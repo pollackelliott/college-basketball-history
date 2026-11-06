@@ -1,0 +1,1008 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/la-salle/conferences.csv",
+    "schools/la-salle/notes.md",
+    "schools/la-salle/opponents.csv",
+    "schools/la-salle/source-games.csv",
+    "schools/la-salle/source-notes.md",
+    "schools/la-salle/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/conferences.csv": "efbd3eddec64de4fcab1630d22d3307f1080fdd0385720bf577d02cff06abc28",
+    "data/reference/programs.csv": "63a875e3cc257f87d9b6e46b91ebad693b3c455badc779030e1d68186774eaf4",
+    "data/reference/venue-names.csv": "2a114bff71f7addbcce39862554ab7cce1ce5cf6430439c5798a30dd65430c5a",
+    "data/reference/venues.csv": "aff2946db68ad1aea99fe07ffe626db4ab0766e5e7d6608bae7cda29b9f1a888",
+    "schools/la-salle/conferences.csv": "816c9a941bc40820b8150030b0d71a977991589382fff6b89e7ae33107dbe4c7",
+    "schools/la-salle/notes.md": "389ac2b803550b5fd561321a5ea2b808576f4bbf6c77cd299c2b043a7a506fa1",
+    "schools/la-salle/opponents.csv": "4b38cba1de8f34896f1951e97c714e3b6a763cbee013337074414b1121617887",
+    "schools/la-salle/source-games.csv": "8240da07acacb356b96c0113813a3d3c1d483df68a9f26a2e4d20f9ecf74634e",
+    "schools/la-salle/source-notes.md": "1616811b3cef0434ea8421547c3caddb70186f247d1e47360aaa9200d4131a00",
+    "schools/la-salle/venues.csv": "10b9df3bba5c9fe3b9b4d4c80eb6e3e9d5488b821fb64665836691c7741f7fd5"
+  },
+  "changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/la-salle/conferences.csv",
+    "schools/la-salle/notes.md",
+    "schools/la-salle/opponents.csv",
+    "schools/la-salle/source-games.csv",
+    "schools/la-salle/source-notes.md",
+    "schools/la-salle/venues.csv"
+  ],
+  "commit_message": "Add La Salle onboarding source package",
+  "conference_mapping": [
+    {
+      "conference_key": "middle-atlantic",
+      "resolution": "NEW_GLOBAL_IDENTITY"
+    }
+  ],
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "816c9a941bc40820b8150030b0d71a977991589382fff6b89e7ae33107dbe4c7",
+    "owner_approval_basis": "Owner directed the La Salle Implementation lane, after Control Center Issue #487 repair, to bind the three remaining ordinary Stage 1 reconciliation items through the repository-defined path. The frozen conference history is preserved byte-for-byte in meaning; only the missing Middle Atlantic Conference registry identity is registered.",
+    "registration_count": 1,
+    "registrations": [
+      {
+        "conference_key": "middle-atlantic",
+        "conference_name": "Middle Atlantic Conference",
+        "notes": "Registered during La Salle Stage 1 current-main rebase. Tournament-label fallback is a project display key and does not assert that a tournament existed in every membership season.",
+        "status": "historical",
+        "tournament_label": "Middle Atlantic Conference"
+      }
+    ],
+    "replacement_history": [
+      {
+        "basis": "Program game universe precedes La Salle's documented 1951-52 Middle Atlantic Conference membership.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1950-1951",
+        "membership_type": "independent",
+        "notes": "Pre-MAC interval; no conference membership is asserted from tournament participation alone.",
+        "ongoing": "No",
+        "source_program_key": "la-salle",
+        "start_season": "1930-1931"
+      },
+      {
+        "basis": "Middle Atlantic Conference official history states La Salle became a member during the 1951-52 academic year and remained through 1973-74.",
+        "conference_key": "middle-atlantic",
+        "conference_name": "Middle Atlantic Conference",
+        "end_season": "1973-1974",
+        "membership_type": "primary",
+        "notes": "https://gomacsports.com/sports/2012/3/26/MAC100History.aspx ; La Salle institutional MAC history independently describes the membership ending in 1974.",
+        "ongoing": "No",
+        "source_program_key": "la-salle",
+        "start_season": "1951-1952"
+      },
+      {
+        "basis": "La Salle institutional series and tournament histories identify ECC membership from 1974-75 through 1982-83.",
+        "conference_key": "east-coast",
+        "conference_name": "East Coast Conference",
+        "end_season": "1982-1983",
+        "membership_type": "primary",
+        "notes": "https://goexplorers.com/news/2015/12/4/_1204153150.aspx ; accepted Stage 3B conference-lineage authority.",
+        "ongoing": "No",
+        "source_program_key": "la-salle",
+        "start_season": "1974-1975"
+      },
+      {
+        "basis": "La Salle Athletics states La Salle was a full-time MAAC member from 1983 through 1992.",
+        "conference_key": "maac",
+        "conference_name": "MAAC",
+        "end_season": "1991-1992",
+        "membership_type": "primary",
+        "notes": "https://goexplorers.com/news/2020/9/18/general-twenty-five-explorers-land-on-maac-40th-anniversary-teams",
+        "ongoing": "No",
+        "source_program_key": "la-salle",
+        "start_season": "1983-1984"
+      },
+      {
+        "basis": "La Salle Athletics states La Salle and Butler competed together in the MCC from 1992-93 through 1994-95.",
+        "conference_key": "midwestern-collegiate",
+        "conference_name": "Midwestern Collegiate Conference",
+        "end_season": "1994-1995",
+        "membership_type": "primary",
+        "notes": "https://goexplorers.com/news/2012/5/2/BB_0502120131",
+        "ongoing": "No",
+        "source_program_key": "la-salle",
+        "start_season": "1992-1993"
+      },
+      {
+        "basis": "La Salle institutional history identifies 1995-96 as its first Atlantic 10 season and current membership continues.",
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10",
+        "end_season": "",
+        "membership_type": "primary",
+        "notes": "La Salle Athletics 2012-13 notes say the program joined the Atlantic 10 in the 1995-96 season; current La Salle institutional series notes likewise identify 1995 as the conference-sharing start.",
+        "ongoing": "Yes",
+        "source_program_key": "la-salle",
+        "start_season": "1995-1996"
+      }
+    ],
+    "replacement_row_count": 6,
+    "spec_path": "/tmp/remote-phase0-inputs-yf1gwbw8/conference-reconciliation.json",
+    "spec_sha256": "e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871"
+  },
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "a5c42854b73978778e089d4224f93a3b99cd2424",
+  "history_scope": {
+    "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Accepted La Salle Research Freeze scope: program history begins 1930-31 and top-level scope is INCEPTION+. The frozen scope is settled Research authority. Protected main currently lacks the La Salle reusable program-top-level-scope row, so guarded Phase 0 must reconcile this exact target-school scope without reopening Research. Preserve the immutable Research Freeze, including the accepted 1930-31 aggregate-coverage authority and all researched uncertainty.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1930-1931",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "INCEPTION+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "INCEPTION+",
+      "school": "La Salle"
+    }
+  },
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "816c9a941bc40820b8150030b0d71a977991589382fff6b89e7ae33107dbe4c7",
+    "notes.md": "389ac2b803550b5fd561321a5ea2b808576f4bbf6c77cd299c2b043a7a506fa1",
+    "opponents.csv": "4b38cba1de8f34896f1951e97c714e3b6a763cbee013337074414b1121617887",
+    "source-games.csv": "8240da07acacb356b96c0113813a3d3c1d483df68a9f26a2e4d20f9ecf74634e",
+    "source-notes.md": "1616811b3cef0434ea8421547c3caddb70186f247d1e47360aaa9200d4131a00",
+    "venues.csv": "10b9df3bba5c9fe3b9b4d4c80eb6e3e9d5488b821fb64665836691c7741f7fd5"
+  },
+  "prepared_commit_sha": "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7",
+  "prepared_parent_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "prepared_tree_sha": "76af903e116ee907a426f4946ff6c6ad97ca9015",
+  "program_alias_mapping": [],
+  "protected_main_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "repository_validation": "PASS",
+  "request_id": "la-salle-phase0-0002",
+  "request_sha256": "aef197a0cc629782ac5249ca0c20777e9745c3c2647af51096d57e0ea96d51e4",
+  "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "research_checkpoint_sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "sidecars": {
+    "conference-reconciliation.json": "e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871",
+    "integration-freeze.json": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+    "stage1-reconciliation.json": "6a968cd58e148f2144bf92c05f5a2e27b8ca6be92a46f0ff8482400d38439cec",
+    "venue-reconciliation.json": "cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224"
+  },
+  "target_branch": "data/la-salle-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Wister Hall",
+      "final_venue_id": "VEN-001081",
+      "final_venue_key": "wister-hall-la-salle",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "wister-hall-la-salle"
+    },
+    {
+      "canonical_name": "Philadelphia Arena",
+      "final_venue_id": "VEN-000749",
+      "final_venue_key": "philadelphia-arena",
+      "research_venue_id": "VEN-000749",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "philadelphia-arena"
+    },
+    {
+      "canonical_name": "Philadelphia Convention Hall",
+      "final_venue_id": "VEN-000563",
+      "final_venue_key": "philadelphia-convention-hall",
+      "research_venue_id": "VEN-000563",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "philadelphia-convention-hall"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000123",
+      "final_venue_key": "madison-square-garden-1925",
+      "research_venue_id": "VEN-000123",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1925"
+    },
+    {
+      "canonical_name": "Cincinnati Gardens",
+      "final_venue_id": "VEN-000285",
+      "final_venue_key": "cincinnati-gardens",
+      "research_venue_id": "VEN-000285",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cincinnati-gardens"
+    },
+    {
+      "canonical_name": "Alumni Memorial Fieldhouse",
+      "final_venue_id": "VEN-000302",
+      "final_venue_key": "alumni-memorial-fieldhouse-saint-josephs",
+      "research_venue_id": "VEN-000302",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alumni-memorial-fieldhouse-saint-josephs"
+    },
+    {
+      "canonical_name": "Abraham Lincoln High School",
+      "final_venue_id": "VEN-001082",
+      "final_venue_key": "abraham-lincoln-high-school-philadelphia",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "abraham-lincoln-high-school-philadelphia"
+    },
+    {
+      "canonical_name": "Memorial Coliseum",
+      "final_venue_id": "VEN-000129",
+      "final_venue_key": "memorial-coliseum-kentucky",
+      "research_venue_id": "VEN-000129",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "memorial-coliseum-kentucky"
+    },
+    {
+      "canonical_name": "Buffalo Memorial Auditorium",
+      "final_venue_id": "VEN-000512",
+      "final_venue_key": "buffalo-memorial-auditorium",
+      "research_venue_id": "VEN-000512",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "buffalo-memorial-auditorium"
+    },
+    {
+      "canonical_name": "Municipal Auditorium",
+      "final_venue_id": "VEN-000143",
+      "final_venue_key": "municipal-auditorium-kc",
+      "research_venue_id": "VEN-000143",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "municipal-auditorium-kc"
+    },
+    {
+      "canonical_name": "Boston Garden",
+      "final_venue_id": "VEN-000313",
+      "final_venue_key": "boston-garden",
+      "research_venue_id": "VEN-000313",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "boston-garden"
+    },
+    {
+      "canonical_name": "Cole Field House",
+      "final_venue_id": "VEN-000047",
+      "final_venue_key": "cole-field-house",
+      "research_venue_id": "VEN-000047",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cole-field-house"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    },
+    {
+      "canonical_name": "Stokely Athletics Center",
+      "final_venue_id": "VEN-000199",
+      "final_venue_key": "stokely-athletics-center",
+      "research_venue_id": "VEN-000199",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stokely-athletics-center"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum",
+      "final_venue_id": "VEN-000040",
+      "final_venue_key": "charlotte-coliseum-1955",
+      "research_venue_id": "VEN-000040",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-coliseum-1955"
+    },
+    {
+      "canonical_name": "Nebraska Coliseum",
+      "final_venue_id": "VEN-000312",
+      "final_venue_key": "nebraska-coliseum",
+      "research_venue_id": "VEN-000312",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nebraska-coliseum"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "Kirby Sports Center",
+      "final_venue_id": "VEN-000909",
+      "final_venue_key": "kirby-sports-center",
+      "research_venue_id": "VEN-000909",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kirby-sports-center"
+    },
+    {
+      "canonical_name": "Allen Fieldhouse",
+      "final_venue_id": "VEN-000003",
+      "final_venue_key": "allen-fieldhouse",
+      "research_venue_id": "VEN-000003",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "allen-fieldhouse"
+    },
+    {
+      "canonical_name": "John E. Glaser Arena",
+      "final_venue_id": "VEN-000864",
+      "final_venue_key": "john-e-glaser-arena",
+      "research_venue_id": "VEN-000864",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "john-e-glaser-arena"
+    },
+    {
+      "canonical_name": "Las Vegas Convention Center",
+      "final_venue_id": "VEN-000448",
+      "final_venue_key": "las-vegas-convention-center",
+      "research_venue_id": "VEN-000448",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "las-vegas-convention-center"
+    },
+    {
+      "canonical_name": "San Diego Sports Arena",
+      "final_venue_id": "VEN-000182",
+      "final_venue_key": "san-diego-sports-arena",
+      "research_venue_id": "VEN-000182",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "san-diego-sports-arena"
+    },
+    {
+      "canonical_name": "Freedom Hall",
+      "final_venue_id": "VEN-000069",
+      "final_venue_key": "freedom-hall",
+      "research_venue_id": "VEN-000069",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "freedom-hall"
+    },
+    {
+      "canonical_name": "McGonigle Hall",
+      "final_venue_id": "VEN-000441",
+      "final_venue_key": "mcgonigle-hall",
+      "research_venue_id": "VEN-000441",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcgonigle-hall"
+    },
+    {
+      "canonical_name": "Mackey Arena",
+      "final_venue_id": "VEN-000122",
+      "final_venue_key": "mackey-arena",
+      "research_venue_id": "VEN-000122",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mackey-arena"
+    },
+    {
+      "canonical_name": "XL Center",
+      "final_venue_id": "VEN-000257",
+      "final_venue_key": "xl-center",
+      "research_venue_id": "VEN-000257",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "xl-center"
+    },
+    {
+      "canonical_name": "MECCA Arena",
+      "final_venue_id": "VEN-000224",
+      "final_venue_key": "uw-milwaukee-panther-arena",
+      "research_venue_id": "VEN-000224",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "uw-milwaukee-panther-arena"
+    },
+    {
+      "canonical_name": "Greensboro Coliseum",
+      "final_venue_id": "VEN-000076",
+      "final_venue_key": "greensboro-coliseum",
+      "research_venue_id": "VEN-000076",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "greensboro-coliseum"
+    },
+    {
+      "canonical_name": "New Haven Coliseum",
+      "final_venue_id": "VEN-000491",
+      "final_venue_key": "new-haven-coliseum",
+      "research_venue_id": "VEN-000491",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "new-haven-coliseum"
+    },
+    {
+      "canonical_name": "Brendan Byrne Arena",
+      "final_venue_id": "VEN-000028",
+      "final_venue_key": "brendan-byrne-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": ""
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "VEN-000542",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "The Pavilion",
+      "final_venue_id": "VEN-000701",
+      "final_venue_key": "finneran-pavilion",
+      "research_venue_id": "VEN-000701",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "finneran-pavilion"
+    },
+    {
+      "canonical_name": "Joyce Center",
+      "final_venue_id": "VEN-000098",
+      "final_venue_key": "joyce-center",
+      "research_venue_id": "VEN-000098",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "joyce-center"
+    },
+    {
+      "canonical_name": "Omni Coliseum",
+      "final_venue_id": "VEN-000157",
+      "final_venue_key": "omni-coliseum",
+      "research_venue_id": "VEN-000157",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "omni-coliseum"
+    },
+    {
+      "canonical_name": "Memorial Gymnasium",
+      "final_venue_id": "VEN-000130",
+      "final_venue_key": "memorial-gymnasium",
+      "research_venue_id": "VEN-000130",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "memorial-gymnasium"
+    },
+    {
+      "canonical_name": "Selland Arena",
+      "final_venue_id": "VEN-000374",
+      "final_venue_key": "selland-arena",
+      "research_venue_id": "VEN-000374",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "selland-arena"
+    },
+    {
+      "canonical_name": "MVP Arena",
+      "final_venue_id": "VEN-000145",
+      "final_venue_key": "mvp-arena",
+      "research_venue_id": "VEN-000145",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mvp-arena"
+    },
+    {
+      "canonical_name": "Curry Hicks Cage",
+      "final_venue_id": "VEN-000436",
+      "final_venue_key": "curry-hicks-cage",
+      "research_venue_id": "VEN-000436",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "curry-hicks-cage"
+    },
+    {
+      "canonical_name": "McKale Center",
+      "final_venue_id": "VEN-000127",
+      "final_venue_key": "mckale-center",
+      "research_venue_id": "VEN-000127",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mckale-center"
+    },
+    {
+      "canonical_name": "Market Square Arena",
+      "final_venue_id": "VEN-000125",
+      "final_venue_key": "market-square-arena",
+      "research_venue_id": "VEN-000125",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "market-square-arena"
+    },
+    {
+      "canonical_name": "CU Events Center",
+      "final_venue_id": "VEN-000052",
+      "final_venue_key": "cu-events-center",
+      "research_venue_id": "VEN-000052",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cu-events-center"
+    },
+    {
+      "canonical_name": "Hinkle Fieldhouse",
+      "final_venue_id": "VEN-000080",
+      "final_venue_key": "hinkle-fieldhouse",
+      "research_venue_id": "VEN-000080",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hinkle-fieldhouse"
+    },
+    {
+      "canonical_name": "Ferrell Center",
+      "final_venue_id": "VEN-000571",
+      "final_venue_key": "ferrell-center",
+      "research_venue_id": "VEN-000571",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ferrell-center"
+    },
+    {
+      "canonical_name": "Nutter Center",
+      "final_venue_id": "VEN-000464",
+      "final_venue_key": "nutter-center",
+      "research_venue_id": "VEN-000464",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nutter-center"
+    },
+    {
+      "canonical_name": "Don Haskins Center",
+      "final_venue_id": "VEN-000325",
+      "final_venue_key": "don-haskins-center",
+      "research_venue_id": "VEN-000325",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "don-haskins-center"
+    },
+    {
+      "canonical_name": "Carver-Hawkeye Arena",
+      "final_venue_id": "VEN-000037",
+      "final_venue_key": "carver-hawkeye-arena",
+      "research_venue_id": "VEN-000037",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carver-hawkeye-arena"
+    },
+    {
+      "canonical_name": "Old Harmon Gymnasium",
+      "final_venue_id": "VEN-000635",
+      "final_venue_key": "old-harmon-gymnasium",
+      "research_venue_id": "VEN-000635",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "old-harmon-gymnasium"
+    },
+    {
+      "canonical_name": "Carrier Dome",
+      "final_venue_id": "VEN-000096",
+      "final_venue_key": "jma-wireless-dome",
+      "research_venue_id": "VEN-000096",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jma-wireless-dome"
+    },
+    {
+      "canonical_name": "Desert Financial Arena",
+      "final_venue_id": "VEN-000056",
+      "final_venue_key": "desert-financial-arena",
+      "research_venue_id": "VEN-000056",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "desert-financial-arena"
+    },
+    {
+      "canonical_name": "The Pit",
+      "final_venue_id": "VEN-000208",
+      "final_venue_key": "the-pit",
+      "research_venue_id": "VEN-000208",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-pit"
+    },
+    {
+      "canonical_name": "Coleman Coliseum",
+      "final_venue_id": "VEN-000048",
+      "final_venue_key": "coleman-coliseum",
+      "research_venue_id": "VEN-000048",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "coleman-coliseum"
+    },
+    {
+      "canonical_name": "Toso Pavilion",
+      "final_venue_id": "VEN-000606",
+      "final_venue_key": "leavey-center",
+      "research_venue_id": "VEN-000606",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "leavey-center"
+    },
+    {
+      "canonical_name": "Lloyd Noble Center",
+      "final_venue_id": "VEN-000116",
+      "final_venue_key": "lloyd-noble-center",
+      "research_venue_id": "VEN-000116",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lloyd-noble-center"
+    },
+    {
+      "canonical_name": "Haas Pavilion",
+      "final_venue_id": "VEN-000393",
+      "final_venue_key": "harmon-gym",
+      "research_venue_id": "VEN-000393",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "harmon-gym"
+    },
+    {
+      "canonical_name": "UVI Sports and Fitness Center",
+      "final_venue_id": "VEN-000191",
+      "final_venue_key": "sports-and-fitness-center",
+      "research_venue_id": "VEN-000191",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "McKenzie Arena",
+      "final_venue_id": "VEN-000697",
+      "final_venue_key": "utc-arena",
+      "research_venue_id": "VEN-000697",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "utc-arena"
+    },
+    {
+      "canonical_name": "U.S. Bank Arena",
+      "final_venue_id": "VEN-000176",
+      "final_venue_key": "riverfront-coliseum",
+      "research_venue_id": "VEN-000176",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "riverfront-coliseum"
+    },
+    {
+      "canonical_name": "Morales Coliseum",
+      "final_venue_id": "VEN-000502",
+      "final_venue_key": "mario-morales-coliseum",
+      "research_venue_id": "VEN-000502",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mario-morales-coliseum"
+    },
+    {
+      "canonical_name": "Boardwalk Hall",
+      "final_venue_id": "VEN-000433",
+      "final_venue_key": "boardwalk-hall",
+      "research_venue_id": "VEN-000433",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "boardwalk-hall"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "VEN-000280",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-arena"
+    },
+    {
+      "canonical_name": "Aventura Palace Resort",
+      "final_venue_id": "VEN-001083",
+      "final_venue_key": "aventura-palace-resort",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY_EXPLICIT_REGISTRATION",
+      "venue_key": ""
+    },
+    {
+      "canonical_name": "Reilly Center",
+      "final_venue_id": "VEN-000926",
+      "final_venue_key": "reilly-center-st-bonaventure",
+      "research_venue_id": "VEN-000926",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reilly-center-st-bonaventure"
+    },
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "VEN-000020",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "barclays-center"
+    },
+    {
+      "canonical_name": "T-Mobile Center",
+      "final_venue_id": "VEN-000202",
+      "final_venue_key": "t-mobile-center",
+      "research_venue_id": "VEN-000202",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-center"
+    },
+    {
+      "canonical_name": "Crypto.com Arena",
+      "final_venue_id": "VEN-000051",
+      "final_venue_key": "crypto-com-arena",
+      "research_venue_id": "VEN-000051",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "crypto-com-arena"
+    },
+    {
+      "canonical_name": "AmericanAirlines Arena",
+      "final_venue_id": "VEN-000499",
+      "final_venue_key": "kaseya-center",
+      "research_venue_id": "VEN-000499",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kaseya-center"
+    },
+    {
+      "canonical_name": "PPG Paints Arena",
+      "final_venue_id": "VEN-000167",
+      "final_venue_key": "ppg-paints-arena",
+      "research_venue_id": "VEN-000167",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ppg-paints-arena"
+    },
+    {
+      "canonical_name": "Mohegan Sun Arena",
+      "final_venue_id": "VEN-000139",
+      "final_venue_key": "mohegan-sun-arena",
+      "research_venue_id": "VEN-000139",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mohegan-sun-arena"
+    },
+    {
+      "canonical_name": "Santander Arena",
+      "final_venue_id": "VEN-000723",
+      "final_venue_key": "santander-arena",
+      "research_venue_id": "VEN-000723",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "santander-arena"
+    },
+    {
+      "canonical_name": "The SSE Arena, Belfast",
+      "final_venue_id": "VEN-000958",
+      "final_venue_key": "sse-arena-belfast",
+      "research_venue_id": "VEN-000958",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sse-arena-belfast"
+    },
+    {
+      "canonical_name": "Capital One Arena",
+      "final_venue_id": "VEN-000036",
+      "final_venue_key": "capital-one-arena",
+      "research_venue_id": "VEN-000036",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "capital-one-arena"
+    },
+    {
+      "canonical_name": "Titan Gym",
+      "final_venue_id": "VEN-000212",
+      "final_venue_key": "titan-gym",
+      "research_venue_id": "VEN-000212",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "titan-gym"
+    },
+    {
+      "canonical_name": "Hertz Arena",
+      "final_venue_id": "VEN-000578",
+      "final_venue_key": "hertz-arena",
+      "research_venue_id": "VEN-000578",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hertz-arena"
+    },
+    {
+      "canonical_name": "Carnesecca Arena",
+      "final_venue_id": "VEN-000456",
+      "final_venue_key": "carnesecca-arena",
+      "research_venue_id": "VEN-000456",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carnesecca-arena"
+    },
+    {
+      "canonical_name": "Siegel Center",
+      "final_venue_id": "VEN-000705",
+      "final_venue_key": "siegel-center",
+      "research_venue_id": "VEN-000705",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "siegel-center"
+    },
+    {
+      "canonical_name": "Montego Bay Convention Center",
+      "final_venue_id": "VEN-000709",
+      "final_venue_key": "montego-bay-convention-center",
+      "research_venue_id": "VEN-000709",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "montego-bay-convention-center"
+    },
+    {
+      "canonical_name": "Wells Fargo Center",
+      "final_venue_id": "VEN-000237",
+      "final_venue_key": "xfinity-mobile-arena",
+      "research_venue_id": "VEN-000237",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "xfinity-mobile-arena"
+    },
+    {
+      "canonical_name": "The Ocean Center",
+      "final_venue_id": "VEN-000482",
+      "final_venue_key": "ocean-center",
+      "research_venue_id": "VEN-000482",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ocean-center"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    }
+  ],
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "d5cb36b0fa555d502db0fb215af329b655ff1faf57023ce07a8468a13006e7b7",
+    "mappings": [
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "East Rutherford",
+        "expected_global_state": "NJ",
+        "expected_local_city": "East Rutherford",
+        "expected_local_name": "Brendan Byrne Arena",
+        "expected_local_state": "NJ",
+        "global_venue_id": "VEN-000028",
+        "global_venue_key": "brendan-byrne-arena",
+        "local_venue_key": "",
+        "local_venue_row_index": "32",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Fresh Stage 1 inventory la-salle-stage1-0002 found exactly one compatible current-main physical match: VEN-000028 / brendan-byrne-arena, with exact name, city, state, and no chronology conflict."
+      },
+      {
+        "action": "REGISTER_NEW_IDENTITY",
+        "expected_local_city": "Playa del Carmen",
+        "expected_local_name": "Aventura Palace Resort",
+        "expected_local_state": "Quintana Roo",
+        "local_venue_key": "",
+        "local_venue_row_index": "63",
+        "new_global_venue_key": "aventura-palace-resort",
+        "resolution_basis": "Fresh Stage 1 inventory la-salle-stage1-0002 found no compatible current-main physical venue candidate. Frozen Research already settled the physical identity and locality; registration is ordinary target-school Stage 1 authority."
+      }
+    ],
+    "owner_approval_basis": "Owner directed the La Salle Implementation lane, after Control Center Issue #487 repair, to bind the three remaining ordinary Stage 1 reconciliation items through the repository-defined path. This spec only resolves the already-classified Brendan Byrne current-main reuse and Aventura Palace Resort new registration; it does not change frozen historical meaning.",
+    "research_zip_sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+    "schema_version": 2,
+    "spec_path": "/tmp/remote-phase0-inputs-yf1gwbw8/venue-reconciliation.json",
+    "spec_sha256": "cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224"
+  }
+}

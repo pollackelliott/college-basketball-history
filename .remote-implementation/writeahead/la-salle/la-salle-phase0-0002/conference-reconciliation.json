@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "owner_approval_basis": "Owner directed the La Salle Implementation lane, after Control Center Issue #487 repair, to bind the three remaining ordinary Stage 1 reconciliation items through the repository-defined path. The frozen conference history is preserved byte-for-byte in meaning; only the missing Middle Atlantic Conference registry identity is registered.",
+  "expected_conferences_sha256": "816c9a941bc40820b8150030b0d71a977991589382fff6b89e7ae33107dbe4c7",
+  "replacement_history": [
+    {
+      "source_program_key": "la-salle",
+      "start_season": "1930-1931",
+      "end_season": "1950-1951",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "No",
+      "basis": "Program game universe precedes La Salle's documented 1951-52 Middle Atlantic Conference membership.",
+      "notes": "Pre-MAC interval; no conference membership is asserted from tournament participation alone."
+    },
+    {
+      "source_program_key": "la-salle",
+      "start_season": "1951-1952",
+      "end_season": "1973-1974",
+      "conference_key": "middle-atlantic",
+      "conference_name": "Middle Atlantic Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "Middle Atlantic Conference official history states La Salle became a member during the 1951-52 academic year and remained through 1973-74.",
+      "notes": "https://gomacsports.com/sports/2012/3/26/MAC100History.aspx ; La Salle institutional MAC history independently describes the membership ending in 1974."
+    },
+    {
+      "source_program_key": "la-salle",
+      "start_season": "1974-1975",
+      "end_season": "1982-1983",
+      "conference_key": "east-coast",
+      "conference_name": "East Coast Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "La Salle institutional series and tournament histories identify ECC membership from 1974-75 through 1982-83.",
+      "notes": "https://goexplorers.com/news/2015/12/4/_1204153150.aspx ; accepted Stage 3B conference-lineage authority."
+    },
+    {
+      "source_program_key": "la-salle",
+      "start_season": "1983-1984",
+      "end_season": "1991-1992",
+      "conference_key": "maac",
+      "conference_name": "MAAC",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "La Salle Athletics states La Salle was a full-time MAAC member from 1983 through 1992.",
+      "notes": "https://goexplorers.com/news/2020/9/18/general-twenty-five-explorers-land-on-maac-40th-anniversary-teams"
+    },
+    {
+      "source_program_key": "la-salle",
+      "start_season": "1992-1993",
+      "end_season": "1994-1995",
+      "conference_key": "midwestern-collegiate",
+      "conference_name": "Midwestern Collegiate Conference",
+      "membership_type": "primary",
+      "ongoing": "No",
+      "basis": "La Salle Athletics states La Salle and Butler competed together in the MCC from 1992-93 through 1994-95.",
+      "notes": "https://goexplorers.com/news/2012/5/2/BB_0502120131"
+    },
+    {
+      "source_program_key": "la-salle",
+      "start_season": "1995-1996",
+      "end_season": "",
+      "conference_key": "atlantic-10",
+      "conference_name": "Atlantic 10",
+      "membership_type": "primary",
+      "ongoing": "Yes",
+      "basis": "La Salle institutional history identifies 1995-96 as its first Atlantic 10 season and current membership continues.",
+      "notes": "La Salle Athletics 2012-13 notes say the program joined the Atlantic 10 in the 1995-96 season; current La Salle institutional series notes likewise identify 1995 as the conference-sharing start."
+    }
+  ],
+  "registrations": [
+    {
+      "conference_key": "middle-atlantic",
+      "conference_name": "Middle Atlantic Conference",
+      "tournament_label": "Middle Atlantic Conference",
+      "status": "historical",
+      "notes": "Registered during La Salle Stage 1 current-main rebase. Tournament-label fallback is a project display key and does not assert that a tournament existed in every membership season."
+    }
+  ]
+}
