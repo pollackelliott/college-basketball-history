@@ -275,6 +275,375 @@ def evidence_by_season(members: dict[str, bytes]) -> dict[str, dict[str, Any]]:
     return {season: payload} if season else {}
 
 
+def authority_cases_for_parent(
+    school: str,
+    parent_sha: str,
+    research_base_sha: str,
+    registry: Path,
+) -> list[dict[str, Any]]:
+    data = read_registry(registry)
+    return sorted(
+        [
+            case for case in data["cases"]
+            if case.get("school_key") == school
+            and case.get("parent_checkpoint_sha256") == parent_sha
+            and case.get("research_base_sha") == research_base_sha
+        ],
+        key=lambda case: str(case.get("season", "")),
+    )
+
+
+def _manifest_payload(members: dict[str, bytes]) -> dict[str, Any]:
+    for name in ("stage1-manifest.json", "checkpoint-manifest.json", "manifest.json"):
+        if name in members:
+            payload = json.loads(members[name])
+            if not isinstance(payload, dict):
+                raise ValueError("INVALID_MANIFEST")
+            return payload
+    raise ValueError("INVALID_MANIFEST")
+
+
+def _legacy_nonblocking(row: dict[str, str]) -> bool:
+    marker = first(row, "blocking", "is_blocking", "blocking_status").upper()
+    state = first(row, "status", "residual_status", "resolution_status").upper()
+    klass = first(row, "class", "residual_class", "blocker_class").upper()
+    if marker in {"0", "FALSE", "NO", "NONBLOCKING", "NON_BLOCKING"}:
+        return True
+    return (
+        "NONBLOCK" in state
+        or "NON_BLOCK" in state
+        or "PRESERVE_UNCHANGED" in state
+        or "NONBLOCK" in klass
+        or "NON_BLOCK" in klass
+    )
+
+
+def _parse_int(value: str) -> int | None:
+    value = str(value or "").strip()
+    if not value:
+        return None
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+
+def _legacy_residuals(
+    raw: bytes,
+    authorities: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    rows = as_csv(raw)
+    auth = {str(case["season"]): case for case in authorities}
+    result: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in rows:
+        season = first(row, "season", "season_label")
+        if not season:
+            if _legacy_nonblocking(row):
+                continue
+            result.append({
+                "blocker_id": first(row, "blocker_id", "residual_id", "id") or "LEGACY_UNSCOPED_RESIDUAL",
+                "season": "",
+                "class": first(row, "class", "residual_class", "blocker_class") or "LEGACY_UNRELATED_STAGE1_RESIDUAL",
+                "research_state": first(row, "research_state", "state", "status"),
+                "research_evidence_summary": first(row, "research_evidence_summary", "evidence_summary", "notes", "detail"),
+                "detail": {},
+            })
+            continue
+        if season not in auth and _legacy_nonblocking(row):
+            continue
+        if season in seen:
+            raise ValueError("DUPLICATE_LEGACY_RESIDUAL_SEASON:" + season)
+        seen.add(season)
+        case = auth.get(season)
+        if case is None:
+            result.append({
+                "blocker_id": first(row, "blocker_id", "residual_id", "id") or "LEGACY_UNRELATED:" + season,
+                "season": season,
+                "class": first(row, "class", "residual_class", "blocker_class") or "LEGACY_UNRELATED_STAGE1_RESIDUAL",
+                "research_state": first(row, "research_state", "state", "status"),
+                "research_evidence_summary": first(row, "research_evidence_summary", "evidence_summary", "notes", "detail"),
+                "detail": {},
+            })
+            continue
+
+        raw_class = first(row, "class", "residual_class", "blocker_class")
+        raw_state = first(row, "research_state", "state")
+        identified = _parse_int(first(
+            row,
+            "identified_game_rows",
+            "identified_games",
+            "identified_competitive_games",
+            "observed_games",
+        ))
+        unidentified = _parse_int(first(
+            row,
+            "unidentified_game_rows",
+            "unidentified_games",
+            "missing_games",
+            "coverage_gap_games",
+        ))
+        result.append({
+            "blocker_id": first(row, "blocker_id", "residual_id", "id") or "LEGACY_AGGREGATE:" + season,
+            "season": season,
+            "class": raw_class or "FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION",
+            "research_state": raw_state or "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
+            "detail": {
+                "identified_game_rows": (
+                    identified if identified is not None
+                    else case["identified_record"]["games"]
+                ),
+                "unidentified_game_rows": (
+                    unidentified if unidentified is not None
+                    else case["unidentified_record"]["games"]
+                ),
+            },
+            "research_evidence_summary": first(
+                row,
+                "research_evidence_summary",
+                "evidence_summary",
+                "research_summary",
+                "notes",
+                "detail",
+            ) or "Legacy manifested Stage 1 residual preserved in stage1-residuals.csv.",
+        })
+    return result
+
+
+def _normalized_legacy_ledger(raw: bytes) -> tuple[bytes, list[dict[str, str]]]:
+    rows = as_csv(raw)
+    normalized: list[dict[str, str]] = []
+    for row in rows:
+        game_id = first(row, "research_game_id", "source_game_id", "game_id", "id")
+        season = first(row, "season_label", "season")
+        opponent = first(
+            row,
+            "opponent_literal",
+            "source_opponent",
+            "source_opponent_label",
+            "opponent",
+            "opponent_name",
+        )
+        game_type = first(
+            row,
+            "game_type",
+            "accepted_game_type",
+            "competition_type",
+            "season_type",
+        )
+        if not game_id or not season or not opponent or not game_type:
+            raise ValueError("LEGACY_LEDGER_REQUIRED_FIELD_MISSING")
+        result = row_result(row)
+        if not result:
+            raise ValueError("LEGACY_LEDGER_RESULT_UNRESOLVED:" + game_id)
+        item = dict(row)
+        item.update({
+            "research_game_id": game_id,
+            "season_label": season,
+            "opponent_literal": opponent,
+            "game_type": game_type,
+            "game_universe_state": first(
+                row, "game_universe_state", "accepted_state", "universe_state"
+            ) or "ACCEPTED",
+            "game_inclusion": first(
+                row, "game_inclusion", "accepted_inclusion", "inclusion"
+            ) or "INCLUDED",
+            "played_result": result,
+        })
+        normalized.append(item)
+    return csv_bytes(normalized), normalized
+
+
+def _record_from_census(row: dict[str, str]) -> tuple[str, str, str]:
+    wins = first(
+        row,
+        "source_aggregate_wins",
+        "institutional_wins",
+        "source_wins",
+        "aggregate_wins",
+    )
+    losses = first(
+        row,
+        "source_aggregate_losses",
+        "institutional_losses",
+        "source_losses",
+        "aggregate_losses",
+    )
+    games = first(
+        row,
+        "source_aggregate_games",
+        "institutional_games",
+        "source_games",
+        "expected_games",
+        "aggregate_games",
+    )
+    record = first(row, "source_header_record", "institutional_record", "source_record")
+    if (not wins or not losses) and record and "-" in record:
+        left, right = record.split("-", 1)
+        if left.strip().isdigit() and right.strip().isdigit():
+            wins = wins or left.strip()
+            losses = losses or right.strip()
+    if not games and wins.isdigit() and losses.isdigit():
+        games = str(int(wins) + int(losses))
+    return wins, losses, games
+
+
+def _normalized_legacy_census(
+    raw: bytes,
+    ledger: list[dict[str, str]],
+) -> bytes:
+    rows = as_csv(raw)
+    normalized: list[dict[str, str]] = []
+    by_season: dict[str, list[dict[str, str]]] = {}
+    for game in ledger:
+        by_season.setdefault(game["season_label"], []).append(game)
+    for row in rows:
+        season = first(row, "season_label", "season")
+        if not season:
+            raise ValueError("LEGACY_CENSUS_SEASON_MISSING")
+        wins, losses, games = _record_from_census(row)
+        season_games = by_season.get(season, [])
+        tally = Counter(game["played_result"] for game in season_games)
+        identified = first(
+            row,
+            "accepted_or_identified_rows",
+            "identified_competitive_games",
+            "observed_games",
+            "identified_game_rows",
+            "identified_games",
+        ) or str(len(season_games))
+        item = dict(row)
+        item.update({
+            "season_label": season,
+            "source_aggregate_wins": wins,
+            "source_aggregate_losses": losses,
+            "source_aggregate_games": games,
+            "accepted_or_identified_rows": identified,
+            "known_played_wins": first(
+                row, "known_played_wins", "identified_wins", "known_wins"
+            ) or str(tally["W"]),
+            "known_played_losses": first(
+                row, "known_played_losses", "identified_losses", "known_losses"
+            ) or str(tally["L"]),
+        })
+        normalized.append(item)
+    return csv_bytes(normalized)
+
+
+def normalize_parent_members(
+    members: dict[str, bytes],
+    *,
+    parent_sha: str,
+    registry: Path,
+) -> tuple[dict[str, bytes], bytes, bool]:
+    current_required = {
+        "stage1-manifest.json",
+        "stage1-status.json",
+        "blocking-residuals.json",
+        "structured-stage1-ledger.csv",
+        "season-census.csv",
+    }
+    if current_required.issubset(members):
+        return dict(members), members["structured-stage1-ledger.csv"], False
+
+    status_name, status_raw = member_alias(
+        members,
+        "stage1-status.json",
+        "status.json",
+        "stage1-state.json",
+    )
+    try:
+        status = json.loads(status_raw)
+    except (json.JSONDecodeError, UnicodeError, TypeError) as exc:
+        raise ValueError("INVALID_LEGACY_STAGE1_STATUS") from exc
+    if not isinstance(status, dict):
+        raise ValueError("INVALID_LEGACY_STAGE1_STATUS")
+
+    manifest = _manifest_payload(members)
+    school = str(status.get("school_key") or status.get("school") or "").strip()
+    research_base = str(
+        status.get("research_base_sha")
+        or manifest.get("research_base_sha")
+        or ""
+    ).strip()
+    if not school:
+        raise ValueError("LEGACY_STAGE1_SCHOOL_MISSING")
+    if not research_base:
+        candidates = {
+            str(case.get("research_base_sha", ""))
+            for case in read_registry(registry)["cases"]
+            if case.get("school_key") == school
+            and case.get("parent_checkpoint_sha256") == parent_sha
+        }
+        if len(candidates) == 1:
+            research_base = next(iter(candidates))
+        else:
+            raise ValueError("LEGACY_STAGE1_RESEARCH_BASE_MISSING")
+
+    authorities = authority_cases_for_parent(
+        school, parent_sha, research_base, registry
+    )
+    if not authorities or any(
+        case.get("legacy_evidence_mode") != LEGACY_EVIDENCE_MODE
+        or not case.get("identified_ledger_sha256")
+        or not isinstance(case.get("identified_rows"), int)
+        for case in authorities
+    ):
+        raise ValueError("LEGACY_STAGE1_EXACT_AUTHORITY_REQUIRED")
+
+    _, ledger_raw = member_alias(
+        members,
+        "structured-stage1-ledger.csv",
+        "stage1-ledger.csv",
+    )
+    canonical_ledger, ledger_rows = _normalized_legacy_ledger(ledger_raw)
+    if any(case["identified_ledger_sha256"] != digest(ledger_raw) for case in authorities):
+        raise ValueError("IDENTIFIED_LEDGER_HASH_MISMATCH")
+    if any(case["identified_rows"] != len(ledger_rows) for case in authorities):
+        raise ValueError("IDENTIFIED_LEDGER_COUNT_MISMATCH")
+
+    _, census_raw = member_alias(
+        members,
+        "season-census.csv",
+        "stage1-season-census.csv",
+    )
+    canonical_census = _normalized_legacy_census(census_raw, ledger_rows)
+
+    if "blocking-residuals.json" in members:
+        residuals_raw = members["blocking-residuals.json"]
+        residuals = json.loads(residuals_raw)
+    else:
+        _, residuals_raw = member_alias(members, "stage1-residuals.csv")
+        residuals = _legacy_residuals(residuals_raw, authorities)
+    if not isinstance(residuals, list):
+        raise ValueError("INVALID_LEGACY_STAGE1_RESIDUALS")
+
+    view = dict(members)
+    normalized_status = dict(status)
+    normalized_status.update({
+        "school_key": school,
+        "status": "RESEARCH_BLOCKED_SOURCE_COVERAGE",
+        "stage1_complete": False,
+        "research_base_sha": research_base,
+        "total_candidate_game_rows": len(ledger_rows),
+        "blocking_residual_count": len(residuals),
+        "legacy_parent_member": status_name,
+    })
+    view["stage1-status.json"] = json_bytes(normalized_status)
+    view["structured-stage1-ledger.csv"] = canonical_ledger
+    view["season-census.csv"] = canonical_census
+    view["blocking-residuals.json"] = json_bytes(residuals)
+    view["stage1-manifest.json"] = json_bytes({
+        "schema_version": 1,
+        "research_base_sha": research_base,
+        "game_rows": len(ledger_rows),
+        "blocking_residuals": len(residuals),
+        "legacy_parent_projection": True,
+        "members": {},
+    })
+    return view, ledger_raw, True
+
+
 def audit_checkpoint(parent: Path, *, expected_parent_sha256: str,
                      registry: Path = REGISTRY) -> dict[str, Any]:
     members, parent_sha = read_zip(parent, expected_parent_sha256)
