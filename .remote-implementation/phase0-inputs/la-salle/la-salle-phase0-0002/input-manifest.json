@@ -1,0 +1,22 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "request_id": "la-salle-phase0-0002",
+  "research_checkpoint_sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+  "research_member_sha256": {
+    "conferences.csv": "816c9a941bc40820b8150030b0d71a977991589382fff6b89e7ae33107dbe4c7",
+    "notes.md": "387a36e7e901c861a7a31438aca4d1fdf432f9dda248c18cc50d05b5ca1a318f",
+    "opponents.csv": "4b38cba1de8f34896f1951e97c714e3b6a763cbee013337074414b1121617887",
+    "source-games.csv": "8240da07acacb356b96c0113813a3d3c1d483df68a9f26a2e4d20f9ecf74634e",
+    "source-notes.md": "1616811b3cef0434ea8421547c3caddb70186f247d1e47360aaa9200d4131a00",
+    "venues.csv": "d5cb36b0fa555d502db0fb215af329b655ff1faf57023ce07a8468a13006e7b7"
+  },
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "sidecars": {
+    "conference-reconciliation.json": "e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871",
+    "stage1-reconciliation.json": "6a968cd58e148f2144bf92c05f5a2e27b8ca6be92a46f0ff8482400d38439cec",
+    "venue-reconciliation.json": "cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224"
+  },
+  "stage1_status": "PASS"
+}
