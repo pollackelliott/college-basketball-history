@@ -864,11 +864,29 @@ def report_coverages(report: dict[str, Any]) -> list[dict[str, Any]]:
     raise ValueError("AUDIT_COVERAGE_MISSING")
 
 
-def expected_successor(parent_members: dict[str, bytes],
-                       report: dict[str, Any], audit_sha: str) -> dict[str, bytes]:
+def expected_successor(
+    parent_members: dict[str, bytes],
+    report: dict[str, Any],
+    audit_sha: str,
+    *,
+    registry: Path = REGISTRY,
+) -> dict[str, bytes]:
+    logical, _, legacy_parent = normalize_parent_members(
+        parent_members,
+        parent_sha=report["parent_checkpoint_sha256"],
+        registry=registry,
+    )
     result = dict(parent_members)
-    status = json.loads(result["stage1-status.json"])
-    manifest = json.loads(result["stage1-manifest.json"])
+    if legacy_parent:
+        result["structured-stage1-ledger.csv"] = logical["structured-stage1-ledger.csv"]
+        result["season-census.csv"] = logical["season-census.csv"]
+        result["stage1-status.json"] = logical["stage1-status.json"]
+        result["blocking-residuals.json"] = logical["blocking-residuals.json"]
+        status = json.loads(logical["stage1-status.json"])
+        manifest = json.loads(logical["stage1-manifest.json"])
+    else:
+        status = json.loads(result["stage1-status.json"])
+        manifest = json.loads(result["stage1-manifest.json"])
     coverages = report_coverages(report)
     for coverage in coverages:
         coverage["audit_sha256"] = audit_sha
@@ -933,7 +951,12 @@ def verified_audit(parent: Path, audit_path: Path, parent_sha: str, audit_sha: s
 def closeout(parent: Path, audit_path: Path, output: Path, *,
              parent_sha: str, audit_sha: str, registry: Path = REGISTRY) -> dict[str, Any]:
     report, members = verified_audit(parent, audit_path, parent_sha, audit_sha, registry)
-    successor = expected_successor(members, report, audit_sha)
+    successor = expected_successor(
+        members,
+        report,
+        audit_sha,
+        registry=registry,
+    )
     sha = serialize_zip(successor, output)
     return {
         "status": "STAGE1_CLOSEOUT_CANDIDATE_CREATED",
@@ -951,7 +974,12 @@ def verify_closeout(parent: Path, successor: Path, audit_path: Path, *,
     try:
         report, original = verified_audit(parent, audit_path, parent_sha, audit_sha, registry)
         actual, _ = read_zip(successor, successor_sha)
-        expected = expected_successor(original, report, audit_sha)
+        expected = expected_successor(
+            original,
+            report,
+            audit_sha,
+            registry=registry,
+        )
         defects = manifest_defects(actual)
         if actual != expected:
             defects.append("CLOSEOUT_CONTENT_OR_HISTORICAL_LEDGER_DRIFT")
