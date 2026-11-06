@@ -1,35 +1,31 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-stage2-census-0002",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "la-salle-stage2-opponent-display-normalize-0002",
   "school_key": "la-salle",
-  "previous_control_state_commit": "66f6dc99179158d8f454f19352f9ab983589870d",
-  "previous_control_state_sha256": "06b526bcf4d782a87ecbded0d039ee71667b7a580db7bf8811db463ab1da680f",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "c19e9810d50f373e87fcfdd6bacfe33f2f7f4214",
+  "previous_control_state_sha256": "cc69a8bb3bf0ba8d2fec4b2fceb256409e2627936875f3c63bfedcd8be0c3ca5",
   "expected_protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
   "target_branch": "data/la-salle-onboarding",
   "target_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/la-salle/la-salle-phase0-0002/successor-manifest.json",
-    "sha256": "cfcd185ffa865c657bd5ad3b6cfcc0eed7e137e8d30bdaa2f9af574ea96d08bb"
-  },
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/la-salle/la-salle-stage2-current-main-refresh-0001/successor-manifest.json",
-    "sha256": "594a53c031e57b5650cebb40ceec4dc85321e94d7b0dc9d117fb5c3cf400161f"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "925b282a101d459fca1077eb04e5f632eae9e96699d61e3115ac565f9b382aa4"
   },
   "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
   "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
   "creation_provenance": {
-    "origin": "ChatGPT La Salle serialized Implementation Stage 2 — fresh census after independently verified current-main refresh -0001",
-    "authorization": "Same owner/Control-Center-authorized La Salle Stage 2 phase persists. Refresh la-salle-stage2-current-main-refresh-0001 is COMPLETE and independently fresh-verified PASS on protected main 784fa4ae41fc77e4443e1cce9ed0866c89b201f9 with exact successor a556999777c59e4937a9f2f5114dd293d490d6ae. This read-only census regenerates the complete Stage 2 topology from that exact successor after generic PR #490. It carries no tracked repair, proposal rehearsal, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
+    "origin": "ChatGPT La Salle serialized Implementation lane — fresh-census-bound Stage 2 opponent-display normalization",
+    "authorization": "Same owner/Control-Center-authorized La Salle Stage 2 phase persists. Fresh-verified census la-salle-stage2-census-0002 on refresh successor a556999777c59e4937a9f2f5114dd293d490d6ae and protected main 784fa4ae41fc77e4443e1cce9ed0866c89b201f9 is BLOCKED solely by exactly two deterministic historical opponent-display conflicts (immaculata and lincoln-pa), with warning_count=0, decision_count=0, semantic drift PASS, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. Authorizes exactly the permanent census-bound representation repair over that complete two-key population. Only canonical_opponent_name in schools/la-salle/opponents.csv and normalized_opponent_name in schools/la-salle/source-games.csv may change, using existing project display authority. No opponent keys, literal source labels, raw evidence, scores, dates, sites, game types, Research, Integration Freeze, protected main, owner gates, release, Preview, merge, or Production authority."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
