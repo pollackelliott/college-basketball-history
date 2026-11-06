@@ -204,6 +204,77 @@ def _research_accounting(
             continue
         return status, _first(row, *basis_fields)
 
+    # Accepted current-transition Stage 3 statuses may encode terminal research
+    # debt with a prefixed workflow vocabulary rather than the controlled
+    # six-file status tokens. Translate only the narrow semantic shapes already
+    # established by the parent row; unrelated or active status strings remain
+    # fail-closed.
+    site = normalize_site(_first(
+        row, "curated_site_type", "stage3b_site_type",
+        "stage3a_final_site_type", "stage3a_final_han", "site_type",
+    ))
+    game_type = normalize_game_type(_first(
+        row, "curated_game_type", "game_type", "structured_game_type",
+    ))
+    accepted_venue = _first(
+        row, "stage3b_physical_venue_name", "stage3b_curated_venue_name",
+        "stage3a_final_physical_venue_name", "stage3a_final_venue_name",
+        "accepted_venue_name", "stage3a_curated_venue_name",
+        "stage3a2_physical_venue_name", "stage3a3_physical_venue_name",
+        "curated_venue_name", "venue_name",
+    )
+
+    legacy_han_status = row.get("site_research_status", "").strip().upper()
+    legacy_han_basis = row.get("site_research_basis", "").strip()
+    if legacy_han_status.startswith("STAGE3A1_RESEARCHED_UNRESOLVED_"):
+        if (
+            game_type == "REGULAR_SEASON"
+            and site == "UNKNOWN"
+            and not accepted_venue
+            and legacy_han_basis
+        ):
+            return "RESEARCHED_UNRESOLVED", legacy_han_basis
+        return "", ""
+
+    legacy_venue_status = row.get("venue_research_status", "").strip().upper()
+    legacy_venue_basis = row.get("venue_research_basis", "").strip()
+    if legacy_venue_status == "RESEARCHED_UNRESOLVED_STAGE3A3_HISTORICAL_LOCALITY":
+        season = _first(row, "season_label", "season")
+        if (
+            game_type == "REGULAR_SEASON"
+            and site == "NEUTRAL"
+            and not accepted_venue
+            and season[:4].isdigit()
+            and int(season[:4]) <= 1995
+            and legacy_venue_basis
+        ):
+            return "RESEARCHED_UNRESOLVED", legacy_venue_basis
+        return "", ""
+
+    if legacy_venue_status in {
+        "RESEARCHED_UNRESOLVED_STAGE3A3_MODERN_ONEOFF_EXACT_VENUE",
+        "RESEARCHED_UNRESOLVED_STAGE3A3_MODERN_RECURRING_EXACT_VENUE",
+    }:
+        season = _first(row, "season_label", "season")
+        city = _first(
+            row, "curated_venue_city", "curated_city", "city", "venue_city"
+        )
+        state = _first(
+            row, "curated_venue_state", "curated_state", "state", "venue_state"
+        )
+        if (
+            game_type == "REGULAR_SEASON"
+            and site == "NEUTRAL"
+            and not accepted_venue
+            and season[:4].isdigit()
+            and int(season[:4]) >= 1996
+            and city
+            and state
+            and legacy_venue_basis
+        ):
+            return "RESEARCHED_UNRESOLVED", legacy_venue_basis
+        return "", ""
+
     # Accepted historical-location-only neutral building debt is not a new
     # absence of research.  Preserve the exact checkpoint basis, not merely
     # a generic status inferred from the missing building.
@@ -325,6 +396,118 @@ def _project_overtime(value: str) -> str:
     if match:
         return match.group(1) or "1"
     return value
+
+
+_LEGACY_LITERAL_SCORE_RESULT_RE = re.compile(
+    r"(?<!\d)(?P<a>\d{1,3})\s+(?P<b>\d{1,3})\s+(?P<result>[WLT])\s*$",
+    re.IGNORECASE,
+)
+_LEGACY_LITERAL_SCORE_PAIR_RE = re.compile(
+    r"(?<!\d)(?P<a>\d{1,3})\s+(?P<b>\d{1,3})(?!\d)"
+)
+
+
+def _score_result_consistent(team: int, opponent: int, result: str) -> bool:
+    result = (result or "").strip().upper()
+    if result == "W":
+        return team > opponent
+    if result == "L":
+        return team < opponent
+    if result == "T":
+        return team == opponent
+    return False
+
+
+def _legacy_score_projection(
+    row: dict[str, str],
+    *,
+    game_id: str,
+) -> tuple[str, str, str, list[dict[str, Any]]]:
+    """Project an accepted legacy positional score pair into team/opponent order.
+
+    This is deliberately fail-closed. Current-schema team/opponent fields are
+    never reinterpreted. A legacy row is eligible only when it carries the older
+    research-ledger topology (season rather than season_label and no
+    source_program_key), the accepted W/L/T conflicts with the current numeric
+    orientation, and the preserved source literal ends with exactly the same two
+    accepted numbers plus the same result token. The unordered numeric pair and
+    played result remain unchanged; only package-field orientation changes.
+    """
+
+    team = _first(row, "team_score", "wagner_points", "dayton_score")
+    opponent = _first(row, "opponent_score", "opponent_points")
+    result = _first(
+        row, "played_result", "on_court_result", "source_result", "result"
+    ).upper()
+    if not team or not opponent:
+        return team, opponent, "", []
+    if not (team.isdigit() and opponent.isdigit()) or result not in {"W", "L", "T"}:
+        return team, opponent, "", []
+
+    team_value = int(team)
+    opponent_value = int(opponent)
+    if _score_result_consistent(team_value, opponent_value, result):
+        return team, opponent, "", []
+
+    legacy_topology = (
+        bool(row.get("research_game_id", "").strip())
+        and bool(row.get("season", "").strip())
+        and not row.get("season_label", "").strip()
+        and not row.get("source_program_key", "").strip()
+    )
+    raw_text = first_literal(row, "raw_text", "source_raw_text")
+    literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
+    literal_pairs = [
+        (int(match.group("a")), int(match.group("b")))
+        for match in _LEGACY_LITERAL_SCORE_PAIR_RE.finditer(raw_text)
+    ]
+    accepted_pair = sorted((team_value, opponent_value))
+    if (
+        not legacy_topology
+        or literal is None
+        or literal.group("result").upper() != result
+        or sorted((int(literal.group("a")), int(literal.group("b")))) != accepted_pair
+        or len(literal_pairs) != 1
+        or sorted(literal_pairs[0]) != accepted_pair
+    ):
+        return team, opponent, "", [
+            {
+                "reason": "LEGACY_SCORE_ORIENTATION_AMBIGUOUS",
+                "source_game_id": game_id,
+                "team_score": team,
+                "opponent_score": opponent,
+                "played_result": result,
+            }
+        ]
+
+    if result == "T":
+        return team, opponent, "", [
+            {
+                "reason": "LEGACY_SCORE_ORIENTATION_AMBIGUOUS",
+                "source_game_id": game_id,
+                "team_score": team,
+                "opponent_score": opponent,
+                "played_result": result,
+            }
+        ]
+
+    projected_team = (
+        max(team_value, opponent_value)
+        if result == "W"
+        else min(team_value, opponent_value)
+    )
+    projected_opponent = (
+        min(team_value, opponent_value)
+        if result == "W"
+        else max(team_value, opponent_value)
+    )
+    note = (
+        "Stage 4 legacy score-orientation compatibility: preserved accepted "
+        f"unordered score pair {{{min(accepted_pair)}, {max(accepted_pair)}}} and "
+        f"played_result={result}; source literal {raw_text!r} deterministically "
+        "orients package team_score/opponent_score without changing the parent ledger."
+    )
+    return str(projected_team), str(projected_opponent), note, []
 
 
 def _norm_name(value: str) -> str:
@@ -514,6 +697,10 @@ def _projection(
         administrative_status, administrative_note = (
             project_administrative_status(row)
         )
+        projected_team_score, projected_opponent_score, score_note, score_defects = (
+            _legacy_score_projection(row, game_id=game_id)
+        )
+        defects.extend(score_defects)
 
         projected.append(
             {
@@ -532,10 +719,8 @@ def _projection(
                 ),
                 "normalized_opponent_key": opponent_key,
                 "normalized_opponent_name": opponent_name,
-                "team_score": _first(
-                    row, "team_score", "wagner_points", "dayton_score"
-                ),
-                "opponent_score": _first(row, "opponent_score", "opponent_points"),
+                "team_score": projected_team_score,
+                "opponent_score": projected_opponent_score,
                 "played_result": _first(
                     row,
                     "played_result",
@@ -629,7 +814,7 @@ def _projection(
                 "administrative_status": administrative_status,
                 "administrative_note": administrative_note,
                 "notes": " ".join(part for part in (
-                    _first(row, "notes", "stage1_notes"), round_note
+                    _first(row, "notes", "stage1_notes"), round_note, score_note
                 ) if part),
                 "site_research_status": research_status,
                 "site_research_basis": research_basis if research_status else "",
@@ -671,8 +856,6 @@ def _semantic_projection_defects(
     """Independent population-level anti-loss checks for accepted source facts."""
     pairs = {
         "season_label": ("season_label", "season"),
-        "team_score": ("team_score", "wagner_points", "dayton_score"),
-        "opponent_score": ("opponent_score", "opponent_points"),
         "played_result": (
             "played_result",
             "on_court_result",
@@ -691,6 +874,36 @@ def _semantic_projection_defects(
         if projected[target] != expected:
             defects.append({"reason": "ACCEPTED_SOURCE_FIELD_LOST",
                             "source_game_id": game_id, "field": target})
+
+    original_team = _first(parent, "team_score", "wagner_points", "dayton_score")
+    original_opponent = _first(parent, "opponent_score", "opponent_points")
+    if original_team or original_opponent:
+        projected_team = projected.get("team_score", "").strip()
+        projected_opponent = projected.get("opponent_score", "").strip()
+        exact_pair = (projected_team, projected_opponent) == (
+            original_team, original_opponent
+        )
+        unordered_preserved = False
+        if all(value.isdigit() for value in (
+            original_team, original_opponent, projected_team, projected_opponent
+        )):
+            unordered_preserved = sorted(
+                (int(original_team), int(original_opponent))
+            ) == sorted((int(projected_team), int(projected_opponent)))
+            result = projected.get("played_result", "").strip().upper()
+            unordered_preserved = (
+                unordered_preserved
+                and _score_result_consistent(
+                    int(projected_team), int(projected_opponent), result
+                )
+            )
+        if not exact_pair and not unordered_preserved:
+            defects.append({
+                "reason": "ACCEPTED_SOURCE_SCORE_PAIR_LOST",
+                "source_game_id": game_id,
+                "field": "team_score/opponent_score",
+            })
+
     accepted_round = _first(parent, "curated_postseason_round",
                             "stage3b_postseason_round", "postseason_round")
     if accepted_round and all(
