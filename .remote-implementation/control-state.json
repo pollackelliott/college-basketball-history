@@ -372,7 +372,7 @@
     "la-salle-phase0-0001"
   ],
   "active_expected_main_sha": "715d7764ad4b629ec8d4243380361d5d20c60c41",
-  "active_lock_commit": null,
+  "active_lock_commit": "494c3c467e0494aa2b078515efe9962cb97bf680",
   "active_lock_owner": "github-actions:42264225836:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
