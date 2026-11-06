@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "8c8b75a288f2b31de328c99b1f6a2bea00f567dad9b90bb47dc60360ea07585f",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "52f5f7ffccfc0f956d7b6c346ad6e78b3f133483f74947e38b849cf29223f634",
+  "pr_created": false,
+  "preview_request_id": "la-salle-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "221691eb65d491975df09980ec412620cae6e844",
+  "readiness_proof_sha256": "716e5cd827070e01daf9dabd7206ca80340a7ce76085bbeb0b62d771db550f77",
+  "release_pr_packet_sha256": "685c4a930c2b8dccc3494d1fc732ba00b028921a75a99b99f62dde95dd6a3a52",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "la-salle-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "tracked_mutation": "NONE"
+}
