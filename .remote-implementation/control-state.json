@@ -384,7 +384,7 @@
   "active_request_sha256": "aef197a0cc629782ac5249ca0c20777e9745c3c2647af51096d57e0ea96d51e4",
   "active_school_key": "la-salle",
   "active_target_branch": "data/la-salle-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "078dce9f903f52dd0b3cf6c64c0e9ee3a8edf66e",
   "active_writeahead_path": ".remote-implementation/writeahead/la-salle/la-salle-phase0-0002/writeahead-manifest.json",
   "active_writeahead_sha256": "99774c39ea4a6705b8d1b3c4491ef20868b7161e1972d47e68d4c27ea450b2c8",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
