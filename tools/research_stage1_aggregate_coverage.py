@@ -385,6 +385,8 @@ def _legacy_residuals(
             continue
 
         raw_class = first(row, "class", "residual_class", "blocker_class")
+        if raw_class == "AGGREGATE_COVERAGE_AUTHORITY_REQUIRED":
+            raw_class = "FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION"
         raw_state = first(row, "research_state", "state")
         identified = _parse_int(first(
             row,
