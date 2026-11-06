@@ -1,0 +1,64 @@
+{
+  "changed_file_sha256": {
+    "tests/test_onboarding_fast_path.py": "fdb9510e42bfb48bed6cd96b22fb9c6478397abab57377437877f19e48890095",
+    "tools/onboarding_plan.py": "4d678bffcca5436bda76d0b0035510de65c92bad7b2ccb31e42d811d2c5f0931"
+  },
+  "changed_paths": [
+    "tests/test_onboarding_fast_path.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7",
+  "global_lock_commit": "5ba5317c3f76297e052f2bf0f6fe8394d1e06200",
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "tests/test_onboarding_fast_path.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "816c9a941bc40820b8150030b0d71a977991589382fff6b89e7ae33107dbe4c7",
+    "notes.md": "389ac2b803550b5fd561321a5ea2b808576f4bbf6c77cd299c2b043a7a506fa1",
+    "opponents.csv": "4b38cba1de8f34896f1951e97c714e3b6a763cbee013337074414b1121617887",
+    "source-games.csv": "8240da07acacb356b96c0113813a3d3c1d483df68a9f26a2e4d20f9ecf74634e",
+    "source-notes.md": "1616811b3cef0434ea8421547c3caddb70186f247d1e47360aaa9200d4131a00",
+    "venues.csv": "10b9df3bba5c9fe3b9b4d4c80eb6e3e9d5488b821fb64665836691c7741f7fd5"
+  },
+  "predecessor_authority_kind": "PHASE0_SUCCESSOR",
+  "prepared_commit_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+  "prepared_main_parent_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "prepared_parent_sha": "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7",
+  "prepared_parents": [
+    "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7",
+    "784fa4ae41fc77e4443e1cce9ed0866c89b201f9"
+  ],
+  "prepared_tree_sha": "3f76a7625d2d65488486e051aae72ce196dbc1fa",
+  "protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "refresh_proof_sha256": "c5b402e15917956e761a8640c85da0eb2f873c67d3d21bb80039add3643bf3d7",
+  "repository_validation": "PASS",
+  "request_id": "la-salle-stage2-current-main-refresh-0001",
+  "request_sha256": "3875b3f2ccbfb6d395938f38a0ba6efd67b760640c29e59be9729e1ba70527d6",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "sidecars": {
+    "integration-freeze.json": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+    "refresh-proof.json": "c5b402e15917956e761a8640c85da0eb2f873c67d3d21bb80039add3643bf3d7"
+  },
+  "target_branch": "data/la-salle-onboarding",
+  "target_changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/la-salle/conferences.csv",
+    "schools/la-salle/notes.md",
+    "schools/la-salle/opponents.csv",
+    "schools/la-salle/source-games.csv",
+    "schools/la-salle/source-notes.md",
+    "schools/la-salle/venues.csv"
+  ]
+}

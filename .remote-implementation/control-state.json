@@ -380,15 +380,15 @@
   "active_lock_commit": "5ba5317c3f76297e052f2bf0f6fe8394d1e06200",
   "active_lock_owner": "github-actions:42273142671:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+  "active_prepared_tree_sha": "3f76a7625d2d65488486e051aae72ce196dbc1fa",
   "active_request_id": "la-salle-stage2-current-main-refresh-0001",
   "active_request_sha256": "3875b3f2ccbfb6d395938f38a0ba6efd67b760640c29e59be9729e1ba70527d6",
   "active_school_key": "la-salle",
   "active_target_branch": "data/la-salle-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/la-salle/la-salle-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "3dcd3ed2a443250c33d2dd4152f298d8199f3b5852943d6dda6f62232867556f",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -771,5 +771,5 @@
   "lock_acquisition_request_commit": "c7fd0534e6ed1633a898b5a16402896ebe125a62",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
