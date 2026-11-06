@@ -1,31 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-stage2-census-0001",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "la-salle-stage2-opponent-display-normalize-0001",
   "school_key": "la-salle",
-  "previous_control_state_commit": "16906a9b99e235ec72e78d12619f71fa0aa48c71",
-  "previous_control_state_sha256": "4740b699e4a3db89b56f7eb820a542321b24ab1b042d69da496b0d9452aeef66",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "8e14bf0a094c5a1031a25320e613061150a5e34a",
+  "previous_control_state_sha256": "f4f506e66f837a7022f9a4d5ddf938f2ef3322cdc65f644b734b9a412123d53f",
   "expected_protected_main_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
   "target_branch": "data/la-salle-onboarding",
   "target_sha": "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/la-salle/la-salle-phase0-0002/successor-manifest.json",
-    "sha256": "cfcd185ffa865c657bd5ad3b6cfcc0eed7e137e8d30bdaa2f9af574ea96d08bb"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "9556dedcabc4843b8b04ec25ab8876275d81d19f8d3e062ebf8b77852a034537"
   },
   "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
   "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
   "creation_provenance": {
-    "origin": "ChatGPT La Salle serialized Implementation lane — owner-authorized Stage 2 capability census",
-    "authorization": "Owner explicitly said Proceed after La Salle stable Phase 0 completed with fresh_runner_verification=PASS and remote_phase0_equivalence=PASS. This request begins exactly one bounded read-only STAGE2_CENSUS against onboarding head 6762a4e710175d74195dfd806ac7c4f1b2d0e8f7, Integration Freeze 8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d, semantic snapshot a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490, and protected main 19d1199bf67eb935ad5856d63b89afbb105129a4. It carries no tracked repair, current-main refresh, recommendation-map proposal rehearsal, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, or Owner Gate 2 authority."
+    "origin": "ChatGPT La Salle serialized Implementation lane — census-bound Stage 2 opponent-display normalization",
+    "authorization": "Same owner-authorized La Salle Stage 2 capability/reconciliation phase persists. Fresh-verified census la-salle-stage2-census-0001 at protected main 19d1199bf67eb935ad5856d63b89afbb105129a4 is BLOCKED solely by exactly two deterministic historical opponent-display conflicts (immaculata and lincoln-pa), with warning_count=12, decision_count=0, semantic drift PASS, decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. Authorizes exactly the permanent census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE representation repair over that complete two-key population. The operation may change only canonical_opponent_name in schools/la-salle/opponents.csv and normalized_opponent_name in schools/la-salle/source-games.csv, using existing project display authority. It may not change opponent keys, literal source labels, raw evidence, scores, dates, sites, game types, Research, Integration Freeze, protected main, Owner Gate 1/2, sealing/apply, release, Preview, merge, or Production."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -35,10 +39,6 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "venue_identity_maintenance": false
+    "release_production_proof": false
   }
 }
