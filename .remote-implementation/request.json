@@ -1,34 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-stage2-gate1-seal-0001",
+  "request_id": "la-salle-stage2-sealed-apply-0001",
   "school_key": "la-salle",
-  "operation": "STAGE2_GATE1_SEAL",
-  "previous_control_state_commit": "e454ae2d5cefcea870736a18ab4204cae7f04809",
-  "previous_control_state_sha256": "4303e772763a4791504e06e591917bfdfabb00f94115e03147817a6db685e059",
-  "expected_protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
-  "target_branch": "data/la-salle-onboarding",
-  "target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
-  "stage2_preseal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
-    "sha256": "248decf5bc5ce0a65771e45a3b31b6e3c017d6046d1b56ddf3449ed4403ba006"
-  },
-  "stage2_preseal_verification": {
-    "path": ".remote-implementation/verifications/la-salle/la-salle-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
-    "sha256": "3c31cea2b1b498b8227ccaac68ffe7208afb184cbea26cc48a12eea540fb176f"
-  },
-  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
-  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
-  "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
-  "recommendation_map_sha256": "01dc70900ef6a7b89c69e9d77d0cd6f5f690a2f919ea57b74d65056906eeb534",
-  "approved_plan_hash_preview": "da71734ae54fff5617d2ada96ae85a7b281247dbbd92a3f9a394761a5b0a9aba",
-  "filled_review_sha256": "da5ec9f29c6b44e12d2144419407b1922a82a060c44f83386a3734bd9f05193e",
-  "decision_id_set_sha256": "0953a53a5a80d453bc84be90d3ff79a42277865fafc46da0fc899ea7ea91d61f",
-  "owner_gate_1_approval_sha256": "e3d25bd74ca18f9117ad3068b90875c8543ee2753346fa9fe2f7d04b398fcc83",
-  "equivalence_sha256": "a9b195ef0f33f497c2bc612cfe93702752c5ecbfcc0e1983952082e9cf3d98e4",
+  "operation": "STAGE2_SEALED_APPLY",
+  "previous_control_state_commit": "66d7efaf75e9be6822e8d3a9537c1fb7d31f8591",
+  "previous_control_state_sha256": "7d18bd7678d4dcbee6780fd97ce60c6ff2ec2cba0a3e3d6f442ed0ea85ed1b81",
+  "expected_protected_main_sha": "221691eb65d491975df09980ec412620cae6e844",
   "creation_provenance": {
-    "origin": "ChatGPT La Salle Implementation post-Gate-1 continuation",
-    "authorization": "Fresh-verified READY_TO_SEAL under the existing exact owner Gate 1 approval; cryptographic seal only. The owner-approved historical meaning is fixed by the exact recommendation map and filled review. No apply, release readiness, Preview, Owner Gate 2, merge, Production, recovery, or new historical authority is included in this request."
+    "origin": "ChatGPT La Salle Implementation chat succession",
+    "authorization": "Owner Gate 1 is already explicitly approved. The same approved post-Gate-1 phase persists through transactional sealed apply and independent post-apply verification against the exact fresh-verified cryptographic seal. No release preparation, Preview, Owner Gate 2, merge, Production, recovery, shared/global mutation, or new historical authority is included."
   },
   "authority": {
     "owner_gate_1": false,
@@ -37,19 +18,38 @@
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_gate1_seal": true,
-    "stage2_sealed_apply": false,
+    "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
-    "release_preview_verify": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false,
+    "stage2_sealed_apply": true,
     "venue_identity_maintenance": false
-  }
+  },
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "8e626f1306753711884b8c382ea590b6fc033ca80ea3cdd5c23bfce4455478a3"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/la-salle/la-salle-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "d15d29d390de8f16705d09ad820c383dc8da807039a35c1fba357c1c70132128"
+  },
+  "approved_plan_hash": "128d4492d1fc17a9d323df8a266d0f728ca0f78e9932788652dfdc8845ab4c4c",
+  "approved_plan_sha256": "622727723cfc6e2cdcc269ab87988ba62860d17f786e4e37541664d38587dbf9",
+  "owner_gate_1_approval_sha256": "e3d25bd74ca18f9117ad3068b90875c8543ee2753346fa9fe2f7d04b398fcc83",
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+  "recommendation_map_sha256": "01dc70900ef6a7b89c69e9d77d0cd6f5f690a2f919ea57b74d65056906eeb534",
+  "filled_review_sha256": "da5ec9f29c6b44e12d2144419407b1922a82a060c44f83386a3734bd9f05193e",
+  "decision_id_set_sha256": "0953a53a5a80d453bc84be90d3ff79a42277865fafc46da0fc899ea7ea91d61f"
 }
