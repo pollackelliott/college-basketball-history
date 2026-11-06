@@ -842,12 +842,13 @@ def audit_checkpoint(parent: Path, *, expected_parent_sha256: str,
         "research_base_sha": research_base,
         "identified_game_rows": len(ledger),
         "identified_ledger_sha256": digest(authority_ledger_raw),
-        "legacy_parent_projection": legacy_parent,
         "season_coverages": coverages,
         "season_coverages_sha256": digest(json_bytes(coverages)),
         "defects": sorted(set(defects)),
         "stage1_complete": False,
     }
+    if legacy_parent:
+        report["legacy_parent_projection"] = True
     if len(coverages) == 1:
         report["season_coverage"] = coverages[0]
         report["season_coverage_sha256"] = digest(json_bytes(coverages[0]))
