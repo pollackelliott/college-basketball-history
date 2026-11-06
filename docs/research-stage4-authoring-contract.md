@@ -129,6 +129,21 @@ Every successor Research checkpoint carries all existing stage4-authoring/ membe
 
 A later stage may add or legitimately update the file it owns, but it must not silently drop an earlier package-authoring member.
 
+Checkpoint/carry-forward tooling must enforce this mechanically with
+`tools/research_authoring_capsule.py` (or the shared functions it exposes).
+Inherited members are byte-preserved by default. A current substage may replace
+only the authoring member it explicitly owns; all other inherited members must
+remain byte-identical to the parent. Parent/child continuity audit failures are
+STOP conditions, not permission to rebuild missing authority from current
+registries or conversation state.
+
+Stage 4 preflight also audits hash-bound `stage4_authoring_carried` claims that
+survive inside legacy/current-transition checkpoint artifacts. If a prior
+accepted member's hash is durable but its bytes disappeared later in the chain,
+preflight must report `DROPPED_INHERITED_AUTHORING_MEMBER` with the expected
+hash and provenance member. The hash proves that authority existed; it does not
+supply the missing contents and therefore cannot authorize reconstruction.
+
 tools/research_stage3a0.py mechanically carries any Stage 2 authoring capsule through its output and records those files in its manifest, including early-history-uncertainty.json when present. Later Research substages must preserve the same invariant when serializing their checkpoints.
 
 ## 4. Stage 3B completion preflight
