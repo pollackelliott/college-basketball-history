@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "la-salle-phase0-0002",
+  "operation": "PHASE0",
+  "school_key": "la-salle",
+  "previous_control_state_commit": "0d41a9473fbed6f975910e3706f00d9e31bdd027",
+  "previous_control_state_sha256": "586593dc465d04b9c2a978d1088a27c7faa10ba52d63a42465acb3195ff38981",
+  "expected_protected_main_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "target_branch": "data/la-salle-onboarding",
+  "research_checkpoint": {
+    "sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+    "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9502b2bcaf5bb5c7f508d5766eb685493de84b5b",
+      "path_prefix": ".remote-implementation/transports/la-salle/la-salle-stage1-0001/piece-",
+      "part_count": 16
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage1-0004/checkpoint-manifest.json",
+    "sha256": "f4191eb01a88a0ec5d230401becca7ca4ff18cf63735fb9eb9af85c593ea4019"
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/venue-reconciliation.json",
+    "sha256": "cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224"
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/conference-reconciliation.json",
+    "sha256": "e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871"
+  },
+  "history_scope": {
+    "start_season": "1930-1931",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted La Salle Research Freeze scope: program history begins 1930-31 and top-level scope is INCEPTION+. The frozen scope is settled Research authority. Protected main currently lacks the La Salle reusable program-top-level-scope row, so guarded Phase 0 must reconcile this exact target-school scope without reopening Research. Preserve the immutable Research Freeze, including the accepted 1930-31 aggregate-coverage authority and all researched uncertainty."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT La Salle serialized Implementation lane — post-PR #489 guarded Phase 0 replay",
+    "authorization": "Owner and Control Center explicitly authorized recovery of la-salle-phase0-0001, the same-family generic JM/Jamaica repair under Issue #487, and after reviewed merge a complete Stage 1/Phase 0 replay. Recovery classified the original mutation NOT_ATTEMPTED and returned global control to IDLE. PR #489 merged as protected-main commit 19d1199bf67eb935ad5856d63b89afbb105129a4. Fresh Stage 1 request la-salle-stage1-0004 is PASS with zero blockers, zero ambiguity, and zero shared/global maintenance. This request authorizes exactly one guarded PHASE0 operation from that exact checkpoint: fresh-repeat Stage 1, install the unchanged six-file Research Freeze, apply accepted 1930-31+/INCEPTION+ target scope, apply the already-bound venue/conference registrations, capture Integration Freeze and semantic snapshot authority, publish create-once data/la-salle-onboarding through the serialized lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. No Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, recovery, unrelated shared/global maintenance, or protected-main direct mutation authority is created."
+  },
+  "authority": {
+    "phase0": true,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
