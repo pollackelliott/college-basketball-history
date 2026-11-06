@@ -1,50 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "la-salle-phase0-recover-0001",
   "school_key": "la-salle",
-  "previous_control_state_commit": "a34911c531fcc7280521ce3a0cd78bbc8bb617a3",
-  "previous_control_state_sha256": "e25b160e41b5b6e34e343b54f2f5f53ed01e570d84248fac289f43a3b4a30d2f",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "44e0e23fe2af24dc511c23a41c70c8d22fbfb15c",
+  "previous_control_state_sha256": "53f13a2d62ace6db24de0634b52e4fe30bda6bb4aa7071e20c132c9b21f02e6b",
   "expected_protected_main_sha": "715d7764ad4b629ec8d4243380361d5d20c60c41",
-  "target_branch": "data/la-salle-onboarding",
-  "research_checkpoint": {
-    "sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
-    "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "9502b2bcaf5bb5c7f508d5766eb685493de84b5b",
-      "path_prefix": ".remote-implementation/transports/la-salle/la-salle-stage1-0001/piece-",
-      "part_count": 16
-    }
-  },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage1-0003/checkpoint-manifest.json",
-    "sha256": "fd2b7870589da461e5dcfc23c91f1001d818bf7f4855b861857d45f5d6002b35"
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/venue-reconciliation.json",
-    "sha256": "cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224"
-  },
-  "conference_reconciliation": {
-    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/conference-reconciliation.json",
-    "sha256": "e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871"
-  },
-  "history_scope": {
-    "start_season": "1930-1931",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Accepted La Salle Research Freeze scope: program history begins 1930-31 and top-level scope is INCEPTION+. The frozen scope is settled Research authority. Protected main currently lacks the La Salle reusable program-top-level-scope row, so guarded Phase 0 must reconcile this exact target-school scope without reopening Research. Preserve the immutable Research Freeze, including the accepted 1930-31 aggregate-coverage authority and all researched uncertainty."
+  "recovery": {
+    "abandoned_request_id": "la-salle-phase0-0001",
+    "lock_commit": "494c3c467e0494aa2b078515efe9962cb97bf680",
+    "target_branch": "data/la-salle-onboarding"
   },
   "creation_provenance": {
-    "origin": "ChatGPT La Salle serialized Implementation lane — Stage 1 PASS to guarded Phase 0",
-    "authorization": "Owner explicitly said Proceed after the durable La Salle Stage 1 PASS checkpoint la-salle-stage1-0003. Current repository policy authorizes one guarded current-main Phase 0 unit from that PASS checkpoint. This request preserves Research Freeze SHA-256 2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306, research base 933d2f9e7ebdd24fefcafda326a7ebe898a476df, exact venue reconciliation cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224, exact conference reconciliation e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871, and Stage 1 checkpoint manifest fd2b7870589da461e5dcfc23c91f1001d818bf7f4855b861857d45f5d6002b35. It authorizes exactly one PHASE0 operation: fresh-repeat Stage 1, install the unchanged six-file package on data/la-salle-onboarding, apply the accepted 1930-31+/INCEPTION+ target scope, perform the already-bound ordinary venue/conference registrations, capture Integration Freeze and semantic snapshot authority, publish through the serialized mutation lock/write-ahead/expected-predecessor CAS path, and require independent fresh Phase 0 verification. No Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, recovery, unrelated shared/global maintenance, or protected-main direct mutation authority is created."
+    "origin": "ChatGPT La Salle serialized Implementation lane — owner-authorized exact Phase 0 recovery",
+    "authorization": "Owner and Control Center explicitly authorized repository-owned permanent RECOVER for failed request la-salle-phase0-0001. Recovery may release/abandon only if the permanent classifier independently confirms NOT_ATTEMPTED. Durable evidence at authorization: transaction_state=INPUTS_VERIFIED, no write-ahead, no prepared commit/tree, target data/la-salle-onboarding absent, protected main unchanged at 715d7764ad4b629ec8d4243380361d5d20c60c41, active lock commit 494c3c467e0494aa2b078515efe9962cb97bf680. After successful recovery, one narrow generic same-family JM/Jamaica tooling repair under Issue #487 is separately authorized; this RECOVER request itself supplies no Phase 0 retry, basketball mutation, owner gate, release, merge, or protected-main mutation authority."
   },
   "authority": {
-    "phase0": true,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
-    "recovery": false,
+    "recovery": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
@@ -58,8 +36,6 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false
+    "venue_identity_maintenance": false
   }
 }
