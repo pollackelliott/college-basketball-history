@@ -12,6 +12,8 @@ import zipfile
 from collections import Counter
 from pathlib import Path
 
+from research_authoring_capsule import carry_authoring_capsule
+
 REGULAR = {"REGULAR_SEASON", "REGULAR", "RS"}
 POST = {
     "POSTSEASON",
@@ -352,52 +354,6 @@ def materialize_legacy_checkpoint(
     }
 
 
-STAGE4_AUTHORING_BASENAMES = {
-    "opponents.csv",
-    "venues.csv",
-    "conferences.csv",
-    "early-history-uncertainty.json",
-    "season-coverage.json",
-}
-
-
-def carry_stage4_authoring(
-    archive: zipfile.ZipFile,
-    out: Path,
-) -> dict[str, dict[str, str]]:
-    """Carry any durable Stage 4 authoring capsule through Stage 3A-0 unchanged."""
-
-    by_basename: dict[str, list[str]] = {}
-    for name in archive.namelist():
-        if name.endswith("/") or "/stage4-authoring/" not in "/" + name:
-            continue
-        basename = Path(name).name.lower()
-        if basename not in STAGE4_AUTHORING_BASENAMES:
-            continue
-        by_basename.setdefault(basename, []).append(name)
-
-    carried: dict[str, dict[str, str]] = {}
-    for basename, members in sorted(by_basename.items()):
-        if len(members) != 1:
-            raise ValueError(
-                "AMBIGUOUS_STAGE4_AUTHORING_MEMBER: "
-                + basename
-                + ":"
-                + ",".join(sorted(members))
-            )
-        member = members[0]
-        data = archive.read(member)
-        target = out / "stage4-authoring" / basename
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(data)
-        carried[basename] = {
-            "input_member": member,
-            "sha256": sha256_bytes(data),
-            "output_path": str(target),
-        }
-    return carried
-
-
 def load_input(path: Path, out: Path) -> tuple[list[dict[str, str]], dict[str, object]]:
     if path.suffix.lower() != ".zip":
         raw = rows(path)
@@ -422,7 +378,7 @@ def load_input(path: Path, out: Path) -> tuple[list[dict[str, str]], dict[str, o
         raise ValueError(f"INVALID_CHECKPOINT_ZIP: {exc}") from exc
 
     with archive:
-        stage4_authoring = carry_stage4_authoring(archive, out)
+        stage4_authoring = carry_authoring_capsule(archive, out)
         members = [
             name
             for name in archive.namelist()
