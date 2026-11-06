@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "221691eb65d491975df09980ec412620cae6e844",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "la-salle-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "pr_number": 495,
+  "preview_deployment_id": 7611808611,
+  "preview_url": "https://college-basketball-history-bi1senfbx-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "la-salle-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "target_branch": "data/la-salle-onboarding"
+}

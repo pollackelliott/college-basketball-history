@@ -1,0 +1,22 @@
+{
+  "approved_plan_hash": "128d4492d1fc17a9d323df8a266d0f728ca0f78e9932788652dfdc8845ab4c4c",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL",
+  "merge_authorized_exact_head_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "merge_authorized_pr_number": 495,
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_body_sha256": "52f5f7ffccfc0f956d7b6c346ad6e78b3f133483f74947e38b849cf29223f634",
+  "pr_number": 495,
+  "preview_checkpoint_sha256": "3d849ae94a0c6e822899de6cd7ae500f322429b7c7d0038668fb9dd457adf23b",
+  "preview_deployment_id": 7611808611,
+  "preview_main_sha": "221691eb65d491975df09980ec412620cae6e844",
+  "preview_request_id": "la-salle-release-preview-verify-0001",
+  "preview_url": "https://college-basketball-history-bi1senfbx-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "67415196c09f55367006cf6d27a345b2a3089146e42291a43b0e0d832c25f5e2",
+  "production_proof": false,
+  "release_manifest_sha256": "5ef8f31c6aca369f81ef18347f35dde1e7491f7b773e9956bd1afb00baa6fbad",
+  "school_key": "la-salle",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d"
+}
