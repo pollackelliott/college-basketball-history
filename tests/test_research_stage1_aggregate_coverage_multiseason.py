@@ -41,6 +41,11 @@ def record(values):
     return {"wins": values[0], "losses": values[1], "games": values[2]}
 
 
+def legacy_full_season(season):
+    start = int(season[:4])
+    return f"{start:04d}-{start + 1:04d}"
+
+
 class MultiSeasonAggregateCoverageTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -228,7 +233,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         for row in ledger:
             legacy_ledger.append({
                 "id": row["research_game_id"],
-                "season": row["season_label"],
+                "season": legacy_full_season(row["season_label"]),
                 "source_opponent": row["opponent_literal"],
                 "accepted_game_type": row["game_type"],
                 "accepted_result": row["played_result"],
@@ -238,7 +243,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         legacy_census = []
         for season, institutional, identified, _ in SEASONS:
             legacy_census.append({
-                "season": season,
+                "season": legacy_full_season(season),
                 "source_header_record": f"{institutional[0]}-{institutional[1]}",
                 "expected_games": str(institutional[2]),
                 "identified_competitive_games": str(identified[2]),
@@ -248,7 +253,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         for season, _, identified, unidentified in SEASONS:
             legacy_residuals.append({
                 "residual_id": "SJU-" + season + "-AGGREGATE",
-                "season": season,
+                "season": legacy_full_season(season),
                 "residual_class": "FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION",
                 "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
                 "identified_competitive_games": str(identified[2]),
@@ -258,7 +263,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
             })
         legacy_residuals.append({
             "residual_id": "SJU-1952-53-NONBLOCKING",
-            "season": "1952-53",
+            "season": "1952-1953",
             "residual_class": "SOURCE_INTERNAL_AGGREGATE_CONFLICT",
             "state": "PRESERVE_UNCHANGED",
             "identified_competitive_games": "25",
@@ -337,6 +342,13 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         self.assertIn("season-census.csv", successor)
         self.assertEqual(json.loads(successor["blocking-residuals.json"]), [])
         self.assertTrue(json.loads(successor["stage1-status.json"])["stage1_complete"])
+
+    def test_legacy_season_label_normalization_is_fail_closed(self):
+        self.assertEqual(mod._legacy_season_label("1911-1912"), "1911-12")
+        self.assertEqual(mod._legacy_season_label("1999-2000"), "1999-00")
+        self.assertEqual(mod._legacy_season_label("1911-1913"), "1911-1913")
+        self.assertEqual(mod._legacy_season_label("1911-12"), "1911-12")
+        self.assertEqual(mod._legacy_season_label("not-a-season"), "not-a-season")
 
     def test_exact_authority_population_is_required(self):
         self.write_registry(drop_last=True)
