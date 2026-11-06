@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "school_key": "la-salle",
+  "owner_approval_basis": "Owner directed the La Salle Implementation lane, after Control Center Issue #487 repair, to bind the three remaining ordinary Stage 1 reconciliation items through the repository-defined path. This spec only resolves the already-classified Brendan Byrne current-main reuse and Aventura Palace Resort new registration; it does not change frozen historical meaning.",
+  "expected_research_zip_sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+  "expected_venues_sha256": "d5cb36b0fa555d502db0fb215af329b655ff1faf57023ce07a8468a13006e7b7",
+  "mappings": [
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_row_index": 32,
+      "expected_local_name": "Brendan Byrne Arena",
+      "expected_local_city": "East Rutherford",
+      "expected_local_state": "NJ",
+      "resolution_basis": "Fresh Stage 1 inventory la-salle-stage1-0002 found exactly one compatible current-main physical match: VEN-000028 / brendan-byrne-arena, with exact name, city, state, and no chronology conflict.",
+      "global_venue_id": "VEN-000028",
+      "global_venue_key": "brendan-byrne-arena",
+      "expected_global_city": "East Rutherford",
+      "expected_global_state": "NJ"
+    },
+    {
+      "action": "REGISTER_NEW_IDENTITY",
+      "local_venue_row_index": 63,
+      "expected_local_name": "Aventura Palace Resort",
+      "expected_local_city": "Playa del Carmen",
+      "expected_local_state": "Quintana Roo",
+      "resolution_basis": "Fresh Stage 1 inventory la-salle-stage1-0002 found no compatible current-main physical venue candidate. Frozen Research already settled the physical identity and locality; registration is ordinary target-school Stage 1 authority.",
+      "new_global_venue_key": "aventura-palace-resort"
+    }
+  ]
+}
