@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "rhode-island-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "rhode-island",
-  "previous_control_state_commit": "96da0f2864d7edeac3ca2625ebfaab06b705920d",
-  "previous_control_state_sha256": "2c88c77dccbe82dc2013c6936721fa250b822368bf95c06ddf29854d93420914",
-  "expected_protected_main_sha": "2461c6adaa78052e41f4105a80e820ecec7ff4a1",
-  "target_branch": "data/rhode-island-onboarding",
-  "target_sha": "2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3",
-  "pr_number": 475,
-  "merge_sha": "2461c6adaa78052e41f4105a80e820ecec7ff4a1",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/rhode-island/rhode-island-release-gate2-approval-0002/checkpoint-manifest.json",
-    "sha256": "c342bbca0ee118f1e2754d24698f0e3c3380ae3218b936c0fa79054ed3d1ce44"
+  "request_id": "la-salle-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "la-salle",
+  "previous_control_state_commit": "9502b2bcaf5bb5c7f508d5766eb685493de84b5b",
+  "previous_control_state_sha256": "cd58766b9652145dc354de41b6793ba06aa1b98e9cfe232b2e8d25ea73e048d2",
+  "expected_protected_main_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+  "research_checkpoint": {
+    "sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+    "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9502b2bcaf5bb5c7f508d5766eb685493de84b5b",
+      "path_prefix": ".remote-implementation/transports/la-salle/la-salle-stage1-0001/piece-",
+      "part_count": 16
+    }
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/rhode-island/rhode-island-release-gate2-approval-0002/gate2-approval-verification.json",
-    "sha256": "75c3883bebcbd7bb7bcdc105216f4937a672a1f342e9e72b6909d2bdd61627cb"
-  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Rhode Island serialized Implementation lane — exact post-merge Production proof",
-    "authorization": "The owner's existing exact Gate 2 approval was reconstructed and independently fresh-verified under repaired protected main 312c3d43049b4b6313cabab2243c1c47a1c2514a as rhode-island-release-gate2-approval-0002. The exact newly generated merge packet authorized PR #475 head 2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3 only. GitHub merged that exact head once as two-parent merge 2461c6adaa78052e41f4105a80e820ecec7ff4a1 with first parent 312c3d43049b4b6313cabab2243c1c47a1c2514a and second parent 2620a4cf8f9ab2b06db89fefd32c5da0f644f2e3; protected main is exactly 2461c6adaa78052e41f4105a80e820ecec7ff4a1. This request is read-only and may only authenticate the existing Gate 2 approval/PR/merge chain, require the exact successful Production deployment, compare required published artifacts against merged main, and independently verify the durable Production proof. It grants no merge replay, deployment creation, historical mutation, onboarding-branch mutation, tooling mutation, recovery, new owner approval, unrelated repair, or other-school authority."
+    "origin": "ChatGPT La Salle serialized Implementation lane — owner-designated Research Freeze intake",
+    "authorization": "Owner explicitly opened the La Salle serialized Implementation lane and identified exactly one attached ZIP as the final accepted RESEARCH_FROZEN artifact, authorizing this first bounded read-only intake / Stage 1 reconciliation inventory only. The current AGENTS.md owner-designated-artifact fallback was applied: exact ZIP SHA-256 2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306 was computed; the exact six flat required members were verified; research_base_sha 933d2f9e7ebdd24fefcafda326a7ebe898a476df and accepted 1930-31+ / INCEPTION+ scope were authenticated from the package; the completed Research lane's required freeze evidence, including the owner NON_D1 sanity-scan disposition and pre-freeze self-challenge completion, was inspected in the available project recovery record; the package's terminal researched site/accounting debt and owner-approved 1930-31 aggregate-coverage authority are preserved without reconstructed or inferred game rows; no competing La Salle onboarding branch/checkpoint or superseding durable Research artifact was found. Current protected main d944103fd952ae254238b199bcd3471a1cfc0ecc and global remote Implementation control were reauthenticated IDLE, transaction COMPLETE, recovery_required=false, active school none. This request authorizes only the repository-owned STAGE1_INVENTORY operation. It grants no Phase 0 mutation, shared/global maintenance, Stage 2, owner gate, release, merge, recovery, or protected-main mutation authority."
   },
   "authority": {
     "phase0": false,
@@ -38,11 +38,11 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
     "release": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": true,
-    "venue_identity_maintenance": false
+    "owner_gate_2": false
   }
 }
