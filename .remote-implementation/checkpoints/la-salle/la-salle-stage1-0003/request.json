@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "la-salle-stage1-0003",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "la-salle",
+  "previous_control_state_commit": "a273aa1c584b492e83048fa760665004e67bb4d1",
+  "previous_control_state_sha256": "f909e8c052fe02fbc2f0420f47ab45ccf6dfb0cc813a18e063836c3bdb2e53c8",
+  "expected_protected_main_sha": "715d7764ad4b629ec8d4243380361d5d20c60c41",
+  "research_checkpoint": {
+    "sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+    "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9502b2bcaf5bb5c7f508d5766eb685493de84b5b",
+      "path_prefix": ".remote-implementation/transports/la-salle/la-salle-stage1-0001/piece-",
+      "part_count": 16
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/venue-reconciliation.json",
+    "sha256": "cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224"
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/conference-reconciliation.json",
+    "sha256": "e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT La Salle serialized Implementation lane — mechanical Stage 1 reconciliation",
+    "authorization": "Owner explicitly directed the La Salle Implementation lane, after the Control Center-authorized Issue #487 tooling repair merged, to preserve the immutable Research Freeze, rerun the complete Stage 1 inventory, bind the three remaining ordinary La Salle reconciliation items through the repository-defined path, and require Stage 1 PASS before Integration Freeze or Phase 0. Fresh checkpoint la-salle-stage1-0002 on protected main 715d7764ad4b629ec8d4243380361d5d20c60c41 shows exactly three blockers: Brendan Byrne exact current-main reuse, Aventura Palace Resort explicit new target-school venue registration, and missing Middle Atlantic Conference registration. This request remains read-only STAGE1_INVENTORY and grants no Phase 0, shared/global maintenance, Stage 2, owner gate, release, merge, or recovery authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}

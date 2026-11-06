@@ -370,15 +370,15 @@
     "la-salle-stage1-0002",
     "la-salle-stage1-0003"
   ],
-  "active_expected_main_sha": "715d7764ad4b629ec8d4243380361d5d20c60c41",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "la-salle-stage1-0003",
-  "active_request_sha256": "50693ed6effd4dec80b82b534e775b14cec76d90a0518ad452faa1d7954eeb31",
-  "active_school_key": "la-salle",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -735,25 +735,23 @@
     "rhode-island-release-gate2-approval-0002",
     "rhode-island-release-production-proof-0001",
     "la-salle-stage1-0001",
-    "la-salle-stage1-0002"
+    "la-salle-stage1-0002",
+    "la-salle-stage1-0003"
   ],
-  "current_sequence": 351,
+  "current_sequence": 352,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/la-salle/la-salle-stage1-0002/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "83137acddc3977fdbabdbc5f5da5f4a946c32c8ae13efee626c0316bfd0f38d4",
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/la-salle/la-salle-stage1-0003/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "fd2b7870589da461e5dcfc23c91f1001d818bf7f4855b861857d45f5d6002b35",
     "operation": "STAGE1_INVENTORY",
     "protected_main_sha": "715d7764ad4b629ec8d4243380361d5d20c60c41",
-    "request_id": "la-salle-stage1-0002",
+    "request_id": "la-salle-stage1-0003",
     "school_key": "la-salle",
-    "stage1_reconciliation_sha256": "b54e9faf0785229a272c6f5e30f6b3e5559900bd70da60363ba1059f71fa9fd8",
-    "stage1_status": "BLOCKED"
+    "stage1_reconciliation_sha256": "22269f7540bd6ed1e284ba5bcdcbde63e2f8ef7b5a07591459e569609724ba3e",
+    "stage1_status": "PASS"
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "42262575932",
-  "lock_acquisition_request_commit": "2894e062b8c418e760c466be343211572ab3b589",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }
