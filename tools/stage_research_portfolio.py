@@ -409,9 +409,15 @@ US_STATE_ABBREVIATIONS = {
 }
 
 
+JURISDICTION_ABBREVIATIONS = {
+    **US_STATE_ABBREVIATIONS,
+    "JAMAICA": "JM",
+}
+
+
 def normalize_jurisdiction(value: str) -> str:
     normalized = (value or "").strip().upper()
-    return US_STATE_ABBREVIATIONS.get(normalized, normalized)
+    return JURISDICTION_ABBREVIATIONS.get(normalized, normalized)
 
 
 _DOMESTIC_COUNTRY_TOKENS = {
