@@ -129,7 +129,12 @@ EARLY_HISTORY_AGGREGATE_RECONCILED_GAP. Eligibility requires all of:
    authority explicitly records `legacy_evidence_mode: MANIFESTED_RESIDUAL_SUMMARY`;
    this exception must also bind the exact parent/research base and may additionally
    bind the identified-ledger hash/count. It is representation compatibility only,
-   not weaker historical authority.
+   not weaker historical authority. A legacy parent may use the older root
+   `manifest.json`, `stage1-ledger.csv`, `stage1-residuals.csv`, and
+   `stage1-season-census.csv` topology only through permanent fail-closed
+   compatibility logic. The closeout must preserve every original legacy member
+   byte-for-byte while adding the current logical Stage 1 members in the separately
+   hashed successor; it must never rewrite the immutable parent checkpoint in place.
 5. A **separate, hashed closeout successor**, built with the permanent closeout
    command and independently verified with verify-closeout. It preserves every
    historical ledger/census/source byte, reclassifies only the approved aggregate

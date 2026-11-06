@@ -221,6 +221,123 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         ))
         self.assertEqual(json.loads(successor["blocking-residuals.json"]), [])
 
+    def make_legacy_parent(self):
+        current, _ = mod.read_zip(self.parent, self.parent_sha)
+        ledger = mod.as_csv(current["structured-stage1-ledger.csv"])
+        legacy_ledger = []
+        for row in ledger:
+            legacy_ledger.append({
+                "id": row["research_game_id"],
+                "season": row["season_label"],
+                "source_opponent": row["opponent_literal"],
+                "accepted_game_type": row["game_type"],
+                "accepted_result": row["played_result"],
+            })
+        legacy_ledger_raw = csv_bytes(legacy_ledger)
+
+        legacy_census = []
+        for season, institutional, identified, _ in SEASONS:
+            legacy_census.append({
+                "season": season,
+                "source_header_record": f"{institutional[0]}-{institutional[1]}",
+                "expected_games": str(institutional[2]),
+                "identified_competitive_games": str(identified[2]),
+            })
+
+        legacy_residuals = []
+        for season, _, identified, unidentified in SEASONS:
+            legacy_residuals.append({
+                "residual_id": "SJU-" + season + "-AGGREGATE",
+                "season": season,
+                "residual_class": "FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION",
+                "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
+                "identified_competitive_games": str(identified[2]),
+                "missing_games": str(unidentified[2]),
+                "evidence_summary": "Legacy manifested bounded research exhaustion.",
+                "blocking": "true",
+            })
+        legacy_residuals.append({
+            "residual_id": "SJU-1952-53-NONBLOCKING",
+            "season": "1952-53",
+            "residual_class": "SOURCE_INTERNAL_AGGREGATE_CONFLICT",
+            "state": "PRESERVE_UNCHANGED",
+            "identified_competitive_games": "25",
+            "missing_games": "0",
+            "evidence_summary": "All game identities stable; aggregate conflict is nonblocking.",
+            "blocking": "false",
+        })
+
+        members = {
+            "stage1-ledger.csv": legacy_ledger_raw,
+            "stage1-season-census.csv": csv_bytes(legacy_census),
+            "stage1-residuals.csv": csv_bytes(legacy_residuals),
+            "status.json": jb({
+                "school": SCHOOL,
+                "research_base_sha": RESEARCH_BASE,
+                "stage1_complete": False,
+            }),
+            "research-log.md": b"Original legacy research log.\n",
+        }
+        manifest = {
+            "research_base_sha": RESEARCH_BASE,
+            "files": [
+                {
+                    "path": name,
+                    "bytes": len(data),
+                    "sha256": mod.digest(data),
+                }
+                for name, data in members.items()
+            ],
+        }
+        members["manifest.json"] = jb(manifest)
+        mod.serialize_zip(members, self.parent)
+        self.parent_sha = mod.digest(self.parent.read_bytes())
+        self.ledger_raw = legacy_ledger_raw
+        self.nonblocking_raw = members["stage1-residuals.csv"]
+        self.write_registry()
+
+    def test_legacy_root_layout_closes_without_rewriting_parent_evidence(self):
+        self.make_legacy_parent()
+        original, _ = mod.read_zip(self.parent, self.parent_sha)
+        report = self.audit()
+        self.assertEqual(report["status"], mod.ELIGIBLE, report["defects"])
+        self.assertTrue(report["legacy_parent_projection"])
+        self.assertEqual(report["identified_ledger_sha256"], mod.digest(self.ledger_raw))
+        self.assertEqual(len(report["season_coverages"]), 5)
+
+        self.audit_file.write_bytes(jb(report))
+        audit_sha = mod.digest(self.audit_file.read_bytes())
+        created = mod.closeout(
+            self.parent,
+            self.audit_file,
+            self.closeout_file,
+            parent_sha=self.parent_sha,
+            audit_sha=audit_sha,
+            registry=self.registry,
+        )
+        self.assertEqual(created["season_coverage_count"], 5)
+        closeout_sha = mod.digest(self.closeout_file.read_bytes())
+        verified = mod.verify_closeout(
+            self.parent,
+            self.closeout_file,
+            self.audit_file,
+            parent_sha=self.parent_sha,
+            successor_sha=closeout_sha,
+            audit_sha=audit_sha,
+            registry=self.registry,
+        )
+        self.assertEqual(verified["status"], mod.VERIFIED, verified["defects"])
+
+        successor, _ = mod.read_zip(self.closeout_file, closeout_sha)
+        for name, data in original.items():
+            self.assertEqual(successor[name], data, name)
+        self.assertEqual(successor["stage1-ledger.csv"], self.ledger_raw)
+        self.assertEqual(successor["stage1-residuals.csv"], self.nonblocking_raw)
+        self.assertIn("structured-stage1-ledger.csv", successor)
+        self.assertIn("season-census.csv", successor)
+        self.assertEqual(json.loads(successor["blocking-residuals.json"]), [])
+        self.assertTrue(json.loads(successor["stage1-status.json"])["stage1_complete"])
+
     def test_exact_authority_population_is_required(self):
         self.write_registry(drop_last=True)
         report = self.audit()
