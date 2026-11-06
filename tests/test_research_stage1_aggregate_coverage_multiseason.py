@@ -24,6 +24,14 @@ SEASONS = [
     ("1926-27", (6, 11, 17), (5, 11, 16), (1, 0, 1)),
 ]
 
+LEGACY_NONBLOCKING_COUNTS = {
+    "1911-12": 23,
+    "1916-17": 20,
+    "1924-25": 4,
+    "1925-26": 4,
+    "1926-27": 12,
+}
+
 
 def jb(value):
     return mod.json_bytes(value)
@@ -226,7 +234,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         ))
         self.assertEqual(json.loads(successor["blocking-residuals.json"]), [])
 
-    def make_legacy_parent(self):
+    def make_legacy_parent(self, *, duplicate_blocker=False):
         current, _ = mod.read_zip(self.parent, self.parent_sha)
         ledger = mod.as_csv(current["structured-stage1-ledger.csv"])
         legacy_ledger = []
@@ -250,6 +258,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
             })
 
         legacy_residuals = []
+        nonblocking_no = 0
         for season, _, identified, unidentified in SEASONS:
             legacy_residuals.append({
                 "residual_id": "SJU-" + season + "-AGGREGATE",
@@ -261,6 +270,29 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
                 "evidence_summary": "Legacy manifested bounded research exhaustion.",
                 "blocking": "true",
             })
+            if duplicate_blocker and season == SEASONS[0][0]:
+                legacy_residuals.append({
+                    "residual_id": "SJU-" + season + "-SECOND-BLOCKER",
+                    "season": legacy_full_season(season),
+                    "residual_class": "FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION",
+                    "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
+                    "identified_competitive_games": str(identified[2]),
+                    "missing_games": str(unidentified[2]),
+                    "evidence_summary": "Deliberate duplicate blocking residual.",
+                    "blocking": "true",
+                })
+            for _ in range(LEGACY_NONBLOCKING_COUNTS[season]):
+                nonblocking_no += 1
+                legacy_residuals.append({
+                    "residual_id": f"EXACT_DATE_UNKNOWN-SJU-R1-{nonblocking_no:05d}",
+                    "season": legacy_full_season(season),
+                    "residual_class": "EXACT_DATE_UNKNOWN",
+                    "state": "PRESERVE_UNCHANGED",
+                    "identified_competitive_games": "1",
+                    "missing_games": "0",
+                    "evidence_summary": "Identified game retained with nonblocking exact-date debt.",
+                    "blocking": "false",
+                })
         legacy_residuals.append({
             "residual_id": "SJU-1952-53-NONBLOCKING",
             "season": "1952-1953",
@@ -342,6 +374,15 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         self.assertIn("season-census.csv", successor)
         self.assertEqual(json.loads(successor["blocking-residuals.json"]), [])
         self.assertTrue(json.loads(successor["stage1-status.json"])["stage1_complete"])
+
+    def test_second_blocking_residual_in_authority_season_still_fails_closed(self):
+        self.make_legacy_parent(duplicate_blocker=True)
+        report = self.audit()
+        self.assertEqual(report["status"], "FAIL")
+        self.assertEqual(
+            report["defects"],
+            ["DUPLICATE_LEGACY_RESIDUAL_SEASON:1911-12"],
+        )
 
     def test_legacy_season_label_normalization_is_fail_closed(self):
         self.assertEqual(mod._legacy_season_label("1911-1912"), "1911-12")
