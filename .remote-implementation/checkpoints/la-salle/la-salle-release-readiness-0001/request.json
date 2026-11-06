@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "la-salle-release-readiness-0001",
+  "school_key": "la-salle",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "b60179a9f2716a16d4e2a38e1468ac1d3382e62d",
+  "previous_control_state_sha256": "8f0a159c7a2b306424fcb79e4b54bee4c97d305cdae59648d930f55f132e075a",
+  "expected_protected_main_sha": "221691eb65d491975df09980ec412620cae6e844",
+  "creation_provenance": {
+    "origin": "ChatGPT La Salle Implementation lane",
+    "authorization": "Owner explicitly said Proceed after independently fresh-verified sealed apply. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, CI/Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or new historical authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/la-salle/la-salle-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "1192f11874f70c8dcda7f49e4eeaf4c696d9bde1604d034055b664d57437de7a"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/la-salle/la-salle-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "8f333f07ca047bc469530667551e4d0923b623b037444ada65ec86506f75b78c"
+  },
+  "approved_plan_hash": "128d4492d1fc17a9d323df8a266d0f728ca0f78e9932788652dfdc8845ab4c4c",
+  "release_manifest_sha256": "5ef8f31c6aca369f81ef18347f35dde1e7491f7b773e9956bd1afb00baa6fbad",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "la-salle-release-preview-verify-0001"
+  }
+}
