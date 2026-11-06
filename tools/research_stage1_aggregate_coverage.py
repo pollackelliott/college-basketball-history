@@ -164,7 +164,7 @@ def csv_bytes(rows: list[dict[str, str]]) -> bytes:
             if key not in fields:
                 fields.append(key)
     out = io.StringIO(newline="")
-    writer = csv.DictWriter(out, fieldnames=fields, lineterminator="\\n")
+    writer = csv.DictWriter(out, fieldnames=fields, lineterminator="\n")
     writer.writeheader()
     writer.writerows(rows)
     return out.getvalue().encode()
