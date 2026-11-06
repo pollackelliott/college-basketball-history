@@ -328,6 +328,23 @@ def _parse_int(value: str) -> int | None:
         return None
 
 
+def _legacy_season_label(value: str) -> str:
+    season = str(value or "").strip()
+    parts = season.split("-")
+    if (
+        len(parts) == 2
+        and len(parts[0]) == 4
+        and len(parts[1]) == 4
+        and parts[0].isdigit()
+        and parts[1].isdigit()
+    ):
+        start = int(parts[0])
+        end = int(parts[1])
+        if end == start + 1:
+            return f"{start:04d}-{end % 100:02d}"
+    return season
+
+
 def _legacy_residuals(
     raw: bytes,
     authorities: list[dict[str, Any]],
@@ -337,7 +354,7 @@ def _legacy_residuals(
     result: list[dict[str, Any]] = []
     seen: set[str] = set()
     for row in rows:
-        season = first(row, "season", "season_label")
+        season = _legacy_season_label(first(row, "season", "season_label"))
         if not season:
             if _legacy_nonblocking(row):
                 continue
@@ -415,7 +432,7 @@ def _normalized_legacy_ledger(raw: bytes) -> tuple[bytes, list[dict[str, str]]]:
     normalized: list[dict[str, str]] = []
     for row in rows:
         game_id = first(row, "research_game_id", "source_game_id", "game_id", "id")
-        season = first(row, "season_label", "season")
+        season = _legacy_season_label(first(row, "season_label", "season"))
         opponent = first(
             row,
             "opponent_literal",
@@ -499,7 +516,7 @@ def _normalized_legacy_census(
     for game in ledger:
         by_season.setdefault(game["season_label"], []).append(game)
     for row in rows:
-        season = first(row, "season_label", "season")
+        season = _legacy_season_label(first(row, "season_label", "season"))
         if not season:
             raise ValueError("LEGACY_CENSUS_SEASON_MISSING")
         wins, losses, games = _record_from_census(row)
