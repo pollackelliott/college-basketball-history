@@ -518,6 +518,7 @@ def normalize_game_type(value: str) -> str:
         "REGULAR_SEASON": "REGULAR_SEASON",
         "CONFERENCE_TOURNAMENT": "CONFERENCE_TOURNAMENT",
         "NIT": "NIT",
+        "CIT": "POSTSEASON",
         "POSTSEASON": "POSTSEASON",
         "OTHER_POSTSEASON": "POSTSEASON",
     }.get(folded, folded)
