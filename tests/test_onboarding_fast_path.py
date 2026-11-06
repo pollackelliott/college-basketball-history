@@ -244,6 +244,19 @@ class ExhibitionWarningTests(unittest.TestCase):
             )
         )
 
+    def test_source_non_exhibition_designation_note_does_not_warn(self):
+        self.assertFalse(
+            exhibition_warning_required(
+                "Dec. 9 Alumni 39 11",
+                "",
+                (
+                    "Source-listed and source-counted historical game; primary source "
+                    "does not designate it as an exhibition. Retained in Stage 1 game "
+                    "universe; opponent classification remains downstream."
+                ),
+            )
+        )
+
     def test_note_describing_current_game_as_exhibition_still_warns(self):
         self.assertTrue(
             exhibition_warning_required(
