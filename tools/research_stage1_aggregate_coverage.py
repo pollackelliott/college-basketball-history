@@ -36,6 +36,7 @@ CLOSEOUT_MEMBER = "aggregate-coverage-closeout.json"
 AUTHORING_MEMBER = "stage4-authoring/season-coverage.json"
 SOURCE_MEMBER = "founding-season-evidence-exhaustion.json"
 LEGACY_EVIDENCE_MODE = "MANIFESTED_RESIDUAL_SUMMARY"
+LEGACY_CLOSEOUT_STATUS_MEMBER = "stage1-closeout-status.json"
 
 
 def digest(data: bytes) -> str:
@@ -478,6 +479,7 @@ def _record_from_census(row: dict[str, str]) -> tuple[str, str, str]:
     wins = first(
         row,
         "source_aggregate_wins",
+        "source_heading_wins",
         "institutional_wins",
         "source_wins",
         "aggregate_wins",
@@ -485,6 +487,7 @@ def _record_from_census(row: dict[str, str]) -> tuple[str, str, str]:
     losses = first(
         row,
         "source_aggregate_losses",
+        "source_heading_losses",
         "institutional_losses",
         "source_losses",
         "aggregate_losses",
@@ -901,13 +904,14 @@ def expected_successor(
     if legacy_parent:
         result["structured-stage1-ledger.csv"] = logical["structured-stage1-ledger.csv"]
         result["season-census.csv"] = logical["season-census.csv"]
-        result["stage1-status.json"] = logical["stage1-status.json"]
         result["blocking-residuals.json"] = logical["blocking-residuals.json"]
         status = json.loads(logical["stage1-status.json"])
         manifest = json.loads(logical["stage1-manifest.json"])
+        status_member = LEGACY_CLOSEOUT_STATUS_MEMBER
     else:
         status = json.loads(result["stage1-status.json"])
         manifest = json.loads(result["stage1-manifest.json"])
+        status_member = "stage1-status.json"
     coverages = report_coverages(report)
     for coverage in coverages:
         coverage["audit_sha256"] = audit_sha
@@ -923,7 +927,7 @@ def expected_successor(
         "aggregate_coverage_audit_sha256": audit_sha,
         "aggregate_coverage_parent_sha256": report["parent_checkpoint_sha256"],
     })
-    result["stage1-status.json"] = json_bytes(status)
+    result[status_member] = json_bytes(status)
     result["blocking-residuals.json"] = json_bytes([])
     result[CLOSEOUT_MEMBER] = (
         json_bytes(coverages[0])
@@ -939,6 +943,11 @@ def expected_successor(
         "aggregate_coverage_terminal": TERMINAL,
         "aggregate_coverage_count": len(coverages),
     })
+    if legacy_parent:
+        manifest.update({
+            "legacy_parent_members_preserved": True,
+            "completion_status_member": LEGACY_CLOSEOUT_STATUS_MEMBER,
+        })
     manifest["members"] = {
         name: {"size": len(data), "sha256": digest(data)}
         for name, data in result.items()
@@ -1004,6 +1013,24 @@ def verify_closeout(parent: Path, successor: Path, audit_path: Path, *,
         defects = manifest_defects(actual)
         if actual != expected:
             defects.append("CLOSEOUT_CONTENT_OR_HISTORICAL_LEDGER_DRIFT")
+        if report.get("legacy_parent_projection"):
+            for name, raw in original.items():
+                if actual.get(name) != raw:
+                    defects.append("LEGACY_PARENT_MEMBER_DRIFT:" + name)
+            status_raw = actual.get(LEGACY_CLOSEOUT_STATUS_MEMBER)
+            if status_raw is None:
+                defects.append("LEGACY_CLOSEOUT_STATUS_MISSING")
+            else:
+                try:
+                    closeout_status = json.loads(status_raw)
+                except (json.JSONDecodeError, UnicodeError, TypeError):
+                    defects.append("LEGACY_CLOSEOUT_STATUS_INVALID")
+                else:
+                    if (
+                        closeout_status.get("status") != "COMPLETE"
+                        or closeout_status.get("stage1_complete") is not True
+                    ):
+                        defects.append("LEGACY_CLOSEOUT_STATUS_INVALID")
     except (OSError, ValueError, TypeError, KeyError, csv.Error, json.JSONDecodeError, zipfile.BadZipFile) as exc:
         return {"status": "FAIL", "defects": [str(exc)], "stage1_complete": False}
     result = {
