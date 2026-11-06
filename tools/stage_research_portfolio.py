@@ -56,6 +56,7 @@ from onboarding_plan import (
     write_csv_preserving_format,
 )
 from program_history import history_scope_errors
+from venue_geography import normalize_jurisdiction
 from stage1_venue_reconciliation import (
     explicit_reuse_locality_compatible,
     load_venue_reconciliation,
@@ -348,76 +349,6 @@ def next_venue_id(used: set[str]) -> str:
         candidate = f"VEN-{high:06d}"
         if candidate not in used:
             return candidate
-
-
-US_STATE_ABBREVIATIONS = {
-    "ALABAMA": "AL",
-    "ALASKA": "AK",
-    "ARIZONA": "AZ",
-    "ARKANSAS": "AR",
-    "CALIFORNIA": "CA",
-    "COLORADO": "CO",
-    "CONNECTICUT": "CT",
-    "DELAWARE": "DE",
-    "FLORIDA": "FL",
-    "GEORGIA": "GA",
-    "HAWAII": "HI",
-    "IDAHO": "ID",
-    "ILLINOIS": "IL",
-    "INDIANA": "IN",
-    "IOWA": "IA",
-    "KANSAS": "KS",
-    "KENTUCKY": "KY",
-    "LOUISIANA": "LA",
-    "MAINE": "ME",
-    "MARYLAND": "MD",
-    "MASSACHUSETTS": "MA",
-    "MICHIGAN": "MI",
-    "MINNESOTA": "MN",
-    "MISSISSIPPI": "MS",
-    "MISSOURI": "MO",
-    "MONTANA": "MT",
-    "NEBRASKA": "NE",
-    "NEVADA": "NV",
-    "NEW HAMPSHIRE": "NH",
-    "NEW JERSEY": "NJ",
-    "NEW MEXICO": "NM",
-    "NEW YORK": "NY",
-    "NORTH CAROLINA": "NC",
-    "NORTH DAKOTA": "ND",
-    "OHIO": "OH",
-    "OKLAHOMA": "OK",
-    "OREGON": "OR",
-    "PENNSYLVANIA": "PA",
-    "RHODE ISLAND": "RI",
-    "SOUTH CAROLINA": "SC",
-    "SOUTH DAKOTA": "SD",
-    "TENNESSEE": "TN",
-    "TEXAS": "TX",
-    "UTAH": "UT",
-    "VERMONT": "VT",
-    "VIRGINIA": "VA",
-    "WASHINGTON": "WA",
-    "WEST VIRGINIA": "WV",
-    "WISCONSIN": "WI",
-    "WYOMING": "WY",
-    "DISTRICT OF COLUMBIA": "DC",
-    "U.S. VIRGIN ISLANDS": "VI",
-    "US VIRGIN ISLANDS": "VI",
-    "VIRGIN ISLANDS": "VI",
-    "U.S.V.I.": "VI",
-}
-
-
-JURISDICTION_ABBREVIATIONS = {
-    **US_STATE_ABBREVIATIONS,
-    "JAMAICA": "JM",
-}
-
-
-def normalize_jurisdiction(value: str) -> str:
-    normalized = (value or "").strip().upper()
-    return JURISDICTION_ABBREVIATIONS.get(normalized, normalized)
 
 
 _DOMESTIC_COUNTRY_TOKENS = {
