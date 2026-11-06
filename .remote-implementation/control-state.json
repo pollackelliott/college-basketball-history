@@ -778,7 +778,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/la-salle/la-salle-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "e400eabafb7142a8f55fa4559a20bb604565d06dca442a1eec2b460713991252",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/la-salle/la-salle-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "361038fb38c4afe0d9eb415e54234ccafca088ddc7913740caf16a557f6ded75",
     "merged": false,
@@ -787,7 +787,7 @@
     "pr_number": 495,
     "production_request_id": "la-salle-release-production-proof-0001",
     "protected_main_sha": "221691eb65d491975df09980ec412620cae6e844",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "la-salle-release-gate2-approval-0001",
     "school_key": "la-salle",
     "target_branch": "data/la-salle-onboarding",
