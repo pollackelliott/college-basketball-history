@@ -395,6 +395,24 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
             self.assertEqual(report["errors"], [])
             self.assertEqual(report["counts"]["unknown_played_scores"], 1)
 
+    def test_series_record_literal_is_not_mistaken_for_game_score(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.make_package(
+                root,
+                team_score="",
+                opponent_score="",
+                played_result="W",
+                raw_text=(
+                    "Example 4-0; first met 1931; detailed ledger first listed "
+                    "meeting Jan. 5, 1932"
+                ),
+            )
+            report = research_portfolio_report(root, school_key="test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["errors"], [])
+            self.assertEqual(report["counts"]["unknown_played_scores"], 1)
+
     def test_season_and_iso_date_are_not_mistaken_for_literal_scores(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
