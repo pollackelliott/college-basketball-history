@@ -57,8 +57,13 @@ def read_zip(path: Path, expected: str) -> tuple[dict[str, bytes], str]:
         names = z.namelist()
         if not names or len(names) != len(set(names)):
             raise ValueError("INVALID_ARCHIVE_NAMES")
+        root_manifests = {
+            "stage1-manifest.json",
+            "checkpoint-manifest.json",
+            "manifest.json",
+        }
         prefixes = {name.split("/", 1)[0] for name in names if "/" in name}
-        if "stage1-manifest.json" in names:
+        if root_manifests.intersection(names):
             prefix = ""
         elif len(prefixes) == 1 and all(name.startswith(next(iter(prefixes)) + "/") for name in names):
             prefix = next(iter(prefixes)) + "/"
@@ -73,24 +78,144 @@ def read_zip(path: Path, expected: str) -> tuple[dict[str, bytes], str]:
     return members, actual
 
 
+def _manifest_records(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    tracked = manifest.get("members")
+    if isinstance(tracked, dict):
+        return {
+            str(name): {
+                "size": meta.get("size", meta.get("bytes")) if isinstance(meta, dict) else None,
+                "sha256": meta.get("sha256") if isinstance(meta, dict) else None,
+            }
+            for name, meta in tracked.items()
+        }
+    legacy_files = manifest.get("files")
+    if isinstance(legacy_files, dict):
+        return {
+            str(name): {
+                "size": meta.get("size", meta.get("bytes")) if isinstance(meta, dict) else None,
+                "sha256": meta.get("sha256") if isinstance(meta, dict) else None,
+            }
+            for name, meta in legacy_files.items()
+        }
+    if isinstance(legacy_files, list):
+        normalized: dict[str, dict[str, Any]] = {}
+        for item in legacy_files:
+            if not isinstance(item, dict):
+                raise ValueError("INVALID_MANIFEST_FILES")
+            name = str(
+                item.get("name")
+                or item.get("path")
+                or item.get("filename")
+                or item.get("file")
+                or ""
+            ).strip()
+            if not name or name in normalized:
+                raise ValueError("INVALID_MANIFEST_FILES")
+            normalized[name] = {
+                "size": item.get("size", item.get("bytes")),
+                "sha256": item.get("sha256"),
+            }
+        return normalized
+    raise ValueError("INVALID_MANIFEST_MEMBERS")
+
+
 def manifest_defects(members: dict[str, bytes]) -> list[str]:
-    try:
-        manifest = json.loads(members["stage1-manifest.json"])
-        expected = manifest["members"]
-    except (KeyError, ValueError, TypeError):
+    present = [
+        name for name in (
+            "stage1-manifest.json",
+            "checkpoint-manifest.json",
+            "manifest.json",
+        )
+        if name in members
+    ]
+    if not present:
         return ["INVALID_MANIFEST"]
+    manifest_name = "stage1-manifest.json" if "stage1-manifest.json" in present else present[0]
+    try:
+        manifest = json.loads(members[manifest_name])
+        expected = _manifest_records(manifest)
+    except (KeyError, ValueError, TypeError, json.JSONDecodeError, UnicodeError):
+        return ["INVALID_MANIFEST"]
+    expected.pop(manifest_name, None)
     defects = []
-    if set(expected) != set(members) - {"stage1-manifest.json"}:
+    if set(expected) != set(members) - {manifest_name}:
         defects.append("MANIFEST_MEMBER_SET_MISMATCH")
     for name, meta in expected.items():
         raw = members.get(name)
-        if raw is None or len(raw) != meta.get("size") or digest(raw) != meta.get("sha256"):
+        if (
+            raw is None
+            or meta.get("size") != len(raw)
+            or meta.get("sha256") != digest(raw)
+        ):
             defects.append("MANIFEST_MISMATCH:" + name)
     return defects
 
 
 def as_csv(raw: bytes) -> list[dict[str, str]]:
     return list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline="")))
+
+
+def csv_bytes(rows: list[dict[str, str]]) -> bytes:
+    if not rows:
+        return b""
+    fields: list[str] = []
+    for row in rows:
+        for key in row:
+            if key not in fields:
+                fields.append(key)
+    out = io.StringIO(newline="")
+    writer = csv.DictWriter(out, fieldnames=fields, lineterminator="\\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    return out.getvalue().encode()
+
+
+def first(row: dict[str, str], *names: str) -> str:
+    for name in names:
+        value = str(row.get(name, "") or "").strip()
+        if value:
+            return value
+    return ""
+
+
+def member_alias(members: dict[str, bytes], *names: str) -> tuple[str, bytes]:
+    present = [name for name in names if name in members]
+    if len(present) != 1:
+        raise ValueError("MISSING_OR_AMBIGUOUS_LEGACY_MEMBER:" + "|".join(names))
+    name = present[0]
+    return name, members[name]
+
+
+def row_result(row: dict[str, str]) -> str:
+    played = first(
+        row,
+        "played_result",
+        "accepted_result",
+        "on_court_result",
+        "source_result",
+        "result",
+    ).upper()
+    if played in {"W", "L", "T"}:
+        return played
+    team = first(
+        row,
+        "accepted_team_score",
+        "team_score",
+        "source_program_score",
+    )
+    opponent = first(
+        row,
+        "accepted_opponent_score",
+        "opponent_score",
+        "opponent_points",
+    )
+    if team and opponent:
+        try:
+            a, b = int(team), int(opponent)
+        except ValueError:
+            return ""
+        return "W" if a > b else "L" if a < b else "T"
+    return ""
 
 
 def read_registry(registry: Path) -> dict[str, Any]:
