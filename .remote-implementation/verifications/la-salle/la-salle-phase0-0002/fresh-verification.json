@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7",
+  "prepared_parent_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "prepared_tree_sha": "76af903e116ee907a426f4946ff6c6ad97ca9015",
+  "protected_main_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "la-salle-phase0-0002",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7"
+}
