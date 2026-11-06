@@ -1,35 +1,36 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-stage2-opponent-display-normalize-0001",
+  "request_id": "la-salle-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "la-salle",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "previous_control_state_commit": "8e14bf0a094c5a1031a25320e613061150a5e34a",
+  "previous_control_state_commit": "2868d0aa8487a600159f8c2d54d66ec138e043be",
   "previous_control_state_sha256": "f4f506e66f837a7022f9a4d5ddf938f2ef3322cdc65f644b734b9a412123d53f",
-  "expected_protected_main_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "expected_protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
   "target_branch": "data/la-salle-onboarding",
   "target_sha": "6762a4e710175d74195dfd806ac7c4f1b2d0e8f7",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "9556dedcabc4843b8b04ec25ab8876275d81d19f8d3e062ebf8b77852a034537"
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/la-salle/la-salle-phase0-0002/successor-manifest.json",
+    "sha256": "cfcd185ffa865c657bd5ad3b6cfcc0eed7e137e8d30bdaa2f9af574ea96d08bb"
   },
   "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
   "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "CONTROL CENTER AUTHORIZATION — LA SALLE STAGE 2 CURRENT-MAIN REFRESH recorded on Issue #491 comment 6692564812. Current protected main 784fa4ae41fc77e4443e1cce9ed0866c89b201f9. Exact onboarding predecessor 6762a4e710175d74195dfd806ac7c4f1b2d0e8f7. Exact merge base 19d1199bf67eb935ad5856d63b89afbb105129a4. Independently authenticated target-only changed paths=10, intervening-main changed paths=2, overlap=0, intervening schools/la-salle changes=0, global control IDLE/COMPLETE, recovery_required=false. Authorization covers only the repository-defined guarded STAGE2_CURRENT_MAIN_REFRESH and required fresh verification; no historical authority, Owner Gate 1/2, sealed apply, release, Preview, merge, or Production authority is created."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT La Salle serialized Implementation lane — census-bound Stage 2 opponent-display normalization",
-    "authorization": "Same owner-authorized La Salle Stage 2 capability/reconciliation phase persists. Fresh-verified census la-salle-stage2-census-0001 at protected main 19d1199bf67eb935ad5856d63b89afbb105129a4 is BLOCKED solely by exactly two deterministic historical opponent-display conflicts (immaculata and lincoln-pa), with warning_count=12, decision_count=0, semantic drift PASS, decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. Authorizes exactly the permanent census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE representation repair over that complete two-key population. The operation may change only canonical_opponent_name in schools/la-salle/opponents.csv and normalized_opponent_name in schools/la-salle/source-games.csv, using existing project display authority. It may not change opponent keys, literal source labels, raw evidence, scores, dates, sites, game types, Research, Integration Freeze, protected main, Owner Gate 1/2, sealing/apply, release, Preview, merge, or Production."
+    "origin": "ChatGPT La Salle serialized Implementation lane — Control Center-authorized Stage 2 current-main refresh",
+    "authorization": "Control Center explicitly authorized Issue #491 exact refresh after generic PR #490 advanced protected main. The operation must independently reproduce the exact disjoint changed-path eligibility, preserve immutable Integration Freeze and semantic authority, publish only through mutation lock/write-ahead/expected-predecessor CAS, and independently fresh-verify exact tree equivalence. Same Stage 2 phase may continue after PASS through a fresh census and, only if unchanged, the census-bound immaculata/lincoln-pa display normalization."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -39,6 +40,10 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
