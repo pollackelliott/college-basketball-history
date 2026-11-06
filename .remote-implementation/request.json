@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-release-readiness-0001",
+  "request_id": "la-salle-release-preview-verify-0001",
   "school_key": "la-salle",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "b60179a9f2716a16d4e2a38e1468ac1d3382e62d",
-  "previous_control_state_sha256": "8f0a159c7a2b306424fcb79e4b54bee4c97d305cdae59648d930f55f132e075a",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "e3271f11e08c691bee36a4faac4cd107cc68bc47",
+  "previous_control_state_sha256": "18604fe9a8998f8c58e3fb4e9578bb800f8a648dd99d6da04462d246d9dc4880",
   "expected_protected_main_sha": "221691eb65d491975df09980ec412620cae6e844",
   "creation_provenance": {
     "origin": "ChatGPT La Salle Implementation lane",
-    "authorization": "Owner explicitly said Proceed after independently fresh-verified sealed apply. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, CI/Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or new historical authority."
+    "authorization": "Continuation of the owner-authorized release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #495. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, and new historical authority remain forbidden."
   },
   "authority": {
     "owner_gate_1": false,
@@ -19,9 +19,9 @@
     "phase0_scope_supersession": false,
     "recovery": false,
     "release_gate2_approval": false,
-    "release_preview_verify": false,
+    "release_preview_verify": true,
     "release_production_proof": false,
-    "release_readiness": true,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -35,18 +35,15 @@
   },
   "target_branch": "data/la-salle-onboarding",
   "target_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/la-salle/la-salle-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "1192f11874f70c8dcda7f49e4eeaf4c696d9bde1604d034055b664d57437de7a"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "8c8b75a288f2b31de328c99b1f6a2bea00f567dad9b90bb47dc60360ea07585f"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/la-salle/la-salle-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "8f333f07ca047bc469530667551e4d0923b623b037444ada65ec86506f75b78c"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/la-salle/la-salle-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "36f0dfdebbd9ca725d523cddc8ac7c56e9dea85faa336e15a5e7e0372d64dd07"
   },
   "approved_plan_hash": "128d4492d1fc17a9d323df8a266d0f728ca0f78e9932788652dfdc8845ab4c4c",
   "release_manifest_sha256": "5ef8f31c6aca369f81ef18347f35dde1e7491f7b773e9956bd1afb00baa6fbad",
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "la-salle-release-preview-verify-0001"
-  }
+  "pr_number": 495
 }
