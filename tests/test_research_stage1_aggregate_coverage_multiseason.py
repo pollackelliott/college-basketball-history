@@ -279,7 +279,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
                 legacy_residuals.append({
                     "residual_id": "SJU-" + season + "-SECOND-BLOCKER",
                     "season": legacy_full_season(season),
-                        "residual_class": blocker_class,
+                    "residual_class": blocker_class,
                     "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
                     "identified_competitive_games": str(identified[2]),
                     "missing_games": str(unidentified[2]),
