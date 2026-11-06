@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "94e5ca87ff44281623597d1fa4b6413b6ca37934ec34f1f517e594b6ffce6511",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "6ac9b45780c084c36387879a0f31f59026604d26c29eb50dffe6d763199e51a0",
+    "implementation-stage2-status.json": "ef581dfa4f2f88a47a8bc3d5ecd6a162c268e6893f7a654bb59d5c2de0a9b266",
+    "last-rehearsal-site-gate.json": "a4d2796337bf8762a934d2d7d16937429f56b3db5cf020c6087b9c3355816ab1",
+    "plan.json": "538ea9da194e305e643d2cc46f6662f04b90c1acdf66e9a86f64d47c5522e4bb",
+    "review.csv": "f1f9552e48848fd6c7a510c09d98928d2fa6e49f137fc468b3613a71227e507f",
+    "review.md": "56953fe14931f93507ffb255ac18a56911db4408e14cde17a4b1afa7735e0629"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "6ac9b45780c084c36387879a0f31f59026604d26c29eb50dffe6d763199e51a0",
+    "implementation-stage2-status.json": "aa5c56e7eb4f1e83f834766f80c0ff885e2e2c7fb2af5953dfb42407fb147ae9",
+    "last-rehearsal-site-gate.json": "a4d2796337bf8762a934d2d7d16937429f56b3db5cf020c6087b9c3355816ab1",
+    "plan.json": "1bcb93f67f1d0c8c988d3f9d97553e5cc158d1b39d18eff33bbee01568b2ec0e",
+    "review.csv": "f1f9552e48848fd6c7a510c09d98928d2fa6e49f137fc468b3613a71227e507f",
+    "review.md": "8436d948c5830d95be6ac93be3f3addbe857b0163132e8eb8183710e23c85b0d"
+  },
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "runtime_decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "recommendation_map_sha256": "cb063c0d59828e5d4262d12f8866c53d1645b989986517165dc61254166f5bf6",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "la-salle-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "target_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+  "tracked_stage2_mutation": "NONE"
+}
