@@ -752,11 +752,11 @@
   "current_sequence": 357,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "la-salle-stage2-current-main-refresh-0001",
     "school_key": "la-salle",
     "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
