@@ -135,9 +135,15 @@ EARLY_HISTORY_AGGREGATE_RECONCILED_GAP. Eligibility requires all of:
    compatibility logic. That in-memory projection may normalize an adjacent full-year
    season label such as `1911-1912` to the canonical `1911-12` key; non-adjacent
    or otherwise non-equivalent labels remain literal and must still fail exact authority
-   matching. The closeout must preserve every original legacy member byte-for-byte
-   while adding the current logical Stage 1 members in the separately hashed successor;
-   it must never rewrite the immutable parent checkpoint in place.
+   matching. When one legacy residual file mixes blocking aggregate-coverage rows with
+   ordinary nonblocking row-level debt, only rows explicitly classified blocking may
+   enter the synthetic `blocking-residuals.json` view. Nonblocking rows remain preserved
+   in the immutable legacy residual member and must never be reinterpreted as duplicate
+   aggregate blockers merely because they share an owner-authorized season. A second
+   genuinely blocking residual for the same approved season remains a fail-closed error.
+   The closeout must preserve every original legacy member byte-for-byte while adding
+   the current logical Stage 1 members in the separately hashed successor; it must never
+   rewrite the immutable parent checkpoint in place.
 5. A **separate, hashed closeout successor**, built with the permanent closeout
    command and independently verified with verify-closeout. It preserves every
    historical ledger/census/source byte, reclassifies only the approved aggregate
