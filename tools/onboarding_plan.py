@@ -666,6 +666,10 @@ _EXHIBITION_NONGAME_PATTERNS = (
         re.IGNORECASE,
     ),
     re.compile(
+        r"\bdoes\s+not\s+designate\s+(?:it|the\s+game)\s+as\s+an?\s+exhibition\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
         r"\bexhibition\s+evidence\s+is\s+comparator\s+only\b",
         re.IGNORECASE,
     ),
