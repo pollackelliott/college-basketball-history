@@ -17,6 +17,7 @@ from onboarding_hardening import (  # noqa: E402
     fill_review_from_map,
     rehearse_review,
     research_portfolio_report,
+    venue_summary_consistency_report,
     frozen_home_exception_keys,
 )
 from stage_research_portfolio import rebase_venues  # noqa: E402
@@ -233,6 +234,39 @@ class ResearchFreezeAcceptanceTests(unittest.TestCase):
                     for warning in integration["warnings"]
                 )
             )
+
+    def test_venue_summary_jurisdiction_equivalence_is_narrow(self):
+        venues = [{
+            "canonical_name": "Montego Bay Convention Center",
+            "aliases": "",
+            "city": "Montego Bay",
+            "state": "Jamaica",
+            "games_currently_assigned": "1",
+            "first_assigned_game": "",
+            "last_assigned_game": "",
+        }]
+        games = [{
+            "source_game_id": "TEST-001",
+            "curated_venue_name": "Montego Bay Convention Center",
+            "city": "Montego Bay",
+            "state": "JM",
+            "game_date": "",
+        }]
+
+        equivalent = venue_summary_consistency_report(games, venues)
+        self.assertEqual(equivalent["status"], "PASS")
+        self.assertEqual(equivalent["groups"][0]["source_game_assignments"], 1)
+
+        unrelated = [dict(games[0], state="BS")]
+        conflict = venue_summary_consistency_report(unrelated, venues)
+        self.assertEqual(conflict["status"], "FAIL")
+        self.assertTrue(
+            any(
+                "games_currently_assigned total 1 != 0 source-game assignments"
+                in error
+                for error in conflict["errors"]
+            )
+        )
 
     def test_preseason_guide_cutoff_can_precede_required_completed_season(self):
         with tempfile.TemporaryDirectory() as temporary:

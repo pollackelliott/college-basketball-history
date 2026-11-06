@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from onboarding_plan import WorkflowError
+from venue_geography import normalize_jurisdiction
 
 
 _ROW_SELECTOR_PREFIX = "__row_index__:"
@@ -81,13 +82,13 @@ def _matching_source_games(
     )
     labels.discard("")
     city = local.get("city", "").strip().casefold()
-    state = local.get("state", "").strip().upper()
+    state = normalize_jurisdiction(local.get("state", ""))
     return [
         row
         for row in source_games
         if _normalize_name(row.get("curated_venue_name", "")) in labels
         and row.get("city", "").strip().casefold() == city
-        and row.get("state", "").strip().upper() == state
+        and normalize_jurisdiction(row.get("state", "")) == state
     ]
 
 
@@ -111,7 +112,7 @@ def explicit_reuse_locality_compatible(
 
     if (
         local_city.casefold() == global_city.casefold()
-        and local_state.upper() == global_state.upper()
+        and normalize_jurisdiction(local_state) == normalize_jurisdiction(global_state)
     ):
         return True
 
@@ -124,7 +125,7 @@ def explicit_reuse_locality_compatible(
 
     return (
         local_city.casefold() == global_city.casefold()
-        or local_state.upper() == global_state.upper()
+        or normalize_jurisdiction(local_state) == normalize_jurisdiction(global_state)
     )
 
 
@@ -467,8 +468,8 @@ def load_venue_reconciliation(
                 if (
                     target.get("city", "").strip().casefold()
                     != item["expected_local_city"].casefold()
-                    or target.get("state", "").strip().upper()
-                    != item["expected_local_state"].upper()
+                    or normalize_jurisdiction(target.get("state", ""))
+                    != normalize_jurisdiction(item["expected_local_state"])
                 ):
                     raise WorkflowError(
                         "SPLIT_LOCAL_ROW_BY_CUTOVER target geography mismatch"

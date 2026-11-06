@@ -52,6 +52,7 @@ from onboarding_plan import (
     WorkflowError,
     approve_plan,
 )
+from venue_geography import normalize_jurisdiction
 from site_completeness import (
     has_supported_foreign_locality,
     source_home_chronology_report,
@@ -192,7 +193,7 @@ def venue_summary_consistency_report(
             continue
         city = match_row.get("city", "").strip()
         state = match_row.get("state", "").strip()
-        group = (_normalize_name(canonical), city.casefold(), state.upper())
+        group = (_normalize_name(canonical), city.casefold(), normalize_jurisdiction(state))
         groups[group].append(index)
         labels = [canonical]
         labels.extend(
@@ -204,7 +205,7 @@ def venue_summary_consistency_report(
             normalized = _normalize_name(label)
             if normalized:
                 labels_to_groups[
-                    (normalized, city.casefold(), state.upper())
+                    (normalized, city.casefold(), normalize_jurisdiction(state))
                 ].add(group)
 
     expected_counts: Counter[tuple[str, str, str]] = Counter()
@@ -219,7 +220,7 @@ def venue_summary_consistency_report(
         lookup = (
             _normalize_name(venue_name),
             game.get("city", "").strip().casefold(),
-            game.get("state", "").strip().upper(),
+            normalize_jurisdiction(game.get("state", "")),
         )
         matches = labels_to_groups.get(lookup, set())
         if len(matches) != 1:

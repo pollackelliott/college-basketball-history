@@ -8,6 +8,7 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 from onboarding_plan import WorkflowError  # noqa: E402
+from onboarding_hardening import venue_summary_consistency_report  # noqa: E402
 from stage_research_portfolio import (  # noqa: E402
     accepted_top_level_scope_expression,
     rebase_venues,
@@ -979,13 +980,24 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
             "montego-bay-convention-center",
         )
 
+        summary_match_rows = []
         rebased, global_rows, _names, mappings = rebase_venues(
             "test-school",
             [dict(local)],
             [dict(venue)],
             [],
             source_games=source_games,
+            summary_match_rows_out=summary_match_rows,
         )
+
+        summary = venue_summary_consistency_report(
+            source_games,
+            rebased,
+            source_match_venues=summary_match_rows,
+        )
+        self.assertEqual(summary["status"], "PASS")
+        self.assertEqual(summary["mismatch_groups"], 0)
+        self.assertEqual(summary["groups"][0]["source_game_assignments"], 1)
 
         self.assertEqual(rebased[0]["venue_id"], "VEN-000709")
         self.assertEqual(rebased[0]["venue_key"], "montego-bay-convention-center")
