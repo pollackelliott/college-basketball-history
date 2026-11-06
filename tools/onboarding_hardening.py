@@ -571,11 +571,21 @@ _RAW_TEXT_SCORE_RE = re.compile(
 )
 
 
+def _raw_text_score_match_is_series_record(
+    raw_text: str,
+    match: re.Match[str],
+) -> bool:
+    """Return True for a score-like pair that is explicitly series metadata."""
+    tail = raw_text[match.end():match.end() + 40]
+    return bool(re.match(r"\s*;\s*first\s+met\b", tail, re.IGNORECASE))
+
+
 def _raw_text_score_tokens(raw_text: str) -> list[tuple[int, int]]:
-    """Return explicit score-like pairs without mistaking ISO dates/seasons for scores."""
+    """Return explicit game-score-like pairs without dates or series records."""
     return [
         (int(match.group("a")), int(match.group("b")))
         for match in _RAW_TEXT_SCORE_RE.finditer(raw_text)
+        if not _raw_text_score_match_is_series_record(raw_text, match)
     ]
 
 def _score_pair_agrees_with_result(
