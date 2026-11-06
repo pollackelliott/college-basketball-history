@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "la-salle-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "la-salle",
+  "previous_control_state_commit": "250884b35d20a50abccd4742ceea7d3796283ef0",
+  "previous_control_state_sha256": "c828bdbe4ab88cadbc2ff8df6847392d2e3c4e2017422581cf31a3a706181bb0",
+  "expected_protected_main_sha": "c3a4a635b9cb7616e449e9aef0ff777289479d51",
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "pr_number": 495,
+  "merge_sha": "c3a4a635b9cb7616e449e9aef0ff777289479d51",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "e400eabafb7142a8f55fa4559a20bb604565d06dca442a1eec2b460713991252"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/la-salle/la-salle-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "a10e0a0120e93c9c06ea1b47d21cff1f0f5efc382edb4a57a571798ac0297ba5"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT La Salle Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact La Salle Preview with “Approved. Proceed,” authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #495 head efdabe6caf19ea80c624f64b1479f3351f58c77d against approved main 221691eb65d491975df09980ec412620cae6e844. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge c3a4a635b9cb7616e449e9aef0ff777289479d51, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
+    "venue_identity_maintenance": false
+  }
+}

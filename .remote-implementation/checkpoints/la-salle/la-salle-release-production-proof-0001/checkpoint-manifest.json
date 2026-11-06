@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "221691eb65d491975df09980ec412620cae6e844",
+  "merge_parent_onboarding": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "merge_sha": "c3a4a635b9cb7616e449e9aef0ff777289479d51",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "e400eabafb7142a8f55fa4559a20bb604565d06dca442a1eec2b460713991252",
+  "owner_gate_2_verification_sha256": "a10e0a0120e93c9c06ea1b47d21cff1f0f5efc382edb4a57a571798ac0297ba5",
+  "pr_head_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d",
+  "pr_number": 495,
+  "production_deployment_id": 7612824640,
+  "production_json_checked_count": 91,
+  "production_proof": true,
+  "production_proof_sha256": "b307a4ecea175de1338f80a40ae3989ca0fe77c6c35aba83ea0ebc376c56e219",
+  "protected_main_sha": "c3a4a635b9cb7616e449e9aef0ff777289479d51",
+  "request_id": "la-salle-release-production-proof-0001",
+  "request_sha256": "a0f8ea2219b307d9b63d77170dbb7be4edd619c3b3dd7b66f14f4292f625f12e",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "status": "PRODUCTION_PROOF_PASS"
+}
