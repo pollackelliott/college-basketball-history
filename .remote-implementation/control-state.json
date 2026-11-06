@@ -379,7 +379,7 @@
     "la-salle-stage2-opponent-display-normalize-0002"
   ],
   "active_expected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
-  "active_lock_commit": null,
+  "active_lock_commit": "92eef8f16bffa6e8bd48e4387ee95ecf17802b83",
   "active_lock_owner": "github-actions:42274561663:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
