@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-stage1-0002",
+  "request_id": "la-salle-stage1-0003",
   "operation": "STAGE1_INVENTORY",
   "school_key": "la-salle",
-  "previous_control_state_commit": "71c993cf97e314e25608c4f94c21c5fe62cde0a2",
-  "previous_control_state_sha256": "412a1ff7e565c7e08d589b72988414db4f19177c648663a439f65e09de91862f",
+  "previous_control_state_commit": "a273aa1c584b492e83048fa760665004e67bb4d1",
+  "previous_control_state_sha256": "f909e8c052fe02fbc2f0420f47ab45ccf6dfb0cc813a18e063836c3bdb2e53c8",
   "expected_protected_main_sha": "715d7764ad4b629ec8d4243380361d5d20c60c41",
   "research_checkpoint": {
     "sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
@@ -17,11 +17,17 @@
       "part_count": 16
     }
   },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
+  "venue_reconciliation": {
+    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/venue-reconciliation.json",
+    "sha256": "cc15af762bc66917c05d16f5769cba588c36cafcd6b7d752d62fd12375368224"
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/payloads/la-salle/la-salle-stage1-0003/conference-reconciliation.json",
+    "sha256": "e5894862b1dda64efd01a54e3baff9ca47c846ed5c85e6aec1253e59da079871"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT La Salle serialized Implementation lane — post-Issue #487 Stage 1 rerun",
-    "authorization": "Control Center explicitly authorized the narrow generic JM/Jamaica Stage 1 representation repair in Issue #487 and directed the La Salle Implementation lane, after clean review and merge, to reauthenticate protected main and rerun the COMPLETE Stage 1 inventory against the same immutable Research Freeze. PR #488 merged at protected-main commit 715d7764ad4b629ec8d4243380361d5d20c60c41 after required repository workflows and Vercel passed. This request is read-only STAGE1_INVENTORY only. It preserves Research Freeze SHA-256 2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306 and research base 933d2f9e7ebdd24fefcafda326a7ebe898a476df. It grants no Phase 0, shared/global maintenance, Stage 2, owner gate, release, merge, or recovery authority."
+    "origin": "ChatGPT La Salle serialized Implementation lane — mechanical Stage 1 reconciliation",
+    "authorization": "Owner explicitly directed the La Salle Implementation lane, after the Control Center-authorized Issue #487 tooling repair merged, to preserve the immutable Research Freeze, rerun the complete Stage 1 inventory, bind the three remaining ordinary La Salle reconciliation items through the repository-defined path, and require Stage 1 PASS before Integration Freeze or Phase 0. Fresh checkpoint la-salle-stage1-0002 on protected main 715d7764ad4b629ec8d4243380361d5d20c60c41 shows exactly three blockers: Brendan Byrne exact current-main reuse, Aventura Palace Resort explicit new target-school venue registration, and missing Middle Atlantic Conference registration. This request remains read-only STAGE1_INVENTORY and grants no Phase 0, shared/global maintenance, Stage 2, owner gate, release, merge, or recovery authority."
   },
   "authority": {
     "phase0": false,
