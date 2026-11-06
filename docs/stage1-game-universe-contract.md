@@ -139,9 +139,13 @@ EARLY_HISTORY_AGGREGATE_RECONCILED_GAP. Eligibility requires all of:
    ordinary nonblocking row-level debt, only rows explicitly classified blocking may
    enter the synthetic `blocking-residuals.json` view. Nonblocking rows remain preserved
    in the immutable legacy residual member and must never be reinterpreted as duplicate
-   aggregate blockers merely because they share an owner-authorized season. A second
-   genuinely blocking residual for the same approved season remains a fail-closed error.
-   The closeout must preserve every original legacy member byte-for-byte while adding
+   aggregate blockers merely because they share an owner-authorized season. Inside that
+   exact parent/research-base/owner-authority-bound projection, the legacy blocker class
+   `AGGREGATE_COVERAGE_AUTHORITY_REQUIRED` is representation-equivalent to the current
+   `FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION` class. No other blocker class is
+   normalized by that rule, and an unrelated/non-authorized season retains its literal
+   class. A second genuinely blocking residual for the same approved season remains a
+   fail-closed error. The closeout must preserve every original legacy member byte-for-byte while adding
    the current logical Stage 1 members in the separately hashed successor; it must never
    rewrite the immutable parent checkpoint in place.
 5. A **separate, hashed closeout successor**, built with the permanent closeout

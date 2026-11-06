@@ -234,7 +234,12 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
         ))
         self.assertEqual(json.loads(successor["blocking-residuals.json"]), [])
 
-    def make_legacy_parent(self, *, duplicate_blocker=False):
+    def make_legacy_parent(
+        self,
+        *,
+        duplicate_blocker=False,
+        blocker_class="AGGREGATE_COVERAGE_AUTHORITY_REQUIRED",
+    ):
         current, _ = mod.read_zip(self.parent, self.parent_sha)
         ledger = mod.as_csv(current["structured-stage1-ledger.csv"])
         legacy_ledger = []
@@ -263,7 +268,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
             legacy_residuals.append({
                 "residual_id": "SJU-" + season + "-AGGREGATE",
                 "season": legacy_full_season(season),
-                "residual_class": "FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION",
+                "residual_class": blocker_class,
                 "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
                 "identified_competitive_games": str(identified[2]),
                 "missing_games": str(unidentified[2]),
@@ -274,7 +279,7 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
                 legacy_residuals.append({
                     "residual_id": "SJU-" + season + "-SECOND-BLOCKER",
                     "season": legacy_full_season(season),
-                    "residual_class": "FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION",
+                    "residual_class": blocker_class,
                     "state": "RESEARCH_EXHAUSTED_SOURCE_COVERAGE",
                     "identified_competitive_games": str(identified[2]),
                     "missing_games": str(unidentified[2]),
@@ -383,6 +388,13 @@ class MultiSeasonAggregateCoverageTests(unittest.TestCase):
             report["defects"],
             ["DUPLICATE_LEGACY_RESIDUAL_SEASON:1911-12"],
         )
+
+    def test_unknown_authority_bound_blocker_class_still_fails_closed(self):
+        self.make_legacy_parent(blocker_class="UNRECOGNIZED_LEGACY_BLOCKER_CLASS")
+        report = self.audit()
+        self.assertEqual(report["status"], "FAIL")
+        self.assertIn("UNRELATED_STAGE1_BLOCKER", report["defects"])
+        self.assertIn("OWNER_AUTHORITY_POPULATION_MISMATCH", report["defects"])
 
     def test_legacy_season_label_normalization_is_fail_closed(self):
         self.assertEqual(mod._legacy_season_label("1911-1912"), "1911-12")
