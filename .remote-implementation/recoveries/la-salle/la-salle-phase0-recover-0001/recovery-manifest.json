@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "494c3c467e0494aa2b078515efe9962cb97bf680",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "715d7764ad4b629ec8d4243380361d5d20c60c41",
+  "recovered_request_id": "la-salle-phase0-0001",
+  "request_id": "la-salle-phase0-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/la-salle-onboarding"
+}
