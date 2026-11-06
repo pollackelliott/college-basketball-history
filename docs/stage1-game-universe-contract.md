@@ -145,9 +145,19 @@ EARLY_HISTORY_AGGREGATE_RECONCILED_GAP. Eligibility requires all of:
    `FOUNDING_SEASON_PARTIAL_ROW_IDENTIFICATION` class. No other blocker class is
    normalized by that rule, and an unrelated/non-authorized season retains its literal
    class. A second genuinely blocking residual for the same approved season remains a
-   fail-closed error. The closeout must preserve every original legacy member byte-for-byte while adding
-   the current logical Stage 1 members in the separately hashed successor; it must never
-   rewrite the immutable parent checkpoint in place.
+   fail-closed error. Legacy season-census headings may expose the institutional record
+   through `source_heading_wins` / `source_heading_losses`; inside the same exact
+   authority-bound projection those numeric fields are representation-equivalent to the
+   current aggregate win/loss fields, and total games remain derived arithmetically from
+   W+L when no explicit games field exists. The closeout must preserve every original
+   legacy member byte-for-byte at its original member path while adding the current
+   logical Stage 1 members in the separately hashed successor; it must never rewrite the
+   immutable parent checkpoint in place. If a legacy parent already owns the
+   `stage1-status.json` member name, the completed logical status must be written to the
+   collision-safe `stage1-closeout-status.json` overlay and identified by
+   `stage1-manifest.json:completion_status_member`. Independent `verify-closeout`
+   must reject drift in any original legacy member even when the candidate otherwise
+   matches the tool's generated successor.
 5. A **separate, hashed closeout successor**, built with the permanent closeout
    command and independently verified with verify-closeout. It preserves every
    historical ledger/census/source byte, reclassifies only the approved aggregate
