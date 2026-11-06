@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "la-salle-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "la-salle",
+  "previous_control_state_commit": "9502b2bcaf5bb5c7f508d5766eb685493de84b5b",
+  "previous_control_state_sha256": "cd58766b9652145dc354de41b6793ba06aa1b98e9cfe232b2e8d25ea73e048d2",
+  "expected_protected_main_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+  "research_checkpoint": {
+    "sha256": "2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306",
+    "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9502b2bcaf5bb5c7f508d5766eb685493de84b5b",
+      "path_prefix": ".remote-implementation/transports/la-salle/la-salle-stage1-0001/piece-",
+      "part_count": 16
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT La Salle serialized Implementation lane — owner-designated Research Freeze intake",
+    "authorization": "Owner explicitly opened the La Salle serialized Implementation lane and identified exactly one attached ZIP as the final accepted RESEARCH_FROZEN artifact, authorizing this first bounded read-only intake / Stage 1 reconciliation inventory only. The current AGENTS.md owner-designated-artifact fallback was applied: exact ZIP SHA-256 2a2bb87171f4fe4dbd6182175abaa775d0085ca3c35850856e010241c17ff306 was computed; the exact six flat required members were verified; research_base_sha 933d2f9e7ebdd24fefcafda326a7ebe898a476df and accepted 1930-31+ / INCEPTION+ scope were authenticated from the package; the completed Research lane's required freeze evidence, including the owner NON_D1 sanity-scan disposition and pre-freeze self-challenge completion, was inspected in the available project recovery record; the package's terminal researched site/accounting debt and owner-approved 1930-31 aggregate-coverage authority are preserved without reconstructed or inferred game rows; no competing La Salle onboarding branch/checkpoint or superseding durable Research artifact was found. Current protected main d944103fd952ae254238b199bcd3471a1cfc0ecc and global remote Implementation control were reauthenticated IDLE, transaction COMPLETE, recovery_required=false, active school none. This request authorizes only the repository-owned STAGE1_INVENTORY operation. It grants no Phase 0 mutation, shared/global maintenance, Stage 2, owner gate, release, merge, recovery, or protected-main mutation authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
