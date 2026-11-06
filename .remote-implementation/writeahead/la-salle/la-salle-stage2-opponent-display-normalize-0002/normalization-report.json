@@ -1,0 +1,51 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Immaculata University"
+      ],
+      "authority_signature": "immaculatauniversity",
+      "canonical_opponent_key": "immaculata",
+      "from_names": [
+        "Immaculata"
+      ],
+      "target_row_count": 1,
+      "to_name": "Immaculata University"
+    },
+    {
+      "authority_names": [
+        "Lincoln University (PA)"
+      ],
+      "authority_signature": "lincolnuniversitypa",
+      "canonical_opponent_key": "lincoln-pa",
+      "from_names": [
+        "Lincoln (Pa.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Lincoln University (PA)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 2,
+  "source_game_display_changes": [
+    {
+      "from_name": "Lincoln (Pa.)",
+      "normalized_opponent_key": "lincoln-pa",
+      "source_game_id": "LAS-2020-21-004",
+      "to_name": "Lincoln University (PA)"
+    },
+    {
+      "from_name": "Immaculata",
+      "normalized_opponent_key": "immaculata",
+      "source_game_id": "LAS-2024-25-013",
+      "to_name": "Immaculata University"
+    }
+  ],
+  "status": "PASS"
+}

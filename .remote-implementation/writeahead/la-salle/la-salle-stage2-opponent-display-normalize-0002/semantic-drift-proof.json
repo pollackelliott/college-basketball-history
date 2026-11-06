@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "integration_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+    "school_key": "la-salle",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "integration_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+    "school_key": "la-salle",
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/la-salle/opponents.csv",
+    "schools/la-salle/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/la-salle/opponents.csv": "5f63f6a23e2403d063a6de92a0a919d9febe5625a548351d64924238a30e93ec",
+    "schools/la-salle/source-games.csv": "393ef6a083b13839d7d000eca16aef1edc649331a3b07ed81044de13649d3af8"
+  },
+  "changed_paths": [
+    "schools/la-salle/opponents.csv",
+    "schools/la-salle/source-games.csv"
+  ],
+  "commit_message": "Normalize la-salle historical opponent display representation",
+  "expected_blocker_keys": [
+    "immaculata",
+    "lincoln-pa"
+  ],
+  "expected_target_predecessor_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+  "field_level_proof_sha256": "9abfd8392d60ac8a0381fda8da4f573e72d4a2d8aea5feda7db046438ca29dfe",
+  "global_lock_commit": "92eef8f16bffa6e8bd48e4387ee95ecf17802b83",
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "d27bc558f59a62330cf25e333b5effa76292237d42c0da20dac90b09169bcb29",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "prepared_parent_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+  "prepared_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+  "protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "repository_validation": "PASS",
+  "request_id": "la-salle-stage2-opponent-display-normalize-0002",
+  "request_sha256": "3ec7670af7aaebe67529c2c8742e07669b486b1fdcc39ba57a7b745cabb27913",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_drift_after": {
+    "baseline_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "integration_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+    "school_key": "la-salle",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "integration_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+    "school_key": "la-salle",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "925b282a101d459fca1077eb04e5f632eae9e96699d61e3115ac565f9b382aa4",
+    "field-level-proof.json": "9abfd8392d60ac8a0381fda8da4f573e72d4a2d8aea5feda7db046438ca29dfe",
+    "integration-freeze.json": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+    "normalization-report.json": "d27bc558f59a62330cf25e333b5effa76292237d42c0da20dac90b09169bcb29",
+    "semantic-drift-proof.json": "6ce6a0346c48188c2b8147745191fc217e1238ff182b9094ad6c11f78602f487"
+  },
+  "source_game_normalized_name_row_count": 2,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "925b282a101d459fca1077eb04e5f632eae9e96699d61e3115ac565f9b382aa4",
+  "target_branch": "data/la-salle-onboarding"
+}

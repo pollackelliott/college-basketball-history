@@ -1,0 +1,90 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "97330d13964d78f9f1e850a51057ae79dbe75fb65bdd6a5417ff4ebb95fe0888",
+    "plan.json": "858879ac0af6309590ff8559bf40b1ae6e19712dd907d33dc7770a5e890dc5fc",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "21ed56aa0cbb563d4e39176d00458561ad489869c112ed06add3eaedf303a765"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "4362f91d48579ea5e641d8aa8811694ebd853a5805fca1bcdcd6f7050a828729",
+    "plan.json": "3393d0a0571df786bc5ec93bd545eb7586481c40e18e86953fa37f0e21b720e6",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "192919e76dfaa2bd0631087951737be3eb9413398dff14caf379652bfcc91683"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 2,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 2,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "la-salle"
+  ],
+  "phase0_protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "phase0_successor_path": ".remote-implementation/successors/la-salle/la-salle-phase0-0002/successor-manifest.json",
+  "phase0_successor_sha256": "cfcd185ffa865c657bd5ad3b6cfcc0eed7e137e8d30bdaa2f9af574ea96d08bb",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/la-salle/plan.json",
+    "review_path": ".onboarding/la-salle/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "request_id": "la-salle-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "stage2_current_main_refresh_successor_path": ".remote-implementation/successors/la-salle/la-salle-stage2-current-main-refresh-0001/successor-manifest.json",
+  "stage2_current_main_refresh_successor_sha256": "594a53c031e57b5650cebb40ceec4dc85321e94d7b0dc9d117fb5c3cf400161f",
+  "stage2_current_main_refresh_verification_path": ".remote-implementation/verifications/la-salle/la-salle-stage2-current-main-refresh-0001/stage2-current-main-refresh-verification.json",
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+  "target_tree_sha": "3f76a7625d2d65488486e051aae72ce196dbc1fa",
+  "tracked_mutation_proof": {
+    "after_head_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+    "after_status": "",
+    "after_tree_sha": "3f76a7625d2d65488486e051aae72ce196dbc1fa",
+    "before_head_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+    "before_status": "",
+    "before_tree_sha": "3f76a7625d2d65488486e051aae72ce196dbc1fa",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
