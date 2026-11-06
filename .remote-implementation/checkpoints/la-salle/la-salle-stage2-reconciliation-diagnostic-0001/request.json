@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "la-salle-stage2-reconciliation-diagnostic-0001",
+  "school_key": "la-salle",
+  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
+  "previous_control_state_commit": "9f2900f7e20a9a456e82dc4f43e12c92df4715a1",
+  "previous_control_state_sha256": "4ef6fa3ab723da6faf356b249aff345d513413c91d7f389c051949fc5e3ff30c",
+  "expected_protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "creation_provenance": {
+    "origin": "ChatGPT La Salle serialized Implementation Stage 2 - blocked proposal strict-HOME diagnostic",
+    "authorization": "Existing owner-authorized La Salle Stage 2 phase persists through OWNER_GATE_1_READY. Fresh-verified proposal la-salle-stage2-proposal-0001 is BLOCKED by exactly two strict HOME canonical rows missing complete location/venue after the exact 186-decision map. This request diagnoses only CBBG-0161990, the 2016-12-06 Villanova/La Salle row, against the exact blocked proposal. The frozen La Salle assertion is terminal UNKNOWN due an exact H/A/N authority conflict; the diagnostic must observe the permanent reconciliation path without changing history. No tracked mutation, historical decision, map rewrite, repair, Owner Gate 1 approval/fill, seal/apply, release, Preview, merge, Production, recovery, or current-main refresh authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": true,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/la-salle-onboarding",
+  "target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-proposal-0001/checkpoint-manifest.json",
+    "sha256": "cc256b22bdba702d9c487d2ad9cd66e9ae591a9a1a6e76c086963bcb3f7b29c5"
+  },
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+  "recommendation_map_sha256": "cb063c0d59828e5d4262d12f8866c53d1645b989986517165dc61254166f5bf6",
+  "canonical_game_id": "CBBG-0161990"
+}
