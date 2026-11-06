@@ -384,18 +384,19 @@
     "la-salle-stage2-preseal-rehearsal-0001",
     "la-salle-stage2-gate1-seal-0001",
     "la-salle-stage2-sealed-apply-0001",
-    "la-salle-release-readiness-0001"
+    "la-salle-release-readiness-0001",
+    "la-salle-release-preview-verify-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "221691eb65d491975df09980ec412620cae6e844",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PREVIEW_VERIFY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "la-salle-release-preview-verify-0001",
+  "active_request_sha256": "426aa9b7a1447866bac9347ac0b8941db3838f0a72d8122e08b39caf668946bf",
+  "active_school_key": "la-salle",
+  "active_target_branch": "data/la-salle-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -787,8 +788,11 @@
     "target_branch": "data/la-salle-onboarding",
     "target_sha": "efdabe6caf19ea80c624f64b1479f3351f58c77d"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42305060901",
+  "lock_acquisition_request_commit": "895bf4af662968c5e90a8b2adddf68f6e81d99f4",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PREVIEW_RUNNING"
 }
