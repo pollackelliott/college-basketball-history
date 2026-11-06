@@ -239,6 +239,21 @@ complete.
 
 The permanent Stage 4 tools may normalize known legacy field vocabulary and checkpoint topology in memory, including accepted legacy administrative-status spellings whose current representation is mechanically equivalent while the on-court result remains unchanged. They must not rewrite the source checkpoint merely to satisfy the current representation. In addition to the current exact-root and accepted single-directory legacy layouts, a manifested root-level descriptive checkpoint may be consumed when exactly one terminal Stage 3B status document is manifested and that status explicitly names its manifested authoritative working ledger. Multiple terminal candidates, broken or unmanifested ledger pointers, and ledger-pointer hash mismatches are stops rather than filename guesses.
 
+Legacy projection compatibility is likewise representation-only and fail-closed. An
+accepted prefixed Stage 3 terminal/partial site-research status may project to the
+controlled package research-status vocabulary only when the parent row itself proves the
+same terminal semantic shape and preserves a nonblank accepted basis; active or ambiguous
+status vocabularies never acquire researched-debt authority by normalization. A legacy
+score pair may be re-oriented into package team/opponent columns only when the parent
+checkpoint preserves the same two numeric values, the accepted W/L/T result, and one
+unambiguous literal source score/result token that deterministically establishes the
+orientation. The unordered numeric pair and accepted result remain unchanged, while
+ambiguous or current-schema conflicts stop instead of being swapped heuristically.
+Specific legacy postseason labels may normalize to the controlled generic POSTSEASON
+vocabulary only when their literal event/source identity remains preserved; CIT is such
+a compatibility label and does not become NCAA, NIT, conference tournament, or regular
+season.
+
 A legacy Stage 3B checkpoint that predates this authoring-capsule contract may legitimately lack package-authoring state. That is a bounded compatibility-recovery problem, not permission to reconstruct prior opponent/conference decisions from present-day registry state or conversational memory.
 
 When predecessor durable artifacts contain the missing accepted state, recover from those artifacts. If they do not, stop with the exact missing authority population.
