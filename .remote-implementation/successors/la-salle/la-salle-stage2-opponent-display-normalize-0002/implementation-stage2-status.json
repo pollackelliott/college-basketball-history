@@ -1,0 +1,42 @@
+{
+  "branch": "remote-stage2-census/la-salle-968bdf71cd41",
+  "capability_census": {
+    "path": ".onboarding/la-salle/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "integration_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "integration_semantic_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 43,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 43,
+      "discrepancy": 115,
+      "identity": 15,
+      "new_game_site_patch": 11,
+      "publication": 1
+    },
+    "decision_count": 186,
+    "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "discrepancies_to_add": 115,
+    "existing_game_matches": 791,
+    "new_canonical_games": 1781,
+    "plan_path": ".onboarding/la-salle/plan.json",
+    "review_path": ".onboarding/la-salle/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "933d2f9e7ebdd24fefcafda326a7ebe898a476df",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}

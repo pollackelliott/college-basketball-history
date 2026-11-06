@@ -1,0 +1,100 @@
+{
+  "actual_published_target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "changed_file_sha256": {
+    "schools/la-salle/opponents.csv": "5f63f6a23e2403d063a6de92a0a919d9febe5625a548351d64924238a30e93ec",
+    "schools/la-salle/source-games.csv": "393ef6a083b13839d7d000eca16aef1edc649331a3b07ed81044de13649d3af8"
+  },
+  "changed_paths": [
+    "schools/la-salle/opponents.csv",
+    "schools/la-salle/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "immaculata",
+    "lincoln-pa"
+  ],
+  "expected_target_predecessor_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+  "field_level_proof_sha256": "9abfd8392d60ac8a0381fda8da4f573e72d4a2d8aea5feda7db046438ca29dfe",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "92eef8f16bffa6e8bd48e4387ee95ecf17802b83",
+  "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "d27bc558f59a62330cf25e333b5effa76292237d42c0da20dac90b09169bcb29",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "9adf1f949d816f835c6c532a2cbdc09768040ad692d6dc4ead942fa691bbadf4",
+      "implementation-stage2-status.json": "a011c1498990e6c9e06753a0dcc884aa7d5f88c1b1f4fb8292c17f9096b03631",
+      "plan.json": "538ea9da194e305e643d2cc46f6662f04b90c1acdf66e9a86f64d47c5522e4bb",
+      "review.csv": "f1f9552e48848fd6c7a510c09d98928d2fa6e49f137fc468b3613a71227e507f",
+      "review.md": "56953fe14931f93507ffb255ac18a56911db4408e14cde17a4b1afa7735e0629"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "9adf1f949d816f835c6c532a2cbdc09768040ad692d6dc4ead942fa691bbadf4",
+      "implementation-stage2-status.json": "bb08d5a5fe412a3080a68ec80e433694ba8d2beea7f70a8b7f70e842f40acf60",
+      "plan.json": "a3dfdd0932225b75c1adfd3cda807f6027caf2a3f0136de613f4e7eec5bb2dca",
+      "review.csv": "f1f9552e48848fd6c7a510c09d98928d2fa6e49f137fc468b3613a71227e507f",
+      "review.md": "9db94d6de54be08d62638553f45cf61ea4e4b7e85d714bffe44dda82a011e0e0"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 100,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 186,
+    "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+      "after_status": "",
+      "after_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+      "before_head_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+      "before_status": "",
+      "before_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "prepared_parent_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
+  "prepared_tree_sha": "8fa79a2013c022dc542cfcdacef7762dc867d4f9",
+  "protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "la-salle-stage2-opponent-display-normalize-0002",
+  "request_sha256": "3ec7670af7aaebe67529c2c8742e07669b486b1fdcc39ba57a7b745cabb27913",
+  "schema_version": 1,
+  "school_key": "la-salle",
+  "semantic_drift_after": {
+    "baseline_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "integration_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+    "school_key": "la-salle",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+    "integration_base_sha": "19d1199bf67eb935ad5856d63b89afbb105129a4",
+    "school_key": "la-salle",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "source_game_normalized_name_row_count": 2,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "925b282a101d459fca1077eb04e5f632eae9e96699d61e3115ac565f9b382aa4",
+  "target_branch": "data/la-salle-onboarding",
+  "writeahead_commit": "69db2370e11e49d9175403d63314b091238c752f",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/la-salle/la-salle-stage2-opponent-display-normalize-0002/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "f0587bad8f1c4864d0f1fd3e42674e963b68c6873e428f63a7a8a8887b771fe7"
+}
