@@ -23,6 +23,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from research_authoring_capsule import checkpoint_continuity_defects
+
 from research_stage4_closeout import (
     closeout,
     first_literal,
@@ -1168,6 +1170,7 @@ def inspect_checkpoint(
             for filename, member in members.items()
             if member not in archive.namelist()
         ]
+        continuity_defects = checkpoint_continuity_defects(archive)
         result: dict[str, Any] = {
             "schema_version": 1,
             "school_key": school_key,
@@ -1184,7 +1187,12 @@ def inspect_checkpoint(
             "early_history_uncertainty": early_history_summary,
             **({"historical_season_coverage": aggregate_coverage_summary}
                if aggregate_coverage else {}),
-            "defects": list(coverage_defects) + early_history_defects + aggregate_coverage_defects,
+            "defects": (
+                list(coverage_defects)
+                + early_history_defects
+                + aggregate_coverage_defects
+                + continuity_defects
+            ),
         }
         if missing:
             return result
