@@ -1,2 +1,3 @@
 program_key,season_label,official_wins,official_losses,official_games,documented_wins,documented_losses,documented_games,unidentified_wins,unidentified_losses,unidentified_games,source_label,owner_disposition,stage1_audit_sha256,public_note
+la-salle,1930-31,15,4,19,1,1,2,14,3,17,Institutional year-by-year season aggregate; individual game details incomplete,https://github.com/pollackelliott/college-basketball-history/issues/450,ea2219506e6da72bb5213631c7ae337076ddcc4ce2b3eecf13dc5e000b48313b,
 st-bonaventure,1919-20,6,10,16,3,7,10,3,3,6,Institutional year-by-year season aggregate; individual game details incomplete.,https://github.com/pollackelliott/college-basketball-history/issues/426,4a380f4328db11b62db7d78582a062993099be78b9e0e1003f20835e4bbcb13b,
