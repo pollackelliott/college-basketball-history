@@ -421,6 +421,7 @@ def _normalized_legacy_ledger(raw: bytes) -> tuple[bytes, list[dict[str, str]]]:
             "opponent_literal",
             "source_opponent",
             "source_opponent_label",
+            "source_opponent_text",
             "opponent",
             "opponent_name",
         )
