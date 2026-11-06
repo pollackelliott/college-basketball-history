@@ -367,7 +367,7 @@ def _legacy_residuals(
                 "detail": {},
             })
             continue
-        if season not in auth and _legacy_nonblocking(row):
+        if _legacy_nonblocking(row):
             continue
         if season in seen:
             raise ValueError("DUPLICATE_LEGACY_RESIDUAL_SEASON:" + season)
