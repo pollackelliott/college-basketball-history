@@ -856,6 +856,8 @@ def _semantic_projection_defects(
     """Independent population-level anti-loss checks for accepted source facts."""
     pairs = {
         "season_label": ("season_label", "season"),
+        "team_score": ("team_score", "wagner_points", "dayton_score"),
+        "opponent_score": ("opponent_score", "opponent_points"),
         "played_result": (
             "played_result",
             "on_court_result",
@@ -872,37 +874,33 @@ def _semantic_projection_defects(
             continue
         expected = project_season_label(original) if target == "season_label" else original
         if projected[target] != expected:
+            if target in {"team_score", "opponent_score"}:
+                original_team = _first(
+                    parent, "team_score", "wagner_points", "dayton_score"
+                )
+                original_opponent = _first(
+                    parent, "opponent_score", "opponent_points"
+                )
+                projected_team = projected.get("team_score", "").strip()
+                projected_opponent = projected.get("opponent_score", "").strip()
+                if all(value.isdigit() for value in (
+                    original_team,
+                    original_opponent,
+                    projected_team,
+                    projected_opponent,
+                )):
+                    unordered_preserved = sorted(
+                        (int(original_team), int(original_opponent))
+                    ) == sorted(
+                        (int(projected_team), int(projected_opponent))
+                    )
+                    result = projected.get("played_result", "").strip().upper()
+                    if unordered_preserved and _score_result_consistent(
+                        int(projected_team), int(projected_opponent), result
+                    ):
+                        continue
             defects.append({"reason": "ACCEPTED_SOURCE_FIELD_LOST",
                             "source_game_id": game_id, "field": target})
-
-    original_team = _first(parent, "team_score", "wagner_points", "dayton_score")
-    original_opponent = _first(parent, "opponent_score", "opponent_points")
-    if original_team or original_opponent:
-        projected_team = projected.get("team_score", "").strip()
-        projected_opponent = projected.get("opponent_score", "").strip()
-        exact_pair = (projected_team, projected_opponent) == (
-            original_team, original_opponent
-        )
-        unordered_preserved = False
-        if all(value.isdigit() for value in (
-            original_team, original_opponent, projected_team, projected_opponent
-        )):
-            unordered_preserved = sorted(
-                (int(original_team), int(original_opponent))
-            ) == sorted((int(projected_team), int(projected_opponent)))
-            result = projected.get("played_result", "").strip().upper()
-            unordered_preserved = (
-                unordered_preserved
-                and _score_result_consistent(
-                    int(projected_team), int(projected_opponent), result
-                )
-            )
-        if not exact_pair and not unordered_preserved:
-            defects.append({
-                "reason": "ACCEPTED_SOURCE_SCORE_PAIR_LOST",
-                "source_game_id": game_id,
-                "field": "team_score/opponent_score",
-            })
 
     accepted_round = _first(parent, "curated_postseason_round",
                             "stage3b_postseason_round", "postseason_round")
