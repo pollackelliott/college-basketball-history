@@ -646,18 +646,22 @@ def normalize_parent_members(
 
 def audit_checkpoint(parent: Path, *, expected_parent_sha256: str,
                      registry: Path = REGISTRY) -> dict[str, Any]:
-    members, parent_sha = read_zip(parent, expected_parent_sha256)
-    defects = manifest_defects(members)
+    raw_members, parent_sha = read_zip(parent, expected_parent_sha256)
+    defects = manifest_defects(raw_members)
     try:
+        members, authority_ledger_raw, legacy_parent = normalize_parent_members(
+            raw_members,
+            parent_sha=parent_sha,
+            registry=registry,
+        )
         status = json.loads(members["stage1-status.json"])
         manifest = json.loads(members["stage1-manifest.json"])
         residuals = json.loads(members["blocking-residuals.json"])
-        ledger_raw = members["structured-stage1-ledger.csv"]
-        ledger = as_csv(ledger_raw)
+        ledger = as_csv(members["structured-stage1-ledger.csv"])
         census = as_csv(members["season-census.csv"])
-        structured_evidence = evidence_by_season(members)
-    except (KeyError, TypeError, ValueError, UnicodeError, csv.Error):
-        return {"status": "FAIL", "defects": ["INVALID_SOURCE_CHECKPOINT"]}
+        structured_evidence = evidence_by_season(raw_members)
+    except (KeyError, TypeError, ValueError, UnicodeError, csv.Error, json.JSONDecodeError) as exc:
+        return {"status": "FAIL", "defects": [str(exc) or "INVALID_SOURCE_CHECKPOINT"]}
 
     school = status.get("school_key") or status.get("school")
     research_base = status.get("research_base_sha")
@@ -723,7 +727,7 @@ def audit_checkpoint(parent: Path, *, expected_parent_sha256: str,
         if year > int(authority.get("maximum_eligible_season_start_year", 0)):
             defects.append("OUTSIDE_FOUNDING_ERA")
 
-        if "identified_ledger_sha256" in authority and authority.get("identified_ledger_sha256") != digest(ledger_raw):
+        if "identified_ledger_sha256" in authority and authority.get("identified_ledger_sha256") != digest(authority_ledger_raw):
             defects.append("IDENTIFIED_LEDGER_HASH_MISMATCH")
         if "identified_rows" in authority and authority.get("identified_rows") != len(ledger):
             defects.append("IDENTIFIED_LEDGER_COUNT_MISMATCH")
@@ -837,7 +841,8 @@ def audit_checkpoint(parent: Path, *, expected_parent_sha256: str,
         "parent_checkpoint_sha256": parent_sha,
         "research_base_sha": research_base,
         "identified_game_rows": len(ledger),
-        "identified_ledger_sha256": digest(ledger_raw),
+        "identified_ledger_sha256": digest(authority_ledger_raw),
+        "legacy_parent_projection": legacy_parent,
         "season_coverages": coverages,
         "season_coverages_sha256": digest(json_bytes(coverages)),
         "defects": sorted(set(defects)),
