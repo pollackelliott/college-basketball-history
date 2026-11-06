@@ -1,23 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-stage2-opponent-display-normalize-0002",
+  "request_id": "la-salle-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
   "school_key": "la-salle",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "previous_control_state_commit": "c19e9810d50f373e87fcfdd6bacfe33f2f7f4214",
-  "previous_control_state_sha256": "cc69a8bb3bf0ba8d2fec4b2fceb256409e2627936875f3c63bfedcd8be0c3ca5",
+  "previous_control_state_commit": "faa98d771c9995f6954d32b626d9e6411311d2eb",
+  "previous_control_state_sha256": "ca1580316d5b16910eadb164f3df7cb3c8cf8775fa2259e55e9cf5bc6d0b3cef",
   "expected_protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
   "target_branch": "data/la-salle-onboarding",
-  "target_sha": "a556999777c59e4937a9f2f5114dd293d490d6ae",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-census-0002/checkpoint-manifest.json",
-    "sha256": "925b282a101d459fca1077eb04e5f632eae9e96699d61e3115ac565f9b382aa4"
+  "target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/la-salle/la-salle-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "sha256": "e8f73e0e622f0c335de852d3a57b40db8bbefb0a85c36c0727396f379bbcabf5"
   },
   "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
   "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
+  "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/la-salle-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "cb063c0d59828e5d4262d12f8866c53d1645b989986517165dc61254166f5bf6"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT La Salle serialized Implementation lane — fresh-census-bound Stage 2 opponent-display normalization",
-    "authorization": "Same owner/Control-Center-authorized La Salle Stage 2 phase persists. Fresh-verified census la-salle-stage2-census-0002 on refresh successor a556999777c59e4937a9f2f5114dd293d490d6ae and protected main 784fa4ae41fc77e4443e1cce9ed0866c89b201f9 is BLOCKED solely by exactly two deterministic historical opponent-display conflicts (immaculata and lincoln-pa), with warning_count=0, decision_count=0, semantic drift PASS, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. Authorizes exactly the permanent census-bound representation repair over that complete two-key population. Only canonical_opponent_name in schools/la-salle/opponents.csv and normalized_opponent_name in schools/la-salle/source-games.csv may change, using existing project display authority. No opponent keys, literal source labels, raw evidence, scores, dates, sites, game types, Research, Integration Freeze, protected main, owner gates, release, Preview, merge, or Production authority."
+    "origin": "ChatGPT La Salle serialized Implementation Stage 2 - exact recommendation-map proposal rehearsal",
+    "authorization": "Existing owner-authorized La Salle Stage 2 phase persists through OWNER_GATE_1_READY after fresh-verified opponent-display normalization la-salle-stage2-opponent-display-normalize-0002. This request rehearses one exact 186-decision recommendation map against target 968bdf71cd41484483f8b4b6ce52dff62ca25d1e and decision universe 5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8. The map matches all 15 deterministic reciprocal identities, preserves canonical authority by default for ordinary non-site date/score/winner conflicts, uses accepted frozen La Salle H/A/N for resolved site conflicts, retains canonical site where La Salle remains terminal UNKNOWN, proposes evidence-backed owner-gated H/A/N patches for the 11 new NCAA games, preserves La Salle's accepted 1952 Olympic Trials postseason classification, verifies identical accomplishment reference values in place, and recommends publication only through normal gated release. No Owner Gate 1 approval/fill, seal, apply, release, Preview, merge, Production, recovery, current-main refresh, or tracked basketball mutation authority is included."
   },
   "authority": {
     "phase0": false,
@@ -25,8 +30,8 @@
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
-    "stage2_proposal_rehearsal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
