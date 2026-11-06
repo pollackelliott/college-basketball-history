@@ -41,7 +41,7 @@ def legacy_score_row(game_id, team, opponent, result, raw_text):
 class Stage4LegacyProjectionCompatibilityTests(unittest.TestCase):
     def test_deterministic_w_reorients_unordered_accepted_pair(self):
         row = legacy_score_row("W", 60, 70, "W", "Old College 60 70 W")
-        games, defects = mod._projection(row and [row], opponent_rows(), [], school_key="test")
+        games, defects = mod._projection([row], opponent_rows(), [], school_key="test")
         self.assertEqual(defects, [])
         game = games[0]
         self.assertEqual((game["team_score"], game["opponent_score"]), ("70", "60"))
