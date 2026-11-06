@@ -1,41 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "la-salle-stage2-gate1-fill-0001",
+  "request_id": "la-salle-stage2-preseal-rehearsal-0001",
   "school_key": "la-salle",
-  "operation": "STAGE2_GATE1_FILL",
-  "previous_control_state_commit": "7cf89219eaab468e388d876671459f212de4a3d6",
-  "previous_control_state_sha256": "fe101571a69f768855fdcd786b4a0f1fc68efc0c78a5a932df0562abf742f522",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "previous_control_state_commit": "25a6aed457b5cd80661f7aff1dd2f2a8c3ca4ee2",
+  "previous_control_state_sha256": "19a6144345ecb8e146722b930f5fbe06a473629dc09d85540b1072e6847ffe9a",
   "expected_protected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
   "target_branch": "data/la-salle-onboarding",
   "target_sha": "968bdf71cd41484483f8b4b6ce52dff62ca25d1e",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-proposal-0002/checkpoint-manifest.json",
-    "sha256": "9c58769b772ba000c5e0b5fbfced14de56e58ea92d575f541138bc1d085727c2"
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/la-salle/la-salle-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "4e4e8e8009bf5cedf759587b8603c6bba835c1e7ab0c39ebfa1c8ba561e895a6"
   },
-  "stage2_proposal_verification": {
-    "path": ".remote-implementation/verifications/la-salle/la-salle-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
-    "sha256": "13ece25720036482653b75a0c911ae3706be2140383b29792b2bf5eda642f983"
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/la-salle/la-salle-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "0e05a6dbf54136193944246d88567e319c092913b5051ba4a658003635820320"
   },
   "integration_freeze_sha256": "8abd9d21fb2f3cd5711d3b5163d0f7330def61a996e5f29bd1ea27467d34756d",
   "semantic_snapshot_sha256": "a595ae70e6c55dbaa6d8d67206ac7c375e1bf6e23012b861be3ba17655132490",
   "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
   "recommendation_map_sha256": "01dc70900ef6a7b89c69e9d77d0cd6f5f690a2f919ea57b74d65056906eeb534",
   "approved_plan_hash_preview": "da71734ae54fff5617d2ada96ae85a7b281247dbbd92a3f9a394761a5b0a9aba",
-  "owner_gate_1_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly wrote 'Approved. Proceed' immediately after the La Salle Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY packet for la-salle-stage2-proposal-0002, including recommendation-map SHA-256 01dc70900ef6a7b89c69e9d77d0cd6f5f690a2f919ea57b74d65056906eeb534, decision-universe SHA-256 5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8, and approved-plan preview hash da71734ae54fff5617d2ada96ae85a7b281247dbbd92a3f9a394761a5b0a9aba. This is explicit Owner Gate 1 approval of that exact packet. Under current repository policy the same phase authority persists through exact-map Gate 1 fill, pre-seal rehearsal, cryptographic Gate 1 seal, sealed apply, and independent post-apply verification if each exact predecessor fresh-verifies and no new blocker or authority boundary appears. It does not authorize release readiness, Preview, Owner Gate 2, merge, Production, recovery, or any change to the approved historical meaning.",
-    "proposal_checkpoint_sha256": "9c58769b772ba000c5e0b5fbfced14de56e58ea92d575f541138bc1d085727c2",
-    "decision_universe_sha256": "5f442414a695480fdfcceeff9bc8f4bfab17df320d3d59f8e6395ec4d16981c8",
-    "recommendation_map_sha256": "01dc70900ef6a7b89c69e9d77d0cd6f5f690a2f919ea57b74d65056906eeb534",
-    "approved_plan_hash_preview": "da71734ae54fff5617d2ada96ae85a7b281247dbbd92a3f9a394761a5b0a9aba"
-  },
+  "filled_review_sha256": "da5ec9f29c6b44e12d2144419407b1922a82a060c44f83386a3734bd9f05193e",
+  "decision_id_set_sha256": "0953a53a5a80d453bc84be90d3ff79a42277865fafc46da0fc899ea7ea91d61f",
   "creation_provenance": {
-    "origin": "ChatGPT La Salle serialized Implementation — exact fresh-verified Owner Gate 1 approval",
-    "authorization": "Owner explicitly approved and said Proceed for the exact fresh-verified 186-decision La Salle OWNER_GATE_1_READY packet from la-salle-stage2-proposal-0002. Authorize exactly one guarded STAGE2_GATE1_FILL to encode the approved recommendation map into the filled review. The same phase authorization persists through pre-seal rehearsal, Gate 1 seal, sealed apply, and independent post-apply verification only if each exact predecessor fresh-verifies. No release readiness, Preview, Owner Gate 2, merge, Production, recovery, unrelated historical work, venue invention, frozen-source rewrite, or changed historical meaning is authorized."
+    "origin": "ChatGPT La Salle Implementation post-Gate-1 continuation",
+    "authorization": "Existing exact owner-approved La Salle Gate 1 phase; pre-seal rehearsal only. The owner explicitly approved the exact fresh-verified recommendation map and same phase authority persists through pre-seal, seal, sealed apply, and independent post-apply verification if every exact predecessor fresh-verifies. No new historical authority, release readiness, Preview, Owner Gate 2, merge, Production, or recovery authority is included."
   },
   "authority": {
-    "owner_gate_1": true,
+    "owner_gate_1": false,
     "owner_gate_2": false,
     "release": false,
     "phase0": false,
@@ -45,8 +39,8 @@
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": true,
-    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": true,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
