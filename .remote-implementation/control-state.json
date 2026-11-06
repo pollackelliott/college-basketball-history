@@ -377,7 +377,7 @@
     "la-salle-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "784fa4ae41fc77e4443e1cce9ed0866c89b201f9",
-  "active_lock_commit": null,
+  "active_lock_commit": "5ba5317c3f76297e052f2bf0f6fe8394d1e06200",
   "active_lock_owner": "github-actions:42273142671:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
