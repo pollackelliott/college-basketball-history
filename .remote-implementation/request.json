@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fordham-stage2-census-0003",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "fordham-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
   "school_key": "fordham",
-  "previous_control_state_commit": "7f2968bc417ea93b68c3df733d749aaab84d7230",
-  "previous_control_state_sha256": "6c706db1957d2de99d733c6ef31c8e84537cf8897dfc7395178530ff3c4f3892",
+  "previous_control_state_commit": "ea08e8b771887c19277d0c86f0c9cfaf4b59f23c",
+  "previous_control_state_sha256": "bfcaf4f36525c3930f7d13b0d64db18a4a8adde519077b2b41e11b302adf6c16",
   "expected_protected_main_sha": "92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2",
   "target_branch": "data/fordham-onboarding",
   "target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/fordham/fordham-phase0-0002/successor-manifest.json",
-    "sha256": "539ed83ec1936d3c6c60f1e06021f3af428feea4a22b8f7a3d40396fca7eacb0"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/fordham/fordham-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "1f07aff12546a375ace739a7352a65067b2610bf4515a9fcb159e018621d4456"
   },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/fordham/fordham-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "f8c76043e5379178619c70ff78e156c3ea7d03c5d38253f4a1dc6834f4d8cc10"
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/fordham-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "e892f0825e206c2150ae5917d3a373f5dd3d1bf43b5170f6a91c40a235d01b3a"
   },
   "historical_game_type_challenge": {
     "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
@@ -23,18 +23,19 @@
   },
   "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
   "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
   "creation_provenance": {
-    "origin": "Fordham serialized Implementation Stage 2 — fresh census after merged PR #503 NCAA non-appearance qualifier capability",
-    "authorization": "Control Center disposition authorizes resuming the same Fordham Implementation lane after PR #503 merged. This read-only census binds the unchanged onboarding head and Integration Freeze, uses current protected-main tooling at 92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2, and transports only the exact hash-bound FORDHAM-1990-91-031 NCAA non-appearance qualifier challenge. The settled historical interpretation is preserved. No Research reopening, Stage 1/Phase 0 replay, tracked basketball mutation, Owner Gate 1 approval, sealing, apply, release, Preview, merge, Production, or recovery authority is included."
+    "origin": "Fordham serialized Implementation Stage 2 — exact recommendation-map rehearsal after fresh qualifier-aware census",
+    "authorization": "Existing owner-authorized Fordham Stage 2 technical/reconciliation phase persists through deterministic/adversarial review and exact recommendation-map rehearsal. Fresh-verified census fordham-stage2-census-0003 is CAPABILITY_CENSUS_READY with 0 blockers/0 warnings and 162 decisions. This map resolves identity topology without duplicates, preserves unsupported reciprocal date/score conflicts as explicit unresolved provenance, applies affirmative frozen Fordham H/A/N where Research settled it, preserves concrete reciprocal H/A/N where Fordham remains researched-unknown, leaves two unsupported early HOME physical sites unresolved, preserves pre-MAAC regular-season game types, exposes the exact Control-Center-authorized NCAA non-appearance qualifier correction, and corrects the accomplishment regular-season title baseline 4->3 from official conference records. This request is read-only and grants no Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, recovery, or arbitrary tracked mutation authority."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
