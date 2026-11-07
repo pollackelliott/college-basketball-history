@@ -1,0 +1,57 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Bard College (formerly St. Stephen’s)"
+      ],
+      "authority_signature": "bardcollegeformerlyststephens",
+      "canonical_opponent_key": "bard",
+      "from_names": [
+        "Bard College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Bard College (formerly St. Stephen’s)"
+    },
+    {
+      "authority_names": [
+        "Pennsylvania Military College (later Widener)"
+      ],
+      "authority_signature": "pennsylvaniamilitarycollegelaterwidener",
+      "canonical_opponent_key": "pennsylvania-military-college",
+      "from_names": [
+        "Pennsylvania Military College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Pennsylvania Military College (later Widener)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "fordham",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 3,
+  "source_game_display_changes": [
+    {
+      "from_name": "Bard College",
+      "normalized_opponent_key": "bard",
+      "source_game_id": "FORDHAM-1925-26-001",
+      "to_name": "Bard College (formerly St. Stephen’s)"
+    },
+    {
+      "from_name": "Bard College",
+      "normalized_opponent_key": "bard",
+      "source_game_id": "FORDHAM-1926-27-002",
+      "to_name": "Bard College (formerly St. Stephen’s)"
+    },
+    {
+      "from_name": "Pennsylvania Military College",
+      "normalized_opponent_key": "pennsylvania-military-college",
+      "source_game_id": "FORDHAM-1970-71-016",
+      "to_name": "Pennsylvania Military College (later Widener)"
+    }
+  ],
+  "status": "PASS"
+}

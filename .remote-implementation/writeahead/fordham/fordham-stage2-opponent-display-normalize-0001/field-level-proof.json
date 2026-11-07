@@ -1,0 +1,26 @@
+{
+  "allowed_paths": [
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "bard",
+    "pennsylvania-military-college"
+  ],
+  "opponent_changed_row_count": 2,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "fordham",
+  "source_game_changed_ids": [
+    "FORDHAM-1925-26-001",
+    "FORDHAM-1926-27-002",
+    "FORDHAM-1970-71-016"
+  ],
+  "source_game_changed_keys": [
+    "bard",
+    "pennsylvania-military-college"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 3
+}

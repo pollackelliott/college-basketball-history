@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/fordham/opponents.csv": "52314a9ee4369996076ca4342e81e4d705c15825a79b26551cf0310d7ba07f7a",
+    "schools/fordham/source-games.csv": "2e1cbf7e3e96946fadb38134b24d1d0a8a4641341cce5c6be387622eea3d5c20"
+  },
+  "changed_paths": [
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv"
+  ],
+  "commit_message": "Normalize fordham historical opponent display representation",
+  "expected_blocker_keys": [
+    "bard",
+    "pennsylvania-military-college"
+  ],
+  "expected_target_predecessor_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "field_level_proof_sha256": "c3f0d38a9b072b08dcaea29916f2233bb3e224642d8da8f0c27ecd5c8a3875c1",
+  "global_lock_commit": "348e457801fe31e22232225eaa043316dddcb45b",
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "519edf542d106c93cd497b3cfeb02c2efa0fb957d77842a13895ada38dfff2b4",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "prepared_parent_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "prepared_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "repository_validation": "PASS",
+  "request_id": "fordham-stage2-opponent-display-normalize-0001",
+  "request_sha256": "53148c9b7cf386924b6f0b1609acd8dda6e6d9c46a6884b76b2d00ebccfcb4d6",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_drift_after": {
+    "baseline_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "integration_base_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+    "school_key": "fordham",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "integration_base_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+    "school_key": "fordham",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "770a4653bbf4fb01f372429a33e2e58902bfc39caebe4e3f3913e902f274e4e2",
+    "field-level-proof.json": "c3f0d38a9b072b08dcaea29916f2233bb3e224642d8da8f0c27ecd5c8a3875c1",
+    "integration-freeze.json": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+    "normalization-report.json": "519edf542d106c93cd497b3cfeb02c2efa0fb957d77842a13895ada38dfff2b4",
+    "semantic-drift-proof.json": "fc69d1aa6a7cd4254c295d07e8e237e3d78d23f6680f645d6e003d9afb32debb"
+  },
+  "source_game_normalized_name_row_count": 3,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/fordham/fordham-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "770a4653bbf4fb01f372429a33e2e58902bfc39caebe4e3f3913e902f274e4e2",
+  "target_branch": "data/fordham-onboarding"
+}

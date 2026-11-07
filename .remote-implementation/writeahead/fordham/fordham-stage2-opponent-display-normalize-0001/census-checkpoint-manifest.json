@@ -1,0 +1,90 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "0b0e4e89e8a1daa8718be5392eb148da4e1414f8c9e39df30b53393bc3158e88",
+    "plan.json": "b3362f1fafb245bc49c3d0acf6199cc1d805fa1faabe40dafd1c48ea24c5a6e5",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "8bdb0675abc306a63a4ad9dfc89109df4fb2b580d8b6ed28f6a7120748be4e51"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "32e2be09e5fff759daa035414dce05be9fb1c7e194301f79b0c5ff096f434438",
+    "plan.json": "aa7a9271c324180df13d0d944a1dfd67e1dbb0d1499c7bf1b6f0184eac439da4",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "c185db65bd8f9c22e09c22c9867160bb03c820403d932d987924e4f4f1ec911f"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 2,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 2,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "fordham"
+  ],
+  "phase0_protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "phase0_successor_path": ".remote-implementation/successors/fordham/fordham-phase0-0002/successor-manifest.json",
+  "phase0_successor_sha256": "539ed83ec1936d3c6c60f1e06021f3af428feea4a22b8f7a3d40396fca7eacb0",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/fordham/plan.json",
+    "review_path": ".onboarding/fordham/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "request_id": "fordham-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "PHASE0_SUCCESSOR",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "target_tree_sha": "710741f186979142338c20c034e0587af4b887d1",
+  "tracked_mutation_proof": {
+    "after_head_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+    "after_status": "",
+    "after_tree_sha": "710741f186979142338c20c034e0587af4b887d1",
+    "before_head_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+    "before_status": "",
+    "before_tree_sha": "710741f186979142338c20c034e0587af4b887d1",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "integration_base_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+    "school_key": "fordham",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "integration_base_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+    "school_key": "fordham",
+    "status": "PASS"
+  }
+}
