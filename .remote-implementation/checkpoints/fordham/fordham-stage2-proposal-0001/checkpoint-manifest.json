@@ -1,0 +1,142 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "355d64635287b02a87f778f9c969d29fb5b6a65a932b27fa8f9e5d107a748cdc",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "25bf1c5869429c5b839c0aaa51891a7f88a83e08b2a7cfc1f0a272f25d81c500",
+    "implementation-stage2-status.json": "237b6e43a515a455eb455dc510a970fb331a7d8085db7377069cd03375150867",
+    "plan.json": "474d02998d208508f53ccf97d64240377198343be9ee10d763d9259402768348",
+    "review.csv": "12e572d55aa68b2354afbf51dfc462c4fa750996eae151ad50e15ba7f0808804",
+    "review.md": "7dc6c23230169da58c7538f9a4465d6ef39854a127c532a1ee8bd72b39893ca6"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "25bf1c5869429c5b839c0aaa51891a7f88a83e08b2a7cfc1f0a272f25d81c500",
+    "implementation-stage2-status.json": "e814675808476bc628b1833a66461f8367d82d98b33351a3c520f4ac6683b6ff",
+    "plan.json": "103e078a1c61fe708be4e73179ec1d4955b8fcfce2fa786df9a544be39ae69f3",
+    "review.csv": "12e572d55aa68b2354afbf51dfc462c4fa750996eae151ad50e15ba7f0808804",
+    "review.md": "279ecd25a5a60853133f0862bb3cbb29e1d520e78451c109c875ea72e36b0246"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 57,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+    "runtime_decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+  "historical_game_type_challenge_path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
+  "historical_game_type_challenge_sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8",
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "fordham",
+    "--map",
+    "<MAP>",
+    "--historical-game-type-challenge",
+    "<HISTORICAL_CHALLENGE>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 52,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 2,
+      "conditional_discrepancy": 52,
+      "discrepancy": 83,
+      "identity": 22,
+      "postseason_classification": 1,
+      "publication": 1
+    },
+    "decision_count": 162,
+    "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+    "discrepancies_to_add": 83,
+    "existing_game_matches": 954,
+    "new_canonical_games": 1941,
+    "plan_path": ".onboarding/fordham/plan.json",
+    "review_path": ".onboarding/fordham/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "APPLY_POSTSEASON_CLASSIFICATION_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "FORCE_NEW": 4,
+      "KEEP_CANONICAL": 5,
+      "LEAVE_UNRESOLVED": 61,
+      "MATCH_CANONICAL:CBBG-0076317": 1,
+      "MATCH_CANONICAL:CBBG-0134677": 1,
+      "MATCH_CANONICAL:CBBG-0136831": 1,
+      "MATCH_CANONICAL:CBBG-0136861": 1,
+      "MATCH_CANONICAL:CBBG-0136868": 1,
+      "MATCH_CANONICAL:CBBG-0137765": 1,
+      "MATCH_CANONICAL:CBBG-0138038": 1,
+      "MATCH_CANONICAL:CBBG-0158347": 1,
+      "MATCH_CANONICAL:CBBG-0158391": 1,
+      "MATCH_CANONICAL:CBBG-0159949": 1,
+      "MATCH_CANONICAL:CBBG-0162161": 1,
+      "MATCH_CANONICAL:CBBG-0162174": 1,
+      "MATCH_CANONICAL:CBBG-0162266": 1,
+      "MATCH_CANONICAL:CBBG-0163822": 1,
+      "MATCH_CANONICAL:CBBG-0163835": 1,
+      "MATCH_CANONICAL:CBBG-0163948": 1,
+      "MATCH_CANONICAL:CBBG-0164265": 1,
+      "MATCH_CANONICAL:CBBG-0196390": 1,
+      "NOT_APPLICABLE": 31,
+      "USE_SOURCE": 40
+    },
+    "approved_plan_hash_preview": "355d64635287b02a87f778f9c969d29fb5b6a65a932b27fa8f9e5d107a748cdc",
+    "decision_count": 162,
+    "path": "/tmp/remote-stage2-proposal-map-upni2bvz/recommendation-map.json",
+    "sha256": "e892f0825e206c2150ae5917d3a373f5dd3d1bf43b5170f6a91c40a235d01b3a"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/fordham/fordham-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/fordham-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "e892f0825e206c2150ae5917d3a373f5dd3d1bf43b5170f6a91c40a235d01b3a",
+  "request_id": "fordham-stage2-proposal-0001",
+  "request_sha256": "49c2ff2774e8b2523f034ca902296afa7f4a842b3cd31c815c7be4c183d787d3",
+  "runtime_commit_sha": "92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2",
+  "runtime_decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "baf970f25fb5060af3e99fcd8b43a3c9cf66b6cc39ac0fcf1461966bb69d36c1",
+    "tools/onboard_school.py": "644207734b9f03791505d3b59ca8ebc982b6cbb41ee3809bf39af42402f9664f",
+    "tools/onboarding_hardening.py": "3fbb3231a2456480e5bc9091b9a38c039f3a2a12b66cccf08b473d29132589e5",
+    "tools/onboarding_plan.py": "cd958a727167a243b3f07ae121a5d9a6d3f7e28e8b0bf3f967cf977f3d0b2dab",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "baf970f25fb5060af3e99fcd8b43a3c9cf66b6cc39ac0fcf1461966bb69d36c1",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "site_diagnostic": {},
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/fordham/fordham-stage2-census-0003/checkpoint-manifest.json",
+  "stage2_authority_sha256": "1f07aff12546a375ace739a7352a65067b2610bf4515a9fcb159e018621d4456",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "target_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+  "tracked_mutation_proof": {
+    "after_head_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+    "after_status": "",
+    "after_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+    "before_head_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+    "before_status": "",
+    "before_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
