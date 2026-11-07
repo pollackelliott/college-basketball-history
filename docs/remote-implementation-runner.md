@@ -250,6 +250,12 @@ The target is exactly:
 data/<school_key>-onboarding
 ```
 
+The request's `history_scope.start_season` is a machine-format field, not the
+human-facing compact scope label. It must be one canonical consecutive-season string
+`YYYY-YYYY` (for example `1973-1974`, not `1973-74` or `1973-74+`).
+Request validation rejects malformed or non-consecutive values before Phase 0 enters
+transactional execution.
+
 Normal Phase 0 refuses a pre-existing target branch. It never silently overwrites or force-adopts an existing onboarding branch.
 
 The permanent Phase 0 command owns the commit/tree. Remote orchestration does not incrementally edit the target branch through GitHub file APIs. The Phase 0 path contract permits the target school's exact `program-top-level-scope.csv` row to change when—and only when—the frozen six-file package carries a different accepted scope expression; that target-row reconciliation is part of the school onboarding transaction, not a separate maintenance workflow.
@@ -267,7 +273,8 @@ protected main, exact existing onboarding predecessor, prior Phase 0 successor,
 current fresh-verified successor, superseded Integration Freeze/semantic hashes, new
 scope metadata, exact excluded source-game IDs/counts, and the Control Center-approved
 spec hash. No Stage 2, owner-gate, release, venue-maintenance, or recovery authority may
-be bundled into the request.
+be bundled into the request. Its `history_scope.start_season` uses the same canonical
+consecutive `YYYY-YYYY` validation as ordinary Phase 0.
 
 The runner acquires the global mutation lock, reauthenticates the original Research
 Freeze without rewriting it, derives the candidate package from the exact onboarding
