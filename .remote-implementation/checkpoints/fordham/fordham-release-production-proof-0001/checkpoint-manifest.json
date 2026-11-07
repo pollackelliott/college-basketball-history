@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "merge_parent_onboarding": "871f426010fef66c2a6ca982197b925100a99318",
+  "merge_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "f6dc0888db5dfd1a3d1e80340c20f5d3a99f2cf4ae621ea0a42a799f2d916819",
+  "owner_gate_2_verification_sha256": "e12c0fc61491c78ca8afa6e2866f3c54a211b2b40d3a3fcb3e2526a2db52e71e",
+  "pr_head_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "pr_number": 508,
+  "production_deployment_id": 7627381320,
+  "production_json_checked_count": 80,
+  "production_proof": true,
+  "production_proof_sha256": "b107b1750c7adfd6d30a0e16de1b2e021319cf824c1526138aafda14ec960347",
+  "protected_main_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
+  "request_id": "fordham-release-production-proof-0001",
+  "request_sha256": "6752995a85d9183c937dfe612ed4450e9f185bee00b5cd2166e1cfcba53ae805",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "status": "PRODUCTION_PROOF_PASS"
+}

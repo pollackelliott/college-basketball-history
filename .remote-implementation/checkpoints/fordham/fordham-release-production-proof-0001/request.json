@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "fordham",
+  "previous_control_state_commit": "44216f73651cced1bc41aebd5790611d2dddbc57",
+  "previous_control_state_sha256": "cbf8444727af717bb510f7dfac07b12575a55f462de4ceac6cede8c6cf72e738",
+  "expected_protected_main_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "pr_number": 508,
+  "merge_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fordham/fordham-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "f6dc0888db5dfd1a3d1e80340c20f5d3a99f2cf4ae621ea0a42a799f2d916819"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/fordham/fordham-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "e12c0fc61491c78ca8afa6e2866f3c54a211b2b40d3a3fcb3e2526a2db52e71e"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Fordham Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact Fordham Preview with “Approved. Proceed,” authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #508 head 871f426010fef66c2a6ca982197b925100a99318 against approved main 8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 9b009c0bed995a9d9af52c5908f0b6abec5532a7, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
+    "venue_identity_maintenance": false
+  }
+}
