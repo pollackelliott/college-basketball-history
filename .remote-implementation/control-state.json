@@ -402,18 +402,19 @@
     "fordham-stage2-proposal-0001",
     "fordham-stage2-current-main-refresh-0001",
     "fordham-stage2-current-main-refresh-0002",
-    "fordham-stage2-census-0005"
+    "fordham-stage2-census-0005",
+    "fordham-stage2-proposal-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fordham-stage2-proposal-0003",
+  "active_request_sha256": "5e3498abe343887bb2ff1a44999a67b7dd28416e0c10edaf08081d3f53935620",
+  "active_school_key": "fordham",
+  "active_target_branch": "data/fordham-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -820,8 +821,11 @@
     "target_branch": "data/fordham-onboarding",
     "target_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42408820803",
+  "lock_acquisition_request_commit": "91ece00bae2a162ff51c57268bda3a8207f944d7",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
