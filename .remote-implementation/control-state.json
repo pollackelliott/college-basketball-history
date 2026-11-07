@@ -406,18 +406,19 @@
     "fordham-stage2-proposal-0003",
     "fordham-stage2-gate1-fill-0001",
     "fordham-stage2-preseal-rehearsal-0001",
-    "fordham-stage2-gate1-seal-0001"
+    "fordham-stage2-gate1-seal-0001",
+    "fordham-stage2-sealed-apply-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42412355964:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fordham-stage2-sealed-apply-0001",
+  "active_request_sha256": "1b77d29e74984dbda9be9522d286bdba3e46f54e0574ccf375f37e2603ed2ae5",
+  "active_school_key": "fordham",
+  "active_target_branch": "data/fordham-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -839,8 +840,11 @@
     "target_branch": "data/fordham-onboarding",
     "target_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42412355964",
+  "lock_acquisition_request_commit": "94a8060eb69342c42d9aad5ab8f8c5b7789e64e8",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

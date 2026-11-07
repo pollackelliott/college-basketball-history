@@ -1,0 +1,55 @@
+{
+  "approved_plan_hash": "a81ffb4936f4b1a1a398abf8a0c852aa85188700b410e2cbbe939c9e1fd4c90a",
+  "approved_plan_sha256": "77d1d190247a1c2aa0cc62e9f8eaff068699f2c27bebcbbb22bfd3c96ef7b6b5",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": true,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from fordham-stage2-gate1-seal-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "7ef1eb5f62d6367f121aa18fc4bdec7c6842589d6b4ab732854612ffdb2bdba6",
+  "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+  "expected_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "filled_review_sha256": "cf9eab159bf2cf6d49682ba57fedd1b9fd12d253a8190d0efb2863afc355b125",
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "d9fcb4e04b4e11e5c6522faf9b05978524f57950d009eed072e643b0f86f8ea0",
+  "previous_control_state_commit": "6d4271357355ca27423cfb6dafc5b772d7303e7d",
+  "previous_control_state_sha256": "1ebef49a0ba0614509417b7c15d3e0758b78acbd3a8010c8b04190faf4c253df",
+  "recommendation_map_sha256": "62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e",
+  "request_id": "fordham-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fordham/fordham-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "bc6ef30770042288092fec0e3024c62a9ba62fb782787c8481132f9c13ab18ae"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/fordham/fordham-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "73402be58957bbff1bf7dc91299a63b096ffaee730771a48df7d83983fc7f62a"
+  },
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32"
+}
