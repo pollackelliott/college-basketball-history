@@ -852,6 +852,79 @@ def venue_chronology_conflicts(
     return conflicts
 
 
+def _exact_local_assignment_window(
+    local: dict[str, str],
+) -> tuple[dt.date, dt.date] | None:
+    """Return one exact inclusive assignment window or None.
+
+    Date-aware venue-name disambiguation is deliberately stricter than physical
+    chronology validation: both assignment endpoints must be exact dates so a
+    shared historical name cannot be resolved from partial or inferred time.
+    """
+    first = venue_date_bounds(local.get("first_assigned_game", "").strip())
+    last = venue_date_bounds(local.get("last_assigned_game", "").strip())
+    if (
+        first is None
+        or last is None
+        or first[0] != first[1]
+        or last[0] != last[1]
+        or first[0] > last[0]
+    ):
+        return None
+    return first[0], last[0]
+
+
+def _registered_name_window(
+    row: dict[str, str],
+) -> tuple[dt.date | None, dt.date | None] | None:
+    """Return conservative inclusive bounds for one shared venue-name row."""
+    start_text = row.get("valid_from", "").strip()
+    end_text = row.get("valid_to", "").strip()
+    start_bounds = venue_date_bounds(start_text) if start_text else None
+    end_bounds = venue_date_bounds(end_text) if end_text else None
+    if start_text and start_bounds is None:
+        return None
+    if end_text and end_bounds is None:
+        return None
+    start = start_bounds[0] if start_bounds else None
+    end = end_bounds[1] if end_bounds else None
+    if start is not None and end is not None and start > end:
+        return None
+    return start, end
+
+
+def _registered_name_covers_assignment(
+    row: dict[str, str],
+    assignment: tuple[dt.date, dt.date],
+) -> bool:
+    window = _registered_name_window(row)
+    if window is None:
+        return False
+    start, end = window
+    assignment_start, assignment_end = assignment
+    return (
+        (start is None or start <= assignment_start)
+        and (end is None or end >= assignment_end)
+    )
+
+
+def _registered_name_proves_nonoverlap(
+    row: dict[str, str],
+    assignment: tuple[dt.date, dt.date],
+) -> bool:
+    """Return True only for a fully bounded competing period outside assignment."""
+    if not row.get("valid_from", "").strip() or not row.get("valid_to", "").strip():
+        return False
+    window = _registered_name_window(row)
+    if window is None:
+        return False
+    start, end = window
+    if start is None or end is None:
+        return False
+    assignment_start, assignment_end = assignment
+    return end < assignment_start or start > assignment_end
+
+
 def incompatible_school_venue_key_rows(
     local: dict[str, str],
     key: str,
@@ -985,6 +1058,7 @@ def venue_reconciliation_inventory(
     ids_by_name: dict[str, set[str]] = {}
     registered_names_by_id: dict[str, set[str]] = {}
     historical_alias_names_by_id: dict[str, set[str]] = {}
+    name_rows_by_normalized: dict[str, list[dict[str, str]]] = {}
 
     for row in global_rows:
         normalized = normalize_name(row.get("display_name", ""))
@@ -1000,6 +1074,7 @@ def venue_reconciliation_inventory(
             continue
         ids_by_name.setdefault(normalized, set()).add(venue_id)
         registered_names_by_id.setdefault(venue_id, set()).add(normalized)
+        name_rows_by_normalized.setdefault(normalized, []).append(row)
         if row.get("name_type", "").strip() == "HISTORICAL_OR_ALIAS":
             historical_alias_names_by_id.setdefault(venue_id, set()).add(normalized)
 
@@ -1207,11 +1282,59 @@ def venue_reconciliation_inventory(
                 and global_by_id[venue_id].get("identity_status", "").strip()
                 == "RESEARCHED_SPLIT"
             ]
+
+            date_disambiguated_ids: list[str] = []
+            assignment_window = _exact_local_assignment_window(local)
+            if (
+                assignment_window is not None
+                and reason in {
+                    "REUSE_EXACT_KEY",
+                    "REUSE_RESEARCH_BASE_IDENTITY",
+                    "REUSE_EXPLICIT_RECONCILIATION",
+                    "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW",
+                }
+            ):
+                local_name_set = set(normalized_names)
+                chosen_period_rows = [
+                    row
+                    for normalized_name in local_name_set
+                    for row in name_rows_by_normalized.get(normalized_name, [])
+                    if row.get("venue_id", "").strip() == chosen_id
+                ]
+                chosen_period_matches = any(
+                    _registered_name_covers_assignment(row, assignment_window)
+                    for row in chosen_period_rows
+                )
+                if chosen_period_matches:
+                    for venue_id in conflicting_ids:
+                        competing_rows = [
+                            row
+                            for normalized_name in local_name_set
+                            for row in name_rows_by_normalized.get(normalized_name, [])
+                            if row.get("venue_id", "").strip() == venue_id
+                        ]
+                        if (
+                            competing_rows
+                            and all(
+                                _registered_name_proves_nonoverlap(
+                                    row, assignment_window
+                                )
+                                for row in competing_rows
+                            )
+                        ):
+                            date_disambiguated_ids.append(venue_id)
+
             unresolved_conflicting_ids = sorted(
-                set(conflicting_ids) - set(intentional_split_ids)
+                set(conflicting_ids)
+                - set(intentional_split_ids)
+                - set(date_disambiguated_ids)
             )
             if intentional_split_ids:
                 item["issues"].append("INTENTIONAL_RESEARCHED_SPLIT_NAME_OVERLAP")
+            if date_disambiguated_ids:
+                item["issues"].append(
+                    "DATE_BOUNDED_REGISTERED_NAME_DISAMBIGUATION"
+                )
 
             if chronology_conflicts:
                 item["classification"] = "STOP_AMBIGUOUS"
