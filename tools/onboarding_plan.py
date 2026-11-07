@@ -3792,11 +3792,15 @@ def build_plan(
                 )
                 decisions.extend(classification_review_decisions)
             elif qualifier_reviewable:
-                if legacy_historical_candidates or generic_postseason_candidates:
+                if legacy_historical_candidates:
                     raise WorkflowError(
                         "NCAA non-appearance qualifier challenge cannot be mixed with "
-                        "appearance-addition classification candidates in one mismatch"
+                        "an appearance-addition historical challenge in one mismatch"
                     )
+                # Generic POSTSEASON rows elsewhere in the package are not themselves
+                # a conflict here. They are not counted as NCAA appearances and cannot
+                # explain an appearance surplus, so leave them untouched while this
+                # exact qualifier challenge is presented at Gate 1.
                 qualifier_seasons = {
                     str(candidate["source"].get("season_label", "")).strip()
                     for candidate in qualifier_historical_candidates
