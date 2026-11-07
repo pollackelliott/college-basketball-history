@@ -411,17 +411,18 @@
     "fordham-release-readiness-0001",
     "fordham-release-preview-verify-0001",
     "fordham-release-gate2-approval-0001",
-    "fordham-release-production-proof-0001"
+    "fordham-release-production-proof-0001",
+    "saint-joseph-s-stage1-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "saint-joseph-s-stage1-0001",
+  "active_request_sha256": "c97d4da3c226b835c87f14e4f9d4e4411b869aa3b78f20330b5b39eb37ef8909",
+  "active_school_key": "saint-joseph-s",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -840,8 +841,11 @@
     "request_id": "fordham-release-production-proof-0001",
     "school_key": "fordham"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42427383176",
+  "lock_acquisition_request_commit": "21c4d44f172e8609de86074589afecc28f2e25a2",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }
