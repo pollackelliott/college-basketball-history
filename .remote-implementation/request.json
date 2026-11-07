@@ -1,53 +1,65 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-stage2-gate1-fill-0001",
+  "school_key": "fordham",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "b7628b8bc9021d6d56e2984293968d0dab8f08a3",
+  "previous_control_state_sha256": "11747aa0d693b0a32523e3bdf188774abb957c7630460618d431bc9923dcab5a",
+  "expected_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fordham/fordham-stage2-proposal-0003/checkpoint-manifest.json",
+    "sha256": "c8c9d95157fa47c4ed7a12e52d7f8c016c7cbce494bd1f221d020909ed5fcb2f"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/fordham/fordham-stage2-proposal-0003/stage2-proposal-rehearsal-verification.json",
+    "sha256": "eb830885e55036727fc901504667eb1b0e1d6083d13bfe6c1e567a78c93103c3"
+  },
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+  "recommendation_map_sha256": "62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e",
+  "approved_plan_hash_preview": "af78486758e226d8feb2f766e4a18de6f6db6e0fdc6bb8044ab7e19b6a6720f5",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly replied 'Approved. Proceed' immediately after the Fordham Implementation lane presented the exact consolidated fresh-verified OWNER_GATE_1_READY packet for fordham-stage2-proposal-0003, checkpoint SHA-256 c8c9d95157fa47c4ed7a12e52d7f8c016c7cbce494bd1f221d020909ed5fcb2f, 162-decision universe SHA-256 1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f, exact recommendation-map SHA-256 62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e, and approved-plan preview af78486758e226d8feb2f766e4a18de6f6db6e0fdc6bb8044ab7e19b6a6720f5. This approves only that exact Owner Gate 1 historical packet and the guarded fill, pre-seal, seal, sealed-apply and independent post-apply verification phase. It does not approve Preview, Owner Gate 2, merge, Production, recovery, unrelated mutation, or changed historical meaning.",
+    "proposal_checkpoint_sha256": "c8c9d95157fa47c4ed7a12e52d7f8c016c7cbce494bd1f221d020909ed5fcb2f",
+    "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+    "recommendation_map_sha256": "62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e",
+    "approved_plan_hash_preview": "af78486758e226d8feb2f766e4a18de6f6db6e0fdc6bb8044ab7e19b6a6720f5"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "fordham-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "fordham-stage2-gate1-seal-0001",
+    "apply_request_id": "fordham-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Fordham serialized Implementation — explicit exact Owner Gate 1 approval",
+    "authorization": "Owner explicitly approved the exact fresh-verified 162-decision Fordham Gate 1 packet and said Proceed. Authorize one guarded Stage 2 Gate 1 fill and its repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic seal, sealed apply and independent post-apply verification only; no release/Preview/Owner Gate 2/merge/Production or historical change."
+  },
   "authority": {
-    "owner_gate_1": false,
+    "owner_gate_1": true,
     "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "release": false,
-    "release_gate2_approval": false,
-    "release_preview_verify": false,
-    "release_production_proof": false,
-    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": true,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": true,
-    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from fordham-stage2-census-0005",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
-  "expected_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
-  "historical_game_type_challenge": {
-    "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
-    "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
-  },
-  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "a4bd2376592e8fa21a62462a96b8432454537f28",
-  "previous_control_state_sha256": "2b8ffb44fe00fbd76683cf7517a4323c8a0b3bba185583dbc28c8785a856a152",
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/fordham-stage2-current-main-refresh-0002/recommendation-map.json",
-    "sha256": "62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e"
-  },
-  "request_id": "fordham-stage2-proposal-0003",
-  "schema_version": 1,
-  "school_key": "fordham",
-  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
-  "stage2_authority": {
-    "path": ".remote-implementation/checkpoints/fordham/fordham-stage2-census-0005/checkpoint-manifest.json",
-    "sha256": "f007b23b5784c82f97c3d4b6dc61df8cce2ca88f1fbfc294379b9a116828e30f"
-  },
-  "target_branch": "data/fordham-onboarding",
-  "target_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32"
+  }
 }
