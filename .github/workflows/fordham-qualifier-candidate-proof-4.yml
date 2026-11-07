@@ -32,6 +32,17 @@ jobs:
             -o /tmp/fordham.tgz
           tar -xzf /tmp/fordham.tgz -C fordham --strip-components=1
 
+          git -C fordham init
+          git -C fordham remote add origin https://github.com/pollackelliott/college-basketball-history.git
+          git -C fordham -c protocol.version=2 fetch --filter=blob:none --depth=1 origin \
+            80f664d563f4963403c72b4a7ed2e7063ae2fac6
+          git -C fordham update-ref refs/heads/data/fordham-onboarding FETCH_HEAD
+          git -C fordham symbolic-ref HEAD refs/heads/data/fordham-onboarding
+          git -C fordham read-tree HEAD
+          test "$(git -C fordham rev-parse HEAD)" = "80f664d563f4963403c72b4a7ed2e7063ae2fac6"
+          test "$(git -C fordham branch --show-current)" = "data/fordham-onboarding"
+          test -z "$(git -C fordham status --porcelain --untracked-files=all)"
+
           curl -fsSL \
             https://raw.githubusercontent.com/pollackelliott/college-basketball-history/7f2968bc417ea93b68c3df733d749aaab84d7230/.remote-implementation/writeahead/fordham/fordham-stage2-opponent-display-normalize-0001/integration-freeze.json \
             -o fordham/.onboarding/fordham/integration-freeze.json
