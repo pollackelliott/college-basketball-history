@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "fordham-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "pr_number": 508,
+  "preview_deployment_id": 7626901326,
+  "preview_url": "https://college-basketball-history-434a5dn7u-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "fordham-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "target_branch": "data/fordham-onboarding"
+}
