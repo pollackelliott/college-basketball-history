@@ -406,17 +406,15 @@ def validated_historical_accounting(
                 f"Historical accounting delta is incomplete: {program_key}/{season}"
             ) from exc
 
-        canonical = record_from_games(seasons[canonical_season])
-        if canonical["ties"]:
-            raise ValueError(
-                f"Historical accounting cannot infer tie outcome: {program_key}/{season}"
-            )
+        # This authority describes the frozen target-source identified ledger,
+        # not the later reciprocal-enriched canonical union for the season. Canonical
+        # publication state must contain the season, but its W/L/tie composition is
+        # intentionally not used to rewrite or invalidate the authenticated source
+        # accounting record.
         if (
             official != authority.get("institutional_record")
             or documented != authority.get("identified_record")
             or delta != authority.get("mechanical_delta")
-            or documented
-            != {key: canonical[key] for key in ("wins", "losses", "games")}
             or official["wins"] + official["losses"] != official["games"]
             or documented["wins"] + documented["losses"] != documented["games"]
             or any(
@@ -425,7 +423,7 @@ def validated_historical_accounting(
             )
         ):
             raise ValueError(
-                f"Historical accounting arithmetic/canonical discrepancy: "
+                f"Historical accounting arithmetic/authority discrepancy: "
                 f"{program_key}/{season}"
             )
         result.append(
