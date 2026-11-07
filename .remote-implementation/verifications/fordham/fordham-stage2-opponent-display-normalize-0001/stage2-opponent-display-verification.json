@@ -1,0 +1,47 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "7219b18bb3603b15a986eab8f69602a04a2c666470181248dfb2c16f6f2d1c44",
+    "implementation-stage2-status.json": "cc30278125650e04e08ba628bc80e3916ef1282b62bdb7635e15adb6c4b22539",
+    "plan.json": "fd67a91f8ca3fe688fdd7d930ad7849237f42984530cd300e6b9a8894b673277",
+    "review.csv": "40efce5d2046ad3b31b1add0bbab639ec1431f2dc665d08f042eed8b022eaa97",
+    "review.md": "387e3f4f49368c39f63c8aec2671df02845e1247358e48f40119f9535a49270a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "7219b18bb3603b15a986eab8f69602a04a2c666470181248dfb2c16f6f2d1c44",
+    "implementation-stage2-status.json": "c815358d064169eebbb0b97ba84f41eaa831639aa50c283be7e324d69cfe3962",
+    "plan.json": "c9cc8e93a7fc7b3a1c55cb3e15d9f0ba02c317276ffefa61153155abf80cc427",
+    "review.csv": "40efce5d2046ad3b31b1add0bbab639ec1431f2dc665d08f042eed8b022eaa97",
+    "review.md": "b35dc7d0be2766ace983248d24c3c3b45818efd73d25dc45f7dac03f08b3b17e"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "changed_paths": [
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv"
+  ],
+  "decision_universe_sha256": "88761a4f37d22396c03380d3f91b79ee66becba3f7bf5d887117f2ed368e05b2",
+  "expected_blocker_keys": [
+    "bard",
+    "pennsylvania-military-college"
+  ],
+  "field_level_proof_sha256": "c3f0d38a9b072b08dcaea29916f2233bb3e224642d8da8f0c27ecd5c8a3875c1",
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "519edf542d106c93cd497b3cfeb02c2efa0fb957d77842a13895ada38dfff2b4",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "fordham-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/fordham-onboarding",
+  "target_predecessor_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "target_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+  "tracked_stage2_mutation": "NONE"
+}
