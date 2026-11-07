@@ -2131,7 +2131,7 @@
       "opponent_key": "fordham",
       "opponent_name": "Fordham",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
@@ -36805,7 +36805,7 @@
       "opponent_key": "fordham",
       "opponent_name": "Fordham",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 78,
       "opponent_score": 57,
       "score_known": true,
@@ -37580,7 +37580,7 @@
       "opponent_key": "fordham",
       "opponent_name": "Fordham",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 77,
       "opponent_score": 62,
       "score_known": true,

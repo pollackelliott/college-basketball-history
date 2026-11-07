@@ -2195,8 +2195,8 @@
       "state": "NY",
       "primary_hex": "#860038",
       "secondary_hex": "#FFFFFF",
-      "history_start_season": null,
-      "conference_regular_season_championships": 4,
+      "history_start_season": "1902-1903",
+      "conference_regular_season_championships": 3,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 4,
       "final_four_appearances": 0,
@@ -2204,7 +2204,7 @@
       "best_finish_key": "SWEET_SIXTEEN",
       "best_finish_year": 1971,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
