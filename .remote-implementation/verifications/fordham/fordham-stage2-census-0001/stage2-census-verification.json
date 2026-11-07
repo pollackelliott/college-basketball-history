@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "0b0e4e89e8a1daa8718be5392eb148da4e1414f8c9e39df30b53393bc3158e88",
+    "plan.json": "b3362f1fafb245bc49c3d0acf6199cc1d805fa1faabe40dafd1c48ea24c5a6e5",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "8bdb0675abc306a63a4ad9dfc89109df4fb2b580d8b6ed28f6a7120748be4e51"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "32e2be09e5fff759daa035414dce05be9fb1c7e194301f79b0c5ff096f434438",
+    "plan.json": "b8c9d3d6e5014dd343acc0538c5ec24aced93d56188dd316339252aa4f98dc55",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "64d0428502d113d48c3c17133c02d573f94eee4ae850c07ef9e361cff7c23ff1"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "fordham-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "target_tree_sha": "710741f186979142338c20c034e0587af4b887d1",
+  "tracked_stage2_mutation": "NONE"
+}
