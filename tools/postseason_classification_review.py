@@ -26,6 +26,8 @@ REVIEW_SITES = frozenset({
 })
 
 HISTORICAL_CHALLENGE_KIND = "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES"
+HISTORICAL_CHALLENGE_LEGACY_TYPE = "REGULAR_TO_NCAA_TOURNAMENT"
+HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE = "NCAA_NON_APPEARANCE_QUALIFIER"
 HISTORICAL_CHALLENGE_SOURCE_TYPE = "REGULAR_SEASON"
 HISTORICAL_CHALLENGE_TARGET_TYPE = "NCAA_TOURNAMENT"
 HISTORICAL_CHALLENGE_ACTION = "APPLY_POSTSEASON_CLASSIFICATION_PATCH"
@@ -84,21 +86,35 @@ def validate_historical_game_type_challenges(
     if not isinstance(rows, list) or not rows:
         raise ValueError("historical game-type challenge requires a nonempty challenges list")
 
-    required = {
+    legacy_required = {
         "source_game_id",
         "source_row_sha256",
         "expected_source_game_type",
         "proposed_source_game_type",
         "evidence_basis",
     }
+    qualifier_required = legacy_required | {
+        "challenge_type",
+        "expected_source_postseason_round",
+        "proposed_source_postseason_round",
+    }
     result: dict[str, dict[str, str]] = {}
     for raw in rows:
         if not isinstance(raw, dict):
             raise ValueError("historical game-type challenge rows must be objects")
-        if set(raw) != required:
+        raw_fields = set(raw)
+        if raw_fields == legacy_required:
+            challenge_type = HISTORICAL_CHALLENGE_LEGACY_TYPE
+        elif raw_fields == qualifier_required:
+            challenge_type = str(raw.get("challenge_type", "")).strip()
+            if challenge_type != HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE:
+                raise ValueError(
+                    "historical qualifier challenge_type is unsupported"
+                )
+        else:
             raise ValueError(
-                "historical game-type challenge rows require exactly: "
-                + ", ".join(sorted(required))
+                "historical game-type challenge rows require exactly either legacy fields "
+                "or the qualifier extension fields"
             )
         source_id = str(raw.get("source_game_id", "")).strip()
         if not source_id or source_id in result:
@@ -112,26 +128,59 @@ def validate_historical_game_type_challenges(
             )
         expected = str(raw.get("expected_source_game_type", "")).strip()
         proposed = str(raw.get("proposed_source_game_type", "")).strip()
-        if expected != HISTORICAL_CHALLENGE_SOURCE_TYPE:
-            raise ValueError(
-                f"{source_id}: challenge may only begin from "
-                f"{HISTORICAL_CHALLENGE_SOURCE_TYPE}"
-            )
-        if proposed != HISTORICAL_CHALLENGE_TARGET_TYPE:
-            raise ValueError(
-                f"{source_id}: challenge may only propose "
-                f"{HISTORICAL_CHALLENGE_TARGET_TYPE}"
-            )
+        if challenge_type == HISTORICAL_CHALLENGE_LEGACY_TYPE:
+            if expected != HISTORICAL_CHALLENGE_SOURCE_TYPE:
+                raise ValueError(
+                    f"{source_id}: challenge may only begin from "
+                    f"{HISTORICAL_CHALLENGE_SOURCE_TYPE}"
+                )
+            if proposed != HISTORICAL_CHALLENGE_TARGET_TYPE:
+                raise ValueError(
+                    f"{source_id}: challenge may only propose "
+                    f"{HISTORICAL_CHALLENGE_TARGET_TYPE}"
+                )
+        else:
+            if (
+                expected != "NCAA_TOURNAMENT"
+                or proposed != "NCAA_TOURNAMENT"
+            ):
+                raise ValueError(
+                    f"{source_id}: non-appearance qualifier challenge must remain "
+                    "broad NCAA_TOURNAMENT"
+                )
+            expected_round = str(
+                raw.get("expected_source_postseason_round", "")
+            ).strip()
+            proposed_round = str(
+                raw.get("proposed_source_postseason_round", "")
+            ).strip()
+            if not expected_round or expected_round not in NCAA_ROUNDS:
+                raise ValueError(
+                    f"{source_id}: non-appearance qualifier challenge requires "
+                    "one exact nonblank controlled NCAA round"
+                )
+            if proposed_round:
+                raise ValueError(
+                    f"{source_id}: non-appearance qualifier challenge must clear "
+                    "the controlled NCAA round"
+                )
         basis = str(raw.get("evidence_basis", "")).strip()
         if not basis:
             raise ValueError(f"{source_id}: challenge evidence_basis is required")
-        result[source_id] = {
+        parsed = {
             "source_game_id": source_id,
             "source_row_sha256": fingerprint,
             "expected_source_game_type": expected,
             "proposed_source_game_type": proposed,
+            "challenge_type": challenge_type,
             "evidence_basis": basis,
         }
+        if challenge_type == HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE:
+            parsed["expected_source_postseason_round"] = str(
+                raw["expected_source_postseason_round"]
+            ).strip()
+            parsed["proposed_source_postseason_round"] = ""
+        result[source_id] = parsed
     return result
 
 
@@ -157,6 +206,15 @@ def build_historical_game_type_challenge_review(
         raise ValueError(
             f"{source_id}: historical challenge source game type changed"
         )
+    challenge_type = challenge.get(
+        "challenge_type", HISTORICAL_CHALLENGE_LEGACY_TYPE
+    )
+    if challenge_type == HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE:
+        expected_round = challenge["expected_source_postseason_round"]
+        if source.get("curated_postseason_round", "").strip() != expected_round:
+            raise ValueError(
+                f"{source_id}: historical qualifier challenge source round changed"
+            )
     if candidate.get("planned_identity_status") != "NEW_GAME":
         raise ValueError(
             f"{source_id}: historical game-type challenge currently requires NEW_GAME identity"
@@ -167,6 +225,55 @@ def build_historical_game_type_challenge_review(
         raise ValueError(
             f"{source_id}: historical challenge canonical identity is incomplete"
         )
+
+    if challenge_type == HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE:
+        return {
+            "decision_id": "HISTORICAL-NCAA-QUALIFIER-" + source_id,
+            "category": "postseason_classification",
+            "source_game_id": source_id,
+            "canonical_game_id": "",
+            "season_label": source.get("season_label", "").strip(),
+            "source_game_date": source.get("game_date", "").strip(),
+            "canonical_game_date": source.get("game_date", "").strip(),
+            "matchup": (
+                f"{school_key} vs "
+                + source.get("normalized_opponent_key", "").strip()
+            ),
+            "field_name": "postseason_round",
+            "source_value": challenge["expected_source_postseason_round"],
+            "canonical_value": "",
+            "source_row_sha256": challenge["source_row_sha256"],
+            "frozen_source_row": dict(source),
+            "expected_canonical_identity": dict(expected_canonical_identity),
+            "planned_identity_status": "NEW_GAME",
+            "historical_ncaa_nonappearance_qualifier_challenge": True,
+            "source_game_type": "NCAA_TOURNAMENT",
+            "expected_source_postseason_round": challenge[
+                "expected_source_postseason_round"
+            ],
+            "proposed_game_type": "NCAA_TOURNAMENT",
+            "proposed_postseason_round": "",
+            "original_site_type": source.get("curated_site_type", "").strip(),
+            "relevant_evidence": (
+                challenge["evidence_basis"]
+                + " This is a post-freeze NCAA non-appearance qualifier challenge only; "
+                "Owner Gate 1 must explicitly approve clearing the controlled round "
+                "and applying the durable qualifier marker."
+            ),
+            "recommended_action": HISTORICAL_CHALLENGE_ACTION,
+            "allowed_actions": [HISTORICAL_CHALLENGE_ACTION],
+            "decision": "PENDING",
+            "resolution_basis": "",
+            "canonical_patch_json": "{}",
+            "source_patch_json": "{}",
+            "notes": (
+                "Exact frozen row and post-ingest canonical identity are bound. "
+                "curated_game_type must remain NCAA_TOURNAMENT; only the controlled "
+                "postseason round may be cleared and the durable non-appearance "
+                "qualifier marker appended. H/A/N, venue/location, score/result, "
+                "overtime, raw evidence, and unrelated source fields are unchanged."
+            ),
+        }
 
     return {
         "decision_id": "HISTORICAL-GAME-TYPE-" + source_id,
@@ -247,6 +354,48 @@ def mismatch_is_reviewable(
         expected_appearances - actual_appearances <= len(eligible_seasons)
         and expected_appearances >= expected_final_fours
     )
+
+
+def nonappearance_qualifier_mismatch_is_reviewable(
+    reference: dict[str, str],
+    derived: dict[str, Any],
+    candidate_rows: list[dict[str, Any]],
+    appearance_game_counts_by_season: dict[str, int],
+) -> bool:
+    """Return whether exact qualifier challenges can explain an appearance surplus.
+
+    Only seasons represented by one and only one currently appearance-counting
+    NCAA game are removable at this boundary. Final Four and championship totals
+    must already agree because a qualifier challenge may not erase earned bracket
+    accomplishments.
+    """
+    try:
+        expected_appearances = int(reference["ncaa_tournament_appearances"])
+        expected_final_fours = int(reference["final_four_appearances"])
+        expected_championships = int(reference["national_championships"])
+        actual_appearances = int(derived["ncaa_tournament_appearances"])
+        actual_final_fours = int(derived["final_four_appearances"])
+        actual_championships = int(derived["national_championships"])
+    except (KeyError, TypeError, ValueError):
+        return False
+    if (
+        expected_appearances >= actual_appearances
+        or expected_final_fours != actual_final_fours
+        or expected_championships != actual_championships
+    ):
+        return False
+    eligible_seasons = {
+        str(item["source"].get("season_label", "")).strip()
+        for item in candidate_rows
+        if item.get("historical_challenge_type")
+        == HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE
+        and str(item["source"].get("season_label", "")).strip()
+        and appearance_game_counts_by_season.get(
+            str(item["source"].get("season_label", "")).strip(), 0
+        )
+        == 1
+    }
+    return actual_appearances - expected_appearances <= len(eligible_seasons)
 
 
 def build_review_rows(

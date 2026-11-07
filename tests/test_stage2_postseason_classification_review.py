@@ -18,12 +18,15 @@ from onboarding_plan import (  # noqa: E402
 )
 from postseason_classification_review import (  # noqa: E402
     HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS,
+    HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE,
     build_historical_game_type_challenge_review,
     build_review_rows,
     mismatch_is_reviewable,
+    nonappearance_qualifier_mismatch_is_reviewable,
     row_fingerprint,
     validate_historical_game_type_challenges,
 )
+from program_history import NCAA_NON_APPEARANCE_QUALIFIER_MARKER  # noqa: E402
 
 
 def write_csv(path, fields, rows):
@@ -259,6 +262,262 @@ class HistoricalGameTypeChallengeTests(unittest.TestCase):
         for field, value in frozen.items():
             if field != "curated_game_type":
                 self.assertEqual(final[field], value, field)
+
+
+class HistoricalNonappearanceQualifierChallengeTests(unittest.TestCase):
+    def qualifier_source(self):
+        row = sample_source()
+        row.update({
+            "source_game_id": "FORDHAM-1990-91-031",
+            "season_label": "1990-1991",
+            "game_date": "1991-03-06",
+            "normalized_opponent_key": "saint-francis-pa",
+            "source_opponent_label": "St. Francis (NCP)",
+            "team_score": "64",
+            "opponent_score": "70",
+            "played_result": "L",
+            "curated_site_type": "OPPONENT_HOME",
+            "curated_game_type": "NCAA_TOURNAMENT",
+            "curated_postseason_round": "Play-in",
+            "normalization_status": "RESEARCH_ACCEPTED",
+            "notes": (
+                "Stage 6 NCAA-round review: Fordham institutional history explicitly "
+                "identifies the Saint Francis game as an NCAA Play-In game."
+            ),
+            "raw_text": "Mar. 6 at St. Francis (NCP) 64 70 L",
+        })
+        return row
+
+    def challenge(self, source, expected_round="Play-in", proposed_round=""):
+        return {
+            "challenge_type": HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE,
+            "source_game_id": source["source_game_id"],
+            "source_row_sha256": row_fingerprint(source),
+            "expected_source_game_type": "NCAA_TOURNAMENT",
+            "proposed_source_game_type": "NCAA_TOURNAMENT",
+            "expected_source_postseason_round": expected_round,
+            "proposed_source_postseason_round": proposed_round,
+            "evidence_basis": (
+                "Fordham institutional history says the Patriot League lacked an "
+                "automatic bid, Fordham lost this NCAA-administered play-in, then "
+                "awaited an at-large bid before entering the NIT."
+            ),
+        }
+
+    def expected_identity(self):
+        return {
+            field: "" for field in HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+        }
+
+    def document(self, source, **changes):
+        challenge = self.challenge(source)
+        challenge.update(changes)
+        return {
+            "schema_version": 1,
+            "kind": "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES",
+            "school_key": "school",
+            "authority_basis": "Control Center Issue #502.",
+            "challenges": [challenge],
+        }
+
+    def test_exact_fordham_1991_qualifier_topology_is_owner_reviewable(self):
+        source = self.qualifier_source()
+        parsed = validate_historical_game_type_challenges(
+            self.document(source), "school"
+        )
+        challenge = parsed[source["source_game_id"]]
+        self.assertEqual(
+            challenge["challenge_type"],
+            HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE,
+        )
+        decision = build_historical_game_type_challenge_review(
+            "school",
+            {"source": source, "planned_identity_status": "NEW_GAME"},
+            challenge,
+            self.expected_identity(),
+        )
+        self.assertTrue(
+            decision["historical_ncaa_nonappearance_qualifier_challenge"]
+        )
+        self.assertEqual(decision["source_value"], "Play-in")
+        self.assertEqual(decision["decision"], "PENDING")
+        self.assertEqual(
+            decision["allowed_actions"],
+            ["APPLY_POSTSEASON_CLASSIFICATION_PATCH"],
+        )
+
+        reference = {
+            "ncaa_tournament_appearances": "4",
+            "final_four_appearances": "0",
+            "national_championships": "0",
+        }
+        derived = {
+            "ncaa_tournament_appearances": 5,
+            "final_four_appearances": 0,
+            "national_championships": 0,
+        }
+        candidate = {
+            "source": source,
+            "historical_challenge_type":
+                HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE,
+        }
+        self.assertTrue(
+            nonappearance_qualifier_mismatch_is_reviewable(
+                reference,
+                derived,
+                [candidate],
+                {"1990-1991": 1},
+            )
+        )
+        self.assertFalse(
+            nonappearance_qualifier_mismatch_is_reviewable(
+                reference,
+                derived,
+                [candidate],
+                {"1990-1991": 2},
+            )
+        )
+
+    def test_qualifier_challenge_fails_closed_on_wrong_or_nonblank_round(self):
+        source = self.qualifier_source()
+        with self.assertRaisesRegex(ValueError, "must clear"):
+            validate_historical_game_type_challenges(
+                self.document(
+                    source,
+                    proposed_source_postseason_round="R64",
+                ),
+                "school",
+            )
+
+        parsed = validate_historical_game_type_challenges(
+            self.document(
+                source,
+                expected_source_postseason_round="R64",
+            ),
+            "school",
+        )
+        with self.assertRaisesRegex(ValueError, "source round changed"):
+            build_historical_game_type_challenge_review(
+                "school",
+                {"source": source, "planned_identity_status": "NEW_GAME"},
+                parsed[source["source_game_id"]],
+                self.expected_identity(),
+            )
+
+    def test_qualifier_pre_ingest_changes_only_round_and_durable_marker(self):
+        source = self.qualifier_source()
+        frozen = dict(source)
+        parsed = validate_historical_game_type_challenges(
+            self.document(source), "school"
+        )
+        decision = build_historical_game_type_challenge_review(
+            "school",
+            {"source": source, "planned_identity_status": "NEW_GAME"},
+            parsed[source["source_game_id"]],
+            self.expected_identity(),
+        )
+        decision.update({
+            "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+            "resolution_basis": "Owner Gate 1 approved exact institutional evidence.",
+            "source_patch": {
+                "curated_game_type": "NCAA_TOURNAMENT",
+                "curated_postseason_round": "",
+            },
+            "canonical_patch": {},
+        })
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            source_path = make_source_repo(repo, source)
+            counts = apply_pre_ingest_source_patches(
+                repo, {"school_key": "school", "decisions": [decision]}
+            )
+            final = read_csv(source_path)[0]
+
+        self.assertEqual(
+            counts["historical_ncaa_nonappearance_qualifier_challenges_applied"],
+            1,
+        )
+        self.assertEqual(final["curated_game_type"], "NCAA_TOURNAMENT")
+        self.assertEqual(final["curated_postseason_round"], "")
+        self.assertIn(NCAA_NON_APPEARANCE_QUALIFIER_MARKER, final["notes"])
+        for field, value in frozen.items():
+            if field not in {"curated_postseason_round", "notes"}:
+                self.assertEqual(final[field], value, field)
+
+
+    def test_qualifier_gate1_seal_accepts_only_exact_patch(self):
+        source = self.qualifier_source()
+        parsed = validate_historical_game_type_challenges(
+            self.document(source), "school"
+        )
+        decision = build_historical_game_type_challenge_review(
+            "school",
+            {"source": source, "planned_identity_status": "NEW_GAME"},
+            parsed[source["source_game_id"]],
+            self.expected_identity(),
+        )
+        plan = {
+            "school_key": "school",
+            "blockers": [],
+            "input_fingerprint": {"sha256": "frozen"},
+            "decisions": [decision],
+        }
+        exact_patch = {
+            "curated_game_type": "NCAA_TOURNAMENT",
+            "curated_postseason_round": "",
+        }
+
+        for source_patch, expected_error in (
+            (exact_patch, None),
+            (
+                {
+                    **exact_patch,
+                    "curated_site_type": "NEUTRAL",
+                },
+                "may only preserve NCAA_TOURNAMENT",
+            ),
+        ):
+            with self.subTest(source_patch=source_patch):
+                with tempfile.TemporaryDirectory() as tmp:
+                    repo = Path(tmp)
+                    plan_path = repo / "plan.json"
+                    plan_path.write_text(json.dumps(plan), encoding="utf-8")
+                    review = {
+                        **decision,
+                        "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+                        "resolution_basis":
+                            "Owner Gate 1 approved exact qualifier evidence.",
+                        "source_patch_json": json.dumps(source_patch),
+                        "canonical_patch_json": "{}",
+                    }
+                    review_path = repo / "review.csv"
+                    write_csv(review_path, list(REVIEW_COLUMNS), [
+                        {field: review.get(field, "") for field in REVIEW_COLUMNS}
+                    ])
+                    with patch(
+                        "onboarding_plan.input_fingerprint",
+                        return_value={"sha256": "frozen"},
+                    ):
+                        if expected_error:
+                            with self.assertRaisesRegex(
+                                WorkflowError, expected_error
+                            ):
+                                approve_plan(
+                                    repo, plan_path, review_path, "owner"
+                                )
+                        else:
+                            sealed, _ = approve_plan(
+                                repo, plan_path, review_path, "owner"
+                            )
+                            sealed_decision = sealed["decisions"][0]
+                            self.assertTrue(
+                                sealed_decision[
+                                    "historical_ncaa_nonappearance_qualifier_challenge"
+                                ]
+                            )
+                            self.assertEqual(
+                                sealed_decision["source_patch"], exact_patch
+                            )
 
 
 class SealedPreIngestTests(unittest.TestCase):
@@ -591,6 +850,116 @@ class PostIngestCanonicalTests(unittest.TestCase):
                 read_csv(repo / "data/canonical/games.csv")[0]["game_type"],
                 "NCAA_TOURNAMENT",
             )
+
+    def test_historical_qualifier_challenge_preserves_identity_and_marker(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            frozen = sample_source()
+            frozen.update({
+                "source_game_id": "FORDHAM-1990-91-031",
+                "season_label": "1990-1991",
+                "game_date": "1991-03-06",
+                "normalized_opponent_key": "saint-francis-pa",
+                "team_score": "64",
+                "opponent_score": "70",
+                "played_result": "L",
+                "curated_game_type": "NCAA_TOURNAMENT",
+                "curated_postseason_round": "Play-in",
+                "curated_site_type": "OPPONENT_HOME",
+                "normalization_status": "RESEARCH_ACCEPTED",
+            })
+            applied = dict(frozen)
+            applied["curated_postseason_round"] = ""
+            applied["notes"] = NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+            make_source_repo(repo, applied)
+            assertion = dict(applied)
+            assertion.update({
+                "assertion_id": "ASRT-TEST-0001",
+                "canonical_game_id": "CBBG-0000001",
+                "match_status": "CONFIDENT",
+                "match_method": "NEW_GAME",
+            })
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ingest_school.ASSERTION_FIELDS, [assertion],
+            )
+            canonical = {field: "" for field in ingest_school.CANONICAL_FIELDS}
+            canonical.update({
+                "canonical_game_id": "CBBG-0000001",
+                "season_label": frozen["season_label"],
+                "game_date": frozen["game_date"],
+                "date_precision": "EXACT",
+                "team_a_key": "purdue",
+                "team_b_key": "school",
+                "team_a_score": "60",
+                "team_b_score": "75",
+                "result_winner_team_key": "school",
+                "overtime_periods": "",
+                "site_type": "OPPONENT_HOME",
+                "designated_home_team_key": "",
+                "venue_key": "",
+                "venue_id": "",
+                "site_city": "",
+                "site_state": "",
+                "game_type": "NCAA_TOURNAMENT",
+                "postseason_round": "",
+                "notes": NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+                "canonical_status": "PROVISIONAL",
+            })
+            write_csv(
+                repo / "data/canonical/games.csv",
+                ingest_school.CANONICAL_FIELDS, [canonical],
+            )
+            write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                ingest_school.DISCREPANCY_FIELDS, [],
+            )
+            identity = {
+                field: canonical.get(field, "")
+                for field in HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+            }
+            approved = {
+                "school_key": "school",
+                "approved_plan_hash": "a" * 64,
+                "decisions": [{
+                    "decision_id":
+                        "HISTORICAL-NCAA-QUALIFIER-FORDHAM-1990-91-031",
+                    "category": "postseason_classification",
+                    "source_game_id": "FORDHAM-1990-91-031",
+                    "canonical_game_id": "",
+                    "season_label": frozen["season_label"],
+                    "source_game_date": frozen["game_date"],
+                    "source_value": "Play-in",
+                    "source_game_type": "NCAA_TOURNAMENT",
+                    "expected_source_postseason_round": "Play-in",
+                    "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+                    "resolution_basis":
+                        "Owner-approved exact institutional qualifier evidence.",
+                    "source_patch": {
+                        "curated_game_type": "NCAA_TOURNAMENT",
+                        "curated_postseason_round": "",
+                    },
+                    "canonical_patch": {},
+                    "source_row_sha256": row_fingerprint(frozen),
+                    "frozen_source_row": dict(frozen),
+                    "expected_canonical_identity": dict(identity),
+                    "planned_identity_status": "NEW_GAME",
+                    "historical_ncaa_nonappearance_qualifier_challenge": True,
+                    "proposed_game_type": "NCAA_TOURNAMENT",
+                    "proposed_postseason_round": "",
+                }],
+            }
+            result = apply_reconciliation_decisions(repo, approved)
+            self.assertEqual(result.get("postseason_canonical_types_enriched", 0), 0)
+            final = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(final["game_type"], "NCAA_TOURNAMENT")
+            self.assertEqual(final["postseason_round"], "")
+            self.assertIn(NCAA_NON_APPEARANCE_QUALIFIER_MARKER, final["notes"])
+            final_identity = {
+                field: final.get(field, "")
+                for field in HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+            }
+            self.assertEqual(final_identity, identity)
 
     def test_historical_challenge_rejects_identity_drift_and_inferred_round(self):
         for mutation, pattern in (
