@@ -138,7 +138,11 @@ jobs:
           assert status["status"] == "CAPABILITY_CENSUS_READY", status
           assert status["semantic_drift"] == {"status": "PASS", "change_count": 0}, status
           assert status["preflight"]["blocker_count"] == 0, status
-          assert census["status"] == "CAPABILITY_CENSUS_READY", census
+          assert census["status"] == "CENSUS_CAPTURED", census
+          assert not any(
+              group.get("topology") == "preflight_blockers"
+              for group in census.get("topology_groups", [])
+          ), census
 
           qualifier = [
               d for d in plan["decisions"]
