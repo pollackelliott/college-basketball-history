@@ -757,6 +757,99 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
     return expected
 
 
+_LEGACY_LITERAL_SCORE_RESULT_RE = re.compile(
+    r"(?<!\d)(?P<a>\d{1,3})\s+(?P<b>\d{1,3})\s+(?P<result>[WLT])\s*$",
+    re.IGNORECASE,
+)
+_LEGACY_LITERAL_SCORE_PAIR_RE = re.compile(
+    r"(?<!\d)(?P<a>\d{1,3})\s+(?P<b>\d{1,3})(?!\d)"
+)
+
+
+def _score_result_consistent(team: int, opponent: int, result: str) -> bool:
+    result = (result or "").strip().upper()
+    if result == "W":
+        return team > opponent
+    if result == "L":
+        return team < opponent
+    if result == "T":
+        return team == opponent
+    return False
+
+
+def _legacy_score_orientation_equivalent(
+    parent_row: dict[str, str],
+    package_row: dict[str, str],
+) -> bool:
+    """Recognize only the accepted legacy score-orientation translation.
+
+    The parent may carry an accepted score pair in legacy positional order.
+    Stage 4 may orient that same unordered pair into package team/opponent
+    columns only when the parent itself proves the older topology and preserves
+    one unambiguous terminal literal pair plus the same accepted W/L result.
+    Current-schema, ambiguous, changed-pair, or result-changing cases remain
+    strict semantic mismatches.
+    """
+
+    parent_team = _first_parent_value(
+        parent_row, "team_score", "wagner_points", "dayton_score"
+    )
+    parent_opponent = _first_parent_value(
+        parent_row, "opponent_score", "opponent_points"
+    )
+    parent_result = _first_parent_value(
+        parent_row, "played_result", "on_court_result", "source_result", "result"
+    ).upper()
+    package_team = package_row.get("team_score", "").strip()
+    package_opponent = package_row.get("opponent_score", "").strip()
+    package_result = package_row.get("played_result", "").strip().upper()
+
+    if not all(
+        value.isdigit()
+        for value in (parent_team, parent_opponent, package_team, package_opponent)
+    ):
+        return False
+    if parent_result not in {"W", "L"} or package_result != parent_result:
+        return False
+    if _score_result_consistent(
+        int(parent_team), int(parent_opponent), parent_result
+    ):
+        return False
+
+    legacy_topology = (
+        bool(parent_row.get("research_game_id", "").strip())
+        and bool(parent_row.get("season", "").strip())
+        and not parent_row.get("season_label", "").strip()
+        and not parent_row.get("source_program_key", "").strip()
+    )
+    if not legacy_topology:
+        return False
+
+    raw_text = first_literal(parent_row, "raw_text", "source_raw_text")
+    literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
+    literal_pairs = [
+        (int(match.group("a")), int(match.group("b")))
+        for match in _LEGACY_LITERAL_SCORE_PAIR_RE.finditer(raw_text)
+    ]
+    parent_pair = sorted((int(parent_team), int(parent_opponent)))
+    package_pair = sorted((int(package_team), int(package_opponent)))
+    if (
+        literal is None
+        or literal.group("result").upper() != parent_result
+        or sorted(
+            (int(literal.group("a")), int(literal.group("b")))
+        ) != parent_pair
+        or len(literal_pairs) != 1
+        or sorted(literal_pairs[0]) != parent_pair
+        or package_pair != parent_pair
+    ):
+        return False
+
+    return _score_result_consistent(
+        int(package_team), int(package_opponent), package_result
+    )
+
+
 def _normalized_venue_name(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
 
@@ -920,6 +1013,13 @@ def compare_parent_semantics(
                 package_value = actual[field]
 
             if expected[field] != package_value:
+                if (
+                    field in {"team_score", "opponent_score"}
+                    and _legacy_score_orientation_equivalent(
+                        parent[game_id], actual_row
+                    )
+                ):
+                    continue
                 mismatches.append(
                     {
                         "source_game_id": game_id,
