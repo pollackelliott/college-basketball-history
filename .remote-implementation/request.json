@@ -22,10 +22,10 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from fordham-stage2-current-main-refresh-0002",
-    "origin": "repository-owned Stage 2 phase continuation"
+    "authorization": "Owner explicitly authorized one atomic control request plus exact protected-main workflow synchronization, superseding unexecuted fordham-stage2-census-0004. Preserve the existing fresh-verified refresh successor, 162-decision universe, recommendation map, NCAA qualifier challenge, frozen H/A/N, and Owner Gate 1 boundary. Do not replay prior stages or cross Owner Gate 1.",
+    "origin": "Fordham Stage 2 continuation — Control Center-authorized fresh census after generic scheduler repair PR #507"
   },
-  "expected_protected_main_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "expected_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
   "historical_game_type_challenge": {
     "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
     "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
@@ -38,22 +38,22 @@
     "sha256": "539ed83ec1936d3c6c60f1e06021f3af428feea4a22b8f7a3d40396fca7eacb0"
   },
   "phase_continuation": {
-    "census_request_id": "fordham-stage2-census-0004",
+    "census_request_id": "fordham-stage2-census-0005",
     "expected_decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
     "historical_game_type_challenge": {
       "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
       "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
     },
     "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "fordham-stage2-proposal-0002",
+    "proposal_request_id": "fordham-stage2-proposal-0003",
     "recommendation_map": {
       "path": ".remote-implementation/requests/fordham-stage2-current-main-refresh-0002/recommendation-map.json",
       "sha256": "62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e"
     }
   },
-  "previous_control_state_commit": "73c980cc96352d5a2b424f5df82c61662864e9d5",
+  "previous_control_state_commit": "1d0f930403531cd603ebdd3495c684d55b5c106c",
   "previous_control_state_sha256": "79a576537f49fb3791d34ac4d82e1a668da2622b90cca3eefc3b7ce9684f3253",
-  "request_id": "fordham-stage2-census-0004",
+  "request_id": "fordham-stage2-census-0005",
   "schema_version": 1,
   "school_key": "fordham",
   "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
