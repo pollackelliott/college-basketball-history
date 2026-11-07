@@ -445,6 +445,81 @@ class HistoricalNonappearanceQualifierChallengeTests(unittest.TestCase):
                 self.assertEqual(final[field], value, field)
 
 
+    def test_qualifier_gate1_seal_accepts_only_exact_patch(self):
+        source = self.qualifier_source()
+        parsed = validate_historical_game_type_challenges(
+            self.document(source), "school"
+        )
+        decision = build_historical_game_type_challenge_review(
+            "school",
+            {"source": source, "planned_identity_status": "NEW_GAME"},
+            parsed[source["source_game_id"]],
+            self.expected_identity(),
+        )
+        plan = {
+            "school_key": "school",
+            "blockers": [],
+            "input_fingerprint": {"sha256": "frozen"},
+            "decisions": [decision],
+        }
+        exact_patch = {
+            "curated_game_type": "NCAA_TOURNAMENT",
+            "curated_postseason_round": "",
+        }
+
+        for source_patch, expected_error in (
+            (exact_patch, None),
+            (
+                {
+                    **exact_patch,
+                    "curated_site_type": "NEUTRAL",
+                },
+                "may only preserve NCAA_TOURNAMENT",
+            ),
+        ):
+            with self.subTest(source_patch=source_patch):
+                with tempfile.TemporaryDirectory() as tmp:
+                    repo = Path(tmp)
+                    plan_path = repo / "plan.json"
+                    plan_path.write_text(json.dumps(plan), encoding="utf-8")
+                    review = {
+                        **decision,
+                        "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+                        "resolution_basis":
+                            "Owner Gate 1 approved exact qualifier evidence.",
+                        "source_patch_json": json.dumps(source_patch),
+                        "canonical_patch_json": "{}",
+                    }
+                    review_path = repo / "review.csv"
+                    write_csv(review_path, list(REVIEW_COLUMNS), [
+                        {field: review.get(field, "") for field in REVIEW_COLUMNS}
+                    ])
+                    with patch(
+                        "onboarding_plan.input_fingerprint",
+                        return_value={"sha256": "frozen"},
+                    ):
+                        if expected_error:
+                            with self.assertRaisesRegex(
+                                WorkflowError, expected_error
+                            ):
+                                approve_plan(
+                                    repo, plan_path, review_path, "owner"
+                                )
+                        else:
+                            sealed, _ = approve_plan(
+                                repo, plan_path, review_path, "owner"
+                            )
+                            sealed_decision = sealed["decisions"][0]
+                            self.assertTrue(
+                                sealed_decision[
+                                    "historical_ncaa_nonappearance_qualifier_challenge"
+                                ]
+                            )
+                            self.assertEqual(
+                                sealed_decision["source_patch"], exact_patch
+                            )
+
+
 class SealedPreIngestTests(unittest.TestCase):
     def run_apply(self, **changes):
         with tempfile.TemporaryDirectory() as tmp:
