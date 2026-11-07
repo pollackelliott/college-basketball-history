@@ -804,11 +804,11 @@
   "current_sequence": 382,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "fordham-stage2-current-main-refresh-0002",
     "school_key": "fordham",
     "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
