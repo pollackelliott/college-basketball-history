@@ -1,7 +1,9 @@
 import json
+import os
 import sys
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -112,6 +114,112 @@ class ContinuationPayloadBindingTests(unittest.TestCase):
             spec["recommendation_map"],
             "RECOMMENDATION_MAP",
         )
+
+
+class ContinuationDispatchTests(unittest.TestCase):
+    def test_actions_authored_queue_explicitly_dispatches_control_workflow(self):
+        completed = SimpleNamespace(returncode=0, stdout="")
+        with patch.dict(
+            os.environ,
+            {
+                "GITHUB_ACTIONS": "true",
+                "GITHUB_REPOSITORY": "owner/repo",
+                "GH_TOKEN": "token",
+            },
+            clear=True,
+        ), patch.object(continuation, "run", return_value=completed) as runner:
+            continuation._dispatch_child_workflow_if_actions("a" * 40)
+
+        runner.assert_called_once_with(
+            [
+                "gh",
+                "api",
+                "--method",
+                "POST",
+                "repos/owner/repo/actions/workflows/remote-implementation.yml/dispatches",
+                "-f",
+                "ref=control/remote-implementation",
+            ],
+            check=False,
+        )
+
+    def test_external_queue_relies_on_push_and_does_not_dispatch(self):
+        with patch.dict(os.environ, {}, clear=True), patch.object(
+            continuation, "run"
+        ) as runner:
+            continuation._dispatch_child_workflow_if_actions("a" * 40)
+        runner.assert_not_called()
+
+    def test_actions_dispatch_failure_is_fail_closed(self):
+        completed = SimpleNamespace(returncode=1, stdout="dispatch denied")
+        with patch.dict(
+            os.environ,
+            {
+                "GITHUB_ACTIONS": "true",
+                "GITHUB_REPOSITORY": "owner/repo",
+                "GH_TOKEN": "token",
+            },
+            clear=True,
+        ), patch.object(continuation, "run", return_value=completed):
+            with self.assertRaisesRegex(
+                Stop, "STAGE2_CONTINUATION_WORKFLOW_DISPATCH_FAILED"
+            ):
+                continuation._dispatch_child_workflow_if_actions("a" * 40)
+
+    def test_queue_dispatches_only_after_successful_control_push(self):
+        request = {
+            "request_id": "school-stage2-census-next",
+            "operation": OP_STAGE2_CENSUS,
+        }
+        with patch.object(
+            continuation, "_already_queued", return_value=False
+        ), patch.object(
+            continuation, "validate_request"
+        ), patch.object(
+            continuation, "write_json"
+        ), patch.object(
+            continuation,
+            "git",
+            return_value=SimpleNamespace(stdout="1" * 40 + "\n"),
+        ), patch.object(
+            continuation, "push_control", return_value="2" * 40
+        ) as push, patch.object(
+            continuation, "_dispatch_child_workflow_if_actions"
+        ) as dispatch:
+            result = continuation._queue_request(
+                request,
+                expected_control_head="1" * 40,
+                state={},
+            )
+
+        self.assertEqual(result, "2" * 40)
+        push.assert_called_once_with("1" * 40)
+        dispatch.assert_called_once_with("2" * 40)
+
+    def test_already_queued_request_does_not_dispatch_again(self):
+        with patch.object(
+            continuation, "_already_queued", return_value=True
+        ), patch.object(
+            continuation, "_dispatch_child_workflow_if_actions"
+        ) as dispatch:
+            result = continuation._queue_request(
+                {
+                    "request_id": "school-stage2-census-next",
+                    "operation": OP_STAGE2_CENSUS,
+                },
+                expected_control_head="1" * 40,
+                state={},
+            )
+        self.assertEqual(result, "1" * 40)
+        dispatch.assert_not_called()
+
+    def test_control_workflow_exposes_dispatch_and_actions_write(self):
+        workflow = (
+            ROOT / ".github/workflows/remote-implementation.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("actions: write", workflow)
+        self.assertIn("github.event_name == 'workflow_dispatch'", workflow)
 
 
 class QueueAfterRefreshTests(unittest.TestCase):
