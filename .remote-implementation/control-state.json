@@ -410,7 +410,7 @@
     "fordham-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
-  "active_lock_commit": null,
+  "active_lock_commit": "0a70d63ed473d6efbfe1031d790cf624a98787e0",
   "active_lock_owner": "github-actions:42412355964:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
