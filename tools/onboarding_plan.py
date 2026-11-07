@@ -3906,6 +3906,7 @@ def build_plan(
             str(item.get("decision_id", ""))
             for item in decisions
             if item.get("historical_game_type_challenge")
+            or item.get("historical_ncaa_nonappearance_qualifier_challenge")
         }
         expected_challenge_ids = {
             str(item.get("decision_id", ""))
