@@ -395,18 +395,19 @@
     "fordham-phase0-0001",
     "fordham-phase0-0002",
     "fordham-stage2-census-0001",
-    "fordham-stage2-opponent-display-normalize-0001"
+    "fordham-stage2-opponent-display-normalize-0001",
+    "fordham-stage2-census-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fordham-stage2-census-0002",
+  "active_request_sha256": "f6271596b54fd622ac3911ecf79cba92b7a75129467c17c4198fa3b8c9160c6c",
+  "active_school_key": "fordham",
+  "active_target_branch": "data/fordham-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -814,8 +815,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/fordham/fordham-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "ecb597280dcb899fa7ca35c5a55e5729baa5ca216b6635c8f20a165424dffbcd"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42384265816",
+  "lock_acquisition_request_commit": "e05b24ba01ca93a63747a491323bf7232c8ea78f",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
