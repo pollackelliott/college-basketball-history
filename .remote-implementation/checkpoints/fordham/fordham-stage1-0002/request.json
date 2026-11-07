@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "fordham",
+  "previous_control_state_commit": "4cd9fccd7025e1152df8a4b35f33f1708ba9a209",
+  "previous_control_state_sha256": "a631452d227acda7411177a653266fe6a22920854c171805bf1d91b250a39500",
+  "expected_protected_main_sha": "cb821f204dee39961c61767f75956b29e43e5356",
+  "research_checkpoint": {
+    "sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
+    "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "a39ae2a8e2f3b49e6eb102e28b4c1bde63d57155",
+      "path_prefix": ".remote-implementation/transports/fordham/fordham-stage1-0001/piece-",
+      "part_count": 15
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/payloads/fordham/fordham-stage1-0002/venue-reconciliation.json",
+    "sha256": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Fordham serialized Implementation lane — deterministic complete Stage 1 reconciliation rerun",
+    "authorization": "Owner startup authority explicitly permits ordinary deterministic current-main reconciliation through the next genuine owner boundary. Durable fordham-stage1-0001 completed the full census and found exactly two STOP_AMBIGUOUS venue rows, zero shared/global maintenance, and zero conference blockers. The bound venue payload resolves Highbridge Lyceum to already-accepted VEN-000845 and the date-sensitive 2004 UCF Arena assignment to already-accepted VEN-000694 using current-main UCF physical-identity chronology. Neither mapping changes the immutable Fordham Research Freeze, H/A/N, game/site authority, or shared venue registries. This request reruns the complete permanent Stage 1 census; it does not authorize Phase 0 or any other mutation."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
