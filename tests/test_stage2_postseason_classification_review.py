@@ -776,6 +776,116 @@ class PostIngestCanonicalTests(unittest.TestCase):
                 "NCAA_TOURNAMENT",
             )
 
+    def test_historical_qualifier_challenge_preserves_identity_and_marker(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            frozen = sample_source()
+            frozen.update({
+                "source_game_id": "FORDHAM-1990-91-031",
+                "season_label": "1990-1991",
+                "game_date": "1991-03-06",
+                "normalized_opponent_key": "saint-francis-pa",
+                "team_score": "64",
+                "opponent_score": "70",
+                "played_result": "L",
+                "curated_game_type": "NCAA_TOURNAMENT",
+                "curated_postseason_round": "Play-in",
+                "curated_site_type": "OPPONENT_HOME",
+                "normalization_status": "RESEARCH_ACCEPTED",
+            })
+            applied = dict(frozen)
+            applied["curated_postseason_round"] = ""
+            applied["notes"] = NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+            make_source_repo(repo, applied)
+            assertion = dict(applied)
+            assertion.update({
+                "assertion_id": "ASRT-TEST-0001",
+                "canonical_game_id": "CBBG-0000001",
+                "match_status": "CONFIDENT",
+                "match_method": "NEW_GAME",
+            })
+            write_csv(
+                repo / "data/evidence/game-assertions.csv",
+                ingest_school.ASSERTION_FIELDS, [assertion],
+            )
+            canonical = {field: "" for field in ingest_school.CANONICAL_FIELDS}
+            canonical.update({
+                "canonical_game_id": "CBBG-0000001",
+                "season_label": frozen["season_label"],
+                "game_date": frozen["game_date"],
+                "date_precision": "EXACT",
+                "team_a_key": "purdue",
+                "team_b_key": "school",
+                "team_a_score": "60",
+                "team_b_score": "75",
+                "result_winner_team_key": "school",
+                "overtime_periods": "",
+                "site_type": "OPPONENT_HOME",
+                "designated_home_team_key": "",
+                "venue_key": "",
+                "venue_id": "",
+                "site_city": "",
+                "site_state": "",
+                "game_type": "NCAA_TOURNAMENT",
+                "postseason_round": "",
+                "notes": NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+                "canonical_status": "PROVISIONAL",
+            })
+            write_csv(
+                repo / "data/canonical/games.csv",
+                ingest_school.CANONICAL_FIELDS, [canonical],
+            )
+            write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                ingest_school.DISCREPANCY_FIELDS, [],
+            )
+            identity = {
+                field: canonical.get(field, "")
+                for field in HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+            }
+            approved = {
+                "school_key": "school",
+                "approved_plan_hash": "a" * 64,
+                "decisions": [{
+                    "decision_id":
+                        "HISTORICAL-NCAA-QUALIFIER-FORDHAM-1990-91-031",
+                    "category": "postseason_classification",
+                    "source_game_id": "FORDHAM-1990-91-031",
+                    "canonical_game_id": "",
+                    "season_label": frozen["season_label"],
+                    "source_game_date": frozen["game_date"],
+                    "source_value": "Play-in",
+                    "source_game_type": "NCAA_TOURNAMENT",
+                    "expected_source_postseason_round": "Play-in",
+                    "decision": "APPLY_POSTSEASON_CLASSIFICATION_PATCH",
+                    "resolution_basis":
+                        "Owner-approved exact institutional qualifier evidence.",
+                    "source_patch": {
+                        "curated_game_type": "NCAA_TOURNAMENT",
+                        "curated_postseason_round": "",
+                    },
+                    "canonical_patch": {},
+                    "source_row_sha256": row_fingerprint(frozen),
+                    "frozen_source_row": dict(frozen),
+                    "expected_canonical_identity": dict(identity),
+                    "planned_identity_status": "NEW_GAME",
+                    "historical_ncaa_nonappearance_qualifier_challenge": True,
+                    "proposed_game_type": "NCAA_TOURNAMENT",
+                    "proposed_postseason_round": "",
+                }],
+            }
+            result = apply_reconciliation_decisions(repo, approved)
+            self.assertEqual(result.get("postseason_canonical_types_enriched", 0), 0)
+            final = read_csv(repo / "data/canonical/games.csv")[0]
+            self.assertEqual(final["game_type"], "NCAA_TOURNAMENT")
+            self.assertEqual(final["postseason_round"], "")
+            self.assertIn(NCAA_NON_APPEARANCE_QUALIFIER_MARKER, final["notes"])
+            final_identity = {
+                field: final.get(field, "")
+                for field in HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS
+            }
+            self.assertEqual(final_identity, identity)
+
     def test_historical_challenge_rejects_identity_drift_and_inferred_round(self):
         for mutation, pattern in (
             ({"team_a_score": "61"}, "canonical identity changed"),
