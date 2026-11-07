@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-stage1-0003",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "fordham",
+  "previous_control_state_commit": "3e89d703a7bd6e21dc62806a8e63611b244216b0",
+  "previous_control_state_sha256": "892eef76378c4e976b1a3af1d8c144a1f26be8de8e8b20ed529c7e81677e8f83",
+  "expected_protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "research_checkpoint": {
+    "sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
+    "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "a39ae2a8e2f3b49e6eb102e28b4c1bde63d57155",
+      "path_prefix": ".remote-implementation/transports/fordham/fordham-stage1-0001/piece-",
+      "part_count": 15
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/payloads/fordham/fordham-stage1-0002/venue-reconciliation.json",
+    "sha256": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Fordham serialized Implementation lane — post-PR #501 complete Stage 1 rerun",
+    "authorization": "Control Center authorized generic date-aware venue-name repair under Issue #500 and confirmed PR #501 merged at protected main 7b506889ec3e613bb92f86866d6d6d1f65852250. Existing Fordham startup authority remains valid. This fresh request reruns the complete permanent Stage 1 inventory once against the unchanged immutable Research Freeze and existing exact venue-reconciliation authority, including the settled FORDHAM-2004-05-009 -> VEN-000694 mapping. It does not reopen Research, change historical meaning, authorize shared/global mutation, or authorize Phase 0; Phase 0 remains contingent on this request reaching PASS with zero blockers."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
