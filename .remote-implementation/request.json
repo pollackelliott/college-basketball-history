@@ -1,49 +1,65 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fordham-release-preview-verify-0001",
+  "request_id": "fordham-release-gate2-approval-0001",
+  "operation": "RELEASE_GATE2_APPROVAL",
   "school_key": "fordham",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "fc93e498a6c5cee1e82c6a1229d28a5c76813d79",
-  "previous_control_state_sha256": "5b6e85522a1cd8aa2325274d32b9fcabcca2b856dccef94ffa4b67de5741365d",
+  "previous_control_state_commit": "65680ab2079546a98e69b7b9790ea08dc459709e",
+  "previous_control_state_sha256": "65a85f79689b49a7aa69aae0795cbdccce864ff8c0a624c44c3b6aa50c0847e1",
   "expected_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "pr_number": 508,
+  "approved_plan_hash": "a81ffb4936f4b1a1a398abf8a0c852aa85188700b410e2cbbe939c9e1fd4c90a",
+  "release_manifest_sha256": "91337a4b522fd2d2acab5e9a8e5da25ba2a8ed0b0c2581faa61daeeac9c4d880",
+  "preview_deployment_id": 7626901326,
+  "preview_url": "https://college-basketball-history-434a5dn7u-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fordham/fordham-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "e1a677fce40e64b572ed9b075ef0f80956534d4b2c0f6c6172be947a2e725344"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/fordham/fordham-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "3dbbc43f11d0c8fd1bd8d544d4280aa127c1540c46fbf6ad0bc213aedea7b172"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner's exact statement: “Approved. Proceed” immediately after being presented the exact fresh-verified Fordham PR #508 Preview and explicitly told that affirmative approval was required at Owner Gate 2.",
+    "preview_checkpoint_sha256": "e1a677fce40e64b572ed9b075ef0f80956534d4b2c0f6c6172be947a2e725344",
+    "preview_verification_sha256": "3dbbc43f11d0c8fd1bd8d544d4280aa127c1540c46fbf6ad0bc213aedea7b172",
+    "pr_number": 508,
+    "pr_head_sha": "871f426010fef66c2a6ca982197b925100a99318",
+    "preview_deployment_id": 7626901326,
+    "preview_url": "https://college-basketball-history-434a5dn7u-elliott-pollacks-projects.vercel.app"
+  },
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "fordham-release-production-proof-0001"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Fordham serialized Implementation — release preparation continuation",
-    "authorization": "Continuation of the owner-authorized Fordham release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #508. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, and new historical authority remain forbidden."
+    "origin": "ChatGPT Fordham Implementation lane — owner-authorized exact Gate 2 approval",
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating “Approved. Proceed” in direct response to the exact fresh-verified Fordham PR #508 Preview at head 871f426010fef66c2a6ca982197b925100a99318 and Vercel Preview deployment 7626901326. This authorizes the repository-defined final release phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof, and independent COMPLETE verification while identities remain unchanged. This request itself records only Gate 2 approval and grants no direct merge, protected-main mutation, recovery, maintenance, unrelated repair, or new historical authority."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "release_gate2_approval": false,
-    "release_preview_verify": true,
-    "release_production_proof": false,
-    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
-    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "release_gate2_approval": true,
+    "release_production_proof": false,
     "venue_identity_maintenance": false
-  },
-  "target_branch": "data/fordham-onboarding",
-  "target_sha": "871f426010fef66c2a6ca982197b925100a99318",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fordham/fordham-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "7a846da59194c6c088d4489a29ea1c854c0ee20587e4933faf07008710d73345"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/fordham/fordham-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "7d79e5e02b5af720adf149b80bc2993d0e741d0843497a8d82dea00b168cad23"
-  },
-  "approved_plan_hash": "a81ffb4936f4b1a1a398abf8a0c852aa85188700b410e2cbbe939c9e1fd4c90a",
-  "release_manifest_sha256": "91337a4b522fd2d2acab5e9a8e5da25ba2a8ed0b0c2581faa61daeeac9c4d880",
-  "pr_number": 508
+  }
 }
