@@ -5209,7 +5209,7 @@
     },
     {
       "opponent_key": "subpac",
-      "opponent_name": "Subpac",
+      "opponent_name": "SubPac",
       "current_d1": false,
       "public_page_enabled": false,
       "current_conference": null,
@@ -34597,7 +34597,7 @@
       "game_date": null,
       "date_precision": "SEASON",
       "opponent_key": "subpac",
-      "opponent_name": "Subpac",
+      "opponent_name": "SubPac",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 65,
