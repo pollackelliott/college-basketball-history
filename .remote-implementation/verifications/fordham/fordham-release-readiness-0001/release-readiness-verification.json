@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "7a846da59194c6c088d4489a29ea1c854c0ee20587e4933faf07008710d73345",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "04a163e99ea9a8127b3f8ad55a370e6ed75417ce1dd2e5a28878e74c40ee1fc0",
+  "pr_created": false,
+  "preview_request_id": "fordham-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "readiness_proof_sha256": "8995ffa89d1eb064342e49c24bef630a19e42c0e0a3ebca02a506bcc793e4253",
+  "release_pr_packet_sha256": "1d9713a3072396d8b5726e20a73b52d11d762c5666f3395bdc2b646412754f57",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "fordham-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "tracked_mutation": "NONE"
+}
