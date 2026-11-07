@@ -243,6 +243,42 @@ class HistoricalCoverageBuildTests(unittest.TestCase):
                 authority,
             )
 
+    def test_accounting_contradiction_still_requires_owner_authority_and_canonical_season(self):
+        authority = {
+            ("example", "1903-04"): {
+                "institutional_record": {"wins": 0, "losses": 0, "games": 0},
+                "identified_record": {"wins": 1, "losses": 0, "games": 1},
+                "mechanical_delta": {"wins": -1, "losses": 0, "games": -1},
+                "owner_disposition": "https://github.com/example/history/issues/2",
+            }
+        }
+        row = {
+            "program_key": "example",
+            "season_label": "1903-04",
+            "official_wins": "0",
+            "official_losses": "0",
+            "official_games": "0",
+            "documented_wins": "1",
+            "documented_losses": "0",
+            "documented_games": "1",
+            "delta_wins": "-1",
+            "delta_losses": "0",
+            "delta_games": "-1",
+            "classification": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+            "source_label": "Conflicting institutional structures",
+            "owner_disposition": "https://github.com/example/history/issues/2",
+            "stage1_audit_sha256": "e" * 64,
+            "public_note": "Diagnostic only",
+        }
+        with self.assertRaisesRegex(ValueError, "lacks owner authority"):
+            validated_historical_accounting(
+                [row], "example", {"1903-1904": [{"result": "W"}]}, {}
+            )
+        with self.assertRaisesRegex(ValueError, "has no documented canonical games"):
+            validated_historical_accounting(
+                [row], "example", {}, authority
+            )
+
     def test_fordham_all_17_accounting_contradictions_allow_enriched_canonical_union(self):
         repo = Path(__file__).resolve().parents[1]
         registry = json.loads(
