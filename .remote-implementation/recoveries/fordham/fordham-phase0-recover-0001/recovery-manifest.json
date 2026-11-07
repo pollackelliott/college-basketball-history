@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "9b4cd3265a210fb3bb94d6da73b2de7bdc4dde52",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "recovered_request_id": "fordham-phase0-0001",
+  "request_id": "fordham-phase0-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/fordham-onboarding"
+}
