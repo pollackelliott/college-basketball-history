@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fordham-stage1-0001",
+  "request_id": "fordham-stage1-0002",
   "operation": "STAGE1_INVENTORY",
   "school_key": "fordham",
-  "previous_control_state_commit": "a39ae2a8e2f3b49e6eb102e28b4c1bde63d57155",
-  "previous_control_state_sha256": "9d027d57d52f821c4bf4bb4fd31d7bb46d5e4deb7d9c39704b1f4097117d3a8a",
+  "previous_control_state_commit": "4cd9fccd7025e1152df8a4b35f33f1708ba9a209",
+  "previous_control_state_sha256": "a631452d227acda7411177a653266fe6a22920854c171805bf1d91b250a39500",
   "expected_protected_main_sha": "cb821f204dee39961c61767f75956b29e43e5356",
   "research_checkpoint": {
     "sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
@@ -17,11 +17,14 @@
       "part_count": 15
     }
   },
-  "venue_reconciliation": null,
+  "venue_reconciliation": {
+    "path": ".remote-implementation/payloads/fordham/fordham-stage1-0002/venue-reconciliation.json",
+    "sha256": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
+  },
   "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Fordham serialized Implementation lane — owner-supplied immutable Research Freeze intake",
-    "authorization": "Owner explicitly opened NEW Fordham Implementation and supplied the exact immutable six-file Research Freeze with SHA-256 e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514, research base fc3a2d4e84f8dbcb68155766568b4ffedc0d6725, checkpoint 0074 / 871e32a70d58726b2cdc37ca9e751af2f5b03e3eddd92b471626bca1db5974df, and settled INCEPTION+ authority. The attachment was independently authenticated byte-for-byte and contains exactly the six required flat package files. This request is read-only STAGE1_INVENTORY only; its permanent tool first reruns Research portfolio acceptance against the exact ZIP, then performs the complete current-main Stage 1 reconciliation census. No Phase 0 mutation, Stage 2 mutation, owner-gate approval, release, merge, recovery, historical reopening, or unrelated shared/global maintenance authority is created."
+    "origin": "ChatGPT Fordham serialized Implementation lane — deterministic complete Stage 1 reconciliation rerun",
+    "authorization": "Owner startup authority explicitly permits ordinary deterministic current-main reconciliation through the next genuine owner boundary. Durable fordham-stage1-0001 completed the full census and found exactly two STOP_AMBIGUOUS venue rows, zero shared/global maintenance, and zero conference blockers. The bound venue payload resolves Highbridge Lyceum to already-accepted VEN-000845 and the date-sensitive 2004 UCF Arena assignment to already-accepted VEN-000694 using current-main UCF physical-identity chronology. Neither mapping changes the immutable Fordham Research Freeze, H/A/N, game/site authority, or shared venue registries. This request reruns the complete permanent Stage 1 census; it does not authorize Phase 0 or any other mutation."
   },
   "authority": {
     "phase0": false,
