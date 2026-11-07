@@ -394,7 +394,7 @@
     "fordham-phase0-0001"
   ],
   "active_expected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
-  "active_lock_commit": null,
+  "active_lock_commit": "9b4cd3265a210fb3bb94d6da73b2de7bdc4dde52",
   "active_lock_owner": "github-actions:42381371509:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
