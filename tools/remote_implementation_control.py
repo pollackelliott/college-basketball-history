@@ -96,6 +96,7 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 REQUEST_ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,127}$")
 SCHOOL_KEY_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,127}$")
 CANONICAL_GAME_ID_RE = re.compile(r"^CBBG-[0-9]{1,12}$")
+CANONICAL_SEASON_RE = re.compile(r"^(?P<start>[0-9]{4})-(?P<end>[0-9]{4})$")
 POST_PUBLICATION_CORRECTION = "POST_PUBLICATION_CORRECTION"
 
 
@@ -189,6 +190,14 @@ def _require_sha(value: Any, length: int, code: str) -> str:
     text = str(value or "").strip().lower()
     pattern = HEX40 if length == 40 else HEX64
     _require(bool(pattern.fullmatch(text)), code)
+    return text
+
+
+def _require_canonical_season(value: Any, code: str) -> str:
+    text = str(value or "").strip()
+    match = CANONICAL_SEASON_RE.fullmatch(text)
+    _require(match is not None, code)
+    _require(int(match.group("end")) == int(match.group("start")) + 1, code)
     return text
 
 
@@ -856,6 +865,14 @@ def validate_request(request: dict[str, Any]) -> None:
                 bool(str(scope.get(key) or "").strip()),
                 f"REQUEST_HISTORY_SCOPE_{key.upper()}_MISSING",
             )
+        _require_canonical_season(
+            scope.get("start_season"),
+            "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
+        )
+        _require_canonical_season(
+            scope.get("start_season"),
+            "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
+        )
         if str(scope.get("basis") or "").strip() == "TOP_LEVEL_INTERVALS":
             _require(
                 bool(str(scope.get("intervals") or "").strip()),
