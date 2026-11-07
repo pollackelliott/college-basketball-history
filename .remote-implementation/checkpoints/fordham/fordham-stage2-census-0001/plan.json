@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "fordham",
+  "created_at": "2026-11-07T14:49:50.062218+00:00",
+  "input_fingerprint": {
+    "sha256": "1bd82dc3207d728a7259a1bf4801bdd189b5547418157ed329e5b9c1e34229c0",
+    "git_head": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+    "files": {
+      "schools/fordham/source-games.csv": "c4f026f973bc08e5ffebf3ea529244aaddd03380f3021be71a47b8e1a764ddd9",
+      "schools/fordham/opponents.csv": "58796a5c268e7a8d7ae9f8657ace6a87b8e0a719093181a5497eff7a2e2a0514",
+      "schools/fordham/venues.csv": "44b13d4c96e202ad5cea68a102e37d862805a1122ec6ee2be29e7092ddd3eddd",
+      "schools/fordham/conferences.csv": "e7b74b26403ffccd805d17dd9b7e2e740536ca3f0b13d06fa33270ec0a700e2a",
+      "schools/fordham/notes.md": "51eddea9184ca4ec033a5d6f03d87191cbd828321702f4030426452e63c8a391",
+      "schools/fordham/source-notes.md": "a0e13fa7c5e4803b48913ac48b9d44964d1177fe14de16de11194e769c33f212",
+      "data/canonical/games.csv": "1950a5f0074aa035e2dfa57a59bf6b0965eb669ffe3560cbea46a277b11f8cd1",
+      "data/evidence/game-assertions.csv": "070c7461928539b45e9e4e38e779818d7577d57c038b8ac3a0ea1ba5d07203de",
+      "data/reconciliation/discrepancies.csv": "1ea6744942d7bf1cd460cd274228d74178ce1d7cb0ccddb9abd41f83dae155b0",
+      "data/reference/programs.csv": "0a38659d33fee62d44a45c59119ef0b9e729930c56a3c5692537ba744ab764e9",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "2d3139cf6607cbd70ff8379cfca7cd1ff53f01ecda88dfa679a364f12b372426",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "efbd3eddec64de4fcab1630d22d3307f1080fdd0385720bf577d02cff06abc28",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "2bf3825519ed9e7670d54e10f74db78d5c1ea8d649947cf0968b0e5a836e2288",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "0daa23dcec7782d659d7d11b9634b94ff957500ab2ad47a7900cabfa10692bd0",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "644207734b9f03791505d3b59ca8ebc982b6cbb41ee3809bf39af42402f9664f",
+      "tools/onboarding_plan.py": "4d678bffcca5436bda76d0b0035510de65c92bad7b2ccb31e42d811d2c5f0931",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: bard: ['Bard College', 'Bard College (formerly St. Stephen’s)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: pennsylvania-military-college: ['Pennsylvania Military College', 'Pennsylvania Military College (later Widener)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2917,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 884,
+      "venues": 64,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: bard: ['Bard College', 'Bard College (formerly St. Stephen’s)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: pennsylvania-military-college: ['Pennsylvania Military College', 'Pennsylvania Military College (later Widener)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
