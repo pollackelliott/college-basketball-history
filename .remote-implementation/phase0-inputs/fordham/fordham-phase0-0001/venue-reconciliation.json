@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "school_key": "fordham",
+  "owner_approval_basis": "Owner opened the Fordham serialized Implementation lane with explicit startup authority for ordinary deterministic current-main Stage 1 reconciliation through guarded Phase 0 and Stage 2, while requiring a stop only for genuine historical-authority or shared/global mutation questions. Fresh complete Stage 1 census fordham-stage1-0001 found exactly two venue STOP_AMBIGUOUS rows and zero shared/global maintenance. This spec resolves only those two representation mappings against already-accepted current-main physical venue authority; it does not alter the immutable Fordham Research Freeze, game assignments, H/A/N, site findings, or shared venue registries.",
+  "expected_research_zip_sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
+  "expected_venues_sha256": "5511f79ac2f5d710c9108cae0a061dc0a472111faaa71b893f4f62f0770737ee",
+  "mappings": [
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "highbridge-lyceum",
+      "expected_local_name": "Highbridge Lyceum",
+      "expected_local_city": "Bronx",
+      "expected_local_state": "NY",
+      "resolution_basis": "Fresh Stage 1 census found the sole compatible current-main candidate VEN-000845 / high-bridge-lyceum-bronx. Current-main accepted St. John's venue authority names the same Bronx physical facility High Bridge Lyceum and registers the normalized name token highbridgelyceum; the Fordham frozen row is the spelling/serialization variant Highbridge Lyceum for exact game FORDHAM-1923-24-003 on 1923-12-18. No chronology conflict or shared-registry change is required.",
+      "global_venue_id": "VEN-000845",
+      "global_venue_key": "high-bridge-lyceum-bronx",
+      "expected_global_city": "Bronx",
+      "expected_global_state": "NY"
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "ucf-arena",
+      "expected_local_name": "UCF Arena",
+      "expected_local_city": "Orlando",
+      "expected_local_state": "FL",
+      "resolution_basis": "Fresh Stage 1 census surfaced VEN-000038 by name similarity, but accepted current-main UCF authority proves that VEN-000038 is the new arena beginning in 2007. The accepted schools/ucf/venues.csv row for VEN-000694 / the-venue-at-ucf covers 1991-11-30 through 2007-03-03 and explicitly states that the old UCF Arena era resolves to The Venue at UCF; accepted UCF 2004-05 game rows likewise preserve source venue UCF Arena while curating The Venue at UCF. Therefore Fordham's exact 2004-12-28 UCF Arena assignment (FORDHAM-2004-05-009) deterministically reuses VEN-000694. This mapping does not register UCF Arena as an unbounded shared alias and does not change the frozen Fordham site assignment.",
+      "global_venue_id": "VEN-000694",
+      "global_venue_key": "the-venue-at-ucf",
+      "expected_global_city": "Orlando",
+      "expected_global_state": "FL"
+    }
+  ]
+}
