@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "25bf1c5869429c5b839c0aaa51891a7f88a83e08b2a7cfc1f0a272f25d81c500",
+    "implementation-stage2-status.json": "f3b566bd250a409105c90b8bd7603ef662e7ac2f0115e32638df1386b6ae6289",
+    "plan.json": "474d02998d208508f53ccf97d64240377198343be9ee10d763d9259402768348",
+    "review.csv": "12e572d55aa68b2354afbf51dfc462c4fa750996eae151ad50e15ba7f0808804",
+    "review.md": "7dc6c23230169da58c7538f9a4465d6ef39854a127c532a1ee8bd72b39893ca6"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "25bf1c5869429c5b839c0aaa51891a7f88a83e08b2a7cfc1f0a272f25d81c500",
+    "implementation-stage2-status.json": "06ce4998f59bd27321a8660cb7b74cc845505d1e753b311d9bd369fc41d1fbbe",
+    "plan.json": "0e4dcd9016bcb65d271146c001fbe0350d85bc3f99e163e0e1f89e666bc2a41d",
+    "review.csv": "12e572d55aa68b2354afbf51dfc462c4fa750996eae151ad50e15ba7f0808804",
+    "review.md": "89913632b3f0f53e8161dedb0c0c0f7a8fde218534d27974f27c57722a226d0b"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+  "historical_game_type_challenge_path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
+  "historical_game_type_challenge_sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8",
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "fordham-stage2-census-0003",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "target_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+  "tracked_stage2_mutation": "NONE"
+}
