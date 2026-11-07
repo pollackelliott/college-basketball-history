@@ -811,11 +811,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2",
     "recommendation_map_sha256": "e892f0825e206c2150ae5917d3a373f5dd3d1bf43b5170f6a91c40a235d01b3a",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "fordham-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
     "school_key": "fordham",
