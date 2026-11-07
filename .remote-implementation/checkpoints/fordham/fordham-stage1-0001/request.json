@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "fordham",
+  "previous_control_state_commit": "a39ae2a8e2f3b49e6eb102e28b4c1bde63d57155",
+  "previous_control_state_sha256": "9d027d57d52f821c4bf4bb4fd31d7bb46d5e4deb7d9c39704b1f4097117d3a8a",
+  "expected_protected_main_sha": "cb821f204dee39961c61767f75956b29e43e5356",
+  "research_checkpoint": {
+    "sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
+    "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "a39ae2a8e2f3b49e6eb102e28b4c1bde63d57155",
+      "path_prefix": ".remote-implementation/transports/fordham/fordham-stage1-0001/piece-",
+      "part_count": 15
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Fordham serialized Implementation lane — owner-supplied immutable Research Freeze intake",
+    "authorization": "Owner explicitly opened NEW Fordham Implementation and supplied the exact immutable six-file Research Freeze with SHA-256 e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514, research base fc3a2d4e84f8dbcb68155766568b4ffedc0d6725, checkpoint 0074 / 871e32a70d58726b2cdc37ca9e751af2f5b03e3eddd92b471626bca1db5974df, and settled INCEPTION+ authority. The attachment was independently authenticated byte-for-byte and contains exactly the six required flat package files. This request is read-only STAGE1_INVENTORY only; its permanent tool first reruns Research portfolio acceptance against the exact ZIP, then performs the complete current-main Stage 1 reconciliation census. No Phase 0 mutation, Stage 2 mutation, owner-gate approval, release, merge, recovery, historical reopening, or unrelated shared/global maintenance authority is created."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
