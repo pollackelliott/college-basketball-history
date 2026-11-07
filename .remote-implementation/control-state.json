@@ -407,18 +407,19 @@
     "fordham-stage2-gate1-fill-0001",
     "fordham-stage2-preseal-rehearsal-0001",
     "fordham-stage2-gate1-seal-0001",
-    "fordham-stage2-sealed-apply-0001"
+    "fordham-stage2-sealed-apply-0001",
+    "fordham-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "fordham-release-readiness-0001",
+  "active_request_sha256": "bbfdc8fa1f3e85b7ee196b33c42b27da829781053be8e59c5f3452fc71f8b8a2",
+  "active_school_key": "fordham",
+  "active_target_branch": "data/fordham-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -836,8 +837,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/fordham/fordham-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "bf19b66abd83a80c1dfbb40029082d29d61eb3486a5981a33a7373a17555fc29"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42414318760",
+  "lock_acquisition_request_commit": "596f4e8cd8a12f995b408b73fe298f169c8d2e59",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }

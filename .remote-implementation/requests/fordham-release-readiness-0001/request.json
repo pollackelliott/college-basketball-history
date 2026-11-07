@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-release-readiness-0001",
+  "school_key": "fordham",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "899cbd445455dfc6ef02ea360a8f6ccd0125f617",
+  "previous_control_state_sha256": "c789295d6035b823f1b3663bd6deedf6b1ec386d8f4a366254fba90fad9a20b9",
+  "expected_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "creation_provenance": {
+    "origin": "ChatGPT Fordham serialized Implementation — release preparation",
+    "authorization": "Owner explicitly said 'Proceed' after the exact Fordham sealed-apply successor 871f426010fef66c2a6ca982197b925100a99318 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, CI/mergeability checks, exact Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or new historical authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "c535170d8c1b216220af59f39acf27f01257b38634c3a42010dc0fa2ad1c7d15"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/fordham/fordham-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "855e65a9283296bc47eabeac0ef8504de7ca5be53184752e6b01fbf7864fd111"
+  },
+  "approved_plan_hash": "a81ffb4936f4b1a1a398abf8a0c852aa85188700b410e2cbbe939c9e1fd4c90a",
+  "release_manifest_sha256": "91337a4b522fd2d2acab5e9a8e5da25ba2a8ed0b0c2581faa61daeeac9c4d880",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "fordham-release-preview-verify-0001"
+  }
+}
