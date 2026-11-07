@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "fordham",
+  "previous_control_state_commit": "ea08e8b771887c19277d0c86f0c9cfaf4b59f23c",
+  "previous_control_state_sha256": "bfcaf4f36525c3930f7d13b0d64db18a4a8adde519077b2b41e11b302adf6c16",
+  "expected_protected_main_sha": "92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/fordham/fordham-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "1f07aff12546a375ace739a7352a65067b2610bf4515a9fcb159e018621d4456"
+  },
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/fordham-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "e892f0825e206c2150ae5917d3a373f5dd3d1bf43b5170f6a91c40a235d01b3a"
+  },
+  "historical_game_type_challenge": {
+    "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
+    "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
+  },
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+  "creation_provenance": {
+    "origin": "Fordham serialized Implementation Stage 2 — exact recommendation-map rehearsal after fresh qualifier-aware census",
+    "authorization": "Existing owner-authorized Fordham Stage 2 technical/reconciliation phase persists through deterministic/adversarial review and exact recommendation-map rehearsal. Fresh-verified census fordham-stage2-census-0003 is CAPABILITY_CENSUS_READY with 0 blockers/0 warnings and 162 decisions. This map resolves identity topology without duplicates, preserves unsupported reciprocal date/score conflicts as explicit unresolved provenance, applies affirmative frozen Fordham H/A/N where Research settled it, preserves concrete reciprocal H/A/N where Fordham remains researched-unknown, leaves two unsupported early HOME physical sites unresolved, preserves pre-MAAC regular-season game types, exposes the exact Control-Center-authorized NCAA non-appearance qualifier correction, and corrects the accomplishment regular-season title baseline 4->3 from official conference records. This request is read-only and grants no Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, recovery, or arbitrary tracked mutation authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
