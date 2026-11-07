@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "e1a677fce40e64b572ed9b075ef0f80956534d4b2c0f6c6172be947a2e725344",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "pr_number": 508,
+  "preview_deployment_id": 7626901326,
+  "preview_deployment_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "preview_url": "https://college-basketball-history-434a5dn7u-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "fordham-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "871f426010fef66c2a6ca982197b925100a99318"
+}
