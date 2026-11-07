@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "prepared_parent_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "prepared_tree_sha": "710741f186979142338c20c034e0587af4b887d1",
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "fordham-phase0-0002",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1"
+}
