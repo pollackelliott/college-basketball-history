@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "a28b65a51f1c38a6097601b5f4868470ef1618d28b86cafbc12d3c6a50a9a81d",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "pr_number": 508,
+  "production_deployment_id": 7627381320,
+  "production_json_checked_count": 80,
+  "production_proof": true,
+  "request_id": "fordham-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "status": "COMPLETE"
+}

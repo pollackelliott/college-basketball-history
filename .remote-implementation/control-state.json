@@ -826,7 +826,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/fordham/fordham-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "a28b65a51f1c38a6097601b5f4868470ef1618d28b86cafbc12d3c6a50a9a81d",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -836,7 +836,7 @@
     "production_deployment_id": 7627381320,
     "production_json_checked_count": 80,
     "protected_main_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "fordham-release-production-proof-0001",
     "school_key": "fordham"
   },
