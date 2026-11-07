@@ -404,7 +404,7 @@
     "fordham-stage2-current-main-refresh-0002"
   ],
   "active_expected_main_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
-  "active_lock_commit": null,
+  "active_lock_commit": "a916bf5155ecf7967e2227cc218d46b9e8b4a531",
   "active_lock_owner": "github-actions:42407037663:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
