@@ -1,0 +1,72 @@
+{
+  "changed_file_sha256": {
+    "tests/test_site_historical_season_coverage.py": "5387ddbccaaf2049dcc77411385d335211ca1e1b03b33c25b30aca7bb2681f0b",
+    "tests/test_stage2_postseason_classification_review.py": "5e6c589b2bad000af51474034ddea58fd7ad5f9cd623565aacfe3add48bc5940",
+    "tools/build_site_data.py": "7db3757e13145dfbbd67bdba0407218387369b38ee4ac52cc3150787adcb77c7",
+    "tools/onboarding_plan.py": "cd958a727167a243b3f07ae121a5d9a6d3f7e28e8b0bf3f967cf977f3d0b2dab",
+    "tools/postseason_classification_review.py": "d77b441334b9c927eff9095aa614cacef3965d8f494a1d412e465ce5a5bd436c"
+  },
+  "changed_paths": [
+    "tests/test_site_historical_season_coverage.py",
+    "tests/test_stage2_postseason_classification_review.py",
+    "tools/build_site_data.py",
+    "tools/onboarding_plan.py",
+    "tools/postseason_classification_review.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "global_lock_commit": "a916bf5155ecf7967e2227cc218d46b9e8b4a531",
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "tests/test_site_historical_season_coverage.py",
+    "tests/test_stage2_postseason_classification_review.py",
+    "tools/build_site_data.py",
+    "tools/onboarding_plan.py",
+    "tools/postseason_classification_review.py"
+  ],
+  "merge_base_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "e7b74b26403ffccd805d17dd9b7e2e740536ca3f0b13d06fa33270ec0a700e2a",
+    "notes.md": "51eddea9184ca4ec033a5d6f03d87191cbd828321702f4030426452e63c8a391",
+    "opponents.csv": "52314a9ee4369996076ca4342e81e4d705c15825a79b26551cf0310d7ba07f7a",
+    "source-games.csv": "2e1cbf7e3e96946fadb38134b24d1d0a8a4641341cce5c6be387622eea3d5c20",
+    "source-notes.md": "a0e13fa7c5e4803b48913ac48b9d44964d1177fe14de16de11194e769c33f212",
+    "venues.csv": "44b13d4c96e202ad5cea68a102e37d862805a1122ec6ee2be29e7092ddd3eddd"
+  },
+  "predecessor_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "prepared_commit_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32",
+  "prepared_main_parent_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "prepared_parent_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "prepared_parents": [
+    "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+    "c2ef77958add14d6474ce0991cf4031665dff7ce"
+  ],
+  "prepared_tree_sha": "733a9fcc8aa86f31684063456b606c6937346f91",
+  "protected_main_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "refresh_proof_sha256": "c2cc4c3e2dc9b06fb21e8bef7f4cbfd1d4db23b5894d8448eeed0a4abf494011",
+  "repository_validation": "PASS",
+  "request_id": "fordham-stage2-current-main-refresh-0002",
+  "request_sha256": "806b3d87fd923dc5b8d094ab4175579337b24d16894bbe0cc3b2a7d4b1c2bd1b",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "sidecars": {
+    "integration-freeze.json": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+    "refresh-proof.json": "c2cc4c3e2dc9b06fb21e8bef7f4cbfd1d4db23b5894d8448eeed0a4abf494011"
+  },
+  "target_branch": "data/fordham-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/fordham/conferences.csv",
+    "schools/fordham/notes.md",
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv",
+    "schools/fordham/source-notes.md",
+    "schools/fordham/venues.csv"
+  ]
+}

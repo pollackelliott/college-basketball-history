@@ -407,15 +407,15 @@
   "active_lock_commit": "a916bf5155ecf7967e2227cc218d46b9e8b4a531",
   "active_lock_owner": "github-actions:42407037663:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32",
+  "active_prepared_tree_sha": "733a9fcc8aa86f31684063456b606c6937346f91",
   "active_request_id": "fordham-stage2-current-main-refresh-0002",
   "active_request_sha256": "806b3d87fd923dc5b8d094ab4175579337b24d16894bbe0cc3b2a7d4b1c2bd1b",
   "active_school_key": "fordham",
   "active_target_branch": "data/fordham-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/fordham/fordham-stage2-current-main-refresh-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "2643db1380100885e26ee9b742a9fb4b6d6222949e5edb5eb55c0d2c1034e987",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -824,5 +824,5 @@
   "lock_acquisition_request_commit": "96e6ed17628e91479f1c06438ed2e5684ba7d9dd",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
