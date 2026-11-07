@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "fordham-stage2-census-0003",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "fordham",
+  "previous_control_state_commit": "7f2968bc417ea93b68c3df733d749aaab84d7230",
+  "previous_control_state_sha256": "6c706db1957d2de99d733c6ef31c8e84537cf8897dfc7395178530ff3c4f3892",
+  "expected_protected_main_sha": "92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-phase0-0002/successor-manifest.json",
+    "sha256": "539ed83ec1936d3c6c60f1e06021f3af428feea4a22b8f7a3d40396fca7eacb0"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f8c76043e5379178619c70ff78e156c3ea7d03c5d38253f4a1dc6834f4d8cc10"
+  },
+  "historical_game_type_challenge": {
+    "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
+    "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
+  },
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "creation_provenance": {
+    "origin": "Fordham serialized Implementation Stage 2 — fresh census after merged PR #503 NCAA non-appearance qualifier capability",
+    "authorization": "Control Center disposition authorizes resuming the same Fordham Implementation lane after PR #503 merged. This read-only census binds the unchanged onboarding head and Integration Freeze, uses current protected-main tooling at 92cc70003ba7bb6e5a1e31416d2d6ebb303ab6f2, and transports only the exact hash-bound FORDHAM-1990-91-031 NCAA non-appearance qualifier challenge. The settled historical interpretation is preserved. No Research reopening, Stage 1/Phase 0 replay, tracked basketball mutation, Owner Gate 1 approval, sealing, apply, release, Preview, merge, Production, or recovery authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
