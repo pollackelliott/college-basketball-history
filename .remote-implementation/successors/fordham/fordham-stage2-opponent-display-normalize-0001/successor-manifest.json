@@ -1,0 +1,105 @@
+{
+  "actual_published_target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "changed_file_sha256": {
+    "schools/fordham/opponents.csv": "52314a9ee4369996076ca4342e81e4d705c15825a79b26551cf0310d7ba07f7a",
+    "schools/fordham/source-games.csv": "2e1cbf7e3e96946fadb38134b24d1d0a8a4641341cce5c6be387622eea3d5c20"
+  },
+  "changed_paths": [
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "bard",
+    "pennsylvania-military-college"
+  ],
+  "expected_target_predecessor_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "field_level_proof_sha256": "c3f0d38a9b072b08dcaea29916f2233bb3e224642d8da8f0c27ecd5c8a3875c1",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "348e457801fe31e22232225eaa043316dddcb45b",
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "519edf542d106c93cd497b3cfeb02c2efa0fb957d77842a13895ada38dfff2b4",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "7219b18bb3603b15a986eab8f69602a04a2c666470181248dfb2c16f6f2d1c44",
+      "implementation-stage2-status.json": "cc30278125650e04e08ba628bc80e3916ef1282b62bdb7635e15adb6c4b22539",
+      "plan.json": "fd67a91f8ca3fe688fdd7d930ad7849237f42984530cd300e6b9a8894b673277",
+      "review.csv": "40efce5d2046ad3b31b1add0bbab639ec1431f2dc665d08f042eed8b022eaa97",
+      "review.md": "387e3f4f49368c39f63c8aec2671df02845e1247358e48f40119f9535a49270a"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "7219b18bb3603b15a986eab8f69602a04a2c666470181248dfb2c16f6f2d1c44",
+      "implementation-stage2-status.json": "c815358d064169eebbb0b97ba84f41eaa831639aa50c283be7e324d69cfe3962",
+      "plan.json": "3f74c148bb52faeb9a053f0bd34406a7ed22dab197ee717873fd72ae81483f61",
+      "review.csv": "40efce5d2046ad3b31b1add0bbab639ec1431f2dc665d08f042eed8b022eaa97",
+      "review.md": "b0799a4df96b75cd49ede4a1780e2813de0470796b7d7b9fdc72958ee3af58ed"
+    },
+    "blocker_count": 1,
+    "capability_census_status": "PREFLIGHT_BLOCKED",
+    "capability_topology_groups": [
+      {
+        "classification": "UNCLASSIFIED",
+        "count": 1,
+        "topology": "preflight_blockers"
+      },
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 57,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 1,
+    "decision_count": 160,
+    "decision_universe_sha256": "88761a4f37d22396c03380d3f91b79ee66becba3f7bf5d887117f2ed368e05b2",
+    "stage2_status": "BLOCKED",
+    "tracked_mutation_proof": {
+      "after_head_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+      "after_status": "",
+      "after_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+      "before_head_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+      "before_status": "",
+      "before_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6",
+  "prepared_parent_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "prepared_tree_sha": "8ae1d5051381563933560442128fde4a76fe3889",
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "fordham-stage2-opponent-display-normalize-0001",
+  "request_sha256": "53148c9b7cf386924b6f0b1609acd8dda6e6d9c46a6884b76b2d00ebccfcb4d6",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_drift_after": {
+    "baseline_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "integration_base_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+    "school_key": "fordham",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+    "integration_base_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+    "school_key": "fordham",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "source_game_normalized_name_row_count": 3,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/fordham/fordham-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "770a4653bbf4fb01f372429a33e2e58902bfc39caebe4e3f3913e902f274e4e2",
+  "target_branch": "data/fordham-onboarding",
+  "writeahead_commit": "84d729641f28186a2e7f170c16798d866db40e81",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/fordham/fordham-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "ecb597280dcb899fa7ca35c5a55e5729baa5ca216b6635c8f20a165424dffbcd"
+}
