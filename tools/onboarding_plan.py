@@ -47,6 +47,8 @@ from location_safety import (
 from ncaa_safety import canonical_ncaa_errors
 from postseason_classification_review import (
     HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS,
+    HISTORICAL_CHALLENGE_LEGACY_TYPE,
+    HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE,
     HISTORICAL_CHALLENGE_SOURCE_TYPE,
     HISTORICAL_CHALLENGE_TARGET_TYPE,
     REVIEW_ACTIONS as POSTSEASON_CLASSIFICATION_ACTIONS,
@@ -56,11 +58,13 @@ from postseason_classification_review import (
     build_historical_game_type_challenge_review,
     build_review_rows as build_postseason_classification_reviews,
     mismatch_is_reviewable as postseason_mismatch_is_reviewable,
+    nonappearance_qualifier_mismatch_is_reviewable,
     row_fingerprint as postseason_row_fingerprint,
     validate_historical_game_type_challenges,
 )
 from program_history import (
     BEST_FINISH_RANK,
+    NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
     derive_ncaa_accomplishments,
     history_scope_errors,
     ncaa_game_counts_as_appearance,
@@ -3305,6 +3309,9 @@ def build_plan(
                 "source": source,
                 "planned_identity_status": status,
                 "identity_method": method,
+                "historical_challenge_type": challenge.get(
+                    "challenge_type", HISTORICAL_CHALLENGE_LEGACY_TYPE
+                ),
             }
             historical_challenge_candidates.append(candidate)
             historical_challenge_decisions.append(
@@ -3717,46 +3724,113 @@ def build_plan(
                 accomplishment_round_candidates,
             )
             decisions.extend(round_review_decisions)
-        elif accomplishment_conflicts and postseason_mismatch_is_reviewable(
-            accomplishment,
-            derived,
-            generic_postseason_candidates + historical_challenge_candidates,
-        ):
-            existing_ncaa_seasons = {
+        else:
+            legacy_historical_candidates = [
+                candidate
+                for candidate in historical_challenge_candidates
+                if candidate.get("historical_challenge_type")
+                != HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE
+            ]
+            qualifier_historical_candidates = [
+                candidate
+                for candidate in historical_challenge_candidates
+                if candidate.get("historical_challenge_type")
+                == HISTORICAL_CHALLENGE_NONAPPEARANCE_TYPE
+            ]
+            appearance_game_counts_by_season = Counter(
                 str(game.get("season_label", "")).strip()
                 for game in projected_accomplishment_games
                 if ncaa_game_counts_as_appearance(game)
-            }
-            challenge_seasons = {
-                str(candidate["source"].get("season_label", "")).strip()
-                for candidate in historical_challenge_candidates
-            }
-            appearance_deficit = (
-                int(accomplishment.get("ncaa_tournament_appearances", 0) or 0)
-                - int(derived.get("ncaa_tournament_appearances", 0) or 0)
+                and str(game.get("season_label", "")).strip()
             )
-            if challenge_seasons & existing_ncaa_seasons:
-                raise WorkflowError(
-                    "historical game-type challenge duplicates an already counted "
-                    "NCAA appearance season"
+            legacy_reviewable = bool(
+                accomplishment_conflicts
+                and postseason_mismatch_is_reviewable(
+                    accomplishment,
+                    derived,
+                    generic_postseason_candidates + legacy_historical_candidates,
                 )
-            if len(challenge_seasons) > max(appearance_deficit, 0):
-                raise WorkflowError(
-                    "historical game-type challenge exceeds the NCAA appearance deficit"
+            )
+            qualifier_reviewable = bool(
+                accomplishment_conflicts
+                and nonappearance_qualifier_mismatch_is_reviewable(
+                    accomplishment,
+                    derived,
+                    qualifier_historical_candidates,
+                    dict(appearance_game_counts_by_season),
                 )
-            classification_review_decisions = build_postseason_classification_reviews(
-                school_key, generic_postseason_candidates,
-            )
-            classification_review_decisions.extend(
-                historical_challenge_decisions
-            )
-            decisions.extend(classification_review_decisions)
-        elif accomplishment_conflicts:
-            blockers.append(
-                "Accomplishment reference conflicts with canonical cross-check: "
-                + "; ".join(accomplishment_conflicts)
             )
 
+            if legacy_reviewable:
+                existing_ncaa_seasons = set(appearance_game_counts_by_season)
+                challenge_seasons = {
+                    str(candidate["source"].get("season_label", "")).strip()
+                    for candidate in legacy_historical_candidates
+                }
+                appearance_deficit = (
+                    int(accomplishment.get("ncaa_tournament_appearances", 0) or 0)
+                    - int(derived.get("ncaa_tournament_appearances", 0) or 0)
+                )
+                if challenge_seasons & existing_ncaa_seasons:
+                    raise WorkflowError(
+                        "historical game-type challenge duplicates an already counted "
+                        "NCAA appearance season"
+                    )
+                if len(challenge_seasons) > max(appearance_deficit, 0):
+                    raise WorkflowError(
+                        "historical game-type challenge exceeds the NCAA appearance deficit"
+                    )
+                classification_review_decisions = build_postseason_classification_reviews(
+                    school_key, generic_postseason_candidates,
+                )
+                classification_review_decisions.extend(
+                    decision
+                    for decision in historical_challenge_decisions
+                    if not decision.get(
+                        "historical_ncaa_nonappearance_qualifier_challenge"
+                    )
+                )
+                decisions.extend(classification_review_decisions)
+            elif qualifier_reviewable:
+                if legacy_historical_candidates or generic_postseason_candidates:
+                    raise WorkflowError(
+                        "NCAA non-appearance qualifier challenge cannot be mixed with "
+                        "appearance-addition classification candidates in one mismatch"
+                    )
+                qualifier_seasons = {
+                    str(candidate["source"].get("season_label", "")).strip()
+                    for candidate in qualifier_historical_candidates
+                }
+                appearance_surplus = (
+                    int(derived.get("ncaa_tournament_appearances", 0) or 0)
+                    - int(accomplishment.get("ncaa_tournament_appearances", 0) or 0)
+                )
+                if any(
+                    appearance_game_counts_by_season.get(season, 0) != 1
+                    for season in qualifier_seasons
+                ):
+                    raise WorkflowError(
+                        "NCAA non-appearance qualifier challenge requires a season "
+                        "with exactly one currently appearance-counting NCAA game"
+                    )
+                if len(qualifier_seasons) > max(appearance_surplus, 0):
+                    raise WorkflowError(
+                        "NCAA non-appearance qualifier challenge exceeds the NCAA "
+                        "appearance surplus"
+                    )
+                classification_review_decisions = [
+                    decision
+                    for decision in historical_challenge_decisions
+                    if decision.get(
+                        "historical_ncaa_nonappearance_qualifier_challenge"
+                    )
+                ]
+                decisions.extend(classification_review_decisions)
+            elif accomplishment_conflicts:
+                blockers.append(
+                    "Accomplishment reference conflicts with canonical cross-check: "
+                    + "; ".join(accomplishment_conflicts)
+                )
         if (
             not blockers
             and (
@@ -4557,31 +4631,56 @@ def approve_plan(
                         "normalized_opponent_name source patch"
                     )
         if item.get("category") == "postseason_classification":
-            historical_challenge = bool(item.get("historical_game_type_challenge"))
+            game_type_challenge = bool(item.get("historical_game_type_challenge"))
+            qualifier_challenge = bool(
+                item.get("historical_ncaa_nonappearance_qualifier_challenge")
+            )
+            historical_challenge = game_type_challenge or qualifier_challenge
             if historical_challenge:
                 if decision != "APPLY_POSTSEASON_CLASSIFICATION_PATCH":
                     raise WorkflowError(
-                        f"{decision_id}: historical game-type challenge must remain "
+                        f"{decision_id}: historical challenge must remain "
                         "an explicit Gate 1 apply decision"
                     )
                 if canonical_patch:
                     raise WorkflowError(
-                        f"{decision_id}: historical game-type challenge may not "
+                        f"{decision_id}: historical challenge may not "
                         "carry a direct canonical patch"
                     )
-                if source_patch != {"curated_game_type": HISTORICAL_CHALLENGE_TARGET_TYPE}:
-                    raise WorkflowError(
-                        f"{decision_id}: historical game-type challenge may change "
-                        "only curated_game_type to NCAA_TOURNAMENT"
-                    )
-                if item.get("source_value") != HISTORICAL_CHALLENGE_SOURCE_TYPE:
-                    raise WorkflowError(
-                        f"{decision_id}: historical game-type challenge source "
-                        "classification is no longer REGULAR_SEASON"
-                    )
+                if game_type_challenge:
+                    if source_patch != {
+                        "curated_game_type": HISTORICAL_CHALLENGE_TARGET_TYPE
+                    }:
+                        raise WorkflowError(
+                            f"{decision_id}: historical game-type challenge may change "
+                            "only curated_game_type to NCAA_TOURNAMENT"
+                        )
+                    if item.get("source_value") != HISTORICAL_CHALLENGE_SOURCE_TYPE:
+                        raise WorkflowError(
+                            f"{decision_id}: historical game-type challenge source "
+                            "classification is no longer REGULAR_SEASON"
+                        )
+                else:
+                    if source_patch != {
+                        "curated_game_type": "NCAA_TOURNAMENT",
+                        "curated_postseason_round": "",
+                    }:
+                        raise WorkflowError(
+                            f"{decision_id}: historical qualifier challenge may only "
+                            "preserve NCAA_TOURNAMENT and clear curated_postseason_round"
+                        )
+                    if (
+                        item.get("source_game_type") != "NCAA_TOURNAMENT"
+                        or item.get("source_value")
+                        != item.get("expected_source_postseason_round")
+                        or not item.get("source_value")
+                    ):
+                        raise WorkflowError(
+                            f"{decision_id}: historical qualifier source binding changed"
+                        )
                 if item.get("planned_identity_status") != ingest_school.NEW_GAME:
                     raise WorkflowError(
-                        f"{decision_id}: historical game-type challenge identity "
+                        f"{decision_id}: historical challenge identity "
                         "is no longer NEW_GAME"
                     )
                 expected_identity = item.get("expected_canonical_identity")
@@ -4591,7 +4690,7 @@ def approve_plan(
                     != set(HISTORICAL_CHALLENGE_CANONICAL_IDENTITY_FIELDS)
                 ):
                     raise WorkflowError(
-                        f"{decision_id}: historical game-type challenge canonical "
+                        f"{decision_id}: historical challenge canonical "
                         "identity binding is incomplete"
                     )
             if canonical_patch and (
@@ -6179,8 +6278,16 @@ def apply_pre_ingest_source_patches(
             raise WorkflowError(
                 f"{decision_id}: reviewed postseason source game is missing"
             )
-        historical_challenge = bool(item.get("historical_game_type_challenge"))
-        expected_source_type = str(item.get("source_value", "")).strip()
+        game_type_challenge = bool(item.get("historical_game_type_challenge"))
+        qualifier_challenge = bool(
+            item.get("historical_ncaa_nonappearance_qualifier_challenge")
+        )
+        historical_challenge = game_type_challenge or qualifier_challenge
+        expected_source_type = (
+            str(item.get("source_game_type", "")).strip()
+            if qualifier_challenge
+            else str(item.get("source_value", "")).strip()
+        )
         if (source.get("curated_game_type", "").strip() != expected_source_type
                 or source.get("season_label", "").strip() != item.get("season_label", "")
                 or source.get("game_date", "").strip() != item.get("source_game_date", "")
@@ -6188,12 +6295,26 @@ def apply_pre_ingest_source_patches(
             raise WorkflowError(
                 f"{decision_id}: frozen postseason source row changed before sealed apply"
             )
+        if qualifier_challenge and (
+            source.get("curated_postseason_round", "").strip()
+            != item.get("expected_source_postseason_round", "")
+        ):
+            raise WorkflowError(
+                f"{decision_id}: historical qualifier source round changed"
+            )
         if historical_challenge:
             frozen_source = item.get("frozen_source_row")
             if (
-                expected_source_type != HISTORICAL_CHALLENGE_SOURCE_TYPE
-                or not isinstance(frozen_source, dict)
+                not isinstance(frozen_source, dict)
                 or frozen_source != source
+                or (
+                    game_type_challenge
+                    and expected_source_type != HISTORICAL_CHALLENGE_SOURCE_TYPE
+                )
+                or (
+                    qualifier_challenge
+                    and expected_source_type != "NCAA_TOURNAMENT"
+                )
             ):
                 raise WorkflowError(
                     f"{decision_id}: historical challenge frozen source binding changed"
@@ -6257,29 +6378,59 @@ def apply_pre_ingest_source_patches(
                 raise WorkflowError(
                     f"{decision_id}: invalid or redundant historical H/A/N patch"
                 )
-        if historical_challenge and patch != {
+        if game_type_challenge and patch != {
             "curated_game_type": HISTORICAL_CHALLENGE_TARGET_TYPE
         }:
             raise WorkflowError(
-                f"{decision_id}: historical challenge source delta widened"
+                f"{decision_id}: historical game-type challenge source delta widened"
+            )
+        if qualifier_challenge and patch != {
+            "curated_game_type": "NCAA_TOURNAMENT",
+            "curated_postseason_round": "",
+        }:
+            raise WorkflowError(
+                f"{decision_id}: historical qualifier challenge source delta widened"
             )
         source["curated_game_type"] = desired_type
         if "curated_postseason_round" in patch:
             source["curated_postseason_round"] = desired_round
+        if qualifier_challenge:
+            source["notes"] = _append_note(
+                source.get("notes", ""),
+                NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
+            )
         if site is not None:
             source["curated_site_type"] = site
             counts["postseason_owner_site_patches"] += 1
         if historical_challenge:
             frozen_source = item["frozen_source_row"]
+            allowed_changed_fields = (
+                {"curated_game_type"}
+                if game_type_challenge
+                else {"curated_postseason_round", "notes"}
+            )
             for field, frozen_value in frozen_source.items():
-                if field == "curated_game_type":
+                if field in allowed_changed_fields:
                     continue
                 if source.get(field, "") != frozen_value:
                     raise WorkflowError(
                         f"{decision_id}: historical challenge changed unrelated "
                         f"source field {field}"
                     )
-            counts["historical_game_type_challenges_applied"] += 1
+            if game_type_challenge:
+                counts["historical_game_type_challenges_applied"] += 1
+            else:
+                if (
+                    source.get("curated_postseason_round", "").strip()
+                    or NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+                    not in source.get("notes", "")
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: historical qualifier semantics did not persist"
+                    )
+                counts[
+                    "historical_ncaa_nonappearance_qualifier_challenges_applied"
+                ] += 1
         else:
             source["notes"] = _append_note(
                 source.get("notes", ""),
@@ -6682,10 +6833,19 @@ def apply_reconciliation_decisions(
             raise WorkflowError(
                 f"{item['decision_id']}: sealed pre-ingest source classification did not persist"
             )
-        if item.get("historical_game_type_challenge"):
+        game_type_challenge = bool(item.get("historical_game_type_challenge"))
+        qualifier_challenge = bool(
+            item.get("historical_ncaa_nonappearance_qualifier_challenge")
+        )
+        if game_type_challenge or qualifier_challenge:
             frozen_source = item.get("frozen_source_row") or {}
+            allowed_changed_fields = (
+                {"curated_game_type"}
+                if game_type_challenge
+                else {"curated_postseason_round", "notes"}
+            )
             for field, frozen_value in frozen_source.items():
-                if field == "curated_game_type":
+                if field in allowed_changed_fields:
                     continue
                 if source.get(field, "") != frozen_value:
                     raise WorkflowError(
@@ -6712,6 +6872,19 @@ def apply_reconciliation_decisions(
                     f"{item['decision_id']}: historical challenge inferred an "
                     "unauthorized postseason round"
                 )
+            if qualifier_challenge:
+                if (
+                    source.get("curated_postseason_round", "").strip()
+                    or assertion.get("curated_postseason_round", "").strip()
+                    or NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+                    not in source.get("notes", "")
+                    or NCAA_NON_APPEARANCE_QUALIFIER_MARKER
+                    not in canonical.get("notes", "")
+                ):
+                    raise WorkflowError(
+                        f"{item['decision_id']}: historical qualifier marker/round "
+                        "did not persist through ingestion"
+                    )
         classification_by_source[source_id] = desired
         previous_type = canonical.get("game_type", "").strip()
         if previous_type == "POSTSEASON":
