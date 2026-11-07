@@ -824,7 +824,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/fordham/fordham-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "f6dc0888db5dfd1a3d1e80340c20f5d3a99f2cf4ae621ea0a42a799f2d916819",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/fordham/fordham-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "ee818110dc2425fa2504d9f6c628fe58051b6ded6e2d537fa607bf0c5a49255b",
     "merged": false,
@@ -833,7 +833,7 @@
     "pr_number": 508,
     "production_request_id": "fordham-release-production-proof-0001",
     "protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "fordham-release-gate2-approval-0001",
     "school_key": "fordham",
     "target_branch": "data/fordham-onboarding",
