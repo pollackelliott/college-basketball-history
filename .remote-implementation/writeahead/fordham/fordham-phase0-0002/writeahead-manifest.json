@@ -1,0 +1,642 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/fordham/conferences.csv",
+    "schools/fordham/notes.md",
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv",
+    "schools/fordham/source-notes.md",
+    "schools/fordham/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "0a38659d33fee62d44a45c59119ef0b9e729930c56a3c5692537ba744ab764e9",
+    "data/reference/venue-names.csv": "fdb5236a1437d91edd145da0571267550c77017674bf2e1b394de878d3899803",
+    "data/reference/venues.csv": "d0e4cac846a305e78af287908fe75d33507640317b4dff44a2bf59739cef7f74",
+    "schools/fordham/conferences.csv": "e7b74b26403ffccd805d17dd9b7e2e740536ca3f0b13d06fa33270ec0a700e2a",
+    "schools/fordham/notes.md": "51eddea9184ca4ec033a5d6f03d87191cbd828321702f4030426452e63c8a391",
+    "schools/fordham/opponents.csv": "58796a5c268e7a8d7ae9f8657ace6a87b8e0a719093181a5497eff7a2e2a0514",
+    "schools/fordham/source-games.csv": "c4f026f973bc08e5ffebf3ea529244aaddd03380f3021be71a47b8e1a764ddd9",
+    "schools/fordham/source-notes.md": "a0e13fa7c5e4803b48913ac48b9d44964d1177fe14de16de11194e769c33f212",
+    "schools/fordham/venues.csv": "44b13d4c96e202ad5cea68a102e37d862805a1122ec6ee2be29e7092ddd3eddd"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/fordham/conferences.csv",
+    "schools/fordham/notes.md",
+    "schools/fordham/opponents.csv",
+    "schools/fordham/source-games.csv",
+    "schools/fordham/source-notes.md",
+    "schools/fordham/venues.csv"
+  ],
+  "commit_message": "Add Fordham onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "64d3b05320ca646e09baf9918231560b5edc5cac",
+  "history_scope": {
+    "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Owner-confirmed Research Freeze scope: Fordham is accepted as top-level/D1-equivalent from program inception, beginning with the accepted 1902-03 program history; accepted scope 1902-03+ / INCEPTION+.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1902-1903",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "INCEPTION+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "INCEPTION+",
+      "school": "Fordham"
+    }
+  },
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "e7b74b26403ffccd805d17dd9b7e2e740536ca3f0b13d06fa33270ec0a700e2a",
+    "notes.md": "51eddea9184ca4ec033a5d6f03d87191cbd828321702f4030426452e63c8a391",
+    "opponents.csv": "58796a5c268e7a8d7ae9f8657ace6a87b8e0a719093181a5497eff7a2e2a0514",
+    "source-games.csv": "c4f026f973bc08e5ffebf3ea529244aaddd03380f3021be71a47b8e1a764ddd9",
+    "source-notes.md": "a0e13fa7c5e4803b48913ac48b9d44964d1177fe14de16de11194e769c33f212",
+    "venues.csv": "44b13d4c96e202ad5cea68a102e37d862805a1122ec6ee2be29e7092ddd3eddd"
+  },
+  "prepared_commit_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "prepared_parent_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "prepared_tree_sha": "710741f186979142338c20c034e0587af4b887d1",
+  "program_alias_mapping": [],
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "repository_validation": "PASS",
+  "request_id": "fordham-phase0-0002",
+  "request_sha256": "4f3553fcb85f5da8012a8f05f52ef8cb73f2291efd3e25bb9293162143bc3e1a",
+  "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "research_checkpoint_sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "sidecars": {
+    "integration-freeze.json": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+    "stage1-reconciliation.json": "4abf6f079f3a25ec67f44e5ddfc1a23bb781f6aacbf02181973c81629b9c26c4",
+    "venue-reconciliation.json": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
+  },
+  "target_branch": "data/fordham-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "MVP Arena",
+      "final_venue_id": "VEN-000145",
+      "final_venue_key": "mvp-arena",
+      "research_venue_id": "VEN-000145",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mvp-arena"
+    },
+    {
+      "canonical_name": "Alumni Hall",
+      "final_venue_id": "VEN-000525",
+      "final_venue_key": "alumni-hall-navy",
+      "research_venue_id": "VEN-000525",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alumni-hall-navy"
+    },
+    {
+      "canonical_name": "Boardwalk Hall",
+      "final_venue_id": "VEN-000433",
+      "final_venue_key": "boardwalk-hall",
+      "research_venue_id": "VEN-000433",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "boardwalk-hall"
+    },
+    {
+      "canonical_name": "Stabler Arena",
+      "final_venue_id": "VEN-001084",
+      "final_venue_key": "stabler-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "stabler-arena"
+    },
+    {
+      "canonical_name": "Cassell Coliseum",
+      "final_venue_id": "VEN-000329",
+      "final_venue_key": "cassell-coliseum",
+      "research_venue_id": "VEN-000329",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cassell-coliseum"
+    },
+    {
+      "canonical_name": "Bronx Church House",
+      "final_venue_id": "VEN-001085",
+      "final_venue_key": "bronx-church-house",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "bronx-church-house"
+    },
+    {
+      "canonical_name": "Highbridge Lyceum",
+      "final_venue_id": "VEN-000845",
+      "final_venue_key": "high-bridge-lyceum-bronx",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "highbridge-lyceum"
+    },
+    {
+      "canonical_name": "Hunts Point Palace",
+      "final_venue_id": "VEN-001086",
+      "final_venue_key": "hunts-point-palace",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "hunts-point-palace"
+    },
+    {
+      "canonical_name": "Rose Hill Gymnasium",
+      "final_venue_id": "VEN-000748",
+      "final_venue_key": "rose-hill-gymnasium",
+      "research_venue_id": "VEN-000748",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rose-hill-gymnasium"
+    },
+    {
+      "canonical_name": "Rose Hill Gymnasium",
+      "final_venue_id": "VEN-000748",
+      "final_venue_key": "rose-hill-gymnasium",
+      "research_venue_id": "VEN-000748",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rose-hill-gymnasium"
+    },
+    {
+      "canonical_name": "deLa Salle Hall",
+      "final_venue_id": "VEN-001087",
+      "final_venue_key": "dela-salle-hall",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "dela-salle-hall"
+    },
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "VEN-000020",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "barclays-center"
+    },
+    {
+      "canonical_name": "Buffalo Memorial Auditorium",
+      "final_venue_id": "VEN-000512",
+      "final_venue_key": "buffalo-memorial-auditorium",
+      "research_venue_id": "VEN-000512",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "buffalo-memorial-auditorium"
+    },
+    {
+      "canonical_name": "U.S. Bank Arena",
+      "final_venue_id": "VEN-000176",
+      "final_venue_key": "riverfront-coliseum",
+      "research_venue_id": "VEN-000176",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "riverfront-coliseum"
+    },
+    {
+      "canonical_name": "Mizzou Arena",
+      "final_venue_id": "VEN-000137",
+      "final_venue_key": "mizzou-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mizzou-arena"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "Ocean Center",
+      "final_venue_id": "VEN-000482",
+      "final_venue_key": "ocean-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ocean-center"
+    },
+    {
+      "canonical_name": "Brendan Byrne Arena",
+      "final_venue_id": "VEN-000028",
+      "final_venue_key": "brendan-byrne-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_NAME_CLUSTER",
+      "venue_key": "brendan-byrne-meadowlands-arena"
+    },
+    {
+      "canonical_name": "Continental Airlines Arena",
+      "final_venue_id": "VEN-000028",
+      "final_venue_key": "brendan-byrne-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "continental-airlines-arena"
+    },
+    {
+      "canonical_name": "IZOD Center",
+      "final_venue_id": "VEN-000028",
+      "final_venue_key": "brendan-byrne-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "izod-center"
+    },
+    {
+      "canonical_name": "Hertz Arena",
+      "final_venue_id": "VEN-000578",
+      "final_venue_key": "hertz-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hertz-arena"
+    },
+    {
+      "canonical_name": "Hartford Civic Center",
+      "final_venue_id": "VEN-000257",
+      "final_venue_key": "xl-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "hartford-civic-center"
+    },
+    {
+      "canonical_name": "Fertitta Center",
+      "final_venue_id": "VEN-000291",
+      "final_venue_key": "hofheinz-pavilion",
+      "research_venue_id": "VEN-000291",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hofheinz-pavilion"
+    },
+    {
+      "canonical_name": "Jersey City Armory",
+      "final_venue_id": "VEN-001088",
+      "final_venue_key": "jersey-city-armory",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "jersey-city-armory"
+    },
+    {
+      "canonical_name": "DeGol Arena",
+      "final_venue_id": "VEN-000911",
+      "final_venue_key": "degol-arena",
+      "research_venue_id": "VEN-000911",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "degol-arena"
+    },
+    {
+      "canonical_name": "Freedom Hall",
+      "final_venue_id": "VEN-000069",
+      "final_venue_key": "freedom-hall",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "freedom-hall"
+    },
+    {
+      "canonical_name": "U.S. Century Bank Arena",
+      "final_venue_id": "VEN-000960",
+      "final_venue_key": "golden-panther-arena-fiu",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "u-s-century-bank-arena"
+    },
+    {
+      "canonical_name": "Montego Bay Convention Center",
+      "final_venue_id": "VEN-000709",
+      "final_venue_key": "montego-bay-convention-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "montego-bay-convention-center"
+    },
+    {
+      "canonical_name": "Place Bell Arena",
+      "final_venue_id": "VEN-001089",
+      "final_venue_key": "place-bell-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "place-bell-arena"
+    },
+    {
+      "canonical_name": "Gaylord Entertainment Center",
+      "final_venue_id": "VEN-000031",
+      "final_venue_key": "bridgestone-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "gaylord-entertainment-center"
+    },
+    {
+      "canonical_name": "New Haven Coliseum",
+      "final_venue_id": "VEN-000491",
+      "final_venue_key": "new-haven-coliseum",
+      "research_venue_id": "VEN-000491",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "new-haven-coliseum"
+    },
+    {
+      "canonical_name": "102nd Engineers Armory",
+      "final_venue_id": "VEN-000848",
+      "final_venue_key": "102nd-engineers-armory",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "102nd-engineers-armory"
+    },
+    {
+      "canonical_name": "69th Regiment Armory",
+      "final_venue_id": "VEN-000768",
+      "final_venue_key": "69th-regiment-armory",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "69th-regiment-armory"
+    },
+    {
+      "canonical_name": "71st Regiment Armory",
+      "final_venue_id": "VEN-001090",
+      "final_venue_key": "71st-regiment-armory",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "71st-regiment-armory"
+    },
+    {
+      "canonical_name": "7th Regiment Armory",
+      "final_venue_id": "VEN-001091",
+      "final_venue_key": "7th-regiment-armory",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "7th-regiment-armory"
+    },
+    {
+      "canonical_name": "Ascension Parish House",
+      "final_venue_id": "VEN-001092",
+      "final_venue_key": "ascension-parish-house",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "ascension-parish-house"
+    },
+    {
+      "canonical_name": "Madison Square Garden (1925–1968 building)",
+      "final_venue_id": "VEN-000123",
+      "final_venue_key": "madison-square-garden-1925",
+      "research_venue_id": "VEN-000123",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1925"
+    },
+    {
+      "canonical_name": "Madison Square Garden (1968 building)",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Manhattan Casino",
+      "final_venue_id": "VEN-001093",
+      "final_venue_key": "manhattan-casino",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "manhattan-casino"
+    },
+    {
+      "canonical_name": "Dee Events Center",
+      "final_venue_id": "VEN-000054",
+      "final_venue_key": "dee-events-center",
+      "research_venue_id": "VEN-000054",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dee-events-center"
+    },
+    {
+      "canonical_name": "UCF Arena",
+      "final_venue_id": "VEN-000694",
+      "final_venue_key": "the-venue-at-ucf",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "ucf-arena"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Philadelphia Civic Center",
+      "final_venue_id": "VEN-000563",
+      "final_venue_key": "philadelphia-convention-hall",
+      "research_venue_id": "VEN-000563",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "philadelphia-convention-hall"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    },
+    {
+      "canonical_name": "Tom Gola Arena",
+      "final_venue_id": "VEN-000864",
+      "final_venue_key": "john-e-glaser-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "tom-gola-arena"
+    },
+    {
+      "canonical_name": "Jersey Mike's Arena",
+      "final_venue_id": "VEN-000095",
+      "final_venue_key": "jersey-mikes-arena",
+      "research_venue_id": "VEN-000095",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jersey-mikes-arena"
+    },
+    {
+      "canonical_name": "PPG Paints Arena",
+      "final_venue_id": "VEN-000167",
+      "final_venue_key": "ppg-paints-arena",
+      "research_venue_id": "VEN-000167",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ppg-paints-arena"
+    },
+    {
+      "canonical_name": "Petersen Events Center",
+      "final_venue_id": "VEN-000164",
+      "final_venue_key": "petersen-events-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "petersen-events-center"
+    },
+    {
+      "canonical_name": "Carnesecca Arena",
+      "final_venue_id": "VEN-000456",
+      "final_venue_key": "carnesecca-arena",
+      "research_venue_id": "VEN-000456",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carnesecca-arena"
+    },
+    {
+      "canonical_name": "Entertainment and Sports Arena",
+      "final_venue_id": "VEN-001094",
+      "final_venue_key": "entertainment-and-sports-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "entertainment-and-sports-arena"
+    },
+    {
+      "canonical_name": "Reynolds Coliseum",
+      "final_venue_id": "VEN-000174",
+      "final_venue_key": "reynolds-coliseum",
+      "research_venue_id": "VEN-000174",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-coliseum"
+    },
+    {
+      "canonical_name": "Robins Center",
+      "final_venue_id": "VEN-000324",
+      "final_venue_key": "robins-center",
+      "research_venue_id": "VEN-000324",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "robins-center"
+    },
+    {
+      "canonical_name": "Siegel Center",
+      "final_venue_id": "VEN-000705",
+      "final_venue_key": "siegel-center",
+      "research_venue_id": "VEN-000705",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "siegel-center"
+    },
+    {
+      "canonical_name": "Leavey Center",
+      "final_venue_id": "VEN-000606",
+      "final_venue_key": "leavey-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "leavey-center"
+    },
+    {
+      "canonical_name": "UVI Sports and Fitness Center",
+      "final_venue_id": "VEN-000191",
+      "final_venue_key": "sports-and-fitness-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "uvi-sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "Yuengling Center",
+      "final_venue_id": "VEN-000238",
+      "final_venue_key": "yuengling-center",
+      "research_venue_id": "VEN-000238",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "yuengling-center"
+    },
+    {
+      "canonical_name": "Mohegan Sun Arena",
+      "final_venue_id": "VEN-000139",
+      "final_venue_key": "mohegan-sun-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mohegan-sun-arena"
+    },
+    {
+      "canonical_name": "Nassau Coliseum",
+      "final_venue_id": "VEN-000147",
+      "final_venue_key": "nassau-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nassau-coliseum"
+    },
+    {
+      "canonical_name": "Capital One Arena",
+      "final_venue_id": "VEN-000036",
+      "final_venue_key": "capital-one-arena",
+      "research_venue_id": "VEN-000036",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "capital-one-arena"
+    },
+    {
+      "canonical_name": "Christl Arena",
+      "final_venue_id": "VEN-000747",
+      "final_venue_key": "christl-arena",
+      "research_venue_id": "VEN-000747",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "christl-arena"
+    },
+    {
+      "canonical_name": "Westchester County Center",
+      "final_venue_id": "VEN-000770",
+      "final_venue_key": "westchester-county-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "westchester-county-center"
+    },
+    {
+      "canonical_name": "Hart Center",
+      "final_venue_id": "VEN-001095",
+      "final_venue_key": "hart-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "hart-center"
+    },
+    {
+      "canonical_name": "Worcester Centrum",
+      "final_venue_id": "VEN-000234",
+      "final_venue_key": "worcester-centrum",
+      "research_venue_id": "VEN-000234",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "worcester-centrum"
+    }
+  ],
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "5511f79ac2f5d710c9108cae0a061dc0a472111faaa71b893f4f62f0770737ee",
+    "mappings": [
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Bronx",
+        "expected_global_state": "NY",
+        "expected_local_city": "Bronx",
+        "expected_local_name": "Highbridge Lyceum",
+        "expected_local_state": "NY",
+        "global_venue_id": "VEN-000845",
+        "global_venue_key": "high-bridge-lyceum-bronx",
+        "local_venue_key": "highbridge-lyceum",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Fresh Stage 1 census found the sole compatible current-main candidate VEN-000845 / high-bridge-lyceum-bronx. Current-main accepted St. John's venue authority names the same Bronx physical facility High Bridge Lyceum and registers the normalized name token highbridgelyceum; the Fordham frozen row is the spelling/serialization variant Highbridge Lyceum for exact game FORDHAM-1923-24-003 on 1923-12-18. No chronology conflict or shared-registry change is required."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Orlando",
+        "expected_global_state": "FL",
+        "expected_local_city": "Orlando",
+        "expected_local_name": "UCF Arena",
+        "expected_local_state": "FL",
+        "global_venue_id": "VEN-000694",
+        "global_venue_key": "the-venue-at-ucf",
+        "local_venue_key": "ucf-arena",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Fresh Stage 1 census surfaced VEN-000038 by name similarity, but accepted current-main UCF authority proves that VEN-000038 is the new arena beginning in 2007. The accepted schools/ucf/venues.csv row for VEN-000694 / the-venue-at-ucf covers 1991-11-30 through 2007-03-03 and explicitly states that the old UCF Arena era resolves to The Venue at UCF; accepted UCF 2004-05 game rows likewise preserve source venue UCF Arena while curating The Venue at UCF. Therefore Fordham's exact 2004-12-28 UCF Arena assignment (FORDHAM-2004-05-009) deterministically reuses VEN-000694. This mapping does not register UCF Arena as an unbounded shared alias and does not change the frozen Fordham site assignment."
+      }
+    ],
+    "owner_approval_basis": "Owner opened the Fordham serialized Implementation lane with explicit startup authority for ordinary deterministic current-main Stage 1 reconciliation through guarded Phase 0 and Stage 2, while requiring a stop only for genuine historical-authority or shared/global mutation questions. Fresh complete Stage 1 census fordham-stage1-0001 found exactly two venue STOP_AMBIGUOUS rows and zero shared/global maintenance. This spec resolves only those two representation mappings against already-accepted current-main physical venue authority; it does not alter the immutable Fordham Research Freeze, game assignments, H/A/N, site findings, or shared venue registries.",
+    "research_zip_sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
+    "schema_version": 1,
+    "spec_path": "/tmp/remote-phase0-inputs-p4ywtbo2/venue-reconciliation.json",
+    "spec_sha256": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
+  }
+}
