@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "apply_request_id": "fordham-stage2-sealed-apply-0001",
+  "approved_plan_hash": "a81ffb4936f4b1a1a398abf8a0c852aa85188700b410e2cbbe939c9e1fd4c90a",
+  "changed_path_count": 89,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "release_manifest_sha256": "91337a4b522fd2d2acab5e9a8e5da25ba2a8ed0b0c2581faa61daeeac9c4d880",
+  "school_key": "fordham",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "c535170d8c1b216220af59f39acf27f01257b38634c3a42010dc0fa2ad1c7d15",
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "855e65a9283296bc47eabeac0ef8504de7ca5be53184752e6b01fbf7864fd111",
+  "writeahead_sha256": "bf19b66abd83a80c1dfbb40029082d29d61eb3486a5981a33a7373a17555fc29"
+}

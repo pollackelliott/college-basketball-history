@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "a81ffb4936f4b1a1a398abf8a0c852aa85188700b410e2cbbe939c9e1fd4c90a",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/fordham/fordham-release-readiness-0001/pr-body.md",
+  "body_sha256": "04a163e99ea9a8127b3f8ad55a370e6ed75417ce1dd2e5a28878e74c40ee1fc0",
+  "head_branch": "data/fordham-onboarding",
+  "head_sha": "871f426010fef66c2a6ca982197b925100a99318",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish Fordham history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "fordham-release-preview-verify-0001",
+  "readiness_request_id": "fordham-release-readiness-0001",
+  "release_manifest_sha256": "91337a4b522fd2d2acab5e9a8e5da25ba2a8ed0b0c2581faa61daeeac9c4d880",
+  "schema_version": 1,
+  "school_key": "fordham"
+}
