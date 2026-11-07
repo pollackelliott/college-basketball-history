@@ -19,6 +19,7 @@ from remote_implementation_control import (  # noqa: E402
     MUTATION_PREPARED,
     MUTATION_PUBLISHED,
     OP_PHASE0,
+    OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_RELEASE_PRODUCTION_PROOF,
     TX_ABANDONED_NOT_ATTEMPTED,
@@ -77,6 +78,7 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "owner_gate_2": False,
             "release": False,
             "phase0": operation == OP_PHASE0,
+            "phase0_scope_supersession": operation == OP_PHASE0_SCOPE_SUPERSESSION,
             "stage2_census": operation == OP_STAGE2_CENSUS,
             "stage2_opponent_display_normalize": (
                 operation == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE
@@ -90,7 +92,7 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "recovery": operation == OP_RECOVER,
         },
     }
-    if operation in {OP_STAGE1, OP_PHASE0}:
+    if operation in {OP_STAGE1, OP_PHASE0, OP_PHASE0_SCOPE_SUPERSESSION}:
         base["research_checkpoint"] = {
             "sha256": "1" * 64,
             "research_base_sha": "2" * 40,
@@ -163,6 +165,39 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "basis": "TOP_LEVEL_INTERVALS",
             "intervals": "2000-01+",
             "notes": "Owner-confirmed scope.",
+        }
+    if operation == OP_PHASE0_SCOPE_SUPERSESSION:
+        base["target_branch"] = "data/example-school-onboarding"
+        base["target_sha"] = "6" * 40
+        base["scope_supersession_spec"] = {
+            "path": ".remote-implementation/requests/example/scope-supersession.json",
+            "sha256": "5" * 64,
+        }
+        base["superseded_phase0_successor"] = {
+            "path": ".remote-implementation/successors/example-school/phase0/successor-manifest.json",
+            "sha256": "6" * 64,
+        }
+        base["superseded_successor"] = {
+            "path": ".remote-implementation/successors/example-school/scope/successor-manifest.json",
+            "sha256": "7" * 64,
+        }
+        base["superseded_successor_verification"] = {
+            "path": ".remote-implementation/verifications/example-school/scope/verification.json",
+            "sha256": "8" * 64,
+        }
+        base["superseded_integration_freeze_sha256"] = "9" * 64
+        base["superseded_semantic_snapshot_sha256"] = "a" * 64
+        base["history_scope"] = {
+            "start_season": "2000-2001",
+            "basis": "TOP_LEVEL_INTERVALS",
+            "intervals": "2000-01+",
+            "notes": "Owner-confirmed superseded scope.",
+        }
+        base["scope_supersession_authorization"] = {
+            "approved": True,
+            "authority_kind": "CONTROL_CENTER_EXPLICIT",
+            "authorization_basis": "Exact owner-confirmed scope supersession.",
+            "spec_sha256": "5" * 64,
         }
     if operation == OP_RECOVER:
         base["recovery"] = {
@@ -238,6 +273,43 @@ class RemoteImplementationControlTests(unittest.TestCase):
             "intervals": "",
             "notes": "Research Freeze confirmed inception scope.",
         }
+        validate_request(req)
+
+    def test_phase0_rejects_shorthand_history_start_season(self):
+        req = request(OP_PHASE0)
+        req["history_scope"]["start_season"] = "1902-03"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
+        ):
+            validate_request(req)
+
+    def test_phase0_rejects_nonconsecutive_history_start_season(self):
+        req = request(OP_PHASE0)
+        req["history_scope"]["start_season"] = "1902-1904"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
+        ):
+            validate_request(req)
+
+    def test_phase0_accepts_canonical_history_start_season(self):
+        req = request(OP_PHASE0)
+        req["history_scope"]["start_season"] = "1973-1974"
+        validate_request(req)
+
+    def test_scope_supersession_rejects_shorthand_history_start_season(self):
+        req = request(OP_PHASE0_SCOPE_SUPERSESSION)
+        req["history_scope"]["start_season"] = "1973-74"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
+        ):
+            validate_request(req)
+
+    def test_scope_supersession_accepts_canonical_history_start_season(self):
+        req = request(OP_PHASE0_SCOPE_SUPERSESSION)
+        req["history_scope"]["start_season"] = "1973-1974"
         validate_request(req)
 
     def test_phase0_requires_intervals_for_interval_scope(self):
