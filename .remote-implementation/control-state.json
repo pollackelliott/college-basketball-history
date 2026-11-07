@@ -398,7 +398,7 @@
     "fordham-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
-  "active_lock_commit": null,
+  "active_lock_commit": "348e457801fe31e22232225eaa043316dddcb45b",
   "active_lock_owner": "github-actions:42383714449:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
