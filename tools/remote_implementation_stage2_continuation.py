@@ -12,6 +12,7 @@ It does not execute Stage 2 itself and does not create new owner authority.
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -33,6 +34,7 @@ from remote_implementation_control import (
     validate_stage2_phase_continuation,
 )
 from remote_implementation_io import (
+    CONTROL_BRANCH,
     REQUEST_PATH,
     STATE_PATH,
     Stop,
@@ -42,6 +44,7 @@ from remote_implementation_io import (
     git_show_bytes,
     git_show_json,
     push_control,
+    run,
     write_json,
 )
 
@@ -143,6 +146,48 @@ def _already_queued(control_head: str, state: dict[str, Any], request_id: str) -
     return current.get("request_id") == request_id
 
 
+def _dispatch_child_workflow_if_actions(new_head: str) -> None:
+    """Launch the child control-plane run when this queue push came from Actions.
+
+    Ordinary pushes made by a user/connector already trigger the control workflow.
+    GitHub suppresses push-triggered workflow recursion for pushes authenticated by
+    the workflow's own GITHUB_TOKEN, so Actions-authored continuation requests must
+    explicitly use workflow_dispatch after their exact control-ref CAS succeeds.
+    """
+
+    if os.environ.get("GITHUB_ACTIONS", "").strip().lower() != "true":
+        return
+
+    repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    token = os.environ.get("GH_TOKEN", "").strip()
+    if not repository:
+        raise Stop("STAGE2_CONTINUATION_DISPATCH_REPOSITORY_MISSING")
+    if not token:
+        raise Stop("STAGE2_CONTINUATION_DISPATCH_TOKEN_MISSING")
+
+    cp = run(
+        [
+            "gh",
+            "api",
+            "--method",
+            "POST",
+            f"repos/{repository}/actions/workflows/remote-implementation.yml/dispatches",
+            "-f",
+            f"ref={CONTROL_BRANCH}",
+        ],
+        check=False,
+    )
+    if cp.returncode != 0:
+        raise Stop(
+            "STAGE2_CONTINUATION_WORKFLOW_DISPATCH_FAILED\n"
+            + str(cp.stdout or "")
+        )
+    print(
+        "STAGE2 CONTINUATION DISPATCHED: "
+        f"workflow=remote-implementation.yml ref={CONTROL_BRANCH} queued_commit={new_head}"
+    )
+
+
 def _queue_request(
     request: dict[str, Any],
     *,
@@ -166,6 +211,7 @@ def _queue_request(
     git("add", "--", REQUEST_PATH.as_posix())
     git("commit", "-m", f"queue Stage 2 continuation {request_id}")
     new_head = push_control(expected_control_head)
+    _dispatch_child_workflow_if_actions(new_head)
     print(
         "STAGE2 CONTINUATION QUEUED: "
         f"operation={request['operation']} request={request_id} commit={new_head}"
