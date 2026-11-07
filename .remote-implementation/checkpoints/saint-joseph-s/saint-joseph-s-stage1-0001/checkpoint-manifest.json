@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "request_id": "saint-joseph-s-stage1-0001",
+  "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "research_checkpoint_sha256": "25f9103ace9dc7cb1649e524e6f1791e84373941adad37abb81fc5b9137a2e6a",
+  "research_member_sha256": {
+    "conferences.csv": "d5d2bcd37e83d70cfcf0225c1e9b5a81456e6216c06605ed62a0b8d227338cf7",
+    "notes.md": "74e3aa6e459392b0b330a0bd9abe246e7af42dfd58014994dd4d4c355e1e0317",
+    "opponents.csv": "983535276907118ee08862a8d997ec45ba5a484d1d627cae3db46dcdf89c0f2f",
+    "source-games.csv": "c36baa704077f86796335cb47932f3df16d290eb1ad429b2c35f648787f2dddd",
+    "source-notes.md": "de5241862848fe2131400c66bfb9aa8c0b28c5bb75af71b2d14b915fad5c93ef",
+    "venues.csv": "d4269f8dcac00f0135e80b8423db6206e604e27d82f97277af74ed48bb344232"
+  },
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "sidecars": {
+    "request.json": "c97d4da3c226b835c87f14e4f9d4e4411b869aa3b78f20330b5b39eb37ef8909",
+    "stage1-reconciliation.json": "759f4caa26f4000b56149de25e332fab524d023fce5dd4d7f33dd4c60369c4c2"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
