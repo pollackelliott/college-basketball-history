@@ -1,0 +1,69 @@
+name: Fordham historical-accounting candidate proof
+
+on:
+  push:
+    branches:
+      - proof/fordham-accounting-505
+
+permissions:
+  contents: read
+
+jobs:
+  rehearse-candidate-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out control authority
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Check out exact candidate runtime
+        uses: actions/checkout@v4
+        with:
+          ref: fae29c55ba487906d09b082bf4e00eb27d7fb31f
+          path: candidate
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate exact control checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C candidate rev-parse HEAD)" = "fae29c55ba487906d09b082bf4e00eb27d7fb31f"
+          git -C control cat-file -e "c0e26ee97cf7498a82f9788d42da4879150e5e04^{commit}"
+          test "$(git -C control rev-parse control/remote-implementation)" = "c0e26ee97cf7498a82f9788d42da4879150e5e04"
+
+      - name: Replay exact blocked Fordham proposal with candidate tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          python candidate/tools/stage2_candidate_runtime_rehearsal.py \
+            --source-repo control \
+            --candidate-runtime candidate \
+            --candidate-sha fae29c55ba487906d09b082bf4e00eb27d7fb31f \
+            --control-commit c0e26ee97cf7498a82f9788d42da4879150e5e04 \
+            --proposal-checkpoint-path .remote-implementation/checkpoints/fordham/fordham-stage2-proposal-0001/checkpoint-manifest.json \
+            --diag /tmp/stage2-candidate-runtime-rehearsal
+
+      - name: Show exact candidate proof summary
+        if: always()
+        shell: bash
+        run: |
+          if [ -f /tmp/stage2-candidate-runtime-rehearsal/candidate-rehearsal-summary.json ]; then
+            cat /tmp/stage2-candidate-runtime-rehearsal/candidate-rehearsal-summary.json
+          fi
+
+      - name: Upload candidate rehearsal diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fordham-accounting-candidate-rehearsal-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/stage2-candidate-runtime-rehearsal
+          if-no-files-found: ignore
+          retention-days: 14
