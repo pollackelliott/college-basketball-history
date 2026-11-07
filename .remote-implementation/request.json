@@ -10,8 +10,8 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
@@ -22,18 +22,17 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Fresh request after explicit recovery of the failed refresh. Preserve the exact 162-decision universe, exact revised recommendation map SHA-256 62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e, only the three authorized Bronx, NY canonical locality patches with no venue fields, unchanged frozen Fordham target-source H/A/N, and the existing NCAA non-appearance qualifier challenge. Do not reopen Research, Stage 1, Phase 0, or historical adjudication. Continuation stops on universe drift, any blocker, or OWNER_GATE_1_READY.",
-    "origin": "Fordham serialized Implementation Stage 2 — fresh post-recovery current-main refresh"
-  },
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "The same Control Center-authorized Fordham Stage 2 current-main refresh remains valid after explicit repository-defined recovery of the mechanically failed request fordham-stage2-current-main-refresh-0001. Recovery durably classified that failed request NOT_ATTEMPTED with unchanged target 80f664d563f4963403c72b4a7ed2e7063ae2fac6 and protected main c2ef77958add14d6474ce0991cf4031665dff7ce. The owner explicitly authorized abandonment, fresh refresh submission, and continuation through census/proposal to the next blocker or OWNER_GATE_1_READY. This grants no new historical authority and no Owner Gate 1/2, seal, apply, release, merge, or Production authority."
+    "authorization": "phase-persistent owner/Control Center authority inherited from fordham-stage2-current-main-refresh-0002",
+    "origin": "repository-owned Stage 2 phase continuation"
   },
   "expected_protected_main_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "historical_game_type_challenge": {
+    "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
+    "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
+  },
   "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "operation": "STAGE2_CENSUS",
   "phase0_successor": {
     "path": ".remote-implementation/successors/fordham/fordham-phase0-0002/successor-manifest.json",
     "sha256": "539ed83ec1936d3c6c60f1e06021f3af428feea4a22b8f7a3d40396fca7eacb0"
@@ -52,16 +51,20 @@
       "sha256": "62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e"
     }
   },
-  "previous_control_state_commit": "9c30dcdabe7413db1b945126dad0b68ee54ada7e",
-  "previous_control_state_sha256": "582cf88e73a172707df34c9bbef8851a1dee4149a2381d28138c41b4b45a6f28",
-  "request_id": "fordham-stage2-current-main-refresh-0002",
+  "previous_control_state_commit": "73c980cc96352d5a2b424f5df82c61662864e9d5",
+  "previous_control_state_sha256": "79a576537f49fb3791d34ac4d82e1a668da2622b90cca3eefc3b7ce9684f3253",
+  "request_id": "fordham-stage2-census-0004",
   "schema_version": 1,
   "school_key": "fordham",
   "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-stage2-current-main-refresh-0002/successor-manifest.json",
+    "sha256": "21ab35204030a6fd8b9e8885202ff424328a06be774c4a796b8dd92e45c9c227"
+  },
   "stage2_opponent_display_successor": {
     "path": ".remote-implementation/successors/fordham/fordham-stage2-opponent-display-normalize-0001/successor-manifest.json",
     "sha256": "f8c76043e5379178619c70ff78e156c3ea7d03c5d38253f4a1dc6834f4d8cc10"
   },
   "target_branch": "data/fordham-onboarding",
-  "target_sha": "80f664d563f4963403c72b4a7ed2e7063ae2fac6"
+  "target_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32"
 }
