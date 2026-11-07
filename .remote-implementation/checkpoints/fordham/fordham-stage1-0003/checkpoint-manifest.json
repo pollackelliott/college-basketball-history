@@ -1,0 +1,25 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "request_id": "fordham-stage1-0003",
+  "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
+  "research_checkpoint_sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
+  "research_member_sha256": {
+    "conferences.csv": "e7b74b26403ffccd805d17dd9b7e2e740536ca3f0b13d06fa33270ec0a700e2a",
+    "notes.md": "21f01fb462e48a9ac566345027102e2e92e354ecbdfcee67295f5023ceb5db60",
+    "opponents.csv": "58796a5c268e7a8d7ae9f8657ace6a87b8e0a719093181a5497eff7a2e2a0514",
+    "source-games.csv": "c4f026f973bc08e5ffebf3ea529244aaddd03380f3021be71a47b8e1a764ddd9",
+    "source-notes.md": "a0e13fa7c5e4803b48913ac48b9d44964d1177fe14de16de11194e769c33f212",
+    "venues.csv": "5511f79ac2f5d710c9108cae0a061dc0a472111faaa71b893f4f62f0770737ee"
+  },
+  "schema_version": 1,
+  "school_key": "fordham",
+  "sidecars": {
+    "request.json": "ef50db7664527e67f75d4778934d41d404e071b2addc0e4031e7e96a784831fa",
+    "stage1-reconciliation.json": "4be3751d059c347019cd1e41615fc0f8c888ccc7b1c411f7fb046745f5a4978e",
+    "venue-reconciliation.json": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
