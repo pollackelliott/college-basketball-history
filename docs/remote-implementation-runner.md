@@ -91,7 +91,7 @@ Tracked repository capability:
 - `tools/remote_implementation_release_preview.py` — exact existing school PR, successful CI/mergeability and PR-head Preview verification.
 - `tools/remote_implementation_production.py` — exact independently verified Owner Gate 2 approval and read-only Production proof.
 - `tools/remote_implementation_verify.py` — independent fresh-runner reconstruction of all guarded stages, exact Gate 2 approval, and post-merge Production equality.
-- `.github/workflows/remote-implementation.yml` — push-driven repository Action for the permanent control branch.
+- `.github/workflows/remote-implementation.yml` — push-driven repository Action for ordinary control-branch request pushes, with guarded `workflow_dispatch` support used only to launch Actions-authored child continuation requests whose `GITHUB_TOKEN` push cannot recursively trigger another workflow run.
 - `config/remote-implementation-control-state.initial.json` — canonical initial IDLE state for creating the operational control branch.
 
 The operational machine authority lives on the dedicated branch:
@@ -404,8 +404,15 @@ After the ordinary `STAGE2_CURRENT_MAIN_REFRESH` reaches independent fresh PASS,
 protected-main runtime executes
 `tools/remote_implementation_stage2_continuation.py`. That helper authors the next
 ordinary `STAGE2_CENSUS` request against the exact fresh-verified refresh successor.
-The new request is committed normally on the control branch and therefore enters the same
-push-driven guarded runner as any manually authored census request.
+The new request is committed normally on the control branch. For an ordinary external
+connector/user push, the existing `push` event starts the guarded runner. When the helper
+itself is running inside GitHub Actions, its control-branch push is authenticated by the
+workflow's `GITHUB_TOKEN`, whose ordinary push event does not recursively create another
+workflow run. In that case only, after the exact control-ref CAS succeeds, the helper
+explicitly dispatches the same `remote-implementation.yml` workflow on
+`control/remote-implementation`. Dispatch failure is fail-closed. This is scheduling
+transport only: it does not alter request bytes, fresh-verification requirements, owner
+authority, concurrency, or any guarded operation boundary.
 
 After that census reaches independent fresh PASS, the helper continues only when:
 
