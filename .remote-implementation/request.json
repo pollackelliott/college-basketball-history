@@ -1,47 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fordham-phase0-0002",
-  "operation": "PHASE0",
+  "request_id": "fordham-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "fordham",
-  "previous_control_state_commit": "f3a55b1689bbd8b29a61670697a5f0bced0f169b",
-  "previous_control_state_sha256": "9c1baace0beecc49fb86b67da0af3e474a122463c65bd3ab38f6f7c924e01e9d",
+  "previous_control_state_commit": "ce30c1830a7e5cbc209ec3910b74a01ff0811af8",
+  "previous_control_state_sha256": "e728fad6909e64b81f88c8982aafa8200a7894d638e498a560d8bb388974dc0a",
   "expected_protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
   "target_branch": "data/fordham-onboarding",
-  "research_checkpoint": {
-    "sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
-    "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "a39ae2a8e2f3b49e6eb102e28b4c1bde63d57155",
-      "path_prefix": ".remote-implementation/transports/fordham/fordham-stage1-0001/piece-",
-      "part_count": 15
-    }
+  "target_sha": "361010cc1ea1c9ba1528b496d64094a97a4d35a1",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-phase0-0002/successor-manifest.json",
+    "sha256": "539ed83ec1936d3c6c60f1e06021f3af428feea4a22b8f7a3d40396fca7eacb0"
   },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/payloads/fordham/fordham-stage1-0002/venue-reconciliation.json",
-    "sha256": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
-  },
-  "conference_reconciliation": null,
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fordham/fordham-stage1-0003/checkpoint-manifest.json",
-    "sha256": "c24805412a09a9a15b20f91edb0ecf8f8c05382f141d1089f2b8ee114e70ec08"
-  },
-  "history_scope": {
-    "start_season": "1902-1903",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Owner-confirmed Research Freeze scope: Fordham is accepted as top-level/D1-equivalent from program inception, beginning with the accepted 1902-03 program history; accepted scope 1902-03+ / INCEPTION+."
-  },
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
   "creation_provenance": {
-    "origin": "ChatGPT Fordham serialized Implementation lane — guarded Phase 0 resubmission after bounded technical recovery",
-    "authorization": "Existing Fordham startup phase authority persists. fordham-phase0-0001 was durably classified NOT_ATTEMPTED because the permanent tool rejected shorthand history_start_season 1902-03 before preparing or publishing any mutation. Recovery fordham-phase0-recover-0001 cleared the lock with no target branch present. This request is identical in historical and reconciliation authority to the prior request and changes only the machine-format season value to the permanent tool's required 1902-1903 representation. Stage 1 fordham-stage1-0003 remains PASS/0 blockers and the immutable Research Freeze remains unchanged."
+    "origin": "ChatGPT Fordham serialized Implementation lane — first Stage 2 capability census after fresh-verified Phase 0",
+    "authorization": "Existing Fordham startup authority continues through deterministic Stage 2 census, any repository-policy-permitted representation-only normalization, and exact recommendation-map rehearsal to the next genuine owner boundary. Phase 0 fordham-phase0-0002 is complete and independently fresh-verified at target 361010cc1ea1c9ba1528b496d64094a97a4d35a1 on protected main 7b506889ec3e613bb92f86866d6d6d1f65852250. This request is read-only and grants no Owner Gate 1, seal, apply, release, Preview, merge, or Production authority."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
