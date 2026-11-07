@@ -407,7 +407,7 @@
   "active_request_sha256": "53148c9b7cf386924b6f0b1609acd8dda6e6d9c46a6884b76b2d00ebccfcb4d6",
   "active_school_key": "fordham",
   "active_target_branch": "data/fordham-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "84d729641f28186a2e7f170c16798d866db40e81",
   "active_writeahead_path": ".remote-implementation/writeahead/fordham/fordham-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "ecb597280dcb899fa7ca35c5a55e5729baa5ca216b6635c8f20a165424dffbcd",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
