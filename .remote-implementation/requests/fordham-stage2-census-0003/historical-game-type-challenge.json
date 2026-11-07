@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "kind": "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES",
+  "school_key": "fordham",
+  "authority_basis": "Control Center disposition after Issue #502 and merged PR #503 authorizes the exact FORDHAM-1990-91-031 NCAA non-appearance qualifier correction to be exposed for Owner Gate 1 review without reopening Research.",
+  "challenges": [
+    {
+      "challenge_type": "NCAA_NON_APPEARANCE_QUALIFIER",
+      "source_game_id": "FORDHAM-1990-91-031",
+      "source_row_sha256": "171776c2ab203f01421ecd2049f22c7b4d4fabbd277d9354c56daa4872d5f82b",
+      "expected_source_game_type": "NCAA_TOURNAMENT",
+      "proposed_source_game_type": "NCAA_TOURNAMENT",
+      "expected_source_postseason_round": "Play-in",
+      "proposed_source_postseason_round": "",
+      "evidence_basis": "Fordham institutional history establishes that the Patriot League lacked an automatic bid; Fordham lost the NCAA-administered Saint Francis play-in, then still awaited an NCAA at-large bid, did not receive one, and entered the NIT. The game is therefore a qualifier outside the national bracket rather than an NCAA Tournament appearance."
+    }
+  ]
+}
