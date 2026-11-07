@@ -869,10 +869,6 @@ def validate_request(request: dict[str, Any]) -> None:
             scope.get("start_season"),
             "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
         )
-        _require_canonical_season(
-            scope.get("start_season"),
-            "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
-        )
         if str(scope.get("basis") or "").strip() == "TOP_LEVEL_INTERVALS":
             _require(
                 bool(str(scope.get("intervals") or "").strip()),
@@ -956,6 +952,10 @@ def validate_request(request: dict[str, Any]) -> None:
                 bool(str(scope.get(key) or "").strip()),
                 f"REQUEST_HISTORY_SCOPE_{key.upper()}_MISSING",
             )
+        _require_canonical_season(
+            scope.get("start_season"),
+            "REQUEST_HISTORY_SCOPE_START_SEASON_INVALID",
+        )
         if str(scope.get("basis") or "").strip() == "TOP_LEVEL_INTERVALS":
             _require(
                 bool(str(scope.get("intervals") or "").strip()),
