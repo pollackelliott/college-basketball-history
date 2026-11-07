@@ -758,11 +758,11 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
 
 
 _LEGACY_LITERAL_SCORE_RESULT_RE = re.compile(
-    r"(?<!\\d)(?P<a>\\d{1,3})\\s+(?P<b>\\d{1,3})\\s+(?P<result>[WLT])\\s*$",
+    r"(?<!\d)(?P<a>\d{1,3})\s+(?P<b>\d{1,3})\s+(?P<result>[WLT])\s*$",
     re.IGNORECASE,
 )
 _LEGACY_LITERAL_SCORE_PAIR_RE = re.compile(
-    r"(?<!\\d)(?P<a>\\d{1,3})\\s+(?P<b>\\d{1,3})(?!\\d)"
+    r"(?<!\d)(?P<a>\d{1,3})\s+(?P<b>\d{1,3})(?!\d)"
 )
 
 
