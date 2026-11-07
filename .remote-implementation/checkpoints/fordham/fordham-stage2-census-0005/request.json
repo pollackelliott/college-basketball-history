@@ -1,0 +1,70 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly authorized one atomic control request plus exact protected-main workflow synchronization, superseding unexecuted fordham-stage2-census-0004. Preserve the existing fresh-verified refresh successor, 162-decision universe, recommendation map, NCAA qualifier challenge, frozen H/A/N, and Owner Gate 1 boundary. Do not replay prior stages or cross Owner Gate 1.",
+    "origin": "Fordham Stage 2 continuation — Control Center-authorized fresh census after generic scheduler repair PR #507"
+  },
+  "expected_protected_main_sha": "8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458",
+  "historical_game_type_challenge": {
+    "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
+    "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
+  },
+  "integration_freeze_sha256": "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-phase0-0002/successor-manifest.json",
+    "sha256": "539ed83ec1936d3c6c60f1e06021f3af428feea4a22b8f7a3d40396fca7eacb0"
+  },
+  "phase_continuation": {
+    "census_request_id": "fordham-stage2-census-0005",
+    "expected_decision_universe_sha256": "1187acf111f3c7034d2fb8be7dcfa00cc50b12e6c09d5a50d0bb607c85a2f80f",
+    "historical_game_type_challenge": {
+      "path": ".remote-implementation/requests/fordham-stage2-census-0003/historical-game-type-challenge.json",
+      "sha256": "669a61a3fc22a7e87eaef95250552d553c5d923cc1035167a8918732acbac2f8"
+    },
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "proposal_request_id": "fordham-stage2-proposal-0003",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/fordham-stage2-current-main-refresh-0002/recommendation-map.json",
+      "sha256": "62aa15ecdbf10bdd2b14ab990490f2be9b1f4aac378a9c90e8e566ceaf46674e"
+    }
+  },
+  "previous_control_state_commit": "1d0f930403531cd603ebdd3495c684d55b5c106c",
+  "previous_control_state_sha256": "79a576537f49fb3791d34ac4d82e1a668da2622b90cca3eefc3b7ce9684f3253",
+  "request_id": "fordham-stage2-census-0005",
+  "schema_version": 1,
+  "school_key": "fordham",
+  "semantic_snapshot_sha256": "0279c0deb7369df609b9bcba398019fc5b302a0fe42a4f2de3c7d6496cf95858",
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-stage2-current-main-refresh-0002/successor-manifest.json",
+    "sha256": "21ab35204030a6fd8b9e8885202ff424328a06be774c4a796b8dd92e45c9c227"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/fordham/fordham-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f8c76043e5379178619c70ff78e156c3ea7d03c5d38253f4a1dc6834f4d8cc10"
+  },
+  "target_branch": "data/fordham-onboarding",
+  "target_sha": "a61317b930f1beedb47c5816f29b2d752c9afb32"
+}
