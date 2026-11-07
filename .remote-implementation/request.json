@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fordham-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "fordham",
-  "previous_control_state_commit": "44216f73651cced1bc41aebd5790611d2dddbc57",
-  "previous_control_state_sha256": "cbf8444727af717bb510f7dfac07b12575a55f462de4ceac6cede8c6cf72e738",
-  "expected_protected_main_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
-  "target_branch": "data/fordham-onboarding",
-  "target_sha": "871f426010fef66c2a6ca982197b925100a99318",
-  "pr_number": 508,
-  "merge_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fordham/fordham-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "f6dc0888db5dfd1a3d1e80340c20f5d3a99f2cf4ae621ea0a42a799f2d916819"
+  "request_id": "saint-joseph-s-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "saint-joseph-s",
+  "previous_control_state_commit": "f9497b66b0e9e9ae535c37828520a2fe9cbe07b8",
+  "previous_control_state_sha256": "72be0d6c936e67c9d64532ff949a312b0123d2fe3591eb4b91eb37e37d641c64",
+  "expected_protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "research_checkpoint": {
+    "sha256": "25f9103ace9dc7cb1649e524e6f1791e84373941adad37abb81fc5b9137a2e6a",
+    "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "f9497b66b0e9e9ae535c37828520a2fe9cbe07b8",
+      "path_prefix": ".remote-implementation/transports/saint-joseph-s/saint-joseph-s-stage1-0001-final/piece-",
+      "part_count": 99
+    }
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/fordham/fordham-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "e12c0fc61491c78ca8afa6e2866f3c54a211b2b40d3a3fcb3e2526a2db52e71e"
-  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT Fordham Implementation lane — packet-bound post-merge Production proof",
-    "authorization": "Owner explicitly approved the exact Fordham Preview with “Approved. Proceed,” authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #508 head 871f426010fef66c2a6ca982197b925100a99318 against approved main 8ab7d35cf49c0166ed36ddfcb3e1cd1041c11458. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 9b009c0bed995a9d9af52c5908f0b6abec5532a7, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
+    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — owner-authorized Stage 1",
+    "authorization": "Owner explicitly concluded Saint Joseph's Research, designated the exact attached final RESEARCH_FROZEN artifact, and authorized the Saint Joseph's serialized Implementation Stage 1 phase. The owner-designated attachment fallback authenticated immutable ZIP SHA-256 25f9103ace9dc7cb1649e524e6f1791e84373941adad37abb81fc5b9137a2e6a, exact six-file membership, research_base_sha 89327ed84827323a3f64e08ac1410ed71e442a0e, settled INCEPTION+ scope, prior owner NON_D1 approval, and pre-freeze self-challenge PASS with no competing/superseding Saint Joseph's artifact found. This request authorizes only the complete read-only current-main Stage 1 reconciliation inventory against exact protected main f812bfd3a02805df6c9124e9fa2991086aa4f99f. It does not reopen Research or authorize Phase 0 mutation, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, protected-main mutation, or another school."
   },
   "authority": {
     "phase0": false,
@@ -42,7 +42,7 @@
     "owner_gate_1": false,
     "owner_gate_2": false,
     "release_gate2_approval": false,
-    "release_production_proof": true,
+    "release_production_proof": false,
     "venue_identity_maintenance": false
   }
 }
