@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fordham-stage1-0003",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "fordham-phase0-0001",
+  "operation": "PHASE0",
   "school_key": "fordham",
-  "previous_control_state_commit": "3e89d703a7bd6e21dc62806a8e63611b244216b0",
-  "previous_control_state_sha256": "892eef76378c4e976b1a3af1d8c144a1f26be8de8e8b20ed529c7e81677e8f83",
+  "previous_control_state_commit": "c326e186c5f63f7f56ded2c5cc26f90f8b1d26f3",
+  "previous_control_state_sha256": "f2db7ec7c9927c188427fb9bb75f8e103da9de09b7b75414f673543d8c90b263",
   "expected_protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
+  "target_branch": "data/fordham-onboarding",
   "research_checkpoint": {
     "sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
     "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
@@ -22,12 +23,22 @@
     "sha256": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
   },
   "conference_reconciliation": null,
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/fordham/fordham-stage1-0003/checkpoint-manifest.json",
+    "sha256": "c24805412a09a9a15b20f91edb0ecf8f8c05382f141d1089f2b8ee114e70ec08"
+  },
+  "history_scope": {
+    "start_season": "1902-03",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Owner-confirmed Research Freeze scope: Fordham is accepted as top-level/D1-equivalent from program inception, beginning with the accepted 1902-03 program history; accepted scope 1902-03+ / INCEPTION+."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Fordham serialized Implementation lane — post-PR #501 complete Stage 1 rerun",
-    "authorization": "Control Center authorized generic date-aware venue-name repair under Issue #500 and confirmed PR #501 merged at protected main 7b506889ec3e613bb92f86866d6d6d1f65852250. Existing Fordham startup authority remains valid. This fresh request reruns the complete permanent Stage 1 inventory once against the unchanged immutable Research Freeze and existing exact venue-reconciliation authority, including the settled FORDHAM-2004-05-009 -> VEN-000694 mapping. It does not reopen Research, change historical meaning, authorize shared/global mutation, or authorize Phase 0; Phase 0 remains contingent on this request reaching PASS with zero blockers."
+    "origin": "ChatGPT Fordham serialized Implementation lane — guarded Phase 0 after post-repair Stage 1 PASS",
+    "authorization": "Existing Fordham startup authority explicitly permits deterministic current-main reconciliation through guarded Phase 0 and Stage 2. Control Center repair PR #501 merged at protected main 7b506889ec3e613bb92f86866d6d6d1f65852250. Fresh complete Stage 1 request fordham-stage1-0003 then reached PASS with zero blockers, zero ambiguous stops, zero maintenance, 52 safe venue reuses, 12 new venue identities, 182 nonblocking program-alias rows, and 4 conference reuses. The immutable Research Freeze and settled FORDHAM-2004-05-009 -> VEN-000694 authority remain unchanged. This request authorizes only ordinary guarded Phase 0 publication to data/fordham-onboarding."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
