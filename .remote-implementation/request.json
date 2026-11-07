@@ -1,46 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "fordham-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "fordham-phase0-recover-0001",
+  "operation": "RECOVER",
   "school_key": "fordham",
-  "previous_control_state_commit": "c326e186c5f63f7f56ded2c5cc26f90f8b1d26f3",
-  "previous_control_state_sha256": "f2db7ec7c9927c188427fb9bb75f8e103da9de09b7b75414f673543d8c90b263",
+  "previous_control_state_commit": "38bc6f34e9786bd61a559e880f4a96fc749c52a0",
+  "previous_control_state_sha256": "b5d79d57643a5111ba013c0da60e308c5c6f6b590cc1bcdebf3110d6b15d20cb",
   "expected_protected_main_sha": "7b506889ec3e613bb92f86866d6d6d1f65852250",
-  "target_branch": "data/fordham-onboarding",
-  "research_checkpoint": {
-    "sha256": "e187db04e8ac3e7bd800eece05645dc105a9cccfbc30fdfeec5c5675697eb514",
-    "research_base_sha": "fc3a2d4e84f8dbcb68155766568b4ffedc0d6725",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "a39ae2a8e2f3b49e6eb102e28b4c1bde63d57155",
-      "path_prefix": ".remote-implementation/transports/fordham/fordham-stage1-0001/piece-",
-      "part_count": 15
-    }
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/payloads/fordham/fordham-stage1-0002/venue-reconciliation.json",
-    "sha256": "ba4ed61aea738438ebdd5882ad54c3a4368de0681fe40ccfedb1897e8e7d1ce4"
-  },
-  "conference_reconciliation": null,
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/fordham/fordham-stage1-0003/checkpoint-manifest.json",
-    "sha256": "c24805412a09a9a15b20f91edb0ecf8f8c05382f141d1089f2b8ee114e70ec08"
-  },
-  "history_scope": {
-    "start_season": "1902-03",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Owner-confirmed Research Freeze scope: Fordham is accepted as top-level/D1-equivalent from program inception, beginning with the accepted 1902-03 program history; accepted scope 1902-03+ / INCEPTION+."
-  },
   "creation_provenance": {
-    "origin": "ChatGPT Fordham serialized Implementation lane — guarded Phase 0 after post-repair Stage 1 PASS",
-    "authorization": "Existing Fordham startup authority explicitly permits deterministic current-main reconciliation through guarded Phase 0 and Stage 2. Control Center repair PR #501 merged at protected main 7b506889ec3e613bb92f86866d6d6d1f65852250. Fresh complete Stage 1 request fordham-stage1-0003 then reached PASS with zero blockers, zero ambiguous stops, zero maintenance, 52 safe venue reuses, 12 new venue identities, 182 nonblocking program-alias rows, and 4 conference reuses. The immutable Research Freeze and settled FORDHAM-2004-05-009 -> VEN-000694 authority remain unchanged. This request authorizes only ordinary guarded Phase 0 publication to data/fordham-onboarding."
+    "origin": "ChatGPT Fordham serialized Implementation lane — bounded recovery of failed Phase 0 input-format request",
+    "authorization": "Existing Fordham startup phase authority persists through deterministic technical recovery. fordham-phase0-0001 stopped after authenticated inputs because history_start_season used shorthand 1902-03 instead of the permanent tool's required YYYY-YYYY form. No write-ahead, prepared commit, or target branch exists; historical scope remains unchanged. This recovery only abandons the unattempted mutation so the same Phase 0 can be resubmitted with start_season 1902-1903."
+  },
+  "recovery": {
+    "abandoned_request_id": "fordham-phase0-0001",
+    "lock_commit": "9b4cd3265a210fb3bb94d6da73b2de7bdc4dde52",
+    "target_branch": "data/fordham-onboarding"
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": false,
+    "recovery": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
