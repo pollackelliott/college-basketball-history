@@ -1,0 +1,156 @@
+name: Fordham qualifier candidate proof 4
+
+on:
+  push:
+    branches:
+      - proof4/fordham-qualifier-503
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download exact candidate and Fordham snapshots
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p candidate fordham fordham/.onboarding/fordham
+
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/pollackelliott/college-basketball-history/tarball/471663cb2291923a8c9fd80cc21b07b835b628e9 \
+            -o /tmp/candidate.tgz
+          tar -xzf /tmp/candidate.tgz -C candidate --strip-components=1
+
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/pollackelliott/college-basketball-history/tarball/80f664d563f4963403c72b4a7ed2e7063ae2fac6 \
+            -o /tmp/fordham.tgz
+          tar -xzf /tmp/fordham.tgz -C fordham --strip-components=1
+
+          curl -fsSL \
+            https://raw.githubusercontent.com/pollackelliott/college-basketball-history/7f2968bc417ea93b68c3df733d749aaab84d7230/.remote-implementation/writeahead/fordham/fordham-stage2-opponent-display-normalize-0001/integration-freeze.json \
+            -o fordham/.onboarding/fordham/integration-freeze.json
+
+          test "$(sha256sum fordham/.onboarding/fordham/integration-freeze.json | awk '{print $1}')" = \
+               "8daa9377ab4809907b4673351641edf8d3b5b7ae443d0d1cea89117268a7a59f"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate Fordham row and build exact challenge
+        shell: bash
+        run: |
+          set -euo pipefail
+          (
+            cd fordham
+            find schools data -type f -print0 | sort -z | xargs -0 sha256sum
+          ) > /tmp/basketball.before.sha256
+
+          python - <<'PY'
+          import csv, json, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path("candidate/tools").resolve()))
+          from postseason_classification_review import row_fingerprint
+
+          with Path("fordham/schools/fordham/source-games.csv").open(
+              encoding="utf-8-sig", newline=""
+          ) as handle:
+              rows = list(csv.DictReader(handle))
+          row = next(r for r in rows if r["source_game_id"] == "FORDHAM-1990-91-031")
+          fingerprint = row_fingerprint(row)
+          expected = "171776c2ab203f01421ecd2049f22c7b4d4fabbd277d9354c56daa4872d5f82b"
+          assert fingerprint == expected, (fingerprint, expected)
+          assert row["game_date"] == "1991-03-06"
+          assert row["normalized_opponent_key"] == "saint-francis-pa"
+          assert row["curated_game_type"] == "NCAA_TOURNAMENT"
+          assert row["curated_postseason_round"] == "Play-in"
+
+          payload = {
+              "schema_version": 1,
+              "kind": "STAGE2_HISTORICAL_GAME_TYPE_CHALLENGES",
+              "school_key": "fordham",
+              "authority_basis": "Control Center Issue #502.",
+              "challenges": [{
+                  "challenge_type": "NCAA_NON_APPEARANCE_QUALIFIER",
+                  "source_game_id": "FORDHAM-1990-91-031",
+                  "source_row_sha256": fingerprint,
+                  "expected_source_game_type": "NCAA_TOURNAMENT",
+                  "proposed_source_game_type": "NCAA_TOURNAMENT",
+                  "expected_source_postseason_round": "Play-in",
+                  "proposed_source_postseason_round": "",
+                  "evidence_basis": (
+                      "Fordham institutional history says the Patriot League lacked an "
+                      "automatic bid, Fordham lost the NCAA-administered play-in, then "
+                      "awaited an NCAA at-large bid; after no NCAA bid it entered the NIT."
+                  ),
+              }],
+          }
+          Path("/tmp/fordham-qualifier-challenge.json").write_text(
+              json.dumps(payload, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print("FORDHAM_SOURCE_ROW_SHA256=" + fingerprint)
+          PY
+
+      - name: Run exact candidate Stage 2 census
+        shell: bash
+        run: |
+          set -euo pipefail
+          python candidate/tools/implementation_stage2.py fordham \
+            --repo fordham \
+            --historical-game-type-challenge /tmp/fordham-qualifier-challenge.json
+
+      - name: Verify owner-reviewable result and zero tracked basketball mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("fordham")
+          status = json.loads(
+              (root / ".onboarding/fordham/implementation-stage2-status.json").read_text()
+          )
+          census = json.loads(
+              (root / ".onboarding/fordham/implementation-stage2-capability-census.json").read_text()
+          )
+          plan = json.loads((root / ".onboarding/fordham/plan.json").read_text())
+
+          assert status["status"] == "CAPABILITY_CENSUS_READY", status
+          assert status["semantic_drift"] == {"status": "PASS", "change_count": 0}, status
+          assert status["preflight"]["blocker_count"] == 0, status
+          assert census["status"] == "CAPABILITY_CENSUS_READY", census
+
+          qualifier = [
+              d for d in plan["decisions"]
+              if d.get("source_game_id") == "FORDHAM-1990-91-031"
+              and d.get("historical_ncaa_nonappearance_qualifier_challenge")
+          ]
+          assert len(qualifier) == 1, qualifier
+          item = qualifier[0]
+          assert item["decision"] == "PENDING", item
+          assert item["source_value"] == "Play-in", item
+          assert item["recommended_action"] == "APPLY_POSTSEASON_CLASSIFICATION_PATCH", item
+          assert item["allowed_actions"] == ["APPLY_POSTSEASON_CLASSIFICATION_PATCH"], item
+
+          print("FORDHAM_CANDIDATE_STAGE2_STATUS=" + status["status"])
+          print("FORDHAM_CANDIDATE_BLOCKERS=" + str(status["preflight"]["blocker_count"]))
+          print("FORDHAM_CANDIDATE_DECISION_COUNT=" + str(status["preflight"]["decision_count"]))
+          print("FORDHAM_QUALIFIER_OWNER_REVIEW=PASS")
+          print("FORDHAM_SEMANTIC_DRIFT=PASS")
+          PY
+
+          (
+            cd fordham
+            find schools data -type f -print0 | sort -z | xargs -0 sha256sum
+          ) > /tmp/basketball.after.sha256
+          diff -u /tmp/basketball.before.sha256 /tmp/basketball.after.sha256
+          echo "FORDHAM_TRACKED_BASKETBALL_MUTATION=NONE"
