@@ -629,6 +629,10 @@ The repository then advances only through fresh-verified durable boundaries:
 4. sealed apply retains its ordinary mutation lock, write-ahead, expected-predecessor
    CAS publication, recovery model, and independent fresh verification.
 
+Actions-authored child requests use the same guarded post-CAS `workflow_dispatch`
+transport described for refresh -> census -> proposal above; ordinary external pushes
+continue to use the normal push trigger.
+
 Each child request binds the exact checkpoint and verification artifact created by the
 prior operation. The owner approval hash, decision universe, recommendation map,
 approved-plan preview, filled review, decision-ID set, and final approved-plan hash are
