@@ -1,3 +1,4 @@
+import csv
 import sys
 import unittest
 from pathlib import Path
@@ -128,6 +129,82 @@ class DateAwareVenueNameReconciliationTests(unittest.TestCase):
         ]
         self.assertEqual(len(old_ucf_rows), 1)
         self.assertEqual(old_ucf_rows[0]["valid_to"], "2007-03-03")
+        self.assertFalse(
+            any(
+                row["venue_id"] == "VEN-000694"
+                and row["normalized_name"] == "ucfarena"
+                and not row.get("valid_from", "").strip()
+                and not row.get("valid_to", "").strip()
+                for row in staged_names
+            )
+        )
+
+    def test_exact_fordham_2004_ucf_topology_against_repository_reference(self):
+        def read_csv(path):
+            with path.open(encoding="utf-8-sig", newline="") as handle:
+                return list(csv.DictReader(handle))
+
+        globals_ = read_csv(ROOT / "data/reference/venues.csv")
+        names = read_csv(ROOT / "data/reference/venue-names.csv")
+        old = next(row for row in globals_ if row["venue_id"] == "VEN-000694")
+        new = next(row for row in globals_ if row["venue_id"] == "VEN-000038")
+        old_names = [
+            row
+            for row in names
+            if row["venue_id"] == "VEN-000694"
+            and row["normalized_name"] == "ucfarena"
+        ]
+        new_names = [
+            row
+            for row in names
+            if row["venue_id"] == "VEN-000038"
+            and row["normalized_name"] == "ucfarena"
+        ]
+
+        self.assertEqual(len(old_names), 1)
+        self.assertEqual(old_names[0]["name_type"], "HISTORICAL_OR_ALIAS")
+        self.assertEqual(old_names[0]["valid_from"], "")
+        self.assertEqual(old_names[0]["valid_to"], "2007-03-03")
+        self.assertEqual(len(new_names), 1)
+        self.assertEqual(new_names[0]["valid_from"], "2007-09-08")
+
+        fordham = local_ucf_arena("2004-12-28")
+        fordham["source_program_key"] = "fordham"
+        fordham["source_basis"] = (
+            "Fordham immutable Research Freeze; FORDHAM-2004-05-009"
+        )
+
+        inventory = venue_reconciliation_inventory(
+            [dict(fordham)],
+            globals_,
+            names,
+            school_key="fordham",
+            venue_reconciliation=reconciliation(),
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        row = inventory["rows"][0]
+        self.assertEqual(row["classification"], "SAFE_REPRESENTATION_REUSE")
+        self.assertEqual(row["target_venue_id"], "VEN-000694")
+        self.assertIn(
+            "DATE_BOUNDED_REGISTERED_NAME_DISAMBIGUATION",
+            row["issues"],
+        )
+        self.assertNotIn("CONFLICTING_REGISTERED_NAME_IDENTITIES", row["issues"])
+        self.assertNotIn("GLOBAL_NAME_REGISTRATION_DURING_PHASE0", row["issues"])
+
+        staged, staged_globals, staged_names, mappings = rebase_venues(
+            "fordham",
+            [dict(fordham)],
+            globals_,
+            names,
+            venue_reconciliation=reconciliation(),
+        )
+        self.assertEqual(staged[0]["venue_id"], "VEN-000694")
+        self.assertEqual(mappings[0]["resolution"], "REUSE_EXPLICIT_RECONCILIATION")
+        self.assertEqual(
+            next(row for row in staged_globals if row["venue_id"] == "VEN-000038"),
+            new,
+        )
         self.assertFalse(
             any(
                 row["venue_id"] == "VEN-000694"
