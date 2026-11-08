@@ -1,0 +1,65 @@
+{
+  "approved_plan_hash_preview": "2c7c7f4b791c3d2dbe669c7871776b978379f89df746bcb0f59d871b4b8ed12d",
+  "authority": {
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": true,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly approved the exact fresh-verified George Mason Gate 1 packet and said Proceed. Authorize one guarded STAGE2_GATE1_FILL plus repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic Gate 1 seal, sealed apply, and independent post-apply verification only. No release readiness, PR/Preview, Owner Gate 2, merge, Production proof, recovery, unrelated mutation, or changed historical authority.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — explicit exact Owner Gate 1 approval"
+  },
+  "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
+  "expected_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_GATE1_FILL",
+  "owner_gate_1_approval": {
+    "approval_basis": "Owner explicitly stated 'approved. Proceed' immediately after the George Mason Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY packet for george-mason-stage2-proposal-0002: 28 decisions, decision-universe SHA-256 f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898, recommendation-map SHA-256 3f84316d79ae50b7c7bf1b5f00db28fed2f33269fbe0ead9f70bb01bda8a47c3, approved-plan preview 2c7c7f4b791c3d2dbe669c7871776b978379f89df746bcb0f59d871b4b8ed12d. That exact packet includes six USE_SOURCE recommendations (including the accepted Butler neutral site and five adversarially corrected institutional-source date/score recommendations), seven KEEP_CANONICAL, six exact canonical identity matches, seven conditional NOT_APPLICABLE, VERIFY_REFERENCE_VALUES for accomplishments, and ENABLE_PUBLIC_PAGE through normal gated release. This approval authorizes the guarded Gate 1 fill, pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification for that exact packet only. It does not approve Preview, Owner Gate 2, merge, Production, recovery, unrelated mutation, or changed historical meaning.",
+    "approved": true,
+    "approved_plan_hash_preview": "2c7c7f4b791c3d2dbe669c7871776b978379f89df746bcb0f59d871b4b8ed12d",
+    "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
+    "proposal_checkpoint_sha256": "1516e445ea3ec8d14b622a8d74d230169ae11683f7a9f7629c16d86ef662d89d",
+    "recommendation_map_sha256": "3f84316d79ae50b7c7bf1b5f00db28fed2f33269fbe0ead9f70bb01bda8a47c3"
+  },
+  "phase_continuation": {
+    "apply_request_id": "george-mason-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "george-mason-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "george-mason-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "735bc0a5dd0a029cf9901c39e1e45d62b8abb921",
+  "previous_control_state_sha256": "f0cde6e55f00b4a90760f2cbf92a2a1eb6f1afaeda474768a0d02cea8e34f943",
+  "recommendation_map_sha256": "3f84316d79ae50b7c7bf1b5f00db28fed2f33269fbe0ead9f70bb01bda8a47c3",
+  "request_id": "george-mason-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-stage2-proposal-0002/checkpoint-manifest.json",
+    "sha256": "1516e445ea3ec8d14b622a8d74d230169ae11683f7a9f7629c16d86ef662d89d"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
+    "sha256": "f769a5b90dc0fe7461cdfbb23f4fdb8b362c6fe88c49766f154d1e7a23d98678"
+  },
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "d49e677de165248ef156f1f8d8c923240bdecee9"
+}
