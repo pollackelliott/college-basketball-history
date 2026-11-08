@@ -115,16 +115,18 @@ A persistent checkout is not required.
 When an exact-state checkout is already available, the command may run there.
 
 Otherwise first use the authenticated GitHub connector to fetch the exact
-`tools/research_stage3a0.py` file at the confirmed full protected-main SHA. When those
-authenticated bytes can be written into temporary storage, execute that exact file against
-the attached checkpoint/ledger with explicit `--main-sha`.
+`tools/research_stage3a0.py` file and its exact repository-owned runtime dependency
+`tools/research_authoring_capsule.py` at the confirmed full protected-main SHA. When those
+authenticated bytes can be written together into temporary storage, execute the exact
+Stage 3A-0 tool against the attached checkpoint/ledger with explicit `--main-sha`.
 
 If the connector can retrieve the exact file content but the current tool environment cannot
 materialize/write those bytes into the execution filesystem, use the authenticated
 exact-SHA Actions artifact fallback. The successful
 `Research Stage 3A-0 portable tool` push run for that exact protected-main SHA publishes
-`research-stage3a0-tool-<sha>`, containing only the permanent Stage 3A-0 tool, its portable
-bundle verifier, and a manifest of exact SHA-256 hashes/file sizes. Download/materialize the
+`research-stage3a0-tool-<sha>`, containing only the permanent Stage 3A-0 tool, its exact
+repository-owned runtime dependency, its portable bundle verifier, and a manifest of exact
+SHA-256 hashes/file sizes. Download/materialize the
 artifact, verify it with
 `python tools/research_stage3a0_portable.py verify <bundle-dir> --main-sha <sha>`, then
 run the unchanged permanent `research_stage3a0.py` against the authoritative checkpoint.

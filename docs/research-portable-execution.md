@@ -21,8 +21,8 @@ Stage 3A-0 is checkpoint-only. It does not require canonical games, assertions, 
 After confirming the exact protected-main SHA:
 
 1. if an exact-state runnable checkout already exists, run the permanent command there;
-2. otherwise use the authenticated GitHub connector to fetch the exact `tools/research_stage3a0.py` file at that full SHA;
-3. when those authenticated bytes can be written to temporary storage, run that exact file against the authoritative Stage 2 checkpoint/ledger with explicit `--main-sha`;
+2. otherwise use the authenticated GitHub connector to fetch the exact `tools/research_stage3a0.py` file and its exact repository-owned runtime dependency `tools/research_authoring_capsule.py` at that full SHA;
+3. when those authenticated bytes can be written together to temporary storage, run that exact Stage 3A-0 tool against the authoritative Stage 2 checkpoint/ledger with explicit `--main-sha`;
 4. if the connector can read the file but cannot materialize/write those bytes into the execution filesystem, use the authenticated exact-SHA Stage 3A-0 artifact fallback described below;
 5. preserve the emitted Stage 3A-0 artifacts.
 
@@ -39,6 +39,7 @@ commit by `.github/workflows/research-stage3a0-portable.yml`.
 The artifact contains exactly:
 
 - `tools/research_stage3a0.py`;
+- `tools/research_authoring_capsule.py`, the permanent Stage 3A-0 tool's repository-owned runtime dependency;
 - `tools/research_stage3a0_portable.py`;
 - `research-stage3a0-tool-manifest.json` with the exact protected-main SHA, file sizes,
   and SHA-256 hashes.
@@ -65,7 +66,7 @@ or owner-operated Codespaces merely to run Stage 3A-0.
 
 The Stage 3A-0 invariant is:
 
-`same checkpoint + same permanent-tool bytes = same census/partition/queues`
+`same checkpoint + same permanent-tool/runtime-dependency bytes = same census/partition/queues`
 
 The protected-main SHA remains recorded so the exact tool/policy version is auditable.
 
