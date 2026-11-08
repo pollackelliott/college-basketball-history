@@ -91,8 +91,15 @@ jobs:
           git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
           actual_main="$(git rev-parse refs/remotes/origin/main)"
           if [[ "$actual_main" != "$expected_main" ]]; then
-            echo "Protected main changed or request is stale: expected=$expected_main actual=$actual_main" >&2
-            exit 1
+            if [[ "${{ steps.detect.outputs.has_request }}" == "true" ]]; then
+              echo "Protected main changed or request is stale: expected=$expected_main actual=$actual_main" >&2
+              exit 1
+            fi
+            if ! git merge-base --is-ancestor "$expected_main" "$actual_main"; then
+              echo "Pending verification bound main is no longer an ancestor of protected main: expected=$expected_main actual=$actual_main" >&2
+              exit 1
+            fi
+            echo "Pending verification will use original bound main runtime: bound=$expected_main observed_live=$actual_main"
           fi
 
       - name: Check out exact protected-main runtime
