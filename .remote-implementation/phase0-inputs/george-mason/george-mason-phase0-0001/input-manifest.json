@@ -1,0 +1,21 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "8e37c18c3572c583e7b1261270a629d97ba11b1a",
+  "request_id": "george-mason-phase0-0001",
+  "research_checkpoint_sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
+  "research_member_sha256": {
+    "conferences.csv": "f4c7b5dc9e4aa80f69de682a900bf5c7fb8326d18f42e5c5861e95f2dccc3ec9",
+    "notes.md": "5b0208b97f887efe421cba9913f74f272edd1838ab2b15e2a2334d4390e90b8d",
+    "opponents.csv": "1b2cf517946eed0692bcfec30f23d81da4fbf15c2148a7f8086577c02844835e",
+    "source-games.csv": "2dae844d6095179500c639de69b2869c2478ee68c0087ffd54401ba1063ea805",
+    "source-notes.md": "327319f26be40950e8c8a0bd3bb1f096f21c290f426b912df716d36f88c7f712",
+    "venues.csv": "f377938f2ac6bc0f93e7ed336471ae48f1d2f13b9e96e0dface00dc655d0e462"
+  },
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "sidecars": {
+    "conference-reconciliation.json": "cfbaeac495e3fca67add4742c9351dc42e6cfa21e196bb6cf944f26ade4f05e9",
+    "stage1-reconciliation.json": "10579975a413b761adf61b4e07b820b55a14f223e3da6ea95a41ba3cb8df9835"
+  },
+  "stage1_status": "PASS"
+}

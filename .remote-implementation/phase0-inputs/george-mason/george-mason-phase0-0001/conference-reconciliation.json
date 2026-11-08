@@ -1,0 +1,61 @@
+{
+  "expected_conferences_sha256": "f4c7b5dc9e4aa80f69de682a900bf5c7fb8326d18f42e5c5861e95f2dccc3ec9",
+  "owner_approval_basis": "Owner explicitly authorized the post-repair George Mason Stage 1 rerun through repository-authorized deterministic current-main reconciliation. The immutable accepted Research Freeze (SHA-256 8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374) already settles the 1979-80 through 1984-85 ECAC South conference identity and explicitly directs serialized Implementation to reconcile that pending global registration on current main. This spec preserves all four frozen conference-history rows unchanged and registers only the missing research-settled `ecac-south` identity; the tournament label is a nonassertive display fallback and does not assert tournament existence.",
+  "registrations": [
+    {
+      "conference_key": "ecac-south",
+      "conference_name": "ECAC South",
+      "notes": "George Mason Stage 1 deterministic current-main registration of the research-settled ECAC South identity. `ECAC South` is used only as a nonassertive display fallback; this registration does not assert that a conference tournament existed in any particular season.",
+      "status": "historical",
+      "tournament_label": "ECAC South"
+    }
+  ],
+  "replacement_history": [
+    {
+      "basis": "George Mason institutional program history identifies 1978-79 as the Division I inaugural season; the accepted conference chronology begins ECAC South play in 1979-80. Sources: https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf ; https://gomason.com/news/2017/8/16/rohlands-mens-basketball-all-decade-team-1976-86",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "end_season": "1978-1979",
+      "membership_type": "independent",
+      "notes": "In-scope first season only; not inferred from opponent scheduling.",
+      "ongoing": "No",
+      "source_program_key": "george-mason",
+      "start_season": "1978-1979"
+    },
+    {
+      "basis": "George Mason institutional all-decade history records 1980 ECAC South honors; the Mason prospectus records 1984-85 as 10-4 ECAC South before the 1985-86 CAA transition. Sources: https://gomason.com/news/2017/8/16/rohlands-mens-basketball-all-decade-team-1976-86 ; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf",
+      "conference_key": "ecac-south",
+      "conference_name": "ECAC South",
+      "end_season": "1984-1985",
+      "membership_type": "primary",
+      "notes": "Research-local historical conference key. No protected-main shared conference mutation occurred; serialized Implementation must reconcile the accepted historical identity on current main.",
+      "ongoing": "No",
+      "source_program_key": "george-mason",
+      "start_season": "1979-1980"
+    },
+    {
+      "basis": "George Mason institutional history states Mason was an original CAA member when the league formed out of the ECAC South in 1985; Mason's prospectus records 1985-86 as CAA. Sources: https://gomason.com/news/2013/3/25/205404612.aspx ; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf",
+      "conference_key": "caa",
+      "conference_name": "CAA",
+      "end_season": "2012-2013",
+      "membership_type": "primary",
+      "notes": "CAA membership ends after 2012-13 when Mason joins the Atlantic 10.",
+      "ongoing": "No",
+      "source_program_key": "george-mason",
+      "start_season": "1985-1986"
+    },
+    {
+      "basis": "George Mason and Atlantic 10 institutional announcements state Mason joined the Atlantic 10 effective July 1, 2013 and began competition in 2013-14. Sources: https://gomason.com/news/2013/3/25/205404612.aspx ; https://atlantic10.com/news/2013/3/25/208918262.aspx",
+      "conference_key": "atlantic-10",
+      "conference_name": "Atlantic 10",
+      "end_season": "",
+      "membership_type": "primary",
+      "notes": "Ongoing through the required completed-season cutoff 2025-26.",
+      "ongoing": "Yes",
+      "source_program_key": "george-mason",
+      "start_season": "2013-2014"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "george-mason"
+}
