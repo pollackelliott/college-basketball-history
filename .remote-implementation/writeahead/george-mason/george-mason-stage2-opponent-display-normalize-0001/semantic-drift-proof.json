@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "integration_base_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+    "school_key": "george-mason",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "integration_base_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+    "school_key": "george-mason",
+    "status": "PASS"
+  }
+}

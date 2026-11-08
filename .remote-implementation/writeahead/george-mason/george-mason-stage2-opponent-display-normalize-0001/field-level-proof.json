@@ -1,0 +1,25 @@
+{
+  "allowed_paths": [
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "shenandoah",
+    "st-marys-md"
+  ],
+  "opponent_changed_row_count": 2,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "source_game_changed_ids": [
+    "GMU-1980-81-019",
+    "GMU-1991-92-002"
+  ],
+  "source_game_changed_keys": [
+    "shenandoah",
+    "st-marys-md"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 2
+}

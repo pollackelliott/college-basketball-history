@@ -1,0 +1,51 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Shenandoah University"
+      ],
+      "authority_signature": "shenandoahuniversity",
+      "canonical_opponent_key": "shenandoah",
+      "from_names": [
+        "Shenandoah"
+      ],
+      "target_row_count": 1,
+      "to_name": "Shenandoah University"
+    },
+    {
+      "authority_names": [
+        "St. Mary's College of Md."
+      ],
+      "authority_signature": "stmaryscollegeofmd",
+      "canonical_opponent_key": "st-marys-md",
+      "from_names": [
+        "St. Mary's (Md.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "St. Mary's College of Md."
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 2,
+  "source_game_display_changes": [
+    {
+      "from_name": "St. Mary's (Md.)",
+      "normalized_opponent_key": "st-marys-md",
+      "source_game_id": "GMU-1980-81-019",
+      "to_name": "St. Mary's College of Md."
+    },
+    {
+      "from_name": "Shenandoah",
+      "normalized_opponent_key": "shenandoah",
+      "source_game_id": "GMU-1991-92-002",
+      "to_name": "Shenandoah University"
+    }
+  ],
+  "status": "PASS"
+}
