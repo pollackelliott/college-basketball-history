@@ -1,0 +1,47 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "e505a724d29993fa04fffb48d5f68fd8acd146623346474cf9ccba9598f97cca",
+    "implementation-stage2-status.json": "c419c91f45d9263cf53c483327a698050b8eeb921fc8013ebfaaae1ad366313e",
+    "plan.json": "453201309c767bac58d0b8bcad063f61aa3748197b9838552dfd895138ca86c6",
+    "review.csv": "13c40e2a45216118b16c5e77b60a8e43c97bc8621ec68b67d72def54271ee592",
+    "review.md": "2d00ff0329f21e4b07a7779c86e1c17c67e4ea62b334a90682689a915a2042ed"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "e505a724d29993fa04fffb48d5f68fd8acd146623346474cf9ccba9598f97cca",
+    "implementation-stage2-status.json": "884dbb775a7c951d1aac65472b79af0e414bfdb7b97025fd2a016936fe5634e1",
+    "plan.json": "ac66f679f98cdbf998a6e026db9ac9de028ad12eef39a56fa69bf2bcb8fdde99",
+    "review.csv": "13c40e2a45216118b16c5e77b60a8e43c97bc8621ec68b67d72def54271ee592",
+    "review.md": "20b67fae976b10a2700ce51483401b6c84e5aafacdcdaa76656bff661b490977"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv"
+  ],
+  "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
+  "expected_blocker_keys": [
+    "shenandoah",
+    "st-marys-md"
+  ],
+  "field_level_proof_sha256": "c661491d98f5792f813a9ab2ffc734363666ca27a35a9399d5516d38edaaacec",
+  "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "e106967875e72c001b79ad328caf2a99e68570361e2d4087e9f3a6524979a80a",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "george-mason-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/george-mason-onboarding",
+  "target_predecessor_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb",
+  "target_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+  "target_tree_sha": "32c833906eab6f69275fc08cc9ee32fbb74d4534",
+  "tracked_stage2_mutation": "NONE"
+}
