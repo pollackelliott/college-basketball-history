@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "ddd6eb0ca0c8f6b5133872d18ad461fe9fbad19f0f516f013680da773a3cc23e",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "b4c791a0da76e2dd0353b72efe2b7cb024d428a7e2c86f33bf1bd54cb3dd9e8d",
+    "implementation-stage2-status.json": "bfe4d87cc4d83f85be6b8959cfb56cfbe1cdd251d1f4428560fcf143f24d04b1",
+    "last-rehearsal-site-gate.json": "e5b2546208d3237d73e5eb228d87b5a56a7fa42ffd928a26dcacad1cffb19faf",
+    "plan.json": "e79e2af6c19be96d44f0ba905245af96db530c035560c2fc2480e3d2578fa58e",
+    "review.csv": "01e021533e646a4fe278cef6c68a9456d5c6f17055364e43d90c3cd1b41670e7",
+    "review.md": "42a0aa39e60af21444ebb9db0a2097b2313f8faaab9ceaebeae8b6295eb25947"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "b4c791a0da76e2dd0353b72efe2b7cb024d428a7e2c86f33bf1bd54cb3dd9e8d",
+    "implementation-stage2-status.json": "ce38fb28febc52d40dad28faab435aefb0e8a9156e9dba06c6264f9c71798a0c",
+    "last-rehearsal-site-gate.json": "e5b2546208d3237d73e5eb228d87b5a56a7fa42ffd928a26dcacad1cffb19faf",
+    "plan.json": "aa2144d48dd84a134044b34cc6314c580a7a5730801bc4cabdf7e1b5668a2dc2",
+    "review.csv": "01e021533e646a4fe278cef6c68a9456d5c6f17055364e43d90c3cd1b41670e7",
+    "review.md": "5470dbd3dea76d385b04aabccc4d0e37cb0edcbb31ac8a4988606c77a3b43db2"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+    "runtime_decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "recommendation_map_sha256": "30fb7052e43ade705c27fa6d845885d196c1befd3fde85329524ac210e092f53",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "saint-joseph-s-stage2-proposal-0002",
+  "runtime_decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e",
+  "target_tree_sha": "2a4ac2550e72be62afb50491b931876a5126c282",
+  "tracked_stage2_mutation": "NONE"
+}
