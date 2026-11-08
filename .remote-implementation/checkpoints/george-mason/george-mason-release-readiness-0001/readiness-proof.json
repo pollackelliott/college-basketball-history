@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "apply_request_id": "george-mason-stage2-sealed-apply-0001",
+  "approved_plan_hash": "0c9b26c88fc8de57642af7f5bf9f805bd2162d2b6c3a6bc26c4ebc0f00f15952",
+  "changed_path_count": 79,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "release_manifest_sha256": "e1834244f6e0dfcb895c9707235c469c641f63295d4a681e1edd572c47a25349",
+  "school_key": "george-mason",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "1cc591da94dc4d8d08eb66992ee01d5e15c7848483da4d449c654ccd94219962",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "adca1cb9d9a882ad68520961dd95f324d873a075",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "449e841c518187d3e2d5e992819c7640bc5e5b58e43c72bb3ed892a9ee3ad8fd",
+  "writeahead_sha256": "35ee291c7c974c64a5caf8a6b10e77b3aa8b02b1bf60b59ad3c1781145915cd6"
+}
