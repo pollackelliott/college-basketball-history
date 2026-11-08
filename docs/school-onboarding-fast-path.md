@@ -100,6 +100,19 @@ Research and verify expected accomplishment values before Gate 1, but normally l
 the onboarding decision machinery apply `program-accomplishments.csv` after owner
 approval rather than manually pre-solving that decision in Phase 0.
 
+A disagreement between authoritative accomplishment metadata and preserved on-court
+canonical NCAA history is not automatically a pre-Gate blocker when the difference may
+be administrative (for example, vacated participation). The planner must expose the
+surviving disagreement as an explicit accomplishment decision. Gate 1 may either correct
+the reference values to an exact canonical `MATCH`, or explicitly choose
+`VERIFY_EXPLAINED_ADMIN_DIFFERENCE` /
+`APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE` with a nonblank authoritative
+resolution basis. Those actions seal `EXPLAINED_ADMIN_DIFFERENCE`; they never rewrite
+canonical games by implication. The final verifier passes that state only when the
+reference is `VERIFIED`, the authoritative basis is nonblank, and a live canonical
+difference still exists. An unexplained conflict, an unapproved administrative
+difference, or a stale explained state after the difference disappears remains a failure.
+
 ### Codespace shell safety
 
 Do not use Bash nounset in this project Codespace. In particular, do not use:
