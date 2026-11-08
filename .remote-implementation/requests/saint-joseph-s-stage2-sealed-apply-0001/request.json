@@ -1,0 +1,55 @@
+{
+  "approved_plan_hash": "683db072558962546ea94b82821b681dca2ef43defc7a825794210f0aaa2e6da",
+  "approved_plan_sha256": "7cc351294f8a3b8fa93f05304ad26a50bad18903ba416ce621e2053a81028348",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": true,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from saint-joseph-s-stage2-gate1-seal-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "d66623081e2f7b9b4b39a1f6a8fb0205c888152156552cbb92cee3ccc5f8b2eb",
+  "decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+  "expected_protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "filled_review_sha256": "97135685323f32999a769740072d5260b6b5359b39a4a16bfd0f09bd9b031112",
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "90d3e9a97d320f6049ae2af3cbee437a6856f13ef011d918939af216a67e9eca",
+  "previous_control_state_commit": "c3f5d834ba09b297a743824aa12f6caa959d2a4f",
+  "previous_control_state_sha256": "ac8fe28ba4d3fb07ea727dffc5d778af586f67f9706b115cd555b56f52660e76",
+  "recommendation_map_sha256": "30fb7052e43ade705c27fa6d845885d196c1befd3fde85329524ac210e092f53",
+  "request_id": "saint-joseph-s-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "2fa675f6af99101e575f322a7e2522ecb782b5b15b8cd825ab3271af66601193"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/saint-joseph-s/saint-joseph-s-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "f926bd89236e834c81445412a8424d0d762726f731543ae5277aa7eeadc9a6d9"
+  },
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e"
+}
