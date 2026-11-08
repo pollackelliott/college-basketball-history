@@ -222,6 +222,36 @@ class ContinuationDispatchTests(unittest.TestCase):
         self.assertIn("github.event_name == 'workflow_dispatch'", workflow)
 
 
+class ContinuationMainAdvanceTests(unittest.TestCase):
+    def test_verified_refresh_with_newer_live_main_does_not_queue_stale_census(self):
+        state = {
+            "lifecycle_state": "IDLE",
+            "last_operation": {
+                "operation": OP_STAGE2_CURRENT_MAIN_REFRESH,
+                "fresh_runner_verification": "PASS",
+                "protected_main_sha": "a" * 40,
+            },
+        }
+        with patch.object(
+            continuation, "configure_git"
+        ), patch.object(
+            continuation,
+            "fetch_operational_refs",
+            return_value=("b" * 40, "c" * 40),
+        ), patch.object(
+            continuation,
+            "git_show_bytes",
+            return_value=json.dumps(state).encode(),
+        ), patch.object(
+            continuation, "validate_control_state"
+        ), patch.object(
+            continuation, "queue_after_refresh"
+        ) as queue:
+            code = continuation.main()
+        self.assertEqual(code, 0)
+        queue.assert_not_called()
+
+
 class QueueAfterRefreshTests(unittest.TestCase):
     def parent(self):
         spec = continuation_spec()
