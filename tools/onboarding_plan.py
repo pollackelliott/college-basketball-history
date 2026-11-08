@@ -129,10 +129,15 @@ DISCREPANCY_ACTIONS = {
     "NORMALIZE_SOURCE_TO_CANONICAL",
     "LEAVE_UNRESOLVED",
 }
+ACCOMPLISHMENT_ADMIN_DIFFERENCE_ACTIONS = {
+    "VERIFY_EXPLAINED_ADMIN_DIFFERENCE",
+    "APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE",
+}
 ACCOMPLISHMENT_ACTIONS = {
     "VERIFY_REFERENCE_VALUES",
     "KEEP_UNDER_REVIEW",
     "APPLY_ACCOMPLISHMENT_PATCH",
+    *ACCOMPLISHMENT_ADMIN_DIFFERENCE_ACTIONS,
 }
 ACCOMPLISHMENT_PATCH_FIELDS = {
     "conference_regular_season_championships",
@@ -3831,17 +3836,43 @@ def build_plan(
                 ]
                 decisions.extend(classification_review_decisions)
             elif accomplishment_conflicts:
-                blockers.append(
-                    "Accomplishment reference conflicts with canonical cross-check: "
-                    + "; ".join(accomplishment_conflicts)
-                )
+                # A surviving NCAA aggregate mismatch may be an intentional
+                # administrative distinction (for example, vacated participation)
+                # rather than a defect in the preserved on-court canonical games.
+                # Do not infer that distinction here. Expose it as an explicit
+                # Gate 1 accomplishment decision unless it was already owner-sealed
+                # and remains a live mismatch.
+                pass
+
+        explained_admin_difference = (
+            bool(accomplishment_conflicts)
+            and accomplishment.get("verification_status", "").strip() == "VERIFIED"
+            and accomplishment.get("canonical_crosscheck_status", "").strip()
+            == "EXPLAINED_ADMIN_DIFFERENCE"
+            and bool(accomplishment.get("verification_basis", "").strip())
+        )
+        if (
+            not accomplishment_conflicts
+            and accomplishment.get("canonical_crosscheck_status", "").strip()
+            == "EXPLAINED_ADMIN_DIFFERENCE"
+        ):
+            blockers.append(
+                "Accomplishment reference has stale EXPLAINED_ADMIN_DIFFERENCE "
+                "but the current canonical cross-check no longer differs"
+            )
+
         if (
             not blockers
+            and not explained_admin_difference
             and (
-                accomplishment.get("verification_status") != "VERIFIED"
+                bool(accomplishment_conflicts)
+                or accomplishment.get("verification_status") != "VERIFIED"
                 or accomplishment.get("canonical_crosscheck_status") != "MATCH"
             )
         ):
+            accomplishment_allowed_actions = set(ACCOMPLISHMENT_ACTIONS)
+            if not accomplishment_conflicts:
+                accomplishment_allowed_actions -= ACCOMPLISHMENT_ADMIN_DIFFERENCE_ACTIONS
             decisions.append(
                 {
                     "decision_id": _decision_id("ACCOMPLISHMENTS", school_key),
@@ -3887,12 +3918,27 @@ def build_plan(
                             "establish exact canonical accomplishment equality before "
                             "publication or VERIFIED status."
                             if classification_review_decisions
-                            else "Canonical NCAA fields match; conference titles still "
-                            "require authoritative source verification."
+                            else (
+                                "Reference accomplishment values differ from the preserved "
+                                "on-court canonical derivation. Gate 1 must either correct "
+                                "the accomplishment values to an exact canonical MATCH or "
+                                "explicitly authorize EXPLAINED_ADMIN_DIFFERENCE with an "
+                                "authoritative administrative basis. Canonical game history "
+                                "is unchanged unless a separate historical game decision "
+                                "independently authorizes it."
+                                if accomplishment_conflicts
+                                else "Canonical NCAA fields match; conference titles still "
+                                "require authoritative source verification."
+                            )
                         )
                     ),
-                    "recommended_action": "VERIFY_REFERENCE_VALUES",
-                    "allowed_actions": sorted(ACCOMPLISHMENT_ACTIONS),
+                    "recommended_action": (
+                        "KEEP_UNDER_REVIEW"
+                        if accomplishment_conflicts
+                        else "VERIFY_REFERENCE_VALUES"
+                    ),
+                    "allowed_actions": sorted(accomplishment_allowed_actions),
+                    "accomplishment_conflicts": list(accomplishment_conflicts),
                     "decision": "PENDING",
                     "resolution_basis": "",
                     "canonical_patch_json": "{}",
@@ -4789,16 +4835,39 @@ def approve_plan(
                 raise WorkflowError(
                     f"{decision_id}: accomplishment review may not carry a source patch"
                 )
-            if decision == "APPLY_ACCOMPLISHMENT_PATCH":
+            if decision in {
+                "APPLY_ACCOMPLISHMENT_PATCH",
+                "APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE",
+            }:
+                if (
+                    decision == "APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE"
+                    and not item.get("accomplishment_conflicts")
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: explained administrative difference requires "
+                        "a live accomplishment/canonical conflict"
+                    )
                 project_accomplishment_patch(
                     repo,
                     plan["school_key"],
                     canonical_patch,
                 )
-            elif decision in {"VERIFY_REFERENCE_VALUES", "KEEP_UNDER_REVIEW"}:
+            elif decision in {
+                "VERIFY_REFERENCE_VALUES",
+                "KEEP_UNDER_REVIEW",
+                "VERIFY_EXPLAINED_ADMIN_DIFFERENCE",
+            }:
                 if canonical_patch:
                     raise WorkflowError(
                         f"{decision_id}: {decision} may not carry an accomplishment patch"
+                    )
+                if (
+                    decision == "VERIFY_EXPLAINED_ADMIN_DIFFERENCE"
+                    and not item.get("accomplishment_conflicts")
+                ):
+                    raise WorkflowError(
+                        f"{decision_id}: explained administrative difference requires "
+                        "a live accomplishment/canonical conflict"
                     )
             else:
                 raise WorkflowError(
@@ -5035,6 +5104,8 @@ def approve_plan(
         if accomplishment and accomplishment["decision"] not in {
             "VERIFY_REFERENCE_VALUES",
             "APPLY_ACCOMPLISHMENT_PATCH",
+            "VERIFY_EXPLAINED_ADMIN_DIFFERENCE",
+            "APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE",
         }:
             raise WorkflowError(
                 "Publication cannot be enabled while accomplishments remain under review"
@@ -7884,7 +7955,10 @@ def apply_publication_decisions(
                 )
                 counts["accomplishments_verified"] += 1
                 accomplishment_changed = True
-            elif item["decision"] == "APPLY_ACCOMPLISHMENT_PATCH":
+            elif item["decision"] in {
+                "APPLY_ACCOMPLISHMENT_PATCH",
+                "APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE",
+            }:
                 patch = dict(item.get("canonical_patch", {}))
                 projected = project_accomplishment_patch(repo, school_key, patch)
                 for field in ACCOMPLISHMENT_PATCH_FIELDS:
@@ -7892,16 +7966,46 @@ def apply_publication_decisions(
                         accomplishment[field] = projected[field]
                 accomplishment["verification_status"] = "VERIFIED"
                 accomplishment["verification_basis"] = item["resolution_basis"]
-                accomplishment["canonical_crosscheck_status"] = "MATCH"
+                explained_admin = (
+                    item["decision"]
+                    == "APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE"
+                )
+                accomplishment["canonical_crosscheck_status"] = (
+                    "EXPLAINED_ADMIN_DIFFERENCE" if explained_admin else "MATCH"
+                )
                 accomplishment["notes"] = _append_note(
                     accomplishment.get("notes", ""),
                     (
-                        "Owner-approved accomplishment correction applied and verified "
+                        "Owner-approved accomplishment correction applied with an "
+                        "explicit administrative difference from preserved on-court "
+                        f"canonical history through onboarding plan "
+                        f"{approved['approved_plan_hash'][:12]}."
+                        if explained_admin
+                        else "Owner-approved accomplishment correction applied and verified "
                         f"through onboarding plan {approved['approved_plan_hash'][:12]}."
                     ),
                 )
                 counts["accomplishments_patched"] += 1
                 counts["accomplishment_fields_patched"] += len(patch)
+                if explained_admin:
+                    counts["accomplishment_admin_differences_explained"] += 1
+                accomplishment_changed = True
+            elif item["decision"] == "VERIFY_EXPLAINED_ADMIN_DIFFERENCE":
+                accomplishment["verification_status"] = "VERIFIED"
+                accomplishment["verification_basis"] = item["resolution_basis"]
+                accomplishment["canonical_crosscheck_status"] = (
+                    "EXPLAINED_ADMIN_DIFFERENCE"
+                )
+                accomplishment["notes"] = _append_note(
+                    accomplishment.get("notes", ""),
+                    (
+                        "Owner-approved administrative difference from preserved on-court "
+                        f"canonical history verified through onboarding plan "
+                        f"{approved['approved_plan_hash'][:12]}."
+                    ),
+                )
+                counts["accomplishments_verified"] += 1
+                counts["accomplishment_admin_differences_explained"] += 1
                 accomplishment_changed = True
             elif item["decision"] != "KEEP_UNDER_REVIEW":
                 raise WorkflowError(f"Unsupported accomplishment decision {item['decision']}")
