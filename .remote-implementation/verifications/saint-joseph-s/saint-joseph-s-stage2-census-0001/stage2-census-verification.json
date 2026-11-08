@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "6812f97eb784e4b800c2c445408267b936f1d40184b8bc8532c6a1b3314dc524",
+    "implementation-stage2-status.json": "32f9d2808d0265dfb599a58be4d10048ef18321299f986f38e60f533f9ccca17",
+    "plan.json": "46856eba5866955c34853243703f2181f2b7452e66748d9a7601c25ddbbc5dd9",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "02252bcb64aae15d1bb922d1905c7ca21fccc177fbdc4a4230139bbb70e6a2aa"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "6812f97eb784e4b800c2c445408267b936f1d40184b8bc8532c6a1b3314dc524",
+    "implementation-stage2-status.json": "b2c674906a99f5293543bd8d6d1349a40b5798b9031b187250e805210fc07127",
+    "plan.json": "3012636856b0e2efc0fa592276ca36362e0c6a4e5289f0e998411f2282c0e0b4",
+    "review.csv": "a67f05419d979a3beb02f642387bce9afaf944ef9301ec451521efbae4b0e388",
+    "review.md": "389d20a9158c28aeac4e77ffb692f95cc0abe87d1a29830cab70f155bb7c2f18"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "saint-joseph-s-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "target_tree_sha": "cf59d97106fd9191411835183561839ee751da0a",
+  "tracked_stage2_mutation": "NONE"
+}
