@@ -430,7 +430,7 @@
     "saint-joseph-s-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
-  "active_lock_commit": null,
+  "active_lock_commit": "7487961d9d8bf0e03ecea341eb035084f472370b",
   "active_lock_owner": "github-actions:42477028211:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
