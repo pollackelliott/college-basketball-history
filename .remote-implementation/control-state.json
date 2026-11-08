@@ -416,7 +416,7 @@
     "saint-joseph-s-phase0-0003"
   ],
   "active_expected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
-  "active_lock_commit": null,
+  "active_lock_commit": "c914bacb0ebc2d0adc2f3eba153431ec69d825d0",
   "active_lock_owner": "github-actions:42435656388:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
