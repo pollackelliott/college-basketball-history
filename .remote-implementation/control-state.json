@@ -433,17 +433,18 @@
     "saint-joseph-s-release-preview-verify-0001",
     "saint-joseph-s-release-gate2-approval-0001",
     "saint-joseph-s-release-production-proof-0001",
-    "george-mason-stage1-0001"
+    "george-mason-stage1-0001",
+    "george-mason-stage1-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8e37c18c3572c583e7b1261270a629d97ba11b1a",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "george-mason-stage1-0002",
+  "active_request_sha256": "c5872712441c71dca9ce27c1563c5ec6b3a0515cb2301563e2353846300c81f0",
+  "active_school_key": "george-mason",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -882,8 +883,11 @@
       "target_branch": null
     }
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42497186224",
+  "lock_acquisition_request_commit": "596ca376f73f0f781206cb730cd078362778c0f5",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
+  "transaction_state": "STAGE1_RUNNING"
 }
