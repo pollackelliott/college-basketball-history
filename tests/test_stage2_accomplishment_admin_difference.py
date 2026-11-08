@@ -18,7 +18,6 @@ from onboarding_plan import (  # noqa: E402
     apply_publication_decisions,
     approve_plan,
 )
-from program_history import accomplishment_row_issues  # noqa: E402
 from verify_program_accomplishments import compare_program  # noqa: E402
 
 
@@ -228,17 +227,22 @@ class Stage2AccomplishmentAdministrativeDifferenceTests(unittest.TestCase):
         self.assertFalse(compare_program(self.program(), reference, self.canonical_games()))
 
     def test_explained_admin_difference_requires_verified_authority_and_basis(self):
-        row = self.reference(
+        unverified = self.reference(
             verification_status="OWNER_BASELINE_UNVERIFIED",
+            verification_basis="Owner baseline alone is not sealed Gate 1 authority.",
+            canonical_crosscheck_status="EXPLAINED_ADMIN_DIFFERENCE",
+        )
+        self.assertFalse(
+            compare_program(self.program(), unverified, self.canonical_games())
+        )
+
+        missing_basis = self.reference(
+            verification_status="VERIFIED",
             verification_basis="",
             canonical_crosscheck_status="EXPLAINED_ADMIN_DIFFERENCE",
         )
-        errors, _warnings = accomplishment_row_issues(row, self.program(), False)
-        self.assertTrue(
-            any("requires VERIFIED accomplishment authority" in item for item in errors)
-        )
-        self.assertTrue(
-            any("requires a nonblank verification_basis" in item for item in errors)
+        self.assertFalse(
+            compare_program(self.program(), missing_basis, self.canonical_games())
         )
 
     def test_no_gate1_authority_is_inferred_without_live_conflict(self):
