@@ -609,11 +609,20 @@ def apply_plan(repo: Path, plan: dict[str, Any], expected_sha256: str) -> dict[s
                 target_row["current_d1"] = target_current_d1_text
             refresh_mapping(target_row, target_rows)
         else:
-            old_opponent_row["canonical_opponent_key"] = new_key
-            old_opponent_row["canonical_opponent_name"] = new_name
-            if "current_d1" in opp_fields:
-                old_opponent_row["current_d1"] = target_current_d1_text
-            refresh_mapping(old_opponent_row, target_rows)
+            if target_opp_matches:
+                target_row = target_opp_matches[0]
+                target_row["canonical_opponent_key"] = new_key
+                target_row["canonical_opponent_name"] = new_name
+                if "current_d1" in opp_fields:
+                    target_row["current_d1"] = target_current_d1_text
+                refresh_mapping(target_row, target_rows)
+                opponents = [row for row in opponents if row is not old_opponent_row]
+            else:
+                old_opponent_row["canonical_opponent_key"] = new_key
+                old_opponent_row["canonical_opponent_name"] = new_name
+                if "current_d1" in opp_fields:
+                    old_opponent_row["current_d1"] = target_current_d1_text
+                refresh_mapping(old_opponent_row, target_rows)
 
         canonical_fields, canonical = read_csv(paths[2])
         by_id = {
