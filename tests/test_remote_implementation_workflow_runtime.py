@@ -56,6 +56,46 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
 
+    def test_pending_refresh_verification_uses_current_verifier_only_after_linear_advance(self):
+        text = self.workflow
+        self.assertIn(
+            "pending_operation: ${{ steps.detect.outputs.pending_operation }}",
+            text,
+        )
+        self.assertIn(
+            "verification_runtime_sha: ${{ steps.authenticate.outputs.verification_runtime_sha }}",
+            text,
+        )
+        self.assertIn(
+            'if [[ "${{ steps.detect.outputs.has_request }}" == "true" ]]; then',
+            text,
+        )
+        self.assertIn(
+            'if [[ "${{ steps.detect.outputs.pending_operation }}" != "STAGE2_CURRENT_MAIN_REFRESH" ]]; then',
+            text,
+        )
+        self.assertIn(
+            'git merge-base --is-ancestor "$expected_main" "$actual_main"',
+            text,
+        )
+        self.assertIn(
+            "Pending refresh verification bound main is no longer an ancestor of protected main",
+            text,
+        )
+        self.assertIn(
+            'runtime_sha="$actual_main"',
+            text,
+        )
+        recovery = text.split(
+            "  fresh-pending-verification-recovery:", 1
+        )[1].split(
+            "  fresh-owner-gate2-approval-verification:", 1
+        )[0]
+        self.assertIn(
+            "ref: ${{ needs.process-request.outputs.verification_runtime_sha }}",
+            recovery,
+        )
+
     def test_stale_control_runner_and_verifier_copies_are_not_executable_paths(self):
         text = self.workflow
         self.assertNotIn("run: python tools/remote_implementation_runner.py", text)
@@ -70,11 +110,17 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             'run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"'
         )
         self.assertGreater(verifier_count, 0)
+        bound_runtime_count = text.count(
+            "ref: ${{ needs.process-request.outputs.protected_main_sha }}\n"
+            "          path: runtime"
+        )
+        recovery_runtime_count = text.count(
+            "ref: ${{ needs.process-request.outputs.verification_runtime_sha }}\n"
+            "          path: runtime"
+        )
+        self.assertEqual(recovery_runtime_count, 1)
         self.assertEqual(
-            text.count(
-                "ref: ${{ needs.process-request.outputs.protected_main_sha }}\n"
-                "          path: runtime"
-            ),
+            bound_runtime_count + recovery_runtime_count,
             verifier_count,
         )
 

@@ -640,10 +640,17 @@ def main() -> int:
     if last.get("fresh_runner_verification") != "PASS":
         print("STAGE2 CONTINUATION: last operation is not fresh-verified PASS")
         return 0
-    if last.get("protected_main_sha") != live_main:
-        raise Stop("STAGE2_CONTINUATION_PROTECTED_MAIN_CHANGED")
 
     operation = last.get("operation")
+    if last.get("protected_main_sha") != live_main:
+        if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
+            print(
+                "STAGE2 CONTINUATION: protected main advanced after the verified "
+                "refresh; do not queue a stale census. A new ordinary current-main "
+                "refresh is required."
+            )
+            return 0
+        raise Stop("STAGE2_CONTINUATION_PROTECTED_MAIN_CHANGED")
     if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
         return queue_after_refresh(
             live_main=live_main,

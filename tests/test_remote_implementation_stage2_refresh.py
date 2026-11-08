@@ -14,6 +14,7 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 import remote_implementation_stage2_refresh as refresh  # noqa: E402
+import remote_implementation_verify as verify  # noqa: E402
 from remote_implementation_io import REQUIRED_PACKAGE_FILES, Stop  # noqa: E402
 
 
@@ -162,6 +163,29 @@ class CurrentMainRefreshTests(unittest.TestCase):
             ):
                 refresh.verify_current_main_refresh_authority(
                     request, "0" * 40, main, source_repo=repo
+                )
+
+    def test_refresh_verifier_accepts_linear_live_main_advance(self):
+        repo, base, _target, main = self.make_repo()
+        successor = {"protected_main_sha": base}
+        with patch.object(verify, "ROOT", repo):
+            refresh_main = verify._stage2_refresh_verification_main(
+                successor,
+                main,
+            )
+        self.assertEqual(refresh_main, base)
+
+    def test_refresh_verifier_rejects_diverged_live_main(self):
+        repo, _base, target, main = self.make_repo()
+        successor = {"protected_main_sha": target}
+        with patch.object(verify, "ROOT", repo):
+            with self.assertRaisesRegex(
+                Stop,
+                "STAGE2_REFRESH_FRESH_MAIN_DIVERGED",
+            ):
+                verify._stage2_refresh_verification_main(
+                    successor,
+                    main,
                 )
 
     def test_authority_rejects_current_main_target_school_change(self):
