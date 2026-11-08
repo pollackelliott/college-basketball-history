@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "recovered_request_id": "george-mason-stage1-0001",
+  "request_id": "george-mason-stage1-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}

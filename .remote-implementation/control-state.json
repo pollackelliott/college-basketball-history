@@ -17,7 +17,8 @@
     "st-bonaventure-stage2-reconciliation-diagnostic-0001",
     "la-salle-phase0-0001",
     "fordham-phase0-0001",
-    "fordham-stage2-current-main-refresh-0001"
+    "fordham-stage2-current-main-refresh-0001",
+    "george-mason-stage1-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -434,15 +435,15 @@
     "saint-joseph-s-release-production-proof-0001",
     "george-mason-stage1-0001"
   ],
-  "active_expected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "george-mason-stage1-0001",
-  "active_request_sha256": "fbf42be7732e8c2c3177dd90d3d36ec926ab1babb511f084a3f7b67af6402111",
-  "active_school_key": "george-mason",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -860,32 +861,29 @@
     "saint-joseph-s-release-readiness-0001",
     "saint-joseph-s-release-preview-verify-0001",
     "saint-joseph-s-release-gate2-approval-0001",
-    "saint-joseph-s-release-production-proof-0001"
+    "saint-joseph-s-release-production-proof-0001",
+    "george-mason-stage1-recover-0001"
   ],
-  "current_sequence": 412,
+  "current_sequence": 413,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-release-production-proof-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "57316e98798aaccb3ff0453e38045882b0106f7594d4d725699b8e686be565b3",
-    "fresh_runner_verification": "PASS",
-    "merge_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
-    "merged": true,
-    "operation": "RELEASE_PRODUCTION_PROOF",
-    "owner_gate_2_approved": true,
-    "pr_head_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
-    "pr_number": 524,
-    "production_deployment_id": 7636478253,
-    "production_json_checked_count": 96,
-    "protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
-    "remote_production_proof_equivalence": "PASS",
-    "request_id": "saint-joseph-s-release-production-proof-0001",
-    "school_key": "saint-joseph-s"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "george-mason-stage1-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": null,
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+      "recovered_request_id": "george-mason-stage1-0001",
+      "request_id": "george-mason-stage1-recover-0001",
+      "schema_version": 1,
+      "target_branch": null
+    }
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "42489245925",
-  "lock_acquisition_request_commit": "43c7efeb2fae2275cdaa9e6847a7cec7097a05bd",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
