@@ -1,0 +1,44 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner said Proceed after George Mason Phase 0 request george-mason-phase0-0002 completed with repository validation PASS, CREATE_ONCE_PASS, fresh_runner_verification=PASS, remote_phase0_equivalence=PASS, exact onboarding successor 352bb660dc262338fdbd84d0c5a29f2b902512eb, and Integration Freeze 2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114. This begins the owner-authorized Stage 2 phase and performs the first bounded read-only STAGE2_CENSUS against that exact independently verified successor and semantic snapshot. Stage 2 authority may continue through deterministic normalization and exact recommendation-map rehearsal toward OWNER_GATE_1_READY if the permanent workflow permits. This request itself carries no tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, recovery, unrelated shared/global mutation, or Owner Gate 2 authority.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — owner-authorized Stage 2 capability census"
+  },
+  "expected_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-phase0-0002/successor-manifest.json",
+    "sha256": "74c1fc419880efc3a60d103cc43d3de7c60183345e98d10ad07a81bf17081b67"
+  },
+  "previous_control_state_commit": "8b054ea7ac9a06f368893157ca5cc7de9603ca6e",
+  "previous_control_state_sha256": "eac5ee4ee926619b94004bdfa1119c39f05e90e357a7c0a57d6415c8556d709a",
+  "request_id": "george-mason-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb"
+}

@@ -1,0 +1,39 @@
+{
+  "blockers": [
+    "historical opponent display conflict: shenandoah: ['Shenandoah', 'Shenandoah University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-marys-md: [\"St. Mary's (Md.)\", \"St. Mary's College of Md.\"]. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/george-mason-352bb660dc26",
+  "capability_census": {
+    "path": ".onboarding/george-mason/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb",
+  "integration_base_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "integration_semantic_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/george-mason/plan.json",
+    "review_path": ".onboarding/george-mason/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
