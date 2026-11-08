@@ -1,0 +1,100 @@
+{
+  "actual_published_target_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+  "changed_file_sha256": {
+    "schools/george-mason/opponents.csv": "2c23dda9404e1845c816a2048c44c1c5214207fca0e97f744e9268378f7428cb",
+    "schools/george-mason/source-games.csv": "dd78f5d5851994b4364773979e6d5cbd13e1d03b49ad54dfba4904a8a6e84c0b"
+  },
+  "changed_paths": [
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "shenandoah",
+    "st-marys-md"
+  ],
+  "expected_target_predecessor_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb",
+  "field_level_proof_sha256": "c661491d98f5792f813a9ab2ffc734363666ca27a35a9399d5516d38edaaacec",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "33000e8f5cb6cd777752ca7b8b00cc74fc7b399e",
+  "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "e106967875e72c001b79ad328caf2a99e68570361e2d4087e9f3a6524979a80a",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "e505a724d29993fa04fffb48d5f68fd8acd146623346474cf9ccba9598f97cca",
+      "implementation-stage2-status.json": "c419c91f45d9263cf53c483327a698050b8eeb921fc8013ebfaaae1ad366313e",
+      "plan.json": "453201309c767bac58d0b8bcad063f61aa3748197b9838552dfd895138ca86c6",
+      "review.csv": "13c40e2a45216118b16c5e77b60a8e43c97bc8621ec68b67d72def54271ee592",
+      "review.md": "2d00ff0329f21e4b07a7779c86e1c17c67e4ea62b334a90682689a915a2042ed"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "e505a724d29993fa04fffb48d5f68fd8acd146623346474cf9ccba9598f97cca",
+      "implementation-stage2-status.json": "884dbb775a7c951d1aac65472b79af0e414bfdb7b97025fd2a016936fe5634e1",
+      "plan.json": "1cb0def462a9204e0ebaf9f3cbf8bcbe8f02a6ac029189521473004a41786a13",
+      "review.csv": "13c40e2a45216118b16c5e77b60a8e43c97bc8621ec68b67d72def54271ee592",
+      "review.md": "ed81c077006b4d461f7e10a34cddb77a74cf91b5580c4e37c78eed88b41612b1"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 4,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 28,
+    "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+      "after_status": "",
+      "after_tree_sha": "32c833906eab6f69275fc08cc9ee32fbb74d4534",
+      "before_head_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+      "before_status": "",
+      "before_tree_sha": "32c833906eab6f69275fc08cc9ee32fbb74d4534",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+  "prepared_parent_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb",
+  "prepared_tree_sha": "32c833906eab6f69275fc08cc9ee32fbb74d4534",
+  "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "george-mason-stage2-opponent-display-normalize-0001",
+  "request_sha256": "df35b0620e571bef5827b1012e7daf18a5e0bef18e2e7f4540e6dbe1d193941e",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_drift_after": {
+    "baseline_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "integration_base_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+    "school_key": "george-mason",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+    "integration_base_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+    "school_key": "george-mason",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "source_game_normalized_name_row_count": 2,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/george-mason/george-mason-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "4b431cad6e6284d2a0f708d1618f608c2ba4db6f127eea67503d70f35fe3bddd",
+  "target_branch": "data/george-mason-onboarding",
+  "writeahead_commit": "6ce04751c8934151d3d0619f5d6fd9ed952b1e5c",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/george-mason/george-mason-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "dc01ba3909cca2457901c9ee3bd76f5abd79b0fb684fc248dbf14881de43e6cd"
+}

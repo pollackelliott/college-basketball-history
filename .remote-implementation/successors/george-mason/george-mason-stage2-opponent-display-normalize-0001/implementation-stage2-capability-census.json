@@ -1,0 +1,45 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 14,
+      "discrepancy": 6,
+      "identity": 6,
+      "publication": 1
+    },
+    "decision_count": 28,
+    "decision_fields": {
+      "game_date": 10,
+      "game_identity": 6,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 5,
+      "site_type": 4
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-GMU-1989-90-013-CBBG-0132290-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-GMU-1991-92-003-CBBG-0136734-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-GMU-2014-15-018-CBBG-0190496-SITE_TYPE",
+      "DISCREPANCY-GMU-1986-87-010-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 4,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
