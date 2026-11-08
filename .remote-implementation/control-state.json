@@ -418,7 +418,7 @@
     "saint-joseph-s-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
-  "active_lock_commit": null,
+  "active_lock_commit": "5875d946d957d30dc25cc69d13121a631d354049",
   "active_lock_owner": "github-actions:42437158785:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
