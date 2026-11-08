@@ -1,0 +1,39 @@
+{
+  "basis_by_decision": {
+    "ACCOMPLISHMENTS-GEORGE-MASON": "Verify the existing George Mason reference values (5 conference regular-season championships, 4 conference tournament championships, 6 NCAA appearances, 1 Final Four, 0 national titles, best finish FINAL_FOUR in 2006) against the accepted Research Freeze and George Mason Athletics historical material. Official Mason material records six NCAA appearances and the 2006 Final Four, identifies the 1999-2000 and 2011 CAA regular-season titles and the 2025 A-10 regular-season title, and explicitly reports four postseason conference tournament championships. Sources include https://static.gomason.com/custompages/pdf/201617mbbquickfacts.pdf , https://gomason.com/news/2015/12/11/210578720 , https://gomason.com/news/2011/3/13/205115150.aspx , https://gomason.com/news/2025/3/8/mens-basketball-champs-patriots-win-first-ever-a-10-regular-season-title-with-win-at-richmond.aspx , and https://gomason.com/news/2026/3/11/mens-basketball-patriots-open-a-10-championship-thursday-in-pittsburgh.aspx . No accomplishment conflict is reported by the Stage 2 canonical cross-check.",
+    "DISCREPANCY-GMU-1986-87-010-SITE_TYPE": "George Mason's immutable accepted Research Freeze classifies the 1986-12-30 Butler game as NEUTRAL after the completed H/A/N research and pre-freeze adversarial audit, while the existing reciprocal canonical value is only UNKNOWN. Recommend the accepted target-school NEUTRAL value and preserve the reciprocal UNKNOWN assertion as provenance.",
+    "PUBLICATION-GEORGE-MASON": "Enable George Mason publication only through the normal Owner Gate 1, sealed apply, Preview, explicit Owner Gate 2, merge and Production-proof workflow after every approved decision and automated gate passes."
+  },
+  "canonical_patch_by_decision": {},
+  "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
+  "decisions": {
+    "ACCOMPLISHMENTS-GEORGE-MASON": "VERIFY_REFERENCE_VALUES",
+    "DISCREPANCY-GMU-1986-87-010-SITE_TYPE": "USE_SOURCE",
+    "PUBLICATION-GEORGE-MASON": "ENABLE_PUBLIC_PAGE"
+  },
+  "defaults": {
+    "basis": "Preserve existing canonical authority for date, score, winner and other non-site conflicts when the newly staged George Mason assertion conflicts with an already-published reciprocal institutional assertion and the accepted frozen Research record does not independently require a canonical correction. Preserve George Mason raw/source evidence and the discrepancy provenance rather than silently rewriting it.",
+    "discrepancy": "KEEP_CANONICAL",
+    "identity_basis": "One real game equals one canonical game. Match the same-season candidate uniquely supported by reciprocal opponent, score/result orientation and companion-game context; do not create a duplicate canonical game when the existing reciprocal record represents the same contest.",
+    "not_applicable_basis": "This conditional discrepancy belongs to an identity candidate not selected by the recommendation map.",
+    "selected_conditional": "KEEP_CANONICAL"
+  },
+  "identity": {
+    "GMU-1989-90-013": "MATCH_CANONICAL:CBBG-0132290",
+    "GMU-1991-92-003": "MATCH_CANONICAL:CBBG-0136722",
+    "GMU-2004-05-006": "MATCH_CANONICAL:CBBG-0048514",
+    "GMU-2004-05-008": "MATCH_CANONICAL:CBBG-0194097",
+    "GMU-2005-06-002": "MATCH_CANONICAL:CBBG-0128384",
+    "GMU-2014-15-018": "MATCH_CANONICAL:CBBG-0190492"
+  },
+  "notes_by_decision": {},
+  "prepared_against_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "prepared_against_target_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "source_patch_by_decision": {},
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "5cb916a85e50bc7c83c815fe20f3c1e82954d0e4c5d47eea5e685cfb409c4d48"
+  }
+}
