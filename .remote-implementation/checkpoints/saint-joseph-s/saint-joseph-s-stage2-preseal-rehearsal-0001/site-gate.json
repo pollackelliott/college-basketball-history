@@ -1,0 +1,116 @@
+{
+  "counts": {
+    "home_missing_venue": 272,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 54,
+    "postseason_missing_venue": 1,
+    "public_gap_rows": 449,
+    "reciprocal_only_unknown_site_provenance": 3,
+    "reciprocal_research_accounted_gap": 3,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue": 272,
+    "researched_unresolved_home_venue_rows": 272,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2975,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 123
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0034029",
+      "CBBG-0127319",
+      "CBBG-0148592",
+      "CBBG-0158647",
+      "CBBG-0158658",
+      "CBBG-0158662",
+      "CBBG-0158683",
+      "CBBG-0158694",
+      "CBBG-0158715",
+      "CBBG-0160390",
+      "CBBG-0160403",
+      "CBBG-0160418"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0200614",
+      "CBBG-0200696"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0012482",
+      "CBBG-0018277",
+      "CBBG-0018525",
+      "CBBG-0030510",
+      "CBBG-0032981",
+      "CBBG-0034746",
+      "CBBG-0038711",
+      "CBBG-0044121",
+      "CBBG-0046094",
+      "CBBG-0064413",
+      "CBBG-0066923",
+      "CBBG-0076810"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0201111"
+    ],
+    "reciprocal_only_unknown_site_provenance": [
+      "CBBG-0184670",
+      "CBBG-0192720",
+      "CBBG-0192892"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0184670",
+      "CBBG-0192720",
+      "CBBG-0192892"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0034029",
+      "CBBG-0127319",
+      "CBBG-0148592",
+      "CBBG-0158647",
+      "CBBG-0158658",
+      "CBBG-0158662",
+      "CBBG-0158683",
+      "CBBG-0158694",
+      "CBBG-0158715",
+      "CBBG-0160390",
+      "CBBG-0160403",
+      "CBBG-0160418"
+    ],
+    "unknown_site_type": [
+      "CBBG-0184670",
+      "CBBG-0192720",
+      "CBBG-0192892",
+      "CBBG-0200237",
+      "CBBG-0200240",
+      "CBBG-0200241",
+      "CBBG-0200242",
+      "CBBG-0200243",
+      "CBBG-0200246",
+      "CBBG-0200247",
+      "CBBG-0200249",
+      "CBBG-0200250"
+    ]
+  },
+  "history_start_season": "1909-1910",
+  "school_key": "saint-joseph-s",
+  "source_site_counts": {
+    "home_missing_venue": 272,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 450,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 57,
+    "researched_gap_rows": 450,
+    "researched_unresolved_home_venue_rows": 272,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 121
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2967
+  },
+  "status": "PASS",
+  "warnings": []
+}
