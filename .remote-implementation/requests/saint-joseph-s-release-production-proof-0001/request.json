@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-joseph-s-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "saint-joseph-s",
+  "previous_control_state_commit": "567a8ee2b1e2354753af409dde0ed66dbb3c6c35",
+  "previous_control_state_sha256": "f7da4f31a11dddf4769665482c6f86aed8f6c9392613d97a7d45e9b57b3b2b97",
+  "expected_protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
+  "pr_number": 524,
+  "merge_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "94370e84f5d39c073d8c4d2a78ad22c771bc73af3c3d28d6f8bc195be8a1db6c"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/saint-joseph-s/saint-joseph-s-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "bbb66103857f3b29a73da2fafa1f95655c9951a00c7ed9f92a131a238f29407f"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Saint Joseph's Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact Saint Joseph's Preview with “Approved. Proceed,” authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #524 head 9ccc5d54ef260bf45a7c2fa0cff9348d43412e86 against approved main 377a539979f727ad00fd6141365444d43b301f15. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 5f0a175045e822be4506ac97d72abab084ede52b, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
+    "venue_identity_maintenance": false
+  }
+}

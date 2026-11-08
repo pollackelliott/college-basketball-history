@@ -430,18 +430,19 @@
     "saint-joseph-s-stage2-sealed-apply-0001",
     "saint-joseph-s-release-readiness-0001",
     "saint-joseph-s-release-preview-verify-0001",
-    "saint-joseph-s-release-gate2-approval-0001"
+    "saint-joseph-s-release-gate2-approval-0001",
+    "saint-joseph-s-release-production-proof-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PRODUCTION_PROOF",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "saint-joseph-s-release-production-proof-0001",
+  "active_request_sha256": "2671f31f075c7cca79b077d86fda89017dbc3de29f527b1b948b49aa4afb837b",
+  "active_school_key": "saint-joseph-s",
+  "active_target_branch": "data/saint-joseph-s-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -879,8 +880,11 @@
     "target_branch": "data/saint-joseph-s-onboarding",
     "target_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42484921796",
+  "lock_acquisition_request_commit": "6d5f705419994ac1a03feb786d524f232a31e713",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PRODUCTION_RUNNING"
 }
