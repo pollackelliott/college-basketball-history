@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "apply_request_id": "saint-joseph-s-stage2-sealed-apply-0001",
+  "approved_plan_hash": "683db072558962546ea94b82821b681dca2ef43defc7a825794210f0aaa2e6da",
+  "changed_path_count": 103,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "release_manifest_sha256": "62c7564434788ffa1276653fab45d6d8d847fc40567f095f80e002d5e7442546",
+  "school_key": "saint-joseph-s",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "af1bc6791d2b44abc38b3600d2dd30c2290dc827749d7475b955cf2eb9e01f42",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "f0e94cd1ed0e3c4fcd0ef8d3085d6dfbf65b9a6041725a1e949ca5756ee4555d",
+  "writeahead_sha256": "ccf22cbb13d98b02dbb614c4e4e170c1acbdd9813535c532e68e5643aca95b5f"
+}
