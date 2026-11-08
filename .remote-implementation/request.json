@@ -10,11 +10,11 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
@@ -22,23 +22,23 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner said Proceed after George Mason Phase 0 request george-mason-phase0-0002 completed with repository validation PASS, CREATE_ONCE_PASS, fresh_runner_verification=PASS, remote_phase0_equivalence=PASS, exact onboarding successor 352bb660dc262338fdbd84d0c5a29f2b902512eb, and Integration Freeze 2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114. This begins the owner-authorized Stage 2 phase and performs the first bounded read-only STAGE2_CENSUS against that exact independently verified successor and semantic snapshot. Stage 2 authority may continue through deterministic normalization and exact recommendation-map rehearsal toward OWNER_GATE_1_READY if the permanent workflow permits. This request itself carries no tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, recovery, unrelated shared/global mutation, or Owner Gate 2 authority.",
-    "origin": "ChatGPT George Mason serialized Implementation lane — owner-authorized Stage 2 capability census"
+    "authorization": "Existing owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Fresh-verified census george-mason-stage2-census-0001 found exactly two historical opponent-display representation conflicts (shenandoah and st-marys-md), zero warnings, zero recommendation decisions, semantic drift PASS, and no other blocker topology. This authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key census population. The permanent helper chooses existing project display authority and may change only opponent display fields under its field-level and semantic guards. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, or protected-main mutation authority.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — Stage 2 deterministic opponent-display reconciliation"
   },
   "expected_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
   "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/george-mason/george-mason-phase0-0002/successor-manifest.json",
-    "sha256": "74c1fc419880efc3a60d103cc43d3de7c60183345e98d10ad07a81bf17081b67"
-  },
-  "previous_control_state_commit": "8b054ea7ac9a06f368893157ca5cc7de9603ca6e",
-  "previous_control_state_sha256": "eac5ee4ee926619b94004bdfa1119c39f05e90e357a7c0a57d6415c8556d709a",
-  "request_id": "george-mason-stage2-census-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "6b642debd41b5d2472d4eccb02a6e405ecab9d6d",
+  "previous_control_state_sha256": "9eb024293b2a136afd6d5dd6b7c40eb37a9460a26c0e679c10da4e19a400bb7f",
+  "request_id": "george-mason-stage2-opponent-display-normalize-0001",
   "schema_version": 1,
   "school_key": "george-mason",
   "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "4b431cad6e6284d2a0f708d1618f608c2ba4db6f127eea67503d70f35fe3bddd"
+  },
   "target_branch": "data/george-mason-onboarding",
   "target_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb"
 }
