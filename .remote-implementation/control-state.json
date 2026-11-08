@@ -896,11 +896,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
     "recommendation_map_sha256": "2d4ff16d8c8a4b137a5973cd3c6a2783b219b31196f8aa41552976f83dd823fc",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "george-mason-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
     "school_key": "george-mason",
