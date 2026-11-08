@@ -1,0 +1,42 @@
+{
+  "branch": "remote-stage2-census/saint-joseph-s-a0456ec79d3b",
+  "capability_census": {
+    "path": ".onboarding/saint-joseph-s/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "a0456ec79d3bfbd37a5488d063bdf5947569a44a",
+  "integration_base_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "integration_semantic_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 50,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 11,
+      "conditional_discrepancy": 50,
+      "discrepancy": 232,
+      "identity": 21,
+      "publication": 1
+    },
+    "decision_count": 316,
+    "decision_universe_sha256": "7ad5e3db5ae84d6466906aa2633a79bcd555110635ff4bea22ce803332a04e33",
+    "discrepancies_to_add": 232,
+    "existing_game_matches": 1228,
+    "new_canonical_games": 1718,
+    "plan_path": ".onboarding/saint-joseph-s/plan.json",
+    "review_path": ".onboarding/saint-joseph-s/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
