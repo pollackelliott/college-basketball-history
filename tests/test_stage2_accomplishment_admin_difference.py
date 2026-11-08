@@ -247,6 +247,9 @@ class Stage2AccomplishmentAdministrativeDifferenceTests(unittest.TestCase):
             repo = root / "repo"
             self.make_repo(repo)
             item = self.accomplishment_item(conflicts=False)
+            item["notes"] = (
+                "Institutional source note says the historical participation was vacated."
+            )
             plan = {
                 "schema_version": 1,
                 "workflow_version": 1,
@@ -280,6 +283,39 @@ class Stage2AccomplishmentAdministrativeDifferenceTests(unittest.TestCase):
                     "requires a live accomplishment/canonical conflict",
                 ):
                     approve_plan(repo, plan_path, review_path, "owner")
+
+    def test_explained_admin_difference_apply_preserves_reference_values(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            self.make_repo(repo)
+            approved = {
+                "school_key": SCHOOL,
+                "approved_plan_hash": "b" * 64,
+                "decisions": [
+                    {
+                        "decision_id": ACCOMPLISHMENT_ID,
+                        "category": "accomplishments",
+                        "decision": "VERIFY_EXPLAINED_ADMIN_DIFFERENCE",
+                        "resolution_basis": (
+                            "Owner-approved institutional evidence documents the "
+                            "administrative difference."
+                        ),
+                        "canonical_patch": {},
+                    }
+                ],
+            }
+            before = read_one(repo / "data/reference/program-accomplishments.csv")
+            counts = apply_publication_decisions(repo, approved)
+            row = read_one(repo / "data/reference/program-accomplishments.csv")
+            self.assertEqual(row["best_finish_key"], before["best_finish_key"])
+            self.assertEqual(row["best_finish_year"], before["best_finish_year"])
+            self.assertEqual(row["verification_status"], "VERIFIED")
+            self.assertEqual(
+                row["canonical_crosscheck_status"], "EXPLAINED_ADMIN_DIFFERENCE"
+            )
+            self.assertEqual(counts["accomplishments_verified"], 1)
+            self.assertEqual(counts["accomplishment_admin_differences_explained"], 1)
+            self.assertTrue(compare_program(self.program(), row, self.canonical_games()))
 
     def test_value_patch_plus_explained_admin_difference_is_supported(self):
         with tempfile.TemporaryDirectory() as temporary:
