@@ -56,6 +56,25 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
 
+    def test_pending_verification_allows_only_linear_main_advance(self):
+        text = self.workflow
+        self.assertIn(
+            'if [[ "${{ steps.detect.outputs.has_request }}" == "true" ]]; then',
+            text,
+        )
+        self.assertIn(
+            'git merge-base --is-ancestor "$expected_main" "$actual_main"',
+            text,
+        )
+        self.assertIn(
+            "Pending verification bound main is no longer an ancestor of protected main",
+            text,
+        )
+        self.assertIn(
+            "Pending verification will use original bound main runtime",
+            text,
+        )
+
     def test_stale_control_runner_and_verifier_copies_are_not_executable_paths(self):
         text = self.workflow
         self.assertNotIn("run: python tools/remote_implementation_runner.py", text)
