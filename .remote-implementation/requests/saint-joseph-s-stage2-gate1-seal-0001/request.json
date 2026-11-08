@@ -1,0 +1,61 @@
+{
+  "approved_plan_hash_preview": "ddd6eb0ca0c8f6b5133872d18ad461fe9fbad19f0f516f013680da773a3cc23e",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from saint-joseph-s-stage2-preseal-rehearsal-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "d66623081e2f7b9b4b39a1f6a8fb0205c888152156552cbb92cee3ccc5f8b2eb",
+  "decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+  "equivalence_sha256": "380cad56c8d1c0ca141eea9ad7e5cf868dc4a50c44b7679c78e025108ee78900",
+  "expected_protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "filled_review_sha256": "97135685323f32999a769740072d5260b6b5359b39a4a16bfd0f09bd9b031112",
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "90d3e9a97d320f6049ae2af3cbee437a6856f13ef011d918939af216a67e9eca",
+  "phase_continuation": {
+    "apply_request_id": "saint-joseph-s-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "saint-joseph-s-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "saint-joseph-s-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "7575114a1de0edb47f90cfa9bb018ab1e7cc469e",
+  "previous_control_state_sha256": "69e50807d8a456e6ad579c7535aaf21e797e1857163311cb327a28f4e6fb9ff5",
+  "recommendation_map_sha256": "30fb7052e43ade705c27fa6d845885d196c1befd3fde85329524ac210e092f53",
+  "request_id": "saint-joseph-s-stage2-gate1-seal-0001",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "99c3756881de150f778f54a28dc718fe51a4d8d96ffd553d37accb757452a058"
+  },
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/saint-joseph-s/saint-joseph-s-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "471e86e67f4a5622d861987d4c326cdabacc31649733496d54648a3748898df7"
+  },
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e"
+}
