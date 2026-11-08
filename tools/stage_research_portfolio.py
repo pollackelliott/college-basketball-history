@@ -1363,17 +1363,21 @@ def venue_reconciliation_inventory(
                     "RESEARCH_SETTLED_GLOBAL_RECONCILIATION_PENDING"
                 )
             else:
-                retained_same_key = [
-                    other
-                    for other in local_rows
-                    if other is not local
-                    and other.get("venue_key", "").strip()
-                    == chosen.get("venue_key", "").strip()
-                    and other.get("canonical_name", "").strip() == name
-                    and explicit_reuse_locality_compatible(
-                        local, other, explicit
-                    )
-                ]
+                retained_same_key = (
+                    [
+                        other
+                        for other in local_rows
+                        if other is not local
+                        and other.get("venue_key", "").strip()
+                        == chosen.get("venue_key", "").strip()
+                        and other.get("canonical_name", "").strip() == name
+                        and explicit_reuse_locality_compatible(
+                            local, other, explicit
+                        )
+                    ]
+                    if explicit is not None
+                    else []
+                )
                 consolidation_conflicts = (
                     representation_consolidation_conflicts(
                         local, retained_same_key
