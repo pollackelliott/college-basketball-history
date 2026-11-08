@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "57316e98798aaccb3ff0453e38045882b0106f7594d4d725699b8e686be565b3",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
+  "pr_number": 524,
+  "production_deployment_id": 7636478253,
+  "production_json_checked_count": 96,
+  "production_proof": true,
+  "request_id": "saint-joseph-s-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "status": "COMPLETE"
+}

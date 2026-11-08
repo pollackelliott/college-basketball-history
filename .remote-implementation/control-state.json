@@ -866,7 +866,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "57316e98798aaccb3ff0453e38045882b0106f7594d4d725699b8e686be565b3",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -876,7 +876,7 @@
     "production_deployment_id": 7636478253,
     "production_json_checked_count": 96,
     "protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "saint-joseph-s-release-production-proof-0001",
     "school_key": "saint-joseph-s"
   },
