@@ -1,0 +1,518 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/george-mason/conferences.csv",
+    "schools/george-mason/notes.md",
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv",
+    "schools/george-mason/source-notes.md",
+    "schools/george-mason/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/conferences.csv": "913cf1356c94662b3917823b986d081bbfdc372a806331f97f5f1df2e3691ea7",
+    "data/reference/programs.csv": "c5e1f3def864052ee063c68ec338ca98a0ee3688e1acd05540932e9425c19110",
+    "data/reference/venue-names.csv": "1df671a8588bcc54152a8c3f5b21ce9dc5ab4d21ed345f4da5812b07f0d223df",
+    "data/reference/venues.csv": "2bcd0b528b6c923755744b09d6d335dc4d60864c6d303648d30ba595b4cd8644",
+    "schools/george-mason/conferences.csv": "f4c7b5dc9e4aa80f69de682a900bf5c7fb8326d18f42e5c5861e95f2dccc3ec9",
+    "schools/george-mason/notes.md": "7ab990abaa250d6cace332c040de67075a92826e41f39eb99927ce24e30f76c3",
+    "schools/george-mason/opponents.csv": "1b2cf517946eed0692bcfec30f23d81da4fbf15c2148a7f8086577c02844835e",
+    "schools/george-mason/source-games.csv": "2dae844d6095179500c639de69b2869c2478ee68c0087ffd54401ba1063ea805",
+    "schools/george-mason/source-notes.md": "327319f26be40950e8c8a0bd3bb1f096f21c290f426b912df716d36f88c7f712",
+    "schools/george-mason/venues.csv": "ae9b048c843361575865bced12390ebf2c64c3257c5aaa996ff5da823d2bab52"
+  },
+  "changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/george-mason/conferences.csv",
+    "schools/george-mason/notes.md",
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv",
+    "schools/george-mason/source-notes.md",
+    "schools/george-mason/venues.csv"
+  ],
+  "commit_message": "Add George Mason onboarding source package",
+  "conference_mapping": [
+    {
+      "conference_key": "ecac-south",
+      "resolution": "NEW_GLOBAL_IDENTITY"
+    }
+  ],
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "f4c7b5dc9e4aa80f69de682a900bf5c7fb8326d18f42e5c5861e95f2dccc3ec9",
+    "owner_approval_basis": "Owner explicitly authorized the post-repair George Mason Stage 1 rerun through repository-authorized deterministic current-main reconciliation. The immutable accepted Research Freeze (SHA-256 8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374) already settles the 1979-80 through 1984-85 ECAC South conference identity and explicitly directs serialized Implementation to reconcile that pending global registration on current main. This spec preserves all four frozen conference-history rows unchanged and registers only the missing research-settled `ecac-south` identity; the tournament label is a nonassertive display fallback and does not assert tournament existence.",
+    "registration_count": 1,
+    "registrations": [
+      {
+        "conference_key": "ecac-south",
+        "conference_name": "ECAC South",
+        "notes": "George Mason Stage 1 deterministic current-main registration of the research-settled ECAC South identity. `ECAC South` is used only as a nonassertive display fallback; this registration does not assert that a conference tournament existed in any particular season.",
+        "status": "historical",
+        "tournament_label": "ECAC South"
+      }
+    ],
+    "replacement_history": [
+      {
+        "basis": "George Mason institutional program history identifies 1978-79 as the Division I inaugural season; the accepted conference chronology begins ECAC South play in 1979-80. Sources: https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf ; https://gomason.com/news/2017/8/16/rohlands-mens-basketball-all-decade-team-1976-86",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1978-1979",
+        "membership_type": "independent",
+        "notes": "In-scope first season only; not inferred from opponent scheduling.",
+        "ongoing": "No",
+        "source_program_key": "george-mason",
+        "start_season": "1978-1979"
+      },
+      {
+        "basis": "George Mason institutional all-decade history records 1980 ECAC South honors; the Mason prospectus records 1984-85 as 10-4 ECAC South before the 1985-86 CAA transition. Sources: https://gomason.com/news/2017/8/16/rohlands-mens-basketball-all-decade-team-1976-86 ; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf",
+        "conference_key": "ecac-south",
+        "conference_name": "ECAC South",
+        "end_season": "1984-1985",
+        "membership_type": "primary",
+        "notes": "Research-local historical conference key. No protected-main shared conference mutation occurred; serialized Implementation must reconcile the accepted historical identity on current main.",
+        "ongoing": "No",
+        "source_program_key": "george-mason",
+        "start_season": "1979-1980"
+      },
+      {
+        "basis": "George Mason institutional history states Mason was an original CAA member when the league formed out of the ECAC South in 1985; Mason's prospectus records 1985-86 as CAA. Sources: https://gomason.com/news/2013/3/25/205404612.aspx ; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf",
+        "conference_key": "caa",
+        "conference_name": "CAA",
+        "end_season": "2012-2013",
+        "membership_type": "primary",
+        "notes": "CAA membership ends after 2012-13 when Mason joins the Atlantic 10.",
+        "ongoing": "No",
+        "source_program_key": "george-mason",
+        "start_season": "1985-1986"
+      },
+      {
+        "basis": "George Mason and Atlantic 10 institutional announcements state Mason joined the Atlantic 10 effective July 1, 2013 and began competition in 2013-14. Sources: https://gomason.com/news/2013/3/25/205404612.aspx ; https://atlantic10.com/news/2013/3/25/208918262.aspx",
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10",
+        "end_season": "",
+        "membership_type": "primary",
+        "notes": "Ongoing through the required completed-season cutoff 2025-26.",
+        "ongoing": "Yes",
+        "source_program_key": "george-mason",
+        "start_season": "2013-2014"
+      }
+    ],
+    "replacement_row_count": 4,
+    "spec_path": "/tmp/remote-phase0-inputs-k88l6kd_/conference-reconciliation.json",
+    "spec_sha256": "cfbaeac495e3fca67add4742c9351dc42e6cfa21e196bb6cf944f26ade4f05e9"
+  },
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "b2f4cd4af2d4ed64bbafb6e2e9eadb98a388ec21",
+  "history_scope": {
+    "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Accepted George Mason 1978-79+ scope from the immutable Research Freeze. The frozen package explicitly records CONFIRMED_CURRENT_REFERENCE_NOT_SUPERSEDED against the owner-confirmed top-level history scope and matching protected-main program-top-level reference. Preserve the exact frozen historical universe beginning 1978-1979.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1978-1979",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "1978-79+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "1978-79+",
+      "school": "George Mason"
+    }
+  },
+  "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "f4c7b5dc9e4aa80f69de682a900bf5c7fb8326d18f42e5c5861e95f2dccc3ec9",
+    "notes.md": "7ab990abaa250d6cace332c040de67075a92826e41f39eb99927ce24e30f76c3",
+    "opponents.csv": "1b2cf517946eed0692bcfec30f23d81da4fbf15c2148a7f8086577c02844835e",
+    "source-games.csv": "2dae844d6095179500c639de69b2869c2478ee68c0087ffd54401ba1063ea805",
+    "source-notes.md": "327319f26be40950e8c8a0bd3bb1f096f21c290f426b912df716d36f88c7f712",
+    "venues.csv": "ae9b048c843361575865bced12390ebf2c64c3257c5aaa996ff5da823d2bab52"
+  },
+  "prepared_commit_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb",
+  "prepared_parent_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "prepared_tree_sha": "ea53924e539cba61a1c3417c6cc892451d2c7396",
+  "program_alias_mapping": [],
+  "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "repository_validation": "PASS",
+  "request_id": "george-mason-phase0-0002",
+  "request_sha256": "533d8ceafba788e876f3b788c3dbad44ee035f5645f34a82ca1f0ae162c19af2",
+  "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+  "research_checkpoint_sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "sidecars": {
+    "conference-reconciliation.json": "cfbaeac495e3fca67add4742c9351dc42e6cfa21e196bb6cf944f26ade4f05e9",
+    "integration-freeze.json": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
+    "stage1-reconciliation.json": "82182d7b52d99b168ce90f93dfb0a308491bdb2dbee388e5cb371d71391680e4"
+  },
+  "target_branch": "data/george-mason-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Capital One Arena",
+      "final_venue_id": "VEN-000036",
+      "final_venue_key": "capital-one-arena",
+      "research_venue_id": "VEN-000036",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "capital-one-arena"
+    },
+    {
+      "canonical_name": "Cassell Coliseum",
+      "final_venue_id": "VEN-000329",
+      "final_venue_key": "cassell-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cassell-coliseum"
+    },
+    {
+      "canonical_name": "Coliseo Roberto Clemente",
+      "final_venue_id": "VEN-000467",
+      "final_venue_key": "coliseo-roberto-clemente",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "coliseo-roberto-clemente"
+    },
+    {
+      "canonical_name": "EagleBank Arena",
+      "final_venue_id": "VEN-000576",
+      "final_venue_key": "eaglebank-arena",
+      "research_venue_id": "VEN-000576",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "eaglebank-arena"
+    },
+    {
+      "canonical_name": "FedExForum",
+      "final_venue_id": "VEN-000062",
+      "final_venue_key": "fedexforum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "fedexforum"
+    },
+    {
+      "canonical_name": "Flagler Gymnasium",
+      "final_venue_id": "VEN-000696",
+      "final_venue_key": "flagler-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "flagler-gymnasium"
+    },
+    {
+      "canonical_name": "HP Field House",
+      "final_venue_id": "VEN-000084",
+      "final_venue_key": "hp-field-house",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hp-field-house"
+    },
+    {
+      "canonical_name": "HP Field House",
+      "final_venue_id": "VEN-000084",
+      "final_venue_key": "hp-field-house",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hp-field-house"
+    },
+    {
+      "canonical_name": "Hard Rock Hotel Riviera Maya",
+      "final_venue_id": "VEN-000659",
+      "final_venue_key": "hard-rock-hotel-riviera-maya",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hard-rock-hotel-riviera-maya"
+    },
+    {
+      "canonical_name": "Hertz Arena",
+      "final_venue_id": "VEN-000578",
+      "final_venue_key": "hertz-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hertz-arena"
+    },
+    {
+      "canonical_name": "John Gray Gymnasium",
+      "final_venue_id": "VEN-001096",
+      "final_venue_key": "john-gray-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "john-gray-gymnasium"
+    },
+    {
+      "canonical_name": "José Miguel Agrelot Coliseum",
+      "final_venue_id": "VEN-000471",
+      "final_venue_key": "provisional-jose-miguel-agrelot-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_NAME_CLUSTER",
+      "venue_key": "jos-miguel-agrelot-coliseum"
+    },
+    {
+      "canonical_name": "LJVM Coliseum",
+      "final_venue_id": "VEN-000115",
+      "final_venue_key": "ljvm-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ljvm-coliseum"
+    },
+    {
+      "canonical_name": "Physical Education Building",
+      "final_venue_id": "VEN-001097",
+      "final_venue_key": "george-mason-physical-education-building",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "george-mason-physical-education-building"
+    },
+    {
+      "canonical_name": "Raider Arena",
+      "final_venue_id": "VEN-000271",
+      "final_venue_key": "raider-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "raider-arena"
+    },
+    {
+      "canonical_name": "Recreation Athletic Complex (RAC)",
+      "final_venue_id": "VEN-001098",
+      "final_venue_key": "george-mason-recreation-athletic-complex",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "george-mason-recreation-athletic-complex"
+    },
+    {
+      "canonical_name": "Richmond Coliseum",
+      "final_venue_id": "VEN-000175",
+      "final_venue_key": "richmond-coliseum",
+      "research_venue_id": "VEN-000175",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "richmond-coliseum"
+    },
+    {
+      "canonical_name": "Rochester War Memorial (Blue Cross Arena)",
+      "final_venue_id": "VEN-000505",
+      "final_venue_key": "rochester-war-memorial",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "rochester-war-memorial-blue-cross-arena"
+    },
+    {
+      "canonical_name": "Sanford Pentagon",
+      "final_venue_id": "VEN-000251",
+      "final_venue_key": "sanford-pentagon",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sanford-pentagon"
+    },
+    {
+      "canonical_name": "Scotiabank Centre",
+      "final_venue_id": "VEN-001099",
+      "final_venue_key": "scotiabank-centre",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "scotiabank-centre"
+    },
+    {
+      "canonical_name": "Sports and Fitness Center",
+      "final_venue_id": "VEN-000191",
+      "final_venue_key": "sports-and-fitness-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "VEN-000280",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-arena"
+    },
+    {
+      "canonical_name": "United Center",
+      "final_venue_id": "VEN-000217",
+      "final_venue_key": "united-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "united-center"
+    },
+    {
+      "canonical_name": "Walter E. Washington Convention Center",
+      "final_venue_id": "VEN-001100",
+      "final_venue_key": "walter-e-washington-convention-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "walter-e-washington-convention-center"
+    },
+    {
+      "canonical_name": "McKale Center",
+      "final_venue_id": "VEN-000127",
+      "final_venue_key": "mckale-center",
+      "research_venue_id": "VEN-000127",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mckale-center"
+    },
+    {
+      "canonical_name": "TD Garden",
+      "final_venue_id": "VEN-000203",
+      "final_venue_key": "td-garden",
+      "research_venue_id": "VEN-000203",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-garden"
+    },
+    {
+      "canonical_name": "ExtraMile Arena",
+      "final_venue_id": "VEN-000061",
+      "final_venue_key": "extramile-arena",
+      "research_venue_id": "VEN-000061",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "extramile-arena"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "Hoosier Dome",
+      "final_venue_id": "VEN-000083",
+      "final_venue_key": "hoosier-dome",
+      "research_venue_id": "VEN-000083",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hoosier-dome"
+    },
+    {
+      "canonical_name": "Ball Arena",
+      "final_venue_id": "VEN-000018",
+      "final_venue_key": "ball-arena",
+      "research_venue_id": "VEN-000018",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ball-arena"
+    },
+    {
+      "canonical_name": "Rocket Arena",
+      "final_venue_id": "VEN-000179",
+      "final_venue_key": "rocket-arena",
+      "research_venue_id": "VEN-000179",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rocket-arena"
+    },
+    {
+      "canonical_name": "Montagne Center",
+      "final_venue_id": "VEN-000581",
+      "final_venue_key": "montagne-center",
+      "research_venue_id": "VEN-000581",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "montagne-center"
+    },
+    {
+      "canonical_name": "Amica Mutual Pavilion",
+      "final_venue_id": "VEN-000011",
+      "final_venue_key": "amica-mutual-pavilion",
+      "research_venue_id": "VEN-000011",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amica-mutual-pavilion"
+    },
+    {
+      "canonical_name": "McArthur Court",
+      "final_venue_id": "VEN-000126",
+      "final_venue_key": "mcarthur-court",
+      "research_venue_id": "VEN-000126",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcarthur-court"
+    },
+    {
+      "canonical_name": "Bryce Jordan Center",
+      "final_venue_id": "VEN-000303",
+      "final_venue_key": "bryce-jordan-center",
+      "research_venue_id": "VEN-000303",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bryce-jordan-center"
+    },
+    {
+      "canonical_name": "Leavey Center",
+      "final_venue_id": "VEN-000606",
+      "final_venue_key": "leavey-center",
+      "research_venue_id": "VEN-000606",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "leavey-center"
+    },
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "VEN-000020",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "barclays-center"
+    },
+    {
+      "canonical_name": "PPG Paints Arena",
+      "final_venue_id": "VEN-000167",
+      "final_venue_key": "ppg-paints-arena",
+      "research_venue_id": "VEN-000167",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ppg-paints-arena"
+    },
+    {
+      "canonical_name": "Robins Center",
+      "final_venue_id": "VEN-000324",
+      "final_venue_key": "robins-center",
+      "research_venue_id": "VEN-000324",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "robins-center"
+    },
+    {
+      "canonical_name": "Norfolk Scope",
+      "final_venue_id": "VEN-000634",
+      "final_venue_key": "norfolk-scope",
+      "research_venue_id": "VEN-000634",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "norfolk-scope"
+    },
+    {
+      "canonical_name": "JMU Convocation Center",
+      "final_venue_id": "VEN-001101",
+      "final_venue_key": "jmu-convocation-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "jmu-convocation-center"
+    },
+    {
+      "canonical_name": "William and Mary Hall",
+      "final_venue_id": "VEN-000363",
+      "final_venue_key": "william-and-mary-hall",
+      "research_venue_id": "VEN-000363",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "william-and-mary-hall"
+    },
+    {
+      "canonical_name": "Hampton Coliseum",
+      "final_venue_id": "VEN-000702",
+      "final_venue_key": "hampton-coliseum",
+      "research_venue_id": "VEN-000702",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hampton-coliseum"
+    },
+    {
+      "canonical_name": "Neal S. Blaisdell Center",
+      "final_venue_id": "VEN-000149",
+      "final_venue_key": "neal-s-blaisdell-center",
+      "research_venue_id": "VEN-000149",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "neal-s-blaisdell-center"
+    }
+  ],
+  "venue_reconciliation": null
+}
