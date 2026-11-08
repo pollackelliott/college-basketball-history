@@ -1,5 +1,6 @@
 {
-  "approved_plan_hash_preview": "2c7c7f4b791c3d2dbe669c7871776b978379f89df746bcb0f59d871b4b8ed12d",
+  "approved_plan_hash": "0c9b26c88fc8de57642af7f5bf9f805bd2162d2b6c3a6bc26c4ebc0f00f15952",
+  "approved_plan_sha256": "49c9bac62012442a289c29e46f097b01668c47cf0fef9a99624d0bb5cfb2fc3a",
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
@@ -14,47 +15,40 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": true,
+    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": false,
+    "stage2_sealed_apply": true,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from george-mason-stage2-preseal-rehearsal-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from george-mason-stage2-gate1-seal-0001",
     "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "0b1e14d128ea1b3e61f8c94702b3527651fbe6db35ea089f87ac65663943c9c5",
   "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
-  "equivalence_sha256": "12198bc067855d94a6c7831d75307beb5a87380489e90454a50a7ba101c80b73",
   "expected_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
   "filled_review_sha256": "0cc368f210b2e3bbac98989ff8cc07bb8b08e84c7824c70e8e2c6d6df26572b5",
   "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_GATE1_SEAL",
+  "operation": "STAGE2_SEALED_APPLY",
   "owner_gate_1_approval_sha256": "be49666491164f375bed84a8f0493662c7b18910f4aa7ccf983f742bfa541baa",
-  "phase_continuation": {
-    "apply_request_id": "george-mason-stage2-sealed-apply-0001",
-    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
-    "preseal_request_id": "george-mason-stage2-preseal-rehearsal-0001",
-    "seal_request_id": "george-mason-stage2-gate1-seal-0001"
-  },
-  "previous_control_state_commit": "bdc3ac5ab9d01d9053f771f238f81a6c54cb2c3e",
-  "previous_control_state_sha256": "0e97afcd3e0db67c34527fb4fea5f8a5a4c86020ed380bf177b7cc2850bef8f6",
+  "previous_control_state_commit": "a4c317ad553891ef0a3c8fec28e72b68698d6805",
+  "previous_control_state_sha256": "57f901e48980d9eefa5851e70b4f105078be1f7aaa3a07fe58e313a0bf00be57",
   "recommendation_map_sha256": "3f84316d79ae50b7c7bf1b5f00db28fed2f33269fbe0ead9f70bb01bda8a47c3",
-  "request_id": "george-mason-stage2-gate1-seal-0001",
+  "request_id": "george-mason-stage2-sealed-apply-0001",
   "schema_version": 1,
   "school_key": "george-mason",
   "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
-  "stage2_preseal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-mason/george-mason-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
-    "sha256": "4c7370696517d0c2c7a1e4e371d39c9a0cbb425dffdd4ae3706088cdf96c2727"
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "c501bfc7ffd7fc841d3826fe90286530ab61d5c7adf51fd36ad5e37d8cc12472"
   },
-  "stage2_preseal_verification": {
-    "path": ".remote-implementation/verifications/george-mason/george-mason-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
-    "sha256": "c7a086aa7efb7edd5c168a99eb08e835a35ac7bf4e308c1b44ca146f439dcb58"
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "a91921ca1cc96a45bee1fff6fdaeca6d3ba7403fc6ab109cea94ee55c5259bfe"
   },
   "target_branch": "data/george-mason-onboarding",
   "target_sha": "d49e677de165248ef156f1f8d8c923240bdecee9"
