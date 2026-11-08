@@ -1,0 +1,32 @@
+{
+  "allowed_paths": [
+    "schools/saint-joseph-s/opponents.csv",
+    "schools/saint-joseph-s/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "bard",
+    "centenary-louisiana",
+    "puerto-rico-bayamon",
+    "union"
+  ],
+  "opponent_changed_row_count": 5,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "source_game_changed_ids": [
+    "SJU-R1-00275",
+    "SJU-R1-00291",
+    "SJU-R1-00577",
+    "SJU-R1-01106",
+    "SJU-R1-02076"
+  ],
+  "source_game_changed_keys": [
+    "bard",
+    "centenary-louisiana",
+    "puerto-rico-bayamon",
+    "union"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 5
+}

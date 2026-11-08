@@ -421,15 +421,15 @@
   "active_lock_commit": "5875d946d957d30dc25cc69d13121a631d354049",
   "active_lock_owner": "github-actions:42437158785:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "271de6a89b902195021e3168c3f14e709175c8ac",
+  "active_prepared_tree_sha": "46ebd8065d25f09d8e9ab8f0677494944e4b4b43",
   "active_request_id": "saint-joseph-s-stage2-opponent-display-normalize-0001",
   "active_request_sha256": "6fde73aea995e96570c9562755a55bc844f5e4c4b9a11a88fbe6ebab209cb364",
   "active_school_key": "saint-joseph-s",
   "active_target_branch": "data/saint-joseph-s-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/saint-joseph-s/saint-joseph-s-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "c0929494f7899ee15af616fc721ef69bdf8b5d699febc8ed8e882b56a9589398",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -851,5 +851,5 @@
   "lock_acquisition_request_commit": "f2e4db5f1973c6dcea8de418943282aa7405c545",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

@@ -1,0 +1,93 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 4,
+  "change_row_count": 5,
+  "changes": [
+    {
+      "authority_names": [
+        "Bard College (formerly St. Stephen’s)"
+      ],
+      "authority_signature": "bardcollegeformerlyststephens",
+      "canonical_opponent_key": "bard",
+      "from_names": [
+        "Bard College"
+      ],
+      "target_row_count": 2,
+      "to_name": "Bard College (formerly St. Stephen’s)"
+    },
+    {
+      "authority_names": [
+        "Centenary (LA)"
+      ],
+      "authority_signature": "centenaryla",
+      "canonical_opponent_key": "centenary-louisiana",
+      "from_names": [
+        "Centenary College (LA)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "authority_names": [
+        "PR-Bayamon"
+      ],
+      "authority_signature": "prbayamon",
+      "canonical_opponent_key": "puerto-rico-bayamon",
+      "from_names": [
+        "Puerto Rico-Bayamon"
+      ],
+      "target_row_count": 1,
+      "to_name": "PR-Bayamon"
+    },
+    {
+      "authority_names": [
+        "Union"
+      ],
+      "authority_signature": "union",
+      "canonical_opponent_key": "union",
+      "from_names": [
+        "Union College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Union"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "source_game_display_change_keys": 4,
+  "source_game_display_change_rows": 5,
+  "source_game_display_changes": [
+    {
+      "from_name": "Bard College",
+      "normalized_opponent_key": "bard",
+      "source_game_id": "SJU-R1-00275",
+      "to_name": "Bard College (formerly St. Stephen’s)"
+    },
+    {
+      "from_name": "Bard College",
+      "normalized_opponent_key": "bard",
+      "source_game_id": "SJU-R1-00291",
+      "to_name": "Bard College (formerly St. Stephen’s)"
+    },
+    {
+      "from_name": "Union College",
+      "normalized_opponent_key": "union",
+      "source_game_id": "SJU-R1-00577",
+      "to_name": "Union"
+    },
+    {
+      "from_name": "Centenary College (LA)",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "SJU-R1-01106",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Puerto Rico-Bayamon",
+      "normalized_opponent_key": "puerto-rico-bayamon",
+      "source_game_id": "SJU-R1-02076",
+      "to_name": "PR-Bayamon"
+    }
+  ],
+  "status": "PASS"
+}

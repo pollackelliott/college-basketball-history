@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "integration_base_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+    "school_key": "saint-joseph-s",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "integration_base_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+    "school_key": "saint-joseph-s",
+    "status": "PASS"
+  }
+}
