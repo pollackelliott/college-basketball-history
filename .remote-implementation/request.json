@@ -4,7 +4,7 @@
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": true,
+    "recovery": false,
     "release": false,
     "release_gate2_approval": false,
     "release_preview_verify": false,
@@ -21,21 +21,31 @@
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/payloads/george-mason/george-mason-stage1-0002/conference-reconciliation.json",
+    "sha256": "cfbaeac495e3fca67add4742c9351dc42e6cfa21e196bb6cf944f26ade4f05e9"
+  },
   "creation_provenance": {
-    "authorization": "Owner asked whether the exact failed George Mason recovery could be performed in this Implementation lane and explicitly instructed 'If so, proceed.' This authorizes recovery and abandonment/adoption classification only for failed accepted request george-mason-phase0-0001, with exact active lock 877839fd592d313880566f49740d92b9121ef7db and target data/george-mason-onboarding. It does not authorize a Phase 0 rerun, generic tooling repair, Research Freeze or historical changes, Stage 2, shared/global maintenance, owner gates, release, Preview, merge, or protected-main mutation.",
-    "origin": "ChatGPT George Mason serialized Implementation lane — explicit owner-authorized Phase 0 recovery"
+    "authorization": "Control Center disposition explicitly authorizes resuming the same George Mason Implementation lane after generic Phase 0 repair PR #528 merged. Because protected main advanced, this request performs a fresh complete read-only Stage 1 inventory against exact protected main fb5a12105c0bae066596dbc4cff2097231cb6333 using the immutable Research Freeze and the already-settled hash-bound ECAC South conference registration. It does not resurrect george-mason-phase0-0001 and does not authorize Phase 0 mutation, Stage 2, a historical change, unrelated shared/global maintenance, owner gates, release, or recovery.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — post-PR #528 current-main Stage 1 reauthentication"
   },
-  "expected_protected_main_sha": "8e37c18c3572c583e7b1261270a629d97ba11b1a",
+  "expected_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "5b9a81c32579373fed9ed6c938384b165b2a75ca",
-  "previous_control_state_sha256": "da9e1922d76adf30fd825688f1524b9de9f4980a84aad23cd4000a540b403bda",
-  "recovery": {
-    "abandoned_request_id": "george-mason-phase0-0001",
-    "lock_commit": "877839fd592d313880566f49740d92b9121ef7db",
-    "target_branch": "data/george-mason-onboarding"
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "e680e9a68e1cdfdc755fbd492c0c0b7263799fce",
+  "previous_control_state_sha256": "066080aa6aca96fee9678f8fe541bbca9970b2825baae4b17156f9f185a05658",
+  "request_id": "george-mason-stage1-0004",
+  "research_checkpoint": {
+    "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+    "sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
+    "transport": {
+      "commit_sha": "d1e478bc606895e27773fdd315ff7d04b86cdac2",
+      "kind": "git_base64_parts",
+      "part_count": 9,
+      "path_prefix": ".remote-implementation/transports/george-mason/george-mason-stage1-0001-final/piece-"
+    }
   },
-  "request_id": "george-mason-phase0-recover-0001",
   "schema_version": 1,
-  "school_key": "george-mason"
+  "school_key": "george-mason",
+  "venue_reconciliation": null
 }
