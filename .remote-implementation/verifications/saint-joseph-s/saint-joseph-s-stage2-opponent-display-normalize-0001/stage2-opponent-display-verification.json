@@ -1,0 +1,49 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "0386eb07e4b05fdba8769fdb77081277b9fb336021351aa76fcfd7425f30765d",
+    "implementation-stage2-status.json": "d31cb109e954fb99c291e09aa9169218afceeeda18d6d1ca28dc9e758c18500e",
+    "plan.json": "7b9132eb2710b96449ae0851e349b508f8afba543b50dea19602e3462a642dbf",
+    "review.csv": "5e7a789f2a3a325a286e34c564136438f6e12801ffb3f0f053e2dee43ac76301",
+    "review.md": "91fd24649dc4621a8b9a3064998de7153c83a38878082aad4e2786c601c05a47"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "0386eb07e4b05fdba8769fdb77081277b9fb336021351aa76fcfd7425f30765d",
+    "implementation-stage2-status.json": "111e94751a918ab7c27822b8a781e52a18d6528f6d202e7cf272f7e5f4152af4",
+    "plan.json": "2dec109bfb41ee44823b4b134ce26d458fe5f79535a218e6e624298a61db01fc",
+    "review.csv": "5e7a789f2a3a325a286e34c564136438f6e12801ffb3f0f053e2dee43ac76301",
+    "review.md": "427ec4bde2dbe0633458eba2d64e34aa5bd4b06550782fdbdc6f94cda4d6c76b"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "changed_paths": [
+    "schools/saint-joseph-s/opponents.csv",
+    "schools/saint-joseph-s/source-games.csv"
+  ],
+  "decision_universe_sha256": "f27c317cc6dc83fb13abfae110431c1c81ba176eb12aa98fe2efb9fd3aa079f1",
+  "expected_blocker_keys": [
+    "bard",
+    "centenary-louisiana",
+    "puerto-rico-bayamon",
+    "union"
+  ],
+  "field_level_proof_sha256": "e98348e679f2da9cc0e4e54e548cb0b29f70eb05ee2f054c3f3e073ccc8217db",
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "27c079debe7f4c1ac83934803a9abc0d3bcf74940455aac31bb2b75bd0add96e",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "saint-joseph-s-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_predecessor_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "target_sha": "271de6a89b902195021e3168c3f14e709175c8ac",
+  "target_tree_sha": "46ebd8065d25f09d8e9ab8f0677494944e4b4b43",
+  "tracked_stage2_mutation": "NONE"
+}
