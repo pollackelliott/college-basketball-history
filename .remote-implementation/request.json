@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-joseph-s-stage2-current-main-refresh-0003",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "saint-joseph-s-stage2-census-0004",
+  "operation": "STAGE2_CENSUS",
   "school_key": "saint-joseph-s",
-  "previous_control_state_commit": "1adad2dfb36f8f814e188392bf6dd19391657cc8",
-  "previous_control_state_sha256": "32f1f459971c4b0a0d514b9509ec8e3847e942e7952449cd51850832acc2a4f4",
+  "previous_control_state_commit": "2d79dd0b5b36561bb613adc647f20fa9f5293145",
+  "previous_control_state_sha256": "f1b4d0287dcb4636d87526c056b161b0ccc3c6e35e993ac9a96fd60498353536",
   "expected_protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
   "target_branch": "data/saint-joseph-s-onboarding",
-  "target_sha": "a0456ec79d3bfbd37a5488d063bdf5947569a44a",
+  "target_sha": "a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e",
   "phase0_successor": {
     "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-phase0-0003/successor-manifest.json",
     "sha256": "c8f42a8e18787fcee7f4fff0284e828d8b89c4ad1413c5dd21a6bfa8d93bdeb4"
@@ -18,26 +18,21 @@
     "sha256": "49c2aaf26f0982b189293f52f450bf159459e42f8bcfd95f3511db723540528b"
   },
   "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-stage2-current-main-refresh-0002/successor-manifest.json",
-    "sha256": "d7f0d45c7ad803946f2a7b921318ecca6dd810c87e753cdb3cb88ab0de2aae33"
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-stage2-current-main-refresh-0003/successor-manifest.json",
+    "sha256": "43d3e4dc80008879df3a8d2432769b3accefc6465686e58a3c04e427837eddba"
   },
   "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
   "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "Control Center disposition after merged Nebraska/Loras maintenance PR #522 explicitly authorizes the required guarded STAGE2_CURRENT_MAIN_REFRESH from Saint Joseph's fresh-verified onboarding authority a0456ec79d3bfbd37a5488d063bdf5947569a44a to protected main 377a539979f727ad00fd6141365444d43b301f15. Independently recomputed merge base 66c4b04b51826f054ce4d240aea398772379cc91; Saint Joseph's target-only changed paths=8, intervening-main changed paths=7, overlap=0, with no intervening schools/saint-joseph-s path. The current-main delta contains the generic source-scoped non-D1 capability and exact Nebraska/Loras maintenance that rekeys CBBG-0054091, CBBG-0054107, and CBBG-0054148 away from Philadelphia Saint Joseph's. No stale Stage 2 decision universe or recommendation map is asserted forward."
-  },
   "creation_provenance": {
-    "origin": "Saint Joseph's serialized Implementation Stage 2 — Control Center-authorized current-main refresh after Nebraska/Loras maintenance",
-    "authorization": "Preserve the immutable Research Freeze, Integration Freeze, semantic snapshot, Saint Joseph's six-file package, opponent-display normalization, and all historical target-school meaning. Do not replay the stale blocked proposal. This refresh absorbs only disjoint protected-main state through 377a539979f727ad00fd6141365444d43b301f15. After fresh PASS, regenerate an ordinary Stage 2 census and a fresh exact recommendation-map rehearsal. Confirm the prior 1916-17 historical-coverage arithmetic blocker disappears because the three Nebraska historical St. Joseph's (Iowa) canonical games now attach to loras. Stop for a new genuine blocker or OWNER_GATE_1_READY; no Owner Gate 1 approval is included."
+    "origin": "Saint Joseph's serialized Implementation Stage 2 — fresh census after Nebraska/Loras current-main refresh",
+    "authorization": "Existing Saint Joseph's Stage 2 phase authority persists through OWNER_GATE_1_READY. Refresh saint-joseph-s-stage2-current-main-refresh-0003 is independently fresh-verified PASS against protected main 377a539979f727ad00fd6141365444d43b301f15 and target a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e. Regenerate the complete Stage 2 universe from repaired current main. Confirm specifically that CBBG-0054091, CBBG-0054107, and CBBG-0054148 no longer attach to saint-joseph-s and that the 1916-17 historical-coverage arithmetic blocker is absent. Do not carry forward the old 316-decision universe or stale recommendation map by assertion. No tracked basketball mutation, historical ruling, Owner Gate 1/2 approval, sealing, apply, release, Preview, merge, or Production authority is included."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
