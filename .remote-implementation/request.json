@@ -2,9 +2,9 @@
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": false,
+    "recovery": true,
     "release": false,
     "release_gate2_approval": false,
     "release_preview_verify": false,
@@ -21,42 +21,21 @@
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
-  "conference_reconciliation": {
-    "path": ".remote-implementation/payloads/george-mason/george-mason-stage1-0002/conference-reconciliation.json",
-    "sha256": "cfbaeac495e3fca67add4742c9351dc42e6cfa21e196bb6cf944f26ade4f05e9"
-  },
   "creation_provenance": {
-    "authorization": "Owner replied Proceed after the clean Stage 1 PASS checkpoint george-mason-stage1-0003. This authorizes exactly one guarded PHASE0 operation: reauthenticate the exact Stage 1 PASS against protected main 8e37c18c3572c583e7b1261270a629d97ba11b1a, stage the immutable six-file Research Freeze SHA-256 8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374, apply the exact hash-bound deterministic ECAC South conference registration from Stage 1, preserve settled 1978-79+ history scope, create the Integration Freeze, publish create-once data/george-mason-onboarding through the global lock/write-ahead/CAS path, and require independent fresh Phase 0 verification. It does not authorize Research reopening, unrelated shared/global maintenance, Stage 2, any owner gate, release, Preview, merge, or protected-main mutation.",
-    "origin": "ChatGPT George Mason serialized Implementation lane — owner-authorized guarded Phase 0"
+    "authorization": "Owner asked whether the exact failed George Mason recovery could be performed in this Implementation lane and explicitly instructed 'If so, proceed.' This authorizes recovery and abandonment/adoption classification only for failed accepted request george-mason-phase0-0001, with exact active lock 877839fd592d313880566f49740d92b9121ef7db and target data/george-mason-onboarding. It does not authorize a Phase 0 rerun, generic tooling repair, Research Freeze or historical changes, Stage 2, shared/global maintenance, owner gates, release, Preview, merge, or protected-main mutation.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — explicit owner-authorized Phase 0 recovery"
   },
   "expected_protected_main_sha": "8e37c18c3572c583e7b1261270a629d97ba11b1a",
-  "history_scope": {
-    "basis": "FIRST_TOP_LEVEL_SEASON",
-    "intervals": "",
-    "notes": "Accepted George Mason 1978-79+ scope from the immutable Research Freeze. The frozen package explicitly records Scope disposition: CONFIRMED_CURRENT_REFERENCE_NOT_SUPERSEDED and basis: owner-confirmed George Mason top-level history scope plus matching protected-main program-top-level reference. Preserve the exact frozen historical universe beginning 1978-1979.",
-    "start_season": "1978-1979"
-  },
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "PHASE0",
-  "previous_control_state_commit": "8f5877528528f7fb96c48d39f0f3687866830b0b",
-  "previous_control_state_sha256": "18ad4b36eb50e3547da0eb2ac24679b9568891ee890162c349f648632c9ac8c5",
-  "request_id": "george-mason-phase0-0001",
-  "research_checkpoint": {
-    "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
-    "sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
-    "transport": {
-      "commit_sha": "d1e478bc606895e27773fdd315ff7d04b86cdac2",
-      "kind": "git_base64_parts",
-      "part_count": 9,
-      "path_prefix": ".remote-implementation/transports/george-mason/george-mason-stage1-0001-final/piece-"
-    }
+  "operation": "RECOVER",
+  "previous_control_state_commit": "5b9a81c32579373fed9ed6c938384b165b2a75ca",
+  "previous_control_state_sha256": "da9e1922d76adf30fd825688f1524b9de9f4980a84aad23cd4000a540b403bda",
+  "recovery": {
+    "abandoned_request_id": "george-mason-phase0-0001",
+    "lock_commit": "877839fd592d313880566f49740d92b9121ef7db",
+    "target_branch": "data/george-mason-onboarding"
   },
+  "request_id": "george-mason-phase0-recover-0001",
   "schema_version": 1,
-  "school_key": "george-mason",
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-mason/george-mason-stage1-0003/checkpoint-manifest.json",
-    "sha256": "9835db9838e26449c851f93414f29fddfb8475bf21afc07ffd1848ded21d92f0"
-  },
-  "target_branch": "data/george-mason-onboarding",
-  "venue_reconciliation": null
+  "school_key": "george-mason"
 }
