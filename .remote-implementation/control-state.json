@@ -425,7 +425,7 @@
   "active_request_sha256": "f1978f744600ac7058ec0357db76c1e7be645740f1e02504f9696968984b892f",
   "active_school_key": "saint-joseph-s",
   "active_target_branch": "data/saint-joseph-s-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "bcf16f57837f2dd8badb7d50154c3df4a449cd25",
   "active_writeahead_path": ".remote-implementation/writeahead/saint-joseph-s/saint-joseph-s-phase0-0003/writeahead-manifest.json",
   "active_writeahead_sha256": "dae36be2715216668ee9931fc4e549d8bb63f546d0e6aa23cfed51258257c560",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
