@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-joseph-s-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "saint-joseph-s",
+  "previous_control_state_commit": "a044b9fd8905d29157bc67202ab9a23a87365651",
+  "previous_control_state_sha256": "86a80dbb4bbec8e8edcf75059422bffb31fb6585f7a2871e76846e8942814144",
+  "expected_protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-phase0-0003/successor-manifest.json",
+    "sha256": "c8f42a8e18787fcee7f4fff0284e828d8b89c4ad1413c5dd21a6bfa8d93bdeb4"
+  },
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "creation_provenance": {
+    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly said Proceed after Saint Joseph's guarded Phase 0 request saint-joseph-s-phase0-0003 completed with repository validation PASS, CREATE_ONCE_PASS, fresh_runner_verification=PASS, remote_phase0_equivalence=PASS, exact onboarding successor ddd4485ff74b053e58e47087bb0442907b169e08, and Integration Freeze 011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf. This request is the first bounded read-only STAGE2_CENSUS operation against that exact independently verified successor and semantic snapshot. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, sealing, sealed apply, release, Preview, merge, recovery, shared/global mutation, or Owner Gate 2 authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
