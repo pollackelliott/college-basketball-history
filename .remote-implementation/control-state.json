@@ -416,18 +416,19 @@
     "saint-joseph-s-phase0-0003",
     "saint-joseph-s-stage2-census-0001",
     "saint-joseph-s-stage2-opponent-display-normalize-0001",
-    "saint-joseph-s-stage2-census-0002"
+    "saint-joseph-s-stage2-census-0002",
+    "saint-joseph-s-stage2-current-main-refresh-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "c3d9ce93b807410835af6df5b998f0644b9806c0",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42439899614:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "saint-joseph-s-stage2-current-main-refresh-0001",
+  "active_request_sha256": "2535b422a0388e1ddaca76bbbd5006fd942acb2fd80eba9528ae8fcf5dd845e8",
+  "active_school_key": "saint-joseph-s",
+  "active_target_branch": "data/saint-joseph-s-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -848,8 +849,11 @@
     "target_branch": "data/saint-joseph-s-onboarding",
     "target_sha": "271de6a89b902195021e3168c3f14e709175c8ac"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42439899614",
+  "lock_acquisition_request_commit": "e7619ed55a90e33c8bc0d6770377346f459e4d3d",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
