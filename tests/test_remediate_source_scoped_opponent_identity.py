@@ -471,6 +471,37 @@ class SourceScopedOpponentIdentityTests(unittest.TestCase):
                 row = next(item for item in games if item["canonical_game_id"] == gid)
                 self.assertEqual({row["team_a_key"], row["team_b_key"]}, {"alabama", "loras"})
 
+    def test_non_d1_in_place_rekey_rejects_existing_exact_canonical_counterpart(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            self.make_repo(repo)
+            canonical_fields, canonical = read_csv(repo / "data/canonical/games.csv")
+            stale = next(row for row in canonical if row["canonical_game_id"] == "CBBG-0028395")
+            duplicate = dict(stale)
+            duplicate["canonical_game_id"] = "CBBG-0028398"
+            a, b = sorted(("alabama", "loras"))
+            duplicate["team_a_key"] = a
+            duplicate["team_b_key"] = b
+            canonical.append(duplicate)
+            write_csv(repo / "data/canonical/games.csv", canonical_fields, canonical)
+
+            with self.assertRaisesRegex(
+                ScopedIdentityError,
+                "in-place rekey would collide with existing canonical row",
+            ):
+                build_plan(
+                    repo,
+                    source_program="alabama",
+                    source_label="Virginia Tech ^",
+                    source_game_id="ALARAW-00923",
+                    old_key="virginia-tech",
+                    new_key="loras",
+                    new_name="Loras",
+                    basis="Authoritative source identifies a distinct historical/non-D1 opponent.",
+                    in_place=True,
+                    target_current_d1=False,
+                )
+
     def test_non_d1_in_place_rekey_rejects_current_d1_target_key(self):
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary)
