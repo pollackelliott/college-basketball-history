@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-joseph-s-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "school_key": "saint-joseph-s",
+  "previous_control_state_commit": "48019f6159f914adcac7bd80cd9006fb81fa874a",
+  "previous_control_state_sha256": "6e539751c6da33ecc7c7c6711845622c79e831fabc2cdcbd181d51b04d0a00e3",
+  "expected_protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "4fc941c8e3873765f60d95dee542eeebbb83e62a07b3cf9b560cf7694abfe978"
+  },
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "creation_provenance": {
+    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — census-bound Stage 2 opponent-display normalization",
+    "authorization": "Same owner-authorized Saint Joseph's Stage 2 technical phase persists through OWNER_GATE_1_READY. Fresh-verified census saint-joseph-s-stage2-census-0001 is BLOCKED solely by exactly four deterministic historical opponent-display conflicts (bard, centenary-louisiana, puerto-rico-bayamon, union), with warning_count=0, decision_count=0, semantic drift PASS, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. Authorizes exactly one permanent census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE representation repair over that complete four-key population. The operation may change only canonical_opponent_name in schools/saint-joseph-s/opponents.csv and synchronized normalized_opponent_name in schools/saint-joseph-s/source-games.csv using existing project display authority. No opponent keys, literal source labels, raw evidence, dates, scores, overtime, H/A/N, venue/location, game type, postseason round, Research, Integration Freeze, protected main, owner gates, sealing/apply, release, Preview, merge, or Production authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
