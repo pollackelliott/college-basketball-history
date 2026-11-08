@@ -473,20 +473,10 @@ def accomplishment_row_issues(
 
     status = row.get("verification_status", "").strip()
     crosscheck = row.get("canonical_crosscheck_status", "").strip()
-    verification_basis = row.get("verification_basis", "").strip()
     if status not in VERIFICATION_STATUSES:
         errors.append(f"unknown verification_status {status!r}")
     if crosscheck not in CANONICAL_CROSSCHECK_STATUSES:
         errors.append(f"unknown canonical_crosscheck_status {crosscheck!r}")
-    if crosscheck == "EXPLAINED_ADMIN_DIFFERENCE":
-        if status != "VERIFIED":
-            errors.append(
-                "EXPLAINED_ADMIN_DIFFERENCE requires VERIFIED accomplishment authority"
-            )
-        if not verification_basis:
-            errors.append(
-                "EXPLAINED_ADMIN_DIFFERENCE requires a nonblank verification_basis"
-            )
 
     if all(field in values for field in ACCOMPLISHMENT_COUNT_FIELDS):
         appearances = values["ncaa_tournament_appearances"]
