@@ -1,0 +1,1204 @@
+{
+  "ambiguous_stop_count": 0,
+  "blocker_count": 0,
+  "conference": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 1,
+      "REUSE_CURRENT_IDENTITY": 3
+    },
+    "row_count": 4,
+    "rows": [
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "issues": []
+      },
+      {
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "conference_key": "ecac-south",
+        "conference_name": "ECAC South",
+        "issues": []
+      },
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "caa",
+        "conference_name": "CAA",
+        "issues": []
+      },
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10",
+        "issues": []
+      }
+    ],
+    "schema_version": 1
+  },
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "f4c7b5dc9e4aa80f69de682a900bf5c7fb8326d18f42e5c5861e95f2dccc3ec9",
+    "owner_approval_basis": "Owner explicitly authorized the post-repair George Mason Stage 1 rerun through repository-authorized deterministic current-main reconciliation. The immutable accepted Research Freeze (SHA-256 8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374) already settles the 1979-80 through 1984-85 ECAC South conference identity and explicitly directs serialized Implementation to reconcile that pending global registration on current main. This spec preserves all four frozen conference-history rows unchanged and registers only the missing research-settled `ecac-south` identity; the tournament label is a nonassertive display fallback and does not assert tournament existence.",
+    "registration_count": 1,
+    "registrations": [
+      {
+        "conference_key": "ecac-south",
+        "conference_name": "ECAC South",
+        "notes": "George Mason Stage 1 deterministic current-main registration of the research-settled ECAC South identity. `ECAC South` is used only as a nonassertive display fallback; this registration does not assert that a conference tournament existed in any particular season.",
+        "status": "historical",
+        "tournament_label": "ECAC South"
+      }
+    ],
+    "replacement_history": [
+      {
+        "basis": "George Mason institutional program history identifies 1978-79 as the Division I inaugural season; the accepted conference chronology begins ECAC South play in 1979-80. Sources: https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf ; https://gomason.com/news/2017/8/16/rohlands-mens-basketball-all-decade-team-1976-86",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1978-1979",
+        "membership_type": "independent",
+        "notes": "In-scope first season only; not inferred from opponent scheduling.",
+        "ongoing": "No",
+        "source_program_key": "george-mason",
+        "start_season": "1978-1979"
+      },
+      {
+        "basis": "George Mason institutional all-decade history records 1980 ECAC South honors; the Mason prospectus records 1984-85 as 10-4 ECAC South before the 1985-86 CAA transition. Sources: https://gomason.com/news/2017/8/16/rohlands-mens-basketball-all-decade-team-1976-86 ; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf",
+        "conference_key": "ecac-south",
+        "conference_name": "ECAC South",
+        "end_season": "1984-1985",
+        "membership_type": "primary",
+        "notes": "Research-local historical conference key. No protected-main shared conference mutation occurred; serialized Implementation must reconcile the accepted historical identity on current main.",
+        "ongoing": "No",
+        "source_program_key": "george-mason",
+        "start_season": "1979-1980"
+      },
+      {
+        "basis": "George Mason institutional history states Mason was an original CAA member when the league formed out of the ECAC South in 1985; Mason's prospectus records 1985-86 as CAA. Sources: https://gomason.com/news/2013/3/25/205404612.aspx ; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/25/2022-23_Mason_MBB_Prospectus__1_.pdf",
+        "conference_key": "caa",
+        "conference_name": "CAA",
+        "end_season": "2012-2013",
+        "membership_type": "primary",
+        "notes": "CAA membership ends after 2012-13 when Mason joins the Atlantic 10.",
+        "ongoing": "No",
+        "source_program_key": "george-mason",
+        "start_season": "1985-1986"
+      },
+      {
+        "basis": "George Mason and Atlantic 10 institutional announcements state Mason joined the Atlantic 10 effective July 1, 2013 and began competition in 2013-14. Sources: https://gomason.com/news/2013/3/25/205404612.aspx ; https://atlantic10.com/news/2013/3/25/208918262.aspx",
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10",
+        "end_season": "",
+        "membership_type": "primary",
+        "notes": "Ongoing through the required completed-season cutoff 2025-26.",
+        "ongoing": "Yes",
+        "source_program_key": "george-mason",
+        "start_season": "2013-2014"
+      }
+    ],
+    "replacement_row_count": 4,
+    "spec_path": "/tmp/remote-phase0-inputs-k88l6kd_/conference-reconciliation.json",
+    "spec_sha256": "cfbaeac495e3fca67add4742c9351dc42e6cfa21e196bb6cf944f26ade4f05e9"
+  },
+  "integration_base_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "maintenance_required_count": 0,
+  "origin_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "program_alias": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NO_CURRENT_VERIFIED_ALIAS": 44
+    },
+    "row_count": 44,
+    "rows": [
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Baltimore",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "baltimore",
+        "source_opponent_label": "at Baltimore"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Catholic University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "catholic-university",
+        "source_opponent_label": "at Catholic"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Frostburg State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "frostburg-state",
+        "source_opponent_label": "at Frostburg State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hartford",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hartford",
+        "source_opponent_label": "at Hartford"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Randolph-Macon",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "randolph-macon",
+        "source_opponent_label": "at Randolph-Macon"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Saint Francis (PA)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "saint-francis-pa",
+        "source_opponent_label": "at St. Francis (Pa.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Barton",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "barton",
+        "source_opponent_label": "Atlantic Christian"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Baltimore",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "baltimore",
+        "source_opponent_label": "Baltimore"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Bluefield College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bluefield-college",
+        "source_opponent_label": "Bluefield College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Bridgewater College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bridgewater-college",
+        "source_opponent_label": "Bridgewater"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Bridgewater College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bridgewater-college",
+        "source_opponent_label": "Bridgewater (VA)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Brooklyn College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "brooklyn-college",
+        "source_opponent_label": "Brooklyn"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Catawba",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "catawba",
+        "source_opponent_label": "Catawba"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Catawba",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "catawba",
+        "source_opponent_label": "CATAWBA!"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Catholic University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "catholic-university",
+        "source_opponent_label": "Catholic"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Davis & Elkins",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "davis-elkins",
+        "source_opponent_label": "Davis & Elkins"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "District of Columbia",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "district-of-columbia",
+        "source_opponent_label": "District of Columbia"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Eastern University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "eastern-university",
+        "source_opponent_label": "Eastern"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Ferrum",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "ferrum",
+        "source_opponent_label": "Ferrum"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Frostburg State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "frostburg-state",
+        "source_opponent_label": "Frostburg State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hartford",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hartford",
+        "source_opponent_label": "Hartford"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Lebanon Valley",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "lebanon-valley",
+        "source_opponent_label": "LEBANON VALLEY&"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Macalester",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "macalester",
+        "source_opponent_label": "Macalester College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Mercy",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "mercy",
+        "source_opponent_label": "Mercy"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Messiah",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "messiah",
+        "source_opponent_label": "Messiah College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Millersville",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "millersville",
+        "source_opponent_label": "Millersville"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Millersville",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "millersville",
+        "source_opponent_label": "Millersville St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "North Carolina Wesleyan",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "north-carolina-wesleyan",
+        "source_opponent_label": "NC Wesleyan"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Randolph-Macon",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "randolph-macon",
+        "source_opponent_label": "Randolph-Macon"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Saint Francis (PA)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "saint-francis-pa",
+        "source_opponent_label": "SAINT FRANCIS (PA.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "San Francisco State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "san-francisco-state",
+        "source_opponent_label": "San Francisco State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Shenandoah",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "shenandoah",
+        "source_opponent_label": "Shenandoah"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Southeastern University (Fla.)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southeastern-university-fl",
+        "source_opponent_label": "Southeastern"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Saint Francis (PA)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "saint-francis-pa",
+        "source_opponent_label": "St. Francis (Pa.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "St. Mary's (Md.)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "st-marys-md",
+        "source_opponent_label": "St. Mary’s (Md.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "US International (San Diego)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "us-international-san-diego",
+        "source_opponent_label": "US Int’l (San Diego)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Utica",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "utica",
+        "source_opponent_label": "Utica"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Johns Hopkins",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "johns-hopkins",
+        "source_opponent_label": "vs. Johns Hopkins%"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Oklahoma City",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "oklahoma-city",
+        "source_opponent_label": "vs. Oklahoma City%"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "St. Francis Brooklyn",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "st-francis-brooklyn",
+        "source_opponent_label": "vs. St. Francis (NY)%"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Washington College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "washington-college",
+        "source_opponent_label": "Washington College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "West Virginia Tech",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "west-virginia-tech",
+        "source_opponent_label": "West Virginia Tech"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Whittier",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "whittier",
+        "source_opponent_label": "Whittier"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Widener",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "widener",
+        "source_opponent_label": "Widener"
+      }
+    ],
+    "schema_version": 1
+  },
+  "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+  "research_zip_sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
+  "schema_version": 2,
+  "school_key": "george-mason",
+  "status": "PASS",
+  "venue": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 6,
+      "SAFE_REPRESENTATION_REUSE": 39
+    },
+    "rows": [
+      {
+        "candidate_venue_ids": [
+          "VEN-000036"
+        ],
+        "canonical_name": "Capital One Arena",
+        "chronology_conflicts": [],
+        "city": "Washington",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000036",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "DC",
+        "target_venue_id": "VEN-000036",
+        "target_venue_key": "capital-one-arena",
+        "venue_key": "capital-one-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000329"
+        ],
+        "canonical_name": "Cassell Coliseum",
+        "chronology_conflicts": [],
+        "city": "Blacksburg",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VA",
+        "target_venue_id": "VEN-000329",
+        "target_venue_key": "cassell-coliseum",
+        "venue_key": "cassell-coliseum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000467"
+        ],
+        "canonical_name": "Coliseo Roberto Clemente",
+        "chronology_conflicts": [],
+        "city": "San Juan",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "PR",
+        "target_venue_id": "VEN-000467",
+        "target_venue_key": "coliseo-roberto-clemente",
+        "venue_key": "coliseo-roberto-clemente"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000576"
+        ],
+        "canonical_name": "EagleBank Arena",
+        "chronology_conflicts": [],
+        "city": "Fairfax",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000576",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VA",
+        "target_venue_id": "VEN-000576",
+        "target_venue_key": "eaglebank-arena",
+        "venue_key": "eaglebank-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000062"
+        ],
+        "canonical_name": "FedExForum",
+        "chronology_conflicts": [],
+        "city": "Memphis",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "TN",
+        "target_venue_id": "VEN-000062",
+        "target_venue_key": "fedexforum",
+        "venue_key": "fedexforum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000696"
+        ],
+        "canonical_name": "Flagler Gymnasium",
+        "chronology_conflicts": [],
+        "city": "St. Augustine",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "FL",
+        "target_venue_id": "VEN-000696",
+        "target_venue_key": "flagler-gymnasium",
+        "venue_key": "flagler-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "HP Field House",
+        "chronology_conflicts": [],
+        "city": "Lake Buena Vista",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "CANONICAL_GEOGRAPHY_NORMALIZATION"
+        ],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "FL",
+        "target_venue_id": "VEN-000084",
+        "target_venue_key": "hp-field-house",
+        "venue_key": "hp-field-house"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "HP Field House",
+        "chronology_conflicts": [],
+        "city": "Orlando",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "CANONICAL_GEOGRAPHY_NORMALIZATION"
+        ],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "FL",
+        "target_venue_id": "VEN-000084",
+        "target_venue_key": "hp-field-house",
+        "venue_key": "hp-field-house"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000659"
+        ],
+        "canonical_name": "Hard Rock Hotel Riviera Maya",
+        "chronology_conflicts": [],
+        "city": "Puerto Aventuras",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "Quintana Roo",
+        "target_venue_id": "VEN-000659",
+        "target_venue_key": "hard-rock-hotel-riviera-maya",
+        "venue_key": "hard-rock-hotel-riviera-maya"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000578"
+        ],
+        "canonical_name": "Hertz Arena",
+        "chronology_conflicts": [],
+        "city": "Estero",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "FL",
+        "target_venue_id": "VEN-000578",
+        "target_venue_key": "hertz-arena",
+        "venue_key": "hertz-arena"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "John Gray Gymnasium",
+        "chronology_conflicts": [],
+        "city": "George Town",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "Grand Cayman",
+        "target_venue_id": "",
+        "target_venue_key": "john-gray-gymnasium",
+        "venue_key": "john-gray-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000471"
+        ],
+        "canonical_name": "José Miguel Agrelot Coliseum",
+        "chronology_conflicts": [],
+        "city": "San Juan",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_REGISTERED_NAME_CLUSTER",
+        "state": "PR",
+        "target_venue_id": "VEN-000471",
+        "target_venue_key": "provisional-jose-miguel-agrelot-coliseum",
+        "venue_key": "jos-miguel-agrelot-coliseum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000115"
+        ],
+        "canonical_name": "LJVM Coliseum",
+        "chronology_conflicts": [],
+        "city": "Winston-Salem",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NC",
+        "target_venue_id": "VEN-000115",
+        "target_venue_key": "ljvm-coliseum",
+        "venue_key": "ljvm-coliseum"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Physical Education Building",
+        "chronology_conflicts": [],
+        "city": "Fairfax",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "VA",
+        "target_venue_id": "",
+        "target_venue_key": "george-mason-physical-education-building",
+        "venue_key": "george-mason-physical-education-building"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000271"
+        ],
+        "canonical_name": "Raider Arena",
+        "chronology_conflicts": [],
+        "city": "Niceville",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "FL",
+        "target_venue_id": "VEN-000271",
+        "target_venue_key": "raider-arena",
+        "venue_key": "raider-arena"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Recreation Athletic Complex (RAC)",
+        "chronology_conflicts": [],
+        "city": "Fairfax",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "VA",
+        "target_venue_id": "",
+        "target_venue_key": "george-mason-recreation-athletic-complex",
+        "venue_key": "george-mason-recreation-athletic-complex"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000175"
+        ],
+        "canonical_name": "Richmond Coliseum",
+        "chronology_conflicts": [],
+        "city": "Richmond",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000175",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VA",
+        "target_venue_id": "VEN-000175",
+        "target_venue_key": "richmond-coliseum",
+        "venue_key": "richmond-coliseum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000505"
+        ],
+        "canonical_name": "Rochester War Memorial (Blue Cross Arena)",
+        "chronology_conflicts": [],
+        "city": "Rochester",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_REGISTERED_ALIAS",
+        "state": "NY",
+        "target_venue_id": "VEN-000505",
+        "target_venue_key": "rochester-war-memorial",
+        "venue_key": "rochester-war-memorial-blue-cross-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000251"
+        ],
+        "canonical_name": "Sanford Pentagon",
+        "chronology_conflicts": [],
+        "city": "Sioux Falls",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "SD",
+        "target_venue_id": "VEN-000251",
+        "target_venue_key": "sanford-pentagon",
+        "venue_key": "sanford-pentagon"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Scotiabank Centre",
+        "chronology_conflicts": [],
+        "city": "Halifax",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "NS",
+        "target_venue_id": "",
+        "target_venue_key": "scotiabank-centre",
+        "venue_key": "scotiabank-centre"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000191"
+        ],
+        "canonical_name": "Sports and Fitness Center",
+        "chronology_conflicts": [],
+        "city": "St. Thomas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VI",
+        "target_venue_id": "VEN-000191",
+        "target_venue_key": "sports-and-fitness-center",
+        "venue_key": "sports-and-fitness-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000194"
+        ],
+        "canonical_name": "Stan Sheriff Center",
+        "chronology_conflicts": [],
+        "city": "Honolulu",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "HI",
+        "target_venue_id": "VEN-000194",
+        "target_venue_key": "stan-sheriff-center",
+        "venue_key": "stan-sheriff-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000280"
+        ],
+        "canonical_name": "TD Arena",
+        "chronology_conflicts": [],
+        "city": "Charleston",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000280",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "SC",
+        "target_venue_id": "VEN-000280",
+        "target_venue_key": "td-arena",
+        "venue_key": "td-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000217"
+        ],
+        "canonical_name": "United Center",
+        "chronology_conflicts": [],
+        "city": "Chicago",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "IL",
+        "target_venue_id": "VEN-000217",
+        "target_venue_key": "united-center",
+        "venue_key": "united-center"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Walter E. Washington Convention Center",
+        "chronology_conflicts": [],
+        "city": "Washington",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "DC",
+        "target_venue_id": "",
+        "target_venue_key": "walter-e-washington-convention-center",
+        "venue_key": "walter-e-washington-convention-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000127"
+        ],
+        "canonical_name": "McKale Center",
+        "chronology_conflicts": [],
+        "city": "Tucson",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000127",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "AZ",
+        "target_venue_id": "VEN-000127",
+        "target_venue_key": "mckale-center",
+        "venue_key": "mckale-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000203"
+        ],
+        "canonical_name": "TD Garden",
+        "chronology_conflicts": [],
+        "city": "Boston",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000203",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "MA",
+        "target_venue_id": "VEN-000203",
+        "target_venue_key": "td-garden",
+        "venue_key": "td-garden"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000061"
+        ],
+        "canonical_name": "ExtraMile Arena",
+        "chronology_conflicts": [],
+        "city": "Boise",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000061",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "ID",
+        "target_venue_id": "VEN-000061",
+        "target_venue_key": "extramile-arena",
+        "venue_key": "extramile-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000221"
+        ],
+        "canonical_name": "University of Dayton Arena",
+        "chronology_conflicts": [],
+        "city": "Dayton",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000221",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OH",
+        "target_venue_id": "VEN-000221",
+        "target_venue_key": "university-of-dayton-arena",
+        "venue_key": "university-of-dayton-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000083"
+        ],
+        "canonical_name": "Hoosier Dome",
+        "chronology_conflicts": [],
+        "city": "Indianapolis",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000083",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "IN",
+        "target_venue_id": "VEN-000083",
+        "target_venue_key": "hoosier-dome",
+        "venue_key": "hoosier-dome"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000018"
+        ],
+        "canonical_name": "Ball Arena",
+        "chronology_conflicts": [],
+        "city": "Denver",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000018",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CO",
+        "target_venue_id": "VEN-000018",
+        "target_venue_key": "ball-arena",
+        "venue_key": "ball-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000179"
+        ],
+        "canonical_name": "Rocket Arena",
+        "chronology_conflicts": [],
+        "city": "Cleveland",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000179",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OH",
+        "target_venue_id": "VEN-000179",
+        "target_venue_key": "rocket-arena",
+        "venue_key": "rocket-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000581"
+        ],
+        "canonical_name": "Montagne Center",
+        "chronology_conflicts": [],
+        "city": "Beaumont",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000581",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "TX",
+        "target_venue_id": "VEN-000581",
+        "target_venue_key": "montagne-center",
+        "venue_key": "montagne-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000011"
+        ],
+        "canonical_name": "Amica Mutual Pavilion",
+        "chronology_conflicts": [],
+        "city": "Providence",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000011",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "RI",
+        "target_venue_id": "VEN-000011",
+        "target_venue_key": "amica-mutual-pavilion",
+        "venue_key": "amica-mutual-pavilion"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000126"
+        ],
+        "canonical_name": "McArthur Court",
+        "chronology_conflicts": [],
+        "city": "Eugene",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000126",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OR",
+        "target_venue_id": "VEN-000126",
+        "target_venue_key": "mcarthur-court",
+        "venue_key": "mcarthur-court"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000303"
+        ],
+        "canonical_name": "Bryce Jordan Center",
+        "chronology_conflicts": [],
+        "city": "State College",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "Jordan Center"
+        ],
+        "research_venue_id": "VEN-000303",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "PA",
+        "target_venue_id": "VEN-000303",
+        "target_venue_key": "bryce-jordan-center",
+        "venue_key": "bryce-jordan-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000606"
+        ],
+        "canonical_name": "Leavey Center",
+        "chronology_conflicts": [],
+        "city": "Santa Clara",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000606",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000606",
+        "target_venue_key": "leavey-center",
+        "venue_key": "leavey-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000020"
+        ],
+        "canonical_name": "Barclays Center",
+        "chronology_conflicts": [],
+        "city": "Brooklyn",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000020",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NY",
+        "target_venue_id": "VEN-000020",
+        "target_venue_key": "barclays-center",
+        "venue_key": "barclays-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000167"
+        ],
+        "canonical_name": "PPG Paints Arena",
+        "chronology_conflicts": [],
+        "city": "Pittsburgh",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000167",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "PA",
+        "target_venue_id": "VEN-000167",
+        "target_venue_key": "ppg-paints-arena",
+        "venue_key": "ppg-paints-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000324"
+        ],
+        "canonical_name": "Robins Center",
+        "chronology_conflicts": [],
+        "city": "Richmond",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000324",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VA",
+        "target_venue_id": "VEN-000324",
+        "target_venue_key": "robins-center",
+        "venue_key": "robins-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000634"
+        ],
+        "canonical_name": "Norfolk Scope",
+        "chronology_conflicts": [],
+        "city": "Norfolk",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000634",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VA",
+        "target_venue_id": "VEN-000634",
+        "target_venue_key": "norfolk-scope",
+        "venue_key": "norfolk-scope"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "JMU Convocation Center",
+        "chronology_conflicts": [],
+        "city": "Harrisonburg",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "VA",
+        "target_venue_id": "",
+        "target_venue_key": "jmu-convocation-center",
+        "venue_key": "jmu-convocation-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000363"
+        ],
+        "canonical_name": "William and Mary Hall",
+        "chronology_conflicts": [],
+        "city": "Williamsburg",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "Kaplan Arena"
+        ],
+        "research_venue_id": "VEN-000363",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VA",
+        "target_venue_id": "VEN-000363",
+        "target_venue_key": "william-and-mary-hall",
+        "venue_key": "william-and-mary-hall"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000702"
+        ],
+        "canonical_name": "Hampton Coliseum",
+        "chronology_conflicts": [],
+        "city": "Hampton",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000702",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VA",
+        "target_venue_id": "VEN-000702",
+        "target_venue_key": "hampton-coliseum",
+        "venue_key": "hampton-coliseum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000149"
+        ],
+        "canonical_name": "Neal S. Blaisdell Center",
+        "chronology_conflicts": [],
+        "city": "Honolulu",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000149",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "HI",
+        "target_venue_id": "VEN-000149",
+        "target_venue_key": "neal-s-blaisdell-center",
+        "venue_key": "neal-s-blaisdell-center"
+      }
+    ],
+    "schema_version": 1,
+    "venue_count": 45
+  },
+  "venue_reconciliation": null
+}
