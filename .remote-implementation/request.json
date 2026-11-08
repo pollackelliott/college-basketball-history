@@ -1,48 +1,41 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-mason-stage1-0001",
-  "operation": "STAGE1_INVENTORY",
-  "school_key": "george-mason",
-  "previous_control_state_commit": "d1e478bc606895e27773fdd315ff7d04b86cdac2",
-  "previous_control_state_sha256": "c365f6fcc4cff2284d01a0c2f6ebd417749ccf65a5f5f7280059468f1130f119",
-  "expected_protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
-  "research_checkpoint": {
-    "sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
-    "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "d1e478bc606895e27773fdd315ff7d04b86cdac2",
-      "path_prefix": ".remote-implementation/transports/george-mason/george-mason-stage1-0001-final/piece-",
-      "part_count": 9
-    }
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
-  "creation_provenance": {
-    "origin": "ChatGPT George Mason serialized Implementation lane — owner-authorized Stage 1",
-    "authorization": "Owner explicitly concluded George Mason Research, designated the exact attached final RESEARCH_FROZEN artifact, and authorized the George Mason serialized Implementation Stage 1 phase. The owner-designated attachment fallback authenticated immutable ZIP SHA-256 8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374, exact six-file membership, research_base_sha d944103fd952ae254238b199bcd3471a1cfc0ecc, settled 1978-79+ scope, prior owner NON_D1 approval, and pre-freeze self-challenge PASS. This request authorizes only the complete read-only current-main Stage 1 reconciliation inventory against exact protected main 5f0a175045e822be4506ac97d72abab084ede52b. It does not reopen Research or authorize Phase 0 mutation, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, protected-main mutation, or another school."
-  },
   "authority": {
-    "phase0": false,
-    "phase0_scope_supersession": false,
-    "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": false,
-    "stage2_gate1_seal": false,
-    "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
-    "release_preview_verify": false,
-    "release": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": true,
+    "release": false,
     "release_gate2_approval": false,
+    "release_preview_verify": false,
     "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly authorized recovery and abandonment of exactly the failed accepted read-only request george-mason-stage1-0001, limited to returning global Implementation control to a safe durable state. This does not authorize rerunning Stage 1, repairing generic tooling, changing the Research Freeze or any historical decision, Phase 0, Stage 2, basketball-data mutation, or shared/global reference mutation.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — explicit owner-authorized recovery"
+  },
+  "expected_protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "1d61790ca03aa2ac6f77ab927e23556551ba2156",
+  "previous_control_state_sha256": "12d56922a9987bc153b25e6cf6ca709b790532c75574acfe3926fec644106458",
+  "recovery": {
+    "abandoned_request_id": "george-mason-stage1-0001",
+    "lock_commit": null,
+    "target_branch": null
+  },
+  "request_id": "george-mason-stage1-recover-0001",
+  "schema_version": 1,
+  "school_key": "george-mason"
 }
