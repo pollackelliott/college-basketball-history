@@ -447,18 +447,19 @@
     "george-mason-stage2-gate1-fill-0001",
     "george-mason-stage2-preseal-rehearsal-0001",
     "george-mason-stage2-gate1-seal-0001",
-    "george-mason-stage2-sealed-apply-0001"
+    "george-mason-stage2-sealed-apply-0001",
+    "george-mason-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-mason-release-readiness-0001",
+  "active_request_sha256": "cd4419d755e1c93c09af0e8b60b496e1c29a46790dae2b321f51c5b5a86e11cd",
+  "active_school_key": "george-mason",
+  "active_target_branch": "data/george-mason-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -914,8 +915,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/george-mason/george-mason-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "35ee291c7c974c64a5caf8a6b10e77b3aa8b02b1bf60b59ad3c1781145915cd6"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42519233184",
+  "lock_acquisition_request_commit": "7755ba7fbadd16918526f7d59fbe90b7fd9397c5",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
