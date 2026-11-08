@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "94370e84f5d39c073d8c4d2a78ad22c771bc73af3c3d28d6f8bc195be8a1db6c",
+  "gate2_merge_packet_sha256": "1c4fb521fb6bac2bbeaa99424e5a1f96d085c0d62ac809649e722d7a26c73d37",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
+  "pr_number": 524,
+  "preview_deployment_id": 7635478595,
+  "preview_url": "https://college-basketball-history-6pa82q1aa-elliott-pollacks-projects.vercel.app",
+  "production_request_id": "saint-joseph-s-release-production-proof-0001",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "saint-joseph-s-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "status": "PASS"
+}
