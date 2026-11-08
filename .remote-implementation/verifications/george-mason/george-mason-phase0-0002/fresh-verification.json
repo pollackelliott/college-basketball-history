@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb",
+  "prepared_parent_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "prepared_tree_sha": "ea53924e539cba61a1c3417c6cc892451d2c7396",
+  "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "george-mason-phase0-0002",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "352bb660dc262338fdbd84d0c5a29f2b902512eb"
+}

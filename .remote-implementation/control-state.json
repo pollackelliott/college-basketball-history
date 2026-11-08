@@ -878,11 +878,11 @@
   "current_sequence": 418,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
     "operation": "PHASE0",
     "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "george-mason-phase0-0002",
     "school_key": "george-mason",
     "successor_manifest_path": ".remote-implementation/successors/george-mason/george-mason-phase0-0002/successor-manifest.json",
