@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-joseph-s-phase0-0001",
+  "request_id": "saint-joseph-s-phase0-0002",
   "operation": "PHASE0",
   "school_key": "saint-joseph-s",
   "previous_control_state_commit": "1c1e9505fcd85f1ef2a61536933a5b688fe39860",
-  "previous_control_state_sha256": "863a77caf521c83cc5c40dec1ab34bc59f87ad7f41c12076821261f3252de485",
+  "previous_control_state_sha256": "145aeee0b02c92be2761ded0185f9fe642b25bc277db5fb24af19cae47d2d4f8",
   "expected_protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
   "target_branch": "data/saint-joseph-s-onboarding",
   "research_checkpoint": {
@@ -20,7 +20,7 @@
   },
   "stage1_checkpoint": {
     "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-stage1-0001/checkpoint-manifest.json",
-    "sha256": "25487fd0a8dcf8668ebd876a26fcce688f6133f02b79d02bbb9855187492fb3a"
+    "sha256": "dd8e284f2e20fea799a3fd3372644f6030a1dc0aed8270bf1079194ac731a229"
   },
   "venue_reconciliation": null,
   "conference_reconciliation": null,
@@ -31,8 +31,8 @@
     "notes": "Accepted Saint Joseph's INCEPTION+ scope from the immutable Research Freeze. The frozen portfolio explicitly confirms the current owner-supplied top-level scope baseline, and the first accepted competitive source game is in 1909-1910. Preserve the exact frozen historical universe and all accepted researched uncertainty."
   },
   "creation_provenance": {
-    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — owner-authorized Integration Freeze / Phase 0",
-    "authorization": "Owner said Proceed after clean Stage 1 request saint-joseph-s-stage1-0001 PASS on protected main f812bfd3a02805df6c9124e9fa2991086aa4f99f with zero blockers, zero ambiguous stops, zero maintenance-required items, 82 safe venue reuses, and four conference identity reuses. This authorizes exactly one guarded PHASE0 operation: rerun the permanent Stage 1 checks against exact main, stage the immutable six-file Research Freeze, apply the authenticated safe current-main identity reuse population, reconcile the accepted INCEPTION+ target scope beginning 1909-1910, create the Integration Freeze, publish the create-once data/saint-joseph-s-onboarding successor through the global mutation lock/write-ahead/CAS path, and require fresh independent Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, recovery, or direct protected-main mutation authority."
+    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — corrected owner-authorized Integration Freeze / Phase 0 request",
+    "authorization": "Owner said Proceed after clean Stage 1 request saint-joseph-s-stage1-0001 PASS on protected main f812bfd3a02805df6c9124e9fa2991086aa4f99f. The prior Phase 0 request saint-joseph-s-phase0-0001 failed before request acceptance, lock acquisition, or tracked mutation with STALE_CONTROL_STATE_HASH because its wrapper computed control/checkpoint digests from rendered text rather than exact raw Git blob bytes. This corrected request preserves the same phase-persistent owner authority and exact basketball meaning. It authorizes exactly one guarded PHASE0 operation: rerun permanent Stage 1 checks against exact main, stage the immutable six-file Research Freeze, apply the authenticated safe current-main identity reuse population, reconcile accepted INCEPTION+ target scope beginning 1909-1910, create the Integration Freeze, publish the create-once data/saint-joseph-s-onboarding successor through the global mutation lock/write-ahead/CAS path, and require fresh independent Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, recovery, or direct protected-main mutation authority."
   },
   "authority": {
     "phase0": true,
