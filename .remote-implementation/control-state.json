@@ -904,7 +904,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/george-mason/george-mason-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "31eeb14c773252dbf4d748f5b7f34ae5e37c047560000b8cb1fc517d5da49b35",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "059d168c6717f0c22a5d56fcb0dfb7d2f2830412",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -914,7 +914,7 @@
     "production_deployment_id": 7641588500,
     "production_json_checked_count": 73,
     "protected_main_sha": "059d168c6717f0c22a5d56fcb0dfb7d2f2830412",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "george-mason-release-production-proof-0001",
     "school_key": "george-mason"
   },
