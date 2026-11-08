@@ -27,6 +27,8 @@ jobs:
       operation: ${{ steps.detect.outputs.operation }}
       protected_main_sha: ${{ steps.detect.outputs.protected_main_sha }}
       pending_verification: ${{ steps.detect.outputs.pending_verification }}
+      pending_operation: ${{ steps.detect.outputs.pending_operation }}
+      verification_runtime_sha: ${{ steps.authenticate.outputs.verification_runtime_sha }}
     steps:
       - name: Check out exact control request
         uses: actions/checkout@v4
@@ -64,6 +66,7 @@ jobs:
               print("operation="+str(request.get("operation","")))
               print("protected_main_sha="+str(request.get("expected_protected_main_sha","")))
               print("pending_verification=false")
+              print("pending_operation=")
           else:
               last = state.get("last_operation") or {}
               pending = (
@@ -76,9 +79,11 @@ jobs:
               print("operation=")
               print("protected_main_sha="+str(last.get("protected_main_sha","") if pending else ""))
               print("pending_verification="+("true" if pending else "false"))
+              print("pending_operation="+str(last.get("operation","") if pending else ""))
           PY
 
       - name: Authenticate exact protected-main runtime
+        id: authenticate
         if: steps.detect.outputs.has_request == 'true' || steps.detect.outputs.pending_verification == 'true'
         shell: bash
         working-directory: control
@@ -90,10 +95,24 @@ jobs:
           fi
           git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
           actual_main="$(git rev-parse refs/remotes/origin/main)"
+          runtime_sha="$expected_main"
           if [[ "$actual_main" != "$expected_main" ]]; then
-            echo "Protected main changed or request is stale: expected=$expected_main actual=$actual_main" >&2
-            exit 1
+            if [[ "${{ steps.detect.outputs.has_request }}" == "true" ]]; then
+              echo "Protected main changed or request is stale: expected=$expected_main actual=$actual_main" >&2
+              exit 1
+            fi
+            if [[ "${{ steps.detect.outputs.pending_operation }}" != "STAGE2_CURRENT_MAIN_REFRESH" ]]; then
+              echo "Protected main changed while non-refresh verification is pending: expected=$expected_main actual=$actual_main" >&2
+              exit 1
+            fi
+            if ! git merge-base --is-ancestor "$expected_main" "$actual_main"; then
+              echo "Pending refresh verification bound main is no longer an ancestor of protected main: expected=$expected_main actual=$actual_main" >&2
+              exit 1
+            fi
+            runtime_sha="$actual_main"
+            echo "Pending refresh verification will use current verifier runtime against original bound transaction: bound=$expected_main verifier_runtime=$runtime_sha"
           fi
+          echo "verification_runtime_sha=$runtime_sha" >> "$GITHUB_OUTPUT"
 
       - name: Check out exact protected-main runtime
         if: steps.detect.outputs.has_request == 'true' || steps.detect.outputs.pending_verification == 'true'
@@ -150,7 +169,7 @@ jobs:
       - name: Check out exact pending-operation protected-main runtime
         uses: actions/checkout@v4
         with:
-          ref: ${{ needs.process-request.outputs.protected_main_sha }}
+          ref: ${{ needs.process-request.outputs.verification_runtime_sha }}
           path: runtime
           fetch-depth: 0
 
