@@ -30,7 +30,7 @@
     "ties": 0,
     "first_season": "1896-1897",
     "last_season": "2025-2026",
-    "opponents": 371
+    "opponents": 372
   },
   "seasons": [
     {
@@ -3122,6 +3122,19 @@
       "ties": 0
     },
     {
+      "opponent_key": "loras",
+      "opponent_name": "Loras",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1912-1913",
+      "last_season": "1916-1917",
+      "games": 3,
+      "wins": 3,
+      "losses": 0,
+      "ties": 0
+    },
+    {
       "opponent_key": "louisiana",
       "opponent_name": "Louisiana",
       "current_d1": true,
@@ -4907,10 +4920,10 @@
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
       },
-      "first_season": "1912-1913",
+      "first_season": "1995-1996",
       "last_season": "1995-1996",
-      "games": 4,
-      "wins": 4,
+      "games": 1,
+      "wins": 1,
       "losses": 0,
       "ties": 0
     },
@@ -11473,9 +11486,9 @@
       "season_label": "1912-1913",
       "game_date": "1913-01-23",
       "date_precision": "EXACT",
-      "opponent_key": "saint-joseph-s",
-      "opponent_name": "Saint Joseph's",
-      "opponent_current_d1": true,
+      "opponent_key": "loras",
+      "opponent_name": "Loras",
+      "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 25,
       "opponent_score": 11,
@@ -11973,9 +11986,9 @@
       "season_label": "1913-1914",
       "game_date": "1914-02-05",
       "date_precision": "EXACT",
-      "opponent_key": "saint-joseph-s",
-      "opponent_name": "Saint Joseph's",
-      "opponent_current_d1": true,
+      "opponent_key": "loras",
+      "opponent_name": "Loras",
+      "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 48,
       "opponent_score": 11,
@@ -13198,9 +13211,9 @@
       "season_label": "1916-1917",
       "game_date": "1917-01-11",
       "date_precision": "EXACT",
-      "opponent_key": "saint-joseph-s",
-      "opponent_name": "Saint Joseph's",
-      "opponent_current_d1": true,
+      "opponent_key": "loras",
+      "opponent_name": "Loras",
+      "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 21,
       "opponent_score": 11,
