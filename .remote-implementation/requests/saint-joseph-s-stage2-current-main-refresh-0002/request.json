@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-joseph-s-stage2-current-main-refresh-0002",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "saint-joseph-s",
+  "previous_control_state_commit": "e13361586880a0fa9f3b96897756a0ad2806d3ed",
+  "previous_control_state_sha256": "4197807342f64377b46b9c558e37f1db9be671bd5bc74181509854c32031ae0c",
+  "expected_protected_main_sha": "66c4b04b51826f054ce4d240aea398772379cc91",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "61bbcf62446f78e409568ef8c09a727e5cb1c8ae",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-phase0-0003/successor-manifest.json",
+    "sha256": "c8f42a8e18787fcee7f4fff0284e828d8b89c4ad1413c5dd21a6bfa8d93bdeb4"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "49c2aaf26f0982b189293f52f450bf159459e42f8bcfd95f3511db723540528b"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "f02e6bdf796c0c7940c39523850414b093baa1cc63dafff129e2706b509751e6"
+  },
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center disposition after Issue #517 / PR #518 explicitly authorizes one ordinary second STAGE2_CURRENT_MAIN_REFRESH from the fresh-verified Saint Joseph's first-refresh successor 61bbcf62446f78e409568ef8c09a727e5cb1c8ae to protected main 66c4b04b51826f054ce4d240aea398772379cc91. The recovered first refresh has fresh_runner_verification=PASS and remote_stage2_current_main_refresh_equivalence=PASS. Independently recomputed merge base c3d9ce93b807410835af6df5b998f0644b9806c0; target-only changed paths=8, intervening-main changed paths=9, overlap=0, with no intervening schools/saint-joseph-s path. Authorization covers only the guarded second refresh and its independent verification. No historical authority, accomplishment ruling, Owner Gate 1/2, seal, apply, release, Preview, merge, or Production authority is created."
+  },
+  "creation_provenance": {
+    "origin": "Saint Joseph's serialized Implementation Stage 2 — Control Center-authorized second current-main refresh after recovered first-refresh verification",
+    "authorization": "Do not replay the first refresh, reset the onboarding branch, change the immutable Research Freeze, or alter Saint Joseph's package semantics. Preserve the exact Integration Freeze, semantic snapshot, six package members, opponent-display normalization, and first-refresh authority. This request absorbs only disjoint protected-main changes through current main 66c4b04b51826f054ce4d240aea398772379cc91. After fresh PASS, the existing Stage 2 phase remains authorized for a new census and exact recommendation-map rehearsal to OWNER_GATE_1_READY or a genuine blocker."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
