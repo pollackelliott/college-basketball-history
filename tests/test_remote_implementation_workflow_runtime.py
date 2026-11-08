@@ -110,11 +110,17 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             'run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"'
         )
         self.assertGreater(verifier_count, 0)
+        bound_runtime_count = text.count(
+            "ref: ${{ needs.process-request.outputs.protected_main_sha }}\n"
+            "          path: runtime"
+        )
+        recovery_runtime_count = text.count(
+            "ref: ${{ needs.process-request.outputs.verification_runtime_sha }}\n"
+            "          path: runtime"
+        )
+        self.assertEqual(recovery_runtime_count, 1)
         self.assertEqual(
-            text.count(
-                "ref: ${{ needs.process-request.outputs.protected_main_sha }}\n"
-                "          path: runtime"
-            ),
+            bound_runtime_count + recovery_runtime_count,
             verifier_count,
         )
 
