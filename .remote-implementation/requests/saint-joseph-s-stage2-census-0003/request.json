@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-joseph-s-stage2-census-0003",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "saint-joseph-s",
+  "previous_control_state_commit": "9f08a62b158e5d8839c5ed755c1f5d30e570fd46",
+  "previous_control_state_sha256": "b6a24357ffca0eb4dce31c464c2b34ef8e1a2dbe433919f14523d48603a77aaf",
+  "expected_protected_main_sha": "66c4b04b51826f054ce4d240aea398772379cc91",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "a0456ec79d3bfbd37a5488d063bdf5947569a44a",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-phase0-0003/successor-manifest.json",
+    "sha256": "c8f42a8e18787fcee7f4fff0284e828d8b89c4ad1413c5dd21a6bfa8d93bdeb4"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "49c2aaf26f0982b189293f52f450bf159459e42f8bcfd95f3511db723540528b"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-stage2-current-main-refresh-0002/successor-manifest.json",
+    "sha256": "d7f0d45c7ad803946f2a7b921318ecca6dd810c87e753cdb3cb88ab0de2aae33"
+  },
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "creation_provenance": {
+    "origin": "Saint Joseph's serialized Implementation Stage 2 — fresh census after second current-main refresh",
+    "authorization": "Existing owner-authorized Saint Joseph's Stage 2 technical/reconciliation phase persists through OWNER_GATE_1_READY. Second current-main refresh saint-joseph-s-stage2-current-main-refresh-0002 is independently fresh-verified PASS on protected main 66c4b04b51826f054ce4d240aea398772379cc91 and target a0456ec79d3bfbd37a5488d063bdf5947569a44a. This read-only census must classify the complete post-repair decision universe, confirm semantic drift remains PASS, and expose the accomplishment/canonical administrative distinction as an explicit owner-visible Gate 1 decision rather than a pre-Gate blocker if the generic repair is functioning as designed. No tracked mutation, historical ruling, Owner Gate 1/2 approval, sealing, apply, release, Preview, merge, Production, recovery, or shared/global mutation authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
