@@ -2147,9 +2147,28 @@ def rebase_venues(
             }
         )
         staged_local_rows.append(local)
+        frozen_city = frozen_summary_match_row.get("city", "").strip()
+        frozen_state = normalize_jurisdiction(
+            frozen_summary_match_row.get("state", "")
+        )
+        staged_city = local.get("city", "").strip()
+        staged_state = normalize_jurisdiction(local.get("state", ""))
+        locality_changed_from_frozen = (
+            bool(frozen_city)
+            and frozen_city.casefold() != staged_city.casefold()
+        ) or (
+            bool(frozen_state)
+            and frozen_state != staged_state
+        )
         summary_match_rows.append(
             frozen_summary_match_row
-            if reason == "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW"
+            if (
+                reason == "REUSE_EXPLICIT_RECONCILIATION_PRESERVE_LOCAL_ROW"
+                or (
+                    not reason.startswith("NEW_GLOBAL_IDENTITY")
+                    and locality_changed_from_frozen
+                )
+            )
             else dict(local)
         )
 
