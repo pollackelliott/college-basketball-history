@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-joseph-s-stage2-census-0002",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "saint-joseph-s-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "saint-joseph-s",
-  "previous_control_state_commit": "4a5bf7464ec60e5d872dfac11052163226716b04",
-  "previous_control_state_sha256": "200ccee1b68ae6ba499211cc11aaa54737117551424387367efceb0778715195",
-  "expected_protected_main_sha": "4c345ec33b7136804bfaca3fba0d2f59bf1a62c1",
+  "previous_control_state_commit": "051856e07c59a50bc690849ca84a18acb56d872d",
+  "previous_control_state_sha256": "aa3c57372029e58d6ad131025788780cd60037262efc13c921b42511c9564094",
+  "expected_protected_main_sha": "c3d9ce93b807410835af6df5b998f0644b9806c0",
   "target_branch": "data/saint-joseph-s-onboarding",
   "target_sha": "271de6a89b902195021e3168c3f14e709175c8ac",
   "phase0_successor": {
@@ -19,16 +19,21 @@
   },
   "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
   "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center disposition explicitly authorized the Saint Joseph's post-repair guarded STAGE2_CURRENT_MAIN_REFRESH after the generic accomplishment administrative-difference capability repair merges. The repair merged as PR #513 at protected main c3d9ce93b807410835af6df5b998f0644b9806c0. Independently recomputed merge base f812bfd3a02805df6c9124e9fa2991086aa4f99f; exact Saint Joseph's target-only changed paths=8, intervening-main changed paths=8, overlap=0; onboarding predecessor remains 271de6a89b902195021e3168c3f14e709175c8ac. Authorization covers only the repository-defined current-main refresh and ordinary Stage 2 recovery through a fresh census and recommendation-map rehearsal to OWNER_GATE_1_READY. It creates no accomplishment ruling and no Owner Gate 1/2, seal, apply, release, Preview, merge, or Production authority."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — fresh Stage 2 census after verified opponent-display normalization",
-    "authorization": "Same owner-authorized Saint Joseph's Stage 2 technical/reconciliation phase persists through OWNER_GATE_1_READY. Opponent-display normalization saint-joseph-s-stage2-opponent-display-normalize-0001 completed with repository validation PASS, exact field-bounded changes, semantic drift PASS, fresh_runner_verification=PASS, and remote_stage2_opponent_display_equivalence=PASS. Protected main subsequently advanced from f812bfd3a02805df6c9124e9fa2991086aa4f99f to 4c345ec33b7136804bfaca3fba0d2f59bf1a62c1 only through PR #512 Stage 3A-0 portable research docs/tests/tooling; no canonical data, shared references, Saint Joseph's package paths, Stage 2 runtime, or target onboarding files changed, so no STAGE2_CURRENT_MAIN_REFRESH is required. This read-only census binds the exact normalized successor 271de6a89b902195021e3168c3f14e709175c8ac and current protected main to durably classify the single remaining post-repair preflight blocker and complete Stage 2 capability discovery. No tracked repair, proposal rehearsal, Owner Gate 1 approval, sealing, apply, release, Preview, merge, Production, recovery, or shared/global mutation authority is included."
+    "origin": "Saint Joseph's serialized Implementation Stage 2 — Control Center-authorized current-main refresh after PR #513",
+    "authorization": "Preserve the immutable Research Freeze, Integration Freeze, semantic snapshot, Saint Joseph's six-file package, the verified opponent-display normalization, and all frozen historical meaning. The refresh exists only to bring current protected-main generic Stage 2 runtime onto the unchanged onboarding branch after the disjoint-path guard passed. After fresh verification, rerun the ordinary Stage 2 census; require the substantive decision universe to remain unchanged except for the newly representable accomplishment decision(s); then continue through ordinary exact-map proposal rehearsal and stop at OWNER_GATE_1_READY. Do not infer the final accomplishment values or EXPLAINED_ADMIN_DIFFERENCE disposition."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
