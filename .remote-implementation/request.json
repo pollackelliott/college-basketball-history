@@ -21,17 +21,20 @@
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
-  "conference_reconciliation": null,
+  "conference_reconciliation": {
+    "path": ".remote-implementation/payloads/george-mason/george-mason-stage1-0002/conference-reconciliation.json",
+    "sha256": "cfbaeac495e3fca67add4742c9351dc42e6cfa21e196bb6cf944f26ade4f05e9"
+  },
   "creation_provenance": {
-    "authorization": "Owner supplied the Control Center disposition that Issue #525 / PR #526 repaired the generic Stage 1 null-explicit locality-mapping defect on protected main 8e37c18c3572c583e7b1261270a629d97ba11b1a and explicitly authorized rerunning the complete read-only George Mason Stage 1 inventory under repaired permanent tooling using a new request ID. The immutable Research Freeze remains SHA-256 8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374 with research_base_sha d944103fd952ae254238b199bcd3471a1cfc0ecc and settled 1978-79+ scope. This request authorizes only complete read-only Stage 1 discovery/classification; it does not authorize Phase 0, Stage 2, basketball-data mutation, shared/global mutation, or any owner gate.",
-    "origin": "ChatGPT George Mason serialized Implementation lane — Control Center-authorized post-repair Stage 1 rerun"
+    "authorization": "Complete repaired Stage 1 census george-mason-stage1-0002 found exactly one blocker: the research-settled `ecac-south / ECAC South` conference identity was absent from current global conference registration. It found zero shared/global maintenance rows, zero venue blockers, and no historical conflict. The immutable Research Freeze explicitly says serialized Implementation must reconcile this accepted historical identity on current main. Under the owner's Stage 1 authorization and current shared-reference policy, this request reruns the complete read-only inventory with one exact hash-bound target-school conference registration while preserving all frozen conference-history rows unchanged. It does not authorize Phase 0, Stage 2, any basketball-data mutation, dedicated shared/global maintenance, or an owner gate.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — deterministic Stage 1 conference reconciliation"
   },
   "expected_protected_main_sha": "8e37c18c3572c583e7b1261270a629d97ba11b1a",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
   "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "b1da7b34b06bfd0d5e4c9508318bdbc2d5c5d3ad",
-  "previous_control_state_sha256": "2b0b43fe548536f5eab5c7972b4d509221cfb6fa13fb8f51a83a14eaf7463c27",
-  "request_id": "george-mason-stage1-0002",
+  "previous_control_state_commit": "7882ba0f9fd461f4be379c486cdf86ecc420691a",
+  "previous_control_state_sha256": "9bd07ebbf23a3cb960edde5c3bd3ccb98fd13821a316812539fb2cd6770a10f1",
+  "request_id": "george-mason-stage1-0003",
   "research_checkpoint": {
     "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
     "sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
