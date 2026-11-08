@@ -17,7 +17,16 @@ def write(path, text):
 class Stage3A0PortableRuntimeTests(unittest.TestCase):
     def make_repo(self, root):
         repo = root / "repo"
-        write(repo / "tools/research_stage3a0.py", "print('stage3a0')\n")
+        write(
+            repo / "tools/research_stage3a0.py",
+            "from research_authoring_capsule import carry_authoring_capsule\n"
+            "print('stage3a0')\n",
+        )
+        write(
+            repo / "tools/research_authoring_capsule.py",
+            "def carry_authoring_capsule(*args, **kwargs):\n"
+            "    return None\n",
+        )
         write(repo / "tools/research_stage3a0_portable.py", SCRIPT.read_text())
         write(repo / "README.md", "not part of Stage 3A-0 portable tool state\n")
         return repo
@@ -47,6 +56,7 @@ class Stage3A0PortableRuntimeTests(unittest.TestCase):
                 paths,
                 {
                     "tools/research_stage3a0.py",
+                    "tools/research_authoring_capsule.py",
                     "tools/research_stage3a0_portable.py",
                 },
             )
@@ -55,7 +65,15 @@ class Stage3A0PortableRuntimeTests(unittest.TestCase):
             self.assertEqual(verify.returncode, 0, verify.stderr or verify.stdout)
             result = json.loads(verify.stdout)
             self.assertEqual(result["status"], "COMPLETE")
-            self.assertEqual(result["file_count"], 2)
+            self.assertEqual(result["file_count"], 3)
+
+            smoke = subprocess.run(
+                [sys.executable, str(snapshot / "tools/research_stage3a0.py")],
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(smoke.returncode, 0, smoke.stderr or smoke.stdout)
+            self.assertIn("stage3a0", smoke.stdout)
 
     def test_verify_fails_closed_on_missing_extra_modified_or_wrong_sha(self):
         with tempfile.TemporaryDirectory() as td:

@@ -58,14 +58,33 @@ def compare_program(
     # not fail an independently matching aggregate cross-check after the
     # accomplishment reference itself has been authoritatively VERIFIED and
     # its stored canonical cross-check has been sealed as MATCH.
+    verification_status = (
+        reference.get("verification_status", "").strip().upper()
+    )
+    stored_crosscheck = (
+        reference.get("canonical_crosscheck_status", "").strip().upper()
+    )
+    verification_basis = reference.get("verification_basis", "").strip()
     verified_historical_match = (
-        reference.get("verification_status", "").strip().upper() == "VERIFIED"
-        and reference.get("canonical_crosscheck_status", "").strip().upper()
-        == "MATCH"
+        verification_status == "VERIFIED"
+        and stored_crosscheck == "MATCH"
         and not conflicts
     )
+    explained_admin_difference = (
+        verification_status == "VERIFIED"
+        and stored_crosscheck == "EXPLAINED_ADMIN_DIFFERENCE"
+        and bool(verification_basis)
+        and bool(conflicts)
+    )
 
-    if conflicts:
+    if stored_crosscheck == "EXPLAINED_ADMIN_DIFFERENCE":
+        if not conflicts:
+            result = "STALE_ADMIN_DIFFERENCE"
+        elif not explained_admin_difference:
+            result = "INVALID_ADMIN_DIFFERENCE"
+        else:
+            result = "EXPLAINED_ADMIN_DIFFERENCE"
+    elif conflicts:
         result = "CONFLICT"
     elif derived["incomplete_reasons"] and not verified_historical_match:
         result = "INCOMPLETE"
@@ -99,6 +118,21 @@ def compare_program(
     )
     for conflict in conflicts:
         print(f"  - {conflict}")
+    if result == "EXPLAINED_ADMIN_DIFFERENCE":
+        print(
+            "  Administrative difference is owner-authorized and intentionally "
+            "preserves the conflicting on-court canonical history."
+        )
+    elif result == "STALE_ADMIN_DIFFERENCE":
+        print(
+            "  - stored EXPLAINED_ADMIN_DIFFERENCE is stale because the live "
+            "canonical cross-check now matches"
+        )
+    elif result == "INVALID_ADMIN_DIFFERENCE":
+        print(
+            "  - EXPLAINED_ADMIN_DIFFERENCE requires VERIFIED status and a "
+            "nonblank authoritative verification basis"
+        )
     if derived["incomplete_reasons"] and result == "MATCH":
         print(
             "  Historical NCAA round gaps remain diagnostic only: "
@@ -107,7 +141,7 @@ def compare_program(
         )
     for reason in derived["incomplete_reasons"]:
         print(f"  - {reason}")
-    return result == "MATCH"
+    return result in {"MATCH", "EXPLAINED_ADMIN_DIFFERENCE"}
 
 
 def main() -> int:
