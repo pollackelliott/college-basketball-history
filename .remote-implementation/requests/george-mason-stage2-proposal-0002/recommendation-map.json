@@ -1,0 +1,63 @@
+{
+  "basis_by_decision": {
+    "ACCOMPLISHMENTS-GEORGE-MASON": "Verify the existing George Mason reference values unchanged: 5 conference regular-season championships (four CAA plus the 2025 A-10 share), 4 conference tournament championships, 6 NCAA appearances, 1 Final Four, 0 national titles, best finish FINAL_FOUR in 2006. George Mason's official materials confirm six NCAA appearances and the 2006 Final Four; the 2011 CAA regular-season title; the 2025 A-10 title as the first regular-season title since 2011; and that entering 2012 Mason was seeking its fifth CAA tournament championship, establishing four prior tournament titles. The existing reference therefore remains historically consistent and Stage 2 reports no canonical NCAA conflict. Authorities include https://gomason.com/news/2011/4/22/205141320.aspx ; https://gomason.com/news/2025/3/8/mens-basketball-champs-patriots-win-first-ever-a-10-regular-season-title-with-win-at-richmond.aspx ; https://static.gomason.com/custompages/pdf/1112-mbb-infoguide.pdf",
+    "CONDITIONAL-DISCREPANCY-GMU-1989-90-013-CBBG-0132290-GAME_DATE": "Keep canonical Jan. 1, 1990. Miami's official media guides/game notes identify its 101-91 overtime win at George Mason as Jan. 1, 1990, while the George Mason frozen ledger says Jan. 3. Authority: https://storage.googleapis.com/hurricanesports-com/2023/11/3b450bbd-2023-24-mbb-media-guide.pdf",
+    "CONDITIONAL-DISCREPANCY-GMU-1989-90-013-CBBG-0132290-SITE_TYPE": "Keep canonical George Mason home designation. Miami's official media guide describes the Jan. 1, 1990 game as 'at George Mason,' affirmatively establishing the Patriots as home; the frozen George Mason row is UNKNOWN rather than contradictory. Authority: https://storage.googleapis.com/hurricanesports-com/2023/11/3b450bbd-2023-24-mbb-media-guide.pdf",
+    "CONDITIONAL-DISCREPANCY-GMU-1991-92-003-CBBG-0136722-GAME_DATE": "Use source Dec. 4, 1991. George Mason's frozen institutional ledger says Dec. 4, and Virginia Tech's current official historical schedule independently lists George Mason at Cassell Coliseum on Dec. 4, 1991, W 76-64. The older imported Virginia Tech row carrying Nov. 27 is stale. Authority: https://stats.hokiesports.com/mbasketball/records/schedule.html",
+    "CONDITIONAL-DISCREPANCY-GMU-2004-05-006-CBBG-0048514-GAME_DATE": "Keep canonical Dec. 5, 2004. Michigan State's current official recap identifies the 66-60 BB&T Classic consolation victory over George Mason as Dec. 5, 2004; the frozen George Mason 12/8 date is erroneous. Authority: https://msuspartans.com/news/2004/12/5/No_11_Michigan_St_Defeats_George_Mason_66_60",
+    "CONDITIONAL-DISCREPANCY-GMU-2004-05-008-CBBG-0194097-GAME_DATE": "Keep canonical Dec. 22, 2004. St. Bonaventure's official series preview explicitly identifies the prior meeting as Dec. 22, 2004 at the Reilly Center, George Mason 95-58; the frozen George Mason 12/28 date is erroneous. Authority: https://gobonnies.com/news/2014/2/14/2_14_2014_2060",
+    "CONDITIONAL-DISCREPANCY-GMU-2005-06-002-CBBG-0128384-GAME_DATE": "Keep canonical Nov. 11, 2005. Wake Forest's current official game center and opponent history identify the 83-78 overtime win over George Mason as Nov. 11, 2005 in Winston-Salem; the frozen George Mason 11/25 date is erroneous. Authority: https://godeacs.com/game-center/1536",
+    "CONDITIONAL-DISCREPANCY-GMU-2014-15-018-CBBG-0190492-GAME_DATE": "Use source Jan. 24, 2015. Both George Mason and Davidson current official records identify Davidson's 80-73 overtime win at George Mason as Jan. 24, 2015. The reciprocal imported Davidson row's 2014-10-24 value is a month-parsing defect in a day-only ledger line. Authorities: https://gomason.com/news/2015/1/24/209863512.aspx ; https://davidsonwildcats.com/news/2015/1/24/MBB_0124151019",
+    "DISCREPANCY-GMU-1985-86-001-SCORE": "Keep canonical 74-58. UCF's official series record lists Nov. 23, 1985 vs George Mason as a 74-58 UCF loss, corroborating the reciprocal UCF media-guide ledger and outweighing the frozen George Mason 72-58 literal. Authority: https://static.ucfknights.com/custompages/attachments1/files/34100/637856.pdf",
+    "DISCREPANCY-GMU-1986-87-010-SITE_TYPE": "Use the accepted frozen George Mason NEUTRAL classification. The immutable Research Freeze completed H/A/N research and places the Dec. 30, 1986 Butler game in Rochester, NY as neutral; the reciprocal canonical value is only UNKNOWN, so this does not contradict affirmative reciprocal site authority.",
+    "DISCREPANCY-GMU-2016-17-024-SCORE": "Keep canonical 76-69. Both current George Mason and Davidson official recaps/box scores give the Feb. 8, 2017 final as George Mason 76, Davidson 69; the frozen George Mason 76-67 literal is erroneous. Authority: https://gomason.com/news/2017/2/8/mens-basketball-mason-closes-out-76-69-win-at-davidson.aspx",
+    "DISCREPANCY-GMU-2016-17-032-SCORE": "Use source 82-71. Current George Mason and Fordham official box scores both show George Mason's Mar. 9, 2017 overtime win as 82-71; the canonical 81-71 value omits Mason's final made free throw. Authorities: https://gomason.com/sports/mens-basketball/stats/2016-17/fordham/boxscore/8104 ; https://fordhamsports.com/sports/mens-basketball/stats/2016-17/george-mason-university/boxscore/6155",
+    "DISCREPANCY-GMU-2019-20-006-GAME_DATE": "Use source Nov. 22, 2019. Current Maryland opponent history/game notes and George Mason's official box score all identify Maryland's 86-63 home win over Mason as Friday Nov. 22, 2019; the imported Maryland row's Nov. 23 value is stale. Authorities: https://umterps.com/sports/mens-basketball/opponent-history/george-mason-university/88 ; https://gomason.com/sports/mens-basketball/stats/2019-20/maryland/boxscore/10495",
+    "DISCREPANCY-GMU-2020-21-011-GAME_DATE": "Use source Jan. 13, 2021. Current La Salle schedule/opponent history and George Mason's official recap/box score all identify the 75-42 game in Fairfax as Wednesday Jan. 13, 2021; the imported La Salle row's Jan. 12 value is stale. Authorities: https://goexplorers.com/sports/mens-basketball/schedule/2020-21?grid=true ; https://gomason.com/sports/mens-basketball/stats/2020-21/la-salle/boxscore/10896",
+    "PUBLICATION-GEORGE-MASON": "Enable George Mason publication only through the normal Owner Gate 1, sealed apply, Preview, explicit Owner Gate 2, merge and Production-proof workflow after every approved decision and automated gate passes."
+  },
+  "canonical_patch_by_decision": {},
+  "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
+  "decisions": {
+    "ACCOMPLISHMENTS-GEORGE-MASON": "VERIFY_REFERENCE_VALUES",
+    "CONDITIONAL-DISCREPANCY-GMU-1989-90-013-CBBG-0132290-GAME_DATE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-GMU-1989-90-013-CBBG-0132290-SITE_TYPE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-GMU-1991-92-003-CBBG-0136722-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-GMU-2004-05-006-CBBG-0048514-GAME_DATE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-GMU-2004-05-008-CBBG-0194097-GAME_DATE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-GMU-2005-06-002-CBBG-0128384-GAME_DATE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-GMU-2014-15-018-CBBG-0190492-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-GMU-1985-86-001-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-GMU-1986-87-010-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-GMU-2016-17-024-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-GMU-2016-17-032-SCORE": "USE_SOURCE",
+    "DISCREPANCY-GMU-2019-20-006-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-GMU-2020-21-011-GAME_DATE": "USE_SOURCE",
+    "PUBLICATION-GEORGE-MASON": "ENABLE_PUBLIC_PAGE"
+  },
+  "defaults": {
+    "basis": "Preserve existing canonical authority only where the final adversarial Gate 1 challenge found current institutional or reciprocal institutional evidence supporting the existing value. Literal George Mason source evidence and discrepancy provenance remain preserved.",
+    "discrepancy": "KEEP_CANONICAL",
+    "identity_basis": "One real game equals one canonical game. Match the same-season canonical candidate whose opponent and score/result orientation identify the same contest; separately adjudicate selected date/site conflicts using current institutional evidence rather than letting date parsing decide identity.",
+    "not_applicable_basis": "This conditional discrepancy belongs to an identity candidate not selected by the recommendation map.",
+    "selected_conditional": "KEEP_CANONICAL"
+  },
+  "identity": {
+    "GMU-1989-90-013": "MATCH_CANONICAL:CBBG-0132290",
+    "GMU-1991-92-003": "MATCH_CANONICAL:CBBG-0136722",
+    "GMU-2004-05-006": "MATCH_CANONICAL:CBBG-0048514",
+    "GMU-2004-05-008": "MATCH_CANONICAL:CBBG-0194097",
+    "GMU-2005-06-002": "MATCH_CANONICAL:CBBG-0128384",
+    "GMU-2014-15-018": "MATCH_CANONICAL:CBBG-0190492"
+  },
+  "notes_by_decision": {},
+  "prepared_against_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "prepared_against_target_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "source_patch_by_decision": {},
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "5cb916a85e50bc7c83c815fe20f3c1e82954d0e4c5d47eea5e685cfb409c4d48"
+  }
+}

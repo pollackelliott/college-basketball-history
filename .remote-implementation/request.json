@@ -22,21 +22,21 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Existing owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Fresh-verified opponent-display normalization resolved the complete two-key representation blocker population and produced a blocker-free 28-decision universe. This request rehearses one exact map against that fresh-verified successor: published canonical date/score/result authority is preserved by default; the accepted frozen NEUTRAL classification is recommended for the sole definite site-type conflict where canonical authority is UNKNOWN; six same-game identity reviews are matched to reciprocal canonical records using score/result and pair-season context; existing accomplishment reference values are verified against accepted Research and George Mason Athletics historical material; publication is recommended only through the normal gated release path. No Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, current-main refresh or tracked basketball mutation authority is included.",
-    "origin": "ChatGPT George Mason serialized Implementation Stage 2 — exact 28-decision recommendation-map rehearsal"
+    "authorization": "The owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Proposal #0001 mechanically reached fresh-verified OWNER_GATE_1_READY, but the required final adversarial historical challenge found five recommendations where current institutional evidence contradicts the old imported canonical/reciprocal value: Virginia Tech 1991 date, Davidson 2015 date, Fordham 2017 final score, Maryland 2019 date, and La Salle 2021 date. This new read-only proposal preserves the same exact 28-decision universe and identity selections, changes only those five recommendations to USE_SOURCE with institutional bases, documents authoritative support for every remaining selected KEEP_CANONICAL decision, and rehearses the resulting exact packet. It carries no Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, recovery, current-main refresh, or tracked basketball mutation authority.",
+    "origin": "ChatGPT George Mason serialized Implementation Stage 2 — adversarially corrected exact recommendation-map rehearsal"
   },
   "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
   "expected_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
   "integration_freeze_sha256": "2f9f95f7d4d1ed16739c83283985bb38615594f1bd45d53524d594f67676c114",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "bf1c8d6868b205a421b740e299710808cffe1348",
-  "previous_control_state_sha256": "958cd19100f436a1fec920e9edb8a1697e3689ad69e8085efbdcb9ed2537de7b",
+  "previous_control_state_commit": "38caef5f2d1e17107f19a1e7261656413e10bf26",
+  "previous_control_state_sha256": "f7b80c53db7f58ceb8771b8be2ccba6989446528b8256f025edc21ca42fda934",
   "recommendation_map": {
-    "path": ".remote-implementation/requests/george-mason-stage2-proposal-0001/recommendation-map.json",
-    "sha256": "2d4ff16d8c8a4b137a5973cd3c6a2783b219b31196f8aa41552976f83dd823fc"
+    "path": ".remote-implementation/requests/george-mason-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "3f84316d79ae50b7c7bf1b5f00db28fed2f33269fbe0ead9f70bb01bda8a47c3"
   },
-  "request_id": "george-mason-stage2-proposal-0001",
+  "request_id": "george-mason-stage2-proposal-0002",
   "schema_version": 1,
   "school_key": "george-mason",
   "semantic_snapshot_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
