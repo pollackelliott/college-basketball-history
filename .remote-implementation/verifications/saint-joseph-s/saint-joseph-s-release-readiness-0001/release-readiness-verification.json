@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "62a0edec360fb6782fbc9198aad9030a148255bd3d9741bc6c3b106a32306d17",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "87520d2091b52b667c73a4287b5d156df380dd927565ed8600f52ba1b31e5113",
+  "pr_created": false,
+  "preview_request_id": "saint-joseph-s-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "readiness_proof_sha256": "28a55ddd346df466f20dc1918bdcaae38acf95de15d339592f3ce06884e525e0",
+  "release_pr_packet_sha256": "c4348be2f2764c7de022c268dcf42153f1897f84dd0e09c55d76d17d8876e93a",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "saint-joseph-s-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
+  "tracked_mutation": "NONE"
+}
