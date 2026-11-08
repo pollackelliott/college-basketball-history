@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "e51d094f01a2f597c3c5df1fa73436e40ffea93091cbe6dff9bec478b8913cb6",
+    "implementation-stage2-status.json": "6caccd09ebff26ba379b14f2c583bac1e8222bdcb2ed707a9e04cdb3e5fe8186",
+    "plan.json": "e79e2af6c19be96d44f0ba905245af96db530c035560c2fc2480e3d2578fa58e",
+    "review.csv": "01e021533e646a4fe278cef6c68a9456d5c6f17055364e43d90c3cd1b41670e7",
+    "review.md": "42a0aa39e60af21444ebb9db0a2097b2313f8faaab9ceaebeae8b6295eb25947"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "e51d094f01a2f597c3c5df1fa73436e40ffea93091cbe6dff9bec478b8913cb6",
+    "implementation-stage2-status.json": "83c5eef959ff2e0a9147da16c6e4a95cda7e424dea3ffb0ff3ea0b7925d4f8e6",
+    "plan.json": "9fe6fcb84e7c3a4e576f157e380e687dc232f1dce0b481b644403c6ba5d6ba52",
+    "review.csv": "01e021533e646a4fe278cef6c68a9456d5c6f17055364e43d90c3cd1b41670e7",
+    "review.md": "6df9a49a1b30e5a3ed90503164605a80bfb5a6511b41d84572ccbbc39940ef17"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "saint-joseph-s-stage2-census-0004",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e",
+  "target_tree_sha": "2a4ac2550e72be62afb50491b931876a5126c282",
+  "tracked_stage2_mutation": "NONE"
+}
