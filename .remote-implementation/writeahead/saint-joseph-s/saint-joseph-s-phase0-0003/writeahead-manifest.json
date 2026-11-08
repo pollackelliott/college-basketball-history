@@ -1,0 +1,742 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/saint-joseph-s/conferences.csv",
+    "schools/saint-joseph-s/notes.md",
+    "schools/saint-joseph-s/opponents.csv",
+    "schools/saint-joseph-s/source-games.csv",
+    "schools/saint-joseph-s/source-notes.md",
+    "schools/saint-joseph-s/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "a526200e5aac914672d375c7a9654be989e8e83f45fd44fc62122d04f78717ec",
+    "data/reference/venue-names.csv": "70fb22382869563f6d7eb52afd3a3c6b7c946686757b442863678ee1cfdb54a9",
+    "schools/saint-joseph-s/conferences.csv": "d5d2bcd37e83d70cfcf0225c1e9b5a81456e6216c06605ed62a0b8d227338cf7",
+    "schools/saint-joseph-s/notes.md": "d63186bcdd2ada359dc522af450028fe660dc16651f09a1952ff998a3d98efaa",
+    "schools/saint-joseph-s/opponents.csv": "983535276907118ee08862a8d997ec45ba5a484d1d627cae3db46dcdf89c0f2f",
+    "schools/saint-joseph-s/source-games.csv": "c36baa704077f86796335cb47932f3df16d290eb1ad429b2c35f648787f2dddd",
+    "schools/saint-joseph-s/source-notes.md": "de5241862848fe2131400c66bfb9aa8c0b28c5bb75af71b2d14b915fad5c93ef",
+    "schools/saint-joseph-s/venues.csv": "652741a2ed034111219fe1abeb4843e0cacf9b7dec80b2a58c3b2a17e686ecc7"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "schools/saint-joseph-s/conferences.csv",
+    "schools/saint-joseph-s/notes.md",
+    "schools/saint-joseph-s/opponents.csv",
+    "schools/saint-joseph-s/source-games.csv",
+    "schools/saint-joseph-s/source-notes.md",
+    "schools/saint-joseph-s/venues.csv"
+  ],
+  "commit_message": "Add Saint Joseph S onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "c914bacb0ebc2d0adc2f3eba153431ec69d825d0",
+  "history_scope": {
+    "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Accepted Saint Joseph's INCEPTION+ scope from the immutable Research Freeze. The frozen portfolio explicitly confirms the current owner-supplied top-level scope baseline, and the first accepted competitive source game is in 1909-1910. Preserve the exact frozen historical universe and all accepted researched uncertainty.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1909-1910",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "INCEPTION+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "INCEPTION+",
+      "school": "Saint Joseph's"
+    }
+  },
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "d5d2bcd37e83d70cfcf0225c1e9b5a81456e6216c06605ed62a0b8d227338cf7",
+    "notes.md": "d63186bcdd2ada359dc522af450028fe660dc16651f09a1952ff998a3d98efaa",
+    "opponents.csv": "983535276907118ee08862a8d997ec45ba5a484d1d627cae3db46dcdf89c0f2f",
+    "source-games.csv": "c36baa704077f86796335cb47932f3df16d290eb1ad429b2c35f648787f2dddd",
+    "source-notes.md": "de5241862848fe2131400c66bfb9aa8c0b28c5bb75af71b2d14b915fad5c93ef",
+    "venues.csv": "652741a2ed034111219fe1abeb4843e0cacf9b7dec80b2a58c3b2a17e686ecc7"
+  },
+  "prepared_commit_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "prepared_parent_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "prepared_tree_sha": "cf59d97106fd9191411835183561839ee751da0a",
+  "program_alias_mapping": [],
+  "protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "repository_validation": "PASS",
+  "request_id": "saint-joseph-s-phase0-0003",
+  "request_sha256": "f1978f744600ac7058ec0357db76c1e7be645740f1e02504f9696968984b892f",
+  "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "research_checkpoint_sha256": "25f9103ace9dc7cb1649e524e6f1791e84373941adad37abb81fc5b9137a2e6a",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "sidecars": {
+    "integration-freeze.json": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+    "stage1-reconciliation.json": "759f4caa26f4000b56149de25e332fab524d023fce5dd4d7f33dd4c60369c4c2"
+  },
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "VEN-000020",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "barclays-center"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum (1955 building)",
+      "final_venue_id": "VEN-000040",
+      "final_venue_key": "charlotte-coliseum-1955",
+      "research_venue_id": "VEN-000040",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-coliseum-1955"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum (1988 building)",
+      "final_venue_id": "VEN-000041",
+      "final_venue_key": "charlotte-coliseum-1988",
+      "research_venue_id": "VEN-000041",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-coliseum-1988"
+    },
+    {
+      "canonical_name": "Freedom Hall",
+      "final_venue_id": "VEN-000069",
+      "final_venue_key": "freedom-hall",
+      "research_venue_id": "VEN-000069",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "freedom-hall"
+    },
+    {
+      "canonical_name": "HP Field House",
+      "final_venue_id": "VEN-000084",
+      "final_venue_key": "hp-field-house",
+      "research_venue_id": "VEN-000084",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hp-field-house"
+    },
+    {
+      "canonical_name": "Carrier Dome",
+      "final_venue_id": "VEN-000096",
+      "final_venue_key": "jma-wireless-dome",
+      "research_venue_id": "VEN-000096",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jma-wireless-dome"
+    },
+    {
+      "canonical_name": "Lahaina Civic Center",
+      "final_venue_id": "VEN-000108",
+      "final_venue_key": "lahaina-civic-center",
+      "research_venue_id": "VEN-000108",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lahaina-civic-center"
+    },
+    {
+      "canonical_name": "Madison Square Garden III",
+      "final_venue_id": "VEN-000123",
+      "final_venue_key": "madison-square-garden-1925",
+      "research_venue_id": "VEN-000123",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1925"
+    },
+    {
+      "canonical_name": "Madison Square Garden IV",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Memorial Gymnasium",
+      "final_venue_id": "VEN-000130",
+      "final_venue_key": "memorial-gymnasium",
+      "research_venue_id": "VEN-000130",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "memorial-gymnasium"
+    },
+    {
+      "canonical_name": "Mohegan Sun Arena",
+      "final_venue_id": "VEN-000139",
+      "final_venue_key": "mohegan-sun-arena",
+      "research_venue_id": "VEN-000139",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mohegan-sun-arena"
+    },
+    {
+      "canonical_name": "Neal S. Blaisdell Center",
+      "final_venue_id": "VEN-000149",
+      "final_venue_key": "neal-s-blaisdell-center",
+      "research_venue_id": "VEN-000149",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "neal-s-blaisdell-center"
+    },
+    {
+      "canonical_name": "Oakland Coliseum Arena",
+      "final_venue_id": "VEN-000153",
+      "final_venue_key": "oakland-coliseum-arena",
+      "research_venue_id": "VEN-000153",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "oakland-coliseum-arena"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "Reynolds Coliseum",
+      "final_venue_id": "VEN-000174",
+      "final_venue_key": "reynolds-coliseum",
+      "research_venue_id": "VEN-000174",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-coliseum"
+    },
+    {
+      "canonical_name": "SAP Center",
+      "final_venue_id": "VEN-000183",
+      "final_venue_key": "sap-center",
+      "research_venue_id": "VEN-000183",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sap-center"
+    },
+    {
+      "canonical_name": "Sports and Fitness Center",
+      "final_venue_id": "VEN-000191",
+      "final_venue_key": "sports-and-fitness-center",
+      "research_venue_id": "VEN-000191",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "The Pit",
+      "final_venue_id": "VEN-000208",
+      "final_venue_key": "the-pit",
+      "research_venue_id": "VEN-000208",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-pit"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    },
+    {
+      "canonical_name": "Titan Gym",
+      "final_venue_id": "VEN-000212",
+      "final_venue_key": "titan-gym",
+      "research_venue_id": "VEN-000212",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "titan-gym"
+    },
+    {
+      "canonical_name": "Williams Arena",
+      "final_venue_id": "VEN-000230",
+      "final_venue_key": "williams-arena",
+      "research_venue_id": "VEN-000230",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "williams-arena"
+    },
+    {
+      "canonical_name": "WVU Coliseum",
+      "final_venue_id": "VEN-000235",
+      "final_venue_key": "wvu-coliseum",
+      "research_venue_id": "VEN-000235",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wvu-coliseum"
+    },
+    {
+      "canonical_name": "Xfinity Mobile Arena",
+      "final_venue_id": "VEN-000237",
+      "final_venue_key": "xfinity-mobile-arena",
+      "research_venue_id": "VEN-000237",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "xfinity-mobile-arena"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "VEN-000280",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-arena"
+    },
+    {
+      "canonical_name": "Suncoast Credit Union Arena",
+      "final_venue_id": "VEN-000294",
+      "final_venue_key": "suncoast-credit-union-arena",
+      "research_venue_id": "VEN-000294",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "suncoast-credit-union-arena"
+    },
+    {
+      "canonical_name": "Veterans Memorial Coliseum",
+      "final_venue_id": "VEN-000297",
+      "final_venue_key": "veterans-memorial-coliseum-portland",
+      "research_venue_id": "VEN-000297",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "veterans-memorial-coliseum-portland"
+    },
+    {
+      "canonical_name": "Alumni Memorial Fieldhouse",
+      "final_venue_id": "VEN-000302",
+      "final_venue_key": "alumni-memorial-fieldhouse-saint-josephs",
+      "research_venue_id": "VEN-000302",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alumni-memorial-fieldhouse-saint-josephs"
+    },
+    {
+      "canonical_name": "Don Haskins Center",
+      "final_venue_id": "VEN-000325",
+      "final_venue_key": "don-haskins-center",
+      "research_venue_id": "VEN-000325",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "don-haskins-center"
+    },
+    {
+      "canonical_name": "HTC Center",
+      "final_venue_id": "VEN-000354",
+      "final_venue_key": "htc-center",
+      "research_venue_id": "VEN-000354",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "htc-center"
+    },
+    {
+      "canonical_name": "Lakefront Arena",
+      "final_venue_id": "VEN-000367",
+      "final_venue_key": "lakefront-arena",
+      "research_venue_id": "VEN-000367",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lakefront-arena"
+    },
+    {
+      "canonical_name": "Eugenio Guerra Sports Complex",
+      "final_venue_id": "VEN-000371",
+      "final_venue_key": "eugenio-guerra-sports-complex",
+      "research_venue_id": "VEN-000371",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "eugenio-guerra-sports-complex"
+    },
+    {
+      "canonical_name": "Anaheim Convention Center",
+      "final_venue_id": "VEN-000386",
+      "final_venue_key": "anaheim-convention-center",
+      "research_venue_id": "VEN-000386",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "anaheim-convention-center"
+    },
+    {
+      "canonical_name": "Haas Pavilion",
+      "final_venue_id": "VEN-000393",
+      "final_venue_key": "harmon-gym",
+      "research_venue_id": "VEN-000393",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "harmon-gym"
+    },
+    {
+      "canonical_name": "Municipal Auditorium (New Orleans)",
+      "final_venue_id": "VEN-000411",
+      "final_venue_key": "municipal-auditorium-new-orleans",
+      "research_venue_id": "VEN-000411",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "municipal-auditorium-new-orleans"
+    },
+    {
+      "canonical_name": "Boardwalk Hall",
+      "final_venue_id": "VEN-000433",
+      "final_venue_key": "boardwalk-hall",
+      "research_venue_id": "VEN-000433",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "boardwalk-hall"
+    },
+    {
+      "canonical_name": "Brown County Arena",
+      "final_venue_id": "VEN-000462",
+      "final_venue_key": "brown-county-arena",
+      "research_venue_id": "VEN-000462",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "brown-county-arena"
+    },
+    {
+      "canonical_name": "Ocean Center",
+      "final_venue_id": "VEN-000482",
+      "final_venue_key": "ocean-center",
+      "research_venue_id": "VEN-000482",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ocean-center"
+    },
+    {
+      "canonical_name": "War Memorial Gymnasium",
+      "final_venue_id": "VEN-000523",
+      "final_venue_key": "war-memorial-gymnasium-san-francisco",
+      "research_venue_id": "VEN-000523",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "war-memorial-gymnasium-san-francisco"
+    },
+    {
+      "canonical_name": "Alumni Hall",
+      "final_venue_id": "VEN-000525",
+      "final_venue_key": "alumni-hall-navy",
+      "research_venue_id": "VEN-000525",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alumni-hall-navy"
+    },
+    {
+      "canonical_name": "Philadelphia Convention Hall",
+      "final_venue_id": "VEN-000563",
+      "final_venue_key": "philadelphia-convention-hall",
+      "research_venue_id": "VEN-000563",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "philadelphia-convention-hall"
+    },
+    {
+      "canonical_name": "Philadelphia Arena",
+      "final_venue_id": "VEN-000749",
+      "final_venue_key": "philadelphia-arena",
+      "research_venue_id": "VEN-000749",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "philadelphia-arena"
+    },
+    {
+      "canonical_name": "Sovereign Bank Arena",
+      "final_venue_id": "VEN-000861",
+      "final_venue_key": "sovereign-bank-arena",
+      "research_venue_id": "VEN-000861",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sovereign-bank-arena"
+    },
+    {
+      "canonical_name": "Wister Hall",
+      "final_venue_id": "VEN-001081",
+      "final_venue_key": "wister-hall-la-salle",
+      "research_venue_id": "VEN-001081",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wister-hall-la-salle"
+    },
+    {
+      "canonical_name": "St. Pete Times Forum",
+      "final_venue_id": "VEN-000008",
+      "final_venue_key": "amalie-arena",
+      "research_venue_id": "VEN-000008",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amalie-arena"
+    },
+    {
+      "canonical_name": "Providence Civic Center",
+      "final_venue_id": "VEN-000011",
+      "final_venue_key": "amica-mutual-pavilion",
+      "research_venue_id": "VEN-000011",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amica-mutual-pavilion"
+    },
+    {
+      "canonical_name": "Brendan Byrne Arena",
+      "final_venue_id": "VEN-000028",
+      "final_venue_key": "brendan-byrne-arena",
+      "research_venue_id": "VEN-000028",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "brendan-byrne-arena"
+    },
+    {
+      "canonical_name": "Capital One Arena",
+      "final_venue_id": "VEN-000036",
+      "final_venue_key": "capital-one-arena",
+      "research_venue_id": "VEN-000036",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "capital-one-arena"
+    },
+    {
+      "canonical_name": "Alumni Hall (St. John's)",
+      "final_venue_id": "VEN-000456",
+      "final_venue_key": "carnesecca-arena",
+      "research_venue_id": "VEN-000456",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "carnesecca-arena"
+    },
+    {
+      "canonical_name": "Cassell Coliseum",
+      "final_venue_id": "VEN-000329",
+      "final_venue_key": "cassell-coliseum",
+      "research_venue_id": "VEN-000329",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cassell-coliseum"
+    },
+    {
+      "canonical_name": "Charles E. Smith Center",
+      "final_venue_id": "VEN-000434",
+      "final_venue_key": "charles-e-smith-center",
+      "research_venue_id": "VEN-000434",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charles-e-smith-center"
+    },
+    {
+      "canonical_name": "Cole Field House",
+      "final_venue_id": "VEN-000047",
+      "final_venue_key": "cole-field-house",
+      "research_venue_id": "VEN-000047",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cole-field-house"
+    },
+    {
+      "canonical_name": "Daskalakis Athletic Center",
+      "final_venue_id": "VEN-000689",
+      "final_venue_key": "daskalakis-athletic-center",
+      "research_venue_id": "VEN-000689",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "daskalakis-athletic-center"
+    },
+    {
+      "canonical_name": "Patriot Center",
+      "final_venue_id": "VEN-000576",
+      "final_venue_key": "eaglebank-arena",
+      "research_venue_id": "VEN-000576",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "eaglebank-arena"
+    },
+    {
+      "canonical_name": "Frank Erwin Center",
+      "final_venue_id": "VEN-000068",
+      "final_venue_key": "frank-erwin-center",
+      "research_venue_id": "VEN-000068",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "frank-erwin-center"
+    },
+    {
+      "canonical_name": "Hammons Student Center",
+      "final_venue_id": "VEN-000562",
+      "final_venue_key": "hammons-student-center",
+      "research_venue_id": "VEN-000562",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hammons-student-center"
+    },
+    {
+      "canonical_name": "Hearnes Center",
+      "final_venue_id": "VEN-000077",
+      "final_venue_key": "hearnes-center",
+      "research_venue_id": "VEN-000077",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hearnes-center"
+    },
+    {
+      "canonical_name": "John A. Mulcahy Campus Events Center",
+      "final_venue_id": "VEN-000948",
+      "final_venue_key": "hynes-athletics-center",
+      "research_venue_id": "VEN-000948",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hynes-athletics-center"
+    },
+    {
+      "canonical_name": "Rutgers Athletic Center",
+      "final_venue_id": "VEN-000095",
+      "final_venue_key": "jersey-mikes-arena",
+      "research_venue_id": "VEN-000095",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jersey-mikes-arena"
+    },
+    {
+      "canonical_name": "Hayman Hall",
+      "final_venue_id": "VEN-000864",
+      "final_venue_key": "john-e-glaser-arena",
+      "research_venue_id": "VEN-000864",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "john-e-glaser-arena"
+    },
+    {
+      "canonical_name": "Jon M. Huntsman Center",
+      "final_venue_id": "VEN-000097",
+      "final_venue_key": "jon-m-huntsman-center",
+      "research_venue_id": "VEN-000097",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jon-m-huntsman-center"
+    },
+    {
+      "canonical_name": "Keaney Gymnasium",
+      "final_venue_id": "VEN-000305",
+      "final_venue_key": "keaney-gymnasium",
+      "research_venue_id": "VEN-000305",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keaney-gymnasium"
+    },
+    {
+      "canonical_name": "HSBC Arena",
+      "final_venue_id": "VEN-000103",
+      "final_venue_key": "keybank-center",
+      "research_venue_id": "VEN-000103",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keybank-center"
+    },
+    {
+      "canonical_name": "BJCC Arena",
+      "final_venue_id": "VEN-000109",
+      "final_venue_key": "legacy-arena",
+      "research_venue_id": "VEN-000109",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "legacy-arena"
+    },
+    {
+      "canonical_name": "McGonigle Hall",
+      "final_venue_id": "VEN-000441",
+      "final_venue_key": "mcgonigle-hall",
+      "research_venue_id": "VEN-000441",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcgonigle-hall"
+    },
+    {
+      "canonical_name": "Moby Arena",
+      "final_venue_id": "VEN-000481",
+      "final_venue_key": "moby-arena",
+      "research_venue_id": "VEN-000481",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "moby-arena"
+    },
+    {
+      "canonical_name": "Municipal Auditorium",
+      "final_venue_id": "VEN-000143",
+      "final_venue_key": "municipal-auditorium-kc",
+      "research_venue_id": "VEN-000143",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "municipal-auditorium-kc"
+    },
+    {
+      "canonical_name": "Nassau Coliseum",
+      "final_venue_id": "VEN-000147",
+      "final_venue_key": "nassau-coliseum",
+      "research_venue_id": "VEN-000147",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nassau-coliseum"
+    },
+    {
+      "canonical_name": "Spokane Veterans Memorial Arena",
+      "final_venue_id": "VEN-000152",
+      "final_venue_key": "numerica-veterans-arena",
+      "research_venue_id": "VEN-000152",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "numerica-veterans-arena"
+    },
+    {
+      "canonical_name": "PPG Paints Arena",
+      "final_venue_id": "VEN-000167",
+      "final_venue_key": "ppg-paints-arena",
+      "research_venue_id": "VEN-000167",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ppg-paints-arena"
+    },
+    {
+      "canonical_name": "Rec Hall",
+      "final_venue_id": "VEN-000308",
+      "final_venue_key": "rec-hall-penn-state",
+      "research_venue_id": "VEN-000308",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rec-hall-penn-state"
+    },
+    {
+      "canonical_name": "Reed Arena",
+      "final_venue_id": "VEN-000171",
+      "final_venue_key": "reed-arena",
+      "research_venue_id": "VEN-000171",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reed-arena"
+    },
+    {
+      "canonical_name": "U.S. Bank Arena",
+      "final_venue_id": "VEN-000176",
+      "final_venue_key": "riverfront-coliseum",
+      "research_venue_id": "VEN-000176",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "riverfront-coliseum"
+    },
+    {
+      "canonical_name": "Robins Center",
+      "final_venue_id": "VEN-000324",
+      "final_venue_key": "robins-center",
+      "research_venue_id": "VEN-000324",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "robins-center"
+    },
+    {
+      "canonical_name": "Ryan Center",
+      "final_venue_id": "VEN-000885",
+      "final_venue_key": "ryan-center-kingston-ri",
+      "research_venue_id": "VEN-000885",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ryan-center-kingston-ri"
+    },
+    {
+      "canonical_name": "Stuart C. Siegel Center",
+      "final_venue_id": "VEN-000705",
+      "final_venue_key": "siegel-center",
+      "research_venue_id": "VEN-000705",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "siegel-center"
+    },
+    {
+      "canonical_name": "Assembly Hall",
+      "final_venue_id": "VEN-000186",
+      "final_venue_key": "simon-skjodt-assembly-hall",
+      "research_venue_id": "VEN-000186",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "simon-skjodt-assembly-hall"
+    },
+    {
+      "canonical_name": "St. John Arena",
+      "final_venue_id": "VEN-000192",
+      "final_venue_key": "st-john-arena",
+      "research_venue_id": "VEN-000192",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "st-john-arena"
+    },
+    {
+      "canonical_name": "University Hall",
+      "final_venue_id": "VEN-000362",
+      "final_venue_key": "university-hall-virginia",
+      "research_venue_id": "VEN-000362",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-hall-virginia"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "Cox Arena at Aztec Bowl",
+      "final_venue_id": "VEN-000226",
+      "final_venue_key": "viejas-arena",
+      "research_venue_id": "VEN-000226",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "viejas-arena"
+    },
+    {
+      "canonical_name": "Walsh Gymnasium",
+      "final_venue_id": "VEN-000868",
+      "final_venue_key": "walsh-gymnasium-seton-hall",
+      "research_venue_id": "VEN-000868",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "walsh-gymnasium-seton-hall"
+    },
+    {
+      "canonical_name": "Houston Field House",
+      "final_venue_id": "VEN-000823",
+      "final_venue_key": "houston-field-house",
+      "research_venue_id": "VEN-000823",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "houston-field-house"
+    }
+  ],
+  "venue_reconciliation": null
+}
