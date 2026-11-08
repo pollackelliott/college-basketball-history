@@ -1,0 +1,107 @@
+{
+  "actual_published_target_sha": "271de6a89b902195021e3168c3f14e709175c8ac",
+  "changed_file_sha256": {
+    "schools/saint-joseph-s/opponents.csv": "02f7089b8c1b3f7944a6daf6fa9902213636e5c8fc3a83b30c81458268493e7a",
+    "schools/saint-joseph-s/source-games.csv": "688f248a3ff1b4f0358429e2041d888455c44c922ca4ed4ff12b0d55a418cbf9"
+  },
+  "changed_paths": [
+    "schools/saint-joseph-s/opponents.csv",
+    "schools/saint-joseph-s/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "bard",
+    "centenary-louisiana",
+    "puerto-rico-bayamon",
+    "union"
+  ],
+  "expected_target_predecessor_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "field_level_proof_sha256": "e98348e679f2da9cc0e4e54e548cb0b29f70eb05ee2f054c3f3e073ccc8217db",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "5875d946d957d30dc25cc69d13121a631d354049",
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "27c079debe7f4c1ac83934803a9abc0d3bcf74940455aac31bb2b75bd0add96e",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "0386eb07e4b05fdba8769fdb77081277b9fb336021351aa76fcfd7425f30765d",
+      "implementation-stage2-status.json": "d31cb109e954fb99c291e09aa9169218afceeeda18d6d1ca28dc9e758c18500e",
+      "plan.json": "7b9132eb2710b96449ae0851e349b508f8afba543b50dea19602e3462a642dbf",
+      "review.csv": "5e7a789f2a3a325a286e34c564136438f6e12801ffb3f0f053e2dee43ac76301",
+      "review.md": "91fd24649dc4621a8b9a3064998de7153c83a38878082aad4e2786c601c05a47"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "0386eb07e4b05fdba8769fdb77081277b9fb336021351aa76fcfd7425f30765d",
+      "implementation-stage2-status.json": "111e94751a918ab7c27822b8a781e52a18d6528f6d202e7cf272f7e5f4152af4",
+      "plan.json": "91182d33d5fcc04167881d4f98eda90a4fde437ba6ee7c45e0ed54a5be3f23c8",
+      "review.csv": "5e7a789f2a3a325a286e34c564136438f6e12801ffb3f0f053e2dee43ac76301",
+      "review.md": "b91b625940bcf300c86617a01bcaee7f0d262daf7a74af610db3bd8567a26d5e"
+    },
+    "blocker_count": 1,
+    "capability_census_status": "PREFLIGHT_BLOCKED",
+    "capability_topology_groups": [
+      {
+        "classification": "UNCLASSIFIED",
+        "count": 1,
+        "topology": "preflight_blockers"
+      },
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 206,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 1,
+    "decision_count": 315,
+    "decision_universe_sha256": "f27c317cc6dc83fb13abfae110431c1c81ba176eb12aa98fe2efb9fd3aa079f1",
+    "stage2_status": "BLOCKED",
+    "tracked_mutation_proof": {
+      "after_head_sha": "271de6a89b902195021e3168c3f14e709175c8ac",
+      "after_status": "",
+      "after_tree_sha": "46ebd8065d25f09d8e9ab8f0677494944e4b4b43",
+      "before_head_sha": "271de6a89b902195021e3168c3f14e709175c8ac",
+      "before_status": "",
+      "before_tree_sha": "46ebd8065d25f09d8e9ab8f0677494944e4b4b43",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "271de6a89b902195021e3168c3f14e709175c8ac",
+  "prepared_parent_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "prepared_tree_sha": "46ebd8065d25f09d8e9ab8f0677494944e4b4b43",
+  "protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "saint-joseph-s-stage2-opponent-display-normalize-0001",
+  "request_sha256": "6fde73aea995e96570c9562755a55bc844f5e4c4b9a11a88fbe6ebab209cb364",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_drift_after": {
+    "baseline_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "integration_base_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+    "school_key": "saint-joseph-s",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+    "integration_base_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+    "school_key": "saint-joseph-s",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "source_game_normalized_name_row_count": 5,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "4fc941c8e3873765f60d95dee542eeebbb83e62a07b3cf9b560cf7694abfe978",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "writeahead_commit": "f99a509e7357745c37df28f1635dbba4af9ae999",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/saint-joseph-s/saint-joseph-s-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "c0929494f7899ee15af616fc721ef69bdf8b5d699febc8ed8e882b56a9589398"
+}
