@@ -442,7 +442,7 @@
     "george-mason-phase0-0002"
   ],
   "active_expected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
-  "active_lock_commit": null,
+  "active_lock_commit": "b2f4cd4af2d4ed64bbafb6e2e9eadb98a388ec21",
   "active_lock_owner": "github-actions:42507321836:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
