@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "377a539979f727ad00fd6141365444d43b301f15",
+  "merge_parent_onboarding": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
+  "merge_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "94370e84f5d39c073d8c4d2a78ad22c771bc73af3c3d28d6f8bc195be8a1db6c",
+  "owner_gate_2_verification_sha256": "bbb66103857f3b29a73da2fafa1f95655c9951a00c7ed9f92a131a238f29407f",
+  "pr_head_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
+  "pr_number": 524,
+  "production_deployment_id": 7636478253,
+  "production_json_checked_count": 96,
+  "production_proof": true,
+  "production_proof_sha256": "bd3ec60b8c891e7cb423fd522fdcec8aa5ee4e0f9608926b88a0e34695b37dcc",
+  "protected_main_sha": "5f0a175045e822be4506ac97d72abab084ede52b",
+  "request_id": "saint-joseph-s-release-production-proof-0001",
+  "request_sha256": "2671f31f075c7cca79b077d86fda89017dbc3de29f527b1b948b49aa4afb837b",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "status": "PRODUCTION_PROOF_PASS"
+}
