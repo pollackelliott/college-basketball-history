@@ -330,6 +330,94 @@ class SourceScopedOpponentIdentityTests(unittest.TestCase):
             self.assertEqual(discrepancy["canonical_value"], "1960-12-16")
             self.assertEqual(discrepancy["status"], "RESOLVED")
 
+    def test_non_d1_in_place_rekey_splits_mixed_literal_population_without_global_remap(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            self.make_repo(repo)
+            plan = build_plan(
+                repo,
+                source_program="alabama",
+                source_label="Virginia Tech ^",
+                source_game_id="ALARAW-00923",
+                old_key="virginia-tech",
+                new_key="loras",
+                new_name="Loras",
+                basis="Authoritative source identifies a distinct historical/non-D1 opponent.",
+                in_place=True,
+                target_current_d1=False,
+            )
+            self.assertEqual(plan["payload"]["stale_canonical_id"], "CBBG-0028395")
+            self.assertEqual(plan["payload"]["survivor_canonical_id"], "CBBG-0028395")
+            self.assertTrue(plan["payload"]["in_place"])
+            self.assertFalse(plan["payload"]["target_current_d1"])
+
+            result = apply_plan(repo, plan, plan["sha256"])
+            self.assertEqual(result["canonical_rows_absorbed"], 0)
+            self.assertEqual(result["canonical_rows_rekeyed"], 1)
+            self.assertEqual(result["assertions_rekeyed"], 1)
+            self.assertEqual(result["canonical_game_id"], "CBBG-0028395")
+
+            _, opponents = read_csv(repo / "schools/alabama/opponents.csv")
+            mapping = {
+                row["canonical_opponent_key"]: row
+                for row in opponents
+                if row["source_opponent_label"] == "Virginia Tech ^"
+            }
+            self.assertEqual(mapping["virginia-tech"]["games_with_source_label"], "2")
+            self.assertEqual(mapping["virginia-tech"]["current_d1"], "Yes")
+            self.assertEqual(mapping["loras"]["games_with_source_label"], "1")
+            self.assertEqual(mapping["loras"]["current_d1"], "No")
+
+            _, sources = read_csv(repo / "schools/alabama/source-games.csv")
+            by_source = {row["source_game_id"]: row for row in sources}
+            self.assertEqual(by_source["ALARAW-00923"]["normalized_opponent_key"], "loras")
+            self.assertEqual(by_source["ALARAW-00923"]["opponent_current_d1"], "No")
+            self.assertEqual(by_source["ALARAW-00948"]["normalized_opponent_key"], "virginia-tech")
+            self.assertEqual(by_source["ALARAW-01025"]["normalized_opponent_key"], "virginia-tech")
+            self.assertEqual(
+                by_source["ALARAW-00923"]["raw_text"],
+                "Dec. 16 vs. Virginia Tech ^ -/- W 72 55",
+            )
+
+            _, games = read_csv(repo / "data/canonical/games.csv")
+            by_id = {row["canonical_game_id"]: row for row in games}
+            self.assertIn("CBBG-0028395", by_id)
+            self.assertEqual(
+                {by_id["CBBG-0028395"]["team_a_key"], by_id["CBBG-0028395"]["team_b_key"]},
+                {"alabama", "loras"},
+            )
+            self.assertEqual(
+                {by_id["CBBG-0099629"]["team_a_key"], by_id["CBBG-0099629"]["team_b_key"]},
+                {"alabama", "baylor"},
+            )
+
+            _, assertions = read_csv(repo / "data/evidence/game-assertions.csv")
+            alabama = next(row for row in assertions if row["source_program_key"] == "alabama")
+            self.assertEqual(alabama["canonical_game_id"], "CBBG-0028395")
+            self.assertEqual(alabama["normalized_opponent_key"], "loras")
+            self.assertEqual(alabama["match_method"], "SOURCE_SCOPED_IDENTITY_IN_PLACE")
+
+    def test_non_d1_in_place_rekey_rejects_current_d1_target_key(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            self.make_repo(repo)
+            with self.assertRaisesRegex(
+                ScopedIdentityError,
+                "historical/non-D1 target 'baylor' is a current-D1 registry key",
+            ):
+                build_plan(
+                    repo,
+                    source_program="alabama",
+                    source_label="Virginia Tech ^",
+                    source_game_id="ALARAW-00923",
+                    old_key="virginia-tech",
+                    new_key="baylor",
+                    new_name="Baylor",
+                    basis="Invalid non-D1 classification.",
+                    in_place=True,
+                    target_current_d1=False,
+                )
+
     def test_date_conflict_requires_explicit_canonical_date(self):
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary)
