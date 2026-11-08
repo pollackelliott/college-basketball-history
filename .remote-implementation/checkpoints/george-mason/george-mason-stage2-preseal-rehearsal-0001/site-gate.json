@@ -1,0 +1,63 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_venue": 30,
+    "public_gap_rows": 124,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 1455,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 94
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_venue": [
+      "CBBG-0083961",
+      "CBBG-0159880",
+      "CBBG-0163341",
+      "CBBG-0165680",
+      "CBBG-0166949",
+      "CBBG-0199815",
+      "CBBG-0202030",
+      "CBBG-0202054",
+      "CBBG-0202055",
+      "CBBG-0202079",
+      "CBBG-0202083",
+      "CBBG-0202108"
+    ],
+    "unknown_site_type": [
+      "CBBG-0201958",
+      "CBBG-0201960",
+      "CBBG-0201965",
+      "CBBG-0201967",
+      "CBBG-0201968",
+      "CBBG-0201969",
+      "CBBG-0201970",
+      "CBBG-0201971",
+      "CBBG-0201972",
+      "CBBG-0201975",
+      "CBBG-0201977",
+      "CBBG-0201979"
+    ]
+  },
+  "history_start_season": "1978-1979",
+  "school_key": "george-mason",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 125,
+    "neutral_missing_venue": 30,
+    "researched_gap_rows": 125,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 95
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 1455
+  },
+  "status": "PASS",
+  "warnings": []
+}
