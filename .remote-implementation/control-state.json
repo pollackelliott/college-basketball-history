@@ -435,18 +435,19 @@
     "saint-joseph-s-release-production-proof-0001",
     "george-mason-stage1-0001",
     "george-mason-stage1-0002",
-    "george-mason-stage1-0003"
+    "george-mason-stage1-0003",
+    "george-mason-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8e37c18c3572c583e7b1261270a629d97ba11b1a",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42498432678:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-mason-phase0-0001",
+  "active_request_sha256": "e7d4b0f0e2170190cb24ff929f1a02fd2599b0ec223faac93462f17d7f6bfd0c",
+  "active_school_key": "george-mason",
+  "active_target_branch": "data/george-mason-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -880,8 +881,11 @@
     "stage1_reconciliation_sha256": "3fd27f558285d1a4fd09c1f09453e3580101e924c8ccb034bec683b020667b6c",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42498432678",
+  "lock_acquisition_request_commit": "686bf899eccea4edbd506f2cc1624841df724b69",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
