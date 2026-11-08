@@ -1,0 +1,86 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 14,
+      "discrepancy": 6,
+      "identity": 6,
+      "publication": 1
+    },
+    "decision_count": 28,
+    "decision_fields": {
+      "game_date": 10,
+      "game_identity": 6,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 5,
+      "site_type": 4
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-GMU-1989-90-013-CBBG-0132290-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-GMU-1991-92-003-CBBG-0136734-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-GMU-2014-15-018-CBBG-0190496-SITE_TYPE",
+      "DISCREPANCY-GMU-1986-87-010-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 30,
+      "public_gap_rows": 124,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1455,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 94
+    },
+    "examples": {
+      "neutral_missing_venue": [
+        "CBBG-0083961",
+        "CBBG-0159880",
+        "CBBG-0163341",
+        "CBBG-0165680",
+        "CBBG-0166949",
+        "CBBG-0199815",
+        "CBBG-0202030",
+        "CBBG-0202054",
+        "CBBG-0202055",
+        "CBBG-0202079",
+        "CBBG-0202083",
+        "CBBG-0202108"
+      ],
+      "unknown_site_type": [
+        "CBBG-0201958",
+        "CBBG-0201960",
+        "CBBG-0201965",
+        "CBBG-0201967",
+        "CBBG-0201968",
+        "CBBG-0201969",
+        "CBBG-0201970",
+        "CBBG-0201971",
+        "CBBG-0201972",
+        "CBBG-0201975",
+        "CBBG-0201977",
+        "CBBG-0201979"
+      ]
+    },
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 4,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
