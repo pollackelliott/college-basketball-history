@@ -38,7 +38,12 @@ LEDGER_BASENAMES = (
     "stage2-working-ledger.csv",
 )
 ID_FIELDS = ("research_game_id", "source_game_id", "game_id", "id")
-OPP_FIELDS = ("opponent_key", "opponent_program_key", "canonical_opponent_key")
+OPP_FIELDS = (
+    "opponent_key",
+    "opponent_program_key",
+    "canonical_opponent_key",
+    "stage2_opponent_key",
+)
 SOURCE_OPP_LABEL_FIELDS = (
     "source_opponent_label",
     "mechanical_family_label",
