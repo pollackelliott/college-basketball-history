@@ -1,0 +1,49 @@
+{
+  "approved_plan_hash": "0c9b26c88fc8de57642af7f5bf9f805bd2162d2b6c3a6bc26c4ebc0f00f15952",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Continuation of the owner-authorized George Mason release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #529. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden.",
+    "origin": "ChatGPT George Mason serialized Implementation — release preparation continuation"
+  },
+  "expected_protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "pr_number": 529,
+  "previous_control_state_commit": "83646a9179414dfa3bf3f909e39a5c43a69e5024",
+  "previous_control_state_sha256": "c2319b3c012b66c68988c306ce455b72d1867eb5f14a75fddd9181de2c59a57e",
+  "release_manifest_sha256": "e1834244f6e0dfcb895c9707235c469c641f63295d4a681e1edd572c47a25349",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "4f0a92537cdb39abb95f777555e31d96ed22ce6981ebd4fbf09be52ea9d9c592"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "ab6b64e5af63b947bbe3de0ed430a396a9bda48136f98e8ffbe68c3ba7904042"
+  },
+  "request_id": "george-mason-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "adca1cb9d9a882ad68520961dd95f324d873a075"
+}
