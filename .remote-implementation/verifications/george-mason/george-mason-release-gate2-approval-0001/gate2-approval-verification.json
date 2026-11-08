@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "da1ace59606411bb732221553401f4af87e45e1cb42f92619d1f9005228cea4f",
+  "gate2_merge_packet_sha256": "6d4e974498002bd4e887be15b027f98c92ba7a2dc40995dc979746d87a277b06",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "adca1cb9d9a882ad68520961dd95f324d873a075",
+  "pr_number": 529,
+  "preview_deployment_id": 7641018550,
+  "preview_url": "https://college-basketball-history-67vhqqo58-elliott-pollacks-projects.vercel.app",
+  "production_request_id": "george-mason-release-production-proof-0001",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "george-mason-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "status": "PASS"
+}

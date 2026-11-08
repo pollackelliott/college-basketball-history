@@ -902,7 +902,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/george-mason/george-mason-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "da1ace59606411bb732221553401f4af87e45e1cb42f92619d1f9005228cea4f",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/george-mason/george-mason-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "6d4e974498002bd4e887be15b027f98c92ba7a2dc40995dc979746d87a277b06",
     "merged": false,
@@ -911,7 +911,7 @@
     "pr_number": 529,
     "production_request_id": "george-mason-release-production-proof-0001",
     "protected_main_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "george-mason-release-gate2-approval-0001",
     "school_key": "george-mason",
     "target_branch": "data/george-mason-onboarding",
