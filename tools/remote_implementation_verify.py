@@ -1576,6 +1576,25 @@ def verify_stage2_census(
 
 
 
+def _stage2_refresh_verification_main(
+    successor: dict,
+    live_main: str,
+) -> str:
+    refresh_main = str(successor.get("protected_main_sha") or "")
+    if not refresh_main:
+        raise Stop("STAGE2_REFRESH_FRESH_BOUND_MAIN_MISSING")
+    if git(
+        "merge-base",
+        "--is-ancestor",
+        refresh_main,
+        live_main,
+        cwd=ROOT,
+        check=False,
+    ).returncode != 0:
+        raise Stop("STAGE2_REFRESH_FRESH_MAIN_DIVERGED")
+    return refresh_main
+
+
 def verify_stage2_current_main_refresh(
     live_main: str,
     control_head: str,
@@ -1598,8 +1617,9 @@ def verify_stage2_current_main_refresh(
         raise Stop("STAGE2_REFRESH_FRESH_SUCCESSOR_KIND_MISMATCH")
     if successor.get("operation") != OP_STAGE2_CURRENT_MAIN_REFRESH:
         raise Stop("STAGE2_REFRESH_FRESH_OPERATION_MISMATCH")
-    if successor.get("protected_main_sha") != live_main:
-        raise Stop("STAGE2_REFRESH_FRESH_MAIN_CHANGED")
+    refresh_main = _stage2_refresh_verification_main(successor, live_main)
+    if refresh_main != str(last.get("protected_main_sha") or ""):
+        raise Stop("STAGE2_REFRESH_FRESH_CONTROL_MAIN_BINDING_MISMATCH")
 
     target_branch = successor["target_branch"]
     prepared = successor["prepared_commit_sha"]
@@ -1641,7 +1661,7 @@ def verify_stage2_current_main_refresh(
         raise Stop("STAGE2_REFRESH_FRESH_PREDECESSOR_MISMATCH")
     if manifest.get("prepared_commit_sha") != prepared:
         raise Stop("STAGE2_REFRESH_FRESH_PREPARED_MISMATCH")
-    if manifest.get("protected_main_sha") != live_main:
+    if manifest.get("protected_main_sha") != refresh_main:
         raise Stop("STAGE2_REFRESH_FRESH_WRITEAHEAD_MAIN_MISMATCH")
 
     prefix = Path(writeahead_path).parent
@@ -1658,7 +1678,7 @@ def verify_stage2_current_main_refresh(
     parents = git(
         "show", "-s", "--format=%P", prepared
     ).stdout.strip().split()
-    if parents != [predecessor, live_main]:
+    if parents != [predecessor, refresh_main]:
         raise Stop("STAGE2_REFRESH_FRESH_PARENTS_MISMATCH")
     tree = git("rev-parse", prepared + "^{tree}").stdout.strip()
     if tree != manifest["prepared_tree_sha"]:
@@ -1678,7 +1698,7 @@ def verify_stage2_current_main_refresh(
 
     rebuilt_tree = reconstruct_refresh_tree(
         predecessor_sha=predecessor,
-        protected_main_sha=live_main,
+        protected_main_sha=refresh_main,
         school_key=successor["school_key"],
         source_repo=ROOT,
     )
@@ -1731,12 +1751,13 @@ def verify_stage2_current_main_refresh(
         "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
         "request_id": successor["request_id"],
         "school_key": successor["school_key"],
-        "protected_main_sha": live_main,
+        "protected_main_sha": refresh_main,
+        "observed_live_main_sha": live_main,
         "target_branch": target_branch,
         "target_predecessor_sha": predecessor,
         "target_sha": prepared,
         "target_tree_sha": tree,
-        "prepared_parents": [predecessor, live_main],
+        "prepared_parents": [predecessor, refresh_main],
         "merge_base_sha": manifest["merge_base_sha"],
         "changed_paths": manifest["changed_paths"],
         "changed_file_sha256": manifest["changed_file_sha256"],
