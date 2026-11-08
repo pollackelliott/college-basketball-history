@@ -335,6 +335,24 @@ def build_plan(
         raise ScopedIdentityError("source-scoped rekey would create a canonical self-game")
     stale_mapped = canonical_view(stale, old_key, new_key)
     canonical_game_date = clean(canonical_game_date)
+    if in_place:
+        collision_fields = ("season_label", "game_date", "team_a_key", "team_b_key")
+        if clean(stale_mapped.get("game_date")):
+            collisions = [
+                clean(row.get("canonical_game_id"))
+                for row in canonical
+                if clean(row.get("canonical_game_id")) != stale_canonical_id
+                and all(
+                    clean(row.get(field)) == clean(stale_mapped.get(field))
+                    for field in collision_fields
+                )
+            ]
+            if collisions:
+                raise ScopedIdentityError(
+                    "in-place rekey would collide with existing canonical row(s): "
+                    + ",".join(sorted(collisions))
+                    + "; use counterpart reconciliation instead"
+                )
 
     final_values: dict[str, str] = {}
     new_discrepancies: list[dict[str, str]] = []
