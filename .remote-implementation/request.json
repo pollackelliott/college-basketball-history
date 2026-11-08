@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-joseph-s-stage1-0001",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "saint-joseph-s-phase0-0001",
+  "operation": "PHASE0",
   "school_key": "saint-joseph-s",
-  "previous_control_state_commit": "f9497b66b0e9e9ae535c37828520a2fe9cbe07b8",
-  "previous_control_state_sha256": "72be0d6c936e67c9d64532ff949a312b0123d2fe3591eb4b91eb37e37d641c64",
+  "previous_control_state_commit": "1c1e9505fcd85f1ef2a61536933a5b688fe39860",
+  "previous_control_state_sha256": "863a77caf521c83cc5c40dec1ab34bc59f87ad7f41c12076821261f3252de485",
   "expected_protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "target_branch": "data/saint-joseph-s-onboarding",
   "research_checkpoint": {
     "sha256": "25f9103ace9dc7cb1649e524e6f1791e84373941adad37abb81fc5b9137a2e6a",
     "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
@@ -17,15 +18,26 @@
       "part_count": 99
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-stage1-0001/checkpoint-manifest.json",
+    "sha256": "25487fd0a8dcf8668ebd876a26fcce688f6133f02b79d02bbb9855187492fb3a"
+  },
   "venue_reconciliation": null,
   "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1909-1910",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted Saint Joseph's INCEPTION+ scope from the immutable Research Freeze. The frozen portfolio explicitly confirms the current owner-supplied top-level scope baseline, and the first accepted competitive source game is in 1909-1910. Preserve the exact frozen historical universe and all accepted researched uncertainty."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — owner-authorized Stage 1",
-    "authorization": "Owner explicitly concluded Saint Joseph's Research, designated the exact attached final RESEARCH_FROZEN artifact, and authorized the Saint Joseph's serialized Implementation Stage 1 phase. The owner-designated attachment fallback authenticated immutable ZIP SHA-256 25f9103ace9dc7cb1649e524e6f1791e84373941adad37abb81fc5b9137a2e6a, exact six-file membership, research_base_sha 89327ed84827323a3f64e08ac1410ed71e442a0e, settled INCEPTION+ scope, prior owner NON_D1 approval, and pre-freeze self-challenge PASS with no competing/superseding Saint Joseph's artifact found. This request authorizes only the complete read-only current-main Stage 1 reconciliation inventory against exact protected main f812bfd3a02805df6c9124e9fa2991086aa4f99f. It does not reopen Research or authorize Phase 0 mutation, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, protected-main mutation, or another school."
+    "origin": "ChatGPT Saint Joseph's serialized Implementation lane — owner-authorized Integration Freeze / Phase 0",
+    "authorization": "Owner said Proceed after clean Stage 1 request saint-joseph-s-stage1-0001 PASS on protected main f812bfd3a02805df6c9124e9fa2991086aa4f99f with zero blockers, zero ambiguous stops, zero maintenance-required items, 82 safe venue reuses, and four conference identity reuses. This authorizes exactly one guarded PHASE0 operation: rerun the permanent Stage 1 checks against exact main, stage the immutable six-file Research Freeze, apply the authenticated safe current-main identity reuse population, reconcile the accepted INCEPTION+ target scope beginning 1909-1910, create the Integration Freeze, publish the create-once data/saint-joseph-s-onboarding successor through the global mutation lock/write-ahead/CAS path, and require fresh independent Phase 0 verification. No Research reopening, unrelated shared/global maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, recovery, or direct protected-main mutation authority."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -38,11 +50,10 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
   }
 }
