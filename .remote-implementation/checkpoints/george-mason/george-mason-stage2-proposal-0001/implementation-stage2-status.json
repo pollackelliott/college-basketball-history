@@ -1,0 +1,125 @@
+{
+  "branch": "remote-stage2-census/george-mason-d49e677de165",
+  "capability_census": {
+    "path": ".onboarding/george-mason/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "d49e677de165248ef156f1f8d8c923240bdecee9",
+  "integration_base_sha": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "integration_semantic_sha256": "5d256d062b54fc73ed4ce4bc7ee6b9be9a49f4811f1d2b6e2345594509198d07",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 14,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 14,
+      "discrepancy": 6,
+      "identity": 6,
+      "publication": 1
+    },
+    "decision_count": 28,
+    "decision_universe_sha256": "f372d0286dedc1f69d05750c1a250e75c4aafbaa5ace88a56e7155ff0bc2d898",
+    "discrepancies_to_add": 6,
+    "existing_game_matches": 293,
+    "new_canonical_games": 1156,
+    "plan_path": ".onboarding/george-mason/plan.json",
+    "review_path": ".onboarding/george-mason/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 12,
+      "MATCH_CANONICAL:CBBG-0048514": 1,
+      "MATCH_CANONICAL:CBBG-0128384": 1,
+      "MATCH_CANONICAL:CBBG-0132290": 1,
+      "MATCH_CANONICAL:CBBG-0136722": 1,
+      "MATCH_CANONICAL:CBBG-0190492": 1,
+      "MATCH_CANONICAL:CBBG-0194097": 1,
+      "NOT_APPLICABLE": 7,
+      "USE_SOURCE": 1,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "3c69573cc6aff4da6e0d866d2ef63af9ddf9c84fbb0e0ff38345b225e5c40509",
+    "changed_path_count": 79
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 12,
+      "MATCH_CANONICAL:CBBG-0048514": 1,
+      "MATCH_CANONICAL:CBBG-0128384": 1,
+      "MATCH_CANONICAL:CBBG-0132290": 1,
+      "MATCH_CANONICAL:CBBG-0136722": 1,
+      "MATCH_CANONICAL:CBBG-0190492": 1,
+      "MATCH_CANONICAL:CBBG-0194097": 1,
+      "NOT_APPLICABLE": 7,
+      "USE_SOURCE": 1,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "3c69573cc6aff4da6e0d866d2ef63af9ddf9c84fbb0e0ff38345b225e5c40509",
+    "decision_count": 28,
+    "path": "/tmp/remote-stage2-proposal-map-cnkivalo/recommendation-map.json",
+    "sha256": "2d4ff16d8c8a4b137a5973cd3c6a2783b219b31196f8aa41552976f83dd823fc"
+  },
+  "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 30,
+      "public_gap_rows": 124,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1455,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 94
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_venue": [
+        "CBBG-0083961",
+        "CBBG-0159880",
+        "CBBG-0163341",
+        "CBBG-0165680",
+        "CBBG-0166949",
+        "CBBG-0199815",
+        "CBBG-0202030",
+        "CBBG-0202054",
+        "CBBG-0202055",
+        "CBBG-0202079",
+        "CBBG-0202083",
+        "CBBG-0202108"
+      ],
+      "unknown_site_type": [
+        "CBBG-0201958",
+        "CBBG-0201960",
+        "CBBG-0201965",
+        "CBBG-0201967",
+        "CBBG-0201968",
+        "CBBG-0201969",
+        "CBBG-0201970",
+        "CBBG-0201971",
+        "CBBG-0201972",
+        "CBBG-0201975",
+        "CBBG-0201977",
+        "CBBG-0201979"
+      ]
+    },
+    "path": ".onboarding/george-mason/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
