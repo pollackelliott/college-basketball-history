@@ -164,6 +164,52 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
         )
         self.assertEqual(result["blocker_count"], 1)
 
+    def test_ordinary_repeated_venue_reuse_needs_no_explicit_mapping(self):
+        local_rows = [
+            {
+                **dict(self.local),
+                "venue_key": "shared-arena",
+                "venue_id": "",
+                "canonical_name": "Shared Arena",
+                "city": "Example City",
+                "state": "NY",
+                "notes": "",
+                "first_assigned_game": "2000-01-01",
+                "last_assigned_game": "2000-01-01",
+            },
+            {
+                **dict(self.local),
+                "venue_key": "shared-arena",
+                "venue_id": "",
+                "canonical_name": "Shared Arena",
+                "city": "Example City",
+                "state": "NY",
+                "notes": "",
+                "first_assigned_game": "2001-01-01",
+                "last_assigned_game": "2001-01-01",
+            },
+        ]
+        global_row = {
+            **dict(self.global_row),
+            "venue_id": "VEN-000100",
+            "venue_key": "shared-arena",
+            "display_name": "Shared Arena",
+            "city": "Example City",
+            "state": "NY",
+        }
+
+        result = venue_reconciliation_inventory(
+            local_rows,
+            [global_row],
+            [],
+        )
+
+        self.assertEqual(result["blocker_count"], 0)
+        self.assertEqual(
+            [row["target_venue_id"] for row in result["rows"]],
+            ["VEN-000100", "VEN-000100"],
+        )
+
     def test_package_hash_mismatch_fails(self):
         self.doc["expected_research_zip_sha256"] = "0" * 64
         self.save()
