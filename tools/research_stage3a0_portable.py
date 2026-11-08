@@ -12,6 +12,7 @@ from pathlib import Path
 MANIFEST = "research-stage3a0-tool-manifest.json"
 TOOL_PATHS = (
     "tools/research_stage3a0.py",
+    "tools/research_authoring_capsule.py",
     "tools/research_stage3a0_portable.py",
 )
 SHA_RE = re.compile(r"^[0-9a-f]{40}$")
