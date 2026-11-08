@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "saint-joseph-s",
+  "created_at": "2026-11-08T02:00:27.031016+00:00",
+  "input_fingerprint": {
+    "sha256": "775616397c323b650882c1c29c08a961a361409fdb5650ea02a10650be0c8cab",
+    "git_head": "ddd4485ff74b053e58e47087bb0442907b169e08",
+    "files": {
+      "schools/saint-joseph-s/source-games.csv": "c36baa704077f86796335cb47932f3df16d290eb1ad429b2c35f648787f2dddd",
+      "schools/saint-joseph-s/opponents.csv": "983535276907118ee08862a8d997ec45ba5a484d1d627cae3db46dcdf89c0f2f",
+      "schools/saint-joseph-s/venues.csv": "652741a2ed034111219fe1abeb4843e0cacf9b7dec80b2a58c3b2a17e686ecc7",
+      "schools/saint-joseph-s/conferences.csv": "d5d2bcd37e83d70cfcf0225c1e9b5a81456e6216c06605ed62a0b8d227338cf7",
+      "schools/saint-joseph-s/notes.md": "d63186bcdd2ada359dc522af450028fe660dc16651f09a1952ff998a3d98efaa",
+      "schools/saint-joseph-s/source-notes.md": "de5241862848fe2131400c66bfb9aa8c0b28c5bb75af71b2d14b915fad5c93ef",
+      "data/canonical/games.csv": "c49e04c84b2a6ba30fe9eaa6acbd52ab73873c5a4b36dc2ec5acf8c085d36eb5",
+      "data/evidence/game-assertions.csv": "968139f205d40f1b46ee7231080477e5851a88116aff27032451a8ed9c05e58a",
+      "data/reconciliation/discrepancies.csv": "8f61b1940f3b39d44186f6e481431d3d76cb828cf5029c36da8f288cea5b5289",
+      "data/reference/programs.csv": "a526200e5aac914672d375c7a9654be989e8e83f45fd44fc62122d04f78717ec",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "87906b9da7baabf2ed6e03dc2bbe947ee3e05ce483fc1298e8da09017e69584f",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "efbd3eddec64de4fcab1630d22d3307f1080fdd0385720bf577d02cff06abc28",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "7db3757e13145dfbbd67bdba0407218387369b38ee4ac52cc3150787adcb77c7",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "0daa23dcec7782d659d7d11b9634b94ff957500ab2ad47a7900cabfa10692bd0",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "644207734b9f03791505d3b59ca8ebc982b6cbb41ee3809bf39af42402f9664f",
+      "tools/onboarding_plan.py": "cd958a727167a243b3f07ae121a5d9a6d3f7e28e8b0bf3f967cf977f3d0b2dab",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "d4746e40fe23a296cd79e7f1f0ed726851201dcd015639e3aa53dba28b19535f"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: bard: ['Bard College', 'Bard College (formerly St. Stephen’s)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: centenary-louisiana: ['Centenary (LA)', 'Centenary College (LA)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: puerto-rico-bayamon: ['PR-Bayamon', 'Puerto Rico-Bayamon']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: union: ['Union', 'Union College']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2967,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 1109,
+      "venues": 82,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: bard: ['Bard College', 'Bard College (formerly St. Stephen’s)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: centenary-louisiana: ['Centenary (LA)', 'Centenary College (LA)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: puerto-rico-bayamon: ['PR-Bayamon', 'Puerto Rico-Bayamon']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: union: ['Union', 'Union College']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

@@ -1,0 +1,41 @@
+{
+  "blockers": [
+    "historical opponent display conflict: bard: ['Bard College', 'Bard College (formerly St. Stephen’s)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: centenary-louisiana: ['Centenary (LA)', 'Centenary College (LA)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: puerto-rico-bayamon: ['PR-Bayamon', 'Puerto Rico-Bayamon']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: union: ['Union', 'Union College']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/saint-joseph-s-ddd4485ff74b",
+  "capability_census": {
+    "path": ".onboarding/saint-joseph-s/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "integration_base_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "integration_semantic_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "preflight": {
+    "blocker_count": 4,
+    "conditional_discrepancies": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/saint-joseph-s/plan.json",
+    "review_path": ".onboarding/saint-joseph-s/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
