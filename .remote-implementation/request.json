@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "saint-joseph-s-release-readiness-0001",
+  "request_id": "saint-joseph-s-release-preview-verify-0001",
   "school_key": "saint-joseph-s",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "728a9a12ba414069f2dbb27addf2f66cb95db2c0",
-  "previous_control_state_sha256": "dad79d70ba58693950b8a81ea273aa72976e79fb21c76c84b725d723a27659f5",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "e86fba35eeca6e49b2681e8c3a66491d212fe897",
+  "previous_control_state_sha256": "baa7ed2d3aa17e9a2c6396bb70de7950ffc608c8b351420fe559fe37d7f63c1f",
   "expected_protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
   "creation_provenance": {
-    "origin": "ChatGPT Saint Joseph's serialized Implementation — release preparation",
-    "authorization": "Owner explicitly said 'Proceed' after the exact Saint Joseph's sealed-apply successor 9ccc5d54ef260bf45a7c2fa0cff9348d43412e86 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, CI/mergeability checks, exact Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or new historical authority."
+    "origin": "ChatGPT Saint Joseph's serialized Implementation — release preparation continuation",
+    "authorization": "Continuation of the owner-authorized Saint Joseph's release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #524. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, and new historical authority remain forbidden."
   },
   "authority": {
     "owner_gate_1": false,
@@ -19,9 +19,9 @@
     "phase0_scope_supersession": false,
     "recovery": false,
     "release_gate2_approval": false,
-    "release_preview_verify": false,
+    "release_preview_verify": true,
     "release_production_proof": false,
-    "release_readiness": true,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -35,18 +35,15 @@
   },
   "target_branch": "data/saint-joseph-s-onboarding",
   "target_sha": "9ccc5d54ef260bf45a7c2fa0cff9348d43412e86",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "af1bc6791d2b44abc38b3600d2dd30c2290dc827749d7475b955cf2eb9e01f42"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "62a0edec360fb6782fbc9198aad9030a148255bd3d9741bc6c3b106a32306d17"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/saint-joseph-s/saint-joseph-s-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "f0e94cd1ed0e3c4fcd0ef8d3085d6dfbf65b9a6041725a1e949ca5756ee4555d"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/saint-joseph-s/saint-joseph-s-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "0f7215bddc762db94c97fd7c063e60188dab4517d8d344cacf47d36ad747e8c5"
   },
   "approved_plan_hash": "683db072558962546ea94b82821b681dca2ef43defc7a825794210f0aaa2e6da",
   "release_manifest_sha256": "62c7564434788ffa1276653fab45d6d8d847fc40567f095f80e002d5e7442546",
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "saint-joseph-s-release-preview-verify-0001"
-  }
+  "pr_number": 524
 }
