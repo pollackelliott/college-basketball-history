@@ -1,0 +1,77 @@
+{
+  "branch": "remote-stage2-census/saint-joseph-s-a0456ec79d3b",
+  "capability_census": {
+    "path": ".onboarding/saint-joseph-s/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "a0456ec79d3bfbd37a5488d063bdf5947569a44a",
+  "integration_base_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "integration_semantic_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "last_error": "site build apply failed with exit code 1",
+  "next_action": "Diagnose this repository/tool failure from durable state and the authoritative permanent-tool output; do not replace the phase with assistant-authored orchestration.",
+  "origin_main_sha_at_integration_freeze": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 50,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 11,
+      "conditional_discrepancy": 50,
+      "discrepancy": 232,
+      "identity": 21,
+      "publication": 1
+    },
+    "decision_count": 316,
+    "decision_universe_sha256": "7ad5e3db5ae84d6466906aa2633a79bcd555110635ff4bea22ce803332a04e33",
+    "discrepancies_to_add": 232,
+    "existing_game_matches": 1228,
+    "new_canonical_games": 1718,
+    "plan_path": ".onboarding/saint-joseph-s/plan.json",
+    "review_path": ".onboarding/saint-joseph-s/review.csv",
+    "warning_count": 0
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "FORCE_NEW": 3,
+      "KEEP_CANONICAL": 67,
+      "LEAVE_UNRESOLVED": 11,
+      "MATCH_CANONICAL:CBBG-0077262": 1,
+      "MATCH_CANONICAL:CBBG-0087459": 1,
+      "MATCH_CANONICAL:CBBG-0120414": 1,
+      "MATCH_CANONICAL:CBBG-0125250": 1,
+      "MATCH_CANONICAL:CBBG-0136832": 1,
+      "MATCH_CANONICAL:CBBG-0136858": 1,
+      "MATCH_CANONICAL:CBBG-0136877": 1,
+      "MATCH_CANONICAL:CBBG-0158658": 1,
+      "MATCH_CANONICAL:CBBG-0160426": 1,
+      "MATCH_CANONICAL:CBBG-0162419": 1,
+      "MATCH_CANONICAL:CBBG-0163903": 1,
+      "MATCH_CANONICAL:CBBG-0163923": 1,
+      "MATCH_CANONICAL:CBBG-0164157": 1,
+      "MATCH_CANONICAL:CBBG-0190493": 1,
+      "MATCH_CANONICAL:CBBG-0193380": 1,
+      "MATCH_CANONICAL:CBBG-0195076": 1,
+      "MATCH_CANONICAL:CBBG-0197047": 1,
+      "MATCH_CANONICAL:CBBG-0200148": 1,
+      "NOT_APPLICABLE": 28,
+      "USE_SOURCE": 187,
+      "VERIFY_EXPLAINED_ADMIN_DIFFERENCE": 1
+    },
+    "approved_plan_hash_preview": "55a5ed393c36b5caee8ba1487869d848ceb1b1eafe4cc81e9b6537dbc802d2aa",
+    "decision_count": 316,
+    "path": "/tmp/remote-stage2-proposal-map-dgshy5cq/recommendation-map.json",
+    "sha256": "8bc102f7d72ce504903471dab249590d249173a1d36a43fca159dfd762273906"
+  },
+  "research_base_sha": "89327ed84827323a3f64e08ac1410ed71e442a0e",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": null,
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
