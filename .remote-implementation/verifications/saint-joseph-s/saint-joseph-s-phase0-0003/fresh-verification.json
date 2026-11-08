@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "ddd4485ff74b053e58e47087bb0442907b169e08",
+  "prepared_parent_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "prepared_tree_sha": "cf59d97106fd9191411835183561839ee751da0a",
+  "protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "saint-joseph-s-phase0-0003",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "ddd4485ff74b053e58e47087bb0442907b169e08"
+}

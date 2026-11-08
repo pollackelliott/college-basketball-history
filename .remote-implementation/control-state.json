@@ -828,11 +828,11 @@
   "current_sequence": 394,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
     "operation": "PHASE0",
     "protected_main_sha": "f812bfd3a02805df6c9124e9fa2991086aa4f99f",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "saint-joseph-s-phase0-0003",
     "school_key": "saint-joseph-s",
     "successor_manifest_path": ".remote-implementation/successors/saint-joseph-s/saint-joseph-s-phase0-0003/successor-manifest.json",
