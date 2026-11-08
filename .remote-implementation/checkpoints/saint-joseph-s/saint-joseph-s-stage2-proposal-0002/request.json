@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "saint-joseph-s-stage2-proposal-0002",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "saint-joseph-s",
+  "previous_control_state_commit": "2a3f59a02dd14182d80abe28e8bd99760bf7fc6f",
+  "previous_control_state_sha256": "34ae92650012577c5907a1fd0a9bc45e1ab58a2bbc810fbfe1311755ade06af7",
+  "expected_protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_sha": "a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/saint-joseph-s/saint-joseph-s-stage2-census-0004/checkpoint-manifest.json",
+    "sha256": "490e567dbd98501900d46d49d28eebe008bc7f9ee50dbf2e1e352ee4bdda4d94"
+  },
+  "integration_freeze_sha256": "011ad196925e0efa0900c05bd99cff14fd129c9938e924be475e2998c16afabf",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "decision_universe_sha256": "ee8c8eacf3dd2e49e5aeab6961c0bde5d5f018f0e0511e013d6f12f4b8b1dcd2",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/saint-joseph-s-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "30fb7052e43ade705c27fa6d845885d196c1befd3fde85329524ac210e092f53"
+  },
+  "creation_provenance": {
+    "origin": "Saint Joseph's serialized Implementation Stage 2 — post-Nebraska/Loras exact-map proposal rehearsal",
+    "authorization": "Existing Saint Joseph's Stage 2 phase authority persists through OWNER_GATE_1_READY. Fresh-verified Census #4 has 313 decisions, 0 blockers, 0 warnings, semantic drift PASS. Compared with prior Census #3, exactly three obsolete canonical-site decisions were removed: CBBG-0054091, CBBG-0054107, and CBBG-0054148; no decision was added and no substantive input of any surviving decision changed. Recommendation map SHA-256 30fb7052e43ade705c27fa6d845885d196c1befd3fde85329524ac210e092f53 is the prior reviewed map rebound to current main/target with only those three obsolete LEAVE_UNRESOLVED actions/bases removed. It preserves the explicit accomplishment VERIFY_EXPLAINED_ADMIN_DIFFERENCE recommendation and all other surviving historical recommendations. The rehearsal must specifically prove deterministic site build and historical coverage now pass after the Loras rekey. No Owner Gate 1 approval/fill, seal, apply, release, Preview, merge, Production, recovery, or tracked basketball mutation authority is included."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
