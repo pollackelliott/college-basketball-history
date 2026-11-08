@@ -424,15 +424,15 @@
   "active_lock_commit": "cff78f5073030bc6aaeae29766b9c5e3cb3d07a4",
   "active_lock_owner": "github-actions:42442134058:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "a0456ec79d3bfbd37a5488d063bdf5947569a44a",
+  "active_prepared_tree_sha": "ff89a1294d53c255a15e3c0cfedc813584713bab",
   "active_request_id": "saint-joseph-s-stage2-current-main-refresh-0002",
   "active_request_sha256": "a57367fb3d113388cbbff71b359dfb941b0897151611aea277fd217dc9fcddf1",
   "active_school_key": "saint-joseph-s",
   "active_target_branch": "data/saint-joseph-s-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/saint-joseph-s/saint-joseph-s-stage2-current-main-refresh-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "a53289c14bff16529cd17a77a565b18cb25aaec1d96ff168069ec2b16f89311e",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -857,5 +857,5 @@
   "lock_acquisition_request_commit": "f136a1be1f37bd49cf754fd1b8e63016d557d291",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
