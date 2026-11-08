@@ -274,6 +274,52 @@ def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     assert (out / "stage3a0-input-ledger.csv").exists()
 
 
+def test_current_stage2_opponent_key_vocabulary_is_direct_entrypoint(tmp_path):
+    checkpoint = tmp_path / "stage2-current-vocabulary.zip"
+    current_rows = []
+    for row in base_rows():
+        current = dict(row)
+        current["stage2_opponent_key"] = current.pop("opponent_key")
+        current_rows.append(current)
+    with zipfile.ZipFile(checkpoint, "w") as archive:
+        archive.writestr("structured-stage2-ledger.csv", csv_text(current_rows))
+
+    process, status, out = run_path(tmp_path, checkpoint)
+
+    assert process.returncode == 0
+    assert status["status"] == "COMPLETE"
+    assert status["entry_mode"] == "checkpoint_zip"
+    assert status["input_checkpoint_member"] == "structured-stage2-ledger.csv"
+    with (out / "stage3a0-input-ledger.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        materialized = list(csv.DictReader(handle))
+    assert [row["stage2_opponent_key"] for row in materialized] == [
+        "duke",
+        "unc",
+        "wake-forest",
+    ]
+    assert all("opponent_key" not in row for row in materialized)
+
+
+def test_current_stage2_opponent_key_blank_value_fails_closed(tmp_path):
+    checkpoint = tmp_path / "stage2-current-vocabulary-blank.zip"
+    current_rows = []
+    for row in base_rows():
+        current = dict(row)
+        current["stage2_opponent_key"] = current.pop("opponent_key")
+        current_rows.append(current)
+    current_rows[1]["stage2_opponent_key"] = ""
+    with zipfile.ZipFile(checkpoint, "w") as archive:
+        archive.writestr("structured-stage2-ledger.csv", csv_text(current_rows))
+
+    process, status, _ = run_path(tmp_path, checkpoint)
+
+    assert process.returncode == 2
+    assert status["status"] == "STAGE_3A0_INPUT_NOT_READY"
+    assert status["readiness"]["blocking_defects"]["missing_opponent_key"] == ["C-2"]
+
+
 def test_stage2_checkpoint_carries_stage4_authoring_capsule(tmp_path):
     checkpoint = tmp_path / "stage2-complete.zip"
     opponent_bytes = b"source_program_key,source_opponent_label\ncreighton,Drake\n"
