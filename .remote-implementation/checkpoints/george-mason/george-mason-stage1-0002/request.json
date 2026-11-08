@@ -1,0 +1,48 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "authorization": "Owner supplied the Control Center disposition that Issue #525 / PR #526 repaired the generic Stage 1 null-explicit locality-mapping defect on protected main 8e37c18c3572c583e7b1261270a629d97ba11b1a and explicitly authorized rerunning the complete read-only George Mason Stage 1 inventory under repaired permanent tooling using a new request ID. The immutable Research Freeze remains SHA-256 8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374 with research_base_sha d944103fd952ae254238b199bcd3471a1cfc0ecc and settled 1978-79+ scope. This request authorizes only complete read-only Stage 1 discovery/classification; it does not authorize Phase 0, Stage 2, basketball-data mutation, shared/global mutation, or any owner gate.",
+    "origin": "ChatGPT George Mason serialized Implementation lane — Control Center-authorized post-repair Stage 1 rerun"
+  },
+  "expected_protected_main_sha": "8e37c18c3572c583e7b1261270a629d97ba11b1a",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "b1da7b34b06bfd0d5e4c9508318bdbc2d5c5d3ad",
+  "previous_control_state_sha256": "2b0b43fe548536f5eab5c7972b4d509221cfb6fa13fb8f51a83a14eaf7463c27",
+  "request_id": "george-mason-stage1-0002",
+  "research_checkpoint": {
+    "research_base_sha": "d944103fd952ae254238b199bcd3471a1cfc0ecc",
+    "sha256": "8a401bcefbace7c8d540085250030a385dba058a61d0848221982f649e0cf374",
+    "transport": {
+      "commit_sha": "d1e478bc606895e27773fdd315ff7d04b86cdac2",
+      "kind": "git_base64_parts",
+      "part_count": 9,
+      "path_prefix": ".remote-implementation/transports/george-mason/george-mason-stage1-0001-final/piece-"
+    }
+  },
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "venue_reconciliation": null
+}
