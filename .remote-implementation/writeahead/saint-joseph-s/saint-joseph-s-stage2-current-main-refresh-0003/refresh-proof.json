@@ -1,0 +1,74 @@
+{
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "5c2e890014e74d8363d9f74edd524472c057e1394c489fbd55e5106978a62d7c",
+    "data/evidence/game-assertions.csv": "a34a8c444e703933685c2316b5f07960e414661964782bab33252b146d381e3b",
+    "schools/nebraska/opponents.csv": "3f79364cc18e7568d0a55cf4efef2406858afbcb2bea9f7f63c23d9254adaa0a",
+    "schools/nebraska/source-games.csv": "91cb7733e7c8daf4c81725315bdb2e6e2ab2a02659839074a457a85464a93891",
+    "site/data/teams/nebraska.json": "a239d59d22ea948bec2d58a37dc619886bc510ebc224cd52e52bfe2a41f82a8b",
+    "tests/test_remediate_source_scoped_opponent_identity.py": "69c14726eb7bd8ef8e9d2511f9bc7614c06f776736142ddce3ebea684cac615f",
+    "tools/remediate_source_scoped_opponent_identity.py": "08394a892f858d817b1c54bf7bee5adf4e9052658e35471e32676a90cf9e26de"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "schools/nebraska/opponents.csv",
+    "schools/nebraska/source-games.csv",
+    "site/data/teams/nebraska.json",
+    "tests/test_remediate_source_scoped_opponent_identity.py",
+    "tools/remediate_source_scoped_opponent_identity.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "a0456ec79d3bfbd37a5488d063bdf5947569a44a",
+  "main_changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "schools/nebraska/opponents.csv",
+    "schools/nebraska/source-games.csv",
+    "site/data/teams/nebraska.json",
+    "tests/test_remediate_source_scoped_opponent_identity.py",
+    "tools/remediate_source_scoped_opponent_identity.py"
+  ],
+  "merge_base_sha": "66c4b04b51826f054ce4d240aea398772379cc91",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "d5d2bcd37e83d70cfcf0225c1e9b5a81456e6216c06605ed62a0b8d227338cf7",
+    "notes.md": "d63186bcdd2ada359dc522af450028fe660dc16651f09a1952ff998a3d98efaa",
+    "opponents.csv": "02f7089b8c1b3f7944a6daf6fa9902213636e5c8fc3a83b30c81458268493e7a",
+    "source-games.csv": "688f248a3ff1b4f0358429e2041d888455c44c922ca4ed4ff12b0d55a418cbf9",
+    "source-notes.md": "de5241862848fe2131400c66bfb9aa8c0b28c5bb75af71b2d14b915fad5c93ef",
+    "venues.csv": "652741a2ed034111219fe1abeb4843e0cacf9b7dec80b2a58c3b2a17e686ecc7"
+  },
+  "prepared_commit_sha": "a65cc9faf25ca7c33ce9852b19d4f9d2b4dc264e",
+  "prepared_parents": [
+    "a0456ec79d3bfbd37a5488d063bdf5947569a44a",
+    "377a539979f727ad00fd6141365444d43b301f15"
+  ],
+  "prepared_tree_sha": "2a4ac2550e72be62afb50491b931876a5126c282",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "a526200e5aac914672d375c7a9654be989e8e83f45fd44fc62122d04f78717ec",
+    "data/reference/venue-names.csv": "70fb22382869563f6d7eb52afd3a3c6b7c946686757b442863678ee1cfdb54a9",
+    "schools/saint-joseph-s/conferences.csv": "d5d2bcd37e83d70cfcf0225c1e9b5a81456e6216c06605ed62a0b8d227338cf7",
+    "schools/saint-joseph-s/notes.md": "d63186bcdd2ada359dc522af450028fe660dc16651f09a1952ff998a3d98efaa",
+    "schools/saint-joseph-s/opponents.csv": "02f7089b8c1b3f7944a6daf6fa9902213636e5c8fc3a83b30c81458268493e7a",
+    "schools/saint-joseph-s/source-games.csv": "688f248a3ff1b4f0358429e2041d888455c44c922ca4ed4ff12b0d55a418cbf9",
+    "schools/saint-joseph-s/source-notes.md": "de5241862848fe2131400c66bfb9aa8c0b28c5bb75af71b2d14b915fad5c93ef",
+    "schools/saint-joseph-s/venues.csv": "652741a2ed034111219fe1abeb4843e0cacf9b7dec80b2a58c3b2a17e686ecc7"
+  },
+  "protected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "saint-joseph-s",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "c5e3bd05cca8f57a634d1bf7e1a6b097999e8e917e9da1516270d9d46e89b050",
+  "target_branch": "data/saint-joseph-s-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "schools/saint-joseph-s/conferences.csv",
+    "schools/saint-joseph-s/notes.md",
+    "schools/saint-joseph-s/opponents.csv",
+    "schools/saint-joseph-s/source-games.csv",
+    "schools/saint-joseph-s/source-notes.md",
+    "schools/saint-joseph-s/venues.csv"
+  ]
+}
