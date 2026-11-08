@@ -424,7 +424,7 @@
     "saint-joseph-s-stage2-current-main-refresh-0003"
   ],
   "active_expected_main_sha": "377a539979f727ad00fd6141365444d43b301f15",
-  "active_lock_commit": null,
+  "active_lock_commit": "13feba298c0bbb8e3b739eb973048f96cce929da",
   "active_lock_owner": "github-actions:42449955871:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
