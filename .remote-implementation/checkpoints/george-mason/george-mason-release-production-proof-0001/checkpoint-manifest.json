@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "fb5a12105c0bae066596dbc4cff2097231cb6333",
+  "merge_parent_onboarding": "adca1cb9d9a882ad68520961dd95f324d873a075",
+  "merge_sha": "059d168c6717f0c22a5d56fcb0dfb7d2f2830412",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "da1ace59606411bb732221553401f4af87e45e1cb42f92619d1f9005228cea4f",
+  "owner_gate_2_verification_sha256": "37406507f09d8a1e7b4d321266daf33209d3b62f438ad33e4eaa9807ba95f559",
+  "pr_head_sha": "adca1cb9d9a882ad68520961dd95f324d873a075",
+  "pr_number": 529,
+  "production_deployment_id": 7641588500,
+  "production_json_checked_count": 73,
+  "production_proof": true,
+  "production_proof_sha256": "54852b9fcf77caf9b0c2d687db48c4de52fe49d7752a4861fa496ab61ce357f9",
+  "protected_main_sha": "059d168c6717f0c22a5d56fcb0dfb7d2f2830412",
+  "request_id": "george-mason-release-production-proof-0001",
+  "request_sha256": "9388528e10c750822a3f42f27b94a8e1dbe4a1f7d26fd7affee441c7503b6348",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "status": "PRODUCTION_PROOF_PASS"
+}

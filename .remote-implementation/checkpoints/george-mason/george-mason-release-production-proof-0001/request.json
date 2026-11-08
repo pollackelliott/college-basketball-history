@@ -1,0 +1,48 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly approved the exact George Mason Preview with “approved. Proceed,” authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #529 head adca1cb9d9a882ad68520961dd95f324d873a075 against approved main fb5a12105c0bae066596dbc4cff2097231cb6333. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 059d168c6717f0c22a5d56fcb0dfb7d2f2830412, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority.",
+    "origin": "ChatGPT George Mason Implementation lane — packet-bound post-merge Production proof"
+  },
+  "expected_protected_main_sha": "059d168c6717f0c22a5d56fcb0dfb7d2f2830412",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "merge_sha": "059d168c6717f0c22a5d56fcb0dfb7d2f2830412",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "da1ace59606411bb732221553401f4af87e45e1cb42f92619d1f9005228cea4f"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "37406507f09d8a1e7b4d321266daf33209d3b62f438ad33e4eaa9807ba95f559"
+  },
+  "pr_number": 529,
+  "previous_control_state_commit": "62b5159766784d8b5ef39439fddcb9101e292b39",
+  "previous_control_state_sha256": "346918840db5176cd690ff7bc2ff6a4d5675c2b5b70b4af95bf6e79b3d9e0064",
+  "request_id": "george-mason-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "adca1cb9d9a882ad68520961dd95f324d873a075"
+}
