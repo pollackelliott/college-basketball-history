@@ -830,6 +830,109 @@ class StageResearchPortfolioVenueReuseTests(unittest.TestCase):
         self.assertEqual(global_rows[0]["city"], "Nassau")
         self.assertEqual(mappings[0]["resolution"], "REUSE_EXACT_KEY")
 
+    def test_reused_locality_variants_refresh_summaries_from_frozen_locality(self):
+        venue = global_venue(
+            "VEN-000084",
+            "hp-field-house",
+            "HP Field House",
+            "Kissimmee",
+            "FL",
+        )
+        locals_ = [
+            {
+                **local_venue(
+                    "Accepted frozen locality label.",
+                    city="Lake Buena Vista",
+                    state="FL",
+                ),
+                "venue_key": "hp-field-house",
+                "canonical_name": "HP Field House",
+                "games_currently_assigned": "2",
+                "first_assigned_game": "2014-11-27",
+                "last_assigned_game": "2014-11-28",
+            },
+            {
+                **local_venue(
+                    "Accepted frozen locality label.",
+                    city="Orlando",
+                    state="FL",
+                ),
+                "venue_key": "hp-field-house",
+                "canonical_name": "HP Field House",
+                "games_currently_assigned": "2",
+                "first_assigned_game": "2015-11-26",
+                "last_assigned_game": "2015-11-27",
+            },
+        ]
+        source_games = [
+            {
+                "source_game_id": "TEST-2014-001",
+                "game_date": "2014-11-27",
+                "curated_venue_name": "HP Field House",
+                "city": "Lake Buena Vista",
+                "state": "FL",
+            },
+            {
+                "source_game_id": "TEST-2015-001",
+                "game_date": "2015-11-26",
+                "curated_venue_name": "HP Field House",
+                "city": "Orlando",
+                "state": "FL",
+            },
+        ]
+        frozen_source_games = [dict(row) for row in source_games]
+        summary_match_rows = []
+
+        rebased, global_rows, _names, mappings = rebase_venues(
+            "test-school",
+            locals_,
+            [dict(venue)],
+            [],
+            source_games=source_games,
+            summary_match_rows_out=summary_match_rows,
+        )
+
+        self.assertEqual(
+            [row["resolution"] for row in mappings],
+            ["REUSE_EXACT_KEY", "REUSE_EXACT_KEY"],
+        )
+        self.assertEqual(
+            [(row["city"], row["state"]) for row in rebased],
+            [("Kissimmee", "FL"), ("Kissimmee", "FL")],
+        )
+        self.assertEqual(
+            [(row["city"], row["state"]) for row in summary_match_rows],
+            [("Lake Buena Vista", "FL"), ("Orlando", "FL")],
+        )
+        self.assertEqual(
+            [
+                (
+                    row["games_currently_assigned"],
+                    row["first_assigned_game"],
+                    row["last_assigned_game"],
+                )
+                for row in rebased
+            ],
+            [
+                ("1", "2014-11-27", "2014-11-27"),
+                ("1", "2015-11-26", "2015-11-26"),
+            ],
+        )
+
+        summary = venue_summary_consistency_report(
+            source_games,
+            rebased,
+            source_match_venues=summary_match_rows,
+        )
+        self.assertEqual(summary["status"], "PASS")
+        self.assertEqual(summary["mismatch_groups"], 0)
+        self.assertEqual(
+            [row["source_game_assignments"] for row in summary["groups"]],
+            [1, 1],
+        )
+        self.assertEqual(source_games, frozen_source_games)
+        self.assertEqual(global_rows, [venue])
+
     def test_exact_key_reuse_normalizes_us_state_name(self):
         globals_ = [
             global_venue(
