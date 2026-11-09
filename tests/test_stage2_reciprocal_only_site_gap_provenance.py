@@ -269,8 +269,8 @@ class ReciprocalOnlySiteGapProvenanceTests(unittest.TestCase):
         assertions = [
             reciprocal(),
             reciprocal(
-                program="third",
-                source_id="THIRD-1",
+                program="other",
+                source_id="OTHER-2",
                 site="SOURCE_PROGRAM_HOME",
             ),
         ]
