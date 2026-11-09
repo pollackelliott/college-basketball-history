@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "vcu-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "pr_number": 544,
+  "preview_deployment_id": 7655703933,
+  "preview_url": "https://college-basketball-history-nns96nk6m-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "vcu-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "target_branch": "data/vcu-onboarding"
+}

@@ -1,0 +1,22 @@
+{
+  "approved_plan_hash": "008612bb8da432a15b60b60c6caa4cf63760d0614a69fff19a51e72f428fbf10",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL",
+  "merge_authorized_exact_head_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "merge_authorized_pr_number": 544,
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_body_sha256": "0bd3e364457e671e27a88b3c14e32c26e556cf82f079a8b9368fec69c627b638",
+  "pr_number": 544,
+  "preview_checkpoint_sha256": "641bd7328f927c8226be85aeac11f009c53e1e61fdd2d381d5673d1b4ef59a25",
+  "preview_deployment_id": 7655703933,
+  "preview_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "preview_request_id": "vcu-release-preview-verify-0001",
+  "preview_url": "https://college-basketball-history-nns96nk6m-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "49f3082df88234ee9ce9137c4e1179821a84d8c5cb8e32acf801faa7464fd476",
+  "production_proof": false,
+  "release_manifest_sha256": "6bb104ca0a88277490d56506e7fc9c9840510aaa590e6df9506323cdfddc4cec",
+  "school_key": "vcu",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d"
+}
