@@ -1,44 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "vcu-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "vcu",
-  "previous_control_state_commit": "8f2351489c3403b6ed1af7e5ebf483f2468f979f",
-  "previous_control_state_sha256": "3ad4f2e5fd1c54e318b7d36b43935088e3801cf12e6947ee4fb40f81bd57ad4d",
+  "previous_control_state_commit": "984f03eab15483f99a5d767ba791b1538a4f7008",
+  "previous_control_state_sha256": "da53eaab360f67e6f22285a1310e234708f043d81e9356be96cfd5e9e73b61ce",
   "expected_protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
   "target_branch": "data/vcu-onboarding",
-  "research_checkpoint": {
-    "sha256": "2b1f46426fe28f1332749c3b743e783c2a1daab7524511b44a57516fb1287fef",
-    "research_base_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "1118330d7366b0c38dbf3b55472520d4dfaedee0",
-      "path_prefix": ".remote-implementation/transports/vcu/vcu-stage1-0001-final/piece-",
-      "part_count": 4
-    }
+  "target_sha": "8fdd87f3f6c2b8e900782892ad0079f3f4d94991",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-phase0-0001/successor-manifest.json",
+    "sha256": "c4d61dbaab782dbff8b9e440f9b2cd3cf3b9d28c023f8fe0f98f668a1de0e645"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-stage1-0001/checkpoint-manifest.json",
-    "sha256": "10317bb929129b2ab66eae184dddb3a83fcb9ab9c1e5954adc182211ed0d1784"
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1973-1974",
-    "basis": "FIRST_TOP_LEVEL_SEASON",
-    "intervals": "",
-    "notes": "Accepted immutable VCU Research Freeze scope is 1973-74+ with the complete frozen historical universe beginning 1973-1974 and no earlier seasons included. Preserve the exact frozen scope and reconcile the target-school scope/reference rows mechanically under current Phase 0 policy."
-  },
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
   "creation_provenance": {
-    "origin": "ChatGPT VCU serialized Implementation lane — owner-authorized complete Stage 1 through Integration Freeze bounded unit",
-    "authorization": "Owner explicitly authorized the complete bounded VCU Implementation Stage 1 unit through current-main reconciliation and INTEGRATION_FROZEN. Durable Stage 1 inventory vcu-stage1-0001 is PASS against exact protected main 7a93e99ed37d66dfe07a801c3ecec86cd9f16d99 with zero blockers, zero maintenance requirements, and zero ambiguous stops; 67 venue identities are safe current-main reuses, Franklin Street Gym is one ordinary new target-school physical identity, five conference identities reuse current authority, and 32 historical/NON_D1 alias rows have no current-program collision. This request authorizes exactly one guarded PHASE0 transaction using the immutable VCU Research Freeze, accepted 1973-74+ scope, repository global lock/write-ahead/CAS publication, and fresh independent verification to establish Integration Freeze/stable Phase 0. It does not reopen Research, authorize unrelated shared/global maintenance, Stage 2, owner gates, release, Preview, merge, recovery, or direct protected-main mutation."
+    "origin": "ChatGPT VCU serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner said Proceed after VCU Stage 1 / Integration Freeze / stable Phase 0 completed with repository validation PASS, CREATE_ONCE_PASS, fresh_runner_verification=PASS, remote_phase0_equivalence=PASS, exact onboarding successor 8fdd87f3f6c2b8e900782892ad0079f3f4d94991, Integration Freeze 9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7, and semantic snapshot 8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656. This request performs only the first bounded read-only STAGE2_CENSUS against that exact independently verified successor. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, recovery, unrelated shared/global mutation, or Owner Gate 2 authority."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
@@ -49,11 +34,11 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false,
     "venue_identity_maintenance": false
   }
 }
