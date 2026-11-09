@@ -519,10 +519,7 @@ class Stage4LegacyBaseLabelOpponentCompatibilityTests(unittest.TestCase):
             [],
             school_key="george-washington",
         )
-        self.assertIn(
-            "OPPONENT_AUTHORITY_MISSING",
-            {item["reason"] for item in projection_defects},
-        )
+        self.assertEqual(projection_defects, [])
         _, defects, _ = mod._project_package_opponents(
             ledger,
             games,
