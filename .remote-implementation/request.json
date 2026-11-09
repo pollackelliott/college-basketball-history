@@ -22,21 +22,21 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-stage2-census-0004",
-    "origin": "repository-owned Stage 2 phase continuation"
+    "origin": "VCU Implementation — Control Center-authorized one-row site-accounting recommendation-map correction",
+    "authorization": "Preserve vcu-stage2-census-0004, exact 84-decision universe, all recommendation actions, all historical dispositions, and all prior map content. Add only site_research_status=RESEARCHED_PARTIAL and the nonblank location-first research basis to DISCREPANCY-VCU-1979-80-008-SITE_TYPE. No Owner Gate 1, fill, seal, apply, Preview, merge, or release authority."
   },
   "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
   "expected_protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
   "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "36717a901885a45812c8227a6962f4f211c99ed6",
-  "previous_control_state_sha256": "0217278115a9789a14b3174441b8ac250327bb5862171ec0db1b2103dce7f96b",
+  "previous_control_state_commit": "04a21dd572215040c92e86374612e5d0c2ec7e2b",
+  "previous_control_state_sha256": "83d777a03c2b264776d4bacae1c3f2afbe7495299794f5cb46c40a523508faf4",
   "recommendation_map": {
-    "path": ".remote-implementation/requests/vcu-stage2-current-main-refresh-0002/recommendation-map.json",
-    "sha256": "8eb7e62e3440d534ce679ec40dec6e4047fd34b008d4517d089b23325fe967af"
+    "path": ".remote-implementation/requests/vcu-stage2-proposal-0003/recommendation-map.json",
+    "sha256": "24160ff7dcbc5023a01083fa89acf69fa2f5035a31445eb9f4d1df10bec1a4b8"
   },
-  "request_id": "vcu-stage2-proposal-0002",
+  "request_id": "vcu-stage2-proposal-0003",
   "schema_version": 1,
   "school_key": "vcu",
   "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
