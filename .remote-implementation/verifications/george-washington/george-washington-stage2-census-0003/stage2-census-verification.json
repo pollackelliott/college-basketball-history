@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "5e78241bf3d21bcec7d67ac6ec4e40c341f123eed51630cc6e543fccf6f0378a",
+    "implementation-stage2-status.json": "23ca92d4ad3dcb07f815ae24627585612c095c586c59db60923e2da3ea055aaf",
+    "plan.json": "b8c3a75b96c3f6d9dc857282587e88fbf6856562893f92e6e3ff08263c9093bf",
+    "review.csv": "9f4c655d90a9e7213e32827a101ada7077388fc43c640e60de185b7c4b47aecc",
+    "review.md": "6c1533b3da3e6c0926277f6c796b4d5fb614f1eebcc5d73950ef0440e5c60b5d"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "5e78241bf3d21bcec7d67ac6ec4e40c341f123eed51630cc6e543fccf6f0378a",
+    "implementation-stage2-status.json": "30af4bea7c9e27096635d3960618681db21d4e6fab4215213b0ea57820f79755",
+    "plan.json": "5fb4a73e9e2e5091ae9ef6f9ee0cf4fb6428faa22d9df668121219720514b66f",
+    "review.csv": "9f4c655d90a9e7213e32827a101ada7077388fc43c640e60de185b7c4b47aecc",
+    "review.md": "4a0f129ccee68723d7987ca17eaf8146b1cb3f4ac047fde774c4882b392ee7c2"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "george-washington-stage2-census-0003",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "53a12a657527931ca2e8146e27d71462fa9e7caf",
+  "target_tree_sha": "9dd6a446c11fa79ced92095b10bdc3dd6c94e3d8",
+  "tracked_stage2_mutation": "NONE"
+}
