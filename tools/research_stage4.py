@@ -668,6 +668,7 @@ def _projection(
             row,
             "normalized_opponent_key",
             "opponent_program_key",
+            "stage2_opponent_key",
             "opponent_key",
             "canonical_opponent_key",
         )
@@ -748,6 +749,7 @@ def _projection(
                     "source_opponent_label",
                     "source_opponent_text",
                     "source_opponent_field",
+                    "source_opponent_literal",
                 ),
                 "normalized_opponent_key": opponent_key,
                 "normalized_opponent_name": opponent_name,
@@ -888,6 +890,19 @@ def _semantic_projection_defects(
     """Independent population-level anti-loss checks for accepted source facts."""
     pairs = {
         "season_label": ("season_label", "season"),
+        "source_opponent_label": (
+            "source_opponent_label",
+            "source_opponent_text",
+            "source_opponent_field",
+            "source_opponent_literal",
+        ),
+        "normalized_opponent_key": (
+            "normalized_opponent_key",
+            "opponent_program_key",
+            "stage2_opponent_key",
+            "opponent_key",
+            "canonical_opponent_key",
+        ),
         "team_score": ("team_score", "wagner_points", "dayton_score", "source_points_for"),
         "opponent_score": ("opponent_score", "opponent_points", "source_points_against"),
         "played_result": (
