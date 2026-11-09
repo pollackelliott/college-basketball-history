@@ -33,6 +33,7 @@ from research_stage4_closeout import (
     closeout,
     first_literal,
     normalize_game_type,
+    effective_parent_game_type,
     normalize_site,
     project_administrative_status,
     project_game_id,
@@ -218,9 +219,7 @@ def _research_accounting(
         row, "curated_site_type", "stage3b_site_type",
         "stage3a_final_site_type", "stage3a_final_han", "site_type",
     ))
-    game_type = normalize_game_type(_first(
-        row, "curated_game_type", "game_type", "structured_game_type",
-    ))
+    game_type = effective_parent_game_type(row)
     accepted_venue = _first(
         row, "stage3b_physical_venue_name", "stage3b_curated_venue_name",
         "stage3a_final_physical_venue_name", "stage3a_final_venue_name",
@@ -287,8 +286,7 @@ def _research_accounting(
     if historical == "HISTORICAL_LOCATION_ACCEPTED_EXACT_BUILDING_ENRICHMENT_UNRESOLVED":
         site = normalize_site(_first(row, "curated_site_type", "stage3b_site_type",
                                     "stage3a_final_site_type", "site_type"))
-        game_type = normalize_game_type(_first(row, "curated_game_type",
-                                               "game_type", "structured_game_type"))
+        game_type = effective_parent_game_type(row)
         season = _first(row, "season_label", "season")
         city = _first(row, "curated_venue_city", "curated_city", "city")
         state = _first(row, "curated_venue_state", "curated_state", "state")
@@ -837,9 +835,7 @@ def _projection(
                     row, "event_or_tournament", "stage3a3_event_name"
                 ),
                 "source_round": source_round,
-                "curated_game_type": normalize_game_type(
-                    _first(row, "curated_game_type", "game_type", "structured_game_type")
-                ),
+                "curated_game_type": effective_parent_game_type(row),
                 "curated_postseason_round": curated_round,
                 "source_page": _first(row, "source_page", "source_pdf_page", "source_locator"),
                 "raw_text": first_literal(
@@ -867,8 +863,7 @@ def _round_projection(row: dict[str, str]) -> tuple[str, str, str]:
     earlier-round detail remains in source_round and, if source wording differs,
     in notes.  First Four -> Play-in is controlled-vocabulary normalization.
     """
-    game_type = normalize_game_type(_first(row, "curated_game_type",
-                                           "game_type", "structured_game_type"))
+    game_type = effective_parent_game_type(row)
     accepted = _first(row, "curated_postseason_round",
                       "stage3b_postseason_round", "postseason_round")
     source = _first(row, "source_round", "stage3b_source_round")
@@ -962,6 +957,15 @@ def _semantic_projection_defects(
                         continue
             defects.append({"reason": "ACCEPTED_SOURCE_FIELD_LOST",
                             "source_game_id": game_id, "field": target})
+
+    effective_game_type = effective_parent_game_type(parent)
+    if projected.get("curated_game_type", "").strip() != effective_game_type:
+        defects.append({
+            "reason": "ACCEPTED_GAME_TYPE_LOST",
+            "source_game_id": game_id,
+            "parent_value": effective_game_type,
+            "package_value": projected.get("curated_game_type", "").strip(),
+        })
 
     accepted_round = _first(parent, "curated_postseason_round",
                             "stage3b_postseason_round", "postseason_round")
