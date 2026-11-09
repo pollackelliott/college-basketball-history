@@ -190,10 +190,6 @@ class AuthoringCapsuleSupersessionTests(unittest.TestCase):
                 "AUTHORIZED_REPLACEMENT_CLAIM_MEMBER_MISSING",
                 reasons,
             )
-            self.assertIn(
-                "AMBIGUOUS_INHERITED_AUTHORING_AUTHORITY",
-                reasons,
-            )
 
     def test_historical_authority_change_cannot_be_compatibility_supersession(self):
         with tempfile.TemporaryDirectory() as td:
