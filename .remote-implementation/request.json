@@ -1,47 +1,53 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-washington-stage2-reconciliation-diagnostic-0002",
+  "request_id": "george-washington-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "george-washington",
-  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "751438f72b95abc38cb0e33c8a55fce035de85f8",
-  "previous_control_state_sha256": "776a4bb3882a8fd20c796c788561ff625e1dbe1887440368b7c39a9379e11e1b",
-  "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "previous_control_state_commit": "18b1e726b13a8ad2232a02131a4ce265b46b4cf3",
+  "previous_control_state_sha256": "3492d1d3632bc54a4cb4f07ba7fedc8243e9c10da85913cdad731686c8362984",
+  "expected_protected_main_sha": "a5d3121a439887d76188b19dd4a2d51316844384",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/george-washington/george-washington-phase0-0001/successor-manifest.json",
+    "sha256": "78c1cd4a15dbc78cde562e35bf6248fde76090ecd622af7183e956dae3cd9384"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/george-washington/george-washington-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "81499dec03584c71f5fae210f06efbdd4aeba76d552235744993bcd66998c149"
+  },
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorizes exactly one guarded George Washington STAGE2_CURRENT_MAIN_REFRESH from exact onboarding predecessor 7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd against exact protected main a5d3121a439887d76188b19dd4a2d51316844384 after independently confirming zero changed-path overlap and no protected-main changes under schools/george-washington/. Authorization covers only the refresh and its independent fresh verification. No automatic STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation is authorized; after fresh PASS, ordinary fresh census and recommendation-map maturation remain in the same Stage 2 phase."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT George Washington serialized Implementation Stage 2 - blocked proposal site-completeness diagnosis",
-    "authorization": "Owner replied Continue while the same Stage 2 proposal-rehearsal phase remains authorized. First fresh-verified diagnostic CBBG-0056182 proved one reciprocal-only neutral public gap with no GW source row and no decision touching the game. Diagnose the only other unaccounted neutral public-gap canonical game CBBG-0056185 against the identical blocked proposal to classify the complete two-row topology before considering any generic repair. No map rewrite, historical reclassification, tracked mutation, Owner Gate 1 action, recovery, current-main refresh, release, Preview, merge, Production, shared/global mutation, or protected-main mutation is authorized."
+    "origin": "George Washington serialized Implementation Stage 2 — Control Center-authorized exact current-main refresh",
+    "authorization": "Execute only the repository-owned guarded STAGE2_CURRENT_MAIN_REFRESH and independent fresh verification. Preserve the immutable Research Freeze, Integration Freeze, semantic snapshot, substantive 329-decision historical authority, and GW package bytes. Do not attach phase_continuation, auto-submit the stale recommendation map, weaken HOME safeguards, perform Owner Gate 1 actions, sealed apply, Preview, release, merge GW basketball data, Production, recovery, or unrelated shared/global mutation."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": true,
+    "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
     "venue_identity_maintenance": false
-  },
-  "target_branch": "data/george-washington-onboarding",
-  "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-proposal-0001/checkpoint-manifest.json",
-    "sha256": "e245674639df7bc0dc52ef671b38e344c1e3a870fe77d8555c2fe2416bbdd36a"
-  },
-  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
-  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
-  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
-  "recommendation_map_sha256": "72445c8c62f7594406d805cfdf7ff79bc481a722cacaa30a55c95dd7edd273fe",
-  "canonical_game_id": "CBBG-0056185"
+  }
 }
