@@ -980,11 +980,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
     "recommendation_map_sha256": "af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "george-washington-stage2-proposal-0003",
     "runtime_decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
     "school_key": "george-washington",
