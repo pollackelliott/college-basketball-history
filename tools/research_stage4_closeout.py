@@ -654,6 +654,84 @@ def normalize_game_type(value: str) -> str:
     }.get(folded, folded)
 
 
+POSTSEASON_SUBTYPE_COMPATIBILITY = {
+    "CONFERENCE_TOURNAMENT": "CONFERENCE_TOURNAMENT",
+    "NIT": "NIT",
+    "NCAA": "NCAA_TOURNAMENT",
+    "NCAA_TOURNAMENT": "NCAA_TOURNAMENT",
+    "CIT": "POSTSEASON",
+}
+_POSTSEASON_GAME_TYPES = {
+    "POSTSEASON",
+    "CONFERENCE_TOURNAMENT",
+    "NIT",
+    "NCAA_TOURNAMENT",
+}
+
+
+def effective_parent_game_type(row: dict[str, str]) -> str:
+    """Resolve accepted current/legacy game-type authority without inference.
+
+    A supported legacy ``postseason_type`` may refine only a generic
+    ``POSTSEASON`` umbrella. Specific current-schema or legacy game types retain
+    precedence when compatible. Contradictory accepted authorities fail closed.
+    """
+
+    curated_raw = row.get("curated_game_type", "").strip()
+    game_raw = _first_parent_value(row, "game_type", "structured_game_type")
+    curated = normalize_game_type(curated_raw) if curated_raw else ""
+    game = normalize_game_type(game_raw) if game_raw else ""
+
+    if curated and game and curated != game:
+        compatible_generic_pair = (
+            curated == "POSTSEASON" and game in _POSTSEASON_GAME_TYPES
+        ) or (
+            game == "POSTSEASON" and curated in _POSTSEASON_GAME_TYPES
+        )
+        if not compatible_generic_pair:
+            raise ValueError(
+                "CONTRADICTORY_ACCEPTED_GAME_TYPE: "
+                f"curated_game_type={curated_raw!r} game_type={game_raw!r}"
+            )
+
+    postseason_raw = row.get("postseason_type", "").strip()
+    subtype = ""
+    if postseason_raw:
+        key = postseason_raw.upper()
+        if key not in POSTSEASON_SUBTYPE_COMPATIBILITY:
+            raise ValueError(
+                "UNSUPPORTED_ACCEPTED_POSTSEASON_TYPE: " + postseason_raw
+            )
+        subtype = POSTSEASON_SUBTYPE_COMPATIBILITY[key]
+        for authority_name, authority in (
+            ("curated_game_type", curated),
+            ("game_type", game),
+        ):
+            if not authority or authority == "POSTSEASON":
+                continue
+            if authority != subtype:
+                raise ValueError(
+                    "CONTRADICTORY_ACCEPTED_POSTSEASON_TYPE: "
+                    f"{authority_name}={authority!r} "
+                    f"postseason_type={postseason_raw!r}"
+                )
+
+    if curated and curated != "POSTSEASON":
+        return curated
+    if game and game != "POSTSEASON":
+        return game
+
+    if subtype:
+        if curated == "POSTSEASON" or game == "POSTSEASON":
+            return subtype
+        raise ValueError(
+            "POSTSEASON_SUBTYPE_WITHOUT_ACCEPTED_POSTSEASON_UMBRELLA: "
+            + postseason_raw
+        )
+
+    return curated or game
+
+
 def explicit_opponent_home_site(row: dict[str, str]) -> tuple[str, str, str] | None:
     """Parse exact literal 'building | city, state' opponent-home source evidence.
 
@@ -875,14 +953,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
         "country": _first_parent_value(
             row, "curated_venue_country", "country", "venue_country"
         ),
-        "curated_game_type": normalize_game_type(
-            _first_parent_value(
-                row,
-                "curated_game_type",
-                "game_type",
-                "structured_game_type",
-            )
-        ),
+        "curated_game_type": effective_parent_game_type(row),
         "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"),
     }
     expected["administrative_status"], expected["administrative_note"] = (
