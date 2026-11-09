@@ -10,52 +10,39 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from george-washington-stage2-current-main-refresh-0002",
+    "authorization": "phase-persistent owner/Control Center authority inherited from george-washington-stage2-census-0003",
     "origin": "repository-owned Stage 2 phase continuation"
   },
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
   "expected_protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
   "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/george-washington/george-washington-phase0-0001/successor-manifest.json",
-    "sha256": "78c1cd4a15dbc78cde562e35bf6248fde76090ecd622af7183e956dae3cd9384"
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "ceea787def4e32d435630e6f98b62927e5ff99a3",
+  "previous_control_state_sha256": "2046634733db7e464743b3292232160c65b8f8834541e3782b9574779097454d",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/george-washington-stage2-current-main-refresh-0002/recommendation-map.json",
+    "sha256": "af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6"
   },
-  "phase_continuation": {
-    "census_request_id": "george-washington-stage2-census-0003",
-    "expected_decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "george-washington-stage2-proposal-0003",
-    "recommendation_map": {
-      "path": ".remote-implementation/requests/george-washington-stage2-current-main-refresh-0002/recommendation-map.json",
-      "sha256": "af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6"
-    }
-  },
-  "previous_control_state_commit": "75f035e4b77dcd543784da4742f7a7fe7a4735e1",
-  "previous_control_state_sha256": "08619a9c7e84167a4f6fb62ee2a69300cd692e236b2d57e3d3da73289f17a0b0",
-  "request_id": "george-washington-stage2-census-0003",
+  "request_id": "george-washington-stage2-proposal-0003",
   "schema_version": 1,
   "school_key": "george-washington",
   "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/george-washington/george-washington-stage2-current-main-refresh-0002/successor-manifest.json",
-    "sha256": "d02d7fe79c228139e7598e0763dcc72b31c7e8606e484d0d71227857fdfafa6f"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/george-washington/george-washington-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "81499dec03584c71f5fae210f06efbdd4aeba76d552235744993bcd66998c149"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "43c9a39816dc3abc27b584f8dc464a2d7d8c5e99ff60c314924c96dea25a269a"
   },
   "target_branch": "data/george-washington-onboarding",
   "target_sha": "53a12a657527931ca2e8146e27d71462fa9e7caf"
