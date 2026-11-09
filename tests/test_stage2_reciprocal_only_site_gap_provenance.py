@@ -40,9 +40,6 @@ def neutral_game(game_id="CBBG-0000001", *, game_type="REGULAR_SEASON"):
         site_state="",
         game_type=game_type,
         notes="",
-        game_date="1919-02-01",
-        team_a_score="11",
-        team_b_score="25",
     )
 
 
@@ -67,8 +64,6 @@ def reciprocal(
         city=city,
         state=state,
     )
-    row["curated_game_type"] = game_type
-    row["source_venue_name"] = ""
     return row
 
 
