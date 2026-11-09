@@ -319,7 +319,7 @@ def _descriptive_root_layout(
         return None
     if len(candidates) > 1:
         raise ValueError(
-            "Stage 3B checkpoint has multiple admissible descriptive-root "
+            "Stage 3B checkpoint has multiple terminal descriptive-root "
             "status/ledger candidates: "
             + ", ".join(status for status, _ in candidates)
         )
