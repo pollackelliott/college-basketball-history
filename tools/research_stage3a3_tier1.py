@@ -38,7 +38,7 @@ def required_site_gaps(row,fact):
     return gaps
 def season_year_bounds(r):
     label=pick(r,"season_label","season")
-    match=re.fullmatch(r"(\\d{4})-(\\d{2}|\\d{4})",label)
+    match=re.fullmatch(r"(\d{4})-(\d{2}|\d{4})",label)
     if not match:return None
     start=int(match.group(1));end_text=match.group(2)
     if len(end_text)==4:
@@ -51,7 +51,7 @@ def exact_date(r):
     explicit=pick(r,"game_date","date")
     if explicit:return explicit
     literal=pick(r,"source_date_literal")
-    match=re.fullmatch(r"(\\d{1,2})/(\\d{1,2})",literal)
+    match=re.fullmatch(r"(\d{1,2})/(\d{1,2})",literal)
     bounds=season_year_bounds(r)
     if not match or bounds is None:return ""
     month=int(match.group(1));day=int(match.group(2))
