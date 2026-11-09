@@ -154,7 +154,7 @@ def _manifest_records(
 
 
 def _stage3b_terminal_status(payload: dict[str, Any]) -> bool:
-    """Return whether a Stage 3B status is a terminal/preflight-ready state."""
+    """Return whether a Stage 3B status is terminal or explicitly preflight-ready."""
 
     if str(payload.get("stage", "")).strip().upper() != "STAGE_3B":
         return False
@@ -164,6 +164,74 @@ def _stage3b_terminal_status(payload: dict[str, Any]) -> bool:
     if status.endswith("PREFLIGHT_READY"):
         return True
     return payload.get("durable_stage3b_complete") is True
+
+
+def _stage3b_durability_preflight_blocked_status(
+    payload: dict[str, Any],
+) -> bool:
+    """Return whether an honest durability-preflight blocker may re-enter preflight.
+
+    This state is deliberately narrower than ordinary BLOCKED/IN_PROGRESS. Historical
+    Stage 3B must already be complete, durable Stage 3B must remain incomplete, Stage 4
+    must not have started, and the checkpoint must preserve explicit non-PASS preflight
+    blocker accounting. The state creates no Stage 3B completion authority.
+    """
+
+    if str(payload.get("stage", "")).strip().upper() != "STAGE_3B":
+        return False
+    if (
+        str(payload.get("status", "")).strip().upper()
+        != "STAGE3B_DURABILITY_PREFLIGHT_BLOCKED"
+    ):
+        return False
+    if payload.get("stage3b_historical_research_complete") is not True:
+        return False
+    if payload.get("stage3b_complete") is not False:
+        return False
+    if payload.get("stage4_started") is not False:
+        return False
+    if payload.get("stage4_preflight_ready") is not False:
+        return False
+
+    preflight_status = str(
+        payload.get("stage4_preflight_status", "")
+    ).strip().upper()
+    if not preflight_status or preflight_status == "PASS":
+        return False
+    if not str(payload.get("stage4_preflight_blocker", "")).strip():
+        return False
+
+    defect_count = payload.get("stage4_preflight_defect_count")
+    defect_counts = payload.get("stage4_preflight_defect_counts")
+    if (
+        isinstance(defect_count, bool)
+        or not isinstance(defect_count, int)
+        or defect_count <= 0
+        or not isinstance(defect_counts, dict)
+        or not defect_counts
+    ):
+        return False
+    classified_count = sum(
+        value
+        for value in defect_counts.values()
+        if isinstance(value, int) and not isinstance(value, bool) and value > 0
+    )
+    return classified_count == defect_count
+
+
+def stage3b_preflight_admissible_status(
+    payload: dict[str, Any],
+    *,
+    allow_durability_blocked: bool = False,
+) -> bool:
+    """Return whether a status may be inspected by Stage 4 preflight."""
+
+    if _stage3b_terminal_status(payload):
+        return True
+    return (
+        allow_durability_blocked
+        and _stage3b_durability_preflight_blocked_status(payload)
+    )
 
 
 def _manifest_names_for_layout(manifest: dict[str, Any]) -> set[str]:
@@ -177,13 +245,17 @@ def _manifest_names_for_layout(manifest: dict[str, Any]) -> set[str]:
 def _descriptive_root_layout(
     archive: zipfile.ZipFile,
     names: set[str],
+    *,
+    allow_durability_blocked: bool = False,
 ) -> dict[str, str] | None:
     """Resolve a manifested root checkpoint with descriptive Stage 3B names.
 
-    The root manifest, terminal Stage 3B status, and authoritative working
+    The root manifest, admissible Stage 3B status, and authoritative working
     ledger must all be manifested. The status owns the ledger pointer; file
-    names themselves are not treated as authority. Ambiguous terminal statuses
-    or broken/unmanifested pointers are explicit stops.
+    names themselves are not treated as authority. The optional durability-blocked
+    path exists only for explicit Stage 4 preflight re-entry and does not create
+    Stage 3B completion authority. Ambiguous statuses or broken/unmanifested
+    pointers are explicit stops.
     """
 
     if "manifest.json" not in names:
@@ -208,7 +280,10 @@ def _descriptive_root_layout(
             payload = json.loads(archive.read(status_path))
         except (json.JSONDecodeError, UnicodeDecodeError):
             continue
-        if not isinstance(payload, dict) or not _stage3b_terminal_status(payload):
+        if not isinstance(payload, dict) or not stage3b_preflight_admissible_status(
+            payload,
+            allow_durability_blocked=allow_durability_blocked,
+        ):
             continue
 
         authoritative = payload.get("authoritative_working_ledger")
@@ -261,6 +336,8 @@ def _descriptive_root_layout(
 
 def resolve_stage3b_parent_layout(
     archive: zipfile.ZipFile,
+    *,
+    allow_durability_preflight_blocked: bool = False,
 ) -> dict[str, str]:
     names = {
         name for name in archive.namelist()
@@ -285,7 +362,11 @@ def resolve_stage3b_parent_layout(
         if required.issubset(names):
             legacy_candidates.append(prefix)
 
-    descriptive = _descriptive_root_layout(archive, names)
+    descriptive = _descriptive_root_layout(
+        archive,
+        names,
+        allow_durability_blocked=allow_durability_preflight_blocked,
+    )
 
     resolved_count = (
         int(current_complete)

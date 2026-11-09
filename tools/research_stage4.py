@@ -39,6 +39,7 @@ from research_stage4_closeout import (
     explicit_opponent_home_site,
     resolve_stage3b_parent_layout,
     sha256_bytes,
+    stage3b_preflight_admissible_status,
     validate_checkpoint_manifest,
     write_json,
 )
@@ -1582,7 +1583,10 @@ def inspect_checkpoint(
     parent = checkpoint.read_bytes()
     parent_sha = sha256_bytes(parent)
     with zipfile.ZipFile(io.BytesIO(parent)) as archive:
-        layout = resolve_stage3b_parent_layout(archive)
+        layout = resolve_stage3b_parent_layout(
+            archive,
+            allow_durability_preflight_blocked=allow_preflight_ready,
+        )
         manifest = validate_checkpoint_manifest(archive, layout)
         status = json.loads(archive.read(layout["status_path"]))
         _, ledger = _csv_bytes(archive.read(layout["ledger_path"]))
@@ -1782,7 +1786,10 @@ def inspect_checkpoint(
         stage3b_status = str(status.get("status", "")).strip().upper()
         stage3b_ready_for_preflight = (
             allow_preflight_ready
-            and stage3b_status.endswith("PREFLIGHT_READY")
+            and stage3b_preflight_admissible_status(
+                status,
+                allow_durability_blocked=True,
+            )
         )
         if stage3b_status != "COMPLETE" and not stage3b_ready_for_preflight:
             result["defects"].append(

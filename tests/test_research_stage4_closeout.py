@@ -279,6 +279,8 @@ def make_legacy_parent(
 def make_descriptive_parent(
     path: Path,
     ids=("G1",),
+    *,
+    status_value="COMPLETE",
 ):
     current = path.with_name(path.stem + "-current.zip")
     make_parent(current, ids)
@@ -293,8 +295,8 @@ def make_descriptive_parent(
         {
             **prior_status,
             "stage": "STAGE_3B",
-            "status": "COMPLETE",
-            "durable_stage3b_complete": True,
+            "status": status_value,
+            "durable_stage3b_complete": status_value == "COMPLETE",
             "authoritative_working_ledger": {
                 "path": ledger_name,
                 "rows": len(ids),
@@ -303,6 +305,21 @@ def make_descriptive_parent(
         },
         sort_keys=True,
     ).encode()
+    if status_value == "STAGE3B_DURABILITY_PREFLIGHT_BLOCKED":
+        blocked_payload = json.loads(status)
+        blocked_payload.update(
+            {
+                "stage3b_historical_research_complete": True,
+                "stage3b_complete": False,
+                "stage4_started": False,
+                "stage4_preflight_ready": False,
+                "stage4_preflight_status": "STAGE4_AUTHORING_INPUT_INVALID",
+                "stage4_preflight_blocker": "GENERIC_COMPATIBILITY_BLOCKER",
+                "stage4_preflight_defect_count": 1,
+                "stage4_preflight_defect_counts": {"TEST_DEFECT": 1},
+            }
+        )
+        status = json.dumps(blocked_payload, sort_keys=True).encode()
     logical_members = {
         ledger_name: ledger,
         status_name: status,
@@ -493,6 +510,29 @@ class Stage4CloseoutTests(unittest.TestCase):
                 "Old College Alias",
                 rows[0]["representative_source_labels"],
             )
+
+    def test_durability_blocked_descriptive_parent_is_not_closeout_authority(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            package = root / "pkg"
+            make_package(package)
+            parent = root / "blocked-parent.zip"
+            make_descriptive_parent(
+                parent,
+                status_value="STAGE3B_DURABILITY_PREFLIGHT_BLOCKED",
+            )
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "does not match the current root layout",
+            ):
+                mod.closeout(
+                    "test",
+                    package,
+                    parent,
+                    "b" * 40,
+                    root / "out",
+                )
 
     def test_descriptive_root_parent_is_accepted_unchanged(self):
         with tempfile.TemporaryDirectory() as temporary:
