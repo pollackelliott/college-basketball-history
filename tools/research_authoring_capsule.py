@@ -136,6 +136,227 @@ def _declared_carried_hashes_from_payload(
     return found
 
 
+def _manifested_members(archive: zipfile.ZipFile) -> set[str]:
+    """Return the authoritative checkpoint-manifest member population when present."""
+
+    candidates = [
+        name
+        for name in archive.namelist()
+        if Path(name).name.lower() in {"manifest.json", "checkpoint-manifest.json"}
+    ]
+    if not candidates:
+        return set()
+    if len(candidates) > 1:
+        root = [name for name in candidates if "/" not in name.strip("/")]
+        if len(root) == 1:
+            candidates = root
+        else:
+            return set()
+    try:
+        payload = json.loads(archive.read(candidates[0]))
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return set()
+    files = payload.get("files", {})
+    if isinstance(files, list):
+        return {
+            str(item.get("name", ""))
+            for item in files
+            if isinstance(item, dict) and item.get("name")
+        }
+    if isinstance(files, dict):
+        return {str(name) for name in files}
+    return set()
+
+
+def _valid_sha256(value: str) -> bool:
+    value = str(value or "").strip().lower()
+    return len(value) == 64 and all(ch in "0123456789abcdef" for ch in value)
+
+
+def _replacement_records_from_payload(
+    payload: Any,
+    *,
+    source_member: str,
+) -> list[dict[str, Any]]:
+    """Extract generic and accepted legacy authoring-replacement records."""
+
+    if not isinstance(payload, dict):
+        return []
+
+    records: list[dict[str, Any]] = []
+    generic = payload.get("stage4_authoring_replacements")
+    generic_items: list[dict[str, Any]] = []
+    if isinstance(generic, list):
+        generic_items = [item for item in generic if isinstance(item, dict)]
+    elif isinstance(generic, dict):
+        for name, metadata in generic.items():
+            if not isinstance(metadata, dict):
+                continue
+            item = dict(metadata)
+            item.setdefault("member", AUTHORING_DIR + "/" + str(name))
+            generic_items.append(item)
+    for item in generic_items:
+        records.append(
+            {
+                "source_member": source_member,
+                "member": str(item.get("member", "")).strip(),
+                "old_sha256": str(
+                    item.get("old_sha256", item.get("old_inherited_sha256", ""))
+                ).strip().lower(),
+                "new_sha256": str(
+                    item.get("new_sha256", item.get("new_authorized_sha256", ""))
+                ).strip().lower(),
+                "old_claim_member": str(item.get("old_claim_member", "")).strip(),
+                "new_claim_member": str(item.get("new_claim_member", "")).strip(),
+                "historical_authority_changed": item.get(
+                    "historical_authority_changed"
+                ),
+            }
+        )
+
+    legacy = payload.get("authoring_provenance_population")
+    if (
+        isinstance(legacy, dict)
+        and str(legacy.get("classification", "")).strip()
+        == "AUTHORIZED_STAGE3B_CAPSULE_REPLACEMENT_VS_INHERITED_STAGE3A4_BYTE_PRESERVATION_CLAIM"
+    ):
+        records.append(
+            {
+                "source_member": source_member,
+                "member": str(legacy.get("member", "")).strip(),
+                "old_sha256": str(
+                    legacy.get("old_inherited_sha256", "")
+                ).strip().lower(),
+                "new_sha256": str(
+                    legacy.get("new_authorized_sha256", "")
+                ).strip().lower(),
+                "old_claim_member": str(
+                    legacy.get("old_claim_member", "")
+                ).strip(),
+                "new_claim_member": str(
+                    legacy.get("new_claim_member", "")
+                ).strip(),
+                "historical_authority_changed": legacy.get(
+                    "historical_authority_changed"
+                ),
+            }
+        )
+    return records
+
+
+def authorized_authoring_replacements(
+    archive: zipfile.ZipFile,
+) -> tuple[dict[str, list[dict[str, Any]]], list[dict[str, Any]]]:
+    """Validate manifested, hash-bound authoring-member replacement claims.
+
+    This is provenance reconciliation only. It never supplies missing bytes or
+    changes historical authority. Invalid replacement records remain explicit
+    defects and cannot suppress ordinary continuity checks.
+    """
+
+    manifested = _manifested_members(archive)
+    replacements: dict[str, list[dict[str, Any]]] = {}
+    defects: list[dict[str, Any]] = []
+
+    for source_member in sorted(archive.namelist()):
+        if source_member.endswith("/") or not source_member.lower().endswith(".json"):
+            continue
+        try:
+            payload = json.loads(archive.read(source_member))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        for record in _replacement_records_from_payload(
+            payload, source_member=source_member
+        ):
+            member = record["member"]
+            basename = _basename(member)
+            reason: str | None = None
+            if source_member not in manifested:
+                reason = "AUTHORIZING_RECORD_NOT_MANIFESTED"
+            elif (
+                basename not in AUTHORING_BASENAMES
+                or member.replace("\\", "/").rstrip("/")
+                != AUTHORING_DIR + "/" + basename
+            ):
+                reason = "UNKNOWN_AUTHORIZED_AUTHORING_MEMBER"
+            elif not _valid_sha256(record["old_sha256"]) or not _valid_sha256(
+                record["new_sha256"]
+            ):
+                reason = "INVALID_AUTHORIZED_AUTHORING_REPLACEMENT_HASH"
+            elif record["old_sha256"] == record["new_sha256"]:
+                reason = "NOOP_AUTHORIZED_AUTHORING_REPLACEMENT"
+            elif record["historical_authority_changed"] is not False:
+                reason = "AUTHORIZED_REPLACEMENT_CHANGED_HISTORICAL_AUTHORITY"
+            elif (
+                not record["old_claim_member"]
+                or not record["new_claim_member"]
+                or record["old_claim_member"] not in archive.namelist()
+                or record["new_claim_member"] not in archive.namelist()
+            ):
+                reason = "AUTHORIZED_REPLACEMENT_CLAIM_MEMBER_MISSING"
+            elif (
+                record["old_claim_member"] not in manifested
+                or record["new_claim_member"] not in manifested
+            ):
+                reason = "AUTHORIZED_REPLACEMENT_CLAIM_MEMBER_NOT_MANIFESTED"
+            else:
+                old_payload = json.loads(archive.read(record["old_claim_member"]))
+                new_payload = json.loads(archive.read(record["new_claim_member"]))
+                old_claims = _declared_carried_hashes_from_payload(old_payload)
+                new_claims = _declared_carried_hashes_from_payload(new_payload)
+                if record["old_sha256"] not in old_claims.get(basename, set()):
+                    reason = "AUTHORIZED_REPLACEMENT_OLD_CLAIM_MISMATCH"
+                elif record["new_sha256"] not in new_claims.get(basename, set()):
+                    reason = "AUTHORIZED_REPLACEMENT_NEW_CLAIM_MISMATCH"
+
+            if reason:
+                defects.append(
+                    {
+                        "reason": reason,
+                        "name": member or AUTHORING_DIR + "/" + basename,
+                        "authorization_member": source_member,
+                    }
+                )
+                continue
+            replacements.setdefault(basename, []).append(record)
+    return replacements, defects
+
+
+def _replacement_chain_explains_hashes(
+    hashes: set[str],
+    replacements: list[dict[str, Any]],
+    *,
+    actual_sha256: str,
+) -> bool:
+    if len(hashes) <= 1:
+        return True
+    edges = {(r["old_sha256"], r["new_sha256"]) for r in replacements}
+    if len(edges) != len(replacements):
+        return False
+    sources = {old for old, _ in edges}
+    targets = {new for _, new in edges}
+    nodes = sources | targets
+    if nodes != hashes or len(edges) != len(hashes) - 1:
+        return False
+    if any(sum(1 for old, _ in edges if old == node) > 1 for node in nodes):
+        return False
+    if any(sum(1 for _, new in edges if new == node) > 1 for node in nodes):
+        return False
+    starts = hashes - targets
+    ends = hashes - sources
+    if len(starts) != 1 or ends != {actual_sha256}:
+        return False
+    current = next(iter(starts))
+    visited = {current}
+    while current != actual_sha256:
+        next_values = [new for old, new in edges if old == current]
+        if len(next_values) != 1 or next_values[0] in visited:
+            return False
+        current = next_values[0]
+        visited.add(current)
+    return visited == hashes
+
+
 def historical_carry_claims(
     archive: zipfile.ZipFile,
 ) -> dict[str, list[dict[str, str]]]:
@@ -169,16 +390,30 @@ def checkpoint_continuity_defects(
 ) -> list[dict[str, Any]]:
     """Report inherited authoring authority that disappeared from a checkpoint.
 
-    Missing bytes are never reconstructed.  Multiple historical hashes for one
-    basename are surfaced as an ambiguity instead of choosing one.
+    Missing bytes are never reconstructed. Multiple historical hashes remain
+    ambiguous unless one exact manifested, hash-bound, no-historical-change
+    replacement chain explains every observed hash and terminates at the
+    current authoring bytes.
     """
 
     actual = discover_authoring_members(archive)
     claims = historical_carry_claims(archive)
-    defects: list[dict[str, Any]] = []
+    replacements, replacement_defects = authorized_authoring_replacements(archive)
+    defects: list[dict[str, Any]] = list(replacement_defects)
     for basename, records in sorted(claims.items()):
         hashes = sorted({record["sha256"] for record in records})
         if len(hashes) > 1:
+            actual_hash = str(actual.get(basename, {}).get("sha256", ""))
+            if (
+                actual_hash
+                and not replacement_defects
+                and _replacement_chain_explains_hashes(
+                    set(hashes),
+                    replacements.get(basename, []),
+                    actual_sha256=actual_hash,
+                )
+            ):
+                continue
             defects.append(
                 {
                     "reason": "AMBIGUOUS_INHERITED_AUTHORING_AUTHORITY",
