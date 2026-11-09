@@ -1,0 +1,61 @@
+{
+  "approved_plan_hash_preview": "20408499a2687f2c4883bd82da7ec751e768318943bed11feac853bfa7525ad3",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-stage2-preseal-rehearsal-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "5f46d5eb730d3feb37c89ad1945e8163233849c962e7faa732ccfd3552d438f6",
+  "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+  "equivalence_sha256": "ff7192f64ace955d7267436a9cda1345acd74457278a8ffc995b7f480850483d",
+  "expected_protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "filled_review_sha256": "4fb7c200ea99b33b4fe029febb229614f78f72a8a3afa3d07a586fcef801a79a",
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "c70de12871e3179519357c78d0143337df982d5937140c95e27f7892acdd825d",
+  "phase_continuation": {
+    "apply_request_id": "vcu-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "vcu-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "vcu-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "458cf09cbb6d888d4d4de2058d9df1bb30d691c8",
+  "previous_control_state_sha256": "6c6ab8f0d800b9c96171c3cd4a8add712238a05b4a153ccbdbf82a15adcfedef",
+  "recommendation_map_sha256": "24160ff7dcbc5023a01083fa89acf69fa2f5035a31445eb9f4d1df10bec1a4b8",
+  "request_id": "vcu-stage2-gate1-seal-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "fe2a3b8ed9c1789aee87becbe6293b14ca52d548c2dabf4840d3a179ea56ea6c"
+  },
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "e14560033e0084aadd5f674b6e5c81f7521dab25e35663bf27c2a4627786fb19"
+  },
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "5e07c03ba8b92e609b9922aa9dad85651d21ab62"
+}
