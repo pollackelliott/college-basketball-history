@@ -724,16 +724,19 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "canonical_opponent_key",
         ),
         "team_score": _first_parent_value(
-            row, "team_score", "wagner_points", "dayton_score"
+            row, "team_score", "wagner_points", "dayton_score", "source_points_for"
         ),
-        "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points"),
+        "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points", "source_points_against"),
         "played_result": _first_parent_value(
             row, "played_result", "on_court_result", "source_result", "result"
         ),
         "overtime_periods": _project_overtime(
-            _first_parent_value(row, "overtime_periods", "overtime")
+            _first_parent_value(row, "overtime_periods", "overtime", "source_overtime_token")
         ),
         "curated_site_type": normalize_site(site),
+        "source_venue_name": _first_parent_value(
+            row, "source_venue_name", "source_venue_token"
+        ),
         "venue_present": "1" if venue.strip() else "0",
         "venue_key": venue_key,
         "city": city.strip(),
@@ -749,7 +752,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
                 "structured_game_type",
             )
         ),
-        "raw_text": first_literal(row, "raw_text", "source_raw_text"),
+        "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal"),
     }
     if parsed_source_site and not original_venue_present:
         # Guard the exact source building, not just venue presence.
@@ -792,10 +795,10 @@ def _legacy_score_orientation_equivalent(
     """
 
     parent_team = _first_parent_value(
-        parent_row, "team_score", "wagner_points", "dayton_score"
+        parent_row, "team_score", "wagner_points", "dayton_score", "source_points_for"
     )
     parent_opponent = _first_parent_value(
-        parent_row, "opponent_score", "opponent_points"
+        parent_row, "opponent_score", "opponent_points", "source_points_against"
     )
     parent_result = _first_parent_value(
         parent_row, "played_result", "on_court_result", "source_result", "result"
@@ -825,7 +828,7 @@ def _legacy_score_orientation_equivalent(
     if not legacy_topology:
         return False
 
-    raw_text = first_literal(parent_row, "raw_text", "source_raw_text")
+    raw_text = first_literal(parent_row, "raw_text", "source_raw_text", "source_entry_literal")
     literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
     literal_pairs = [
         (int(match.group("a")), int(match.group("b")))
@@ -980,6 +983,7 @@ def compare_parent_semantics(
             "opponent_score": actual_row.get("opponent_score", "").strip(),
             "played_result": actual_row.get("played_result", "").strip(),
             "curated_venue_name": actual_row.get("curated_venue_name", "").strip(),
+            "source_venue_name": actual_row.get("source_venue_name", "").strip(),
             "overtime_periods": actual_row.get("overtime_periods", "").strip(),
             "curated_site_type": normalize_site(
                 actual_row.get("curated_site_type", "")

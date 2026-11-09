@@ -187,5 +187,132 @@ class Stage4LegacyProjectionCompatibilityTests(unittest.TestCase):
         self.assertEqual(game["played_result"], "L")
 
 
+def durable_stage3b_row(
+    game_id="DURABLE",
+    *,
+    points_for="58",
+    points_against="65",
+    result="L",
+):
+    return {
+        "research_game_id": game_id,
+        "source_program_key": "test",
+        "season_label": "2012-2013",
+        "game_date": "2012-11-24",
+        "source_opponent_label": "Old College",
+        "opponent_key": "old-college",
+        "source_points_for": points_for,
+        "source_points_against": points_against,
+        "played_result": result,
+        "source_overtime_token": "2OT",
+        "source_venue_token": "RC",
+        "source_entry_literal": "Nov. 24 vs Old College& L 65-58 2OT",
+        "game_type": "REGULAR_SEASON",
+        "site_type": "NEUTRAL",
+    }
+
+
+class Stage4DurableStage3BSchemaCompatibilityTests(unittest.TestCase):
+    def test_current_durable_aliases_project_without_semantic_loss(self):
+        row = durable_stage3b_row()
+        games, defects = mod._projection(
+            [row],
+            opponent_rows(),
+            [],
+            school_key="test",
+        )
+
+        self.assertEqual(defects, [])
+        self.assertEqual(len(games), 1)
+        game = games[0]
+        self.assertEqual(game["team_score"], "58")
+        self.assertEqual(game["opponent_score"], "65")
+        self.assertEqual(game["played_result"], "L")
+        self.assertEqual(game["overtime_periods"], "2")
+        self.assertEqual(game["source_venue_name"], "RC")
+        self.assertEqual(
+            game["raw_text"],
+            "Nov. 24 vs Old College& L 65-58 2OT",
+        )
+        self.assertEqual(game["curated_venue_name"], "")
+
+    def test_preflight_anti_loss_checks_current_durable_aliases(self):
+        row = durable_stage3b_row()
+        games, defects = mod._projection(
+            [row],
+            opponent_rows(),
+            [],
+            school_key="test",
+        )
+        self.assertEqual(defects, [])
+        projected = dict(games[0])
+
+        expected_fields = {
+            "team_score",
+            "opponent_score",
+            "overtime_periods",
+            "source_venue_name",
+            "raw_text",
+        }
+        for field in expected_fields:
+            with self.subTest(field=field):
+                candidate = dict(projected)
+                candidate[field] = ""
+                losses = mod._semantic_projection_defects(row, candidate)
+                self.assertIn(
+                    field,
+                    {
+                        item["field"]
+                        for item in losses
+                        if item["reason"] == "ACCEPTED_SOURCE_FIELD_LOST"
+                    },
+                )
+
+    def test_current_schema_score_result_inconsistency_fails_closed(self):
+        row = durable_stage3b_row(
+            game_id="BAD-CURRENT",
+            points_for="65",
+            points_against="58",
+            result="L",
+        )
+        games, defects = mod._projection(
+            [row],
+            opponent_rows(),
+            [],
+            school_key="test",
+        )
+
+        self.assertEqual(
+            [item["reason"] for item in defects],
+            ["LEGACY_SCORE_ORIENTATION_AMBIGUOUS"],
+        )
+        self.assertEqual(
+            (games[0]["team_score"], games[0]["opponent_score"]),
+            ("65", "58"),
+        )
+        self.assertEqual(games[0]["played_result"], "L")
+
+    def test_corrected_current_schema_score_result_projects_normally(self):
+        row = durable_stage3b_row(
+            game_id="CORRECTED-CURRENT",
+            points_for="58",
+            points_against="65",
+            result="L",
+        )
+        games, defects = mod._projection(
+            [row],
+            opponent_rows(),
+            [],
+            school_key="test",
+        )
+
+        self.assertEqual(defects, [])
+        self.assertEqual(
+            (games[0]["team_score"], games[0]["opponent_score"]),
+            ("58", "65"),
+        )
+        self.assertEqual(games[0]["played_result"], "L")
+
+
 if __name__ == "__main__":
     unittest.main()

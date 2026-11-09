@@ -1606,6 +1606,7 @@ class Stage4CloseoutTests(unittest.TestCase):
             "team_score": "70",
             "opponent_score": "55",
             "curated_site_type": "OPPONENT_HOME",
+            "source_venue_name": "John E. Glaser Arena | Philadelphia, Pa.",
             "curated_venue_name": "John E. Glaser Arena",
             "city": "Philadelphia",
             "state": "PA",

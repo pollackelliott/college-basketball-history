@@ -434,8 +434,8 @@ def _legacy_score_projection(
     played result remain unchanged; only package-field orientation changes.
     """
 
-    team = _first(row, "team_score", "wagner_points", "dayton_score")
-    opponent = _first(row, "opponent_score", "opponent_points")
+    team = _first(row, "team_score", "wagner_points", "dayton_score", "source_points_for")
+    opponent = _first(row, "opponent_score", "opponent_points", "source_points_against")
     result = _first(
         row, "played_result", "on_court_result", "source_result", "result"
     ).upper()
@@ -455,7 +455,7 @@ def _legacy_score_projection(
         and not row.get("season_label", "").strip()
         and not row.get("source_program_key", "").strip()
     )
-    raw_text = first_literal(row, "raw_text", "source_raw_text")
+    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal")
     literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
     literal_pairs = [
         (int(match.group("a")), int(match.group("b")))
@@ -729,7 +729,7 @@ def _projection(
                     "result",
                 ),
                 "overtime_periods": _project_overtime(
-                    _first(row, "overtime_periods", "overtime")
+                    _first(row, "overtime_periods", "overtime", "source_overtime_token")
                 ),
                 "source_site_candidate": _first(
                     row, "source_site_candidate", "source_site_token"
@@ -744,7 +744,7 @@ def _projection(
                         "site_type",
                     )
                 ),
-                "source_venue_name": _first(row, "source_venue_name"),
+                "source_venue_name": _first(row, "source_venue_name", "source_venue_token"),
                 "curated_venue_name": _first(
                     row,
                     "stage3b_physical_venue_name",
@@ -807,7 +807,7 @@ def _projection(
                 "curated_postseason_round": curated_round,
                 "source_page": _first(row, "source_page", "source_pdf_page", "source_locator"),
                 "raw_text": first_literal(
-                    row, "raw_text", "source_raw_text"
+                    row, "raw_text", "source_raw_text", "source_entry_literal"
                 ),
                 "normalization_status": _first(row, "normalization_status")
                 or "RESEARCH_ACCEPTED",
@@ -856,8 +856,8 @@ def _semantic_projection_defects(
     """Independent population-level anti-loss checks for accepted source facts."""
     pairs = {
         "season_label": ("season_label", "season"),
-        "team_score": ("team_score", "wagner_points", "dayton_score"),
-        "opponent_score": ("opponent_score", "opponent_points"),
+        "team_score": ("team_score", "wagner_points", "dayton_score", "source_points_for"),
+        "opponent_score": ("opponent_score", "opponent_points", "source_points_against"),
         "played_result": (
             "played_result",
             "on_court_result",
@@ -865,21 +865,33 @@ def _semantic_projection_defects(
             "result",
         ),
         "source_page": ("source_page", "source_pdf_page", "source_locator"),
+        "overtime_periods": ("overtime_periods", "overtime", "source_overtime_token"),
+        "source_venue_name": ("source_venue_name", "source_venue_token"),
+        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal"),
     }
     defects = []
     game_id = projected["source_game_id"]
     for target, aliases in pairs.items():
-        original = _first(parent, *aliases)
+        original = (
+            first_literal(parent, *aliases)
+            if target == "raw_text"
+            else _first(parent, *aliases)
+        )
         if not original:
             continue
-        expected = project_season_label(original) if target == "season_label" else original
+        if target == "season_label":
+            expected = project_season_label(original)
+        elif target == "overtime_periods":
+            expected = _project_overtime(original)
+        else:
+            expected = original
         if projected[target] != expected:
             if target in {"team_score", "opponent_score"}:
                 original_team = _first(
-                    parent, "team_score", "wagner_points", "dayton_score"
+                    parent, "team_score", "wagner_points", "dayton_score", "source_points_for"
                 )
                 original_opponent = _first(
-                    parent, "opponent_score", "opponent_points"
+                    parent, "opponent_score", "opponent_points", "source_points_against"
                 )
                 projected_team = projected.get("team_score", "").strip()
                 projected_opponent = projected.get("opponent_score", "").strip()
