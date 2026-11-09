@@ -10,12 +10,105 @@ sys.path.insert(0, str(TOOLS))
 
 from onboarding_plan import (  # noqa: E402
     _record_reconciled_unresolved_home_venue_markers,
+    _retire_target_home_exception_markers_after_site_reconciliation,
     _sync_explicit_source_site_patch_to_canonical,
     _sync_site_metadata_from_source,
 )
 
 
 class ReconciliationHomeExceptionPropagationTests(unittest.TestCase):
+    def test_exact_gw_away_reconciliations_retire_stale_home_markers(self):
+        cases = [
+            (
+                "CBBG-0092679",
+                "duke",
+                "george-washington",
+                "TEAM_A_HOME",
+                "GW-1949-50-019",
+            ),
+            (
+                "CBBG-0164244",
+                "george-washington",
+                "georgetown",
+                "TEAM_B_HOME",
+                "GW-1948-49-011",
+            ),
+        ]
+        for game_id, team_a, team_b, site_type, source_game_id in cases:
+            with self.subTest(game_id=game_id):
+                canonical = {
+                    "canonical_game_id": game_id,
+                    "team_a_key": team_a,
+                    "team_b_key": team_b,
+                    "site_type": site_type,
+                    "notes": (
+                        "[RESEARCHED_UNRESOLVED_HOME_VENUE "
+                        f"source=george-washington/{source_game_id}]; "
+                        "[RESEARCHED_UNRESOLVED_HOME_VENUE "
+                        "source=other/OTHER-1]; durable unrelated note"
+                    ),
+                }
+
+                retired = (
+                    _retire_target_home_exception_markers_after_site_reconciliation(
+                        "george-washington",
+                        canonical,
+                    )
+                )
+
+                self.assertEqual(retired, 1)
+                self.assertNotIn(
+                    "source=george-washington/",
+                    canonical["notes"],
+                )
+                self.assertIn("source=other/OTHER-1", canonical["notes"])
+                self.assertIn("durable unrelated note", canonical["notes"])
+
+    def test_nonhome_reconciliation_retires_all_target_home_marker_families(self):
+        canonical = {
+            "team_a_key": "other",
+            "team_b_key": "test",
+            "site_type": "TEAM_A_HOME",
+            "notes": (
+                "[RESEARCHED_UNRESOLVED_HOME_VENUE source=test/TEST-1]; "
+                "[RECONCILED_UNRESOLVED_HOME_VENUE "
+                "source=test/TEST-1 reciprocal=other/OTHER-1]; "
+                "[RECONCILED_UNKNOWN_SITE_HOME_VENUE "
+                "source=test/TEST-2 reciprocal=other/OTHER-2]; "
+                "[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE "
+                "target=test reciprocal=other/OTHER-3]; "
+                "[RESEARCHED_UNRESOLVED_HOME_VENUE source=other/OTHER-4]"
+            ),
+        }
+
+        retired = _retire_target_home_exception_markers_after_site_reconciliation(
+            "test",
+            canonical,
+        )
+
+        self.assertEqual(retired, 4)
+        self.assertEqual(
+            canonical["notes"],
+            "[RESEARCHED_UNRESOLVED_HOME_VENUE source=other/OTHER-4]",
+        )
+
+    def test_target_home_reconciliation_preserves_home_marker(self):
+        marker = "[RESEARCHED_UNRESOLVED_HOME_VENUE source=test/TEST-1]"
+        canonical = {
+            "team_a_key": "test",
+            "team_b_key": "other",
+            "site_type": "TEAM_A_HOME",
+            "notes": marker,
+        }
+
+        retired = _retire_target_home_exception_markers_after_site_reconciliation(
+            "test",
+            canonical,
+        )
+
+        self.assertEqual(retired, 0)
+        self.assertEqual(canonical["notes"], marker)
+
     def test_use_source_home_sync_propagates_researched_unresolved_marker(self):
         source = {
             "source_program_key": "kansas-state",
