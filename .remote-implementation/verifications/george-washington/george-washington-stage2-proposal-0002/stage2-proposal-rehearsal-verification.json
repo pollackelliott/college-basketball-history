@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "cf70585d63ef98f052bdc1bbe5541e34cecefea6992d29de509562509865c5de",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1f019b90abbeedbbd34e491d07193e6ff9aff0595f633eadc29dc093dfcd35cc",
+    "implementation-stage2-status.json": "2968eb6b6f687e5b96b6198cccc74139d05b56494c963b7261f72314811e4065",
+    "last-rehearsal-site-gate.json": "1d7513719a828f3fedfae601791b8f9a6b2e56296431147259d9a152641e2af2",
+    "plan.json": "81a45299c8342498fb0007c76ae43314e84131bac94cd7618a81048c9517a861",
+    "review.csv": "9f4c655d90a9e7213e32827a101ada7077388fc43c640e60de185b7c4b47aecc",
+    "review.md": "2e5ee0e5936fe817b0030400836f67a74b8c026af3a67d5fa7a41dee39658ea3"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1f019b90abbeedbbd34e491d07193e6ff9aff0595f633eadc29dc093dfcd35cc",
+    "implementation-stage2-status.json": "e7ee7c5f4f95266fac1b37d46f9ee67fb8ee6ff4e8449b1373f6282a598cbb3b",
+    "last-rehearsal-site-gate.json": "1d7513719a828f3fedfae601791b8f9a6b2e56296431147259d9a152641e2af2",
+    "plan.json": "b4d4d7dbc5a7ced28b867d407139f143a2f93511e302d68848d6f9e458e6cd54",
+    "review.csv": "9f4c655d90a9e7213e32827a101ada7077388fc43c640e60de185b7c4b47aecc",
+    "review.md": "b1c62a8e250ef947cda1018323a1460b1f8350690316df518bbb0d52cea44ac0"
+  },
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+    "runtime_decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "a5d3121a439887d76188b19dd4a2d51316844384",
+  "recommendation_map_sha256": "af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "george-washington-stage2-proposal-0002",
+  "runtime_decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "b13701602f1eb240ba6fc15d4d5e267d017cac22",
+  "target_tree_sha": "e58b75ff29664be884f20746523923f48ca58b1b",
+  "tracked_stage2_mutation": "NONE"
+}
