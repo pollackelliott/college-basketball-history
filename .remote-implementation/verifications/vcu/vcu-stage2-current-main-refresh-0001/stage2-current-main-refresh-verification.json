@@ -1,0 +1,50 @@
+{
+  "changed_file_sha256": {
+    "tests/test_research_authoring_capsule_supersession.py": "aa70d2d42d70a3473ba24f365d065790a5db67235c0df21c141b808f3c2795c8",
+    "tests/test_research_stage4.py": "74d5ab6a992f510173a70713c658760fae7db608f9c3cb7cf6ac4e79f8a28685",
+    "tests/test_research_stage4_closeout_legacy_score.py": "7d0937bec1d99a4a8272dea9376f674a4864982d25c16d41cb05558a639dc907",
+    "tests/test_research_stage4_legacy_projection.py": "f1559edfc3cf251c1110bd6dd5d5d2ec73480e2a01bdd3d6989aab2397b9df4f",
+    "tools/research_authoring_capsule.py": "6445f535310b595adb106e1f149ccc8ae48e002e2f96775845dbfc9c27fb70cc",
+    "tools/research_stage4.py": "a405233cfdcbcb02257820c2af4fe070cbff1d89ca4c3714c355945e6e6d7fca",
+    "tools/research_stage4_closeout.py": "07eadd2f6438640f968ad5c06f9b0586e5a97ea7c51af9ab369592fb8f77abb4"
+  },
+  "changed_paths": [
+    "tests/test_research_authoring_capsule_supersession.py",
+    "tests/test_research_stage4.py",
+    "tests/test_research_stage4_closeout_legacy_score.py",
+    "tests/test_research_stage4_legacy_projection.py",
+    "tools/research_authoring_capsule.py",
+    "tools/research_stage4.py",
+    "tools/research_stage4_closeout.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "observed_live_main_sha": "a5a66225b06c4492b4e3341731c12e75c6acb94b",
+  "package_member_sha256": {
+    "conferences.csv": "8941e06e7ac83d071a7c934394b338b87d82f86be96e9a5b70b30df85ccdaf09",
+    "notes.md": "f836a5c594f682ed924ab90c933b75d26c6e15a55bc57a77dd6f4df25087b200",
+    "opponents.csv": "729fa694a6878e9f5f701fd820e2f2b6f7e4442a231a5d7f22953c3e55a8819b",
+    "source-games.csv": "d692431e6c6a98de598b25fef7c48a70f7fe7082989691ca05da866392cc863f",
+    "source-notes.md": "0b625ec2749385bb1c6abbaf617b2f5908b3e9f79d0f957924460b0541cd13ee",
+    "venues.csv": "9773cb94d63c33cdc83439d1fce000f4730929f7e493d9fb81d3f5ca3f51443f"
+  },
+  "prepared_parents": [
+    "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+    "a5a66225b06c4492b4e3341731c12e75c6acb94b"
+  ],
+  "protected_main_sha": "a5a66225b06c4492b4e3341731c12e75c6acb94b",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "vcu-stage2-current-main-refresh-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "target_branch": "data/vcu-onboarding",
+  "target_predecessor_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+  "target_sha": "189d88d800296bded78cbd2ad3daaa4257aee845",
+  "target_tree_sha": "492ed141b025bb40feabb265b1ac108ccb5c2b1a",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
