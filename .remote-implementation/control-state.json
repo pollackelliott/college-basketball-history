@@ -478,7 +478,7 @@
     "george-washington-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
-  "active_lock_commit": null,
+  "active_lock_commit": "e994f36659d13cb17c1dbaf21ae845e061b647d2",
   "active_lock_owner": "github-actions:42679592486:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
