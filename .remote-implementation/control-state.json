@@ -906,11 +906,11 @@
   "current_sequence": 432,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
     "operation": "PHASE0",
     "protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "vcu-phase0-0001",
     "school_key": "vcu",
     "successor_manifest_path": ".remote-implementation/successors/vcu/vcu-phase0-0001/successor-manifest.json",

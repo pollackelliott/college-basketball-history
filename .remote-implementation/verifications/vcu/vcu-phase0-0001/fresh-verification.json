@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "8fdd87f3f6c2b8e900782892ad0079f3f4d94991",
+  "prepared_parent_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "prepared_tree_sha": "ae0326468e5c20dfe431ce66448412c53f623f64",
+  "protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "vcu-phase0-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "8fdd87f3f6c2b8e900782892ad0079f3f4d94991"
+}
