@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "george-washington",
+  "created_at": "2026-11-09T18:37:37.978138+00:00",
+  "input_fingerprint": {
+    "sha256": "96fde608621df1bbdfe6a1f1f4e1f97944939fd0ac381ac425bf3259def9707f",
+    "git_head": "96f323aec9967c9e32147106f59fce39f2fe1e39",
+    "files": {
+      "schools/george-washington/source-games.csv": "4e1d3aad6dd175b30308e3fe54b4b24d91bc4a62478c4499e5b8cc648ce611ee",
+      "schools/george-washington/opponents.csv": "96e77874729373707ffb045850600358587d1b35b30d9221f2cff7f00c4e5336",
+      "schools/george-washington/venues.csv": "6284872ee6e1dd3089c0029f781e74144c05b3a6142d894b5b3b1e8df252418a",
+      "schools/george-washington/conferences.csv": "f23ed9e28474bfb1c398446006ecec74e3485078af8e557c392edc6739fd4553",
+      "schools/george-washington/notes.md": "15b044fb5b468dd65dc0916c65088a6a0fbca04a3c1eefcb7ba8faf734dd5770",
+      "schools/george-washington/source-notes.md": "8402984f6bcabc089f2596499d923d9782a8069b00e615e37b6b4ffd055aa866",
+      "data/canonical/games.csv": "9b66df77b054a700af472636dd6c605903d7dc778c349d3e0c3504ebc93e4770",
+      "data/evidence/game-assertions.csv": "86bea06e99456d972087816eff393dc06518d923f68eaa8c96347c6f5dda8be5",
+      "data/reconciliation/discrepancies.csv": "30d606caa295cbedc6b5d6f610e0ba121b2533bea617233ea33930572c407aef",
+      "data/reference/programs.csv": "2ebb19abc495d4562679fa759f2f12f98c4c808150ceb3a7716ed7a199d38108",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "a74573e9b96368b601e3ffe028813300d8a504afa3955a767d2b121c38df2ebe",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "913cf1356c94662b3917823b986d081bbfdc372a806331f97f5f1df2e3691ea7",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "7db3757e13145dfbbd67bdba0407218387369b38ee4ac52cc3150787adcb77c7",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "0daa23dcec7782d659d7d11b9634b94ff957500ab2ad47a7900cabfa10692bd0",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "644207734b9f03791505d3b59ca8ebc982b6cbb41ee3809bf39af42402f9664f",
+      "tools/onboarding_plan.py": "407c6a6c25173af15d080b2b8fab332c82bef1b10f0eda4772886cb71bd9692c",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "4ab22a260ec498bc87de60f7638845a5e713f3dc8c323bfd6e1e4a1ec194bfea"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: merchant-marine-academy: ['U.S. Merchant Marine Academy', 'United States Merchant Marine Academy']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: north-carolina-pre-flight: ['North Carolina Pre-Flight', 'North Carolina Pre-Flight (U.S. Navy)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: pennsylvania-military-college: ['Pennsylvania Military College', 'Pennsylvania Military College (later Widener)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2741,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 943,
+      "venues": 89,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: merchant-marine-academy: ['U.S. Merchant Marine Academy', 'United States Merchant Marine Academy']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: north-carolina-pre-flight: ['North Carolina Pre-Flight', 'North Carolina Pre-Flight (U.S. Navy)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: pennsylvania-military-college: ['Pennsylvania Military College', 'Pennsylvania Military College (later Widener)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
