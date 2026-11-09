@@ -1,0 +1,48 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "5e78241bf3d21bcec7d67ac6ec4e40c341f123eed51630cc6e543fccf6f0378a",
+    "implementation-stage2-status.json": "452893417220729d4ccaa90e8133d26aec2f0b677ff306cc54f6bf5a97b06fc7",
+    "plan.json": "c56a95009c803586a740bccab173c61368995bd06a57c82b64791905f2e2e0c1",
+    "review.csv": "aedfba1dd89d0b230ed12fce97229e7d8471437f4d1d485f2f49db81eba96bdd",
+    "review.md": "ad744ab3164468431fd6371e622db7de3e3fd92b2269ac7884346c87ca6e7b2e"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "5e78241bf3d21bcec7d67ac6ec4e40c341f123eed51630cc6e543fccf6f0378a",
+    "implementation-stage2-status.json": "469310bc8cb752d0d17e2f6e5c741f9dc65d905654504910b5129c4f37542d55",
+    "plan.json": "301f1a46ce9adb4f42248f63dd4711e35fc741ec86f49bbd3d93eec164cd8f0d",
+    "review.csv": "aedfba1dd89d0b230ed12fce97229e7d8471437f4d1d485f2f49db81eba96bdd",
+    "review.md": "a4a934b5d9ed4510aad193c0f48e78a5305e134fbe090aa8439b18602d5bf401"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/george-washington/opponents.csv",
+    "schools/george-washington/source-games.csv"
+  ],
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "expected_blocker_keys": [
+    "merchant-marine-academy",
+    "north-carolina-pre-flight",
+    "pennsylvania-military-college"
+  ],
+  "field_level_proof_sha256": "a4f6529cc4da0184f5b348f97cbe186b2a3884126b0fe6c9d9581c473a0557c5",
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "bb74767cffcd3f456fb04025537f1ddcb8f9eaadb2db745c8199d69e391f5244",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "george-washington-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/george-washington-onboarding",
+  "target_predecessor_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39",
+  "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
+  "target_tree_sha": "30980027c195ee4d670a8cf9e262c480cd2a25a9",
+  "tracked_stage2_mutation": "NONE"
+}
