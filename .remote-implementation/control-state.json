@@ -944,7 +944,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/vcu/vcu-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "d83037b79f668ac81c6011d2351bbe6e8d989deb424002e95a69869724c9927c",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "e7706912f5b7988d48faae47f33a48bd6a8abc62",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -954,7 +954,7 @@
     "production_deployment_id": 7658916482,
     "production_json_checked_count": 89,
     "protected_main_sha": "e7706912f5b7988d48faae47f33a48bd6a8abc62",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "vcu-release-production-proof-0001",
     "school_key": "vcu"
   },

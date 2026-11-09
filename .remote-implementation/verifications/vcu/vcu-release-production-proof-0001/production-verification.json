@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "d83037b79f668ac81c6011d2351bbe6e8d989deb424002e95a69869724c9927c",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "e7706912f5b7988d48faae47f33a48bd6a8abc62",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "pr_number": 544,
+  "production_deployment_id": 7658916482,
+  "production_json_checked_count": 89,
+  "production_proof": true,
+  "request_id": "vcu-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "status": "COMPLETE"
+}
