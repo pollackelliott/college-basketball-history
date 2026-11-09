@@ -4012,6 +4012,7 @@ def build_plan(
         "in_scope_source_rows": len(sources),
         "pre_cutoff_rows": len(pre_cutoff),
         "history_start_season": program.get("history_start_season", "").strip(),
+        "history_scope_intervals": program.get("history_scope_intervals", "").strip(),
         "pre_cutoff_first_season": pre_cutoff_seasons[0] if pre_cutoff_seasons else "",
         "pre_cutoff_last_season": pre_cutoff_seasons[-1] if pre_cutoff_seasons else "",
         "existing_game_matches": identity_counts[ingest_school.CONFIDENT],
@@ -5897,6 +5898,24 @@ def _validate_reciprocal_only_site_gap_provenance_rows(
         }:
             raise WorkflowError(
                 f"{game_id}: canonical game does not involve target {school_key}"
+            )
+        summary = plan.get("summary", {})
+        history_start = str(summary.get("history_start_season", "") or "").strip()
+        history_intervals = str(
+            summary.get("history_scope_intervals", "") or ""
+        ).strip()
+        if not history_start:
+            raise WorkflowError(
+                f"{game_id}: site-gap provenance requires explicit public history scope"
+            )
+        if not season_is_in_scope(
+            canonical.get("season_label", "").strip(),
+            history_start,
+            history_intervals,
+        ):
+            raise WorkflowError(
+                f"{game_id}: reciprocal-only site-gap provenance is valid only for "
+                "a canonical game inside the target's public history scope"
             )
         if canonical.get("site_type", "").strip() != "NEUTRAL":
             raise WorkflowError(
