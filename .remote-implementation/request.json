@@ -10,52 +10,39 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-stage2-current-main-refresh-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-stage2-census-0003",
     "origin": "repository-owned Stage 2 phase continuation"
   },
+  "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
   "expected_protected_main_sha": "a5a66225b06c4492b4e3341731c12e75c6acb94b",
   "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/vcu/vcu-phase0-0001/successor-manifest.json",
-    "sha256": "c4d61dbaab782dbff8b9e440f9b2cd3cf3b9d28c023f8fe0f98f668a1de0e645"
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "a4faa01fb4fc7572fae2330bd2b5d6b73eb9e30e",
+  "previous_control_state_sha256": "bd4d381e5b2fb5c2f6d088a39a70b5a020f882629bffab0ba19a5bbc7bbecc58",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/vcu-stage2-current-main-refresh-0001/recommendation-map.json",
+    "sha256": "96541fa3135bfee096232cd1d35370e05c3ff432be2d80bbccf80d9260e2287d"
   },
-  "phase_continuation": {
-    "census_request_id": "vcu-stage2-census-0003",
-    "expected_decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "vcu-stage2-proposal-0001",
-    "recommendation_map": {
-      "path": ".remote-implementation/requests/vcu-stage2-current-main-refresh-0001/recommendation-map.json",
-      "sha256": "96541fa3135bfee096232cd1d35370e05c3ff432be2d80bbccf80d9260e2287d"
-    }
-  },
-  "previous_control_state_commit": "9d1de532afcf9d63e87f2b6e9b0c564426a6666a",
-  "previous_control_state_sha256": "a8f2a1ef515f7d8fd03666ce2cad669ce45a992f2a2a2c86d5568396ba053f25",
-  "request_id": "vcu-stage2-census-0003",
+  "request_id": "vcu-stage2-proposal-0001",
   "schema_version": 1,
   "school_key": "vcu",
   "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/vcu/vcu-stage2-current-main-refresh-0001/successor-manifest.json",
-    "sha256": "d007d95e5f81151d56693d073fc25680cebbf5df4c97719fb0af8bea7742695a"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/vcu/vcu-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "a8707ace7cffe805f375e5afa58708c98bc341968873ec507a1f03b3d9a5e6bd"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "0d53de52bef8b127ae2253d1d7fbf8c3e11f0980fc4281b8f20cf8f86a7c36fb"
   },
   "target_branch": "data/vcu-onboarding",
   "target_sha": "189d88d800296bded78cbd2ad3daaa4257aee845"
