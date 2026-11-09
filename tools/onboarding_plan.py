@@ -5356,14 +5356,15 @@ def _retire_target_home_exception_markers_after_site_reconciliation(
     school_key = (school_key or "").strip()
     if not school_key:
         return 0
-    if (
-        relative_source_site(
-            school_key,
-            canonical,
-            canonical.get("site_type", ""),
-        )
-        == "SOURCE_PROGRAM_HOME"
-    ):
+    site_type = canonical.get("site_type", "").strip()
+    target_home = (
+        site_type == "TEAM_A_HOME"
+        and canonical.get("team_a_key", "").strip() == school_key
+    ) or (
+        site_type == "TEAM_B_HOME"
+        and canonical.get("team_b_key", "").strip() == school_key
+    )
+    if target_home:
         return 0
 
     escaped_school = re.escape(school_key)
@@ -5381,8 +5382,11 @@ def _retire_target_home_exception_markers_after_site_reconciliation(
         retired += count
 
     if retired:
-        notes = re.sub(r"\s*;\s*;\s*", "; ", notes)
-        notes = re.sub(r"^\s*;\s*|\s*;\s*$", "", notes).strip()
+        notes = "; ".join(
+            part.strip()
+            for part in notes.split(";")
+            if part.strip()
+        )
         canonical["notes"] = notes
     return retired
 
