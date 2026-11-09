@@ -5173,7 +5173,7 @@
       "opponent_key": "vcu",
       "opponent_name": "VCU",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
@@ -57867,7 +57867,7 @@
       "opponent_key": "vcu",
       "opponent_name": "VCU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 66,
       "opponent_score": 57,
       "score_known": true,
@@ -73917,7 +73917,7 @@
       "opponent_key": "vcu",
       "opponent_name": "VCU",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 69,
       "opponent_score": 83,
       "score_known": true,
