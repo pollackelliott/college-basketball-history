@@ -719,9 +719,17 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
         "source_program_key": row.get("source_program_key", "").strip(),
         "season_start": season_start(_first_parent_value(row, "season_label", "season")),
         "game_date": row.get("game_date", "").strip(),
+        "source_opponent_label": _first_parent_value(
+            row,
+            "source_opponent_label",
+            "source_opponent_text",
+            "source_opponent_field",
+            "source_opponent_literal",
+        ),
         "normalized_opponent_key": _first_parent_value(
             row,
             "opponent_program_key",
+            "stage2_opponent_key",
             "normalized_opponent_key",
             "opponent_key",
             "canonical_opponent_key",
@@ -979,6 +987,9 @@ def compare_parent_semantics(
             "source_program_key": actual_row.get("source_program_key", "").strip(),
             "season_start": season_start(actual_row.get("season_label", "")),
             "game_date": actual_row.get("game_date", "").strip(),
+            "source_opponent_label": actual_row.get(
+                "source_opponent_label", ""
+            ).strip(),
             "normalized_opponent_key": actual_row.get(
                 "normalized_opponent_key", ""
             ).strip(),
