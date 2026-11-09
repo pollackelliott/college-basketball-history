@@ -942,7 +942,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/vcu/vcu-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "59be7aaad4632a7b9d3ec7d230a9bac756f4bdf51a79fd126c55e8c8ffe415fa",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/vcu/vcu-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "8a53fb5a1dd2f0af07252f241fa909daf15b0e28f9ccbd4c3ef5cf7ef3713d74",
     "merged": false,
@@ -951,7 +951,7 @@
     "pr_number": 544,
     "production_request_id": "vcu-release-production-proof-0001",
     "protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "vcu-release-gate2-approval-0001",
     "school_key": "vcu",
     "target_branch": "data/vcu-onboarding",
