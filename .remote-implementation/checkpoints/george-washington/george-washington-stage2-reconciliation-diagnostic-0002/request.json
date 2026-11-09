@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-stage2-reconciliation-diagnostic-0002",
+  "school_key": "george-washington",
+  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
+  "previous_control_state_commit": "751438f72b95abc38cb0e33c8a55fce035de85f8",
+  "previous_control_state_sha256": "776a4bb3882a8fd20c796c788561ff625e1dbe1887440368b7c39a9379e11e1b",
+  "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "creation_provenance": {
+    "origin": "ChatGPT George Washington serialized Implementation Stage 2 - blocked proposal site-completeness diagnosis",
+    "authorization": "Owner replied Continue while the same Stage 2 proposal-rehearsal phase remains authorized. First fresh-verified diagnostic CBBG-0056182 proved one reciprocal-only neutral public gap with no GW source row and no decision touching the game. Diagnose the only other unaccounted neutral public-gap canonical game CBBG-0056185 against the identical blocked proposal to classify the complete two-row topology before considering any generic repair. No map rewrite, historical reclassification, tracked mutation, Owner Gate 1 action, recovery, current-main refresh, release, Preview, merge, Production, shared/global mutation, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": true,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  },
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-proposal-0001/checkpoint-manifest.json",
+    "sha256": "e245674639df7bc0dc52ef671b38e344c1e3a870fe77d8555c2fe2416bbdd36a"
+  },
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "recommendation_map_sha256": "72445c8c62f7594406d805cfdf7ff79bc481a722cacaa30a55c95dd7edd273fe",
+  "canonical_game_id": "CBBG-0056185"
+}
