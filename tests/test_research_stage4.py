@@ -320,6 +320,9 @@ def make_descriptive_checkpoint(
     duplicate_terminal=False,
     manifest_ledger=True,
     ledger_sha_override="",
+    historical_research_complete=True,
+    stage4_started=False,
+    include_preflight_blocker_evidence=True,
 ):
     ledger_name = "stage3b-postseason-research-complete-ledger.csv"
     status_name = "stage3b-preflight-ready-status.json"
@@ -338,6 +341,27 @@ def make_descriptive_checkpoint(
             "sha256": ledger_sha_override or mod.sha256_bytes(ledger),
         },
     }
+    if status_value == "STAGE3B_DURABILITY_PREFLIGHT_BLOCKED":
+        status_payload.update(
+            {
+                "stage3b_historical_research_complete": historical_research_complete,
+                "stage3b_complete": False,
+                "stage4_started": stage4_started,
+                "stage4_preflight_ready": False,
+            }
+        )
+        if include_preflight_blocker_evidence:
+            status_payload.update(
+                {
+                    "stage4_preflight_status": "STAGE4_AUTHORING_INPUT_INVALID",
+                    "stage4_preflight_blocker": "GENERIC_COMPATIBILITY_BLOCKER",
+                    "stage4_preflight_defect_count": 2,
+                    "stage4_preflight_defect_counts": {
+                        "TEST_DEFECT_A": 1,
+                        "TEST_DEFECT_B": 1,
+                    },
+                }
+            )
     status = json.dumps(status_payload, sort_keys=True).encode()
 
     logical = {
@@ -586,6 +610,118 @@ class Stage4AuthoringTests(unittest.TestCase):
                 "STAGE3B_NOT_COMPLETE",
                 {item["reason"] for item in result["defects"]},
             )
+
+    def test_durability_preflight_blocked_descriptive_root_reenters_preflight_only(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkpoint = root / "durability-blocked.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                status_value="STAGE3B_DURABILITY_PREFLIGHT_BLOCKED",
+            )
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "does not match the current root layout",
+            ):
+                mod.inspect_checkpoint("test", checkpoint)
+
+            preflight = mod.inspect_checkpoint(
+                "test",
+                checkpoint,
+                allow_preflight_ready=True,
+            )
+            self.assertEqual(preflight["status"], "PASS")
+            self.assertEqual(
+                preflight["stage3b_status"],
+                "STAGE3B_DURABILITY_PREFLIGHT_BLOCKED",
+            )
+            self.assertEqual(
+                preflight["stage3b_parent_topology"],
+                "MANIFESTED_DESCRIPTIVE_ROOT",
+            )
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "does not match the current root layout",
+            ):
+                mod.author(
+                    "test",
+                    checkpoint,
+                    "b" * 40,
+                    root / "out",
+                )
+
+    def test_durability_blocked_requires_historical_stage3b_complete(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "blocked-incomplete-history.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                status_value="STAGE3B_DURABILITY_PREFLIGHT_BLOCKED",
+                historical_research_complete=False,
+            )
+            with self.assertRaisesRegex(
+                ValueError,
+                "does not match the current root layout",
+            ):
+                mod.inspect_checkpoint(
+                    "test",
+                    checkpoint,
+                    allow_preflight_ready=True,
+                )
+
+    def test_durability_blocked_rejects_stage4_started(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "blocked-stage4-started.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                status_value="STAGE3B_DURABILITY_PREFLIGHT_BLOCKED",
+                stage4_started=True,
+            )
+            with self.assertRaisesRegex(
+                ValueError,
+                "does not match the current root layout",
+            ):
+                mod.inspect_checkpoint(
+                    "test",
+                    checkpoint,
+                    allow_preflight_ready=True,
+                )
+
+    def test_durability_blocked_requires_explicit_preflight_blocker_accounting(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "blocked-no-evidence.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                status_value="STAGE3B_DURABILITY_PREFLIGHT_BLOCKED",
+                include_preflight_blocker_evidence=False,
+            )
+            with self.assertRaisesRegex(
+                ValueError,
+                "does not match the current root layout",
+            ):
+                mod.inspect_checkpoint(
+                    "test",
+                    checkpoint,
+                    allow_preflight_ready=True,
+                )
+
+    def test_arbitrary_blocked_status_does_not_gain_preflight_admission(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "ordinary-blocked.zip"
+            make_descriptive_checkpoint(
+                checkpoint,
+                status_value="STAGE3B_BLOCKED",
+            )
+            with self.assertRaisesRegex(
+                ValueError,
+                "does not match the current root layout",
+            ):
+                mod.inspect_checkpoint(
+                    "test",
+                    checkpoint,
+                    allow_preflight_ready=True,
+                )
 
     def test_descriptive_root_multiple_terminal_statuses_stop(self):
         with tempfile.TemporaryDirectory() as temporary:
