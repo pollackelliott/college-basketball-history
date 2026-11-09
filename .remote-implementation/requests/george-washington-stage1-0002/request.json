@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "george-washington",
+  "previous_control_state_commit": "9df56013c22eed251ff7ddd1ab36fe07dd5e3222",
+  "previous_control_state_sha256": "3d127f5a61878348d2d2b5622ca5883aa446692c645e337fb601c5e4f1b29434",
+  "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "research_checkpoint": {
+    "sha256": "73eb3f8f0f4b739aaf08bb6eb92029d151be5d151416fd0277e33c5a38d4c679",
+    "research_base_sha": "2991241b273614781d3153a0cbbe7574d48e457f",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9df56013c22eed251ff7ddd1ab36fe07dd5e3222",
+      "path_prefix": ".remote-implementation/transports/george-washington/george-washington-stage1-0002-final/piece-",
+      "part_count": 10
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT George Washington serialized Implementation lane — continuation of owner-directed Research-to-Implementation transition",
+    "authorization": "Owner authorized the George Washington Implementation Stage 1 intake/inventory phase after an authenticated RESEARCH_FROZEN transition and then explicitly said Continue after the first unconsumed submission attempt. Immutable Research Freeze SHA-256 73eb3f8f0f4b739aaf08bb6eb92029d151be5d151416fd0277e33c5a38d4c679, research_base_sha 2991241b273614781d3153a0cbbe7574d48e457f, accepted INCEPTION+ scope with reusable baseline CONFIRMED, accepted Stage 5 NON_D1 owner scan, and PRE-FREEZE SELF-CHALLENGE PASS remain frozen authority. This request authorizes only complete read-only current-main Stage 1 reconciliation inventory against exact protected main 2c47d43d92d6fbf2e7f14ed147876c341daac24a. It does not reopen Research or authorize Integration Freeze mutation, Phase 0, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, recovery, protected-main mutation, or another school."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

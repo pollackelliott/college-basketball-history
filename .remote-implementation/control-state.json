@@ -471,17 +471,18 @@
     "vcu-release-readiness-0001",
     "vcu-release-preview-verify-0001",
     "vcu-release-gate2-approval-0001",
-    "vcu-release-production-proof-0001"
+    "vcu-release-production-proof-0001",
+    "george-washington-stage1-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "george-washington-stage1-0002",
+  "active_request_sha256": "3dd183aad35105cf09e25bf146290e89fbce282b0fe05436cc44e07aaed5f88a",
+  "active_school_key": "george-washington",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -958,8 +959,11 @@
     "request_id": "vcu-release-production-proof-0001",
     "school_key": "vcu"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42670345880",
+  "lock_acquisition_request_commit": "43c0fda7dd0d0cf1a43672093ad465cd07693304",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }
