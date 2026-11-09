@@ -487,7 +487,7 @@
   "active_request_sha256": "5167a719d31b9df434f3707fd8514ca57c5b9a50062327b3634cc4f167bfcbf5",
   "active_school_key": "george-washington",
   "active_target_branch": "data/george-washington-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "c0865eef136fb4cd4d90160f30afd94a8c883566",
   "active_writeahead_path": ".remote-implementation/writeahead/george-washington/george-washington-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "1067e3c4d6ac30fd2b49602e0cb5157cdee219b5977545aacd64864494d82991",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
