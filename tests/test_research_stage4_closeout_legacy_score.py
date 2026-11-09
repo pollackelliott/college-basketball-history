@@ -224,5 +224,78 @@ class Stage4CloseoutDurableSchemaCompatibilityTests(unittest.TestCase):
         )
 
 
+class Stage4CloseoutDurableOpponentSchemaTests(unittest.TestCase):
+    @staticmethod
+    def _parent():
+        return {
+            "research_game_id": "GW-DURABLE-OPPONENT",
+            "source_program_key": "george-washington",
+            "season_label": "2000-2001",
+            "game_date": "2001-01-15",
+            "source_opponent_literal": "Old College",
+            "stage2_opponent_key": "old-college",
+            "team_score": "70",
+            "opponent_score": "60",
+            "played_result": "W",
+            "game_type": "REGULAR_SEASON",
+            "stage3a_final_han": "HOME",
+        }
+
+    @staticmethod
+    def _package(*, label="Old College", key="old-college"):
+        row = package_row("70", "60", "W", "")
+        row.update(
+            {
+                "source_game_id": "GW-DURABLE-OPPONENT",
+                "source_program_key": "george-washington",
+                "season_label": "2000-2001",
+                "game_date": "2001-01-15",
+                "source_opponent_label": label,
+                "normalized_opponent_key": key,
+                "curated_site_type": "HOME",
+            }
+        )
+        return row
+
+    def test_exact_durable_opponent_key_and_literal_label_are_preserved(self):
+        self.assertEqual(
+            mod.compare_parent_semantics(
+                [self._parent()],
+                [self._package()],
+                [],
+                school_key="george-washington",
+            ),
+            [],
+        )
+
+    def test_durable_opponent_key_loss_or_change_is_detected(self):
+        for key in ("", "different-college"):
+            with self.subTest(key=key):
+                mismatches = mod.compare_parent_semantics(
+                    [self._parent()],
+                    [self._package(key=key)],
+                    [],
+                    school_key="george-washington",
+                )
+                self.assertIn(
+                    "normalized_opponent_key",
+                    {item["field"] for item in mismatches},
+                )
+
+    def test_literal_source_opponent_label_loss_or_change_is_detected(self):
+        for label in ("", "Different Literal"):
+            with self.subTest(label=label):
+                mismatches = mod.compare_parent_semantics(
+                    [self._parent()],
+                    [self._package(label=label)],
+                    [],
+                    school_key="george-washington",
+                )
+                self.assertIn(
+                    "source_opponent_label",
+                    {item["field"] for item in mismatches},
+                )
+
+
 if __name__ == "__main__":
     unittest.main()

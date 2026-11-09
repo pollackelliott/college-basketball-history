@@ -314,5 +314,89 @@ class Stage4DurableStage3BSchemaCompatibilityTests(unittest.TestCase):
         self.assertEqual(games[0]["played_result"], "L")
 
 
+class Stage4DurableOpponentSchemaCompatibilityTests(unittest.TestCase):
+    @staticmethod
+    def _gw_style_row():
+        return {
+            "research_game_id": "GW-DURABLE-OPPONENT",
+            "source_program_key": "george-washington",
+            "season_label": "2000-2001",
+            "game_date": "2001-01-15",
+            "source_opponent_literal": "Old College",
+            "stage2_opponent_key": "old-college",
+            "team_score": "70",
+            "opponent_score": "60",
+            "played_result": "W",
+            "game_type": "REGULAR_SEASON",
+            "site_type": "HOME",
+        }
+
+    def test_stage2_key_and_literal_source_label_project_exactly(self):
+        row = self._gw_style_row()
+        games, defects = mod._projection(
+            [row],
+            opponent_rows(),
+            [],
+            school_key="george-washington",
+        )
+
+        self.assertEqual(defects, [])
+        self.assertEqual(len(games), 1)
+        game = games[0]
+        self.assertEqual(game["normalized_opponent_key"], "old-college")
+        self.assertEqual(game["normalized_opponent_name"], "Old College")
+        self.assertEqual(game["source_opponent_label"], "Old College")
+        self.assertEqual(
+            mod._mapping_defects(games, opponent_rows()),
+            [],
+        )
+
+    def test_literal_label_key_pair_still_must_exist_in_opponents_capsule(self):
+        row = self._gw_style_row()
+        games, defects = mod._projection(
+            [row],
+            opponent_rows("Different Literal"),
+            [],
+            school_key="george-washington",
+        )
+
+        self.assertEqual(defects, [])
+        mapping = mod._mapping_defects(
+            games,
+            opponent_rows("Different Literal"),
+        )
+        self.assertEqual(
+            [item["reason"] for item in mapping],
+            ["SOURCE_LABEL_OPPONENT_MAPPING_MISSING"],
+        )
+        self.assertEqual(mapping[0]["source_opponent_label"], "Old College")
+        self.assertEqual(mapping[0]["canonical_opponent_key"], "old-college")
+
+    def test_durable_opponent_aliases_are_in_semantic_anti_loss_guard(self):
+        row = self._gw_style_row()
+        games, defects = mod._projection(
+            [row],
+            opponent_rows(),
+            [],
+            school_key="george-washington",
+        )
+        self.assertEqual(defects, [])
+        projected = dict(games[0])
+
+        for field in ("source_opponent_label", "normalized_opponent_key"):
+            with self.subTest(field=field):
+                candidate = dict(projected)
+                candidate[field] = ""
+                losses = mod._semantic_projection_defects(row, candidate)
+                self.assertIn(
+                    field,
+                    {
+                        item["field"]
+                        for item in losses
+                        if item["reason"] == "ACCEPTED_SOURCE_FIELD_LOST"
+                    },
+                )
+
+
 if __name__ == "__main__":
     unittest.main()
