@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "ddb168252a0f93dca1b5da20d224497543aca4cf0d475dbe27c45993e91d3b6a",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "0bd3e364457e671e27a88b3c14e32c26e556cf82f079a8b9368fec69c627b638",
+  "pr_created": false,
+  "preview_request_id": "vcu-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "readiness_proof_sha256": "9f97bacc14264e5a3d35356da69dccda1865c84856cf41b2aad13b121c7a8eea",
+  "release_pr_packet_sha256": "6de911797b188ba7c795ba68706382fd979401a6766e45dccc33ea5dcb334bbe",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "vcu-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "tracked_mutation": "NONE"
+}
