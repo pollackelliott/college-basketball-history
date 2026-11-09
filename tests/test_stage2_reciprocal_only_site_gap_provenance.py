@@ -465,7 +465,7 @@ class ReciprocalOnlySiteGapProvenanceTests(unittest.TestCase):
         gw_plan = {
             "school_key": "george-washington",
             "summary": {
-                "history_start_season": "1912-1913",
+                "history_start_season": "1900-1901",
                 "history_scope_intervals": "",
             },
             "decisions": [
