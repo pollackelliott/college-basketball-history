@@ -456,7 +456,7 @@
     "vcu-phase0-0001"
   ],
   "active_expected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
-  "active_lock_commit": null,
+  "active_lock_commit": "81d4e131f89b4a5e1c654bf5c310e48b8e46f826",
   "active_lock_owner": "github-actions:42561201707:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
