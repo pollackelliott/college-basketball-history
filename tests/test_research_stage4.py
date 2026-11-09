@@ -389,6 +389,124 @@ class Stage4AuthoringTests(unittest.TestCase):
             self.assertEqual(result["conference_rows"], 1)
 
 
+    def test_legacy_base_label_preflight_and_author_materialize_literal_mapping(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkpoint = root / "decorated.zip"
+            ledger_fields = [
+                "research_game_id",
+                "source_program_key",
+                "season_label",
+                "game_date",
+                "source_opponent_literal",
+                "stage2_opponent_base_label",
+                "stage2_opponent_key",
+                "team_score",
+                "opponent_score",
+                "played_result",
+                "game_type",
+                "site_type",
+            ]
+            ledger = csv_bytes(
+                ledger_fields,
+                [
+                    {
+                        "research_game_id": "G-DECORATED",
+                        "source_program_key": "test",
+                        "season_label": "2000-2001",
+                        "game_date": "2001-01-15",
+                        "source_opponent_literal": "at Old College",
+                        "stage2_opponent_base_label": "Old College",
+                        "stage2_opponent_key": "old-college",
+                        "team_score": "70",
+                        "opponent_score": "60",
+                        "played_result": "W",
+                        "game_type": "REGULAR_SEASON",
+                        "site_type": "UNKNOWN",
+                    }
+                ],
+            )
+            status = json.dumps(
+                {
+                    "stage": "STAGE_3B",
+                    "status": "COMPLETE",
+                    "school_key": "test",
+                    "research_base_sha": "a" * 40,
+                    "primary_source_historical_cutoff": "2000-2001",
+                    "required_completed_season_cutoff": "2000-2001",
+                },
+                sort_keys=True,
+            ).encode()
+            logical = {
+                "stage3b-working-ledger.csv": ledger,
+                "stage3b-status.json": status,
+                "stage4-authoring/opponents.csv": opponent_bytes(),
+                "stage4-authoring/venues.csv": venue_bytes(),
+                "stage4-authoring/conferences.csv": conference_bytes(),
+            }
+            manifest = {
+                "research_base_sha": "a" * 40,
+                "files": [
+                    {
+                        "name": name,
+                        "bytes": len(data),
+                        "sha256": mod.sha256_bytes(data),
+                    }
+                    for name, data in sorted(logical.items())
+                ],
+            }
+            members = dict(logical)
+            members["checkpoint-manifest.json"] = (
+                json.dumps(manifest, sort_keys=True) + "\n"
+            ).encode()
+            write_deterministic_zip(checkpoint, members)
+
+            preflight = mod.inspect_checkpoint("test", checkpoint)
+            self.assertEqual(preflight["status"], "PASS")
+            self.assertEqual(preflight["authoring_opponent_rows"], 1)
+            self.assertEqual(preflight["opponent_rows"], 2)
+            self.assertEqual(
+                preflight["legacy_opponent_compatibility"][
+                    "legacy_literal_mapping_rows_added"
+                ],
+                1,
+            )
+
+            fake_closeout = {
+                "status": "COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY",
+                "checkpoint_sha256": "c" * 64,
+            }
+            with patch.object(mod, "closeout", return_value=fake_closeout):
+                result = mod.author(
+                    "test",
+                    checkpoint,
+                    "b" * 40,
+                    root / "out",
+                )
+            self.assertEqual(
+                result["status"],
+                "COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY",
+            )
+            with (root / "out" / "package" / "source-games.csv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                games = list(csv.DictReader(handle))
+            self.assertEqual(games[0]["source_opponent_label"], "at Old College")
+            with (root / "out" / "package" / "opponents.csv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                package_opponents = list(csv.DictReader(handle))
+            mappings = {
+                (row["source_opponent_label"], row["canonical_opponent_key"]): row
+                for row in package_opponents
+            }
+            self.assertIn(("Old College", "old-college"), mappings)
+            self.assertIn(("at Old College", "old-college"), mappings)
+            projected = mappings[("at Old College", "old-college")]
+            self.assertEqual(projected["games_with_source_label"], "1")
+            self.assertEqual(projected["first_season"], "2000-2001")
+            self.assertEqual(projected["last_season"], "2000-2001")
+
     def test_descriptive_root_preflight_ready_passes_only_for_preflight(self):
         with tempfile.TemporaryDirectory() as temporary:
             checkpoint = Path(temporary) / "descriptive.zip"

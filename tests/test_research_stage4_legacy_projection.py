@@ -398,5 +398,226 @@ class Stage4DurableOpponentSchemaCompatibilityTests(unittest.TestCase):
                 )
 
 
+class Stage4LegacyBaseLabelOpponentCompatibilityTests(unittest.TestCase):
+    @staticmethod
+    def _opponent(label="Fordham", key="fordham", name="Fordham"):
+        return {
+            "source_program_key": "george-washington",
+            "source_opponent_label": label,
+            "canonical_opponent_key": key,
+            "canonical_opponent_name": name,
+            "current_d1": "Yes",
+            "games_with_source_label": "10",
+            "first_season": "1935-36",
+            "last_season": "1945-46",
+            "resolution_status": "RESOLVED",
+            "resolution_method": "ACCEPTED_STAGE2_DURABLE_IDENTITY",
+            "user_choice": "",
+            "audit_note": "Literal source variants remain preserved on game rows.",
+        }
+
+    @staticmethod
+    def _ledger(
+        game_id,
+        literal,
+        *,
+        season="1940-41",
+        base="Fordham",
+        stage2_key="fordham",
+        normalized_key="",
+    ):
+        row = {
+            "research_game_id": game_id,
+            "source_program_key": "george-washington",
+            "season_label": season,
+            "game_date": "1941-01-01",
+            "source_opponent_literal": literal,
+            "stage2_opponent_base_label": base,
+            "stage2_opponent_key": stage2_key,
+            "team_score": "70",
+            "opponent_score": "60",
+            "played_result": "W",
+            "game_type": "REGULAR_SEASON",
+            "site_type": "HOME",
+        }
+        if normalized_key:
+            row["normalized_opponent_key"] = normalized_key
+        return row
+
+    def test_decorated_literals_materialize_package_ready_mappings_without_rewriting_literal(self):
+        ledger = [
+            self._ledger("PREFIX", "at Fordham", season="1940-41"),
+            self._ledger("SUFFIX-A", "Fordham*", season="1941-42"),
+            self._ledger("SUFFIX-B", "Fordham*", season="1942-43"),
+            self._ledger("BOTH", "vs. Fordham 2", season="1943-44"),
+        ]
+        opponents = [self._opponent()]
+        games, projection_defects = mod._projection(
+            ledger,
+            opponents,
+            [],
+            school_key="george-washington",
+        )
+        self.assertEqual(projection_defects, [])
+
+        package_opponents, defects, summary = mod._project_package_opponents(
+            ledger,
+            games,
+            opponents,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(summary["authoring_opponent_rows"], 1)
+        self.assertEqual(summary["package_opponent_rows"], 4)
+        self.assertEqual(summary["legacy_literal_mapping_rows_added"], 3)
+        self.assertEqual(mod._mapping_defects(games, package_opponents), [])
+
+        games_by_id = {row["source_game_id"]: row for row in games}
+        self.assertEqual(games_by_id["PREFIX"]["source_opponent_label"], "at Fordham")
+        self.assertEqual(games_by_id["SUFFIX-A"]["source_opponent_label"], "Fordham*")
+        self.assertEqual(games_by_id["BOTH"]["source_opponent_label"], "vs. Fordham 2")
+
+        mappings = {
+            (row["source_opponent_label"], row["canonical_opponent_key"]): row
+            for row in package_opponents
+        }
+        self.assertEqual(mappings[("at Fordham", "fordham")]["canonical_opponent_name"], "Fordham")
+        self.assertEqual(mappings[("at Fordham", "fordham")]["current_d1"], "Yes")
+        self.assertEqual(
+            mappings[("at Fordham", "fordham")]["resolution_method"],
+            "ACCEPTED_STAGE2_DURABLE_IDENTITY",
+        )
+        suffix = mappings[("Fordham*", "fordham")]
+        self.assertEqual(suffix["games_with_source_label"], "2")
+        self.assertEqual(suffix["first_season"], "1941-42")
+        self.assertEqual(suffix["last_season"], "1942-43")
+
+    def test_exact_literal_mapping_is_not_duplicated(self):
+        ledger = [self._ledger("EXACT", "Fordham")]
+        opponents = [self._opponent()]
+        games, projection_defects = mod._projection(
+            ledger,
+            opponents,
+            [],
+            school_key="george-washington",
+        )
+        self.assertEqual(projection_defects, [])
+        package_opponents, defects, summary = mod._project_package_opponents(
+            ledger,
+            games,
+            opponents,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(package_opponents, opponents)
+        self.assertEqual(summary["legacy_literal_mapping_rows_added"], 0)
+
+    def test_missing_base_mapping_fails_closed(self):
+        ledger = [self._ledger("MISS", "at Fordham")]
+        opponents = [self._opponent(label="Different")]
+        games, projection_defects = mod._projection(
+            ledger,
+            opponents,
+            [],
+            school_key="george-washington",
+        )
+        self.assertEqual(projection_defects, [])
+        _, defects, _ = mod._project_package_opponents(
+            ledger,
+            games,
+            opponents,
+        )
+        self.assertIn(
+            "LEGACY_STAGE2_BASE_LABEL_KEY_AMBIGUOUS",
+            {item["reason"] for item in defects},
+        )
+
+    def test_base_label_mapping_ambiguous_across_keys_fails_closed(self):
+        ledger = [self._ledger("AMB", "at Fordham")]
+        opponents = [
+            self._opponent(),
+            self._opponent(label="Fordham", key="fordham-state", name="Fordham State"),
+        ]
+        games, projection_defects = mod._projection(
+            ledger,
+            opponents,
+            [],
+            school_key="george-washington",
+        )
+        self.assertEqual(projection_defects, [])
+        _, defects, _ = mod._project_package_opponents(
+            ledger,
+            games,
+            opponents,
+        )
+        self.assertIn(
+            "LEGACY_STAGE2_BASE_LABEL_KEY_AMBIGUOUS",
+            {item["reason"] for item in defects},
+        )
+
+    def test_stage2_key_conflict_with_projected_key_fails_closed(self):
+        ledger = [
+            self._ledger(
+                "KEY-CONFLICT",
+                "at Fordham",
+                normalized_key="different-key",
+            )
+        ]
+        opponents = [
+            self._opponent(),
+            self._opponent(label="Different", key="different-key", name="Different"),
+        ]
+        games, projection_defects = mod._projection(
+            ledger,
+            opponents,
+            [],
+            school_key="george-washington",
+        )
+        self.assertEqual(projection_defects, [])
+        _, defects, _ = mod._project_package_opponents(
+            ledger,
+            games,
+            opponents,
+        )
+        self.assertIn(
+            "LEGACY_STAGE2_OPPONENT_KEY_CONFLICT",
+            {item["reason"] for item in defects},
+        )
+
+    def test_current_schema_missing_literal_mapping_remains_fail_closed(self):
+        ledger = [
+            {
+                "research_game_id": "CURRENT",
+                "source_program_key": "test",
+                "season_label": "2020-21",
+                "game_date": "2021-01-01",
+                "source_opponent_label": "Decorated Old College",
+                "opponent_key": "old-college",
+                "team_score": "70",
+                "opponent_score": "60",
+                "played_result": "W",
+                "game_type": "REGULAR_SEASON",
+                "site_type": "HOME",
+            }
+        ]
+        opponents = opponent_rows("Old College")
+        games, projection_defects = mod._projection(
+            ledger,
+            opponents,
+            [],
+            school_key="test",
+        )
+        self.assertEqual(projection_defects, [])
+        package_opponents, defects, summary = mod._project_package_opponents(
+            ledger,
+            games,
+            opponents,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(summary["legacy_literal_mapping_rows_added"], 0)
+        self.assertEqual(
+            [item["reason"] for item in mod._mapping_defects(games, package_opponents)],
+            ["SOURCE_LABEL_OPPONENT_MAPPING_MISSING"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
