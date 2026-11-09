@@ -467,18 +467,19 @@
     "vcu-stage2-gate1-fill-0001",
     "vcu-stage2-preseal-rehearsal-0001",
     "vcu-stage2-gate1-seal-0001",
-    "vcu-stage2-sealed-apply-0001"
+    "vcu-stage2-sealed-apply-0001",
+    "vcu-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "vcu-release-readiness-0001",
+  "active_request_sha256": "bd5494cdeee4ed052ae105e4e22bf354a91952310d0238adf753faf7b720b500",
+  "active_school_key": "vcu",
+  "active_target_branch": "data/vcu-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -954,8 +955,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/vcu/vcu-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "89db881ec246a59c80454854609aff63a77af00ac5263f459118300726e18b4a"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42638397753",
+  "lock_acquisition_request_commit": "99fb47bd4fa6a509a6ced41b66f0a0df0bff3f56",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
