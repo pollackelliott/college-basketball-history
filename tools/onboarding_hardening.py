@@ -1199,6 +1199,11 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
         "venue_relationship_patch_by_decision", {}
     )
     notes_by_decision = decision_map.get("notes_by_decision", {})
+    site_gap_provenance = decision_map.get("site_gap_provenance", [])
+    if not isinstance(site_gap_provenance, list) or any(
+        not isinstance(item, dict) for item in site_gap_provenance
+    ):
+        raise WorkflowError("site_gap_provenance must be a JSON array of objects")
     objects = (
         identities,
         explicit,
@@ -1410,6 +1415,26 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
             if not isinstance(note, str):
                 raise WorkflowError(f"{did}: notes_by_decision value must be a string")
             row["notes"] = note
+
+    if site_gap_provenance:
+        publication_rows = [
+            row for row in rows if row.get("category", "").strip() == "publication"
+        ]
+        if len(publication_rows) != 1:
+            raise WorkflowError(
+                "site_gap_provenance requires exactly one publication decision row"
+            )
+        if "site_gap_provenance_json" not in fieldnames:
+            raise WorkflowError(
+                "review schema lacks site_gap_provenance_json; regenerate Stage 2 "
+                "with the current runtime"
+            )
+        publication_rows[0]["site_gap_provenance_json"] = json.dumps(
+            site_gap_provenance,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
 
     _write_review(review_path, fieldnames, rows)
     return Counter(row["decision"] for row in rows)
