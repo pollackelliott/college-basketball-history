@@ -477,18 +477,19 @@
     "george-washington-stage2-census-0001",
     "george-washington-stage2-opponent-display-normalize-0001",
     "george-washington-stage2-proposal-0001",
-    "george-washington-stage2-reconciliation-diagnostic-0001"
+    "george-washington-stage2-reconciliation-diagnostic-0001",
+    "george-washington-stage2-reconciliation-diagnostic-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-washington-stage2-reconciliation-diagnostic-0002",
+  "active_request_sha256": "21adeb7f114125224339aeed02dcc3f84c84121663109fbe9f8b0ee1d19cf41a",
+  "active_school_key": "george-washington",
+  "active_target_branch": "data/george-washington-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -969,8 +970,11 @@
     "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
     "trace_sha256": "fbabf36831940bde55613d22d15bbb4e4710b6bdd4110d5ad1ab95ea47ea0a38"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42697892370",
+  "lock_acquisition_request_commit": "3ec0452793b19c7e0a99a15ac2484de70e4984c5",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_RECONCILIATION_DIAGNOSTIC_RUNNING"
 }
