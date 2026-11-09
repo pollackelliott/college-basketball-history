@@ -1,65 +1,59 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-stage2-gate1-fill-0001",
-  "school_key": "vcu",
-  "operation": "STAGE2_GATE1_FILL",
-  "previous_control_state_commit": "9d917b0216b457c9509ed39a64650c61f87115b8",
-  "previous_control_state_sha256": "a7b8bcf1a3082affddb07acd27be8cb20f8c8a51ca405e85006dc7e95d4a0c8e",
-  "expected_protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
-  "target_branch": "data/vcu-onboarding",
-  "target_sha": "5e07c03ba8b92e609b9922aa9dad85651d21ab62",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-stage2-proposal-0003/checkpoint-manifest.json",
-    "sha256": "42e5c3f6108af4d3b73a47dfba2c8af23b0ce5eefc1c2c3f9fdb77e3d4bd479b"
-  },
-  "stage2_proposal_verification": {
-    "path": ".remote-implementation/verifications/vcu/vcu-stage2-proposal-0003/stage2-proposal-rehearsal-verification.json",
-    "sha256": "076e091630cd36c3b0fb5369750192a84083359481a435ec889872faa8db1174"
-  },
-  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
-  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
-  "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
-  "recommendation_map_sha256": "24160ff7dcbc5023a01083fa89acf69fa2f5035a31445eb9f4d1df10bec1a4b8",
   "approved_plan_hash_preview": "20408499a2687f2c4883bd82da7ec751e768318943bed11feac853bfa7525ad3",
-  "owner_gate_1_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly stated 'Approved. Proceed' immediately after the VCU Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY packet for vcu-stage2-proposal-0003: 84 decisions, decision-universe SHA-256 1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e, exact recommendation-map SHA-256 24160ff7dcbc5023a01083fa89acf69fa2f5035a31445eb9f4d1df10bec1a4b8, and approved-plan preview 20408499a2687f2c4883bd82da7ec751e768318943bed11feac853bfa7525ad3. This approval is limited to that exact Gate 1 historical packet and the guarded fill, pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification phase. It does not approve Preview, Owner Gate 2, merge, Production, recovery, unrelated mutation, or changed historical meaning.",
-    "proposal_checkpoint_sha256": "42e5c3f6108af4d3b73a47dfba2c8af23b0ce5eefc1c2c3f9fdb77e3d4bd479b",
-    "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
-    "recommendation_map_sha256": "24160ff7dcbc5023a01083fa89acf69fa2f5035a31445eb9f4d1df10bec1a4b8",
-    "approved_plan_hash_preview": "20408499a2687f2c4883bd82da7ec751e768318943bed11feac853bfa7525ad3"
-  },
-  "phase_continuation": {
-    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
-    "preseal_request_id": "vcu-stage2-preseal-rehearsal-0001",
-    "seal_request_id": "vcu-stage2-gate1-seal-0001",
-    "apply_request_id": "vcu-stage2-sealed-apply-0001"
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT VCU serialized Implementation — explicit exact Owner Gate 1 approval",
-    "authorization": "Owner explicitly approved the exact fresh-verified 84-decision VCU Gate 1 packet. Authorize one guarded Stage 2 Gate 1 fill and its repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification only; no release/Preview/Owner Gate 2/merge/Production, recovery, unrelated mutation, or historical change."
-  },
   "authority": {
-    "owner_gate_1": true,
+    "owner_gate_1": false,
     "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": true,
-    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
-    "release_preview_verify": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-stage2-gate1-fill-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "5f46d5eb730d3feb37c89ad1945e8163233849c962e7faa732ccfd3552d438f6",
+  "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+  "expected_protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "filled_review_sha256": "4fb7c200ea99b33b4fe029febb229614f78f72a8a3afa3d07a586fcef801a79a",
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "phase_continuation": {
+    "apply_request_id": "vcu-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "vcu-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "vcu-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "2b3c1798d745a254019c50ee1b3680ee4671f175",
+  "previous_control_state_sha256": "158b248f88e29a61f039c8b6a6db4441e37c3ee94ee523b30b45db2eb4d5ec08",
+  "recommendation_map_sha256": "24160ff7dcbc5023a01083fa89acf69fa2f5035a31445eb9f4d1df10bec1a4b8",
+  "request_id": "vcu-stage2-preseal-rehearsal-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "925127741de66967c0e80e6cdd6eefb17f8f8feb8f60342ff3678bc0b719b88d"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "fa6fa012456fc6f1a433c1df09b71c49bf2b17fc78e99c3587c2dca1aa0a163d"
+  },
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "5e07c03ba8b92e609b9922aa9dad85651d21ab62"
 }
