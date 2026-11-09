@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "merge_parent_onboarding": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "merge_sha": "e7706912f5b7988d48faae47f33a48bd6a8abc62",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "59be7aaad4632a7b9d3ec7d230a9bac756f4bdf51a79fd126c55e8c8ffe415fa",
+  "owner_gate_2_verification_sha256": "13bf27e12c9b3fe2b7d8fd3a60266b01739f495337fcdab4a313641e30ff68c1",
+  "pr_head_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "pr_number": 544,
+  "production_deployment_id": 7658916482,
+  "production_json_checked_count": 89,
+  "production_proof": true,
+  "production_proof_sha256": "51aaf5f396e27255bd147f3f91d206c843d91b9862a57e36d050462234060d7e",
+  "protected_main_sha": "e7706912f5b7988d48faae47f33a48bd6a8abc62",
+  "request_id": "vcu-release-production-proof-0001",
+  "request_sha256": "5ecf264e74b8099302ece9baa1b7aab12452371513e9def5068845c88007efeb",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "status": "PRODUCTION_PROOF_PASS"
+}
