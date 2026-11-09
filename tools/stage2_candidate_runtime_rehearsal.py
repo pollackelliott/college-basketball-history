@@ -88,6 +88,51 @@ def validate_candidate_scope(paths: list[str]) -> None:
         )
 
 
+SITE_BLOCKER_KEYS = (
+    "strict_home_gap_rows",
+    "strict_ncaa_gap_rows",
+    "target_source_information_loss",
+    "reciprocal_unpropagated",
+    "unaccounted_public_gap_rows",
+    "invalid_home_venue_exception_marker_rows",
+)
+
+
+def _site_blocker_signature(site_diagnostic: Any) -> dict[str, Any] | None:
+    """Return the structured publication-blocker population for one site diagnostic."""
+
+    if not isinstance(site_diagnostic, dict):
+        return None
+    counts = site_diagnostic.get("counts")
+    examples = site_diagnostic.get("examples")
+    if not isinstance(counts, dict) or not isinstance(examples, dict):
+        return None
+
+    signature: dict[str, Any] = {}
+    for key in SITE_BLOCKER_KEYS:
+        raw_count = counts.get(key, 0)
+        try:
+            count = int(raw_count or 0)
+        except (TypeError, ValueError):
+            return None
+        raw_examples = examples.get(key, [])
+        if raw_examples is None:
+            raw_examples = []
+        if not isinstance(raw_examples, list):
+            return None
+        normalized_examples = sorted(
+            str(value).strip()
+            for value in raw_examples
+            if str(value).strip()
+        )
+        if count or normalized_examples:
+            signature[key] = {
+                "count": count,
+                "examples": normalized_examples,
+            }
+    return signature
+
+
 def classify_candidate_result(
     baseline_status: dict[str, Any],
     candidate_result: dict[str, Any],
@@ -101,6 +146,18 @@ def classify_candidate_result(
     baseline_error = str(baseline_status.get("last_error") or "").strip()
     candidate_error = str((candidate_result.get("status") or {}).get("last_error") or "").strip()
     if baseline_error and candidate_error == baseline_error:
+        baseline_site = _site_blocker_signature(
+            baseline_status.get("site_diagnostic")
+        )
+        candidate_site = _site_blocker_signature(
+            candidate_result.get("site_diagnostic")
+        )
+        if (
+            baseline_site is not None
+            and candidate_site is not None
+            and baseline_site != candidate_site
+        ):
+            return "ADVANCED_TO_DIFFERENT_BLOCKER"
         return "NO_PROGRESS_SAME_BLOCKER"
     return "ADVANCED_TO_DIFFERENT_BLOCKER"
 
