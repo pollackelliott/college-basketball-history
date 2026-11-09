@@ -14,6 +14,7 @@ sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(TESTS))
 
 from implementation_site_gate import implementation_site_report  # noqa: E402
+from implementation_stage2 import _decision_universe_sha256  # noqa: E402
 from onboarding_hardening import fill_review_from_map  # noqa: E402
 from onboarding_plan import (  # noqa: E402
     REVIEW_COLUMNS,
@@ -137,6 +138,26 @@ class ReciprocalOnlySiteGapProvenanceTests(unittest.TestCase):
         ]
         with self.assertRaisesRegex(WorkflowError, "target source assertion exists"):
             validate(assertions=assertions)
+
+    def test_01b_exact_target_source_row_uses_ordinary_accounting(self):
+        canonical = neutral_game()
+        canonical.update(
+            {
+                "game_date": "1919-02-01",
+                "team_a_score": "11",
+                "team_b_score": "25",
+            }
+        )
+        target_source = {
+            "source_game_id": "TESTRAW-1",
+            "source_program_key": "test",
+            "normalized_opponent_key": "other",
+            "game_date": "1919-02-01",
+            "team_score": "25",
+            "opponent_score": "11",
+        }
+        with self.assertRaisesRegex(WorkflowError, "exact target source row exists"):
+            validate(canonical=[canonical], sources=[target_source])
 
     def test_02_reciprocal_only_gap_validates_and_materializes(self):
         entries = validate()
@@ -388,6 +409,17 @@ class ReciprocalOnlySiteGapProvenanceTests(unittest.TestCase):
         payload = json.loads(rows[0]["site_gap_provenance_json"])
         self.assertEqual(len(payload), 1)
         self.assertEqual(payload[0]["canonical_game_id"], "CBBG-0000001")
+
+    def test_11b_top_level_provenance_preserves_decision_universe_hash(self):
+        base_plan = plan()
+        with_provenance = {
+            **base_plan,
+            "site_gap_provenance": [provenance()],
+        }
+        self.assertEqual(
+            _decision_universe_sha256(base_plan),
+            _decision_universe_sha256(with_provenance),
+        )
 
     def test_12_exact_two_gw_diagnostic_topologies_are_generic_fixtures(self):
         games = [
