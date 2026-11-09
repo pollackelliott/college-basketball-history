@@ -1,0 +1,65 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 37,
+      "discrepancy": 28,
+      "identity": 9,
+      "postseason_classification": 7,
+      "publication": 1
+    },
+    "decision_count": 84,
+    "decision_fields": {
+      "game_date": 23,
+      "game_identity": 9,
+      "game_type": 11,
+      "overtime_periods": 2,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 2,
+      "score": 16,
+      "site_metadata": 1,
+      "site_type": 18
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0066496",
+      "CONDITIONAL-DISCREPANCY-VCU-1974-75-011-CBBG-0066492-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1991-92-022-CBBG-0136728-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-018-CBBG-0136763-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-018-CBBG-0136768-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-023-CBBG-0136758-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-023-CBBG-0136768-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1994-95-029-CBBG-0144854-SITE_TYPE",
+      "DISCREPANCY-VCU-1976-77-009-SITE_TYPE",
+      "DISCREPANCY-VCU-1977-78-021-SITE_TYPE",
+      "DISCREPANCY-VCU-1979-80-008-SITE_TYPE",
+      "DISCREPANCY-VCU-1987-88-008-SITE_TYPE",
+      "DISCREPANCY-VCU-1989-90-008-SITE_TYPE",
+      "DISCREPANCY-VCU-1996-97-008-SITE_TYPE",
+      "DISCREPANCY-VCU-2009-10-023-SITE_TYPE",
+      "DISCREPANCY-VCU-2011-12-006-SITE_TYPE",
+      "DISCREPANCY-VCU-2012-13-006-SITE_TYPE",
+      "DISCREPANCY-VCU-2019-20-014-SITE_TYPE",
+      "DISCREPANCY-VCU-2020-21-025-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 19,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
