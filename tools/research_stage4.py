@@ -27,6 +27,7 @@ from research_authoring_capsule import checkpoint_continuity_defects
 from research_stage3a4_accounting import (
     reconcile_opponent_home_outside_responsibility,
 )
+from onboarding_hardening import refresh_venue_assignment_summaries
 
 from research_stage4_closeout import (
     closeout,
@@ -438,8 +439,8 @@ def _legacy_score_projection(
     played result remain unchanged; only package-field orientation changes.
     """
 
-    team = _first(row, "team_score", "wagner_points", "dayton_score", "source_points_for")
-    opponent = _first(row, "opponent_score", "opponent_points", "source_points_against")
+    team = _first(row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for")
+    opponent = _first(row, "opponent_score", "opponent_points", "score_against", "source_points_against")
     result = _first(
         row, "played_result", "on_court_result", "source_result", "result"
     ).upper()
@@ -459,7 +460,7 @@ def _legacy_score_projection(
         and not row.get("season_label", "").strip()
         and not row.get("source_program_key", "").strip()
     )
-    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal")
+    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line")
     literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
     literal_pairs = [
         (int(match.group("a")), int(match.group("b")))
@@ -842,7 +843,7 @@ def _projection(
                 "curated_postseason_round": curated_round,
                 "source_page": _first(row, "source_page", "source_pdf_page", "source_locator"),
                 "raw_text": first_literal(
-                    row, "raw_text", "source_raw_text", "source_entry_literal"
+                    row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"
                 ),
                 "normalization_status": _first(row, "normalization_status")
                 or "RESEARCH_ACCEPTED",
@@ -904,8 +905,8 @@ def _semantic_projection_defects(
             "opponent_key",
             "canonical_opponent_key",
         ),
-        "team_score": ("team_score", "wagner_points", "dayton_score", "source_points_for"),
-        "opponent_score": ("opponent_score", "opponent_points", "source_points_against"),
+        "team_score": ("team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"),
+        "opponent_score": ("opponent_score", "opponent_points", "score_against", "source_points_against"),
         "played_result": (
             "played_result",
             "on_court_result",
@@ -915,7 +916,7 @@ def _semantic_projection_defects(
         "source_page": ("source_page", "source_pdf_page", "source_locator"),
         "overtime_periods": ("overtime_periods", "overtime", "source_overtime_token"),
         "source_venue_name": ("source_venue_name", "source_venue_token"),
-        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal"),
+        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"),
     }
     defects = []
     game_id = projected["source_game_id"]
@@ -936,10 +937,10 @@ def _semantic_projection_defects(
         if projected[target] != expected:
             if target in {"team_score", "opponent_score"}:
                 original_team = _first(
-                    parent, "team_score", "wagner_points", "dayton_score", "source_points_for"
+                    parent, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"
                 )
                 original_opponent = _first(
-                    parent, "opponent_score", "opponent_points", "source_points_against"
+                    parent, "opponent_score", "opponent_points", "score_against", "source_points_against"
                 )
                 projected_team = projected.get("team_score", "").strip()
                 projected_opponent = projected.get("opponent_score", "").strip()
@@ -1892,7 +1893,7 @@ def author(
             for filename in AUTHORING_FILES
         }
         opp_fields, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
-        _, venues = _csv_bytes(archive.read(members["venues.csv"]))
+        venue_fields, venues = _csv_bytes(archive.read(members["venues.csv"]))
         games, defects = _projection(
             ledger,
             opponents,
@@ -1916,10 +1917,14 @@ def author(
                 "Stage 4 source-game projection defects: "
                 + json.dumps(defects[:10], sort_keys=True)
             )
+        refreshed_venues, venue_summary_refresh = refresh_venue_assignment_summaries(
+            games, venues
+        )
+        write_json(output_dir / "stage4-venue-summary-refresh.json", venue_summary_refresh)
         _write_csv(package / "source-games.csv", SOURCE_GAME_FIELDS, games)
         _write_csv(package / "opponents.csv", opp_fields, package_opponents)
-        for filename in ("venues.csv", "conferences.csv"):
-            (package / filename).write_bytes(archive.read(members[filename]))
+        _write_csv(package / "venues.csv", venue_fields, refreshed_venues)
+        (package / "conferences.csv").write_bytes(archive.read(members["conferences.csv"]))
         (package / "notes.md").write_text(
             _notes(
                 school_key,
@@ -1959,6 +1964,7 @@ def author(
         "research_base_sha": preflight["research_base_sha"],
         "coverage": preflight["coverage"],
         "early_history_uncertainty": preflight["early_history_uncertainty"],
+        "venue_summary_refresh": venue_summary_refresh,
         "package_dir": str(package),
         "closeout": closeout_status,
         "repository_mutations": 0,
