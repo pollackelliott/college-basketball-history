@@ -153,6 +153,178 @@ def _valid_season(value: str) -> bool:
     return bool(match and int(match.group(2)) == int(match.group(1)) + 1)
 
 
+def refresh_venue_assignment_summaries(
+    games: list[dict[str, str]],
+    venues: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], dict[str, Any]]:
+    """Refresh only derived venue assignment summaries from exact final games.
+
+    Historical venue identity, locality, aliases, relationship chronology and
+    provenance are never inferred or changed. Matching uses the same exact
+    normalized venue-name + locality model as the permanent consistency gate.
+    Any game that can match more than one physical venue group fails closed.
+    """
+
+    refreshed = [dict(row) for row in venues]
+    groups: dict[tuple[str, str, str], list[int]] = defaultdict(list)
+    labels_to_groups: dict[
+        tuple[str, str, str], set[tuple[str, str, str]]
+    ] = defaultdict(set)
+
+    for index, row in enumerate(venues):
+        canonical = row.get("canonical_name", "").strip()
+        if not canonical:
+            continue
+        city = row.get("city", "").strip()
+        state = row.get("state", "").strip()
+        group = (
+            _normalize_name(canonical),
+            city.casefold(),
+            normalize_jurisdiction(state),
+        )
+        groups[group].append(index)
+        labels = [canonical]
+        labels.extend(
+            alias.strip()
+            for alias in row.get("aliases", "").split(";")
+            if alias.strip()
+        )
+        for label in labels:
+            normalized = _normalize_name(label)
+            if normalized:
+                labels_to_groups[(normalized, group[1], group[2])].add(group)
+
+    ambiguous_group_rows: list[dict[str, Any]] = []
+    for group, indexes in groups.items():
+        venue_keys = {
+            venues[index].get("venue_key", "").strip()
+            for index in indexes
+            if venues[index].get("venue_key", "").strip()
+        }
+        if len(venue_keys) > 1:
+            ambiguous_group_rows.append(
+                {
+                    "canonical_name": venues[indexes[0]].get("canonical_name", ""),
+                    "city": venues[indexes[0]].get("city", ""),
+                    "state": venues[indexes[0]].get("state", ""),
+                    "venue_keys": sorted(venue_keys),
+                }
+            )
+    if ambiguous_group_rows:
+        raise WorkflowError(
+            "venue summary refresh found one name/locality group bound to "
+            "multiple physical venue keys: "
+            + json.dumps(ambiguous_group_rows[:10], sort_keys=True)
+        )
+
+    assignments: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
+    ambiguous_games: list[dict[str, Any]] = []
+    for game in games:
+        venue_name = game.get("curated_venue_name", "").strip()
+        if not venue_name:
+            continue
+        lookup = (
+            _normalize_name(venue_name),
+            game.get("city", "").strip().casefold(),
+            normalize_jurisdiction(game.get("state", "")),
+        )
+        matches = labels_to_groups.get(lookup, set())
+        if len(matches) > 1:
+            ambiguous_games.append(
+                {
+                    "source_game_id": game.get("source_game_id", "").strip(),
+                    "curated_venue_name": venue_name,
+                    "city": game.get("city", "").strip(),
+                    "state": game.get("state", "").strip(),
+                    "group_count": len(matches),
+                }
+            )
+            continue
+        if len(matches) == 1:
+            assignments[next(iter(matches))].append(game)
+
+    if ambiguous_games:
+        raise WorkflowError(
+            "venue summary refresh found ambiguous venue/locality game matches: "
+            + json.dumps(ambiguous_games[:25], sort_keys=True)
+        )
+
+    changed_fields = {
+        "games_currently_assigned",
+        "first_assigned_game",
+        "last_assigned_game",
+    }
+    changed_groups: list[dict[str, Any]] = []
+    changed_row_count = 0
+    for group, indexes in sorted(groups.items()):
+        group_games = assignments.get(group, [])
+        count = len(group_games)
+        dates = [game.get("game_date", "").strip() for game in group_games]
+        all_dated = bool(group_games) and all(dates)
+        first = min(dates) if all_dated else ""
+        last = max(dates) if all_dated else ""
+
+        owner_index = indexes[0]
+        for index in indexes:
+            row = refreshed[index]
+            before = {field: row.get(field, "") for field in changed_fields}
+            if index == owner_index:
+                row["games_currently_assigned"] = str(count)
+                row["first_assigned_game"] = first
+                row["last_assigned_game"] = last
+            else:
+                row["games_currently_assigned"] = "0"
+                row["first_assigned_game"] = ""
+                row["last_assigned_game"] = ""
+            after = {field: row.get(field, "") for field in changed_fields}
+            if before != after:
+                changed_row_count += 1
+
+        original_group = [venues[index] for index in indexes]
+        refreshed_group = [refreshed[index] for index in indexes]
+        group_changed = any(
+            any(
+                original.get(field, "") != updated.get(field, "")
+                for field in changed_fields
+            )
+            for original, updated in zip(original_group, refreshed_group)
+        )
+        if group_changed:
+            changed_groups.append(
+                {
+                    "canonical_name": venues[owner_index].get("canonical_name", ""),
+                    "city": venues[owner_index].get("city", ""),
+                    "state": venues[owner_index].get("state", ""),
+                    "venue_rows": len(indexes),
+                    "games_currently_assigned": count,
+                    "first_assigned_game": first,
+                    "last_assigned_game": last,
+                }
+            )
+
+    # Prove that no non-derived field changed.
+    for original, updated in zip(venues, refreshed):
+        keys = set(original) | set(updated)
+        for field in keys - changed_fields:
+            if original.get(field, "") != updated.get(field, ""):
+                raise WorkflowError(
+                    "venue summary refresh altered non-derived field "
+                    f"{field!r}"
+                )
+
+    report = {
+        "status": "PASS",
+        "venue_rows": len(venues),
+        "game_rows": len(games),
+        "changed_row_count": changed_row_count,
+        "changed_group_count": len(changed_groups),
+        "changed_groups": changed_groups,
+        "ambiguous_game_count": 0,
+        "refreshed_fields": sorted(changed_fields),
+    }
+    return refreshed, report
+
+
 def venue_summary_consistency_report(
     games: list[dict[str, str]],
     venues: list[dict[str, str]],
