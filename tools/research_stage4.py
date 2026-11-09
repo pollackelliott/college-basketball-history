@@ -1144,8 +1144,9 @@ def _project_package_opponents(
         clone = dict(base_rows[0])
         seasons = sorted(
             {
-                project_season_label(_first(parent, "season_label", "season"))
+                _first(parent, "season_label", "season")
                 for parent, _ in records
+                if _first(parent, "season_label", "season")
             }
         )
         clone["source_opponent_label"] = literal
