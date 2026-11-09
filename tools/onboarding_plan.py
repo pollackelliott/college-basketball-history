@@ -82,6 +82,7 @@ from plan_home_chronology_remediation import (
     valid_home_exception_shape,
 )
 from site_completeness import (
+    ALLOWED_SITE_RESEARCH_STATUSES,
     _row_gap_categories,
     has_supported_foreign_locality,
     researched_unresolved_home_venue,
@@ -4090,7 +4091,7 @@ def build_plan(
         summary["assertions_to_add"] = 0
 
 
-    return {
+    result = {
         "schema_version": PLAN_SCHEMA_VERSION,
         "workflow_version": WORKFLOW_VERSION,
         "school_key": school_key,
@@ -4102,6 +4103,14 @@ def build_plan(
         "summary": summary,
         "decisions": decisions,
     }
+    if not blockers:
+        site_gap_provenance = _discover_reciprocal_only_site_gap_provenance(
+            repo,
+            result,
+        )
+        if site_gap_provenance:
+            result["site_gap_provenance"] = site_gap_provenance
+    return result
 
 
 def render_report(plan: dict[str, Any], approved_hash: str = "") -> str:
@@ -4158,6 +4167,31 @@ def render_report(plan: dict[str, Any], approved_hash: str = "") -> str:
     if not warnings:
         lines.append("- None.")
 
+    site_gap_provenance = plan.get("site_gap_provenance", [])
+    lines.extend(["", "## Non-substantive site-gap provenance", ""])
+    if site_gap_provenance:
+        lines.append(
+            "These field-specific records do not add substantive Gate 1 decisions or "
+            "change canonical basketball facts. They are sealed only with the publication "
+            "review and materialize as reconciliation provenance during apply."
+        )
+        lines.append("")
+        for entry in site_gap_provenance:
+            lines.append(
+                "- "
+                + entry["canonical_game_id"]
+                + ": "
+                + ", ".join(entry["fields"])
+                + "; reciprocal "
+                + entry["reciprocal_source_program_key"]
+                + "/"
+                + entry["reciprocal_source_game_id"]
+                + "; "
+                + entry["resolution_basis"]
+            )
+    else:
+        lines.append("- None.")
+
     lines.extend(["", "## Owner decisions", ""])
     decisions = plan.get("decisions", [])
     if not decisions:
@@ -4201,6 +4235,16 @@ def write_preflight_artifacts(plan: dict[str, Any], output_dir: Path) -> dict[st
         for item in plan.get("decisions", []):
             row = dict(item)
             row["allowed_actions"] = " | ".join(item.get("allowed_actions", []))
+            if (
+                item.get("category") == "publication"
+                and plan.get("site_gap_provenance")
+            ):
+                row["site_gap_provenance_json"] = json.dumps(
+                    plan["site_gap_provenance"],
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                )
             writer.writerow({field: row.get(field, "") for field in REVIEW_COLUMNS})
     report_path.write_text(render_report(plan), encoding="utf-8")
     return {"plan": plan_path, "review": review_path, "report": report_path}
@@ -6040,6 +6084,180 @@ def _validate_reciprocal_only_site_gap_provenance(
         source_rows,
         discrepancy_rows,
     )
+
+
+def _discover_reciprocal_only_site_gap_provenance(
+    repo: Path,
+    plan: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Propose owner-visible provenance for the narrow reciprocal-only gap topology.
+
+    Discovery is deterministic representation work, not historical adjudication. It
+    proposes provenance only when the canonical game is already regular-season NEUTRAL,
+    the target has no source assertion/exact source row or substantive decision for the
+    game, all reciprocal H/A/N evidence is compatible, no usable reciprocal site field
+    exists for the gap, and neither source research metadata nor an existing
+    reconciliation record already accounts for it.
+    """
+
+    school_key = str(plan.get("school_key", "") or "").strip()
+    if not school_key:
+        return []
+
+    canonical_rows = read_csv(repo / "data/canonical/games.csv")
+    assertion_rows = read_csv(repo / "data/evidence/game-assertions.csv")
+    source_rows = read_csv(repo / "schools" / school_key / "source-games.csv")
+    discrepancy_rows = read_csv(repo / "data/reconciliation/discrepancies.csv")
+    assertions_by_game: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for assertion in assertion_rows:
+        game_id = assertion.get("canonical_game_id", "").strip()
+        if game_id:
+            assertions_by_game[game_id].append(assertion)
+
+    reciprocal_source_cache: dict[str, dict[str, dict[str, str]]] = {}
+
+    def reciprocal_source_row(program: str, source_id: str) -> dict[str, str]:
+        if program not in reciprocal_source_cache:
+            path = repo / "schools" / program / "source-games.csv"
+            rows = read_csv(path) if path.is_file() else []
+            reciprocal_source_cache[program] = {
+                row.get("source_game_id", "").strip(): row
+                for row in rows
+                if row.get("source_game_id", "").strip()
+            }
+        return reciprocal_source_cache[program].get(source_id, {})
+
+    proposals: list[dict[str, Any]] = []
+    for canonical in canonical_rows:
+        game_id = canonical.get("canonical_game_id", "").strip()
+        if not game_id or school_key not in {
+            canonical.get("team_a_key", "").strip(),
+            canonical.get("team_b_key", "").strip(),
+        }:
+            continue
+        if canonical.get("site_type", "").strip() != "NEUTRAL":
+            continue
+        if canonical.get("game_type", "").strip() != "REGULAR_SEASON":
+            continue
+
+        venue_missing = not (
+            canonical.get("venue_key", "").strip()
+            or canonical.get("venue_id", "").strip()
+        )
+        city = canonical.get("site_city", "").strip()
+        state = canonical.get("site_state", "").strip()
+        if bool(city) != bool(state):
+            continue
+        fields = sorted(
+            (["venue"] if venue_missing else [])
+            + (["location"] if not city and not state else [])
+        )
+        if not fields:
+            continue
+        if any(
+            _decision_references_canonical_game(item, game_id)
+            for item in plan.get("decisions", [])
+        ):
+            continue
+
+        game_assertions = assertions_by_game.get(game_id, [])
+        if any(
+            assertion.get("source_program_key", "").strip() == school_key
+            for assertion in game_assertions
+        ):
+            continue
+        reciprocals = [
+            assertion
+            for assertion in game_assertions
+            if assertion.get("source_program_key", "").strip() != school_key
+        ]
+        compatible = [
+            assertion
+            for assertion in reciprocals
+            if assertion.get("normalized_opponent_key", "").strip() == school_key
+            and _assertion_site_to_canonical(assertion, canonical) == "NEUTRAL"
+        ]
+        if not compatible:
+            continue
+        if any(
+            _assertion_site_to_canonical(assertion, canonical)
+            not in {"UNKNOWN", "NEUTRAL"}
+            for assertion in reciprocals
+        ):
+            continue
+        if "venue" in fields and any(
+            assertion.get("curated_venue_name", "").strip()
+            or assertion.get("source_venue_name", "").strip()
+            for assertion in reciprocals
+        ):
+            continue
+        if "location" in fields and any(
+            assertion.get("city", "").strip() or assertion.get("state", "").strip()
+            for assertion in reciprocals
+        ):
+            continue
+        if any(
+            row.get("canonical_game_id", "").strip() == game_id
+            and row.get("field_name", "").strip() in set(fields)
+            and row.get("status", "").strip().upper() in {"UNDER_REVIEW", "RESOLVED"}
+            for row in discrepancy_rows
+        ):
+            continue
+
+        researched_reciprocal = False
+        for assertion in compatible:
+            program = assertion.get("source_program_key", "").strip()
+            source_id = assertion.get("source_game_id", "").strip()
+            source = reciprocal_source_row(program, source_id)
+            if (
+                source.get("site_research_status", "").strip().upper()
+                in ALLOWED_SITE_RESEARCH_STATUSES
+                and source.get("site_research_basis", "").strip()
+            ):
+                researched_reciprocal = True
+                break
+        if researched_reciprocal:
+            continue
+
+        named = sorted(
+            compatible,
+            key=lambda row: (
+                row.get("source_program_key", "").strip(),
+                row.get("source_game_id", "").strip(),
+            ),
+        )[0]
+        entry = {
+            "canonical_game_id": game_id,
+            "fields": fields,
+            "reciprocal_source_program_key": named.get(
+                "source_program_key", ""
+            ).strip(),
+            "reciprocal_source_game_id": named.get("source_game_id", "").strip(),
+            "resolution_basis": (
+                "Non-substantive publication provenance: the established canonical "
+                "regular-season H/A/N is NEUTRAL; the target has no source assertion "
+                "or substantive decision for this game; accepted reciprocal evidence "
+                "agrees with NEUTRAL but supplies no supported "
+                + " and ".join(fields)
+                + ". Preserve the surviving blank field(s) rather than infer from "
+                "event text or geography."
+            ),
+        }
+        try:
+            validated = _validate_reciprocal_only_site_gap_provenance_rows(
+                school_key,
+                plan,
+                [entry],
+                canonical_rows,
+                assertion_rows,
+                source_rows,
+                discrepancy_rows,
+            )
+        except WorkflowError:
+            continue
+        proposals.extend(validated)
+
+    return sorted(proposals, key=lambda item: item["canonical_game_id"])
 
 
 def _record_reciprocal_only_site_gap_provenance(
