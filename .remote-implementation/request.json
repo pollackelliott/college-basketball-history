@@ -1,48 +1,48 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "george-washington",
+  "previous_control_state_commit": "9df56013c22eed251ff7ddd1ab36fe07dd5e3222",
+  "previous_control_state_sha256": "3d127f5a61878348d2d2b5622ca5883aa446692c645e337fb601c5e4f1b29434",
+  "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "research_checkpoint": {
+    "sha256": "73eb3f8f0f4b739aaf08bb6eb92029d151be5d151416fd0277e33c5a38d4c679",
+    "research_base_sha": "2991241b273614781d3153a0cbbe7574d48e457f",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9df56013c22eed251ff7ddd1ab36fe07dd5e3222",
+      "path_prefix": ".remote-implementation/transports/george-washington/george-washington-stage1-0002-final/piece-",
+      "part_count": 10
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT George Washington serialized Implementation lane — continuation of owner-directed Research-to-Implementation transition",
+    "authorization": "Owner authorized the George Washington Implementation Stage 1 intake/inventory phase after an authenticated RESEARCH_FROZEN transition and then explicitly said Continue after the first unconsumed submission attempt. Immutable Research Freeze SHA-256 73eb3f8f0f4b739aaf08bb6eb92029d151be5d151416fd0277e33c5a38d4c679, research_base_sha 2991241b273614781d3153a0cbbe7574d48e457f, accepted INCEPTION+ scope with reusable baseline CONFIRMED, accepted Stage 5 NON_D1 owner scan, and PRE-FREEZE SELF-CHALLENGE PASS remain frozen authority. This request authorizes only complete read-only current-main Stage 1 reconciliation inventory against exact protected main 2c47d43d92d6fbf2e7f14ed147876c341daac24a. It does not reopen Research or authorize Integration Freeze mutation, Phase 0, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, recovery, protected-main mutation, or another school."
+  },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "release": false,
-    "release_gate2_approval": false,
-    "release_preview_verify": false,
-    "release_production_proof": true,
-    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
-    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT VCU Implementation lane — packet-bound post-merge Production proof",
-    "authorization": "Owner explicitly approved the exact VCU Preview with 'Approved. Proceed,' authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #544 head c58fae3653a86d5317b45d210951beea9cee1f0d against approved main 6164f7b0269d5d53b2be08b02c3d97626d375be7. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge e7706912f5b7988d48faae47f33a48bd6a8abc62, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
-  },
-  "expected_protected_main_sha": "e7706912f5b7988d48faae47f33a48bd6a8abc62",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "merge_sha": "e7706912f5b7988d48faae47f33a48bd6a8abc62",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "59be7aaad4632a7b9d3ec7d230a9bac756f4bdf51a79fd126c55e8c8ffe415fa"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/vcu/vcu-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "13bf27e12c9b3fe2b7d8fd3a60266b01739f495337fcdab4a313641e30ff68c1"
-  },
-  "pr_number": 544,
-  "previous_control_state_commit": "67e099d653daa3b5694e8b55fc51c28ca42b8e8e",
-  "previous_control_state_sha256": "fda9430a1e899213345b83ba3f1e93581b1634af677c89e4cc4eac4a4f188637",
-  "request_id": "vcu-release-production-proof-0001",
-  "schema_version": 1,
-  "school_key": "vcu",
-  "target_branch": "data/vcu-onboarding",
-  "target_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d"
+  }
 }
