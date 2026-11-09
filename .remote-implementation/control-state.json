@@ -474,18 +474,19 @@
     "vcu-release-production-proof-0001",
     "george-washington-stage1-0002",
     "george-washington-phase0-0001",
-    "george-washington-stage2-census-0001"
+    "george-washington-stage2-census-0001",
+    "george-washington-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42679592486:1",
+  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-washington-stage2-opponent-display-normalize-0001",
+  "active_request_sha256": "5167a719d31b9df434f3707fd8514ca57c5b9a50062327b3634cc4f167bfcbf5",
+  "active_school_key": "george-washington",
+  "active_target_branch": "data/george-washington-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -962,8 +963,11 @@
     "target_branch": "data/george-washington-onboarding",
     "target_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42679592486",
+  "lock_acquisition_request_commit": "1b5cad9f4595a35107e5706951762d13f009d150",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

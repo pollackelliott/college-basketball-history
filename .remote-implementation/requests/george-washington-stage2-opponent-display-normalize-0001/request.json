@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "school_key": "george-washington",
+  "previous_control_state_commit": "2c1377a1ba381e52935dad7f044447311b9a914c",
+  "previous_control_state_sha256": "a3345ab64420257b4be79f8a2583f6f41a1855275a7db098a5972be61f193c49",
+  "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "69b11fe958f1e7fce8339958f94d333d5f994be6176ff16ca5377fbd411c7179"
+  },
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "creation_provenance": {
+    "origin": "ChatGPT George Washington serialized Implementation lane — Stage 2 deterministic opponent-display reconciliation",
+    "authorization": "Owner explicitly replied Proceed after fresh-verified Stage 2 census george-washington-stage2-census-0001. That exact census is BLOCKED solely by three deterministic historical opponent-display conflicts (merchant-marine-academy, north-carolina-pre-flight, pennsylvania-military-college), with zero warnings, zero owner decisions, semantic drift PASS, tracked Stage 2 mutation NONE, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete three-key population. The permanent helper may change only canonical_opponent_name in schools/george-washington/opponents.csv and normalized_opponent_name in schools/george-washington/source-games.csv, using existing project display authority, followed by no-map Stage 2 regeneration and fresh equivalence verification. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, or protected-main mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
