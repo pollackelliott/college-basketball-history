@@ -1,44 +1,49 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-washington-stage2-opponent-display-normalize-0001",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "request_id": "george-washington-stage2-proposal-0001",
   "school_key": "george-washington",
-  "previous_control_state_commit": "2c1377a1ba381e52935dad7f044447311b9a914c",
-  "previous_control_state_sha256": "a3345ab64420257b4be79f8a2583f6f41a1855275a7db098a5972be61f193c49",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "e022fcf5b531ec0168a2eafc5d22eda2ceb340de",
+  "previous_control_state_sha256": "4e15a554890bb0e43c934d9ef504155581cffb8112e47da8841f35fbbd79dd66",
   "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
   "target_branch": "data/george-washington-onboarding",
-  "target_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "69b11fe958f1e7fce8339958f94d333d5f994be6176ff16ca5377fbd411c7179"
+  "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/george-washington/george-washington-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "81499dec03584c71f5fae210f06efbdd4aeba76d552235744993bcd66998c149"
   },
   "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
   "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/george-washington-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "72445c8c62f7594406d805cfdf7ff79bc481a722cacaa30a55c95dd7edd273fe"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT George Washington serialized Implementation lane — Stage 2 deterministic opponent-display reconciliation",
-    "authorization": "Owner explicitly replied Proceed after fresh-verified Stage 2 census george-washington-stage2-census-0001. That exact census is BLOCKED solely by three deterministic historical opponent-display conflicts (merchant-marine-academy, north-carolina-pre-flight, pennsylvania-military-college), with zero warnings, zero owner decisions, semantic drift PASS, tracked Stage 2 mutation NONE, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete three-key population. The permanent helper may change only canonical_opponent_name in schools/george-washington/opponents.csv and normalized_opponent_name in schools/george-washington/source-games.csv, using existing project display authority, followed by no-map Stage 2 regeneration and fresh equivalence verification. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, or protected-main mutation authority."
+    "origin": "ChatGPT George Washington serialized Implementation Stage 2 - exact recommendation-map rehearsal",
+    "authorization": "Owner explicitly replied Proceed after fresh-verified CAPABILITY_CENSUS_READY authority. This request rehearses one exact mature map over all 329 decisions. No Owner Gate 1 approval, fill, seal, apply, Preview, release, merge, Production, recovery, current-main refresh, shared/global mutation, or protected-main mutation is authorized."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
-    "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
-    "release_preview_verify": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
   }
 }
