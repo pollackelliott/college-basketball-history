@@ -1,0 +1,70 @@
+{
+  "changed_file_sha256": {
+    "docs/research-stage4-authoring-contract.md": "69730ebdda316ad3a5016683d6cf39f65e86ddae871451c15101216201e8201a",
+    "tests/test_research_stage4.py": "2e5ab65a52b44f2673888826fd612afafcc87f8253bdef4d097188c392b987a8",
+    "tests/test_research_stage4_closeout.py": "b96813b710172ea06badeae32bd09cc6d77d985c19487c0183bdac7fa4dc622c",
+    "tools/research_stage4.py": "ceb01da405e7aa64ddb783ebaea94c67c20fa36eb89a20871bc3064c7be3bc76",
+    "tools/research_stage4_closeout.py": "69e7159050ff0adf2e0cc3ae088c6bc0a5d83b8bc2d0bc67017fccc5742239e1"
+  },
+  "changed_paths": [
+    "docs/research-stage4-authoring-contract.md",
+    "tests/test_research_stage4.py",
+    "tests/test_research_stage4_closeout.py",
+    "tools/research_stage4.py",
+    "tools/research_stage4_closeout.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "189d88d800296bded78cbd2ad3daaa4257aee845",
+  "main_changed_paths": [
+    "docs/research-stage4-authoring-contract.md",
+    "tests/test_research_stage4.py",
+    "tests/test_research_stage4_closeout.py",
+    "tools/research_stage4.py",
+    "tools/research_stage4_closeout.py"
+  ],
+  "merge_base_sha": "a5a66225b06c4492b4e3341731c12e75c6acb94b",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "8941e06e7ac83d071a7c934394b338b87d82f86be96e9a5b70b30df85ccdaf09",
+    "notes.md": "f836a5c594f682ed924ab90c933b75d26c6e15a55bc57a77dd6f4df25087b200",
+    "opponents.csv": "729fa694a6878e9f5f701fd820e2f2b6f7e4442a231a5d7f22953c3e55a8819b",
+    "source-games.csv": "d692431e6c6a98de598b25fef7c48a70f7fe7082989691ca05da866392cc863f",
+    "source-notes.md": "0b625ec2749385bb1c6abbaf617b2f5908b3e9f79d0f957924460b0541cd13ee",
+    "venues.csv": "9773cb94d63c33cdc83439d1fce000f4730929f7e493d9fb81d3f5ca3f51443f"
+  },
+  "prepared_commit_sha": "5e07c03ba8b92e609b9922aa9dad85651d21ab62",
+  "prepared_parents": [
+    "189d88d800296bded78cbd2ad3daaa4257aee845",
+    "6164f7b0269d5d53b2be08b02c3d97626d375be7"
+  ],
+  "prepared_tree_sha": "1ea9c183187478f55ceca78c3da9d20d2923a219",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "0b6adf9a0aaa6611c1b85bffb761900c4f94dd6d1bbf10e4f43105edefad5efd",
+    "data/reference/venue-names.csv": "9b8f6d7714046fbcf32a02cebce146596ff9bb3220694f9344a4509c2903902e",
+    "data/reference/venues.csv": "035d27228844bdb16452795537670f0574bcb496a83b3b394f52b914c4ef4596",
+    "schools/vcu/conferences.csv": "8941e06e7ac83d071a7c934394b338b87d82f86be96e9a5b70b30df85ccdaf09",
+    "schools/vcu/notes.md": "f836a5c594f682ed924ab90c933b75d26c6e15a55bc57a77dd6f4df25087b200",
+    "schools/vcu/opponents.csv": "729fa694a6878e9f5f701fd820e2f2b6f7e4442a231a5d7f22953c3e55a8819b",
+    "schools/vcu/source-games.csv": "d692431e6c6a98de598b25fef7c48a70f7fe7082989691ca05da866392cc863f",
+    "schools/vcu/source-notes.md": "0b625ec2749385bb1c6abbaf617b2f5908b3e9f79d0f957924460b0541cd13ee",
+    "schools/vcu/venues.csv": "9773cb94d63c33cdc83439d1fce000f4730929f7e493d9fb81d3f5ca3f51443f"
+  },
+  "protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "target_branch": "data/vcu-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/vcu/conferences.csv",
+    "schools/vcu/notes.md",
+    "schools/vcu/opponents.csv",
+    "schools/vcu/source-games.csv",
+    "schools/vcu/source-notes.md",
+    "schools/vcu/venues.csv"
+  ]
+}
