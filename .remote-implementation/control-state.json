@@ -946,11 +946,11 @@
   "current_sequence": 452,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
     "operation": "PHASE0",
     "protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "george-washington-phase0-0001",
     "school_key": "george-washington",
     "successor_manifest_path": ".remote-implementation/successors/george-washington/george-washington-phase0-0001/successor-manifest.json",

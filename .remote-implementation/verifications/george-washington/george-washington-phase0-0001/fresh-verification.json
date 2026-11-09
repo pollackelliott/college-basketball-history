@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39",
+  "prepared_parent_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "prepared_tree_sha": "eb1bf04780adca099b9f3f73618130568bd188bb",
+  "protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "george-washington-phase0-0001",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39"
+}
