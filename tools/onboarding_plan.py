@@ -5339,18 +5339,69 @@ def _append_note(existing: str, addition: str) -> str:
     return f"{existing}; {addition}" if existing else addition
 
 
+def _retire_target_home_exception_markers_after_site_reconciliation(
+    school_key: str,
+    canonical: dict[str, str],
+) -> int:
+    """Retire target-HOME-only provenance after H/A/N moves away from the target.
+
+    Research-backed HOME venue exception markers are valid only while the named
+    target school remains the canonical home program.  A sealed USE_SOURCE site
+    reconciliation can legitimately change that H/A/N while leaving the old
+    canonical note behind.  Remove only markers owned by this target school;
+    preserve other programs' provenance and preserve every marker when the
+    target remains HOME.
+    """
+
+    school_key = (school_key or "").strip()
+    if not school_key:
+        return 0
+    if (
+        relative_source_site(
+            school_key,
+            canonical,
+            canonical.get("site_type", ""),
+        )
+        == "SOURCE_PROGRAM_HOME"
+    ):
+        return 0
+
+    escaped_school = re.escape(school_key)
+    patterns = (
+        rf"\[RESEARCHED_UNRESOLVED_HOME_VENUE source={escaped_school}/[^\]]+\]",
+        rf"\[RECONCILED_UNRESOLVED_HOME_VENUE source={escaped_school}/[^\]]+\]",
+        rf"\[RECONCILED_UNKNOWN_SITE_HOME_VENUE source={escaped_school}/[^\]]+\]",
+        rf"\[RECIPROCAL_ONLY_UNRESOLVED_HOME_VENUE target={escaped_school} [^\]]+\]",
+    )
+
+    notes = canonical.get("notes", "")
+    retired = 0
+    for pattern in patterns:
+        notes, count = re.subn(pattern, "", notes)
+        retired += count
+
+    if retired:
+        notes = re.sub(r"\s*;\s*;\s*", "; ", notes)
+        notes = re.sub(r"^\s*;\s*|\s*;\s*$", "", notes).strip()
+        canonical["notes"] = notes
+    return retired
+
+
 def _sync_site_metadata_from_source(
     source: dict[str, str],
     canonical: dict[str, str],
     venue_map: dict[str, list[dict[str, str]]],
-) -> None:
+) -> int:
     site = canonical.get("site_type", "")
     if site == "UNKNOWN":
         canonical["venue_key"] = ""
         canonical["venue_id"] = ""
         canonical["site_city"] = ""
         canonical["site_state"] = ""
-        return
+        return _retire_target_home_exception_markers_after_site_reconciliation(
+            source.get("source_program_key", ""),
+            canonical,
+        )
 
     venue_name = source.get("curated_venue_name", "").strip()
     venue = (
@@ -5425,6 +5476,11 @@ def _sync_site_metadata_from_source(
             f"source={source.get('source_program_key', '').strip()}/"
             f"{source.get('source_game_id', '').strip()}]",
         )
+
+    return _retire_target_home_exception_markers_after_site_reconciliation(
+        source.get("source_program_key", ""),
+        canonical,
+    )
 
 
 def _sync_site_metadata_to_source(
@@ -8235,10 +8291,12 @@ def apply_reconciliation_decisions(
                         school_key,
                         approved_plan=approved,
                     )
-                _sync_site_metadata_from_source(
-                    source,
-                    canonical,
-                    target_venue_metadata,
+                counts["home_exception_markers_retired"] += (
+                    _sync_site_metadata_from_source(
+                        source,
+                        canonical,
+                        target_venue_metadata,
+                    )
                 )
                 canonical["notes"], retired = retire_site_mismatched_registry_fallbacks(
                     canonical.get("notes", ""),
