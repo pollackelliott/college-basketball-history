@@ -668,6 +668,7 @@ def _projection(
             row,
             "normalized_opponent_key",
             "opponent_program_key",
+            "stage2_opponent_key",
             "opponent_key",
             "canonical_opponent_key",
         )
@@ -748,6 +749,7 @@ def _projection(
                     "source_opponent_label",
                     "source_opponent_text",
                     "source_opponent_field",
+                    "source_opponent_literal",
                 ),
                 "normalized_opponent_key": opponent_key,
                 "normalized_opponent_name": opponent_name,
@@ -888,6 +890,19 @@ def _semantic_projection_defects(
     """Independent population-level anti-loss checks for accepted source facts."""
     pairs = {
         "season_label": ("season_label", "season"),
+        "source_opponent_label": (
+            "source_opponent_label",
+            "source_opponent_text",
+            "source_opponent_field",
+            "source_opponent_literal",
+        ),
+        "normalized_opponent_key": (
+            "normalized_opponent_key",
+            "opponent_program_key",
+            "stage2_opponent_key",
+            "opponent_key",
+            "canonical_opponent_key",
+        ),
         "team_score": ("team_score", "wagner_points", "dayton_score", "source_points_for"),
         "opponent_score": ("opponent_score", "opponent_points", "source_points_against"),
         "played_result": (
@@ -1001,6 +1016,153 @@ def _opponent_home_accounting_projection_defects(
                 }
             )
     return defects
+
+
+def _project_package_opponents(
+    ledger: list[dict[str, str]],
+    games: list[dict[str, str]],
+    opponents: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], list[dict[str, Any]], dict[str, int]]:
+    """Materialize package-ready literal mappings from accepted legacy base labels.
+
+    Legacy ledgers may preserve a decorated source literal separately from the
+    Stage 2 base label used for identity resolution. The base label is authority
+    only when the row explicitly carries both stage2_opponent_base_label and
+    stage2_opponent_key and that exact pair has one unambiguous mapping in the
+    durable opponents capsule. No decoration parsing or stripping occurs.
+    """
+
+    package_rows = [dict(row) for row in opponents]
+    by_pair: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    keys_by_label: dict[str, set[str]] = defaultdict(set)
+    for row in opponents:
+        label = row.get("source_opponent_label", "").strip()
+        key = row.get("canonical_opponent_key", "").strip()
+        if label and key:
+            by_pair[(label, key)].append(row)
+            keys_by_label[label].add(key)
+
+    game_by_id = {
+        row.get("source_game_id", "").strip(): row
+        for row in games
+        if row.get("source_game_id", "").strip()
+    }
+    grouped: dict[
+        tuple[str, str], list[tuple[dict[str, str], dict[str, str]]]
+    ] = defaultdict(list)
+    defects: list[dict[str, Any]] = []
+
+    for parent in ledger:
+        game_id = project_game_id(parent)
+        game = game_by_id.get(game_id)
+        if game is None:
+            continue
+        literal = game.get("source_opponent_label", "").strip()
+        projected_key = game.get("normalized_opponent_key", "").strip()
+        if not literal or not projected_key:
+            continue
+        if (literal, projected_key) in by_pair:
+            continue
+
+        base_label = _first(parent, "stage2_opponent_base_label")
+        stage2_key = _first(parent, "stage2_opponent_key")
+        if not base_label and not stage2_key:
+            continue
+        if not base_label or not stage2_key:
+            defects.append(
+                {
+                    "reason": "LEGACY_STAGE2_BASE_LABEL_AUTHORITY_INCOMPLETE",
+                    "source_game_id": game_id,
+                    "stage2_opponent_base_label": base_label,
+                    "stage2_opponent_key": stage2_key,
+                }
+            )
+            continue
+        if stage2_key != projected_key:
+            defects.append(
+                {
+                    "reason": "LEGACY_STAGE2_OPPONENT_KEY_CONFLICT",
+                    "source_game_id": game_id,
+                    "stage2_opponent_key": stage2_key,
+                    "projected_opponent_key": projected_key,
+                }
+            )
+            continue
+        label_keys = keys_by_label.get(base_label, set())
+        if label_keys != {stage2_key}:
+            defects.append(
+                {
+                    "reason": "LEGACY_STAGE2_BASE_LABEL_KEY_AMBIGUOUS",
+                    "source_game_id": game_id,
+                    "stage2_opponent_base_label": base_label,
+                    "stage2_opponent_key": stage2_key,
+                    "capsule_keys": sorted(label_keys),
+                }
+            )
+            continue
+        candidates = by_pair.get((base_label, stage2_key), [])
+        if len(candidates) != 1:
+            defects.append(
+                {
+                    "reason": "LEGACY_STAGE2_BASE_LABEL_MAPPING_NOT_UNIQUE",
+                    "source_game_id": game_id,
+                    "stage2_opponent_base_label": base_label,
+                    "stage2_opponent_key": stage2_key,
+                    "matches": len(candidates),
+                }
+            )
+            continue
+        grouped[(literal, stage2_key)].append((parent, candidates[0]))
+
+    added = 0
+    for (literal, key), records in sorted(grouped.items()):
+        base_rows = [record[1] for record in records]
+        identity_fields = (
+            "source_program_key",
+            "canonical_opponent_key",
+            "canonical_opponent_name",
+            "current_d1",
+            "resolution_status",
+            "resolution_method",
+            "user_choice",
+            "audit_note",
+        )
+        signatures = {
+            tuple(row.get(field, "").strip() for field in identity_fields)
+            for row in base_rows
+        }
+        if len(signatures) != 1:
+            defects.append(
+                {
+                    "reason": "LEGACY_STAGE2_BASE_LABEL_MAPPING_CONFLICT",
+                    "source_opponent_label": literal,
+                    "canonical_opponent_key": key,
+                }
+            )
+            continue
+
+        clone = dict(base_rows[0])
+        seasons = sorted(
+            {
+                _first(parent, "season_label", "season")
+                for parent, _ in records
+                if _first(parent, "season_label", "season")
+            }
+        )
+        clone["source_opponent_label"] = literal
+        clone["canonical_opponent_key"] = key
+        clone["games_with_source_label"] = str(len(records))
+        clone["first_season"] = seasons[0] if seasons else ""
+        clone["last_season"] = seasons[-1] if seasons else ""
+        package_rows.append(clone)
+        by_pair[(literal, key)].append(clone)
+        added += 1
+
+    return package_rows, defects, {
+        "authoring_opponent_rows": len(opponents),
+        "package_opponent_rows": len(package_rows),
+        "legacy_literal_mapping_rows_added": added,
+    }
 
 
 def _mapping_defects(
@@ -1537,6 +1699,12 @@ def inspect_checkpoint(
                 ),
             )
         )
+        (
+            package_opponents,
+            opponent_compatibility_defects,
+            opponent_compatibility_summary,
+        ) = _project_package_opponents(ledger, games, opponents)
+        projection_defects.extend(opponent_compatibility_defects)
         if early_history:
             by_game_id = {row["source_game_id"]: row for row in games}
             for game_id in early_history_summary.get("class_b_game_ids", []):
@@ -1564,7 +1732,7 @@ def inspect_checkpoint(
         result["defects"].extend(
             _table_defects(
                 opp_fields,
-                opponents,
+                package_opponents,
                 OPPONENT_FIELDS,
                 school_key=school_key,
                 table="opponents.csv",
@@ -1589,10 +1757,10 @@ def inspect_checkpoint(
             )
         )
         result["defects"].extend(projection_defects)
-        result["defects"].extend(_mapping_defects(games, opponents))
+        result["defects"].extend(_mapping_defects(games, package_opponents))
         result["defects"].extend(_venue_defects(games, venues))
 
-        for line, row in enumerate(opponents, start=2):
+        for line, row in enumerate(package_opponents, start=2):
             value = row.get("current_d1", "").strip().casefold()
             if value not in D1_VALUES | NON_D1_VALUES:
                 result["defects"].append(
@@ -1629,7 +1797,9 @@ def inspect_checkpoint(
                 "status": "PASS"
                 if not result["defects"]
                 else "STAGE4_AUTHORING_INPUT_INVALID",
-                "opponent_rows": len(opponents),
+                "opponent_rows": len(package_opponents),
+                "authoring_opponent_rows": len(opponents),
+                "legacy_opponent_compatibility": opponent_compatibility_summary,
                 "venue_rows": len(venues),
                 "conference_rows": len(conferences),
                 "projected_source_games": len(games),
@@ -1714,7 +1884,7 @@ def author(
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
             for filename in AUTHORING_FILES
         }
-        _, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
+        opp_fields, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
         _, venues = _csv_bytes(archive.read(members["venues.csv"]))
         games, defects = _projection(
             ledger,
@@ -1729,13 +1899,19 @@ def author(
                 opponent_home_responsibility,
             )
         )
+        package_opponents, opponent_compatibility_defects, _ = (
+            _project_package_opponents(ledger, games, opponents)
+        )
+        defects.extend(opponent_compatibility_defects)
+        defects.extend(_mapping_defects(games, package_opponents))
         if defects:
             raise ValueError(
                 "Stage 4 source-game projection defects: "
                 + json.dumps(defects[:10], sort_keys=True)
             )
         _write_csv(package / "source-games.csv", SOURCE_GAME_FIELDS, games)
-        for filename in AUTHORING_FILES:
+        _write_csv(package / "opponents.csv", opp_fields, package_opponents)
+        for filename in ("venues.csv", "conferences.csv"):
             (package / filename).write_bytes(archive.read(members[filename]))
         (package / "notes.md").write_text(
             _notes(

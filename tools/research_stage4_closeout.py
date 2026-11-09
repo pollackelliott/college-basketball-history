@@ -722,6 +722,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
         "normalized_opponent_key": _first_parent_value(
             row,
             "opponent_program_key",
+            "stage2_opponent_key",
             "normalized_opponent_key",
             "opponent_key",
             "canonical_opponent_key",
@@ -757,6 +758,15 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
         ),
         "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal"),
     }
+    source_opponent_label = _first_parent_value(
+        row,
+        "source_opponent_label",
+        "source_opponent_text",
+        "source_opponent_field",
+        "source_opponent_literal",
+    )
+    if source_opponent_label:
+        expected["source_opponent_label"] = source_opponent_label
     if parsed_source_site and not original_venue_present:
         # Guard the exact source building, not just venue presence.
         expected["curated_venue_name"] = parsed_source_site[0]
@@ -979,6 +989,9 @@ def compare_parent_semantics(
             "source_program_key": actual_row.get("source_program_key", "").strip(),
             "season_start": season_start(actual_row.get("season_label", "")),
             "game_date": actual_row.get("game_date", "").strip(),
+            "source_opponent_label": actual_row.get(
+                "source_opponent_label", ""
+            ).strip(),
             "normalized_opponent_key": actual_row.get(
                 "normalized_opponent_key", ""
             ).strip(),
