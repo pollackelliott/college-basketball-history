@@ -1,35 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-stage2-opponent-display-normalize-0001",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "request_id": "vcu-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
   "school_key": "vcu",
-  "previous_control_state_commit": "469bee59c8b53b81324bee9d48d8d80e3cbb0739",
-  "previous_control_state_sha256": "f9278dbe119f74f56b6c80251a5fc9b9f5a5e795f0888176ccaf51065e6620d9",
+  "previous_control_state_commit": "e00c0f8646e9d95ce432f178fc8bf8e737f67927",
+  "previous_control_state_sha256": "6a60e4e2aaaa38ec6ee7411f3bcfb89ed373442af214d410539570f9bb53e3f1",
   "expected_protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
   "target_branch": "data/vcu-onboarding",
-  "target_sha": "8fdd87f3f6c2b8e900782892ad0079f3f4d94991",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "1ccfe79d975d0fcf189cf80bab525a459caa9119926aa71268c8e88429de3ead"
+  "target_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-phase0-0001/successor-manifest.json",
+    "sha256": "c4d61dbaab782dbff8b9e440f9b2cd3cf3b9d28c023f8fe0f98f668a1de0e645"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "a8707ace7cffe805f375e5afa58708c98bc341968873ec507a1f03b3d9a5e6bd"
   },
   "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
   "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
   "creation_provenance": {
-    "origin": "ChatGPT VCU serialized Implementation lane — Stage 2 deterministic opponent-display reconciliation",
-    "authorization": "Existing owner-authorized VCU Stage 2 phase persists through its normal OWNER_GATE_1_READY boundary. Fresh-verified census vcu-stage2-census-0001 found exactly two historical opponent-display representation conflicts (centenary-louisiana and virginia-state), zero warnings, zero recommendation decisions, semantic drift PASS, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. This authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key census population. The permanent helper may change only opponent display fields under its field-level and semantic guards using existing project display authority. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, or protected-main mutation authority."
+    "origin": "ChatGPT VCU serialized Implementation lane — fresh Stage 2 census after opponent-display normalization",
+    "authorization": "Existing owner-authorized VCU Stage 2 phase persists through its normal OWNER_GATE_1_READY boundary. Opponent-display normalization vcu-stage2-opponent-display-normalize-0001 is independently fresh-verified PASS against exact target 54607765b2a7dbb476f96f7cc4f8c5a51dac6b77 and preserved semantic snapshot 8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656. This request reruns the complete permanent Stage 2 census from that exact verified successor so the full post-normalization decision/site/H-A-N topology is durably captured before any fingerprint-changing repair or recommendation-map work. No tracked repair, historical ruling, proposal rehearsal, Owner Gate 1/2 approval, sealing/apply, release, Preview, merge, Production, recovery, or protected-main mutation authority is included."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
+    "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -39,6 +39,10 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
