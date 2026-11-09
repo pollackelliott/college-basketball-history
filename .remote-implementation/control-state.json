@@ -476,7 +476,7 @@
     "george-washington-phase0-0001"
   ],
   "active_expected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
-  "active_lock_commit": null,
+  "active_lock_commit": "2125e87b3ae4ec84af62d2bcd7be640744d0d29c",
   "active_lock_owner": "github-actions:42673528936:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
