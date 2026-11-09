@@ -485,7 +485,7 @@
     "george-washington-stage2-current-main-refresh-0002"
   ],
   "active_expected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
-  "active_lock_commit": null,
+  "active_lock_commit": "39623b7fdd1492fc9385a89e5b2c590cd2fc0380",
   "active_lock_owner": "github-actions:42720246954:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
