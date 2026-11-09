@@ -11,6 +11,7 @@ from onboarding_hardening import refresh_venue_assignment_summaries
 from onboarding_plan import WorkflowError
 from research_stage4_closeout import (
     compare_parent_semantics,
+    effective_parent_game_type,
     project_administrative_status,
 )
 
@@ -210,6 +211,185 @@ class Stage4HawaiiLegacyCompatibilityTests(unittest.TestCase):
         }]
         with self.assertRaisesRegex(WorkflowError, "ambiguous venue/locality"):
             refresh_venue_assignment_summaries(games, venues)
+
+
+class Stage4LegacyPostseasonTaxonomyTests(unittest.TestCase):
+    def _row(self, **overrides):
+        row = {
+            "research_game_id": "hawai-i-post-001",
+            "season": "2025-26",
+            "game_date": "2026-03-19",
+            "source_opponent_literal": "Arkansas",
+            "stage2_opponent_key": "arkansas",
+            "stage2_opponent_name": "Arkansas",
+            "score_for": "70",
+            "score_against": "68",
+            "on_court_result": "W",
+            "source_raw_line": "Arkansas W 70-68",
+            "site_type": "NEUTRAL",
+            "game_type": "POSTSEASON",
+            "postseason_type": "NCAA",
+            "stage3a_final_site_type": "NEUTRAL",
+            "stage3a_final_physical_venue_name": "Moda Center",
+            "stage3a_final_city": "Portland",
+            "stage3a_final_state": "OR",
+            "administrative_status": "",
+        }
+        row.update(overrides)
+        return row
+
+    def _opponents(self):
+        return [{
+            "source_opponent_label": "Arkansas",
+            "canonical_opponent_key": "arkansas",
+            "canonical_opponent_name": "Arkansas",
+            "current_d1": "Yes",
+        }]
+
+    def test_generic_postseason_refines_conference_tournament(self):
+        self.assertEqual(
+            effective_parent_game_type(
+                self._row(postseason_type="CONFERENCE_TOURNAMENT")
+            ),
+            "CONFERENCE_TOURNAMENT",
+        )
+
+    def test_generic_postseason_refines_nit(self):
+        self.assertEqual(
+            effective_parent_game_type(self._row(postseason_type="NIT")),
+            "NIT",
+        )
+
+    def test_generic_postseason_refines_ncaa(self):
+        self.assertEqual(
+            effective_parent_game_type(self._row(postseason_type="NCAA")),
+            "NCAA_TOURNAMENT",
+        )
+
+    def test_cit_remains_controlled_generic_postseason(self):
+        row = self._row(postseason_type="CIT")
+        self.assertEqual(effective_parent_game_type(row), "POSTSEASON")
+        games, defects = author._projection(
+            [row], self._opponents(), [], school_key="hawai-i"
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(games[0]["curated_game_type"], "POSTSEASON")
+        self.assertNotIn(
+            games[0]["curated_game_type"],
+            {
+                "NCAA_TOURNAMENT",
+                "NIT",
+                "CONFERENCE_TOURNAMENT",
+                "REGULAR_SEASON",
+            },
+        )
+
+    def test_current_specific_curated_game_type_retains_precedence_when_compatible(self):
+        row = self._row(curated_game_type="NCAA_TOURNAMENT")
+        self.assertEqual(
+            effective_parent_game_type(row),
+            "NCAA_TOURNAMENT",
+        )
+
+    def test_compatible_specific_game_type_remains_unchanged(self):
+        row = self._row(game_type="NIT", postseason_type="NIT")
+        self.assertEqual(effective_parent_game_type(row), "NIT")
+
+    def test_contradictory_game_type_and_postseason_type_fail_closed(self):
+        for game_type, postseason_type in (
+            ("REGULAR_SEASON", "NCAA"),
+            ("NIT", "NCAA"),
+        ):
+            with self.subTest(
+                game_type=game_type,
+                postseason_type=postseason_type,
+            ):
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "CONTRADICTORY_ACCEPTED_POSTSEASON_TYPE",
+                ):
+                    effective_parent_game_type(
+                        self._row(
+                            game_type=game_type,
+                            postseason_type=postseason_type,
+                        )
+                    )
+
+    def test_conflicting_current_curated_type_fails_closed(self):
+        row = self._row(
+            curated_game_type="NIT",
+            game_type="POSTSEASON",
+            postseason_type="NCAA",
+        )
+        with self.assertRaisesRegex(
+            ValueError,
+            "CONTRADICTORY_ACCEPTED_POSTSEASON_TYPE",
+        ):
+            effective_parent_game_type(row)
+
+    def test_parent_semantics_detects_collapsed_specific_postseason_type(self):
+        for subtype, expected in (
+            ("NCAA", "NCAA_TOURNAMENT"),
+            ("NIT", "NIT"),
+            ("CONFERENCE_TOURNAMENT", "CONFERENCE_TOURNAMENT"),
+        ):
+            with self.subTest(subtype=subtype):
+                row = self._row(postseason_type=subtype)
+                games, defects = author._projection(
+                    [row], self._opponents(), [], school_key="hawai-i"
+                )
+                self.assertEqual(defects, [])
+                self.assertEqual(
+                    games[0]["curated_game_type"],
+                    expected,
+                )
+                collapsed = [
+                    dict(
+                        games[0],
+                        curated_game_type="POSTSEASON",
+                    )
+                ]
+                mismatches = compare_parent_semantics(
+                    [row],
+                    collapsed,
+                    [],
+                    school_key="hawai-i",
+                )
+                self.assertTrue(
+                    any(
+                        item["field"] == "curated_game_type"
+                        for item in mismatches
+                    ),
+                    mismatches,
+                )
+
+    def test_ncaa_round_projection_uses_effective_ncaa_type(self):
+        row = self._row(
+            postseason_type="NCAA",
+            postseason_round="First Four",
+        )
+        source_round, curated_round, _note = author._round_projection(row)
+        self.assertEqual(source_round, "First Four")
+        self.assertEqual(curated_round, "Play-in")
+
+    def test_regular_season_behavior_unchanged(self):
+        row = self._row(
+            game_type="REGULAR_SEASON",
+            postseason_type="",
+            curated_game_type="",
+        )
+        self.assertEqual(
+            effective_parent_game_type(row),
+            "REGULAR_SEASON",
+        )
+        games, defects = author._projection(
+            [row], self._opponents(), [], school_key="hawai-i"
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(
+            games[0]["curated_game_type"],
+            "REGULAR_SEASON",
+        )
 
 
 if __name__ == "__main__":
