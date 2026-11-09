@@ -58,6 +58,82 @@ class CandidateRuntimeClassificationTests(unittest.TestCase):
             "ADVANCED_TO_DIFFERENT_BLOCKER",
         )
 
+    def test_same_coarse_site_error_with_reduced_blocker_population_advances(self):
+        baseline_site = {
+            "counts": {
+                "strict_home_gap_rows": 13,
+                "unaccounted_public_gap_rows": 5,
+            },
+            "examples": {
+                "strict_home_gap_rows": ["HOME-1"],
+                "unaccounted_public_gap_rows": [
+                    "NEUTRAL-1",
+                    "NEUTRAL-2",
+                    "HOME-1",
+                    "HOME-2",
+                    "HOME-3",
+                ],
+            },
+        }
+        candidate_site = {
+            "counts": {
+                "strict_home_gap_rows": 13,
+                "unaccounted_public_gap_rows": 3,
+            },
+            "examples": {
+                "strict_home_gap_rows": ["HOME-1"],
+                "unaccounted_public_gap_rows": [
+                    "HOME-1",
+                    "HOME-2",
+                    "HOME-3",
+                ],
+            },
+        }
+        self.assertEqual(
+            classify_candidate_result(
+                {
+                    "last_error": "site_completeness failed with exit code 1",
+                    "site_diagnostic": baseline_site,
+                },
+                {
+                    "stage2_status": "BLOCKED",
+                    "status": {
+                        "last_error": "site_completeness failed with exit code 1",
+                    },
+                    "site_diagnostic": candidate_site,
+                },
+            ),
+            "ADVANCED_TO_DIFFERENT_BLOCKER",
+        )
+
+    def test_same_coarse_site_error_with_same_structured_blocker_is_no_progress(self):
+        site = {
+            "counts": {
+                "strict_home_gap_rows": 13,
+                "unaccounted_public_gap_rows": 5,
+            },
+            "examples": {
+                "strict_home_gap_rows": ["HOME-1"],
+                "unaccounted_public_gap_rows": ["NEUTRAL-1", "HOME-1"],
+            },
+        }
+        self.assertEqual(
+            classify_candidate_result(
+                {
+                    "last_error": "site_completeness failed with exit code 1",
+                    "site_diagnostic": site,
+                },
+                {
+                    "stage2_status": "BLOCKED",
+                    "status": {
+                        "last_error": "site_completeness failed with exit code 1",
+                    },
+                    "site_diagnostic": site,
+                },
+            ),
+            "NO_PROGRESS_SAME_BLOCKER",
+        )
+
     def test_same_blocker_is_no_progress(self):
         self.assertEqual(
             classify_candidate_result(
