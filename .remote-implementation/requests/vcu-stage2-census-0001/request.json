@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "vcu-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "vcu",
+  "previous_control_state_commit": "984f03eab15483f99a5d767ba791b1538a4f7008",
+  "previous_control_state_sha256": "da53eaab360f67e6f22285a1310e234708f043d81e9356be96cfd5e9e73b61ce",
+  "expected_protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "8fdd87f3f6c2b8e900782892ad0079f3f4d94991",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-phase0-0001/successor-manifest.json",
+    "sha256": "c4d61dbaab782dbff8b9e440f9b2cd3cf3b9d28c023f8fe0f98f668a1de0e645"
+  },
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "creation_provenance": {
+    "origin": "ChatGPT VCU serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner said Proceed after VCU Stage 1 / Integration Freeze / stable Phase 0 completed with repository validation PASS, CREATE_ONCE_PASS, fresh_runner_verification=PASS, remote_phase0_equivalence=PASS, exact onboarding successor 8fdd87f3f6c2b8e900782892ad0079f3f4d94991, Integration Freeze 9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7, and semantic snapshot 8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656. This request performs only the first bounded read-only STAGE2_CENSUS against that exact independently verified successor. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, recovery, unrelated shared/global mutation, or Owner Gate 2 authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
