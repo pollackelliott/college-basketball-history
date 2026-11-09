@@ -478,18 +478,19 @@
     "george-washington-stage2-opponent-display-normalize-0001",
     "george-washington-stage2-proposal-0001",
     "george-washington-stage2-reconciliation-diagnostic-0001",
-    "george-washington-stage2-reconciliation-diagnostic-0002"
+    "george-washington-stage2-reconciliation-diagnostic-0002",
+    "george-washington-stage2-current-main-refresh-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a5d3121a439887d76188b19dd4a2d51316844384",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42712291358:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-washington-stage2-current-main-refresh-0001",
+  "active_request_sha256": "f20e6a7d03f2cc514ca19e8ccf6a461afcd466c4e4129403c8d9b1b00d2bf820",
+  "active_school_key": "george-washington",
+  "active_target_branch": "data/george-washington-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -971,8 +972,11 @@
     "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
     "trace_sha256": "ffd2686aa96876e2948091b9acceec84b78a58a19b02fff10b97e93ee86d1837"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42712291358",
+  "lock_acquisition_request_commit": "063cb60014c0a8b4e8fb1c7e7acb66ee605ce60c",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
