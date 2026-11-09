@@ -300,14 +300,22 @@ def authorized_authoring_replacements(
             ):
                 reason = "AUTHORIZED_REPLACEMENT_CLAIM_MEMBER_NOT_MANIFESTED"
             else:
-                old_payload = json.loads(archive.read(record["old_claim_member"]))
-                new_payload = json.loads(archive.read(record["new_claim_member"]))
-                old_claims = _declared_carried_hashes_from_payload(old_payload)
-                new_claims = _declared_carried_hashes_from_payload(new_payload)
-                if record["old_sha256"] not in old_claims.get(basename, set()):
-                    reason = "AUTHORIZED_REPLACEMENT_OLD_CLAIM_MISMATCH"
-                elif record["new_sha256"] not in new_claims.get(basename, set()):
-                    reason = "AUTHORIZED_REPLACEMENT_NEW_CLAIM_MISMATCH"
+                try:
+                    old_payload = json.loads(
+                        archive.read(record["old_claim_member"])
+                    )
+                    new_payload = json.loads(
+                        archive.read(record["new_claim_member"])
+                    )
+                except (json.JSONDecodeError, UnicodeDecodeError):
+                    reason = "AUTHORIZED_REPLACEMENT_CLAIM_MEMBER_INVALID_JSON"
+                else:
+                    old_claims = _declared_carried_hashes_from_payload(old_payload)
+                    new_claims = _declared_carried_hashes_from_payload(new_payload)
+                    if record["old_sha256"] not in old_claims.get(basename, set()):
+                        reason = "AUTHORIZED_REPLACEMENT_OLD_CLAIM_MISMATCH"
+                    elif record["new_sha256"] not in new_claims.get(basename, set()):
+                        reason = "AUTHORIZED_REPLACEMENT_NEW_CLAIM_MISMATCH"
 
             if reason:
                 defects.append(
