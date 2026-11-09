@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-washington-stage2-reconciliation-diagnostic-0001",
+  "request_id": "george-washington-stage2-reconciliation-diagnostic-0002",
   "school_key": "george-washington",
   "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "08b5aa8fccdeb420e6be8c49bc59132874451d8f",
-  "previous_control_state_sha256": "1eb42aa7db2020841ce59c184485724a1bd21019266be51fd89fef6358eef672",
+  "previous_control_state_commit": "751438f72b95abc38cb0e33c8a55fce035de85f8",
+  "previous_control_state_sha256": "776a4bb3882a8fd20c796c788561ff625e1dbe1887440368b7c39a9379e11e1b",
   "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
   "creation_provenance": {
     "origin": "ChatGPT George Washington serialized Implementation Stage 2 - blocked proposal site-completeness diagnosis",
-    "authorization": "Owner replied Continue while the already-authorized Stage 2 proposal-rehearsal phase remains active. Fresh-verified proposal george-washington-stage2-proposal-0001 is BLOCKED only by post-reconciliation site-completeness scope. Diagnose exact neutral public-gap game CBBG-0056182 against that immutable blocked proposal to determine whether the missing research/reconciliation accounting is a map-level historical decision or a generic Stage 2 capability defect. No map rewrite, historical reclassification, tracked mutation, Owner Gate 1 action, recovery, current-main refresh, release, Preview, merge, Production, shared/global mutation, or protected-main mutation is authorized."
+    "authorization": "Owner replied Continue while the same Stage 2 proposal-rehearsal phase remains authorized. First fresh-verified diagnostic CBBG-0056182 proved one reciprocal-only neutral public gap with no GW source row and no decision touching the game. Diagnose the only other unaccounted neutral public-gap canonical game CBBG-0056185 against the identical blocked proposal to classify the complete two-row topology before considering any generic repair. No map rewrite, historical reclassification, tracked mutation, Owner Gate 1 action, recovery, current-main refresh, release, Preview, merge, Production, shared/global mutation, or protected-main mutation is authorized."
   },
   "authority": {
     "owner_gate_1": false,
@@ -43,5 +43,5 @@
   "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
   "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
   "recommendation_map_sha256": "72445c8c62f7594406d805cfdf7ff79bc481a722cacaa30a55c95dd7edd273fe",
-  "canonical_game_id": "CBBG-0056182"
+  "canonical_game_id": "CBBG-0056185"
 }
