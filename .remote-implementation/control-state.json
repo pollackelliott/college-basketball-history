@@ -463,7 +463,7 @@
     "vcu-stage2-current-main-refresh-0002"
   ],
   "active_expected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
-  "active_lock_commit": null,
+  "active_lock_commit": "60cfd58d83d25579b616757fc07377425f48fc38",
   "active_lock_owner": "github-actions:42612808531:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
