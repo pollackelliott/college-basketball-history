@@ -1,0 +1,137 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "18d6223ace6e844cb0096a1cea1ff7cc04dda9f73b29e2365a2e368b13007d91",
+    "implementation-stage2-status.json": "bd8c75f5ee984d32691713af49fda760a51edec0ba341ca85b79eb6dcf6661d2",
+    "plan.json": "6b6099a1ff0d3c9d84e5d86828f64dce26f5ee4ea6b12018b5e5f25240b5da25",
+    "review.csv": "1f65f23334b848226ec40a95fc4c6665e30f3a7c5388591bfcf077ab73997776",
+    "review.md": "44e1940fda58c916ffe471e3a1f93935d1e5cceb1b32eddab27e55a1d8893f79"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "18d6223ace6e844cb0096a1cea1ff7cc04dda9f73b29e2365a2e368b13007d91",
+    "implementation-stage2-status.json": "bb6561a6c227a611f350a2d2c2255c1e014bb3978148f7f4e8c64671ba8a1622",
+    "plan.json": "13b165e536ee401b699f35360854a90acba3af6f7cdebfc60ad2d0dd95d6e348",
+    "review.csv": "1f65f23334b848226ec40a95fc4c6665e30f3a7c5388591bfcf077ab73997776",
+    "review.md": "656bb6fb0fa5d80228e3bf34da41e0085b892a361d96d98ecf7c7d10cfd7a4f8"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "18d6223ace6e844cb0096a1cea1ff7cc04dda9f73b29e2365a2e368b13007d91",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 37,
+      "discrepancy": 28,
+      "identity": 9,
+      "postseason_classification": 7,
+      "publication": 1
+    },
+    "decision_count": 84,
+    "decision_fields": {
+      "game_date": 23,
+      "game_identity": 9,
+      "game_type": 11,
+      "overtime_periods": 2,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 2,
+      "score": 16,
+      "site_metadata": 1,
+      "site_type": 18
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0066496",
+      "CONDITIONAL-DISCREPANCY-VCU-1974-75-011-CBBG-0066492-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1991-92-022-CBBG-0136728-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-018-CBBG-0136763-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-018-CBBG-0136768-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-023-CBBG-0136758-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1992-93-023-CBBG-0136768-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-VCU-1994-95-029-CBBG-0144854-SITE_TYPE",
+      "DISCREPANCY-VCU-1976-77-009-SITE_TYPE",
+      "DISCREPANCY-VCU-1977-78-021-SITE_TYPE",
+      "DISCREPANCY-VCU-1979-80-008-SITE_TYPE",
+      "DISCREPANCY-VCU-1987-88-008-SITE_TYPE",
+      "DISCREPANCY-VCU-1989-90-008-SITE_TYPE",
+      "DISCREPANCY-VCU-1996-97-008-SITE_TYPE",
+      "DISCREPANCY-VCU-2009-10-023-SITE_TYPE",
+      "DISCREPANCY-VCU-2011-12-006-SITE_TYPE",
+      "DISCREPANCY-VCU-2012-13-006-SITE_TYPE",
+      "DISCREPANCY-VCU-2019-20-014-SITE_TYPE",
+      "DISCREPANCY-VCU-2020-21-025-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 19,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "vcu"
+  ],
+  "phase0_protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "phase0_successor_path": ".remote-implementation/successors/vcu/vcu-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "c4d61dbaab782dbff8b9e440f9b2cd3cf3b9d28c023f8fe0f98f668a1de0e645",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 37,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 37,
+      "discrepancy": 28,
+      "identity": 9,
+      "postseason_classification": 7,
+      "publication": 1
+    },
+    "decision_count": 84,
+    "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+    "discrepancies_to_add": 28,
+    "existing_game_matches": 489,
+    "new_canonical_games": 1152,
+    "plan_path": ".onboarding/vcu/plan.json",
+    "review_path": ".onboarding/vcu/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "request_id": "vcu-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": ".remote-implementation/successors/vcu/vcu-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_opponent_display_successor_sha256": "a8707ace7cffe805f375e5afa58708c98bc341968873ec507a1f03b3d9a5e6bd",
+  "stage2_opponent_display_verification_path": ".remote-implementation/verifications/vcu/vcu-stage2-opponent-display-normalize-0001/stage2-opponent-display-verification.json",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+  "target_tree_sha": "9ed964d0f69494321e9e7b37c89eee1c2bc0acf8",
+  "tracked_mutation_proof": {
+    "after_head_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+    "after_status": "",
+    "after_tree_sha": "9ed964d0f69494321e9e7b37c89eee1c2bc0acf8",
+    "before_head_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+    "before_status": "",
+    "before_tree_sha": "9ed964d0f69494321e9e7b37c89eee1c2bc0acf8",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
