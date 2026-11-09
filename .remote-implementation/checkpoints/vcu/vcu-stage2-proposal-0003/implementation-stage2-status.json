@@ -1,0 +1,129 @@
+{
+  "branch": "remote-stage2-census/vcu-5e07c03ba8b9",
+  "capability_census": {
+    "path": ".onboarding/vcu/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 1
+  },
+  "head_sha": "5e07c03ba8b92e609b9922aa9dad85651d21ab62",
+  "integration_base_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "integration_semantic_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 37,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 37,
+      "discrepancy": 28,
+      "identity": 9,
+      "postseason_classification": 7,
+      "publication": 1
+    },
+    "decision_count": 84,
+    "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+    "discrepancies_to_add": 28,
+    "existing_game_matches": 489,
+    "new_canonical_games": 1152,
+    "plan_path": ".onboarding/vcu/plan.json",
+    "review_path": ".onboarding/vcu/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 1,
+      "KEEP_POSTSEASON_UNRESOLVED": 7,
+      "LEAVE_UNRESOLVED": 1,
+      "MATCH_CANONICAL:CBBG-0028889": 1,
+      "MATCH_CANONICAL:CBBG-0066496": 1,
+      "MATCH_CANONICAL:CBBG-0136691": 1,
+      "MATCH_CANONICAL:CBBG-0136707": 1,
+      "MATCH_CANONICAL:CBBG-0136737": 1,
+      "MATCH_CANONICAL:CBBG-0136758": 1,
+      "MATCH_CANONICAL:CBBG-0136763": 1,
+      "MATCH_CANONICAL:CBBG-0144868": 1,
+      "MATCH_CANONICAL:CBBG-0203017": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 11,
+      "NOT_APPLICABLE": 28,
+      "USE_SOURCE": 25,
+      "VERIFY_EXPLAINED_ADMIN_DIFFERENCE": 1
+    },
+    "approved_plan_hash_preview": "20408499a2687f2c4883bd82da7ec751e768318943bed11feac853bfa7525ad3",
+    "changed_path_count": 97
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 1,
+      "KEEP_POSTSEASON_UNRESOLVED": 7,
+      "LEAVE_UNRESOLVED": 1,
+      "MATCH_CANONICAL:CBBG-0028889": 1,
+      "MATCH_CANONICAL:CBBG-0066496": 1,
+      "MATCH_CANONICAL:CBBG-0136691": 1,
+      "MATCH_CANONICAL:CBBG-0136707": 1,
+      "MATCH_CANONICAL:CBBG-0136737": 1,
+      "MATCH_CANONICAL:CBBG-0136758": 1,
+      "MATCH_CANONICAL:CBBG-0136763": 1,
+      "MATCH_CANONICAL:CBBG-0144868": 1,
+      "MATCH_CANONICAL:CBBG-0203017": 1,
+      "NORMALIZE_SOURCE_TO_CANONICAL": 11,
+      "NOT_APPLICABLE": 28,
+      "USE_SOURCE": 25,
+      "VERIFY_EXPLAINED_ADMIN_DIFFERENCE": 1
+    },
+    "approved_plan_hash_preview": "20408499a2687f2c4883bd82da7ec751e768318943bed11feac853bfa7525ad3",
+    "decision_count": 84,
+    "path": "/tmp/remote-stage2-proposal-map-clkrtkzn/recommendation-map.json",
+    "sha256": "24160ff7dcbc5023a01083fa89acf69fa2f5035a31445eb9f4d1df10bec1a4b8"
+  },
+  "research_base_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 31,
+      "public_gap_rows": 31,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1650,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0024568",
+        "CBBG-0203957"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0024034",
+        "CBBG-0024568",
+        "CBBG-0030957",
+        "CBBG-0108068",
+        "CBBG-0125864",
+        "CBBG-0144874",
+        "CBBG-0156375",
+        "CBBG-0202030",
+        "CBBG-0202054",
+        "CBBG-0203227",
+        "CBBG-0203236",
+        "CBBG-0203237"
+      ]
+    },
+    "path": ".onboarding/vcu/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
