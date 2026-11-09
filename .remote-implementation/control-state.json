@@ -458,18 +458,19 @@
     "vcu-stage2-opponent-display-normalize-0001",
     "vcu-stage2-census-0002",
     "vcu-stage2-current-main-refresh-0001",
-    "vcu-stage2-census-0003"
+    "vcu-stage2-census-0003",
+    "vcu-stage2-proposal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a5a66225b06c4492b4e3341731c12e75c6acb94b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "vcu-stage2-proposal-0001",
+  "active_request_sha256": "08cd4ab0f32f392b3eaef7b94caceb902b97cb9f87bc7a954c29ce9414b3fe78",
+  "active_school_key": "vcu",
+  "active_target_branch": "data/vcu-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -930,8 +931,11 @@
     "target_branch": "data/vcu-onboarding",
     "target_sha": "189d88d800296bded78cbd2ad3daaa4257aee845"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42570553259",
+  "lock_acquisition_request_commit": "6baa894d3e5e90a478f40a292c4ade4d51f48e77",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
