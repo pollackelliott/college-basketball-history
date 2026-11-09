@@ -475,18 +475,19 @@
     "george-washington-stage1-0002",
     "george-washington-phase0-0001",
     "george-washington-stage2-census-0001",
-    "george-washington-stage2-opponent-display-normalize-0001"
+    "george-washington-stage2-opponent-display-normalize-0001",
+    "george-washington-stage2-proposal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-washington-stage2-proposal-0001",
+  "active_request_sha256": "5e0dc4b500c09758ed98591c9e13606a68f38c7869d5515988c2b59a0a3dd617",
+  "active_school_key": "george-washington",
+  "active_target_branch": "data/george-washington-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -971,8 +972,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/george-washington/george-washington-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "1067e3c4d6ac30fd2b49602e0cb5157cdee219b5977545aacd64864494d82991"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42683142384",
+  "lock_acquisition_request_commit": "8b23b378bc5d1a8c3c9670c202970bf3831b1f50",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
