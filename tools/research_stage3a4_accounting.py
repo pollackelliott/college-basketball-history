@@ -62,6 +62,7 @@ def _accepted_physical_venue(row: dict[str, str]) -> str:
         "stage3a3_physical_venue_name",
         "curated_venue_name",
         "venue_name",
+        "accepted_venue_key",
     )
 
 
