@@ -1,0 +1,30 @@
+{
+  "allowed_paths": [
+    "schools/george-washington/opponents.csv",
+    "schools/george-washington/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "merchant-marine-academy",
+    "north-carolina-pre-flight",
+    "pennsylvania-military-college"
+  ],
+  "opponent_changed_row_count": 5,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "source_game_changed_ids": [
+    "GW-1916-17-014",
+    "GW-1942-43-008",
+    "GW-1946-47-007",
+    "GW-1946-47-013",
+    "GW-1947-48-002"
+  ],
+  "source_game_changed_keys": [
+    "merchant-marine-academy",
+    "north-carolina-pre-flight",
+    "pennsylvania-military-college"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 5
+}

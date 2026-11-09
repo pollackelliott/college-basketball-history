@@ -1,0 +1,81 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 3,
+  "change_row_count": 5,
+  "changes": [
+    {
+      "authority_names": [
+        "United States Merchant Marine Academy"
+      ],
+      "authority_signature": "unitedstatesmerchantmarineacademy",
+      "canonical_opponent_key": "merchant-marine-academy",
+      "from_names": [
+        "U.S. Merchant Marine Academy"
+      ],
+      "target_row_count": 2,
+      "to_name": "United States Merchant Marine Academy"
+    },
+    {
+      "authority_names": [
+        "North Carolina Pre-Flight"
+      ],
+      "authority_signature": "northcarolinapreflight",
+      "canonical_opponent_key": "north-carolina-pre-flight",
+      "from_names": [
+        "North Carolina Pre-Flight (U.S. Navy)"
+      ],
+      "target_row_count": 2,
+      "to_name": "North Carolina Pre-Flight"
+    },
+    {
+      "authority_names": [
+        "Pennsylvania Military College (later Widener)"
+      ],
+      "authority_signature": "pennsylvaniamilitarycollegelaterwidener",
+      "canonical_opponent_key": "pennsylvania-military-college",
+      "from_names": [
+        "Pennsylvania Military College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Pennsylvania Military College (later Widener)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "source_game_display_change_keys": 3,
+  "source_game_display_change_rows": 5,
+  "source_game_display_changes": [
+    {
+      "from_name": "Pennsylvania Military College",
+      "normalized_opponent_key": "pennsylvania-military-college",
+      "source_game_id": "GW-1916-17-014",
+      "to_name": "Pennsylvania Military College (later Widener)"
+    },
+    {
+      "from_name": "North Carolina Pre-Flight (U.S. Navy)",
+      "normalized_opponent_key": "north-carolina-pre-flight",
+      "source_game_id": "GW-1942-43-008",
+      "to_name": "North Carolina Pre-Flight"
+    },
+    {
+      "from_name": "U.S. Merchant Marine Academy",
+      "normalized_opponent_key": "merchant-marine-academy",
+      "source_game_id": "GW-1946-47-007",
+      "to_name": "United States Merchant Marine Academy"
+    },
+    {
+      "from_name": "U.S. Merchant Marine Academy",
+      "normalized_opponent_key": "merchant-marine-academy",
+      "source_game_id": "GW-1946-47-013",
+      "to_name": "United States Merchant Marine Academy"
+    },
+    {
+      "from_name": "U.S. Merchant Marine Academy",
+      "normalized_opponent_key": "merchant-marine-academy",
+      "source_game_id": "GW-1947-48-002",
+      "to_name": "United States Merchant Marine Academy"
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "integration_base_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+    "school_key": "george-washington",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "integration_base_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+    "school_key": "george-washington",
+    "status": "PASS"
+  }
+}

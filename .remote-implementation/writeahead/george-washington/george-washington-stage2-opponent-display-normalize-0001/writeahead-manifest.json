@@ -1,0 +1,67 @@
+{
+  "allowed_paths": [
+    "schools/george-washington/opponents.csv",
+    "schools/george-washington/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/george-washington/opponents.csv": "8f3ec19ac81924fa3b266a8b6d2f10ce20db258a552de6c66978d43118232086",
+    "schools/george-washington/source-games.csv": "15ca8a34416ed0e60b5bc95d82edabc441f1a822d770ea8c61840f9286602539"
+  },
+  "changed_paths": [
+    "schools/george-washington/opponents.csv",
+    "schools/george-washington/source-games.csv"
+  ],
+  "commit_message": "Normalize george-washington historical opponent display representation",
+  "expected_blocker_keys": [
+    "merchant-marine-academy",
+    "north-carolina-pre-flight",
+    "pennsylvania-military-college"
+  ],
+  "expected_target_predecessor_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39",
+  "field_level_proof_sha256": "a4f6529cc4da0184f5b348f97cbe186b2a3884126b0fe6c9d9581c473a0557c5",
+  "global_lock_commit": "e994f36659d13cb17c1dbaf21ae845e061b647d2",
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "bb74767cffcd3f456fb04025537f1ddcb8f9eaadb2db745c8199d69e391f5244",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
+  "prepared_parent_sha": "96f323aec9967c9e32147106f59fce39f2fe1e39",
+  "prepared_tree_sha": "30980027c195ee4d670a8cf9e262c480cd2a25a9",
+  "protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "repository_validation": "PASS",
+  "request_id": "george-washington-stage2-opponent-display-normalize-0001",
+  "request_sha256": "5167a719d31b9df434f3707fd8514ca57c5b9a50062327b3634cc4f167bfcbf5",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "semantic_drift_after": {
+    "baseline_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "integration_base_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+    "school_key": "george-washington",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+    "integration_base_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+    "school_key": "george-washington",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "69b11fe958f1e7fce8339958f94d333d5f994be6176ff16ca5377fbd411c7179",
+    "field-level-proof.json": "a4f6529cc4da0184f5b348f97cbe186b2a3884126b0fe6c9d9581c473a0557c5",
+    "integration-freeze.json": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+    "normalization-report.json": "bb74767cffcd3f456fb04025537f1ddcb8f9eaadb2db745c8199d69e391f5244",
+    "semantic-drift-proof.json": "e531e2974e2fa0496dc0ee15ab9bc44dbc56cc84e106c0012ea75c477196bb59"
+  },
+  "source_game_normalized_name_row_count": 5,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "69b11fe958f1e7fce8339958f94d333d5f994be6176ff16ca5377fbd411c7179",
+  "target_branch": "data/george-washington-onboarding"
+}
