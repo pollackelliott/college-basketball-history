@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-stage2-census-0002",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "vcu-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "vcu",
-  "previous_control_state_commit": "e00c0f8646e9d95ce432f178fc8bf8e737f67927",
-  "previous_control_state_sha256": "6a60e4e2aaaa38ec6ee7411f3bcfb89ed373442af214d410539570f9bb53e3f1",
-  "expected_protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "previous_control_state_commit": "f3adf791c3882ccc35ac3ecaadd1cd68e994e49a",
+  "previous_control_state_sha256": "a7fb8b0134d0ee8f1947fc7536e502421845dc1286c4911ccb79cf3646c0ce58",
+  "expected_protected_main_sha": "a5a66225b06c4492b4e3341731c12e75c6acb94b",
   "target_branch": "data/vcu-onboarding",
   "target_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
   "phase0_successor": {
@@ -19,16 +19,31 @@
   },
   "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
   "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorizes one bounded VCU STAGE2_CURRENT_MAIN_REFRESH from exact onboarding predecessor 54607765b2a7dbb476f96f7cc4f8c5a51dac6b77 against exact protected main a5a66225b06c4492b4e3341731c12e75c6acb94b after independently determining the intervening protected-main and VCU target-only changed-path populations are disjoint. Authorization persists through independent refresh verification, fresh Stage 2 census, exact decision-universe comparison, exact-map proposal rehearsal, independent proposal verification, and stops at OWNER_GATE_1_READY or the first genuine blocker."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "vcu-stage2-census-0003",
+    "proposal_request_id": "vcu-stage2-proposal-0001",
+    "expected_decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/vcu-stage2-current-main-refresh-0001/recommendation-map.json",
+      "sha256": "96541fa3135bfee096232cd1d35370e05c3ff432be2d80bbccf80d9260e2287d"
+    }
+  },
   "creation_provenance": {
-    "origin": "ChatGPT VCU serialized Implementation lane — fresh Stage 2 census after opponent-display normalization",
-    "authorization": "Existing owner-authorized VCU Stage 2 phase persists through its normal OWNER_GATE_1_READY boundary. Opponent-display normalization vcu-stage2-opponent-display-normalize-0001 is independently fresh-verified PASS against exact target 54607765b2a7dbb476f96f7cc4f8c5a51dac6b77 and preserved semantic snapshot 8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656. This request reruns the complete permanent Stage 2 census from that exact verified successor so the full post-normalization decision/site/H-A-N topology is durably captured before any fingerprint-changing repair or recommendation-map work. No tracked repair, historical ruling, proposal rehearsal, Owner Gate 1/2 approval, sealing/apply, release, Preview, merge, Production, recovery, or protected-main mutation authority is included."
+    "origin": "VCU serialized Implementation Stage 2 successor — Control Center-authorized current-main refresh with repository-owned refresh/census/proposal continuation",
+    "authorization": "Preserve the immutable Research Freeze, Integration Freeze, semantic snapshot, exact 84-decision universe, exact VCU recommendation-map bytes, and completed opponent-display normalization. Do not restart Research, Stage 1, Phase 0, normalization, or adversarial review. Stop on changed protected main, moved target, changed decision universe, any permanent-tool blocker, unsafe control state, or OWNER_GATE_1_READY. This grants no Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, recovery, or arbitrary repair authority."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
