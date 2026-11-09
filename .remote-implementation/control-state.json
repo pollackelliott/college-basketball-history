@@ -958,11 +958,11 @@
   "current_sequence": 458,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "a5d3121a439887d76188b19dd4a2d51316844384",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "george-washington-stage2-current-main-refresh-0001",
     "school_key": "george-washington",
     "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
