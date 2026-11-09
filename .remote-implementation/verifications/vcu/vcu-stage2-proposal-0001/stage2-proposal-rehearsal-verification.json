@@ -1,0 +1,47 @@
+{
+  "approved_plan_hash_preview": null,
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "18d6223ace6e844cb0096a1cea1ff7cc04dda9f73b29e2365a2e368b13007d91",
+    "implementation-stage2-status.json": "abea18a861e484203398b7e28e0ec9354a89f456695d636cb7dd9ecf31668e5b",
+    "plan.json": "8a865e89d6a098c65694723d36b13606464f2ed99e71cb4ba889433755e05324",
+    "review.csv": "1f65f23334b848226ec40a95fc4c6665e30f3a7c5388591bfcf077ab73997776",
+    "review.md": "d2113b73b00789fbe12c6b030dad73efb3b51f7009e113ff2311dde0a97d060f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "18d6223ace6e844cb0096a1cea1ff7cc04dda9f73b29e2365a2e368b13007d91",
+    "implementation-stage2-status.json": "5cae73524c3d025a3b8bcbd27fc646ebd7aef5c66948cacb1311407bf6bab92b",
+    "plan.json": "be1bc3f085f1f2ef0a4cd6af6be328f4c6d138989cd4b35ca7e446041c8bcff6",
+    "review.csv": "1f65f23334b848226ec40a95fc4c6665e30f3a7c5388591bfcf077ab73997776",
+    "review.md": "a201d4da308438caa3e83da60842b04afd234719d8ab48a8252e4d5afec536b7"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+    "runtime_decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "a5a66225b06c4492b4e3341731c12e75c6acb94b",
+  "recommendation_map_sha256": "96541fa3135bfee096232cd1d35370e05c3ff432be2d80bbccf80d9260e2287d",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "vcu-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "189d88d800296bded78cbd2ad3daaa4257aee845",
+  "target_tree_sha": "492ed141b025bb40feabb265b1ac108ccb5c2b1a",
+  "tracked_stage2_mutation": "NONE"
+}
