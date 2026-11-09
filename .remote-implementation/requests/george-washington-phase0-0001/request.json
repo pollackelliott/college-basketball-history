@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-phase0-0001",
+  "operation": "PHASE0",
+  "school_key": "george-washington",
+  "previous_control_state_commit": "80c99f9235d79b0f93b6e2393c48b1cff6b826fd",
+  "previous_control_state_sha256": "dc8f1b09fd493336e0ece113753079d0ca3dc73d4f655db2ca00f6bb268b1485",
+  "expected_protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "target_branch": "data/george-washington-onboarding",
+  "research_checkpoint": {
+    "sha256": "73eb3f8f0f4b739aaf08bb6eb92029d151be5d151416fd0277e33c5a38d4c679",
+    "research_base_sha": "2991241b273614781d3153a0cbbe7574d48e457f",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9df56013c22eed251ff7ddd1ab36fe07dd5e3222",
+      "path_prefix": ".remote-implementation/transports/george-washington/george-washington-stage1-0002-final/piece-",
+      "part_count": 10
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage1-0002/checkpoint-manifest.json",
+    "sha256": "5a99f0f6749e9fa1894017b78d7ccd5dabd19a0b683787f55c5ae9df35bd8e62"
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "1906-1907",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted immutable George Washington Research Freeze scope is INCEPTION+; current reusable repository scope baseline is confirmed. The frozen competitive ledger begins in 1906-1907."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT George Washington serialized Implementation lane — owner-authorized Phase 0 after durable Stage 1 PASS",
+    "authorization": "Owner explicitly replied Proceed after George Washington Implementation Stage 1 completed PASS. Durable Stage 1 request george-washington-stage1-0002 is bound to protected main 2c47d43d92d6fbf2e7f14ed147876c341daac24a, immutable Research Freeze SHA-256 73eb3f8f0f4b739aaf08bb6eb92029d151be5d151416fd0277e33c5a38d4c679 and research_base_sha 2991241b273614781d3153a0cbbe7574d48e457f, with zero blockers, zero ambiguous stops, and zero dedicated-maintenance requirements. The accepted history scope is INCEPTION+, current reusable scope authority confirms INCEPTION+, and the frozen ledger begins 1906-1907. This request authorizes exactly one guarded PHASE0 transaction: fresh current-main Stage 1 verification, Integration Freeze creation, onboarding-branch publication under the global mutation lock/write-ahead/CAS contract, and required fresh independent Phase 0 verification. It does not authorize Stage 2, shared/global maintenance outside ordinary Phase 0 integration surfaces, Owner Gate 1, Owner Gate 2, release, Preview, merge, recovery, or direct protected-main mutation."
+  },
+  "authority": {
+    "phase0": true,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
