@@ -158,8 +158,25 @@ A Stage 3B candidate may enter this preflight while its durable status is explic
 preflight-ready rather than already `COMPLETE`. This avoids circular completion
 semantics: the preflight command may inspect a terminal `*_PREFLIGHT_READY` Stage 3B
 candidate, but `research_stage4.py author` still requires the parent checkpoint to be
-durably `COMPLETE`. A preflight PASS therefore authorizes the Research lane to serialize
-its final Stage 3B COMPLETE checkpoint; it does not begin Stage 4 automatically.
+durably `COMPLETE`.
+
+An honest descriptive-root checkpoint whose **historical Stage 3B research is already
+complete** but whose durable closeout is blocked by Stage 4 preflight may also re-enter
+the **preflight command only** without rewriting its checkpoint status. This narrow
+compatibility applies only to the exact durable lifecycle state
+`STAGE3B_DURABILITY_PREFLIGHT_BLOCKED` when the status itself proves all of the
+following: historical Stage 3B complete, durable Stage 3B incomplete, Stage 4 not
+started, preflight-ready false, one explicit non-PASS Stage 4 preflight blocker/status,
+and a positive fully classified defect population. The ordinary descriptive-root
+manifest/authoritative-ledger pointer and hash requirements still apply.
+
+This re-entry state does **not** become Stage 3B completion authority. It remains
+ineligible for Stage 4 authoring and closeout. Arbitrary `BLOCKED`, `IN_PROGRESS`,
+partially researched, Stage-4-started, missing-blocker-accounting, ambiguous-ledger, or
+broken-ledger states remain stops.
+
+A preflight PASS therefore authorizes the Research lane to serialize its final Stage 3B
+COMPLETE checkpoint; it does not begin Stage 4 automatically.
 
 Stage 4 also requires the two explicit Research coverage declarations:
 `primary_source_historical_cutoff` and `required_completed_season_cutoff`. These
@@ -237,7 +254,7 @@ Already-frozen six-file packages that predate the coverage declaration remain re
 failures. New Stage 4 authoring runs, however, must supply the declaration before they may
 complete.
 
-The permanent Stage 4 tools may normalize known legacy field vocabulary and checkpoint topology in memory, including accepted legacy administrative-status spellings whose current representation is mechanically equivalent while the on-court result remains unchanged. They must not rewrite the source checkpoint merely to satisfy the current representation. In addition to the current exact-root and accepted single-directory legacy layouts, a manifested root-level descriptive checkpoint may be consumed when exactly one terminal Stage 3B status document is manifested and that status explicitly names its manifested authoritative working ledger. Multiple terminal candidates, broken or unmanifested ledger pointers, and ledger-pointer hash mismatches are stops rather than filename guesses.
+The permanent Stage 4 tools may normalize known legacy field vocabulary and checkpoint topology in memory, including accepted legacy administrative-status spellings whose current representation is mechanically equivalent while the on-court result remains unchanged. They must not rewrite the source checkpoint merely to satisfy the current representation. In addition to the current exact-root and accepted single-directory legacy layouts, a manifested root-level descriptive checkpoint may be consumed when exactly one Stage 3B status document is admissible for the requested operation and that status explicitly names its manifested authoritative working ledger. Ordinary authoring/closeout retain terminal-completion requirements; only the explicit preflight operation may admit the narrowly defined durability-preflight-blocked re-entry state above. Multiple admissible candidates, broken or unmanifested ledger pointers, and ledger-pointer hash mismatches are stops rather than filename guesses.
 
 Legacy projection compatibility is likewise representation-only and fail-closed. An
 accepted prefixed Stage 3 terminal/partial site-research status may project to the
