@@ -473,15 +473,15 @@
   "active_lock_commit": "549e085174e45f56650a15d2322f06106e1e81e1",
   "active_lock_owner": "github-actions:42622555721:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "active_prepared_tree_sha": "b9d5d9fef8eb6bc79ea4c1a031f69ea46bc78df0",
   "active_request_id": "vcu-stage2-sealed-apply-0001",
   "active_request_sha256": "34f294e0619560fa4451cd77a81614c9bea8813dff0f7cd8c14e8387458612d8",
   "active_school_key": "vcu",
   "active_target_branch": "data/vcu-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/vcu/vcu-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "89db881ec246a59c80454854609aff63a77af00ac5263f459118300726e18b4a",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -964,5 +964,5 @@
   "lock_acquisition_request_commit": "1f1cebbb8baa01131165a256e829ab3d44ca6760",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
