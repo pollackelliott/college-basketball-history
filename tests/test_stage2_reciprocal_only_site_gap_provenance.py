@@ -73,6 +73,10 @@ def reciprocal(
 def plan(*, decisions=None):
     return {
         "school_key": "test",
+        "summary": {
+            "history_start_season": "1900-1901",
+            "history_scope_intervals": "",
+        },
         "decisions": decisions
         if decisions is not None
         else [
@@ -509,6 +513,12 @@ class ReciprocalOnlySiteGapProvenanceTests(unittest.TestCase):
             validate(assertions=[reciprocal(venue="Known Arena")])
         with self.assertRaisesRegex(WorkflowError, "reciprocal locality evidence exists"):
             validate(assertions=[reciprocal(city="Washington", state="DC")])
+
+    def test_13b_out_of_scope_gap_cannot_receive_provenance(self):
+        out_of_scope_plan = plan()
+        out_of_scope_plan["summary"]["history_start_season"] = "2030-2031"
+        with self.assertRaisesRegex(WorkflowError, "public history scope"):
+            validate(plan_value=out_of_scope_plan)
 
     def test_14_exact_legacy_map_preserves_auto_discovered_provenance(self):
         with tempfile.TemporaryDirectory() as temporary:
