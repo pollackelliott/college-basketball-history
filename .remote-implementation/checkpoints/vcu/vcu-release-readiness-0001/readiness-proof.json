@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "apply_request_id": "vcu-stage2-sealed-apply-0001",
+  "approved_plan_hash": "008612bb8da432a15b60b60c6caa4cf63760d0614a69fff19a51e72f428fbf10",
+  "changed_path_count": 97,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "release_manifest_sha256": "6bb104ca0a88277490d56506e7fc9c9840510aaa590e6df9506323cdfddc4cec",
+  "school_key": "vcu",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "ec48836e4fc074407471efdf425af49f43dceefd081a2b48cb4ec3dd149a57bf",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "22567076b3c23fdeaa7809e3a28faae4488c11b040eee038d57703b2fba0deec",
+  "writeahead_sha256": "89db881ec246a59c80454854609aff63a77af00ac5263f459118300726e18b4a"
+}
