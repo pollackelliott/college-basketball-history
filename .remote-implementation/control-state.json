@@ -472,7 +472,7 @@
   "active_request_sha256": "06d7a26abdd0de4104d398e2fe75848cb1c06b7b411f0645dfe13715ab83a091",
   "active_school_key": "vcu",
   "active_target_branch": "data/vcu-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "fa747fbcd00edb689758c61c7a15a4795fa8aac8",
   "active_writeahead_path": ".remote-implementation/writeahead/vcu/vcu-stage2-current-main-refresh-0002/writeahead-manifest.json",
   "active_writeahead_sha256": "e6102f7adb4d0913eba094e89462260efc94039ee7d32c85b67e17c05119d9a6",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
