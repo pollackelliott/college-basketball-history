@@ -1,0 +1,203 @@
+{
+  "basis_by_decision": {
+    "ACCOMPLISHMENTS-VCU": "Verify the current VCU reference values with an explained administrative difference: 14 regular-season conference titles, 12 conference tournament titles, 21 NCAA appearances, 1 Final Four, 0 national titles, best finish Final Four in 2011. VCU calls the 2026 berth its 21st NCAA appearance; the canonical on-court total is one lower because the 2021 NCAA selection ended in an NCAA-declared no contest before a game was played. Authorities: https://vcuathletics.com/news/2026/3/15/mens-basketball-vcu-to-face-off-with-north-carolina-in-ncaa-tournament-first-round.aspx ; https://vcuathletics.com/news/2021/3/20/mens-basketball-vcu-removed-from-ncaa-tournament-as-committee-declares-game-no-contest.aspx",
+    "CANONICAL-SITE-PATCH-CBBG-0066496": "Leave the reciprocal-only canonical site patch unresolved. Once VCU-1974-75-011 is matched to this game, the target source row supplies the historical Richmond Coliseum HOME assertion; do not choose Franklin Street Gym versus Richmond Coliseum from chronology alone.",
+    "CONDITIONAL-DISCREPANCY-VCU-1974-75-011-CBBG-0066496-GAME_DATE": "Normalize the target source date to Dec. 30, 1974 because Texas A&M's institutional sequence identifies the Dec. 30 at-VCU game and separately accounts for Dec. 29.",
+    "CONDITIONAL-DISCREPANCY-VCU-1974-75-011-CBBG-0066496-SCORE": "Normalize the target source score to Texas A&M 84, VCU 70. The institutional Texas A&M game sequence and exact matched identity support 84-70; 80-84 is frozen source transcription drift.",
+    "CONDITIONAL-DISCREPANCY-VCU-1984-85-032-CBBG-0028889-GAME_DATE": "Use source Mar. 17, 1985; this is the actual Alabama/VCU NCAA Tournament date.",
+    "CONDITIONAL-DISCREPANCY-VCU-1989-90-011-CBBG-0136691-GAME_DATE": "Use source Jan. 8, 1990; Virginia Tech's current official historical schedule independently confirms it.",
+    "CONDITIONAL-DISCREPANCY-VCU-1990-91-006-CBBG-0136707-GAME_DATE": "Use source Dec. 11, 1990; Virginia Tech's current official historical schedule independently confirms it.",
+    "CONDITIONAL-DISCREPANCY-VCU-1991-92-022-CBBG-0136737-GAME_DATE": "Use source Feb. 20, 1992; Virginia Tech's current official historical schedule lists the 60-63 loss at VCU on that date.",
+    "CONDITIONAL-DISCREPANCY-VCU-1992-93-018-CBBG-0136758-GAME_DATE": "Use source Feb. 6, 1993; Virginia Tech's current official historical schedule lists the 54-73 home loss on that date.",
+    "CONDITIONAL-DISCREPANCY-VCU-1992-93-023-CBBG-0136763-GAME_DATE": "Use source Feb. 22, 1993; Virginia Tech's current official historical schedule lists the 69-86 road loss on that date.",
+    "CONDITIONAL-DISCREPANCY-VCU-1994-95-029-CBBG-0144868-GAME_DATE": "Normalize the target source date to Mar. 2, 1995; Louisville's current official history identifies the exact 80-64 contest on Mar. 2.",
+    "DISCREPANCY-VCU-1976-77-009-SITE_TYPE": "Recommend the accepted frozen VCU HOME designation. The target row is affirmatively home under VCU's accepted marker-era evidence and Richmond Coliseum assignment; reciprocal Virginia classifies the tournament-context game neutral, so preserve that conflict for Owner Gate 1 rather than silently overriding the target.",
+    "DISCREPANCY-VCU-1977-78-021-SITE_TYPE": "Recommend the accepted frozen VCU HOME designation. VCU's target evidence and marker-era rules classify the Richmond Coliseum game home; Virginia Tech's tournament-context record classifies it neutral. This is a genuine historical designation conflict, not a geography inference.",
+    "DISCREPANCY-VCU-1977-78-027-GAME_TYPE": "Use the frozen generic POSTSEASON type. Research deliberately retained the 1978 ECAC South game outside the repository's controlled NCAA/NIT/conference-tournament classes; do not silently recast the ECAC regional event as a conference tournament.",
+    "DISCREPANCY-VCU-1979-80-008-SITE_TYPE": "Normalize the VCU source to NEUTRAL. Virginia's reciprocal institutional classification is neutral, and independent schedule evidence places the Dec. 28, 1979 VCU-Virginia game outside the frozen HOME interpretation. Remove the unsupported Richmond Coliseum building assignment but retain Richmond locality.",
+    "DISCREPANCY-VCU-1985-86-005-SCORE": "Use source VCU 65-67. Current VCU institutional series history supports 65-67; Virginia Tech's current history supports 59-57. With a live one-score reciprocal conflict and no decisive third institutional authority, recommend the immutable target source rather than overwriting it.",
+    "DISCREPANCY-VCU-1987-88-008-SITE_TYPE": "Recommend frozen VCU HOME. The target's accepted H/A/N evidence classifies the Dec. 19, 1987 Times-Dispatch Invitational game home at Richmond Coliseum; reciprocal Virginia treats the tournament game neutral. Preserve the target recommendation and surface residual uncertainty.",
+    "DISCREPANCY-VCU-1988-89-008-GAME_DATE": "Use source Dec. 30, 1988. Virginia Tech's current official historical schedule lists its 97-91 win at VCU on Dec. 30. Authority: https://stats.hokiesports.com/mbasketball/records/schedule.html",
+    "DISCREPANCY-VCU-1989-90-008-SITE_TYPE": "Recommend frozen VCU HOME. Target and historical series evidence support VCU home at Richmond Coliseum; reciprocal Virginia labels the Times-Dispatch Invitational game neutral. Preserve the explicit target classification for owner disposition.",
+    "DISCREPANCY-VCU-1991-92-006-GAME_DATE": "Keep canonical Dec. 12, 1991. The only current reciprocal project authority gives Dec. 12, while the frozen VCU row gives Dec. 11 and VCU's current online opponent-history series does not cover this pre-1993 game. Recommend canonical but retain the one-day source conflict.",
+    "DISCREPANCY-VCU-1993-94-022-SCORE": "Use source VCU 59-76. VCU's current institutional schedule/series record gives a 59-76 loss at Virginia Tech; Virginia Tech currently gives 75-59. Recommend direct target authority while preserving the one-point reciprocal conflict.",
+    "DISCREPANCY-VCU-1996-97-008-SITE_TYPE": "Normalize the source to NEUTRAL and correct the physical site to historical Levitt Arena in Wichita, Kansas. TCU's institutional row classifies the Cessna Classic game neutral, and Wichita State event/facility evidence places the event at Levitt Arena. The registered physical identity is Charles Koch Arena, VEN-000039.",
+    "DISCREPANCY-VCU-2000-01-006-OVERTIME_PERIODS": "Use source 2OT. VCU's current history and Texas A&M's contemporary institutional recap both identify the Dec. 2, 2000 game as double overtime.",
+    "DISCREPANCY-VCU-2004-05-002-GAME_DATE": "Use source Nov. 18, 2004. Wake Forest's contemporary institutional archive identifies the VCU game on Nov. 18; the Nov. 19 canonical date is stale.",
+    "DISCREPANCY-VCU-2009-10-023-SITE_TYPE": "Use source OPPONENT_HOME. VCU's current institutional George Mason history explicitly lists Feb. 9, 2010 as an away game in Fairfax, so the reciprocal canonical VCU-home designation is erroneous.",
+    "DISCREPANCY-VCU-2010-11-003-SCORE": "Use source VCU 90-69. VCU's current schedule, cumulative statistics, and contemporary recap all give the Nov. 16, 2010 Wake Forest final as 90-69.",
+    "DISCREPANCY-VCU-2011-12-006-SITE_TYPE": "Use source OPPONENT_HOME. The VCU frozen row explicitly says at Alabama; canonical UNKNOWN is weaker than affirmative target site authority.",
+    "DISCREPANCY-VCU-2012-13-006-SCORE": "Normalize the frozen structured score to VCU 65, Missouri 68. VCU's own exact 2012 box score gives 65-68; the frozen 58-65 orientation arose from a literal-source transcription error. Preserve raw_text unchanged. Authority: https://vcuathletics.com/sports/mens-basketball/stats/2012-13/-13-missouri/boxscore/1271",
+    "DISCREPANCY-VCU-2012-13-006-SITE_TYPE": "Use the target NEUTRAL designation and correct the curated physical site to Imperial Arena, Nassau, BS. VCU's exact box score says Battle 4 Atlantis at Imperial Arena, Paradise Island, Bahamas; the frozen Mizzou Arena/Columbia assignment is wrong. Authority: https://vcuathletics.com/sports/mens-basketball/stats/2012-13/-13-missouri/boxscore/1271",
+    "DISCREPANCY-VCU-2013-14-034-SCORE": "Use source VCU 61-65. VCU's current institutional Saint Joseph's series history gives the Mar. 16, 2014 loss as 61-65; reciprocal 64-61 conflicts by one point.",
+    "DISCREPANCY-VCU-2014-15-031-SCORE": "Use source VCU 71-60. VCU's current George Mason history and contemporary recap both give the Mar. 7, 2015 final as 71-60.",
+    "DISCREPANCY-VCU-2016-17-023-OVERTIME_PERIODS": "Use source 1OT. The reciprocal St. Bonaventure structured value is 0 but its preserved raw source explicitly says OT; the frozen VCU overtime token is therefore the coherent value.",
+    "DISCREPANCY-VCU-2019-20-014-SITE_TYPE": "Normalize the VCU source to SOURCE_PROGRAM_HOME at Siegel Center. VCU's current Fordham opponent history explicitly lists Jan. 2, 2020 as a home 64-46 win; the frozen OPPONENT_HOME classification is wrong.",
+    "DISCREPANCY-VCU-2019-20-022-SCORE": "Use source VCU 75-87. VCU's current Rhode Island series history lists the Jan. 31, 2020 road loss as 75-87; reciprocal canonical 81-75 is erroneous.",
+    "DISCREPANCY-VCU-2020-21-025-SITE_TYPE": "Use source SOURCE_PROGRAM_HOME. VCU's current official 2020-21 schedule explicitly labels the Mar. 6, 2021 A-10 semifinal against Davidson as Home at Siegel Center. The conference/event convention creates a real designation conflict, but the target institution's explicit designation is affirmative authority. Authority: https://vcuathletics.com/sports/mens-basketball/schedule/2020-21?grid=true",
+    "DISCREPANCY-VCU-2022-23-033-GAME_DATE": "Normalize source to canonical Mar. 11, 2023. VCU's current official schedule places the A-10 semifinal against Saint Louis on Mar. 11.",
+    "DISCREPANCY-VCU-2022-23-034-GAME_DATE": "Normalize source to canonical Mar. 12, 2023. VCU's current official schedule places the A-10 championship against Dayton on Mar. 12.",
+    "DISCREPANCY-VCU-2023-24-005-GAME_DATE": "Normalize source to canonical Nov. 23, 2023. VCU's current official schedule places the Iowa State game on Nov. 23.",
+    "DISCREPANCY-VCU-2023-24-006-GAME_DATE": "Normalize source to canonical Nov. 24, 2023. VCU's current official schedule places the Boise State game on Nov. 24.",
+    "IDENTITY-VCU-1974-75-011": "Match CBBG-0066496. Texas A&M's institutional sequence has Fairfield on Dec. 29 and at VCU on Dec. 30, 1974, W 84-70; VCU already carries the separate Dec. 10 Texas A&M game. The Dec. 29/80-84 frozen VCU row is therefore the Dec. 30 game with source date/score drift, not a third contest.",
+    "IDENTITY-VCU-1984-85-032": "Match CBBG-0028889 by exact Alabama/VCU NCAA game identity and 63-59 Alabama win. Current institutional/NCAA history places the game on Mar. 17, 1985, so the selected date discrepancy should use the frozen VCU date.",
+    "IDENTITY-VCU-1989-90-011": "Match CBBG-0136691 by exact opponent and 71-68 Virginia Tech win. Virginia Tech's current official historical schedule lists VCU on Jan. 8, 1990, so use the VCU source date rather than the stale Jan. 6 canonical date. Authority: https://stats.hokiesports.com/mbasketball/records/schedule.html",
+    "IDENTITY-VCU-1990-91-006": "Match CBBG-0136707 by exact opponent and 77-75 Virginia Tech overtime win. Virginia Tech's current official history lists the game on Dec. 11, 1990, so use the VCU source date rather than Dec. 8. Authority: https://stats.hokiesports.com/mbasketball/records/schedule.html",
+    "IDENTITY-VCU-1991-92-022": "Match CBBG-0136737: its 63-60 score uniquely identifies the Feb. 20, 1992 VCU win among the two same-season Virginia Tech games. Virginia Tech's current official schedule confirms Feb. 20 at Richmond Coliseum. Authority: https://stats.hokiesports.com/mbasketball/records/schedule.html",
+    "IDENTITY-VCU-1992-93-018": "Match CBBG-0136758: the 73-54 score uniquely identifies Virginia Tech's Feb. 6, 1993 home loss to VCU. Virginia Tech's current official schedule confirms the date. Authority: https://stats.hokiesports.com/mbasketball/records/schedule.html",
+    "IDENTITY-VCU-1992-93-023": "Match CBBG-0136763: the 86-69 score uniquely identifies Virginia Tech's Feb. 22, 1993 road loss at VCU. Virginia Tech's current official schedule confirms the date. Authority: https://stats.hokiesports.com/mbasketball/records/schedule.html",
+    "IDENTITY-VCU-1994-95-029": "Match CBBG-0144868. Louisville's Mar. 2, 1995 80-64 win is the exact score/orientation match; the other same-season Louisville candidates have different scores. Normalize the frozen Mar. 5 date to Mar. 2.",
+    "IDENTITY-VCU-2020-21-011": "Match CBBG-0203017 and use the plan's built-in cross-opponent source patch to George Mason. VCU's current official statistics list Jan. 6, 2021 at George Mason, W 66-61, while the actual George Washington game was Jan. 13, W 84-77. Authority: https://vcuathletics.com/sports/mens-basketball/stats/2020-21",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-027": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. The row is an ECAC regional/other-postseason or CBI game, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-028": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. The row is an ECAC regional/other-postseason or CBI game, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-032": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. The row is an ECAC regional/other-postseason or CBI game, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-033": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. The row is an ECAC regional/other-postseason or CBI game, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-034": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. The row is an ECAC regional/other-postseason or CBI game, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-035": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. The row is an ECAC regional/other-postseason or CBI game, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-036": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. The row is an ECAC regional/other-postseason or CBI game, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "PUBLICATION-VCU": "Recommend enabling VCU publication only through the normal sealed apply, Preview, Owner Gate 2, merge, and Production-proof path after all Gate 1 decisions are approved and rehearsed."
+  },
+  "canonical_patch_by_decision": {
+    "DISCREPANCY-VCU-1996-97-008-SITE_TYPE": {
+      "site_city": "Wichita",
+      "site_state": "KS",
+      "venue_id": "VEN-000039",
+      "venue_key": "charles-koch-arena"
+    },
+    "DISCREPANCY-VCU-2012-13-006-SITE_TYPE": {
+      "site_city": "Nassau",
+      "site_state": "BS",
+      "site_type": "NEUTRAL",
+      "venue_id": "VEN-000088",
+      "venue_key": "imperial-arena"
+    },
+    "DISCREPANCY-VCU-2019-20-014-SITE_TYPE": {
+      "site_city": "Richmond",
+      "site_state": "VA",
+      "site_type": "TEAM_B_HOME",
+      "venue_id": "VEN-000705",
+      "venue_key": "siegel-center"
+    }
+  },
+  "decision_universe_sha256": "1d8a5aca2f904aae1e8d0bc58b683fcc487c276a2d5a06cf7b77b9213035966e",
+  "decisions": {
+    "ACCOMPLISHMENTS-VCU": "VERIFY_EXPLAINED_ADMIN_DIFFERENCE",
+    "CANONICAL-SITE-PATCH-CBBG-0066496": "LEAVE_UNRESOLVED",
+    "CONDITIONAL-DISCREPANCY-VCU-1974-75-011-CBBG-0066496-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-VCU-1974-75-011-CBBG-0066496-SCORE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-VCU-1984-85-032-CBBG-0028889-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-VCU-1989-90-011-CBBG-0136691-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-VCU-1990-91-006-CBBG-0136707-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-VCU-1991-92-022-CBBG-0136737-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-VCU-1992-93-018-CBBG-0136758-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-VCU-1992-93-023-CBBG-0136763-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-VCU-1994-95-029-CBBG-0144868-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-1976-77-009-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1977-78-021-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1977-78-027-GAME_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1979-80-008-SITE_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-1985-86-005-SCORE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1987-88-008-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1988-89-008-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1989-90-008-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1991-92-006-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-VCU-1993-94-022-SCORE": "USE_SOURCE",
+    "DISCREPANCY-VCU-1996-97-008-SITE_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-2000-01-006-OVERTIME_PERIODS": "USE_SOURCE",
+    "DISCREPANCY-VCU-2004-05-002-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2009-10-023-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2010-11-003-SCORE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2011-12-006-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2012-13-006-SCORE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-2012-13-006-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2013-14-034-SCORE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2014-15-031-SCORE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2016-17-023-OVERTIME_PERIODS": "USE_SOURCE",
+    "DISCREPANCY-VCU-2019-20-014-SITE_TYPE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-2019-20-022-SCORE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2020-21-025-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-VCU-2022-23-033-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-2022-23-034-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-2023-24-005-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "DISCREPANCY-VCU-2023-24-006-GAME_DATE": "NORMALIZE_SOURCE_TO_CANONICAL",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-027": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-028": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-032": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-033": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-034": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-035": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-036": "KEEP_POSTSEASON_UNRESOLVED",
+    "PUBLICATION-VCU": "ENABLE_PUBLIC_PAGE"
+  },
+  "defaults": {
+    "basis": "Use the exact evidence-specific recommendation in this map; preserve unresolved reciprocal conflicts rather than converting uncertainty into silent authority.",
+    "discrepancy": "KEEP_CANONICAL",
+    "identity_basis": "One real game equals one canonical game. Select the candidate supported by exact opponent/score sequence and current institutional evidence; adjudicate date/score/site differences separately.",
+    "not_applicable_basis": "This conditional discrepancy belongs to an identity candidate not selected by the recommendation map.",
+    "selected_conditional": "KEEP_CANONICAL"
+  },
+  "identity": {
+    "VCU-1974-75-011": "MATCH_CANONICAL:CBBG-0066496",
+    "VCU-1984-85-032": "MATCH_CANONICAL:CBBG-0028889",
+    "VCU-1989-90-011": "MATCH_CANONICAL:CBBG-0136691",
+    "VCU-1990-91-006": "MATCH_CANONICAL:CBBG-0136707",
+    "VCU-1991-92-022": "MATCH_CANONICAL:CBBG-0136737",
+    "VCU-1992-93-018": "MATCH_CANONICAL:CBBG-0136758",
+    "VCU-1992-93-023": "MATCH_CANONICAL:CBBG-0136763",
+    "VCU-1994-95-029": "MATCH_CANONICAL:CBBG-0144868",
+    "VCU-2020-21-011": "MATCH_CANONICAL:CBBG-0203017"
+  },
+  "notes_by_decision": {
+    "DISCREPANCY-VCU-1996-97-008-SITE_TYPE": "Historical venue name Levitt Arena is an accepted alias of the same physical facility now registered as Charles Koch Arena; venue identity does not itself establish H/A/N.",
+    "DISCREPANCY-VCU-2012-13-006-SCORE": "This explicitly supersedes only the frozen structured score fields after new exact VCU box-score evidence. The immutable Research Freeze and raw literal remain audit evidence and are not rewritten.",
+    "DISCREPANCY-VCU-2012-13-006-SITE_TYPE": "Do not infer H/A/N from the venue. Neutrality is independently established by the Battle 4 Atlantis game context and VCU exact box score.",
+    "IDENTITY-VCU-2020-21-011": "The permanent identity plan already supplies the exact cross-opponent patch George Washington -> George Mason when CBBG-0203017 is selected."
+  },
+  "prepared_against_protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "prepared_against_target_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "source_patch_by_decision": {
+    "IDENTITY-VCU-2020-21-011": {
+      "normalized_opponent_key": "george-mason",
+      "normalized_opponent_name": "George Mason"
+    },
+    "DISCREPANCY-VCU-1979-80-008-SITE_TYPE": {
+      "city": "Richmond",
+      "curated_site_type": "NEUTRAL",
+      "curated_venue_name": "",
+      "state": "VA"
+    },
+    "DISCREPANCY-VCU-1996-97-008-SITE_TYPE": {
+      "city": "Wichita",
+      "curated_site_type": "NEUTRAL",
+      "curated_venue_name": "Levitt Arena",
+      "state": "KS"
+    },
+    "DISCREPANCY-VCU-2012-13-006-SCORE": {
+      "opponent_score": "68",
+      "team_score": "65"
+    },
+    "DISCREPANCY-VCU-2012-13-006-SITE_TYPE": {
+      "city": "Nassau",
+      "curated_venue_name": "Imperial Arena",
+      "state": "BS"
+    },
+    "DISCREPANCY-VCU-2019-20-014-SITE_TYPE": {
+      "city": "Richmond",
+      "curated_site_type": "SOURCE_PROGRAM_HOME",
+      "curated_venue_name": "Siegel Center",
+      "state": "VA"
+    }
+  },
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "a8707ace7cffe805f375e5afa58708c98bc341968873ec507a1f03b3d9a5e6bd"
+  },
+  "venue_relationship_patch_by_decision": {
+    "DISCREPANCY-VCU-1996-97-008-SITE_TYPE": {
+      "venue_id": "VEN-000039",
+      "venue_key": "charles-koch-arena"
+    }
+  }
+}
