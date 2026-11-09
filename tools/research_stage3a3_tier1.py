@@ -4,7 +4,7 @@
 No network access, document reading, event research, or historical adjudication.
 """
 from __future__ import annotations
-import argparse,csv,hashlib,json,subprocess
+import argparse,csv,datetime,hashlib,json,re,subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -21,7 +21,7 @@ def head():
 def rid(r):return pick(r,"research_game_id","source_game_id","game_id","id")
 def is_regular(r):return pick(r,"game_type","curated_game_type","season_type","competition_type").upper() in {"REGULAR_SEASON","REGULAR","RS"}
 def is_neutral(r):return pick(r,"site_type","curated_site_type","site","han","home_away_neutral").upper() in {"NEUTRAL","N"}
-def opp(r):return pick(r,"opponent_key","opponent_program_key","normalized_opponent_key","canonical_opponent_key")
+def opp(r):return pick(r,"opponent_key","opponent_program_key","normalized_opponent_key","canonical_opponent_key","stage2_opponent_key")
 def venue(r):return pick(r,"curated_venue_name","venue_name","venue")
 def city(r):return pick(r,"city","venue_city")
 def state(r):return pick(r,"state","venue_state")
@@ -36,8 +36,30 @@ def required_site_gaps(row,fact):
     y=season_year(row)
     if y is not None and y>=1996 and not venue_name:gaps.append("venue_name")
     return gaps
+def season_year_bounds(r):
+    label=pick(r,"season_label","season")
+    match=re.fullmatch(r"(\\d{4})-(\\d{2}|\\d{4})",label)
+    if not match:return None
+    start=int(match.group(1));end_text=match.group(2)
+    if len(end_text)==4:
+        end=int(end_text)
+    else:
+        end=(start//100)*100+int(end_text)
+        if end<=start:end+=100
+    return (start,end) if end==start+1 else None
+def exact_date(r):
+    explicit=pick(r,"game_date","date")
+    if explicit:return explicit
+    literal=pick(r,"source_date_literal")
+    match=re.fullmatch(r"(\\d{1,2})/(\\d{1,2})",literal)
+    bounds=season_year_bounds(r)
+    if not match or bounds is None:return ""
+    month=int(match.group(1));day=int(match.group(2))
+    year=bounds[0] if month>=7 else bounds[1]
+    try:return datetime.date(year,month,day).isoformat()
+    except ValueError:return ""
 def exact_key(r,school=None):
-    d=pick(r,"game_date","date");o=opp(r)
+    d=exact_date(r);o=opp(r)
     if school and not o:
         a=pick(r,"team_a_key");b=pick(r,"team_b_key")
         if school in (a,b):o=b if a==school else a
@@ -76,7 +98,7 @@ def main():
     for r in neutral:
         k=exact_key(r)
         if k is None:
-            unresolved.append({"research_game_id":rid(r),"game_date":pick(r,"game_date","date"),"opponent_key":opp(r),"reason":"NO_EXACT_DATE_FOR_TIER1_MATCH"})
+            unresolved.append({"research_game_id":rid(r),"game_date":exact_date(r),"opponent_key":opp(r),"reason":"NO_EXACT_DATE_FOR_TIER1_MATCH"})
             remaining.append(r)
             continue
         cands=idx.get(k,[]);facts={}

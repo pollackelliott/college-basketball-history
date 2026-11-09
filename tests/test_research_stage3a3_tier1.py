@@ -70,3 +70,61 @@ def test_tier1_historical_partial_locality_stays_in_residual(tmp_path):
     assert s["remaining_historical"]==1
     accepted=json.loads((out/"accepted-project-evidence.json").read_text())
     assert accepted[0]["missing_required_fields"]==["state"]
+
+
+def run_durable_schema_case(tmp, ledger_row, evidence_rows):
+    ledger_path=tmp/"ledger.csv";write(ledger_path,[ledger_row])
+    write(tmp/"schools"/"virginia"/"source-games.csv",evidence_rows)
+    can=tmp/"data/canonical/games.csv";write(can,[{"canonical_game_id":"OTHER","game_date":"2000-01-01","team_a_key":"a","team_b_key":"b","venue_name":"","city":"","state":""}])
+    out=tmp/"out";p=subprocess.run([sys.executable,"tools/research_stage3a3_tier1.py","clemson",str(ledger_path),"--repo-root",str(tmp),"--output-dir",str(out),"--main-sha","PIN"],capture_output=True,text=True)
+    return p,json.loads((out/"stage3a3-tier1-status.json").read_text()),out
+
+def test_tier1_accepts_stage2_opponent_key_and_projects_fall_source_date(tmp_path):
+    ledger_row={"research_game_id":"C-DURABLE-FALL","season_label":"2024-25","source_date_literal":"11/20","stage2_opponent_key":"virginia","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}
+    evidence=[{"source_game_id":"V-FALL","source_program_key":"virginia","game_date":"2024-11-20","normalized_opponent_key":"clemson","curated_venue_name":"Arena A","city":"Atlanta","state":"GA"}]
+    p,s,out=run_durable_schema_case(tmp_path,ledger_row,evidence)
+    assert p.returncode==0 and s["status"]=="COMPLETE" and s["accepted_count"]==1
+    accepted=json.loads((out/"accepted-project-evidence.json").read_text())
+    assert accepted[0]["game_date"]=="2024-11-20" and accepted[0]["opponent_key"]=="virginia"
+
+def test_tier1_projects_second_half_source_date_to_season_end_year(tmp_path):
+    ledger_row={"research_game_id":"C-DURABLE-JAN","season_label":"2024-25","source_date_literal":"1/15","stage2_opponent_key":"virginia","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}
+    evidence=[{"source_game_id":"V-JAN","source_program_key":"virginia","game_date":"2025-01-15","normalized_opponent_key":"clemson","curated_venue_name":"Arena A","city":"Atlanta","state":"GA"}]
+    p,s,out=run_durable_schema_case(tmp_path,ledger_row,evidence)
+    assert p.returncode==0 and s["accepted_count"]==1
+    accepted=json.loads((out/"accepted-project-evidence.json").read_text())
+    assert accepted[0]["game_date"]=="2025-01-15"
+
+def test_tier1_projects_two_digit_century_rollover(tmp_path):
+    ledger_row={"research_game_id":"C-DURABLE-2000","season_label":"1999-00","source_date_literal":"1/15","stage2_opponent_key":"virginia","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}
+    evidence=[{"source_game_id":"V-2000","source_program_key":"virginia","game_date":"2000-01-15","normalized_opponent_key":"clemson","curated_venue_name":"Arena A","city":"Atlanta","state":"GA"}]
+    p,s,out=run_durable_schema_case(tmp_path,ledger_row,evidence)
+    assert p.returncode==0 and s["accepted_count"]==1
+    accepted=json.loads((out/"accepted-project-evidence.json").read_text())
+    assert accepted[0]["game_date"]=="2000-01-15"
+
+def test_tier1_explicit_game_date_precedes_source_date_literal(tmp_path):
+    ledger_row={"research_game_id":"C-DURABLE-EXPLICIT","season_label":"2024-25","game_date":"2024-11-20","source_date_literal":"1/15","stage2_opponent_key":"virginia","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}
+    evidence=[{"source_game_id":"V-EXPLICIT","source_program_key":"virginia","game_date":"2024-11-20","normalized_opponent_key":"clemson","curated_venue_name":"Arena A","city":"Atlanta","state":"GA"}]
+    p,s,out=run_durable_schema_case(tmp_path,ledger_row,evidence)
+    assert p.returncode==0 and s["accepted_count"]==1
+    accepted=json.loads((out/"accepted-project-evidence.json").read_text())
+    assert accepted[0]["game_date"]=="2024-11-20"
+
+def test_tier1_blank_source_date_remains_unresolved(tmp_path):
+    ledger_row={"research_game_id":"C-DURABLE-BLANK","season_label":"2024-25","source_date_literal":"","stage2_opponent_key":"virginia","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}
+    evidence=[{"source_game_id":"V-BLANK","source_program_key":"virginia","game_date":"2024-11-20","normalized_opponent_key":"clemson","curated_venue_name":"Arena A","city":"Atlanta","state":"GA"}]
+    p,s,out=run_durable_schema_case(tmp_path,ledger_row,evidence)
+    assert p.returncode==0 and s["status"]=="COMPLETE" and s["accepted_count"]==0 and s["unresolved_count"]==1
+    unresolved=json.loads((out/"tier1-unresolved.json").read_text())
+    assert unresolved==[{"research_game_id":"C-DURABLE-BLANK","game_date":"","opponent_key":"virginia","reason":"NO_EXACT_DATE_FOR_TIER1_MATCH"}]
+
+def test_tier1_malformed_or_impossible_source_date_remains_unresolved(tmp_path):
+    for index,literal in enumerate(("Nov 20","2/30"),1):
+        case=tmp_path/str(index);case.mkdir()
+        ledger_row={"research_game_id":f"C-DURABLE-BAD-{index}","season_label":"2024-25","source_date_literal":literal,"stage2_opponent_key":"virginia","site_type":"NEUTRAL","game_type":"REGULAR_SEASON"}
+        evidence=[{"source_game_id":f"V-BAD-{index}","source_program_key":"virginia","game_date":"2024-11-20","normalized_opponent_key":"clemson","curated_venue_name":"Arena A","city":"Atlanta","state":"GA"}]
+        p,s,out=run_durable_schema_case(case,ledger_row,evidence)
+        assert p.returncode==0 and s["status"]=="COMPLETE" and s["accepted_count"]==0 and s["unresolved_count"]==1
+        unresolved=json.loads((out/"tier1-unresolved.json").read_text())
+        assert unresolved[0]["game_date"]=="" and unresolved[0]["reason"]=="NO_EXACT_DATE_FOR_TIER1_MATCH"
