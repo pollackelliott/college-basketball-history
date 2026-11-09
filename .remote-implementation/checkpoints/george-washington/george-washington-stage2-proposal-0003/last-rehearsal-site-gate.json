@@ -1,0 +1,118 @@
+{
+  "counts": {
+    "home_missing_venue": 161,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 4,
+    "neutral_missing_venue": 54,
+    "public_gap_rows": 416,
+    "reciprocal_only_unresolved_home_venue": 4,
+    "reciprocal_research_accounted_gap": 1,
+    "reciprocal_unpropagated": 0,
+    "reconciled_unknown_site_unresolved_home_venue": 2,
+    "researched_unresolved_home_venue": 161,
+    "researched_unresolved_home_venue_rows": 161,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2753,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 201
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0000440",
+      "CBBG-0017942",
+      "CBBG-0020282",
+      "CBBG-0020578",
+      "CBBG-0025551",
+      "CBBG-0025605",
+      "CBBG-0035784",
+      "CBBG-0035897",
+      "CBBG-0045454",
+      "CBBG-0045477",
+      "CBBG-0054424",
+      "CBBG-0056470"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0056182",
+      "CBBG-0056185",
+      "CBBG-0162196",
+      "CBBG-0204817"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0018762",
+      "CBBG-0024138",
+      "CBBG-0030869",
+      "CBBG-0034346",
+      "CBBG-0047814",
+      "CBBG-0056182",
+      "CBBG-0056185",
+      "CBBG-0072518",
+      "CBBG-0081183",
+      "CBBG-0090556",
+      "CBBG-0099845",
+      "CBBG-0125434"
+    ],
+    "reciprocal_only_unresolved_home_venue": [
+      "CBBG-0080911",
+      "CBBG-0124781",
+      "CBBG-0163881",
+      "CBBG-0163887"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0162196"
+    ],
+    "reconciled_unknown_site_unresolved_home_venue": [
+      "CBBG-0124844",
+      "CBBG-0125315"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0000440",
+      "CBBG-0017942",
+      "CBBG-0020282",
+      "CBBG-0020578",
+      "CBBG-0025551",
+      "CBBG-0025605",
+      "CBBG-0035784",
+      "CBBG-0035897",
+      "CBBG-0045454",
+      "CBBG-0045477",
+      "CBBG-0054424",
+      "CBBG-0056470"
+    ],
+    "unknown_site_type": [
+      "CBBG-0092206",
+      "CBBG-0127194",
+      "CBBG-0127229",
+      "CBBG-0127243",
+      "CBBG-0127250",
+      "CBBG-0127255",
+      "CBBG-0127262",
+      "CBBG-0127267",
+      "CBBG-0127401",
+      "CBBG-0127402",
+      "CBBG-0163749",
+      "CBBG-0163751"
+    ]
+  },
+  "history_start_season": "1906-1907",
+  "school_key": "george-washington",
+  "source_site_counts": {
+    "home_missing_venue": 157,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 412,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 51,
+    "researched_gap_rows": 412,
+    "researched_unresolved_home_venue_rows": 157,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 204
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2741
+  },
+  "status": "PASS",
+  "warnings": []
+}
