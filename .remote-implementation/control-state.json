@@ -488,15 +488,15 @@
   "active_lock_commit": "39623b7fdd1492fc9385a89e5b2c590cd2fc0380",
   "active_lock_owner": "github-actions:42720246954:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "53a12a657527931ca2e8146e27d71462fa9e7caf",
+  "active_prepared_tree_sha": "9dd6a446c11fa79ced92095b10bdc3dd6c94e3d8",
   "active_request_id": "george-washington-stage2-current-main-refresh-0002",
   "active_request_sha256": "637e5b4321e0dc288c4710beaec75ec8e673ddde9cf07ed2336deb090ef6c847",
   "active_school_key": "george-washington",
   "active_target_branch": "data/george-washington-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/george-washington/george-washington-stage2-current-main-refresh-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "c45b6d1143471893372458cff28be3d7c32074a723be28fd1b76c6046ece828d",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -993,5 +993,5 @@
   "lock_acquisition_request_commit": "46fa06be8a15ed5d95c5ec9dfe8120e13967204d",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

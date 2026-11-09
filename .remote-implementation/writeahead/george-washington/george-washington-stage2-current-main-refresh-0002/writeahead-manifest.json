@@ -1,0 +1,63 @@
+{
+  "changed_file_sha256": {
+    "tests/test_onboarding_reconciliation_home_exception.py": "c4d1881a42d4008c2bf3e6bc63271bf9f05db54e43fb30deb2d5785d97cdf63e",
+    "tools/onboarding_plan.py": "b565c9e60032048021c81b688eff3f900dade48a18ec0f23a92c7b2ca7caf847"
+  },
+  "changed_paths": [
+    "tests/test_onboarding_reconciliation_home_exception.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "b13701602f1eb240ba6fc15d4d5e267d017cac22",
+  "global_lock_commit": "39623b7fdd1492fc9385a89e5b2c590cd2fc0380",
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "tests/test_onboarding_reconciliation_home_exception.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "a5d3121a439887d76188b19dd4a2d51316844384",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "f23ed9e28474bfb1c398446006ecec74e3485078af8e557c392edc6739fd4553",
+    "notes.md": "15b044fb5b468dd65dc0916c65088a6a0fbca04a3c1eefcb7ba8faf734dd5770",
+    "opponents.csv": "8f3ec19ac81924fa3b266a8b6d2f10ce20db258a552de6c66978d43118232086",
+    "source-games.csv": "15ca8a34416ed0e60b5bc95d82edabc441f1a822d770ea8c61840f9286602539",
+    "source-notes.md": "8402984f6bcabc089f2596499d923d9782a8069b00e615e37b6b4ffd055aa866",
+    "venues.csv": "6284872ee6e1dd3089c0029f781e74144c05b3a6142d894b5b3b1e8df252418a"
+  },
+  "predecessor_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "prepared_commit_sha": "53a12a657527931ca2e8146e27d71462fa9e7caf",
+  "prepared_main_parent_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "prepared_parent_sha": "b13701602f1eb240ba6fc15d4d5e267d017cac22",
+  "prepared_parents": [
+    "b13701602f1eb240ba6fc15d4d5e267d017cac22",
+    "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2"
+  ],
+  "prepared_tree_sha": "9dd6a446c11fa79ced92095b10bdc3dd6c94e3d8",
+  "protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "refresh_proof_sha256": "5406477bedbc2ce4ffa36263287df0cb3d88def00ef42b997bcc7da7eb982c25",
+  "repository_validation": "PASS",
+  "request_id": "george-washington-stage2-current-main-refresh-0002",
+  "request_sha256": "637e5b4321e0dc288c4710beaec75ec8e673ddde9cf07ed2336deb090ef6c847",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "sidecars": {
+    "integration-freeze.json": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+    "refresh-proof.json": "5406477bedbc2ce4ffa36263287df0cb3d88def00ef42b997bcc7da7eb982c25"
+  },
+  "target_branch": "data/george-washington-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/george-washington/conferences.csv",
+    "schools/george-washington/notes.md",
+    "schools/george-washington/opponents.csv",
+    "schools/george-washington/source-games.csv",
+    "schools/george-washington/source-notes.md",
+    "schools/george-washington/venues.csv"
+  ]
+}
