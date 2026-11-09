@@ -24,6 +24,9 @@ from pathlib import Path
 from typing import Any
 
 from research_authoring_capsule import checkpoint_continuity_defects
+from research_stage3a4_accounting import (
+    reconcile_opponent_home_outside_responsibility,
+)
 
 from research_stage4_closeout import (
     closeout,
@@ -617,7 +620,11 @@ def _projection(
     venues: list[dict[str, str]],
     *,
     school_key: str = "",
+    opponent_home_outside_responsibility: dict[str, dict[str, str]] | None = None,
 ) -> tuple[list[dict[str, str]], list[dict[str, Any]]]:
+    opponent_home_outside_responsibility = (
+        opponent_home_outside_responsibility or {}
+    )
     names: dict[str, set[str]] = defaultdict(set)
     for row in opponents:
         key = row.get("canonical_opponent_key", "").strip()
@@ -693,6 +700,31 @@ def _projection(
                 )
             else:
                 accepted_venue = candidates[0]
+
+        if not research_status:
+            supplemental = opponent_home_outside_responsibility.get(game_id)
+            source_token = _first(row, "source_venue_token")
+            accepted_physical_venue = _first(
+                row,
+                "stage3b_physical_venue_name",
+                "stage3b_curated_venue_name",
+                "stage3a_final_physical_venue_name",
+                "stage3a_final_venue_name",
+                "accepted_venue_name",
+                "stage3a_curated_venue_name",
+                "stage3a2_physical_venue_name",
+                "stage3a3_physical_venue_name",
+                "curated_venue_name",
+                "venue_name",
+            )
+            if (
+                supplemental
+                and source_token
+                and not accepted_physical_venue
+                and not accepted_venue
+            ):
+                research_status = "RESEARCHED_PARTIAL"
+                research_basis = supplemental.get("basis", "")
 
         administrative_status, administrative_note = (
             project_administrative_status(row)
@@ -932,6 +964,42 @@ def _semantic_projection_defects(
                or not projected["site_research_basis"]):
             defects.append({"reason": "ACCEPTED_SITE_RESEARCH_ACCOUNTING_LOST",
                             "source_game_id": game_id, "field": source_status})
+    return defects
+
+
+def _opponent_home_accounting_projection_defects(
+    games: list[dict[str, str]],
+    reconciled: dict[str, dict[str, str]],
+) -> list[dict[str, str]]:
+    """Guard package accounting for reconciled material opponent-home literals."""
+
+    defects: list[dict[str, str]] = []
+    for game in games:
+        game_id = game.get("source_game_id", "").strip()
+        item = reconciled.get(game_id)
+        if not item:
+            continue
+        if (
+            normalize_game_type(game.get("curated_game_type", "")) != "REGULAR_SEASON"
+            or normalize_site(game.get("curated_site_type", "")) != "OPPONENT_HOME"
+        ):
+            continue
+        if (
+            not game.get("source_venue_name", "").strip()
+            or game.get("curated_venue_name", "").strip()
+        ):
+            continue
+        expected_basis = item.get("basis", "").strip()
+        if (
+            game.get("site_research_status", "").strip() != "RESEARCHED_PARTIAL"
+            or game.get("site_research_basis", "").strip() != expected_basis
+        ):
+            defects.append(
+                {
+                    "reason": "STAGE3A4_OPPONENT_HOME_PACKAGE_ACCOUNTING_LOST",
+                    "source_game_id": game_id,
+                }
+            )
     return defects
 
 
@@ -1365,6 +1433,19 @@ def inspect_checkpoint(
             "research_base_sha", manifest.get("research_base_sha", "")
         )
         (
+            opponent_home_responsibility,
+            opponent_home_responsibility_defects,
+            opponent_home_responsibility_summary,
+        ) = reconcile_opponent_home_outside_responsibility(
+            archive,
+            layout["prefix"],
+            manifest,
+            ledger,
+            normalize_game_type=normalize_game_type,
+            normalize_site=normalize_site,
+            project_game_id=project_game_id,
+        )
+        (
             early_history,
             early_history_defects,
             early_history_summary,
@@ -1408,12 +1489,16 @@ def inspect_checkpoint(
             "missing_authoring_files": missing,
             "coverage": coverage,
             "early_history_uncertainty": early_history_summary,
+            "stage3a4_opponent_home_responsibility": (
+                opponent_home_responsibility_summary
+            ),
             **({"historical_season_coverage": aggregate_coverage_summary}
                if aggregate_coverage else {}),
             "defects": (
                 list(coverage_defects)
                 + early_history_defects
                 + aggregate_coverage_defects
+                + opponent_home_responsibility_defects
                 + continuity_defects
             ),
         }
@@ -1432,7 +1517,25 @@ def inspect_checkpoint(
         venue_fields, venues = _csv_bytes(archive.read(members["venues.csv"]))
         conf_fields, conferences = _csv_bytes(archive.read(members["conferences.csv"]))
         games, projection_defects = _projection(
-            ledger, opponents, venues, school_key=school_key
+            ledger,
+            opponents,
+            venues,
+            school_key=school_key,
+            opponent_home_outside_responsibility=(
+                opponent_home_responsibility
+                if not opponent_home_responsibility_defects
+                else {}
+            ),
+        )
+        projection_defects.extend(
+            _opponent_home_accounting_projection_defects(
+                games,
+                (
+                    opponent_home_responsibility
+                    if not opponent_home_responsibility_defects
+                    else {}
+                ),
+            )
         )
         if early_history:
             by_game_id = {row["source_game_id"]: row for row in games}
@@ -1565,6 +1668,28 @@ def author(
         layout = resolve_stage3b_parent_layout(archive)
         status = json.loads(archive.read(layout["status_path"]))
         _, ledger = _csv_bytes(archive.read(layout["ledger_path"]))
+        manifest = validate_checkpoint_manifest(archive, layout)
+        (
+            opponent_home_responsibility,
+            opponent_home_responsibility_defects,
+            _opponent_home_responsibility_summary,
+        ) = reconcile_opponent_home_outside_responsibility(
+            archive,
+            layout["prefix"],
+            manifest,
+            ledger,
+            normalize_game_type=normalize_game_type,
+            normalize_site=normalize_site,
+            project_game_id=project_game_id,
+        )
+        if opponent_home_responsibility_defects:
+            raise ValueError(
+                "Stage 3A-4 opponent-home accounting reconciliation defects: "
+                + json.dumps(
+                    opponent_home_responsibility_defects[:10],
+                    sort_keys=True,
+                )
+            )
         early_member = (
             layout["prefix"]
             + AUTHORING_DIR
@@ -1591,7 +1716,19 @@ def author(
         }
         _, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
         _, venues = _csv_bytes(archive.read(members["venues.csv"]))
-        games, defects = _projection(ledger, opponents, venues, school_key=school_key)
+        games, defects = _projection(
+            ledger,
+            opponents,
+            venues,
+            school_key=school_key,
+            opponent_home_outside_responsibility=opponent_home_responsibility,
+        )
+        defects.extend(
+            _opponent_home_accounting_projection_defects(
+                games,
+                opponent_home_responsibility,
+            )
+        )
         if defects:
             raise ValueError(
                 "Stage 4 source-game projection defects: "

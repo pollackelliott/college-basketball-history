@@ -29,6 +29,9 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from onboarding_hardening import research_portfolio_report
+from research_stage3a4_accounting import (
+    reconcile_opponent_home_outside_responsibility,
+)
 
 REQUIRED_PACKAGE_FILES = (
     "conferences.csv",
@@ -1034,6 +1037,51 @@ def compare_parent_semantics(
                 )
     return mismatches
 
+def compare_opponent_home_responsibility_accounting(
+    package_rows: list[dict[str, str]],
+    reconciled: dict[str, dict[str, str]],
+) -> list[dict[str, str]]:
+    """Independently guard package accounting for material sidecar-backed rows."""
+
+    package = {
+        str(row.get("source_game_id") or "").strip(): row
+        for row in package_rows
+        if str(row.get("source_game_id") or "").strip()
+    }
+    mismatches: list[dict[str, str]] = []
+    for game_id, item in sorted(reconciled.items()):
+        row = package.get(game_id)
+        if row is None:
+            continue
+        if (
+            normalize_game_type(row.get("curated_game_type", "")) != "REGULAR_SEASON"
+            or normalize_site(row.get("curated_site_type", "")) != "OPPONENT_HOME"
+        ):
+            continue
+        if (
+            not row.get("source_venue_name", "").strip()
+            or row.get("curated_venue_name", "").strip()
+        ):
+            continue
+        expected_basis = str(item.get("basis", "") or "").strip()
+        expected = {
+            "site_research_status": "RESEARCHED_PARTIAL",
+            "site_research_basis": expected_basis,
+        }
+        for field, value in expected.items():
+            actual = row.get(field, "").strip()
+            if actual != value:
+                mismatches.append(
+                    {
+                        "source_game_id": game_id,
+                        "field": field,
+                        "parent_value": value,
+                        "package_value": actual,
+                    }
+                )
+    return mismatches
+
+
 def current_d1_flag(value: str) -> bool | None:
     folded = (value or "").strip().casefold()
     if folded in TRUE_VALUES:
@@ -1283,6 +1331,27 @@ def closeout(
         _, parent_rows = read_csv_bytes(
             parent_zip.read(parent_layout["ledger_path"])
         )
+        (
+            opponent_home_responsibility,
+            opponent_home_responsibility_defects,
+            opponent_home_responsibility_summary,
+        ) = reconcile_opponent_home_outside_responsibility(
+            parent_zip,
+            parent_layout["prefix"],
+            parent_manifest,
+            parent_rows,
+            normalize_game_type=normalize_game_type,
+            normalize_site=normalize_site,
+            project_game_id=project_game_id,
+        )
+        if opponent_home_responsibility_defects:
+            raise ValueError(
+                "Stage 3A-4 opponent-home accounting reconciliation defects: "
+                + json.dumps(
+                    opponent_home_responsibility_defects[:10],
+                    sort_keys=True,
+                )
+            )
 
     package_members = {
         name: (package_dir / name).read_bytes()
@@ -1328,6 +1397,9 @@ def closeout(
             "research_base_sha",
             parent_manifest.get("research_base_sha", ""),
         ),
+        "stage3a4_opponent_home_responsibility": (
+            opponent_home_responsibility_summary
+        ),
     }
     if (
         not parent_sanity["stage3b_parent_game_ids_unique"]
@@ -1351,6 +1423,12 @@ def closeout(
         package_rows,
         venue_rows,
         school_key=school_key,
+    )
+    mismatches.extend(
+        compare_opponent_home_responsibility_accounting(
+            package_rows,
+            opponent_home_responsibility,
+        )
     )
     parent_sanity[
         "semantic_comparison_unexpected_mismatches"
