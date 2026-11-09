@@ -308,8 +308,7 @@ def _research_accounting(
     if postseason == "OPPONENT_HOME_VENUE_OUTSIDE_TARGET_RESEARCH_RESPONSIBILITY":
         site = normalize_site(_first(row, "curated_site_type", "stage3b_site_type",
                                     "stage3a_final_site_type", "site_type"))
-        game_type = normalize_game_type(_first(row, "curated_game_type",
-                                               "game_type", "structured_game_type"))
+        game_type = effective_parent_game_type(row)
         basis = _first(row, "postseason_site_research_basis")
         shared_row = _first(row, "postseason_shared_ref_source_row")
         if (site == "OPPONENT_HOME" and game_type == "CONFERENCE_TOURNAMENT"
@@ -329,9 +328,7 @@ def _research_accounting(
         row, "curated_site_type", "stage3b_site_type",
         "stage3a_final_site_type", "stage3a_final_han", "site_type",
     ))
-    game_type = normalize_game_type(_first(
-        row, "curated_game_type", "game_type", "structured_game_type",
-    ))
+    game_type = effective_parent_game_type(row)
     accepted_venue = _first(
         row, "stage3b_physical_venue_name", "stage3b_curated_venue_name",
         "stage3a_final_physical_venue_name", "stage3a_final_venue_name",
