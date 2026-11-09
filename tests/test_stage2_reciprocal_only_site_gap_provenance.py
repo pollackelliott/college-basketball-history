@@ -18,8 +18,10 @@ from onboarding_hardening import fill_review_from_map  # noqa: E402
 from onboarding_plan import (  # noqa: E402
     REVIEW_COLUMNS,
     WorkflowError,
+    _discover_reciprocal_only_site_gap_provenance,
     _record_reciprocal_only_site_gap_provenance,
     _validate_reciprocal_only_site_gap_provenance_rows,
+    write_preflight_artifacts,
 )
 from test_implementation_site_gate import (  # noqa: E402
     ImplementationSiteGateTests,
@@ -475,6 +477,60 @@ class ReciprocalOnlySiteGapProvenanceTests(unittest.TestCase):
             validate(assertions=[reciprocal(venue="Known Arena")])
         with self.assertRaisesRegex(WorkflowError, "reciprocal locality evidence exists"):
             validate(assertions=[reciprocal(city="Washington", state="DC")])
+
+    def test_14_exact_legacy_map_preserves_auto_discovered_provenance(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture = ImplementationSiteGateTests()
+            fixture.make_repo(
+                root,
+                sources=[],
+                canonical=[neutral_game()],
+                assertions=[reciprocal()],
+                discrepancies=[],
+            )
+            base_plan = plan()
+            discovered = _discover_reciprocal_only_site_gap_provenance(
+                root,
+                base_plan,
+            )
+            self.assertEqual(len(discovered), 1)
+            self.assertEqual(
+                discovered[0]["canonical_game_id"],
+                "CBBG-0000001",
+            )
+
+            generated_plan = {
+                **base_plan,
+                "site_gap_provenance": discovered,
+            }
+            artifacts = write_preflight_artifacts(generated_plan, root / "out")
+            legacy_map = root / "legacy-map.json"
+            legacy_map.write_text(
+                json.dumps(
+                    {
+                        "decisions": {
+                            "PUBLICATION-test": "ENABLE_PUBLIC_PAGE",
+                        },
+                        "basis_by_decision": {
+                            "PUBLICATION-test": "Publish only after every gate passes.",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            counts = fill_review_from_map(artifacts["review"], legacy_map)
+            with artifacts["review"].open(
+                newline="",
+                encoding="utf-8",
+            ) as handle:
+                rows = list(csv.DictReader(handle))
+
+        self.assertEqual(sum(counts.values()), 1)
+        self.assertEqual(len(rows), 1)
+        preserved = json.loads(rows[0]["site_gap_provenance_json"])
+        self.assertEqual(preserved, discovered)
 
 
 if __name__ == "__main__":
