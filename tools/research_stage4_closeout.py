@@ -567,6 +567,44 @@ def project_season_label(value: str) -> str:
     )
 
 
+def _legacy_research_topology(row: dict[str, str]) -> bool:
+    """Return whether a row uses the accepted legacy Research ledger shape."""
+
+    return (
+        bool(row.get("research_game_id", "").strip())
+        and bool(row.get("season", "").strip())
+        and not row.get("season_label", "").strip()
+        and not row.get("source_program_key", "").strip()
+    )
+
+
+def _administrative_representation_note(
+    row: dict[str, str],
+    *,
+    source_status: str,
+    target_status: str,
+    retained: bool = False,
+) -> str:
+    played = _first_parent_value(
+        row, "played_result", "on_court_result", "source_result", "result"
+    )
+    team = _first_parent_value(
+        row, "team_score", "wagner_points", "dayton_score", "score_for",
+        "source_points_for"
+    )
+    opponent = _first_parent_value(
+        row, "opponent_score", "opponent_points", "score_against",
+        "source_points_against"
+    )
+    score = f" and score={team}-{opponent}" if team and opponent else ""
+    action = "retained" if retained else f"projected to {target_status}"
+    return (
+        "Stage 4 representation normalization: accepted legacy "
+        f"administrative_status {source_status} {action}; "
+        f"on-court played_result={played or '[blank]'}{score} unchanged."
+    )
+
+
 def project_administrative_status(
     row: dict[str, str],
 ) -> tuple[str, str]:
@@ -577,20 +615,28 @@ def project_administrative_status(
     target = {
         "FORFEIT_LOSS": "FORFEIT",
         "FORFEIT_WIN": "FORFEIT",
+        "FORFEITED_AFTER_PLAY": "FORFEIT",
         "VACATED": "VACATED_GAME",
     }.get(status)
-    if target is None:
-        return status, note
+    if target is not None:
+        provenance = _administrative_representation_note(
+            row, source_status=status, target_status=target
+        )
+        return target, f"{note} {provenance}".strip()
 
-    played = _first_parent_value(
-        row, "played_result", "on_court_result", "source_result", "result"
-    )
-    provenance = (
-        "Stage 4 representation normalization: accepted legacy "
-        f"administrative_status {status} projected to {target}; "
-        f"on-court played_result={played or '[blank]'} unchanged."
-    )
-    return target, f"{note} {provenance}".strip()
+    if (
+        status == "VACATED_WIN"
+        and not note
+        and _legacy_research_topology(row)
+    ):
+        return status, _administrative_representation_note(
+            row,
+            source_status=status,
+            target_status=status,
+            retained=True,
+        )
+
+    return status, note
 
 
 def normalize_game_type(value: str) -> str:
@@ -809,9 +855,9 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "canonical_opponent_key",
         ),
         "team_score": _first_parent_value(
-            row, "team_score", "wagner_points", "dayton_score", "source_points_for"
+            row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"
         ),
-        "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points", "source_points_against"),
+        "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points", "score_against", "source_points_against"),
         "played_result": _first_parent_value(
             row, "played_result", "on_court_result", "source_result", "result"
         ),
@@ -837,8 +883,11 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
                 "structured_game_type",
             )
         ),
-        "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal"),
+        "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"),
     }
+    expected["administrative_status"], expected["administrative_note"] = (
+        project_administrative_status(row)
+    )
     source_opponent_label = _first_parent_value(
         row,
         "source_opponent_label",
@@ -889,10 +938,10 @@ def _legacy_score_orientation_equivalent(
     """
 
     parent_team = _first_parent_value(
-        parent_row, "team_score", "wagner_points", "dayton_score", "source_points_for"
+        parent_row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"
     )
     parent_opponent = _first_parent_value(
-        parent_row, "opponent_score", "opponent_points", "source_points_against"
+        parent_row, "opponent_score", "opponent_points", "score_against", "source_points_against"
     )
     parent_result = _first_parent_value(
         parent_row, "played_result", "on_court_result", "source_result", "result"
@@ -913,16 +962,11 @@ def _legacy_score_orientation_equivalent(
     ):
         return False
 
-    legacy_topology = (
-        bool(parent_row.get("research_game_id", "").strip())
-        and bool(parent_row.get("season", "").strip())
-        and not parent_row.get("season_label", "").strip()
-        and not parent_row.get("source_program_key", "").strip()
-    )
+    legacy_topology = _legacy_research_topology(parent_row)
     if not legacy_topology:
         return False
 
-    raw_text = first_literal(parent_row, "raw_text", "source_raw_text", "source_entry_literal")
+    raw_text = first_literal(parent_row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line")
     literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
     literal_pairs = [
         (int(match.group("a")), int(match.group("b")))
@@ -1095,6 +1139,8 @@ def compare_parent_semantics(
                 "curated_game_type", ""
             ).strip(),
             "raw_text": actual_row.get("raw_text", ""),
+            "administrative_status": actual_row.get("administrative_status", "").strip(),
+            "administrative_note": actual_row.get("administrative_note", ""),
         }
         for field in expected:
             if field == "venue_key":
