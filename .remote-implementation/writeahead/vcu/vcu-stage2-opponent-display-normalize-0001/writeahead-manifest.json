@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/vcu/opponents.csv",
+    "schools/vcu/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/vcu/opponents.csv": "729fa694a6878e9f5f701fd820e2f2b6f7e4442a231a5d7f22953c3e55a8819b",
+    "schools/vcu/source-games.csv": "d692431e6c6a98de598b25fef7c48a70f7fe7082989691ca05da866392cc863f"
+  },
+  "changed_paths": [
+    "schools/vcu/opponents.csv",
+    "schools/vcu/source-games.csv"
+  ],
+  "commit_message": "Normalize vcu historical opponent display representation",
+  "expected_blocker_keys": [
+    "centenary-louisiana",
+    "virginia-state"
+  ],
+  "expected_target_predecessor_sha": "8fdd87f3f6c2b8e900782892ad0079f3f4d94991",
+  "field_level_proof_sha256": "6ce529fa4778bcb10597d189f1a9626a7d5920a64989029ee7a529ea921dd7a2",
+  "global_lock_commit": "ce9c1c344c302799f99520242d1eeaf3632f8608",
+  "integration_freeze_sha256": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "b53dd29e360481637c449cdc3705c888a6433371215b933e4245e3d63260fe39",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "54607765b2a7dbb476f96f7cc4f8c5a51dac6b77",
+  "prepared_parent_sha": "8fdd87f3f6c2b8e900782892ad0079f3f4d94991",
+  "prepared_tree_sha": "9ed964d0f69494321e9e7b37c89eee1c2bc0acf8",
+  "protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "repository_validation": "PASS",
+  "request_id": "vcu-stage2-opponent-display-normalize-0001",
+  "request_sha256": "c0d902f114a70d30addd4a056fe470e6d2cd18b84f966069c260581e82f9452e",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_drift_after": {
+    "baseline_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+    "integration_base_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+    "school_key": "vcu",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+    "integration_base_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+    "school_key": "vcu",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "8ea930dd7cac37a76545b7e0cad1e8c2e3b77ac08af971eba3fea66acf92f656",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "1ccfe79d975d0fcf189cf80bab525a459caa9119926aa71268c8e88429de3ead",
+    "field-level-proof.json": "6ce529fa4778bcb10597d189f1a9626a7d5920a64989029ee7a529ea921dd7a2",
+    "integration-freeze.json": "9ed64ea5cf2909e4920672fe8d79b300c4391de05b59420f801bb1eb25173df7",
+    "normalization-report.json": "b53dd29e360481637c449cdc3705c888a6433371215b933e4245e3d63260fe39",
+    "semantic-drift-proof.json": "9f342eac6e85399b44e7174ea1d18a8f05874de48449844496e35cab608a88cc"
+  },
+  "source_game_normalized_name_row_count": 6,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/vcu/vcu-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "1ccfe79d975d0fcf189cf80bab525a459caa9119926aa71268c8e88429de3ead",
+  "target_branch": "data/vcu-onboarding"
+}

@@ -1,0 +1,75 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 3,
+  "changes": [
+    {
+      "authority_names": [
+        "Centenary (LA)"
+      ],
+      "authority_signature": "centenaryla",
+      "canonical_opponent_key": "centenary-louisiana",
+      "from_names": [
+        "Centenary College of Louisiana"
+      ],
+      "target_row_count": 2,
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "authority_names": [
+        "Virginia State University"
+      ],
+      "authority_signature": "virginiastateuniversity",
+      "canonical_opponent_key": "virginia-state",
+      "from_names": [
+        "Virginia State"
+      ],
+      "target_row_count": 1,
+      "to_name": "Virginia State University"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "vcu",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 6,
+  "source_game_display_changes": [
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "VCU-1973-74-015",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "VCU-1974-75-007",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "VCU-1974-75-017",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "VCU-1975-76-005",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Centenary College of Louisiana",
+      "normalized_opponent_key": "centenary-louisiana",
+      "source_game_id": "VCU-1975-76-024",
+      "to_name": "Centenary (LA)"
+    },
+    {
+      "from_name": "Virginia State",
+      "normalized_opponent_key": "virginia-state",
+      "source_game_id": "VCU-1978-79-022",
+      "to_name": "Virginia State University"
+    }
+  ],
+  "status": "PASS"
+}
