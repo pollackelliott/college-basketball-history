@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "7a93e99ed37d66dfe07a801c3ecec86cd9f16d99",
+  "request_id": "vcu-stage1-0001",
+  "research_base_sha": "9b009c0bed995a9d9af52c5908f0b6abec5532a7",
+  "research_checkpoint_sha256": "2b1f46426fe28f1332749c3b743e783c2a1daab7524511b44a57516fb1287fef",
+  "research_member_sha256": {
+    "conferences.csv": "8941e06e7ac83d071a7c934394b338b87d82f86be96e9a5b70b30df85ccdaf09",
+    "notes.md": "47cfd67f1aeac42284c969c5a1c91a44de78bbc69ed53b002790818a66bb8a15",
+    "opponents.csv": "ee2c155c5ea56ddb2640c379898047ce4cc2460bc3991975ea5f96dd84f2aeae",
+    "source-games.csv": "a4f62109ba2d71cf243b36179df7d0697d8f4e85729e39138956cf27b36158a9",
+    "source-notes.md": "0b625ec2749385bb1c6abbaf617b2f5908b3e9f79d0f957924460b0541cd13ee",
+    "venues.csv": "14af2187f5ab326591950dbbb64ed84dae3f8982895d64c1a00b2abd32679b85"
+  },
+  "schema_version": 1,
+  "school_key": "vcu",
+  "sidecars": {
+    "request.json": "a3f7aea81eeee99e2c28dc94123be33dde01834f0f963e6c95b99a7162376c6d",
+    "stage1-reconciliation.json": "6779b068460c343a6474a456bb202e046f601e9b5e81c941c37c6307901e296d"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
