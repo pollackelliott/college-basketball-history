@@ -1,0 +1,20 @@
+{
+  "canonical_game_id": "CBBG-0056185",
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_RECONCILIATION_DIAGNOSTIC_VERIFICATION",
+  "partial_location_classification": "FINAL_LOCATION_NOT_PARTIAL",
+  "protected_main_sha": "2c47d43d92d6fbf2e7f14ed147876c341daac24a",
+  "recommendation_map_sha256": "72445c8c62f7594406d805cfdf7ff79bc481a722cacaa30a55c95dd7edd273fe",
+  "remote_stage2_diagnostic_equivalence": "PASS",
+  "request_id": "george-washington-stage2-reconciliation-diagnostic-0002",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "stage2_proposal_checkpoint_sha256": "e245674639df7bc0dc52ef671b38e344c1e3a870fe77d8555c2fe2416bbdd36a",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "7d29f1bfe123c6e757275d66ae6e7bc0a2afcdfd",
+  "target_tree_sha": "30980027c195ee4d670a8cf9e262c480cd2a25a9",
+  "trace_sha256": "ffd2686aa96876e2948091b9acceec84b78a58a19b02fff10b97e93ee86d1837",
+  "tracked_stage2_mutation": "NONE"
+}
