@@ -1,0 +1,82 @@
+{
+  "changed_file_sha256": {
+    "tests/test_candidate_validator_override_scope.py": "52c70617cea4d274ee275015fcd59da6dca4f32b8b6102237ff76ceca9888ec0",
+    "tests/test_stage2_reciprocal_only_site_gap_provenance.py": "db19684667f10cc25529f767806bbb922a9ed52eb29b47422dbb31edd500110c",
+    "tests/test_validate_data_venue_name_periods.py": "e7ac402e16e3df0ce369375641aef9823e28e775a4e7b28661226ca1d79402e3",
+    "tools/ingest_school.py": "0ff68f34cfad3d0a197da5f076fcb0b61c7ec5a2540b375ebef754143a12613b",
+    "tools/onboard_school.py": "3f174f00648fd36b3bb560886a2ec6f083fb53579c701d9fe08aca2ca4d71f34",
+    "tools/onboarding_plan.py": "af35b68f319a83fbb44df8e296fc6ca2cdaaa378715f8c7b05fc8285305174ac",
+    "tools/remote_implementation_stage2_proposal.py": "4b75d095603e39df1c1689a62c69722a256f5ec037457536d406d8e7a8a1b8d1",
+    "tools/validate_data.py": "3599a6849aed4d4a2d9a380f4d5871c480b83912700112e853b18c94663953c3"
+  },
+  "changed_paths": [
+    "tests/test_candidate_validator_override_scope.py",
+    "tests/test_stage2_reciprocal_only_site_gap_provenance.py",
+    "tests/test_validate_data_venue_name_periods.py",
+    "tools/ingest_school.py",
+    "tools/onboard_school.py",
+    "tools/onboarding_plan.py",
+    "tools/remote_implementation_stage2_proposal.py",
+    "tools/validate_data.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+  "global_lock_commit": "370b6d8de81a1c1b1578ab77d40486731a9b2e1e",
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "tests/test_candidate_validator_override_scope.py",
+    "tests/test_stage2_reciprocal_only_site_gap_provenance.py",
+    "tests/test_validate_data_venue_name_periods.py",
+    "tools/ingest_school.py",
+    "tools/onboard_school.py",
+    "tools/onboarding_plan.py",
+    "tools/remote_implementation_stage2_proposal.py",
+    "tools/validate_data.py"
+  ],
+  "merge_base_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "notes.md": "5a4c39cdb3b3749cccbff2463d2c84e2f4794d0d2e6020f17d057b2066bcefae",
+    "opponents.csv": "1a36a5a99b703bcaf8c4e0d1936f25108fe517b02e2864629b3b76a4ae97fa62",
+    "source-games.csv": "f864bbcd2386021faf64395d92050db54ee30a4c67180b15b6fec568de7a08a2",
+    "source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "venues.csv": "02492f4186235a9e1c2d9ab85c2edb33fd1033dea7f2d46f9a2afd925c32fe23"
+  },
+  "predecessor_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "prepared_commit_sha": "f046e3cf6f3f4e8b2c6395aac0f0716af54cac54",
+  "prepared_main_parent_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "prepared_parent_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+  "prepared_parents": [
+    "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+    "3738701d72680f81902f85d9ef679eab41b2d8d3"
+  ],
+  "prepared_tree_sha": "9778e50db39ec6bfaedc0e85b620c93987a76453",
+  "protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "refresh_proof_sha256": "e37896be4fc468e888e604d16fc428ba138fee3daa5bd4b79fa13a05bdf7451a",
+  "repository_validation": "PASS",
+  "request_id": "richmond-stage2-current-main-refresh-0004",
+  "request_sha256": "4cee63ca9a852f95e99f650275aac19991326e1a969c31177743a574a756a94c",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "sidecars": {
+    "integration-freeze.json": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+    "refresh-proof.json": "e37896be4fc468e888e604d16fc428ba138fee3daa5bd4b79fa13a05bdf7451a"
+  },
+  "target_branch": "data/richmond-onboarding",
+  "target_changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/richmond/conferences.csv",
+    "schools/richmond/notes.md",
+    "schools/richmond/opponents.csv",
+    "schools/richmond/source-games.csv",
+    "schools/richmond/source-notes.md",
+    "schools/richmond/venues.csv"
+  ]
+}
