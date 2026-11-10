@@ -796,6 +796,32 @@ def bind_frozen_venue_split_authority(
     venue_metadata_map[FROZEN_VENUE_SPLIT_AUTHORITY_KEY] = normalized  # type: ignore[assignment]
 
 
+def load_venue_metadata_map_with_name_periods(
+    repo_root: Path,
+    venue_path: Path,
+    global_venues_by_id: dict[str, dict[str, str]],
+) -> dict[str, list[dict[str, str]]]:
+    """Load ordinary venue metadata plus dated exact-name registry authority.
+
+    This helper is intentionally dependency-light: it does not authenticate or
+    bind Integration-Freeze per-game split authority. Planning paths that need
+    stronger frozen authority must bind that separately, while generic marker
+    support checks may safely consume the shared name-period registry alone.
+    """
+
+    venue_metadata_map = load_venue_metadata_map(
+        venue_path,
+        global_venues_by_id,
+    )
+    name_period_path = repo_root / "data/reference/venue-names.csv"
+    if name_period_path.is_file():
+        bind_registered_venue_name_periods(
+            venue_metadata_map,
+            read_csv(name_period_path),
+        )
+    return venue_metadata_map
+
+
 def load_runtime_venue_metadata_map(
     repo_root: Path,
     school_key: str,
@@ -816,16 +842,11 @@ def load_runtime_venue_metadata_map(
     retaining the exact pre-ingest source-semantic boundary.
     """
 
-    venue_metadata_map = load_venue_metadata_map(
+    venue_metadata_map = load_venue_metadata_map_with_name_periods(
+        repo_root,
         venue_path,
         global_venues_by_id,
     )
-    name_period_path = repo_root / "data/reference/venue-names.csv"
-    if name_period_path.is_file():
-        bind_registered_venue_name_periods(
-            venue_metadata_map,
-            read_csv(name_period_path),
-        )
     allowed_semantic_delta = (
         sealed_post_reconciliation_semantic_delta(
             repo_root,
