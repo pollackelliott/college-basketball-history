@@ -1,0 +1,45 @@
+{
+  "branch": "remote-stage2-census/richmond-2350ec65bbc6",
+  "capability_census": {
+    "path": ".onboarding/richmond/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 3
+  },
+  "head_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+  "integration_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "integration_semantic_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 77,
+    "confident_collision_groups": 1,
+    "confident_collision_source_rows": 2,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 77,
+      "discrepancy": 27,
+      "identity": 30,
+      "publication": 1
+    },
+    "decision_count": 137,
+    "decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+    "discrepancies_to_add": 27,
+    "existing_game_matches": 1192,
+    "identity_cardinality_constraints": 17,
+    "new_canonical_games": 1603,
+    "plan_path": ".onboarding/richmond/plan.json",
+    "review_path": ".onboarding/richmond/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
