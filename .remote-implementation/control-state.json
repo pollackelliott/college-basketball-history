@@ -492,17 +492,18 @@
     "george-washington-release-readiness-0001",
     "george-washington-release-preview-verify-0001",
     "george-washington-release-gate2-approval-0001",
-    "george-washington-release-production-proof-0001"
+    "george-washington-release-production-proof-0001",
+    "richmond-stage1-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "richmond-stage1-0001",
+  "active_request_sha256": "2b9116c06e15bc438eb2d0b5a288f9b39da35b4266fe2d895205818442b8abc4",
+  "active_school_key": "richmond",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -1000,8 +1001,11 @@
     "request_id": "george-washington-release-production-proof-0001",
     "school_key": "george-washington"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42756067901",
+  "lock_acquisition_request_commit": "5fdded2a33840cfef279574835e68828fd5e1eb4",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE1_RUNNING"
 }
