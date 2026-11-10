@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "4465ec76f1129590f61d7b1dd69cd198be332ac88eff865fd2dc313cad4f8167",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/george-washington/george-washington-release-readiness-0001/pr-body.md",
+  "body_sha256": "ab311dd1d0f72bc24c9cec57e98bff3c4c46f09283d2bde013ffd1e12559768a",
+  "head_branch": "data/george-washington-onboarding",
+  "head_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish George Washington history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "george-washington-release-preview-verify-0001",
+  "readiness_request_id": "george-washington-release-readiness-0001",
+  "release_manifest_sha256": "f88586b4b7e9c15ea1349c205ff6875a78bbbf31d169103a87e1fb3e7488b825",
+  "schema_version": 1,
+  "school_key": "george-washington"
+}

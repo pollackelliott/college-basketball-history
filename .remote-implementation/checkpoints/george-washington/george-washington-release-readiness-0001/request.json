@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-release-readiness-0001",
+  "school_key": "george-washington",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "097858e8fdb6a64283c4c616ab37fecd3ef30bf0",
+  "previous_control_state_sha256": "ae77b47aab929efcff99d53631a4c46c13da2025155cb76a9f3ef0e06f4d28fb",
+  "expected_protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/george-washington/george-washington-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "7b6abd5390040f317b155cc7e21f1a5c5991b1ce9c9d3e6012b59d4f6079c8a1"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/george-washington/george-washington-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "cf05ffee5adbf0e8efd1130bb6e8c13fef408691c561600d802874826ac8f0f4"
+  },
+  "approved_plan_hash": "4465ec76f1129590f61d7b1dd69cd198be332ac88eff865fd2dc313cad4f8167",
+  "release_manifest_sha256": "f88586b4b7e9c15ea1349c205ff6875a78bbbf31d169103a87e1fb3e7488b825",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "george-washington-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "George Washington serialized Implementation lane",
+    "authorization": "Owner Proceed after fresh-verified sealed apply; repository-defined release-preparation phase through OWNER_GATE_2_READY only"
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "apply_request_id": "george-washington-stage2-sealed-apply-0001",
+  "approved_plan_hash": "4465ec76f1129590f61d7b1dd69cd198be332ac88eff865fd2dc313cad4f8167",
+  "changed_path_count": 100,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "release_manifest_sha256": "f88586b4b7e9c15ea1349c205ff6875a78bbbf31d169103a87e1fb3e7488b825",
+  "school_key": "george-washington",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "7b6abd5390040f317b155cc7e21f1a5c5991b1ce9c9d3e6012b59d4f6079c8a1",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "cf05ffee5adbf0e8efd1130bb6e8c13fef408691c561600d802874826ac8f0f4",
+  "writeahead_sha256": "7f2dfe585888534861a26753fed3895e3fb1a588b4862922a0400044a83c0657"
+}
