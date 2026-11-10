@@ -14,45 +14,47 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
+    "stage2_gate1_seal": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": true,
+    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from richmond-stage2-gate1-fill-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from richmond-stage2-preseal-rehearsal-0001",
     "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "96acdb6057dbe80e9609fd90ac3adc17194e6125c18482446915354cde9860b0",
   "decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+  "equivalence_sha256": "b26407c351495cc7f6260da966c6e90be17356d9527196da8dc8309c3b5ed223",
   "expected_protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
   "filled_review_sha256": "69f3e32a55d2b17fabf16f82226eb69b0704a48fe7177c8e2e6d25b24a4ef8ea",
   "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "d5d6cb221357f123e63e5277190d63fc80f0fe4693bb5a4101c5a5b985b1b1d4",
   "phase_continuation": {
     "apply_request_id": "richmond-stage2-sealed-apply-0001",
     "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
     "preseal_request_id": "richmond-stage2-preseal-rehearsal-0001",
     "seal_request_id": "richmond-stage2-gate1-seal-0001"
   },
-  "previous_control_state_commit": "3e7736a896173afeede38956257573894f4db0a3",
-  "previous_control_state_sha256": "2c9086a3b23264e5620c1325b892024f5bbfbb8aeef4f171cf7edf81c05d06ad",
+  "previous_control_state_commit": "fe23af8d62fbd5f3d3553f0179275e6038c2a675",
+  "previous_control_state_sha256": "f218b251ab7d1e86e82561248eb2499ea7fe490d0f4b5243c611ef5b45cdb17b",
   "recommendation_map_sha256": "352232cf27ba3fa88f0214ac8ee49efc0897756a6f1a53994033cd349a8be218",
-  "request_id": "richmond-stage2-preseal-rehearsal-0001",
+  "request_id": "richmond-stage2-gate1-seal-0001",
   "schema_version": 1,
   "school_key": "richmond",
   "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/richmond/richmond-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "f75e01a56574d2839203267665f7fe82d2f3c9adb630d5bca58d6dc19248b264"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/richmond/richmond-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "51e08146ed61867ae3b761c5e3278d60e4ff764ea82ccd835c57e69d3fa11b8a"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/richmond/richmond-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "42b11728b316a5badd5e8ac4ed826e51759cee09163f2c96966033341ee184fb"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/richmond/richmond-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "ab26effe7542d33b54e41b70ea403f86c906479426de3a0490a0324c1694df23"
   },
   "target_branch": "data/richmond-onboarding",
   "target_sha": "f046e3cf6f3f4e8b2c6395aac0f0716af54cac54"
