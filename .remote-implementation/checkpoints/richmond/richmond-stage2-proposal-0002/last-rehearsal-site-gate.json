@@ -1,0 +1,48 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_venue": 46,
+    "public_gap_rows": 46,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2827,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_venue": [
+      "CBBG-0008338",
+      "CBBG-0053518",
+      "CBBG-0125660",
+      "CBBG-0125676",
+      "CBBG-0125709",
+      "CBBG-0127586",
+      "CBBG-0130631",
+      "CBBG-0136346",
+      "CBBG-0155596",
+      "CBBG-0164472",
+      "CBBG-0191949",
+      "CBBG-0202079"
+    ]
+  },
+  "history_start_season": "1913-1914",
+  "school_key": "richmond",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 49,
+    "neutral_missing_location": 1,
+    "neutral_missing_venue": 49,
+    "researched_gap_rows": 49,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2825
+  },
+  "status": "PASS",
+  "warnings": []
+}
