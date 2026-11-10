@@ -1,0 +1,40 @@
+{
+  "changed_file_sha256": {
+    "tests/test_reused_venue_name_date_resolution.py": "173f9625606be2e46e818ea6e1f0de600e0c5ea46acaeb2543c5e63c9f70f25c",
+    "tools/ingest_school.py": "f390ed9129969ccbd1676d14e493f7c6efaa130871159bd5688c8c59546e2922"
+  },
+  "changed_paths": [
+    "tests/test_reused_venue_name_date_resolution.py",
+    "tools/ingest_school.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "observed_live_main_sha": "44bac3ca1cf135d97dabb874dabeba39da92a33a",
+  "package_member_sha256": {
+    "conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "notes.md": "5a4c39cdb3b3749cccbff2463d2c84e2f4794d0d2e6020f17d057b2066bcefae",
+    "opponents.csv": "1a36a5a99b703bcaf8c4e0d1936f25108fe517b02e2864629b3b76a4ae97fa62",
+    "source-games.csv": "f864bbcd2386021faf64395d92050db54ee30a4c67180b15b6fec568de7a08a2",
+    "source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "venues.csv": "02492f4186235a9e1c2d9ab85c2edb33fd1033dea7f2d46f9a2afd925c32fe23"
+  },
+  "prepared_parents": [
+    "270804be1bbf134806cd4c1233b29c68be59341e",
+    "44bac3ca1cf135d97dabb874dabeba39da92a33a"
+  ],
+  "protected_main_sha": "44bac3ca1cf135d97dabb874dabeba39da92a33a",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "richmond-stage2-current-main-refresh-0001",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "target_branch": "data/richmond-onboarding",
+  "target_predecessor_sha": "270804be1bbf134806cd4c1233b29c68be59341e",
+  "target_sha": "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4",
+  "target_tree_sha": "e2dc72f94782b9e813682eca0b1d2c03b8998404",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
