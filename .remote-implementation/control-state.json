@@ -1026,11 +1026,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
     "recommendation_map_sha256": "352232cf27ba3fa88f0214ac8ee49efc0897756a6f1a53994033cd349a8be218",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "richmond-stage2-proposal-0002",
     "runtime_decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
     "school_key": "richmond",
