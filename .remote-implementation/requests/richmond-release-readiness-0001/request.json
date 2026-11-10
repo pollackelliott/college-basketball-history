@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "richmond-release-readiness-0001",
+  "school_key": "richmond",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "cf2a951f957afd59704b98b276316f711e6f73eb",
+  "previous_control_state_sha256": "b2fbe1378a0d88bb8dc8d3b220a53c33dc0b644aefc5f5f55060abe999cb45ca",
+  "expected_protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "approved_plan_hash": "a58657cc01439a6b56aacc2bcd2fef5d746cfb20e307a71c8d53f88afaf1efcd",
+  "release_manifest_sha256": "70f59d2f6446ab2cfc76088f7d136237df14e8b3ab3c6f84f01e05ba1923cc2f",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "0f2a896748328bd646bc6fce375b9b08200c542049e74512b1ea89b82a7a0005"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/richmond/richmond-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "7b278dc45d5bc421c83ded0dc26cfae0c5e20b6471211ad89b5058a02654c09c"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "richmond-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Richmond serialized Implementation — owner-authorized release preparation",
+    "authorization": "Owner explicitly said 'Proceed' after the exact Richmond sealed-apply successor c451e8094011154c556a0f8c7786fe63222e0a61 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, ordinary CI/mergeability checks, exact Vercel Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or changed historical authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
