@@ -500,18 +500,19 @@
     "richmond-stage2-opponent-display-normalize-0001",
     "richmond-stage2-current-main-refresh-0001",
     "richmond-stage2-census-0002",
-    "richmond-stage2-current-main-refresh-0002"
+    "richmond-stage2-current-main-refresh-0002",
+    "richmond-stage2-census-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "7c976d15c551df0cd0f1a8c018956a8fa33d623c",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "richmond-stage2-census-0003",
+  "active_request_sha256": "9051b7efeaa4ea3799f2786851c78edc3c880e3986081e36e79322832f046506",
+  "active_school_key": "richmond",
+  "active_target_branch": "data/richmond-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1014,8 +1015,11 @@
     "target_predecessor_sha": "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4",
     "target_sha": "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42836374842",
+  "lock_acquisition_request_commit": "bbbafc3c41715ea6522226a203751f86ce612235",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
