@@ -501,18 +501,19 @@
     "richmond-stage2-current-main-refresh-0001",
     "richmond-stage2-census-0002",
     "richmond-stage2-current-main-refresh-0002",
-    "richmond-stage2-census-0003"
+    "richmond-stage2-census-0003",
+    "richmond-stage2-current-main-refresh-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42844793812:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "richmond-stage2-current-main-refresh-0003",
+  "active_request_sha256": "7de833d185cbca92718566a5b7d5938479f149f0c111efaf97835124db29a4c6",
+  "active_school_key": "richmond",
+  "active_target_branch": "data/richmond-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1016,8 +1017,11 @@
     "target_branch": "data/richmond-onboarding",
     "target_sha": "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42844793812",
+  "lock_acquisition_request_commit": "7223be2fea0b1de90de4a205818dafc8897e14de",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

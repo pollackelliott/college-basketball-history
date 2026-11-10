@@ -4,7 +4,7 @@
   "request_id": "richmond-stage2-current-main-refresh-0003",
   "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "richmond",
-  "previous_control_state_commit": "810e7e63de0b34fb0b74e5f2ee83f8a9fabd8f82",
+  "previous_control_state_commit": "e4779685c1026a8f7ebedc573c7954b68a8e2561",
   "previous_control_state_sha256": "7d944c26e2bcc00b17628b316f1868e9ca4eb046ef53fb8c4e9f7e493f40c97a",
   "expected_protected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
   "target_branch": "data/richmond-onboarding",
