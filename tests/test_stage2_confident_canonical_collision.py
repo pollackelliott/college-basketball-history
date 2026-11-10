@@ -289,13 +289,18 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
             decision_map["canonical_patch_by_decision"] = canonical_patch
         map_path.write_text(json.dumps(decision_map), encoding="utf-8")
         onboarding_hardening.fill_review_from_map(paths["review"], map_path)
-        return onboarding_plan.approve_plan(
-            repo,
-            paths["plan"],
-            paths["review"],
-            "fixture-owner",
-            approved_at="2026-01-01T00:00:00+00:00",
-        )[0]
+        with patch.object(
+            onboarding_plan,
+            "input_fingerprint",
+            return_value=plan["input_fingerprint"],
+        ):
+            return onboarding_plan.approve_plan(
+                repo,
+                paths["plan"],
+                paths["review"],
+                "fixture-owner",
+                approved_at="2026-01-01T00:00:00+00:00",
+            )[0]
 
     def test_actual_planner_converts_confident_collision_to_coupled_identity_review(self):
         repo, _ = self.make_repo()
@@ -382,7 +387,17 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
             },
         }), encoding="utf-8")
         onboarding_hardening.fill_review_from_map(paths["review"], zero_map)
-        with self.assertRaisesRegex(onboarding_plan.WorkflowError, "requires exactly 1 target match"):
+        with (
+            patch.object(
+                onboarding_plan,
+                "input_fingerprint",
+                return_value=plan["input_fingerprint"],
+            ),
+            self.assertRaisesRegex(
+                onboarding_plan.WorkflowError,
+                "requires exactly 1 target match",
+            ),
+        ):
             onboarding_plan.approve_plan(
                 repo, paths["plan"], paths["review"], "fixture-owner"
             )
@@ -538,7 +553,14 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
             },
         }), encoding="utf-8")
         onboarding_hardening.fill_review_from_map(paths["review"], map_path)
-        with self.assertRaisesRegex(onboarding_plan.WorkflowError, "observed 2"):
+        with (
+            patch.object(
+                onboarding_plan,
+                "input_fingerprint",
+                return_value=plan["input_fingerprint"],
+            ),
+            self.assertRaisesRegex(onboarding_plan.WorkflowError, "observed 2"),
+        ):
             onboarding_plan.approve_plan(
                 repo, paths["plan"], paths["review"], "fixture-owner"
             )
