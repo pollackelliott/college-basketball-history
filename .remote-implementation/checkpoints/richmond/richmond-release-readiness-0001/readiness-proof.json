@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "apply_request_id": "richmond-stage2-sealed-apply-0001",
+  "approved_plan_hash": "a58657cc01439a6b56aacc2bcd2fef5d746cfb20e307a71c8d53f88afaf1efcd",
+  "changed_path_count": 87,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "release_manifest_sha256": "70f59d2f6446ab2cfc76088f7d136237df14e8b3ab3c6f84f01e05ba1923cc2f",
+  "school_key": "richmond",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "0f2a896748328bd646bc6fce375b9b08200c542049e74512b1ea89b82a7a0005",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "7b278dc45d5bc421c83ded0dc26cfae0c5e20b6471211ad89b5058a02654c09c",
+  "writeahead_sha256": "747760b079c39f2486e82c8be6577fa9d9553b50f71765ac3d0d93b296b59952"
+}

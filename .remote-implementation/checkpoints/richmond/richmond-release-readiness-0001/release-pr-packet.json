@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "a58657cc01439a6b56aacc2bcd2fef5d746cfb20e307a71c8d53f88afaf1efcd",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/richmond/richmond-release-readiness-0001/pr-body.md",
+  "body_sha256": "b6702caa2050c567cc18b23127b3b5e07eb8dec84372f58b30e05437c47a0da3",
+  "head_branch": "data/richmond-onboarding",
+  "head_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish Richmond history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "richmond-release-preview-verify-0001",
+  "readiness_request_id": "richmond-release-readiness-0001",
+  "release_manifest_sha256": "70f59d2f6446ab2cfc76088f7d136237df14e8b3ab3c6f84f01e05ba1923cc2f",
+  "schema_version": 1,
+  "school_key": "richmond"
+}
