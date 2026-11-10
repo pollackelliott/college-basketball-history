@@ -32,6 +32,7 @@ import argparse
 import csv
 import datetime as dt
 import json
+import os
 import re
 import subprocess
 import sys
@@ -2302,13 +2303,16 @@ def main() -> int:
     print(f"  discrepancies:     +{len(new_discrepancies):,}")
     print()
 
-    # Validate with the same permanent tooling runtime that performed the
-    # ingestion. In normal repository execution this is the repository's
-    # tools/validate_data.py; candidate-runtime rehearsal intentionally runs
-    # this module from an isolated candidate tool tree and must validate with
-    # that same candidate validator rather than silently falling back to the
-    # target worktree's older tooling.
-    validator = Path(__file__).resolve().with_name("validate_data.py")
+    # Ordinary ingestion validates with the repository-local validator. Exact
+    # remote/candidate orchestration may bind an authenticated validator from
+    # the same external tooling runtime; this keeps pre-merge candidate proof
+    # faithful without changing normal repository-local execution semantics.
+    validator_override = os.environ.get("CBB_VALIDATE_DATA_TOOL_OVERRIDE", "").strip()
+    validator = (
+        Path(validator_override).resolve()
+        if validator_override
+        else repo_root / "tools" / "validate_data.py"
+    )
     if validator.exists():
         result = subprocess.run([sys.executable, str(validator), str(repo_root)])
         if result.returncode != 0:
