@@ -1,0 +1,363 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "f5193e392b93f39a9dc06eb1e4555c389ae06df3d90eb20733823cb8452ffa80",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "59285828cd69ae7552ee4ee49bf09101faa7e775d42f08a0cce1a9f429e97eb8",
+    "implementation-stage2-status.json": "dfaabfb056aed4134e2d5e6bc8117b8f3f4cc7806502a3401b99a16d1728c322",
+    "plan.json": "f99dee22d1babf3afe909ff929ae6ae7c7513b8392e345c7f890e97b63b278a8",
+    "review.csv": "83353b19ce2af208b8aeb265506c016692a1ebf73ee5a04812bd49d3fd30f30c",
+    "review.md": "da15fed53490c6e707c9bbca1b2ec2331c2296b0b1fb99230c0c8289ea7c16a6"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "59285828cd69ae7552ee4ee49bf09101faa7e775d42f08a0cce1a9f429e97eb8",
+    "implementation-stage2-status.json": "55c925773698279e86404215bc8b04ddc0027af8968340f1345472d3a588cb4c",
+    "plan.json": "0d994009cc96bd12d14dae71cf70469742bc22fa2c5b69e6b3ff1a04855fbdcf",
+    "review.csv": "83353b19ce2af208b8aeb265506c016692a1ebf73ee5a04812bd49d3fd30f30c",
+    "review.md": "7e1d111d3f5bd9ad3940754ee318c7a0b78e7fa5c972cef40bddc6c0e612cb39"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 46,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "REPRESENTED_BY_COUPLED_IDENTITY_REVIEW",
+      "count": 1,
+      "groups": [
+        {
+          "canonical_game_id": "CBBG-0204104",
+          "representation": "COUPLED_IDENTITY_REVIEW",
+          "required_existing_canonical_matches": 1,
+          "source_game_ids": [
+            "richmond-2013-14-030",
+            "richmond-2013-14-033"
+          ]
+        }
+      ],
+      "source_row_count": 2,
+      "topology": "confident_many_to_one_canonical_identity_collision"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0204104",
+          "fixed_confident_source_game_ids": [],
+          "reason": "CONFIDENT_CANONICAL_COLLISION",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2013-14-030",
+            "richmond-2013-14-033"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0056472",
+          "fixed_confident_source_game_ids": [
+            "richmond-1938-39-020"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1938-39-001"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0095405",
+          "fixed_confident_source_game_ids": [
+            "richmond-1952-53-015"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1952-53-003"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0127307",
+          "fixed_confident_source_game_ids": [
+            "richmond-1937-38-010"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1937-38-004"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0135935",
+          "fixed_confident_source_game_ids": [
+            "richmond-1945-46-012"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1945-46-010"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0136074",
+          "fixed_confident_source_game_ids": [
+            "richmond-1953-54-017"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1953-54-009"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0136079",
+          "fixed_confident_source_game_ids": [
+            "richmond-1953-54-024"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1953-54-009"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0192244",
+          "fixed_confident_source_game_ids": [
+            "richmond-2006-07-024"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2007-08-023"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0196424",
+          "fixed_confident_source_game_ids": [
+            "richmond-2021-22-032"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2021-22-020"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0201878",
+          "fixed_confident_source_game_ids": [
+            "richmond-2020-21-020"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2020-21-014"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0202408",
+          "fixed_confident_source_game_ids": [
+            "richmond-1995-96-022"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1995-96-018"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0202413",
+          "fixed_confident_source_game_ids": [
+            "richmond-1995-96-027"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1995-96-018"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204663",
+          "fixed_confident_source_game_ids": [
+            "richmond-1953-54-031"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1953-54-005",
+            "richmond-1953-54-010"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204758",
+          "fixed_confident_source_game_ids": [
+            "richmond-1961-62-010"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1961-62-005"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204759",
+          "fixed_confident_source_game_ids": [
+            "richmond-1961-62-013"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1961-62-005"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204863",
+          "fixed_confident_source_game_ids": [
+            "richmond-1969-70-026"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1969-70-020"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0205533",
+          "fixed_confident_source_game_ids": [
+            "richmond-2022-23-015"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2022-23-025"
+          ]
+        }
+      ],
+      "count": 17,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+    "runtime_decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "richmond",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 77,
+    "confident_collision_groups": 1,
+    "confident_collision_source_rows": 2,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 77,
+      "discrepancy": 27,
+      "identity": 30,
+      "publication": 1
+    },
+    "decision_count": 137,
+    "decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+    "discrepancies_to_add": 27,
+    "existing_game_matches": 1192,
+    "identity_cardinality_constraints": 17,
+    "new_canonical_games": 1603,
+    "plan_path": ".onboarding/richmond/plan.json",
+    "review_path": ".onboarding/richmond/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "FORCE_NEW": 1,
+      "KEEP_CANONICAL": 23,
+      "LEAVE_UNRESOLVED": 1,
+      "MATCH_CANONICAL:CBBG-0017664": 1,
+      "MATCH_CANONICAL:CBBG-0056451": 1,
+      "MATCH_CANONICAL:CBBG-0057372": 1,
+      "MATCH_CANONICAL:CBBG-0087916": 1,
+      "MATCH_CANONICAL:CBBG-0095391": 1,
+      "MATCH_CANONICAL:CBBG-0124860": 1,
+      "MATCH_CANONICAL:CBBG-0125119": 1,
+      "MATCH_CANONICAL:CBBG-0125122": 1,
+      "MATCH_CANONICAL:CBBG-0125648": 1,
+      "MATCH_CANONICAL:CBBG-0127073": 1,
+      "MATCH_CANONICAL:CBBG-0127306": 1,
+      "MATCH_CANONICAL:CBBG-0135713": 1,
+      "MATCH_CANONICAL:CBBG-0135933": 1,
+      "MATCH_CANONICAL:CBBG-0136071": 1,
+      "MATCH_CANONICAL:CBBG-0184108": 1,
+      "MATCH_CANONICAL:CBBG-0192270": 1,
+      "MATCH_CANONICAL:CBBG-0196381": 1,
+      "MATCH_CANONICAL:CBBG-0196396": 1,
+      "MATCH_CANONICAL:CBBG-0196418": 1,
+      "MATCH_CANONICAL:CBBG-0196436": 1,
+      "MATCH_CANONICAL:CBBG-0199974": 1,
+      "MATCH_CANONICAL:CBBG-0201877": 1,
+      "MATCH_CANONICAL:CBBG-0202404": 1,
+      "MATCH_CANONICAL:CBBG-0204104": 1,
+      "MATCH_CANONICAL:CBBG-0204654": 1,
+      "MATCH_CANONICAL:CBBG-0204656": 1,
+      "MATCH_CANONICAL:CBBG-0204756": 1,
+      "MATCH_CANONICAL:CBBG-0204859": 1,
+      "MATCH_CANONICAL:CBBG-0205535": 1,
+      "NOT_APPLICABLE": 51,
+      "USE_SOURCE": 30,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "f5193e392b93f39a9dc06eb1e4555c389ae06df3d90eb20733823cb8452ffa80",
+    "decision_count": 137,
+    "path": "/tmp/remote-stage2-proposal-map-ze0dow9z/recommendation-map.json",
+    "sha256": "352232cf27ba3fa88f0214ac8ee49efc0897756a6f1a53994033cd349a8be218"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/inputs/richmond-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "352232cf27ba3fa88f0214ac8ee49efc0897756a6f1a53994033cd349a8be218",
+  "request_id": "richmond-stage2-proposal-0001",
+  "request_sha256": "3a3fa43b61a0475596657ae62e745a52da1ffd2f4ea902a03b9659f9d08d28e7",
+  "runtime_commit_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "runtime_decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+    "tools/onboard_school.py": "644207734b9f03791505d3b59ca8ebc982b6cbb41ee3809bf39af42402f9664f",
+    "tools/onboarding_hardening.py": "03c1a519928d0e58539fa05a7303bfc994ddeb89fcff55618650f3044edd66b2",
+    "tools/onboarding_plan.py": "671182d5209f0c81f991836e3ade2fe50241d5111a9cf29bd190bf54e1447895",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "site_diagnostic": {},
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/richmond/richmond-stage2-census-0004/checkpoint-manifest.json",
+  "stage2_authority_sha256": "0f7df3cdba8a25a7ae11c5f67f9b1cd75036af8abfe2efc7f88bfb6fd58e50ea",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+  "target_tree_sha": "946184c4c11cf8d8fbb5113818708226e7233ff8",
+  "tracked_mutation_proof": {
+    "after_head_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+    "after_status": "",
+    "after_tree_sha": "946184c4c11cf8d8fbb5113818708226e7233ff8",
+    "before_head_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+    "before_status": "",
+    "before_tree_sha": "946184c4c11cf8d8fbb5113818708226e7233ff8",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

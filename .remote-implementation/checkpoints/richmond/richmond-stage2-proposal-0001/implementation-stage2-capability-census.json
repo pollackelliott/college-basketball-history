@@ -1,0 +1,301 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "accomplishments": 1,
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 77,
+      "discrepancy": 27,
+      "identity": 30,
+      "publication": 1
+    },
+    "decision_count": 137,
+    "decision_fields": {
+      "game_date": 2,
+      "game_identity": 30,
+      "game_type": 7,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 8,
+      "score": 42,
+      "site_metadata": 1,
+      "site_type": 45
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0127073",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1935-36-012-CBBG-0125122-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1935-36-016-CBBG-0125119-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1937-38-004-CBBG-0127307-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1938-39-001-CBBG-0056472-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1952-53-003-CBBG-0095405-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1953-54-005-CBBG-0204663-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1953-54-009-CBBG-0136071-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1953-54-009-CBBG-0136074-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1953-54-009-CBBG-0136079-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1953-54-010-CBBG-0204654-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1953-54-010-CBBG-0204656-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1961-62-005-CBBG-0204759-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1969-70-020-CBBG-0204859-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1969-70-020-CBBG-0204863-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1995-96-018-CBBG-0202408-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-1995-96-018-CBBG-0202413-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-2007-08-023-CBBG-0192244-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-2013-14-030-CBBG-0204104-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-2020-21-014-CBBG-0201878-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-2021-22-020-CBBG-0196424-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-RICHMOND-2022-23-025-CBBG-0205533-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1922-23-010-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1925-26-017-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1942-43-013-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1943-44-007-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1949-50-019-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1950-51-013-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1954-55-028-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1957-58-009-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1958-59-007-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1966-67-002-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1967-68-002-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1968-69-012-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1970-71-008-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1973-74-009-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1981-82-029-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1983-84-009-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1988-89-002-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1988-89-007-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1991-92-005-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1991-92-009-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1997-98-017-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-1998-99-027-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-2016-17-033-SITE_TYPE",
+      "DISCREPANCY-RICHMOND-2019-20-013-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 46,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "REPRESENTED_BY_COUPLED_IDENTITY_REVIEW",
+      "count": 1,
+      "groups": [
+        {
+          "canonical_game_id": "CBBG-0204104",
+          "representation": "COUPLED_IDENTITY_REVIEW",
+          "required_existing_canonical_matches": 1,
+          "source_game_ids": [
+            "richmond-2013-14-030",
+            "richmond-2013-14-033"
+          ]
+        }
+      ],
+      "source_row_count": 2,
+      "topology": "confident_many_to_one_canonical_identity_collision"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0204104",
+          "fixed_confident_source_game_ids": [],
+          "reason": "CONFIDENT_CANONICAL_COLLISION",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2013-14-030",
+            "richmond-2013-14-033"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0056472",
+          "fixed_confident_source_game_ids": [
+            "richmond-1938-39-020"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1938-39-001"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0095405",
+          "fixed_confident_source_game_ids": [
+            "richmond-1952-53-015"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1952-53-003"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0127307",
+          "fixed_confident_source_game_ids": [
+            "richmond-1937-38-010"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1937-38-004"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0135935",
+          "fixed_confident_source_game_ids": [
+            "richmond-1945-46-012"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1945-46-010"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0136074",
+          "fixed_confident_source_game_ids": [
+            "richmond-1953-54-017"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1953-54-009"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0136079",
+          "fixed_confident_source_game_ids": [
+            "richmond-1953-54-024"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1953-54-009"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0192244",
+          "fixed_confident_source_game_ids": [
+            "richmond-2006-07-024"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2007-08-023"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0196424",
+          "fixed_confident_source_game_ids": [
+            "richmond-2021-22-032"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2021-22-020"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0201878",
+          "fixed_confident_source_game_ids": [
+            "richmond-2020-21-020"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2020-21-014"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0202408",
+          "fixed_confident_source_game_ids": [
+            "richmond-1995-96-022"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1995-96-018"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0202413",
+          "fixed_confident_source_game_ids": [
+            "richmond-1995-96-027"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1995-96-018"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204663",
+          "fixed_confident_source_game_ids": [
+            "richmond-1953-54-031"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1953-54-005",
+            "richmond-1953-54-010"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204758",
+          "fixed_confident_source_game_ids": [
+            "richmond-1961-62-010"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1961-62-005"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204759",
+          "fixed_confident_source_game_ids": [
+            "richmond-1961-62-013"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1961-62-005"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0204863",
+          "fixed_confident_source_game_ids": [
+            "richmond-1969-70-026"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-1969-70-020"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0205533",
+          "fixed_confident_source_game_ids": [
+            "richmond-2022-23-015"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "richmond-2022-23-025"
+          ]
+        }
+      ],
+      "count": 17,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}
