@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "richmond-release-preview-verify-0001",
+  "school_key": "richmond",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "d949239843a03a36b6232f6be1072d1b847fdc68",
+  "previous_control_state_sha256": "bd0163930d897a06ac353b0b9f3e2229e4ffa3a284f7a3370e96115b8823ec78",
+  "expected_protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "0f2a896748328bd646bc6fce375b9b08200c542049e74512b1ea89b82a7a0005"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/richmond/richmond-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "7b278dc45d5bc421c83ded0dc26cfae0c5e20b6471211ad89b5058a02654c09c"
+  },
+  "approved_plan_hash": "a58657cc01439a6b56aacc2bcd2fef5d746cfb20e307a71c8d53f88afaf1efcd",
+  "release_manifest_sha256": "70f59d2f6446ab2cfc76088f7d136237df14e8b3ab3c6f84f01e05ba1923cc2f",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/richmond/richmond-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "8999464d8c8c10e265b782e12c39b8ad35f5b3c5f153d98912c6a78c4fdb22e4"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/richmond/richmond-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "3478ce026b20252e908310cba3f6d71b82bdc163ba77c497692d90a9ae4139ff"
+  },
+  "pr_number": 560,
+  "creation_provenance": {
+    "origin": "ChatGPT Richmond serialized Implementation — release preparation continuation",
+    "authorization": "Continuation of the owner-authorized Richmond release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #560. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
