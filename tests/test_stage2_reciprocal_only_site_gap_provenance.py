@@ -579,5 +579,267 @@ class ReciprocalOnlySiteGapProvenanceTests(unittest.TestCase):
         self.assertEqual(preserved, discovered)
 
 
+    def test_15_materialization_retires_resolved_location_and_keeps_venue_only(self):
+        canonical = neutral_game()
+        canonical["site_city"] = "Tucson"
+        canonical["site_state"] = "AZ"
+        discrepancies = [
+            {
+                "canonical_game_id": "CBBG-0000001",
+                "field_name": "location",
+                "status": "RESOLVED",
+                "resolution_basis": "Accepted reconciliation established Tucson, AZ.",
+            }
+        ]
+        result = _record_reciprocal_only_site_gap_provenance(
+            "test",
+            {
+                **plan(),
+                "site_gap_provenance": [provenance()],
+                "approved_plan_hash": "1" * 64,
+            },
+            [canonical],
+            [reciprocal()],
+            [],
+            discrepancies,
+        )
+
+        self.assertEqual(
+            result["reciprocal_only_site_gap_fields_retired_as_resolved"],
+            1,
+        )
+        self.assertEqual(result["reciprocal_only_site_gap_provenance_rows_added"], 1)
+        added = discrepancies[-1]
+        self.assertEqual(added["field_name"], "venue")
+        self.assertIn("surviving blank venue field(s)", added["notes"])
+        self.assertNotIn("venue and location", added["notes"])
+
+    def test_16_materialization_retires_fully_resolved_entry_without_stale_rows(self):
+        canonical = neutral_game()
+        canonical.update(
+            {
+                "venue_key": "accepted-arena",
+                "venue_id": "VEN-TEST",
+                "site_city": "Tucson",
+                "site_state": "AZ",
+            }
+        )
+        discrepancies = [
+            {
+                "canonical_game_id": "CBBG-0000001",
+                "field_name": field_name,
+                "status": "RESOLVED",
+                "resolution_basis": f"Accepted reconciliation resolved {field_name}.",
+            }
+            for field_name in ("venue", "location")
+        ]
+        before = copy.deepcopy(discrepancies)
+        result = _record_reciprocal_only_site_gap_provenance(
+            "test",
+            {
+                **plan(),
+                "site_gap_provenance": [provenance()],
+                "approved_plan_hash": "2" * 64,
+            },
+            [canonical],
+            [reciprocal()],
+            [],
+            discrepancies,
+        )
+
+        self.assertEqual(
+            result["reciprocal_only_site_gap_entries_retired_fully_resolved"],
+            1,
+        )
+        self.assertEqual(
+            result["reciprocal_only_site_gap_fields_retired_as_resolved"],
+            2,
+        )
+        self.assertEqual(discrepancies, before)
+        self.assertNotIn("reciprocal_only_site_gap_provenance_rows_added", result)
+
+    def test_17_target_assertion_retires_reciprocal_only_entry_to_researched_source_accounting(self):
+        canonical = neutral_game()
+        canonical["site_city"] = "Cancun"
+        canonical["site_state"] = "Quintana Roo"
+        target = target_assertion(
+            canonical_game_id="CBBG-0000001",
+            source_program_key="test",
+            source_game_id="TESTRAW-1",
+            normalized_opponent_key="other",
+            curated_site_type="NEUTRAL",
+            curated_venue_name="",
+            city="Cancun",
+            state="Quintana Roo",
+        )
+        source = {
+            "source_game_id": "TESTRAW-1",
+            "source_program_key": "test",
+            "site_research_status": "RESEARCHED_PARTIAL",
+            "site_research_basis": (
+                "Accepted source establishes Cancun locality; exact venue remains unresolved."
+            ),
+        }
+        discrepancies = []
+        result = _record_reciprocal_only_site_gap_provenance(
+            "test",
+            {
+                **plan(),
+                "site_gap_provenance": [provenance()],
+                "approved_plan_hash": "3" * 64,
+            },
+            [canonical],
+            [reciprocal(), target],
+            [source],
+            discrepancies,
+        )
+
+        self.assertEqual(
+            result[
+                "reciprocal_only_site_gap_entries_retired_to_target_source_accounting"
+            ],
+            1,
+        )
+        self.assertEqual(
+            result["reciprocal_only_site_gap_fields_retired_as_resolved"],
+            1,
+        )
+        self.assertEqual(
+            result[
+                "reciprocal_only_site_gap_fields_retired_to_target_source_accounting"
+            ],
+            1,
+        )
+        self.assertEqual(discrepancies, [])
+
+    def test_18_target_assertion_with_surviving_gap_requires_ordinary_accounting(self):
+        canonical = neutral_game()
+        canonical["site_city"] = "Cancun"
+        canonical["site_state"] = "Quintana Roo"
+        target = target_assertion(
+            canonical_game_id="CBBG-0000001",
+            source_program_key="test",
+            source_game_id="TESTRAW-1",
+            normalized_opponent_key="other",
+            curated_site_type="NEUTRAL",
+            curated_venue_name="",
+            city="Cancun",
+            state="Quintana Roo",
+        )
+        source = {
+            "source_game_id": "TESTRAW-1",
+            "source_program_key": "test",
+            "site_research_status": "",
+            "site_research_basis": "",
+        }
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "surviving primitive gaps.*lack ordinary target-source",
+        ):
+            _record_reciprocal_only_site_gap_provenance(
+                "test",
+                {
+                    **plan(),
+                    "site_gap_provenance": [provenance()],
+                    "approved_plan_hash": "4" * 64,
+                },
+                [canonical],
+                [reciprocal(), target],
+                [source],
+                [],
+            )
+
+    def test_19_materialization_rejects_unsupported_resolved_field(self):
+        canonical = neutral_game()
+        canonical["site_city"] = "Unproven City"
+        canonical["site_state"] = "ZZ"
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "resolved but no accepted target-assertion/registry or resolved reconciliation",
+        ):
+            _record_reciprocal_only_site_gap_provenance(
+                "test",
+                {
+                    **plan(),
+                    "site_gap_provenance": [provenance()],
+                    "approved_plan_hash": "5" * 64,
+                },
+                [canonical],
+                [reciprocal()],
+                [],
+                [],
+            )
+
+    def test_20_materialization_rejects_new_gap_not_in_discovery_snapshot(self):
+        entry = provenance()
+        entry["fields"] = ["venue"]
+        canonical = neutral_game()
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "introduced primitive site gaps.*not in approved discovery fields",
+        ):
+            _record_reciprocal_only_site_gap_provenance(
+                "test",
+                {
+                    **plan(),
+                    "site_gap_provenance": [entry],
+                    "approved_plan_hash": "6" * 64,
+                },
+                [canonical],
+                [reciprocal()],
+                [],
+                [],
+            )
+
+    def test_21_materialization_partial_locality_remains_fail_closed(self):
+        canonical = neutral_game()
+        canonical["site_city"] = "Tucson"
+        canonical["site_state"] = ""
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "partial canonical locality",
+        ):
+            _record_reciprocal_only_site_gap_provenance(
+                "test",
+                {
+                    **plan(),
+                    "site_gap_provenance": [provenance()],
+                    "approved_plan_hash": "7" * 64,
+                },
+                [canonical],
+                [reciprocal()],
+                [],
+                [],
+            )
+
+    def test_22_surviving_gap_with_existing_review_is_not_duplicated(self):
+        canonical = neutral_game()
+        discrepancies = [
+            {
+                "canonical_game_id": "CBBG-0000001",
+                "field_name": "venue",
+                "status": "RESOLVED",
+                "resolution_basis": "Existing accepted venue-gap review.",
+            }
+        ]
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "field-specific reconciliation provenance already exists",
+        ):
+            _record_reciprocal_only_site_gap_provenance(
+                "test",
+                {
+                    **plan(),
+                    "site_gap_provenance": [provenance()],
+                    "approved_plan_hash": "8" * 64,
+                },
+                [canonical],
+                [reciprocal()],
+                [],
+                discrepancies,
+            )
+
+
+
 if __name__ == "__main__":
     unittest.main()
