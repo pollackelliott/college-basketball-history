@@ -1,0 +1,62 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from richmond-stage2-current-main-refresh-0004",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "expected_protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-phase0-0001/successor-manifest.json",
+    "sha256": "80d344498ed6a050bc969ec0118e54612b9a38ec82624302bda4ecaef9ede893"
+  },
+  "phase_continuation": {
+    "census_request_id": "richmond-stage2-census-0005",
+    "expected_decision_universe_sha256": "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8",
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "proposal_request_id": "richmond-stage2-proposal-0002",
+    "recommendation_map": {
+      "path": ".remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/recommendation-map.json",
+      "sha256": "352232cf27ba3fa88f0214ac8ee49efc0897756a6f1a53994033cd349a8be218"
+    }
+  },
+  "previous_control_state_commit": "1be65fc01dd6d010893eb806e334e4b3df615083",
+  "previous_control_state_sha256": "01873274e4c60a9ee4c69f4d5d1b0be1d4f0f2ece15d0ac3de4005644920dfb9",
+  "request_id": "richmond-stage2-census-0005",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-current-main-refresh-0004/successor-manifest.json",
+    "sha256": "c772cbdef2d31fa9d4b1af75e0b83b01a9938735b8c070ec928fe8934305acae"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f3d8427e01e9dcbe8b8a9848c35711f9da5024f0ae70eddd076ebc467c0780ee"
+  },
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "f046e3cf6f3f4e8b2c6395aac0f0716af54cac54"
+}
