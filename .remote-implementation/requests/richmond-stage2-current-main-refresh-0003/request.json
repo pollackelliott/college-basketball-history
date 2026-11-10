@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "richmond-stage2-current-main-refresh-0003",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "richmond",
+  "previous_control_state_commit": "810e7e63de0b34fb0b74e5f2ee83f8a9fabd8f82",
+  "previous_control_state_sha256": "7d944c26e2bcc00b17628b316f1868e9ca4eb046ef53fb8c4e9f7e493f40c97a",
+  "expected_protected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-phase0-0001/successor-manifest.json",
+    "sha256": "80d344498ed6a050bc969ec0118e54612b9a38ec82624302bda4ecaef9ede893"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f3d8427e01e9dcbe8b8a9848c35711f9da5024f0ae70eddd076ebc467c0780ee"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-current-main-refresh-0002/successor-manifest.json",
+    "sha256": "1da073992d400cf9d902cb611aec229cf034566aabf5665a3f9db84c50e0c231"
+  },
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorizes exactly one guarded Richmond STAGE2_CURRENT_MAIN_REFRESH from onboarding predecessor aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49 to protected main 802006f8f30ec9fc2e7b7a528d482bd343dc8e3b after authenticating common comparison base 7c976d15c551df0cd0f1a8c018956a8fa33d623c, exact target-only and main-only changed-path populations, and zero overlap. The protected-main advance is the merged generic confident-canonical-collision repair from PR #554 / issue #553. No STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation is authorized because the repaired 137-decision candidate universe is pre-merge evidence only and Richmond has no mature recommendation map."
+  },
+  "creation_provenance": {
+    "origin": "Richmond serialized Implementation Stage 2 — Control Center-authorized third current-main refresh after PR #554",
+    "authorization": "Execute exactly one repository-owned guarded STAGE2_CURRENT_MAIN_REFRESH plus required independent fresh verification. Preserve immutable Richmond Research authority, Integration Freeze, semantic snapshot, all six school-package members, and all Richmond target-only paths byte-for-byte while importing exactly the disjoint PR #554 tooling/test delta. Do not attach STAGE2_REFRESH_CENSUS_PROPOSAL_V1. After fresh refresh PASS, ordinary authoritative STAGE2_CENSUS may proceed in the same owner-authorized Stage 2 phase; compare its real post-merge universe to candidate evidence count=137, SHA=f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8, identity-cardinality constraints=17, VCU collision groups=1 without forcing equivalence. No Owner Gate 1 approval, fill, pre-seal, seal, sealed apply, Preview, release, Richmond basketball merge, Production, new historical research, recovery, or unrelated shared/global mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
