@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "8999464d8c8c10e265b782e12c39b8ad35f5b3c5f153d98912c6a78c4fdb22e4",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "b6702caa2050c567cc18b23127b3b5e07eb8dec84372f58b30e05437c47a0da3",
+  "pr_created": false,
+  "preview_request_id": "richmond-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "readiness_proof_sha256": "ef1baadf7f92a8fbeaff1b1435445063c8cc13525e5c814a8e27df294afa4a9c",
+  "release_pr_packet_sha256": "05b4782ac7c8f8afc599147f330853dcf950e7c669bc7fbfd162610d9a42b631",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "richmond-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "tracked_mutation": "NONE"
+}
