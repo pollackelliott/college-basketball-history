@@ -1,0 +1,38 @@
+name: Temporary confident collision candidate tests
+
+on:
+  push:
+    branches:
+      - validation/stage2-confident-collision-tests
+
+permissions:
+  contents: read
+
+jobs:
+  exact-candidate-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact candidate
+        uses: actions/checkout@v4
+        with:
+          ref: b9c716eb0aab8650e81819bc8c0700b6813628aa
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile changed tooling
+        run: |
+          python -m py_compile             tools/onboarding_plan.py             tools/onboarding_hardening.py             tools/ingest_school.py             tools/implementation_stage2.py             tests/test_stage2_confident_canonical_collision.py
+
+      - name: Run targeted confident-collision regressions
+        run: python -m unittest -v tests.test_stage2_confident_canonical_collision
+
+      - name: Run Stage 2 / onboarding regression suites
+        run: |
+          python -m unittest -v             tests.test_onboarding_fast_path             tests.test_onboarding_hardening             tests.test_implementation_stage2             tests.test_stage2_venue_name_period_planner             tests.test_stage2_confident_canonical_collision
+
+      - name: Run full repository Python test suite
+        run: python -m unittest discover -v -s tests -p 'test_*.py'
