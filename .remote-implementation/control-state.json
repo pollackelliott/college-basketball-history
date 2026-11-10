@@ -500,7 +500,7 @@
     "richmond-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
-  "active_lock_commit": null,
+  "active_lock_commit": "d0f3a1c499e1cabbe04ad5495def23cf9c7118bc",
   "active_lock_owner": "github-actions:42817289765:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
