@@ -99,9 +99,16 @@ def run(
     cwd: Path,
     label: str,
     echo: bool = True,
+    preserve_candidate_validator_override: bool = False,
 ) -> str:
     environment = dict(os.environ)
     environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    # Candidate-runtime validation is an orchestration-only exception.  It must
+    # reach the exact ingestion-apply subprocess, but it must not leak into
+    # later gates or the nested unit-test process where temporary repository
+    # fixtures intentionally rely on their normal repository-local semantics.
+    if not preserve_candidate_validator_override:
+        environment.pop("CBB_VALIDATE_DATA_TOOL_OVERRIDE", None)
     result = subprocess.run(
         command,
         cwd=cwd,
@@ -1361,6 +1368,7 @@ def execute_approved_in_place(
             ],
             cwd=repo,
             label="ingestion apply",
+            preserve_candidate_validator_override=True,
         )
     finally:
         plan_path.unlink(missing_ok=True)
