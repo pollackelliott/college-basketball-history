@@ -13,6 +13,13 @@ jobs:
   validate-family-closeout:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out assessment instrumentation
+        uses: actions/checkout@v4
+        with:
+          ref: validation/venue-name-period-family-closeout-556
+          path: assessment
+          fetch-depth: 0
+
       - name: Check out exact candidate
         uses: actions/checkout@v4
         with:
@@ -103,6 +110,17 @@ jobs:
           set -euo pipefail
           python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha 9d8822325f2d049cbf23a828e7346a835e6a0a7b             --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e             --proposal-checkpoint-path .remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/checkpoint-manifest.json             --diag /tmp/venue-name-period-family-closeout
 
+      - name: Run bounded Richmond systemic assessment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python assessment/.github/assessment/richmond_stage2_systemic_assessment.py \
+            --candidate candidate \
+            --target target \
+            --control control \
+            --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e \
+            --output /tmp/richmond-stage2-systemic-assessment
+
       - name: Require Richmond resolution to Owner Gate 1 readiness
         shell: bash
         run: |
@@ -126,6 +144,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: venue-name-period-family-closeout-${{ github.run_id }}
-          path: /tmp/venue-name-period-family-closeout
+          path: |
+            /tmp/venue-name-period-family-closeout
+            /tmp/richmond-stage2-systemic-assessment
           if-no-files-found: ignore
           retention-days: 14
