@@ -181,9 +181,13 @@ class ValidateDataVenueNamePeriodIntegrationTests(unittest.TestCase):
                         "name_type": "PROJECT_DISPLAY",
                         "valid_from": valid_from,
                         "valid_to": valid_to,
-                        "date_precision": "EXACT",
+                        "date_precision": "EXACT" if valid_from or valid_to else "",
                         "source_basis": "Integrated validate_data fixture",
-                        "notes": "Synthetic dated exact-name authority.",
+                        "notes": (
+                            "Synthetic dated exact-name authority."
+                            if valid_from or valid_to
+                            else "Synthetic undated display identity only."
+                        ),
                     }
                 )
                 return row
@@ -236,7 +240,12 @@ class ValidateDataVenueNamePeriodIntegrationTests(unittest.TestCase):
 
             # Incomplete authority: one competing physical identity has no dated
             # exact-name period, so the resolver must not infer from geography.
-            install_name_rows([name_row(NEW_ID, game_date, "2099-12-31")])
+            install_name_rows(
+                [
+                    name_row(OLD_ID, "", ""),
+                    name_row(NEW_ID, game_date, "2099-12-31"),
+                ]
+            )
             code, output = self.run_validate(repo)
             self.assertNotEqual(code, 0)
             self.assertIn("registry fallback marker venue identity cannot be resolved date-safely", output)
