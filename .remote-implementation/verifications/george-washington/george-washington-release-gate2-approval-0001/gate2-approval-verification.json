@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "aee6f7c0ac57f5a043d16b782d79926ac1e43bd4e29f1e97c144142a7514a278",
+  "gate2_merge_packet_sha256": "5773cfc6f6c39c144a9dd38425fe136599c2d744703fe3114d8a964c7559cd06",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "pr_number": 549,
+  "preview_deployment_id": 7672451052,
+  "preview_url": "https://college-basketball-history-2s5cpqx22-elliott-pollacks-projects.vercel.app",
+  "production_request_id": "george-washington-release-production-proof-0001",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "george-washington-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "status": "PASS"
+}

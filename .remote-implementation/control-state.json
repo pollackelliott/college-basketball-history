@@ -984,7 +984,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/george-washington/george-washington-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "aee6f7c0ac57f5a043d16b782d79926ac1e43bd4e29f1e97c144142a7514a278",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/george-washington/george-washington-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "5773cfc6f6c39c144a9dd38425fe136599c2d744703fe3114d8a964c7559cd06",
     "merged": false,
@@ -993,7 +993,7 @@
     "pr_number": 549,
     "production_request_id": "george-washington-release-production-proof-0001",
     "protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "george-washington-release-gate2-approval-0001",
     "school_key": "george-washington",
     "target_branch": "data/george-washington-onboarding",
