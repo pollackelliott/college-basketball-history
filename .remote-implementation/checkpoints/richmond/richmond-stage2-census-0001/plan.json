@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "richmond",
+  "created_at": "2026-11-10T12:32:28.859181+00:00",
+  "input_fingerprint": {
+    "sha256": "d45860caa07c4c33a1c2733d8393b5f6a7df98046925c115a65e57740cd2abe2",
+    "git_head": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
+    "files": {
+      "schools/richmond/source-games.csv": "29a285c9945574c277edb544e72c185c225f01114d19c35afe24a40c851f7c3a",
+      "schools/richmond/opponents.csv": "98421dcd9c1bae782a2f6961d2258ea5d66d548d4f60b30e72f718a63fe927f7",
+      "schools/richmond/venues.csv": "02492f4186235a9e1c2d9ab85c2edb33fd1033dea7f2d46f9a2afd925c32fe23",
+      "schools/richmond/conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+      "schools/richmond/notes.md": "5a4c39cdb3b3749cccbff2463d2c84e2f4794d0d2e6020f17d057b2066bcefae",
+      "schools/richmond/source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+      "data/canonical/games.csv": "c35770e940f2f4aa5e624cab4fee4f17580c95a30ca00f967d0c5be134ae2a76",
+      "data/evidence/game-assertions.csv": "67811c9e2020e303755d1612c1242a665f58bf2a3b2ccd7225ef9b83e633cf10",
+      "data/reconciliation/discrepancies.csv": "7245bb383f2dad45773ac905038029b566880c72ef58f048dead4fa69b175eb8",
+      "data/reference/programs.csv": "a1caa406750a41d001a63fe02e0b305dbdada28156905cb27069a0e7084fc642",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "89b700afc80c3dbbb03ba7a4bc898ab8e4e144f1a0cc44492649469e939a0800",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "7db3757e13145dfbbd67bdba0407218387369b38ee4ac52cc3150787adcb77c7",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "0daa23dcec7782d659d7d11b9634b94ff957500ab2ad47a7900cabfa10692bd0",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "644207734b9f03791505d3b59ca8ebc982b6cbb41ee3809bf39af42402f9664f",
+      "tools/onboarding_plan.py": "b565c9e60032048021c81b688eff3f900dade48a18ec0f23a92c7b2ca7caf847",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "6332acd37b90db9de4fdd8eebccfee66cc16436fc127f50a6737e15444c75f14",
+      "tools/verify_program_accomplishments.py": "4ab22a260ec498bc87de60f7638845a5e713f3dc8c323bfd6e1e4a1ec194bfea"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: belmont-abbey: ['Belmont Abbey', 'Belmont Abbey College']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: stockton: ['Stockton', 'Stockton University']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2825,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 882,
+      "venues": 85,
+      "conference_intervals": 8,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: belmont-abbey: ['Belmont Abbey', 'Belmont Abbey College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: stockton: ['Stockton', 'Stockton University']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

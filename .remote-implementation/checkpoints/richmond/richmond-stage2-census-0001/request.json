@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "richmond-stage2-census-0001",
+  "school_key": "richmond",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "1daa9b2b51a4659ac2150226ab2c1e484dc0ab8b",
+  "previous_control_state_sha256": "7e97f31f4c9f6d873fb3492e52e38f2947fa3a57d4ae7d9f968277ce397c20a4",
+  "expected_protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-phase0-0001/successor-manifest.json",
+    "sha256": "80d344498ed6a050bc969ec0118e54612b9a38ec82624302bda4ecaef9ede893"
+  },
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "creation_provenance": {
+    "origin": "ChatGPT Richmond serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly replied Proceed after Richmond Phase 0 completed with repository validation PASS, CREATE_ONCE_PASS, fresh_runner_verification=PASS, remote_phase0_equivalence=PASS, exact onboarding successor 0b8280a6195f1ad8a29268bf7c35a81f6f466143, Integration Freeze 170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916, and semantic snapshot 383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d. This request performs only one bounded read-only STAGE2_CENSUS against that exact independently verified successor and protected main 2aedc8051d2031c0ad4ccb87f60226839da0c48a. It carries no tracked repair, current-main refresh, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, recovery, unrelated shared/global mutation, protected-main mutation, or Owner Gate 2 authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
