@@ -498,7 +498,7 @@
     "richmond-phase0-0001"
   ],
   "active_expected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
-  "active_lock_commit": null,
+  "active_lock_commit": "02cdd156e29e4a67660485e1619f34cb2ce1dcfb",
   "active_lock_owner": "github-actions:42815614284:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
