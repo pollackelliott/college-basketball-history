@@ -503,7 +503,7 @@
     "richmond-stage2-current-main-refresh-0002"
   ],
   "active_expected_main_sha": "7c976d15c551df0cd0f1a8c018956a8fa33d623c",
-  "active_lock_commit": null,
+  "active_lock_commit": "014c93fb4697728dccec595ed057b41f78eba7fa",
   "active_lock_owner": "github-actions:42835491379:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
