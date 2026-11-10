@@ -2302,7 +2302,13 @@ def main() -> int:
     print(f"  discrepancies:     +{len(new_discrepancies):,}")
     print()
 
-    validator = repo_root / "tools" / "validate_data.py"
+    # Validate with the same permanent tooling runtime that performed the
+    # ingestion. In normal repository execution this is the repository's
+    # tools/validate_data.py; candidate-runtime rehearsal intentionally runs
+    # this module from an isolated candidate tool tree and must validate with
+    # that same candidate validator rather than silently falling back to the
+    # target worktree's older tooling.
+    validator = Path(__file__).resolve().with_name("validate_data.py")
     if validator.exists():
         result = subprocess.run([sys.executable, str(validator), str(repo_root)])
         if result.returncode != 0:
