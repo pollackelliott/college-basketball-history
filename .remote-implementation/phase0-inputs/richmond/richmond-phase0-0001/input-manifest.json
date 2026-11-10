@@ -1,0 +1,22 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "request_id": "richmond-phase0-0001",
+  "research_checkpoint_sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
+  "research_member_sha256": {
+    "conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "notes.md": "c666adf82be9b74ea548dc4f23bbd6e2d7cb60548f439a4f79b4af93eb518cfb",
+    "opponents.csv": "98421dcd9c1bae782a2f6961d2258ea5d66d548d4f60b30e72f718a63fe927f7",
+    "source-games.csv": "29a285c9945574c277edb544e72c185c225f01114d19c35afe24a40c851f7c3a",
+    "source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "venues.csv": "28b622b33d5e399e64ed38bc269bca77eea890928dae22d276895586f6c1805d"
+  },
+  "schema_version": 1,
+  "school_key": "richmond",
+  "sidecars": {
+    "conference-reconciliation.json": "2ce37286fcdde40cdefbb384a252aef0e9b0c3604866ae11e419e14ef91c231e",
+    "stage1-reconciliation.json": "ab615dcdeafbc91de00b17c4c8527347b01600ab8cd692db3eb262a736e885c8",
+    "venue-reconciliation.json": "41b8e2b4a7947f7f841ec6e3436cf45c660b96f01ad669de3a485bfd061b0d49"
+  },
+  "stage1_status": "PASS"
+}
