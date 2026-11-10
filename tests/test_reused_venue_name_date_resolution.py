@@ -567,6 +567,65 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
         }
         return ingest_school.load_venue_metadata_map(path, globals_by_id)
 
+    def make_runtime_name_period_map(self, *, include_old=True, include_new=True):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        repo = Path(directory.name)
+        school = repo / "schools" / "example"
+        reference = repo / "data" / "reference"
+        school.mkdir(parents=True)
+        reference.mkdir(parents=True)
+
+        venue_path = school / "venues.csv"
+        with venue_path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=FIELDS)
+            writer.writeheader()
+            writer.writerow(venue_row("charlotte-coliseum-1955", "VEN-000040", "", ""))
+            writer.writerow(venue_row("charlotte-coliseum-1988", "VEN-000041", "", ""))
+
+        name_fields = [
+            "venue_id", "venue_name", "normalized_name", "name_type",
+            "valid_from", "valid_to", "date_precision", "source_basis", "notes",
+        ]
+        name_rows = []
+        if include_old:
+            name_rows.append({
+                "venue_id": "VEN-000040", "venue_name": "Charlotte Coliseum",
+                "normalized_name": "charlottecoliseum", "name_type": "PROJECT_DISPLAY",
+                "valid_from": "1955", "valid_to": "1988", "date_precision": "YEAR",
+                "source_basis": "fixture", "notes": "",
+            })
+        if include_new:
+            name_rows.append({
+                "venue_id": "VEN-000041", "venue_name": "Charlotte Coliseum",
+                "normalized_name": "charlottecoliseum", "name_type": "PROJECT_DISPLAY",
+                "valid_from": "1988", "valid_to": "2005", "date_precision": "YEAR",
+                "source_basis": "fixture", "notes": "",
+            })
+        with (reference / "venue-names.csv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=name_fields)
+            writer.writeheader()
+            writer.writerows(name_rows)
+
+        globals_by_id = {
+            "VEN-000040": {
+                "venue_id": "VEN-000040", "city": "Charlotte", "state": "NC",
+                "opened": "1955", "closed": "",
+            },
+            "VEN-000041": {
+                "venue_id": "VEN-000041", "city": "Charlotte", "state": "NC",
+                "opened": "1988", "closed": "2005",
+            },
+        }
+        return ingest_school.load_runtime_venue_metadata_map(
+            repo,
+            "example",
+            venue_path,
+            globals_by_id,
+        )
+
     def test_1976_resolves_original(self):
         result = ingest_school.resolve_venue_metadata(
             {"source_game_id":"DEPRAW-01178","game_date":"1976-03-13","curated_venue_name":"Charlotte Coliseum"},
@@ -593,6 +652,49 @@ class ReusedVenueNameDateResolutionTests(unittest.TestCase):
                     "curated_venue_name":"Charlotte Coliseum",
                 },
                 self.make_map(),
+            )
+
+    def test_undated_2000_01_resolves_from_registered_name_period(self):
+        result = ingest_school.resolve_venue_metadata(
+            {
+                "source_game_id": "RICHMOND-2000-01",
+                "game_date": "",
+                "season_label": "2000-2001",
+                "curated_venue_name": "Charlotte Coliseum",
+                "city": "Charlotte",
+                "state": "NC",
+            },
+            self.make_runtime_name_period_map(),
+        )
+        self.assertEqual(result["venue_id"], "VEN-000041")
+        self.assertEqual(result["venue_key"], "charlotte-coliseum-1988")
+
+    def test_registered_name_period_transition_season_still_stops(self):
+        with self.assertRaisesRegex(ValueError, "available date/season evidence"):
+            ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "TRANSITION-1988-89",
+                    "game_date": "",
+                    "season_label": "1988-1989",
+                    "curated_venue_name": "Charlotte Coliseum",
+                    "city": "Charlotte",
+                    "state": "NC",
+                },
+                self.make_runtime_name_period_map(),
+            )
+
+    def test_incomplete_registered_name_period_authority_still_stops(self):
+        with self.assertRaisesRegex(ValueError, "available date/season evidence"):
+            ingest_school.resolve_venue_metadata(
+                {
+                    "source_game_id": "INCOMPLETE-PERIOD-AUTHORITY",
+                    "game_date": "",
+                    "season_label": "2000-2001",
+                    "curated_venue_name": "Charlotte Coliseum",
+                    "city": "Charlotte",
+                    "state": "NC",
+                },
+                self.make_runtime_name_period_map(include_old=False),
             )
 
     def test_ambiguous_exact_date_stops(self):

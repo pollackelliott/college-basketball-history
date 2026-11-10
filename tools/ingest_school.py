@@ -77,6 +77,7 @@ NEW_GAME = "NEW_GAME"
 # Reserved internal metadata channel. NUL cannot occur in a CSV venue label, so
 # ordinary name lookup can never collide with this key.
 FROZEN_VENUE_SPLIT_AUTHORITY_KEY = "\x00frozen-source-game-venue-authority"
+REGISTERED_VENUE_NAME_PERIODS_FIELD = "\x00registered-venue-name-periods"
 
 CANONICAL_FIELDS = [
     "canonical_game_id",
@@ -731,6 +732,44 @@ def load_venue_metadata_map(
     return dict(result)
 
 
+def bind_registered_venue_name_periods(
+    venue_metadata_map: dict[str, list[dict[str, str]]],
+    name_rows: list[dict[str, str]],
+) -> None:
+    """Attach dated global naming periods to existing runtime venue candidates.
+
+    This is representation authority only. It does not create venue identity or
+    infer a site from geography. Only dated rows for the exact textual venue
+    name are useful; undated aliases cannot disambiguate a reused name.
+    """
+    periods_by_name_and_id: dict[
+        tuple[str, str], list[dict[str, str]]
+    ] = defaultdict(list)
+    for row in name_rows:
+        venue_id = row.get("venue_id", "").strip()
+        venue_name = row.get("venue_name", "").strip()
+        valid_from = row.get("valid_from", "").strip()
+        valid_to = row.get("valid_to", "").strip()
+        if not venue_id or not venue_name or (not valid_from and not valid_to):
+            continue
+        periods_by_name_and_id[(venue_name.casefold(), venue_id)].append(
+            {"valid_from": valid_from, "valid_to": valid_to}
+        )
+
+    for folded_name, candidates in venue_metadata_map.items():
+        if not isinstance(candidates, list):
+            continue
+        for candidate in candidates:
+            venue_id = candidate.get("venue_id", "").strip()
+            periods = periods_by_name_and_id.get((folded_name, venue_id), [])
+            if periods:
+                candidate[REGISTERED_VENUE_NAME_PERIODS_FIELD] = json.dumps(
+                    periods,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                )
+
+
 def bind_frozen_venue_split_authority(
     venue_metadata_map: dict[str, list[dict[str, str]]],
     authority: dict[str, dict[str, str]],
@@ -781,6 +820,12 @@ def load_runtime_venue_metadata_map(
         venue_path,
         global_venues_by_id,
     )
+    name_period_path = repo_root / "data/reference/venue-names.csv"
+    if name_period_path.is_file():
+        bind_registered_venue_name_periods(
+            venue_metadata_map,
+            read_csv(name_period_path),
+        )
     allowed_semantic_delta = (
         sealed_post_reconciliation_semantic_delta(
             repo_root,
@@ -999,6 +1044,63 @@ def resolve_venue_metadata(
     if match and int(match.group(2)) == int(match.group(1)) + 1:
         season_start = dt.date(int(match.group(1)), 7, 1)
         season_end = dt.date(int(match.group(2)), 6, 30)
+
+        # A reused venue name can move to a different physical building while
+        # the older building remains open. When every competing candidate has
+        # dated authority for this exact textual name, use those registered
+        # naming periods before broad physical-lifetime fallback. This is a
+        # positive-only disambiguation rule: overlap, transition seasons, or
+        # incomplete competing period authority continue to fail closed below.
+        registered_period_candidates: list[dict[str, str]] = []
+        registered_period_authority_complete = True
+        for candidate in candidates:
+            serialized_periods = candidate.get(
+                REGISTERED_VENUE_NAME_PERIODS_FIELD, ""
+            ).strip()
+            if not serialized_periods:
+                registered_period_authority_complete = False
+                break
+            try:
+                registered_periods = json.loads(serialized_periods)
+            except json.JSONDecodeError:
+                registered_period_authority_complete = False
+                break
+            if not isinstance(registered_periods, list) or not registered_periods:
+                registered_period_authority_complete = False
+                break
+
+            intersects = False
+            for period in registered_periods:
+                if not isinstance(period, dict):
+                    continue
+                start = _venue_bound_date(
+                    str(period.get("valid_from", "")),
+                    is_end=False,
+                )
+                end = _venue_bound_date(
+                    str(period.get("valid_to", "")),
+                    is_end=True,
+                )
+                if start is None and end is None:
+                    continue
+                if start is not None and start > season_end:
+                    continue
+                if end is not None and end < season_start:
+                    continue
+                intersects = True
+                break
+            if intersects:
+                registered_period_candidates.append(candidate)
+
+        if registered_period_authority_complete:
+            registered_period_ids = {
+                row.get("venue_id", "")
+                for row in registered_period_candidates
+                if row.get("venue_id", "")
+            }
+            if len(registered_period_ids) == 1 and registered_period_candidates:
+                return registered_period_candidates[0]
+
         season_candidates: list[dict[str, str]] = []
         for candidate in candidates:
             opened = _venue_bound_date(
