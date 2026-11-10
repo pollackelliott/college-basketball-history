@@ -1,0 +1,19 @@
+{
+  "branch": "remote-stage2-census/richmond-270804be1bbf",
+  "head_sha": "270804be1bbf134806cd4c1233b29c68be59341e",
+  "integration_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "integration_semantic_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "last_error": "source game richmond-2000-01-009: venue name 'Charlotte Coliseum' maps to multiple physical venue IDs (VEN-000040, VEN-000041) and available date/season evidence does not resolve exactly one candidate; explicit date-aware research is required",
+  "next_action": "Diagnose this repository/tool failure from durable state and the authoritative permanent-tool output; do not replace the phase with assistant-authored orchestration.",
+  "origin_main_sha_at_integration_freeze": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "research_base_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": null,
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
