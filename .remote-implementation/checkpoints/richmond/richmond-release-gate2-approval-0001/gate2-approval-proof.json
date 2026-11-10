@@ -1,0 +1,22 @@
+{
+  "approved_plan_hash": "a58657cc01439a6b56aacc2bcd2fef5d746cfb20e307a71c8d53f88afaf1efcd",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL",
+  "merge_authorized_exact_head_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "merge_authorized_pr_number": 560,
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_body_sha256": "b6702caa2050c567cc18b23127b3b5e07eb8dec84372f58b30e05437c47a0da3",
+  "pr_number": 560,
+  "preview_checkpoint_sha256": "1575ccf21c07e727ad105aa2eda06adcd58b5d0cd35a1f49a90080ad8a99cad8",
+  "preview_deployment_id": 7695032924,
+  "preview_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "preview_request_id": "richmond-release-preview-verify-0001",
+  "preview_url": "https://college-basketball-history-qesl5qtlt-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "3b669daa0443c2cd658a4a5ab91196881414fcf6b450fc24fb53bbfde8d4abda",
+  "production_proof": false,
+  "release_manifest_sha256": "70f59d2f6446ab2cfc76088f7d136237df14e8b3ab3c6f84f01e05ba1923cc2f",
+  "school_key": "richmond",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "c451e8094011154c556a0f8c7786fe63222e0a61"
+}
