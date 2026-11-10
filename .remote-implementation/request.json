@@ -1,55 +1,38 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "richmond-release-gate2-approval-0001",
+  "request_id": "richmond-release-production-proof-0001",
   "school_key": "richmond",
-  "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "083981904a5a09b13ba7bb32f89894fac6d72a2f",
-  "previous_control_state_sha256": "04106c116aa957be33a550f16b0a7968ee422918552e5bfd1a76e9a8d7c4c521",
-  "expected_protected_main_sha": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "a04eb9a30a94dbd660911c73d9e339adca584d5a",
+  "previous_control_state_sha256": "6a35ae532cca7f8223f2510ef7d69379bc817bafc201a5c9ad95af7c58cf3743",
+  "expected_protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
   "target_branch": "data/richmond-onboarding",
   "target_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
-  "approved_plan_hash": "a58657cc01439a6b56aacc2bcd2fef5d746cfb20e307a71c8d53f88afaf1efcd",
-  "release_manifest_sha256": "70f59d2f6446ab2cfc76088f7d136237df14e8b3ab3c6f84f01e05ba1923cc2f",
   "pr_number": 560,
-  "preview_deployment_id": 7695032924,
-  "preview_url": "https://college-basketball-history-qesl5qtlt-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/richmond/richmond-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "1575ccf21c07e727ad105aa2eda06adcd58b5d0cd35a1f49a90080ad8a99cad8"
+  "merge_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/richmond/richmond-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "df04fb8090f286d1ec247a4a1419451e2c5813c009d7b305154cacb965df0550"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/richmond/richmond-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "3b669daa0443c2cd658a4a5ab91196881414fcf6b450fc24fb53bbfde8d4abda"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly approved the exact authenticated Richmond Preview for PR #560 by stating “approved. Proceed” immediately after being presented the fresh-verified OWNER_GATE_2_READY packet for head c451e8094011154c556a0f8c7786fe63222e0a61 and Vercel Preview deployment 7695032924.",
-    "pr_number": 560,
-    "pr_head_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
-    "preview_deployment_id": 7695032924,
-    "preview_url": "https://college-basketball-history-qesl5qtlt-elliott-pollacks-projects.vercel.app",
-    "preview_checkpoint_sha256": "1575ccf21c07e727ad105aa2eda06adcd58b5d0cd35a1f49a90080ad8a99cad8",
-    "preview_verification_sha256": "3b669daa0443c2cd658a4a5ab91196881414fcf6b450fc24fb53bbfde8d4abda"
-  },
-  "final_release_continuation": {
-    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
-    "production_request_id": "richmond-release-production-proof-0001"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/richmond/richmond-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "17142d82eff0bdf61c29beba7b4e0fd47331e7b433e88e008fd0b51d7280402f"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Richmond serialized Implementation lane — owner-authorized exact Gate 2 approval",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating 'approved. Proceed' in direct response to the exact fresh-verified Richmond PR #560 Preview at head c451e8094011154c556a0f8c7786fe63222e0a61 and Vercel Preview deployment 7695032924. This authorizes the repository-defined final release phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof, and independent COMPLETE verification while identities remain unchanged. This request itself records only Gate 2 approval and grants no direct merge, protected-main mutation, recovery, maintenance, unrelated repair, or new historical authority."
+    "origin": "ChatGPT Richmond Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact Richmond Preview with 'approved. Proceed,' authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #560 head c451e8094011154c556a0f8c7786fe63222e0a61 against approved main 3738701d72680f81902f85d9ef679eab41b2d8d3. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 36b8e829e7e5ffde7390ec7ef00816cda3d7f663, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": true,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": true,
+    "release_gate2_approval": false,
     "release_preview_verify": false,
-    "release_production_proof": false,
+    "release_production_proof": true,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
