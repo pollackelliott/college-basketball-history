@@ -1,0 +1,130 @@
+name: Venue name period family closeout validation
+
+on:
+  push:
+    branches:
+      - validation/venue-name-period-family-closeout-556
+
+permissions:
+  contents: read
+
+jobs:
+  validate-family-closeout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact candidate
+        uses: actions/checkout@v4
+        with:
+          ref: f8cbbcb5044028de4ac2892dc9370a43f28bd87b
+          path: candidate
+          fetch-depth: 0
+
+      - name: Check out exact Richmond target
+        uses: actions/checkout@v4
+        with:
+          ref: 2350ec65bbc6bf066dff29c356b6855e1d9fc980
+          path: target
+          fetch-depth: 0
+
+      - name: Check out durable control authority
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate exact identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C candidate rev-parse HEAD)" = "f8cbbcb5044028de4ac2892dc9370a43f28bd87b"
+          test "$(git -C target rev-parse HEAD)" = "2350ec65bbc6bf066dff29c356b6855e1d9fc980"
+          git -C control cat-file -e "41fb2d14ef35eb751a59012002ddd911c9e9f97e^{commit}"
+
+      - name: Compile changed code
+        working-directory: candidate
+        run: python -m py_compile tools/validate_data.py tests/test_validate_data_venue_name_periods.py
+
+      - name: Run venue-name-period family matrix
+        working-directory: candidate
+        run: |
+          python -m unittest -v             tests.test_validate_data_venue_name_periods             tests.test_stage2_venue_name_period_planner             tests.test_reused_venue_name_date_resolution             tests.test_registry_geography_write_and_reused_marker             tests.test_stage1_date_aware_venue_names             tests.test_stage1_venue_reconciliation
+
+      - name: Run confident-collision regression
+        working-directory: candidate
+        run: python -m unittest -v tests.test_stage2_confident_canonical_collision
+
+      - name: Prove exact Richmond Charlotte resolution
+        shell: bash
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          candidate = Path("candidate").resolve()
+          target = Path("target").resolve()
+          sys.path.insert(0, str(candidate / "tools"))
+          import ingest_school
+          from venue_reference import load_global_venue_reference
+
+          global_by_id, _, _ = load_global_venue_reference(target)
+          metadata = ingest_school.load_venue_metadata_map_with_name_periods(
+              target,
+              target / "schools/richmond/venues.csv",
+              global_by_id,
+          )
+          rows = {
+              row["source_game_id"]: row
+              for row in ingest_school.read_csv(target / "schools/richmond/source-games.csv")
+          }
+          expected = {
+              "richmond-2000-01-009",
+              "richmond-2000-01-010",
+          }
+          for source_id in sorted(expected):
+              resolved = ingest_school.resolve_venue_metadata(rows[source_id], metadata)
+              assert resolved["venue_id"] == "VEN-000041", (source_id, resolved)
+              assert resolved["venue_key"] == "charlotte-coliseum-1988", (source_id, resolved)
+              print(source_id, resolved["venue_id"], resolved["venue_key"])
+          PY
+
+      - name: Run full repository Python suite
+        working-directory: candidate
+        run: python -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Replay exact blocked Richmond proposal with candidate runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha f8cbbcb5044028de4ac2892dc9370a43f28bd87b             --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e             --proposal-checkpoint-path .remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/checkpoint-manifest.json             --diag /tmp/venue-name-period-family-closeout
+
+      - name: Require Richmond resolution to Owner Gate 1 readiness
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("/tmp/venue-name-period-family-closeout/candidate-rehearsal-summary.json").read_text())
+          assert summary["candidate_stage2_status"] == "OWNER_GATE_1_READY", summary
+          assert summary["classification"] == "RESOLVED_TO_GATE1", summary
+          assert summary["decision_universe_sha256"] == "f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8", summary
+          assert summary["recommendation_map_sha256"] == "352232cf27ba3fa88f0214ac8ee49efc0897756a6f1a53994033cd349a8be218", summary
+          proof = summary.get("tracked_mutation_proof") or {}
+          assert proof.get("tracked_stage2_mutation") == "NONE", proof
+          compatibility = summary.get("decision_universe_compatibility") or {}
+          assert compatibility.get("status") == "EXACT", compatibility
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload validation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: venue-name-period-family-closeout-${{ github.run_id }}
+          path: /tmp/venue-name-period-family-closeout
+          if-no-files-found: ignore
+          retention-days: 14
