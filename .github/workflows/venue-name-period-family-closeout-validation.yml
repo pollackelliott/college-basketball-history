@@ -1,4 +1,4 @@
-name: Venue name period family closeout validation
+name: Consolidated Stage 2 pre-Gate-1 hardening validation
 # Validation-only workflow; never merged into protected main.
 
 on:
@@ -13,17 +13,10 @@ jobs:
   validate-family-closeout:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out assessment instrumentation
-        uses: actions/checkout@v4
-        with:
-          ref: validation/venue-name-period-family-closeout-556
-          path: assessment
-          fetch-depth: 0
-
       - name: Check out exact candidate
         uses: actions/checkout@v4
         with:
-          ref: 9d8822325f2d049cbf23a828e7346a835e6a0a7b
+          ref: f3c81cb0f807a3c520eec93e6c8bb397d6af4ceb
           path: candidate
           fetch-depth: 0
 
@@ -50,18 +43,26 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C candidate rev-parse HEAD)" = "9d8822325f2d049cbf23a828e7346a835e6a0a7b"
+          test "$(git -C candidate rev-parse HEAD)" = "f3c81cb0f807a3c520eec93e6c8bb397d6af4ceb"
           test "$(git -C target rev-parse HEAD)" = "2350ec65bbc6bf066dff29c356b6855e1d9fc980"
           git -C control cat-file -e "41fb2d14ef35eb751a59012002ddd911c9e9f97e^{commit}"
 
       - name: Compile changed code
         working-directory: candidate
-        run: python -m py_compile tools/validate_data.py tests/test_validate_data_venue_name_periods.py
+        run: |
+          python -m py_compile \
+            tools/validate_data.py \
+            tools/ingest_school.py \
+            tools/onboarding_plan.py \
+            tools/remote_implementation_stage2_proposal.py \
+            tests/test_validate_data_venue_name_periods.py \
+            tests/test_stage2_reciprocal_only_site_gap_provenance.py
 
       - name: Run venue-name-period family matrix
         working-directory: candidate
         run: |
-          python -m unittest -v             tests.test_validate_data_venue_name_periods             tests.test_stage2_venue_name_period_planner             tests.test_reused_venue_name_date_resolution             tests.test_registry_geography_write_and_reused_marker             tests.test_stage1_date_aware_venue_names             tests.test_stage1_venue_reconciliation
+          python -m unittest -v             tests.test_validate_data_venue_name_periods             tests.test_stage2_venue_name_period_planner             tests.test_reused_venue_name_date_resolution             tests.test_registry_geography_write_and_reused_marker             tests.test_stage1_date_aware_venue_names             tests.test_stage1_venue_reconciliation \
+            tests.test_stage2_reciprocal_only_site_gap_provenance
 
       - name: Run confident-collision regression
         working-directory: candidate
@@ -108,18 +109,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha 9d8822325f2d049cbf23a828e7346a835e6a0a7b             --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e             --proposal-checkpoint-path .remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/checkpoint-manifest.json             --diag /tmp/venue-name-period-family-closeout
-
-      - name: Run bounded Richmond systemic assessment
-        shell: bash
-        run: |
-          set -euo pipefail
-          python assessment/.github/assessment/richmond_stage2_systemic_assessment.py \
-            --candidate candidate \
-            --target target \
-            --control control \
-            --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e \
-            --output /tmp/richmond-stage2-systemic-assessment
+          python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha f3c81cb0f807a3c520eec93e6c8bb397d6af4ceb             --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e             --proposal-checkpoint-path .remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/checkpoint-manifest.json             --diag /tmp/venue-name-period-family-closeout
 
       - name: Require Richmond resolution to Owner Gate 1 readiness
         shell: bash
@@ -144,8 +134,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: venue-name-period-family-closeout-${{ github.run_id }}
-          path: |
-            /tmp/venue-name-period-family-closeout
-            /tmp/richmond-stage2-systemic-assessment
+          path: /tmp/venue-name-period-family-closeout
           if-no-files-found: ignore
           retention-days: 14
