@@ -1,4 +1,5 @@
 name: Venue name period family closeout validation
+# Validation-only workflow; never merged into protected main.
 
 on:
   push:
