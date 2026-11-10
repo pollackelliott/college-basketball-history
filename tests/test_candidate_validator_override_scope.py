@@ -11,7 +11,7 @@ import onboard_school  # noqa: E402
 
 
 class CandidateValidatorOverrideScopeTests(unittest.TestCase):
-    def child_value(self, *, preserve: bool) -> str:
+    def child_value(self) -> str:
         return onboard_school.run(
             [
                 sys.executable,
@@ -23,7 +23,6 @@ class CandidateValidatorOverrideScopeTests(unittest.TestCase):
             ],
             cwd=ROOT,
             label="candidate validator override scope probe",
-            preserve_candidate_validator_override=preserve,
         ).strip()
 
     def test_nested_children_strip_candidate_validator_override_by_default(self):
@@ -32,16 +31,18 @@ class CandidateValidatorOverrideScopeTests(unittest.TestCase):
             {"CBB_VALIDATE_DATA_TOOL_OVERRIDE": "/candidate/tools/validate_data.py"},
             clear=False,
         ):
-            self.assertEqual(self.child_value(preserve=False), "ABSENT")
+            self.assertEqual(self.child_value(), "ABSENT")
 
-    def test_ingestion_apply_can_explicitly_preserve_candidate_validator_override(self):
+    def test_ingestion_scope_can_preserve_candidate_validator_override(self):
         expected = "/candidate/tools/validate_data.py"
         with patch.dict(
             os.environ,
             {"CBB_VALIDATE_DATA_TOOL_OVERRIDE": expected},
             clear=False,
         ):
-            self.assertEqual(self.child_value(preserve=True), expected)
+            with onboard_school._candidate_validator_override_for_ingestion():
+                self.assertEqual(self.child_value(), expected)
+            self.assertEqual(self.child_value(), "ABSENT")
 
 
 if __name__ == "__main__":
