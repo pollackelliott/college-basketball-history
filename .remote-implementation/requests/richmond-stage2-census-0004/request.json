@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "richmond-stage2-census-0004",
+  "school_key": "richmond",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "3cf5957adf05f0226a679458a64221840df41a02",
+  "previous_control_state_sha256": "7f067573adf457733fd5701358b95ddda0b1b736ae1d3f126b00bfc54b385a7e",
+  "expected_protected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-phase0-0001/successor-manifest.json",
+    "sha256": "80d344498ed6a050bc969ec0118e54612b9a38ec82624302bda4ecaef9ede893"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f3d8427e01e9dcbe8b8a9848c35711f9da5024f0ae70eddd076ebc467c0780ee"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-current-main-refresh-0003/successor-manifest.json",
+    "sha256": "d22fa3d1e7d16152b0c381b0994caf5d4e3e11203c23da6d4b32d71eea76de62"
+  },
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "creation_provenance": {
+    "origin": "Richmond serialized Implementation Stage 2 — authoritative post-merge census after independently fresh-verified third current-main refresh",
+    "authorization": "Control Center explicitly authorizes ordinary authoritative STAGE2_CENSUS after fresh PASS of richmond-stage2-current-main-refresh-0003, against protected main 802006f8f30ec9fc2e7b7a528d482bd343dc8e3b and exact refresh successor 2350ec65bbc6bf066dff29c356b6855e1d9fc980. Candidate count 137, candidate decision-universe SHA f10f646c6a808f5d5ff77b1ecf3f8b4626d6bcecd6f0055d5c127b7e238a23a8, 17 identity-cardinality constraints, and one VCU confident-collision group are comparison expectations only and are not forced. No phase continuation, recommendation map, proposal rehearsal, Owner Gate 1 approval, fill, pre-seal, seal, sealed apply, Preview, release, merge, Production, recovery, historical mutation, or unrelated shared/global mutation is authorized by this request."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
