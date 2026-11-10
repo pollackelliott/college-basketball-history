@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "richmond-stage2-current-main-refresh-0002",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "richmond-stage2-census-0003",
   "school_key": "richmond",
-  "previous_control_state_commit": "d799f4718cabb0f6d0f0340d6ced267d0e911557",
-  "previous_control_state_sha256": "3216bd7d78bf859ac376e7555fe6a78da6f39c96a47bc236534d09f4f24852ec",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "35096fabe4fe4ad8b8b475daa8a36dd47d1b367e",
+  "previous_control_state_sha256": "65b310e44f3217ec83fed4b2dc0cd0e6c38e8cd423ecd27774faf5762eb8ce36",
   "expected_protected_main_sha": "7c976d15c551df0cd0f1a8c018956a8fa33d623c",
   "target_branch": "data/richmond-onboarding",
-  "target_sha": "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4",
+  "target_sha": "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49",
   "phase0_successor": {
     "path": ".remote-implementation/successors/richmond/richmond-phase0-0001/successor-manifest.json",
     "sha256": "80d344498ed6a050bc969ec0118e54612b9a38ec82624302bda4ecaef9ede893"
@@ -18,26 +18,21 @@
     "sha256": "f3d8427e01e9dcbe8b8a9848c35711f9da5024f0ae70eddd076ebc467c0780ee"
   },
   "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/richmond/richmond-stage2-current-main-refresh-0001/successor-manifest.json",
-    "sha256": "13b8eed2adaab37e773b0c696211e6c4bb1ceaf1df1094bce5a017e37e3c5385"
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-current-main-refresh-0002/successor-manifest.json",
+    "sha256": "1da073992d400cf9d902cb611aec229cf034566aabf5665a3f9db84c50e0c231"
   },
   "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
   "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "Control Center explicitly authorizes exactly one guarded Richmond STAGE2_CURRENT_MAIN_REFRESH from onboarding predecessor 4f466ddc3d696bc1afaa521bc369c2e5c965c0a4 to protected main 7c976d15c551df0cd0f1a8c018956a8fa33d623c after authenticating the common comparison base 44bac3ca1cf135d97dabb874dabeba39da92a33a, exact target-only and main-only changed-path populations, and zero overlap. The protected-main advance is the merged generic planner-path venue-name-period repair from PR #552. No STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation is authorized because Richmond still has no authoritative post-merge decision universe or mature recommendation map."
-  },
   "creation_provenance": {
-    "origin": "Richmond serialized Implementation Stage 2 — Control Center-authorized second current-main refresh after PR #552",
-    "authorization": "Execute exactly one repository-owned guarded STAGE2_CURRENT_MAIN_REFRESH plus required independent fresh verification. Preserve immutable Richmond Research authority, Integration Freeze, semantic snapshot, all six school-package members, and all Richmond target-only paths byte-for-byte while importing exactly the disjoint PR #552 tooling/test delta. Do not attach STAGE2_REFRESH_CENSUS_PROPOSAL_V1. After fresh refresh PASS, ordinary authoritative STAGE2_CENSUS may proceed in the same owner-authorized Stage 2 phase; compare its real post-merge universe to pre-merge candidate evidence without forcing equivalence. No Owner Gate 1 approval, fill, pre-seal, seal, sealed apply, Preview, release, Richmond basketball merge, Production, historical mutation, recovery, or unrelated shared/global mutation is authorized."
+    "origin": "Richmond serialized Implementation Stage 2 — authoritative post-merge census after independently fresh-verified second current-main refresh",
+    "authorization": "Control Center returns authority to the same Richmond lane after fresh PASS of richmond-stage2-current-main-refresh-0002 to run the ordinary read-only STAGE2_CENSUS on protected main 7c976d15c551df0cd0f1a8c018956a8fa33d623c and exact refresh successor aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49. This census establishes authoritative post-merge Stage 2 authority. The pre-merge candidate count 135 and SHA 799ca96f7ff2a2d3b72cf1b7368af4a97d5ef864ab2a9c35e2bece753e8e8f0c are comparison evidence only and are not forced. No phase continuation, tracked repair, Owner Gate 1 approval, fill, pre-seal, seal, sealed apply, Preview, release, merge, Production, recovery, historical mutation, or unrelated shared/global mutation is authorized."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
