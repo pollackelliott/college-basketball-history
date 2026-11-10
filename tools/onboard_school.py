@@ -24,6 +24,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -92,6 +93,21 @@ SINGLE_GAME_CORRECTION_KINDS = frozenset({
     "SINGLE_GAME_IDENTITY_SITE",
 })
 
+_PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE = False
+
+
+@contextmanager
+def _candidate_validator_override_for_ingestion():
+    """Preserve the authenticated candidate validator for ingestion only."""
+
+    global _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE
+    previous = _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE
+    _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE = True
+    try:
+        yield
+    finally:
+        _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE = previous
+
 
 def run(
     command: list[str],
@@ -102,6 +118,12 @@ def run(
 ) -> str:
     environment = dict(os.environ)
     environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    # Candidate-runtime validation is an orchestration-only exception.  It must
+    # reach the exact ingestion-apply subprocess, but it must not leak into
+    # later gates or the nested unit-test process where temporary repository
+    # fixtures intentionally rely on their normal repository-local semantics.
+    if not _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE:
+        environment.pop("CBB_VALIDATE_DATA_TOOL_OVERRIDE", None)
     result = subprocess.run(
         command,
         cwd=cwd,
@@ -1348,20 +1370,21 @@ def execute_approved_in_place(
     plan_path = write_plan_for_ingest(repo, approved)
     try:
         print("\n=== ingestion apply ===")
-        ingestion_output = run(
-            [
-                sys.executable,
-                str(_runtime_tool("ingest_school.py")),
-                school_key,
-                "--apply",
-                "--identity-decisions",
-                str(plan_path),
-                "--repo",
-                str(repo),
-            ],
-            cwd=repo,
-            label="ingestion apply",
-        )
+        with _candidate_validator_override_for_ingestion():
+            ingestion_output = run(
+                [
+                    sys.executable,
+                    str(_runtime_tool("ingest_school.py")),
+                    school_key,
+                    "--apply",
+                    "--identity-decisions",
+                    str(plan_path),
+                    "--repo",
+                    str(repo),
+                ],
+                cwd=repo,
+                label="ingestion apply",
+            )
     finally:
         plan_path.unlink(missing_ok=True)
 

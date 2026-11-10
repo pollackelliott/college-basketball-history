@@ -825,7 +825,8 @@ def main() -> int:
             program = venue_path.parent.name
             try:
                 registry_venue_metadata_by_program[program] = (
-                    ingest_school.load_venue_metadata_map(
+                    ingest_school.load_venue_metadata_map_with_name_periods(
+                        repo_root,
                         venue_path,
                         global_venues_by_id,
                     )
