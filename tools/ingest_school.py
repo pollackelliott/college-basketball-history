@@ -1090,6 +1090,62 @@ def resolve_venue_metadata(
         if len(physical_ids) == 1 and physical_matching:
             return physical_matching[0]
 
+        # A reused exact textual name can move to another physical building
+        # while the earlier building remains open. If every competing
+        # candidate carries dated registered authority for this exact name,
+        # use that authority for the exact game date. This is deliberately
+        # positive-only: overlapping periods or incomplete authority do not
+        # disambiguate.
+        registered_period_candidates: list[dict[str, str]] = []
+        registered_period_authority_complete = True
+        for candidate in candidates:
+            serialized_periods = candidate.get(
+                REGISTERED_VENUE_NAME_PERIODS_FIELD, ""
+            ).strip()
+            if not serialized_periods:
+                registered_period_authority_complete = False
+                break
+            try:
+                registered_periods = json.loads(serialized_periods)
+            except json.JSONDecodeError:
+                registered_period_authority_complete = False
+                break
+            if not isinstance(registered_periods, list) or not registered_periods:
+                registered_period_authority_complete = False
+                break
+
+            matches_registered_period = False
+            for period in registered_periods:
+                if not isinstance(period, dict):
+                    continue
+                start = _venue_bound_date(
+                    str(period.get("valid_from", "")),
+                    is_end=False,
+                )
+                end = _venue_bound_date(
+                    str(period.get("valid_to", "")),
+                    is_end=True,
+                )
+                if start is None and end is None:
+                    continue
+                if start is not None and game_date < start:
+                    continue
+                if end is not None and game_date > end:
+                    continue
+                matches_registered_period = True
+                break
+            if matches_registered_period:
+                registered_period_candidates.append(candidate)
+
+        if registered_period_authority_complete:
+            registered_period_ids = {
+                row.get("venue_id", "")
+                for row in registered_period_candidates
+                if row.get("venue_id", "")
+            }
+            if len(registered_period_ids) == 1 and registered_period_candidates:
+                return registered_period_candidates[0]
+
         candidate_ids = ", ".join(
             sorted(
                 {
