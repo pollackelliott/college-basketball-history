@@ -568,6 +568,48 @@ def identity_decisions_from_sealed_plan(
     return result
 
 
+
+def confident_collision_force_new_authority_from_sealed_plan(
+    payload: dict[str, Any] | None,
+) -> dict[str, str]:
+    """Return source→canonical authority for collision-bound confident FORCE_NEW."""
+    if payload is None:
+        return {}
+    result: dict[str, str] = {}
+    for item in payload.get("decisions", []):
+        if item.get("category") != "identity":
+            continue
+        if str(item.get("decision", "")).strip() != "FORCE_NEW":
+            continue
+        canonical_game_id = str(
+            item.get("confident_collision_canonical_game_id", "")
+        ).strip()
+        if not canonical_game_id:
+            continue
+        source_game_id = str(item.get("source_game_id", "")).strip()
+        group_source_ids = {
+            str(value).strip()
+            for value in item.get(
+                "confident_collision_group_source_game_ids", []
+            )
+            if str(value).strip()
+        }
+        if (
+            not source_game_id
+            or source_game_id not in group_source_ids
+            or len(group_source_ids) < 2
+        ):
+            raise ValueError(
+                "confident collision FORCE_NEW authority is incomplete"
+            )
+        if source_game_id in result:
+            raise ValueError(
+                f"confident collision FORCE_NEW authority repeats {source_game_id!r}"
+            )
+        result[source_game_id] = canonical_game_id
+    return result
+
+
 def load_sealed_identity_decisions(
     path: Path | None,
     school_key: str,
@@ -584,11 +626,19 @@ def resolve_sealed_identity_decision(
     decision: str,
     candidates: list[dict[str, str]],
     canonical_by_id: dict[str, dict[str, str]],
+    confident_force_new_canonical_game_id: str = "",
 ) -> tuple[str, str, str]:
     """Resolve one sealed decision with the same defensive checks as normal matching."""
     if decision == "FORCE_NEW":
-        normal_status, _, normal_method = identify_game(source, candidates)
+        normal_status, normal_id, normal_method = identify_game(source, candidates)
         if normal_status == CONFIDENT:
+            authorized_id = (confident_force_new_canonical_game_id or "").strip()
+            if authorized_id and normal_id == authorized_id:
+                return (
+                    NEW_GAME,
+                    "",
+                    "SEALED_OWNER_FORCE_NEW_CONFIDENT_CANONICAL_COLLISION",
+                )
             return REVIEW, "", f"SEALED_FORCE_NEW_CONFLICTS_WITH_{normal_method}"
         return NEW_GAME, "", "SEALED_OWNER_FORCE_NEW"
 
@@ -1741,6 +1791,11 @@ def main() -> int:
         sealed_identity_decisions = identity_decisions_from_sealed_plan(
             sealed_identity_plan
         )
+        confident_collision_force_new_authority = (
+            confident_collision_force_new_authority_from_sealed_plan(
+                sealed_identity_plan
+            )
+        )
         if sealed_identity_plan is not None and sealed_verification_plan is not None:
             raise ValueError(
                 "identity decisions and post-apply sealed-plan verification context "
@@ -1986,6 +2041,10 @@ def main() -> int:
                     sealed_decision,
                     candidates,
                     canonical_by_id,
+                    confident_collision_force_new_authority.get(
+                        source.get("source_game_id", "").strip(),
+                        "",
+                    ),
                 )
                 if status == NEW_GAME:
                     game_id = f"CBBG-{next_game_num:07d}"

@@ -1275,6 +1275,22 @@ def fill_review_from_map(review_path: Path, map_path: Path) -> Counter[str]:
         row["decision"] = action
         row["resolution_basis"] = basis
 
+    selected_match_sources: dict[str, list[str]] = defaultdict(list)
+    for source_game_id, selected in selected_by_source.items():
+        if selected:
+            selected_match_sources[selected].append(source_game_id)
+    duplicate_matches = {
+        canonical_game_id: sorted(source_game_ids)
+        for canonical_game_id, source_game_ids in selected_match_sources.items()
+        if len(source_game_ids) > 1
+    }
+    if duplicate_matches:
+        raise WorkflowError(
+            "decision map selects the same canonical identity for multiple distinct "
+            "target source rows: "
+            + json.dumps(duplicate_matches, sort_keys=True)
+        )
+
     for row in rows:
         category = row.get("category", "")
         did = row.get("decision_id", "")
