@@ -503,15 +503,15 @@
   "active_lock_commit": "d0f3a1c499e1cabbe04ad5495def23cf9c7118bc",
   "active_lock_owner": "github-actions:42817289765:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "270804be1bbf134806cd4c1233b29c68be59341e",
+  "active_prepared_tree_sha": "5421e5248ae5ea46c68c6801225354a9dadf8a60",
   "active_request_id": "richmond-stage2-opponent-display-normalize-0001",
   "active_request_sha256": "549795b6508ba7579b6fdacac3098c6c351423029d8b0f502a0fd66606f12681",
   "active_school_key": "richmond",
   "active_target_branch": "data/richmond-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/richmond/richmond-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "e6cc3c43747c788a84147108208f2646924804f1992eb9e373deee56d8342b77",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1013,5 +1013,5 @@
   "lock_acquisition_request_commit": "e1da37f0864e8427e740d97f158645b1e38b1177",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/richmond/opponents.csv",
+    "schools/richmond/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/richmond/opponents.csv": "1a36a5a99b703bcaf8c4e0d1936f25108fe517b02e2864629b3b76a4ae97fa62",
+    "schools/richmond/source-games.csv": "f864bbcd2386021faf64395d92050db54ee30a4c67180b15b6fec568de7a08a2"
+  },
+  "changed_paths": [
+    "schools/richmond/opponents.csv",
+    "schools/richmond/source-games.csv"
+  ],
+  "commit_message": "Normalize richmond historical opponent display representation",
+  "expected_blocker_keys": [
+    "belmont-abbey",
+    "stockton"
+  ],
+  "expected_target_predecessor_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
+  "field_level_proof_sha256": "6178e7209f998f511dc31fa59a765e9952c4bb3b2aeb70c7ccbc7f8125183bdc",
+  "global_lock_commit": "d0f3a1c499e1cabbe04ad5495def23cf9c7118bc",
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "d2cb6ec2a84aaa081ee69724424589e4728187f7f0574778f11bfdd4c4609d44",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "270804be1bbf134806cd4c1233b29c68be59341e",
+  "prepared_parent_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
+  "prepared_tree_sha": "5421e5248ae5ea46c68c6801225354a9dadf8a60",
+  "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "repository_validation": "PASS",
+  "request_id": "richmond-stage2-opponent-display-normalize-0001",
+  "request_sha256": "549795b6508ba7579b6fdacac3098c6c351423029d8b0f502a0fd66606f12681",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_drift_after": {
+    "baseline_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "integration_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+    "school_key": "richmond",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "integration_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+    "school_key": "richmond",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "96f8ec088a7f417a3fafa784edda44caade22368b5e971e7ab3ddbc55ea2ae98",
+    "field-level-proof.json": "6178e7209f998f511dc31fa59a765e9952c4bb3b2aeb70c7ccbc7f8125183bdc",
+    "integration-freeze.json": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+    "normalization-report.json": "d2cb6ec2a84aaa081ee69724424589e4728187f7f0574778f11bfdd4c4609d44",
+    "semantic-drift-proof.json": "6d472a65b1bc9d410f694c1410273b45e19ad5b2c0293c012ee985ac6ddc23f6"
+  },
+  "source_game_normalized_name_row_count": 3,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/richmond/richmond-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "96f8ec088a7f417a3fafa784edda44caade22368b5e971e7ab3ddbc55ea2ae98",
+  "target_branch": "data/richmond-onboarding"
+}

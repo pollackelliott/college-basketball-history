@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "integration_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+    "school_key": "richmond",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+    "integration_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+    "school_key": "richmond",
+    "status": "PASS"
+  }
+}

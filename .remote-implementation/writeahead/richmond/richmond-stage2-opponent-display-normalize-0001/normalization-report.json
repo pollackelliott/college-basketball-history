@@ -1,0 +1,57 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 3,
+  "changes": [
+    {
+      "authority_names": [
+        "Belmont Abbey College"
+      ],
+      "authority_signature": "belmontabbeycollege",
+      "canonical_opponent_key": "belmont-abbey",
+      "from_names": [
+        "Belmont Abbey"
+      ],
+      "target_row_count": 2,
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "authority_names": [
+        "Stockton"
+      ],
+      "authority_signature": "stockton",
+      "canonical_opponent_key": "stockton",
+      "from_names": [
+        "Stockton University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Stockton"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "richmond",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 3,
+  "source_game_display_changes": [
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "richmond-1955-56-012",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "Belmont Abbey",
+      "normalized_opponent_key": "belmont-abbey",
+      "source_game_id": "richmond-1971-72-002",
+      "to_name": "Belmont Abbey College"
+    },
+    {
+      "from_name": "Stockton University",
+      "normalized_opponent_key": "stockton",
+      "source_game_id": "richmond-1980-81-023",
+      "to_name": "Stockton"
+    }
+  ],
+  "status": "PASS"
+}
