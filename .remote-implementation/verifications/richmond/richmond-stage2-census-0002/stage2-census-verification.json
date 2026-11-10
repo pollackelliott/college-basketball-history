@@ -1,0 +1,26 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-status.json": "014a18c98fc302d05ab66d6db22ff89aafec5b31caa0f087fabf0a42890fa832"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-status.json": "c96ca75be9e8d568866c02a7aff8c108e93fe89e41f03bfe006aa085cfb1acfa"
+  },
+  "capability_census_status": "",
+  "decision_universe_sha256": null,
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [],
+  "protected_main_sha": "44bac3ca1cf135d97dabb874dabeba39da92a33a",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "richmond-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4",
+  "target_tree_sha": "e2dc72f94782b9e813682eca0b1d2c03b8998404",
+  "tracked_stage2_mutation": "NONE"
+}
