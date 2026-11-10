@@ -1,0 +1,110 @@
+name: Temporary Richmond Stage 2 candidate census rehearsal v3
+
+on:
+  push:
+    branches:
+      - ops/richmond-stage2-candidate-census-552-v3
+
+permissions:
+  contents: read
+
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact candidate runtime
+        uses: actions/checkout@v4
+        with:
+          ref: 8ca578da493d2999dda42046a3db99105f271258
+          path: candidate
+          fetch-depth: 0
+
+      - name: Check out exact Richmond target
+        uses: actions/checkout@v4
+        with:
+          ref: 4f466ddc3d696bc1afaa521bc369c2e5c965c0a4
+          path: target
+          fetch-depth: 0
+
+      - name: Check out exact durable control authority
+        uses: actions/checkout@v4
+        with:
+          ref: d799f4718cabb0f6d0f0340d6ced267d0e911557
+          path: control
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Restore exact target branch and Integration Freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C target rev-parse HEAD)" = "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4"
+          git -C target switch -c data/richmond-onboarding
+          test "$(git -C target branch --show-current)" = "data/richmond-onboarding"
+          test "$(git -C candidate rev-parse HEAD)" = "8ca578da493d2999dda42046a3db99105f271258"
+          mkdir -p target/.onboarding/richmond
+          cp control/.remote-implementation/writeahead/richmond/richmond-stage2-current-main-refresh-0001/integration-freeze.json target/.onboarding/richmond/integration-freeze.json
+          test "$(sha256sum target/.onboarding/richmond/integration-freeze.json | awk '{print $1}')" = "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916"
+
+      - name: Run exact Richmond census with candidate runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/richmond-candidate-census
+          set +e
+          python candidate/tools/implementation_stage2.py richmond --repo target > /tmp/richmond-candidate-census/stdout.log 2> /tmp/richmond-candidate-census/stderr.log
+          rc=$?
+          set -e
+          printf '%s\n' "$rc" > /tmp/richmond-candidate-census/exit-code.txt
+          if [[ "$rc" -ne 0 && "$rc" -ne 1 ]]; then
+            cat /tmp/richmond-candidate-census/stderr.log >&2
+            exit "$rc"
+          fi
+          cp target/.onboarding/richmond/implementation-stage2-status.json /tmp/richmond-candidate-census/status.json
+          if [[ -f target/.onboarding/richmond/implementation-stage2-capability-census.json ]]; then
+            cp target/.onboarding/richmond/implementation-stage2-capability-census.json /tmp/richmond-candidate-census/capability-census.json
+          fi
+          if [[ -f target/.onboarding/richmond/plan.json ]]; then
+            cp target/.onboarding/richmond/plan.json /tmp/richmond-candidate-census/plan.json
+          fi
+
+      - name: Verify exact candidate rehearsal boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          status = json.loads(Path("/tmp/richmond-candidate-census/status.json").read_text())
+          old = (
+              "source game richmond-2000-01-009: venue name 'Charlotte Coliseum' "
+              "maps to multiple physical venue IDs (VEN-000040, VEN-000041)"
+          )
+          error = status.get("last_error", "") or ""
+          if old in error:
+              raise SystemExit("NO_PROGRESS_SAME_BLOCKER: " + error)
+          semantic = status.get("semantic_drift", {})
+          if semantic.get("status") != "PASS" or semantic.get("change_count") not in (0, None):
+              raise SystemExit("semantic drift failed: " + json.dumps(semantic, sort_keys=True))
+          print("candidate_stage2_status=" + str(status.get("status", "")))
+          print("candidate_last_error=" + error)
+          print("semantic_drift=PASS")
+          PY
+          test "$(git -C target rev-parse HEAD)" = "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4"
+          test "$(git -C target branch --show-current)" = "data/richmond-onboarding"
+          test -z "$(git -C target status --porcelain --untracked-files=no)"
+          test "$(sha256sum target/.onboarding/richmond/integration-freeze.json | awk '{print $1}')" = "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916"
+
+      - name: Upload candidate rehearsal diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: richmond-stage2-candidate-census-v3-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/richmond-candidate-census
+          if-no-files-found: ignore
+          retention-days: 14
