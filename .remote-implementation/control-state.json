@@ -503,18 +503,19 @@
     "richmond-stage2-current-main-refresh-0002",
     "richmond-stage2-census-0003",
     "richmond-stage2-current-main-refresh-0003",
-    "richmond-stage2-census-0004"
+    "richmond-stage2-census-0004",
+    "richmond-stage2-proposal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "richmond-stage2-proposal-0001",
+  "active_request_sha256": "3a3fa43b61a0475596657ae62e745a52da1ffd2f4ea902a03b9659f9d08d28e7",
+  "active_school_key": "richmond",
+  "active_target_branch": "data/richmond-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1020,8 +1021,11 @@
     "target_branch": "data/richmond-onboarding",
     "target_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42847827848",
+  "lock_acquisition_request_commit": "7ed9e03af2f27b52e3bd7ca4d49eaed78f590729",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
