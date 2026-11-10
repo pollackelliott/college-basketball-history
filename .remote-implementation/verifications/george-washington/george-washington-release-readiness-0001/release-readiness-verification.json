@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "c348608cd723b7e8322305e3826c41fc90d617dc62a4cac64c4f6c63442c096f",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "ab311dd1d0f72bc24c9cec57e98bff3c4c46f09283d2bde013ffd1e12559768a",
+  "pr_created": false,
+  "preview_request_id": "george-washington-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "readiness_proof_sha256": "4a06f03b4d08ef85976ecb8276ee29840a87e4cc2ccd881b8cdbd1dce9c2d37a",
+  "release_pr_packet_sha256": "a1cb165ee775052658125bfc3e31b429aab98c2d839368b0271c005d8e8b0bcc",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "george-washington-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "tracked_mutation": "NONE"
+}
