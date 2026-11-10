@@ -990,11 +990,11 @@
   "current_sequence": 474,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
     "operation": "PHASE0",
     "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "richmond-phase0-0001",
     "school_key": "richmond",
     "successor_manifest_path": ".remote-implementation/successors/richmond/richmond-phase0-0001/successor-manifest.json",

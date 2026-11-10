@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
+  "prepared_parent_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "prepared_tree_sha": "ff16cef673fa349c399681258f278f87901ce387",
+  "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "richmond-phase0-0001",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "target_branch": "data/richmond-onboarding",
+  "target_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143"
+}
