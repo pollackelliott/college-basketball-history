@@ -18,7 +18,7 @@ jobs:
       - name: Check out exact candidate
         uses: actions/checkout@v4
         with:
-          ref: b9c716eb0aab8650e81819bc8c0700b6813628aa
+          ref: 0b37109d8ce0336c85906ece8d19b5fef3ae2d09
           fetch-depth: 0
 
       - name: Set up Python
@@ -39,3 +39,236 @@ jobs:
 
       - name: Run full repository Python test suite
         run: python -m unittest discover -v -s tests -p 'test_*.py'
+
+
+  exact-richmond-candidate-census:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact control authority
+        uses: actions/checkout@v4
+        with:
+          ref: 810e7e63de0b34fb0b74e5f2ee83f8a9fabd8f82
+          fetch-depth: 0
+          path: control
+
+      - name: Check out exact candidate tooling
+        uses: actions/checkout@v4
+        with:
+          ref: 0b37109d8ce0336c85906ece8d19b5fef3ae2d09
+          fetch-depth: 0
+          path: candidate
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run exact Richmond candidate census proof
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          import hashlib
+          import json
+          import sys
+          import tempfile
+          from pathlib import Path
+
+          root = Path.cwd()
+          control = (root / "control").resolve()
+          candidate = (root / "candidate").resolve()
+          sys.path.insert(0, str(candidate / "tools"))
+
+          from remote_implementation_stage2_census import (
+              add_existing_onboarding_worktree,
+              run_stage2_census_tool,
+              verify_phase0_authority,
+          )
+
+          CONTROL = "810e7e63de0b34fb0b74e5f2ee83f8a9fabd8f82"
+          MAIN = "7c976d15c551df0cd0f1a8c018956a8fa33d623c"
+          TARGET = "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49"
+          FREEZE = "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916"
+          SEMANTIC = "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d"
+          OLD_DECISION_SHA = "799ca96f7ff2a2d3b72cf1b7368af4a97d5ef864ab2a9c35e2bece753e8e8f0c"
+
+          request_path = control / ".remote-implementation/checkpoints/richmond/richmond-stage2-census-0003/request.json"
+          request = json.loads(request_path.read_text(encoding="utf-8"))
+          assert request["expected_protected_main_sha"] == MAIN
+          assert request["target_sha"] == TARGET
+          assert request["integration_freeze_sha256"] == FREEZE
+          assert request["semantic_snapshot_sha256"] == SEMANTIC
+
+          authority = verify_phase0_authority(
+              request,
+              CONTROL,
+              source_repo=control,
+          )
+          freeze_bytes = authority["freeze_bytes"]
+          assert hashlib.sha256(freeze_bytes).hexdigest() == FREEZE
+
+          target_repo = add_existing_onboarding_worktree(
+              request["target_branch"],
+              TARGET,
+              "richmond",
+              source_repo=control,
+          )
+          diag = Path(tempfile.mkdtemp(prefix="richmond-candidate-census-"))
+          result = run_stage2_census_tool(
+              target_repo,
+              "richmond",
+              freeze_bytes,
+              diag,
+              tool_repo=candidate,
+          )
+
+          assert result["stage2_status"] == "CAPABILITY_CENSUS_READY", result
+          mutation = result["tracked_mutation_proof"]
+          assert mutation["tracked_stage2_mutation"] == "NONE", mutation
+          assert mutation["before_head_sha"] == TARGET == mutation["after_head_sha"]
+          assert mutation["before_tree_sha"] == mutation["after_tree_sha"]
+          assert not mutation["before_status"] and not mutation["after_status"]
+
+          freeze_path = target_repo / ".onboarding/richmond/integration-freeze.json"
+          assert hashlib.sha256(freeze_path.read_bytes()).hexdigest() == FREEZE
+
+          status = json.loads(
+              (target_repo / ".onboarding/richmond/implementation-stage2-status.json")
+              .read_text(encoding="utf-8")
+          )
+          assert status["semantic_drift"]["status"] == "PASS", status["semantic_drift"]
+          assert status["semantic_drift"]["change_count"] == 0, status["semantic_drift"]
+          assert status["integration_semantic_sha256"] == SEMANTIC
+
+          plan = json.loads(
+              (target_repo / ".onboarding/richmond/plan.json")
+              .read_text(encoding="utf-8")
+          )
+          assert plan["blockers"] == [], plan["blockers"]
+          collision_groups = plan.get("identity_collision_groups", [])
+          target_groups = [
+              group for group in collision_groups
+              if group.get("canonical_game_id") == "CBBG-0204104"
+          ]
+          assert len(target_groups) == 1, collision_groups
+          assert target_groups[0]["source_game_ids"] == [
+              "richmond-2013-14-030",
+              "richmond-2013-14-033",
+          ]
+          assert target_groups[0]["representation"] == "COUPLED_IDENTITY_REVIEW"
+
+          identities = {
+              item["source_game_id"]: item
+              for item in plan["decisions"]
+              if item.get("category") == "identity"
+              and item.get("source_game_id") in {
+                  "richmond-2013-14-030",
+                  "richmond-2013-14-033",
+              }
+          }
+          assert set(identities) == {
+              "richmond-2013-14-030",
+              "richmond-2013-14-033",
+          }
+          for item in identities.values():
+              assert item["allowed_actions"] == [
+                  "MATCH_CANONICAL:CBBG-0204104",
+                  "FORCE_NEW",
+              ], item
+              assert item["confident_collision_canonical_game_id"] == "CBBG-0204104"
+
+          conditionals = {
+              (
+                  item.get("source_game_id"),
+                  item.get("field_name"),
+              ): item
+              for item in plan["decisions"]
+              if item.get("category") == "conditional_discrepancy"
+              and item.get("canonical_game_id") == "CBBG-0204104"
+          }
+          assert ("richmond-2013-14-030", "site_type") in conditionals
+          assert ("richmond-2013-14-030", "game_type") in conditionals
+          assert ("richmond-2013-14-033", "score") in conditionals
+          for item in conditionals.values():
+              assert item["applies_if_identity_decision"] == "MATCH_CANONICAL:CBBG-0204104"
+              assert "NOT_APPLICABLE" in item["allowed_actions"]
+
+          constraints = [
+              item for item in plan.get("identity_cardinality_constraints", [])
+              if item.get("canonical_game_id") == "CBBG-0204104"
+          ]
+          assert len(constraints) == 1, constraints
+          assert constraints[0]["fixed_confident_source_game_ids"] == []
+          assert constraints[0]["required_total_target_matches"] == 1
+          assert set(constraints[0]["review_source_game_ids"]) >= {
+              "richmond-2013-14-030",
+              "richmond-2013-14-033",
+          }
+
+          # The permanent repair handles every same-family all-heuristic confident
+          # collision it detects. Any mixed durable/heuristic topology is a blocker
+          # and would have prevented CAPABILITY_CENSUS_READY above.
+          assert not any(
+              "Confident canonical identity collision requires separate durable-authority"
+              in blocker
+              for blocker in plan.get("blockers", [])
+          )
+
+          summary = status["preflight"]
+          assert summary["decision_count"] != 135
+          assert summary["decision_universe_sha256"] != OLD_DECISION_SHA
+
+          source_path = target_repo / "schools/richmond/source-games.csv"
+          with source_path.open(newline="", encoding="utf-8-sig") as handle:
+              rows = {
+                  row["source_game_id"]: row
+                  for row in csv.DictReader(handle)
+                  if row["source_game_id"] in {
+                      "richmond-2013-14-030",
+                      "richmond-2013-14-033",
+                  }
+              }
+          assert set(rows) == {
+              "richmond-2013-14-030",
+              "richmond-2013-14-033",
+          }
+          a = rows["richmond-2013-14-030"]
+          b = rows["richmond-2013-14-033"]
+          assert a["game_date"] == ""
+          assert a["team_score"] == "50" and a["opponent_score"] == "56"
+          assert a["curated_site_type"] == "SOURCE_PROGRAM_HOME"
+          assert a["curated_game_type"] == "REGULAR_SEASON"
+          assert "Mar. 6" in a["raw_text"]
+          assert b["game_date"] == "2014-03-14"
+          assert b["team_score"] == "53" and b["opponent_score"] == "71"
+          assert b["curated_site_type"] == "NEUTRAL"
+          assert b["curated_game_type"] == "CONFERENCE_TOURNAMENT"
+          assert "Mar. 14" in b["raw_text"]
+
+          capability = result["capability_census"]
+          represented = [
+              group for group in capability["topology_groups"]
+              if group.get("topology")
+              == "confident_many_to_one_canonical_identity_collision"
+          ]
+          assert represented, capability["topology_groups"]
+
+          proof = {
+              "candidate_sha": "0b37109d8ce0336c85906ece8d19b5fef3ae2d09",
+              "protected_main_sha": MAIN,
+              "target_sha": TARGET,
+              "integration_freeze_sha256": FREEZE,
+              "semantic_snapshot_sha256": SEMANTIC,
+              "stage2_status": result["stage2_status"],
+              "tracked_stage2_mutation": mutation["tracked_stage2_mutation"],
+              "semantic_drift": status["semantic_drift"],
+              "decision_count": summary["decision_count"],
+              "decision_universe_sha256": summary["decision_universe_sha256"],
+              "collision_group_count": len(collision_groups),
+              "collision_groups": collision_groups,
+              "identity_cardinality_constraint_count": len(
+                  plan.get("identity_cardinality_constraints", [])
+              ),
+          }
+          print("RICHMOND_CANDIDATE_CENSUS_PROOF=" + json.dumps(proof, sort_keys=True))
+          PY
