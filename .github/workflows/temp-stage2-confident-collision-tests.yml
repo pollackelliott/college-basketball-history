@@ -18,7 +18,7 @@ jobs:
       - name: Check out exact candidate
         uses: actions/checkout@v4
         with:
-          ref: 0b37109d8ce0336c85906ece8d19b5fef3ae2d09
+          ref: 389f202757978bbe11585898c584ef2556b1d47d
           fetch-depth: 0
 
       - name: Set up Python
@@ -54,7 +54,7 @@ jobs:
       - name: Check out exact candidate tooling
         uses: actions/checkout@v4
         with:
-          ref: 0b37109d8ce0336c85906ece8d19b5fef3ae2d09
+          ref: 389f202757978bbe11585898c584ef2556b1d47d
           fetch-depth: 0
           path: candidate
 
@@ -254,7 +254,7 @@ jobs:
           assert represented, capability["topology_groups"]
 
           proof = {
-              "candidate_sha": "0b37109d8ce0336c85906ece8d19b5fef3ae2d09",
+              "candidate_sha": "389f202757978bbe11585898c584ef2556b1d47d",
               "protected_main_sha": MAIN,
               "target_sha": TARGET,
               "integration_freeze_sha256": FREEZE,
