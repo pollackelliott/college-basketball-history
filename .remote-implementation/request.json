@@ -1,6 +1,32 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-release-readiness-0001",
+  "school_key": "george-washington",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "097858e8fdb6a64283c4c616ab37fecd3ef30bf0",
+  "previous_control_state_sha256": "ae77b47aab929efcff99d53631a4c46c13da2025155cb76a9f3ef0e06f4d28fb",
+  "expected_protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/george-washington/george-washington-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "7b6abd5390040f317b155cc7e21f1a5c5991b1ce9c9d3e6012b59d4f6079c8a1"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/george-washington/george-washington-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "cf05ffee5adbf0e8efd1130bb6e8c13fef408691c561600d802874826ac8f0f4"
+  },
   "approved_plan_hash": "4465ec76f1129590f61d7b1dd69cd198be332ac88eff865fd2dc313cad4f8167",
-  "approved_plan_sha256": "7c89b51d6dd66148f01ce940b1e71121e7a7dbf7f0e354f9ba9d12cc05214136",
+  "release_manifest_sha256": "f88586b4b7e9c15ea1349c205ff6875a78bbbf31d169103a87e1fb3e7488b825",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "george-washington-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "George Washington serialized Implementation lane",
+    "authorization": "Owner Proceed after fresh-verified sealed apply; repository-defined release-preparation phase through OWNER_GATE_2_READY only"
+  },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
@@ -11,7 +37,7 @@
     "release_gate2_approval": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -20,36 +46,7 @@
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from george-washington-stage2-gate1-seal-0001",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_id_set_sha256": "22e28ad02490b6f1afe4001e7a5b67316c98debc9e3f974cf333bb5d4303b5fd",
-  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
-  "expected_protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
-  "filled_review_sha256": "2f687f9b5b13a0b0978f27d09924ba6d6de8caedd9306678bb13701c64fbef96",
-  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_SEALED_APPLY",
-  "owner_gate_1_approval_sha256": "d3e4b65773878586adc01a561ec4029f114540de37dd17c64c03d6fcefa0a3a8",
-  "previous_control_state_commit": "bd3fc3a54660d45ebf0e65ea800bfe45863bbe6a",
-  "previous_control_state_sha256": "b2b95a21518b20001962a5baee073811945ad1065d7e27dcf242a63ce64daf8c",
-  "recommendation_map_sha256": "af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6",
-  "request_id": "george-washington-stage2-sealed-apply-0001",
-  "schema_version": 1,
-  "school_key": "george-washington",
-  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "91a624147c0ac37347cf16b4eaa0d923a1de2abc6f9b5db3b52e6bf55517d665"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/george-washington/george-washington-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "d5b075ca7a4c97b0a6c1e2baedc96544635b67760460713c418137c34bd34c94"
-  },
-  "target_branch": "data/george-washington-onboarding",
-  "target_sha": "53a12a657527931ca2e8146e27d71462fa9e7caf"
+  }
 }
