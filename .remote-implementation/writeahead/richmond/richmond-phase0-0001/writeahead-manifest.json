@@ -1,0 +1,924 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/richmond/conferences.csv",
+    "schools/richmond/notes.md",
+    "schools/richmond/opponents.csv",
+    "schools/richmond/source-games.csv",
+    "schools/richmond/source-notes.md",
+    "schools/richmond/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+    "data/reference/programs.csv": "a1caa406750a41d001a63fe02e0b305dbdada28156905cb27069a0e7084fc642",
+    "data/reference/venue-names.csv": "952cd692afc941ab2b621985a7a114f043d936b82dbb5c6e1eb082951fe2016e",
+    "data/reference/venues.csv": "88489741f64d7075498da3bd69d69ed6651ad1eec29ecde14f386f0c4a347dba",
+    "schools/richmond/conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "schools/richmond/notes.md": "5a4c39cdb3b3749cccbff2463d2c84e2f4794d0d2e6020f17d057b2066bcefae",
+    "schools/richmond/opponents.csv": "98421dcd9c1bae782a2f6961d2258ea5d66d548d4f60b30e72f718a63fe927f7",
+    "schools/richmond/source-games.csv": "29a285c9945574c277edb544e72c185c225f01114d19c35afe24a40c851f7c3a",
+    "schools/richmond/source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "schools/richmond/venues.csv": "02492f4186235a9e1c2d9ab85c2edb33fd1033dea7f2d46f9a2afd925c32fe23"
+  },
+  "changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/richmond/conferences.csv",
+    "schools/richmond/notes.md",
+    "schools/richmond/opponents.csv",
+    "schools/richmond/source-games.csv",
+    "schools/richmond/source-notes.md",
+    "schools/richmond/venues.csv"
+  ],
+  "commit_message": "Add Richmond onboarding source package",
+  "conference_mapping": [
+    {
+      "conference_key": "virginia-conference",
+      "resolution": "NEW_GLOBAL_IDENTITY"
+    }
+  ],
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "owner_approval_basis": "Richmond frozen Research already establishes Virginia Conference membership for 1923-24 through 1933-34 under conference_key virginia-conference. On 2026-11-10 the owner explicitly approved the exact tournament_label VC for that pending current-main registration. This Stage 1 reconciliation registers only that settled historical conference identity as historical; all eight frozen conference-history rows otherwise remain byte-for-field equivalent in historical meaning. This is not Owner Gate 1 authority.",
+    "registration_count": 1,
+    "registrations": [
+      {
+        "conference_key": "virginia-conference",
+        "conference_name": "Virginia Conference",
+        "notes": "Richmond frozen Research establishes the historical Virginia Conference identity for 1923-24 through 1933-34; tournament label VC explicitly owner-approved 2026-11-10.",
+        "status": "historical",
+        "tournament_label": "VC"
+      }
+    ],
+    "replacement_history": [
+      {
+        "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) lists no named conference for 1913-14 through 1922-23; 1923-24 is the first season explicitly labeled Va. Conf.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1922-1923",
+        "membership_type": "independent",
+        "notes": "Early year-by-year records contain some unlabeled subset records, but the institutional table does not identify a conference membership before 1923-24; this row preserves the named-affiliation chronology rather than converting unlabeled subsets into conference identity.",
+        "ongoing": "False",
+        "source_program_key": "richmond",
+        "start_season": "1913-1914"
+      },
+      {
+        "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) explicitly labels 1923-24 through 1933-34 as Va. Conf.",
+        "conference_key": "virginia-conference",
+        "conference_name": "Virginia Conference",
+        "end_season": "1933-1934",
+        "membership_type": "conference",
+        "notes": "Research-local historical conference key; serialized Implementation must reconcile shared conference registration on current main.",
+        "ongoing": "False",
+        "source_program_key": "richmond",
+        "start_season": "1923-1924"
+      },
+      {
+        "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) shows no conference record/label in 1934-35 or 1935-36, then explicitly states the Spiders joined the Southern Conference before 1936-37.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1935-1936",
+        "membership_type": "independent",
+        "notes": "Two-season independent interval between Virginia Conference and Southern Conference membership.",
+        "ongoing": "False",
+        "source_program_key": "richmond",
+        "start_season": "1934-1935"
+      },
+      {
+        "basis": "Richmond 2024 Offseason Record Book (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) states the Spiders joined the Southern Conference before 1936-37; year-by-year records remain explicitly Southern through 1975-76.",
+        "conference_key": "southern",
+        "conference_name": "Southern Conference",
+        "end_season": "1975-1976",
+        "membership_type": "conference",
+        "notes": "Institutional source directly establishes both entry and final Southern season.",
+        "ongoing": "False",
+        "source_program_key": "richmond",
+        "start_season": "1936-1937"
+      },
+      {
+        "basis": "Richmond 2024 Offseason Record Book year-by-year table (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) shows 1976-77, 1977-78, and 1978-79 with no conference record/label after 1975-76 Southern and before 1979-80 ECAC South.",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1978-1979",
+        "membership_type": "independent",
+        "notes": "The blank conference interval is explicit in the institutional table; not inferred from scheduling geography or opponents.",
+        "ongoing": "False",
+        "source_program_key": "richmond",
+        "start_season": "1976-1977"
+      },
+      {
+        "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) explicitly labels 1979-80 through 1981-82 ECAC South.",
+        "conference_key": "ecac-south",
+        "conference_name": "ECAC South",
+        "end_season": "1981-1982",
+        "membership_type": "conference",
+        "notes": "Research-local historical conference key; serialized Implementation must reconcile shared conference registration on current main.",
+        "ongoing": "False",
+        "source_program_key": "richmond",
+        "start_season": "1979-1980"
+      },
+      {
+        "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) explicitly labels 1982-83 through 2000-01 CAA.",
+        "conference_key": "caa",
+        "conference_name": "CAA",
+        "end_season": "2000-2001",
+        "membership_type": "conference",
+        "notes": "Richmond transitions to Atlantic 10 in 2001-02.",
+        "ongoing": "False",
+        "source_program_key": "richmond",
+        "start_season": "1982-1983"
+      },
+      {
+        "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) begins A10 in 2001-02; the University of Richmond current athletics conference-affiliations page (https://www.richmond.edu/athletics/) lists men's basketball in the Atlantic 10.",
+        "conference_key": "atlantic-10",
+        "conference_name": "Atlantic 10",
+        "end_season": "",
+        "membership_type": "conference",
+        "notes": "Ongoing through the required completed-season cutoff 2025-26.",
+        "ongoing": "True",
+        "source_program_key": "richmond",
+        "start_season": "2001-2002"
+      }
+    ],
+    "replacement_row_count": 8,
+    "spec_path": "/tmp/remote-phase0-inputs-d8ec9q5e/conference-reconciliation.json",
+    "spec_sha256": "2ce37286fcdde40cdefbb384a252aef0e9b0c3604866ae11e419e14ef91c231e"
+  },
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "02cdd156e29e4a67660485e1619f34cb2ce1dcfb",
+  "history_scope": {
+    "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "history_scope_intervals": "",
+    "history_scope_notes": "Accepted immutable Richmond Research Freeze scope is INCEPTION+. The frozen competitive ledger begins in 1913-1914, and current reusable repository scope authority confirms INCEPTION+. Preserve the exact frozen historical universe and accepted researched residuals.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1913-1914",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "INCEPTION+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "INCEPTION+",
+      "school": "Richmond"
+    }
+  },
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "notes.md": "5a4c39cdb3b3749cccbff2463d2c84e2f4794d0d2e6020f17d057b2066bcefae",
+    "opponents.csv": "98421dcd9c1bae782a2f6961d2258ea5d66d548d4f60b30e72f718a63fe927f7",
+    "source-games.csv": "29a285c9945574c277edb544e72c185c225f01114d19c35afe24a40c851f7c3a",
+    "source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "venues.csv": "02492f4186235a9e1c2d9ab85c2edb33fd1033dea7f2d46f9a2afd925c32fe23"
+  },
+  "prepared_commit_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
+  "prepared_parent_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "prepared_tree_sha": "ff16cef673fa349c399681258f278f87901ce387",
+  "program_alias_mapping": [],
+  "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "repository_validation": "PASS",
+  "request_id": "richmond-phase0-0001",
+  "request_sha256": "d4a94fdb772dc38c54f8cc944c736bde5b8992b4fc10d444148c229ec0bc8c20",
+  "research_base_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "research_checkpoint_sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "sidecars": {
+    "conference-reconciliation.json": "2ce37286fcdde40cdefbb384a252aef0e9b0c3604866ae11e419e14ef91c231e",
+    "integration-freeze.json": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+    "stage1-reconciliation.json": "ab615dcdeafbc91de00b17c4c8527347b01600ab8cd692db3eb262a736e885c8",
+    "venue-reconciliation.json": "41b8e2b4a7947f7f841ec6e3436cf45c660b96f01ad669de3a485bfd061b0d49"
+  },
+  "target_branch": "data/richmond-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Alamodome",
+      "final_venue_id": "VEN-000002",
+      "final_venue_key": "alamodome",
+      "research_venue_id": "VEN-000002",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alamodome"
+    },
+    {
+      "canonical_name": "Alico Arena",
+      "final_venue_id": "VEN-001110",
+      "final_venue_key": "alico-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "alico-arena"
+    },
+    {
+      "canonical_name": "Alumni Hall",
+      "final_venue_id": "VEN-000525",
+      "final_venue_key": "alumni-hall-navy",
+      "research_venue_id": "VEN-000525",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alumni-hall-navy"
+    },
+    {
+      "canonical_name": "Amerant Bank Arena",
+      "final_venue_id": "VEN-000009",
+      "final_venue_key": "amerant-bank-arena",
+      "research_venue_id": "VEN-000009",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amerant-bank-arena"
+    },
+    {
+      "canonical_name": "Dunkin' Donuts Center",
+      "final_venue_id": "VEN-000011",
+      "final_venue_key": "amica-mutual-pavilion",
+      "research_venue_id": "VEN-000011",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "amica-mutual-pavilion"
+    },
+    {
+      "canonical_name": "Baha Mar Convention Center",
+      "final_venue_id": "VEN-000267",
+      "final_venue_key": "baha-mar-convention-center",
+      "research_venue_id": "VEN-000267",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "baha-mar-convention-center"
+    },
+    {
+      "canonical_name": "Pepsi Center",
+      "final_venue_id": "VEN-000018",
+      "final_venue_key": "ball-arena",
+      "research_venue_id": "VEN-000018",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ball-arena"
+    },
+    {
+      "canonical_name": "Barclays Center",
+      "final_venue_id": "VEN-000020",
+      "final_venue_key": "barclays-center",
+      "research_venue_id": "VEN-000020",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "barclays-center"
+    },
+    {
+      "canonical_name": "Benedictine High School Gym",
+      "final_venue_id": "VEN-000699",
+      "final_venue_key": "benedictine-high-school-gym",
+      "research_venue_id": "VEN-000699",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "benedictine-high-school-gym"
+    },
+    {
+      "canonical_name": "Blues' Armory",
+      "final_venue_id": "VEN-001111",
+      "final_venue_key": "blues-armory-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "blues-armory-richmond"
+    },
+    {
+      "canonical_name": "Boardwalk Hall",
+      "final_venue_id": "VEN-000433",
+      "final_venue_key": "boardwalk-hall",
+      "research_venue_id": "VEN-000433",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "boardwalk-hall"
+    },
+    {
+      "canonical_name": "Bon Secours Wellness Arena",
+      "final_venue_id": "VEN-000025",
+      "final_venue_key": "bon-secours-wellness-arena",
+      "research_venue_id": "VEN-000025",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bon-secours-wellness-arena"
+    },
+    {
+      "canonical_name": "Bradley Center",
+      "final_venue_id": "VEN-000026",
+      "final_venue_key": "bradley-center",
+      "research_venue_id": "VEN-000026",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bradley-center"
+    },
+    {
+      "canonical_name": "Brendan Byrne Arena",
+      "final_venue_id": "VEN-000028",
+      "final_venue_key": "brendan-byrne-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "brendan-byrne-arena-richmond-research"
+    },
+    {
+      "canonical_name": "Cameron Indoor Stadium",
+      "final_venue_id": "VEN-000035",
+      "final_venue_key": "cameron-indoor-stadium",
+      "research_venue_id": "VEN-000035",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cameron-indoor-stadium"
+    },
+    {
+      "canonical_name": "Capital One Arena",
+      "final_venue_id": "VEN-000036",
+      "final_venue_key": "capital-one-arena",
+      "research_venue_id": "VEN-000036",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "capital-one-arena"
+    },
+    {
+      "canonical_name": "CareFirst Arena",
+      "final_venue_id": "VEN-001112",
+      "final_venue_key": "carefirst-arena-washington-dc",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "carefirst-arena-washington-dc"
+    },
+    {
+      "canonical_name": "Cassell Coliseum",
+      "final_venue_id": "VEN-000329",
+      "final_venue_key": "cassell-coliseum",
+      "research_venue_id": "VEN-000329",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cassell-coliseum"
+    },
+    {
+      "canonical_name": "Cavalier Arena",
+      "final_venue_id": "VEN-001113",
+      "final_venue_key": "cavalier-arena-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "cavalier-arena-richmond"
+    },
+    {
+      "canonical_name": "Chace Athletic Center",
+      "final_venue_id": "VEN-000919",
+      "final_venue_key": "chace-athletic-center",
+      "research_venue_id": "VEN-000919",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chace-athletic-center"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum",
+      "final_venue_id": "VEN-000040",
+      "final_venue_key": "charlotte-coliseum-1955",
+      "research_venue_id": "VEN-000040",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-coliseum-1955"
+    },
+    {
+      "canonical_name": "Charlotte Coliseum",
+      "final_venue_id": "VEN-000041",
+      "final_venue_key": "charlotte-coliseum-1988",
+      "research_venue_id": "VEN-000041",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charlotte-coliseum-1988"
+    },
+    {
+      "canonical_name": "Cole Field House",
+      "final_venue_id": "VEN-000047",
+      "final_venue_key": "cole-field-house",
+      "research_venue_id": "VEN-000047",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cole-field-house"
+    },
+    {
+      "canonical_name": "Coleman Coliseum",
+      "final_venue_id": "VEN-000048",
+      "final_venue_key": "coleman-coliseum",
+      "research_venue_id": "VEN-000048",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "coleman-coliseum"
+    },
+    {
+      "canonical_name": "DeGol Arena",
+      "final_venue_id": "VEN-000911",
+      "final_venue_key": "degol-arena",
+      "research_venue_id": "VEN-000911",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "degol-arena"
+    },
+    {
+      "canonical_name": "Patriot Center",
+      "final_venue_id": "VEN-000576",
+      "final_venue_key": "eaglebank-arena",
+      "research_venue_id": "VEN-000576",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "eaglebank-arena"
+    },
+    {
+      "canonical_name": "FedExForum",
+      "final_venue_id": "VEN-000062",
+      "final_venue_key": "fedexforum",
+      "research_venue_id": "VEN-000062",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "fedexforum"
+    },
+    {
+      "canonical_name": "Freedom Hall",
+      "final_venue_id": "VEN-000069",
+      "final_venue_key": "freedom-hall",
+      "research_venue_id": "VEN-000069",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "freedom-hall"
+    },
+    {
+      "canonical_name": "Grays' Armory",
+      "final_venue_id": "VEN-001114",
+      "final_venue_key": "grays-armory-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "grays-armory-richmond"
+    },
+    {
+      "canonical_name": "Greenville Memorial Auditorium",
+      "final_venue_id": "VEN-001046",
+      "final_venue_key": "greenville-memorial-auditorium",
+      "research_venue_id": "VEN-001046",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "greenville-memorial-auditorium"
+    },
+    {
+      "canonical_name": "Hampton Coliseum",
+      "final_venue_id": "VEN-000702",
+      "final_venue_key": "hampton-coliseum",
+      "research_venue_id": "VEN-000702",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hampton-coliseum"
+    },
+    {
+      "canonical_name": "Hertz Arena",
+      "final_venue_id": "VEN-000578",
+      "final_venue_key": "hertz-arena",
+      "research_venue_id": "VEN-000578",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hertz-arena"
+    },
+    {
+      "canonical_name": "Howitzers' Armory",
+      "final_venue_id": "VEN-001115",
+      "final_venue_key": "howitzers-armory-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "howitzers-armory-richmond"
+    },
+    {
+      "canonical_name": "HP Field House",
+      "final_venue_id": "VEN-000084",
+      "final_venue_key": "hp-field-house",
+      "research_venue_id": "VEN-000084",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hp-field-house"
+    },
+    {
+      "canonical_name": "Imperial Ballroom",
+      "final_venue_id": "VEN-001116",
+      "final_venue_key": "imperial-ballroom-atlantis-paradise-island",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "imperial-ballroom-atlantis-paradise-island"
+    },
+    {
+      "canonical_name": "Indiana Convention Center",
+      "final_venue_id": "VEN-001029",
+      "final_venue_key": "indiana-convention-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "indiana-convention-center"
+    },
+    {
+      "canonical_name": "Carrier Dome",
+      "final_venue_id": "VEN-000096",
+      "final_venue_key": "jma-wireless-dome",
+      "research_venue_id": "VEN-000096",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jma-wireless-dome"
+    },
+    {
+      "canonical_name": "JMU Convocation Center",
+      "final_venue_id": "VEN-001101",
+      "final_venue_key": "jmu-convocation-center",
+      "research_venue_id": "VEN-001101",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jmu-convocation-center"
+    },
+    {
+      "canonical_name": "Tom Gola Arena",
+      "final_venue_id": "VEN-000864",
+      "final_venue_key": "john-e-glaser-arena",
+      "research_venue_id": "VEN-000864",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "john-e-glaser-arena"
+    },
+    {
+      "canonical_name": "John Gray Gymnasium",
+      "final_venue_id": "VEN-001096",
+      "final_venue_key": "john-gray-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "john-gray-gymnasium-grand-cayman-richmond-research"
+    },
+    {
+      "canonical_name": "John Paul Jones Arena",
+      "final_venue_id": "VEN-000317",
+      "final_venue_key": "john-paul-jones-arena",
+      "research_venue_id": "VEN-000317",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "john-paul-jones-arena"
+    },
+    {
+      "canonical_name": "KeyBank Center",
+      "final_venue_id": "VEN-000103",
+      "final_venue_key": "keybank-center",
+      "research_venue_id": "VEN-000103",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keybank-center"
+    },
+    {
+      "canonical_name": "Madison Square Garden",
+      "final_venue_id": "VEN-000124",
+      "final_venue_key": "madison-square-garden-1968",
+      "research_venue_id": "VEN-000124",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "madison-square-garden-1968"
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "VEN-000542",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "McGill's Catholic Union",
+      "final_venue_id": "VEN-001117",
+      "final_venue_key": "mcgills-catholic-union-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "mcgills-catholic-union-richmond"
+    },
+    {
+      "canonical_name": "McKale Center",
+      "final_venue_id": "VEN-000127",
+      "final_venue_key": "mckale-center",
+      "research_venue_id": "VEN-000127",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mckale-center"
+    },
+    {
+      "canonical_name": "Millhiser Gymnasium",
+      "final_venue_id": "VEN-001118",
+      "final_venue_key": "millhiser-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "millhiser-gymnasium"
+    },
+    {
+      "canonical_name": "Mohegan Sun Arena",
+      "final_venue_id": "VEN-000139",
+      "final_venue_key": "mohegan-sun-arena",
+      "research_venue_id": "VEN-000139",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mohegan-sun-arena"
+    },
+    {
+      "canonical_name": "Municipal Auditorium",
+      "final_venue_id": "VEN-000143",
+      "final_venue_key": "municipal-auditorium-kc",
+      "research_venue_id": "VEN-000143",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "municipal-auditorium-kc"
+    },
+    {
+      "canonical_name": "Norfolk Scope",
+      "final_venue_id": "VEN-000634",
+      "final_venue_key": "norfolk-scope",
+      "research_venue_id": "VEN-000634",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "norfolk-scope"
+    },
+    {
+      "canonical_name": "Sears Centre",
+      "final_venue_id": "VEN-000443",
+      "final_venue_key": "now-arena",
+      "research_venue_id": "VEN-000443",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "now-arena"
+    },
+    {
+      "canonical_name": "Nutter Center",
+      "final_venue_id": "VEN-000464",
+      "final_venue_key": "nutter-center",
+      "research_venue_id": "VEN-000464",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nutter-center"
+    },
+    {
+      "canonical_name": "Ocean Center",
+      "final_venue_id": "VEN-000482",
+      "final_venue_key": "ocean-center",
+      "research_venue_id": "VEN-000482",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ocean-center"
+    },
+    {
+      "canonical_name": "O'Connell Center",
+      "final_venue_id": "VEN-000154",
+      "final_venue_key": "oconnell-center",
+      "research_venue_id": "VEN-000154",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "oconnell-center"
+    },
+    {
+      "canonical_name": "Omni Coliseum",
+      "final_venue_id": "VEN-000157",
+      "final_venue_key": "omni-coliseum",
+      "research_venue_id": "VEN-000157",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "omni-coliseum"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "VEN-000356",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Palestra",
+      "final_venue_id": "VEN-000159",
+      "final_venue_key": "palestra",
+      "research_venue_id": "VEN-000159",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "palestra"
+    },
+    {
+      "canonical_name": "PPG Paints Arena",
+      "final_venue_id": "VEN-000167",
+      "final_venue_key": "ppg-paints-arena",
+      "research_venue_id": "VEN-000167",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ppg-paints-arena"
+    },
+    {
+      "canonical_name": "Red Cross Building",
+      "final_venue_id": "VEN-001119",
+      "final_venue_key": "red-cross-building-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "red-cross-building-richmond"
+    },
+    {
+      "canonical_name": "Reynolds Coliseum",
+      "final_venue_id": "VEN-000174",
+      "final_venue_key": "reynolds-coliseum",
+      "research_venue_id": "VEN-000174",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-coliseum"
+    },
+    {
+      "canonical_name": "Richmond Arena",
+      "final_venue_id": "VEN-000666",
+      "final_venue_key": "richmond-arena",
+      "research_venue_id": "VEN-000666",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "richmond-arena"
+    },
+    {
+      "canonical_name": "Richmond Coliseum",
+      "final_venue_id": "VEN-000175",
+      "final_venue_key": "richmond-coliseum",
+      "research_venue_id": "VEN-000175",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "richmond-coliseum"
+    },
+    {
+      "canonical_name": "U.S. Bank Arena",
+      "final_venue_id": "VEN-000176",
+      "final_venue_key": "riverfront-coliseum",
+      "research_venue_id": "VEN-000176",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "riverfront-coliseum"
+    },
+    {
+      "canonical_name": "Robins Center",
+      "final_venue_id": "VEN-000324",
+      "final_venue_key": "robins-center",
+      "research_venue_id": "VEN-000324",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "robins-center"
+    },
+    {
+      "canonical_name": "Rupp Arena",
+      "final_venue_id": "VEN-000181",
+      "final_venue_key": "rupp-arena",
+      "research_venue_id": "VEN-000181",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rupp-arena"
+    },
+    {
+      "canonical_name": "Schollmaier Arena",
+      "final_venue_id": "VEN-000370",
+      "final_venue_key": "schollmaier-arena",
+      "research_venue_id": "VEN-000370",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "schollmaier-arena"
+    },
+    {
+      "canonical_name": "Siegel Center",
+      "final_venue_id": "VEN-000705",
+      "final_venue_key": "siegel-center",
+      "research_venue_id": "VEN-000705",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "siegel-center"
+    },
+    {
+      "canonical_name": "Assembly Hall",
+      "final_venue_id": "VEN-000186",
+      "final_venue_key": "simon-skjodt-assembly-hall",
+      "research_venue_id": "VEN-000186",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "simon-skjodt-assembly-hall"
+    },
+    {
+      "canonical_name": "South Padre Island Convention Center",
+      "final_venue_id": "VEN-000445",
+      "final_venue_key": "south-padre-island-convention-center",
+      "research_venue_id": "VEN-000445",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "south-padre-island-convention-center"
+    },
+    {
+      "canonical_name": "Spectrum Center",
+      "final_venue_id": "VEN-000190",
+      "final_venue_key": "spectrum-center",
+      "research_venue_id": "VEN-000190",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "spectrum-center"
+    },
+    {
+      "canonical_name": "Suncoast Credit Union Arena",
+      "final_venue_id": "VEN-000294",
+      "final_venue_key": "suncoast-credit-union-arena",
+      "research_venue_id": "VEN-000294",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "suncoast-credit-union-arena"
+    },
+    {
+      "canonical_name": "Temporary Gym",
+      "final_venue_id": "VEN-001120",
+      "final_venue_key": "temporary-gym-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "temporary-gym-richmond"
+    },
+    {
+      "canonical_name": "The Spectrum",
+      "final_venue_id": "VEN-000209",
+      "final_venue_key": "the-spectrum",
+      "research_venue_id": "VEN-000209",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-spectrum"
+    },
+    {
+      "canonical_name": "Thomas Jefferson High School",
+      "final_venue_id": "VEN-001121",
+      "final_venue_key": "thomas-jefferson-high-school-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "thomas-jefferson-high-school-richmond"
+    },
+    {
+      "canonical_name": "Thompson Gym",
+      "final_venue_id": "VEN-000328",
+      "final_venue_key": "thompson-gym",
+      "research_venue_id": "VEN-000328",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thompson-gym"
+    },
+    {
+      "canonical_name": "University Auditorium",
+      "final_venue_id": "VEN-001122",
+      "final_venue_key": "university-auditorium-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "university-auditorium-richmond"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "UNT Coliseum",
+      "final_venue_id": "VEN-000273",
+      "final_venue_key": "unt-coliseum",
+      "research_venue_id": "VEN-000273",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "unt-coliseum"
+    },
+    {
+      "canonical_name": "Valley High School",
+      "final_venue_id": "VEN-000455",
+      "final_venue_key": "valley-high-school-las-vegas",
+      "research_venue_id": "VEN-000455",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "valley-high-school-las-vegas"
+    },
+    {
+      "canonical_name": "War Memorial Gymnasium",
+      "final_venue_id": "VEN-000523",
+      "final_venue_key": "war-memorial-gymnasium-san-francisco",
+      "research_venue_id": "VEN-000523",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "war-memorial-gymnasium-san-francisco"
+    },
+    {
+      "canonical_name": "William and Mary Hall",
+      "final_venue_id": "VEN-000363",
+      "final_venue_key": "william-and-mary-hall",
+      "research_venue_id": "VEN-000363",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "william-and-mary-hall"
+    },
+    {
+      "canonical_name": "Williams Arena",
+      "final_venue_id": "VEN-000230",
+      "final_venue_key": "williams-arena",
+      "research_venue_id": "VEN-000230",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "williams-arena"
+    },
+    {
+      "canonical_name": "WVU Field House",
+      "final_venue_id": "VEN-000524",
+      "final_venue_key": "wvu-field-house-morgantown",
+      "research_venue_id": "VEN-000524",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wvu-field-house-morgantown"
+    },
+    {
+      "canonical_name": "XL Center",
+      "final_venue_id": "VEN-000257",
+      "final_venue_key": "xl-center",
+      "research_venue_id": "VEN-000257",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "xl-center"
+    },
+    {
+      "canonical_name": "YWCA",
+      "final_venue_id": "VEN-001123",
+      "final_venue_key": "ywca-richmond",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "ywca-richmond"
+    }
+  ],
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "28b622b33d5e399e64ed38bc269bca77eea890928dae22d276895586f6c1805d",
+    "mappings": [
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "East Rutherford",
+        "expected_global_state": "NJ",
+        "expected_local_city": "East Rutherford",
+        "expected_local_name": "Brendan Byrne Arena",
+        "expected_local_state": "NJ",
+        "global_venue_id": "VEN-000028",
+        "global_venue_key": "brendan-byrne-arena",
+        "local_venue_key": "brendan-byrne-arena-richmond-research",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Richmond Stage 1 current-main reconciliation: frozen Research resolved Brendan Byrne Arena, East Rutherford, NJ as the physical game site; current protected main contains the exact same physical identity as VEN-000028 / brendan-byrne-arena. Reuse is representation-only and does not change frozen historical meaning."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "George Town",
+        "expected_global_state": "Grand Cayman",
+        "expected_local_city": "George Town",
+        "expected_local_name": "John Gray Gymnasium",
+        "expected_local_state": "Grand Cayman",
+        "global_venue_id": "VEN-001096",
+        "global_venue_key": "john-gray-gymnasium",
+        "local_venue_key": "john-gray-gymnasium-grand-cayman-richmond-research",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Richmond Stage 1 current-main reconciliation: frozen Research resolved John Gray Gymnasium, George Town, Grand Cayman as the physical game site; current protected main contains the exact same physical identity as VEN-001096 / john-gray-gymnasium. Reuse is representation-only and does not change frozen historical meaning."
+      }
+    ],
+    "owner_approval_basis": "Owner authorized Richmond Stage 1 reconciliation. The two venue mappings are deterministic current-main representation reuse of the same frozen physical identities and require no new historical ruling; the owner’s explicit 2026-11-10 approval in this lane is limited to the Virginia Conference tournament label VC. No new venue identity is created by these mappings, and this is not Owner Gate 1 authority.",
+    "research_zip_sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
+    "schema_version": 1,
+    "spec_path": "/tmp/remote-phase0-inputs-d8ec9q5e/venue-reconciliation.json",
+    "spec_sha256": "41b8e2b4a7947f7f841ec6e3436cf45c660b96f01ad669de3a485bfd061b0d49"
+  }
+}
