@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - validation/stage2-confident-collision-tests
+  pull_request:
+    branches:
+      - tooling/stage2-confident-canonical-collision
 
 permissions:
   contents: read
