@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "richmond-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "richmond",
+  "previous_control_state_commit": "d345db288591a8f55f0c2fa3ed7cfc6bfa8cf1bb",
+  "previous_control_state_sha256": "cb0a96bace82bac061a6886bbae63d53f11dc58dbe05889760784097f141a726",
+  "expected_protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "research_checkpoint": {
+    "sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
+    "research_base_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "201be577bab07830e3873cbc95e56638583c1c51",
+      "path_prefix": ".remote-implementation/transports/richmond/richmond-stage1-0001-final/piece-",
+      "part_count": 4
+    }
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/richmond-stage1-0002/venue-reconciliation.json",
+    "sha256": "41b8e2b4a7947f7f841ec6e3436cf45c660b96f01ad669de3a485bfd061b0d49"
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/inputs/richmond-stage1-0002/conference-reconciliation.json",
+    "sha256": "2ce37286fcdde40cdefbb384a252aef0e9b0c3604866ae11e419e14ef91c231e"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Richmond serialized Implementation lane — owner-approved Stage 1 reconciliation continuation",
+    "authorization": "Owner explicitly approved the exact Virginia Conference tournament label VC on 2026-11-10 and directed Proceed. The frozen Richmond Research package remains immutable and authoritative. This request performs one fresh read-only Stage 1 inventory against exact protected main 2aedc8051d2031c0ad4ccb87f60226839da0c48a using deterministic current-main reuse of Brendan Byrne Arena as VEN-000028 / brendan-byrne-arena and John Gray Gymnasium as VEN-001096 / john-gray-gymnasium, plus the settled Virginia Conference registration proposal virginia-conference / Virginia Conference / tournament_label VC / historical. It does not reopen Research, alter frozen historical meaning, begin Phase 0 or Stage 2, authorize dedicated shared/global maintenance, create Owner Gate 1 or Gate 2 authority, release, merge, Production, recovery, protected-main mutation, or another school."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}

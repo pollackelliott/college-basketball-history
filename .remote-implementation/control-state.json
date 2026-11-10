@@ -496,15 +496,15 @@
     "richmond-stage1-0001",
     "richmond-stage1-0002"
   ],
-  "active_expected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "richmond-stage1-0002",
-  "active_request_sha256": "59b80cc339c7b0a2ef47f6b2d3544fed13c236745c7f2f1d86888df328fd015c",
-  "active_school_key": "richmond",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -982,25 +982,23 @@
     "george-washington-release-preview-verify-0001",
     "george-washington-release-gate2-approval-0001",
     "george-washington-release-production-proof-0001",
-    "richmond-stage1-0001"
+    "richmond-stage1-0001",
+    "richmond-stage1-0002"
   ],
-  "current_sequence": 472,
+  "current_sequence": 473,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/richmond/richmond-stage1-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "9b78e813e37d6b85bc30ae9f72f2a385bb113faf9eb21ce38c177bee4009d656",
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/richmond/richmond-stage1-0002/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "893d75992655f7a57ef7fddc793d4858517d17cdb5a54be78361d75d6fe52f5d",
     "operation": "STAGE1_INVENTORY",
     "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
-    "request_id": "richmond-stage1-0001",
+    "request_id": "richmond-stage1-0002",
     "school_key": "richmond",
-    "stage1_reconciliation_sha256": "364ce38228d8f1455061c988ae747d688a9a93f0bc9f9ca8038cd38eec96448c",
-    "stage1_status": "BLOCKED"
+    "stage1_reconciliation_sha256": "04d14bb9d3ef9f9c3673a87fe32b52fe16cb3a90fbc9aec363e4d464b9c9d282",
+    "stage1_status": "PASS"
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "42814986725",
-  "lock_acquisition_request_commit": "0acee5488ed8459e4bff9e633be7c4e993cd9a5d",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }
