@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "merge_parent_onboarding": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "merge_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "aee6f7c0ac57f5a043d16b782d79926ac1e43bd4e29f1e97c144142a7514a278",
+  "owner_gate_2_verification_sha256": "27d1d91a0ded2c0dfeb9a85df59f9a1aef6e7194548b2fc846f88647dca1476f",
+  "pr_head_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "pr_number": 549,
+  "production_deployment_id": 7673137829,
+  "production_json_checked_count": 94,
+  "production_proof": true,
+  "production_proof_sha256": "755d50d7582a380b620c4c63248240a32daa4b3e0bf7dbc8c7c22e354e0808cc",
+  "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "request_id": "george-washington-release-production-proof-0001",
+  "request_sha256": "af94cc2106ff2771dfad4632dd95b22ec02536e5177958af0c0aecc6935a34aa",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "status": "PRODUCTION_PROOF_PASS"
+}
