@@ -1004,11 +1004,11 @@
   "current_sequence": 481,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "richmond-stage2-current-main-refresh-0003",
     "school_key": "richmond",
     "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",

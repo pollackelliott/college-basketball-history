@@ -1,0 +1,46 @@
+{
+  "changed_file_sha256": {
+    "tests/test_stage2_confident_canonical_collision.py": "4bc2147a04a92cf7e56e0233aa75c122a58a6754d384a87fe9aee534c9b828ab",
+    "tools/implementation_stage2.py": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+    "tools/ingest_school.py": "8ae0dd683a5c8682eb2ad64bf3a14d120d7f29268024c4896f41e5c7ca2e7c28",
+    "tools/onboarding_hardening.py": "03c1a519928d0e58539fa05a7303bfc994ddeb89fcff55618650f3044edd66b2",
+    "tools/onboarding_plan.py": "671182d5209f0c81f991836e3ade2fe50241d5111a9cf29bd190bf54e1447895"
+  },
+  "changed_paths": [
+    "tests/test_stage2_confident_canonical_collision.py",
+    "tools/implementation_stage2.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_hardening.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "7c976d15c551df0cd0f1a8c018956a8fa33d623c",
+  "observed_live_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "package_member_sha256": {
+    "conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "notes.md": "5a4c39cdb3b3749cccbff2463d2c84e2f4794d0d2e6020f17d057b2066bcefae",
+    "opponents.csv": "1a36a5a99b703bcaf8c4e0d1936f25108fe517b02e2864629b3b76a4ae97fa62",
+    "source-games.csv": "f864bbcd2386021faf64395d92050db54ee30a4c67180b15b6fec568de7a08a2",
+    "source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "venues.csv": "02492f4186235a9e1c2d9ab85c2edb33fd1033dea7f2d46f9a2afd925c32fe23"
+  },
+  "prepared_parents": [
+    "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49",
+    "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b"
+  ],
+  "protected_main_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "richmond-stage2-current-main-refresh-0003",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "target_branch": "data/richmond-onboarding",
+  "target_predecessor_sha": "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49",
+  "target_sha": "2350ec65bbc6bf066dff29c356b6855e1d9fc980",
+  "target_tree_sha": "946184c4c11cf8d8fbb5113818708226e7233ff8",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
