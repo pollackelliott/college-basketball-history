@@ -1,0 +1,71 @@
+{
+  "actual_published_target_sha": "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49",
+  "changed_file_sha256": {
+    "tests/test_stage2_venue_name_period_planner.py": "1e929a729546d6f3f73486bbd9abe2488fedeb1930e5a61bae338491a119892d",
+    "tools/ingest_school.py": "002dcf3c8c347f760f73a70d13adaa0872e46e0132e01290b1f9ee684aeb58f4",
+    "tools/onboarding_plan.py": "c2ad32a9ae324c9c1f409e5e960fbea30ec09ec451bdea461eee3e0872e2def5"
+  },
+  "changed_paths": [
+    "tests/test_stage2_venue_name_period_planner.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "tests/test_stage2_venue_name_period_planner.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "44bac3ca1cf135d97dabb874dabeba39da92a33a",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "notes.md": "5a4c39cdb3b3749cccbff2463d2c84e2f4794d0d2e6020f17d057b2066bcefae",
+    "opponents.csv": "1a36a5a99b703bcaf8c4e0d1936f25108fe517b02e2864629b3b76a4ae97fa62",
+    "source-games.csv": "f864bbcd2386021faf64395d92050db54ee30a4c67180b15b6fec568de7a08a2",
+    "source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "venues.csv": "02492f4186235a9e1c2d9ab85c2edb33fd1033dea7f2d46f9a2afd925c32fe23"
+  },
+  "predecessor_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "prepared_commit_sha": "aa14a09fc0f8e83f1dcde8255874d9eb8cac4a49",
+  "prepared_main_parent_sha": "7c976d15c551df0cd0f1a8c018956a8fa33d623c",
+  "prepared_parent_sha": "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4",
+  "prepared_parents": [
+    "4f466ddc3d696bc1afaa521bc369c2e5c965c0a4",
+    "7c976d15c551df0cd0f1a8c018956a8fa33d623c"
+  ],
+  "prepared_tree_sha": "ee41c82abdf6d911d0e0e19e34e151196f17888c",
+  "prior_refresh_successor_path": ".remote-implementation/successors/richmond/richmond-stage2-current-main-refresh-0001/successor-manifest.json",
+  "prior_refresh_successor_sha256": "13b8eed2adaab37e773b0c696211e6c4bb1ceaf1df1094bce5a017e37e3c5385",
+  "protected_main_sha": "7c976d15c551df0cd0f1a8c018956a8fa33d623c",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "9ce140d8c31538f79b64dc242341539b40d6c2bed27a1cd9c82f698015b2a091",
+  "repository_validation": "PASS",
+  "request_id": "richmond-stage2-current-main-refresh-0002",
+  "request_sha256": "d93164540138f547d2f8ea709eb6a2a2bda2060e0e384cd6af351165223681bb",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "target_branch": "data/richmond-onboarding",
+  "target_changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/richmond/conferences.csv",
+    "schools/richmond/notes.md",
+    "schools/richmond/opponents.csv",
+    "schools/richmond/source-games.csv",
+    "schools/richmond/source-notes.md",
+    "schools/richmond/venues.csv"
+  ],
+  "writeahead_commit": "94642c4be0906813423aa73903509e230bf11eda",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/richmond/richmond-stage2-current-main-refresh-0002/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "14b9f001ba3b893bc883366e7e09d9759c884f71822ae9240747bfb96cf0a3c2"
+}
