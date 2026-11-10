@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "richmond-stage1-0001",
+  "request_id": "richmond-stage1-0002",
   "operation": "STAGE1_INVENTORY",
   "school_key": "richmond",
-  "previous_control_state_commit": "201be577bab07830e3873cbc95e56638583c1c51",
-  "previous_control_state_sha256": "a90c101c4ae4a7e6380293c438fdb6e0eeeba38c92b76576e0e68a336106ed1e",
+  "previous_control_state_commit": "d345db288591a8f55f0c2fa3ed7cfc6bfa8cf1bb",
+  "previous_control_state_sha256": "cb0a96bace82bac061a6886bbae63d53f11dc58dbe05889760784097f141a726",
   "expected_protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
   "research_checkpoint": {
     "sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
@@ -17,11 +17,17 @@
       "part_count": 4
     }
   },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/richmond-stage1-0002/venue-reconciliation.json",
+    "sha256": "41b8e2b4a7947f7f841ec6e3436cf45c660b96f01ad669de3a485bfd061b0d49"
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/inputs/richmond-stage1-0002/conference-reconciliation.json",
+    "sha256": "2ce37286fcdde40cdefbb384a252aef0e9b0c3604866ae11e419e14ef91c231e"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Richmond serialized Implementation lane — explicit owner-directed same-conversation Research-to-Implementation transition",
-    "authorization": "Owner explicitly authorized Richmond Research Stage 7, then—only after RESEARCH_FROZEN: YES and a free global serialized lock—terminated the Richmond Research lane, transitioned this same conversation into the one active serialized Richmond Implementation lane, and authorized the complete bounded Implementation Stage 1 intake/inventory. Immutable Research Freeze SHA-256 0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af, research_base_sha c2ef77958add14d6474ce0991cf4031665dff7ce, accepted INCEPTION+ scope with baseline CONFIRMED, Stage 5 owner disposition APPROVED_NO_FLAGS, and PRE-FREEZE SELF-CHALLENGE PASS remain frozen authority. This request authorizes only complete read-only current-main Stage 1 reconciliation inventory against exact protected main 2aedc8051d2031c0ad4ccb87f60226839da0c48a. It does not reopen Research or authorize Integration Freeze mutation, Phase 0, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, recovery, protected-main mutation, or another school."
+    "origin": "ChatGPT Richmond serialized Implementation lane — owner-approved Stage 1 reconciliation continuation",
+    "authorization": "Owner explicitly approved the exact Virginia Conference tournament label VC on 2026-11-10 and directed Proceed. The frozen Richmond Research package remains immutable and authoritative. This request performs one fresh read-only Stage 1 inventory against exact protected main 2aedc8051d2031c0ad4ccb87f60226839da0c48a using deterministic current-main reuse of Brendan Byrne Arena as VEN-000028 / brendan-byrne-arena and John Gray Gymnasium as VEN-001096 / john-gray-gymnasium, plus the settled Virginia Conference registration proposal virginia-conference / Virginia Conference / tournament_label VC / historical. It does not reopen Research, alter frozen historical meaning, begin Phase 0 or Stage 2, authorize dedicated shared/global maintenance, create Owner Gate 1 or Gate 2 authority, release, merge, Production, recovery, protected-main mutation, or another school."
   },
   "authority": {
     "phase0": false,

@@ -1,0 +1,31 @@
+{
+  "expected_research_zip_sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
+  "expected_venues_sha256": "28b622b33d5e399e64ed38bc269bca77eea890928dae22d276895586f6c1805d",
+  "mappings": [
+    {
+      "expected_global_city": "East Rutherford",
+      "expected_global_state": "NJ",
+      "expected_local_city": "East Rutherford",
+      "expected_local_name": "Brendan Byrne Arena",
+      "expected_local_state": "NJ",
+      "global_venue_id": "VEN-000028",
+      "global_venue_key": "brendan-byrne-arena",
+      "local_venue_key": "brendan-byrne-arena-richmond-research",
+      "resolution_basis": "Richmond Stage 1 current-main reconciliation: frozen Research resolved Brendan Byrne Arena, East Rutherford, NJ as the physical game site; current protected main contains the exact same physical identity as VEN-000028 / brendan-byrne-arena. Reuse is representation-only and does not change frozen historical meaning."
+    },
+    {
+      "expected_global_city": "George Town",
+      "expected_global_state": "Grand Cayman",
+      "expected_local_city": "George Town",
+      "expected_local_name": "John Gray Gymnasium",
+      "expected_local_state": "Grand Cayman",
+      "global_venue_id": "VEN-001096",
+      "global_venue_key": "john-gray-gymnasium",
+      "local_venue_key": "john-gray-gymnasium-grand-cayman-richmond-research",
+      "resolution_basis": "Richmond Stage 1 current-main reconciliation: frozen Research resolved John Gray Gymnasium, George Town, Grand Cayman as the physical game site; current protected main contains the exact same physical identity as VEN-001096 / john-gray-gymnasium. Reuse is representation-only and does not change frozen historical meaning."
+    }
+  ],
+  "owner_approval_basis": "Owner authorized Richmond Stage 1 reconciliation. The two venue mappings are deterministic current-main representation reuse of the same frozen physical identities and require no new historical ruling; the owner’s explicit 2026-11-10 approval in this lane is limited to the Virginia Conference tournament label VC. No new venue identity is created by these mappings, and this is not Owner Gate 1 authority.",
+  "schema_version": 1,
+  "school_key": "richmond"
+}

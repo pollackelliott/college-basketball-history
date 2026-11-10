@@ -1,0 +1,105 @@
+{
+  "expected_conferences_sha256": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+  "owner_approval_basis": "Richmond frozen Research already establishes Virginia Conference membership for 1923-24 through 1933-34 under conference_key virginia-conference. On 2026-11-10 the owner explicitly approved the exact tournament_label VC for that pending current-main registration. This Stage 1 reconciliation registers only that settled historical conference identity as historical; all eight frozen conference-history rows otherwise remain byte-for-field equivalent in historical meaning. This is not Owner Gate 1 authority.",
+  "registrations": [
+    {
+      "conference_key": "virginia-conference",
+      "conference_name": "Virginia Conference",
+      "tournament_label": "VC",
+      "status": "historical",
+      "notes": "Richmond frozen Research establishes the historical Virginia Conference identity for 1923-24 through 1933-34; tournament label VC explicitly owner-approved 2026-11-10."
+    }
+  ],
+  "replacement_history": [
+    {
+      "source_program_key": "richmond",
+      "start_season": "1913-1914",
+      "end_season": "1922-1923",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "False",
+      "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) lists no named conference for 1913-14 through 1922-23; 1923-24 is the first season explicitly labeled Va. Conf.",
+      "notes": "Early year-by-year records contain some unlabeled subset records, but the institutional table does not identify a conference membership before 1923-24; this row preserves the named-affiliation chronology rather than converting unlabeled subsets into conference identity."
+    },
+    {
+      "source_program_key": "richmond",
+      "start_season": "1923-1924",
+      "end_season": "1933-1934",
+      "conference_key": "virginia-conference",
+      "conference_name": "Virginia Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) explicitly labels 1923-24 through 1933-34 as Va. Conf.",
+      "notes": "Research-local historical conference key; serialized Implementation must reconcile shared conference registration on current main."
+    },
+    {
+      "source_program_key": "richmond",
+      "start_season": "1934-1935",
+      "end_season": "1935-1936",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "False",
+      "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) shows no conference record/label in 1934-35 or 1935-36, then explicitly states the Spiders joined the Southern Conference before 1936-37.",
+      "notes": "Two-season independent interval between Virginia Conference and Southern Conference membership."
+    },
+    {
+      "source_program_key": "richmond",
+      "start_season": "1936-1937",
+      "end_season": "1975-1976",
+      "conference_key": "southern",
+      "conference_name": "Southern Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Richmond 2024 Offseason Record Book (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) states the Spiders joined the Southern Conference before 1936-37; year-by-year records remain explicitly Southern through 1975-76.",
+      "notes": "Institutional source directly establishes both entry and final Southern season."
+    },
+    {
+      "source_program_key": "richmond",
+      "start_season": "1976-1977",
+      "end_season": "1978-1979",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "False",
+      "basis": "Richmond 2024 Offseason Record Book year-by-year table (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) shows 1976-77, 1977-78, and 1978-79 with no conference record/label after 1975-76 Southern and before 1979-80 ECAC South.",
+      "notes": "The blank conference interval is explicit in the institutional table; not inferred from scheduling geography or opponents."
+    },
+    {
+      "source_program_key": "richmond",
+      "start_season": "1979-1980",
+      "end_season": "1981-1982",
+      "conference_key": "ecac-south",
+      "conference_name": "ECAC South",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) explicitly labels 1979-80 through 1981-82 ECAC South.",
+      "notes": "Research-local historical conference key; serialized Implementation must reconcile shared conference registration on current main."
+    },
+    {
+      "source_program_key": "richmond",
+      "start_season": "1982-1983",
+      "end_season": "2000-2001",
+      "conference_key": "caa",
+      "conference_name": "CAA",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) explicitly labels 1982-83 through 2000-01 CAA.",
+      "notes": "Richmond transitions to Atlantic 10 in 2001-02."
+    },
+    {
+      "source_program_key": "richmond",
+      "start_season": "2001-2002",
+      "end_season": "",
+      "conference_key": "atlantic-10",
+      "conference_name": "Atlantic 10",
+      "membership_type": "conference",
+      "ongoing": "True",
+      "basis": "Richmond 2024 Offseason Record Book year-by-year results (https://richmondspiders.com/documents/download/2024/3/27/2024_Offseason_Record_Book.pdf) begins A10 in 2001-02; the University of Richmond current athletics conference-affiliations page (https://www.richmond.edu/athletics/) lists men's basketball in the Atlantic 10.",
+      "notes": "Ongoing through the required completed-season cutoff 2025-26."
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "richmond"
+}
