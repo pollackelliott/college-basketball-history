@@ -144,7 +144,7 @@ class ValidateDataVenueNamePeriodIntegrationTests(unittest.TestCase):
                         "opened": "1900",
                         "closed": "",
                         "date_precision": "YEAR",
-                        "status": "RESEARCHED_SPLIT",
+                        "identity_status": "RESEARCHED_SPLIT",
                         "source_basis": "Integrated validate_data fixture",
                         "notes": "Two physical identities intentionally share one exact textual name.",
                     }
