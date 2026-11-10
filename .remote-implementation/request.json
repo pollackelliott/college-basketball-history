@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "richmond-stage1-0002",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "richmond-phase0-0001",
+  "operation": "PHASE0",
   "school_key": "richmond",
-  "previous_control_state_commit": "d345db288591a8f55f0c2fa3ed7cfc6bfa8cf1bb",
-  "previous_control_state_sha256": "cb0a96bace82bac061a6886bbae63d53f11dc58dbe05889760784097f141a726",
+  "previous_control_state_commit": "cd6ab9c6014997811313138013e6ebbfcbe02d6f",
+  "previous_control_state_sha256": "dd633938612abf30c6d8688394777f630480a9b32fdb4b41620542901611b244",
   "expected_protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "target_branch": "data/richmond-onboarding",
   "research_checkpoint": {
     "sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
     "research_base_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
@@ -17,6 +18,10 @@
       "part_count": 4
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/richmond/richmond-stage1-0002/checkpoint-manifest.json",
+    "sha256": "893d75992655f7a57ef7fddc793d4858517d17cdb5a54be78361d75d6fe52f5d"
+  },
   "venue_reconciliation": {
     "path": ".remote-implementation/inputs/richmond-stage1-0002/venue-reconciliation.json",
     "sha256": "41b8e2b4a7947f7f841ec6e3436cf45c660b96f01ad669de3a485bfd061b0d49"
@@ -25,12 +30,18 @@
     "path": ".remote-implementation/inputs/richmond-stage1-0002/conference-reconciliation.json",
     "sha256": "2ce37286fcdde40cdefbb384a252aef0e9b0c3604866ae11e419e14ef91c231e"
   },
+  "history_scope": {
+    "start_season": "1913-1914",
+    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+    "intervals": "",
+    "notes": "Accepted immutable Richmond Research Freeze scope is INCEPTION+. The frozen competitive ledger begins in 1913-1914, and current reusable repository scope authority confirms INCEPTION+. Preserve the exact frozen historical universe and accepted researched residuals."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Richmond serialized Implementation lane — owner-approved Stage 1 reconciliation continuation",
-    "authorization": "Owner explicitly approved the exact Virginia Conference tournament label VC on 2026-11-10 and directed Proceed. The frozen Richmond Research package remains immutable and authoritative. This request performs one fresh read-only Stage 1 inventory against exact protected main 2aedc8051d2031c0ad4ccb87f60226839da0c48a using deterministic current-main reuse of Brendan Byrne Arena as VEN-000028 / brendan-byrne-arena and John Gray Gymnasium as VEN-001096 / john-gray-gymnasium, plus the settled Virginia Conference registration proposal virginia-conference / Virginia Conference / tournament_label VC / historical. It does not reopen Research, alter frozen historical meaning, begin Phase 0 or Stage 2, authorize dedicated shared/global maintenance, create Owner Gate 1 or Gate 2 authority, release, merge, Production, recovery, protected-main mutation, or another school."
+    "origin": "ChatGPT Richmond serialized Implementation lane — owner-authorized Phase 0 after durable Stage 1 PASS",
+    "authorization": "Owner explicitly replied Proceed after Richmond Stage 1 reconciliation completed PASS. Durable Stage 1 request richmond-stage1-0002 is bound to protected main 2aedc8051d2031c0ad4ccb87f60226839da0c48a, immutable Research Freeze SHA-256 0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af and research_base_sha c2ef77958add14d6474ce0991cf4031665dff7ce, with zero blockers, zero ambiguous stops and zero dedicated-maintenance requirements. Its exact reconciliation reuses Brendan Byrne Arena as VEN-000028 / brendan-byrne-arena, reuses John Gray Gymnasium as VEN-001096 / john-gray-gymnasium, and carries the owner-approved Virginia Conference registration virginia-conference / Virginia Conference / tournament_label VC / historical. The accepted history scope is INCEPTION+, current reusable scope authority confirms INCEPTION+, and the frozen competitive ledger begins 1913-1914. This request authorizes exactly one guarded PHASE0 transaction: fresh current-main Stage 1 verification, ordinary target-school reference registration and package installation, Integration Freeze creation, create-once publication to data/richmond-onboarding under the global mutation lock/write-ahead/CAS contract, and required fresh independent Phase 0 verification. It does not reopen Research, authorize dedicated shared/global maintenance outside ordinary Phase 0 integration surfaces, Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, recovery, or direct protected-main mutation."
   },
   "authority": {
-    "phase0": false,
+    "phase0": true,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
