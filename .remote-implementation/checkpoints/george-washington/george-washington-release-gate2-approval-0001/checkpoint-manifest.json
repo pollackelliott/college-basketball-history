@@ -1,0 +1,30 @@
+{
+  "approval_proof_sha256": "dbd5cc7ce1bb1db4b1de309f984e00dccf3b31dcf30c1d34c91e5dea242418ba",
+  "approved_plan_hash": "4465ec76f1129590f61d7b1dd69cd198be332ac88eff865fd2dc313cad4f8167",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "george-washington-release-production-proof-0001"
+  },
+  "gate2_merge_packet_path": ".remote-implementation/checkpoints/george-washington/george-washington-release-gate2-approval-0001/gate2-merge-packet.json",
+  "gate2_merge_packet_sha256": "5773cfc6f6c39c144a9dd38425fe136599c2d744703fe3114d8a964c7559cd06",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "pr_number": 549,
+  "preview_checkpoint_sha256": "2d9473353fed2d3b9f1b388d0caa635ea27f9bf4d81802720e8fe1f3adae83ac",
+  "preview_deployment_id": 7672451052,
+  "preview_url": "https://college-basketball-history-2s5cpqx22-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "dc59311c8fac692bcb1d4b3002db5c9e575f5932a31e7f7b9da6e9db2797c8f9",
+  "production_proof": false,
+  "production_request_id": "george-washington-release-production-proof-0001",
+  "protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "release_manifest_sha256": "f88586b4b7e9c15ea1349c205ff6875a78bbbf31d169103a87e1fb3e7488b825",
+  "request_id": "george-washington-release-gate2-approval-0001",
+  "request_sha256": "2410cf69735da41319f1c3de0c2f263f53d017e244b5655884928b2e3639ca6b",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "47e778e3f075390527adbbdd26e04ffc69a48493"
+}

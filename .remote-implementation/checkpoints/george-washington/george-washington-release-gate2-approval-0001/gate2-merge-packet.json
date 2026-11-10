@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "george-washington-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "pr_number": 549,
+  "preview_deployment_id": 7672451052,
+  "preview_url": "https://college-basketball-history-2s5cpqx22-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "george-washington-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "target_branch": "data/george-washington-onboarding"
+}
