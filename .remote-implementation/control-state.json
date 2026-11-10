@@ -512,7 +512,7 @@
   "active_request_sha256": "d93164540138f547d2f8ea709eb6a2a2bda2060e0e384cd6af351165223681bb",
   "active_school_key": "richmond",
   "active_target_branch": "data/richmond-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "94642c4be0906813423aa73903509e230bf11eda",
   "active_writeahead_path": ".remote-implementation/writeahead/richmond/richmond-stage2-current-main-refresh-0002/writeahead-manifest.json",
   "active_writeahead_sha256": "14b9f001ba3b893bc883366e7e09d9759c884f71822ae9240747bfb96cf0a3c2",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
