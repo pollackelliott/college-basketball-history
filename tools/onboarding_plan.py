@@ -3106,7 +3106,8 @@ def build_plan(
         if row.get("program_key", "").strip()
     }
     global_venues_by_id, global_venues_by_key, _ = load_global_venue_reference(repo)
-    venue_metadata = ingest_school.load_venue_metadata_map(
+    venue_metadata = ingest_school.load_venue_metadata_map_with_name_periods(
+        repo,
         repo / "schools" / school_key / "venues.csv",
         global_venues_by_id,
     )
@@ -5702,9 +5703,12 @@ def _retire_invalid_registry_fallbacks_after_site_reconciliation(
                 venue_metadata_by_program[program] = {}
             else:
                 try:
-                    venue_metadata_by_program[program] = ingest_school.load_venue_metadata_map(
-                        venue_path,
-                        global_venues_by_id,
+                    venue_metadata_by_program[program] = (
+                        ingest_school.load_venue_metadata_map_with_name_periods(
+                            repo,
+                            venue_path,
+                            global_venues_by_id,
+                        )
                     )
                 except ValueError:
                     venue_metadata_by_program[program] = {}
