@@ -1,0 +1,69 @@
+name: Richmond Stage 2 systemic pre-Gate-1 assessment
+
+on:
+  push:
+    branches:
+      - validation/richmond-stage2-systemic-assessment
+
+permissions:
+  contents: read
+
+jobs:
+  assess:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out assessment instrumentation
+        uses: actions/checkout@v4
+        with:
+          ref: validation/richmond-stage2-systemic-assessment
+          path: assessment
+          fetch-depth: 0
+
+      - name: Check out exact candidate runtime
+        uses: actions/checkout@v4
+        with:
+          ref: 9d8822325f2d049cbf23a828e7346a835e6a0a7b
+          path: candidate
+          fetch-depth: 0
+
+      - name: Check out exact Richmond target
+        uses: actions/checkout@v4
+        with:
+          ref: 2350ec65bbc6bf066dff29c356b6855e1d9fc980
+          path: target
+          fetch-depth: 0
+
+      - name: Check out durable control authority
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate exact inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C candidate rev-parse HEAD)" = "9d8822325f2d049cbf23a828e7346a835e6a0a7b"
+          test "$(git -C target rev-parse HEAD)" = "2350ec65bbc6bf066dff29c356b6855e1d9fc980"
+          git -C control cat-file -e "41fb2d14ef35eb751a59012002ddd911c9e9f97e^{commit}"
+
+      - name: Run bounded systemic assessment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python assessment/.github/assessment/richmond_stage2_systemic_assessment.py             --candidate candidate             --target target             --control control             --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e             --output /tmp/richmond-stage2-systemic-assessment
+
+      - name: Upload assessment artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: richmond-stage2-systemic-assessment-${{ github.run_id }}
+          path: /tmp/richmond-stage2-systemic-assessment
+          if-no-files-found: error
+          retention-days: 30
