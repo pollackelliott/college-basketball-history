@@ -1,0 +1,36 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-status.json": "6b84f1f81c6b5a3e53c28e176d20b968c1ee854f2c33b62c58d1fab38d4b56f5"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-status.json": "619f139bcfa010933f9504fcaa428d8e54e1d41761e8e60ddf4b08d56c0fcff2"
+  },
+  "capability_census_status": null,
+  "changed_paths": [
+    "schools/richmond/opponents.csv",
+    "schools/richmond/source-games.csv"
+  ],
+  "decision_universe_sha256": null,
+  "expected_blocker_keys": [
+    "belmont-abbey",
+    "stockton"
+  ],
+  "field_level_proof_sha256": "6178e7209f998f511dc31fa59a765e9952c4bb3b2aeb70c7ccbc7f8125183bdc",
+  "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "d2cb6ec2a84aaa081ee69724424589e4728187f7f0574778f11bfdd4c4609d44",
+  "normalized_equivalence_artifacts": [],
+  "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "richmond-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/richmond-onboarding",
+  "target_predecessor_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
+  "target_sha": "270804be1bbf134806cd4c1233b29c68be59341e",
+  "target_tree_sha": "5421e5248ae5ea46c68c6801225354a9dadf8a60",
+  "tracked_stage2_mutation": "NONE"
+}
