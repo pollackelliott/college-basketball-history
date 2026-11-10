@@ -125,7 +125,7 @@ def source_b(*, review_only=False):
 def hybrid_canonical():
     # Canonical orientation is example-opponent (team A) vs example-school (team B).
     return {
-        "canonical_game_id": "CBBG-TEST0001",
+        "canonical_game_id": "CBBG-0000001",
         "season_label": "2013-2014",
         "game_date": "2014-03-14",
         "date_precision": "EXACT",
@@ -317,11 +317,11 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
         for row in identities.values():
             self.assertEqual(
                 row["allowed_actions"],
-                ["MATCH_CANONICAL:CBBG-TEST0001", "FORCE_NEW"],
+                ["MATCH_CANONICAL:CBBG-0000001", "FORCE_NEW"],
             )
             self.assertEqual(
                 row["confident_collision_canonical_game_id"],
-                "CBBG-TEST0001",
+                "CBBG-0000001",
             )
             self.assertIn("hybridized", row["relevant_evidence"])
 
@@ -355,11 +355,12 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
         double_map = out / "double.json"
         double_map.write_text(json.dumps({
             "identity": {
-                "EXAMPLE-2013-14-030": "MATCH_CANONICAL:CBBG-TEST0001",
-                "EXAMPLE-2013-14-033": "MATCH_CANONICAL:CBBG-TEST0001",
+                "EXAMPLE-2013-14-030": "MATCH_CANONICAL:CBBG-0000001",
+                "EXAMPLE-2013-14-033": "MATCH_CANONICAL:CBBG-0000001",
             },
             "defaults": {
                 "selected_conditional": "KEEP_CANONICAL",
+                "discrepancy": "KEEP_CANONICAL",
                 "basis": "fixture",
                 "identity_basis": "fixture",
             },
@@ -375,6 +376,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
             },
             "defaults": {
                 "selected_conditional": "KEEP_CANONICAL",
+                "discrepancy": "KEEP_CANONICAL",
                 "basis": "fixture",
                 "identity_basis": "fixture",
             },
@@ -396,7 +398,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
                     else "EXAMPLE-2013-14-030"
                 )
                 identities = {
-                    retain_source: "MATCH_CANONICAL:CBBG-TEST0001",
+                    retain_source: "MATCH_CANONICAL:CBBG-0000001",
                     force_source: "FORCE_NEW",
                 }
                 canonical_patch = {}
@@ -421,7 +423,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
                         approved
                     )
                 )
-                self.assertEqual(authority[force_source], "CBBG-TEST0001")
+                self.assertEqual(authority[force_source], "CBBG-0000001")
 
                 sources = {
                     row["source_game_id"]: row
@@ -433,7 +435,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
                     sources[force_source],
                     "FORCE_NEW",
                     candidates,
-                    {"CBBG-TEST0001": canonical},
+                    {"CBBG-0000001": canonical},
                     authority[force_source],
                 )
                 self.assertEqual(status, ingest_school.NEW_GAME)
@@ -448,7 +450,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
                     sources[force_source],
                     "FORCE_NEW",
                     candidates,
-                    {"CBBG-TEST0001": canonical},
+                    {"CBBG-0000001": canonical},
                 )
                 self.assertEqual(status, ingest_school.REVIEW)
                 self.assertIn("CONFLICTS_WITH", method)
@@ -472,7 +474,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
 
                 new_game = ingest_school.build_new_canonical(
                     sources[force_source],
-                    "CBBG-NEW0001",
+                    "CBBG-9999999",
                     {},
                     {},
                 )
@@ -506,7 +508,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
         self.assertEqual(set(identities), {"EXAMPLE-2013-14-033"})
         self.assertEqual(
             identities["EXAMPLE-2013-14-033"]["allowed_actions"],
-            ["MATCH_CANONICAL:CBBG-TEST0001", "FORCE_NEW"],
+            ["MATCH_CANONICAL:CBBG-0000001", "FORCE_NEW"],
         )
         constraints = plan["identity_cardinality_constraints"]
         self.assertEqual(len(constraints), 1)
@@ -526,10 +528,11 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
         map_path = out / "map.json"
         map_path.write_text(json.dumps({
             "identity": {
-                "EXAMPLE-2013-14-033": "MATCH_CANONICAL:CBBG-TEST0001",
+                "EXAMPLE-2013-14-033": "MATCH_CANONICAL:CBBG-0000001",
             },
             "defaults": {
                 "selected_conditional": "KEEP_CANONICAL",
+                "discrepancy": "KEEP_CANONICAL",
                 "basis": "fixture",
                 "identity_basis": "fixture",
             },
@@ -544,7 +547,7 @@ class ConfidentCanonicalCollisionTests(unittest.TestCase):
         assertions = []
         for source in (source_a(), source_b()):
             assertions.append({
-                "canonical_game_id": "CBBG-TEST0001",
+                "canonical_game_id": "CBBG-0000001",
                 "source_program_key": "example-school",
                 "source_game_id": source["source_game_id"],
                 "season_label": source["season_label"],
