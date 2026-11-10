@@ -1,55 +1,38 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-washington-release-gate2-approval-0001",
+  "request_id": "george-washington-release-production-proof-0001",
   "school_key": "george-washington",
-  "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "d832b1d385889e9325e0d71b2a8500e8e878b272",
-  "previous_control_state_sha256": "d6ce0ca73529eb77f7c0e9084d116de255882e71d7583798166e4b0c1889ae08",
-  "expected_protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "11a88226c45b664b9eec7684bacf5879840a89a5",
+  "previous_control_state_sha256": "0c082baae254f3ee18ef949281f0e9c9a6e54925b6b5e6c2c6016632584ca7cb",
+  "expected_protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
   "target_branch": "data/george-washington-onboarding",
   "target_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
   "pr_number": 549,
-  "approved_plan_hash": "4465ec76f1129590f61d7b1dd69cd198be332ac88eff865fd2dc313cad4f8167",
-  "release_manifest_sha256": "f88586b4b7e9c15ea1349c205ff6875a78bbbf31d169103a87e1fb3e7488b825",
-  "preview_deployment_id": 7672451052,
-  "preview_url": "https://college-basketball-history-2s5cpqx22-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-washington/george-washington-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "2d9473353fed2d3b9f1b388d0caa635ea27f9bf4d81802720e8fe1f3adae83ac"
+  "merge_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-washington/george-washington-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "aee6f7c0ac57f5a043d16b782d79926ac1e43bd4e29f1e97c144142a7514a278"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/george-washington/george-washington-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "dc59311c8fac692bcb1d4b3002db5c9e575f5932a31e7f7b9da6e9db2797c8f9"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly approved the exact authenticated Preview for PR #549 by stating “Approved. Proceed”.",
-    "preview_checkpoint_sha256": "2d9473353fed2d3b9f1b388d0caa635ea27f9bf4d81802720e8fe1f3adae83ac",
-    "preview_verification_sha256": "dc59311c8fac692bcb1d4b3002db5c9e575f5932a31e7f7b9da6e9db2797c8f9",
-    "pr_number": 549,
-    "pr_head_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
-    "preview_deployment_id": 7672451052,
-    "preview_url": "https://college-basketball-history-2s5cpqx22-elliott-pollacks-projects.vercel.app"
-  },
-  "final_release_continuation": {
-    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
-    "production_request_id": "george-washington-release-production-proof-0001"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/george-washington/george-washington-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "27d1d91a0ded2c0dfeb9a85df59f9a1aef6e7194548b2fc846f88647dca1476f"
   },
   "creation_provenance": {
     "origin": "George Washington serialized Implementation lane",
-    "authorization": "Explicit Owner Gate 2 approval of exact PR #549 Preview: “Approved. Proceed”; authority persists through exact packet-bound merge and Production proof only."
+    "authorization": "Packet-bound exact two-parent merge executed after fresh Owner Gate 2 approval; read-only Production proof for merge 2aedc8051d2031c0ad4ccb87f60226839da0c48a."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": true,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": true,
+    "release_gate2_approval": false,
     "release_preview_verify": false,
-    "release_production_proof": false,
+    "release_production_proof": true,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
