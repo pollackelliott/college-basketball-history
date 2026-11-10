@@ -16,7 +16,7 @@ jobs:
       - name: Check out exact candidate
         uses: actions/checkout@v4
         with:
-          ref: 27bb0e584d9f1ff95d49f8f8ab7f8841bf57876d
+          ref: dd79b47fd0d49d7d10feadc62be2fd6fc06ef5ae
           path: candidate
           fetch-depth: 0
 
@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C candidate rev-parse HEAD)" = "27bb0e584d9f1ff95d49f8f8ab7f8841bf57876d"
+          test "$(git -C candidate rev-parse HEAD)" = "dd79b47fd0d49d7d10feadc62be2fd6fc06ef5ae"
           test "$(git -C target rev-parse HEAD)" = "2350ec65bbc6bf066dff29c356b6855e1d9fc980"
           git -C control cat-file -e "41fb2d14ef35eb751a59012002ddd911c9e9f97e^{commit}"
 
@@ -101,7 +101,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha 27bb0e584d9f1ff95d49f8f8ab7f8841bf57876d             --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e             --proposal-checkpoint-path .remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/checkpoint-manifest.json             --diag /tmp/venue-name-period-family-closeout
+          python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha dd79b47fd0d49d7d10feadc62be2fd6fc06ef5ae             --control-commit 41fb2d14ef35eb751a59012002ddd911c9e9f97e             --proposal-checkpoint-path .remote-implementation/checkpoints/richmond/richmond-stage2-proposal-0001/checkpoint-manifest.json             --diag /tmp/venue-name-period-family-closeout
 
       - name: Require Richmond resolution to Owner Gate 1 readiness
         shell: bash
