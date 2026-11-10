@@ -487,18 +487,19 @@
     "george-washington-stage2-proposal-0003",
     "george-washington-stage2-gate1-fill-0001",
     "george-washington-stage2-preseal-rehearsal-0001",
-    "george-washington-stage2-gate1-seal-0001"
+    "george-washington-stage2-gate1-seal-0001",
+    "george-washington-stage2-sealed-apply-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:42746270562:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-washington-stage2-sealed-apply-0001",
+  "active_request_sha256": "60f90d7b2f83bc55dce087bc78783e17fa3acdd852b81055e3f0906d889e12a6",
+  "active_school_key": "george-washington",
+  "active_target_branch": "data/george-washington-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -999,8 +1000,11 @@
     "target_branch": "data/george-washington-onboarding",
     "target_sha": "53a12a657527931ca2e8146e27d71462fa9e7caf"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42746270562",
+  "lock_acquisition_request_commit": "8c3d9a02b1212d92bee23a5adbe2667a9915d50f",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
