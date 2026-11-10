@@ -174,6 +174,33 @@ def _capability_census(
                 "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
             }
         )
+    collision_groups = list(plan.get("identity_collision_groups", []))
+    if collision_groups:
+        topology_groups.append(
+            {
+                "topology": "confident_many_to_one_canonical_identity_collision",
+                "count": len(collision_groups),
+                "source_row_count": sum(
+                    len(group.get("source_game_ids", []))
+                    for group in collision_groups
+                ),
+                "classification": "REPRESENTED_BY_COUPLED_IDENTITY_REVIEW",
+                "groups": collision_groups,
+            }
+        )
+    cardinality_constraints = list(
+        plan.get("identity_cardinality_constraints", [])
+    )
+    if cardinality_constraints:
+        topology_groups.append(
+            {
+                "topology": "target_canonical_identity_cardinality_constraints",
+                "count": len(cardinality_constraints),
+                "classification": "PERMANENT_MAP_VALIDATION",
+                "constraints": cardinality_constraints,
+            }
+        )
+
     if preexisting_partial_site_ids:
         topology_groups.append({
             "topology": "preexisting_partial_canonical_site_on_touched_game",
@@ -320,6 +347,13 @@ def _plan_summary(plan: dict[str, Any]) -> dict[str, Any]:
         "new_canonical_games": summary.get("new_canonical_games", 0),
         "discrepancies_to_add": summary.get("discrepancies_to_add", 0),
         "conditional_discrepancies": summary.get("conditional_discrepancies", 0),
+        "confident_collision_groups": summary.get("confident_collision_groups", 0),
+        "confident_collision_source_rows": summary.get(
+            "confident_collision_source_rows", 0
+        ),
+        "identity_cardinality_constraints": summary.get(
+            "identity_cardinality_constraints", 0
+        ),
     }
 
 

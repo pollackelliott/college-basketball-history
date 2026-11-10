@@ -1368,6 +1368,328 @@ def _identity_candidates(
     return ids, dates, "; ".join(evidence)
 
 
+
+def _durable_duplicate_identity_authority(method: str) -> bool:
+    """Return whether a confident target identity is already explicit durable authority."""
+    method = (method or "").strip()
+    return (
+        method == "EXISTING_SOURCE_ASSERTION"
+        or method.startswith("CURATED_MATCH_SOURCE_ASSERTION:")
+    )
+
+
+def _represent_confident_identity_collisions(
+    *,
+    school_key: str,
+    decisions: list[dict[str, Any]],
+    sources_by_id: dict[str, dict[str, str]],
+    confident_matches_by_canonical: dict[str, list[dict[str, str]]],
+    canonical_by_id: dict[str, dict[str, str]],
+    assertions_by_game: dict[str, list[dict[str, str]]],
+    planned_target_canonical_ids: set[str],
+    candidate_identity_source_ids_by_canonical: dict[str, set[str]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
+    """Turn unsafe many-to-one CONFIDENT target matches into coupled identity review.
+
+    Existing durable target-assertion / curated assertion-link authority is preserved
+    as explicit duplicate-source authority. Mixed durable/heuristic confident
+    collisions fail closed as a distinct correction topology rather than guessing.
+    """
+
+    collision_groups: list[dict[str, Any]] = []
+    blockers: list[dict[str, Any]] = []
+    converted_discrepancies = 0
+
+    for canonical_game_id, raw_members in sorted(confident_matches_by_canonical.items()):
+        members_by_source = {
+            str(member.get("source_game_id", "")).strip(): member
+            for member in raw_members
+            if str(member.get("source_game_id", "")).strip()
+        }
+        members = [members_by_source[key] for key in sorted(members_by_source)]
+        if len(members) <= 1:
+            continue
+
+        durable = [
+            member
+            for member in members
+            if _durable_duplicate_identity_authority(member.get("method", ""))
+        ]
+        if len(durable) == len(members):
+            # Multiple durable source assertions may intentionally describe one real
+            # game. Do not manufacture duplicate Gate-1 identity decisions.
+            continue
+        if durable:
+            blockers.append(
+                {
+                    "canonical_game_id": canonical_game_id,
+                    "source_game_ids": sorted(members_by_source),
+                    "reason": (
+                        "CONFIDENT_CANONICAL_COLLISION_INTERSECTS_DURABLE_IDENTITY_AUTHORITY"
+                    ),
+                }
+            )
+            continue
+
+        canonical = canonical_by_id.get(canonical_game_id)
+        if canonical is None:
+            blockers.append(
+                {
+                    "canonical_game_id": canonical_game_id,
+                    "source_game_ids": sorted(members_by_source),
+                    "reason": "CONFIDENT_CANONICAL_COLLISION_CANONICAL_MISSING",
+                }
+            )
+            continue
+
+        source_ids = sorted(members_by_source)
+        source_summaries = []
+        for source_id in source_ids:
+            source = sources_by_id[source_id]
+            source_summaries.append(
+                (
+                    f"{source_id}: date={source.get('game_date') or '[unknown]'}, "
+                    f"score={source.get('team_score','')}-{source.get('opponent_score','')}, "
+                    f"site={source.get('curated_site_type','') or '[unknown]'}, "
+                    f"type={source.get('curated_game_type','') or '[unknown]'}"
+                )
+            )
+
+        candidate_ids, candidate_dates, evidence = _identity_candidates(
+            [canonical],
+            assertions_by_game,
+        )
+        match_action = f"MATCH_CANONICAL:{canonical_game_id}"
+        collision_evidence = (
+            "Unsafe confident many-to-one target identity collision. Distinct target "
+            f"source rows independently matched {canonical_game_id}: "
+            + " | ".join(source_summaries)
+            + ". Existing canonical fields may be hybridized across these rows; "
+            "identity must be chosen before field reconciliation. "
+            + (evidence or "")
+        ).strip()
+
+        # The existing canonical is no longer a safely planned target assertion until
+        # Gate 1 chooses exactly one target row to retain it.
+        planned_target_canonical_ids.discard(canonical_game_id)
+
+        for source_id in source_ids:
+            source = sources_by_id[source_id]
+            candidate_identity_source_ids_by_canonical[canonical_game_id].add(source_id)
+            decisions.append(
+                {
+                    "decision_id": _decision_id("IDENTITY", source_id),
+                    "category": "identity",
+                    "source_game_id": source_id,
+                    "season_label": source.get("season_label", "").strip(),
+                    **_date_fields(source.get("game_date", ""), candidate_dates),
+                    "matchup": (
+                        f"{school_key} vs "
+                        f"{source.get('normalized_opponent_key','').strip()}"
+                    ),
+                    "field_name": "game_identity",
+                    "source_value": (
+                        f"date={source.get('game_date') or '[unknown]'}; "
+                        f"score={source.get('team_score','')}-"
+                        f"{source.get('opponent_score','')}"
+                    ),
+                    "canonical_value": candidate_ids,
+                    "relevant_evidence": collision_evidence,
+                    "recommended_action": "REVIEW_REQUIRED",
+                    "allowed_actions": [match_action, "FORCE_NEW"],
+                    "decision": "PENDING",
+                    "resolution_basis": "",
+                    "canonical_patch_json": "{}",
+                    "source_patch_json": "{}",
+                    "source_identity_expected": {
+                        "season_label": source.get("season_label", "").strip(),
+                        "game_date": source.get("game_date", "").strip(),
+                        "normalized_opponent_key": source.get(
+                            "normalized_opponent_key", ""
+                        ).strip(),
+                        "normalized_opponent_name": source.get(
+                            "normalized_opponent_name", ""
+                        ).strip(),
+                    },
+                    "cross_season_source_patch_by_action": {},
+                    "cross_opponent_source_patch_by_action": {},
+                    "confident_collision_canonical_game_id": canonical_game_id,
+                    "confident_collision_group_source_game_ids": source_ids,
+                    "notes": (
+                        "Generated by the generic confident-collision fail-closed path. "
+                        "Exactly one coupled target identity may retain the existing "
+                        "canonical game; the other distinct row(s) must split. If this "
+                        "row retains the canonical identity, conditional discrepancies "
+                        "and their canonical_patch_json authority may repair hybrid "
+                        "canonical fields supported by the source evidence. Do not invent "
+                        "a blank/unknown source value merely to eliminate a hybrid field."
+                    ),
+                }
+            )
+
+        # Definite discrepancies against the previously assumed confident match are
+        # now conditional on retaining that canonical identity.
+        for item in decisions:
+            source_id = str(item.get("source_game_id", "")).strip()
+            if (
+                source_id not in members_by_source
+                or item.get("category") != "discrepancy"
+                or str(item.get("canonical_game_id", "")).strip()
+                != canonical_game_id
+            ):
+                continue
+            field_name = str(item.get("field_name", "")).strip()
+            item["decision_id"] = _decision_id(
+                "CONDITIONAL-DISCREPANCY",
+                source_id,
+                canonical_game_id,
+                field_name,
+            )
+            item["category"] = "conditional_discrepancy"
+            item["applies_if_identity_decision"] = match_action
+            item["allowed_actions"] = sorted(
+                DISCREPANCY_ACTIONS | {"NOT_APPLICABLE"}
+            )
+            item["notes"] = (
+                "Applies only if this source row is selected to retain the "
+                f"{canonical_game_id} identity. FORCE_NEW seals this old-canonical "
+                "comparison NOT_APPLICABLE."
+            )
+            converted_discrepancies += 1
+
+        collision_groups.append(
+            {
+                "canonical_game_id": canonical_game_id,
+                "source_game_ids": source_ids,
+                "required_existing_canonical_matches": 1,
+                "representation": "COUPLED_IDENTITY_REVIEW",
+            }
+        )
+
+    return collision_groups, blockers, converted_discrepancies
+
+
+def _identity_cardinality_constraints(
+    *,
+    confident_matches_by_canonical: dict[str, list[dict[str, str]]],
+    candidate_identity_source_ids_by_canonical: dict[str, set[str]],
+    collision_groups: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Bind recommendation-map choices to one target match per existing canonical."""
+
+    collision_ids = {
+        str(group.get("canonical_game_id", "")).strip()
+        for group in collision_groups
+    }
+    constraints: list[dict[str, Any]] = []
+
+    for group in collision_groups:
+        canonical_game_id = str(group["canonical_game_id"])
+        review_source_ids = sorted(
+            candidate_identity_source_ids_by_canonical.get(
+                canonical_game_id, set()
+            )
+        )
+        constraints.append(
+            {
+                "canonical_game_id": canonical_game_id,
+                "fixed_confident_source_game_ids": [],
+                "review_source_game_ids": review_source_ids,
+                "required_total_target_matches": 1,
+                "reason": "CONFIDENT_CANONICAL_COLLISION",
+            }
+        )
+
+    for canonical_game_id, candidate_source_ids in sorted(
+        candidate_identity_source_ids_by_canonical.items()
+    ):
+        if canonical_game_id in collision_ids or not candidate_source_ids:
+            continue
+        confident_members = [
+            member
+            for member in confident_matches_by_canonical.get(canonical_game_id, [])
+            if not _durable_duplicate_identity_authority(member.get("method", ""))
+        ]
+        if len(confident_members) != 1:
+            continue
+        fixed_source_id = str(
+            confident_members[0].get("source_game_id", "")
+        ).strip()
+        if not fixed_source_id:
+            continue
+        constraints.append(
+            {
+                "canonical_game_id": canonical_game_id,
+                "fixed_confident_source_game_ids": [fixed_source_id],
+                "review_source_game_ids": sorted(candidate_source_ids),
+                "required_total_target_matches": 1,
+                "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+            }
+        )
+
+    return constraints
+
+
+def _validate_identity_cardinality(
+    plan: dict[str, Any],
+    identity_choices: dict[str, str],
+) -> None:
+    """Fail closed if one recommendation map attaches distinct target rows twice."""
+
+    selected_by_canonical: dict[str, list[str]] = defaultdict(list)
+    for source_game_id, action in identity_choices.items():
+        if action.startswith("MATCH_CANONICAL:"):
+            selected_by_canonical[action.split(":", 1)[1]].append(source_game_id)
+    duplicated = {
+        canonical_game_id: sorted(source_ids)
+        for canonical_game_id, source_ids in selected_by_canonical.items()
+        if len(source_ids) > 1
+    }
+    if duplicated:
+        raise WorkflowError(
+            "identity cardinality violation: multiple target source rows selected "
+            "the same canonical identity: "
+            + json.dumps(duplicated, sort_keys=True)
+        )
+
+    for constraint in plan.get("identity_cardinality_constraints", []):
+        canonical_game_id = str(
+            constraint.get("canonical_game_id", "")
+        ).strip()
+        fixed = {
+            str(value).strip()
+            for value in constraint.get(
+                "fixed_confident_source_game_ids", []
+            )
+            if str(value).strip()
+        }
+        review = {
+            str(value).strip()
+            for value in constraint.get("review_source_game_ids", [])
+            if str(value).strip()
+        }
+        missing = sorted(review - set(identity_choices))
+        if missing:
+            raise WorkflowError(
+                f"{canonical_game_id}: identity cardinality review is missing "
+                f"source decisions: {missing}"
+            )
+        selected_review = {
+            source_game_id
+            for source_game_id in review
+            if identity_choices.get(source_game_id)
+            == f"MATCH_CANONICAL:{canonical_game_id}"
+        }
+        expected = int(constraint.get("required_total_target_matches", 1))
+        observed = len(fixed) + len(selected_review)
+        if observed != expected:
+            raise WorkflowError(
+                f"{canonical_game_id}: identity cardinality requires exactly "
+                f"{expected} target match(es); observed {observed}; "
+                f"fixed={sorted(fixed)} selected={sorted(selected_review)}"
+            )
+
+
 def _unique_adjacent_season_score_identity_candidate(
     source: dict[str, str],
     canonical_index: dict[tuple[str, str, str], list[dict[str, str]]],
@@ -3080,6 +3402,12 @@ def build_plan(
     # A possible identity candidate is not yet a target source assertion.
     planned_target_canonical_ids: set[str] = set()
     candidate_identity_source_ids_by_canonical: dict[str, set[str]] = defaultdict(set)
+    confident_matches_by_canonical: dict[str, list[dict[str, str]]] = defaultdict(list)
+    sources_by_id = {
+        row.get("source_game_id", "").strip(): row
+        for row in sources
+        if row.get("source_game_id", "").strip()
+    }
     identity_counts = Counter()
     predicted_conflicts = 0
     conditional_conflicts = 0
@@ -3211,6 +3539,12 @@ def build_plan(
         identity_counts[status] += 1
         if status == ingest_school.CONFIDENT and game_id:
             planned_target_canonical_ids.add(game_id)
+            confident_matches_by_canonical[game_id].append(
+                {
+                    "source_game_id": source.get("source_game_id", "").strip(),
+                    "method": method,
+                }
+            )
         elif status == ingest_school.REVIEW:
             source_id = source.get("source_game_id", "").strip()
             for candidate in identity_candidates:
@@ -3650,6 +3984,46 @@ def build_plan(
                 }
             )
 
+    (
+        identity_collision_groups,
+        identity_collision_blockers,
+        converted_collision_discrepancies,
+    ) = _represent_confident_identity_collisions(
+        school_key=school_key,
+        decisions=decisions,
+        sources_by_id=sources_by_id,
+        confident_matches_by_canonical=confident_matches_by_canonical,
+        canonical_by_id=canonical_by_id,
+        assertions_by_game=assertions_by_game,
+        planned_target_canonical_ids=planned_target_canonical_ids,
+        candidate_identity_source_ids_by_canonical=(
+            candidate_identity_source_ids_by_canonical
+        ),
+    )
+    if identity_collision_blockers:
+        blockers.extend(
+            "Confident canonical identity collision requires separate durable-authority "
+            "reconciliation: " + json.dumps(blocker, sort_keys=True)
+            for blocker in identity_collision_blockers
+        )
+    converted_collision_source_count = sum(
+        len(group.get("source_game_ids", []))
+        for group in identity_collision_groups
+    )
+    if converted_collision_source_count:
+        identity_counts[ingest_school.CONFIDENT] -= converted_collision_source_count
+        identity_counts[ingest_school.REVIEW] += converted_collision_source_count
+        predicted_conflicts -= converted_collision_discrepancies
+        conditional_conflicts += converted_collision_discrepancies
+
+    identity_cardinality_constraints = _identity_cardinality_constraints(
+        confident_matches_by_canonical=confident_matches_by_canonical,
+        candidate_identity_source_ids_by_canonical=(
+            candidate_identity_source_ids_by_canonical
+        ),
+        collision_groups=identity_collision_groups,
+    )
+
     correction_identity_decisions, post_identity_canonical = (
         _post_publication_identity_review_decisions(
             repo, school_key, sources, canonical_by_id,
@@ -4019,6 +4393,9 @@ def build_plan(
         "existing_game_matches": identity_counts[ingest_school.CONFIDENT],
         "new_canonical_games": identity_counts[ingest_school.NEW_GAME],
         "identity_review_required": identity_counts[ingest_school.REVIEW],
+        "confident_collision_groups": len(identity_collision_groups),
+        "confident_collision_source_rows": converted_collision_source_count,
+        "identity_cardinality_constraints": len(identity_cardinality_constraints),
         "assertions_to_add": sum(
             (school_key, row.get("source_game_id", "")) not in existing_pairs
             for row in sources
@@ -4104,6 +4481,8 @@ def build_plan(
         "warnings": warnings,
         "summary": summary,
         "decisions": decisions,
+        "identity_collision_groups": identity_collision_groups,
+        "identity_cardinality_constraints": identity_cardinality_constraints,
     }
     if not blockers:
         site_gap_provenance = _discover_reciprocal_only_site_gap_provenance(
@@ -4612,6 +4991,8 @@ def approve_plan(
                 f"{item['decision_id']}: unsupported decision {decision!r}"
             )
         identity_choices[item["source_game_id"]] = decision
+
+    _validate_identity_cardinality(plan, identity_choices)
 
     sealed_items: list[dict[str, Any]] = []
     for item in plan.get("decisions", []):
