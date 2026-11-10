@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "3738701d72680f81902f85d9ef679eab41b2d8d3",
+  "merge_parent_onboarding": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "merge_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "df04fb8090f286d1ec247a4a1419451e2c5813c009d7b305154cacb965df0550",
+  "owner_gate_2_verification_sha256": "17142d82eff0bdf61c29beba7b4e0fd47331e7b433e88e008fd0b51d7280402f",
+  "pr_head_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "pr_number": 560,
+  "production_deployment_id": 7696685208,
+  "production_json_checked_count": 81,
+  "production_proof": true,
+  "production_proof_sha256": "022e3d8c063660f6887d9f47cc348fd257f1e8ec0553092df7aef8294f6b0c72",
+  "protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "request_id": "richmond-release-production-proof-0001",
+  "request_sha256": "1b47537648aae3680ef63aff6a78a22aff2facdbec96f3fb98764be429472c01",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "status": "PRODUCTION_PROOF_PASS"
+}
