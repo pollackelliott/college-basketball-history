@@ -1,6 +1,7 @@
 """Stage 2 planner regressions for reused venue-name period authority."""
 
 import csv
+import re
 import sys
 import tempfile
 import unittest
@@ -87,7 +88,7 @@ def name_row(venue_id, name, valid_from, valid_to, name_type="PROJECT_DISPLAY"):
     return {
         "venue_id": venue_id,
         "venue_name": name,
-        "normalized_name": ingest_school.re.sub(r"[^a-z0-9]+", "", name.casefold()),
+        "normalized_name": re.sub(r"[^a-z0-9]+", "", name.casefold()),
         "name_type": name_type,
         "valid_from": valid_from,
         "valid_to": valid_to,
@@ -315,6 +316,29 @@ class Stage2VenueNamePeriodPlannerTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "available date/season evidence"):
             ingest_school.resolve_venue_metadata(self.source(venue_name="Shared Alias"), metadata)
+
+    def test_frozen_split_authority_precedes_name_period_inference(self):
+        repo, _ = self.make_repo()
+        globals_by_id, _, _ = onboarding_plan.load_global_venue_reference(repo)
+        metadata = ingest_school.load_venue_metadata_map_with_name_periods(
+            repo,
+            repo / "schools/example-school/venues.csv",
+            globals_by_id,
+        )
+        source = self.source()
+        ingest_school.bind_frozen_venue_split_authority(
+            metadata,
+            {
+                source["source_game_id"]: {
+                    "venue_id": "VEN-OLD",
+                    "venue_key": "shared-arena-old",
+                    "curated_venue_name": "Shared Arena",
+                }
+            },
+        )
+        resolved = ingest_school.resolve_venue_metadata(source, metadata)
+        self.assertEqual(resolved["venue_id"], "VEN-OLD")
+        self.assertEqual(resolved["venue_key"], "shared-arena-old")
 
     def test_registry_fallback_support_uses_same_name_period_semantics(self):
         repo, _ = self.make_repo()
