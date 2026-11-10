@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-washington-stage2-gate1-fill-0001",
+  "school_key": "george-washington",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "5887289a0b7be870fdbc161e2fd4061bfb52bcaa",
+  "previous_control_state_sha256": "1479d3fec692b0225b45cb4f0d4a6d6c8c4121129e55c4702c4fddebefbac370",
+  "expected_protected_main_sha": "9cc7ee4a67af72a0720b5bef393b32c8df9b03b2",
+  "target_branch": "data/george-washington-onboarding",
+  "target_sha": "53a12a657527931ca2e8146e27d71462fa9e7caf",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-washington/george-washington-stage2-proposal-0003/checkpoint-manifest.json",
+    "sha256": "5398d5fe244412d4cd264a41fa361ae46d5b290c9103487ad2664d3b694ab1f2"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/george-washington/george-washington-stage2-proposal-0003/stage2-proposal-rehearsal-verification.json",
+    "sha256": "8ba2df51454d6d781ba2c28ecca40371d66053ba1d573787d1d0a5e3ef859e0a"
+  },
+  "integration_freeze_sha256": "6d3bf2eef6ee66b570d61a029f68744b633d6542e7e0919e8c21bbce056e5845",
+  "semantic_snapshot_sha256": "e70cfe73818703da99a0ead15ad83b55a2d39166bd0deb9c6f4cf9972c98633e",
+  "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+  "recommendation_map_sha256": "af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6",
+  "approved_plan_hash_preview": "c9d89f0ccdcc00ada62a434b00965c14613e4ea06520a01ad2222c7cd8f46412",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly stated 'Approved. Proceed' immediately after the George Washington serialized Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY packet for george-washington-stage2-proposal-0003: 329 decisions, decision-universe SHA-256 d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2, recommendation-map SHA-256 af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6, and approved-plan preview c9d89f0ccdcc00ada62a434b00965c14613e4ea06520a01ad2222c7cd8f46412. The presented packet included 55 canonical identity matches plus two FORCE_NEW cross-season Georgetown rows, 55 USE_SOURCE recommendations including 54 affirmative frozen H/A/N classifications and the 1975 Pittsburgh conference-tournament classification, three canonical Washington/DC locality patches plus two conditional Washington/DC locality patches without venue invention, 11 deliberately unresolved historical HOME site rows, the regular-season/division conference-title correction from 5 to 7, and gated publication enablement. This approval authorizes only that exact Gate 1 historical packet and the guarded fill, pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification phase. It does not approve Preview, Owner Gate 2, merge, Production, recovery, unrelated mutation, or changed historical meaning.",
+    "proposal_checkpoint_sha256": "5398d5fe244412d4cd264a41fa361ae46d5b290c9103487ad2664d3b694ab1f2",
+    "decision_universe_sha256": "d78a410d66dcf6899522278f22ae2302a436dbe4cb4776bc2280a706fd8ceef2",
+    "recommendation_map_sha256": "af6848073ab5c240800e95b51908301cd6de275a82d3ea98db1829b735da46e6",
+    "approved_plan_hash_preview": "c9d89f0ccdcc00ada62a434b00965c14613e4ea06520a01ad2222c7cd8f46412"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "george-washington-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "george-washington-stage2-gate1-seal-0001",
+    "apply_request_id": "george-washington-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT George Washington serialized Implementation — explicit exact Owner Gate 1 approval",
+    "authorization": "Owner explicitly approved the exact fresh-verified 329-decision George Washington Gate 1 packet and said Proceed. Authorize one guarded Stage 2 Gate 1 fill and its repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification only; no release readiness, PR/Preview, Owner Gate 2, merge, Production proof, recovery, unrelated mutation, or historical change."
+  },
+  "authority": {
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": true,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
