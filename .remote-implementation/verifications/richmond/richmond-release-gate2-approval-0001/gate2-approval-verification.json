@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "df04fb8090f286d1ec247a4a1419451e2c5813c009d7b305154cacb965df0550",
+  "gate2_merge_packet_sha256": "cafe63f99f41cc62ead025cc0ed426b43d7861adc0af9934ae64ac3401e193d3",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "pr_number": 560,
+  "preview_deployment_id": 7695032924,
+  "preview_url": "https://college-basketball-history-qesl5qtlt-elliott-pollacks-projects.vercel.app",
+  "production_request_id": "richmond-release-production-proof-0001",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "richmond-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "status": "PASS"
+}
