@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "a89801cd0a627b94175b3e9897ebc7fd2a2088888d5b461c0484959821313bd9",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "47e778e3f075390527adbbdd26e04ffc69a48493",
+  "pr_number": 549,
+  "production_deployment_id": 7673137829,
+  "production_json_checked_count": 94,
+  "production_proof": true,
+  "request_id": "george-washington-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "george-washington",
+  "status": "COMPLETE"
+}

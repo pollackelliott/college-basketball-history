@@ -986,7 +986,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/george-washington/george-washington-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "a89801cd0a627b94175b3e9897ebc7fd2a2088888d5b461c0484959821313bd9",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -996,7 +996,7 @@
     "production_deployment_id": 7673137829,
     "production_json_checked_count": 94,
     "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "george-washington-release-production-proof-0001",
     "school_key": "george-washington"
   },
