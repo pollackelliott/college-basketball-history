@@ -5891,7 +5891,7 @@
       "state": "VA",
       "primary_hex": "#000066",
       "secondary_hex": "#990000",
-      "history_start_season": null,
+      "history_start_season": "1913-1914",
       "conference_regular_season_championships": 7,
       "conference_tournament_championships": 7,
       "ncaa_tournament_appearances": 10,
@@ -5900,7 +5900,7 @@
       "best_finish_key": "SWEET_SIXTEEN",
       "best_finish_year": 2011,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "atlantic-10",
         "conference_name": "Atlantic 10"
