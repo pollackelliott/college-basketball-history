@@ -1,4 +1,5 @@
 name: Richmond Stage 2 systemic pre-Gate-1 assessment
+# Validation-only systemic assessment; never merge into protected main.
 
 on:
   push:
