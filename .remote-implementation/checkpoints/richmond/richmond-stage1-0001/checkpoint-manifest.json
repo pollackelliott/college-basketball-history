@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "request_id": "richmond-stage1-0001",
+  "research_base_sha": "c2ef77958add14d6474ce0991cf4031665dff7ce",
+  "research_checkpoint_sha256": "0b26612e541ea725eba6bf138a8ccfc37fb8958415b5d90d80bff7b12be591af",
+  "research_member_sha256": {
+    "conferences.csv": "823515108810316cef86770f7037854b3fd5b26d48b340b4068bc07e3bc47caa",
+    "notes.md": "c666adf82be9b74ea548dc4f23bbd6e2d7cb60548f439a4f79b4af93eb518cfb",
+    "opponents.csv": "98421dcd9c1bae782a2f6961d2258ea5d66d548d4f60b30e72f718a63fe927f7",
+    "source-games.csv": "29a285c9945574c277edb544e72c185c225f01114d19c35afe24a40c851f7c3a",
+    "source-notes.md": "7e8ff2df2d3fd8eecdfa3d879047166520fabed46c802d2f62b776e362073235",
+    "venues.csv": "28b622b33d5e399e64ed38bc269bca77eea890928dae22d276895586f6c1805d"
+  },
+  "schema_version": 1,
+  "school_key": "richmond",
+  "sidecars": {
+    "request.json": "2b9116c06e15bc438eb2d0b5a288f9b39da35b4266fe2d895205818442b8abc4",
+    "stage1-reconciliation.json": "364ce38228d8f1455061c988ae747d688a9a93f0bc9f9ca8038cd38eec96448c"
+  },
+  "stage1_blocker_count": 3,
+  "stage1_status": "BLOCKED"
+}
