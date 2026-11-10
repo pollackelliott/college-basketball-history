@@ -1,35 +1,40 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "richmond-stage2-opponent-display-normalize-0001",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "request_id": "richmond-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "richmond",
-  "previous_control_state_commit": "3c2bad495c06a64008b1abfb4f17f7a75bcaa9c1",
-  "previous_control_state_sha256": "065636a7a11a35db572ffc31c3895ff866daa9fd97559757b524715febe715ce",
-  "expected_protected_main_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "previous_control_state_commit": "e4806e7468c94ca7afb0911bc214417465963b27",
+  "previous_control_state_sha256": "ac21f4a0441845327a55134dca9fe9816400f4afcca4ffce9cd0527e39d572ca",
+  "expected_protected_main_sha": "44bac3ca1cf135d97dabb874dabeba39da92a33a",
   "target_branch": "data/richmond-onboarding",
-  "target_sha": "0b8280a6195f1ad8a29268bf7c35a81f6f466143",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/richmond/richmond-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "96f8ec088a7f417a3fafa784edda44caade22368b5e971e7ab3ddbc55ea2ae98"
+  "target_sha": "270804be1bbf134806cd4c1233b29c68be59341e",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-phase0-0001/successor-manifest.json",
+    "sha256": "80d344498ed6a050bc969ec0118e54612b9a38ec82624302bda4ecaef9ede893"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/richmond/richmond-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f3d8427e01e9dcbe8b8a9848c35711f9da5024f0ae70eddd076ebc467c0780ee"
   },
   "integration_freeze_sha256": "170bacc15fd117aacef9e9303d2bf88c46daf931c20b8c11b5c7447c4c90c916",
   "semantic_snapshot_sha256": "383dfc3cf1d4411534fa0f17de2252114392eed43791a2e4a9fdccc7bc770f9d",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorizes exactly one guarded Richmond STAGE2_CURRENT_MAIN_REFRESH from onboarding predecessor 270804be1bbf134806cd4c1233b29c68be59341e to protected main 44bac3ca1cf135d97dabb874dabeba39da92a33a after authenticating the common base 2aedc8051d2031c0ad4ccb87f60226839da0c48a, exact target-only and main-only changed-path populations, and zero overlap. The protected-main advance is the generic venue-name-period compatibility repair from PR #551 / issue #550 and does not alter Richmond historical meaning. No STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation is authorized or applicable because Richmond has no prior substantive decision universe or mature recommendation map."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Richmond serialized Implementation lane — Stage 2 deterministic opponent-display reconciliation",
-    "authorization": "Owner explicitly replied Proceed after fresh-verified Stage 2 census richmond-stage2-census-0001. That exact census is BLOCKED solely by two deterministic historical opponent-display conflicts: belmont-abbey with displays Belmont Abbey / Belmont Abbey College, and stockton with displays Stockton / Stockton University. The census records zero warnings, zero owner decisions, semantic drift PASS, tracked Stage 2 mutation NONE, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key census population. The permanent helper may change only canonical_opponent_name in schools/richmond/opponents.csv and normalized_opponent_name in schools/richmond/source-games.csv using existing project display authority, followed by no-map Stage 2 regeneration and fresh equivalence verification. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, venue maintenance, or protected-main mutation authority."
+    "origin": "Richmond serialized Implementation Stage 2 — Control Center-authorized current-main refresh after PR #551",
+    "authorization": "Execute exactly one repository-owned guarded STAGE2_CURRENT_MAIN_REFRESH plus its required independent fresh verification. Preserve the immutable Richmond Research authority, Integration Freeze, semantic snapshot, all six school-package members, and all Richmond target-only paths byte-for-byte while importing only the disjoint protected-main tooling/test delta. Do not attach STAGE2_REFRESH_CENSUS_PROPOSAL_V1, do not treat the prior zero-decision blocked census as substantive recommendation authority, and do not perform Owner Gate 1 approval, fill, pre-seal, seal, sealed apply, Preview, release, merge Richmond basketball data, Production, recovery, historical mutation, or unrelated shared/global mutation. After fresh refresh PASS, ordinary STAGE2_CENSUS may proceed under the same already-authorized Richmond Stage 2 phase."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -39,6 +44,10 @@
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
