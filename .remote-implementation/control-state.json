@@ -1032,7 +1032,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/richmond/richmond-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "b4c750ea6df5f9cacb2bcfcd0b4e89c61bba93ade8ac313dd79ea97ea499df37",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1042,7 +1042,7 @@
     "production_deployment_id": 7696685208,
     "production_json_checked_count": 81,
     "protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "richmond-release-production-proof-0001",
     "school_key": "richmond"
   },

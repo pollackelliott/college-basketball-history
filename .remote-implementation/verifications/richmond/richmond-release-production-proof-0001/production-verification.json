@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "b4c750ea6df5f9cacb2bcfcd0b4e89c61bba93ade8ac313dd79ea97ea499df37",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c451e8094011154c556a0f8c7786fe63222e0a61",
+  "pr_number": 560,
+  "production_deployment_id": 7696685208,
+  "production_json_checked_count": 81,
+  "production_proof": true,
+  "request_id": "richmond-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "richmond",
+  "status": "COMPLETE"
+}
