@@ -10,6 +10,7 @@ actions itself.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -386,7 +387,18 @@ def run_stage2_proposal_tool(
             "--historical-game-type-challenge",
             str(historical_game_type_challenge_path),
         ])
-    cp = run(cmd, cwd=runtime_repo, check=False)
+    validator_path = runtime_repo / "tools/validate_data.py"
+    if not validator_path.is_file():
+        raise Stop("STAGE2_PROPOSAL_RUNTIME_VALIDATOR_MISSING:%s" % validator_path)
+    previous_validator_override = os.environ.get("CBB_VALIDATE_DATA_TOOL_OVERRIDE")
+    os.environ["CBB_VALIDATE_DATA_TOOL_OVERRIDE"] = str(validator_path)
+    try:
+        cp = run(cmd, cwd=runtime_repo, check=False)
+    finally:
+        if previous_validator_override is None:
+            os.environ.pop("CBB_VALIDATE_DATA_TOOL_OVERRIDE", None)
+        else:
+            os.environ["CBB_VALIDATE_DATA_TOOL_OVERRIDE"] = previous_validator_override
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "stage2-proposal-rehearsal.log").write_text(cp.stdout, encoding="utf-8")
 

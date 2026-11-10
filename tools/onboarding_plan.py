@@ -6724,6 +6724,335 @@ def _discover_reciprocal_only_site_gap_provenance(
     return sorted(proposals, key=lambda item: item["canonical_game_id"])
 
 
+def _current_reciprocal_only_site_gap_fields(
+    canonical: dict[str, str],
+) -> list[str]:
+    """Return the current primitive venue/location gaps, failing on partial pairs."""
+
+    venue_key = canonical.get("venue_key", "").strip()
+    venue_id = canonical.get("venue_id", "").strip()
+    if bool(venue_key) != bool(venue_id):
+        raise WorkflowError(
+            f"{canonical.get('canonical_game_id', '')}: partial canonical venue identity "
+            "cannot be represented by reciprocal-only site-gap provenance"
+        )
+    city = canonical.get("site_city", "").strip()
+    state = canonical.get("site_state", "").strip()
+    if bool(city) != bool(state):
+        raise WorkflowError(
+            f"{canonical.get('canonical_game_id', '')}: partial canonical locality "
+            "cannot be represented by reciprocal-only site-gap provenance"
+        )
+    return sorted(
+        (["venue"] if not venue_key and not venue_id else [])
+        + (["location"] if not city and not state else [])
+    )
+
+
+_SITE_GAP_REVIEW_FIELDS = {
+    "venue": {"venue", "venue_key", "venue_id"},
+    "location": {"location", "site_city", "site_state"},
+}
+
+
+def _resolved_site_gap_field_has_review_provenance(
+    game_id: str,
+    field_name: str,
+    discrepancy_rows: list[dict[str, str]],
+) -> bool:
+    accepted = _SITE_GAP_REVIEW_FIELDS[field_name]
+    return any(
+        row.get("canonical_game_id", "").strip() == game_id
+        and row.get("field_name", "").strip() in accepted
+        and row.get("status", "").strip().upper() == "RESOLVED"
+        and bool(row.get("resolution_basis", "").strip())
+        for row in discrepancy_rows
+    )
+
+
+def _target_assertion_supports_resolved_site_field(
+    canonical: dict[str, str],
+    target_assertions: list[dict[str, str]],
+    field_name: str,
+) -> bool:
+    """Prove a post-ingest fill came from the new target assertion/registry path."""
+
+    if field_name == "location":
+        city = canonical.get("site_city", "").strip()
+        state = canonical.get("site_state", "").strip()
+        if city and state and any(
+            assertion.get("city", "").strip() == city
+            and assertion.get("state", "").strip() == state
+            for assertion in target_assertions
+        ):
+            return True
+
+    markers = parse_registry_fallback_markers(canonical.get("notes", ""))
+    assertion_pairs = {
+        (
+            assertion.get("source_program_key", "").strip(),
+            assertion.get("source_game_id", "").strip(),
+        )
+        for assertion in target_assertions
+    }
+    for marker in markers:
+        pair = (
+            marker.get("source_program_key", "").strip(),
+            marker.get("source_game_id", "").strip(),
+        )
+        if pair not in assertion_pairs:
+            continue
+        marker_fields = {
+            value.strip()
+            for value in marker.get("fields", "").split(",")
+            if value.strip()
+        }
+        if field_name == "venue":
+            if (
+                canonical.get("venue_key", "").strip()
+                and canonical.get("venue_id", "").strip()
+                and marker.get("venue_key", "").strip()
+                == canonical.get("venue_key", "").strip()
+                and {"venue_key", "venue_id"} <= marker_fields
+            ):
+                return True
+        elif field_name == "location":
+            if (
+                canonical.get("site_city", "").strip()
+                and canonical.get("site_state", "").strip()
+                and {"site_city", "site_state"} <= marker_fields
+            ):
+                return True
+    return False
+
+
+def _target_source_site_gaps_are_ordinary_accounted(
+    target_assertions: list[dict[str, str]],
+    source_by_id: dict[str, dict[str, str]],
+    game_id: str,
+    current_fields: list[str],
+    discrepancy_rows: list[dict[str, str]],
+) -> bool:
+    """Match implementation-site-gate ordinary target-source/review accounting."""
+
+    if not current_fields:
+        return True
+    researched = any(
+        (
+            source_by_id.get(
+                assertion.get("source_game_id", "").strip(),
+                {},
+            ).get("site_research_status", "").strip().upper()
+            in ALLOWED_SITE_RESEARCH_STATUSES
+        )
+        and bool(
+            source_by_id.get(
+                assertion.get("source_game_id", "").strip(),
+                {},
+            ).get("site_research_basis", "").strip()
+        )
+        for assertion in target_assertions
+    )
+    if researched:
+        return True
+    return all(
+        _resolved_site_gap_field_has_review_provenance(
+            game_id,
+            field_name,
+            discrepancy_rows,
+        )
+        for field_name in current_fields
+    )
+
+
+def _materialize_reciprocal_only_site_gap_provenance_rows(
+    school_key: str,
+    approved: dict[str, Any],
+    entries: list[dict[str, Any]],
+    canonical_rows: list[dict[str, str]],
+    assertion_rows: list[dict[str, str]],
+    source_rows: list[dict[str, str]],
+    discrepancy_rows: list[dict[str, str]],
+) -> tuple[list[dict[str, Any]], Counter[str]]:
+    """Normalize discovery-time provenance to the legitimate materialization state.
+
+    The approved payload is a conservative pre-apply snapshot.  Ingestion and
+    reconciliation run before this function and may legitimately resolve some or all
+    primitive gaps, or may create a target assertion that moves the game out of the
+    reciprocal-only topology entirely.  This function may only retire approved gaps;
+    it never invents a new one and never weakens the strict discovery/approval
+    validator.
+    """
+
+    canonical_by_id = {
+        row.get("canonical_game_id", "").strip(): row
+        for row in canonical_rows
+        if row.get("canonical_game_id", "").strip()
+    }
+    assertions_by_game: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for assertion in assertion_rows:
+        game_id = assertion.get("canonical_game_id", "").strip()
+        if game_id:
+            assertions_by_game[game_id].append(assertion)
+    source_by_id = {
+        row.get("source_game_id", "").strip(): row
+        for row in source_rows
+        if row.get("source_game_id", "").strip()
+    }
+
+    normalized: list[dict[str, Any]] = []
+    counts: Counter[str] = Counter()
+    for entry in entries:
+        game_id = str(entry.get("canonical_game_id", "") or "").strip()
+        discovery_fields_raw = entry.get("fields", [])
+        if not isinstance(discovery_fields_raw, list) or any(
+            not isinstance(field, str) for field in discovery_fields_raw
+        ):
+            raise WorkflowError(
+                f"{game_id or '[unknown]'}: site-gap provenance fields must be a string array"
+            )
+        discovery_fields = sorted(
+            {field.strip() for field in discovery_fields_raw if field.strip()}
+        )
+        if len(discovery_fields) != len(discovery_fields_raw):
+            raise WorkflowError(
+                f"{game_id or '[unknown]'}: site-gap provenance fields must be unique "
+                "and nonblank"
+            )
+        if set(discovery_fields) - {"venue", "location"}:
+            raise WorkflowError(
+                f"{game_id or '[unknown]'}: reciprocal-only site-gap provenance may "
+                "account only for venue and/or location"
+            )
+
+        canonical = canonical_by_id.get(game_id)
+        if canonical is None:
+            raise WorkflowError(f"{game_id}: canonical game is missing")
+        if school_key not in {
+            canonical.get("team_a_key", "").strip(),
+            canonical.get("team_b_key", "").strip(),
+        }:
+            raise WorkflowError(
+                f"{game_id}: canonical game does not involve target {school_key}"
+            )
+        if canonical.get("site_type", "").strip() != "NEUTRAL":
+            raise WorkflowError(
+                f"{game_id}: reciprocal-only site-gap provenance cannot survive "
+                "a non-NEUTRAL canonical site"
+            )
+        if canonical.get("game_type", "").strip() != "REGULAR_SEASON":
+            raise WorkflowError(
+                f"{game_id}: reciprocal-only site-gap provenance cannot waive "
+                "NCAA or other postseason site strictness"
+            )
+        summary = approved.get("summary", {})
+        history_start = str(summary.get("history_start_season", "") or "").strip()
+        history_intervals = str(
+            summary.get("history_scope_intervals", "") or ""
+        ).strip()
+        if not history_start or not season_is_in_scope(
+            canonical.get("season_label", "").strip(),
+            history_start,
+            history_intervals,
+        ):
+            raise WorkflowError(
+                f"{game_id}: reciprocal-only site-gap provenance moved outside "
+                "the target's public history scope"
+            )
+        if any(
+            _decision_references_canonical_game(item, game_id)
+            for item in approved.get("decisions", [])
+        ):
+            raise WorkflowError(
+                f"{game_id}: substantive Gate 1 decision references this canonical "
+                "game; reciprocal-only provenance may not absorb it"
+            )
+
+        current_fields = _current_reciprocal_only_site_gap_fields(canonical)
+        new_fields = sorted(set(current_fields) - set(discovery_fields))
+        if new_fields:
+            raise WorkflowError(
+                f"{game_id}: materialization introduced primitive site gaps "
+                f"{new_fields} that were not in approved discovery fields "
+                f"{discovery_fields}"
+            )
+        retired_fields = sorted(set(discovery_fields) - set(current_fields))
+        game_assertions = assertions_by_game.get(game_id, [])
+        target_assertions = [
+            assertion
+            for assertion in game_assertions
+            if assertion.get("source_program_key", "").strip() == school_key
+        ]
+
+        for field_name in retired_fields:
+            supported = _resolved_site_gap_field_has_review_provenance(
+                game_id,
+                field_name,
+                discrepancy_rows,
+            )
+            if target_assertions:
+                supported = supported or _target_assertion_supports_resolved_site_field(
+                    canonical,
+                    target_assertions,
+                    field_name,
+                )
+            if not supported:
+                raise WorkflowError(
+                    f"{game_id}: approved discovery field {field_name!r} is now "
+                    "resolved but no accepted target-assertion/registry or resolved "
+                    "reconciliation provenance supports that enrichment"
+                )
+            counts["reciprocal_only_site_gap_fields_retired_as_resolved"] += 1
+
+        if target_assertions:
+            if not _target_source_site_gaps_are_ordinary_accounted(
+                target_assertions,
+                source_by_id,
+                game_id,
+                current_fields,
+                discrepancy_rows,
+            ):
+                raise WorkflowError(
+                    f"{game_id}: target source assertion now exists but surviving "
+                    f"primitive gaps {current_fields} lack ordinary target-source "
+                    "research/reconciliation accounting"
+                )
+            counts[
+                "reciprocal_only_site_gap_entries_retired_to_target_source_accounting"
+            ] += 1
+            counts["reciprocal_only_site_gap_fields_retired_to_target_source_accounting"] += len(
+                current_fields
+            )
+            continue
+
+        if not current_fields:
+            counts["reciprocal_only_site_gap_entries_retired_fully_resolved"] += 1
+            continue
+
+        adjusted = dict(entry)
+        adjusted["fields"] = current_fields
+        validated = _validate_reciprocal_only_site_gap_provenance_rows(
+            school_key,
+            approved,
+            [adjusted],
+            canonical_rows,
+            assertion_rows,
+            source_rows,
+            discrepancy_rows,
+        )
+        if len(validated) != 1:
+            raise WorkflowError(
+                f"{game_id}: materialization failed to preserve one validated "
+                "reciprocal-only site-gap provenance entry"
+            )
+        normalized.extend(validated)
+
+    return (
+        sorted(normalized, key=lambda item: item["canonical_game_id"]),
+        counts,
+    )
+
+
 def _record_reciprocal_only_site_gap_provenance(
     school_key: str,
     approved: dict[str, Any],
@@ -6732,13 +7061,13 @@ def _record_reciprocal_only_site_gap_provenance(
     source_rows: list[dict[str, str]],
     discrepancy_rows: list[dict[str, str]],
 ) -> dict[str, int]:
-    """Materialize sealed non-substantive site-gap provenance as reconciliation rows."""
+    """Materialize only still-legitimate reciprocal-only site-gap provenance."""
 
     entries = list(approved.get("site_gap_provenance", []))
     if not entries:
         return {}
 
-    validated = _validate_reciprocal_only_site_gap_provenance_rows(
+    validated, counts = _materialize_reciprocal_only_site_gap_provenance_rows(
         school_key,
         approved,
         entries,
@@ -6747,11 +7076,12 @@ def _record_reciprocal_only_site_gap_provenance(
         source_rows,
         discrepancy_rows,
     )
-    counts = Counter()
     next_number = ingest_school.next_discrepancy_number(discrepancy_rows)
 
     for entry in validated:
-        for field_name in entry["fields"]:
+        surviving_fields = list(entry["fields"])
+        field_text = " and ".join(surviving_fields)
+        for field_name in surviving_fields:
             discrepancy_rows.append(
                 {
                     "discrepancy_id": f"DISC-{next_number:06d}",
@@ -6766,9 +7096,9 @@ def _record_reciprocal_only_site_gap_provenance(
                     "resolution_basis": entry["resolution_basis"],
                     "notes": (
                         "Sealed non-substantive reciprocal-only site-gap provenance; "
-                        "the established canonical NEUTRAL H/A/N and blank "
-                        "venue/locality are intentionally preserved without creating "
-                        "a target source assertion. Reciprocal source: "
+                        "the established canonical NEUTRAL H/A/N and surviving blank "
+                        f"{field_text} field(s) are intentionally preserved without "
+                        "creating a target source assertion. Reciprocal source: "
                         f"{entry['reciprocal_source_program_key']}/"
                         f"{entry['reciprocal_source_game_id']}; plan "
                         f"{approved['approved_plan_hash'][:12]}."
@@ -6780,7 +7110,6 @@ def _record_reciprocal_only_site_gap_provenance(
         counts["reciprocal_only_site_gap_games_accounted"] += 1
 
     return dict(counts)
-
 
 def _record_dependent_site_gap_discrepancies(
     school_key: str,
