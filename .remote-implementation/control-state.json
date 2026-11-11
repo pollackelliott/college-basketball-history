@@ -1057,11 +1057,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
     "recommendation_map_sha256": "1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "hawai-i-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
     "school_key": "hawai-i",

@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "4648bf631bd7d92b658a245e02f427e2d8967eecd2120a7457014bf6894b6c0d",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "13b8584e39058857d86dbf529db3beec7983110bebef5af9dfa67f6f39c9eb82",
+    "implementation-stage2-status.json": "575b965b7c04a3165596c4c2dd2a2b34ea0734505025a7c581840e83b4724fb9",
+    "last-rehearsal-site-gate.json": "ac5049ba8f2fc788f4545397fcaa460e19c41bc22a6b491a82de633215e2ddd5",
+    "plan.json": "a15da29e68b55468d84e009901801c056bc0e98f80c053f30f1a37ba8b71e447",
+    "review.csv": "11f8c55868f0e9ea9266274c4abfdc0e4ae50460088cd35c48ed95da1e11c845",
+    "review.md": "02a959cebddfe60447acd62b9c90ea43a59d8988dc1898c54813c2b95fdcb0df"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "13b8584e39058857d86dbf529db3beec7983110bebef5af9dfa67f6f39c9eb82",
+    "implementation-stage2-status.json": "cabaa0e3813bad716c09b8a9f5771291e84bf459ccf5b4a5c0a4ebd1f97c10cf",
+    "last-rehearsal-site-gate.json": "ac5049ba8f2fc788f4545397fcaa460e19c41bc22a6b491a82de633215e2ddd5",
+    "plan.json": "6fb211379144eb567dc10e14bf5dcbb7d0cbbec882f12aa00fbc8aeb17ec4f71",
+    "review.csv": "11f8c55868f0e9ea9266274c4abfdc0e4ae50460088cd35c48ed95da1e11c845",
+    "review.md": "89aedf42f44c280863ab7804a3ecbad703e00301541884bfdaced2216a95e6e0"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+    "runtime_decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "recommendation_map_sha256": "1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "hawai-i-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
+  "target_tree_sha": "7ef978cdded4b7e8e07795fab804fa33c728fa46",
+  "tracked_stage2_mutation": "NONE"
+}
