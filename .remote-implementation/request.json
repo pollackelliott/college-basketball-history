@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "uc-davis-stage1-0001",
+  "request_id": "uc-davis-stage1-verify-0001",
   "operation": "STAGE1_INVENTORY",
   "school_key": "uc-davis",
-  "previous_control_state_commit": "77f81e6f8451c6b50180b41b4cbf43632b972ddb",
-  "previous_control_state_sha256": "a66612b4326042a95003336b9124a8081b21bcf7347da8277969c3c67d023148",
+  "previous_control_state_commit": "0868de87662f70fa66f76883bf59c8bdd940107f",
+  "previous_control_state_sha256": "f42abc6fdba644f5d4529ee46f415f602448e3c3cf4c562d49842c232b6bdcb0",
   "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
   "research_checkpoint": {
     "sha256": "c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d",
@@ -20,8 +20,8 @@
   "venue_reconciliation": null,
   "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "ChatGPT UC Davis serialized Implementation lane — owner-designated FINAL accepted RESEARCH_FROZEN attachment intake",
-    "authorization": "Owner explicitly opened a NEW serialized UC Davis Implementation lane for school key uc-davis and authorized the complete bounded read-only Implementation Stage 1 intake/inventory only. The owner designated exactly one attached ZIP as FINAL accepted RESEARCH_FROZEN and invoked the repository-defined attachment fallback. Exact attachment SHA-256 is c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d, exact size 226367 bytes, research_base_sha 6164f7b0269d5d53b2be08b02c3d97626d375be7, school identity uc-davis / UC Davis / Aggies, and accepted top-level scope 2004-05+. Current protected main is exactly a13229ce64a489b39aaada66f0d8bf38db6868db and current global control was re-authenticated IDLE / COMPLETE with recovery_required=false and no active school/request/lock. This request authorizes only the repository-owned read-only current-main STAGE1_INVENTORY, including the permanent Research acceptance/package checks and durable Stage 1 checkpoint. It does not authorize Phase 0, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, recovery, protected-main mutation, or another school."
+    "origin": "ChatGPT UC Davis serialized Implementation lane — independent fresh-runner Stage 1 verification",
+    "authorization": "Owner authorized the bounded UC Davis startup unit through repository-owned read-only STAGE1_INVENTORY, durable checkpoint, and independent fresh verification, stopping before Phase 0. The first durable checkpoint uc-davis-stage1-0001 passed on protected main a13229ce64a489b39aaada66f0d8bf38db6868db with Research Freeze c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d and stage1-reconciliation SHA-256 a39c010ffb487b36d98e60474b82e23d2fbe31c07eb55a2a0acd070a31311727. The current workflow exposes no separate Stage 1 verifier job, so this second repository-owned read-only STAGE1_INVENTORY request is authorized solely as an independent fresh-runner reconstruction of the exact same current-main/freeze inputs. No mutation, Phase 0, Stage 2, shared/global maintenance, owner gate, release, or recovery authority is granted."
   },
   "authority": {
     "phase0": false,
