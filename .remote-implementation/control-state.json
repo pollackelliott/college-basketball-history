@@ -537,7 +537,7 @@
     "uc-davis-phase0-0001"
   ],
   "active_expected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
-  "active_lock_commit": null,
+  "active_lock_commit": "15cba06c28d56ffbab108c72148e2aeab25a4230",
   "active_lock_owner": "github-actions:43043713937:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
