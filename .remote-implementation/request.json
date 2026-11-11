@@ -1,35 +1,34 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-stage2-current-main-refresh-0001",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "hawai-i-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
   "school_key": "hawai-i",
-  "previous_control_state_commit": "f7485b931e8ced821e38896b814f5f05d780b40e",
-  "previous_control_state_sha256": "6cd14337e36dd98c54cc5cf77db90977920cdcaf3c78b3d407db6a36cbb8cd01",
+  "previous_control_state_commit": "7752f349006aebeb763836c45951e95ebd3a329b",
+  "previous_control_state_sha256": "05e482c3df3a9de22e97c62e17dec2b067d6eb47f2a0b16a773f6e84b299c1a5",
   "expected_protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
   "target_branch": "data/hawai-i-onboarding",
-  "target_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+  "target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
   "phase0_successor": {
     "path": ".remote-implementation/successors/hawai-i/hawai-i-phase0-0002/successor-manifest.json",
     "sha256": "1ed8e3cba48af506a773b9efd4cb13580cd4a320533ea46f14dec10499aee783"
   },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "ed870fba68d74de604e57f09ec46d8cf194be90d10099a619636469f309560ec"
+  },
   "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
   "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "CONTROL_CENTER_EXPLICIT",
-    "authorization_basis": "Control Center explicitly authorized the Hawai'i post-maintenance guarded STAGE2_CURRENT_MAIN_REFRESH after the exact three-row shared-canonical site-state maintenance merged as PR #561. Protected main is 8f1b8e79e55108be63afcd13e6e570ab928d6bb4, exact onboarding predecessor is 03b47d1257d78e5f6d48f50ddcc52a554d67d64b, and common base is 36b8e829e7e5ffde7390ec7ef00816cda3d7f663. Independently authenticated target-only paths are the nine Hawai'i Phase 0/reference paths, intervening-main paths are data/canonical/games.csv, data/reconciliation/maintenance/hawai-i-kansas-three-site-states.json, and site/data/teams/kansas.json, with zero overlap and zero intervening schools/hawai-i/ changes. Authorization covers this refresh, required fresh verification, and subsequent fresh Stage 2 census under the already authorized technical phase; no Owner Gate 1 authority is created."
-  },
   "creation_provenance": {
-    "origin": "Hawai'i serialized Implementation Stage 2 — Control Center-authorized post-PR-561 current-main refresh",
-    "authorization": "Run exactly one guarded STAGE2_CURRENT_MAIN_REFRESH from Hawai'i predecessor 03b47d1257d78e5f6d48f50ddcc52a554d67d64b to protected main 8f1b8e79e55108be63afcd13e6e570ab928d6bb4, require independent fresh verification, then continue with a fresh authoritative Hawai'i Stage 2 census. Preserve the immutable Research Freeze, Integration Freeze, six-file source package, semantic snapshot, and historical meaning. This request does not carry a phase_continuation recommendation map because no mature Hawai'i recommendation map existed before the maintenance boundary. No Owner Gate 1 approval, Gate 1 fill, pre-seal, seal, apply, Preview, merge, Production, new Research, unrelated shared maintenance, or recovery authority is included."
+    "origin": "Hawai'i serialized Implementation Stage 2 — fresh census after Control Center-authorized PR #561 maintenance and current-main refresh",
+    "authorization": "The Control Center disposition explicitly authorizes the required fresh authoritative Hawai'i Stage 2 census after the three-row maintenance merge and independently fresh-verified STAGE2_CURRENT_MAIN_REFRESH. This request is read-only with respect to tracked basketball state and is bound to protected main 8f1b8e79e55108be63afcd13e6e570ab928d6bb4, refreshed Hawai'i target d5690304f4fdc3bc5c24ba13eb992c72149a340e, immutable Integration Freeze 5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7, and semantic snapshot cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b. After fresh verification, compare its regenerated decision universe to prior authenticated SHA-256 341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf and continue technical recommendation-map maturation only if substantive historical meaning is preserved and no materially new blocker appears. No Owner Gate 1 approval, tracked repair, shared maintenance, seal/apply, Preview, merge, Production, or Research reopening is authorized."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
