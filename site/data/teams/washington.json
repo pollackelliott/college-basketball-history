@@ -4958,7 +4958,7 @@
       "opponent_key": "uc-davis",
       "opponent_name": "UC Davis",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -79267,7 +79267,7 @@
       "opponent_key": "uc-davis",
       "opponent_name": "UC Davis",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 77,
       "opponent_score": 70,
       "score_known": true,
@@ -84742,7 +84742,7 @@
       "opponent_key": "uc-davis",
       "opponent_name": "UC Davis",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 79,
       "opponent_score": 73,
       "score_known": true,

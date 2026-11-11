@@ -5636,7 +5636,7 @@
       "opponent_key": "uc-davis",
       "opponent_name": "UC Davis",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -76774,12 +76774,12 @@
     {
       "canonical_game_id": "CBBG-0070225",
       "season_label": "2018-2019",
-      "game_date": "2018-12-29",
+      "game_date": "2018-12-30",
       "date_precision": "EXACT",
       "opponent_key": "uc-davis",
       "opponent_name": "UC Davis",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 73,
       "opponent_score": 55,
       "score_known": true,
