@@ -1,0 +1,22 @@
+{
+  "approved_plan_hash": "5412b3591b59ff449e6d0a24ca2c6a8243cc40283525f757a6f8ba3dffe9cfc2",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL",
+  "merge_authorized_exact_head_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
+  "merge_authorized_pr_number": 562,
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_body_sha256": "bf56f715130cd6df02912b074e6060ef50adb9706616e2cf6c738216935610c4",
+  "pr_number": 562,
+  "preview_checkpoint_sha256": "d8d120817cb3f1b981209dcaefe3572a37c346f010d60d2469b501c9388f7897",
+  "preview_deployment_id": 7707541366,
+  "preview_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "preview_request_id": "hawai-i-release-preview-verify-0001",
+  "preview_url": "https://college-basketball-history-f4w7qw673-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "192d6c24cff44a9cdee48ee0ca06a4df0b482ee42d68dd00ccab66365ad9b507",
+  "production_proof": false,
+  "release_manifest_sha256": "ca93e0489b1d561551be3c1c2edf7799f0b93b6e1c655565eabb6125ad44842b",
+  "school_key": "hawai-i",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7"
+}

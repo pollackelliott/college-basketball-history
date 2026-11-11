@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "hawai-i-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
+  "pr_number": 562,
+  "preview_deployment_id": 7707541366,
+  "preview_url": "https://college-basketball-history-f4w7qw673-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "hawai-i-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "target_branch": "data/hawai-i-onboarding"
+}
