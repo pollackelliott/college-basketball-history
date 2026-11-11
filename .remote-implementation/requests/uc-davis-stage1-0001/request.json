@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "77f81e6f8451c6b50180b41b4cbf43632b972ddb",
+  "previous_control_state_sha256": "a66612b4326042a95003336b9124a8081b21bcf7347da8277969c3c67d023148",
+  "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "research_checkpoint": {
+    "sha256": "c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d",
+    "research_base_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "77f81e6f8451c6b50180b41b4cbf43632b972ddb",
+      "path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-stage1-0001-final/piece-",
+      "part_count": 16
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT UC Davis serialized Implementation lane — owner-designated FINAL accepted RESEARCH_FROZEN attachment intake",
+    "authorization": "Owner explicitly opened a NEW serialized UC Davis Implementation lane for school key uc-davis and authorized the complete bounded read-only Implementation Stage 1 intake/inventory only. The owner designated exactly one attached ZIP as FINAL accepted RESEARCH_FROZEN and invoked the repository-defined attachment fallback. Exact attachment SHA-256 is c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d, exact size 226367 bytes, research_base_sha 6164f7b0269d5d53b2be08b02c3d97626d375be7, school identity uc-davis / UC Davis / Aggies, and accepted top-level scope 2004-05+. Current protected main is exactly a13229ce64a489b39aaada66f0d8bf38db6868db and current global control was re-authenticated IDLE / COMPLETE with recovery_required=false and no active school/request/lock. This request authorizes only the repository-owned read-only current-main STAGE1_INVENTORY, including the permanent Research acceptance/package checks and durable Stage 1 checkpoint. It does not authorize Phase 0, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, recovery, protected-main mutation, or another school."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
