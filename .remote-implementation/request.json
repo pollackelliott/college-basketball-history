@@ -1,46 +1,54 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "uc-davis-release-preview-verify-0001",
+  "request_id": "uc-davis-release-gate2-approval-0001",
   "school_key": "uc-davis",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "8205fb48c5d93df122e608652e73122845d6a784",
-  "previous_control_state_sha256": "cdc07b62552d19c8d95bcb2f1d6bcc21762a02ed85ef9d20cad2cb36d333aa44",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "previous_control_state_commit": "c7006fb2ae5c383b4f24bc1f1502a3f8dff71877",
+  "previous_control_state_sha256": "3657bdab4a80434bc4a17b0f098804e9fcd808783f34cdeefa4123d498efc25b",
   "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
   "target_branch": "data/uc-davis-onboarding",
   "target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/uc-davis/uc-davis-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "a33e7eb0315f392f163837a6f545bba6099d1fcccef98a2f92be3d58d2615bab"
-  },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/uc-davis/uc-davis-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "f252512ed8dd44d7e64bd4239ed1c927f8921e4acc1f4f33a47396df854919eb"
-  },
   "approved_plan_hash": "8c032a33b6cb071b3d57eb3595afa1f8c0f656d9280684c5069e4bae29882cd0",
   "release_manifest_sha256": "04eb503833a8f66f494ccdca1af04dbcdf31127edcf64aba7980cb18c96c8cd2",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "335cb613013e480f9804ca3fea1f432f0fa1da90a47f0f1bf3d6007f5c2b99f0"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/uc-davis/uc-davis-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "d28ff2750350de76ed9ff536fc7a3599f79af74b27729247ec1f8c2c30bba68a"
-  },
   "pr_number": 563,
+  "preview_deployment_id": 7716210605,
+  "preview_url": "https://college-basketball-history-hozci0dry-elliott-pollacks-projects.vercel.app",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "0b34ac1f7e70f91147b0329e4348f6dd63fa20cb9aefa2d096f875aac4912986"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/uc-davis/uc-davis-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "a7ac9fafe436be063c3f82543873dd45045d3a9c32204270cb833ed8a6c738ee"
+  },
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly approved the exact authenticated UC Davis Preview for PR #563 by stating “Approved. Proceed” immediately after being presented the fresh-verified OWNER_GATE_2_READY packet for head f83219268b85b44314fba7b53256767f19ed3004 and Vercel Preview deployment 7716210605.",
+    "pr_number": 563,
+    "pr_head_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+    "preview_deployment_id": 7716210605,
+    "preview_url": "https://college-basketball-history-hozci0dry-elliott-pollacks-projects.vercel.app",
+    "preview_checkpoint_sha256": "0b34ac1f7e70f91147b0329e4348f6dd63fa20cb9aefa2d096f875aac4912986",
+    "preview_verification_sha256": "a7ac9fafe436be063c3f82543873dd45045d3a9c32204270cb833ed8a6c738ee"
+  },
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "uc-davis-release-production-proof-0001"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT UC Davis serialized Implementation — release preparation continuation",
-    "authorization": "Continuation of the owner-authorized UC Davis release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #563. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden."
+    "origin": "ChatGPT UC Davis serialized Implementation lane — owner-authorized exact Gate 2 approval",
+    "authorization": "Owner explicitly approved Owner Gate 2 by stating 'Approved. Proceed' in direct response to the exact fresh-verified UC Davis PR #563 Preview at head f83219268b85b44314fba7b53256767f19ed3004 and Vercel Preview deployment 7716210605. This authorizes the repository-defined final release phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof, and independent COMPLETE verification while identities remain unchanged. This request itself records only Gate 2 approval and grants no direct merge, protected-main mutation, recovery, maintenance, unrelated repair, or new historical authority."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": false,
+    "owner_gate_2": true,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": false,
-    "release_preview_verify": true,
+    "release_gate2_approval": true,
+    "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
