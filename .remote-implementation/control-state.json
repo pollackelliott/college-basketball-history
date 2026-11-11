@@ -522,7 +522,7 @@
     "hawai-i-phase0-0002"
   ],
   "active_expected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
-  "active_lock_commit": null,
+  "active_lock_commit": "7e68d303cff056d30fd70698705e6aebcb975501",
   "active_lock_owner": "github-actions:42942037550:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
