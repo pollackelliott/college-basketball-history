@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "8f2f58f5c52e478fc293619259b9a2ff7969768155e90968608afc94a4f6143b",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "6af30c0448b85eccc11a902766cafae55bc81640537cfd4da7c7c32bac96d8ef",
+    "implementation-stage2-status.json": "5486712634eeb164196208f9115162ad328edea3aaf1425e3e5d8e92e93d9e1f",
+    "last-rehearsal-site-gate.json": "bc8a36be7e6e71ffe7207444cb3e39ad9508fb9dc710ccef2ed9cc088ca68c59",
+    "plan.json": "f5847a16878ed29755309fcd1019624b4df84df1eda17086b237244fb123a6f9",
+    "review.csv": "af7d891de7ac6b6c77cbca5e124b9ad9320f5c5c94fcd150f8d6b88da02d098c",
+    "review.md": "b2701a45bdf225356a191a739d8d205e0643aeb1d51c7f6cfceb9fdd6ca7f6f3"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "6af30c0448b85eccc11a902766cafae55bc81640537cfd4da7c7c32bac96d8ef",
+    "implementation-stage2-status.json": "c1d0ebcbb4dd1f55477f0566a500c38a7d71261ef585f9ae615e2de18389e943",
+    "last-rehearsal-site-gate.json": "bc8a36be7e6e71ffe7207444cb3e39ad9508fb9dc710ccef2ed9cc088ca68c59",
+    "plan.json": "818f39629b44d3f2c4301d904011e36ef8b31a37c0d21e81fa65f026462e2ea5",
+    "review.csv": "af7d891de7ac6b6c77cbca5e124b9ad9320f5c5c94fcd150f8d6b88da02d098c",
+    "review.md": "3c27895161ac01cb12c382f366322d7f6d625ff59a62282de49f426643fb0904"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+    "runtime_decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "recommendation_map_sha256": "ad4b714b534ba995f370eccbe25109e8c3b5558ac8f571daf16fbdf7db67718a",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "uc-davis-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "8cc822c21553fdce3825930a59622d540b539dc8",
+  "target_tree_sha": "5b1944af126bcf380028315a9909a02a94fe0b2e",
+  "tracked_stage2_mutation": "NONE"
+}
