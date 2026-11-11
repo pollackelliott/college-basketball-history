@@ -2427,7 +2427,7 @@
       "opponent_key": "hawai-i",
       "opponent_name": "Hawai'i",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -56541,7 +56541,7 @@
       "opponent_key": "hawai-i",
       "opponent_name": "Hawai'i",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 92,
       "opponent_score": 78,
       "score_known": true,
@@ -56554,7 +56554,7 @@
       "site_city": "Ogden",
       "site_state": "UT",
       "game_type": "NCAA_TOURNAMENT",
-      "postseason_round": null,
+      "postseason_round": "R64",
       "administrative_status": null,
       "administrative_note": null
     },
@@ -62416,7 +62416,7 @@
       "opponent_key": "hawai-i",
       "opponent_name": "Hawai'i",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 79,
       "opponent_score": 69,
       "score_known": true,
@@ -62429,7 +62429,7 @@
       "site_city": "Dayton",
       "site_state": "OH",
       "game_type": "NCAA_TOURNAMENT",
-      "postseason_round": null,
+      "postseason_round": "R64",
       "administrative_status": null,
       "administrative_note": null
     },
