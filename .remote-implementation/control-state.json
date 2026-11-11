@@ -534,18 +534,19 @@
     "hawai-i-release-production-proof-0001",
     "uc-davis-stage1-0001",
     "uc-davis-stage1-verify-0001",
-    "uc-davis-phase0-0001"
+    "uc-davis-phase0-0001",
+    "uc-davis-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "uc-davis-stage2-census-0001",
+  "active_request_sha256": "81355bd1ac3ea157090320fbee8a7f7300b10e7d760b4a649acb3f634686913a",
+  "active_school_key": "uc-davis",
+  "active_target_branch": "data/uc-davis-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1081,8 +1082,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/uc-davis/uc-davis-phase0-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "99f43808833b37622d81661fffc0f054ab5b37579adb7b876dcbee7accd199a2"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43045121184",
+  "lock_acquisition_request_commit": "e0182227178a258d491e5d019af46c481c0fe91e",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
