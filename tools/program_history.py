@@ -348,6 +348,22 @@ def partition_source_rows(
     return in_scope, outside_scope
 
 
+def partition_publication_source_rows(
+    rows: Iterable[dict[str, str]],
+    program: dict[str, str],
+) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    """Partition source evidence by authorized publication history without rewriting it."""
+    published_rows: list[dict[str, str]] = []
+    unpublished_rows: list[dict[str, str]] = []
+    for row in rows:
+        season = row.get("season_label", "").strip()
+        if season_is_published_history(season, program):
+            published_rows.append(row)
+        else:
+            unpublished_rows.append(row)
+    return published_rows, unpublished_rows
+
+
 def trim_conference_history(
     history_rows: Iterable[dict[str, str]],
     history_start_season: str,
