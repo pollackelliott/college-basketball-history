@@ -2485,7 +2485,7 @@
       "opponent_key": "hawai-i",
       "opponent_name": "Hawai'i",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -39506,7 +39506,7 @@
       "opponent_key": "hawai-i",
       "opponent_name": "Hawai'i",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 121,
       "opponent_score": 65,
       "score_known": true,
