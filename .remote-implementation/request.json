@@ -1,43 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "hawai-i-phase0-recover-0001",
   "school_key": "hawai-i",
-  "previous_control_state_commit": "c3ef1fc5da32ebb7ad7c6002d9ae74ed846fbb45",
-  "previous_control_state_sha256": "b4b4a4108ff789f1317656960c3ec45b347db5a995c5cbece4998eb1809f902e",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "cde34c42ab4c16f5c90728947ca4aae4b71c9239",
+  "previous_control_state_sha256": "e14e17521da6f488029853e36846f91554b31dbcd10192217bc5ecee7cbd148d",
   "expected_protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
-  "target_branch": "data/hawai-i-onboarding",
-  "research_checkpoint": {
-    "sha256": "49948624da8a0f2048585a99a00bc7a6f3ed996ba674806de1df4708608f7313",
-    "research_base_sha": "6a192223de544cd942100cce9c0a7565985c9784",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "779c352ab63130b2d1dd01a2c3f0b039809a2075",
-      "path_prefix": ".remote-implementation/transports/hawai-i/hawai-i-stage1-0001-final/piece-",
-      "part_count": 6
-    }
-  },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-stage1-0001/checkpoint-manifest.json",
-    "sha256": "049a0d5a9493694049e3a7f6cdcf7564764e64e1e216f185f3389005623f4286"
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1970-1971",
-    "basis": "OWNER_CONFIRMED_TOP_LEVEL",
-    "intervals": "1970-71+",
-    "notes": "Frozen Hawai'i accepted scope 1970-71+ agrees with protected-main reusable scope authority. Preserve exact accepted universe and immutable Research Freeze."
+  "recovery": {
+    "abandoned_request_id": "hawai-i-phase0-0001",
+    "lock_commit": "6fdd5b38a3a8287c610a22c4f901178312fd2745",
+    "target_branch": "data/hawai-i-onboarding"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Hawai'i serialized Implementation lane — owner-authorized guarded Phase 0 after Stage 1 PASS",
-    "authorization": "Owner replied Proceed following durable Hawai'i Stage 1 PASS. Stage 1 checkpoint hawai-i-stage1-0001 has zero blockers, zero ambiguous stops and zero shared/global maintenance. Authorizes one guarded PHASE0 transaction against exact protected main 36b8e829e7e5ffde7390ec7ef00816cda3d7f663, exact final Research Freeze SHA-256 49948624da8a0f2048585a99a00bc7a6f3ed996ba674806de1df4708608f7313, research base 6a192223de544cd942100cce9c0a7565985c9784 and Stage 1 manifest SHA-256 049a0d5a9493694049e3a7f6cdcf7564764e64e1e216f185f3389005623f4286. Reuse 42 existing physical venues, register four new target-school physical identities and ordinary historical names, reuse three conference identities, preserve 1970-71+ accepted scope. Authorizes permanent fresh Stage 1 recheck, Integration Freeze, guarded Phase 0 publication to create-once data/hawai-i-onboarding, and independent fresh verification. No Research reopening, unrelated global maintenance, Stage 2, owner gates, Preview, release, merge, direct protected-main mutation or recovery."
+    "origin": "ChatGPT Hawai'i serialized Implementation lane after failed guarded Phase 0",
+    "authorization": "Owner explicitly authorized recovery after hawai-i-phase0-0001 failed mechanically before write-ahead or target publication. Durable control is ACTIVE/INPUTS_VERIFIED with recovery_required=true, exact lock commit 6fdd5b38a3a8287c610a22c4f901178312fd2745, no write-ahead/prepared commit/tree, absent data/hawai-i-onboarding branch, and protected main unchanged at 36b8e829e7e5ffde7390ec7ef00816cda3d7f663. Authorize only exact permanent RECOVER to classify objective mutation state, abandon the failed nonreplayable request if NOT_ATTEMPTED/PREPARED_NOT_PUBLISHED, release the one-active mutation lock, and preserve all Research/Stage1 evidence. No Phase 0 retry in this recovery request, no historical change, basketball-data mutation, target publication, Stage 2, Owner Gate 1/2, Preview, release, merge, or unrelated mutation authorized."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": false,
+    "recovery": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
