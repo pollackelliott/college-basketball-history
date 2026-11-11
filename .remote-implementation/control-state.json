@@ -1037,11 +1037,11 @@
   "current_sequence": 497,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
     "operation": "PHASE0",
     "protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "hawai-i-phase0-0002",
     "school_key": "hawai-i",
     "successor_manifest_path": ".remote-implementation/successors/hawai-i/hawai-i-phase0-0002/successor-manifest.json",

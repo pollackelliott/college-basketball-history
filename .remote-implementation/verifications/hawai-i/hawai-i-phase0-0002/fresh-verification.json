@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+  "prepared_parent_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "prepared_tree_sha": "e1c0f0483eb0e1131b3b578bb632f35af9f43b00",
+  "protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "hawai-i-phase0-0002",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b"
+}
