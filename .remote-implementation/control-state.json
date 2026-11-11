@@ -548,7 +548,7 @@
   "active_request_sha256": "cf7e5b9ee85eaa5f5b017181f4a3da099b4a20fb03b4f7d1f1cd2d94e552edd5",
   "active_school_key": "uc-davis",
   "active_target_branch": "data/uc-davis-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "33de7a81aa44d05b9ebc131ce72154dee046af97",
   "active_writeahead_path": ".remote-implementation/writeahead/uc-davis/uc-davis-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "c7d7cff5850caa0543b7253a0894fbb3d8111358cd6fd30658dfe9c87f5bca6a",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
