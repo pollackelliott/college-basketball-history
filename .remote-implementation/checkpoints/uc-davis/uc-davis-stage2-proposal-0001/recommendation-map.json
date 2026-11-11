@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "9980b31443e70a6ee96988d29d411b45328c77259125129e973c37a597aa8b07"
+  },
+  "prepared_against_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "prepared_against_target_sha": "8cc822c21553fdce3825930a59622d540b539dc8",
+  "defaults": {
+    "discrepancy": "KEEP_CANONICAL",
+    "selected_conditional": "KEEP_CANONICAL",
+    "basis": "Preserve established canonical authority by default, but use stronger affirmative institutional evidence where it independently resolves the exact historical field. Raw target and reciprocal evidence remain preserved.",
+    "identity_basis": "No identity decisions are present in the UC Davis decision universe.",
+    "not_applicable_basis": "No selected conditional discrepancy or identity topology is present in this four-decision universe."
+  },
+  "identity": {},
+  "decisions": {
+    "DISCREPANCY-UC-DAVIS-2013-14-005-OVERTIME_PERIODS": "USE_SOURCE",
+    "DISCREPANCY-UC-DAVIS-2018-19-013-GAME_DATE": "USE_SOURCE",
+    "ACCOMPLISHMENTS-UC-DAVIS": "VERIFY_REFERENCE_VALUES",
+    "PUBLICATION-UC-DAVIS": "ENABLE_PUBLIC_PAGE"
+  },
+  "basis_by_decision": {
+    "DISCREPANCY-UC-DAVIS-2013-14-005-OVERTIME_PERIODS": "Use UC Davis's accepted source value of 1 overtime. UC Davis's official box score shows an OT period (12-9) and its official recap calls the 64-61 result an overtime win over Loyola Chicago on Nov. 23, 2013. This is affirmative institutional evidence that the canonical 0 is stale. https://ucdavisaggies.com/sports/mens-basketball/stats/2013-14/loyola/boxscore/2393 https://ucdavisaggies.com/news/2013/11/23/UC_Davis_Wins_Overtime_Thriller_64_61.aspx",
+    "DISCREPANCY-UC-DAVIS-2018-19-013-GAME_DATE": "Use UC Davis's accepted 2018-12-30 date. UC Davis's official box score dates the 73-55 game at USC Dec. 30, 2018, and USC's official recap and postgame notes independently date the same score/game Sunday, Dec. 30. The canonical 2018-12-29 date is stale. https://ucdavisaggies.com/sports/mens-basketball/stats/2018-19/usc/boxscore/9736 https://usctrojans.com/news/2018/12/30/usc-trojans-m-basketball-recap-uc-davis-aggies-elijah-weaver https://usctrojans.com/documents/download/2018/12/30/December_30_vs_UC_Davis.pdf",
+    "ACCOMPLISHMENTS-UC-DAVIS": "Verify the existing reference values without applying a redundant patch. Big West official records list UC Davis as men's basketball regular-season champion in 2014-15 and 2017-18 (2 total) and conference tournament champion in 2017 (1 total). UC Davis's official record book and Big West NCAA history support the existing NCAA appearance/best-finish values. https://bigwest.org/sports/2022/6/9/all-time-big-west-regular-season-champions.aspx https://bigwest.org/sports/2022/9/23/mbb-big-west-championship-history.aspx https://ucdavisaggies.com/sports/2026/5/19/mens-basketball-record-book.aspx https://bigwest.org/sports/2022/9/24/mbb-big-west-ncaa-tournament-history.aspx",
+    "PUBLICATION-UC-DAVIS": "Recommend enabling UC Davis only through the normal explicit Owner Gate 1, sealed apply, exact Preview, explicit Owner Gate 2, merge, and Production-proof sequence after this exact recommendation map is approved."
+  },
+  "canonical_patch_by_decision": {},
+  "source_patch_by_decision": {},
+  "notes_by_decision": {}
+}

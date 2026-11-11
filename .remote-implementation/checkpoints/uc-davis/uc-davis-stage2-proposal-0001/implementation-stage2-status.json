@@ -1,0 +1,79 @@
+{
+  "branch": "remote-stage2-census/uc-davis-8cc822c21553",
+  "capability_census": {
+    "path": ".onboarding/uc-davis/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 0
+  },
+  "head_sha": "8cc822c21553fdce3825930a59622d540b539dc8",
+  "integration_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "integration_semantic_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "discrepancy": 2,
+      "publication": 1
+    },
+    "decision_count": 4,
+    "decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+    "discrepancies_to_add": 2,
+    "existing_game_matches": 86,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 582,
+    "plan_path": ".onboarding/uc-davis/plan.json",
+    "review_path": ".onboarding/uc-davis/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "USE_SOURCE": 2,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "8f2f58f5c52e478fc293619259b9a2ff7969768155e90968608afc94a4f6143b",
+    "changed_path_count": 47
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "USE_SOURCE": 2,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "8f2f58f5c52e478fc293619259b9a2ff7969768155e90968608afc94a4f6143b",
+    "decision_count": 4,
+    "path": "/tmp/remote-stage2-proposal-map-x1lhuqpq/recommendation-map.json",
+    "sha256": "ad4b714b534ba995f370eccbe25109e8c3b5558ac8f571daf16fbdf7db67718a"
+  },
+  "research_base_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "public_gap_rows": 0,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 668,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {},
+    "path": ".onboarding/uc-davis/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
