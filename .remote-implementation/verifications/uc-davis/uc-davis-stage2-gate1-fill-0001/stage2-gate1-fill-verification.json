@@ -1,0 +1,28 @@
+{
+  "action_counts": {
+    "ENABLE_PUBLIC_PAGE": 1,
+    "USE_SOURCE": 2,
+    "VERIFY_REFERENCE_VALUES": 1
+  },
+  "approved_plan_hash_preview": "8f2f58f5c52e478fc293619259b9a2ff7969768155e90968608afc94a4f6143b",
+  "decision_count": 4,
+  "decision_id_set_sha256": "a94f4745050bbc1760f3e47d950a10de40d4964b6c336a9e89cb5c4ef26570a4",
+  "decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+  "filled_review_sha256": "d66b521dc4b514f0c59c93bfaa0a8dfcce8ae206aa8c463cac98234933ae7468",
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_VERIFICATION",
+  "owner_gate_1_approval_sha256": "f38b4d8bdc2f1c76616537572a2d9a89a0f0d5327314f72bbcac017297456841",
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "recommendation_map_sha256": "ad4b714b534ba995f370eccbe25109e8c3b5558ac8f571daf16fbdf7db67718a",
+  "remote_stage2_gate1_fill_equivalence": "PASS",
+  "request_id": "uc-davis-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "stage2_proposal_checkpoint_sha256": "aaf0ad73861239c0c85587321ae1d7e0303ad341aae1352d74dca87642ebcdfb",
+  "stage2_proposal_verification_sha256": "2c2827ef93fef7cbee448742f8fea4549164184bcf2ac39d68307004058a9026",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "8cc822c21553fdce3825930a59622d540b539dc8",
+  "target_tree_sha": "5b1944af126bcf380028315a9909a02a94fe0b2e",
+  "tracked_stage2_mutation": "NONE"
+}
