@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-stage2-gate1-fill-0001",
+  "school_key": "uc-davis",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "30f2bda00b2951bdac46c3b490199ffcdc93a268",
+  "previous_control_state_sha256": "86be9ae6299cfdda8cc5e088b8f41e077b16732f3d412ae27a568e3afee28e1e",
+  "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "8cc822c21553fdce3825930a59622d540b539dc8",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-stage2-proposal-0001/checkpoint-manifest.json",
+    "sha256": "aaf0ad73861239c0c85587321ae1d7e0303ad341aae1352d74dca87642ebcdfb"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/uc-davis/uc-davis-stage2-proposal-0001/stage2-proposal-rehearsal-verification.json",
+    "sha256": "2c2827ef93fef7cbee448742f8fea4549164184bcf2ac39d68307004058a9026"
+  },
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+  "recommendation_map_sha256": "ad4b714b534ba995f370eccbe25109e8c3b5558ac8f571daf16fbdf7db67718a",
+  "approved_plan_hash_preview": "8f2f58f5c52e478fc293619259b9a2ff7969768155e90968608afc94a4f6143b",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner replied “Approved. Proceed” immediately after the UC Davis Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY packet bound to proposal uc-davis-stage2-proposal-0001, decision universe 9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a, recommendation map ad4b714b534ba995f370eccbe25109e8c3b5558ac8f571daf16fbdf7db67718a, and approved-plan-hash preview 8f2f58f5c52e478fc293619259b9a2ff7969768155e90968608afc94a4f6143b. This approval authorizes only the four exact UC Davis recommendations and the guarded Gate 1 fill, pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification phase. It does not authorize release readiness, Preview, Owner Gate 2, merge, Production proof, recovery, unrelated mutation, or changed historical meaning.",
+    "proposal_checkpoint_sha256": "aaf0ad73861239c0c85587321ae1d7e0303ad341aae1352d74dca87642ebcdfb",
+    "decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+    "recommendation_map_sha256": "ad4b714b534ba995f370eccbe25109e8c3b5558ac8f571daf16fbdf7db67718a",
+    "approved_plan_hash_preview": "8f2f58f5c52e478fc293619259b9a2ff7969768155e90968608afc94a4f6143b"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "uc-davis-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "uc-davis-stage2-gate1-seal-0001",
+    "apply_request_id": "uc-davis-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT UC Davis serialized Implementation — explicit exact Owner Gate 1 approval",
+    "authorization": "Owner explicitly approved the exact four-decision UC Davis Gate 1 packet and instructed the lane to proceed. Authorize one guarded Gate 1 fill and its repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification only; no release readiness, PR/Preview, Owner Gate 2, merge, Production proof, recovery, unrelated mutation, or changed historical meaning."
+  },
+  "authority": {
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": true,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
