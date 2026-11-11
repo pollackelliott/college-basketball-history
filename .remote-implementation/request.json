@@ -1,55 +1,38 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-release-gate2-approval-0001",
+  "request_id": "hawai-i-release-production-proof-0001",
   "school_key": "hawai-i",
-  "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "50140b4057111debbe7e4cfe09ae0e8196723ae6",
-  "previous_control_state_sha256": "17844f2ecdab7ffa394e6cd93de89ff5d6ae8588a73aeb32298024de70057116",
-  "expected_protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "d2663d13ae846b80b8a922479d4fc3dd47e33613",
+  "previous_control_state_sha256": "b5cb553f63a34126608889822abf6dae6f99b830fd7a83e302d3a5414458b92d",
+  "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
   "target_branch": "data/hawai-i-onboarding",
   "target_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
-  "approved_plan_hash": "5412b3591b59ff449e6d0a24ca2c6a8243cc40283525f757a6f8ba3dffe9cfc2",
-  "release_manifest_sha256": "ca93e0489b1d561551be3c1c2edf7799f0b93b6e1c655565eabb6125ad44842b",
   "pr_number": 562,
-  "preview_deployment_id": 7707541366,
-  "preview_url": "https://college-basketball-history-f4w7qw673-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "d8d120817cb3f1b981209dcaefe3572a37c346f010d60d2469b501c9388f7897"
+  "merge_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "95db311a1accd967337c802e9891ac15ccf9a96a3a6deed61bcfc72ed040131c"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/hawai-i/hawai-i-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "192d6c24cff44a9cdee48ee0ca06a4df0b482ee42d68dd00ccab66365ad9b507"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly approved the exact authenticated Hawai'i Preview for PR #562 by stating “Approved. Proceed” immediately after being presented the fresh-verified OWNER_GATE_2_READY packet for head c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7 and Vercel Preview deployment 7707541366.",
-    "pr_number": 562,
-    "pr_head_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
-    "preview_deployment_id": 7707541366,
-    "preview_url": "https://college-basketball-history-f4w7qw673-elliott-pollacks-projects.vercel.app",
-    "preview_checkpoint_sha256": "d8d120817cb3f1b981209dcaefe3572a37c346f010d60d2469b501c9388f7897",
-    "preview_verification_sha256": "192d6c24cff44a9cdee48ee0ca06a4df0b482ee42d68dd00ccab66365ad9b507"
-  },
-  "final_release_continuation": {
-    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
-    "production_request_id": "hawai-i-release-production-proof-0001"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "a4ec9cac995d8ce0396028c475e8546f2d30d117197e67f7456503d0c30c0215"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Hawai'i serialized Implementation lane — owner-authorized exact Gate 2 approval",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating 'Approved. Proceed' in direct response to the exact fresh-verified Hawai'i PR #562 Preview at head c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7 and Vercel Preview deployment 7707541366. This authorizes the repository-defined final release phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof, and independent COMPLETE verification while identities remain unchanged. This request itself records only Gate 2 approval and grants no direct merge, protected-main mutation, recovery, maintenance, unrelated repair, or new historical authority."
+    "origin": "ChatGPT Hawai'i Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact Hawai'i Preview with 'Approved. Proceed,' authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #562 head c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7 against approved main 8f1b8e79e55108be63afcd13e6e570ab928d6bb4. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge a13229ce64a489b39aaada66f0d8bf38db6868db with parents 8f1b8e79e55108be63afcd13e6e570ab928d6bb4 and c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": true,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": true,
+    "release_gate2_approval": false,
     "release_preview_verify": false,
-    "release_production_proof": false,
+    "release_production_proof": true,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
