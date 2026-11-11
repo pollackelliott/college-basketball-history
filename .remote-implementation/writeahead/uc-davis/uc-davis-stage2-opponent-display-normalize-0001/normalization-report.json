@@ -1,0 +1,123 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Holy Names University"
+      ],
+      "authority_signature": "holynamesuniversity",
+      "canonical_opponent_key": "holy-names",
+      "from_names": [
+        "Holy Names"
+      ],
+      "target_row_count": 1,
+      "to_name": "Holy Names University"
+    },
+    {
+      "authority_names": [
+        "Jessup University"
+      ],
+      "authority_signature": "jessupuniversity",
+      "canonical_opponent_key": "jessup",
+      "from_names": [
+        "Jessup"
+      ],
+      "target_row_count": 1,
+      "to_name": "Jessup University"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 14,
+  "source_game_display_changes": [
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2013-14-002",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2014-15-001",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2015-16-013",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2016-17-004",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Jessup",
+      "normalized_opponent_key": "jessup",
+      "source_game_id": "UC-DAVIS-2016-17-012",
+      "to_name": "Jessup University"
+    },
+    {
+      "from_name": "Jessup",
+      "normalized_opponent_key": "jessup",
+      "source_game_id": "UC-DAVIS-2017-18-009",
+      "to_name": "Jessup University"
+    },
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2017-18-014",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Jessup",
+      "normalized_opponent_key": "jessup",
+      "source_game_id": "UC-DAVIS-2018-19-010",
+      "to_name": "Jessup University"
+    },
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2018-19-014",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Jessup",
+      "normalized_opponent_key": "jessup",
+      "source_game_id": "UC-DAVIS-2019-20-002",
+      "to_name": "Jessup University"
+    },
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2019-20-016",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Jessup",
+      "normalized_opponent_key": "jessup",
+      "source_game_id": "UC-DAVIS-2020-21-004",
+      "to_name": "Jessup University"
+    },
+    {
+      "from_name": "Holy Names",
+      "normalized_opponent_key": "holy-names",
+      "source_game_id": "UC-DAVIS-2022-23-010",
+      "to_name": "Holy Names University"
+    },
+    {
+      "from_name": "Jessup",
+      "normalized_opponent_key": "jessup",
+      "source_game_id": "UC-DAVIS-2023-24-001",
+      "to_name": "Jessup University"
+    }
+  ],
+  "status": "PASS"
+}

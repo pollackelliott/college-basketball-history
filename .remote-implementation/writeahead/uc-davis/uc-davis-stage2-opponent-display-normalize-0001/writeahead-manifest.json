@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/uc-davis/opponents.csv": "17a0267627697c8a2da5388e64af421ae781aaa4189398b84ae0366f8c106550",
+    "schools/uc-davis/source-games.csv": "22d20d0675f1bb48a6832cb68793b90fca28993192d0806edf0d7757cadc2647"
+  },
+  "changed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "commit_message": "Normalize uc-davis historical opponent display representation",
+  "expected_blocker_keys": [
+    "holy-names",
+    "jessup"
+  ],
+  "expected_target_predecessor_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "field_level_proof_sha256": "b4e8cf08034d2509d24d95d803d0ba3fbccf374624765f745aa26202c4d75b09",
+  "global_lock_commit": "95494a06e0e19f039b08c24312d16d106aaad61d",
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "d8d6a1571ca5e299e9f70e4a792a21766d46db46b41f2f9b4d4433dea25e9bb9",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "8cc822c21553fdce3825930a59622d540b539dc8",
+  "prepared_parent_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "prepared_tree_sha": "5b1944af126bcf380028315a9909a02a94fe0b2e",
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "repository_validation": "PASS",
+  "request_id": "uc-davis-stage2-opponent-display-normalize-0001",
+  "request_sha256": "cf7e5b9ee85eaa5f5b017181f4a3da099b4a20fb03b4f7d1f1cd2d94e552edd5",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift_after": {
+    "baseline_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "integration_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "integration_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "6257532d6eb12ecbf29865a38d4e35f143952b89f9b43be1f4c18761565b5947",
+    "field-level-proof.json": "b4e8cf08034d2509d24d95d803d0ba3fbccf374624765f745aa26202c4d75b09",
+    "integration-freeze.json": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+    "normalization-report.json": "d8d6a1571ca5e299e9f70e4a792a21766d46db46b41f2f9b4d4433dea25e9bb9",
+    "semantic-drift-proof.json": "a9dc3ad454bb166a34c981b9bd77e7230389aa7225febeb812bee16a0fb3ab8c"
+  },
+  "source_game_normalized_name_row_count": 14,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "6257532d6eb12ecbf29865a38d4e35f143952b89f9b43be1f4c18761565b5947",
+  "target_branch": "data/uc-davis-onboarding"
+}

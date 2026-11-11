@@ -1,0 +1,37 @@
+{
+  "allowed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "holy-names",
+    "jessup"
+  ],
+  "opponent_changed_row_count": 2,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "source_game_changed_ids": [
+    "UC-DAVIS-2013-14-002",
+    "UC-DAVIS-2014-15-001",
+    "UC-DAVIS-2015-16-013",
+    "UC-DAVIS-2016-17-004",
+    "UC-DAVIS-2016-17-012",
+    "UC-DAVIS-2017-18-009",
+    "UC-DAVIS-2017-18-014",
+    "UC-DAVIS-2018-19-010",
+    "UC-DAVIS-2018-19-014",
+    "UC-DAVIS-2019-20-002",
+    "UC-DAVIS-2019-20-016",
+    "UC-DAVIS-2020-21-004",
+    "UC-DAVIS-2022-23-010",
+    "UC-DAVIS-2023-24-001"
+  ],
+  "source_game_changed_keys": [
+    "holy-names",
+    "jessup"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 14
+}

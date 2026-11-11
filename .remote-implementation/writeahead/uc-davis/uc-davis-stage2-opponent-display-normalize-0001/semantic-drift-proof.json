@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "integration_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+    "integration_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  }
+}
