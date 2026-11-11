@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "3a901fbc0050ee1838b11b40087bf55d15ba2a1c7e2e2859459a504a05600d32",
+    "implementation-stage2-status.json": "8b6d11d14ad544979ac7d176a8875b4d9c17aa361530d1d6a0c50a0d31802e9f",
+    "plan.json": "490a7da92a447fddbd94e8db435d98911d2021f1469cf8c5c7f9371f3eff6af6",
+    "review.csv": "11f8c55868f0e9ea9266274c4abfdc0e4ae50460088cd35c48ed95da1e11c845",
+    "review.md": "0d46ef6075790777901cd2363b54c1d5ebee24ab06976cf686f6dd8928ee1886"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "3a901fbc0050ee1838b11b40087bf55d15ba2a1c7e2e2859459a504a05600d32",
+    "implementation-stage2-status.json": "ba97caa3290ba75dcaf23a9bf5478a1c6748f48c60f1c9ce2b66407cfe28e414",
+    "plan.json": "b974b1c87ba879d6582156e3c62e7224af23c4829787dbc997fdd5055588b454",
+    "review.csv": "11f8c55868f0e9ea9266274c4abfdc0e4ae50460088cd35c48ed95da1e11c845",
+    "review.md": "d7017f0b6c00fb1766c1e6bb2c913733ee797b3a080f5380cc1e73889cb51988"
+  },
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "hawai-i-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+  "target_tree_sha": "e1c0f0483eb0e1131b3b578bb632f35af9f43b00",
+  "tracked_stage2_mutation": "NONE"
+}
