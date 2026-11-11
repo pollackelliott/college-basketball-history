@@ -1,0 +1,110 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 13,
+      "discrepancy": 40,
+      "identity": 3,
+      "publication": 1
+    },
+    "decision_count": 58,
+    "decision_fields": {
+      "game_date": 12,
+      "game_identity": 3,
+      "game_type": 2,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "score": 10,
+      "site_type": 29
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-1984-85-020-CBBG-0108101-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-1988-89-028-CBBG-0108207-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-1988-89-028-CBBG-0108214-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1970-71-006-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1971-72-008-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1975-76-011-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1979-80-008-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1986-87-011-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1988-89-006-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1991-92-002-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1992-93-007-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1994-95-001-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1994-95-007-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1997-98-011-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1998-99-005-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1998-99-009-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-1999-00-013-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2001-02-005-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2001-02-011-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2004-05-008-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2007-08-010-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2011-12-010-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2011-12-011-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2012-13-011-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2015-16-010-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2015-16-011-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2019-20-012-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2019-20-013-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-2023-24-011-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 29,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0108101",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-1984-85-014"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-1984-85-020"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0108207",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-1988-89-015"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-1988-89-028"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0108214",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-1988-89-023"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-1988-89-028"
+          ]
+        }
+      ],
+      "count": 3,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}

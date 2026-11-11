@@ -1,0 +1,44 @@
+{
+  "branch": "remote-stage2-census/hawai-i-d5690304f4fd",
+  "capability_census": {
+    "path": ".onboarding/hawai-i/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 2
+  },
+  "head_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
+  "integration_base_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "integration_semantic_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 13,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 13,
+      "discrepancy": 40,
+      "identity": 3,
+      "publication": 1
+    },
+    "decision_count": 58,
+    "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+    "discrepancies_to_add": 40,
+    "existing_game_matches": 528,
+    "identity_cardinality_constraints": 3,
+    "new_canonical_games": 1118,
+    "plan_path": ".onboarding/hawai-i/plan.json",
+    "review_path": ".onboarding/hawai-i/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "6a192223de544cd942100cce9c0a7565985c9784",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
