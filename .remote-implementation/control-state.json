@@ -536,18 +536,19 @@
     "uc-davis-stage1-verify-0001",
     "uc-davis-phase0-0001",
     "uc-davis-stage2-census-0001",
-    "uc-davis-stage2-opponent-display-normalize-0001"
+    "uc-davis-stage2-opponent-display-normalize-0001",
+    "uc-davis-stage2-proposal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "uc-davis-stage2-proposal-0001",
+  "active_request_sha256": "7c4c4995cd5327478c82f5e41a9f81a1fd57fddb87bf65391bd3444ba527f308",
+  "active_school_key": "uc-davis",
+  "active_target_branch": "data/uc-davis-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1092,8 +1093,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/uc-davis/uc-davis-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "c7d7cff5850caa0543b7253a0894fbb3d8111358cd6fd30658dfe9c87f5bca6a"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43049392134",
+  "lock_acquisition_request_commit": "0ef1de8592120456c8badea077e5c6f44a97aa5d",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
