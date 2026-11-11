@@ -524,7 +524,7 @@
     "hawai-i-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
-  "active_lock_commit": null,
+  "active_lock_commit": "79effdf7527ede71d955963c843748df2156f1f9",
   "active_lock_owner": "github-actions:42950635621:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
