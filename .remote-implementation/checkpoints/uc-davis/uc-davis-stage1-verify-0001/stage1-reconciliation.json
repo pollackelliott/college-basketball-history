@@ -1,0 +1,624 @@
+{
+  "ambiguous_stop_count": 0,
+  "blocker_count": 0,
+  "conference": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "REUSE_CURRENT_IDENTITY": 2
+    },
+    "row_count": 2,
+    "rows": [
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "issues": []
+      },
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "big-west",
+        "conference_name": "Big West",
+        "issues": []
+      }
+    ],
+    "schema_version": 1
+  },
+  "conference_reconciliation": null,
+  "integration_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "maintenance_required_count": 0,
+  "origin_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "program_alias": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NO_CURRENT_VERIFIED_ALIAS": 15
+    },
+    "row_count": 15,
+    "rows": [
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Academy of Art",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "academy-of-art",
+        "source_opponent_label": "Academy of Art"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Bethany College (Calif.)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bethany-california",
+        "source_opponent_label": "Bethany"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal Maritime",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-maritime",
+        "source_opponent_label": "Cal Maritime"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Fresno Pacific",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "fresno-pacific",
+        "source_opponent_label": "Fresno Pacific"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Holy Names",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "holy-names",
+        "source_opponent_label": "Holy Names"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "La Verne",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "la-verne",
+        "source_opponent_label": "La Verne"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Menlo",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "menlo",
+        "source_opponent_label": "Menlo"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Notre Dame de Namur",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "notre-dame-de-namur",
+        "source_opponent_label": "Notre Dame de Namur"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Pacific Union",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "pacific-union",
+        "source_opponent_label": "Pacific Union"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Simpson University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "simpson-university",
+        "source_opponent_label": "Simpson"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "UC Merced",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "uc-merced",
+        "source_opponent_label": "UC Merced"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "UC Santa Cruz",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "uc-santa-cruz",
+        "source_opponent_label": "UC Santa Cruz"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Whittier",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "whittier",
+        "source_opponent_label": "Whittier"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Jessup",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "jessup",
+        "source_opponent_label": "William Jessup"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Winston-Salem State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "winston-salem-state",
+        "source_opponent_label": "Winston-Salem State"
+      }
+    ],
+    "schema_version": 1
+  },
+  "research_base_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "research_zip_sha256": "c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d",
+  "schema_version": 2,
+  "school_key": "uc-davis",
+  "status": "PASS",
+  "venue": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 2,
+      "SAFE_REPRESENTATION_REUSE": 25
+    },
+    "rows": [
+      {
+        "candidate_venue_ids": [
+          "VEN-000567"
+        ],
+        "canonical_name": "Alaska Airlines Center",
+        "chronology_conflicts": [],
+        "city": "Anchorage",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000567",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "AK",
+        "target_venue_id": "VEN-000567",
+        "target_venue_key": "alaska-airlines-center",
+        "venue_key": "alaska-airlines-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000035"
+        ],
+        "canonical_name": "Cameron Indoor Stadium",
+        "chronology_conflicts": [],
+        "city": "Durham",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000035",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NC",
+        "target_venue_id": "VEN-000035",
+        "target_venue_key": "cameron-indoor-stadium",
+        "venue_key": "cameron-indoor-stadium"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000643"
+        ],
+        "canonical_name": "Chiles Center",
+        "chronology_conflicts": [],
+        "city": "Portland",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000643",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OR",
+        "target_venue_id": "VEN-000643",
+        "target_venue_key": "chiles-center",
+        "venue_key": "chiles-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000365"
+        ],
+        "canonical_name": "College Park Center",
+        "chronology_conflicts": [],
+        "city": "Arlington",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000365",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "TX",
+        "target_venue_id": "VEN-000365",
+        "target_venue_key": "college-park-center",
+        "venue_key": "college-park-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000559"
+        ],
+        "canonical_name": "Dahlberg Arena",
+        "chronology_conflicts": [],
+        "city": "Missoula",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000559",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "MT",
+        "target_venue_id": "VEN-000559",
+        "target_venue_key": "dahlberg-arena",
+        "venue_key": "dahlberg-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000378"
+        ],
+        "canonical_name": "Dee Glen Smith Spectrum",
+        "chronology_conflicts": [],
+        "city": "Logan",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000378",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "UT",
+        "target_venue_id": "VEN-000378",
+        "target_venue_key": "dee-glen-smith-spectrum",
+        "venue_key": "dee-glen-smith-spectrum"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "First National Bank Arena",
+        "chronology_conflicts": [],
+        "city": "Jonesboro",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AR",
+        "target_venue_id": "",
+        "target_venue_key": "first-national-bank-arena",
+        "venue_key": "first-national-bank-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000074"
+        ],
+        "canonical_name": "Golden 1 Center",
+        "chronology_conflicts": [],
+        "city": "Sacramento",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000074",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000074",
+        "target_venue_key": "golden-1-center",
+        "venue_key": "golden-1-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000079"
+        ],
+        "canonical_name": "Hilton Coliseum",
+        "chronology_conflicts": [],
+        "city": "Ames",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000079",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "IA",
+        "target_venue_id": "VEN-000079",
+        "target_venue_key": "hilton-coliseum",
+        "venue_key": "hilton-coliseum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000468"
+        ],
+        "canonical_name": "Klotsche Center",
+        "chronology_conflicts": [],
+        "city": "Milwaukee",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000468",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "WI",
+        "target_venue_id": "VEN-000468",
+        "target_venue_key": "klotsche-center",
+        "venue_key": "klotsche-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000606"
+        ],
+        "canonical_name": "Leavey Center",
+        "chronology_conflicts": [],
+        "city": "Santa Clara",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000606",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000606",
+        "target_venue_key": "leavey-center",
+        "venue_key": "leavey-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000126"
+        ],
+        "canonical_name": "McArthur Court",
+        "chronology_conflicts": [],
+        "city": "Eugene",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000126",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OR",
+        "target_venue_id": "VEN-000126",
+        "target_venue_key": "mcarthur-court",
+        "venue_key": "mcarthur-court"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000719"
+        ],
+        "canonical_name": "Mitchell Center",
+        "chronology_conflicts": [],
+        "city": "Mobile",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000719",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "AL",
+        "target_venue_id": "VEN-000719",
+        "target_venue_key": "mitchell-center",
+        "venue_key": "mitchell-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000356"
+        ],
+        "canonical_name": "Orleans Arena",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000356",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000356",
+        "target_venue_key": "orleans-arena",
+        "venue_key": "orleans-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001033"
+        ],
+        "canonical_name": "Peter W. Stott Center",
+        "chronology_conflicts": [],
+        "city": "Portland",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-001033",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OR",
+        "target_venue_id": "VEN-001033",
+        "target_venue_key": "peter-w-stott-center",
+        "venue_key": "peter-w-stott-center"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "University Credit Union Center",
+        "chronology_conflicts": [],
+        "city": "Davis",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CA",
+        "target_venue_id": "",
+        "target_venue_key": "university-credit-union-center",
+        "venue_key": "university-credit-union-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000449"
+        ],
+        "canonical_name": "University Credit Union Pavilion",
+        "chronology_conflicts": [],
+        "city": "Moraga",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000449",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000449",
+        "target_venue_key": "university-credit-union-pavilion",
+        "venue_key": "university-credit-union-pavilion"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000226"
+        ],
+        "canonical_name": "Viejas Arena",
+        "chronology_conflicts": [],
+        "city": "San Diego",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "Viejas Arena at Aztec Bowl"
+        ],
+        "research_venue_id": "VEN-000226",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000226",
+        "target_venue_key": "viejas-arena",
+        "venue_key": "viejas-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000523"
+        ],
+        "canonical_name": "War Memorial Gymnasium",
+        "chronology_conflicts": [],
+        "city": "San Francisco",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000523",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000523",
+        "target_venue_key": "war-memorial-gymnasium-san-francisco",
+        "venue_key": "war-memorial-gymnasium-san-francisco"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000386"
+        ],
+        "canonical_name": "Anaheim Convention Center",
+        "chronology_conflicts": [],
+        "city": "Anaheim",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000386",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000386",
+        "target_venue_key": "anaheim-convention-center",
+        "venue_key": "anaheim-convention-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000082"
+        ],
+        "canonical_name": "Honda Center",
+        "chronology_conflicts": [],
+        "city": "Anaheim",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000082",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000082",
+        "target_venue_key": "honda-center",
+        "venue_key": "honda-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000399"
+        ],
+        "canonical_name": "Lee’s Family Forum",
+        "chronology_conflicts": [],
+        "city": "Henderson",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000399",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000399",
+        "target_venue_key": "lees-family-forum",
+        "venue_key": "lees-family-forum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000135"
+        ],
+        "canonical_name": "Michelob ULTRA Arena",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000135",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000135",
+        "target_venue_key": "michelob-ultra-arena",
+        "venue_key": "michelob-ultra-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000221"
+        ],
+        "canonical_name": "University of Dayton Arena",
+        "chronology_conflicts": [],
+        "city": "Dayton",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000221",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OH",
+        "target_venue_id": "VEN-000221",
+        "target_venue_key": "university-of-dayton-arena",
+        "venue_key": "university-of-dayton-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000024"
+        ],
+        "canonical_name": "BOK Center",
+        "chronology_conflicts": [],
+        "city": "Tulsa",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000024",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "OK",
+        "target_venue_id": "VEN-000024",
+        "target_venue_key": "bok-center",
+        "venue_key": "bok-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000542"
+        ],
+        "canonical_name": "Maples Pavilion",
+        "chronology_conflicts": [],
+        "city": "Stanford",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000542",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000542",
+        "target_venue_key": "maples-pavilion",
+        "venue_key": "maples-pavilion"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000097"
+        ],
+        "canonical_name": "Jon M. Huntsman Center",
+        "chronology_conflicts": [],
+        "city": "Salt Lake City",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000097",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "UT",
+        "target_venue_id": "VEN-000097",
+        "target_venue_key": "jon-m-huntsman-center",
+        "venue_key": "jon-m-huntsman-center"
+      }
+    ],
+    "schema_version": 1,
+    "venue_count": 27
+  },
+  "venue_reconciliation": null
+}
