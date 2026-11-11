@@ -1041,11 +1041,11 @@
   "current_sequence": 499,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "hawai-i-stage2-current-main-refresh-0001",
     "school_key": "hawai-i",
     "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
