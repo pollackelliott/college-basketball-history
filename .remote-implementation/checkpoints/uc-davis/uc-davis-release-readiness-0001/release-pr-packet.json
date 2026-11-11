@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "8c032a33b6cb071b3d57eb3595afa1f8c0f656d9280684c5069e4bae29882cd0",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-release-readiness-0001/pr-body.md",
+  "body_sha256": "f84f00cff8194b6af1bf1f987b9fcbd7ff81a89d35f4df60f053e6200eb1976f",
+  "head_branch": "data/uc-davis-onboarding",
+  "head_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish UC Davis history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "uc-davis-release-preview-verify-0001",
+  "readiness_request_id": "uc-davis-release-readiness-0001",
+  "release_manifest_sha256": "04eb503833a8f66f494ccdca1af04dbcdf31127edcf64aba7980cb18c96c8cd2",
+  "schema_version": 1,
+  "school_key": "uc-davis"
+}
