@@ -1,0 +1,47 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_venue": 15,
+    "public_gap_rows": 15,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 1650,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_venue": [
+      "CBBG-0024137",
+      "CBBG-0034454",
+      "CBBG-0066853",
+      "CBBG-0128153",
+      "CBBG-0135028",
+      "CBBG-0138436",
+      "CBBG-0207260",
+      "CBBG-0207261",
+      "CBBG-0207413",
+      "CBBG-0207460",
+      "CBBG-0207491",
+      "CBBG-0207506"
+    ]
+  },
+  "history_start_season": "1970-1971",
+  "school_key": "hawai-i",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 16,
+    "neutral_missing_venue": 16,
+    "researched_gap_rows": 16,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 1649
+  },
+  "status": "PASS",
+  "warnings": []
+}
