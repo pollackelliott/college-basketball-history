@@ -1,0 +1,30 @@
+{
+  "approval_proof_sha256": "0a793325f15c71d67d9b914f9ba40d71c47e745179b71fb18bcac8ac5cc92e9c",
+  "approved_plan_hash": "8c032a33b6cb071b3d57eb3595afa1f8c0f656d9280684c5069e4bae29882cd0",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "uc-davis-release-production-proof-0001"
+  },
+  "gate2_merge_packet_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-release-gate2-approval-0001/gate2-merge-packet.json",
+  "gate2_merge_packet_sha256": "8266a2e2148cb3db055035a34f986af9dde3ff1baeaf8c1f33ff2ac634e68dad",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "pr_number": 563,
+  "preview_checkpoint_sha256": "0b34ac1f7e70f91147b0329e4348f6dd63fa20cb9aefa2d096f875aac4912986",
+  "preview_deployment_id": 7716210605,
+  "preview_url": "https://college-basketball-history-hozci0dry-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "a7ac9fafe436be063c3f82543873dd45045d3a9c32204270cb833ed8a6c738ee",
+  "production_proof": false,
+  "production_request_id": "uc-davis-release-production-proof-0001",
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "release_manifest_sha256": "04eb503833a8f66f494ccdca1af04dbcdf31127edcf64aba7980cb18c96c8cd2",
+  "request_id": "uc-davis-release-gate2-approval-0001",
+  "request_sha256": "e5756d1e78c19ac000ce7c106f37f38da1704b693b014d909566e576863a6a8c",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "f83219268b85b44314fba7b53256767f19ed3004"
+}
