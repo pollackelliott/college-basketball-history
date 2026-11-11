@@ -519,18 +519,19 @@
     "richmond-release-production-proof-0001",
     "hawai-i-stage1-0001",
     "hawai-i-phase0-0001",
-    "hawai-i-phase0-0002"
+    "hawai-i-phase0-0002",
+    "hawai-i-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "hawai-i-stage2-census-0001",
+  "active_request_sha256": "9d8ca3521d99091dcfc04d0f621b1fa7edfdaa8b3a50e19a975b37578a169089",
+  "active_school_key": "hawai-i",
+  "active_target_branch": "data/hawai-i-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1051,8 +1052,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/hawai-i/hawai-i-phase0-0002/writeahead-manifest.json",
     "writeahead_manifest_sha256": "ffddce6ed57932d688296b7a6470cc4ae5a22db26c188a51213bd9cc167e147c"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "42942781452",
+  "lock_acquisition_request_commit": "693a4b3840d16a6ede6d2c420adc42ce424f5aea",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
