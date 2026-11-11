@@ -21,7 +21,6 @@ jobs:
       - name: Check out exact triggering commit
         uses: actions/checkout@v4
         with:
-          ref: $GITHUB_SHA
           fetch-depth: 0
 
       - name: Detect request-bearing trigger
