@@ -1063,7 +1063,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/hawai-i/hawai-i-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "12fbefddf471cf76a4ba9b6d5c4bdabb558e48fa555266827834875cefea3ec2",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1073,7 +1073,7 @@
     "production_deployment_id": 7708960063,
     "production_json_checked_count": 94,
     "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "hawai-i-release-production-proof-0001",
     "school_key": "hawai-i"
   },
