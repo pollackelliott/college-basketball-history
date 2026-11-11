@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-stage2-gate1-fill-0001",
+  "school_key": "hawai-i",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "a0bbe6e98167efc21ce4440fe49fb673439b379f",
+  "previous_control_state_sha256": "c4bdd26cb20e35bea5e1749671724a8c93c73ae0af6bd46b3b6c35462a6582c5",
+  "expected_protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-stage2-proposal-0001/checkpoint-manifest.json",
+    "sha256": "0f016b57ecf05bb10034f20633ee12138abbf22b3e42aa64a0cdae4258e58964"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-stage2-proposal-0001/stage2-proposal-rehearsal-verification.json",
+    "sha256": "bb719d6e9d8640c25a86d1f7e48aa353869d4d7e712065e1fdca7dff61097184"
+  },
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "recommendation_map_sha256": "1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a",
+  "approved_plan_hash_preview": "4648bf631bd7d92b658a245e02f427e2d8967eecd2120a7457014bf6894b6c0d",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner replied “Approved. Proceed” immediately after the Hawai'i Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY packet bound to proposal hawai-i-stage2-proposal-0001, decision universe 341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf, recommendation map 1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a, and approved-plan-hash preview 4648bf631bd7d92b658a245e02f427e2d8967eecd2120a7457014bf6894b6c0d. This approval authorizes only that exact fresh-verified Hawai'i Gate 1 packet and the guarded fill, pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification phase. It does not approve release readiness, Preview, Owner Gate 2, merge, Production, recovery, unrelated mutation, or changed historical meaning.",
+    "proposal_checkpoint_sha256": "0f016b57ecf05bb10034f20633ee12138abbf22b3e42aa64a0cdae4258e58964",
+    "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+    "recommendation_map_sha256": "1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a",
+    "approved_plan_hash_preview": "4648bf631bd7d92b658a245e02f427e2d8967eecd2120a7457014bf6894b6c0d"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "hawai-i-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "hawai-i-stage2-gate1-seal-0001",
+    "apply_request_id": "hawai-i-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Hawai'i serialized Implementation — explicit exact Owner Gate 1 approval",
+    "authorization": "Owner explicitly approved the exact fresh-verified Hawai'i Gate 1 packet and instructed the lane to proceed. Authorize one guarded Stage 2 Gate 1 fill and its repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification only; no release readiness, PR/Preview, Owner Gate 2, merge, Production proof, recovery, unrelated mutation, or changed historical meaning."
+  },
+  "authority": {
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": true,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
