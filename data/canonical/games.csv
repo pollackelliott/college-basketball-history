@@ -13191,7 +13191,7 @@ CBBG-0013190,1986-1987,1986-12-20,EXACT,kansas,texas-tech,82,52,kansas,0,TEAM_A_
 CBBG-0013191,1986-1987,1986-12-22,EXACT,kansas,the-citadel,74,71,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013192,1986-1987,1986-12-28,EXACT,kansas,pittsburgh,76,79,pittsburgh,0,NEUTRAL,,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013193,1986-1987,1986-12-29,EXACT,kansas,ohio-state,78,79,ohio-state,1,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0013194,1986-1987,1986-12-30,EXACT,hawai-i,kansas,80,81,kansas,1,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0013194,1986-1987,1986-12-30,EXACT,hawai-i,kansas,80,81,kansas,1,NEUTRAL,,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013195,1986-1987,1987-01-06,EXACT,kansas,wichita-state,49,54,wichita-state,0,TEAM_B_HOME,wichita-state,,,Wichita,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013196,1986-1987,1987-01-08,EXACT,kansas,temple,67,64,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013197,1986-1987,1987-01-11,EXACT,kansas,oklahoma-state,66,63,kansas,0,TEAM_B_HOME,oklahoma-state,gallagher-iba-arena,VEN-000072,Stillwater,OK,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oklahoma-state/OKSTRAW-01778;venue_key=gallagher-iba-arena;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
@@ -13382,7 +13382,7 @@ CBBG-0013381,1992-1993,1992-12-12,EXACT,kansas,kansas-city,108,62,kansas,0,TEAM_
 CBBG-0013382,1992-1993,1992-12-19,EXACT,east-tennessee-state,kansas,83,86,kansas,0,TEAM_B_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013383,1992-1993,1992-12-21,EXACT,kansas,nc-state,84,64,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013384,1992-1993,1992-12-27,EXACT,jackson-state,kansas,85,93,kansas,0,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0013385,1992-1993,1992-12-29,EXACT,hawai-i,kansas,66,94,kansas,0,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0013385,1992-1993,1992-12-29,EXACT,hawai-i,kansas,66,94,kansas,0,NEUTRAL,,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013386,1992-1993,1992-12-30,EXACT,kansas,michigan,74,86,michigan,0,NEUTRAL,,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=michigan/MICHRAW-01762;venue_key=neal-s-blaisdell-center;site_type=NEUTRAL;fields=venue_id,venue_key]"
 CBBG-0013387,1992-1993,1993-01-06,EXACT,kansas,wichita-state,103,54,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013388,1992-1993,1993-01-09,EXACT,iowa-state,kansas,71,78,kansas,0,TEAM_B_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
@@ -13552,7 +13552,7 @@ CBBG-0013551,1997-1998,1997-12-20,EXACT,kansas,tcu,94,78,kansas,0,NEUTRAL,,kempe
 CBBG-0013552,1997-1998,1997-12-23,EXACT,kansas,usc,74,69,kansas,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02135;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0013553,1997-1998,1997-12-28,EXACT,kansas,ohio-state,69,56,kansas,0,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013554,1997-1998,1997-12-29,EXACT,kansas,vanderbilt,89,82,kansas,0,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0013555,1997-1998,1997-12-30,EXACT,hawai-i,kansas,76,65,hawai-i,0,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0013555,1997-1998,1997-12-30,EXACT,hawai-i,kansas,76,65,hawai-i,0,NEUTRAL,,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013556,1997-1998,1998-01-03,EXACT,kansas,nebraska,96,76,kansas,0,TEAM_A_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013557,1997-1998,1998-01-07,EXACT,colorado,kansas,62,111,kansas,0,TEAM_B_HOME,kansas,allen-fieldhouse,VEN-000003,Lawrence,KS,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0013558,1997-1998,1998-01-10,EXACT,kansas,texas,102,72,kansas,0,TEAM_B_HOME,texas,frank-erwin-center,VEN-000068,Austin,TX,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=texas/TEXRAW-02141;venue_key=frank-erwin-center;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
