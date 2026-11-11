@@ -1,0 +1,59 @@
+{
+  "approved_plan_hash_preview": "4648bf631bd7d92b658a245e02f427e2d8967eecd2120a7457014bf6894b6c0d",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from hawai-i-stage2-gate1-fill-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "2e4accbbf1d41d7b5e8335a3919d9282c930408a622c5f5c554f9b97609bcf7c",
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "expected_protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "filled_review_sha256": "b89d0f5ccec02fcf2ca062cf68a4ffc9af3bc69802b32fac465696e4ec294880",
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "phase_continuation": {
+    "apply_request_id": "hawai-i-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "hawai-i-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "hawai-i-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "f3e1574a7f1dee33efc7030f9560d2d9b4b2a2fb",
+  "previous_control_state_sha256": "733faa8b028a1053b4f371fc50434a4b52d9c582b91c2a76901aaebbf1a268c1",
+  "recommendation_map_sha256": "1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a",
+  "request_id": "hawai-i-stage2-preseal-rehearsal-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "31076c7c4578be8514022586820b44ddc4b783c763544d62fda3259092fa944f"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "df313eb9f5f42c0055eec2ed8d82d5ba3c623ec63d127bb7363ef5252c290329"
+  },
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e"
+}
