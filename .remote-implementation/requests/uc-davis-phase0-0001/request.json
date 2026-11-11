@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-phase0-0001",
+  "operation": "PHASE0",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "e36ec2cd59cf1d4ef48e6f29f5be038c9fc08325",
+  "previous_control_state_sha256": "b4a825dffea5b7efc0958f8a1b253c857fbbbec3cfbd923148cc086d426cc0c4",
+  "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "target_branch": "data/uc-davis-onboarding",
+  "research_checkpoint": {
+    "sha256": "c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d",
+    "research_base_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "77f81e6f8451c6b50180b41b4cbf43632b972ddb",
+      "path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-stage1-0001-final/piece-",
+      "part_count": 16
+    }
+  },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-stage1-verify-0001/checkpoint-manifest.json",
+    "sha256": "f318a0945b911486d9ab75870dd5c819cb0ba139f31b47f003e6b72fd7237873"
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "history_scope": {
+    "start_season": "2004-2005",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "2004-05+",
+    "notes": "Accepted immutable UC Davis Research Freeze scope is 2004-05+ and current protected-main reusable scope authority agrees. Historical scope and frozen game universe are unchanged."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT UC Davis serialized Implementation lane — guarded Phase 0 after fresh-verified Stage 1 PASS",
+    "authorization": "Owner said Proceed after UC Davis Stage 1 completed PASS. This authorizes exactly the next bounded owner-facing phase: guarded PHASE0 against protected main a13229ce64a489b39aaada66f0d8bf38db6868db, bound to immutable Research Freeze c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d and fresh Stage 1 verification checkpoint uc-davis-stage1-verify-0001. Stage 1 found zero blockers, zero ambiguities, zero dedicated shared/global maintenance requirements, 25 safe venue reuses, two ordinary new venue registrations, and two conference reuses. Authorizes permanent Phase 0 fresh Stage 1 recheck, deterministic current-main reconciliation, ordinary target-school/shared registrations permitted within Phase 0, Integration Freeze creation, target branch publication to data/uc-davis-onboarding, and required independent fresh Phase 0 verification. No Stage 2, Owner Gate 1, Preview, Owner Gate 2, merge, release, unrelated maintenance, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "phase0": true,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
