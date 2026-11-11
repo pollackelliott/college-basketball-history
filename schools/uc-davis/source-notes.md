@@ -1,0 +1,16 @@
+# uc-davis source notes
+
+Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.
+
+## Research coverage declaration
+
+- Primary-source historical results cutoff: 2025-2026
+- Required completed-season cutoff: 2025-2026
+- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.
+
+## Durable row-level source families
+
+
+## Row-level source URLs
+
+- https://ucdavisaggies.com/sports/2026/5/19/mens-basketball-record-book.aspx
