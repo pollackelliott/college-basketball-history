@@ -1,0 +1,47 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "8427bdb2137a707538fbe242b7f149b86e619e17970df44ed2aaa205d2201c7f",
+    "implementation-stage2-status.json": "bda0c40c176f30a6dac2ae4ab073e60049e3ad7a1152d1a2fdae777e0368efde",
+    "plan.json": "f5847a16878ed29755309fcd1019624b4df84df1eda17086b237244fb123a6f9",
+    "review.csv": "af7d891de7ac6b6c77cbca5e124b9ad9320f5c5c94fcd150f8d6b88da02d098c",
+    "review.md": "b2701a45bdf225356a191a739d8d205e0643aeb1d51c7f6cfceb9fdd6ca7f6f3"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "8427bdb2137a707538fbe242b7f149b86e619e17970df44ed2aaa205d2201c7f",
+    "implementation-stage2-status.json": "9598d783ed0f96f02ac8b72a8e82d0030488117edcc29f48aa1a442a985e966d",
+    "plan.json": "aba54bf5d3b356184ab9528c6efb85e742033cdf3f51a3a4ad9477e8e2cf528f",
+    "review.csv": "af7d891de7ac6b6c77cbca5e124b9ad9320f5c5c94fcd150f8d6b88da02d098c",
+    "review.md": "e44c019139a88aae887f7124b33994a37ec64c63d3ac9059a1d742ef4c8def18"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "decision_universe_sha256": "9d7bc5900fc55f5352e18189354dc083a0fd3645b316274ec6932e0cd05d043a",
+  "expected_blocker_keys": [
+    "holy-names",
+    "jessup"
+  ],
+  "field_level_proof_sha256": "b4e8cf08034d2509d24d95d803d0ba3fbccf374624765f745aa26202c4d75b09",
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "d8d6a1571ca5e299e9f70e4a792a21766d46db46b41f2f9b4d4433dea25e9bb9",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "uc-davis-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_predecessor_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "target_sha": "8cc822c21553fdce3825930a59622d540b539dc8",
+  "target_tree_sha": "5b1944af126bcf380028315a9909a02a94fe0b2e",
+  "tracked_stage2_mutation": "NONE"
+}
