@@ -36,7 +36,7 @@ from program_history import (
     normalize_scope_season,
     publication_history_games,
     publication_history_start,
-    trim_conference_history,
+    publication_conference_timeline,
 )
 from venue_reference import (
     canonical_venue_geography_errors,
@@ -165,6 +165,13 @@ def conference_publication_metadata(
                 "conference_key": row.get("conference_key", "").strip(),
                 "conference_name": row.get("conference_name", "").strip(),
                 "membership_type": row.get("membership_type", "").strip(),
+                **(
+                    {
+                        "classification": row.get("classification", "").strip(),
+                    }
+                    if row.get("classification", "").strip()
+                    else {}
+                ),
             }
             for row in history_rows
         ],
@@ -1039,12 +1046,6 @@ def main() -> int:
         scope_exclusion_counts[program_key] = (
             len(all_program_games) - len(scoped_canonical)
         )
-        public_conference_history = trim_conference_history(
-            conference_history,
-            history_start,
-            history_intervals,
-        )
-
         perspective_games = [
             perspective_game(
                 row,
@@ -1089,6 +1090,11 @@ def main() -> int:
         }
         season_labels = (
             set(seasons) | set(coverage_by_season) | set(accounting_by_season)
+        )
+        public_conference_history = publication_conference_timeline(
+            conference_history,
+            program,
+            season_labels,
         )
         season_summaries = []
         for season_label in sorted(season_labels, reverse=True):

@@ -14,8 +14,10 @@ from program_history import (  # noqa: E402
     current_top_level_stint_start,
     derive_ncaa_accomplishments,
     history_coverage_errors,
+    publication_conference_timeline,
     publication_history_games,
     publication_history_start,
+    season_is_published_history,
     season_is_top_level,
     top_level_canonical_games,
 )
@@ -275,6 +277,170 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
         self.assertEqual(derived["ncaa_tournament_appearances"], 1)
 
 
+class AllHistoryUniverseConferenceProjectionTests(unittest.TestCase):
+    @staticmethod
+    def complete_program(
+        *,
+        inception="1930-1931",
+        top_level_start="1950-1951",
+        intervals="",
+    ):
+        return {
+            "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+            "program_inception_season": inception,
+            "history_start_season": top_level_start,
+            "history_scope_intervals": intervals,
+        }
+
+    @staticmethod
+    def real_row(start="1950-1951", end=""):
+        return {
+            "start_season": start,
+            "end_season": end,
+            "conference_key": "example-conference",
+            "conference_name": "Example Conference",
+            "membership_type": "full",
+        }
+
+    def test_complete_institutional_synthesizes_active_pre_d1_block(self):
+        program = self.complete_program()
+        timeline = publication_conference_timeline(
+            [self.real_row()],
+            program,
+            ["1930-1931", "1931-1932", "1950-1951"],
+        )
+        self.assertEqual(
+            timeline[0],
+            {
+                "start_season": "1930-1931",
+                "end_season": "1931-1932",
+                "conference_key": "",
+                "conference_name": "Non-D1",
+                "membership_type": "classification",
+                "classification": "NON_D1_CLASSIFICATION",
+            },
+        )
+        self.assertTrue(season_is_published_history("1930-1931", program))
+        self.assertFalse(season_is_top_level("1930-1931", "1950-1951"))
+
+    def test_dormant_season_gap_is_not_manufactured(self):
+        timeline = publication_conference_timeline(
+            [self.real_row()],
+            self.complete_program(),
+            ["1930-1931", "1932-1933", "1950-1951"],
+        )
+        synthetic = [
+            row for row in timeline
+            if row.get("classification") == "NON_D1_CLASSIFICATION"
+        ]
+        self.assertEqual(
+            [(row["start_season"], row["end_season"]) for row in synthetic],
+            [
+                ("1930-1931", "1930-1931"),
+                ("1932-1933", "1932-1933"),
+            ],
+        )
+
+    def test_interrupted_d1_non_d1_d1_history(self):
+        program = self.complete_program(
+            inception="1940-1941",
+            top_level_start="1940-1941",
+            intervals="1940-41..1941-42|1944-45+",
+        )
+        history = [
+            self.real_row("1940-1941", "1941-1942"),
+            {
+                **self.real_row("1944-1945", ""),
+                "conference_key": "later-conference",
+                "conference_name": "Later Conference",
+            },
+        ]
+        timeline = publication_conference_timeline(
+            history,
+            program,
+            [
+                "1940-1941",
+                "1941-1942",
+                "1942-1943",
+                "1943-1944",
+                "1944-1945",
+            ],
+        )
+        self.assertEqual(
+            [row["conference_name"] for row in timeline],
+            ["Example Conference", "Non-D1", "Later Conference"],
+        )
+        synthetic = timeline[1]
+        self.assertEqual(synthetic["start_season"], "1942-1943")
+        self.assertEqual(synthetic["end_season"], "1943-1944")
+
+    def test_legacy_does_not_synthesize_unpublished_pre_scope_history(self):
+        program = {
+            "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
+            "program_inception_season": "",
+            "history_start_season": "1950-1951",
+            "history_scope_intervals": "",
+        }
+        timeline = publication_conference_timeline(
+            [self.real_row()],
+            program,
+            ["1930-1931", "1950-1951"],
+        )
+        self.assertEqual(timeline, [self.real_row()])
+        self.assertFalse(season_is_published_history("1930-1931", program))
+        self.assertTrue(season_is_published_history("1950-1951", program))
+
+    def test_real_conference_rows_keep_existing_public_shape(self):
+        source = self.real_row()
+        timeline = publication_conference_timeline(
+            [source],
+            self.complete_program(),
+            ["1950-1951"],
+        )
+        self.assertEqual(timeline, [source])
+        self.assertNotIn("classification", timeline[0])
+
+    def test_current_published_portfolio_has_zero_synthetic_non_d1_rows(self):
+        programs = read_csv(ROOT / "data/reference/programs.csv")
+        published = [
+            row for row in programs
+            if row["public_page_enabled"] == "Yes"
+        ]
+        self.assertEqual(len(published), 113)
+
+        synthetic = []
+        for program in published:
+            key = program["program_key"]
+            history = read_csv(ROOT / "schools" / key / "conferences.csv")
+            team = json.loads(
+                (ROOT / "site/data/teams" / f"{key}.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            active_seasons = {
+                row["season_label"] for row in team.get("seasons", [])
+            }
+            timeline = publication_conference_timeline(
+                history,
+                program,
+                active_seasons,
+            )
+            synthetic.extend(
+                (key, row)
+                for row in timeline
+                if row.get("classification") == "NON_D1_CLASSIFICATION"
+            )
+
+        self.assertEqual(synthetic, [])
+
+    def test_publication_season_unknown_coverage_fails_closed(self):
+        with self.assertRaises(ValueError):
+            season_is_published_history(
+                "2000-2001",
+                {"history_coverage_status": "MYSTERY"},
+            )
+
+
 class AllHistoryUniversePublicNonregressionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -357,6 +523,9 @@ class AllHistoryUniverseBuilderSourceTests(unittest.TestCase):
         self.assertNotIn("scope_canonical_games(", source)
         self.assertIn("publication_history_start(", source)
         self.assertIn("current_top_level_stint_start(", source)
+        self.assertIn("publication_conference_timeline(", source)
+        self.assertNotIn("trim_conference_history(", source)
+        self.assertIn('"classification": row.get("classification", "").strip()', source)
         for field in (
             "published_history_start_season",
             "d1_since_season",

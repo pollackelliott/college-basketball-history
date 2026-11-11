@@ -392,6 +392,89 @@ def trim_conference_history(
     return trimmed
 
 
+def season_is_published_history(
+    season_label: str,
+    program: dict[str, str],
+) -> bool:
+    """Return whether one active season is inside the authorized public history."""
+    status = program.get("history_coverage_status", "").strip()
+    if status == "UNMIGRATED":
+        return False
+    if status == "LEGACY_TOP_LEVEL_ONLY":
+        return season_is_top_level(
+            season_label,
+            program.get("history_start_season", "").strip(),
+            program.get("history_scope_intervals", "").strip(),
+        )
+    if status == "COMPLETE_INSTITUTIONAL":
+        inception = program.get("program_inception_season", "").strip()
+        if not valid_season_label(inception):
+            raise ValueError(
+                "COMPLETE_INSTITUTIONAL requires valid program_inception_season"
+            )
+        return valid_season_label(season_label) and season_label >= inception
+    raise ValueError(f"unknown history_coverage_status {status!r}")
+
+
+def _next_season_label(season_label: str) -> str:
+    """Return the next consecutive canonical season label."""
+    if not valid_season_label(season_label):
+        raise ValueError(f"invalid season label {season_label!r}")
+    start = int(season_label[:4]) + 1
+    return f"{start:04d}-{start + 1:04d}"
+
+
+def publication_conference_timeline(
+    history_rows: Iterable[dict[str, str]],
+    program: dict[str, str],
+    active_published_seasons: Iterable[str],
+) -> list[dict[str, str]]:
+    """Project real top-level membership plus active published Non-D1 seasons."""
+    history_start = program.get("history_start_season", "").strip()
+    history_intervals = program.get("history_scope_intervals", "").strip()
+    real_rows = trim_conference_history(
+        history_rows,
+        history_start,
+        history_intervals,
+    )
+
+    non_d1_seasons: list[str] = []
+    for raw_season in active_published_seasons:
+        season = str(raw_season or "").strip()
+        if not valid_season_label(season):
+            raise ValueError(f"invalid active published season {season!r}")
+        if (
+            season_is_published_history(season, program)
+            and not season_is_top_level(season, history_start, history_intervals)
+        ):
+            non_d1_seasons.append(season)
+
+    blocks: list[dict[str, str]] = []
+    for season in sorted(set(non_d1_seasons)):
+        if not blocks or season != _next_season_label(blocks[-1]["end_season"]):
+            blocks.append(
+                {
+                    "start_season": season,
+                    "end_season": season,
+                    "conference_key": "",
+                    "conference_name": "Non-D1",
+                    "membership_type": "classification",
+                    "classification": "NON_D1_CLASSIFICATION",
+                }
+            )
+        else:
+            blocks[-1]["end_season"] = season
+
+    return sorted(
+        [*real_rows, *blocks],
+        key=lambda row: (
+            row.get("start_season", "").strip(),
+            row.get("end_season", "").strip(),
+            row.get("conference_name", "").strip(),
+        ),
+    )
+
+
 def history_coverage_errors(
     program: dict[str, str],
     public: bool,
