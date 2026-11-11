@@ -350,5 +350,21 @@ class AllHistoryUniversePublicNonregressionTests(unittest.TestCase):
             self.assertEqual(selected_ids, frozen_ids, key)
 
 
+class AllHistoryUniverseBuilderSourceTests(unittest.TestCase):
+    def test_builder_uses_publication_history_helper_and_metadata_contract(self):
+        source = (ROOT / "tools/build_site_data.py").read_text(encoding="utf-8")
+        self.assertIn("publication_history_games(", source)
+        self.assertNotIn("scope_canonical_games(", source)
+        self.assertIn("publication_history_start(", source)
+        self.assertIn("current_top_level_stint_start(", source)
+        for field in (
+            "published_history_start_season",
+            "d1_since_season",
+            "history_coverage_status",
+        ):
+            self.assertGreaterEqual(source.count(f'"{field}"'), 2, field)
+        self.assertGreaterEqual(source.count('"history_start_season"'), 2)
+
+
 if __name__ == "__main__":
     unittest.main()
