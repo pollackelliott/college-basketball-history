@@ -539,7 +539,7 @@
     "uc-davis-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
-  "active_lock_commit": null,
+  "active_lock_commit": "95494a06e0e19f039b08c24312d16d106aaad61d",
   "active_lock_owner": "github-actions:43046954544:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
