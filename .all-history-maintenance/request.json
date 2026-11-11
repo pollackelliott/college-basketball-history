@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "kind": "ALL_HISTORY_MAINTENANCE_REQUEST",
+  "operation": "GENERATE_PUBLIC_DATA",
+  "expected_protected_main_sha": "8a61ba1cf5abc83171bbf78f4221f80690c3853d",
+  "expected_branch_predecessor_sha": "ebe0044b4811d67ce1183f2526a915f4d5373bb9",
+  "source_authority_sha": "1e57718aae9e5eac4c9b7573cef825eafe30e00e",
+  "publication_baseline_sha": "e28b2fa5a64bcefeae485131c4e7b7be6f03e9c9"
+}
