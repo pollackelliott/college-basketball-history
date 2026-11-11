@@ -546,7 +546,7 @@
   "active_request_sha256": "36a28e49e10ee279df72ca6a106078c6d9f85ccf77acb075aaaef0c83f065259",
   "active_school_key": "uc-davis",
   "active_target_branch": "data/uc-davis-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "439e254e0dde3b661f49dccd155bd98c3a1f2127",
   "active_writeahead_path": ".remote-implementation/writeahead/uc-davis/uc-davis-phase0-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "99f43808833b37622d81661fffc0f054ab5b37579adb7b876dcbee7accd199a2",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
