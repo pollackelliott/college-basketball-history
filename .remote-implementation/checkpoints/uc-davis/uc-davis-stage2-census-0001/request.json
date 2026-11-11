@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "f8136f89d9df84a0923c21df9ebd4e75173549c6",
+  "previous_control_state_sha256": "076ac181f413d0a2bd57b5f7e42583337deb711ec09ea45f2f753dd4fdc96eca",
+  "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-phase0-0001/successor-manifest.json",
+    "sha256": "740166b533505d8357e27a01b5aa278a394b0e2c6e814f5c6e24232075bcf36e"
+  },
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "creation_provenance": {
+    "origin": "ChatGPT UC Davis serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly replied Proceed after UC Davis Phase 0 completed with repository validation PASS, CREATE_ONCE_PASS, remote_phase0_equivalence=PASS, fresh_runner_verification=PASS, Integration Freeze SHA-256 63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d, and target SHA ec226b981d1c53e2b24c9d88d680fbcb683757d5. This request performs exactly one bounded read-only STAGE2_CENSUS against protected main a13229ce64a489b39aaada66f0d8bf38db6868db and the exact independently verified Phase 0 successor. It must stop at CAPABILITY_CENSUS_READY or an honest durable BLOCKED checkpoint. No tracked repair, current-main refresh, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1, fill/seal/apply, release, Preview, merge, recovery, shared/global mutation, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}

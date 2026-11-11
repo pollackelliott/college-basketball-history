@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "uc-davis",
+  "created_at": "2026-11-11T15:09:49.195253+00:00",
+  "input_fingerprint": {
+    "sha256": "28801fc035d499cb27474c7ecded5c741d23cd121fb3b7eb4f5d8bd46b122f79",
+    "git_head": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+    "files": {
+      "schools/uc-davis/source-games.csv": "3401424c39cf5341dd518f26343d60e898c7879b3ea5aea6b1c7cece1bba648a",
+      "schools/uc-davis/opponents.csv": "ac47ecd51cdb1a2daf1f50f7f0bf4e8a0c7b709681b2f9f8c92adcc965fe0e3c",
+      "schools/uc-davis/venues.csv": "2fcbc3c471825cf4675c2029de2456a93f8e2c390987f4312fe63ba36dcc1988",
+      "schools/uc-davis/conferences.csv": "05a14189a2e80c4c34908f1382e959cc0905a1aa3ecf1badd1ad1b05c31fe10e",
+      "schools/uc-davis/notes.md": "448869c1b4c58bbfbd98cc2a396976402da8bb9498a0db72b7e2179529d15142",
+      "schools/uc-davis/source-notes.md": "34981ef59a0c2037db8d80fbb2f9aa1faa39e846dcfc59505a5c2bdf268b3d50",
+      "data/canonical/games.csv": "4326ae87a220f07713fb098f47870397ca8b01cdc2f901d2f98b2ca7e3583f15",
+      "data/evidence/game-assertions.csv": "0e37bab99e41ec9effb2db25768d784c02954ee62c056078b8d6ebbee1c78282",
+      "data/reconciliation/discrepancies.csv": "f38fa5b9a300d5a50df98779de2f86b1a25b0159943a0e8989e3357324595459",
+      "data/reference/programs.csv": "f0f55c2b36d6e921f68b8c671dbde1116c678fb5af65e667a4a69caee222e8d4",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "03e443b7c13139bfb26e69d2639f36675689b794cb66656e7a74730f220b1fd0",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "7db3757e13145dfbbd67bdba0407218387369b38ee4ac52cc3150787adcb77c7",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "0ff68f34cfad3d0a197da5f076fcb0b61c7ec5a2540b375ebef754143a12613b",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "3f174f00648fd36b3bb560886a2ec6f083fb53579c701d9fe08aca2ca4d71f34",
+      "tools/onboarding_plan.py": "af35b68f319a83fbb44df8e296fc6ca2cdaaa378715f8c7b05fc8285305174ac",
+      "tools/program_history.py": "ccaeb06db28ec8343bc237af6e225ab1363e61bb390c944c5e70a55e065ce5d8",
+      "tools/validate_data.py": "3599a6849aed4d4a2d9a380f4d5871c480b83912700112e853b18c94663953c3",
+      "tools/verify_program_accomplishments.py": "4ab22a260ec498bc87de60f7638845a5e713f3dc8c323bfd6e1e4a1ec194bfea"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: holy-names: ['Holy Names', 'Holy Names University']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: jessup: ['Jessup', 'Jessup University']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 668,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 116,
+      "venues": 27,
+      "conference_intervals": 2,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: holy-names: ['Holy Names', 'Holy Names University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: jessup: ['Jessup', 'Jessup University']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
