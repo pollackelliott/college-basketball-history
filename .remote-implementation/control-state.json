@@ -1067,11 +1067,11 @@
   "current_sequence": 512,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
     "operation": "PHASE0",
     "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "uc-davis-phase0-0001",
     "school_key": "uc-davis",
     "successor_manifest_path": ".remote-implementation/successors/uc-davis/uc-davis-phase0-0001/successor-manifest.json",

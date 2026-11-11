@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "prepared_parent_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "prepared_tree_sha": "d2bf3dd159aa2f368e72b323b9a49ba54fe2c6eb",
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "uc-davis-phase0-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5"
+}
