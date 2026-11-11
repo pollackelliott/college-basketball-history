@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "request_id": "hawai-i-stage1-0001",
+  "research_base_sha": "6a192223de544cd942100cce9c0a7565985c9784",
+  "research_checkpoint_sha256": "49948624da8a0f2048585a99a00bc7a6f3ed996ba674806de1df4708608f7313",
+  "research_member_sha256": {
+    "conferences.csv": "b88a0dd44668ea4cb26b3c214c5bfe96a26023d9c6e411dba90422f55fe17b74",
+    "notes.md": "8d3901feae934dfa634a8682e83fe2e9728d936ce758e841a5b5b21883ceac7c",
+    "opponents.csv": "a6ea3d8ff1af7073ad7f35803fb727eb4b79a4042d6e58bc6f4ab6d1e94ac853",
+    "source-games.csv": "3fbb3e60b14be6871c5478697bc01477de1010abde2fb0c2433ad93ac2c55f95",
+    "source-notes.md": "c423bb1a6c3c04964c389d8184d169a1dd4c3cc740b3fa2546767eca673ffc92",
+    "venues.csv": "36960202b2b5dec3c396062d005869de90e4c0621991534909501ce262f59914"
+  },
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "sidecars": {
+    "request.json": "47d4832d80e8f812016d17bb401759a0fb693dc1791c84db2e89c319a62b9b21",
+    "stage1-reconciliation.json": "f6c137a660144c930d52a1a400e336dae1947537838a84c32dd9a6c42b488466"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
