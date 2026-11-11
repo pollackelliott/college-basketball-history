@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "70fbb7d46d61dfdd8598e3e378e63ab8b3f8701d601ba11924ac0067189abbfc",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "bf56f715130cd6df02912b074e6060ef50adb9706616e2cf6c738216935610c4",
+  "pr_created": false,
+  "preview_request_id": "hawai-i-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "readiness_proof_sha256": "927fd56f88fa7638f4236abc62abe8ac80affa77e8923914c695fd4ccf5238be",
+  "release_pr_packet_sha256": "55a3159f08f8cff3ab151e40dec2a1903441143d8d9e10cbfb96ab1918c37d07",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "hawai-i-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
+  "tracked_mutation": "NONE"
+}
