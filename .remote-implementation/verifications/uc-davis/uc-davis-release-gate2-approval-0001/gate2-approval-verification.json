@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "f41069b41a404f8155b05446ae3d3fb8cf8b27c7eae0bcaef374345f434ed055",
+  "gate2_merge_packet_sha256": "8266a2e2148cb3db055035a34f986af9dde3ff1baeaf8c1f33ff2ac634e68dad",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "pr_number": 563,
+  "preview_deployment_id": 7716210605,
+  "preview_url": "https://college-basketball-history-hozci0dry-elliott-pollacks-projects.vercel.app",
+  "production_request_id": "uc-davis-release-production-proof-0001",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "uc-davis-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "status": "PASS"
+}

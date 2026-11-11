@@ -1089,7 +1089,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "f41069b41a404f8155b05446ae3d3fb8cf8b27c7eae0bcaef374345f434ed055",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "8266a2e2148cb3db055035a34f986af9dde3ff1baeaf8c1f33ff2ac634e68dad",
     "merged": false,
@@ -1098,7 +1098,7 @@
     "pr_number": 563,
     "production_request_id": "uc-davis-release-production-proof-0001",
     "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "uc-davis-release-gate2-approval-0001",
     "school_key": "uc-davis",
     "target_branch": "data/uc-davis-onboarding",
