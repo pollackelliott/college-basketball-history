@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-stage2-census-0001",
+  "request_id": "hawai-i-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "hawai-i",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "7cfeabb8f75eab3828189a71345a5789d4712567",
-  "previous_control_state_sha256": "060eb36cb795e5521030672bc7a36a5832e50db99691f4793d81c282d11ed045",
-  "expected_protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "previous_control_state_commit": "f7485b931e8ced821e38896b814f5f05d780b40e",
+  "previous_control_state_sha256": "6cd14337e36dd98c54cc5cf77db90977920cdcaf3c78b3d407db6a36cbb8cd01",
+  "expected_protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
   "target_branch": "data/hawai-i-onboarding",
   "target_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
   "phase0_successor": {
@@ -15,16 +15,21 @@
   },
   "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
   "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the Hawai'i post-maintenance guarded STAGE2_CURRENT_MAIN_REFRESH after the exact three-row shared-canonical site-state maintenance merged as PR #561. Protected main is 8f1b8e79e55108be63afcd13e6e570ab928d6bb4, exact onboarding predecessor is 03b47d1257d78e5f6d48f50ddcc52a554d67d64b, and common base is 36b8e829e7e5ffde7390ec7ef00816cda3d7f663. Independently authenticated target-only paths are the nine Hawai'i Phase 0/reference paths, intervening-main paths are data/canonical/games.csv, data/reconciliation/maintenance/hawai-i-kansas-three-site-states.json, and site/data/teams/kansas.json, with zero overlap and zero intervening schools/hawai-i/ changes. Authorization covers this refresh, required fresh verification, and subsequent fresh Stage 2 census under the already authorized technical phase; no Owner Gate 1 authority is created."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Hawai'i serialized Implementation lane — owner-authorized Stage 2 capability census",
-    "authorization": "Owner explicitly replied Proceed after Hawai'i Phase 0 completed with repository validation PASS, CREATE_ONCE_PASS, remote_phase0_equivalence=PASS and fresh_runner_verification=PASS. This request performs exactly one bounded read-only STAGE2_CENSUS against protected main 36b8e829e7e5ffde7390ec7ef00816cda3d7f663, exact onboarding target 03b47d1257d78e5f6d48f50ddcc52a554d67d64b, Phase 0 successor manifest SHA-256 1ed8e3cba48af506a773b9efd4cb13580cd4a320533ea46f14dec10499aee783, Integration Freeze SHA-256 5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7, and semantic snapshot SHA-256 cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b. It invokes the unchanged permanent Stage 2 coordinator to produce a durable capability census and must stop at CAPABILITY_CENSUS_READY or an honest BLOCKED checkpoint. No tracked repair, current-main refresh, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1, fill/seal/apply, release, Preview, merge, recovery, shared/global mutation, or protected-main mutation is authorized by this request."
+    "origin": "Hawai'i serialized Implementation Stage 2 — Control Center-authorized post-PR-561 current-main refresh",
+    "authorization": "Run exactly one guarded STAGE2_CURRENT_MAIN_REFRESH from Hawai'i predecessor 03b47d1257d78e5f6d48f50ddcc52a554d67d64b to protected main 8f1b8e79e55108be63afcd13e6e570ab928d6bb4, require independent fresh verification, then continue with a fresh authoritative Hawai'i Stage 2 census. Preserve the immutable Research Freeze, Integration Freeze, six-file source package, semantic snapshot, and historical meaning. This request does not carry a phase_continuation recommendation map because no mature Hawai'i recommendation map existed before the maintenance boundary. No Owner Gate 1 approval, Gate 1 fill, pre-seal, seal, apply, Preview, merge, Production, new Research, unrelated shared maintenance, or recovery authority is included."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
@@ -34,11 +39,11 @@
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "release": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false,
     "venue_identity_maintenance": false
   }
 }
