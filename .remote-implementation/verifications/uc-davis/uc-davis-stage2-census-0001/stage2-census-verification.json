@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "342212458eac37442a0eb8b4a882331c74bb42a35f4e72bb7485f0b93ecd6f6a",
+    "plan.json": "3923bcb01eb0c42cf78ba1fd7817f7cec576cfc8fd1c8410cbfaf18f809057e5",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "319fb185750ca88161a4a71299b0a6a1487367f40fe6248a02dd68733ac82a07"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "cbe9ca7eefad94d065815fc7a0bb80c94e4ab56d6bbed078576881d49c12ede2",
+    "plan.json": "1147b282896cbf06de348a5526810670ebf616100d2153dcc29934f64b568a64",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "f70de639ac8a3ed9beaef05ce8cf822a940653350fb6d19682ef1357675d3949"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "uc-davis-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "target_tree_sha": "d2bf3dd159aa2f368e72b323b9a49ba54fe2c6eb",
+  "tracked_stage2_mutation": "NONE"
+}
