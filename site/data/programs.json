@@ -7427,7 +7427,7 @@
       "state": "CA",
       "primary_hex": "#002855",
       "secondary_hex": "#B3A369",
-      "history_start_season": null,
+      "history_start_season": "2004-2005",
       "conference_regular_season_championships": 2,
       "conference_tournament_championships": 1,
       "ncaa_tournament_appearances": 1,
@@ -7436,7 +7436,7 @@
       "best_finish_key": "ROUND_OF_64",
       "best_finish_year": 2017,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
