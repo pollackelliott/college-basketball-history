@@ -13,6 +13,7 @@ sys.path.insert(0, str(TOOLS))
 from program_history import (  # noqa: E402
     current_top_level_stint_start,
     derive_ncaa_accomplishments,
+    derive_top_level_ncaa_accomplishments,
     history_coverage_errors,
     publication_conference_timeline,
     publication_history_games,
@@ -275,6 +276,223 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
             "1950-1951",
         )
         self.assertEqual(derived["ncaa_tournament_appearances"], 1)
+
+
+class AllHistoryUniverseTopLevelAccomplishmentTests(unittest.TestCase):
+    def test_publication_can_include_pre_d1_while_accomplishments_exclude_it(self):
+        games = [
+            game(
+                "CBBG-EARLY-NCAA",
+                "1930-1931",
+                game_type="NCAA_TOURNAMENT",
+                round_name="Championship",
+            ),
+            game(
+                "CBBG-TOP-NCAA",
+                "1950-1951",
+                game_type="NCAA_TOURNAMENT",
+                round_name="R32",
+            ),
+        ]
+        program = {
+            "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+            "program_inception_season": "1930-1931",
+            "history_start_season": "1950-1951",
+            "history_scope_intervals": "",
+        }
+        self.assertEqual(
+            [row["canonical_game_id"] for row in publication_history_games(
+                games, "program-a", program
+            )],
+            ["CBBG-EARLY-NCAA", "CBBG-TOP-NCAA"],
+        )
+        derived = derive_top_level_ncaa_accomplishments(
+            games,
+            "program-a",
+            program["history_start_season"],
+            program["history_scope_intervals"],
+        )
+        self.assertEqual(derived["ncaa_game_count"], 1)
+        self.assertEqual(derived["ncaa_tournament_appearances"], 1)
+        self.assertEqual(derived["best_finish_key"], "ROUND_OF_32")
+
+    def test_pre_d1_ncaa_row_cannot_create_top_level_accomplishments(self):
+        derived = derive_top_level_ncaa_accomplishments(
+            [
+                game(
+                    "CBBG-EARLY-CHAMPION",
+                    "1930-1931",
+                    game_type="NCAA_TOURNAMENT",
+                    round_name="Championship",
+                )
+            ],
+            "program-a",
+            "1950-1951",
+        )
+        self.assertEqual(derived["ncaa_tournament_appearances"], 0)
+        self.assertEqual(derived["final_four_appearances"], 0)
+        self.assertEqual(derived["national_championships"], 0)
+        self.assertIsNone(derived["best_finish_key"])
+        self.assertIsNone(derived["best_finish_year"])
+
+    def test_pre_d1_tournament_row_does_not_change_valid_top_level_result(self):
+        top_level = game(
+            "CBBG-TOP-R32",
+            "1950-1951",
+            game_type="NCAA_TOURNAMENT",
+            round_name="R32",
+        )
+        pre_d1 = game(
+            "CBBG-EARLY-CHAMPION",
+            "1930-1931",
+            game_type="NCAA_TOURNAMENT",
+            round_name="Championship",
+        )
+        expected = derive_top_level_ncaa_accomplishments(
+            [top_level],
+            "program-a",
+            "1950-1951",
+        )
+        actual = derive_top_level_ncaa_accomplishments(
+            [pre_d1, top_level],
+            "program-a",
+            "1950-1951",
+        )
+        self.assertEqual(actual, expected)
+
+    def test_interrupted_top_level_intervals_exclude_gap_tournament_rows(self):
+        intervals = "1940-41..1941-42|1944-45+"
+        first_stint = game(
+            "CBBG-FIRST-STINT",
+            "1940-1941",
+            game_type="NCAA_TOURNAMENT",
+            round_name="R64",
+        )
+        gap_champion = game(
+            "CBBG-GAP-CHAMPION",
+            "1942-1943",
+            game_type="NCAA_TOURNAMENT",
+            round_name="Championship",
+        )
+        current_stint = game(
+            "CBBG-CURRENT-STINT",
+            "1944-1945",
+            game_type="NCAA_TOURNAMENT",
+            round_name="R32",
+        )
+        expected = derive_top_level_ncaa_accomplishments(
+            [first_stint, current_stint],
+            "program-a",
+            "1940-1941",
+            intervals,
+        )
+        actual = derive_top_level_ncaa_accomplishments(
+            [first_stint, gap_champion, current_stint],
+            "program-a",
+            "1940-1941",
+            intervals,
+        )
+        self.assertEqual(actual, expected)
+        self.assertEqual(actual["ncaa_tournament_appearances"], 2)
+        self.assertEqual(actual["national_championships"], 0)
+        self.assertEqual(actual["best_finish_key"], "ROUND_OF_32")
+
+    def test_compatibility_wrapper_matches_explicit_top_level_helper(self):
+        games = [
+            game(
+                "CBBG-EARLY",
+                "1930-1931",
+                game_type="NCAA_TOURNAMENT",
+                round_name="Championship",
+            ),
+            game(
+                "CBBG-TOP",
+                "1950-1951",
+                game_type="NCAA_TOURNAMENT",
+                round_name="R32",
+            ),
+        ]
+        explicit = derive_top_level_ncaa_accomplishments(
+            games,
+            "program-a",
+            "1950-1951",
+        )
+        compatibility = derive_ncaa_accomplishments(
+            games,
+            "program-a",
+            "1950-1951",
+        )
+        self.assertEqual(compatibility, explicit)
+
+    def test_explicit_helper_uses_top_level_authority_not_publication_history(self):
+        source = (ROOT / "tools/program_history.py").read_text(encoding="utf-8")
+        helper = source.split(
+            "def derive_top_level_ncaa_accomplishments(", 1
+        )[1].split("\ndef ", 1)[0]
+        self.assertIn("top_level_canonical_games(", helper)
+        self.assertNotIn("scope_canonical_games(", helper)
+        self.assertNotIn("publication_history_games(", helper)
+        self.assertIn(
+            "accepted top-level/D-I-equivalent intervals",
+            helper,
+        )
+
+    def test_direct_accomplishment_consumers_use_explicit_top_level_helper(self):
+        for relative_path in (
+            "tools/verify_program_accomplishments.py",
+            "tools/onboarding_plan.py",
+        ):
+            with self.subTest(path=relative_path):
+                source = (ROOT / relative_path).read_text(encoding="utf-8")
+                self.assertIn("derive_top_level_ncaa_accomplishments", source)
+                self.assertNotIn("derive_ncaa_accomplishments", source)
+                self.assertIn("history_scope_intervals", source)
+
+    def test_accomplishment_reference_and_generated_payloads_are_unchanged(self):
+        reference = {
+            row["program_key"]: row
+            for row in read_csv(
+                ROOT / "data/reference/program-accomplishments.csv"
+            )
+        }
+        manifest = json.loads(
+            (ROOT / "site/data/programs.json").read_text(encoding="utf-8")
+        )["programs"]
+        integer_fields = (
+            "conference_regular_season_championships",
+            "conference_tournament_championships",
+            "ncaa_tournament_appearances",
+            "final_four_appearances",
+            "national_championships",
+            "best_finish_year",
+        )
+        scalar_fields = ("best_finish_key",)
+
+        self.assertEqual(
+            {program["program_key"] for program in manifest},
+            set(reference),
+        )
+        for program in manifest:
+            key = program["program_key"]
+            row = reference[key]
+            for field in integer_fields:
+                expected = int(row[field]) if row[field].strip() else None
+                self.assertEqual(program[field], expected, (key, field))
+            for field in scalar_fields:
+                self.assertEqual(
+                    program[field],
+                    row[field].strip() or None,
+                    (key, field),
+                )
+
+            if program["public_page_enabled"]:
+                team = json.loads(
+                    (ROOT / "site/data/teams" / f"{key}.json").read_text(
+                        encoding="utf-8"
+                    )
+                )["program"]
+                for field in (*integer_fields, *scalar_fields):
+                    self.assertEqual(team[field], program[field], (key, field))
 
 
 class AllHistoryUniverseConferenceProjectionTests(unittest.TestCase):

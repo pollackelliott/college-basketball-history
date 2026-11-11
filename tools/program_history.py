@@ -572,14 +572,14 @@ def _game_finish(game: dict[str, Any], program_key: str) -> str | None:
     return ROUND_TO_FINISH.get(round_name)
 
 
-def derive_ncaa_accomplishments(
+def derive_top_level_ncaa_accomplishments(
     canonical_games: Iterable[dict[str, Any]],
     program_key: str,
     history_start_season: str,
     history_scope_intervals: str = "",
 ) -> dict[str, Any]:
-    """Derive on-court NCAA accomplishments within one program's scope."""
-    scoped = scope_canonical_games(
+    """Derive accomplishments only from accepted top-level/D-I-equivalent intervals."""
+    scoped = top_level_canonical_games(
         canonical_games,
         program_key,
         history_start_season,
@@ -670,6 +670,21 @@ def derive_ncaa_accomplishments(
         "incomplete_reasons": incomplete,
     }
 
+
+
+def derive_ncaa_accomplishments(
+    canonical_games: Iterable[dict[str, Any]],
+    program_key: str,
+    history_start_season: str,
+    history_scope_intervals: str = "",
+) -> dict[str, Any]:
+    """Backward-compatible wrapper for explicit top-level accomplishment derivation."""
+    return derive_top_level_ncaa_accomplishments(
+        canonical_games,
+        program_key,
+        history_start_season,
+        history_scope_intervals,
+    )
 
 def accomplishment_row_issues(
     row: dict[str, str],
