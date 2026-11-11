@@ -1,48 +1,49 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-stage2-census-0002",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "hawai-i-stage2-proposal-0001",
   "school_key": "hawai-i",
-  "previous_control_state_commit": "7752f349006aebeb763836c45951e95ebd3a329b",
-  "previous_control_state_sha256": "05e482c3df3a9de22e97c62e17dec2b067d6eb47f2a0b16a773f6e84b299c1a5",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "ba3f1be8d7adeb6a7048ffa45d3b5e0176c01ce5",
+  "previous_control_state_sha256": "1d7369b0dca70564a25f6bed141500d5833aba6fc57fddb86c07899ded4b9fdf",
   "expected_protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
   "target_branch": "data/hawai-i-onboarding",
   "target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/hawai-i/hawai-i-phase0-0002/successor-manifest.json",
-    "sha256": "1ed8e3cba48af506a773b9efd4cb13580cd4a320533ea46f14dec10499aee783"
-  },
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/hawai-i/hawai-i-stage2-current-main-refresh-0001/successor-manifest.json",
-    "sha256": "ed870fba68d74de604e57f09ec46d8cf194be90d10099a619636469f309560ec"
-  },
   "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
   "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "ea3f60e8b4b1e03244ee502c4e51632c4b7a9fd9c85cd14cf95609bc6e0ee1c6"
+  },
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/hawai-i-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a"
+  },
   "creation_provenance": {
-    "origin": "Hawai'i serialized Implementation Stage 2 — fresh census after Control Center-authorized PR #561 maintenance and current-main refresh",
-    "authorization": "The Control Center disposition explicitly authorizes the required fresh authoritative Hawai'i Stage 2 census after the three-row maintenance merge and independently fresh-verified STAGE2_CURRENT_MAIN_REFRESH. This request is read-only with respect to tracked basketball state and is bound to protected main 8f1b8e79e55108be63afcd13e6e570ab928d6bb4, refreshed Hawai'i target d5690304f4fdc3bc5c24ba13eb992c72149a340e, immutable Integration Freeze 5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7, and semantic snapshot cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b. After fresh verification, compare its regenerated decision universe to prior authenticated SHA-256 341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf and continue technical recommendation-map maturation only if substantive historical meaning is preserved and no materially new blocker appears. No Owner Gate 1 approval, tracked repair, shared maintenance, seal/apply, Preview, merge, Production, or Research reopening is authorized."
+    "origin": "Hawai'i serialized Implementation Stage 2 - exact recommendation-map rehearsal after Control Center-authorized three-row site-state maintenance and fresh current-main census",
+    "authorization": "Phase-persistent Control Center authority explicitly permits current-main refresh, fresh census, and exact recommendation-map maturation toward OWNER_GATE_1_READY after the three-row maintenance merge, provided substantive meaning remains unchanged. The fresh census preserves the exact prior decision universe. This request is read-only and creates no Owner Gate 1 approval, fill, seal, apply, Preview, merge, release, shared/global mutation, or protected-main mutation authority."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": false,
-    "stage2_gate1_seal": false,
-    "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
-    "release_preview_verify": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false,
     "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   }
 }

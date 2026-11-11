@@ -1,0 +1,55 @@
+{
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "identity": {
+    "hawai-i-1984-85-020": "FORCE_NEW",
+    "hawai-i-1988-89-028": "MATCH_CANONICAL:CBBG-0108221",
+    "hawai-i-1998-99-003": "MATCH_CANONICAL:CBBG-0081915"
+  },
+  "decisions": {
+    "DISCREPANCY-HAWAI-I-1970-71-006-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1971-72-008-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1975-76-011-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1979-80-008-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1986-87-011-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1988-89-006-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1991-92-002-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1992-93-007-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1994-95-001-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1994-95-007-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1997-98-011-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1998-99-005-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1998-99-009-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-1999-00-013-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2001-02-005-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2001-02-011-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2004-05-008-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2007-08-010-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2011-12-010-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2011-12-011-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2012-13-011-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2015-16-010-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2015-16-011-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2019-20-012-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2019-20-013-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-HAWAI-I-2023-24-011-SITE_TYPE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-HAWAI-I-1998-99-003-CBBG-0081915-GAME_DATE": "USE_SOURCE",
+    "ACCOMPLISHMENTS-HAWAI-I": "VERIFY_REFERENCE_VALUES",
+    "PUBLICATION-HAWAI-I": "ENABLE_PUBLIC_PAGE"
+  },
+  "defaults": {
+    "discrepancy": "KEEP_CANONICAL",
+    "selected_conditional": "KEEP_CANONICAL",
+    "basis": "Use the accepted frozen Hawai'i package for settled H/A/N meaning while preserving existing canonical date/score values where frozen Research did not independently adjudicate the reciprocal conflict. Raw source evidence remains preserved; this recommendation map creates no Owner Gate 1 authority.",
+    "identity_basis": "One real game equals one canonical game. Use the accepted Hawai'i source row plus exact reciprocal schedule/date/score/event evidence; do not collapse distinct games or infer identity from source order alone.",
+    "not_applicable_basis": "This conditional discrepancy belongs to a canonical identity candidate not selected by the recommendation map, or the source game is proposed as FORCE_NEW."
+  },
+  "basis_by_decision": {
+    "IDENTITY-HAWAI-I-1984-85-020": "FORCE_NEW. Hawai'i's accepted row is the 1985-02-02 road loss at BYU, 60-66. BYU's official 1984-85 schedule separately records the existing 1985-01-14 Hawai'i game as an 88-78 overtime win and the 1985-02-02 game as a 66-60 BYU home win, proving two real games. https://byucougars.com/sports/mens-basketball/schedule/1984-85",
+    "IDENTITY-HAWAI-I-1988-89-028": "MATCH_CANONICAL:CBBG-0108221. Hawai'i's accepted row is the neutral WAC tournament win over BYU, 72-69, at the Jon M. Huntsman Center. CBBG-0108221 is the reciprocal neutral conference-tournament 72-69 game; BYU's official 1988-89 schedule dates it 1989-03-10. https://byucougars.com/sports/mens-basketball/schedule/1988-89",
+    "CONDITIONAL-DISCREPANCY-HAWAI-I-1988-89-028-CBBG-0108221-GAME_DATE": "KEEP_CANONICAL. BYU's official 1988-89 schedule independently dates the neutral conference-tournament 72-69 game to 1989-03-10, so retain the established canonical date while preserving Hawai'i's conflicting source literal. https://byucougars.com/sports/mens-basketball/schedule/1988-89",
+    "IDENTITY-HAWAI-I-1998-99-003": "MATCH_CANONICAL:CBBG-0081915. The 37-58 Hawai'i home loss is the same game represented by CBBG-0081915. Oklahoma State's official 1998-99 schedule identifies the 58-37 win at Hawai'i in Honolulu on 1998-11-20, while 1999-01-20 was Baylor. https://okstate.com/sports/mens-basketball/schedule/1998-99",
+    "CONDITIONAL-DISCREPANCY-HAWAI-I-1998-99-003-CBBG-0081915-GAME_DATE": "USE_SOURCE. Oklahoma State's official 1998-99 schedule independently fixes this 58-37 game at Hawai'i to 1998-11-20; repair only the canonical date through Gate 1 if approved. https://okstate.com/sports/mens-basketball/schedule/1998-99",
+    "ACCOMPLISHMENTS-HAWAI-I": "VERIFY_REFERENCE_VALUES. Hawai'i Athletics' official WAC history records men's basketball with 2 WAC regular-season titles and 3 WAC tournament titles; the official 2015-16 season review records both the Big West regular-season and tournament titles, and the official 2025-26 season review records the second Big West tournament title and sixth NCAA appearance. Those sources support the stored totals of 3 regular-season titles, 5 tournament titles, 6 NCAA appearances, no Final Fours/national titles, and best NCAA finish Round of 32 in 2016. https://hawaiiathletics.com/sports/2012/6/13/GEN_0613124544 https://hawaiiathletics.com/news/2016/6/14/general-h-tv-2015-16-hawaii-athletics-season-in-review https://hawaiiathletics.com/news/2026/6/22/general-2025-26-season-in-review.aspx",
+    "PUBLICATION-HAWAI-I": "Recommend enabling Hawai'i only through the normal explicit Owner Gate 1, sealed apply, Preview, explicit Owner Gate 2, merge, and Production-proof sequence after this exact 58-decision recommendation map is approved."
+  }
+}
