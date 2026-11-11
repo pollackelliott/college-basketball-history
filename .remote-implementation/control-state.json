@@ -532,17 +532,18 @@
     "hawai-i-release-preview-verify-0001",
     "hawai-i-release-gate2-approval-0001",
     "hawai-i-release-production-proof-0001",
-    "uc-davis-stage1-0001"
+    "uc-davis-stage1-0001",
+    "uc-davis-stage1-verify-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "uc-davis-stage1-verify-0001",
+  "active_request_sha256": "e2643e51b9744c6bc07bcb84fbc1576b27a17e944b8781237d71b8f6911af34a",
+  "active_school_key": "uc-davis",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -1072,8 +1073,11 @@
     "stage1_reconciliation_sha256": "a39c010ffb487b36d98e60474b82e23d2fbe31c07eb55a2a0acd070a31311727",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43040458695",
+  "lock_acquisition_request_commit": "90a36cf7c8be1f17ae6c0653108b0c1ccd5ea08b",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "STAGE1_RUNNING"
 }

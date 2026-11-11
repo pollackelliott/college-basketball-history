@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-stage1-verify-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "0868de87662f70fa66f76883bf59c8bdd940107f",
+  "previous_control_state_sha256": "f42abc6fdba644f5d4529ee46f415f602448e3c3cf4c562d49842c232b6bdcb0",
+  "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "research_checkpoint": {
+    "sha256": "c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d",
+    "research_base_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "77f81e6f8451c6b50180b41b4cbf43632b972ddb",
+      "path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-stage1-0001-final/piece-",
+      "part_count": 16
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT UC Davis serialized Implementation lane — independent fresh-runner Stage 1 verification",
+    "authorization": "Owner authorized the bounded UC Davis startup unit through repository-owned read-only STAGE1_INVENTORY, durable checkpoint, and independent fresh verification, stopping before Phase 0. The first durable checkpoint uc-davis-stage1-0001 passed on protected main a13229ce64a489b39aaada66f0d8bf38db6868db with Research Freeze c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d and stage1-reconciliation SHA-256 a39c010ffb487b36d98e60474b82e23d2fbe31c07eb55a2a0acd070a31311727. The current workflow exposes no separate Stage 1 verifier job, so this second repository-owned read-only STAGE1_INVENTORY request is authorized solely as an independent fresh-runner reconstruction of the exact same current-main/freeze inputs. No mutation, Phase 0, Stage 2, shared/global maintenance, owner gate, release, or recovery authority is granted."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
