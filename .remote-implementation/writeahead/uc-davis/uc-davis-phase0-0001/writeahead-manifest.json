@@ -1,0 +1,304 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/uc-davis/conferences.csv",
+    "schools/uc-davis/notes.md",
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv",
+    "schools/uc-davis/source-notes.md",
+    "schools/uc-davis/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "f0f55c2b36d6e921f68b8c671dbde1116c678fb5af65e667a4a69caee222e8d4",
+    "data/reference/venue-names.csv": "2a86683dcb446f8602ee8ee39190112f5d915378b633b37a615514442d80f0f6",
+    "data/reference/venues.csv": "606358e4e82d81901ec407221ed310f2159e247a8aa924d89840893b77e38b0f",
+    "schools/uc-davis/conferences.csv": "05a14189a2e80c4c34908f1382e959cc0905a1aa3ecf1badd1ad1b05c31fe10e",
+    "schools/uc-davis/notes.md": "448869c1b4c58bbfbd98cc2a396976402da8bb9498a0db72b7e2179529d15142",
+    "schools/uc-davis/opponents.csv": "ac47ecd51cdb1a2daf1f50f7f0bf4e8a0c7b709681b2f9f8c92adcc965fe0e3c",
+    "schools/uc-davis/source-games.csv": "3401424c39cf5341dd518f26343d60e898c7879b3ea5aea6b1c7cece1bba648a",
+    "schools/uc-davis/source-notes.md": "34981ef59a0c2037db8d80fbb2f9aa1faa39e846dcfc59505a5c2bdf268b3d50",
+    "schools/uc-davis/venues.csv": "2fcbc3c471825cf4675c2029de2456a93f8e2c390987f4312fe63ba36dcc1988"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/uc-davis/conferences.csv",
+    "schools/uc-davis/notes.md",
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv",
+    "schools/uc-davis/source-notes.md",
+    "schools/uc-davis/venues.csv"
+  ],
+  "commit_message": "Add Uc Davis onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "15cba06c28d56ffbab108c72148e2aeab25a4230",
+  "history_scope": {
+    "history_scope_basis": "TOP_LEVEL_INTERVALS",
+    "history_scope_intervals": "2004-05+",
+    "history_scope_notes": "Accepted immutable UC Davis Research Freeze scope is 2004-05+ and current protected-main reusable scope authority agrees. Historical scope and frozen game universe are unchanged.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "2004-2005",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "2004-05+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "2004-05+",
+      "school": "UC Davis"
+    }
+  },
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "05a14189a2e80c4c34908f1382e959cc0905a1aa3ecf1badd1ad1b05c31fe10e",
+    "notes.md": "448869c1b4c58bbfbd98cc2a396976402da8bb9498a0db72b7e2179529d15142",
+    "opponents.csv": "ac47ecd51cdb1a2daf1f50f7f0bf4e8a0c7b709681b2f9f8c92adcc965fe0e3c",
+    "source-games.csv": "3401424c39cf5341dd518f26343d60e898c7879b3ea5aea6b1c7cece1bba648a",
+    "source-notes.md": "34981ef59a0c2037db8d80fbb2f9aa1faa39e846dcfc59505a5c2bdf268b3d50",
+    "venues.csv": "2fcbc3c471825cf4675c2029de2456a93f8e2c390987f4312fe63ba36dcc1988"
+  },
+  "prepared_commit_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "prepared_parent_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "prepared_tree_sha": "d2bf3dd159aa2f368e72b323b9a49ba54fe2c6eb",
+  "program_alias_mapping": [],
+  "protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "repository_validation": "PASS",
+  "request_id": "uc-davis-phase0-0001",
+  "request_sha256": "36a28e49e10ee279df72ca6a106078c6d9f85ccf77acb075aaaef0c83f065259",
+  "research_base_sha": "6164f7b0269d5d53b2be08b02c3d97626d375be7",
+  "research_checkpoint_sha256": "c777f72dde318c633d8f0c8cc13529da32170c575ce49136101c397c2972a85d",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "sidecars": {
+    "integration-freeze.json": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+    "stage1-reconciliation.json": "a39c010ffb487b36d98e60474b82e23d2fbe31c07eb55a2a0acd070a31311727"
+  },
+  "target_branch": "data/uc-davis-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Alaska Airlines Center",
+      "final_venue_id": "VEN-000567",
+      "final_venue_key": "alaska-airlines-center",
+      "research_venue_id": "VEN-000567",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alaska-airlines-center"
+    },
+    {
+      "canonical_name": "Cameron Indoor Stadium",
+      "final_venue_id": "VEN-000035",
+      "final_venue_key": "cameron-indoor-stadium",
+      "research_venue_id": "VEN-000035",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cameron-indoor-stadium"
+    },
+    {
+      "canonical_name": "Chiles Center",
+      "final_venue_id": "VEN-000643",
+      "final_venue_key": "chiles-center",
+      "research_venue_id": "VEN-000643",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chiles-center"
+    },
+    {
+      "canonical_name": "College Park Center",
+      "final_venue_id": "VEN-000365",
+      "final_venue_key": "college-park-center",
+      "research_venue_id": "VEN-000365",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "college-park-center"
+    },
+    {
+      "canonical_name": "Dahlberg Arena",
+      "final_venue_id": "VEN-000559",
+      "final_venue_key": "dahlberg-arena",
+      "research_venue_id": "VEN-000559",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dahlberg-arena"
+    },
+    {
+      "canonical_name": "Dee Glen Smith Spectrum",
+      "final_venue_id": "VEN-000378",
+      "final_venue_key": "dee-glen-smith-spectrum",
+      "research_venue_id": "VEN-000378",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dee-glen-smith-spectrum"
+    },
+    {
+      "canonical_name": "First National Bank Arena",
+      "final_venue_id": "VEN-001128",
+      "final_venue_key": "first-national-bank-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "first-national-bank-arena"
+    },
+    {
+      "canonical_name": "Golden 1 Center",
+      "final_venue_id": "VEN-000074",
+      "final_venue_key": "golden-1-center",
+      "research_venue_id": "VEN-000074",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "golden-1-center"
+    },
+    {
+      "canonical_name": "Hilton Coliseum",
+      "final_venue_id": "VEN-000079",
+      "final_venue_key": "hilton-coliseum",
+      "research_venue_id": "VEN-000079",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hilton-coliseum"
+    },
+    {
+      "canonical_name": "Klotsche Center",
+      "final_venue_id": "VEN-000468",
+      "final_venue_key": "klotsche-center",
+      "research_venue_id": "VEN-000468",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "klotsche-center"
+    },
+    {
+      "canonical_name": "Leavey Center",
+      "final_venue_id": "VEN-000606",
+      "final_venue_key": "leavey-center",
+      "research_venue_id": "VEN-000606",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "leavey-center"
+    },
+    {
+      "canonical_name": "McArthur Court",
+      "final_venue_id": "VEN-000126",
+      "final_venue_key": "mcarthur-court",
+      "research_venue_id": "VEN-000126",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mcarthur-court"
+    },
+    {
+      "canonical_name": "Mitchell Center",
+      "final_venue_id": "VEN-000719",
+      "final_venue_key": "mitchell-center",
+      "research_venue_id": "VEN-000719",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mitchell-center"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "VEN-000356",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Peter W. Stott Center",
+      "final_venue_id": "VEN-001033",
+      "final_venue_key": "peter-w-stott-center",
+      "research_venue_id": "VEN-001033",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "peter-w-stott-center"
+    },
+    {
+      "canonical_name": "University Credit Union Center",
+      "final_venue_id": "VEN-001129",
+      "final_venue_key": "university-credit-union-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "university-credit-union-center"
+    },
+    {
+      "canonical_name": "University Credit Union Pavilion",
+      "final_venue_id": "VEN-000449",
+      "final_venue_key": "university-credit-union-pavilion",
+      "research_venue_id": "VEN-000449",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-credit-union-pavilion"
+    },
+    {
+      "canonical_name": "Viejas Arena",
+      "final_venue_id": "VEN-000226",
+      "final_venue_key": "viejas-arena",
+      "research_venue_id": "VEN-000226",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "viejas-arena"
+    },
+    {
+      "canonical_name": "War Memorial Gymnasium",
+      "final_venue_id": "VEN-000523",
+      "final_venue_key": "war-memorial-gymnasium-san-francisco",
+      "research_venue_id": "VEN-000523",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "war-memorial-gymnasium-san-francisco"
+    },
+    {
+      "canonical_name": "Anaheim Convention Center",
+      "final_venue_id": "VEN-000386",
+      "final_venue_key": "anaheim-convention-center",
+      "research_venue_id": "VEN-000386",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "anaheim-convention-center"
+    },
+    {
+      "canonical_name": "Honda Center",
+      "final_venue_id": "VEN-000082",
+      "final_venue_key": "honda-center",
+      "research_venue_id": "VEN-000082",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "honda-center"
+    },
+    {
+      "canonical_name": "Lee’s Family Forum",
+      "final_venue_id": "VEN-000399",
+      "final_venue_key": "lees-family-forum",
+      "research_venue_id": "VEN-000399",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lees-family-forum"
+    },
+    {
+      "canonical_name": "Michelob ULTRA Arena",
+      "final_venue_id": "VEN-000135",
+      "final_venue_key": "michelob-ultra-arena",
+      "research_venue_id": "VEN-000135",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "michelob-ultra-arena"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "BOK Center",
+      "final_venue_id": "VEN-000024",
+      "final_venue_key": "bok-center",
+      "research_venue_id": "VEN-000024",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bok-center"
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "VEN-000542",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "Jon M. Huntsman Center",
+      "final_venue_id": "VEN-000097",
+      "final_venue_key": "jon-m-huntsman-center",
+      "research_venue_id": "VEN-000097",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jon-m-huntsman-center"
+    }
+  ],
+  "venue_reconciliation": null
+}
