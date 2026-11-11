@@ -72,6 +72,17 @@ tracked integration. The program top-level scope reference is controlling as the
 owner-supplied research baseline for each current D1 program's accepted top-level /
 Division I-equivalent history intervals.
 
+All-History Universe compatibility transition: top-level scope is classification
+authority, not institutional program inception. The program registry's
+`program_inception_season` / `history_coverage_status` fields govern the new
+publication-history semantic layer. Until later generic maintenance units migrate each
+workflow, existing Research/Implementation/publication consumers may continue using the
+legacy history-scope fields as an explicit compatibility boundary; do not treat that
+temporary behavior as proof that top-level scope and institutional inception are the
+same fact. A genuine postseason tournament played while the target program is outside
+its accepted top-level scope ordinarily uses `POSTSEASON`; `CONFERENCE_TOURNAMENT`
+remains the D-I/top-level conference-tournament taxonomy.
+
 Implementation intake authentication has a narrow owner-designated-artifact fallback.
 A precomputed Research Freeze ZIP SHA-256 and final status card remain the preferred
 bootstrap inputs. If the owner explicitly identifies exactly one attached ZIP as the final
