@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "0b7d2d3fddbefe8acae7c9b82e4bb2974196bd22c67f14d3e9fd072a608fb57a",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "8a61ba1cf5abc83171bbf78f4221f80690c3853d",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "pr_number": 563,
+  "production_deployment_id": 7717859712,
+  "production_json_checked_count": 41,
+  "production_proof": true,
+  "request_id": "uc-davis-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "status": "COMPLETE"
+}

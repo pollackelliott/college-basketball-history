@@ -1091,7 +1091,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "0b7d2d3fddbefe8acae7c9b82e4bb2974196bd22c67f14d3e9fd072a608fb57a",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "8a61ba1cf5abc83171bbf78f4221f80690c3853d",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1101,7 +1101,7 @@
     "production_deployment_id": 7717859712,
     "production_json_checked_count": 41,
     "protected_main_sha": "8a61ba1cf5abc83171bbf78f4221f80690c3853d",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "uc-davis-release-production-proof-0001",
     "school_key": "uc-davis"
   },
