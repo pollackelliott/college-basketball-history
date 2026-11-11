@@ -1,0 +1,33 @@
+{
+  "action_counts": {
+    "ENABLE_PUBLIC_PAGE": 1,
+    "FORCE_NEW": 1,
+    "KEEP_CANONICAL": 15,
+    "MATCH_CANONICAL:CBBG-0081915": 1,
+    "MATCH_CANONICAL:CBBG-0108221": 1,
+    "NOT_APPLICABLE": 11,
+    "USE_SOURCE": 27,
+    "VERIFY_REFERENCE_VALUES": 1
+  },
+  "approved_plan_hash_preview": "4648bf631bd7d92b658a245e02f427e2d8967eecd2120a7457014bf6894b6c0d",
+  "decision_count": 58,
+  "decision_id_set_sha256": "2e4accbbf1d41d7b5e8335a3919d9282c930408a622c5f5c554f9b97609bcf7c",
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "filled_review_sha256": "b89d0f5ccec02fcf2ca062cf68a4ffc9af3bc69802b32fac465696e4ec294880",
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_VERIFICATION",
+  "owner_gate_1_approval_sha256": "b8d86e50daeaceaf05bde9929ddba3a5a011387aef4aedafad1426da76fe538d",
+  "protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "recommendation_map_sha256": "1c5e7a5b7973c1b23002ff66d917789e77abc503332c5e62c600e4286b4ce82a",
+  "remote_stage2_gate1_fill_equivalence": "PASS",
+  "request_id": "hawai-i-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "stage2_proposal_checkpoint_sha256": "0f016b57ecf05bb10034f20633ee12138abbf22b3e42aa64a0cdae4258e58964",
+  "stage2_proposal_verification_sha256": "bb719d6e9d8640c25a86d1f7e48aa353869d4d7e712065e1fdca7dff61097184",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
+  "target_tree_sha": "7ef978cdded4b7e8e07795fab804fa33c728fa46",
+  "tracked_stage2_mutation": "NONE"
+}
