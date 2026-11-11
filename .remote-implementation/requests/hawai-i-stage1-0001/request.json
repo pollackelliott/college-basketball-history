@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "hawai-i",
+  "previous_control_state_commit": "779c352ab63130b2d1dd01a2c3f0b039809a2075",
+  "previous_control_state_sha256": "eff4db9b677c742922efa16dde1998f6230624ee26db87fd108f24a1bfeb4444",
+  "expected_protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "research_checkpoint": {
+    "sha256": "49948624da8a0f2048585a99a00bc7a6f3ed996ba674806de1df4708608f7313",
+    "research_base_sha": "6a192223de544cd942100cce9c0a7565985c9784",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "779c352ab63130b2d1dd01a2c3f0b039809a2075",
+      "path_prefix": ".remote-implementation/transports/hawai-i/hawai-i-stage1-0001-final/piece-",
+      "part_count": 6
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Hawai'i serialized Implementation lane — owner-designated FINAL accepted RESEARCH_FROZEN attachment intake",
+    "authorization": "Owner explicitly opened a NEW serialized Hawai'i Implementation lane for school key hawai-i and authorized the complete bounded Implementation Stage 1 intake/inventory only after re-authenticating current protected main, current governance, the free global serialized lock, and the exact owner-designated FINAL RESEARCH_FROZEN attachment. Immutable Research Freeze SHA-256 49948624da8a0f2048585a99a00bc7a6f3ed996ba674806de1df4708608f7313, exact size 67999 bytes, research_base_sha 6a192223de544cd942100cce9c0a7565985c9784, school identity hawai-i / Hawai'i / Rainbow Warriors, accepted top-level scope 1970-71+, and frozen historical conclusions remain authoritative. Current protected main is exactly 36b8e829e7e5ffde7390ec7ef00816cda3d7f663 and current reusable scope authority agrees at 1970-71+, so the scope baseline is confirmed. This request authorizes only the complete read-only current-main Stage 1 reconciliation inventory and permanent Research acceptance check. It does not reopen Research or authorize Integration Freeze mutation, Phase 0, Stage 2, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, recovery, protected-main mutation, or another school."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
