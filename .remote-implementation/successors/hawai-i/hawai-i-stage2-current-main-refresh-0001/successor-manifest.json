@@ -1,0 +1,70 @@
+{
+  "actual_published_target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "f076e10cf73924e6d2ab359ad11dd5184e890b98673fc72d5176e66e4700e411",
+    "data/reconciliation/maintenance/hawai-i-kansas-three-site-states.json": "45fe2aa170501df808c92db3eebad26279cecdea6d7d6354f75e8d3ce13f5ec9",
+    "site/data/teams/kansas.json": "52220d445c290c169ab69b2c155d7e79e1853e8a5547dae218e31da7c1553551"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/maintenance/hawai-i-kansas-three-site-states.json",
+    "site/data/teams/kansas.json"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/maintenance/hawai-i-kansas-three-site-states.json",
+    "site/data/teams/kansas.json"
+  ],
+  "merge_base_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "b88a0dd44668ea4cb26b3c214c5bfe96a26023d9c6e411dba90422f55fe17b74",
+    "notes.md": "b952bd13c29dccee362f60f75f4913a07fd05315c68d9534fa6d1ab3de4b6825",
+    "opponents.csv": "a6ea3d8ff1af7073ad7f35803fb727eb4b79a4042d6e58bc6f4ab6d1e94ac853",
+    "source-games.csv": "3fbb3e60b14be6871c5478697bc01477de1010abde2fb0c2433ad93ac2c55f95",
+    "source-notes.md": "c423bb1a6c3c04964c389d8184d169a1dd4c3cc740b3fa2546767eca673ffc92",
+    "venues.csv": "cde86d8ab041e5b3cc10d9a9ba93453166acf96b09e9df0fc9de0d755676f9fc"
+  },
+  "predecessor_authority_kind": "PHASE0_SUCCESSOR",
+  "prepared_commit_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
+  "prepared_main_parent_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "prepared_parent_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+  "prepared_parents": [
+    "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+    "8f1b8e79e55108be63afcd13e6e570ab928d6bb4"
+  ],
+  "prepared_tree_sha": "7ef978cdded4b7e8e07795fab804fa33c728fa46",
+  "prior_refresh_successor_path": null,
+  "prior_refresh_successor_sha256": null,
+  "protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "a8b58417d2d8f0bb473863f519e7385c1283822bc6bfde083edd1e306892d73c",
+  "repository_validation": "PASS",
+  "request_id": "hawai-i-stage2-current-main-refresh-0001",
+  "request_sha256": "b812905ccf88175f7dd9144c992d66901a313dc7de4ffc8e2965a3aca031601c",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/hawai-i/conferences.csv",
+    "schools/hawai-i/notes.md",
+    "schools/hawai-i/opponents.csv",
+    "schools/hawai-i/source-games.csv",
+    "schools/hawai-i/source-notes.md",
+    "schools/hawai-i/venues.csv"
+  ],
+  "writeahead_commit": "caeb1a7ad5af03db331ab0d1011e2f3fe771f942",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/hawai-i/hawai-i-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "6d322875d34c94611f50944a461afef6fcd8ed557ff74d68182227d158a6e0c3"
+}
