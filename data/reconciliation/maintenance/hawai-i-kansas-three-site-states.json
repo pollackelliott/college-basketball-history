@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "CONTROL_CENTER_AUTHORIZED_SHARED_CANONICAL_SITE_STATE_MAINTENANCE",
+  "authorization": "Hawai'i Stage 2 three-row shared canonical site-state maintenance explicitly authorized by the Control Center on 2026-11-10.",
+  "protected_main_predecessor_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "control_branch_predecessor_sha": "f7485b931e8ced821e38896b814f5f05d780b40e",
+  "control_sequence": 498,
+  "hawai_i_onboarding_branch": "data/hawai-i-onboarding",
+  "hawai_i_onboarding_predecessor_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+  "research_checkpoint_sha256": "49948624da8a0f2048585a99a00bc7a6f3ed996ba674806de1df4708608f7313",
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "prior_stage2_decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "predecessor_blobs": {
+    "data/canonical/games.csv": "915e2be044c78255f52718a9251d26c2ba775cbb",
+    "site/data/teams/kansas.json": "378dfdaf8a40388c0b37c81656b302aa5a98e524",
+    "schools/kansas/source-games.csv": "0ea0407411ad5d0b62d1a2f92fdcc4e45ab3157c",
+    "schools/hawai-i/source-games.csv@data/hawai-i-onboarding": "a88917acbedd32e7d6752ae7ab1108465465ca88"
+  },
+  "authorized_canonical_game_ids": [
+    "CBBG-0013194",
+    "CBBG-0013385",
+    "CBBG-0013555"
+  ],
+  "authorized_field": "site_state",
+  "expected_old_value": "",
+  "required_new_value": "HI",
+  "expected_unchanged_site_city": "Honolulu",
+  "evidence_basis": {
+    "kansas_source_rows": [
+      {
+        "source_game_id": "KURAW-01970",
+        "game_date": "1986-12-30",
+        "raw_location_text": "Honolulu, Hawai'i"
+      },
+      {
+        "source_game_id": "KURAW-02176",
+        "game_date": "1992-12-29",
+        "raw_location_text": "Honolulu, Hawai'i"
+      },
+      {
+        "source_game_id": "KURAW-02357",
+        "game_date": "1997-12-30",
+        "raw_location_text": "Honolulu, Hawai'i"
+      }
+    ],
+    "hawai_i_frozen_source_rows": [
+      {
+        "source_game_id": "hawai-i-1986-87-011",
+        "game_date": "1986-12-30",
+        "city": "Honolulu",
+        "state": "HI"
+      },
+      {
+        "source_game_id": "hawai-i-1992-93-007",
+        "game_date": "1992-12-29",
+        "city": "Honolulu",
+        "state": "HI"
+      },
+      {
+        "source_game_id": "hawai-i-1997-98-011",
+        "game_date": "1997-12-30",
+        "city": "Honolulu",
+        "state": "HI"
+      }
+    ]
+  },
+  "prohibited_canonical_fields": [
+    "site_type",
+    "site_city",
+    "venue_key",
+    "venue_id",
+    "game_date",
+    "team_a_score",
+    "team_b_score",
+    "overtime_periods",
+    "game_type",
+    "canonical_game_id",
+    "team_a_key",
+    "team_b_key"
+  ],
+  "prohibited_mutations": [
+    "source assertions",
+    "Kansas source rows",
+    "Hawai'i frozen source rows",
+    "Hawai'i Research Freeze",
+    "Hawai'i Integration Freeze",
+    "Hawai'i semantic snapshot",
+    "Hawai'i recommendation decisions",
+    "data/hawai-i-onboarding"
+  ],
+  "substantive_source_mutation_paths": [
+    "data/canonical/games.csv"
+  ],
+  "expected_derived_output_paths": [
+    "site/data/teams/kansas.json"
+  ],
+  "audit_spec_path": "data/reconciliation/maintenance/hawai-i-kansas-three-site-states.json",
+  "expected_final_changed_paths": [
+    "data/canonical/games.csv",
+    "data/reconciliation/maintenance/hawai-i-kansas-three-site-states.json",
+    "site/data/teams/kansas.json"
+  ],
+  "h_a_n_conflict_preserved": {
+    "canonical_site_type": "NEUTRAL",
+    "kansas_evidence": "NEUTRAL",
+    "hawai_i_frozen_evidence": "SOURCE_PROGRAM_HOME",
+    "maintenance_must_not_resolve_conflict": true
+  },
+  "precedent_pr": 430
+}
