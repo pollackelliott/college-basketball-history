@@ -1,0 +1,575 @@
+name: All-History maintenance
+
+on:
+  push:
+    branches:
+      - tooling/all-history-universe
+    paths:
+      - .all-history-maintenance/request.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: all-history-maintenance-global
+  cancel-in-progress: false
+
+jobs:
+  generate-public-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact triggering commit
+        uses: actions/checkout@v4
+        with:
+          ref: $GITHUB_SHA
+          fetch-depth: 0
+
+      - name: Detect request-bearing trigger
+        id: detect
+        shell: bash
+        run: |
+          set -eo pipefail
+          if [[ -f .all-history-maintenance/request.json ]]; then
+            echo "has_request=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_request=false" >> "$GITHUB_OUTPUT"
+            echo "No request file at triggering commit; treating request-deletion successor push as a no-op."
+          fi
+
+      - name: Set up Python
+        if: steps.detect.outputs.has_request == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate bounded request schema
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        run: |
+          set -eo pipefail
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          request_path = Path(".all-history-maintenance/request.json")
+          request = json.loads(request_path.read_text(encoding="utf-8"))
+
+          if str(request.get("schema_version")) != "1":
+              raise SystemExit("Unsupported schema_version; expected 1.")
+          if request.get("kind") != "ALL_HISTORY_MAINTENANCE_REQUEST":
+              raise SystemExit("Unknown request kind.")
+          if request.get("operation") != "GENERATE_PUBLIC_DATA":
+              raise SystemExit("Unknown or unsupported operation.")
+
+          sha_fields = (
+              "expected_protected_main_sha",
+              "expected_branch_predecessor_sha",
+              "source_authority_sha",
+              "publication_baseline_sha",
+          )
+          for field in sha_fields:
+              value = request.get(field)
+              if not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{40}", value) is None:
+                  raise SystemExit(f"Invalid or missing {field}.")
+
+          env_text = (
+              f"OPERATION={request['operation']}\n"
+              f"EXPECTED_MAIN_SHA={request['expected_protected_main_sha']}\n"
+              f"PREDECESSOR_SHA={request['expected_branch_predecessor_sha']}\n"
+              f"SOURCE_AUTHORITY_SHA={request['source_authority_sha']}\n"
+              f"PUBLICATION_BASELINE_SHA={request['publication_baseline_sha']}\n"
+          )
+          Path("/tmp/all-history-request.env").write_text(env_text, encoding="utf-8")
+          PY
+
+      - name: Authenticate request commit, main, control, and branch tip
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        run: |
+          set -eo pipefail
+          source /tmp/all-history-request.env
+
+          if [[ "$(git rev-parse HEAD)" != "$GITHUB_SHA" ]]; then
+            echo "Checkout does not match triggering commit." >&2
+            exit 1
+          fi
+
+          set -- $(git rev-list --parents -n 1 "$GITHUB_SHA")
+          if [[ "$#" -ne 2 ]]; then
+            echo "Trigger commit must have exactly one parent." >&2
+            exit 1
+          fi
+          trigger_parent="$2"
+          if [[ "$trigger_parent" != "$PREDECESSOR_SHA" ]]; then
+            echo "Trigger parent does not match expected_branch_predecessor_sha." >&2
+            exit 1
+          fi
+
+          changed_paths="$(git diff-tree --no-commit-id --name-only -r "$trigger_parent" "$GITHUB_SHA")"
+          if [[ "$changed_paths" != ".all-history-maintenance/request.json" ]]; then
+            echo "Trigger commit changed paths outside the single request file:" >&2
+            printf '%s\n' "$changed_paths" >&2
+            exit 1
+          fi
+
+          git fetch --no-tags origin             "+refs/heads/main:refs/remotes/origin/main"             "+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation"             "+refs/heads/tooling/all-history-universe:refs/remotes/origin/tooling/all-history-universe"
+
+          actual_main="$(git rev-parse refs/remotes/origin/main)"
+          if [[ "$actual_main" != "$EXPECTED_MAIN_SHA" ]]; then
+            echo "Protected main mismatch: expected=$EXPECTED_MAIN_SHA actual=$actual_main" >&2
+            exit 1
+          fi
+
+          branch_tip="$(git rev-parse refs/remotes/origin/tooling/all-history-universe)"
+          if [[ "$branch_tip" != "$GITHUB_SHA" ]]; then
+            echo "Maintenance branch advanced away from the triggering request commit." >&2
+            exit 1
+          fi
+
+          if ! git cat-file -e "$SOURCE_AUTHORITY_SHA^{commit}" 2>/dev/null; then
+            echo "source_authority_sha is not a reachable commit." >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$SOURCE_AUTHORITY_SHA" "$PREDECESSOR_SHA"; then
+            echo "source_authority_sha is not an ancestor of the request predecessor." >&2
+            exit 1
+          fi
+
+          if ! git cat-file -e "$PUBLICATION_BASELINE_SHA^{commit}" 2>/dev/null; then
+            echo "publication_baseline_sha is not a reachable commit." >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$PUBLICATION_BASELINE_SHA" "$PREDECESSOR_SHA"; then
+            echo "publication_baseline_sha is not an ancestor of the request predecessor." >&2
+            exit 1
+          fi
+
+          git show refs/remotes/origin/control/remote-implementation:.remote-implementation/control-state.json > /tmp/all-history-control-state.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          state = json.loads(Path("/tmp/all-history-control-state.json").read_text(encoding="utf-8"))
+          if state.get("lifecycle_state") != "IDLE":
+              raise SystemExit("Global remote Implementation lifecycle is not IDLE.")
+          if state.get("transaction_state") != "COMPLETE":
+              raise SystemExit("Global remote Implementation transaction is not COMPLETE.")
+          if state.get("recovery_required") is not False:
+              raise SystemExit("Global remote Implementation recovery_required is not false.")
+
+          active = {
+              key: value
+              for key, value in state.items()
+              if key.startswith("active_")
+          }
+          nonempty = {
+              key: value
+              for key, value in active.items()
+              if value not in (None, "", False, [], {})
+          }
+          if nonempty:
+              raise SystemExit(f"Global remote Implementation has active state: {nonempty}")
+          PY
+
+      - name: Generate and validate public data
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        run: |
+          set -eo pipefail
+          source /tmp/all-history-request.env
+
+          python tools/build_site_data.py --apply
+          python tools/check_site_data_freshness.py
+          python tools/validate_data.py
+
+          python - <<'PY'
+          import csv
+          import json
+          import subprocess
+          import sys
+          from collections import Counter, defaultdict
+          from pathlib import Path
+
+          ROOT = Path.cwd()
+          sys.path.insert(0, str(ROOT / "tools"))
+          from program_history import publication_history_games
+
+          request_env = {}
+          for line in Path("/tmp/all-history-request.env").read_text(encoding="utf-8").splitlines():
+              key, value = line.split("=", 1)
+              request_env[key] = value
+          baseline = request_env["PUBLICATION_BASELINE_SHA"]
+
+          metadata_fields = {
+              "published_history_start_season",
+              "d1_since_season",
+              "history_coverage_status",
+          }
+
+          def read_csv(path):
+              with path.open(encoding="utf-8-sig", newline="") as handle:
+                  return list(csv.DictReader(handle))
+
+          def git_text(sha, path):
+              return subprocess.check_output(
+                  ["git", "show", f"{sha}:{path}"],
+                  text=True,
+                  encoding="utf-8",
+              )
+
+          def git_json(sha, path):
+              return json.loads(git_text(sha, path))
+
+          def strip_metadata(value):
+              if isinstance(value, dict):
+                  return {
+                      key: strip_metadata(item)
+                      for key, item in value.items()
+                      if key not in metadata_fields
+                  }
+              if isinstance(value, list):
+                  return [strip_metadata(item) for item in value]
+              return value
+
+          programs = read_csv(ROOT / "data/reference/programs.csv")
+          published = [
+              row for row in programs
+              if row.get("public_page_enabled") == "Yes"
+          ]
+          legacy = [
+              row for row in published
+              if row.get("history_coverage_status") == "LEGACY_TOP_LEVEL_ONLY"
+          ]
+          published_keys = {row["program_key"] for row in published}
+
+          current_programs = json.loads(
+              (ROOT / "site/data/programs.json").read_text(encoding="utf-8")
+          )
+          baseline_programs = git_json(baseline, "site/data/programs.json")
+          if strip_metadata(current_programs) != strip_metadata(baseline_programs):
+              raise SystemExit(
+                  "site/data/programs.json changed semantically beyond the three additive metadata fields."
+              )
+
+          current_program_rows = current_programs.get("programs")
+          if not isinstance(current_program_rows, list):
+              raise SystemExit("Current programs.json lacks a programs list.")
+          for program in current_program_rows:
+              missing = sorted(metadata_fields - set(program))
+              if missing:
+                  raise SystemExit(
+                      f"Program {program.get('program_key')} lacks additive metadata fields: {missing}"
+                  )
+
+          baseline_team_paths = sorted(
+              line
+              for line in subprocess.check_output(
+                  ["git", "ls-tree", "-r", "--name-only", baseline, "--", "site/data/teams"],
+                  text=True,
+                  encoding="utf-8",
+              ).splitlines()
+              if line.endswith(".json")
+          )
+          current_team_paths = sorted(
+              path.relative_to(ROOT).as_posix()
+              for path in (ROOT / "site/data/teams").glob("*.json")
+          )
+          if current_team_paths != baseline_team_paths:
+              raise SystemExit("Generated team JSON path population differs from the publication baseline.")
+
+          current_team_keys = {
+              Path(path).stem for path in current_team_paths
+          }
+          if current_team_keys != published_keys:
+              raise SystemExit(
+                  "Generated team-file population does not exactly match currently published programs."
+              )
+
+          baseline_union = set()
+          current_union = set()
+
+          for key in sorted(published_keys):
+              path = f"site/data/teams/{key}.json"
+              baseline_team = git_json(baseline, path)
+              current_team = json.loads((ROOT / path).read_text(encoding="utf-8"))
+
+              current_program = current_team.get("program")
+              if not isinstance(current_program, dict):
+                  raise SystemExit(f"{key}: team JSON lacks program metadata object.")
+              missing = sorted(metadata_fields - set(current_program))
+              if missing:
+                  raise SystemExit(f"{key}: additive metadata fields missing: {missing}")
+
+              baseline_games = baseline_team.get("games")
+              current_games = current_team.get("games")
+              if not isinstance(baseline_games, list) or not isinstance(current_games, list):
+                  raise SystemExit(f"{key}: games payload is not a list.")
+
+              baseline_ids = [game.get("canonical_game_id") for game in baseline_games]
+              current_ids = [game.get("canonical_game_id") for game in current_games]
+
+              if len(current_games) != len(baseline_games):
+                  raise SystemExit(f"{key}: game count changed.")
+              if set(current_ids) != set(baseline_ids):
+                  raise SystemExit(f"{key}: canonical-game-ID set changed.")
+
+              baseline_results = Counter(
+                  (game.get("canonical_game_id"), game.get("result"))
+                  for game in baseline_games
+              )
+              current_results = Counter(
+                  (game.get("canonical_game_id"), game.get("result"))
+                  for game in current_games
+              )
+              if current_results != baseline_results:
+                  raise SystemExit(f"{key}: canonical-game-ID + W/L/T population changed.")
+
+              if strip_metadata(current_team) != strip_metadata(baseline_team):
+                  raise SystemExit(
+                      f"{key}: team JSON changed semantically beyond the three additive metadata fields."
+                  )
+
+              baseline_union.update(baseline_ids)
+              current_union.update(current_ids)
+
+          if current_union != baseline_union:
+              raise SystemExit("Overall published canonical-game-ID union changed.")
+
+          canonical_rows = read_csv(ROOT / "data/canonical/games.csv")
+          games_by_program = defaultdict(list)
+          for game in canonical_rows:
+              games_by_program[game["team_a_key"]].append(game)
+              games_by_program[game["team_b_key"]].append(game)
+
+          for program in legacy:
+              key = program["program_key"]
+              selected_ids = {
+                  game["canonical_game_id"]
+                  for game in publication_history_games(
+                      games_by_program[key],
+                      key,
+                      program,
+                  )
+              }
+              current_team = json.loads(
+                  (ROOT / f"site/data/teams/{key}.json").read_text(encoding="utf-8")
+              )
+              current_ids = {
+                  game["canonical_game_id"]
+                  for game in current_team.get("games", [])
+              }
+              if current_ids != selected_ids:
+                  raise SystemExit(
+                      f"{key}: LEGACY_TOP_LEVEL_ONLY publication exposes a non-selector game population."
+                  )
+
+          proof = {
+              "published_program_count": len(published),
+              "legacy_program_count": len(legacy),
+              "published_game_id_union_count": len(current_union),
+              "exact_game_id_nonregression": "PASS",
+              "legacy_no_leak": "PASS",
+          }
+          Path("/tmp/all-history-proof.json").write_text(
+              json.dumps(proof, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Enforce generated-path boundary
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        run: |
+          set -eo pipefail
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          def lines(command):
+              return [
+                  line
+                  for line in subprocess.check_output(
+                      command,
+                      text=True,
+                      encoding="utf-8",
+                  ).splitlines()
+                  if line
+              ]
+
+          changed = sorted(set(
+              lines(["git", "diff", "--name-only", "HEAD"])
+              + lines(["git", "ls-files", "--others", "--exclude-standard"])
+          ))
+          bad = [path for path in changed if not path.startswith("site/data/")]
+          if bad:
+              raise SystemExit(f"Build changed forbidden paths: {bad}")
+          if not changed:
+              raise SystemExit("GENERATE_PUBLIC_DATA produced no site/data changes.")
+
+          team_files = sorted(Path("site/data/teams").glob("*.json"))
+          if not Path("site/data/programs.json").is_file():
+              raise SystemExit("Generated programs.json is missing.")
+
+          proof_path = Path("/tmp/all-history-proof.json")
+          proof = json.loads(proof_path.read_text(encoding="utf-8"))
+          proof["generated_file_count"] = len(team_files) + 1
+          proof["changed_generated_path_count"] = len(changed)
+          proof["changed_generated_paths"] = changed
+          proof_path.write_text(
+              json.dumps(proof, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Publish guarded successor
+        if: steps.detect.outputs.has_request == 'true'
+        shell: bash
+        run: |
+          set -eo pipefail
+          source /tmp/all-history-request.env
+
+          check_remote_guards() {
+            git fetch --no-tags origin               "+refs/heads/main:refs/remotes/origin/main"               "+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation"               "+refs/heads/tooling/all-history-universe:refs/remotes/origin/tooling/all-history-universe"
+
+            actual_main="$(git rev-parse refs/remotes/origin/main)"
+            if [[ "$actual_main" != "$EXPECTED_MAIN_SHA" ]]; then
+              echo "Protected main changed before publication." >&2
+              exit 1
+            fi
+
+            branch_tip="$(git rev-parse refs/remotes/origin/tooling/all-history-universe)"
+            if [[ "$branch_tip" != "$GITHUB_SHA" ]]; then
+              echo "Maintenance branch changed before publication." >&2
+              exit 1
+            fi
+
+            git show refs/remotes/origin/control/remote-implementation:.remote-implementation/control-state.json > /tmp/all-history-control-state-publish.json
+            python - <<'PY'
+          import json
+          from pathlib import Path
+
+          state = json.loads(
+              Path("/tmp/all-history-control-state-publish.json").read_text(encoding="utf-8")
+          )
+          if state.get("lifecycle_state") != "IDLE":
+              raise SystemExit("Global remote Implementation lifecycle changed before publication.")
+          if state.get("transaction_state") != "COMPLETE":
+              raise SystemExit("Global remote Implementation transaction changed before publication.")
+          if state.get("recovery_required") is not False:
+              raise SystemExit("Global remote Implementation now requires recovery.")
+          active = {
+              key: value
+              for key, value in state.items()
+              if key.startswith("active_")
+          }
+          nonempty = {
+              key: value
+              for key, value in active.items()
+              if value not in (None, "", False, [], {})
+          }
+          if nonempty:
+              raise SystemExit(f"Global remote Implementation became active: {nonempty}")
+          PY
+          }
+
+          check_remote_guards
+
+          git rm -- .all-history-maintenance/request.json
+          git add -- site/data
+
+          python - <<'PY'
+          import subprocess
+
+          staged = [
+              line
+              for line in subprocess.check_output(
+                  ["git", "diff", "--cached", "--name-only", "HEAD"],
+                  text=True,
+                  encoding="utf-8",
+              ).splitlines()
+              if line
+          ]
+          request = ".all-history-maintenance/request.json"
+          if request not in staged:
+              raise SystemExit("Request deletion is not staged.")
+          generated = [path for path in staged if path != request]
+          if not generated:
+              raise SystemExit("No generated site/data paths are staged.")
+          bad = [path for path in generated if not path.startswith("site/data/")]
+          if bad:
+              raise SystemExit(f"Staged successor contains forbidden paths: {bad}")
+
+          unstaged = [
+              line
+              for line in subprocess.check_output(
+                  ["git", "diff", "--name-only"],
+                  text=True,
+                  encoding="utf-8",
+              ).splitlines()
+              if line
+          ]
+          untracked = [
+              line
+              for line in subprocess.check_output(
+                  ["git", "ls-files", "--others", "--exclude-standard"],
+                  text=True,
+                  encoding="utf-8",
+              ).splitlines()
+              if line
+          ]
+          if unstaged or untracked:
+              raise SystemExit(
+                  f"Worktree has unstaged/untracked residue before commit: unstaged={unstaged} untracked={untracked}"
+              )
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "All-History GENERATE_PUBLIC_DATA"
+          successor_sha="$(git rev-parse HEAD)"
+
+          check_remote_guards
+
+          git push origin "HEAD:refs/heads/tooling/all-history-universe"
+          git fetch --no-tags origin "+refs/heads/tooling/all-history-universe:refs/remotes/origin/tooling/all-history-universe"
+          published_tip="$(git rev-parse refs/remotes/origin/tooling/all-history-universe)"
+          if [[ "$published_tip" != "$successor_sha" ]]; then
+            echo "Published branch tip does not equal the prepared successor." >&2
+            exit 1
+          fi
+
+          printf '%s\n' "$successor_sha" > /tmp/all-history-successor.sha
+
+      - name: Write durable job summary
+        if: steps.detect.outputs.has_request == 'true' && success()
+        shell: bash
+        run: |
+          set -eo pipefail
+          source /tmp/all-history-request.env
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+
+          env = {}
+          for line in Path("/tmp/all-history-request.env").read_text(encoding="utf-8").splitlines():
+              key, value = line.split("=", 1)
+              env[key] = value
+          proof = json.loads(Path("/tmp/all-history-proof.json").read_text(encoding="utf-8"))
+          successor = Path("/tmp/all-history-successor.sha").read_text(encoding="utf-8").strip()
+
+          print("## All-History maintenance — GENERATE_PUBLIC_DATA")
+          print()
+          print(f"- Request operation: {env['OPERATION']}")
+          print(f"- Authenticated protected-main SHA: {env['EXPECTED_MAIN_SHA']}")
+          print(f"- Request predecessor SHA: {env['PREDECESSOR_SHA']}")
+          print(f"- Publication baseline SHA: {env['PUBLICATION_BASELINE_SHA']}")
+          print(f"- Generated-file count: {proof['generated_file_count']}")
+          print(f"- Changed generated-path count: {proof['changed_generated_path_count']}")
+          print(f"- Published-program count: {proof['published_program_count']}")
+          print(f"- Legacy-program count: {proof['legacy_program_count']}")
+          print(f"- Exact game-ID nonregression: {proof['exact_game_id_nonregression']}")
+          print(f"- Legacy no-leak: {proof['legacy_no_leak']}")
+          print(f"- Successor commit SHA: {successor}")
+          PY
