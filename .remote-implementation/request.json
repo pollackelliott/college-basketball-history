@@ -1,16 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-release-readiness-0001",
+  "request_id": "hawai-i-release-preview-verify-0001",
   "school_key": "hawai-i",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "05d8954a66200a415c41688f5d057ed5a015a3ba",
-  "previous_control_state_sha256": "b5a01e05e66c926a0c3c4f24d91c67d1407423f68e610e4b8d6d2205f7dd7ddb",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "891841e2ba0e4d757edae913cceea66b408819da",
+  "previous_control_state_sha256": "3e63d90eb0e02952638679b0f1af67b42ceb66927fd773acc72685f2571852f9",
   "expected_protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
   "target_branch": "data/hawai-i-onboarding",
   "target_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
-  "approved_plan_hash": "5412b3591b59ff449e6d0a24ca2c6a8243cc40283525f757a6f8ba3dffe9cfc2",
-  "release_manifest_sha256": "ca93e0489b1d561551be3c1c2edf7799f0b93b6e1c655565eabb6125ad44842b",
   "stage2_apply_successor": {
     "path": ".remote-implementation/successors/hawai-i/hawai-i-stage2-sealed-apply-0001/successor-manifest.json",
     "sha256": "c8f9ee8eb34c176be70e6011a7f769cf9309c38ea99faf783698b98e7322e131"
@@ -19,13 +17,20 @@
     "path": ".remote-implementation/verifications/hawai-i/hawai-i-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
     "sha256": "6364aa0d2508a6d7f451d841574db5b111cf756d2ed155aa551cddf4083f9bcd"
   },
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "hawai-i-release-preview-verify-0001"
+  "approved_plan_hash": "5412b3591b59ff449e6d0a24ca2c6a8243cc40283525f757a6f8ba3dffe9cfc2",
+  "release_manifest_sha256": "ca93e0489b1d561551be3c1c2edf7799f0b93b6e1c655565eabb6125ad44842b",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "70fbb7d46d61dfdd8598e3e378e63ab8b3f8701d601ba11924ac0067189abbfc"
   },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "d9fb1ae51e2d59b6e1dc32ed77ab30ccee306b1754bf3177b9d2319dc0e8c877"
+  },
+  "pr_number": 562,
   "creation_provenance": {
-    "origin": "ChatGPT Hawai'i serialized Implementation — owner-authorized release preparation",
-    "authorization": "Owner explicitly said 'Continue' after the exact Hawai'i sealed-apply successor c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, ordinary CI/mergeability checks, exact Vercel Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or changed historical authority."
+    "origin": "ChatGPT Hawai'i serialized Implementation — release preparation continuation",
+    "authorization": "Continuation of the owner-authorized Hawai'i release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #562. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden."
   },
   "authority": {
     "owner_gate_1": false,
@@ -35,9 +40,9 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
-    "release_preview_verify": false,
+    "release_preview_verify": true,
     "release_production_proof": false,
-    "release_readiness": true,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
