@@ -535,18 +535,19 @@
     "uc-davis-stage1-0001",
     "uc-davis-stage1-verify-0001",
     "uc-davis-phase0-0001",
-    "uc-davis-stage2-census-0001"
+    "uc-davis-stage2-census-0001",
+    "uc-davis-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43046954544:1",
+  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "uc-davis-stage2-opponent-display-normalize-0001",
+  "active_request_sha256": "cf7e5b9ee85eaa5f5b017181f4a3da099b4a20fb03b4f7d1f1cd2d94e552edd5",
+  "active_school_key": "uc-davis",
+  "active_target_branch": "data/uc-davis-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1083,8 +1084,11 @@
     "target_branch": "data/uc-davis-onboarding",
     "target_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43046954544",
+  "lock_acquisition_request_commit": "5c2ea63b0af3ce5e16e173f4ed49321cede269fd",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

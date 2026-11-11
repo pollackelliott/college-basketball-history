@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "d2fd0feceba2f91ff581cbc26b81973b2593609e",
+  "previous_control_state_sha256": "c0f6102ec02be807298e7dae637c130f9b6421b78991033cec90713d4e8d2bda",
+  "expected_protected_main_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "ec226b981d1c53e2b24c9d88d680fbcb683757d5",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "6257532d6eb12ecbf29865a38d4e35f143952b89f9b43be1f4c18761565b5947"
+  },
+  "integration_freeze_sha256": "63bf2919f546534fa6b0d23021b0c32d974b082c5db593d72545d3c0b4b95f1d",
+  "semantic_snapshot_sha256": "3d5c912c2dc46c7bebc0861e707e59bf44eb5ce8f0f847989b6faa87a67b7a48",
+  "creation_provenance": {
+    "origin": "ChatGPT UC Davis serialized Implementation lane — Stage 2 deterministic opponent-display reconciliation",
+    "authorization": "Owner explicitly replied Proceed after fresh-verified Stage 2 census uc-davis-stage2-census-0001. That exact census is BLOCKED solely by two deterministic historical opponent-display conflicts: holy-names with displays Holy Names / Holy Names University, and jessup with displays Jessup / Jessup University. The census records zero warnings, zero owner decisions, semantic drift PASS, tracked Stage 2 mutation NONE, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key census population. The permanent helper may change only canonical_opponent_name in schools/uc-davis/opponents.csv and normalized_opponent_name in schools/uc-davis/source-games.csv using existing project display authority, followed by no-map Stage 2 regeneration and fresh equivalence verification. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, venue maintenance, or protected-main mutation authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
