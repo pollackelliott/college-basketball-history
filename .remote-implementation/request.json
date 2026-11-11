@@ -1,44 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-phase0-0002",
-  "operation": "PHASE0",
+  "request_id": "hawai-i-stage2-census-0001",
   "school_key": "hawai-i",
-  "previous_control_state_commit": "155397ccc9aa80c131ea567e7838d41f1dd11b89",
-  "previous_control_state_sha256": "04d5e8a90389894a50c79dbf8dad53de2533e9fd1e3ca5d661473c0550130a95",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "7cfeabb8f75eab3828189a71345a5789d4712567",
+  "previous_control_state_sha256": "060eb36cb795e5521030672bc7a36a5832e50db99691f4793d81c282d11ed045",
   "expected_protected_main_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
   "target_branch": "data/hawai-i-onboarding",
-  "research_checkpoint": {
-    "sha256": "49948624da8a0f2048585a99a00bc7a6f3ed996ba674806de1df4708608f7313",
-    "research_base_sha": "6a192223de544cd942100cce9c0a7565985c9784",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "779c352ab63130b2d1dd01a2c3f0b039809a2075",
-      "path_prefix": ".remote-implementation/transports/hawai-i/hawai-i-stage1-0001-final/piece-",
-      "part_count": 6
-    }
+  "target_sha": "03b47d1257d78e5f6d48f50ddcc52a554d67d64b",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-phase0-0002/successor-manifest.json",
+    "sha256": "1ed8e3cba48af506a773b9efd4cb13580cd4a320533ea46f14dec10499aee783"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-stage1-0001/checkpoint-manifest.json",
-    "sha256": "049a0d5a9493694049e3a7f6cdcf7564764e64e1e216f185f3389005623f4286"
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1970-1971",
-    "basis": "TOP_LEVEL_INTERVALS",
-    "intervals": "1970-71+",
-    "notes": "Accepted immutable Hawai'i Research Freeze scope is 1970-71+ and current protected-main reusable scope authority agrees. This request corrects only the machine history-scope basis vocabulary rejected by the abandoned hawai-i-phase0-0001; historical meaning and frozen game universe are unchanged."
-  },
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
   "creation_provenance": {
-    "origin": "ChatGPT Hawai'i serialized Implementation lane — corrected guarded Phase 0 after explicit recovery of mechanically invalid request",
-    "authorization": "Owner previously authorized Hawai'i Phase 0 after durable Stage 1 PASS, then explicitly authorized recovery of failed hawai-i-phase0-0001. Permanent RECOVER request hawai-i-phase0-recover-0001 completed successfully with mutation_classification=NOT_ATTEMPTED, control returned IDLE, recovery_required=false, target data/hawai-i-onboarding remains absent, protected main remains 36b8e829e7e5ffde7390ec7ef00816cda3d7f663, and no write-ahead/prepared target mutation exists. The only correction in this resubmission is machine scope vocabulary: basis TOP_LEVEL_INTERVALS with intervals 1970-71+, preserving exact accepted historical authority and immutable Research Freeze. Authorizes one guarded PHASE0 transaction, fresh Stage 1 recheck, Integration Freeze, create-once target publication, and required independent fresh verification. No Research reopening, unrelated shared/global maintenance, Stage 2, owner gates, Preview, release, merge, direct protected-main mutation, or further recovery is authorized."
+    "origin": "ChatGPT Hawai'i serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly replied Proceed after Hawai'i Phase 0 completed with repository validation PASS, CREATE_ONCE_PASS, remote_phase0_equivalence=PASS and fresh_runner_verification=PASS. This request performs exactly one bounded read-only STAGE2_CENSUS against protected main 36b8e829e7e5ffde7390ec7ef00816cda3d7f663, exact onboarding target 03b47d1257d78e5f6d48f50ddcc52a554d67d64b, Phase 0 successor manifest SHA-256 1ed8e3cba48af506a773b9efd4cb13580cd4a320533ea46f14dec10499aee783, Integration Freeze SHA-256 5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7, and semantic snapshot SHA-256 cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b. It invokes the unchanged permanent Stage 2 coordinator to produce a durable capability census and must stop at CAPABILITY_CENSUS_READY or an honest BLOCKED checkpoint. No tracked repair, current-main refresh, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1, fill/seal/apply, release, Preview, merge, recovery, shared/global mutation, or protected-main mutation is authorized by this request."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
