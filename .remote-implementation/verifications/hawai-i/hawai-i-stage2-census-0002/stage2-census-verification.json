@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "0bb3e123513020d9b2d7564285e3a2db07382e0c7d790c3d793149f8b827d325",
+    "implementation-stage2-status.json": "10f3d4174f920eefd037da53c31cd0ca2d98d04ea99257e6444f4c3dd83892c7",
+    "plan.json": "a15da29e68b55468d84e009901801c056bc0e98f80c053f30f1a37ba8b71e447",
+    "review.csv": "11f8c55868f0e9ea9266274c4abfdc0e4ae50460088cd35c48ed95da1e11c845",
+    "review.md": "02a959cebddfe60447acd62b9c90ea43a59d8988dc1898c54813c2b95fdcb0df"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "0bb3e123513020d9b2d7564285e3a2db07382e0c7d790c3d793149f8b827d325",
+    "implementation-stage2-status.json": "5e65f342e8646631e6cde9642f0e54043660f4d83405ada4167b7f974db6fcb8",
+    "plan.json": "3220f214ad1bf0d0750a3c99de9289adee5e799bd99e706181edfb3903500d30",
+    "review.csv": "11f8c55868f0e9ea9266274c4abfdc0e4ae50460088cd35c48ed95da1e11c845",
+    "review.md": "f46938401cb7a9c705c5a7318893c9e0ec482a1a8272e6e9f9d786772d24edd0"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "341adf8512e6b12e4b637af970691bcbc005f5ebfa4e861155470f7edf5e7ccf",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "5c7c266bf8ab32fd9916a7bf8c3bb2792ebcec4d1899f5b8c5146aecab5150f7",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "8f1b8e79e55108be63afcd13e6e570ab928d6bb4",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "hawai-i-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "cae31883f025cbed210f1740a295181cbdb116a8e6f53a8d78c163c31bdc839b",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "d5690304f4fdc3bc5c24ba13eb992c72149a340e",
+  "target_tree_sha": "7ef978cdded4b7e8e07795fab804fa33c728fa46",
+  "tracked_stage2_mutation": "NONE"
+}
