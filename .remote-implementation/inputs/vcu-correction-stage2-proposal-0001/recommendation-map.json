@@ -1,0 +1,14 @@
+{
+  "decisions": {
+    "CORRECTION-IDENTITY-VCU-1973-74-023-CBBG-0203133": "APPLY_CORRECTION_IDENTITY_PATCH",
+    "CORRECTION-IDENTITY-VCU-1976-77-006-CBBG-0203182": "APPLY_CORRECTION_IDENTITY_PATCH",
+    "CORRECTION-IDENTITY-VCU-1977-78-004-CBBG-0203204": "APPLY_CORRECTION_IDENTITY_PATCH",
+    "CORRECTION-IDENTITY-VCU-1978-79-006-CBBG-0203231": "APPLY_CORRECTION_IDENTITY_PATCH"
+  },
+  "basis_by_decision": {
+    "CORRECTION-IDENTITY-VCU-1973-74-023-CBBG-0203133": "Owner-accepted VCU post-publication correction Research (accepted checkpoint SHA-256 55060682a99bcb3b3519aa5f50c3175a9f07a43bf06d67002f2b310e249531a2) establishes VCU-1973-74-023 as Southeastern University / Lakeland, Florida, represented by normalized opponent key southeastern-florida. Apply only the census-bound identity retarget on existing canonical game CBBG-0203133; preserve literal source evidence, scores, date, H/A/N, venue/location, game type, and game existence.",
+    "CORRECTION-IDENTITY-VCU-1976-77-006-CBBG-0203182": "Owner-accepted VCU post-publication correction Research (accepted checkpoint SHA-256 55060682a99bcb3b3519aa5f50c3175a9f07a43bf06d67002f2b310e249531a2) establishes VCU-1976-77-006 as Southeastern University / Lakeland, Florida, represented by normalized opponent key southeastern-florida. Apply only the census-bound identity retarget on existing canonical game CBBG-0203182; preserve literal source evidence, scores, date, H/A/N, venue/location, game type, and game existence.",
+    "CORRECTION-IDENTITY-VCU-1977-78-004-CBBG-0203204": "Owner-accepted VCU post-publication correction Research (accepted checkpoint SHA-256 55060682a99bcb3b3519aa5f50c3175a9f07a43bf06d67002f2b310e249531a2) establishes VCU-1977-78-004 as Southeastern University / Lakeland, Florida, represented by normalized opponent key southeastern-florida. Apply only the census-bound identity retarget on existing canonical game CBBG-0203204; preserve literal source evidence, scores, date, H/A/N, venue/location, game type, and game existence.",
+    "CORRECTION-IDENTITY-VCU-1978-79-006-CBBG-0203231": "Owner-accepted VCU post-publication correction Research (accepted checkpoint SHA-256 55060682a99bcb3b3519aa5f50c3175a9f07a43bf06d67002f2b310e249531a2) establishes VCU-1978-79-006 as Southeastern University / Lakeland, Florida, represented by normalized opponent key southeastern-florida. Apply only the census-bound identity retarget on existing canonical game CBBG-0203231; preserve literal source evidence, scores, date, H/A/N, venue/location, game type, and game existence."
+  }
+}
