@@ -29,6 +29,11 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from onboarding_hardening import research_portfolio_report
+from expansion_stage4_coverage import (
+    ExpansionStage4CoverageError,
+    prove_expansion_stage4_coverage,
+    reconcile_stage4_research_report,
+)
 from research_stage3a4_accounting import (
     reconcile_opponent_home_outside_responsibility,
 )
@@ -1670,6 +1675,44 @@ def closeout(
         output_dir / "stage4-research-check.json",
         research_check,
     )
+    expansion_proof: dict[str, Any] | None = None
+    if parent_status.get("workflow_kind", "") == "ALL_HISTORY_EXPANSION":
+        # Only the *manifest-authenticated* Stage 3B owner can claim expansion
+        # scope; a six-file package or notes.md phrase is not authority.
+        parent_base = str(parent_status.get("research_base_sha", "")).strip()
+        manifest_base = str(parent_manifest.get("research_base_sha", "")).strip()
+        if not parent_base or parent_base != manifest_base:
+            raise ExpansionStage4CoverageError(
+                "expansion Stage 3B research_base_sha/manifest mismatch"
+            )
+        if parent_status.get("school_key") != school_key:
+            raise ExpansionStage4CoverageError(
+                "expansion Stage 3B school_key mismatch"
+            )
+        required_cutoff = str(parent_status.get(
+            "required_completed_season_cutoff", ""
+        )).strip()
+        coverage_cutoff = research_check.get("counts", {}).get(
+            "coverage", {}
+        ).get("required_completed_season_cutoff", "")
+        if required_cutoff != coverage_cutoff:
+            raise ExpansionStage4CoverageError(
+                "expansion Stage 3B completed-season declaration changed"
+            )
+        expansion_proof = prove_expansion_stage4_coverage(
+            repo=Path(__file__).resolve().parents[1],
+            school_key=school_key,
+            research_base_sha=parent_base,
+            required_completed_season_cutoff=required_cutoff,
+            supplemental_rows=package_rows,
+        )
+        write_json(output_dir / "stage4-expansion-coverage-proof.json",
+                   expansion_proof)
+        research_check = reconcile_stage4_research_report(
+            research_check, expansion_proof
+        )
+        write_json(output_dir / "stage4-research-check.json",
+                   research_check)
     if research_check["status"] != "PASS":
         raise ValueError(
             "Stage 4 research acceptance failed with "
@@ -1719,6 +1762,9 @@ def closeout(
             research_check.get("warnings", [])
         ),
         "research_coverage": counts.get("coverage", {}),
+        "expansion_coverage_proof": (
+            "PASS" if expansion_proof is not None else "NOT_APPLICABLE"
+        ),
         "home_chronology": counts.get("home_chronology", {}),
         "owner_scan": scan_summary,
         "mechanical_stage4_csv_repairs_required": 0,
@@ -1747,6 +1793,13 @@ def closeout(
         "conference_rows": counts["conference_rows"],
         "package_qa": "PASS",
         "research_acceptance_contract_qa": "PASS",
+        "workflow_kind": (
+            "ALL_HISTORY_EXPANSION" if expansion_proof is not None else
+            "ORDINARY_SCHOOL_RESEARCH"
+        ),
+        "expansion_coverage_proof": (
+            "PASS" if expansion_proof is not None else "NOT_APPLICABLE"
+        ),
         "unresolved_opponent_identities": counts[
             "unresolved_opponents"
         ],
@@ -1834,6 +1887,11 @@ def closeout(
             "six_file_package_sha256": package_sha,
         }
     )
+    if expansion_proof is not None:
+        checkpoint_members["stage4-expansion-coverage-proof.json"] = (
+            output_dir / "stage4-expansion-coverage-proof.json"
+        ).read_bytes()
+
     checkpoint_members["checkpoint-manifest.json"] = (
         json.dumps(
             checkpoint_manifest,

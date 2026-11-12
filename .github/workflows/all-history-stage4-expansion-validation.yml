@@ -1,0 +1,65 @@
+name: All-History expansion Stage 4 compatibility validation
+
+on:
+  push:
+    branches:
+      - tooling/all-history-stage4-expansion-coverage
+
+permissions:
+  contents: read
+
+concurrency:
+  group: all-history-stage4-expansion-coverage-validation
+  cancel-in-progress: false
+
+jobs:
+  stage4-expansion-compatibility:
+    name: Exact-commit Stage 4 / expansion / full-suite regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout entire immutable Git history for baseline proof
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify original George Mason immutable Research base is present
+        shell: bash
+        run: |
+          test "$(git rev-parse 'df73675852ec5a43dfac50da0ee06d8bcabf8832^{commit}')" = "df73675852ec5a43dfac50da0ee06d8bcabf8832"
+      - name: Compile edited Stage 4 and coverage tools
+        run: |
+          python -m py_compile tools/expansion_stage4_coverage.py tools/research_stage4_closeout.py tests/test_research_stage4_expansion_coverage.py
+      - name: Run focused expansion compatibility tests
+        run: |
+          python -m unittest discover -s tests -p 'test_research_stage4_expansion_coverage.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage4_closeout.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage4.py' -v
+      - name: Authenticate real inherited Mason 2025-26 coverage
+        shell: bash
+        run: |
+          PYTHONPATH=tools python - <<'PY'
+          from pathlib import Path
+          from expansion_stage4_coverage import prove_expansion_stage4_coverage
+          proof = prove_expansion_stage4_coverage(
+              repo=Path('.'),
+              school_key='george-mason',
+              research_base_sha='df73675852ec5a43dfac50da0ee06d8bcabf8832',
+              required_completed_season_cutoff='2025-2026',
+              supplemental_rows=[{
+                  'source_game_id':'GMU-EXP-1966-67-001',
+                  'source_program_key':'george-mason',
+                  'season_label':'1966-1967',
+              }],
+          )
+          assert proof['inherited_required_season_source_rows'] > 0
+          assert proof['inherited_required_season_published_canonical_rows'] > 0
+          assert proof['supplemental_last_season'] == '1966-1967'
+          print('Authenticated Mason inherited cutoff coverage:', proof['inherited_required_season_source_rows'], 'source games,', proof['inherited_required_season_published_canonical_rows'], 'published canonical games')
+          PY
+      - name: Run full repository nonregression suite
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py'
