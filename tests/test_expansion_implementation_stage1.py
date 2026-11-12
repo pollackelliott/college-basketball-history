@@ -1,0 +1,149 @@
+"""Fail-closed Stage 1 adapter tests. Synthetic authority is never published."""
+import json
+import tempfile
+import unittest
+from pathlib import Path
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+from expansion_implementation_stage1 import (
+    Stage1Stop, build_candidate, csv_rows, materialize_support,
+    reconcile_canonical, render_csv, sha256, stage1,
+)
+from all_history_expansion_freeze import canonical_row_sha256, OPPONENT_EXTENSION_FIELDS
+
+
+def support(action, candidate, original=None, changed="", identity_label="A"):
+    return {"support_id": "support-" + identity_label, "support_action": action,
+            "source_opponent_label": candidate["source_opponent_label"],
+            "canonical_opponent_key": candidate["canonical_opponent_key"],
+            "baseline_row_sha256": canonical_row_sha256(original) if original is not None else "",
+            "changed_fields": changed, "candidate_row_json": json.dumps(candidate),
+            "evidence_basis": "mock fixture"}
+
+
+class Stage1FoundationTests(unittest.TestCase):
+    def setUp(self):
+        self.original = {"source_program_key":"sample", "source_opponent_label":"Team A",
+                         "canonical_opponent_key":"a", "audit_note":"old", "games_currently_assigned":"1"}
+        self.opp_fields = list(self.original)
+        self.source1 = {"source_game_id":"OLD-1", "source_program_key":"sample",
+                        "season_label":"1978-1979", "normalized_opponent_key":"a", "game_date":"1978-12-01",
+                        "team_score":"60", "opponent_score":"40"}
+        self.source2 = {**self.source1, "source_game_id":"NEW-1", "season_label":"1966-1967"}
+        self.venue = {"venue_key":"hall", "source_program_key":"sample", "notes":"old",
+                      "games_currently_assigned":"1"}
+
+    def test_reuse_inherited_is_nonmutating(self):
+        original = self.original.copy()
+        rows, counts, _ = materialize_support([original], self.opp_fields,
+            [support("REUSE_INHERITED", original, original)],
+            ("source_opponent_label", "canonical_opponent_key"), OPPONENT_EXTENSION_FIELDS,"opponent")
+        self.assertEqual(rows, [original])
+        self.assertEqual(counts["REUSE_INHERITED"],1)
+        self.assertEqual(self.original, original)
+
+    def test_allowed_extension_is_additive_and_does_not_touch_baseline(self):
+        original = self.original.copy()
+        extension = {**original,"audit_note":"old; new evidence"}
+        rows, counts, _ = materialize_support([original],self.opp_fields,
+            [support("EXTEND_INHERITED", extension, original, "audit_note")],
+            ("source_opponent_label", "canonical_opponent_key"), OPPONENT_EXTENSION_FIELDS,"opponent")
+        self.assertEqual(rows,[extension]);self.assertEqual(original,self.original)
+        self.assertEqual(counts["EXTEND_INHERITED"],1)
+
+    def test_changed_baseline_rejected(self):
+        candidate={**self.original,"audit_note":"new"}
+        item=support("EXTEND_INHERITED",candidate,self.original,"audit_note")
+        item["baseline_row_sha256"]="0"*64
+        with self.assertRaisesRegex(Stage1Stop,"hash changed"):
+            materialize_support([self.original],self.opp_fields,[item],
+                ("source_opponent_label","canonical_opponent_key"),OPPONENT_EXTENSION_FIELDS,"opponent")
+
+    def test_unsupported_extension_rejected(self):
+        item=support("EXTEND_INHERITED",{**self.original,"canonical_opponent_key":"renamed"},self.original,"canonical_opponent_key")
+        with self.assertRaises(Stage1Stop):
+            materialize_support([self.original],self.opp_fields,[item],
+                ("source_opponent_label","canonical_opponent_key"),OPPONENT_EXTENSION_FIELDS,"opponent")
+
+    def test_new_support_collision_and_duplicate_identity_refused(self):
+        item=support("NEW_SUPPLEMENTAL",self.original)
+        with self.assertRaisesRegex(Stage1Stop,"collides"):
+            materialize_support([self.original],self.opp_fields,[item],
+                ("source_opponent_label","canonical_opponent_key"),OPPONENT_EXTENSION_FIELDS,"opponent")
+        distinct={**self.original,"source_opponent_label":"Team B"}
+        two=[support("NEW_SUPPLEMENTAL",distinct,identity_label="1"),support("NEW_SUPPLEMENTAL",distinct,identity_label="2")]
+        with self.assertRaisesRegex(Stage1Stop,"duplicate"):
+            materialize_support([self.original],self.opp_fields,two,
+                ("source_opponent_label","canonical_opponent_key"),OPPONENT_EXTENSION_FIELDS,"opponent")
+
+    def fixture(self):
+        b={"source_fields":list(self.source1),"source_rows":[self.source1],
+            "opponent_fields":self.opp_fields,"opponent_rows":[self.original],
+            "venue_fields":list(self.venue),"venue_rows":[self.venue]}
+        b["package_bytes"]={"source-games.csv":render_csv(b["source_fields"],b["source_rows"]),
+             "opponents.csv":render_csv(self.opp_fields,[self.original]),
+             "venues.csv":render_csv(list(self.venue),[self.venue]),
+             "conferences.csv":b"school,conference\nsample,Independent\n",
+             "notes.md":b"Original notes\n", "source-notes.md":b"Original source notes\n"}
+        new_opp={**self.original,"source_opponent_label":"Team B","canonical_opponent_key":"b"}
+        v={"source_game_id":"NEW-1", "source_program_key":"sample", "season_label":"1966-1967",
+           "normalized_opponent_key":"b", "game_date":"1966-12-01", "team_score":"60", "opponent_score":"40"}
+        validated={"source_rows":[v],"opponent_support_rows":[support("NEW_SUPPLEMENTAL",new_opp)],
+                   "venue_support_rows":[], "season_accounting_rows":[],"non_d1_scan_rows":[],"residual_rows":[]}
+        payload={"expansion-notes.md":b"Additional historical notes\n",
+                 "expansion-source-notes.md":b"Additional source notes\n"}
+        return b,validated,payload
+
+    def test_complete_candidate_preserves_inherited_ids_and_conference(self):
+        base,valid,payload=self.fixture()
+        candidate,census=build_candidate(base,payload,valid)
+        _,sources=csv_rows(candidate["source-games.csv"],"candidate")
+        self.assertEqual([r["source_game_id"] for r in sources],["OLD-1","NEW-1"])
+        self.assertEqual(sources[0],self.source1)
+        self.assertEqual(candidate["conferences.csv"],base["package_bytes"]["conferences.csv"])
+        self.assertTrue(candidate["notes.md"].startswith(base["package_bytes"]["notes.md"]))
+        self.assertEqual(census["opponent_support_actions"]["NEW_SUPPLEMENTAL"],1)
+
+    def test_duplicate_source_game_id_rejected(self):
+        base,valid,payload=self.fixture()
+        valid["source_rows"][0]["source_game_id"]="OLD-1"
+        with self.assertRaisesRegex(Stage1Stop,"Duplicate"):
+            build_candidate(base,payload,valid)
+
+    def test_existing_canonical_reuse_and_ambiguity(self):
+        src={**self.source2, "normalized_opponent_key":"a"}
+        can={"canonical_game_id":"CB-1","season_label":"1966-1967","team_a_key":"a","team_b_key":"sample",
+             "team_a_score":"40","team_b_score":"60","game_date":"1978-12-01"}
+        src["game_date"]="1978-12-01"
+        match=reconcile_canonical("sample",[src],[can])
+        self.assertEqual(match["counts"]["REUSE_CANONICAL"],1)
+        self.assertEqual(match["game_rows"][0]["canonical_game_id"],"CB-1")
+        multiple=reconcile_canonical("sample",[src],[can,{**can,"canonical_game_id":"CB-2"}])
+        self.assertEqual(multiple["counts"]["IDENTITY_REVIEW_BLOCKER"],1)
+
+    def test_new_game_is_provisional_not_published(self):
+        match=reconcile_canonical("sample",[self.source2],[])
+        self.assertEqual(match["counts"]["PROVISIONAL_NEW_CANONICAL"],1)
+        self.assertEqual(match["game_rows"][0]["canonical_game_id"],"")
+
+    def test_no_output_under_repository_or_over_existing_output(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            with self.assertRaisesRegex(Stage1Stop,"outside"):
+                stage1(root,"sample",root/"artifact.zip","", "", "",root/"inside")
+            with self.assertRaisesRegex(Stage1Stop,"already exists"):
+                stage1(root,"sample",root/"artifact.zip","", "", "",root.parent)
+
+    def test_reject_modified_or_unauthenticated_freeze_before_projection(self):
+        from unittest.mock import patch
+        from expansion_implementation_stage1 import stage1
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            artifact=root/"freeze.zip";artifact.write_bytes(b"tampered")
+            with patch("expansion_implementation_stage1.git_revision",return_value="a"*40):
+                with self.assertRaisesRegex(Stage1Stop,"SHA-256 mismatch"):
+                    stage1(root,"sample",artifact,"0"*64,"b"*40,"a"*40,root.parent/"new-expansion-test-output")
+        
+if __name__=="__main__":
+    unittest.main()
