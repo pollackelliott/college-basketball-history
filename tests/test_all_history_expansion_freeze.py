@@ -928,5 +928,192 @@ class ExpansionFreezeTests(unittest.TestCase):
             verify_expansion(self.repo, self.output)
 
 
+    def _write_v2_mixed_delta(self):
+        """One inherited unpublished game plus two genuinely new games."""
+        source_path = self.repo / "schools/legacy/source-games.csv"
+        with source_path.open(encoding="utf-8", newline="") as handle:
+            inherited = list(csv.DictReader(handle))
+        reused = source_row("BASE-EARLY", "1968-1969", "baseline-opp", "Baseline Opp")
+        inherited.append(reused)
+        write_csv(source_path, SOURCE_FIELDS, inherited)
+        self._recommit_baseline()
+
+        accounting = self._rows("expansion-season-accounting.csv")
+        accounting[0]["identified_competitive_game_count"] = "2"
+        self._rewrite("expansion-season-accounting.csv", SEASON_ACCOUNTING_FIELDS, accounting)
+        write_csv(
+            self.delta / "expansion-inherited-source-references.csv",
+            freeze.INHERITED_SOURCE_REFERENCE_FIELDS,
+            [{
+                "source_game_id": "BASE-EARLY",
+                "season_label": "1968-1969",
+                "baseline_row_sha256": canonical_row_sha256(reused),
+                "evidence_basis": "Exact inherited unpublished source-game row",
+            }],
+        )
+        authority = {
+            "baseline_scope": "1970-71+",
+            "accepted_scope": "INCEPTION+",
+            "authority_kind": "OWNER_SUPERSESSION",
+            "owner_decision_reference": "Explicit final owner scope ruling",
+            "scope_notes": "Owner confirmed top level from 1968-69 inception",
+        }
+        self._write_scope_authority(authority)
+
+    def _write_scope_authority(self, authority):
+        (self.delta / "expansion-scope-authority.json").write_text(
+            json.dumps(authority, sort_keys=True, separators=(",", ":")) + "\n",
+            encoding="utf-8",
+        )
+
+    def test_35_v2_hash_bound_inherited_unpublished_mixed_season(self):
+        self._write_v2_mixed_delta()
+        report = self._freeze()
+        self.assertEqual(report["status"], "EXPANSION_RESEARCH_FROZEN")
+        manifest = self._manifest()
+        self.assertEqual(manifest["schema_version"], 2)
+        self.assertEqual(manifest["expansion"]["supplemental_source_game_count"], 2)
+        self.assertEqual(manifest["expansion"]["inherited_reused_source_game_count"], 1)
+        self.assertEqual(manifest["expansion"]["total_expansion_source_game_count"], 3)
+        self.assertEqual(
+            manifest["scope_authority"]["target_program_scope_fields"]["history_start_season"],
+            "1968-1969",
+        )
+        self.assertEqual(
+            manifest["scope_authority"]["target_program_scope_fields"]["history_scope_basis"],
+            "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+        )
+        self.assertEqual(
+            manifest["scope_authority"]["baseline_scope_row_sha256"],
+            authenticate_baseline(self.repo, "legacy", self.base)["scope_row_sha256"],
+        )
+        self.assertEqual(
+            verify_expansion(self.repo, self.output)["status"],
+            "VERIFIED_EXPANSION_RESEARCH_FROZEN",
+        )
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertNotIn("source-games.csv", archive.namelist())
+            self.assertIn("expansion-inherited-source-references.csv", archive.namelist())
+
+    def test_36_v2_reuses_exact_inherited_id_without_duplication(self):
+        self._write_v2_mixed_delta()
+        self._freeze()
+        with zipfile.ZipFile(self.output) as archive:
+            fields, rows = freeze._csv_bytes(
+                archive.read("expansion-source-games.csv"), "supplemental"
+            )
+            self.assertEqual([row["source_game_id"] for row in rows], ["EXP-1", "EXP-2"])
+            self.assertNotIn("BASE-EARLY", [row["source_game_id"] for row in rows])
+
+    def test_37_v2_missing_required_inherited_reference_fails(self):
+        self._write_v2_mixed_delta()
+        self._rewrite(
+            "expansion-inherited-source-references.csv",
+            freeze.INHERITED_SOURCE_REFERENCE_FIELDS, [],
+        )
+        with self.assertRaisesRegex(ExpansionFreezeError, "reference census must be complete"):
+            self._freeze()
+
+    def test_38_v2_forged_reused_source_hash_fails(self):
+        self._write_v2_mixed_delta()
+        refs = self._rows("expansion-inherited-source-references.csv")
+        refs[0]["baseline_row_sha256"] = "0" * 64
+        self._rewrite(
+            "expansion-inherited-source-references.csv",
+            freeze.INHERITED_SOURCE_REFERENCE_FIELDS, refs,
+        )
+        with self.assertRaisesRegex(ExpansionFreezeError, "hash mismatch"):
+            self._freeze()
+
+    def test_39_v2_published_inherited_source_reference_fails(self):
+        self._write_v2_mixed_delta()
+        refs = self._rows("expansion-inherited-source-references.csv")
+        refs.append({
+            "source_game_id": "BASE-1",
+            "season_label": "1970-1971",
+            "baseline_row_sha256": "0" * 64,
+            "evidence_basis": "should be prohibited",
+        })
+        self._rewrite(
+            "expansion-inherited-source-references.csv",
+            freeze.INHERITED_SOURCE_REFERENCE_FIELDS, refs,
+        )
+        with self.assertRaisesRegex(ExpansionFreezeError, "published"):
+            self._freeze()
+
+    def test_40_v2_mixed_season_count_cannot_omit_reused_game(self):
+        self._write_v2_mixed_delta()
+        accounting = self._rows("expansion-season-accounting.csv")
+        accounting[0]["identified_competitive_game_count"] = "1"
+        self._rewrite("expansion-season-accounting.csv", SEASON_ACCOUNTING_FIELDS, accounting)
+        with self.assertRaisesRegex(ExpansionFreezeError, "ACTIVE count"):
+            self._freeze()
+
+    def test_41_v2_scope_supersession_must_claim_owner_authority(self):
+        self._write_v2_mixed_delta()
+        authority = json.loads(
+            (self.delta / "expansion-scope-authority.json").read_text(encoding="utf-8")
+        )
+        authority["authority_kind"] = "BASELINE_CONFIRMED"
+        self._write_scope_authority(authority)
+        with self.assertRaisesRegex(ExpansionFreezeError, "OWNER_SUPERSESSION"):
+            self._freeze()
+
+    def test_42_v2_rejects_changed_baseline_scope_and_arbitrary_scope(self):
+        self._write_v2_mixed_delta()
+        authority = json.loads(
+            (self.delta / "expansion-scope-authority.json").read_text(encoding="utf-8")
+        )
+        authority["baseline_scope"] = "1967-68+"
+        self._write_scope_authority(authority)
+        with self.assertRaisesRegex(ExpansionFreezeError, "inherited top-level scope"):
+            self._freeze()
+        authority["baseline_scope"] = "1970-71+"
+        authority["accepted_scope"] = "1915-16+"
+        self._write_scope_authority(authority)
+        with self.assertRaisesRegex(ExpansionFreezeError, "supports only INCEPTION"):
+            self._freeze()
+
+    def test_43_v2_rejects_duplicate_id_across_new_and_reused(self):
+        self._write_v2_mixed_delta()
+        sources = self._rows("expansion-source-games.csv")
+        sources[0]["source_game_id"] = "BASE-EARLY"
+        self._rewrite("expansion-source-games.csv", SOURCE_FIELDS, sources)
+        with self.assertRaises(ExpansionFreezeError):
+            self._freeze()
+
+    def test_44_v2_repeat_freeze_is_deterministic_and_fresh_verification_fail_closed(self):
+        self._write_v2_mixed_delta()
+        one = self._freeze()
+        second = self.root / "v2-second.zip"
+        two = self._freeze(output=second)
+        self.assertEqual(one["zip_sha256"], two["zip_sha256"])
+        self.assertEqual(self.output.read_bytes(), second.read_bytes())
+        self._rewrite_artifact_manifest(
+            lambda manifest: manifest["scope_authority"].__setitem__(
+                "accepted_scope", "1970-71+"
+            )
+        )
+        with self.assertRaises(ExpansionFreezeError):
+            verify_expansion(self.repo, self.output)
+
+    def test_45_v2_reused_row_may_have_research_accounted_residual(self):
+        self._write_v2_mixed_delta()
+        self._rewrite("expansion-residuals.csv", RESIDUAL_FIELDS, [{
+            "residual_id": "R-1",
+            "season_label": "1968-1969",
+            "source_game_id": "BASE-EARLY",
+            "residual_category": "VENUE_DETAIL",
+            "status": "NONBLOCKING_RESEARCHED",
+            "research_basis": "Completed bounded historical site source review",
+        }])
+        self._freeze()
+        self.assertEqual(
+            verify_expansion(self.repo, self.output)["status"],
+            "VERIFIED_EXPANSION_RESEARCH_FROZEN",
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()

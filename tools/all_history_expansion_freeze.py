@@ -60,6 +60,21 @@ PAYLOAD_MEMBERS = (
 )
 MANIFEST_MEMBER = "expansion-freeze.json"
 ZIP_MEMBERS = tuple(sorted((*PAYLOAD_MEMBERS, MANIFEST_MEMBER)))
+# Version 1 is preserved byte-for-byte for preexisting ordinary expansion inputs.
+# Version 2 explicitly references accepted, inherited but *unpublished* games.
+SCHEMA_VERSION_V2 = 2
+INHERITED_SOURCE_REFERENCE_FIELDS = (
+    "source_game_id",
+    "season_label",
+    "baseline_row_sha256",
+    "evidence_basis",
+)
+V2_EXTRA_MEMBERS = (
+    "expansion-inherited-source-references.csv",
+    "expansion-scope-authority.json",
+)
+PAYLOAD_MEMBERS_V2 = (*PAYLOAD_MEMBERS, *V2_EXTRA_MEMBERS)
+ZIP_MEMBERS_V2 = tuple(sorted((*PAYLOAD_MEMBERS_V2, MANIFEST_MEMBER)))
 
 SEASON_ACCOUNTING_FIELDS = (
     "season_label",
@@ -498,10 +513,10 @@ def _read_delta_dir(delta_dir: Path) -> dict[str, bytes]:
     names = [path.name for path in entries]
     if any(not path.is_file() for path in entries):
         raise ExpansionFreezeError("delta directory must contain flat files only")
-    if names != sorted(PAYLOAD_MEMBERS):
+    if names not in (sorted(PAYLOAD_MEMBERS), sorted(PAYLOAD_MEMBERS_V2)):
         raise ExpansionFreezeError(
-            f"delta directory must contain exactly {sorted(PAYLOAD_MEMBERS)!r}; "
-            f"found {names!r}"
+            "delta directory must contain exactly version 1 or version 2 "
+            f"payload members; found {names!r}"
         )
     return {path.name: path.read_bytes() for path in entries}
 
@@ -880,6 +895,171 @@ def _validate_source_games(
     return source_ids, per_season, per_opponent
 
 
+
+def _validate_inherited_source_references(
+    data: bytes,
+    baseline: dict[str, Any],
+    school_key: str,
+    researched_inception_season: str,
+) -> tuple[list[dict[str, str]], Counter[str], dict[str, dict[str, str]]]:
+    """Require an exact hash-bound reference to *every* inherited unpublished game.
+
+    References are not new source rows and do not re-author inherited evidence.
+    """
+    fields, references = _csv_bytes(
+        data, "expansion-inherited-source-references.csv"
+    )
+    _require_exact_fields(
+        fields, INHERITED_SOURCE_REFERENCE_FIELDS,
+        "expansion-inherited-source-references.csv",
+    )
+
+    inherited: dict[str, dict[str, str]] = {}
+    expected: dict[str, dict[str, str]] = {}
+    for row in baseline["source_rows"]:
+        source_id = row.get("source_game_id", "").strip()
+        if not source_id or source_id in inherited:
+            raise ExpansionFreezeError(
+                "inherited baseline contains blank/duplicate source_game_id"
+            )
+        inherited[source_id] = row
+        season = row.get("season_label", "").strip()
+        try:
+            disposition = expansion_season_disposition(
+                season, baseline["program"], researched_inception_season,
+            )
+        except ExpansionResearchAuthorityError as exc:
+            raise ExpansionFreezeError(
+                f"inherited source {source_id}: {exc}"
+            ) from exc
+        if disposition == EXPANSION_REQUIRED:
+            if row.get("source_program_key", "").strip() != school_key:
+                raise ExpansionFreezeError(
+                    f"inherited unpublished source {source_id} belongs to another school"
+                )
+            if row.get("curated_game_type", "").strip() not in ALLOWED_GAME_TYPES:
+                raise ExpansionFreezeError(
+                    f"inherited unpublished source {source_id} is not a competitive game"
+                )
+            if "EXHIBITION" in row.get("administrative_status", "").upper():
+                raise ExpansionFreezeError(
+                    f"inherited unpublished source {source_id} is an exhibition"
+                )
+            expected[source_id] = row
+
+    seen: set[str] = set()
+    counts: Counter[str] = Counter()
+    accepted: dict[str, dict[str, str]] = {}
+    for index, reference in enumerate(references, start=2):
+        label = f"expansion-inherited-source-references.csv line {index}"
+        source_id = reference["source_game_id"].strip()
+        season = reference["season_label"].strip()
+        basis = reference["evidence_basis"].strip()
+        digest = reference["baseline_row_sha256"].strip()
+        if not source_id or source_id in seen:
+            raise ExpansionFreezeError(f"{label} has blank/duplicate source_game_id")
+        seen.add(source_id)
+        row = expected.get(source_id)
+        if row is None:
+            raise ExpansionFreezeError(
+                f"{label} references missing, published, or pre-inception source {source_id}"
+            )
+        if season != row.get("season_label", "").strip():
+            raise ExpansionFreezeError(f"{label} season conflicts with inherited row")
+        if digest != canonical_row_sha256(row):
+            raise ExpansionFreezeError(f"{label} inherited source row hash mismatch")
+        if not basis:
+            raise ExpansionFreezeError(f"{label} requires explicit reuse evidence basis")
+        counts[season] += 1
+        accepted[source_id] = row
+
+    if seen != set(expected):
+        raise ExpansionFreezeError(
+            "inherited unpublished reference census must be complete; "
+            f"missing={sorted(set(expected) - seen)!r}, "
+            f"extra={sorted(seen - set(expected))!r}"
+        )
+    return references, counts, accepted
+
+
+def _validate_scope_authority(
+    data: bytes,
+    baseline: dict[str, Any],
+    researched_inception_season: str,
+) -> dict[str, Any]:
+    """Bind an accepted scope decision without editing the immutable baseline."""
+    try:
+        authority = json.loads(data.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise ExpansionFreezeError("invalid expansion-scope-authority.json") from exc
+    required = {
+        "baseline_scope", "accepted_scope", "authority_kind",
+        "owner_decision_reference", "scope_notes",
+    }
+    if not isinstance(authority, dict) or set(authority) != required:
+        raise ExpansionFreezeError(
+            "scope authority requires exactly baseline_scope, accepted_scope, "
+            "authority_kind, owner_decision_reference, scope_notes"
+        )
+    if any(not isinstance(value, str) for value in authority.values()):
+        raise ExpansionFreezeError("scope authority values must all be strings")
+
+    baseline_scope = baseline["scope_row"].get("top_level_scope", "").strip()
+    if authority["baseline_scope"] != baseline_scope or not baseline_scope:
+        raise ExpansionFreezeError(
+            "scope authority does not match the exact inherited top-level scope row"
+        )
+    accepted_scope = authority["accepted_scope"]
+    if accepted_scope == baseline_scope:
+        if authority["authority_kind"] != "BASELINE_CONFIRMED":
+            raise ExpansionFreezeError(
+                "unchanged baseline scope must be BASELINE_CONFIRMED"
+            )
+        if authority["owner_decision_reference"] or authority["scope_notes"]:
+            raise ExpansionFreezeError(
+                "unchanged scope may not claim supersession details"
+            )
+        scope_projection = {
+            field: baseline["program"].get(field, "")
+            for field in (
+                "history_start_season", "history_scope_intervals",
+                "history_scope_status", "history_scope_basis", "history_scope_notes",
+            )
+        }
+    else:
+        # Extend supported forms only with corresponding validated projections.
+        # No arbitrary scope expression may be accepted by this version.
+        if accepted_scope != "INCEPTION+":
+            raise ExpansionFreezeError(
+                "v2 scope supersession currently supports only INCEPTION+"
+            )
+        if authority["authority_kind"] != "OWNER_SUPERSESSION":
+            raise ExpansionFreezeError(
+                "changed scope requires explicit OWNER_SUPERSESSION"
+            )
+        if not authority["owner_decision_reference"].strip():
+            raise ExpansionFreezeError(
+                "scope supersession requires owner decision provenance"
+            )
+        if not authority["scope_notes"].strip():
+            raise ExpansionFreezeError(
+                "scope supersession requires nonblank projected program scope notes"
+            )
+        scope_projection = {
+            "history_start_season": researched_inception_season,
+            "history_scope_intervals": "",
+            "history_scope_status": "OWNER_CONFIRMED",
+            "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+            "history_scope_notes": authority["scope_notes"],
+        }
+
+    return {
+        **authority,
+        "baseline_scope_row_sha256": baseline["scope_row_sha256"],
+        "target_program_scope_fields": scope_projection,
+    }
+
+
 def _validate_season_accounting(
     rows: list[dict[str, str]],
     expected_seasons: list[str],
@@ -1118,7 +1298,8 @@ def validate_delta_payload(
 ) -> dict[str, Any]:
     """Validate the complete supplemental artifact payload against baseline authority."""
 
-    if set(payload) != set(PAYLOAD_MEMBERS):
+    v2 = set(payload) == set(PAYLOAD_MEMBERS_V2)
+    if not v2 and set(payload) != set(PAYLOAD_MEMBERS):
         raise ExpansionFreezeError("supplemental payload member population mismatch")
 
     expected_seasons = expected_expansion_seasons(
@@ -1141,6 +1322,25 @@ def validate_delta_payload(
     source_by_id = {
         row["source_game_id"].strip(): row for row in source_rows
     }
+    reused_references: list[dict[str, str]] = []
+    scope_authority: dict[str, Any] | None = None
+    if v2:
+        reused_references, reused_per_season, reused_rows = (
+            _validate_inherited_source_references(
+                payload["expansion-inherited-source-references.csv"],
+                baseline, school_key, researched_inception_season,
+            )
+        )
+        if set(source_by_id).intersection(reused_rows):
+            raise ExpansionFreezeError(
+                "new supplemental and inherited reused source IDs overlap"
+            )
+        source_by_id.update(reused_rows)
+        per_season.update(reused_per_season)
+        scope_authority = _validate_scope_authority(
+            payload["expansion-scope-authority.json"],
+            baseline, researched_inception_season,
+        )
 
     opponent_fields, opponent_rows = _csv_bytes(
         payload["expansion-opponents.csv"],
@@ -1243,6 +1443,9 @@ def validate_delta_payload(
     )
 
     return {
+        "schema_version": SCHEMA_VERSION_V2 if v2 else SCHEMA_VERSION,
+        "inherited_source_references": reused_references,
+        "scope_authority": scope_authority,
         "expected_expansion_seasons": expected_seasons,
         "source_rows": source_rows,
         "source_ids": source_ids,
@@ -1273,7 +1476,7 @@ def build_manifest(
     researched_inception_season: str,
 ) -> dict[str, Any]:
     member_hashes = {
-        name: sha256_bytes(payload[name]) for name in sorted(PAYLOAD_MEMBERS)
+        name: sha256_bytes(payload[name]) for name in sorted(payload)
     }
     expected_seasons = validated["expected_expansion_seasons"]
     source_ids = validated["source_ids"]
@@ -1284,7 +1487,7 @@ def build_manifest(
     correction_rows = validated["correction_question_rows"]
 
     manifest: dict[str, Any] = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": validated["schema_version"],
         "workflow_kind": WORKFLOW_KIND,
         "state": FROZEN_STATE,
         "school_key": school_key,
@@ -1348,6 +1551,26 @@ def build_manifest(
         ),
         "manifest_self_fingerprint_sha256": "",
     }
+    if validated["schema_version"] == SCHEMA_VERSION_V2:
+        reference_ids = [
+            row["source_game_id"].strip()
+            for row in validated["inherited_source_references"]
+        ]
+        manifest["expansion"].update({
+            "inherited_reused_source_game_count": len(reference_ids),
+            "inherited_reused_source_id_population_sha256": population_sha256(
+                reference_ids
+            ),
+            "total_expansion_source_game_count": len(source_ids) + len(reference_ids),
+        })
+        manifest["scope_authority"] = validated["scope_authority"]
+        manifest["authority_statement"] = (
+            "Supplemental expansion Research authority plus hash-bound references "
+            "to unchanged inherited, unpublished source rows. The authenticated "
+            "inherited package is not copied or rewritten. Accepted scope "
+            "supersession is historical authority for later serialized "
+            "Implementation only; this freeze never applies it."
+        )
     manifest["manifest_self_fingerprint_sha256"] = manifest_self_fingerprint(
         manifest
     )
@@ -1394,7 +1617,12 @@ def freeze_expansion(
     manifest_bytes = canonical_json_bytes(manifest)
     members = dict(payload)
     members[MANIFEST_MEMBER] = manifest_bytes
-    if set(members) != set(ZIP_MEMBERS):
+    expected_zip_members = (
+        ZIP_MEMBERS_V2
+        if validated["schema_version"] == SCHEMA_VERSION_V2
+        else ZIP_MEMBERS
+    )
+    if set(members) != set(expected_zip_members):
         raise ExpansionFreezeError("internal freeze member population mismatch")
     output = output.resolve()
     write_deterministic_zip(output, members)
@@ -1421,9 +1649,9 @@ def _read_frozen_zip(path: Path) -> dict[str, bytes]:
         if archive.testzip() is not None:
             raise ExpansionFreezeError("expansion freeze ZIP failed CRC validation")
         names = archive.namelist()
-        if names != list(ZIP_MEMBERS):
+        if names not in (list(ZIP_MEMBERS), list(ZIP_MEMBERS_V2)):
             raise ExpansionFreezeError(
-                f"expansion freeze ZIP members/order must equal {list(ZIP_MEMBERS)!r}"
+                "expansion freeze ZIP members/order must be exact v1 or v2 contract"
             )
         for info in archive.infolist():
             if info.date_time != FIXED_ZIP_TIME:
@@ -1453,15 +1681,26 @@ def verify_expansion(repo: Path, artifact: Path) -> dict[str, Any]:
         raise ExpansionFreezeError("expansion-freeze.json is invalid") from exc
     if not isinstance(manifest, dict):
         raise ExpansionFreezeError("expansion-freeze.json must contain an object")
-    if manifest.get("schema_version") != SCHEMA_VERSION:
+    version = manifest.get("schema_version")
+    if version not in {SCHEMA_VERSION, SCHEMA_VERSION_V2}:
         raise ExpansionFreezeError("unsupported expansion freeze schema_version")
+    payload_members = (
+        PAYLOAD_MEMBERS_V2 if version == SCHEMA_VERSION_V2 else PAYLOAD_MEMBERS
+    )
+    expected_members = (
+        ZIP_MEMBERS_V2 if version == SCHEMA_VERSION_V2 else ZIP_MEMBERS
+    )
+    if set(members) != set(expected_members):
+        raise ExpansionFreezeError(
+            "expansion artifact ZIP member population disagrees with schema_version"
+        )
     if manifest.get("workflow_kind") != WORKFLOW_KIND:
         raise ExpansionFreezeError("expansion freeze workflow_kind mismatch")
     if manifest.get("state") != FROZEN_STATE:
         raise ExpansionFreezeError("expansion freeze state mismatch")
 
     expected_member_hashes = {
-        name: sha256_bytes(members[name]) for name in sorted(PAYLOAD_MEMBERS)
+        name: sha256_bytes(members[name]) for name in sorted(payload_members)
     }
     if manifest.get("frozen_payload_member_sha256") != expected_member_hashes:
         raise ExpansionFreezeError("frozen payload member SHA-256 map mismatch")
@@ -1474,7 +1713,7 @@ def verify_expansion(repo: Path, artifact: Path) -> dict[str, Any]:
     research_base = str(manifest.get("research_base_sha") or "").strip()
     inception = str(manifest.get("researched_inception_season") or "").strip()
     baseline = authenticate_baseline(repo.resolve(), school_key, research_base)
-    payload = {name: members[name] for name in PAYLOAD_MEMBERS}
+    payload = {name: members[name] for name in payload_members}
     validated = validate_delta_payload(
         payload,
         baseline,
