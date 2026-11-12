@@ -49,6 +49,28 @@ This rule applies to any already-frozen portfolio waiting in the holster, includ
 
 If the owner flags an obvious issue, correct only the affected opponent identity and any mechanically dependent package fields, then rerun the appropriate package QA and hashes. Do not reopen unrelated research.
 
+## 4A. Already-published All-History expansion
+
+For an `ALL_HISTORY_EXPANSION` Research lane governed by
+`docs/all-history-expansion-lifecycle.md`, the school is already published
+and its accepted baseline opponent population is inherited authority. The
+required owner sanity scan therefore covers only:
+
+- distinct opponents classified as `NON_D1` that are introduced by the
+  supplemental expansion Research population; and
+- any inherited baseline opponent identity that is explicitly touched or
+  re-relied upon because deterministic expansion materialization requires a
+  representation change.
+
+The scan does **not** require reopening the complete inherited accepted
+`NON_D1` population. Any owner-flagged supplemental/touched identity must
+still receive the ordinary bounded follow-up and be corrected, evidence-
+supported, or explicitly explained before `EXPANSION_RESEARCH_FROZEN`.
+
+This expansion-specific scope does not weaken the complete-population scan for
+ordinary newly researched schools or the pre-integration scan for older
+already-frozen onboarding portfolios.
+
 ## 5. What the owner is checking for
 
 The owner scan is specifically intended to catch entries that appear likely to be:

@@ -9,6 +9,26 @@
 
 > **Establish and serialize the mechanical game universe first; then repair discrepancies in bounded evidence families; close Stage 1 once game identity and season accounting are stable even if explicitly nonblocking field unknowns remain.**
 
+
+### All-History expansion adaptation
+
+Ordinary Stage 1 remains controlling for new-school complete game-universe Research.
+For an already-published `LEGACY_TOP_LEVEL_ONLY` program operating under
+`docs/all-history-expansion-lifecycle.md`, reuse the mechanical Stage 1
+quality and durability rules in this document, including season accounting,
+competitive-game inclusion/exclusion, duplicate accounting, stable research
+IDs, literal evidence, explicit residual classification, and durable
+checkpoints before extended discrepancy work.
+
+The authoritative Research population is different: All-History expansion
+Stage 1 owns only the supplemental `EXPANSION_REQUIRED` institutional-history
+population defined by the expansion lifecycle. Inherited
+`BASELINE_PUBLISHED` rows remain accepted published authority and are not
+placed into a fresh Research ledger merely to satisfy standards adopted after
+their publication. A genuine contradiction discovered against an inherited
+baseline row is preserved separately as a correction question; expansion
+authority does not silently rewrite it.
+
 Stage 1 owns game-universe truth. It does **not** require every historical date or score field to become known before a durable ledger may exist or before Stage 1 may close.
 
 Unknown is preferable to unsupported certainty.
