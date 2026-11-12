@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "056bff5eabb91462ced3852030969aa54613b3e36d2794e489b16652b2892865",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "fd82e96bad007c97644b27932f6e1a4297b63cb42e68a62fccbaf89467604833",
+    "implementation-stage2-status.json": "973080ea223c9a6a56fd8426a62bbda26871697a526d6dc6780eb080891e727b",
+    "last-rehearsal-site-gate.json": "c0ba48ce8bb3d6869b90427a18155a8efe8b3c4fc9a7a266bd93cd5673781555",
+    "plan.json": "ad157e07392e2297090f6701324c5959d8a5c52e3dd781c4148937f085330658",
+    "review.csv": "3dde1d8ca848bc98366a3161c19ea76abfd6f4135e17331e7c256a21c7a51961",
+    "review.md": "14977bbddba9134c4bf7cb96c7ee40b77d645aefbde4cbe906f1f02858a27e46"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "fd82e96bad007c97644b27932f6e1a4297b63cb42e68a62fccbaf89467604833",
+    "implementation-stage2-status.json": "5735dfc73eb368136c23ccffefb709ed0557ccccf8abb46a7c7b1ad5437fc20f",
+    "last-rehearsal-site-gate.json": "c0ba48ce8bb3d6869b90427a18155a8efe8b3c4fc9a7a266bd93cd5673781555",
+    "plan.json": "71c04b063c84edc0fded3de3f8487183b96d62172eafacb6e1ab72113d3b7351",
+    "review.csv": "3dde1d8ca848bc98366a3161c19ea76abfd6f4135e17331e7c256a21c7a51961",
+    "review.md": "876859bf19a6b7c77ca5b910259ed67d5bf356c83b338c1ae201ca4fce9a2e3c"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+    "runtime_decision_universe_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "abc6b38a7aa987caa3023893dfffab8d34fa470210b910e8fcc7f865d4ef7bd8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
+  "recommendation_map_sha256": "4ab9159f66bbc85370dc92b4a429166da1bc574e9142da9da97b4dfa4941c6aa",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "vcu-correction-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "34d1020ec913bfa5336e75f112a3c56039ad66b6ef3b049d0edf8bc4df5a865d",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/vcu-correction",
+  "target_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+  "target_tree_sha": "258cecbe2cdd136614a995b1529884497469bb1f",
+  "tracked_stage2_mutation": "NONE"
+}
