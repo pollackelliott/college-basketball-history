@@ -2,7 +2,7 @@
 """Authoritative read-only census of published game-site completeness debt.
 
 The census measures the exact public-game universe implied by programs.csv and each
-published program's approved history start and any explicit history-scope intervals.
+published program's authorized publication-history metadata.
 It never mutates basketball data.
 
 HOME exception accounting is deliberately delegated to implementation_site_gate so
@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from implementation_site_gate import implementation_site_report
-from program_history import season_is_in_scope
+from program_history import season_is_published_history
 
 
 POSTSEASON_TYPES = {
@@ -107,11 +107,7 @@ def _published_perspectives(
     for key in {row.get("team_a_key", "").strip(), row.get("team_b_key", "").strip()}:
         if not key or key not in published:
             continue
-        if season_is_in_scope(
-            season,
-            published[key]["history_start_season"],
-            published[key]["history_scope_intervals"],
-        ):
+        if season_is_published_history(season, published[key]):
             perspectives.append(key)
     return sorted(perspectives)
 
@@ -150,12 +146,20 @@ def build_census(repo: Path, *, example_limit: int = 10) -> dict[str, Any]:
             raise ValueError(
                 "every public_page_enabled program must have program_key and history_start_season"
             )
-        published[key] = {
-            "program_key": key,
-            "display_name": row.get("display_name", "").strip() or key,
-            "history_start_season": history_start,
-            "history_scope_intervals": row.get("history_scope_intervals", "").strip(),
-        }
+        published_row = dict(row)
+        published_row["program_key"] = key
+        published_row["display_name"] = row.get("display_name", "").strip() or key
+        published_row["history_start_season"] = history_start
+        published_row["history_scope_intervals"] = (
+            row.get("history_scope_intervals", "").strip()
+        )
+        published_row["program_inception_season"] = (
+            row.get("program_inception_season", "").strip()
+        )
+        published_row["history_coverage_status"] = (
+            row.get("history_coverage_status", "").strip()
+        )
+        published[key] = published_row
 
     if not published:
         raise ValueError("no public_page_enabled programs found")

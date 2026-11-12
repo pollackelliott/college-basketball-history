@@ -13,6 +13,7 @@ from published_site_completeness_census import (  # noqa: E402
     _published_perspectives,
     build_census,
 )
+from program_history import season_is_top_level  # noqa: E402
 
 
 SOURCE_FIELDS = [
@@ -129,6 +130,8 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 "program_key": "alpha",
                 "display_name": "Alpha",
                 "history_start_season": "1900-1901",
+                "history_scope_intervals": "",
+                "program_inception_season": "",
                 "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
                 "public_page_enabled": "yes",
             },
@@ -136,6 +139,8 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 "program_key": "beta",
                 "display_name": "Beta",
                 "history_start_season": "1900-1901",
+                "history_scope_intervals": "",
+                "program_inception_season": "",
                 "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
                 "public_page_enabled": "yes",
             },
@@ -143,6 +148,8 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 "program_key": "gamma",
                 "display_name": "Gamma",
                 "history_start_season": "2000-2001",
+                "history_scope_intervals": "",
+                "program_inception_season": "",
                 "history_coverage_status": "UNMIGRATED",
                 "public_page_enabled": "no",
             },
@@ -153,6 +160,8 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 "program_key",
                 "display_name",
                 "history_start_season",
+                "history_scope_intervals",
+                "program_inception_season",
                 "history_coverage_status",
                 "public_page_enabled",
             ],
@@ -283,6 +292,8 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
 
             self.assertEqual(report["published_program_count"], 2)
             self.assertEqual(report["published_unique_canonical_games"], 4)
+            self.assertEqual(report["by_team"]["alpha"]["total_games"], 4)
+            self.assertEqual(report["by_team"]["beta"]["total_games"], 4)
 
             self.assertEqual(report["home"]["missing_any"], 2)
             self.assertEqual(report["home"]["hard_blockers"], 1)
@@ -314,16 +325,64 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
 
 
 
-    def test_discontinuous_scope_excludes_gap_for_only_in_scope_program(self):
-        """A gap-season game must not enter a program's public perspective."""
+    def test_complete_institutional_includes_pre_d1_published_season(self):
+        published = {
+            "alpha": {
+                "program_key": "alpha",
+                "display_name": "Alpha",
+                "history_start_season": "1950-1951",
+                "history_scope_intervals": "",
+                "program_inception_season": "1930-1931",
+                "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+                "public_page_enabled": "yes",
+            },
+        }
+        game = {
+            "season_label": "1940-1941",
+            "team_a_key": "alpha",
+            "team_b_key": "unpublished",
+        }
+        self.assertEqual(_published_perspectives(game, published), ["alpha"])
+
+    def test_complete_institutional_excludes_pre_inception_season(self):
+        published = {
+            "alpha": {
+                "program_key": "alpha",
+                "display_name": "Alpha",
+                "history_start_season": "1950-1951",
+                "history_scope_intervals": "",
+                "program_inception_season": "1930-1931",
+                "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+                "public_page_enabled": "yes",
+            },
+        }
+        game = {
+            "season_label": "1929-1930",
+            "team_a_key": "alpha",
+            "team_b_key": "unpublished",
+        }
+        self.assertEqual(_published_perspectives(game, published), [])
+
+    def test_discontinuous_legacy_scope_preserves_old_published_behavior(self):
+        """LEGACY publication still excludes internal non-top-level gaps."""
         published = {
             "miami": {
+                "program_key": "miami",
+                "display_name": "Miami",
                 "history_start_season": "1925-1926",
                 "history_scope_intervals": "1925-1926..1939-1940|1954-1955+",
+                "program_inception_season": "",
+                "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
+                "public_page_enabled": "yes",
             },
             "beta": {
+                "program_key": "beta",
+                "display_name": "Beta",
                 "history_start_season": "1900-1901",
                 "history_scope_intervals": "",
+                "program_inception_season": "",
+                "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
+                "public_page_enabled": "yes",
             },
         }
         game = {
@@ -354,8 +413,8 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 )
             write_csv(programs_file, [
                 "program_key", "display_name", "history_start_season",
-                "history_scope_intervals", "history_coverage_status",
-                "public_page_enabled",
+                "history_scope_intervals", "program_inception_season",
+                "history_coverage_status", "public_page_enabled",
             ], programs)
             canonical_file = root / "data/canonical/games.csv"
             with canonical_file.open(newline="", encoding="utf-8") as handle:
@@ -369,6 +428,69 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
             self.assertEqual(report["published_unique_canonical_games"], 4)
             self.assertEqual(report["by_team"]["alpha"]["total_games"], 0)
             self.assertEqual(report["by_team"]["beta"]["total_games"], 4)
+
+    def test_current_113_program_population_matches_prior_top_level_authority(self):
+        programs = {
+            row["program_key"]: row
+            for row in read_csv(ROOT / "data/reference/programs.csv")
+            if row["public_page_enabled"].strip().lower() == "yes"
+        }
+        self.assertEqual(len(programs), 113)
+        self.assertEqual(
+            sum(
+                row["history_coverage_status"] == "COMPLETE_INSTITUTIONAL"
+                for row in programs.values()
+            ),
+            89,
+        )
+        self.assertEqual(
+            sum(
+                row["history_coverage_status"] == "LEGACY_TOP_LEVEL_ONLY"
+                for row in programs.values()
+            ),
+            24,
+        )
+
+        canonical = read_csv(ROOT / "data/canonical/games.csv")
+        prior_unique = set()
+        publication_unique = set()
+        for game in canonical:
+            season = game["season_label"].strip()
+            prior = sorted(
+                key
+                for key in {
+                    game["team_a_key"].strip(),
+                    game["team_b_key"].strip(),
+                }
+                if key in programs
+                and season_is_top_level(
+                    season,
+                    programs[key]["history_start_season"].strip(),
+                    programs[key].get("history_scope_intervals", "").strip(),
+                )
+            )
+            publication = _published_perspectives(game, programs)
+            self.assertEqual(publication, prior, game["canonical_game_id"])
+            if prior:
+                prior_unique.add(game["canonical_game_id"])
+            if publication:
+                publication_unique.add(game["canonical_game_id"])
+
+        self.assertEqual(publication_unique, prior_unique)
+
+    def test_census_source_uses_publication_history_authority(self):
+        source = (
+            ROOT / "tools/published_site_completeness_census.py"
+        ).read_text(encoding="utf-8")
+        self.assertIn("season_is_published_history", source)
+        self.assertNotIn("season_is_in_scope", source)
+        selector = source.split("def _published_perspectives(", 1)[1].split(
+            "\ndef ", 1
+        )[0]
+        self.assertIn(
+            "season_is_published_history(season, published[key])",
+            selector,
+        )
 
 if __name__ == "__main__":
     unittest.main()
