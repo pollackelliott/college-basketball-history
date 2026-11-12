@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-correction-stage2-census-0002",
+  "request_id": "vcu-correction-stage2-census-0003",
   "operation": "STAGE2_CENSUS",
   "school_key": "vcu",
-  "previous_control_state_commit": "09259e29eef0419576ad7cf39fad63958f5134ce",
-  "previous_control_state_sha256": "3da994fe7e119faf8d8a2700d89ef7d9e5947e0dc687b5d9fde5b1dc35bf2977",
-  "expected_protected_main_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "previous_control_state_commit": "442f5e37c557de18794f3888987109ce23cb5272",
+  "previous_control_state_sha256": "ee3188188254b2ae047618ae431d229317ec1873351e9c34bf695c91ef108222",
+  "expected_protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
   "target_branch": "data/vcu-correction",
   "target_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
   "correction_integration_freeze": {
@@ -16,8 +16,8 @@
   "integration_freeze_sha256": "abc6b38a7aa987caa3023893dfffab8d34fa470210b910e8fcc7f865d4ef7bd8",
   "semantic_snapshot_sha256": "34d1020ec913bfa5336e75f112a3c56039ad66b6ef3b049d0edf8bc4df5a865d",
   "creation_provenance": {
-    "origin": "ChatGPT VCU post-publication correction Implementation lane — same authorized first correction Stage 2 census phase",
-    "authorization": "Owner's existing Proceed/Continue authority persists for the first correction-aware read-only STAGE2_CENSUS. Request vcu-correction-stage2-census-0001 failed before begin_request because its exact Integration Freeze payload was added in the same request commit while the runner intentionally authenticates correction payloads from request_commit^. Global control remained IDLE/COMPLETE with no used request ID or recovery flag. This corrected request binds predecessor control commit 09259e29eef0419576ad7cf39fad63958f5134ce, where the exact hash-bound Integration Freeze already exists. No Phase 0, tracked repair, proposal rehearsal, historical decision, Owner Gate 1, release, merge, recovery, shared/global mutation, or unrelated work is authorized."
+    "origin": "ChatGPT VCU post-publication correction Implementation lane — repaired protected-main Stage 2 census resume",
+    "authorization": "Control Center explicitly authorized PR #565 merge at exact base/head and, after successful merged-main validation, directed this lane to return to preserved data/vcu-correction and the exact existing Integration Freeze, without redoing Research or correction staging, and resume from the earliest incomplete durable Stage 2 boundary. Protected main is now the authorized tooling-repair merge 436a72f9fa76adb80f64f5a63e0bed1dc3e66721. This request is read-only STAGE2_CENSUS only; it binds the preserved correction branch/head and the exact predecessor-resident Correction Integration Freeze. No current-main refresh, tracked repair, proposal rehearsal, historical decision, Owner Gate 1, release, merge, recovery, shared/global mutation, canonical site amendment, additional correction row, or unrelated work is authorized."
   },
   "authority": {
     "owner_gate_1": false,
