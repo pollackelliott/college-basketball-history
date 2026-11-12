@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-correction-stage2-gate1-fill-0001",
+  "request_id": "vcu-correction-stage2-gate1-fill-0002",
   "school_key": "vcu",
   "operation": "STAGE2_GATE1_FILL",
-  "previous_control_state_commit": "20c7a2576a938e010f9b72b1093931a1350503a5",
+  "previous_control_state_commit": "619a0ca54c6922e69da3df57f89a3b162a3d5713",
   "previous_control_state_sha256": "c9b0db9a579885fc69b98b477158e89d0229dc6294c1b6c809f9e6dfe2d17136",
   "expected_protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
   "target_branch": "data/vcu-correction",
@@ -37,8 +37,8 @@
     "apply_request_id": "vcu-correction-stage2-sealed-apply-0001"
   },
   "creation_provenance": {
-    "origin": "ChatGPT VCU post-publication correction Implementation — explicit exact Owner Gate 1 approval",
-    "authorization": "Owner explicitly approved the exact fresh-verified four-decision VCU correction Gate 1 packet and instructed the lane to proceed. Authorize one guarded Gate 1 fill and its repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification only. Release readiness, PR/Preview, Owner Gate 2, merge, Production proof, recovery, canonical site amendments, additional correction rows, unrelated mutation, and changed historical meaning remain unauthorized."
+    "origin": "ChatGPT VCU post-publication correction Implementation — transport retry of explicit exact Owner Gate 1 approval",
+    "authorization": "Owner explicitly approved the exact fresh-verified four-decision VCU correction Gate 1 packet. Prior request vcu-correction-stage2-gate1-fill-0001 was durably committed at 619a0ca54c6922e69da3df57f89a3b162a3d5713 but GitHub created no workflow/check suite; control state remained IDLE/COMPLETE, the request ID was never accepted/consumed/abandoned, and no operation or mutation occurred. This fresh request ID carries the identical owner-approved packet and exact continuation only. Release readiness, PR/Preview, Owner Gate 2, merge, Production proof, recovery mutation, canonical site amendments, additional correction rows, unrelated mutation, and changed historical meaning remain unauthorized."
   },
   "authority": {
     "owner_gate_1": true,
