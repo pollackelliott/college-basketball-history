@@ -303,3 +303,53 @@ The Stage 4 terminal state remains:
 STAGE 4: COMPLETE — OWNER NON_D1 SANITY SCAN READY
 
 Stage 5 remains the required owner NON_D1 sanity scan. Stage 4 must not approve it on the owner's behalf or automatically begin Stage 5.
+
+## 9. All-History expansion supplemental closeout compatibility
+
+An already-published program with `LEGACY_TOP_LEVEL_ONLY` coverage may
+author a supplemental Stage 4 six-file package containing **only**
+`EXPANSION_REQUIRED` games. This is not an ordinary complete institutional
+Research package and does not gain `RESEARCH_FROZEN` authority at Stage 4.
+
+The ordinary `research_portfolio_report` remains unchanged and continues to
+require rows in the declared final completed season for ordinary whole-school
+Research. Stage 4 closeout may reconcile **one exact completed-season error**
+for `ALL_HISTORY_EXPANSION` only after all of the following are proven:
+
+1. An exact hash-verified Stage 3B COMPLETE checkpoint's status declares
+   `workflow_kind=ALL_HISTORY_EXPANSION`, the target school and original
+   immutable `research_base_sha`; this SHA agrees with the manifest and
+   completed-season declaration. Notes or a user-supplied flag cannot create
+   this authority.
+2. The permanent `tools/expansion_stage4_coverage.py` reauthenticates the
+   accepted `LEGACY_TOP_LEVEL_ONLY` target baseline directly from the
+   immutable Git commit, including the target program, scope-reference row,
+   inherited package and publication-authorized canonical population.
+3. The final completed season is a published season under the authenticated
+   target program **and** scope reference. The inherited source package and
+   published canonical-game population both have at least one game in that
+   season. All supplemental source rows belong to the target school and
+   entirely outside the baseline-published seasons; source IDs are unique,
+   and inherited source IDs may not be silently repurposed.
+4. The full ordinary Research report contains exactly the one specific
+   missing-final-season error being reconciled. **Every other Research error
+   remains blocking**. Ordinary Research, unsupported/malformed expansion
+   claims and invalid/missing immutable Git objects must fail closed.
+
+The accepted Stage 4 checkpoint preserves a
+`stage4-expansion-coverage-proof.json` containing the immutable baseline
+and target-scope fingerprints, completed-season inherited game counts,
+supplemental source-ID census, and exact authority boundary. The standard
+Stage 4 parent/semantic/venue checks, exact package hash, scoped NON_D1
+owner-scan generation, and owner-facing Stage 5 stop remain mandatory.
+
+This proof requires a **runnable Git checkout containing the original
+`research_base_sha` commit**. A portable tools-only ZIP is not, by itself,
+sufficient to authenticate historical Git objects. Execute from a repository
+checkout with that immutable commit available, rather than fabricating a
+published-baseline attestation or disabling the check. No Research, protected
+main, or shared-registry mutation occurs in Stage 4 acceptance.
+
+This transition is distinct from later `EXPANSION_RESEARCH_FROZEN` v1/v2
+validation and does not authorize an Implementation lane or automatically
+advance Stage 5.

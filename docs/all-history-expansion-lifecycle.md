@@ -365,3 +365,22 @@ current-main rebase, Integration Freeze, Gate 1, sealed apply, Preview, Gate 2,
 and exact Production proof. If permanent generic downstream expansion
 Implementation is still missing, it is a separate explicit capability blocker;
 this Research-side v2 repair is not permission to improvise it.
+
+## 14. Supplemental Stage 4 acceptance (Research compatibility)
+
+Current-policy Stage 4 mechanical authoring can produce the ordinary flat
+six-file **supplemental** package from Stage 3B without copying inherited
+published source rows. The generic complete-school `research-check` retains
+its ordinary completed-season requirement; a supplemental package intentionally
+contains no `BASELINE_PUBLISHED` final-season games.
+
+The expansion-aware Stage 4 closeout is governed by
+`docs/research-stage4-authoring-contract.md#9-all-history-expansion-supplemental-closeout-compatibility`.
+Only an immutable, manifest-authenticated `ALL_HISTORY_EXPANSION` Stage 3B
+parent and an independent exact-Git-base publication proof can reconcile the
+one already-published completed-season error. All other Research acceptance
+and Stage 4 semantic gates remain unchanged and mandatory. The resulting
+checkpoint records the exact coverage proof and ends at the separate owner
+NON_D1 sanity-scan boundary. It does not constitute ordinary
+`RESEARCH_FROZEN` or `EXPANSION_RESEARCH_FROZEN`, authorize source-row
+duplication, or begin serialized Implementation.
