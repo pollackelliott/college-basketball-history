@@ -206,8 +206,77 @@ It certifies the accepted supplement against an inherited baseline. It does
 **not** claim that the inherited six-file package or accepted published rows
 were researched anew.
 
-The artifact schema and freeze writer are intentionally outside this contract
-unit and require a separately bounded implementation.
+### 11A. EXPANSION_RESEARCH_FROZEN artifact contract
+
+The permanent writer/validator is
+`tools/all_history_expansion_freeze.py`. It is read-only with respect to
+tracked repository state. It consumes one flat supplemental Research directory
+and emits one deterministic ZIP containing exactly:
+
+- `expansion-source-games.csv`;
+- `expansion-opponents.csv`;
+- `expansion-venues.csv`;
+- `expansion-season-accounting.csv`;
+- `expansion-exclusions.csv`;
+- `expansion-residuals.csv`;
+- `expansion-non-d1-scan.csv`;
+- `expansion-baseline-correction-questions.csv`;
+- `expansion-notes.md`;
+- `expansion-source-notes.md`; and
+- `expansion-freeze.json`.
+
+The ZIP is a supplemental Research authority artifact, not a replacement
+school package. It must never contain inherited `source-games.csv`,
+`opponents.csv`, `venues.csv`, `conferences.csv`, `notes.md`, or
+`source-notes.md` under their ordinary package names.
+
+The manifest binds the exact `research_base_sha` to canonical row
+fingerprints for the target `programs.csv` row, target
+`program-top-level-scope.csv` row, and target accomplishment row when
+present; raw SHA-256 values for all six inherited package members; the
+baseline source-game ID population; and the target's publication-authorized
+canonical-game ID population. The baseline terminal season is the latest
+valid season represented by the inherited source-game rows.
+
+The expected supplemental season-accounting universe is mechanically
+enumerated from researched inception through that baseline terminal season
+and includes exactly the seasons classified `EXPANSION_REQUIRED` by
+`expansion_season_disposition(...)`. Research, not publication
+classification, determines whether each such season is `ACTIVE` or
+`DORMANT_OR_NO_TEAM`.
+
+Supplemental support rows use explicit actions:
+`NEW_SUPPLEMENTAL`, `REUSE_INHERITED`, or `EXTEND_INHERITED`.
+A reuse/extension must carry the canonical hash of the exact inherited support
+row. An extension must list its changed fields, and only narrowly additive
+opponent accounting or venue relationship/chronology fields are eligible.
+The freeze does not apply those changes.
+
+Frozen residuals may contain `NONBLOCKING_RESEARCHED` rows only when
+Research already accepted them under substantive policy. Any `BLOCKING`
+residual prevents freeze. Likewise, a baseline correction question with
+`BLOCKS_EXPANSION` prevents freeze; a
+`NO_EXPANSION_IMPACT` question remains explicitly routed outside expansion
+mutation authority.
+
+The expansion NON_D1 scan is exact and scoped: it contains distinct NON_D1
+identities introduced by supplemental support rows and inherited NON_D1
+identities whose representation is explicitly extended. It does not rescan
+unchanged inherited identities. `UNRESOLVED` owner dispositions prevent
+freeze.
+
+The manifest stores SHA-256 values for every non-manifest frozen member and a
+canonical self-fingerprint computed with the self-fingerprint field blank.
+(The literal manifest file cannot contain its own raw SHA-256 without
+self-reference.) Freeze and fresh verify additionally report the raw manifest
+member SHA-256 and whole-ZIP SHA-256.
+
+Fresh verification re-reads every baseline fact from the exact Git object
+named by `research_base_sha`, recomputes every supplemental population and
+hash, and requires exact manifest equality. It never runs the inherited
+baseline package through Research acceptance rules adopted after that package
+was accepted.
+
 
 ## 12. Implementation boundary
 
