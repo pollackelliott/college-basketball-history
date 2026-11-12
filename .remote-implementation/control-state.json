@@ -550,18 +550,19 @@
     "vcu-correction-stage2-census-0003",
     "vcu-correction-stage2-proposal-0001",
     "vcu-correction-stage2-gate1-fill-0002",
-    "vcu-correction-stage2-preseal-rehearsal-0001"
+    "vcu-correction-stage2-preseal-rehearsal-0001",
+    "vcu-correction-stage2-gate1-seal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_GATE1_SEAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "vcu-correction-stage2-gate1-seal-0001",
+  "active_request_sha256": "91063f532f62e53a8fd77608dae5fc8b75c5982091257510b1b2a67fe75afd1f",
+  "active_school_key": "vcu",
+  "active_target_branch": "data/vcu-correction",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1124,8 +1125,11 @@
     "target_branch": "data/vcu-correction",
     "target_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43262624979",
+  "lock_acquisition_request_commit": "2a124a24ba7bb7361d8291e90461367c89d0a777",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_GATE1_SEAL_RUNNING"
 }
