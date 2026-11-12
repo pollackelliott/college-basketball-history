@@ -1,0 +1,33 @@
+{
+  "approved_plan_hash": "3a1e5bb5235eb827f83e2287b8114ff18165bd02007254625b0f0aa87bcb2f87",
+  "approved_plan_sha256": "98668754e4ff48afc2a27310a8cb76bd774911ba03bf340e47e8e9b959e451db",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "8e816e92075fdaacff735b7fc4902283633b1547350a35009c55a992aa03208f",
+    "data/evidence/game-assertions.csv": "2bfbd1e23a123cab73fa116c84688eacd393a16f82ae96b4ae0b482a477d9949",
+    "data/reconciliation/onboarding-decisions/vcu-3a1e5bb5235e.json": "98668754e4ff48afc2a27310a8cb76bd774911ba03bf340e47e8e9b959e451db",
+    "site/data/teams/vcu.json": "32e046363940f8d1f2d1a07a5ec0d57d12e6505abe06f78e12d96471b142f4f7"
+  },
+  "changed_path_count": 4,
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/onboarding-decisions/vcu-3a1e5bb5235e.json",
+    "site/data/teams/vcu.json"
+  ],
+  "deleted_paths": [],
+  "fresh_replayed_tree_sha": "5aa8236a2bf11f8f1788564160371012bae8de7c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION",
+  "protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
+  "release_manifest_sha256": "e8d4f177674cf8a7255ce2ba9ed4532596d092b3a3e740098e7ab2cd458db431",
+  "remote_stage2_sealed_apply_equivalence": "PASS",
+  "request_id": "vcu-correction-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "stage2_gate1_seal_checkpoint_sha256": "e96fa4cc63b16b17d9509fb558ca522489786cf581eb2e49e396c497a244bc22",
+  "stage2_gate1_seal_verification_sha256": "f82efa7f59d05bbd8b1f2a0b3227147abbd9e489650dd162da800c4e93e1ece2",
+  "target_branch": "data/vcu-correction",
+  "target_predecessor_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+  "target_sha": "b7077c8a2fb871a6917d296ec3efd12284b53302",
+  "target_tree_sha": "5aa8236a2bf11f8f1788564160371012bae8de7c",
+  "tracked_stage2_mutation": "EXACT_SEALED_APPLY_SUCCESSOR"
+}
