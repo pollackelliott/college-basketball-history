@@ -545,18 +545,19 @@
     "uc-davis-release-readiness-0001",
     "uc-davis-release-preview-verify-0001",
     "uc-davis-release-gate2-approval-0001",
-    "uc-davis-release-production-proof-0001"
+    "uc-davis-release-production-proof-0001",
+    "vcu-correction-stage2-census-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "vcu-correction-stage2-census-0002",
+  "active_request_sha256": "4217655f04d1b6f211b6c3d0e0e2dbb9b7433087b3400d462bb447616f93cd7b",
+  "active_school_key": "vcu",
+  "active_target_branch": "data/vcu-correction",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1105,8 +1106,11 @@
     "request_id": "uc-davis-release-production-proof-0001",
     "school_key": "uc-davis"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43231883890",
+  "lock_acquisition_request_commit": "e0a17e789c5dac12074bb34f576714bd7de9071a",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
