@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
+  "apply_request_id": "vcu-correction-stage2-sealed-apply-0001",
+  "approved_plan_hash": "3a1e5bb5235eb827f83e2287b8114ff18165bd02007254625b0f0aa87bcb2f87",
+  "changed_path_count": 4,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
+  "release_manifest_sha256": "e8d4f177674cf8a7255ce2ba9ed4532596d092b3a3e740098e7ab2cd458db431",
+  "school_key": "vcu",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "f3e9519b7c1e326b334f14db2a14c13cc3b5c94ab57f4c083cca33409a6480e0",
+  "target_branch": "data/vcu-correction",
+  "target_sha": "b7077c8a2fb871a6917d296ec3efd12284b53302",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "5db169f4fcdfcfb09120c18a16f76c1020324252ad059dd552622d8933734e9e",
+  "writeahead_sha256": "9f73547492b1f9ec0725ce454dc776f51208143d42860a0621c9d353912aaee3"
+}
