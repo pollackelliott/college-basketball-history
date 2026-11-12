@@ -114,27 +114,50 @@ Exhibitions do not:
 
 If exhibition metadata is ever retained, it remains outside the canonical competitive-games dataset.
 
-### Program-perspective history boundary
+### Program publication history and top-level classification
 
-Every published program has an owner-approved history scope in
-`data/reference/programs.csv`. `history_start_season` stores the first accepted
-season. Programs with uninterrupted history may continue to use that lower bound alone.
-Programs whose accepted top-level history has gaps additionally store the exact accepted
-interval expression in `history_scope_intervals` with
-`history_scope_basis=TOP_LEVEL_INTERVALS`.
+The repository permanently distinguishes two independent concepts:
 
-This is a site-scope ruling, not a claim that the formal NCAA Division I label existed
-throughout the period. A canonical game may remain globally valid while being outside
-one participant's public perspective. Builders filter by displayed program before
-calculating games, records, seasons, opponents, postseason figures, conference history,
-or any other aggregate. Raw out-of-scope source rows remain preserved; ingestion excludes
-them from the target perspective without rewriting `raw_text`.
+1. **Complete institutional publication history** — every legitimate recognized
+   competitive varsity game from program inception, excluding exhibitions.
+2. **Top-level / Division I-equivalent classification** — the accepted season
+   intervals used for D-I/top-level classification and accomplishments.
 
-The program registry stores `history_start_season`, `history_scope_status`,
-`history_scope_basis`, `history_scope_notes`, and `history_scope_intervals`.
-A public program requires an owner-confirmed scope. When
-`history_scope_intervals` is populated, it is the authoritative perspective filter and
-`history_start_season` must equal its first accepted interval start.
+`data/reference/programs.csv` now stores `program_inception_season` and
+`history_coverage_status` for publication-history authority. Allowed coverage
+states are:
+
+- `UNMIGRATED` — the program has not entered the all-history publication
+  migration; it must not silently acquire public history.
+- `LEGACY_TOP_LEVEL_ONLY` — the currently published page deliberately retains
+  its existing legacy scope-based public-game universe until a complete institutional
+  supplement is accepted and integrated.
+- `COMPLETE_INSTITUTIONAL` — accepted publication history is complete from
+  the recognized varsity program inception stored in `program_inception_season`.
+
+`program_inception_season` is historical authority, not a proxy derived from the
+earliest reciprocal canonical game, geography, database appearance, or a top-level
+classification start. It may remain blank until accepted authority establishes it.
+
+The pre-existing fields `history_start_season`, `history_scope_status`,
+`history_scope_basis`, `history_scope_notes`, and
+`history_scope_intervals` are retained during the migration as compatibility /
+top-level fields. They are not redefined as institutional inception. The permanent
+top-level interval authority remains `data/reference/program-top-level-scope.csv`.
+
+This is a compatibility transition. Unit 1 does **not** change current public game
+populations: `LEGACY_TOP_LEVEL_ONLY` continues to use the old scope selector,
+`COMPLETE_INSTITUTIONAL` is seeded only where accepted authority already says
+top-level history begins at program inception, and `UNMIGRATED` publishes no new
+history. Later maintenance units will migrate Research, ingestion, builders, site gates,
+conference presentation, accomplishments, and serialized expansion workflows to the
+split model.
+
+Top-level intervals remain the authority for NCAA Tournament appearances, Final Fours,
+national championships, best NCAA finish, D-I conference regular-season championships,
+D-I conference-tournament championships, and D-I/top-level conference presentation.
+Interrupted top-level histories must remain interval-driven and must not be collapsed to
+the first or current stint.
 
 ## Program accomplishments
 
@@ -233,6 +256,8 @@ Allowed public competitive classifications:
 - `POSTSEASON`
 
 `POSTSEASON` is the generic controlled classification for a real competitive postseason game that is not properly classified as the conference tournament, NCAA Tournament, or NIT. Event-specific wording remains preserved in source/event metadata and notes rather than creating ad hoc public game-type values.
+
+A genuine postseason tournament game played while the target program is outside its accepted D-I/top-level scope should ordinarily use `POSTSEASON`, including a lower-level conference tournament. `CONFERENCE_TOURNAMENT` remains the D-I/top-level conference-tournament taxonomy. Unit 1 records this semantic distinction only; the lower-level postseason site-policy migration belongs to a later maintenance unit.
 
 ### Postseason round
 

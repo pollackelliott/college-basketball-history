@@ -42,6 +42,7 @@ from program_history import (
     HISTORY_SCOPE_STATUSES,
     VERIFICATION_STATUSES,
     accomplishment_row_issues,
+    history_coverage_errors,
     history_scope_errors,
     valid_season_label,
 )
@@ -166,6 +167,8 @@ REQUIRED_PROGRAM_COLUMNS = {
     "nickname",
     "current_d1",
     "public_page_enabled",
+    "program_inception_season",
+    "history_coverage_status",
     "history_start_season",
     "history_scope_status",
     "history_scope_basis",
@@ -649,6 +652,11 @@ def main() -> int:
                 f"{label}: public_page_enabled=Yes requires current_d1=Yes."
             )
 
+        for problem in history_coverage_errors(
+            row, public=public_page_enabled == "Yes"
+        ):
+            errors.append(f"{label}: {problem}.")
+
         for problem in history_scope_errors(
             row, required=public_page_enabled == "Yes"
         ):
@@ -712,7 +720,9 @@ def main() -> int:
                 f"{program_key} accomplishments: verification_basis is required."
             )
 
-    # Generated public data must enforce scope without deleting shared canonical rows.
+    # Transitional Unit 1 compatibility: generated public data still uses the
+    # legacy history_* scope fields until the Unit 2 publication-builder migration.
+    # The new institutional coverage metadata is validated independently above.
     for program in program_rows:
         if program.get("public_page_enabled", "") != "Yes":
             continue

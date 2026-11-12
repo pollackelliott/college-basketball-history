@@ -17,10 +17,18 @@ from pathlib import Path
 from typing import Any
 
 from integration_freeze_guard import SEMANTIC_SOURCE_GAME_FIELDS
-from program_history import partition_source_rows, scope_canonical_games
+from program_history import (
+    partition_publication_source_rows,
+    partition_source_rows,
+    publication_history_games,
+    scope_canonical_games,
+    season_is_published_history,
+    season_is_top_level,
+)
 from site_completeness import (
     ALLOWED_SITE_RESEARCH_STATUSES,
     POSTSEASON_TYPES_REQUIRING_ACCOUNTING,
+    lower_level_postseason_site_disposition,
     researched_unresolved_home_venue,
     source_site_completeness_report,
 )
@@ -147,6 +155,35 @@ def _target_home(row: dict[str, str], school_key: str) -> bool:
         (site == "TEAM_A_HOME" and row.get("team_a_key", "").strip() == school_key)
         or (site == "TEAM_B_HOME" and row.get("team_b_key", "").strip() == school_key)
     )
+
+
+def _shared_published_top_level_obligation(
+    game: dict[str, str],
+    school_key: str,
+    programs_by_key: dict[str, dict[str, str]],
+) -> bool:
+    """Return whether another published participant retains top-level site strictness."""
+    season = game.get("season_label", "").strip()
+    for participant_key in (
+        game.get("team_a_key", "").strip(),
+        game.get("team_b_key", "").strip(),
+    ):
+        if not participant_key or participant_key == school_key:
+            continue
+        participant = programs_by_key.get(participant_key)
+        if participant is None:
+            continue
+        if participant.get("public_page_enabled", "").strip().casefold() != "yes":
+            continue
+        if not season_is_published_history(season, participant):
+            continue
+        if season_is_top_level(
+            season,
+            participant.get("history_start_season", "").strip(),
+            participant.get("history_scope_intervals", "").strip(),
+        ):
+            return True
+    return False
 
 
 def _home_venue_exception_marker_for_school(
@@ -693,16 +730,30 @@ def implementation_site_report(
     )
     if program is None:
         raise ValueError(f"program registry has no row for {school_key}")
+    programs_by_key = {
+        row.get("program_key", "").strip(): row
+        for row in programs
+        if row.get("program_key", "").strip()
+    }
+    target_is_published = (
+        program.get("public_page_enabled", "").strip().casefold() == "yes"
+    )
     history_start = program.get("history_start_season", "").strip()
     if not history_start:
         raise ValueError(f"{school_key} has no history_start_season")
     history_scope_intervals = program.get("history_scope_intervals", "").strip()
 
-    in_scope_sources, _ = partition_source_rows(
-        all_sources,
-        history_start,
-        history_scope_intervals,
-    )
+    if target_is_published:
+        in_scope_sources, _ = partition_publication_source_rows(
+            all_sources,
+            program,
+        )
+    else:
+        in_scope_sources, _ = partition_source_rows(
+            all_sources,
+            history_start,
+            history_scope_intervals,
+        )
     source_validation_rows, source_validation_scope = (
         _correction_source_validation_scope(repo, school_key, in_scope_sources)
     )
@@ -712,12 +763,19 @@ def implementation_site_report(
         example_limit=example_limit,
     )
 
-    target_games = scope_canonical_games(
-        canonical,
-        school_key,
-        history_start,
-        history_scope_intervals,
-    )
+    if target_is_published:
+        target_games = publication_history_games(
+            canonical,
+            school_key,
+            program,
+        )
+    else:
+        target_games = scope_canonical_games(
+            canonical,
+            school_key,
+            history_start,
+            history_scope_intervals,
+        )
 
     assertions_by_canonical: dict[str, list[dict[str, str]]] = defaultdict(list)
     target_source_ids_by_canonical: dict[str, list[str]] = defaultdict(list)
@@ -903,6 +961,29 @@ def implementation_site_report(
                 or reciprocal_research_accounted
                 or reciprocal_only_unknown_site_provenance
             )
+            target_top_level = season_is_top_level(
+                game.get("season_label", "").strip(),
+                history_start,
+                history_scope_intervals,
+            )
+            shared_top_level_obligation = _shared_published_top_level_obligation(
+                game,
+                school_key,
+                programs_by_key,
+            )
+            lower_level_disposition = lower_level_postseason_site_disposition(
+                game,
+                target_top_level=target_top_level,
+                target_home=_target_home(game, school_key),
+                research_accounted=research_accounted,
+                shared_top_level_obligation=shared_top_level_obligation,
+            )
+            nonblocking_researched_gap = lower_level_disposition["nonblocking"]
+            if nonblocking_researched_gap:
+                record(
+                    "lower_level_postseason_researched_nonblocking",
+                    canonical_id,
+                )
             if reciprocal_research_accounted and not target_research_accounted:
                 record("reciprocal_research_accounted_gap", canonical_id)
             if reciprocal_only_unknown_site_provenance:

@@ -27,6 +27,7 @@ POSTSEASON_TYPES_REQUIRING_ACCOUNTING = {
     "NIT",
     "POSTSEASON",
 }
+LOWER_LEVEL_POSTSEASON_MODERN_START = "1996-1997"
 HOME_PUBLICATION_BLOCKER_CATEGORIES = {
     "home_missing_venue",
     "home_missing_location",
@@ -58,6 +59,101 @@ def has_supported_foreign_locality(row: dict[str, str]) -> bool:
         city and not state and country
         and country.casefold() not in domestic
     )
+
+
+def lower_level_postseason_site_disposition(
+    row: dict[str, str],
+    *,
+    target_top_level: bool,
+    target_home: bool,
+    research_accounted: bool,
+    shared_top_level_obligation: bool = False,
+) -> dict[str, Any]:
+    """Classify the narrow researched-gap policy for lower-level generic POSTSEASON.
+
+    This does not alter existing site-gap categories or publication gates. The relaxed
+    disposition applies only to a non-home target perspective outside accepted
+    top-level/D-I intervals, only for generic POSTSEASON, and never when a shared
+    published participant retains a top-level obligation.
+    """
+
+    def first_nonblank(*keys: str) -> str:
+        for key in keys:
+            value = str(row.get(key, "") or "").strip()
+            if value:
+                return value
+        return ""
+
+    def locality_known() -> bool:
+        representations = (
+            ("site_city", "site_state", "site_country"),
+            ("curated_site_city", "curated_site_state", "curated_site_country"),
+            ("city", "state", "country"),
+            ("source_city", "source_state", "source_country"),
+        )
+        domestic = {
+            "us", "usa", "u.s.", "u.s.a.", "united states",
+            "united states of america",
+        }
+        for city_key, state_key, country_key in representations:
+            city = str(row.get(city_key, "") or "").strip()
+            state = str(row.get(state_key, "") or "").strip()
+            country = str(row.get(country_key, "") or "").strip()
+            if city and state:
+                return True
+            if (
+                city
+                and not state
+                and country
+                and country.casefold() not in domestic
+            ):
+                return True
+        return False
+
+    season = str(row.get("season_label", "") or "").strip()
+    season_match = re.fullmatch(r"(\d{4})-(\d{4})", season)
+    if (
+        not season_match
+        or int(season_match.group(2)) != int(season_match.group(1)) + 1
+    ):
+        raise ValueError(f"invalid season_label for site-policy classification: {season!r}")
+
+    era = (
+        "MODERN_1996_97_PLUS"
+        if season >= LOWER_LEVEL_POSTSEASON_MODERN_START
+        else "HISTORICAL_1995_96_OR_EARLIER"
+    )
+    game_type = first_nonblank("curated_game_type", "game_type").upper()
+    applies = (
+        game_type == "POSTSEASON"
+        and not target_top_level
+        and not target_home
+        and not shared_top_level_obligation
+    )
+
+    venue_known = bool(
+        first_nonblank(
+            "venue_key",
+            "venue_id",
+            "curated_venue_name",
+            "venue_name",
+            "source_venue_name",
+        )
+    )
+    venue_missing = not venue_known
+    locality_missing = not locality_known()
+    material_gap = venue_missing or locality_missing
+    accounted = bool(research_accounted)
+
+    return {
+        "applies": applies,
+        "era": era,
+        "venue_missing": venue_missing,
+        "locality_missing": locality_missing,
+        "research_accounted": accounted,
+        "material_gap": material_gap,
+        "nonblocking": applies and material_gap and accounted,
+    }
 
 
 def _row_gap_categories(row: dict[str, str]) -> list[str]:

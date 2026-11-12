@@ -9,7 +9,7 @@ from pathlib import Path
 
 from program_history import (
     BEST_FINISH_LABELS,
-    derive_ncaa_accomplishments,
+    derive_top_level_ncaa_accomplishments,
     history_scope_errors,
 )
 
@@ -31,7 +31,7 @@ def compare_program(
         print(f"{program_key}: INCOMPLETE — {'; '.join(scope_problems)}")
         return False
 
-    derived = derive_ncaa_accomplishments(
+    derived = derive_top_level_ncaa_accomplishments(
         canonical_games,
         program_key,
         cutoff,

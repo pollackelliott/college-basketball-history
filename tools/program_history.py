@@ -17,6 +17,12 @@ HISTORY_SCOPE_BASES = {
     "TOP_LEVEL_INTERVALS",
 }
 
+HISTORY_COVERAGE_STATUSES = {
+    "UNMIGRATED",
+    "LEGACY_TOP_LEVEL_ONLY",
+    "COMPLETE_INSTITUTIONAL",
+}
+
 BEST_FINISH_LABELS = {
     "NATIONAL_CHAMPION": "National Champion",
     "NATIONAL_RUNNER_UP": "National Runner Up",
@@ -180,12 +186,12 @@ def parse_history_scope_intervals(value: str) -> list[tuple[str, str | None]]:
     return intervals
 
 
-def season_is_in_scope(
+def season_is_top_level(
     season_label: str,
     history_start_season: str,
     history_scope_intervals: str = "",
 ) -> bool:
-    """Return whether a valid game season belongs to one program's perspective."""
+    """Return whether a valid season belongs to the accepted top-level intervals."""
     if not valid_season_label(season_label):
         return False
 
@@ -201,23 +207,124 @@ def season_is_in_scope(
     )
 
 
+def season_is_in_scope(
+    season_label: str,
+    history_start_season: str,
+    history_scope_intervals: str = "",
+) -> bool:
+    """Backward-compatible alias for top-level season membership."""
+    return season_is_top_level(
+        season_label,
+        history_start_season,
+        history_scope_intervals,
+    )
+
+
+def top_level_canonical_games(
+    games: Iterable[dict[str, Any]],
+    program_key: str,
+    history_start_season: str,
+    history_scope_intervals: str = "",
+) -> list[dict[str, Any]]:
+    """Select canonical games inside one program's accepted top-level intervals."""
+    return [
+        game
+        for game in games
+        if program_key in {game.get("team_a_key"), game.get("team_b_key")}
+        and season_is_top_level(
+            str(game.get("season_label", "")),
+            history_start_season,
+            history_scope_intervals,
+        )
+    ]
+
+
 def scope_canonical_games(
     games: Iterable[dict[str, Any]],
     program_key: str,
     history_start_season: str,
     history_scope_intervals: str = "",
 ) -> list[dict[str, Any]]:
-    """Select canonical games that count for one program's approved perspective."""
-    return [
-        game
-        for game in games
-        if program_key in {game.get("team_a_key"), game.get("team_b_key")}
-        and season_is_in_scope(
-            str(game.get("season_label", "")),
-            history_start_season,
-            history_scope_intervals,
+    """Backward-compatible top-level selector retained during the transition."""
+    return top_level_canonical_games(
+        games,
+        program_key,
+        history_start_season,
+        history_scope_intervals,
+    )
+
+
+def publication_history_games(
+    games: Iterable[dict[str, Any]],
+    program_key: str,
+    program: dict[str, str],
+) -> list[dict[str, Any]]:
+    """Select the currently authorized publication history for one program.
+
+    COMPLETE_INSTITUTIONAL uses institutional inception. LEGACY_TOP_LEVEL_ONLY
+    deliberately preserves the existing scope-based public universe until that
+    program's all-history supplement is integrated. UNMIGRATED publishes nothing.
+    Unknown or structurally incomplete states fail closed.
+    """
+    status = program.get("history_coverage_status", "").strip()
+    if status == "UNMIGRATED":
+        return []
+    if status == "LEGACY_TOP_LEVEL_ONLY":
+        return top_level_canonical_games(
+            games,
+            program_key,
+            program.get("history_start_season", "").strip(),
+            program.get("history_scope_intervals", "").strip(),
         )
-    ]
+    if status == "COMPLETE_INSTITUTIONAL":
+        inception = program.get("program_inception_season", "").strip()
+        if not valid_season_label(inception):
+            raise ValueError(
+                "COMPLETE_INSTITUTIONAL requires valid program_inception_season"
+            )
+        return [
+            game
+            for game in games
+            if program_key in {game.get("team_a_key"), game.get("team_b_key")}
+            and valid_season_label(str(game.get("season_label", "")))
+            and str(game.get("season_label", "")) >= inception
+        ]
+    raise ValueError(f"unknown history_coverage_status {status!r}")
+
+
+def publication_history_start(program: dict[str, str]) -> str:
+    """Return the currently authorized first published season, or blank if none."""
+    status = program.get("history_coverage_status", "").strip()
+    if status == "UNMIGRATED":
+        return ""
+    if status == "LEGACY_TOP_LEVEL_ONLY":
+        start = program.get("history_start_season", "").strip()
+        if not valid_season_label(start):
+            raise ValueError(
+                "LEGACY_TOP_LEVEL_ONLY requires valid history_start_season"
+            )
+        return start
+    if status == "COMPLETE_INSTITUTIONAL":
+        inception = program.get("program_inception_season", "").strip()
+        if not valid_season_label(inception):
+            raise ValueError(
+                "COMPLETE_INSTITUTIONAL requires valid program_inception_season"
+            )
+        return inception
+    raise ValueError(f"unknown history_coverage_status {status!r}")
+
+
+def current_top_level_stint_start(
+    history_start_season: str,
+    history_scope_intervals: str = "",
+) -> str:
+    """Return the start of the current continuous top-level stint."""
+    if history_scope_intervals.strip():
+        intervals = parse_history_scope_intervals(history_scope_intervals)
+        if intervals and intervals[-1][1] is None:
+            return intervals[-1][0]
+        return ""
+    return history_start_season if valid_season_label(history_start_season) else ""
 
 
 def partition_source_rows(
@@ -239,6 +346,22 @@ def partition_source_rows(
         else:
             in_scope.append(row)
     return in_scope, outside_scope
+
+
+def partition_publication_source_rows(
+    rows: Iterable[dict[str, str]],
+    program: dict[str, str],
+) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    """Partition source evidence by authorized publication history without rewriting it."""
+    published_rows: list[dict[str, str]] = []
+    unpublished_rows: list[dict[str, str]] = []
+    for row in rows:
+        season = row.get("season_label", "").strip()
+        if season_is_published_history(season, program):
+            published_rows.append(row)
+        else:
+            unpublished_rows.append(row)
+    return published_rows, unpublished_rows
 
 
 def trim_conference_history(
@@ -283,6 +406,116 @@ def trim_conference_history(
             trimmed.append(row)
 
     return trimmed
+
+
+def season_is_published_history(
+    season_label: str,
+    program: dict[str, str],
+) -> bool:
+    """Return whether one active season is inside the authorized public history."""
+    status = program.get("history_coverage_status", "").strip()
+    if status == "UNMIGRATED":
+        return False
+    if status == "LEGACY_TOP_LEVEL_ONLY":
+        return season_is_top_level(
+            season_label,
+            program.get("history_start_season", "").strip(),
+            program.get("history_scope_intervals", "").strip(),
+        )
+    if status == "COMPLETE_INSTITUTIONAL":
+        inception = program.get("program_inception_season", "").strip()
+        if not valid_season_label(inception):
+            raise ValueError(
+                "COMPLETE_INSTITUTIONAL requires valid program_inception_season"
+            )
+        return valid_season_label(season_label) and season_label >= inception
+    raise ValueError(f"unknown history_coverage_status {status!r}")
+
+
+def _next_season_label(season_label: str) -> str:
+    """Return the next consecutive canonical season label."""
+    if not valid_season_label(season_label):
+        raise ValueError(f"invalid season label {season_label!r}")
+    start = int(season_label[:4]) + 1
+    return f"{start:04d}-{start + 1:04d}"
+
+
+def publication_conference_timeline(
+    history_rows: Iterable[dict[str, str]],
+    program: dict[str, str],
+    active_published_seasons: Iterable[str],
+) -> list[dict[str, str]]:
+    """Project real top-level membership plus active published Non-D1 seasons."""
+    history_start = program.get("history_start_season", "").strip()
+    history_intervals = program.get("history_scope_intervals", "").strip()
+    real_rows = trim_conference_history(
+        history_rows,
+        history_start,
+        history_intervals,
+    )
+
+    non_d1_seasons: list[str] = []
+    for raw_season in active_published_seasons:
+        season = str(raw_season or "").strip()
+        if not valid_season_label(season):
+            raise ValueError(f"invalid active published season {season!r}")
+        if (
+            season_is_published_history(season, program)
+            and not season_is_top_level(season, history_start, history_intervals)
+        ):
+            non_d1_seasons.append(season)
+
+    blocks: list[dict[str, str]] = []
+    for season in sorted(set(non_d1_seasons)):
+        if not blocks or season != _next_season_label(blocks[-1]["end_season"]):
+            blocks.append(
+                {
+                    "start_season": season,
+                    "end_season": season,
+                    "conference_key": "",
+                    "conference_name": "Non-D1",
+                    "membership_type": "classification",
+                    "classification": "NON_D1_CLASSIFICATION",
+                }
+            )
+        else:
+            blocks[-1]["end_season"] = season
+
+    return sorted(
+        [*real_rows, *blocks],
+        key=lambda row: (
+            row.get("start_season", "").strip(),
+            row.get("end_season", "").strip(),
+            row.get("conference_name", "").strip(),
+        ),
+    )
+
+
+def history_coverage_errors(
+    program: dict[str, str],
+    public: bool,
+) -> list[str]:
+    """Validate institutional-publication coverage metadata independently of top-level scope."""
+    errors: list[str] = []
+    status = program.get("history_coverage_status", "").strip()
+    inception = program.get("program_inception_season", "").strip()
+
+    if status not in HISTORY_COVERAGE_STATUSES:
+        errors.append(f"unknown history_coverage_status {status!r}")
+        return errors
+
+    if inception and not valid_season_label(inception):
+        errors.append("program_inception_season must be a valid season")
+
+    if status == "COMPLETE_INSTITUTIONAL" and not valid_season_label(inception):
+        errors.append(
+            "COMPLETE_INSTITUTIONAL requires valid program_inception_season"
+        )
+
+    if public and status == "UNMIGRATED":
+        errors.append("public program cannot have history_coverage_status=UNMIGRATED")
+
+    return errors
 
 
 def history_scope_errors(program: dict[str, str], required: bool) -> list[str]:
@@ -355,14 +588,14 @@ def _game_finish(game: dict[str, Any], program_key: str) -> str | None:
     return ROUND_TO_FINISH.get(round_name)
 
 
-def derive_ncaa_accomplishments(
+def derive_top_level_ncaa_accomplishments(
     canonical_games: Iterable[dict[str, Any]],
     program_key: str,
     history_start_season: str,
     history_scope_intervals: str = "",
 ) -> dict[str, Any]:
-    """Derive on-court NCAA accomplishments within one program's scope."""
-    scoped = scope_canonical_games(
+    """Derive accomplishments only from accepted top-level/D-I-equivalent intervals."""
+    scoped = top_level_canonical_games(
         canonical_games,
         program_key,
         history_start_season,
@@ -453,6 +686,21 @@ def derive_ncaa_accomplishments(
         "incomplete_reasons": incomplete,
     }
 
+
+
+def derive_ncaa_accomplishments(
+    canonical_games: Iterable[dict[str, Any]],
+    program_key: str,
+    history_start_season: str,
+    history_scope_intervals: str = "",
+) -> dict[str, Any]:
+    """Backward-compatible wrapper for explicit top-level accomplishment derivation."""
+    return derive_top_level_ncaa_accomplishments(
+        canonical_games,
+        program_key,
+        history_start_season,
+        history_scope_intervals,
+    )
 
 def accomplishment_row_issues(
     row: dict[str, str],

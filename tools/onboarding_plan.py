@@ -65,7 +65,7 @@ from postseason_classification_review import (
 from program_history import (
     BEST_FINISH_RANK,
     NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
-    derive_ncaa_accomplishments,
+    derive_top_level_ncaa_accomplishments,
     history_scope_errors,
     ncaa_game_counts_as_appearance,
     partition_source_rows,
@@ -1898,7 +1898,7 @@ def _accomplishment_conflicts(
     reference: dict[str, str],
     canonical_games: list[dict[str, str]],
 ) -> tuple[dict[str, Any], list[str]]:
-    derived = derive_ncaa_accomplishments(
+    derived = derive_top_level_ncaa_accomplishments(
         canonical_games,
         program["program_key"],
         program.get("history_start_season", "").strip(),

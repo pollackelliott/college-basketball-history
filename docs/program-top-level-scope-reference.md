@@ -2,13 +2,15 @@
 
 - **Status:** Required research-lane baseline
 - **Data:** `data/reference/program-top-level-scope.csv`
-- **Purpose:** Remove repetitive owner handoffs about when a current Division I program first entered, left, or re-entered the project's accepted top-level / Division I-equivalent history universe.
+- **Purpose:** Preserve owner-supplied authority for when a current Division I program entered, left, or re-entered the project's accepted top-level / Division I-equivalent classification. This reference does not define institutional program inception.
 
 ## 1. Governing rule
 
 Every new Research lane must read `data/reference/program-top-level-scope.csv` before defining the target school's game universe.
 
-The reference is the default owner-supplied history-scope baseline. The owner does not need to restate that a school has always been top-level or provide its first Division I season when the school is present in this file.
+The reference is the default owner-supplied top-level classification baseline. The owner does not need to restate that a school has always been top-level or provide its first Division I season when the school is present in this file.
+
+Top-level classification and complete institutional publication history are permanently separate authorities. `INCEPTION+` means that accepted top-level classification begins at the same recognized program inception; any other scope expression says nothing by itself about when varsity basketball began. Never infer `program_inception_season` from a top-level start, reciprocal canonical games, earliest database appearance, or geography.
 
 The reference was supplied by the owner and received a bounded structural and historical sanity audit on 2026-09-02. It is intentionally treated as a strong project baseline, not as infallible external historical law. Ordinary school research should sanity-check the scope against authoritative school/conference/NCAA evidence encountered naturally during research. Do **not** independently re-research the entire classification history merely because the reference exists.
 
@@ -30,7 +32,7 @@ Examples:
 - `Akron,1947-48..1949-50|1980-81+`
 - `Miami,1948-49..1952-53|1954-55..1970-71|1985-86+`
 
-The reference describes **accepted top-level / Division I-equivalent seasons for project inclusion**, not merely current NCAA membership or postseason eligibility. Pre-1973 history therefore uses the project's top-level-equivalent concept rather than pretending the modern NCAA Division I label existed unchanged throughout basketball history.
+The reference describes **accepted top-level / Division I-equivalent classification seasons**, not merely current NCAA membership or postseason eligibility and not institutional publication inception. Pre-1973 history therefore uses the project's top-level-equivalent concept rather than pretending the modern NCAA Division I label existed unchanged throughout basketball history.
 
 ## 3. Research-lane behavior
 
@@ -38,7 +40,7 @@ At lane startup:
 
 1. locate the target school in the scope reference;
 2. record the applicable `top_level_scope` in the research notes/status card;
-3. construct the competitive game universe only from accepted intervals, subject to the normal exhibition and game-identity rules;
+3. during the current compatibility transition, continue constructing the Research package's operational game universe from the accepted intervals, subject to the normal exhibition and game-identity rules; this temporary workflow boundary does not redefine those intervals as institutional inception;
 4. preserve source evidence from non-scope seasons when useful for context, but do not ingest those games into the target canonical universe;
 5. continue ordinary research without asking the owner to restate scope.
 
@@ -65,11 +67,39 @@ Every interval listed is independently accepted. Games outside every listed inte
 
 ## 5. Relationship to `programs.csv`
 
-`data/reference/programs.csv` remains the global program registry. This scope reference is a research-policy input and does not automatically overwrite `history_start_season`, `history_scope_status`, or previously published school metadata.
+`data/reference/programs.csv` remains the global program registry. It now carries
+the independent publication-history fields `program_inception_season` and
+`history_coverage_status`. The controlled coverage states are
+`UNMIGRATED`, `LEGACY_TOP_LEVEL_ONLY`, and
+`COMPLETE_INSTITUTIONAL`.
 
-During implementation, a newly researched school's final accepted history metadata is taken from the explicit frozen package scope statement and reconciled under the normal serialized workflow. Implementation writes that same accepted scope into current-main-compatible `programs.csv` metadata. If the frozen expression differs from the target row in `program-top-level-scope.csv`, the target row is stale and must be corrected in the same guarded school Phase 0/onboarding commit. The frozen package does not need a second owner approval merely because the reusable baseline lagged behind it. A prior explicit owner ruling already recorded in `programs.csv` remains valid only when it does not conflict with the later accepted frozen package scope or genuinely new authoritative evidence.
+The top-level scope reference does not automatically overwrite or supply
+`program_inception_season`. A published program may be seeded as
+`COMPLETE_INSTITUTIONAL` only when accepted authority establishes both
+`INCEPTION+` classification and a valid existing first-season value that truly
+represents program inception. Published programs with any non-`INCEPTION+` accepted
+top-level expression remain `LEGACY_TOP_LEVEL_ONLY` until their institutional
+supplement is researched and integrated. Unpublished current-D1 programs remain
+`UNMIGRATED` unless a later authorized migration establishes otherwise.
 
-`programs.csv` retains `history_start_season` as the first accepted season for backward-compatible display and validation. When accepted history is interrupted, Implementation also writes the exact owner-approved interval expression to `history_scope_intervals` and uses `history_scope_basis=TOP_LEVEL_INTERVALS`. Publication, ingestion, reciprocal-only review, conference-history clipping, and accomplishment cross-checking must use `history_scope_intervals` when it is present rather than collapsing the program to a single lower-bound cutoff.
+The existing `history_start_season`, `history_scope_status`,
+`history_scope_basis`, `history_scope_notes`, and
+`history_scope_intervals` remain compatibility/top-level fields during this
+transition. They are not repurposed as institutional inception. Existing publication,
+Research, ingestion, site, and accomplishment workflows may still depend on those
+fields until later all-history maintenance units migrate each consumer explicitly.
+
+During ordinary serialized school work before those later migrations, a newly researched
+school's final accepted top-level metadata is still reconciled under the existing guarded
+workflow. If a frozen scope expression differs from the target row in this reference,
+the target row is stale and the existing target-row correction rules continue to apply.
+That compatibility behavior does not authorize a global rewrite of this reference.
+
+A genuine postseason tournament game played while the target program is outside its
+accepted top-level scope should ordinarily use `POSTSEASON`, including a
+lower-level conference tournament. `CONFERENCE_TOURNAMENT` remains the
+D-I/top-level conference-tournament taxonomy. Unit 1 establishes the taxonomy boundary;
+later maintenance owns the lower-level postseason site-policy changes.
 
 ## 6. Validation status
 

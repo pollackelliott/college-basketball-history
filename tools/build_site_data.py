@@ -32,9 +32,11 @@ from conference_reference import (
 from location_safety import public_location_pair
 from ncaa_safety import canonical_ncaa_errors
 from program_history import (
+    current_top_level_stint_start,
     normalize_scope_season,
-    scope_canonical_games,
-    trim_conference_history,
+    publication_history_games,
+    publication_history_start,
+    publication_conference_timeline,
 )
 from venue_reference import (
     canonical_venue_geography_errors,
@@ -163,6 +165,13 @@ def conference_publication_metadata(
                 "conference_key": row.get("conference_key", "").strip(),
                 "conference_name": row.get("conference_name", "").strip(),
                 "membership_type": row.get("membership_type", "").strip(),
+                **(
+                    {
+                        "classification": row.get("classification", "").strip(),
+                    }
+                    if row.get("classification", "").strip()
+                    else {}
+                ),
             }
             for row in history_rows
         ],
@@ -971,6 +980,18 @@ def main() -> int:
                 "history_start_season": (
                     row.get("history_start_season", "").strip() or None
                 ),
+                "published_history_start_season": (
+                    publication_history_start(row) or None
+                    if yes(row["public_page_enabled"])
+                    else None
+                ),
+                "d1_since_season": (
+                    current_top_level_stint_start(
+                        row.get("history_start_season", "").strip(),
+                        row.get("history_scope_intervals", "").strip(),
+                    ) or None
+                ),
+                "history_coverage_status": row.get("history_coverage_status", "").strip(),
                 **public_accomplishments(accomplishment),
                 "current_d1": yes(row["current_d1"]),
                 "public_page_enabled": yes(row["public_page_enabled"]),
@@ -1017,21 +1038,14 @@ def main() -> int:
             for row in canonical_rows
             if program_key in {row["team_a_key"], row["team_b_key"]}
         ]
-        scoped_canonical = scope_canonical_games(
+        scoped_canonical = publication_history_games(
             all_program_games,
             program_key,
-            history_start,
-            history_intervals,
+            program,
         )
         scope_exclusion_counts[program_key] = (
             len(all_program_games) - len(scoped_canonical)
         )
-        public_conference_history = trim_conference_history(
-            conference_history,
-            history_start,
-            history_intervals,
-        )
-
         perspective_games = [
             perspective_game(
                 row,
@@ -1076,6 +1090,11 @@ def main() -> int:
         }
         season_labels = (
             set(seasons) | set(coverage_by_season) | set(accounting_by_season)
+        )
+        public_conference_history = publication_conference_timeline(
+            conference_history,
+            program,
+            season_labels,
         )
         season_summaries = []
         for season_label in sorted(season_labels, reverse=True):
@@ -1153,6 +1172,11 @@ def main() -> int:
                 "primary_hex": program.get("primary_hex", ""),
                 "secondary_hex": program.get("secondary_hex", ""),
                 "history_start_season": history_start,
+                "published_history_start_season": publication_history_start(program),
+                "d1_since_season": (
+                    current_top_level_stint_start(history_start, history_intervals) or None
+                ),
+                "history_coverage_status": program.get("history_coverage_status", "").strip(),
                 **public_accomplishments(accomplishments[program_key]),
                 "current_conference": (
                     {

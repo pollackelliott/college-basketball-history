@@ -154,21 +154,38 @@ class ImplementationSiteGateTests(unittest.TestCase):
         discrepancies=None,
         history_start="1900-1901",
         history_scope_intervals="",
+        public_page_enabled="No",
+        history_coverage_status="UNMIGRATED",
+        program_inception_season="",
+        additional_programs=None,
     ):
         sources = sources if sources is not None else [source_row()]
         canonical = canonical if canonical is not None else [canonical_row()]
         assertions = assertions if assertions is not None else [target_assertion()]
         discrepancies = discrepancies if discrepancies is not None else []
+        additional_programs = additional_programs or []
 
         write_csv(root / "schools/test/source-games.csv", SOURCE_FIELDS, sources)
+        program_fields = [
+            "program_key",
+            "history_start_season",
+            "history_scope_intervals",
+            "public_page_enabled",
+            "history_coverage_status",
+            "program_inception_season",
+        ]
+        target_program = {
+            "program_key": "test",
+            "history_start_season": history_start,
+            "history_scope_intervals": history_scope_intervals,
+            "public_page_enabled": public_page_enabled,
+            "history_coverage_status": history_coverage_status,
+            "program_inception_season": program_inception_season,
+        }
         write_csv(
             root / "data/reference/programs.csv",
-            ["program_key", "history_start_season", "history_scope_intervals"],
-            [{
-                "program_key": "test",
-                "history_start_season": history_start,
-                "history_scope_intervals": history_scope_intervals,
-            }],
+            program_fields,
+            [target_program, *additional_programs],
         )
         write_csv(root / "data/canonical/games.csv", CANONICAL_FIELDS, canonical)
         write_csv(root / "data/evidence/game-assertions.csv", ASSERTION_FIELDS, assertions)
@@ -563,6 +580,230 @@ class ImplementationSiteGateTests(unittest.TestCase):
                 report["counts"]["invalid_home_venue_exception_marker_rows"], 1
             )
 
+    def test_published_complete_target_includes_pre_d1_publication_game(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                season_label="1899-1900",
+                curated_site_type="NEUTRAL",
+            )
+            canonical = canonical_row(
+                season_label="1899-1900",
+                site_type="NEUTRAL",
+            )
+            assertion = target_assertion(curated_site_type="NEUTRAL")
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=[assertion],
+                history_start="1900-1901",
+                public_page_enabled="Yes",
+                history_coverage_status="COMPLETE_INSTITUTIONAL",
+                program_inception_season="1899-1900",
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["target_canonical_games"], 1)
+
+    def test_lower_level_postseason_researched_gap_is_observable_nonblocking(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                season_label="1899-1900",
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+                curated_game_type="POSTSEASON",
+                site_research_status="RESEARCHED_UNRESOLVED",
+                site_research_basis=(
+                    "Bounded institutional and reciprocal site research completed; "
+                    "exact lower-level postseason site remains unresolved."
+                ),
+            )
+            canonical = canonical_row(
+                season_label="1899-1900",
+                site_type="NEUTRAL",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+                game_type="POSTSEASON",
+            )
+            assertion = target_assertion(
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+            )
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=[assertion],
+                history_start="1900-1901",
+                public_page_enabled="Yes",
+                history_coverage_status="COMPLETE_INSTITUTIONAL",
+                program_inception_season="1899-1900",
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(report["counts"]["target_canonical_games"], 1)
+            self.assertEqual(
+                report["counts"]["lower_level_postseason_researched_nonblocking"],
+                1,
+            )
+            self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 0)
+
+    def test_lower_level_postseason_unresearched_gap_still_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                season_label="1899-1900",
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+                curated_game_type="POSTSEASON",
+            )
+            canonical = canonical_row(
+                season_label="1899-1900",
+                site_type="NEUTRAL",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+                game_type="POSTSEASON",
+            )
+            assertion = target_assertion(
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+            )
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=[assertion],
+                history_start="1900-1901",
+                public_page_enabled="Yes",
+                history_coverage_status="COMPLETE_INSTITUTIONAL",
+                program_inception_season="1899-1900",
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(
+                report["counts"].get(
+                    "lower_level_postseason_researched_nonblocking", 0
+                ),
+                0,
+            )
+            self.assertEqual(report["counts"]["unaccounted_public_gap_rows"], 1)
+            self.assertGreater(report["source_site_counts"]["unaccounted_gap_rows"], 0)
+
+    def test_top_level_postseason_does_not_record_lower_level_relaxation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                season_label="1900-1901",
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+                curated_game_type="POSTSEASON",
+                site_research_status="RESEARCHED_UNRESOLVED",
+                site_research_basis="Bounded site research completed.",
+            )
+            canonical = canonical_row(
+                season_label="1900-1901",
+                site_type="NEUTRAL",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+                game_type="POSTSEASON",
+            )
+            assertion = target_assertion(
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+            )
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=[assertion],
+                history_start="1900-1901",
+                public_page_enabled="Yes",
+                history_coverage_status="COMPLETE_INSTITUTIONAL",
+                program_inception_season="1899-1900",
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(
+                report["counts"].get(
+                    "lower_level_postseason_researched_nonblocking", 0
+                ),
+                0,
+            )
+
+    def test_shared_published_top_level_participant_disables_relaxation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = source_row(
+                season_label="1899-1900",
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+                curated_game_type="POSTSEASON",
+                site_research_status="RESEARCHED_UNRESOLVED",
+                site_research_basis="Bounded site research completed.",
+            )
+            canonical = canonical_row(
+                season_label="1899-1900",
+                site_type="NEUTRAL",
+                venue_key="",
+                venue_id="",
+                site_city="",
+                site_state="",
+                game_type="POSTSEASON",
+            )
+            assertion = target_assertion(
+                curated_site_type="NEUTRAL",
+                curated_venue_name="",
+                city="",
+                state="",
+            )
+            other_program = {
+                "program_key": "other",
+                "history_start_season": "1890-1891",
+                "history_scope_intervals": "",
+                "public_page_enabled": "Yes",
+                "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+                "program_inception_season": "1890-1891",
+            }
+            self.make_repo(
+                root,
+                sources=[source],
+                canonical=[canonical],
+                assertions=[assertion],
+                history_start="1900-1901",
+                public_page_enabled="Yes",
+                history_coverage_status="COMPLETE_INSTITUTIONAL",
+                program_inception_season="1899-1900",
+                additional_programs=[other_program],
+            )
+            report = implementation_site_report(root, "test")
+            self.assertEqual(
+                report["counts"].get(
+                    "lower_level_postseason_researched_nonblocking", 0
+                ),
+                0,
+            )
+
     def test_ncaa_canonical_site_gap_is_non_waivable(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -621,6 +862,7 @@ class ImplementationSiteGateTests(unittest.TestCase):
             report = implementation_site_report(root, "test")
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["counts"]["target_canonical_games"], 0)
+            self.assertEqual(report["source_site_counts"]["material_gap_rows"], 0)
 
     def test_interrupted_history_scope_excludes_internal_gap(self):
         with tempfile.TemporaryDirectory() as temporary:
