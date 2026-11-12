@@ -12,6 +12,7 @@ sys.path.insert(0, str(TOOLS))
 from published_site_completeness_census import (  # noqa: E402
     _published_perspectives,
     build_census,
+    read_csv,
 )
 from program_history import season_is_top_level  # noqa: E402
 
