@@ -129,18 +129,21 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 "program_key": "alpha",
                 "display_name": "Alpha",
                 "history_start_season": "1900-1901",
+                "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
                 "public_page_enabled": "yes",
             },
             {
                 "program_key": "beta",
                 "display_name": "Beta",
                 "history_start_season": "1900-1901",
+                "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
                 "public_page_enabled": "yes",
             },
             {
                 "program_key": "gamma",
                 "display_name": "Gamma",
                 "history_start_season": "2000-2001",
+                "history_coverage_status": "UNMIGRATED",
                 "public_page_enabled": "no",
             },
         ]
@@ -150,6 +153,7 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 "program_key",
                 "display_name",
                 "history_start_season",
+                "history_coverage_status",
                 "public_page_enabled",
             ],
             programs,
@@ -350,7 +354,8 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 )
             write_csv(programs_file, [
                 "program_key", "display_name", "history_start_season",
-                "history_scope_intervals", "public_page_enabled",
+                "history_scope_intervals", "history_coverage_status",
+                "public_page_enabled",
             ], programs)
             canonical_file = root / "data/canonical/games.csv"
             with canonical_file.open(newline="", encoding="utf-8") as handle:
