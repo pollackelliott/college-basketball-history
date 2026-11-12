@@ -1,0 +1,40 @@
+name: All-History expansion freeze v2 maintenance validation
+
+on:
+  push:
+    branches:
+      - tooling/all-history-expansion-freeze-v2
+
+permissions:
+  contents: read
+
+concurrency:
+  group: all-history-expansion-freeze-v2-validation
+  cancel-in-progress: false
+
+jobs:
+  expansion-freeze-v2-regression:
+    name: Exact-branch expansion freeze and nonregression
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile changed tooling and focused tests
+        run: |
+          python -m py_compile tools/all_history_expansion_freeze.py tests/test_all_history_expansion_freeze.py
+      - name: Expansion freeze v1/v2 regression
+        run: |
+          python -m unittest discover -s tests -p 'test_all_history_expansion_freeze.py' -v
+      - name: Expansion classification, universe, and scope nonregression
+        run: |
+          python -m unittest discover -s tests -p 'test_all_history_expansion_research.py' -v
+          python -m unittest discover -s tests -p 'test_all_history_universe.py' -v
+          python -m unittest discover -s tests -p 'test_program_history_scope.py' -v
+      - name: Complete repository unit suite
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py'

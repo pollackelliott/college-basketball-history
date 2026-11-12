@@ -294,3 +294,74 @@ Only the successful serialized mutation path may establish
 `program_inception_season`, change
 `history_coverage_status: LEGACY_TOP_LEVEL_ONLY -> COMPLETE_INSTITUTIONAL`,
 and cause public history to expand.
+
+## 13. Versioned inherited-unpublished reuse and owner scope authority (v2 amendment)
+
+This section **amends Sections 2, 4-6, 11A and 12** solely for the new
+version 2 expansion freeze format. It does not modify ordinary v1 accepted
+freeze artifacts or alter any accepted historical baseline.
+
+### 13.1 Research freeze representation
+
+V1 freezes retain the exact original 11 members and deterministic hashes.
+V2 freezes retain those members and add exactly two files:
+
+- `expansion-inherited-source-references.csv` with fields
+  `source_game_id,season_label,baseline_row_sha256,evidence_basis`;
+- `expansion-scope-authority.json` with exactly
+  `baseline_scope,accepted_scope,authority_kind,owner_decision_reference,scope_notes`.
+
+An inherited **unpublished** source row in an `EXPANSION_REQUIRED` season
+is already accepted Research evidence. V2 includes its exact hash-bound
+reference, **not** an additional `expansion-source-games.csv` row. Every
+inherited unpublished source row must be referenced exactly once: no selective
+omission, mutation, alternate ID, or duplicate representation is permitted.
+The immutable `research_base_sha` must be reauthenticated and must contain
+every referenced source ID with the exact row/season/hash. An inherited
+published-season game, unknown source, exhibition, or wrong school/season must
+fail closed. Active season accounting counts **new supplemental + inherited
+unpublished reused games** with disjoint IDs. New and reused source games are
+distinguishable in the manifest and the original accepted source-game IDs
+survive. No new NON_D1 scan is required merely for referencing unchanged
+inherited opponent or venue identities.
+
+### 13.2 Owner-authorized top-level scope supersession
+
+The ordinary expansion rule (publication scope changes, top-level classification
+does not) remains the default. A **separately and explicitly owner-authorized
+top-level scope supersession**, settled during Research, may be preserved in
+v2. The original scope/reference row hash remains bound to the immutable
+baseline; accepted replacement scope and owner provenance are bound separately.
+Research/freeze do not mutate the shared reference or program record.
+V2 permits `BASELINE_CONFIRMED` unchanged scope or an explicit
+`OWNER_SUPERSESSION` to `INCEPTION+`. Unsupported replacement expressions
+fail closed until a matching deterministic projection is tested.
+
+The v2 manifest derives the exact target program-scope fields for
+`INCEPTION+`: `history_start_season` equals researched inception,
+`history_scope_intervals` is blank, `history_scope_status` is
+`OWNER_CONFIRMED`, `history_scope_basis` is
+`ALWAYS_TOP_LEVEL_FROM_INCEPTION`, and `history_scope_notes` preserves
+the owner-authorized explanation. The scope reference target is
+`INCEPTION+`. A literal owner-decision locator is preserved as an
+auditable assertion, not a self-authenticating proof of the actual owner
+decision. Historical accomplishment audits remain necessary before publishing
+the superseded top-level universe.
+
+### 13.3 Freeze and downstream safeguards
+
+V2 requires exact member population/schema match, deterministic ZIP output,
+independent fresh-verification recomputation, a complete reused-ID census,
+combined active-season totals, and hash-bound scope authority.
+Existing v1 frozen packages remain verifiable by unchanged v1 logic.
+The freeze does **not** reproduce the inherited six-file package or declare
+downstream expansion materialization/Implementation functionality complete.
+
+Later guarded serialized Implementation must materialize inherited unpublished
+source rows **once**, retaining original IDs, and atomically reconcile accepted
+scope into the single target program and top-level reference row, alongside
+the ordinary `COMPLETE_INSTITUTIONAL` transition. This remains subject to
+current-main rebase, Integration Freeze, Gate 1, sealed apply, Preview, Gate 2,
+and exact Production proof. If permanent generic downstream expansion
+Implementation is still missing, it is a separate explicit capability blocker;
+this Research-side v2 repair is not permission to improvise it.
