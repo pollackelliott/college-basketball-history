@@ -551,18 +551,19 @@
     "vcu-correction-stage2-proposal-0001",
     "vcu-correction-stage2-gate1-fill-0002",
     "vcu-correction-stage2-preseal-rehearsal-0001",
-    "vcu-correction-stage2-gate1-seal-0001"
+    "vcu-correction-stage2-gate1-seal-0001",
+    "vcu-correction-stage2-sealed-apply-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43265397866:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "vcu-correction-stage2-sealed-apply-0001",
+  "active_request_sha256": "de0e584e27e30ecf7f58d870fa695a68dcfba18eaa0e0a384b8b6ac70ea7b4c0",
+  "active_school_key": "vcu",
+  "active_target_branch": "data/vcu-correction",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1126,8 +1127,11 @@
     "target_branch": "data/vcu-correction",
     "target_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43265397866",
+  "lock_acquisition_request_commit": "f56b3b8b04b3bea4530d883b32c7993fdf1ee65f",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
