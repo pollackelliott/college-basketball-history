@@ -145,5 +145,99 @@ class Stage1FoundationTests(unittest.TestCase):
                 with self.assertRaisesRegex(Stage1Stop,"SHA-256 mismatch"):
                     stage1(root,"sample",artifact,"0"*64,"b"*40,"a"*40,root.parent/"new-expansion-test-output")
         
+
+class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
+    """Synthetic Git and verifier surfaces test Stage 1 stop boundaries."""
+
+    def _invoke(self, *, drift=False, verify_error=None, accounting_error=None):
+        import zipfile
+        from unittest.mock import patch
+        fixture = Stage1FoundationTests()
+        fixture.setUp()
+        baseline, validated, payload = fixture.fixture()
+        baseline.update({
+            "program": {"program_key": "sample"},
+            "scope_row": {"school": "Sample"},
+            "accomplishment_row": None,
+            "published_canonical_ids": [],
+            "package_member_sha256": {k: sha256(v) for k, v in baseline["package_bytes"].items()},
+        })
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "checkout"
+            repo.mkdir()
+            artifact = root / "accepted.zip"
+            with zipfile.ZipFile(artifact, "w") as archive:
+                archive.writestr("expansion-freeze.json", json.dumps({
+                    "researched_inception_season": "1966-1967", "schema_version": 1,
+                }))
+                for name, raw in payload.items():
+                    archive.writestr(name, raw)
+            main = "a" * 40
+            base = "b" * 40
+            expected = sha256(artifact.read_bytes())
+            output = root / "rehearsal"
+
+            def git_show(_repo, commit, path):
+                name = path.rsplit("/", 1)[-1]
+                if name in baseline["package_bytes"]:
+                    content = baseline["package_bytes"][name]
+                    if drift and commit == main and name == "source-games.csv":
+                        return content + b"current-main-drift"
+                    return content
+                raise AssertionError(path)
+
+            def read_rows(_repo, _sha, path):
+                if path.endswith("programs.csv"):
+                    return [baseline["program"]]
+                if path.endswith("program-top-level-scope.csv"):
+                    return [baseline["scope_row"]]
+                return []
+
+            def verification(_repo, _artifact):
+                if verify_error:
+                    raise ValueError(verify_error)
+                return {"status": "VERIFIED_EXPANSION_RESEARCH_FROZEN",
+                        "school_key": "sample", "research_base_sha": base}
+
+            def validated_delta(*_args):
+                if accounting_error:
+                    raise ValueError(accounting_error)
+                return validated
+
+            with patch("expansion_implementation_stage1.git_revision", return_value=main), \
+                 patch("expansion_implementation_stage1.git_bytes", side_effect=git_show), \
+                 patch("expansion_implementation_stage1.read_csv_at_git", side_effect=read_rows), \
+                 patch("expansion_implementation_stage1.verify_expansion", side_effect=verification), \
+                 patch("expansion_implementation_stage1.authenticate_baseline", return_value=baseline), \
+                 patch("expansion_implementation_stage1.validate_delta_payload", side_effect=validated_delta):
+                if verify_error or accounting_error:
+                    with self.assertRaisesRegex(ValueError, verify_error or accounting_error):
+                        stage1(repo, "sample", artifact, expected, base, main, output)
+                    self.assertFalse(output.exists(), "Rejected inputs cannot materialize candidate")
+                    return None
+                result = stage1(repo, "sample", artifact, expected, base, main, output)
+                self.assertEqual(result["status"], "BLOCKED")
+                self.assertEqual(result["write_authority"], "NONE_REHEARSAL_ONLY")
+                self.assertFalse((repo / "schools").exists())
+                self.assertTrue((output / "expansion-stage1-reconciliation.json").exists())
+                return result
+
+    def test_changed_inherited_package_is_explicit_blocker(self):
+        result = self._invoke(drift=True)
+        self.assertIn("CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+                      [b["class"] for b in result["blockers"]])
+
+    def test_modified_member_fails_permanent_freeze_verification(self):
+        self._invoke(verify_error="frozen payload member SHA-256 map mismatch")
+
+    def test_missing_season_accounting_fails_before_projection(self):
+        self._invoke(accounting_error="season accounting mismatch")
+
+    def test_unblocked_source_projection_still_cannot_publish(self):
+        result = self._invoke()
+        self.assertEqual([b["class"] for b in result["blockers"]], [
+            "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"])
+
 if __name__=="__main__":
     unittest.main()
