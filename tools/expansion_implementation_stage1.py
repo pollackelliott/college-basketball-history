@@ -249,6 +249,86 @@ def reconcile_canonical(school: str, supplemental: list[dict[str, str]],
     }
 
 
+
+def reconcile_global_venues(
+    support_rows: list[dict[str, str]],
+    registered_venues: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Classify global venue reuse without inventing IDs or changing candidates.
+
+    NEW_SUPPLEMENTAL denotes new *school* support, not a new physical building.
+    An already-registered venue_key is reused only when its physical identity
+    and any explicitly carried global ID agree. Ambiguity is a blocker.
+    """
+    by_key: dict[str, list[dict[str, str]]] = defaultdict(list)
+    by_id: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in registered_venues:
+        by_key[row.get("venue_key", "").strip()].append(row)
+        if row.get("venue_id", "").strip():
+            by_id[row["venue_id"].strip()].append(row)
+    rows: list[dict[str, str]] = []
+    blockers: list[dict[str, Any]] = []
+    counts: Counter[str] = Counter()
+    for item in support_rows:
+        key = item["venue_key"].strip()
+        support_id = item["support_id"].strip()
+        candidate = json.loads(item["candidate_row_json"])
+        matches = by_key.get(key, [])
+        reasons: list[str] = []
+        existing_id = ""
+        if len(matches) > 1:
+            reasons.append("DUPLICATE_GLOBAL_VENUE_KEY")
+        elif len(matches) == 1:
+            registered = matches[0]
+            existing_id = registered.get("venue_id", "").strip()
+            candidate_id = candidate.get("venue_id", "").strip()
+            if not existing_id:
+                reasons.append("REGISTERED_VENUE_ID_MISSING")
+            elif candidate_id and candidate_id != existing_id:
+                reasons.append("REGISTERED_VENUE_ID_CONFLICT")
+            if (candidate.get("canonical_name", "").strip().casefold()
+                    != registered.get("display_name", "").strip().casefold()):
+                reasons.append("REGISTERED_VENUE_NAME_REVIEW")
+            for field in ("city", "state"):
+                declared = candidate.get(field, "").strip()
+                official = registered.get(field, "").strip()
+                if not declared or not official or declared.casefold() != official.casefold():
+                    reasons.append("REGISTERED_VENUE_GEOGRAPHY_REVIEW")
+                    break
+        else:
+            candidate_id = candidate.get("venue_id", "").strip()
+            if candidate_id:
+                reasons.append("UNREGISTERED_VENUE_ID_REFERENCE")
+                if by_id.get(candidate_id):
+                    reasons.append("GLOBAL_VENUE_ID_USED_BY_DIFFERENT_KEY")
+        status = (
+            "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER" if reasons else
+            "REUSE_REGISTERED_GLOBAL_VENUE" if matches else
+            "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED"
+        )
+        counts[status] += 1
+        rows.append({
+            "support_id": support_id, "venue_key": key,
+            "support_action": item["support_action"],
+            "global_reconciliation_class": status,
+            "existing_global_venue_id": existing_id,
+        })
+        for reason in reasons:
+            blockers.append({
+                "class": reason, "support_id": support_id, "venue_key": key,
+                "registered_venue_id": existing_id,
+            })
+    return {
+        "counts": {k: counts[k] for k in (
+            "REUSE_REGISTERED_GLOBAL_VENUE",
+            "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED",
+            "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER",
+        )},
+        "rows": rows,
+        "blockers": blockers,
+    }
+
+
 def read_csv_at_git(repo: Path, commit: str, path: str) -> list[dict[str, str]]:
     return csv_rows(git_bytes(repo, commit, path), path)[1]
 
@@ -302,26 +382,13 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
     canonical_drift = sorted(k for k in baseline_ids if base_by_id.get(k) != main_by_id.get(k))
     if canonical_drift:
         blockers.append({"class": "CURRENT_MAIN_INHERITED_CANONICAL_DRIFT", "canonical_game_ids": canonical_drift})
-    # A registered venue key is a physical identity, not permission to overwrite a different building.
     global_venues = read_csv_at_git(repo, main_sha, "data/reference/venues.csv")
-    venues_by_key: dict[str, list[dict[str, str]]] = defaultdict(list)
-    for venue in global_venues:
-        venues_by_key[venue.get("venue_key", "").strip()].append(venue)
+    global_venue_reconciliation = reconcile_global_venues(
+        validated["venue_support_rows"], global_venues,
+    )
+    blockers.extend(global_venue_reconciliation["blockers"])
     registered_programs = {r["program_key"] for r in read_csv_at_git(
         repo, main_sha, "data/reference/programs.csv")}
-    for item in validated["venue_support_rows"]:
-        proposed = json.loads(item["candidate_row_json"])
-        matches = venues_by_key.get(item["venue_key"].strip(), [])
-        if len(matches) > 1:
-            blockers.append({"class": "DUPLICATE_GLOBAL_VENUE_KEY", "support_id": item["support_id"]})
-        elif matches:
-            current = matches[0]
-            if (proposed.get("city", "").casefold(), proposed.get("state", "").upper()) != (
-                current.get("city", "").casefold(), current.get("state", "").upper()
-            ) and proposed.get("city") and proposed.get("state"):
-                blockers.append({"class": "CONFLICTING_GLOBAL_VENUE_GEOGRAPHY",
-                                 "support_id": item["support_id"],
-                                 "existing_venue_id": current.get("venue_id", "")})
     for item in validated["opponent_support_rows"]:
         proposed = json.loads(item["candidate_row_json"])
         if (item["canonical_opponent_key"] in registered_programs and
@@ -352,7 +419,8 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
         "season_accounting_count": len(validated["season_accounting_rows"]),
         "non_d1_owner_scan_count": len(validated["non_d1_scan_rows"]),
         "accepted_residual_count": len(validated["residual_rows"]),
-        "census": census, "canonical_identity_census": identity, "blockers": blockers,
+        "census": census, "global_venue_reconciliation": global_venue_reconciliation,
+        "canonical_identity_census": identity, "blockers": blockers,
         "write_authority": "NONE_REHEARSAL_ONLY",
     }
     output.mkdir(parents=True)
