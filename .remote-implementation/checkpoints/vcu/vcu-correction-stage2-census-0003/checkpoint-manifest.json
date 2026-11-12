@@ -1,0 +1,93 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "f1cbb96f88ef83d7219d93687344688dd9515b615c4526b79f200d1ce638ca1b",
+    "implementation-stage2-status.json": "4d2ae85d99b8707c3b6843375763007b23ed27fa2202712eeeb4258bab8b6d1f",
+    "plan.json": "ad157e07392e2297090f6701324c5959d8a5c52e3dd781c4148937f085330658",
+    "review.csv": "3dde1d8ca848bc98366a3161c19ea76abfd6f4135e17331e7c256a21c7a51961",
+    "review.md": "14977bbddba9134c4bf7cb96c7ee40b77d645aefbde4cbe906f1f02858a27e46"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "f1cbb96f88ef83d7219d93687344688dd9515b615c4526b79f200d1ce638ca1b",
+    "implementation-stage2-status.json": "c5f7464453bdc79af1912a37de932c4e4b628a91e202afb5045dce5afa82a4c2",
+    "plan.json": "baeec579f67a5778fc7031586d7ecc7f064d8a730fafb960ecb9ff5ccf91f0f0",
+    "review.csv": "3dde1d8ca848bc98366a3161c19ea76abfd6f4135e17331e7c256a21c7a51961",
+    "review.md": "8c27c4badb8627b837e759695e66c7ee05ca884d7d63b47cad46781a07754332"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "f1cbb96f88ef83d7219d93687344688dd9515b615c4526b79f200d1ce638ca1b",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "correction_identity_patch": 4
+    },
+    "decision_count": 4,
+    "decision_fields": {
+      "normalized_opponent_key": 4
+    },
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": ".remote-implementation/inputs/vcu-correction-stage2-census-0001/integration-freeze.json",
+  "correction_integration_freeze_sha256": "abc6b38a7aa987caa3023893dfffab8d34fa470210b910e8fcc7f865d4ef7bd8",
+  "correction_origin_main_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "decision_universe_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "abc6b38a7aa987caa3023893dfffab8d34fa470210b910e8fcc7f865d4ef7bd8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "vcu"
+  ],
+  "phase0_protected_main_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "phase0_successor_path": null,
+  "phase0_successor_sha256": null,
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "correction_identity_patch": 4
+    },
+    "decision_count": 4,
+    "decision_universe_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 1650,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/vcu/plan.json",
+    "review_path": ".onboarding/vcu/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
+  "request_id": "vcu-correction-stage2-census-0003",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "34d1020ec913bfa5336e75f112a3c56039ad66b6ef3b049d0edf8bc4df5a865d",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "POST_PUBLICATION_CORRECTION",
+  "target_branch": "data/vcu-correction",
+  "target_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+  "target_tree_sha": "258cecbe2cdd136614a995b1529884497469bb1f",
+  "tracked_mutation_proof": {
+    "after_head_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+    "after_status": "",
+    "after_tree_sha": "258cecbe2cdd136614a995b1529884497469bb1f",
+    "before_head_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+    "before_status": "",
+    "before_tree_sha": "258cecbe2cdd136614a995b1529884497469bb1f",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
