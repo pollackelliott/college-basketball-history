@@ -1,0 +1,28 @@
+name: All-History expansion Stage 1 foundation
+
+on:
+  pull_request:
+    paths:
+      - 'tools/expansion_implementation_stage1.py'
+      - 'tests/test_expansion_implementation_stage1.py'
+      - '.github/workflows/all-history-expansion-stage1-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  expansion-stage1-and-nonregression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Expansion Stage 1 focused regression
+        run: python -m unittest discover -s tests -p 'test_expansion_implementation_stage1.py' -v
+      - name: Full repository unittest nonregression
+        run: python -m unittest discover -s tests -p 'test_*.py'
