@@ -239,5 +239,57 @@ class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
         self.assertEqual([b["class"] for b in result["blockers"]], [
             "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"])
 
+
+class GlobalVenueReconciliationTests(unittest.TestCase):
+    def row(self, key="town-hall", name="Town Hall", city="Midtown", state="VA", vid=""):
+        return {"support_id": "venue-1", "support_action": "NEW_SUPPLEMENTAL",
+                "venue_key": key,
+                "candidate_row_json": json.dumps({
+                    "venue_key": key, "venue_id": vid,
+                    "canonical_name": name, "city": city, "state": state})}
+
+    def global_row(self, key="town-hall", name="Town Hall", city="Midtown", state="VA", vid="VEN-000001"):
+        return {"venue_key": key, "venue_id": vid, "display_name": name,
+                "city": city, "state": state}
+
+    def run_census(self, supp, global_rows):
+        from expansion_implementation_stage1 import reconcile_global_venues
+        return reconcile_global_venues(supp, global_rows)
+
+    def test_registered_physical_identity_reused_with_blank_candidate_id(self):
+        result = self.run_census([self.row()], [self.global_row()])
+        self.assertEqual(result["counts"]["REUSE_REGISTERED_GLOBAL_VENUE"], 1)
+        self.assertEqual(result["rows"][0]["existing_global_venue_id"], "VEN-000001")
+        self.assertEqual(result["blockers"], [])
+
+    def test_new_school_venue_requires_future_global_registration(self):
+        result = self.run_census([self.row()], [])
+        self.assertEqual(result["counts"]["NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED"], 1)
+        self.assertEqual(result["rows"][0]["existing_global_venue_id"], "")
+        self.assertFalse(result["blockers"])
+
+    def test_conflicting_geography_is_not_silent_reuse(self):
+        result = self.run_census([self.row(city="Elsewhere")], [self.global_row()])
+        self.assertEqual(result["counts"]["GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER"], 1)
+        self.assertIn("REGISTERED_VENUE_GEOGRAPHY_REVIEW", [b["class"] for b in result["blockers"]])
+
+    def test_conflicting_global_id_is_not_reassigned(self):
+        result = self.run_census([self.row(vid="VEN-999999")], [self.global_row()])
+        self.assertIn("REGISTERED_VENUE_ID_CONFLICT", [b["class"] for b in result["blockers"]])
+
+    def test_conflicting_canonical_name_requires_review(self):
+        result = self.run_census([self.row(name="Another Building")], [self.global_row()])
+        self.assertIn("REGISTERED_VENUE_NAME_REVIEW", [b["class"] for b in result["blockers"]])
+
+    def test_duplicate_registered_global_venue_keys_are_rejected(self):
+        result = self.run_census([self.row()], [self.global_row(), self.global_row(vid="VEN-000002")])
+        self.assertIn("DUPLICATE_GLOBAL_VENUE_KEY", [b["class"] for b in result["blockers"]])
+
+    def test_new_candidate_cannot_reuse_id_of_different_venue(self):
+        result = self.run_census([self.row(vid="VEN-000001")],
+                                 [self.global_row(key="other-key")])
+        self.assertIn("GLOBAL_VENUE_ID_USED_BY_DIFFERENT_KEY",
+                      [b["class"] for b in result["blockers"]])
+
 if __name__=="__main__":
     unittest.main()
