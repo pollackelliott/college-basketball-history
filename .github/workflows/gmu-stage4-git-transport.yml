@@ -1,0 +1,73 @@
+name: Temporary George Mason Stage 4 authenticated Git transport
+
+on:
+  push:
+    branches:
+      - tooling/gmu-stage4-git-transport
+
+permissions:
+  contents: read
+
+jobs:
+  export-immutable-git:
+    name: Export authenticated Git objects for external read-only Stage 4
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Exact-history checkout with blob-on-demand
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+
+      - name: Authenticate immutable SHA and hydrate required historical objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAIN=3375bf111c3f327d35e617af16582aca15d2597a
+          BASE=df73675852ec5a43dfac50da0ee06d8bcabf8832
+          test "$(git rev-parse HEAD^)" = "$MAIN"
+          test "$(git rev-parse "$BASE^{commit}")" = "$BASE"
+          for path in \
+            data/reference/programs.csv \
+            data/reference/program-top-level-scope.csv \
+            data/reference/program-accomplishments.csv \
+            data/canonical/games.csv \
+            schools/george-mason/source-games.csv \
+            schools/george-mason/opponents.csv \
+            schools/george-mason/venues.csv \
+            schools/george-mason/conferences.csv \
+            schools/george-mason/notes.md \
+            schools/george-mason/source-notes.md \
+            data/reference/frozen-home-venue-exceptions.csv
+          do
+            git show "$BASE:$path" >/dev/null
+          done
+          test "$(git rev-parse HEAD^)" = "$MAIN"
+
+      - name: Export credential-free Git object database
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "$RUNNER_TEMP/gmu-stage4-object-export"
+          mkdir -p "$RUNNER_TEMP/gmu-stage4-object-export"
+          cp -a .git "$RUNNER_TEMP/gmu-stage4-object-export/.git"
+          cd "$RUNNER_TEMP/gmu-stage4-object-export"
+          git remote remove origin
+          git config --local --unset-all credential.helper || true
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          git config --local --unset-all core.sshCommand || true
+          git rev-parse df73675852ec5a43dfac50da0ee06d8bcabf8832^{commit}
+          git show df73675852ec5a43dfac50da0ee06d8bcabf8832:data/canonical/games.csv > /dev/null
+          tar -czf "$RUNNER_TEMP/gmu-stage4-authenticated-git.tar.gz" .git
+          sha256sum "$RUNNER_TEMP/gmu-stage4-authenticated-git.tar.gz"
+          du -h "$RUNNER_TEMP/gmu-stage4-authenticated-git.tar.gz"
+
+      - name: Publish short-lived authenticated Git object artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gmu-stage4-authenticated-git-3375bf111c3f327d35e617af16582aca15d2597a
+          path: ${{ runner.temp }}/gmu-stage4-authenticated-git.tar.gz
+          if-no-files-found: error
+          retention-days: 2
