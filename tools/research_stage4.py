@@ -65,6 +65,17 @@ OPPONENT_FIELDS = {
     "user_choice",
     "audit_note",
 }
+# Accepted Stage 2 authoring capsules used these names before the Stage 4
+# package schema was standardized. Translation is in memory only: no checkpoint
+# CSV or original manifest is rewritten, and conflicting dual headers fail closed.
+LEGACY_OPPONENT_FIELD_ALIASES = {
+    "canonical_opponent_name": "canonical_opponent_display_name",
+    "current_d1": "current_d1_at_research_base",
+    "games_with_source_label": "game_count",
+    "user_choice": "owner_choice",
+    "audit_note": "audit_provenance_note",
+}
+
 VENUE_FIELDS = {
     "source_program_key",
     "venue_key",
@@ -144,6 +155,53 @@ NON_D1_VALUES = {"no", "false", "0", "n", "non_d1", "non-d1", "non d1"}
 def _csv_bytes(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
     reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig"), newline=""))
     return list(reader.fieldnames or []), list(reader)
+
+
+def _opponent_authoring_schema_compatibility(
+    fields: list[str],
+    rows: list[dict[str, str]],
+) -> tuple[list[str], list[dict[str, str]], list[dict[str, Any]], dict[str, Any]]:
+    """Project documented legacy Stage 2 opponent columns without changing evidence.
+
+    Only a known one-to-one column alias is allowed. An existing canonical
+    column takes precedence only when a simultaneous legacy column agrees
+    on every row; disagreements remain preflight defects. All input columns
+    are retained alongside projected canonical fields for literal provenance.
+    """
+    normalized_fields = list(fields)
+    normalized_rows = [dict(row) for row in rows]
+    defects: list[dict[str, Any]] = []
+    projected: list[str] = []
+    for canonical, legacy in LEGACY_OPPONENT_FIELD_ALIASES.items():
+        if legacy not in fields:
+            continue
+        if canonical in fields:
+            for line, row in enumerate(rows, start=2):
+                accepted = (row.get(canonical) or "").strip()
+                inherited = (row.get(legacy) or "").strip()
+                if accepted != inherited:
+                    defects.append({
+                        "reason": "LEGACY_OPPONENT_SCHEMA_ALIAS_CONFLICT",
+                        "table": "opponents.csv",
+                        "line": line,
+                        "canonical_column": canonical,
+                        "legacy_column": legacy,
+                        "canonical_value": accepted,
+                        "legacy_value": inherited,
+                    })
+            continue
+        normalized_fields.append(canonical)
+        for row in normalized_rows:
+            row[canonical] = row.get(legacy, "")
+        projected.append(canonical)
+    return normalized_fields, normalized_rows, defects, {
+        "legacy_schema_detected": bool(
+            set(fields) & set(LEGACY_OPPONENT_FIELD_ALIASES.values())
+        ),
+        "projected_canonical_columns": sorted(projected),
+        "source_opponent_rows": len(rows),
+        "projection_is_in_memory_only": True,
+    }
 
 
 def _write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None:
@@ -1682,6 +1740,10 @@ def inspect_checkpoint(
                 )
 
         opp_fields, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
+        (
+            opp_fields, opponents, opponent_schema_defects,
+            opponent_schema_summary,
+        ) = _opponent_authoring_schema_compatibility(opp_fields, opponents)
         venue_fields, venues = _csv_bytes(archive.read(members["venues.csv"]))
         conf_fields, conferences = _csv_bytes(archive.read(members["conferences.csv"]))
         games, projection_defects = _projection(
@@ -1762,6 +1824,7 @@ def inspect_checkpoint(
                 table="conferences.csv",
             )
         )
+        result["defects"].extend(opponent_schema_defects)
         result["defects"].extend(projection_defects)
         result["defects"].extend(_mapping_defects(games, package_opponents))
         result["defects"].extend(_venue_defects(games, venues))
@@ -1809,6 +1872,7 @@ def inspect_checkpoint(
                 "opponent_rows": len(package_opponents),
                 "authoring_opponent_rows": len(opponents),
                 "legacy_opponent_compatibility": opponent_compatibility_summary,
+                "legacy_opponent_schema_compatibility": opponent_schema_summary,
                 "venue_rows": len(venues),
                 "conference_rows": len(conferences),
                 "projected_source_games": len(games),
@@ -1894,6 +1958,15 @@ def author(
             for filename in AUTHORING_FILES
         }
         opp_fields, opponents = _csv_bytes(archive.read(members["opponents.csv"]))
+        (
+            opp_fields, opponents, opponent_schema_defects,
+            _,
+        ) = _opponent_authoring_schema_compatibility(opp_fields, opponents)
+        if opponent_schema_defects:
+            raise ValueError(
+                "Stage 4 opponent authoring schema conflict: "
+                + json.dumps(opponent_schema_defects[:10], sort_keys=True)
+            )
         venue_fields, venues = _csv_bytes(archive.read(members["venues.csv"]))
         games, defects = _projection(
             ledger,

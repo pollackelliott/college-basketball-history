@@ -1,0 +1,38 @@
+name: Stage 4 legacy opponent schema compatibility regression
+
+on:
+  push:
+    branches:
+      - tooling/vcu-stage4-opponent-schema-compatibility
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vcu-stage4-opponent-schema-compatibility
+  cancel-in-progress: false
+
+jobs:
+  legacy-opponent-schema-regression:
+    name: Exact-commit Stage 4 schema compatibility and full regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: tools:tests
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile source and new tests
+        run: python -m py_compile tools/research_stage4.py tests/test_research_stage4_opponent_schema.py
+      - name: Focused Stage 4 opponent schema and existing Stage 4 tests
+        run: |
+          python -m unittest discover -s tests -p 'test_research_stage4_opponent_schema.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage4.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage4_closeout.py' -v
+      - name: Run full repository nonregression suite
+        run: python -m unittest discover -s tests -p 'test_*.py'

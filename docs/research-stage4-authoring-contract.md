@@ -237,7 +237,9 @@ The coordinator:
 
 1. reruns Stage 4 authoring preflight;
 2. projects the accepted final Stage 3B ledger to current source-games.csv;
-3. copies the three durable authoring tables unchanged;
+3. copies durable venue/conference authoring unchanged and projects only documented
+   legacy Stage 2 opponent field aliases into the package in memory, retaining
+   the literal accepted opponent capsule and its original member hash;
 4. generates notes.md and source-notes.md mechanically from durable checkpoint state,
    including machine-readable primary-source and required-completed-season cutoffs;
 5. invokes the permanent Stage 4 closeout gate;
@@ -270,6 +272,20 @@ Specific legacy postseason labels may normalize to the controlled generic POSTSE
 vocabulary only when their literal event/source identity remains preserved; CIT is such
 a compatibility label and does not become NCAA, NIT, conference tournament, or regular
 season.
+
+The narrowly accepted Stage 2 opponent-capsule field aliases are:
+`canonical_opponent_display_name` → `canonical_opponent_name`,
+`current_d1_at_research_base` → `current_d1`,
+`game_count` → `games_with_source_label`,
+`owner_choice` → `user_choice`, and
+`audit_provenance_note` → `audit_note`. Only these exact one-to-one
+header mappings are permitted. The original checkpoint member and every
+accepted mapping remain unchanged; the generated six-file opponent table
+retains original columns alongside required canonical columns. If a row
+contains both corresponding columns with conflicting values, the permanent
+preflight fails instead of silently selecting either. Missing identity keys,
+invalid D1 flags, broken provenance and unrelated authoring defects remain
+blocking.
 
 A legacy Stage 3B checkpoint that predates this authoring-capsule contract may legitimately lack package-authoring state. That is a bounded compatibility-recovery problem, not permission to reconstruct prior opponent/conference decisions from present-day registry state or conversational memory.
 
