@@ -1111,7 +1111,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/vcu/vcu-correction-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "b4d83d838ec243d7f8173603dd2fd91f21966c4bdafe4a8f80b74a2b0ccbbd17",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/vcu/vcu-correction-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "cab1f110e2acbb41c08aaac043e1e53ab95428d365d1ac94ade7ae7d463e78c7",
     "merged": false,
@@ -1120,7 +1120,7 @@
     "pr_number": 566,
     "production_request_id": "vcu-correction-release-production-proof-0001",
     "protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "vcu-correction-release-gate2-approval-0001",
     "school_key": "vcu",
     "target_branch": "data/vcu-correction",
