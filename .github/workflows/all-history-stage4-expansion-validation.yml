@@ -17,6 +17,8 @@ jobs:
     name: Exact-commit Stage 4 / expansion / full-suite regression
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      PYTHONPATH: tools:.
     steps:
       - name: Checkout entire immutable Git history for baseline proof
         uses: actions/checkout@v4
