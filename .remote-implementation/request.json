@@ -1,16 +1,14 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-correction-release-readiness-0001",
+  "request_id": "vcu-correction-release-preview-verify-0001",
   "school_key": "vcu",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "3cac7159e0552cdbc08c21b6c2ecc00cf90a867e",
-  "previous_control_state_sha256": "57fa63fc166454020d3d83ef60bfe2470a99a425d786a66425c8b6e0070b07a1",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "29208aace5a12661f1ffad07ad2d437608ce691b",
+  "previous_control_state_sha256": "e2e1d5d06c55ad77522a69b12217c2744e3f244c35ab465c2f3d1750605db484",
   "expected_protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
   "target_branch": "data/vcu-correction",
   "target_sha": "b7077c8a2fb871a6917d296ec3efd12284b53302",
-  "approved_plan_hash": "3a1e5bb5235eb827f83e2287b8114ff18165bd02007254625b0f0aa87bcb2f87",
-  "release_manifest_sha256": "e8d4f177674cf8a7255ce2ba9ed4532596d092b3a3e740098e7ab2cd458db431",
   "stage2_apply_successor": {
     "path": ".remote-implementation/successors/vcu/vcu-correction-stage2-sealed-apply-0001/successor-manifest.json",
     "sha256": "f3e9519b7c1e326b334f14db2a14c13cc3b5c94ab57f4c083cca33409a6480e0"
@@ -19,13 +17,20 @@
     "path": ".remote-implementation/verifications/vcu/vcu-correction-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
     "sha256": "5db169f4fcdfcfb09120c18a16f76c1020324252ad059dd552622d8933734e9e"
   },
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "vcu-correction-release-preview-verify-0001"
+  "approved_plan_hash": "3a1e5bb5235eb827f83e2287b8114ff18165bd02007254625b0f0aa87bcb2f87",
+  "release_manifest_sha256": "e8d4f177674cf8a7255ce2ba9ed4532596d092b3a3e740098e7ab2cd458db431",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-correction-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "4f84edbefbcb13ce9ad85f70a295af55915ca1dcae9571292ae229d6009482e8"
   },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-correction-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "23bc02f8d117d707024b0deffb7db7c9afa4395b75f31f70202c2c82b7a7cc95"
+  },
+  "pr_number": 566,
   "creation_provenance": {
-    "origin": "ChatGPT VCU post-publication correction Implementation — owner-authorized release preparation",
-    "authorization": "Owner said 'Proceed' after exact sealed-apply successor b7077c8a2fb871a6917d296ec3efd12284b53302 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, ordinary CI/mergeability checks, exact Vercel Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, additional correction rows, canonical site amendments, or changed historical authority."
+    "origin": "ChatGPT VCU post-publication correction Implementation — release preparation continuation",
+    "authorization": "Continuation of the owner-authorized VCU correction release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #566. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, shared/global mutation, additional correction rows, canonical site amendments, and new historical authority remain forbidden."
   },
   "authority": {
     "owner_gate_1": false,
@@ -35,9 +40,9 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
-    "release_preview_verify": false,
+    "release_preview_verify": true,
     "release_production_proof": false,
-    "release_readiness": true,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
