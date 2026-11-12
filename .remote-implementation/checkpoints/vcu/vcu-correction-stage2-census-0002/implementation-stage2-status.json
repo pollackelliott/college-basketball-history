@@ -1,0 +1,19 @@
+{
+  "branch": "remote-stage2-census/vcu-4abead1cd63d",
+  "head_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+  "integration_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "integration_semantic_sha256": "34d1020ec913bfa5336e75f112a3c56039ad66b6ef3b049d0edf8bc4df5a865d",
+  "last_error": "single-game correction requires exactly one frozen source identity and zero or one canonical site review; broader corrections need explicit tooling",
+  "next_action": "Diagnose this repository/tool failure from durable state and the authoritative permanent-tool output; do not replace the phase with assistant-authored orchestration.",
+  "origin_main_sha_at_integration_freeze": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": null,
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}

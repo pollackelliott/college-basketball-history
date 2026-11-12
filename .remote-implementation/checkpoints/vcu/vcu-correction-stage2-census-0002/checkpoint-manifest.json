@@ -1,0 +1,56 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-status.json": "45c1ea854343628721ad635a2ecb0f679cd199dd502cd16be99daace0a4c47c9"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-status.json": "406258e57a7ae94215ca5be5bf89afedfebfa31ddadc5fbd68a0b9a5ddb83e19"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": null,
+  "capability_census_status": "",
+  "capability_preflight": {},
+  "capability_topology_groups": [],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": ".remote-implementation/inputs/vcu-correction-stage2-census-0001/integration-freeze.json",
+  "correction_integration_freeze_sha256": "abc6b38a7aa987caa3023893dfffab8d34fa470210b910e8fcc7f865d4ef7bd8",
+  "correction_origin_main_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "decision_universe_sha256": null,
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "abc6b38a7aa987caa3023893dfffab8d34fa470210b910e8fcc7f865d4ef7bd8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "vcu"
+  ],
+  "phase0_protected_main_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "phase0_successor_path": null,
+  "phase0_successor_sha256": null,
+  "preflight": {},
+  "protected_main_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "request_id": "vcu-correction-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "34d1020ec913bfa5336e75f112a3c56039ad66b6ef3b049d0edf8bc4df5a865d",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "POST_PUBLICATION_CORRECTION",
+  "target_branch": "data/vcu-correction",
+  "target_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+  "target_tree_sha": "258cecbe2cdd136614a995b1529884497469bb1f",
+  "tracked_mutation_proof": {
+    "after_head_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+    "after_status": "",
+    "after_tree_sha": "258cecbe2cdd136614a995b1529884497469bb1f",
+    "before_head_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+    "before_status": "",
+    "before_tree_sha": "258cecbe2cdd136614a995b1529884497469bb1f",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
