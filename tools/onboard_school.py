@@ -92,6 +92,10 @@ SINGLE_GAME_CORRECTION_KINDS = frozenset({
     "SINGLE_GAME_IDENTITY",
     "SINGLE_GAME_IDENTITY_SITE",
 })
+MULTI_GAME_IDENTITY_CORRECTION_KIND = "MULTI_GAME_IDENTITY_ONLY"
+BOUNDED_CORRECTION_KINDS = SINGLE_GAME_CORRECTION_KINDS | frozenset({
+    MULTI_GAME_IDENTITY_CORRECTION_KIND,
+})
 
 _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE = False
 
@@ -235,30 +239,80 @@ def allowed_apply_path(
     return path in exact or path.startswith("site/data/")
 
 
+def _correction_summary_bindings(summary: dict[str, Any]) -> list[tuple[str, str]]:
+    kind = summary.get("correction_transaction_kind")
+    if kind in SINGLE_GAME_CORRECTION_KINDS:
+        source_id = str(summary.get("correction_source_game_id", "")).strip()
+        game_id = str(summary.get("correction_canonical_game_id", "")).strip()
+        if not source_id or not game_id:
+            raise WorkflowError("invalid sealed single-game correction summary")
+        return [(source_id, game_id)]
+    if kind != MULTI_GAME_IDENTITY_CORRECTION_KIND:
+        return []
+    raw = summary.get("correction_game_bindings")
+    source_ids = summary.get("correction_source_game_ids")
+    game_ids = summary.get("correction_canonical_game_ids")
+    if (not isinstance(raw, list) or not isinstance(source_ids, list)
+        or not isinstance(game_ids, list) or len(raw) < 2):
+        raise WorkflowError("invalid sealed multi-game correction summary")
+    bindings: list[tuple[str, str]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            raise WorkflowError("invalid sealed multi-game correction binding")
+        source_id = str(item.get("source_game_id", "")).strip()
+        game_id = str(item.get("canonical_game_id", "")).strip()
+        if not source_id or not game_id:
+            raise WorkflowError("invalid sealed multi-game correction binding")
+        bindings.append((source_id, game_id))
+    if (len(set(bindings)) != len(bindings)
+        or len({source_id for source_id, _ in bindings}) != len(bindings)
+        or len({game_id for _, game_id in bindings}) != len(bindings)
+        or sorted(source_ids) != sorted(source_id for source_id, _ in bindings)
+        or sorted(game_ids) != sorted(game_id for _, game_id in bindings)):
+        raise WorkflowError("invalid sealed multi-game correction binding population")
+    return sorted(bindings)
+
+
 def correction_gate_kwargs_from_manifest(
     manifest: dict[str, Any], school_key: str,
 ) -> dict[str, Any]:
     """Carry the exact sealed correction proof into verify/Preview/Production gates."""
     summary = manifest.get("summary", {})
-    if summary.get("correction_transaction_kind") not in SINGLE_GAME_CORRECTION_KINDS:
+    kind = summary.get("correction_transaction_kind")
+    if kind not in BOUNDED_CORRECTION_KINDS:
         return {}
     execution = manifest.get("execution", {})
     proof = execution.get("correction_site_nonregression", {})
-    source_id = summary.get("correction_source_game_id", "")
-    game_id = summary.get("correction_canonical_game_id", "")
-    if (
-        manifest.get("school_key") != school_key
-        or not source_id or not game_id
-        or not isinstance(proof, dict)
-        or proof.get("mode") != "SINGLE_GAME_CORRECTION_NONREGRESSION"
-        or proof.get("school_key") != school_key
-        or proof.get("target_game_id") != game_id
-    ):
+    if not isinstance(proof, dict):
         raise WorkflowError("invalid sealed correction site proof in release manifest")
-    return {
-        "correction_source_id": source_id,
-        "correction_site_proof": proof,
-    }
+    bindings = _correction_summary_bindings(summary)
+    source_ids = [source_id for source_id, _ in bindings]
+    game_ids = sorted(game_id for _, game_id in bindings)
+    proof_matches = (
+        proof.get("mode") == "SINGLE_GAME_CORRECTION_NONREGRESSION"
+        and len(game_ids) == 1
+        and proof.get("target_game_id") == game_ids[0]
+    ) or (
+        proof.get("mode") == "MULTI_GAME_CORRECTION_NONREGRESSION"
+        and len(game_ids) >= 2
+        and proof.get("target_game_ids") == game_ids
+    )
+    if (manifest.get("school_key") != school_key
+        or proof.get("school_key") != school_key or not proof_matches):
+        raise WorkflowError("invalid sealed correction site proof in release manifest")
+    if len(source_ids) == 1:
+        return {"correction_source_id": source_ids[0], "correction_site_proof": proof}
+    return {"correction_source_ids": source_ids, "correction_site_proof": proof}
+
+
+def correction_gate_kwargs_from_approved(
+    approved: dict[str, Any], execution: dict[str, Any],
+) -> dict[str, Any]:
+    return correction_gate_kwargs_from_manifest(
+        {"school_key": approved.get("school_key"),
+         "summary": approved.get("summary", {}), "execution": execution},
+        str(approved.get("school_key", "")),
+    )
 
 
 def whitespace_errors(repo: Path, paths: list[str]) -> list[str]:
@@ -280,11 +334,21 @@ def run_gates(
     *,
     include_tests: bool = True,
     correction_source_id: str = "",
+    correction_source_ids: list[str] | None = None,
     correction_site_proof: dict[str, Any] | None = None,
     approved_plan: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     python = sys.executable
     outputs: dict[str, str] = {}
+    scoped_correction_source_ids = list(correction_source_ids or [])
+    if correction_source_id:
+        if scoped_correction_source_ids and correction_source_id not in scoped_correction_source_ids:
+            raise WorkflowError("conflicting correction source identities for gate scope")
+        if not scoped_correction_source_ids:
+            scoped_correction_source_ids = [correction_source_id]
+    if (any(not str(source_id).strip() for source_id in scoped_correction_source_ids)
+        or len(set(scoped_correction_source_ids)) != len(scoped_correction_source_ids)):
+        raise WorkflowError("correction gate source identities must be unique and nonblank")
     gate_context_temp = None
     sealed_context_path = None
     if approved_plan is not None and sealed_pre_ingest_semantic_delta(approved_plan):
@@ -311,10 +375,11 @@ def run_gates(
                 "--check-package",
                 "--repo",
                 str(repo),
-                *(
-                    ["--source-game-id", correction_source_id]
-                    if correction_source_id else []
-                ),
+                *[
+                    argument
+                    for source_id in scoped_correction_source_ids
+                    for argument in ("--source-game-id", source_id)
+                ],
                 *(
                     ["--sealed-plan-context", str(sealed_context_path)]
                     if sealed_context_path is not None else []
@@ -377,7 +442,7 @@ def run_gates(
     for label, command, command_cwd in commands:
         print(f"\n=== {label} ===")
         if label == "site_completeness" and correction_site_proof is not None:
-            if not correction_source_id:
+            if not scoped_correction_source_ids:
                 raise WorkflowError("correction site proof lacks source identity")
             # The independent gate STILL runs and emits its full report.
             failure = None
@@ -1246,6 +1311,45 @@ def _prove_single_game_correction_boundary(
             )
 
 
+def _prove_multi_game_identity_correction_boundary(
+    before: dict[str, tuple[list[str], list[dict[str, str]]]],
+    after: dict[str, tuple[list[str], list[dict[str, str]]]],
+    *, bindings: dict[str, str], school: str,
+) -> None:
+    """Reject any change outside the exact multi-game identity-only population."""
+    if len(bindings) < 2 or len(set(bindings.values())) != len(bindings):
+        raise WorkflowError("multi-game identity correction requires unique source/game bindings")
+    target_sources=set(bindings); target_games=set(bindings.values())
+    keys={"canonical":"canonical_game_id","discrepancy":"discrepancy_id","source":"source_game_id","assertion":"assertion_id"}
+    changed_canonical:set[str]=set(); changed_assertions:set[str]=set()
+    for kind, field in keys.items():
+        old_fields, old_rows = before[kind]; new_fields, new_rows = after[kind]
+        old_ids=[row.get(field,"") for row in old_rows]; new_ids=[row.get(field,"") for row in new_rows]
+        if old_fields != new_fields or old_ids != new_ids or not all(old_ids) or len(set(old_ids)) != len(old_ids):
+            raise WorkflowError(f"multi-game identity correction changed {kind} row IDs/order/schema")
+        altered=[(prior,current) for prior,current in zip(old_rows,new_rows) if prior != current]
+        if kind in {"source","discrepancy"}:
+            if altered: raise WorkflowError(f"multi-game identity correction changed unauthorized {kind} rows")
+            continue
+        for prior,current in altered:
+            if kind == "canonical":
+                game_id=current.get("canonical_game_id","")
+                allowed={"team_a_key","team_b_key","team_a_score","team_b_score","result_winner_team_key","site_type","designated_home_team_key","notes"}
+                authorized=(prior.get("canonical_game_id") == game_id and game_id in target_games and all(prior.get(key)==current.get(key) for key in set(old_fields)-allowed))
+                if authorized: changed_canonical.add(game_id)
+            else:
+                source_id=current.get("source_game_id",""); game_id=current.get("canonical_game_id","")
+                allowed={"normalized_opponent_key","normalized_opponent_name"}
+                authorized=(prior.get("source_program_key")==school and current.get("source_program_key")==school
+                    and prior.get("source_game_id")==source_id and source_id in target_sources
+                    and prior.get("canonical_game_id")==game_id and bindings.get(source_id)==game_id
+                    and all(prior.get(key)==current.get(key) for key in set(old_fields)-allowed))
+                if authorized: changed_assertions.add(source_id)
+            if not authorized: raise WorkflowError(f"multi-game identity correction changed unauthorized {kind} evidence")
+    if changed_canonical != target_games or changed_assertions != target_sources:
+        raise WorkflowError("multi-game identity correction did not change exactly the sealed target rows")
+
+
 def _execute_single_game_correction(
     repo: Path,
     approved: dict[str, Any],
@@ -1342,15 +1446,54 @@ def _execute_single_game_correction(
     }
 
 
+def _execute_multi_game_identity_correction(
+    repo: Path, approved: dict[str, Any],
+) -> dict[str, Any]:
+    school=approved["school_key"]
+    if _validated_correction_freeze_bytes(repo, school) is None:
+        raise WorkflowError("multi-game correction lacks trusted Integration Freeze")
+    summary=approved.get("summary", {})
+    if summary.get("correction_transaction_kind") != MULTI_GAME_IDENTITY_CORRECTION_KIND:
+        raise WorkflowError("invalid sealed multi-game correction transaction kind")
+    binding_rows=_correction_summary_bindings(summary); bindings=dict(binding_rows); items=approved.get("decisions", [])
+    if (len(items) != len(bindings)
+        or any(item.get("category") != "correction_identity_patch" for item in items)
+        or any(item.get("decision") != "APPLY_CORRECTION_IDENTITY_PATCH" for item in items)
+        or {(str(item.get("source_game_id","")).strip(),str(item.get("canonical_game_id","")).strip()) for item in items} != set(binding_rows)):
+        raise WorkflowError("invalid sealed multi-game identity-only correction scope")
+    before=_single_game_correction_snapshot(repo, school); before_site=capture_correction_site_report(repo, school)
+    print("\n=== bounded multi-game correction identity retarget ===")
+    identity=apply_pre_ingest_correction_identity_patches(repo, approved); print(json.dumps(identity, sort_keys=True))
+    print("\n=== bounded multi-game correction reconciliation ===")
+    reconciliation=apply_reconciliation_decisions(repo, approved); print(json.dumps(reconciliation, sort_keys=True))
+    if identity.get("correction_identity_patches") != len(bindings) or reconciliation.get("correction_site_patches",0) != 0:
+        raise WorkflowError("multi-game correction did not apply the exact sealed identity population")
+    after=_single_game_correction_snapshot(repo, school)
+    _prove_multi_game_identity_correction_boundary(before, after, bindings=bindings, school=school)
+    print("PASS: exact multi-game identity-only delta; no unrelated rows changed")
+    archive=archive_approved_plan(repo, approved); print(f"Archived sealed decisions: {archive.relative_to(repo)}")
+    print("\n=== deterministic site build ===")
+    site_output=run([sys.executable,str(_runtime_tool("build_site_data.py")),str(repo),"--apply"],cwd=repo,label="site build apply")
+    first=site_hashes(repo)
+    run([sys.executable,str(_runtime_tool("build_site_data.py")),str(repo),"--apply"],cwd=repo,label="site build determinism replay",echo=False)
+    if first != site_hashes(repo): raise WorkflowError("correction site build was not deterministic")
+    site_proof=prove_correction_site_nonregression(before_site,capture_correction_site_report(repo,school),sorted(bindings.values()))
+    print("PASS: correction site nonregression; inherited full-gate status: "+site_proof["corrected_site_status"])
+    return {"correction_site_nonregression":site_proof,"correction_identity_patches":identity,"reconciliation":reconciliation,"transaction_kind":MULTI_GAME_IDENTITY_CORRECTION_KIND,"archive":archive.relative_to(repo).as_posix(),"site_output":site_output}
+
+
 def execute_approved_in_place(
     repo: Path,
     approved: dict[str, Any],
 ) -> dict[str, Any]:
     school_key = approved["school_key"]
-    if approved.get("summary", {}).get(
+    correction_kind = approved.get("summary", {}).get(
         "correction_transaction_kind"
-    ) in SINGLE_GAME_CORRECTION_KINDS:
+    )
+    if correction_kind in SINGLE_GAME_CORRECTION_KINDS:
         return _execute_single_game_correction(repo, approved)
+    if correction_kind == MULTI_GAME_IDENTITY_CORRECTION_KIND:
+        return _execute_multi_game_identity_correction(repo, approved)
 
     try:
         load_frozen_venue_split_authority(repo, school_key)
@@ -1720,7 +1863,7 @@ def pr_body(approved: dict[str, Any], changed: list[str]) -> str:
                 "- correction-only site nonregression — PASS; inherited full-gate "
                 "failures remain reported"
                 if summary.get("correction_transaction_kind")
-                in SINGLE_GAME_CORRECTION_KINDS
+                in BOUNDED_CORRECTION_KINDS
                 else "- implementation site completeness — PASS"
             ),
             "- accomplishment cross-check — PASS",
@@ -1777,11 +1920,7 @@ def transactional_apply(
         run_gates(
             rehearsal, approved["school_key"], changed, include_tests=True,
             approved_plan=approved,
-            **({
-                "correction_source_id": approved["summary"]["correction_source_game_id"],
-                "correction_site_proof": execution["correction_site_nonregression"],
-            } if approved.get("summary", {}).get("correction_transaction_kind")
-                   in SINGLE_GAME_CORRECTION_KINDS else {}),
+            **correction_gate_kwargs_from_approved(approved, execution),
         )
         copy_validated_changes(rehearsal, repo, after, changed)
 
@@ -1792,11 +1931,7 @@ def transactional_apply(
         changed,
         include_tests=False,
         approved_plan=approved,
-        **({
-            "correction_source_id": approved["summary"]["correction_source_game_id"],
-            "correction_site_proof": execution["correction_site_nonregression"],
-        } if approved.get("summary", {}).get("correction_transaction_kind")
-               in SINGLE_GAME_CORRECTION_KINDS else {}),
+        **correction_gate_kwargs_from_approved(approved, execution),
     )
     output_dir.mkdir(parents=True, exist_ok=True)
     manifest = {

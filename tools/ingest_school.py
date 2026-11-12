@@ -1788,10 +1788,11 @@ def main() -> int:
     )
     parser.add_argument(
         "--source-game-id",
-        default="",
+        action="append",
+        default=[],
         help=(
-            "Limit --check-package dry-run/no-op verification to one existing "
-            "source-game ID; never supported for --apply."
+            "Limit --check-package dry-run/no-op verification to one or more existing "
+            "source-game IDs; repeat the flag for multiple IDs. Never supported for --apply."
         ),
     )
     parser.add_argument(
@@ -1816,6 +1817,8 @@ def main() -> int:
     args = parser.parse_args()
     if args.source_game_id and (not args.check_package or args.apply):
         parser.error("--source-game-id is restricted to --check-package without --apply")
+    if len(set(args.source_game_id)) != len(args.source_game_id):
+        parser.error("--source-game-id values must be unique")
     if args.sealed_plan_context is not None and (
         not args.check_package or args.apply
     ):
@@ -1913,12 +1916,16 @@ def main() -> int:
         history_intervals,
     )
     if args.source_game_id:
+        wanted = set(args.source_game_id)
         matches = [
             row for row in sources
-            if row.get("source_game_id", "").strip() == args.source_game_id
+            if row.get("source_game_id", "").strip() in wanted
         ]
-        if len(matches) != 1:
-            print("FAIL: scoped no-op requires exactly one in-scope source-game ID")
+        if (
+            len(matches) != len(wanted)
+            or {row.get("source_game_id", "").strip() for row in matches} != wanted
+        ):
+            print("FAIL: scoped no-op requires every requested in-scope source-game ID exactly once")
             return 1
         sources = matches
 
