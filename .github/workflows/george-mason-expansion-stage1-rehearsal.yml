@@ -1,0 +1,136 @@
+name: George Mason exact expansion Stage 1 rehearsal
+on:
+  pull_request:
+    paths: ['.github/workflows/george-mason-expansion-stage1-rehearsal.yml']
+permissions:
+  contents: read
+jobs:
+  authentic-stage1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate protected main and immutable Research base
+        run: |
+          test "$(git rev-parse refs/remotes/origin/main)" = "ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd"
+          test "$(git rev-parse --verify df73675852ec5a43dfac50da0ee06d8bcabf8832^{commit})" = "df73675852ec5a43dfac50da0ee06d8bcabf8832"
+          test -z "$(git status --porcelain --untracked-files=no)"
+      - name: Retrieve unreferenced Git blob and verify exact original frozen ZIP bytes
+        env:
+          GITHUB_READ_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          TRANSPORT_DIR: ${{ runner.temp }}
+        run: |
+          python - <<'PY'
+          import os,json,base64,hashlib,lzma
+          from urllib.request import Request,urlopen
+          from zipfile import ZipFile
+          from pathlib import Path
+          blob_sha="dde2c6bc0a4641154732cd822c978a124c61d57d"
+          url=f"https://api.github.com/repos/{os.environ['REPOSITORY']}/git/blobs/{blob_sha}"
+          request=Request(url,headers={
+              "Authorization":"Bearer "+os.environ["GITHUB_READ_TOKEN"],
+              "Accept":"application/vnd.github+json",
+              "X-GitHub-Api-Version":"2022-11-28"})
+          with urlopen(request,timeout=60) as response:
+              blob=json.load(response)
+          if blob.get("sha")!=blob_sha or blob.get("encoding")!="base64":
+              raise SystemExit("unreferenced Git transport blob mismatch")
+          text=base64.b64decode(blob["content"])
+          if hashlib.sha1(b"blob "+str(len(text)).encode()+b"\0"+text).hexdigest()!=blob_sha:
+              raise SystemExit("Git blob raw identity mismatch")
+          if hashlib.sha256(text).hexdigest()!="5b1faa4293a147c04b36e7fb2b882cff15b446d5e3b6cefc366a219ae274ddc4":
+              raise SystemExit("transport text SHA-256 mismatch")
+          compressed=base64.b64decode(b"".join(text.split()),validate=True)
+          if hashlib.sha256(compressed).hexdigest()!="8854b49ac2ecc8bf455bb75c5db5f300c1a10d4c154d7b515cb3c99b926bdb50":
+              raise SystemExit("XZ SHA-256 mismatch")
+          original=lzma.decompress(compressed)
+          freeze_sha="bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236"
+          if hashlib.sha256(original).hexdigest()!=freeze_sha:
+              raise SystemExit("ORIGINAL RESEARCH FREEZE ZIP SHA-256 MISMATCH")
+          target=Path(os.environ["TRANSPORT_DIR"])/"george-mason-expansion-research-frozen.zip"
+          target.write_bytes(original)
+          with ZipFile(target) as archive:
+              if archive.testzip():
+                  raise SystemExit("Freeze ZIP CRC failure")
+              manifest=json.loads(archive.read("expansion-freeze.json"))
+          if (manifest.get("school_key"),manifest.get("research_base_sha"),manifest.get("state"))!=(
+              "george-mason","df73675852ec5a43dfac50da0ee06d8bcabf8832","EXPANSION_RESEARCH_FROZEN"):
+              raise SystemExit("Freeze manifest authority mismatch")
+          print("EXACT_FREEZE_TRANSPORT_VERIFIED",freeze_sha,len(original))
+          PY
+      - name: Permanent full inherited-baseline and expansion-freeze verification
+        run: |
+          python tools/all_history_expansion_freeze.py --repo . verify "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip"
+      - name: Run permanent exact-current-main Stage 1 twice without repository mutation
+        run: |
+          mkdir -p "${RUNNER_TEMP}/gmu-stage1"
+          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd --repo . --output "${RUNNER_TEMP}/gmu-stage1/a" >"${RUNNER_TEMP}/gmu-stage1/run-a.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"; exit 1; }
+          cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"
+          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd --repo . --output "${RUNNER_TEMP}/gmu-stage1/b" >"${RUNNER_TEMP}/gmu-stage1/run-b.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"; exit 1; }
+          cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"
+      - name: Independent byte-level two-rehearsal proof and complete population inventory
+        run: |
+          python - <<'PY'
+          import csv,hashlib,io,json,os,subprocess
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"gmu-stage1"
+          a,b=root/"a",root/"b"
+          members=["source-games.csv","opponents.csv","venues.csv","conferences.csv","notes.md","source-notes.md","expansion-stage1-reconciliation.json"]
+          for name in members:
+              if (a/name).read_bytes()!=(b/name).read_bytes():
+                  raise SystemExit("nondeterministic candidate: "+name)
+          report=json.loads((a/members[-1]).read_text())
+          for name,expected in report["candidate_member_sha256"].items():
+              if hashlib.sha256((a/name).read_bytes()).hexdigest()!=expected:
+                  raise SystemExit("candidate hash mismatch: "+name)
+          raw=subprocess.check_output(["git","show","df73675852ec5a43dfac50da0ee06d8bcabf8832:schools/george-mason/source-games.csv"])
+          inherited=list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"))))
+          combined=list(csv.DictReader((a/"source-games.csv").open(encoding="utf-8")))
+          if len(inherited)!=1455 or len(combined)!=1769 or combined[:1455]!=inherited:
+              raise SystemExit("inherited evidence changed or source count incorrect")
+          if len({r["source_game_id"] for r in combined})!=1769:
+              raise SystemExit("duplicate source-game IDs")
+          census=report["census"]
+          if (census["inherited_source_game_count"],census["supplemental_new_source_game_count"])!=(1455,314):
+              raise SystemExit("source count mismatch")
+          identity=report["canonical_identity_census"]
+          if len(identity["game_rows"])!=314 or sum(identity["counts"].values())!=314:
+              raise SystemExit("canonical match population incomplete")
+          if census["opponent_support_actions"]["NEW_SUPPLEMENTAL"]!=96 or census["opponent_support_actions"]["EXTEND_INHERITED"]!=25:
+              raise SystemExit("opponent actions changed")
+          if census["venue_support_actions"]["NEW_SUPPLEMENTAL"]!=7 or census["venue_support_actions"]["EXTEND_INHERITED"]!=1:
+              raise SystemExit("venue actions changed")
+          if report["status"]!="BLOCKED" or report["write_authority"]!="NONE_REHEARSAL_ONLY":
+              raise SystemExit("unauthorized integration advance")
+          if subprocess.check_output(["git","status","--porcelain","--untracked-files=no"]).strip():
+              raise SystemExit("tracked repository mutation detected")
+          proof={"status":"INDEPENDENTLY_REPRODUCED_READ_ONLY_STAGE1",
+                 "protected_main_sha":"ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd",
+                 "research_base_sha":"df73675852ec5a43dfac50da0ee06d8bcabf8832",
+                 "freeze_zip_sha256":"bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
+                 "identity_counts":identity["counts"],
+                 "support_opponents":census["opponent_support_actions"],
+                 "support_venues":census["venue_support_actions"],
+                 "global_venue_counts":report["global_venue_reconciliation"]["counts"],
+                 "blockers":report["blockers"],
+                 "candidate_sha256":{name:hashlib.sha256((a/name).read_bytes()).hexdigest() for name in members},
+                 "integration_freeze_authorized":False}
+          serialized=(json.dumps(proof,sort_keys=True,separators=(",",":"))+"\n").encode()
+          (root/"independent-proof.json").write_bytes(serialized)
+          print("INDEPENDENT_PROOF_SHA256",hashlib.sha256(serialized).hexdigest())
+          print("RECONCILIATION_COUNTS",json.dumps({k:proof[k] for k in ("identity_counts","support_opponents","support_venues","global_venue_counts")},sort_keys=True))
+          print("BLOCKER_CLASSES",json.dumps([x["class"] for x in proof["blockers"]],sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: george-mason-exact-stage1-rehearsal
+          path: ${{ runner.temp }}/gmu-stage1/
+          retention-days: 30
+          if-no-files-found: warn
