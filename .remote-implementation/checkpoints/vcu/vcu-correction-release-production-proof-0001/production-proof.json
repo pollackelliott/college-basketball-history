@@ -1,0 +1,23 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
+  "merge_parent_onboarding": "b7077c8a2fb871a6917d296ec3efd12284b53302",
+  "merge_sha": "97849df4bb09d084fac20b478e1ca1bc0a400edb",
+  "owner_gate_2_approval_checkpoint_sha256": "b4d83d838ec243d7f8173603dd2fd91f21966c4bdafe4a8f80b74a2b0ccbbd17",
+  "owner_gate_2_verification_sha256": "d9c50e5495d205e2962a042a86d54ebc48d21fc24ce4a90acf801b8a6cc11eb3",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "b7077c8a2fb871a6917d296ec3efd12284b53302",
+  "pr_number": 566,
+  "production_deployment_id": 7745592714,
+  "production_deployment_sha": "97849df4bb09d084fac20b478e1ca1bc0a400edb",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/vcu.json"
+  ],
+  "production_json_checked_count": 3,
+  "school_key": "vcu",
+  "status": "COMPLETE"
+}

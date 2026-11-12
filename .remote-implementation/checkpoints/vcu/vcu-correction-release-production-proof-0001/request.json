@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "vcu-correction-release-production-proof-0001",
+  "school_key": "vcu",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "358b30e04729aa807c6b963a4b289916099809d1",
+  "previous_control_state_sha256": "05dc0897515f1efbbba975b9e12d3fc7734a9cb7e7e8bef4666db9023469e150",
+  "expected_protected_main_sha": "97849df4bb09d084fac20b478e1ca1bc0a400edb",
+  "target_branch": "data/vcu-correction",
+  "target_sha": "b7077c8a2fb871a6917d296ec3efd12284b53302",
+  "pr_number": 566,
+  "merge_sha": "97849df4bb09d084fac20b478e1ca1bc0a400edb",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-correction-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "b4d83d838ec243d7f8173603dd2fd91f21966c4bdafe4a8f80b74a2b0ccbbd17"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-correction-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "d9c50e5495d205e2962a042a86d54ebc48d21fc24ce4a90acf801b8a6cc11eb3"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT VCU post-publication correction Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact VCU correction Preview with 'APPROVED. Proceed,' authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #566 head b7077c8a2fb871a6917d296ec3efd12284b53302 against approved main 436a72f9fa76adb80f64f5a63e0bed1dc3e66721. The authorized GitHub connector executed exactly merge method `merge` with expected_head_sha b7077c8a2fb871a6917d296ec3efd12284b53302, producing two-parent merge 97849df4bb09d084fac20b478e1ca1bc0a400edb, now exact protected main, with first parent 436a72f9fa76adb80f64f5a63e0bed1dc3e66721 and second parent b7077c8a2fb871a6917d296ec3efd12284b53302. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, additional correction rows, canonical site amendments, shared/global mutation, or unrelated authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
