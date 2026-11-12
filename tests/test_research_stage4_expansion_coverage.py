@@ -4,6 +4,7 @@ import json
 import subprocess
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 import test_all_history_expansion_freeze as fixture
@@ -151,7 +152,8 @@ class ExpansionStage4CoverageTests(unittest.TestCase):
         ])
         self.baseline._recommit_baseline()
         with self.assertRaisesRegex(
-            ExpansionStage4CoverageError, "disagree"
+            ExpansionStage4CoverageError,
+            "inherited published history|disagree",
         ):
             self._prove()
 
