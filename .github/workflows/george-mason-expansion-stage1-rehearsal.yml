@@ -127,6 +127,58 @@ jobs:
           print("RECONCILIATION_COUNTS",json.dumps({k:proof[k] for k in ("identity_counts","support_opponents","support_venues","global_venue_counts")},sort_keys=True))
           print("BLOCKER_CLASSES",json.dumps([x["class"] for x in proof["blockers"]],sort_keys=True))
           PY
+      - name: Focused generic Integration Freeze and Phase 0 authority regressions
+        run: python -m unittest discover -s tests -p 'test_all_history_expansion_integration.py' -v
+      - name: Integrate exact read-only expansion freeze twice and verify independent equivalence
+        run: |
+          PROOF_SHA=$(sha256sum "$RUNNER_TEMP/gmu-stage1/independent-proof.json" | cut -d' ' -f1)
+          for slot in a b; do
+            python tools/all_history_expansion_integration.py freeze george-mason "$RUNNER_TEMP/george-mason-expansion-research-frozen.zip" \
+              --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 \
+              --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 \
+              --main-sha ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd \
+              --independent-proof "$RUNNER_TEMP/gmu-stage1/independent-proof.json" \
+              --independent-proof-sha256 "$PROOF_SHA" \
+              --repo . --output "$RUNNER_TEMP/gmu-stage1/integration-$slot"
+          done
+          python tools/all_history_expansion_integration.py verify "$RUNNER_TEMP/gmu-stage1/integration-a"
+          python tools/all_history_expansion_integration.py verify "$RUNNER_TEMP/gmu-stage1/integration-b"
+          python tools/all_history_expansion_integration.py prepare-phase0 \
+            "$RUNNER_TEMP/gmu-stage1/integration-a" \
+            --output "$RUNNER_TEMP/gmu-stage1/phase0-preparation-only.json"
+          python - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"gmu-stage1"
+          a,b=root/"integration-a",root/"integration-b"
+          members=sorted(p.name for p in a.iterdir() if p.is_file())
+          assert len(members)==8, members
+          assert members==sorted(p.name for p in b.iterdir() if p.is_file())
+          for name in members:
+              assert (a/name).read_bytes()==(b/name).read_bytes(), f"nondeterministic integration freeze {name}"
+          m=json.loads((a/"expansion-integration-freeze.json").read_bytes())
+          assert m["status"]=="INTEGRATION_FROZEN"
+          assert m["source_preservation"]["inherited_count"]==1455
+          assert m["source_preservation"]["supplemental_count"]==314
+          assert m["source_preservation"]["combined_count"]==1769
+          assert m["canonical_identity_counts"]=={
+              "IDENTITY_REVIEW_BLOCKER":0, "PROVISIONAL_NEW_CANONICAL":312,"REUSE_CANONICAL":2}
+          assert m["global_venue_reconciliation"]=={
+              "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER":0,
+              "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED":6,
+              "REUSE_REGISTERED_GLOBAL_VENUE":2}
+          assert not m["release_authority"]
+          assert m["tracked_mutation"]=="NONE"
+          proposal=json.loads((root/"phase0-preparation-only.json").read_bytes())
+          assert proposal["status"]=="PREPARATION_ONLY"
+          assert not proposal["phase0_executed"]
+          assert proposal["mutation_authority"]=="NONE"
+          assert subprocess.check_output(["git","status","--porcelain","--untracked-files=no"]).strip()==b""
+          print("INTEGRATION_FREEZE_SHA256",hashlib.sha256(
+              (a/"expansion-integration-freeze.json").read_bytes()).hexdigest())
+          print("PHASE0_TRANSACTION_EXECUTED",False)
+          print("EXACT_REHEARSAL_VERIFIED", True)
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
