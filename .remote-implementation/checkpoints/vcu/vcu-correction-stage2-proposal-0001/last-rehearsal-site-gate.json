@@ -1,0 +1,80 @@
+{
+  "counts": {
+    "home_missing_both": 2,
+    "home_missing_location": 2,
+    "home_missing_venue": 2,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 31,
+    "public_gap_rows": 33,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap": 2,
+    "strict_home_gap_rows": 2,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 1651,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap": 2,
+    "unaccounted_public_gap_rows": 2
+  },
+  "errors": [
+    "2 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable.",
+    "2 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+  ],
+  "examples": {
+    "home_missing_both": [
+      "CBBG-0203553",
+      "CBBG-0203690"
+    ],
+    "home_missing_location": [
+      "CBBG-0203553",
+      "CBBG-0203690"
+    ],
+    "home_missing_venue": [
+      "CBBG-0203553",
+      "CBBG-0203690"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0024568",
+      "CBBG-0203957"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0024034",
+      "CBBG-0024568",
+      "CBBG-0030957",
+      "CBBG-0108068",
+      "CBBG-0125864",
+      "CBBG-0144874",
+      "CBBG-0156375",
+      "CBBG-0202030",
+      "CBBG-0202054",
+      "CBBG-0203227",
+      "CBBG-0203236",
+      "CBBG-0203237"
+    ],
+    "strict_home_gap": [
+      "CBBG-0203553",
+      "CBBG-0203690"
+    ],
+    "unaccounted_public_gap": [
+      "CBBG-0203553",
+      "CBBG-0203690"
+    ]
+  },
+  "history_start_season": "1973-1974",
+  "school_key": "vcu",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 0,
+    "researched_gap_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "correction_source_games": 4,
+    "mode": "CORRECTION_DELTA",
+    "scoped_source_games": 4
+  },
+  "status": "FAIL",
+  "warnings": []
+}

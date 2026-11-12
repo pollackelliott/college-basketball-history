@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "vcu-correction-stage2-proposal-0001",
+  "school_key": "vcu",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "90363621da0b17ff0cf7b6fd07df2d961dcab706",
+  "previous_control_state_sha256": "7ff9b8ee3dbdc92dcf206dfb615b9debbdee1841720565f899af2c92d2ecfbd3",
+  "expected_protected_main_sha": "436a72f9fa76adb80f64f5a63e0bed1dc3e66721",
+  "target_branch": "data/vcu-correction",
+  "target_sha": "4abead1cd63df8e5672774fa078a697aa0bd0dff",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-correction-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "5512ee9b3a195bb2d4056fb77d2a764b9ea46cc535b1e11c0d6c4182c9037990"
+  },
+  "integration_freeze_sha256": "abc6b38a7aa987caa3023893dfffab8d34fa470210b910e8fcc7f865d4ef7bd8",
+  "semantic_snapshot_sha256": "34d1020ec913bfa5336e75f112a3c56039ad66b6ef3b049d0edf8bc4df5a865d",
+  "decision_universe_sha256": "4251269b9afc0aa49a9eaafcca5db59272d5993252b875b4f3a2bbcd4d2487f1",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/vcu-correction-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "4ab9159f66bbc85370dc92b4a429166da1bc574e9142da9da97b4dfa4941c6aa"
+  },
+  "creation_provenance": {
+    "origin": "VCU post-publication correction Implementation — census-bound recommendation-map rehearsal",
+    "authorization": "Owner Proceed authorizes the next bounded Stage 2 unit after fresh-verified vcu-correction-stage2-census-0003. The map contains exactly the four census decisions and chooses each decision's sole allowed/recommended APPLY_CORRECTION_IDENTITY_PATCH action, with basis limited to the already owner-accepted correction Research. This request is read-only proposal rehearsal only. It creates no Owner Gate 1 approval and authorizes no fill, seal, apply, Preview, merge, release, additional correction row, canonical site amendment, shared/global mutation, or unrelated work."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
