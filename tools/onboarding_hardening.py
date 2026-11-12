@@ -1703,11 +1703,9 @@ def rehearse_review(
                 changed,
                 include_tests=True,
                 approved_plan=approved,
-                **({
-                    "correction_source_id": approved["summary"]["correction_source_game_id"],
-                    "correction_site_proof": execution["correction_site_nonregression"],
-                } if approved.get("summary", {}).get("correction_transaction_kind")
-                       in onboard_school.SINGLE_GAME_CORRECTION_KINDS else {}),
+                **onboard_school.correction_gate_kwargs_from_approved(
+                    approved, execution
+                ),
             )
         finally:
             source_diagnostic = (

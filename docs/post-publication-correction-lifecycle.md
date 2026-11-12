@@ -150,6 +150,19 @@ separate remediation; it is neither waived for new changes nor silently
 reclassified as researched/complete. This narrow correction transaction
 does not authorize a new-school exception or retroactive Tennessee research.
 
+
+A frozen correction may also use the bounded `MULTI_GAME_IDENTITY_ONLY`
+transaction when **every** listed correction source ID has exactly one
+collision-free opponent-identity review, those reviews bind to unique existing
+canonical games, and there are zero correction site-review decisions. The
+transaction applies only those exact identity retargets, requires zero source-row
+or discrepancy mutation, limits canonical/assertion changes to the sealed bound
+population, scopes package no-op verification to the complete frozen source-ID
+set, and proves site nonregression against the complete bound canonical-game set.
+The one-game proof schema remains unchanged for existing releases. Multi-game
+corrections that require any canonical site amendment remain unsupported and
+must stop for explicit tooling rather than inheriting this identity-only path.
+
 ## 7. Stop conditions
 
 Stop rather than broadening the correction when any of these occurs:

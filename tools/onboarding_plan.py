@@ -3279,12 +3279,15 @@ def _canonical_site_patch_review_decisions(
 
 
 
+MULTI_GAME_IDENTITY_CORRECTION_KIND = "MULTI_GAME_IDENTITY_ONLY"
+
+
 def _single_game_correction_transaction_kind(
     correction_source_ids: set[str],
     identity_decisions: list[dict[str, Any]],
     site_decisions: list[dict[str, Any]],
 ) -> str:
-    """Classify the only supported bounded one-game correction topologies."""
+    """Classify the supported bounded one-game correction topologies."""
     if (
         len(correction_source_ids) != 1
         or len(identity_decisions) != 1
@@ -3292,13 +3295,52 @@ def _single_game_correction_transaction_kind(
     ):
         raise WorkflowError(
             "single-game correction requires exactly one frozen source identity "
-            "and zero or one canonical site review; broader corrections need explicit tooling"
+            "and zero or one canonical site review"
         )
     return (
         "SINGLE_GAME_IDENTITY_SITE"
         if site_decisions
         else "SINGLE_GAME_IDENTITY"
     )
+
+
+def _correction_transaction_kind(
+    correction_source_ids: set[str],
+    identity_decisions: list[dict[str, Any]],
+    site_decisions: list[dict[str, Any]],
+) -> str:
+    """Classify bounded published identity corrections without widening site authority."""
+    if len(correction_source_ids) == 1:
+        return _single_game_correction_transaction_kind(
+            correction_source_ids, identity_decisions, site_decisions
+        )
+
+    if site_decisions:
+        raise WorkflowError(
+            "multi-game correction with canonical site review requires explicit tooling"
+        )
+    source_ids = [
+        str(item.get("source_game_id", "")).strip()
+        for item in identity_decisions
+    ]
+    game_ids = [
+        str(item.get("canonical_game_id", "")).strip()
+        for item in identity_decisions
+    ]
+    if (
+        not correction_source_ids
+        or len(identity_decisions) != len(correction_source_ids)
+        or not all(source_ids)
+        or not all(game_ids)
+        or set(source_ids) != correction_source_ids
+        or len(set(source_ids)) != len(source_ids)
+        or len(set(game_ids)) != len(game_ids)
+    ):
+        raise WorkflowError(
+            "multi-game identity-only correction requires exactly one identity review "
+            "for each frozen correction source, unique canonical games, and zero site reviews"
+        )
+    return MULTI_GAME_IDENTITY_CORRECTION_KIND
 
 def build_plan(
     repo: Path,
@@ -4409,61 +4451,109 @@ def build_plan(
         "already_public": program.get("public_page_enabled") == "Yes",
     }
 
-    # An already-published, frozen single-game opponent retarget must not turn
-    # every unrelated, previously accepted source/canonical residual into a new
-    # correction transaction. This narrow branch deliberately rejects other
-    # correction topologies until a separately tested transaction exists.
+    # An already-published, frozen opponent retarget must not turn unrelated,
+    # previously accepted source/canonical residuals into a new correction
+    # transaction. Multi-game support is identity-only; any multi-game site
+    # amendment remains fail-closed until a separately tested transaction exists.
     if correction_identity_decisions:
         context = _verified_correction_identity_context(repo, school_key)
         ids = set(context["correction_source_game_ids"]) if context else set()
-        transaction_kind = _single_game_correction_transaction_kind(
+        transaction_kind = _correction_transaction_kind(
             ids, correction_identity_decisions, correction_site_decisions
         )
-        identity = correction_identity_decisions[0]
-        site = correction_site_decisions[0] if correction_site_decisions else None
-        source_id = next(iter(ids))
-        game_id = identity["canonical_game_id"]
-        if identity["source_game_id"] != source_id:
-            raise WorkflowError("correction identity decision targets the wrong source game")
-        if site is not None and (
-            site["source_game_id"] != source_id
-            or site["canonical_game_id"] != game_id
-        ):
-            raise WorkflowError("correction identity/site decisions target different games")
 
-        # The winner disagreement is already resolved by the sealed identity
-        # retarget, which rewrites the old opponent winner key. It must not be
-        # applied again as a generic discrepancy after the old key disappears.
-        duplicates = [
-            d for d in decisions
-            if d.get("category") == "discrepancy"
-            and d.get("source_game_id") == source_id
-            and d.get("canonical_game_id") == game_id
-            and d.get("field_name") == "result_winner_team_key"
-            and d.get("source_value") == identity["new_opponent_key"]
-            and d.get("canonical_value") == identity["old_opponent_key"]
-        ]
-        related = [
-            d for d in decisions
-            if d.get("source_game_id") == source_id
-            or d.get("canonical_game_id") == game_id
-        ]
-        expected_related_ids = {
-            identity["decision_id"],
-            *(d["decision_id"] for d in duplicates),
-        }
-        if site is not None:
-            expected_related_ids.add(site["decision_id"])
-        if set(d["decision_id"] for d in related) != expected_related_ids:
-            raise WorkflowError(
-                "correction has additional same-game reviews; single-game "
-                "correction transaction cannot silently omit them"
+        if transaction_kind in {"SINGLE_GAME_IDENTITY", "SINGLE_GAME_IDENTITY_SITE"}:
+            identity = correction_identity_decisions[0]
+            site = correction_site_decisions[0] if correction_site_decisions else None
+            source_id = next(iter(ids))
+            game_id = identity["canonical_game_id"]
+            if identity["source_game_id"] != source_id:
+                raise WorkflowError("correction identity decision targets the wrong source game")
+            if site is not None and (
+                site["source_game_id"] != source_id
+                or site["canonical_game_id"] != game_id
+            ):
+                raise WorkflowError("correction identity/site decisions target different games")
+            duplicates = [
+                d for d in decisions
+                if d.get("category") == "discrepancy"
+                and d.get("source_game_id") == source_id
+                and d.get("canonical_game_id") == game_id
+                and d.get("field_name") == "result_winner_team_key"
+                and d.get("source_value") == identity["new_opponent_key"]
+                and d.get("canonical_value") == identity["old_opponent_key"]
+            ]
+            related = [
+                d for d in decisions
+                if d.get("source_game_id") == source_id
+                or d.get("canonical_game_id") == game_id
+            ]
+            expected_related_ids = {
+                identity["decision_id"],
+                *(d["decision_id"] for d in duplicates),
+            }
+            if site is not None:
+                expected_related_ids.add(site["decision_id"])
+            if set(d["decision_id"] for d in related) != expected_related_ids:
+                raise WorkflowError(
+                    "correction has additional same-game reviews; single-game "
+                    "correction transaction cannot silently omit them"
+                )
+            excluded_count = len(decisions) - len(related)
+            decisions = [identity] + ([site] if site is not None else [])
+            summary["correction_source_game_id"] = source_id
+            summary["correction_canonical_game_id"] = game_id
+        else:
+            identities = sorted(
+                correction_identity_decisions,
+                key=lambda item: str(item.get("source_game_id", "")),
             )
-        excluded_count = len(decisions) - len(related)
-        decisions = [identity] + ([site] if site is not None else [])
+            bindings = [
+                {
+                    "source_game_id": str(item.get("source_game_id", "")).strip(),
+                    "canonical_game_id": str(item.get("canonical_game_id", "")).strip(),
+                }
+                for item in identities
+            ]
+            game_ids = {item["canonical_game_id"] for item in bindings}
+            identity_by_source = {
+                str(item.get("source_game_id", "")).strip(): item
+                for item in identities
+            }
+            duplicate_ids: set[str] = set()
+            for source_id, identity in identity_by_source.items():
+                game_id = str(identity.get("canonical_game_id", "")).strip()
+                duplicate_ids.update(
+                    str(d.get("decision_id", ""))
+                    for d in decisions
+                    if d.get("category") == "discrepancy"
+                    and d.get("source_game_id") == source_id
+                    and d.get("canonical_game_id") == game_id
+                    and d.get("field_name") == "result_winner_team_key"
+                    and d.get("source_value") == identity["new_opponent_key"]
+                    and d.get("canonical_value") == identity["old_opponent_key"]
+                )
+            related = [
+                d for d in decisions
+                if d.get("source_game_id") in ids
+                or d.get("canonical_game_id") in game_ids
+            ]
+            expected_related_ids = {
+                *(str(item.get("decision_id", "")) for item in identities),
+                *duplicate_ids,
+            }
+            if set(str(d.get("decision_id", "")) for d in related) != expected_related_ids:
+                raise WorkflowError(
+                    "multi-game identity correction has additional targeted reviews; "
+                    "the bounded identity-only transaction cannot silently omit them"
+                )
+            excluded_count = len(decisions) - len(related)
+            decisions = identities
+            summary["correction_source_game_ids"] = sorted(ids)
+            summary["correction_canonical_game_ids"] = sorted(game_ids)
+            summary["correction_game_bindings"] = bindings
+
         summary["correction_transaction_kind"] = transaction_kind
-        summary["correction_source_game_id"] = source_id
-        summary["correction_canonical_game_id"] = game_id
         summary["inherited_unrelated_reviews_excluded"] = excluded_count
         summary["discrepancies_to_add"] = 0
         summary["new_canonical_games"] = 0

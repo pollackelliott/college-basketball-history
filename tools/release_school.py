@@ -144,7 +144,11 @@ def correction_integration_freeze_bytes(
         freeze = json.loads(payload)
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise WorkflowError("correction Integration Freeze is unreadable") from exc
-    source_id = gate_kwargs["correction_source_id"]
+    source_ids = gate_kwargs.get("correction_source_ids") or (
+        [gate_kwargs["correction_source_id"]]
+        if gate_kwargs.get("correction_source_id")
+        else []
+    )
     correction_ids = freeze.get("correction_source_game_ids", [])
     if (
         not isinstance(freeze, dict)
@@ -152,7 +156,9 @@ def correction_integration_freeze_bytes(
         or freeze.get("workflow_kind") != "POST_PUBLICATION_CORRECTION"
         or freeze.get("school_key") != school_key
         or not isinstance(correction_ids, list)
-        or source_id not in correction_ids
+        or not isinstance(source_ids, list)
+        or not source_ids
+        or sorted(correction_ids) != sorted(source_ids)
     ):
         raise WorkflowError(
             "correction Integration Freeze identity does not match sealed release"
