@@ -20,12 +20,11 @@ from all_history_expansion_integration import (
 from all_history_expansion_venue_guard import require_clean
 from remote_implementation_control import (
     MUTATION_COMPLETE, MUTATION_DIVERGED, MUTATION_NOT_ATTEMPTED,
-    MUTATION_PREPARED, MUTATION_PUBLISHED, begin_request, bind_lock_commit,
-    classify_mutation, classify_publication_precondition, initial_control_state,
+    MUTATION_PREPARED, MUTATION_PUBLISHED, OP_EXPANSION_PHASE0,
+    begin_request, bind_lock_commit, classify_mutation,
+    classify_publication_precondition, initial_control_state,
     validate_control_state,
 )
-
-OP_EXPANSION_PHASE0 = "EXPANSION_PHASE0"
 MUTABLE_GLOBALS = frozenset({
     "data/reference/programs.csv",
     "data/reference/venues.csv",
