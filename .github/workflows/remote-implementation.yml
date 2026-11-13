@@ -101,16 +101,17 @@ jobs:
               echo "Protected main changed or request is stale: expected=$expected_main actual=$actual_main" >&2
               exit 1
             fi
-            if [[ "${{ steps.detect.outputs.pending_operation }}" != "STAGE2_CURRENT_MAIN_REFRESH" ]]; then
-              echo "Protected main changed while non-refresh verification is pending: expected=$expected_main actual=$actual_main" >&2
+            pending_operation="${{ steps.detect.outputs.pending_operation }}"
+            if [[ "$pending_operation" != "STAGE2_CURRENT_MAIN_REFRESH" && "$pending_operation" != "EXPANSION_PHASE0" ]]; then
+              echo "Protected main changed while this verification is pending: operation=$pending_operation expected=$expected_main actual=$actual_main" >&2
               exit 1
             fi
             if ! git merge-base --is-ancestor "$expected_main" "$actual_main"; then
-              echo "Pending refresh verification bound main is no longer an ancestor of protected main: expected=$expected_main actual=$actual_main" >&2
+              echo "Pending verification bound main is no longer an ancestor of protected main: operation=$pending_operation expected=$expected_main actual=$actual_main" >&2
               exit 1
             fi
             runtime_sha="$actual_main"
-            echo "Pending refresh verification will use current verifier runtime against original bound transaction: bound=$expected_main verifier_runtime=$runtime_sha"
+            echo "Pending verification will use current verifier runtime against original bound transaction: operation=$pending_operation bound=$expected_main verifier_runtime=$runtime_sha"
           fi
           echo "verification_runtime_sha=$runtime_sha" >> "$GITHUB_OUTPUT"
 
