@@ -391,7 +391,7 @@ or performs Production proof. After fresh verification, the school Implementatio
 its authenticated GitHub connector to create/review/merge the dedicated maintenance PR under
 normal protected-main rules, then reruns the complete Stage 1 inventory on refreshed main.
 
-## 7B. Control Center-authorized Stage 2 current-main refresh
+## 7B. Fail-closed Stage 2 current-main refresh
 
 `STAGE2_CURRENT_MAIN_REFRESH` is a narrow serialized representation operation for an
 already-in-Stage-2 `data/<school>-onboarding` branch when protected `main` has
@@ -402,6 +402,8 @@ It is not a second Phase 0 and does not recreate, replace, or mutate the immutab
 Research Freeze or Integration Freeze. It authenticates the existing Phase 0 authority,
 any supported opponent-display successor, and any earlier refresh successor, then binds
 the exact current onboarding predecessor and exact protected-main SHA.
+
+This refresh does not require a separate Control Center authorization when it is invoked inside an already-authorized school Stage 2 phase and the permanent changed-path proof below establishes a disjoint mechanical refresh with no historical/shared authority conflict. A Control Center stop is required only for overlapping path populations, ambiguous/diverged state, or changed historical/shared meaning.
 
 Automatic refresh is permitted only when the Git changed-path population from the exact
 merge base to the onboarding target is disjoint from the changed-path population from
@@ -1022,7 +1024,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, the Control-Center-authorized disjoint-path `STAGE2_CURRENT_MAIN_REFRESH`, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. Other tracked Stage 2 repairs remain unauthorized. The remote runner cannot merge or push protected main; explicit scoped Owner Gate 2 approval and post-merge Production proof are separately guarded, and merge is performed only by the authorized school Implementation connector after approval.
+Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, the mechanically proven disjoint-path `STAGE2_CURRENT_MAIN_REFRESH`, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. Other tracked Stage 2 repairs remain unauthorized. The remote runner cannot merge or push protected main; explicit scoped Owner Gate 2 approval and post-merge Production proof are separately guarded, and merge is performed only by the authorized school Implementation connector after approval.
 
 ## 13. Mobile / ChatGPT operation
 

@@ -119,6 +119,18 @@ Phase-persistent owner authorization does **not** require single-turn phase exha
 
 A bounded-turn yield does not consume or revoke the already granted phase authority.
 
+### 3.4A Hard per-turn execution budget
+
+One assistant response is not a phase runner. Unless the next steps are entirely local and immediate, complete at most one major durable advance per turn:
+
+- one protected-main tooling PR through exact merge; or
+- one tracked school mutation through independent fresh verification; or
+- one read-only remote census/proposal/recovery/refresh chain through its next durable checkpoint.
+
+For a tooling PR, permit at most one failed remote candidate-validation cycle plus one corrected replacement cycle in the same turn. If the replacement still fails or exposes another topology, preserve the exact PR head/failure/run and yield. Do not continue creating a long chain of tiny commits and remote runs inside one live response.
+
+If a tooling PR merge itself required iterative debugging in the turn, stop after authenticating the merge and durable next-school boundary. Do not also launch the next school transaction in that response.
+
 ### 3.5 `Proceed` is execution authorization, not a historical/release gate
 
 After an ordinary completed implementation stage, owner responses such as `Proceed`, `Continue`, or equivalent authorize the identified next bounded **owner-facing phase**, including its explicitly described deterministic internal repository operations and fresh-verification substeps. They do not authorize a different later phase, but authorization is not consumed merely because the first internal request/checkpoint completes.
@@ -142,9 +154,9 @@ Do **not** end the turn with `NEXT OWNER ACTION: PROCEED` merely because:
 - a fresh verifier has not yet written its result;
 - a successful intermediate checkpoint exists and the next deterministic substep belongs to the same authorized phase.
 
-Do **not** turn the conversation into a rapid waiting loop. After the initial authenticated observation, a healthy active turn may use a low-frequency heartbeat of roughly **120 seconds** between status reads. Each heartbeat should make one status read, provide one compact visible progress update, and immediately continue the already-authorized phase when a material transition occurs. Multiple equivalent reads inside that interval are not durable progress.
+Do **not** turn the conversation into a waiting loop. After dispatching or first authenticating a healthy external workflow, make at most **one** bounded follow-up status observation in the same assistant turn. If the workflow is still in flight, preserve the exact workflow/request/control identity, include the direct workflow link, and yield immediately. Do not sit in the same response polling every 120 seconds while the owner watches a spinner.
 
-If the workflow remains healthy and in flight but the turn cannot safely remain active, preserve the exact workflow/request/control identity, include the direct workflow link, and yield at that durable state. Existing phase authorization remains valid.
+A later `Continue` resumes the same already-authorized phase; it is transport, not a new owner decision. Existing phase authorization remains valid.
 
 A single long external operation may therefore require one transport continuation. A deterministic phase that repeatedly requires transport continuation between refresh, census, proposal, fill, seal, apply, or release substeps is not healthy phase-sized orchestration. Treat that repeated pattern as a repository tooling defect and add a repository-owned continuation path rather than normalizing owner-scheduled `Continue` messages.
 
