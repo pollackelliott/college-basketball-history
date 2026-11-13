@@ -4,7 +4,7 @@
   "request_id": "george-mason-expansion-phase0-0001",
   "school_key": "george-mason",
   "operation": "EXPANSION_PHASE0",
-  "previous_control_state_commit": "547841acd5cab3a077f246d3d1baea166dfbdfbb",
+  "previous_control_state_commit": "8f8d752dcb4a3921e42de80ea1364f03273871e3",
   "previous_control_state_sha256": "0619dd1f8dcaa7d761763bfefc741f9fadbe5ae1e6e2559860f71f1c317a6e82",
   "expected_protected_main_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
   "target_branch": "data/george-mason-onboarding",
