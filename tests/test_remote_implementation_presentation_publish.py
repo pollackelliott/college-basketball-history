@@ -74,18 +74,13 @@ class GuardedPublicationFixture(unittest.TestCase):
             self.repo, "commit-tree", str(self.plan["candidate_tree_sha"]),
             "-p", self.sealed, "-m", "presentation only",
         )
-        self.asset_content = git(
-            self.repo, "show", f"{self.successor}:{ASSET_PATH}"
-        ).encode("utf-8")
+        self.asset_content = subprocess.run(
+            ["git", "show", f"{self.successor}:{ASSET_PATH}"],
+            cwd=self.repo, check=True, stdout=subprocess.PIPE,
+        ).stdout
         self.original_paths = [
             "data/canonical/games.csv", "site/data/teams/example.json",
         ]
-        self.original_hashes = {
-            path: hashlib.sha256(
-                git(self.repo, "show", f"{self.sealed}:{path}").encode("utf-8") + b"\n"
-            ).hexdigest()
-            for path in self.original_paths
-        }
         # Use actual Git object bytes for hash calculation to avoid text stripping.
         self.original_hashes = {
             path: hashlib.sha256(subprocess.run(
