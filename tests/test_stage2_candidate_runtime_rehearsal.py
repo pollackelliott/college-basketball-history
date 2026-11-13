@@ -7,6 +7,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from remote_implementation_io import Stop  # noqa: E402
 from stage2_candidate_runtime_rehearsal import (  # noqa: E402
+    candidate_census_decision_universe,
     classify_candidate_result,
     validate_candidate_scope,
 )
@@ -34,6 +35,32 @@ class CandidateRuntimeScopeTests(unittest.TestCase):
             validate_candidate_scope([
                 "data/reference/venues.csv",
             ])
+
+
+class CandidateRuntimeDecisionUniverseTests(unittest.TestCase):
+    def test_candidate_census_exposes_recomputed_decision_universe(self):
+        value = "a" * 64
+        self.assertEqual(
+            candidate_census_decision_universe(
+                {
+                    "status": {
+                        "preflight": {
+                            "decision_universe_sha256": value,
+                        }
+                    }
+                }
+            ),
+            value,
+        )
+
+    def test_candidate_census_requires_decision_universe_fingerprint(self):
+        with self.assertRaisesRegex(
+            Stop,
+            "CANDIDATE_REHEARSAL_DECISION_UNIVERSE_MISSING",
+        ):
+            candidate_census_decision_universe(
+                {"status": {"preflight": {}}}
+            )
 
 
 class CandidateRuntimeClassificationTests(unittest.TestCase):

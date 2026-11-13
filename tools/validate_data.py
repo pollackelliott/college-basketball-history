@@ -17,6 +17,7 @@ import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import Any
 
 import ingest_school
 from administrative_status import ALLOWED_ADMINISTRATIVE_STATUSES
@@ -44,6 +45,8 @@ from program_history import (
     accomplishment_row_issues,
     history_coverage_errors,
     history_scope_errors,
+    publication_history_start,
+    season_is_published_history,
     valid_season_label,
 )
 from venue_reference import (
@@ -231,6 +234,54 @@ def resolved_assertion_venue_key(
         assertion,
         venue_metadata_map,
     ).get("venue_key", "").strip()
+
+
+def generated_publication_scope_errors(
+    program: dict[str, str],
+    document: dict[str, Any],
+) -> list[str]:
+    """Validate generated team JSON against publication and top-level authority.
+
+    history_start_season remains the accepted top-level/D-I-equivalent boundary.
+    Publication eligibility is separately controlled by history_coverage_status and,
+    for COMPLETE_INSTITUTIONAL, program_inception_season.
+    """
+    errors: list[str] = []
+    program_key = program.get("program_key", "")
+    top_level_start = program.get("history_start_season", "").strip()
+    generated_top_level_start = (
+        document.get("program", {}).get("history_start_season")
+    )
+    if generated_top_level_start != top_level_start:
+        errors.append(
+            f"{program_key}: generated history_start_season does not match programs.csv."
+        )
+
+    invalid_game_ids = [
+        game.get("canonical_game_id", "")
+        for game in document.get("games", [])
+        if not season_is_published_history(
+            str(game.get("season_label", "")),
+            program,
+        )
+    ]
+    if invalid_game_ids:
+        errors.append(
+            f"{program_key}: generated public games precede publication coverage: "
+            + ", ".join(invalid_game_ids[:10])
+        )
+
+    published_start = publication_history_start(program)
+    invalid_intervals = [
+        row.get("conference_key", "")
+        for row in document.get("conference_history", [])
+        if str(row.get("start_season", "")) < published_start
+    ]
+    if invalid_intervals:
+        errors.append(
+            f"{program_key}: generated conference history precedes publication coverage."
+        )
+    return errors
 
 
 def main() -> int:
@@ -720,14 +771,12 @@ def main() -> int:
                 f"{program_key} accomplishments: verification_basis is required."
             )
 
-    # Transitional Unit 1 compatibility: generated public data still uses the
-    # legacy history_* scope fields until the Unit 2 publication-builder migration.
-    # The new institutional coverage metadata is validated independently above.
+    # Generated public data must respect publication coverage independently from
+    # the accepted top-level/D-I-equivalent history boundary.
     for program in program_rows:
         if program.get("public_page_enabled", "") != "Yes":
             continue
         program_key = program.get("program_key", "")
-        cutoff = program.get("history_start_season", "").strip()
         team_json_path = repo_root / "site" / "data" / "teams" / f"{program_key}.json"
         if not team_json_path.exists():
             continue
@@ -736,30 +785,7 @@ def main() -> int:
         except (OSError, json.JSONDecodeError) as exc:
             errors.append(f"{team_json_path}: cannot validate generated scope: {exc}")
             continue
-        published_start = document.get("program", {}).get("history_start_season")
-        if published_start != cutoff:
-            errors.append(
-                f"{program_key}: generated history_start_season does not match programs.csv."
-            )
-        pre_cutoff_game_ids = [
-            game.get("canonical_game_id", "")
-            for game in document.get("games", [])
-            if game.get("season_label", "") < cutoff
-        ]
-        if pre_cutoff_game_ids:
-            errors.append(
-                f"{program_key}: generated public games precede history scope: "
-                + ", ".join(pre_cutoff_game_ids[:10])
-            )
-        pre_cutoff_intervals = [
-            row.get("conference_key", "")
-            for row in document.get("conference_history", [])
-            if row.get("start_season", "") < cutoff
-        ]
-        if pre_cutoff_intervals:
-            errors.append(
-                f"{program_key}: generated conference history precedes history scope."
-            )
+        errors.extend(generated_publication_scope_errors(program, document))
 
     membership_keys = [
         f"{r.get('program_key', '')}::{r.get('season_label', '')}"

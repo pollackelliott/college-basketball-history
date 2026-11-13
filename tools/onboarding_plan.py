@@ -68,7 +68,7 @@ from program_history import (
     derive_top_level_ncaa_accomplishments,
     history_scope_errors,
     ncaa_game_counts_as_appearance,
-    partition_source_rows,
+    partition_stage2_source_rows,
     season_is_in_scope,
 )
 from plan_home_chronology_remediation import (
@@ -3374,11 +3374,15 @@ def build_plan(
     )
     programs = read_csv(repo / "data/reference/programs.csv")
     program = next(row for row in programs if row["program_key"] == school_key)
-    sources, pre_cutoff = partition_source_rows(
+    sources, pre_cutoff, top_level_sources = partition_stage2_source_rows(
         all_sources,
-        program["history_start_season"].strip(),
-        program.get("history_scope_intervals", "").strip(),
+        program,
     )
+    top_level_source_ids = {
+        row.get("source_game_id", "").strip()
+        for row in top_level_sources
+        if row.get("source_game_id", "").strip()
+    }
     source_consistency_by_id = {
         item.get("source_game_id", ""): item
         for item in package.get("source_consistency_issues", [])
@@ -3497,6 +3501,8 @@ def build_plan(
         if opponent in public_keys:
             affected_public_programs.add(opponent)
         season = source.get("season_label", "").strip()
+        source_id = source.get("source_game_id", "").strip()
+        source_is_top_level = source_id in top_level_source_ids
         team_a, team_b = ingest_school.ordered_pair(school_key, opponent)
         candidates = canonical_index.get((team_a, team_b, season), [])
         identity_candidates = list(candidates)
@@ -3670,7 +3676,6 @@ def build_plan(
                 }
             )
 
-        source_id = source.get("source_game_id", "").strip()
         challenge = historical_challenge_by_source.get(source_id)
         if challenge is not None:
             historical_challenge_seen.add(source_id)
@@ -3697,65 +3702,68 @@ def build_plan(
                     "challenge_type", HISTORICAL_CHALLENGE_LEGACY_TYPE
                 ),
             }
-            historical_challenge_candidates.append(candidate)
-            historical_challenge_decisions.append(
-                build_historical_game_type_challenge_review(
-                    school_key,
-                    candidate,
-                    challenge,
-                    expected_canonical_identity,
-                )
+            challenge_decision = build_historical_game_type_challenge_review(
+                school_key,
+                candidate,
+                challenge,
+                expected_canonical_identity,
             )
+            historical_challenge_decisions.append(challenge_decision)
+            if source_is_top_level:
+                historical_challenge_candidates.append(candidate)
+            else:
+                decisions.append(challenge_decision)
 
-        accomplishment_candidate = _accomplishment_crosscheck_game(
-            source,
-            status,
-            game_id,
-            canonical_by_id,
-            venue_name_map,
-            venue_metadata,
-            (
-                "PREFLIGHT-ACCOMPLISHMENT-"
-                + (source.get("source_game_id", "").strip() or "UNKNOWN")
-            ),
-        )
-        accomplishment_crosscheck_games.append(accomplishment_candidate)
-        if source.get("curated_game_type", "").strip() == "POSTSEASON":
-            generic_postseason_candidates.append({
-                "source": source,
-                "canonical_game_id": game_id if status == ingest_school.CONFIDENT else "",
-                "canonical_game_date": (
-                    canonical_by_id.get(game_id, {}).get("game_date", "")
-                    if status == ingest_school.CONFIDENT else ""
+        if source_is_top_level:
+            accomplishment_candidate = _accomplishment_crosscheck_game(
+                source,
+                status,
+                game_id,
+                canonical_by_id,
+                venue_name_map,
+                venue_metadata,
+                (
+                    "PREFLIGHT-ACCOMPLISHMENT-"
+                    + (source.get("source_game_id", "").strip() or "UNKNOWN")
                 ),
-                "canonical_game_type": (
-                    canonical_by_id.get(game_id, {}).get("game_type", "")
-                    if status == ingest_school.CONFIDENT else ""
-                ),
-            })
-        if (
-            status != ingest_school.REVIEW
-            and source.get("curated_game_type", "").strip() == "NCAA_TOURNAMENT"
-            and ncaa_game_counts_as_appearance(accomplishment_candidate)
-            and not accomplishment_candidate.get("postseason_round", "").strip()
-        ):
-            canonical_match = canonical_by_id.get(game_id, {})
-            source_date = source.get("game_date", "").strip()
-            calendar_year = (
-                int(source_date[:4])
-                if re.fullmatch(r"\d{4}-\d{2}-\d{2}", source_date)
-                else int(source.get("season_label", "0000-0000").split("-")[1])
-                if re.fullmatch(r"\d{4}-\d{4}", source.get("season_label", ""))
-                else None
             )
-            accomplishment_round_candidates.append(
-                {
+            accomplishment_crosscheck_games.append(accomplishment_candidate)
+            if source.get("curated_game_type", "").strip() == "POSTSEASON":
+                generic_postseason_candidates.append({
                     "source": source,
                     "canonical_game_id": game_id if status == ingest_school.CONFIDENT else "",
-                    "canonical_game_date": canonical_match.get("game_date", ""),
-                    "calendar_year": calendar_year,
-                }
-            )
+                    "canonical_game_date": (
+                        canonical_by_id.get(game_id, {}).get("game_date", "")
+                        if status == ingest_school.CONFIDENT else ""
+                    ),
+                    "canonical_game_type": (
+                        canonical_by_id.get(game_id, {}).get("game_type", "")
+                        if status == ingest_school.CONFIDENT else ""
+                    ),
+                })
+            if (
+                status != ingest_school.REVIEW
+                and source.get("curated_game_type", "").strip() == "NCAA_TOURNAMENT"
+                and ncaa_game_counts_as_appearance(accomplishment_candidate)
+                and not accomplishment_candidate.get("postseason_round", "").strip()
+            ):
+                canonical_match = canonical_by_id.get(game_id, {})
+                source_date = source.get("game_date", "").strip()
+                calendar_year = (
+                    int(source_date[:4])
+                    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", source_date)
+                    else int(source.get("season_label", "0000-0000").split("-")[1])
+                    if re.fullmatch(r"\d{4}-\d{4}", source.get("season_label", ""))
+                    else None
+                )
+                accomplishment_round_candidates.append(
+                    {
+                        "source": source,
+                        "canonical_game_id": game_id if status == ingest_school.CONFIDENT else "",
+                        "canonical_game_date": canonical_match.get("game_date", ""),
+                        "calendar_year": calendar_year,
+                    }
+                )
 
         for problem in _planned_venue_geography_errors(
             source,
@@ -4396,10 +4404,11 @@ def build_plan(
                 "source_value": program.get("public_page_enabled", ""),
                 "canonical_value": "Yes",
                 "relevant_evidence": (
-                    f"{len(sources):,} in-scope source rows; "
+                    f"{len(sources):,} publication-eligible source rows; "
+                    f"{len(top_level_sources):,} top-level source rows; "
                     + (
-                        f"{len(pre_cutoff):,} researched pre-cutoff rows remain outside "
-                        f"the public page before {program.get('history_start_season', '').strip()}; "
+                        f"{len(pre_cutoff):,} researched rows remain outside authorized "
+                        "publication coverage; "
                         if pre_cutoff
                         else ""
                     )
@@ -4427,6 +4436,7 @@ def build_plan(
     summary = {
         "source_rows": len(all_sources),
         "in_scope_source_rows": len(sources),
+        "top_level_source_rows": len(top_level_sources),
         "pre_cutoff_rows": len(pre_cutoff),
         "history_start_season": program.get("history_start_season", "").strip(),
         "history_scope_intervals": program.get("history_scope_intervals", "").strip(),
@@ -4598,8 +4608,9 @@ def render_report(plan: dict[str, Any], approved_hash: str = "") -> str:
     if summary:
         labels = (
             ("Source rows", "source_rows"),
-            ("In-scope rows", "in_scope_source_rows"),
-            ("Pre-cutoff researched rows", "pre_cutoff_rows"),
+            ("Publication-eligible rows", "in_scope_source_rows"),
+            ("Top-level rows", "top_level_source_rows"),
+            ("Publication-excluded researched rows", "pre_cutoff_rows"),
             ("Existing matches", "existing_game_matches"),
             ("New canonical games", "new_canonical_games"),
             ("Identity reviews", "identity_review_required"),
