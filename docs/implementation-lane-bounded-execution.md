@@ -123,6 +123,8 @@ A bounded-turn yield does not consume or revoke the already granted phase author
 
 After an ordinary completed implementation stage, owner responses such as `Proceed`, `Continue`, or equivalent authorize the identified next bounded **owner-facing phase**, including its explicitly described deterministic internal repository operations and fresh-verification substeps. They do not authorize a different later phase, but authorization is not consumed merely because the first internal request/checkpoint completes.
 
+A completed generic tooling repair does not insert a new Control Center phase between owner-facing school phases. If the repair unit was deliberately prohibited from executing a later live school mutation, that prohibition expires with the repair unit; after post-merge refresh/revalidation, classify the live mutation under the ordinary school lifecycle. For normal target-school Phase 0 work already permitted by current policy, the next owner action is `PROCEED`, not `CONTROL CENTER AUTHORIZATION REQUIRED`.
+
 They do **not** substitute for:
 
 - Owner Gate 1 historical decisions;

@@ -145,6 +145,8 @@ Return to the Control Center only when the proposed repair changes historical/sh
 
 For Research in particular, the intended owner interaction is **stage result -> owner `Proceed` -> next stage**. Control Center round trips between deterministic technical steps inside that stage are a process defect.
 
+The same principle applies when a school Implementation phase was temporarily interrupted by a generic tooling repair. A repair authorization may forbid executing the later live school mutation *inside the repair unit* without turning that later mutation into permanent Control Center work. After the repair merges and the school revalidates against refreshed protected main, return to the ordinary lifecycle boundary. If current policy says the next mutation is normal target-school Phase 0 authority, the owner authorizes it with ordinary `Proceed` in that school lane.
+
 ## 4. Repository-owned recovery command
 
 When a runnable repository checkout is available, use:
