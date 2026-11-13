@@ -14,6 +14,8 @@ They must not turn those findings directly into incidental mutations of protecte
 
 Research owns the historical conclusion. Serialized Implementation, or an explicitly authorized dedicated maintenance workflow, owns the authoritative global repository mutation.
 
+A **school-scoped owner-authority registry** used only to serialize an explicit owner disposition for that target school's Research closeout is not a shared basketball identity registry for purposes of this boundary. Current `AGENTS.md` may delegate an exact additive target-school authority case to the school Research lane when it changes no other school, shared/global basketball identity, registry schema/policy, canonical/public data, or executable mutation scope. This does not permit incidental edits to programs, aliases, conferences, venues, canonical games, or other globally reusable basketball state.
+
 ## 2. Research-lane authority
 
 A school Research lane may:

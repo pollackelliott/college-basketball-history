@@ -325,6 +325,8 @@ Return early only for:
 
 Routine internal transitions from extraction to baseline serialization to discrepancy repair do not require owner approval.
 
+When an owner-authorized Stage 1 exception requires a protected-main school authority registry entry, the registry write is a **serialization of the owner's decision**, not a second owner/Control Center gate. After the owner has explicitly approved the exact substantive disposition, the target-school Research lane may add the exact hash-bound target-school case and merge that narrow authority-only change under the `AGENTS.md` school-scoped owner-authority delegation. It must not edit another school's case, change registry schema/policy, or use the registry write to manufacture authority that the owner did not provide. After merge, rerun the permanent audit/closeout/verify-closeout path and return at the ordinary Stage 1 completion boundary.
+
 ## 8. Anti-patterns
 
 Flag and stop these Stage 1 behaviors:
