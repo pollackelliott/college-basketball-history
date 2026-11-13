@@ -33,6 +33,11 @@ from integration_freeze_guard import (
     build_source_game_semantic_snapshot,
     semantic_snapshot_sha256,
 )
+from stage1_venue_reconciliation import load_venue_reconciliation
+from stage_research_portfolio import (
+    load_existing_school_venues,
+    venue_reconciliation_inventory,
+)
 
 MANIFEST_NAME = "expansion-integration-freeze.json"
 PROPOSAL_NAME = "expansion-phase0-transaction-proposal.json"
@@ -122,11 +127,14 @@ def freeze_authority(
     repo: Path, school: str, artifact: Path, zip_sha: str,
     research_base: str, main_sha: str, proof_path: Path, proof_sha: str,
     output: Path, *, retain: bool = True,
+    venue_reconciliation_path: Path | None = None,
 ) -> dict[str, Any]:
     """Fresh-verifies accepted frozen evidence and independently replays Stage 1."""
     repo, artifact, proof_path, output = (
         repo.resolve(), artifact.resolve(), proof_path.resolve(), output.resolve()
     )
+    if venue_reconciliation_path is not None:
+        venue_reconciliation_path = venue_reconciliation_path.resolve()
     for digest in (zip_sha, proof_sha):
         check_sha(digest, 64)
     for digest in (research_base, main_sha):
@@ -168,6 +176,71 @@ def freeze_authority(
         require(report["global_venue_reconciliation"]["counts"][
             "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER"] == 0,
             "VENUE_IDENTITY_UNRESOLVED")
+
+        venue_reconciliation: dict[str, dict[str, Any]] = {}
+        venue_reconciliation_meta: dict[str, Any] | None = None
+        venue_reconciliation_census: dict[str, Any] | None = None
+        if venue_reconciliation_path is not None:
+            candidate_venues_raw = (candidate / "venues.csv").read_bytes()
+            _, candidate_venues = csv_rows(
+                candidate_venues_raw, "expansion candidate venues"
+            )
+            _, global_venues = csv_rows(
+                git_bytes(repo, main_sha, "data/reference/venues.csv"),
+                "current global venues",
+            )
+            _, global_names = csv_rows(
+                git_bytes(repo, main_sha, "data/reference/venue-names.csv"),
+                "current global venue names",
+            )
+            venue_reconciliation, venue_reconciliation_meta = (
+                load_venue_reconciliation(
+                    venue_reconciliation_path,
+                    school_key=school,
+                    package_path=artifact,
+                    local_venues=candidate_venues,
+                    global_venues=global_venues,
+                    frozen_venues_bytes=candidate_venues_raw,
+                    source_games_bytes=(candidate / "source-games.csv").read_bytes(),
+                )
+            )
+            venue_reconciliation_meta = dict(venue_reconciliation_meta)
+            venue_reconciliation_meta["spec_path"] = "venue-reconciliation.json"
+            require(
+                all(
+                    item.get("action") == "REUSE_CURRENT_IDENTITY"
+                    for item in venue_reconciliation.values()
+                ),
+                "EXPANSION_VENUE_RECONCILIATION_ACTION_UNSUPPORTED",
+            )
+            inherited_venue_count = len(baseline["venue_rows"])
+            new_venues = candidate_venues[inherited_venue_count:]
+            new_keys = {
+                row.get("venue_key", "").strip()
+                for row in new_venues
+                if row.get("venue_key", "").strip()
+            }
+            require(
+                all(
+                    item.get("local_venue_key", "") in new_keys
+                    for item in venue_reconciliation.values()
+                ),
+                "EXPANSION_VENUE_RECONCILIATION_NOT_NEW_SUPPORT",
+            )
+            venue_reconciliation_census = venue_reconciliation_inventory(
+                new_venues,
+                global_venues,
+                global_names,
+                school_key=school,
+                existing_school_venues=load_existing_school_venues(
+                    repo, exclude_school_key=school
+                ),
+                venue_reconciliation=venue_reconciliation,
+            )
+            require(
+                venue_reconciliation_census["blocker_count"] == 0,
+                "EXPANSION_VENUE_RECONCILIATION_STILL_BLOCKED",
+            )
         hashes = {name: sha256((candidate / name).read_bytes())
                   for name in (*PACKAGE_FILES, STAGE1_REPORT)}
         require(report["candidate_member_sha256"] == {
@@ -242,6 +315,12 @@ def freeze_authority(
             "opponent_support_actions": report["census"]["opponent_support_actions"],
             "venue_support_actions": report["census"]["venue_support_actions"],
             "global_venue_reconciliation": report["global_venue_reconciliation"]["counts"],
+            "venue_reconciliation": venue_reconciliation_meta,
+            "venue_reconciliation_sha256": (
+                venue_reconciliation_meta["spec_sha256"]
+                if venue_reconciliation_meta is not None else ""
+            ),
+            "venue_reconciliation_census": venue_reconciliation_census,
             "baseline_package_member_sha256": baseline["package_member_sha256"],
             "baseline_program_row_sha256": canonical_row_sha256(baseline["program"]),
             "frozen_program_projection_sha256": canonical_row_sha256(expected),
@@ -268,6 +347,11 @@ def freeze_authority(
             output.mkdir(parents=True)
             for name in (*PACKAGE_FILES, STAGE1_REPORT):
                 shutil.copyfile(candidate / name, output / name)
+            if venue_reconciliation_path is not None:
+                shutil.copyfile(
+                    venue_reconciliation_path,
+                    output / "venue-reconciliation.json",
+                )
             (output / MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
         return manifest
 
@@ -291,6 +375,21 @@ def verify_manifest_bytes(manifest_bytes: bytes, candidate: Path) -> dict[str, A
     require(sha256((candidate / STAGE1_REPORT).read_bytes()) ==
             manifest["stage1_report_sha256"],
             "INTEGRATION_FREEZE_STAGE1_REPORT_CHANGED")
+    reconciliation = manifest.get("venue_reconciliation")
+    reconciliation_sha = str(manifest.get("venue_reconciliation_sha256") or "")
+    if reconciliation is not None:
+        require(isinstance(reconciliation, dict),
+                "INTEGRATION_FREEZE_VENUE_RECONCILIATION_INVALID")
+        require(reconciliation_sha == reconciliation.get("spec_sha256"),
+                "INTEGRATION_FREEZE_VENUE_RECONCILIATION_HASH_BINDING")
+        sidecar = candidate / "venue-reconciliation.json"
+        require(sidecar.is_file(),
+                "INTEGRATION_FREEZE_VENUE_RECONCILIATION_MISSING")
+        require(sha256(sidecar.read_bytes()) == reconciliation_sha,
+                "INTEGRATION_FREEZE_VENUE_RECONCILIATION_CHANGED")
+    else:
+        require(reconciliation_sha == "",
+                "INTEGRATION_FREEZE_UNEXPECTED_VENUE_RECONCILIATION_HASH")
     require(manifest["tracked_mutation"] == "NONE"
             and manifest["release_authority"] is False,
             "INTEGRATION_FREEZE_CANNOT_AUTHORIZE_MUTATION")
@@ -343,6 +442,7 @@ def main(argv: list[str] | None = None) -> int:
     freeze.add_argument("--independent-proof-sha256", required=True)
     freeze.add_argument("--repo", type=Path, required=True)
     freeze.add_argument("--output", type=Path, required=True)
+    freeze.add_argument("--venue-reconciliation", type=Path)
     verify = sub.add_parser("verify")
     verify.add_argument("candidate", type=Path)
     prepare = sub.add_parser("prepare-phase0")
@@ -355,6 +455,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.repo,args.school_key,args.freeze_zip,args.expected_sha256,
                 args.research_base,args.main_sha,args.independent_proof,
                 args.independent_proof_sha256,args.output,
+                venue_reconciliation_path=args.venue_reconciliation,
             )
         elif args.command == "verify":
             result = verify_manifest_bytes(

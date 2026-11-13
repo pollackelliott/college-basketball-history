@@ -13,6 +13,10 @@ from collections import defaultdict
 from typing import Any
 
 from stage_research_portfolio import normalize_name, normalize_jurisdiction
+from stage1_venue_reconciliation import (
+    explicit_reuse_locality_compatible,
+    venue_reconciliation_for_row,
+)
 
 
 class ExpansionVenueConflict(ValueError):
@@ -36,6 +40,7 @@ def census(
     new_school_venues: list[dict[str,str]],
     global_venues: list[dict[str,str]],
     global_venue_names: list[dict[str,str]],
+    venue_reconciliation: dict[str,dict[str,Any]] | None = None,
 ) -> dict[str,Any]:
     """Return every duplicate/alias/geography conflict, no exception hides rows.
 
@@ -64,7 +69,8 @@ def census(
     conflicts: list[dict[str,Any]] = []
     classification: list[dict[str,Any]] = []
     seen_keys:set[str]=set()
-    for local in new_school_venues:
+    venue_reconciliation = venue_reconciliation or {}
+    for row_index, local in enumerate(new_school_venues, 1):
         key=local.get("venue_key","").strip()
         labels=_names(local)
         if not key or not labels:
@@ -75,6 +81,9 @@ def census(
             conflicts.append({"class":"VENUE_NEW_SUPPORT_DUPLICATE_KEY",
                               "venue_key":key})
         seen_keys.add(key)
+        explicit = venue_reconciliation_for_row(
+            venue_reconciliation, local, row_index
+        )
         expected_key_rows=by_key.get(key,[])
         if len(expected_key_rows)>1:
             conflicts.append({"class":"VENUE_GLOBAL_DUPLICATE_KEY",
@@ -83,7 +92,14 @@ def census(
         same_key_id=expected_key_rows[0].get("venue_id","") if len(expected_key_rows)==1 else ""
         if same_key_id:
             registered=expected_key_rows[0]
-            if _locality(registered)!=_locality(local):
+            explicit_same = (
+                explicit is not None
+                and explicit.get("action") == "REUSE_CURRENT_IDENTITY"
+                and explicit.get("global_venue_id") == same_key_id
+                and explicit.get("global_venue_key") == key
+                and explicit_reuse_locality_compatible(local, registered, explicit)
+            )
+            if _locality(registered)!=_locality(local) and not explicit_same:
                 conflicts.append({
                     "class":"VENUE_EXACT_KEY_LOCALITY_CONFLICT",
                     "venue_key":key,
@@ -104,6 +120,15 @@ def census(
                 continue
             row=registered[0]
             if row.get("venue_key","") == key:
+                continue
+            explicit_reuse = (
+                explicit is not None
+                and explicit.get("action") == "REUSE_CURRENT_IDENTITY"
+                and explicit.get("global_venue_id") == vid
+                and explicit.get("global_venue_key") == row.get("venue_key","")
+                and explicit_reuse_locality_compatible(local, row, explicit)
+            )
+            if explicit_reuse:
                 continue
             matching_labels=sorted(n for n in labels
                                    if vid in alias_by_name.get(n,set()))
@@ -127,6 +152,12 @@ def census(
         classification.append({
             "venue_key":key,
             "existing_key_reuse_id":same_key_id,
+            "explicit_reuse_id":(
+                explicit.get("global_venue_id","")
+                if explicit is not None
+                and explicit.get("action") == "REUSE_CURRENT_IDENTITY"
+                else ""
+            ),
             "possible_existing_global_ids":sorted(matches),
             "registration_safe":not any(x.get("venue_key")==key for x in conflicts),
         })
