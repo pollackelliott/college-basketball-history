@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-mason-expansion-stage2-proposal-recover-0001",
+  "school_key": "george-mason",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "aad02c572160449fc03a17fa46e5fe0491006289",
+  "previous_control_state_sha256": "79770f0c5baa1c56f82fea8acf4d84a273a0cb4c1abd4a8a87217b0faa829171",
+  "expected_protected_main_sha": "059affedf2e51ae3ade5144b046d2eee3b80f83c",
+  "recovery": {
+    "abandoned_request_id": "george-mason-expansion-stage2-proposal-0001",
+    "lock_commit": null,
+    "target_branch": null
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — deterministic read-only proposal recovery",
+    "authorization": "The already-authorized George Mason Stage 2 phase includes deterministic safe recovery. The accepted read-only STAGE2_PROPOSAL_REHEARSAL request george-mason-expansion-stage2-proposal-0001 failed on REQUEST_PAYLOAD_HASH_MISMATCH before proposal execution. Durable control records no write-ahead, no prepared commit/tree, no mutation lock, and the George Mason onboarding ref remains 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd. The original accepted request bytes independently match active_request_sha256 dd1cd4ba65178ad550630a5418aab01fb60c53c130c70e7729777d2ef99e2597. Authorize only permanent RECOVER to classify the exact failed accepted request and abandon it if NOT_ATTEMPTED or PREPARED_NOT_PUBLISHED, returning global control safely to IDLE. No replay, Stage 2 proposal execution, tracked basketball mutation, current-main refresh, owner gate, release, merge, or shared/global basketball mutation is authorized by this recovery request."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "expansion_phase0": false,
+    "recovery": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
