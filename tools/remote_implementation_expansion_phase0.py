@@ -111,23 +111,66 @@ def materialize_expansion_research_checkpoint(
 def _target_predecessor_authority(
     request: dict[str, Any],
     live_main: str,
+    *,
+    authenticated_published_target_sha: str | None = None,
 ) -> tuple[str, bool]:
+    """Authenticate the target ref while preserving the request predecessor.
+
+    Live Phase 0 requires the target ref to remain at the request-bound
+    predecessor. Fresh verification runs after publication, so it separately
+    authenticates the exact published successor and then reconstructs intent
+    against the original predecessor rather than pretending the ref never moved.
+    """
     target_branch = request["target_branch"]
-    target = remote_head(ROOT, target_branch)
-    if target != request["target_sha"]:
-        raise Stop(
-            "EXPANSION_PHASE0_TARGET_PREDECESSOR_CHANGED expected=%s actual=%s"
-            % (request["target_sha"], target or "[missing]")
+    actual_target = remote_head(ROOT, target_branch)
+    expected_actual = (
+        authenticated_published_target_sha
+        if authenticated_published_target_sha is not None
+        else request["target_sha"]
+    )
+    if actual_target != expected_actual:
+        reason = (
+            "EXPANSION_PHASE0_PUBLISHED_TARGET_CHANGED"
+            if authenticated_published_target_sha is not None
+            else "EXPANSION_PHASE0_TARGET_PREDECESSOR_CHANGED"
         )
+        raise Stop(
+            "%s expected=%s actual=%s"
+            % (reason, expected_actual, actual_target or "[missing]")
+        )
+    target_predecessor = request["target_sha"]
     cp = git(
         "merge-base",
         "--is-ancestor",
-        target,
+        target_predecessor,
         live_main,
         cwd=ROOT,
         check=False,
     )
-    return target, cp.returncode == 0
+    return target_predecessor, cp.returncode == 0
+
+
+def _verification_bound_main(
+    successor: dict[str, Any],
+    observed_live_main: str,
+) -> str:
+    """Return the original transaction main after proving a linear runtime advance."""
+    bound_main = str(successor.get("protected_main_sha") or "")
+    if observed_live_main != bound_main:
+        cp = git(
+            "merge-base",
+            "--is-ancestor",
+            bound_main,
+            observed_live_main,
+            cwd=ROOT,
+            check=False,
+        )
+        if cp.returncode != 0:
+            raise Stop(
+                "EXPANSION_PHASE0_FRESH_BOUND_MAIN_NOT_ANCESTOR "
+                "bound=%s observed=%s" % (bound_main, observed_live_main)
+            )
+    return bound_main
 
 
 def _external_authority(
@@ -137,6 +180,7 @@ def _external_authority(
     live_main: str,
     worktree: Path,
     scratch: Path,
+    authenticated_published_target_sha: str | None = None,
 ) -> dict[str, Any]:
     research_zip = scratch / "expansion-research-frozen.zip"
     checkpoint_info = materialize_expansion_research_checkpoint(request, research_zip)
@@ -200,7 +244,11 @@ def _external_authority(
             shutil.copyfile(blocker, diag / blocker.name)
         raise
 
-    target, ancestor = _target_predecessor_authority(request, live_main)
+    target, ancestor = _target_predecessor_authority(
+        request,
+        live_main,
+        authenticated_published_target_sha=authenticated_published_target_sha,
+    )
     intent = authenticate_intent(
         request=request,
         current_main=live_main,
@@ -309,6 +357,55 @@ def _verify_projected_hashes(
         )
 
 
+def _add_expansion_replay_worktree(
+    bound_main: str,
+    school_key: str,
+) -> Path:
+    """Create an isolated bound-main repo after proving live main is linear.
+
+    Stage 1 and Integration Freeze deliberately require origin/main to equal
+    their authenticated main. Fresh verification may run from newer verifier
+    software, so use a disposable local clone whose origin/main snapshot is
+    pinned to the original transaction main. The outer runtime's real
+    origin/main is separately required to be a linear descendant first.
+    Live publication still uses add_isolated_worktree() unchanged.
+    """
+    origin_main = git("rev-parse", "origin/main", cwd=ROOT).stdout.strip()
+    if origin_main != bound_main:
+        cp = git(
+            "merge-base",
+            "--is-ancestor",
+            bound_main,
+            origin_main,
+            cwd=ROOT,
+            check=False,
+        )
+        if cp.returncode != 0:
+            raise Stop(
+                "EXPANSION_PHASE0_REPLAY_ORIGIN_MAIN_DIVERGED "
+                "bound=%s origin=%s" % (bound_main, origin_main)
+            )
+    path = Path(
+        tempfile.mkdtemp(prefix="remote-expansion-phase0-replay-%s-" % school_key)
+    )
+    shutil.rmtree(path)
+    git(
+        "clone",
+        "--no-hardlinks",
+        str(ROOT),
+        str(path),
+        cwd=ROOT,
+    )
+    git("checkout", "--detach", bound_main, cwd=path)
+    git("update-ref", "refs/remotes/origin/main", bound_main, cwd=path)
+    configure_git(path)
+    if git("rev-parse", "HEAD", cwd=path).stdout.strip() != bound_main:
+        raise Stop("EXPANSION_PHASE0_REPLAY_WORKTREE_MAIN_MISMATCH")
+    if git("rev-parse", "origin/main", cwd=path).stdout.strip() != bound_main:
+        raise Stop("EXPANSION_PHASE0_REPLAY_ORIGIN_MAIN_MISMATCH")
+    return path
+
+
 def prepare_expansion_candidate(
     *,
     request: dict[str, Any],
@@ -316,9 +413,14 @@ def prepare_expansion_candidate(
     live_main: str,
     diag: Path,
     commit: bool,
+    authenticated_published_target_sha: str | None = None,
 ) -> dict[str, Any]:
     """Reconstruct exact expansion Phase 0 candidate from protected main."""
-    worktree = add_isolated_worktree(live_main, request["school_key"])
+    worktree = (
+        _add_expansion_replay_worktree(live_main, request["school_key"])
+        if authenticated_published_target_sha is not None
+        else add_isolated_worktree(live_main, request["school_key"])
+    )
     scratch = Path(tempfile.mkdtemp(prefix="remote-expansion-phase0-authority-"))
     authority = _external_authority(
         request=request,
@@ -326,6 +428,7 @@ def prepare_expansion_candidate(
         live_main=live_main,
         worktree=worktree,
         scratch=scratch,
+        authenticated_published_target_sha=authenticated_published_target_sha,
     )
     allowed = _install_preview_candidate(worktree, request, authority)
     _repository_validation(worktree, diag)
@@ -717,6 +820,8 @@ def verify_expansion_phase0_equivalence(
     ):
         raise Stop("EXPANSION_PHASE0_FRESH_SUCCESSOR_INVALID")
 
+    bound_main = _verification_bound_main(successor, live_main)
+
     writeahead_bytes = git_show_bytes(
         control_head,
         successor["writeahead_manifest_path"],
@@ -809,7 +914,7 @@ def verify_expansion_phase0_equivalence(
         successor["prepared_commit_sha"] + "^{tree}",
         cwd=ROOT,
     ).stdout.strip()
-    if parent != live_main or parent != successor["prepared_parent_sha"]:
+    if parent != bound_main or parent != successor["prepared_parent_sha"]:
         raise Stop("EXPANSION_PHASE0_FRESH_PARENT_MISMATCH")
     if tree != successor["prepared_tree_sha"]:
         raise Stop("EXPANSION_PHASE0_FRESH_TREE_MISMATCH")
@@ -817,9 +922,10 @@ def verify_expansion_phase0_equivalence(
     reconstructed = prepare_expansion_candidate(
         request=request,
         control_commit=control_head,
-        live_main=live_main,
+        live_main=bound_main,
         diag=diag,
         commit=False,
+        authenticated_published_target_sha=successor["prepared_commit_sha"],
     )
     if reconstructed["prepared_tree_sha"] != tree:
         raise Stop("EXPANSION_PHASE0_FRESH_REPLAY_TREE_MISMATCH")
@@ -850,7 +956,8 @@ def verify_expansion_phase0_equivalence(
         "status": "PASS",
         "request_id": request["request_id"],
         "school_key": request["school_key"],
-        "protected_main_sha": live_main,
+        "protected_main_sha": bound_main,
+        "observed_live_main_sha": live_main,
         "target_branch": target_branch,
         "expected_target_predecessor_sha": successor[
             "expected_target_predecessor_sha"
