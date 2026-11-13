@@ -1,0 +1,102 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "8f8092e637f21ca0556a124d682ded705838155401331d1f06783ea5f5393103",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "7ce06c34811b385c7a2af817914caea6c35c77a5bbdaf291960f2f9da4bf93b9",
+    "plan.json": "08f0f0856e013f6b1e46fdae54527d89cf5015ea99e37e398e6b8d209692126d",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "bd972a5bc9022a13aadc64b86263863e6e242af7cebe50e69dd83415e537548f"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "fa02d0916d283e6676efad03d7cf4b7e4146d418bb80a359596ce31479f750e6",
+    "plan.json": "6006f3604f6a913c093d970487d5c1a72aefc535f7a807867e3ebff021b4ca59",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "ddfa29e34246a6f6bc74e7b76bc93335c4d954cc20e0b1705d57600bcda6fe1d"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "george-mason",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 1455,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/george-mason/plan.json",
+    "review_path": ".onboarding/george-mason/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "059affedf2e51ae3ade5144b046d2eee3b80f83c",
+  "recommendation_map": {
+    "action_counts": {},
+    "approved_plan_hash_preview": "8f8092e637f21ca0556a124d682ded705838155401331d1f06783ea5f5393103",
+    "decision_count": 0,
+    "path": "/tmp/remote-stage2-proposal-map-_lu7v29o/recommendation-map.json",
+    "sha256": "ceef0fc589611f8026a1154f55abade09b74dec4290ca14561799946cfba7c74"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-proposal-0003/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/george-mason-expansion-stage2-proposal-0003/recommendation-map.json",
+  "recommendation_map_sha256": "ceef0fc589611f8026a1154f55abade09b74dec4290ca14561799946cfba7c74",
+  "request_id": "george-mason-expansion-stage2-proposal-0003",
+  "request_sha256": "2bd399878cbb63120a09679be177e43179164680be6c86eb6cd0835154b4482e",
+  "runtime_commit_sha": "059affedf2e51ae3ade5144b046d2eee3b80f83c",
+  "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+    "tools/onboard_school.py": "aa3344c74a8c689bd64c31543e57cf94dda6d621de020cbbcb53bc10c5b283de",
+    "tools/onboarding_hardening.py": "6c6a7f42c92da6c82471b7d7172e367565d6e2b046813ea5ab9381c957e95077",
+    "tools/onboarding_plan.py": "c5b6a27e2b38d9459e7253c8387902b0a6da43197e037ae684c31e735d0f7e47",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "site_diagnostic": {},
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-census-0006/checkpoint-manifest.json",
+  "stage2_authority_sha256": "453096c70c940e8e6f4c211b63ebccbd608153b8cfb76c303116c95f5efdb1b1",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd",
+  "target_tree_sha": "aa5b5827144b477c6ef69dd4fb1d931ea0fb036c",
+  "tracked_mutation_proof": {
+    "after_head_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd",
+    "after_status": "",
+    "after_tree_sha": "aa5b5827144b477c6ef69dd4fb1d931ea0fb036c",
+    "before_head_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd",
+    "before_status": "",
+    "before_tree_sha": "aa5b5827144b477c6ef69dd4fb1d931ea0fb036c",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
