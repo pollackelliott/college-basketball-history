@@ -125,6 +125,28 @@ The initial response should be concise and should state:
 
 If no genuine Control Center issue exists, explicitly say the Control Center is recovered, ready, and requires no owner action.
 
+### F. Routine school-lane tooling PRs are not Control Center work
+
+The Control Center is an exception/governance lane, not a mandatory merge desk for every permanent-tool repair.
+
+Once the owner has authorized a school Research stage or Implementation phase, a generic tooling-only repair required to complete that same stage/phase may be developed, validated, and merged from the school lane under the delegation rule in `AGENTS.md`. A ready exact-head tooling PR is **not** by itself a Control Center escalation.
+
+The school lane may carry that repair through merge when all of the following remain true:
+
+- the diff is confined to generic tooling, tests, workflows, and documentation;
+- no school package, canonical-game data, generated public data, shared/global basketball registry, owner-gate record, or publication state is changed;
+- the exact failure topology has regression coverage;
+- required exact-head CI and any applicable target-school candidate/runtime rehearsal pass;
+- protected `main` and the exact PR head are reauthenticated immediately before merge;
+- any intervening main advance is either incorporated and fully revalidated or classified as a material authority conflict and stopped;
+- post-merge protected main and merge parents are authenticated, followed by a rerun of the permanent school-stage entrypoint.
+
+Return to the Control Center only when the proposed repair changes historical/shared authority, mutates shared/global or already-published basketball state, changes repository policy/governance or mutation scope, creates a competing serialized Implementation claim, or enters an unsafe/ambiguous recovery state.
+
+For Research in particular, the intended owner interaction is **stage result -> owner `Proceed` -> next stage**. Control Center round trips between deterministic technical steps inside that stage are a process defect.
+
+The same principle applies when a school Implementation phase was temporarily interrupted by a generic tooling repair. A repair authorization may forbid executing the later live school mutation *inside the repair unit* without turning that later mutation into permanent Control Center work. After the repair merges and the school revalidates against refreshed protected main, return to the ordinary lifecycle boundary. If current policy says the next mutation is normal target-school Phase 0 authority, the owner authorizes it with ordinary `Proceed` in that school lane.
+
 ## 4. Repository-owned recovery command
 
 When a runnable repository checkout is available, use:

@@ -895,6 +895,10 @@ def validate_request(request: dict[str, Any]) -> None:
             "stage1_independent_proof",
             required=True,
         )
+        _validate_payload_ref(
+            request.get("venue_reconciliation"),
+            "venue_reconciliation",
+        )
         _require_sha(
             request.get("integration_freeze_sha256"),
             64,

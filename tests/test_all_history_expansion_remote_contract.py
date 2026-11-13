@@ -119,6 +119,55 @@ class ExpansionTransactionModelTests(unittest.TestCase):
             self.assertEqual(result["expected_target_predecessor_sha"],self.target)
             self.assertEqual(len(result["projected_package_sha256"]),6)
 
+    def test_hash_bound_venue_reconciliation_is_part_of_intent(self):
+        with tempfile.TemporaryDirectory() as temp:
+            freeze,preview,view=self.fixture(Path(temp))
+            sidecar=b'{"schema_version":2,"school_key":"example"}\n'
+            sidecar_sha=sha256(sidecar)
+            (freeze/"venue-reconciliation.json").write_bytes(sidecar)
+            manifest=json.loads((freeze/MANIFEST_NAME).read_bytes())
+            census={
+                "schema_version":1,
+                "venue_count":1,
+                "classification_counts":{"NEW_GLOBAL_IDENTITY":1},
+                "blocker_count":0,
+                "blockers":[],
+                "rows":[],
+            }
+            manifest["venue_reconciliation"]={
+                "schema_version":2,
+                "spec_path":"venue-reconciliation.json",
+                "spec_sha256":sidecar_sha,
+                "owner_approval_basis":"durable accepted resolution",
+                "research_zip_sha256":self.research_sha,
+                "frozen_venues_sha256":"f"*64,
+                "mappings":[],
+            }
+            manifest["venue_reconciliation_sha256"]=sidecar_sha
+            manifest["venue_reconciliation_census"]=census
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+            raw=canonical_bytes(manifest)
+            (freeze/MANIFEST_NAME).write_bytes(raw)
+            self.integration_sha=sha256(raw)
+            self.request["integration_freeze_sha256"]=self.integration_sha
+            self.request["venue_reconciliation"]={
+                "path":".remote-implementation/payloads/example/venue-reconciliation.json",
+                "sha256":sidecar_sha,
+            }
+            view["integration_freeze_sha256"]=self.integration_sha
+            view["venue_reconciliation_sha256"]=sidecar_sha
+            view["venue_reconciliation_census"]=census
+            (preview/"phase0-preview.json").write_bytes(canonical_bytes(view))
+            result=self.authenticate(freeze,preview)
+            self.assertEqual(result["venue_reconciliation_sha256"],sidecar_sha)
+            self.request["venue_reconciliation"]["sha256"]="0"*64
+            with self.assertRaisesRegex(
+                IntegrationAuthorityError,
+                "VENUE_RECONCILIATION_REQUEST_BINDING_MISMATCH",
+            ):
+                self.authenticate(freeze,preview)
+
     def test_changed_main_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             freeze,preview,_=self.fixture(Path(temp))

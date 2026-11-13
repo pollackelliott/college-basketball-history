@@ -149,6 +149,19 @@ def _external_authority(
         raise Stop("EXPANSION_PHASE0_STAGE1_PROOF_MISSING")
     if sha256_file(proof) != request["stage1_independent_proof_sha256"]:
         raise Stop("EXPANSION_PHASE0_STAGE1_PROOF_HASH_MISMATCH")
+    venue_reconciliation = materialize_payload(
+        control_commit,
+        request.get("venue_reconciliation"),
+        scratch / "venue-reconciliation.json",
+    )
+    if request.get("venue_reconciliation") is not None:
+        if venue_reconciliation is None:
+            raise Stop("EXPANSION_PHASE0_VENUE_RECONCILIATION_MISSING")
+        if (
+            sha256_file(venue_reconciliation)
+            != request["venue_reconciliation"]["sha256"]
+        ):
+            raise Stop("EXPANSION_PHASE0_VENUE_RECONCILIATION_HASH_MISMATCH")
 
     frozen = scratch / "integration-freeze"
     manifest = freeze_authority(
@@ -161,6 +174,7 @@ def _external_authority(
         proof,
         request["stage1_independent_proof_sha256"],
         frozen,
+        venue_reconciliation_path=venue_reconciliation,
     )
     manifest_bytes = (frozen / MANIFEST_NAME).read_bytes()
     manifest_sha = sha256_bytes(manifest_bytes)
@@ -206,6 +220,7 @@ def _external_authority(
     return {
         "checkpoint_info": checkpoint_info,
         "proof_path": proof,
+        "venue_reconciliation_path": venue_reconciliation,
         "frozen": frozen,
         "manifest": manifest,
         "manifest_bytes": manifest_bytes,
@@ -458,14 +473,20 @@ def run_expansion_phase0(
     (input_dir / "stage1-independent-proof.json").write_bytes(
         authority["proof_path"].read_bytes()
     )
+    sidecar_names = [
+        "integration-freeze.json",
+        STAGE1_REPORT,
+        "phase0-preview.json",
+        "stage1-independent-proof.json",
+    ]
+    if authority["venue_reconciliation_path"] is not None:
+        (input_dir / "venue-reconciliation.json").write_bytes(
+            authority["venue_reconciliation_path"].read_bytes()
+        )
+        sidecar_names.append("venue-reconciliation.json")
     sidecars = {
         name: sha256_file(input_dir / name)
-        for name in (
-            "integration-freeze.json",
-            STAGE1_REPORT,
-            "phase0-preview.json",
-            "stage1-independent-proof.json",
-        )
+        for name in sidecar_names
     }
     write_json(
         input_dir / "input-manifest.json",
@@ -484,6 +505,9 @@ def run_expansion_phase0(
                 "stage1_independent_proof_sha256"
             ],
             "integration_freeze_sha256": request["integration_freeze_sha256"],
+            "venue_reconciliation_sha256": authority["manifest"].get(
+                "venue_reconciliation_sha256",""
+            ),
             "semantic_snapshot_sha256": authority[
                 "semantic_snapshot_sha256"
             ],
@@ -542,6 +566,9 @@ def run_expansion_phase0(
         "allowed_paths": candidate["allowed_paths"],
         "sidecars": sidecars,
         "integration_freeze_sha256": request["integration_freeze_sha256"],
+        "venue_reconciliation_sha256": authority["manifest"].get(
+            "venue_reconciliation_sha256",""
+        ),
         "package_member_sha256": authority["manifest"][
             "package_member_sha256"
         ],
@@ -611,6 +638,9 @@ def run_expansion_phase0(
         "changed_paths": changed,
         "changed_file_sha256": changed_hashes,
         "integration_freeze_sha256": request["integration_freeze_sha256"],
+        "venue_reconciliation_sha256": authority["manifest"].get(
+            "venue_reconciliation_sha256",""
+        ),
         "semantic_snapshot_sha256": authority[
             "semantic_snapshot_sha256"
         ],
@@ -636,6 +666,9 @@ def run_expansion_phase0(
             "successor_manifest_path": successor_path.as_posix(),
             "successor_manifest_sha256": successor_sha,
             "integration_freeze_sha256": request["integration_freeze_sha256"],
+            "venue_reconciliation_sha256": authority["manifest"].get(
+                "venue_reconciliation_sha256",""
+            ),
             "semantic_snapshot_sha256": authority[
                 "semantic_snapshot_sha256"
             ],
@@ -708,6 +741,7 @@ def verify_expansion_phase0_equivalence(
         "changed_paths",
         "changed_file_sha256",
         "integration_freeze_sha256",
+        "venue_reconciliation_sha256",
         "semantic_snapshot_sha256",
         "repository_validation",
     ):
@@ -733,6 +767,16 @@ def verify_expansion_phase0_equivalence(
         != successor["integration_freeze_sha256"]
     ):
         raise Stop("EXPANSION_PHASE0_FRESH_FREEZE_SIDECAR_BINDING_MISMATCH")
+    reconciliation_sha = str(successor.get("venue_reconciliation_sha256") or "")
+    if reconciliation_sha:
+        if sidecars.get("venue-reconciliation.json") != reconciliation_sha:
+            raise Stop(
+                "EXPANSION_PHASE0_FRESH_VENUE_RECONCILIATION_SIDECAR_BINDING_MISMATCH"
+            )
+    elif "venue-reconciliation.json" in sidecars:
+        raise Stop(
+            "EXPANSION_PHASE0_FRESH_UNEXPECTED_VENUE_RECONCILIATION_SIDECAR"
+        )
 
     request_path = (
         ".remote-implementation/requests/%s/request.json"
@@ -780,6 +824,13 @@ def verify_expansion_phase0_equivalence(
     if reconstructed["prepared_tree_sha"] != tree:
         raise Stop("EXPANSION_PHASE0_FRESH_REPLAY_TREE_MISMATCH")
     if (
+        reconstructed["authority"]["manifest"].get(
+            "venue_reconciliation_sha256",""
+        )
+        != successor.get("venue_reconciliation_sha256","")
+    ):
+        raise Stop("EXPANSION_PHASE0_FRESH_VENUE_RECONCILIATION_MISMATCH")
+    if (
         reconstructed["authority"]["semantic_snapshot_sha256"]
         != successor["semantic_snapshot_sha256"]
     ):
@@ -809,6 +860,9 @@ def verify_expansion_phase0_equivalence(
         "integration_freeze_sha256": successor[
             "integration_freeze_sha256"
         ],
+        "venue_reconciliation_sha256": successor.get(
+            "venue_reconciliation_sha256",""
+        ),
         "semantic_snapshot_sha256": successor[
             "semantic_snapshot_sha256"
         ],
