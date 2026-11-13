@@ -11,27 +11,38 @@ jobs:
   rehearse:
     runs-on: ubuntu-latest
     steps:
-      # Integration CI must use the exact candidate that GitHub would merge,
-      # not the unchanged school head against obsolete pre-expansion tests.
-      - name: Check out exact PR merge candidate
+      # Integration CI must validate the exact PR head against the protected-main
+      # state that exists when this run executes. GitHub pull_request event base/merge
+      # refs may be stale after protected main advances beneath an open release PR.
+      - name: Check out exact PR head
         uses: actions/checkout@v4
         with:
-          ref: refs/pull/${{ github.event.pull_request.number }}/merge
-          fetch-depth: 2
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
 
-      - name: Verify exact merge candidate parents
+      - name: Build exact live-main merge candidate
         env:
-          EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          test "$(git rev-parse HEAD^1)" = "$EXPECTED_BASE_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+          live_main="$(git rev-parse refs/remotes/origin/main)"
+          echo "LIVE_MAIN_SHA=$live_main" >> "$GITHUB_ENV"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B ci-live-main refs/remotes/origin/main
+          git merge --no-ff --no-edit "$EXPECTED_HEAD_SHA"
+          test "$(git rev-parse HEAD^1)" = "$live_main"
           test "$(git rev-parse HEAD^2)" = "$EXPECTED_HEAD_SHA"
-          echo "PR_MERGE_PARENT_BINDINGS=PASS"
+          echo "LIVE_MAIN_PR_MERGE_PARENT_BINDINGS=PASS"
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Run All-History expansion implementation acceptance gate
+        run: python tools/all_history_expansion_implementation_acceptance.py
 
       - name: Run transaction fixture tests
         run: python -m unittest discover -s tests -p 'test_opponent_identity_transaction.py' -v
@@ -427,3 +438,15 @@ jobs:
             exit 1
           fi
           echo 'PASS: no basketball data changed in the real checkout.'
+
+      - name: Require protected main stayed fixed during rehearsal
+        run: |
+          latest_main="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          test -n "$latest_main"
+          if [ "$latest_main" != "$LIVE_MAIN_SHA" ]; then
+            echo "FAIL: protected main moved during transaction rehearsal"
+            echo "bound=$LIVE_MAIN_SHA"
+            echo "live=$latest_main"
+            exit 1
+          fi
+          echo "LIVE_MAIN_STABILITY=PASS"

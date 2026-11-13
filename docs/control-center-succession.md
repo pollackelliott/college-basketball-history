@@ -141,6 +141,8 @@ A mechanically safe `STAGE2_CURRENT_MAIN_REFRESH` is likewise not Control Center
 
 Control Center should also treat hour-long school-chat execution as a process defect. School turns must obey the repository hard turn budget: one major durable advance, no repeated external polling, and at most one failed candidate-validation cycle plus one corrected replacement cycle before checkpoint/yield.
 
+Owner-facing waiting semantics must distinguish **automation running** from **chat transport required**. If an already-authorized repository workflow or continuation is accepted/queued/running and no additional chat action can advance it, the school lane reports `NEXT OWNER ACTION: NONE — AUTHORIZED PHASE RUNNING` with the exact run link. It must not ask the owner to type `Continue` merely to poll or permit an already-queued continuation. `CONTINUE — SAME PHASE AUTHORITY PERSISTS` is reserved for a durable same-phase point where another chat turn must actually submit or execute the next deterministic operation.
+
 The school lane may carry that repair through merge when all of the following remain true:
 
 - the diff is confined to generic tooling, tests, workflows, and documentation;
