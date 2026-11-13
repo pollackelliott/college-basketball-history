@@ -190,6 +190,16 @@ class ExpansionAccountingTests(unittest.TestCase):
             self.assertTrue(t["contested_source_still_unresolved"])
             self.assertEqual(t["unidentified_season_aggregate_games"],41)
 
+    def test_production_authority_cannot_be_forged_by_registry_override(self):
+        self.make_parent(); self.make_authority()
+        with self.assertRaisesRegex(ValueError, "REGISTRY_OVERRIDE_NOT_ALLOWED_FOR_PRODUCTION"):
+            mod.audit(self.parent, mod.sha(self.parent.read_bytes()), self.registry,
+                      main_sha="a" * 40)
+
+    def test_production_authority_requires_pinned_main(self):
+        with self.assertRaisesRegex(ValueError, "EXPECTED_PROTECTED_MAIN_SHA_REQUIRED"):
+            mod.protected_registry_authentication(mod.REGISTRY, "not-a-commit")
+
     def test_unapproved_wartime_exception_blocks(self):
         self.make_parent();self.make_authority()
         payload=json.loads(self.registry.read_bytes())

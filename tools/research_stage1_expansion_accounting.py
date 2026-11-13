@@ -19,12 +19,14 @@ import hashlib
 import io
 import json
 import re
+import subprocess
 import sys
 import zipfile
 from collections import Counter, defaultdict
 from pathlib import Path
 
-REGISTRY = Path(__file__).resolve().parents[1] / "data/reference/expansion-stage1-accounting-authorities.json"
+REGISTRY_PATH = "data/reference/expansion-stage1-accounting-authorities.json"
+REGISTRY = Path(__file__).resolve().parents[1] / REGISTRY_PATH
 BASE = "df73675852ec5a43dfac50da0ee06d8bcabf8832"
 SCHOOL = "arizona-state"
 ORIGINAL_BLOB = "bb2e5ddb63e2caab96c2f3eb33d4d231bf75c875"
@@ -317,7 +319,29 @@ def lookup(registry_path, school):
     return matches[0] if matches else None
 
 
-def audit(parent, parent_sha, registry=REGISTRY):
+def protected_registry_authentication(registry, main_sha):
+    """Prove that authority bytes are from the exact remote protected-main Git object."""
+    if not re.fullmatch(r"[0-9a-f]{40}", main_sha or ""):
+        raise ValueError("EXPECTED_PROTECTED_MAIN_SHA_REQUIRED")
+    if Path(registry).resolve() != REGISTRY.resolve():
+        raise ValueError("REGISTRY_OVERRIDE_NOT_ALLOWED_FOR_PRODUCTION")
+    root = Path(__file__).resolve().parents[1]
+    try:
+        actual_main = subprocess.check_output(
+            ["git", "-C", str(root), "rev-parse", "refs/remotes/origin/main"],
+            stderr=subprocess.DEVNULL, text=True).strip()
+        committed = subprocess.check_output(
+            ["git", "-C", str(root), "show", f"{main_sha}:{REGISTRY_PATH}"],
+            stderr=subprocess.DEVNULL)
+    except (OSError, subprocess.CalledProcessError):
+        raise ValueError("PROTECTED_MAIN_REGISTRY_GIT_OBJECT_UNAVAILABLE")
+    if actual_main != main_sha:
+        raise ValueError("PROTECTED_MAIN_SHA_CHANGED")
+    if not REGISTRY.is_file() or REGISTRY.read_bytes() != committed:
+        raise ValueError("AUTHORITY_REGISTRY_BYTES_NOT_PROTECTED_MAIN")
+
+
+def audit(parent, parent_sha, registry=REGISTRY, main_sha=None):
     members, manifest = zip_read(parent, parent_sha)
     defects = []
     if manifest.get("kind") != "EXPANSION_STAGE1_PARENT_V1" or manifest.get("school_key") != SCHOOL:
@@ -368,6 +392,10 @@ def audit(parent, parent_sha, registry=REGISTRY):
                 defects.append("PARENT_NOT_EXACT_DETERMINISTIC_REPLAY")
         except (ValueError, KeyError, TypeError, OSError) as exc:
             defects.append("PARENT_REPLAY_FAILED:" + str(exc))
+    if main_sha is not None:
+        protected_registry_authentication(registry, main_sha)
+    elif Path(registry).resolve() == REGISTRY.resolve():
+        defects.append("PROTECTED_MAIN_AUTHENTICATION_REQUIRED")
     authority = lookup(registry, SCHOOL)
     if authority is None:
         defects.append("NO_EXACT_OWNER_AUTHORITY")
@@ -398,9 +426,9 @@ def audit(parent, parent_sha, registry=REGISTRY):
             "expected_terminal_residuals": sorted(expected_ids)}
 
 
-def closeout(parent, report_path, parent_sha, audit_sha, registry, output):
+def closeout(parent, report_path, parent_sha, audit_sha, registry, output, main_sha=None):
     report_raw = Path(report_path).read_bytes()
-    if sha(report_raw) != audit_sha or json.loads(report_raw) != audit(parent, parent_sha, registry):
+    if sha(report_raw) != audit_sha or json.loads(report_raw) != audit(parent, parent_sha, registry, main_sha):
         raise ValueError("AUDIT_HASH_OR_FRESHNESS_MISMATCH")
     report = json.loads(report_raw)
     if report["status"] != "ELIGIBLE_FOR_EXPANSION_STAGE1_ACCOUNTING_CLOSEOUT":
@@ -440,10 +468,10 @@ def closeout(parent, report_path, parent_sha, audit_sha, registry, output):
     return {"status": "CLOSEOUT_CANDIDATE_ONLY", "sha256": result, "stage1_complete": False}
 
 
-def verify_closeout(parent, successor, audit_path, parent_sha, successor_sha, audit_sha, registry):
+def verify_closeout(parent, successor, audit_path, parent_sha, successor_sha, audit_sha, registry, main_sha=None):
     if sha(Path(audit_path).read_bytes()) != audit_sha:
         raise ValueError("AUDIT_HASH_MISMATCH")
-    expected_report = audit(parent, parent_sha, registry)
+    expected_report = audit(parent, parent_sha, registry, main_sha)
     if expected_report != json.loads(Path(audit_path).read_bytes()) or expected_report["status"] != "ELIGIBLE_FOR_EXPANSION_STAGE1_ACCOUNTING_CLOSEOUT":
         raise ValueError("FRESH_AUDIT_NOT_ELIGIBLE")
     old, _ = zip_read(parent, parent_sha)
@@ -457,7 +485,7 @@ def verify_closeout(parent, successor, audit_path, parent_sha, successor_sha, au
     import tempfile
     with tempfile.TemporaryDirectory() as d:
         candidate = Path(d) / "expected.zip"
-        closeout(parent, audit_path, parent_sha, audit_sha, registry, candidate)
+        closeout(parent, audit_path, parent_sha, audit_sha, registry, candidate, main_sha)
         if candidate.read_bytes() != Path(successor).read_bytes():
             raise ValueError("CLOSEOUT_CONTENT_MISMATCH")
     return {"status": "VERIFIED_EXPANSION_STAGE1_ACCOUNTING_CLOSEOUT_CANDIDATE",
@@ -477,28 +505,28 @@ def main(argv=None):
     p.add_argument("--accept-verified-candidates", action="store_true")
     p = sub.add_parser("audit")
     p.add_argument("parent", type=Path); p.add_argument("--parent-sha", required=True)
-    p.add_argument("--registry", type=Path, default=REGISTRY); p.add_argument("--output", type=Path)
+    p.add_argument("--registry", type=Path, default=REGISTRY); p.add_argument("--main-sha", required=True); p.add_argument("--output", type=Path)
     p = sub.add_parser("closeout")
     p.add_argument("parent", type=Path); p.add_argument("audit", type=Path)
     p.add_argument("--parent-sha", required=True); p.add_argument("--audit-sha", required=True)
-    p.add_argument("--registry", type=Path, default=REGISTRY); p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--registry", type=Path, default=REGISTRY); p.add_argument("--main-sha", required=True); p.add_argument("--output", type=Path, required=True)
     p = sub.add_parser("verify-closeout")
     p.add_argument("parent", type=Path); p.add_argument("successor", type=Path); p.add_argument("audit", type=Path)
     p.add_argument("--parent-sha", required=True); p.add_argument("--successor-sha", required=True)
-    p.add_argument("--audit-sha", required=True); p.add_argument("--registry", type=Path, default=REGISTRY)
+    p.add_argument("--audit-sha", required=True); p.add_argument("--registry", type=Path, default=REGISTRY); p.add_argument("--main-sha", required=True)
     a = ap.parse_args(argv)
     try:
         if a.command == "materialize":
             out = materialize(a.checkpoint, a.source, a.checkpoint_sha, a.source_blob, a.output,
                               accept=a.accept_verified_candidates)
         elif a.command == "audit":
-            out = audit(a.parent, a.parent_sha, a.registry)
+            out = audit(a.parent, a.parent_sha, a.registry, a.main_sha)
             if a.output: a.output.write_bytes(jb(out))
         elif a.command == "closeout":
-            out = closeout(a.parent, a.audit, a.parent_sha, a.audit_sha, a.registry, a.output)
+            out = closeout(a.parent, a.audit, a.parent_sha, a.audit_sha, a.registry, a.output, a.main_sha)
         else:
             out = verify_closeout(a.parent, a.successor, a.audit, a.parent_sha,
-                                  a.successor_sha, a.audit_sha, a.registry)
+                                  a.successor_sha, a.audit_sha, a.registry, a.main_sha)
     except (ValueError, KeyError, IndexError, TypeError, OSError, zipfile.BadZipFile) as exc:
         print(jb({"status": "BLOCKED", "error": str(exc)}).decode(), end="")
         return 2

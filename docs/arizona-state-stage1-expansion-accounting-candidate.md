@@ -27,6 +27,9 @@ research-base source-game CSV are embedded unchanged and reauthenticated.
 `audit` defaults to the protected-main reference
 `data/reference/expansion-stage1-accounting-authorities.json`, which is **not
 included in this candidate**. No such Arizona State authority currently exists.
+Future CLI audit/closeout/verify-closeout commands require `--main-sha` and
+independently compare the registry bytes against the exact `origin/main` Git
+object; arbitrary `--registry` overrides are rejected in production.
 A successful future audit must hash-bind a separately approved parent,
 research base, identified-game ledger, 39-season census, explicit four-season
 aggregate accounting (including the narrow 1943–44 wartime exception), exact
