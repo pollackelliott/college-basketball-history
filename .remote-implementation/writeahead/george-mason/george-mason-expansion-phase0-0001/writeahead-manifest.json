@@ -1,0 +1,70 @@
+{
+  "allowed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/george-mason/conferences.csv",
+    "schools/george-mason/notes.md",
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv",
+    "schools/george-mason/source-notes.md",
+    "schools/george-mason/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "33e949ae8df9542e848d9ffa95dd52e68782b52ee9f1550891ad391785a280cd",
+    "data/reference/venue-names.csv": "cda73fbd3af540c8fab3c74c36af46a01029c274fcc71ef420b7c4983611122b",
+    "data/reference/venues.csv": "d140198db9ee70a3fea456c3940bed75b8ffc55b0e19fba4bebd1699d8ce3e60",
+    "schools/george-mason/notes.md": "1f7f5a2775e0da0cf2fa0e2bef647e578eed694a87a855e80a9dd994213ac3ac",
+    "schools/george-mason/opponents.csv": "3d26d85655ef41699a455868206e39b057134cef358c77ef5415f60718c2e47b",
+    "schools/george-mason/source-games.csv": "ff92b800cd02327399ba2dd2858afae65496681a2d1a1da6dc03acd3b5d106a3",
+    "schools/george-mason/source-notes.md": "8e17fdbfe3a3b3ec921b842f11e2b031d65ac2fa0c7a80e5e737d077b09f8422",
+    "schools/george-mason/venues.csv": "3b1fb4e838092d78e5ae730bbbac95d31b77200e83f6077f076e11fb2512b24a"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/george-mason/notes.md",
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv",
+    "schools/george-mason/source-notes.md",
+    "schools/george-mason/venues.csv"
+  ],
+  "commit_message": "Stage george-mason all-history expansion Phase 0",
+  "expected_target_predecessor_sha": "adca1cb9d9a882ad68520961dd95f324d873a075",
+  "global_lock_commit": "6828d855e5e00a10fa8ad0dd0f6847d1f3b2944b",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "EXPANSION_PHASE0",
+  "package_member_sha256": {
+    "conferences.csv": "f4c7b5dc9e4aa80f69de682a900bf5c7fb8326d18f42e5c5861e95f2dccc3ec9",
+    "notes.md": "1f7f5a2775e0da0cf2fa0e2bef647e578eed694a87a855e80a9dd994213ac3ac",
+    "opponents.csv": "3d26d85655ef41699a455868206e39b057134cef358c77ef5415f60718c2e47b",
+    "source-games.csv": "ff92b800cd02327399ba2dd2858afae65496681a2d1a1da6dc03acd3b5d106a3",
+    "source-notes.md": "8e17fdbfe3a3b3ec921b842f11e2b031d65ac2fa0c7a80e5e737d077b09f8422",
+    "venues.csv": "42977b11d4ea2f55c05829cd5732c2dd6a00e970f53b432bdd400c27102d8431"
+  },
+  "prepared_commit_sha": "330a5873008d2bdc3afe3ce73d1f4af9c3ce983f",
+  "prepared_parent_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
+  "prepared_tree_sha": "da8bb00a1c6e89d4236c46e287076c0371bf589a",
+  "protected_main_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
+  "repository_validation": "PASS",
+  "request_id": "george-mason-expansion-phase0-0001",
+  "request_sha256": "015dd18a0254327963be3ffc61d08239a839995f660111267ec18fe54aa27af2",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_checkpoint_sha256": "bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "170bd061f992f4dc4a8500240aa1ba48c55f2a4762497c6900e78a01bf6feb85",
+    "integration-freeze.json": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+    "phase0-preview.json": "f3ef3481e822296400e3913342c019271ba595fdda1f53fc29ebb24f977ea66b",
+    "stage1-independent-proof.json": "5d2be4afe287e9cf8bde343c389439d706588ce7fe6c90f93ebb5e5ad5a5bf43",
+    "venue-reconciliation.json": "7fdfd39970ac63af563444a7efcde57225846474a9aade1da95f18ab4913b931"
+  },
+  "stage1_independent_proof_sha256": "5d2be4afe287e9cf8bde343c389439d706588ce7fe6c90f93ebb5e5ad5a5bf43",
+  "target_branch": "data/george-mason-onboarding",
+  "venue_reconciliation_sha256": "7fdfd39970ac63af563444a7efcde57225846474a9aade1da95f18ab4913b931"
+}
