@@ -1,0 +1,36 @@
+{
+  "allowed_paths": [
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "dominican-new-york",
+    "salisbury"
+  ],
+  "opponent_changed_row_count": 3,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "source_game_changed_ids": [
+    "GMU-EXP-1969-70-017",
+    "GMU-EXP-1970-71-006",
+    "GMU-EXP-1971-72-003",
+    "GMU-EXP-1972-73-023",
+    "GMU-EXP-1973-74-019",
+    "GMU-EXP-1974-75-017",
+    "GMU-EXP-1975-76-020",
+    "GMU-EXP-1975-76-026",
+    "GMU-EXP-1976-77-002",
+    "GMU-EXP-1976-77-008",
+    "GMU-EXP-1976-77-019",
+    "GMU-EXP-1977-78-010",
+    "GMU-EXP-1977-78-022"
+  ],
+  "source_game_changed_keys": [
+    "dominican-new-york",
+    "salisbury"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 13
+}

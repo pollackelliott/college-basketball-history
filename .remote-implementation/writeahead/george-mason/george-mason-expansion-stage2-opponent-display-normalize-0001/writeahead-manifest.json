@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/george-mason/opponents.csv": "48b18b76642656240a9d12a9e797b8ae500716e52849f39c1c678adac973d2b2",
+    "schools/george-mason/source-games.csv": "de2f7c5d4f5e81c242d89a6353cd1eb9f9766069457804608135eed3ec2f838a"
+  },
+  "changed_paths": [
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv"
+  ],
+  "commit_message": "Normalize george-mason historical opponent display representation",
+  "expected_blocker_keys": [
+    "dominican-new-york",
+    "salisbury"
+  ],
+  "expected_target_predecessor_sha": "330a5873008d2bdc3afe3ce73d1f4af9c3ce983f",
+  "field_level_proof_sha256": "13e5fa6a193d2329e66123c869ea60e11b4ef38925a185d6a90d9b65129fc17d",
+  "global_lock_commit": "2d643243cbcb5907db432715aae440c07276c169",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "d1dda9b315aedf20e00f16c2884e1d6b63bbe84248329fbcdda04718d8e4edc7",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd",
+  "prepared_parent_sha": "330a5873008d2bdc3afe3ce73d1f4af9c3ce983f",
+  "prepared_tree_sha": "aa5b5827144b477c6ef69dd4fb1d931ea0fb036c",
+  "protected_main_sha": "7c6457aabf5e741beabef8e4b5e22be16108a354",
+  "repository_validation": "PASS",
+  "request_id": "george-mason-expansion-stage2-opponent-display-normalize-0001",
+  "request_sha256": "18e7ba56ef3e07cb9677c55c28cb9b5849bffad2a813d54ced29f0a58a4e867c",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_drift_after": {
+    "baseline_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+    "integration_base_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
+    "school_key": "george-mason",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+    "integration_base_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
+    "school_key": "george-mason",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "b8210f44ee276f856357943ad98a5b5b38249b0720090b3294da8fa3f96af22b",
+    "field-level-proof.json": "13e5fa6a193d2329e66123c869ea60e11b4ef38925a185d6a90d9b65129fc17d",
+    "integration-freeze.json": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+    "normalization-report.json": "d1dda9b315aedf20e00f16c2884e1d6b63bbe84248329fbcdda04718d8e4edc7",
+    "semantic-drift-proof.json": "385222e8450849588c7598d4ae984f95ad03aaefca03f3a5301bdeb9470538fc"
+  },
+  "source_game_normalized_name_row_count": 13,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "b8210f44ee276f856357943ad98a5b5b38249b0720090b3294da8fa3f96af22b",
+  "target_branch": "data/george-mason-onboarding"
+}

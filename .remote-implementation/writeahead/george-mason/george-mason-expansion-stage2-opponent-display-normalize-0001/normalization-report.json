@@ -1,0 +1,117 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 3,
+  "changes": [
+    {
+      "authority_names": [
+        "Dominican (NY)"
+      ],
+      "authority_signature": "dominicanny",
+      "canonical_opponent_key": "dominican-new-york",
+      "from_names": [
+        "Dominican University New York"
+      ],
+      "target_row_count": 1,
+      "to_name": "Dominican (NY)"
+    },
+    {
+      "authority_names": [
+        "Salisbury"
+      ],
+      "authority_signature": "salisbury",
+      "canonical_opponent_key": "salisbury",
+      "from_names": [
+        "Salisbury University"
+      ],
+      "target_row_count": 2,
+      "to_name": "Salisbury"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 13,
+  "source_game_display_changes": [
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1969-70-017",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1970-71-006",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1971-72-003",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1972-73-023",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1973-74-019",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1974-75-017",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1975-76-020",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1975-76-026",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Dominican University New York",
+      "normalized_opponent_key": "dominican-new-york",
+      "source_game_id": "GMU-EXP-1976-77-002",
+      "to_name": "Dominican (NY)"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1976-77-008",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1976-77-019",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1977-78-010",
+      "to_name": "Salisbury"
+    },
+    {
+      "from_name": "Salisbury University",
+      "normalized_opponent_key": "salisbury",
+      "source_game_id": "GMU-EXP-1977-78-022",
+      "to_name": "Salisbury"
+    }
+  ],
+  "status": "PASS"
+}
