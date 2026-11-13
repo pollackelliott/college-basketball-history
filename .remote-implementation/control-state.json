@@ -574,7 +574,7 @@
     "george-mason-expansion-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
-  "active_lock_commit": null,
+  "active_lock_commit": "f257d8f7963c773f8b9e466bbddd3a62baad9fdf",
   "active_lock_owner": "github-actions:43481238988:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
