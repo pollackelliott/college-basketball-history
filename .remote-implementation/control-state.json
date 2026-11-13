@@ -562,7 +562,7 @@
     "george-mason-expansion-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "7c6457aabf5e741beabef8e4b5e22be16108a354",
-  "active_lock_commit": null,
+  "active_lock_commit": "2d643243cbcb5907db432715aae440c07276c169",
   "active_lock_owner": "github-actions:43436199970:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
