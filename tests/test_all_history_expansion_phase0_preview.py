@@ -52,7 +52,11 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
         }
         for name,raw in artifacts.items():
             (frozen/name).write_bytes(raw)
-        baseline={k:sha256(artifacts[k]) for k in PACKAGE_FILES}
+        inherited=dict(artifacts)
+        inherited["source-games.csv"]=csv_encoded([], list(source))
+        inherited["opponents.csv"]=csv_encoded([], ["source_opponent_label","canonical_opponent_key"])
+        inherited["venues.csv"]=csv_encoded([], list(venue))
+        baseline={k:sha256(inherited[k]) for k in PACKAGE_FILES}
         manifest={
             "kind":"ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
             "status":"INTEGRATION_FROZEN",
@@ -61,6 +65,8 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             "stage1_report_sha256":sha256(artifacts[STAGE1_REPORT]),
             "baseline_package_member_sha256":baseline,
             "baseline_program_row_sha256":canonical_row_sha256(program),
+            "opponent_support_actions":{"NEW_SUPPLEMENTAL":1,"EXTEND_INHERITED":0,"REUSE_INHERITED":0},
+            "venue_support_actions":{"NEW_SUPPLEMENTAL":1,"EXTEND_INHERITED":0,"REUSE_INHERITED":0},
             "source_preservation":{"combined_count":1,"inherited_count":0,
                                    "supplemental_count":1},
             "frozen_program_projection":target,
@@ -77,7 +83,7 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
                       "display_name":"Sample Gym","city":"Sampleville","state":"VA"}
         fake_git={}
         for n in PACKAGE_FILES:
-            fake_git["schools/sample/"+n]=artifacts[n]
+            fake_git["schools/sample/"+n]=inherited[n]
         fake_git["data/reference/programs.csv"]=csv_encoded([program])
         fake_git["data/reference/venues.csv"]=csv_encoded([global_venue])
         fake_git["data/reference/venue-names.csv"]=b"venue_id,venue_name\n"
