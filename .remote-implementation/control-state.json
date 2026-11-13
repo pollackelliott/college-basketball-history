@@ -563,18 +563,19 @@
     "george-mason-expansion-stage2-opponent-display-normalize-0001",
     "george-mason-expansion-stage2-census-0006",
     "george-mason-expansion-stage2-proposal-0001",
-    "george-mason-expansion-stage2-proposal-0003"
+    "george-mason-expansion-stage2-proposal-0003",
+    "george-mason-expansion-stage2-census-0007"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "e10f7c7f35f444d62e847cdb2a20f76101bb737b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-mason-expansion-stage2-census-0007",
+  "active_request_sha256": "1d359088b4c8f44cda961bbd722f91e70787c00f5e6f07d2a401abb08aa3dc44",
+  "active_school_key": "george-mason",
+  "active_target_branch": "data/george-mason-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1148,8 +1149,11 @@
     "target_branch": "data/george-mason-onboarding",
     "target_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43459023366",
+  "lock_acquisition_request_commit": "a72b5d63de912c6cae889fe360a23498719a3a6a",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
