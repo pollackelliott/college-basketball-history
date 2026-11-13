@@ -336,6 +336,37 @@ class RemoteImplementationControlTests(unittest.TestCase):
         }
         validate_request(req)
 
+    def test_valid_stage2_current_main_refresh_request_school_delegated(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["operation"] = OP_STAGE2_CURRENT_MAIN_REFRESH
+        req["authority"]["stage2_census"] = False
+        req["authority"]["stage2_current_main_refresh"] = True
+        req["current_main_refresh_authorization"] = {
+            "approved": True,
+            "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+            "authorization_basis": (
+                "Existing Stage 2 authority; permanent refresh must prove "
+                "disjoint target/main changed paths."
+            ),
+        }
+        validate_request(req)
+
+    def test_stage2_current_main_refresh_rejects_unknown_authority_kind(self):
+        req = request(OP_STAGE2_CENSUS)
+        req["operation"] = OP_STAGE2_CURRENT_MAIN_REFRESH
+        req["authority"]["stage2_census"] = False
+        req["authority"]["stage2_current_main_refresh"] = True
+        req["current_main_refresh_authorization"] = {
+            "approved": True,
+            "authority_kind": "SCHOOL_STAGE2_UNBOUNDED",
+            "authorization_basis": "Invalid broad authority.",
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_REFRESH_AUTHORITY_KIND_INVALID",
+        ):
+            validate_request(req)
+
     def test_stage2_refresh_accepts_phase_continuation(self):
         req = request(OP_STAGE2_CENSUS)
         req["operation"] = OP_STAGE2_CURRENT_MAIN_REFRESH
