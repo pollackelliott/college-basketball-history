@@ -691,8 +691,48 @@ def verify_expansion_phase0_equivalence(
     if sha256_bytes(writeahead_bytes) != successor["writeahead_manifest_sha256"]:
         raise Stop("EXPANSION_PHASE0_FRESH_WRITEAHEAD_HASH_MISMATCH")
     writeahead = json.loads(writeahead_bytes)
-    if writeahead.get("operation") != OP_EXPANSION_PHASE0:
+    if (
+        writeahead.get("kind") != "REMOTE_IMPLEMENTATION_WRITEAHEAD"
+        or writeahead.get("operation") != OP_EXPANSION_PHASE0
+    ):
         raise Stop("EXPANSION_PHASE0_FRESH_WRITEAHEAD_OPERATION_MISMATCH")
+    for key in (
+        "request_id",
+        "school_key",
+        "protected_main_sha",
+        "expected_target_predecessor_sha",
+        "prepared_commit_sha",
+        "prepared_tree_sha",
+        "prepared_parent_sha",
+        "target_branch",
+        "changed_paths",
+        "changed_file_sha256",
+        "integration_freeze_sha256",
+        "semantic_snapshot_sha256",
+        "repository_validation",
+    ):
+        if writeahead.get(key) != successor.get(key):
+            raise Stop(
+                "EXPANSION_PHASE0_FRESH_SUCCESSOR_WRITEAHEAD_MISMATCH:" + key
+            )
+    sidecars = writeahead.get("sidecars") or {}
+    if not isinstance(sidecars, dict) or not sidecars:
+        raise Stop("EXPANSION_PHASE0_FRESH_SIDECARS_MISSING")
+    prefix = Path(successor["writeahead_manifest_path"]).parent
+    for relative, expected in sorted(sidecars.items()):
+        data = git_show_bytes(
+            control_head,
+            (prefix / relative).as_posix(),
+        )
+        if sha256_bytes(data) != expected:
+            raise Stop(
+                "EXPANSION_PHASE0_FRESH_SIDECAR_HASH_MISMATCH:" + relative
+            )
+    if (
+        sidecars.get("integration-freeze.json")
+        != successor["integration_freeze_sha256"]
+    ):
+        raise Stop("EXPANSION_PHASE0_FRESH_FREEZE_SIDECAR_BINDING_MISMATCH")
 
     request_path = (
         ".remote-implementation/requests/%s/request.json"
