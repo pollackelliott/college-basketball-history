@@ -892,11 +892,11 @@ function seriesGamesFor(teamKey, opponentKey) {
   const team = DB.teams[teamKey];
   if (!team) return [];
   const opponent = opponentProfile(teamKey, opponentKey);
+  // Generated team games are already filtered to the program's authorized
+  // publication history. Do not reapply the (possibly later) top-level start:
+  // COMPLETE_INSTITUTIONAL publishes valid pre-D1 institutional meetings too.
   return (DB.games[teamKey] || [])
-    .filter((game) => (
-      game.opponentKey === opponentKey
-      && gameInProgramScope(game, teamKey)
-    ))
+    .filter((game) => game.opponentKey === opponentKey)
     .map((game) => ({
       canonicalGameId: game.canonicalGameId,
       season: game.season,
@@ -918,11 +918,6 @@ function seriesGamesFor(teamKey, opponentKey) {
       administrativeStatus: game.administrativeStatus,
       administrativeNote: game.administrativeNote,
     }));
-}
-
-function gameInProgramScope(game, teamKey) {
-  const historyStart = DB.teams[teamKey]?.historyStartSeason;
-  return !historyStart || game.season >= historyStart;
 }
 
 function siteShort(site) {
