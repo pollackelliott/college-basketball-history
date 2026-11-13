@@ -17,6 +17,7 @@ import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import Any
 
 import ingest_school
 from administrative_status import ALLOWED_ADMINISTRATIVE_STATUSES
