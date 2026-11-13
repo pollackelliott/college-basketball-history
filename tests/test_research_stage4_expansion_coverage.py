@@ -77,6 +77,7 @@ class ExpansionStage4CoverageTests(unittest.TestCase):
         adjusted = reconcile_stage4_research_report(report, proof)
         self.assertEqual(adjusted["status"], "PASS")
         self.assertEqual(adjusted["errors"], [])
+        self.assertEqual(adjusted["warnings"], [])  # proof, not warning debt
         self.assertEqual(report["status"], "FAIL")  # no mutation of raw report
         self.assertEqual(adjusted["counts"]["coverage"]["acceptance_scope"],
                          "ALL_HISTORY_EXPANSION_SUPPLEMENTAL")

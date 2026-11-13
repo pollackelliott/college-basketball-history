@@ -403,11 +403,17 @@ def source_home_chronology_report(
     ]
     warnings: list[str] = []
     if not chronology_rows:
-        warnings.append(
-            "venues.csv has no documented HOME relationship chronology; exact "
-            "SOURCE_PROGRAM_HOME venue chronology challenge skipped for legacy "
-            "compatibility"
-        )
+        # A package without HOME games has no HOME chronology obligation.
+        # Continue warning for actual HOME games lacking relationship evidence.
+        if any(
+            row.get("curated_site_type", "").strip().upper() == "SOURCE_PROGRAM_HOME"
+            for row in game_rows
+        ):
+            warnings.append(
+                "venues.csv has no documented HOME relationship chronology; exact "
+                "SOURCE_PROGRAM_HOME venue chronology challenge skipped for legacy "
+                "compatibility"
+            )
         return {
             "errors": [],
             "warnings": warnings,
