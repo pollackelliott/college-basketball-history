@@ -278,36 +278,50 @@ class OpponentIdentityTransactionTests(unittest.TestCase):
 
 
 class OpponentIdentityTransactionWorkflowAuthorityTests(unittest.TestCase):
-    def test_rehearsal_runs_exact_pr_merge_candidate_with_parent_guards(self):
+    def test_rehearsal_runs_exact_pr_head_against_live_main_with_parent_guards(self):
         source = (
             ROOT / ".github/workflows/opponent-identity-transaction-validation.yml"
         ).read_text(encoding="utf-8")
-        # PR heads may intentionally preserve frozen school data while main
-        # receives later generic tests. Full-suite integration CI must use the
-        # two-parent merge candidate, not an obsolete standalone school head.
+        # An open release PR may preserve a frozen school head while protected
+        # main receives later generic fixes. Integration CI must therefore build
+        # the two-parent candidate from live origin/main plus the exact PR head,
+        # not trust the pull_request event's potentially stale base/merge ref.
         self.assertIn(
-            'ref: refs/pull/${{ github.event.pull_request.number }}/merge',
+            'ref: ${{ github.event.pull_request.head.sha }}',
             source,
         )
-        self.assertIn("fetch-depth: 2", source)
-        self.assertIn(
-            'EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}',
-            source,
-        )
+        self.assertIn("fetch-depth: 0", source)
         self.assertIn(
             'EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}',
             source,
         )
         self.assertIn(
-            'test "$(git rev-parse HEAD^1)" = "$EXPECTED_BASE_SHA"',
+            'git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"',
+            source,
+        )
+        self.assertIn(
+            'git merge --no-ff --no-edit "$EXPECTED_HEAD_SHA"',
+            source,
+        )
+        self.assertIn(
+            'test "$(git rev-parse HEAD^1)" = "$live_main"',
             source,
         )
         self.assertIn(
             'test "$(git rev-parse HEAD^2)" = "$EXPECTED_HEAD_SHA"',
             source,
         )
+        self.assertIn(
+            'git ls-remote origin refs/heads/main',
+            source,
+        )
+        self.assertIn("LIVE_MAIN_STABILITY=PASS", source)
         self.assertNotIn(
-            'ref: ${{ github.event.pull_request.head.sha }}',
+            'ref: refs/pull/${{ github.event.pull_request.number }}/merge',
+            source,
+        )
+        self.assertNotIn(
+            'EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}',
             source,
         )
 
