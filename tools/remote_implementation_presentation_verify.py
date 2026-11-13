@@ -16,7 +16,7 @@ from remote_implementation_control import (
 )
 from remote_implementation_io import (
     ROOT, STATE_PATH, Stop, commit_control,
-    git_show_bytes, read_json, remote_head, write_json,
+    git, git_show_bytes, read_json, remote_head, write_json,
 )
 from remote_implementation_presentation_refresh import (
     ASSET_PATH, verify_presentation_successor,
@@ -78,6 +78,20 @@ def inspect_presentation_checkpoint(
     require(
         remote_head(repo, successor["target_branch"]) == successor["prepared_commit_sha"],
         "PRESENTATION_FRESH_REMOTE_TARGET_MISMATCH",
+    )
+    # A fresh checkout may not have fetched the unpublished-to-main C object.
+    # Fetch the exact remote target before inspecting any candidate Git tree.
+    git(
+        "fetch", "--no-tags", "origin",
+        "+refs/heads/%s:refs/remotes/origin/presentation-refresh-target"
+        % successor["target_branch"], cwd=repo,
+    )
+    require(
+        git(
+            "rev-parse", "refs/remotes/origin/presentation-refresh-target",
+            cwd=repo,
+        ).stdout.strip() == successor["prepared_commit_sha"],
+        "PRESENTATION_FRESH_FETCHED_TARGET_CHANGED",
     )
     request_bytes = git_show_bytes(
         control_head,
