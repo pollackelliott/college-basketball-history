@@ -1904,6 +1904,10 @@ def closeout(
             output_dir / name
         ).read_bytes()
 
+    if expansion_proof is not None:
+        checkpoint_members["stage4-expansion-coverage-proof.json"] = (
+            output_dir / "stage4-expansion-coverage-proof.json"
+        ).read_bytes()
     checkpoint_manifest = manifest_for_members(
         checkpoint_members
     )
@@ -1922,10 +1926,6 @@ def closeout(
             "six_file_package_sha256": package_sha,
         }
     )
-    if expansion_proof is not None:
-        checkpoint_members["stage4-expansion-coverage-proof.json"] = (
-            output_dir / "stage4-expansion-coverage-proof.json"
-        ).read_bytes()
 
     checkpoint_members["checkpoint-manifest.json"] = (
         json.dumps(
