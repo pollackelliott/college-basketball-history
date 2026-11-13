@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "protected_main_sha": "d197f9d33f1ad18b8377d69bf3cd1e015cb901b8",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "stage3b_checkpoint_sha256": "00f552c1e46fd753db96172cde923f0b90fa03162c7a56bd5d321a64f56db8df",
+  "school_key": "vcu",
+  "validation_mode": "CANDIDATE_VALIDATION"
+}
