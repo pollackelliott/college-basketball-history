@@ -277,5 +277,40 @@ class OpponentIdentityTransactionTests(unittest.TestCase):
         self.assertEqual({path:path.read_bytes() for path in paths},before)
 
 
+class OpponentIdentityTransactionWorkflowAuthorityTests(unittest.TestCase):
+    def test_rehearsal_runs_exact_pr_merge_candidate_with_parent_guards(self):
+        source = (
+            ROOT / ".github/workflows/opponent-identity-transaction-validation.yml"
+        ).read_text(encoding="utf-8")
+        # PR heads may intentionally preserve frozen school data while main
+        # receives later generic tests. Full-suite integration CI must use the
+        # two-parent merge candidate, not an obsolete standalone school head.
+        self.assertIn(
+            'ref: refs/pull/${{ github.event.pull_request.number }}/merge',
+            source,
+        )
+        self.assertIn("fetch-depth: 2", source)
+        self.assertIn(
+            'EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}',
+            source,
+        )
+        self.assertIn(
+            'EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}',
+            source,
+        )
+        self.assertIn(
+            'test "$(git rev-parse HEAD^1)" = "$EXPECTED_BASE_SHA"',
+            source,
+        )
+        self.assertIn(
+            'test "$(git rev-parse HEAD^2)" = "$EXPECTED_HEAD_SHA"',
+            source,
+        )
+        self.assertNotIn(
+            'ref: ${{ github.event.pull_request.head.sha }}',
+            source,
+        )
+
+
 if __name__=='__main__':
     unittest.main()

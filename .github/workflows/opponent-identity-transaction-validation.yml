@@ -11,10 +11,22 @@ jobs:
   rehearse:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact PR head
+      # Integration CI must use the exact candidate that GitHub would merge,
+      # not the unchanged school head against obsolete pre-expansion tests.
+      - name: Check out exact PR merge candidate
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
+          fetch-depth: 2
+
+      - name: Verify exact merge candidate parents
+        env:
+          EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD^1)" = "$EXPECTED_BASE_SHA"
+          test "$(git rev-parse HEAD^2)" = "$EXPECTED_HEAD_SHA"
+          echo "PR_MERGE_PARENT_BINDINGS=PASS"
 
       - name: Set up Python
         uses: actions/setup-python@v5
