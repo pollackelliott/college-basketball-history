@@ -45,9 +45,12 @@ def _bound_bytes(
 
 def _decision_id_set_sha256(review_bytes: bytes) -> str:
     text = review_bytes.decode("utf-8-sig")
-    rows = list(csv.DictReader(text.splitlines()))
+    reader = csv.DictReader(text.splitlines())
+    if not reader.fieldnames or "decision_id" not in reader.fieldnames:
+        raise Stop("STAGE2_GATE1_FILL_DECISION_ID_SET_INVALID")
+    rows = list(reader)
     decision_ids = [str(row.get("decision_id") or "").strip() for row in rows]
-    if not decision_ids or any(not value for value in decision_ids):
+    if any(not value for value in decision_ids):
         raise Stop("STAGE2_GATE1_FILL_DECISION_ID_SET_INVALID")
     if len(decision_ids) != len(set(decision_ids)):
         raise Stop("STAGE2_GATE1_FILL_DECISION_ID_SET_DUPLICATE")
@@ -57,9 +60,11 @@ def _decision_id_set_sha256(review_bytes: bytes) -> str:
 
 def _filled_review_summary(review_bytes: bytes) -> dict[str, Any]:
     text = review_bytes.decode("utf-8-sig")
-    rows = list(csv.DictReader(text.splitlines()))
-    if not rows:
-        raise Stop("STAGE2_GATE1_FILL_REVIEW_EMPTY")
+    reader = csv.DictReader(text.splitlines())
+    required_columns = {"decision_id", "decision", "resolution_basis"}
+    if not reader.fieldnames or not required_columns.issubset(reader.fieldnames):
+        raise Stop("STAGE2_GATE1_FILL_REVIEW_COLUMNS_INVALID")
+    rows = list(reader)
     counts: Counter[str] = Counter()
     for row in rows:
         decision_id = str(row.get("decision_id") or "").strip()
