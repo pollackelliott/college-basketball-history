@@ -51,6 +51,45 @@ FALSE_VALUES = {"no", "false", "0", "n", "non_d1", "non-d1", "non d1"}
 TRUE_VALUES = {"yes", "true", "1", "y", "d1", "current_d1", "current-d1"}
 
 
+def _expansion_stage3b_required_cutoff(
+    parent_status: dict[str, Any], report_cutoff: str
+) -> str:
+    """Read the authenticated Stage 3B cutoff without rewriting parent bytes.
+
+    Existing Stage 3B checkpoints may serialize research coverage under
+    ``research_coverage`` rather than at the top level. Both declarations, if
+    present, must be identical; neither may override a conflicting value.
+    The projected package's independently checked cutoff must also agree.
+    """
+    coverage = parent_status.get("research_coverage", {})
+    if not isinstance(coverage, dict):
+        raise ExpansionStage4CoverageError(
+            "expansion Stage 3B research_coverage is not an object"
+        )
+
+    declared = []
+    for record in (parent_status, coverage):
+        if "required_completed_season_cutoff" in record:
+            declared.append(str(
+                record["required_completed_season_cutoff"] or ""
+            ).strip())
+    if not declared or any(not value for value in declared):
+        raise ExpansionStage4CoverageError(
+            "expansion Stage 3B completed-season declaration missing"
+        )
+    if len(set(declared)) != 1:
+        raise ExpansionStage4CoverageError(
+            "conflicting expansion Stage 3B completed-season declarations"
+        )
+
+    required = declared[0]
+    if required != str(report_cutoff or "").strip():
+        raise ExpansionStage4CoverageError(
+            "expansion Stage 3B completed-season declaration changed"
+        )
+    return required
+
+
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -1689,16 +1728,12 @@ def closeout(
             raise ExpansionStage4CoverageError(
                 "expansion Stage 3B school_key mismatch"
             )
-        required_cutoff = str(parent_status.get(
-            "required_completed_season_cutoff", ""
-        )).strip()
         coverage_cutoff = research_check.get("counts", {}).get(
             "coverage", {}
         ).get("required_completed_season_cutoff", "")
-        if required_cutoff != coverage_cutoff:
-            raise ExpansionStage4CoverageError(
-                "expansion Stage 3B completed-season declaration changed"
-            )
+        required_cutoff = _expansion_stage3b_required_cutoff(
+            parent_status, coverage_cutoff
+        )
         expansion_proof = prove_expansion_stage4_coverage(
             repo=Path(__file__).resolve().parents[1],
             school_key=school_key,
