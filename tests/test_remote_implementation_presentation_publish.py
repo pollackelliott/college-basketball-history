@@ -336,11 +336,23 @@ class FreshProofTests(GuardedPublicationFixture):
                 cwd=cwd, stdout=subprocess.PIPE, check=True,
             ).stdout
 
+        from types import SimpleNamespace
+
+        def fake_verifier_git(*args, **kwargs):
+            if args[0] == "fetch":
+                return SimpleNamespace(stdout="")
+            if args[0] == "rev-parse":
+                return SimpleNamespace(stdout=self.successor + "\n")
+            raise AssertionError("Unexpected verification Git invocation: %s" % (args,))
+
         with patch(
             "remote_implementation_presentation_verify.git_show_bytes", side_effect=read,
         ), patch(
             "remote_implementation_presentation_verify.remote_head",
             return_value=self.successor,
+        ), patch(
+            "remote_implementation_presentation_verify.git",
+            side_effect=fake_verifier_git,
         ):
             result = inspect_presentation_checkpoint(
                 self.main, "0" * 40, {"last_operation": last}, repo=self.repo,
