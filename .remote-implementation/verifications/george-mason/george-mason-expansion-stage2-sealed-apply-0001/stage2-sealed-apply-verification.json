@@ -1,0 +1,39 @@
+{
+  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+  "approved_plan_sha256": "cfce78f58851c0f166c76886b1d6efa8d0464c71080b750ec836494738138a7e",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "296f51a3e03cd18fff83a12821f622a59a8faad6fa4ba86ee6af9ffe028fb5b4",
+    "data/evidence/game-assertions.csv": "8fb63d2cbfc7c9291b6c35be8dda398a9a6b7fef2e8130af33c57a797bfdd090",
+    "data/reconciliation/onboarding-decisions/george-mason-1cb5cfb48aea.json": "cfce78f58851c0f166c76886b1d6efa8d0464c71080b750ec836494738138a7e",
+    "site/data/manifest.json": "c82a83812493a1cfff738b4938f8c476b4360175cebb1f61a79fc2a6c2c76d53",
+    "site/data/programs.json": "e76a1736925d55d00179c7543fedf043c6dddd013544db0a167198776d7de9af",
+    "site/data/teams/george-mason.json": "8486ca5c4eaddcd22319aa98f11a8b88e8f7998729e279cf6954aa0b2dc2ca0a",
+    "site/data/teams/vcu.json": "984031154355780f4639f3ec57ffcda49a8fce45510c356e6d482340ad988f07"
+  },
+  "changed_path_count": 7,
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/onboarding-decisions/george-mason-1cb5cfb48aea.json",
+    "site/data/manifest.json",
+    "site/data/programs.json",
+    "site/data/teams/george-mason.json",
+    "site/data/teams/vcu.json"
+  ],
+  "deleted_paths": [],
+  "fresh_replayed_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION",
+  "protected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "remote_stage2_sealed_apply_equivalence": "PASS",
+  "request_id": "george-mason-expansion-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "stage2_gate1_seal_checkpoint_sha256": "68719c9f5b780465306e3202e98a9f75bf8ffcd1003b095206f86efbd70ee61c",
+  "stage2_gate1_seal_verification_sha256": "1da338b5c8fca77505b8ab94d62daeece9c834106300018e60d5dd31fa885dc0",
+  "target_branch": "data/george-mason-onboarding",
+  "target_predecessor_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38",
+  "target_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+  "target_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
+  "tracked_stage2_mutation": "EXACT_SEALED_APPLY_SUCCESSOR"
+}
