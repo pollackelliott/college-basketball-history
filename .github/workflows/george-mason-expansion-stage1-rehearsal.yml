@@ -3,7 +3,7 @@ on:
   pull_request:
     paths: ['.github/workflows/george-mason-expansion-stage1-rehearsal.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
   authentic-stage1:
     runs-on: ubuntu-latest
@@ -286,6 +286,26 @@ jobs:
           print("PHASE0_TRANSACTION_EXECUTED",False)
           print("EXACT_REHEARSAL_VERIFIED", True)
           PY
+      - name: Publish immutable expansion Research Freeze transport branch
+        env:
+          TRANSPORT_BRANCH: transport/george-mason-expansion-phase0-0001
+        run: |
+          set -e
+          if git ls-remote --exit-code --heads origin "refs/heads/$TRANSPORT_BRANCH" >/dev/null 2>&1; then
+            echo "FAIL: transport branch already exists" >&2
+            exit 1
+          fi
+          mkdir -p .remote-implementation/transports/george-mason/expansion-phase0-0001
+          base64 -w0 "$RUNNER_TEMP/george-mason-expansion-research-frozen.zip" > .remote-implementation/transports/george-mason/expansion-phase0-0001/part-0001.b64
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- .remote-implementation/transports/george-mason/expansion-phase0-0001/part-0001.b64
+          git commit -m "[transport] George Mason expansion Research Freeze"
+          TRANSPORT_COMMIT_SHA=$(git rev-parse HEAD)
+          git push origin "HEAD:refs/heads/$TRANSPORT_BRANCH"
+          echo "TRANSPORT_COMMIT_SHA=$TRANSPORT_COMMIT_SHA"
+          echo "TRANSPORT_PREFIX=.remote-implementation/transports/george-mason/expansion-phase0-0001/"
+          echo "TRANSPORT_PART_COUNT=1"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
