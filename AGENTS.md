@@ -378,6 +378,16 @@ site, venue, opponent, or a controlling canonical fact merely to make the workfl
 pass. Preserve source `raw_text`, explicit researched-unresolved metadata, and approved
 unresolved discrepancies.
 
+## All-History expansion Implementation acceptance boundary
+
+Before any **new** ALL_HISTORY_EXPANSION school acquires the serialized Implementation lane, current protected `main` must pass:
+
+`python tools/all_history_expansion_implementation_acceptance.py`
+
+This is a repository-wide readiness gate, not a school Research decision. A failure blocks starting the next expansion Implementation and belongs in generic maintenance/Control Center hardening rather than being discovered piecemeal from the target school's live lane. The gate must remain count-agnostic as completed expansion schools migrate from `LEGACY_TOP_LEVEL_ONLY` to `COMPLETE_INSTITUTIONAL`, and must authenticate the current expansion workflow/orchestration contracts. It does not replace Research Freeze, Phase 0, Stage 2, Owner Gate 1, Preview, Owner Gate 2, or Production proof.
+
+An expansion Implementation already beyond Gate 1 when this boundary is introduced may be frozen and resumed only after current protected `main` passes the gate; do not roll back accepted historical authority merely to re-enter the pre-Implementation boundary.
+
 ## Implementation efficiency and recovery
 
 * Use one fresh Implementation chat per school, but do not assume that a fresh chat alone prevents context bloat. Keep verbose logs and large evidence tables in durable files rather than the conversation whenever possible.

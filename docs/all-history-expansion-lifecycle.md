@@ -282,6 +282,12 @@ was accepted.
 
 Research completion alone does not expand publication.
 
+Before a **new** expansion Implementation acquires the serialized mutation lane, current protected `main` must pass the repository-wide expansion Implementation acceptance gate:
+
+`python tools/all_history_expansion_implementation_acceptance.py`
+
+This fail-closed preflight checks portfolio/publication invariants and the current generic expansion workflow contracts. A failure is a generic repository-readiness blocker to repair before choosing the next school; it is not target-school historical authority and must not be deferred until that school is mid-Implementation.
+
 Serialized Implementation must authenticate the immutable baseline and
 accepted supplemental delta, rebase against current protected main,
 deterministically materialize a complete six-file candidate, reconcile
