@@ -11,8 +11,8 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
@@ -23,20 +23,25 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — fresh census after generic publication-coverage planner repair",
-    "authorization": "Existing owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Generic tooling PR #591 merged as protected main e10f7c7f35f444d62e847cdb2a20f76101bb737b after exact-head full validation and an exact blocked-proposal candidate-runtime rehearsal that resolved to OWNER_GATE_1_READY. This request invalidates the stale pre-repair census/universe/map fingerprints and runs a fresh permanent read-only STAGE2_CENSUS against unchanged onboarding successor 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd, preserving the frozen George Mason authority, Phase 0 result, and accepted 1978-79+ top-level scope while processing COMPLETE_INSTITUTIONAL publication coverage. No tracked basketball mutation, proposal rehearsal, Gate 1 approval, fill/seal/apply, release, merge, recovery, or shared/global basketball mutation authority is included."
+    "authorization": "Continuation of the SAME owner-authorized George Mason Stage 2 phase. Current protected main 419c78df7ca4c30df501657c079445d0bb7cbdee includes the school-lane delegated-refresh validator and its regression. Independently checked merge base 5171c84922c7b88ad6df023d3e4ae5fa94fd5edb; target-only changed files 8; intervening main-only changed files 32; overlapping files 0; intervening schools/george-mason files 0; remote control IDLE/COMPLETE/recovery_required=false; onboarding HEAD 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd. Authorize ONLY the guarded STAGE2_CURRENT_MAIN_REFRESH through permanent fail-closed proof, expected-predecessor CAS, and independent fresh verification. Preserve immutable Research Freeze, accepted George Mason 1978-79+ top-level scope, COMPLETE_INSTITUTIONAL publication coverage, Integration Freeze, semantics, and all six package bytes. No census/proposal continuation, Owner Gate, apply, merge, release, or historical/shared-authority change.",
+    "origin": "George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — bounded delegated current-main refresh"
   },
-  "expected_protected_main_sha": "e10f7c7f35f444d62e847cdb2a20f76101bb737b",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized George Mason Stage 2 phase, repository AGENTS.md delegated disjoint-path refresh rule, and tools/remote_implementation_control.py permanent validator. Precheck merge base 5171c84922c7b88ad6df023d3e4ae5fa94fd5edb: 8 target-only paths; 32 main-only paths; zero overlap, zero schools/george-mason changes. Permanent runner must repeat and enforce all eligibility, Phase 0, opponent-display, package-hash, and semantic safeguards before publication."
+  },
+  "expected_protected_main_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
   "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "phase0_successor": {
     "path": ".remote-implementation/successors/george-mason/george-mason-expansion-phase0-0001/successor-manifest.json",
     "sha256": "2025a1dedb9b89469e9bfbae395d2c32f9cd8d84b217951a9c0b5421a2d2832f"
   },
-  "previous_control_state_commit": "541db8c4dd0c450e55d06d6d7244ccc828de6c69",
-  "previous_control_state_sha256": "ba91fb76c84959be190be999ec74da222b68773b5716a74be532eba117b7555f",
-  "request_id": "george-mason-expansion-stage2-census-0007",
+  "previous_control_state_commit": "a149151dc2ae12c694bc10e13c49402777014861",
+  "previous_control_state_sha256": "0276703bfabdd9ef797f348ae9dea84af2de922c5bc2e0b431dd0a141a25f791",
+  "request_id": "george-mason-expansion-stage2-current-main-refresh-0001",
   "schema_version": 1,
   "school_key": "george-mason",
   "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
