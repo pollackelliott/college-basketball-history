@@ -1,7 +1,7 @@
 # Guarded Remote Implementation Runner
 
 - **Status:** Controlling execution-environment policy for serialized remote Implementation, including the authenticated release and Production-proof lifecycle
-- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or an honest durable `BLOCKED` checkpoint, the read-only exact-owner-approval `STAGE2_GATE1_FILL` boundary, the read-only filled-review `STAGE2_PRESEAL_REHEARSAL` boundary, the read-only cryptographic `STAGE2_GATE1_SEAL` boundary, the transactional `STAGE2_SEALED_APPLY` boundary, and the read-only reconciliation diagnostic
+- **Applies to:** RESEARCH_FROZEN intake, Implementation Stage 1 inventory, current-main reconciliation, Integration Freeze, stable Phase 0, guarded `ALL_HISTORY_EXPANSION` Phase 0 against an exact accepted published predecessor, the read-only Stage 2 capability census through `CAPABILITY_CENSUS_READY` or an honest permanent-tool `BLOCKED` checkpoint, the single census-bound representation-only `STAGE2_OPPONENT_DISPLAY_NORMALIZE` repair, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or an honest durable `BLOCKED` checkpoint, the read-only exact-owner-approval `STAGE2_GATE1_FILL` boundary, the read-only filled-review `STAGE2_PRESEAL_REHEARSAL` boundary, the read-only cryptographic `STAGE2_GATE1_SEAL` boundary, the transactional `STAGE2_SEALED_APPLY` boundary, and the read-only reconciliation diagnostic
 - **Does not apply to:** arbitrary unapproved Stage 2 tracked repairs or uncontrolled release/merge bypasses; the remote runner does not itself create or merge PRs or push protected main
 
 ## 1. Execution environments
@@ -80,8 +80,8 @@ Tracked repository capability:
 
 - `tools/remote_implementation_control.py` — request/state validation, replay refusal, mutation classification, sidecar hashing, and Git-ref CAS primitives.
 - `tools/remote_implementation_io.py` — hash-bound checkpoint transport, isolated worktrees, permanent-command invocation, and control-branch CAS helpers.
-- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, Phase 0, read-only Stage 2 census, exact-map proposal rehearsal, exact-owner-approval Gate 1 fill, read-only pre-seal rehearsal, read-only cryptographic Gate 1 sealing, transactional sealed apply, the opponent-display normalization mutation, reconciliation diagnostics, and explicit recovery.
-- `tools/remote_implementation_stage2_census.py` — exact Phase 0 authority restoration, read-only Stage 2 coordinator invocation, artifact hashing, and tracked-mutation proof shared by the runner and verifier.
+- `tools/remote_implementation_runner.py` — bounded request processor for Stage 1, ordinary Phase 0, guarded expansion Phase 0, read-only Stage 2 census, exact-map proposal rehearsal, exact-owner-approval Gate 1 fill, read-only pre-seal rehearsal, read-only cryptographic Gate 1 sealing, transactional sealed apply, the opponent-display normalization mutation, reconciliation diagnostics, and explicit recovery.
+- `tools/remote_implementation_expansion_phase0.py` — expansion Research-Freeze materialization, exact current-main Integration-Freeze/preview reconstruction, existing-predecessor prepared-tree construction, repository validation, write-ahead/CAS publication, and independent exact-tree replay using the ordinary global control primitives.\n- `tools/remote_implementation_stage2_census.py` — exact Phase 0 authority restoration, read-only Stage 2 coordinator invocation, artifact hashing, and tracked-mutation proof shared by the runner and verifier.
 - `tools/remote_implementation_stage2_opponent_display.py` — exact census/Freeze authentication, permanent normalizer dry-run/apply orchestration, representation-only field proof, and post-repair Stage 2 regeneration.
 - `tools/remote_implementation_stage2_proposal.py` — exact blocker-free Stage 2 authority authentication, immutable recommendation-map transport binding, runtime/target-worktree separation, permanent `--map` invocation, proposal artifact hashing, and tracked-mutation proof.
 - `tools/remote_implementation_stage2_gate1_fill.py` — exact `OWNER_GATE_1_READY` proposal plus fresh-verification authentication, exact owner-approval binding, permanent `fill-review` invocation, filled-review hashing, and tracked-mutation proof.
@@ -145,7 +145,7 @@ Every push-driven transition is an explicit JSON request bound to:
 Supported operations are:
 
 - `STAGE1_INVENTORY`
-- `PHASE0`\n- `PHASE0_SCOPE_SUPERSESSION`\n- `STAGE2_CENSUS`
+- `PHASE0`\n- `EXPANSION_PHASE0`\n- `PHASE0_SCOPE_SUPERSESSION`\n- `STAGE2_CENSUS`
 - `STAGE2_OPPONENT_DISPLAY_NORMALIZE`
 - `STAGE2_PROPOSAL_REHEARSAL`
 - `STAGE2_GATE1_FILL`
@@ -158,6 +158,45 @@ Supported operations are:
 - `RELEASE_GATE2_APPROVAL`
 - `RELEASE_PRODUCTION_PROOF`
 - `RECOVER`
+
+### 4.1 Guarded All-History expansion Phase 0
+
+`EXPANSION_PHASE0` is the mutation-capable Phase 0 operation for an already
+published school whose immutable Research authority is
+`EXPANSION_RESEARCH_FROZEN`. It is not ordinary new-school `PHASE0` and it
+must not create a second school branch or a second control plane.
+
+The request must bind the exact expansion Research Freeze SHA-256 and immutable
+`research_base_sha`, one exact independent expansion Stage 1 proof, the
+deterministically reconstructed expansion Integration Freeze SHA-256, current
+protected main, `target_branch=data/<school>-onboarding`, and the exact
+existing target head as `target_sha`. That target predecessor must already be
+an ancestor of the accepted current main. A missing, moved, or unaccepted
+predecessor is a STOP.
+
+The runner acquires the ordinary global mutation lock, reconstructs the
+expansion Integration Freeze and disposable Phase 0 preview from the exact
+protected-main runtime, and reruns the physical-venue identity guard before any
+publication. A venue alias/locality collision remains a historical/shared-
+identity blocker; the operation may not infer sameness, infer separation,
+register a second physical identity, or rewrite historical locality.
+
+A clean candidate may change only the complete target-school six-file package
+and the expansion preview's declared target-school global rows
+(`programs.csv`, `venues.csv`, and `venue-names.csv`). The expansion
+Integration Freeze carries the ordinary package-hash and source-game semantic
+snapshot fields required by downstream Stage 2 while preserving its expansion
+Research provenance. The runner validates the repository, persists write-ahead
+before publication, updates the existing onboarding ref only through expected-
+predecessor force-with-lease CAS, and releases the global lock only after a
+durable successor checkpoint.
+
+The fresh verifier independently reconstructs the Integration Freeze, venue
+guard, Phase 0 preview, changed-path set, projected file hashes, semantic
+snapshot, repository validation, and prepared Git tree from the same exact
+protected-main runtime. Stage 2 authority exists only after this exact-tree
+verification is `PASS`. `EXPANSION_PHASE0` carries no Stage 2, Owner Gate,
+release, merge, or protected-main authority.
 
 Only `STAGE2_GATE1_FILL` may carry Owner Gate 1 authority, bound to its exact fresh-verified proposal checkpoint, decision universe, recommendation map and approved-plan preview. Only `RELEASE_GATE2_APPROVAL` may carry Owner Gate 2 authority, bound to an explicit affirmative owner decision on one exact fresh-verified PR-head Preview. No other operation may carry either owner gate or GitHub merge authority; all guarded Production requests remain read-only.
 
