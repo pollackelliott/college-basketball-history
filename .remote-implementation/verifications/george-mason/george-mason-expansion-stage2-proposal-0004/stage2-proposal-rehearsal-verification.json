@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "f6dbb47803b7653b561ae1913af2bec638fb88cf6884c57e982e513b0b9ac661",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "b0db485fdb571e5680a5642be4b96f0e29867f9785d61e0abf882f72d422e2fd",
+    "implementation-stage2-status.json": "d57841a4789f21f4f7929737b65903df0d7ad7934775318f20ef863678d70670",
+    "last-rehearsal-site-gate.json": "eee8493170ec577cace36246732dbd07da3e23267314c037e6e1600984a13c17",
+    "plan.json": "1f2d8343bfe998463be148372385a2bcfb2685920968195a49b9776bc3a777ab",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "97fb648fd98a39cf8bfc6f67cd3aae775b061ece95aa262eb5f5803ce6aca7d5"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "b0db485fdb571e5680a5642be4b96f0e29867f9785d61e0abf882f72d422e2fd",
+    "implementation-stage2-status.json": "1650816a0e6626177831505b8614b2d22fc4de7b79f84bae18a8fe9551bd10cd",
+    "last-rehearsal-site-gate.json": "eee8493170ec577cace36246732dbd07da3e23267314c037e6e1600984a13c17",
+    "plan.json": "f29604b3159838e2ff2bb5c86f15531c7d020bf513135616a4af276fdcb343b2",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "d3e0f7fe2dd0691c551722d4425a20fdd324a88d9bf8135dfad94c0874c1848c"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
+  "recommendation_map_sha256": "e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "george-mason-expansion-stage2-proposal-0004",
+  "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38",
+  "target_tree_sha": "2de2fd26ca3553e5ac2469de4d3e2f245f614319",
+  "tracked_stage2_mutation": "NONE"
+}

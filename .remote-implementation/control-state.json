@@ -1144,11 +1144,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
     "recommendation_map_sha256": "e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "george-mason-expansion-stage2-proposal-0004",
     "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "school_key": "george-mason",
