@@ -208,8 +208,7 @@ def workflow_contract_errors(root: Path) -> list[str]:
         ".github/workflows/opponent-identity-transaction-validation.yml",
     )
     required_live_main = (
-        "types: [opened, synchronize, reopened, assigned]",
-        "github.event.action != 'assigned' || github.event.assignee.login == github.repository_owner",
+        "types: [opened, synchronize, reopened]",
         'ref: ${{ github.event.pull_request.head.sha }}',
         'git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"',
         'git merge --no-ff --no-edit "$EXPECTED_HEAD_SHA"',

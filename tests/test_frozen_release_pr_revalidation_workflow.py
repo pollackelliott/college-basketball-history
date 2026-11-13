@@ -10,16 +10,12 @@ WORKFLOWS = (
 
 
 class FrozenReleasePrRevalidationWorkflowTests(unittest.TestCase):
-    def test_required_workflows_support_metadata_only_live_main_revalidation(self):
+    def test_required_workflows_support_reopen_live_main_revalidation(self):
         for path in WORKFLOWS:
             source = path.read_text(encoding="utf-8")
             with self.subTest(workflow=path.name):
                 self.assertIn(
-                    "types: [opened, synchronize, reopened, assigned]",
-                    source,
-                )
-                self.assertIn(
-                    "github.event.action != 'assigned' || github.event.assignee.login == github.repository_owner",
+                    "types: [opened, synchronize, reopened]",
                     source,
                 )
                 self.assertIn(
@@ -52,6 +48,7 @@ class FrozenReleasePrRevalidationWorkflowTests(unittest.TestCase):
                     'EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}',
                     source,
                 )
+                self.assertNotIn("assigned", source)
 
 
 if __name__ == "__main__":
