@@ -150,3 +150,50 @@ Generated mechanically from durable Research checkpoint evidence. Literal row-le
 ## Stage 6 pre-freeze self-challenge recoveries
 
 Current protected main: `377a539979f727ad00fd6141365444d43b301f15`. The bounded current-main reciprocal challenge recovered four George Mason HOME classifications (Long Island 1983-84 and 1988-89; Maryland 1985-86; Virginia Tech 1991-92), corrected the Maryland game date to 1985-11-26 and Virginia Tech game date to 1992-02-05 while preserving literal target-source dates/raw text, and recovered Neal S. Blaisdell Center for the 1989-12-22 Maryland neutral game. The owner-approved NON_D1 population was unchanged by Stage 6.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# george-mason source notes
+
+Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.
+
+## Research coverage declaration
+
+- Primary-source historical results cutoff: 2021-2022
+- Required completed-season cutoff: 2025-2026
+- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.
+
+## Durable row-level source families
+
+
+## Durable source register: stage3a2-source-register.json
+
+- 50 Years of Mason Men’s Basketball — https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2016/11/11/16_411_AllianceMag_final.pdf
+- Mason Marauders: Looking Back at the First Men's Basketball Team — https://gomason.com/news/2017/2/10/mason-marauders-looking-back-at-the-first-mens-basketball-team
+- The Gunston Ledger: As I See It — https://masonlibraries.gmu.edu/masonhistory/files/original/ffb3d36c43043f2d5049abdca395011e.pdf
+- George Mason on Upgrade — https://www.washingtonpost.com/archive/sports/1979/05/13/george-mason-on-upgrade/16202faf-6496-4cd9-8525-ec8fe4c2a7e1/
+- Mason’s First Building Boom: Filling out the First Forty Acres during the 1970s — https://omekaportal.gmu.edu/masonhistory/exhibits/show/independence/buildingboom
+- Alliance Magazine, fall 2018, profile of Jay Marsh — https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2018/12/5/18_220_Alliance_Magazine_vFINAL_REVISED.pdf
+- 2022–23 Mason MBB Prospectus / Media Guide — In-Season/MTE Tournament History — https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/georgemason.sidearmsports.com/documents/2022/10/5/2022-23_Mason_MBB_Prospectus_Media_Day.pdf
+- Broadside, October 24 1977, men’s basketball schedule — https://masonlibraries.gmu.edu/masonhistory/files/original/9a4eccd3c9afc4780d62e64916a15373.pdf
+- George Mason inherited venue chronology — https://github.com/pollackelliott/college-basketball-history/blob/df73675852ec5a43dfac50da0ee06d8bcabf8832/schools/george-mason/venues.csv
+- Mason Athletics Celebrates Grand Opening of the RAC — https://gomason.com/news/2009/9/2/205045098.aspx
+
+## Stage 6 bounded adversarial reciprocal-date challenge (2026-11-12)
+
+The owner explicitly approved the 47-identity/228-game NON_D1 scan. Stage 6 retained the inherited baseline and the 314-game supplemental source IDs. The following **two** 1970-71 game dates were recovered from exact opponent/score matches against official contemporary-era opponent schedule records. No results, opponents, site classifications, or venues changed:
+
+- GMU-EXP-1970-71-003 — December 4, 1970, Christopher Newport (74–70 CNU); https://www.cnusports.com/sports/mens-basketball/schedule/1970-1971
+- GMU-EXP-1970-71-004 — December 3, 1970, Virginia Wesleyan (82–63 George Mason); https://vwuathletics.com/sports/mens-basketball/schedule/1970
+
+Thirteen early-history exact-date blanks remain after the class-level reciprocal opportunity. No date was inferred from season order. Source-dated score/date disagreements (including CNU's 1971 home-side score, Virginia Wesleyan's January 1971 date, and Frostburg's 1971 away-side score) are preserved as comparative evidence, not silently overwritten. See `stage6-reciprocal-source-conflicts.json` in the Stage 6 checkpoint. The original Stage 4 Research package remains immutable in its parent checkpoint.
+
+## All-History expansion freeze transport and baseline provenance
+
+- Exact inherited program, scope, accomplishment, school package, and publication-authorized canonical population authenticated from git commit df73675852ec5a43dfac50da0ee06d8bcabf8832.
+- Supplemental Research evidence, 314 accepted source-game rows, authorship mappings and venue evidence carried from unchanged Stage 6 six-file package.
+- Stage 6 self-challenge PASS; source-register and adversarial site and reciprocal audits remain byte-for-byte in the attached predecessor checkpoint.
+- Owner NON_D1 approval: 47 identities / 228 games, original scan hash ecc280601bb1b21945bac2e2bd89c4bb0be70ea30fdd03376dcd34bfb70d0dbe.
+- Only field-supported, contract-permitted opponent/venue extensions were projected. Inherited source/canonical history was not modified.
