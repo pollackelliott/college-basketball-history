@@ -1,0 +1,19 @@
+{
+  "basis_by_decision": {},
+  "canonical_patch_by_decision": {},
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "decisions": {},
+  "defaults": {},
+  "identity": {},
+  "notes_by_decision": {},
+  "prepared_against_protected_main_sha": "2ec9329e965bbd7e58d5e6464d5e8632daa2c472",
+  "prepared_against_target_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "source_patch_by_decision": {},
+  "source_stage2_census": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-census-0006/checkpoint-manifest.json",
+    "sha256": "453096c70c940e8e6f4c211b63ebccbd608153b8cfb76c303116c95f5efdb1b1"
+  },
+  "venue_relationship_patch_by_decision": {}
+}
