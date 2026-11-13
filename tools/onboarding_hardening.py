@@ -156,6 +156,8 @@ def _valid_season(value: str) -> bool:
 def refresh_venue_assignment_summaries(
     games: list[dict[str, str]],
     venues: list[dict[str, str]],
+    *,
+    accepted_venue_keys_by_game: dict[str, str] | None = None,
 ) -> tuple[list[dict[str, str]], dict[str, Any]]:
     """Refresh only derived venue assignment summaries from exact final games.
 
@@ -194,29 +196,6 @@ def refresh_venue_assignment_summaries(
             if normalized:
                 labels_to_groups[(normalized, group[1], group[2])].add(group)
 
-    ambiguous_group_rows: list[dict[str, Any]] = []
-    for group, indexes in groups.items():
-        venue_keys = {
-            venues[index].get("venue_key", "").strip()
-            for index in indexes
-            if venues[index].get("venue_key", "").strip()
-        }
-        if len(venue_keys) > 1:
-            ambiguous_group_rows.append(
-                {
-                    "canonical_name": venues[indexes[0]].get("canonical_name", ""),
-                    "city": venues[indexes[0]].get("city", ""),
-                    "state": venues[indexes[0]].get("state", ""),
-                    "venue_keys": sorted(venue_keys),
-                }
-            )
-    if ambiguous_group_rows:
-        raise WorkflowError(
-            "venue summary refresh found one name/locality group bound to "
-            "multiple physical venue keys: "
-            + json.dumps(ambiguous_group_rows[:10], sort_keys=True)
-        )
-
     assignments: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
     ambiguous_games: list[dict[str, Any]] = []
     for game in games:
@@ -249,6 +228,40 @@ def refresh_venue_assignment_summaries(
             + json.dumps(ambiguous_games[:25], sort_keys=True)
         )
 
+    # Names are not physical identities: two generations of an arena can share
+    # the same name and locality.  Only split a group when the authoritative
+    # parent ledger supplies an exact physical venue key for every game.
+    split_assignments: dict[
+        tuple[str, str, str], dict[str, list[dict[str, str]]]
+    ] = {}
+    for group, indexes in groups.items():
+        venue_keys = {
+            venues[index].get("venue_key", "").strip()
+            for index in indexes
+        }
+        if len(venue_keys) <= 1:
+            continue
+        if "" in venue_keys:
+            raise WorkflowError(
+                "venue summary refresh found multiple physical venue identities "
+                "with a blank venue key for " + repr(group)
+            )
+        keyed: dict[str, list[dict[str, str]]] = defaultdict(list)
+        uncertain = []
+        for game in assignments.get(group, []):
+            game_id = game.get("source_game_id", "").strip()
+            key = (accepted_venue_keys_by_game or {}).get(game_id, "").strip()
+            if key not in venue_keys:
+                uncertain.append({"source_game_id": game_id, "accepted_venue_key": key})
+            else:
+                keyed[key].append(game)
+        if uncertain:
+            raise WorkflowError(
+                "venue summary refresh cannot disambiguate accepted physical venue keys: "
+                + json.dumps(uncertain[:25], sort_keys=True)
+            )
+        split_assignments[group] = keyed
+
     changed_fields = {
         "games_currently_assigned",
         "first_assigned_game",
@@ -265,17 +278,23 @@ def refresh_venue_assignment_summaries(
         last = max(dates) if all_dated else ""
 
         owner_index = indexes[0]
+        keyed_owners: set[str] = set()
         for index in indexes:
             row = refreshed[index]
             before = {field: row.get(field, "") for field in changed_fields}
-            if index == owner_index:
-                row["games_currently_assigned"] = str(count)
-                row["first_assigned_game"] = first
-                row["last_assigned_game"] = last
-            else:
-                row["games_currently_assigned"] = "0"
-                row["first_assigned_game"] = ""
-                row["last_assigned_game"] = ""
+            current_games = group_games if index == owner_index else []
+            if group in split_assignments:
+                key = venues[index].get("venue_key", "").strip()
+                if key not in keyed_owners:
+                    current_games = split_assignments[group].get(key, [])
+                    keyed_owners.add(key)
+                else:
+                    current_games = []
+            current_dates = [game.get("game_date", "").strip() for game in current_games]
+            complete_dates = bool(current_games) and all(current_dates)
+            row["games_currently_assigned"] = str(len(current_games))
+            row["first_assigned_game"] = min(current_dates) if complete_dates else ""
+            row["last_assigned_game"] = max(current_dates) if complete_dates else ""
             after = {field: row.get(field, "") for field in changed_fields}
             if before != after:
                 changed_row_count += 1
