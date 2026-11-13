@@ -116,10 +116,14 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             return opp, ([dict(sources[0],season_label="1999-2000")]
                          if alter_source else sources),[]
         def venues(*_args,**_kwargs):
-            after=[global_old,global_new]
+            # The permanent helper mutates its global registry input in place.
+            # Exercise that exact topology; the production preview must snapshot
+            # the authenticated original list before rebase.
+            after=_args[2]
+            after.append(global_new)
             if register_extra:
                 after.append(dict(global_new,venue_id="VEN-000003",venue_key="third-gym"))
-            return [venue],after,[],[{"venue_key":"gym"}]
+            return [venue],after,_args[3],[{"venue_key":"gym"}]
         with patch("all_history_expansion_phase0_preview.git_revision",return_value=main), \
              patch("all_history_expansion_phase0_preview.git_bytes",side_effect=lambda repo,commit,path:files[path]), \
              patch("all_history_expansion_phase0_preview.load_existing_school_venues",return_value=[]), \
