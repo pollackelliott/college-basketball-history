@@ -405,6 +405,14 @@ the exact current onboarding predecessor and exact protected-main SHA.
 
 This refresh does not require a separate Control Center authorization when it is invoked inside an already-authorized school Stage 2 phase and the permanent changed-path proof below establishes a disjoint mechanical refresh with no historical/shared authority conflict. A Control Center stop is required only for overlapping path populations, ambiguous/diverged state, or changed historical/shared meaning.
 
+For request validation, school-lane delegated refresh uses
+`current_main_refresh_authorization.authority_kind=SCHOOL_STAGE2_DISJOINT_DELEGATED`
+with `approved=true` and a nonempty basis identifying the existing Stage 2 authority.
+Legacy exact Control Center grants remain valid as
+`authority_kind=CONTROL_CENTER_EXPLICIT`. In either case, the authority label never
+substitutes for the permanent disjoint-path proof below; overlap or ambiguity still fails
+closed.
+
 Automatic refresh is permitted only when the Git changed-path population from the exact
 merge base to the onboarding target is disjoint from the changed-path population from
 that same merge base to current protected `main`. Protected main also must not have

@@ -1201,7 +1201,11 @@ def validate_request(request: dict[str, Any]) -> None:
             "STAGE2_REFRESH_CONTROL_CENTER_APPROVAL_REQUIRED",
         )
         _require(
-            authorization.get("authority_kind") == "CONTROL_CENTER_EXPLICIT",
+            authorization.get("authority_kind")
+            in {
+                "CONTROL_CENTER_EXPLICIT",
+                "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+            },
             "STAGE2_REFRESH_AUTHORITY_KIND_INVALID",
         )
         _require(
