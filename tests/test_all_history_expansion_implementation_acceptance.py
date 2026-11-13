@@ -67,10 +67,20 @@ class AllHistoryExpansionImplementationAcceptanceTests(unittest.TestCase):
         self.assertTrue(any("missing inception" in error or "requires valid" in error
                             for error in errors))
 
-    def test_known_stale_cohort_literals_are_forbidden(self):
-        for snippets in acceptance.STALE_TEST_SNIPPETS.values():
-            for snippet in snippets:
-                self.assertTrue(snippet)
+    def test_curated_suite_includes_all_owner_phase_boundaries(self):
+        patterns = set(acceptance.ACCEPTANCE_TEST_PATTERNS)
+        required = {
+            "test_remote_implementation_expansion_phase0.py",
+            "test_implementation_stage2.py",
+            "test_remote_implementation_stage2_gate1_fill.py",
+            "test_remote_implementation_stage2_continuation.py",
+            "test_remote_implementation_release_readiness.py",
+            "test_remote_implementation_release_preview.py",
+            "test_remote_implementation_final_release.py",
+            "test_remote_implementation_production.py",
+            "test_all_history_expansion_implementation_composition.py",
+        }
+        self.assertTrue(required <= patterns)
 
 
 if __name__ == "__main__":
