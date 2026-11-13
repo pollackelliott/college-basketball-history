@@ -452,6 +452,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         request: dict,
         *,
         extra_school_change: bool = False,
+        tamper_venues: bool = False,
         bad_predecessor: bool = False,
         verification_pass: bool = True,
     ):
@@ -463,6 +464,8 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         (school_dir / "source-games.csv").write_text("source-games.csv display\n")
         if extra_school_change:
             (school_dir / "notes.md").write_text("notes.md unrelated\n")
+        if tamper_venues:
+            (school_dir / "venues.csv").write_text("venues.csv tampered after Phase 0\n")
         self.git(repo, "add", "schools")
         self.git(repo, "commit", "-m", "display successor")
         display_sha = self.git(repo, "rev-parse", "HEAD")
@@ -635,6 +638,76 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             ],
             request["target_sha"],
         )
+
+    def test_expansion_reconciled_venues_survive_verified_display_successor(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+        )
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["target_authority_kind"],
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+        )
+        self.assertEqual(
+            authority["successor"]["operation"],
+            "EXPANSION_PHASE0",
+        )
+
+    def test_expansion_display_chain_rejects_missing_venue_reconciliation_binding(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            missing_reconciliation_binding=True,
+        )
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_expansion_display_chain_rejects_stale_phase0_final_venue_proof(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            bad_final_venue_proof=True,
+        )
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_RECONCILED_PACKAGE_HASH_MISMATCH:venues.csv",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_expansion_display_chain_rejects_post_phase0_venue_tamper(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+        )
+        control_sha, request = self.add_verified_display_successor(
+            repo,
+            request,
+            tamper_venues=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_OPPONENT_DISPLAY_GIT_DIFF_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
 
     def test_display_successor_rejects_unrelated_school_file_change(self):
         repo, _, request, _ = self.make_authority_repo()
