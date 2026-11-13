@@ -108,11 +108,22 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
             row for row in published
             if row["history_coverage_status"] == "LEGACY_TOP_LEVEL_ONLY"
         ]
-        self.assertEqual(len(complete), 89)
-        self.assertEqual(len(legacy), 24)
+        baseline_legacy = {
+            row["program_key"] for row in published
+            if self.scope_for(row) != "INCEPTION+"
+        }
+        self.assertEqual(baseline_legacy, LEGACY_PUBLISHED_KEYS)
+        expanded = {
+            row["program_key"] for row in complete
+            if row["program_key"] in baseline_legacy
+        }
+        # Each accepted expansion moves one baseline legacy program to full
+        # institutional publication without changing the top-level reference.
+        self.assertEqual(len(complete), 89 + len(expanded))
+        self.assertEqual(len(legacy), 24 - len(expanded))
         self.assertEqual(
             {row["program_key"] for row in legacy},
-            LEGACY_PUBLISHED_KEYS,
+            LEGACY_PUBLISHED_KEYS - expanded,
         )
         self.assertEqual(len(unpublished), 252)
         self.assertTrue(
@@ -121,13 +132,9 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
         )
 
         for row in published:
-            expected = (
-                "COMPLETE_INSTITUTIONAL"
-                if self.scope_for(row) == "INCEPTION+"
-                else "LEGACY_TOP_LEVEL_ONLY"
-            )
-            self.assertEqual(row["history_coverage_status"], expected)
-            if expected == "COMPLETE_INSTITUTIONAL":
+            status = row["history_coverage_status"]
+            if self.scope_for(row) == "INCEPTION+":
+                self.assertEqual(status, "COMPLETE_INSTITUTIONAL")
                 self.assertEqual(
                     row["program_inception_season"],
                     row["history_start_season"],
@@ -136,12 +143,42 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
                     row["history_scope_basis"],
                     "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
                 )
+            elif status == "COMPLETE_INSTITUTIONAL":
+                self.assertIn(row["program_key"], baseline_legacy)
+                self.assertTrue(row["program_inception_season"])
+                self.assertLessEqual(
+                    row["program_inception_season"],
+                    row["history_start_season"],
+                )
             else:
+                self.assertEqual(status, "LEGACY_TOP_LEVEL_ONLY")
                 self.assertEqual(row["program_inception_season"], "")
 
         self.assertTrue(
             all(row["program_inception_season"] == "" for row in unpublished)
         )
+
+    def test_expansion_does_not_redefine_george_mason_top_level_scope(self):
+        mason = next(
+            row for row in self.programs
+            if row["program_key"] == "george-mason"
+        )
+        self.assertEqual(self.scope_for(mason), "1978-79+")
+        expanded = {
+            **mason,
+            "program_inception_season": "1966-1967",
+            "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+        }
+        self.assertEqual(
+            publication_history_start(expanded), "1966-1967"
+        )
+        self.assertFalse(season_is_top_level(
+            "1966-1967", mason["history_start_season"],
+            mason["history_scope_intervals"],
+        ))
+        self.assertTrue(season_is_published_history(
+            "1966-1967", expanded
+        ))
 
     def test_registry_coverage_metadata_validates_independently(self):
         for row in self.programs:
@@ -618,7 +655,7 @@ class AllHistoryUniverseConferenceProjectionTests(unittest.TestCase):
         self.assertEqual(timeline, [source])
         self.assertNotIn("classification", timeline[0])
 
-    def test_current_published_portfolio_has_zero_synthetic_non_d1_rows(self):
+    def test_synthetic_non_d1_intervals_cover_only_published_non_top_level_seasons(self):
         programs = read_csv(ROOT / "data/reference/programs.csv")
         published = [
             row for row in programs
@@ -626,7 +663,6 @@ class AllHistoryUniverseConferenceProjectionTests(unittest.TestCase):
         ]
         self.assertEqual(len(published), 113)
 
-        synthetic = []
         for program in published:
             key = program["program_key"]
             history = read_csv(ROOT / "schools" / key / "conferences.csv")
@@ -639,17 +675,55 @@ class AllHistoryUniverseConferenceProjectionTests(unittest.TestCase):
                 row["season_label"] for row in team.get("seasons", [])
             }
             timeline = publication_conference_timeline(
-                history,
-                program,
-                active_seasons,
+                history, program, active_seasons,
             )
-            synthetic.extend(
-                (key, row)
-                for row in timeline
+            synthetic = [
+                row for row in timeline
                 if row.get("classification") == "NON_D1_CLASSIFICATION"
-            )
-
-        self.assertEqual(synthetic, [])
+            ]
+            non_top_level = {
+                season for season in active_seasons
+                if season_is_published_history(season, program)
+                and not season_is_top_level(
+                    season,
+                    program["history_start_season"],
+                    program.get("history_scope_intervals", ""),
+                )
+            }
+            if non_top_level:
+                self.assertEqual(
+                    program["history_coverage_status"],
+                    "COMPLETE_INSTITUTIONAL",
+                    key,
+                )
+            for row in synthetic:
+                self.assertEqual(row["conference_name"], "Non-D1", key)
+                self.assertEqual(row["membership_type"], "classification", key)
+                self.assertLessEqual(row["start_season"], row["end_season"])
+                self.assertGreaterEqual(
+                    row["start_season"], program["program_inception_season"]
+                )
+                self.assertFalse(season_is_top_level(
+                    row["start_season"], program["history_start_season"],
+                    program.get("history_scope_intervals", ""),
+                ), key)
+                self.assertFalse(season_is_top_level(
+                    row["end_season"], program["history_start_season"],
+                    program.get("history_scope_intervals", ""),
+                ), key)
+                self.assertTrue(any(
+                    row["start_season"] <= season <= row["end_season"]
+                    for season in non_top_level
+                ), key)
+            for season in non_top_level:
+                self.assertEqual(
+                    sum(
+                        row["start_season"] <= season <= row["end_season"]
+                        for row in synthetic
+                    ),
+                    1,
+                    (key, season),
+                )
 
     def test_publication_season_unknown_coverage_fails_closed(self):
         with self.assertRaises(ValueError):

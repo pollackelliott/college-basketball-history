@@ -430,7 +430,7 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
             self.assertEqual(report["by_team"]["alpha"]["total_games"], 0)
             self.assertEqual(report["by_team"]["beta"]["total_games"], 4)
 
-    def test_current_113_program_population_matches_prior_top_level_authority(self):
+    def test_current_113_program_population_preserves_top_level_authority(self):
         programs = {
             row["program_key"]: row
             for row in read_csv(ROOT / "data/reference/programs.csv")
@@ -438,18 +438,15 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
         }
         self.assertEqual(len(programs), 113)
         self.assertEqual(
-            sum(
-                row["history_coverage_status"] == "COMPLETE_INSTITUTIONAL"
-                for row in programs.values()
-            ),
-            89,
+            {row["history_coverage_status"] for row in programs.values()},
+            {"COMPLETE_INSTITUTIONAL", "LEGACY_TOP_LEVEL_ONLY"},
         )
         self.assertEqual(
-            sum(
-                row["history_coverage_status"] == "LEGACY_TOP_LEVEL_ONLY"
-                for row in programs.values()
-            ),
-            24,
+            sum(row["history_coverage_status"] == "COMPLETE_INSTITUTIONAL"
+                for row in programs.values())
+            + sum(row["history_coverage_status"] == "LEGACY_TOP_LEVEL_ONLY"
+                for row in programs.values()),
+            113,
         )
 
         canonical = read_csv(ROOT / "data/canonical/games.csv")
@@ -471,13 +468,32 @@ class PublishedSiteCompletenessCensusTests(unittest.TestCase):
                 )
             )
             publication = _published_perspectives(game, programs)
-            self.assertEqual(publication, prior, game["canonical_game_id"])
+            self.assertTrue(
+                set(prior) <= set(publication), game["canonical_game_id"]
+            )
+            for key in set(publication) - set(prior):
+                # An accepted expansion may add a previously non-top-level
+                # perspective, but may not redefine the top-level interval.
+                program = programs[key]
+                self.assertEqual(
+                    program["history_coverage_status"],
+                    "COMPLETE_INSTITUTIONAL",
+                    (key, game["canonical_game_id"]),
+                )
+                self.assertGreaterEqual(
+                    season, program["program_inception_season"],
+                    (key, game["canonical_game_id"]),
+                )
+                self.assertFalse(season_is_top_level(
+                    season, program["history_start_season"].strip(),
+                    program.get("history_scope_intervals", "").strip(),
+                ), (key, game["canonical_game_id"]))
             if prior:
                 prior_unique.add(game["canonical_game_id"])
             if publication:
                 publication_unique.add(game["canonical_game_id"])
 
-        self.assertEqual(publication_unique, prior_unique)
+        self.assertTrue(prior_unique <= publication_unique)
 
     def test_census_source_uses_publication_history_authority(self):
         source = (

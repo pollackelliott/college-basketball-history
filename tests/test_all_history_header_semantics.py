@@ -1,4 +1,5 @@
 """Presentation-only regression checks for All-History team header semantics."""
+import csv
 import json
 import unittest
 from pathlib import Path
@@ -9,6 +10,14 @@ SITE = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
 PROGRAMS = json.loads(
     (ROOT / "site" / "data" / "programs.json").read_text(encoding="utf-8")
 )["programs"]
+with (ROOT / "data/reference/programs.csv").open(
+    encoding="utf-8-sig", newline=""
+) as handle:
+    REFERENCE_PUBLIC = {
+        row["program_key"]: row
+        for row in csv.DictReader(handle)
+        if row["public_page_enabled"] == "Yes"
+    }
 
 
 def helper_source():
@@ -60,7 +69,11 @@ class AllHistoryHeaderSemanticsTests(unittest.TestCase):
             if program.get("public_page_enabled")
             and program.get("history_coverage_status") == "COMPLETE_INSTITUTIONAL"
         ]
-        self.assertEqual(len(complete), 89)
+        self.assertEqual(
+            len(complete),
+            sum(row["history_coverage_status"] == "COMPLETE_INSTITUTIONAL"
+                for row in REFERENCE_PUBLIC.values()),
+        )
         self.assertTrue(
             all(program.get("published_history_start_season") for program in complete)
         )
@@ -74,7 +87,11 @@ class AllHistoryHeaderSemanticsTests(unittest.TestCase):
             if program.get("public_page_enabled")
             and program.get("history_coverage_status") == "LEGACY_TOP_LEVEL_ONLY"
         ]
-        self.assertEqual(len(legacy), 24)
+        self.assertEqual(
+            len(legacy),
+            sum(row["history_coverage_status"] == "LEGACY_TOP_LEVEL_ONLY"
+                for row in REFERENCE_PUBLIC.values()),
+        )
         self.assertTrue(
             all(
                 program.get("published_history_start_season")
@@ -123,8 +140,28 @@ class AllHistoryHeaderSemanticsTests(unittest.TestCase):
             if program.get("history_coverage_status") == "LEGACY_TOP_LEVEL_ONLY"
         ]
         self.assertEqual(len(published), 113)
-        self.assertEqual(len(complete), 89)
-        self.assertEqual(len(legacy), 24)
+        self.assertEqual(len(complete) + len(legacy), len(published))
+        self.assertEqual(
+            {program["program_key"] for program in published},
+            set(REFERENCE_PUBLIC),
+        )
+        for program in published:
+            reference = REFERENCE_PUBLIC[program["program_key"]]
+            self.assertEqual(
+                program["history_coverage_status"],
+                reference["history_coverage_status"],
+                program["program_key"],
+            )
+            expected_start = (
+                reference["program_inception_season"]
+                if reference["history_coverage_status"] == "COMPLETE_INSTITUTIONAL"
+                else reference["history_start_season"]
+            )
+            self.assertEqual(
+                program["published_history_start_season"],
+                expected_start,
+                program["program_key"],
+            )
 
 
 if __name__ == "__main__":
