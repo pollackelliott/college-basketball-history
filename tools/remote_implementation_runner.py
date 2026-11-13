@@ -30,6 +30,7 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
+    OP_RELEASE_PRESENTATION_REFRESH,
     OP_RELEASE_PREVIEW_VERIFY,
     OP_RELEASE_GATE2_APPROVAL,
     OP_RELEASE_PRODUCTION_PROOF,
@@ -4607,6 +4608,11 @@ def main() -> int:
                 predecessor_commit,
                 live_main,
             )
+        elif request["operation"] == OP_RELEASE_PRESENTATION_REFRESH:
+            # Never accept a tracked request without its complete
+            # write-ahead/CAS/recovery and fresh-verification runner.
+            # Deliberate fail-closed draft integration boundary.
+            raise Stop("PRESENTATION_REFRESH_PUBLICATION_NOT_YET_ENABLED")
         elif request["operation"] == OP_RELEASE_GATE2_APPROVAL:
             run_owner_gate2_approval(
                 state, request, request_bytes, request_commit,
