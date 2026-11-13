@@ -49,6 +49,7 @@ Once the owner authorizes a clearly named Implementation phase, that authorizati
 Default phase continuations are:
 
 - Stage 2 technical/reconciliation authorization continues through census, any policy-permitted deterministic representation repair, regeneration, recommendation-map preparation/rehearsal, and stops at `OWNER_GATE_1_READY` or a genuine blocker;
+- if a generic technical repair corrects planner eligibility/coverage and therefore changes the Stage 2 decision-universe fingerprint, invalidate the stale map/universe and recompute from the unchanged frozen authority; do not create an owner relay merely because the SHA changed. Newly surfaced genuine historical decisions are handled in the ordinary Gate 1 packet;
 - explicit Owner Gate 1 approval continues through fill/encode, pre-seal rehearsal, cryptographic seal, transactional sealed apply, and independent post-apply verification;
 - one release-preparation `Proceed` continues through release readiness, exact PR creation/reuse, CI/mergeability checks, exact Preview verification, and stops at `OWNER_GATE_2_READY`;
 - exact Preview `APPROVED. Proceed` continues through durable Gate 2 approval verification, exact approved two-parent merge, Production-proof request, and independent Production verification through `IMPLEMENTATION COMPLETE`.
@@ -130,7 +131,11 @@ Do not restate or reconstruct a completed phase from memory if its durable artif
 
 ## 5. Failure recovery rule
 
-A Codespace, shell, browser, or chat failure does not automatically restart Implementation.
+A Codespace, shell, browser, chat, or remote-request failure does not automatically restart Implementation or create a new owner gate.
+
+For an already-authorized phase, **deterministic safe recovery is collaborator work**. If an accepted failed request made no tracked basketball mutation and permanent recovery can objectively classify it as `NOT_ATTEMPTED` / `PREPARED_NOT_PUBLISHED` (including a read-only payload-hash or request-envelope failure), the school lane should recover/abandon that exact request, require control to return to `IDLE`, correct the mechanical defect, submit a new request ID with exact bindings, and resume the same phase. Do not ask the owner to schedule those steps separately.
+
+The accepted failed request is never replayed. A new request after safe abandonment must use a fresh request ID and the exact current authority. Escalate only when permanent recovery reports `DIVERGED_STOP`, target mutation/publication state is ambiguous, authority has materially changed, or recovery itself would require a new historical/shared mutation decision.
 
 On recovery, inspect in this order:
 
@@ -252,7 +257,7 @@ Never skip research acceptance, current-main rebase, owner decisions, pre-seal r
 
 Persistent phase authorization is not a mandate to finish an arbitrarily large phase inside one assistant response.
 
-A healthy turn should make one coherent durable advance or a small deterministic chain, then reassess. Continue inside the same turn only while the next operation is known, bounded, and producing new durable state. Stop at the latest authenticated checkpoint when any of these appear:
+A healthy turn should make one coherent durable advance or a small deterministic chain, then reassess. **Treat one tooling PR merge, one tracked school mutation, or one read-only remote transaction/recovery chain as the normal maximum durable unit for a single response.** A tooling PR may receive one remote validation failure and one corrected replacement attempt in the same turn; a second remote failure/new topology ends the turn at a durable checkpoint. Continue inside the same turn only while the next operation is known, bounded, and producing new durable state. Stop at the latest authenticated checkpoint when any of these appear:
 
 - repeated repository archaeology/search with no narrowing result;
 - the same blocker/state is being rechecked without new evidence;
@@ -260,7 +265,7 @@ A healthy turn should make one coherent durable advance or a small deterministic
 - transcript/context is growing materially faster than durable progress;
 - an external workflow remains healthy but in flight after a bounded status observation and there is no useful independent repository work to perform in the same turn.
 
-When the active assistant turn can safely remain open, use the low-frequency heartbeat rule instead of owner-scheduled transport: roughly one status read every 120 seconds, one compact visible update, and immediate continuation when the workflow finishes, fails, materially advances, or creates the next durable checkpoint. Re-reading an unchanged job at shorter intervals adds no authority and no durable state. Yield only when the turn cannot safely remain active; preserve the exact run/request identity and classify that yield as `CONTINUE — SAME PHASE AUTHORITY PERSISTS`, not as a new owner decision.
+Do not keep a school-chat response open merely to watch GitHub Actions. After dispatching or authenticating an external workflow, perform at most one follow-up status read in that turn. If it is still running, yield immediately with the exact workflow link and `CONTINUE — SAME PHASE AUTHORITY PERSISTS`. The owner may return later with a bare `Continue`; that message supplies no new authority.
 
 This transport yield is acceptable for one genuinely long external operation. It is **not** acceptable as the normal scheduler for a deterministic chain such as refresh -> census -> proposal. If one owner-authorized phase repeatedly requires transport yields between its internal operations, the repository is missing phase-sized orchestration and that gap should be repaired before the pattern is normalized for later schools.
 

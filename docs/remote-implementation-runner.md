@@ -18,6 +18,8 @@ For push-driven execution, the control branch is **data authority, not software 
 
 The control branch's workflow file is scheduling authority only, but it must still equal the exact `.github/workflows/remote-implementation.yml` bytes on the request-bound protected-main runtime before any new request is allowed to execute. Every request push therefore fails closed on a stale control-workflow snapshot. When a completed operation is already durable but its independent fresh verifier was not scheduled because an older control-workflow snapshot lacked that job, a non-request control-workflow synchronization push may detect the IDLE operation's durable `fresh_runner_verification=PENDING` state and run only `remote_implementation_verify.py` from that operation's exact protected-main runtime. This recovery path never calls `remote_implementation_runner.py`, never replays the mutation, and may persist PASS only through the ordinary verifier's exact equivalence checks. A consumed or abandoned request left in the control inbox is not replayed merely because the workflow snapshot is synchronized.
 
+For a completed `EXPANSION_PHASE0` whose target publication and durable write-ahead/successor checkpoint succeeded but whose independent fresh verifier is still `PENDING`, the published target ref is expected to equal the prepared successor, not the request-bound predecessor. Fresh verification must first authenticate that exact published successor, its parent/tree/write-ahead/successor hashes, then reconstruct the candidate against the original request-bound predecessor and original protected-main SHA. It must never replay the mutation or require the published target ref to move backward. If protected main has advanced linearly while verification is pending, the no-replay pending-verification recovery may execute the verifier implementation from the exact current protected-main SHA only when the original expansion-bound SHA remains an ancestor of current main. The transaction authority remains bound to the original SHA; the newer SHA is verifier runtime only. Any target ref other than the exact durable prepared successor, any non-ancestor main transition, or any reconstructed-tree/hash mismatch fails closed.
+
 For a completed `STAGE2_CURRENT_MAIN_REFRESH` whose publication succeeded but whose independent verifier has not yet persisted PASS, a later **linear** protected-main advance does not invalidate the already-published refresh transaction. The ordinary fresh verifier still executes from the refresh-bound runtime. If that verifier was stranded by a later linear main advance, the no-replay **pending-verification recovery** may execute the verifier implementation from one exact current protected-main SHA only when the original refresh-bound SHA remains an ancestor of the observed live main; the transaction being verified remains bound to the original refresh SHA. The verifier must bind parents, reconstructed tree, changed paths/file hashes, package hashes, Integration Freeze, semantic snapshot, and repository validation to the original refresh SHA; it records the newer observed live-main SHA separately. If main diverged or was rewritten, verification fails closed. When live main has advanced after such a PASS, Stage 2 continuation must not queue a census from the stale refresh; the school must perform a second ordinary disjoint `STAGE2_CURRENT_MAIN_REFRESH` to the newer protected main before continuing.
 
 The same software/data authority split continues inside disposable onboarding transactions. A target onboarding worktree or rehearsal copy is basketball-data authority only; its tracked `tools/` and `tests/` bytes must not become a nested executable authority merely because the data repository is passed as `--repo`. `onboard_school.py` therefore resolves ingestion, validation, implementation site-gate, accomplishment verification, site-build, and transaction test execution from the runtime checkout containing the executing `onboard_school.py`, while each command still receives the disposable onboarding repository as its data path. This prevents an older onboarding branch from silently running stale inner tooling after the outer remote runner has already authenticated a newer protected-main runtime.
@@ -389,7 +391,7 @@ or performs Production proof. After fresh verification, the school Implementatio
 its authenticated GitHub connector to create/review/merge the dedicated maintenance PR under
 normal protected-main rules, then reruns the complete Stage 1 inventory on refreshed main.
 
-## 7B. Control Center-authorized Stage 2 current-main refresh
+## 7B. Fail-closed Stage 2 current-main refresh
 
 `STAGE2_CURRENT_MAIN_REFRESH` is a narrow serialized representation operation for an
 already-in-Stage-2 `data/<school>-onboarding` branch when protected `main` has
@@ -400,6 +402,16 @@ It is not a second Phase 0 and does not recreate, replace, or mutate the immutab
 Research Freeze or Integration Freeze. It authenticates the existing Phase 0 authority,
 any supported opponent-display successor, and any earlier refresh successor, then binds
 the exact current onboarding predecessor and exact protected-main SHA.
+
+This refresh does not require a separate Control Center authorization when it is invoked inside an already-authorized school Stage 2 phase and the permanent changed-path proof below establishes a disjoint mechanical refresh with no historical/shared authority conflict. A Control Center stop is required only for overlapping path populations, ambiguous/diverged state, or changed historical/shared meaning.
+
+For request validation, school-lane delegated refresh uses
+`current_main_refresh_authorization.authority_kind=SCHOOL_STAGE2_DISJOINT_DELEGATED`
+with `approved=true` and a nonempty basis identifying the existing Stage 2 authority.
+Legacy exact Control Center grants remain valid as
+`authority_kind=CONTROL_CENTER_EXPLICIT`. In either case, the authority label never
+substitutes for the permanent disjoint-path proof below; overlap or ambiguity still fails
+closed.
 
 Automatic refresh is permitted only when the Git changed-path population from the exact
 merge base to the onboarding target is disjoint from the changed-path population from
@@ -1020,7 +1032,7 @@ It does not receive pull-request, deployment, environment, administration, or pr
 
 Protected `main` is read as the exact integration base. The runner never pushes to `main`.
 
-Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, the Control-Center-authorized disjoint-path `STAGE2_CURRENT_MAIN_REFRESH`, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. Other tracked Stage 2 repairs remain unauthorized. The remote runner cannot merge or push protected main; explicit scoped Owner Gate 2 approval and post-merge Production proof are separately guarded, and merge is performed only by the authorized school Implementation connector after approval.
+Remote Stage 2 capability is limited to the read-only census, the census-bound `STAGE2_OPPONENT_DISPLAY_NORMALIZE` representation repair, the mechanically proven disjoint-path `STAGE2_CURRENT_MAIN_REFRESH`, exact-map read-only `STAGE2_PROPOSAL_REHEARSAL` through permanent-tool `OWNER_GATE_1_READY` or durable `BLOCKED`, exact-owner-approval read-only `STAGE2_GATE1_FILL`, read-only filled-review `STAGE2_PRESEAL_REHEARSAL`, read-only cryptographic `STAGE2_GATE1_SEAL`, transactional `STAGE2_SEALED_APPLY`, read-only `RELEASE_READINESS` final-gate verification, read-only `RELEASE_PREVIEW_VERIFY` exact PR-head CI/Preview verification, and the read-only blocked-proposal `STAGE2_RECONCILIATION_DIAGNOSTIC` described above. Other tracked Stage 2 repairs remain unauthorized. The remote runner cannot merge or push protected main; explicit scoped Owner Gate 2 approval and post-merge Production proof are separately guarded, and merge is performed only by the authorized school Implementation connector after approval.
 
 ## 13. Mobile / ChatGPT operation
 

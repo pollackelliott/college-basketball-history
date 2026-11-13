@@ -1,0 +1,41 @@
+name: Arizona State Stage 1 generic accounting parent compatibility
+on:
+  push:
+    branches:
+      - tooling/asu-stage1-generic-parent-20261113
+  pull_request:
+    paths:
+      - tools/research_stage1_expansion_parent.py
+      - tests/test_research_stage1_expansion_parent.py
+      - .github/workflows/arizona-state-stage1-generic-parent-validation.yml
+      - docs/arizona-state-stage1-generic-parent-adapter.md
+permissions:
+  contents: read
+jobs:
+  exact-parent-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: tools:tests
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate source at immutable Arizona State Research base
+        shell: bash
+        run: |
+          set -euo pipefail
+          git cat-file blob df73675852ec5a43dfac50da0ee06d8bcabf8832:schools/arizona-state/source-games.csv > /tmp/asu-stage1-exact-source.csv
+          [[ "$(git hash-object /tmp/asu-stage1-exact-source.csv)" == "bb2e5ddb63e2caab96c2f3eb33d4d231bf75c875" ]]
+      - name: Compile adapter and focused regressions
+        run: python -m py_compile tools/research_stage1_expansion_parent.py tests/test_research_stage1_expansion_parent.py
+      - name: Arizona State parent and unchanged generic closeout regressions
+        run: |
+          python -m unittest discover -s tests -p 'test_research_stage1_expansion_parent.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage1_early_accounting_closeout.py' -v
+      - name: Full repository nonregression suite
+        run: python -m unittest discover -s tests -p 'test_*.py'

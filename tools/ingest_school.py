@@ -61,7 +61,7 @@ from ncaa_safety import canonical_ncaa_errors
 from program_history import (
     NCAA_NON_APPEARANCE_QUALIFIER_MARKER,
     history_scope_errors,
-    partition_source_rows,
+    partition_stage2_source_rows,
     source_declares_ncaa_nonappearance_qualifier,
 )
 from site_completeness import has_supported_foreign_locality, researched_unresolved_home_venue
@@ -1908,12 +1908,9 @@ def main() -> int:
             print(f"  - {args.school_key}: {problem}")
         return 1
 
-    history_start = target_program["history_start_season"].strip()
-    history_intervals = target_program.get("history_scope_intervals", "").strip()
-    sources, pre_cutoff_sources = partition_source_rows(
+    sources, pre_cutoff_sources, top_level_sources = partition_stage2_source_rows(
         all_sources,
-        history_start,
-        history_intervals,
+        target_program,
     )
     if args.source_game_id:
         wanted = set(args.source_game_id)
@@ -1925,7 +1922,7 @@ def main() -> int:
             len(matches) != len(wanted)
             or {row.get("source_game_id", "").strip() for row in matches} != wanted
         ):
-            print("FAIL: scoped no-op requires every requested in-scope source-game ID exactly once")
+            print("FAIL: scoped no-op requires every requested publication-eligible source-game ID exactly once")
             return 1
         sources = matches
 
@@ -2134,17 +2131,18 @@ def main() -> int:
     print(f"School:     {args.school_key}")
     print(f"Mode:       {'APPLY' if args.apply else 'DRY RUN'}")
     print()
-    print(f"Source rows:                {len(all_sources):,}")
-    print(f"In-scope source rows:       {len(sources):,}")
-    print(f"Pre-cutoff rows preserved:  {len(pre_cutoff_sources):,}")
+    print(f"Source rows:                         {len(all_sources):,}")
+    print(f"Publication-eligible source rows:   {len(sources):,}")
+    print(f"Top-level source rows:              {len(top_level_sources):,}")
+    print(f"Publication-excluded rows preserved:{len(pre_cutoff_sources):>7,}")
     if pre_cutoff_sources:
-        pre_cutoff_seasons = sorted(
+        excluded_seasons = sorted(
             source.get("season_label", "").strip()
             for source in pre_cutoff_sources
         )
         print(
-            "Pre-cutoff season range:    "
-            f"{pre_cutoff_seasons[0]} through {pre_cutoff_seasons[-1]} "
+            "Publication-excluded season range: "
+            f"{excluded_seasons[0]} through {excluded_seasons[-1]} "
             "(excluded from target ingestion)"
         )
     print(f"Existing-game matches:      {identity_counts[CONFIDENT]:,}")

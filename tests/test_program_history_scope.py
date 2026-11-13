@@ -9,12 +9,14 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 import build_site_data  # noqa: E402
+import validate_data  # noqa: E402
 from program_history import (  # noqa: E402
     BEST_FINISH_LABELS,
     accomplishment_row_issues,
     derive_ncaa_accomplishments,
     history_scope_errors,
     partition_source_rows,
+    partition_stage2_source_rows,
     scope_canonical_games,
     season_is_in_scope,
     trim_conference_history,
@@ -171,6 +173,161 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(in_scope, [current])
         self.assertEqual(pre_cutoff, [old])
         self.assertEqual(old["raw_text"], "preserve me")
+
+    def test_stage2_complete_institutional_uses_publication_coverage_without_broadening_top_level(self):
+        early = {
+            "source_game_id": "EARLY",
+            "season_label": "1966-1967",
+            "raw_text": "institutional history",
+        }
+        top_level = {
+            "source_game_id": "TOP",
+            "season_label": "1978-1979",
+            "raw_text": "top-level history",
+        }
+        program = {
+            "program_key": "program-a",
+            "program_inception_season": "1966-1967",
+            "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+            "history_start_season": "1978-1979",
+            "history_scope_intervals": "",
+        }
+
+        published, unpublished, top_level_rows = partition_stage2_source_rows(
+            [early, top_level],
+            program,
+        )
+
+        self.assertEqual(published, [early, top_level])
+        self.assertEqual(unpublished, [])
+        self.assertEqual(top_level_rows, [top_level])
+
+    def test_stage2_transitional_missing_coverage_status_preserves_legacy_partition(self):
+        early = {
+            "source_game_id": "EARLY",
+            "season_label": "1966-1967",
+        }
+        top_level = {
+            "source_game_id": "TOP",
+            "season_label": "1978-1979",
+        }
+        program = {
+            "program_key": "program-a",
+            "history_start_season": "1978-1979",
+            "history_scope_intervals": "",
+        }
+
+        published, unpublished, top_level_rows = partition_stage2_source_rows(
+            [early, top_level],
+            program,
+        )
+
+        self.assertEqual(published, [top_level])
+        self.assertEqual(unpublished, [early])
+        self.assertEqual(top_level_rows, [top_level])
+
+    def test_stage2_legacy_top_level_only_preserves_legacy_source_partition(self):
+        early = {
+            "source_game_id": "EARLY",
+            "season_label": "1966-1967",
+            "raw_text": "preserved outside publication",
+        }
+        top_level = {
+            "source_game_id": "TOP",
+            "season_label": "1978-1979",
+            "raw_text": "published top-level history",
+        }
+        program = {
+            "program_key": "program-a",
+            "program_inception_season": "1966-1967",
+            "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
+            "history_start_season": "1978-1979",
+            "history_scope_intervals": "",
+        }
+
+        published, unpublished, top_level_rows = partition_stage2_source_rows(
+            [early, top_level],
+            program,
+        )
+
+        self.assertEqual(published, [top_level])
+        self.assertEqual(unpublished, [early])
+        self.assertEqual(top_level_rows, [top_level])
+
+    def test_generated_complete_institutional_history_may_precede_top_level_scope(self):
+        program = {
+            "program_key": "program-a",
+            "public_page_enabled": "Yes",
+            "program_inception_season": "1966-1967",
+            "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+            "history_start_season": "1978-1979",
+            "history_scope_intervals": "",
+        }
+        document = {
+            "program": {
+                "history_start_season": "1978-1979",
+                "published_history_start_season": "1966-1967",
+            },
+            "games": [
+                {
+                    "canonical_game_id": "CBBG-EARLY",
+                    "season_label": "1966-1967",
+                },
+                {
+                    "canonical_game_id": "CBBG-TOP",
+                    "season_label": "1978-1979",
+                },
+            ],
+            "conference_history": [
+                {
+                    "start_season": "1966-1967",
+                    "conference_key": "",
+                    "classification": "NON_D1_CLASSIFICATION",
+                },
+                {
+                    "start_season": "1978-1979",
+                    "conference_key": "independent",
+                },
+            ],
+        }
+
+        self.assertEqual(
+            validate_data.generated_publication_scope_errors(program, document),
+            [],
+        )
+
+    def test_generated_complete_institutional_history_rejects_pre_inception_rows(self):
+        program = {
+            "program_key": "program-a",
+            "public_page_enabled": "Yes",
+            "program_inception_season": "1966-1967",
+            "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+            "history_start_season": "1978-1979",
+            "history_scope_intervals": "",
+        }
+        document = {
+            "program": {"history_start_season": "1978-1979"},
+            "games": [
+                {
+                    "canonical_game_id": "CBBG-TOO-EARLY",
+                    "season_label": "1965-1966",
+                }
+            ],
+            "conference_history": [
+                {
+                    "start_season": "1965-1966",
+                    "conference_key": "",
+                }
+            ],
+        }
+
+        errors = validate_data.generated_publication_scope_errors(program, document)
+        self.assertTrue(
+            any("generated public games precede publication coverage" in e for e in errors)
+        )
+        self.assertTrue(
+            any("conference history precedes publication coverage" in e for e in errors)
+        )
 
     def test_records_and_opponents_use_only_scoped_games(self):
         old = canonical_game("CBBG-OLD", "1999-2000", winner="program-b")

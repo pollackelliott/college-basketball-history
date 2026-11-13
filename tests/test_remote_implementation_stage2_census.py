@@ -303,13 +303,21 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         )
 
 
-    def make_authority_repo(self):
+    def make_authority_repo(
+        self,
+        *,
+        reconciled_venues: bool = False,
+        missing_reconciliation_binding: bool = False,
+        bad_final_venue_proof: bool = False,
+        unrelated_package_mismatch: bool = False,
+    ):
         repo = Path(tempfile.mkdtemp(prefix="stage2-authority-test-"))
         self.addCleanup(lambda: shutil.rmtree(repo, ignore_errors=True))
         self.git(repo, "init")
         self.git(repo, "config", "user.name", "Test")
         self.git(repo, "config", "user.email", "test@example.com")
         package_hashes = {}
+        final_hashes = {}
         school_dir = repo / "schools" / SCHOOL
         school_dir.mkdir(parents=True)
         for name in (
@@ -320,20 +328,36 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "source-notes.md",
             "venues.csv",
         ):
-            data = (name + "\n").encode()
-            (school_dir / name).write_bytes(data)
-            package_hashes[name] = hashlib.sha256(data).hexdigest()
+            candidate_data = (name + "\n").encode()
+            final_data = candidate_data
+            if reconciled_venues and name == "venues.csv":
+                final_data = b"venues.csv canonicalized explicit reuse\n"
+            if unrelated_package_mismatch and name == "notes.md":
+                final_data = b"notes.md unrelated mismatch\n"
+            (school_dir / name).write_bytes(final_data)
+            package_hashes[name] = hashlib.sha256(candidate_data).hexdigest()
+            final_hashes[name] = hashlib.sha256(final_data).hexdigest()
         (repo / "base.txt").write_text("base\n")
         self.git(repo, "add", ".")
         self.git(repo, "commit", "-m", "target")
         target_sha = self.git(repo, "rev-parse", "HEAD")
 
+        reconciliation_sha = "7" * 64 if reconciled_venues else ""
         freeze = {
             "status": "INTEGRATION_FROZEN",
             "school_key": SCHOOL,
             "package_member_sha256": package_hashes,
             "source_game_semantic_guard": {"snapshot_sha256": SEMANTIC},
         }
+        if reconciled_venues and not missing_reconciliation_binding:
+            freeze["venue_reconciliation_sha256"] = reconciliation_sha
+            freeze["venue_reconciliation_census"] = {
+                "blocker_count": 0,
+                "classification_counts": {
+                    "NEW_GLOBAL_IDENTITY": 0,
+                    "SAFE_REPRESENTATION_REUSE": 1,
+                },
+            }
         freeze_bytes = (
             json.dumps(freeze, indent=2, sort_keys=True) + "\n"
         ).encode()
@@ -354,6 +378,29 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "semantic_snapshot_sha256": SEMANTIC,
             "sidecars": {"integration-freeze.json": freeze_sha},
         }
+        successor_extra = {}
+        if reconciled_venues:
+            school_venue_path = f"schools/{SCHOOL}/venues.csv"
+            final_venue_hash = final_hashes["venues.csv"]
+            if bad_final_venue_proof:
+                final_venue_hash = "0" * 64
+            writeahead.update({
+                "operation": "EXPANSION_PHASE0",
+                "venue_reconciliation_sha256": reconciliation_sha,
+                "package_member_sha256": package_hashes,
+                "changed_paths": [school_venue_path],
+                "changed_file_sha256": {
+                    school_venue_path: final_venue_hash,
+                },
+            })
+            successor_extra = {
+                "operation": "EXPANSION_PHASE0",
+                "venue_reconciliation_sha256": reconciliation_sha,
+                "changed_paths": [school_venue_path],
+                "changed_file_sha256": {
+                    school_venue_path: final_venue_hash,
+                },
+            }
         writeahead_bytes = (
             json.dumps(writeahead, indent=2, sort_keys=True) + "\n"
         ).encode()
@@ -376,6 +423,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "protected_main_sha": "1" * 40,
             "writeahead_manifest_path": writeahead_path,
             "writeahead_manifest_sha256": writeahead_sha,
+            **successor_extra,
         }
         successor_bytes = (
             json.dumps(successor, indent=2, sort_keys=True) + "\n"
@@ -404,6 +452,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         request: dict,
         *,
         extra_school_change: bool = False,
+        tamper_venues: bool = False,
         bad_predecessor: bool = False,
         verification_pass: bool = True,
     ):
@@ -415,6 +464,8 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         (school_dir / "source-games.csv").write_text("source-games.csv display\n")
         if extra_school_change:
             (school_dir / "notes.md").write_text("notes.md unrelated\n")
+        if tamper_venues:
+            (school_dir / "venues.csv").write_text("venues.csv tampered after Phase 0\n")
         self.git(repo, "add", "schools")
         self.git(repo, "commit", "-m", "display successor")
         display_sha = self.git(repo, "rev-parse", "HEAD")
@@ -588,6 +639,76 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             request["target_sha"],
         )
 
+    def test_expansion_reconciled_venues_survive_verified_display_successor(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+        )
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["target_authority_kind"],
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+        )
+        self.assertEqual(
+            authority["successor"]["operation"],
+            "EXPANSION_PHASE0",
+        )
+
+    def test_expansion_display_chain_rejects_missing_venue_reconciliation_binding(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            missing_reconciliation_binding=True,
+        )
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_expansion_display_chain_rejects_stale_phase0_final_venue_proof(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            bad_final_venue_proof=True,
+        )
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_RECONCILED_PACKAGE_HASH_MISMATCH:venues.csv",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_expansion_display_chain_rejects_post_phase0_venue_tamper(self):
+        repo, _, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+        )
+        control_sha, request = self.add_verified_display_successor(
+            repo,
+            request,
+            tamper_venues=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_OPPONENT_DISPLAY_GIT_DIFF_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
     def test_display_successor_rejects_unrelated_school_file_change(self):
         repo, _, request, _ = self.make_authority_repo()
         control_sha, request = self.add_verified_display_successor(
@@ -751,6 +872,65 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                     "0" * 40,
                     source_repo=Path("/tmp/synthetic-correction-authority"),
                 )
+
+    def test_expansion_phase0_reconciled_venues_are_authenticated(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+        )
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["successor"]["operation"],
+            "EXPANSION_PHASE0",
+        )
+
+    def test_expansion_reconciled_venues_require_reconciliation_binding(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            missing_reconciliation_binding=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_expansion_reconciled_venues_require_exact_final_file_proof(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            bad_final_venue_proof=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_RECONCILED_PACKAGE_HASH_MISMATCH:venues.csv",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_expansion_reconciliation_does_not_relax_unrelated_package_hashes(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            unrelated_package_mismatch=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:notes.md",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
 
     def test_phase0_authority_and_freeze_are_authenticated(self):
         repo, control_sha, request, _ = self.make_authority_repo()

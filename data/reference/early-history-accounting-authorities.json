@@ -412,6 +412,121 @@
       "minimum_direct_result_conflicts": 5,
       "maximum_eligible_season_start_year": 1923,
       "notes": "Owner-approved Fordham multi-season early-history closeout. Aggregate-only seasons remain season-level records; detailed/accounting contradictions retain all identified rows and prohibit arithmetic fitting or inferred overlap."
+    },
+    {
+      "accepted_nonexcluded_rows": 479,
+      "accounting_contradiction_seasons": [
+        {
+          "identified_record": {
+            "games": 11,
+            "losses": 2,
+            "wins": 9
+          },
+          "institutional_record": {
+            "games": 14,
+            "losses": 3,
+            "wins": 11
+          },
+          "mechanical_delta": {
+            "games": 3,
+            "losses": 1,
+            "wins": 2
+          },
+          "season": "1920-1921",
+          "source_note": "ASC W42-13 source assertion is terminal contested; inherited Northern Arizona W45-13 result remains unchanged. No inferred game rows."
+        }
+      ],
+      "accounting_summary": {
+        "chronological_detail": {
+          "losses": 2,
+          "rows": 11,
+          "wins": 9
+        },
+        "club_high_school_aggregate": null,
+        "official_season_aggregate": {
+          "games": 14,
+          "losses": 3,
+          "wins": 11
+        },
+        "simple_union_implied_overlap_games": null
+      },
+      "aggregate_only_seasons": [
+        {
+          "identified_record": {
+            "games": 0,
+            "losses": 0,
+            "wins": 0
+          },
+          "institutional_record": {
+            "games": 1,
+            "losses": 1,
+            "wins": 0
+          },
+          "season": "1916-1917",
+          "source_note": "ASU official historical season aggregate; game identities not recoverable in bounded research. No anonymous rows or aggregate W/L allocations."
+        },
+        {
+          "identified_record": {
+            "games": 0,
+            "losses": 0,
+            "wins": 0
+          },
+          "institutional_record": {
+            "games": 18,
+            "losses": 4,
+            "wins": 14
+          },
+          "season": "1917-1918",
+          "source_note": "ASU official historical season aggregate; game identities not recoverable in bounded research. No anonymous rows or aggregate W/L allocations."
+        },
+        {
+          "identified_record": {
+            "games": 0,
+            "losses": 0,
+            "wins": 0
+          },
+          "institutional_record": {
+            "games": 8,
+            "losses": 3,
+            "wins": 5
+          },
+          "season": "1919-1920",
+          "source_note": "ASU official historical season aggregate; game identities not recoverable in bounded research. No anonymous rows or aggregate W/L allocations."
+        },
+        {
+          "exception_kind": "EXACT_WARTIME_NONFOUNDING_1943_44",
+          "identified_record": {
+            "games": 0,
+            "losses": 0,
+            "wins": 0
+          },
+          "institutional_record": {
+            "games": 14,
+            "losses": 2,
+            "wins": 12
+          },
+          "season": "1943-1944",
+          "source_note": "ASU official historical season aggregate; game identities not recoverable in bounded research. Explicit narrow wartime exception approved for 1943-44. No anonymous rows or aggregate W/L allocations."
+        }
+      ],
+      "approved_aggregate_unidentified_games": 41,
+      "approved_terminal_contested_representation": {
+        "disposition": "TERMINAL_CONTESTED_SOURCE_REPRESENTATION__NOT_IDENTITY_RESOLVED__NO_ROW_ADDED",
+        "inherited_result": "Northern Arizona W45-13",
+        "inherited_source_game_id": "ASU-STG2-PRE1950-1920-21-001",
+        "literal_assertion": "ASC W42-13",
+        "season": "1920-1921"
+      },
+      "historical_scope": "INCEPTION+",
+      "identified_ledger_sha256": "ea7b96988b9618fd39b50aa7a271850fda71a5aa9c138c7f8b35ed0797e25ae4",
+      "identified_rows": 479,
+      "minimum_direct_result_conflicts": 1,
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/582",
+      "parent_checkpoint_sha256": "4e5567e832deb63f531dd3a04386de3afd1755db0717dc89a86f67a1e948d8e0",
+      "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+      "school_key": "arizona-state",
+      "season_census_sha256": "320012930b90d1b9c1b4e6f561e81fb6352779b43b5bfef10c9c336a5e305932",
+      "wartime_exception_school_and_season_only": "arizona-state 1943-44"
     }
   ]
 }

@@ -4,6 +4,8 @@ from __future__ import annotations
 import sys
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
@@ -11,6 +13,11 @@ from remote_implementation_control import (
     OP_EXPANSION_PHASE0,
     RemoteImplementationError,
     validate_request,
+)
+from remote_implementation_expansion_phase0 import (
+    Stop,
+    _target_predecessor_authority,
+    _verification_bound_main,
 )
 
 
@@ -74,6 +81,94 @@ def expansion_request() -> dict:
         },
         "authority": false_flags,
     }
+
+
+class ExpansionFreshVerificationRegressionTests(unittest.TestCase):
+    def test_live_predecessor_movement_still_fails_closed(self):
+        request = expansion_request()
+        with patch(
+            "remote_implementation_expansion_phase0.remote_head",
+            return_value="a" * 40,
+        ):
+            with self.assertRaisesRegex(
+                Stop,
+                "EXPANSION_PHASE0_TARGET_PREDECESSOR_CHANGED",
+            ):
+                _target_predecessor_authority(
+                    request,
+                    request["expected_protected_main_sha"],
+                )
+
+    def test_published_successor_authenticates_ref_but_reconstructs_predecessor(self):
+        request = expansion_request()
+        successor = "a" * 40
+        with patch(
+            "remote_implementation_expansion_phase0.remote_head",
+            return_value=successor,
+        ), patch(
+            "remote_implementation_expansion_phase0.git",
+            return_value=SimpleNamespace(returncode=0),
+        ) as git_mock:
+            target, ancestor = _target_predecessor_authority(
+                request,
+                request["expected_protected_main_sha"],
+                authenticated_published_target_sha=successor,
+            )
+        self.assertEqual(target, request["target_sha"])
+        self.assertTrue(ancestor)
+        git_mock.assert_called_once_with(
+            "merge-base",
+            "--is-ancestor",
+            request["target_sha"],
+            request["expected_protected_main_sha"],
+            cwd=git_mock.call_args.kwargs["cwd"],
+            check=False,
+        )
+
+    def test_wrong_published_successor_still_fails_closed(self):
+        request = expansion_request()
+        with patch(
+            "remote_implementation_expansion_phase0.remote_head",
+            return_value="b" * 40,
+        ):
+            with self.assertRaisesRegex(
+                Stop,
+                "EXPANSION_PHASE0_PUBLISHED_TARGET_CHANGED",
+            ):
+                _target_predecessor_authority(
+                    request,
+                    request["expected_protected_main_sha"],
+                    authenticated_published_target_sha="a" * 40,
+                )
+
+    def test_verification_preserves_bound_main_after_linear_runtime_advance(self):
+        bound = "3" * 40
+        observed = "4" * 40
+        with patch(
+            "remote_implementation_expansion_phase0.git",
+            return_value=SimpleNamespace(returncode=0),
+        ):
+            self.assertEqual(
+                _verification_bound_main(
+                    {"protected_main_sha": bound},
+                    observed,
+                ),
+                bound,
+            )
+
+    def test_verification_rejects_nonancestor_runtime_advance(self):
+        with patch(
+            "remote_implementation_expansion_phase0.git",
+            return_value=SimpleNamespace(returncode=1),
+        ):
+            with self.assertRaisesRegex(
+                Stop,
+                "EXPANSION_PHASE0_FRESH_BOUND_MAIN_NOT_ANCESTOR",
+            ):
+                _verification_bound_main(
+                    {"protected_main_sha": "3" * 40},
+                    "4" * 40,
+                )
 
 
 class ExpansionRemoteRequestValidationTests(unittest.TestCase):
