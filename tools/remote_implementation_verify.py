@@ -12,6 +12,7 @@ from pathlib import Path
 from remote_implementation_control import (
     LIFECYCLE_IDLE,
     OP_PHASE0,
+    OP_EXPANSION_PHASE0,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_STAGE2_CENSUS,
@@ -54,6 +55,9 @@ from remote_implementation_io import (
 )
 from remote_implementation_scope_supersession_transaction import (
     verify_scope_supersession_equivalence,
+)
+from remote_implementation_expansion_phase0 import (
+    verify_expansion_phase0_equivalence,
 )
 from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
@@ -2794,6 +2798,13 @@ def main() -> int:
         if state.get("lifecycle_state") != LIFECYCLE_IDLE:
             raise Stop("FRESH_VERIFY_CONTROL_NOT_IDLE")
         last = state.get("last_operation") or {}
+        if last.get("operation") == OP_EXPANSION_PHASE0:
+            return verify_expansion_phase0_equivalence(
+                live_main=live_main,
+                control_head=control_head,
+                state=state,
+                diag=DIAG,
+            )
         if last.get("operation") == OP_PHASE0_SCOPE_SUPERSESSION:
             return verify_scope_supersession_equivalence(
                 live_main=live_main,
