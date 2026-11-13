@@ -695,6 +695,66 @@ def _verify_current_main_refresh_target_authority(
     return result
 
 
+def _verify_phase0_package_member(
+    *,
+    name: str,
+    expected: str,
+    actual: str,
+    school_key: str,
+    successor: dict[str, Any],
+    writeahead: dict[str, Any],
+    integration: dict[str, Any],
+) -> None:
+    """Authenticate one Phase 0 school-package member.
+
+    Ordinary Phase 0 requires the Integration Freeze member to remain byte-identical
+    in the published successor. Expansion Phase 0 may legitimately canonicalize only
+    venues.csv when an exact explicit venue reconciliation was already authenticated
+    and carried through durable write-ahead/successor authority. In that one case,
+    require both the original candidate member hash and the exact final school-file
+    hash to be independently bound; never infer a representation change from content.
+    """
+    if not expected:
+        raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISSING:%s" % name)
+    if actual == expected:
+        return
+    if name != "venues.csv":
+        raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
+    if (
+        successor.get("operation") != "EXPANSION_PHASE0"
+        or writeahead.get("operation") != "EXPANSION_PHASE0"
+    ):
+        raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
+
+    reconciliation_sha = str(integration.get("venue_reconciliation_sha256") or "")
+    if not reconciliation_sha:
+        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING")
+    if (
+        successor.get("venue_reconciliation_sha256") != reconciliation_sha
+        or writeahead.get("venue_reconciliation_sha256") != reconciliation_sha
+    ):
+        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISMATCH")
+    census = integration.get("venue_reconciliation_census")
+    if not isinstance(census, dict) or census.get("blocker_count") != 0:
+        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_NOT_CLEAN")
+    if (
+        (writeahead.get("package_member_sha256") or {}).get(name)
+        != expected
+    ):
+        raise Stop("STAGE2_PHASE0_SOURCE_PACKAGE_HASH_MISMATCH:%s" % name)
+
+    school_path = "schools/%s/%s" % (school_key, name)
+    successor_changed = successor.get("changed_file_sha256") or {}
+    writeahead_changed = writeahead.get("changed_file_sha256") or {}
+    if (
+        school_path not in set(successor.get("changed_paths") or [])
+        or school_path not in set(writeahead.get("changed_paths") or [])
+        or successor_changed.get(school_path) != actual
+        or writeahead_changed.get(school_path) != actual
+    ):
+        raise Stop("STAGE2_PHASE0_RECONCILED_PACKAGE_HASH_MISMATCH:%s" % name)
+
+
 def verify_phase0_authority(
     request: dict[str, Any],
     control_commit: str,
@@ -787,8 +847,15 @@ def verify_phase0_authority(
             name,
             source_repo=source_repo,
         )
-        if not expected or actual != expected:
-            raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
+        _verify_phase0_package_member(
+            name=name,
+            expected=expected,
+            actual=actual,
+            school_key=request["school_key"],
+            successor=successor,
+            writeahead=writeahead,
+            integration=integration,
+        )
 
     display_authority: dict[str, Any] | None = None
     if request["target_sha"] == phase0_target_sha:
