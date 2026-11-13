@@ -364,6 +364,38 @@ def partition_publication_source_rows(
     return published_rows, unpublished_rows
 
 
+def partition_stage2_source_rows(
+    rows: Iterable[dict[str, str]],
+    program: dict[str, str],
+) -> tuple[
+    list[dict[str, str]],
+    list[dict[str, str]],
+    list[dict[str, str]],
+]:
+    """Partition Stage 2 rows by publication coverage and top-level authority.
+
+    The first population is eligible for Stage 2 reconciliation/publication under the
+    program's current history-coverage status. The second remains preserved but outside
+    publication coverage. The third is the top-level/D-I-equivalent subset used for
+    accomplishment and other classification-scoped authority.
+
+    This keeps COMPLETE_INSTITUTIONAL publication coverage independent from the accepted
+    top-level history scope instead of treating history_start_season as a publication
+    cutoff.
+    """
+    published_rows, unpublished_rows = partition_publication_source_rows(rows, program)
+    top_level_rows = [
+        row
+        for row in published_rows
+        if season_is_top_level(
+            row.get("season_label", "").strip(),
+            program.get("history_start_season", "").strip(),
+            program.get("history_scope_intervals", "").strip(),
+        )
+    ]
+    return published_rows, unpublished_rows, top_level_rows
+
+
 def trim_conference_history(
     history_rows: Iterable[dict[str, str]],
     history_start_season: str,
