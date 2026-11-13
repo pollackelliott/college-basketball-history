@@ -146,6 +146,9 @@ jobs:
           python tools/all_history_expansion_integration.py prepare-phase0 \
             "$RUNNER_TEMP/gmu-stage1/integration-a" \
             --output "$RUNNER_TEMP/gmu-stage1/phase0-preparation-only.json"
+          python tools/all_history_expansion_phase0_preview.py \
+            --repo . --integration-freeze "$RUNNER_TEMP/gmu-stage1/integration-a" \
+            --output "$RUNNER_TEMP/gmu-stage1/phase0-disposable-preview"
           python - <<'PY'
           import hashlib, json, os, subprocess
           from pathlib import Path
