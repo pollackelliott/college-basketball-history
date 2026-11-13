@@ -286,21 +286,19 @@ class RemoteStage2Gate1FillTests(unittest.TestCase):
                 gate1.verify_stage2_gate1_fill_authority(req, CONTROL)
 
     def test_zero_decision_review_summary_preserves_empty_decision_set(self):
-        review = b"decision_id,category,decision,resolution_basis\\r\\n".replace(
-            b"\\r", b"\r"
-        ).replace(b"\\n", b"\n")
+        review = b"decision_id,category,decision,resolution_basis\r\n"
         summary = gate1._filled_review_summary(review)
         self.assertEqual(summary["decision_count"], 0)
         self.assertEqual(summary["action_counts"], {})
         self.assertEqual(
-            summary["decision_id_set_sha256"], hashlib.sha256(b"\\n").hexdigest()
+            summary["decision_id_set_sha256"], hashlib.sha256(b"\n").hexdigest()
         )
 
     def test_zero_decision_review_rejects_missing_required_headers(self):
         for review in (
             b"",
-            b"category,decision,resolution_basis\\n",
-            b"decision_id,resolution_basis\\n",
+            b"category,decision,resolution_basis\n",
+            b"decision_id,resolution_basis\n",
         ):
             with self.subTest(review=review):
                 with self.assertRaisesRegex(
@@ -312,7 +310,7 @@ class RemoteStage2Gate1FillTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             clean = {"head_sha": TARGET, "tree_sha": TREE, "status": ""}
-            review = b"decision_id,category,decision,resolution_basis\\n"
+            review = b"decision_id,category,decision,resolution_basis\n"
 
             with (
                 patch.object(gate1, "restore_integration_freeze"),
@@ -322,15 +320,15 @@ class RemoteStage2Gate1FillTests(unittest.TestCase):
                 patch.object(
                     gate1,
                     "run",
-                    return_value=subprocess.CompletedProcess([], 0, stdout="PASS\\n"),
+                    return_value=subprocess.CompletedProcess([], 0, stdout="PASS\n"),
                 ),
             ):
                 result = gate1.run_stage2_gate1_fill_tool(
                     root,
                     SCHOOL,
                     freeze_bytes=b"freeze",
-                    map_bytes=b'{"decisions": {}}\\n',
-                    plan_bytes=b'{"decisions": []}\\n',
+                    map_bytes=b'{"decisions": {}}\n',
+                    plan_bytes=b'{"decisions": []}\n',
                     review_bytes=review,
                     expected_action_counts={},
                     expected_decision_count=0,
@@ -340,7 +338,7 @@ class RemoteStage2Gate1FillTests(unittest.TestCase):
             self.assertEqual(result["decision_count"], 0)
             self.assertEqual(result["action_counts"], {})
             self.assertEqual(
-                result["decision_id_set_sha256"], hashlib.sha256(b"\\n").hexdigest()
+                result["decision_id_set_sha256"], hashlib.sha256(b"\n").hexdigest()
             )
             self.assertEqual(
                 result["tracked_mutation_proof"]["tracked_stage2_mutation"],
