@@ -265,7 +265,7 @@ A healthy turn should make one coherent durable advance or a small deterministic
 - transcript/context is growing materially faster than durable progress;
 - an external workflow remains healthy but in flight after a bounded status observation and there is no useful independent repository work to perform in the same turn.
 
-Do not keep a school-chat response open merely to watch GitHub Actions. After dispatching or authenticating an external workflow, perform at most one follow-up status read in that turn. If it is still running, yield immediately with the exact workflow link and `CONTINUE — SAME PHASE AUTHORITY PERSISTS`. The owner may return later with a bare `Continue`; that message supplies no new authority.
+Do not keep a school-chat response open merely to watch GitHub Actions. After dispatching or authenticating an external workflow, perform at most one follow-up status read in that turn. If it is still running and repository automation will continue without another chat action, yield immediately with the exact workflow link and `NEXT OWNER ACTION: NONE — AUTHORIZED PHASE RUNNING`. The owner need not return merely to supervise it. Reserve `CONTINUE — SAME PHASE AUTHORITY PERSISTS` for a durable same-phase point where automation has stopped and another chat turn must genuinely submit or execute the next deterministic operation.
 
 This transport yield is acceptable for one genuinely long external operation. It is **not** acceptable as the normal scheduler for a deterministic chain such as refresh -> census -> proposal. If one owner-authorized phase repeatedly requires transport yields between its internal operations, the repository is missing phase-sized orchestration and that gap should be repaired before the pattern is normalized for later schools.
 
@@ -275,7 +275,7 @@ This is **transport continuation**, not a new owner decision. Report:
 
 `NEXT OWNER ACTION: CONTINUE — SAME PHASE AUTHORITY PERSISTS`
 
-The owner may answer `Continue`, `Proceed`, or start a replacement chat with the recovery capsule; none of those supplies new authority. The next turn must reauthenticate durable state and resume the same already-authorized phase. Do not use this classification routinely after every successful internal request; it exists specifically to prevent overlong/stalled turns while preserving phase-sized owner interaction.
+Use that classification only when another chat turn is actually required. If repository automation is already carrying the authorized phase, report `NEXT OWNER ACTION: NONE — AUTHORIZED PHASE RUNNING` instead; the owner need not answer. When `CONTINUE` is appropriate, the owner may answer `Continue`, `Proceed`, or start a replacement chat with the recovery capsule; none of those supplies new authority. The next turn must reauthenticate durable state and resume the same already-authorized phase. Do not use this classification routinely after every successful internal request; it exists specifically to prevent overlong/stalled turns while preserving phase-sized owner interaction.
 
 ## 10. Tooling direction
 
