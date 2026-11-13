@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "protected_main_sha": "e44f9328311132f3ba5b56db666afedce433e562",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "stage3b_checkpoint_sha256": "00f552c1e46fd753db96172cde923f0b90fa03162c7a56bd5d321a64f56db8df",
+  "school_key": "vcu",
+  "validation_mode": "PROTECTED_MAIN"
+}
