@@ -29,6 +29,10 @@ from expansion_implementation_stage1 import (
     PACKAGE_FILES, Stage1Stop, canonical_bytes, csv_rows,
     git_bytes, git_revision, sha256, stage1,
 )
+from integration_freeze_guard import (
+    build_source_game_semantic_snapshot,
+    semantic_snapshot_sha256,
+)
 
 MANIFEST_NAME = "expansion-integration-freeze.json"
 PROPOSAL_NAME = "expansion-phase0-transaction-proposal.json"
@@ -206,6 +210,11 @@ def freeze_authority(
              if x["classification"] == "REUSE_CANONICAL"],
             key=lambda x:x["source_game_id"]
         )
+        semantic_snapshot = build_source_game_semantic_snapshot(
+            candidate / "source-games.csv"
+        )
+        semantic_sha = semantic_snapshot_sha256(semantic_snapshot)
+        package_hashes = {k: hashes[k] for k in PACKAGE_FILES}
         manifest = {
             "schema_version": 1,
             "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
@@ -215,10 +224,18 @@ def freeze_authority(
             "school_key": school,
             "research_base_sha": research_base,
             "protected_main_sha": main_sha,
+            "integration_base_sha": main_sha,
+            "origin_main_sha": main_sha,
             "research_freeze_zip_sha256": zip_sha,
+            "research_zip_sha256": zip_sha,
             "independent_stage1_proof_sha256": proof_sha,
             "stage1_report_sha256": hashes[STAGE1_REPORT],
-            "candidate_member_sha256": {k: hashes[k] for k in PACKAGE_FILES},
+            "candidate_member_sha256": package_hashes,
+            "package_member_sha256": package_hashes,
+            "source_game_semantic_guard": {
+                "snapshot": semantic_snapshot,
+                "snapshot_sha256": semantic_sha,
+            },
             "source_preservation": guard,
             "canonical_identity_counts": counts,
             "canonical_reuses": reuse,
