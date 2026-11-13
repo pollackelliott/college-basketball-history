@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "059affedf2e51ae3ade5144b046d2eee3b80f83c",
+  "recovered_request_id": "george-mason-expansion-stage2-proposal-0001",
+  "request_id": "george-mason-expansion-stage2-proposal-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}
