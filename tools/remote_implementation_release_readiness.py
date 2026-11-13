@@ -15,6 +15,9 @@ import release_school
 from remote_implementation_control import sha256_bytes, school_data_target_kind
 from remote_implementation_io import Stop, git, git_show_bytes, remote_head
 from remote_implementation_stage2_apply import verify_prepared_sealed_apply
+from remote_implementation_presentation_release_boundary import (
+    verify_presentation_dual_release_boundary,
+)
 
 SUCCESSOR_KIND = "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_SUCCESSOR"
 VERIFICATION_KIND = "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION"
@@ -67,11 +70,12 @@ def _matching(document: dict[str, Any], fields: dict[str, Any], label: str) -> N
         _require(document.get(key) == expected, "RELEASE_%s_%s_MISMATCH" % (label, key.upper()))
 
 
-def verify_release_readiness_authority(
+def _verify_sealed_release_readiness_authority(
     request: dict[str, Any],
     control_commit: str,
     *,
     source_repo: Path,
+    published_head_sha: str | None = None,
 ) -> dict[str, Any]:
     """Bind request, prior write-ahead, successor, verification and sealed bytes."""
     school = request["school_key"]
@@ -235,7 +239,9 @@ def verify_release_readiness_authority(
         "APPROVED",
     )
     _require(
-        remote_head(source_repo, branch) == target,
+        remote_head(source_repo, branch) == (
+            published_head_sha if published_head_sha is not None else target
+        ),
         "RELEASE_TARGET_MOVED",
     )
     # The existing sealed-apply verifier is the canonical prepared-parent/tree,
@@ -266,10 +272,170 @@ def verify_release_readiness_authority(
         "release_manifest_sha256": request["release_manifest_sha256"],
         "changed_path_count": len(successor["changed_paths"]),
         "changed_paths": successor["changed_paths"],
+        "original_apply_file_hashes": successor["changed_file_sha256"],
+        "original_apply_deleted_paths": successor["deleted_paths"],
         "sidecars": sidecars,
         "manifest": manifest,
         "approved": approved,
     }
+
+
+def verify_release_readiness_authority(
+    request: dict[str, Any],
+    control_commit: str,
+    *,
+    source_repo: Path,
+) -> dict[str, Any]:
+    """Keep ordinary G unchanged; demand an authenticated G+C proof for C."""
+    succ_ref = request.get("presentation_refresh_successor")
+    fresh_ref = request.get("presentation_refresh_verification")
+    _require(
+        (succ_ref is None) == (fresh_ref is None),
+        "RELEASE_PRESENTATION_REFERENCES_MUST_BE_PAIRED",
+    )
+    if succ_ref is None:
+        return _verify_sealed_release_readiness_authority(
+            request, control_commit, source_repo=source_repo,
+        )
+
+    school = request["school_key"]
+    branch = request["target_branch"]
+    target = request["target_sha"]
+    successor, _ = _bound_json(
+        control_commit, succ_ref, source_repo=source_repo,
+        label="PRESENTATION_SUCCESSOR",
+    )
+    fresh, _ = _bound_json(
+        control_commit, fresh_ref, source_repo=source_repo,
+        label="PRESENTATION_VERIFICATION",
+    )
+    rid = successor.get("request_id")
+    _require(
+        isinstance(rid, str) and rid
+        and succ_ref["path"] ==
+          ".remote-implementation/successors/%s/%s/successor-manifest.json" %
+          (school, rid)
+        and fresh_ref["path"] ==
+          ".remote-implementation/verifications/%s/%s/"
+          "presentation-refresh-verification.json" % (school, rid),
+        "RELEASE_PRESENTATION_REFERENCE_PATH_MISMATCH",
+    )
+    sealed_sha = successor.get("expected_target_predecessor_sha")
+    _require(
+        isinstance(sealed_sha, str) and len(sealed_sha) == 40
+        and sealed_sha != target,
+        "RELEASE_PRESENTATION_ORIGINAL_SEAL_MISSING",
+    )
+    _matching(successor, {
+        "schema_version": 1,
+        "kind": "REMOTE_IMPLEMENTATION_PRESENTATION_REFRESH_SUCCESSOR",
+        "operation": "RELEASE_PRESENTATION_REFRESH",
+        "school_key": school,
+        "target_branch": branch,
+        "prepared_parent_sha": sealed_sha,
+        "prepared_commit_sha": target,
+        "actual_published_target_sha": target,
+        "changed_paths": ["site/index.html"],
+        "deleted_paths": [],
+        "approved_plan_hash": request["approved_plan_hash"],
+        "release_manifest_sha256": request["release_manifest_sha256"],
+        "stage2_apply_successor": request["stage2_apply_successor"],
+        "stage2_apply_verification": request["stage2_apply_verification"],
+        "repository_validation": "PASS",
+        "tracked_basketball_mutation": "NONE",
+        "owner_gate_2_approved": False,
+        "final_transaction_state": "COMPLETE",
+    }, "PRESENTATION_SUCCESSOR")
+    _matching(fresh, {
+        "kind": "REMOTE_IMPLEMENTATION_PRESENTATION_REFRESH_FRESH_PROOF",
+        "request_id": rid,
+        "school_key": school,
+        "original_sealed_sha": sealed_sha,
+        "successor_sha": target,
+        "successor_tree_sha": successor.get("prepared_tree_sha"),
+        "protected_main_sha": successor.get("protected_main_sha"),
+        "accepted_asset_blob_sha": successor.get("accepted_asset_blob_sha"),
+        "changed_paths": ["site/index.html"],
+        "original_sealed_apply_equivalence": "PASS",
+        "fresh_presentation_tree_equivalence": "PASS",
+        "branch_published_exact": True,
+        "owner_gate_2_approved": False,
+    }, "PRESENTATION_VERIFICATION")
+    _require(
+        remote_head(source_repo, branch) == target,
+        "RELEASE_PRESENTATION_TARGET_MOVED",
+    )
+    original_main = successor.get("repair_main_sha")
+    current_main = request["expected_protected_main_sha"]
+    _require(
+        git(
+            "merge-base", "--is-ancestor", original_main, current_main,
+            cwd=source_repo, check=False,
+        ).returncode == 0,
+        "RELEASE_PRESENTATION_SOURCE_NOT_CURRENT_MAIN_ANCESTOR",
+    )
+    _require(
+        git(
+            "rev-parse", current_main + ":site/index.html",
+            cwd=source_repo,
+        ).stdout.strip() == successor.get("accepted_asset_blob_sha"),
+        "RELEASE_PRESENTATION_ACCEPTED_BLOB_DRIFT",
+    )
+    # Reconstruct the full original Stage 2 sealed-release sidecars and hash
+    # evidence with G as target; the real branch MUST remain at C throughout.
+    sealed_request = dict(request)
+    sealed_request["target_sha"] = sealed_sha
+    original = _verify_sealed_release_readiness_authority(
+        sealed_request, control_commit, source_repo=source_repo,
+        published_head_sha=target,
+    )
+    _require(
+        original["target_sha"] == sealed_sha
+        and original["approved_plan_hash"] == request["approved_plan_hash"]
+        and original["release_manifest_sha256"] == request["release_manifest_sha256"],
+        "RELEASE_PRESENTATION_ORIGINAL_AUTHORITY_MISMATCH",
+    )
+    # Exact parent and complete-tree replay, independent of the original
+    # manifest's seven-file historical apply and its sealed-only validator.
+    # This check can run without a school worktree; full clean-HEAD verification
+    # follows inside run_permanent_release_readiness.
+    from remote_implementation_presentation_refresh import (
+        PresentationRefreshStop, verify_presentation_successor,
+    )
+    try:
+        tree_proof = verify_presentation_successor(
+            source_repo,
+            sealed_commit_sha=sealed_sha,
+            successor_sha=target,
+            repair_main_sha=original_main,
+            expected_sealed_tree_sha=successor["sealed_tree_sha"],
+            expected_asset_blob_sha=successor["accepted_asset_blob_sha"],
+        )
+    except PresentationRefreshStop as exc:
+        raise Stop("RELEASE_PRESENTATION_TREE_REPLAY:" + str(exc)) from exc
+    _require(
+        tree_proof["successor_tree_sha"] == successor["prepared_tree_sha"],
+        "RELEASE_PRESENTATION_SUCCESSOR_TREE_MISMATCH",
+    )
+    original["target_sha"] = target
+    original["changed_paths"] = sorted(
+        set(original["changed_paths"]) | {"site/index.html"}
+    )
+    original["changed_path_count"] = len(original["changed_paths"])
+    original["presentation_refresh"] = {
+        "successor_ref": succ_ref,
+        "fresh_verification_ref": fresh_ref,
+        "original_sealed_sha": sealed_sha,
+        "original_sealed_tree_sha": successor["sealed_tree_sha"],
+        "source_protected_main_sha": original_main,
+        "accepted_site_blob_sha": successor["accepted_asset_blob_sha"],
+        "presentation_successor_sha": target,
+        "presentation_successor_tree_sha": successor["prepared_tree_sha"],
+        "historical_apply_paths": original["manifest"]["changed_paths"],
+        "fresh_presentation_tree_equivalence": "PASS",
+        "owner_gate_2_approved": False,
+    }
+    return original
 
 
 def build_release_pr_packet(
@@ -335,9 +501,31 @@ def run_permanent_release_readiness(
         "visual-qa.md", "integration-freeze.json",
     ):
         (artifact_dir / name).write_bytes(authority["sidecars"][name])
-    paths = release_school.verify_committed_change_boundary(
-        worktree, manifest, target
-    )
+    presentation = authority.get("presentation_refresh")
+    if presentation is None:
+        paths = release_school.verify_committed_change_boundary(
+            worktree, manifest, target
+        )
+        dual_boundary = None
+    else:
+        # Never reinterpret the G manifest as a manifest for C. Independently
+        # prove original G and the one-asset C overlay as separate boundaries.
+        dual_boundary = verify_presentation_dual_release_boundary(
+            worktree,
+            school_key=school,
+            original_release_manifest=manifest,
+            approved_plan_hash=authority["approved_plan_hash"],
+            original_apply_base_sha=manifest["base_commit"],
+            original_sealed_sha=presentation["original_sealed_sha"],
+            original_sealed_tree_sha=presentation["original_sealed_tree_sha"],
+            original_changed_paths=manifest["changed_paths"],
+            original_changed_file_sha256=authority["original_apply_file_hashes"],
+            original_deleted_paths=authority["original_apply_deleted_paths"],
+            presentation_successor_sha=target,
+            source_protected_main_sha=presentation["source_protected_main_sha"],
+            accepted_site_blob_sha=presentation["accepted_site_blob_sha"],
+        )
+        paths = dual_boundary["full_rehearsal_changed_paths"]
     release_school.run_gates(
         worktree,
         school,
@@ -346,7 +534,28 @@ def run_permanent_release_readiness(
         approved_plan=authority["approved"],
         **release_school.correction_gate_kwargs_from_manifest(manifest, school),
     )
-    release_school.verify_committed_change_boundary(worktree, manifest, target)
+    if presentation is None:
+        release_school.verify_committed_change_boundary(worktree, manifest, target)
+    else:
+        second_proof = verify_presentation_dual_release_boundary(
+            worktree,
+            school_key=school,
+            original_release_manifest=manifest,
+            approved_plan_hash=authority["approved_plan_hash"],
+            original_apply_base_sha=manifest["base_commit"],
+            original_sealed_sha=presentation["original_sealed_sha"],
+            original_sealed_tree_sha=presentation["original_sealed_tree_sha"],
+            original_changed_paths=manifest["changed_paths"],
+            original_changed_file_sha256=authority["original_apply_file_hashes"],
+            original_deleted_paths=authority["original_apply_deleted_paths"],
+            presentation_successor_sha=target,
+            source_protected_main_sha=presentation["source_protected_main_sha"],
+            accepted_site_blob_sha=presentation["accepted_site_blob_sha"],
+        )
+        _require(
+            second_proof == dual_boundary,
+            "RELEASE_PRESENTATION_GATE_REPLAY_DRIFT",
+        )
     return {
         "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
         "status": "RELEASE_READINESS_PASS",
@@ -362,6 +571,9 @@ def run_permanent_release_readiness(
         "approved_plan_hash": authority["approved_plan_hash"],
         "release_manifest_sha256": authority["release_manifest_sha256"],
         "changed_path_count": authority["changed_path_count"],
+        "presentation_dual_boundary": (
+            dual_boundary if presentation is not None else None
+        ),
         "permanent_release_gates": "PASS",
         "tracked_mutation": "NONE",
         "pr_created": False,
