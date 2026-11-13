@@ -22,7 +22,7 @@ from remote_implementation_io import (
     commit_control, git_show_bytes, remote_head, write_json,
 )
 from remote_implementation_presentation_refresh import (
-    ASSET_PATH, verify_presentation_successor,
+    ASSET_PATH, PresentationRefreshStop, verify_presentation_successor,
 )
 from remote_implementation_presentation_transaction import (
     PREPARED_KIND, prepare_presentation_successor,
@@ -40,14 +40,20 @@ def require(ok: bool, code: str) -> None:
 def verify_committed_presentation(
     request: dict[str, Any], candidate_sha: str, *, repo: Path,
 ) -> dict[str, object]:
-    return verify_presentation_successor(
-        repo,
-        sealed_commit_sha=request["target_sha"],
-        successor_sha=candidate_sha,
-        repair_main_sha=request["repair_main_sha"],
-        expected_sealed_tree_sha=request["sealed_tree_sha"],
-        expected_asset_blob_sha=request["accepted_asset_blob_sha"],
-    )
+    try:
+        return verify_presentation_successor(
+            repo,
+            sealed_commit_sha=request["target_sha"],
+            successor_sha=candidate_sha,
+            repair_main_sha=request["repair_main_sha"],
+            expected_sealed_tree_sha=request["sealed_tree_sha"],
+            expected_asset_blob_sha=request["accepted_asset_blob_sha"],
+        )
+    except PresentationRefreshStop as exc:
+        # The remote runner's STOP boundary uses the permanent Stop class.
+        # A tampered published commit must fail closed instead of escaping
+        # that boundary as a raw tree-helper exception.
+        raise Stop(str(exc)) from exc
 
 
 def writeahead_contents(
