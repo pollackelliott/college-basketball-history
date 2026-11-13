@@ -4398,6 +4398,9 @@ def run_recovery(
                 "active_writeahead_sha256"
             ],
             "protected_main_sha": live_main,
+            "expected_target_predecessor_sha": manifest.get(
+                "expected_target_predecessor_sha"
+            ),
             "prepared_commit_sha": prepared,
             "prepared_tree_sha": tree,
             "prepared_parent_sha": parent,
