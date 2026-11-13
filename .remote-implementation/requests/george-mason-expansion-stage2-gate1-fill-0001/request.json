@@ -1,0 +1,66 @@
+{
+  "approved_plan_hash_preview": "f6dbb47803b7653b561ae1913af2bec638fb88cf6884c57e982e513b0b9ac661",
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": true,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Explicit project owner approval in this George Mason ALL_HISTORY_EXPANSION Implementation conversation, 2026-11-13, for proposal george-mason-expansion-stage2-proposal-0004, checkpoint SHA-256 31a84e3917c2c74f6dc441bdd3e010f7a9803eea7741614152b995bcbadefcf3, recommendation-map SHA-256 e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465, approved-plan preview hash f6dbb47803b7653b561ae1913af2bec638fb88cf6884c57e982e513b0b9ac661; owner authorized ordinary guarded Gate 1 fill-to-apply and specifically prohibited release. Exact independently verified proposal checkpoint/verification, no intervening target mutation and healthy global control. PR #596 merged at 866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d (tooling and tests only). Parent fill is read-only; children are gated by independent fresh verification, permanent pre-seal and seal, and sealed apply CAS with the one-active-Implementation lock. No release, Preview, Owner Gate 2, merge, or Production authorization.",
+    "origin": "George Mason ALL_HISTORY_EXPANSION school Implementation lane — exact owner-approved Gate 1 fill and guarded continuation after merged zero-decision generic fix"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "expected_protected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_GATE1_FILL",
+  "owner_gate_1_approval": {
+    "approval_basis": "Explicit project owner approval in this George Mason ALL_HISTORY_EXPANSION Implementation conversation, 2026-11-13, for proposal george-mason-expansion-stage2-proposal-0004, checkpoint SHA-256 31a84e3917c2c74f6dc441bdd3e010f7a9803eea7741614152b995bcbadefcf3, recommendation-map SHA-256 e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465, approved-plan preview hash f6dbb47803b7653b561ae1913af2bec638fb88cf6884c57e982e513b0b9ac661; owner authorized ordinary guarded Gate 1 fill-to-apply and specifically prohibited release.",
+    "approved": true,
+    "approved_plan_hash_preview": "f6dbb47803b7653b561ae1913af2bec638fb88cf6884c57e982e513b0b9ac661",
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "proposal_checkpoint_sha256": "31a84e3917c2c74f6dc441bdd3e010f7a9803eea7741614152b995bcbadefcf3",
+    "recommendation_map_sha256": "e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465"
+  },
+  "phase_continuation": {
+    "apply_request_id": "george-mason-expansion-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "george-mason-expansion-stage2-preseal-0001",
+    "seal_request_id": "george-mason-expansion-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "ff57dacbdc0a4fde46f16708de686abeac639c48",
+  "previous_control_state_sha256": "2817e2cb32dbc0d14d9b6dca54a0b008f4045d7d929327f38af45b18e3e90413",
+  "recommendation_map_sha256": "e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465",
+  "request_id": "george-mason-expansion-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-proposal-0004/checkpoint-manifest.json",
+    "sha256": "31a84e3917c2c74f6dc441bdd3e010f7a9803eea7741614152b995bcbadefcf3"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-proposal-0004/stage2-proposal-rehearsal-verification.json",
+    "sha256": "ad6658d1ff2a889469a205f7d9116e6c856b3793a33a77b86b524a922a0f01d7"
+  },
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38"
+}
