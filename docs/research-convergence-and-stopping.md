@@ -261,6 +261,18 @@ These stopping decisions belong to the Research lane. They should not create a n
 
 Contact the owner only when existing repository policy requires owner disposition or when evidence leaves a genuine material historical choice that affects canonical publication. Do not ask the owner to resolve an obscure historical lineage question that can safely remain a defensible historical/NON_D1 identity under this policy.
 
+Research is owner-facing at meaningful **stage/substage boundaries**, not at deterministic tooling boundaries. When the owner says `Proceed` into a Research stage, that authorization persists through ordinary source work allowed by that stage, mechanical closeout, generic same-family tooling/transport repair, exact-head tooling-only PR merge under the `AGENTS.md` delegation rule, rerun of the permanent entrypoint, and durable checkpoint creation. A Research lane must not route the owner through the Control Center merely because a narrow generic repair reached a PR merge boundary. Escalate only when the repair or newly discovered evidence changes historical/shared authority, basketball/shared state, repository policy/mutation scope, or recovery safety.
+
+The normal Research cadence is therefore:
+
+`stage result -> owner review / Proceed -> next stage work -> next durable stage result`
+
+not:
+
+`school chat -> Control Center -> school chat`
+
+for each deterministic technical repair or checkpoint.
+
 ## 9. Relationship to existing standards
 
 This document narrows **when continued research is warranted**. It does not lower substantive acceptance requirements.
