@@ -15,6 +15,7 @@ from program_history import (  # noqa: E402
     derive_ncaa_accomplishments,
     history_scope_errors,
     partition_source_rows,
+    partition_stage2_source_rows,
     scope_canonical_games,
     season_is_in_scope,
     trim_conference_history,
@@ -171,6 +172,62 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(in_scope, [current])
         self.assertEqual(pre_cutoff, [old])
         self.assertEqual(old["raw_text"], "preserve me")
+
+    def test_stage2_complete_institutional_uses_publication_coverage_without_broadening_top_level(self):
+        early = {
+            "source_game_id": "EARLY",
+            "season_label": "1966-1967",
+            "raw_text": "institutional history",
+        }
+        top_level = {
+            "source_game_id": "TOP",
+            "season_label": "1978-1979",
+            "raw_text": "top-level history",
+        }
+        program = {
+            "program_key": "program-a",
+            "program_inception_season": "1966-1967",
+            "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+            "history_start_season": "1978-1979",
+            "history_scope_intervals": "",
+        }
+
+        published, unpublished, top_level_rows = partition_stage2_source_rows(
+            [early, top_level],
+            program,
+        )
+
+        self.assertEqual(published, [early, top_level])
+        self.assertEqual(unpublished, [])
+        self.assertEqual(top_level_rows, [top_level])
+
+    def test_stage2_legacy_top_level_only_preserves_legacy_source_partition(self):
+        early = {
+            "source_game_id": "EARLY",
+            "season_label": "1966-1967",
+            "raw_text": "preserved outside publication",
+        }
+        top_level = {
+            "source_game_id": "TOP",
+            "season_label": "1978-1979",
+            "raw_text": "published top-level history",
+        }
+        program = {
+            "program_key": "program-a",
+            "program_inception_season": "1966-1967",
+            "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
+            "history_start_season": "1978-1979",
+            "history_scope_intervals": "",
+        }
+
+        published, unpublished, top_level_rows = partition_stage2_source_rows(
+            [early, top_level],
+            program,
+        )
+
+        self.assertEqual(published, [top_level])
+        self.assertEqual(unpublished, [early])
+        self.assertEqual(top_level_rows, [top_level])
 
     def test_records_and_opponents_use_only_scoped_games(self):
         old = canonical_game("CBBG-OLD", "1999-2000", winner="program-b")
