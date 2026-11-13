@@ -49,6 +49,7 @@ Once the owner authorizes a clearly named Implementation phase, that authorizati
 Default phase continuations are:
 
 - Stage 2 technical/reconciliation authorization continues through census, any policy-permitted deterministic representation repair, regeneration, recommendation-map preparation/rehearsal, and stops at `OWNER_GATE_1_READY` or a genuine blocker;
+- if a generic technical repair corrects planner eligibility/coverage and therefore changes the Stage 2 decision-universe fingerprint, invalidate the stale map/universe and recompute from the unchanged frozen authority; do not create an owner relay merely because the SHA changed. Newly surfaced genuine historical decisions are handled in the ordinary Gate 1 packet;
 - explicit Owner Gate 1 approval continues through fill/encode, pre-seal rehearsal, cryptographic seal, transactional sealed apply, and independent post-apply verification;
 - one release-preparation `Proceed` continues through release readiness, exact PR creation/reuse, CI/mergeability checks, exact Preview verification, and stops at `OWNER_GATE_2_READY`;
 - exact Preview `APPROVED. Proceed` continues through durable Gate 2 approval verification, exact approved two-parent merge, Production-proof request, and independent Production verification through `IMPLEMENTATION COMPLETE`.
