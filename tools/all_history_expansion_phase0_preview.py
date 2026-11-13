@@ -61,11 +61,9 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     require(manifest["frozen_program_projection"] is not None,
             "PHASE0_PREVIEW_MISSING_METADATA_PROJECTION")
     before=[p for p in program_rows if p["program_key"]==school]
-    require(len(before)==1 and
-            sha256(canonical_bytes(before[0])) ==
-            sha256(canonical_bytes(before[0])), "PHASE0_PREVIEW_PROGRAM_MISSING")
-    # The exact canonical-row hash is stored from original Research; it is
-    # intentionally not compared to JSON serialization of the raw registry.
+    require(len(before)==1, "PHASE0_PREVIEW_PROGRAM_MISSING")
+    # The exact canonical-row hash is stored from original Research; verify
+    # the original registry identity before any projection.
     from all_history_expansion_freeze import canonical_row_sha256
     require(canonical_row_sha256(before[0]) == manifest["baseline_program_row_sha256"],
             "PHASE0_PREVIEW_BASELINE_PROGRAM_DRIFT")
