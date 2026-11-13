@@ -630,7 +630,7 @@ jobs:
       - name: Check out exact request-bound protected-main runtime
         uses: actions/checkout@v4
         with:
-          ref: ${{ needs.process-request.outputs.verification_runtime_sha }}
+          ref: ${{ needs.process-request.outputs.protected_main_sha }}
           path: runtime
           fetch-depth: 0
 
