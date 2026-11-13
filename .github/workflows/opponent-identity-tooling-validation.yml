@@ -3,14 +3,13 @@ name: Opponent identity tooling validation
 on:
   pull_request:
     branches: [main]
-    types: [opened, synchronize, reopened, assigned]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: read
 
 jobs:
   validate:
-    if: github.event.action != 'assigned' || github.event.assignee.login == github.repository_owner
     runs-on: ubuntu-latest
     steps:
       - name: Check out exact PR head
