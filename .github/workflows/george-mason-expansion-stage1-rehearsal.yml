@@ -146,9 +146,31 @@ jobs:
           python tools/all_history_expansion_integration.py prepare-phase0 \
             "$RUNNER_TEMP/gmu-stage1/integration-a" \
             --output "$RUNNER_TEMP/gmu-stage1/phase0-preparation-only.json"
-          python tools/all_history_expansion_phase0_preview.py \
-            --repo . --integration-freeze "$RUNNER_TEMP/gmu-stage1/integration-a" \
-            --output "$RUNNER_TEMP/gmu-stage1/phase0-disposable-preview"
+          # Explicit expected historical venue-identity blocker. A successful
+          # Phase 0 preview would be an unsafe implicit physical-venue decision.
+          if python tools/all_history_expansion_phase0_preview.py \
+              --repo . --integration-freeze "$RUNNER_TEMP/gmu-stage1/integration-a" \
+              --output "$RUNNER_TEMP/gmu-stage1/phase0-disposable-preview"; then
+            echo "FAIL: preview permitted registration despite historical alias conflict" >&2
+            exit 1
+          fi
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"gmu-stage1/phase0-disposable-preview"
+          assert not (root/"phase0-preview.json").exists()
+          doc=json.loads((root/"phase0-venue-identity-blockers.json").read_bytes())
+          targets=[x for x in doc["blockers"]
+                   if x["class"]=="VENUE_POTENTIAL_EXISTING_PHYSICAL_IDENTITY"
+                   and x["venue_key"]=="umbc-fieldhouse"
+                   and x["global_venue_id"]=="VEN-000934"
+                   and x["local_city"]=="Baltimore"
+                   and x["registered_city"]=="Catonsville"
+                   and "HISTORICAL_OR_ALIAS" in x["registered_alias_types"]]
+          assert len(targets)==1, doc
+          assert doc["status"]=="BLOCKED_VENUE_IDENTITY_RECONCILIATION"
+          print("EXPECTED_PRE_REGISTRATION_HISTORICAL_IDENTITY_BLOCKER",json.dumps(targets,sort_keys=True))
+          PY
           python - <<'PY'
           import hashlib, json, os, subprocess
           from pathlib import Path
