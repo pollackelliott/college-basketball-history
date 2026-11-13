@@ -23,10 +23,10 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner said Proceed after durable recovery of independently fresh-verified expansion Phase 0 successor 330a5873008d2bdc3afe3ce73d1f4af9c3ce983f. The prior workflow-level STAGE2_CONTINUATION_PROTECTED_MAIN_CHANGED occurred only after successful Phase 0 fresh verification and did not consume a Stage 2 transaction. This request begins the ordinary owner-authorized Stage 2 phase with one read-only STAGE2_CENSUS against current protected main e7f90652b3517c1d301d40c3c8527fca167f812f and the exact Phase 0 successor. It carries no current-main refresh, tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority.",
+    "authorization": "Owner said Proceed for the ordinary George Mason Stage 2 phase. The prior census attempt exposed only the generic expansion Phase 0 reconciled-venues authority-consumer defect; delegated tooling PR #586 was exact-head validated and merged as protected main 7c6457aabf5e741beabef8e4b5e22be16108a354. This request reruns the permanent read-only STAGE2_CENSUS against the unchanged independently verified expansion Phase 0 successor. It carries no current-main refresh, tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority.",
     "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census"
   },
-  "expected_protected_main_sha": "e7f90652b3517c1d301d40c3c8527fca167f812f",
+  "expected_protected_main_sha": "7c6457aabf5e741beabef8e4b5e22be16108a354",
   "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
   "operation": "STAGE2_CENSUS",
@@ -34,9 +34,9 @@
     "path": ".remote-implementation/successors/george-mason/george-mason-expansion-phase0-0001/successor-manifest.json",
     "sha256": "2025a1dedb9b89469e9bfbae395d2c32f9cd8d84b217951a9c0b5421a2d2832f"
   },
-  "previous_control_state_commit": "54f805a4a18da5eff3c9eca4777d9ff15594c57c",
+  "previous_control_state_commit": "b37026b5a9068f47516f8364828fc65999951569",
   "previous_control_state_sha256": "f0d4a8ec06871aeb7761a06c91f2acff2f0e8da221e1a4f64b79ba6d27087ee6",
-  "request_id": "george-mason-expansion-stage2-census-0001",
+  "request_id": "george-mason-expansion-stage2-census-0002",
   "schema_version": 1,
   "school_key": "george-mason",
   "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
