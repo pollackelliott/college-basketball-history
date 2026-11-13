@@ -244,11 +244,9 @@ def reconcile_stage4_research_report(
     adjusted = dict(report)
     adjusted["errors"] = remaining
     adjusted["status"] = "PASS" if not remaining else "FAIL"
-    adjusted["warnings"] = list(report.get("warnings", [])) + [
-        "All-History expansion: required completed season was authenticated "
-        "in inherited published history at the immutable research_base_sha; "
-        "it is intentionally absent from this supplemental-only package."
-    ]
+    # A proved inherited completed-season cutoff is recorded in the coverage
+    # proof and counters, not as a new Research warning.
+    adjusted["warnings"] = list(report.get("warnings", []))
     adjusted["counts"] = dict(report["counts"])
     adjusted["counts"]["coverage"] = {
         **coverage,

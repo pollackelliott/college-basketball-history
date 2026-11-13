@@ -334,6 +334,23 @@ class HomeChronologyChallengeTests(unittest.TestCase):
             state="EX",
         )
 
+    def test_no_home_games_without_chronology_is_clean(self):
+        report = source_home_chronology_report(
+            [row(source_game_id="NONHOME", curated_site_type="UNKNOWN")],
+            [], school_key="test",
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["warnings"], [])
+        self.assertEqual(report["counts"]["home_rows_checked"], 0)
+
+    def test_existing_home_without_chronology_still_warns(self):
+        report = source_home_chronology_report(
+            [self.home_game("Undocumented Arena")],
+            [], school_key="test",
+        )
+        self.assertTrue(any("HOME relationship chronology" in x
+                            for x in report["warnings"]))
+
     def test_primary_home_relationship_passes(self):
         report = source_home_chronology_report(
             [self.home_game("Example Arena")],
