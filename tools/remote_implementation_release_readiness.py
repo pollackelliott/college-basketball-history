@@ -272,8 +272,6 @@ def _verify_sealed_release_readiness_authority(
         "release_manifest_sha256": request["release_manifest_sha256"],
         "changed_path_count": len(successor["changed_paths"]),
         "changed_paths": successor["changed_paths"],
-        "original_apply_file_hashes": successor["changed_file_sha256"],
-        "original_apply_deleted_paths": successor["deleted_paths"],
         "sidecars": sidecars,
         "manifest": manifest,
         "approved": approved,
@@ -417,6 +415,12 @@ def verify_release_readiness_authority(
         tree_proof["successor_tree_sha"] == successor["prepared_tree_sha"],
         "RELEASE_PRESENTATION_SUCCESSOR_TREE_MISMATCH",
     )
+    original_successor, _ = _bound_json(
+        control_commit, request["stage2_apply_successor"],
+        source_repo=source_repo, label="ORIGINAL_APPLY_FOR_PRESENTATION",
+    )
+    original["original_apply_file_hashes"] = original_successor["changed_file_sha256"]
+    original["original_apply_deleted_paths"] = original_successor["deleted_paths"]
     original["target_sha"] = target
     original["changed_paths"] = sorted(
         set(original["changed_paths"]) | {"site/index.html"}
@@ -571,8 +575,9 @@ def run_permanent_release_readiness(
         "approved_plan_hash": authority["approved_plan_hash"],
         "release_manifest_sha256": authority["release_manifest_sha256"],
         "changed_path_count": authority["changed_path_count"],
-        "presentation_dual_boundary": (
-            dual_boundary if presentation is not None else None
+        **(
+            {"presentation_dual_boundary": dual_boundary}
+            if presentation is not None else {}
         ),
         "permanent_release_gates": "PASS",
         "tracked_mutation": "NONE",
