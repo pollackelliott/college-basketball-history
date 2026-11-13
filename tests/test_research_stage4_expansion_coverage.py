@@ -302,8 +302,19 @@ class Stage4ExpansionCloseoutIntegrationTests(unittest.TestCase):
             self.assertEqual(status["expansion_coverage_proof"], "PASS")
             proof_mock.assert_called_once()
             with zipfile.ZipFile(root / "output" / "test-stage4-complete-checkpoint.zip") as z:
-                self.assertIn("stage4-expansion-coverage-proof.json",
-                              z.namelist())
+                proof_name = "stage4-expansion-coverage-proof.json"
+                self.assertIn(proof_name, z.namelist())
+                manifest = json.loads(z.read("checkpoint-manifest.json"))
+                records = {item["name"]: item for item in manifest["files"]}
+                self.assertEqual(
+                    set(records), set(z.namelist()) - {"checkpoint-manifest.json"}
+                )
+                proof_bytes = z.read(proof_name)
+                self.assertEqual(records[proof_name]["bytes"], len(proof_bytes))
+                self.assertEqual(
+                    records[proof_name]["sha256"], stage4.sha256_bytes(proof_bytes)
+                )
+                self.assertEqual(json.loads(proof_bytes), self._proof())
 
     def test_17_package_notes_cannot_claim_expansion_mode(self):
         import test_research_stage4_closeout as stage4_fixture
