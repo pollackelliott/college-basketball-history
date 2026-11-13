@@ -179,6 +179,9 @@ def _verify_opponent_display_target_authority(
     *,
     phase0_target_sha: str,
     package_hashes: dict[str, str],
+    phase0_successor: dict[str, Any],
+    phase0_writeahead: dict[str, Any],
+    integration: dict[str, Any],
     source_repo: Path,
 ) -> dict[str, Any]:
     ref = request.get("stage2_opponent_display_successor")
@@ -419,12 +422,30 @@ def _verify_opponent_display_target_authority(
             expected = changed_hashes.get(
                 "schools/%s/%s" % (request["school_key"], name)
             )
-        else:
-            expected = package_hashes.get(name)
-        if not expected or actual != expected:
-            raise Stop(
-                "STAGE2_OPPONENT_DISPLAY_PACKAGE_HASH_MISMATCH:%s" % name
+            if not expected or actual != expected:
+                raise Stop(
+                    "STAGE2_OPPONENT_DISPLAY_PACKAGE_HASH_MISMATCH:%s" % name
+                )
+            continue
+
+        expected = package_hashes.get(name)
+        try:
+            _verify_phase0_package_member(
+                name=name,
+                expected=expected,
+                actual=actual,
+                school_key=request["school_key"],
+                successor=phase0_successor,
+                writeahead=phase0_writeahead,
+                integration=integration,
             )
+        except Stop as exc:
+            message = str(exc)
+            if message.startswith("STAGE2_PHASE0_"):
+                raise Stop(
+                    "STAGE2_OPPONENT_DISPLAY_" + message[len("STAGE2_PHASE0_"):]
+                ) from exc
+            raise
 
     return {
         "successor": successor,
@@ -868,6 +889,9 @@ def verify_phase0_authority(
             control_commit,
             phase0_target_sha=phase0_target_sha,
             package_hashes=package_hashes,
+            phase0_successor=successor,
+            phase0_writeahead=writeahead,
+            integration=integration,
             source_repo=source_repo,
         )
         target_authority_kind = "STAGE2_OPPONENT_DISPLAY_SUCCESSOR"
