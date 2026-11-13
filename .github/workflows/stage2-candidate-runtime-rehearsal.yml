@@ -1,20 +1,9 @@
-name: Stage 2 candidate runtime rehearsal
+name: Stage 2 candidate runtime rehearsal — transport trigger
 
 on:
-  workflow_dispatch:
-    inputs:
-      candidate_sha:
-        description: Exact candidate tooling commit SHA
-        required: true
-        type: string
-      control_commit:
-        description: Exact control/remote-implementation commit carrying the blocked proposal checkpoint
-        required: true
-        type: string
-      proposal_checkpoint_path:
-        description: Exact blocked Stage 2 proposal checkpoint manifest path
-        required: true
-        type: string
+  push:
+    branches:
+      - rehearsal/gmu-stage2-publication-coverage-54dcc76b
 
 permissions:
   contents: read
@@ -23,17 +12,17 @@ jobs:
   rehearse-candidate-runtime:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out control authority
+      - name: Check out exact blocked proposal authority
         uses: actions/checkout@v4
         with:
-          ref: control/remote-implementation
+          ref: 541db8c4dd0c450e55d06d6d7244ccc828de6c69
           path: control
           fetch-depth: 0
 
       - name: Check out exact candidate runtime
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.candidate_sha }}
+          ref: 54dcc76baf50a0993ae3606ac24899676e88c826
           path: candidate
           fetch-depth: 0
 
@@ -42,32 +31,17 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Authenticate requested commits
+      - name: Replay exact blocked proposal with exact candidate tooling
         shell: bash
         run: |
           set -euo pipefail
-          candidate="${{ inputs.candidate_sha }}"
-          control_commit="${{ inputs.control_commit }}"
-          if [[ ! "$candidate" =~ ^[0-9a-f]{40}$ ]]; then
-            echo "Invalid candidate_sha: $candidate" >&2
-            exit 1
-          fi
-          if [[ ! "$control_commit" =~ ^[0-9a-f]{40}$ ]]; then
-            echo "Invalid control_commit: $control_commit" >&2
-            exit 1
-          fi
-          actual_candidate="$(git -C candidate rev-parse HEAD)"
-          if [[ "$actual_candidate" != "$candidate" ]]; then
-            echo "Candidate checkout mismatch: expected=$candidate actual=$actual_candidate" >&2
-            exit 1
-          fi
-          git -C control cat-file -e "$control_commit^{commit}"
-
-      - name: Replay exact blocked proposal with candidate tooling
-        shell: bash
-        run: |
-          set -euo pipefail
-          python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha "${{ inputs.candidate_sha }}"             --control-commit "${{ inputs.control_commit }}"             --proposal-checkpoint-path "${{ inputs.proposal_checkpoint_path }}"             --diag /tmp/stage2-candidate-runtime-rehearsal
+          python candidate/tools/stage2_candidate_runtime_rehearsal.py \
+            --source-repo control \
+            --candidate-runtime candidate \
+            --candidate-sha 54dcc76baf50a0993ae3606ac24899676e88c826 \
+            --control-commit 541db8c4dd0c450e55d06d6d7244ccc828de6c69 \
+            --proposal-checkpoint-path .remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-proposal-0003/checkpoint-manifest.json \
+            --diag /tmp/stage2-candidate-runtime-rehearsal
 
       - name: Upload candidate rehearsal diagnostics
         if: always()
