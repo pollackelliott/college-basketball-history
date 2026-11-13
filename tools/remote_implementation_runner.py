@@ -17,6 +17,7 @@ from remote_implementation_control import (
     MUTATION_PREPARED,
     MUTATION_PUBLISHED,
     OP_PHASE0,
+    OP_EXPANSION_PHASE0,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_STAGE1,
@@ -83,6 +84,7 @@ from remote_implementation_scope_supersession_transaction import (
     run_phase0_scope_supersession,
     scope_supersession_changed_paths,
 )
+from remote_implementation_expansion_phase0 import run_expansion_phase0
 from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
     add_existing_onboarding_worktree,
@@ -4381,6 +4383,7 @@ def run_recovery(
         successor = {
             "schema_version": 1,
             "kind": "REMOTE_IMPLEMENTATION_SUCCESSOR",
+            "operation": state.get("active_operation"),
             "request_id": original_request_id,
             "school_key": request["school_key"],
             "request_sha256": state["active_request_sha256"],
@@ -4395,6 +4398,9 @@ def run_recovery(
                 "active_writeahead_sha256"
             ],
             "protected_main_sha": live_main,
+            "expected_target_predecessor_sha": manifest.get(
+                "expected_target_predecessor_sha"
+            ),
             "prepared_commit_sha": prepared,
             "prepared_tree_sha": tree,
             "prepared_parent_sha": parent,
@@ -4429,7 +4435,11 @@ def run_recovery(
             state,
             request_id=original_request_id,
             last_operation={
-                "operation": OP_PHASE0,
+                "operation": (
+                    OP_EXPANSION_PHASE0
+                    if state.get("active_operation") == OP_EXPANSION_PHASE0
+                    else OP_PHASE0
+                ),
                 "request_id": original_request_id,
                 "school_key": request["school_key"],
                 "protected_main_sha": live_main,
@@ -4642,6 +4652,15 @@ def main() -> int:
                 request_commit,
                 predecessor_commit,
                 live_main,
+            )
+        elif request["operation"] == OP_EXPANSION_PHASE0:
+            run_expansion_phase0(
+                state=state,
+                request=request,
+                request_bytes=request_bytes,
+                request_commit=request_commit,
+                live_main=live_main,
+                diag=DIAG,
             )
         elif request["operation"] == OP_PHASE0_SCOPE_SUPERSESSION:
             run_phase0_scope_supersession(

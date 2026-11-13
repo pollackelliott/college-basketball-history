@@ -1,0 +1,132 @@
+name: All-History expansion Stage 1 canonical preflight
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/all-history-expansion-stage1-canonical-preflight.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  mason-exact-main-census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate immutable base and exact current main; census canonical identities
+        env:
+          EXACT_MAIN: ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd
+          RESEARCH_BASE: df73675852ec5a43dfac50da0ee06d8bcabf8832
+        run: |
+          python - <<'PY'
+          import collections
+          import csv
+          import hashlib
+          import io
+          import json
+          import os
+          import pathlib
+          import subprocess
+
+          main = os.environ["EXACT_MAIN"]
+          base = os.environ["RESEARCH_BASE"]
+
+          def git(*args):
+              return subprocess.check_output(["git", *args]).decode().strip()
+
+          def git_raw(commit, path):
+              return subprocess.check_output(["git", "show", commit + ":" + path])
+
+          observed = git("rev-parse", "refs/remotes/origin/main")
+          if observed != main:
+              raise SystemExit(f"main drift: expected {main}, saw {observed}")
+          if git("rev-parse", "--verify", base + "^{commit}") != base:
+              raise SystemExit("original Research base missing")
+
+          package_files = (
+              "source-games.csv", "opponents.csv", "venues.csv",
+              "conferences.csv", "notes.md", "source-notes.md",
+          )
+          sha_by_member = {}
+          for name in package_files:
+              path = "schools/george-mason/" + name
+              inherited = git_raw(base, path)
+              current = git_raw(main, path)
+              if current != inherited:
+                  raise SystemExit("inherited school package drift: " + path)
+              sha_by_member[name] = hashlib.sha256(inherited).hexdigest()
+
+          source_reader = csv.DictReader(io.StringIO(git_raw(main,
+              "schools/george-mason/source-games.csv").decode("utf-8-sig")))
+          source_rows = list(source_reader)
+          inherited_ids = [x["source_game_id"].strip() for x in source_rows]
+          if len(inherited_ids) != len(set(inherited_ids)) or any(not x for x in inherited_ids):
+              raise SystemExit("inherited source ID population invalid")
+          if len(source_rows) != 1455:
+              raise SystemExit(f"inherited source count changed: {len(source_rows)}")
+
+          def subset(commit):
+              rows = csv.DictReader(io.StringIO(git_raw(commit,
+                  "data/canonical/games.csv").decode("utf-8-sig")))
+              return [row for row in rows if "george-mason" in (
+                  row.get("team_a_key"), row.get("team_b_key"))
+                  and 1966 <= int(row.get("season_label", "0000")[:4]) <= 1977]
+
+          current = subset(main)
+          original = subset(base)
+          def duplicates(rows):
+              ids = [r["canonical_game_id"] for r in rows]
+              return len(ids) - len(set(ids))
+          if duplicates(current) or duplicates(original):
+              raise SystemExit("canonical ID collision within pre-scope games")
+
+          canonical_json = lambda x:(json.dumps(x,sort_keys=True,
+              ensure_ascii=False,separators=(",",":"))+"\n").encode()
+          cur_id = {r["canonical_game_id"]:r for r in current}
+          orig_id = {r["canonical_game_id"]:r for r in original}
+          report = {
+              "kind":"GEORGE_MASON_ALL_HISTORY_STAGE1_CURRENT_MAIN_CANONICAL_PRECHECK",
+              "status":"READ_ONLY_PRECHECK_NOT_FULL_STAGE1",
+              "protected_main_sha":main,
+              "research_base_sha":base,
+              "inherited_source_game_count":len(source_rows),
+              "unchanged_inherited_school_members_sha256":sha_by_member,
+              "current_prescope_canonical_game_count":len(current),
+              "research_base_prescope_canonical_game_count":len(original),
+              "pre_scope_canonical_id_additions":sorted(set(cur_id)-set(orig_id)),
+              "pre_scope_canonical_id_removals":sorted(set(orig_id)-set(cur_id)),
+              "pre_scope_canonical_row_changes":sorted(k for k in set(cur_id)&set(orig_id) if cur_id[k]!=orig_id[k]),
+              "current_prescope_canonical_rows":sorted(current,key=lambda x:x["canonical_game_id"]),
+              "current_prescope_canonical_rows_sha256":hashlib.sha256(canonical_json(
+                  sorted(current,key=lambda x:x["canonical_game_id"]))).hexdigest(),
+              "rehearsal_complete":False,
+              "freeze_zip_authenticated_in_this_run":False,
+          }
+          raw = canonical_json(report)
+          out=pathlib.Path("mason-canonical-precheck.json")
+          out.write_bytes(raw)
+          print("EXACT_MAIN",main)
+          print("RESEARCH_BASE",base)
+          print("INHERITED_SOURCE_GAME_COUNT",len(source_rows))
+          print("CURRENT_PRESCOPE_CANONICAL_GAME_COUNT",len(current))
+          print("RESEARCH_BASE_PRESCOPE_CANONICAL_GAME_COUNT",len(original))
+          print("PRESCOPE_CANONICAL_ROWS",json.dumps(
+              [{"id":x["canonical_game_id"],"season":x["season_label"],
+                "date":x["game_date"],"team_a":x["team_a_key"],
+                "team_b":x["team_b_key"]} for x in current],
+              sort_keys=True))
+          print("PRECHECK_SHA256",hashlib.sha256(raw).hexdigest())
+          print("REHEARSAL_COMPLETED",False)
+          PY
+          test -z "$(git status --porcelain --untracked-files=no)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: george-mason-stage1-canonical-precheck
+          path: mason-canonical-precheck.json
+          retention-days: 30

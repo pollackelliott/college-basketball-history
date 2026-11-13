@@ -23,6 +23,7 @@ REQUEST_SCHEMA_VERSION = 1
 
 OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
+OP_EXPANSION_PHASE0 = "EXPANSION_PHASE0"
 OP_PHASE0_SCOPE_SUPERSESSION = "PHASE0_SCOPE_SUPERSESSION"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_STAGE2_CURRENT_MAIN_REFRESH = "STAGE2_CURRENT_MAIN_REFRESH"
@@ -42,6 +43,7 @@ OP_RECOVER = "RECOVER"
 SUPPORTED_OPERATIONS = {
     OP_STAGE1,
     OP_PHASE0,
+    OP_EXPANSION_PHASE0,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_STAGE2_CENSUS,
     OP_STAGE2_CURRENT_MAIN_REFRESH,
@@ -851,6 +853,80 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("stage2_reconciliation_diagnostic") is not True,
             "STAGE1_REQUEST_STAGE2_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
+        )
+
+    if operation == OP_EXPANSION_PHASE0:
+        _require(
+            authority.get("expansion_phase0") is True,
+            "EXPANSION_PHASE0_REQUEST_AUTHORITY_REQUIRED",
+        )
+        _require(
+            authority.get("phase0") is False,
+            "EXPANSION_PHASE0_ORDINARY_PHASE0_AUTHORITY_FORBIDDEN",
+        )
+        expected_target = f"data/{school_key}-onboarding"
+        _require(
+            request.get("target_branch") == expected_target,
+            "EXPANSION_PHASE0_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "EXPANSION_PHASE0_TARGET_SHA_INVALID",
+        )
+        checkpoint = request.get("expansion_research_checkpoint")
+        _require(
+            isinstance(checkpoint, dict),
+            "EXPANSION_PHASE0_RESEARCH_CHECKPOINT_MISSING",
+        )
+        _require_sha(
+            checkpoint.get("sha256"),
+            64,
+            "EXPANSION_PHASE0_RESEARCH_CHECKPOINT_SHA_INVALID",
+        )
+        _require_sha(
+            checkpoint.get("research_base_sha"),
+            40,
+            "EXPANSION_PHASE0_RESEARCH_BASE_INVALID",
+        )
+        _validate_transport(checkpoint.get("transport"))
+        _validate_payload_ref(
+            request.get("stage1_independent_proof"),
+            "stage1_independent_proof",
+            required=True,
+        )
+        _require_sha(
+            request.get("integration_freeze_sha256"),
+            64,
+            "EXPANSION_PHASE0_INTEGRATION_FREEZE_SHA_INVALID",
+        )
+        _require(
+            request.get("research_freeze_sha256") == checkpoint.get("sha256"),
+            "EXPANSION_PHASE0_RESEARCH_FREEZE_BINDING_MISMATCH",
+        )
+        _require(
+            request.get("stage1_independent_proof_sha256")
+            == (request.get("stage1_independent_proof") or {}).get("sha256"),
+            "EXPANSION_PHASE0_STAGE1_PROOF_BINDING_MISMATCH",
+        )
+        for key in (
+            "recovery", "stage2_census", "stage2_current_main_refresh",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+            "release_preview_verify", "release_gate2_approval",
+            "release_production_proof", "venue_identity_maintenance", "release",
+            "owner_gate_1", "owner_gate_2",
+        ):
+            _require(
+                authority.get(key) is not True,
+                "EXPANSION_PHASE0_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+    else:
+        _require(
+            authority.get("expansion_phase0") is not True,
+            "REQUEST_EXPANSION_PHASE0_AUTHORITY_FORBIDDEN",
         )
 
     if operation == OP_PHASE0:
@@ -1695,6 +1771,7 @@ def verify_request_predecessor(
             )
         elif state.get("active_operation") in {
             OP_PHASE0,
+            OP_EXPANSION_PHASE0,
             OP_PHASE0_SCOPE_SUPERSESSION,
             OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
         }:
