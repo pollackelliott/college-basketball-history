@@ -232,9 +232,11 @@ def verify_exact_prepared(
             "EXPANSION_SEMANTIC_HASH_MISSING")
     require(sorted(changed_paths)==sorted(set(changed_paths)),
             "EXPANSION_CHANGED_PATHS_DUPLICATE")
-    required={f"schools/{intent['school_key']}/{x}" for x in PACKAGE_FILES}
-    require(required.issubset(changed_paths),
-            "EXPANSION_SIX_FILE_COMMIT_INCOMPLETE")
+    # A complete six-file candidate need not change every inherited member.
+    # The six expected file hashes below must all be present on the prepared
+    # commit; require only the expanded source game ledger to actually change.
+    require(f"schools/{intent['school_key']}/source-games.csv" in changed_paths,
+            "EXPANSION_SOURCE_GAME_PACKAGE_NOT_UPDATED")
     require(set(changed_paths)<=set(intent["allowed_changed_paths"]),
             "EXPANSION_CHANGED_PATH_OUTSIDE_ALLOWLIST")
     expected={f"schools/{intent['school_key']}/{name}":digest
