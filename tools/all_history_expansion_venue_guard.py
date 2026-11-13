@@ -56,8 +56,7 @@ def census(
         if key:
             by_key[key].append(row)
     for row in global_venue_names:
-        label=normalize_name(row.get("venue_name",""))
-                              or row.get("normalized_name",""))
+        label=normalize_name(row.get("venue_name","") or row.get("normalized_name",""))
         vid=row.get("venue_id","").strip()
         if label and vid:
             alias_by_name[label].add(vid)
