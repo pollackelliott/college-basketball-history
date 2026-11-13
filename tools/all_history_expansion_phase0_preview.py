@@ -79,20 +79,68 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     post_programs=[dict(projected) if r["program_key"]==school else dict(r)
                    for r in program_rows]
 
-    # Alias rebase is representation-only. It must not silently rewrite
-    # source-game semantics; any proposed source change stops this preflight.
-    _, rebased_sources, alias_actions = rebase_program_aliases(
-        program_rows, aliases, opponents, sources)
-    require(rebased_sources==sources,
+    # Expansion differs from new-school onboarding: do not mechanically rebase
+    # the inherited accepted school venue/opponent populations. Only newly
+    # introduced supplement supports are rebase candidates. EXTEND_INHERITED
+    # has already been checked against the exact inherited-row hash and field
+    # allowlist by the permanent Research Freeze verifier and Stage 1.
+    _, old_source=csv_rows(school_bytes["source-games.csv"],"inherited source games")
+    old_opponent_fields,old_opponents=csv_rows(school_bytes["opponents.csv"],
+                                              "inherited school opponents")
+    old_venue_fields,old_venues=csv_rows(school_bytes["venues.csv"],
+                                        "inherited school venues")
+    require(old_opponent_fields==opponent_fields and old_venue_fields==venue_fields,
+            "PHASE0_PREVIEW_INHERITED_SUPPORT_SCHEMA_CHANGED")
+    require(len(sources)==len(old_source)+manifest["source_preservation"]["supplemental_count"],
+            "PHASE0_PREVIEW_INHERITED_SOURCE_POPULATION_CHANGED")
+    require(sources[:len(old_source)]==old_source,
+            "PHASE0_PREVIEW_INHERITED_SOURCE_EVIDENCE_CHANGED")
+    require(len(opponents)>=len(old_opponents) and
+            len(venues)>=len(old_venues),
+            "PHASE0_PREVIEW_INHERITED_SUPPORT_ROWS_REMOVED")
+    require(all(a["venue_key"]==b["venue_key"] for a,b in
+                zip(venues[:len(old_venues)],old_venues)),
+            "PHASE0_PREVIEW_INHERITED_VENUE_ORDER_OR_IDENTITY_CHANGED")
+    require(all((a["source_opponent_label"],a["canonical_opponent_key"])==
+                (b["source_opponent_label"],b["canonical_opponent_key"])
+                for a,b in zip(opponents[:len(old_opponents)],old_opponents)),
+            "PHASE0_PREVIEW_INHERITED_OPPONENT_ORDER_OR_IDENTITY_CHANGED")
+    new_venues=venues[len(old_venues):]
+    new_opponents=opponents[len(old_opponents):]
+    require(len(new_venues)==manifest["venue_support_actions"]["NEW_SUPPLEMENTAL"],
+            "PHASE0_PREVIEW_NEW_VENUE_SUPPORT_POPULATION_CHANGED")
+    require(len(new_opponents)==manifest["opponent_support_actions"]["NEW_SUPPLEMENTAL"],
+            "PHASE0_PREVIEW_NEW_OPPONENT_SUPPORT_POPULATION_CHANGED")
+    inherited_keys={v["venue_key"] for v in old_venues}
+    require(len(inherited_keys)==len(old_venues) and
+            all(v["venue_key"] not in inherited_keys for v in new_venues),
+            "PHASE0_PREVIEW_NEW_VENUE_COLLIDES_WITH_INHERITED")
+    inherited_opponent_keys={
+        (r["source_opponent_label"],r["canonical_opponent_key"])
+        for r in old_opponents
+    }
+    require(all((r["source_opponent_label"],r["canonical_opponent_key"])
+                not in inherited_opponent_keys for r in new_opponents),
+            "PHASE0_PREVIEW_NEW_OPPONENT_COLLIDES_WITH_INHERITED")
+    # Strict representation-only alias compatibility for new sources. Any
+    # proposed rewrite of accepted source semantics or frozen opponent support
+    # remains a blocker for the ordinary guarded reconciliation boundary.
+    supplemental_sources=sources[len(old_source):]
+    aliases_rebased, rebased_sources, alias_actions = rebase_program_aliases(
+        program_rows, aliases, new_opponents, supplemental_sources)
+    require(rebased_sources==supplemental_sources,
             "PHASE0_PREVIEW_SOURCE_SEMANTIC_REBASE_REQUIRES_GUARDED_REVIEW")
-    # Any existing opponent support changes need explicit representation
-    # reconciliation in later locked Phase 0. Preserve the frozen rows now.
+    require(aliases_rebased==new_opponents,
+            "PHASE0_PREVIEW_OPPONENT_IDENTITY_REBASE_REQUIRES_GUARDED_REVIEW")
     existing_other_venues=load_existing_school_venues(repo,exclude_school_key=school)
-    rebased_local,rebased_global,rebased_names,venue_mappings = rebase_venues(
-        school,venues,global_venues,global_names,
+    rebased_new,rebased_global,rebased_names,venue_mappings = rebase_venues(
+        school,new_venues,global_venues,global_names,
         existing_school_venues=existing_other_venues,
-        source_games=sources,
+        source_games=supplemental_sources,
     )
+    require(len(rebased_new)==len(new_venues),
+            "PHASE0_PREVIEW_SUPPLEMENTAL_VENUE_POPULATION_CHANGED")
+    rebased_local=venues[:len(old_venues)]+rebased_new
     require(len(rebased_local)==len(venues),
             "PHASE0_PREVIEW_SCHOOL_VENUE_POPULATION_CHANGED")
     before_by_id={v["venue_id"]:v for v in global_venues}
@@ -143,6 +191,8 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         "new_global_venue_ids_and_keys":[{"venue_id":x["venue_id"],
                     "venue_key":x["venue_key"]} for x in registered],
         "rebased_venue_mapping_count":len(venue_mappings),
+        "inherited_venue_rows_preserved_without_rebase":len(old_venues),
+        "supplemental_venue_rows_rebased":len(new_venues),
         "alias_reconciliation_count":len(alias_actions),
         "six_file_preview_sha256":{n:sha256(data) for n,data in sorted(candidate.items())},
         "global_reference_preview_sha256":{n:sha256(data) for n,data in sorted(global_changes.items())},
