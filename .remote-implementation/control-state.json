@@ -562,18 +562,19 @@
     "george-mason-expansion-stage2-census-0002",
     "george-mason-expansion-stage2-opponent-display-normalize-0001",
     "george-mason-expansion-stage2-census-0006",
-    "george-mason-expansion-stage2-proposal-0001"
+    "george-mason-expansion-stage2-proposal-0001",
+    "george-mason-expansion-stage2-proposal-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "059affedf2e51ae3ade5144b046d2eee3b80f83c",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-mason-expansion-stage2-proposal-0003",
+  "active_request_sha256": "2bd399878cbb63120a09679be177e43179164680be6c86eb6cd0835154b4482e",
+  "active_school_key": "george-mason",
+  "active_target_branch": "data/george-mason-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1137,8 +1138,11 @@
       "target_branch": null
     }
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43449736756",
+  "lock_acquisition_request_commit": "2d6214074d1dc43c6d20891d4954151a5cbdb05b",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
