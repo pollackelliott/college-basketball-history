@@ -1,0 +1,92 @@
+name: Research Stage 4 authenticated Git history transport
+
+on:
+  push:
+    branches:
+      - 'research/stage4-git-requests/**'
+
+permissions:
+  contents: read
+
+jobs:
+  package-git-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out genuine complete Git history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate exact protected-main software and request
+        id: identity
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, subprocess, re
+          request = json.loads(pathlib.Path('.github/stage4-git-request.json').read_text())
+          main = request['protected_main_sha']
+          base = request['research_base_sha']
+          checkpoint = request['stage3b_checkpoint_sha256']
+          school = request['school_key']
+          if not re.fullmatch(r'[0-9a-f]{40}', main) or not re.fullmatch(r'[0-9a-f]{40}', base):
+              raise SystemExit('FAIL: exact 40-character Git SHAs required')
+          if not re.fullmatch(r'[0-9a-f]{64}', checkpoint):
+              raise SystemExit('FAIL: exact checkpoint SHA-256 required')
+          if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', school):
+              raise SystemExit('FAIL: invalid school key')
+          latest = subprocess.check_output(['git','ls-remote','origin','refs/heads/main'], text=True).split()[0]
+          if main != latest:
+              raise SystemExit('FAIL: request protected main is stale or wrong')
+          subprocess.run(['git','fetch','--no-tags','origin','main'],check=True)
+          # Production request branches are data/scheduling authority, never software
+          # authority. They must carry byte-identical protected-main workflow/tool code.
+          changed = set(subprocess.check_output(['git','diff','--name-only',f'{main}...HEAD'], text=True).splitlines())
+          mode = request.get('validation_mode', 'PROTECTED_MAIN')
+          if mode == 'PROTECTED_MAIN':
+              for path in ('.github/workflows/research-stage4-git-transport.yml',
+                           'tools/research_stage4_git_transport.py'):
+                  expected = subprocess.check_output(['git','show',f'{main}:{path}'])
+                  if expected != pathlib.Path(path).read_bytes():
+                      raise SystemExit(f'FAIL: stale/untrusted protected-main runtime: {path}')
+              if changed != {'.github/stage4-git-request.json'}:
+                  raise SystemExit(f'FAIL: production request changed paths: {sorted(changed)}')
+          elif mode == 'CANDIDATE_VALIDATION':
+              # Exact PR candidate rehearsal ONLY. Such a bundle contains the
+              # genuine protected-main history but does not certify a merged tool.
+              if os.environ.get('GITHUB_REF_NAME') != 'research/stage4-git-requests/candidate-validation':
+                  raise SystemExit('FAIL: candidate mode outside reserved rehearsal ref')
+              allowed = {'.github/stage4-git-request.json',
+                         '.github/workflows/research-stage4-git-transport.yml',
+                         'tools/research_stage4_git_transport.py',
+                         'tests/test_research_stage4_git_transport.py',
+                         'docs/research-portable-execution.md'}
+              if changed != allowed:
+                  raise SystemExit(f'FAIL: candidate changed paths differ: {sorted(changed)}')
+          else:
+              raise SystemExit('FAIL: invalid transport validation mode')
+          for key,val in (('main',main),('base',base),('checkpoint',checkpoint),('school',school)):
+              with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+                  out.write(f'{key}={val}\n')
+          PY
+      - name: Create exact-history Git bundle with unchanged transport tool
+        shell: bash
+        run: |
+          python tools/research_stage4_git_transport.py build \
+            --repo-root . \
+            --output-dir "$RUNNER_TEMP/stage4-git" \
+            --main-sha "${{ steps.identity.outputs.main }}" \
+            --research-base-sha "${{ steps.identity.outputs.base }}" \
+            --school-key "${{ steps.identity.outputs.school }}" \
+            --checkpoint-sha256 "${{ steps.identity.outputs.checkpoint }}"
+      - name: Publish exact-Git-object artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-stage4-auth-git-${{ steps.identity.outputs.main }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/stage4-git
+          if-no-files-found: error
+          retention-days: 7

@@ -188,3 +188,45 @@ Portable execution changes transport only. It does not change:
 - checkpoint hashes or immutable Research baselines;
 - the rule that the permanent repository tool, not conversational reconstruction, owns deterministic output.
 
+
+### Stage 4 expansion: authenticated Git-object transport
+
+An `ALL_HISTORY_EXPANSION` Stage 4 closeout additionally requires real Git
+objects for the original immutable `research_base_sha`. A tools-only snapshot
+or a repository ZIP cannot substitute for `git show <base>:<path>`.
+
+When local GitHub connectivity is unavailable, the repository-owned workflow
+`.github/workflows/research-stage4-git-transport.yml` can produce an exact
+protected-main Git bundle through an Actions runner with full history. This
+transport does **not** run a different Stage 4 algorithm, copy a synthetic
+historical subset, alter the checkpoint, or mutate tracked school data.
+
+1. Authenticate protected main, the 40-character immutable Research-base SHA,
+   and the original Stage 3B checkpoint ZIP SHA-256. Preserve that original ZIP.
+2. Create a disposable `research/stage4-git-requests/<nonce>` branch from the
+   exact protected-main commit; add only `.github/stage4-git-request.json` with
+   `protected_main_sha`, `research_base_sha`, `stage3b_checkpoint_sha256`,
+   `school_key`, and `validation_mode="PROTECTED_MAIN"`. The resulting push
+   triggers the read-only workflow. Do not merge the request branch.
+3. The workflow refuses a moved protected main, absent/non-ancestor Research
+   base, changed request-branch workflow/tool files, or extraneous changes.
+   It creates a genuine Git bundle of protected-main history and publishes the
+   bundle plus a manifest with exact request/bundle SHA-256 bindings.
+4. Download the artifact and run the **protected-main** tool
+   `tools/research_stage4_git_transport.py run --artifact-dir <directory>
+   --stage3b-checkpoint <original-stage3b-zip> --output-dir <results>
+   --main-sha <exact-protected-main-sha> --research-base-sha <exact-base-sha>
+   --school-key <school> --checkpoint-sha256 <exact-zip-sha256>`.
+   The consumer checks the input hash, clones genuine Git objects, requires the
+   exact main HEAD and base commit, verifies unmodified permanent tools against
+   their committed bytes, and invokes the ordinary `research_stage4.py author`.
+5. The **unchanged permanent Stage 4 closeout** owns acceptance and checksum
+   generation. A nonzero exit or missing immutable Git proof is BLOCKED, not
+   Stage 4 COMPLETE. Authenticate the produced closeout checkpoint independently
+   and stop at the Stage 5 owner NON_D1 scan. No automatic Research Freeze.
+
+`CANDIDATE_VALIDATION` is permitted only on the fixed isolated candidate
+rehearsal ref; it transports genuine protected-main objects for maintenance
+pre-merge testing but is not protected-main merge or historical acceptance
+certification. Ordinary production requests require identical workflow/tool
+bytes from the bound protected-main commit.
