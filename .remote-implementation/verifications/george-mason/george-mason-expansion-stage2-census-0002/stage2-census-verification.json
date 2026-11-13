@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "eb80d29e5f48f2543288a9b4adad94d70e247b664aac15a3c69d05c761330fe4",
+    "plan.json": "8a917a52b58029e46662d7c532942de3b429bcfc993c89b8c83a21fa18f8bc09",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "1e1b85dde396e85e4ef2a9d8bfc9028ffb90742c6283c87bdd4f2e9ab6bb3133"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "222a72837f2ea18770d735d894b20712cc01ef44f7e65e7768452e493fd2e324",
+    "plan.json": "a874a14302830c7c6b5c9974f82dc03ee49a89268fc7925b3d31e7b036934171",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "591b9196ed617b4d8633313110f1d5de3d07a154e43570a3c8d666e53dbfc7fc"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "7c6457aabf5e741beabef8e4b5e22be16108a354",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "george-mason-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "330a5873008d2bdc3afe3ce73d1f4af9c3ce983f",
+  "target_tree_sha": "da8bb00a1c6e89d4236c46e287076c0371bf589a",
+  "tracked_stage2_mutation": "NONE"
+}
