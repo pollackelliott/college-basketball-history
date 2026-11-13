@@ -1,0 +1,21 @@
+{
+  "expected_target_predecessor_sha": "adca1cb9d9a882ad68520961dd95f324d873a075",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
+  "request_id": "george-mason-expansion-phase0-0001",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_freeze_sha256": "bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "170bd061f992f4dc4a8500240aa1ba48c55f2a4762497c6900e78a01bf6feb85",
+    "integration-freeze.json": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+    "phase0-preview.json": "f3ef3481e822296400e3913342c019271ba595fdda1f53fc29ebb24f977ea66b",
+    "stage1-independent-proof.json": "5d2be4afe287e9cf8bde343c389439d706588ce7fe6c90f93ebb5e5ad5a5bf43",
+    "venue-reconciliation.json": "7fdfd39970ac63af563444a7efcde57225846474a9aade1da95f18ab4913b931"
+  },
+  "stage1_independent_proof_sha256": "5d2be4afe287e9cf8bde343c389439d706588ce7fe6c90f93ebb5e5ad5a5bf43",
+  "venue_reconciliation_sha256": "7fdfd39970ac63af563444a7efcde57225846474a9aade1da95f18ab4913b931"
+}
