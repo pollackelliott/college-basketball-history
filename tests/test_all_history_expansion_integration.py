@@ -112,7 +112,7 @@ class ExpansionIntegrationAuthorityTests(unittest.TestCase):
 
     def test_canonical_reuse_or_ambiguity_count_drift_refused(self):
         proof=self.good_proof()
-        proof["identity_counts"]["REUSE_CANONICAL"]=1
+        proof["identity_counts"]=dict(proof["identity_counts"], REUSE_CANONICAL=1)
         with self.assertRaisesRegex(IntegrationAuthorityError,"PROOF_COUNTS"):
             self.authenticate(proof)
 
