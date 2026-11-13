@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Iterable, Mapping
@@ -59,6 +60,55 @@ REQUIRED_REMOTE_CONTINUATIONS = (
     "Queue authorized Stage 2 Gate 1 seal continuation",
     "Queue authorized Stage 2 sealed-apply continuation",
 )
+
+ACCEPTANCE_TEST_PATTERNS = (
+    "test_all_history_expansion_implementation_composition.py",
+    "test_all_history_expansion_integration.py",
+    "test_all_history_expansion_phase0_preview.py",
+    "test_all_history_expansion_venue_guard.py",
+    "test_remote_implementation_expansion_phase0.py",
+    "test_program_history_scope.py",
+    "test_implementation_stage2.py",
+    "test_remote_implementation_stage2_gate1_fill.py",
+    "test_remote_implementation_stage2_preseal.py",
+    "test_remote_implementation_stage2_seal.py",
+    "test_remote_implementation_stage2_apply.py",
+    "test_remote_implementation_stage2_continuation.py",
+    "test_remote_implementation_stage2_refresh.py",
+    "test_all_history_universe.py",
+    "test_remote_implementation_release_readiness.py",
+    "test_remote_implementation_release_preview.py",
+    "test_remote_implementation_final_release.py",
+    "test_remote_implementation_production.py",
+)
+
+
+def run_curated_acceptance_suite(root: Path = ROOT) -> list[str]:
+    """Run the focused expansion lifecycle regression suite."""
+    failures: list[str] = []
+    for pattern in ACCEPTANCE_TEST_PATTERNS:
+        cp = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "unittest",
+                "discover",
+                "-s",
+                "tests",
+                "-p",
+                pattern,
+                "-q",
+            ],
+            cwd=root,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+        if cp.returncode != 0:
+            tail = "\n".join(cp.stdout.splitlines()[-40:])
+            failures.append(f"{pattern} failed:\n{tail}")
+    return failures
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -218,9 +268,24 @@ def evaluate_repository(root: Path = ROOT) -> tuple[list[str], dict[str, object]
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--json", action="store_true")
+    parser.add_argument(
+        "--static-only",
+        action="store_true",
+        help="run repository invariant checks without the curated lifecycle suite",
+    )
     args = parser.parse_args()
     errors, summary = evaluate_repository(ROOT)
-    payload = {"summary": summary, "errors": errors}
+    suite_failures = [] if args.static_only else run_curated_acceptance_suite(ROOT)
+    all_errors = [*errors, *suite_failures]
+    summary = {
+        **summary,
+        "curated_lifecycle_suite": (
+            "SKIPPED" if args.static_only
+            else ("PASS" if not suite_failures else "FAIL")
+        ),
+        "status": "PASS" if not all_errors else "FAIL",
+    }
+    payload = {"summary": summary, "errors": all_errors}
     if args.json:
         print(json.dumps(payload, indent=2, sort_keys=True))
     else:
@@ -232,9 +297,10 @@ def main() -> int:
             "PUBLISHED={published} COMPLETE={complete} LEGACY={legacy} "
             "ELIGIBLE={eligible}".format(**summary["portfolio"])
         )
-        for error in errors:
+        print("CURATED_LIFECYCLE_SUITE=" + summary["curated_lifecycle_suite"])
+        for error in all_errors:
             print("ERROR:", error)
-    return 0 if not errors else 1
+    return 0 if not all_errors else 1
 
 
 if __name__ == "__main__":
