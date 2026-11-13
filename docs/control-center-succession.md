@@ -135,6 +135,8 @@ That delegation is **phase/family-persistent, not one-PR-only**. If a second man
 
 Likewise, `recovery_required=true` is not automatically Control Center work. When an accepted request is read-only or permanent recovery proves no tracked target publication (`NOT_ATTEMPTED` / `PREPARED_NOT_PUBLISHED`), the school lane should execute exact evidence-first recovery/abandonment, return control to `IDLE`, correct the mechanical request defect, and resume the same authorized phase with a new request ID. Escalate recovery only for ambiguous/diverged mutation state, materially changed authority, or a recovery action that itself needs new historical/shared mutation permission.
 
+A changed Stage 2 `decision_universe_sha256` is also not automatically Control Center work. When the change is the deterministic consequence of fixing planner coverage/indexing/normalization so that already-frozen accepted rows are finally processed under current policy, the school lane should invalidate stale census/map fingerprints, recompute the correct universe, and continue toward Gate 1. Control Center is needed only if the underlying historical/shared authority changed—not because a technical fingerprint changed.
+
 The school lane may carry that repair through merge when all of the following remain true:
 
 - the diff is confined to generic tooling, tests, workflows, and documentation;
