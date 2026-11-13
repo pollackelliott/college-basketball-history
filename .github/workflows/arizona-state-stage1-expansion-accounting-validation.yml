@@ -1,0 +1,53 @@
+name: Arizona State Stage 1 expansion accounting candidate validation
+
+on:
+  push:
+    branches:
+      - tooling/arizona-state-stage1-accounting
+  pull_request:
+    paths:
+      - 'tools/research_stage1_expansion_accounting.py'
+      - 'tests/test_research_stage1_expansion_accounting.py'
+      - '.github/workflows/arizona-state-stage1-expansion-accounting-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-candidate-stage1-accounting-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: tools:tests
+    steps:
+      - name: Checkout exact triggering candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate immutable Arizona State Research-base source blob
+        run: |
+          python - <<'PY'
+          import subprocess
+          from collections import Counter
+          from research_stage1_expansion_accounting import BASE, ORIGINAL_BLOB, blob, read_csv
+          raw = subprocess.check_output(['git', 'show', f'{BASE}:schools/arizona-state/source-games.csv'])
+          assert blob(raw) == ORIGINAL_BLOB, 'Research-base source blob changed'
+          rows = read_csv(raw)
+          assert len(rows) == 2680
+          early = [r for r in rows if 1911 <= int(r['season_label'][:4]) < 1950]
+          assert len(early) == 469
+          assert len({r['source_game_id'] for r in rows}) == 2680
+          assert Counter(r['played_result'] for r in early) == {'W': 215, 'L': 254}
+          assert sum(r['season_label'] == '1920-1921' for r in early) == 1
+          print('EXACT_IMMUTABLE_BASE_SOURCE_PROVEN')
+          PY
+      - name: Compile permanent tool and regression suite
+        run: python -m py_compile tools/research_stage1_expansion_accounting.py tests/test_research_stage1_expansion_accounting.py
+      - name: Exact and adversarial expansion accounting regressions
+        run: python -m unittest discover -s tests -p 'test_research_stage1_expansion_accounting.py' -v
+      - name: Full repository nonregression
+        run: python -m unittest discover -s tests -p 'test_*.py'
