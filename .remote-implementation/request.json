@@ -23,8 +23,8 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Same owner-authorized George Mason Stage 2 phase. Prior guarded STAGE2_CURRENT_MAIN_REFRESH george-mason-expansion-stage2-current-main-refresh-0001 independently verified PASS on protected main 419c78df7ca4c30df501657c079445d0bb7cbdee, publishing exact onboarding successor e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38. This request authorizes only the permanent read-only Stage 2 capability census against the exact refreshed successor and unchanged Phase 0/display, Integration Freeze, semantic snapshot, and accepted George Mason historical authority. No further tracked mutation, proposal, recommendation-map rehearsal, owner gate, seal, apply, release or protected-main merge.",
-    "origin": "George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — fresh census after independently verified current-main refresh"
+    "authorization": "The same owner-authorized George Mason Stage 2 phase persists. Read-only census request george-mason-expansion-stage2-census-0008 was rejected by the permanent schema validator with STAGE2_CENSUS_SEMANTIC_SNAPSHOT_SHA_INVALID before request acceptance, control lock, or target mutation (Actions run https://github.com/pollackelliott/college-basketball-history/actions/runs/43467797754). Global control remains IDLE/COMPLETE/recovery_required=false, with no accepted/consumed george-mason-expansion-stage2-census-0008. This distinct george-mason-expansion-stage2-census-0009 request corrects only the 52-character semantic_snapshot_sha256 to the exact original 64-character frozen integration semantic hash 8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b and binds the unchanged fresh-verified STAGE2_CURRENT_MAIN_REFRESH successor e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38 at protected main 419c78df7ca4c30df501657c079445d0bb7cbdee. The failed original request remains intact in the control ledger. Authorize only permanent read-only STAGE2_CENSUS and independent fresh verification; no historical, shared, tracked, proposal, Gate 1/2, release, or merge authority.",
+    "origin": "George Mason ALL_HISTORY_EXPANSION Implementation — mechanically corrected Stage 2 census after unaccepted request-envelope failure"
   },
   "expected_protected_main_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
   "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
@@ -34,12 +34,12 @@
     "path": ".remote-implementation/successors/george-mason/george-mason-expansion-phase0-0001/successor-manifest.json",
     "sha256": "2025a1dedb9b89469e9bfbae395d2c32f9cd8d84b217951a9c0b5421a2d2832f"
   },
-  "previous_control_state_commit": "21438b62756a8496c778faf47c5a48bdbe5fccf1",
+  "previous_control_state_commit": "a8e452b68dffbf7b9efd5c6b4f3a0bad5e535094",
   "previous_control_state_sha256": "32a78b791e61021673efd9858219cd2136b0c6714c84151b029a289d6c9a9593",
-  "request_id": "george-mason-expansion-stage2-census-0008",
+  "request_id": "george-mason-expansion-stage2-census-0009",
   "schema_version": 1,
   "school_key": "george-mason",
-  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca604d4249408c937a7899cd7b",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
   "stage2_current_main_refresh_successor": {
     "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
     "sha256": "827c218eac9d499cb46ef1c870126c5ae62908c31ca72b369eeb08817ebe3b94"
