@@ -9,6 +9,7 @@ on:
       - 'tests/test_all_history_expansion_venue_guard.py'
       - 'tools/all_history_expansion_remote_contract.py'
       - 'tests/test_all_history_expansion_remote_contract.py'
+      - 'tests/test_all_history_expansion_disposable_git_transaction.py'
       - 'tools/all_history_expansion_phase0_preview.py'
       - 'tests/test_all_history_expansion_phase0_preview.py'
       - 'tools/all_history_expansion_integration.py'
@@ -36,6 +37,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_all_history_expansion_venue_guard.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_remote_contract.py' -v
+          python -m unittest discover -s tests -p 'test_all_history_expansion_disposable_git_transaction.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_integration.py' -v
       - name: Full repository unittest nonregression
