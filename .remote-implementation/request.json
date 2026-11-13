@@ -1,6 +1,32 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-mason-expansion-release-readiness-0001",
+  "school_key": "george-mason",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "50512066bc4b4f592e33751aa03df199e3941028",
+  "previous_control_state_sha256": "2de7447aa4dfbd51f7be0490084af1a024b034fe48b17da12a174b7725692023",
+  "expected_protected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
   "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
-  "approved_plan_sha256": "cfce78f58851c0f166c76886b1d6efa8d0464c71080b750ec836494738138a7e",
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "f8c3a9c8281780d640c97f4c15823c289e737f2ff826a043ce19c1488434d757"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "george-mason-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "George Mason ALL_HISTORY_EXPANSION serialized Implementation — owner-authorized release preparation via GitHub connector",
+    "authorization": "Owner said 'Proceed' after the exact George Mason sealed-apply successor 0fe86b37405bc5322bec5639a28c1819bb97d5f7 independently fresh-verified PASS, with no recovery required and lock released. This authorizes the bounded release-preparation phase through read-only release readiness, exact connector-owned same-repository PR creation/reuse, ordinary CI/mergeability checks, exact Vercel Preview verification, and OWNER_GATE_2_READY. It does NOT authorize Owner Gate 2 approval, protected-main merge, Production proof, historical reinterpretation, shared/global registry mutation, recovery, or release beyond the Gate 2 stop."
+  },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
@@ -11,7 +37,7 @@
     "release_gate2_approval": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -20,36 +46,7 @@
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from george-mason-expansion-stage2-gate1-seal-0001",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-  "expected_protected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
-  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
-  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_SEALED_APPLY",
-  "owner_gate_1_approval_sha256": "13776a059424ea263d94e24c37885e0719cf7198b07260e5bee52e58d3a0d023",
-  "previous_control_state_commit": "fc9051f28aaca9695c25519820192497c04b053d",
-  "previous_control_state_sha256": "a85b2e740bff144ace2eb5d8ae201c45ef5477616dfc53c250bc568d41292ca9",
-  "recommendation_map_sha256": "e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465",
-  "request_id": "george-mason-expansion-stage2-sealed-apply-0001",
-  "schema_version": 1,
-  "school_key": "george-mason",
-  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "68719c9f5b780465306e3202e98a9f75bf8ffcd1003b095206f86efbd70ee61c"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "1da338b5c8fca77505b8ab94d62daeece9c834106300018e60d5dd31fa885dc0"
-  },
-  "target_branch": "data/george-mason-onboarding",
-  "target_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38"
+  }
 }
