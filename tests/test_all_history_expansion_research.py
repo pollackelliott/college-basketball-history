@@ -284,8 +284,17 @@ class AllHistoryExpansionResearchTests(unittest.TestCase):
             eligible.append(row)
 
         self.assertEqual(len(published), 113)
-        self.assertEqual(len(eligible), 24)
-        self.assertEqual(len(complete), 89)
+        # Completed expansion targets leave the eligible legacy cohort without
+        # changing the published portfolio or its inherited top-level scope.
+        self.assertEqual(
+            len(eligible),
+            sum(row["history_coverage_status"] == "LEGACY_TOP_LEVEL_ONLY"
+                for row in published),
+        )
+        self.assertEqual(len(eligible) + len(complete), len(published))
+        self.assertTrue(
+            all(row["program_inception_season"] for row in complete)
+        )
         self.assertTrue(
             all(
                 row["history_coverage_status"] == "LEGACY_TOP_LEVEL_ONLY"
