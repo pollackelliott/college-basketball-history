@@ -99,7 +99,7 @@ def explicit_reuse_locality_compatible(
 ) -> bool:
     """Return whether an explicit reuse may canonicalize a locality variant.
 
-    Exact geography remains the default. Schema-v2 row-index reconciliation may
+    Exact geography remains the default. Schema-v2 explicit reconciliation may
     opt into a documented representation-only locality variant only when the
     exact current-main venue ID/key has already been authenticated and at least
     one populated locality axis independently agrees. Frozen source-game
@@ -202,18 +202,25 @@ def load_venue_reconciliation(
     path: Path | None,
     *,
     school_key: str,
-    package_path: Path,
+    package_path: Path | None,
     local_venues: list[dict[str, str]],
     global_venues: list[dict[str, str]],
+    expected_package_sha256: str | None = None,
+    frozen_venues_bytes: bytes | None = None,
+    source_games_bytes: bytes | None = None,
 ) -> tuple[dict[str, dict[str, Any]], dict[str, Any] | None]:
     """Validate an explicit identity map and return mappings + durable provenance.
 
-    Both the entire transport ZIP and its exact frozen venues.csv member are
-    hash-bound, so no operator instruction can apply to a changed Research
-    package. Geography and exact ID/key must agree with current main.
+    Both the entire transport ZIP identity and its exact frozen venues.csv
+    representation are hash-bound, so no operator instruction can apply to
+    changed Research authority. Ordinary onboarding reads both directly from
+    the package ZIP; callers with a different immutable package shape may pass
+    the already-authenticated package SHA plus deterministic frozen venues bytes.
+    Geography and exact ID/key must agree with current main.
 
-    Schema v2 adds row-index selectors for frozen rows whose venue_key is blank
-    and a narrowly guarded DROP_REDUNDANT_LOCAL_ROW representation action.
+    Schema v2 adds row-index selectors for blank-key representation rows, a
+    narrowly guarded DROP_REDUNDANT_LOCAL_ROW action, and documented
+    locality-variant reuse for either key-bound or row-index-bound identities.
     """
     if path is None:
         return {}, None
@@ -233,21 +240,36 @@ def load_venue_reconciliation(
     if not approval:
         raise WorkflowError("venue reconciliation requires owner_approval_basis")
     expected_package = str(doc.get("expected_research_zip_sha256") or "").lower().strip()
-    actual_package = _sha256_file(package_path)
+    if package_path is not None:
+        actual_package = _sha256_file(package_path)
+    else:
+        actual_package = str(expected_package_sha256 or "").lower().strip()
+        if not re.fullmatch(r"[0-9a-f]{64}", actual_package):
+            raise WorkflowError(
+                "venue reconciliation requires authenticated package SHA-256"
+            )
     if expected_package != actual_package:
         raise WorkflowError("venue reconciliation frozen package SHA-256 mismatch")
-    try:
-        with zipfile.ZipFile(package_path) as archive:
-            member = archive.read("venues.csv")
-            source_games_member = (
-                archive.read("source-games.csv")
-                if "source-games.csv" in archive.namelist()
-                else b""
+    if frozen_venues_bytes is None:
+        if package_path is None:
+            raise WorkflowError(
+                "venue reconciliation requires frozen venues.csv bytes"
             )
-    except (OSError, ValueError, KeyError, zipfile.BadZipFile) as exc:
-        raise WorkflowError(
-            f"venue reconciliation cannot read frozen package members: {exc}"
-        ) from exc
+        try:
+            with zipfile.ZipFile(package_path) as archive:
+                member = archive.read("venues.csv")
+                source_games_member = (
+                    archive.read("source-games.csv")
+                    if "source-games.csv" in archive.namelist()
+                    else b""
+                )
+        except (OSError, ValueError, KeyError, zipfile.BadZipFile) as exc:
+            raise WorkflowError(
+                f"venue reconciliation cannot read frozen package members: {exc}"
+            ) from exc
+    else:
+        member = frozen_venues_bytes
+        source_games_member = source_games_bytes or b""
     source_games = (
         _csv_rows(source_games_member)
         if source_games_member
@@ -791,9 +813,9 @@ def load_venue_reconciliation(
             raw.get("locality_variant_basis") or ""
         ).strip()
         if raw_allow_variant:
-            if schema_version != 2 or row_index is None:
+            if schema_version != 2:
                 raise WorkflowError(
-                    "allow_locality_variant requires schema-v2 local_venue_row_index"
+                    "allow_locality_variant requires schema-v2 reconciliation"
                 )
             if not locality_variant_basis:
                 raise WorkflowError(

@@ -80,6 +80,26 @@ class ExpansionRemoteRequestValidationTests(unittest.TestCase):
     def test_exact_expansion_request_is_supported(self):
         validate_request(expansion_request())
 
+    def test_expansion_accepts_hash_bound_venue_reconciliation_payload(self):
+        request = expansion_request()
+        request["venue_reconciliation"] = {
+            "path": ".remote-implementation/payloads/example/venue-reconciliation.json",
+            "sha256": "a" * 64,
+        }
+        validate_request(request)
+
+    def test_expansion_rejects_malformed_venue_reconciliation_payload(self):
+        request = expansion_request()
+        request["venue_reconciliation"] = {
+            "path": ".remote-implementation/payloads/example/venue-reconciliation.json",
+            "sha256": "not-a-sha",
+        }
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "REQUEST_VENUE_RECONCILIATION_SHA_INVALID",
+        ):
+            validate_request(request)
+
     def test_expansion_requires_explicit_expansion_authority(self):
         request = expansion_request()
         request["authority"]["expansion_phase0"] = False

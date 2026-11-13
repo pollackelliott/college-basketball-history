@@ -7,6 +7,8 @@ on:
       - 'tests/test_expansion_implementation_stage1.py'
       - 'tools/all_history_expansion_venue_guard.py'
       - 'tests/test_all_history_expansion_venue_guard.py'
+      - 'tools/stage1_venue_reconciliation.py'
+      - 'tests/test_stage1_venue_reconciliation.py'
       - 'tools/all_history_expansion_remote_contract.py'
       - 'tests/test_all_history_expansion_remote_contract.py'
       - 'tests/test_all_history_expansion_disposable_git_transaction.py'
@@ -42,6 +44,7 @@ jobs:
       - name: Expansion venue identity and remote transaction pure-contract regressions
         run: |
           python -m unittest discover -s tests -p 'test_all_history_expansion_venue_guard.py' -v
+          python -m unittest discover -s tests -p 'test_stage1_venue_reconciliation.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_remote_contract.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_disposable_git_transaction.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
