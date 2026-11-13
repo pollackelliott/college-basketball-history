@@ -134,6 +134,11 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_SOURCE_SEMANTIC_REBASE_REQUIRES_GUARDED_REVIEW")
     require(aliases_rebased==new_opponents,
             "PHASE0_PREVIEW_OPPONENT_IDENTITY_REBASE_REQUIRES_GUARDED_REVIEW")
+    # Permanent rebase_venues mutates global_rows/name_rows in place. Snapshot
+    # the authoritative *pre-rebase* rows so the full new-registration census
+    # cannot accidentally compare the mutated list against itself.
+    original_global_venues=[dict(x) for x in global_venues]
+    original_global_names=[dict(x) for x in global_names]
     existing_other_venues=load_existing_school_venues(repo,exclude_school_key=school)
     rebased_new,rebased_global,rebased_names,venue_mappings = rebase_venues(
         school,new_venues,global_venues,global_names,
@@ -145,7 +150,7 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     rebased_local=venues[:len(old_venues)]+rebased_new
     require(len(rebased_local)==len(venues),
             "PHASE0_PREVIEW_SCHOOL_VENUE_POPULATION_CHANGED")
-    before_by_id={v["venue_id"]:v for v in global_venues}
+    before_by_id={v["venue_id"]:v for v in original_global_venues}
     after_by_id={v["venue_id"]:v for v in rebased_global}
     require(len(before_by_id)==len(global_venues),
             "PHASE0_PREVIEW_DUPLICATE_CURRENT_GLOBAL_VENUE_ID")
@@ -153,6 +158,8 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_DUPLICATE_PROJECTED_GLOBAL_VENUE_ID")
     require(all(after_by_id.get(k)==v for k,v in before_by_id.items()),
             "PHASE0_PREVIEW_REWRITES_EXISTING_GLOBAL_VENUE")
+    require(rebased_names[:len(original_global_names)]==original_global_names,
+            "PHASE0_PREVIEW_REWRITES_EXISTING_GLOBAL_VENUE_NAMES")
     registered=[v for k,v in after_by_id.items() if k not in before_by_id]
     global_report=json.loads((frozen/STAGE1_REPORT).read_bytes())
     new_expected=global_report["global_venue_reconciliation"]["counts"][
