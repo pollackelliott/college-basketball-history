@@ -1,4 +1,5 @@
 name: George Mason exact expansion Stage 1 rehearsal
+# temporary current-main transport rehearsal
 on:
   pull_request:
     paths: ['.github/workflows/george-mason-expansion-stage1-rehearsal.yml']
