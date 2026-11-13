@@ -282,13 +282,30 @@ was accepted.
 
 Research completion alone does not expand publication.
 
-Future serialized Implementation must authenticate the immutable baseline and
+Serialized Implementation must authenticate the immutable baseline and
 accepted supplemental delta, rebase against current protected main,
 deterministically materialize a complete six-file candidate, reconcile
 canonical/shared identities, create an `INTEGRATION_FROZEN` authority,
 preserve the one-active-Implementation mutation lock, and pass the ordinary
 Gate 1, pre-seal, sealed apply, verification, Preview, explicit Owner Gate 2,
 merge, and exact Production-proof safeguards.
+
+For guarded remote execution, `EXPANSION_PHASE0` is the only expansion
+mutation operation through stable Phase 0. It reuses the existing
+`data/<school>-onboarding` ref, requires its exact accepted head to be an
+ancestor of current protected main, reconstructs the Integration Freeze and
+disposable Phase 0 preview from exact immutable expansion authority, reruns
+the fail-closed physical-venue identity guard, persists write-ahead, and
+publishes only by expected-predecessor CAS. Its fresh verifier must reproduce
+the exact successor tree before ordinary Stage 2 may consume the successor.
+The expansion Integration Freeze carries the ordinary package hashes and
+source-game semantic snapshot needed by the existing Stage 2 drift guard; it
+does not create a parallel Stage 2 authority format.
+
+A shared-identity conflict remains outside this operation's historical
+authority. In particular, matching venue names or aliases with conflicting
+physical/locality evidence must stop before registration rather than being
+resolved by the transaction layer.
 
 Only the successful serialized mutation path may establish
 `program_inception_season`, change
