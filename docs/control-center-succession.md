@@ -137,6 +137,10 @@ Likewise, `recovery_required=true` is not automatically Control Center work. Whe
 
 A changed Stage 2 `decision_universe_sha256` is also not automatically Control Center work. When the change is the deterministic consequence of fixing planner coverage/indexing/normalization so that already-frozen accepted rows are finally processed under current policy, the school lane should invalidate stale census/map fingerprints, recompute the correct universe, and continue toward Gate 1. Control Center is needed only if the underlying historical/shared authority changed—not because a technical fingerprint changed.
 
+A mechanically safe `STAGE2_CURRENT_MAIN_REFRESH` is likewise not Control Center work when the permanent refresh tool proves the target-only and intervening-main changed-path populations are disjoint and there is no historical/shared authority conflict. The school lane may refresh/fresh-verify under its existing Stage 2 authorization. Escalate only on overlapping paths, ambiguous/diverged state, or changed historical/shared meaning.
+
+Control Center should also treat hour-long school-chat execution as a process defect. School turns must obey the repository hard turn budget: one major durable advance, no repeated external polling, and at most one failed candidate-validation cycle plus one corrected replacement cycle before checkpoint/yield.
+
 The school lane may carry that repair through merge when all of the following remain true:
 
 - the diff is confined to generic tooling, tests, workflows, and documentation;
