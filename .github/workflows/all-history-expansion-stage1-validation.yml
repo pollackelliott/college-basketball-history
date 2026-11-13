@@ -14,6 +14,12 @@ on:
       - 'tests/test_all_history_expansion_phase0_preview.py'
       - 'tools/all_history_expansion_integration.py'
       - 'tests/test_all_history_expansion_integration.py'
+      - 'tools/remote_implementation_control.py'
+      - 'tools/remote_implementation_runner.py'
+      - 'tools/remote_implementation_verify.py'
+      - 'tools/remote_implementation_expansion_phase0.py'
+      - 'tests/test_remote_implementation_expansion_phase0.py'
+      - '.github/workflows/remote-implementation.yml'
       - '.github/workflows/all-history-expansion-stage1-validation.yml'
   workflow_dispatch:
 
@@ -40,5 +46,6 @@ jobs:
           python -m unittest discover -s tests -p 'test_all_history_expansion_disposable_git_transaction.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_integration.py' -v
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -v
       - name: Full repository unittest nonregression
         run: python -m unittest discover -s tests -p 'test_*.py'
