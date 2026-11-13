@@ -1,0 +1,27 @@
+name: Arizona State Stage 1 exact authority readback
+on:
+  push:
+    branches:
+      - tooling/asu-stage1-exact-authority-transport-20261113
+permissions:
+  contents: read
+jobs:
+  readback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify protected-main authority Git blob and export exact bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git show 6b529b7b95015846fa72f3c33e3dda19244030b3:data/reference/early-history-accounting-authorities.json > /tmp/asu-stage1-exact-early-history-authorities.json
+          test "$(git hash-object /tmp/asu-stage1-exact-early-history-authorities.json)" = "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee"
+          python -m json.tool /tmp/asu-stage1-exact-early-history-authorities.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: asu-stage1-protected-main-authorities-exact
+          path: /tmp/asu-stage1-exact-early-history-authorities.json
+          retention-days: 2
