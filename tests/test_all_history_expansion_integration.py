@@ -162,6 +162,42 @@ class ExpansionIntegrationAuthorityTests(unittest.TestCase):
             with self.assertRaisesRegex(IntegrationAuthorityError,"SELF_FINGERPRINT"):
                 verify_manifest_bytes(canonical_bytes(m),path)
 
+    def test_manifest_binds_exact_venue_reconciliation_sidecar(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"f"
+            manifest=self.make_manifest(path)
+            sidecar=b'{"schema_version":2,"school_key":"sample"}\n'
+            sidecar_sha=sha256(sidecar)
+            (path/"venue-reconciliation.json").write_bytes(sidecar)
+            manifest["venue_reconciliation"]={
+                "schema_version":2,
+                "spec_path":"venue-reconciliation.json",
+                "spec_sha256":sidecar_sha,
+                "owner_approval_basis":"durable resolution",
+                "research_zip_sha256":"f"*64,
+                "frozen_venues_sha256":"e"*64,
+                "mappings":[],
+            }
+            manifest["venue_reconciliation_sha256"]=sidecar_sha
+            manifest["venue_reconciliation_census"]={
+                "schema_version":1,"venue_count":0,
+                "classification_counts":{},"blocker_count":0,
+                "blockers":[],"rows":[],
+            }
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+            raw=canonical_bytes(manifest)
+            self.assertEqual(
+                verify_manifest_bytes(raw,path)["venue_reconciliation_sha256"],
+                sidecar_sha,
+            )
+            (path/"venue-reconciliation.json").write_bytes(b"tampered")
+            with self.assertRaisesRegex(
+                IntegrationAuthorityError,
+                "VENUE_RECONCILIATION_CHANGED",
+            ):
+                verify_manifest_bytes(raw,path)
+
     def test_candidate_content_modification_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/"f"

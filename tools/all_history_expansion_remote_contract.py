@@ -96,6 +96,15 @@ def authenticate_intent(
             accepted_stage1_proof_sha256==
             request.get("stage1_independent_proof_sha256"),
             "EXPANSION_INDEPENDENT_STAGE1_PROOF_CHANGED")
+    reconciliation_sha=str(manifest.get("venue_reconciliation_sha256") or "")
+    reconciliation_ref=request.get("venue_reconciliation")
+    if reconciliation_sha:
+        require(isinstance(reconciliation_ref,dict) and
+                reconciliation_ref.get("sha256")==reconciliation_sha,
+                "EXPANSION_VENUE_RECONCILIATION_REQUEST_BINDING_MISMATCH")
+    else:
+        require(reconciliation_ref is None,
+                "EXPANSION_UNEXPECTED_VENUE_RECONCILIATION_REQUEST")
     require(manifest["canonical_identity_counts"].get("IDENTITY_REVIEW_BLOCKER")==0,
             "EXPANSION_CANONICAL_AMBIGUITY")
     require(manifest["global_venue_reconciliation"].get(
@@ -120,9 +129,22 @@ def authenticate_intent(
     require(preview.get("supplemental_source_game_count")==
             manifest["source_preservation"]["supplemental_count"],
             "EXPANSION_PHASE0_SUPPLEMENTAL_COUNT_CHANGED")
-    require(preview.get("global_venue_registration_count")==
-            manifest["global_venue_reconciliation"]["NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED"],
+    reconciliation_census=manifest.get("venue_reconciliation_census")
+    expected_registrations=(
+        reconciliation_census["classification_counts"].get(
+            "NEW_GLOBAL_IDENTITY",0
+        )
+        if reconciliation_census is not None
+        else manifest["global_venue_reconciliation"][
+            "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED"
+        ]
+    )
+    require(preview.get("global_venue_registration_count")==expected_registrations,
             "EXPANSION_GLOBAL_VENUE_REGISTRATION_DRIFT")
+    require(preview.get("venue_reconciliation_sha256","")==reconciliation_sha,
+            "EXPANSION_PHASE0_VENUE_RECONCILIATION_HASH_DRIFT")
+    require(preview.get("venue_reconciliation_census")==reconciliation_census,
+            "EXPANSION_PHASE0_VENUE_RECONCILIATION_CENSUS_DRIFT")
     require(preview.get("authorized_live_mutation") is False and
             preview.get("branch_published") is False and
             preview.get("lock_acquired") is False,
@@ -156,6 +178,7 @@ def authenticate_intent(
         "integration_freeze_sha256":sha256(raw),
         "research_freeze_sha256":original_research_sha256,
         "stage1_proof_sha256":accepted_stage1_proof_sha256,
+        "venue_reconciliation_sha256":reconciliation_sha,
         "source_game_count":preview["source_game_count"],
         "canonical_identity_counts":manifest["canonical_identity_counts"],
         "allowed_changed_paths":sorted(expected),

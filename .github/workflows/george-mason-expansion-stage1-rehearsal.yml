@@ -17,7 +17,7 @@ jobs:
           python-version: '3.12'
       - name: Authenticate protected main and immutable Research base
         run: |
-          test "$(git rev-parse refs/remotes/origin/main)" = "ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd"
+          test "$(git rev-parse refs/remotes/origin/main)" = "d197f9d33f1ad18b8377d69bf3cd1e015cb901b8"
           test "$(git rev-parse --verify df73675852ec5a43dfac50da0ee06d8bcabf8832^{commit})" = "df73675852ec5a43dfac50da0ee06d8bcabf8832"
           test -z "$(git status --porcelain --untracked-files=no)"
       - name: Retrieve unreferenced Git blob and verify exact original frozen ZIP bytes
@@ -70,9 +70,9 @@ jobs:
       - name: Run permanent exact-current-main Stage 1 twice without repository mutation
         run: |
           mkdir -p "${RUNNER_TEMP}/gmu-stage1"
-          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd --repo . --output "${RUNNER_TEMP}/gmu-stage1/a" >"${RUNNER_TEMP}/gmu-stage1/run-a.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"; exit 1; }
+          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha d197f9d33f1ad18b8377d69bf3cd1e015cb901b8 --repo . --output "${RUNNER_TEMP}/gmu-stage1/a" >"${RUNNER_TEMP}/gmu-stage1/run-a.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"; exit 1; }
           cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"
-          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd --repo . --output "${RUNNER_TEMP}/gmu-stage1/b" >"${RUNNER_TEMP}/gmu-stage1/run-b.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"; exit 1; }
+          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha d197f9d33f1ad18b8377d69bf3cd1e015cb901b8 --repo . --output "${RUNNER_TEMP}/gmu-stage1/b" >"${RUNNER_TEMP}/gmu-stage1/run-b.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"; exit 1; }
           cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"
       - name: Independent byte-level two-rehearsal proof and complete population inventory
         run: |
@@ -111,7 +111,7 @@ jobs:
           if subprocess.check_output(["git","status","--porcelain","--untracked-files=no"]).strip():
               raise SystemExit("tracked repository mutation detected")
           proof={"status":"INDEPENDENTLY_REPRODUCED_READ_ONLY_STAGE1",
-                 "protected_main_sha":"ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd",
+                 "protected_main_sha":"d197f9d33f1ad18b8377d69bf3cd1e015cb901b8",
                  "research_base_sha":"df73675852ec5a43dfac50da0ee06d8bcabf8832",
                  "freeze_zip_sha256":"bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
                  "identity_counts":identity["counts"],
@@ -132,13 +132,57 @@ jobs:
       - name: Integrate exact read-only expansion freeze twice and verify independent equivalence
         run: |
           PROOF_SHA=$(sha256sum "$RUNNER_TEMP/gmu-stage1/independent-proof.json" | cut -d' ' -f1)
+          python - <<'PY'
+          import csv,hashlib,json,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"gmu-stage1"
+          venues_raw=(root/"a/venues.csv").read_bytes()
+          venues=list(csv.DictReader((root/"a/venues.csv").open(encoding="utf-8")))
+          target=[r for r in venues if r.get("venue_key")=="umbc-fieldhouse"]
+          assert len(target)==1,target
+          row=target[0]
+          assert (row.get("canonical_name"),row.get("city"),row.get("state"))==(
+              "UMBC Fieldhouse","Baltimore","MD"),row
+          globals_=list(csv.DictReader(Path("data/reference/venues.csv").open(encoding="utf-8")))
+          global_row=[r for r in globals_ if r.get("venue_id")=="VEN-000934"]
+          assert len(global_row)==1,global_row
+          global_row=global_row[0]
+          assert (global_row.get("venue_key"),global_row.get("city"),global_row.get("state"))==(
+              "retriever-activities-center","Catonsville","MD"),global_row
+          spec={
+              "schema_version":2,
+              "school_key":"george-mason",
+              "owner_approval_basis":"Control Center accepted durable UMBC physical-venue resolution: https://github.com/pollackelliott/college-basketball-history/pull/572#issuecomment-6844523817",
+              "expected_research_zip_sha256":"bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
+              "expected_venues_sha256":hashlib.sha256(venues_raw).hexdigest(),
+              "mappings":[{
+                  "local_venue_key":"umbc-fieldhouse",
+                  "expected_local_name":"UMBC Fieldhouse",
+                  "expected_local_city":"Baltimore",
+                  "expected_local_state":"MD",
+                  "global_venue_id":"VEN-000934",
+                  "global_venue_key":"retriever-activities-center",
+                  "expected_global_city":"Catonsville",
+                  "expected_global_state":"MD",
+                  "allow_locality_variant":True,
+                  "locality_variant_basis":"UMBC identifies the physical campus in Catonsville while using a Baltimore MD 21250 mailing address; UMBC institutional history identifies the 1973 UMBC Fieldhouse as the same building later renamed Retriever Activities Center.",
+                  "resolution_basis":"Control Center accepted same-physical-venue resolution at PR #572 issuecomment-6844523817; no second global venue; preserve literal frozen/source Baltimore locality evidence."
+              }]
+          }
+          raw=(json.dumps(spec,sort_keys=True,separators=(",",":"))+"\n").encode()
+          out=root/"umbc-venue-reconciliation.json"
+          out.write_bytes(raw)
+          print("VENUE_RECONCILIATION_SHA256",hashlib.sha256(raw).hexdigest())
+          print("FROZEN_VENUES_SHA256",spec["expected_venues_sha256"])
+          PY
           for slot in a b; do
             python tools/all_history_expansion_integration.py freeze george-mason "$RUNNER_TEMP/george-mason-expansion-research-frozen.zip" \
               --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 \
               --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 \
-              --main-sha ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd \
+              --main-sha d197f9d33f1ad18b8377d69bf3cd1e015cb901b8 \
               --independent-proof "$RUNNER_TEMP/gmu-stage1/independent-proof.json" \
               --independent-proof-sha256 "$PROOF_SHA" \
+              --venue-reconciliation "$RUNNER_TEMP/gmu-stage1/umbc-venue-reconciliation.json" \
               --repo . --output "$RUNNER_TEMP/gmu-stage1/integration-$slot"
           done
           python tools/all_history_expansion_integration.py verify "$RUNNER_TEMP/gmu-stage1/integration-a"
@@ -146,38 +190,18 @@ jobs:
           python tools/all_history_expansion_integration.py prepare-phase0 \
             "$RUNNER_TEMP/gmu-stage1/integration-a" \
             --output "$RUNNER_TEMP/gmu-stage1/phase0-preparation-only.json"
-          # Explicit expected historical venue-identity blocker. A successful
-          # Phase 0 preview would be an unsafe implicit physical-venue decision.
-          if python tools/all_history_expansion_phase0_preview.py \
-              --repo . --integration-freeze "$RUNNER_TEMP/gmu-stage1/integration-a" \
-              --output "$RUNNER_TEMP/gmu-stage1/phase0-disposable-preview"; then
-            echo "FAIL: preview permitted registration despite historical alias conflict" >&2
-            exit 1
-          fi
+          python tools/all_history_expansion_phase0_preview.py \
+            --repo . --integration-freeze "$RUNNER_TEMP/gmu-stage1/integration-a" \
+            --output "$RUNNER_TEMP/gmu-stage1/phase0-disposable-preview"
           python - <<'PY'
-          import json,os
-          from pathlib import Path
-          root=Path(os.environ["RUNNER_TEMP"])/"gmu-stage1/phase0-disposable-preview"
-          assert not (root/"phase0-preview.json").exists()
-          doc=json.loads((root/"phase0-venue-identity-blockers.json").read_bytes())
-          targets=[x for x in doc["blockers"]
-                   if x["class"]=="VENUE_POTENTIAL_EXISTING_PHYSICAL_IDENTITY"
-                   and x["venue_key"]=="umbc-fieldhouse"
-                   and x["global_venue_id"]=="VEN-000934"
-                   and x["local_city"]=="Baltimore"
-                   and x["registered_city"]=="Catonsville"
-                   and "HISTORICAL_OR_ALIAS" in x["registered_alias_types"]]
-          assert len(targets)==1, doc
-          assert doc["status"]=="BLOCKED_VENUE_IDENTITY_RECONCILIATION"
-          print("EXPECTED_PRE_REGISTRATION_HISTORICAL_IDENTITY_BLOCKER",json.dumps(targets,sort_keys=True))
-          PY
-          python - <<'PY'
-          import hashlib, json, os, subprocess
+          import csv,hashlib,json,os,subprocess
           from pathlib import Path
           root=Path(os.environ["RUNNER_TEMP"])/"gmu-stage1"
           a,b=root/"integration-a",root/"integration-b"
+          preview=root/"phase0-disposable-preview"
           members=sorted(p.name for p in a.iterdir() if p.is_file())
-          assert len(members)==8, members
+          assert len(members)==9, members
+          assert "venue-reconciliation.json" in members
           assert members==sorted(p.name for p in b.iterdir() if p.is_file())
           for name in members:
               assert (a/name).read_bytes()==(b/name).read_bytes(), f"nondeterministic integration freeze {name}"
@@ -192,15 +216,73 @@ jobs:
               "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER":0,
               "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED":6,
               "REUSE_REGISTERED_GLOBAL_VENUE":2}
+          assert m["venue_reconciliation"]["spec_path"]=="venue-reconciliation.json"
+          assert m["venue_reconciliation"]["mappings"][0]["local_venue_key"]=="umbc-fieldhouse"
+          assert m["venue_reconciliation"]["mappings"][0]["global_venue_id"]=="VEN-000934"
+          assert m["venue_reconciliation"]["mappings"][0]["global_venue_key"]=="retriever-activities-center"
+          vc=m["venue_reconciliation_census"]
+          assert vc["blocker_count"]==0,vc
+          assert vc["classification_counts"].get("NEW_GLOBAL_IDENTITY")==5,vc
+          target=[r for r in vc["rows"] if r["venue_key"]=="umbc-fieldhouse"]
+          assert len(target)==1,target
+          assert target[0]["classification"]=="SAFE_REPRESENTATION_REUSE",target
+          assert target[0]["resolution"]=="REUSE_EXPLICIT_RECONCILIATION",target
+          assert target[0]["target_venue_id"]=="VEN-000934",target
+          assert target[0]["target_venue_key"]=="retriever-activities-center",target
           assert not m["release_authority"]
           assert m["tracked_mutation"]=="NONE"
-          proposal=json.loads((root/"phase0-preparation-only.json").read_bytes())
-          assert proposal["status"]=="PREPARATION_ONLY"
-          assert not proposal["phase0_executed"]
-          assert proposal["mutation_authority"]=="NONE"
+
+          proposal=json.loads((preview/"phase0-preview.json").read_bytes())
+          assert proposal["status"]=="DISPOSABLE_ONLY_NOT_PUBLISHED"
+          assert proposal["global_venue_registration_count"]==5,proposal
+          assert proposal["venue_identity_census"]["blocker_count"]==0,proposal["venue_identity_census"]
+          guard=[r for r in proposal["venue_identity_census"]["rows"] if r["venue_key"]=="umbc-fieldhouse"]
+          assert len(guard)==1,guard
+          assert guard[0]["explicit_reuse_id"]=="VEN-000934",guard
+          assert all(x["venue_key"]!="umbc-fieldhouse" for x in proposal["new_global_venue_ids_and_keys"])
+
+          frozen_sources=(a/"source-games.csv").read_bytes()
+          preview_sources=(preview/"source-games.csv").read_bytes()
+          assert preview_sources==frozen_sources, "source-games literal evidence changed"
+          source_rows=list(csv.DictReader((preview/"source-games.csv").open(encoding="utf-8")))
+          umbc_games=[r for r in source_rows if r.get("curated_venue_name")=="UMBC Fieldhouse"]
+          assert len(umbc_games)==3,umbc_games
+          assert [(r.get("game_date"),r.get("city"),r.get("state")) for r in umbc_games]==[
+              ("1974-02-23","Baltimore","MD"),
+              ("1974-02-28","Baltimore","MD"),
+              ("1975-02-27","Baltimore","MD"),
+          ],umbc_games
+
+          venue_rows=list(csv.DictReader((preview/"venues.csv").open(encoding="utf-8")))
+          resolved=[r for r in venue_rows if r.get("venue_id")=="VEN-000934"]
+          assert len(resolved)>=1,resolved
+          gmu=[r for r in resolved if r.get("canonical_name")=="UMBC Fieldhouse"]
+          assert len(gmu)==1,gmu
+          assert (gmu[0]["venue_key"],gmu[0]["city"],gmu[0]["state"])==(
+              "retriever-activities-center","Catonsville","MD"),gmu[0]
+
+          projected_globals=list(csv.DictReader((preview/"references/venues.csv").open(encoding="utf-8")))
+          current_globals=list(csv.DictReader(Path("data/reference/venues.csv").open(encoding="utf-8")))
+          before=[r for r in current_globals if r.get("venue_id")=="VEN-000934"]
+          after=[r for r in projected_globals if r.get("venue_id")=="VEN-000934"]
+          assert before==after and len(after)==1,(before,after)
+          assert not [r for r in projected_globals if r.get("venue_key")=="umbc-fieldhouse"]
+
+          prep=json.loads((root/"phase0-preparation-only.json").read_bytes())
+          assert prep["status"]=="PREPARATION_ONLY"
+          assert not prep["phase0_executed"]
+          assert prep["mutation_authority"]=="NONE"
           assert subprocess.check_output(["git","status","--porcelain","--untracked-files=no"]).strip()==b""
           print("INTEGRATION_FREEZE_SHA256",hashlib.sha256(
               (a/"expansion-integration-freeze.json").read_bytes()).hexdigest())
+          print("VENUE_RECONCILIATION_CENSUS",json.dumps(vc,sort_keys=True))
+          print("PHASE0_PREVIEW_COUNTS",json.dumps({
+              "global_venue_registration_count":proposal["global_venue_registration_count"],
+              "venue_blockers":proposal["venue_identity_census"]["blocker_count"],
+              "source_game_count":proposal["source_game_count"],
+              "inherited_source_game_count":proposal["inherited_source_game_count"],
+              "supplemental_source_game_count":proposal["supplemental_source_game_count"],
+          },sort_keys=True))
           print("PHASE0_TRANSACTION_EXECUTED",False)
           print("EXACT_REHEARSAL_VERIFIED", True)
           PY

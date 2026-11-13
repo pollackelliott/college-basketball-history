@@ -105,6 +105,76 @@ class ExplicitVenueReconciliationTests(unittest.TestCase):
             )
         )
 
+    def test_keyed_same_state_locality_variant_reuses_current_identity(self):
+        self.doc["schema_version"] = 2
+        self.doc["mappings"][0].update({
+            "expected_global_city": "Catonsville",
+            "allow_locality_variant": True,
+            "locality_variant_basis": (
+                "Official institutional campus/locality evidence establishes the "
+                "same physical venue; school-local city is preserved only in source evidence."
+            ),
+        })
+        self.save()
+        global_row = dict(self.global_row, city="Catonsville")
+        mapping, meta = load_venue_reconciliation(
+            self.spec,
+            school_key="test-school",
+            package_path=self.package,
+            local_venues=[dict(self.local)],
+            global_venues=[global_row],
+        )
+        self.assertTrue(meta["mappings"][0]["allow_locality_variant"])
+        inventory = venue_reconciliation_inventory(
+            [dict(self.local)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(inventory["blocker_count"], 0)
+        self.assertEqual(inventory["rows"][0]["classification"], "SAFE_REPRESENTATION_REUSE")
+        staged, globals_, _names, outcomes = rebase_venues(
+            "test-school",
+            [dict(self.local)],
+            [dict(global_row)],
+            [],
+            venue_reconciliation=mapping,
+        )
+        self.assertEqual(len(globals_), 1)
+        self.assertEqual(staged[0]["venue_id"], "VEN-000925")
+        self.assertEqual(staged[0]["venue_key"], "reitz-arena-loyola-maryland")
+        self.assertEqual((staged[0]["city"], staged[0]["state"]), ("Catonsville", "MD"))
+        self.assertEqual(outcomes[0]["resolution"], "REUSE_EXPLICIT_RECONCILIATION")
+
+    def test_keyed_locality_variant_fails_closed_on_stale_authority(self):
+        self.doc["schema_version"] = 2
+        self.doc["mappings"][0].update({
+            "expected_global_city": "Catonsville",
+            "allow_locality_variant": True,
+            "locality_variant_basis": "Documented same-state locality representation difference.",
+        })
+        global_row = dict(self.global_row, city="Catonsville")
+        cases = [
+            ("global_venue_id", "VEN-999999", "stale global venue ID/key"),
+            ("global_venue_key", "wrong-key", "stale global venue ID/key"),
+            ("expected_global_city", "Wrong City", "global geography mismatch"),
+            ("locality_variant_basis", "", "requires locality_variant_basis"),
+        ]
+        for field, value, message in cases:
+            with self.subTest(field=field):
+                original = self.doc["mappings"][0][field]
+                self.doc["mappings"][0][field] = value
+                self.save()
+                with self.assertRaisesRegex(WorkflowError, message):
+                    load_venue_reconciliation(
+                        self.spec,
+                        school_key="test-school",
+                        package_path=self.package,
+                        local_venues=[dict(self.local)],
+                        global_venues=[dict(global_row)],
+                    )
+                self.doc["mappings"][0][field] = original
+
     def test_explicit_locality_variant_predicate_fails_closed(self):
         mapping = {
             "allow_locality_variant": True,

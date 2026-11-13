@@ -21,8 +21,9 @@ from all_history_expansion_integration import (
 )
 from stage_research_portfolio import (
     WorkflowError, load_existing_school_venues, rebase_venues,
-    rebase_program_aliases,
+    rebase_program_aliases, venue_reconciliation_inventory,
 )
+from stage1_venue_reconciliation import load_venue_reconciliation
 from expansion_implementation_stage1 import render_csv
 from all_history_expansion_venue_guard import census as venue_identity_census, require_clean as require_venue_identity_clean
 
@@ -108,9 +109,45 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_INHERITED_OPPONENT_ORDER_OR_IDENTITY_CHANGED")
     new_venues=venues[len(old_venues):]
     new_opponents=opponents[len(old_opponents):]
-    # Preserve the whole conflict census for review. This is not authority to
-    # register a new VEN ID, assume alias equivalence, or rewrite historic city.
-    venue_identity = venue_identity_census(new_venues,global_venues,global_names)
+    existing_other_venues=load_existing_school_venues(
+        repo,exclude_school_key=school
+    )
+    venue_reconciliation: dict[str,dict[str,object]] = {}
+    venue_reconciliation_meta=manifest.get("venue_reconciliation")
+    venue_reconciliation_census=manifest.get("venue_reconciliation_census")
+    if venue_reconciliation_meta is not None:
+        sidecar=frozen/"venue-reconciliation.json"
+        venue_reconciliation, revalidated_meta = load_venue_reconciliation(
+            sidecar,
+            school_key=school,
+            package_path=None,
+            expected_package_sha256=manifest["research_freeze_zip_sha256"],
+            frozen_venues_bytes=(frozen/"venues.csv").read_bytes(),
+            source_games_bytes=(frozen/"source-games.csv").read_bytes(),
+            local_venues=venues,
+            global_venues=global_venues,
+        )
+        revalidated_meta=dict(revalidated_meta)
+        revalidated_meta["spec_path"]="venue-reconciliation.json"
+        require(revalidated_meta==venue_reconciliation_meta,
+                "PHASE0_PREVIEW_VENUE_RECONCILIATION_AUTHORITY_DRIFT")
+        revalidated_census=venue_reconciliation_inventory(
+            new_venues,global_venues,global_names,
+            school_key=school,
+            existing_school_venues=existing_other_venues,
+            venue_reconciliation=venue_reconciliation,
+        )
+        require(revalidated_census==venue_reconciliation_census,
+                "PHASE0_PREVIEW_VENUE_RECONCILIATION_CENSUS_DRIFT")
+    else:
+        require(venue_reconciliation_census is None,
+                "PHASE0_PREVIEW_UNBOUND_VENUE_RECONCILIATION_CENSUS")
+    # Preserve the whole conflict census for review. Explicit reuse may clear
+    # only the exact already-authenticated mapping; unresolved alias/locality
+    # collisions remain blockers.
+    venue_identity = venue_identity_census(
+        new_venues,global_venues,global_names,venue_reconciliation
+    )
     if venue_identity["blocker_count"]:
         output.mkdir(parents=True)
         (output/"phase0-venue-identity-blockers.json").write_bytes(
@@ -148,10 +185,10 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     # cannot accidentally compare the mutated list against itself.
     original_global_venues=[dict(x) for x in global_venues]
     original_global_names=[dict(x) for x in global_names]
-    existing_other_venues=load_existing_school_venues(repo,exclude_school_key=school)
     rebased_new,rebased_global,rebased_names,venue_mappings = rebase_venues(
         school,new_venues,global_venues,global_names,
         existing_school_venues=existing_other_venues,
+        venue_reconciliation=venue_reconciliation,
         source_games=supplemental_sources,
     )
     require(len(rebased_new)==len(new_venues),
@@ -171,8 +208,13 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_REWRITES_EXISTING_GLOBAL_VENUE_NAMES")
     registered=[v for k,v in after_by_id.items() if k not in before_by_id]
     global_report=json.loads((frozen/STAGE1_REPORT).read_bytes())
-    new_expected=global_report["global_venue_reconciliation"]["counts"][
-        "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED"]
+    if venue_reconciliation_census is not None:
+        new_expected=venue_reconciliation_census["classification_counts"].get(
+            "NEW_GLOBAL_IDENTITY",0
+        )
+    else:
+        new_expected=global_report["global_venue_reconciliation"]["counts"][
+            "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED"]
     require(len(registered)==new_expected,
             "PHASE0_PREVIEW_GLOBAL_REGISTRATION_COUNT_CHANGED")
     candidate={name:(frozen/name).read_bytes() for name in PACKAGE_FILES}
@@ -207,6 +249,8 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         "supplemental_source_game_count":manifest["source_preservation"]["supplemental_count"],
         "global_venue_registration_count":len(registered),
         "venue_identity_census":venue_identity,
+        "venue_reconciliation_sha256":manifest.get("venue_reconciliation_sha256",""),
+        "venue_reconciliation_census":venue_reconciliation_census,
         "new_global_venue_ids_and_keys":[{"venue_id":x["venue_id"],
                     "venue_key":x["venue_key"]} for x in registered],
         "rebased_venue_mapping_count":len(venue_mappings),
