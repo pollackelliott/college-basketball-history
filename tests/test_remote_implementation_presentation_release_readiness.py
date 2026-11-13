@@ -21,6 +21,15 @@ from remote_implementation_release_readiness import (  # noqa: E402
     verify_release_readiness_authority,
     run_permanent_release_readiness,
 )
+from remote_implementation_release_preview import (  # noqa: E402
+    verify_release_preview_authority,
+)
+from remote_implementation_production import (  # noqa: E402
+    verify_gate2_ready_chain, verify_exact_merge,
+)
+import remote_implementation_release_readiness as readiness  # noqa: E402
+import remote_implementation_release_preview as preview_module  # noqa: E402
+import remote_implementation_production as production_module  # noqa: E402
 
 
 def json_bytes(value):
@@ -241,6 +250,270 @@ class PresentationReleaseReadinessTests(unittest.TestCase):
         self.assertFalse(result["owner_gate_2"])
         old.assert_not_called()
         self.assertEqual(gates.call_args.args[2], sorted(self.old_paths + [ASSET_PATH]))
+
+    def archive_corrected_readiness(self):
+        """Archive one genuinely C-bound readiness + fresh proof under control."""
+        import hashlib
+
+        readiness_id = "example-readiness-after-presentation-0001"
+        preview_id = "example-preview-after-presentation-0001"
+        prior_request = {
+            **self.request,
+            "request_id": readiness_id,
+            "operation": "RELEASE_READINESS",
+        }
+        prior_bytes = json_bytes(prior_request)
+        original_body = self.original_authority["sidecars"]["pr-body.md"]
+        body_sha = hashlib.sha256(original_body).hexdigest()
+        packet_sha = "8" * 64
+        base = {
+            "request_id": readiness_id,
+            "school_key": "example",
+            "target_branch": self.request["target_branch"],
+            "target_sha": self.candidate,
+            "approved_plan_hash": self.request["approved_plan_hash"],
+            "release_manifest_sha256": self.request["release_manifest_sha256"],
+        }
+        ckpt = {
+            **base,
+            "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_CHECKPOINT",
+            "request_sha256": hashlib.sha256(prior_bytes).hexdigest(),
+            "protected_main_sha": self.main,
+            "readiness_status": "RELEASE_READINESS_PASS",
+            "tracked_mutation": "NONE", "pr_created": False, "owner_gate_2": False,
+            "preview_request_id": preview_id,
+            "pr_body_sha256": body_sha,
+            "release_pr_packet_sha256": packet_sha,
+        }
+        ckpt_bytes = json_bytes(ckpt)
+        verified = {
+            **base,
+            "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+            "checkpoint_manifest_sha256": hashlib.sha256(ckpt_bytes).hexdigest(),
+            "remote_release_readiness_equivalence": "PASS",
+            "tracked_mutation": "NONE", "pr_created": False, "owner_gate_2": False,
+            "preview_request_id": preview_id,
+            "pr_body_sha256": body_sha,
+            "release_pr_packet_sha256": packet_sha,
+        }
+        verify_bytes = json_bytes(verified)
+        checkpoint_dir = (
+            ".remote-implementation/checkpoints/example/" + readiness_id
+        )
+        verification_path = (
+            ".remote-implementation/verifications/example/" + readiness_id
+            + "/release-readiness-verification.json"
+        )
+        self.write(checkpoint_dir + "/request.json", prior_bytes.decode())
+        self.write(checkpoint_dir + "/checkpoint-manifest.json", ckpt_bytes.decode())
+        self.write(verification_path, verify_bytes.decode())
+        self.control = self.commit("archive exact C readiness and fresh verification")
+        request = {
+            "operation": "RELEASE_PREVIEW_VERIFY",
+            "request_id": preview_id,
+            "school_key": "example",
+            "target_branch": self.request["target_branch"],
+            "target_sha": self.candidate,
+            "expected_protected_main_sha": self.main,
+            "approved_plan_hash": self.request["approved_plan_hash"],
+            "release_manifest_sha256": self.request["release_manifest_sha256"],
+            "pr_number": 597,
+            "release_readiness_checkpoint": {
+                "path": checkpoint_dir + "/checkpoint-manifest.json",
+                "sha256": hashlib.sha256(ckpt_bytes).hexdigest(),
+            },
+            "release_readiness_verification": {
+                "path": verification_path,
+                "sha256": hashlib.sha256(verify_bytes).hexdigest(),
+            },
+        }
+        return request, original_body
+
+    def check_corrected_preview(self, request):
+        with patch.object(
+            readiness, "_verify_sealed_release_readiness_authority",
+            return_value=dict(self.original_authority),
+        ), patch.object(
+            readiness, "remote_head", return_value=self.candidate,
+        ), patch.object(
+            preview_module, "remote_head", return_value=self.candidate,
+        ):
+            return verify_release_preview_authority(
+                request, self.control, source_repo=self.repo,
+            )
+
+    def archive_corrected_preview(self):
+        """Build an exact C-only Preview checkpoint for Gate 2 chain testing."""
+        request, body = self.archive_corrected_readiness()
+        verified = self.check_corrected_preview(request)
+        preview_id = request["request_id"]
+        checksum = hashlib.sha256(json_bytes(request)).hexdigest()
+        check = {
+            "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_CHECKPOINT",
+            "request_id": preview_id,
+            "request_sha256": checksum,
+            "school_key": request["school_key"],
+            "target_branch": request["target_branch"],
+            "target_sha": self.candidate,
+            "approved_plan_hash": request["approved_plan_hash"],
+            "release_manifest_sha256": request["release_manifest_sha256"],
+            "protected_main_sha": self.main,
+            "pr_number": request["pr_number"],
+            "pr_head_sha": self.candidate,
+            "preview_deployment_id": 999,
+            "preview_url": "https://example.invalid/new-c-preview",
+            "pr_body_sha256": hashlib.sha256(body).hexdigest(),
+            "gate2_status": "OWNER_GATE_2_READY",
+            "owner_gate_2_approved": False,
+            "merged": False,
+            "production_proof": False,
+        }
+        checkpoint_bytes = json_bytes(check)
+        fresh = {
+            "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+            "request_id": preview_id,
+            "school_key": request["school_key"],
+            "target_branch": request["target_branch"],
+            "target_sha": self.candidate,
+            "checkpoint_manifest_sha256": hashlib.sha256(checkpoint_bytes).hexdigest(),
+            "pr_number": request["pr_number"],
+            "pr_head_sha": self.candidate,
+            "preview_deployment_id": 999,
+            "preview_url": check["preview_url"],
+            "remote_release_preview_equivalence": "PASS",
+            "owner_gate_2_approved": False,
+            "merged": False,
+        }
+        verify_bytes = json_bytes(fresh)
+        checkdir = ".remote-implementation/checkpoints/example/" + preview_id
+        verify_path = (
+            ".remote-implementation/verifications/example/" + preview_id
+            + "/release-preview-verification.json"
+        )
+        self.write(checkdir + "/request.json", json_bytes(request).decode())
+        self.write(checkdir + "/checkpoint-manifest.json", checkpoint_bytes.decode())
+        self.write(verify_path, verify_bytes.decode())
+        self.control = self.commit("archive exact C Preview and fresh proof")
+        gate2 = {
+            "school_key": "example", "target_branch": request["target_branch"],
+            "target_sha": self.candidate,
+            "expected_protected_main_sha": self.main,
+            "approved_plan_hash": request["approved_plan_hash"],
+            "release_manifest_sha256": request["release_manifest_sha256"],
+            "pr_number": request["pr_number"],
+            "preview_deployment_id": 999,
+            "preview_url": check["preview_url"],
+            "release_preview_checkpoint": {
+                "path": checkdir + "/checkpoint-manifest.json",
+                "sha256": hashlib.sha256(checkpoint_bytes).hexdigest(),
+            },
+            "release_preview_verification": {
+                "path": verify_path, "sha256": hashlib.sha256(verify_bytes).hexdigest(),
+            },
+        }
+        return gate2
+
+    def test_corrected_c_preview_reauthenticates_original_g_and_exact_c(self):
+        request, body = self.archive_corrected_readiness()
+        result = self.check_corrected_preview(request)
+        self.assertEqual(result["target_sha"], self.candidate)
+        self.assertEqual(result["preview_request_id"], request["request_id"])
+        self.assertEqual(result["pr_body_sha256"], hashlib.sha256(body).hexdigest())
+        self.assertEqual(result["release_pr_packet_sha256"], "8" * 64)
+        self.assertFalse(result.get("owner_gate_2_approved", False))
+
+    def test_old_sealed_g_readiness_or_preview_cannot_authorize_c(self):
+        request, _ = self.archive_corrected_readiness()
+        request["target_sha"] = self.sealed
+        with self.assertRaises(Stop):
+            self.check_corrected_preview(request)
+        request["target_sha"] = self.candidate
+        request["request_id"] = "old-preview-not-bound-to-new-C"
+        with self.assertRaisesRegex(Stop, "PREVIEW_REQUEST_ID_CONTINUATION_MISMATCH"):
+            self.check_corrected_preview(request)
+
+    def test_exact_c_gate2_chain_still_has_no_owner_approval(self):
+        gate2 = self.archive_corrected_preview()
+        with patch.object(
+            readiness, "_verify_sealed_release_readiness_authority",
+            return_value=dict(self.original_authority),
+        ), patch.object(
+            readiness, "remote_head", return_value=self.candidate,
+        ), patch.object(
+            preview_module, "remote_head", return_value=self.candidate,
+        ):
+            result = verify_gate2_ready_chain(
+                gate2, self.control, repo=self.repo, check_live_preview=False,
+            )
+            self.assertEqual(result["target_sha"], self.candidate)
+            self.assertEqual(result["pr_body_sha256"], hashlib.sha256(
+                self.original_authority["sidecars"]["pr-body.md"]
+            ).hexdigest())
+            self.assertEqual(result["preview_deployment_id"], 999)
+            self.assertNotIn("owner_gate_2_approved", result)
+            wrong = dict(gate2, target_sha=self.sealed)
+            with self.assertRaises(Stop):
+                verify_gate2_ready_chain(
+                    wrong, self.control, repo=self.repo,
+                    check_live_preview=False,
+                )
+
+    def test_production_merge_must_use_exact_c_as_second_parent(self):
+        from unittest.mock import patch
+        import release_school
+
+        exact_merge = git(
+            self.repo, "commit-tree", str(self.plan["candidate_tree_sha"]),
+            "-p", self.main, "-p", self.candidate,
+            "-m", "synthetic merge with approved C as second parent",
+        )
+        wrong_merge = git(
+            self.repo, "commit-tree", str(self.plan["candidate_tree_sha"]),
+            "-p", self.main, "-p", self.sealed,
+            "-m", "synthetic merge with old G as second parent",
+        )
+        gh_data = {
+            "number": 597,
+            "state": "MERGED",
+            "headRefOid": self.candidate,
+            "headRefName": self.request["target_branch"],
+            "baseRefName": "main",
+            "mergedAt": "2026-11-13T23:00:00Z",
+            "mergeCommit": {"oid": exact_merge},
+        }
+        original_git = release_school.git
+        def mocked_git(repo, *args):
+            if args[:3] == ("ls-remote", "--heads", "origin"):
+                return exact_merge + "\trefs/heads/main\n"
+            return original_git(repo, *args)
+
+        proof_request = {
+            "merge_sha": exact_merge, "pr_number": 597,
+            "target_sha": self.candidate,
+            "target_branch": self.request["target_branch"],
+        }
+        with patch.object(release_school, "git", side_effect=mocked_git), patch.object(
+            release_school, "gh_json", return_value=gh_data,
+        ):
+            proof = verify_exact_merge(
+                proof_request, {"original_main_sha": self.main}, repo=self.repo,
+            )
+            self.assertEqual(proof["merge_parent_main"], self.main)
+            self.assertEqual(proof["merge_parent_onboarding"], self.candidate)
+        old_head_request = dict(proof_request, merge_sha=wrong_merge)
+        gh_data["mergeCommit"] = {"oid": wrong_merge}
+        def wrong_git(repo, *args):
+            if args[:3] == ("ls-remote", "--heads", "origin"):
+                return wrong_merge + "\trefs/heads/main\n"
+            return original_git(repo, *args)
+        with patch.object(release_school, "git", side_effect=wrong_git), patch.object(
+            release_school, "gh_json", return_value=gh_data,
+        ):
+            with self.assertRaisesRegex(Stop, "PRODUCTION_MERGE_SECOND_PARENT_INVALID"):
+                verify_exact_merge(
+                    old_head_request, {"original_main_sha": self.main},
+                    repo=self.repo,
+                )
 
     def test_missing_mismatched_verification_or_original_seal_rejected(self):
         for label, update in (
