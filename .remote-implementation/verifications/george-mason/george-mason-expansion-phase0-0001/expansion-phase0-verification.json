@@ -1,0 +1,29 @@
+{
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/george-mason/notes.md",
+    "schools/george-mason/opponents.csv",
+    "schools/george-mason/source-games.csv",
+    "schools/george-mason/source-notes.md",
+    "schools/george-mason/venues.csv"
+  ],
+  "expected_target_predecessor_sha": "adca1cb9d9a882ad68520961dd95f324d873a075",
+  "independent_exact_tree_equivalence": "PASS",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_VERIFICATION",
+  "observed_live_main_sha": "e7f90652b3517c1d301d40c3c8527fca167f812f",
+  "prepared_tree_sha": "da8bb00a1c6e89d4236c46e287076c0371bf589a",
+  "protected_main_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "george-mason-expansion-phase0-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "status": "PASS",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "330a5873008d2bdc3afe3ce73d1f4af9c3ce983f",
+  "venue_reconciliation_sha256": "7fdfd39970ac63af563444a7efcde57225846474a9aade1da95f18ab4913b931"
+}
