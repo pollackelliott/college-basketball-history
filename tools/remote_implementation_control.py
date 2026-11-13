@@ -1660,6 +1660,26 @@ def validate_request(request: dict[str, Any]) -> None:
                 request.get(key), 64,
                 "RELEASE_READINESS_%s_INVALID" % key.upper(),
             )
+        # C presentation successor and independent fresh proof are optional
+        # only for the original G-only request. Both are mandatory together.
+        presented = request.get("presentation_refresh_successor")
+        verified = request.get("presentation_refresh_verification")
+        _require(
+            (presented is None) == (verified is None),
+            "RELEASE_READINESS_PRESENTATION_REFS_NOT_PAIRED",
+        )
+        if presented is not None:
+            _validate_payload_ref(
+                presented, "presentation_refresh_successor", required=True,
+            )
+            _validate_payload_ref(
+                verified, "presentation_refresh_verification", required=True,
+            )
+    elif (
+        request.get("presentation_refresh_successor") is not None
+        or request.get("presentation_refresh_verification") is not None
+    ):
+        _require(False, "RELEASE_PRESENTATION_REFS_WRONG_OPERATION")
 
     if operation == OP_RELEASE_PREVIEW_VERIFY:
         for key in (
