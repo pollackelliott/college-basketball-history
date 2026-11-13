@@ -203,27 +203,35 @@ def portfolio_errors(programs: Iterable[Mapping[str, str]]) -> tuple[list[str], 
 
 def workflow_contract_errors(root: Path) -> list[str]:
     errors: list[str] = []
-    transaction = (
-        root / ".github/workflows/opponent-identity-transaction-validation.yml"
-    ).read_text(encoding="utf-8")
-    required_transaction = (
+    workflow_paths = (
+        ".github/workflows/opponent-identity-tooling-validation.yml",
+        ".github/workflows/opponent-identity-transaction-validation.yml",
+    )
+    required_live_main = (
+        "types: [opened, synchronize, reopened, assigned]",
+        "github.event.action != 'assigned' || github.event.assignee.login == github.repository_owner",
         'ref: ${{ github.event.pull_request.head.sha }}',
         'git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"',
         'git merge --no-ff --no-edit "$EXPECTED_HEAD_SHA"',
         'git ls-remote origin refs/heads/main',
         'LIVE_MAIN_STABILITY=PASS',
     )
-    for snippet in required_transaction:
-        if snippet not in transaction:
-            errors.append(f"transaction rehearsal missing live-main contract: {snippet}")
-
-    forbidden_transaction = (
+    forbidden_stale = (
         'refs/pull/${{ github.event.pull_request.number }}/merge',
         'EXPECTED_BASE_SHA: ${{ github.event.pull_request.base.sha }}',
     )
-    for snippet in forbidden_transaction:
-        if snippet in transaction:
-            errors.append(f"transaction rehearsal still trusts stale event merge state: {snippet}")
+    for relative in workflow_paths:
+        workflow_text = (root / relative).read_text(encoding="utf-8")
+        for snippet in required_live_main:
+            if snippet not in workflow_text:
+                errors.append(
+                    f"{relative} missing live-main/revalidation contract: {snippet}"
+                )
+        for snippet in forbidden_stale:
+            if snippet in workflow_text:
+                errors.append(
+                    f"{relative} still trusts stale event merge state: {snippet}"
+                )
 
     remote = (root / ".github/workflows/remote-implementation.yml").read_text(
         encoding="utf-8"
@@ -232,7 +240,6 @@ def workflow_contract_errors(root: Path) -> list[str]:
         if step not in remote:
             errors.append(f"remote Implementation orchestration missing: {step}")
     return errors
-
 
 def stale_test_contract_errors(root: Path) -> list[str]:
     errors: list[str] = []

@@ -3,12 +3,14 @@ name: Opponent identity transaction rehearsal
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, assigned]
 
 permissions:
   contents: read
 
 jobs:
   rehearse:
+    if: github.event.action != 'assigned' || github.event.assignee.login == github.repository_owner
     runs-on: ubuntu-latest
     steps:
       # Integration CI must validate the exact PR head against the protected-main

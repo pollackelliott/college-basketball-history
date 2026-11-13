@@ -3,16 +3,37 @@ name: Opponent identity tooling validation
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, assigned]
 
 permissions:
   contents: read
 
 jobs:
   validate:
+    if: github.event.action != 'assigned' || github.event.assignee.login == github.repository_owner
     runs-on: ubuntu-latest
     steps:
-      - name: Check out PR head
+      - name: Check out exact PR head
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Build exact live-main merge candidate
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+          live_main="$(git rev-parse refs/remotes/origin/main)"
+          echo "LIVE_MAIN_SHA=$live_main" >> "$GITHUB_ENV"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B ci-live-main refs/remotes/origin/main
+          git merge --no-ff --no-edit "$EXPECTED_HEAD_SHA"
+          test "$(git rev-parse HEAD^1)" = "$live_main"
+          test "$(git rev-parse HEAD^2)" = "$EXPECTED_HEAD_SHA"
+          echo "LIVE_MAIN_PR_MERGE_PARENT_BINDINGS=PASS"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -96,3 +117,15 @@ jobs:
           for game_id in a1['unpaired_affected_game_ids']:
               print('UNPAIRED=' + game_id)
           PY
+
+      - name: Require protected main stayed fixed during validation
+        run: |
+          latest_main="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          test -n "$latest_main"
+          if [ "$latest_main" != "$LIVE_MAIN_SHA" ]; then
+            echo "FAIL: protected main moved during tooling validation"
+            echo "bound=$LIVE_MAIN_SHA"
+            echo "live=$latest_main"
+            exit 1
+          fi
+          echo "LIVE_MAIN_STABILITY=PASS"
