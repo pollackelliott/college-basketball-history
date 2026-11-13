@@ -18,7 +18,9 @@ from program_history import (  # noqa: E402
     partition_source_rows,
     partition_stage2_source_rows,
     scope_canonical_games,
+    publication_history_games,
     season_is_in_scope,
+    season_is_published_history,
     trim_conference_history,
 )
 
@@ -358,7 +360,7 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(public[0]["start_season"], "2000-2001")
         self.assertEqual(source[0]["start_season"], "1990-1991")
 
-    def test_public_program_pre_scope_games_are_reciprocal_only(self):
+    def test_games_outside_publication_history_are_reciprocal_only(self):
         with (ROOT / "data/reference/programs.csv").open(
             encoding="utf-8-sig", newline=""
         ) as f:
@@ -400,17 +402,20 @@ class ProgramHistoryScopeTests(unittest.TestCase):
                 intervals,
             )
             scoped_ids = {game["canonical_game_id"] for game in scoped}
+            published_ids = {
+                game["canonical_game_id"] for game in publication_history_games(
+                    all_games, key, programs[key],
+                )
+            }
+            self.assertTrue(scoped_ids <= published_ids, key)
             excluded = [
-                game
-                for game in all_games
-                if game["canonical_game_id"] not in scoped_ids
+                game for game in all_games
+                if game["canonical_game_id"] not in published_ids
             ]
             for game in excluded:
                 self.assertFalse(
-                    season_is_in_scope(
-                        game["season_label"],
-                        start,
-                        intervals,
+                    season_is_published_history(
+                        game["season_label"], programs[key],
                     ),
                     key,
                 )
