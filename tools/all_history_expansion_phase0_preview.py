@@ -112,8 +112,10 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     require(len(new_opponents)==manifest["opponent_support_actions"]["NEW_SUPPLEMENTAL"],
             "PHASE0_PREVIEW_NEW_OPPONENT_SUPPORT_POPULATION_CHANGED")
     inherited_keys={v["venue_key"] for v in old_venues}
-    require(len(inherited_keys)==len(old_venues) and
-            all(v["venue_key"] not in inherited_keys for v in new_venues),
+    # Accepted legacy school venues can have multiple relationship intervals
+    # under one physical venue_key. Preserve every inherited row; reject only
+    # a *new* support reusing an inherited venue identity.
+    require(all(v["venue_key"] not in inherited_keys for v in new_venues),
             "PHASE0_PREVIEW_NEW_VENUE_COLLIDES_WITH_INHERITED")
     inherited_opponent_keys={
         (r["source_opponent_label"],r["canonical_opponent_key"])
