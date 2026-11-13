@@ -152,7 +152,7 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_SCHOOL_VENUE_POPULATION_CHANGED")
     before_by_id={v["venue_id"]:v for v in original_global_venues}
     after_by_id={v["venue_id"]:v for v in rebased_global}
-    require(len(before_by_id)==len(global_venues),
+    require(len(before_by_id)==len(original_global_venues),
             "PHASE0_PREVIEW_DUPLICATE_CURRENT_GLOBAL_VENUE_ID")
     require(len(after_by_id)==len(rebased_global),
             "PHASE0_PREVIEW_DUPLICATE_PROJECTED_GLOBAL_VENUE_ID")
