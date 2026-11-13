@@ -161,6 +161,8 @@ class PresentationRefreshTreeTests(unittest.TestCase):
         deleted = self.commit("delete site")
         with self.assertRaises(PresentationRefreshStop):
             self.verify(deleted)
+        git(self.repo, "checkout", "-q", "sealed")
+        git(self.repo, "checkout", "-q", "-b", "wrong-asset")
         self.write("site/index.html", "different unreviewed site content\n")
         altered = self.commit("wrong asset")
         with self.assertRaisesRegex(
