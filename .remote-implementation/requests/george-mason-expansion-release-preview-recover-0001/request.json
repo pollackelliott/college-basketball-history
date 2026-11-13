@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-mason-expansion-release-preview-recover-0001",
+  "school_key": "george-mason",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "98025b7ceef8a60c3e0cbb40bde716b57e3c2785",
+  "previous_control_state_sha256": "34b6afbc3cfcd831b2ea46d5498b903f07e176b7a8d52ca9ca2812b5cd8769d3",
+  "expected_protected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
+  "recovery": {
+    "abandoned_request_id": "george-mason-expansion-release-preview-verify-0001",
+    "lock_commit": null,
+    "target_branch": null
+  },
+  "creation_provenance": {
+    "origin": "George Mason ALL_HISTORY_EXPANSION Implementation — deterministic failed read-only Preview-verification recovery",
+    "authorization": "Owner-authorized George Mason release preparation includes safe recovery of the accepted failed read-only RELEASE_PREVIEW_VERIFY request george-mason-expansion-release-preview-verify-0001. Exact GitHub run #43489251795 failed because PR #597 full-suite CI checks failed on eight stale pre-expansion population/scope tests, not because historical authority changed. The failed request SHA256 d933271f102329bebdba4135e5819c87c1c0ff1962fc38b530c10d3e30d3050f matches durable active control; no write-ahead, no prepared commit/tree, no mutation lock, no target publication, and exact sealed onboarding target 0fe86b37405bc5322bec5639a28c1819bb97d5f7 and protected main 866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d remain unchanged. Authorize only permanent RECOVER to classify NOT_ATTEMPTED and abandon the failed read-only request, returning global control to IDLE. Do not replay the accepted request, mutate George Mason basketball or generated data, change PR #597, create a new historical decision, approve Gate 2, merge, deploy, or bypass failed CI. The approved release-preparation phase remains pending narrow test/runtime repair and exact fresh Preview verification."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "expansion_phase0": false,
+    "recovery": true,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
