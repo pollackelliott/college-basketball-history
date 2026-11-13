@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner said Proceed for the ordinary George Mason Stage 2 phase. The prior census attempt exposed only the generic expansion Phase 0 reconciled-venues authority-consumer defect; delegated tooling PR #586 was exact-head validated and merged as protected main 7c6457aabf5e741beabef8e4b5e22be16108a354. This request reruns the permanent read-only STAGE2_CENSUS against the unchanged independently verified expansion Phase 0 successor. It carries no current-main refresh, tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority.",
+    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census"
+  },
+  "expected_protected_main_sha": "7c6457aabf5e741beabef8e4b5e22be16108a354",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-phase0-0001/successor-manifest.json",
+    "sha256": "2025a1dedb9b89469e9bfbae395d2c32f9cd8d84b217951a9c0b5421a2d2832f"
+  },
+  "previous_control_state_commit": "b37026b5a9068f47516f8364828fc65999951569",
+  "previous_control_state_sha256": "f0d4a8ec06871aeb7761a06c91f2acff2f0e8da221e1a4f64b79ba6d27087ee6",
+  "request_id": "george-mason-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "330a5873008d2bdc3afe3ce73d1f4af9c3ce983f"
+}
