@@ -130,7 +130,11 @@ Do not restate or reconstruct a completed phase from memory if its durable artif
 
 ## 5. Failure recovery rule
 
-A Codespace, shell, browser, or chat failure does not automatically restart Implementation.
+A Codespace, shell, browser, chat, or remote-request failure does not automatically restart Implementation or create a new owner gate.
+
+For an already-authorized phase, **deterministic safe recovery is collaborator work**. If an accepted failed request made no tracked basketball mutation and permanent recovery can objectively classify it as `NOT_ATTEMPTED` / `PREPARED_NOT_PUBLISHED` (including a read-only payload-hash or request-envelope failure), the school lane should recover/abandon that exact request, require control to return to `IDLE`, correct the mechanical defect, submit a new request ID with exact bindings, and resume the same phase. Do not ask the owner to schedule those steps separately.
+
+The accepted failed request is never replayed. A new request after safe abandonment must use a fresh request ID and the exact current authority. Escalate only when permanent recovery reports `DIVERGED_STOP`, target mutation/publication state is ambiguous, authority has materially changed, or recovery itself would require a new historical/shared mutation decision.
 
 On recovery, inspect in this order:
 
