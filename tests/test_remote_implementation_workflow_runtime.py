@@ -56,7 +56,7 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
 
-    def test_pending_refresh_verification_uses_current_verifier_only_after_linear_advance(self):
+    def test_pending_refresh_or_expansion_verification_uses_current_verifier_only_after_linear_advance(self):
         text = self.workflow
         self.assertIn(
             "pending_operation: ${{ steps.detect.outputs.pending_operation }}",
@@ -71,7 +71,7 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
         self.assertIn(
-            'if [[ "${{ steps.detect.outputs.pending_operation }}" != "STAGE2_CURRENT_MAIN_REFRESH" ]]; then',
+            'if [[ "$pending_operation" != "STAGE2_CURRENT_MAIN_REFRESH" && "$pending_operation" != "EXPANSION_PHASE0" ]]; then',
             text,
         )
         self.assertIn(
@@ -79,11 +79,15 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
         self.assertIn(
-            "Pending refresh verification bound main is no longer an ancestor of protected main",
+            "Pending verification bound main is no longer an ancestor of protected main",
             text,
         )
         self.assertIn(
             'runtime_sha="$actual_main"',
+            text,
+        )
+        self.assertIn(
+            'pending_operation="${{ steps.detect.outputs.pending_operation }}"',
             text,
         )
         recovery = text.split(
