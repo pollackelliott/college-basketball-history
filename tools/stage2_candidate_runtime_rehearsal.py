@@ -19,7 +19,10 @@ from pathlib import Path
 from typing import Any
 
 from remote_implementation_io import Stop, git_show_bytes, sha256_bytes
-from remote_implementation_stage2_census import add_existing_onboarding_worktree
+from remote_implementation_stage2_census import (
+    add_existing_onboarding_worktree,
+    run_stage2_census_tool,
+)
 from remote_implementation_stage2_proposal import (
     run_stage2_proposal_tool,
     verify_stage2_proposal_authority,
@@ -162,6 +165,18 @@ def classify_candidate_result(
     return "ADVANCED_TO_DIFFERENT_BLOCKER"
 
 
+def candidate_census_decision_universe(
+    candidate_result: dict[str, Any],
+) -> str:
+    """Return the candidate census decision-universe fingerprint or fail closed."""
+    status = candidate_result.get("status") or {}
+    preflight = status.get("preflight") or {}
+    value = str(preflight.get("decision_universe_sha256") or "").strip()
+    if len(value) != 64:
+        raise Stop("CANDIDATE_REHEARSAL_DECISION_UNIVERSE_MISSING")
+    return value
+
+
 def _load_json_at(
     source_repo: Path,
     commit: str,
@@ -273,17 +288,41 @@ def run_candidate_rehearsal(
         source_repo=source_repo,
     )
 
-    result = run_stage2_proposal_tool(
+    candidate_census = run_stage2_census_tool(
         target,
         str(request["school_key"]),
         authority["freeze_bytes"],
-        map_path,
-        str(request["decision_universe_sha256"]),
-        diag,
+        diag / "candidate-census",
         tool_repo=candidate_runtime,
         historical_game_type_challenge_path=challenge_path,
     )
-    classification = classify_candidate_result(baseline_status, result)
+    expected_universe = str(request["decision_universe_sha256"])
+    candidate_universe = candidate_census_decision_universe(candidate_census)
+
+    if candidate_universe != expected_universe:
+        result = candidate_census
+        classification = "ADVANCED_TO_CHANGED_DECISION_UNIVERSE"
+        decision_universe_compatibility = {
+            "status": "CHANGED",
+            "kind": "MECHANICAL_PLANNER_ELIGIBILITY_RECOMPUTE",
+            "authority_decision_universe_sha256": expected_universe,
+            "runtime_decision_universe_sha256": candidate_universe,
+        }
+    else:
+        result = run_stage2_proposal_tool(
+            target,
+            str(request["school_key"]),
+            authority["freeze_bytes"],
+            map_path,
+            expected_universe,
+            diag,
+            tool_repo=candidate_runtime,
+            historical_game_type_challenge_path=challenge_path,
+        )
+        classification = classify_candidate_result(baseline_status, result)
+        decision_universe_compatibility = result.get(
+            "decision_universe_compatibility"
+        )
 
     summary = {
         "schema_version": 1,
@@ -299,11 +338,12 @@ def run_candidate_rehearsal(
         "target_sha": request.get("target_sha"),
         "recommendation_map_sha256": map_sha,
         "decision_universe_sha256": request.get("decision_universe_sha256"),
+        "candidate_decision_universe_sha256": candidate_universe,
         "changed_paths": changed_paths,
         "baseline_error": baseline_status.get("last_error"),
         "candidate_stage2_status": result.get("stage2_status"),
         "candidate_error": (result.get("status") or {}).get("last_error"),
-        "decision_universe_compatibility": result.get("decision_universe_compatibility"),
+        "decision_universe_compatibility": decision_universe_compatibility,
         "tracked_mutation_proof": result.get("tracked_mutation_proof"),
         "classification": classification,
     }
