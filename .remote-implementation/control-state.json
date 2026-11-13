@@ -557,18 +557,19 @@
     "vcu-correction-release-preview-verify-0001",
     "vcu-correction-release-gate2-approval-0001",
     "vcu-correction-release-production-proof-0001",
-    "george-mason-expansion-phase0-0001"
+    "george-mason-expansion-phase0-0001",
+    "george-mason-expansion-stage2-census-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "7c6457aabf5e741beabef8e4b5e22be16108a354",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "george-mason-expansion-stage2-census-0002",
+  "active_request_sha256": "31d4db53aba7a694eb6e4c2ffc45eec946ad872285ddd98577ce6d3e56ebfa01",
+  "active_school_key": "george-mason",
+  "active_target_branch": "data/george-mason-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1129,8 +1130,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/george-mason/george-mason-expansion-phase0-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "4a9a4799fd7fcdf83fd67d0b0ae46e6e15c9cc2c1ac54b2283b678389a75a838"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43435309940",
+  "lock_acquisition_request_commit": "f8fe68a88e7c514dd2d3dede62542d5c348e04ed",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
