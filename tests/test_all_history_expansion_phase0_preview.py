@@ -90,8 +90,28 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
         fake_git["data/reference/program-names.csv"]=b"program_key,alias_name\n"
         return frozen, fake_git, source, venue, global_venue, new_global
 
-    def evaluate(self,root,*,main="a"*40,alter_source=False,register_extra=False):
+    def evaluate(self,root,*,main="a"*40,alter_source=False,register_extra=False,
+                 duplicate_inherited_venue=False):
         frozen,files,source,venue,global_old,global_new=self.fixture(root)
+        if duplicate_inherited_venue:
+            # Two frozen legacy relationship rows may share a physical venue key;
+            # they are inherited authority, not two new venue registrations.
+            first=dict(venue,venue_key="legacy-gym",venue_id="VEN-000001",
+                       canonical_name="Legacy Gym",relationship_start="1960-1961")
+            second=dict(first,relationship_start="1964-1965")
+            supplement=dict(venue,relationship_start="")
+            fields=list(first)
+            original_rows=[first,second]
+            files["schools/sample/venues.csv"]=csv_encoded(original_rows,fields)
+            (frozen/"venues.csv").write_bytes(csv_encoded(original_rows+[supplement],fields))
+            manifest=json.loads((frozen/MANIFEST_NAME).read_bytes())
+            manifest["baseline_package_member_sha256"]["venues.csv"]=sha256(
+                files["schools/sample/venues.csv"])
+            manifest["candidate_member_sha256"]["venues.csv"]=sha256(
+                (frozen/"venues.csv").read_bytes())
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+            (frozen/MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
         def rebase(programs,aliases,opp,sources):
             return opp, ([dict(sources[0],season_label="1999-2000")]
                          if alter_source else sources),[]
@@ -118,6 +138,14 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             self.assertFalse(result["authorized_live_mutation"])
             self.assertEqual(result["source_game_count"],1)
             self.assertFalse((repo/"schools").exists())
+
+    def test_multiple_inherited_venue_relationship_rows_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo=Path(tmp)/"repo";repo.mkdir()
+            result=self.evaluate(repo,duplicate_inherited_venue=True)
+            self.assertEqual(result["inherited_venue_rows_preserved_without_rebase"],2)
+            self.assertEqual(result["supplemental_venue_rows_rebased"],1)
+            self.assertEqual(result["global_venue_registration_count"],1)
 
     def test_current_main_drift_stops_without_output(self):
         with tempfile.TemporaryDirectory() as tmp:
