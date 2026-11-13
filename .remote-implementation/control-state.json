@@ -571,15 +571,15 @@
   "active_lock_commit": "e8fdb9b11e6a9d3780b88b5ebcb87e370a08a329",
   "active_lock_owner": "github-actions:43466205370:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38",
+  "active_prepared_tree_sha": "2de2fd26ca3553e5ac2469de4d3e2f245f614319",
   "active_request_id": "george-mason-expansion-stage2-current-main-refresh-0001",
   "active_request_sha256": "d148b037cb77f4ecd8ff57f0299967abbcf999744b982074f6f56a0977ef4cf4",
   "active_school_key": "george-mason",
   "active_target_branch": "data/george-mason-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/george-mason/george-mason-expansion-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "e113f49d7c0bd5ce230ba07e00bd7a4a3dad9d37b74500c4154eb606b1f0d366",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1147,5 +1147,5 @@
   "lock_acquisition_request_commit": "b4a8a9d3e2bc45d35a3b4ebcbce3e36740e4617b",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
