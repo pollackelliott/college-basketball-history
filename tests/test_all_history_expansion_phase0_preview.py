@@ -61,7 +61,7 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             "kind":"ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
             "status":"INTEGRATION_FROZEN",
             "school_key":"sample","protected_main_sha":"a"*40,"research_base_sha":"b"*40,
-            "candidate_member_sha256":baseline,
+            "candidate_member_sha256":{k:sha256(artifacts[k]) for k in PACKAGE_FILES},
             "stage1_report_sha256":sha256(artifacts[STAGE1_REPORT]),
             "baseline_package_member_sha256":baseline,
             "baseline_program_row_sha256":canonical_row_sha256(program),
