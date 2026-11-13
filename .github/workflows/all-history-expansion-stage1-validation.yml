@@ -5,6 +5,14 @@ on:
     paths:
       - 'tools/expansion_implementation_stage1.py'
       - 'tests/test_expansion_implementation_stage1.py'
+      - 'tools/all_history_expansion_venue_guard.py'
+      - 'tests/test_all_history_expansion_venue_guard.py'
+      - 'tools/all_history_expansion_remote_contract.py'
+      - 'tests/test_all_history_expansion_remote_contract.py'
+      - 'tools/all_history_expansion_phase0_preview.py'
+      - 'tests/test_all_history_expansion_phase0_preview.py'
+      - 'tools/all_history_expansion_integration.py'
+      - 'tests/test_all_history_expansion_integration.py'
       - '.github/workflows/all-history-expansion-stage1-validation.yml'
   workflow_dispatch:
 
@@ -24,5 +32,11 @@ jobs:
           python-version: '3.11'
       - name: Expansion Stage 1 focused regression
         run: python -m unittest discover -s tests -p 'test_expansion_implementation_stage1.py' -v
+      - name: Expansion venue identity and remote transaction pure-contract regressions
+        run: |
+          python -m unittest discover -s tests -p 'test_all_history_expansion_venue_guard.py' -v
+          python -m unittest discover -s tests -p 'test_all_history_expansion_remote_contract.py' -v
+          python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
+          python -m unittest discover -s tests -p 'test_all_history_expansion_integration.py' -v
       - name: Full repository unittest nonregression
         run: python -m unittest discover -s tests -p 'test_*.py'
