@@ -24,6 +24,7 @@ from stage_research_portfolio import (
     rebase_program_aliases,
 )
 from expansion_implementation_stage1 import render_csv
+from all_history_expansion_venue_guard import census as venue_identity_census, require_clean as require_venue_identity_clean
 
 
 def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
@@ -107,6 +108,14 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_INHERITED_OPPONENT_ORDER_OR_IDENTITY_CHANGED")
     new_venues=venues[len(old_venues):]
     new_opponents=opponents[len(old_opponents):]
+    # Preserve the whole conflict census for review. This is not authority to
+    # register a new VEN ID, assume alias equivalence, or rewrite historic city.
+    venue_identity = venue_identity_census(new_venues,global_venues,global_names)
+    if venue_identity["blocker_count"]:
+        output.mkdir(parents=True)
+        (output/"phase0-venue-identity-blockers.json").write_bytes(
+            canonical_bytes(venue_identity))
+    require_venue_identity_clean(venue_identity)
     require(len(new_venues)==manifest["venue_support_actions"]["NEW_SUPPLEMENTAL"],
             "PHASE0_PREVIEW_NEW_VENUE_SUPPORT_POPULATION_CHANGED")
     require(len(new_opponents)==manifest["opponent_support_actions"]["NEW_SUPPLEMENTAL"],
@@ -197,6 +206,7 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         "inherited_source_game_count":manifest["source_preservation"]["inherited_count"],
         "supplemental_source_game_count":manifest["source_preservation"]["supplemental_count"],
         "global_venue_registration_count":len(registered),
+        "venue_identity_census":venue_identity,
         "new_global_venue_ids_and_keys":[{"venue_id":x["venue_id"],
                     "venue_key":x["venue_key"]} for x in registered],
         "rebased_venue_mapping_count":len(venue_mappings),
