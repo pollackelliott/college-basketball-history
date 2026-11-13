@@ -75,6 +75,17 @@ class PresentationReleaseReadinessTests(unittest.TestCase):
             "approved_plan_hash": "f" * 64,
             "changed_paths": list(self.old_paths),
         }
+        self.original_apply_record = {
+            "changed_file_sha256": dict(self.old_hashes),
+            "deleted_paths": [],
+        }
+        self.original_apply_path = (
+            ".remote-implementation/successors/example/original-seal/successor-manifest.json"
+        )
+        self.original_apply_ref = {
+            "path": self.original_apply_path,
+            "sha256": hashlib.sha256(json_bytes(self.original_apply_record)).hexdigest(),
+        }
         self.successor = {
             "schema_version": 1,
             "kind": "REMOTE_IMPLEMENTATION_PRESENTATION_REFRESH_SUCCESSOR",
@@ -92,7 +103,7 @@ class PresentationReleaseReadinessTests(unittest.TestCase):
             "deleted_paths": [],
             "approved_plan_hash": "f" * 64,
             "release_manifest_sha256": "e" * 64,
-            "stage2_apply_successor": {"path": "control/apply.json", "sha256": "a" * 64},
+            "stage2_apply_successor": self.original_apply_ref,
             "stage2_apply_verification": {"path": "control/apply-verified.json", "sha256": "b" * 64},
             "repair_main_sha": self.main,
             "sealed_tree_sha": self.sealed_tree,
@@ -128,6 +139,8 @@ class PresentationReleaseReadinessTests(unittest.TestCase):
         git(self.repo, "checkout", "-qb", "control", self.base)
         (self.repo / self.succ_path).parent.mkdir(parents=True, exist_ok=True)
         (self.repo / self.fresh_path).parent.mkdir(parents=True, exist_ok=True)
+        (self.repo / self.original_apply_path).parent.mkdir(parents=True, exist_ok=True)
+        (self.repo / self.original_apply_path).write_bytes(json_bytes(self.original_apply_record))
         (self.repo / self.succ_path).write_bytes(json_bytes(self.successor))
         (self.repo / self.fresh_path).write_bytes(json_bytes(self.fresh))
         self.control = self.commit("archived signed presentation proof")
