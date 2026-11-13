@@ -1,9 +1,10 @@
 name: George Mason exact expansion Stage 1 rehearsal
+# temporary exact-current-main rehearsal
 on:
   pull_request:
     paths: ['.github/workflows/george-mason-expansion-stage1-rehearsal.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
   authentic-stage1:
     runs-on: ubuntu-latest
@@ -17,7 +18,7 @@ jobs:
           python-version: '3.12'
       - name: Authenticate protected main and immutable Research base
         run: |
-          test "$(git rev-parse refs/remotes/origin/main)" = "d197f9d33f1ad18b8377d69bf3cd1e015cb901b8"
+          test "$(git rev-parse refs/remotes/origin/main)" = "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb"
           test "$(git rev-parse --verify df73675852ec5a43dfac50da0ee06d8bcabf8832^{commit})" = "df73675852ec5a43dfac50da0ee06d8bcabf8832"
           test -z "$(git status --porcelain --untracked-files=no)"
       - name: Retrieve unreferenced Git blob and verify exact original frozen ZIP bytes
@@ -70,9 +71,9 @@ jobs:
       - name: Run permanent exact-current-main Stage 1 twice without repository mutation
         run: |
           mkdir -p "${RUNNER_TEMP}/gmu-stage1"
-          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha d197f9d33f1ad18b8377d69bf3cd1e015cb901b8 --repo . --output "${RUNNER_TEMP}/gmu-stage1/a" >"${RUNNER_TEMP}/gmu-stage1/run-a.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"; exit 1; }
+          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha 5171c84922c7b88ad6df023d3e4ae5fa94fd5edb --repo . --output "${RUNNER_TEMP}/gmu-stage1/a" >"${RUNNER_TEMP}/gmu-stage1/run-a.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"; exit 1; }
           cat "${RUNNER_TEMP}/gmu-stage1/run-a.log"
-          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha d197f9d33f1ad18b8377d69bf3cd1e015cb901b8 --repo . --output "${RUNNER_TEMP}/gmu-stage1/b" >"${RUNNER_TEMP}/gmu-stage1/run-b.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"; exit 1; }
+          python tools/expansion_implementation_stage1.py george-mason "${RUNNER_TEMP}/george-mason-expansion-research-frozen.zip" --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 --main-sha 5171c84922c7b88ad6df023d3e4ae5fa94fd5edb --repo . --output "${RUNNER_TEMP}/gmu-stage1/b" >"${RUNNER_TEMP}/gmu-stage1/run-b.log" 2>&1 || { cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"; exit 1; }
           cat "${RUNNER_TEMP}/gmu-stage1/run-b.log"
       - name: Independent byte-level two-rehearsal proof and complete population inventory
         run: |
@@ -111,7 +112,7 @@ jobs:
           if subprocess.check_output(["git","status","--porcelain","--untracked-files=no"]).strip():
               raise SystemExit("tracked repository mutation detected")
           proof={"status":"INDEPENDENTLY_REPRODUCED_READ_ONLY_STAGE1",
-                 "protected_main_sha":"d197f9d33f1ad18b8377d69bf3cd1e015cb901b8",
+                 "protected_main_sha":"5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
                  "research_base_sha":"df73675852ec5a43dfac50da0ee06d8bcabf8832",
                  "freeze_zip_sha256":"bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
                  "identity_counts":identity["counts"],
@@ -179,7 +180,7 @@ jobs:
             python tools/all_history_expansion_integration.py freeze george-mason "$RUNNER_TEMP/george-mason-expansion-research-frozen.zip" \
               --expected-sha256 bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236 \
               --research-base df73675852ec5a43dfac50da0ee06d8bcabf8832 \
-              --main-sha d197f9d33f1ad18b8377d69bf3cd1e015cb901b8 \
+              --main-sha 5171c84922c7b88ad6df023d3e4ae5fa94fd5edb \
               --independent-proof "$RUNNER_TEMP/gmu-stage1/independent-proof.json" \
               --independent-proof-sha256 "$PROOF_SHA" \
               --venue-reconciliation "$RUNNER_TEMP/gmu-stage1/umbc-venue-reconciliation.json" \
@@ -290,6 +291,8 @@ jobs:
         if: always()
         with:
           name: george-mason-exact-stage1-rehearsal
-          path: ${{ runner.temp }}/gmu-stage1/
+          path: |
+            ${{ runner.temp }}/gmu-stage1/
+            ${{ runner.temp }}/george-mason-expansion-research-frozen.zip
           retention-days: 30
           if-no-files-found: warn
