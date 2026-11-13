@@ -1,40 +1,6 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-mason-expansion-phase0-0001",
-  "school_key": "george-mason",
-  "operation": "EXPANSION_PHASE0",
-  "previous_control_state_commit": "8f8d752dcb4a3921e42de80ea1364f03273871e3",
-  "previous_control_state_sha256": "0619dd1f8dcaa7d761763bfefc741f9fadbe5ae1e6e2559860f71f1c317a6e82",
-  "expected_protected_main_sha": "5171c84922c7b88ad6df023d3e4ae5fa94fd5edb",
-  "target_branch": "data/george-mason-onboarding",
-  "target_sha": "adca1cb9d9a882ad68520961dd95f324d873a075",
-  "research_freeze_sha256": "bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
-  "stage1_independent_proof_sha256": "5d2be4afe287e9cf8bde343c389439d706588ce7fe6c90f93ebb5e5ad5a5bf43",
-  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
-  "expansion_research_checkpoint": {
-    "sha256": "bd3d550907b8d761eb7000c1f5d934f24d5a3c96b47e054d49a173c5e1295236",
-    "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "f259a2f8fd3f4e02bc388ee95d285df719d6e0c2",
-      "path_prefix": ".remote-implementation/transports/george-mason/expansion-phase0-0001/",
-      "part_count": 1
-    }
-  },
-  "stage1_independent_proof": {
-    "path": ".remote-implementation/payloads/george-mason/george-mason-expansion-phase0-0001/stage1-independent-proof.json",
-    "sha256": "5d2be4afe287e9cf8bde343c389439d706588ce7fe6c90f93ebb5e5ad5a5bf43"
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/payloads/george-mason/george-mason-expansion-phase0-0001/venue-reconciliation.json",
-    "sha256": "7fdfd39970ac63af563444a7efcde57225846474a9aade1da95f18ab4913b931"
-  },
-  "creation_provenance": {
-    "origin": "George Mason ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Owner Proceed under current school-lane Phase 0 delegation after merged PR #576; execute only guarded live EXPANSION_PHASE0 with accepted UMBC explicit reuse. No Stage 2, owner gate, release, recovery, or shared-identity maintenance authority."
-  },
   "authority": {
+    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -45,7 +11,7 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
@@ -54,7 +20,26 @@
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
-    "venue_identity_maintenance": false,
-    "expansion_phase0": true
-  }
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner said Proceed after durable recovery of independently fresh-verified expansion Phase 0 successor 330a5873008d2bdc3afe3ce73d1f4af9c3ce983f. The prior workflow-level STAGE2_CONTINUATION_PROTECTED_MAIN_CHANGED occurred only after successful Phase 0 fresh verification and did not consume a Stage 2 transaction. This request begins the ordinary owner-authorized Stage 2 phase with one read-only STAGE2_CENSUS against current protected main e7f90652b3517c1d301d40c3c8527fca167f812f and the exact Phase 0 successor. It carries no current-main refresh, tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority.",
+    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census"
+  },
+  "expected_protected_main_sha": "e7f90652b3517c1d301d40c3c8527fca167f812f",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-phase0-0001/successor-manifest.json",
+    "sha256": "2025a1dedb9b89469e9bfbae395d2c32f9cd8d84b217951a9c0b5421a2d2832f"
+  },
+  "previous_control_state_commit": "54f805a4a18da5eff3c9eca4777d9ff15594c57c",
+  "previous_control_state_sha256": "f0d4a8ec06871aeb7761a06c91f2acff2f0e8da221e1a4f64b79ba6d27087ee6",
+  "request_id": "george-mason-expansion-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "330a5873008d2bdc3afe3ce73d1f4af9c3ce983f"
 }
