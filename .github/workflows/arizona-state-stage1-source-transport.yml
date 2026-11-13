@@ -1,0 +1,27 @@
+name: Arizona State Stage 1 immutable source transport
+on:
+  push:
+    branches:
+      - tooling/asu-stage1-generic-parent-20261113
+permissions:
+  contents: read
+jobs:
+  exact-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Extract pinned Research-base source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git cat-file blob df73675852ec5a43dfac50da0ee06d8bcabf8832:schools/arizona-state/source-games.csv > /tmp/asu-source-games.csv
+          [[ "$(git hash-object /tmp/asu-source-games.csv)" == "bb2e5ddb63e2caab96c2f3eb33d4d231bf75c875" ]]
+          wc -l /tmp/asu-source-games.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arizona-state-stage1-exact-base-source
+          path: /tmp/asu-source-games.csv
+          retention-days: 2
