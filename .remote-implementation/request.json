@@ -1,42 +1,50 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-mason-expansion-stage2-proposal-recover-0001",
+  "request_id": "george-mason-expansion-stage2-proposal-0003",
   "school_key": "george-mason",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "aad02c572160449fc03a17fa46e5fe0491006289",
-  "previous_control_state_sha256": "79770f0c5baa1c56f82fea8acf4d84a273a0cb4c1abd4a8a87217b0faa829171",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "28bec875f332202123bdb892ecf04e60f18d6b20",
+  "previous_control_state_sha256": "e62b6453a4304a2c7e7a4a6ad07b43943a0f5b805f95bd265f6de701a88e51ee",
   "expected_protected_main_sha": "059affedf2e51ae3ade5144b046d2eee3b80f83c",
-  "recovery": {
-    "abandoned_request_id": "george-mason-expansion-stage2-proposal-0001",
-    "lock_commit": null,
-    "target_branch": null
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-census-0006/checkpoint-manifest.json",
+    "sha256": "453096c70c940e8e6f4c211b63ebccbd608153b8cfb76c303116c95f5efdb1b1"
   },
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/george-mason-expansion-stage2-proposal-0003/recommendation-map.json",
+    "sha256": "ceef0fc589611f8026a1154f55abade09b74dec4290ca14561799946cfba7c74"
+  },
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "creation_provenance": {
-    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — deterministic read-only proposal recovery",
-    "authorization": "The already-authorized George Mason Stage 2 phase includes deterministic safe recovery. The accepted read-only STAGE2_PROPOSAL_REHEARSAL request george-mason-expansion-stage2-proposal-0001 failed on REQUEST_PAYLOAD_HASH_MISMATCH before proposal execution. Durable control records no write-ahead, no prepared commit/tree, no mutation lock, and the George Mason onboarding ref remains 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd. The original accepted request bytes independently match active_request_sha256 dd1cd4ba65178ad550630a5418aab01fb60c53c130c70e7729777d2ef99e2597. Authorize only permanent RECOVER to classify the exact failed accepted request and abandon it if NOT_ATTEMPTED or PREPARED_NOT_PUBLISHED, returning global control safely to IDLE. No replay, Stage 2 proposal execution, tracked basketball mutation, current-main refresh, owner gate, release, merge, or shared/global basketball mutation is authorized by this recovery request."
+    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — recovered exact zero-decision recommendation-map rehearsal",
+    "authorization": "The existing owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Failed accepted proposal request george-mason-expansion-stage2-proposal-0001 was permanently recovered as NOT_ATTEMPTED by george-mason-expansion-stage2-proposal-recover-0001; fresh recovery verification passed, control returned IDLE, and the George Mason onboarding successor remained exactly 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd. Fresh-verified census george-mason-expansion-stage2-census-0006 remains CAPABILITY_CENSUS_READY with zero blockers, zero warnings, zero decisions, zero new canonical games, 1455 existing-game matches, and exact decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945. Protected main advanced only through governance/SOP documentation from 2ec9329e965bbd7e58d5e6464d5e8632daa2c472 to 059affedf2e51ae3ade5144b046d2eee3b80f83c; no basketball/tool runtime path changed. This request transports the identical zero-decision recommendation-map bytes from the abandoned request, now correctly bound to SHA-256 ceef0fc589611f8026a1154f55abade09b74dec4290ca14561799946cfba7c74. It carries no Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, tracked basketball mutation, recovery, or Owner Gate 2 authority."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "expansion_phase0": false,
-    "recovery": true,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
-    "stage2_sealed_apply": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
-    "release_preview_verify": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   }
 }
