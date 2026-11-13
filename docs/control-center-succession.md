@@ -133,6 +133,8 @@ Once the owner has authorized a school Research stage or Implementation phase, a
 
 That delegation is **phase/family-persistent, not one-PR-only**. If a second manifestation in the same generic defect family could not be mechanically observed until the first repair or a required deterministic state transition completed, the school lane may perform the dependent follow-on repair and exact-head merge under the same stage/phase authority. The lane must document the dependency, add regression coverage for the newly reachable topology, and rerun the full permanent coordinator. A repeated unchanged failure or an expanding/unclear defect family should stop at a durable same-phase checkpoint, but does not require Control Center review unless authority, shared/global basketball state, mutation scope, serialized ownership, or recovery safety actually changes.
 
+Likewise, `recovery_required=true` is not automatically Control Center work. When an accepted request is read-only or permanent recovery proves no tracked target publication (`NOT_ATTEMPTED` / `PREPARED_NOT_PUBLISHED`), the school lane should execute exact evidence-first recovery/abandonment, return control to `IDLE`, correct the mechanical request defect, and resume the same authorized phase with a new request ID. Escalate recovery only for ambiguous/diverged mutation state, materially changed authority, or a recovery action that itself needs new historical/shared mutation permission.
+
 The school lane may carry that repair through merge when all of the following remain true:
 
 - the diff is confined to generic tooling, tests, workflows, and documentation;
