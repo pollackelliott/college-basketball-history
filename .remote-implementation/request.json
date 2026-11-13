@@ -1,50 +1,49 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-mason-expansion-stage2-proposal-0003",
-  "school_key": "george-mason",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "28bec875f332202123bdb892ecf04e60f18d6b20",
-  "previous_control_state_sha256": "e62b6453a4304a2c7e7a4a6ad07b43943a0f5b805f95bd265f6de701a88e51ee",
-  "expected_protected_main_sha": "059affedf2e51ae3ade5144b046d2eee3b80f83c",
-  "target_branch": "data/george-mason-onboarding",
-  "target_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd",
-  "stage2_authority": {
-    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-census-0006/checkpoint-manifest.json",
-    "sha256": "453096c70c940e8e6f4c211b63ebccbd608153b8cfb76c303116c95f5efdb1b1"
-  },
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/george-mason-expansion-stage2-proposal-0003/recommendation-map.json",
-    "sha256": "ceef0fc589611f8026a1154f55abade09b74dec4290ca14561799946cfba7c74"
-  },
-  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
-  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
-  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-  "creation_provenance": {
-    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — recovered exact zero-decision recommendation-map rehearsal",
-    "authorization": "The existing owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Failed accepted proposal request george-mason-expansion-stage2-proposal-0001 was permanently recovered as NOT_ATTEMPTED by george-mason-expansion-stage2-proposal-recover-0001; fresh recovery verification passed, control returned IDLE, and the George Mason onboarding successor remained exactly 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd. Fresh-verified census george-mason-expansion-stage2-census-0006 remains CAPABILITY_CENSUS_READY with zero blockers, zero warnings, zero decisions, zero new canonical games, 1455 existing-game matches, and exact decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945. Protected main advanced only through governance/SOP documentation from 2ec9329e965bbd7e58d5e6464d5e8632daa2c472 to 059affedf2e51ae3ade5144b046d2eee3b80f83c; no basketball/tool runtime path changed. This request transports the identical zero-decision recommendation-map bytes from the abandoned request, now correctly bound to SHA-256 ceef0fc589611f8026a1154f55abade09b74dec4290ca14561799946cfba7c74. It carries no Owner Gate 1 approval/fill, sealing, apply, release, Preview, merge, Production, tracked basketball mutation, recovery, or Owner Gate 2 authority."
-  },
   "authority": {
+    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "expansion_phase0": false,
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — fresh census after generic publication-coverage planner repair",
+    "authorization": "Existing owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Generic tooling PR #591 merged as protected main e10f7c7f35f444d62e847cdb2a20f76101bb737b after exact-head full validation and an exact blocked-proposal candidate-runtime rehearsal that resolved to OWNER_GATE_1_READY. This request invalidates the stale pre-repair census/universe/map fingerprints and runs a fresh permanent read-only STAGE2_CENSUS against unchanged onboarding successor 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd, preserving the frozen George Mason authority, Phase 0 result, and accepted 1978-79+ top-level scope while processing COMPLETE_INSTITUTIONAL publication coverage. No tracked basketball mutation, proposal rehearsal, Gate 1 approval, fill/seal/apply, release, merge, recovery, or shared/global basketball mutation authority is included."
+  },
+  "expected_protected_main_sha": "e10f7c7f35f444d62e847cdb2a20f76101bb737b",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-phase0-0001/successor-manifest.json",
+    "sha256": "2025a1dedb9b89469e9bfbae395d2c32f9cd8d84b217951a9c0b5421a2d2832f"
+  },
+  "previous_control_state_commit": "541db8c4dd0c450e55d06d6d7244ccc828de6c69",
+  "previous_control_state_sha256": "ba91fb76c84959be190be999ec74da222b68773b5716a74be532eba117b7555f",
+  "request_id": "george-mason-expansion-stage2-census-0007",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "6ad9e3b2c76348ce2f430f5a0c62c301a38bb398cf82cb6b484ae484978bfcb3"
+  },
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd"
 }

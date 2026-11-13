@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT George Mason ALL_HISTORY_EXPANSION serialized Implementation Stage 2 — fresh census after generic publication-coverage planner repair",
+    "authorization": "Existing owner-authorized George Mason Stage 2 phase persists through OWNER_GATE_1_READY. Generic tooling PR #591 merged as protected main e10f7c7f35f444d62e847cdb2a20f76101bb737b after exact-head full validation and an exact blocked-proposal candidate-runtime rehearsal that resolved to OWNER_GATE_1_READY. This request invalidates the stale pre-repair census/universe/map fingerprints and runs a fresh permanent read-only STAGE2_CENSUS against unchanged onboarding successor 8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd, preserving the frozen George Mason authority, Phase 0 result, and accepted 1978-79+ top-level scope while processing COMPLETE_INSTITUTIONAL publication coverage. No tracked basketball mutation, proposal rehearsal, Gate 1 approval, fill/seal/apply, release, merge, recovery, or shared/global basketball mutation authority is included."
+  },
+  "expected_protected_main_sha": "e10f7c7f35f444d62e847cdb2a20f76101bb737b",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-phase0-0001/successor-manifest.json",
+    "sha256": "2025a1dedb9b89469e9bfbae395d2c32f9cd8d84b217951a9c0b5421a2d2832f"
+  },
+  "previous_control_state_commit": "541db8c4dd0c450e55d06d6d7244ccc828de6c69",
+  "previous_control_state_sha256": "ba91fb76c84959be190be999ec74da222b68773b5716a74be532eba117b7555f",
+  "request_id": "george-mason-expansion-stage2-census-0007",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "6ad9e3b2c76348ce2f430f5a0c62c301a38bb398cf82cb6b484ae484978bfcb3"
+  },
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "8054632b046b51ea841d7ae97a5ad0fe8fd4b1dd"
+}
