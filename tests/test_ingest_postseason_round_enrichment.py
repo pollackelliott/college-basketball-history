@@ -497,6 +497,22 @@ class FresnoDisposableIngestionRegressionTests(unittest.TestCase):
                 result = ingest_school.main()
         return result, output.getvalue()
 
+    def run_ingest_dry(self, repo: Path):
+        output = io.StringIO()
+        with patch.object(
+            sys,
+            "argv",
+            [
+                "ingest_school.py",
+                SCHOOL,
+                "--repo",
+                str(repo),
+            ],
+        ):
+            with contextlib.redirect_stdout(output):
+                result = ingest_school.main()
+        return result, output.getvalue()
+
     def run_verifier(self, repo: Path):
         output = io.StringIO()
         with patch.object(
@@ -512,6 +528,47 @@ class FresnoDisposableIngestionRegressionTests(unittest.TestCase):
             with contextlib.redirect_stdout(output):
                 result = verify_program_accomplishments.main()
         return result, output.getvalue()
+
+    def test_complete_institutional_ingestion_processes_pre_top_level_publication_rows(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            self.make_repo(repo)
+
+            program = self.program_row()
+            program.update(
+                {
+                    "program_inception_season": "1966-1967",
+                    "history_coverage_status": "COMPLETE_INSTITUTIONAL",
+                }
+            )
+            write_csv(
+                repo / "data/reference/programs.csv",
+                tuple(program),
+                [program],
+            )
+
+            early = source_game(round_name="", game_type="REGULAR_SEASON")
+            early.update(
+                {
+                    "source_game_id": "FRESNO-S1-1966-67-001",
+                    "season_label": "1966-1967",
+                    "game_date": "1967-01-01",
+                    "raw_text": "1967-01-01 vs. Georgetown L 58-40",
+                }
+            )
+            write_csv(
+                repo / "schools/fresno-state/source-games.csv",
+                SOURCE_FIELDS,
+                [early, source_game()],
+            )
+
+            result, output = self.run_ingest_dry(repo)
+
+            self.assertEqual(result, 0, output)
+            self.assertIn("Publication-eligible source rows:   2", output)
+            self.assertIn("Top-level source rows:              1", output)
+            self.assertIn("Publication-excluded rows preserved:      0", output)
+            self.assertIn("New canonical games:        1", output)
 
     def test_fresno_1982_sweet_sixteen_survives_ingestion_and_verifies(self):
         with tempfile.TemporaryDirectory() as temporary:
