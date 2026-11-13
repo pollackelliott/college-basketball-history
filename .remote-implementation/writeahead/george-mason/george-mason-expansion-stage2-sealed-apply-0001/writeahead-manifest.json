@@ -1,0 +1,78 @@
+{
+  "apply_runtime_tool_sha256": {
+    "tools/onboard_school.py": "aa3344c74a8c689bd64c31543e57cf94dda6d621de020cbbcb53bc10c5b283de",
+    "tools/onboarding_plan.py": "b0cbabdf934494bf619e1cf485c61a54abb61835a072a17f8b4ed4e6e287c9a1"
+  },
+  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+  "approved_plan_sha256": "cfce78f58851c0f166c76886b1d6efa8d0464c71080b750ec836494738138a7e",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "296f51a3e03cd18fff83a12821f622a59a8faad6fa4ba86ee6af9ffe028fb5b4",
+    "data/evidence/game-assertions.csv": "8fb63d2cbfc7c9291b6c35be8dda398a9a6b7fef2e8130af33c57a797bfdd090",
+    "data/reconciliation/onboarding-decisions/george-mason-1cb5cfb48aea.json": "cfce78f58851c0f166c76886b1d6efa8d0464c71080b750ec836494738138a7e",
+    "site/data/manifest.json": "c82a83812493a1cfff738b4938f8c476b4360175cebb1f61a79fc2a6c2c76d53",
+    "site/data/programs.json": "e76a1736925d55d00179c7543fedf043c6dddd013544db0a167198776d7de9af",
+    "site/data/teams/george-mason.json": "8486ca5c4eaddcd22319aa98f11a8b88e8f7998729e279cf6954aa0b2dc2ca0a",
+    "site/data/teams/vcu.json": "984031154355780f4639f3ec57ffcda49a8fce45510c356e6d482340ad988f07"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/onboarding-decisions/george-mason-1cb5cfb48aea.json",
+    "site/data/manifest.json",
+    "site/data/programs.json",
+    "site/data/teams/george-mason.json",
+    "site/data/teams/vcu.json"
+  ],
+  "commit_message": "Apply sealed george-mason onboarding plan",
+  "current_main_preseal": {
+    "approved_plan_hash_preview": "f6dbb47803b7653b561ae1913af2bec638fb88cf6884c57e982e513b0b9ac661",
+    "changed_path_count": 7,
+    "equivalence_sha256": "2f4ddb7e607f80dad08048fbd5a77184b829fd281c9bc338faa02fac84fbe345",
+    "preseal_status": "READY_TO_SEAL",
+    "runtime_tool_sha256": {
+      "tools/onboard_school.py": "aa3344c74a8c689bd64c31543e57cf94dda6d621de020cbbcb53bc10c5b283de",
+      "tools/onboarding_hardening.py": "6c6a7f42c92da6c82471b7d7172e367565d6e2b046813ea5ab9381c957e95077"
+    },
+    "site_gate_normalized_sha256": "b44ea54164331cb65dfb8ad96997da57e57213a6fa131c778ee03f9f556c799c",
+    "tracked_stage2_mutation": "NONE"
+  },
+  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38",
+  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+  "global_lock_commit": "f257d8f7963c773f8b9e466bbddd3a62baad9fdf",
+  "integration_freeze_sha256": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "13776a059424ea263d94e24c37885e0719cf7198b07260e5bee52e58d3a0d023",
+  "prepared_commit_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+  "prepared_parent_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38",
+  "prepared_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
+  "protected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
+  "recommendation_map_sha256": "e67e4020bc8b0650f0afd95ebb0aac304329b9e4418c95bcc3f67c95a625c465",
+  "release_manifest_changed_path_count": 7,
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "repository_validation": "PASS",
+  "request_id": "george-mason-expansion-stage2-sealed-apply-0001",
+  "request_sha256": "ab0ae3ccf2ddd2c500e3afce766b50f42e0cfc0920b9d051a68ab5d53243e65c",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "semantic_snapshot_sha256": "8e34b5ee93f99fbd7b196e6266ca4d41a6e628ca604d4249408c937a7899cd7b",
+  "sidecars": {
+    "approved-plan.json": "cfce78f58851c0f166c76886b1d6efa8d0464c71080b750ec836494738138a7e",
+    "current-main-preseal.json": "d439f407d13981cd23dda2dcd33ea61cb8bb550b1ccfb299f3542b0346ab4f19",
+    "integration-freeze.json": "0ccd02972310665a791161310e3d3c0101ce9426e15393897a7041a8c1d2fc0b",
+    "pr-body.md": "9109c793a0571bb7c03a2e1bec95d30eac3160d7157f847ef744d91a67758732",
+    "release-manifest.json": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+    "seal-checkpoint-manifest.json": "68719c9f5b780465306e3202e98a9f75bf8ffcd1003b095206f86efbd70ee61c",
+    "seal-verification.json": "1da338b5c8fca77505b8ab94d62daeece9c834106300018e60d5dd31fa885dc0",
+    "visual-qa.md": "ab96f139c283eb3d9e23a9b5636a54e913d867b022513406586492133cbc1123"
+  },
+  "stage2_gate1_seal_checkpoint_path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-stage2-gate1-seal-0001/checkpoint-manifest.json",
+  "stage2_gate1_seal_checkpoint_sha256": "68719c9f5b780465306e3202e98a9f75bf8ffcd1003b095206f86efbd70ee61c",
+  "stage2_gate1_seal_verification_path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+  "stage2_gate1_seal_verification_sha256": "1da338b5c8fca77505b8ab94d62daeece9c834106300018e60d5dd31fa885dc0",
+  "target_branch": "data/george-mason-onboarding"
+}
