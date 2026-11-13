@@ -70,9 +70,14 @@ class AllHistoryExpansionImplementationAcceptanceTests(unittest.TestCase):
     def test_curated_suite_includes_all_owner_phase_boundaries(self):
         patterns = set(acceptance.ACCEPTANCE_TEST_PATTERNS)
         required = {
+            "test_all_history_expansion_integration.py",
+            "test_all_history_expansion_venue_guard.py",
             "test_remote_implementation_expansion_phase0.py",
             "test_implementation_stage2.py",
             "test_remote_implementation_stage2_gate1_fill.py",
+            "test_remote_implementation_stage2_preseal.py",
+            "test_remote_implementation_stage2_seal.py",
+            "test_remote_implementation_stage2_apply.py",
             "test_remote_implementation_stage2_continuation.py",
             "test_remote_implementation_release_readiness.py",
             "test_remote_implementation_release_preview.py",
