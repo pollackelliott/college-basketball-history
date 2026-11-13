@@ -13,7 +13,7 @@ from all_history_expansion_remote_contract import (
     OP_EXPANSION_PHASE0,authenticate_intent,prove_lock_contract,
     inspect_recovery,check_cas,verify_exact_prepared,exact_paths,
 )
-from remote_implementation_control import initial_control_state
+from remote_implementation_control import initial_control_state, RemoteImplementationError
 
 
 class ExpansionTransactionModelTests(unittest.TestCase):
@@ -189,6 +189,13 @@ class ExpansionTransactionModelTests(unittest.TestCase):
         self.assertEqual(active["active_lock_commit"],"2"*40)
         with self.assertRaisesRegex(IntegrationAuthorityError,"GLOBAL_LOCK_OCCUPIED"):
             prove_lock_contract(active,request,b"request-bytes","1"*40,"3"*40)
+
+    def test_consumed_request_id_cannot_acquire_global_lock_again(self):
+        request=dict(self.request,request_id="expansion-test-consumed")
+        state=initial_control_state()
+        state["consumed_request_ids"].append(request["request_id"])
+        with self.assertRaisesRegex(RemoteImplementationError,"REQUEST_REPLAY_REFUSED"):
+            prove_lock_contract(state,request,b"request-bytes","1"*40,"2"*40)
 
     def test_recovery_before_writeahead_classifies_not_attempted(self):
         classification=inspect_recovery(
