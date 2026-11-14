@@ -1,0 +1,13 @@
+{
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "VCU_EXPANSION_PHASE0_PREPARATION",
+  "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_freeze_sha256": "00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9",
+  "school_key": "vcu",
+  "stage1_independent_proof_sha256": "ae75d07502b731dd4cf0141b0f920d33531e4b09c25117a7fa3010cb56291f04",
+  "status": "READY_TO_SUBMIT_GUARDED_EXPANSION_PHASE0",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "tracked_mutation": "NONE_PREPARATION_ONLY"
+}
