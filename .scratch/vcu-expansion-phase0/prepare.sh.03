@@ -1,0 +1,58 @@
+ raise SystemExit('remote control is not idle/complete')
+if state.get('recovery_required') is not False:
+    raise SystemExit('remote control requires recovery')
+for key in ('active_school_key','active_request_id','active_lock_commit'):
+    if state.get(key) is not None:
+        raise SystemExit(f'remote control has active field: {key}')
+used=set(state.get('accepted_request_ids') or [])
+used.update(state.get('consumed_request_ids') or [])
+used.update(state.get('abandoned_request_ids') or [])
+if request_id in used:
+    raise SystemExit('VCU expansion request ID already used')
+PY
+
+PREFIX=.remote-implementation/transports/vcu/expansion-phase0-0001
+PAYLOAD=.remote-implementation/payloads/vcu/${REQUEST_ID}
+mkdir -p "/tmp/control/${PREFIX}" "/tmp/control/${PAYLOAD}"
+base64 --wrap=0 /tmp/vcu-freeze.zip \
+  | split --bytes=60000 --numeric-suffixes=0 --suffix-length=4 - "/tmp/control/${PREFIX}/part-"
+PART_COUNT="$(find "/tmp/control/${PREFIX}" -maxdepth 1 -type f | wc -l | tr -d ' ')"
+test "${PART_COUNT}" = "4"
+cat "/tmp/control/${PREFIX}"/part-* | base64 --decode > /tmp/control-reconstructed-freeze.zip
+test "$(sha256sum /tmp/control-reconstructed-freeze.zip | awk '{print $1}')" = "${FREEZE_SHA}"
+cp /tmp/stage1-independent-proof.json "/tmp/control/${PAYLOAD}/stage1-independent-proof.json"
+cp /tmp/vcu-prep-artifacts/preparation-summary.json "/tmp/control/${PAYLOAD}/preparation-summary.json"
+
+git -C /tmp/control add -- "${PREFIX}" "${PAYLOAD}"
+git -C /tmp/control commit -m "[remote-implementation-internal] stage VCU expansion Phase 0 inputs"
+TRANSPORT_COMMIT="$(git -C /tmp/control rev-parse HEAD)"
+git -C /tmp/control push origin HEAD:refs/heads/${CONTROL_BRANCH} \
+  --force-with-lease=refs/heads/${CONTROL_BRANCH}:${EXPECTED_CONTROL_SHA}
+
+STATE_SHA="$(sha256sum "${CONTROL_STATE}" | awk '{print $1}')"
+TRANSPORT_COMMIT="${TRANSPORT_COMMIT}" STATE_SHA="${STATE_SHA}" \
+MAIN_SHA="${MAIN_SHA}" PROOF_SHA="${PROOF_SHA}" INTEGRATION_SHA="${INTEGRATION_SHA}" \
+PART_COUNT="${PART_COUNT}" PREFIX="${PREFIX}/" PAYLOAD="${PAYLOAD}" \
+python - <<'PY'
+import json, os
+from pathlib import Path
+authority={
+    'owner_gate_1':False,'owner_gate_2':False,
+    'phase0':False,'phase0_scope_supersession':False,
+    'recovery':False,'release':False,
+    'release_gate2_approval':False,'release_preview_verify':False,
+    'release_production_proof':False,'release_readiness':False,
+    'stage2_census':False,'stage2_current_main_refresh':False,
+    'stage2_gate1_fill':False,'stage2_gate1_seal':False,
+    'stage2_opponent_display_normalize':False,
+    'stage2_preseal_rehearsal':False,
+    'stage2_proposal_rehearsal':False,
+    'stage2_reconciliation_diagnostic':False,
+    'stage2_sealed_apply':False,'venue_identity_maintenance':False,
+    'expansion_phase0':True,
+}
+request={
+    'schema_version':1,
+    'kind':'REMOTE_IMPLEMENTATION_REQUEST',
+    'request_id':'vcu-expansion-phase0-0001',
+    'sc
