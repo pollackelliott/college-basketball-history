@@ -14,45 +14,47 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
+    "stage2_gate1_seal": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": true,
+    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-expansion-stage2-gate1-fill-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-expansion-stage2-preseal-0001",
     "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "f261006cc0bb9b5de907f3fcac741e35eb4f1ae00a793eeeebad9b533db80eb6",
   "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+  "equivalence_sha256": "200e5ee0a0d10299522f20fecfab2b844653c2fbd2b1682bf6619b9c9fa7988d",
   "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
   "filled_review_sha256": "f183b9cfef041b4c5433b57beb9da964544196480fbbcd40c5374da459d8e52c",
   "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "694e70afa7468b97f2893821f6f26fb80093681c70f3e9b9a3599ac96f3f8cef",
   "phase_continuation": {
     "apply_request_id": "vcu-expansion-stage2-sealed-apply-0001",
     "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
     "preseal_request_id": "vcu-expansion-stage2-preseal-0001",
     "seal_request_id": "vcu-expansion-stage2-gate1-seal-0001"
   },
-  "previous_control_state_commit": "594beec6f099b1b510bac5cff23f7a24f96fedd6",
-  "previous_control_state_sha256": "66ed9049685248372b6efd6970ad23c274fac4a12223fd04e89889a208cc3ce2",
+  "previous_control_state_commit": "50e2d31480221ef6a73ee6f80f867e8ba4452ff5",
+  "previous_control_state_sha256": "114dab706ae92b99bfa94ba586efa9ea42e632f141d9d4a9191c6cb6d36ac535",
   "recommendation_map_sha256": "da619e7ae0090fbb19ba7b4df571b66cf36266953b49324a635621cb076a1dcb",
-  "request_id": "vcu-expansion-stage2-preseal-0001",
+  "request_id": "vcu-expansion-stage2-gate1-seal-0001",
   "schema_version": 1,
   "school_key": "vcu",
   "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "ad3eacf37bc8ce616052d5d098da34f75ebba9ce669352f894973800a22404ab"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-stage2-preseal-0001/checkpoint-manifest.json",
+    "sha256": "23a9ae26223788467a9bdb19b5625817d09cd1618d9974c9dd3e9c831d992413"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/vcu/vcu-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "9d9718e4315e36ad6850867245c3705e7f9427e083a916a1495cfcc3e80a1532"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-expansion-stage2-preseal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "7b6201b773f2c56a751add28cb37b0fedc4407bad444e917c848ae5f5579e39a"
   },
   "target_branch": "data/vcu-onboarding",
   "target_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1"
