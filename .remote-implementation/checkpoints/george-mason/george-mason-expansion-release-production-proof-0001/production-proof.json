@@ -1,0 +1,24 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "ed658b706aa7d215b7a1d99f88ed282c37a710ec",
+  "merge_parent_onboarding": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "merge_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
+  "owner_gate_2_approval_checkpoint_sha256": "0393e5abfad8b496c45f79fe062b490be37c19f996407b0daa7d1bf54e99f719",
+  "owner_gate_2_verification_sha256": "e6658edc741a4d6c35bf34ce041ee2df9332982154e68b46fd7f7e8e0a94087f",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "pr_number": 597,
+  "production_deployment_id": 7788096383,
+  "production_deployment_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/george-mason.json",
+    "/data/teams/vcu.json"
+  ],
+  "production_json_checked_count": 4,
+  "school_key": "george-mason",
+  "status": "COMPLETE"
+}

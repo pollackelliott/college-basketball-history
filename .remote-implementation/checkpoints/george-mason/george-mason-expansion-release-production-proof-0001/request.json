@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-mason-expansion-release-production-proof-0001",
+  "school_key": "george-mason",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "3b08f0b073d4b6599f2bca31c4b841a093599e7f",
+  "previous_control_state_sha256": "ffc24a333f51df1db4f5a24af7132b0f7c48a97b6662c4b368001fe7558a1f17",
+  "expected_protected_main_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "0393e5abfad8b496c45f79fe062b490be37c19f996407b0daa7d1bf54e99f719"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "e6658edc741a4d6c35bf34ce041ee2df9332982154e68b46fd7f7e8e0a94087f"
+  },
+  "pr_number": 597,
+  "merge_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
+  "creation_provenance": {
+    "origin": "Same George Mason ALL_HISTORY_EXPANSION Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact George Mason expansion Preview with “Approved. Procee,” authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #597 head 9db724322351dc2facdaf2934248b8c34912c3a3 against approved main ed658b706aa7d215b7a1d99f88ed282c37a710ec. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412, now exact protected main with parents ed658b706aa7d215b7a1d99f88ed282c37a710ec and 9db724322351dc2facdaf2934248b8c34912c3a3. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "release_presentation_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}

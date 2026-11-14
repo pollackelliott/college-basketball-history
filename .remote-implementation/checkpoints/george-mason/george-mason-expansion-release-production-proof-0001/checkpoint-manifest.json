@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "ed658b706aa7d215b7a1d99f88ed282c37a710ec",
+  "merge_parent_onboarding": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "merge_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "0393e5abfad8b496c45f79fe062b490be37c19f996407b0daa7d1bf54e99f719",
+  "owner_gate_2_verification_sha256": "e6658edc741a4d6c35bf34ce041ee2df9332982154e68b46fd7f7e8e0a94087f",
+  "pr_head_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "pr_number": 597,
+  "production_deployment_id": 7788096383,
+  "production_json_checked_count": 4,
+  "production_proof": true,
+  "production_proof_sha256": "cf627464f58086458b5f36e1fd47ac533e556f74b32bd6a136b0592a3b898ee0",
+  "protected_main_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
+  "request_id": "george-mason-expansion-release-production-proof-0001",
+  "request_sha256": "74cfda18f00e2bc1defae0b2df7f89c436fe3882f605ae3a1e577902384a049d",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "status": "PRODUCTION_PROOF_PASS"
+}
