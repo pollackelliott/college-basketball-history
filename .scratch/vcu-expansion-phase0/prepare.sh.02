@@ -63,4 +63,4 @@ import json, sys
 state=json.load(open(sys.argv[1]))
 request_id=sys.argv[2]
 if state.get('lifecycle_state') != 'IDLE' or state.get('transaction_state') != 'COMPLETE':
-    
+   
