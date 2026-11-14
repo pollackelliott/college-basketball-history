@@ -76,6 +76,12 @@ ACCEPTANCE_TEST_PATTERNS = (
     "test_remote_implementation_stage2_continuation.py",
     "test_remote_implementation_stage2_refresh.py",
     "test_all_history_universe.py",
+    "test_site_matchup_published_history.py",
+    "test_remote_implementation_presentation_refresh.py",
+    "test_remote_implementation_presentation_publish.py",
+    "test_remote_implementation_presentation_release_readiness.py",
+    "test_george_mason_presentation_rehearsal_ref_contract.py",
+    "test_frozen_release_pr_revalidation_workflow.py",
     "test_remote_implementation_release_readiness.py",
     "test_remote_implementation_release_preview.py",
     "test_remote_implementation_final_release.py",
@@ -238,6 +244,26 @@ def workflow_contract_errors(root: Path) -> list[str]:
     for step in REQUIRED_REMOTE_CONTINUATIONS:
         if step not in remote:
             errors.append(f"remote Implementation orchestration missing: {step}")
+
+    rehearsal = (root / "tools/rehearse_george_mason_presentation.py").read_text(
+        encoding="utf-8"
+    )
+    for snippet in ("refs/pull/597", "refs/pull/607", "exact-gmu-release", "exact-site-fix-source"):
+        if snippet in rehearsal:
+            errors.append(
+                "George Mason presentation regression must not depend on mutable PR refs: "
+                + snippet
+            )
+    for snippet in (
+        'GUARDED_C = "9db724322351dc2facdaf2934248b8c34912c3a3"',
+        '"GUARDED_C_PARENT_MISMATCH"',
+        '"GUARDED_C_TREE_NOT_REPRODUCED"',
+    ):
+        if snippet not in rehearsal:
+            errors.append(
+                "George Mason immutable presentation regression missing contract: "
+                + snippet
+            )
     return errors
 
 def stale_test_contract_errors(root: Path) -> list[str]:
