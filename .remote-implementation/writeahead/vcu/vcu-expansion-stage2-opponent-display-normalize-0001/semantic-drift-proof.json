@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+    "integration_base_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+    "school_key": "vcu",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+    "integration_base_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+    "school_key": "vcu",
+    "status": "PASS"
+  }
+}

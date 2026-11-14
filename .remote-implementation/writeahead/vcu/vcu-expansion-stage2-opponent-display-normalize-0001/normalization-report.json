@@ -1,0 +1,33 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 1,
+  "change_row_count": 1,
+  "changes": [
+    {
+      "authority_names": [
+        "Apprentice School"
+      ],
+      "authority_signature": "apprenticeschool",
+      "canonical_opponent_key": "apprentice-school",
+      "from_names": [
+        "The Apprentice School"
+      ],
+      "target_row_count": 1,
+      "to_name": "Apprentice School"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "vcu",
+  "source_game_display_change_keys": 1,
+  "source_game_display_change_rows": 1,
+  "source_game_display_changes": [
+    {
+      "from_name": "The Apprentice School",
+      "normalized_opponent_key": "apprentice-school",
+      "source_game_id": "VCU-EXP-1968-69-005",
+      "to_name": "Apprentice School"
+    }
+  ],
+  "status": "PASS"
+}
