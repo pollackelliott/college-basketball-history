@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "0cf9a93a0ad4f3070873302d5f184555f8811e4ebe924ecb107eb3aa9e3ee7f4",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "9109c793a0571bb7c03a2e1bec95d30eac3160d7157f847ef744d91a67758732",
+  "pr_created": false,
+  "preview_request_id": "george-mason-expansion-release-preview-verify-0003",
+  "preview_verified": false,
+  "protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+  "readiness_proof_sha256": "a6db341485c8bf83b207bebeeefb3e596ed9a306052174a4ad307eeb5c6e09a0",
+  "release_pr_packet_sha256": "2389c1484ddfd45e28fee2d5077ecf76402c8aa24b0a5d9a1745ce4fb183b7a5",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "george-mason-expansion-release-readiness-0003",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "tracked_mutation": "NONE"
+}
