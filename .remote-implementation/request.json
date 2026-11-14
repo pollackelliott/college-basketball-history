@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-mason-expansion-release-presentation-refresh-0002",
+  "request_id": "george-mason-expansion-release-presentation-refresh-0003",
   "school_key": "george-mason",
   "operation": "RELEASE_PRESENTATION_REFRESH",
-  "previous_control_state_commit": "6eeed09db930472512acdcc9c70dcc8580668a1a",
+  "previous_control_state_commit": "84cbaeb90f8fb1b03305f726da6156d0730aeda9",
   "previous_control_state_sha256": "ef619ed48c30037cc124d57af619c3a55e5e6f4112465ba984e6f3a8813c258c",
-  "expected_protected_main_sha": "051a3fe02ada1dda3ef53efea435fdfb6d3733ce",
+  "expected_protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
   "target_branch": "data/george-mason-onboarding",
   "target_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
   "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
@@ -20,8 +20,8 @@
     "sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef"
   },
   "creation_provenance": {
-    "origin": "George Mason same Implementation — bounded recovery of unaccepted presentation refresh request after control-workflow snapshot synchronization",
-    "authorization": "Owner explicitly authorized same lane to publish ONLY the corrected website asset as a guarded direct child C of original sealed G, per current permanent RELEASE_PRESENTATION_REFRESH and Control Center issue #602. Exact live main 051a3fe02ada1dda3ef53efea435fdfb6d3733ce incorporates merged website PR #607 and permanent tooling PR #608. Prior authentic real George Mason G/C rehearsal GitHub Action #43531100168 PASS establishes 1,769 games and George Mason vs James Madison 102 meetings, 51-51; accepted source asset blob 73328a90c7d8b8dc835663ca6226382cd708698e. Request preserves all G historical games, evidence, records, global registries and public JSON. It authorizes only serial CAS/writeahead and independent fresh verification, then separate C-bound release-readiness, CI and Preview; no Gate 2 approval or merge. Prior attempted request george-mason-expansion-release-presentation-refresh-0001 never passed the workflow-snapshot guard, was never accepted, and never obtained a lock or mutated the target. The only preprocessor repair is to synchronize the exact approved current-main workflow blob to control and bind this fresh request to control predecessor 6eeed09db930472512acdcc9c70dcc8580668a1a with unchanged prior control-state bytes and SHA-256."
+    "origin": "George Mason same Implementation — corrected live-inbox submission after fresh bounded retry",
+    "authorization": "Owner explicitly authorized the same George Mason release-preparation phase to publish ONLY the corrected website asset as a guarded direct child C of original sealed G. Protected main ed7935a045f182a86997ab94dbde7e2e09e2fbbd includes merged website repair PR #607, guarded presentation tooling PR #608, and git-identity repair PR #609. PR #609 exact-head tooling validation and transaction rehearsal passed, including full repository tests and the exact sealed George Mason website-candidate rehearsal. Prior request george-mason-expansion-release-presentation-refresh-0002 failed before request acceptance/lock/write-ahead/target mutation solely because git commit-tree lacked deterministic author/committer identity. The first 0003 control push archived this request but accidentally left the live .remote-implementation/request.json inbox pointing at unaccepted 0002; run #43561105353 therefore failed at protected-main authentication before runner execution or acceptance. This corrected live-inbox submission preserves unchanged state bytes and binds the exact parent control commit. It preserves all G historical games, evidence, records, global registries and public JSON; it authorizes only the guarded presentation-only successor transaction and independent fresh verification, followed separately by C-bound release readiness, CI and Preview. It does not authorize Owner Gate 2 approval or merge."
   },
   "authority": {
     "owner_gate_1": false,
@@ -47,6 +47,6 @@
     "release_presentation_refresh": true
   },
   "sealed_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
-  "repair_main_sha": "051a3fe02ada1dda3ef53efea435fdfb6d3733ce",
+  "repair_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
   "accepted_asset_blob_sha": "73328a90c7d8b8dc835663ca6226382cd708698e"
 }
