@@ -1,0 +1,41 @@
+{
+  "accepted_asset_blob_sha": "73328a90c7d8b8dc835663ca6226382cd708698e",
+  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+  "changed_file_sha256": {
+    "site/index.html": "e61f5b30f14b3dbdc40e0f29028c0710c2cc20a9cc21c943b7dea68db703671d"
+  },
+  "changed_paths": [
+    "site/index.html"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+  "global_lock_commit": "782ab342ea1a263b701c9850a3ff206da7b48a0c",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "RELEASE_PRESENTATION_REFRESH",
+  "owner_gate_2_approved": false,
+  "prepared_commit_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "prepared_parent_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+  "prepared_tree_sha": "e91a9699cea59c0a89834a17f75e682ecfa9ab99",
+  "protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "repair_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+  "repository_validation": "PASS",
+  "request_id": "george-mason-expansion-release-presentation-refresh-0003",
+  "request_sha256": "1f43cadb6a7df8f7dd8bbe98ed8cd24b96e2fbf39013cc331757bab0c8b746fe",
+  "schema_version": 1,
+  "school_key": "george-mason",
+  "sealed_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
+  "sidecars": {
+    "prepared-proof.json": "b6c4a3a7382a5f4ee47273b065ed54e228251d05ce5998eea2fd0608d27fb7f7"
+  },
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "f8c3a9c8281780d640c97f4c15823c289e737f2ff826a043ce19c1488434d757"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef"
+  },
+  "target_branch": "data/george-mason-onboarding"
+}
