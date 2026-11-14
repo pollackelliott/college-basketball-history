@@ -1,0 +1,46 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "479a9a8c02738421d6ed13c8210a038471bf7c39b38f338d6e7751d46dc01e8f",
+    "implementation-stage2-status.json": "94b352150b4e741458ee44a456b891ce520f0f65332b262e8f92a7cb75de4a79",
+    "plan.json": "8c6ef5ceeb97e1e8c1b43b22e4586712fbe7534321246d50e4499b94e847c301",
+    "review.csv": "a8818de5351b49b0afc8f20b7178ad355f0ded451448443d883e3605058ad6af",
+    "review.md": "20448b781578b71279bcf60bbd8a94dbc1262ec3d8129720fa3d52c01341499a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "479a9a8c02738421d6ed13c8210a038471bf7c39b38f338d6e7751d46dc01e8f",
+    "implementation-stage2-status.json": "fca792c020192ecacae833ca9fd843af05bca636f82c4a53bc92180215866579",
+    "plan.json": "b11a0497d7e41501744a0a91d52609b64369b20fcad52f02084b85f4d04194aa",
+    "review.csv": "a8818de5351b49b0afc8f20b7178ad355f0ded451448443d883e3605058ad6af",
+    "review.md": "440d5f6276731998ac706b290be3ffc4b0bac14fde866b351a66180acc3d1af4"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/vcu/opponents.csv",
+    "schools/vcu/source-games.csv"
+  ],
+  "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+  "expected_blocker_keys": [
+    "apprentice-school"
+  ],
+  "field_level_proof_sha256": "7698198f2eea3f88564b337e8d181a31120408e4f8c2b28fc6eca4c1b82ba27b",
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "dfa92f71faa1f6f09eb1972c4100d9b4a431646ea071f63fc6b38e1b1cfe73bd",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "vcu-expansion-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/vcu-onboarding",
+  "target_predecessor_sha": "6e83bffb541577e1feff92b1d185554b4701de1c",
+  "target_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1",
+  "target_tree_sha": "8892006423db2e7943d12566bf118a3dc795fae3",
+  "tracked_stage2_mutation": "NONE"
+}
