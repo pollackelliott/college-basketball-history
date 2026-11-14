@@ -1,0 +1,20 @@
+{
+  "expected_target_predecessor_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "request_id": "vcu-expansion-phase0-0001",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_freeze_sha256": "00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "7480e466aad03c0aadea4eeb803b9358819f69b8e3053188b8e6aac0ea62f49c",
+    "integration-freeze.json": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+    "phase0-preview.json": "ce24d5fc6d6c5d3d1c657698d6ba9f805b4614c1da0ce9cabc46b6eed0e876f2",
+    "stage1-independent-proof.json": "ae75d07502b731dd4cf0141b0f920d33531e4b09c25117a7fa3010cb56291f04"
+  },
+  "stage1_independent_proof_sha256": "ae75d07502b731dd4cf0141b0f920d33531e4b09c25117a7fa3010cb56291f04",
+  "venue_reconciliation_sha256": ""
+}
