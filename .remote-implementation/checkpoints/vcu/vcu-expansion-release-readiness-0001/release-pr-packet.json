@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "b647eb83bfc2a3a3d71e9568471f3dc4c09a0c291034d82b8822473f5788079d",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/vcu/vcu-expansion-release-readiness-0001/pr-body.md",
+  "body_sha256": "174514b93f38be00846bb6443535ba13795ebd1d86371d2e11b69af8d4713dbb",
+  "head_branch": "data/vcu-onboarding",
+  "head_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish VCU history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "vcu-expansion-release-preview-verify-0001",
+  "readiness_request_id": "vcu-expansion-release-readiness-0001",
+  "release_manifest_sha256": "89b323d21e1ec3eaa27be3fea01d07c72c88551e01f8311fc321b73756e47288",
+  "schema_version": 1,
+  "school_key": "vcu"
+}
