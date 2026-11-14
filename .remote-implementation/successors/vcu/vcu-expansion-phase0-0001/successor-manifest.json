@@ -1,0 +1,41 @@
+{
+  "actual_published_target_sha": "6e83bffb541577e1feff92b1d185554b4701de1c",
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "2ad14b78ad91ba08a87fa3c5f788c6a45f49579d94f9e6339fa90377be42b15f",
+    "schools/vcu/notes.md": "5d5365a4e9c74a0f3c2502320224edfaf1e7d28ab0cefe5ee785ceeb6cced4a0",
+    "schools/vcu/opponents.csv": "126b6ae605d15eb598d52dae7e319efc75db97cf7324226237a2a6a35391d2c5",
+    "schools/vcu/source-games.csv": "e42f54b472900729f916edb75036efc40379b461d8b85452099a9a451f61c251",
+    "schools/vcu/source-notes.md": "8b6c4eeb4f8ee12eaed13e5042da0a885a53209a4051383926c9614c22131227",
+    "schools/vcu/venues.csv": "92cb8b75f15cc20235c8e92e9f70c29d658360061fb2eaf57aeb1e7c84162d5f"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "schools/vcu/notes.md",
+    "schools/vcu/opponents.csv",
+    "schools/vcu/source-games.csv",
+    "schools/vcu/source-notes.md",
+    "schools/vcu/venues.csv"
+  ],
+  "expected_target_predecessor_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "15cb7ab8ec42da03ed1882cdd73ab24a2cf59433",
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_SUCCESSOR",
+  "operation": "EXPANSION_PHASE0",
+  "prepared_commit_sha": "6e83bffb541577e1feff92b1d185554b4701de1c",
+  "prepared_parent_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "prepared_tree_sha": "8ffba2a8d56fe2a561b99ef632037d9b453370e1",
+  "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "vcu-expansion-phase0-0001",
+  "request_sha256": "dc7a4432c6ae16fc6b253ba63bbe0213974d2e3241234b36e4bfda4aecd5c412",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "target_branch": "data/vcu-onboarding",
+  "venue_reconciliation_sha256": "",
+  "writeahead_commit": "564eef1e7a29f98a97ea2ec1e709d7e74322a6ee",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/vcu/vcu-expansion-phase0-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "bd0e52db6ccf0c877de467d8a0ae01e8ad32841de80cc3af52054228b7eb46d8"
+}
