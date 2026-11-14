@@ -1,0 +1,43 @@
+name: VCU expansion Phase 0 one-shot preparer
+
+on:
+  push:
+    branches:
+      - scratch/vcu-expansion-phase0-prepare-20261114
+    paths:
+      - '.github/workflows/vcu-expansion-phase0-prepare.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: vcu-expansion-phase0-one-shot-prepare
+  cancel-in-progress: false
+
+jobs:
+  prepare-and-submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate, prepare, stage, and submit guarded VCU request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat .scratch/vcu-expansion-phase0/prepare.sh.* > /tmp/vcu-prepare.sh
+          test "$(sha256sum /tmp/vcu-prepare.sh | awk '{print $1}')" = "b89cc815ad9c9043e1d97d8bd74e1e5ec7545fbaad500e5de7abc123b07a8fbb"
+          bash /tmp/vcu-prepare.sh
+      - name: Preserve read-only preparation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vcu-expansion-phase0-preparation
+          path: /tmp/vcu-prep-artifacts
+          if-no-files-found: ignore
+          retention-days: 30
