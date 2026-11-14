@@ -28,10 +28,17 @@ def require(condition: bool, code: str) -> None:
         raise PresentationRefreshStop(code)
 
 
-def git(repo: Path, *args: str, index_file: str | None = None) -> str:
+def git(
+    repo: Path,
+    *args: str,
+    index_file: str | None = None,
+    env_overrides: dict[str, str] | None = None,
+) -> str:
     env = os.environ.copy()
     if index_file is not None:
         env["GIT_INDEX_FILE"] = index_file
+    if env_overrides:
+        env.update(env_overrides)
     result = subprocess.run(
         ["git", *args], cwd=repo, env=env,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,

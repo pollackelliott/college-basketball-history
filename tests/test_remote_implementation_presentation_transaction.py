@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import json
 import subprocess
 import sys
@@ -16,7 +17,10 @@ sys.path.insert(0, str(ROOT / "tools"))
 from remote_implementation_io import Stop, git_show_bytes as actual_show  # noqa: E402
 from remote_implementation_presentation_refresh import git  # noqa: E402
 from remote_implementation_presentation_transaction import (  # noqa: E402
-    PREPARED_KIND, prepare_presentation_successor,
+    PREPARED_KIND,
+    PRESENTATION_COMMIT_EMAIL,
+    PRESENTATION_COMMIT_NAME,
+    prepare_presentation_successor,
 )
 
 
@@ -120,6 +124,42 @@ class PresentationPreflightTests(unittest.TestCase):
         self.assertEqual(
             git(self.repo, "rev-list", "--parents", "-n", "1", result["prepared_commit_sha"]).split(),
             [result["prepared_commit_sha"], self.sealed],
+        )
+
+    def test_preparation_binds_bot_identity_without_git_config(self):
+        subprocess.run(
+            ["git", "config", "--unset-all", "user.name"],
+            cwd=self.repo,
+            check=True,
+        )
+        subprocess.run(
+            ["git", "config", "--unset-all", "user.email"],
+            cwd=self.repo,
+            check=True,
+        )
+        poisoned_identity = {
+            "GIT_AUTHOR_NAME": "ambient-author",
+            "GIT_AUTHOR_EMAIL": "ambient-author@example.invalid",
+            "GIT_COMMITTER_NAME": "ambient-committer",
+            "GIT_COMMITTER_EMAIL": "ambient-committer@example.invalid",
+        }
+        with patch.dict(os.environ, poisoned_identity, clear=False):
+            result = self.prepared()
+        identity = git(
+            self.repo,
+            "show",
+            "-s",
+            "--format=%an%n%ae%n%cn%n%ce",
+            result["prepared_commit_sha"],
+        ).splitlines()
+        self.assertEqual(
+            identity,
+            [
+                PRESENTATION_COMMIT_NAME,
+                PRESENTATION_COMMIT_EMAIL,
+                PRESENTATION_COMMIT_NAME,
+                PRESENTATION_COMMIT_EMAIL,
+            ],
         )
 
     def test_rejects_wrong_original_manifest_and_source(self):
