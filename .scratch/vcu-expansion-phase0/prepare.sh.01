@@ -1,0 +1,61 @@
+HA}" \
+    --repo /tmp/runtime \
+    --output "/tmp/stage1-${suffix}"
+done
+diff --recursive --brief /tmp/stage1-a /tmp/stage1-b
+
+MAIN_SHA="${MAIN_SHA}" FREEZE_SHA="${FREEZE_SHA}" RESEARCH_BASE="${RESEARCH_BASE}" \
+python - <<'PY'
+import hashlib, json, os
+from pathlib import Path
+root=Path('/tmp/stage1-b')
+report=json.loads((root/'expansion-stage1-reconciliation.json').read_text())
+expected_sources={
+    'VCU-1973-74-023','VCU-1976-77-006',
+    'VCU-1977-78-004','VCU-1978-79-006',
+}
+expected_canonical={
+    'CBBG-0203133','CBBG-0203182','CBBG-0203204','CBBG-0203231',
+}
+classes=[item['class'] for item in report['blockers']]
+if classes != ['DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING']:
+    raise SystemExit(f'unexpected Stage 1 blockers: {classes}')
+if report['canonical_identity_census']['counts']['IDENTITY_REVIEW_BLOCKER'] != 0:
+    raise SystemExit('canonical identity blocker remains')
+if report['global_venue_reconciliation']['counts']['GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER'] != 0:
+    raise SystemExit('global venue identity blocker remains')
+if report['census']['combined_source_game_count'] != 1759:
+    raise SystemExit('combined VCU source-game count mismatch')
+recon=report.get('current_main_reconciliation') or {}
+if recon.get('status') != 'APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION':
+    raise SystemExit(f'current-main correction rebase missing: {recon.get("status")}')
+if set(recon.get('changed_source_game_ids') or []) != expected_sources:
+    raise SystemExit('current-main corrected source population mismatch')
+if set(recon.get('accepted_canonical_game_ids') or []) != expected_canonical:
+    raise SystemExit('current-main corrected canonical population mismatch')
+names=(
+    'source-games.csv','opponents.csv','venues.csv','conferences.csv',
+    'notes.md','source-notes.md','expansion-stage1-reconciliation.json',
+)
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+proof={
+    'status':'INDEPENDENTLY_REPRODUCED_READ_ONLY_STAGE1',
+    'protected_main_sha':os.environ['MAIN_SHA'],
+    'research_base_sha':os.environ['RESEARCH_BASE'],
+    'freeze_zip_sha256':os.environ['FREEZE_SHA'],
+    'candidate_sha256':{name:digest(root/name) for name in names},
+    'identity_counts':report['canonical_identity_census']['counts'],
+    'global_venue_counts':report['global_venue_reconciliation']['counts'],
+    'support_opponents':report['census']['opponent_support_actions'],
+    'support_venues':report['census']['venue_support_actions'],
+    'blockers':report['blockers'],
+    'integration_freeze_authorized':False,
+}
+raw=(json.dumps(proof,sort_keys=True,separators=(',',':'))+'\n').encode()
+Path('/tmp/stage1-independent-proof.json').write_bytes(raw)
+PY
+
+PROOF_SHA="$(sha256sum /tmp/stage1-independent-proof.json | awk '{print $1}')"
+python /tmp/runtime/tools/all_history_expansion_integration.py freeze \
+  "${SCHOOL}" /tmp/vc
