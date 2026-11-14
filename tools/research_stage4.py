@@ -476,6 +476,33 @@ def _score_result_consistent(team: int, opponent: int, result: str) -> bool:
     return False
 
 
+def _legacy_date_projection(row: dict[str, str], game_id: str) -> tuple[str, str, list[dict[str, str]]]:
+    """Convert only exact, unambiguous season-bound month/day tokens.
+
+    Original tokens remain in raw_text and notes regardless of date precision.
+    """
+    date = _first(row, "game_date")
+    if date:
+        return date, "", []
+    raw = row.get("source_date_raw", "").strip()
+    if not raw:
+        return "", "", []
+    match = re.fullmatch(r"([NDJFMA])\s*(\d{1,2})", raw.upper())
+    if not match:
+        return "", f"Accepted original source_date_raw={raw!r} (not an exact date).", []
+    season = _first(row, "season_label", "season")
+    try:
+        normalized = project_season_label(season)
+        start, end = (int(x) for x in normalized.split("-"))
+        month = {"N": 11, "D": 12, "J": 1, "F": 2, "M": 3, "A": 4}[match.group(1)]
+        day = int(match.group(2))
+        from datetime import date as _date
+        iso = _date(start if month >= 9 else end, month, day).isoformat()
+    except (ValueError, TypeError):
+        return "", "", [{"reason": "LEGACY_DATE_TOKEN_INVALID", "source_game_id": game_id, "token": raw}]
+    return iso, f"Accepted original source_date_raw={raw!r}; exact ISO date derived from season and unambiguous month/day token.", []
+
+
 def _legacy_score_projection(
     row: dict[str, str],
     *,
@@ -498,6 +525,35 @@ def _legacy_score_projection(
         row, "played_result", "on_court_result", "source_result", "result"
     ).upper()
     if not team or not opponent:
+        # Older Stage 1 ledgers retained only an on-page score token. Require
+        # exact agreement with the original literal line and accepted result,
+        # and never replace a populated structured score field.
+        raw_pair = row.get("source_score_raw", "").strip()
+        literal_line = row.get("source_line_raw", "").strip()
+        if not team and not opponent and raw_pair:
+            m = re.fullmatch(r"(\d{1,3})\s*-\s*(\d{1,3})(?:\s*\(ot\))?", raw_pair, re.I)
+            exact_literal = bool(literal_line and len(re.findall(
+                r"\b" + re.escape(result) + r"\s+" + re.escape(raw_pair) + r"(?=\s|$)",
+                literal_line, re.I,
+            )) == 1)
+            if not m or not exact_literal or result not in {"W", "L", "T"}:
+                return "", "", "", [{"reason": "LEGACY_LITERAL_SCORE_AMBIGUOUS", "source_game_id": game_id}]
+            a, b = map(int, m.groups())
+            if result == "T" and a != b:
+                return "", "", "", [{"reason": "LEGACY_LITERAL_SCORE_RESULT_CONFLICT", "source_game_id": game_id}]
+            if result in {"W", "L"} and a == b:
+                return "", "", "", [{"reason": "LEGACY_LITERAL_SCORE_RESULT_CONFLICT", "source_game_id": game_id}]
+            # Most source pages use school-first; some recent pages print
+            # winner-first. The accepted W/L and literal *unordered* pair
+            # distinguish the two representations without inventing a score.
+            projected_team = max(a, b) if result == "W" else min(a, b) if result == "L" else a
+            projected_opponent = min(a, b) if result == "W" else max(a, b) if result == "L" else b
+            note = (
+                "Stage 4 accepted literal score-pair compatibility: "
+                f"source_score_raw={raw_pair!r}; source_line_raw={literal_line!r}; "
+                f"played_result={result}; unordered accepted score pair preserved."
+            )
+            return str(projected_team), str(projected_opponent), note, []
         return team, opponent, "", []
     if not (team.isdigit() and opponent.isdigit()) or result not in {"W", "L", "T"}:
         return team, opponent, "", []
@@ -513,7 +569,7 @@ def _legacy_score_projection(
         and not row.get("season_label", "").strip()
         and not row.get("source_program_key", "").strip()
     )
-    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line")
+    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw")
     literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
     literal_pairs = [
         (int(match.group("a")), int(match.group("b")))
@@ -789,6 +845,44 @@ def _projection(
             _legacy_score_projection(row, game_id=game_id)
         )
         defects.extend(score_defects)
+        projected_date, date_note, date_defects = _legacy_date_projection(row, game_id)
+        defects.extend(date_defects)
+        literal_type = _first(row, "game_type", "structured_game_type")
+        type_note = (
+            f"Accepted original postseason game type={literal_type!r}; "
+            "POSTSEASON is the controlled package taxonomy."
+            if literal_type.upper() in {"CBI", "CIT"} else ""
+        )
+        raw_score_note = (
+            f"Accepted original source_score_raw={row['source_score_raw']!r}."
+            if row.get("source_score_raw", "").strip() else ""
+        )
+        # A contested historical locality may preserve a certain state but no
+        # accepted city. The package requires paired normalized city/state.
+        # Keep the accepted state explicitly in notes; do not pick either city.
+        location_note = ""
+        provisional_city = _first(
+            row, "stage3b_venue_city", "stage3b_site_city", "curated_venue_city",
+            "stage3a_final_venue_city", "stage3a_final_city", "accepted_city",
+            "stage3a_site_city", "stage3a2_venue_city", "stage3a3_venue_city",
+            "curated_city", "city", "venue_city",
+        )
+        provisional_state = _first(
+            row, "stage3b_venue_state", "stage3b_site_state", "curated_venue_state",
+            "stage3a_final_venue_state", "stage3a_final_state", "accepted_state",
+            "stage3a_site_state", "stage3a2_venue_state", "stage3a3_venue_state",
+            "curated_state", "state", "venue_state",
+        )
+        contested_state = ""
+        if (not provisional_city and provisional_state and research_status == "RESEARCHED_PARTIAL"
+            and "city contested" in research_basis.casefold()
+            and not accepted_venue):
+            contested_state = provisional_state
+            location_note = (
+                "Accepted incomplete US locality: state=" + repr(provisional_state)
+                + "; city remains contested; source evidence=" + research_basis
+                + "; normalized city/state pair left blank without resolving history."
+            )
 
         projected.append(
             {
@@ -798,13 +892,14 @@ def _projection(
                 "season_label": project_season_label(
                     _first(row, "season_label", "season")
                 ),
-                "game_date": _first(row, "game_date"),
+                "game_date": projected_date,
                 "source_opponent_label": _first(
                     row,
                     "source_opponent_label",
                     "source_opponent_text",
                     "source_opponent_field",
                     "source_opponent_literal",
+                    "source_opponent_raw",
                 ),
                 "normalized_opponent_key": opponent_key,
                 "normalized_opponent_name": opponent_name,
@@ -866,7 +961,7 @@ def _projection(
                 )
                 or accepted_venue.get("city", "").strip()
                 or (literal_opponent_home[1] if literal_opponent_home else ""),
-                "state": _first(
+                "state": ("" if contested_state else _first(
                     row,
                     "stage3b_venue_state",
                     "stage3b_site_state",
@@ -882,26 +977,27 @@ def _projection(
                     "venue_state",
                 )
                 or accepted_venue.get("state", "").strip()
-                or (literal_opponent_home[2] if literal_opponent_home else ""),
+                or (literal_opponent_home[2] if literal_opponent_home else "")),
                 "country": _first(
                     row, "curated_venue_country", "country", "venue_country"
                 ),
                 "event_or_tournament": _first(
-                    row, "event_or_tournament", "stage3a3_event_name"
+                    row, "event_or_tournament", "stage3b_event_name", "stage3a3_event_name"
                 ),
                 "source_round": source_round,
                 "curated_game_type": effective_parent_game_type(row),
                 "curated_postseason_round": curated_round,
                 "source_page": _first(row, "source_page", "source_pdf_page", "source_locator"),
                 "raw_text": first_literal(
-                    row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"
+                    row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw"
                 ),
                 "normalization_status": _first(row, "normalization_status")
                 or "RESEARCH_ACCEPTED",
                 "administrative_status": administrative_status,
                 "administrative_note": administrative_note,
                 "notes": " ".join(part for part in (
-                    _first(row, "notes", "stage1_notes"), round_note, score_note
+                    _first(row, "notes", "stage1_notes"), round_note, score_note,
+                    date_note, raw_score_note, type_note, location_note
                 ) if part),
                 "site_research_status": research_status,
                 "site_research_basis": research_basis if research_status else "",
@@ -947,6 +1043,7 @@ def _semantic_projection_defects(
             "source_opponent_text",
             "source_opponent_field",
             "source_opponent_literal",
+            "source_opponent_raw",
         ),
         "normalized_opponent_key": (
             "normalized_opponent_key",
@@ -966,7 +1063,7 @@ def _semantic_projection_defects(
         "source_page": ("source_page", "source_pdf_page", "source_locator"),
         "overtime_periods": ("overtime_periods", "overtime", "source_overtime_token"),
         "source_venue_name": ("source_venue_name", "source_venue_token"),
-        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"),
+        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw"),
     }
     defects = []
     game_id = projected["source_game_id"]
@@ -1012,6 +1109,13 @@ def _semantic_projection_defects(
                         continue
             defects.append({"reason": "ACCEPTED_SOURCE_FIELD_LOST",
                             "source_game_id": game_id, "field": target})
+
+    parent_state = _first(parent, "stage3b_venue_state", "stage3a_final_venue_state")
+    parent_city = _first(parent, "stage3b_venue_city", "stage3a_final_venue_city")
+    if parent_state and not parent_city and not projected.get("state"):
+        if (f"state={parent_state!r}" not in projected.get("notes", "")
+            or "city remains contested" not in projected.get("notes", "")):
+            defects.append({"reason": "ACCEPTED_PARTIAL_LOCALITY_LOST", "source_game_id": game_id})
 
     effective_game_type = effective_parent_game_type(parent)
     if projected.get("curated_game_type", "").strip() != effective_game_type:
@@ -1991,8 +2095,14 @@ def author(
                 "Stage 4 source-game projection defects: "
                 + json.dumps(defects[:10], sort_keys=True)
             )
+        accepted_venue_keys_by_game = {
+            project_game_id(row): _first(
+                row, "stage3b_venue_key", "stage3a_final_venue_key", "accepted_venue_key"
+            )
+            for row in ledger
+        }
         refreshed_venues, venue_summary_refresh = refresh_venue_assignment_summaries(
-            games, venues
+            games, venues, accepted_venue_keys_by_game=accepted_venue_keys_by_game
         )
         write_json(output_dir / "stage4-venue-summary-refresh.json", venue_summary_refresh)
         _write_csv(package / "source-games.csv", SOURCE_GAME_FIELDS, games)

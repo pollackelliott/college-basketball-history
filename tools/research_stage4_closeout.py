@@ -693,6 +693,7 @@ def normalize_game_type(value: str) -> str:
         "CONFERENCE_TOURNAMENT": "CONFERENCE_TOURNAMENT",
         "NIT": "NIT",
         "CIT": "POSTSEASON",
+        "CBI": "POSTSEASON",
         "POSTSEASON": "POSTSEASON",
         "OTHER_POSTSEASON": "POSTSEASON",
     }.get(folded, folded)
@@ -704,6 +705,7 @@ POSTSEASON_SUBTYPE_COMPATIBILITY = {
     "NCAA": "NCAA_TOURNAMENT",
     "NCAA_TOURNAMENT": "NCAA_TOURNAMENT",
     "CIT": "POSTSEASON",
+    "CBI": "POSTSEASON",
 }
 _POSTSEASON_GAME_TYPES = {
     "POSTSEASON",
@@ -1196,6 +1198,68 @@ def _package_venue_matches_parent_key(
     return True
 
 
+def _accepted_legacy_literal_enrichment_equivalent(
+    parent: dict[str, str], package: dict[str, str], field: str,
+) -> bool:
+    """Prove Stage 4 legacy source token enrichment without reopening history.
+
+    The original accepted source token and whole raw line are immutable. A
+    derived exact date or team/opponent score is admissible only when those
+    literal tokens establish the values and accepted result unambiguously.
+    """
+    raw_line = parent.get("source_line_raw", "").strip()
+    if field == "raw_text":
+        return bool(raw_line and package.get("raw_text", "") == raw_line)
+    if field == "game_date":
+        token = parent.get("source_date_raw", "").strip()
+        m = re.fullmatch(r"([NDJFMA])\s*(\d{1,2})", token.upper())
+        if not m or not raw_line:
+            return False
+        try:
+            season = project_season_label(_first_parent_value(parent, "season", "season_label"))
+            a, b = [int(x) for x in season.split("-")]
+            month = {"N": 11, "D": 12, "J": 1, "F": 2, "M": 3, "A": 4}[m.group(1)]
+            day = int(m.group(2))
+            import datetime as _datetime
+            date_value = _datetime.date(a if month >= 9 else b, month, day).isoformat()
+        except (ValueError, TypeError):
+            return False
+        return package.get("game_date", "") == date_value
+    if field in {"team_score", "opponent_score"}:
+        raw_score = parent.get("source_score_raw", "").strip()
+        match = re.fullmatch(r"(\d{1,3})\s*-\s*(\d{1,3})(?:\s*\(ot\))?", raw_score, re.I)
+        result = _first_parent_value(parent, "played_result", "on_court_result", "source_result", "result").upper()
+        if (not match or not raw_line or result not in {"W", "L", "T"}
+            or package.get("played_result", "").strip().upper() != result):
+            return False
+        literal_hits = re.findall(
+            r"\b" + re.escape(result) + r"\s+" + re.escape(raw_score) + r"(?=\s|$)",
+            raw_line, re.I,
+        )
+        if len(literal_hits) != 1:
+            return False
+        a, b = map(int, match.groups())
+        if result == "W" and a == b or result == "L" and a == b or result == "T" and a != b:
+            return False
+        school_score = max(a, b) if result == "W" else min(a, b) if result == "L" else a
+        other_score = min(a, b) if result == "W" else max(a, b) if result == "L" else b
+        return (package.get("team_score", "") == str(school_score)
+            and package.get("opponent_score", "") == str(other_score))
+    if field == "state":
+        source_state = _first_parent_value(parent, "stage3b_venue_state", "stage3a_final_venue_state")
+        source_city = _first_parent_value(parent, "stage3b_venue_city", "stage3a_final_venue_city")
+        research_status = _first_parent_value(parent, "stage3a_site_research_status", "site_research_status")
+        basis = _first_parent_value(parent, "stage3a_site_research_basis", "site_research_basis")
+        notes = package.get("notes", "")
+        return bool(
+            source_state and not source_city and research_status == "RESEARCHED_PARTIAL"
+            and "city contested" in basis.casefold()
+            and package.get("city", "") == "" and package.get("state", "") == ""
+            and f"state={source_state!r}" in notes and basis in notes
+        )
+    return False
+
+
 def compare_parent_semantics(
     parent_rows: list[dict[str, str]],
     package_rows: list[dict[str, str]],
@@ -1281,6 +1345,14 @@ def compare_parent_semantics(
                         parent[game_id], actual_row
                     )
                 ):
+                    continue
+                if not expected[field] and _accepted_legacy_literal_enrichment_equivalent(
+                    parent[game_id], actual_row, field
+                ):
+                    continue
+                if (field == "state" and _accepted_legacy_literal_enrichment_equivalent(
+                    parent[game_id], actual_row, field
+                )):
                     continue
                 mismatches.append(
                     {
