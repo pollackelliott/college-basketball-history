@@ -211,7 +211,6 @@ def workflow_contract_errors(root: Path) -> list[str]:
     errors: list[str] = []
     workflow_paths = (
         ".github/workflows/opponent-identity-tooling-validation.yml",
-        ".github/workflows/opponent-identity-transaction-validation.yml",
     )
     required_live_main = (
         "types: [opened, synchronize, reopened]",
@@ -237,6 +236,18 @@ def workflow_contract_errors(root: Path) -> list[str]:
                 errors.append(
                     f"{relative} still trusts stale event merge state: {snippet}"
                 )
+
+    bundled = (root / ".github/workflows/opponent-identity-tooling-validation.yml").read_text(
+        encoding="utf-8"
+    )
+    for job in ("  validate:", "  rehearse:"):
+        if job not in bundled:
+            errors.append("bundled PR validation missing required job: " + job.strip())
+    if (root / ".github/workflows/opponent-identity-transaction-validation.yml").exists():
+        errors.append(
+            "opponent identity transaction rehearsal must remain bundled into the "
+            "single tooling validation workflow"
+        )
 
     remote = (root / ".github/workflows/remote-implementation.yml").read_text(
         encoding="utf-8"
