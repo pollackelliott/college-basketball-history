@@ -67,6 +67,14 @@ class AllHistoryExpansionImplementationAcceptanceTests(unittest.TestCase):
         self.assertTrue(any("missing inception" in error or "requires valid" in error
                             for error in errors))
 
+    def test_pr_validation_is_bundled_into_one_workflow(self):
+        errors = acceptance.workflow_contract_errors(ROOT)
+        self.assertFalse(any("bundled PR validation" in error for error in errors))
+        self.assertFalse((ROOT / ".github/workflows/opponent-identity-transaction-validation.yml").exists())
+        bundled = (ROOT / ".github/workflows/opponent-identity-tooling-validation.yml").read_text(encoding="utf-8")
+        self.assertIn("  validate:", bundled)
+        self.assertIn("  rehearse:", bundled)
+
     def test_curated_suite_includes_all_owner_phase_boundaries(self):
         patterns = set(acceptance.ACCEPTANCE_TEST_PATTERNS)
         required = {
@@ -79,6 +87,12 @@ class AllHistoryExpansionImplementationAcceptanceTests(unittest.TestCase):
             "test_remote_implementation_stage2_seal.py",
             "test_remote_implementation_stage2_apply.py",
             "test_remote_implementation_stage2_continuation.py",
+            "test_site_matchup_published_history.py",
+            "test_remote_implementation_presentation_refresh.py",
+            "test_remote_implementation_presentation_publish.py",
+            "test_remote_implementation_presentation_release_readiness.py",
+            "test_george_mason_presentation_rehearsal_ref_contract.py",
+            "test_frozen_release_pr_revalidation_workflow.py",
             "test_remote_implementation_release_readiness.py",
             "test_remote_implementation_release_preview.py",
             "test_remote_implementation_final_release.py",
