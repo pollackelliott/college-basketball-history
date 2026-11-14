@@ -589,7 +589,7 @@
   "active_request_sha256": "1f43cadb6a7df8f7dd8bbe98ed8cd24b96e2fbf39013cc331757bab0c8b746fe",
   "active_school_key": "george-mason",
   "active_target_branch": "data/george-mason-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "e44dc0f15dcf66d709dd9d51f76921b4a36b51a1",
   "active_writeahead_path": ".remote-implementation/writeahead/george-mason/george-mason-expansion-release-presentation-refresh-0003/writeahead-manifest.json",
   "active_writeahead_sha256": "825b984ea44df65236f8c8705fbb8f3f3d761e95350c210b6b95c140871f7658",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
