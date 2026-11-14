@@ -288,6 +288,8 @@ Before a **new** expansion Implementation acquires the serialized mutation lane,
 
 This fail-closed preflight checks portfolio/publication invariants and the current generic expansion workflow contracts. A failure is a generic repository-readiness blocker to repair before choosing the next school; it is not target-school historical authority and must not be deferred until that school is mid-Implementation.
 
+The durable pre-school proof is a successful run of the read-only GitHub Actions workflow `All-History expansion implementation acceptance` bound to the exact protected-main SHA that will be handed to the next school. The workflow must authenticate that `main` still equals its requested SHA, run the complete acceptance command (including browser/presentation/release regressions), upload the JSON result, and recheck that protected main did not move during the proof. A local PASS or a PASS against an older main is diagnostic only; it does not authorize selection of the next expansion Implementation school.
+
 Serialized Implementation must authenticate the immutable baseline and
 accepted supplemental delta, rebase against current protected main,
 deterministically materialize a complete six-file candidate, reconcile
