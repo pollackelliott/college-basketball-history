@@ -9,7 +9,7 @@ EXPECTED_TARGET_SHA=c58fae3653a86d5317b45d210951beea9cee1f0d
 REQUEST_ID=vcu-expansion-phase0-0001
 CONTROL_BRANCH=control/remote-implementation
 TARGET_BRANCH=data/vcu-onboarding
-REQUIRED_FOLLOWUP_HEAD=9eff7ba0290e59f5147c9001055e2522f6ed7c76
+REQUIRED_FOLLOWUP_HEAD=cbc547360e65538339b11fc8171bd1861470f430
 
 set -euo pipefail
 git fetch --no-tags origin \
