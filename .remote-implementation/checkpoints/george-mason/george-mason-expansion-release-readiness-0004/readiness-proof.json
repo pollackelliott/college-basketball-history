@@ -1,0 +1,62 @@
+{
+  "apply_protected_main_sha": "866aa5d397e1161731c69e7a65a5d4ea1fa0ae8d",
+  "apply_request_id": "george-mason-expansion-stage2-sealed-apply-0001",
+  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+  "changed_path_count": 8,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "presentation_dual_boundary": {
+    "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+    "full_rehearsal_changed_paths": [
+      "data/canonical/games.csv",
+      "data/evidence/game-assertions.csv",
+      "data/reconciliation/onboarding-decisions/george-mason-1cb5cfb48aea.json",
+      "site/data/manifest.json",
+      "site/data/programs.json",
+      "site/data/teams/george-mason.json",
+      "site/data/teams/vcu.json",
+      "site/index.html"
+    ],
+    "kind": "REMOTE_IMPLEMENTATION_PRESENTATION_DUAL_RELEASE_BOUNDARY_V1",
+    "original_apply_base_sha": "e163ec0a952cd4c40ce7ff6f5d7b0feea0d96e38",
+    "original_apply_path_hash_equivalence": "PASS",
+    "original_manifest_modified": false,
+    "original_release_changed_path_count": 7,
+    "original_release_changed_paths": [
+      "data/canonical/games.csv",
+      "data/evidence/game-assertions.csv",
+      "data/reconciliation/onboarding-decisions/george-mason-1cb5cfb48aea.json",
+      "site/data/manifest.json",
+      "site/data/programs.json",
+      "site/data/teams/george-mason.json",
+      "site/data/teams/vcu.json"
+    ],
+    "original_sealed_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+    "original_sealed_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
+    "owner_gate_2_approved": false,
+    "presentation_accepted_site_blob_sha": "73328a90c7d8b8dc835663ca6226382cd708698e",
+    "presentation_changed_paths": [
+      "site/index.html"
+    ],
+    "presentation_site_sha256": "e61f5b30f14b3dbdc40e0f29028c0710c2cc20a9cc21c943b7dea68db703671d",
+    "presentation_source_protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+    "presentation_successor_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+    "presentation_successor_tree_sha": "e91a9699cea59c0a89834a17f75e682ecfa9ab99",
+    "presentation_tree_equivalence": "PASS",
+    "school_key": "george-mason",
+    "tracked_basketball_mutation_after_seal": "NONE"
+  },
+  "preview_verified": false,
+  "protected_main_sha": "ed658b706aa7d215b7a1d99f88ed282c37a710ec",
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "school_key": "george-mason",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "f8c3a9c8281780d640c97f4c15823c289e737f2ff826a043ce19c1488434d757",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef",
+  "writeahead_sha256": "07bd0d0b7e49289e6b226b3fbb0dd79a99bd3762dc89b2f5540391f20cb78bb1"
+}
