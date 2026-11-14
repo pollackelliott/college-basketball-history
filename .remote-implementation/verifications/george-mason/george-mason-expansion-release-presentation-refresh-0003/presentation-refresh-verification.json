@@ -1,0 +1,17 @@
+{
+  "accepted_asset_blob_sha": "73328a90c7d8b8dc835663ca6226382cd708698e",
+  "branch_published_exact": true,
+  "changed_paths": [
+    "site/index.html"
+  ],
+  "fresh_presentation_tree_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_PRESENTATION_REFRESH_FRESH_PROOF",
+  "original_sealed_apply_equivalence": "PASS",
+  "original_sealed_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+  "owner_gate_2_approved": false,
+  "protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+  "request_id": "george-mason-expansion-release-presentation-refresh-0003",
+  "school_key": "george-mason",
+  "successor_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "successor_tree_sha": "e91a9699cea59c0a89834a17f75e682ecfa9ab99"
+}
