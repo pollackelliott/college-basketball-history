@@ -20,6 +20,14 @@ from remote_implementation_presentation_refresh import (
 )
 
 PREPARED_KIND = "REMOTE_IMPLEMENTATION_PRESENTATION_REFRESH_PREPARED_V1"
+PRESENTATION_COMMIT_NAME = "github-actions[bot]"
+PRESENTATION_COMMIT_EMAIL = "41898282+github-actions[bot]@users.noreply.github.com"
+PRESENTATION_COMMIT_IDENTITY = {
+    "GIT_AUTHOR_NAME": PRESENTATION_COMMIT_NAME,
+    "GIT_AUTHOR_EMAIL": PRESENTATION_COMMIT_EMAIL,
+    "GIT_COMMITTER_NAME": PRESENTATION_COMMIT_NAME,
+    "GIT_COMMITTER_EMAIL": PRESENTATION_COMMIT_EMAIL,
+}
 
 
 def require(ok: bool, code: str) -> None:
@@ -89,6 +97,7 @@ def prepare_presentation_successor(
         repo, "commit-tree", str(plan["candidate_tree_sha"]),
         "-p", request["target_sha"],
         "-m", "Guarded post-seal presentation-only refresh",
+        env_overrides=PRESENTATION_COMMIT_IDENTITY,
     )
     checked = verify_presentation_successor(
         repo,
