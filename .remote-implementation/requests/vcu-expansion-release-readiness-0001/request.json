@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "vcu-expansion-release-readiness-0001",
+  "school_key": "vcu",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "ed3512304255087c971d73d5ec81398de260bc47",
+  "previous_control_state_sha256": "b8db8d9b64c9e998228b2327555c9c575aed2cdd12f93a5f8e7e4d5ad668e74a",
+  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
+  "approved_plan_hash": "b647eb83bfc2a3a3d71e9568471f3dc4c09a0c291034d82b8822473f5788079d",
+  "release_manifest_sha256": "89b323d21e1ec3eaa27be3fea01d07c72c88551e01f8311fc321b73756e47288",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "349647c2f1732616cf82a88091b6df980b92f93501e84e4eb4e798d01c887fb2"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "55a2caa36f08ba3028f6884e6de35d6c55cc65f0acccee135892103ad2a91666"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "vcu-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation — owner-authorized release preparation",
+    "authorization": "Owner instructed 'Continue' after the exact VCU expansion sealed-apply successor e3ef85569a50d9fcb3771b575babafde84ea38df independently fresh-verified PASS. Under the current owner-facing release workflow, this authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, ordinary CI/mergeability checks, exact Vercel Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or changed historical authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
