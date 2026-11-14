@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-mason-expansion-release-presentation-refresh-0001",
+  "school_key": "george-mason",
+  "operation": "RELEASE_PRESENTATION_REFRESH",
+  "previous_control_state_commit": "9ceb6de1fb26ed979defae9c175ed22e4d1299ab",
+  "previous_control_state_sha256": "ef619ed48c30037cc124d57af619c3a55e5e6f4112465ba984e6f3a8813c258c",
+  "expected_protected_main_sha": "051a3fe02ada1dda3ef53efea435fdfb6d3733ce",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "f8c3a9c8281780d640c97f4c15823c289e737f2ff826a043ce19c1488434d757"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef"
+  },
+  "creation_provenance": {
+    "origin": "Same George Mason ALL_HISTORY_EXPANSION Implementation lane; Control Center issue #602 post-seal generic presentation correction clearance",
+    "authorization": "Owner explicitly authorized same lane to publish ONLY the corrected website asset as a guarded direct child C of original sealed G, per current permanent RELEASE_PRESENTATION_REFRESH and Control Center issue #602. Exact live main 051a3fe02ada1dda3ef53efea435fdfb6d3733ce incorporates merged website PR #607 and permanent tooling PR #608. Prior authentic real George Mason G/C rehearsal GitHub Action #43531100168 PASS establishes 1,769 games and George Mason vs James Madison 102 meetings, 51-51; accepted source asset blob 73328a90c7d8b8dc835663ca6226382cd708698e. Request preserves all G historical games, evidence, records, global registries and public JSON. It authorizes only serial CAS/writeahead and independent fresh verification, then separate C-bound release-readiness, CI and Preview; no Gate 2 approval or merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false,
+    "release_presentation_refresh": true
+  },
+  "sealed_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
+  "repair_main_sha": "051a3fe02ada1dda3ef53efea435fdfb6d3733ce",
+  "accepted_asset_blob_sha": "73328a90c7d8b8dc835663ca6226382cd708698e"
+}
