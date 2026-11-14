@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "ed658b706aa7d215b7a1d99f88ed282c37a710ec",
+  "recovered_request_id": "george-mason-expansion-release-preview-verify-0003",
+  "request_id": "george-mason-expansion-release-preview-recover-0002",
+  "schema_version": 1,
+  "target_branch": null
+}

@@ -22,7 +22,8 @@
     "george-mason-phase0-0001",
     "hawai-i-phase0-0001",
     "george-mason-expansion-stage2-proposal-0001",
-    "george-mason-expansion-release-preview-verify-0001"
+    "george-mason-expansion-release-preview-verify-0001",
+    "george-mason-expansion-release-preview-verify-0003"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -581,16 +582,16 @@
     "george-mason-expansion-release-readiness-0003",
     "george-mason-expansion-release-preview-verify-0003"
   ],
-  "active_expected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "RELEASE_PREVIEW_VERIFY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "george-mason-expansion-release-preview-verify-0003",
-  "active_request_sha256": "e69eb8a498e7d7b7738f667c0b3044cf4a3e8ee2268434e036f177111d27b245",
-  "active_school_key": "george-mason",
-  "active_target_branch": "data/george-mason-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1149,31 +1150,29 @@
     "george-mason-expansion-release-readiness-0002",
     "george-mason-expansion-release-preview-verify-0002",
     "george-mason-expansion-release-presentation-refresh-0003",
-    "george-mason-expansion-release-readiness-0003"
+    "george-mason-expansion-release-readiness-0003",
+    "george-mason-expansion-release-preview-recover-0002"
   ],
-  "current_sequence": 554,
+  "current_sequence": 555,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-release-readiness-0003/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "0cf9a93a0ad4f3070873302d5f184555f8811e4ebe924ecb107eb3aa9e3ee7f4",
-    "fresh_runner_verification": "PASS",
-    "operation": "RELEASE_READINESS",
-    "preview_request_id": "george-mason-expansion-release-preview-verify-0003",
-    "protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
-    "readiness_status": "RELEASE_READINESS_PASS",
-    "release_pr_packet_path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-release-readiness-0003/release-pr-packet.json",
-    "release_pr_packet_sha256": "2389c1484ddfd45e28fee2d5077ecf76402c8aa24b0a5d9a1745ce4fb183b7a5",
-    "remote_release_readiness_equivalence": "PASS",
-    "request_id": "george-mason-expansion-release-readiness-0003",
-    "school_key": "george-mason",
-    "target_branch": "data/george-mason-onboarding",
-    "target_sha": "9db724322351dc2facdaf2934248b8c34912c3a3"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "george-mason-expansion-release-preview-verify-0003",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": null,
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "ed658b706aa7d215b7a1d99f88ed282c37a710ec",
+      "recovered_request_id": "george-mason-expansion-release-preview-verify-0003",
+      "request_id": "george-mason-expansion-release-preview-recover-0002",
+      "schema_version": 1,
+      "target_branch": null
+    }
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "43592999724",
-  "lock_acquisition_request_commit": "8e5186edf7d34bc7def3eca5ebad95e39e855e16",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "RELEASE_PREVIEW_RUNNING"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
