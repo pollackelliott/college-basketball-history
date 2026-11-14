@@ -1,0 +1,27 @@
+{
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "schools/vcu/notes.md",
+    "schools/vcu/opponents.csv",
+    "schools/vcu/source-games.csv",
+    "schools/vcu/source-notes.md",
+    "schools/vcu/venues.csv"
+  ],
+  "expected_target_predecessor_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d",
+  "independent_exact_tree_equivalence": "PASS",
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_VERIFICATION",
+  "observed_live_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "prepared_tree_sha": "8ffba2a8d56fe2a561b99ef632037d9b453370e1",
+  "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "vcu-expansion-phase0-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "status": "PASS",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "6e83bffb541577e1feff92b1d185554b4701de1c",
+  "venue_reconciliation_sha256": ""
+}
