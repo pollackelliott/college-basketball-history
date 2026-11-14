@@ -67,6 +67,14 @@ class AllHistoryExpansionImplementationAcceptanceTests(unittest.TestCase):
         self.assertTrue(any("missing inception" in error or "requires valid" in error
                             for error in errors))
 
+    def test_pr_validation_is_bundled_into_one_workflow(self):
+        errors = acceptance.workflow_contract_errors(ROOT)
+        self.assertFalse(any("bundled PR validation" in error for error in errors))
+        self.assertFalse((ROOT / ".github/workflows/opponent-identity-transaction-validation.yml").exists())
+        bundled = (ROOT / ".github/workflows/opponent-identity-tooling-validation.yml").read_text(encoding="utf-8")
+        self.assertIn("  validate:", bundled)
+        self.assertIn("  rehearse:", bundled)
+
     def test_curated_suite_includes_all_owner_phase_boundaries(self):
         patterns = set(acceptance.ACCEPTANCE_TEST_PATTERNS)
         required = {
