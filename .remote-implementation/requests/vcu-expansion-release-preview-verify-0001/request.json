@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "vcu-expansion-release-preview-verify-0001",
+  "school_key": "vcu",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "c1ba018f31751bfea6fb1bd5dc32dc3ee9970035",
+  "previous_control_state_sha256": "318010e7d99719deac81a1b6979794bf7e76ee8ef59547f4c24da555968a89f1",
+  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
+  "approved_plan_hash": "b647eb83bfc2a3a3d71e9568471f3dc4c09a0c291034d82b8822473f5788079d",
+  "release_manifest_sha256": "89b323d21e1ec3eaa27be3fea01d07c72c88551e01f8311fc321b73756e47288",
+  "pr_number": 615,
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "bb62edf745510bfe9bc7b94f410ba45895f4ac7489d7096f72918c7ccd26128b"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-expansion-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "7387669569f3333bf2a54a8cb52be04eda678ca6ccaf6716253bf7164145a2bd"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation — release preparation continuation",
+    "authorization": "Continuation of the owner-authorized VCU expansion release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #615. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
