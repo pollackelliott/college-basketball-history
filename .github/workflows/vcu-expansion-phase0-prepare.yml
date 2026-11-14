@@ -1,4 +1,4 @@
-name: VCU expansion inherited canonical drift census
+name: VCU expansion Phase 0 one-shot preparer
 
 on:
   push:
@@ -8,88 +8,42 @@ on:
       - '.github/workflows/vcu-expansion-phase0-prepare.yml'
 
 permissions:
-  contents: read
+  contents: write
+  actions: write
+
+concurrency:
+  group: vcu-expansion-phase0-one-shot-prepare
+  cancel-in-progress: false
 
 jobs:
-  census:
+  prepare-and-submit:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Exact field-level VCU inherited canonical drift census
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate exact preparer parts and submit guarded VCU request
+        env:
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          BASE=df73675852ec5a43dfac50da0ee06d8bcabf8832
-          MAIN=dd3c1e50c60e40a219ee519b1f30d76bd84a9b02
-          git fetch --no-tags origin "$BASE" "$MAIN"
-          test "$(git rev-parse "$MAIN^{commit}")" = "$MAIN"
-          python - <<'PY'
-          import csv, io, json, subprocess
-          BASE="df73675852ec5a43dfac50da0ee06d8bcabf8832"
-          MAIN="dd3c1e50c60e40a219ee519b1f30d76bd84a9b02"
-          def show(commit,path):
-              return subprocess.check_output(["git","show",f"{commit}:{path}"])
-          def rows(raw):
-              return list(csv.DictReader(io.StringIO(raw.decode("utf-8"))))
-          base_games=rows(show(BASE,"data/canonical/games.csv"))
-          main_games=rows(show(MAIN,"data/canonical/games.csv"))
-          programs=rows(show(BASE,"data/reference/programs.csv"))
-          prog=next(r for r in programs if r["program_key"]=="vcu")
-          start=prog["history_start_season"]
-          baseline=[
-              r for r in base_games
-              if "vcu" in {r["team_a_key"],r["team_b_key"]}
-              and r["season_label"] >= start
-          ]
-          ids={r["canonical_game_id"] for r in baseline}
-          bm={r["canonical_game_id"]:r for r in base_games if r["canonical_game_id"] in ids}
-          mm={r["canonical_game_id"]:r for r in main_games if r["canonical_game_id"] in ids}
-          drift=[]
-          field_counts={}
-          for gid in sorted(ids):
-              a,b=bm.get(gid),mm.get(gid)
-              if a==b:
-                  continue
-              if a is None or b is None:
-                  drift.append({"canonical_game_id":gid,"kind":"ROW_MISSING","base":a,"main":b})
-                  continue
-              changed=[k for k in a if a.get(k)!=b.get(k)]
-              for k in changed: field_counts[k]=field_counts.get(k,0)+1
-              drift.append({
-                  "canonical_game_id":gid,
-                  "season_label":a["season_label"],
-                  "changed_fields":changed,
-                  "base_values":{k:a.get(k) for k in changed},
-                  "main_values":{k:b.get(k) for k in changed},
-              })
-          assertions=rows(show(MAIN,"data/evidence/game-assertions.csv"))
-          correction_sources={
-              "VCU-1973-74-023","VCU-1976-77-006",
-              "VCU-1977-78-004","VCU-1978-79-006",
-          }
-          correction_bindings={
-              r["source_game_id"]:r["canonical_game_id"]
-              for r in assertions
-              if r.get("source_program_key")=="vcu"
-              and r.get("source_game_id") in correction_sources
-          }
-          allowed=set(correction_bindings.values())
-          result={
-              "protected_main_sha":MAIN,
-              "research_base_sha":BASE,
-              "baseline_published_count":len(ids),
-              "drift_count":len(drift),
-              "field_counts":dict(sorted(field_counts.items())),
-              "correction_bindings":correction_bindings,
-              "correction_canonical_ids":sorted(allowed),
-              "unexpected_drift_ids":sorted(
-                  d["canonical_game_id"] for d in drift
-                  if d["canonical_game_id"] not in allowed
-              ),
-              "drift":drift,
-          }
-          print(json.dumps(result,indent=2,sort_keys=True))
-          PY
+          test "$(git hash-object .scratch/vcu-expansion-phase0/prepare.sh.00)" = "b7d68d4b44021db746017f83046032583a8c0642"
+          test "$(git hash-object .scratch/vcu-expansion-phase0/prepare.sh.01)" = "da6950044f0fddb77cc8c6149b6c19e7d3b3520c"
+          test "$(git hash-object .scratch/vcu-expansion-phase0/prepare.sh.02)" = "c5a0e1e2fd8b1d358737f0b546cd4a554d87082c"
+          test "$(git hash-object .scratch/vcu-expansion-phase0/prepare.sh.03)" = "bac3cafd5c8b81addc8454928a81b61c23d34328"
+          test "$(git hash-object .scratch/vcu-expansion-phase0/prepare.sh.04)" = "a1fa02c843e87742625b796124f675b87dfa950c"
+          cat .scratch/vcu-expansion-phase0/prepare.sh.* > /tmp/vcu-prepare.sh
+          bash /tmp/vcu-prepare.sh
+      - name: Preserve read-only preparation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vcu-expansion-phase0-preparation
+          path: /tmp/vcu-prep-artifacts
+          if-no-files-found: ignore
+          retention-days: 30
