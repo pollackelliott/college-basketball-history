@@ -247,8 +247,27 @@ def freeze_authority(
             name: hashes[name] for name in PACKAGE_FILES
         }, "CANDIDATE_SHA_MAP_CHANGED")
         authenticate_proof(proof, report, hashes, main_sha, research_base, zip_sha)
+        preservation_baseline = baseline
+        if report.get("current_main_reconciliation", {}).get("status") == (
+            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
+        ):
+            current_source_fields, current_source_rows = csv_rows(
+                git_bytes(repo, main_sha, f"schools/{school}/source-games.csv"),
+                "current-main inherited source games",
+            )
+            require(
+                current_source_fields == baseline["source_fields"],
+                "CURRENT_MAIN_REBASE_SOURCE_SCHEMA_DRIFT",
+            )
+            preservation_baseline = dict(
+                baseline,
+                source_rows=current_source_rows,
+            )
         guard = source_preservation(
-            baseline, (candidate / "source-games.csv").read_bytes(), report, {}
+            preservation_baseline,
+            (candidate / "source-games.csv").read_bytes(),
+            report,
+            {},
         )
         # Only historical publication metadata may transition, never top-level scope.
         expected = project_complete_institutional_program_row(
@@ -310,6 +329,9 @@ def freeze_authority(
                 "snapshot_sha256": semantic_sha,
             },
             "source_preservation": guard,
+            "current_main_reconciliation": report.get(
+                "current_main_reconciliation", {}
+            ),
             "canonical_identity_counts": counts,
             "canonical_reuses": reuse,
             "opponent_support_actions": report["census"]["opponent_support_actions"],
