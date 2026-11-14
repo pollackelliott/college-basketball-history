@@ -16,6 +16,7 @@ from remote_implementation_control import (
 )
 from remote_implementation_expansion_phase0 import (
     Stop,
+    _require_repository_acceptance,
     _target_predecessor_authority,
     _verification_bound_main,
 )
@@ -81,6 +82,80 @@ def expansion_request() -> dict:
         },
         "authority": false_flags,
     }
+
+
+class ExpansionImplementationAcceptancePreflightTests(unittest.TestCase):
+    def test_preflight_passes_and_preserves_json_proof(self):
+        import json
+        import tempfile
+
+        payload = {
+            "summary": {
+                "status": "PASS",
+                "curated_lifecycle_suite": "PASS",
+            },
+            "errors": [],
+        }
+        with tempfile.TemporaryDirectory() as temporary, patch(
+            "remote_implementation_expansion_phase0.git",
+            return_value=SimpleNamespace(stdout="3" * 40),
+        ), patch(
+            "remote_implementation_expansion_phase0.run",
+            return_value=SimpleNamespace(
+                returncode=0,
+                stdout=json.dumps(payload),
+            ),
+        ):
+            diag = Path(temporary)
+            result = _require_repository_acceptance("3" * 40, diag)
+            self.assertEqual(result["summary"]["status"], "PASS")
+            self.assertEqual(
+                json.loads(
+                    (diag / "all-history-expansion-implementation-acceptance.json")
+                    .read_text(encoding="utf-8")
+                ),
+                payload,
+            )
+
+    def test_preflight_fails_before_transaction_on_acceptance_failure(self):
+        import json
+        import tempfile
+
+        payload = {
+            "summary": {
+                "status": "FAIL",
+                "curated_lifecycle_suite": "FAIL",
+            },
+            "errors": ["known generic blocker"],
+        }
+        with tempfile.TemporaryDirectory() as temporary, patch(
+            "remote_implementation_expansion_phase0.git",
+            return_value=SimpleNamespace(stdout="3" * 40),
+        ), patch(
+            "remote_implementation_expansion_phase0.run",
+            return_value=SimpleNamespace(
+                returncode=1,
+                stdout=json.dumps(payload),
+            ),
+        ):
+            with self.assertRaisesRegex(
+                Stop,
+                "EXPANSION_IMPLEMENTATION_ACCEPTANCE_FAILED",
+            ):
+                _require_repository_acceptance("3" * 40, Path(temporary))
+
+    def test_preflight_rejects_wrong_runtime_main(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as temporary, patch(
+            "remote_implementation_expansion_phase0.git",
+            return_value=SimpleNamespace(stdout="4" * 40),
+        ):
+            with self.assertRaisesRegex(
+                Stop,
+                "EXPANSION_IMPLEMENTATION_ACCEPTANCE_RUNTIME_MISMATCH",
+            ):
+                _require_repository_acceptance("3" * 40, Path(temporary))
 
 
 class ExpansionFreshVerificationRegressionTests(unittest.TestCase):
