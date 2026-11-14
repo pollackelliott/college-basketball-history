@@ -7,47 +7,41 @@ SCRIPT = ROOT / "tools/rehearse_george_mason_presentation.py"
 
 
 class GeorgeMasonPresentationRehearsalRefContractTests(unittest.TestCase):
-    def test_release_pr_may_advance_from_g_to_guarded_c(self):
+    def test_regression_uses_only_immutable_commits(self):
         source = SCRIPT.read_text(encoding="utf-8")
 
-        # The exact sealed historical commit remains immutable authority.
         self.assertIn(
             'SEALED_G = "0fe86b37405bc5322bec5639a28c1819bb97d5f7"',
             source,
         )
         self.assertIn(
-            'git("rev-parse", f"{SEALED_G}^{tree}") == SEALED_G_TREE'
-                .replace("{tree}", "{{tree}}"),
+            'REVIEWED_FIX = "fc42631af872e2ae6573efcbb15b93f668360fb2"',
+            source,
+        )
+        self.assertIn(
+            'GUARDED_C = "9db724322351dc2facdaf2934248b8c34912c3a3"',
             source,
         )
 
-        # PR #597 is a moving release locator: once guarded presentation
-        # successor C is published, its head must not be required to equal G.
-        self.assertNotIn('"G_REF_DRIFT"', source)
-        self.assertNotIn(
-            'git("rev-parse", "refs/remotes/origin/exact-gmu-sealed")',
-            source,
-        )
-        self.assertIn(
-            'git("merge-base", SEALED_G, gmu_release_head) == SEALED_G',
-            source,
-        )
-        self.assertIn(
-            '"SEALED_G_NOT_ANCESTOR_OF_RELEASE_HEAD"',
-            source,
-        )
+        # Generic CI must not depend on mutable historical PR refs.
+        self.assertNotIn("refs/pull/597", source)
+        self.assertNotIn("refs/pull/607", source)
+        self.assertNotIn("exact-gmu-release", source)
+        self.assertNotIn("exact-site-fix-source", source)
 
-        # The reviewed site-fix commit is likewise pinned by immutable commit
-        # ancestry rather than by assuming a mutable PR head never advances.
-        self.assertNotIn('"FIX_REF_DRIFT"', source)
+        # The accepted guarded C remains a direct child of sealed G, while its
+        # tree is reproduced by the permanent presentation-refresh planner.
         self.assertIn(
-            'git("merge-base", REVIEWED_FIX, site_fix_head) == REVIEWED_FIX',
+            'git("rev-parse", f"{GUARDED_C}^") == SEALED_G',
             source,
         )
-        self.assertIn(
-            '"REVIEWED_FIX_NOT_ANCESTOR_OF_SOURCE_HEAD"',
-            source,
-        )
+        self.assertIn('"GUARDED_C_PARENT_MISMATCH"', source)
+        self.assertIn('"GUARDED_C_TREE_NOT_REPRODUCED"', source)
+        self.assertIn("successor_sha=GUARDED_C", source)
+
+        # The regression no longer synthesizes a commit, so Git identity is
+        # irrelevant to future generic validation.
+        self.assertNotIn('"commit-tree"', source)
 
 
 if __name__ == "__main__":
