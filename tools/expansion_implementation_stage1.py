@@ -33,6 +33,20 @@ PACKAGE_FILES = (
 )
 SUPPORT_ACTIONS = ("NEW_SUPPLEMENTAL", "REUSE_INHERITED", "EXTEND_INHERITED")
 
+# Protected current main may legitimately enrich a shared inherited canonical game
+# after the immutable Research base was frozen (for example, another school's
+# completed Implementation can add exact venue/locality support).  Expansion Stage 1
+# may inherit only this narrow non-historical representation delta automatically.
+# Everything that can change game identity, result, H/A/N, game type, postseason
+# semantics, or administrative outcome remains fail-closed.
+CANONICAL_CURRENT_MAIN_ENRICHMENT_FIELDS = frozenset({
+    "venue_key",
+    "venue_id",
+    "site_city",
+    "site_state",
+    "notes",
+})
+
 
 class Stage1Stop(ValueError):
     """An unsafe or unauthorized expansion candidate has been rejected."""
@@ -88,6 +102,40 @@ def render_csv(fields: list[str], rows: list[dict[str, str]]) -> bytes:
     writer.writeheader()
     writer.writerows(rows)
     return out.getvalue().encode("utf-8")
+
+
+def classify_current_main_canonical_drift(
+    base_by_id: Mapping[str, dict[str, str]],
+    main_by_id: Mapping[str, dict[str, str]],
+    canonical_ids: list[str],
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Partition accepted representation enrichment from historical-semantic drift.
+
+    The immutable Research-base row remains provenance.  Protected current main may
+    be inherited automatically only when the same canonical ID still exists with the
+    exact same schema and every changed field is confined to venue/locality/provenance
+    enrichment.  Any identity, result, H/A/N, game-type, postseason, administrative,
+    or status change remains unresolved for an explicit authority path.
+    """
+    accepted: list[dict[str, Any]] = []
+    unresolved: list[str] = []
+    for game_id in canonical_ids:
+        before = base_by_id.get(game_id)
+        after = main_by_id.get(game_id)
+        if before is None or after is None or set(before) != set(after):
+            unresolved.append(game_id)
+            continue
+        changed = sorted(
+            field for field in before if before.get(field, "") != after.get(field, "")
+        )
+        if changed and set(changed) <= CANONICAL_CURRENT_MAIN_ENRICHMENT_FIELDS:
+            accepted.append({
+                "canonical_game_id": game_id,
+                "changed_fields": changed,
+            })
+            continue
+        unresolved.append(game_id)
+    return accepted, unresolved
 
 
 def materialize_support(
@@ -726,7 +774,15 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
     base_by_id = {r["canonical_game_id"]: r for r in base_canonical if r["canonical_game_id"] in baseline_ids}
     main_by_id = {r["canonical_game_id"]: r for r in main_canonical if r["canonical_game_id"] in baseline_ids}
     canonical_drift = sorted(k for k in baseline_ids if base_by_id.get(k) != main_by_id.get(k))
-    if canonical_drift:
+    accepted_enrichment, unresolved_canonical_drift = (
+        classify_current_main_canonical_drift(
+            base_by_id,
+            main_by_id,
+            canonical_drift,
+        )
+    )
+    current_main_reconciliation["accepted_canonical_enrichment"] = accepted_enrichment
+    if unresolved_canonical_drift:
         if current_main_reconciliation.get("status") == (
             "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
         ):
@@ -757,21 +813,28 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
                 for source_id in changed_sources
                 if len(assertion_ids.get(source_id, set())) == 1
             })
-            unexpected = sorted(set(canonical_drift) - set(allowed_canonical))
+            unexpected = sorted(
+                set(unresolved_canonical_drift) - set(allowed_canonical)
+            )
             if invalid_bindings or unexpected:
                 blockers.append({
                     "class": "CURRENT_MAIN_INHERITED_CANONICAL_DRIFT",
-                    "canonical_game_ids": canonical_drift,
+                    "canonical_game_ids": unresolved_canonical_drift,
                     "reason": "CORRECTION_ASSERTION_BINDING_MISMATCH",
                     "invalid_source_game_ids": invalid_bindings,
                     "unexpected_canonical_game_ids": unexpected,
+                    "accepted_nonhistorical_enrichment": accepted_enrichment,
                 })
             else:
                 current_main_reconciliation["accepted_canonical_game_ids"] = (
-                    canonical_drift
+                    unresolved_canonical_drift
                 )
         else:
-            blockers.append({"class": "CURRENT_MAIN_INHERITED_CANONICAL_DRIFT", "canonical_game_ids": canonical_drift})
+            blockers.append({
+                "class": "CURRENT_MAIN_INHERITED_CANONICAL_DRIFT",
+                "canonical_game_ids": unresolved_canonical_drift,
+                "accepted_nonhistorical_enrichment": accepted_enrichment,
+            })
     global_venues = read_csv_at_git(repo, main_sha, "data/reference/venues.csv")
     global_venue_reconciliation = reconcile_global_venues(
         validated["venue_support_rows"], global_venues,
