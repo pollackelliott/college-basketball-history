@@ -11,11 +11,11 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
@@ -23,23 +23,23 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner said Proceed for the VCU ALL_HISTORY_EXPANSION Stage 2 phase after independently verified EXPANSION_PHASE0 vcu-expansion-phase0-0001. This request performs only the permanent read-only STAGE2_CENSUS against the unchanged fresh-verified Phase 0 successor. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority.",
-    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census"
+    "authorization": "Existing owner-authorized VCU ALL_HISTORY_EXPANSION Stage 2 phase persists through OWNER_GATE_1_READY. Fresh-verified census vcu-expansion-stage2-census-0001 found exactly one historical opponent-display representation conflict for apprentice-school ('Apprentice School' versus 'The Apprentice School'), zero warnings, zero owner decisions, semantic drift PASS, and no other blocker topology. This authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete one-key census population. The permanent helper may change only representation-only opponent display fields under its field-level and semantic guards. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, or protected-main mutation authority.",
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation lane — Stage 2 deterministic opponent-display normalization"
   },
   "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
   "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/vcu/vcu-expansion-phase0-0001/successor-manifest.json",
-    "sha256": "54550af9dc4a2a3191eb33c5cc69d89221ac3097d287fa06403aa8511a46e592"
-  },
-  "previous_control_state_commit": "7a40ed847141cdd076721bd5cede69acc739109e",
-  "previous_control_state_sha256": "b36cf2fe1809d56e3fce8d435229bd5d77ba10af81588a5e3892aeae3d33fd8e",
-  "request_id": "vcu-expansion-stage2-census-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "b7d2e1e65cde758156ef613d41c070ae4092b4a4",
+  "previous_control_state_sha256": "2baaa090cd11c8f1c1d1f86b35e1853ccac137c8deacb5cd07954459d7411eb3",
+  "request_id": "vcu-expansion-stage2-opponent-display-normalize-0001",
   "schema_version": 1,
   "school_key": "vcu",
   "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "e691fa531c77149c596b65c3e5d74f8470c42a12b4ad92c3611599dc6c25d3f3"
+  },
   "target_branch": "data/vcu-onboarding",
   "target_sha": "6e83bffb541577e1feff92b1d185554b4701de1c"
 }
