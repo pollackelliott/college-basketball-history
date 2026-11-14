@@ -307,6 +307,19 @@ def freeze_authority(
         )
         semantic_sha = semantic_snapshot_sha256(semantic_snapshot)
         package_hashes = {k: hashes[k] for k in PACKAGE_FILES}
+        predecessor_package_hashes = dict(baseline["package_member_sha256"])
+        if report.get("current_main_reconciliation", {}).get("status") == (
+            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
+        ):
+            predecessor_package_hashes = dict(
+                report["current_main_reconciliation"][
+                    "current_package_member_sha256"
+                ]
+            )
+            require(
+                set(predecessor_package_hashes) == set(PACKAGE_FILES),
+                "CURRENT_MAIN_REBASE_PREDECESSOR_HASH_SET_INVALID",
+            )
         manifest = {
             "schema_version": 1,
             "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
@@ -344,6 +357,7 @@ def freeze_authority(
             ),
             "venue_reconciliation_census": venue_reconciliation_census,
             "baseline_package_member_sha256": baseline["package_member_sha256"],
+            "accepted_predecessor_package_member_sha256": predecessor_package_hashes,
             "baseline_program_row_sha256": canonical_row_sha256(baseline["program"]),
             "frozen_program_projection_sha256": canonical_row_sha256(expected),
             "frozen_program_projection": expected,
