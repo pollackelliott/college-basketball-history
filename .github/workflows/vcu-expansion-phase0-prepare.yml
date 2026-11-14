@@ -44,6 +44,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: vcu-expansion-phase0-preparation
-          path: /tmp/vcu-prep-artifacts
+          path: |
+            /tmp/vcu-prep-artifacts
+            /tmp/stage1-a
+            /tmp/stage1-b
           if-no-files-found: ignore
           retention-days: 30
