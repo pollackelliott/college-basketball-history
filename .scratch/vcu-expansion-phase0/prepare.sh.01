@@ -19,6 +19,10 @@ expected_canonical={
 }
 classes=[item['class'] for item in report['blockers']]
 if classes != ['DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING']:
+    print(json.dumps({
+        'unexpected_stage1_blockers': report['blockers'],
+        'current_main_reconciliation': report.get('current_main_reconciliation') or {},
+    }, indent=2, sort_keys=True))
     raise SystemExit(f'unexpected Stage 1 blockers: {classes}')
 if report['canonical_identity_census']['counts']['IDENTITY_REVIEW_BLOCKER'] != 0:
     raise SystemExit('canonical identity blocker remains')
