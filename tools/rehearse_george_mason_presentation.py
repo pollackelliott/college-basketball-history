@@ -119,14 +119,21 @@ def browser_series(series_source: str, all_games: list[dict]) -> dict:
 
 def main() -> int:
     require(shutil.which("node") is not None, "NODE_REQUIRED")
-    # Fetch exact GitHub PR refs; never accept branch/PR movement.
+    # PR refs are transport locators only. The George Mason release PR is
+    # expected to advance from sealed G to its guarded presentation successor C;
+    # never mistake that legitimate post-seal head movement for drift in the
+    # immutable G authority. Pin and verify the accepted commits themselves,
+    # while requiring each moving PR head to retain the accepted commit in its
+    # ancestry.
     git("fetch", "--no-tags", "origin",
-        "+refs/pull/597/head:refs/remotes/origin/exact-gmu-sealed",
-        "+refs/pull/607/head:refs/remotes/origin/exact-site-fix")
-    require(git("rev-parse", "refs/remotes/origin/exact-gmu-sealed")
-            == SEALED_G, "G_REF_DRIFT")
-    require(git("rev-parse", "refs/remotes/origin/exact-site-fix")
-            == REVIEWED_FIX, "FIX_REF_DRIFT")
+        "+refs/pull/597/head:refs/remotes/origin/exact-gmu-release",
+        "+refs/pull/607/head:refs/remotes/origin/exact-site-fix-source")
+    gmu_release_head = git("rev-parse", "refs/remotes/origin/exact-gmu-release")
+    site_fix_head = git("rev-parse", "refs/remotes/origin/exact-site-fix-source")
+    require(git("merge-base", SEALED_G, gmu_release_head) == SEALED_G,
+            "SEALED_G_NOT_ANCESTOR_OF_RELEASE_HEAD")
+    require(git("merge-base", REVIEWED_FIX, site_fix_head) == REVIEWED_FIX,
+            "REVIEWED_FIX_NOT_ANCESTOR_OF_SOURCE_HEAD")
     require(git("rev-parse", f"{SEALED_G}^{{tree}}") == SEALED_G_TREE,
             "SEALED_HISTORICAL_TREE_CHANGED")
     require(git("rev-parse", f"{REVIEWED_FIX}:{ASSET_PATH}")
