@@ -7,9 +7,9 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from expansion_implementation_stage1 import (
-    Stage1Stop, build_candidate, csv_rows, materialize_support,
-    prepare_current_main_identity_rebase, reconcile_canonical, render_csv,
-    sha256, stage1,
+    Stage1Stop, build_candidate, classify_current_main_canonical_drift,
+    csv_rows, materialize_support, prepare_current_main_identity_rebase,
+    reconcile_canonical, render_csv, sha256, stage1,
 )
 from all_history_expansion_freeze import canonical_row_sha256, OPPONENT_EXTENSION_FIELDS
 
@@ -287,6 +287,86 @@ class CurrentMainIdentityRebaseTests(unittest.TestCase):
 
 
 
+class CurrentMainCanonicalDriftTests(unittest.TestCase):
+    def canonical(self, game_id="CB-1", **updates):
+        row = {
+            "canonical_game_id": game_id,
+            "season_label": "2009-2010",
+            "game_date": "2010-02-09",
+            "date_precision": "EXACT",
+            "team_a_key": "george-mason",
+            "team_b_key": "sample",
+            "team_a_score": "82",
+            "team_b_score": "77",
+            "result_winner_team_key": "george-mason",
+            "overtime_periods": "",
+            "site_type": "TEAM_A_HOME",
+            "designated_home_team_key": "george-mason",
+            "venue_key": "",
+            "venue_id": "",
+            "site_city": "",
+            "site_state": "",
+            "game_type": "REGULAR_SEASON",
+            "postseason_round": "",
+            "administrative_status": "",
+            "administrative_note": "",
+            "canonical_status": "PROVISIONAL",
+            "notes": "",
+        }
+        row.update(updates)
+        return row
+
+    def test_accepted_venue_locality_provenance_enrichment_is_nonhistorical(self):
+        before = self.canonical()
+        after = self.canonical(
+            venue_key="eaglebank-arena",
+            venue_id="VEN-000576",
+            site_city="Fairfax",
+            site_state="VA",
+            notes="[RESOLVED_TARGET_HOME_CHRONOLOGY_BACKFILL]",
+        )
+        accepted, unresolved = classify_current_main_canonical_drift(
+            {"CB-1": before}, {"CB-1": after}, ["CB-1"]
+        )
+        self.assertEqual(unresolved, [])
+        self.assertEqual(accepted, [{
+            "canonical_game_id": "CB-1",
+            "changed_fields": [
+                "notes", "site_city", "site_state", "venue_id", "venue_key",
+            ],
+        }])
+
+    def test_historical_semantic_drift_remains_blocking(self):
+        before = self.canonical()
+        for field, value in (
+            ("team_a_key", "different-opponent"),
+            ("team_a_score", "83"),
+            ("site_type", "NEUTRAL"),
+            ("game_type", "POSTSEASON"),
+        ):
+            after = self.canonical(**{field: value})
+            accepted, unresolved = classify_current_main_canonical_drift(
+                {"CB-1": before}, {"CB-1": after}, ["CB-1"]
+            )
+            self.assertEqual(accepted, [], field)
+            self.assertEqual(unresolved, ["CB-1"], field)
+
+    def test_missing_or_schema_changed_row_remains_blocking(self):
+        before = self.canonical()
+        accepted, unresolved = classify_current_main_canonical_drift(
+            {"CB-1": before}, {}, ["CB-1"]
+        )
+        self.assertEqual(accepted, [])
+        self.assertEqual(unresolved, ["CB-1"])
+        after = dict(before)
+        after["new_field"] = "x"
+        accepted, unresolved = classify_current_main_canonical_drift(
+            {"CB-1": before}, {"CB-1": after}, ["CB-1"]
+        )
+        self.assertEqual(accepted, [])
+        self.assertEqual(unresolved, ["CB-1"])
+
+
 class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
     """Synthetic Git and verifier surfaces test Stage 1 stop boundaries."""
 
@@ -363,6 +443,142 @@ class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
                 self.assertFalse((repo / "schools").exists())
                 self.assertTrue((output / "expansion-stage1-reconciliation.json").exists())
                 return result
+
+    def test_explicit_correction_can_coexist_with_current_main_venue_enrichment(self):
+        import zipfile
+        from unittest.mock import patch
+        fixture = Stage1FoundationTests()
+        fixture.setUp()
+        baseline, validated, payload = fixture.fixture()
+        baseline.update({
+            "program": {"program_key": "sample"},
+            "scope_row": {"school": "Sample"},
+            "accomplishment_row": None,
+            "package_member_sha256": {
+                k: sha256(v) for k, v in baseline["package_bytes"].items()
+            },
+            "published_canonical_ids": ["CB-CORR", "CB-ENRICH"],
+        })
+        fields = [
+            "canonical_game_id", "season_label", "game_date", "date_precision",
+            "team_a_key", "team_b_key", "team_a_score", "team_b_score",
+            "result_winner_team_key", "overtime_periods", "site_type",
+            "designated_home_team_key", "venue_key", "venue_id", "site_city",
+            "site_state", "game_type", "postseason_round",
+            "administrative_status", "administrative_note",
+            "canonical_status", "notes",
+        ]
+        def canonical(game_id, team_a):
+            return dict.fromkeys(fields, "") | {
+                "canonical_game_id": game_id,
+                "season_label": "1978-1979",
+                "game_date": "1978-12-09",
+                "date_precision": "EXACT",
+                "team_a_key": team_a,
+                "team_b_key": "sample",
+                "team_a_score": "69",
+                "team_b_score": "120",
+                "result_winner_team_key": "sample",
+                "site_type": "TEAM_B_HOME",
+                "designated_home_team_key": "sample",
+                "game_type": "REGULAR_SEASON",
+                "canonical_status": "PROVISIONAL",
+            }
+        base_corr = canonical("CB-CORR", "old-key")
+        main_corr = canonical("CB-CORR", "new-key")
+        main_corr["notes"] = "accepted correction"
+        base_enrich = canonical("CB-ENRICH", "george-mason")
+        main_enrich = dict(
+            base_enrich,
+            venue_key="eaglebank-arena",
+            venue_id="VEN-000576",
+            site_city="Fairfax",
+            site_state="VA",
+            notes="accepted reciprocal venue enrichment",
+        )
+        base_rows = [base_corr, base_enrich]
+        main_rows = [main_corr, main_enrich]
+        validated = dict(validated)
+        validated["source_rows"] = []
+        validated["opponent_support_rows"] = []
+        validated["venue_support_rows"] = []
+        validated["season_accounting_rows"] = []
+        validated["non_d1_scan_rows"] = []
+        validated["residual_rows"] = []
+        metadata = {
+            "status": "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION",
+            "changed_members": ["source-games.csv", "opponents.csv"],
+            "changed_source_game_ids": ["OLD-1"],
+            "accepted_canonical_game_ids": [],
+            "support_action_rebases": [],
+            "resolved_external_source_game_ids": ["OLD-1"],
+            "current_package_member_sha256": baseline["package_member_sha256"],
+        }
+
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "checkout"; repo.mkdir()
+            artifact = root / "accepted.zip"
+            with zipfile.ZipFile(artifact, "w") as archive:
+                archive.writestr("expansion-freeze.json", json.dumps({
+                    "researched_inception_season": "1966-1967",
+                    "schema_version": 1,
+                }))
+                for name, raw in payload.items():
+                    archive.writestr(name, raw)
+            output = root / "rehearsal"
+            main = "a" * 40
+            base = "b" * 40
+
+            def read_rows(_repo, sha, path):
+                if path.endswith("programs.csv"):
+                    return [baseline["program"]]
+                if path.endswith("program-top-level-scope.csv"):
+                    return [baseline["scope_row"]]
+                if path.endswith("program-accomplishments.csv"):
+                    return []
+                if path.endswith("data/canonical/games.csv"):
+                    return base_rows if sha == base else main_rows
+                if path.endswith("data/evidence/game-assertions.csv"):
+                    return [{
+                        "source_program_key": "sample",
+                        "source_game_id": "OLD-1",
+                        "canonical_game_id": "CB-CORR",
+                    }]
+                if path.endswith("data/reference/venues.csv"):
+                    return []
+                raise AssertionError((sha, path))
+
+            with patch("expansion_implementation_stage1.git_revision", return_value=main), \
+                 patch("expansion_implementation_stage1.verify_expansion",
+                       return_value={"status":"VERIFIED_EXPANSION_RESEARCH_FROZEN",
+                                     "school_key":"sample",
+                                     "research_base_sha":base}), \
+                 patch("expansion_implementation_stage1.authenticate_baseline",
+                       return_value=baseline), \
+                 patch("expansion_implementation_stage1.validate_delta_payload",
+                       return_value=validated), \
+                 patch("expansion_implementation_stage1.prepare_current_main_identity_rebase",
+                       return_value=(baseline, validated, metadata, [])), \
+                 patch("expansion_implementation_stage1.read_csv_at_git",
+                       side_effect=read_rows):
+                result = stage1(
+                    repo, "sample", artifact, sha256(artifact.read_bytes()),
+                    base, main, output,
+                )
+
+        self.assertEqual(
+            [b["class"] for b in result["blockers"]],
+            ["DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"],
+        )
+        reconciled = result["current_main_reconciliation"]
+        self.assertEqual(reconciled["accepted_canonical_game_ids"], ["CB-CORR"])
+        self.assertEqual(reconciled["accepted_canonical_enrichment"], [{
+            "canonical_game_id": "CB-ENRICH",
+            "changed_fields": [
+                "notes", "site_city", "site_state", "venue_id", "venue_key",
+            ],
+        }])
 
     def test_changed_inherited_package_is_explicit_blocker(self):
         result = self._invoke(drift=True)
