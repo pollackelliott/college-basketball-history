@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "vcu",
+  "created_at": "2026-11-14T20:08:22.960044+00:00",
+  "input_fingerprint": {
+    "sha256": "3222c72c8dbc61b3de2a41f73d2ce09118fd52584684959375e355ee665d6499",
+    "git_head": "6e83bffb541577e1feff92b1d185554b4701de1c",
+    "files": {
+      "schools/vcu/source-games.csv": "e42f54b472900729f916edb75036efc40379b461d8b85452099a9a451f61c251",
+      "schools/vcu/opponents.csv": "126b6ae605d15eb598d52dae7e319efc75db97cf7324226237a2a6a35391d2c5",
+      "schools/vcu/venues.csv": "92cb8b75f15cc20235c8e92e9f70c29d658360061fb2eaf57aeb1e7c84162d5f",
+      "schools/vcu/conferences.csv": "8941e06e7ac83d071a7c934394b338b87d82f86be96e9a5b70b30df85ccdaf09",
+      "schools/vcu/notes.md": "5d5365a4e9c74a0f3c2502320224edfaf1e7d28ab0cefe5ee785ceeb6cced4a0",
+      "schools/vcu/source-notes.md": "8b6c4eeb4f8ee12eaed13e5042da0a885a53209a4051383926c9614c22131227",
+      "data/canonical/games.csv": "296f51a3e03cd18fff83a12821f622a59a8faad6fa4ba86ee6af9ffe028fb5b4",
+      "data/evidence/game-assertions.csv": "8fb63d2cbfc7c9291b6c35be8dda398a9a6b7fef2e8130af33c57a797bfdd090",
+      "data/reconciliation/discrepancies.csv": "110db7e35d6335694ad946c1fddb3c36fac8e90aa021f89959ce17905b6d8de2",
+      "data/reference/programs.csv": "2ad14b78ad91ba08a87fa3c5f788c6a45f49579d94f9e6339fa90377be42b15f",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "93319d0e826fe833253c524d7299fe90547925d9cc2ce0feeb55f54df9e7c43b",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "2166f3205ba3d084002d46fb1507044b696e0c32ccc50f529cf6e10d5c1fb707",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "729b349032b95b7db28207b51519c72d6d1ae15c9846bbd9310e77ac083bba27",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "aa3344c74a8c689bd64c31543e57cf94dda6d621de020cbbcb53bc10c5b283de",
+      "tools/onboarding_plan.py": "b0cbabdf934494bf619e1cf485c61a54abb61835a072a17f8b4ed4e6e287c9a1",
+      "tools/program_history.py": "b956c6c77b17d23423bfef7004e4e73e6b87e4f37c3b2baf2feb9779f9ea8a62",
+      "tools/validate_data.py": "f5ba42f68d25804c37833d712766347b2ad342818fa9e98332a181e31591f854",
+      "tools/verify_program_accomplishments.py": "9b2cd4ec6bafcd9f825fd6d6a1c42a52ecce0497c523f3fbdb48f157aab59dcb"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: apprentice-school: ['Apprentice School', 'The Apprentice School']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 1759,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 477,
+      "venues": 69,
+      "conference_intervals": 5,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: apprentice-school: ['Apprentice School', 'The Apprentice School']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}

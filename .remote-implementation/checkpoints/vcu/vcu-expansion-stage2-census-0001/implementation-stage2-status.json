@@ -1,0 +1,41 @@
+{
+  "blockers": [
+    "historical opponent display conflict: apprentice-school: ['Apprentice School', 'The Apprentice School']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/vcu-6e83bffb5415",
+  "capability_census": {
+    "path": ".onboarding/vcu/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "6e83bffb541577e1feff92b1d185554b4701de1c",
+  "integration_base_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "integration_semantic_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "preflight": {
+    "blocker_count": 1,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/vcu/plan.json",
+    "review_path": ".onboarding/vcu/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
