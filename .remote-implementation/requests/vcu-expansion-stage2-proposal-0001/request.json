@@ -1,0 +1,50 @@
+{
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "The existing owner-authorized VCU ALL_HISTORY_EXPANSION Stage 2 phase persists through OWNER_GATE_1_READY. Fresh-verified opponent-display normalization vcu-expansion-stage2-opponent-display-normalize-0001 produced CAPABILITY_CENSUS_READY with zero blockers, zero warnings, semantic drift PASS, and exactly nine decisions. This exact recommendation map keeps canonical 1OT for the two pre-1973 reciprocal-supported overtime conflicts while preserving VCU source assertions, and carries forward the prior accepted VCU Stage 2 disposition KEEP_POSTSEASON_UNRESOLVED for the same seven ECAC/CBI postseason-classification decisions because the controlled taxonomy cannot represent those events without false classification. Run only the permanent read-only proposal rehearsal. No Owner Gate 1 approval/fill, seal/apply, release, Preview, merge, Production, recovery, tracked basketball mutation, or Owner Gate 2 authority.",
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation lane — mature nine-decision Stage 2 recommendation-map rehearsal"
+  },
+  "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "86d4d2e90b76cd3063ed47651d4924f07dbf8026",
+  "previous_control_state_sha256": "cfba4a01801295a5b7034bcc3d1ec0f743f9d4e9d49f578d5133c6ae929706dc",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/vcu-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "da619e7ae0090fbb19ba7b4df571b66cf36266953b49324a635621cb076a1dcb"
+  },
+  "request_id": "vcu-expansion-stage2-proposal-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/vcu/vcu-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "ba6ab71897ebe2a3fef35f9b52236fe45d27f407406187f15ac342a700ceea21"
+  },
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1"
+}
