@@ -110,3 +110,95 @@ Generated mechanically from durable Research checkpoint evidence. Literal row-le
 - Thirty supported controlled round assignments are populated.
 - Four pre-64-team VCU institutional `First Round` records remain deliberately blank because no historically honest mapping to the current controlled vocabulary is supported: 1980 vs Iowa; 1981 vs Long Island; 1983 vs La Salle; 1984 vs Northeastern.
 - The Stage 3A-4 regular-season OPPONENT_HOME responsibility sidecar was reconciled as a complete 612-row population by repaired permanent Stage 4 tooling. Literal source venue tokens remain literal evidence and never establish physical venue identity.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Supplemental source evidence and immutable lineage
+
+Original accepted Stage 4 source-notes.md follows byte-preserved in content, after this provenance heading.
+VCU Stage 6 accepted Stage 5 review and explicitly confirmed all 109 accepted source identities unchanged. The Stage 4 source notes below preserve original source-literal details, 2026-27 official record-book evidence and site-evidence register provenance.
+
+## Frozen research provenance
+
+- VCU Stage 6: SHA-256 ff334d2d8d91a13a21968198212b3e71c2d9b555b95c0d8f548cb3f77440c9e4; seven neutral building terminal research statuses, 50 opponent-home outside source-school venue responsibility, 52 home-chronology passes, 27/59 owner scan approved.
+- VCU Stage 4: SHA-256 8f0fb33621df107e5be74fad60198cea2167e9c666d5e241d9168f098b11e0d9; zero Research errors, one authenticated inherited completed-season expansion exception.
+- VCU Stage 3B: SHA-256 00f552c1e46fd753db96172cde923f0b90fa03162c7a56bd5d321a64f56db8df; original accepted ledger/game evidence unchanged.
+- Immutable Research-base Git commit: df73675852ec5a43dfac50da0ee06d8bcabf8832; inherited six-file package and global/canonical population authenticated by the permanent freeze validator.
+- No additional external historical research was conducted at Research Freeze.
+- The 7 final historical neutral exact-building unknowns are documented in expansion-residuals.csv with their original accepted site_research_basis and source IDs.
+- The 50 OPPONENT_HOME rows deliberately have no building claims; source venue evidence, when explicit, remains in the original accepted source raw fields.
+- Original Stage 5 owner scan source labels and accepted IDs are frozen in expansion-non-d1-scan.csv.
+
+## Accepted Stage 4 source notes (verbatim)
+
+# vcu source notes
+
+Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.
+
+## Research coverage declaration
+
+- Primary-source historical results cutoff: 2025-2026
+- Required completed-season cutoff: 2025-2026
+- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.
+
+## Durable row-level source families
+
+
+
+## Original accepted Stage 4 local venue authoring (verbatim CSV)
+
+The inherited physical venues are represented by exact baseline-key extension support. This original accepted Stage 4 capsule preserves richer local facility chronology and source relationship evidence without changing baseline fields forbidden by the permanent validator.
+
+```csv
+source_program_key,venue_key,venue_id,canonical_name,aliases,city,state,venue_type,known_opened,known_closed,venue_date_precision,games_currently_assigned,first_assigned_game,last_assigned_game,relationship_type,relationship_start,relationship_end,relationship_date_precision,site_rule,source_basis,notes
+vcu,vcu-franklin-street-gym,,Franklin Street Gym,FS,Richmond,VA,gymnasium,1952,2020,YEAR,41,1968-12-06,1973-02-27,primary_home,1968-1969,1972-1973,SEASON,Use exact official game-level FS/RC markers during 1971-72 and 1972-73; earlier 1968-71 Franklin Street Gym coverage comes from explicit official season-wide statement.,VCU-RB-2026-27;VCU-RB-2026-27-ONLINE;VCU-FSG-HISTORY-2022,"PROVISIONAL local venue key, not a newly allocated global physical ID. Research-base/global physical reuse deliberately deferred to current-main rebase; game-level source tokens and real concurrent venue relationship control. Coverage dates specify only this supplemental population, not an asserted complete career of the building. VCU institution: opened 1952, demolished 2020; 1970 expansion same physical building."
+vcu,vcu-richmond-coliseum,,Richmond Coliseum,RC,Richmond,VA,arena,1971,,YEAR,11,1971-12-20,1973-02-07,alternate_home,1971-1972,1972-1973,SEASON,Use exact official game-level FS/RC markers during 1971-72 and 1972-73; earlier 1968-71 Franklin Street Gym coverage comes from explicit official season-wide statement.,VCU-RB-2026-27;VCU-RB-2026-27-ONLINE;VCU-FSG-HISTORY-2022;VCU-RC-CITY-RICHMOND,"PROVISIONAL local venue key, not a newly allocated global physical ID. Research-base/global physical reuse deliberately deferred to current-main rebase; game-level source tokens and real concurrent venue relationship control. Coverage dates specify only this supplemental population, not an asserted complete career of the building. Record book home-courts chronology begins 1971; City of Richmond confirms venue site at 601 E Leigh St."
+
+```
+
+## Exact-label opponent support reconciliation
+
+Nine aliases have a prior Stage 4 support_action of EXTEND_INHERITED but no exact inherited literal-label/key pair. The freeze contract treats those as new *label support*, while retaining exactly their accepted canonical opponent identities.
+
+```json
+[
+  [
+    "Atlantic Christian",
+    "barton"
+  ],
+  [
+    "Augusta",
+    "augusta"
+  ],
+  [
+    "Baltimore",
+    "university-of-baltimore"
+  ],
+  [
+    "Mount St. Mary’s",
+    "mount-st-mary-s"
+  ],
+  [
+    "Norfolk State",
+    "norfolk-state"
+  ],
+  [
+    "ST. FRANCIS",
+    "saint-francis-pa"
+  ],
+  [
+    "Virginia State",
+    "virginia-state"
+  ],
+  [
+    "Virginia Union",
+    "virginia-union"
+  ],
+  [
+    "Wilmington",
+    "wilmington-delaware"
+  ]
+]
+```

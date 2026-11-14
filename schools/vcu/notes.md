@@ -66,3 +66,25 @@ CURRENT-MAIN REBASE REQUIRED BEFORE TRACKED PHASE 0: YES
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=7a93e99ed37d66dfe07a801c3ecec86cd9f16d99` from `research_base_sha=9b009c0bed995a9d9af52c5908f0b6abec5532a7`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# VCU ALL_HISTORY_EXPANSION — supplemental Research Freeze
+
+- Workflow: ALL_HISTORY_EXPANSION. School key: vcu.
+- Original immutable research_base_sha: df73675852ec5a43dfac50da0ee06d8bcabf8832.
+- Researched institutional program inception: 1968-1969. Accepted top-level published baseline is inherited, scoped 1973-74+.
+- Exact accepted 109 competitive supplement games: five ACTIVE seasons 1968-1969 through 1972-1973; game rows reproduced byte-for-byte from the verified Stage 4 package (Stage 6 audit approved).
+- Inherited baseline source package contains 1650 source games; no inherited source games or canonical rows are copied into supplemental source rows. The immutable baseline remains authoritative and unchanged.
+- Source ledger season totals: 1968-1969 23; 1969-1970 23; 1970-1971 24; 1971-1972 19; 1972-1973 20. All are REGULAR_SEASON, with HOME 52, OPPONENT_HOME 50, NEUTRAL 7; zero exhibitions, unknown H/A/N, and postseason games.
+- Opponent support: 82 source-literal/key rows; 30 exact inherited label/key extensions and 52 new source-label/key support rows (including 9 literal aliases of inherited institutions whose exact inherited label/key pair does not exist). Every existing institutional identity and D1 classification is preserved.
+- Venue support: two EXTEND_INHERITED physically identical sites, Franklin Street Gym / VEN-001102 and Richmond Coliseum / VEN-000175, preserving inherited venue keys and relationships. New supplemental HOME assignment counts are 41 and 11. Physical IDs are not allocated or mutated.
+- Stage 5 owner approved the complete 27-key / 59-game NON_D1 scan with response "Approved. Proceed"; no flagged identities.
+- Stage 6 adversarial self-challenge: PASS with zero historical-semantic corrections; the seven 1968-1969 Quantico and Fort Eustis location-complete historic regular-season neutral exact-building blanks remain accepted NONBLOCKING_RESEARCHED residuals. OPPONENT_HOME physical buildings for 50 rows are outside source-school responsibility, not researched building debt.
+- The original source literal `#at Bridgewater` conflicting with explicit Quantico tournament footnote is preserved verbatim; accepted neutral classification remains unchanged.
+- The inherited four-row Southeastern baseline correction was resolved separately by PR #566 with exact Production proof; correction question is retained as NO_EXPANSION_IMPACT, not re-applied in this supplement.
+- All five seasons ACTIVE; no dormant/no-team seasons or separate documented exclusions identified in the accepted supplemental population. The exclusions table is explicitly empty.
+- Stage 4 parent ZIP SHA-256: 8f0fb33621df107e5be74fad60198cea2167e9c666d5e241d9168f098b11e0d9. Stage 3B original SHA-256: 00f552c1e46fd753db96172cde923f0b90fa03162c7a56bd5d321a64f56db8df. Stage 6 audit parent ZIP SHA-256: ff334d2d8d91a13a21968198212b3e71c2d9b555b95c0d8f548cb3f77440c9e4.
+- Research Freeze is supplemental-only and does not authorize Implementation, protected-main changes, shared-reference registrations, or reopening inherited published history.
