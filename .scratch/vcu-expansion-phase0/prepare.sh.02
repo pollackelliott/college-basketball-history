@@ -1,0 +1,66 @@
+u-freeze.zip \
+  --expected-sha256 "${FREEZE_SHA}" \
+  --research-base "${RESEARCH_BASE}" \
+  --main-sha "${MAIN_SHA}" \
+  --independent-proof /tmp/stage1-independent-proof.json \
+  --independent-proof-sha256 "${PROOF_SHA}" \
+  --repo /tmp/runtime \
+  --output /tmp/integration
+
+INTEGRATION_SHA="$(sha256sum /tmp/integration/expansion-integration-freeze.json | awk '{print $1}')"
+python /tmp/runtime/tools/all_history_expansion_phase0_preview.py \
+  --repo /tmp/runtime \
+  --integration-freeze /tmp/integration \
+  --output /tmp/phase0-preview
+
+mkdir -p /tmp/vcu-prep-artifacts
+cp /tmp/stage1-independent-proof.json /tmp/vcu-prep-artifacts/
+cp /tmp/stage1-b/expansion-stage1-reconciliation.json /tmp/vcu-prep-artifacts/
+cp /tmp/integration/expansion-integration-freeze.json /tmp/vcu-prep-artifacts/
+cp /tmp/phase0-preview/phase0-preview.json /tmp/vcu-prep-artifacts/
+MAIN_SHA="${MAIN_SHA}" PROOF_SHA="${PROOF_SHA}" INTEGRATION_SHA="${INTEGRATION_SHA}" \
+python - <<'PY'
+import json, os
+from pathlib import Path
+summary={
+    'kind':'VCU_EXPANSION_PHASE0_PREPARATION',
+    'status':'READY_TO_SUBMIT_GUARDED_EXPANSION_PHASE0',
+    'school_key':'vcu',
+    'protected_main_sha':os.environ['MAIN_SHA'],
+    'research_base_sha':'df73675852ec5a43dfac50da0ee06d8bcabf8832',
+    'research_freeze_sha256':'00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9',
+    'stage1_independent_proof_sha256':os.environ['PROOF_SHA'],
+    'integration_freeze_sha256':os.environ['INTEGRATION_SHA'],
+    'target_branch':'data/vcu-onboarding',
+    'target_sha':'c58fae3653a86d5317b45d210951beea9cee1f0d',
+    'tracked_mutation':'NONE_PREPARATION_ONLY',
+}
+Path('/tmp/vcu-prep-artifacts/preparation-summary.json').write_text(
+    json.dumps(summary,indent=2,sort_keys=True)+'\n'
+)
+PY
+
+set -euo pipefail
+
+git fetch --no-tags origin \
+  +refs/heads/main:refs/remotes/origin/main \
+  +refs/heads/${CONTROL_BRANCH}:refs/remotes/origin/${CONTROL_BRANCH} \
+  +refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}
+test "$(git rev-parse refs/remotes/origin/main)" = "${MAIN_SHA}"
+test "$(git rev-parse refs/remotes/origin/${CONTROL_BRANCH})" = "${EXPECTED_CONTROL_SHA}"
+test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "${EXPECTED_TARGET_SHA}"
+
+rm -rf /tmp/control
+git worktree add --detach /tmp/control "${EXPECTED_CONTROL_SHA}"
+git -C /tmp/control config user.name "github-actions[bot]"
+git -C /tmp/control config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+cmp /tmp/control/.github/workflows/remote-implementation.yml \
+    /tmp/runtime/.github/workflows/remote-implementation.yml
+
+CONTROL_STATE=/tmp/control/.remote-implementation/control-state.json
+python - "${CONTROL_STATE}" "${REQUEST_ID}" <<'PY'
+import json, sys
+state=json.load(open(sys.argv[1]))
+request_id=sys.argv[2]
+if state.get('lifecycle_state') != 'IDLE' or state.get('transaction_state') != 'COMPLETE':
+    
