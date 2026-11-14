@@ -1186,7 +1186,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/vcu/vcu-expansion-release-preview-verify-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "0450386a88814f7fc1f9d1e85d803ac1441e59d2665fda7a5f619eda33fc0630",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -1195,7 +1195,7 @@
     "preview_deployment_id": 7794320648,
     "preview_url": "https://college-basketball-history-ivqarxedr-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "vcu-expansion-release-preview-verify-0001",
     "school_key": "vcu",
     "target_branch": "data/vcu-onboarding",
