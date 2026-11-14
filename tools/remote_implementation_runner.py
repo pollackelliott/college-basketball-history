@@ -30,6 +30,7 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
+    OP_RELEASE_PRESENTATION_REFRESH,
     OP_RELEASE_PREVIEW_VERIFY,
     OP_RELEASE_GATE2_APPROVAL,
     OP_RELEASE_PRODUCTION_PROOF,
@@ -137,6 +138,11 @@ from remote_implementation_final_release import (
 from remote_implementation_release_preview import (
     verify_release_preview_authority,
     verify_pr_checks_and_preview,
+)
+from remote_implementation_presentation_publish import (
+    run_presentation_refresh,
+    finalize_presentation_refresh_successor,
+    validate_presentation_intent,
 )
 from remote_implementation_release_readiness import (
     build_release_pr_packet,
@@ -4330,6 +4336,44 @@ def run_recovery(
             )
             return
 
+        if state.get("active_operation") == OP_RELEASE_PRESENTATION_REFRESH:
+            if manifest.get("operation") != OP_RELEASE_PRESENTATION_REFRESH:
+                raise Stop("RECOVERY_PRESENTATION_WRITEAHEAD_OPERATION_MISMATCH")
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_bytes = git_show_bytes(predecessor_commit, original_request_path)
+            if sha256_bytes(original_bytes) != state["active_request_sha256"]:
+                raise Stop("RECOVERY_PRESENTATION_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_bytes)
+            if original_request.get("operation") != OP_RELEASE_PRESENTATION_REFRESH:
+                raise Stop("RECOVERY_PRESENTATION_REQUEST_OPERATION_MISMATCH")
+            if manifest.get("request_sha256") != state["active_request_sha256"]:
+                raise Stop("RECOVERY_PRESENTATION_WRITEAHEAD_REQUEST_MISMATCH")
+            validate_presentation_intent(original_request, manifest, repo=ROOT)
+            commit = finalize_presentation_refresh_successor(
+                active=state,
+                request=original_request,
+                request_sha256=state["active_request_sha256"],
+                live_main=live_main,
+                writeahead=manifest,
+                writeahead_path=state["active_writeahead_path"],
+                writeahead_sha256=state["active_writeahead_sha256"],
+                writeahead_commit=state.get("active_writeahead_commit"),
+                expected_remote=request_commit,
+                publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
+                extra_commit_paths=[directory],
+                recovery_request_id=request["request_id"],
+                recovery_classification=classification,
+                repo=ROOT,
+            )
+            print(
+                "REMOTE PRESENTATION REFRESH RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
         if state.get("active_operation") == OP_STAGE2_SEALED_APPLY:
             if manifest.get("operation") != OP_STAGE2_SEALED_APPLY:
                 raise Stop("RECOVERY_SEALED_APPLY_WRITEAHEAD_OPERATION_MISMATCH")
@@ -4606,6 +4650,11 @@ def main() -> int:
                 request_commit,
                 predecessor_commit,
                 live_main,
+            )
+        elif request["operation"] == OP_RELEASE_PRESENTATION_REFRESH:
+            run_presentation_refresh(
+                state, request, request_bytes, request_commit,
+                predecessor_commit, live_main,
             )
         elif request["operation"] == OP_RELEASE_GATE2_APPROVAL:
             run_owner_gate2_approval(

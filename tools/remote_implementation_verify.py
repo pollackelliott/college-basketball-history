@@ -24,6 +24,7 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
+    OP_RELEASE_PRESENTATION_REFRESH,
     OP_RELEASE_PREVIEW_VERIFY,
     OP_RELEASE_GATE2_APPROVAL,
     OP_RELEASE_PRODUCTION_PROOF,
@@ -117,6 +118,9 @@ from remote_implementation_final_release import (
 from remote_implementation_release_preview import (
     verify_release_preview_authority,
     verify_pr_checks_and_preview,
+)
+from remote_implementation_presentation_verify import (
+    verify_presentation_refresh_equivalence,
 )
 from remote_implementation_release_readiness import (
     build_release_pr_packet,
@@ -2818,6 +2822,10 @@ def main() -> int:
             return verify_exact_production(live_main, control_head, state)
         if last.get("operation") == OP_RELEASE_PREVIEW_VERIFY:
             return verify_release_preview(live_main, control_head, state)
+        if last.get("operation") == OP_RELEASE_PRESENTATION_REFRESH:
+            return verify_presentation_refresh_equivalence(
+                live_main, control_head, state,
+            )
         if last.get("operation") == OP_RELEASE_READINESS:
             return verify_release_readiness(live_main, control_head, state)
         if last.get("operation") == OP_STAGE2_CENSUS:
