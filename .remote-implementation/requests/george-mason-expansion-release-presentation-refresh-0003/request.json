@@ -4,7 +4,7 @@
   "request_id": "george-mason-expansion-release-presentation-refresh-0003",
   "school_key": "george-mason",
   "operation": "RELEASE_PRESENTATION_REFRESH",
-  "previous_control_state_commit": "40b57215e9447341a2c2d1db0fbd77c9708305fb",
+  "previous_control_state_commit": "84cbaeb90f8fb1b03305f726da6156d0730aeda9",
   "previous_control_state_sha256": "ef619ed48c30037cc124d57af619c3a55e5e6f4112465ba984e6f3a8813c258c",
   "expected_protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
   "target_branch": "data/george-mason-onboarding",
@@ -20,8 +20,8 @@
     "sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef"
   },
   "creation_provenance": {
-    "origin": "George Mason same Implementation — fresh bounded retry after permanent presentation-successor git-identity repair",
-    "authorization": "Owner explicitly authorized the same George Mason release-preparation phase to publish ONLY the corrected website asset as a guarded direct child C of original sealed G. Protected main ed7935a045f182a86997ab94dbde7e2e09e2fbbd includes merged website repair PR #607, guarded presentation tooling PR #608, and git-identity repair PR #609. PR #609 exact-head tooling validation and transaction rehearsal passed, including full repository tests and the exact sealed George Mason website-candidate rehearsal. Prior request george-mason-expansion-release-presentation-refresh-0002 failed before request acceptance/lock/write-ahead/target mutation solely because git commit-tree lacked deterministic author/committer identity; permanent tooling now binds the repository-established github-actions[bot] identity and has regression coverage without git config. This request preserves all G historical games, evidence, records, global registries and public JSON; it authorizes only the guarded presentation-only successor transaction and independent fresh verification, followed separately by C-bound release readiness, CI and Preview. It does not authorize Owner Gate 2 approval or merge."
+    "origin": "George Mason same Implementation — corrected live-inbox submission after fresh bounded retry",
+    "authorization": "Owner explicitly authorized the same George Mason release-preparation phase to publish ONLY the corrected website asset as a guarded direct child C of original sealed G. Protected main ed7935a045f182a86997ab94dbde7e2e09e2fbbd includes merged website repair PR #607, guarded presentation tooling PR #608, and git-identity repair PR #609. PR #609 exact-head tooling validation and transaction rehearsal passed, including full repository tests and the exact sealed George Mason website-candidate rehearsal. Prior request george-mason-expansion-release-presentation-refresh-0002 failed before request acceptance/lock/write-ahead/target mutation solely because git commit-tree lacked deterministic author/committer identity. The first 0003 control push archived this request but accidentally left the live .remote-implementation/request.json inbox pointing at unaccepted 0002; run #43561105353 therefore failed at protected-main authentication before runner execution or acceptance. This corrected live-inbox submission preserves unchanged state bytes and binds the exact parent control commit. It preserves all G historical games, evidence, records, global registries and public JSON; it authorizes only the guarded presentation-only successor transaction and independent fresh verification, followed separately by C-bound release readiness, CI and Preview. It does not authorize Owner Gate 2 approval or merge."
   },
   "authority": {
     "owner_gate_1": false,
