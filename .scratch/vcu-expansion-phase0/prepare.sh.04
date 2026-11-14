@@ -1,0 +1,64 @@
+hool_key':'vcu',
+    'operation':'EXPANSION_PHASE0',
+    'previous_control_state_commit':os.environ['TRANSPORT_COMMIT'],
+    'previous_control_state_sha256':os.environ['STATE_SHA'],
+    'expected_protected_main_sha':os.environ['MAIN_SHA'],
+    'target_branch':'data/vcu-onboarding',
+    'target_sha':'c58fae3653a86d5317b45d210951beea9cee1f0d',
+    'research_freeze_sha256':'00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9',
+    'stage1_independent_proof_sha256':os.environ['PROOF_SHA'],
+    'integration_freeze_sha256':os.environ['INTEGRATION_SHA'],
+    'expansion_research_checkpoint':{
+        'sha256':'00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9',
+        'research_base_sha':'df73675852ec5a43dfac50da0ee06d8bcabf8832',
+        'transport':{
+            'kind':'git_base64_parts',
+            'commit_sha':os.environ['TRANSPORT_COMMIT'],
+            'path_prefix':os.environ['PREFIX'],
+            'part_count':int(os.environ['PART_COUNT']),
+        },
+    },
+    'stage1_independent_proof':{
+        'path':os.environ['PAYLOAD']+'/stage1-independent-proof.json',
+        'sha256':os.environ['PROOF_SHA'],
+    },
+    'creation_provenance':{
+        'origin':'VCU SAME ALL_HISTORY_EXPANSION Implementation lane',
+        'authorization':(
+            'Owner Proceed authorizes the current initial VCU expansion Implementation phase. '
+            'Permanent current-main correction compatibility repairs #612 and #613 are merged. '
+            'Execute only guarded EXPANSION_PHASE0 through fresh verification; no Stage 2, '
+            'owner gate, release, recovery, or shared-identity authority.'
+        ),
+    },
+    'authority':authority,
+}
+raw=json.dumps(request,indent=2,sort_keys=True)+'\n'
+Path('/tmp/control/.remote-implementation/request.json').write_text(raw)
+PY
+
+PYTHONPATH=/tmp/runtime/tools python - <<'PY'
+import json
+from pathlib import Path
+from remote_implementation_control import validate_control_state, validate_request
+control=Path('/tmp/control')
+state=json.loads((control/'.remote-implementation/control-state.json').read_text())
+request=json.loads((control/'.remote-implementation/request.json').read_text())
+validate_control_state(state)
+validate_request(request)
+PY
+
+git -C /tmp/control add -- .remote-implementation/request.json
+git -C /tmp/control commit -m "Queue VCU expansion Phase 0 request ${REQUEST_ID}"
+REQUEST_COMMIT="$(git -C /tmp/control rev-parse HEAD)"
+git -C /tmp/control push origin HEAD:refs/heads/${CONTROL_BRANCH} \
+  --force-with-lease=refs/heads/${CONTROL_BRANCH}:${TRANSPORT_COMMIT}
+
+gh api --method POST \
+  "repos/${GITHUB_REPOSITORY}/actions/workflows/remote-implementation.yml/dispatches" \
+  -f ref="${CONTROL_BRANCH}"
+
+echo "Submitted ${REQUEST_ID} at control commit ${REQUEST_COMMIT}"
+echo "Protected main: ${MAIN_SHA}"
+echo "Stage 1 proof: ${PROOF_SHA}"
+echo "Integration Freeze: ${INTEGRATION_SHA}"
