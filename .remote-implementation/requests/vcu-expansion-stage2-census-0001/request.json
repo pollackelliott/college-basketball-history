@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner said Proceed for the VCU ALL_HISTORY_EXPANSION Stage 2 phase after independently verified EXPANSION_PHASE0 vcu-expansion-phase0-0001. This request performs only the permanent read-only STAGE2_CENSUS against the unchanged fresh-verified Phase 0 successor. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority.",
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census"
+  },
+  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-expansion-phase0-0001/successor-manifest.json",
+    "sha256": "54550af9dc4a2a3191eb33c5cc69d89221ac3097d287fa06403aa8511a46e592"
+  },
+  "previous_control_state_commit": "7a40ed847141cdd076721bd5cede69acc739109e",
+  "previous_control_state_sha256": "b36cf2fe1809d56e3fce8d435229bd5d77ba10af81588a5e3892aeae3d33fd8e",
+  "request_id": "vcu-expansion-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "6e83bffb541577e1feff92b1d185554b4701de1c"
+}
