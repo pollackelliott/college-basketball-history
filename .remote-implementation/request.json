@@ -1,17 +1,43 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "vcu-expansion-release-readiness-0001",
+  "school_key": "vcu",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "ed3512304255087c971d73d5ec81398de260bc47",
+  "previous_control_state_sha256": "b8db8d9b64c9e998228b2327555c9c575aed2cdd12f93a5f8e7e4d5ad668e74a",
+  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
   "approved_plan_hash": "b647eb83bfc2a3a3d71e9568471f3dc4c09a0c291034d82b8822473f5788079d",
-  "approved_plan_sha256": "6126d6411e52ca610589025e58a7301d046cf03775f5e73e338e2d2efb3ac2b6",
+  "release_manifest_sha256": "89b323d21e1ec3eaa27be3fea01d07c72c88551e01f8311fc321b73756e47288",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "349647c2f1732616cf82a88091b6df980b92f93501e84e4eb4e798d01c887fb2"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "55a2caa36f08ba3028f6884e6de35d6c55cc65f0acccee135892103ad2a91666"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "vcu-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation — owner-authorized release preparation",
+    "authorization": "Owner instructed 'Continue' after the exact VCU expansion sealed-apply successor e3ef85569a50d9fcb3771b575babafde84ea38df independently fresh-verified PASS. Under the current owner-facing release workflow, this authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, ordinary CI/mergeability checks, exact Vercel Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or changed historical authority."
+  },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "release": false,
     "release_gate2_approval": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -20,36 +46,7 @@
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from vcu-expansion-stage2-gate1-seal-0001",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_id_set_sha256": "f261006cc0bb9b5de907f3fcac741e35eb4f1ae00a793eeeebad9b533db80eb6",
-  "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
-  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
-  "filled_review_sha256": "f183b9cfef041b4c5433b57beb9da964544196480fbbcd40c5374da459d8e52c",
-  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_SEALED_APPLY",
-  "owner_gate_1_approval_sha256": "694e70afa7468b97f2893821f6f26fb80093681c70f3e9b9a3599ac96f3f8cef",
-  "previous_control_state_commit": "6783c12db3d45b9eab3fa8e6835ec130314da989",
-  "previous_control_state_sha256": "be3775a406ee70c5eab768bf6be68c6b9d969ec5c6d23d50d8f9febfd95446e6",
-  "recommendation_map_sha256": "da619e7ae0090fbb19ba7b4df571b66cf36266953b49324a635621cb076a1dcb",
-  "request_id": "vcu-expansion-stage2-sealed-apply-0001",
-  "schema_version": 1,
-  "school_key": "vcu",
-  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "b0928e519b0f2b590de6fe78bb2453af5329b9093d429e189323dc85317aed34"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/vcu/vcu-expansion-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "037e50d17e54c045a16bbe7de3f8e7f832054b2cb51433a69a8fecb2a9fbe3ec"
-  },
-  "target_branch": "data/vcu-onboarding",
-  "target_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1"
+  }
 }
