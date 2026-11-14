@@ -580,7 +580,7 @@
     "george-mason-expansion-release-presentation-refresh-0003"
   ],
   "active_expected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
-  "active_lock_commit": null,
+  "active_lock_commit": "782ab342ea1a263b701c9850a3ff206da7b48a0c",
   "active_lock_owner": "github-actions:43561316556:1",
   "active_operation": "RELEASE_PRESENTATION_REFRESH",
   "active_prepared_commit_sha": null,
