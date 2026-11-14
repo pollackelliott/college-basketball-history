@@ -8,7 +8,8 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from expansion_implementation_stage1 import (
     Stage1Stop, build_candidate, csv_rows, materialize_support,
-    reconcile_canonical, render_csv, sha256, stage1,
+    prepare_current_main_identity_rebase, reconcile_canonical, render_csv,
+    sha256, stage1,
 )
 from all_history_expansion_freeze import canonical_row_sha256, OPPONENT_EXTENSION_FIELDS
 
@@ -145,6 +146,146 @@ class Stage1FoundationTests(unittest.TestCase):
                 with self.assertRaisesRegex(Stage1Stop,"SHA-256 mismatch"):
                     stage1(root,"sample",artifact,"0"*64,"b"*40,"a"*40,root.parent/"new-expansion-test-output")
         
+
+class CurrentMainIdentityRebaseTests(unittest.TestCase):
+    def test_resolved_external_identity_correction_is_preserved_and_extended(self):
+        from unittest.mock import patch
+
+        source_fields = [
+            "source_game_id", "source_program_key", "season_label",
+            "source_opponent_label", "normalized_opponent_key",
+            "normalized_opponent_name",
+        ]
+        old_source = {
+            "source_game_id": "OLD-1",
+            "source_program_key": "sample",
+            "season_label": "1978-1979",
+            "source_opponent_label": "SOUTHEASTERN",
+            "normalized_opponent_key": "old-key",
+            "normalized_opponent_name": "Old Identity",
+        }
+        current_source = dict(
+            old_source,
+            normalized_opponent_key="new-key",
+            normalized_opponent_name="New Identity",
+        )
+        opponent_fields = [
+            "source_program_key", "source_opponent_label",
+            "canonical_opponent_key", "canonical_opponent_name", "current_d1",
+            "games_with_source_label", "first_season", "last_season",
+            "resolution_status", "resolution_method", "user_choice", "audit_note",
+        ]
+        old_opponent = {
+            "source_program_key": "sample",
+            "source_opponent_label": "SOUTHEASTERN",
+            "canonical_opponent_key": "old-key",
+            "canonical_opponent_name": "Old Identity",
+            "current_d1": "Yes",
+            "games_with_source_label": "4",
+            "first_season": "1973-74",
+            "last_season": "1978-79",
+            "resolution_status": "RESOLVED_PROJECT_AUTHORITY",
+            "resolution_method": "OLD_METHOD",
+            "user_choice": "",
+            "audit_note": "old authority",
+        }
+        current_opponent = dict(
+            old_opponent,
+            canonical_opponent_key="new-key",
+            canonical_opponent_name="New Identity",
+            current_d1="No",
+            resolution_status="RESOLVED_RESEARCHED_IDENTITY",
+            resolution_method="LIVE_CORRECTION",
+            audit_note="accepted live correction",
+        )
+        supplemental_opponent = dict(
+            current_opponent,
+            games_with_source_label="6",
+            first_season="1968-69",
+            last_season="1972-73",
+            resolution_method="EXPANSION_RESEARCH",
+            audit_note="frozen expansion evidence",
+        )
+
+        package = {
+            "source-games.csv": render_csv(source_fields, [old_source]),
+            "opponents.csv": render_csv(opponent_fields, [old_opponent]),
+            "venues.csv": b"venue_key\n",
+            "conferences.csv": b"school,conference\nsample,Independent\n",
+            "notes.md": b"notes\n",
+            "source-notes.md": b"source notes\n",
+        }
+        current_package = dict(package)
+        current_package["source-games.csv"] = render_csv(
+            source_fields, [current_source]
+        )
+        current_package["opponents.csv"] = render_csv(
+            opponent_fields, [current_opponent]
+        )
+        baseline = {
+            "package_bytes": package,
+            "source_fields": source_fields,
+            "source_rows": [old_source],
+            "source_ids": ["OLD-1"],
+            "source_game_count": 1,
+            "opponent_fields": opponent_fields,
+            "opponent_rows": [old_opponent],
+            "venue_fields": ["venue_key"],
+            "venue_rows": [],
+        }
+        validated = {
+            "opponent_support_rows": [{
+                "support_id": "SUP-1",
+                "support_action": "NEW_SUPPLEMENTAL",
+                "source_opponent_label": "SOUTHEASTERN",
+                "canonical_opponent_key": "new-key",
+                "baseline_row_sha256": "",
+                "changed_fields": "",
+                "candidate_row_json": json.dumps(supplemental_opponent),
+                "evidence_basis": "frozen evidence",
+            }],
+            "correction_question_rows": [{
+                "inherited_source_game_id": "OLD-1",
+                "expansion_impact": "NO_EXPANSION_IMPACT",
+                "disposition": "RESOLVED_EXTERNALLY: accepted correction is already live",
+            }],
+        }
+
+        def git_show(_repo, _sha, path):
+            return current_package[path.rsplit("/", 1)[-1]]
+
+        with patch(
+            "expansion_implementation_stage1.git_bytes",
+            side_effect=git_show,
+        ):
+            rebased, adjusted, metadata, blockers = (
+                prepare_current_main_identity_rebase(
+                    Path("/tmp/repo"),
+                    "sample",
+                    "a" * 40,
+                    baseline,
+                    validated,
+                )
+            )
+
+        self.assertEqual(blockers, [])
+        self.assertEqual(
+            metadata["status"],
+            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION",
+        )
+        self.assertEqual(metadata["changed_source_game_ids"], ["OLD-1"])
+        self.assertEqual(rebased["source_rows"], [current_source])
+        rewritten = adjusted["opponent_support_rows"][0]
+        self.assertEqual(rewritten["support_action"], "EXTEND_INHERITED")
+        merged = json.loads(rewritten["candidate_row_json"])
+        self.assertEqual(merged["games_with_source_label"], "10")
+        self.assertEqual(merged["first_season"], "1968-69")
+        self.assertEqual(merged["last_season"], "1978-79")
+        self.assertEqual(merged["resolution_method"], "LIVE_CORRECTION")
+        self.assertIn("accepted live correction", merged["audit_note"])
+        self.assertIn("frozen expansion evidence", merged["audit_note"])
+
+
 
 class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
     """Synthetic Git and verifier surfaces test Stage 1 stop boundaries."""
