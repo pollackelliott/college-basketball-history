@@ -1,0 +1,56 @@
+{
+  "authority": {
+    "expansion_phase0": true,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner Proceed authorizes the current initial VCU expansion Implementation phase. Permanent current-main correction compatibility repairs #612 and #613 are merged. Execute only guarded EXPANSION_PHASE0 through fresh verification; no Stage 2, owner gate, release, recovery, or shared-identity authority.",
+    "origin": "VCU SAME ALL_HISTORY_EXPANSION Implementation lane"
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+    "sha256": "00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9",
+    "transport": {
+      "commit_sha": "2ca469a132f4eb1ab0f805a62bcc35c7f4a9b02d",
+      "kind": "git_base64_parts",
+      "part_count": 4,
+      "path_prefix": ".remote-implementation/transports/vcu/expansion-phase0-0001/"
+    }
+  },
+  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "2ca469a132f4eb1ab0f805a62bcc35c7f4a9b02d",
+  "previous_control_state_sha256": "af735e8dca363ec8076a96810466c4a3fbd503cfa1df7b5a429f7619b7ed31e8",
+  "request_id": "vcu-expansion-phase0-0001",
+  "research_freeze_sha256": "00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/payloads/vcu/vcu-expansion-phase0-0001/stage1-independent-proof.json",
+    "sha256": "ae75d07502b731dd4cf0141b0f920d33531e4b09c25117a7fa3010cb56291f04"
+  },
+  "stage1_independent_proof_sha256": "ae75d07502b731dd4cf0141b0f920d33531e4b09c25117a7fa3010cb56291f04",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d"
+}

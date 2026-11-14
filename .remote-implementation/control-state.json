@@ -584,18 +584,19 @@
     "george-mason-expansion-release-readiness-0004",
     "george-mason-expansion-release-preview-verify-0004",
     "george-mason-expansion-release-gate2-approval-0001",
-    "george-mason-expansion-release-production-proof-0001"
+    "george-mason-expansion-release-production-proof-0001",
+    "vcu-expansion-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43633372274:1",
+  "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "vcu-expansion-phase0-0001",
+  "active_request_sha256": "dc7a4432c6ae16fc6b253ba63bbe0213974d2e3241234b36e4bfda4aecd5c412",
+  "active_school_key": "vcu",
+  "active_target_branch": "data/vcu-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1180,8 +1181,11 @@
     "request_id": "george-mason-expansion-release-production-proof-0001",
     "school_key": "george-mason"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43633372274",
+  "lock_acquisition_request_commit": "881f3dc21843c617b608f0a31dbfa3c46a79af64",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
