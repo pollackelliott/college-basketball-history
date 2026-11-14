@@ -1,6 +1,6 @@
 {
   "authority": {
-    "expansion_phase0": true,
+    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -11,7 +11,7 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
@@ -23,34 +23,23 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner Proceed authorizes the current initial VCU expansion Implementation phase. Permanent current-main correction compatibility repairs #612 and #613 are merged. Execute only guarded EXPANSION_PHASE0 through fresh verification; no Stage 2, owner gate, release, recovery, or shared-identity authority.",
-    "origin": "VCU SAME ALL_HISTORY_EXPANSION Implementation lane"
-  },
-  "expansion_research_checkpoint": {
-    "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
-    "sha256": "00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9",
-    "transport": {
-      "commit_sha": "2ca469a132f4eb1ab0f805a62bcc35c7f4a9b02d",
-      "kind": "git_base64_parts",
-      "part_count": 4,
-      "path_prefix": ".remote-implementation/transports/vcu/expansion-phase0-0001/"
-    }
+    "authorization": "Owner said Proceed for the VCU ALL_HISTORY_EXPANSION Stage 2 phase after independently verified EXPANSION_PHASE0 vcu-expansion-phase0-0001. This request performs only the permanent read-only STAGE2_CENSUS against the unchanged fresh-verified Phase 0 successor. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority.",
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census"
   },
   "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
   "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "EXPANSION_PHASE0",
-  "previous_control_state_commit": "2ca469a132f4eb1ab0f805a62bcc35c7f4a9b02d",
-  "previous_control_state_sha256": "af735e8dca363ec8076a96810466c4a3fbd503cfa1df7b5a429f7619b7ed31e8",
-  "request_id": "vcu-expansion-phase0-0001",
-  "research_freeze_sha256": "00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-expansion-phase0-0001/successor-manifest.json",
+    "sha256": "54550af9dc4a2a3191eb33c5cc69d89221ac3097d287fa06403aa8511a46e592"
+  },
+  "previous_control_state_commit": "7a40ed847141cdd076721bd5cede69acc739109e",
+  "previous_control_state_sha256": "b36cf2fe1809d56e3fce8d435229bd5d77ba10af81588a5e3892aeae3d33fd8e",
+  "request_id": "vcu-expansion-stage2-census-0001",
   "schema_version": 1,
   "school_key": "vcu",
-  "stage1_independent_proof": {
-    "path": ".remote-implementation/payloads/vcu/vcu-expansion-phase0-0001/stage1-independent-proof.json",
-    "sha256": "ae75d07502b731dd4cf0141b0f920d33531e4b09c25117a7fa3010cb56291f04"
-  },
-  "stage1_independent_proof_sha256": "ae75d07502b731dd4cf0141b0f920d33531e4b09c25117a7fa3010cb56291f04",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
   "target_branch": "data/vcu-onboarding",
-  "target_sha": "c58fae3653a86d5317b45d210951beea9cee1f0d"
+  "target_sha": "6e83bffb541577e1feff92b1d185554b4701de1c"
 }
