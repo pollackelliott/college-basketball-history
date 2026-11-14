@@ -48,7 +48,7 @@ jobs:
       - name: Run full repository test suite
         run: python -m unittest discover -s tests -v
 
-      - name: Prove exact sealed George Mason plus reviewed PR 607 website candidate
+      - name: Prove immutable George Mason expansion presentation regression
         run: python tools/rehearse_george_mason_presentation.py
 
       - name: Validate alias registry
