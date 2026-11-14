@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-mason-expansion-release-presentation-refresh-0003",
+  "school_key": "george-mason",
+  "operation": "RELEASE_PRESENTATION_REFRESH",
+  "previous_control_state_commit": "40b57215e9447341a2c2d1db0fbd77c9708305fb",
+  "previous_control_state_sha256": "ef619ed48c30037cc124d57af619c3a55e5e6f4112465ba984e6f3a8813c258c",
+  "expected_protected_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "0fe86b37405bc5322bec5639a28c1819bb97d5f7",
+  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "f8c3a9c8281780d640c97f4c15823c289e737f2ff826a043ce19c1488434d757"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef"
+  },
+  "creation_provenance": {
+    "origin": "George Mason same Implementation — fresh bounded retry after permanent presentation-successor git-identity repair",
+    "authorization": "Owner explicitly authorized the same George Mason release-preparation phase to publish ONLY the corrected website asset as a guarded direct child C of original sealed G. Protected main ed7935a045f182a86997ab94dbde7e2e09e2fbbd includes merged website repair PR #607, guarded presentation tooling PR #608, and git-identity repair PR #609. PR #609 exact-head tooling validation and transaction rehearsal passed, including full repository tests and the exact sealed George Mason website-candidate rehearsal. Prior request george-mason-expansion-release-presentation-refresh-0002 failed before request acceptance/lock/write-ahead/target mutation solely because git commit-tree lacked deterministic author/committer identity; permanent tooling now binds the repository-established github-actions[bot] identity and has regression coverage without git config. This request preserves all G historical games, evidence, records, global registries and public JSON; it authorizes only the guarded presentation-only successor transaction and independent fresh verification, followed separately by C-bound release readiness, CI and Preview. It does not authorize Owner Gate 2 approval or merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false,
+    "release_presentation_refresh": true
+  },
+  "sealed_tree_sha": "da3081fb1867f9fc8ff82429ebdfd57c9a594918",
+  "repair_main_sha": "ed7935a045f182a86997ab94dbde7e2e09e2fbbd",
+  "accepted_asset_blob_sha": "73328a90c7d8b8dc835663ca6226382cd708698e"
+}
