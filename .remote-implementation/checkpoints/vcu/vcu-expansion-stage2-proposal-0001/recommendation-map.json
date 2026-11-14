@@ -1,0 +1,39 @@
+{
+  "basis_by_decision": {
+    "DISCREPANCY-VCU-EXP-1969-70-002-OVERTIME_PERIODS": "Keep canonical 1OT. Long Island University's preserved reciprocal institutional source row is the exact 72-67 Virginia Commonwealth game and explicitly records 'ot'; VCU's frozen supplemental source row records overtime_periods=0. Preserve the conflicting VCU source assertion rather than normalizing it silently, while retaining the reciprocally supported canonical value.",
+    "DISCREPANCY-VCU-EXP-1970-71-009-OVERTIME_PERIODS": "Keep canonical 1OT. Minnesota's preserved institutional media-guide row for Dec. 28, 1970 at Virginia Commonwealth explicitly records 'L 56-63 (OT)', matching the exact VCU game; VCU's frozen supplemental source row records overtime_periods=0. Preserve the VCU source assertion as conflicting evidence while retaining the reciprocally supported canonical value.",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-027": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. Prior accepted VCU Stage 2 authority already adjudicated this exact decision: the row is ECAC regional/other-postseason or CBI, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-028": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. Prior accepted VCU Stage 2 authority already adjudicated this exact decision: the row is ECAC regional/other-postseason or CBI, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-032": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. Prior accepted VCU Stage 2 authority already adjudicated this exact decision: the row is ECAC regional/other-postseason or CBI, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-033": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. Prior accepted VCU Stage 2 authority already adjudicated this exact decision: the row is ECAC regional/other-postseason or CBI, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-034": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. Prior accepted VCU Stage 2 authority already adjudicated this exact decision: the row is ECAC regional/other-postseason or CBI, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-035": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. Prior accepted VCU Stage 2 authority already adjudicated this exact decision: the row is ECAC regional/other-postseason or CBI, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class.",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-036": "Keep the accepted generic POSTSEASON classification unresolved in the controlled taxonomy. Prior accepted VCU Stage 2 authority already adjudicated this exact decision: the row is ECAC regional/other-postseason or CBI, while the permanent classifier only offers NCAA_TOURNAMENT, NIT, or CONFERENCE_TOURNAMENT. Do not manufacture a false controlled class."
+  },
+  "canonical_patch_by_decision": {},
+  "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+  "decisions": {
+    "DISCREPANCY-VCU-EXP-1969-70-002-OVERTIME_PERIODS": "KEEP_CANONICAL",
+    "DISCREPANCY-VCU-EXP-1970-71-009-OVERTIME_PERIODS": "KEEP_CANONICAL",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-027": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-1977-78-028": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-032": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-033": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-034": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-035": "KEEP_POSTSEASON_UNRESOLVED",
+    "POSTSEASON-CLASSIFICATION-VCU-2009-10-036": "KEEP_POSTSEASON_UNRESOLVED"
+  },
+  "defaults": {},
+  "identity": {},
+  "notes_by_decision": {},
+  "prepared_against_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "prepared_against_target_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "source_patch_by_decision": {},
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/vcu/vcu-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "ba6ab71897ebe2a3fef35f9b52236fe45d27f407406187f15ac342a700ceea21"
+  },
+  "venue_relationship_patch_by_decision": {}
+}

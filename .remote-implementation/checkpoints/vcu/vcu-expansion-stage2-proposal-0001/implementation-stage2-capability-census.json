@@ -1,0 +1,57 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "discrepancy": 2,
+      "postseason_classification": 7
+    },
+    "decision_count": 9,
+    "decision_fields": {
+      "game_type": 7,
+      "overtime_periods": 2
+    },
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 38,
+      "public_gap_rows": 38,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1760,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0024568",
+        "CBBG-0203957"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0024034",
+        "CBBG-0024568",
+        "CBBG-0030957",
+        "CBBG-0108068",
+        "CBBG-0125864",
+        "CBBG-0144874",
+        "CBBG-0156375",
+        "CBBG-0202030",
+        "CBBG-0202054",
+        "CBBG-0203227",
+        "CBBG-0203236",
+        "CBBG-0203237"
+      ]
+    },
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "topology_groups": []
+}

@@ -1,0 +1,173 @@
+{
+  "action_counts": {
+    "KEEP_CANONICAL": 2,
+    "KEEP_POSTSEASON_UNRESOLVED": 7
+  },
+  "approved_plan_hash_preview": "afdcc54f8c313d5793b89354ceb7e0c8988d9c58b22b150dd2f1515e753f79d8",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "5aa355a9dddcfeb260cb3956c45305d877d59af161c5bd45030938146cba497b",
+    "implementation-stage2-status.json": "5d0a06a245db68078c8b927c76065b151b2cd8ee059cb26e5dd5ed4f122c52cf",
+    "last-rehearsal-site-gate.json": "c4ac73034071ae11b0f878b8eb1dce64018da559d51eee7e3fb3a64dcaba9cd1",
+    "plan.json": "8c6ef5ceeb97e1e8c1b43b22e4586712fbe7534321246d50e4499b94e847c301",
+    "review.csv": "a8818de5351b49b0afc8f20b7178ad355f0ded451448443d883e3605058ad6af",
+    "review.md": "20448b781578b71279bcf60bbd8a94dbc1262ec3d8129720fa3d52c01341499a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "5aa355a9dddcfeb260cb3956c45305d877d59af161c5bd45030938146cba497b",
+    "implementation-stage2-status.json": "6457b57d8e91ffc31b6701202a0c816aa7c456614ca97bae81287fb2a9f7f033",
+    "last-rehearsal-site-gate.json": "c4ac73034071ae11b0f878b8eb1dce64018da559d51eee7e3fb3a64dcaba9cd1",
+    "plan.json": "1ee0aab99b387c9531249084a9979844f85b7fbbe99978fcefa6dc65207ff81b",
+    "review.csv": "a8818de5351b49b0afc8f20b7178ad355f0ded451448443d883e3605058ad6af",
+    "review.md": "bf93d5544533f4e71e2539a5b1fedba790de75bb7e338bc9c2be79a1aff7116f"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "PASS",
+  "capability_topology_groups": [],
+  "changed_path_count": 10,
+  "command_exit_code": 0,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+    "runtime_decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "c4e9bff2f33d35ae21f5089c966bb6a2855a29ceb67d43e0f217091f02f4330f",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "vcu",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "discrepancy": 2,
+      "postseason_classification": 7
+    },
+    "decision_count": 9,
+    "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+    "discrepancies_to_add": 2,
+    "existing_game_matches": 1658,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 101,
+    "plan_path": ".onboarding/vcu/plan.json",
+    "review_path": ".onboarding/vcu/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "KEEP_CANONICAL": 2,
+      "KEEP_POSTSEASON_UNRESOLVED": 7
+    },
+    "approved_plan_hash_preview": "afdcc54f8c313d5793b89354ceb7e0c8988d9c58b22b150dd2f1515e753f79d8",
+    "changed_path_count": 10
+  },
+  "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "recommendation_map": {
+    "action_counts": {
+      "KEEP_CANONICAL": 2,
+      "KEEP_POSTSEASON_UNRESOLVED": 7
+    },
+    "approved_plan_hash_preview": "afdcc54f8c313d5793b89354ceb7e0c8988d9c58b22b150dd2f1515e753f79d8",
+    "decision_count": 9,
+    "path": "/tmp/remote-stage2-proposal-map-3m2uylxu/recommendation-map.json",
+    "sha256": "da619e7ae0090fbb19ba7b4df571b66cf36266953b49324a635621cb076a1dcb"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/vcu/vcu-expansion-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/vcu-expansion-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "da619e7ae0090fbb19ba7b4df571b66cf36266953b49324a635621cb076a1dcb",
+  "request_id": "vcu-expansion-stage2-proposal-0001",
+  "request_sha256": "c6dbf9c6dcef608b1cb12f0203ff911d724db880db63d770b90a90a0427ffe5c",
+  "runtime_commit_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "runtime_decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+    "tools/onboard_school.py": "aa3344c74a8c689bd64c31543e57cf94dda6d621de020cbbcb53bc10c5b283de",
+    "tools/onboarding_hardening.py": "6c6a7f42c92da6c82471b7d7172e367565d6e2b046813ea5ab9381c957e95077",
+    "tools/onboarding_plan.py": "b0cbabdf934494bf619e1cf485c61a54abb61835a072a17f8b4ed4e6e287c9a1",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "semantic_snapshot_sha256": "8a58776cf8b55777a70e25850ee44be0fd9b9c2eb0d7f985ce1b965f9bbd236e",
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 38,
+      "public_gap_rows": 38,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1760,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0024568",
+        "CBBG-0203957"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0024034",
+        "CBBG-0024568",
+        "CBBG-0030957",
+        "CBBG-0108068",
+        "CBBG-0125864",
+        "CBBG-0144874",
+        "CBBG-0156375",
+        "CBBG-0202030",
+        "CBBG-0202054",
+        "CBBG-0203227",
+        "CBBG-0203236",
+        "CBBG-0203237"
+      ]
+    },
+    "history_start_season": "1973-1974",
+    "school_key": "vcu",
+    "source_site_counts": {
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 39,
+      "neutral_missing_venue": 38,
+      "opponent_home_source_site_location_missing": 1,
+      "opponent_home_source_venue_unpreserved": 1,
+      "researched_gap_rows": 39,
+      "researched_unresolved_home_venue_rows": 0,
+      "unaccounted_gap_rows": 0
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 1759
+    },
+    "status": "PASS",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/vcu/vcu-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_authority_sha256": "ba6ab71897ebe2a3fef35f9b52236fe45d27f407406187f15ac342a700ceea21",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1",
+  "target_tree_sha": "8892006423db2e7943d12566bf118a3dc795fae3",
+  "tracked_mutation_proof": {
+    "after_head_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1",
+    "after_status": "",
+    "after_tree_sha": "8892006423db2e7943d12566bf118a3dc795fae3",
+    "before_head_sha": "d35802e1f2fbc1a4081dc9f6142a43040d7156f1",
+    "before_status": "",
+    "before_tree_sha": "8892006423db2e7943d12566bf118a3dc795fae3",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
