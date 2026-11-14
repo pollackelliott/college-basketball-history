@@ -1184,11 +1184,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
     "recommendation_map_sha256": "da619e7ae0090fbb19ba7b4df571b66cf36266953b49324a635621cb076a1dcb",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "vcu-expansion-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "37af654a2f8b78cc02c823767fc80593db8ac3fde9d86847192edd9a195f401a",
     "school_key": "vcu",
