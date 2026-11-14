@@ -1,55 +1,38 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "george-mason-expansion-release-gate2-approval-0001",
+  "request_id": "george-mason-expansion-release-production-proof-0001",
   "school_key": "george-mason",
-  "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "fa2b34b24117fbc97430b65138f2c4b5243aed67",
-  "previous_control_state_sha256": "2c774bac75d3c672512d0a47171b4b699f356506d6f12dde07d79ab705cd2d88",
-  "expected_protected_main_sha": "ed658b706aa7d215b7a1d99f88ed282c37a710ec",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "3b08f0b073d4b6599f2bca31c4b841a093599e7f",
+  "previous_control_state_sha256": "ffc24a333f51df1db4f5a24af7132b0f7c48a97b6662c4b368001fe7558a1f17",
+  "expected_protected_main_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
   "target_branch": "data/george-mason-onboarding",
   "target_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-release-preview-verify-0004/checkpoint-manifest.json",
-    "sha256": "3f9b5a4ad56923e4610c16e249f64f1276a468b7aa0788c62da48aa0139459ea"
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/george-mason/george-mason-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "0393e5abfad8b496c45f79fe062b490be37c19f996407b0daa7d1bf54e99f719"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-release-preview-verify-0004/release-preview-verification.json",
-    "sha256": "cdcfb6f38edf564e9fae4cd500d001038eb65d5b7fc5386beb96cbaeb93240aa"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "e6658edc741a4d6c35bf34ce041ee2df9332982154e68b46fd7f7e8e0a94087f"
   },
-  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
-  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
   "pr_number": 597,
-  "preview_deployment_id": 7783149207,
-  "preview_url": "https://college-basketball-history-kb4z41ulr-elliott-pollacks-projects.vercel.app",
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: “Approved. Procee” immediately after being presented the exact fresh-verified George Mason expansion PR #597 Preview at head 9db724322351dc2facdaf2934248b8c34912c3a3 and Vercel Preview deployment 7783149207, with explicit notice that Owner Gate 2 approval was required before merge.",
-    "pr_number": 597,
-    "pr_head_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
-    "preview_deployment_id": 7783149207,
-    "preview_url": "https://college-basketball-history-kb4z41ulr-elliott-pollacks-projects.vercel.app",
-    "preview_checkpoint_sha256": "3f9b5a4ad56923e4610c16e249f64f1276a468b7aa0788c62da48aa0139459ea",
-    "preview_verification_sha256": "cdcfb6f38edf564e9fae4cd500d001038eb65d5b7fc5386beb96cbaeb93240aa"
-  },
-  "final_release_continuation": {
-    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
-    "production_request_id": "george-mason-expansion-release-production-proof-0001"
-  },
+  "merge_sha": "2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412",
   "creation_provenance": {
-    "origin": "Same George Mason ALL_HISTORY_EXPANSION Implementation lane — owner-authorized exact Gate 2 approval",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating “Approved. Procee” in direct response to the exact fresh-verified George Mason PR #597 Preview at head 9db724322351dc2facdaf2934248b8c34912c3a3 and Vercel Preview deployment 7783149207. This authorizes the repository-defined final release phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof, and independent COMPLETE verification while identities remain unchanged. This request itself records only Gate 2 approval and grants no direct merge, protected-main mutation, recovery, maintenance, unrelated repair, or new historical authority."
+    "origin": "Same George Mason ALL_HISTORY_EXPANSION Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact George Mason expansion Preview with “Approved. Procee,” authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #597 head 9db724322351dc2facdaf2934248b8c34912c3a3 against approved main ed658b706aa7d215b7a1d99f88ed282c37a710ec. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 2ff1247789a6d91540d7c6c4f8f7ba49dcc4a412, now exact protected main with parents ed658b706aa7d215b7a1d99f88ed282c37a710ec and 9db724322351dc2facdaf2934248b8c34912c3a3. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": true,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": true,
+    "release_gate2_approval": false,
     "release_preview_verify": false,
-    "release_production_proof": false,
+    "release_production_proof": true,
     "release_readiness": false,
     "release_presentation_refresh": false,
     "stage2_census": false,
