@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCHOOL=vcu
+FREEZE_SHA=00e9a95396eb4ca4aafcfd51243edd68872723db16249b5c4ca633b3ea485dc9
+RESEARCH_BASE=df73675852ec5a43dfac50da0ee06d8bcabf8832
+EXPECTED_CONTROL_SHA=57010e7be30f3966f39b205149e12db7d0ac5973
+EXPECTED_TARGET_SHA=c58fae3653a86d5317b45d210951beea9cee1f0d
+REQUEST_ID=vcu-expansion-phase0-0001
+CONTROL_BRANCH=control/remote-implementation
+TARGET_BRANCH=data/vcu-onboarding
+REQUIRED_FOLLOWUP_HEAD=9eff7ba0290e59f5147c9001055e2522f6ed7c76
+
+set -euo pipefail
+git fetch --no-tags origin \
+  +refs/heads/main:refs/remotes/origin/main \
+  +refs/heads/${CONTROL_BRANCH}:refs/remotes/origin/${CONTROL_BRANCH} \
+  +refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}
+git fetch --no-tags origin "${RESEARCH_BASE}"
+
+MAIN_SHA="$(git rev-parse refs/remotes/origin/main)"
+git merge-base --is-ancestor "${REQUIRED_FOLLOWUP_HEAD}" "${MAIN_SHA}"
+CONTROL_SHA="$(git rev-parse refs/remotes/origin/${CONTROL_BRANCH})"
+TARGET_SHA="$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})"
+test "${CONTROL_SHA}" = "${EXPECTED_CONTROL_SHA}"
+test "${TARGET_SHA}" = "${EXPECTED_TARGET_SHA}"
+git merge-base --is-ancestor "${TARGET_SHA}" "${MAIN_SHA}"
+
+python - <<'PY'
+import subprocess
+main = subprocess.check_output(
+    ['git','rev-parse','refs/remotes/origin/main'], text=True
+).strip()
+allowed = {
+    '.github/workflows/vcu-expansion-phase0-prepare.yml',
+    '.scratch/vcu-expansion-phase0/freeze.xz.b64.00',
+    '.scratch/vcu-expansion-phase0/freeze.xz.b64.01',
+    '.scratch/vcu-expansion-phase0/prepare.sh.00',
+    '.scratch/vcu-expansion-phase0/prepare.sh.01',
+    '.scratch/vcu-expansion-phase0/prepare.sh.02',
+    '.scratch/vcu-expansion-phase0/prepare.sh.03',
+    '.scratch/vcu-expansion-phase0/prepare.sh.04',
+}
+changed = set(subprocess.check_output(
+    ['git','diff','--name-only',f'{main}...HEAD'], text=True
+).splitlines())
+if changed != allowed:
+    raise SystemExit(f'scratch changed-path set mismatch: {sorted(changed)}')
+PY
+
+rm -rf /tmp/runtime /tmp/stage1-a /tmp/stage1-b /tmp/integration /tmp/phase0-preview /tmp/vcu-prep-artifacts
+git worktree add --detach /tmp/runtime "${MAIN_SHA}"
+
+cat .scratch/vcu-expansion-phase0/freeze.xz.b64.00 \
+    .scratch/vcu-expansion-phase0/freeze.xz.b64.01 \
+  | base64 --decode > /tmp/vcu-freeze.xz
+test "$(sha256sum /tmp/vcu-freeze.xz | awk '{print $1}')" = \
+  "31cd6635b89a8c241c544a68d58256f70e92340944619d04ae0c07d2cd0d3fa0"
+xz --decompress --stdout /tmp/vcu-freeze.xz > /tmp/vcu-freeze.zip
+test "$(sha256sum /tmp/vcu-freeze.zip | awk '{print $1}')" = "${FREEZE_SHA}"
+
+python /tmp/runtime/tools/all_history_expansion_freeze.py \
+  --repo /tmp/runtime verify /tmp/vcu-freeze.zip
+
+for suffix in a b; do
+  python /tmp/runtime/tools/expansion_implementation_stage1.py \
+    "${SCHOOL}" /tmp/vcu-freeze.zip \
+    --expected-sha256 "${FREEZE_SHA}" \
+    --research-base "${RESEARCH_BASE}" \
+    --main-sha "${MAIN_S
