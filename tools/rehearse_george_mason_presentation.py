@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Exact read-only George Mason G + PR #607 browser rehearsal.
+"""Immutable George Mason expansion presentation regression.
 
-Pinned immutable input: George Mason sealed Stage 2 apply (G) and website
-fix PR #607. Does not use synthetic games, rewrite accepted history, publish
-a school ref, or create a new owner-gate state. In CI, reads real G public
-team JSON and executes the actual corrected series selector in Node.js.
+Pinned immutable inputs are the sealed historical apply G, the reviewed website
+fix commit, and the accepted guarded presentation successor C. The regression
+never reads mutable pull-request refs. It executes the actual corrected browser
+series selector against the real sealed George Mason team JSON and proves that
+C is exactly the one-file successor reproduced by the permanent refresh logic.
 """
 from __future__ import annotations
 
 import hashlib
 import json
-import re
 import shutil
 import subprocess
 import sys
@@ -23,12 +23,12 @@ from remote_implementation_presentation_refresh import (  # noqa: E402
     ASSET_PATH,
     presentation_refresh_tree_plan,
     verify_presentation_successor,
-    git as site_git,
 )
 
 SEALED_G = "0fe86b37405bc5322bec5639a28c1819bb97d5f7"
 SEALED_G_TREE = "da3081fb1867f9fc8ff82429ebdfd57c9a594918"
 REVIEWED_FIX = "fc42631af872e2ae6573efcbb15b93f668360fb2"
+GUARDED_C = "9db724322351dc2facdaf2934248b8c34912c3a3"
 REVIEWED_SITE_BLOB = "73328a90c7d8b8dc835663ca6226382cd708698e"
 SEALED_TEAM_JSON_SHA256 = "8486ca5c4eaddcd22319aa98f11a8b88e8f7998729e279cf6954aa0b2dc2ca0a"
 TEAM_JSON = "site/data/teams/george-mason.json"
@@ -119,23 +119,23 @@ def browser_series(series_source: str, all_games: list[dict]) -> dict:
 
 def main() -> int:
     require(shutil.which("node") is not None, "NODE_REQUIRED")
-    # PR refs are transport locators only. The George Mason release PR is
-    # expected to advance from sealed G to its guarded presentation successor C;
-    # never mistake that legitimate post-seal head movement for drift in the
-    # immutable G authority. Pin and verify the accepted commits themselves,
-    # while requiring each moving PR head to retain the accepted commit in its
-    # ancestry.
-    git("fetch", "--no-tags", "origin",
-        "+refs/pull/597/head:refs/remotes/origin/exact-gmu-release",
-        "+refs/pull/607/head:refs/remotes/origin/exact-site-fix-source")
-    gmu_release_head = git("rev-parse", "refs/remotes/origin/exact-gmu-release")
-    site_fix_head = git("rev-parse", "refs/remotes/origin/exact-site-fix-source")
-    require(git("merge-base", SEALED_G, gmu_release_head) == SEALED_G,
-            "SEALED_G_NOT_ANCESTOR_OF_RELEASE_HEAD")
-    require(git("merge-base", REVIEWED_FIX, site_fix_head) == REVIEWED_FIX,
-            "REVIEWED_FIX_NOT_ANCESTOR_OF_SOURCE_HEAD")
+    # This is an immutable regression fixture, not a live release locator.
+    # A future school PR must never fail because a historical George Mason PR
+    # ref moved, closed, or disappeared. The pinned commits themselves are the
+    # durable regression authority and must remain in current repository history.
+    for commit, label in (
+        (SEALED_G, "SEALED_G"),
+        (REVIEWED_FIX, "REVIEWED_FIX"),
+        (GUARDED_C, "GUARDED_C"),
+    ):
+        require(git("rev-parse", f"{commit}^{{commit}}") == commit,
+                label + "_COMMIT_MISSING")
+        require(git("merge-base", commit, "HEAD") == commit,
+                label + "_NOT_ANCESTOR_OF_CURRENT_HISTORY")
     require(git("rev-parse", f"{SEALED_G}^{{tree}}") == SEALED_G_TREE,
             "SEALED_HISTORICAL_TREE_CHANGED")
+    require(git("rev-parse", f"{GUARDED_C}^") == SEALED_G,
+            "GUARDED_C_PARENT_MISMATCH")
     require(git("rev-parse", f"{REVIEWED_FIX}:{ASSET_PATH}")
             == REVIEWED_SITE_BLOB, "ACCEPTED_SITE_BLOB_CHANGED")
 
@@ -165,7 +165,9 @@ def main() -> int:
         "ties": 0, "distinctGames": 102, "early": 16,
     }, "FIXED_BROWSER_102_MEETINGS_51_51_MISMATCH:" + str(actual))
 
-    # Build C without moving a branch/ref or changing the working tree.
+    # Reproduce the accepted C tree from immutable G + reviewed website blob,
+    # then independently verify the already-merged C commit. No commit is
+    # synthesized and no Git identity or mutable PR transport is required.
     plan = presentation_refresh_tree_plan(
         REPO, sealed_commit_sha=SEALED_G, repair_main_sha=REVIEWED_FIX,
         expected_sealed_tree_sha=SEALED_G_TREE,
@@ -173,12 +175,10 @@ def main() -> int:
     )
     require(plan["allowed_changed_paths"] == [ASSET_PATH],
             "CANDIDATE_CHANGE_SCOPE_NOT_SITE_ONLY")
-    candidate = site_git(
-        REPO, "commit-tree", plan["candidate_tree_sha"],
-        "-p", SEALED_G, "-m", "read-only George Mason website proof",
-    )
+    require(plan["candidate_tree_sha"] == git("rev-parse", f"{GUARDED_C}^{{tree}}"),
+            "GUARDED_C_TREE_NOT_REPRODUCED")
     proof = verify_presentation_successor(
-        REPO, sealed_commit_sha=SEALED_G, successor_sha=candidate,
+        REPO, sealed_commit_sha=SEALED_G, successor_sha=GUARDED_C,
         repair_main_sha=REVIEWED_FIX,
         expected_sealed_tree_sha=SEALED_G_TREE,
         expected_asset_blob_sha=REVIEWED_SITE_BLOB,
@@ -187,17 +187,17 @@ def main() -> int:
             and proof["sealed_parent"] == SEALED_G
             and proof["allowed_changed_paths"] == [ASSET_PATH],
             "EXACT_CANDIDATE_NOT_EQUIVALENT")
-    require(git("diff", "--name-only", SEALED_G, candidate)
+    require(git("diff", "--name-only", SEALED_G, GUARDED_C)
             == ASSET_PATH, "EXTRA_CANONICAL_OR_SITE_DATA_MUTATION")
-    require(git("rev-parse", f"{candidate}:{TEAM_JSON}")
+    require(git("rev-parse", f"{GUARDED_C}:{TEAM_JSON}")
             == git("rev-parse", f"{SEALED_G}:{TEAM_JSON}"),
             "SEALED_TEAM_JSON_CHANGED_IN_C")
-    require(git("rev-parse", f"{candidate}:{ASSET_PATH}")
+    require(git("rev-parse", f"{GUARDED_C}:{ASSET_PATH}")
             == REVIEWED_SITE_BLOB, "C_WEBSITE_NOT_EXACT_REVIEWED_FIX")
     print(json.dumps({
         "status": "EXACT_GMU_G_TO_C_PRESENTATION_REHEARSAL_PASS",
         "sealed_g": SEALED_G,
-        "synthetic_unreferenced_c": candidate,
+        "guarded_c": GUARDED_C,
         "c_tree": plan["candidate_tree_sha"],
         "changed_paths": [ASSET_PATH],
         "sealed_published_games": len(games),
