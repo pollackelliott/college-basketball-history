@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "george-mason-expansion-release-readiness-0004",
+  "school_key": "george-mason",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "bc9d010e345b8a3fa2fceb5f8da7edba0cfecfc0",
+  "previous_control_state_sha256": "5a8af93f7ad845c75cf56403d2572376f1bc1b9c467ffba4f73f3857ad0af220",
+  "expected_protected_main_sha": "ed658b706aa7d215b7a1d99f88ed282c37a710ec",
+  "target_branch": "data/george-mason-onboarding",
+  "target_sha": "9db724322351dc2facdaf2934248b8c34912c3a3",
+  "approved_plan_hash": "1cb5cfb48aea646e11a33b22122d649dd5b0938dc6ac23a85919ca93d97b7076",
+  "release_manifest_sha256": "48a35f522b649322c8bcdbf048a8d8697915b12993e96d0473ca9f2b92e531ed",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "f8c3a9c8281780d640c97f4c15823c289e737f2ff826a043ce19c1488434d757"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "768547abf9fd185928893f3b0fc7a2a6e233b3487f9e8648b9e650ebb4cee9ef"
+  },
+  "presentation_refresh_successor": {
+    "path": ".remote-implementation/successors/george-mason/george-mason-expansion-release-presentation-refresh-0003/successor-manifest.json",
+    "sha256": "7d7e16cf3da1fd23936f15a5ca5c3dd19b7aff5ec4aaed94df39dc1aa1d84eb9"
+  },
+  "presentation_refresh_verification": {
+    "path": ".remote-implementation/verifications/george-mason/george-mason-expansion-release-presentation-refresh-0003/presentation-refresh-verification.json",
+    "sha256": "66cdf438a7a14e9dcaa7227974b4a4a0e06006fea9416247bdb95acd1cda4e4d"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "george-mason-expansion-release-preview-verify-0004"
+  },
+  "creation_provenance": {
+    "origin": "Same George Mason ALL_HISTORY_EXPANSION Implementation lane — fresh C-bound readiness after deterministic recovery and merged validation repair",
+    "authorization": "Owner's existing George Mason release-preparation authorization persists through independently verified OWNER_GATE_2_READY. Failed read-only Preview request george-mason-expansion-release-preview-verify-0003 was durably recovered as NOT_ATTEMPTED by george-mason-expansion-release-preview-recover-0002; no basketball, historical, branch, PR-head, or presentation successor mutation occurred. Control Center repair PR #610 merged at protected main ed658b706aa7d215b7a1d99f88ed282c37a710ec, correcting the stale CI rehearsal that rejected legitimate G-to-C PR-head advancement. Exact successor C remains 9db724322351dc2facdaf2934248b8c34912c3a3. This fresh read-only readiness request reauthenticates original sealed historical authority plus the independently verified presentation overlay against current main and emits a new connector packet bound to future Preview request george-mason-expansion-release-preview-verify-0004. It supplies no historical decision, Owner Gate 2 approval, merge authority, or Production authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
