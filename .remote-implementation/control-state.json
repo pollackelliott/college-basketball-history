@@ -590,7 +590,7 @@
     "vcu-expansion-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
-  "active_lock_commit": null,
+  "active_lock_commit": "e3c166af481adafcd3bec12b293cda98e6baaa3e",
   "active_lock_owner": "github-actions:43636247326:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
