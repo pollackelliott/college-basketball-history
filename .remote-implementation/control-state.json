@@ -588,7 +588,7 @@
     "vcu-expansion-phase0-0001"
   ],
   "active_expected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
-  "active_lock_commit": null,
+  "active_lock_commit": "15cb7ab8ec42da03ed1882cdd73ab24a2cf59433",
   "active_lock_owner": "github-actions:43633372274:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
