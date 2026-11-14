@@ -34,6 +34,7 @@ OP_STAGE2_PRESEAL_REHEARSAL = "STAGE2_PRESEAL_REHEARSAL"
 OP_STAGE2_GATE1_SEAL = "STAGE2_GATE1_SEAL"
 OP_STAGE2_SEALED_APPLY = "STAGE2_SEALED_APPLY"
 OP_RELEASE_READINESS = "RELEASE_READINESS"
+OP_RELEASE_PRESENTATION_REFRESH = "RELEASE_PRESENTATION_REFRESH"
 OP_RELEASE_PREVIEW_VERIFY = "RELEASE_PREVIEW_VERIFY"
 OP_RELEASE_GATE2_APPROVAL = "RELEASE_GATE2_APPROVAL"
 OP_RELEASE_PRODUCTION_PROOF = "RELEASE_PRODUCTION_PROOF"
@@ -54,6 +55,7 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
     OP_RELEASE_READINESS,
+    OP_RELEASE_PRESENTATION_REFRESH,
     OP_RELEASE_PREVIEW_VERIFY,
     OP_RELEASE_GATE2_APPROVAL,
     OP_RELEASE_PRODUCTION_PROOF,
@@ -629,6 +631,60 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             authority.get("venue_identity_maintenance") is not True,
             "REQUEST_VENUE_MAINTENANCE_AUTHORITY_FORBIDDEN",
+        )
+
+    # A post-seal presentation refresh is a guarded tracked operation and
+    # grants no additional historical authority or Owner Gate 2 approval.
+    if operation == OP_RELEASE_PRESENTATION_REFRESH:
+        _require(
+            authority.get("release_presentation_refresh") is True,
+            "PRESENTATION_REFRESH_AUTHORITY_REQUIRED",
+        )
+        for key in (
+            "phase0", "phase0_scope_supersession", "recovery",
+            "stage2_census", "stage2_current_main_refresh",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+            "release_preview_verify", "release_gate2_approval",
+            "release_production_proof", "venue_identity_maintenance",
+        ):
+            _require(
+                authority.get(key) is not True,
+                "PRESENTATION_REFRESH_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        _require(
+            authority.get("owner_gate_1") is False
+            and authority.get("owner_gate_2") is False,
+            "PRESENTATION_REFRESH_OWNER_GATES_FORBIDDEN",
+        )
+        _require_school_data_target_branch(
+            request, school_key, "PRESENTATION_REFRESH_TARGET_BRANCH_INVALID",
+        )
+        for field in (
+            "target_sha", "sealed_tree_sha", "repair_main_sha",
+            "accepted_asset_blob_sha",
+        ):
+            _require_sha(
+                request.get(field), 40,
+                "PRESENTATION_REFRESH_" + field.upper() + "_INVALID",
+            )
+        _require(
+            request["repair_main_sha"] == request["expected_protected_main_sha"],
+            "PRESENTATION_REFRESH_SOURCE_NOT_EXACT_MAIN",
+        )
+        for field in ("stage2_apply_successor", "stage2_apply_verification"):
+            _validate_payload_ref(request.get(field), field, required=True)
+        for field in ("approved_plan_hash", "release_manifest_sha256"):
+            _require_sha(
+                request.get(field), 64,
+                "PRESENTATION_REFRESH_" + field.upper() + "_INVALID",
+            )
+    else:
+        _require(
+            authority.get("release_presentation_refresh") is not True,
+            "PRESENTATION_REFRESH_AUTHORITY_ON_WRONG_OPERATION",
         )
 
     # RELEASE_READINESS is inspection and final-gate rehearsal only. No PR,
@@ -1604,6 +1660,26 @@ def validate_request(request: dict[str, Any]) -> None:
                 request.get(key), 64,
                 "RELEASE_READINESS_%s_INVALID" % key.upper(),
             )
+        # C presentation successor and independent fresh proof are optional
+        # only for the original G-only request. Both are mandatory together.
+        presented = request.get("presentation_refresh_successor")
+        verified = request.get("presentation_refresh_verification")
+        _require(
+            (presented is None) == (verified is None),
+            "RELEASE_READINESS_PRESENTATION_REFS_NOT_PAIRED",
+        )
+        if presented is not None:
+            _validate_payload_ref(
+                presented, "presentation_refresh_successor", required=True,
+            )
+            _validate_payload_ref(
+                verified, "presentation_refresh_verification", required=True,
+            )
+    elif (
+        request.get("presentation_refresh_successor") is not None
+        or request.get("presentation_refresh_verification") is not None
+    ):
+        _require(False, "RELEASE_PRESENTATION_REFS_WRONG_OPERATION")
 
     if operation == OP_RELEASE_PREVIEW_VERIFY:
         for key in (
@@ -1791,6 +1867,7 @@ def verify_request_predecessor(
         elif state.get("active_operation") in {
             OP_STAGE2_SEALED_APPLY,
             OP_STAGE2_CURRENT_MAIN_REFRESH,
+            OP_RELEASE_PRESENTATION_REFRESH,
         }:
             _require(
                 recovery.get("target_branch") == state.get("active_target_branch"),

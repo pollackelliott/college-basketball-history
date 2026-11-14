@@ -76,6 +76,12 @@ ACCEPTANCE_TEST_PATTERNS = (
     "test_remote_implementation_stage2_continuation.py",
     "test_remote_implementation_stage2_refresh.py",
     "test_all_history_universe.py",
+    "test_site_matchup_published_history.py",
+    "test_remote_implementation_presentation_refresh.py",
+    "test_remote_implementation_presentation_publish.py",
+    "test_remote_implementation_presentation_release_readiness.py",
+    "test_george_mason_presentation_rehearsal_ref_contract.py",
+    "test_frozen_release_pr_revalidation_workflow.py",
     "test_remote_implementation_release_readiness.py",
     "test_remote_implementation_release_preview.py",
     "test_remote_implementation_final_release.py",
@@ -205,7 +211,6 @@ def workflow_contract_errors(root: Path) -> list[str]:
     errors: list[str] = []
     workflow_paths = (
         ".github/workflows/opponent-identity-tooling-validation.yml",
-        ".github/workflows/opponent-identity-transaction-validation.yml",
     )
     required_live_main = (
         "types: [opened, synchronize, reopened]",
@@ -232,12 +237,44 @@ def workflow_contract_errors(root: Path) -> list[str]:
                     f"{relative} still trusts stale event merge state: {snippet}"
                 )
 
+    bundled = (root / ".github/workflows/opponent-identity-tooling-validation.yml").read_text(
+        encoding="utf-8"
+    )
+    for job in ("  validate:", "  rehearse:"):
+        if job not in bundled:
+            errors.append("bundled PR validation missing required job: " + job.strip())
+    if (root / ".github/workflows/opponent-identity-transaction-validation.yml").exists():
+        errors.append(
+            "opponent identity transaction rehearsal must remain bundled into the "
+            "single tooling validation workflow"
+        )
+
     remote = (root / ".github/workflows/remote-implementation.yml").read_text(
         encoding="utf-8"
     )
     for step in REQUIRED_REMOTE_CONTINUATIONS:
         if step not in remote:
             errors.append(f"remote Implementation orchestration missing: {step}")
+
+    rehearsal = (root / "tools/rehearse_george_mason_presentation.py").read_text(
+        encoding="utf-8"
+    )
+    for snippet in ("refs/pull/597", "refs/pull/607", "exact-gmu-release", "exact-site-fix-source"):
+        if snippet in rehearsal:
+            errors.append(
+                "George Mason presentation regression must not depend on mutable PR refs: "
+                + snippet
+            )
+    for snippet in (
+        'GUARDED_C = "9db724322351dc2facdaf2934248b8c34912c3a3"',
+        '"GUARDED_C_PARENT_MISMATCH"',
+        '"GUARDED_C_TREE_NOT_REPRODUCED"',
+    ):
+        if snippet not in rehearsal:
+            errors.append(
+                "George Mason immutable presentation regression missing contract: "
+                + snippet
+            )
     return errors
 
 def stale_test_contract_errors(root: Path) -> list[str]:

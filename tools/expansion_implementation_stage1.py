@@ -33,6 +33,20 @@ PACKAGE_FILES = (
 )
 SUPPORT_ACTIONS = ("NEW_SUPPLEMENTAL", "REUSE_INHERITED", "EXTEND_INHERITED")
 
+# Protected current main may legitimately enrich a shared inherited canonical game
+# after the immutable Research base was frozen (for example, another school's
+# completed Implementation can add exact venue/locality support).  Expansion Stage 1
+# may inherit only this narrow non-historical representation delta automatically.
+# Everything that can change game identity, result, H/A/N, game type, postseason
+# semantics, or administrative outcome remains fail-closed.
+CANONICAL_CURRENT_MAIN_ENRICHMENT_FIELDS = frozenset({
+    "venue_key",
+    "venue_id",
+    "site_city",
+    "site_state",
+    "notes",
+})
+
 
 class Stage1Stop(ValueError):
     """An unsafe or unauthorized expansion candidate has been rejected."""
@@ -88,6 +102,40 @@ def render_csv(fields: list[str], rows: list[dict[str, str]]) -> bytes:
     writer.writeheader()
     writer.writerows(rows)
     return out.getvalue().encode("utf-8")
+
+
+def classify_current_main_canonical_drift(
+    base_by_id: Mapping[str, dict[str, str]],
+    main_by_id: Mapping[str, dict[str, str]],
+    canonical_ids: list[str],
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Partition accepted representation enrichment from historical-semantic drift.
+
+    The immutable Research-base row remains provenance.  Protected current main may
+    be inherited automatically only when the same canonical ID still exists with the
+    exact same schema and every changed field is confined to venue/locality/provenance
+    enrichment.  Any identity, result, H/A/N, game-type, postseason, administrative,
+    or status change remains unresolved for an explicit authority path.
+    """
+    accepted: list[dict[str, Any]] = []
+    unresolved: list[str] = []
+    for game_id in canonical_ids:
+        before = base_by_id.get(game_id)
+        after = main_by_id.get(game_id)
+        if before is None or after is None or set(before) != set(after):
+            unresolved.append(game_id)
+            continue
+        changed = sorted(
+            field for field in before if before.get(field, "") != after.get(field, "")
+        )
+        if changed and set(changed) <= CANONICAL_CURRENT_MAIN_ENRICHMENT_FIELDS:
+            accepted.append({
+                "canonical_game_id": game_id,
+                "changed_fields": changed,
+            })
+            continue
+        unresolved.append(game_id)
+    return accepted, unresolved
 
 
 def materialize_support(
@@ -202,6 +250,349 @@ def build_candidate(baseline: Mapping[str, Any], payload: Mapping[str, bytes],
         "opponent_support_provenance": opp_provenance,
         "venue_support_provenance": ven_provenance,
     }
+
+
+
+IDENTITY_REBASE_SOURCE_FIELDS = frozenset({
+    "normalized_opponent_key",
+    "normalized_opponent_name",
+})
+OPPONENT_REBASE_CORE_FIELDS = (
+    "source_program_key",
+    "source_opponent_label",
+    "canonical_opponent_key",
+    "canonical_opponent_name",
+    "current_d1",
+    "resolution_status",
+    "user_choice",
+)
+
+
+def _resolved_external_correction_source_ids(
+    validated: Mapping[str, Any],
+) -> set[str]:
+    """Return inherited source IDs explicitly routed to completed correction authority."""
+    result: set[str] = set()
+    for row in validated.get("correction_question_rows", []):
+        if row.get("expansion_impact", "").strip() != "NO_EXPANSION_IMPACT":
+            continue
+        disposition = row.get("disposition", "").strip()
+        if not disposition.startswith("RESOLVED_EXTERNALLY"):
+            continue
+        for value in row.get("inherited_source_game_id", "").split("|"):
+            value = value.strip()
+            if value:
+                result.add(value)
+    return result
+
+
+def _season_sort_key(value: str) -> tuple[int, str]:
+    text = str(value or "").strip()
+    try:
+        return int(text[:4]), text
+    except (TypeError, ValueError):
+        return (999999, text)
+
+
+def _rebase_new_opponent_support(
+    support_rows: list[dict[str, str]],
+    current_rows: list[dict[str, str]],
+    fields: list[str],
+) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    """Convert a frozen NEW support row to a narrow extension when current main already
+    contains the same accepted opponent identity because a resolved external correction
+    landed after the immutable Research base.
+    """
+    by_identity: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in current_rows:
+        by_identity[(
+            row.get("source_opponent_label", "").strip(),
+            row.get("canonical_opponent_key", "").strip(),
+        )].append(row)
+
+    transformed: list[dict[str, str]] = []
+    provenance: list[dict[str, str]] = []
+    for item in support_rows:
+        identity = (
+            item.get("source_opponent_label", "").strip(),
+            item.get("canonical_opponent_key", "").strip(),
+        )
+        matches = by_identity.get(identity, [])
+        if item.get("support_action", "").strip() != "NEW_SUPPLEMENTAL" or not matches:
+            transformed.append(dict(item))
+            continue
+        if len(matches) != 1:
+            raise Stage1Stop(
+                "current-main correction rebase opponent identity is not unique: "
+                + "|".join(identity)
+            )
+        current = matches[0]
+        candidate = json.loads(item["candidate_row_json"])
+        if not isinstance(candidate, dict) or set(candidate) != set(fields):
+            raise Stage1Stop(
+                "current-main correction rebase candidate opponent schema mismatch"
+            )
+        for field in OPPONENT_REBASE_CORE_FIELDS:
+            if candidate.get(field, "") != current.get(field, ""):
+                raise Stage1Stop(
+                    "current-main correction rebase opponent core conflict: "
+                    f"{identity!r}:{field}"
+                )
+
+        merged = dict(current)
+        for field in ("games_with_source_label",):
+            try:
+                merged[field] = str(
+                    int(current.get(field, "").strip())
+                    + int(candidate.get(field, "").strip())
+                )
+            except ValueError as exc:
+                raise Stage1Stop(
+                    "current-main correction rebase opponent game count is not numeric"
+                ) from exc
+        for field, fn in (("first_season", min), ("last_season", max)):
+            values = [
+                value
+                for value in (
+                    current.get(field, "").strip(),
+                    candidate.get(field, "").strip(),
+                )
+                if value
+            ]
+            if values:
+                merged[field] = fn(values, key=_season_sort_key)
+        candidate_note = candidate.get("audit_note", "").strip()
+        current_note = current.get("audit_note", "").strip()
+        if candidate_note and candidate_note not in current_note:
+            merged["audit_note"] = (
+                current_note + (" | " if current_note else "")
+                + "Expansion supplement: " + candidate_note
+            )
+
+        changed = [field for field in fields if current.get(field, "") != merged.get(field, "")]
+        if not changed or set(changed) - set(OPPONENT_EXTENSION_FIELDS):
+            raise Stage1Stop(
+                "current-main correction rebase produced unsupported opponent extension"
+            )
+        rewritten = dict(item)
+        rewritten["support_action"] = "EXTEND_INHERITED"
+        rewritten["baseline_row_sha256"] = canonical_row_sha256(current)
+        rewritten["changed_fields"] = ";".join(changed)
+        rewritten["candidate_row_json"] = json.dumps(
+            merged, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        )
+        transformed.append(rewritten)
+        provenance.append({
+            "support_id": item.get("support_id", "").strip(),
+            "original_action": "NEW_SUPPLEMENTAL",
+            "operational_action": "EXTEND_INHERITED",
+            "identity": "|".join(identity),
+        })
+    return transformed, provenance
+
+
+def prepare_current_main_identity_rebase(
+    repo: Path,
+    school: str,
+    main_sha: str,
+    baseline: dict[str, Any],
+    validated: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
+    """Preserve one narrowly authenticated class of accepted post-freeze correction.
+
+    Expansion Research stays immutable. When current protected main differs from the
+    Research-base package only by an identity-only correction explicitly preserved in
+    the frozen NO_EXPANSION_IMPACT / RESOLVED_EXTERNALLY provenance, materialization
+    may inherit that already-live representation instead of replaying the stale baseline.
+    """
+    current_bytes = {
+        name: git_bytes(repo, main_sha, f"schools/{school}/{name}")
+        for name in PACKAGE_FILES
+    }
+    changed_members = [
+        name for name in PACKAGE_FILES
+        if current_bytes[name] != baseline["package_bytes"][name]
+    ]
+    metadata: dict[str, Any] = {
+        "status": "NOT_REQUIRED",
+        "changed_members": changed_members,
+        "changed_source_game_ids": [],
+        "accepted_canonical_game_ids": [],
+        "support_action_rebases": [],
+        "resolved_external_source_game_ids": sorted(
+            _resolved_external_correction_source_ids(validated)
+        ),
+        "current_package_member_sha256": {
+            name: sha256(current_bytes[name]) for name in PACKAGE_FILES
+        },
+    }
+    if not changed_members:
+        return baseline, validated, metadata, []
+
+    blockers: list[dict[str, Any]] = []
+    allowed_members = {"source-games.csv", "opponents.csv"}
+    unsupported_members = sorted(set(changed_members) - allowed_members)
+    if unsupported_members:
+        blockers.extend({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/{name}",
+            "reason": "UNSUPPORTED_POST_FREEZE_MEMBER_DRIFT",
+        } for name in unsupported_members)
+        return baseline, validated, metadata, blockers
+
+    allowed_source_ids = set(metadata["resolved_external_source_game_ids"])
+    if not allowed_source_ids:
+        blockers.append({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/source-games.csv",
+            "reason": "NO_RESOLVED_EXTERNAL_CORRECTION_AUTHORITY",
+        })
+        return baseline, validated, metadata, blockers
+
+    current_source_fields, current_sources = csv_rows(
+        current_bytes["source-games.csv"], "current-main inherited source-games.csv"
+    )
+    current_opponent_fields, current_opponents = csv_rows(
+        current_bytes["opponents.csv"], "current-main inherited opponents.csv"
+    )
+    if current_source_fields != baseline["source_fields"]:
+        blockers.append({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/source-games.csv",
+            "reason": "SOURCE_SCHEMA_DRIFT",
+        })
+        return baseline, validated, metadata, blockers
+    if current_opponent_fields != baseline["opponent_fields"]:
+        blockers.append({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/opponents.csv",
+            "reason": "OPPONENT_SCHEMA_DRIFT",
+        })
+        return baseline, validated, metadata, blockers
+
+    base_ids = [row.get("source_game_id", "").strip() for row in baseline["source_rows"]]
+    current_ids = [row.get("source_game_id", "").strip() for row in current_sources]
+    if current_ids != base_ids:
+        blockers.append({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/source-games.csv",
+            "reason": "SOURCE_ID_POPULATION_OR_ORDER_DRIFT",
+        })
+        return baseline, validated, metadata, blockers
+
+    changed_source_ids: list[str] = []
+    allowed_old_opponents: set[tuple[str, str]] = set()
+    allowed_new_opponents: set[tuple[str, str]] = set()
+    for original, current in zip(baseline["source_rows"], current_sources):
+        if original == current:
+            continue
+        source_id = original.get("source_game_id", "").strip()
+        changed_source_ids.append(source_id)
+        changed_fields = {
+            field for field in current_source_fields
+            if original.get(field, "") != current.get(field, "")
+        }
+        if source_id not in allowed_source_ids or (
+            changed_fields - IDENTITY_REBASE_SOURCE_FIELDS
+        ):
+            blockers.append({
+                "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+                "path": f"schools/{school}/source-games.csv",
+                "source_game_id": source_id,
+                "reason": "UNAUTHORIZED_OR_NON_IDENTITY_SOURCE_DRIFT",
+                "changed_fields": sorted(changed_fields),
+            })
+            continue
+        label = original.get("source_opponent_label", "").strip()
+        allowed_old_opponents.add(
+            (label, original.get("normalized_opponent_key", "").strip())
+        )
+        allowed_new_opponents.add(
+            (label, current.get("normalized_opponent_key", "").strip())
+        )
+
+    if blockers:
+        return baseline, validated, metadata, blockers
+    if not changed_source_ids:
+        blockers.append({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/opponents.csv",
+            "reason": "OPPONENT_DRIFT_WITHOUT_SOURCE_IDENTITY_DRIFT",
+        })
+        return baseline, validated, metadata, blockers
+
+    def by_identity(rows: list[dict[str, str]]) -> dict[tuple[str, str], dict[str, str]]:
+        result: dict[tuple[str, str], dict[str, str]] = {}
+        for row in rows:
+            identity = (
+                row.get("source_opponent_label", "").strip(),
+                row.get("canonical_opponent_key", "").strip(),
+            )
+            if identity in result:
+                raise Stage1Stop(
+                    "current-main correction rebase opponent identity is duplicated"
+                )
+            result[identity] = row
+        return result
+
+    base_opponents = by_identity(baseline["opponent_rows"])
+    current_opponents_by_identity = by_identity(current_opponents)
+    changed_opponent_identities = sorted(
+        identity
+        for identity in set(base_opponents) | set(current_opponents_by_identity)
+        if base_opponents.get(identity) != current_opponents_by_identity.get(identity)
+    )
+    allowed_opponent_identities = allowed_old_opponents | allowed_new_opponents
+    unexpected_opponent_identities = [
+        identity for identity in changed_opponent_identities
+        if identity not in allowed_opponent_identities
+    ]
+    if unexpected_opponent_identities:
+        blockers.append({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/opponents.csv",
+            "reason": "UNRELATED_OPPONENT_DRIFT",
+            "identities": ["|".join(value) for value in unexpected_opponent_identities],
+        })
+        return baseline, validated, metadata, blockers
+
+    try:
+        opponent_support, support_rebases = _rebase_new_opponent_support(
+            validated["opponent_support_rows"],
+            current_opponents,
+            current_opponent_fields,
+        )
+    except (Stage1Stop, ValueError, TypeError, KeyError) as exc:
+        blockers.append({
+            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+            "path": f"schools/{school}/opponents.csv",
+            "reason": "SUPPLEMENTAL_SUPPORT_REBASE_CONFLICT",
+            "detail": str(exc),
+        })
+        return baseline, validated, metadata, blockers
+
+    rebased_baseline = dict(baseline)
+    rebased_baseline.update({
+        "package_bytes": current_bytes,
+        "source_fields": current_source_fields,
+        "source_rows": current_sources,
+        "source_ids": current_ids,
+        "source_game_count": len(current_sources),
+        "opponent_fields": current_opponent_fields,
+        "opponent_rows": current_opponents,
+    })
+    rebased_validated = dict(validated)
+    rebased_validated["opponent_support_rows"] = opponent_support
+    metadata.update({
+        "status": "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION",
+        "changed_source_game_ids": sorted(changed_source_ids),
+        "changed_opponent_identities": [
+            "|".join(value) for value in changed_opponent_identities
+        ],
+        "support_action_rebases": support_rebases,
+    })
+    return rebased_baseline, rebased_validated, metadata, []
+
 
 
 def reconcile_canonical(school: str, supplemental: list[dict[str, str]],
@@ -357,12 +748,15 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
         payload = {name: raw for name, raw in members.items() if name != "expansion-freeze.json"}
     validated = validate_delta_payload(payload, baseline, school,
                                       manifest["researched_inception_season"])
-    candidate, census = build_candidate(baseline, payload, validated)
-    blockers: list[dict[str, Any]] = []
-    for name in PACKAGE_FILES:
-        current = git_bytes(repo, main_sha, f"schools/{school}/{name}")
-        if current != baseline["package_bytes"][name]:
-            blockers.append({"class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT", "path": f"schools/{school}/{name}"})
+    materialization_baseline, materialized_validated, current_main_reconciliation, rebase_blockers = (
+        prepare_current_main_identity_rebase(
+            repo, school, main_sha, baseline, validated
+        )
+    )
+    candidate, census = build_candidate(
+        materialization_baseline, payload, materialized_validated
+    )
+    blockers: list[dict[str, Any]] = list(rebase_blockers)
     for label, path, key, expected in (
         ("PROGRAM", "data/reference/programs.csv", "program_key", baseline["program"]),
         ("SCOPE", "data/reference/program-top-level-scope.csv", "school", baseline["scope_row"]),
@@ -380,8 +774,67 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
     base_by_id = {r["canonical_game_id"]: r for r in base_canonical if r["canonical_game_id"] in baseline_ids}
     main_by_id = {r["canonical_game_id"]: r for r in main_canonical if r["canonical_game_id"] in baseline_ids}
     canonical_drift = sorted(k for k in baseline_ids if base_by_id.get(k) != main_by_id.get(k))
-    if canonical_drift:
-        blockers.append({"class": "CURRENT_MAIN_INHERITED_CANONICAL_DRIFT", "canonical_game_ids": canonical_drift})
+    accepted_enrichment, unresolved_canonical_drift = (
+        classify_current_main_canonical_drift(
+            base_by_id,
+            main_by_id,
+            canonical_drift,
+        )
+    )
+    current_main_reconciliation["accepted_canonical_enrichment"] = accepted_enrichment
+    if unresolved_canonical_drift:
+        if current_main_reconciliation.get("status") == (
+            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
+        ):
+            changed_sources = set(
+                current_main_reconciliation.get("changed_source_game_ids") or []
+            )
+            assertions = read_csv_at_git(
+                repo, main_sha, "data/evidence/game-assertions.csv"
+            )
+            assertion_ids: dict[str, set[str]] = defaultdict(set)
+            for row in assertions:
+                source_id = row.get("source_game_id", "").strip()
+                if (
+                    row.get("source_program_key", "").strip() == school
+                    and source_id in changed_sources
+                    and row.get("canonical_game_id", "").strip()
+                ):
+                    assertion_ids[source_id].add(
+                        row.get("canonical_game_id", "").strip()
+                    )
+            invalid_bindings = sorted(
+                source_id
+                for source_id in changed_sources
+                if len(assertion_ids.get(source_id, set())) != 1
+            )
+            allowed_canonical = sorted({
+                next(iter(assertion_ids[source_id]))
+                for source_id in changed_sources
+                if len(assertion_ids.get(source_id, set())) == 1
+            })
+            unexpected = sorted(
+                set(unresolved_canonical_drift) - set(allowed_canonical)
+            )
+            if invalid_bindings or unexpected:
+                blockers.append({
+                    "class": "CURRENT_MAIN_INHERITED_CANONICAL_DRIFT",
+                    "canonical_game_ids": unresolved_canonical_drift,
+                    "reason": "CORRECTION_ASSERTION_BINDING_MISMATCH",
+                    "invalid_source_game_ids": invalid_bindings,
+                    "unexpected_canonical_game_ids": unexpected,
+                    "accepted_nonhistorical_enrichment": accepted_enrichment,
+                })
+            else:
+                current_main_reconciliation["accepted_canonical_game_ids"] = (
+                    unresolved_canonical_drift
+                )
+        else:
+            blockers.append({
+                "class": "CURRENT_MAIN_INHERITED_CANONICAL_DRIFT",
+                "canonical_game_ids": unresolved_canonical_drift,
+                "accepted_nonhistorical_enrichment": accepted_enrichment,
+            })
     global_venues = read_csv_at_git(repo, main_sha, "data/reference/venues.csv")
     global_venue_reconciliation = reconcile_global_venues(
         validated["venue_support_rows"], global_venues,
@@ -421,6 +874,7 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
         "accepted_residual_count": len(validated["residual_rows"]),
         "census": census, "global_venue_reconciliation": global_venue_reconciliation,
         "canonical_identity_census": identity, "blockers": blockers,
+        "current_main_reconciliation": current_main_reconciliation,
         "write_authority": "NONE_REHEARSAL_ONLY",
     }
     output.mkdir(parents=True)

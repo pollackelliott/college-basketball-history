@@ -280,7 +280,7 @@ class OpponentIdentityTransactionTests(unittest.TestCase):
 class OpponentIdentityTransactionWorkflowAuthorityTests(unittest.TestCase):
     def test_rehearsal_runs_exact_pr_head_against_live_main_with_parent_guards(self):
         source = (
-            ROOT / ".github/workflows/opponent-identity-transaction-validation.yml"
+            ROOT / ".github/workflows/opponent-identity-tooling-validation.yml"
         ).read_text(encoding="utf-8")
         # An open release PR may preserve a frozen school head while protected
         # main receives later generic fixes. Integration CI must therefore build

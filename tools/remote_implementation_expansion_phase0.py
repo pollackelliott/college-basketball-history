@@ -60,6 +60,49 @@ from remote_implementation_io import (
 )
 
 
+def _require_repository_acceptance(
+    live_main: str,
+    diag: Path,
+) -> dict[str, Any]:
+    """Fail closed on generic expansion readiness before lock or mutation."""
+    observed = git("rev-parse", "HEAD", cwd=ROOT).stdout.strip()
+    if observed != live_main:
+        raise Stop(
+            "EXPANSION_IMPLEMENTATION_ACCEPTANCE_RUNTIME_MISMATCH "
+            "expected=%s actual=%s" % (live_main, observed)
+        )
+    cp = run(
+        [
+            sys.executable,
+            "tools/all_history_expansion_implementation_acceptance.py",
+            "--json",
+        ],
+        cwd=ROOT,
+        check=False,
+    )
+    diag.mkdir(parents=True, exist_ok=True)
+    proof_path = diag / "all-history-expansion-implementation-acceptance.json"
+    proof_path.write_text(cp.stdout, encoding="utf-8")
+    try:
+        payload = json.loads(cp.stdout)
+    except json.JSONDecodeError as exc:
+        raise Stop(
+            "EXPANSION_IMPLEMENTATION_ACCEPTANCE_OUTPUT_INVALID"
+        ) from exc
+    summary = payload.get("summary") or {}
+    if (
+        cp.returncode != 0
+        or summary.get("status") != "PASS"
+        or summary.get("curated_lifecycle_suite") != "PASS"
+    ):
+        raise Stop(
+            "EXPANSION_IMPLEMENTATION_ACCEPTANCE_FAILED "
+            "main=%s errors=%s"
+            % (live_main, payload.get("errors") or [])
+        )
+    return payload
+
+
 def materialize_expansion_research_checkpoint(
     request: dict[str, Any],
     out_path: Path,
@@ -520,6 +563,11 @@ def run_expansion_phase0(
     diag: Path,
 ) -> None:
     """Execute one expansion Phase 0 through the existing mutation primitives."""
+    # Generic expansion readiness is proved before begin_request(), lock acquisition,
+    # write-ahead creation, or any target-branch publication. This keeps platform
+    # failures outside the school mutation transaction and avoids a separate owner-
+    # scheduled acceptance workflow.
+    _require_repository_acceptance(live_main, diag)
     target_branch = request["target_branch"]
     target, ancestor = _target_predecessor_authority(request, live_main)
     if not ancestor:

@@ -247,8 +247,27 @@ def freeze_authority(
             name: hashes[name] for name in PACKAGE_FILES
         }, "CANDIDATE_SHA_MAP_CHANGED")
         authenticate_proof(proof, report, hashes, main_sha, research_base, zip_sha)
+        preservation_baseline = baseline
+        if report.get("current_main_reconciliation", {}).get("status") == (
+            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
+        ):
+            current_source_fields, current_source_rows = csv_rows(
+                git_bytes(repo, main_sha, f"schools/{school}/source-games.csv"),
+                "current-main inherited source games",
+            )
+            require(
+                current_source_fields == baseline["source_fields"],
+                "CURRENT_MAIN_REBASE_SOURCE_SCHEMA_DRIFT",
+            )
+            preservation_baseline = dict(
+                baseline,
+                source_rows=current_source_rows,
+            )
         guard = source_preservation(
-            baseline, (candidate / "source-games.csv").read_bytes(), report, {}
+            preservation_baseline,
+            (candidate / "source-games.csv").read_bytes(),
+            report,
+            {},
         )
         # Only historical publication metadata may transition, never top-level scope.
         expected = project_complete_institutional_program_row(
@@ -288,6 +307,19 @@ def freeze_authority(
         )
         semantic_sha = semantic_snapshot_sha256(semantic_snapshot)
         package_hashes = {k: hashes[k] for k in PACKAGE_FILES}
+        predecessor_package_hashes = dict(baseline["package_member_sha256"])
+        if report.get("current_main_reconciliation", {}).get("status") == (
+            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
+        ):
+            predecessor_package_hashes = dict(
+                report["current_main_reconciliation"][
+                    "current_package_member_sha256"
+                ]
+            )
+            require(
+                set(predecessor_package_hashes) == set(PACKAGE_FILES),
+                "CURRENT_MAIN_REBASE_PREDECESSOR_HASH_SET_INVALID",
+            )
         manifest = {
             "schema_version": 1,
             "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
@@ -310,6 +342,9 @@ def freeze_authority(
                 "snapshot_sha256": semantic_sha,
             },
             "source_preservation": guard,
+            "current_main_reconciliation": report.get(
+                "current_main_reconciliation", {}
+            ),
             "canonical_identity_counts": counts,
             "canonical_reuses": reuse,
             "opponent_support_actions": report["census"]["opponent_support_actions"],
@@ -322,6 +357,7 @@ def freeze_authority(
             ),
             "venue_reconciliation_census": venue_reconciliation_census,
             "baseline_package_member_sha256": baseline["package_member_sha256"],
+            "accepted_predecessor_package_member_sha256": predecessor_package_hashes,
             "baseline_program_row_sha256": canonical_row_sha256(baseline["program"]),
             "frozen_program_projection_sha256": canonical_row_sha256(expected),
             "frozen_program_projection": expected,

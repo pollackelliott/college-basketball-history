@@ -50,3 +50,44 @@
 Current-main shared-reference rebase completed against `integration_base_sha=fb5a12105c0bae066596dbc4cff2097231cb6333` from `research_base_sha=d944103fd952ae254238b199bcd3471a1cfc0ecc`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
 
 Owner-authorized Stage 1 conference-history reconciliation was applied during current-main integration; the exact correction specification and hash are recorded in the Integration Freeze manifest.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# george-mason research package notes
+
+## Stage 4 deterministic authoring
+
+- Stage 3B checkpoint SHA-256: f560963d2fd9c023ad55b68cf988ab6aa4cadd2264f59c6b9986352e4e8cc9e9
+- Research base SHA: df73675852ec5a43dfac50da0ee06d8bcabf8832
+- Stage 3B status: COMPLETE
+- Competitive games: 314
+- Primary-source historical results cutoff: 2021-2022
+- Required completed-season cutoff: 2025-2026
+- Coverage cutoffs are explicit Research declarations; media-guide titles and filenames are not coverage inference rules.
+- Package authoring was mechanical from durable Stage 3B state; no historical research or reinterpretation was performed by Stage 4.
+
+## Final game census
+
+- POSTSEASON: 20
+- REGULAR_SEASON: 294
+
+## Final H/A/N census
+
+- NEUTRAL: 16
+- OPPONENT_HOME: 143
+- SOURCE_PROGRAM_HOME: 155
+
+## All-History expansion Research Freeze authority
+
+- workflow_kind: ALL_HISTORY_EXPANSION
+- immutable research_base_sha: df73675852ec5a43dfac50da0ee06d8bcabf8832
+- researched institutional inception: 1966-1967
+- baseline: inherited published 1978-79+ George Mason history is retained without re-research or rewrite.
+- accepted Stage 6 checkpoint SHA-256: 27991b2af9621c8cf3ba017831e8c4b68b3058f5e004b9285803d54d9d65f028
+- original Stage 6 six-file package SHA-256: 1a0aa8fc9c53814b50d4589739bfc62c0fa3286015491a894d03aed835258d5a
+- Stage 5 owner approved all 47 distinct NON_D1 identities covering 228 games; exact scan preserved in predecessor checkpoint.
+- 13 dates, seven site uncertainties, and three reciprocal conflicts remain explicitly nonblocking and provenance-preserved.
+- Opponent and venue support row actions were reconciled against exact immutable inherited package columns, not assigned using current-main registry guesses.
+- No inherited baseline source or canonical games have been copied into supplemental source-games.csv.

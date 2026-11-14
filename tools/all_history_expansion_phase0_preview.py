@@ -41,8 +41,11 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     require(git_revision(repo,main+"^{commit}") == main,
             "PHASE0_PREVIEW_MAIN_OBJECT_MISSING")
     school_bytes={name:git_bytes(repo,main,f"schools/{school}/{name}") for name in PACKAGE_FILES}
-    baseline_hashes=manifest["baseline_package_member_sha256"]
-    require({name:sha256(raw) for name,raw in school_bytes.items()} == baseline_hashes,
+    predecessor_hashes=manifest.get(
+        "accepted_predecessor_package_member_sha256",
+        manifest["baseline_package_member_sha256"],
+    )
+    require({name:sha256(raw) for name,raw in school_bytes.items()} == predecessor_hashes,
             "PHASE0_PREVIEW_INHERITED_SCHOOL_DRIFT")
     globals_paths={
         "programs":"data/reference/programs.csv",
