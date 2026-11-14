@@ -91,8 +91,24 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
         return frozen, fake_git, source, venue, global_venue, new_global
 
     def evaluate(self,root,*,main="a"*40,alter_source=False,register_extra=False,
-                 duplicate_inherited_venue=False):
+                 duplicate_inherited_venue=False,
+                 accepted_predecessor_rebase=False):
         frozen,files,source,venue,global_old,global_new=self.fixture(root)
+        if accepted_predecessor_rebase:
+            manifest=json.loads((frozen/MANIFEST_NAME).read_bytes())
+            manifest["accepted_predecessor_package_member_sha256"]={
+                name:sha256(files["schools/sample/"+name])
+                for name in PACKAGE_FILES
+            }
+            manifest["baseline_package_member_sha256"]=dict(
+                manifest["baseline_package_member_sha256"]
+            )
+            manifest["baseline_package_member_sha256"]["source-games.csv"]="0"*64
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(
+                canonical_bytes(manifest)
+            )
+            (frozen/MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
         if duplicate_inherited_venue:
             # Two frozen legacy relationship rows may share a physical venue key;
             # they are inherited authority, not two new venue registrations.
@@ -142,6 +158,13 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             self.assertFalse(result["authorized_live_mutation"])
             self.assertEqual(result["source_game_count"],1)
             self.assertFalse((repo/"schools").exists())
+
+    def test_accepted_current_main_predecessor_can_differ_from_research_base(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo=Path(tmp)/"repo";repo.mkdir()
+            result=self.evaluate(repo,accepted_predecessor_rebase=True)
+            self.assertEqual(result["status"],"DISPOSABLE_ONLY_NOT_PUBLISHED")
+            self.assertEqual(result["source_game_count"],1)
 
     def test_multiple_inherited_venue_relationship_rows_preserved(self):
         with tempfile.TemporaryDirectory() as tmp:
