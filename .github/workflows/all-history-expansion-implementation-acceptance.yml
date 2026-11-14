@@ -1,0 +1,74 @@
+name: All-History expansion implementation acceptance
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_main_sha:
+        description: Exact protected-main SHA to certify before selecting the next expansion Implementation school
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      EXPECTED_MAIN_SHA: ${{ inputs.expected_main_sha }}
+    steps:
+      - name: Check out exact requested main
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.expected_main_sha }}
+          fetch-depth: 0
+
+      - name: Authenticate exact protected main
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_MAIN_SHA"
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+          test "$(git rev-parse refs/remotes/origin/main)" = "$EXPECTED_MAIN_SHA"
+          echo "EXPANSION_ACCEPTANCE_MAIN_SHA=$EXPECTED_MAIN_SHA"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node for browser regression execution
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run repository-wide expansion Implementation acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/all_history_expansion_implementation_acceptance.py --json \
+            | tee all-history-expansion-implementation-acceptance.json
+
+      - name: Require protected main stayed fixed during acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest_main="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          test -n "$latest_main"
+          if [ "$latest_main" != "$EXPECTED_MAIN_SHA" ]; then
+            echo "FAIL: protected main moved during expansion acceptance"
+            echo "bound=$EXPECTED_MAIN_SHA"
+            echo "live=$latest_main"
+            exit 1
+          fi
+          echo "EXPANSION_ACCEPTANCE_MAIN_STABILITY=PASS"
+
+      - name: Preserve acceptance result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-history-expansion-implementation-acceptance-${{ inputs.expected_main_sha }}
+          path: all-history-expansion-implementation-acceptance.json
+          if-no-files-found: error
+          retention-days: 30
