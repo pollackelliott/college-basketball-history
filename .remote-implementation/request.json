@@ -1,55 +1,38 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-expansion-release-gate2-approval-0001",
+  "request_id": "vcu-expansion-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "vcu",
-  "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "b584cd2ecdfb26a1cecf333cc6b63ea8f094219f",
-  "previous_control_state_sha256": "ea0a44e9796eb714eff361eebdb1526e0dc051ea13a7f9426395d7cc8679e8e0",
-  "expected_protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "previous_control_state_commit": "e730af8c24d92cb29b5fc2c92e93a0e927535218",
+  "previous_control_state_sha256": "5f1fafcf3c538b396504ac5b01f5fc0984f932a8fa165d9987185dd1db98f513",
+  "expected_protected_main_sha": "655aff91f2085c119f2bf64b4dfe993bffd85d46",
   "target_branch": "data/vcu-onboarding",
   "target_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
-  "approved_plan_hash": "b647eb83bfc2a3a3d71e9568471f3dc4c09a0c291034d82b8822473f5788079d",
-  "release_manifest_sha256": "89b323d21e1ec3eaa27be3fea01d07c72c88551e01f8311fc321b73756e47288",
   "pr_number": 615,
-  "preview_deployment_id": 7794320648,
-  "preview_url": "https://college-basketball-history-ivqarxedr-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "0450386a88814f7fc1f9d1e85d803ac1441e59d2665fda7a5f619eda33fc0630"
+  "merge_sha": "655aff91f2085c119f2bf64b4dfe993bffd85d46",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "7285c3216f5e8590387530fb1bdfe5d7939e8acc293f388cb2ffa319e69b7040"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/vcu/vcu-expansion-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "e424e681e4295762f88f60a2d2427fa6345dc3f42308d610da5fe4ba209d2667"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner's exact statement: 'APPROVED. Proceed' immediately after being presented the exact fresh-verified VCU ALL_HISTORY_EXPANSION PR #615 Preview at head e3ef85569a50d9fcb3771b575babafde84ea38df and explicitly told that affirmative approval was required at Owner Gate 2.",
-    "pr_number": 615,
-    "pr_head_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
-    "preview_deployment_id": 7794320648,
-    "preview_url": "https://college-basketball-history-ivqarxedr-elliott-pollacks-projects.vercel.app",
-    "preview_checkpoint_sha256": "0450386a88814f7fc1f9d1e85d803ac1441e59d2665fda7a5f619eda33fc0630",
-    "preview_verification_sha256": "e424e681e4295762f88f60a2d2427fa6345dc3f42308d610da5fe4ba209d2667"
-  },
-  "final_release_continuation": {
-    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
-    "production_request_id": "vcu-expansion-release-production-proof-0001"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/vcu/vcu-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "0bfd7325daa2fab3ca6a630dbb1de93ea524b6025bd85549b22f1dddd40b7ea9"
   },
   "creation_provenance": {
-    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION Implementation lane — owner-authorized exact Gate 2 approval",
-    "authorization": "Owner explicitly approved Owner Gate 2 by stating 'APPROVED. Proceed' in direct response to the exact fresh-verified VCU PR #615 Preview at head e3ef85569a50d9fcb3771b575babafde84ea38df and Vercel Preview deployment 7794320648. This authorizes the repository-defined final release phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof, and independent COMPLETE verification while identities remain unchanged. This request itself records only Gate 2 approval and grants no direct merge, protected-main mutation, recovery, maintenance, unrelated repair, or new historical authority."
+    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION Implementation lane — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact VCU PR #615 Preview with 'APPROVED. Proceed,' authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #615 head e3ef85569a50d9fcb3771b575babafde84ea38df against approved main 52991f3aa066f222d8b96a5d0f91df9544abf652. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 655aff91f2085c119f2bf64b4dfe993bffd85d46, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": true,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": true,
+    "release_gate2_approval": false,
     "release_preview_verify": false,
-    "release_production_proof": false,
+    "release_production_proof": true,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
