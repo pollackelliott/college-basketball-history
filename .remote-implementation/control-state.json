@@ -600,7 +600,7 @@
     "arizona-state-expansion-phase0-0002"
   ],
   "active_expected_main_sha": "5bbb7398dd6e1311f5a31ae0831caa2908480664",
-  "active_lock_commit": null,
+  "active_lock_commit": "e9cb7b08ad8e1299a9b9d174d86fcea8f249f91c",
   "active_lock_owner": "github-actions:43668280610:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
