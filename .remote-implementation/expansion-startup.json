@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "arizona-state-expansion-startup-0001",
-  "phase0_request_id": "arizona-state-expansion-phase0-0001",
+  "startup_id": "arizona-state-expansion-startup-0002",
+  "phase0_request_id": "arizona-state-expansion-phase0-0002",
   "school_key": "arizona-state",
-  "expected_protected_main_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "expected_protected_main_sha": "5bbb7398dd6e1311f5a31ae0831caa2908480664",
   "target_branch": "data/arizona-state-onboarding",
   "target_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
   "research_freeze_sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
@@ -13,13 +13,13 @@
     "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "e0e208f3365e86b5c959b78a10a09256eda28acf",
+      "commit_sha": "7248360e1cec9d9dd23ec931fd671a0c027de8c5",
       "path_prefix": ".remote-implementation/transports/arizona-state/arizona-state-expansion-startup-0001/part-",
       "part_count": 11
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION Implementation lane — owner-selected initial expansion startup",
-    "authorization": "Owner explicitly selected Arizona State as the next serialized ALL_HISTORY_EXPANSION Implementation school and authorized the ordinary initial phase after authoritative recovery. Authority covers only the repository-defined initial startup through guarded EXPANSION_PHASE0; it is not Owner Gate 1, Owner Gate 2, recovery authorization, Research reopening, unrelated maintenance, another school, or protected-main mutation."
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION Implementation lane — same owner-authorized initial phase after bounded generic v2 repair",
+    "authorization": "Owner's original Arizona State initial expansion Implementation authorization remains phase-persistent. Startup 0001 stopped before mutation on the documented generic schema-v2 materialization gap. Generic repair PR #618 merged as protected-main 5bbb7398dd6e1311f5a31ae0831caa2908480664 after exact-head acceptance, full nonregression, and independent transaction validation. This retry authorizes only repository-owned startup through guarded EXPANSION_PHASE0 and its fresh verification; it is not Owner Gate 1, Owner Gate 2, recovery authority, Research reopening, unrelated maintenance, another school, or protected-main mutation."
   }
 }
