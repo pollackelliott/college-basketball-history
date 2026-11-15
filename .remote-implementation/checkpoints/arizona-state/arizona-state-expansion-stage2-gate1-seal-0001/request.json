@@ -1,0 +1,61 @@
+{
+  "approved_plan_hash_preview": "cfea2179d64c897f53d119b555ec4c51cc7efda1cec3a36a66b51dac7a296b77",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from arizona-state-expansion-stage2-preseal-rehearsal-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "961c1ddb586f6bc35be7c8975f2e7848097a1e956d2c733f84e4ecf2e7919a9d",
+  "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+  "equivalence_sha256": "4acf1a7e3ea6c2af77412a9d1130a7e96b361cbcc2566aba25d0f54e853f2e41",
+  "expected_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "filled_review_sha256": "c12e92ed8618022fce10b153311ebdcb526dcfd53de9e902a9b5cc4805c6f2a8",
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "f92ebaf70428d99cf9f1d57a5cd140763f47fced41b6d54301cb4e22f842d20b",
+  "phase_continuation": {
+    "apply_request_id": "arizona-state-expansion-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "arizona-state-expansion-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "arizona-state-expansion-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "c87bbd897a2645326203589a59ab646c380828b5",
+  "previous_control_state_sha256": "9988c04e5f81744e307e59326ca12679e330e035abc0978c8bec7aefed11cc2a",
+  "recommendation_map_sha256": "a2b4b7cb4db7f77d65d63c38475749ff7ba912965e665739c551b4ff6198f1c5",
+  "request_id": "arizona-state-expansion-stage2-gate1-seal-0001",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "22e3df1b90ef72b808cc033ce698526be6822cf36b301d94e8b244eca384dd0d"
+  },
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/arizona-state/arizona-state-expansion-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "650e586fbf8bb822704082550342ce5e16236973bdb86428b9a53ddf7baec290"
+  },
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de"
+}
