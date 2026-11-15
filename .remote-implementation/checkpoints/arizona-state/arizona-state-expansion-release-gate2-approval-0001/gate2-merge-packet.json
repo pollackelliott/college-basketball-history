@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "c2f7f0c32e04641a22b820b489399d89e5a6f37b",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "arizona-state-expansion-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "pr_number": 622,
+  "preview_deployment_id": 7804146892,
+  "preview_url": "https://college-basketball-history-oluf2drd6-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "arizona-state-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "target_branch": "data/arizona-state-onboarding"
+}
