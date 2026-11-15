@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from arizona-state-expansion-stage2-census-0002",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+  "expected_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "5e154253398fed8fd71de7928f214e4f93650b59",
+  "previous_control_state_sha256": "17eaf1bfc01f55b583e16a069ba652a4a0ed5175e061ba0ef634ad773c28b409",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/arizona-state-expansion-stage2-current-main-refresh-0001/recommendation-map.json",
+    "sha256": "a2b4b7cb4db7f77d65d63c38475749ff7ba912965e665739c551b4ff6198f1c5"
+  },
+  "request_id": "arizona-state-expansion-stage2-proposal-0002",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "22f5d54734b301ba313321ae04641c35a30707ff7e1495db72b4bf46a5124fb5"
+  },
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de"
+}
