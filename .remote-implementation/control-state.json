@@ -599,18 +599,19 @@
     "vcu-expansion-release-gate2-approval-0001",
     "vcu-expansion-release-production-proof-0001",
     "arizona-state-expansion-phase0-0002",
-    "arizona-state-expansion-phase0-0003"
+    "arizona-state-expansion-phase0-0003",
+    "arizona-state-expansion-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "arizona-state-expansion-stage2-census-0001",
+  "active_request_sha256": "0259a687b27ed6b24bbc4f43aebc0aed21aa7f07221b90b5b04b194830d5b59b",
+  "active_school_key": "arizona-state",
+  "active_target_branch": "data/arizona-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1209,8 +1210,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/arizona-state/arizona-state-expansion-phase0-0003/writeahead-manifest.json",
     "writeahead_manifest_sha256": "d510f0847cabbe09d69930368ae0cfbe886b1792b4a761b70a4d69f4d611b772"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43681827867",
+  "lock_acquisition_request_commit": "c4c142297b8276501f67bbc01fa4280df411239c",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }

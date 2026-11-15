@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "arizona-state-expansion-stage2-census-0001",
+  "school_key": "arizona-state",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "74f8f0d0d861958bf5954bb9b0118f8e46b7b730",
+  "previous_control_state_sha256": "9bca72e12ad8cfc12b37ebfee7985aa9fb97b5f177103aed2bb7fea242a14835",
+  "expected_protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/arizona-state/arizona-state-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "e2b4ca757b9fb3265f66cbd9ddf42519546c5e6920862e590591ea677e59a2d8"
+  },
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "creation_provenance": {
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner said Proceed for the Arizona State ALL_HISTORY_EXPANSION Stage 2 phase after independently verified EXPANSION_PHASE0 arizona-state-expansion-phase0-0003. This request performs only permanent read-only STAGE2_CENSUS against the unchanged fresh-verified Phase 0 successor. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority. Subsequent deterministic Stage 2 work remains phase-persistent only after authenticating this census."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
