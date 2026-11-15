@@ -607,18 +607,19 @@
     "arizona-state-expansion-stage2-proposal-0002",
     "arizona-state-expansion-stage2-gate1-fill-0001",
     "arizona-state-expansion-stage2-preseal-rehearsal-0001",
-    "arizona-state-expansion-stage2-gate1-seal-0001"
+    "arizona-state-expansion-stage2-gate1-seal-0001",
+    "arizona-state-expansion-stage2-sealed-apply-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43718018478:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "arizona-state-expansion-stage2-sealed-apply-0001",
+  "active_request_sha256": "b6dfa0caea09f76a519d1671aad77ddf7271c7c937abe8285acba3c7ab89b9dd",
+  "active_school_key": "arizona-state",
+  "active_target_branch": "data/arizona-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1234,8 +1235,11 @@
     "target_branch": "data/arizona-state-onboarding",
     "target_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43718018478",
+  "lock_acquisition_request_commit": "588fbafde902581ef3186ac106faeab0c47b904d",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
