@@ -45,6 +45,14 @@ STAGE1_REPORT = "expansion-stage1-reconciliation.json"
 KNOWN_STAGE1_BLOCKER = "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"
 SHA40 = re.compile(r"[0-9a-f]{40}\Z")
 SHA64 = re.compile(r"[0-9a-f]{64}\Z")
+SCOPE_REFERENCE_PATH = "data/reference/program-top-level-scope.csv"
+PROGRAM_SCOPE_FIELDS = (
+    "history_start_season",
+    "history_scope_intervals",
+    "history_scope_status",
+    "history_scope_basis",
+    "history_scope_notes",
+)
 
 
 class IntegrationAuthorityError(Stage1Stop):
@@ -95,6 +103,61 @@ def authenticate_proof(
     require(proof.get("blockers") == report["blockers"], "STAGE1_PROOF_BLOCKERS_MISMATCH")
     require(proof.get("integration_freeze_authorized") is False,
             "STAGE1_PROOF_CANNOT_PREAUTHORIZE_INTEGRATION")
+
+
+def metadata_projection(
+    baseline: dict[str, Any], report: dict[str, Any]
+) -> tuple[dict[str, str], dict[str, str], bool]:
+    """Project only freeze-authenticated target metadata and scope authority."""
+    projected_program = project_complete_institutional_program_row(
+        baseline["program"], report["researched_inception_season"]
+    )
+    projected_scope = dict(baseline["scope_row"])
+    allowed_program_changes = {
+        "program_inception_season", "history_coverage_status"
+    }
+    authority = report.get("scope_authority")
+    schema_version = report.get("research_freeze_schema_version", 1)
+    if authority is not None:
+        require(schema_version == 2, "SCOPE_AUTHORITY_REQUIRES_FREEZE_V2")
+        require(isinstance(authority, dict), "SCOPE_AUTHORITY_INVALID")
+        target_fields = authority.get("target_program_scope_fields")
+        require(
+            isinstance(target_fields, dict)
+            and set(target_fields) == set(PROGRAM_SCOPE_FIELDS),
+            "SCOPE_PROGRAM_PROJECTION_FIELDS_INVALID",
+        )
+        require(
+            authority.get("baseline_scope")
+            == baseline["scope_row"].get("top_level_scope"),
+            "SCOPE_AUTHORITY_BASELINE_MISMATCH",
+        )
+        accepted_scope = str(authority.get("accepted_scope") or "").strip()
+        require(bool(accepted_scope), "SCOPE_AUTHORITY_ACCEPTED_SCOPE_MISSING")
+        projected_program.update(target_fields)
+        projected_scope["top_level_scope"] = accepted_scope
+        allowed_program_changes.update(PROGRAM_SCOPE_FIELDS)
+    else:
+        require(schema_version == 1, "FREEZE_V2_SCOPE_AUTHORITY_MISSING")
+
+    require(set(projected_program) == set(baseline["program"]), "PROGRAM_SCHEMA_DRIFT")
+    differences = {
+        key for key in projected_program
+        if baseline["program"][key] != projected_program[key]
+    }
+    require(
+        differences <= allowed_program_changes,
+        "UNAUTHENTICATED_PROGRAM_METADATA_MUTATION",
+    )
+    require(
+        set(projected_scope) == set(baseline["scope_row"]),
+        "TOP_LEVEL_SCOPE_SCHEMA_DRIFT",
+    )
+    return (
+        projected_program,
+        projected_scope,
+        projected_scope != baseline["scope_row"],
+    )
 
 
 def source_preservation(
@@ -269,15 +332,9 @@ def freeze_authority(
             report,
             {},
         )
-        # Only historical publication metadata may transition, never top-level scope.
-        expected = project_complete_institutional_program_row(
-            baseline["program"], report["researched_inception_season"])
-        require(set(expected) == set(baseline["program"]), "PROGRAM_SCHEMA_DRIFT")
-        differences = {k for k in expected
-                       if baseline["program"][k] != expected[k]}
-        require(differences <= {
-            "program_inception_season", "history_coverage_status"
-        }, "TOP_LEVEL_SCOPE_OR_ACCOMPLISHMENT_MUTATION_FORBIDDEN")
+        expected, projected_scope, scope_mutation_authorized = metadata_projection(
+            baseline, report
+        )
         current_program_rows = csv_rows(git_bytes(repo, main_sha,
             "data/reference/programs.csv"), "current programs")[1]
         current = [x for x in current_program_rows if x["program_key"] == school]
@@ -333,6 +390,13 @@ def freeze_authority(
             "origin_main_sha": main_sha,
             "research_freeze_zip_sha256": zip_sha,
             "research_zip_sha256": zip_sha,
+            "research_freeze_schema_version": report.get(
+                "research_freeze_schema_version", 1
+            ),
+            "inherited_reused_source_reference_count": report.get(
+                "inherited_reused_source_reference_count", 0
+            ),
+            "scope_authority": report.get("scope_authority"),
             "independent_stage1_proof_sha256": proof_sha,
             "stage1_report_sha256": hashes[STAGE1_REPORT],
             "candidate_member_sha256": package_hashes,
@@ -362,6 +426,9 @@ def freeze_authority(
             "frozen_program_projection_sha256": canonical_row_sha256(expected),
             "frozen_program_projection": expected,
             "top_level_scope_row_sha256": baseline["scope_row_sha256"],
+            "frozen_scope_projection_sha256": canonical_row_sha256(projected_scope),
+            "frozen_scope_projection": projected_scope,
+            "scope_mutation_authorized": scope_mutation_authorized,
             "accomplishment_status": baseline["accomplishment_status"],
             "accomplishment_row_sha256": baseline["accomplishment_row_sha256"],
             "unresolved_history_decisions": 0,
@@ -439,11 +506,14 @@ def phase0_packet(frozen: Path, output: Path) -> dict[str, Any]:
         (frozen / MANIFEST_NAME).read_bytes(), frozen
     )
     school = manifest["school_key"]
-    paths = sorted({
+    paths = {
         *(f"schools/{school}/{name}" for name in PACKAGE_FILES),
         "data/reference/programs.csv", "data/reference/venues.csv",
         "data/reference/venue-names.csv", "data/reference/conferences.csv",
-    })
+    }
+    if manifest.get("scope_mutation_authorized"):
+        paths.add(SCOPE_REFERENCE_PATH)
+    paths = sorted(paths)
     packet = {
         "schema_version": 1,
         "kind": "ALL_HISTORY_EXPANSION_PHASE0_GUARDED_PRECONDITIONS",

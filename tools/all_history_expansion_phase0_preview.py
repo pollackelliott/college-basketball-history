@@ -16,8 +16,8 @@ from pathlib import Path
 
 from all_history_expansion_integration import (
     MANIFEST_NAME, PACKAGE_FILES, STAGE1_REPORT, IntegrationAuthorityError,
-    canonical_bytes, csv_rows, git_bytes, git_revision, require,
-    sha256, verify_manifest_bytes,
+    SCOPE_REFERENCE_PATH, canonical_bytes, csv_rows, git_bytes, git_revision,
+    require, sha256, verify_manifest_bytes,
 )
 from stage_research_portfolio import (
     WorkflowError, load_existing_school_venues, rebase_venues,
@@ -49,12 +49,14 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_INHERITED_SCHOOL_DRIFT")
     globals_paths={
         "programs":"data/reference/programs.csv",
+        "scope":SCOPE_REFERENCE_PATH,
         "venues":"data/reference/venues.csv",
         "venue-names":"data/reference/venue-names.csv",
         "program-names":"data/reference/program-names.csv",
     }
     original={key:git_bytes(repo,main,path) for key,path in globals_paths.items()}
     program_fields,program_rows=csv_rows(original["programs"],"programs.csv")
+    scope_fields,scope_rows=csv_rows(original["scope"],"program-top-level-scope.csv")
     global_venue_fields,global_venues=csv_rows(original["venues"],"venues.csv")
     global_name_fields,global_names=csv_rows(original["venue-names"],"venue-names.csv")
     _, aliases=csv_rows(original["program-names"],"program-names.csv")
@@ -75,14 +77,46 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     projected=manifest["frozen_program_projection"]
     require(set(projected)==set(program_fields),
             "PHASE0_PREVIEW_PROGRAM_SCHEMA_CHANGED")
+    scope_mutation=bool(manifest.get("scope_mutation_authorized"))
+    scope_program_fields=set()
+    if scope_mutation:
+        authority=manifest.get("scope_authority")
+        require(isinstance(authority,dict),
+                "PHASE0_PREVIEW_SCOPE_AUTHORITY_MISSING")
+        fields=authority.get("target_program_scope_fields")
+        require(isinstance(fields,dict),
+                "PHASE0_PREVIEW_SCOPE_PROGRAM_FIELDS_MISSING")
+        scope_program_fields=set(fields)
     protected_fields=set(program_fields)-{
-        "program_inception_season","history_coverage_status"}
+        "program_inception_season","history_coverage_status"}-scope_program_fields
     require(all(projected[k]==before[0][k] for k in protected_fields),
             "PHASE0_PREVIEW_PROTECTED_METADATA_CHANGED")
     require(projected["history_coverage_status"]=="COMPLETE_INSTITUTIONAL",
             "PHASE0_PREVIEW_COVERAGE_NOT_COMPLETE")
+    require(canonical_row_sha256(projected)==
+            manifest["frozen_program_projection_sha256"],
+            "PHASE0_PREVIEW_PROGRAM_PROJECTION_HASH_CHANGED")
     post_programs=[dict(projected) if r["program_key"]==school else dict(r)
                    for r in program_rows]
+
+    projected_scope=manifest.get("frozen_scope_projection")
+    require(isinstance(projected_scope,dict) and set(projected_scope)==set(scope_fields),
+            "PHASE0_PREVIEW_SCOPE_PROJECTION_INVALID")
+    scope_school=projected_scope.get("school","")
+    current_scope=[r for r in scope_rows if r.get("school")==scope_school]
+    require(len(current_scope)==1,
+            "PHASE0_PREVIEW_SCOPE_ROW_MISSING")
+    require(canonical_row_sha256(current_scope[0])==
+            manifest["top_level_scope_row_sha256"],
+            "PHASE0_PREVIEW_BASELINE_SCOPE_DRIFT")
+    require(canonical_row_sha256(projected_scope)==
+            manifest["frozen_scope_projection_sha256"],
+            "PHASE0_PREVIEW_SCOPE_PROJECTION_HASH_CHANGED")
+    if not scope_mutation:
+        require(projected_scope==current_scope[0],
+                "PHASE0_PREVIEW_UNAUTHORIZED_SCOPE_CHANGE")
+    post_scope=[dict(projected_scope) if r.get("school")==scope_school else dict(r)
+                for r in scope_rows]
 
     # Expansion differs from new-school onboarding: do not mechanically rebase
     # the inherited accepted school venue/opponent populations. Only newly
@@ -228,6 +262,8 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         "data/reference/venues.csv":render_csv(global_venue_fields,rebased_global),
         "data/reference/venue-names.csv":render_csv(global_name_fields,rebased_names),
     }
+    if scope_mutation:
+        global_changes[SCOPE_REFERENCE_PATH]=render_csv(scope_fields,post_scope)
     checked_programs=csv_rows(global_changes["data/reference/programs.csv"],"proposed programs")[1]
     require([r for r in checked_programs if r["program_key"]!=school] ==
             [r for r in program_rows if r["program_key"]!=school],
@@ -263,7 +299,13 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         "six_file_preview_sha256":{n:sha256(data) for n,data in sorted(candidate.items())},
         "global_reference_preview_sha256":{n:sha256(data) for n,data in sorted(global_changes.items())},
         "permitted_new_coverage_status":"COMPLETE_INSTITUTIONAL",
-        "protected_top_level_and_accomplishments":"UNCHANGED",
+        "scope_mutation_authorized":scope_mutation,
+        "frozen_scope_projection_sha256":
+            manifest["frozen_scope_projection_sha256"],
+        "protected_top_level_and_accomplishments":(
+            "FROZEN_TARGET_SCOPE_ONLY;ACCOMPLISHMENTS_UNCHANGED"
+            if scope_mutation else "UNCHANGED"
+        ),
         "required_guards":manifest["required_phase0_guards"],
         "lock_acquired":False,
         "writeahead_persisted":False,

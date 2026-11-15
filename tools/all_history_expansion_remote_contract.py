@@ -15,7 +15,7 @@ from typing import Any
 
 from all_history_expansion_integration import (
     MANIFEST_NAME, PACKAGE_FILES, STAGE1_REPORT, IntegrationAuthorityError,
-    canonical_bytes, sha256, verify_manifest_bytes,
+    SCOPE_REFERENCE_PATH, canonical_bytes, sha256, verify_manifest_bytes,
 )
 from all_history_expansion_venue_guard import require_clean
 from remote_implementation_control import (
@@ -30,6 +30,7 @@ MUTABLE_GLOBALS = frozenset({
     "data/reference/venues.csv",
     "data/reference/venue-names.csv",
 })
+OPTIONAL_SCOPE_GLOBAL = frozenset({SCOPE_REFERENCE_PATH})
 
 
 def require(ok: Any, code: str) -> None:
@@ -37,10 +38,25 @@ def require(ok: Any, code: str) -> None:
         raise IntegrationAuthorityError(code)
 
 
-def exact_paths(school: str) -> frozenset[str]:
-    return MUTABLE_GLOBALS | frozenset(
+def exact_paths(
+    school: str, global_paths: Any = None
+) -> frozenset[str]:
+    selected = MUTABLE_GLOBALS if global_paths is None else frozenset(global_paths)
+    require(
+        MUTABLE_GLOBALS <= selected
+        and selected <= (MUTABLE_GLOBALS | OPTIONAL_SCOPE_GLOBAL),
+        "EXPANSION_GLOBAL_PATH_SET_FORBIDDEN",
+    )
+    return selected | frozenset(
         f"schools/{school}/{name}" for name in PACKAGE_FILES
     )
+
+
+def expected_global_paths(manifest: dict[str, Any]) -> frozenset[str]:
+    selected = set(MUTABLE_GLOBALS)
+    if manifest.get("scope_mutation_authorized"):
+        selected.add(SCOPE_REFERENCE_PATH)
+    return frozenset(selected)
 
 
 def authenticate_intent(
@@ -157,12 +173,30 @@ def authenticate_intent(
             "EXPANSION_NEW_VENUE_POPULATION_CHANGED")
     require(preview["permitted_new_coverage_status"]=="COMPLETE_INSTITUTIONAL",
             "EXPANSION_METADATA_TARGET_INVALID")
-    require(preview["protected_top_level_and_accomplishments"]=="UNCHANGED",
-            "EXPANSION_TOP_LEVEL_OR_ACCOMPLISHMENTS_CHANGED")
-    expected=exact_paths(school)
+    scope_mutation = bool(manifest.get("scope_mutation_authorized"))
+    require(preview.get("scope_mutation_authorized") is scope_mutation,
+            "EXPANSION_SCOPE_MUTATION_AUTHORITY_DRIFT")
+    if scope_mutation:
+        require(
+            preview.get("frozen_scope_projection_sha256")
+            == manifest.get("frozen_scope_projection_sha256"),
+            "EXPANSION_SCOPE_PROJECTION_HASH_DRIFT",
+        )
+        expected_presentation = (
+            "FROZEN_TARGET_SCOPE_ONLY;ACCOMPLISHMENTS_UNCHANGED"
+        )
+    else:
+        expected_presentation = "UNCHANGED"
+    require(
+        preview["protected_top_level_and_accomplishments"]
+        == expected_presentation,
+        "EXPANSION_TOP_LEVEL_OR_ACCOMPLISHMENTS_CHANGED",
+    )
+    expected_globals = expected_global_paths(manifest)
+    expected=exact_paths(school, expected_globals)
     require(set(preview["six_file_preview_sha256"])==set(PACKAGE_FILES),
             "EXPANSION_SIX_FILE_PREVIEW_INCOMPLETE")
-    require(set(preview["global_reference_preview_sha256"])==MUTABLE_GLOBALS,
+    require(set(preview["global_reference_preview_sha256"])==expected_globals,
             "EXPANSION_GLOBAL_PREVIEW_PATHS_FORBIDDEN")
     for name,digest in preview["six_file_preview_sha256"].items():
         require(sha256((phase0_preview/name).read_bytes())==digest,

@@ -370,7 +370,8 @@ class CurrentMainCanonicalDriftTests(unittest.TestCase):
 class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
     """Synthetic Git and verifier surfaces test Stage 1 stop boundaries."""
 
-    def _invoke(self, *, drift=False, verify_error=None, accounting_error=None):
+    def _invoke(self, *, drift=False, verify_error=None, accounting_error=None,
+                schema_version=1):
         import zipfile
         from unittest.mock import patch
         fixture = Stage1FoundationTests()
@@ -390,7 +391,8 @@ class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
             artifact = root / "accepted.zip"
             with zipfile.ZipFile(artifact, "w") as archive:
                 archive.writestr("expansion-freeze.json", json.dumps({
-                    "researched_inception_season": "1966-1967", "schema_version": 1,
+                    "researched_inception_season": "1966-1967",
+                    "schema_version": schema_version,
                 }))
                 for name, raw in payload.items():
                     archive.writestr(name, raw)
@@ -579,6 +581,14 @@ class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
                 "notes", "site_city", "site_state", "venue_id", "venue_key",
             ],
         }])
+
+    def test_authenticated_v2_reaches_only_downstream_integration_boundary(self):
+        result=self._invoke(schema_version=2)
+        self.assertEqual(
+            [b["class"] for b in result["blockers"]],
+            ["DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"],
+        )
+        self.assertEqual(result["research_freeze_schema_version"],2)
 
     def test_changed_inherited_package_is_explicit_blocker(self):
         result = self._invoke(drift=True)

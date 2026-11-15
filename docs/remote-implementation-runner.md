@@ -220,13 +220,21 @@ register a second physical identity, or rewrite historical locality.
 
 A clean candidate may change only the complete target-school six-file package
 and the expansion preview's declared target-school global rows
-(`programs.csv`, `venues.csv`, and `venue-names.csv`). The expansion
-Integration Freeze carries the ordinary package-hash and source-game semantic
-snapshot fields required by downstream Stage 2 while preserving its expansion
-Research provenance. The runner validates the repository, persists write-ahead
-before publication, updates the existing onboarding ref only through expected-
-predecessor force-with-lease CAS, and releases the global lock only after a
-durable successor checkpoint.
+(`programs.csv`, `venues.csv`, and `venue-names.csv`). For a freshly
+verified schema-v2 Freeze carrying an authenticated owner scope supersession,
+the exact declared global set may additionally include only
+`program-top-level-scope.csv`, with the frozen target row and matching target
+program scope fields hash-bound by Integration Freeze. V1 and v2-without-scope-
+change requests may not add that path, and accomplishments remain outside this
+Phase 0 authority.
+
+The expansion Integration Freeze carries the ordinary package-hash and
+source-game semantic snapshot fields required by downstream Stage 2 while
+preserving its expansion Research provenance. The runner derives its changed-
+path allowlist from those authenticated projected global hashes, validates the
+repository, persists write-ahead before publication, updates the existing
+onboarding ref only through expected-predecessor force-with-lease CAS, and
+releases the global lock only after a durable successor checkpoint.
 
 The fresh verifier independently reconstructs the Integration Freeze, venue
 guard, Phase 0 preview, changed-path set, projected file hashes, semantic

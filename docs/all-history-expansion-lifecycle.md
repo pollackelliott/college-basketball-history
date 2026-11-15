@@ -392,14 +392,27 @@ Existing v1 frozen packages remain verifiable by unchanged v1 logic.
 The freeze does **not** reproduce the inherited six-file package or declare
 downstream expansion materialization/Implementation functionality complete.
 
-Later guarded serialized Implementation must materialize inherited unpublished
-source rows **once**, retaining original IDs, and atomically reconcile accepted
-scope into the single target program and top-level reference row, alongside
-the ordinary `COMPLETE_INSTITUTIONAL` transition. This remains subject to
-current-main rebase, Integration Freeze, Gate 1, sealed apply, Preview, Gate 2,
-and exact Production proof. If permanent generic downstream expansion
-Implementation is still missing, it is a separate explicit capability blocker;
-this Research-side v2 repair is not permission to improvise it.
+Guarded serialized Implementation materializes inherited unpublished source
+rows **once**, retaining original IDs. After fresh v2 verification, Stage 1 may
+treat those references as authenticated inherited authority rather than a
+separate new-row population. Integration Freeze must bind the exact v2 schema,
+reused-reference count, frozen scope authority, target program projection, and
+single target top-level-scope-row projection.
+
+When and only when the v2 Freeze carries an authenticated
+`OWNER_SUPERSESSION`, disposable and guarded Phase 0 may atomically reconcile
+that exact target scope together with the ordinary `COMPLETE_INSTITUTIONAL`
+transition. The allowed global write surface expands by exactly
+`data/reference/program-top-level-scope.csv`; only the one frozen target row
+may change. Accomplishments remain unchanged unless separate ordinary authority
+exists, and no v2 scope projection creates Gate 1, release, or merge authority.
+V1 continues to preserve the existing top-level-scope row unchanged.
+
+This remains subject to current-main rebase, Integration Freeze, guarded Phase 0
+lock/write-ahead/CAS, independent exact-tree replay, Gate 1, sealed apply,
+Preview, Gate 2, and exact Production proof. A malformed or missing v2 scope
+authority, a different scope expression, an unrelated global-row change, or
+any drift from the authenticated predecessor fails closed.
 
 ## 14. Supplemental Stage 4 acceptance (Research compatibility)
 
