@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "e9cb7b08ad8e1299a9b9d174d86fcea8f249f91c",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "5a2893f81f5d939be51242b1de24712c8a31a1de",
+  "recovered_request_id": "arizona-state-expansion-phase0-0002",
+  "request_id": "arizona-state-expansion-phase0-recover-0002",
+  "schema_version": 1,
+  "target_branch": "data/arizona-state-onboarding"
+}
