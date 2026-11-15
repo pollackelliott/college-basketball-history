@@ -1,38 +1,32 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "arizona-state-expansion-release-preview-verify-0001",
+  "request_id": "arizona-state-expansion-release-preview-recover-0001",
   "school_key": "arizona-state",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "91468239aee4d92ffd70d6d9a8337608f2ae4b81",
-  "previous_control_state_sha256": "d3f9c6b022afac81c6eea8907b0194b3ef88df0bb2a64a888e58488a3aae5eac",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "193b861e16ca3df7f71d2e38e7b10d464cd87a97",
+  "previous_control_state_sha256": "d3bde577138daaeb44987360ed9f4f7805f75f90d3f98d48c177c423decc92e3",
   "expected_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
-  "target_branch": "data/arizona-state-onboarding",
-  "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
-  "approved_plan_hash": "c5cbe44a8fdcfcc37654b8d7dfb80708cd8c23729f4616b69ab3465f144d6bee",
-  "release_manifest_sha256": "9b60a10d0d0bd75c511df31a44a0e665a42e2b9f3a84535a82685259ed4e1e89",
-  "pr_number": 622,
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "df4da3d7303b480992b283ef7a7bf15c3ff0f434125fcbadb6d008661d39e52a"
-  },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/arizona-state/arizona-state-expansion-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "51f0ee2795f37bf125b560798d5966a604befd891e46322f0c0b3c81b676192e"
+  "recovery": {
+    "abandoned_request_id": "arizona-state-expansion-release-preview-verify-0001",
+    "lock_commit": null,
+    "target_branch": null
   },
   "creation_provenance": {
-    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — Stage 4 release preparation continuation",
-    "authorization": "Continuation of the owner-authorized Arizona State Stage 4 release-preparation phase after independently fresh-verified RELEASE_READINESS and connector creation of exact packet-bound PR #622 at head e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0. This request may only verify exact PR-head CI, mergeability, and Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden."
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — deterministic Stage 4 read-only recovery",
+    "authorization": "The accepted arizona-state-expansion-release-preview-verify-0001 request failed only because required PR checks failed on one generic cohort-regression test; the request was read-only, PR #622 remains exact at head e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0, protected main remains fbce880c5d30fe63312330179de9a543bdab8e0a, and the Arizona State target remains unchanged. Authorize only permanent RECOVER classification and abandonment of this read-only request, durable recovery evidence, and restoration of IDLE. No historical change, target mutation, Owner Gate 2, merge, Production, or unrelated operation is authorized."
   },
   "authority": {
+    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": false,
+    "recovery": true,
     "release": false,
     "release_gate2_approval": false,
-    "release_preview_verify": true,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
