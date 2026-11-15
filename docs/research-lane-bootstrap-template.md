@@ -14,7 +14,7 @@ https://github.com/pollackelliott/college-basketball-history
 
 This is ONE INDEPENDENT RESEARCH LANE for one school. It is not the serialized repository-integration lane. A long Research lane may span a small number of chats through verified durable checkpoints; one uninterrupted conversation is not required.
 
-Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, docs/stage3a0-local-only-contract.md, docs/stage3a1-source-fanout-contract.md, docs/stage3a3-neutral-tranche-contract.md, and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
+Before beginning research, inspect current protected main, record research_base_sha, and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/complete-institutional-research-protocol.md, docs/stage3a-regular-season-site-research.md, docs/stage3a0-local-only-contract.md, docs/stage3a1-source-fanout-contract.md, docs/stage3a3-neutral-tranche-contract.md, and docs/shared-reference-authority.md. Follow the current repository research policies those documents reference. Repository policy controls over copied handoff wording.
 
 Use the bounded-stage execution protocol exactly. Work on only the currently authorized stage in each turn. At a completed stage boundary, report the required STAGE X: COMPLETE status, identify the next bounded stage, and STOP. Do not begin the next stage until I respond with Proceed/Continue or equivalent. If a stage cannot safely finish in one turn, preserve a portable durable checkpoint containing the exact residual queue(s), report STAGE X: INCOMPLETE — DURABLE CHECKPOINT PRESERVED, identify exactly what remains, and STOP.
 
@@ -25,6 +25,8 @@ My Proceed/Continue response authorizes only the identified next bounded stage, 
 Preserve accepted prior stages unless later evidence produces a genuine contradiction. Durable artifacts outrank chat memory. A replacement chat should be able to attach the latest checkpoint, verify it, and continue without rediscovering completed work. Historical uncertainty remains valid; unsupported certainty is worse than a researched unknown.
 
 Research may fully resolve shared historical identities, but this independent Research lane must not directly mutate protected-main shared reference registries. Carry any settled new shared identity forward as a resolved proposal for current-main Implementation rebase under docs/shared-reference-authority.md. General permission to mutate repository/research state does not override that boundary.
+
+For an ordinary unpublished school, Stage 1 researches the complete recognized institutional varsity history from actual program inception, not merely the accepted top-level/D-I intervals. Read the top-level scope separately as classification authority. Preserve `stage4-authoring/institutional-scope.json` as required by `docs/complete-institutional-research-protocol.md`.
 
 The target school and owner-supplied sources/constraints follow below.
 
@@ -62,11 +64,13 @@ Use this when a prior chat/session failed or must be replaced but durable resear
 ```text
 We are recovering an existing Research lane for <school> in my College Basketball History project.
 
-Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/stage3a-regular-season-site-research.md, docs/stage3a0-local-only-contract.md, docs/stage3a1-source-fanout-contract.md, docs/stage3a3-neutral-tranche-contract.md, and docs/shared-reference-authority.md.
+Before acting, inspect current protected main and read current AGENTS.md plus docs/research-lane-bounded-execution.md, docs/complete-institutional-research-protocol.md, docs/stage3a-regular-season-site-research.md, docs/stage3a0-local-only-contract.md, docs/stage3a1-source-fanout-contract.md, docs/stage3a3-neutral-tranche-contract.md, and docs/shared-reference-authority.md.
 
 I am attaching the latest durable checkpoint/recovery bundle from the prior lane. Treat verified durable artifacts—not conversational reconstruction—as the controlling continuation state.
 
 Verify the checkpoint ZIP/artifact hash and internal manifest, load the exact serialized residual queue(s), preserve accepted owner dispositions and completed repairs, and resume only the earliest incomplete bounded stage. If that stage is Stage 3A, resume the exact incomplete Stage 3A substage/tranche serialized by the checkpoint; do not reopen completed substages or broaden into another research mode.
+
+If this is an explicitly authorized pre-protocol complete-institutional retrofit, do not treat the scope change as permission to restart. Authenticate the parent artifact, preserve the same `research_base_sha`, serialize `stage4-authoring/institutional-scope.json`, extend Stage 1 only for the omitted institutional seasons/games, and later revisit only downstream rows/identities directly affected by that extension. A frozen parent remains immutable evidence; a genuine pre-existing `INCEPTION+` universe needs no retrofit merely for symmetry.
 
 If the earliest incomplete work is Stage 3A-0, resume only its unfinished **local mechanical** census/partition/project-evidence queue. Use only the checkpoint and already-present current-project evidence. Do not search the web, discover external opponent sources, browse institutional archives, or investigate venue candidates. If local project evidence does not resolve a candidate, preserve it for the later Stage 3A research substage rather than broadening the search.
 

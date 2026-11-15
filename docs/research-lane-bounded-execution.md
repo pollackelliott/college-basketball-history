@@ -23,9 +23,10 @@ At Research-lane startup:
 
 1. inspect current protected `main` and record `research_base_sha`;
 2. read current `AGENTS.md` and the controlling research documents it references;
-3. read `data/reference/program-top-level-scope.csv` and apply the target school's uncontradicted scope row;
-4. identify the owner-supplied school sources and any source-specific authorization limits;
-5. begin Stage 1 only.
+3. read `data/reference/program-top-level-scope.csv` as the target school's accepted top-level/D-I classification authority;
+4. for an ordinary unpublished school, read `docs/complete-institutional-research-protocol.md`, establish institutional varsity inception independently, and define the complete institutional Stage 1 universe from inception through the required completed-season cutoff;
+5. identify the owner-supplied school sources and any source-specific authorization limits;
+6. begin Stage 1 only.
 
 Repository policy controls over copied handoff wording when they conflict.
 
@@ -36,6 +37,8 @@ A Research lane does not write canonical/global repository state. Research-time 
 ### 3.1 Preserve accepted prior stages
 
 Once a stage is complete, its conclusions and durable artifacts are controlling working state. A later stage must not broadly reopen it merely because new work has begun.
+
+For a pre-protocol complete-institutional retrofit, scope expansion is not itself a contradiction. Authenticate the parent checkpoint/Freeze and follow `docs/complete-institutional-research-protocol.md`: extend only the omitted institutional population and downstream obligations directly caused by those new rows. Preserve the same immutable `research_base_sha`. Restart only when the durable row-level state cannot be safely extended, and state the exact reason.
 
 Reopen an accepted prior conclusion only when later evidence exposes a **genuine contradiction**. Prefer a narrow correction overlay when game identity/universe remains valid and only a field-level correction is required. Preserve literal source evidence and provenance.
 

@@ -32,6 +32,12 @@ The three ordinary package-ready members are:
 2. stage4-authoring/venues.csv
 3. stage4-authoring/conferences.csv
 
+A new ordinary complete-institutional lane, or an explicitly retrofitted pre-protocol ordinary lane, additionally carries:
+
+4. stage4-authoring/institutional-scope.json
+
+This member is not a seventh Research Freeze file. It preserves the researched institutional inception, unchanged accepted top-level/D-I classification, complete publication-universe declaration, transition mode, and (for retrofits) exact parent artifact SHA-256. It is inherited byte-for-byte through later Research checkpoints. Stage 4 validates it against the school/research base and renders the structured authority into `notes.md` and `source-notes.md`. Legacy lanes that were already correctly `INCEPTION+` are not required to manufacture this member merely for symmetry.
+
 A portfolio that completed Stage 1 through the independently verified early-history
 uncertainty path additionally carries:
 

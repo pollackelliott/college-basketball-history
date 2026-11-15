@@ -40,9 +40,9 @@ At lane startup:
 
 1. locate the target school in the scope reference;
 2. record the applicable `top_level_scope` in the research notes/status card;
-3. during the current compatibility transition, continue constructing the Research package's operational game universe from the accepted intervals, subject to the normal exhibition and game-identity rules; this temporary workflow boundary does not redefine those intervals as institutional inception;
-4. preserve source evidence from non-scope seasons when useful for context, but do not ingest those games into the target canonical universe;
-5. continue ordinary research without asking the owner to restate scope.
+3. for ordinary unpublished-school Research, apply `docs/complete-institutional-research-protocol.md`: establish actual institutional varsity inception independently and construct the Research game universe across all active varsity seasons from inception through the required completed-season cutoff;
+4. use the accepted intervals to classify top-level/D-I-equivalent seasons, accomplishments and top-level tournament semantics; do not use them to discard otherwise valid institutional games from an unpublished target school's ordinary Research universe;
+5. preserve the complete institutional population and continue ordinary research without asking the owner to restate scope.
 
 A lane should contact the owner about history scope only when:
 
@@ -81,6 +81,12 @@ represents program inception. Published programs with any non-`INCEPTION+` accep
 top-level expression remain `LEGACY_TOP_LEVEL_ONLY` until their institutional
 supplement is researched and integrated. Unpublished current-D1 programs remain
 `UNMIGRATED` unless a later authorized migration establishes otherwise.
+
+For those unpublished `UNMIGRATED` programs, current ordinary Research is nevertheless
+complete-institutional under `docs/complete-institutional-research-protocol.md`: `UNMIGRATED`
+describes repository publication state, not permission to clip Research to the top-level
+intervals. The researched inception is carried as Research authority until serialized
+Implementation can project the program metadata safely.
 
 The existing `history_start_season`, `history_scope_status`,
 `history_scope_basis`, `history_scope_notes`, and
