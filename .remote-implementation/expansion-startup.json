@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "arizona-state-expansion-startup-0003",
-  "phase0_request_id": "arizona-state-expansion-phase0-0003",
-  "school_key": "arizona-state",
-  "expected_protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
-  "target_branch": "data/arizona-state-onboarding",
-  "target_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
-  "research_freeze_sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+  "startup_id": "houston-expansion-startup-0001",
+  "phase0_request_id": "houston-expansion-phase0-0001",
+  "school_key": "houston",
+  "expected_protected_main_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50",
+  "research_freeze_sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
   "expansion_research_checkpoint": {
-    "sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
-    "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+    "sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
+    "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "ec688f2e5394846deb41826e560fc64c1a4c4f26",
-      "path_prefix": ".remote-implementation/transports/arizona-state/arizona-state-expansion-startup-0001/part-",
-      "part_count": 11
+      "commit_sha": "6ccafd17d534decd30500e35224982855908ea48",
+      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0001/part-",
+      "part_count": 20
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION Implementation lane — fresh same-phase startup after generic Phase 0 and recovered-idle coordinator repairs",
-    "authorization": "Owner Proceed continues the already-authorized Arizona State initial expansion Implementation phase. The failed arizona-state-expansion-phase0-0002 request was durably recovered as NOT_ATTEMPTED with the target unchanged. Generic repair PR #619 synchronized authenticated v2 scope-derived generated site data during guarded expansion Phase 0, and PR #620 made the startup coordinator accept repository-valid recovered IDLE terminal states. This fresh startup authorizes only repository-owned Stage 1 reproduction, Integration Freeze, guarded EXPANSION_PHASE0 request arizona-state-expansion-phase0-0003, and its independent fresh verification. It does not reopen Research, alter historical authority, grant Owner Gate 1 or Gate 2, authorize release/merge, or permit unrelated mutation."
+    "origin": "ChatGPT Houston ALL_HISTORY_EXPANSION Implementation lane",
+    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/recovery unit. This startup authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0001, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
   }
 }
