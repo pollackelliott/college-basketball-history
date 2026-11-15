@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "c5cbe44a8fdcfcc37654b8d7dfb80708cd8c23729f4616b69ab3465f144d6bee",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-release-readiness-0002/pr-body.md",
+  "body_sha256": "04d2bd6979aea49c824745d7c2c61575508064fe3ec0dafe799760665f4a120c",
+  "head_branch": "data/arizona-state-onboarding",
+  "head_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish Arizona State history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "arizona-state-expansion-release-preview-verify-0002",
+  "readiness_request_id": "arizona-state-expansion-release-readiness-0002",
+  "release_manifest_sha256": "9b60a10d0d0bd75c511df31a44a0e665a42e2b9f3a84535a82685259ed4e1e89",
+  "schema_version": 1,
+  "school_key": "arizona-state"
+}
