@@ -12,12 +12,16 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 from all_history_expansion_integration import PACKAGE_FILES, STAGE1_REPORT  # noqa: E402
-from remote_implementation_control import validate_request  # noqa: E402
+from remote_implementation_control import (  # noqa: E402
+    initial_control_state,
+    validate_request,
+)
 from remote_implementation_expansion_startup import (  # noqa: E402
     STARTUP_KIND,
     Stop,
     build_phase0_request,
     build_stage1_proof,
+    require_startup_idle_control,
     validate_startup_intent,
 )
 
@@ -55,6 +59,45 @@ def startup_intent() -> dict:
             ),
         },
     }
+
+
+def recovered_idle_state(disposition: str) -> dict:
+    state = initial_control_state()
+    failed_request = "example-expansion-phase0-failed"
+    recovery_request = "example-expansion-phase0-recover"
+    classification = {
+        "ABANDONED_NOT_ATTEMPTED": "NOT_ATTEMPTED",
+        "ABANDONED_PREPARED_NOT_PUBLISHED": "PREPARED_NOT_PUBLISHED",
+    }[disposition]
+    state["transaction_state"] = disposition
+    state["abandoned_request_ids"] = [failed_request]
+    state["consumed_request_ids"] = [recovery_request]
+    state["last_operation"] = {
+        "operation": "RECOVER",
+        "recovered_request_id": failed_request,
+        "disposition": disposition,
+        "recovery_manifest": {
+            "mutation_classification": classification,
+            "recovered_request_id": failed_request,
+            "request_id": recovery_request,
+        },
+    }
+    return state
+
+
+class ExpansionStartupIdleControlTests(unittest.TestCase):
+    def test_initial_idle_control_is_eligible(self):
+        require_startup_idle_control(initial_control_state())
+
+    def test_not_attempted_recovery_terminal_is_eligible(self):
+        require_startup_idle_control(
+            recovered_idle_state("ABANDONED_NOT_ATTEMPTED")
+        )
+
+    def test_prepared_unpublished_recovery_terminal_is_eligible(self):
+        require_startup_idle_control(
+            recovered_idle_state("ABANDONED_PREPARED_NOT_PUBLISHED")
+        )
 
 
 class ExpansionStartupIntentTests(unittest.TestCase):
