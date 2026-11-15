@@ -1,0 +1,72 @@
+{
+  "allowed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/arizona-state/conferences.csv",
+    "schools/arizona-state/notes.md",
+    "schools/arizona-state/opponents.csv",
+    "schools/arizona-state/source-games.csv",
+    "schools/arizona-state/source-notes.md",
+    "schools/arizona-state/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/arizona-state.json"
+  ],
+  "changed_file_sha256": {
+    "data/reference/program-top-level-scope.csv": "0ffdb3e28ffa8da75c36132421cf736922a3bfaf93a9028136cc2bf1c29b523a",
+    "data/reference/programs.csv": "0100107d26cb68eb5fd5ebcca4b32366c653186a52881abdb9a58383bcf78227",
+    "schools/arizona-state/notes.md": "b4589e684e50a35beb48deac6642f14b46c4bc7c9da721036ac48796fb544dbc",
+    "schools/arizona-state/opponents.csv": "6fe1f36af4ba4c1445277c601719b7de575c93c3e549cb6c2510429f4df2b16f",
+    "schools/arizona-state/source-games.csv": "8835af82844cd46e639d2132ccb736324254a8f40d58c8499172df4047e7bfe0",
+    "schools/arizona-state/source-notes.md": "67375b96451e0bfbf6d9ae9a4a351fe58e664889c1fe056719476ceba102a722",
+    "site/data/programs.json": "d98e8aa4782d1e85fb9827d41a7e9f6029f2498253e0160e2d1495b1fe0facdb",
+    "site/data/teams/arizona-state.json": "83ba8b7635552da58d42075e80fa598c054ca8914d7d6221cd1d0b557e27d117"
+  },
+  "changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "schools/arizona-state/notes.md",
+    "schools/arizona-state/opponents.csv",
+    "schools/arizona-state/source-games.csv",
+    "schools/arizona-state/source-notes.md",
+    "site/data/programs.json",
+    "site/data/teams/arizona-state.json"
+  ],
+  "commit_message": "Stage arizona-state all-history expansion Phase 0",
+  "expected_target_predecessor_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
+  "global_lock_commit": "3e2d3878c2c45b69c58c08d7f654e547590f5138",
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "EXPANSION_PHASE0",
+  "package_member_sha256": {
+    "conferences.csv": "0527b0ca1ddb72fd1125fdc0821696850d3b109faf5eeb4558b65787bb225182",
+    "notes.md": "b4589e684e50a35beb48deac6642f14b46c4bc7c9da721036ac48796fb544dbc",
+    "opponents.csv": "6fe1f36af4ba4c1445277c601719b7de575c93c3e549cb6c2510429f4df2b16f",
+    "source-games.csv": "8835af82844cd46e639d2132ccb736324254a8f40d58c8499172df4047e7bfe0",
+    "source-notes.md": "67375b96451e0bfbf6d9ae9a4a351fe58e664889c1fe056719476ceba102a722",
+    "venues.csv": "e425d686450c4a7c9a0056a048293b6871f03e3ae93756faef35e286bd5aee14"
+  },
+  "prepared_commit_sha": "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+  "prepared_parent_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "prepared_tree_sha": "98241645cfb3bf9f61b9701148355c53e4881ad6",
+  "protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "repository_validation": "PASS",
+  "request_id": "arizona-state-expansion-phase0-0003",
+  "request_sha256": "1c36f6eab3d4b59f81b4473408bb3775cf5b7c7010954dfc7d1a309dbf7a32b6",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_checkpoint_sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "88f508204049f5151c15dba03fd830b65523e5ca1de4b1d03b39d48579cde6c2",
+    "integration-freeze.json": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+    "phase0-preview.json": "10449e2d597f989c8af2ceabd466202d2edad4a502c2957fdfb1f60a4602c7e7",
+    "stage1-independent-proof.json": "0d9411a1528be67e1397dd4712fdcee28a2fc63f3771a5dae63de3bbe9c02f7f"
+  },
+  "stage1_independent_proof_sha256": "0d9411a1528be67e1397dd4712fdcee28a2fc63f3771a5dae63de3bbe9c02f7f",
+  "target_branch": "data/arizona-state-onboarding",
+  "venue_reconciliation_sha256": ""
+}
