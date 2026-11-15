@@ -1,0 +1,134 @@
+{
+  "branch": "remote-stage2-census/arizona-state-6f0ee8f5e046",
+  "capability_census": {
+    "path": ".onboarding/arizona-state/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 2
+  },
+  "head_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de",
+  "integration_base_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "integration_semantic_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 10,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 10,
+      "discrepancy": 10,
+      "identity": 2
+    },
+    "decision_count": 23,
+    "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+    "discrepancies_to_add": 10,
+    "existing_game_matches": 2334,
+    "identity_cardinality_constraints": 3,
+    "new_canonical_games": 354,
+    "plan_path": ".onboarding/arizona-state/plan.json",
+    "review_path": ".onboarding/arizona-state/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "KEEP_CANONICAL": 11,
+      "LEAVE_UNRESOLVED": 1,
+      "MATCH_CANONICAL:CBBG-0109396": 1,
+      "MATCH_CANONICAL:CBBG-0187244": 1,
+      "NOT_APPLICABLE": 7,
+      "USE_SOURCE": 2
+    },
+    "approved_plan_hash_preview": "cfea2179d64c897f53d119b555ec4c51cc7efda1cec3a36a66b51dac7a296b77",
+    "changed_path_count": 11
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "KEEP_CANONICAL": 11,
+      "LEAVE_UNRESOLVED": 1,
+      "MATCH_CANONICAL:CBBG-0109396": 1,
+      "MATCH_CANONICAL:CBBG-0187244": 1,
+      "NOT_APPLICABLE": 7,
+      "USE_SOURCE": 2
+    },
+    "approved_plan_hash_preview": "cfea2179d64c897f53d119b555ec4c51cc7efda1cec3a36a66b51dac7a296b77",
+    "decision_count": 23,
+    "path": "/tmp/remote-stage2-proposal-map-rmnyz06_/recommendation-map.json",
+    "sha256": "a2b4b7cb4db7f77d65d63c38475749ff7ba912965e665739c551b4ff6198f1c5"
+  },
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 5,
+      "neutral_missing_venue": 13,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 237,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2691,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 224
+    },
+    "errors": [],
+    "examples": {
+      "neutral_missing_location": [
+        "CBBG-0107254",
+        "CBBG-0107255",
+        "CBBG-0111915",
+        "CBBG-0209612",
+        "CBBG-0209613"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0020868",
+        "CBBG-0056792",
+        "CBBG-0097447",
+        "CBBG-0107254",
+        "CBBG-0107255",
+        "CBBG-0109447",
+        "CBBG-0111915",
+        "CBBG-0111946",
+        "CBBG-0209327",
+        "CBBG-0209329",
+        "CBBG-0209339",
+        "CBBG-0209612"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0097447"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0107254",
+        "CBBG-0107255"
+      ],
+      "unknown_site_type": [
+        "CBBG-0067908",
+        "CBBG-0111364",
+        "CBBG-0111365",
+        "CBBG-0111366",
+        "CBBG-0111369",
+        "CBBG-0111370",
+        "CBBG-0111371",
+        "CBBG-0111379",
+        "CBBG-0111382",
+        "CBBG-0111402",
+        "CBBG-0111404",
+        "CBBG-0111405"
+      ]
+    },
+    "path": ".onboarding/arizona-state/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}
