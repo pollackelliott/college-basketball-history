@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "e650e7600897c17b00d3a29b5238a7b1201631acbc6f94c5f77e7cdd21ecb9de",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "04d2bd6979aea49c824745d7c2c61575508064fe3ec0dafe799760665f4a120c",
+  "pr_created": false,
+  "preview_request_id": "arizona-state-expansion-release-preview-verify-0002",
+  "preview_verified": false,
+  "protected_main_sha": "c2f7f0c32e04641a22b820b489399d89e5a6f37b",
+  "readiness_proof_sha256": "b48a556bfe27ef2e26108a48a5d774c2d70be17b83df2b07379ae6d4048ef026",
+  "release_pr_packet_sha256": "0171555a90615faea5a3eb32b34a44bd76f46c13b52838b2c457e096a3f745fe",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "arizona-state-expansion-release-readiness-0002",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "tracked_mutation": "NONE"
+}
