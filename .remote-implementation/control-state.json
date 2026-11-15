@@ -611,7 +611,7 @@
     "arizona-state-expansion-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
-  "active_lock_commit": null,
+  "active_lock_commit": "95d35c1333bea727e8bc802e7a5f28881b2b798d",
   "active_lock_owner": "github-actions:43718018478:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
