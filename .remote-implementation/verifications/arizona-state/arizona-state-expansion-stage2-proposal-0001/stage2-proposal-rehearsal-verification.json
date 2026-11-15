@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "151c47fe0f1440030bbf49a378eb9b17476f4f075d59550995509feedcc49d79",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "9ce59a8af47527346febe6c21f54a16e79374b3ae2a559d5775e5f10c17a0775",
+    "implementation-stage2-status.json": "22cab52ea3aabc290b1c0241790113aa94927a8cb9a199cc3e6edaa19efae8ef",
+    "last-rehearsal-site-gate.json": "02cbd458df8ce52c5f0ae93d506b04e9a8adc8dc044c5840c1af85fd49b86b75",
+    "plan.json": "956b2302bd0bbe7153a585b59f392de88f6f7f477d0387bd05b59e7a296e04d5",
+    "review.csv": "08f2fa57318322262d553d3d32bfaf10806d3bf08ef4c5c95c9fbc7f2af493d6",
+    "review.md": "ba4584029dbae792eda25a314db1b09018c9b3db36138b82a0f975f54632b969"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "9ce59a8af47527346febe6c21f54a16e79374b3ae2a559d5775e5f10c17a0775",
+    "implementation-stage2-status.json": "edae278e6b90286eb45d38011c2a840e79e2fd6832c504a4afb227270e3ab15a",
+    "last-rehearsal-site-gate.json": "02cbd458df8ce52c5f0ae93d506b04e9a8adc8dc044c5840c1af85fd49b86b75",
+    "plan.json": "5089e4f76a6ecf44d5dd3866419c91a44a30b690143f7da32181571af723351e",
+    "review.csv": "08f2fa57318322262d553d3d32bfaf10806d3bf08ef4c5c95c9fbc7f2af493d6",
+    "review.md": "d18789a9df876f510086f82f86d5831e8f33f9aa9d114166616b56e695420b7c"
+  },
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+    "runtime_decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "recommendation_map_sha256": "c32bb27900a083c5a6c48e4b361658bc52ea356bfc364f452555c152fdb676d6",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "arizona-state-expansion-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+  "target_tree_sha": "98241645cfb3bf9f61b9701148355c53e4881ad6",
+  "tracked_stage2_mutation": "NONE"
+}
