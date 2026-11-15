@@ -1,0 +1,173 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 10,
+      "discrepancy": 10,
+      "identity": 2
+    },
+    "decision_count": 23,
+    "decision_fields": {
+      "game_identity": 2,
+      "result_winner_team_key": 1,
+      "score": 9,
+      "site_metadata": 1,
+      "site_type": 10
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0109396",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109390-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109391-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109394-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1949-50-007-CBBG-0187244-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1930-31-014-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1932-33-002-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1932-33-007-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1946-47-001-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1946-47-002-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1949-50-009-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 2,
+      "home_missing_location": 2,
+      "home_missing_venue": 2,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 5,
+      "neutral_missing_venue": 12,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 238,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap": 2,
+      "strict_home_gap_rows": 2,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2691,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 224
+    },
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0109447",
+        "CBBG-0109485"
+      ],
+      "home_missing_location": [
+        "CBBG-0109447",
+        "CBBG-0109485"
+      ],
+      "home_missing_venue": [
+        "CBBG-0109447",
+        "CBBG-0109485"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0107254",
+        "CBBG-0107255",
+        "CBBG-0111915",
+        "CBBG-0209612",
+        "CBBG-0209613"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0020868",
+        "CBBG-0056792",
+        "CBBG-0097447",
+        "CBBG-0107254",
+        "CBBG-0107255",
+        "CBBG-0111915",
+        "CBBG-0111946",
+        "CBBG-0209327",
+        "CBBG-0209329",
+        "CBBG-0209339",
+        "CBBG-0209612",
+        "CBBG-0209613"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0097447"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0107254",
+        "CBBG-0107255"
+      ],
+      "strict_home_gap": [
+        "CBBG-0109447",
+        "CBBG-0109485"
+      ],
+      "unknown_site_type": [
+        "CBBG-0067908",
+        "CBBG-0111364",
+        "CBBG-0111365",
+        "CBBG-0111366",
+        "CBBG-0111369",
+        "CBBG-0111370",
+        "CBBG-0111371",
+        "CBBG-0111379",
+        "CBBG-0111382",
+        "CBBG-0111402",
+        "CBBG-0111404",
+        "CBBG-0111405"
+      ]
+    },
+    "status": "FAIL"
+  },
+  "status": "REPAIR_SCOPE_REQUIRED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 11,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0109390",
+          "fixed_confident_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-002"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-008"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0109391",
+          "fixed_confident_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-003"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-008"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0109394",
+          "fixed_confident_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-007"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-008"
+          ]
+        }
+      ],
+      "count": 3,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 2,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    }
+  ]
+}

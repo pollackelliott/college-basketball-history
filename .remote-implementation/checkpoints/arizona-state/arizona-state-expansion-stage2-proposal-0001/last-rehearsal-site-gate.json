@@ -1,0 +1,104 @@
+{
+  "counts": {
+    "home_missing_both": 2,
+    "home_missing_location": 2,
+    "home_missing_venue": 2,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 5,
+    "neutral_missing_venue": 12,
+    "postseason_missing_venue": 1,
+    "public_gap_rows": 238,
+    "reciprocal_research_accounted_gap": 2,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap": 2,
+    "strict_home_gap_rows": 2,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2691,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 224
+  },
+  "errors": [
+    "2 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception. Complete HOME location is never waivable."
+  ],
+  "examples": {
+    "home_missing_both": [
+      "CBBG-0109447",
+      "CBBG-0109485"
+    ],
+    "home_missing_location": [
+      "CBBG-0109447",
+      "CBBG-0109485"
+    ],
+    "home_missing_venue": [
+      "CBBG-0109447",
+      "CBBG-0109485"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0107254",
+      "CBBG-0107255",
+      "CBBG-0111915",
+      "CBBG-0209612",
+      "CBBG-0209613"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0020868",
+      "CBBG-0056792",
+      "CBBG-0097447",
+      "CBBG-0107254",
+      "CBBG-0107255",
+      "CBBG-0111915",
+      "CBBG-0111946",
+      "CBBG-0209327",
+      "CBBG-0209329",
+      "CBBG-0209339",
+      "CBBG-0209612",
+      "CBBG-0209613"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0097447"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0107254",
+      "CBBG-0107255"
+    ],
+    "strict_home_gap": [
+      "CBBG-0109447",
+      "CBBG-0109485"
+    ],
+    "unknown_site_type": [
+      "CBBG-0067908",
+      "CBBG-0111364",
+      "CBBG-0111365",
+      "CBBG-0111366",
+      "CBBG-0111369",
+      "CBBG-0111370",
+      "CBBG-0111371",
+      "CBBG-0111379",
+      "CBBG-0111382",
+      "CBBG-0111402",
+      "CBBG-0111404",
+      "CBBG-0111405"
+    ]
+  },
+  "history_start_season": "1911-1912",
+  "school_key": "arizona-state",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 237,
+    "neutral_missing_location": 3,
+    "neutral_missing_venue": 11,
+    "postseason_missing_venue": 1,
+    "researched_gap_rows": 237,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 226
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2690
+  },
+  "status": "FAIL",
+  "warnings": []
+}
