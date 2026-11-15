@@ -1,0 +1,29 @@
+{
+  "changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "schools/arizona-state/notes.md",
+    "schools/arizona-state/opponents.csv",
+    "schools/arizona-state/source-games.csv",
+    "schools/arizona-state/source-notes.md",
+    "site/data/programs.json",
+    "site/data/teams/arizona-state.json"
+  ],
+  "expected_target_predecessor_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
+  "independent_exact_tree_equivalence": "PASS",
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_VERIFICATION",
+  "observed_live_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "prepared_tree_sha": "98241645cfb3bf9f61b9701148355c53e4881ad6",
+  "protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "arizona-state-expansion-phase0-0003",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "status": "PASS",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+  "venue_reconciliation_sha256": ""
+}
