@@ -346,6 +346,64 @@ def _install_preview_candidate(
     return allowed
 
 
+def _install_scope_generated_projection(
+    worktree: Path,
+    request: dict[str, Any],
+    authority: dict[str, Any],
+    diag: Path,
+) -> list[str]:
+    expected = sorted(authority["intent"].get("scope_generated_paths") or [])
+    if not expected:
+        return []
+
+    cp = run(
+        [
+            sys.executable,
+            str(worktree / "tools" / "build_site_data.py"),
+            str(worktree),
+            "--apply",
+        ],
+        cwd=worktree,
+        check=False,
+    )
+    diag.mkdir(parents=True, exist_ok=True)
+    (diag / "expansion-phase0-build-site-data.log").write_text(
+        cp.stdout or "",
+        encoding="utf-8",
+    )
+    if cp.returncode != 0:
+        raise Stop(
+            "EXPANSION_PHASE0_SCOPE_SITE_PROJECTION_FAILED\n"
+            + (cp.stdout or "")[-10000:]
+        )
+
+    changed = sorted(
+        line.strip()
+        for line in git(
+            "diff",
+            "--name-only",
+            "--",
+            "site/data",
+            cwd=worktree,
+        ).stdout.splitlines()
+        if line.strip()
+    )
+    unexpected = sorted(set(changed) - set(expected))
+    if unexpected:
+        raise Stop(
+            "EXPANSION_PHASE0_SCOPE_SITE_PROJECTION_OUTSIDE_TARGET:"
+            + ",".join(unexpected)
+        )
+    missing = [path for path in expected if not (worktree / path).is_file()]
+    if missing:
+        raise Stop(
+            "EXPANSION_PHASE0_SCOPE_SITE_PROJECTION_MISSING:"
+            + ",".join(missing)
+        )
+    git("add", "--", *expected, cwd=worktree)
+    return expected
+
+
 def _repository_validation(worktree: Path, diag: Path) -> None:
     cp = run(
         [sys.executable, str(worktree / "tools" / "validate_data.py")],
@@ -476,6 +534,17 @@ def prepare_expansion_candidate(
         authenticated_published_target_sha=authenticated_published_target_sha,
     )
     allowed = _install_preview_candidate(worktree, request, authority)
+    allowed = sorted(
+        set(allowed)
+        | set(
+            _install_scope_generated_projection(
+                worktree,
+                request,
+                authority,
+                diag,
+            )
+        )
+    )
     _repository_validation(worktree, diag)
 
     changed = sorted(
