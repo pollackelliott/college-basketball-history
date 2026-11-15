@@ -1,0 +1,26 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "c2f7f0c32e04641a22b820b489399d89e5a6f37b",
+  "merge_parent_onboarding": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "merge_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
+  "owner_gate_2_approval_checkpoint_sha256": "28eed4b1bfdd0df84ddc56d3a2e389f9dde46b817c0d98390de9c6748da2697f",
+  "owner_gate_2_verification_sha256": "555a0390288795238484f3502c1ccd20c0e8d17d3ff40474510745ed19021393",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "pr_number": 622,
+  "production_deployment_id": 7805774578,
+  "production_deployment_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/arizona-state.json",
+    "/data/teams/arizona.json",
+    "/data/teams/baylor.json",
+    "/data/teams/texas-tech.json"
+  ],
+  "production_json_checked_count": 6,
+  "school_key": "arizona-state",
+  "status": "COMPLETE"
+}
