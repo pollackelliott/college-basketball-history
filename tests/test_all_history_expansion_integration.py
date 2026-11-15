@@ -14,8 +14,9 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1] / "tools"))
 from all_history_expansion_integration import (
     IntegrationAuthorityError, MANIFEST_NAME, PACKAGE_FILES, PROPOSAL_NAME,
-    STAGE1_REPORT, authenticate_proof, canonical_bytes, freeze_authority,
-    phase0_packet, sha256, source_preservation, verify_manifest_bytes,
+    SCOPE_REFERENCE_PATH, STAGE1_REPORT, authenticate_proof, canonical_bytes,
+    freeze_authority, metadata_projection, phase0_packet, sha256,
+    source_preservation, verify_manifest_bytes,
 )
 
 
@@ -121,6 +122,87 @@ class ExpansionIntegrationAuthorityTests(unittest.TestCase):
         proof["integration_freeze_authorized"]=True
         with self.assertRaisesRegex(IntegrationAuthorityError,"PREAUTHORIZE"):
             self.authenticate(proof)
+
+    def projection_baseline(self):
+        program={
+            "program_key":"sample",
+            "program_inception_season":"",
+            "history_coverage_status":"LEGACY_TOP_LEVEL_ONLY",
+            "history_start_season":"1978-1979",
+            "history_scope_intervals":"",
+            "history_scope_status":"OWNER_CONFIRMED",
+            "history_scope_basis":"FIRST_TOP_LEVEL_SEASON",
+            "history_scope_notes":"Baseline scope",
+        }
+        return {
+            "program":program,
+            "scope_row":{"school":"Sample","top_level_scope":"1978-79+"},
+        }
+
+    def test_v1_metadata_projection_preserves_scope(self):
+        baseline=self.projection_baseline()
+        report={
+            "researched_inception_season":"1966-1967",
+            "research_freeze_schema_version":1,
+            "scope_authority":None,
+        }
+        program,scope,changed=metadata_projection(baseline,report)
+        self.assertEqual(program["program_inception_season"],"1966-1967")
+        self.assertEqual(program["history_coverage_status"],"COMPLETE_INSTITUTIONAL")
+        self.assertEqual(program["history_start_season"],"1978-1979")
+        self.assertEqual(scope,baseline["scope_row"])
+        self.assertFalse(changed)
+
+    def test_v2_metadata_projection_applies_only_frozen_target_scope(self):
+        baseline=self.projection_baseline()
+        target_fields={
+            "history_start_season":"1966-1967",
+            "history_scope_intervals":"",
+            "history_scope_status":"OWNER_CONFIRMED",
+            "history_scope_basis":"ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+            "history_scope_notes":"Owner accepted INCEPTION+",
+        }
+        report={
+            "researched_inception_season":"1966-1967",
+            "research_freeze_schema_version":2,
+            "scope_authority":{
+                "baseline_scope":"1978-79+",
+                "accepted_scope":"INCEPTION+",
+                "target_program_scope_fields":target_fields,
+            },
+        }
+        program,scope,changed=metadata_projection(baseline,report)
+        self.assertTrue(changed)
+        self.assertEqual(scope,{"school":"Sample","top_level_scope":"INCEPTION+"})
+        for key,value in target_fields.items():
+            self.assertEqual(program[key],value)
+        self.assertEqual(program["history_coverage_status"],"COMPLETE_INSTITUTIONAL")
+
+    def test_v2_metadata_projection_requires_authenticated_scope_authority(self):
+        baseline=self.projection_baseline()
+        with self.assertRaisesRegex(
+            IntegrationAuthorityError,"FREEZE_V2_SCOPE_AUTHORITY_MISSING"
+        ):
+            metadata_projection(baseline,{
+                "researched_inception_season":"1966-1967",
+                "research_freeze_schema_version":2,
+                "scope_authority":None,
+            })
+
+    def test_v2_metadata_projection_rejects_unbound_program_scope_fields(self):
+        baseline=self.projection_baseline()
+        with self.assertRaisesRegex(
+            IntegrationAuthorityError,"SCOPE_PROGRAM_PROJECTION_FIELDS_INVALID"
+        ):
+            metadata_projection(baseline,{
+                "researched_inception_season":"1966-1967",
+                "research_freeze_schema_version":2,
+                "scope_authority":{
+                    "baseline_scope":"1978-79+",
+                    "accepted_scope":"INCEPTION+",
+                    "target_program_scope_fields":{"history_start_season":"1966-1967"},
+                },
+            })
 
     def make_manifest(self,root):
         root.mkdir()
@@ -229,6 +311,17 @@ class ExpansionIntegrationAuthorityTests(unittest.TestCase):
                           packet["required_transaction_guards"])
             self.assertIn("DURABLE_WRITEAHEAD_BEFORE_PUBLICATION",
                           packet["required_transaction_guards"])
+
+    def test_phase0_packet_includes_scope_path_only_when_frozen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)/"f"
+            manifest=self.make_manifest(folder)
+            manifest["scope_mutation_authorized"]=True
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+            (folder/MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
+            packet=phase0_packet(folder,Path(tmp)/"packet.json")
+            self.assertIn(SCOPE_REFERENCE_PATH,packet["allowed_changed_paths"])
 
     def test_phase0_packet_refuses_overwriting_existing_output(self):
         with tempfile.TemporaryDirectory() as tmp:
