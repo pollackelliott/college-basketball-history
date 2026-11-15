@@ -16,6 +16,7 @@ from remote_implementation_control import (
 )
 from remote_implementation_expansion_phase0 import (
     Stop,
+    _install_scope_generated_projection,
     _require_repository_acceptance,
     _target_predecessor_authority,
     _verification_bound_main,
@@ -156,6 +157,102 @@ class ExpansionImplementationAcceptancePreflightTests(unittest.TestCase):
                 "EXPANSION_IMPLEMENTATION_ACCEPTANCE_RUNTIME_MISMATCH",
             ):
                 _require_repository_acceptance("3" * 40, Path(temporary))
+
+
+class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
+    def test_scope_projection_stages_only_target_generated_files(self):
+        import tempfile
+
+        expected = [
+            "site/data/programs.json",
+            "site/data/teams/example.json",
+        ]
+        authority = {"intent": {"scope_generated_paths": expected}}
+        with tempfile.TemporaryDirectory() as temporary:
+            worktree = Path(temporary) / "repo"
+            diag = Path(temporary) / "diag"
+            (worktree / "tools").mkdir(parents=True)
+            for path in expected:
+                target = worktree / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text("{}\n", encoding="utf-8")
+
+            def fake_run(*args, **kwargs):
+                return SimpleNamespace(returncode=0, stdout="PASS\n")
+
+            def fake_git(*args, **kwargs):
+                if args[:4] == ("diff", "--name-only", "--", "site/data"):
+                    return SimpleNamespace(stdout="\n".join(expected) + "\n")
+                if args[:2] == ("add", "--"):
+                    return SimpleNamespace(stdout="")
+                raise AssertionError(f"unexpected git call: {args}")
+
+            with patch(
+                "remote_implementation_expansion_phase0.run",
+                side_effect=fake_run,
+            ) as run_mock, patch(
+                "remote_implementation_expansion_phase0.git",
+                side_effect=fake_git,
+            ) as git_mock:
+                observed = _install_scope_generated_projection(
+                    worktree,
+                    expansion_request(),
+                    authority,
+                    diag,
+                )
+
+            self.assertEqual(observed, expected)
+            self.assertTrue(
+                (diag / "expansion-phase0-build-site-data.log").is_file()
+            )
+            run_mock.assert_called_once()
+            git_mock.assert_any_call(
+                "add",
+                "--",
+                *expected,
+                cwd=worktree,
+            )
+
+    def test_scope_projection_rejects_unrelated_generated_drift(self):
+        import tempfile
+
+        expected = [
+            "site/data/programs.json",
+            "site/data/teams/example.json",
+        ]
+        authority = {"intent": {"scope_generated_paths": expected}}
+        with tempfile.TemporaryDirectory() as temporary:
+            worktree = Path(temporary) / "repo"
+            diag = Path(temporary) / "diag"
+            (worktree / "tools").mkdir(parents=True)
+            for path in expected:
+                target = worktree / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text("{}\n", encoding="utf-8")
+
+            with patch(
+                "remote_implementation_expansion_phase0.run",
+                return_value=SimpleNamespace(returncode=0, stdout="PASS\n"),
+            ), patch(
+                "remote_implementation_expansion_phase0.git",
+                return_value=SimpleNamespace(
+                    stdout=(
+                        "site/data/programs.json\n"
+                        "site/data/teams/example.json\n"
+                        "site/data/teams/other.json\n"
+                    )
+                ),
+            ):
+                with self.assertRaisesRegex(
+                    Stop,
+                    "EXPANSION_PHASE0_SCOPE_SITE_PROJECTION_OUTSIDE_TARGET",
+                ):
+                    _install_scope_generated_projection(
+                        worktree,
+                        expansion_request(),
+                        authority,
+                        diag,
+                    )
 
 
 class ExpansionFreshVerificationRegressionTests(unittest.TestCase):
