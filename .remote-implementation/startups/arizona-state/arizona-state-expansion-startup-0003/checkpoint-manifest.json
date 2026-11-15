@@ -1,0 +1,21 @@
+{
+  "implementation_acceptance_sha256": "fada2d2f3b371b23b4d5722f5387a1e0ae5e7e8e1a0343cd8a5dcb1f8559bdfa",
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_CHECKPOINT",
+  "next_operation": "EXPANSION_PHASE0",
+  "phase0_preview_sha256": "10449e2d597f989c8af2ceabd466202d2edad4a502c2957fdfb1f60a4602c7e7",
+  "phase0_request_id": "arizona-state-expansion-phase0-0003",
+  "protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_freeze_sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "stage1_independent_proof_sha256": "0d9411a1528be67e1397dd4712fdcee28a2fc63f3771a5dae63de3bbe9c02f7f",
+  "stage1_reconciliation_sha256": "88f508204049f5151c15dba03fd830b65523e5ca1de4b1d03b39d48579cde6c2",
+  "startup_id": "arizona-state-expansion-startup-0003",
+  "startup_intent_sha256": "d062607fb11eea26825c0cf3a256988af67a64ac305853a87211e58f559a6bbe",
+  "status": "READY_TO_SUBMIT_GUARDED_EXPANSION_PHASE0",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
+  "tracked_basketball_mutation": "NONE_PREPARATION_ONLY"
+}
