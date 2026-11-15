@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "arizona-state-expansion-stage2-gate1-fill-0001",
+  "school_key": "arizona-state",
+  "operation": "STAGE2_GATE1_FILL",
+  "previous_control_state_commit": "e70bc9f2cc4450972c03c0b22f62f6ecdd7b4bc9",
+  "previous_control_state_sha256": "03991b94a1db7e9bf2f5f33c32f098d1667a38ed5fe51a74d6bbeaa39979ce14",
+  "expected_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-stage2-proposal-0002/checkpoint-manifest.json",
+    "sha256": "32c1c558a92178fa50d3608ced052abff35200c8555a1b15f0bac1ea347e7c40"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/arizona-state/arizona-state-expansion-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
+    "sha256": "5e686b5f3009e163f540316725c09b44ffd79da3e619fb73f0992bd900dc1236"
+  },
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+  "recommendation_map_sha256": "a2b4b7cb4db7f77d65d63c38475749ff7ba912965e665739c551b4ff6198f1c5",
+  "approved_plan_hash_preview": "cfea2179d64c897f53d119b555ec4c51cc7efda1cec3a36a66b51dac7a296b77",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly stated 'Approved. Proceed' immediately after the Arizona State ALL_HISTORY_EXPANSION Implementation lane presented the exact fresh-verified OWNER_GATE_1_READY packet for arizona-state-expansion-stage2-proposal-0002: 23 formal decisions reduced to the presented substantive reconciliation packet, decision-universe SHA-256 88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea, recommendation-map SHA-256 a2b4b7cb4db7f77d65d63c38475749ff7ba912965e665739c551b4ff6198f1c5, proposal checkpoint SHA-256 32c1c558a92178fa50d3608ced052abff35200c8555a1b15f0bac1ea347e7c40, and approved-plan preview cfea2179d64c897f53d119b555ec4c51cc7efda1cec3a36a66b51dac7a296b77. Approval is limited to that exact historical packet and the guarded fill, pre-seal rehearsal, cryptographic seal, sealed apply, and independent post-apply verification. It does not authorize release readiness, Preview, Owner Gate 2, merge, Production, recovery, unrelated mutation, or changed historical meaning.",
+    "proposal_checkpoint_sha256": "32c1c558a92178fa50d3608ced052abff35200c8555a1b15f0bac1ea347e7c40",
+    "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+    "recommendation_map_sha256": "a2b4b7cb4db7f77d65d63c38475749ff7ba912965e665739c551b4ff6198f1c5",
+    "approved_plan_hash_preview": "cfea2179d64c897f53d119b555ec4c51cc7efda1cec3a36a66b51dac7a296b77"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "arizona-state-expansion-stage2-preseal-rehearsal-0001",
+    "seal_request_id": "arizona-state-expansion-stage2-gate1-seal-0001",
+    "apply_request_id": "arizona-state-expansion-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — explicit exact Owner Gate 1 approval",
+    "authorization": "Owner explicitly approved the exact fresh-verified Arizona State Gate 1 reconciliation packet and said Proceed. Authorize one guarded Stage 2 Gate 1 fill and its repository-owned fresh-verified continuation through pre-seal rehearsal, cryptographic Gate 1 seal, sealed apply, and independent post-apply verification only; no release readiness, PR/Preview, Owner Gate 2, merge, Production proof, recovery, unrelated mutation, or historical change."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": true,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
