@@ -1,0 +1,124 @@
+name: UCF Stage 1 canonical reciprocal preflight
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ucf-stage1-canonical-reciprocal-preflight.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-main-census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate exact main and run bounded UCF census
+        env:
+          EXACT_MAIN: 4682d528bf62eee1ad9cd3d8114663882cb78bdf
+          RESEARCH_BASE: 4682d528bf62eee1ad9cd3d8114663882cb78bdf
+          SCHOOL_KEY: ucf
+          START_YEAR: '1970'
+          END_YEAR: '1983'
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse refs/remotes/origin/main)" = "$EXACT_MAIN"
+          test "$(git rev-parse "$RESEARCH_BASE^{commit}")" = "$RESEARCH_BASE"
+          python - <<'PY'
+          import csv, hashlib, io, json, os, pathlib, subprocess
+
+          main=os.environ["EXACT_MAIN"]
+          school=os.environ["SCHOOL_KEY"]
+          start=int(os.environ["START_YEAR"])
+          end=int(os.environ["END_YEAR"])
+
+          def git_raw(commit,path):
+              return subprocess.check_output(["git","show",f"{commit}:{path}"])
+          def csv_rows(raw):
+              return list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline="")))
+          def in_window(season):
+              try:
+                  y=int((season or "")[:4])
+              except ValueError:
+                  return False
+              return start <= y <= end
+
+          canonical_all=csv_rows(git_raw(main,"data/canonical/games.csv"))
+          canonical=[]
+          for row in canonical_all:
+              if not in_window(row.get("season_label","")):
+                  continue
+              if school not in {row.get("team_a_key",""),row.get("team_b_key","")}:
+                  continue
+              canonical.append(row)
+
+          paths=subprocess.check_output(
+              ["git","ls-tree","-r","--name-only",main,"--","schools"],
+              text=True, encoding="utf-8"
+          ).splitlines()
+          source_paths=[p for p in paths if p.endswith("/source-games.csv") and p != f"schools/{school}/source-games.csv"]
+          reciprocal=[]
+          for path in source_paths:
+              try:
+                  rows=csv_rows(git_raw(main,path))
+              except Exception:
+                  continue
+              for row in rows:
+                  if not in_window(row.get("season_label","")):
+                      continue
+                  normalized=(row.get("normalized_opponent_key","") or "").strip()
+                  literal=(row.get("source_opponent_label","") or "").strip().casefold()
+                  curated=(row.get("curated_opponent_name","") or "").strip().casefold()
+                  if normalized == school or literal in {"ucf","central florida","florida technological university"} or curated in {"ucf","central florida","florida technological university"}:
+                      reciprocal.append({"source_path":path, **row})
+
+          def subset(row, fields):
+              return {f:row.get(f,"") for f in fields}
+
+          canonical_fields=[
+              "canonical_game_id","season_label","game_date","team_a_key","team_b_key",
+              "team_a_score","team_b_score","game_type","site_type","venue_name","city","state"
+          ]
+          reciprocal_fields=[
+              "source_path","source_program_key","source_game_id","season_label","game_date",
+              "source_opponent_label","normalized_opponent_key","team_score","opponent_score",
+              "played_result","curated_game_type","curated_site_type","canonical_game_id","raw_text"
+          ]
+
+          crows=[subset(r,canonical_fields) for r in canonical]
+          rrows=[subset(r,reciprocal_fields) for r in reciprocal]
+          crows.sort(key=lambda r:(r["season_label"],r["game_date"],r["canonical_game_id"]))
+          rrows.sort(key=lambda r:(r["season_label"],r["game_date"],r["source_path"],r["source_game_id"]))
+
+          report={
+              "kind":"UCF_ALL_HISTORY_STAGE1_CURRENT_MAIN_CANONICAL_RECIPROCAL_PRECHECK",
+              "status":"READ_ONLY_PRECHECK_NOT_FULL_STAGE1",
+              "protected_main_sha":main,
+              "research_base_sha":os.environ["RESEARCH_BASE"],
+              "school_key":school,
+              "season_start_year":start,
+              "season_end_year":end,
+              "canonical_count":len(crows),
+              "reciprocal_source_count":len(rrows),
+              "canonical_rows":crows,
+              "reciprocal_rows":rrows,
+          }
+          raw=(json.dumps(report,sort_keys=True,indent=2,ensure_ascii=False)+"\n").encode()
+          pathlib.Path("ucf-stage1-canonical-reciprocal-precheck.json").write_bytes(raw)
+          print("CANONICAL_COUNT",len(crows))
+          print("RECIPROCAL_SOURCE_COUNT",len(rrows))
+          print("REPORT_SHA256",hashlib.sha256(raw).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ucf-stage1-canonical-reciprocal-precheck
+          path: ucf-stage1-canonical-reciprocal-precheck.json
+          retention-days: 30
