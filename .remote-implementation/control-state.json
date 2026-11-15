@@ -1226,7 +1226,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "38aec031e75c3ebff7a207576755e7fee265b89924b4293419b4c504357b0090",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1236,7 +1236,7 @@
     "production_deployment_id": 7805774578,
     "production_json_checked_count": 6,
     "protected_main_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "arizona-state-expansion-release-production-proof-0001",
     "school_key": "arizona-state"
   },

@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "38aec031e75c3ebff7a207576755e7fee265b89924b4293419b4c504357b0090",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "pr_number": 622,
+  "production_deployment_id": 7805774578,
+  "production_json_checked_count": 6,
+  "production_proof": true,
+  "request_id": "arizona-state-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "status": "COMPLETE"
+}
