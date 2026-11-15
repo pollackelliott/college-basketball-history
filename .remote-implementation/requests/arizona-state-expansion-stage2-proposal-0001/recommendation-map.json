@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+  "source_stage2_successor": {
+    "path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "b677468d610b8d22b32818d2535811094a128a474d2563b9c3be61ba44278476"
+  },
+  "prepared_against_protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "prepared_against_target_sha": "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+  "identity": {
+    "ASU-STG2-PRE1950-1927-28-008": "MATCH_CANONICAL:CBBG-0109396",
+    "ASU-STG2-PRE1950-1949-50-007": "MATCH_CANONICAL:CBBG-0187244"
+  },
+  "decisions": {
+    "IDENTITY-ASU-STG2-PRE1950-1927-28-008": "MATCH_CANONICAL:CBBG-0109396",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109390-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109390-SITE_TYPE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109391-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109391-SITE_TYPE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109394-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109394-SITE_TYPE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109394-RESULT_WINNER_TEAM_KEY": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109396-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1928-29-001-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1930-31-014-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1932-33-002-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1932-33-007-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1935-36-008-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1938-39-023-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1946-47-001-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1946-47-002-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1949-50-002-SCORE": "KEEP_CANONICAL",
+    "IDENTITY-ASU-STG2-PRE1950-1949-50-007": "MATCH_CANONICAL:CBBG-0187244",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1949-50-007-CBBG-0187244-SCORE": "KEEP_CANONICAL",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1949-50-007-CBBG-0187244-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-ASU-STG2-PRE1950-1949-50-009-SITE_TYPE": "KEEP_CANONICAL",
+    "CANONICAL-SITE-PATCH-CBBG-0109396": "LEAVE_UNRESOLVED"
+  },
+  "defaults": {
+    "discrepancy": "KEEP_CANONICAL",
+    "selected_conditional": "KEEP_CANONICAL",
+    "basis": "Preserve the accepted frozen Arizona State assertion as evidence while retaining the established reciprocal canonical score/result/H-A-N value where the conflict was not independently adjudicated in frozen Research. Do not silently normalize away the target-school source assertion.",
+    "identity_basis": "One real game equals one canonical game. Use same-season opponent identity, sequence, score/result pattern, and reciprocal exact-date evidence to select one existing canonical game rather than manufacturing a duplicate.",
+    "not_applicable_basis": "This conditional discrepancy belongs to an identity candidate not selected by the Arizona State recommendation map."
+  },
+  "basis_by_decision": {
+    "IDENTITY-ASU-STG2-PRE1950-1927-28-008": "Match CBBG-0109396 (1928-02-01). Arizona State's official all-time scores list the four 1927-28 Arizona results in sequence as 32-39, 24-38, 47-27, and 25-30. Arizona's official series history dates the corresponding four games Jan. 13, Jan. 14, Jan. 30, and Feb. 1, with the first three score pairs matching exactly and the fourth recorded 30-23. The one-to-one sequence and opponent identity make the undated ASU 25-30 row the Feb. 1 game; preserve the score conflict separately rather than creating a fifth Arizona game.",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109396-SCORE": "Keep canonical 23-30 for the selected Feb. 1 identity. Arizona's exact dated reciprocal series record supports 30-23, while Arizona State's frozen all-time score row says 25-30. Preserve the ASU assertion as conflicting evidence without overwriting the established canonical score.",
+    "IDENTITY-ASU-STG2-PRE1950-1949-50-007": "Match CBBG-0187244 (1950-01-01). Dayton's official media guide records exactly one 1949-50 Arizona State meeting, Jan. 1, 1950 at Fairgrounds Coliseum, Dayton 66-51. Arizona State's frozen row is the same-season same-opponent undated 51-67 loss; the one-point Dayton-score conflict is handled separately rather than creating a second game.",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1949-50-007-CBBG-0187244-SCORE": "Keep canonical 51-66. Dayton's exact dated official series record gives 66-51; preserve Arizona State's frozen 51-67 assertion as conflicting source evidence.",
+    "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1949-50-007-CBBG-0187244-SITE_TYPE": "Keep canonical opponent-home. Dayton's official series record places the Jan. 1, 1950 game at Fairgrounds Coliseum, supporting the existing Dayton-home canonical site classification; Arizona State's frozen UNKNOWN site remains preserved as source evidence.",
+    "CANONICAL-SITE-PATCH-CBBG-0109396": "Leave the standalone canonical-site patch unresolved in the map. The selected ASU identity match attaches the target assertion to CBBG-0109396, so this reciprocal-only site-gap review should become not applicable during rehearsal. Do not fabricate a separate physical-venue patch where the documented Arizona State HOME chronology has no uniquely covering venue."
+  },
+  "canonical_patch_by_decision": {},
+  "source_patch_by_decision": {},
+  "notes_by_decision": {
+    "IDENTITY-ASU-STG2-PRE1950-1927-28-008": "External cross-check: Arizona State official all-time scores and Arizona official opponent history; exact dates are taken only from the reciprocal Arizona series record, while the frozen ASU source row remains undated.",
+    "IDENTITY-ASU-STG2-PRE1950-1949-50-007": "External cross-check: Dayton official media guide all-time series table; frozen Arizona State source row remains preserved unchanged."
+  },
+  "venue_relationship_patch_by_decision": {}
+}
