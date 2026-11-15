@@ -1,34 +1,44 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "arizona-state-expansion-release-preview-recover-0001",
+  "request_id": "arizona-state-expansion-release-readiness-0002",
   "school_key": "arizona-state",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "193b861e16ca3df7f71d2e38e7b10d464cd87a97",
-  "previous_control_state_sha256": "d3bde577138daaeb44987360ed9f4f7805f75f90d3f98d48c177c423decc92e3",
-  "expected_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
-  "recovery": {
-    "abandoned_request_id": "arizona-state-expansion-release-preview-verify-0001",
-    "lock_commit": null,
-    "target_branch": null
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "cb363bac63be397c9facf98f0bfcd5b2e4706873",
+  "previous_control_state_sha256": "b7c97854a476f112e66ca8d4b17d1eeff247ea79e4e8a8ebd2c747657e3914cd",
+  "expected_protected_main_sha": "c2f7f0c32e04641a22b820b489399d89e5a6f37b",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "approved_plan_hash": "c5cbe44a8fdcfcc37654b8d7dfb80708cd8c23729f4616b69ab3465f144d6bee",
+  "release_manifest_sha256": "9b60a10d0d0bd75c511df31a44a0e665a42e2b9f3a84535a82685259ed4e1e89",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/arizona-state/arizona-state-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "547142e58274876365cdeafd30e9f5a1e7a10055c565aa6af2dd9f90ec5d9caf"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/arizona-state/arizona-state-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "5c0a7cf1a4bf12a523f1c63907f6270055d54fd10cbb71d6aeef3d58185dd228"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "arizona-state-expansion-release-preview-verify-0002"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — deterministic Stage 4 read-only recovery",
-    "authorization": "The accepted arizona-state-expansion-release-preview-verify-0001 request failed only because required PR checks failed on one generic cohort-regression test; the request was read-only, PR #622 remains exact at head e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0, protected main remains fbce880c5d30fe63312330179de9a543bdab8e0a, and the Arizona State target remains unchanged. Authorize only permanent RECOVER classification and abandonment of this read-only request, durable recovery evidence, and restoration of IDLE. No historical change, target mutation, Owner Gate 2, merge, Production, or unrelated operation is authorized."
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — Stage 4 current-main revalidation continuation",
+    "authorization": "Continuation of the already owner-authorized Arizona State Stage 4 release-preparation phase after the narrow generic cohort-test repair merged to protected main c2f7f0c32e04641a22b820b489399d89e5a6f37b and frozen PR #622 was close/reopen revalidated successfully at exact sealed head e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0. The earlier Preview request 0001 was durably abandoned NOT_ATTEMPTED. This fresh readiness request may only rerun release readiness on current main, reproduce the exact PR packet, and bind fresh Preview request 0002. No historical change, target mutation, Owner Gate 2 approval, merge, Production proof, recovery, or unrelated mutation is authorized."
   },
   "authority": {
-    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": true,
-    "release": false,
+    "recovery": false,
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
