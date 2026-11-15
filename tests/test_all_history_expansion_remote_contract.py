@@ -6,8 +6,8 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"tools"))
 
 from all_history_expansion_integration import (
-    MANIFEST_NAME,PACKAGE_FILES,STAGE1_REPORT,canonical_bytes,sha256,
-    IntegrationAuthorityError,
+    MANIFEST_NAME,PACKAGE_FILES,SCOPE_REFERENCE_PATH,STAGE1_REPORT,
+    canonical_bytes,sha256,IntegrationAuthorityError,
 )
 from all_history_expansion_remote_contract import (
     OP_EXPANSION_PHASE0,authenticate_intent,prove_lock_contract,
@@ -93,6 +93,7 @@ class ExpansionTransactionModelTests(unittest.TestCase):
             "venue_identity_census":{"status":"PASS","blocker_count":0,
                 "new_support_count":1,"blockers":[]},
             "permitted_new_coverage_status":"COMPLETE_INSTITUTIONAL",
+            "scope_mutation_authorized":False,
             "protected_top_level_and_accomplishments":"UNCHANGED",
             "six_file_preview_sha256":{k:sha256(v) for k,v in p.items()},
             "global_reference_preview_sha256":{k:sha256(v) for k,v in globals_.items()},
@@ -118,6 +119,45 @@ class ExpansionTransactionModelTests(unittest.TestCase):
             self.assertFalse(result["live_mutation_authority"])
             self.assertEqual(result["expected_target_predecessor_sha"],self.target)
             self.assertEqual(len(result["projected_package_sha256"]),6)
+
+    def test_v2_scope_path_is_hash_bound_and_allowlisted(self):
+        with tempfile.TemporaryDirectory() as temp:
+            freeze,preview,view=self.fixture(Path(temp))
+            manifest=json.loads((freeze/MANIFEST_NAME).read_bytes())
+            manifest["scope_mutation_authorized"]=True
+            manifest["frozen_scope_projection_sha256"]="9"*64
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+            raw=canonical_bytes(manifest)
+            (freeze/MANIFEST_NAME).write_bytes(raw)
+            self.integration_sha=sha256(raw)
+            self.request["integration_freeze_sha256"]=self.integration_sha
+
+            scope_bytes=b"school,top_level_scope\nExample,INCEPTION+\n"
+            (preview/"references"/Path(SCOPE_REFERENCE_PATH).name).write_bytes(scope_bytes)
+            view["integration_freeze_sha256"]=self.integration_sha
+            view["scope_mutation_authorized"]=True
+            view["frozen_scope_projection_sha256"]="9"*64
+            view["protected_top_level_and_accomplishments"]=(
+                "FROZEN_TARGET_SCOPE_ONLY;ACCOMPLISHMENTS_UNCHANGED"
+            )
+            view["global_reference_preview_sha256"][SCOPE_REFERENCE_PATH]=sha256(scope_bytes)
+            (preview/"phase0-preview.json").write_bytes(canonical_bytes(view))
+
+            result=self.authenticate(freeze,preview)
+            self.assertIn(SCOPE_REFERENCE_PATH,result["allowed_changed_paths"])
+            self.assertIn(SCOPE_REFERENCE_PATH,result["projected_global_sha256"])
+
+            forged=dict(view)
+            forged["global_reference_preview_sha256"]=dict(
+                view["global_reference_preview_sha256"]
+            )
+            forged["global_reference_preview_sha256"].pop(SCOPE_REFERENCE_PATH)
+            (preview/"phase0-preview.json").write_bytes(canonical_bytes(forged))
+            with self.assertRaisesRegex(
+                IntegrationAuthorityError,"GLOBAL_PREVIEW_PATHS_FORBIDDEN"
+            ):
+                self.authenticate(freeze,preview)
 
     def test_hash_bound_venue_reconciliation_is_part_of_intent(self):
         with tempfile.TemporaryDirectory() as temp:
