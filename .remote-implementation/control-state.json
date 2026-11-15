@@ -605,7 +605,7 @@
     "arizona-state-expansion-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
-  "active_lock_commit": null,
+  "active_lock_commit": "b0bb8f29b8513a80800dcb203a109abb46d1d0bb",
   "active_lock_owner": "github-actions:43683643165:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
