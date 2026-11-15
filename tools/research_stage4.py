@@ -50,6 +50,7 @@ AUTHORING_DIR = "stage4-authoring"
 AUTHORING_FILES = ("opponents.csv", "venues.csv", "conferences.csv")
 EARLY_HISTORY_AUTHORING_FILE = "early-history-uncertainty.json"
 AGGREGATE_COVERAGE_AUTHORING_FILE = "season-coverage.json"
+INSTITUTIONAL_SCOPE_AUTHORING_FILE = "institutional-scope.json"
 
 OPPONENT_FIELDS = {
     "source_program_key",
@@ -1388,6 +1389,7 @@ def _notes(
     status: dict[str, Any],
     games: list[dict[str, str]],
     coverage: dict[str, str],
+    institutional_scope: dict[str, Any] | None = None,
 ) -> str:
     types = Counter(row["curated_game_type"] for row in games)
     sites = Counter(row["curated_site_type"] for row in games)
@@ -1404,15 +1406,26 @@ def _notes(
         f"- Required completed-season cutoff: {coverage['required_completed_season_cutoff']}",
         "- Coverage cutoffs are explicit Research declarations; media-guide titles and filenames are not coverage inference rules.",
         "- Package authoring was mechanical from durable Stage 3B state; no historical research or reinterpretation was performed by Stage 4.",
-        "",
-        "## Final game census",
-        "",
     ]
+    if institutional_scope:
+        lines.extend([
+            "",
+            "## Complete institutional Research scope",
+            "",
+            f"- Program inception season: {institutional_scope.get('program_inception_season', '')}",
+            f"- Accepted top-level/D-I scope: {institutional_scope.get('top_level_scope', '')}",
+            f"- Publication universe: {institutional_scope.get('publication_universe', '')}",
+            f"- Transition mode: {institutional_scope.get('transition_mode', '')}",
+        ])
+        parent = str(institutional_scope.get("parent_artifact_sha256", "")).strip()
+        if parent:
+            lines.append(f"- Preserved parent artifact SHA-256: {parent}")
+        lines.append("- Top-level scope is classification authority and does not clip this ordinary institutional game universe.")
+    lines.extend(["", "## Final game census", ""])
     lines.extend(f"- {key or '[blank]'}: {count:,}" for key, count in sorted(types.items()))
     lines.extend(["", "## Final H/A/N census", ""])
     lines.extend(f"- {key or '[blank]'}: {count:,}" for key, count in sorted(sites.items()))
     return "\n".join(lines) + "\n"
-
 
 def _source_notes(
     school_key: str,
@@ -1422,6 +1435,7 @@ def _source_notes(
     coverage: dict[str, str],
     early_history: dict[str, Any] | None = None,
     aggregate_coverage: dict[str, Any] | None = None,
+    institutional_scope: dict[str, Any] | None = None,
 ) -> str:
     kinds = Counter(
         _first(row, "source_kind")
@@ -1446,6 +1460,19 @@ def _source_notes(
         f"- Required completed-season cutoff: {coverage['required_completed_season_cutoff']}",
         "- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.",
     ]
+    if institutional_scope:
+        lines.extend(
+            [
+                "",
+                "## Complete institutional Research scope",
+                "",
+                "The following structured scope authority was carried from the Research checkpoint.",
+                "",
+                "```json",
+                json.dumps(institutional_scope, indent=2, sort_keys=True),
+                "```",
+            ]
+        )
     if early_history:
         lines.extend(
             [
@@ -1508,6 +1535,75 @@ def _source_notes(
             detail = source.get("url") or source.get("use") or ""
             lines.append(f"- {label}" + (f" — {detail}" if detail else ""))
     return "\n".join(lines) + "\n"
+
+
+def _institutional_scope_payload(
+    archive: zipfile.ZipFile,
+    prefix: str,
+    manifest: dict[str, Any],
+    *,
+    school_key: str,
+    research_base_sha: str,
+) -> tuple[dict[str, Any] | None, list[dict[str, Any]], dict[str, Any]]:
+    logical = AUTHORING_DIR + "/" + INSTITUTIONAL_SCOPE_AUTHORING_FILE
+    member = prefix + logical
+    if member not in archive.namelist():
+        return None, [], {"present": False}
+
+    defects: list[dict[str, Any]] = []
+    if logical not in _manifest_names(manifest):
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_NOT_MANIFESTED", "name": logical})
+    raw = archive.read(member)
+    try:
+        payload = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return None, defects + [{"reason": "INSTITUTIONAL_SCOPE_INVALID_JSON"}], {
+            "present": True,
+            "sha256": sha256_bytes(raw),
+        }
+
+    if not isinstance(payload, dict):
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_INVALID_STRUCTURE"})
+        return payload, defects, {"present": True, "sha256": sha256_bytes(raw)}
+
+    if payload.get("schema_version") != 1 or payload.get("kind") != "COMPLETE_INSTITUTIONAL_RESEARCH_SCOPE_V1":
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_SCHEMA_INVALID"})
+    if payload.get("school_key") != school_key:
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_SCHOOL_MISMATCH"})
+    if payload.get("research_base_sha") != research_base_sha:
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_RESEARCH_BASE_MISMATCH"})
+
+    inception = str(payload.get("program_inception_season", "")).strip()
+    match = re.fullmatch(r"(\d{4})-(\d{4})", inception)
+    if not match or int(match.group(2)) != int(match.group(1)) + 1:
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_INCEPTION_INVALID"})
+
+    top_level_scope = str(payload.get("top_level_scope", "")).strip()
+    if not top_level_scope:
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_TOP_LEVEL_SCOPE_MISSING"})
+    if payload.get("publication_universe") != "INCEPTION_THROUGH_PRESENT":
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_PUBLICATION_UNIVERSE_INVALID"})
+
+    mode = str(payload.get("transition_mode", "")).strip()
+    if mode not in {"NEW_LANE", "IN_PROGRESS_RETROFIT", "FROZEN_SUCCESSOR"}:
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_TRANSITION_MODE_INVALID"})
+    if payload.get("preservation_rule") != "PRESERVE_ACCEPTED_PARENT_WORK_EXCEPT_GENUINE_CONTRADICTION":
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_PRESERVATION_RULE_INVALID"})
+    parent_sha = str(payload.get("parent_artifact_sha256", "")).strip().lower()
+    if mode in {"IN_PROGRESS_RETROFIT", "FROZEN_SUCCESSOR"} and not re.fullmatch(r"[0-9a-f]{64}", parent_sha):
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_PARENT_HASH_REQUIRED"})
+    if mode == "NEW_LANE" and parent_sha and not re.fullmatch(r"[0-9a-f]{64}", parent_sha):
+        defects.append({"reason": "INSTITUTIONAL_SCOPE_PARENT_HASH_INVALID"})
+
+    return payload, defects, {
+        "present": True,
+        "sha256": sha256_bytes(raw),
+        "program_inception_season": inception,
+        "top_level_scope": top_level_scope,
+        "publication_universe": payload.get("publication_universe", ""),
+        "transition_mode": mode,
+        "parent_artifact_sha256": parent_sha,
+    }
 
 
 def _aggregate_coverage_payload(
@@ -1794,6 +1890,14 @@ def inspect_checkpoint(
             archive, layout["prefix"], manifest,
             school_key=school_key, research_base_sha=research_base_sha,
         )
+        (
+            institutional_scope,
+            institutional_scope_defects,
+            institutional_scope_summary,
+        ) = _institutional_scope_payload(
+            archive, layout["prefix"], manifest,
+            school_key=school_key, research_base_sha=research_base_sha,
+        )
 
         members = {
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
@@ -1824,10 +1928,13 @@ def inspect_checkpoint(
             ),
             **({"historical_season_coverage": aggregate_coverage_summary}
                if aggregate_coverage else {}),
+            **({"institutional_scope": institutional_scope_summary}
+               if institutional_scope else {}),
             "defects": (
                 list(coverage_defects)
                 + early_history_defects
                 + aggregate_coverage_defects
+                + institutional_scope_defects
                 + opponent_home_responsibility_defects
                 + continuity_defects
             ),
@@ -2057,6 +2164,14 @@ def author(
             if aggregate_member in archive.namelist()
             else None
         )
+        institutional_scope_member = (
+            layout["prefix"] + AUTHORING_DIR + "/" + INSTITUTIONAL_SCOPE_AUTHORING_FILE
+        )
+        institutional_scope = (
+            json.loads(archive.read(institutional_scope_member))
+            if institutional_scope_member in archive.namelist()
+            else None
+        )
         members = {
             filename: layout["prefix"] + AUTHORING_DIR + "/" + filename
             for filename in AUTHORING_FILES
@@ -2116,6 +2231,7 @@ def author(
                 status,
                 games,
                 preflight["coverage"],
+                institutional_scope,
             ),
             encoding="utf-8",
         )
@@ -2128,6 +2244,7 @@ def author(
                 preflight["coverage"],
                 early_history,
                 aggregate_coverage,
+                institutional_scope,
             ),
             encoding="utf-8",
         )

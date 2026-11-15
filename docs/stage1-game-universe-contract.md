@@ -10,6 +10,26 @@
 > **Establish and serialize the mechanical game universe first; then repair discrepancies in bounded evidence families; close Stage 1 once game identity and season accounting are stable even if explicitly nonblocking field unknowns remain.**
 
 
+### Complete-institutional ordinary-school adaptation
+
+For an unpublished ordinary school operating under
+`docs/complete-institutional-research-protocol.md`, Stage 1 owns the complete recognized
+institutional varsity game universe from researched program inception through the required
+completed-season cutoff. The accepted top-level/D-I scope classifies seasons; it does not
+clip the Stage 1 population.
+
+For an explicitly retrofitted pre-protocol lane, preserve the authenticated parent
+checkpoint/Freeze and immutable `research_base_sha`. Add only the omitted institutional
+season/game population, reconcile it mechanically against preserved game identities, and
+then close a new combined Stage 1 universe. Do not re-extract or re-adjudicate accepted
+parent rows absent a genuine contradiction. A pre-protocol lane whose accepted universe was
+already truly `INCEPTION+` does not need a scope-extension pass solely because this protocol
+now exists.
+
+The retrofit checkpoint must durably carry
+`stage4-authoring/institutional-scope.json` as defined by the complete-institutional
+protocol so later stages can preserve the scope transition without conversational memory.
+
 ### All-History expansion adaptation
 
 Ordinary Stage 1 remains controlling for new-school complete game-universe Research.

@@ -28,6 +28,7 @@ AUTHORING_BASENAMES = frozenset(
         "conferences.csv",
         "early-history-uncertainty.json",
         "season-coverage.json",
+        "institutional-scope.json",
     }
 )
 

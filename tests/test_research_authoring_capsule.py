@@ -98,3 +98,16 @@ def test_owned_member_may_be_updated_but_unowned_member_may_not(tmp_path):
     })
     with zipfile.ZipFile(parent_path) as parent, zipfile.ZipFile(child_path) as child:
         assert compare_parent_child(parent, child, owned_updates={"venues.csv"}) == []
+
+
+def test_institutional_scope_is_a_carried_authoring_member(tmp_path):
+    payload = b'{"kind":"COMPLETE_INSTITUTIONAL_RESEARCH_SCOPE_V1"}\n'
+    parent_path = tmp_path / "parent-scope.zip"
+    make_zip(parent_path, {
+        "stage4-authoring/institutional-scope.json": payload,
+    })
+    out = tmp_path / "out-scope"
+    with zipfile.ZipFile(parent_path) as parent:
+        carried = carry_authoring_capsule(parent, out)
+    assert (out / "stage4-authoring/institutional-scope.json").read_bytes() == payload
+    assert carried["institutional-scope.json"]["sha256"] == sha(payload)
