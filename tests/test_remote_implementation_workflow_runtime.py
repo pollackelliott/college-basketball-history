@@ -67,7 +67,11 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
         self.assertIn(
-            'if [[ "${{ steps.detect.outputs.has_request }}" == "true" ]]; then',
+            'if [[ "${{ steps.detect.outputs.has_request }}" == "true" || "${{ steps.detect.outputs.has_expansion_startup }}" == "true" ]]; then',
+            text,
+        )
+        self.assertIn(
+            "has_expansion_startup: ${{ steps.detect.outputs.has_expansion_startup }}",
             text,
         )
         self.assertIn(

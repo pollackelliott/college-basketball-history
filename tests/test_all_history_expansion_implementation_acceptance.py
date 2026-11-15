@@ -81,6 +81,7 @@ class AllHistoryExpansionImplementationAcceptanceTests(unittest.TestCase):
             "test_all_history_expansion_integration.py",
             "test_all_history_expansion_venue_guard.py",
             "test_remote_implementation_expansion_phase0.py",
+            "test_remote_implementation_expansion_startup.py",
             "test_implementation_stage2.py",
             "test_remote_implementation_stage2_gate1_fill.py",
             "test_remote_implementation_stage2_preseal.py",

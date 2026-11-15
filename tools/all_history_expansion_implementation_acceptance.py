@@ -67,6 +67,7 @@ ACCEPTANCE_TEST_PATTERNS = (
     "test_all_history_expansion_phase0_preview.py",
     "test_all_history_expansion_venue_guard.py",
     "test_remote_implementation_expansion_phase0.py",
+    "test_remote_implementation_expansion_startup.py",
     "test_program_history_scope.py",
     "test_implementation_stage2.py",
     "test_remote_implementation_stage2_gate1_fill.py",
@@ -255,6 +256,32 @@ def workflow_contract_errors(root: Path) -> list[str]:
     for step in REQUIRED_REMOTE_CONTINUATIONS:
         if step not in remote:
             errors.append(f"remote Implementation orchestration missing: {step}")
+    for snippet in (
+        "has_expansion_startup",
+        ".remote-implementation/expansion-startup.json",
+        "remote_implementation_expansion_startup.py",
+        "Prepare and queue guarded All-History expansion Phase 0",
+    ):
+        if snippet not in remote:
+            errors.append(
+                "remote expansion startup orchestration missing: " + snippet
+            )
+    startup_tool = root / "tools/remote_implementation_expansion_startup.py"
+    if not startup_tool.is_file():
+        errors.append("generic expansion startup coordinator missing")
+    else:
+        startup_text = startup_tool.read_text(encoding="utf-8")
+        for snippet in (
+            "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
+            "EXPANSION_STARTUP_PHASE0_QUEUED",
+            '"operation": "EXPANSION_PHASE0"',
+            "build_stage1_proof",
+        ):
+            if snippet not in startup_text:
+                errors.append(
+                    "generic expansion startup coordinator contract missing: "
+                    + snippet
+                )
 
     rehearsal = (root / "tools/rehearse_george_mason_presentation.py").read_text(
         encoding="utf-8"

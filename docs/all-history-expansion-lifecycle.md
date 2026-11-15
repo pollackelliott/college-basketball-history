@@ -288,6 +288,16 @@ Before a **new** expansion Implementation acquires the serialized mutation lane,
 
 This fail-closed preflight checks portfolio/publication invariants and the current generic expansion workflow contracts. A failure is a generic repository-readiness blocker to repair before choosing the next school; it is not target-school historical authority and must not be deferred until that school is mid-Implementation.
 
+The repository-owned initial expansion startup coordinator is
+`tools/remote_implementation_expansion_startup.py`. The school lane stages the immutable
+Freeze with the existing hash-bound Git-part transport and commits one
+`.remote-implementation/expansion-startup.json` intent. The coordinator performs
+deterministic exact-current-main Stage 1 reproduction, creates the independent Stage 1
+proof, Integration Freeze, and disposable Phase 0 preview, preserves a durable startup
+checkpoint, and queues the existing guarded `EXPANSION_PHASE0` request. This coordinator
+has no tracked basketball mutation authority and creates no new owner gate. A failure
+before the child request is queued leaves the school mutation transaction unstarted.
+
 The guarded `EXPANSION_PHASE0` remote transaction must run the complete acceptance command against its exact request-bound protected-main runtime **before** `begin_request()`, global-lock acquisition, write-ahead creation, or target-branch publication. A failure stops without beginning the school mutation transaction. The acceptance JSON is preserved in remote diagnostics. This preflight is part of the one already-required Phase 0 workflow run; it must not be split into a separate owner-scheduled acceptance workflow. A PASS against an older main is diagnostic only; every new expansion Phase 0 reruns the gate automatically on its exact protected-main authority.
 
 Serialized Implementation must authenticate the immutable baseline and
