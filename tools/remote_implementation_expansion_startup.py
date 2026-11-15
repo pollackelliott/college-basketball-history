@@ -204,6 +204,29 @@ def validate_startup_intent(intent: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def require_startup_idle_control(state: dict[str, Any]) -> None:
+    """Require a healthy idle global controller, including recovered terminal states."""
+    validate_control_state(state)
+    require(
+        state.get("lifecycle_state") == "IDLE",
+        "EXPANSION_STARTUP_CONTROL_NOT_IDLE",
+    )
+    require(
+        state.get("recovery_required") is False,
+        "EXPANSION_STARTUP_RECOVERY_REQUIRED",
+    )
+    for key in (
+        "active_request_id",
+        "active_school_key",
+        "active_lock_owner",
+        "active_lock_commit",
+    ):
+        require(
+            state.get(key) is None,
+            "EXPANSION_STARTUP_ACTIVE_CONTROL_FIELD:" + key,
+        )
+
+
 def _authority() -> dict[str, bool]:
     keys = (
         "owner_gate_1",
@@ -512,29 +535,7 @@ def run_startup() -> dict[str, Any]:
     )
 
     state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
-    validate_control_state(state)
-    require(
-        state.get("lifecycle_state") == "IDLE",
-        "EXPANSION_STARTUP_CONTROL_NOT_IDLE",
-    )
-    require(
-        state.get("transaction_state") == "COMPLETE",
-        "EXPANSION_STARTUP_CONTROL_NOT_COMPLETE",
-    )
-    require(
-        state.get("recovery_required") is False,
-        "EXPANSION_STARTUP_RECOVERY_REQUIRED",
-    )
-    for key in (
-        "active_request_id",
-        "active_school_key",
-        "active_lock_owner",
-        "active_lock_commit",
-    ):
-        require(
-            state.get(key) is None,
-            "EXPANSION_STARTUP_ACTIVE_CONTROL_FIELD:" + key,
-        )
+    require_startup_idle_control(state)
     used = set(state.get("accepted_request_ids") or [])
     used.update(state.get("consumed_request_ids") or [])
     used.update(state.get("abandoned_request_ids") or [])
