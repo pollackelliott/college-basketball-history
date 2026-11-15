@@ -404,9 +404,15 @@ When and only when the v2 Freeze carries an authenticated
 that exact target scope together with the ordinary `COMPLETE_INSTITUTIONAL`
 transition. The allowed global write surface expands by exactly
 `data/reference/program-top-level-scope.csv`; only the one frozen target row
-may change. Accomplishments remain unchanged unless separate ordinary authority
-exists, and no v2 scope projection creates Gate 1, release, or merge authority.
-V1 continues to preserve the existing top-level-scope row unchanged.
+may change. Because the target is already public, guarded Phase 0 must also
+regenerate the deterministic public projection and may stage only the derived
+`site/data/programs.json` and `site/data/teams/<school>.json` changes caused by
+that authenticated target-scope transition. Any other generated-site drift
+fails closed. These derived files carry no new historical authority and are
+rebuilt again by the ordinary sealed apply. Accomplishments remain unchanged
+unless separate ordinary authority exists, and no v2 scope projection creates
+Gate 1, release, or merge authority. V1 continues to preserve the existing
+top-level-scope row unchanged.
 
 This remains subject to current-main rebase, Integration Freeze, guarded Phase 0
 lock/write-ahead/CAS, independent exact-tree replay, Gate 1, sealed apply,

@@ -33,13 +33,25 @@ MUTABLE_GLOBALS = frozenset({
 OPTIONAL_SCOPE_GLOBAL = frozenset({SCOPE_REFERENCE_PATH})
 
 
+def scope_generated_paths(school: str, scope_mutation: bool) -> frozenset[str]:
+    """Derived public projections permitted only for a frozen target-scope change."""
+    if not scope_mutation:
+        return frozenset()
+    return frozenset({
+        "site/data/programs.json",
+        f"site/data/teams/{school}.json",
+    })
+
+
 def require(ok: Any, code: str) -> None:
     if not ok:
         raise IntegrationAuthorityError(code)
 
 
 def exact_paths(
-    school: str, global_paths: Any = None
+    school: str,
+    global_paths: Any = None,
+    generated_paths: Any = None,
 ) -> frozenset[str]:
     selected = MUTABLE_GLOBALS if global_paths is None else frozenset(global_paths)
     require(
@@ -47,7 +59,16 @@ def exact_paths(
         and selected <= (MUTABLE_GLOBALS | OPTIONAL_SCOPE_GLOBAL),
         "EXPANSION_GLOBAL_PATH_SET_FORBIDDEN",
     )
-    return selected | frozenset(
+    generated = (
+        frozenset()
+        if generated_paths is None
+        else frozenset(generated_paths)
+    )
+    require(
+        generated <= scope_generated_paths(school, True),
+        "EXPANSION_GENERATED_PATH_SET_FORBIDDEN",
+    )
+    return selected | generated | frozenset(
         f"schools/{school}/{name}" for name in PACKAGE_FILES
     )
 
@@ -193,7 +214,8 @@ def authenticate_intent(
         "EXPANSION_TOP_LEVEL_OR_ACCOMPLISHMENTS_CHANGED",
     )
     expected_globals = expected_global_paths(manifest)
-    expected=exact_paths(school, expected_globals)
+    expected_generated = scope_generated_paths(school, scope_mutation)
+    expected=exact_paths(school, expected_globals, expected_generated)
     require(set(preview["six_file_preview_sha256"])==set(PACKAGE_FILES),
             "EXPANSION_SIX_FILE_PREVIEW_INCOMPLETE")
     require(set(preview["global_reference_preview_sha256"])==expected_globals,
@@ -218,6 +240,7 @@ def authenticate_intent(
         "allowed_changed_paths":sorted(expected),
         "projected_package_sha256":preview["six_file_preview_sha256"],
         "projected_global_sha256":preview["global_reference_preview_sha256"],
+        "scope_generated_paths":sorted(expected_generated),
         "stage2_authority":False,"owner_gate_authority":False,
         "live_mutation_authority":False,
     }
