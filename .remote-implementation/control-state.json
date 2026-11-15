@@ -614,15 +614,15 @@
   "active_lock_commit": "95d35c1333bea727e8bc802e7a5f28881b2b798d",
   "active_lock_owner": "github-actions:43718018478:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "active_prepared_tree_sha": "d5c7aead3ef5656a837e689b46461e0838beb2da",
   "active_request_id": "arizona-state-expansion-stage2-sealed-apply-0001",
   "active_request_sha256": "b6dfa0caea09f76a519d1671aad77ddf7271c7c937abe8285acba3c7ab89b9dd",
   "active_school_key": "arizona-state",
   "active_target_branch": "data/arizona-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/arizona-state/arizona-state-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "bdd6bed5ca9c093df777eb300b4c51f670b53de7337b961b39f17c25dd7f203c",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1241,5 +1241,5 @@
   "lock_acquisition_request_commit": "588fbafde902581ef3186ac106faeab0c47b904d",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
