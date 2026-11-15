@@ -1,0 +1,30 @@
+{
+  "approval_proof_sha256": "50f77860b9b0ffde42dbb908c9e05f43cf4132a455e15b92b7500d6321c7fa98",
+  "approved_plan_hash": "b647eb83bfc2a3a3d71e9568471f3dc4c09a0c291034d82b8822473f5788079d",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "vcu-expansion-release-production-proof-0001"
+  },
+  "gate2_merge_packet_path": ".remote-implementation/checkpoints/vcu/vcu-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
+  "gate2_merge_packet_sha256": "d5e9f5d38509e823318ed3594f8ccb6e5554c6122f9e1158a1861c7334ca5296",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
+  "pr_number": 615,
+  "preview_checkpoint_sha256": "0450386a88814f7fc1f9d1e85d803ac1441e59d2665fda7a5f619eda33fc0630",
+  "preview_deployment_id": 7794320648,
+  "preview_url": "https://college-basketball-history-ivqarxedr-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "e424e681e4295762f88f60a2d2427fa6345dc3f42308d610da5fe4ba209d2667",
+  "production_proof": false,
+  "production_request_id": "vcu-expansion-release-production-proof-0001",
+  "protected_main_sha": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "release_manifest_sha256": "89b323d21e1ec3eaa27be3fea01d07c72c88551e01f8311fc321b73756e47288",
+  "request_id": "vcu-expansion-release-gate2-approval-0001",
+  "request_sha256": "82d291d44171ee2c4f35dc4bc2ed2ee31deff747415fde7cc4698ef68b87a708",
+  "schema_version": 1,
+  "school_key": "vcu",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/vcu-onboarding",
+  "target_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df"
+}
