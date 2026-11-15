@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "arizona-state-expansion-phase0-recover-0001",
+  "request_id": "arizona-state-expansion-phase0-recover-0002",
   "school_key": "arizona-state",
   "operation": "RECOVER",
-  "previous_control_state_commit": "68b54c9f230bc48ee2aeb20dd0824f0591373f65",
+  "previous_control_state_commit": "0729585ded149df6a554245513da216b708f37eb",
   "previous_control_state_sha256": "ed5dcab53c14e0b297018e86cb095b5e547772531add208f30571efa2a759260",
-  "expected_protected_main_sha": "5bbb7398dd6e1311f5a31ae0831caa2908480664",
+  "expected_protected_main_sha": "5a2893f81f5d939be51242b1de24712c8a31a1de",
   "recovery": {
     "abandoned_request_id": "arizona-state-expansion-phase0-0002",
     "lock_commit": "e9cb7b08ad8e1299a9b9d174d86fcea8f249f91c",
     "target_branch": "data/arizona-state-onboarding"
   },
   "creation_provenance": {
-    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION Implementation lane — deterministic same-phase recovery",
-    "authorization": "Owner's existing Arizona State initial expansion Implementation phase remains active. The failed arizona-state-expansion-phase0-0002 published no target successor and has no durable write-ahead. Authorize only permanent RECOVER classification of the exact active request/lock, abandonment if NOT_ATTEMPTED or PREPARED_NOT_PUBLISHED, durable recovery evidence, and release of the one-active Implementation lock. No Phase 0 retry, historical change, shared basketball mutation, Owner Gate 1/2, release, merge, or unrelated operation is authorized."
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION Implementation lane — deterministic same-phase recovery retry after stale-main refusal",
+    "authorization": "The prior recovery request arizona-state-expansion-phase0-recover-0001 failed closed solely with CHANGED_PROTECTED_MAIN after protected main advanced to 5a2893f81f5d939be51242b1de24712c8a31a1de. The active failed mutation request, exact lock commit, control state, and untouched Arizona State target remain unchanged. Authorize only permanent RECOVER classification of arizona-state-expansion-phase0-0002, abandonment if NOT_ATTEMPTED or PREPARED_NOT_PUBLISHED, durable recovery evidence, and release of the one-active Implementation lock. No Phase 0 retry, historical change, shared basketball mutation, Owner Gate 1/2, release, merge, or unrelated operation is authorized."
   },
   "authority": {
     "expansion_phase0": false,
