@@ -1,0 +1,161 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "625505bed129925fe27dd1467de29b97dbf63892edf2d70bc29c7b52d7a1f432",
+    "implementation-stage2-status.json": "a6a85ad23cffa1aa1b7dda1f0404bad1cfcfbc7f49d4b838970d80f16d89abab",
+    "plan.json": "2cf91116ec225785c43afa00318cb33d1a84656238049d5f64ef75c626860cec",
+    "review.csv": "08f2fa57318322262d553d3d32bfaf10806d3bf08ef4c5c95c9fbc7f2af493d6",
+    "review.md": "e9ef130e78b46170f969a17b54154026d0aeb2f62528760a4d8edda9ff098e67"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "625505bed129925fe27dd1467de29b97dbf63892edf2d70bc29c7b52d7a1f432",
+    "implementation-stage2-status.json": "5a00302e3e3404316c78ee13cfd32a59d8a92d90ed3446777ae2e4bf632500e9",
+    "plan.json": "3b1d89fc28276049104432cf443fbc5669fa8e057114f52317f935e89d520007",
+    "review.csv": "08f2fa57318322262d553d3d32bfaf10806d3bf08ef4c5c95c9fbc7f2af493d6",
+    "review.md": "6d83f59270ee19109b5f453a474510a313df8d2fcc6520181831fd208b470c46"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "625505bed129925fe27dd1467de29b97dbf63892edf2d70bc29c7b52d7a1f432",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 10,
+      "discrepancy": 10,
+      "identity": 2
+    },
+    "decision_count": 23,
+    "decision_fields": {
+      "game_identity": 2,
+      "result_winner_team_key": 1,
+      "score": 9,
+      "site_metadata": 1,
+      "site_type": 10
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0109396",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109390-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109391-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1927-28-008-CBBG-0109394-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-ASU-STG2-PRE1950-1949-50-007-CBBG-0187244-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1930-31-014-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1932-33-002-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1932-33-007-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1946-47-001-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1946-47-002-SITE_TYPE",
+      "DISCREPANCY-ASU-STG2-PRE1950-1949-50-009-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 11,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0109390",
+          "fixed_confident_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-002"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-008"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0109391",
+          "fixed_confident_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-003"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-008"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0109394",
+          "fixed_confident_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-007"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "ASU-STG2-PRE1950-1927-28-008"
+          ]
+        }
+      ],
+      "count": 3,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "arizona-state"
+  ],
+  "phase0_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "phase0_successor_path": ".remote-implementation/successors/arizona-state/arizona-state-expansion-phase0-0003/successor-manifest.json",
+  "phase0_successor_sha256": "e2b4ca757b9fb3265f66cbd9ddf42519546c5e6920862e590591ea677e59a2d8",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 10,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "conditional_discrepancy": 10,
+      "discrepancy": 10,
+      "identity": 2
+    },
+    "decision_count": 23,
+    "decision_universe_sha256": "88a863c10ae0acc202e2b67a9ba70e4c7dae1bb7497a38a4631a5966fadc1dea",
+    "discrepancies_to_add": 10,
+    "existing_game_matches": 2334,
+    "identity_cardinality_constraints": 3,
+    "new_canonical_games": 354,
+    "plan_path": ".onboarding/arizona-state/plan.json",
+    "review_path": ".onboarding/arizona-state/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "request_id": "arizona-state-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "stage2_current_main_refresh_successor_path": ".remote-implementation/successors/arizona-state/arizona-state-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+  "stage2_current_main_refresh_successor_sha256": "910dbfecbc16cba156402cef0ed4b4d3d5c94eaa6ea2872e7499170fca1aeb4c",
+  "stage2_current_main_refresh_verification_path": ".remote-implementation/verifications/arizona-state/arizona-state-expansion-stage2-current-main-refresh-0001/stage2-current-main-refresh-verification.json",
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de",
+  "target_tree_sha": "5d63e780585f65aac1b14966ddabeda058447421",
+  "tracked_mutation_proof": {
+    "after_head_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de",
+    "after_status": "",
+    "after_tree_sha": "5d63e780585f65aac1b14966ddabeda058447421",
+    "before_head_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de",
+    "before_status": "",
+    "before_tree_sha": "5d63e780585f65aac1b14966ddabeda058447421",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
