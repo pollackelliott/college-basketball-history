@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "arizona-state-expansion-release-readiness-0001",
+  "school_key": "arizona-state",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "127a647be638c10bede9e660b7cb2f927c2982c1",
+  "previous_control_state_sha256": "46d2125880b66d9462d8faec96e51128e1b3cc72748d81408fa2ecbbdb2ce713",
+  "expected_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "approved_plan_hash": "c5cbe44a8fdcfcc37654b8d7dfb80708cd8c23729f4616b69ab3465f144d6bee",
+  "release_manifest_sha256": "9b60a10d0d0bd75c511df31a44a0e665a42e2b9f3a84535a82685259ed4e1e89",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/arizona-state/arizona-state-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "547142e58274876365cdeafd30e9f5a1e7a10055c565aa6af2dd9f90ec5d9caf"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/arizona-state/arizona-state-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "5c0a7cf1a4bf12a523f1c63907f6270055d54fd10cbb71d6aeef3d58185dd228"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "arizona-state-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 4 release preparation",
+    "authorization": "Owner explicitly said 'Proceed' after the exact Arizona State sealed-apply successor e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0 independently fresh-verified PASS. This authorizes the bounded release-preparation phase through release readiness, connector-owned exact PR creation/reuse, ordinary CI/mergeability checks, exact Vercel Preview verification, and OWNER_GATE_2_READY. It does not authorize Owner Gate 2 approval, merge, Production proof, protected-main mutation, recovery, shared/global mutation, or changed historical authority."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}

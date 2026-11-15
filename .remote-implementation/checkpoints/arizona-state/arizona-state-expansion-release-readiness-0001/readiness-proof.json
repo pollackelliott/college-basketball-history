@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "apply_request_id": "arizona-state-expansion-stage2-sealed-apply-0001",
+  "approved_plan_hash": "c5cbe44a8fdcfcc37654b8d7dfb80708cd8c23729f4616b69ab3465f144d6bee",
+  "changed_path_count": 11,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "release_manifest_sha256": "9b60a10d0d0bd75c511df31a44a0e665a42e2b9f3a84535a82685259ed4e1e89",
+  "school_key": "arizona-state",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "547142e58274876365cdeafd30e9f5a1e7a10055c565aa6af2dd9f90ec5d9caf",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "5c0a7cf1a4bf12a523f1c63907f6270055d54fd10cbb71d6aeef3d58185dd228",
+  "writeahead_sha256": "bdd6bed5ca9c093df777eb300b4c51f670b53de7337b961b39f17c25dd7f203c"
+}
