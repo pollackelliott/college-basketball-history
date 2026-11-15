@@ -51,6 +51,14 @@ LEGACY_PUBLISHED_KEYS = {
     "wagner",
 }
 
+# Programs in the historical legacy cohort whose accepted scope authority may
+# supersede the old top-level-only boundary all the way to inception. Keep this
+# explicit so the cohort test passes both before and after the approved school
+# release lands, without weakening the legacy baseline for unrelated programs.
+LEGACY_INCEPTION_SCOPE_SUPERSESSION_KEYS = {
+    "arizona-state",
+}
+
 
 def read_csv(path):
     with path.open(encoding="utf-8-sig", newline="") as handle:
@@ -112,18 +120,39 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
             row["program_key"] for row in published
             if self.scope_for(row) != "INCEPTION+"
         }
-        self.assertEqual(baseline_legacy, LEGACY_PUBLISHED_KEYS)
+        scope_superseded = {
+            row["program_key"] for row in published
+            if (
+                row["program_key"] in LEGACY_INCEPTION_SCOPE_SUPERSESSION_KEYS
+                and self.scope_for(row) == "INCEPTION+"
+            )
+        }
+        self.assertLessEqual(
+            scope_superseded,
+            LEGACY_PUBLISHED_KEYS,
+        )
+        self.assertEqual(
+            baseline_legacy,
+            LEGACY_PUBLISHED_KEYS - scope_superseded,
+        )
         expanded = {
             row["program_key"] for row in complete
             if row["program_key"] in baseline_legacy
         }
         # Each accepted expansion moves one baseline legacy program to full
-        # institutional publication without changing the top-level reference.
-        self.assertEqual(len(complete), 89 + len(expanded))
-        self.assertEqual(len(legacy), 24 - len(expanded))
+        # institutional publication. A separately approved inception-scope
+        # supersession also moves that program out of the live legacy cohort.
+        self.assertEqual(
+            len(complete),
+            89 + len(expanded) + len(scope_superseded),
+        )
+        self.assertEqual(
+            len(legacy),
+            24 - len(expanded) - len(scope_superseded),
+        )
         self.assertEqual(
             {row["program_key"] for row in legacy},
-            LEGACY_PUBLISHED_KEYS - expanded,
+            LEGACY_PUBLISHED_KEYS - expanded - scope_superseded,
         )
         self.assertEqual(len(unpublished), 252)
         self.assertTrue(
