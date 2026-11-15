@@ -613,18 +613,19 @@
     "arizona-state-expansion-release-readiness-0001",
     "arizona-state-expansion-release-preview-verify-0001",
     "arizona-state-expansion-release-readiness-0002",
-    "arizona-state-expansion-release-preview-verify-0002"
+    "arizona-state-expansion-release-preview-verify-0002",
+    "arizona-state-expansion-release-gate2-approval-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "c2f7f0c32e04641a22b820b489399d89e5a6f37b",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_GATE2_APPROVAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "arizona-state-expansion-release-gate2-approval-0001",
+  "active_request_sha256": "25a85c3cca3476ccebeab6938f6037980c7dfe4004c32359a5f80f5a5653fdb9",
+  "active_school_key": "arizona-state",
+  "active_target_branch": "data/arizona-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1237,8 +1238,11 @@
     "target_branch": "data/arizona-state-onboarding",
     "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43730246786",
+  "lock_acquisition_request_commit": "3a0a1fc0fac7609d2a4a141f9b16167faf079c10",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_GATE2_RUNNING"
 }
