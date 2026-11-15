@@ -9,30 +9,23 @@ permissions:
   contents: read
 
 jobs:
-  ucf-exact-main-census:
+  mason-exact-main-census:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Authenticate exact main and census UCF canonical/reciprocal identities
+      - name: Authenticate immutable base and exact current main; census canonical identities
         env:
-          EXACT_MAIN: 4682d528bf62eee1ad9cd3d8114663882cb78bdf
-          RESEARCH_BASE: 4682d528bf62eee1ad9cd3d8114663882cb78bdf
-          SCHOOL_KEY: ucf
-          START_YEAR: '1970'
-          END_YEAR: '1983'
+          EXACT_MAIN: ac5e7c03e09e07c171190a1aa7fdd7da2bf4d9fd
+          RESEARCH_BASE: df73675852ec5a43dfac50da0ee06d8bcabf8832
         run: |
-          set -euo pipefail
-          git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
-          test "$(git rev-parse refs/remotes/origin/main)" = "$EXACT_MAIN"
-          test "$(git rev-parse "$RESEARCH_BASE^{commit}")" = "$RESEARCH_BASE"
           python - <<'PY'
+          import collections
           import csv
           import hashlib
           import io
@@ -43,112 +36,97 @@ jobs:
 
           main = os.environ["EXACT_MAIN"]
           base = os.environ["RESEARCH_BASE"]
-          school = os.environ["SCHOOL_KEY"]
-          start = int(os.environ["START_YEAR"])
-          end = int(os.environ["END_YEAR"])
+
+          def git(*args):
+              return subprocess.check_output(["git", *args]).decode().strip()
 
           def git_raw(commit, path):
-              return subprocess.check_output(["git", "show", f"{commit}:{path}"])
+              return subprocess.check_output(["git", "show", commit + ":" + path])
 
-          def rows(raw):
-              return list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline="")))
-
-          def in_window(value):
-              try:
-                  year = int((value or "")[:4])
-              except ValueError:
-                  return False
-              return start <= year <= end
+          observed = git("rev-parse", "refs/remotes/origin/main")
+          if observed != main:
+              raise SystemExit(f"main drift: expected {main}, saw {observed}")
+          if git("rev-parse", "--verify", base + "^{commit}") != base:
+              raise SystemExit("original Research base missing")
 
           package_files = (
               "source-games.csv", "opponents.csv", "venues.csv",
               "conferences.csv", "notes.md", "source-notes.md",
           )
-          package_sha = {}
+          sha_by_member = {}
           for name in package_files:
-              raw = git_raw(base, f"schools/{school}/{name}")
-              if git_raw(main, f"schools/{school}/{name}") != raw:
-                  raise SystemExit(f"inherited school package drift: {name}")
-              package_sha[name] = hashlib.sha256(raw).hexdigest()
+              path = "schools/george-mason/" + name
+              inherited = git_raw(base, path)
+              current = git_raw(main, path)
+              if current != inherited:
+                  raise SystemExit("inherited school package drift: " + path)
+              sha_by_member[name] = hashlib.sha256(inherited).hexdigest()
 
-          canonical = []
-          for row in rows(git_raw(main, "data/canonical/games.csv")):
-              if in_window(row.get("season_label", "")) and school in {
-                  row.get("team_a_key", ""), row.get("team_b_key", "")
-              }:
-                  canonical.append(row)
+          source_reader = csv.DictReader(io.StringIO(git_raw(main,
+              "schools/george-mason/source-games.csv").decode("utf-8-sig")))
+          source_rows = list(source_reader)
+          inherited_ids = [x["source_game_id"].strip() for x in source_rows]
+          if len(inherited_ids) != len(set(inherited_ids)) or any(not x for x in inherited_ids):
+              raise SystemExit("inherited source ID population invalid")
+          if len(source_rows) != 1455:
+              raise SystemExit(f"inherited source count changed: {len(source_rows)}")
 
-          paths = subprocess.check_output(
-              ["git", "ls-tree", "-r", "--name-only", main, "--", "schools"],
-              text=True, encoding="utf-8"
-          ).splitlines()
-          source_paths = [
-              path for path in paths
-              if path.endswith("/source-games.csv")
-              and path != f"schools/{school}/source-games.csv"
-          ]
-          reciprocal = []
-          for path in source_paths:
-              for row in rows(git_raw(main, path)):
-                  if not in_window(row.get("season_label", "")):
-                      continue
-                  normalized = (row.get("normalized_opponent_key", "") or "").strip()
-                  literal = (row.get("source_opponent_label", "") or "").strip().casefold()
-                  curated = (row.get("curated_opponent_name", "") or "").strip().casefold()
-                  if (
-                      normalized == school
-                      or literal in {"ucf", "central florida", "florida technological university"}
-                      or curated in {"ucf", "central florida", "florida technological university"}
-                  ):
-                      reciprocal.append({"source_path": path, **row})
+          def subset(commit):
+              rows = csv.DictReader(io.StringIO(git_raw(commit,
+                  "data/canonical/games.csv").decode("utf-8-sig")))
+              return [row for row in rows if "george-mason" in (
+                  row.get("team_a_key"), row.get("team_b_key"))
+                  and 1966 <= int(row.get("season_label", "0000")[:4]) <= 1977]
 
-          cfields = [
-              "canonical_game_id", "season_label", "game_date",
-              "team_a_key", "team_b_key", "team_a_score", "team_b_score",
-              "game_type", "site_type", "venue_name", "city", "state"
-          ]
-          rfields = [
-              "source_path", "source_program_key", "source_game_id", "season_label",
-              "game_date", "source_opponent_label", "normalized_opponent_key",
-              "team_score", "opponent_score", "played_result",
-              "curated_game_type", "curated_site_type", "canonical_game_id", "raw_text"
-          ]
-          crows = [{field: row.get(field, "") for field in cfields} for row in canonical]
-          rrows = [{field: row.get(field, "") for field in rfields} for row in reciprocal]
-          crows.sort(key=lambda row: (
-              row["season_label"], row["game_date"], row["canonical_game_id"]
-          ))
-          rrows.sort(key=lambda row: (
-              row["season_label"], row["game_date"], row["source_path"], row["source_game_id"]
-          ))
+          current = subset(main)
+          original = subset(base)
+          def duplicates(rows):
+              ids = [r["canonical_game_id"] for r in rows]
+              return len(ids) - len(set(ids))
+          if duplicates(current) or duplicates(original):
+              raise SystemExit("canonical ID collision within pre-scope games")
 
+          canonical_json = lambda x:(json.dumps(x,sort_keys=True,
+              ensure_ascii=False,separators=(",",":"))+"\n").encode()
+          cur_id = {r["canonical_game_id"]:r for r in current}
+          orig_id = {r["canonical_game_id"]:r for r in original}
           report = {
-              "kind": "UCF_ALL_HISTORY_STAGE1_CURRENT_MAIN_CANONICAL_RECIPROCAL_PRECHECK",
-              "status": "READ_ONLY_PRECHECK_NOT_FULL_STAGE1",
-              "protected_main_sha": main,
-              "research_base_sha": base,
-              "school_key": school,
-              "season_start_year": start,
-              "season_end_year": end,
-              "unchanged_inherited_school_members_sha256": package_sha,
-              "canonical_count": len(crows),
-              "reciprocal_source_count": len(rrows),
-              "canonical_rows": crows,
-              "reciprocal_rows": rrows,
+              "kind":"GEORGE_MASON_ALL_HISTORY_STAGE1_CURRENT_MAIN_CANONICAL_PRECHECK",
+              "status":"READ_ONLY_PRECHECK_NOT_FULL_STAGE1",
+              "protected_main_sha":main,
+              "research_base_sha":base,
+              "inherited_source_game_count":len(source_rows),
+              "unchanged_inherited_school_members_sha256":sha_by_member,
+              "current_prescope_canonical_game_count":len(current),
+              "research_base_prescope_canonical_game_count":len(original),
+              "pre_scope_canonical_id_additions":sorted(set(cur_id)-set(orig_id)),
+              "pre_scope_canonical_id_removals":sorted(set(orig_id)-set(cur_id)),
+              "pre_scope_canonical_row_changes":sorted(k for k in set(cur_id)&set(orig_id) if cur_id[k]!=orig_id[k]),
+              "current_prescope_canonical_rows":sorted(current,key=lambda x:x["canonical_game_id"]),
+              "current_prescope_canonical_rows_sha256":hashlib.sha256(canonical_json(
+                  sorted(current,key=lambda x:x["canonical_game_id"]))).hexdigest(),
+              "rehearsal_complete":False,
+              "freeze_zip_authenticated_in_this_run":False,
           }
-          raw = (
-              json.dumps(report, sort_keys=True, indent=2, ensure_ascii=False) + "\n"
-          ).encode()
-          out = pathlib.Path("ucf-stage1-canonical-reciprocal-precheck.json")
+          raw = canonical_json(report)
+          out=pathlib.Path("mason-canonical-precheck.json")
           out.write_bytes(raw)
-          print("CANONICAL_COUNT", len(crows))
-          print("RECIPROCAL_SOURCE_COUNT", len(rrows))
-          print("REPORT_SHA256", hashlib.sha256(raw).hexdigest())
+          print("EXACT_MAIN",main)
+          print("RESEARCH_BASE",base)
+          print("INHERITED_SOURCE_GAME_COUNT",len(source_rows))
+          print("CURRENT_PRESCOPE_CANONICAL_GAME_COUNT",len(current))
+          print("RESEARCH_BASE_PRESCOPE_CANONICAL_GAME_COUNT",len(original))
+          print("PRESCOPE_CANONICAL_ROWS",json.dumps(
+              [{"id":x["canonical_game_id"],"season":x["season_label"],
+                "date":x["game_date"],"team_a":x["team_a_key"],
+                "team_b":x["team_b_key"]} for x in current],
+              sort_keys=True))
+          print("PRECHECK_SHA256",hashlib.sha256(raw).hexdigest())
+          print("REHEARSAL_COMPLETED",False)
           PY
+          test -z "$(git status --porcelain --untracked-files=no)"
       - uses: actions/upload-artifact@v4
         with:
-          name: ucf-stage1-canonical-reciprocal-precheck
-          path: ucf-stage1-canonical-reciprocal-precheck.json
+          name: george-mason-stage1-canonical-precheck
+          path: mason-canonical-precheck.json
           retention-days: 30
-
-# disposable synchronization trigger for UCF Stage 1
