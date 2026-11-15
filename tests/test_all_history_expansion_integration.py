@@ -126,6 +126,7 @@ class ExpansionIntegrationAuthorityTests(unittest.TestCase):
     def projection_baseline(self):
         program={
             "program_key":"sample",
+            "public_page_enabled":"Yes",
             "program_inception_season":"",
             "history_coverage_status":"LEGACY_TOP_LEVEL_ONLY",
             "history_start_season":"1978-1979",
