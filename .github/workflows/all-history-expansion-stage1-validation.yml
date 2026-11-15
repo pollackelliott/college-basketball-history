@@ -21,6 +21,10 @@ on:
       - 'tools/remote_implementation_verify.py'
       - 'tools/remote_implementation_expansion_phase0.py'
       - 'tests/test_remote_implementation_expansion_phase0.py'
+      - 'tools/remote_implementation_expansion_startup.py'
+      - 'tests/test_remote_implementation_expansion_startup.py'
+      - 'tools/all_history_expansion_implementation_acceptance.py'
+      - 'tests/test_all_history_expansion_implementation_acceptance.py'
       - '.github/workflows/remote-implementation.yml'
       - '.github/workflows/all-history-expansion-stage1-validation.yml'
   workflow_dispatch:
@@ -50,5 +54,9 @@ jobs:
           python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_integration.py' -v
           python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -v
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_startup.py' -v
+          python -m unittest discover -s tests -p 'test_all_history_expansion_implementation_acceptance.py' -v
+      - name: All-History expansion implementation acceptance
+        run: python tools/all_history_expansion_implementation_acceptance.py --json
       - name: Full repository unittest nonregression
         run: python -m unittest discover -s tests -p 'test_*.py'
