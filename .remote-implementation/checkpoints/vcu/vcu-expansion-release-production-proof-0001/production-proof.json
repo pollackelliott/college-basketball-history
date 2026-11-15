@@ -1,0 +1,26 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "52991f3aa066f222d8b96a5d0f91df9544abf652",
+  "merge_parent_onboarding": "e3ef85569a50d9fcb3771b575babafde84ea38df",
+  "merge_sha": "655aff91f2085c119f2bf64b4dfe993bffd85d46",
+  "owner_gate_2_approval_checkpoint_sha256": "7285c3216f5e8590387530fb1bdfe5d7939e8acc293f388cb2ffa319e69b7040",
+  "owner_gate_2_verification_sha256": "0bfd7325daa2fab3ca6a630dbb1de93ea524b6025bd85549b22f1dddd40b7ea9",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
+  "pr_number": 615,
+  "production_deployment_id": 7795967354,
+  "production_deployment_sha": "655aff91f2085c119f2bf64b4dfe993bffd85d46",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/fairleigh-dickinson.json",
+    "/data/teams/long-island-university.json",
+    "/data/teams/richmond.json",
+    "/data/teams/vcu.json"
+  ],
+  "production_json_checked_count": 6,
+  "school_key": "vcu",
+  "status": "COMPLETE"
+}
