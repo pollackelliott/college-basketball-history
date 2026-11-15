@@ -11,7 +11,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"tools"))
 from all_history_expansion_integration import (
     MANIFEST_NAME, PACKAGE_FILES, STAGE1_REPORT, IntegrationAuthorityError,
-    canonical_bytes, sha256,
+    canonical_bytes, csv_rows, sha256,
 )
 from all_history_expansion_freeze import canonical_row_sha256
 from all_history_expansion_phase0_preview import preview_phase0
