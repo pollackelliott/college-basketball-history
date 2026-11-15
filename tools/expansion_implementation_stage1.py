@@ -857,8 +857,10 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
         blockers.append({"class": "MULTIPLE_SUPPLEMENTAL_SOURCES_REUSE_ONE_CANONICAL", "population": identity["duplicate_canonical_reuse"]})
     if identity["possible_duplicate_supplemental_rows"]:
         blockers.append({"class": "POSSIBLE_DUPLICATE_SUPPLEMENTAL_GAMES", "population": identity["possible_duplicate_supplemental_rows"]})
-    if manifest["schema_version"] != 1:
-        blockers.append({"class": "V2_SCOPE_AND_INHERITED_UNPUBLISHED_REUSE_NOT_YET_MATERIALIZED"})
+    # Schema-v2 inherited-unpublished references and accepted scope authority
+    # are already fail-closed authenticated by validate_delta_payload(). Stage 1
+    # materializes the unchanged inherited package plus genuinely new rows; the
+    # later Integration Freeze owns the frozen metadata/scope projection.
     # This adapter deliberately cannot authorize release or write a school Integration Freeze.
     blockers.append({"class": "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"})
     report = {
@@ -872,6 +874,11 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
         "season_accounting_count": len(validated["season_accounting_rows"]),
         "non_d1_owner_scan_count": len(validated["non_d1_scan_rows"]),
         "accepted_residual_count": len(validated["residual_rows"]),
+        "research_freeze_schema_version": manifest["schema_version"],
+        "inherited_reused_source_reference_count": len(
+            validated.get("inherited_source_references") or []
+        ),
+        "scope_authority": validated.get("scope_authority"),
         "census": census, "global_venue_reconciliation": global_venue_reconciliation,
         "canonical_identity_census": identity, "blockers": blockers,
         "current_main_reconciliation": current_main_reconciliation,
