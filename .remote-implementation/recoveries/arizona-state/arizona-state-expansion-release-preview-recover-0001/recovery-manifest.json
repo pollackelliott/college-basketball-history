@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "recovered_request_id": "arizona-state-expansion-release-preview-verify-0001",
+  "request_id": "arizona-state-expansion-release-preview-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}
