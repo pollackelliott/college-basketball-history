@@ -1,0 +1,20 @@
+{
+  "expected_target_predecessor_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "request_id": "arizona-state-expansion-phase0-0003",
+  "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+  "research_freeze_sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "88f508204049f5151c15dba03fd830b65523e5ca1de4b1d03b39d48579cde6c2",
+    "integration-freeze.json": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+    "phase0-preview.json": "10449e2d597f989c8af2ceabd466202d2edad4a502c2957fdfb1f60a4602c7e7",
+    "stage1-independent-proof.json": "0d9411a1528be67e1397dd4712fdcee28a2fc63f3771a5dae63de3bbe9c02f7f"
+  },
+  "stage1_independent_proof_sha256": "0d9411a1528be67e1397dd4712fdcee28a2fc63f3771a5dae63de3bbe9c02f7f",
+  "venue_reconciliation_sha256": ""
+}
