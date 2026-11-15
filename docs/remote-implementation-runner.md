@@ -161,7 +161,42 @@ Supported operations are:
 - `RELEASE_PRODUCTION_PROOF`
 - `RECOVER`
 
-### 4.1 Guarded All-History expansion Phase 0
+### 4.1 Repository-owned All-History expansion startup
+
+The initial expansion Implementation phase uses one repository-owned startup
+coordinator rather than a school-specific scratch workflow. The school lane first
+stages the immutable Research Freeze through the existing hash-bound
+`git_base64_parts` transport and then commits exactly one startup intent at:
+
+`.remote-implementation/expansion-startup.json`
+
+The permanent `tools/remote_implementation_expansion_startup.py` coordinator is
+read-only with respect to tracked basketball state. Against the exact startup-bound
+protected-main SHA it:
+
+1. requires global control to be `IDLE / COMPLETE` with no recovery condition;
+2. authenticates the existing accepted `data/<school>-onboarding` predecessor;
+3. reruns the repository-wide expansion Implementation acceptance gate;
+4. reconstructs and fresh-verifies the immutable expansion Research Freeze;
+5. executes permanent expansion Stage 1 twice and requires byte-identical output;
+6. builds the generic independent Stage 1 proof consumed by Integration Freeze;
+7. creates the permanent Integration Freeze and disposable Phase 0 preview;
+8. preserves those read-only artifacts under
+   `.remote-implementation/startups/<school>/<startup_id>/`; and
+9. queues one ordinary, separately validated `EXPANSION_PHASE0` request and dispatches
+   the existing remote control workflow.
+
+The startup intent is orchestration authority only. It is not a new remote mutation
+operation, does not acquire the global mutation lock, and carries no Stage 2, Owner Gate,
+release, merge, or Production authority. Any Stage 1, Integration Freeze, venue-identity,
+main-drift, target-drift, or acceptance failure stops before the child
+`EXPANSION_PHASE0` request is queued.
+
+One owner `Proceed` for the initial expansion Implementation phase persists through this
+deterministic startup and the child guarded `EXPANSION_PHASE0` transaction through its
+independent fresh verification. The owner must not be asked to schedule the child request.
+
+### 4.2 Guarded All-History expansion Phase 0
 
 `EXPANSION_PHASE0` is the mutation-capable Phase 0 operation for an already
 published school whose immutable Research authority is
@@ -206,7 +241,7 @@ A generic owner `Proceed` may be converted into a request only when the next bou
 
 Owner authorization is **phase-persistent**, not request-consumed. Once an owner has authorized a named phase, the school lane may author and monitor the distinct exact requests required inside that phase serially, provided each predecessor reaches its required fresh-verified durable state and no new owner authority, changed historical meaning, changed exact approved identity, recovery authority, or shared/global mutation is introduced. A successful internal request/checkpoint or a still-running verifier does not require another owner `Proceed`.
 
-### 4.1 Pre-merge candidate-runtime replay for Stage 2 repair PRs
+### 4.3 Pre-merge candidate-runtime replay for Stage 2 repair PRs
 
 When one exact durable `STAGE2_PROPOSAL_REHEARSAL` is BLOCKED by a generic permanent-tool defect and a repair PR is prepared, do not wait until that PR merges to discover the next executable boundary.
 

@@ -48,6 +48,12 @@ Once the owner authorizes a clearly named Implementation phase, that authorizati
 
 Default phase continuations are:
 
+- initial All-History expansion authorization continues through the repository-owned
+  expansion startup coordinator: exact-current-main Stage 1 reproduction, independent
+  proof, Integration Freeze, disposable Phase 0 preview, queuing of the ordinary guarded
+  `EXPANSION_PHASE0` request, and its independent fresh verification. These are
+  deterministic substeps of one initial phase; the owner does not schedule the child
+  Phase 0 request separately;
 - Stage 2 technical/reconciliation authorization continues through census, any policy-permitted deterministic representation repair, regeneration, recommendation-map preparation/rehearsal, and stops at `OWNER_GATE_1_READY` or a genuine blocker;
 - if a generic technical repair corrects planner eligibility/coverage and therefore changes the Stage 2 decision-universe fingerprint, invalidate the stale map/universe and recompute from the unchanged frozen authority; do not create an owner relay merely because the SHA changed. Newly surfaced genuine historical decisions are handled in the ordinary Gate 1 packet;
 - explicit Owner Gate 1 approval continues through fill/encode, pre-seal rehearsal, cryptographic seal, transactional sealed apply, and independent post-apply verification;
