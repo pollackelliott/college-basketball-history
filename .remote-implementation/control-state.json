@@ -1199,11 +1199,11 @@
   "current_sequence": 576,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "arizona-state-expansion-stage2-current-main-refresh-0001",
     "school_key": "arizona-state",
     "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
