@@ -37,9 +37,13 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
                "city":"Sampleville","state":"VA"}
         program={"program_key":"sample","history_start_season":"1978-1979",
                  "history_coverage_status":"LEGACY_TOP_LEVEL_ONLY",
-                 "program_inception_season":"","public_page_enabled":"Yes"}
+                 "program_inception_season":"","public_page_enabled":"Yes",
+                 "history_scope_intervals":"","history_scope_status":"OWNER_CONFIRMED",
+                 "history_scope_basis":"FIRST_TOP_LEVEL_SEASON",
+                 "history_scope_notes":"Baseline scope"}
         target=dict(program,history_coverage_status="COMPLETE_INSTITUTIONAL",
                     program_inception_season="1966-1967")
+        scope={"school":"Sample","top_level_scope":"1978-79+"}
         artifacts={
             "source-games.csv":csv_encoded([source]),
             "opponents.csv":csv_encoded([{"source_opponent_label":"Opp","canonical_opponent_key":"opp"}]),
@@ -65,6 +69,12 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             "stage1_report_sha256":sha256(artifacts[STAGE1_REPORT]),
             "baseline_package_member_sha256":baseline,
             "baseline_program_row_sha256":canonical_row_sha256(program),
+            "frozen_program_projection_sha256":canonical_row_sha256(target),
+            "top_level_scope_row_sha256":canonical_row_sha256(scope),
+            "frozen_scope_projection_sha256":canonical_row_sha256(scope),
+            "frozen_scope_projection":scope,
+            "scope_mutation_authorized":False,
+            "scope_authority":None,
             "opponent_support_actions":{"NEW_SUPPLEMENTAL":1,"EXTEND_INHERITED":0,"REUSE_INHERITED":0},
             "venue_support_actions":{"NEW_SUPPLEMENTAL":1,"EXTEND_INHERITED":0,"REUSE_INHERITED":0},
             "source_preservation":{"combined_count":1,"inherited_count":0,
@@ -85,6 +95,7 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
         for n in PACKAGE_FILES:
             fake_git["schools/sample/"+n]=inherited[n]
         fake_git["data/reference/programs.csv"]=csv_encoded([program])
+        fake_git["data/reference/program-top-level-scope.csv"]=csv_encoded([scope])
         fake_git["data/reference/venues.csv"]=csv_encoded([global_venue])
         fake_git["data/reference/venue-names.csv"]=b"venue_id,venue_name\n"
         fake_git["data/reference/program-names.csv"]=b"program_key,alias_name\n"
@@ -158,6 +169,70 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             self.assertFalse(result["authorized_live_mutation"])
             self.assertEqual(result["source_game_count"],1)
             self.assertFalse((repo/"schools").exists())
+
+    def test_frozen_v2_scope_supersession_is_staged_exactly(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo=Path(tmp)/"repo";repo.mkdir()
+            frozen,files,source,venue,global_old,global_new=self.fixture(repo)
+            manifest=json.loads((frozen/MANIFEST_NAME).read_bytes())
+            program_rows=csv_rows(files["data/reference/programs.csv"],"programs")[1]
+            current=program_rows[0]
+            target=dict(
+                current,
+                history_start_season="1966-1967",
+                history_scope_intervals="",
+                history_scope_status="OWNER_CONFIRMED",
+                history_scope_basis="ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+                history_scope_notes="Owner accepted INCEPTION+",
+                history_coverage_status="COMPLETE_INSTITUTIONAL",
+                program_inception_season="1966-1967",
+            )
+            projected_scope={"school":"Sample","top_level_scope":"INCEPTION+"}
+            manifest["frozen_program_projection"]=target
+            manifest["frozen_program_projection_sha256"]=canonical_row_sha256(target)
+            manifest["frozen_scope_projection"]=projected_scope
+            manifest["frozen_scope_projection_sha256"]=canonical_row_sha256(projected_scope)
+            manifest["scope_mutation_authorized"]=True
+            manifest["scope_authority"]={
+                "accepted_scope":"INCEPTION+",
+                "baseline_scope":"1978-79+",
+                "authority_kind":"OWNER_SUPERSESSION",
+                "owner_decision_reference":"owner decision",
+                "scope_notes":"Owner accepted INCEPTION+",
+                "baseline_scope_row_sha256":manifest["top_level_scope_row_sha256"],
+                "target_program_scope_fields":{
+                    "history_start_season":"1966-1967",
+                    "history_scope_intervals":"",
+                    "history_scope_status":"OWNER_CONFIRMED",
+                    "history_scope_basis":"ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+                    "history_scope_notes":"Owner accepted INCEPTION+",
+                },
+            }
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+            (frozen/MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
+
+            def rebase(programs,aliases,opp,sources):
+                return opp,sources,[]
+            def venues(*args,**kwargs):
+                after=args[2]
+                after.append(global_new)
+                return [venue],after,args[3],[{"venue_key":"gym"}]
+            with patch("all_history_expansion_phase0_preview.git_revision",return_value="a"*40), \
+                 patch("all_history_expansion_phase0_preview.git_bytes",side_effect=lambda repo,commit,path:files[path]), \
+                 patch("all_history_expansion_phase0_preview.load_existing_school_venues",return_value=[]), \
+                 patch("all_history_expansion_phase0_preview.rebase_program_aliases",side_effect=rebase), \
+                 patch("all_history_expansion_phase0_preview.rebase_venues",side_effect=venues):
+                result=preview_phase0(repo,frozen,repo.parent/"v2-preview")
+            self.assertTrue(result["scope_mutation_authorized"])
+            self.assertEqual(
+                result["protected_top_level_and_accomplishments"],
+                "FROZEN_TARGET_SCOPE_ONLY;ACCOMPLISHMENTS_UNCHANGED",
+            )
+            self.assertIn(
+                "data/reference/program-top-level-scope.csv",
+                result["global_reference_preview_sha256"],
+            )
 
     def test_accepted_current_main_predecessor_can_differ_from_research_base(self):
         with tempfile.TemporaryDirectory() as tmp:
