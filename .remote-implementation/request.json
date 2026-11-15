@@ -1,29 +1,6 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "vcu-expansion-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "vcu",
-  "previous_control_state_commit": "e730af8c24d92cb29b5fc2c92e93a0e927535218",
-  "previous_control_state_sha256": "5f1fafcf3c538b396504ac5b01f5fc0984f932a8fa165d9987185dd1db98f513",
-  "expected_protected_main_sha": "655aff91f2085c119f2bf64b4dfe993bffd85d46",
-  "target_branch": "data/vcu-onboarding",
-  "target_sha": "e3ef85569a50d9fcb3771b575babafde84ea38df",
-  "pr_number": 615,
-  "merge_sha": "655aff91f2085c119f2bf64b4dfe993bffd85d46",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/vcu/vcu-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "7285c3216f5e8590387530fb1bdfe5d7939e8acc293f388cb2ffa319e69b7040"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/vcu/vcu-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "0bfd7325daa2fab3ca6a630dbb1de93ea524b6025bd85549b22f1dddd40b7ea9"
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT VCU ALL_HISTORY_EXPANSION Implementation lane — packet-bound post-merge Production proof",
-    "authorization": "Owner explicitly approved the exact VCU PR #615 Preview with 'APPROVED. Proceed,' authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #615 head e3ef85569a50d9fcb3771b575babafde84ea38df against approved main 52991f3aa066f222d8b96a5d0f91df9544abf652. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 655aff91f2085c119f2bf64b4dfe993bffd85d46, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
-  },
   "authority": {
+    "expansion_phase0": true,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -31,8 +8,9 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
+    "release_presentation_refresh": false,
     "release_preview_verify": false,
-    "release_production_proof": true,
+    "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -44,5 +22,36 @@
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "Owner's original Arizona State initial expansion Implementation authorization remains phase-persistent. Startup 0001 stopped before mutation on the documented generic schema-v2 materialization gap. Generic repair PR #618 merged as protected-main 5bbb7398dd6e1311f5a31ae0831caa2908480664 after exact-head acceptance, full nonregression, and independent transaction validation. This retry authorizes only repository-owned startup through guarded EXPANSION_PHASE0 and its fresh verification; it is not Owner Gate 1, Owner Gate 2, recovery authority, Research reopening, unrelated maintenance, another school, or protected-main mutation. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION Implementation lane — same owner-authorized initial phase after bounded generic v2 repair"
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+    "sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+    "transport": {
+      "commit_sha": "7248360e1cec9d9dd23ec931fd671a0c027de8c5",
+      "kind": "git_base64_parts",
+      "part_count": 11,
+      "path_prefix": ".remote-implementation/transports/arizona-state/arizona-state-expansion-startup-0001/part-"
+    }
+  },
+  "expected_protected_main_sha": "5bbb7398dd6e1311f5a31ae0831caa2908480664",
+  "integration_freeze_sha256": "f02ee116e5c7bc8ca351ce295bf4975ef1e9ac505526ae0983e6a5000c349e83",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "b23de0edef08cd4e0706f8dc5b8631510e03acd9",
+  "previous_control_state_sha256": "abcd88489519a3fd48643c356c4dd7150ca51351cf6d013b33a6fec5da8c2aa1",
+  "request_id": "arizona-state-expansion-phase0-0002",
+  "research_freeze_sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/arizona-state/arizona-state-expansion-startup-0002/stage1-independent-proof.json",
+    "sha256": "78d4f1c01e677eaba32b4b79e1aa92810c3c51d66393fa892bc117014a1b1419"
+  },
+  "stage1_independent_proof_sha256": "78d4f1c01e677eaba32b4b79e1aa92810c3c51d66393fa892bc117014a1b1419",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "67462a0aa953930761f6fe46eb656997c69e3f86"
 }
