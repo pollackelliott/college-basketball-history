@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "617c0af2bd3752c42f6a4512243fedbead9fd6a1402e196d41670c9faf57d68c",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "pr_number": 622,
+  "preview_deployment_id": 7804146892,
+  "preview_deployment_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
+  "preview_url": "https://college-basketball-history-oluf2drd6-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "c2f7f0c32e04641a22b820b489399d89e5a6f37b",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "arizona-state-expansion-release-preview-verify-0002",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0"
+}
