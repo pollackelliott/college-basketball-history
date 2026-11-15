@@ -339,7 +339,9 @@ def _install_preview_candidate(
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(source.read_bytes())
 
-    allowed = sorted(exact_paths(school))
+    allowed = sorted(
+        exact_paths(school, authority["intent"]["projected_global_sha256"])
+    )
     git("add", "--", *allowed, cwd=worktree)
     return allowed
 
