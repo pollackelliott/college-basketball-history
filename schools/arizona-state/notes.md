@@ -64,3 +64,59 @@ Current-main shared-reference preparation against `20b3c568136009aae8d06f9ab2430
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=20b3c568136009aae8d06f9ab24307af3a1a7f50` from `research_base_sha=3989158d6e461a3dfb7be919586c5b388f8ef83d`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Arizona State — frozen supplemental All-History expansion Research
+
+- Workflow: ALL_HISTORY_EXPANSION, owner-approved INCEPTION+ scope; researched inception: 1911-1912.
+- Immutable inherited Research-base SHA: df73675852ec5a43dfac50da0ee06d8bcabf8832.
+- Current protected-main tool SHA binding: b9b88537cafaebed829a620c9e007e8caf767aa7 (freeze generated read-only).
+- Original Stage 6 PASS checkpoint SHA-256: c637a920dce8a18bac290b79b7a2b03313b28d3c234bb58f7e094908b3e94ecc.
+- Stage 5 explicit six-identity NON_D1 owner approval SHA-256: 5a2db44e88c6a1cfe8e4a0eb4b539eddedcf492f4d62e651369e6419488dc74d.
+- Accepted original Stage 4 checkpoint SHA-256: ad253fffc9a5536ab2ae0d76853c458abc490da477b4bb896b284b972c20a1d8.
+- **Inherited baseline**: accepted historical authority; all 469 inherited but unpublished games are exact baseline-row-hash references only, not newly authored game rows.
+- **New supplemental**: exactly 10 accepted 1920-21 competitive games (8-2), with literal original Stage 1 raw_text restored without factual interpolation.
+- **Season accounting**: exactly 39 expansion-required seasons (1911-12 through 1949-50), 1915-16 NO_TEAM, four terminal aggregate-only unidentified seasons totaling 41 games.
+- **Official 1920-21 11-3 vs documented 9-2**: separate accounting, no invented three-game delta.
+- **ASC W42-13**: terminal contested-source representation, neither a new ASC game nor the same as inherited Northern Arizona W45-13.
+- **Source sites and dates**: ten UNKNOWN H/A/N and ten blank dates are researched unresolved, not inferred from geography or score order.
+- **VENUE**: no supported supplemental physical venue; do not add a speculative venue.
+- **Opponent support**: three NEW_SUPPLEMENTAL and three hash-bound EXTEND_INHERITED actions; underlying inherited row bytes stay untouched. All six identities are owner-cleared in Stage 5.
+- **Owner scope**: supersedes inherited 1950-51+ top-level classification for Research only, no global classification mutation.
+- **Research acceptance**: Stage 6 permanent acceptance 0 errors/0 warnings and PRE-FREEZE SELF-CHALLENGE: PASS.
+- **Implementation**: NOT BEGUN. A future current-main rebase is required; do not apply shared or public data in Research.
+
+## Accepted six-file source notes carried forward
+
+# arizona-state research package notes
+
+## Stage 4 deterministic authoring
+
+- Stage 3B checkpoint SHA-256: a62dad8c2d57624ad3cefee9f607130111e1181390e312e418c73142415fb753
+- Research base SHA: df73675852ec5a43dfac50da0ee06d8bcabf8832
+- Stage 3B status: COMPLETE
+- Competitive games: 10
+- Primary-source historical results cutoff: 2025-2026
+- Required completed-season cutoff: 2025-2026
+- Coverage cutoffs are explicit Research declarations; media-guide titles and filenames are not coverage inference rules.
+- Package authoring was mechanical from durable Stage 3B state; no historical research or reinterpretation was performed by Stage 4.
+
+## Final game census
+
+- REGULAR_SEASON: 10
+
+## Final H/A/N census
+
+- UNKNOWN: 10
+
+## Accepted top-level history scope — All-History expansion v2
+
+- Research workflow: ALL_HISTORY_EXPANSION (supplemental-only package).
+- Inherited protected Research-base classification/reference: `1950-51+` (retained unchanged, immutable Research base `df73675852ec5a43dfac50da0ee06d8bcabf8832`).
+- Owner-approved Research target classification: **INCEPTION+**, starting with the institutional inception season **1911-1912**.
+- Scope authority kind: `OWNER_SUPERSESSION`; owner decision reference: Arizona State ALL_HISTORY_EXPANSION Research owner-superseded inception+ scope instruction and explicit owner continuation preserving INCEPTION+ in the same Research conversation.
+- This Research supplement and the Stage 6 audit do not modify the inherited program or shared/global top-level-scope reference. Any publication/classification update remains subject to the future guarded Implementation workflow.
+- Accepted historical coverage includes the 469 original Research-base pre-1950-51 source-game rows only by exact inherited-reference identity; those inherited records are not new supplemental source-game rows.
