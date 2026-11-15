@@ -614,7 +614,7 @@
   "active_request_sha256": "e104b89df685e84e0b8000f41957964960585bed5caa95dc223d63d277addae8",
   "active_school_key": "arizona-state",
   "active_target_branch": "data/arizona-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "aaea783240dcf04e87f7f4ac41ac7f82b909e2cd",
   "active_writeahead_path": ".remote-implementation/writeahead/arizona-state/arizona-state-expansion-stage2-current-main-refresh-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "6dfe13879a8e9e2615c9f9fad9910b7541ca9c15d32d423e9cb0d08b38ac75ef",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
