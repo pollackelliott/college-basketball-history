@@ -596,18 +596,19 @@
     "vcu-expansion-release-readiness-0001",
     "vcu-expansion-release-preview-verify-0001",
     "vcu-expansion-release-gate2-approval-0001",
-    "vcu-expansion-release-production-proof-0001"
+    "vcu-expansion-release-production-proof-0001",
+    "arizona-state-expansion-phase0-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "5bbb7398dd6e1311f5a31ae0831caa2908480664",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43668280610:1",
+  "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "arizona-state-expansion-phase0-0002",
+  "active_request_sha256": "475966ba03c2a6db19eec94ad44735c91d68c04e54d1781dfcea479c94b39f7f",
+  "active_school_key": "arizona-state",
+  "active_target_branch": "data/arizona-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1204,8 +1205,11 @@
     "request_id": "vcu-expansion-release-production-proof-0001",
     "school_key": "vcu"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43668280610",
+  "lock_acquisition_request_commit": "da1179038d96d5d4fb6bd7ef41804f4abd856d90",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
