@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
+  "startup_id": "arizona-state-expansion-startup-0001",
+  "phase0_request_id": "arizona-state-expansion-phase0-0001",
+  "school_key": "arizona-state",
+  "expected_protected_main_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "target_branch": "data/arizona-state-onboarding",
+  "target_sha": "67462a0aa953930761f6fe46eb656997c69e3f86",
+  "research_freeze_sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+  "expansion_research_checkpoint": {
+    "sha256": "71a05250b4d57c31429255c3d31444046df1341dddc1814a80cda5315846bfb4",
+    "research_base_sha": "df73675852ec5a43dfac50da0ee06d8bcabf8832",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "e0e208f3365e86b5c959b78a10a09256eda28acf",
+      "path_prefix": ".remote-implementation/transports/arizona-state/arizona-state-expansion-startup-0001/part-",
+      "part_count": 11
+    }
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION Implementation lane — owner-selected initial expansion startup",
+    "authorization": "Owner explicitly selected Arizona State as the next serialized ALL_HISTORY_EXPANSION Implementation school and authorized the ordinary initial phase after authoritative recovery. Authority covers only the repository-defined initial startup through guarded EXPANSION_PHASE0; it is not Owner Gate 1, Owner Gate 2, recovery authorization, Research reopening, unrelated maintenance, another school, or protected-main mutation."
+  }
+}
