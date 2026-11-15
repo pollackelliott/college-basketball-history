@@ -1,0 +1,89 @@
+{
+  "changed_file_sha256": {
+    "AGENTS.md": "6be712de5b3ecac3151ee6dc92e71ab3613574884a46d5dc33330d77be9cb1d9",
+    "docs/complete-institutional-research-protocol.md": "481e24cb89ad906fe48a70e8a14f7eef54fe4015d859bd82f6258115da469a1c",
+    "docs/program-top-level-scope-reference.md": "c4a4ef12dc5da87841f72abe33028fbf7de9e6280b56dbbc6b2df6e681f81aad",
+    "docs/research-lane-bootstrap-template.md": "c72847558eabf06ec46b99421936de21e0f785c64eb00bb2c96a3cd8e118ac3a",
+    "docs/research-lane-bounded-execution.md": "91286de9b4bb1d8f46aa1d6fa66f80dd8ad6881dc85878557968a75942a66a85",
+    "docs/research-stage4-authoring-contract.md": "bba68f0c6f06c28ac1870fbc887f92252df80e81522ce92b45788ec62b75ac2b",
+    "docs/stage1-game-universe-contract.md": "757ef158e7f449b9f1813a61797312320eea8aaf696e424480fed53c765927d4",
+    "tests/test_complete_institutional_research_scope.py": "f9ce9fd6d7f6e08f81f1efd241d73ba4cbf0e2c4035ca3bf144bf52e99f601a2",
+    "tests/test_research_authoring_capsule.py": "20564377a560e0ea6b2ea5743dcce94308ef25ff219f329acaa8e2f0bf695529",
+    "tools/research_authoring_capsule.py": "2b84857c48ef30d5322e1e45ece7c45b31670d49854f5704345f6e4ed98d8452",
+    "tools/research_stage4.py": "e57b57e6eeee5e9381a2f85814f8ae4c16b6e2110dfcd01843b826a30a9a494e"
+  },
+  "changed_paths": [
+    "AGENTS.md",
+    "docs/complete-institutional-research-protocol.md",
+    "docs/program-top-level-scope-reference.md",
+    "docs/research-lane-bootstrap-template.md",
+    "docs/research-lane-bounded-execution.md",
+    "docs/research-stage4-authoring-contract.md",
+    "docs/stage1-game-universe-contract.md",
+    "tests/test_complete_institutional_research_scope.py",
+    "tests/test_research_authoring_capsule.py",
+    "tools/research_authoring_capsule.py",
+    "tools/research_stage4.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+  "global_lock_commit": "b0bb8f29b8513a80800dcb203a109abb46d1d0bb",
+  "integration_freeze_sha256": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "AGENTS.md",
+    "docs/complete-institutional-research-protocol.md",
+    "docs/program-top-level-scope-reference.md",
+    "docs/research-lane-bootstrap-template.md",
+    "docs/research-lane-bounded-execution.md",
+    "docs/research-stage4-authoring-contract.md",
+    "docs/stage1-game-universe-contract.md",
+    "tests/test_complete_institutional_research_scope.py",
+    "tests/test_research_authoring_capsule.py",
+    "tools/research_authoring_capsule.py",
+    "tools/research_stage4.py"
+  ],
+  "merge_base_sha": "4b43773ae771aa1baf1df76cef68e64aa9fa9116",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "0527b0ca1ddb72fd1125fdc0821696850d3b109faf5eeb4558b65787bb225182",
+    "notes.md": "b4589e684e50a35beb48deac6642f14b46c4bc7c9da721036ac48796fb544dbc",
+    "opponents.csv": "6fe1f36af4ba4c1445277c601719b7de575c93c3e549cb6c2510429f4df2b16f",
+    "source-games.csv": "8835af82844cd46e639d2132ccb736324254a8f40d58c8499172df4047e7bfe0",
+    "source-notes.md": "67375b96451e0bfbf6d9ae9a4a351fe58e664889c1fe056719476ceba102a722",
+    "venues.csv": "e425d686450c4a7c9a0056a048293b6871f03e3ae93756faef35e286bd5aee14"
+  },
+  "predecessor_authority_kind": "PHASE0_SUCCESSOR",
+  "prepared_commit_sha": "6f0ee8f5e046c550ada1596a5d039b78cda2c2de",
+  "prepared_main_parent_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "prepared_parent_sha": "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+  "prepared_parents": [
+    "9fa016d11886ac91ad96c9768e959afae0c0a48d",
+    "fbce880c5d30fe63312330179de9a543bdab8e0a"
+  ],
+  "prepared_tree_sha": "5d63e780585f65aac1b14966ddabeda058447421",
+  "protected_main_sha": "fbce880c5d30fe63312330179de9a543bdab8e0a",
+  "refresh_proof_sha256": "47bf897835b4bddcb93e150e2caf0aeb01c9435e01ffb74d516822f2cd0a82bc",
+  "repository_validation": "PASS",
+  "request_id": "arizona-state-expansion-stage2-current-main-refresh-0001",
+  "request_sha256": "e104b89df685e84e0b8000f41957964960585bed5caa95dc223d63d277addae8",
+  "schema_version": 1,
+  "school_key": "arizona-state",
+  "semantic_snapshot_sha256": "56ae6a7ad281900701d2158f029709b68f8d4cdaaa39e4624f2a76ddb4911a46",
+  "sidecars": {
+    "integration-freeze.json": "911cf4eb6b45a56979b260aa5c4d121eacf3065143fcb9139aead46cac09243b",
+    "refresh-proof.json": "47bf897835b4bddcb93e150e2caf0aeb01c9435e01ffb74d516822f2cd0a82bc"
+  },
+  "target_branch": "data/arizona-state-onboarding",
+  "target_changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "schools/arizona-state/notes.md",
+    "schools/arizona-state/opponents.csv",
+    "schools/arizona-state/source-games.csv",
+    "schools/arizona-state/source-notes.md",
+    "site/data/programs.json",
+    "site/data/teams/arizona-state.json"
+  ]
+}
