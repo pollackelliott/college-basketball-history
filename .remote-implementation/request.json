@@ -1,29 +1,6 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "arizona-state-expansion-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "arizona-state",
-  "previous_control_state_commit": "0cc3cf6fc8deb005ad163d70dcd2f8bbd61519b7",
-  "previous_control_state_sha256": "0610c877ba49e97df2de35b2f16ec064410a20ae6a3b14bf028222944904db58",
-  "expected_protected_main_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
-  "target_branch": "data/arizona-state-onboarding",
-  "target_sha": "e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0",
-  "pr_number": 622,
-  "merge_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/arizona-state/arizona-state-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "28eed4b1bfdd0df84ddc56d3a2e389f9dde46b817c0d98390de9c6748da2697f"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/arizona-state/arizona-state-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "555a0390288795238484f3502c1ccd20c0e8d17d3ff40474510745ed19021393"
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT Arizona State ALL_HISTORY_EXPANSION serialized Implementation lane — packet-bound post-merge Production proof",
-    "authorization": "Owner explicitly approved the exact Arizona State PR #622 Preview with 'Approved. Proceed,' authorizing the repository-defined final release phase. Fresh Gate 2 verification passed and emitted the exact merge packet for PR #622 head e5960dcbe5ab6bbed50af1e0d0750f6f080ec1c0 against approved main c2f7f0c32e04641a22b820b489399d89e5a6f37b. The authorized GitHub connector executed exactly merge method `merge`, producing two-parent merge 5c305396dc52c295bb957c5b1b6c8e9795ba2c2f, now exact protected main. This request is the packet-bound read-only Production proof only; it grants no further merge, protected-main mutation, recovery, maintenance, historical mutation, or unrelated authority."
-  },
   "authority": {
+    "expansion_phase0": true,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -33,7 +10,7 @@
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
-    "release_production_proof": true,
+    "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -45,5 +22,36 @@
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/Phase 0 phase. Earlier startup attempts ended before any Houston request acceptance or basketball mutation. Protected-main PR #625 generically repaired expansion Stage 1 reciprocal identity assertion handling after exact diagnosis of HOU-EXP-00022, preserving the same authenticated Houston Research Freeze. This fresh replacement authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0004, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "ChatGPT Houston ALL_HISTORY_EXPANSION Implementation lane"
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
+    "sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
+    "transport": {
+      "commit_sha": "f93dcb2e2121be8c09b5e900aee8acc2c9cc08f9",
+      "kind": "git_base64_parts",
+      "part_count": 20,
+      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0004/part-"
+    }
+  },
+  "expected_protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "084684b6dcbf88e3afd5a267088e76ff94f61ce4",
+  "previous_control_state_sha256": "d59dd0ac2d58c0632fb7e88df973c012c17e2260621c355e765be33a33a5c145",
+  "request_id": "houston-expansion-phase0-0004",
+  "research_freeze_sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
+  "schema_version": 1,
+  "school_key": "houston",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/houston/houston-expansion-startup-0004/stage1-independent-proof.json",
+    "sha256": "aaafd34204b81cdc3f4374ea04a14a6d34c24113fa7f964aaf2b36f38772ed6e"
+  },
+  "stage1_independent_proof_sha256": "aaafd34204b81cdc3f4374ea04a14a6d34c24113fa7f964aaf2b36f38772ed6e",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50"
 }
