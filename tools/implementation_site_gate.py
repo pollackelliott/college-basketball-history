@@ -1172,9 +1172,9 @@ def implementation_site_report(
     if strict_home_gap_rows:
         errors.append(
             f"{strict_home_gap_rows:,} in-scope target HOME canonical game(s) are missing "
-            "venue and/or complete location without a valid researched HOME exception. "
-            "HOME location is waivable only for an exact protected-main owner-authorized "
-            "row; ordinary research statuses remain nonwaivable."
+            "venue and/or complete location without a valid researched-unresolved HOME "
+            "venue exception or exact protected-main owner-authorized HOME locality "
+            "exception. Ordinary research statuses remain nonwaivable."
         )
     if invalid_home_venue_exception_marker_rows:
         errors.append(
