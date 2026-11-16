@@ -1,0 +1,70 @@
+{
+  "counts": {
+    "home_missing_both": 1,
+    "home_missing_location": 1,
+    "home_missing_venue": 1,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_venue": 9,
+    "public_gap_rows": 10,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap": 1,
+    "strict_home_gap_rows": 1,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2395,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap": 1,
+    "unaccounted_public_gap_rows": 1
+  },
+  "errors": [
+    "1 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception or exact protected-main owner-authorized HOME locality exception. Ordinary research statuses remain nonwaivable.",
+    "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+  ],
+  "examples": {
+    "home_missing_both": [
+      "CBBG-0101041"
+    ],
+    "home_missing_location": [
+      "CBBG-0101041"
+    ],
+    "home_missing_venue": [
+      "CBBG-0101041"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0015509",
+      "CBBG-0028322",
+      "CBBG-0034324",
+      "CBBG-0043822",
+      "CBBG-0100717",
+      "CBBG-0100718",
+      "CBBG-0100750",
+      "CBBG-0100751",
+      "CBBG-0101030"
+    ],
+    "strict_home_gap": [
+      "CBBG-0101041"
+    ],
+    "unaccounted_public_gap": [
+      "CBBG-0101041"
+    ]
+  },
+  "history_start_season": "1950-1951",
+  "school_key": "houston",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 11,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 9,
+    "researched_gap_rows": 11,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2394
+  },
+  "status": "FAIL",
+  "warnings": []
+}

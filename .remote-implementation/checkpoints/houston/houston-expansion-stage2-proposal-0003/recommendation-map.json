@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "school_key": "houston",
+  "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "source_stage2_successor": {
+    "path": ".remote-implementation/checkpoints/houston/houston-expansion-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "78ebecf594fe122869445f249f35c8f7945fa1e414b5963b3615cbc4624b942a"
+  },
+  "prepared_against_protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "prepared_against_target_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+  "identity": {},
+  "decisions": {
+    "DISCREPANCY-HOU-EXP-00022-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-HOU-EXP-00086-SCORE": "KEEP_CANONICAL",
+    "DISCREPANCY-HOU-EXP-00087-GAME_DATE": "KEEP_CANONICAL",
+    "DISCREPANCY-HOU-EXP-00087-OVERTIME_PERIODS": "KEEP_CANONICAL",
+    "CANONICAL-SITE-PATCH-CBBG-0124516": "APPLY_CANONICAL_PATCH"
+  },
+  "basis_by_decision": {
+    "DISCREPANCY-HOU-EXP-00022-SCORE": "Keep canonical Houston 60-41. Texas A&M's official series history says the 1946-47 series opener was a 60-41 Aggie loss, while Houston's official historical guides say 62-41 on Dec. 28, 1946. Under All-History expansion authority, preserve Houston's frozen 62-41 assertion as conflicting evidence without rewriting the accepted reciprocal canonical score.",
+    "DISCREPANCY-HOU-EXP-00086-SCORE": "Keep canonical Houston 64-69. Marquette's official year-by-year history records a 69-64 win over Houston on Dec. 10, 1949, while Houston's official guide records a 65-69 loss. Preserve the frozen Houston assertion as conflicting evidence without overwriting the established reciprocal canonical score.",
+    "DISCREPANCY-HOU-EXP-00087-GAME_DATE": "Keep canonical 1949-12-14. Creighton's current official 1949-50 schedule, current all-time scores, and official 2006 Houston-series history all place the 52-47 game on Dec. 14, 1949; Houston's frozen guide row says Dec. 13. The convergent reciprocal institutional record supports the canonical date while the Houston date remains preserved as source evidence.",
+    "DISCREPANCY-HOU-EXP-00087-OVERTIME_PERIODS": "Keep canonical 1 OT. Creighton's current official schedule marks the Dec. 14, 1949 Houston game as overtime, and Creighton's official 2006 series history describes the first Houston meeting as an overtime win. Houston's frozen row omits overtime; preserve that conflicting assertion without changing the established canonical overtime value.",
+    "CANONICAL-SITE-PATCH-CBBG-0124516": "Apply the exact Hofheinz Pavilion site metadata to canonical game CBBG-0124516. Houston's official Jan. 6, 2015 game recap says UCF won 79-78 inside Hofheinz Pavilion; UCF's official recap likewise places the game at Hofheinz Pavilion; Houston's official 2014-15 schedule lists the UCF game at Hofheinz Pavilion. Current registry identity is VEN-000291 / hofheinz-pavilion in Houston, TX, the same physical venue now displayed as Fertitta Center. Preserve the existing Houston-home H/A/N classification and patch only physical venue/locality."
+  },
+  "canonical_patch_by_decision": {
+    "CANONICAL-SITE-PATCH-CBBG-0124516": {
+      "venue_key": "hofheinz-pavilion",
+      "venue_id": "VEN-000291",
+      "site_city": "Houston",
+      "site_state": "TX"
+    }
+  },
+  "source_patch_by_decision": {},
+  "notes_by_decision": {
+    "DISCREPANCY-HOU-EXP-00022-SCORE": "Official institutional conflict: Houston historical guide 62-41; Texas A&M official series history 60-41. Expansion recommendation retains accepted canonical while preserving Houston evidence.",
+    "DISCREPANCY-HOU-EXP-00086-SCORE": "Official institutional conflict: Houston historical guide 65-69; Marquette official year-by-year history 69-64. Expansion recommendation retains accepted canonical while preserving Houston evidence.",
+    "DISCREPANCY-HOU-EXP-00087-GAME_DATE": "Creighton official 1949-50 schedule, current all-time scores, and official series history converge on Dec. 14, 1949.",
+    "DISCREPANCY-HOU-EXP-00087-OVERTIME_PERIODS": "Creighton official current schedule and official series history independently identify the 1949 Houston meeting as overtime.",
+    "CANONICAL-SITE-PATCH-CBBG-0124516": "Exact-game venue supported by both participating institutions. Registry VEN-000291 is the Hofheinz Pavilion/Fertitta Center physical identity in Houston, TX."
+  },
+  "venue_relationship_patch_by_decision": {}
+}
