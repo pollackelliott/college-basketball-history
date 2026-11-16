@@ -148,6 +148,7 @@ ALLOWED_RESEARCH_STATUSES = {
     "RESEARCHED_PARTIAL",
     "RESEARCHED_UNRESOLVED",
     "RESEARCHED_UNRESOLVED_HOME_VENUE",
+    "RESEARCHED_UNRESOLVED_HOME_LOCATION",
 }
 D1_VALUES = {"yes", "true", "1", "y", "d1", "current_d1", "current-d1"}
 NON_D1_VALUES = {"no", "false", "0", "n", "non_d1", "non-d1", "non d1"}
@@ -245,6 +246,10 @@ def _research_accounting(
         (
             "stage3a_site_research_status",
             ("stage3a_site_research_basis",),
+        ),
+        (
+            "stage3a2_home_venue_status",
+            ("stage3a2_resolution_note", "stage3a2_evidence_locator"),
         ),
         (
             "site_research_status",
