@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "houston-expansion-startup-0004",
-  "phase0_request_id": "houston-expansion-phase0-0004",
-  "school_key": "houston",
-  "expected_protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
-  "target_branch": "data/houston-onboarding",
-  "target_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50",
-  "research_freeze_sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
+  "startup_id": "ucf-expansion-startup-0001",
+  "phase0_request_id": "ucf-expansion-phase0-0001",
+  "school_key": "ucf",
+  "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "e0fa9cc31e908529b9e13297621af8c04be76147",
+  "research_freeze_sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
   "expansion_research_checkpoint": {
-    "sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
-    "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
+    "sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+    "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "f93dcb2e2121be8c09b5e900aee8acc2c9cc08f9",
-      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0004/part-",
-      "part_count": 20
+      "commit_sha": "77c733782ae0a890454843323f243de4e70b341e",
+      "path_prefix": ".remote-implementation/transports/ucf/ucf-expansion-startup-0001/part-",
+      "part_count": 1
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT Houston ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/Phase 0 phase. Earlier startup attempts ended before any Houston request acceptance or basketball mutation. Protected-main PR #625 generically repaired expansion Stage 1 reciprocal identity assertion handling after exact diagnosis of HOU-EXP-00022, preserving the same authenticated Houston Research Freeze. This fresh replacement authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0004, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
+    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION Implementation lane, explicit owner-authorized startup 2026-11-16",
+    "authorization": "Owner explicitly designated UCF as the sole serialized Implementation school following Houston COMPLETE and authorized only the permanent repository-owned UCF expansion startup coordinator, exact 377-game v2 Research Freeze, existing target predecessor, current-main acceptance gate, deterministic Stage 1, Integration Freeze, and guarded EXPANSION_PHASE0 through independent fresh verification. 27 exact HOME-location exceptions and 90 cleared NON_D1 identities remain settled. No new Research, inherited rewrite, top-level scope change, Stage 2, Owner Gate 1/2, release, merge, or Production authority."
   }
 }
