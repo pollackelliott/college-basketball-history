@@ -1,8 +1,9 @@
-"""Fail-closed bounded published-correction site nonregression proof.
+"""Fail-closed published-site nonregression proofs.
 
 The ordinary site gate still emits its independent full PASS/FAIL result for
-inherited debt. An exact frozen bounded correction may additionally prove that
-no site-category/game pair regressed across its authorized target-game set.
+inherited debt. Exact bounded corrections and authenticated All-History
+expansions may additionally prove that they introduced no new site-category/game
+failure while leaving pre-existing published debt visible.
 """
 from __future__ import annotations
 import hashlib
@@ -12,6 +13,7 @@ from implementation_site_gate import implementation_site_report
 FULL_POPULATION_LIMIT = 100000
 SINGLE_MODE = "SINGLE_GAME_CORRECTION_NONREGRESSION"
 MULTI_MODE = "MULTI_GAME_CORRECTION_NONREGRESSION"
+EXPANSION_MODE = "ALL_HISTORY_EXPANSION_NONREGRESSION"
 
 def stable(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
@@ -78,3 +80,85 @@ def verify_current(report: dict[str, Any], proof: dict[str, Any], school: str) -
     target_ok = (bool(proof.get('target_game_id')) if mode==SINGLE_MODE else (isinstance(proof.get('target_game_ids'),list) and len(proof['target_game_ids'])>=2 and proof['target_game_ids']==sorted(set(proof['target_game_ids'])) and all(proof['target_game_ids'])) if mode==MULTI_MODE else False)
     if (not target_ok or proof.get('school_key') != school or report.get('school_key') != school or digest(report) != proof.get('corrected_report_sha256') or report.get('status') != proof.get('corrected_site_status')):
         raise WorkflowError("correction site proof does not match independent site gate")
+
+
+def prove_expansion(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
+    """Prove an All-History expansion introduced no new canonical site debt."""
+    from onboarding_plan import WorkflowError
+    if (
+        before.get("school_key") != after.get("school_key")
+        or before.get("history_start_season") != after.get("history_start_season")
+        or before.get("source_validation_scope") != after.get("source_validation_scope")
+        or before.get("source_validation_scope", {}).get("mode") != "FULL_SOURCE_PACKAGE"
+    ):
+        raise WorkflowError(
+            "expansion site proof requires identical trusted full-source scope"
+        )
+    if before.get("source_site_counts") != after.get("source_site_counts"):
+        raise WorkflowError("expansion site proof changed source-side Research debt")
+
+    bcounts, acounts = before.get("counts", {}), after.get("counts", {})
+    before_games = int(bcounts.get("target_canonical_games", 0) or 0)
+    after_games = int(acounts.get("target_canonical_games", 0) or 0)
+    if after_games < before_games:
+        raise WorkflowError("expansion site proof shrank target canonical universe")
+
+    bex, aex = before.get("examples", {}), after.get("examples", {})
+    inherited, eliminated = 0, 0
+    for category in sorted(set(bex) | set(aex)):
+        b, a = bex.get(category, []), aex.get(category, [])
+        if (
+            not isinstance(b, list)
+            or not isinstance(a, list)
+            or len(set(b)) != len(b)
+            or len(set(a)) != len(a)
+            or len(b) != bcounts.get(category, 0)
+            or len(a) != acounts.get(category, 0)
+        ):
+            raise WorkflowError(
+                "expansion site proof lacks complete failure population: " + category
+            )
+        new = sorted(set(a) - set(b))
+        if new:
+            raise WorkflowError(
+                "expansion introduced site failure "
+                + category
+                + ": "
+                + ", ".join(new[:5])
+            )
+        inherited += len(a)
+        eliminated += len(set(b) - set(a))
+
+    return {
+        "mode": EXPANSION_MODE,
+        "school_key": before["school_key"],
+        "baseline_report_sha256": digest(before),
+        "expanded_report_sha256": digest(after),
+        "baseline_site_status": before["status"],
+        "expanded_site_status": after["status"],
+        "baseline_target_canonical_games": before_games,
+        "expanded_target_canonical_games": after_games,
+        "added_target_canonical_games": after_games - before_games,
+        "inherited_site_findings": inherited,
+        "removed_site_findings": eliminated,
+        "before_counts": bcounts,
+        "after_counts": acounts,
+        "site_debt_remains": after["status"] != "PASS",
+    }
+
+
+def verify_expansion_current(
+    report: dict[str, Any], proof: dict[str, Any], school: str
+) -> None:
+    """Require the independent full site gate to equal the proved expansion state."""
+    from onboarding_plan import WorkflowError
+    if (
+        proof.get("mode") != EXPANSION_MODE
+        or proof.get("school_key") != school
+        or report.get("school_key") != school
+        or digest(report) != proof.get("expanded_report_sha256")
+        or report.get("status") != proof.get("expanded_site_status")
+    ):
+        raise WorkflowError(
+            "expansion site proof does not match independent site gate"
+        )
