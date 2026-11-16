@@ -1,0 +1,58 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from houston-expansion-stage2-current-main-refresh-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "expected_protected_main_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/houston/houston-expansion-phase0-0004/successor-manifest.json",
+    "sha256": "d3b117589a3b7f1fed522866f1a6187fd8b5c7dc16ca76aea1f11ea786c70348"
+  },
+  "phase_continuation": {
+    "census_request_id": "houston-expansion-stage2-census-0002",
+    "expected_decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "proposal_request_id": "houston-expansion-stage2-proposal-0002",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/houston-expansion-stage2-current-main-refresh-0001/recommendation-map.json",
+      "sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59"
+    }
+  },
+  "previous_control_state_commit": "5e6a60662aecb06c20e092cf46bc2e367e6a4bfa",
+  "previous_control_state_sha256": "171c4381bad590e98d4069b3b95f8bb269f2cf18a58973f41fc1c52d49b7528a",
+  "request_id": "houston-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/houston/houston-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "d8e144a4c8bd6451000481b198d2314ab51f170dd259d6b7a32a0f71758b6a9b"
+  },
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228"
+}
