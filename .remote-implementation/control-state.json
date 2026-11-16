@@ -1258,7 +1258,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/houston/houston-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "fb9717397a8ff31ae23314e3e0b8dca679e07869bae351e053fff3c2782c2ce0",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/houston/houston-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "51c7f1ff25684b01b40b4063a3f669b9abe9c0fbe0a2ece764d0e6f413c77cfc",
     "merged": false,
@@ -1267,7 +1267,7 @@
     "pr_number": 630,
     "production_request_id": "houston-expansion-release-production-proof-0001",
     "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "houston-expansion-release-gate2-approval-0001",
     "school_key": "houston",
     "target_branch": "data/houston-onboarding",
