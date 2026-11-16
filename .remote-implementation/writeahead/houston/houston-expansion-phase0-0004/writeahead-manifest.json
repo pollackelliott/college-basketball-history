@@ -1,0 +1,65 @@
+{
+  "allowed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/houston/conferences.csv",
+    "schools/houston/notes.md",
+    "schools/houston/opponents.csv",
+    "schools/houston/source-games.csv",
+    "schools/houston/source-notes.md",
+    "schools/houston/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "53a2850dcd1cad6ea47038c3a4ad72342e0a70a315d200108a85e61fe72d3071",
+    "schools/houston/notes.md": "f0e75aaef45a27f95b45b8bca57a276ded80658cdfb11e0a3d21b7534e3601a4",
+    "schools/houston/opponents.csv": "d1c82da19a7ada44ae57f91f1d144a09697228f95584aefd86adb3adc3aa65b2",
+    "schools/houston/source-games.csv": "0cbd868736edb736849fae75fc48e83c89714697d3cde91903b792809d860259",
+    "schools/houston/source-notes.md": "2d15c15edb513b35d2d36280c65bf458f3ff31b8572052dc9204e74d86750c76",
+    "schools/houston/venues.csv": "7259d27cdb4d71802951940609569c75c365e2bae2e3b732282517a07596ee41"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "schools/houston/notes.md",
+    "schools/houston/opponents.csv",
+    "schools/houston/source-games.csv",
+    "schools/houston/source-notes.md",
+    "schools/houston/venues.csv"
+  ],
+  "commit_message": "Stage houston all-history expansion Phase 0",
+  "expected_target_predecessor_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50",
+  "global_lock_commit": "eeddf68ccab80ad8ee1fb8d1bc8884fec5ddbc96",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "EXPANSION_PHASE0",
+  "package_member_sha256": {
+    "conferences.csv": "59183dcd0237730b9246ce3108fa8f873d7418c80bd957f283a675e51a3f75d6",
+    "notes.md": "f0e75aaef45a27f95b45b8bca57a276ded80658cdfb11e0a3d21b7534e3601a4",
+    "opponents.csv": "d1c82da19a7ada44ae57f91f1d144a09697228f95584aefd86adb3adc3aa65b2",
+    "source-games.csv": "0cbd868736edb736849fae75fc48e83c89714697d3cde91903b792809d860259",
+    "source-notes.md": "2d15c15edb513b35d2d36280c65bf458f3ff31b8572052dc9204e74d86750c76",
+    "venues.csv": "7259d27cdb4d71802951940609569c75c365e2bae2e3b732282517a07596ee41"
+  },
+  "prepared_commit_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+  "prepared_parent_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "prepared_tree_sha": "1506fc427a8beb29174b87f5e549d77309556bb5",
+  "protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "repository_validation": "PASS",
+  "request_id": "houston-expansion-phase0-0004",
+  "request_sha256": "76aa95d702b5cb907d929661e5394a19d47ffed5011c7f397877f9d68005c4b5",
+  "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
+  "research_checkpoint_sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "3e6d4438a532ddec39ad586810f9e35131f8df454dfb0a2fdfcd4dffd52cf1a7",
+    "integration-freeze.json": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+    "phase0-preview.json": "d68abfacf0b8b432f9b8b9c5aa5d1778464a21466f020fd8dc5042208ddc0c07",
+    "stage1-independent-proof.json": "aaafd34204b81cdc3f4374ea04a14a6d34c24113fa7f964aaf2b36f38772ed6e"
+  },
+  "stage1_independent_proof_sha256": "aaafd34204b81cdc3f4374ea04a14a6d34c24113fa7f964aaf2b36f38772ed6e",
+  "target_branch": "data/houston-onboarding",
+  "venue_reconciliation_sha256": ""
+}
