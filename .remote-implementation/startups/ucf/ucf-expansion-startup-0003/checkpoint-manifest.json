@@ -1,0 +1,21 @@
+{
+  "implementation_acceptance_sha256": "9e872d66247d9db633f09d64417f53640a449f61dfc40ed3d7b22e011510a165",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_CHECKPOINT",
+  "next_operation": "EXPANSION_PHASE0",
+  "phase0_preview_sha256": "0847e2944b1be431d020b4072e8b14551bccec75ad9d8ae5dd984b010ba27f75",
+  "phase0_request_id": "ucf-expansion-phase0-0003",
+  "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "research_freeze_sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "stage1_independent_proof_sha256": "d0d627c8e08cd9c8d0d7bb00568caa9353c948872e4b00d447a7ccdc42ea853a",
+  "stage1_reconciliation_sha256": "a7fdd1df4ffa05b8e7a47e9a7e361850dfb61412b51990d24be172d2ef3ccfa8",
+  "startup_id": "ucf-expansion-startup-0003",
+  "startup_intent_sha256": "3b5398b348f83a8e908e957a172521f44d8da70a06d566d0e17fbc15f4c8bfa8",
+  "status": "READY_TO_SUBMIT_GUARDED_EXPANSION_PHASE0",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "e0fa9cc31e908529b9e13297621af8c04be76147",
+  "tracked_basketball_mutation": "NONE_PREPARATION_ONLY"
+}
