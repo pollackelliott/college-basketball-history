@@ -615,18 +615,19 @@
     "arizona-state-expansion-release-readiness-0002",
     "arizona-state-expansion-release-preview-verify-0002",
     "arizona-state-expansion-release-gate2-approval-0001",
-    "arizona-state-expansion-release-production-proof-0001"
+    "arizona-state-expansion-release-production-proof-0001",
+    "houston-expansion-phase0-0004"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43815631813:1",
+  "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "houston-expansion-phase0-0004",
+  "active_request_sha256": "76aa95d702b5cb907d929661e5394a19d47ffed5011c7f397877f9d68005c4b5",
+  "active_school_key": "houston",
+  "active_target_branch": "data/houston-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1240,8 +1241,11 @@
     "request_id": "arizona-state-expansion-release-production-proof-0001",
     "school_key": "arizona-state"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43815631813",
+  "lock_acquisition_request_commit": "a8f442279c9bc074ee57afc163d087dc03679a9d",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

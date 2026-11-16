@@ -1,0 +1,57 @@
+{
+  "authority": {
+    "expansion_phase0": true,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/Phase 0 phase. Earlier startup attempts ended before any Houston request acceptance or basketball mutation. Protected-main PR #625 generically repaired expansion Stage 1 reciprocal identity assertion handling after exact diagnosis of HOU-EXP-00022, preserving the same authenticated Houston Research Freeze. This fresh replacement authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0004, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "ChatGPT Houston ALL_HISTORY_EXPANSION Implementation lane"
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
+    "sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
+    "transport": {
+      "commit_sha": "f93dcb2e2121be8c09b5e900aee8acc2c9cc08f9",
+      "kind": "git_base64_parts",
+      "part_count": 20,
+      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0004/part-"
+    }
+  },
+  "expected_protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "084684b6dcbf88e3afd5a267088e76ff94f61ce4",
+  "previous_control_state_sha256": "d59dd0ac2d58c0632fb7e88df973c012c17e2260621c355e765be33a33a5c145",
+  "request_id": "houston-expansion-phase0-0004",
+  "research_freeze_sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
+  "schema_version": 1,
+  "school_key": "houston",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/houston/houston-expansion-startup-0004/stage1-independent-proof.json",
+    "sha256": "aaafd34204b81cdc3f4374ea04a14a6d34c24113fa7f964aaf2b36f38772ed6e"
+  },
+  "stage1_independent_proof_sha256": "aaafd34204b81cdc3f4374ea04a14a6d34c24113fa7f964aaf2b36f38772ed6e",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50"
+}
