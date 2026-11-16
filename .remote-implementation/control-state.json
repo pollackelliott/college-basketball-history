@@ -617,18 +617,19 @@
     "arizona-state-expansion-release-gate2-approval-0001",
     "arizona-state-expansion-release-production-proof-0001",
     "houston-expansion-phase0-0004",
-    "houston-expansion-stage2-census-0001"
+    "houston-expansion-stage2-census-0001",
+    "houston-expansion-stage2-proposal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "houston-expansion-stage2-proposal-0001",
+  "active_request_sha256": "07a6de554fa93f2b29bfb962819b154a2c23a4aa4a185892fd32996ce7489a6a",
+  "active_school_key": "houston",
+  "active_target_branch": "data/houston-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1242,8 +1243,11 @@
     "target_branch": "data/houston-onboarding",
     "target_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43884730741",
+  "lock_acquisition_request_commit": "64b81a022e131c6c471128137c54c863fa72e21b",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
