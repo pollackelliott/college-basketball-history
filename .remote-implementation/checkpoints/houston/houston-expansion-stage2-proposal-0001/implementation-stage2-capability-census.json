@@ -1,0 +1,91 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "discrepancy": 4
+    },
+    "decision_count": 5,
+    "decision_fields": {
+      "game_date": 1,
+      "overtime_periods": 1,
+      "score": 2,
+      "site_metadata": 1
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0124516"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 1,
+      "home_missing_location": 1,
+      "home_missing_venue": 1,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_venue": 9,
+      "public_gap_rows": 10,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap": 1,
+      "strict_home_gap_rows": 1,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2395,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap": 1,
+      "unaccounted_public_gap_rows": 1
+    },
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0101041"
+      ],
+      "home_missing_location": [
+        "CBBG-0101041"
+      ],
+      "home_missing_venue": [
+        "CBBG-0101041"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0015509",
+        "CBBG-0028322",
+        "CBBG-0034324",
+        "CBBG-0043822",
+        "CBBG-0100717",
+        "CBBG-0100718",
+        "CBBG-0100750",
+        "CBBG-0100751",
+        "CBBG-0101030"
+      ],
+      "strict_home_gap": [
+        "CBBG-0101041"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0101041"
+      ]
+    },
+    "status": "FAIL"
+  },
+  "status": "REPAIR_SCOPE_REQUIRED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 1,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 1,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 1,
+      "examples": [],
+      "topology": "unaccounted_public_gap_rows"
+    }
+  ]
+}
