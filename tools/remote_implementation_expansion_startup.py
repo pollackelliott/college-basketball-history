@@ -446,6 +446,24 @@ def _copy_payload(
     return destination, sha256_file(destination)
 
 
+def preserve_preintegration_diagnostics(
+    stage1_dir: Path,
+    proof_path: Path,
+) -> None:
+    """Preserve Stage 1 evidence before Integration Freeze can fail."""
+    DIAG.mkdir(parents=True, exist_ok=True)
+    _copy_payload(
+        stage1_dir / STAGE1_REPORT,
+        DIAG,
+        "stage1-reconciliation.json",
+    )
+    _copy_payload(
+        proof_path,
+        DIAG,
+        "stage1-independent-proof.json",
+    )
+
+
 def _dispatch_control_workflow() -> None:
     repository = str(os.environ.get("GITHUB_REPOSITORY") or "").strip()
     require(
@@ -664,6 +682,7 @@ def run_startup() -> dict[str, Any]:
     proof_path = scratch / "stage1-independent-proof.json"
     proof_path.write_bytes(canonical_json_bytes(proof))
     proof_sha = sha256_file(proof_path)
+    preserve_preintegration_diagnostics(stage1_b, proof_path)
 
     integration = scratch / "integration-freeze"
     cmd = [
