@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "houston-expansion-startup-0001",
-  "phase0_request_id": "houston-expansion-phase0-0001",
+  "startup_id": "houston-expansion-startup-0002",
+  "phase0_request_id": "houston-expansion-phase0-0002",
   "school_key": "houston",
-  "expected_protected_main_sha": "5c305396dc52c295bb957c5b1b6c8e9795ba2c2f",
+  "expected_protected_main_sha": "eceb825864342ceb9c343466efaf3e1e0c799700",
   "target_branch": "data/houston-onboarding",
   "target_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50",
   "research_freeze_sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
@@ -20,6 +20,6 @@
   },
   "creation_provenance": {
     "origin": "ChatGPT Houston ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/recovery unit. This startup authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0001, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
+    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/recovery phase. After generic diagnostic repair PR #624 merged, this refreshed startup preserves the same accepted Houston Research Freeze and authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0002, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
   }
 }
