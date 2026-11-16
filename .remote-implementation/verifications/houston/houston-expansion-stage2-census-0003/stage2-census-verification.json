@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "f70330d2329b01a292959c41f4da88ec8345103c20800934bdedb58d49415515",
+    "implementation-stage2-status.json": "6ec9a41b984d11ba6b6bef99c8d8745cfe55bd6a7fc69f511ad5bb861375f48a",
+    "plan.json": "484a4d1b52cc3685e12050ac687b94f9b245780d333692ba160e5dcbfec457c6",
+    "review.csv": "2c112841b099d1815c755ef8961fc72fe245c49b8373a5d3707d3584c8df6b67",
+    "review.md": "d66e6dfebea6f547d11bd377f2220c9ea986ad9f89bc0e2f4c442d90594c748c"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "f70330d2329b01a292959c41f4da88ec8345103c20800934bdedb58d49415515",
+    "implementation-stage2-status.json": "53850450786ba4780beff490d84eedb7ab8e115004982d7e0b740c7cb3d97080",
+    "plan.json": "ae1f3340ef9a1ffcdcf00b7ddd78a32ddde677fe357fd34a3c1d7c1a73f4ed31",
+    "review.csv": "2c112841b099d1815c755ef8961fc72fe245c49b8373a5d3707d3584c8df6b67",
+    "review.md": "30dc3be570c8cc6f0a9a3cfe5e8b4675ef155f5fcef1d017f1586ceec2d2a66f"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "houston-expansion-stage2-census-0003",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "4a15e67d5a53cbea96e67b5c14b42dd43d61bae9",
+  "target_tree_sha": "db470f44a2acd1a27e50320e994ada5053598e0b",
+  "tracked_stage2_mutation": "NONE"
+}
