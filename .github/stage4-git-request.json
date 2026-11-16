@@ -1,0 +1,7 @@
+{
+  "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "stage3b_checkpoint_sha256": "00cc3aa782e0255a115594a73dc506affb8f4fadf4ca401a12df4eea5e3e69ac",
+  "school_key": "ucf",
+  "validation_mode": "PROTECTED_MAIN"
+}
