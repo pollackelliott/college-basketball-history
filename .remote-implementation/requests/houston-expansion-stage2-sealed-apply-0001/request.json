@@ -1,0 +1,55 @@
+{
+  "approved_plan_hash": "14589bf760be7155b205d28cb07733d9faacf75becb0ffe3a330d16564a65f90",
+  "approved_plan_sha256": "2b361ccb936fec12363358cbcc205f55dd8a7c57e78b858d36470f9ca1797fc5",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": true,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from houston-expansion-stage2-gate1-seal-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "749528c0b895237490cd53733d4e08efd466aab9b0fc48d766b4e68daa275d99",
+  "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "expected_protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "filled_review_sha256": "eb8064dfbd7b998fd334a74693b5a5ff3fe3611bf50662b2b3d6bfc62ab4e832",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "ce743ddd8429d1b5d478791bce0af74932fc1a0408d9f6e04b31fe99f21bc1b2",
+  "previous_control_state_commit": "dc9e4950cbc26f1127bc362968dfed3be674a63a",
+  "previous_control_state_sha256": "5139ecf77896de60599c110cb3b95a837ea96d8e97ac5e3c40a08c8a924e4b3a",
+  "recommendation_map_sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59",
+  "request_id": "houston-expansion-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/houston/houston-expansion-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "23b6fc6916c45349d32dd96325991dc4eb69ea836d35c94a4e2270ae4c60307f"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/houston/houston-expansion-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "490f09aefcd706a604b36e5b79dc99f965c4975e5bcf07f811c4f0177ec76ca1"
+  },
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "4a15e67d5a53cbea96e67b5c14b42dd43d61bae9"
+}
