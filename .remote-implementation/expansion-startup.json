@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "houston-expansion-startup-0002",
-  "phase0_request_id": "houston-expansion-phase0-0002",
+  "startup_id": "houston-expansion-startup-0003",
+  "phase0_request_id": "houston-expansion-phase0-0003",
   "school_key": "houston",
   "expected_protected_main_sha": "eceb825864342ceb9c343466efaf3e1e0c799700",
   "target_branch": "data/houston-onboarding",
@@ -13,13 +13,13 @@
     "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "6ccafd17d534decd30500e35224982855908ea48",
-      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0001/part-",
+      "commit_sha": "32f0f343a89304d8d4e538d69c17d664fcd35d42",
+      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0003/part-",
       "part_count": 20
     }
   },
   "creation_provenance": {
     "origin": "ChatGPT Houston ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/recovery phase. After generic diagnostic repair PR #624 merged, this refreshed startup preserves the same accepted Houston Research Freeze and authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0002, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
+    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/recovery phase. After PR #624 and a pre-Stage-1 transport-predecessor startup-envelope failure with no accepted request or basketball mutation, this corrected replacement preserves the same authenticated Houston Research Freeze and authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0003, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
   }
 }
