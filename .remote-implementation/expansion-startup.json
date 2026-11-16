@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "ucf-expansion-startup-0001",
-  "phase0_request_id": "ucf-expansion-phase0-0001",
+  "startup_id": "ucf-expansion-startup-0002",
+  "phase0_request_id": "ucf-expansion-phase0-0002",
   "school_key": "ucf",
   "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
   "target_branch": "data/ucf-onboarding",
@@ -13,13 +13,17 @@
     "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "77c733782ae0a890454843323f243de4e70b341e",
+      "commit_sha": "a7f59acefaf3dcf0d9a042bae3d6be3333ccdd68",
       "path_prefix": ".remote-implementation/transports/ucf/ucf-expansion-startup-0001/part-",
       "part_count": 1
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION Implementation lane, explicit owner-authorized startup 2026-11-16",
-    "authorization": "Owner explicitly designated UCF as the sole serialized Implementation school following Houston COMPLETE and authorized only the permanent repository-owned UCF expansion startup coordinator, exact 377-game v2 Research Freeze, existing target predecessor, current-main acceptance gate, deterministic Stage 1, Integration Freeze, and guarded EXPANSION_PHASE0 through independent fresh verification. 27 exact HOME-location exceptions and 90 cleared NON_D1 identities remain settled. No new Research, inherited rewrite, top-level scope change, Stage 2, Owner Gate 1/2, release, merge, or Production authority."
+    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION Implementation lane; exact blocked startup #43971688777 successor",
+    "authorization": "Owner's explicit November 16 UCF startup-through-Phase-0 authorization persists. The exact prior startup stopped read-only at VENUE_IDENTITY_RECONCILIATION_REQUIRED before Phase 0. Owner-accepted immutable UCF Research Freeze v2 identified five definite protected-main physical reuse candidates; each now maps to one matching current-main global physical venue with identical name and locality, using an exact five-row immutable representation-only spec. This replacement startup preserves the same frozen history, original target, top-level scope 1984-85+, all 27 HOME exceptions and 90 cleared NON_D1 identities. Only deterministic startup, Integration Freeze and guarded EXPANSION_PHASE0 through independent fresh verification are authorized; no Stage 2, Owner Gate 1/2, research reopening, release, merge, or protected-main mutation is authorized."
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/venue-reconciliation/ucf/ucf-expansion-startup-0002.json",
+    "sha256": "25c332b17e33c5e587a0bf20e93fc241c421808f9459f444060f2a22beec33a9"
   }
 }
