@@ -1,0 +1,63 @@
+{
+  "changed_file_sha256": {
+    "tests/test_correction_site_nonregression.py": "7f9887ee5fd1727064b8dd9b5c384912eb65872de0b76558d27b75c22364d2d8",
+    "tools/correction_site_nonregression.py": "94b7268a836fc992fd755330bba63b6121c2464d7f124c2c83bb74cb837fd16d",
+    "tools/onboard_school.py": "f02991e1816db26f15302a718cc6ab9939c3f49f7062573aeb599893de7091b3"
+  },
+  "changed_paths": [
+    "tests/test_correction_site_nonregression.py",
+    "tools/correction_site_nonregression.py",
+    "tools/onboard_school.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+  "global_lock_commit": "b2b608da1467f8e372f1f7da55847db3bf994038",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "tests/test_correction_site_nonregression.py",
+    "tools/correction_site_nonregression.py",
+    "tools/onboard_school.py"
+  ],
+  "merge_base_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "59183dcd0237730b9246ce3108fa8f873d7418c80bd957f283a675e51a3f75d6",
+    "notes.md": "f0e75aaef45a27f95b45b8bca57a276ded80658cdfb11e0a3d21b7534e3601a4",
+    "opponents.csv": "d1c82da19a7ada44ae57f91f1d144a09697228f95584aefd86adb3adc3aa65b2",
+    "source-games.csv": "0cbd868736edb736849fae75fc48e83c89714697d3cde91903b792809d860259",
+    "source-notes.md": "2d15c15edb513b35d2d36280c65bf458f3ff31b8572052dc9204e74d86750c76",
+    "venues.csv": "7259d27cdb4d71802951940609569c75c365e2bae2e3b732282517a07596ee41"
+  },
+  "predecessor_authority_kind": "PHASE0_SUCCESSOR",
+  "prepared_commit_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228",
+  "prepared_main_parent_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
+  "prepared_parent_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+  "prepared_parents": [
+    "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+    "790e0c130b62c068e417e83909882a4b965a58a3"
+  ],
+  "prepared_tree_sha": "e1312876d108c556331a02851a1ef44b336a5bff",
+  "protected_main_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
+  "refresh_proof_sha256": "78ca257b152d14008fbf5d3831a03d1766e578b5129206f00739c97435b5a81b",
+  "repository_validation": "PASS",
+  "request_id": "houston-expansion-stage2-current-main-refresh-0001",
+  "request_sha256": "0064696042adfdfa76e38519fa3ae70c1a4e7eb4d202bca999f4149e70ef252c",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "sidecars": {
+    "integration-freeze.json": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+    "refresh-proof.json": "78ca257b152d14008fbf5d3831a03d1766e578b5129206f00739c97435b5a81b"
+  },
+  "target_branch": "data/houston-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "schools/houston/notes.md",
+    "schools/houston/opponents.csv",
+    "schools/houston/source-games.csv",
+    "schools/houston/source-notes.md",
+    "schools/houston/venues.csv"
+  ]
+}
