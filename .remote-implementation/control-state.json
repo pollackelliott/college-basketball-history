@@ -636,7 +636,7 @@
     "ucf-expansion-phase0-0003"
   ],
   "active_expected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-  "active_lock_commit": null,
+  "active_lock_commit": "3b6a4473ed6434a07e0e8709c535e7d3f00b5b03",
   "active_lock_owner": "github-actions:43980353826:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
