@@ -625,7 +625,7 @@
     "houston-expansion-stage2-current-main-refresh-0002"
   ],
   "active_expected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
-  "active_lock_commit": null,
+  "active_lock_commit": "b7142b9992073f45f7feed1bbe36009ef3098e99",
   "active_lock_owner": "github-actions:43936390847:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
