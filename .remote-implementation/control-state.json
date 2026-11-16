@@ -1238,11 +1238,11 @@
   "current_sequence": 595,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "houston-expansion-stage2-current-main-refresh-0002",
     "school_key": "houston",
     "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
