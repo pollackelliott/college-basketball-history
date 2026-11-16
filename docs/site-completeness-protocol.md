@@ -35,9 +35,12 @@ The site census covers at least:
 
 ### Home rows
 
-Every in-scope `SOURCE_PROGRAM_HOME` row must resolve to complete city/state geography
-before `RESEARCH_FROZEN`. Exact physical venue identity is the expected result and
-remains an active source-school research responsibility.
+Every in-scope `SOURCE_PROGRAM_HOME` row must ordinarily resolve to complete city/state
+geography before `RESEARCH_FROZEN`. Exact physical venue identity is the expected result
+and remains an active source-school research responsibility. The only locality exception is
+an exact protected-main owner-authority entry under
+`data/reference/research-home-location-exceptions.csv`; it may be used only after bounded
+research exhaustion has established HOME but cannot support either locality or building.
 
 The lane must use documented facility chronology, predecessor buildings, transitions,
 temporary sites, alternate sites, and game-level/reciprocal evidence before accepting a
@@ -151,10 +154,13 @@ Allowed `site_research_status` values:
 - `RESEARCHED_PARTIAL` — some site information is established, but one or more material site fields remain unresolved;
 - `RESEARCHED_UNRESOLVED` — the relevant non-home site fact could not be safely established after deliberate research;
 - `RESEARCHED_UNRESOLVED_HOME_VENUE` — a source-program HOME row has independently established H/A/N and complete city/state, but exhaustive historical research cannot support a specific physical venue identity.
+- `RESEARCHED_UNRESOLVED_HOME_LOCATION` — an exact protected-main registered source-program HOME row has independently established H/A/N, but bounded research exhaustion cannot support either city/state or physical venue; the package may not self-authorize this status.
 
 `site_research_basis` must briefly identify the evidence checked or why stronger certainty is unsupported. It should be specific enough for another researcher or the Implementation lane to understand the unresolved state. Repeating one well-supported era-level basis across several rows is acceptable when the same research conclusion genuinely applies to all of them.
 
 The dedicated HOME venue status is deliberately narrower than the other research statuses. It is valid only when `curated_site_type=SOURCE_PROGRAM_HOME`, `curated_venue_name` is blank, both city and state are populated, a substantive basis is present, and the row is not an NCAA Tournament game. It may not be used when agreeing target or reciprocal evidence already supplies a usable curated venue identity.
+
+`RESEARCHED_UNRESOLVED_HOME_LOCATION` is narrower still. It is valid only when venue, city, and state are all blank; the row exactly matches the protected-main owner-authority registry (school, stable game ID, season/date, opponent identity, score pair, and HOME classification); the registry preserves the exact approved checkpoint/ledger/population hashes; the research basis is substantive; the game is not NCAA; and no known agreeing evidence supplies stronger site facts. Unregistered HOME locality blanks remain blockers.
 
 Examples for non-home unresolved research:
 
@@ -183,7 +189,7 @@ The columns are source-research metadata. They are not canonical basketball fact
 
 - any exact source-program HOME venue conflicts with the documented HOME relationship
   chronology without a supported HOME relationship/exception;
-- any source-program HOME row lacks complete city/state;
+- any source-program HOME row lacks complete city/state without an exact valid `RESEARCHED_UNRESOLVED_HOME_LOCATION` protected-main authority entry;
 - any source-program HOME venue blank lacks a valid `RESEARCHED_UNRESOLVED_HOME_VENUE` research finding;
 - any other material site-gap row is merely blank and unaccounted, including explicit
   opponent-home source venue evidence that was silently dropped;
