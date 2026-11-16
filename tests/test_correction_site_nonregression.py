@@ -5,7 +5,14 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
-from correction_site_nonregression import prove, digest, verify_current
+from correction_site_nonregression import (
+    EXPANSION_MODE,
+    digest,
+    prove,
+    prove_expansion,
+    verify_current,
+    verify_expansion_current,
+)
 from onboarding_plan import WorkflowError
 from onboard_school import correction_gate_kwargs_from_manifest, pr_body
 
@@ -103,6 +110,84 @@ class CorrectionSiteNonregressionTests(unittest.TestCase):
                     correction_gate_kwargs_from_manifest(corrupt, "tennessee")
                 with self.assertRaisesRegex(WorkflowError, "invalid sealed correction"):
                     correction_gate_kwargs_from_manifest(manifest, "georgetown")
+
+    def test_expansion_nonregression_allows_inherited_debt_while_universe_grows(self):
+        before = report()
+        after = report()
+        for value in (before, after):
+            value["school_key"] = "houston"
+            value["history_start_season"] = "1950-1951"
+            value["source_validation_scope"] = {
+                "mode": "FULL_SOURCE_PACKAGE",
+                "scoped_source_games": 2394,
+            }
+            value["source_site_counts"] = {"material_gap_rows": 11}
+        before["counts"]["target_canonical_games"] = 2296
+        after["counts"]["target_canonical_games"] = 2395
+        proof = prove_expansion(before, after)
+        self.assertEqual(proof["mode"], EXPANSION_MODE)
+        self.assertEqual(proof["added_target_canonical_games"], 99)
+        self.assertTrue(proof["site_debt_remains"])
+        verify_expansion_current(after, proof, "houston")
+
+    def test_expansion_nonregression_rejects_new_site_failure(self):
+        before = report(gaps=("CBBG-OLD",))
+        after = report(gaps=("CBBG-OLD", "CBBG-NEW"))
+        for value in (before, after):
+            value["school_key"] = "houston"
+            value["history_start_season"] = "1950-1951"
+            value["source_validation_scope"] = {
+                "mode": "FULL_SOURCE_PACKAGE",
+                "scoped_source_games": 2394,
+            }
+            value["source_site_counts"] = {"material_gap_rows": 11}
+        before["counts"]["target_canonical_games"] = 2296
+        after["counts"]["target_canonical_games"] = 2395
+        with self.assertRaisesRegex(WorkflowError, "expansion introduced site failure"):
+            prove_expansion(before, after)
+
+    def test_release_gate_carries_valid_expansion_proof(self):
+        before = report()
+        after = report()
+        for value in (before, after):
+            value["school_key"] = "houston"
+            value["history_start_season"] = "1950-1951"
+            value["source_validation_scope"] = {
+                "mode": "FULL_SOURCE_PACKAGE",
+                "scoped_source_games": 2394,
+            }
+            value["source_site_counts"] = {"material_gap_rows": 11}
+        before["counts"]["target_canonical_games"] = 2296
+        after["counts"]["target_canonical_games"] = 2395
+        proof = prove_expansion(before, after)
+        manifest = {
+            "school_key": "houston",
+            "summary": {"already_public": True},
+            "execution": {"expansion_site_nonregression": proof},
+        }
+        kwargs = correction_gate_kwargs_from_manifest(manifest, "houston")
+        self.assertEqual(kwargs["expansion_site_proof"]["mode"], EXPANSION_MODE)
+        verify_expansion_current(after, kwargs["expansion_site_proof"], "houston")
+
+    def test_expansion_pr_body_reports_nonregression(self):
+        body = pr_body(
+            {
+                "school_key": "houston",
+                "approved_plan_hash": "abc123",
+                "summary": {
+                    "already_public": True,
+                    "source_rows": 2394,
+                    "pre_cutoff_rows": 103,
+                    "existing_game_matches": 2295,
+                    "new_canonical_games": 99,
+                },
+                "decisions": [],
+            },
+            ["data/canonical/games.csv"],
+            execution={"expansion_site_nonregression": {"mode": EXPANSION_MODE}},
+        )
+        self.assertIn("All-History expansion site nonregression — PASS", body)
+        self.assertNotIn("implementation site completeness — PASS", body)
 
     def test_identity_only_pr_body_reports_correction_nonregression(self):
         body = pr_body(
