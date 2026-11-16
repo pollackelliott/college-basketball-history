@@ -96,3 +96,48 @@ The owner approved the complete 28-identity Houston working `NON_D1` scan on 202
 
 Protected `main` had advanced beyond the original research base by Stage 6. That change does not authorize a Research-lane current-main numeric/reference rebase. The authoritative shared-reference rebase remains required in serialized Implementation before tracked Phase 0.
 
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Houston All-History Expansion — Source Notes
+
+Research base SHA: 419c78df7ca4c30df501657c079445d0bb7cbdee
+Researched inception: 1945-1946
+
+The 103 supplemental source rows preserve Houston's accepted literal year-by-year result evidence, exact source locators, raw text, scores/results, and site-research accounting. Stage 1 used Houston official media-guide/history material as the target-source backbone and preserved reciprocal conflicts field-specifically rather than replacing target assertions.
+
+Site research added institutional evidence for Jeppesen Fieldhouse as Houston basketball home during 1946-1966, and exact NAIB Tournament site evidence placing the four 1946/1947 postseason games at Municipal Auditorium in Kansas City, Missouri. Opponent identities were researched against the immutable program registry, accepted project identities, and institutional evidence as needed.
+
+The frozen support tables intentionally distinguish NEW_SUPPLEMENTAL identities from hash-bound EXTEND_INHERITED rows. Extensions change only contract-permitted additive count/chronology/note fields; inherited canonical identity, D1 classification, and baseline historical authority are preserved.
+
+Stage 4 source-notes follow for detailed source/provenance context:
+
+# houston source notes
+
+Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.
+
+## Research coverage declaration
+
+- Primary-source historical results cutoff: 2025-2026
+- Required completed-season cutoff: 2025-2026
+- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.
+
+## Durable row-level source families
+
+
+## Row-level source URLs
+
+- https://uhcougars.com/documents/download/2026/11/4/MBB_2627_115_192_Small.pdf
+
+## Durable source register: stage3b-source-register.json
+
+- source — https://uhcougars.com/documents/download/2026/11/4/MBB_2627_Complete_Small.pdf
+- source — https://www.naia.org/about/
+- source — https://jbuathletics.com/facilities/municipal-auditorium/3
+- source — https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/indstate.sidearmsports.com/documents/2015/10/23/1516recordbook.pdf
+- source — https://uhcougars.com/news/2023/6/23/general-houston-athletics-ready-to-enter-new-era-in-its-conference-history
+- source — https://uhcougars.com/documents/download/2018/6/29/08_mg_pg_152_178.pdf
+- source — https://github.com/pollackelliott/college-basketball-history/blob/419c78df7ca4c30df501657c079445d0bb7cbdee/data/reference/venues.csv
+

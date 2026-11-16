@@ -226,3 +226,24 @@ Predicted-publication challenge identified a finite Houston H/A/N conflict popul
 
 Coleman Coliseum reuses existing global physical identity VEN-000048. Houston-local VEN-000453 no longer claims the bare `Municipal Auditorium` alias; Kansas City Municipal Auditorium remains VEN-000143.
 
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Houston All-History Expansion Research Freeze
+
+Workflow: ALL_HISTORY_EXPANSION
+School key: houston
+Research base SHA: 419c78df7ca4c30df501657c079445d0bb7cbdee
+Researched institutional inception: 1945-1946
+
+This artifact is supplemental Research authority only. The accepted Houston baseline at the exact research_base_sha is inherited authority and is not re-researched or reproduced here. The accepted top-level publication scope remains 1950-1951+; expansion adds institutional varsity history from 1945-1946 through 1949-1950 without changing top-level classification.
+
+Accepted supplemental universe: 103 competitive varsity games, 63-40, across five ACTIVE expansion-required seasons: 14, 22, 22, 22, and 23 games. Four lower-level NAIB Tournament games remain generic POSTSEASON and are exactly sited at Municipal Auditorium, Kansas City, Missouri. Regular-season site accounting is 51 SOURCE_PROGRAM_HOME at Jeppesen Fieldhouse and 48 OPPONENT_HOME, with zero UNKNOWN and zero regular-season neutral rows.
+
+Stage 5 owner NON_D1 sanity scan was explicitly approved for all 14 distinct NON_D1 identities / 40 games after a bounded follow-up confirmed that Houston's Southwestern opponent is Southwestern University in Georgetown, Texas, not today's Texas State. Stage 6 adversarial self-challenge passed with zero repairs, zero blocking residuals, zero current-program key splits, zero ambiguous current-program matches, zero ambiguous physical venue identities, and zero material site gaps.
+
+The five preserved residual rows are terminal NONBLOCKING_RESEARCHED source/reciprocal provenance conflicts; none changes accepted game identity, inclusion, result, H/A/N, or publication-safe site facts. There are no baseline correction questions that block expansion.
+
+Later serialized Implementation must authenticate this immutable freeze, rebase against current protected main, reconcile the four pre-existing reciprocal canonical identities, and materialize baseline+delta exactly once. Research Freeze itself performs no repository mutation.
