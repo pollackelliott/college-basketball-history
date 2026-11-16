@@ -57,24 +57,51 @@ def candidate_changed_paths(
     candidate_repo: Path,
     base_sha: str,
     candidate_sha: str,
-) -> list[str]:
-    ancestry = _run_git(
-        candidate_repo,
-        "merge-base",
-        "--is-ancestor",
-        base_sha,
-        candidate_sha,
+) -> tuple[list[str], str]:
+    """Compare actual tooling delta against authenticated *current* protected main.
+
+    The blocked Stage 2 request retains an immutable historical main SHA; later
+    merged repository changes are not candidate PR changes. Both SHA histories
+    must be anchored, and current main must be an ancestor of the candidate.
+    """
+    if _run_git(
+        candidate_repo, "merge-base", "--is-ancestor", base_sha, candidate_sha,
         check=False,
-    )
-    if ancestry.returncode != 0:
+    ).returncode != 0:
         raise Stop("CANDIDATE_REHEARSAL_BASE_NOT_ANCESTOR")
+
+    live_ref = _run_git(
+        candidate_repo, "ls-remote", "origin", "refs/heads/main",
+    ).stdout.strip().splitlines()
+    if len(live_ref) != 1:
+        raise Stop("CANDIDATE_REHEARSAL_MAIN_REF_MISSING")
+    fields = live_ref[0].split()
+    if len(fields) != 2 or fields[1] != "refs/heads/main":
+        raise Stop("CANDIDATE_REHEARSAL_MAIN_REF_INVALID")
+    current_main_sha = fields[0]
+    if len(current_main_sha) != 40 or any(c not in "0123456789abcdef" for c in current_main_sha):
+        raise Stop("CANDIDATE_REHEARSAL_MAIN_SHA_INVALID")
+    local_main_sha = _run_git(
+        candidate_repo, "rev-parse", "refs/remotes/origin/main",
+    ).stdout.strip()
+    if local_main_sha != current_main_sha:
+        raise Stop("CANDIDATE_REHEARSAL_STALE_MAIN_FETCH")
+
+    if _run_git(
+        candidate_repo, "merge-base", "--is-ancestor", base_sha, current_main_sha,
+        check=False,
+    ).returncode != 0:
+        raise Stop("CANDIDATE_REHEARSAL_AUTHORITY_BASE_NOT_MAIN_ANCESTOR")
+    if _run_git(
+        candidate_repo, "merge-base", "--is-ancestor", current_main_sha, candidate_sha,
+        check=False,
+    ).returncode != 0:
+        raise Stop("CANDIDATE_REHEARSAL_CANDIDATE_NOT_BASED_ON_CURRENT_MAIN")
+
     cp = _run_git(
-        candidate_repo,
-        "diff",
-        "--name-only",
-        f"{base_sha}..{candidate_sha}",
+        candidate_repo, "diff", "--name-only", f"{current_main_sha}..{candidate_sha}",
     )
-    return [line.strip() for line in cp.stdout.splitlines() if line.strip()]
+    return [line.strip() for line in cp.stdout.splitlines() if line.strip()], current_main_sha
 
 
 def validate_candidate_scope(paths: list[str]) -> None:
@@ -241,7 +268,7 @@ def run_candidate_rehearsal(
     base_sha = str(request.get("expected_protected_main_sha") or "")
     if len(base_sha) != 40:
         raise Stop("CANDIDATE_REHEARSAL_BASE_SHA_INVALID")
-    changed_paths = candidate_changed_paths(candidate_runtime, base_sha, candidate_sha)
+    changed_paths, scope_main_sha = candidate_changed_paths(candidate_runtime, base_sha, candidate_sha)
     validate_candidate_scope(changed_paths)
 
     authority = verify_stage2_proposal_authority(
@@ -330,6 +357,7 @@ def run_candidate_rehearsal(
         "school_key": request["school_key"],
         "candidate_sha": candidate_sha,
         "base_protected_main_sha": base_sha,
+        "candidate_scope_main_sha": scope_main_sha,
         "control_commit": control_commit,
         "proposal_checkpoint_path": proposal_checkpoint_path,
         "proposal_checkpoint_sha256": manifest.get("checkpoint_manifest_sha256"),

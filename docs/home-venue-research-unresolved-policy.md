@@ -149,3 +149,13 @@ from geography. It exists only so canonical reconciliation can preserve reciproc
 authority, explicit supported HOME locality, and a truthful unresolved physical venue while
 the accepted target-source H/A/N uncertainty remains visible.
 
+
+## Exact owner-authorized HOME locality exception
+
+Control Center-authorized on 2026-11-16 for exact research-exhausted cases where HOME is independently established but neither locality nor building can be supported without inference.
+
+This is not an expansion of the ordinary unresolved-building safety valve. Ordinary HOME city/state remains mandatory. The exception exists only through the protected-main registry `data/reference/research-home-location-exceptions.csv`, whose entries are bound to exact school/game identity and the owner-approved checkpoint, authoritative-ledger, and exception-population hashes.
+
+A qualifying source row uses `site_research_status=RESEARCHED_UNRESOLVED_HOME_LOCATION` and must have blank `curated_venue_name`, blank `city`, blank `state`, a substantive research basis, independently established `SOURCE_PROGRAM_HOME`, and non-NCAA game type. The package cannot create authority merely by writing that status. Known agreeing locality or venue evidence must be propagated and defeats the corresponding blank-field exception.
+
+Canonical publication preserves an explicit `[RESEARCHED_UNRESOLVED_HOME_LOCATION source=<school>/<source_game_id>]` provenance marker while venue and locality remain blank. If later accepted evidence supplies complete locality but not a building, the canonical result may degrade safely to the ordinary unresolved-HOME-venue representation rather than discarding the stronger locality evidence.

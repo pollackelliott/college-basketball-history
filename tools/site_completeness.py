@@ -15,12 +15,18 @@ import re
 from collections import Counter, defaultdict
 from typing import Any, Iterable
 
+from home_location_exception_authority import (
+    RESEARCHED_UNRESOLVED_HOME_LOCATION_STATUS,
+    owner_authorized_home_location_exception,
+)
+
 
 RESEARCHED_UNRESOLVED_HOME_VENUE_STATUS = "RESEARCHED_UNRESOLVED_HOME_VENUE"
 ALLOWED_SITE_RESEARCH_STATUSES = {
     "RESEARCHED_PARTIAL",
     "RESEARCHED_UNRESOLVED",
     RESEARCHED_UNRESOLVED_HOME_VENUE_STATUS,
+    RESEARCHED_UNRESOLVED_HOME_LOCATION_STATUS,
 }
 POSTSEASON_TYPES_REQUIRING_ACCOUNTING = {
     "CONFERENCE_TOURNAMENT",
@@ -523,6 +529,22 @@ def researched_unresolved_home_venue(row: dict[str, str]) -> bool:
     )
 
 
+def researched_unresolved_home_location(row: dict[str, str]) -> bool:
+    """Validate the exact protected-main owner-authorized HOME locality exception."""
+
+    return (
+        row.get("curated_site_type", "").strip().upper() == "SOURCE_PROGRAM_HOME"
+        and not row.get("curated_venue_name", "").strip()
+        and not row.get("city", "").strip()
+        and not row.get("state", "").strip()
+        and row.get("site_research_status", "").strip().upper()
+        == RESEARCHED_UNRESOLVED_HOME_LOCATION_STATUS
+        and bool(row.get("site_research_basis", "").strip())
+        and row.get("curated_game_type", "").strip().upper() != "NCAA_TOURNAMENT"
+        and owner_authorized_home_location_exception(row)
+    )
+
+
 def source_site_completeness_report(
     game_fields: Iterable[str],
     games: Iterable[dict[str, str]],
@@ -546,9 +568,11 @@ def source_site_completeness_report(
     archaeology. NCAA Tournament rows remain governed by the stricter non-waivable
     NCAA gate.
 
-    Research metadata may account for most material gaps. A HOME location gap is never
-    waivable. A HOME venue-only gap is waivable only through the dedicated
-    RESEARCHED_UNRESOLVED_HOME_VENUE status after exhaustive research.
+    Research metadata may account for most material gaps. HOME location remains mandatory
+    except for an exact protected-main owner-authorized row whose HOME classification is
+    established and whose locality/building research is exhausted. A HOME venue-only gap
+    is waivable through RESEARCHED_UNRESOLVED_HOME_VENUE; the rarer exact-row location
+    exception uses RESEARCHED_UNRESOLVED_HOME_LOCATION.
     """
 
     fields = set(game_fields)
@@ -572,14 +596,17 @@ def source_site_completeness_report(
     unaccounted_gap_rows = 0
     home_publication_blocker_rows = 0
     researched_unresolved_home_venue_rows = 0
+    researched_unresolved_home_location_rows = 0
     invalid_status_rows: list[str] = []
     missing_basis_rows: list[str] = []
     orphan_basis_rows: list[str] = []
     invalid_home_exception_rows: list[str] = []
+    invalid_home_location_exception_rows: list[str] = []
     unnecessary_status_rows: list[str] = []
     unaccounted_examples: list[dict[str, Any]] = []
     home_blocker_examples: list[dict[str, Any]] = []
     home_exception_examples: list[dict[str, Any]] = []
+    home_location_exception_examples: list[dict[str, Any]] = []
 
     for line_number, row in enumerate(rows, start=2):
         source_game_id = row.get("source_game_id", "").strip() or f"line {line_number}"
@@ -588,6 +615,7 @@ def source_site_completeness_report(
         status = row.get("site_research_status", "").strip().upper()
         basis = row.get("site_research_basis", "").strip()
         home_exception = researched_unresolved_home_venue(row)
+        home_location_exception = researched_unresolved_home_location(row)
 
         if status and status not in ALLOWED_SITE_RESEARCH_STATUSES:
             invalid_status_rows.append(source_game_id)
@@ -597,6 +625,11 @@ def source_site_completeness_report(
             orphan_basis_rows.append(source_game_id)
         if status == RESEARCHED_UNRESOLVED_HOME_VENUE_STATUS and not home_exception:
             invalid_home_exception_rows.append(source_game_id)
+        if (
+            status == RESEARCHED_UNRESOLVED_HOME_LOCATION_STATUS
+            and not home_location_exception
+        ):
+            invalid_home_location_exception_rows.append(source_game_id)
 
         if not categories:
             if status or basis:
@@ -612,7 +645,21 @@ def source_site_completeness_report(
         has_home_gap = any(
             category in HOME_PUBLICATION_BLOCKER_CATEGORIES for category in categories
         )
-        if has_home_gap and home_exception:
+        if has_home_gap and home_location_exception:
+            researched_unresolved_home_location_rows += 1
+            if len(home_location_exception_examples) < example_limit:
+                home_location_exception_examples.append(
+                    {
+                        "source_game_id": source_game_id,
+                        "season_label": season,
+                        "categories": sorted(
+                            category
+                            for category in categories
+                            if category in HOME_PUBLICATION_BLOCKER_CATEGORIES
+                        ),
+                    }
+                )
+        elif has_home_gap and home_exception:
             researched_unresolved_home_venue_rows += 1
             if len(home_exception_examples) < example_limit:
                 home_exception_examples.append(
@@ -659,8 +706,9 @@ def source_site_completeness_report(
         errors.append(
             "invalid site_research_status on "
             f"{len(invalid_status_rows):,} row(s); allowed values are "
-            "RESEARCHED_PARTIAL, RESEARCHED_UNRESOLVED, and "
-            "RESEARCHED_UNRESOLVED_HOME_VENUE; examples: "
+            "RESEARCHED_PARTIAL, RESEARCHED_UNRESOLVED, "
+            "RESEARCHED_UNRESOLVED_HOME_VENUE, and "
+            "RESEARCHED_UNRESOLVED_HOME_LOCATION; examples: "
             + ", ".join(invalid_status_rows[:example_limit])
         )
     if missing_basis_rows:
@@ -683,6 +731,15 @@ def source_site_completeness_report(
             f"{len(invalid_home_exception_rows):,} row(s) violate that shape; examples: "
             + ", ".join(invalid_home_exception_rows[:example_limit])
         )
+    if invalid_home_location_exception_rows:
+        errors.append(
+            "RESEARCHED_UNRESOLVED_HOME_LOCATION is valid only for an exact "
+            "protected-main registered SOURCE_PROGRAM_HOME row with blank venue and "
+            "blank city/state, substantive research basis, non-NCAA game type, and "
+            "matching immutable identity fields; "
+            f"{len(invalid_home_location_exception_rows):,} row(s) violate that shape; examples: "
+            + ", ".join(invalid_home_location_exception_rows[:example_limit])
+        )
     if home_publication_blocker_rows:
         rendered = "; ".join(
             f"{item['source_game_id']} ({item['season_label'] or 'season unknown'}: "
@@ -693,8 +750,9 @@ def source_site_completeness_report(
         errors.append(
             f"{home_publication_blocker_rows:,} source-program HOME row(s) are missing "
             "venue and/or complete location without a valid historical-unrecoverable "
-            "venue exception. Complete location is always mandatory; ordinary "
-            "RESEARCHED_PARTIAL/RESEARCHED_UNRESOLVED cannot waive HOME completeness. "
+            "venue exception or exact protected-main owner-authorized HOME locality "
+            "exception. Ordinary RESEARCHED_PARTIAL/RESEARCHED_UNRESOLVED cannot waive "
+            "HOME completeness. "
             f"Examples: {rendered}"
         )
     if unaccounted_gap_rows:
@@ -727,6 +785,7 @@ def source_site_completeness_report(
             "unaccounted_gap_rows": unaccounted_gap_rows,
             "home_publication_blocker_rows": home_publication_blocker_rows,
             "researched_unresolved_home_venue_rows": researched_unresolved_home_venue_rows,
+            "researched_unresolved_home_location_rows": researched_unresolved_home_location_rows,
         },
         "by_decade": {
             category: dict(sorted(counts.items()))
@@ -739,4 +798,5 @@ def source_site_completeness_report(
         "unaccounted_examples": unaccounted_examples,
         "home_publication_blocker_examples": home_blocker_examples,
         "researched_unresolved_home_venue_examples": home_exception_examples,
+        "researched_unresolved_home_location_examples": home_location_exception_examples,
     }

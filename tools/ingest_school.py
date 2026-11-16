@@ -64,7 +64,12 @@ from program_history import (
     partition_stage2_source_rows,
     source_declares_ncaa_nonappearance_qualifier,
 )
-from site_completeness import has_supported_foreign_locality, researched_unresolved_home_venue
+from home_location_exception_authority import HOME_LOCATION_EXCEPTION_MARKER
+from site_completeness import (
+    has_supported_foreign_locality,
+    researched_unresolved_home_location,
+    researched_unresolved_home_venue,
+)
 from venue_reference import (
     load_global_venue_reference,
     school_venue_reference_errors,
@@ -1582,6 +1587,31 @@ def canonical_enrichment_candidates(
             result.append(("notes", new_notes))
 
     if (
+        researched_unresolved_home_location(source)
+        and not canonical.get("venue_key", "").strip()
+        and not canonical.get("venue_id", "").strip()
+    ):
+        city = canonical.get("site_city", "").strip()
+        state = canonical.get("site_state", "").strip()
+        marker = ""
+        if city and state:
+            marker = (
+                "[RESEARCHED_UNRESOLVED_HOME_VENUE "
+                f"source={source.get('source_program_key', '').strip()}/"
+                f"{source.get('source_game_id', '').strip()}]"
+            )
+        elif not city and not state:
+            marker = (
+                f"{HOME_LOCATION_EXCEPTION_MARKER} "
+                f"source={source.get('source_program_key', '').strip()}/"
+                f"{source.get('source_game_id', '').strip()}]"
+            )
+        if marker:
+            new_notes = append_note(canonical.get("notes", ""), marker)
+            if new_notes != canonical.get("notes", ""):
+                result.append(("notes", new_notes))
+
+    if (
         source_declares_ncaa_nonappearance_qualifier(source)
         and not canonical.get("postseason_round", "").strip()
     ):
@@ -1734,6 +1764,14 @@ def build_new_canonical(
         notes = append_note(
             notes,
             "[RESEARCHED_UNRESOLVED_HOME_VENUE "
+            f"source={source.get('source_program_key', '').strip()}/"
+            f"{source.get('source_game_id', '').strip()}]",
+        )
+
+    if researched_unresolved_home_location(source):
+        notes = append_note(
+            notes,
+            f"{HOME_LOCATION_EXCEPTION_MARKER} "
             f"source={source.get('source_program_key', '').strip()}/"
             f"{source.get('source_game_id', '').strip()}]",
         )
