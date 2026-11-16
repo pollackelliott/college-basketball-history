@@ -1,0 +1,27 @@
+{
+  "action_counts": {
+    "APPLY_CANONICAL_PATCH": 1,
+    "KEEP_CANONICAL": 4
+  },
+  "approved_plan_hash_preview": "46b3070ce49be27926a3fa4fd67e50557e23db375d0983f8a68bbd71597d9d16",
+  "decision_count": 5,
+  "decision_id_set_sha256": "749528c0b895237490cd53733d4e08efd466aab9b0fc48d766b4e68daa275d99",
+  "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "filled_review_sha256": "eb8064dfbd7b998fd334a74693b5a5ff3fe3611bf50662b2b3d6bfc62ab4e832",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_VERIFICATION",
+  "owner_gate_1_approval_sha256": "ce743ddd8429d1b5d478791bce0af74932fc1a0408d9f6e04b31fe99f21bc1b2",
+  "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "recommendation_map_sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59",
+  "remote_stage2_gate1_fill_equivalence": "PASS",
+  "request_id": "houston-expansion-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "stage2_proposal_checkpoint_sha256": "acdc0a247919383c74c38d875d9d17195e6246cf54ee3f736259985ff77d63eb",
+  "stage2_proposal_verification_sha256": "7fd291ae52483ca3871ffdb1da6942d4912961e33f3d1926b38b8c799380e748",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "4a15e67d5a53cbea96e67b5c14b42dd43d61bae9",
+  "target_tree_sha": "db470f44a2acd1a27e50320e994ada5053598e0b",
+  "tracked_stage2_mutation": "NONE"
+}
