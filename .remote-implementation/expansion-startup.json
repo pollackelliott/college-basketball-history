@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "ucf-expansion-startup-0002",
-  "phase0_request_id": "ucf-expansion-phase0-0002",
+  "startup_id": "ucf-expansion-startup-0003",
+  "phase0_request_id": "ucf-expansion-phase0-0003",
   "school_key": "ucf",
   "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
   "target_branch": "data/ucf-onboarding",
@@ -13,17 +13,17 @@
     "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "a7f59acefaf3dcf0d9a042bae3d6be3333ccdd68",
+      "commit_sha": "2a4685ec8d5d5fa4cc8881522d306e13b5bdbc2e",
       "path_prefix": ".remote-implementation/transports/ucf/ucf-expansion-startup-0001/part-",
       "part_count": 1
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION Implementation lane; exact blocked startup #43971688777 successor",
-    "authorization": "Owner's explicit November 16 UCF startup-through-Phase-0 authorization persists. The exact prior startup stopped read-only at VENUE_IDENTITY_RECONCILIATION_REQUIRED before Phase 0. Owner-accepted immutable UCF Research Freeze v2 identified five definite protected-main physical reuse candidates; each now maps to one matching current-main global physical venue with identical name and locality, using an exact five-row immutable representation-only spec. This replacement startup preserves the same frozen history, original target, top-level scope 1984-85+, all 27 HOME exceptions and 90 cleared NON_D1 identities. Only deterministic startup, Integration Freeze and guarded EXPANSION_PHASE0 through independent fresh verification are authorized; no Stage 2, Owner Gate 1/2, research reopening, release, merge, or protected-main mutation is authorized."
+    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION Implementation lane; bounded correction of read-only startup #43974026389",
+    "authorization": "The owner's November 16 authorization for initial UCF expansion Implementation startup through independently verified guarded EXPANSION_PHASE0 persists. Earlier read-only coordinator startup #43974026389 failed at integration-freeze venue reconciliation because its map bound the supplemental expansion-venues SHA rather than the exact Stage 1 combined candidate venues SHA. This replacement changes only expected_venues_sha256 in the exact five-venue current-main identity reuse map; it retains the immutable v2 Research Freeze, published predecessor, 27 HOME exceptions, 90 cleared NON_D1 approvals, accepted 1984-85+ scope, all source history, and all inherited published games. It grants no new historical decision, shared mutation, Stage 2, owner gates, release, merge, or Production authority."
   },
   "venue_reconciliation": {
-    "path": ".remote-implementation/venue-reconciliation/ucf/ucf-expansion-startup-0002.json",
-    "sha256": "25c332b17e33c5e587a0bf20e93fc241c421808f9459f444060f2a22beec33a9"
+    "path": ".remote-implementation/venue-reconciliation/ucf/ucf-expansion-startup-0003.json",
+    "sha256": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
   }
 }
