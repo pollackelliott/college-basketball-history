@@ -769,6 +769,11 @@ def effective_parent_game_type(row: dict[str, str]) -> str:
 
     if subtype:
         if curated == "POSTSEASON" or game == "POSTSEASON":
+            if (
+                row.get("top_level_classification", "").strip()
+                == "OUTSIDE_ACCEPTED_TOP_LEVEL_SCOPE"
+            ):
+                return "POSTSEASON"
             return subtype
         raise ValueError(
             "POSTSEASON_SUBTYPE_WITHOUT_ACCEPTED_POSTSEASON_UMBRELLA: "
