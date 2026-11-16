@@ -1,0 +1,21 @@
+{
+  "expected_target_predecessor_sha": "e0fa9cc31e908529b9e13297621af8c04be76147",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "request_id": "ucf-expansion-phase0-0003",
+  "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "research_freeze_sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "a7fdd1df4ffa05b8e7a47e9a7e361850dfb61412b51990d24be172d2ef3ccfa8",
+    "integration-freeze.json": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+    "phase0-preview.json": "0847e2944b1be431d020b4072e8b14551bccec75ad9d8ae5dd984b010ba27f75",
+    "stage1-independent-proof.json": "d0d627c8e08cd9c8d0d7bb00568caa9353c948872e4b00d447a7ccdc42ea853a",
+    "venue-reconciliation.json": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
+  },
+  "stage1_independent_proof_sha256": "d0d627c8e08cd9c8d0d7bb00568caa9353c948872e4b00d447a7ccdc42ea853a",
+  "venue_reconciliation_sha256": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
+}
