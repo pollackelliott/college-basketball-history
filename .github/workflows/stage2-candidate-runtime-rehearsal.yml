@@ -1,6 +1,13 @@
 name: Stage 2 candidate runtime rehearsal
 
 on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    branches: [main]
+    paths:
+      - 'tools/**'
+      - 'tests/**'
+      - '.github/workflows/stage2-candidate-runtime-rehearsal.yml'
   workflow_dispatch:
     inputs:
       candidate_sha:
@@ -21,6 +28,10 @@ permissions:
 
 jobs:
   rehearse-candidate-runtime:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+       startsWith(github.event.pull_request.head.ref, 'tooling/'))
     runs-on: ubuntu-latest
     steps:
       - name: Check out control authority
@@ -29,25 +40,109 @@ jobs:
           ref: control/remote-implementation
           path: control
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Check out exact candidate runtime
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.candidate_sha }}
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || inputs.candidate_sha }}
           path: candidate
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
+      - name: Resolve exact PR-head and durable blocked-proposal authority
+        id: authority
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || '' }}
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref || '' }}
+          INPUT_CANDIDATE_SHA: ${{ inputs.candidate_sha || '' }}
+          INPUT_CONTROL_COMMIT: ${{ inputs.control_commit || '' }}
+          INPUT_CHECKPOINT_PATH: ${{ inputs.proposal_checkpoint_path || '' }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, re, subprocess
+          from pathlib import Path
+
+          def fail(message): raise SystemExit('FAIL: ' + message)
+          def git(repo, *args):
+              return subprocess.check_output(['git', '-C', repo, *args], text=True).strip()
+          def valid_sha(value): return bool(re.fullmatch(r'[0-9a-f]{40}', value or ''))
+
+          event = os.environ['EVENT_NAME']
+          control_head = git('control', 'rev-parse', 'HEAD')
+          candidate_head = git('candidate', 'rev-parse', 'HEAD')
+          if event == 'pull_request':
+              candidate = os.environ['PR_HEAD_SHA']
+              control_commit = control_head
+              state = json.loads(Path('control/.remote-implementation/control-state.json').read_text())
+              last = state.get('last_operation') or {}
+              if (state.get('kind') != 'REMOTE_IMPLEMENTATION_GLOBAL_CONTROL'
+                      or state.get('lifecycle_state') != 'IDLE'
+                      or state.get('transaction_state') != 'COMPLETE'
+                      or state.get('recovery_required')
+                      or state.get('active_request_id')):
+                  fail('global control is not safely idle and complete')
+              if (last.get('operation') != 'STAGE2_PROPOSAL_REHEARSAL'
+                      or last.get('stage2_status') != 'BLOCKED'
+                      or last.get('fresh_runner_verification') != 'PASS'
+                      or last.get('remote_stage2_proposal_equivalence') != 'PASS'):
+                  fail('latest operation is not a freshly verified blocked proposal')
+              checkpoint = str(last.get('checkpoint_manifest_path') or '')
+              school = str(last.get('school_key') or '')
+              if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                      or not checkpoint.startswith('.remote-implementation/checkpoints/' + school + '/')
+                      or not checkpoint.endswith('/checkpoint-manifest.json')
+                      or '..' in Path(checkpoint).parts):
+                  fail('checkpoint path not within selected school authority')
+              raw = (Path('control') / checkpoint).read_bytes()
+              if hashlib.sha256(raw).hexdigest() != last.get('checkpoint_manifest_sha256'):
+                  fail('checkpoint bytes do not match control-state hash')
+              manifest = json.loads(raw)
+              if (manifest.get('kind') != 'REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT'
+                      or manifest.get('stage2_status') != 'BLOCKED'
+                      or manifest.get('school_key') != school
+                      or manifest.get('request_id') != last.get('request_id')
+                      or manifest.get('target_sha') != last.get('target_sha')
+                      or manifest.get('recommendation_map_sha256') != last.get('recommendation_map_sha256')
+                      or manifest.get('decision_universe_sha256') != last.get('decision_universe_sha256')):
+                  fail('checkpoint does not bind exact verified last operation')
+              remote = git('candidate', 'ls-remote', 'origin', 'refs/heads/' + os.environ['PR_HEAD_REF']).split()
+              if not remote or remote[0] != candidate:
+                  fail('live PR head no longer equals event candidate SHA')
+          elif event == 'workflow_dispatch':
+              candidate = os.environ['INPUT_CANDIDATE_SHA']
+              control_commit = os.environ['INPUT_CONTROL_COMMIT']
+              checkpoint = os.environ['INPUT_CHECKPOINT_PATH']
+          else:
+              fail('unsupported workflow event')
+          if not valid_sha(candidate) or not valid_sha(control_commit):
+              fail('candidate/control commit must be full SHA-40')
+          if candidate_head != candidate:
+              fail('candidate checkout does not match selected SHA')
+          if not re.fullmatch(r'\.remote-implementation/checkpoints/[a-z0-9-]+/[^/]+/checkpoint-manifest\.json', checkpoint):
+              fail('invalid checkpoint path')
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              for key, value in [('candidate_sha', candidate),
+                                 ('control_commit', control_commit),
+                                 ('proposal_checkpoint_path', checkpoint)]:
+                  output.write(key + '=' + value + '\n')
+          print('AUTHENTICATED_CANDIDATE=' + candidate)
+          print('AUTHENTICATED_CONTROL=' + control_commit)
+          print('AUTHENTICATED_CHECKPOINT=' + checkpoint)
+          PY
       - name: Authenticate requested commits
         shell: bash
         run: |
           set -euo pipefail
-          candidate="${{ inputs.candidate_sha }}"
-          control_commit="${{ inputs.control_commit }}"
+          candidate="${{ steps.authority.outputs.candidate_sha }}"
+          control_commit="${{ steps.authority.outputs.control_commit }}"
           if [[ ! "$candidate" =~ ^[0-9a-f]{40}$ ]]; then
             echo "Invalid candidate_sha: $candidate" >&2
             exit 1
@@ -67,8 +162,53 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python candidate/tools/stage2_candidate_runtime_rehearsal.py             --source-repo control             --candidate-runtime candidate             --candidate-sha "${{ inputs.candidate_sha }}"             --control-commit "${{ inputs.control_commit }}"             --proposal-checkpoint-path "${{ inputs.proposal_checkpoint_path }}"             --diag /tmp/stage2-candidate-runtime-rehearsal
+          python candidate/tools/stage2_candidate_runtime_rehearsal.py \
+            --source-repo control \
+            --candidate-runtime candidate \
+            --candidate-sha "${{ steps.authority.outputs.candidate_sha }}" \
+            --control-commit "${{ steps.authority.outputs.control_commit }}" \
+            --proposal-checkpoint-path "${{ steps.authority.outputs.proposal_checkpoint_path }}" \
+            --diag /tmp/stage2-candidate-runtime-rehearsal
 
+      - name: Require resolved proposal, unchanged decision universe, and no tracked mutation
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-rehearsal-summary.json').read_text())
+          assert summary['classification'] == 'RESOLVED_TO_GATE1', summary['classification']
+          assert summary['candidate_stage2_status'] == 'OWNER_GATE_1_READY'
+          assert summary['candidate_decision_universe_sha256'] == summary['decision_universe_sha256']
+          proof = summary.get('tracked_mutation_proof') or {}
+          assert proof.get('tracked_stage2_mutation') == 'NONE', proof
+          print('EXACT_STAGE2_CANDIDATE_REPLAY=PASS')
+          print('UNCHANGED_HISTORICAL_DECISION_UNIVERSE=PASS')
+          PY
+
+      - name: Require control and actual PR head remained fixed
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          SELECTED_CONTROL: ${{ steps.authority.outputs.control_commit }}
+          SELECTED_CANDIDATE: ${{ steps.authority.outputs.candidate_sha }}
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          control="$(git -C control ls-remote origin refs/heads/control/remote-implementation | awk '{print $1}')"
+          candidate="$(git -C candidate ls-remote origin "refs/heads/$PR_HEAD_REF" | awk '{print $1}')"
+          test -n "$control" && test "$control" = "$SELECTED_CONTROL"
+          test -n "$candidate" && test "$candidate" = "$SELECTED_CANDIDATE"
+          scoped_main="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-rehearsal-summary.json').read_text())
+          print(summary['candidate_scope_main_sha'])
+          PY
+          )"
+          live_main="$(git -C candidate ls-remote origin refs/heads/main | awk '{print $1}')"
+          test -n "$live_main" && test "$live_main" = "$scoped_main"
+          echo 'EXACT_PR_HEAD_CONTROL_AND_MAIN_STABILITY=PASS'
       - name: Upload candidate rehearsal diagnostics
         if: always()
         uses: actions/upload-artifact@v4
