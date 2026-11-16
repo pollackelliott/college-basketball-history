@@ -25,6 +25,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from home_location_exception_authority import HOME_LOCATION_EXCEPTION_MARKER
+
 
 HOME_VENUE_EXCEPTION_MARKER = "[RESEARCHED_UNRESOLVED_HOME_VENUE"
 
@@ -60,6 +62,15 @@ def _canonical_home_venue_exception_shape(row: dict[str, str]) -> bool:
     )
 
 
+def _canonical_home_location_exception_shape(row: dict[str, str]) -> bool:
+    return (
+        HOME_LOCATION_EXCEPTION_MARKER in row.get("notes", "")
+        and not _venue_known(row)
+        and not row.get("site_city", "").strip()
+        and not row.get("site_state", "").strip()
+    )
+
+
 def published_site_standard_report(
     repo: Path,
     *,
@@ -79,6 +90,7 @@ def published_site_standard_report(
     examples: dict[str, list[str]] = defaultdict(list)
     hard_home_ids: set[str] = set()
     researched_home_venue_unknown_ids: set[str] = set()
+    researched_home_location_unknown_ids: set[str] = set()
     invalid_home_venue_marker_ids: set[str] = set()
     expected_away_ids: set[str] = set()
     heightened_neutral_ids: set[str] = set()
@@ -104,23 +116,35 @@ def published_site_standard_report(
         venue_missing = not _venue_known(row)
         location_missing = not _complete_location(row)
         marker_present = HOME_VENUE_EXCEPTION_MARKER in row.get("notes", "")
+        location_marker_present = HOME_LOCATION_EXCEPTION_MARKER in row.get("notes", "")
         home_exception_shape = _canonical_home_venue_exception_shape(row)
+        home_location_exception_shape = _canonical_home_location_exception_shape(row)
 
-        if marker_present and not (home_team in published and home_exception_shape):
+        if (
+            (marker_present or location_marker_present)
+            and not (
+                home_team in published
+                and (home_exception_shape or home_location_exception_shape)
+            )
+        ):
             invalid_home_venue_marker_ids.add(game_id)
             record("invalid_researched_unresolved_home_venue_marker", game_id)
 
         if home_team in published:
             if venue_missing:
                 record("published_home_missing_venue", game_id)
-                if home_exception_shape:
+                if home_location_exception_shape:
+                    researched_home_location_unknown_ids.add(game_id)
+                    record("published_home_researched_unresolved_location", game_id)
+                elif home_exception_shape:
                     researched_home_venue_unknown_ids.add(game_id)
                     record("published_home_researched_unresolved_venue", game_id)
                 else:
                     hard_home_ids.add(game_id)
             if location_missing:
                 record("published_home_missing_location", game_id)
-                hard_home_ids.add(game_id)
+                if not home_location_exception_shape:
+                    hard_home_ids.add(game_id)
             if venue_missing and location_missing:
                 record("published_home_missing_both", game_id)
         elif home_team and home_team not in published:
@@ -156,6 +180,7 @@ def published_site_standard_report(
             **dict(sorted(counts.items())),
             "hard_published_home_blocker_games": len(hard_home_ids),
             "researched_unresolved_home_venue_games": len(researched_home_venue_unknown_ids),
+            "researched_unresolved_home_location_games": len(researched_home_location_unknown_ids),
             "invalid_researched_unresolved_home_venue_marker_games": len(invalid_home_venue_marker_ids),
             "expected_away_at_unpublished_debt_games": len(expected_away_ids),
             "heightened_published_vs_published_neutral_games": len(heightened_neutral_ids),
