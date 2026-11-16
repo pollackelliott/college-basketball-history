@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "houston-expansion-startup-0003",
-  "phase0_request_id": "houston-expansion-phase0-0003",
+  "startup_id": "houston-expansion-startup-0004",
+  "phase0_request_id": "houston-expansion-phase0-0004",
   "school_key": "houston",
-  "expected_protected_main_sha": "eceb825864342ceb9c343466efaf3e1e0c799700",
+  "expected_protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
   "target_branch": "data/houston-onboarding",
   "target_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50",
   "research_freeze_sha256": "c837f231ac12bbca1fa90a66c5d5571912370068af3d86811298922389cadee2",
@@ -13,13 +13,13 @@
     "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "32f0f343a89304d8d4e538d69c17d664fcd35d42",
-      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0003/part-",
+      "commit_sha": "f93dcb2e2121be8c09b5e900aee8acc2c9cc08f9",
+      "path_prefix": ".remote-implementation/transports/houston/houston-expansion-startup-0004/part-",
       "part_count": 20
     }
   },
   "creation_provenance": {
     "origin": "ChatGPT Houston ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/recovery phase. After PR #624 and a pre-Stage-1 transport-predecessor startup-envelope failure with no accepted request or basketball mutation, this corrected replacement preserves the same authenticated Houston Research Freeze and authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0003, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
+    "authorization": "Owner explicitly opened the serialized Houston ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded initial startup/Phase 0 phase. Earlier startup attempts ended before any Houston request acceptance or basketball mutation. Protected-main PR #625 generically repaired expansion Stage 1 reciprocal identity assertion handling after exact diagnosis of HOU-EXP-00022, preserving the same authenticated Houston Research Freeze. This fresh replacement authorizes only repository-owned deterministic Stage 1 reproduction, Integration Freeze preparation, guarded EXPANSION_PHASE0 request houston-expansion-phase0-0004, and its independent fresh verification. It does not reopen Research, change accepted top-level scope, grant Owner Gate 1 or Owner Gate 2, authorize release or merge, or permit another school."
   }
 }
