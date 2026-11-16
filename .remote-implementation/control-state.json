@@ -628,18 +628,19 @@
     "houston-expansion-stage2-gate1-fill-0001",
     "houston-expansion-stage2-preseal-0001",
     "houston-expansion-stage2-gate1-seal-0001",
-    "houston-expansion-stage2-sealed-apply-0001"
+    "houston-expansion-stage2-sealed-apply-0001",
+    "houston-expansion-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "houston-expansion-release-readiness-0001",
+  "active_request_sha256": "f02127bd39368f11de4a35c3587808b233b46b897d4edcf3a42291b71846326c",
+  "active_school_key": "houston",
+  "active_target_branch": "data/houston-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1270,8 +1271,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/houston/houston-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "58d3068bfc9010875483fc8640a84bc0d38e78b8471862478dd1f9f684831196"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43956267527",
+  "lock_acquisition_request_commit": "8b97d65a527ad006221eeccf62fc2c90a271bf5c",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }

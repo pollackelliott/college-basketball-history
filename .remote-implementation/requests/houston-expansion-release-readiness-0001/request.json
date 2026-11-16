@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "houston-expansion-release-readiness-0001",
+  "school_key": "houston",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "58460de05193f3894019b1fdaf66480dc0a518de",
+  "previous_control_state_sha256": "a17d3c814fe431c71279a38cbe3719d5cba3c33902d83ab7a525c4009bf7b014",
+  "expected_protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "approved_plan_hash": "14589bf760be7155b205d28cb07733d9faacf75becb0ffe3a330d16564a65f90",
+  "release_manifest_sha256": "ef0a3e8a2af2a42ac3fd4383187033ddb1c082213e88d710c29b93c1d757b542",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/houston/houston-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "04f01d13bf0dda207b9d8c8f31c8f6c0935429d269019b592b9662101148d7da"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/houston/houston-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "09a182c817097af2cdcd74e424bf3bab750dfe6c135a34d93d58c850f834d7af"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "houston-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "Same Houston ALL_HISTORY_EXPANSION serialized Implementation lane — next owner-authorized release-preparation phase",
+    "authorization": "Owner said 'continue' after Houston authorized Stage 3 sealed apply run #43950460570; the exact sealed apply was found independently fresh-verified PASS at current protected main and current target. This authorizes the next routine reversible Stage 4 release preparation through read-only readiness, exact GitHub connector PR creation/reuse, CI/mergeability and exact Vercel Preview verification, ending at OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2, PR merge, Production proof, separate historical decisions, and unrelated shared/global mutations are NOT authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
