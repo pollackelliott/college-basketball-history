@@ -632,18 +632,19 @@
     "houston-expansion-release-readiness-0001",
     "houston-expansion-release-preview-verify-0001",
     "houston-expansion-release-gate2-approval-0001",
-    "houston-expansion-release-production-proof-0001"
+    "houston-expansion-release-production-proof-0001",
+    "ucf-expansion-phase0-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43980353826:1",
+  "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "ucf-expansion-phase0-0003",
+  "active_request_sha256": "7c194e06232f963ac36266fce12c27fc9726cb47c994721f859c6ce822bac0cf",
+  "active_school_key": "ucf",
+  "active_target_branch": "data/ucf-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1274,8 +1275,11 @@
     "request_id": "houston-expansion-release-production-proof-0001",
     "school_key": "houston"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43980353826",
+  "lock_acquisition_request_commit": "a548cb085c9fc7f23ca167e4bc12df66bc1e8917",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

@@ -1,0 +1,61 @@
+{
+  "authority": {
+    "expansion_phase0": true,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "The owner's November 16 authorization for initial UCF expansion Implementation startup through independently verified guarded EXPANSION_PHASE0 persists. Earlier read-only coordinator startup #43974026389 failed at integration-freeze venue reconciliation because its map bound the supplemental expansion-venues SHA rather than the exact Stage 1 combined candidate venues SHA. This replacement changes only expected_venues_sha256 in the exact five-venue current-main identity reuse map; it retains the immutable v2 Research Freeze, published predecessor, 27 HOME exceptions, 90 cleared NON_D1 approvals, accepted 1984-85+ scope, all source history, and all inherited published games. It grants no new historical decision, shared mutation, Stage 2, owner gates, release, merge, or Production authority. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION Implementation lane; bounded correction of read-only startup #43974026389"
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+    "sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+    "transport": {
+      "commit_sha": "2a4685ec8d5d5fa4cc8881522d306e13b5bdbc2e",
+      "kind": "git_base64_parts",
+      "part_count": 1,
+      "path_prefix": ".remote-implementation/transports/ucf/ucf-expansion-startup-0001/part-"
+    }
+  },
+  "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "309db866837485120e88efe66346c84cc10fbc6a",
+  "previous_control_state_sha256": "6cfff78374f52d69e861dea867cb93f1ff043c664307b3a85c411d484ab143d3",
+  "request_id": "ucf-expansion-phase0-0003",
+  "research_freeze_sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/ucf/ucf-expansion-startup-0003/stage1-independent-proof.json",
+    "sha256": "d0d627c8e08cd9c8d0d7bb00568caa9353c948872e4b00d447a7ccdc42ea853a"
+  },
+  "stage1_independent_proof_sha256": "d0d627c8e08cd9c8d0d7bb00568caa9353c948872e4b00d447a7ccdc42ea853a",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "e0fa9cc31e908529b9e13297621af8c04be76147",
+  "venue_reconciliation": {
+    "path": ".remote-implementation/startups/ucf/ucf-expansion-startup-0003/venue-reconciliation.json",
+    "sha256": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
+  }
+}
