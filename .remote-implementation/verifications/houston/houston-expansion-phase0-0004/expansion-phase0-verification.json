@@ -1,0 +1,27 @@
+{
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "schools/houston/notes.md",
+    "schools/houston/opponents.csv",
+    "schools/houston/source-games.csv",
+    "schools/houston/source-notes.md",
+    "schools/houston/venues.csv"
+  ],
+  "expected_target_predecessor_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50",
+  "independent_exact_tree_equivalence": "PASS",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_VERIFICATION",
+  "observed_live_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "prepared_tree_sha": "1506fc427a8beb29174b87f5e549d77309556bb5",
+  "protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "houston-expansion-phase0-0004",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "status": "PASS",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+  "venue_reconciliation_sha256": ""
+}

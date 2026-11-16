@@ -1226,11 +1226,11 @@
   "current_sequence": 589,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
     "operation": "EXPANSION_PHASE0",
     "protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "houston-expansion-phase0-0004",
     "school_key": "houston",
     "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
