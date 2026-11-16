@@ -1,0 +1,25 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "merge_parent_onboarding": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "merge_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "owner_gate_2_approval_checkpoint_sha256": "fb9717397a8ff31ae23314e3e0b8dca679e07869bae351e053fff3c2782c2ce0",
+  "owner_gate_2_verification_sha256": "2c6b36634c7f5befc200fd0ae012da9d7c41fa43a0f8edbf32811d07f0593e41",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "pr_number": 630,
+  "production_deployment_id": 7837071975,
+  "production_deployment_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/houston.json",
+    "/data/teams/texas-a-m.json",
+    "/data/teams/ucf.json"
+  ],
+  "production_json_checked_count": 5,
+  "school_key": "houston",
+  "status": "COMPLETE"
+}

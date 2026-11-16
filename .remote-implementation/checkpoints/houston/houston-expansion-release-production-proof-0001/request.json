@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "houston-expansion-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "school_key": "houston",
+  "previous_control_state_commit": "24dcc8187e2beda490b2d4c1659c747264386197",
+  "previous_control_state_sha256": "7a9a2dae5d6cf89f76d52704570d4047d77101c3450b58756f63e6bff248cfce",
+  "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "pr_number": 630,
+  "merge_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/houston/houston-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "fb9717397a8ff31ae23314e3e0b8dca679e07869bae351e053fff3c2782c2ce0"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/houston/houston-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "2c6b36634c7f5befc200fd0ae012da9d7c41fa43a0f8edbf32811d07f0593e41"
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Houston ALL_HISTORY_EXPANSION Implementation final phase — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved exact Houston PR #630 Preview ('approved. proceed'), fresh Gate 2 approval houston-expansion-release-gate2-approval-0001 independently verified PASS, and packet 51c7f1ff25684b01b40b4063a3f669b9abe9c0fbe0a2ece764d0e6f413c77cfc required exact ordinary merge of PR #630 head 5c3e58420eb8ce1fe2c10e57322b517397179db5 from approved main d10252b203206ba75e375b9cb845a662fcb39c85. GitHub connector merged exactly, producing ed1164118f471b2a398bf6b53491035de17c7212, now exact protected main with both verified parents. This request grants read-only exact-merge Production deployment/public JSON proof and independent fresh verification only. No new historical authority, main mutation, recovery, maintenance or additional merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "merge_parent_onboarding": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "merge_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "fb9717397a8ff31ae23314e3e0b8dca679e07869bae351e053fff3c2782c2ce0",
+  "owner_gate_2_verification_sha256": "2c6b36634c7f5befc200fd0ae012da9d7c41fa43a0f8edbf32811d07f0593e41",
+  "pr_head_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "pr_number": 630,
+  "production_deployment_id": 7837071975,
+  "production_json_checked_count": 5,
+  "production_proof": true,
+  "production_proof_sha256": "2837219b8fd2879ff559aa7e1a5240ee8a7d71c5c4246977fa6be367e010164e",
+  "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "request_id": "houston-expansion-release-production-proof-0001",
+  "request_sha256": "f8203ddf39358c744f6137c9c2bca3e7a35f7fd9dc4c34d3263e30734388d33c",
+  "schema_version": 1,
+  "school_key": "houston",
+  "status": "PRODUCTION_PROOF_PASS"
+}
