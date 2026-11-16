@@ -14,45 +14,47 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
+    "stage2_gate1_seal": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": true,
+    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from houston-expansion-stage2-gate1-fill-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from houston-expansion-stage2-preseal-0001",
     "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "749528c0b895237490cd53733d4e08efd466aab9b0fc48d766b4e68daa275d99",
   "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "equivalence_sha256": "266e890e5716481a8de96eafacddbe59a10c87b79fbfa3e6ef63ef429a3a55aa",
   "expected_protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
   "filled_review_sha256": "eb8064dfbd7b998fd334a74693b5a5ff3fe3611bf50662b2b3d6bfc62ab4e832",
   "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "ce743ddd8429d1b5d478791bce0af74932fc1a0408d9f6e04b31fe99f21bc1b2",
   "phase_continuation": {
     "apply_request_id": "houston-expansion-stage2-sealed-apply-0001",
     "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
     "preseal_request_id": "houston-expansion-stage2-preseal-0001",
     "seal_request_id": "houston-expansion-stage2-gate1-seal-0001"
   },
-  "previous_control_state_commit": "12aa8e79cd14c88bac72a93a595668a33302ef73",
-  "previous_control_state_sha256": "f93efee65d2bfdeaded60dcfad76c40d4554fa1b8b800e029f9c1d968230855a",
+  "previous_control_state_commit": "fa5dbb2355ad70be912a1f85c7cda0921644acbd",
+  "previous_control_state_sha256": "a692d9b03d748c215343ce72eae7d11a872c3d7f6a6827bda1cfb4367e70eb27",
   "recommendation_map_sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59",
-  "request_id": "houston-expansion-stage2-preseal-0001",
+  "request_id": "houston-expansion-stage2-gate1-seal-0001",
   "schema_version": 1,
   "school_key": "houston",
   "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/houston/houston-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "162b6ddc4ceaa2b577c871e8c7f979f62065257b7a620e8092d69aa770efdb44"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/houston/houston-expansion-stage2-preseal-0001/checkpoint-manifest.json",
+    "sha256": "f1583091153a9e39ff44942e65d60027170106e59bc7e8c5fffbf15883649724"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/houston/houston-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "4eb6896e461255c54a3b3f79863a17a7d550cd0704b4f9175d1ee8e3fae5e7e3"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/houston/houston-expansion-stage2-preseal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "540555d670d01173bf6b7d7ed92271472a90905d14408c71f8d28e39daf77345"
   },
   "target_branch": "data/houston-onboarding",
   "target_sha": "4a15e67d5a53cbea96e67b5c14b42dd43d61bae9"
