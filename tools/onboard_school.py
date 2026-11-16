@@ -1740,6 +1740,110 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
     return payload
 
 
+def _validated_expansion_freeze_bytes(source: Path, school_key: str) -> bytes | None:
+    """Transport only a self-consistent, exact-package expansion Freeze.
+
+    The guarded outer runner separately authenticates the Freeze's SHA-256
+    against its control/write-ahead authority. This inner disposable boundary
+    must independently recheck the bytes and current school package instead
+    of copying arbitrary ignored .onboarding state.
+    """
+    path = source / ".onboarding" / school_key / "integration-freeze.json"
+    if not path.is_file():
+        return None
+    payload = path.read_bytes()
+    try:
+        manifest = json.loads(payload)
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise WorkflowError("invalid All-History expansion Integration Freeze JSON") from exc
+    if not isinstance(manifest, dict):
+        raise WorkflowError("invalid All-History expansion Integration Freeze object")
+    if manifest.get("kind") != "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE":
+        return None
+
+    if (
+        manifest.get("schema_version") != 1
+        or manifest.get("status") != "INTEGRATION_FROZEN"
+        or manifest.get("school_key") != school_key
+        or manifest.get("tracked_mutation") != "NONE"
+        or manifest.get("release_authority") is not False
+        or any(
+            not re.fullmatch(r"[0-9a-f]{40}", str(manifest.get(name) or ""))
+            for name in ("research_base_sha", "protected_main_sha", "integration_base_sha")
+        )
+    ):
+        raise WorkflowError("invalid All-History expansion Integration Freeze identity/status")
+
+    fingerprint = manifest.get("manifest_self_fingerprint_sha256")
+    canonical = dict(manifest, manifest_self_fingerprint_sha256="")
+    expected_fingerprint = hashlib.sha256(
+        (json.dumps(canonical, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+         + "\n").encode("utf-8")
+    ).hexdigest()
+    if fingerprint != expected_fingerprint:
+        raise WorkflowError("All-History expansion Integration Freeze fingerprint mismatch")
+
+    names = {
+        "conferences.csv", "notes.md", "opponents.csv",
+        "source-games.csv", "source-notes.md", "venues.csv",
+    }
+    candidate_hashes = manifest.get("candidate_member_sha256")
+    package_hashes = manifest.get("package_member_sha256")
+    if (
+        not isinstance(candidate_hashes, dict)
+        or not isinstance(package_hashes, dict)
+        or set(candidate_hashes) != names
+        or candidate_hashes != package_hashes
+        or any(
+            not isinstance(digest, str)
+            or not re.fullmatch(r"[0-9a-f]{64}", digest)
+            or not (source / "schools" / school_key / name).is_file()
+            or file_sha(source / "schools" / school_key / name) != digest
+            for name, digest in candidate_hashes.items()
+        )
+    ):
+        raise WorkflowError("All-History expansion Integration Freeze package mismatch")
+
+    guard = manifest.get("source_game_semantic_guard")
+    if not isinstance(guard, dict) or not isinstance(guard.get("snapshot"), dict):
+        raise WorkflowError("All-History expansion Integration Freeze semantic guard missing")
+    snapshot = guard["snapshot"]
+    if (
+        snapshot.get("schema_version") != 1
+        or snapshot.get("fields") != list(SEMANTIC_SOURCE_GAME_FIELDS)
+        or not isinstance(snapshot.get("rows"), dict)
+        or guard.get("snapshot_sha256") != semantic_snapshot_sha256(snapshot)
+        or build_source_game_semantic_snapshot(
+            source / "schools" / school_key / "source-games.csv"
+        ) != snapshot
+    ):
+        raise WorkflowError("All-History expansion Integration Freeze semantic guard mismatch")
+
+    reconciliation = manifest.get("venue_reconciliation")
+    reconciliation_hash = manifest.get("venue_reconciliation_sha256")
+    if reconciliation is None:
+        if reconciliation_hash != "":
+            raise WorkflowError("unexpected All-History expansion venue-reconciliation hash")
+    else:
+        if (
+            not isinstance(reconciliation, dict)
+            or not isinstance(reconciliation_hash, str)
+            or not re.fullmatch(r"[0-9a-f]{64}", reconciliation_hash)
+            or reconciliation.get("spec_sha256") != reconciliation_hash
+        ):
+            raise WorkflowError("invalid All-History expansion venue reconciliation")
+        sidecar = source / ".onboarding" / school_key / "venue-reconciliation.json"
+        if not sidecar.is_file() or file_sha(sidecar) != reconciliation_hash:
+            raise WorkflowError("All-History expansion venue reconciliation changed")
+        # Retain the existing physical-venue split authority validator.
+        try:
+            frozen_venue_split_freeze_bytes(source, school_key)
+        except FrozenVenueSplitAuthorityError as exc:
+            raise WorkflowError(str(exc)) from exc
+
+    return payload
+
+
 def copy_repository(
     source: Path, destination: Path, *, school_key: str | None = None
 ) -> None:
@@ -1749,8 +1853,13 @@ def copy_repository(
         if school_key is not None
         else None
     )
+    expansion_freeze = (
+        _validated_expansion_freeze_bytes(source, school_key)
+        if school_key is not None and correction_freeze is None
+        else None
+    )
     split_authority_freeze = None
-    if school_key is not None and correction_freeze is None:
+    if school_key is not None and correction_freeze is None and expansion_freeze is None:
         try:
             split_authority_freeze = frozen_venue_split_freeze_bytes(
                 source,
@@ -1758,7 +1867,7 @@ def copy_repository(
             )
         except FrozenVenueSplitAuthorityError as exc:
             raise WorkflowError(str(exc)) from exc
-    runtime_freeze = correction_freeze or split_authority_freeze
+    runtime_freeze = correction_freeze or expansion_freeze or split_authority_freeze
 
     def ignore(_directory: str, names: list[str]) -> set[str]:
         return {
