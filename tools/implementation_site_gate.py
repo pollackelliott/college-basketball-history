@@ -25,10 +25,12 @@ from program_history import (
     season_is_published_history,
     season_is_top_level,
 )
+from home_location_exception_authority import HOME_LOCATION_EXCEPTION_MARKER
 from site_completeness import (
     ALLOWED_SITE_RESEARCH_STATUSES,
     POSTSEASON_TYPES_REQUIRING_ACCOUNTING,
     lower_level_postseason_site_disposition,
+    researched_unresolved_home_location,
     researched_unresolved_home_venue,
     source_site_completeness_report,
 )
@@ -184,6 +186,15 @@ def _shared_published_top_level_obligation(
         ):
             return True
     return False
+
+
+def _home_location_exception_marker_for_school(
+    game: dict[str, str], school_key: str
+) -> bool:
+    return (
+        f"{HOME_LOCATION_EXCEPTION_MARKER} source={school_key}/"
+        in game.get("notes", "")
+    )
 
 
 def _home_venue_exception_marker_for_school(
@@ -558,7 +569,10 @@ def _canonical_home_venue_exception(
     qualifying_sources = [
         row
         for row in source_rows
-        if researched_unresolved_home_venue(row)
+        if (
+            researched_unresolved_home_venue(row)
+            or researched_unresolved_home_location(row)
+        )
         and _source_site_to_canonical(row) == can_site
     ]
     if not qualifying_sources:
@@ -577,6 +591,50 @@ def _canonical_home_venue_exception(
 
     return True
 
+
+
+def _canonical_home_location_exception(
+    game: dict[str, str],
+    school_key: str,
+    source_rows: list[dict[str, str]],
+    all_assertions: list[dict[str, str]],
+) -> bool:
+    """Validate the exact owner-authorized HOME locality+venue unknown."""
+
+    if not _target_home(game, school_key):
+        return False
+    if _venue_known(game):
+        return False
+    if game.get("site_city", "").strip() or game.get("site_state", "").strip():
+        return False
+    if game.get("game_type", "").strip().upper() == "NCAA_TOURNAMENT":
+        return False
+    if not _home_location_exception_marker_for_school(game, school_key):
+        return False
+
+    can_site = game.get("site_type", "").strip()
+    qualifying_sources = [
+        row
+        for row in source_rows
+        if researched_unresolved_home_location(row)
+        and _source_site_to_canonical(row) == can_site
+    ]
+    if not qualifying_sources:
+        return False
+
+    agreeing = [
+        assertion
+        for assertion in all_assertions
+        if _source_site_to_canonical(assertion) == can_site
+    ]
+    if any(assertion.get("curated_venue_name", "").strip() for assertion in agreeing):
+        return False
+    if any(
+        _complete_pair(assertion.get("city", ""), assertion.get("state", ""))
+        for assertion in agreeing
+    ):
+        return False
+    return True
 
 
 def _reciprocal_only_home_venue_exception_marker_for_school(
@@ -843,6 +901,7 @@ def implementation_site_report(
     unaccounted_public_gap_rows = 0
     strict_home_gap_rows = 0
     researched_unresolved_home_venue_rows = 0
+    researched_unresolved_home_location_rows = 0
     invalid_home_venue_exception_marker_rows = 0
     strict_ncaa_gap_rows = 0
 
@@ -857,6 +916,12 @@ def implementation_site_report(
         ]
         all_game_assertions = assertions_by_canonical.get(canonical_id, [])
         source_home_exception = _canonical_home_venue_exception(
+            game,
+            school_key,
+            source_rows,
+            all_game_assertions,
+        )
+        source_home_location_exception = _canonical_home_location_exception(
             game,
             school_key,
             source_rows,
@@ -886,12 +951,14 @@ def implementation_site_report(
         )
         home_exception = (
             source_home_exception
+            or source_home_location_exception
             or reconciled_home_exception
             or reconciled_unknown_site_home_exception
             or reciprocal_only_home_exception
         )
         marker_present = (
             _home_venue_exception_marker_for_school(game, school_key)
+            or _home_location_exception_marker_for_school(game, school_key)
             or _reconciled_home_venue_exception_marker_for_school(game, school_key)
             or _reconciled_unknown_site_home_venue_exception_marker_for_school(
                 game, school_key
@@ -912,8 +979,12 @@ def implementation_site_report(
 
             if any(category.startswith("home_missing_") for category in categories):
                 if home_exception:
-                    researched_unresolved_home_venue_rows += 1
-                    record("researched_unresolved_home_venue", canonical_id)
+                    if source_home_location_exception:
+                        researched_unresolved_home_location_rows += 1
+                        record("researched_unresolved_home_location", canonical_id)
+                    else:
+                        researched_unresolved_home_venue_rows += 1
+                        record("researched_unresolved_home_venue", canonical_id)
                     if reconciled_home_exception:
                         record("reconciled_unresolved_home_venue", canonical_id)
                     if reconciled_unknown_site_home_exception:
@@ -1101,13 +1172,14 @@ def implementation_site_report(
     if strict_home_gap_rows:
         errors.append(
             f"{strict_home_gap_rows:,} in-scope target HOME canonical game(s) are missing "
-            "venue and/or complete location without a valid researched-unresolved HOME "
-            "venue exception. Complete HOME location is never waivable."
+            "venue and/or complete location without a valid researched HOME exception. "
+            "HOME location is waivable only for an exact protected-main owner-authorized "
+            "row; ordinary research statuses remain nonwaivable."
         )
     if invalid_home_venue_exception_marker_rows:
         errors.append(
             f"{invalid_home_venue_exception_marker_rows:,} canonical game(s) carry a "
-            "RESEARCHED_UNRESOLVED_HOME_VENUE marker for the target school without "
+            "researched HOME exception marker for the target school without "
             "satisfying the source, location, H/A/N, NCAA, and reciprocal-evidence "
             "requirements."
         )
@@ -1153,6 +1225,7 @@ def implementation_site_report(
             "unaccounted_public_gap_rows": unaccounted_public_gap_rows,
             "strict_home_gap_rows": strict_home_gap_rows,
             "researched_unresolved_home_venue_rows": researched_unresolved_home_venue_rows,
+            "researched_unresolved_home_location_rows": researched_unresolved_home_location_rows,
             "invalid_home_venue_exception_marker_rows": invalid_home_venue_exception_marker_rows,
             "strict_ncaa_gap_rows": strict_ncaa_gap_rows,
             "target_source_information_loss": loss_total,
