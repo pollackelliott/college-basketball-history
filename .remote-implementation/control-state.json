@@ -1260,7 +1260,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/houston/houston-expansion-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "75a395718775e4381bcd567038080f4aee5a37154de1dcb15391784bb7c6e4d3",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1270,7 +1270,7 @@
     "production_deployment_id": 7837071975,
     "production_json_checked_count": 5,
     "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "houston-expansion-release-production-proof-0001",
     "school_key": "houston"
   },
