@@ -125,3 +125,25 @@ Research/package acceptance after Stage 6: **0 errors, 0 warnings**. HOME public
 Current-main shared-reference rebase completed against `integration_base_sha=e8e870a16da17c5d3e723ae214e27ffba1f9a82d` from `research_base_sha=5c91e35485060a0be27f9612d0b140883a555dbf`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
 
 Owner-authorized Stage 1 conference-history reconciliation was applied during current-main integration; the exact correction specification and hash are recorded in the Integration Freeze manifest.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# UCF ALL_HISTORY_EXPANSION Research Freeze — accepted Stage7 authority
+
+- Immutable UCF research_base_sha: `4682d528bf62eee1ad9cd3d8114663882cb78bdf`.
+- Exact protected main at freeze preparation: `d10252b203206ba75e375b9cb845a662fcb39c85`.
+- Inherited baseline: the already-published UCF 1984-85 through 2025-26 school history; no inherited publication row has been re-researched or changed.
+- Accepted top-level scope remains `1984-85+` (BASELINE_CONFIRMED; no supersession). The Research Freeze does not claim pre-1984-85 Division I/top-level classification.
+- Researched institutional **competitive varsity** inception: `1970-1971`. The 1969-70 institutional basketball origin was club play, excluded from varsity history; no club/exhibition game is added as a competitive row.
+- Exactly 377 supplemental competitive games in 14 active EXPANSION_REQUIRED seasons, 1970-1971 through 1983-1984.
+- Historical-results primary source cutoff: 2025-2026; required completed-season cutoff: 2025-2026; 2026-27 game results are excluded.
+- Immutable Stage4 supplemental six-file package SHA-256: `36db72dcbbca8e8606f808531174bce978a33a43bb6d5fd0d254ef8e13faece6`. Permanent research acceptance, Stage4 package QA, and expansion-specific immutable published coverage proof passed.
+- Stage5 exact supplemental NON_D1 scan: 90 identities / 307 games, explicitly owner-approved 2026-11-16 (approval member carried in Stage6 checkpoint). Five earlier accepted distinct ambiguous identities remain unchanged.
+- Stage6 owner-independent adversarial self-challenge: PASS; checkpoint SHA-256 `eacbaa5ddc88eac7e6bdbfb2e76a149136a06813ab8429f4b9a0ce6ef2445b34`. No unsupported new historical certainty. All 28 postseason venues complete; 27 exact owner-authorized HOME-location exceptions, 10 HOME physical venue unknowns with locality, 19 UNKNOWN H/A/N, 12 historical-neutral building blanks with locality, and five unknown dates remain researched and explicitly visible.
+- The inherited research-base opponent support is extended additively where the *same exact* literal label and canonical key occur. Nonadditive inherited fields remain unchanged, the approved Stage4 opponent evidence remains independently preserved in the unchanged Stage4 package, and no canonical key is changed. 39 inherited support extensions; 97 new supplemental literal/opponent mappings.
+- All 10 venue support rows are new to the **inherited UCF six-file package**, not assertions of newly invented global physical buildings. Stage6 review identified five definite protected-main physical reuse candidates and five provisional new candidates; downstream current-main Integration must reconcile these identities.
+- No inherited unpublished pre-1984-85 source-game rows existed at the immutable Research baseline: the v2 inherited-source-reference table is explicitly empty.
+- No inherited published baseline correction question blocks UCF expansion. Three source disagreements remain acknowledged as accepted supplemental historical residuals, not asserted edits to inherited publication history.
+- Freeze freezes supplemental authority only; Implementation remains separate, serialized and owner-gated. No shared/global venue or program registry mutation has occurred.
