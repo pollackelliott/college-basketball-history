@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "14589bf760be7155b205d28cb07733d9faacf75becb0ffe3a330d16564a65f90",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/houston/houston-expansion-release-readiness-0001/pr-body.md",
+  "body_sha256": "37e759493a82f1bd230743f6a2ee57f23f7dcadd57bd3f608bbb7049ef36d155",
+  "head_branch": "data/houston-onboarding",
+  "head_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish Houston history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "houston-expansion-release-preview-verify-0001",
+  "readiness_request_id": "houston-expansion-release-readiness-0001",
+  "release_manifest_sha256": "ef0a3e8a2af2a42ac3fd4383187033ddb1c082213e88d710c29b93c1d757b542",
+  "schema_version": 1,
+  "school_key": "houston"
+}

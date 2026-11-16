@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "apply_request_id": "houston-expansion-stage2-sealed-apply-0001",
+  "approved_plan_hash": "14589bf760be7155b205d28cb07733d9faacf75becb0ffe3a330d16564a65f90",
+  "changed_path_count": 9,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "release_manifest_sha256": "ef0a3e8a2af2a42ac3fd4383187033ddb1c082213e88d710c29b93c1d757b542",
+  "school_key": "houston",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "04f01d13bf0dda207b9d8c8f31c8f6c0935429d269019b592b9662101148d7da",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "09a182c817097af2cdcd74e424bf3bab750dfe6c135a34d93d58c850f834d7af",
+  "writeahead_sha256": "58d3068bfc9010875483fc8640a84bc0d38e78b8471862478dd1f9f684831196"
+}
