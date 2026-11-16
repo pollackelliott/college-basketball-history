@@ -123,6 +123,79 @@ class Stage1FoundationTests(unittest.TestCase):
         multiple=reconcile_canonical("sample",[src],[can,{**can,"canonical_game_id":"CB-2"}])
         self.assertEqual(multiple["counts"]["IDENTITY_REVIEW_BLOCKER"],1)
 
+    def test_frozen_reciprocal_source_assertion_resolves_unique_candidate(self):
+        from unittest.mock import patch
+
+        src = {
+            "source_game_id": "EXP-1", "source_program_key": "sample",
+            "season_label": "1946-1947", "normalized_opponent_key": "a",
+            "game_date": "1946-12-28", "team_score": "62", "opponent_score": "41",
+            "played_result": "W", "curated_game_type": "REGULAR_SEASON",
+            "identity_override": "MATCH_SOURCE_ASSERTION",
+            "identity_override_basis": "accepted reciprocal identity research",
+            "identity_match_program_key": "a",
+            "identity_match_source_game_id": "A-1",
+        }
+        reciprocal = {
+            "source_game_id": "A-1", "source_program_key": "a",
+            "season_label": "1946-1947", "normalized_opponent_key": "sample",
+            "game_date": "", "team_score": "41", "opponent_score": "60",
+            "played_result": "L", "curated_game_type": "REGULAR_SEASON",
+        }
+        fields = list(reciprocal)
+        canonical = {
+            "canonical_game_id": "CB-1", "season_label": "1946-1947",
+            "team_a_key": "a", "team_b_key": "sample",
+            "team_a_score": "41", "team_b_score": "60", "game_date": "",
+            "overtime_periods": "0",
+        }
+        reciprocal_csv = render_csv(fields, [reciprocal])
+        with patch("expansion_implementation_stage1.git_bytes", return_value=reciprocal_csv):
+            result = reconcile_canonical(
+                "sample", [src], [canonical], repo=Path("/repo"), research_base="a" * 40,
+            )
+        row = result["game_rows"][0]
+        self.assertEqual(result["counts"]["REUSE_CANONICAL"], 1)
+        self.assertEqual(row["canonical_game_id"], "CB-1")
+        self.assertEqual(
+            row["match_method"],
+            "FROZEN_RECIPROCAL_SOURCE_ASSERTION_UNIQUE_PAIR_SEASON_SCORE_DATE_INCOMPLETE",
+        )
+        self.assertEqual(row["field_disagreements"], ["score"])
+
+    def test_frozen_reciprocal_source_assertion_fails_closed_on_result_conflict(self):
+        from unittest.mock import patch
+
+        src = {
+            "source_game_id": "EXP-1", "source_program_key": "sample",
+            "season_label": "1946-1947", "normalized_opponent_key": "a",
+            "game_date": "1946-12-28", "team_score": "62", "opponent_score": "41",
+            "played_result": "W", "curated_game_type": "REGULAR_SEASON",
+            "identity_override": "MATCH_SOURCE_ASSERTION",
+            "identity_override_basis": "accepted reciprocal identity research",
+            "identity_match_program_key": "a",
+            "identity_match_source_game_id": "A-1",
+        }
+        reciprocal = {
+            "source_game_id": "A-1", "source_program_key": "a",
+            "season_label": "1946-1947", "normalized_opponent_key": "sample",
+            "game_date": "", "team_score": "60", "opponent_score": "41",
+            "played_result": "W", "curated_game_type": "REGULAR_SEASON",
+        }
+        canonical = {
+            "canonical_game_id": "CB-1", "season_label": "1946-1947",
+            "team_a_key": "a", "team_b_key": "sample",
+            "team_a_score": "41", "team_b_score": "60", "game_date": "",
+        }
+        reciprocal_csv = render_csv(list(reciprocal), [reciprocal])
+        with patch("expansion_implementation_stage1.git_bytes", return_value=reciprocal_csv):
+            result = reconcile_canonical(
+                "sample", [src], [canonical], repo=Path("/repo"), research_base="a" * 40,
+            )
+        row = result["game_rows"][0]
+        self.assertEqual(result["counts"]["IDENTITY_REVIEW_BLOCKER"], 1)
+        self.assertEqual(row["match_method"], "SOURCE_ASSERTION_RECIPROCAL_RESULT_MISMATCH")
+
     def test_new_game_is_provisional_not_published(self):
         match=reconcile_canonical("sample",[self.source2],[])
         self.assertEqual(match["counts"]["PROVISIONAL_NEW_CANONICAL"],1)

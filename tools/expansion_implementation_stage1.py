@@ -595,8 +595,75 @@ def prepare_current_main_identity_rebase(
 
 
 
-def reconcile_canonical(school: str, supplemental: list[dict[str, str]],
-                        canonical: list[dict[str, str]]) -> dict[str, Any]:
+def _frozen_reciprocal_source_assertion_match(
+    repo: Path,
+    research_base: str,
+    school: str,
+    source: dict[str, str],
+    candidates: list[dict[str, str]],
+    reciprocal_cache: dict[str, list[dict[str, str]]],
+) -> tuple[str, str]:
+    """Resolve one frozen reciprocal source assertion without trusting free text."""
+    program = source.get("identity_match_program_key", "").strip()
+    source_id = source.get("identity_match_source_game_id", "").strip()
+    basis = source.get("identity_override_basis", "").strip()
+    opponent = source.get("normalized_opponent_key", "").strip()
+    if not program or not source_id or not basis:
+        return "", "SOURCE_ASSERTION_BINDING_INCOMPLETE"
+    if program != opponent:
+        return "", "SOURCE_ASSERTION_PROGRAM_MISMATCH"
+
+    if program not in reciprocal_cache:
+        try:
+            _, rows = csv_rows(
+                git_bytes(repo, research_base, f"schools/{program}/source-games.csv"),
+                f"research-base reciprocal source-games.csv for {program}",
+            )
+        except Stage1Stop:
+            return "", "SOURCE_ASSERTION_RECIPROCAL_SOURCE_UNAVAILABLE"
+        reciprocal_cache[program] = rows
+
+    matches = [
+        row for row in reciprocal_cache[program]
+        if row.get("source_game_id", "").strip() == source_id
+    ]
+    if len(matches) != 1:
+        return "", "SOURCE_ASSERTION_RECIPROCAL_SOURCE_NOT_UNIQUE"
+    reciprocal = matches[0]
+    if (
+        reciprocal.get("source_program_key", "").strip() != program
+        or reciprocal.get("normalized_opponent_key", "").strip() != school
+    ):
+        return "", "SOURCE_ASSERTION_RECIPROCAL_PAIR_MISMATCH"
+    if reciprocal.get("season_label", "").strip() != source.get("season_label", "").strip():
+        return "", "SOURCE_ASSERTION_RECIPROCAL_SEASON_MISMATCH"
+
+    source_result = source.get("played_result", "").strip().upper()
+    reciprocal_result = reciprocal.get("played_result", "").strip().upper()
+    opposite = {"W": "L", "L": "W", "T": "T"}
+    if source_result in opposite and reciprocal_result in opposite:
+        if opposite[source_result] != reciprocal_result:
+            return "", "SOURCE_ASSERTION_RECIPROCAL_RESULT_MISMATCH"
+
+    source_type = source.get("curated_game_type", "").strip()
+    reciprocal_type = reciprocal.get("curated_game_type", "").strip()
+    if source_type and reciprocal_type and source_type != reciprocal_type:
+        return "", "SOURCE_ASSERTION_RECIPROCAL_GAME_TYPE_MISMATCH"
+
+    status, match, method = identify_game(reciprocal, candidates)
+    if status != CONFIDENT or not match:
+        return "", "SOURCE_ASSERTION_RECIPROCAL_NOT_CONFIDENT"
+    return match, "FROZEN_RECIPROCAL_SOURCE_ASSERTION_" + method
+
+
+def reconcile_canonical(
+    school: str,
+    supplemental: list[dict[str, str]],
+    canonical: list[dict[str, str]],
+    *,
+    repo: Path | None = None,
+    research_base: str = "",
+) -> dict[str, Any]:
     """Reuse the permanent matcher; ambiguous identities are hard blockers."""
     index: dict[tuple[str, tuple[str, str]], list[dict[str, str]]] = defaultdict(list)
     for row in canonical:
@@ -607,12 +674,28 @@ def reconcile_canonical(school: str, supplemental: list[dict[str, str]],
     rows: list[dict[str, Any]] = []
     reuse_by_id: dict[str, list[str]] = defaultdict(list)
     seen_strong: dict[tuple[str, str, str, str, str], list[str]] = defaultdict(list)
+    reciprocal_cache: dict[str, list[dict[str, str]]] = {}
     counts = Counter()
     for src in supplemental:
         sid = src["source_game_id"].strip()
         pair = ordered_pair(school, src["normalized_opponent_key"])
         candidates = index.get((src["season_label"], pair), [])
         status, match, method = identify_game(src, candidates)
+        if src.get("identity_override", "").strip() == "MATCH_SOURCE_ASSERTION":
+            if repo is None or not research_base:
+                status, method = REVIEW, "SOURCE_ASSERTION_AUTHORITY_UNAVAILABLE"
+            else:
+                asserted_match, asserted_method = _frozen_reciprocal_source_assertion_match(
+                    repo, research_base, school, src, candidates, reciprocal_cache,
+                )
+                if not asserted_match:
+                    status, match, method = REVIEW, "", asserted_method
+                elif status == CONFIDENT and match != asserted_match:
+                    status, match, method = (
+                        REVIEW, "", "SOURCE_ASSERTION_GENERIC_MATCH_CONFLICT"
+                    )
+                else:
+                    status, match, method = CONFIDENT, asserted_match, asserted_method
         if status == CONFIDENT:
             reuse_by_id[match].append(sid)
             can = next(c for c in candidates if c["canonical_game_id"] == match)
@@ -849,7 +932,13 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
             blockers.append({"class": "REGISTERED_PROGRAM_OPPONENT_CLASSIFICATION_CONFLICT",
                              "support_id": item["support_id"],
                              "opponent_key": item["canonical_opponent_key"]})
-    identity = reconcile_canonical(school, validated["source_rows"], main_canonical)
+    identity = reconcile_canonical(
+        school,
+        validated["source_rows"],
+        main_canonical,
+        repo=repo,
+        research_base=research_base,
+    )
     if identity["counts"]["IDENTITY_REVIEW_BLOCKER"]:
         blockers.append({"class": "AMBIGUOUS_SUPPLEMENTAL_CANONICAL_IDENTITIES", "source_game_ids": [
             r["source_game_id"] for r in identity["game_rows"] if r["classification"] == "IDENTITY_REVIEW_BLOCKER"]})
