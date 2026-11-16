@@ -619,7 +619,7 @@
     "houston-expansion-phase0-0004"
   ],
   "active_expected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
-  "active_lock_commit": null,
+  "active_lock_commit": "eeddf68ccab80ad8ee1fb8d1bc8884fec5ddbc96",
   "active_lock_owner": "github-actions:43815631813:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
