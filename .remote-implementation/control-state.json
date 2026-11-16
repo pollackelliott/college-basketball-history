@@ -634,15 +634,15 @@
   "active_lock_commit": "55bff7c0cf914fff277db2239d1cdf73948bd3ca",
   "active_lock_owner": "github-actions:43950460570:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "active_prepared_tree_sha": "bf14e1010883e9de27116ab68db0b3df0c95f2d0",
   "active_request_id": "houston-expansion-stage2-sealed-apply-0001",
   "active_request_sha256": "43fb47226cf649c0ad1d03dcd6bfd317b1270e587c0219caeeaa3d8a241a4572",
   "active_school_key": "houston",
   "active_target_branch": "data/houston-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/houston/houston-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "58d3068bfc9010875483fc8640a84bc0d38e78b8471862478dd1f9f684831196",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1280,5 +1280,5 @@
   "lock_acquisition_request_commit": "00623d60e086f56b208645691870314ce0109252",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
