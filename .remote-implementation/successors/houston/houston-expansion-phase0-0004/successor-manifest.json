@@ -1,0 +1,41 @@
+{
+  "actual_published_target_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "53a2850dcd1cad6ea47038c3a4ad72342e0a70a315d200108a85e61fe72d3071",
+    "schools/houston/notes.md": "f0e75aaef45a27f95b45b8bca57a276ded80658cdfb11e0a3d21b7534e3601a4",
+    "schools/houston/opponents.csv": "d1c82da19a7ada44ae57f91f1d144a09697228f95584aefd86adb3adc3aa65b2",
+    "schools/houston/source-games.csv": "0cbd868736edb736849fae75fc48e83c89714697d3cde91903b792809d860259",
+    "schools/houston/source-notes.md": "2d15c15edb513b35d2d36280c65bf458f3ff31b8572052dc9204e74d86750c76",
+    "schools/houston/venues.csv": "7259d27cdb4d71802951940609569c75c365e2bae2e3b732282517a07596ee41"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "schools/houston/notes.md",
+    "schools/houston/opponents.csv",
+    "schools/houston/source-games.csv",
+    "schools/houston/source-notes.md",
+    "schools/houston/venues.csv"
+  ],
+  "expected_target_predecessor_sha": "59db4cc716b5bedf8ec6ea9c546a828b5dcbff50",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "eeddf68ccab80ad8ee1fb8d1bc8884fec5ddbc96",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_SUCCESSOR",
+  "operation": "EXPANSION_PHASE0",
+  "prepared_commit_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
+  "prepared_parent_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "prepared_tree_sha": "1506fc427a8beb29174b87f5e549d77309556bb5",
+  "protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "houston-expansion-phase0-0004",
+  "request_sha256": "76aa95d702b5cb907d929661e5394a19d47ffed5011c7f397877f9d68005c4b5",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "target_branch": "data/houston-onboarding",
+  "venue_reconciliation_sha256": "",
+  "writeahead_commit": "0b3f65deaa9812f6987bb9b0b1f12da37b2fbbc7",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/houston/houston-expansion-phase0-0004/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "d658cc4b435fa870c8057377960b9f8a815ba48b1332db8ac3889c78e3807ec4"
+}
