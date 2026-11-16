@@ -43,6 +43,8 @@ The project does **not** require false certainty for genuinely difficult ancient
 
 When deliberate research establishes `HOME` and complete city/state geography but the surviving historical record does not support a specific physical building, the row may use the existing `RESEARCHED_UNRESOLVED_HOME_VENUE` exception.
 
+A rarer owner-authorized exception may preserve both locality and building unknown only when bounded research is exhausted, unsupported locality inference would be required, and an exact protected-main entry in `data/reference/research-home-location-exceptions.csv` binds the decision to the school, stable row identity, and approved checkpoint/ledger/population hashes. Such a row uses `RESEARCHED_UNRESOLVED_HOME_LOCATION`. Research packages cannot self-declare this exception, and any later authoritative locality/venue evidence must be propagated rather than discarded.
+
 This safety valve is especially relevant to games from the **1930s or earlier**, where surviving facility documentation may be thin. That era emphasis is not an automatic waiver: obvious institutional, archival, facility, reciprocal, and game-level evidence must still be exhausted first.
 
 A broad unexplored historical era does not qualify.
@@ -263,8 +265,10 @@ other obvious systematic paths are exhausted, close the homogeneous residual und
 `RESEARCHED_UNRESOLVED_HOME_VENUE` rather than creating one archaeology project per
 game.
 
-**HOME geography must be closed in Stage 3A-2, not deferred to 3A-4.** Every HOME row
-using the unresolved-building exception must have supported city/state written through.
+**HOME geography must be closed in Stage 3A-2, not deferred to 3A-4.** Every ordinary HOME row
+using the unresolved-building exception must have supported city/state written through. An
+exact protected-main `RESEARCHED_UNRESOLVED_HOME_LOCATION` owner-authority row is the sole
+exception and closes as explicit researched debt rather than inferred geography.
 When the source program's home geography is systematically established for an era and no
 accepted evidence indicates an alternate/off-campus location, that geography may be
 propagated across already-established HOME rows as a default-with-exceptions operation.
@@ -348,7 +352,8 @@ returning a response.
 Continue until each HOME row has either:
 
 - an exact physical venue with complete location/provenance; or
-- a valid `RESEARCHED_UNRESOLVED_HOME_VENUE` disposition under the dedicated policy.
+- a valid `RESEARCHED_UNRESOLVED_HOME_VENUE` disposition under the dedicated policy; or
+- an exact protected-main owner-authorized `RESEARCHED_UNRESOLVED_HOME_LOCATION` disposition after documented research exhaustion.
 
 The 1930s-or-earlier safety valve prevents false certainty; it does not excuse shallow research.
 
