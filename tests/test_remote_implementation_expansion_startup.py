@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
@@ -21,6 +22,7 @@ from remote_implementation_expansion_startup import (  # noqa: E402
     Stop,
     build_phase0_request,
     build_stage1_proof,
+    preserve_preintegration_diagnostics,
     require_startup_idle_control,
     validate_startup_intent,
 )
@@ -237,6 +239,62 @@ class ExpansionStartupProofTests(unittest.TestCase):
         self.assertEqual(
             request["venue_reconciliation"]["sha256"],
             "a" * 64,
+        )
+
+
+class ExpansionStartupDiagnosticTests(unittest.TestCase):
+    def test_stage1_diagnostics_survive_later_integration_failure(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            stage1 = root / "stage1"
+            stage1.mkdir()
+            report = stage1 / STAGE1_REPORT
+            report.write_text(
+                '{"blockers":[{"class":"EXAMPLE_BLOCKER"}]}\n',
+                encoding="utf-8",
+            )
+            proof = root / "stage1-independent-proof.json"
+            proof.write_text(
+                '{"status":"INDEPENDENTLY_REPRODUCED_READ_ONLY_STAGE1"}\n',
+                encoding="utf-8",
+            )
+            diag = root / "diag"
+            with patch(
+                "remote_implementation_expansion_startup.DIAG",
+                diag,
+            ):
+                preserve_preintegration_diagnostics(stage1, proof)
+
+            self.assertEqual(
+                (diag / "stage1-reconciliation.json").read_bytes(),
+                report.read_bytes(),
+            )
+            self.assertEqual(
+                (diag / "stage1-independent-proof.json").read_bytes(),
+                proof.read_bytes(),
+            )
+
+    def test_diagnostics_are_preserved_before_integration_freeze(self):
+        tool = (
+            ROOT
+            / "tools"
+            / "remote_implementation_expansion_startup.py"
+        ).read_text(encoding="utf-8")
+        preserve_call = (
+            "preserve_preintegration_diagnostics(stage1_b, proof_path)"
+        )
+        integration_call = (
+            'str(\n'
+            '            ROOT\n'
+            '            / "tools"\n'
+            '            / "all_history_expansion_integration.py"\n'
+            '        )'
+        )
+        self.assertIn(preserve_call, tool)
+        self.assertIn(integration_call, tool)
+        self.assertLess(
+            tool.index(preserve_call),
+            tool.index(integration_call),
         )
 
 
