@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "houston-expansion-stage2-current-main-refresh-0002",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "houston",
+  "previous_control_state_commit": "5e108deff06d68a30c3a4e4e8a421fda09a9565a",
+  "previous_control_state_sha256": "b2f69af7f44ad0b3c48843d02ac3c2c618d6f98403bec2b42096c83da53b394a",
+  "expected_protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/houston/houston-expansion-phase0-0004/successor-manifest.json",
+    "sha256": "d3b117589a3b7f1fed522866f1a6187fd8b5c7dc16ca76aea1f11ea786c70348"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/houston/houston-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "d8e144a4c8bd6451000481b198d2314ab51f170dd259d6b7a32a0f71758b6a9b"
+  },
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized Houston ALL_HISTORY_EXPANSION Stage 2 persists after merged tooling PR #629. Authenticated merge base 790e0c130b62c068e417e83909882a4b965a58a3: onboarding target-only changed paths = 6 (five schools/houston members and data/reference/programs.csv), protected-main-only changed paths = 17, overlap = 0; main touched no schools/houston files. Preserve exact Phase0, prior refresh, frozen Integration Freeze and semantic snapshot, historical decision universe, and five recommendations. Candidate-runtime run 43932492214 and exact-head tooling CI 43932492220 passed on PR head d6eaece21b88603e93b2f3ad46f3e4d2e6e96bc6; merge d10252b203206ba75e375b9cb845a662fcb39c85. Permanent refresh must prove disjointness again and fail closed."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "houston-expansion-stage2-census-0003",
+    "proposal_request_id": "houston-expansion-stage2-proposal-0003",
+    "expected_decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/houston-expansion-stage2-current-main-refresh-0001/recommendation-map.json",
+      "sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59"
+    }
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Houston ALL_HISTORY_EXPANSION Implementation Stage 2 lane",
+    "authorization": "Owner Continue after PR #629 merged. Existing Stage 2 phase authority persists for disjoint guarded STAGE2_CURRENT_MAIN_REFRESH, independent fresh verification, and repository-owned refresh→census→proposal continuation only. Stop at OWNER_GATE_1_READY or any durable blocker. No historical approval, Gate 1, sealed apply, release, Gate 2, or unrelated mutation."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
