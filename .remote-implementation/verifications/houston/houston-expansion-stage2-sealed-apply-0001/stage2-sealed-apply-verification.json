@@ -1,0 +1,43 @@
+{
+  "approved_plan_hash": "14589bf760be7155b205d28cb07733d9faacf75becb0ffe3a330d16564a65f90",
+  "approved_plan_sha256": "2b361ccb936fec12363358cbcc205f55dd8a7c57e78b858d36470f9ca1797fc5",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "fd8db830a3b3906a923cd8ca63f6b0eb8a36e0f9b5e90d135582785b163706a4",
+    "data/evidence/game-assertions.csv": "4d81f0fe25525a315edc4d5bcf3dfb5ec34dc6a7104780c08c690252b106b843",
+    "data/reconciliation/discrepancies.csv": "cfc07d679dc5c4344e34151d3a346545f21df82236ee4cdaf0ea648688e2ecd6",
+    "data/reconciliation/onboarding-decisions/houston-14589bf760be.json": "2b361ccb936fec12363358cbcc205f55dd8a7c57e78b858d36470f9ca1797fc5",
+    "site/data/manifest.json": "e72b4242bb7adae4a7d4ff89721ccf916ba2b2b080152bbe88a0483b63ddfaaf",
+    "site/data/programs.json": "544466918270442ac58d5bc4ee68fac5e9373d2d862123627bb1dd8f275aa869",
+    "site/data/teams/houston.json": "47941aa2f12615e111794310209cf13ae2e8750fdf4f6137d332e3cc79800cc7",
+    "site/data/teams/texas-a-m.json": "b6cafd436f0e9f771ae03724ffde44ea7b77c989a8ae860b8fa3d1b85b0601d6",
+    "site/data/teams/ucf.json": "ef15f367aba1875271c59ce4ee2f7c30f69407030e881fa2731281a20f9c2171"
+  },
+  "changed_path_count": 9,
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/discrepancies.csv",
+    "data/reconciliation/onboarding-decisions/houston-14589bf760be.json",
+    "site/data/manifest.json",
+    "site/data/programs.json",
+    "site/data/teams/houston.json",
+    "site/data/teams/texas-a-m.json",
+    "site/data/teams/ucf.json"
+  ],
+  "deleted_paths": [],
+  "fresh_replayed_tree_sha": "bf14e1010883e9de27116ab68db0b3df0c95f2d0",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION",
+  "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "release_manifest_sha256": "ef0a3e8a2af2a42ac3fd4383187033ddb1c082213e88d710c29b93c1d757b542",
+  "remote_stage2_sealed_apply_equivalence": "PASS",
+  "request_id": "houston-expansion-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "houston",
+  "stage2_gate1_seal_checkpoint_sha256": "23b6fc6916c45349d32dd96325991dc4eb69ea836d35c94a4e2270ae4c60307f",
+  "stage2_gate1_seal_verification_sha256": "490f09aefcd706a604b36e5b79dc99f965c4975e5bcf07f811c4f0177ec76ca1",
+  "target_branch": "data/houston-onboarding",
+  "target_predecessor_sha": "4a15e67d5a53cbea96e67b5c14b42dd43d61bae9",
+  "target_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "target_tree_sha": "bf14e1010883e9de27116ab68db0b3df0c95f2d0",
+  "tracked_stage2_mutation": "EXACT_SEALED_APPLY_SUCCESSOR"
+}
