@@ -1,41 +1,5 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "houston-expansion-stage2-current-main-refresh-0001",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "school_key": "houston",
-  "previous_control_state_commit": "e32b70222b05f26c848087efb04f498b7b40fbff",
-  "previous_control_state_sha256": "56a36d4d4056b34c0904c61bbafd69715ac807908a359a14597a03dd8a9b4d94",
-  "expected_protected_main_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
-  "target_branch": "data/houston-onboarding",
-  "target_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/houston/houston-expansion-phase0-0004/successor-manifest.json",
-    "sha256": "d3b117589a3b7f1fed522866f1a6187fd8b5c7dc16ca76aea1f11ea786c70348"
-  },
-  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
-  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
-    "authorization_basis": "Owner-authorized Houston Stage 2 remains active. Exact merge base between onboarding target 9de0c1614c6f146e660c59591dc03c6e7dbcb5f1 and protected main 790e0c130b62c068e417e83909882a4b965a58a3 is 5a3f7f1c486c3f877a7801f6471f40ad7e9ca055. Target-only population is exactly six Phase 0 paths: data/reference/programs.csv plus five schools/houston package files. Intervening main-only population is exactly three generic tooling/test paths from PR #627: tools/correction_site_nonregression.py, tools/onboard_school.py, tests/test_correction_site_nonregression.py. Overlap is zero and protected main changed no schools/houston path. Preserve exact Phase 0 successor, Integration Freeze, semantic snapshot, five-decision universe, and historical recommendations."
-  },
-  "phase_continuation": {
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "census_request_id": "houston-expansion-stage2-census-0002",
-    "proposal_request_id": "houston-expansion-stage2-proposal-0002",
-    "expected_decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
-    "recommendation_map": {
-      "path": ".remote-implementation/requests/houston-expansion-stage2-current-main-refresh-0001/recommendation-map.json",
-      "sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59"
-    }
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT serialized Houston ALL_HISTORY_EXPANSION Implementation Stage 2 lane",
-    "authorization": "Owner said Continue after tooling-only PR #627 merged. Existing Stage 2 authority persists. Authorize only the repository-owned disjoint STAGE2_CURRENT_MAIN_REFRESH against current protected main 790e0c130b62c068e417e83909882a4b965a58a3 plus STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation: fresh refresh verification, ordinary census requiring the exact previously authenticated five-decision universe f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1, then read-only exact-map proposal rehearsal. Stop at OWNER_GATE_1_READY or any durable blocker. No Owner Gate 1 approval, seal/apply, release, merge, Owner Gate 2, or unrelated historical/shared mutation is authorized."
-  },
   "authority": {
-    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -43,12 +7,11 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
-    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
@@ -57,5 +20,39 @@
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from houston-expansion-stage2-current-main-refresh-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "expected_protected_main_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/houston/houston-expansion-phase0-0004/successor-manifest.json",
+    "sha256": "d3b117589a3b7f1fed522866f1a6187fd8b5c7dc16ca76aea1f11ea786c70348"
+  },
+  "phase_continuation": {
+    "census_request_id": "houston-expansion-stage2-census-0002",
+    "expected_decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "proposal_request_id": "houston-expansion-stage2-proposal-0002",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/houston-expansion-stage2-current-main-refresh-0001/recommendation-map.json",
+      "sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59"
+    }
+  },
+  "previous_control_state_commit": "5e6a60662aecb06c20e092cf46bc2e367e6a4bfa",
+  "previous_control_state_sha256": "171c4381bad590e98d4069b3b95f8bb269f2cf18a58973f41fc1c52d49b7528a",
+  "request_id": "houston-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/houston/houston-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "d8e144a4c8bd6451000481b198d2314ab51f170dd259d6b7a32a0f71758b6a9b"
+  },
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228"
 }
