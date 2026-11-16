@@ -1853,13 +1853,8 @@ def copy_repository(
         if school_key is not None
         else None
     )
-    expansion_freeze = (
-        _validated_expansion_freeze_bytes(source, school_key)
-        if school_key is not None and correction_freeze is None
-        else None
-    )
     split_authority_freeze = None
-    if school_key is not None and correction_freeze is None and expansion_freeze is None:
+    if school_key is not None and correction_freeze is None:
         try:
             split_authority_freeze = frozen_venue_split_freeze_bytes(
                 source,
@@ -1867,7 +1862,12 @@ def copy_repository(
             )
         except FrozenVenueSplitAuthorityError as exc:
             raise WorkflowError(str(exc)) from exc
-    runtime_freeze = correction_freeze or expansion_freeze or split_authority_freeze
+    expansion_freeze = (
+        _validated_expansion_freeze_bytes(source, school_key)
+        if school_key is not None and correction_freeze is None and split_authority_freeze is None
+        else None
+    )
+    runtime_freeze = correction_freeze or split_authority_freeze or expansion_freeze
 
     def ignore(_directory: str, names: list[str]) -> set[str]:
         return {
