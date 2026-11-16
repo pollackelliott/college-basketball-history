@@ -1,20 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "houston-expansion-stage2-census-0001",
+  "request_id": "houston-expansion-stage2-proposal-0001",
   "school_key": "houston",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "0c278b9488410f512d33a4ec5f3fef6c4012f303",
-  "previous_control_state_sha256": "89ec433952537d714a84d463c7434851d2a537b0b1579cf9cf9354c41785123e",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "b67cc1ca926a20346fd647b936f5a8b102afb3c9",
+  "previous_control_state_sha256": "6b22e03deedc03b7c6aaf54071d2767f1cba22c3df281c5548b98116a09d2f55",
   "expected_protected_main_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
   "target_branch": "data/houston-onboarding",
   "target_sha": "9de0c1614c6f146e660c59591dc03c6e7dbcb5f1",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/houston/houston-expansion-phase0-0004/successor-manifest.json",
-    "sha256": "d3b117589a3b7f1fed522866f1a6187fd8b5c7dc16ca76aea1f11ea786c70348"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/houston/houston-expansion-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "78ebecf594fe122869445f249f35c8f7945fa1e414b5963b3615cbc4624b942a"
+  },
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/houston-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59"
   },
   "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
   "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
   "authority": {
     "expansion_phase0": false,
     "owner_gate_1": false,
@@ -28,19 +33,19 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
     "origin": "ChatGPT serialized Houston ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Owner explicitly said Proceed after independently fresh-verified Houston expansion Phase 0. Authorizes only the read-only permanent Stage 2 capability census and independent fresh verification through CAPABILITY_CENSUS_READY or honest BLOCKED. No tracked repair, proposal, gate, release, or new lane."
+    "authorization": "Owner said Continue within authorized Houston Stage 2 after fresh-verified CAPABILITY_CENSUS_READY. This request authorizes only read-only exact-map proposal rehearsal against the five-row verified decision universe, through OWNER_GATE_1_READY or an honest durable BLOCKED checkpoint. It does not create Owner Gate 1 approval, mutate tracked basketball state, seal/apply, release, merge, or authorize another school."
   }
 }
