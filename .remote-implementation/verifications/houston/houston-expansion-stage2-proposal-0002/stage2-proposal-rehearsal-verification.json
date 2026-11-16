@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "e9f27e14f49a2758cbbf4865ce2c783cb56787bd39590adc105c324b492674ab",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "366cc80b748000538791865ba2cfbf6f36d62ec2cab3c47ff25e340698f08855",
+    "implementation-stage2-status.json": "bd14a95d2bd07e4b058aeb7a12ca4cb7cbd262546f9f21b29daba46ff4b87f4a",
+    "last-rehearsal-site-gate.json": "e894e241ebb12d45e613e333d74027de61679284cb88fd99bf5ac6e88c8591c3",
+    "plan.json": "c7d026ade65370933abd3f3790d6c2b0ed7eec30a29f045140e4f35ee87f2869",
+    "review.csv": "2c112841b099d1815c755ef8961fc72fe245c49b8373a5d3707d3584c8df6b67",
+    "review.md": "99080bf4755744310ac20c686fc6161b52e72893e93cba7d17483c730b373caa"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "366cc80b748000538791865ba2cfbf6f36d62ec2cab3c47ff25e340698f08855",
+    "implementation-stage2-status.json": "179f33b548317bdb0794532fcb40d9f3bfa941d081338b2eb0bd503b0a254a2e",
+    "last-rehearsal-site-gate.json": "e894e241ebb12d45e613e333d74027de61679284cb88fd99bf5ac6e88c8591c3",
+    "plan.json": "c73cbfaf5b3ec09b0039e5a07beca9ba7a0933b7e4ebf4949cd2bca563e4d52a",
+    "review.csv": "2c112841b099d1815c755ef8961fc72fe245c49b8373a5d3707d3584c8df6b67",
+    "review.md": "b2774b0827fa57a188068b89fb6d8a98f5ef6f15909b4476d6a5845308879541"
+  },
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "runtime_decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
+  "recommendation_map_sha256": "7f65d85f53021469534b1f24f6ddba507f9d53246743b41561fa5eddd7be4c59",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "houston-expansion-stage2-proposal-0002",
+  "runtime_decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228",
+  "target_tree_sha": "e1312876d108c556331a02851a1ef44b336a5bff",
+  "tracked_stage2_mutation": "NONE"
+}
