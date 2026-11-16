@@ -38,9 +38,12 @@ from frozen_venue_authority import (
 from publish_historical_season_coverage import integrate_approved_coverage
 
 from correction_site_nonregression import (
+    EXPANSION_MODE,
     capture as capture_correction_site_report,
     prove as prove_correction_site_nonregression,
+    prove_expansion as prove_expansion_site_nonregression,
     verify_current as verify_correction_site_report,
+    verify_expansion_current as verify_expansion_site_report,
 )
 from integration_freeze_guard import (
     SEMANTIC_SOURCE_GAME_FIELDS,
@@ -273,15 +276,49 @@ def _correction_summary_bindings(summary: dict[str, Any]) -> list[tuple[str, str
     return sorted(bindings)
 
 
+def _all_history_expansion_integration_freeze(
+    repo: Path, school_key: str,
+) -> dict[str, Any] | None:
+    """Return authenticated expansion Integration Freeze metadata when present."""
+    path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not path.is_file():
+        return None
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise WorkflowError("invalid Integration Freeze JSON") from exc
+    if value.get("kind") != "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE":
+        return None
+    if (
+        value.get("status") != "INTEGRATION_FROZEN"
+        or value.get("school_key") != school_key
+        or not str(value.get("research_base_sha") or "").strip()
+    ):
+        raise WorkflowError("invalid All-History expansion Integration Freeze")
+    return value
+
+
 def correction_gate_kwargs_from_manifest(
     manifest: dict[str, Any], school_key: str,
 ) -> dict[str, Any]:
-    """Carry the exact sealed correction proof into verify/Preview/Production gates."""
+    """Carry exact sealed site nonregression proof into later gates."""
     summary = manifest.get("summary", {})
+    execution = manifest.get("execution", {})
+    expansion_proof = execution.get("expansion_site_nonregression")
+    if expansion_proof is not None:
+        if (
+            summary.get("correction_transaction_kind") in BOUNDED_CORRECTION_KINDS
+            or summary.get("already_public") is not True
+            or not isinstance(expansion_proof, dict)
+            or expansion_proof.get("mode") != EXPANSION_MODE
+            or expansion_proof.get("school_key") != school_key
+            or manifest.get("school_key") != school_key
+        ):
+            raise WorkflowError("invalid sealed expansion site proof in release manifest")
+        return {"expansion_site_proof": expansion_proof}
     kind = summary.get("correction_transaction_kind")
     if kind not in BOUNDED_CORRECTION_KINDS:
         return {}
-    execution = manifest.get("execution", {})
     proof = execution.get("correction_site_nonregression", {})
     if not isinstance(proof, dict):
         raise WorkflowError("invalid sealed correction site proof in release manifest")
@@ -336,10 +373,13 @@ def run_gates(
     correction_source_id: str = "",
     correction_source_ids: list[str] | None = None,
     correction_site_proof: dict[str, Any] | None = None,
+    expansion_site_proof: dict[str, Any] | None = None,
     approved_plan: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     python = sys.executable
     outputs: dict[str, str] = {}
+    if correction_site_proof is not None and expansion_site_proof is not None:
+        raise WorkflowError("site gate cannot combine correction and expansion proofs")
     scoped_correction_source_ids = list(correction_source_ids or [])
     if correction_source_id:
         if scoped_correction_source_ids and correction_source_id not in scoped_correction_source_ids:
@@ -441,10 +481,12 @@ def run_gates(
         )
     for label, command, command_cwd in commands:
         print(f"\n=== {label} ===")
-        if label == "site_completeness" and correction_site_proof is not None:
-            if not scoped_correction_source_ids:
+        if label == "site_completeness" and (
+            correction_site_proof is not None or expansion_site_proof is not None
+        ):
+            if correction_site_proof is not None and not scoped_correction_source_ids:
                 raise WorkflowError("correction site proof lacks source identity")
-            # The independent gate STILL runs and emits its full report.
+            # The independent full gate STILL runs and emits its complete report.
             failure = None
             try:
                 run(command, cwd=command_cwd, label=label, echo=False)
@@ -457,14 +499,19 @@ def run_gates(
                 raise WorkflowError("independent site gate produced no durable report")
             independent = json.loads(report_path.read_text(encoding="utf-8"))
             full = capture_correction_site_report(repo, school_key)
-            verify_correction_site_report(full, correction_site_proof, school_key)
+            if correction_site_proof is not None:
+                verify_correction_site_report(full, correction_site_proof, school_key)
+                prefix = "CORRECTION NONREGRESSION PASS"
+            else:
+                verify_expansion_site_report(full, expansion_site_proof or {}, school_key)
+                prefix = "ALL-HISTORY EXPANSION NONREGRESSION PASS"
             if independent["status"] != full["status"] or (
                 (failure is None) != (full["status"] == "PASS")
             ):
                 raise WorkflowError("independent site gate status conflicts with proof")
             outputs[label] = (
-                "CORRECTION NONREGRESSION PASS; independent full site gate "
-                + full["status"] + "; inherited published debt remains visible."
+                prefix + "; independent full site gate " + full["status"]
+                + "; inherited published debt remains visible."
             )
             print(outputs[label])
         else:
@@ -1500,6 +1547,13 @@ def execute_approved_in_place(
     except FrozenVenueSplitAuthorityError as exc:
         raise WorkflowError(str(exc)) from exc
 
+    expansion_freeze = _all_history_expansion_integration_freeze(repo, school_key)
+    expansion_site_before = (
+        capture_correction_site_report(repo, school_key)
+        if expansion_freeze is not None
+        else None
+    )
+
     print("\n=== sealed correction-only identity retarget ===")
     correction_identity_patches = apply_pre_ingest_correction_identity_patches(
         repo, approved
@@ -1586,6 +1640,17 @@ def execute_approved_in_place(
     if first_site_hashes != second_site_hashes:
         raise WorkflowError("site/data changed during the deterministic replay")
     print("PASS: repeated site build produced identical JSON hashes.")
+
+    expansion_site_nonregression = None
+    if expansion_site_before is not None:
+        expansion_site_nonregression = prove_expansion_site_nonregression(
+            expansion_site_before,
+            capture_correction_site_report(repo, school_key),
+        )
+        print(
+            "PASS: All-History expansion site nonregression; inherited full-gate "
+            "status: " + expansion_site_nonregression["expanded_site_status"]
+        )
     return {
         "correction_identity_patches": correction_identity_patches,
         "pre_ingest_source_patches": pre_ingest_source_patches,
@@ -1596,6 +1661,7 @@ def execute_approved_in_place(
         "reciprocal_unknown_site_provenance": reciprocal_unknown_site_provenance,
         "publication": publication,
         "historical_coverage": historical_coverage,
+        "expansion_site_nonregression": expansion_site_nonregression,
         "site_output": site_output,
         "archive": archive.relative_to(repo).as_posix(),
     }
@@ -1829,7 +1895,9 @@ def visual_qa_markdown(repo: Path, school_key: str) -> str:
     return "\n".join(lines) + "\n"
 
 
-def pr_body(approved: dict[str, Any], changed: list[str]) -> str:
+def pr_body(
+    approved: dict[str, Any], changed: list[str], *, execution: dict[str, Any] | None = None
+) -> str:
     summary = approved.get("summary", {})
     decisions = approved.get("decisions", [])
     discrepancy_decisions = [item for item in decisions if item["category"] == "discrepancy"]
@@ -1864,7 +1932,12 @@ def pr_body(approved: dict[str, Any], changed: list[str]) -> str:
                 "failures remain reported"
                 if summary.get("correction_transaction_kind")
                 in BOUNDED_CORRECTION_KINDS
-                else "- implementation site completeness — PASS"
+                else (
+                    "- All-History expansion site nonregression — PASS; inherited "
+                    "full-gate failures remain reported"
+                    if (execution or {}).get("expansion_site_nonregression")
+                    else "- implementation site completeness — PASS"
+                )
             ),
             "- accomplishment cross-check — PASS",
             "- deterministic site build — PASS",
@@ -1950,7 +2023,7 @@ def transactional_apply(
         encoding="utf-8",
     )
     (output_dir / "pr-body.md").write_text(
-        pr_body(approved, changed),
+        pr_body(approved, changed, execution=execution),
         encoding="utf-8",
     )
     (output_dir / "visual-qa.md").write_text(
