@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "school_key": "ucf",
+  "owner_approval_basis": "Owner explicitly accepted immutable UCF Research Freeze v2 (SHA256 2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0) and authorized startup/current-main integration on 2026-11-16. Frozen expansion-notes Stage6 identifies five definite current-main physical reuse candidates; each exact facility name and city/state matches the existing immutable global venue registry, and this spec only reuses those accepted physical identities without making a new historical decision or changing source-game meaning.",
+  "expected_research_zip_sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+  "expected_venues_sha256": "188a1899067206c34bafe4dc3bb01aef7701ded2c483b7453f911994991a122d",
+  "mappings": [
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "ucf-provisional-education-gym",
+      "expected_local_name": "Education Gym",
+      "expected_local_city": "Orlando",
+      "expected_local_state": "FL",
+      "global_venue_id": "VEN-000691",
+      "global_venue_key": "education-gym-ucf",
+      "expected_global_city": "Orlando",
+      "expected_global_state": "FL",
+      "resolution_basis": "Accepted UCF v2 Research Freeze expansion-notes Stage6: definite protected-main physical reuse candidate; exact physical facility name and exact locality already registered on protected main ed1164118f471b2a398bf6b53491035de17c7212; representation-only current-main venue-key reuse, no source-site/date/HAN or geographic change."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "ucf-provisional-george-w-jenkins-field-house",
+      "expected_local_name": "George W. Jenkins Field House",
+      "expected_local_city": "Lakeland",
+      "expected_local_state": "FL",
+      "global_venue_id": "VEN-001105",
+      "global_venue_key": "george-w-jenkins-field-house",
+      "expected_global_city": "Lakeland",
+      "expected_global_state": "FL",
+      "resolution_basis": "Accepted UCF v2 Research Freeze expansion-notes Stage6: definite protected-main physical reuse candidate; exact physical facility name and exact locality already registered on protected main ed1164118f471b2a398bf6b53491035de17c7212; representation-only current-main venue-key reuse, no source-site/date/HAN or geographic change."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "ucf-provisional-hammons-student-center",
+      "expected_local_name": "Hammons Student Center",
+      "expected_local_city": "Springfield",
+      "expected_local_state": "MO",
+      "global_venue_id": "VEN-000562",
+      "global_venue_key": "hammons-student-center",
+      "expected_global_city": "Springfield",
+      "expected_global_state": "MO",
+      "resolution_basis": "Accepted UCF v2 Research Freeze expansion-notes Stage6: definite protected-main physical reuse candidate; exact physical facility name and exact locality already registered on protected main ed1164118f471b2a398bf6b53491035de17c7212; representation-only current-main venue-key reuse, no source-site/date/HAN or geographic change."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "ucf-provisional-lakeland-civic-center",
+      "expected_local_name": "Lakeland Civic Center",
+      "expected_local_city": "Lakeland",
+      "expected_local_state": "FL",
+      "global_venue_id": "VEN-000905",
+      "global_venue_key": "lakeland-civic-center",
+      "expected_global_city": "Lakeland",
+      "expected_global_state": "FL",
+      "resolution_basis": "Accepted UCF v2 Research Freeze expansion-notes Stage6: definite protected-main physical reuse candidate; exact physical facility name and exact locality already registered on protected main ed1164118f471b2a398bf6b53491035de17c7212; representation-only current-main venue-key reuse, no source-site/date/HAN or geographic change."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "ucf-provisional-orange-county-civic-center",
+      "expected_local_name": "Orange County Civic Center",
+      "expected_local_city": "Orlando",
+      "expected_local_state": "FL",
+      "global_venue_id": "VEN-000683",
+      "global_venue_key": "orange-county-civic-center",
+      "expected_global_city": "Orlando",
+      "expected_global_state": "FL",
+      "resolution_basis": "Accepted UCF v2 Research Freeze expansion-notes Stage6: definite protected-main physical reuse candidate; exact physical facility name and exact locality already registered on protected main ed1164118f471b2a398bf6b53491035de17c7212; representation-only current-main venue-key reuse, no source-site/date/HAN or geographic change."
+    }
+  ]
+}
