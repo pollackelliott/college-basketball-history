@@ -199,7 +199,16 @@ jobs:
           candidate="$(git -C candidate ls-remote origin "refs/heads/$PR_HEAD_REF" | awk '{print $1}')"
           test -n "$control" && test "$control" = "$SELECTED_CONTROL"
           test -n "$candidate" && test "$candidate" = "$SELECTED_CANDIDATE"
-          echo 'EXACT_PR_HEAD_AND_CONTROL_REF_STABILITY=PASS'
+          scoped_main="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-rehearsal-summary.json').read_text())
+          print(summary['candidate_scope_main_sha'])
+          PY
+          )"
+          live_main="$(git -C candidate ls-remote origin refs/heads/main | awk '{print $1}')"
+          test -n "$live_main" && test "$live_main" = "$scoped_main"
+          echo 'EXACT_PR_HEAD_CONTROL_AND_MAIN_STABILITY=PASS'
       - name: Upload candidate rehearsal diagnostics
         if: always()
         uses: actions/upload-artifact@v4
