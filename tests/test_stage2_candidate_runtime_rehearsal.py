@@ -1,4 +1,6 @@
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -7,10 +9,77 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from remote_implementation_io import Stop  # noqa: E402
 from stage2_candidate_runtime_rehearsal import (  # noqa: E402
+    candidate_changed_paths,
     candidate_census_decision_universe,
     classify_candidate_result,
     validate_candidate_scope,
 )
+
+
+class CandidateRuntimeLiveMainScopeTests(unittest.TestCase):
+    """Old frozen main ancestry must not count intervening main changes as PR edits."""
+
+    @staticmethod
+    def git(repo, *args):
+        return subprocess.run(
+            ["git", *args], cwd=repo, text=True, check=True,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        ).stdout.strip()
+
+    def prepare(self, root):
+        repo, remote = root / "candidate", root / "remote.git"
+        self.git(root, "init", "-q", "--bare", str(remote))
+        self.git(root, "init", "-q", "-b", "main", str(repo))
+        self.git(repo, "config", "user.email", "fixture@example.invalid")
+        self.git(repo, "config", "user.name", "Fixture")
+        (repo / "data/reference").mkdir(parents=True)
+        (repo / "data/reference/example.csv").write_text("old\n")
+        self.git(repo, "add", ".")
+        self.git(repo, "commit", "-qm", "historical request main")
+        old = self.git(repo, "rev-parse", "HEAD")
+        (repo / "data/reference/research-home-location-exceptions.csv").write_text("intervening main\n")
+        self.git(repo, "add", ".")
+        self.git(repo, "commit", "-qm", "main-only reference edit")
+        main = self.git(repo, "rev-parse", "HEAD")
+        self.git(repo, "remote", "add", "origin", str(remote))
+        self.git(repo, "push", "-q", "origin", "main")
+        self.git(repo, "fetch", "-q", "origin", "main")
+        (repo / "tools").mkdir()
+        (repo / "tools/example.py").write_text("print('tooling')\n")
+        self.git(repo, "add", ".")
+        self.git(repo, "commit", "-qm", "candidate tooling")
+        return repo, old, main, self.git(repo, "rev-parse", "HEAD")
+
+    def test_main_only_data_change_excluded_from_pr_scope(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, old, main, head = self.prepare(Path(tmp))
+            paths, scoped_main = candidate_changed_paths(repo, old, head)
+            self.assertEqual((paths, scoped_main), (["tools/example.py"], main))
+            validate_candidate_scope(paths)
+
+    def test_actual_candidate_data_edit_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, old, main, _ = self.prepare(Path(tmp))
+            (repo / "data/reference/example.csv").write_text("candidate edit\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-qm", "forbidden candidate data change")
+            paths, scoped_main = candidate_changed_paths(
+                repo, old, self.git(repo, "rev-parse", "HEAD")
+            )
+            self.assertEqual(scoped_main, main)
+            with self.assertRaisesRegex(Stop, "NON_TOOLING_PATHS"):
+                validate_candidate_scope(paths)
+
+    def test_candidate_without_current_main_ancestry_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, old, _, _ = self.prepare(Path(tmp))
+            self.git(repo, "checkout", "-q", "-b", "old-base", old)
+            (repo / "tools").mkdir(exist_ok=True)
+            (repo / "tools/example.py").write_text("print('stale')\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-qm", "stale candidate")
+            with self.assertRaisesRegex(Stop, "NOT_BASED_ON_CURRENT_MAIN"):
+                candidate_changed_paths(repo, old, self.git(repo, "rev-parse", "HEAD"))
 
 
 class CandidateRuntimeScopeTests(unittest.TestCase):
