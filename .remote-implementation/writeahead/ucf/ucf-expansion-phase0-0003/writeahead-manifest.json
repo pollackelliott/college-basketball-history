@@ -1,0 +1,70 @@
+{
+  "allowed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/ucf/conferences.csv",
+    "schools/ucf/notes.md",
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv",
+    "schools/ucf/source-notes.md",
+    "schools/ucf/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "bc76cda8ba41e7638ecddb9194a554e9a88b6c14dd93dc2554fa2a4058bce409",
+    "data/reference/venue-names.csv": "59e285efdc5104c21f312e78e73f037b1c83a4a26514fff16f8aebef9bf3587e",
+    "data/reference/venues.csv": "4545312c6f3fd5f66c51c26e5f70c1a68b939afbdf145d600c422348b221c83d",
+    "schools/ucf/notes.md": "7d0af4868506bd195908802ac4efbeb04087a4d99d4a6f839ca31f8defd86448",
+    "schools/ucf/opponents.csv": "8845c2f3b8611b62e5afd42344ed49273068e568510901082f3aaacc0d0bc305",
+    "schools/ucf/source-games.csv": "c81413ebb4fc9de075527bf5a924e6b0c5141235d31bec1c8bbdac910d4317fe",
+    "schools/ucf/source-notes.md": "a5491ddb17ca2736c121f4f4e39f2110b3605bf42570ace3d5c6c71f882855ff",
+    "schools/ucf/venues.csv": "01965ba29b19335d7a1ada157edac566a45ffe91c3d6b0205a557e5aee162f59"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/ucf/notes.md",
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv",
+    "schools/ucf/source-notes.md",
+    "schools/ucf/venues.csv"
+  ],
+  "commit_message": "Stage ucf all-history expansion Phase 0",
+  "expected_target_predecessor_sha": "e0fa9cc31e908529b9e13297621af8c04be76147",
+  "global_lock_commit": "3b6a4473ed6434a07e0e8709c535e7d3f00b5b03",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "EXPANSION_PHASE0",
+  "package_member_sha256": {
+    "conferences.csv": "89b16a2bbdfc282ced1d178f21108eb22a1c0ed58af23153a685ebc019ef612f",
+    "notes.md": "7d0af4868506bd195908802ac4efbeb04087a4d99d4a6f839ca31f8defd86448",
+    "opponents.csv": "8845c2f3b8611b62e5afd42344ed49273068e568510901082f3aaacc0d0bc305",
+    "source-games.csv": "c81413ebb4fc9de075527bf5a924e6b0c5141235d31bec1c8bbdac910d4317fe",
+    "source-notes.md": "a5491ddb17ca2736c121f4f4e39f2110b3605bf42570ace3d5c6c71f882855ff",
+    "venues.csv": "2ca14ce188e021a990bced2667da735d4373fb44558a174892e93e2bf77ba392"
+  },
+  "prepared_commit_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "prepared_parent_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "prepared_tree_sha": "f0fb99ac3b2997d545d4e01a3dd7ec7d419c335a",
+  "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "repository_validation": "PASS",
+  "request_id": "ucf-expansion-phase0-0003",
+  "request_sha256": "7c194e06232f963ac36266fce12c27fc9726cb47c994721f859c6ce822bac0cf",
+  "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "research_checkpoint_sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "a7fdd1df4ffa05b8e7a47e9a7e361850dfb61412b51990d24be172d2ef3ccfa8",
+    "integration-freeze.json": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+    "phase0-preview.json": "0847e2944b1be431d020b4072e8b14551bccec75ad9d8ae5dd984b010ba27f75",
+    "stage1-independent-proof.json": "d0d627c8e08cd9c8d0d7bb00568caa9353c948872e4b00d447a7ccdc42ea853a",
+    "venue-reconciliation.json": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
+  },
+  "stage1_independent_proof_sha256": "d0d627c8e08cd9c8d0d7bb00568caa9353c948872e4b00d447a7ccdc42ea853a",
+  "target_branch": "data/ucf-onboarding",
+  "venue_reconciliation_sha256": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
+}

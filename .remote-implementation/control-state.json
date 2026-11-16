@@ -639,15 +639,15 @@
   "active_lock_commit": "3b6a4473ed6434a07e0e8709c535e7d3f00b5b03",
   "active_lock_owner": "github-actions:43980353826:1",
   "active_operation": "EXPANSION_PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "active_prepared_tree_sha": "f0fb99ac3b2997d545d4e01a3dd7ec7d419c335a",
   "active_request_id": "ucf-expansion-phase0-0003",
   "active_request_sha256": "7c194e06232f963ac36266fce12c27fc9726cb47c994721f859c6ce822bac0cf",
   "active_school_key": "ucf",
   "active_target_branch": "data/ucf-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/ucf/ucf-expansion-phase0-0003/writeahead-manifest.json",
+  "active_writeahead_sha256": "e084f9a18b95687b6a96ce085417163c949be871de368744b6928d7ac8e8cd0b",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1281,5 +1281,5 @@
   "lock_acquisition_request_commit": "a548cb085c9fc7f23ca167e4bc12df66bc1e8917",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
