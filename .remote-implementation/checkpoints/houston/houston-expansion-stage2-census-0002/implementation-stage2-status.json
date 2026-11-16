@@ -1,0 +1,41 @@
+{
+  "branch": "remote-stage2-census/houston-79af8599ed9d",
+  "capability_census": {
+    "path": ".onboarding/houston/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 1
+  },
+  "head_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228",
+  "integration_base_sha": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "integration_semantic_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "5a3f7f1c486c3f877a7801f6471f40ad7e9ca055",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "discrepancy": 4
+    },
+    "decision_count": 5,
+    "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "discrepancies_to_add": 4,
+    "existing_game_matches": 2295,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 99,
+    "plan_path": ".onboarding/houston/plan.json",
+    "review_path": ".onboarding/houston/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "419c78df7ca4c30df501657c079445d0bb7cbdee",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}

@@ -1,0 +1,106 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "f70330d2329b01a292959c41f4da88ec8345103c20800934bdedb58d49415515",
+    "implementation-stage2-status.json": "d3f018718a9fc5faf3771ae86d80c31c487bb3d218c9cbf1521e4dc5c4c38b46",
+    "plan.json": "c7d026ade65370933abd3f3790d6c2b0ed7eec30a29f045140e4f35ee87f2869",
+    "review.csv": "2c112841b099d1815c755ef8961fc72fe245c49b8373a5d3707d3584c8df6b67",
+    "review.md": "99080bf4755744310ac20c686fc6161b52e72893e93cba7d17483c730b373caa"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "f70330d2329b01a292959c41f4da88ec8345103c20800934bdedb58d49415515",
+    "implementation-stage2-status.json": "6dd38798f46e482ad4549c910236e8412bfc8b1d079909f44c16e959680f87c0",
+    "plan.json": "da86df9cf495ba4314695724615903533e5ffd860139bab3c3fa83499e163a7b",
+    "review.csv": "2c112841b099d1815c755ef8961fc72fe245c49b8373a5d3707d3584c8df6b67",
+    "review.md": "4e401191a3407577c04b8c3a39e2652b97e44e136191bb359f95b464b4e40249"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "f70330d2329b01a292959c41f4da88ec8345103c20800934bdedb58d49415515",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 1,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "discrepancy": 4
+    },
+    "decision_count": 5,
+    "decision_fields": {
+      "game_date": 1,
+      "overtime_periods": 1,
+      "score": 2,
+      "site_metadata": 1
+    },
+    "site_or_han_review_decision_ids": [
+      "CANONICAL-SITE-PATCH-CBBG-0124516"
+    ],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 1,
+      "topology": "site_or_han_review_population"
+    }
+  ],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "6fc4c65b20e78ec210dc95be8a0ed9c8e4ebf47aaaf130b4706b870d268022cc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "houston"
+  ],
+  "phase0_protected_main_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
+  "phase0_successor_path": ".remote-implementation/successors/houston/houston-expansion-phase0-0004/successor-manifest.json",
+  "phase0_successor_sha256": "d3b117589a3b7f1fed522866f1a6187fd8b5c7dc16ca76aea1f11ea786c70348",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "canonical_site_patch": 1,
+      "discrepancy": 4
+    },
+    "decision_count": 5,
+    "decision_universe_sha256": "f43adae217bef9eaa0672aff55c70e089b06266ddb158997a6acc596ce821df1",
+    "discrepancies_to_add": 4,
+    "existing_game_matches": 2295,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 99,
+    "plan_path": ".onboarding/houston/plan.json",
+    "review_path": ".onboarding/houston/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "790e0c130b62c068e417e83909882a4b965a58a3",
+  "request_id": "houston-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "houston",
+  "semantic_snapshot_sha256": "43f7d1127d2f9a5e92b02d125577fb643e3df77900942a91897e4f16f3512cdc",
+  "stage2_current_main_refresh_successor_path": ".remote-implementation/successors/houston/houston-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+  "stage2_current_main_refresh_successor_sha256": "d8e144a4c8bd6451000481b198d2314ab51f170dd259d6b7a32a0f71758b6a9b",
+  "stage2_current_main_refresh_verification_path": ".remote-implementation/verifications/houston/houston-expansion-stage2-current-main-refresh-0001/stage2-current-main-refresh-verification.json",
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228",
+  "target_tree_sha": "e1312876d108c556331a02851a1ef44b336a5bff",
+  "tracked_mutation_proof": {
+    "after_head_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228",
+    "after_status": "",
+    "after_tree_sha": "e1312876d108c556331a02851a1ef44b336a5bff",
+    "before_head_sha": "79af8599ed9dde40c31c5693fdfe030cbb499228",
+    "before_status": "",
+    "before_tree_sha": "e1312876d108c556331a02851a1ef44b336a5bff",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
