@@ -625,18 +625,19 @@
     "houston-expansion-stage2-current-main-refresh-0002",
     "houston-expansion-stage2-census-0003",
     "houston-expansion-stage2-proposal-0003",
-    "houston-expansion-stage2-gate1-fill-0001"
+    "houston-expansion-stage2-gate1-fill-0001",
+    "houston-expansion-stage2-preseal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PRESEAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "houston-expansion-stage2-preseal-0001",
+  "active_request_sha256": "767c32f8af56c2e13630364014dca637d6967cf24ea7a27106c7cfd527397336",
+  "active_school_key": "houston",
+  "active_target_branch": "data/houston-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1263,8 +1264,11 @@
     "target_branch": "data/houston-onboarding",
     "target_sha": "4a15e67d5a53cbea96e67b5c14b42dd43d61bae9"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43944803259",
+  "lock_acquisition_request_commit": "f8a2263d274da6447bd5c7656a83cc662a88746a",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PRESEAL_REHEARSAL_RUNNING"
 }
