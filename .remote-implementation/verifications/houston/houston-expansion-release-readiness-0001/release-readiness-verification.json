@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "f819e7f05235135f7ace29d02fabe96b972eaeaeb0c28151c432a1276cfa1f08",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "37e759493a82f1bd230743f6a2ee57f23f7dcadd57bd3f608bbb7049ef36d155",
+  "pr_created": false,
+  "preview_request_id": "houston-expansion-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "d10252b203206ba75e375b9cb845a662fcb39c85",
+  "readiness_proof_sha256": "6c9e8279d973e907cbb6cfb2442cf351b90f3583ca15350e984549154398f61d",
+  "release_pr_packet_sha256": "9f4eac52859021aa9d87b6d1541ef5800d39501b150dcd086e11f416a39050a4",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "houston-expansion-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "houston",
+  "target_branch": "data/houston-onboarding",
+  "target_sha": "5c3e58420eb8ce1fe2c10e57322b517397179db5",
+  "tracked_mutation": "NONE"
+}
