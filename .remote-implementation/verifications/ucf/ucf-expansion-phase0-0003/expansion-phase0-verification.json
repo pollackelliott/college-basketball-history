@@ -1,0 +1,29 @@
+{
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/ucf/notes.md",
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv",
+    "schools/ucf/source-notes.md",
+    "schools/ucf/venues.csv"
+  ],
+  "expected_target_predecessor_sha": "e0fa9cc31e908529b9e13297621af8c04be76147",
+  "independent_exact_tree_equivalence": "PASS",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_VERIFICATION",
+  "observed_live_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "prepared_tree_sha": "f0fb99ac3b2997d545d4e01a3dd7ec7d419c335a",
+  "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "ucf-expansion-phase0-0003",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "status": "PASS",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "venue_reconciliation_sha256": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
+}
