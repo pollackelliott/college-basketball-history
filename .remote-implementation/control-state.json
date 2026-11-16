@@ -640,7 +640,7 @@
   "active_request_sha256": "43fb47226cf649c0ad1d03dcd6bfd317b1270e587c0219caeeaa3d8a241a4572",
   "active_school_key": "houston",
   "active_target_branch": "data/houston-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "5c34b5403afbe1ef9e3903735c1deced4ff34352",
   "active_writeahead_path": ".remote-implementation/writeahead/houston/houston-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "58d3068bfc9010875483fc8640a84bc0d38e78b8471862478dd1f9f684831196",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
