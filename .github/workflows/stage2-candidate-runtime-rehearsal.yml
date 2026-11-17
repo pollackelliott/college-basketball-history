@@ -200,9 +200,8 @@ jobs:
 
       - name: Require control and actual PR head remained fixed
         if: >-
-          github.event_name == 'workflow_dispatch' ||
+          github.event_name == 'pull_request' &&
           !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
-        if: github.event_name == 'pull_request'
         shell: bash
         env:
           SELECTED_CONTROL: ${{ steps.authority.outputs.control_commit }}
