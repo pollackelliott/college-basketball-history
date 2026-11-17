@@ -1,43 +1,41 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-release-readiness-0001",
+  "request_id": "ucf-expansion-release-preview-verify-0001",
+  "operation": "RELEASE_PREVIEW_VERIFY",
   "school_key": "ucf",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "a945ce9da86c47a786699e51bd996805403be8be",
-  "previous_control_state_sha256": "6433957014d7d9f983e7370f2376c97d9c546536ddfcaf7c2304b7e57487422f",
+  "previous_control_state_commit": "fe65b01d9bc82050909ea9af2a09c06b46638a8d",
+  "previous_control_state_sha256": "6f4280ee70343e081d11a63b4fce8650bdc77deadf8305604ca45bc5d0cc2a96",
   "expected_protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
   "target_branch": "data/ucf-onboarding",
   "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
   "approved_plan_hash": "7cd9aaa960bc204ec92cdf707e4237fb72730cb1e63315be9af754d2209fdc8e",
   "release_manifest_sha256": "c98633e07af66e867247f107a7d84c2fc542d61627f68ae1a4bf1aaa32be5f78",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-sealed-apply-0004/successor-manifest.json",
-    "sha256": "7ae3797486ee34ef385ea356f60e48e5506208e05aafc797f6aa33611aabe0bd"
+  "pr_number": 636,
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "4680c0670104a609df0ec67ce967546305a971054d58b65ea950d20f49d78786"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-sealed-apply-0004/stage2-sealed-apply-verification.json",
-    "sha256": "8092ab3d065aac26aab505dad85825cef41a88f291454b3380cd54cc8733548d"
-  },
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "ucf-expansion-release-preview-verify-0001"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/ucf/ucf-expansion-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "2b7d9614ab28f34ced196e20cb9ada37b58a1b201540f2b612e15e169c3a3074"
   },
   "creation_provenance": {
-    "origin": "Same UCF ALL_HISTORY_EXPANSION serialized Implementation lane — next owner-authorized release-preparation phase",
-    "authorization": "Owner said 'Continue' after UCF Stage 3 sealed apply completed and was independently fresh-verified PASS. This authorizes the next routine reversible Stage 4 release preparation through read-only readiness, exact GitHub connector PR creation/reuse, CI/mergeability and exact Vercel Preview verification, ending at OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2 approval, PR merge, Production proof, new historical decisions, and unrelated shared/global mutations are NOT authorized."
+    "origin": "Same serialized UCF ALL_HISTORY_EXPANSION Implementation Stage 4 release-preparation phase",
+    "authorization": "Owner phase-persistent Continue authorizes exact connector-created PR #636, from fresh-verified release readiness ucf-expansion-release-readiness-0001, to undergo read-only exact PR-head CI, clean mergeability and Vercel Preview verification through independent OWNER_GATE_2_READY. Packet-bound head fa527b5607152006c36c26b8625dc5d0d70e5b4d, base protected main 3518f3da648417c914c9bf78b8ce1270f80a9999, body sha256 c9d7ee4553f10f669a4bf1eb7ee18a5c7697fe196320b4507ee2f3f3442d0cc2. No Gate 2 approval, PR merge, Production proof, historical reinterpretation or tracked mutation authorized."
   },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
+    "release": false,
     "release_gate2_approval": false,
-    "release_preview_verify": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": true,
     "release_production_proof": false,
-    "release_readiness": true,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
