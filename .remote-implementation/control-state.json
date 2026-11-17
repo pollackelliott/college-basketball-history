@@ -646,18 +646,19 @@
     "ucf-expansion-stage2-census-0005",
     "ucf-expansion-stage2-proposal-0004",
     "ucf-expansion-stage2-gate1-fill-0001",
-    "ucf-expansion-stage2-preseal-0001"
+    "ucf-expansion-stage2-preseal-0001",
+    "ucf-expansion-stage2-preseal-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PRESEAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "ucf-expansion-stage2-preseal-0002",
+  "active_request_sha256": "db43e28bb3224b5fbbfb6fb8226545d4244b486b45ea4a75e4202a9c9ab6a66f",
+  "active_school_key": "ucf",
+  "active_target_branch": "data/ucf-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1310,8 +1311,11 @@
     "target_branch": "data/ucf-onboarding",
     "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44097008689",
+  "lock_acquisition_request_commit": "80254a5df72c0fbea8cbca290ccab4d5c23eea45",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PRESEAL_REHEARSAL_RUNNING"
 }
