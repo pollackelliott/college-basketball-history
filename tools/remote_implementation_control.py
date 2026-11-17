@@ -295,7 +295,10 @@ def request_used(state: dict[str, Any], request_id: str) -> bool:
 
 def _validate_transport(transport: Any) -> None:
     _require(isinstance(transport, dict), "REQUEST_TRANSPORT_MISSING")
-    _require(transport.get("kind") == "git_base64_parts", "REQUEST_TRANSPORT_KIND_UNSUPPORTED")
+    _require(
+        transport.get("kind") in {"git_base64_parts", "git_gzip_base64_parts"},
+        "REQUEST_TRANSPORT_KIND_UNSUPPORTED",
+    )
     _require_sha(transport.get("commit_sha"), 40, "REQUEST_TRANSPORT_COMMIT_INVALID")
     prefix = str(transport.get("path_prefix") or "").strip()
     _require(bool(prefix) and not prefix.startswith("/"), "REQUEST_TRANSPORT_PREFIX_INVALID")

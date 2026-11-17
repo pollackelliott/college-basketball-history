@@ -224,6 +224,11 @@ class RemoteImplementationControlTests(unittest.TestCase):
     def test_valid_bounded_stage1_request(self):
         validate_request(request(OP_STAGE1))
 
+    def test_valid_compressed_stage1_transport(self):
+        req = request(OP_STAGE1)
+        req["research_checkpoint"]["transport"]["kind"] = "git_gzip_base64_parts"
+        validate_request(req)
+
     def test_valid_bounded_phase0_request(self):
         validate_request(request(OP_PHASE0))
 
