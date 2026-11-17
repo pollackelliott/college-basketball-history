@@ -645,7 +645,7 @@
     "ucf-expansion-stage2-current-main-refresh-0005"
   ],
   "active_expected_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
-  "active_lock_commit": null,
+  "active_lock_commit": "4b0204c4dc7e6f3c9942e74b704120c1be13400a",
   "active_lock_owner": "github-actions:44080320967:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
