@@ -193,7 +193,13 @@ def build_normalization_plan(repo: Path, school_key: str) -> dict[str, Any]:
 
 
 
-def build_source_display_plan(repo: Path, school_key: str, opponent_plan: dict[str, Any]) -> dict[str, Any]:
+def build_source_display_plan(
+    repo: Path,
+    school_key: str,
+    opponent_plan: dict[str, Any],
+    *,
+    limit_to_opponent_changes: bool = False,
+) -> dict[str, Any]:
     """Sync only historical game-level normalized names to unambiguous project authority.
 
     Registered program keys, raw evidence, source opponent labels, and all frozen
@@ -221,8 +227,16 @@ def build_source_display_plan(repo: Path, school_key: str, opponent_plan: dict[s
         if key and name:
             names_by_key[key].add(name)
 
+    # A guarded Stage 2 census repair must not synchronize source-only historical
+    # display variants for keys absent from the exact opponent blocker population.
+    changed_opponent_keys = (
+        {item["canonical_opponent_key"] for item in opponent_plan["changes"]}
+        if limit_to_opponent_changes else None
+    )
     stable: dict[str, str] = {}
     for key in sorted(names_by_key):
+        if changed_opponent_keys is not None and key not in changed_opponent_keys:
+            continue
         if key in program_keys or key not in authority:
             continue
         signatures = {
@@ -286,8 +300,15 @@ def main() -> int:
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--sync-source-games", action="store_true",
                         help="Also align only source-games.csv normalized_opponent_name")
+    parser.add_argument(
+        "--limit-source-games-to-opponent-changes",
+        action="store_true",
+        help="Limit source-game display sync to opponent keys changed by the plan",
+    )
     parser.add_argument("--json-output", type=Path, default=None)
     args = parser.parse_args()
+    if args.limit_source_games_to_opponent_changes and not args.sync_source_games:
+        parser.error("--limit-source-games-to-opponent-changes requires --sync-source-games")
 
     repo = (
         args.repo.resolve()
@@ -315,7 +336,10 @@ def main() -> int:
     source_plan = None
     if args.sync_source_games and plan["status"] == "PASS":
         try:
-            source_plan = build_source_display_plan(repo, args.school_key, plan)
+            source_plan = build_source_display_plan(
+                repo, args.school_key, plan,
+                limit_to_opponent_changes=args.limit_source_games_to_opponent_changes,
+            )
         except (FileNotFoundError, ValueError) as exc:
             print(f"FAIL: {exc}")
             return 1

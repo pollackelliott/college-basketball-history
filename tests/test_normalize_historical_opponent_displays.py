@@ -229,6 +229,66 @@ class HistoricalOpponentDisplayNormalizerTests(unittest.TestCase):
             again = normalizer.build_source_display_plan(repo, "alpha", opponent_plan)
             self.assertEqual(again["change_row_count"], 0)
 
+
+    def test_census_scoped_source_sync_excludes_source_only_historical_variants(self):
+        # UCF topology: opponent display conflict plus independently settled
+        # source-name variants for Centenary and St. Thomas absent from census.
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            write_programs(repo, [])
+            write_opponents(repo, "alpha", [
+                {"source_opponent_label": "Western Maryland",
+                 "canonical_opponent_key": "mcdaniel",
+                 "canonical_opponent_name": "Western Maryland"},
+                {"source_opponent_label": "Centenary",
+                 "canonical_opponent_key": "centenary",
+                 "canonical_opponent_name": "Centenary"},
+            ])
+            write_opponents(repo, "beta", [
+                {"source_opponent_label": "McDaniel",
+                 "canonical_opponent_key": "mcdaniel",
+                 "canonical_opponent_name": "McDaniel"},
+                {"source_opponent_label": "Centenary",
+                 "canonical_opponent_key": "centenary",
+                 "canonical_opponent_name": "Centenary"},
+            ])
+            source = repo / "schools" / "alpha" / "source-games.csv"
+            fields = [
+                "source_game_id", "normalized_opponent_key",
+                "normalized_opponent_name", "source_opponent_label", "raw_text",
+            ]
+            write_csv(source, fields, [
+                {"source_game_id": "A-1", "normalized_opponent_key": "mcdaniel",
+                 "normalized_opponent_name": "Western Maryland",
+                 "source_opponent_label": "Western Maryland",
+                 "raw_text": "at Western Maryland W 50-40"},
+                {"source_game_id": "A-2", "normalized_opponent_key": "centenary",
+                 "normalized_opponent_name": "Centenary College of Louisiana",
+                 "source_opponent_label": "Centenary",
+                 "raw_text": "Centenary L 50-40"},
+            ])
+            plan = normalizer.build_normalization_plan(repo, "alpha")
+            self.assertEqual(
+                [x["canonical_opponent_key"] for x in plan["changes"]],
+                ["mcdaniel"],
+            )
+            broad = normalizer.build_source_display_plan(repo, "alpha", plan)
+            self.assertEqual(broad["change_key_count"], 2)
+            scoped = normalizer.build_source_display_plan(
+                repo, "alpha", plan, limit_to_opponent_changes=True
+            )
+            self.assertEqual(scoped["change_key_count"], 1)
+            self.assertEqual(scoped["changes"][0]["normalized_opponent_key"], "mcdaniel")
+            self.assertEqual(scoped["rows"][0]["normalized_opponent_name"], "McDaniel")
+            self.assertEqual(
+                scoped["rows"][1]["normalized_opponent_name"],
+                "Centenary College of Louisiana",
+            )
+            self.assertEqual(
+                scoped["rows"][1]["raw_text"], "Centenary L 50-40"
+            )
+            self.assertEqual(scoped["rows"][1]["source_opponent_label"], "Centenary")
+
     def test_sync_rejects_ambiguous_project_authority(self):
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary)

@@ -260,6 +260,7 @@ def run_normalizer_dry_run(
         "--repo",
         str(repo),
         "--sync-source-games",
+        "--limit-source-games-to-opponent-changes",
         "--json-output",
         str(report_path),
     ]
@@ -302,6 +303,7 @@ def run_normalizer_dry_run(
             "tools/normalize_historical_opponent_displays.py",
             school_key,
             "--sync-source-games",
+            "--limit-source-games-to-opponent-changes",
             "--json-output",
             "<DIAG>/opponent-display-normalization-dry-run.json",
         ],
@@ -449,6 +451,7 @@ def apply_and_prepare_repair(
         "--repo",
         str(repo),
         "--sync-source-games",
+        "--limit-source-games-to-opponent-changes",
         "--apply",
     ]
     cp = run(cmd, cwd=runtime_repo, check=False)
@@ -537,6 +540,7 @@ def apply_and_prepare_repair(
             "tools/normalize_historical_opponent_displays.py",
             school_key,
             "--sync-source-games",
+            "--limit-source-games-to-opponent-changes",
             "--apply",
         ],
         "prepared_commit_sha": prepared,
