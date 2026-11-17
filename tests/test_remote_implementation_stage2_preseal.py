@@ -224,11 +224,18 @@ class RemoteStage2PresealTests(unittest.TestCase):
             patch.object(
                 preseal,
                 "verify_stage2_gate1_fill_authority",
-                return_value={"freeze_bytes": b"freeze"},
+                return_value={
+                    "freeze_bytes": b"freeze",
+                    "venue_reconciliation_bytes": b"venue-sidecar",
+                },
             ),
         ):
             result = preseal.verify_stage2_preseal_authority(req, CONTROL)
 
+        self.assertEqual(
+            result["venue_reconciliation_bytes"],
+            b"venue-sidecar",
+        )
         self.assertEqual(result["gate1_fill_manifest"], manifest)
         self.assertEqual(result["gate1_fill_verification"], verification)
         self.assertEqual(result["target_tree_sha"], TREE)
@@ -282,6 +289,90 @@ class RemoteStage2PresealTests(unittest.TestCase):
         self.assertIn("<TARGET_REPO>", normalized)
         self.assertIn("<TMPDIR>/schools/alpha/source-games.csv", normalized)
         self.assertIn("Ran 865 tests in <ELAPSED>s", normalized)
+
+    def test_expansion_venue_reconciliation_is_restored_exactly(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            sidecar_bytes = b'{"schema_version":1}\n'
+            freeze_bytes = (
+                json.dumps(
+                    {
+                        "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
+                        "venue_reconciliation": {"spec_sha256": sha(sidecar_bytes)},
+                        "venue_reconciliation_sha256": sha(sidecar_bytes),
+                    }
+                )
+                + "\n"
+            ).encode()
+            restored = preseal.restore_expansion_venue_reconciliation(
+                root,
+                SCHOOL,
+                freeze_bytes,
+                sidecar_bytes,
+            )
+            self.assertIsNotNone(restored)
+            self.assertEqual(restored.read_bytes(), sidecar_bytes)
+
+            with self.assertRaisesRegex(
+                Stop,
+                "STAGE2_GATE1_VENUE_RECONCILIATION_BYTES_MISMATCH",
+            ):
+                preseal.restore_expansion_venue_reconciliation(
+                    root,
+                    SCHOOL,
+                    freeze_bytes,
+                    b"wrong",
+                )
+
+    def test_permanent_rehearsal_restores_bound_venue_reconciliation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            clean = {"head_sha": TARGET, "tree_sha": TREE, "status": ""}
+            sidecar_bytes = b'{"schema_version":1}\n'
+            freeze_bytes = (
+                json.dumps(
+                    {
+                        "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
+                        "venue_reconciliation": {"spec_sha256": sha(sidecar_bytes)},
+                        "venue_reconciliation_sha256": sha(sidecar_bytes),
+                    }
+                )
+                + "\n"
+            ).encode()
+            log = (
+                "TECHNICAL READINESS PASSED\n"
+                f"Preview approved-plan hash: {PLAN_PREVIEW}\n"
+                "Changed paths: 12\n"
+            )
+            with (
+                patch.object(
+                    preseal,
+                    "tracked_worktree_state",
+                    side_effect=[clean, clean],
+                ),
+                patch.object(
+                    preseal,
+                    "run",
+                    return_value=subprocess.CompletedProcess([], 0, stdout=log),
+                ),
+            ):
+                result = preseal.run_stage2_preseal_rehearsal_tool(
+                    root,
+                    SCHOOL,
+                    freeze_bytes=freeze_bytes,
+                    plan_bytes=b"{}\n",
+                    filled_review_bytes=b"decision_id\n",
+                    venue_reconciliation_bytes=sidecar_bytes,
+                    expected_approved_plan_hash_preview=PLAN_PREVIEW,
+                    diag=root / "diag",
+                    tool_repo=ROOT,
+                )
+
+            restored = (
+                root / ".onboarding" / SCHOOL / "venue-reconciliation.json"
+            )
+            self.assertEqual(restored.read_bytes(), sidecar_bytes)
+            self.assertEqual(result["preseal_status"], "READY_TO_SEAL")
 
     def test_permanent_rehearsal_success_is_ready_to_seal(self):
         with tempfile.TemporaryDirectory() as directory:

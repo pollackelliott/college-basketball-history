@@ -1273,6 +1273,9 @@ def run_read_only_stage2_preseal_rehearsal(
         freeze_bytes=authority["freeze_bytes"],
         plan_bytes=authority["plan_bytes"],
         filled_review_bytes=authority["filled_review_bytes"],
+        venue_reconciliation_bytes=authority.get(
+            "venue_reconciliation_bytes"
+        ),
         expected_approved_plan_hash_preview=request[
             "approved_plan_hash_preview"
         ],
@@ -1511,6 +1514,9 @@ def run_read_only_stage2_gate1_seal(
         freeze_bytes=authority["freeze_bytes"],
         plan_bytes=authority["plan_bytes"],
         filled_review_bytes=authority["filled_review_bytes"],
+        venue_reconciliation_bytes=authority.get(
+            "venue_reconciliation_bytes"
+        ),
         expected_approved_plan_hash_preview=request[
             "approved_plan_hash_preview"
         ],
@@ -1547,6 +1553,9 @@ def run_read_only_stage2_gate1_seal(
         freeze_bytes=authority["freeze_bytes"],
         plan_bytes=authority["plan_bytes"],
         filled_review_bytes=authority["filled_review_bytes"],
+        venue_reconciliation_bytes=authority.get(
+            "venue_reconciliation_bytes"
+        ),
         diag=DIAG / "stage2-gate1-seal",
     )
     expected_decisions = authority.get("expected_decision_count")

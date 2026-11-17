@@ -24,7 +24,10 @@ from remote_implementation_stage2_census import (
     restore_integration_freeze,
     tracked_worktree_state,
 )
-from remote_implementation_stage2_preseal import verify_stage2_preseal_authority
+from remote_implementation_stage2_preseal import (
+    restore_expansion_venue_reconciliation,
+    verify_stage2_preseal_authority,
+)
 
 APPROVED_BY = "project-owner"
 SEALED_DIR_NAME = "remote-gate1-seal"
@@ -174,6 +177,9 @@ def verify_stage2_gate1_seal_authority(
         "preseal_request": preseal_request,
         "preseal_authority": preseal_authority,
         "freeze_bytes": preseal_authority["freeze_bytes"],
+        "venue_reconciliation_bytes": preseal_authority.get(
+            "venue_reconciliation_bytes"
+        ),
         "plan_bytes": preseal_authority["plan_bytes"],
         "filled_review_bytes": preseal_authority["filled_review_bytes"],
         "target_tree_sha": manifest.get("target_tree_sha"),
@@ -274,12 +280,19 @@ def run_stage2_gate1_seal_tool(
     freeze_bytes: bytes,
     plan_bytes: bytes,
     filled_review_bytes: bytes,
+    venue_reconciliation_bytes: bytes | None = None,
     diag: Path,
     tool_repo: Path | None = None,
 ) -> dict[str, Any]:
     """Invoke permanent --approve, checkpoint exact seal bytes, and prove no mutation."""
 
     restore_integration_freeze(repo, school_key, freeze_bytes)
+    restore_expansion_venue_reconciliation(
+        repo,
+        school_key,
+        freeze_bytes,
+        venue_reconciliation_bytes,
+    )
     base_output = repo / ".onboarding" / school_key
     seal_output = base_output / SEALED_DIR_NAME
     seal_output.mkdir(parents=True, exist_ok=True)

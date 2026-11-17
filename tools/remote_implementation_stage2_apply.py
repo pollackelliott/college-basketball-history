@@ -32,6 +32,7 @@ from remote_implementation_stage2_census import (
     tracked_worktree_state,
 )
 from remote_implementation_stage2_preseal import (
+    restore_expansion_venue_reconciliation,
     run_stage2_preseal_rehearsal_tool,
 )
 from remote_implementation_stage2_seal import (
@@ -187,6 +188,9 @@ def verify_stage2_sealed_apply_authority(
         "seal_request": seal_request,
         "seal_authority": seal_authority,
         "freeze_bytes": seal_authority["freeze_bytes"],
+        "venue_reconciliation_bytes": seal_authority.get(
+            "venue_reconciliation_bytes"
+        ),
         "plan_bytes": seal_authority["plan_bytes"],
         "filled_review_bytes": seal_authority["filled_review_bytes"],
         "approved_plan_bytes": approved_plan_bytes,
@@ -248,6 +252,9 @@ def replay_current_main_preseal(
         freeze_bytes=authority["freeze_bytes"],
         plan_bytes=authority["plan_bytes"],
         filled_review_bytes=authority["filled_review_bytes"],
+        venue_reconciliation_bytes=authority.get(
+            "venue_reconciliation_bytes"
+        ),
         expected_approved_plan_hash_preview=authority[
             "expected_approved_plan_hash_preview"
         ],
@@ -290,6 +297,12 @@ def run_sealed_apply_tool(
         raise Stop("STAGE2_SEALED_APPLY_PRECONDITION_MISMATCH")
 
     restore_integration_freeze(repo, school_key, authority["freeze_bytes"])
+    restore_expansion_venue_reconciliation(
+        repo,
+        school_key,
+        authority["freeze_bytes"],
+        authority.get("venue_reconciliation_bytes"),
+    )
     apply_output = repo / ".onboarding" / school_key / APPLY_DIR_NAME
     apply_output.mkdir(parents=True, exist_ok=True)
     approved_path = apply_output / APPROVED_PLAN_NAME
