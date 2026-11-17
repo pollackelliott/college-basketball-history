@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "4680c0670104a609df0ec67ce967546305a971054d58b65ea950d20f49d78786",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "c9d7ee4553f10f669a4bf1eb7ee18a5c7697fe196320b4507ee2f3f3442d0cc2",
+  "pr_created": false,
+  "preview_request_id": "ucf-expansion-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "readiness_proof_sha256": "f8cb025b1988a6ffec7a23b235c8f80df099f6b9c140f5e41faba0fce202bc60",
+  "release_pr_packet_sha256": "32b278e4f95586e40226dd10d2e2dd39d73a41b9d598e7656dec599278557184",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "ucf-expansion-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "tracked_mutation": "NONE"
+}
