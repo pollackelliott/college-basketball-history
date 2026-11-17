@@ -654,18 +654,19 @@
     "ucf-expansion-release-preview-verify-0001",
     "ucf-expansion-release-gate2-approval-0001",
     "ucf-expansion-release-production-proof-0001",
-    "wyoming-stage1-0001"
+    "wyoming-stage1-0001",
+    "wyoming-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:44172844162:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "wyoming-phase0-0001",
+  "active_request_sha256": "b10a5b6d5c78cf1d6ecddd877232dcbea57e82a70ee1632e42d76508a69b6d02",
+  "active_school_key": "wyoming",
+  "active_target_branch": "data/wyoming-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1310,8 +1311,11 @@
     "stage1_reconciliation_sha256": "b2af95bea2c986eab670070c913394da62931f1998c460f5b60eb918e1416fa7",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44172844162",
+  "lock_acquisition_request_commit": "03c28dad7a777babd86e0b9cc67de34a0a3896d4",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
