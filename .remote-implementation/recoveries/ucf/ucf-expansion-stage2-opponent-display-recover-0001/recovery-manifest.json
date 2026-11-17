@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "91dd2c414d5ddd1fd784a7000b38576a88be3e11",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "recovered_request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
+  "request_id": "ucf-expansion-stage2-opponent-display-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/ucf-onboarding"
+}

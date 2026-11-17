@@ -25,7 +25,8 @@
     "george-mason-expansion-release-preview-verify-0001",
     "george-mason-expansion-release-preview-verify-0003",
     "arizona-state-expansion-phase0-0002",
-    "arizona-state-expansion-release-preview-verify-0001"
+    "arizona-state-expansion-release-preview-verify-0001",
+    "ucf-expansion-stage2-opponent-display-normalize-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -637,16 +638,16 @@
     "ucf-expansion-stage2-census-0001",
     "ucf-expansion-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-  "active_lock_commit": "91dd2c414d5ddd1fd784a7000b38576a88be3e11",
-  "active_lock_owner": "github-actions:43986800340:1",
-  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
-  "active_request_sha256": "d10f8642d684129619753d58a0d30ed63a0d3e5b162a93ea31485f10b3fe7448",
-  "active_school_key": "ucf",
-  "active_target_branch": "data/ucf-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1258,30 +1259,29 @@
     "houston-expansion-release-gate2-approval-0001",
     "houston-expansion-release-production-proof-0001",
     "ucf-expansion-phase0-0003",
-    "ucf-expansion-stage2-census-0001"
+    "ucf-expansion-stage2-census-0001",
+    "ucf-expansion-stage2-opponent-display-recover-0001"
   ],
-  "current_sequence": 607,
+  "current_sequence": 608,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "capability_census_sha256": "445330ea0b945d3ffee2322c38a1ecbc0082ff6c5e585761ee5938a682132b24",
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-census-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "78138219f401cc79a187a51cb476176878dd6f6487b1ce23b6956750d6ce58b3",
-    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "fresh_runner_verification": "PASS",
-    "operation": "STAGE2_CENSUS",
-    "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-    "remote_stage2_census_equivalence": "PASS",
-    "request_id": "ucf-expansion-stage2-census-0001",
-    "school_key": "ucf",
-    "stage2_status": "BLOCKED",
-    "target_branch": "data/ucf-onboarding",
-    "target_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
+    "recovery_manifest": {
+      "actual_target_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "91dd2c414d5ddd1fd784a7000b38576a88be3e11",
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+      "recovered_request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
+      "request_id": "ucf-expansion-stage2-opponent-display-recover-0001",
+      "schema_version": 1,
+      "target_branch": "data/ucf-onboarding"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "43986800340",
-  "lock_acquisition_request_commit": "f45879fdc6fbbe651f53a4975dddb4d9cfadbf8b",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
