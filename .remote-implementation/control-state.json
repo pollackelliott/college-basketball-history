@@ -636,18 +636,19 @@
     "houston-expansion-release-production-proof-0001",
     "ucf-expansion-phase0-0003",
     "ucf-expansion-stage2-census-0001",
-    "ucf-expansion-stage2-opponent-display-normalize-0001"
+    "ucf-expansion-stage2-opponent-display-normalize-0001",
+    "ucf-expansion-stage2-current-main-refresh-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:43993865393:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "ucf-expansion-stage2-current-main-refresh-0001",
+  "active_request_sha256": "5de7c4a182e091dd8904eb3c73331477ea3525ecb5f761dd8ea8cfeec5e23540",
+  "active_school_key": "ucf",
+  "active_target_branch": "data/ucf-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1280,8 +1281,11 @@
       "target_branch": "data/ucf-onboarding"
     }
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43993865393",
+  "lock_acquisition_request_commit": "de9c00b8604ee2d956a416daa83c932666f14e37",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
+  "transaction_state": "LOCKED"
 }
