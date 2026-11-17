@@ -1,56 +1,39 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-release-gate2-approval-0001",
+  "request_id": "ucf-expansion-release-production-proof-0001",
+  "operation": "RELEASE_PRODUCTION_PROOF",
   "school_key": "ucf",
-  "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "7723e224e89d6bf1cbb351a4688e5235fc31c7cd",
-  "previous_control_state_sha256": "fae8759c70126579234f915a71de1f424693a5832969ae4b4ac660a891255a18",
-  "expected_protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "previous_control_state_commit": "685d3d959524c1f5a291a9f21e0b66951af2a5b1",
+  "previous_control_state_sha256": "33cdb3092da59d21a70c4521eb5cd7fb09dc58eded4f1a82192396cbd4b14ee9",
+  "expected_protected_main_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
   "target_branch": "data/ucf-onboarding",
   "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
-  "approved_plan_hash": "7cd9aaa960bc204ec92cdf707e4237fb72730cb1e63315be9af754d2209fdc8e",
-  "release_manifest_sha256": "c98633e07af66e867247f107a7d84c2fc542d61627f68ae1a4bf1aaa32be5f78",
   "pr_number": 636,
-  "preview_deployment_id": 7857416801,
-  "preview_url": "https://college-basketball-history-b8bfwizqt-elliott-pollacks-projects.vercel.app",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-release-preview-verify-0001/checkpoint-manifest.json",
-    "sha256": "ebab9c8cde593323e90d7e5e0859d32efe048172d0cdfc68a3fa4a37dedfdc13"
+  "merge_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "ef802a192e5499ad864d320cb4de63dbc8a93ad9d09dfcdac92fb339fc4c3099"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/ucf/ucf-expansion-release-preview-verify-0001/release-preview-verification.json",
-    "sha256": "7748bc69bd571d957a694e821f6640b4fd98caf17c8bac76b9f38cff0bc1669c"
-  },
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly responded 'Approved. Proceed' on 2026-11-17 immediately after the independently verified UCF ALL_HISTORY_EXPANSION Owner Gate 2 packet for PR #636, exact head fa527b5607152006c36c26b8625dc5d0d70e5b4d, Preview deployment 7857416801 at https://college-basketball-history-b8bfwizqt-elliott-pollacks-projects.vercel.app, and explicit notice that merge required approval. Approves the exact Preview and authorizes only the repository-defined guarded Gate 2 approval, fresh verification, exact two-parent PR merge through GitHub connector, exact Production proof and independent complete verification subject to every existing safeguard; does not authorize altered PR/head, main predecessor, other historical choice, or bypass.",
-    "pr_number": 636,
-    "pr_head_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
-    "preview_deployment_id": 7857416801,
-    "preview_url": "https://college-basketball-history-b8bfwizqt-elliott-pollacks-projects.vercel.app",
-    "preview_checkpoint_sha256": "ebab9c8cde593323e90d7e5e0859d32efe048172d0cdfc68a3fa4a37dedfdc13",
-    "preview_verification_sha256": "7748bc69bd571d957a694e821f6640b4fd98caf17c8bac76b9f38cff0bc1669c"
-  },
-  "final_release_continuation": {
-    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
-    "production_request_id": "ucf-expansion-release-production-proof-0001"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/ucf/ucf-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "bfc6fd2941478f5ae9df3c5a719202ce8ede852efdfd0975192a14bb955b4d0d"
   },
   "creation_provenance": {
-    "origin": "Same UCF ALL_HISTORY_EXPANSION serialized Implementation lane — exact Owner Gate 2 approval",
-    "authorization": "Owner expressly answered 'Approved. Proceed' after exact PR #636 Preview verification, head fa527b5607152006c36c26b8625dc5d0d70e5b4d and deployment 7857416801. This authorizes the bounded final phase through fresh Gate 2 approval, connector merge only from exact packet, and exact Production proof with independent verification. The Gate 2 approval request itself is read-only and does not merge or publish; all prior authority constraints persist."
+    "origin": "Same serialized UCF ALL_HISTORY_EXPANSION Implementation final phase — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved exact UCF PR #636 Preview ('Approved. Proceed'), fresh Gate 2 approval ucf-expansion-release-gate2-approval-0001 independently verified PASS, and packet fea78b11ce1e645d8336e054a08ce9349191e08034a0a91c5a82e2c159415528 required exact ordinary merge of PR #636 head fa527b5607152006c36c26b8625dc5d0d70e5b4d from approved main 3518f3da648417c914c9bf78b8ce1270f80a9999. GitHub connector merged exactly, producing a950b261648d13fd77c88e7bf997b7dd8555eae1, now exact protected main with verified parents 3518f3da648417c914c9bf78b8ce1270f80a9999 and fa527b5607152006c36c26b8625dc5d0d70e5b4d. This request grants read-only exact-merge Production deployment/public JSON proof and independent fresh verification only. No new historical authority, main mutation, recovery, maintenance or additional merge."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": true,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": true,
+    "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
-    "release_production_proof": false,
+    "release_production_proof": true,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
