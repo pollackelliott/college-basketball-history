@@ -648,18 +648,19 @@
     "ucf-expansion-stage2-gate1-fill-0001",
     "ucf-expansion-stage2-preseal-0001",
     "ucf-expansion-stage2-preseal-0002",
-    "ucf-expansion-stage2-gate1-seal-0004"
+    "ucf-expansion-stage2-gate1-seal-0004",
+    "ucf-expansion-stage2-sealed-apply-0004"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:44109419196:1",
+  "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "ucf-expansion-stage2-sealed-apply-0004",
+  "active_request_sha256": "78593cb130d131987edcc8fcb9792ca5bb55577e2a54dca0347b59c52f8ff241",
+  "active_school_key": "ucf",
+  "active_target_branch": "data/ucf-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1314,8 +1315,11 @@
     "target_branch": "data/ucf-onboarding",
     "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44109419196",
+  "lock_acquisition_request_commit": "e1dcb19649680e763dd4c07495c3c01aa4ae1848",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
