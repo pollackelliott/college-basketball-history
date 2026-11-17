@@ -1,0 +1,50 @@
+{
+  "blockers": [
+    "historical opponent display conflict: ashland: ['Ashland', 'Ashland University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: california-pennsylvania: ['California (PA)', 'PennWest California']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: francis-marion: ['Francis Marion', 'Francis Marion University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: missouri-baptist: ['Missouri Baptist', 'Missouri Baptist University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: mit: ['MIT', 'Massachusetts Institute of Technology']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: monmouth-college-illinois: ['Monmouth College (IL)', 'Monmouth College (Illinois)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: new-york-institute-of-technology: ['New York Institute of Technology', 'New York Tech']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: tennessee-wesleyan: ['Tennessee Wesleyan', 'Tennessee Wesleyan University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: upsala-college: ['Upsala College', 'Upsala College (New Jersey)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: william-jewell: ['William Jewell', 'William Jewell College']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/ucf-52234c11493b",
+  "capability_census": {
+    "path": ".onboarding/ucf/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "integration_base_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "integration_semantic_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "preflight": {
+    "blocker_count": 10,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/ucf/plan.json",
+    "review_path": ".onboarding/ucf/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
