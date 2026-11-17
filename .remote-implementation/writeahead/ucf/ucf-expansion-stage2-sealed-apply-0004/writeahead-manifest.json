@@ -1,0 +1,82 @@
+{
+  "apply_runtime_tool_sha256": {
+    "tools/onboard_school.py": "6d7ba427e5652029cbef680239767eb7801c621c0ebcf6d574caa43611c70c74",
+    "tools/onboarding_plan.py": "b0cbabdf934494bf619e1cf485c61a54abb61835a072a17f8b4ed4e6e287c9a1"
+  },
+  "approved_plan_hash": "7cd9aaa960bc204ec92cdf707e4237fb72730cb1e63315be9af754d2209fdc8e",
+  "approved_plan_sha256": "36772665fc5dfb7f43023afb7bdfcfd2f3b39cc82dca8633d69168810ba21a48",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "e4698eb5b90cbdfaf475725d6bc65e0e038ad2076e86e4dfb4eaea5d416b5975",
+    "data/evidence/game-assertions.csv": "31fb313e90ea359df846bc99189d4552a8d62d5ed245cfe1e945f9b249864f6d",
+    "data/reconciliation/onboarding-decisions/ucf-7cd9aaa960bc.json": "36772665fc5dfb7f43023afb7bdfcfd2f3b39cc82dca8633d69168810ba21a48",
+    "site/data/manifest.json": "c660caabbdbe1d6f3f594025ad08467528a046fe0084bbd4d4b2faa2c2cd707f",
+    "site/data/programs.json": "837f787688f35414e6ec5e75a334a96790c3a4b19ea6c81e7f4261240a523711",
+    "site/data/teams/fordham.json": "366f8aa5832920e9f5db17ecfdd87339f0f7e8a63013563faf8205f9e41310dc",
+    "site/data/teams/long-island-university.json": "1d3ba511a8509701e02cef1cf7dff71024bc3b66dc4bd8b775ca701f6cf645d9",
+    "site/data/teams/ucf.json": "83ab5c648c7655bbd84f69f7766ef98f6486c9110c17effcc6adee993b28a0f5",
+    "site/data/teams/wisconsin.json": "0389a7bb5338d43dcb1d9b6a02458ac388afee2b23a6913526dccbb92bb50f27"
+  },
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/onboarding-decisions/ucf-7cd9aaa960bc.json",
+    "site/data/manifest.json",
+    "site/data/programs.json",
+    "site/data/teams/fordham.json",
+    "site/data/teams/long-island-university.json",
+    "site/data/teams/ucf.json",
+    "site/data/teams/wisconsin.json"
+  ],
+  "commit_message": "Apply sealed ucf onboarding plan",
+  "current_main_preseal": {
+    "approved_plan_hash_preview": "3e827ae6b7429cc695d5d01b1df4bb7046a095e84aad2b2606acac0421906b2c",
+    "changed_path_count": 9,
+    "equivalence_sha256": "e1e745b80bafe2e04a1705271e5107f3323a5857f832d9d3eeb268866b2fd13b",
+    "preseal_status": "READY_TO_SEAL",
+    "runtime_tool_sha256": {
+      "tools/onboard_school.py": "6d7ba427e5652029cbef680239767eb7801c621c0ebcf6d574caa43611c70c74",
+      "tools/onboarding_hardening.py": "9229f31cb2885b38e7ba6940d75d325d9b6e7ecafee46c7119edd8a640ddb28f"
+    },
+    "site_gate_normalized_sha256": "fb820216b140730ce223bf55dd3372cee041abf9797cd974ba39c4d1c77fc4c7",
+    "tracked_stage2_mutation": "NONE"
+  },
+  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
+  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+  "global_lock_commit": "0839b5ae0af64957546e8f7ad670bd3dd71efb78",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "749cbdd9fc3f0d0cf3c90de8a8f2366c13b0fc16e5f7724c73a9b5711087548c",
+  "prepared_commit_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "prepared_parent_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
+  "prepared_tree_sha": "215440dcbf399af24b3cbc0023975298428c236e",
+  "protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "recommendation_map_sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d",
+  "release_manifest_changed_path_count": 9,
+  "release_manifest_sha256": "c98633e07af66e867247f107a7d84c2fc542d61627f68ae1a4bf1aaa32be5f78",
+  "repository_validation": "PASS",
+  "request_id": "ucf-expansion-stage2-sealed-apply-0004",
+  "request_sha256": "78593cb130d131987edcc8fcb9792ca5bb55577e2a54dca0347b59c52f8ff241",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "sidecars": {
+    "approved-plan.json": "36772665fc5dfb7f43023afb7bdfcfd2f3b39cc82dca8633d69168810ba21a48",
+    "current-main-preseal.json": "867bf6b0df4e897a1e0c376c77b9a0790d902865df104e414e202bbcd34d92b4",
+    "integration-freeze.json": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+    "pr-body.md": "c9d7ee4553f10f669a4bf1eb7ee18a5c7697fe196320b4507ee2f3f3442d0cc2",
+    "release-manifest.json": "c98633e07af66e867247f107a7d84c2fc542d61627f68ae1a4bf1aaa32be5f78",
+    "seal-checkpoint-manifest.json": "196a26f390a263a783a25285a00c6070f1a1dd474a0a9cd45eb48441fd27d747",
+    "seal-verification.json": "eefb00f1481fa016b0dad5e51b68b4be469da8db25e804405f96fa73afd2450b",
+    "visual-qa.md": "0622564ae328199f8e6d37b50ef358d0dbef4c725807d3f6ceb7addee0162913"
+  },
+  "stage2_gate1_seal_checkpoint_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-gate1-seal-0004/checkpoint-manifest.json",
+  "stage2_gate1_seal_checkpoint_sha256": "196a26f390a263a783a25285a00c6070f1a1dd474a0a9cd45eb48441fd27d747",
+  "stage2_gate1_seal_verification_path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-gate1-seal-0004/stage2-gate1-seal-verification.json",
+  "stage2_gate1_seal_verification_sha256": "eefb00f1481fa016b0dad5e51b68b4be469da8db25e804405f96fa73afd2450b",
+  "target_branch": "data/ucf-onboarding"
+}
