@@ -633,18 +633,19 @@
     "houston-expansion-release-preview-verify-0001",
     "houston-expansion-release-gate2-approval-0001",
     "houston-expansion-release-production-proof-0001",
-    "ucf-expansion-phase0-0003"
+    "ucf-expansion-phase0-0003",
+    "ucf-expansion-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "ucf-expansion-stage2-census-0001",
+  "active_request_sha256": "7ed7316964c9cfb2ad7c20472019ad164e3788bda0f5d3c226ef79d5320ccb55",
+  "active_school_key": "ucf",
+  "active_target_branch": "data/ucf-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1276,8 +1277,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/ucf/ucf-expansion-phase0-0003/writeahead-manifest.json",
     "writeahead_manifest_sha256": "e084f9a18b95687b6a96ce085417163c949be871de368744b6928d7ac8e8cd0b"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "43985824888",
+  "lock_acquisition_request_commit": "aef61a072137cce1c066d1356e4ad0811fc90dc9",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
