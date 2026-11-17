@@ -658,7 +658,7 @@
     "wyoming-phase0-0001"
   ],
   "active_expected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
-  "active_lock_commit": null,
+  "active_lock_commit": "983832b815c283e35e1a1cc6e722516c0589ee87",
   "active_lock_owner": "github-actions:44172844162:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
