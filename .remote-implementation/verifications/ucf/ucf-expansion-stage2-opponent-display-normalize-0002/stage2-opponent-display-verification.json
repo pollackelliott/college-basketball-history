@@ -1,0 +1,55 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "27e61704d784e7e5993595b0bb3aae6c8058aae33f746ceec23fe698a7069b17",
+    "plan.json": "507b3dcd6da55db049e66976314b1e49b6d9b72eb40d630f24502b639e8e9cd5",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "10efa1039d8f2c971060def3f6d58cfe2f075cf467b259e0b7eafbd122c7d68a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "aaa387ecba9045454056cdc884e8e467cebf864adeb75ce5a646bb1b5c1e8e23",
+    "plan.json": "0c25a005dab51a0395be5a313788a046b149c63bb1e7f0af5a1bb2d22017469a",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "e8b5de4530fd54702086d867c81db81ade2666c059c7df58e01fc8cb1e04d1f8"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv"
+  ],
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "expected_blocker_keys": [
+    "ashland",
+    "california-pennsylvania",
+    "francis-marion",
+    "missouri-baptist",
+    "mit",
+    "monmouth-college-illinois",
+    "new-york-institute-of-technology",
+    "tennessee-wesleyan",
+    "upsala-college",
+    "william-jewell"
+  ],
+  "field_level_proof_sha256": "70c0afc005aa6f75d83e302dc6b9f4839fdeb95d86811e0bd8c4405eb989158b",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "1d0376ac7d5a43b0617ed2cdc4c0f4ca28ef17cc7b9891503cb2206751c1141d",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "ucf-expansion-stage2-opponent-display-normalize-0002",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/ucf-onboarding",
+  "target_predecessor_sha": "518ae6c81a797d67585f2382a139942f539ad7e7",
+  "target_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "target_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+  "tracked_stage2_mutation": "NONE"
+}
