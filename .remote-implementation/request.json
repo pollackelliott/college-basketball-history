@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-stage2-gate1-seal-0002",
+  "request_id": "ucf-expansion-stage2-gate1-seal-0003",
   "operation": "STAGE2_GATE1_SEAL",
   "school_key": "ucf",
   "previous_control_state_commit": "848411be9341844b1957a6156e71b0bf1246141b",
-  "previous_control_state_sha256": "0baa99667a20f07f44c1ed0373812ea51858b29d1ca7bcb8c19716ef95c0a2ac",
+  "previous_control_state_sha256": "9d8c4561def94318480ef30d116b857a71a8c2528cf0a039be5ad29a41b19f56",
   "expected_protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
   "target_branch": "data/ucf-onboarding",
   "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
@@ -15,7 +15,7 @@
   },
   "stage2_preseal_verification": {
     "path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-preseal-0002/stage2-preseal-rehearsal-verification.json",
-    "sha256": "8ac9e5f8173d0ad90d7142056cca7350bf75776ad708ef90cfaddf29ed842c7f"
+    "sha256": "c304394bc1e2f2551e0cb992372d513fc0eb6b13f1b883ebe36c42bfd3d3c9bf"
   },
   "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
   "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
@@ -29,12 +29,12 @@
   "phase_continuation": {
     "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
     "preseal_request_id": "ucf-expansion-stage2-preseal-0002",
-    "seal_request_id": "ucf-expansion-stage2-gate1-seal-0002",
-    "apply_request_id": "ucf-expansion-stage2-sealed-apply-0002"
+    "seal_request_id": "ucf-expansion-stage2-gate1-seal-0003",
+    "apply_request_id": "ucf-expansion-stage2-sealed-apply-0003"
   },
   "creation_provenance": {
     "origin": "Same serialized UCF ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Same explicit Owner Gate 1 authority and already-authorized post-Gate-1 technical phase. Exact fresh-verified pre-seal ucf-expansion-stage2-preseal-0002 is READY_TO_SEAL. Authorizes only cryptographic Gate 1 seal followed, after independent verification, by guarded sealed apply. No new historical authority, Owner Gate 2, release, merge, or protected-main bypass."
+    "authorization": "Corrected replacement for pre-accept mechanical failure of ucf-expansion-stage2-gate1-seal-0002. Same explicit Owner Gate 1 authority and already-authorized post-Gate-1 technical phase; exact fresh-verified pre-seal ucf-expansion-stage2-preseal-0002 remains READY_TO_SEAL. Authorizes only cryptographic Gate 1 seal followed after independent verification by guarded sealed apply. No new historical authority, Owner Gate 2, release, merge, or protected-main bypass."
   },
   "authority": {
     "expansion_phase0": false,
