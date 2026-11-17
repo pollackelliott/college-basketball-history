@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-stage2-gate1-seal-0003",
+  "request_id": "ucf-expansion-stage2-gate1-seal-0004",
   "operation": "STAGE2_GATE1_SEAL",
   "school_key": "ucf",
-  "previous_control_state_commit": "848411be9341844b1957a6156e71b0bf1246141b",
+  "previous_control_state_commit": "7a9eaba07d04542ac9c1720cdda40b50bb93c107",
   "previous_control_state_sha256": "9d8c4561def94318480ef30d116b857a71a8c2528cf0a039be5ad29a41b19f56",
   "expected_protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
   "target_branch": "data/ucf-onboarding",
@@ -29,12 +29,12 @@
   "phase_continuation": {
     "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
     "preseal_request_id": "ucf-expansion-stage2-preseal-0002",
-    "seal_request_id": "ucf-expansion-stage2-gate1-seal-0003",
-    "apply_request_id": "ucf-expansion-stage2-sealed-apply-0003"
+    "seal_request_id": "ucf-expansion-stage2-gate1-seal-0004",
+    "apply_request_id": "ucf-expansion-stage2-sealed-apply-0004"
   },
   "creation_provenance": {
     "origin": "Same serialized UCF ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Corrected replacement for pre-accept mechanical failure of ucf-expansion-stage2-gate1-seal-0002. Same explicit Owner Gate 1 authority and already-authorized post-Gate-1 technical phase; exact fresh-verified pre-seal ucf-expansion-stage2-preseal-0002 remains READY_TO_SEAL. Authorizes only cryptographic Gate 1 seal followed after independent verification by guarded sealed apply. No new historical authority, Owner Gate 2, release, merge, or protected-main bypass."
+    "authorization": "Corrected replacement after two pre-accept transport failures. Binds the actual immediate control predecessor 7a9eaba07d04542ac9c1720cdda40b50bb93c107 and its exact unchanged control-state bytes. Same explicit Owner Gate 1 authority and already-authorized post-Gate-1 technical phase; fresh-verified preseal-0002 remains READY_TO_SEAL. Authorizes only cryptographic Gate 1 seal and, after independent verification, guarded sealed apply. No new historical authority, Owner Gate 2, release, merge, or protected-main bypass."
   },
   "authority": {
     "expansion_phase0": false,
