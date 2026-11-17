@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "ucf-expansion-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "pr_number": 636,
+  "preview_deployment_id": 7857416801,
+  "preview_url": "https://college-basketball-history-b8bfwizqt-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "ucf-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "target_branch": "data/ucf-onboarding"
+}
