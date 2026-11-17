@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "0d2d4c6148451a059396f3aa5f344b6aee08f8cffed32d7fd3e040b8f9e776e4",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "767bed8d689e2af93673d72d37cdf88225200fad084db2e2921f9c1a211dbb26",
+    "implementation-stage2-status.json": "fac59bcf8b1b12aa20d46d8b294c8264bbebbe49daf6d20a556f7f6612b7fb82",
+    "last-rehearsal-site-gate.json": "daa16840e1a0ed68391bcf9b442e338d891aa6c121a801301fe4028d740c0f20",
+    "plan.json": "a874d1a69bd9bd709744be679a7d9d9ca2787e307731b5a7a1138f399383fe89",
+    "review.csv": "775abab6dff99595e9bb8c6b40f1c20abc7ad9df5b57fc5027e2db7e58244a9a",
+    "review.md": "7bfbcf0e0b4be7320caf30ecbb5a60837b2012ca7ace7398e543b0550ab7b7f8"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "767bed8d689e2af93673d72d37cdf88225200fad084db2e2921f9c1a211dbb26",
+    "implementation-stage2-status.json": "b39d6c26dcfae9c1c1447a4ac2a37ea135964d1361a868c77fc3dcfbde1a8ec1",
+    "last-rehearsal-site-gate.json": "daa16840e1a0ed68391bcf9b442e338d891aa6c121a801301fe4028d740c0f20",
+    "plan.json": "070c6a32cac6861c6cace8b61712857ea3fda4c7ccd6f1f290ee7447831af0b5",
+    "review.csv": "775abab6dff99595e9bb8c6b40f1c20abc7ad9df5b57fc5027e2db7e58244a9a",
+    "review.md": "8d106aa4e6606487bb21b6cf678e05b2f0ce9367a2be3256e830ac5de66bc628"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+    "runtime_decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "recommendation_map_sha256": "873b3c60a1f1d001ca2a1e7d50f9953935a061ef725d8af554f6ed2bb6c62c62",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "wyoming-stage2-proposal-0002",
+  "runtime_decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "target_tree_sha": "820fca044427469e694c37a8054237d990113845",
+  "tracked_stage2_mutation": "NONE"
+}
