@@ -1,49 +1,50 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "wyoming-stage2-reconciliation-diagnostic-0001",
+  "request_id": "wyoming-stage2-proposal-0002",
   "school_key": "wyoming",
-  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "38b64d571e7c2ee0a0ca4489a07303125ccd904d",
-  "previous_control_state_sha256": "a42f74af3921e15ea6a450406fd8cbe5dddf199f204ae9edb613c5fc086209a0",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "aa6499158add3a8d69b57bd67d88e1762f25663f",
+  "previous_control_state_sha256": "7cae84286fcfb089f55cd3bcc6cd25900c47cf5715fda183b5619153d3443fb1",
   "expected_protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
-  "creation_provenance": {
-    "origin": "Wyoming serialized ordinary original-school Implementation Stage 2 — fresh-verified blocked exact-map proposal diagnosis",
-    "authorization": "Owner explicitly directed PROCEED with the same Wyoming Stage 2 authority. Fresh verification confirms wyoming-stage2-proposal-0001 is durably BLOCKED on three strict target-canonical HOME site gaps with the exact decision universe and recommendation map unchanged. Authorizes exactly one read-only reconciliation diagnostic on representative canonical game CBBG-0166073, whose accepted Wyoming frozen source row already preserves Casper Events Center, Casper, WY while canonical H/A/N remains HOME under the current KEEP_CANONICAL recommendation. Diagnose whether accepted site metadata is mechanically lost or suppressed in reconciliation. Preserve all frozen historical authority and the exact recommendation map. No new historical judgment, Research reopening, tracked mutation, map rewrite, current-main refresh, Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, Owner Gate 2, merge, Production, recovery, or shared/global authority."
-  },
-  "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
-    "phase0": false,
-    "expansion_phase0": false,
-    "phase0_scope_supersession": false,
-    "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": false,
-    "stage2_gate1_seal": false,
-    "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": true,
-    "release_readiness": false,
-    "release_presentation_refresh": false,
-    "release_preview_verify": false,
-    "release_gate2_approval": false,
-    "release_production_proof": false,
-    "venue_identity_maintenance": false
-  },
   "target_branch": "data/wyoming-onboarding",
   "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-proposal-0001/checkpoint-manifest.json",
-    "sha256": "899f9f4d27e09caa2467f1aea7e2fe4e022689e03c9dead8d7bef575af62ae7e"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "2336c4e364b25e1e7fc4065266ba5ca5f8a593aede09f4ec11233fa076957b1c"
   },
   "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
   "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
   "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
-  "recommendation_map_sha256": "d1fb6a5944eeb0a67a59c8ff12f568c4d09edb9436cae1c787e5be762fb68d4d",
-  "canonical_game_id": "CBBG-0166073"
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/wyoming-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "873b3c60a1f1d001ca2a1e7d50f9953935a061ef725d8af554f6ed2bb6c62c62"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Wyoming serialized original-school Implementation Stage 2 — exact-map successor rehearsal after fresh-verified reconciliation diagnosis",
+    "authorization": "Existing owner-authorized Wyoming Stage 2 authority persists. Fresh-verified diagnostic wyoming-stage2-reconciliation-diagnostic-0001 proved the prior exact map's KEEP_CANONICAL handling leaves accepted Wyoming site metadata unsynchronized on a canonical HOME row; the proposal blocker population is exactly three source-NEUTRAL versus canonical-HOME conflicts. This successor map changes only those three SITE_TYPE recommendations to USE_SOURCE so the historical conflicts remain explicit Owner Gate 1 decisions while the candidate obeys site-completeness policy: 1957 Michigan is accepted neutral at Albuquerque, NM; 1984 Baylor is accepted Cowboy Shootout neutral at Casper, WY; 1998 Wagner is accepted Cowboy Shootout neutral at Casper Events Center, Casper, WY. All identities, all other discrepancy recommendations, accomplishment verification, publication recommendation, frozen Research authority, decision universe, target branch, and Integration Freeze remain unchanged. This request is read-only and creates no Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, recovery, maintenance, shared-reference, or protected-main mutation authority."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
 }
