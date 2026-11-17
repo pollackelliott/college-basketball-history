@@ -111,3 +111,24 @@ Stage 6 compared all 227 locally current-D1 canonical keys against the current g
 ## Conference shared-reference carry-forward
 - Historical `american-south` (1990-91) and `taac` (1992-93 through 2000-01) identities are established by UCF institutional history / owner-authorized tournament chronology but were not present as global conference keys on the Stage 4 protected-main snapshot.
 - Research preserves them locally and defers authoritative shared-registry registration/reuse to serialized Implementation.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# UCF expansion source notes — provenance and accepted historical uncertainty
+
+Inherited immutable baseline is authenticated from Git commit `4682d528bf62eee1ad9cd3d8114663882cb78bdf`, not from present-day current-main registry guesses. The source-game universe below is the 377 accepted supplemental game rows from immutable UCF Stage4 package `36db72dcbbca8e8606f808531174bce978a33a43bb6d5fd0d254ef8e13faece6`; their original literal raw_text and source_page are preserved in the freeze source-game rows.
+
+## Source families and cutoff
+UCF institutional year-by-year and conference/postseason records; official 2026–27 media guide reviewed as a historical record containing final **2025-26** results, not as authority to include any 2026–27 games; Sunshine State Conference tournament record; NCAA Division II historical results; Florida Southern, Florida Tech, Rollins, Chattanooga and regional first-party facility/event/source evidence; targeted contemporary archival evidence preserved in predecessor Research checkpoints.
+
+## Representation-only Stage7 adaptation
+The accepted Stage4 source-games.csv used a 31-column authoring schema. The permanent expansion freeze expects the exact 36-column immutable UCF source-game schema. The Stage7 row projection preserves every common accepted game field verbatim; `country` was blank across all 377 U.S. supplemental games, `season_year` was derived mechanically as the numeric terminal year of the accepted season_label, and `opponent_current_d1` was copied by deterministic TRUE/FALSE-to-Yes/No mapping from the accepted Stage4 opponent capsule. Four identity override/match columns are blank because no such override/match assertions were present in accepted Stage4 game rows. This is NOT new historical inference, a new identity ruling, or permission to rewrite inherited baseline rows.
+
+The accepted Stage4 opponent capsule has 17 authoring columns; the freeze supports the inherited exact 12-column base support schema. Support rows for exact inherited (source_opponent_label, canonical_opponent_key) pairs retain all nonadditive inherited fields, and extend only supported game-count/first/last-season/audit-note fields; Stage4 additional accepted display and research fields remain unchanged in source-games.csv and the immutable Stage4 checkpoint `eacbaa5ddc88eac7e6bdbfb2e76a149136a06813ab8429f4b9a0ce6ef2445b34` parent. The single historical display divergence for Centenary (accepted Stage4 display `Centenary College of Louisiana`, inherited UCF support `Centenary`) is *explicitly* retained as a reconciliation note, not silently overwritten. Canonical key remains the accepted `centenary` identity.
+
+## Owner authority, residuals, and source disagreements
+The 27 UCF pre-arena HOME locality exceptions are independently present in protected-main `data/reference/research-home-location-exceptions.csv`, with exact owner authority and accepted 27-game hash-bound population. Do not infer Orlando, Oviedo, Winter Park or a building for them.
+The Stage6 terminal research residual register is serialized row-for-row (68 site-gap rows), plus five exact-date blanks and three first-party source disagreements. The 1977 NCAA Division II Armstrong State score disagreement retains UCF 91–82; the 1980 SSC semifinal UCF–Rollins date remains source-attributed and contested rather than replaced with an inferred 1980-02-23; the 1982 UCF–Rollins disagreement preserves UCF 95–87 corroborated by Rollins reciprocal evidence.
+The Stage5 exact 90-key NON_D1 scan was approved with no owner flags, and no new Stage7 opponent decision is claimed. The Stage6 self-challenge remains `COMPLETE_PRE_FREEZE_SELF_CHALLENGE_PASS`.
