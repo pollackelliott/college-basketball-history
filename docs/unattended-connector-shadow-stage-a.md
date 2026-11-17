@@ -105,3 +105,43 @@ protected-main policy, or supersede Gate 1/Gate 2. It does not supply
 **Current status:** Stage A source/test proof only, no activation. Opening or
 merging this inert tooling code is not permission to deploy a listener or enable
 mutating connector actions.
+
+## 2026-11-17 follow-on: existing-GitHub-Actions read-only hosting pilot
+
+The owner authorized a **simpler** first hosted observation using the
+repository's **existing GitHub Actions**, explicitly declining any new or
+additional Vercel project. This is a narrow observational extension to
+Stage A; it is **not** Stage B PR publication or a GitHub App activation.
+
+The sole new `.github/workflows/remote-implementation-shadow.yml` file:
+
+- triggers from completion of the existing `Remote Implementation control
+  plane` workflow and performs one bootstrap smoke observation when the
+  workflow is first merged to `main`;
+- grants the entire workflow only `contents: read`; it neither persists
+  checkout credentials nor references secrets, stores credentials, changes
+  the operational control branch, or fetches executable tooling from control;
+- checks out trusted `main`, fetches the immutable control objects to the
+  disposable GitHub-hosted runner's **local** checkout for reading, and runs
+  the existing `remote_implementation_connector_shadow.py` CLI;
+- writes only standard workflow logs and returns the observer's
+  `NO_ELIGIBLE_HANDOFF`, `NOT_READY`, shadow-only candidate, or STOP result;
+- stops immediately after observation. No PR creation, control request
+  submission, merge, Vercel deployment, workflow dispatch, webhook
+  registration, GitHub App creation, or expanded privilege is present.
+
+The current UCF completed control checkpoint must result in
+`NO_ELIGIBLE_HANDOFF`, not a new release action. These workflow checks
+are backed by a static permission/trigger-contract test and the original
+Stage A negative synthetic tests.
+
+This exercise intentionally verifies **GitHub Actions event-driven hosting**,
+not external webhook installation, independent packet delivery across all
+live phases, PR/Preview checks, or a true unattended end-to-end publication.
+GitHub's `workflow_run` event is a wakeup only, not owner gate authority.
+No special app/hosting budget or Vercel work is proposed here.
+
+**Next governance boundary:** evaluate whether this low-overhead observer
+actually reduces handoffs before deciding if more infrastructure is justified.
+Do not install a GitHub App or add write permissions on the strength of this
+pilot alone.
