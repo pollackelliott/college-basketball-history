@@ -664,15 +664,15 @@
   "active_lock_commit": "d6e0f1d4ce7093dbf6c61965cc8d7e69b1d43124",
   "active_lock_owner": "github-actions:44182741116:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "active_prepared_tree_sha": "820fca044427469e694c37a8054237d990113845",
   "active_request_id": "wyoming-stage2-current-main-refresh-0001",
   "active_request_sha256": "8d184ea1cc3cb8615d151bd1c9cfaefc8a031000bc575a620f24226e7392688a",
   "active_school_key": "wyoming",
   "active_target_branch": "data/wyoming-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/wyoming/wyoming-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "798f3559da29aa3a2d08e7689fa5b9d14e163c70358dc697b9141dece60b3bac",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1335,5 +1335,5 @@
   "lock_acquisition_request_commit": "f2d341460efd7a9cae3c3e168bb6322daa39e5fa",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
