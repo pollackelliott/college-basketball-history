@@ -161,6 +161,7 @@ p=argparse.ArgumentParser()
 p.add_argument("school")
 p.add_argument("--repo",type=Path,required=True)
 p.add_argument("--sync-source-games",action="store_true")
+p.add_argument("--limit-source-games-to-opponent-changes",action="store_true")
 p.add_argument("--apply",action="store_true")
 p.add_argument("--json-output",type=Path)
 a=p.parse_args()
@@ -312,6 +313,9 @@ raise SystemExit(0 if ready else 1)
         )
         after = self.git(repo, "status", "--porcelain", "--untracked-files=all")
         self.assertEqual(before, after)
+        self.assertIn(
+            "--limit-source-games-to-opponent-changes", result["command"]
+        )
         self.assertEqual(result["report"]["status"], "PASS")
         self.assertEqual(
             sorted(x["canonical_opponent_key"] for x in result["report"]["changes"]),
@@ -373,6 +377,9 @@ raise SystemExit(0 if ready else 1)
             repo.parent / "diag-apply",
         )
         self.assertEqual(result["prepared_parent_sha"], predecessor)
+        self.assertIn(
+            "--limit-source-games-to-opponent-changes", result["apply_command"]
+        )
         self.assertEqual(
             set(result["changed_paths"]),
             {
