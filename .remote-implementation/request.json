@@ -10,52 +10,39 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from ucf-expansion-stage2-current-main-refresh-0005",
+    "authorization": "phase-persistent owner/Control Center authority inherited from ucf-expansion-stage2-census-0005",
     "origin": "repository-owned Stage 2 phase continuation"
   },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "expected_protected_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
   "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/ucf/ucf-expansion-phase0-0003/successor-manifest.json",
-    "sha256": "3fc6f552ef55a5e84c74b9e5e020ebe559cdf7700ab9d1c8ee8c472c2644b7b3"
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "79e41a922c7fca168d6a14f76d20a9f26ae9cb13",
+  "previous_control_state_sha256": "119d247859b865c5db3bbd070319043d9cc2bb48293414a742bd04c625bd8819",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/ucf-expansion-stage2-current-main-refresh-0005/recommendation-map.json",
+    "sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d"
   },
-  "phase_continuation": {
-    "census_request_id": "ucf-expansion-stage2-census-0005",
-    "expected_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "ucf-expansion-stage2-proposal-0004",
-    "recommendation_map": {
-      "path": ".remote-implementation/requests/ucf-expansion-stage2-current-main-refresh-0005/recommendation-map.json",
-      "sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d"
-    }
-  },
-  "previous_control_state_commit": "1df4c9e537369ba5f3e7f841047842dc9e296c86",
-  "previous_control_state_sha256": "c71f6dd6c40061747b6167d4ec64141fabeeaacce67e40847d2880463f270853",
-  "request_id": "ucf-expansion-stage2-census-0005",
+  "request_id": "ucf-expansion-stage2-proposal-0004",
   "schema_version": 1,
   "school_key": "ucf",
   "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-current-main-refresh-0005/successor-manifest.json",
-    "sha256": "28a3f91202ce9aa7c3ee9ed9d5de57fb5cc1154d62072228821c41a13bf03b8c"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
-    "sha256": "f9e38cbb1a0b5cec68a5c25b62bcdf9fde0027bfb3b84b285c4bff0e5ef98b84"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-census-0005/checkpoint-manifest.json",
+    "sha256": "7237c17d0422f64efccc12dfca561082443fd2ed110b627be2759a040f985c29"
   },
   "target_branch": "data/ucf-onboarding",
   "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9"
