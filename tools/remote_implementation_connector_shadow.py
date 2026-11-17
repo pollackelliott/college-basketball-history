@@ -133,7 +133,14 @@ def _load_source(
         "request_id": req_id,
         "school_key": school,
         "operation": last.get("operation"),
+        "expected_protected_main_sha": checkpoint.get("protected_main_sha"),
+        "target_branch": checkpoint.get("target_branch"),
+        "target_sha": checkpoint.get("target_sha"),
     }, "SOURCE_REQUEST")
+    require(
+        last.get("protected_main_sha") == checkpoint.get("protected_main_sha"),
+        "SHADOW_LAST_MAIN_BINDING_MISMATCH",
+    )
     # The action is a pure observation at one immutable Git control commit.
     require(bool(VALID_SHA.fullmatch(control_head)), "SHADOW_CONTROL_HEAD_INVALID")
     return last, checkpoint, request, base
@@ -362,6 +369,17 @@ def evaluate_shadow(
             blobs, last, checkpoint, request, base, main_sha, target_sha
         )
         packet_hash = checkpoint["gate2_merge_packet_sha256"]
+    child_id = (
+        packet["preview_request_id"] if op == REA
+        else packet["production_request_id"]
+    )
+    consumed = set(state.get("accepted_request_ids") or [])
+    consumed.update(state.get("consumed_request_ids") or [])
+    consumed.update(state.get("abandoned_request_ids") or [])
+    require(
+        child_id not in consumed and child_id != state.get("active_request_id"),
+        "SHADOW_CHILD_ID_ALREADY_CONSUMED",
+    )
     identity = "\n".join((
         repo_slug, checkpoint["school_key"], op,
         checkpoint["request_id"], packet_hash,
@@ -375,10 +393,7 @@ def evaluate_shadow(
         "school_key": checkpoint["school_key"],
         "packet_sha256": packet_hash,
         "work_item_sha256": hashlib.sha256(identity.encode("utf-8")).hexdigest(),
-        "child_request_id": (
-            packet["preview_request_id"] if op == REA
-            else packet["production_request_id"]
-        ),
+        "child_request_id": child_id,
         "actions_executed": 0,
         "execution_authorized_by_this_tool": False,
     }
