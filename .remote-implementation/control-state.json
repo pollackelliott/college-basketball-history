@@ -664,18 +664,19 @@
     "wyoming-stage2-reconciliation-diagnostic-0001",
     "wyoming-stage2-proposal-0002",
     "wyoming-stage2-gate1-fill-0001",
-    "wyoming-stage2-preseal-0001"
+    "wyoming-stage2-preseal-0001",
+    "wyoming-stage2-gate1-seal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_GATE1_SEAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "wyoming-stage2-gate1-seal-0001",
+  "active_request_sha256": "cdc8bfec7795bf44885dc3bac99f6a9279c0b938199df0cd0feb4b730dc29ecf",
+  "active_school_key": "wyoming",
+  "active_target_branch": "data/wyoming-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1346,8 +1347,11 @@
     "target_branch": "data/wyoming-onboarding",
     "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44198654979",
+  "lock_acquisition_request_commit": "2984bc7ac589b5fc0059de633bdf9119cf7f4a70",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_GATE1_SEAL_RUNNING"
 }
