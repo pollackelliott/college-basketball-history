@@ -92,30 +92,60 @@ jobs:
                       or state.get('recovery_required')
                       or state.get('active_request_id')):
                   fail('global control is not safely idle and complete')
-              if (last.get('operation') != 'STAGE2_PROPOSAL_REHEARSAL'
-                      or last.get('stage2_status') != 'BLOCKED'
-                      or last.get('fresh_runner_verification') != 'PASS'
-                      or last.get('remote_stage2_proposal_equivalence') != 'PASS'):
-                  fail('latest operation is not a freshly verified blocked proposal')
-              checkpoint = str(last.get('checkpoint_manifest_path') or '')
-              school = str(last.get('school_key') or '')
-              if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
-                      or not checkpoint.startswith('.remote-implementation/checkpoints/' + school + '/')
-                      or not checkpoint.endswith('/checkpoint-manifest.json')
-                      or '..' in Path(checkpoint).parts):
-                  fail('checkpoint path not within selected school authority')
-              raw = (Path('control') / checkpoint).read_bytes()
-              if hashlib.sha256(raw).hexdigest() != last.get('checkpoint_manifest_sha256'):
-                  fail('checkpoint bytes do not match control-state hash')
-              manifest = json.loads(raw)
-              if (manifest.get('kind') != 'REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT'
-                      or manifest.get('stage2_status') != 'BLOCKED'
-                      or manifest.get('school_key') != school
-                      or manifest.get('request_id') != last.get('request_id')
-                      or manifest.get('target_sha') != last.get('target_sha')
-                      or manifest.get('recommendation_map_sha256') != last.get('recommendation_map_sha256')
-                      or manifest.get('decision_universe_sha256') != last.get('decision_universe_sha256')):
-                  fail('checkpoint does not bind exact verified last operation')
+              if (last.get('operation') == 'STAGE2_PROPOSAL_REHEARSAL'
+                      and last.get('stage2_status') == 'BLOCKED'
+                      and last.get('fresh_runner_verification') == 'PASS'
+                      and last.get('remote_stage2_proposal_equivalence') == 'PASS'):
+                  mode = 'BLOCKED_PROPOSAL'
+                  checkpoint = str(last.get('checkpoint_manifest_path') or '')
+                  school = str(last.get('school_key') or '')
+                  expected_main = ''
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or not checkpoint.startswith('.remote-implementation/checkpoints/' + school + '/')
+                          or not checkpoint.endswith('/checkpoint-manifest.json')
+                          or '..' in Path(checkpoint).parts):
+                      fail('checkpoint path not within selected school authority')
+                  raw = (Path('control') / checkpoint).read_bytes()
+                  if hashlib.sha256(raw).hexdigest() != last.get('checkpoint_manifest_sha256'):
+                      fail('checkpoint bytes do not match control-state hash')
+                  manifest = json.loads(raw)
+                  if (manifest.get('kind') != 'REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT'
+                          or manifest.get('stage2_status') != 'BLOCKED'
+                          or manifest.get('school_key') != school
+                          or manifest.get('request_id') != last.get('request_id')
+                          or manifest.get('target_sha') != last.get('target_sha')
+                          or manifest.get('recommendation_map_sha256') != last.get('recommendation_map_sha256')
+                          or manifest.get('decision_universe_sha256') != last.get('decision_universe_sha256')):
+                      fail('checkpoint does not bind exact verified last operation')
+              elif (last.get('operation') == 'STAGE2_CURRENT_MAIN_REFRESH'
+                    and last.get('fresh_runner_verification') == 'PASS'
+                    and last.get('remote_stage2_current_main_refresh_equivalence') == 'PASS'):
+                  mode = 'LIVE_CENSUS_AFTER_REFRESH'
+                  checkpoint = ''
+                  live_request = json.loads(
+                      Path('control/.remote-implementation/request.json').read_text()
+                  )
+                  school = str(last.get('school_key') or '')
+                  continuation = live_request.get('phase_continuation') or {}
+                  refresh_ref = live_request.get('stage2_current_main_refresh_successor') or {}
+                  authority = live_request.get('authority') or {}
+                  expected_main = str(live_request.get('expected_protected_main_sha') or '')
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or live_request.get('kind') != 'REMOTE_IMPLEMENTATION_REQUEST'
+                          or live_request.get('operation') != 'STAGE2_CENSUS'
+                          or live_request.get('school_key') != school
+                          or live_request.get('target_branch') != last.get('target_branch')
+                          or live_request.get('target_sha') != last.get('target_sha')
+                          or expected_main != last.get('protected_main_sha')
+                          or continuation.get('kind') != 'STAGE2_REFRESH_CENSUS_PROPOSAL_V1'
+                          or live_request.get('request_id') != continuation.get('census_request_id')
+                          or authority.get('stage2_census') is not True
+                          or authority.get('stage2_current_main_refresh') is not False
+                          or refresh_ref.get('path') != last.get('successor_manifest_path')
+                          or refresh_ref.get('sha256') != last.get('successor_manifest_sha256')):
+                      fail('live census continuation does not bind exact verified refresh')
+              else:
+                  fail('latest operation is neither a verified blocked proposal nor a verified refresh with live census continuation')
               remote = git('candidate', 'ls-remote', 'origin', 'refs/heads/' + os.environ['PR_HEAD_REF']).split()
               if not remote or remote[0] != candidate:
                   fail('live PR head no longer equals event candidate SHA')
@@ -123,22 +153,31 @@ jobs:
               candidate = os.environ['INPUT_CANDIDATE_SHA']
               control_commit = os.environ['INPUT_CONTROL_COMMIT']
               checkpoint = os.environ['INPUT_CHECKPOINT_PATH']
+              mode = 'BLOCKED_PROPOSAL'
+              expected_main = ''
           else:
               fail('unsupported workflow event')
           if not valid_sha(candidate) or not valid_sha(control_commit):
               fail('candidate/control commit must be full SHA-40')
           if candidate_head != candidate:
               fail('candidate checkout does not match selected SHA')
-          if not re.fullmatch(r'\.remote-implementation/checkpoints/[a-z0-9-]+/[^/]+/checkpoint-manifest\.json', checkpoint):
+          if (mode == 'BLOCKED_PROPOSAL'
+                  and not re.fullmatch(r'\.remote-implementation/checkpoints/[a-z0-9-]+/[^/]+/checkpoint-manifest\.json', checkpoint)):
               fail('invalid checkpoint path')
           with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
               for key, value in [('candidate_sha', candidate),
                                  ('control_commit', control_commit),
-                                 ('proposal_checkpoint_path', checkpoint)]:
+                                 ('proposal_checkpoint_path', checkpoint),
+                                 ('mode', mode),
+                                 ('expected_main_sha', expected_main)]:
                   output.write(key + '=' + value + '\n')
           print('AUTHENTICATED_CANDIDATE=' + candidate)
           print('AUTHENTICATED_CONTROL=' + control_commit)
-          print('AUTHENTICATED_CHECKPOINT=' + checkpoint)
+          print('AUTHORITY_MODE=' + mode)
+          if checkpoint:
+              print('AUTHENTICATED_CHECKPOINT=' + checkpoint)
+          if expected_main:
+              print('EXPECTED_MAIN_SHA=' + expected_main)
           PY
       - name: Authenticate requested commits
         if: >-
@@ -167,7 +206,9 @@ jobs:
       - name: Replay exact blocked proposal with candidate tooling
         if: >-
           github.event_name == 'workflow_dispatch' ||
-          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+          (github.event_name == 'pull_request' &&
+           steps.authority.outputs.mode == 'BLOCKED_PROPOSAL' &&
+           !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-'))
         shell: bash
         run: |
           set -euo pipefail
@@ -182,7 +223,9 @@ jobs:
       - name: Require resolved proposal, unchanged decision universe, and no tracked mutation
         if: >-
           github.event_name == 'workflow_dispatch' ||
-          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+          (github.event_name == 'pull_request' &&
+           steps.authority.outputs.mode == 'BLOCKED_PROPOSAL' &&
+           !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-'))
         shell: bash
         run: |
           python - <<'PY'
@@ -198,6 +241,102 @@ jobs:
           print('UNCHANGED_HISTORICAL_DECISION_UNIVERSE=PASS')
           PY
 
+      - name: Replay exact live census after refresh with candidate tooling
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'LIVE_CENSUS_AFTER_REFRESH' &&
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          candidate = Path('candidate').resolve()
+          control = Path('control').resolve()
+          sys.path.insert(0, str(candidate / 'tools'))
+          from remote_implementation_stage2_census import (
+              add_existing_onboarding_worktree,
+              run_stage2_census_tool,
+              verify_phase0_authority,
+          )
+
+          request = json.loads(
+              (control / '.remote-implementation/request.json').read_text()
+          )
+          control_commit = '${{ steps.authority.outputs.control_commit }}'
+          authority = verify_phase0_authority(
+              request,
+              control_commit,
+              source_repo=control,
+          )
+          assert (
+              authority.get('target_authority_kind')
+              == 'STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR'
+          ), authority.get('target_authority_kind')
+          assert authority.get('phase0_target_sha') == request['target_sha']
+
+          worktree = add_existing_onboarding_worktree(
+              request['target_branch'],
+              request['target_sha'],
+              request['school_key'],
+              source_repo=candidate,
+          )
+          try:
+              result = run_stage2_census_tool(
+                  worktree,
+                  request['school_key'],
+                  authority['freeze_bytes'],
+                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
+                  tool_repo=candidate,
+              )
+          finally:
+              subprocess.run(
+                  ['git', '-C', str(candidate), 'worktree', 'remove',
+                   '--force', str(worktree)],
+                  check=True,
+              )
+
+          expected = request['phase_continuation'][
+              'expected_decision_universe_sha256'
+          ]
+          preflight = result['status'].get('preflight') or {}
+          proof = result.get('tracked_mutation_proof') or {}
+          assert result['stage2_status'] == 'CAPABILITY_CENSUS_READY'
+          assert preflight.get('blocker_count') == 0, preflight
+          assert preflight.get('warning_count') == 0, preflight
+          assert preflight.get('decision_count') == 0, preflight
+          assert preflight.get('decision_universe_sha256') == expected, preflight
+          assert proof.get('tracked_stage2_mutation') == 'NONE', proof
+
+          summary = {
+              'kind': 'LIVE_CENSUS_AFTER_REFRESH_CANDIDATE_REHEARSAL',
+              'candidate_sha': '${{ steps.authority.outputs.candidate_sha }}',
+              'control_commit': control_commit,
+              'school_key': request['school_key'],
+              'target_sha': request['target_sha'],
+              'expected_protected_main_sha': request[
+                  'expected_protected_main_sha'
+              ],
+              'stage2_status': result['stage2_status'],
+              'decision_universe_sha256': preflight[
+                  'decision_universe_sha256'
+              ],
+              'tracked_stage2_mutation': proof['tracked_stage2_mutation'],
+          }
+          out = Path('/tmp/stage2-candidate-runtime-rehearsal')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'live-census-summary.json').write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + '\n'
+          )
+          print('EXACT_LIVE_CENSUS_CANDIDATE_REPLAY=PASS')
+          print('UNCHANGED_HISTORICAL_DECISION_UNIVERSE=PASS')
+          print('TRACKED_STAGE2_MUTATION=NONE')
+          PY
+
       - name: Require control and actual PR head remained fixed
         if: >-
           github.event_name == 'pull_request' &&
@@ -206,6 +345,8 @@ jobs:
         env:
           SELECTED_CONTROL: ${{ steps.authority.outputs.control_commit }}
           SELECTED_CANDIDATE: ${{ steps.authority.outputs.candidate_sha }}
+          AUTHORITY_MODE: ${{ steps.authority.outputs.mode }}
+          EXPECTED_MAIN_SHA: ${{ steps.authority.outputs.expected_main_sha }}
           PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
@@ -213,13 +354,20 @@ jobs:
           candidate="$(git -C candidate ls-remote origin "refs/heads/$PR_HEAD_REF" | awk '{print $1}')"
           test -n "$control" && test "$control" = "$SELECTED_CONTROL"
           test -n "$candidate" && test "$candidate" = "$SELECTED_CANDIDATE"
-          scoped_main="$(python - <<'PY'
+          if [[ "$AUTHORITY_MODE" == "BLOCKED_PROPOSAL" ]]; then
+            scoped_main="$(python - <<'PY'
           import json
           from pathlib import Path
           summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-rehearsal-summary.json').read_text())
           print(summary['candidate_scope_main_sha'])
           PY
           )"
+          elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_REFRESH" ]]; then
+            scoped_main="$EXPECTED_MAIN_SHA"
+          else
+            echo "Unsupported authority mode: $AUTHORITY_MODE" >&2
+            exit 1
+          fi
           live_main="$(git -C candidate ls-remote origin refs/heads/main | awk '{print $1}')"
           test -n "$live_main" && test "$live_main" = "$scoped_main"
           echo 'EXACT_PR_HEAD_CONTROL_AND_MAIN_STABILITY=PASS'
