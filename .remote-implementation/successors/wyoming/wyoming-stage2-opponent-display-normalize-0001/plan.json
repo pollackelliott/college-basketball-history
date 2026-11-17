@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "wyoming",
+  "created_at": "2026-11-17T21:19:05.033965+00:00",
+  "input_fingerprint": {
+    "sha256": "095579d7bd8b792b2ad9b6cc9ef29aa17444f2c18808a216ca14c9a9f8dbcd54",
+    "git_head": "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+    "files": {
+      "schools/wyoming/source-games.csv": "f6a75f84a2c13e2c781647e4fed27463f9677f4830b456ac2b02bf8aad00f2d1",
+      "schools/wyoming/opponents.csv": "f34ef65c98deb784a01081c6d9ed5920205ffc90a461b8860488f73380dd9da7",
+      "schools/wyoming/venues.csv": "def0f8cffd279534f3f983b6b8a570d2c5324e5e2b4cb1cf0142ddf4c000b679",
+      "schools/wyoming/conferences.csv": "30cbe0c542c701440ce3f60e0c3900805ba4fdd503d50846000e4dff4caa9d52",
+      "schools/wyoming/notes.md": "ed4d8846bcb92feb4e5e59d0ff96e52fb054f774f40fe6c6f875a36395e34629",
+      "schools/wyoming/source-notes.md": "439f233f29a29cbc02419e432061a1c379da109bd7ab316a034b5b3470843614",
+      "data/canonical/games.csv": "e4698eb5b90cbdfaf475725d6bc65e0e038ad2076e86e4dfb4eaea5d416b5975",
+      "data/evidence/game-assertions.csv": "31fb313e90ea359df846bc99189d4552a8d62d5ed245cfe1e945f9b249864f6d",
+      "data/reconciliation/discrepancies.csv": "cfc07d679dc5c4344e34151d3a346545f21df82236ee4cdaf0ea648688e2ecd6",
+      "data/reference/programs.csv": "caf4ffa12a9e36c8f3efd2f9728f7ec602f2bf9381868a533ff924ce3e798756",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "93319d0e826fe833253c524d7299fe90547925d9cc2ce0feeb55f54df9e7c43b",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "2166f3205ba3d084002d46fb1507044b696e0c32ccc50f529cf6e10d5c1fb707",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "3c057d6f71702700f3a5f47fa82c52ca6206de84818c34646ea48b5b51e44de4",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "6d7ba427e5652029cbef680239767eb7801c621c0ebcf6d574caa43611c70c74",
+      "tools/onboarding_plan.py": "b0cbabdf934494bf619e1cf485c61a54abb61835a072a17f8b4ed4e6e287c9a1",
+      "tools/program_history.py": "b956c6c77b17d23423bfef7004e4e73e6b87e4f37c3b2baf2feb9779f9ea8a62",
+      "tools/validate_data.py": "f5ba42f68d25804c37833d712766347b2ad342818fa9e98332a181e31591f854",
+      "tools/verify_program_accomplishments.py": "9b2cd4ec6bafcd9f825fd6d6a1c42a52ecce0497c523f3fbdb48f157aab59dcb"
+    }
+  },
+  "package": {
+    "errors": [],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2951,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 921,
+      "venues": 44,
+      "conference_intervals": 5,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "summary": {
+    "source_rows": 2951,
+    "in_scope_source_rows": 0,
+    "top_level_source_rows": 0,
+    "pre_cutoff_rows": 2951,
+    "history_start_season": "1904-1905",
+    "history_scope_intervals": "",
+    "pre_cutoff_first_season": "1904-1905",
+    "pre_cutoff_last_season": "2025-2026",
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "identity_review_required": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "identity_cardinality_constraints": 0,
+    "assertions_to_add": 0,
+    "canonical_enrichment_games": 0,
+    "canonical_enrichment_fields": 0,
+    "discrepancies_to_add": 0,
+    "conditional_discrepancies": 0,
+    "canonical_site_patch_reviews": 0,
+    "affected_public_programs": [],
+    "already_public": false
+  },
+  "decisions": [
+    {
+      "decision_id": "ACCOMPLISHMENTS-WYOMING",
+      "category": "accomplishments",
+      "source_game_id": "",
+      "season_label": "",
+      "source_game_date": "[unknown]",
+      "canonical_game_date": "[unknown]",
+      "matchup": "wyoming",
+      "field_name": "program_accomplishments",
+      "source_value": "{\"best_finish_key\":\"NATIONAL_CHAMPION\",\"best_finish_year\":\"1943\",\"conference_regular_season_championships\":\"21\",\"conference_tournament_championships\":\"3\",\"final_four_appearances\":\"1\",\"national_championships\":\"1\",\"ncaa_tournament_appearances\":\"16\"}",
+      "canonical_value": "{\"best_finish_key\":\"FINAL_FOUR\",\"best_finish_year\":1943,\"final_four_appearances\":1,\"national_championships\":0,\"ncaa_tournament_appearances\":11}",
+      "relevant_evidence": "Reference accomplishment values differ from the preserved on-court canonical derivation. Gate 1 must either correct the accomplishment values to an exact canonical MATCH or explicitly authorize EXPLAINED_ADMIN_DIFFERENCE with an authoritative administrative basis. Canonical game history is unchanged unless a separate historical game decision independently authorizes it.",
+      "recommended_action": "KEEP_UNDER_REVIEW",
+      "allowed_actions": [
+        "APPLY_ACCOMPLISHMENT_PATCH",
+        "APPLY_ACCOMPLISHMENT_PATCH_WITH_ADMIN_DIFFERENCE",
+        "KEEP_UNDER_REVIEW",
+        "VERIFY_EXPLAINED_ADMIN_DIFFERENCE",
+        "VERIFY_REFERENCE_VALUES"
+      ],
+      "accomplishment_conflicts": [
+        "ncaa_tournament_appearances: reference='16', canonical='11'",
+        "national_championships: reference='1', canonical='0'",
+        "best_finish_key: reference='NATIONAL_CHAMPION', canonical='FINAL_FOUR'",
+        "1981-1982 has no resolved NCAA round"
+      ],
+      "decision": "PENDING",
+      "resolution_basis": "",
+      "canonical_patch_json": "{}",
+      "source_patch_json": "{}",
+      "notes": "Approval basis must cite the authoritative accomplishment source."
+    },
+    {
+      "decision_id": "PUBLICATION-WYOMING",
+      "category": "publication",
+      "source_game_id": "",
+      "season_label": "",
+      "source_game_date": "[unknown]",
+      "canonical_game_date": "[unknown]",
+      "matchup": "wyoming",
+      "field_name": "public_page_enabled",
+      "source_value": "No",
+      "canonical_value": "Yes",
+      "relevant_evidence": "0 publication-eligible source rows; 0 top-level source rows; 2,951 researched rows remain outside authorized publication coverage; 0 identity reviews; 0 definite and 0 conditional discrepancies.",
+      "recommended_action": "ENABLE_PUBLIC_PAGE",
+      "allowed_actions": [
+        "ENABLE_PUBLIC_PAGE",
+        "KEEP_DISABLED"
+      ],
+      "decision": "PENDING",
+      "resolution_basis": "",
+      "canonical_patch_json": "{}",
+      "source_patch_json": "{}",
+      "notes": "Publication occurs only after every approved decision and automated gate passes."
+    }
+  ],
+  "identity_collision_groups": [],
+  "identity_cardinality_constraints": [],
+  "site_gap_provenance": [
+    {
+      "canonical_game_id": "CBBG-0040722",
+      "fields": [
+        "venue"
+      ],
+      "reciprocal_source_program_key": "lsu",
+      "reciprocal_source_game_id": "LSURAW-01194",
+      "resolution_basis": "Non-substantive publication provenance: the established canonical regular-season H/A/N is NEUTRAL; the target has no source assertion or substantive decision for this game; accepted reciprocal evidence agrees with NEUTRAL but supplies no supported venue. Preserve the surviving blank field(s) rather than infer from event text or geography."
+    }
+  ]
+}
