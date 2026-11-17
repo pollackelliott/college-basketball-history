@@ -1,0 +1,74 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "06624fdc3df7928fe589bf8dbe5dd5bc4b659bcb9b66d2b17bbf19bfacf8b5c8",
+    "docs/remote-implementation-runner.md": "c51f93db892abe5956437f36ca05b73bfd792f4b3b1c5099b0bb05c3c58dd2ac",
+    "tests/test_normalize_historical_opponent_displays.py": "3254978e7bdd8c231bdf8fec7fae47ea429d9d33565ea79e297ddd7cb0800885",
+    "tests/test_remote_implementation_stage2_opponent_display.py": "97e03aa6f90c0cc5335592724cb4460b383bad27e5d483cabd6aec61d64004f0",
+    "tools/normalize_historical_opponent_displays.py": "78e8893357fbe71943e6183f0f5922ec3804e554e99aea620d0c80f37fa7b1a1",
+    "tools/remote_implementation_stage2_opponent_display.py": "8b93e1a8aaff2f24f1e91c98b8487b32d137a8c464aa7e41faf71f68a58410ec",
+    "tools/stage2_candidate_opponent_display_rehearsal.py": "207285c2b4d4973b5cdf4ca2a2eca93f69fc9de585dc1dea513cfd9587a13524"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "docs/remote-implementation-runner.md",
+    "tests/test_normalize_historical_opponent_displays.py",
+    "tests/test_remote_implementation_stage2_opponent_display.py",
+    "tools/normalize_historical_opponent_displays.py",
+    "tools/remote_implementation_stage2_opponent_display.py",
+    "tools/stage2_candidate_opponent_display_rehearsal.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "main_changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "docs/remote-implementation-runner.md",
+    "tests/test_normalize_historical_opponent_displays.py",
+    "tests/test_remote_implementation_stage2_opponent_display.py",
+    "tools/normalize_historical_opponent_displays.py",
+    "tools/remote_implementation_stage2_opponent_display.py",
+    "tools/stage2_candidate_opponent_display_rehearsal.py"
+  ],
+  "merge_base_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "89b16a2bbdfc282ced1d178f21108eb22a1c0ed58af23153a685ebc019ef612f",
+    "notes.md": "7d0af4868506bd195908802ac4efbeb04087a4d99d4a6f839ca31f8defd86448",
+    "opponents.csv": "8845c2f3b8611b62e5afd42344ed49273068e568510901082f3aaacc0d0bc305",
+    "source-games.csv": "c81413ebb4fc9de075527bf5a924e6b0c5141235d31bec1c8bbdac910d4317fe",
+    "source-notes.md": "a5491ddb17ca2736c121f4f4e39f2110b3605bf42570ace3d5c6c71f882855ff",
+    "venues.csv": "01965ba29b19335d7a1ada157edac566a45ffe91c3d6b0205a557e5aee162f59"
+  },
+  "prepared_commit_sha": "518ae6c81a797d67585f2382a139942f539ad7e7",
+  "prepared_parents": [
+    "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+    "e91be3617bf812547f32c414bc06fe6643f3d7e8"
+  ],
+  "prepared_tree_sha": "ca7d180fafc7b26420b3bb0d9af39897b9b08919",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "bc76cda8ba41e7638ecddb9194a554e9a88b6c14dd93dc2554fa2a4058bce409",
+    "data/reference/venue-names.csv": "59e285efdc5104c21f312e78e73f037b1c83a4a26514fff16f8aebef9bf3587e",
+    "data/reference/venues.csv": "4545312c6f3fd5f66c51c26e5f70c1a68b939afbdf145d600c422348b221c83d",
+    "schools/ucf/notes.md": "7d0af4868506bd195908802ac4efbeb04087a4d99d4a6f839ca31f8defd86448",
+    "schools/ucf/opponents.csv": "8845c2f3b8611b62e5afd42344ed49273068e568510901082f3aaacc0d0bc305",
+    "schools/ucf/source-games.csv": "c81413ebb4fc9de075527bf5a924e6b0c5141235d31bec1c8bbdac910d4317fe",
+    "schools/ucf/source-notes.md": "a5491ddb17ca2736c121f4f4e39f2110b3605bf42570ace3d5c6c71f882855ff",
+    "schools/ucf/venues.csv": "01965ba29b19335d7a1ada157edac566a45ffe91c3d6b0205a557e5aee162f59"
+  },
+  "protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "target_branch": "data/ucf-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/ucf/notes.md",
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv",
+    "schools/ucf/source-notes.md",
+    "schools/ucf/venues.csv"
+  ]
+}
