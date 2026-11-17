@@ -233,6 +233,9 @@ def verify_stage2_gate1_fill_authority(
         "proposal_request": proposal_request,
         "proposal_authority": proposal_authority,
         "freeze_bytes": proposal_authority["freeze_bytes"],
+        "venue_reconciliation_bytes": proposal_authority.get(
+            "venue_reconciliation_bytes"
+        ),
         "map_bytes": map_bytes,
         "plan_bytes": plan_bytes,
         "review_bytes": review_bytes,

@@ -44,6 +44,47 @@ def _bound_bytes(
     return data
 
 
+def restore_expansion_venue_reconciliation(
+    repo: Path,
+    school_key: str,
+    freeze_bytes: bytes,
+    venue_reconciliation_bytes: bytes | None,
+) -> Path | None:
+    """Restore only the exact Freeze-bound expansion venue sidecar, when required."""
+
+    try:
+        freeze = json.loads(freeze_bytes)
+    except (TypeError, ValueError):
+        # Synthetic unit fixtures may use opaque freeze bytes. Production
+        # authority has already authenticated valid Freeze JSON upstream.
+        if venue_reconciliation_bytes is not None:
+            raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_FREEZE_INVALID")
+        return None
+
+    reconciliation = freeze.get("venue_reconciliation")
+    expected = str(freeze.get("venue_reconciliation_sha256") or "")
+    if reconciliation is None:
+        if expected:
+            raise Stop("STAGE2_GATE1_UNEXPECTED_VENUE_RECONCILIATION_HASH")
+        if venue_reconciliation_bytes is not None:
+            raise Stop("STAGE2_GATE1_UNEXPECTED_VENUE_RECONCILIATION_BYTES")
+        return None
+
+    if not isinstance(reconciliation, dict):
+        raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_INVALID")
+    if not re.fullmatch(r"[0-9a-f]{64}", expected):
+        raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_HASH_INVALID")
+    if venue_reconciliation_bytes is None:
+        raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_BYTES_MISSING")
+    if sha256_bytes(venue_reconciliation_bytes) != expected:
+        raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_BYTES_MISMATCH")
+
+    path = repo / ".onboarding" / school_key / "venue-reconciliation.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(venue_reconciliation_bytes)
+    return path
+
+
 def _normalize_text(text: str, *, repo: Path) -> str:
     """Normalize ephemeral diagnostics without making them equivalence authority."""
 
@@ -246,6 +287,9 @@ def verify_stage2_preseal_authority(
         "gate1_fill_request": fill_request,
         "gate1_fill_authority": fill_authority,
         "freeze_bytes": fill_authority["freeze_bytes"],
+        "venue_reconciliation_bytes": fill_authority.get(
+            "venue_reconciliation_bytes"
+        ),
         "plan_bytes": plan_bytes,
         "filled_review_bytes": filled_review_bytes,
         "target_tree_sha": manifest.get("target_tree_sha"),
@@ -263,12 +307,19 @@ def run_stage2_preseal_rehearsal_tool(
     plan_bytes: bytes,
     filled_review_bytes: bytes,
     expected_approved_plan_hash_preview: str,
+    venue_reconciliation_bytes: bytes | None = None,
     diag: Path,
     tool_repo: Path | None = None,
 ) -> dict[str, Any]:
     """Run the permanent filled-review rehearsal without tracked mutation."""
 
     restore_integration_freeze(repo, school_key, freeze_bytes)
+    restore_expansion_venue_reconciliation(
+        repo,
+        school_key,
+        freeze_bytes,
+        venue_reconciliation_bytes,
+    )
     output = repo / ".onboarding" / school_key
     output.mkdir(parents=True, exist_ok=True)
     plan_path = output / SOURCE_PLAN

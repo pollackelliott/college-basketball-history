@@ -614,6 +614,9 @@ def verify_stage2_preseal_rehearsal(
         freeze_bytes=authority["freeze_bytes"],
         plan_bytes=authority["plan_bytes"],
         filled_review_bytes=authority["filled_review_bytes"],
+        venue_reconciliation_bytes=authority.get(
+            "venue_reconciliation_bytes"
+        ),
         expected_approved_plan_hash_preview=manifest[
             "approved_plan_hash_preview"
         ],
@@ -828,6 +831,9 @@ def verify_stage2_gate1_seal(
         freeze_bytes=authority["freeze_bytes"],
         plan_bytes=authority["plan_bytes"],
         filled_review_bytes=authority["filled_review_bytes"],
+        venue_reconciliation_bytes=authority.get(
+            "venue_reconciliation_bytes"
+        ),
         expected_approved_plan_hash_preview=manifest[
             "approved_plan_hash_preview"
         ],

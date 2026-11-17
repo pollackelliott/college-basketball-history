@@ -14,6 +14,7 @@ sys.path.insert(0, str(TOOLS))
 import remote_implementation_runner as runner  # noqa: E402
 import remote_implementation_stage2_preseal as preseal  # noqa: E402
 import remote_implementation_verify as verifier  # noqa: E402
+import stage2_candidate_runtime_rehearsal as candidate_rehearsal  # noqa: E402
 from remote_implementation_control import (  # noqa: E402
     OP_STAGE2_PRESEAL_REHEARSAL,
     REQUEST_KIND,
@@ -224,11 +225,18 @@ class RemoteStage2PresealTests(unittest.TestCase):
             patch.object(
                 preseal,
                 "verify_stage2_gate1_fill_authority",
-                return_value={"freeze_bytes": b"freeze"},
+                return_value={
+                    "freeze_bytes": b"freeze",
+                    "venue_reconciliation_bytes": b"venue-sidecar",
+                },
             ),
         ):
             result = preseal.verify_stage2_preseal_authority(req, CONTROL)
 
+        self.assertEqual(
+            result["venue_reconciliation_bytes"],
+            b"venue-sidecar",
+        )
         self.assertEqual(result["gate1_fill_manifest"], manifest)
         self.assertEqual(result["gate1_fill_verification"], verification)
         self.assertEqual(result["target_tree_sha"], TREE)
@@ -282,6 +290,90 @@ class RemoteStage2PresealTests(unittest.TestCase):
         self.assertIn("<TARGET_REPO>", normalized)
         self.assertIn("<TMPDIR>/schools/alpha/source-games.csv", normalized)
         self.assertIn("Ran 865 tests in <ELAPSED>s", normalized)
+
+    def test_expansion_venue_reconciliation_is_restored_exactly(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            sidecar_bytes = b'{"schema_version":1}\n'
+            freeze_bytes = (
+                json.dumps(
+                    {
+                        "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
+                        "venue_reconciliation": {"spec_sha256": sha(sidecar_bytes)},
+                        "venue_reconciliation_sha256": sha(sidecar_bytes),
+                    }
+                )
+                + "\n"
+            ).encode()
+            restored = preseal.restore_expansion_venue_reconciliation(
+                root,
+                SCHOOL,
+                freeze_bytes,
+                sidecar_bytes,
+            )
+            self.assertIsNotNone(restored)
+            self.assertEqual(restored.read_bytes(), sidecar_bytes)
+
+            with self.assertRaisesRegex(
+                Stop,
+                "STAGE2_GATE1_VENUE_RECONCILIATION_BYTES_MISMATCH",
+            ):
+                preseal.restore_expansion_venue_reconciliation(
+                    root,
+                    SCHOOL,
+                    freeze_bytes,
+                    b"wrong",
+                )
+
+    def test_permanent_rehearsal_restores_bound_venue_reconciliation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            clean = {"head_sha": TARGET, "tree_sha": TREE, "status": ""}
+            sidecar_bytes = b'{"schema_version":1}\n'
+            freeze_bytes = (
+                json.dumps(
+                    {
+                        "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
+                        "venue_reconciliation": {"spec_sha256": sha(sidecar_bytes)},
+                        "venue_reconciliation_sha256": sha(sidecar_bytes),
+                    }
+                )
+                + "\n"
+            ).encode()
+            log = (
+                "TECHNICAL READINESS PASSED\n"
+                f"Preview approved-plan hash: {PLAN_PREVIEW}\n"
+                "Changed paths: 12\n"
+            )
+            with (
+                patch.object(
+                    preseal,
+                    "tracked_worktree_state",
+                    side_effect=[clean, clean],
+                ),
+                patch.object(
+                    preseal,
+                    "run",
+                    return_value=subprocess.CompletedProcess([], 0, stdout=log),
+                ),
+            ):
+                result = preseal.run_stage2_preseal_rehearsal_tool(
+                    root,
+                    SCHOOL,
+                    freeze_bytes=freeze_bytes,
+                    plan_bytes=b"{}\n",
+                    filled_review_bytes=b"decision_id\n",
+                    venue_reconciliation_bytes=sidecar_bytes,
+                    expected_approved_plan_hash_preview=PLAN_PREVIEW,
+                    diag=root / "diag",
+                    tool_repo=ROOT,
+                )
+
+            restored = (
+                root / ".onboarding" / SCHOOL / "venue-reconciliation.json"
+            )
+            self.assertEqual(restored.read_bytes(), sidecar_bytes)
+            self.assertEqual(result["preseal_status"], "READY_TO_SEAL")
 
     def test_permanent_rehearsal_success_is_ready_to_seal(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -587,6 +679,196 @@ class RemoteStage2PresealTests(unittest.TestCase):
             tracked_stage2_mutation="NONE",
         )
         self.assertNotEqual(baseline, changed)
+
+
+    def test_candidate_preseal_replays_exact_blocked_authority_with_sidecar(self):
+        req = request()
+        req["request_id"] = "preseal-001"
+        request_bytes = (json.dumps(req, sort_keys=True) + "\n").encode()
+        checkpoint_path = (
+            ".remote-implementation/checkpoints/example-school/"
+            "preseal-001/checkpoint-manifest.json"
+        )
+        manifest = {
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+            "request_id": "preseal-001",
+            "request_sha256": sha(request_bytes),
+            "school_key": SCHOOL,
+            "target_branch": BRANCH,
+            "target_sha": TARGET,
+            "target_tree_sha": TREE,
+            "integration_freeze_sha256": FREEZE_SHA,
+            "decision_universe_sha256": DECISION_SHA,
+            "recommendation_map_sha256": MAP_SHA,
+            "approved_plan_hash_preview": PLAN_PREVIEW,
+            "filled_review_sha256": FILLED_REVIEW_SHA,
+            "owner_gate_1_approval_sha256": OWNER_APPROVAL_SHA,
+            "preseal_status": "BLOCKED",
+            "tracked_mutation_proof": {"tracked_stage2_mutation": "NONE"},
+        }
+        authority = {
+            "freeze_bytes": b"freeze",
+            "plan_bytes": b"plan",
+            "filled_review_bytes": b"review",
+            "venue_reconciliation_bytes": b"venue-sidecar",
+            "target_tree_sha": TREE,
+            "owner_gate_1_approval_sha256": OWNER_APPROVAL_SHA,
+        }
+        result = {
+            "preseal_status": "READY_TO_SEAL",
+            "approved_plan_hash_preview": PLAN_PREVIEW,
+            "tracked_mutation_proof": {"tracked_stage2_mutation": "NONE"},
+        }
+        cp_head = subprocess.CompletedProcess([], 0, stdout=("f" * 40) + "\n")
+        cp_tree = subprocess.CompletedProcess([], 0, stdout=TREE + "\n")
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            diag = target / "diag"
+            with (
+                patch.object(
+                    candidate_rehearsal,
+                    "_run_git",
+                    side_effect=[cp_head, cp_tree],
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "_load_json_at",
+                    side_effect=[(manifest, b"manifest"), (req, request_bytes)],
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "candidate_changed_paths",
+                    return_value=(
+                        ["tools/remote_implementation_stage2_preseal.py"],
+                        MAIN,
+                    ),
+                ),
+                patch.object(candidate_rehearsal, "validate_candidate_scope"),
+                patch.object(
+                    candidate_rehearsal,
+                    "verify_stage2_preseal_authority",
+                    return_value=authority,
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "add_existing_onboarding_worktree",
+                    return_value=target,
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "run_stage2_preseal_rehearsal_tool",
+                    return_value=result,
+                ) as replay,
+            ):
+                summary = candidate_rehearsal.run_candidate_preseal_rehearsal(
+                    source_repo=ROOT,
+                    candidate_runtime=ROOT,
+                    candidate_sha="f" * 40,
+                    control_commit=CONTROL,
+                    preseal_checkpoint_path=checkpoint_path,
+                    diag=diag,
+                )
+
+        self.assertEqual(
+            summary["classification"],
+            "RESOLVED_TO_READY_TO_SEAL",
+        )
+        self.assertEqual(summary["decision_universe_sha256"], DECISION_SHA)
+        self.assertEqual(summary["recommendation_map_sha256"], MAP_SHA)
+        self.assertEqual(
+            summary["owner_gate_1_approval_sha256"],
+            OWNER_APPROVAL_SHA,
+        )
+        self.assertEqual(
+            replay.call_args.kwargs["venue_reconciliation_bytes"],
+            b"venue-sidecar",
+        )
+
+    def test_candidate_preseal_fails_closed_when_candidate_remains_blocked(self):
+        req = request()
+        req["request_id"] = "preseal-001"
+        request_bytes = (json.dumps(req, sort_keys=True) + "\n").encode()
+        checkpoint_path = (
+            ".remote-implementation/checkpoints/example-school/"
+            "preseal-001/checkpoint-manifest.json"
+        )
+        manifest = {
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+            "request_id": "preseal-001",
+            "request_sha256": sha(request_bytes),
+            "school_key": SCHOOL,
+            "target_branch": BRANCH,
+            "target_sha": TARGET,
+            "decision_universe_sha256": DECISION_SHA,
+            "recommendation_map_sha256": MAP_SHA,
+            "approved_plan_hash_preview": PLAN_PREVIEW,
+            "filled_review_sha256": FILLED_REVIEW_SHA,
+            "owner_gate_1_approval_sha256": OWNER_APPROVAL_SHA,
+            "preseal_status": "BLOCKED",
+            "tracked_mutation_proof": {"tracked_stage2_mutation": "NONE"},
+        }
+        authority = {
+            "freeze_bytes": b"freeze",
+            "plan_bytes": b"plan",
+            "filled_review_bytes": b"review",
+            "venue_reconciliation_bytes": b"venue-sidecar",
+            "target_tree_sha": TREE,
+            "owner_gate_1_approval_sha256": OWNER_APPROVAL_SHA,
+        }
+        cp_head = subprocess.CompletedProcess([], 0, stdout=("f" * 40) + "\n")
+        cp_tree = subprocess.CompletedProcess([], 0, stdout=TREE + "\n")
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            with (
+                patch.object(
+                    candidate_rehearsal,
+                    "_run_git",
+                    side_effect=[cp_head, cp_tree],
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "_load_json_at",
+                    side_effect=[(manifest, b"manifest"), (req, request_bytes)],
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "candidate_changed_paths",
+                    return_value=(["tools/example.py"], MAIN),
+                ),
+                patch.object(candidate_rehearsal, "validate_candidate_scope"),
+                patch.object(
+                    candidate_rehearsal,
+                    "verify_stage2_preseal_authority",
+                    return_value=authority,
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "add_existing_onboarding_worktree",
+                    return_value=target,
+                ),
+                patch.object(
+                    candidate_rehearsal,
+                    "run_stage2_preseal_rehearsal_tool",
+                    return_value={
+                        "preseal_status": "BLOCKED",
+                        "tracked_mutation_proof": {
+                            "tracked_stage2_mutation": "NONE"
+                        },
+                    },
+                ),
+            ):
+                with self.assertRaisesRegex(
+                    Stop,
+                    "CANDIDATE_PRESEAL_NOT_READY:BLOCKED",
+                ):
+                    candidate_rehearsal.run_candidate_preseal_rehearsal(
+                        source_repo=ROOT,
+                        candidate_runtime=ROOT,
+                        candidate_sha="f" * 40,
+                        control_commit=CONTROL,
+                        preseal_checkpoint_path=checkpoint_path,
+                        diag=target / "diag",
+                    )
 
     def test_fresh_verifier_dispatches_preseal_operation(self):
         state = initial_control_state()
