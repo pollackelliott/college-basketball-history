@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "ebab9c8cde593323e90d7e5e0859d32efe048172d0cdfc68a3fa4a37dedfdc13",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "pr_number": 636,
+  "preview_deployment_id": 7857416801,
+  "preview_deployment_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "preview_url": "https://college-basketball-history-b8bfwizqt-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "ucf-expansion-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d"
+}
