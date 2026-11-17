@@ -1,0 +1,70 @@
+{
+  "actual_published_target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "changed_file_sha256": {
+    "tests/test_program_history_scope.py": "600f9cd6435e31c3ea8bc08ff7b44f12d1434964a5204c2bc2acd6c8e8ca8b0d",
+    "tools/onboarding_plan.py": "452bbbee5663332e398876078726a66848b8ab0921499e8dd69134fc91fe844b",
+    "tools/program_history.py": "d1b6d69e15a994dcefb628d7078e100f792c671db35e32bd5efef504b6c860da"
+  },
+  "changed_paths": [
+    "tests/test_program_history_scope.py",
+    "tools/onboarding_plan.py",
+    "tools/program_history.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "tests/test_program_history_scope.py",
+    "tools/onboarding_plan.py",
+    "tools/program_history.py"
+  ],
+  "merge_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "30cbe0c542c701440ce3f60e0c3900805ba4fdd503d50846000e4dff4caa9d52",
+    "notes.md": "ed4d8846bcb92feb4e5e59d0ff96e52fb054f774f40fe6c6f875a36395e34629",
+    "opponents.csv": "f34ef65c98deb784a01081c6d9ed5920205ffc90a461b8860488f73380dd9da7",
+    "source-games.csv": "f6a75f84a2c13e2c781647e4fed27463f9677f4830b456ac2b02bf8aad00f2d1",
+    "source-notes.md": "439f233f29a29cbc02419e432061a1c379da109bd7ab316a034b5b3470843614",
+    "venues.csv": "def0f8cffd279534f3f983b6b8a570d2c5324e5e2b4cb1cf0142ddf4c000b679"
+  },
+  "predecessor_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "prepared_commit_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "prepared_main_parent_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "prepared_parent_sha": "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+  "prepared_parents": [
+    "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+    "33af595fcae2a17664379638f89ce64c2e63be08"
+  ],
+  "prepared_tree_sha": "820fca044427469e694c37a8054237d990113845",
+  "prior_refresh_successor_path": null,
+  "prior_refresh_successor_sha256": null,
+  "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "1e35e33cc9e3870e9cd21bedb9022b152cbac037971def7be125a6371da682c8",
+  "repository_validation": "PASS",
+  "request_id": "wyoming-stage2-current-main-refresh-0001",
+  "request_sha256": "8d184ea1cc3cb8615d151bd1c9cfaefc8a031000bc575a620f24226e7392688a",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "target_branch": "data/wyoming-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/wyoming/conferences.csv",
+    "schools/wyoming/notes.md",
+    "schools/wyoming/opponents.csv",
+    "schools/wyoming/source-games.csv",
+    "schools/wyoming/source-notes.md",
+    "schools/wyoming/venues.csv"
+  ],
+  "writeahead_commit": "83c71ea1ec07ef240de86be9a1059d1d65b5dfa9",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/wyoming/wyoming-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "798f3559da29aa3a2d08e7689fa5b9d14e163c70358dc697b9141dece60b3bac"
+}
