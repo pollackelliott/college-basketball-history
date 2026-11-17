@@ -1798,11 +1798,37 @@ def _validated_expansion_freeze_bytes(source: Path, school_key: str) -> bytes | 
             not isinstance(digest, str)
             or not re.fullmatch(r"[0-9a-f]{64}", digest)
             or not (source / "schools" / school_key / name).is_file()
-            or file_sha(source / "schools" / school_key / name) != digest
             for name, digest in candidate_hashes.items()
         )
     ):
         raise WorkflowError("All-History expansion Integration Freeze package mismatch")
+
+    current_matches_freeze = all(
+        file_sha(source / "schools" / school_key / name) == digest
+        for name, digest in candidate_hashes.items()
+    )
+    if not current_matches_freeze:
+        # The original six-file Freeze is immutable. A guarded, committed
+        # Stage-2 historical opponent-display normalization is a later
+        # representation-only successor, not a new Integration Freeze.
+        # Prove its exact Git ancestry, field-level delta and project identity
+        # before transporting the original frozen evidence to a rehearsal.
+        from all_history_expansion_display_successor_guard import (
+            permits_authenticated_display_successor,
+        )
+
+        diagnostics: list[str] = []
+        if not permits_authenticated_display_successor(
+            source,
+            school_key,
+            candidate_hashes,
+            integration_freeze=manifest,
+            diagnostics=diagnostics,
+        ):
+            raise WorkflowError(
+                "All-History expansion Integration Freeze package mismatch"
+                + (f" [display-successor:{diagnostics[-1]}]" if diagnostics else "")
+            )
 
     guard = manifest.get("source_game_semantic_guard")
     if not isinstance(guard, dict) or not isinstance(guard.get("snapshot"), dict):
@@ -1853,8 +1879,17 @@ def copy_repository(
         if school_key is not None
         else None
     )
+    expansion_freeze = (
+        _validated_expansion_freeze_bytes(source, school_key)
+        if school_key is not None and correction_freeze is None
+        else None
+    )
     split_authority_freeze = None
-    if school_key is not None and correction_freeze is None:
+    if (
+        school_key is not None
+        and correction_freeze is None
+        and expansion_freeze is None
+    ):
         try:
             split_authority_freeze = frozen_venue_split_freeze_bytes(
                 source,
@@ -1862,12 +1897,24 @@ def copy_repository(
             )
         except FrozenVenueSplitAuthorityError as exc:
             raise WorkflowError(str(exc)) from exc
-    expansion_freeze = (
-        _validated_expansion_freeze_bytes(source, school_key)
-        if school_key is not None and correction_freeze is None and split_authority_freeze is None
-        else None
-    )
-    runtime_freeze = correction_freeze or split_authority_freeze or expansion_freeze
+    runtime_freeze = correction_freeze or expansion_freeze or split_authority_freeze
+    runtime_expansion_venue_reconciliation = None
+    if expansion_freeze is not None:
+        expansion_manifest = json.loads(expansion_freeze)
+        if expansion_manifest.get("venue_reconciliation") is not None:
+            expected = str(
+                expansion_manifest.get("venue_reconciliation_sha256") or ""
+            )
+            sidecar = source / ".onboarding" / school_key / "venue-reconciliation.json"
+            if (
+                not re.fullmatch(r"[0-9a-f]{64}", expected)
+                or not sidecar.is_file()
+                or file_sha(sidecar) != expected
+            ):
+                raise WorkflowError(
+                    "All-History expansion venue reconciliation changed during transport"
+                )
+            runtime_expansion_venue_reconciliation = sidecar.read_bytes()
 
     def ignore(_directory: str, names: list[str]) -> set[str]:
         return {
@@ -1926,6 +1973,10 @@ def copy_repository(
         target = destination / ".onboarding" / school_key / "integration-freeze.json"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(runtime_freeze)
+    if runtime_expansion_venue_reconciliation is not None:
+        target = destination / ".onboarding" / school_key / "venue-reconciliation.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(runtime_expansion_venue_reconciliation)
 
 
 def copy_validated_changes(

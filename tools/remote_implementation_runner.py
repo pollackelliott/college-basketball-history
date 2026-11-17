@@ -849,6 +849,7 @@ def run_read_only_stage2_proposal(
         DIAG / "stage2-proposal",
         tool_repo=runtime_repo,
         historical_game_type_challenge_path=challenge_path,
+        venue_reconciliation_bytes=authority.get("venue_reconciliation_bytes"),
     )
     assert_protected_main_unchanged(live_main)
     if remote_head(ROOT, request["target_branch"]) != request["target_sha"]:
