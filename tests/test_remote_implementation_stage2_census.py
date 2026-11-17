@@ -760,6 +760,140 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                 source_repo=repo,
             )
 
+    def test_display_successor_after_refresh_composes_verified_authorities(self):
+        predecessor = "a" * 40
+        target = "b" * 40
+        display_successor = {
+            "expected_target_predecessor_sha": predecessor,
+            "protected_main_sha": "c" * 40,
+        }
+        display_bytes = (
+            json.dumps(display_successor, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        package_hashes = {
+            name: "d" * 64 for name in stage2_runtime.REQUIRED_PACKAGE_FILES
+        }
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": TARGET_BRANCH,
+            "target_sha": target,
+            "integration_freeze_sha256": "e" * 64,
+            "semantic_snapshot_sha256": SEMANTIC,
+            "stage2_current_main_refresh_successor": {
+                "path": ".remote-implementation/successors/example/refresh.json",
+                "sha256": "f" * 64,
+            },
+            "stage2_opponent_display_successor": {
+                "path": ".remote-implementation/successors/example/display.json",
+                "sha256": hashlib.sha256(display_bytes).hexdigest(),
+            },
+        }
+        prior = {
+            "successor": {"kind": "REMOTE_IMPLEMENTATION_SUCCESSOR"},
+            "writeahead": {"kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD"},
+            "freeze_bytes": b"{}",
+            "phase0_target_sha": predecessor,
+            "phase0_protected_main_sha": "1" * 40,
+            "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+            "opponent_display_authority": None,
+            "current_main_refresh_authority": {
+                "successor": {"package_member_sha256": package_hashes},
+            },
+        }
+        display_authority = {"successor": display_successor}
+
+        with (
+            patch.object(
+                stage2_runtime,
+                "git_show_bytes",
+                return_value=display_bytes,
+            ),
+            patch.object(
+                stage2_runtime,
+                "_verify_current_main_refresh_target_authority",
+                return_value=prior,
+            ) as verify_refresh,
+            patch.object(
+                stage2_runtime,
+                "_verify_opponent_display_target_authority",
+                return_value=display_authority,
+            ) as verify_display,
+        ):
+            authority = verify_phase0_authority(
+                request,
+                "0" * 40,
+                source_repo=Path("/tmp/not-used"),
+            )
+
+        refresh_request = verify_refresh.call_args.args[0]
+        self.assertEqual(refresh_request["target_sha"], predecessor)
+        self.assertNotIn(
+            "stage2_opponent_display_successor",
+            refresh_request,
+        )
+        self.assertEqual(
+            verify_display.call_args.kwargs["phase0_target_sha"],
+            predecessor,
+        )
+        self.assertEqual(
+            verify_display.call_args.kwargs["package_hashes"],
+            package_hashes,
+        )
+        self.assertEqual(
+            authority["target_authority_kind"],
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+        )
+        self.assertIs(
+            authority["current_main_refresh_authority"],
+            prior["current_main_refresh_authority"],
+        )
+        self.assertIs(
+            authority["opponent_display_authority"],
+            display_authority,
+        )
+        self.assertEqual(authority["phase0_target_sha"], target)
+        self.assertEqual(
+            authority["phase0_protected_main_sha"],
+            display_successor["protected_main_sha"],
+        )
+
+    def test_display_successor_after_refresh_rejects_bad_display_hash(self):
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": TARGET_BRANCH,
+            "target_sha": "b" * 40,
+            "stage2_current_main_refresh_successor": {
+                "path": ".remote-implementation/successors/example/refresh.json",
+                "sha256": "c" * 64,
+            },
+            "stage2_opponent_display_successor": {
+                "path": ".remote-implementation/successors/example/display.json",
+                "sha256": "d" * 64,
+            },
+        }
+        display_bytes = b'{"expected_target_predecessor_sha":"a"}\n'
+        with (
+            patch.object(
+                stage2_runtime,
+                "git_show_bytes",
+                return_value=display_bytes,
+            ),
+            patch.object(
+                stage2_runtime,
+                "_verify_current_main_refresh_target_authority",
+            ) as verify_refresh,
+        ):
+            with self.assertRaisesRegex(
+                RemoteImplementationError,
+                "STAGE2_OPPONENT_DISPLAY_SUCCESSOR_HASH_MISMATCH",
+            ):
+                verify_phase0_authority(
+                    request,
+                    "0" * 40,
+                    source_repo=Path("/tmp/not-used"),
+                )
+        verify_refresh.assert_not_called()
+
     def test_wrong_onboarding_sha_is_rejected_before_worktree(self):
         with patch(
             "remote_implementation_stage2_census.remote_head",
