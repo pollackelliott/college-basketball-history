@@ -1299,7 +1299,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "ef802a192e5499ad864d320cb4de63dbc8a93ad9d09dfcdac92fb339fc4c3099",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "fea78b11ce1e645d8336e054a08ce9349191e08034a0a91c5a82e2c159415528",
     "merged": false,
@@ -1308,7 +1308,7 @@
     "pr_number": 636,
     "production_request_id": "ucf-expansion-release-production-proof-0001",
     "protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "ucf-expansion-release-gate2-approval-0001",
     "school_key": "ucf",
     "target_branch": "data/ucf-onboarding",
