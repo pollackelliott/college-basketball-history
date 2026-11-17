@@ -1,0 +1,20 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "request_id": "wyoming-phase0-0001",
+  "research_checkpoint_sha256": "2cd99fdbbc02d7f438b86559458534bace3d5431d01986600ba1c9ae317d6388",
+  "research_member_sha256": {
+    "conferences.csv": "30cbe0c542c701440ce3f60e0c3900805ba4fdd503d50846000e4dff4caa9d52",
+    "notes.md": "a108b0fcfc77ddf03ffb5624c1bf035740d61c23a29a72207b8969178eaa299b",
+    "opponents.csv": "76a566f466adfbcc049c3ff41a6da3342b3cff984de572feaab5e59663f95621",
+    "source-games.csv": "eaad5abde4773733a2c939104aeef57e27f9e34b4013ce4e1ae7181922eb46f7",
+    "source-notes.md": "439f233f29a29cbc02419e432061a1c379da109bd7ab316a034b5b3470843614",
+    "venues.csv": "aa57d134d4605e772e714b670cb3eabe7fbeb18bc3a75b4675b0a81b3437c2bc"
+  },
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "sidecars": {
+    "stage1-reconciliation.json": "b2af95bea2c986eab670070c913394da62931f1998c460f5b60eb918e1416fa7"
+  },
+  "stage1_status": "PASS"
+}
