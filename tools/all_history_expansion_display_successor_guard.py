@@ -77,6 +77,8 @@ def permits_authenticated_display_successor(
     root: Path,
     school: str,
     freeze_hashes: dict[str, str],
+    *,
+    diagnostics: list[str] | None = None,
 ) -> bool:
     """Prove an exact Git successor, never grant arbitrary package drift.
 
@@ -87,38 +89,43 @@ def permits_authenticated_display_successor(
     established-project-identity representation chosen by the permanent
     normalizer. No other historical or source column may change.
     """
+    def reject(reason: str) -> bool:
+        if diagnostics is not None:
+            diagnostics.append(reason)
+        return False
+
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", school):
-        return False
+        return reject("school_key_invalid")
     if set(freeze_hashes) != set(PACKAGE_NAMES):
-        return False
+        return reject("freeze_member_set_invalid")
     school_dir = root / "schools" / school
     current = {name: (school_dir / name).read_bytes() for name in PACKAGE_NAMES}
     changed = {name for name in PACKAGE_NAMES if _sha(current[name]) != freeze_hashes[name]}
     if not changed or not changed.issubset(DISPLAY_COLUMNS):
-        return False
+        return reject("changed_file_scope_invalid")
     if "opponents.csv" not in changed:
-        return False
+        return reject("opponents_unchanged")
     # No uncommitted/staged bypass; the source must equal its Git HEAD.
     dirty = _git(root, "status", "--porcelain", "--untracked-files=no", "--",
                  f"schools/{school}")
     head = _git(root, "rev-parse", "HEAD")
     if dirty is None or dirty or head is None:
-        return False
+        return reject("tracked_package_dirty")
     cursor = head.decode().strip()
     for name in PACKAGE_NAMES:
         current_git = _blob(root, cursor, school, name)
         if current_git is None or current_git != current[name]:
-            return False
+            return reject("working_tree_not_equal_head")
 
     # A later current-main refresh is a two-parent merge whose target package
     # is byte-identical to its first parent, even though tooling may advance.
     for _ in range(12):
         lineage = _git(root, "rev-list", "--parents", "-n", "1", cursor)
         if lineage is None:
-            return False
+            return reject("lineage_unavailable")
         parts = lineage.decode().split()
         if not parts or parts[0] != cursor:
-            return False
+            return reject("lineage_invalid")
         if len(parts) == 3:
             parent = parts[1]
             if any(
@@ -126,29 +133,29 @@ def permits_authenticated_display_successor(
                 != _blob(root, parent, school, name)
                 for name in PACKAGE_NAMES
             ):
-                return False
+                return reject("merge_changes_school_package")
             cursor = parent
             continue
         if len(parts) != 2:
-            return False
+            return reject("nonlinear_or_missing_parent")
         parent = parts[1]
         message = _git(root, "show", "-s", "--format=%s", cursor)
         if message is None or message.decode().strip() != (
             f"Normalize {school} historical opponent display representation"
         ):
-            return False
+            return reject("unexpected_normalization_commit_message")
 
         original = {name: _blob(root, parent, school, name) for name in PACKAGE_NAMES}
         if any(original[name] is None or _sha(original[name]) != freeze_hashes[name]
                for name in PACKAGE_NAMES):
-            return False
+            return reject("normalization_predecessor_not_frozen")
         paths = _git(root, "diff", "--name-only", parent, cursor)
         if paths is None:
-            return False
+            return reject("git_diff_unavailable")
         permitted = {f"schools/{school}/{name}" for name in DISPLAY_COLUMNS}
         actual_paths = set(paths.decode().splitlines())
         if not actual_paths or not actual_paths.issubset(permitted):
-            return False
+            return reject("normalization_changed_extra_path")
 
         opponent_changes = _column_only_changes(
             original["opponents.csv"], current["opponents.csv"],
@@ -159,21 +166,21 @@ def permits_authenticated_display_successor(
             DISPLAY_COLUMNS["source-games.csv"],
         )
         if opponent_changes is None or source_changes is None or not opponent_changes:
-            return False
+            return reject("non_display_field_delta")
         try:
             registered = normalization.project_program_keys(root)
             established = normalization.authority_names_by_key(
                 root, school, program_keys=registered,
             )
         except (OSError, ValueError, KeyError):
-            return False
+            return reject("identity_authority_unavailable")
 
         final_name_by_key: dict[str, str] = {}
         for old, new in opponent_changes:
             key = new.get("canonical_opponent_key", "").strip()
             new_name = new.get("canonical_opponent_name", "").strip()
             if not key or not new_name or key in registered:
-                return False
+                return reject("invalid_nonregistered_display_key")
             signatures = {
                 normalization.build_site_data.normalized_name_signature(x)
                 for x in established.get(key, ())
@@ -183,9 +190,9 @@ def permits_authenticated_display_successor(
                 normalization.build_site_data.normalized_name_signature(new_name)
                 not in signatures
             ):
-                return False
+                return reject("established_identity_signature_mismatch")
             if key in final_name_by_key and final_name_by_key[key] != new_name:
-                return False
+                return reject("duplicate_key_display_mismatch")
             final_name_by_key[key] = new_name
 
         # Every changed source display must correspond to a changed opponent
@@ -196,7 +203,7 @@ def permits_authenticated_display_successor(
             if key not in final_name_by_key or (
                 new.get("normalized_opponent_name") != final_name_by_key[key]
             ):
-                return False
+                return reject("source_name_outside_changed_keys")
         _, source_before = _rows(original["source-games.csv"])
         _, source_after = _rows(current["source-games.csv"])
         for old, new in zip(source_before, source_after):
@@ -204,6 +211,6 @@ def permits_authenticated_display_successor(
             if key in final_name_by_key and (
                 new.get("normalized_opponent_name") != final_name_by_key[key]
             ):
-                return False
+                return reject("changed_key_source_not_aligned")
         return True
-    return False
+    return reject("lineage_depth_limit")

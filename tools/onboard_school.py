@@ -1817,11 +1817,13 @@ def _validated_expansion_freeze_bytes(source: Path, school_key: str) -> bytes | 
             permits_authenticated_display_successor,
         )
 
+        diagnostics: list[str] = []
         if not permits_authenticated_display_successor(
-            source, school_key, candidate_hashes,
+            source, school_key, candidate_hashes, diagnostics=diagnostics,
         ):
             raise WorkflowError(
                 "All-History expansion Integration Freeze package mismatch"
+                + (f" [display-successor:{diagnostics[-1]}]" if diagnostics else "")
             )
 
     guard = manifest.get("source_game_semantic_guard")
