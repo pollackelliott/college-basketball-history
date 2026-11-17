@@ -384,7 +384,30 @@ def partition_stage2_source_rows(
     cutoff.
     """
     materialized_rows = list(rows)
-    if program.get("history_coverage_status", "").strip():
+    coverage_status = program.get("history_coverage_status", "").strip()
+    history_start = program.get("history_start_season", "").strip()
+    history_intervals = program.get("history_scope_intervals", "").strip()
+    unmigrated_inception_compat = (
+        coverage_status == "UNMIGRATED"
+        and program.get("public_page_enabled", "").strip() != "Yes"
+        and program.get("history_scope_status", "").strip() == "OWNER_CONFIRMED"
+        and program.get("history_scope_basis", "").strip()
+        == "ALWAYS_TOP_LEVEL_FROM_INCEPTION"
+        and not history_intervals
+        and valid_season_label(history_start)
+    )
+    if unmigrated_inception_compat:
+        # A settled INCEPTION+ scope is the narrow compatibility case where the
+        # accepted top-level start is, by definition, the researched program
+        # inception. Stage 2 may therefore reconcile that complete frozen
+        # history before the sealed publication decision atomically migrates
+        # the program registry out of UNMIGRATED.
+        published_rows, unpublished_rows = partition_source_rows(
+            materialized_rows,
+            history_start,
+            "",
+        )
+    elif coverage_status:
         published_rows, unpublished_rows = partition_publication_source_rows(
             materialized_rows,
             program,
@@ -395,8 +418,8 @@ def partition_stage2_source_rows(
         # independently required to carry an explicit coverage status.
         published_rows, unpublished_rows = partition_source_rows(
             materialized_rows,
-            program.get("history_start_season", "").strip(),
-            program.get("history_scope_intervals", "").strip(),
+            history_start,
+            history_intervals,
         )
     top_level_rows = [
         row
