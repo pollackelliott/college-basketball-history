@@ -1,0 +1,20 @@
+{
+  "canonical_game_id": "CBBG-0166073",
+  "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_RECONCILIATION_DIAGNOSTIC_VERIFICATION",
+  "partial_location_classification": "FINAL_LOCATION_NOT_PARTIAL",
+  "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "recommendation_map_sha256": "d1fb6a5944eeb0a67a59c8ff12f568c4d09edb9436cae1c787e5be762fb68d4d",
+  "remote_stage2_diagnostic_equivalence": "PASS",
+  "request_id": "wyoming-stage2-reconciliation-diagnostic-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "stage2_proposal_checkpoint_sha256": "899f9f4d27e09caa2467f1aea7e2fe4e022689e03c9dead8d7bef575af62ae7e",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "target_tree_sha": "820fca044427469e694c37a8054237d990113845",
+  "trace_sha256": "ad502af012372734d0340374486706afd84515e189666b68e23e6fbc686aabee",
+  "tracked_stage2_mutation": "NONE"
+}
