@@ -25,6 +25,8 @@ from remote_implementation_control import (
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_SEALED_APPLY,
     OP_STAGE2_PROPOSAL_REHEARSAL,
+    STAGE2_POST_GATE1_CONTINUATION_KIND,
+    TX_COMPLETE,
     REQUEST_KIND,
     REQUEST_SCHEMA_VERSION,
     request_used,
@@ -225,6 +227,198 @@ def _continuation_from_parent(parent: dict[str, Any]) -> dict[str, Any] | None:
         return None
     validate_stage2_phase_continuation(parent["operation"], parent["request_id"], continuation)
     return continuation
+
+
+
+def _resume_post_gate1_from_verified_replacement(
+    parent: dict[str, Any],
+    manifest: dict[str, Any],
+    *,
+    control_head: str,
+    state: dict[str, Any],
+    last: dict[str, Any],
+) -> dict[str, str] | None:
+    """Resume only a verified replacement for an originally BLOCKED pre-seal.
+
+    No original owner approval is restated and no failed request ID is replayed.
+    Exact fresh-verified replacement authority must match the original approved
+    fill and first blocked pre-seal; otherwise refuse continuation. The resulting
+    seal/apply IDs are deterministic and single-use, not retry counters.
+    """
+
+    if (
+        state.get("lifecycle_state") != LIFECYCLE_IDLE
+        or state.get("transaction_state") != TX_COMPLETE
+        or state.get("recovery_required") is not False
+        or state.get("active_request_id") is not None
+        or state.get("active_lock_commit") is not None
+        or last.get("fresh_runner_verification") != "PASS"
+        or last.get("request_id") != parent.get("request_id")
+        or manifest.get("request_id") != parent.get("request_id")
+        or manifest.get("school_key") != parent.get("school_key")
+    ):
+        raise Stop("STAGE2_RESUME_CONTROL_OR_PRESEAL_AUTHORITY_UNSAFE")
+
+    fill_ref = parent.get("stage2_gate1_fill_checkpoint")
+    fill_verification_ref = parent.get("stage2_gate1_fill_verification")
+    if not isinstance(fill_ref, dict) or not isinstance(fill_verification_ref, dict):
+        return None
+
+    try:
+        fill = json.loads(_verify_payload_ref(control_head, fill_ref, "RESUME_FILL"))
+        fill_verification = json.loads(
+            _verify_payload_ref(
+                control_head, fill_verification_ref, "RESUME_FILL_VERIFICATION"
+            )
+        )
+    except (ValueError, TypeError) as exc:
+        raise Stop("STAGE2_RESUME_FILL_AUTHORITY_INVALID") from exc
+
+    fill_id = fill.get("request_id")
+    if (
+        fill.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_CHECKPOINT"
+        or fill.get("gate1_fill_status") != "FILLED"
+        or fill.get("owner_gate_1_approval", {}).get("approved") is not True
+        or fill_verification.get("kind")
+        != "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_VERIFICATION"
+        or fill_verification.get("request_id") != fill_id
+        or fill_verification.get("remote_stage2_gate1_fill_equivalence") != "PASS"
+        or fill_verification.get("tracked_stage2_mutation") != "NONE"
+        or fill_ref.get("path")
+        != (
+            f".remote-implementation/checkpoints/{parent['school_key']}/"
+            f"{fill_id}/checkpoint-manifest.json"
+        )
+        or fill_verification_ref.get("path")
+        != (
+            f".remote-implementation/verifications/{parent['school_key']}/"
+            f"{fill_id}/stage2-gate1-fill-verification.json"
+        )
+    ):
+        raise Stop("STAGE2_RESUME_FILL_AUTHORITY_NOT_VERIFIED")
+
+    fill_request, fill_request_bytes = _load_archived_request(control_head, fill_id)
+    if (
+        fill_request.get("operation") != OP_STAGE2_GATE1_FILL
+        or fill_request.get("school_key") != parent["school_key"]
+        or fill_request.get("authority", {}).get("owner_gate_1") is not True
+        or fill.get("request_sha256") != sha256_bytes(fill_request_bytes)
+    ):
+        raise Stop("STAGE2_RESUME_ORIGINAL_OWNER_APPROVAL_MISMATCH")
+
+    authorized = _continuation_from_parent(fill_request)
+    if authorized is None:
+        return None  # An approved fill without continuation cannot create one.
+
+    first_id = authorized["preseal_request_id"]
+    if first_id == parent["request_id"]:
+        return None  # No distinct blocked predecessor; no replacement to resume.
+
+    first_request, first_request_bytes = _load_archived_request(control_head, first_id)
+    if (
+        first_request.get("operation") != OP_STAGE2_PRESEAL_REHEARSAL
+        or first_request.get("school_key") != parent["school_key"]
+        or first_request.get("phase_continuation") != authorized
+        or first_request.get("stage2_gate1_fill_checkpoint") != fill_ref
+        or first_request.get("stage2_gate1_fill_verification")
+        != fill_verification_ref
+        or not request_used(state, first_id)
+    ):
+        raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_LINEAGE_INVALID")
+
+    first_checkpoint_path = (
+        f".remote-implementation/checkpoints/{parent['school_key']}/"
+        f"{first_id}/checkpoint-manifest.json"
+    )
+    first_verification_path = (
+        f".remote-implementation/verifications/{parent['school_key']}/"
+        f"{first_id}/stage2-preseal-rehearsal-verification.json"
+    )
+    try:
+        first = json.loads(git_show_bytes(control_head, first_checkpoint_path))
+        first_verification = json.loads(
+            git_show_bytes(control_head, first_verification_path)
+        )
+    except (ValueError, TypeError) as exc:
+        raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_EVIDENCE_INVALID") from exc
+
+    if (
+        first.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT"
+        or first.get("request_id") != first_id
+        or first.get("request_sha256") != sha256_bytes(first_request_bytes)
+        or first.get("preseal_status") != "BLOCKED"
+        or first_verification.get("kind")
+        != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION"
+        or first_verification.get("request_id") != first_id
+        or first_verification.get("preseal_status") != "BLOCKED"
+        or first_verification.get("remote_stage2_preseal_equivalence") != "PASS"
+        or first_verification.get("tracked_stage2_mutation") != "NONE"
+    ):
+        raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_NOT_VERIFIED_BLOCKED")
+
+    identity_fields = (
+        "school_key",
+        "target_branch",
+        "target_sha",
+        "target_tree_sha",
+        "integration_freeze_sha256",
+        "semantic_snapshot_sha256",
+        "decision_universe_sha256",
+        "recommendation_map_sha256",
+        "approved_plan_hash_preview",
+        "filled_review_sha256",
+        "decision_id_set_sha256",
+        "owner_gate_1_approval_sha256",
+    )
+    for field in identity_fields:
+        if (
+            fill.get(field) is None
+            or fill.get(field) != first.get(field)
+            or fill.get(field) != manifest.get(field)
+            or fill_verification.get(field) != fill.get(field)
+            or first_verification.get(field) != first.get(field)
+        ):
+            raise Stop("STAGE2_RESUME_HISTORICAL_AUTHORITY_CHANGED:" + field)
+
+    if (
+        manifest.get("source_gate1_fill_request_id") != fill_id
+        or manifest.get("stage2_gate1_fill_checkpoint_path") != fill_ref["path"]
+        or manifest.get("stage2_gate1_fill_checkpoint_sha256")
+        != fill_ref["sha256"]
+        or manifest.get("stage2_gate1_fill_verification_path")
+        != fill_verification_ref["path"]
+        or manifest.get("stage2_gate1_fill_verification_sha256")
+        != fill_verification_ref["sha256"]
+        or parent.get("target_branch") != manifest["target_branch"]
+        or parent.get("target_sha") != manifest["target_sha"]
+        or manifest.get("preseal_status") != "READY_TO_SEAL"
+    ):
+        raise Stop("STAGE2_RESUME_REPLACEMENT_PRESEAL_BINDING_INVALID")
+
+    if any(
+        request_used(state, authorized[key])
+        for key in ("seal_request_id", "apply_request_id")
+    ):
+        raise Stop("STAGE2_RESUME_ORIGINAL_CHILD_ALREADY_CONSUMED")
+
+    # These IDs can never represent a replay of the abandoned original chain.
+    preseal_id = parent["request_id"]
+    resume = {
+        "kind": STAGE2_POST_GATE1_CONTINUATION_KIND,
+        "preseal_request_id": preseal_id,
+        "seal_request_id": preseal_id + "-seal",
+        "apply_request_id": preseal_id + "-apply",
+    }
+    validate_stage2_phase_continuation(
+        OP_STAGE2_PRESEAL_REHEARSAL, preseal_id, resume
+    )
+    for key in ("seal_request_id", "apply_request_id"):
+        if (
+            request_used(state, resume[key])
+            or _already_queued(control_head, state, resume[key])
+        ):
+            raise Stop("STAGE2_RESUME_REPLACEMENT_CHILD_ALREADY_USED")
+    return resume
 
 
 def verify_phase_continuation_payloads(
@@ -501,16 +695,22 @@ def queue_after_preseal(
 ) -> int:
     parent, _ = _load_archived_request(control_head, last["request_id"])
     continuation = _continuation_from_parent(parent)
-    if continuation is None:
-        print("STAGE2 CONTINUATION: pre-seal has no phase continuation")
-        return 0
-
     manifest, checkpoint_ref = _checkpoint_manifest(
         control_head,
         last,
         expected_kind="REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
         label="PRESEAL_CHECKPOINT",
     )
+    if continuation is None:
+        if manifest.get("preseal_status") != "READY_TO_SEAL":
+            print("STAGE2 CONTINUATION: pre-seal has no phase continuation")
+            return 0
+        continuation = _resume_post_gate1_from_verified_replacement(
+            parent, manifest, control_head=control_head, state=state, last=last
+        )
+        if continuation is None:
+            print("STAGE2 CONTINUATION: no authenticated continuation to resume")
+            return 0
     if manifest.get("preseal_status") != "READY_TO_SEAL":
         raise Stop(
             "STAGE2_CONTINUATION_PRESEAL_NOT_READY:"
