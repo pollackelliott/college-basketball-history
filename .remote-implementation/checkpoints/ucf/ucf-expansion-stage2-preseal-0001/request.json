@@ -1,0 +1,59 @@
+{
+  "approved_plan_hash_preview": "3e827ae6b7429cc695d5d01b1df4bb7046a095e84aad2b2606acac0421906b2c",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from ucf-expansion-stage2-gate1-fill-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "expected_protected_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
+  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "phase_continuation": {
+    "apply_request_id": "ucf-expansion-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "ucf-expansion-stage2-preseal-0001",
+    "seal_request_id": "ucf-expansion-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "e15bf7d4ffdebc8f3651160c9853a9e10657cb31",
+  "previous_control_state_sha256": "0e847bdf44e86717ff4b5f322110c6fa8edd6560acd6d14102e1a30379c68efe",
+  "recommendation_map_sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d",
+  "request_id": "ucf-expansion-stage2-preseal-0001",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "4f09fb4faafeaf1021044a0d0402fe882a19d9fc8801211c94d7cc8885a15070"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "b2e6f1754d9c89ac0a88c628cef7140f7d123914149d420573670ba9b13d82db"
+  },
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9"
+}
