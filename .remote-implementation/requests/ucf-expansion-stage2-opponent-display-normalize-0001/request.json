@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "school_key": "ucf",
+  "previous_control_state_commit": "27485d873693be977e6b0c05ccdb18d73dda95ae",
+  "previous_control_state_sha256": "724585b80d42b8cd593c5328fcebc3decf0c125b0ccea8edb934dbebd9a7d892",
+  "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "78138219f401cc79a187a51cb476176878dd6f6487b1ce23b6956750d6ce58b3"
+  },
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION serialized Implementation lane — census-bound ten-key opponent-display normalization",
+    "authorization": "Existing owner-authorized UCF Stage 2 phase persists after independently fresh-verified Stage 2 census ucf-expansion-stage2-census-0001. Exact immutable census is BLOCKED solely by ten deterministic historical opponent-display conflicts (ashland, california-pennsylvania, francis-marion, missouri-baptist, mit, monmouth-college-illinois, new-york-institute-of-technology, tennessee-wesleyan, upsala-college, william-jewell), zero warnings, zero owner decisions, semantic drift PASS, tracked mutation NONE and fresh census equivalence PASS. Authorize one complete coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation bound to that exact census population. The permanent normalizer chooses existing project display authority and is restricted to opponent canonical_opponent_name and source-game normalized_opponent_name under exact field-level checks, semantic-drift guards, current-main validation, write-ahead/CAS, post-repair no-map Stage 2 regeneration, and independent fresh verification. No game history, identity key, raw source, score, H/A/N, venue/locality, scope, shared/global change, proposal, owner gate, sealed apply, Preview, release, merge, Production, recovery, or second Implementation lane authority."
+  }
+}
