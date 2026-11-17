@@ -1,0 +1,43 @@
+{
+  "approved_plan_hash": "7cd9aaa960bc204ec92cdf707e4237fb72730cb1e63315be9af754d2209fdc8e",
+  "approved_plan_sha256": "36772665fc5dfb7f43023afb7bdfcfd2f3b39cc82dca8633d69168810ba21a48",
+  "changed_file_sha256": {
+    "data/canonical/games.csv": "e4698eb5b90cbdfaf475725d6bc65e0e038ad2076e86e4dfb4eaea5d416b5975",
+    "data/evidence/game-assertions.csv": "31fb313e90ea359df846bc99189d4552a8d62d5ed245cfe1e945f9b249864f6d",
+    "data/reconciliation/onboarding-decisions/ucf-7cd9aaa960bc.json": "36772665fc5dfb7f43023afb7bdfcfd2f3b39cc82dca8633d69168810ba21a48",
+    "site/data/manifest.json": "c660caabbdbe1d6f3f594025ad08467528a046fe0084bbd4d4b2faa2c2cd707f",
+    "site/data/programs.json": "837f787688f35414e6ec5e75a334a96790c3a4b19ea6c81e7f4261240a523711",
+    "site/data/teams/fordham.json": "366f8aa5832920e9f5db17ecfdd87339f0f7e8a63013563faf8205f9e41310dc",
+    "site/data/teams/long-island-university.json": "1d3ba511a8509701e02cef1cf7dff71024bc3b66dc4bd8b775ca701f6cf645d9",
+    "site/data/teams/ucf.json": "83ab5c648c7655bbd84f69f7766ef98f6486c9110c17effcc6adee993b28a0f5",
+    "site/data/teams/wisconsin.json": "0389a7bb5338d43dcb1d9b6a02458ac388afee2b23a6913526dccbb92bb50f27"
+  },
+  "changed_path_count": 9,
+  "changed_paths": [
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/onboarding-decisions/ucf-7cd9aaa960bc.json",
+    "site/data/manifest.json",
+    "site/data/programs.json",
+    "site/data/teams/fordham.json",
+    "site/data/teams/long-island-university.json",
+    "site/data/teams/ucf.json",
+    "site/data/teams/wisconsin.json"
+  ],
+  "deleted_paths": [],
+  "fresh_replayed_tree_sha": "215440dcbf399af24b3cbc0023975298428c236e",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION",
+  "protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "release_manifest_sha256": "c98633e07af66e867247f107a7d84c2fc542d61627f68ae1a4bf1aaa32be5f78",
+  "remote_stage2_sealed_apply_equivalence": "PASS",
+  "request_id": "ucf-expansion-stage2-sealed-apply-0004",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "stage2_gate1_seal_checkpoint_sha256": "196a26f390a263a783a25285a00c6070f1a1dd474a0a9cd45eb48441fd27d747",
+  "stage2_gate1_seal_verification_sha256": "eefb00f1481fa016b0dad5e51b68b4be469da8db25e804405f96fa73afd2450b",
+  "target_branch": "data/ucf-onboarding",
+  "target_predecessor_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
+  "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "target_tree_sha": "215440dcbf399af24b3cbc0023975298428c236e",
+  "tracked_stage2_mutation": "EXACT_SEALED_APPLY_SUCCESSOR"
+}
