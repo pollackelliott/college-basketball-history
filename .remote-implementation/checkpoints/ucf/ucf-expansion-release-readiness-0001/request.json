@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "ucf-expansion-release-readiness-0001",
+  "school_key": "ucf",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "a945ce9da86c47a786699e51bd996805403be8be",
+  "previous_control_state_sha256": "6433957014d7d9f983e7370f2376c97d9c546536ddfcaf7c2304b7e57487422f",
+  "expected_protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "approved_plan_hash": "7cd9aaa960bc204ec92cdf707e4237fb72730cb1e63315be9af754d2209fdc8e",
+  "release_manifest_sha256": "c98633e07af66e867247f107a7d84c2fc542d61627f68ae1a4bf1aaa32be5f78",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-sealed-apply-0004/successor-manifest.json",
+    "sha256": "7ae3797486ee34ef385ea356f60e48e5506208e05aafc797f6aa33611aabe0bd"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-sealed-apply-0004/stage2-sealed-apply-verification.json",
+    "sha256": "8092ab3d065aac26aab505dad85825cef41a88f291454b3380cd54cc8733548d"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "ucf-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "Same UCF ALL_HISTORY_EXPANSION serialized Implementation lane — next owner-authorized release-preparation phase",
+    "authorization": "Owner said 'Continue' after UCF Stage 3 sealed apply completed and was independently fresh-verified PASS. This authorizes the next routine reversible Stage 4 release preparation through read-only readiness, exact GitHub connector PR creation/reuse, CI/mergeability and exact Vercel Preview verification, ending at OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2 approval, PR merge, Production proof, new historical decisions, and unrelated shared/global mutations are NOT authorized."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}

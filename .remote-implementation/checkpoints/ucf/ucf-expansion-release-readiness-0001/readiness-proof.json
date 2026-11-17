@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "apply_request_id": "ucf-expansion-stage2-sealed-apply-0004",
+  "approved_plan_hash": "7cd9aaa960bc204ec92cdf707e4237fb72730cb1e63315be9af754d2209fdc8e",
+  "changed_path_count": 9,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "release_manifest_sha256": "c98633e07af66e867247f107a7d84c2fc542d61627f68ae1a4bf1aaa32be5f78",
+  "school_key": "ucf",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "7ae3797486ee34ef385ea356f60e48e5506208e05aafc797f6aa33611aabe0bd",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "8092ab3d065aac26aab505dad85825cef41a88f291454b3380cd54cc8733548d",
+  "writeahead_sha256": "32d0ac263be0525dfe31ccf68b4c4917608434bb9bcdf0ba5aa55b18ac7065ba"
+}
