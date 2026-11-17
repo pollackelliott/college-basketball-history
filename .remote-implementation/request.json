@@ -1,31 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "wyoming-stage2-census-0002",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "wyoming-stage2-proposal-0001",
   "school_key": "wyoming",
-  "previous_control_state_commit": "9b8d4f8f58fa732e8beacf17d6e7f689fa870e77",
-  "previous_control_state_sha256": "fff894e57f811b475efb8608c43aff3f8b13d9769922165eee25f3071d0c370d",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "7e031713031e2310bc23e914c0d4c022253b6764",
+  "previous_control_state_sha256": "db25eeeb29d4021e2e5d26733bfc156479c5462c4c5c8fc0887dcf0cb6daa457",
   "expected_protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
   "target_branch": "data/wyoming-onboarding",
   "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/wyoming/wyoming-phase0-0001/successor-manifest.json",
-    "sha256": "aff95392d87cec5a5012949c79102f24fa96616ddc36a7ffa4e4cf4ade21fd31"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/wyoming/wyoming-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "a667a6a76ec93f297420139eb23c5d5be8991f9da016286d5704824b991ef217"
-  },
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/wyoming/wyoming-stage2-current-main-refresh-0001/successor-manifest.json",
-    "sha256": "6ec7a6d469f720f9be5a8dca97486c2d6eb84734209dd5d6019b134f4b6c9426"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "2336c4e364b25e1e7fc4065266ba5ca5f8a593aede09f4ec11233fa076957b1c"
   },
   "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
   "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/wyoming-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "d1fb6a5944eeb0a67a59c8ff12f568c4d09edb9436cae1c787e5be762fb68d4d"
+  },
   "creation_provenance": {
-    "origin": "Wyoming serialized original-school Implementation Stage 2 — fresh census after PR #642 compatibility repair and verified current-main refresh",
-    "authorization": "Same owner-authorized Wyoming Stage 2 phase. Fresh-verified STAGE2_CURRENT_MAIN_REFRESH wyoming-stage2-current-main-refresh-0001 advanced the onboarding branch to 5c9d47e3c00690cbbe7d9057396b5734cedaffcf against protected main 33af595fcae2a17664379638f89ce64c2e63be08 while preserving the exact Integration Freeze, semantic snapshot, and all Wyoming package bytes. PR #642 intentionally changed planner publication-eligibility semantics for the settled UNMIGRATED INCEPTION+ compatibility class, so the prior zero-row decision universe is invalidated by design. This request authorizes one ordinary read-only fresh Stage 2 census only, recomputing the complete decision universe from unchanged frozen authority under current protected-main tooling. No phase_continuation or stale map is supplied. No tracked basketball mutation, historical reinterpretation, Owner Gate 1 approval, fill, pre-seal, seal, apply, release, Preview, merge, Production, recovery, or shared/global historical mutation is authorized."
+    "origin": "ChatGPT Wyoming serialized original-school Implementation Stage 2 — exact post-PR #642 recommendation-map rehearsal",
+    "authorization": "Existing owner-authorized Wyoming Stage 2 authority persists. Fresh census wyoming-stage2-census-0002 is CAPABILITY_CENSUS_READY with 0 blockers, 0 warnings and exact 343-decision universe 1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1 over all 2,951 publication-eligible rows. Bounded adversarial review resolves 31 identity decisions from reciprocal candidates plus cardinality (30 MATCH_CANONICAL and one FORCE_NEW), uses frozen Wyoming H/A/N only to fill canonical UNKNOWN site classifications, otherwise preserves established canonical date/score/result/game-type values absent a decisive tie-breaker, verifies the existing 21 regular-season and 3 tournament conference-title totals against NCAA official conference-champions history, and recommends publication only through normal gates. This request is read-only and creates no Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, recovery, maintenance, or protected-main mutation authority."
   },
   "authority": {
     "expansion_phase0": false,
@@ -39,13 +36,13 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
