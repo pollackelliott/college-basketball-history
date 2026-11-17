@@ -161,6 +161,64 @@ Supported operations are:
 - `RELEASE_PRODUCTION_PROOF`
 - `RECOVER`
 
+### Exact request envelope construction and publication
+
+For a distinct, already-authorized manual/connector-originated remote request,
+use the permanent `tools/remote_implementation_request_submit.py` helper when
+the school lane has repository shell access. The owner need not operate the
+GitHub Actions interface or assemble predecessor hashes by hand.
+
+```bash
+python tools/remote_implementation_request_submit.py \
+  --template /tmp/school-request-template.json
+# Only after the dry-run validation is clean:
+python tools/remote_implementation_request_submit.py \
+  --template /tmp/school-request-template.json --submit
+```
+
+The input is a **complete, independently authorized request body** containing
+the exact `expected_protected_main_sha`, school, operation, target/checkpoint
+references, provenance, and any explicit owner approval required by the
+ordinary permanent request validator. It must **omit both**
+`previous_control_state_commit` and `previous_control_state_sha256`;
+pre-filled or stale values are rejected, not quietly repaired. The helper
+never creates authority, updates an expected-main SHA, synthesizes historical
+decisions, recovers an active request, or supplies a missing owner gate.
+
+The helper freshly fetches protected `main` and the exact global control
+branch, hashes the **raw control-state Git blob bytes** (not parsed/reformatted
+JSON), verifies the IDLE control and request identity, derives both predecessor
+fields from that same control commit, and invokes the unchanged permanent
+`verify_request_predecessor`/request validators. By default it validates
+without writing anything. With `--submit`, it creates only an updated
+`.remote-implementation/request.json` on an exact-head temporary worktree,
+rechecks both authoritative refs, and publishes **one** request commit through
+the existing expected-head Git CAS. A moved main/control ref, replayed ID,
+occupied lock, unsafe recovery state, or push rejection stops without an
+automatic retry. Missing or mismatched payload bytes remain a fail-closed
+permanent-runner validation boundary. As usual, a published request
+is **not** an accepted or successful operation until the independent runner
+authenticates it.
+
+For GitHub-connector-only school lanes, use the *same* exact-byte and
+immediate-predecessor procedure when preparing the one connector-owned
+control-branch commit: obtain fresh main/control refs, hash the raw bytes at
+that exact control commit, validate the whole request, create its commit with
+that control SHA as the immediate parent, and update the ref by compare-and-swap
+against that same SHA. Never reuse a prior turn's control hash, a hash of
+JSON reserialization, or a guessed parent. If the connector cannot faithfully
+perform those checks, stop rather than requesting the owner to supply
+technical workflow inputs. The repository helper is a reusable execution
+surface for school-lane operators with shell access, not a new owner action.
+
+This one-request constructor is **not** an automatic phase continuation.
+Use existing repository-owned `phase_continuation` chains instead of
+submitting their ordinary child requests individually. The helper refuses
+`RECOVER` and Actions-token publication: recovery uses its separate explicit
+permanent authority path, and `GITHUB_TOKEN` pushes must not be mistaken for
+a workflow-triggering user/connector push. No policy gate, one-active-mutation
+lock, source evidence, seal, Preview, merge or Production proof is changed.
+
 ### 4.1 Repository-owned All-History expansion startup
 
 The initial expansion Implementation phase uses one repository-owned startup
