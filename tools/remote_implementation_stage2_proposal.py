@@ -298,6 +298,7 @@ def verify_stage2_proposal_authority(
         mismatch_code="STAGE2_PROPOSAL_AUTHORITY_HASH_MISMATCH",
     )
     kind = authority.get("kind")
+    correction_freeze_bytes = None
     if kind == "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT":
         stage2_status = authority.get("stage2_status")
         blocker_count = int((authority.get("preflight") or {}).get("blocker_count", -1))
