@@ -776,6 +776,70 @@ def _verify_phase0_package_member(
         raise Stop("STAGE2_PHASE0_RECONCILED_PACKAGE_HASH_MISMATCH:%s" % name)
 
 
+def _verify_refresh_then_display_target_authority(
+    request: dict[str, Any],
+    control_commit: str,
+    *,
+    source_repo: Path,
+) -> dict[str, Any]:
+    display_ref = request.get("stage2_opponent_display_successor")
+    if not isinstance(display_ref, dict):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_REFERENCE_REQUIRED")
+
+    display_bytes = git_show_bytes(
+        control_commit,
+        str(display_ref.get("path") or ""),
+        cwd=source_repo,
+    )
+    if sha256_bytes(display_bytes) != display_ref.get("sha256"):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_HASH_MISMATCH")
+    display_successor = json.loads(display_bytes)
+    display_predecessor = str(
+        display_successor.get("expected_target_predecessor_sha") or ""
+    )
+    if not display_predecessor:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_PREDECESSOR_MISSING")
+
+    refresh_request = dict(request)
+    refresh_request["target_sha"] = display_predecessor
+    refresh_request.pop("stage2_opponent_display_successor", None)
+    prior = _verify_current_main_refresh_target_authority(
+        refresh_request,
+        control_commit,
+        source_repo=source_repo,
+    )
+
+    refresh_authority = prior.get("current_main_refresh_authority") or {}
+    refresh_successor = refresh_authority.get("successor") or {}
+    package_hashes = refresh_successor.get("package_member_sha256") or {}
+    if any(not package_hashes.get(name) for name in REQUIRED_PACKAGE_FILES):
+        raise Stop("STAGE2_REFRESH_PACKAGE_HASHES_MISSING")
+
+    display_authority = _verify_opponent_display_target_authority(
+        request,
+        control_commit,
+        phase0_target_sha=display_predecessor,
+        package_hashes=package_hashes,
+        phase0_successor=prior["successor"],
+        phase0_writeahead=prior["writeahead"],
+        integration=json.loads(prior["freeze_bytes"]),
+        source_repo=source_repo,
+    )
+    result = dict(prior)
+    result.update(
+        {
+            "phase0_target_sha": request["target_sha"],
+            "phase0_protected_main_sha": (
+                display_authority["successor"].get("protected_main_sha")
+                or prior.get("phase0_protected_main_sha")
+            ),
+            "target_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+            "opponent_display_authority": display_authority,
+        }
+    )
+    return result
+
+
 def verify_phase0_authority(
     request: dict[str, Any],
     control_commit: str,
@@ -783,6 +847,12 @@ def verify_phase0_authority(
     source_repo: Path = ROOT,
 ) -> dict[str, Any]:
     if request.get("stage2_current_main_refresh_successor") is not None:
+        if request.get("stage2_opponent_display_successor") is not None:
+            return _verify_refresh_then_display_target_authority(
+                request,
+                control_commit,
+                source_repo=source_repo,
+            )
         return _verify_current_main_refresh_target_authority(
             request,
             control_commit,

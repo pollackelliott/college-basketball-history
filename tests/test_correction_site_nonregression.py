@@ -130,6 +130,94 @@ class CorrectionSiteNonregressionTests(unittest.TestCase):
         self.assertTrue(proof["site_debt_remains"])
         verify_expansion_current(after, proof, "houston")
 
+
+    def test_expansion_nonregression_allows_new_researched_nonblocking_categories(self):
+        before = report(gaps=(), lost=0)
+        after = report(gaps=(), lost=0)
+        for value in (before, after):
+            value["school_key"] = "ucf"
+            value["history_start_season"] = "1984-1985"
+            value["source_validation_scope"] = {
+                "mode": "FULL_SOURCE_PACKAGE",
+                "scoped_source_games": 1646,
+            }
+            value["source_site_counts"] = {
+                "material_gap_rows": 76,
+                "researched_unresolved_home_location_rows": 27,
+            }
+            value["status"] = "PASS"
+            value["errors"] = []
+            value["counts"]["target_canonical_games"] = 1273
+        after["counts"]["target_canonical_games"] = 1646
+
+        # These are real site findings, but not publication failures when the
+        # permanent site report independently validates their research authority.
+        accepted = {
+            "home_missing_both": ["CBBG-HOME-1"],
+            "home_missing_location": ["CBBG-HOME-1"],
+            "home_missing_venue": ["CBBG-HOME-1", "CBBG-HOME-2"],
+            "researched_unresolved_home_location": ["CBBG-HOME-1"],
+            "researched_unresolved_home_venue": ["CBBG-HOME-2"],
+            "neutral_missing_venue": ["CBBG-NEUTRAL"],
+            "unknown_site_type": ["CBBG-UNKNOWN"],
+        }
+        for category, population in accepted.items():
+            after["counts"][category] = len(population)
+            after["examples"][category] = population
+
+        proof = prove_expansion(before, after)
+        self.assertEqual(proof["added_target_canonical_games"], 373)
+        self.assertEqual(proof["expanded_site_status"], "PASS")
+        self.assertFalse(proof["site_debt_remains"])
+
+    def test_expansion_nonregression_still_rejects_new_blocking_population(self):
+        before = report(gaps=(), lost=0)
+        after = report(gaps=(), lost=0)
+        for value in (before, after):
+            value["school_key"] = "ucf"
+            value["history_start_season"] = "1984-1985"
+            value["source_validation_scope"] = {
+                "mode": "FULL_SOURCE_PACKAGE",
+                "scoped_source_games": 1646,
+            }
+            value["source_site_counts"] = {"material_gap_rows": 76}
+            value["counts"]["target_canonical_games"] = 1273
+            value["status"] = "PASS"
+            value["errors"] = []
+        after["counts"]["target_canonical_games"] = 1646
+        after["counts"]["home_missing_both"] = 1
+        after["examples"]["home_missing_both"] = ["CBBG-BLOCKED"]
+        after["counts"]["strict_home_gap"] = 1
+        after["examples"]["strict_home_gap"] = ["CBBG-BLOCKED"]
+        after["status"] = "FAIL"
+        after["errors"] = ["1 in-scope target HOME canonical game is missing authority"]
+        with self.assertRaisesRegex(
+            WorkflowError, "expansion introduced site failure strict_home_gap"
+        ):
+            prove_expansion(before, after)
+
+    def test_expansion_nonregression_fails_closed_on_unclassified_new_report_error(self):
+        before = report(gaps=(), lost=0)
+        after = report(gaps=(), lost=0)
+        for value in (before, after):
+            value["school_key"] = "ucf"
+            value["history_start_season"] = "1984-1985"
+            value["source_validation_scope"] = {
+                "mode": "FULL_SOURCE_PACKAGE",
+                "scoped_source_games": 1646,
+            }
+            value["source_site_counts"] = {"material_gap_rows": 76}
+            value["counts"]["target_canonical_games"] = 1273
+            value["status"] = "PASS"
+            value["errors"] = []
+        after["counts"]["target_canonical_games"] = 1646
+        after["status"] = "FAIL"
+        after["errors"] = ["future implementation site failure category"]
+        with self.assertRaisesRegex(
+            WorkflowError, "expansion introduced site failure report-error"
+        ):
+            prove_expansion(before, after)
+
     def test_expansion_nonregression_rejects_new_site_failure(self):
         before = report(gaps=("CBBG-OLD",))
         after = report(gaps=("CBBG-OLD", "CBBG-NEW"))

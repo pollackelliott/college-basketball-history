@@ -237,6 +237,7 @@ def verify_stage2_proposal_rehearsal(
         DIAG / "stage2-proposal",
         tool_repo=runtime_repo,
         historical_game_type_challenge_path=challenge_path,
+        venue_reconciliation_bytes=authority.get("venue_reconciliation_bytes"),
     )
     if result["runtime_tool_sha256"] != manifest["runtime_tool_sha256"]:
         raise Stop("STAGE2_PROPOSAL_FRESH_RUNTIME_TOOL_MISMATCH")
