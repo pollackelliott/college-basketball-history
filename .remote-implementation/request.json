@@ -1,16 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-stage2-opponent-display-recover-0001",
+  "request_id": "ucf-expansion-stage2-current-main-refresh-0001",
   "school_key": "ucf",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "dc0c751dee87f03fbe71aa6f2a4d9c2392ae5102",
-  "previous_control_state_sha256": "0d5e77838f0c35879f39594174cd20e3b25ad3d04cd0d0ee738e94ba7ac64f37",
-  "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-  "recovery": {
-    "abandoned_request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
-    "lock_commit": "91dd2c414d5ddd1fd784a7000b38576a88be3e11",
-    "target_branch": "data/ucf-onboarding"
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "previous_control_state_commit": "c817869e8156fe57af27a6e667b6bbe8c4265888",
+  "previous_control_state_sha256": "428613066df69cdf054893995917c37198465f725859a6c6d74345d852321620",
+  "expected_protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "3fc6f552ef55a5e84c74b9e5e020ebe559cdf7700ab9d1c8ee8c472c2644b7b3"
+  },
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "UCF owner-authorized ALL_HISTORY_EXPANSION Stage 2 remains in force. Generic tools/tests/workflow/docs-only PR #631 merged 8fd247e28d3d659c923a80165bd79a77c0399851 as protected main e91be3617bf812547f32c414bc06fe6643f3d7e8. Direct GitHub compare established merge base ed1164118f471b2a398bf6b53491035de17c7212; eight target-only paths vs seven intervening-main-only paths; zero overlap and zero schools/ucf changes on main. Exact previous Phase 0 successor and Integration Freeze unchanged. One guarded current-main refresh under SCHOOL_STAGE2_DISJOINT_DELEGATED; independent exact-tree fresh verification mandatory. This authority never selects new historical interpretation or bypasses owner gates."
+  },
+  "creation_provenance": {
+    "origin": "UCF serialized ALL_HISTORY_EXPANSION Implementation Stage 2 — verified PR #631 tooling-only current-main refresh",
+    "authorization": "Existing authorized UCF Stage 2 persists; prior ten-blocker census ucf-expansion-stage2-census-0001 fresh verified, failed display normalization ucf-expansion-stage2-opponent-display-normalize-0001 safely abandoned as NOT_ATTEMPTED after exact recovery. This is ONLY one disjoint-path current-main refresh of unchanged UCF Phase 0 onboarding predecessor to latest protected-main runtime with no UCF package rewrites, historical adjudication, new source changes, changed venue identity, shared/global basketball registry edit, Phase 0 rerun, owner gate, proposal, normalization, sealed apply, release, Preview, merge, Production, or a second Implementation lane. No STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation: current census is deliberately blocked, no blocker-free recommendation map exists, and the next census/normalizer must follow independently verified refresh."
   },
   "authority": {
     "expansion_phase0": false,
@@ -18,14 +30,14 @@
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": true,
+    "recovery": false,
     "release": false,
     "release_gate2_approval": false,
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
+    "stage2_current_main_refresh": true,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
@@ -34,9 +46,5 @@
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION school Implementation lane — deterministic safe recovery of failed census-bound display normalization",
-    "authorization": "Owner-authorized Stage 2 technical phase persists. Accepted UCF normalization ucf-expansion-stage2-opponent-display-normalize-0001 stopped at OPPONENT_DISPLAY_SOURCE_GAME_KEY_OUTSIDE_CENSUS:centenary,st-thomas-florida after global lock acquisition but before write-ahead, prepared commit/tree, or target publication. The exact original archived request hash, unchanged UCF predecessor, current protected main and lock commit were authenticated. Authorize only repository-owned RECOVER to objectively classify that exact failed request and safely abandon/release the global lock if NOT_ATTEMPTED or PREPARED_NOT_PUBLISHED, preserving all historical authority and source games. No failed-request replay, wider normalization, basketball mutation, proposal, historical decision, owner gate, release, merge or other Implementation lane authority."
   }
 }
