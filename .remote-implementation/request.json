@@ -1,27 +1,24 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "request_id": "ucf-expansion-stage2-opponent-display-recover-0001",
   "school_key": "ucf",
-  "previous_control_state_commit": "27485d873693be977e6b0c05ccdb18d73dda95ae",
-  "previous_control_state_sha256": "724585b80d42b8cd593c5328fcebc3decf0c125b0ccea8edb934dbebd9a7d892",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "dc0c751dee87f03fbe71aa6f2a4d9c2392ae5102",
+  "previous_control_state_sha256": "0d5e77838f0c35879f39594174cd20e3b25ad3d04cd0d0ee738e94ba7ac64f37",
   "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-  "target_branch": "data/ucf-onboarding",
-  "target_sha": "52234c11493bde4ed5c8bab25e94a67b24b51b23",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "78138219f401cc79a187a51cb476176878dd6f6487b1ce23b6956750d6ce58b3"
+  "recovery": {
+    "abandoned_request_id": "ucf-expansion-stage2-opponent-display-normalize-0001",
+    "lock_commit": "91dd2c414d5ddd1fd784a7000b38576a88be3e11",
+    "target_branch": "data/ucf-onboarding"
   },
-  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
-  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
   "authority": {
     "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": false,
+    "recovery": true,
     "release": false,
     "release_gate2_approval": false,
     "release_preview_verify": false,
@@ -31,7 +28,7 @@
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": true,
+    "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
@@ -39,7 +36,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION serialized Implementation lane — census-bound ten-key opponent-display normalization",
-    "authorization": "Existing owner-authorized UCF Stage 2 phase persists after independently fresh-verified Stage 2 census ucf-expansion-stage2-census-0001. Exact immutable census is BLOCKED solely by ten deterministic historical opponent-display conflicts (ashland, california-pennsylvania, francis-marion, missouri-baptist, mit, monmouth-college-illinois, new-york-institute-of-technology, tennessee-wesleyan, upsala-college, william-jewell), zero warnings, zero owner decisions, semantic drift PASS, tracked mutation NONE and fresh census equivalence PASS. Authorize one complete coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation bound to that exact census population. The permanent normalizer chooses existing project display authority and is restricted to opponent canonical_opponent_name and source-game normalized_opponent_name under exact field-level checks, semantic-drift guards, current-main validation, write-ahead/CAS, post-repair no-map Stage 2 regeneration, and independent fresh verification. No game history, identity key, raw source, score, H/A/N, venue/locality, scope, shared/global change, proposal, owner gate, sealed apply, Preview, release, merge, Production, recovery, or second Implementation lane authority."
+    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION school Implementation lane — deterministic safe recovery of failed census-bound display normalization",
+    "authorization": "Owner-authorized Stage 2 technical phase persists. Accepted UCF normalization ucf-expansion-stage2-opponent-display-normalize-0001 stopped at OPPONENT_DISPLAY_SOURCE_GAME_KEY_OUTSIDE_CENSUS:centenary,st-thomas-florida after global lock acquisition but before write-ahead, prepared commit/tree, or target publication. The exact original archived request hash, unchanged UCF predecessor, current protected main and lock commit were authenticated. Authorize only repository-owned RECOVER to objectively classify that exact failed request and safely abandon/release the global lock if NOT_ATTEMPTED or PREPARED_NOT_PUBLISHED, preserving all historical authority and source games. No failed-request replay, wider normalization, basketball mutation, proposal, historical decision, owner gate, release, merge or other Implementation lane authority."
   }
 }
