@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "0748a722fbb193d9d2a94c7a92c253793af87461d02a94a4a5f251d4fc66bd80",
+    "implementation-stage2-status.json": "a1a1ba8c200da3a934a5f16e5ce783267e6b9acce1a613f078138827beee7d84",
+    "plan.json": "a874d1a69bd9bd709744be679a7d9d9ca2787e307731b5a7a1138f399383fe89",
+    "review.csv": "775abab6dff99595e9bb8c6b40f1c20abc7ad9df5b57fc5027e2db7e58244a9a",
+    "review.md": "7bfbcf0e0b4be7320caf30ecbb5a60837b2012ca7ace7398e543b0550ab7b7f8"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "0748a722fbb193d9d2a94c7a92c253793af87461d02a94a4a5f251d4fc66bd80",
+    "implementation-stage2-status.json": "9f93e688f59774fb6b33636ebd5d08798c3162346641fc5868cedf62ab86bd8d",
+    "plan.json": "3c2d536dc19c66d59f6141ef40206eeea2dad11a0e02aa8515bc4852a90ec066",
+    "review.csv": "775abab6dff99595e9bb8c6b40f1c20abc7ad9df5b57fc5027e2db7e58244a9a",
+    "review.md": "e9dc6212aca800c277430af54bbcee4a5b62178af84984deb37339d9136f2616"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "wyoming-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "target_tree_sha": "820fca044427469e694c37a8054237d990113845",
+  "tracked_stage2_mutation": "NONE"
+}
