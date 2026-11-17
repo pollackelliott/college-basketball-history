@@ -693,7 +693,7 @@ def queue_after_preseal(
     state_bytes: bytes,
     last: dict[str, Any],
 ) -> int:
-    parent, _ = _load_archived_request(control_head, last["request_id"])
+    parent, parent_bytes = _load_archived_request(control_head, last["request_id"])
     continuation = _continuation_from_parent(parent)
     manifest, checkpoint_ref = _checkpoint_manifest(
         control_head,
@@ -702,6 +702,8 @@ def queue_after_preseal(
         label="PRESEAL_CHECKPOINT",
     )
     if continuation is None:
+        if manifest.get("request_sha256") != sha256_bytes(parent_bytes):
+            raise Stop("STAGE2_RESUME_REPLACEMENT_REQUEST_HASH_MISMATCH")
         if manifest.get("preseal_status") != "READY_TO_SEAL":
             print("STAGE2 CONTINUATION: pre-seal has no phase continuation")
             return 0
