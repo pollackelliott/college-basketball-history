@@ -602,9 +602,9 @@ IDLE
 → exact request/census/Freeze authenticated
 → global Implementation lock durable
 → isolated exact predecessor worktree
-→ permanent normalizer dry-run with --sync-source-games
+→ permanent normalizer dry-run with --sync-source-games --limit-source-games-to-opponent-changes
 → exact census blocker-key equality + ambiguous-key count zero
-→ permanent normalizer --sync-source-games --apply
+→ permanent normalizer --sync-source-games --limit-source-games-to-opponent-changes --apply
 → representation-only field proof + semantic-drift PASS
 → repository validation
 → exact prepared commit/tree/diff
@@ -623,6 +623,7 @@ The permanent helper, not the remote runner, chooses the authoritative display. 
 - opponent keys, literal source opponent labels, raw text, game identity, dates, scores/results, H/A/N, venues/locations, game type/postseason fields, and every other column must remain unchanged;
 - the Integration Freeze semantic guard must be `PASS` before and after;
 - the dry-run key population must equal the complete bound census blocker population exactly. A broader proposal is a STOP, not opportunistic cleanup.
+- guarded source-name synchronization is restricted to the keys whose opponent names change in that exact census. Historical source-only display variants for other keys remain byte-identical; the general-purpose normalizer's unscoped default remains unchanged.
 
 Before publication, write-ahead state preserves the exact request, lock, census binding, target predecessor, prepared commit/tree, changed paths/file hashes, normalization report, field-level proof, Integration Freeze/semantic hashes, and semantic-drift proof. Publication is an expected-head CAS on the already-existing onboarding ref; unrestricted force updates are forbidden.
 

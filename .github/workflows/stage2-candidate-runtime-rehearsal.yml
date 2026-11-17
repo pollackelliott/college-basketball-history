@@ -56,6 +56,9 @@ jobs:
           python-version: '3.12'
 
       - name: Resolve exact PR-head and durable blocked-proposal authority
+        if: >-
+          github.event_name == 'workflow_dispatch' ||
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
         id: authority
         shell: bash
         env:
@@ -138,6 +141,9 @@ jobs:
           print('AUTHENTICATED_CHECKPOINT=' + checkpoint)
           PY
       - name: Authenticate requested commits
+        if: >-
+          github.event_name == 'workflow_dispatch' ||
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
         shell: bash
         run: |
           set -euo pipefail
@@ -159,6 +165,9 @@ jobs:
           git -C control cat-file -e "$control_commit^{commit}"
 
       - name: Replay exact blocked proposal with candidate tooling
+        if: >-
+          github.event_name == 'workflow_dispatch' ||
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
         shell: bash
         run: |
           set -euo pipefail
@@ -171,6 +180,9 @@ jobs:
             --diag /tmp/stage2-candidate-runtime-rehearsal
 
       - name: Require resolved proposal, unchanged decision universe, and no tracked mutation
+        if: >-
+          github.event_name == 'workflow_dispatch' ||
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
         shell: bash
         run: |
           python - <<'PY'
@@ -187,7 +199,9 @@ jobs:
           PY
 
       - name: Require control and actual PR head remained fixed
-        if: github.event_name == 'pull_request'
+        if: >-
+          github.event_name == 'pull_request' &&
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
         shell: bash
         env:
           SELECTED_CONTROL: ${{ steps.authority.outputs.control_commit }}
@@ -209,6 +223,24 @@ jobs:
           live_main="$(git -C candidate ls-remote origin refs/heads/main | awk '{print $1}')"
           test -n "$live_main" && test "$live_main" = "$scoped_main"
           echo 'EXACT_PR_HEAD_CONTROL_AND_MAIN_STABILITY=PASS'
+      - name: Rehearse recovered census-bound opponent display repair with candidate tooling
+        if: >-
+          github.event_name == 'pull_request' &&
+          startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+        shell: bash
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          python candidate/tools/stage2_candidate_opponent_display_rehearsal.py \
+            --control-checkout control \
+            --candidate-checkout candidate \
+            --candidate-sha "$PR_HEAD_SHA" \
+            --control-commit "$(git -C control rev-parse HEAD)" \
+            --pr-head-ref "$PR_HEAD_REF" \
+            --diag /tmp/stage2-candidate-runtime-rehearsal
+
       - name: Upload candidate rehearsal diagnostics
         if: always()
         uses: actions/upload-artifact@v4
