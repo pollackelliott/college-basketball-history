@@ -27,6 +27,10 @@ from remote_implementation_stage2_proposal import (
     run_stage2_proposal_tool,
     verify_stage2_proposal_authority,
 )
+from remote_implementation_stage2_preseal import (
+    run_stage2_preseal_rehearsal_tool,
+    verify_stage2_preseal_authority,
+)
 
 
 ALLOWED_CANDIDATE_PATHS = (
@@ -387,15 +391,183 @@ def run_candidate_rehearsal(
     return summary
 
 
+
+def run_candidate_preseal_rehearsal(
+    *,
+    source_repo: Path,
+    candidate_runtime: Path,
+    candidate_sha: str,
+    control_commit: str,
+    preseal_checkpoint_path: str,
+    diag: Path,
+) -> dict[str, Any]:
+    """Replay one independently verified blocked pre-seal checkpoint with candidate tooling."""
+
+    actual_candidate = _run_git(candidate_runtime, "rev-parse", "HEAD").stdout.strip()
+    if actual_candidate != candidate_sha:
+        raise Stop(
+            "CANDIDATE_REHEARSAL_HEAD_MISMATCH:"
+            f"expected={candidate_sha}:actual={actual_candidate}"
+        )
+
+    manifest, _ = _load_json_at(
+        source_repo,
+        control_commit,
+        preseal_checkpoint_path,
+    )
+    if (
+        manifest.get("kind")
+        != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT"
+    ):
+        raise Stop("CANDIDATE_PRESEAL_CHECKPOINT_KIND_MISMATCH")
+    if manifest.get("preseal_status") != "BLOCKED":
+        raise Stop("CANDIDATE_PRESEAL_SOURCE_CHECKPOINT_NOT_BLOCKED")
+    proof = manifest.get("tracked_mutation_proof") or {}
+    if proof.get("tracked_stage2_mutation") != "NONE":
+        raise Stop("CANDIDATE_PRESEAL_SOURCE_TRACKED_MUTATION")
+
+    directory = Path(preseal_checkpoint_path).parent
+    request_path = (directory / "request.json").as_posix()
+    request, request_bytes = _load_json_at(
+        source_repo,
+        control_commit,
+        request_path,
+    )
+    if request.get("request_id") != manifest.get("request_id"):
+        raise Stop("CANDIDATE_PRESEAL_REQUEST_ID_MISMATCH")
+    expected_request_sha = str(manifest.get("request_sha256") or "")
+    if sha256_bytes(request_bytes) != expected_request_sha:
+        raise Stop("CANDIDATE_PRESEAL_REQUEST_HASH_MISMATCH")
+    if request.get("operation") != "STAGE2_PRESEAL_REHEARSAL":
+        raise Stop("CANDIDATE_PRESEAL_REQUEST_OPERATION_MISMATCH")
+    for field in (
+        "school_key",
+        "target_branch",
+        "target_sha",
+        "decision_universe_sha256",
+        "recommendation_map_sha256",
+        "approved_plan_hash_preview",
+        "filled_review_sha256",
+    ):
+        if manifest.get(field) != request.get(field):
+            raise Stop("CANDIDATE_PRESEAL_%s_MISMATCH" % field.upper())
+
+    base_sha = str(request.get("expected_protected_main_sha") or "")
+    if len(base_sha) != 40:
+        raise Stop("CANDIDATE_REHEARSAL_BASE_SHA_INVALID")
+    changed_paths, scope_main_sha = candidate_changed_paths(
+        candidate_runtime,
+        base_sha,
+        candidate_sha,
+    )
+    validate_candidate_scope(changed_paths)
+
+    authority = verify_stage2_preseal_authority(
+        request,
+        control_commit,
+        source_repo=source_repo,
+    )
+    if (
+        authority.get("owner_gate_1_approval_sha256")
+        != manifest.get("owner_gate_1_approval_sha256")
+    ):
+        raise Stop("CANDIDATE_PRESEAL_OWNER_APPROVAL_MISMATCH")
+
+    target = add_existing_onboarding_worktree(
+        str(request["target_branch"]),
+        str(request["target_sha"]),
+        str(request["school_key"]),
+        source_repo=source_repo,
+    )
+    target_tree = _run_git(target, "rev-parse", "HEAD^{tree}").stdout.strip()
+    expected_tree = str(authority.get("target_tree_sha") or "")
+    if expected_tree and target_tree != expected_tree:
+        raise Stop("CANDIDATE_PRESEAL_AUTHORITY_TREE_MISMATCH")
+
+    result = run_stage2_preseal_rehearsal_tool(
+        target,
+        str(request["school_key"]),
+        freeze_bytes=authority["freeze_bytes"],
+        plan_bytes=authority["plan_bytes"],
+        filled_review_bytes=authority["filled_review_bytes"],
+        venue_reconciliation_bytes=authority.get("venue_reconciliation_bytes"),
+        expected_approved_plan_hash_preview=str(
+            request["approved_plan_hash_preview"]
+        ),
+        diag=diag / "candidate-preseal",
+        tool_repo=candidate_runtime,
+    )
+    if result.get("preseal_status") != "READY_TO_SEAL":
+        raise Stop(
+            "CANDIDATE_PRESEAL_NOT_READY:"
+            + str(result.get("preseal_status") or "")
+        )
+    if (
+        result.get("approved_plan_hash_preview")
+        != request["approved_plan_hash_preview"]
+    ):
+        raise Stop("CANDIDATE_PRESEAL_APPROVED_PLAN_PREVIEW_MISMATCH")
+    result_proof = result.get("tracked_mutation_proof") or {}
+    if result_proof.get("tracked_stage2_mutation") != "NONE":
+        raise Stop("CANDIDATE_PRESEAL_TRACKED_MUTATION")
+
+    venue_bytes = authority.get("venue_reconciliation_bytes")
+    summary = {
+        "schema_version": 1,
+        "kind": "STAGE2_CANDIDATE_PRESEAL_REHEARSAL",
+        "school_key": request["school_key"],
+        "candidate_sha": candidate_sha,
+        "base_protected_main_sha": base_sha,
+        "candidate_scope_main_sha": scope_main_sha,
+        "control_commit": control_commit,
+        "preseal_checkpoint_path": preseal_checkpoint_path,
+        "request_id": request.get("request_id"),
+        "target_branch": request.get("target_branch"),
+        "target_sha": request.get("target_sha"),
+        "target_tree_sha": target_tree,
+        "integration_freeze_sha256": manifest.get(
+            "integration_freeze_sha256"
+        ),
+        "decision_universe_sha256": request.get(
+            "decision_universe_sha256"
+        ),
+        "recommendation_map_sha256": request.get(
+            "recommendation_map_sha256"
+        ),
+        "filled_review_sha256": request.get("filled_review_sha256"),
+        "owner_gate_1_approval_sha256": manifest.get(
+            "owner_gate_1_approval_sha256"
+        ),
+        "venue_reconciliation_sha256": (
+            sha256_bytes(venue_bytes) if venue_bytes is not None else None
+        ),
+        "changed_paths": changed_paths,
+        "baseline_preseal_status": manifest.get("preseal_status"),
+        "candidate_preseal_status": result.get("preseal_status"),
+        "approved_plan_hash_preview": result.get(
+            "approved_plan_hash_preview"
+        ),
+        "tracked_mutation_proof": result_proof,
+        "classification": "RESOLVED_TO_READY_TO_SEAL",
+    }
+    diag.mkdir(parents=True, exist_ok=True)
+    (diag / "candidate-preseal-summary.json").write_text(
+        json.dumps(summary, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return summary
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Replay a blocked Stage-2 proposal against candidate tooling."
+        description="Replay exact blocked Stage-2 authority against candidate tooling."
     )
     parser.add_argument("--source-repo", type=Path, required=True)
     parser.add_argument("--candidate-runtime", type=Path, required=True)
     parser.add_argument("--candidate-sha", required=True)
     parser.add_argument("--control-commit", required=True)
-    parser.add_argument("--proposal-checkpoint-path", required=True)
+    checkpoint = parser.add_mutually_exclusive_group(required=True)
+    checkpoint.add_argument("--proposal-checkpoint-path")
+    checkpoint.add_argument("--preseal-checkpoint-path")
     parser.add_argument(
         "--diag",
         type=Path,
@@ -407,26 +579,50 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        summary = run_candidate_rehearsal(
-            source_repo=args.source_repo.resolve(),
-            candidate_runtime=args.candidate_runtime.resolve(),
-            candidate_sha=args.candidate_sha,
-            control_commit=args.control_commit,
-            proposal_checkpoint_path=args.proposal_checkpoint_path,
-            diag=args.diag.resolve(),
-        )
+        if args.preseal_checkpoint_path:
+            summary = run_candidate_preseal_rehearsal(
+                source_repo=args.source_repo.resolve(),
+                candidate_runtime=args.candidate_runtime.resolve(),
+                candidate_sha=args.candidate_sha,
+                control_commit=args.control_commit,
+                preseal_checkpoint_path=args.preseal_checkpoint_path,
+                diag=args.diag.resolve(),
+            )
+        else:
+            summary = run_candidate_rehearsal(
+                source_repo=args.source_repo.resolve(),
+                candidate_runtime=args.candidate_runtime.resolve(),
+                candidate_sha=args.candidate_sha,
+                control_commit=args.control_commit,
+                proposal_checkpoint_path=args.proposal_checkpoint_path,
+                diag=args.diag.resolve(),
+            )
     except Stop as exc:
         print(f"FAIL: {exc}")
         return 1
 
-    print(
-        "STAGE2 CANDIDATE RUNTIME REHEARSAL: "
-        f"{summary['classification']} "
-        f"candidate_status={summary['candidate_stage2_status']}"
-    )
-    if summary.get("candidate_error"):
-        print("candidate_error=" + str(summary["candidate_error"]))
-    print("summary=" + str((args.diag / "candidate-rehearsal-summary.json").resolve()))
+    if args.preseal_checkpoint_path:
+        print(
+            "STAGE2 CANDIDATE PRESEAL REHEARSAL: "
+            f"{summary['classification']} "
+            f"candidate_status={summary['candidate_preseal_status']}"
+        )
+        print(
+            "summary="
+            + str((args.diag / "candidate-preseal-summary.json").resolve())
+        )
+    else:
+        print(
+            "STAGE2 CANDIDATE RUNTIME REHEARSAL: "
+            f"{summary['classification']} "
+            f"candidate_status={summary['candidate_stage2_status']}"
+        )
+        if summary.get("candidate_error"):
+            print("candidate_error=" + str(summary["candidate_error"]))
+        print(
+            "summary="
+            + str((args.diag / "candidate-rehearsal-summary.json").resolve())
+        )
     return 0
 
 

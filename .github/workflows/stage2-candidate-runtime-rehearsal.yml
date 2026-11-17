@@ -117,6 +117,33 @@ jobs:
                           or manifest.get('recommendation_map_sha256') != last.get('recommendation_map_sha256')
                           or manifest.get('decision_universe_sha256') != last.get('decision_universe_sha256')):
                       fail('checkpoint does not bind exact verified last operation')
+              elif (last.get('operation') == 'STAGE2_PRESEAL_REHEARSAL'
+                    and last.get('preseal_status') == 'BLOCKED'
+                    and last.get('fresh_runner_verification') == 'PASS'
+                    and last.get('remote_stage2_preseal_equivalence') == 'PASS'):
+                  mode = 'BLOCKED_PRESEAL'
+                  checkpoint = str(last.get('checkpoint_manifest_path') or '')
+                  school = str(last.get('school_key') or '')
+                  expected_main = ''
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or not checkpoint.startswith('.remote-implementation/checkpoints/' + school + '/')
+                          or not checkpoint.endswith('/checkpoint-manifest.json')
+                          or '..' in Path(checkpoint).parts):
+                      fail('checkpoint path not within selected school authority')
+                  raw = (Path('control') / checkpoint).read_bytes()
+                  if hashlib.sha256(raw).hexdigest() != last.get('checkpoint_manifest_sha256'):
+                      fail('checkpoint bytes do not match control-state hash')
+                  manifest = json.loads(raw)
+                  if (manifest.get('kind') != 'REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT'
+                          or manifest.get('preseal_status') != 'BLOCKED'
+                          or manifest.get('school_key') != school
+                          or manifest.get('request_id') != last.get('request_id')
+                          or manifest.get('target_sha') != last.get('target_sha')
+                          or manifest.get('decision_universe_sha256') != last.get('decision_universe_sha256')
+                          or manifest.get('recommendation_map_sha256') != last.get('recommendation_map_sha256')
+                          or manifest.get('filled_review_sha256') != last.get('filled_review_sha256')
+                          or manifest.get('owner_gate_1_approval_sha256') != last.get('owner_gate_1_approval_sha256')):
+                      fail('checkpoint does not bind exact verified last operation')
               elif (last.get('operation') == 'STAGE2_CURRENT_MAIN_REFRESH'
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_current_main_refresh_equivalence') == 'PASS'):
@@ -161,7 +188,7 @@ jobs:
               fail('candidate/control commit must be full SHA-40')
           if candidate_head != candidate:
               fail('candidate checkout does not match selected SHA')
-          if (mode == 'BLOCKED_PROPOSAL'
+          if (mode in ('BLOCKED_PROPOSAL', 'BLOCKED_PRESEAL')
                   and not re.fullmatch(r'\.remote-implementation/checkpoints/[a-z0-9-]+/[^/]+/checkpoint-manifest\.json', checkpoint)):
               fail('invalid checkpoint path')
           with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
@@ -239,6 +266,45 @@ jobs:
           assert proof.get('tracked_stage2_mutation') == 'NONE', proof
           print('EXACT_STAGE2_CANDIDATE_REPLAY=PASS')
           print('UNCHANGED_HISTORICAL_DECISION_UNIVERSE=PASS')
+          PY
+
+      - name: Replay exact blocked pre-seal with candidate tooling
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'BLOCKED_PRESEAL' &&
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+        shell: bash
+        run: |
+          set -euo pipefail
+          python candidate/tools/stage2_candidate_runtime_rehearsal.py \
+            --source-repo control \
+            --candidate-runtime candidate \
+            --candidate-sha "${{ steps.authority.outputs.candidate_sha }}" \
+            --control-commit "${{ steps.authority.outputs.control_commit }}" \
+            --preseal-checkpoint-path "${{ steps.authority.outputs.proposal_checkpoint_path }}" \
+            --diag /tmp/stage2-candidate-runtime-rehearsal
+
+      - name: Require ready-to-seal pre-seal result and preserved authority
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'BLOCKED_PRESEAL' &&
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-preseal-summary.json').read_text())
+          assert summary['classification'] == 'RESOLVED_TO_READY_TO_SEAL', summary['classification']
+          assert summary['candidate_preseal_status'] == 'READY_TO_SEAL'
+          assert summary['decision_universe_sha256'] and len(summary['decision_universe_sha256']) == 64
+          assert summary['recommendation_map_sha256'] and len(summary['recommendation_map_sha256']) == 64
+          assert summary['filled_review_sha256'] and len(summary['filled_review_sha256']) == 64
+          assert summary['owner_gate_1_approval_sha256'] and len(summary['owner_gate_1_approval_sha256']) == 64
+          proof = summary.get('tracked_mutation_proof') or {}
+          assert proof.get('tracked_stage2_mutation') == 'NONE', proof
+          print('EXACT_STAGE2_PRESEAL_CANDIDATE_REPLAY=PASS')
+          print('PRESERVED_GATE1_AND_HISTORICAL_AUTHORITY=PASS')
           PY
 
       - name: Replay exact live census after refresh with candidate tooling
@@ -359,6 +425,14 @@ jobs:
           import json
           from pathlib import Path
           summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-rehearsal-summary.json').read_text())
+          print(summary['candidate_scope_main_sha'])
+          PY
+          )"
+          elif [[ "$AUTHORITY_MODE" == "BLOCKED_PRESEAL" ]]; then
+            scoped_main="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-preseal-summary.json').read_text())
           print(summary['candidate_scope_main_sha'])
           PY
           )"
