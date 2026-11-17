@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "ucf-expansion-stage2-current-main-refresh-0002",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "ucf",
+  "previous_control_state_commit": "b1d4485af0e6ba9740aab34038789a61ba342ff7",
+  "previous_control_state_sha256": "940ad35b7ac8d2467d2c812ffd832a24b250a51f9632f9a4eecd68ea819da4e7",
+  "expected_protected_main_sha": "9a373c5fd709a3b73377a029b9f9d4ba60da850a",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "3fc6f552ef55a5e84c74b9e5e020ebe559cdf7700ab9d1c8ee8c472c2644b7b3"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "sha256": "f9e38cbb1a0b5cec68a5c25b62bcdf9fde0027bfb3b84b285c4bff0e5ef98b84"
+  },
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized UCF ALL_HISTORY_EXPANSION Stage 2 persists. Generic tooling-only PR #632 merged exact protected main 9a373c5fd709a3b73377a029b9f9d4ba60da850a. GitHub compare against exact merge base e91be3617bf812547f32c414bc06fe6643f3d7e8 proves eight target-only paths versus ten intervening-main-only tooling/test/doc paths, zero overlap, and no schools/ucf path changed on protected main. Preserve exact prior refresh, display-successor, Integration Freeze, semantic snapshot, historical decision universe, and recommendation map. One guarded disjoint current-main refresh with independent exact-tree fresh verification; no historical selection, shared-data authority decision, or owner-gate bypass."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "ucf-expansion-stage2-census-0003",
+    "proposal_request_id": "ucf-expansion-stage2-proposal-0002",
+    "expected_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/ucf-expansion-stage2-current-main-refresh-0002/recommendation-map.json",
+      "sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d"
+    }
+  },
+  "creation_provenance": {
+    "origin": "UCF ALL_HISTORY_EXPANSION serialized Implementation Stage 2 - post-PR #632 tooling-only current-main refresh and deterministic continuation",
+    "authorization": "Exact candidate-runtime rehearsal on PR #632 resolved the prior blocked proposal to OWNER_GATE_1_READY with unchanged decision-universe SHA256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 and tracked Stage 2 mutation NONE. The preserved recommendation map is empty and hash-identical. Authorize only refresh -> fresh verify -> census -> fresh verify -> exact-map proposal -> fresh verify, stopping automatically on any changed universe, blocker, moved authority, or at OWNER_GATE_1_READY. No Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, new research, or second Implementation lane."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "20050743f3469260d17e651391771dc8d123f291dd47675f1a1c116b504172fa"
+  }
+}
