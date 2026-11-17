@@ -655,18 +655,19 @@
     "ucf-expansion-release-gate2-approval-0001",
     "ucf-expansion-release-production-proof-0001",
     "wyoming-stage1-0001",
-    "wyoming-phase0-0001"
+    "wyoming-phase0-0001",
+    "wyoming-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "wyoming-stage2-census-0001",
+  "active_request_sha256": "3a0ec07b0d333524ec6d34b9efbc73b6bb12090dd1f7e2120f6d7a7b67b3169b",
+  "active_school_key": "wyoming",
+  "active_target_branch": "data/wyoming-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1317,8 +1318,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/wyoming/wyoming-phase0-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "8ae580aca2aef8a454a9fcaa7cb9385e351e165fbabef4fc165a55c307291575"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44174877647",
+  "lock_acquisition_request_commit": "6c68ecdad2ae6aba0a72d150408cb8613c8939e9",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
