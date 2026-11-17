@@ -1,0 +1,74 @@
+{
+  "allowed_paths": [
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/ucf/opponents.csv": "800f09a8cad92c9d2123a37cd95cad6d723a5b3fe4a72283afeb40faf5c15151",
+    "schools/ucf/source-games.csv": "19a5addb5e1d9289f988621f87863c57072c5607c1e94c6fe7880a5825c56442"
+  },
+  "changed_paths": [
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv"
+  ],
+  "commit_message": "Normalize ucf historical opponent display representation",
+  "expected_blocker_keys": [
+    "ashland",
+    "california-pennsylvania",
+    "francis-marion",
+    "missouri-baptist",
+    "mit",
+    "monmouth-college-illinois",
+    "new-york-institute-of-technology",
+    "tennessee-wesleyan",
+    "upsala-college",
+    "william-jewell"
+  ],
+  "expected_target_predecessor_sha": "518ae6c81a797d67585f2382a139942f539ad7e7",
+  "field_level_proof_sha256": "70c0afc005aa6f75d83e302dc6b9f4839fdeb95d86811e0bd8c4405eb989158b",
+  "global_lock_commit": "2b136ae7c02312622be151794d72a462a8fe9d77",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "1d0376ac7d5a43b0617ed2cdc4c0f4ca28ef17cc7b9891503cb2206751c1141d",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "prepared_parent_sha": "518ae6c81a797d67585f2382a139942f539ad7e7",
+  "prepared_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+  "protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "repository_validation": "PASS",
+  "request_id": "ucf-expansion-stage2-opponent-display-normalize-0002",
+  "request_sha256": "6cd740d804f63b7ff6e4fe730b103008a9257b10ecd7229acd405d85eca6cd6a",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_drift_after": {
+    "baseline_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "integration_base_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+    "school_key": "ucf",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "integration_base_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+    "school_key": "ucf",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "52d8b030eb094f6cf4f7930c8cd8e34fde913be6fe75770cd35cf8469a8e8d37",
+    "field-level-proof.json": "70c0afc005aa6f75d83e302dc6b9f4839fdeb95d86811e0bd8c4405eb989158b",
+    "integration-freeze.json": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+    "normalization-report.json": "1d0376ac7d5a43b0617ed2cdc4c0f4ca28ef17cc7b9891503cb2206751c1141d",
+    "semantic-drift-proof.json": "9f8e996fc23742b8c4b39130c8eb39fdc0a937867a466e1f90523022bacc2ea4"
+  },
+  "source_game_normalized_name_row_count": 12,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "52d8b030eb094f6cf4f7930c8cd8e34fde913be6fe75770cd35cf8469a8e8d37",
+  "target_branch": "data/ucf-onboarding"
+}

@@ -1,0 +1,207 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 10,
+  "change_row_count": 10,
+  "changes": [
+    {
+      "authority_names": [
+        "Ashland"
+      ],
+      "authority_signature": "ashland",
+      "canonical_opponent_key": "ashland",
+      "from_names": [
+        "Ashland University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Ashland"
+    },
+    {
+      "authority_names": [
+        "California (PA)"
+      ],
+      "authority_signature": "californiapa",
+      "canonical_opponent_key": "california-pennsylvania",
+      "from_names": [
+        "PennWest California"
+      ],
+      "target_row_count": 1,
+      "to_name": "California (PA)"
+    },
+    {
+      "authority_names": [
+        "Francis Marion"
+      ],
+      "authority_signature": "francismarion",
+      "canonical_opponent_key": "francis-marion",
+      "from_names": [
+        "Francis Marion University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Francis Marion"
+    },
+    {
+      "authority_names": [
+        "Missouri Baptist"
+      ],
+      "authority_signature": "missouribaptist",
+      "canonical_opponent_key": "missouri-baptist",
+      "from_names": [
+        "Missouri Baptist University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Missouri Baptist"
+    },
+    {
+      "authority_names": [
+        "MIT"
+      ],
+      "authority_signature": "mit",
+      "canonical_opponent_key": "mit",
+      "from_names": [
+        "Massachusetts Institute of Technology"
+      ],
+      "target_row_count": 1,
+      "to_name": "MIT"
+    },
+    {
+      "authority_names": [
+        "Monmouth College (IL)"
+      ],
+      "authority_signature": "monmouthcollegeil",
+      "canonical_opponent_key": "monmouth-college-illinois",
+      "from_names": [
+        "Monmouth College (Illinois)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Monmouth College (IL)"
+    },
+    {
+      "authority_names": [
+        "New York Tech"
+      ],
+      "authority_signature": "newyorktech",
+      "canonical_opponent_key": "new-york-institute-of-technology",
+      "from_names": [
+        "New York Institute of Technology"
+      ],
+      "target_row_count": 1,
+      "to_name": "New York Tech"
+    },
+    {
+      "authority_names": [
+        "Tennessee Wesleyan"
+      ],
+      "authority_signature": "tennesseewesleyan",
+      "canonical_opponent_key": "tennessee-wesleyan",
+      "from_names": [
+        "Tennessee Wesleyan University"
+      ],
+      "target_row_count": 1,
+      "to_name": "Tennessee Wesleyan"
+    },
+    {
+      "authority_names": [
+        "Upsala College (New Jersey)"
+      ],
+      "authority_signature": "upsalacollegenewjersey",
+      "canonical_opponent_key": "upsala-college",
+      "from_names": [
+        "Upsala College"
+      ],
+      "target_row_count": 1,
+      "to_name": "Upsala College (New Jersey)"
+    },
+    {
+      "authority_names": [
+        "William Jewell"
+      ],
+      "authority_signature": "williamjewell",
+      "canonical_opponent_key": "william-jewell",
+      "from_names": [
+        "William Jewell College"
+      ],
+      "target_row_count": 1,
+      "to_name": "William Jewell"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "ucf",
+  "source_game_display_change_keys": 10,
+  "source_game_display_change_rows": 12,
+  "source_game_display_changes": [
+    {
+      "from_name": "Massachusetts Institute of Technology",
+      "normalized_opponent_key": "mit",
+      "source_game_id": "UCF-EXP-197374-012",
+      "to_name": "MIT"
+    },
+    {
+      "from_name": "New York Institute of Technology",
+      "normalized_opponent_key": "new-york-institute-of-technology",
+      "source_game_id": "UCF-EXP-197374-014",
+      "to_name": "New York Tech"
+    },
+    {
+      "from_name": "Ashland University",
+      "normalized_opponent_key": "ashland",
+      "source_game_id": "UCF-EXP-197475-007",
+      "to_name": "Ashland"
+    },
+    {
+      "from_name": "Tennessee Wesleyan University",
+      "normalized_opponent_key": "tennessee-wesleyan",
+      "source_game_id": "UCF-EXP-197677-004",
+      "to_name": "Tennessee Wesleyan"
+    },
+    {
+      "from_name": "Missouri Baptist University",
+      "normalized_opponent_key": "missouri-baptist",
+      "source_game_id": "UCF-EXP-197677-010",
+      "to_name": "Missouri Baptist"
+    },
+    {
+      "from_name": "Upsala College",
+      "normalized_opponent_key": "upsala-college",
+      "source_game_id": "UCF-EXP-197677-015",
+      "to_name": "Upsala College (New Jersey)"
+    },
+    {
+      "from_name": "Missouri Baptist University",
+      "normalized_opponent_key": "missouri-baptist",
+      "source_game_id": "UCF-EXP-197879-009",
+      "to_name": "Missouri Baptist"
+    },
+    {
+      "from_name": "Monmouth College (Illinois)",
+      "normalized_opponent_key": "monmouth-college-illinois",
+      "source_game_id": "UCF-EXP-198081-004",
+      "to_name": "Monmouth College (IL)"
+    },
+    {
+      "from_name": "William Jewell College",
+      "normalized_opponent_key": "william-jewell",
+      "source_game_id": "UCF-EXP-198081-008",
+      "to_name": "William Jewell"
+    },
+    {
+      "from_name": "PennWest California",
+      "normalized_opponent_key": "california-pennsylvania",
+      "source_game_id": "UCF-EXP-198081-011",
+      "to_name": "California (PA)"
+    },
+    {
+      "from_name": "Francis Marion University",
+      "normalized_opponent_key": "francis-marion",
+      "source_game_id": "UCF-EXP-198081-012",
+      "to_name": "Francis Marion"
+    },
+    {
+      "from_name": "Monmouth College (Illinois)",
+      "normalized_opponent_key": "monmouth-college-illinois",
+      "source_game_id": "UCF-EXP-198283-005",
+      "to_name": "Monmouth College (IL)"
+    }
+  ],
+  "status": "PASS"
+}

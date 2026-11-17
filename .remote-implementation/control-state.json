@@ -645,15 +645,15 @@
   "active_lock_commit": "2b136ae7c02312622be151794d72a462a8fe9d77",
   "active_lock_owner": "github-actions:43995858436:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "active_prepared_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
   "active_request_id": "ucf-expansion-stage2-opponent-display-normalize-0002",
   "active_request_sha256": "6cd740d804f63b7ff6e4fe730b103008a9257b10ecd7229acd405d85eca6cd6a",
   "active_school_key": "ucf",
   "active_target_branch": "data/ucf-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/ucf/ucf-expansion-stage2-opponent-display-normalize-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "c7ab20aa861053cb382e6c036165df84185d1b89216021e33cfabbbf73fc16b4",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1290,5 +1290,5 @@
   "lock_acquisition_request_commit": "3ebf8cb7d581e8fc4549442a4edc2f44e7356bb8",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

@@ -1,0 +1,51 @@
+{
+  "allowed_paths": [
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "ashland",
+    "california-pennsylvania",
+    "francis-marion",
+    "missouri-baptist",
+    "mit",
+    "monmouth-college-illinois",
+    "new-york-institute-of-technology",
+    "tennessee-wesleyan",
+    "upsala-college",
+    "william-jewell"
+  ],
+  "opponent_changed_row_count": 10,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "ucf",
+  "source_game_changed_ids": [
+    "UCF-EXP-197374-012",
+    "UCF-EXP-197374-014",
+    "UCF-EXP-197475-007",
+    "UCF-EXP-197677-004",
+    "UCF-EXP-197677-010",
+    "UCF-EXP-197677-015",
+    "UCF-EXP-197879-009",
+    "UCF-EXP-198081-004",
+    "UCF-EXP-198081-008",
+    "UCF-EXP-198081-011",
+    "UCF-EXP-198081-012",
+    "UCF-EXP-198283-005"
+  ],
+  "source_game_changed_keys": [
+    "ashland",
+    "california-pennsylvania",
+    "francis-marion",
+    "missouri-baptist",
+    "mit",
+    "monmouth-college-illinois",
+    "new-york-institute-of-technology",
+    "tennessee-wesleyan",
+    "upsala-college",
+    "william-jewell"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 12
+}
