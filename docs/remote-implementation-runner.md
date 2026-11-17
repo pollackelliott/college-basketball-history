@@ -333,7 +333,7 @@ This gate exists specifically to prevent the St. Bonaventure pattern of merge ->
 
 ## 5. Research/checkpoint transport
 
-The initial permanent transport is the proven immutable Git-part transport:
+The permanent Research transport uses immutable Git-part payloads. The ordinary form is:
 
 ```text
 kind = git_base64_parts
@@ -343,7 +343,17 @@ part_count = exact expected count
 sha256 = exact reconstructed Research Freeze SHA-256
 ```
 
-The runner reconstructs the ZIP outside the tracked worktree, verifies the exact hash, requires exactly the six package members, and then passes that file to the existing permanent commands.
+For large text-heavy Research Freezes, connector-originated lanes may use the lossless compressed representation:
+
+```text
+kind = git_gzip_base64_parts
+commit_sha = exact immutable commit
+path_prefix = exact part prefix
+part_count = exact expected count
+sha256 = exact reconstructed Research Freeze SHA-256
+```
+
+The gzip layer is transport representation only. The runner base64-decodes the Git parts, losslessly decompresses the compressed form when selected, reconstructs the exact original ZIP outside the tracked worktree, verifies the original ZIP SHA-256, requires exactly the six package members, and only then passes that unchanged file to the existing permanent commands.
 
 Reconciliation JSON payloads are exact request-commit files with SHA-256 bindings.
 

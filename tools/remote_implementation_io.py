@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import base64
 import csv
+import gzip
 import io
 import json
 import os
@@ -225,6 +226,23 @@ def runtime_tool_sha256_manifest(
     return result
 
 
+def decode_research_transport(encoded: bytes, kind: str) -> bytes:
+    """Decode one hash-bound Research transport into the exact original ZIP bytes."""
+    try:
+        payload = base64.b64decode(encoded, validate=True)
+    except ValueError as exc:
+        raise Stop("RESEARCH_CHECKPOINT_BASE64_INVALID: %s" % exc) from exc
+
+    if kind == "git_base64_parts":
+        return payload
+    if kind == "git_gzip_base64_parts":
+        try:
+            return gzip.decompress(payload)
+        except (OSError, EOFError) as exc:
+            raise Stop("RESEARCH_CHECKPOINT_GZIP_INVALID: %s" % exc) from exc
+    raise Stop("RESEARCH_CHECKPOINT_TRANSPORT_KIND_UNSUPPORTED: %s" % kind)
+
+
 def materialize_research_checkpoint(request: dict[str, Any], out_path: Path) -> dict[str, Any]:
     checkpoint = request["research_checkpoint"]
     transport = checkpoint["transport"]
@@ -242,10 +260,7 @@ def materialize_research_checkpoint(request: dict[str, Any], out_path: Path) -> 
             % (transport["part_count"], len(parts))
         )
     encoded = b"".join(git_show_bytes(commit_sha, path) for path in parts)
-    try:
-        data = base64.b64decode(encoded, validate=True)
-    except ValueError as exc:
-        raise Stop("RESEARCH_CHECKPOINT_BASE64_INVALID: %s" % exc) from exc
+    data = decode_research_transport(encoded, transport["kind"])
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_bytes(data)
     actual = sha256_file(out_path)
