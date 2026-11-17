@@ -661,7 +661,7 @@
     "wyoming-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
-  "active_lock_commit": null,
+  "active_lock_commit": "d6e0f1d4ce7093dbf6c61965cc8d7e69b1d43124",
   "active_lock_owner": "github-actions:44182741116:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
