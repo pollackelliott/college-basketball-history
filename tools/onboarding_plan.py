@@ -70,6 +70,7 @@ from program_history import (
     ncaa_game_counts_as_appearance,
     partition_stage2_source_rows,
     season_is_in_scope,
+    valid_season_label,
 )
 from plan_home_chronology_remediation import (
     _dedupe_relationships,
@@ -260,6 +261,37 @@ SOURCE_PATCH_FIELDS = (
 
 class WorkflowError(RuntimeError):
     """A safe, user-correctable onboarding stop."""
+
+
+def prepare_publication_coverage_transition(program: dict[str, str]) -> bool:
+    """Migrate the settled INCEPTION+ unpublished compatibility case at Gate 1 apply."""
+    status = program.get("history_coverage_status", "").strip()
+    if status != "UNMIGRATED":
+        return False
+
+    start = program.get("history_start_season", "").strip()
+    basis = program.get("history_scope_basis", "").strip()
+    intervals = program.get("history_scope_intervals", "").strip()
+    scope_status = program.get("history_scope_status", "").strip()
+    existing_inception = program.get("program_inception_season", "").strip()
+    if (
+        scope_status != "OWNER_CONFIRMED"
+        or basis != "ALWAYS_TOP_LEVEL_FROM_INCEPTION"
+        or intervals
+        or not valid_season_label(start)
+    ):
+        raise WorkflowError(
+            "cannot enable publication for UNMIGRATED program without settled "
+            "ALWAYS_TOP_LEVEL_FROM_INCEPTION authority"
+        )
+    if existing_inception and existing_inception != start:
+        raise WorkflowError(
+            "UNMIGRATED program_inception_season conflicts with settled INCEPTION+ start"
+        )
+
+    program["program_inception_season"] = start
+    program["history_coverage_status"] = "COMPLETE_INSTITUTIONAL"
+    return True
 
 
 def read_csv_table(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -9547,6 +9579,7 @@ def apply_publication_decisions(
                 raise WorkflowError(f"Unsupported accomplishment decision {item['decision']}")
         elif item["category"] == "publication":
             if item["decision"] == "ENABLE_PUBLIC_PAGE":
+                prepare_publication_coverage_transition(program)
                 program["public_page_enabled"] = "Yes"
                 counts["pages_enabled"] += 1
                 program_changed = True
