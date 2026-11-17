@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "wyoming-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "school_key": "wyoming",
+  "previous_control_state_commit": "fe0b01bbc6ace1b5b01e70eec662dc9681c78511",
+  "previous_control_state_sha256": "e0941a924b3b3f2b15eb36431895251ddc7035f361ee3c978a5455d68d682e4c",
+  "expected_protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "e2b4f3aac4e5e0c9f25e017ae7b27873f6e43fe1dd6a11dea55d3d6a5d4c0ddf"
+  },
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "creation_provenance": {
+    "origin": "ChatGPT Wyoming serialized original-school Implementation lane — Stage 2 deterministic opponent-display reconciliation",
+    "authorization": "Owner authorized Wyoming Stage 2 and that phase authority persists through deterministic representation repair. Fresh-verified census wyoming-stage2-census-0001 is BLOCKED solely by seven historical opponent-display conflicts and has zero warnings, zero owner decisions, semantic drift PASS, tracked mutation NONE, and fresh equivalence PASS. The complete conflict population is montana-state-billings, msu-denver, northern-new-mexico, st-francis-brooklyn, uc-colorado-springs, united-states-international, and washington-st-louis. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that census-bound population using existing project display authority, limited to the repository-owned representation-only fields and followed by no-map Stage 2 regeneration and fresh equivalence verification. It does not authorize historical reinterpretation, unrelated cleanup, current-main refresh, recommendation-map proposal, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, Production, recovery, shared/global maintenance, venue maintenance, or protected-main mutation."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
