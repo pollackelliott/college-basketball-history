@@ -1,45 +1,54 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "wyoming-stage2-opponent-display-normalize-0001",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "request_id": "wyoming-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "wyoming",
-  "previous_control_state_commit": "fe0b01bbc6ace1b5b01e70eec662dc9681c78511",
-  "previous_control_state_sha256": "e0941a924b3b3f2b15eb36431895251ddc7035f361ee3c978a5455d68d682e4c",
-  "expected_protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "previous_control_state_commit": "10d4932c945c642dbb68aaf6c5242f765eaf48fc",
+  "previous_control_state_sha256": "1697a385d7babd626fd13b3411ad8c23979da2f70dbbb989e23111f40b7c70f0",
+  "expected_protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
   "target_branch": "data/wyoming-onboarding",
-  "target_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "e2b4f3aac4e5e0c9f25e017ae7b27873f6e43fe1dd6a11dea55d3d6a5d4c0ddf"
+  "target_sha": "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/wyoming/wyoming-phase0-0001/successor-manifest.json",
+    "sha256": "aff95392d87cec5a5012949c79102f24fa96616ddc36a7ffa4e4cf4ade21fd31"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/wyoming/wyoming-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "a667a6a76ec93f297420139eb23c5d5be8991f9da016286d5704824b991ef217"
   },
   "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
   "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized Wyoming Stage 2 authority persists. Generic tooling-only PR #642 merged normally at exact validated head as protected main 33af595fcae2a17664379638f89ce64c2e63be08. Exact compare from merge base f6628d64feea79468aa2c383cee3488feb0e019e proves Wyoming target b5e150cb6f1e8ec44e8e966247cf15a69f865fb7 differs on nine target-owned/shared registration paths while protected main differs only on tests/test_program_history_scope.py, tools/onboarding_plan.py, and tools/program_history.py; overlap is empty and protected main has no schools/wyoming path. PR #642 intentionally corrects Stage 2 publication eligibility for the settled UNMIGRATED INCEPTION+ compatibility case, so the prior zero-row decision universe is stale by design and is not authorized for preservation. Perform exactly one guarded disjoint current-main refresh while preserving the immutable Wyoming package, Integration Freeze, semantic snapshot, and opponent-display repair."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT Wyoming serialized original-school Implementation lane — Stage 2 deterministic opponent-display reconciliation",
-    "authorization": "Owner authorized Wyoming Stage 2 and that phase authority persists through deterministic representation repair. Fresh-verified census wyoming-stage2-census-0001 is BLOCKED solely by seven historical opponent-display conflicts and has zero warnings, zero owner decisions, semantic drift PASS, tracked mutation NONE, and fresh equivalence PASS. The complete conflict population is montana-state-billings, msu-denver, northern-new-mexico, st-francis-brooklyn, uc-colorado-springs, united-states-international, and washington-st-louis. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that census-bound population using existing project display authority, limited to the repository-owned representation-only fields and followed by no-map Stage 2 regeneration and fresh equivalence verification. It does not authorize historical reinterpretation, unrelated cleanup, current-main refresh, recommendation-map proposal, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, Production, recovery, shared/global maintenance, venue maintenance, or protected-main mutation."
+    "origin": "Wyoming serialized original-school Implementation Stage 2 — post-PR #642 delegated disjoint current-main refresh",
+    "authorization": "Owner-authorized Wyoming Stage 2 remains active. This request authorizes exactly one repository-owned STAGE2_CURRENT_MAIN_REFRESH from onboarding predecessor b5e150cb6f1e8ec44e8e966247cf15a69f865fb7 to protected main 33af595fcae2a17664379638f89ce64c2e63be08 after explicit disjoint-path proof. It carries no stale-universe phase continuation because PR #642 changes planner eligibility semantics and policy requires recomputation from unchanged frozen authority. After fresh refresh PASS, the same Stage 2 authority may run a new ordinary census and exact-map proposal as separate bounded deterministic work, stopping at OWNER_GATE_1_READY or a genuine blocker. No historical reinterpretation, Owner Gate 1 approval, fill, pre-seal, seal, apply, release, Preview, merge, Production, recovery, shared/global historical maintenance, or protected-main mutation is authorized by this request."
   },
   "authority": {
+    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
-    "stage2_proposal_rehearsal": false,
-    "stage2_gate1_fill": false,
-    "stage2_preseal_rehearsal": false,
-    "stage2_gate1_seal": false,
-    "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": false,
-    "release_readiness": false,
-    "release_presentation_refresh": false,
-    "release_preview_verify": false,
+    "release": false,
     "release_gate2_approval": false,
-    "release_production_proof": false
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
   }
 }
