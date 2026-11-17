@@ -1,45 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "wyoming-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "wyoming-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
   "school_key": "wyoming",
-  "previous_control_state_commit": "36c87043953303f0e3a71759f36fbf5ddb0e9d91",
-  "previous_control_state_sha256": "2050c963937d29bf5d0c834a7400d62ab973427ad44f663d61da1fda3441bdd6",
+  "previous_control_state_commit": "d8c0959c59c5cdaf81fb648477b93e5998133069",
+  "previous_control_state_sha256": "18fded77d1993d6d8e8393189021eb3da0b857f5b94a39769ee7fe42be253cd5",
   "expected_protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
   "target_branch": "data/wyoming-onboarding",
-  "research_checkpoint": {
-    "sha256": "2cd99fdbbc02d7f438b86559458534bace3d5431d01986600ba1c9ae317d6388",
-    "research_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
-    "transport": {
-      "kind": "git_gzip_base64_parts",
-      "commit_sha": "950fff80aa7ceda25a254411881d971e53a3dd6e",
-      "path_prefix": ".remote-implementation/transports/wyoming/wyoming-stage1-0001/part-",
-      "part_count": 12
-    }
+  "target_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/wyoming/wyoming-phase0-0001/successor-manifest.json",
+    "sha256": "aff95392d87cec5a5012949c79102f24fa96616ddc36a7ffa4e4cf4ade21fd31"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage1-0001/checkpoint-manifest.json",
-    "sha256": "2b0c5e2bfc6797ff654d8ad7312db479b7db734c2e9a4df6d56c8b1acfa4d60b"
-  },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1904-1905",
-    "basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-    "intervals": "",
-    "notes": "Accepted immutable Wyoming Research authority is INCEPTION+. The frozen competitive ledger begins in 1904-1905, current protected-main top-level scope authority confirms INCEPTION+, and the complete institutional Research Freeze is preserved unchanged through the completed 2025-2026 season."
-  },
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
   "creation_provenance": {
-    "origin": "ChatGPT Wyoming serialized original-school Implementation lane — owner-authorized Phase 0 after durable Stage 1 PASS",
-    "authorization": "Owner explicitly approved and directed Proceed after Wyoming Stage 1 completed durable PASS. This authorizes exactly one guarded PHASE0 transaction bound to protected main f6628d64feea79468aa2c383cee3488feb0e019e, immutable Wyoming Research Freeze SHA-256 2cd99fdbbc02d7f438b86559458534bace3d5431d01986600ba1c9ae317d6388, research base a13229ce64a489b39aaada66f0d8bf38db6868db, and Stage 1 checkpoint wyoming-stage1-0001. Stage 1 found zero blockers, zero ambiguous stops, zero dedicated shared/global maintenance requirements, 39 safe venue reuses, five ordinary new venue registrations, 149 NO_CURRENT_VERIFIED_ALIAS program rows, and five conference reuses. Authority includes fresh current-main Stage 1 verification, deterministic ordinary target-school/reference registration within Phase 0, Integration Freeze creation, write-ahead, create-once publication to data/wyoming-onboarding under the global mutation lock/CAS contract, and required independent fresh Phase 0 verification. It does not reopen Research, authorize dedicated unrelated shared/global maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, Production, recovery, or direct protected-main mutation."
+    "origin": "ChatGPT Wyoming serialized original-school Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly replied Proceed after Wyoming Phase 0 completed with repository_validation=PASS, CREATE_ONCE_PASS, remote_phase0_equivalence=PASS, fresh_runner_verification=PASS, Integration Freeze SHA-256 60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea, and target SHA 68546b283897ecf63020b5fbd8216c99abd412f5. This begins the already-authorized Stage 2 technical/reconciliation phase. This request performs the first bounded read-only STAGE2_CENSUS against protected main f6628d64feea79468aa2c383cee3488feb0e019e and the exact independently verified Phase 0 successor, stopping at CAPABILITY_CENSUS_READY or an honest durable BLOCKED checkpoint. Same-phase authority persists for policy-permitted deterministic representation repair, regeneration, recommendation-map preparation/rehearsal through OWNER_GATE_1_READY or a genuine blocker. This request itself authorizes no tracked repair, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, recovery, unrelated shared/global mutation, or protected-main mutation."
   },
   "authority": {
-    "phase0": true,
-    "expansion_phase0": false,
+    "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
