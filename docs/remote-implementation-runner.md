@@ -762,6 +762,29 @@ A changed protected main, moved target, failed fresh verifier, `BLOCKED` pre-sea
 binding mismatch, recovery condition, or other existing guard stops the chain. This
 continuation never creates new historical authority and never crosses Owner Gate 2.
 
+**Bounded post-repair resumption:** A replacement pre-seal request may reach an
+independently fresh-verified `READY_TO_SEAL` checkpoint after a previous,
+independently verified `BLOCKED` pre-seal that was originally queued by an
+explicitly owner-approved Gate 1 fill continuation. If the replacement itself
+omitted `phase_continuation`, the repository-owned continuation helper may
+resume *only* after authenticating the original approved fill request,
+checkpoint, and fresh verification; the originally authorized child pre-seal
+request, BLOCKED checkpoint, and fresh verification; the unchanged target
+head/tree, complete historical/hash authority, and exact Gate 1 fill references
+carried by the replacement; a healthy IDLE/COMPLETE control state; and absence
+of any already-consumed original seal/apply request. This is a specific
+recovery from a verified read-only technical stop, not a generic permission to
+invent a continuation for a fresh pre-seal.
+
+The resumed seal and apply request IDs are deterministic new single-use IDs
+suffixed to the exact replacement pre-seal request ID. Reused IDs, missing
+original authorization, changed historical hashes, an unsafe lock/recovery
+state, unverified or non-BLOCKED predecessor, or a second active child fail
+closed. The ordinary seal/apply commands, exact current-main binding, checkpoint
+validation, serialized lock, write-ahead, CAS, and independent verification
+remain unchanged. The helper never retries a previously accepted request,
+creates owner approval, or continues into release preparation or Gate 2.
+
 
 
 ### Stage 2 pre-seal rehearsal request
