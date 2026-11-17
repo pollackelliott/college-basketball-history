@@ -343,9 +343,21 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
         self, src: Path, *, variant: str = "valid"
     ) -> bytes:
         self.make_git_fixture(src)
-        baseline = self.git(src, "rev-parse", "HEAD")
         authority = src / ".onboarding/example/integration-freeze.json"
         manifest = json.loads(authority.read_text(encoding="utf-8"))
+
+        # The protected-main parent carries only inherited rows.  The immutable
+        # Integration Freeze is an ignored preview containing the inherited row
+        # plus the two supplemental rows that Phase 0 will publish.
+        school_venues = src / "schools/example/venues.csv"
+        school_venues.write_text(
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            "example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,Inherited note\n",
+            encoding="utf-8",
+        )
+        self.git(src, "add", "schools/example/venues.csv")
+        self.git(src, "commit", "-m", "Synthetic protected main integration base")
+        baseline = self.git(src, "rev-parse", "HEAD")
         manifest["protected_main_sha"] = baseline
         manifest["integration_base_sha"] = baseline
 
@@ -400,7 +412,6 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
         manifest["manifest_self_fingerprint_sha256"] = fingerprint(manifest)
         authority.write_text(json.dumps(manifest, sort_keys=True) + "\n", encoding="utf-8")
 
-        school_venues = src / "schools/example/venues.csv"
         reuse_key = "reuse-gym-wrong" if variant == "wrong_key" else "reuse-gym"
         reuse_id = "VEN-000999" if variant == "wrong_id" else "VEN-000010"
         reuse_suffix = (

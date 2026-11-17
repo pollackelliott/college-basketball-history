@@ -194,12 +194,24 @@ def _reconstruct_frozen_venues(
     fields, rows = _rows(phase0_venues)
     if not {"venue_key", "venue_id", "notes"}.issubset(fields):
         return reject("phase0_venue_schema_invalid")
+    parent_venues = _blob(root, integration_base, school, "venues.csv")
+    if parent_venues is None:
+        return reject("phase0_parent_venues_unavailable")
+    parent_fields, parent_rows = _rows(parent_venues)
+    if parent_fields != fields:
+        return reject("phase0_parent_venue_schema_mismatch")
+    if len(rows) != len(parent_rows) + len(census_rows):
+        return reject("phase0_supplemental_venue_population_mismatch")
+    if rows[:len(parent_rows)] != parent_rows:
+        return reject("phase0_inherited_venue_rows_changed")
+
     registry = _registry_ids_by_key(root, phase0_commit)
     if registry is None:
         return reject("phase0_global_venue_registry_unavailable")
 
     positions: dict[str, list[int]] = {}
-    for index, row in enumerate(rows):
+    for index in range(len(parent_rows), len(rows)):
+        row = rows[index]
         positions.setdefault(row.get("venue_key", "").strip(), []).append(index)
 
     transformed: set[int] = set()
