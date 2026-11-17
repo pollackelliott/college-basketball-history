@@ -1,0 +1,38 @@
+{
+  "branch": "remote-stage2-census/ucf-209eabe5a84c",
+  "capability_census": {
+    "path": ".onboarding/ucf/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 0
+  },
+  "head_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
+  "integration_base_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "integration_semantic_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "ed1164118f471b2a398bf6b53491035de17c7212",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 1273,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 373,
+    "plan_path": ".onboarding/ucf/plan.json",
+    "review_path": ".onboarding/ucf/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
