@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "merge_parent_onboarding": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "merge_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "ef802a192e5499ad864d320cb4de63dbc8a93ad9d09dfcdac92fb339fc4c3099",
+  "owner_gate_2_verification_sha256": "bfc6fd2941478f5ae9df3c5a719202ce8ede852efdfd0975192a14bb955b4d0d",
+  "pr_head_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "pr_number": 636,
+  "production_deployment_id": 7860038517,
+  "production_json_checked_count": 6,
+  "production_proof": true,
+  "production_proof_sha256": "2fc3a34d679c00497b3e100c2490b205f3fd475dece6c69606b7437cd4176550",
+  "protected_main_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
+  "request_id": "ucf-expansion-release-production-proof-0001",
+  "request_sha256": "be538d8106c71356c02f19b4c8c27b4280396a021e06ee6ed573ca266b5d86e8",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "status": "PRODUCTION_PROOF_PASS"
+}

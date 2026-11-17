@@ -1,0 +1,26 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "3518f3da648417c914c9bf78b8ce1270f80a9999",
+  "merge_parent_onboarding": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "merge_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
+  "owner_gate_2_approval_checkpoint_sha256": "ef802a192e5499ad864d320cb4de63dbc8a93ad9d09dfcdac92fb339fc4c3099",
+  "owner_gate_2_verification_sha256": "bfc6fd2941478f5ae9df3c5a719202ce8ede852efdfd0975192a14bb955b4d0d",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
+  "pr_number": 636,
+  "production_deployment_id": 7860038517,
+  "production_deployment_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/fordham.json",
+    "/data/teams/long-island-university.json",
+    "/data/teams/ucf.json",
+    "/data/teams/wisconsin.json"
+  ],
+  "production_json_checked_count": 6,
+  "school_key": "ucf",
+  "status": "COMPLETE"
+}
