@@ -1325,11 +1325,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
     "recommendation_map_sha256": "d1fb6a5944eeb0a67a59c8ff12f568c4d09edb9436cae1c787e5be762fb68d4d",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "wyoming-stage2-proposal-0001",
     "runtime_decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
     "school_key": "wyoming",
