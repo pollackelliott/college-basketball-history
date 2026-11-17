@@ -1,0 +1,188 @@
+{
+  "branch": "remote-stage2-census/wyoming-5c9d47e3c006",
+  "capability_census": {
+    "path": ".onboarding/wyoming/implementation-stage2-capability-census.json",
+    "status": "REPAIR_SCOPE_REQUIRED",
+    "topology_group_count": 3
+  },
+  "head_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "integration_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "integration_semantic_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "last_error": "site_completeness failed with exit code 1",
+  "next_action": "Inspect the preserved site diagnostic and durable capability census. Classify the complete detected failure population before changing history or tooling; if generic permanent tooling is defective, define one consolidated repair scope before merging the first repair. Do not invent a replacement rehearsal wrapper.",
+  "origin_main_sha_at_integration_freeze": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 131,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 131,
+      "discrepancy": 179,
+      "identity": 31,
+      "publication": 1
+    },
+    "decision_count": 343,
+    "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+    "discrepancies_to_add": 179,
+    "existing_game_matches": 1361,
+    "identity_cardinality_constraints": 22,
+    "new_canonical_games": 1559,
+    "plan_path": ".onboarding/wyoming/plan.json",
+    "review_path": ".onboarding/wyoming/review.csv",
+    "warning_count": 0
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "ENABLE_PUBLIC_PAGE": 1,
+      "FORCE_NEW": 1,
+      "KEEP_CANONICAL": 190,
+      "MATCH_CANONICAL:CBBG-0015173": 1,
+      "MATCH_CANONICAL:CBBG-0045553": 1,
+      "MATCH_CANONICAL:CBBG-0086802": 1,
+      "MATCH_CANONICAL:CBBG-0086843": 1,
+      "MATCH_CANONICAL:CBBG-0087002": 1,
+      "MATCH_CANONICAL:CBBG-0089908": 1,
+      "MATCH_CANONICAL:CBBG-0098278": 1,
+      "MATCH_CANONICAL:CBBG-0104264": 1,
+      "MATCH_CANONICAL:CBBG-0104588": 1,
+      "MATCH_CANONICAL:CBBG-0106983": 1,
+      "MATCH_CANONICAL:CBBG-0107171": 1,
+      "MATCH_CANONICAL:CBBG-0114539": 1,
+      "MATCH_CANONICAL:CBBG-0161275": 1,
+      "MATCH_CANONICAL:CBBG-0170528": 1,
+      "MATCH_CANONICAL:CBBG-0175160": 1,
+      "MATCH_CANONICAL:CBBG-0175504": 1,
+      "MATCH_CANONICAL:CBBG-0177245": 1,
+      "MATCH_CANONICAL:CBBG-0177249": 1,
+      "MATCH_CANONICAL:CBBG-0177255": 1,
+      "MATCH_CANONICAL:CBBG-0177258": 1,
+      "MATCH_CANONICAL:CBBG-0177262": 1,
+      "MATCH_CANONICAL:CBBG-0177268": 1,
+      "MATCH_CANONICAL:CBBG-0177278": 1,
+      "MATCH_CANONICAL:CBBG-0177378": 1,
+      "MATCH_CANONICAL:CBBG-0177396": 1,
+      "MATCH_CANONICAL:CBBG-0177430": 1,
+      "MATCH_CANONICAL:CBBG-0177450": 1,
+      "MATCH_CANONICAL:CBBG-0177486": 1,
+      "MATCH_CANONICAL:CBBG-0178158": 1,
+      "MATCH_CANONICAL:CBBG-0180729": 1,
+      "NOT_APPLICABLE": 82,
+      "USE_SOURCE": 38,
+      "VERIFY_REFERENCE_VALUES": 1
+    },
+    "approved_plan_hash_preview": "f118d55df285ba216e20717c38a12f0106148e4cb77e17da9c5d51e18152250a",
+    "decision_count": 343,
+    "path": "/tmp/remote-stage2-proposal-map-5ok2qlar/recommendation-map.json",
+    "sha256": "d1fb6a5944eeb0a67a59c8ff12f568c4d09edb9436cae1c787e5be762fb68d4d"
+  },
+  "research_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 3,
+      "home_missing_location": 3,
+      "home_missing_venue": 3,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "neutral_missing_location": 7,
+      "neutral_missing_venue": 144,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 156,
+      "reciprocal_research_accounted_gap": 10,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap": 3,
+      "strict_home_gap_rows": 3,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2952,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 9
+    },
+    "errors": [
+      "3 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception or exact protected-main owner-authorized HOME locality exception. Ordinary research statuses remain nonwaivable."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0049319",
+        "CBBG-0100017",
+        "CBBG-0166073"
+      ],
+      "home_missing_location": [
+        "CBBG-0049319",
+        "CBBG-0100017",
+        "CBBG-0166073"
+      ],
+      "home_missing_venue": [
+        "CBBG-0049319",
+        "CBBG-0100017",
+        "CBBG-0166073"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0107233",
+        "CBBG-0210311",
+        "CBBG-0210312",
+        "CBBG-0210504",
+        "CBBG-0210937",
+        "CBBG-0211071",
+        "CBBG-0211098"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0003637",
+        "CBBG-0009636",
+        "CBBG-0020962",
+        "CBBG-0028232",
+        "CBBG-0030539",
+        "CBBG-0034747",
+        "CBBG-0040722",
+        "CBBG-0043665",
+        "CBBG-0043805",
+        "CBBG-0046310",
+        "CBBG-0050816",
+        "CBBG-0056961"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0107696"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0071971",
+        "CBBG-0072119",
+        "CBBG-0080873",
+        "CBBG-0080988",
+        "CBBG-0080989",
+        "CBBG-0099367",
+        "CBBG-0103920",
+        "CBBG-0107233",
+        "CBBG-0153013",
+        "CBBG-0177870"
+      ],
+      "strict_home_gap": [
+        "CBBG-0049319",
+        "CBBG-0100017",
+        "CBBG-0166073"
+      ],
+      "unknown_site_type": [
+        "CBBG-0210126",
+        "CBBG-0210127",
+        "CBBG-0210128",
+        "CBBG-0210129",
+        "CBBG-0210130",
+        "CBBG-0210131",
+        "CBBG-0210139",
+        "CBBG-0210141",
+        "CBBG-0210142"
+      ]
+    },
+    "path": ".onboarding/wyoming/last-rehearsal-site-gate.json",
+    "status": "FAIL"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
