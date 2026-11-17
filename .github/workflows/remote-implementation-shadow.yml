@@ -1,0 +1,55 @@
+name: Remote Implementation shadow observation
+
+# Read-only event-driven observation using the repository's existing Actions.
+# This workflow has no request, PR, merge, or GitHub App publication authority.
+on:
+  workflow_run:
+    workflows:
+      - Remote Implementation control plane
+    types:
+      - completed
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/remote-implementation-shadow.yml
+
+permissions:
+  contents: read
+
+jobs:
+  observe-shadow:
+    # A normal push of this workflow to main gives a one-time bootstrap smoke
+    # observation. Subsequent observations follow completed successful runs.
+    # The event payload is wakeup data only, never action or approval authority.
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        (github.event.workflow_run.conclusion == 'success' &&
+         github.event.workflow_run.head_repository.full_name == github.repository)
+      }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out trusted protected main runtime
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Fetch control history into disposable runner checkout for read-only inspection
+        shell: bash
+        run: |
+          git fetch --no-tags origin \
+            +refs/heads/control/remote-implementation:refs/remotes/origin/remote-control
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Observe latest exact control checkpoint without executing any action
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python -B tools/remote_implementation_connector_shadow.py --repo .
