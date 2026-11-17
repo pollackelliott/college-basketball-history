@@ -1,0 +1,455 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "0748a722fbb193d9d2a94c7a92c253793af87461d02a94a4a5f251d4fc66bd80",
+    "implementation-stage2-status.json": "a1a1ba8c200da3a934a5f16e5ce783267e6b9acce1a613f078138827beee7d84",
+    "plan.json": "a874d1a69bd9bd709744be679a7d9d9ca2787e307731b5a7a1138f399383fe89",
+    "review.csv": "775abab6dff99595e9bb8c6b40f1c20abc7ad9df5b57fc5027e2db7e58244a9a",
+    "review.md": "7bfbcf0e0b4be7320caf30ecbb5a60837b2012ca7ace7398e543b0550ab7b7f8"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "0748a722fbb193d9d2a94c7a92c253793af87461d02a94a4a5f251d4fc66bd80",
+    "implementation-stage2-status.json": "9f93e688f59774fb6b33636ebd5d08798c3162346641fc5868cedf62ab86bd8d",
+    "plan.json": "d222fb8032aa972ca259709ad0c1bff07b8480a9d78886e051f7b6deb3bbd4e3",
+    "review.csv": "775abab6dff99595e9bb8c6b40f1c20abc7ad9df5b57fc5027e2db7e58244a9a",
+    "review.md": "0c3f2531d86e4e4411440fbbe2e14b48277e744512062f4f4801546e6f1b3b45"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "0748a722fbb193d9d2a94c7a92c253793af87461d02a94a4a5f251d4fc66bd80",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 131,
+      "discrepancy": 179,
+      "identity": 31,
+      "publication": 1
+    },
+    "decision_count": 343,
+    "decision_fields": {
+      "game_date": 98,
+      "game_identity": 31,
+      "game_type": 20,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 12,
+      "score": 90,
+      "site_type": 90
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1910-11-P151C2Y1072-CBBG-0177241-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1911-12-P151C2Y2000-CBBG-0177246-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1912-13-P151C2Y3407-CBBG-0086847-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1912-13-P151C2Y3807-CBBG-0177252-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1913-14-P151C2Y4894-CBBG-0177262-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1913-14-P151C2Y4974-CBBG-0177258-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1914-15-P151C2Y5661-CBBG-0177264-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1915-16-P151C2Y7018-CBBG-0177273-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1915-16-P151C2Y7178-CBBG-0177273-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1926-27-P152C1Y6473-CBBG-0177373-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1928-29-P152C2Y3163-CBBG-0087003-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1928-29-P152C2Y3723-CBBG-0177396-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1928-29-P152C2Y3723-CBBG-0177397-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1929-30-P152C2Y4570-CBBG-0175160-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1937-38-P153C2Y0876-CBBG-0177487-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1940-41-P153C2Y7098-CBBG-0107167-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1944-45-P153C3Y6345-CBBG-0015173-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1944-45-P153C3Y6905-CBBG-0104594-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1945-46-P154C1Y2283-CBBG-0170528-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1953-54-P155C1Y4570-CBBG-0175504-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1953-54-P155C1Y4570-CBBG-0175505-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1982-83-P158C3Y3072-CBBG-0178152-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-WYO-S1-1983-84-P158C3Y5120-CBBG-0180733-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1928-29-P152C2Y3643-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1929-30-P152C2Y5290-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1935-36-P153C1Y5050-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1935-36-P153C1Y5130-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1935-36-P153C1Y5210-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1937-38-P153C2Y0636-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1937-38-P153C2Y0796-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1938-39-P153C2Y3083-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1938-39-P153C2Y3323-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1939-40-P153C2Y4890-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1939-40-P153C2Y5130-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1939-40-P153C2Y5370-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1940-41-P153C2Y6138-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1940-41-P153C2Y6218-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1940-41-P153C2Y6298-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1940-41-P153C2Y7018-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1940-41-P153C2Y7258-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1941-42-P153C3Y2123-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1941-42-P153C3Y2443-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1944-45-P153C3Y6505-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1944-45-P154C1Y1036-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1944-45-P154C1Y1276-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1945-46-P154C1Y1723-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1945-46-P154C1Y2763-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1945-46-P154C1Y2843-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1945-46-P154C1Y3163-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1945-46-P154C1Y3563-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1946-47-P154C1Y5050-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1946-47-P154C1Y5610-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1947-48-P154C2Y1356-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1947-48-P154C2Y1596-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1948-49-P154C2Y4283-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1948-49-P154C2Y4363-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1948-49-P154C2Y4683-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1948-49-P154C2Y4763-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1949-50-P154C2Y7050-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1949-50-P154C2Y7130-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1949-50-P154C3Y0716-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1949-50-P154C3Y0796-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1950-51-P154C3Y2353-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1950-51-P154C3Y3697-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1950-51-P154C3Y3776-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1950-51-P154C3Y3934-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1950-51-P154C3Y4013-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1951-52-P154C3Y5097-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1951-52-P154C3Y5817-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1951-52-P154C3Y5897-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1955-56-P155C2Y2283-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1955-56-P155C2Y2443-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1957-58-P155C2Y6698-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1960-61-P156C1Y0636-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1965-66-P156C2Y4810-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1965-66-P156C2Y5450-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1967-68-P156C3Y3643-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1972-73-P157C2Y1563-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1972-73-P157C2Y1643-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1973-74-P157C2Y4548-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1978-79-P158C1Y4560-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1984-85-P158C3Y7167-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-1998-99-P161C1Y4538-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-2004-05-P162C1Y2138-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-2018-19-P164C2Y2018-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-2018-19-P164C2Y2088-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-2019-20-P164C2Y5098-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-2019-20-P164C2Y5168-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-2021-22-P164C3Y4782-SITE_TYPE",
+      "DISCREPANCY-WYO-S1-2024-25-P165C3Y1445-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 90,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0086847",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1912-13-P151C2Y3567"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1912-13-P151C2Y3407"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0087003",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1928-29-P152C2Y3083"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1928-29-P152C2Y3163"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0104263",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1929-30-P152C2Y4810"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1929-30-P152C2Y4730"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0104594",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1944-45-P154C1Y0716"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1944-45-P153C3Y6905"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0106968",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y2683"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y4123"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0106969",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y2763"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y4123"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0106981",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y3963"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y4123"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0106982",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y4043"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y4123"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0107167",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1940-41-P153C2Y6538"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1940-41-P153C2Y7098"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0175505",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1953-54-P155C1Y5050"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1953-54-P155C1Y4570"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177241",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1910-11-P151C2Y0912"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1910-11-P151C2Y1072"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177246",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1911-12-P151C2Y1520"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1911-12-P151C2Y2000"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177252",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1912-13-P151C2Y3327"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1912-13-P151C2Y3807"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177264",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1914-15-P151C2Y5501"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1914-15-P151C2Y5661"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177273",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1915-16-P151C2Y6858"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1915-16-P151C2Y7018",
+            "WYO-S1-1915-16-P151C2Y7178"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177373",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1926-27-P152C1Y6173"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1926-27-P152C1Y6473"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177397",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1928-29-P152C2Y3643"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1928-29-P152C2Y3723"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177431",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y3723"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1931-32-P152C3Y3803"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177451",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1933-34-P153C1Y0796"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1933-34-P153C1Y0876"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0177487",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1937-38-P153C2Y1516"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1937-38-P153C2Y0876"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0178152",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1982-83-P158C3Y2432"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1982-83-P158C3Y3072"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0180733",
+          "fixed_confident_source_game_ids": [
+            "WYO-S1-1983-84-P158C3Y5760"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "WYO-S1-1983-84-P158C3Y5120"
+          ]
+        }
+      ],
+      "count": 22,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "wyoming"
+  ],
+  "phase0_protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "phase0_successor_path": ".remote-implementation/successors/wyoming/wyoming-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "aff95392d87cec5a5012949c79102f24fa96616ddc36a7ffa4e4cf4ade21fd31",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 131,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 131,
+      "discrepancy": 179,
+      "identity": 31,
+      "publication": 1
+    },
+    "decision_count": 343,
+    "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+    "discrepancies_to_add": 179,
+    "existing_game_matches": 1361,
+    "identity_cardinality_constraints": 22,
+    "new_canonical_games": 1559,
+    "plan_path": ".onboarding/wyoming/plan.json",
+    "review_path": ".onboarding/wyoming/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "request_id": "wyoming-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "stage2_current_main_refresh_successor_path": ".remote-implementation/successors/wyoming/wyoming-stage2-current-main-refresh-0001/successor-manifest.json",
+  "stage2_current_main_refresh_successor_sha256": "6ec7a6d469f720f9be5a8dca97486c2d6eb84734209dd5d6019b134f4b6c9426",
+  "stage2_current_main_refresh_verification_path": ".remote-implementation/verifications/wyoming/wyoming-stage2-current-main-refresh-0001/stage2-current-main-refresh-verification.json",
+  "stage2_opponent_display_successor_path": ".remote-implementation/successors/wyoming/wyoming-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_opponent_display_successor_sha256": "a667a6a76ec93f297420139eb23c5d5be8991f9da016286d5704824b991ef217",
+  "stage2_opponent_display_verification_path": ".remote-implementation/verifications/wyoming/wyoming-stage2-opponent-display-normalize-0001/stage2-opponent-display-verification.json",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "target_tree_sha": "820fca044427469e694c37a8054237d990113845",
+  "tracked_mutation_proof": {
+    "after_head_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+    "after_status": "",
+    "after_tree_sha": "820fca044427469e694c37a8054237d990113845",
+    "before_head_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+    "before_status": "",
+    "before_tree_sha": "820fca044427469e694c37a8054237d990113845",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

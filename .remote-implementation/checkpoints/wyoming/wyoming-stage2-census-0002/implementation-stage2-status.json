@@ -1,0 +1,44 @@
+{
+  "branch": "remote-stage2-census/wyoming-5c9d47e3c006",
+  "capability_census": {
+    "path": ".onboarding/wyoming/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 2
+  },
+  "head_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "integration_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "integration_semantic_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 131,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 131,
+      "discrepancy": 179,
+      "identity": 31,
+      "publication": 1
+    },
+    "decision_count": 343,
+    "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+    "discrepancies_to_add": 179,
+    "existing_game_matches": 1361,
+    "identity_cardinality_constraints": 22,
+    "new_canonical_games": 1559,
+    "plan_path": ".onboarding/wyoming/plan.json",
+    "review_path": ".onboarding/wyoming/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
