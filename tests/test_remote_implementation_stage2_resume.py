@@ -306,6 +306,9 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
             "apply_request_id": self.REPLACEMENT + "-apply",
         }
         self.manifest["equivalence_sha256"] = "e" * 64
+        self.manifest["request_sha256"] = resume.sha256_bytes(
+            self.bytes(self.parent)
+        )
         captured = {}
         with (
             patch.object(
