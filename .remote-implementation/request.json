@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-stage2-preseal-0002",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "request_id": "ucf-expansion-stage2-gate1-seal-0002",
+  "operation": "STAGE2_GATE1_SEAL",
   "school_key": "ucf",
-  "previous_control_state_commit": "4109bfd8f4067113d596a8946327942628bf4e63",
-  "previous_control_state_sha256": "dbea0c8381eba4c2b7fc98205c3064563997deafb73715ce455e4a721a8ad308",
+  "previous_control_state_commit": "848411be9341844b1957a6156e71b0bf1246141b",
+  "previous_control_state_sha256": "0baa99667a20f07f44c1ed0373812ea51858b29d1ca7bcb8c19716ef95c0a2ac",
   "expected_protected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
   "target_branch": "data/ucf-onboarding",
   "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "4f09fb4faafeaf1021044a0d0402fe882a19d9fc8801211c94d7cc8885a15070"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-preseal-0002/checkpoint-manifest.json",
+    "sha256": "2c830d664cf4410343032a854aaabdbccb074fd45ae81ee2b18fdebf6a4b473c"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "b2e6f1754d9c89ac0a88c628cef7140f7d123914149d420573670ba9b13d82db"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-preseal-0002/stage2-preseal-rehearsal-verification.json",
+    "sha256": "8ac9e5f8173d0ad90d7142056cca7350bf75776ad708ef90cfaddf29ed842c7f"
   },
   "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
   "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
@@ -24,9 +24,17 @@
   "approved_plan_hash_preview": "3e827ae6b7429cc695d5d01b1df4bb7046a095e84aad2b2606acac0421906b2c",
   "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
   "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "owner_gate_1_approval_sha256": "749cbdd9fc3f0d0cf3c90de8a8f2366c13b0fc16e5f7724c73a9b5711087548c",
+  "equivalence_sha256": "e1e745b80bafe2e04a1705271e5107f3323a5857f832d9d3eeb268866b2fd13b",
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "ucf-expansion-stage2-preseal-0002",
+    "seal_request_id": "ucf-expansion-stage2-gate1-seal-0002",
+    "apply_request_id": "ucf-expansion-stage2-sealed-apply-0002"
+  },
   "creation_provenance": {
     "origin": "Same serialized UCF ALL_HISTORY_EXPANSION Implementation lane",
-    "authorization": "Same already-approved post-Gate-1 technical phase after merge of PR #635; fresh pre-seal only against current protected main. Preserves exact Gate 1 fill, owner approval, decision universe, recommendation map, and filled review. No new historical authority, Gate 2, release, or protected-main mutation authority."
+    "authorization": "Same explicit Owner Gate 1 authority and already-authorized post-Gate-1 technical phase. Exact fresh-verified pre-seal ucf-expansion-stage2-preseal-0002 is READY_TO_SEAL. Authorizes only cryptographic Gate 1 seal followed, after independent verification, by guarded sealed apply. No new historical authority, Owner Gate 2, release, merge, or protected-main bypass."
   },
   "authority": {
     "expansion_phase0": false,
@@ -44,9 +52,9 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
+    "stage2_gate1_seal": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": true,
+    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
