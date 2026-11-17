@@ -1,0 +1,52 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1bf1ce861f22a522fff6f1ca2ded10e3a439a5bec6bd242ae782103b4083f587",
+    "implementation-stage2-status.json": "3cfd343c16a521a36ee27ef6b903768d361e50f263720648a688700a5c8be050",
+    "plan.json": "d659e75b713465fa83b6089d8075d02d0d44f2f4304aeb6f3d3452b734879dca",
+    "review.csv": "6236c1efa7ffb83a11c70e2ee93b0717fd59889bd2ce03fdad3221f7c21c787a",
+    "review.md": "68fc64eeade8bc19ecdb0768572a859bd6c745b9f6a26efbeabe036ca297ffa9"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1bf1ce861f22a522fff6f1ca2ded10e3a439a5bec6bd242ae782103b4083f587",
+    "implementation-stage2-status.json": "5cc84d15a4dba188f14a08e5db9566d809c6de2548af1e9d87c5daa0a184ae51",
+    "plan.json": "712eba0c9ad486eacf09d4893a054f316f81c1d0e7e3c058c5560ef1dad9e2a4",
+    "review.csv": "6236c1efa7ffb83a11c70e2ee93b0717fd59889bd2ce03fdad3221f7c21c787a",
+    "review.md": "217466476adc2a470e336b73d9a485b0f8f5d5b1f26504222823f71dcd0ccf55"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/wyoming/opponents.csv",
+    "schools/wyoming/source-games.csv"
+  ],
+  "decision_universe_sha256": "500bc95a5bffd6b0354e8a2f3251cc7bdaf93fc4c08e6586686cfa9e9aa75baa",
+  "expected_blocker_keys": [
+    "montana-state-billings",
+    "msu-denver",
+    "northern-new-mexico",
+    "st-francis-brooklyn",
+    "uc-colorado-springs",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "field_level_proof_sha256": "fb28f9fff074801b66673e04e997ebc7dc83fe7a68e9ba54b6de43d6a2a91cc8",
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "de9fdd17ae72b10668b222d0e66e9d988b355d04547ca01dcadbbe4fc4637628",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "wyoming-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/wyoming-onboarding",
+  "target_predecessor_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
+  "target_sha": "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+  "target_tree_sha": "79b23165886c22ea2c682ca42d5496ed90d8d6f4",
+  "tracked_stage2_mutation": "NONE"
+}
