@@ -293,16 +293,61 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
         with self.assertRaisesRegex(Stop, "CONTROL_OR_PRESEAL_AUTHORITY_UNSAFE"):
             self.call()
 
-    def test_original_fill_reference_cannot_be_swapped(self):
-        self.parent["stage2_gate1_fill_checkpoint"] = {
-            "path": self.fill_path,
-            "sha256": "f" * 64,
-        }
-        # prepare() normally resets refs, so inject after preparing via
-        # an exact underlying record mismatch instead.
+    def test_changed_original_fill_target_tree_fails(self):
         self.fill["target_tree_sha"] = "f" * 40
         with self.assertRaisesRegex(Stop, "HISTORICAL_AUTHORITY_CHANGED"):
             self.call()
+
+    def test_verified_replacement_queues_seal_without_an_owner_relay(self):
+        spec = {
+            "kind": STAGE2_POST_GATE1_CONTINUATION_KIND,
+            "preseal_request_id": self.REPLACEMENT,
+            "seal_request_id": self.REPLACEMENT + "-seal",
+            "apply_request_id": self.REPLACEMENT + "-apply",
+        }
+        self.manifest["equivalence_sha256"] = "e" * 64
+        captured = {}
+        with (
+            patch.object(
+                resume, "_load_archived_request",
+                return_value=(self.parent, self.bytes(self.parent)),
+            ),
+            patch.object(
+                resume, "_checkpoint_manifest",
+                return_value=(
+                    self.manifest,
+                    {"path": "preseal-manifest.json", "sha256": "b" * 64},
+                ),
+            ),
+            patch.object(
+                resume, "_resume_post_gate1_from_verified_replacement",
+                return_value=spec,
+            ),
+            patch.object(
+                resume, "_verification_ref",
+                return_value={"path": "preseal-verify.json", "sha256": "c" * 64},
+            ),
+            patch.object(
+                resume, "_queue_request",
+                side_effect=lambda request, **kwargs: captured.setdefault(
+                    "request", request
+                ),
+            ),
+        ):
+            resume.queue_after_preseal(
+                live_main="d" * 40,
+                control_head="e" * 40,
+                state=self.state,
+                state_bytes=b"{}",
+                last=self.last,
+            )
+        request = captured["request"]
+        self.assertEqual(request["operation"], OP_STAGE2_GATE1_SEAL)
+        self.assertEqual(request["request_id"], spec["seal_request_id"])
+        self.assertEqual(request["phase_continuation"], spec)
+        self.assertEqual(request["owner_gate_1_approval_sha256"], "9" * 64)
+        self.assertEqual(request["equivalence_sha256"], "e" * 64)
+        validate_request(request)
 
 
 if __name__ == "__main__":
