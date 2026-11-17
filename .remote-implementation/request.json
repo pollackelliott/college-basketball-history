@@ -1,49 +1,48 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "ucf-expansion-release-production-proof-0001",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "school_key": "ucf",
-  "previous_control_state_commit": "685d3d959524c1f5a291a9f21e0b66951af2a5b1",
-  "previous_control_state_sha256": "33cdb3092da59d21a70c4521eb5cd7fb09dc58eded4f1a82192396cbd4b14ee9",
-  "expected_protected_main_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
-  "target_branch": "data/ucf-onboarding",
-  "target_sha": "fa527b5607152006c36c26b8625dc5d0d70e5b4d",
-  "pr_number": 636,
-  "merge_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "ef802a192e5499ad864d320cb4de63dbc8a93ad9d09dfcdac92fb339fc4c3099"
+  "request_id": "wyoming-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "wyoming",
+  "previous_control_state_commit": "71d75fe4496ab2f6a0683877ec5520dd47e4e412",
+  "previous_control_state_sha256": "5a5c488a67f2354bfc33d387b6fbe6384cd373f3f9586264d165c754d8ddbf39",
+  "expected_protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "research_checkpoint": {
+    "sha256": "2cd99fdbbc02d7f438b86559458534bace3d5431d01986600ba1c9ae317d6388",
+    "research_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+    "transport": {
+      "kind": "git_gzip_base64_parts",
+      "commit_sha": "950fff80aa7ceda25a254411881d971e53a3dd6e",
+      "path_prefix": ".remote-implementation/transports/wyoming/wyoming-stage1-0001/part-",
+      "part_count": 12
+    }
   },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/ucf/ucf-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "bfc6fd2941478f5ae9df3c5a719202ce8ede852efdfd0975192a14bb955b4d0d"
-  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
   "creation_provenance": {
-    "origin": "Same serialized UCF ALL_HISTORY_EXPANSION Implementation final phase — packet-bound post-merge Production proof",
-    "authorization": "Owner explicitly approved exact UCF PR #636 Preview ('Approved. Proceed'), fresh Gate 2 approval ucf-expansion-release-gate2-approval-0001 independently verified PASS, and packet fea78b11ce1e645d8336e054a08ce9349191e08034a0a91c5a82e2c159415528 required exact ordinary merge of PR #636 head fa527b5607152006c36c26b8625dc5d0d70e5b4d from approved main 3518f3da648417c914c9bf78b8ce1270f80a9999. GitHub connector merged exactly, producing a950b261648d13fd77c88e7bf997b7dd8555eae1, now exact protected main with verified parents 3518f3da648417c914c9bf78b8ce1270f80a9999 and fa527b5607152006c36c26b8625dc5d0d70e5b4d. This request grants read-only exact-merge Production deployment/public JSON proof and independent fresh verification only. No new historical authority, main mutation, recovery, maintenance or additional merge."
+    "origin": "ChatGPT Wyoming serialized original-school Implementation lane — owner-authorized Stage 1",
+    "authorization": "Owner explicitly authorized Wyoming Implementation Stage 1 only and then directed Continue under the same phase authority. This request performs the complete read-only current-main STAGE1_INVENTORY against the exact owner-designated immutable Wyoming Research Freeze. It may authenticate Research acceptance, census current-main venue/program/conference reconciliation, and preserve the durable Stage 1 checkpoint. It does not authorize Phase 0, Integration Freeze mutation, Stage 2, shared/global maintenance, historical changes, any owner gate, release, merge, Production, recovery, protected-main mutation, or another school."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "release": false,
-    "release_gate2_approval": false,
-    "release_presentation_refresh": false,
-    "release_preview_verify": false,
-    "release_production_proof": true,
-    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
-    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
     "venue_identity_maintenance": false
   }
 }
