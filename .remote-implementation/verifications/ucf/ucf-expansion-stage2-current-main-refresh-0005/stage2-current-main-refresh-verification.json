@@ -1,0 +1,42 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "f7ddad1cd186a7b6549b27ac2219c125a4ea81bf6ac0ffb219d73aa2a8b45b3e",
+    "tests/test_remote_implementation_stage2_census.py": "7f636cb04a464e042bb497ae54f28150aac9609dd42c974b27131a04dd0e50ff",
+    "tools/remote_implementation_stage2_census.py": "cca7953790fd698e2a5976d222ea1c3e8a65aeb52ee28c852b84983361a1976b"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_remote_implementation_stage2_census.py",
+    "tools/remote_implementation_stage2_census.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "243abce983ece5f0d9aa932b2370a8d467c1d581",
+  "observed_live_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
+  "package_member_sha256": {
+    "conferences.csv": "89b16a2bbdfc282ced1d178f21108eb22a1c0ed58af23153a685ebc019ef612f",
+    "notes.md": "7d0af4868506bd195908802ac4efbeb04087a4d99d4a6f839ca31f8defd86448",
+    "opponents.csv": "800f09a8cad92c9d2123a37cd95cad6d723a5b3fe4a72283afeb40faf5c15151",
+    "source-games.csv": "19a5addb5e1d9289f988621f87863c57072c5607c1e94c6fe7880a5825c56442",
+    "source-notes.md": "a5491ddb17ca2736c121f4f4e39f2110b3605bf42570ace3d5c6c71f882855ff",
+    "venues.csv": "01965ba29b19335d7a1ada157edac566a45ffe91c3d6b0205a557e5aee162f59"
+  },
+  "prepared_parents": [
+    "ae91412800ebf3a27d0ac7fa3d35c570bea6387c",
+    "0bb7ddf194147c28307491e5eb330a37f80d9dd0"
+  ],
+  "protected_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "ucf-expansion-stage2-current-main-refresh-0005",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "target_branch": "data/ucf-onboarding",
+  "target_predecessor_sha": "ae91412800ebf3a27d0ac7fa3d35c570bea6387c",
+  "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
+  "target_tree_sha": "19c29556f9c777c582ff34b06414cdc722c01075",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
