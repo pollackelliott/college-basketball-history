@@ -840,6 +840,29 @@ def _verify_refresh_then_display_target_authority(
     return result
 
 
+def _current_refresh_successor_targets_request(
+    request: dict[str, Any],
+    control_commit: str,
+    *,
+    source_repo: Path,
+) -> bool:
+    ref = request.get("stage2_current_main_refresh_successor")
+    if not isinstance(ref, dict):
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_REFERENCE_REQUIRED")
+    data = git_show_bytes(
+        control_commit,
+        str(ref.get("path") or ""),
+        cwd=source_repo,
+    )
+    if sha256_bytes(data) != ref.get("sha256"):
+        raise Stop("STAGE2_REFRESH_SUCCESSOR_HASH_MISMATCH")
+    successor = json.loads(data)
+    return (
+        str(successor.get("actual_published_target_sha") or "")
+        == str(request.get("target_sha") or "")
+    )
+
+
 def verify_phase0_authority(
     request: dict[str, Any],
     control_commit: str,
@@ -847,7 +870,14 @@ def verify_phase0_authority(
     source_repo: Path = ROOT,
 ) -> dict[str, Any]:
     if request.get("stage2_current_main_refresh_successor") is not None:
-        if request.get("stage2_opponent_display_successor") is not None:
+        if (
+            request.get("stage2_opponent_display_successor") is not None
+            and not _current_refresh_successor_targets_request(
+                request,
+                control_commit,
+                source_repo=source_repo,
+            )
+        ):
             return _verify_refresh_then_display_target_authority(
                 request,
                 control_commit,
