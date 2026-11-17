@@ -1301,7 +1301,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "a751d2a3393daa570cebc5bdcdb4fadb39a518773d81a41c6c07718394e99048",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1311,7 +1311,7 @@
     "production_deployment_id": 7860038517,
     "production_json_checked_count": 6,
     "protected_main_sha": "a950b261648d13fd77c88e7bf997b7dd8555eae1",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "ucf-expansion-release-production-proof-0001",
     "school_key": "ucf"
   },
