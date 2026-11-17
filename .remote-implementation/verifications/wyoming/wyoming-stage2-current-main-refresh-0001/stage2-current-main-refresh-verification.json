@@ -1,0 +1,42 @@
+{
+  "changed_file_sha256": {
+    "tests/test_program_history_scope.py": "600f9cd6435e31c3ea8bc08ff7b44f12d1434964a5204c2bc2acd6c8e8ca8b0d",
+    "tools/onboarding_plan.py": "452bbbee5663332e398876078726a66848b8ab0921499e8dd69134fc91fe844b",
+    "tools/program_history.py": "d1b6d69e15a994dcefb628d7078e100f792c671db35e32bd5efef504b6c860da"
+  },
+  "changed_paths": [
+    "tests/test_program_history_scope.py",
+    "tools/onboarding_plan.py",
+    "tools/program_history.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "observed_live_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "package_member_sha256": {
+    "conferences.csv": "30cbe0c542c701440ce3f60e0c3900805ba4fdd503d50846000e4dff4caa9d52",
+    "notes.md": "ed4d8846bcb92feb4e5e59d0ff96e52fb054f774f40fe6c6f875a36395e34629",
+    "opponents.csv": "f34ef65c98deb784a01081c6d9ed5920205ffc90a461b8860488f73380dd9da7",
+    "source-games.csv": "f6a75f84a2c13e2c781647e4fed27463f9677f4830b456ac2b02bf8aad00f2d1",
+    "source-notes.md": "439f233f29a29cbc02419e432061a1c379da109bd7ab316a034b5b3470843614",
+    "venues.csv": "def0f8cffd279534f3f983b6b8a570d2c5324e5e2b4cb1cf0142ddf4c000b679"
+  },
+  "prepared_parents": [
+    "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+    "33af595fcae2a17664379638f89ce64c2e63be08"
+  ],
+  "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "wyoming-stage2-current-main-refresh-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "target_branch": "data/wyoming-onboarding",
+  "target_predecessor_sha": "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+  "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "target_tree_sha": "820fca044427469e694c37a8054237d990113845",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}

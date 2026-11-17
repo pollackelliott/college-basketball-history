@@ -1309,11 +1309,11 @@
   "current_sequence": 630,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "wyoming-stage2-current-main-refresh-0001",
     "school_key": "wyoming",
     "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
