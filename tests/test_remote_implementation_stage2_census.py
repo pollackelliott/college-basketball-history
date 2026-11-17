@@ -805,6 +805,11 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         with (
             patch.object(
                 stage2_runtime,
+                "_current_refresh_successor_targets_request",
+                return_value=False,
+            ),
+            patch.object(
+                stage2_runtime,
                 "git_show_bytes",
                 return_value=display_bytes,
             ),
@@ -857,6 +862,49 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             display_successor["protected_main_sha"],
         )
 
+    def test_latest_refresh_target_precedes_older_display_successor(self):
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": TARGET_BRANCH,
+            "target_sha": "b" * 40,
+            "stage2_current_main_refresh_successor": {
+                "path": ".remote-implementation/successors/example/latest-refresh.json",
+                "sha256": "c" * 64,
+            },
+            "stage2_opponent_display_successor": {
+                "path": ".remote-implementation/successors/example/display.json",
+                "sha256": "d" * 64,
+            },
+        }
+        expected = {
+            "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+        }
+        with (
+            patch.object(
+                stage2_runtime,
+                "_current_refresh_successor_targets_request",
+                return_value=True,
+            ),
+            patch.object(
+                stage2_runtime,
+                "_verify_current_main_refresh_target_authority",
+                return_value=expected,
+            ) as verify_refresh,
+            patch.object(
+                stage2_runtime,
+                "_verify_refresh_then_display_target_authority",
+            ) as verify_display_chain,
+        ):
+            authority = verify_phase0_authority(
+                request,
+                "0" * 40,
+                source_repo=Path("/tmp/not-used"),
+            )
+
+        self.assertIs(authority, expected)
+        verify_refresh.assert_called_once()
+        verify_display_chain.assert_not_called()
+
     def test_display_successor_after_refresh_rejects_bad_display_hash(self):
         request = {
             "school_key": SCHOOL,
@@ -873,6 +921,11 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         }
         display_bytes = b'{"expected_target_predecessor_sha":"a"}\n'
         with (
+            patch.object(
+                stage2_runtime,
+                "_current_refresh_successor_targets_request",
+                return_value=False,
+            ),
             patch.object(
                 stage2_runtime,
                 "git_show_bytes",
