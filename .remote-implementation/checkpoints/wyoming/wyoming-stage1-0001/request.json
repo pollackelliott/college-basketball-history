@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "wyoming-stage1-0001",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "wyoming",
+  "previous_control_state_commit": "71d75fe4496ab2f6a0683877ec5520dd47e4e412",
+  "previous_control_state_sha256": "5a5c488a67f2354bfc33d387b6fbe6384cd373f3f9586264d165c754d8ddbf39",
+  "expected_protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "research_checkpoint": {
+    "sha256": "2cd99fdbbc02d7f438b86559458534bace3d5431d01986600ba1c9ae317d6388",
+    "research_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+    "transport": {
+      "kind": "git_gzip_base64_parts",
+      "commit_sha": "950fff80aa7ceda25a254411881d971e53a3dd6e",
+      "path_prefix": ".remote-implementation/transports/wyoming/wyoming-stage1-0001/part-",
+      "part_count": 12
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT Wyoming serialized original-school Implementation lane — owner-authorized Stage 1",
+    "authorization": "Owner explicitly authorized Wyoming Implementation Stage 1 only and then directed Continue under the same phase authority. This request performs the complete read-only current-main STAGE1_INVENTORY against the exact owner-designated immutable Wyoming Research Freeze. It may authenticate Research acceptance, census current-main venue/program/conference reconciliation, and preserve the durable Stage 1 checkpoint. It does not authorize Phase 0, Integration Freeze mutation, Stage 2, shared/global maintenance, historical changes, any owner gate, release, merge, Production, recovery, protected-main mutation, or another school."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
