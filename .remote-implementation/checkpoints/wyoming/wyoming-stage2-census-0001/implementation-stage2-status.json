@@ -1,0 +1,47 @@
+{
+  "blockers": [
+    "historical opponent display conflict: montana-state-billings: ['MSU Billings', 'Montana State Billings', 'Montana State-Billings']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: msu-denver: ['MSU Denver', 'Metropolitan State University of Denver']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: northern-new-mexico: ['Northern New Mexico', 'Northern New Mexico College']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: st-francis-brooklyn: ['St. Francis (NY)', 'St. Francis Brooklyn']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: uc-colorado-springs: ['UC Colorado Springs', 'University of Colorado Colorado Springs']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: united-states-international: ['U.S. International', 'United States International University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: washington-st-louis: ['Washington (Mo.)', 'Washington (St. Louis)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/wyoming-68546b283897",
+  "capability_census": {
+    "path": ".onboarding/wyoming/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
+  "integration_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "integration_semantic_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "preflight": {
+    "blocker_count": 7,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/wyoming/plan.json",
+    "review_path": ".onboarding/wyoming/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "a13229ce64a489b39aaada66f0d8bf38db6868db",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
