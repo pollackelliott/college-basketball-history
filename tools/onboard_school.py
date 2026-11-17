@@ -1798,11 +1798,31 @@ def _validated_expansion_freeze_bytes(source: Path, school_key: str) -> bytes | 
             not isinstance(digest, str)
             or not re.fullmatch(r"[0-9a-f]{64}", digest)
             or not (source / "schools" / school_key / name).is_file()
-            or file_sha(source / "schools" / school_key / name) != digest
             for name, digest in candidate_hashes.items()
         )
     ):
         raise WorkflowError("All-History expansion Integration Freeze package mismatch")
+
+    current_matches_freeze = all(
+        file_sha(source / "schools" / school_key / name) == digest
+        for name, digest in candidate_hashes.items()
+    )
+    if not current_matches_freeze:
+        # The original six-file Freeze is immutable. A guarded, committed
+        # Stage-2 historical opponent-display normalization is a later
+        # representation-only successor, not a new Integration Freeze.
+        # Prove its exact Git ancestry, field-level delta and project identity
+        # before transporting the original frozen evidence to a rehearsal.
+        from all_history_expansion_display_successor_guard import (
+            permits_authenticated_display_successor,
+        )
+
+        if not permits_authenticated_display_successor(
+            source, school_key, candidate_hashes,
+        ):
+            raise WorkflowError(
+                "All-History expansion Integration Freeze package mismatch"
+            )
 
     guard = manifest.get("source_game_semantic_guard")
     if not isinstance(guard, dict) or not isinstance(guard.get("snapshot"), dict):

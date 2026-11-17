@@ -649,6 +649,21 @@ The request binds:
 
 The recommendation map is immutable request transport. The runner verifies its bytes/hash and never derives, rewrites, completes, or interprets recommendation actions. The permanent `validate_decision_map` path inside `implementation_stage2.py` remains the only map schema/completeness/action authority.
 
+For All-History expansion successors, the inner disposable rehearsal also transports
+the **original immutable Integration Freeze**, not a manufactured replacement.
+A productionized opponent-display normalization may legitimately change the
+committed `opponents.csv` and `source-games.csv` display-name columns after
+the original Freeze. The nested `onboard_school.copy_repository` guard must
+independently prove that exact committed, scoped representation successor:
+frozen six-file predecessor hashes, bounded first-parent/disjoint-merge
+ancestry, clean tracked package, no other committed changed paths, unchanged
+non-display columns, canonical names supported by established project
+opponent-display authority, and source-name synchronization only for changed
+opponent keys. Any uncommitted, historical/semantic, unsupported-name,
+source-only, or broader package mutation continues to fail closed. This is
+a package-transport compatibility proof and does **not** change the original
+Freeze or grant new historical, Gate 1, or publication authority.
+
 The runner authenticates the request-bound Stage 2 authority, restores only the exact ignored `.onboarding/<school>/integration-freeze.json`, creates an exact worktree at the request-bound onboarding SHA, and invokes current production runtime tooling conceptually as:
 
 ```bash
