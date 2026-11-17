@@ -1,0 +1,102 @@
+{
+  "actual_published_target_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "changed_file_sha256": {
+    "schools/ucf/opponents.csv": "800f09a8cad92c9d2123a37cd95cad6d723a5b3fe4a72283afeb40faf5c15151",
+    "schools/ucf/source-games.csv": "19a5addb5e1d9289f988621f87863c57072c5607c1e94c6fe7880a5825c56442"
+  },
+  "changed_paths": [
+    "schools/ucf/opponents.csv",
+    "schools/ucf/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "ashland",
+    "california-pennsylvania",
+    "francis-marion",
+    "missouri-baptist",
+    "mit",
+    "monmouth-college-illinois",
+    "new-york-institute-of-technology",
+    "tennessee-wesleyan",
+    "upsala-college",
+    "william-jewell"
+  ],
+  "expected_target_predecessor_sha": "518ae6c81a797d67585f2382a139942f539ad7e7",
+  "field_level_proof_sha256": "70c0afc005aa6f75d83e302dc6b9f4839fdeb95d86811e0bd8c4405eb989158b",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "2b136ae7c02312622be151794d72a462a8fe9d77",
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "1d0376ac7d5a43b0617ed2cdc4c0f4ca28ef17cc7b9891503cb2206751c1141d",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+      "implementation-stage2-status.json": "27e61704d784e7e5993595b0bb3aae6c8058aae33f746ceec23fe698a7069b17",
+      "plan.json": "507b3dcd6da55db049e66976314b1e49b6d9b72eb40d630f24502b639e8e9cd5",
+      "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+      "review.md": "10efa1039d8f2c971060def3f6d58cfe2f075cf467b259e0b7eafbd122c7d68a"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+      "implementation-stage2-status.json": "aaa387ecba9045454056cdc884e8e467cebf864adeb75ce5a646bb1b5c1e8e23",
+      "plan.json": "0f4511bbca3bcb450c30781aa24273ee945d87c14a9815760572714f25c99930",
+      "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+      "review.md": "bb66c9ba9523a8a01aff4adffa1b3f354e5b17806e7f76cfd12638f496109ba1"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [],
+    "command_exit_code": 0,
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+      "after_status": "",
+      "after_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+      "before_head_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+      "before_status": "",
+      "before_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "prepared_parent_sha": "518ae6c81a797d67585f2382a139942f539ad7e7",
+  "prepared_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+  "protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "ucf-expansion-stage2-opponent-display-normalize-0002",
+  "request_sha256": "6cd740d804f63b7ff6e4fe730b103008a9257b10ecd7229acd405d85eca6cd6a",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_drift_after": {
+    "baseline_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "integration_base_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+    "school_key": "ucf",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+    "integration_base_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
+    "school_key": "ucf",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "source_game_normalized_name_row_count": 12,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "52d8b030eb094f6cf4f7930c8cd8e34fde913be6fe75770cd35cf8469a8e8d37",
+  "target_branch": "data/ucf-onboarding",
+  "writeahead_commit": "5d4ffc758f2393182e91acb3cbf25f5e34d6b4eb",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/ucf/ucf-expansion-stage2-opponent-display-normalize-0002/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "c7ab20aa861053cb382e6c036165df84185d1b89216021e33cfabbbf73fc16b4"
+}
