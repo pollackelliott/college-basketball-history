@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "ucf-expansion-stage2-current-main-refresh-0005",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "ucf",
+  "previous_control_state_commit": "6c0fb95cfb46162a115cedc88f8822bf6f233b6c",
+  "previous_control_state_sha256": "bfe099bce2bedbee0ee44299eb71bb63b6ac8127807d977a2f7192e7795b3e9f",
+  "expected_protected_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "ae91412800ebf3a27d0ac7fa3d35c570bea6387c",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "3fc6f552ef55a5e84c74b9e5e020ebe559cdf7700ab9d1c8ee8c472c2644b7b3"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "sha256": "f9e38cbb1a0b5cec68a5c25b62bcdf9fde0027bfb3b84b285c4bff0e5ef98b84"
+  },
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized UCF ALL_HISTORY_EXPANSION Stage 2 persists. Refresh 0004 fresh-verified against protected main 243abce983ece5f0d9aa932b2370a8d467c1d581 and produced target ae91412800ebf3a27d0ac7fa3d35c570bea6387c with unchanged Integration Freeze, semantic snapshot, historical decision universe, package hashes, and tracked Stage 2 mutation NONE. Generic tooling PR #634 then merged as protected main 0bb7ddf194147c28307491e5eb330a37f80d9dd0 after exact live-census candidate rehearsal and the full 1,898-test repository validation. Exact compare uses merge base 243abce983ece5f0d9aa932b2370a8d467c1d581: UCF target differs on eight target paths; protected main differs only on .github/workflows/stage2-candidate-runtime-rehearsal.yml, tests/test_remote_implementation_stage2_census.py, and tools/remote_implementation_stage2_census.py; overlap is empty and protected main has no schools/ucf change. Preserve all historical evidence and prior successor authority. One guarded disjoint current-main refresh only; no historical selection, shared-data authority decision, or owner-gate bypass."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "ucf-expansion-stage2-census-0005",
+    "proposal_request_id": "ucf-expansion-stage2-proposal-0004",
+    "expected_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/ucf-expansion-stage2-current-main-refresh-0005/recommendation-map.json",
+      "sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d"
+    }
+  },
+  "creation_provenance": {
+    "origin": "UCF ALL_HISTORY_EXPANSION serialized Implementation Stage 2 - post-PR #634 current-main refresh",
+    "authorization": "The repository-owned continuation from refresh 0004 queued census 0004, which failed pre-acceptance before mutation. PR #634 repaired the generic authority selection and added an exact live-census-after-refresh candidate rehearsal. That PR passed the exact UCF live-census replay with unchanged decision universe and tracked mutation NONE, passed the full 1,898-test suite, and merged to protected main. Because census 0004 is bound to the prior protected-main SHA, this request performs only the required guarded refresh to exact current main and schedules fresh census/proposal IDs. Authorize refresh -> fresh verify -> census -> fresh verify -> exact-map proposal -> fresh verify, stopping automatically on any changed universe, blocker, moved authority, or at OWNER_GATE_1_READY. No Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, new research, or second Implementation lane."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-current-main-refresh-0004/successor-manifest.json",
+    "sha256": "93a952dac2f3cd2f8577fa87712094b8a0726737d33250a3260fcef8c6f3a3d8"
+  }
+}
