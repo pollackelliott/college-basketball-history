@@ -158,6 +158,98 @@ def _freeze_from_writeahead(
     return freeze_bytes, writeahead
 
 
+def _phase0_venue_reconciliation_bytes(
+    *,
+    control_commit: str,
+    stage2_authority: dict[str, Any],
+    request: dict[str, Any],
+    freeze_bytes: bytes,
+    source_repo: Path,
+) -> bytes | None:
+    """Recover the original exact Phase-0 venue authority through durable ancestry."""
+    try:
+        freeze = json.loads(freeze_bytes)
+    except (TypeError, ValueError) as exc:
+        raise Stop("STAGE2_PROPOSAL_FREEZE_JSON_INVALID") from exc
+    reconciliation = freeze.get("venue_reconciliation")
+    expected = str(freeze.get("venue_reconciliation_sha256") or "")
+    if reconciliation is None:
+        if expected:
+            raise Stop("STAGE2_PROPOSAL_UNEXPECTED_VENUE_RECONCILIATION_HASH")
+        return None
+    if len(expected) != 64 or any(c not in "0123456789abcdef" for c in expected):
+        raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_HASH_INVALID")
+
+    authority_kind = stage2_authority.get("kind")
+    if authority_kind == "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT":
+        census = stage2_authority
+    elif authority_kind == "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR":
+        census_path = str(stage2_authority.get("stage2_census_checkpoint_path") or "")
+        census_sha = str(stage2_authority.get("stage2_census_checkpoint_sha256") or "")
+        if not census_path or not census_sha:
+            raise Stop("STAGE2_PROPOSAL_DISPLAY_CENSUS_REFERENCE_MISSING")
+        census_bytes = git_show_bytes(control_commit, census_path, cwd=source_repo)
+        if sha256_bytes(census_bytes) != census_sha:
+            raise Stop("STAGE2_PROPOSAL_DISPLAY_CENSUS_HASH_MISMATCH")
+        census = json.loads(census_bytes)
+        if (
+            census.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT"
+            or census.get("school_key") != request["school_key"]
+            or census.get("target_branch") != request["target_branch"]
+            or census.get("integration_freeze_sha256")
+            != request["integration_freeze_sha256"]
+        ):
+            raise Stop("STAGE2_PROPOSAL_DISPLAY_CENSUS_AUTHORITY_MISMATCH")
+    else:
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_AUTHORITY_UNAVAILABLE")
+
+    phase0_path = str(census.get("phase0_successor_path") or "")
+    phase0_sha = str(census.get("phase0_successor_sha256") or "")
+    if not phase0_path or not phase0_sha:
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_SUCCESSOR_REFERENCE_MISSING")
+    phase0_bytes = git_show_bytes(control_commit, phase0_path, cwd=source_repo)
+    if sha256_bytes(phase0_bytes) != phase0_sha:
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_SUCCESSOR_HASH_MISMATCH")
+    phase0 = json.loads(phase0_bytes)
+    if (
+        phase0.get("kind") != "REMOTE_IMPLEMENTATION_SUCCESSOR"
+        or phase0.get("operation") != "EXPANSION_PHASE0"
+        or phase0.get("school_key") != request["school_key"]
+        or phase0.get("target_branch") != request["target_branch"]
+        or phase0.get("integration_freeze_sha256")
+        != request["integration_freeze_sha256"]
+    ):
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_SUCCESSOR_MISMATCH")
+
+    writeahead_path = str(phase0.get("writeahead_manifest_path") or "")
+    writeahead_sha = str(phase0.get("writeahead_manifest_sha256") or "")
+    if not writeahead_path or not writeahead_sha:
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_WRITEAHEAD_REFERENCE_MISSING")
+    writeahead_bytes = git_show_bytes(
+        control_commit, writeahead_path, cwd=source_repo
+    )
+    if sha256_bytes(writeahead_bytes) != writeahead_sha:
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_WRITEAHEAD_HASH_MISMATCH")
+    writeahead = json.loads(writeahead_bytes)
+    if (
+        writeahead.get("kind") != "REMOTE_IMPLEMENTATION_WRITEAHEAD"
+        or writeahead.get("operation") != "EXPANSION_PHASE0"
+        or writeahead.get("school_key") != request["school_key"]
+        or writeahead.get("target_branch") != request["target_branch"]
+        or writeahead.get("integration_freeze_sha256")
+        != request["integration_freeze_sha256"]
+    ):
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_WRITEAHEAD_MISMATCH")
+    if (writeahead.get("sidecars") or {}).get("venue-reconciliation.json") != expected:
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_SIDECAR_BINDING_MISMATCH")
+    sidecar_path = (
+        Path(writeahead_path).parent / "venue-reconciliation.json"
+    ).as_posix()
+    sidecar_bytes = git_show_bytes(control_commit, sidecar_path, cwd=source_repo)
+    if sha256_bytes(sidecar_bytes) != expected:
+        raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_SIDECAR_HASH_MISMATCH")
+    return sidecar_bytes
+
 
 def _freeze_from_correction_census(
     control_commit: str,
@@ -294,6 +386,17 @@ def verify_stage2_proposal_authority(
             request=request,
             source_repo=source_repo,
         )
+    venue_reconciliation_bytes = (
+        None
+        if correction_freeze_bytes is not None
+        else _phase0_venue_reconciliation_bytes(
+            control_commit=control_commit,
+            stage2_authority=authority,
+            request=request,
+            freeze_bytes=freeze_bytes,
+            source_repo=source_repo,
+        )
+    )
     return {
         "authority": authority,
         "authority_bytes": authority_bytes,
@@ -301,6 +404,7 @@ def verify_stage2_proposal_authority(
         "target_tree_sha": target_tree_sha,
         "freeze_bytes": freeze_bytes,
         "writeahead": writeahead,
+        "venue_reconciliation_bytes": venue_reconciliation_bytes,
         "historical_game_type_challenge": authority_challenge,
     }
 
@@ -356,10 +460,25 @@ def run_stage2_proposal_tool(
     *,
     tool_repo: Path | None = None,
     historical_game_type_challenge_path: Path | None = None,
+    venue_reconciliation_bytes: bytes | None = None,
 ) -> dict[str, Any]:
     """Run the unchanged permanent Stage-2 coordinator with one exact map payload."""
 
     restore_integration_freeze(repo, school_key, freeze_bytes)
+    freeze = json.loads(freeze_bytes)
+    reconciliation = freeze.get("venue_reconciliation")
+    reconciliation_sha = str(freeze.get("venue_reconciliation_sha256") or "")
+    if reconciliation is None:
+        if venue_reconciliation_bytes is not None:
+            raise Stop("STAGE2_PROPOSAL_UNEXPECTED_VENUE_RECONCILIATION_BYTES")
+    else:
+        if venue_reconciliation_bytes is None:
+            raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_BYTES_MISSING")
+        if sha256_bytes(venue_reconciliation_bytes) != reconciliation_sha:
+            raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_BYTES_MISMATCH")
+        sidecar = repo / ".onboarding" / school_key / "venue-reconciliation.json"
+        sidecar.parent.mkdir(parents=True, exist_ok=True)
+        sidecar.write_bytes(venue_reconciliation_bytes)
     before = tracked_worktree_state(repo)
     if before["status"]:
         raise Stop("STAGE2_PROPOSAL_TRACKED_STATE_DIRTY_BEFORE_RUN")

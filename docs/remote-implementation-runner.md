@@ -259,7 +259,7 @@ Run `.github/workflows/stage2-candidate-runtime-rehearsal.yml` against:
 - the exact remote-control commit containing the blocked proposal checkpoint; and
 - the exact blocked proposal checkpoint-manifest path.
 
-The workflow executes `tools/stage2_candidate_runtime_rehearsal.py`. It authenticates the archived request/checkpoint/map, recreates the exact target onboarding worktree and Integration Freeze, and invokes the candidate runtime's unchanged permanent `implementation_stage2.py --map` against that data.
+The workflow executes `tools/stage2_candidate_runtime_rehearsal.py`. It authenticates the archived request/checkpoint/map, recreates the exact target onboarding worktree and Integration Freeze, and invokes the candidate runtime's unchanged permanent `implementation_stage2.py --map` against that data. When the immutable expansion Freeze carries venue-reconciliation authority, proposal rehearsal must also recover the original exact `venue-reconciliation.json` bytes through the authenticated Phase 0 successor/write-ahead chain, verify the sidecar hash against the Freeze and write-ahead, and transport only those exact bytes into nested disposable rehearsals. A later Phase 0 venue representation may differ from frozen `venues.csv` only when the frozen reconciliation census mechanically reverses that exact committed transformation to the original frozen member hash; arbitrary venue drift remains forbidden.
 
 The candidate rehearsal is read-only. It rejects any candidate diff outside generic tooling/tests/docs/workflow paths, proves tracked basketball mutation remains NONE, and classifies the result as:
 

@@ -1819,7 +1819,11 @@ def _validated_expansion_freeze_bytes(source: Path, school_key: str) -> bytes | 
 
         diagnostics: list[str] = []
         if not permits_authenticated_display_successor(
-            source, school_key, candidate_hashes, diagnostics=diagnostics,
+            source,
+            school_key,
+            candidate_hashes,
+            integration_freeze=manifest,
+            diagnostics=diagnostics,
         ):
             raise WorkflowError(
                 "All-History expansion Integration Freeze package mismatch"
@@ -1890,6 +1894,23 @@ def copy_repository(
         else None
     )
     runtime_freeze = correction_freeze or split_authority_freeze or expansion_freeze
+    runtime_expansion_venue_reconciliation = None
+    if expansion_freeze is not None:
+        expansion_manifest = json.loads(expansion_freeze)
+        if expansion_manifest.get("venue_reconciliation") is not None:
+            expected = str(
+                expansion_manifest.get("venue_reconciliation_sha256") or ""
+            )
+            sidecar = source / ".onboarding" / school_key / "venue-reconciliation.json"
+            if (
+                not re.fullmatch(r"[0-9a-f]{64}", expected)
+                or not sidecar.is_file()
+                or file_sha(sidecar) != expected
+            ):
+                raise WorkflowError(
+                    "All-History expansion venue reconciliation changed during transport"
+                )
+            runtime_expansion_venue_reconciliation = sidecar.read_bytes()
 
     def ignore(_directory: str, names: list[str]) -> set[str]:
         return {
@@ -1948,6 +1969,10 @@ def copy_repository(
         target = destination / ".onboarding" / school_key / "integration-freeze.json"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(runtime_freeze)
+    if runtime_expansion_venue_reconciliation is not None:
+        target = destination / ".onboarding" / school_key / "venue-reconciliation.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(runtime_expansion_venue_reconciliation)
 
 
 def copy_validated_changes(

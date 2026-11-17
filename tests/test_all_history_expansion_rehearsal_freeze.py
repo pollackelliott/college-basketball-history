@@ -11,6 +11,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import onboard_school
@@ -214,6 +215,19 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
         programs.write_text(
             "program_key\nexample\npublished-example\n", encoding="utf-8",
         )
+        (school / "venues.csv").write_text(
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            "example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,Inherited note\n"
+            "example,provisional-reuse,,Reuse Gym,Example,EX,Reuse note\n"
+            "example,new-gym,,New Gym,Example,EX,New note\n",
+            encoding="utf-8",
+        )
+        (programs.parent / "venues.csv").write_text(
+            "venue_id,venue_key,display_name,city,state\n"
+            "VEN-000001,inherited-arena,Inherited Arena,Example,EX\n"
+            "VEN-000010,reuse-gym,Reuse Gym,Example,EX\n",
+            encoding="utf-8",
+        )
         manifest = json.loads(authority.read_text(encoding="utf-8"))
         hashes = {name: onboard_school.file_sha(school / name)
                   for name in PACKAGE_NAMES}
@@ -237,12 +251,13 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
         school = src / "schools/example"
         opp = school / "opponents.csv"
         games = school / "source-games.csv"
-        opp.write_text(
-            opp.read_text(encoding="utf-8").replace(
-                "Old College", "Invented College" if variant == "invented" else
-                "Preferred College"
-            ), encoding="utf-8",
-        )
+        if variant != "source_only":
+            opp.write_text(
+                opp.read_text(encoding="utf-8").replace(
+                    "Old College", "Invented College" if variant == "invented" else
+                    "Preferred College"
+                ), encoding="utf-8",
+            )
         games.write_text(
             games.read_text(encoding="utf-8")
             .replace("Old College", "Preferred College")
@@ -282,7 +297,7 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
             )
 
     def test_unapproved_or_non_display_successors_fail_closed(self):
-        for variant in ("invented", "raw_tamper", "extra_tracked_path"):
+        for variant in ("invented", "raw_tamper", "extra_tracked_path", "source_only"):
             with self.subTest(variant=variant), tempfile.TemporaryDirectory() as temp:
                 src, dst = Path(temp) / "source", Path(temp) / "copy"
                 self.make_git_fixture(src)
@@ -322,6 +337,188 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
             self.assertTrue(
                 (dst / ".onboarding/example/integration-freeze.json").is_file()
             )
+
+
+    def make_phase0_venue_successor(
+        self, src: Path, *, variant: str = "valid"
+    ) -> bytes:
+        self.make_git_fixture(src)
+        baseline = self.git(src, "rev-parse", "HEAD")
+        authority = src / ".onboarding/example/integration-freeze.json"
+        manifest = json.loads(authority.read_text(encoding="utf-8"))
+        manifest["protected_main_sha"] = baseline
+        manifest["integration_base_sha"] = baseline
+
+        sidecar = (
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "school_key": "example",
+                    "owner_approval_basis": "synthetic authenticated Phase 0 fixture",
+                    "expected_research_zip_sha256": "1" * 64,
+                    "expected_venues_sha256": manifest["candidate_member_sha256"]["venues.csv"],
+                    "mappings": [],
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "\n"
+        ).encode("utf-8")
+        sidecar_sha = hashlib.sha256(sidecar).hexdigest()
+        sidecar_path = authority.parent / "venue-reconciliation.json"
+        sidecar_path.write_bytes(sidecar)
+        manifest["venue_reconciliation"] = {
+            "schema_version": 1,
+            "spec_sha256": sidecar_sha,
+        }
+        manifest["venue_reconciliation_sha256"] = sidecar_sha
+        manifest["venue_reconciliation_census"] = {
+            "schema_version": 1,
+            "blocker_count": 0,
+            "venue_count": 2,
+            "rows": [
+                {
+                    "classification": "SAFE_REPRESENTATION_REUSE",
+                    "venue_key": "provisional-reuse",
+                    "target_venue_key": "reuse-gym",
+                    "target_venue_id": "VEN-000010",
+                    "canonical_name": "Reuse Gym",
+                    "city": "Example",
+                    "state": "EX",
+                },
+                {
+                    "classification": "NEW_GLOBAL_IDENTITY",
+                    "venue_key": "new-gym",
+                    "target_venue_key": "new-gym",
+                    "target_venue_id": "",
+                    "canonical_name": "New Gym",
+                    "city": "Example",
+                    "state": "EX",
+                },
+            ],
+        }
+        manifest["manifest_self_fingerprint_sha256"] = fingerprint(manifest)
+        authority.write_text(json.dumps(manifest, sort_keys=True) + "\n", encoding="utf-8")
+
+        school_venues = src / "schools/example/venues.csv"
+        reuse_key = "reuse-gym-wrong" if variant == "wrong_key" else "reuse-gym"
+        reuse_id = "VEN-000999" if variant == "wrong_id" else "VEN-000010"
+        reuse_suffix = (
+            " Integration rebase resolved final global venue ID VEN-000010"
+            if variant == "wrong_suffix"
+            else " Integration rebase resolved final global venue ID VEN-000010."
+        )
+        inherited_note = "Inherited changed" if variant == "inherited_tamper" else "Inherited note"
+        phase0 = (
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            f"example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,{inherited_note}\n"
+            f"example,{reuse_key},{reuse_id},Reuse Gym,Example,EX,Reuse note{reuse_suffix}\n"
+            "example,new-gym,VEN-000011,New Gym,Example,EX,"
+            "New note Integration rebase resolved final global venue ID VEN-000011.\n"
+        )
+        if variant == "extra_row":
+            phase0 += (
+                "example,extra-gym,VEN-000012,Extra Gym,Example,EX,"
+                "Uncensused venue representation\n"
+            )
+        school_venues.write_text(phase0, encoding="utf-8")
+        registry = src / "data/reference/venues.csv"
+        registry.write_text(
+            registry.read_text(encoding="utf-8")
+            + "VEN-000011,new-gym,New Gym,Example,EX\n"
+            + ("VEN-000012,extra-gym,Extra Gym,Example,EX\n" if variant == "extra_row" else ""),
+            encoding="utf-8",
+        )
+        self.git(src, "add", "schools/example/venues.csv", "data/reference/venues.csv")
+        self.git(src, "commit", "-m", "Stage example all-history expansion Phase 0")
+        self.commit_display(src)
+        return sidecar
+
+    def test_phase0_venue_rebase_then_display_successor_survives_nested_rehearsal(self):
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "source", Path(temp) / "copy"
+            sidecar = self.make_phase0_venue_successor(src)
+            with mock.patch.object(
+                onboard_school,
+                "frozen_venue_split_freeze_bytes",
+                side_effect=[None, None],
+            ):
+                onboard_school.copy_repository(src, dst, school_key="example")
+            self.assertEqual(
+                (dst / ".onboarding/example/venue-reconciliation.json").read_bytes(),
+                sidecar,
+            )
+            manifest = json.loads(
+                (src / ".onboarding/example/integration-freeze.json").read_text()
+            )
+            self.assertEqual(
+                manifest["candidate_member_sha256"]["venues.csv"],
+                hashlib.sha256(
+                    (
+                        "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+                        "example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,Inherited note\n"
+                        "example,provisional-reuse,,Reuse Gym,Example,EX,Reuse note\n"
+                        "example,new-gym,,New Gym,Example,EX,New note\n"
+                    ).encode("utf-8")
+                ).hexdigest(),
+            )
+
+    def test_phase0_venue_rebase_rejects_non_census_or_inexact_mutations(self):
+        for variant in (
+            "extra_row", "inherited_tamper", "wrong_id", "wrong_key", "wrong_suffix",
+        ):
+            with self.subTest(variant=variant), tempfile.TemporaryDirectory() as temp:
+                src, dst = Path(temp) / "source", Path(temp) / "copy"
+                self.make_phase0_venue_successor(src, variant=variant)
+                with mock.patch.object(
+                    onboard_school,
+                    "frozen_venue_split_freeze_bytes",
+                    side_effect=[None, None],
+                ):
+                    with self.assertRaisesRegex(
+                        WorkflowError, "Integration Freeze package mismatch"
+                    ):
+                        onboard_school.copy_repository(src, dst, school_key="example")
+                self.assertFalse(dst.exists())
+
+    def test_phase0_venue_authority_sidecar_missing_or_forged_fails_closed(self):
+        for variant in ("missing", "forged"):
+            with self.subTest(variant=variant), tempfile.TemporaryDirectory() as temp:
+                src, dst = Path(temp) / "source", Path(temp) / "copy"
+                self.make_phase0_venue_successor(src)
+                sidecar = src / ".onboarding/example/venue-reconciliation.json"
+                if variant == "missing":
+                    sidecar.unlink()
+                else:
+                    sidecar.write_text('{"forged":true}\n', encoding="utf-8")
+                with mock.patch.object(
+                    onboard_school,
+                    "frozen_venue_split_freeze_bytes",
+                    return_value=None,
+                ):
+                    with self.assertRaises(WorkflowError):
+                        onboard_school.copy_repository(src, dst, school_key="example")
+                self.assertFalse(dst.exists())
+
+    def test_phase0_venue_rebase_requires_exact_integration_base_ancestry(self):
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "source", Path(temp) / "copy"
+            self.make_phase0_venue_successor(src)
+            authority = src / ".onboarding/example/integration-freeze.json"
+            manifest = json.loads(authority.read_text())
+            manifest["integration_base_sha"] = "f" * 40
+            manifest["manifest_self_fingerprint_sha256"] = fingerprint(manifest)
+            authority.write_text(json.dumps(manifest, sort_keys=True) + "\n")
+            with mock.patch.object(
+                onboard_school,
+                "frozen_venue_split_freeze_bytes",
+                side_effect=[None, None],
+            ):
+                with self.assertRaisesRegex(
+                    WorkflowError, "Integration Freeze package mismatch"
+                ):
+                    onboard_school.copy_repository(src, dst, school_key="example")
+            self.assertFalse(dst.exists())
 
 
 if __name__ == "__main__":

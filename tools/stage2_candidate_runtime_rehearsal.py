@@ -345,6 +345,7 @@ def run_candidate_rehearsal(
             diag,
             tool_repo=candidate_runtime,
             historical_game_type_challenge_path=challenge_path,
+            venue_reconciliation_bytes=authority.get("venue_reconciliation_bytes"),
         )
         classification = classify_candidate_result(baseline_status, result)
         decision_universe_compatibility = result.get(
