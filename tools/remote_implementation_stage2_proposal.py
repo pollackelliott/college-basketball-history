@@ -466,15 +466,15 @@ def run_stage2_proposal_tool(
     """Run the unchanged permanent Stage-2 coordinator with one exact map payload."""
 
     restore_integration_freeze(repo, school_key, freeze_bytes)
-    freeze = json.loads(freeze_bytes)
-    reconciliation = freeze.get("venue_reconciliation")
-    reconciliation_sha = str(freeze.get("venue_reconciliation_sha256") or "")
-    if reconciliation is None:
-        if venue_reconciliation_bytes is not None:
+    if venue_reconciliation_bytes is not None:
+        try:
+            freeze = json.loads(freeze_bytes)
+        except (TypeError, ValueError) as exc:
+            raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_FREEZE_INVALID") from exc
+        reconciliation = freeze.get("venue_reconciliation")
+        reconciliation_sha = str(freeze.get("venue_reconciliation_sha256") or "")
+        if not isinstance(reconciliation, dict):
             raise Stop("STAGE2_PROPOSAL_UNEXPECTED_VENUE_RECONCILIATION_BYTES")
-    else:
-        if venue_reconciliation_bytes is None:
-            raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_BYTES_MISSING")
         if sha256_bytes(venue_reconciliation_bytes) != reconciliation_sha:
             raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_BYTES_MISMATCH")
         sidecar = repo / ".onboarding" / school_key / "venue-reconciliation.json"

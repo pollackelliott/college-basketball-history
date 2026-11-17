@@ -15,6 +15,24 @@ SINGLE_MODE = "SINGLE_GAME_CORRECTION_NONREGRESSION"
 MULTI_MODE = "MULTI_GAME_CORRECTION_NONREGRESSION"
 EXPANSION_MODE = "ALL_HISTORY_EXPANSION_NONREGRESSION"
 
+# These are the canonical populations that the permanent implementation site
+# report turns into actual publication errors. Raw gap categories such as
+# home_missing_venue, neutral_missing_venue, or unknown_site_type may grow in an
+# All-History expansion when the same report independently proves those exact
+# rows are research-accounted or owner-authorized exceptions.
+EXPANSION_BLOCKING_CATEGORIES = frozenset({
+    "strict_home_gap",
+    "invalid_home_venue_exception_marker",
+    "strict_ncaa_gap",
+    "target_source_site_type_lost",
+    "target_source_venue_lost",
+    "target_source_location_lost",
+    "reciprocal_site_type_unpropagated",
+    "reciprocal_venue_unpropagated",
+    "reciprocal_location_unpropagated",
+    "unaccounted_public_gap",
+})
+
 def stable(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
@@ -105,15 +123,15 @@ def prove_expansion(before: dict[str, Any], after: dict[str, Any]) -> dict[str, 
 
     bex, aex = before.get("examples", {}), after.get("examples", {})
     inherited, eliminated = 0, 0
-    for category in sorted(set(bex) | set(aex)):
+    for category in sorted(EXPANSION_BLOCKING_CATEGORIES):
         b, a = bex.get(category, []), aex.get(category, [])
         if (
             not isinstance(b, list)
             or not isinstance(a, list)
             or len(set(b)) != len(b)
             or len(set(a)) != len(a)
-            or len(b) != bcounts.get(category, 0)
-            or len(a) != acounts.get(category, 0)
+            or len(b) != int(bcounts.get(category, 0) or 0)
+            or len(a) != int(acounts.get(category, 0) or 0)
         ):
             raise WorkflowError(
                 "expansion site proof lacks complete failure population: " + category
@@ -128,6 +146,17 @@ def prove_expansion(before: dict[str, Any], after: dict[str, Any]) -> dict[str, 
             )
         inherited += len(a)
         eliminated += len(set(b) - set(a))
+
+    before_errors = before.get("errors", [])
+    after_errors = after.get("errors", [])
+    if not isinstance(before_errors, list) or not isinstance(after_errors, list):
+        raise WorkflowError("expansion site proof requires structured site errors")
+    new_errors = [error for error in after_errors if error not in before_errors]
+    if new_errors:
+        raise WorkflowError(
+            "expansion introduced site failure report-error: "
+            + str(new_errors[0])
+        )
 
     return {
         "mode": EXPANSION_MODE,
