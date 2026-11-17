@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "wyoming-stage2-gate1-fill-0001",
+  "operation": "STAGE2_GATE1_FILL",
+  "school_key": "wyoming",
+  "previous_control_state_commit": "3ae7a628a1500e77276174a49d334f8f803d8aa0",
+  "previous_control_state_sha256": "269f27b683f98dcf5298dbdbfd1a05354ce61fcd5b3b9a2a35a9e985f36aeae6",
+  "expected_protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-proposal-0002/checkpoint-manifest.json",
+    "sha256": "c02822169cd91e05fc662fbe510a4691e01cc5b181c1c8b1fd2f268dc953fd58"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/wyoming/wyoming-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
+    "sha256": "2a4fffedad55463412a61cf8e14c2f9a76bf3af8ce2fb366c4ee1b25dfe73ce8"
+  },
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "recommendation_map_sha256": "873b3c60a1f1d001ca2a1e7d50f9953935a061ef725d8af554f6ed2bb6c62c62",
+  "approved_plan_hash_preview": "0d2d4c6148451a059396f3aa5f344b6aee08f8cffed32d7fd3e040b8f9e776e4",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly replied 'Approved. Proceed' on 2026-11-17 to the immediately preceding consolidated Wyoming Owner Gate 1 packet for exact Stage 2 proposal wyoming-stage2-proposal-0002. The approved packet binds all 343 decisions under decision universe 1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1, exact recommendation map 873b3c60a1f1d001ca2a1e7d50f9953935a061ef725d8af554f6ed2bb6c62c62, and approved-plan preview 0d2d4c6148451a059396f3aa5f344b6aee08f8cffed32d7fd3e040b8f9e776e4. This explicitly approves the recommendation set, including 30 reciprocal MATCH_CANONICAL identities, one FORCE_NEW identity, 187 KEEP_CANONICAL dispositions, 41 USE_SOURCE dispositions including the three owner-facing NEUTRAL site decisions for 1957 Michigan at Albuquerque NM, 1984 Baylor Cowboy Shootout at Casper WY, and 1998 Wagner Cowboy Shootout at Casper Events Center, accomplishment verification preserving 21 regular-season conference championships and 3 conference-tournament championships, and the publication recommendation subject to all downstream gates. This approval authorizes the repository-defined mechanical Stage 3 fill→preseal→seal→sealed-apply sequence with independent verification. It is not Owner Gate 2, release, Preview, merge, Production, new Research, shared/global maintenance, or protected-main bypass authority.",
+    "proposal_checkpoint_sha256": "c02822169cd91e05fc662fbe510a4691e01cc5b181c1c8b1fd2f268dc953fd58",
+    "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+    "recommendation_map_sha256": "873b3c60a1f1d001ca2a1e7d50f9953935a061ef725d8af554f6ed2bb6c62c62",
+    "approved_plan_hash_preview": "0d2d4c6148451a059396f3aa5f344b6aee08f8cffed32d7fd3e040b8f9e776e4"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "wyoming-stage2-preseal-0001",
+    "seal_request_id": "wyoming-stage2-gate1-seal-0001",
+    "apply_request_id": "wyoming-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Wyoming ordinary original-school Implementation lane",
+    "authorization": "Owner explicitly Approved. Proceed to the exact Wyoming Gate 1 packet. This authorizes only the already-bound mechanical Stage 3 sequence: fill/encode, fresh verification, pre-seal rehearsal, fresh verification, cryptographic Gate 1 seal, fresh verification, transactional sealed apply, and fresh post-apply verification. All current-main, one-active-lane, Integration Freeze, semantic, historical, site-completeness, CAS, and owner-gate constraints remain. Stop before release preparation / exact Preview / Owner Gate 2."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": true,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
