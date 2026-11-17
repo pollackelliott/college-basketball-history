@@ -1,49 +1,67 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "ucf-expansion-stage2-gate1-fill-0001",
+  "operation": "STAGE2_GATE1_FILL",
+  "school_key": "ucf",
+  "previous_control_state_commit": "284a25b784512aa64dad21fd61f9b8ccaf043c50",
+  "previous_control_state_sha256": "7dd4a82c6bb881d691497437d8c9b03b74f467e81e2dd65b03348d1f71d23f48",
+  "expected_protected_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-proposal-0004/checkpoint-manifest.json",
+    "sha256": "e068a10baa788a2db3ede5ef9349cf08105cc30b5b90b1c77f8bb5ade579e01e"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/ucf/ucf-expansion-stage2-proposal-0004/stage2-proposal-rehearsal-verification.json",
+    "sha256": "8884098305a83879913fff755b9e2a4c5877604967348b463a49f3b6628b38be"
+  },
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "recommendation_map_sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d",
+  "approved_plan_hash_preview": "3e827ae6b7429cc695d5d01b1df4bb7046a095e84aad2b2606acac0421906b2c",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly replied 'Approved. Proceed' on 2026-11-17 to the immediately preceding consolidated UCF Owner Gate 1 packet for exact Stage 2 proposal ucf-expansion-stage2-proposal-0004. The approved packet has zero historical decisions, exact empty recommendation map SHA-256 0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d, exact decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, approved-plan preview 3e827ae6b7429cc695d5d01b1df4bb7046a095e84aad2b2606acac0421906b2c, zero blockers/warnings/decisions, and site diagnostic PASS preserving all accepted research-accounted residuals including the 27 owner-approved founding-era HOME-location exceptions. Owner authorized the bounded technical fill, pre-seal rehearsal, cryptographic seal, and sealed apply with independent verification. This is not Owner Gate 2, Preview, release, merge, Production, new historical research, or shared/global basketball mutation approval.",
+    "proposal_checkpoint_sha256": "e068a10baa788a2db3ede5ef9349cf08105cc30b5b90b1c77f8bb5ade579e01e",
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "recommendation_map_sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d",
+    "approved_plan_hash_preview": "3e827ae6b7429cc695d5d01b1df4bb7046a095e84aad2b2606acac0421906b2c"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "ucf-expansion-stage2-preseal-0001",
+    "seal_request_id": "ucf-expansion-stage2-gate1-seal-0001",
+    "apply_request_id": "ucf-expansion-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "Same serialized UCF ALL_HISTORY_EXPANSION Implementation lane",
+    "authorization": "Owner explicitly Approved. Proceed to the exact UCF Gate 1 packet; authorizes only the already-bound fill→fresh verification→preseal→fresh verification→seal→fresh verification→sealed apply→fresh verification sequence. All current-main, lock, Freeze, semantic, historical, nonregression, CAS, and gate constraints remain. Stop before release preparation or Owner Gate 2."
+  },
   "authority": {
-    "owner_gate_1": false,
+    "expansion_phase0": false,
+    "owner_gate_1": true,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
+    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
+    "stage2_gate1_fill": true,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from ucf-expansion-stage2-census-0005",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-  "expected_protected_main_sha": "0bb7ddf194147c28307491e5eb330a37f80d9dd0",
-  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "79e41a922c7fca168d6a14f76d20a9f26ae9cb13",
-  "previous_control_state_sha256": "119d247859b865c5db3bbd070319043d9cc2bb48293414a742bd04c625bd8819",
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/ucf-expansion-stage2-current-main-refresh-0005/recommendation-map.json",
-    "sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d"
-  },
-  "request_id": "ucf-expansion-stage2-proposal-0004",
-  "schema_version": 1,
-  "school_key": "ucf",
-  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
-  "stage2_authority": {
-    "path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-census-0005/checkpoint-manifest.json",
-    "sha256": "7237c17d0422f64efccc12dfca561082443fd2ed110b627be2759a040f985c29"
-  },
-  "target_branch": "data/ucf-onboarding",
-  "target_sha": "209eabe5a84c287030c80c31bebda94cf85860e9"
+  }
 }
