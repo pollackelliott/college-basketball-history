@@ -660,7 +660,7 @@
     "wyoming-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
-  "active_lock_commit": null,
+  "active_lock_commit": "90ab326f82e95d4d79318baa76790f22059657a7",
   "active_lock_owner": "github-actions:44178151536:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
