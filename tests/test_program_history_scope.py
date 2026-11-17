@@ -10,6 +10,10 @@ sys.path.insert(0, str(TOOLS))
 
 import build_site_data  # noqa: E402
 import validate_data  # noqa: E402
+from onboarding_plan import (  # noqa: E402
+    WorkflowError,
+    prepare_publication_coverage_transition,
+)
 from program_history import (  # noqa: E402
     BEST_FINISH_LABELS,
     accomplishment_row_issues,
@@ -175,6 +179,91 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(in_scope, [current])
         self.assertEqual(pre_cutoff, [old])
         self.assertEqual(old["raw_text"], "preserve me")
+
+    def test_stage2_unmigrated_inception_scope_uses_settled_inception_compatibility(self):
+        before = {
+            "source_game_id": "BEFORE",
+            "season_label": "1903-1904",
+        }
+        inception = {
+            "source_game_id": "INCEPTION",
+            "season_label": "1904-1905",
+        }
+        current = {
+            "source_game_id": "CURRENT",
+            "season_label": "2025-2026",
+        }
+        program = {
+            "program_key": "program-a",
+            "public_page_enabled": "No",
+            "program_inception_season": "",
+            "history_coverage_status": "UNMIGRATED",
+            "history_start_season": "1904-1905",
+            "history_scope_status": "OWNER_CONFIRMED",
+            "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+            "history_scope_intervals": "",
+        }
+
+        published, unpublished, top_level_rows = partition_stage2_source_rows(
+            [before, inception, current],
+            program,
+        )
+
+        self.assertEqual(published, [inception, current])
+        self.assertEqual(unpublished, [before])
+        self.assertEqual(top_level_rows, [inception, current])
+
+    def test_stage2_unmigrated_non_inception_scope_remains_unpublished(self):
+        row = {"source_game_id": "ROW", "season_label": "1978-1979"}
+        program = {
+            "program_key": "program-a",
+            "public_page_enabled": "No",
+            "program_inception_season": "",
+            "history_coverage_status": "UNMIGRATED",
+            "history_start_season": "1978-1979",
+            "history_scope_status": "OWNER_CONFIRMED",
+            "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+            "history_scope_intervals": "",
+        }
+
+        published, unpublished, top_level_rows = partition_stage2_source_rows(
+            [row],
+            program,
+        )
+
+        self.assertEqual(published, [])
+        self.assertEqual(unpublished, [row])
+        self.assertEqual(top_level_rows, [])
+
+    def test_publication_transition_migrates_settled_unmigrated_inception_scope(self):
+        program = {
+            "program_inception_season": "",
+            "history_coverage_status": "UNMIGRATED",
+            "history_start_season": "1904-1905",
+            "history_scope_status": "OWNER_CONFIRMED",
+            "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+            "history_scope_intervals": "",
+        }
+
+        self.assertTrue(prepare_publication_coverage_transition(program))
+        self.assertEqual(program["program_inception_season"], "1904-1905")
+        self.assertEqual(program["history_coverage_status"], "COMPLETE_INSTITUTIONAL")
+
+    def test_publication_transition_refuses_unmigrated_non_inception_scope(self):
+        program = {
+            "program_inception_season": "",
+            "history_coverage_status": "UNMIGRATED",
+            "history_start_season": "1978-1979",
+            "history_scope_status": "OWNER_CONFIRMED",
+            "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+            "history_scope_intervals": "",
+        }
+
+        with self.assertRaisesRegex(
+            WorkflowError,
+            "without settled ALWAYS_TOP_LEVEL_FROM_INCEPTION authority",
+        ):
+            prepare_publication_coverage_transition(program)
 
     def test_stage2_complete_institutional_uses_publication_coverage_without_broadening_top_level(self):
         early = {
