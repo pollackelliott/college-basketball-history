@@ -1,0 +1,44 @@
+{
+  "allowed_paths": [
+    "schools/wyoming/opponents.csv",
+    "schools/wyoming/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "montana-state-billings",
+    "msu-denver",
+    "northern-new-mexico",
+    "st-francis-brooklyn",
+    "uc-colorado-springs",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "opponent_changed_row_count": 9,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "source_game_changed_ids": [
+    "WYO-S1-1945-46-P154C1Y2363",
+    "WYO-S1-1961-62-P156C1Y2603",
+    "WYO-S1-1976-77-P157C3Y5530",
+    "WYO-S1-1977-78-P158C1Y1312",
+    "WYO-S1-1979-80-P158C1Y6767",
+    "WYO-S1-1979-80-P158C1Y7087",
+    "WYO-S1-1982-83-P158C3Y1792",
+    "WYO-S1-1990-91-P159C3Y5370",
+    "WYO-S1-2005-06-P162C1Y4919",
+    "WYO-S1-2007-08-P162C2Y4908",
+    "WYO-S1-2023-24-P165C2Y0867"
+  ],
+  "source_game_changed_keys": [
+    "montana-state-billings",
+    "msu-denver",
+    "northern-new-mexico",
+    "st-francis-brooklyn",
+    "uc-colorado-springs",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 11
+}

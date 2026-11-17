@@ -1,0 +1,71 @@
+{
+  "allowed_paths": [
+    "schools/wyoming/opponents.csv",
+    "schools/wyoming/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/wyoming/opponents.csv": "f34ef65c98deb784a01081c6d9ed5920205ffc90a461b8860488f73380dd9da7",
+    "schools/wyoming/source-games.csv": "f6a75f84a2c13e2c781647e4fed27463f9677f4830b456ac2b02bf8aad00f2d1"
+  },
+  "changed_paths": [
+    "schools/wyoming/opponents.csv",
+    "schools/wyoming/source-games.csv"
+  ],
+  "commit_message": "Normalize wyoming historical opponent display representation",
+  "expected_blocker_keys": [
+    "montana-state-billings",
+    "msu-denver",
+    "northern-new-mexico",
+    "st-francis-brooklyn",
+    "uc-colorado-springs",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "expected_target_predecessor_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
+  "field_level_proof_sha256": "fb28f9fff074801b66673e04e997ebc7dc83fe7a68e9ba54b6de43d6a2a91cc8",
+  "global_lock_commit": "90ab326f82e95d4d79318baa76790f22059657a7",
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "de9fdd17ae72b10668b222d0e66e9d988b355d04547ca01dcadbbe4fc4637628",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "b5e150cb6f1e8ec44e8e966247cf15a69f865fb7",
+  "prepared_parent_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
+  "prepared_tree_sha": "79b23165886c22ea2c682ca42d5496ed90d8d6f4",
+  "protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "repository_validation": "PASS",
+  "request_id": "wyoming-stage2-opponent-display-normalize-0001",
+  "request_sha256": "784cde892f6c5bfb0f932ce09c08f1c6ec1ab7b10b4811004cb19a6447010624",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_drift_after": {
+    "baseline_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "integration_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+    "school_key": "wyoming",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "integration_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+    "school_key": "wyoming",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "e2b4f3aac4e5e0c9f25e017ae7b27873f6e43fe1dd6a11dea55d3d6a5d4c0ddf",
+    "field-level-proof.json": "fb28f9fff074801b66673e04e997ebc7dc83fe7a68e9ba54b6de43d6a2a91cc8",
+    "integration-freeze.json": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+    "normalization-report.json": "de9fdd17ae72b10668b222d0e66e9d988b355d04547ca01dcadbbe4fc4637628",
+    "semantic-drift-proof.json": "c3c6ecf1034a4c69587e96f838cbc65b649fd69b0be6db8904dc9839d094ac27"
+  },
+  "source_game_normalized_name_row_count": 11,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "e2b4f3aac4e5e0c9f25e017ae7b27873f6e43fe1dd6a11dea55d3d6a5d4c0ddf",
+  "target_branch": "data/wyoming-onboarding"
+}

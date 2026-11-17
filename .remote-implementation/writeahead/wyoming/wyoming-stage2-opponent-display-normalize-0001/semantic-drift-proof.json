@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "integration_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+    "school_key": "wyoming",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+    "integration_base_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+    "school_key": "wyoming",
+    "status": "PASS"
+  }
+}

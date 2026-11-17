@@ -1,0 +1,166 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 7,
+  "change_row_count": 9,
+  "changes": [
+    {
+      "authority_names": [
+        "Montana State Billings",
+        "Montana State-Billings"
+      ],
+      "authority_signature": "montanastatebillings",
+      "canonical_opponent_key": "montana-state-billings",
+      "from_names": [
+        "MSU Billings"
+      ],
+      "target_row_count": 3,
+      "to_name": "Montana State Billings"
+    },
+    {
+      "authority_names": [
+        "Metropolitan State University of Denver"
+      ],
+      "authority_signature": "metropolitanstateuniversityofdenver",
+      "canonical_opponent_key": "msu-denver",
+      "from_names": [
+        "MSU Denver"
+      ],
+      "target_row_count": 1,
+      "to_name": "Metropolitan State University of Denver"
+    },
+    {
+      "authority_names": [
+        "Northern New Mexico College"
+      ],
+      "authority_signature": "northernnewmexicocollege",
+      "canonical_opponent_key": "northern-new-mexico",
+      "from_names": [
+        "Northern New Mexico"
+      ],
+      "target_row_count": 1,
+      "to_name": "Northern New Mexico College"
+    },
+    {
+      "authority_names": [
+        "St. Francis Brooklyn"
+      ],
+      "authority_signature": "stfrancisbrooklyn",
+      "canonical_opponent_key": "st-francis-brooklyn",
+      "from_names": [
+        "St. Francis (NY)"
+      ],
+      "target_row_count": 1,
+      "to_name": "St. Francis Brooklyn"
+    },
+    {
+      "authority_names": [
+        "University of Colorado Colorado Springs"
+      ],
+      "authority_signature": "universityofcoloradocoloradosprings",
+      "canonical_opponent_key": "uc-colorado-springs",
+      "from_names": [
+        "UC Colorado Springs"
+      ],
+      "target_row_count": 1,
+      "to_name": "University of Colorado Colorado Springs"
+    },
+    {
+      "authority_names": [
+        "United States International University"
+      ],
+      "authority_signature": "unitedstatesinternationaluniversity",
+      "canonical_opponent_key": "united-states-international",
+      "from_names": [
+        "U.S. International"
+      ],
+      "target_row_count": 1,
+      "to_name": "United States International University"
+    },
+    {
+      "authority_names": [
+        "Washington (St. Louis)"
+      ],
+      "authority_signature": "washingtonstlouis",
+      "canonical_opponent_key": "washington-st-louis",
+      "from_names": [
+        "Washington (Mo.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Washington (St. Louis)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "source_game_display_change_keys": 7,
+  "source_game_display_change_rows": 11,
+  "source_game_display_changes": [
+    {
+      "from_name": "Washington (Mo.)",
+      "normalized_opponent_key": "washington-st-louis",
+      "source_game_id": "WYO-S1-1945-46-P154C1Y2363",
+      "to_name": "Washington (St. Louis)"
+    },
+    {
+      "from_name": "MSU Billings",
+      "normalized_opponent_key": "montana-state-billings",
+      "source_game_id": "WYO-S1-1961-62-P156C1Y2603",
+      "to_name": "Montana State Billings"
+    },
+    {
+      "from_name": "MSU Billings",
+      "normalized_opponent_key": "montana-state-billings",
+      "source_game_id": "WYO-S1-1976-77-P157C3Y5530",
+      "to_name": "Montana State Billings"
+    },
+    {
+      "from_name": "MSU Billings",
+      "normalized_opponent_key": "montana-state-billings",
+      "source_game_id": "WYO-S1-1977-78-P158C1Y1312",
+      "to_name": "Montana State Billings"
+    },
+    {
+      "from_name": "U.S. International",
+      "normalized_opponent_key": "united-states-international",
+      "source_game_id": "WYO-S1-1979-80-P158C1Y6767",
+      "to_name": "United States International University"
+    },
+    {
+      "from_name": "St. Francis (NY)",
+      "normalized_opponent_key": "st-francis-brooklyn",
+      "source_game_id": "WYO-S1-1979-80-P158C1Y7087",
+      "to_name": "St. Francis Brooklyn"
+    },
+    {
+      "from_name": "U.S. International",
+      "normalized_opponent_key": "united-states-international",
+      "source_game_id": "WYO-S1-1982-83-P158C3Y1792",
+      "to_name": "United States International University"
+    },
+    {
+      "from_name": "MSU Denver",
+      "normalized_opponent_key": "msu-denver",
+      "source_game_id": "WYO-S1-1990-91-P159C3Y5370",
+      "to_name": "Metropolitan State University of Denver"
+    },
+    {
+      "from_name": "UC Colorado Springs",
+      "normalized_opponent_key": "uc-colorado-springs",
+      "source_game_id": "WYO-S1-2005-06-P162C1Y4919",
+      "to_name": "University of Colorado Colorado Springs"
+    },
+    {
+      "from_name": "UC Colorado Springs",
+      "normalized_opponent_key": "uc-colorado-springs",
+      "source_game_id": "WYO-S1-2007-08-P162C2Y4908",
+      "to_name": "University of Colorado Colorado Springs"
+    },
+    {
+      "from_name": "Northern New Mexico",
+      "normalized_opponent_key": "northern-new-mexico",
+      "source_game_id": "WYO-S1-2023-24-P165C2Y0867",
+      "to_name": "Northern New Mexico College"
+    }
+  ],
+  "status": "PASS"
+}
