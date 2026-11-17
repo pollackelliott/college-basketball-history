@@ -1267,11 +1267,11 @@
   "current_sequence": 609,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "ucf-expansion-stage2-current-main-refresh-0001",
     "school_key": "ucf",
     "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
