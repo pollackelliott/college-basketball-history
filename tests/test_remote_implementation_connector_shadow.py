@@ -47,6 +47,7 @@ class Fixture:
             "request_id": self.id,
             "expected_protected_main_sha": MAIN,
             "target_sha": TARGET,
+            "target_branch": "data/ucf-onboarding",
         }
         self.checkpoint = {
             "school_key": self.school,
@@ -289,6 +290,13 @@ class ReadinessShadowTests(unittest.TestCase):
         self.f.packet["owner_gate_2"] = True
         self.f.finalize()
         with self.assertRaisesRegex(shadow.ShadowStop, "PR_PACKET_OWNER_GATE_2_MISMATCH"):
+            self.f.evaluate()
+
+    def test_already_consumed_child_id_stops(self):
+        self.f.state["consumed_request_ids"].append(
+            "synthetic-ucf-release-preview-001"
+        )
+        with self.assertRaisesRegex(shadow.ShadowStop, "CHILD_ID_ALREADY_CONSUMED"):
             self.f.evaluate()
 
     def test_active_mutation_lock_stops(self):
