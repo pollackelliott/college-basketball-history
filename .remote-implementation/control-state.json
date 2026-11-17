@@ -638,7 +638,7 @@
     "ucf-expansion-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-  "active_lock_commit": null,
+  "active_lock_commit": "91dd2c414d5ddd1fd784a7000b38576a88be3e11",
   "active_lock_owner": "github-actions:43986800340:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
