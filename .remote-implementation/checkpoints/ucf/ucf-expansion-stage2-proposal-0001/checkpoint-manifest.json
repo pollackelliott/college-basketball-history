@@ -1,0 +1,102 @@
+{
+  "action_counts": {},
+  "approved_plan_hash_preview": "59f6ec8997f0a27bc8c768d8fd2d9b33414e5dc420d2eaad21518ee4f220b93c",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "b5c5e69824f2c54c0a89285668c44ec993f511234af0b728678b3d789567b9c9",
+    "plan.json": "507b3dcd6da55db049e66976314b1e49b6d9b72eb40d630f24502b639e8e9cd5",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "10efa1039d8f2c971060def3f6d58cfe2f075cf467b259e0b7eafbd122c7d68a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "cda55ddc175f38adbbcba92e66db213df1c8f251cad28387a4d116fe208cd2a8",
+    "plan.json": "c7a1c538bfabfdd6c7c60d7e7f1b1ad5d1ecfa769ed663b94a43dc24ead2bcb7",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "33df86ecfa18616850d5e6c181598215a64c1be760cdf3721a8877538ce93f56"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_topology_groups": [],
+  "changed_path_count": null,
+  "command_exit_code": 1,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "ucf",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 1273,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 373,
+    "plan_path": ".onboarding/ucf/plan.json",
+    "review_path": ".onboarding/ucf/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {},
+  "protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "recommendation_map": {
+    "action_counts": {},
+    "approved_plan_hash_preview": "59f6ec8997f0a27bc8c768d8fd2d9b33414e5dc420d2eaad21518ee4f220b93c",
+    "decision_count": 0,
+    "path": "/tmp/remote-stage2-proposal-map-lucd9oxg/recommendation-map.json",
+    "sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/ucf/ucf-expansion-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/ucf-expansion-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d",
+  "request_id": "ucf-expansion-stage2-proposal-0001",
+  "request_sha256": "820a34e9e4d4686b50d2501f218e3e3de875a70d3b6223a89693b73f32761ba5",
+  "runtime_commit_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+    "tools/onboard_school.py": "48410fc2a7d37c3d6c62872d933c7badbe8092f91dace507718da9efd8c1a520",
+    "tools/onboarding_hardening.py": "9229f31cb2885b38e7ba6940d75d325d9b6e7ecafee46c7119edd8a640ddb28f",
+    "tools/onboarding_plan.py": "b0cbabdf934494bf619e1cf485c61a54abb61835a072a17f8b4ed4e6e287c9a1",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+  "schema_version": 1,
+  "school_key": "ucf",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "site_diagnostic": {},
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "stage2_authority_path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+  "stage2_authority_sha256": "f9e38cbb1a0b5cec68a5c25b62bcdf9fde0027bfb3b84b285c4bff0e5ef98b84",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "target_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+  "tracked_mutation_proof": {
+    "after_head_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+    "after_status": "",
+    "after_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+    "before_head_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+    "before_status": "",
+    "before_tree_sha": "fae9541cf642a0d74834bfc3fb36009ab2013ce9",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

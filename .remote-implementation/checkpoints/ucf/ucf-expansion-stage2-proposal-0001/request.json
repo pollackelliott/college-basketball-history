@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "ucf-expansion-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "ucf",
+  "previous_control_state_commit": "e55e44239da4e60f5fcf2d58c29fa539bb33a7dd",
+  "previous_control_state_sha256": "ce4e8a3406858181d149969e75996a868a767bec2a8db3864785cf8a7d4452ae",
+  "expected_protected_main_sha": "e91be3617bf812547f32c414bc06fe6643f3d7e8",
+  "target_branch": "data/ucf-onboarding",
+  "target_sha": "3a0a7e429b2ee5e5d13ad1b10df3fce80d107b7b",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/ucf/ucf-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "sha256": "f9e38cbb1a0b5cec68a5c25b62bcdf9fde0027bfb3b84b285c4bff0e5ef98b84"
+  },
+  "integration_freeze_sha256": "9478c84be3bfc897d00fa7923d61bec36453c2c98dd23f27ace7e18355b188e8",
+  "semantic_snapshot_sha256": "8af5cd10acdf38f2424a94cd4dc3baf3f1bb16d34d1a4e4583c72fb23c31b7d6",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/ucf-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "0ce6249cf185e9508f9e526a094eb28ba96a8e420d583978473a65cad374216d"
+  },
+  "creation_provenance": {
+    "origin": "UCF ALL_HISTORY_EXPANSION single serialized Implementation Stage 2 — exact empty-decision map and full disposable pre-Gate proposal rehearsal",
+    "authorization": "Existing UCF Stage 2 authorization persists. The bounded, frozen-authority and deterministic pre-Gate source challenge found 1,646 accepted source games (1,273 existing canonical matches, 373 new canonical games), zero preflight blockers/warnings, no material historical decisions, 5 safe enrichment fields, and no detected capability topology. All 27 owner-approved pre-1984-85 HOME locality exceptions, 19 unknown pre-1984-85 H/A/N rows, and five undated pre-1984-85 rows remain explicitly preserved; all 111 postseason rows have complete sites and no modern neutral site blank; overtime 0-3 only. The exact independently fresh-verified post-normalization successor ucf-expansion-stage2-opponent-display-normalize-0002 records CAPABILITY_CENSUS_READY, zero decisions, empty decision universe SHA256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, semantic guard PASS. The immutable map has zero identity or historical decisions; authorize read-only STAGE2_PROPOSAL_REHEARSAL through unchanged permanent implementation_stage2.py --map and full disposable adversarial/simulation suite. Any BLOCKED result must be diagnosed and not overridden. No owner approval, fill, seal, apply, mutation, publication, Preview, release, merge, Production, shared-reference repair, or second Implementation lane."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
