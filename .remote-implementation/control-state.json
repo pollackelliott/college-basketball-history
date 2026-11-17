@@ -652,7 +652,7 @@
     "ucf-expansion-stage2-sealed-apply-0004"
   ],
   "active_expected_main_sha": "3518f3da648417c914c9bf78b8ce1270f80a9999",
-  "active_lock_commit": null,
+  "active_lock_commit": "0839b5ae0af64957546e8f7ad670bd3dd71efb78",
   "active_lock_owner": "github-actions:44109419196:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
