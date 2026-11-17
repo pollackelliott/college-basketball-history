@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "68546b283897ecf63020b5fbd8216c99abd412f5",
+  "prepared_parent_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "prepared_tree_sha": "86a3ff0706ef2cbadf810e878c498de507cf5f7c",
+  "protected_main_sha": "f6628d64feea79468aa2c383cee3488feb0e019e",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "wyoming-phase0-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "68546b283897ecf63020b5fbd8216c99abd412f5"
+}
