@@ -313,6 +313,30 @@ class ProgramHistoryScopeTests(unittest.TestCase):
             self.assertEqual(program["history_coverage_status"], "UNMIGRATED")
             self.assertEqual(program["program_inception_season"], "")
 
+    def test_complete_institutional_scope_authority_rejects_top_level_scope_conflict(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            complete_institutional_scope_repo(
+                repo,
+                top_level_scope="1979-80+",
+            )
+            program = {
+                "program_key": "program-a",
+                "public_page_enabled": "No",
+                "program_inception_season": "",
+                "history_coverage_status": "UNMIGRATED",
+                "history_start_season": "1978-1979",
+                "history_scope_status": "OWNER_CONFIRMED",
+                "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                "history_scope_intervals": "",
+            }
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "top-level scope conflicts with accepted program scope",
+            ):
+                stage2_program_for_planning(repo, "program-a", program)
+
     def test_publication_transition_uses_frozen_complete_institutional_authority(self):
         with tempfile.TemporaryDirectory() as tmp:
             repo = Path(tmp)

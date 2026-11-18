@@ -194,6 +194,36 @@ jobs:
                       ).split()
                       if not remote_target or remote_target[0] != target_sha:
                           fail('recovered-idle target no longer equals classified unpublished target')
+              elif (last.get('operation') == 'STAGE2_OPPONENT_DISPLAY_NORMALIZE'
+                    and last.get('stage2_status') == 'CAPABILITY_CENSUS_READY'
+                    and last.get('fresh_runner_verification') == 'PASS'
+                    and last.get('remote_stage2_opponent_display_equivalence') == 'PASS'):
+                  mode = 'LIVE_CENSUS_AFTER_OPPONENT_DISPLAY'
+                  checkpoint = str(last.get('successor_manifest_path') or '')
+                  school = str(last.get('school_key') or '')
+                  expected_main = str(last.get('protected_main_sha') or '')
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or not checkpoint.startswith('.remote-implementation/successors/' + school + '/')
+                          or not checkpoint.endswith('/successor-manifest.json')
+                          or '..' in Path(checkpoint).parts
+                          or not valid_sha(expected_main)):
+                      fail('opponent-display successor path/main authority invalid')
+                  raw = (Path('control') / checkpoint).read_bytes()
+                  if hashlib.sha256(raw).hexdigest() != last.get('successor_manifest_sha256'):
+                      fail('opponent-display successor bytes do not match control-state hash')
+                  successor = json.loads(raw)
+                  if (successor.get('kind') != 'REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR'
+                          or successor.get('operation') != 'STAGE2_OPPONENT_DISPLAY_NORMALIZE'
+                          or successor.get('school_key') != school
+                          or successor.get('request_id') != last.get('request_id')
+                          or successor.get('target_branch') != last.get('target_branch')
+                          or successor.get('actual_published_target_sha') != last.get('target_sha')
+                          or successor.get('protected_main_sha') != expected_main
+                          or successor.get('final_transaction_state') != 'COMPLETE'
+                          or successor.get('publication_cas') != 'EXISTING_REF_CAS_PASS'
+                          or (successor.get('post_repair_stage2') or {}).get('stage2_status')
+                              != 'CAPABILITY_CENSUS_READY'):
+                      fail('opponent-display successor does not bind exact verified last operation')
               elif (last.get('operation') == 'STAGE2_CURRENT_MAIN_REFRESH'
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_current_main_refresh_equivalence') == 'PASS'):
@@ -453,6 +483,133 @@ jobs:
           print('TRACKED_STAGE2_MUTATION=NONE')
           PY
 
+      - name: Replay live census after opponent-display normalization
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'LIVE_CENSUS_AFTER_OPPONENT_DISPLAY' &&
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          candidate = Path('candidate').resolve()
+          control = Path('control').resolve()
+          sys.path.insert(0, str(candidate / 'tools'))
+          from remote_implementation_stage2_census import (
+              add_existing_onboarding_worktree,
+              run_stage2_census_tool,
+              verify_phase0_authority,
+          )
+
+          state = json.loads(
+              (control / '.remote-implementation/control-state.json').read_text()
+          )
+          last = state.get('last_operation') or {}
+          successor_path = Path(
+              '${{ steps.authority.outputs.proposal_checkpoint_path }}'
+          )
+          successor_raw = (control / successor_path).read_bytes()
+          assert (
+              hashlib.sha256(successor_raw).hexdigest()
+              == last['successor_manifest_sha256']
+          )
+          successor = json.loads(successor_raw)
+          census_path = Path(successor['stage2_census_checkpoint_path'])
+          census_raw = (control / census_path).read_bytes()
+          assert (
+              hashlib.sha256(census_raw).hexdigest()
+              == successor['stage2_census_checkpoint_sha256']
+          )
+          census = json.loads(census_raw)
+
+          request = {
+              'school_key': last['school_key'],
+              'target_branch': last['target_branch'],
+              'target_sha': last['target_sha'],
+              'expected_protected_main_sha': last['protected_main_sha'],
+              'phase0_successor': {
+                  'path': census['phase0_successor_path'],
+                  'sha256': census['phase0_successor_sha256'],
+              },
+              'integration_freeze_sha256': last['integration_freeze_sha256'],
+              'semantic_snapshot_sha256': last['semantic_snapshot_sha256'],
+              'stage2_opponent_display_successor': {
+                  'path': successor_path.as_posix(),
+                  'sha256': last['successor_manifest_sha256'],
+              },
+          }
+          control_commit = '${{ steps.authority.outputs.control_commit }}'
+          authority = verify_phase0_authority(
+              request,
+              control_commit,
+              source_repo=control,
+          )
+          assert (
+              authority.get('target_authority_kind')
+              == 'STAGE2_OPPONENT_DISPLAY_SUCCESSOR'
+          ), authority.get('target_authority_kind')
+          assert authority.get('phase0_target_sha') != request['target_sha']
+
+          worktree = add_existing_onboarding_worktree(
+              request['target_branch'],
+              request['target_sha'],
+              request['school_key'],
+              source_repo=candidate,
+          )
+          try:
+              result = run_stage2_census_tool(
+                  worktree,
+                  request['school_key'],
+                  authority['freeze_bytes'],
+                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
+                  tool_repo=candidate,
+              )
+          finally:
+              subprocess.run(
+                  ['git', '-C', str(candidate), 'worktree', 'remove',
+                   '--force', str(worktree)],
+                  check=True,
+              )
+
+          preflight = result['status'].get('preflight') or {}
+          proof = result.get('tracked_mutation_proof') or {}
+          universe = str(preflight.get('decision_universe_sha256') or '')
+          assert result['stage2_status'] == 'CAPABILITY_CENSUS_READY'
+          assert preflight.get('blocker_count') == 0, preflight
+          assert preflight.get('warning_count') == 0, preflight
+          assert len(universe) == 64, preflight
+          assert proof.get('tracked_stage2_mutation') == 'NONE', proof
+
+          summary = {
+              'kind': 'LIVE_CENSUS_AFTER_OPPONENT_DISPLAY_CANDIDATE_REHEARSAL',
+              'candidate_sha': '${{ steps.authority.outputs.candidate_sha }}',
+              'control_commit': control_commit,
+              'school_key': request['school_key'],
+              'target_sha': request['target_sha'],
+              'expected_protected_main_sha': request[
+                  'expected_protected_main_sha'
+              ],
+              'stage2_status': result['stage2_status'],
+              'decision_count': preflight.get('decision_count'),
+              'decision_universe_sha256': universe,
+              'tracked_stage2_mutation': proof['tracked_stage2_mutation'],
+          }
+          out = Path('/tmp/stage2-candidate-runtime-rehearsal')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'live-census-after-opponent-display-summary.json').write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + '\n'
+          )
+          print('EXACT_LIVE_CENSUS_AFTER_OPPONENT_DISPLAY_REPLAY=PASS')
+          print('CANDIDATE_DECISION_UNIVERSE=' + universe)
+          print('TRACKED_STAGE2_MUTATION=NONE')
+          PY
+
       - name: Require control and actual PR head remained fixed
         if: >-
           github.event_name == 'pull_request' &&
@@ -487,6 +644,8 @@ jobs:
           PY
           )"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_REFRESH" ]]; then
+            scoped_main="$EXPECTED_MAIN_SHA"
+          elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_OPPONENT_DISPLAY" ]]; then
             scoped_main="$EXPECTED_MAIN_SHA"
           elif [[ "$AUTHORITY_MODE" == "RECOVERED_IDLE" ]]; then
             scoped_main="$EXPECTED_MAIN_SHA"

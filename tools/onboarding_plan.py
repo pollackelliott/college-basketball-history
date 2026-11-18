@@ -406,6 +406,18 @@ def frozen_complete_institutional_scope_authority(
     return dict(payload)
 
 
+def accepted_top_level_scope_expression(program: dict[str, str]) -> str:
+    """Render the settled program-row top-level authority in Research scope syntax."""
+
+    intervals = program.get("history_scope_intervals", "").strip()
+    if intervals:
+        return intervals
+    start = program.get("history_start_season", "").strip()
+    if not valid_season_label(start):
+        return ""
+    return f"{start[:5]}{start[7:9]}+"
+
+
 def stage2_program_for_planning(
     repo: Path,
     school_key: str,
@@ -427,6 +439,16 @@ def stage2_program_for_planning(
     if projected.get("history_scope_status", "").strip() != "OWNER_CONFIRMED":
         raise WorkflowError(
             "complete institutional planning requires owner-confirmed top-level scope"
+        )
+
+    frozen_top_level_scope = str(authority["top_level_scope"]).strip()
+    accepted_top_level_scope = accepted_top_level_scope_expression(projected)
+    if (
+        not accepted_top_level_scope
+        or frozen_top_level_scope != accepted_top_level_scope
+    ):
+        raise WorkflowError(
+            "frozen complete institutional top-level scope conflicts with accepted program scope"
         )
 
     inception = str(authority["program_inception_season"]).strip()
