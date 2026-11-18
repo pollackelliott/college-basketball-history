@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+  "recovered_request_id": "wyoming-release-preview-verify-0001",
+  "request_id": "wyoming-release-preview-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}

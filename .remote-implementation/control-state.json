@@ -27,7 +27,8 @@
     "arizona-state-expansion-phase0-0002",
     "arizona-state-expansion-release-preview-verify-0001",
     "ucf-expansion-stage2-opponent-display-normalize-0001",
-    "wyoming-stage2-sealed-apply-0001"
+    "wyoming-stage2-sealed-apply-0001",
+    "wyoming-release-preview-verify-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -676,16 +677,16 @@
     "wyoming-release-readiness-0001",
     "wyoming-release-preview-verify-0001"
   ],
-  "active_expected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "RELEASE_PREVIEW_VERIFY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "wyoming-release-preview-verify-0001",
-  "active_request_sha256": "dc8fc6075b4141bbd7ce3e16932ae711dcd12904a5ad6496e792eb1ef1793764",
-  "active_school_key": "wyoming",
-  "active_target_branch": "data/wyoming-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1334,31 +1335,29 @@
     "wyoming-stage2-preseal-0004",
     "wyoming-stage2-preseal-0004-seal",
     "wyoming-stage2-preseal-0004-apply",
-    "wyoming-release-readiness-0001"
+    "wyoming-release-readiness-0001",
+    "wyoming-release-preview-recover-0001"
   ],
-  "current_sequence": 644,
+  "current_sequence": 645,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/wyoming/wyoming-release-readiness-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "e833cc03474938a8fc49b21bc950fecd8b24673d2b78fdeca924e839466ab1e1",
-    "fresh_runner_verification": "PASS",
-    "operation": "RELEASE_READINESS",
-    "preview_request_id": "wyoming-release-preview-verify-0001",
-    "protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
-    "readiness_status": "RELEASE_READINESS_PASS",
-    "release_pr_packet_path": ".remote-implementation/checkpoints/wyoming/wyoming-release-readiness-0001/release-pr-packet.json",
-    "release_pr_packet_sha256": "98617c49c0d140a0d2929157afd3491d8d54efe6a1d64fae75ad2e5d24ef78ee",
-    "remote_release_readiness_equivalence": "PASS",
-    "request_id": "wyoming-release-readiness-0001",
-    "school_key": "wyoming",
-    "target_branch": "data/wyoming-onboarding",
-    "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "wyoming-release-preview-verify-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": null,
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+      "recovered_request_id": "wyoming-release-preview-verify-0001",
+      "request_id": "wyoming-release-preview-recover-0001",
+      "schema_version": 1,
+      "target_branch": null
+    }
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "44327717501",
-  "lock_acquisition_request_commit": "a2ef05059972037135cf23b109dd2f8cfb49c880",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "RELEASE_PREVIEW_RUNNING"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
