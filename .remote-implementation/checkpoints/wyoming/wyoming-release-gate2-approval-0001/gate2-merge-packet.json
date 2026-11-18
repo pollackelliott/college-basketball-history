@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "0c3f3948a6369d687459083c15e46ec89b82de57",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "wyoming-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "pr_number": 648,
+  "preview_deployment_id": 7885435949,
+  "preview_url": "https://college-basketball-history-ormlqm6ug-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "wyoming-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "target_branch": "data/wyoming-onboarding"
+}
