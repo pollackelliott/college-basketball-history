@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "a601f3c60d14d12753a8cf2975b5a1d450af7b0cad0ae0ad01e4a3da67182be6",
+  "gate2_merge_packet_sha256": "4e55dae046f5229f87fd41532043a1abef521f2e1d66b66625e62dd4940f8151",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "pr_number": 648,
+  "preview_deployment_id": 7885435949,
+  "preview_url": "https://college-basketball-history-ormlqm6ug-elliott-pollacks-projects.vercel.app",
+  "production_request_id": "wyoming-release-production-proof-0001",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "wyoming-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "status": "PASS"
+}

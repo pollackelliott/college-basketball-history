@@ -1349,7 +1349,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/wyoming/wyoming-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "a601f3c60d14d12753a8cf2975b5a1d450af7b0cad0ae0ad01e4a3da67182be6",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/wyoming/wyoming-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "4e55dae046f5229f87fd41532043a1abef521f2e1d66b66625e62dd4940f8151",
     "merged": false,
@@ -1358,7 +1358,7 @@
     "pr_number": 648,
     "production_request_id": "wyoming-release-production-proof-0001",
     "protected_main_sha": "0c3f3948a6369d687459083c15e46ec89b82de57",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "wyoming-release-gate2-approval-0001",
     "school_key": "wyoming",
     "target_branch": "data/wyoming-onboarding",
