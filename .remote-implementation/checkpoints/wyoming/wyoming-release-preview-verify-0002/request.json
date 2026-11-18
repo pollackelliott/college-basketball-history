@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash": "2626333f0053bccfbc7e2669001dd2a2317b561a92c98540da27dba114f1d37c",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Continuation of the already owner-authorized Wyoming Stage 4 release-preparation phase after fresh release-readiness 0002 independently verified PASS against protected main 0c3f3948a6369d687459083c15e46ec89b82de57. PR #648 remains exact, open, non-draft and mergeable at sealed head 1fc9be9b0a400a60405da1cf487b8a967040687c with the exact packet body, after successful frozen-head/live-main revalidation run #44335422659. This request may only verify exact PR-head checks, mergeability, and the exact Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden.",
+    "origin": "Same serialized Wyoming ordinary original-school Implementation lane — fresh release-readiness 0002 continuation"
+  },
+  "expected_protected_main_sha": "0c3f3948a6369d687459083c15e46ec89b82de57",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "pr_number": 648,
+  "previous_control_state_commit": "991c1abefdbd3fe1345275e9ea9b4be9b0d8dba2",
+  "previous_control_state_sha256": "ea77ed2b4e6fff9feb40063ab965694fb7a8b1f6ef662a41e2384a4a4428de20",
+  "release_manifest_sha256": "09b4ad1cdb5ac26c837c0b49e2da18a23ed4e3ea99544f0e544d77f1d8483af5",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-release-readiness-0002/checkpoint-manifest.json",
+    "sha256": "a0ab36169426d60e2115d48d80ff23c39e66dfd35017c547d345a824db1e3082"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/wyoming/wyoming-release-readiness-0002/release-readiness-verification.json",
+    "sha256": "ac9d8c4c7bbd4d8f0e454e5f39fa3eb9da5e3eb8729de34135fe3cfa58a6920e"
+  },
+  "request_id": "wyoming-release-preview-verify-0002",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c"
+}
