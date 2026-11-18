@@ -281,7 +281,7 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
 
     def test_earlier_preseal_must_be_blocked(self):
         self.first["preseal_status"] = "READY_TO_SEAL"
-        with self.assertRaisesRegex(Stop, "NOT_VERIFIED_BLOCKED"):
+        with self.assertRaisesRegex(Stop, "ORIGINAL_PRESEAL_EVIDENCE_INVALID"):
             self.call()
 
     def test_earlier_preseal_must_be_independently_verified(self):
