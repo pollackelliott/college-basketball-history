@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "e833cc03474938a8fc49b21bc950fecd8b24673d2b78fdeca924e839466ab1e1",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "15ea6849a5dc0a7b45da77c4a07f33e3067412e496ca3e4caef894eb354bb5d4",
+  "pr_created": false,
+  "preview_request_id": "wyoming-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+  "readiness_proof_sha256": "29d3863d49ebc01a1147920389c5f694fed3dc923fff18ef1817ee9d598246a1",
+  "release_pr_packet_sha256": "98617c49c0d140a0d2929157afd3491d8d54efe6a1d64fae75ad2e5d24ef78ee",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "wyoming-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "tracked_mutation": "NONE"
+}
