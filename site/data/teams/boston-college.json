@@ -4974,7 +4974,7 @@
       "opponent_key": "wyoming",
       "opponent_name": "Wyoming",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -59503,7 +59503,7 @@
       "opponent_key": "wyoming",
       "opponent_name": "Wyoming",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 88,
       "opponent_score": 76,
       "score_known": true,
@@ -62453,7 +62453,7 @@
       "opponent_key": "wyoming",
       "opponent_name": "Wyoming",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 59,
       "opponent_score": 48,
       "score_known": true,
