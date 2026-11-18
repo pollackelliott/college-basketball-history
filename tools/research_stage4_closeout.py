@@ -1827,12 +1827,30 @@ def closeout(
         required_cutoff = _expansion_stage3b_required_cutoff(
             parent_status, coverage_cutoff
         )
+        declared_supplemental = parent_status.get("supplemental_game_population")
+        declared_supplemental_count = None
+        if declared_supplemental is not None:
+            try:
+                declared_supplemental_count = int(declared_supplemental)
+            except (TypeError, ValueError) as exc:
+                raise ExpansionStage4CoverageError(
+                    "expansion Stage 3B supplemental_game_population is invalid"
+                ) from exc
+            if declared_supplemental_count != len(package_rows):
+                raise ExpansionStage4CoverageError(
+                    "expansion Stage 3B supplemental_game_population does not match "
+                    "the exact Stage 4 supplemental package row count"
+                )
+        allow_empty_supplemental = (
+            not package_rows and declared_supplemental_count == 0
+        )
         expansion_proof = prove_expansion_stage4_coverage(
             repo=Path(__file__).resolve().parents[1],
             school_key=school_key,
             research_base_sha=parent_base,
             required_completed_season_cutoff=required_cutoff,
             supplemental_rows=package_rows,
+            allow_empty_supplemental=allow_empty_supplemental,
         )
         write_json(output_dir / "stage4-expansion-coverage-proof.json",
                    expansion_proof)

@@ -207,7 +207,28 @@ class ExpansionStage4CoverageTests(unittest.TestCase):
         with self.assertRaises(ExpansionStage4CoverageError):
             self._prove(rows=bad)
 
-    def test_15_baseline_fingerprints_remain_unchanged_by_proof(self):
+    def test_15_zero_delta_requires_explicit_authority_and_proves_inherited_cutoff(self):
+        with self.assertRaisesRegex(
+            ExpansionStage4CoverageError, "zero-delta Stage 3B authority"
+        ):
+            self._prove(rows=[])
+        proof = prove_expansion_stage4_coverage(
+            repo=self.repo,
+            school_key="legacy",
+            research_base_sha=self.baseline.base,
+            required_completed_season_cutoff="1971-1972",
+            supplemental_rows=[],
+            allow_empty_supplemental=True,
+        )
+        self.assertEqual(proof["status"], "PASS")
+        self.assertEqual(proof["supplemental_game_count"], 0)
+        self.assertEqual(proof["supplemental_first_season"], "")
+        self.assertEqual(proof["supplemental_last_season"], "")
+        self.assertTrue(proof["zero_delta_supplemental"])
+        self.assertEqual(proof["inherited_required_season_source_rows"], 1)
+        self.assertEqual(proof["inherited_required_season_published_canonical_rows"], 1)
+
+    def test_16_baseline_fingerprints_remain_unchanged_by_proof(self):
         before = fixture.git(self.repo, "status", "--porcelain")
         proof = self._prove()
         self.assertEqual(before, fixture.git(self.repo, "status", "--porcelain"))

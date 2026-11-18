@@ -56,6 +56,7 @@ def prove_expansion_stage4_coverage(
     research_base_sha: str,
     required_completed_season_cutoff: str,
     supplemental_rows: list[dict[str, str]],
+    allow_empty_supplemental: bool = False,
 ) -> dict[str, Any]:
     """Prove that the omitted completed season is already published, not missing.
 
@@ -75,9 +76,10 @@ def prove_expansion_stage4_coverage(
         scope_expression = baseline["scope_row"].get("top_level_scope", "").strip()
         if not scope_expression:
             raise ExpansionStage4CoverageError("missing baseline scope expression")
-        if not supplemental_rows:
+        if not supplemental_rows and not allow_empty_supplemental:
             raise ExpansionStage4CoverageError(
-                "expansion Stage 4 must not claim an empty supplemental game universe"
+                "expansion Stage 4 must not claim an empty supplemental game universe "
+                "without manifest-authenticated zero-delta Stage 3B authority"
             )
         if not season_is_published_history(required, program):
             raise ExpansionStage4CoverageError(
@@ -172,15 +174,18 @@ def prove_expansion_stage4_coverage(
 
         # Verify baseline program metadata and the owner scope reference classify
         # every season across the supplemental -> completed-season span identically.
-        earliest = min(all_seasons)
-        for year in range(int(earliest[:4]), int(required[:4]) + 1):
-            season = f"{year:04d}-{year+1:04d}"
-            if season_is_published_history(season, program) != _scope_reference_includes(
-                season, scope_expression, program.get("history_start_season", "").strip()
-            ):
-                raise ExpansionStage4CoverageError(
-                    f"inherited scope row and program metadata disagree for {season}"
-                )
+        # A zero-delta expansion has no supplemental span; its empty-universe authority
+        # is supplied only by the manifest-authenticated Stage 3B parent in closeout.
+        earliest = min(all_seasons) if all_seasons else ""
+        if earliest:
+            for year in range(int(earliest[:4]), int(required[:4]) + 1):
+                season = f"{year:04d}-{year+1:04d}"
+                if season_is_published_history(season, program) != _scope_reference_includes(
+                    season, scope_expression, program.get("history_start_season", "").strip()
+                ):
+                    raise ExpansionStage4CoverageError(
+                        f"inherited scope row and program metadata disagree for {season}"
+                    )
 
         return {
             "status": "PASS",
@@ -201,8 +206,9 @@ def prove_expansion_stage4_coverage(
             "inherited_required_season_published_canonical_rows": len(published_cutoff),
             "supplemental_game_count": len(ids),
             "supplemental_source_id_population_sha256": population_sha256(ids),
-            "supplemental_first_season": min(all_seasons),
-            "supplemental_last_season": max(all_seasons),
+            "supplemental_first_season": min(all_seasons) if all_seasons else "",
+            "supplemental_last_season": max(all_seasons) if all_seasons else "",
+            "zero_delta_supplemental": not bool(ids),
             "exception_scope": "INHERITED_PUBLISHED_COMPLETED_SEASON_ONLY",
             "research_accepted_inherited_rows_reproven": False,
             "publication_mutation": False,
