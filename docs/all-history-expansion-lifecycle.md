@@ -369,19 +369,26 @@ v2. The original scope/reference row hash remains bound to the immutable
 baseline; accepted replacement scope and owner provenance are bound separately.
 Research/freeze do not mutate the shared reference or program record.
 V2 permits `BASELINE_CONFIRMED` unchanged scope or an explicit
-`OWNER_SUPERSESSION` to `INCEPTION+`. Unsupported replacement expressions
-fail closed until a matching deterministic projection is tested.
+`OWNER_SUPERSESSION` to either `INCEPTION+` or one open first-top-level
+interval in the repository's ordinary `YYYY-YY+` scope syntax. Closed or
+multi-interval supersessions remain unsupported and fail closed until a matching
+deterministic projection is tested.
 
-The v2 manifest derives the exact target program-scope fields for
-`INCEPTION+`: `history_start_season` equals researched inception,
-`history_scope_intervals` is blank, `history_scope_status` is
-`OWNER_CONFIRMED`, `history_scope_basis` is
-`ALWAYS_TOP_LEVEL_FROM_INCEPTION`, and `history_scope_notes` preserves
-the owner-authorized explanation. The scope reference target is
-`INCEPTION+`. A literal owner-decision locator is preserved as an
-auditable assertion, not a self-authenticating proof of the actual owner
-decision. Historical accomplishment audits remain necessary before publishing
-the superseded top-level universe.
+For `INCEPTION+`, the v2 manifest derives `history_start_season` from
+researched inception, leaves `history_scope_intervals` blank, sets
+`history_scope_status=OWNER_CONFIRMED` and
+`history_scope_basis=ALWAYS_TOP_LEVEL_FROM_INCEPTION`, and preserves the
+owner-authorized explanation in `history_scope_notes`. For one open
+first-top-level interval, the manifest normalizes that interval's first season
+into `history_start_season`, leaves `history_scope_intervals` blank, sets
+`history_scope_status=OWNER_CONFIRMED` and
+`history_scope_basis=FIRST_TOP_LEVEL_SEASON`, and preserves the same owner
+notes. The accepted first-top-level season may not predate researched program
+inception. The scope reference target remains the exact accepted owner scope
+expression. A literal owner-decision locator is preserved as an auditable
+assertion, not a self-authenticating proof of the actual owner decision.
+Historical accomplishment audits remain necessary before publishing the
+superseded top-level universe.
 
 ### 13.3 Freeze and downstream safeguards
 
