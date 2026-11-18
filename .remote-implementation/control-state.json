@@ -1359,11 +1359,11 @@
   "current_sequence": 654,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
     "operation": "PHASE0",
     "protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "unlv-phase0-0002",
     "school_key": "unlv",
     "successor_manifest_path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",

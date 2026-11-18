@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7",
+  "prepared_parent_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "prepared_tree_sha": "931fee150bdc48ff0b7dbf4d3dc480d69e096d08",
+  "protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "unlv-phase0-0002",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7"
+}
