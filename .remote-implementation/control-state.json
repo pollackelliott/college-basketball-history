@@ -690,7 +690,7 @@
     "unlv-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
-  "active_lock_commit": null,
+  "active_lock_commit": "9d13f4e87f1ce292876bfaaa1768eec2e1fdcf1f",
   "active_lock_owner": "github-actions:44404452836:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
