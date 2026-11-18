@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf",
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "09da359c219ae40f4eb1867162903f6fdfa9a475",
+  "mutation_classification": "PREPARED_NOT_PUBLISHED",
+  "protected_main_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "recovered_request_id": "wyoming-stage2-sealed-apply-0001",
+  "request_id": "wyoming-stage2-sealed-apply-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/wyoming-onboarding"
+}
