@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+  "apply_request_id": "wyoming-stage2-preseal-0004-apply",
+  "approved_plan_hash": "2626333f0053bccfbc7e2669001dd2a2317b561a92c98540da27dba114f1d37c",
+  "changed_path_count": 96,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+  "release_manifest_sha256": "09b4ad1cdb5ac26c837c0b49e2da18a23ed4e3ea99544f0e544d77f1d8483af5",
+  "school_key": "wyoming",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "60ed10a52b3daf4712d80ab4d793edfc5a5d384f1dc68c504f82cf6e21216550",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "a16d2a0c67493566c88b2b87fdca9d7a1f442d81f69a85f1fc965f38f9a26a88",
+  "writeahead_sha256": "187d53f274c7f93fcf07cf79a6a129759d62ecc8a1298f2026c90fa639fa8d38"
+}

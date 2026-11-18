@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "2626333f0053bccfbc7e2669001dd2a2317b561a92c98540da27dba114f1d37c",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/wyoming/wyoming-release-readiness-0001/pr-body.md",
+  "body_sha256": "15ea6849a5dc0a7b45da77c4a07f33e3067412e496ca3e4caef894eb354bb5d4",
+  "head_branch": "data/wyoming-onboarding",
+  "head_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish Wyoming history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "wyoming-release-preview-verify-0001",
+  "readiness_request_id": "wyoming-release-readiness-0001",
+  "release_manifest_sha256": "09b4ad1cdb5ac26c837c0b49e2da18a23ed4e3ea99544f0e544d77f1d8483af5",
+  "schema_version": 1,
+  "school_key": "wyoming"
+}

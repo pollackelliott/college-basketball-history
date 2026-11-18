@@ -1,0 +1,52 @@
+{
+  "approved_plan_hash": "2626333f0053bccfbc7e2669001dd2a2317b561a92c98540da27dba114f1d37c",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly said 'Proceed' after Wyoming Stage 2 sealed apply completed and was independently fresh-verified PASS. This authorizes the routine release-preparation phase through read-only RELEASE_READINESS, exact GitHub connector PR creation/reuse, CI/mergeability and exact Vercel Preview verification, ending at OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2 approval, PR merge, Production proof, new historical decisions, and unrelated shared/global mutations are NOT authorized.",
+    "origin": "Same serialized Wyoming ordinary original-school Implementation lane — owner-authorized release-preparation phase"
+  },
+  "expected_protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "b241d59fc72525c9d66d4dcaeb7fd394eea56c0f",
+  "previous_control_state_sha256": "7a30d1e7e6784410745bab83f1ba2d68dc0149c63f26717f69171b7dc52f60b3",
+  "release_manifest_sha256": "09b4ad1cdb5ac26c837c0b49e2da18a23ed4e3ea99544f0e544d77f1d8483af5",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "wyoming-release-preview-verify-0001"
+  },
+  "request_id": "wyoming-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/wyoming/wyoming-stage2-preseal-0004-apply/successor-manifest.json",
+    "sha256": "60ed10a52b3daf4712d80ab4d793edfc5a5d384f1dc68c504f82cf6e21216550"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/wyoming/wyoming-stage2-preseal-0004-apply/stage2-sealed-apply-verification.json",
+    "sha256": "a16d2a0c67493566c88b2b87fdca9d7a1f442d81f69a85f1fc965f38f9a26a88"
+  },
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c"
+}
