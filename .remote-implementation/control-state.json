@@ -1365,11 +1365,11 @@
   "current_sequence": 657,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "unlv-stage2-current-main-refresh-0001",
     "school_key": "unlv",
     "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
