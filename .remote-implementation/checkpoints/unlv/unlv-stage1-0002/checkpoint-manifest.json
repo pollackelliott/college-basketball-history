@@ -1,0 +1,24 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "4c39332f9f23fe545c780c3d725206d6c6360949",
+  "request_id": "unlv-stage1-0002",
+  "research_base_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+  "research_checkpoint_sha256": "02e0e3ff19c5c02b014558d9f33b820b04354a5acfbb2eb333c9a84bd7d2b9b2",
+  "research_member_sha256": {
+    "conferences.csv": "06937895a1b8afb6ec2519b324cbbb76a99079de9942ac0c893394f13f8cc2f8",
+    "notes.md": "b9d336af77e0f12b8ce06b6cff687c30b68a92b3150c0ce406e012542711292b",
+    "opponents.csv": "8e375727357d52bee9d396643709b0382c66cf4d59899536eedacb0c3a6c5715",
+    "source-games.csv": "c55ca18b90b94245f8aefe9342c3377485e04b805e2bb64f89fea08e8ea31fe4",
+    "source-notes.md": "a6970d0a738116a55cda294df61d1ef8f835f4e5bdcb04bdf43c6c05a60233ae",
+    "venues.csv": "43c527f17f61ea047422ce88e52378f366e475638f364f202b629817be853932"
+  },
+  "schema_version": 1,
+  "school_key": "unlv",
+  "sidecars": {
+    "request.json": "b7fd11e69d62aab40ed1e83aa637e19a41835cbfcd8ba73a3d97edc5a1e56957",
+    "stage1-reconciliation.json": "0e6a6037017d11eb5e35b59cd220e4dd5b99d9ea8f1226f1dbdaab235197366b"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
