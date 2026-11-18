@@ -1,17 +1,17 @@
 {
+  "approved_plan_hash": "2626333f0053bccfbc7e2669001dd2a2317b561a92c98540da27dba114f1d37c",
   "authority": {
-    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": true,
+    "recovery": false,
     "release": false,
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -24,20 +24,30 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner-authorized Wyoming release preparation includes safe recovery of accepted failed read-only RELEASE_PREVIEW_VERIFY request wyoming-release-preview-verify-0001. Exact run #44327717501 failed because PR #648 required CI exposed six stale tests hard-coding the pre-Wyoming published cohort as 113 while the exact sealed candidate correctly makes it 114. Failed request SHA256 dc8fc6075b4141bbd7ce3e16932ae711dcd12904a5ad6496e792eb1ef1793764 matches durable active control; no write-ahead, prepared commit/tree, mutation lock, target publication, or PR-head mutation occurred. Exact sealed target 1fc9be9b0a400a60405da1cf487b8a967040687c and protected main d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1 remain unchanged. Authorize only permanent RECOVER to classify NOT_ATTEMPTED and abandon the failed read-only request, returning global control to IDLE. Do not replay the accepted request, alter Wyoming history/data, change PR #648, create historical authority, approve Gate 2, merge, deploy, or bypass failed CI. The already-authorized release-preparation phase remains pending narrow generic test repair and exact fresh Preview verification.",
-    "origin": "Wyoming ordinary Implementation — deterministic failed read-only Preview-verification recovery"
+    "authorization": "Continuation of the already owner-authorized Wyoming Stage 4 release-preparation phase after narrow generic cohort/recovery tooling repair PR #649 merged to protected main 0c3f3948a6369d687459083c15e46ec89b82de57 and frozen release PR #648 was close/reopen revalidated successfully at exact sealed head 1fc9be9b0a400a60405da1cf487b8a967040687c; fresh live-main validation/rehearsal run #44335422659 passed. Earlier Preview request wyoming-release-preview-verify-0001 was durably abandoned NOT_ATTEMPTED. This fresh read-only RELEASE_READINESS request may only rerun readiness on current main, reproduce the exact connector PR packet for existing PR #648, and bind fresh Preview request wyoming-release-preview-verify-0002. No historical change, target mutation, Owner Gate 2 approval, merge, Production proof, recovery, or unrelated mutation is authorized.",
+    "origin": "Same serialized Wyoming ordinary original-school Implementation lane — Stage 4 current-main revalidation continuation"
   },
-  "expected_protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
+  "expected_protected_main_sha": "0c3f3948a6369d687459083c15e46ec89b82de57",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "a3be35fbfd435c965407e3d648196cc7e05e1598",
-  "previous_control_state_sha256": "4536512b81ff732c9171e8c85d7bbcfcac97954f87526d34aae585a64d7ed8a8",
-  "recovery": {
-    "abandoned_request_id": "wyoming-release-preview-verify-0001",
-    "lock_commit": null,
-    "target_branch": null
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "bebaef449757f7103755d3b0b4580d25414ffcf1",
+  "previous_control_state_sha256": "31bcc85380f16407769a30da2033999cb164cfd6dd25be11e14cb7d2e32a899a",
+  "release_manifest_sha256": "09b4ad1cdb5ac26c837c0b49e2da18a23ed4e3ea99544f0e544d77f1d8483af5",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "wyoming-release-preview-verify-0002"
   },
-  "request_id": "wyoming-release-preview-recover-0001",
+  "request_id": "wyoming-release-readiness-0002",
   "schema_version": 1,
-  "school_key": "wyoming"
+  "school_key": "wyoming",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/wyoming/wyoming-stage2-preseal-0004-apply/successor-manifest.json",
+    "sha256": "60ed10a52b3daf4712d80ab4d793edfc5a5d384f1dc68c504f82cf6e21216550"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/wyoming/wyoming-stage2-preseal-0004-apply/stage2-sealed-apply-verification.json",
+    "sha256": "a16d2a0c67493566c88b2b87fdca9d7a1f442d81f69a85f1fc965f38f9a26a88"
+  },
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c"
 }
