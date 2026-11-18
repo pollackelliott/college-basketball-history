@@ -675,7 +675,7 @@
     "wyoming-stage2-preseal-0004-apply"
   ],
   "active_expected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
-  "active_lock_commit": null,
+  "active_lock_commit": "fb0bdd59ba7ab6843af93031ad1d5a407274c2e3",
   "active_lock_owner": "github-actions:44316791194:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
