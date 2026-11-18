@@ -684,7 +684,7 @@
     "unlv-venue-maintenance-0002"
   ],
   "active_expected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
-  "active_lock_commit": null,
+  "active_lock_commit": "7d592f3bf9e42e7974a3e90ff2643260ce4795b0",
   "active_lock_owner": "github-actions:44373711785:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
