@@ -1,0 +1,12 @@
+{
+  "merges": [
+    {
+      "absorbed_venue_id": "VEN-000965",
+      "expected_canonical_rows": 0,
+      "expected_school_rows": 1,
+      "resolution_basis": "Control Center authorization for UNLV Stage 1: VEN-000965 (liu-meadowlands-arena, Meadowlands Arena (Brendan Byrne Arena), East Rutherford, NJ) is a duplicate physical identity of VEN-000028 (brendan-byrne-arena, Brendan Byrne Arena, East Rutherford, NJ). Retain VEN-000028 as survivor, retire VEN-000965, and preserve accepted historical names, aliases, and evidence.",
+      "survivor_venue_id": "VEN-000028"
+    }
+  ],
+  "schema_version": 1
+}
