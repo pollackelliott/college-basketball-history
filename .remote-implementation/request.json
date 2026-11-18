@@ -1,13 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "unlv-phase0-0001",
-  "operation": "PHASE0",
+  "request_id": "unlv-stage1-0003",
+  "operation": "STAGE1_INVENTORY",
   "school_key": "unlv",
-  "previous_control_state_commit": "4cd76c1aac57f0404ec6620d6fca6adb599e2aff",
+  "previous_control_state_commit": "519ad86e792d367beaa976ceba0f1c16983a720e",
   "previous_control_state_sha256": "2bed016fc80974635020b8d67b8d7d0584746c1154cf6967bc6fe2ee7e562986",
-  "expected_protected_main_sha": "4c39332f9f23fe545c780c3d725206d6c6360949",
-  "target_branch": "data/unlv-onboarding",
+  "expected_protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
   "research_checkpoint": {
     "sha256": "02e0e3ff19c5c02b014558d9f33b820b04354a5acfbb2eb333c9a84bd7d2b9b2",
     "research_base_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
@@ -18,25 +17,14 @@
       "part_count": 14
     }
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/unlv/unlv-stage1-0002/checkpoint-manifest.json",
-    "sha256": "a8f7d445193c6fd1977d40b15a2801d9a738c7c15b83e12edef04c98f936de69"
-  },
   "venue_reconciliation": null,
   "conference_reconciliation": null,
-  "history_scope": {
-    "start_season": "1969-1970",
-    "basis": "FIRST_TOP_LEVEL_SEASON",
-    "intervals": "",
-    "notes": "Accepted immutable UNLV Research authority preserves complete institutional history separately while the accepted top-level/public scope is 1969-70+. Current protected-main program-top-level-scope authority independently confirms UNLV,1969-70+. No scope supersession or Research reopening."
-  },
   "creation_provenance": {
-    "origin": "ChatGPT UNLV serialized ordinary original-school Implementation lane — owner-authorized Phase 0 after refreshed Stage 1 PASS",
-    "authorization": "Owner explicitly said Proceed after UNLV Stage 1 request unlv-stage1-0002 durably passed against protected main 4c39332f9f23fe545c780c3d725206d6c6360949 with zero blockers, zero ambiguous stops, zero maintenance-required items, 66 safe venue reuses and 3 ordinary new venue registrations. This authorizes exactly one guarded PHASE0 transaction bound to the unchanged immutable UNLV Research Freeze and exact Stage 1 PASS checkpoint: fresh-repeat Stage 1, deterministic target-school/reference registration within ordinary Phase 0, Integration Freeze creation, durable write-ahead, create-once publication to data/unlv-onboarding under the global mutation lock/CAS contract, and required independent fresh Phase 0 verification. It does not reopen Research, authorize unrelated shared/global maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, Preview, merge, Production, recovery, or direct protected-main mutation."
+    "origin": "ChatGPT serialized ordinary original-school UNLV Implementation lane",
+    "authorization": "Technical current-main refresh inside the already-authorized UNLV Phase 0 progression. The previously published unlv-phase0-0001 inbox request was never accepted and became stale only because protected main advanced linearly from 4c39332f9f23fe545c780c3d725206d6c6360949 to 35cc6cf377a269cf8d6d535a8945d537d0a5b19a through generic Research Stage 3A-0 tooling/test changes with no UNLV, shared-reference, canonical, or basketball-data changes. Rerun the complete read-only Stage 1 inventory against exact current main and stop. No Phase 0 mutation in this request, no Stage 2, owner gate, release, recovery, or Research reopening."
   },
   "authority": {
-    "phase0": true,
-    "expansion_phase0": false,
+    "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
