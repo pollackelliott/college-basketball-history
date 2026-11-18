@@ -38,6 +38,7 @@ import subprocess
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+from game_assertion_store import append_game_assertions, read_game_assertions
 
 from administrative_status import administrative_status_errors
 from frozen_venue_authority import (
@@ -1920,7 +1921,7 @@ def main() -> int:
             post_reconciliation_semantics=sealed_verification_plan is not None,
         )
         canonical = read_csv(canonical_path)
-        assertions = read_csv(assertions_path)
+        _, assertions = read_game_assertions(repo_root)
         discrepancies = read_csv(discrepancies_path)
     except (FileNotFoundError, ValueError) as exc:
         print(f"FAIL: invalid ingestion inputs: {exc}")
@@ -2324,7 +2325,7 @@ def main() -> int:
         return 0
 
     write_csv(canonical_path, CANONICAL_FIELDS, canonical + new_canonical)
-    write_csv(assertions_path, ASSERTION_FIELDS, assertions + new_assertions)
+    append_game_assertions(repo_root, ASSERTION_FIELDS, new_assertions)
     if local_assertions_path.exists() and new_local_assertions:
         write_csv(
             local_assertions_path,

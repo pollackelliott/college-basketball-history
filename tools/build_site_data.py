@@ -21,6 +21,7 @@ import unicodedata
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
+from game_assertion_store import read_game_assertions
 from typing import Any
 
 from conference_reference import (
@@ -788,7 +789,7 @@ def main() -> int:
     membership_rows = read_csv(memberships_path)
     conference_rows = read_csv(conferences_path)
     canonical_rows = read_csv(games_path)
-    assertion_rows = read_csv(assertions_path)
+    _, assertion_rows = read_game_assertions(repo_root)
     coverage_path = repo_root / "data" / "reference" / "historical-season-coverage.csv"
     accounting_path = (
         repo_root / "data" / "reference" / "historical-season-accounting.csv"

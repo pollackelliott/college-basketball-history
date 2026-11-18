@@ -504,6 +504,7 @@ class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
             with patch("expansion_implementation_stage1.git_revision", return_value=main), \
                  patch("expansion_implementation_stage1.git_bytes", side_effect=git_show), \
                  patch("expansion_implementation_stage1.read_csv_at_git", side_effect=read_rows), \
+                 patch("game_assertion_store.assertion_relative_paths_at_git", return_value=["data/evidence/game-assertions.csv"]), \
                  patch("expansion_implementation_stage1.verify_expansion", side_effect=verification), \
                  patch("expansion_implementation_stage1.authenticate_baseline", return_value=baseline), \
                  patch("expansion_implementation_stage1.validate_delta_payload", side_effect=validated_delta):
@@ -636,7 +637,9 @@ class Stage1AuthenticatedWorkflowTests(unittest.TestCase):
                  patch("expansion_implementation_stage1.prepare_current_main_identity_rebase",
                        return_value=(baseline, validated, metadata, [])), \
                  patch("expansion_implementation_stage1.read_csv_at_git",
-                       side_effect=read_rows):
+                       side_effect=read_rows), \
+                 patch("game_assertion_store.assertion_relative_paths_at_git",
+                       return_value=["data/evidence/game-assertions.csv"]):
                 result = stage1(
                     repo, "sample", artifact, sha256(artifact.read_bytes()),
                     base, main, output,

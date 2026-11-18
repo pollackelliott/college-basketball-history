@@ -86,12 +86,22 @@ jobs:
               control_commit = control_head
               state = json.loads(Path('control/.remote-implementation/control-state.json').read_text())
               last = state.get('last_operation') or {}
+              recovered_idle = (
+                  state.get('transaction_state') in (
+                      'ABANDONED_PREPARED_NOT_PUBLISHED',
+                      'ABANDONED_NOT_ATTEMPTED',
+                  )
+                  and last.get('operation') == 'RECOVER'
+              )
               if (state.get('kind') != 'REMOTE_IMPLEMENTATION_GLOBAL_CONTROL'
                       or state.get('lifecycle_state') != 'IDLE'
-                      or state.get('transaction_state') != 'COMPLETE'
+                      or (
+                          state.get('transaction_state') != 'COMPLETE'
+                          and not recovered_idle
+                      )
                       or state.get('recovery_required')
                       or state.get('active_request_id')):
-                  fail('global control is not safely idle and complete')
+                  fail('global control is not safely idle after complete or recovered transaction')
               if (last.get('operation') == 'STAGE2_PROPOSAL_REHEARSAL'
                       and last.get('stage2_status') == 'BLOCKED'
                       and last.get('fresh_runner_verification') == 'PASS'
@@ -144,6 +154,37 @@ jobs:
                           or manifest.get('filled_review_sha256') != last.get('filled_review_sha256')
                           or manifest.get('owner_gate_1_approval_sha256') != last.get('owner_gate_1_approval_sha256')):
                       fail('checkpoint does not bind exact verified last operation')
+              elif (last.get('operation') == 'RECOVER'
+                    and last.get('disposition') in (
+                        'ABANDONED_PREPARED_NOT_PUBLISHED',
+                        'ABANDONED_NOT_ATTEMPTED',
+                    )):
+                  mode = 'RECOVERED_IDLE'
+                  checkpoint = ''
+                  recovery = last.get('recovery_manifest') or {}
+                  expected_main = str(recovery.get('protected_main_sha') or '')
+                  school = str(recovery.get('target_branch') or '')
+                  target_sha = str(recovery.get('actual_target_sha') or '')
+                  classification = str(recovery.get('mutation_classification') or '')
+                  if (recovery.get('kind') != 'REMOTE_IMPLEMENTATION_RECOVERY'
+                          or not re.fullmatch(
+                              r'[a-z0-9][a-z0-9-]*',
+                              str(recovery.get('request_id') or ''),
+                          )
+                          or recovery.get('recovered_request_id') != last.get('recovered_request_id')
+                          or classification != {
+                              'ABANDONED_PREPARED_NOT_PUBLISHED': 'PREPARED_NOT_PUBLISHED',
+                              'ABANDONED_NOT_ATTEMPTED': 'NOT_ATTEMPTED',
+                          }.get(last.get('disposition'))
+                          or not valid_sha(expected_main)
+                          or not valid_sha(target_sha)
+                          or not school.startswith('data/')):
+                      fail('recovered-idle control does not bind a valid recovery manifest')
+                  remote_target = git(
+                      'candidate', 'ls-remote', 'origin', 'refs/heads/' + school
+                  ).split()
+                  if not remote_target or remote_target[0] != target_sha:
+                      fail('recovered-idle target no longer equals classified unpublished target')
               elif (last.get('operation') == 'STAGE2_CURRENT_MAIN_REFRESH'
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_current_main_refresh_equivalence') == 'PASS'):
@@ -172,7 +213,7 @@ jobs:
                           or refresh_ref.get('sha256') != last.get('successor_manifest_sha256')):
                       fail('live census continuation does not bind exact verified refresh')
               else:
-                  fail('latest operation is neither a verified blocked proposal nor a verified refresh with live census continuation')
+                  fail('latest operation has no authenticated candidate-runtime authority mode')
               remote = git('candidate', 'ls-remote', 'origin', 'refs/heads/' + os.environ['PR_HEAD_REF']).split()
               if not remote or remote[0] != candidate:
                   fail('live PR head no longer equals event candidate SHA')
@@ -438,6 +479,9 @@ jobs:
           )"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_REFRESH" ]]; then
             scoped_main="$EXPECTED_MAIN_SHA"
+          elif [[ "$AUTHORITY_MODE" == "RECOVERED_IDLE" ]]; then
+            scoped_main="$EXPECTED_MAIN_SHA"
+            echo 'RECOVERED_IDLE_NO_HISTORICAL_REPLAY_REQUIRED=PASS'
           else
             echo "Unsupported authority mode: $AUTHORITY_MODE" >&2
             exit 1

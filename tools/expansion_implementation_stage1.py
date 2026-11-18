@@ -18,6 +18,7 @@ import sys
 import zipfile
 from collections import Counter, defaultdict
 from pathlib import Path
+from game_assertion_store import read_game_assertions_at_git
 from typing import Any, Mapping
 
 from all_history_expansion_freeze import (
@@ -872,8 +873,8 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
             changed_sources = set(
                 current_main_reconciliation.get("changed_source_game_ids") or []
             )
-            assertions = read_csv_at_git(
-                repo, main_sha, "data/evidence/game-assertions.csv"
+            assertions = read_game_assertions_at_git(
+                repo, main_sha, read_csv_at_git
             )
             assertion_ids: dict[str, set[str]] = defaultdict(set)
             for row in assertions:

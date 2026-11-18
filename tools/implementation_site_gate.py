@@ -14,6 +14,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
+from game_assertion_store import read_game_assertions
 from typing import Any
 
 from integration_freeze_guard import SEMANTIC_SOURCE_GAME_FIELDS
@@ -779,7 +780,7 @@ def implementation_site_report(
     source_fields, all_sources = read_csv(source_path)
     _, programs = read_csv(programs_path)
     _, canonical = read_csv(canonical_path)
-    _, assertions = read_csv(assertions_path)
+    _, assertions = read_game_assertions(repo)
     _, discrepancies = read_csv(discrepancies_path)
 
     program = next(
