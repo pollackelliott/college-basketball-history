@@ -414,10 +414,15 @@ def source_home_chronology_report(
     ]
     warnings: list[str] = []
     if not chronology_rows:
-        # A package without HOME games has no HOME chronology obligation.
-        # Continue warning for actual HOME games lacking relationship evidence.
+        # HOME chronology constrains exact physical venue assignments. A package whose
+        # HOME rows all retain blank curated venues has no exact venue chronology to
+        # challenge here; site-completeness accounting separately governs whether those
+        # blanks are valid researched debt. Continue warning only when at least one HOME
+        # row actually assigns an exact venue without documented HOME relationship
+        # evidence.
         if any(
             row.get("curated_site_type", "").strip().upper() == "SOURCE_PROGRAM_HOME"
+            and row.get("curated_venue_name", "").strip()
             for row in game_rows
         ):
             warnings.append(
