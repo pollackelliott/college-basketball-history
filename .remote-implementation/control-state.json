@@ -687,15 +687,15 @@
   "active_lock_commit": "7d592f3bf9e42e7974a3e90ff2643260ce4795b0",
   "active_lock_owner": "github-actions:44373711785:1",
   "active_operation": "VENUE_IDENTITY_MAINTENANCE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "36db2ec0d58eaf49931f5a363d601bb00d33141f",
+  "active_prepared_tree_sha": "d9bff71f5e0ff9706a044f7bf29f34cca64964f4",
   "active_request_id": "unlv-venue-maintenance-0002",
   "active_request_sha256": "b78e74f67fd1dfc5c7d8b259c8d56fc32f580c27bfac4c8cca8b740b23facf68",
   "active_school_key": "unlv",
   "active_target_branch": "maintenance/unlv-stage1-meadowlands-identity",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/unlv/unlv-venue-maintenance-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "7b67499ab23eb7091da94b98653376d41b4fbacb9a40441c09a9b986e3af74d3",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1367,5 +1367,5 @@
   "lock_acquisition_request_commit": "9e50b41c3283786085d418a364b9e70072e14d72",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

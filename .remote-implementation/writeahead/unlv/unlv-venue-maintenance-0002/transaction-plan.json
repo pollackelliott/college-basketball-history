@@ -1,0 +1,42 @@
+{
+  "blockers": [],
+  "fingerprints": {
+    "data/canonical/games.csv": "aed7848ad5f2cfac67a054b8afd2ea7e79cc2838464b2dcd599f0de52c172d2e",
+    "data/evidence/game-assertions.csv": "31fb313e90ea359df846bc99189d4552a8d62d5ed245cfe1e945f9b249864f6d",
+    "data/evidence/ncaa-tournament-sites.csv": "eb462cba0e44bc87bcedb6b95aa0aa690a917bf4010263db156b281763851135",
+    "data/reconciliation/venue-identity-maintenance/unlv-stage1.json": "6286eeb7e57ca3da1d8a647ba9d2b27e99fb1fcc6d3fef5dbeee73531aa142e5",
+    "data/reference/venue-names.csv": "f4ee5d839b12090b80c5c654a4d9b8c7a6148f7abcd076163c274787394360b3",
+    "data/reference/venues.csv": "d8a8297610ad9189342bb784b23f431cb70586c9483b301a61eacdc8e5e3d0a2",
+    "schools/long-island-university/venues.csv": "972a151dbd3c43faed243ca400e0014861d5f5a6841fce01fbcf9b33f380d42d"
+  },
+  "geography_corrections": [],
+  "git_head": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "merges": [
+    {
+      "absorbed_venue_id": "VEN-000965",
+      "absorbed_venue_key": "liu-meadowlands-arena",
+      "assertion_rows": 0,
+      "canonical_rows": 0,
+      "city": "East Rutherford",
+      "expected_canonical_rows": 0,
+      "expected_school_rows": 1,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 0,
+      "resolution_basis": "Control Center authorization for UNLV Stage 1: VEN-000965 (liu-meadowlands-arena, Meadowlands Arena (Brendan Byrne Arena), East Rutherford, NJ) is a duplicate physical identity of VEN-000028 (brendan-byrne-arena, Brendan Byrne Arena, East Rutherford, NJ). Retain VEN-000028 as survivor, retire VEN-000965, and preserve accepted historical names, aliases, and evidence.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "NJ",
+      "survivor_venue_id": "VEN-000028",
+      "survivor_venue_key": "brendan-byrne-arena",
+      "venue_name_rows": 1
+    }
+  ],
+  "plan_sha256": "0ce2432b069a893713644b18e1ac5c6045cca1a1f92810319d3f45e620e18161",
+  "schema_version": 1,
+  "spec": "data/reconciliation/venue-identity-maintenance/unlv-stage1.json"
+}
