@@ -1579,8 +1579,9 @@ def _institutional_scope_payload(
         defects.append({"reason": "INSTITUTIONAL_SCOPE_RESEARCH_BASE_MISMATCH"})
 
     inception = str(payload.get("program_inception_season", "")).strip()
-    match = re.fullmatch(r"(\d{4})-(\d{4})", inception)
-    if not match or int(match.group(2)) != int(match.group(1)) + 1:
+    try:
+        project_season_label(inception)
+    except ValueError:
         defects.append({"reason": "INSTITUTIONAL_SCOPE_INCEPTION_INVALID"})
 
     top_level_scope = str(payload.get("top_level_scope", "")).strip()
