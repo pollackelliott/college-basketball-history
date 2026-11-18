@@ -1,0 +1,20 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_PHASE0_INPUTS",
+  "protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "request_id": "unlv-phase0-0002",
+  "research_checkpoint_sha256": "02e0e3ff19c5c02b014558d9f33b820b04354a5acfbb2eb333c9a84bd7d2b9b2",
+  "research_member_sha256": {
+    "conferences.csv": "06937895a1b8afb6ec2519b324cbbb76a99079de9942ac0c893394f13f8cc2f8",
+    "notes.md": "b9d336af77e0f12b8ce06b6cff687c30b68a92b3150c0ce406e012542711292b",
+    "opponents.csv": "8e375727357d52bee9d396643709b0382c66cf4d59899536eedacb0c3a6c5715",
+    "source-games.csv": "c55ca18b90b94245f8aefe9342c3377485e04b805e2bb64f89fea08e8ea31fe4",
+    "source-notes.md": "a6970d0a738116a55cda294df61d1ef8f835f4e5bdcb04bdf43c6c05a60233ae",
+    "venues.csv": "43c527f17f61ea047422ce88e52378f366e475638f364f202b629817be853932"
+  },
+  "schema_version": 1,
+  "school_key": "unlv",
+  "sidecars": {
+    "stage1-reconciliation.json": "5de2dd6fd1caa1e3c7cbbe05c16b2f97b961855a773404418cc752f45c365029"
+  },
+  "stage1_status": "PASS"
+}
