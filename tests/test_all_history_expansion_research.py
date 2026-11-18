@@ -283,7 +283,8 @@ class AllHistoryExpansionResearchTests(unittest.TestCase):
                 continue
             eligible.append(row)
 
-        self.assertEqual(len(published), 113)
+        # Ordinary school onboarding may grow the published portfolio. This
+        # test owns expansion eligibility semantics, not a frozen portfolio size.
         # Completed expansion targets leave the eligible legacy cohort without
         # changing the published portfolio or its inherited top-level scope.
         self.assertEqual(

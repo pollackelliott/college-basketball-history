@@ -107,7 +107,6 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
             and row["public_page_enabled"] != "Yes"
         ]
 
-        self.assertEqual(len(published), 113)
         complete = [
             row for row in published
             if row["history_coverage_status"] == "COMPLETE_INSTITUTIONAL"
@@ -118,7 +117,10 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
         ]
         baseline_legacy = {
             row["program_key"] for row in published
-            if self.scope_for(row) != "INCEPTION+"
+            if (
+                row["program_key"] in LEGACY_PUBLISHED_KEYS
+                and self.scope_for(row) != "INCEPTION+"
+            )
         }
         scope_superseded = {
             row["program_key"] for row in published
@@ -139,22 +141,28 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
             row["program_key"] for row in complete
             if row["program_key"] in baseline_legacy
         }
-        # Each accepted expansion moves one baseline legacy program to full
-        # institutional publication. A separately approved inception-scope
-        # supersession also moves that program out of the live legacy cohort.
-        self.assertEqual(
-            len(complete),
-            89 + len(expanded) + len(scope_superseded),
-        )
-        self.assertEqual(
-            len(legacy),
-            24 - len(expanded) - len(scope_superseded),
-        )
+        # Accepted expansions and inception-scope supersessions can only shrink
+        # the original legacy cohort. Ordinary school onboarding may add new
+        # COMPLETE_INSTITUTIONAL public programs without belonging to that
+        # historical 24-program baseline.
+        expected_legacy = LEGACY_PUBLISHED_KEYS - expanded - scope_superseded
         self.assertEqual(
             {row["program_key"] for row in legacy},
-            LEGACY_PUBLISHED_KEYS - expanded - scope_superseded,
+            expected_legacy,
         )
-        self.assertEqual(len(unpublished), 252)
+        self.assertEqual(
+            {row["program_key"] for row in complete},
+            {row["program_key"] for row in published} - expected_legacy,
+        )
+        self.assertEqual(len(complete) + len(legacy), len(published))
+        current_d1 = {
+            row["program_key"] for row in self.programs
+            if row["current_d1"] == "Yes"
+        }
+        published_keys = {row["program_key"] for row in published}
+        unpublished_keys = {row["program_key"] for row in unpublished}
+        self.assertFalse(published_keys & unpublished_keys)
+        self.assertEqual(published_keys | unpublished_keys, current_d1)
         self.assertTrue(
             all(row["history_coverage_status"] == "UNMIGRATED"
                 for row in unpublished)
@@ -173,7 +181,8 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
                     "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
                 )
             elif status == "COMPLETE_INSTITUTIONAL":
-                self.assertIn(row["program_key"], baseline_legacy)
+                # This may be either an accepted expansion of the historical
+                # legacy cohort or a newly published ordinary school.
                 self.assertTrue(row["program_inception_season"])
                 self.assertLessEqual(
                     row["program_inception_season"],
@@ -690,8 +699,6 @@ class AllHistoryUniverseConferenceProjectionTests(unittest.TestCase):
             row for row in programs
             if row["public_page_enabled"] == "Yes"
         ]
-        self.assertEqual(len(published), 113)
-
         for program in published:
             key = program["program_key"]
             history = read_csv(ROOT / "schools" / key / "conferences.csv")
@@ -780,8 +787,6 @@ class AllHistoryUniversePublicNonregressionTests(unittest.TestCase):
             row for row in self.programs
             if row["public_page_enabled"] == "Yes"
         ]
-        self.assertEqual(len(published), 113)
-
         selector_union = set()
         frozen_site_union = set()
         for program in published:
