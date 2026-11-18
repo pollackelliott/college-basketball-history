@@ -10,6 +10,7 @@ CAS publication, recovery, and fresh verification.
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import sys
 import tempfile
@@ -320,11 +321,17 @@ def run_sealed_apply_tool(
     runtime_repo = (tool_repo or RUNTIME_ROOT).resolve()
     onboard_tool = runtime_repo / "tools/onboard_school.py"
     onboarding_plan_tool = runtime_repo / "tools/onboarding_plan.py"
-    if not onboard_tool.is_file() or not onboarding_plan_tool.is_file():
+    validator_tool = runtime_repo / "tools/validate_data.py"
+    if (
+        not onboard_tool.is_file()
+        or not onboarding_plan_tool.is_file()
+        or not validator_tool.is_file()
+    ):
         raise Stop("STAGE2_SEALED_APPLY_RUNTIME_TOOL_MISSING")
     runtime_tool_sha256 = {
         "tools/onboard_school.py": sha256_file(onboard_tool),
         "tools/onboarding_plan.py": sha256_file(onboarding_plan_tool),
+        "tools/validate_data.py": sha256_file(validator_tool),
     }
 
     cmd = [
@@ -341,7 +348,15 @@ def run_sealed_apply_tool(
         "--approved-plan-file",
         str(approved_path),
     ]
-    cp = run(cmd, cwd=runtime_repo, check=False)
+    prior_validator_override = os.environ.get("CBB_VALIDATE_DATA_TOOL_OVERRIDE")
+    os.environ["CBB_VALIDATE_DATA_TOOL_OVERRIDE"] = str(validator_tool)
+    try:
+        cp = run(cmd, cwd=runtime_repo, check=False)
+    finally:
+        if prior_validator_override is None:
+            os.environ.pop("CBB_VALIDATE_DATA_TOOL_OVERRIDE", None)
+        else:
+            os.environ["CBB_VALIDATE_DATA_TOOL_OVERRIDE"] = prior_validator_override
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "stage2-sealed-apply.log").write_text(
         cp.stdout or "",

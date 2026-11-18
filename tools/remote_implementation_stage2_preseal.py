@@ -345,6 +345,7 @@ def run_stage2_preseal_rehearsal_tool(
     runtime_tool_sha256 = {
         "tools/onboarding_hardening.py": sha256_file(hardening_tool),
         "tools/onboard_school.py": sha256_file(onboard_tool),
+        "tools/validate_data.py": sha256_file(validator_tool),
     }
 
     cmd = [
