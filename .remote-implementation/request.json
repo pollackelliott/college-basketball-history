@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "unlv-stage2-census-0002",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "unlv-stage2-current-main-refresh-0002",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "unlv",
-  "previous_control_state_commit": "203a7b12c276206ba91916aac5b77bddf2080948",
-  "previous_control_state_sha256": "7fd585544bdc811c1800c40011dbe2a17c836696f93f7588f1cdfd5136ba9cd6",
-  "expected_protected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
+  "previous_control_state_commit": "aee9124b817e79f16ff27e5362ba0545a7066659",
+  "previous_control_state_sha256": "fa026f585c625c6cecb7c352cf0aa4e912065224d4a8fc9252d7e5a86ce219ab",
+  "expected_protected_main_sha": "71fa9541e758e623d849d5ef165e8874949673d9",
   "target_branch": "data/unlv-onboarding",
   "target_sha": "80f9a7bcf66cc12f3bef8be78f7960c894130576",
   "phase0_successor": {
@@ -23,16 +23,31 @@
   },
   "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
   "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized UNLV Stage 2 persists after protected main advanced from f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3 to 71fa9541e758e623d849d5ef165e8874949673d9 via generic Stage 4 zero-delta expansion PR #653. Authenticated intervening main paths are docs/research-stage4-authoring-contract.md, tests/test_research_stage4_expansion_coverage.py, tools/expansion_stage4_coverage.py, and tools/research_stage4_closeout.py. They are disjoint from UNLV's target-only basketball/reference/package paths and do not touch Stage 2 planner/runtime semantics. Fresh-verified census unlv-stage2-census-0002 is CAPABILITY_CENSUS_READY with 46 decisions, zero blockers/warnings, decision universe 6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982, and tracked mutation NONE. This request authorizes the guarded disjoint refresh and repository-owned STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation using the exact mature map bound below; continuation must fail closed on any decision-universe drift and stop at OWNER_GATE_1_READY or any blocker."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "unlv-stage2-census-0003",
+    "proposal_request_id": "unlv-stage2-proposal-0001",
+    "expected_decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/unlv-stage2-current-main-refresh-0002/recommendation-map.json",
+      "sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395"
+    }
+  },
   "creation_provenance": {
-    "origin": "UNLV serialized ordinary original-school Implementation Stage 2 — fresh census after PR #652 coverage repair and verified current-main refresh",
-    "authorization": "Same owner-authorized UNLV Stage 2 phase. Fresh-verified STAGE2_CURRENT_MAIN_REFRESH unlv-stage2-current-main-refresh-0001 advanced the onboarding branch to 80f9a7bcf66cc12f3bef8be78f7960c894130576 against protected main f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3 while preserving the exact Integration Freeze, semantic snapshot, and all UNLV package bytes. PR #652 intentionally changed planner coverage semantics for ordinary complete-institutional unpublished schools whose inception precedes accepted top-level scope, so the prior seven-decision universe is invalidated by design. Exact-head candidate rehearsal produced corrected decision universe 6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982 with tracked Stage 2 mutation NONE. This request authorizes one ordinary read-only fresh Stage 2 census only, recomputing the complete decision universe from unchanged frozen authority under current protected-main tooling. No phase_continuation or stale map is supplied. No tracked basketball mutation, historical reinterpretation, Owner Gate 1 approval, fill, pre-seal, seal, apply, release, Preview, merge, Production, recovery, or shared/global historical mutation is authorized."
+    "origin": "UNLV serialized ordinary original-school Implementation Stage 2 — second disjoint current-main refresh with mature 46-decision map",
+    "authorization": "Owner Continue preserves the same Stage 2 technical/reconciliation authority. The map was matured from fresh-verified census-0002 using reciprocal/current repository evidence plus UNLV's frozen source evidence; it creates recommendations only, not historical authority. The continuation may refresh, regenerate the exact same 46-decision universe, and rehearse this exact map to OWNER_GATE_1_READY. No Owner Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, recovery, or unrelated shared/global mutation is authorized."
   },
   "authority": {
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
