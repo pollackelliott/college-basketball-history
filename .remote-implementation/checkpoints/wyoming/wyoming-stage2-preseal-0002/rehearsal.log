@@ -1,0 +1,109 @@
+Rehearsing filled review in /tmp/preseal-wyoming-wm0tc208/repository
+
+=== sealed correction-only identity retarget ===
+{}
+
+=== owner-approved pre-ingest source patches ===
+{}
+
+=== ingestion apply ===
+College Basketball History — data validation
+Repository: /tmp/preseal-wyoming-wm0tc208/repository
+
+Canonical games:      211,622
+Source assertions:    299,214
+Discrepancies:        11,246
+Reference programs:   365
+Accomplishment rows:  365
+Conference rows:      365
+Reference venues:     1,117
+
+WARNINGS (10):
+  - missouri: 3,022 legacy source/assertion rows drift (city=1,653, curated_site_type=3,022, curated_venue_name=1,586, state=1,582); run ingest_school.py --check-package for target-team enforcement.
+  - missouri: 3,024 legacy source/local-assertion rows drift (city=1,694, curated_site_type=3,024, curated_venue_name=1,593, state=1,622); run ingest_school.py --check-package for target-team enforcement.
+  - arkansas accomplishments: public accomplishment row awaits source verification.
+  - florida accomplishments: public accomplishment row awaits source verification.
+  - illinois accomplishments: public accomplishment row awaits source verification.
+  - kansas accomplishments: public accomplishment row awaits source verification.
+  - kentucky accomplishments: public accomplishment row awaits source verification.
+  - missouri accomplishments: public accomplishment row awaits source verification.
+  - northwestern accomplishments: public accomplishment row awaits source verification.
+  - tennessee accomplishments: public accomplishment row awaits source verification.
+
+FAIL (1481 errors):
+  - CBBG-0000550: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1938-39-P153C2Y2443.
+  - CBBG-0000834: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1952-53-P155C1Y1403.
+  - CBBG-0002509: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-2010-11-P163C1Y1323.
+  - CBBG-0018995: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1985-86-P159C1Y5083.
+  - CBBG-0036065: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1951-52-P154C3Y5017.
+  - CBBG-0041113: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1999-00-P161C1Y7030.
+  - CBBG-0047860: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1959-60-P155C3Y5216.
+  - CBBG-0054389: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1934-35-P153C1Y2283.
+  - CBBG-0054402: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1935-36-P153C1Y3770.
+  - CBBG-0054780: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1961-62-P156C1Y2763.
+  - CBBG-0054835: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1964-65-P156C2Y2443.
+  - CBBG-0054873: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1966-67-P156C2Y7098.
+  - CBBG-0054951: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1970-71-P157C1Y3290.
+  - CBBG-0054992: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1972-73-P157C2Y1003.
+  - CBBG-0055174: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1981-82-P158C2Y4730.
+  - CBBG-0055225: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1983-84-P158C3Y4080.
+  - CBBG-0055269: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1985-86-P159C1Y2523.
+  - CBBG-0055326: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1987-88-P159C2Y3448.
+  - CBBG-0055380: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1989-90-P159C3Y3723.
+  - CBBG-0055796: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-2006-07-P162C2Y1602.
+  - CBBG-0062101: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1968-69-P156C3Y5770.
+  - CBBG-0065130: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-2002-03-P161C3Y2938.
+  - CBBG-0065353: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-2018-19-P164C2Y2298.
+  - CBBG-0068675: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1961-62-P156C1Y2843.
+  - CBBG-0069176: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1982-83-P158C3Y1152.
+  - CBBG-0069259: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1985-86-P159C1Y2683.
+  - CBBG-0070158: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-2016-17-P164C1Y2668.
+  - CBBG-0071437: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1950-51-P154C3Y2114.
+  - CBBG-0071438: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1950-51-P154C3Y2193.
+  - CBBG-0071497: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1952-53-P155C1Y1483.
+  - CBBG-0071498: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1952-53-P155C1Y1563.
+  - CBBG-0071684: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1960-61-P155C3Y7104.
+  - CBBG-0072266: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1984-85-P158C3Y7007.
+  - CBBG-0078897: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1951-52-P154C3Y6777.
+  - CBBG-0078898: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1951-52-P154C3Y6857.
+  - CBBG-0079315: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1975-76-P157C3Y2123.
+  - CBBG-0079923: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-2003-04-P161C3Y5959.
+  - CBBG-0081182: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1954-55-P155C1Y6458.
+  - CBBG-0081220: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1956-57-P155C2Y4250.
+  - CBBG-0081373: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1967-68-P156C3Y3003.
+  - CBBG-0085406: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1937-38-P153C1Y7225.
+  - CBBG-0085489: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1945-46-P154C1Y1963.
+  - CBBG-0085490: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1945-46-P154C1Y2043.
+  - CBBG-0085606: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1955-56-P155C2Y3163.
+  - CBBG-0086072: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1991-92-P160C1Y2363.
+  - CBBG-0086833: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1910-11-P151C2Y0992.
+  - CBBG-0086838: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1911-12-P151C2Y1600.
+  - CBBG-0086843: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1912-13-P151C2Y3407.
+  - CBBG-0086862: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1914-15-P151C2Y5421.
+  - CBBG-0086965: registry fallback marker does not resolve to one linked assertion for wyoming/WYO-S1-1925-26-P152C1Y4490.
+  ... 1431 more
+College Basketball History — school ingestion
+Repository: /tmp/preseal-wyoming-wm0tc208/repository
+School:     wyoming
+Mode:       APPLY
+
+Source rows:                         2,951
+Publication-eligible source rows:   2,951
+Top-level source rows:              2,951
+Publication-excluded rows preserved:      0
+Existing-game matches:      1,391
+New canonical games:        1,560
+Identity review required:   0
+Canonical enrichments:       596 games / 2,894 fields
+Assertions to add:           2,951
+Discrepancies to add:        228
+
+Applied updates:
+  canonical games:   +1,560
+  enrichments:       596 games / 2,894 fields
+  source assertions: +2,951
+  discrepancies:     +228
+
+
+FAIL: files were written, but post-write validation failed.
+FAIL: ingestion apply failed with exit code 1
