@@ -358,6 +358,12 @@ for `ALL_HISTORY_EXPANSION` only after all of the following are proven:
    remains blocking**. Ordinary Research, unsupported/malformed expansion
    claims and invalid/missing immutable Git objects must fail closed.
 
+A zero-row supplemental package remains fail-closed by default. It is accepted only
+when the manifest-authenticated Stage 3B COMPLETE status explicitly declares
+`supplemental_game_population=0` and the exact Stage 4 package/parent reconciliation
+also proves zero supplemental rows. The immutable-base completed-season publication
+proof remains mandatory; no notes text or caller flag can create zero-delta authority.
+
 The accepted Stage 4 checkpoint preserves a
 `stage4-expansion-coverage-proof.json` containing the immutable baseline
 and target-scope fingerprints, completed-season inherited game counts,
