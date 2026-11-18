@@ -1,5 +1,8 @@
 import csv
+import hashlib
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -12,7 +15,9 @@ import build_site_data  # noqa: E402
 import validate_data  # noqa: E402
 from onboarding_plan import (  # noqa: E402
     WorkflowError,
+    frozen_complete_institutional_scope_authority,
     prepare_publication_coverage_transition,
+    stage2_program_for_planning,
 )
 from program_history import (  # noqa: E402
     BEST_FINISH_LABELS,
@@ -60,6 +65,53 @@ def canonical_game(
         "administrative_status": "",
         "administrative_note": "",
     }
+
+
+def complete_institutional_scope_repo(
+    root: Path,
+    *,
+    school_key: str = "program-a",
+    inception: str = "1966-1967",
+    top_level_scope: str = "1978-79+",
+) -> Path:
+    payload = {
+        "schema_version": 1,
+        "kind": "COMPLETE_INSTITUTIONAL_RESEARCH_SCOPE_V1",
+        "school_key": school_key,
+        "research_base_sha": "a" * 40,
+        "program_inception_season": inception,
+        "top_level_scope": top_level_scope,
+        "publication_universe": "INCEPTION_THROUGH_PRESENT",
+        "transition_mode": "IN_PROGRESS_RETROFIT",
+        "parent_artifact_sha256": "b" * 64,
+        "preservation_rule": (
+            "PRESERVE_ACCEPTED_PARENT_WORK_EXCEPT_GENUINE_CONTRADICTION"
+        ),
+    }
+    source_notes = (
+        f"# {school_key} source notes\n\n"
+        "## Complete institutional Research scope\n\n"
+        "The following structured scope authority was carried from the Research checkpoint.\n\n"
+        "```json\n"
+        + json.dumps(payload, indent=2, sort_keys=True)
+        + "\n```\n"
+    )
+    notes_path = root / "schools" / school_key / "source-notes.md"
+    notes_path.parent.mkdir(parents=True, exist_ok=True)
+    notes_path.write_text(source_notes, encoding="utf-8")
+
+    freeze = {
+        "status": "INTEGRATION_FROZEN",
+        "school_key": school_key,
+        "research_base_sha": "a" * 40,
+        "package_member_sha256": {
+            "source-notes.md": hashlib.sha256(source_notes.encode()).hexdigest(),
+        },
+    }
+    freeze_path = root / ".onboarding" / school_key / "integration-freeze.json"
+    freeze_path.parent.mkdir(parents=True, exist_ok=True)
+    freeze_path.write_text(json.dumps(freeze), encoding="utf-8")
+    return notes_path
 
 
 class ProgramHistoryScopeTests(unittest.TestCase):
@@ -212,6 +264,100 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(published, [inception, current])
         self.assertEqual(unpublished, [before])
         self.assertEqual(top_level_rows, [inception, current])
+
+    def test_stage2_unmigrated_non_inception_scope_uses_frozen_complete_authority(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            complete_institutional_scope_repo(repo)
+            program = {
+                "program_key": "program-a",
+                "public_page_enabled": "No",
+                "program_inception_season": "",
+                "history_coverage_status": "UNMIGRATED",
+                "history_start_season": "1978-1979",
+                "history_scope_status": "OWNER_CONFIRMED",
+                "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                "history_scope_intervals": "",
+            }
+
+            planning_program = stage2_program_for_planning(
+                repo,
+                "program-a",
+                program,
+            )
+            published, unpublished, top_level_rows = partition_stage2_source_rows(
+                [
+                    {"source_game_id": "EARLY", "season_label": "1966-1967"},
+                    {"source_game_id": "TOP", "season_label": "1978-1979"},
+                ],
+                planning_program,
+            )
+
+            self.assertEqual(
+                planning_program["program_inception_season"],
+                "1966-1967",
+            )
+            self.assertEqual(
+                planning_program["history_coverage_status"],
+                "COMPLETE_INSTITUTIONAL",
+            )
+            self.assertEqual(
+                [row["source_game_id"] for row in published],
+                ["EARLY", "TOP"],
+            )
+            self.assertEqual(unpublished, [])
+            self.assertEqual(
+                [row["source_game_id"] for row in top_level_rows],
+                ["TOP"],
+            )
+            self.assertEqual(program["history_coverage_status"], "UNMIGRATED")
+            self.assertEqual(program["program_inception_season"], "")
+
+    def test_publication_transition_uses_frozen_complete_institutional_authority(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            complete_institutional_scope_repo(repo)
+            program = {
+                "program_key": "program-a",
+                "public_page_enabled": "No",
+                "program_inception_season": "",
+                "history_coverage_status": "UNMIGRATED",
+                "history_start_season": "1978-1979",
+                "history_scope_status": "OWNER_CONFIRMED",
+                "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                "history_scope_intervals": "",
+            }
+
+            self.assertTrue(
+                prepare_publication_coverage_transition(
+                    program,
+                    repo=repo,
+                    school_key="program-a",
+                )
+            )
+            self.assertEqual(program["program_inception_season"], "1966-1967")
+            self.assertEqual(
+                program["history_coverage_status"],
+                "COMPLETE_INSTITUTIONAL",
+            )
+
+    def test_complete_institutional_scope_authority_requires_frozen_source_notes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            notes_path = complete_institutional_scope_repo(repo)
+            notes_path.write_text(
+                notes_path.read_text(encoding="utf-8") + "\nchanged\n",
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "does not match frozen source-notes.md",
+            ):
+                frozen_complete_institutional_scope_authority(
+                    repo,
+                    "program-a",
+                )
 
     def test_stage2_unmigrated_non_inception_scope_remains_unpublished(self):
         row = {"source_game_id": "ROW", "season_label": "1978-1979"}

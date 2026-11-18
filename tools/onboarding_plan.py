@@ -264,11 +264,202 @@ class WorkflowError(RuntimeError):
     """A safe, user-correctable onboarding stop."""
 
 
-def prepare_publication_coverage_transition(program: dict[str, str]) -> bool:
-    """Migrate the settled INCEPTION+ unpublished compatibility case at Gate 1 apply."""
+COMPLETE_INSTITUTIONAL_SCOPE_HEADING = "## Complete institutional Research scope"
+COMPLETE_INSTITUTIONAL_SCOPE_KIND = "COMPLETE_INSTITUTIONAL_RESEARCH_SCOPE_V1"
+COMPLETE_INSTITUTIONAL_PUBLICATION_UNIVERSE = "INCEPTION_THROUGH_PRESENT"
+COMPLETE_INSTITUTIONAL_PRESERVATION_RULE = (
+    "PRESERVE_ACCEPTED_PARENT_WORK_EXCEPT_GENUINE_CONTRADICTION"
+)
+COMPLETE_INSTITUTIONAL_TRANSITION_MODES = {
+    "NEW_LANE",
+    "IN_PROGRESS_RETROFIT",
+    "FROZEN_SUCCESSOR",
+}
+
+
+def frozen_complete_institutional_scope_authority(
+    repo: Path,
+    school_key: str,
+) -> dict[str, Any] | None:
+    """Return hash-authenticated complete-institutional Research scope authority.
+
+    Stage 4 serializes this structured payload into source-notes.md. The
+    Integration Freeze authenticates those exact bytes, so Stage 2 may consume
+    the payload mechanically without reopening Research or inferring inception
+    from top-level scope.
+    """
+
+    source_notes_path = repo / "schools" / school_key / "source-notes.md"
+    if not source_notes_path.is_file():
+        return None
+    source_notes = source_notes_path.read_text(encoding="utf-8")
+    if COMPLETE_INSTITUTIONAL_SCOPE_HEADING not in source_notes:
+        return None
+
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        raise WorkflowError(
+            "complete institutional scope authority requires the Integration Freeze manifest"
+        )
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise WorkflowError(
+            "cannot read Integration Freeze complete institutional scope authority"
+        ) from exc
+    if (
+        manifest.get("status") != "INTEGRATION_FROZEN"
+        or manifest.get("school_key") != school_key
+    ):
+        raise WorkflowError(
+            "Integration Freeze complete institutional scope authority identity mismatch"
+        )
+    package_hashes = manifest.get("package_member_sha256")
+    expected_notes_hash = (
+        str(package_hashes.get("source-notes.md", "")).strip()
+        if isinstance(package_hashes, dict)
+        else ""
+    )
+    if (
+        not re.fullmatch(r"[0-9a-f]{64}", expected_notes_hash)
+        or sha256_file(source_notes_path) != expected_notes_hash
+    ):
+        raise WorkflowError(
+            "complete institutional scope authority does not match frozen source-notes.md"
+        )
+
+    section = source_notes.split(COMPLETE_INSTITUTIONAL_SCOPE_HEADING, 1)[1]
+    next_heading = re.search(r"\n##\s+", section)
+    if next_heading is not None:
+        section = section[: next_heading.start()]
+    payload_blocks = re.findall(
+        r"```json\s*(\{.*?\})\s*```",
+        section,
+        flags=re.DOTALL,
+    )
+    if len(payload_blocks) != 1:
+        raise WorkflowError(
+            "complete institutional scope authority requires exactly one structured JSON payload"
+        )
+    try:
+        payload = json.loads(payload_blocks[0])
+    except json.JSONDecodeError as exc:
+        raise WorkflowError(
+            "complete institutional scope authority contains invalid JSON"
+        ) from exc
+    if not isinstance(payload, dict):
+        raise WorkflowError(
+            "complete institutional scope authority must be a JSON object"
+        )
+
+    if (
+        payload.get("schema_version") != 1
+        or payload.get("kind") != COMPLETE_INSTITUTIONAL_SCOPE_KIND
+    ):
+        raise WorkflowError("complete institutional scope authority schema mismatch")
+    if payload.get("school_key") != school_key:
+        raise WorkflowError("complete institutional scope authority school mismatch")
+
+    manifest_research_base = str(manifest.get("research_base_sha", "")).strip()
+    payload_research_base = str(payload.get("research_base_sha", "")).strip()
+    if (
+        not re.fullmatch(r"[0-9a-f]{40}", manifest_research_base)
+        or payload_research_base != manifest_research_base
+    ):
+        raise WorkflowError(
+            "complete institutional scope authority research-base mismatch"
+        )
+
+    inception = str(payload.get("program_inception_season", "")).strip()
+    if not valid_season_label(inception):
+        raise WorkflowError(
+            "complete institutional scope authority has invalid program inception season"
+        )
+    if not str(payload.get("top_level_scope", "")).strip():
+        raise WorkflowError(
+            "complete institutional scope authority lacks accepted top-level scope"
+        )
+    if payload.get("publication_universe") != COMPLETE_INSTITUTIONAL_PUBLICATION_UNIVERSE:
+        raise WorkflowError(
+            "complete institutional scope authority has invalid publication universe"
+        )
+
+    mode = str(payload.get("transition_mode", "")).strip()
+    if mode not in COMPLETE_INSTITUTIONAL_TRANSITION_MODES:
+        raise WorkflowError(
+            "complete institutional scope authority has invalid transition mode"
+        )
+    if payload.get("preservation_rule") != COMPLETE_INSTITUTIONAL_PRESERVATION_RULE:
+        raise WorkflowError(
+            "complete institutional scope authority has invalid preservation rule"
+        )
+    parent_hash = str(payload.get("parent_artifact_sha256", "")).strip().lower()
+    if mode in {"IN_PROGRESS_RETROFIT", "FROZEN_SUCCESSOR"}:
+        if not re.fullmatch(r"[0-9a-f]{64}", parent_hash):
+            raise WorkflowError(
+                "complete institutional scope authority requires preserved parent hash"
+            )
+    elif parent_hash and not re.fullmatch(r"[0-9a-f]{64}", parent_hash):
+        raise WorkflowError(
+            "complete institutional scope authority has invalid parent hash"
+        )
+    return dict(payload)
+
+
+def stage2_program_for_planning(
+    repo: Path,
+    school_key: str,
+    program: dict[str, str],
+) -> dict[str, str]:
+    """Project frozen complete-institutional coverage without mutating tracked state."""
+
+    projected = dict(program)
+    if projected.get("history_coverage_status", "").strip() != "UNMIGRATED":
+        return projected
+
+    authority = frozen_complete_institutional_scope_authority(repo, school_key)
+    if authority is None:
+        return projected
+    if projected.get("public_page_enabled", "").strip() == "Yes":
+        raise WorkflowError(
+            "UNMIGRATED complete institutional authority cannot describe an enabled page"
+        )
+    if projected.get("history_scope_status", "").strip() != "OWNER_CONFIRMED":
+        raise WorkflowError(
+            "complete institutional planning requires owner-confirmed top-level scope"
+        )
+
+    inception = str(authority["program_inception_season"]).strip()
+    existing_inception = projected.get("program_inception_season", "").strip()
+    if existing_inception and existing_inception != inception:
+        raise WorkflowError(
+            "UNMIGRATED program_inception_season conflicts with frozen complete institutional authority"
+        )
+
+    projected["program_inception_season"] = inception
+    projected["history_coverage_status"] = "COMPLETE_INSTITUTIONAL"
+    return projected
+
+
+def prepare_publication_coverage_transition(
+    program: dict[str, str],
+    *,
+    repo: Path | None = None,
+    school_key: str | None = None,
+) -> bool:
+    """Migrate settled frozen coverage metadata at Gate 1 apply."""
     status = program.get("history_coverage_status", "").strip()
     if status != "UNMIGRATED":
         return False
+
+    if repo is not None and school_key:
+        projected = stage2_program_for_planning(repo, school_key, program)
+        if projected.get("history_coverage_status", "").strip() == "COMPLETE_INSTITUTIONAL":
+            program["program_inception_season"] = projected[
+                "program_inception_season"
+            ]
+            program["history_coverage_status"] = "COMPLETE_INSTITUTIONAL"
+            return True
 
     start = program.get("history_start_season", "").strip()
     basis = program.get("history_scope_basis", "").strip()
@@ -3407,9 +3598,10 @@ def build_plan(
     )
     programs = read_csv(repo / "data/reference/programs.csv")
     program = next(row for row in programs if row["program_key"] == school_key)
+    planning_program = stage2_program_for_planning(repo, school_key, program)
     sources, pre_cutoff, top_level_sources = partition_stage2_source_rows(
         all_sources,
-        program,
+        planning_program,
     )
     top_level_source_ids = {
         row.get("source_game_id", "").strip()
@@ -9580,7 +9772,11 @@ def apply_publication_decisions(
                 raise WorkflowError(f"Unsupported accomplishment decision {item['decision']}")
         elif item["category"] == "publication":
             if item["decision"] == "ENABLE_PUBLIC_PAGE":
-                prepare_publication_coverage_transition(program)
+                prepare_publication_coverage_transition(
+                    program,
+                    repo=repo,
+                    school_key=school_key,
+                )
                 program["public_page_enabled"] = "Yes"
                 counts["pages_enabled"] += 1
                 program_changed = True
