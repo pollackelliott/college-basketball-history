@@ -166,6 +166,15 @@ jobs:
                   school = str(recovery.get('target_branch') or '')
                   target_sha = str(recovery.get('actual_target_sha') or '')
                   classification = str(recovery.get('mutation_classification') or '')
+                  read_only_not_attempted = (
+                      classification == 'NOT_ATTEMPTED'
+                      and recovery.get('target_branch') is None
+                      and recovery.get('actual_target_sha') is None
+                  )
+                  mutation_target = (
+                      valid_sha(target_sha)
+                      and school.startswith('data/')
+                  )
                   if (recovery.get('kind') != 'REMOTE_IMPLEMENTATION_RECOVERY'
                           or not re.fullmatch(
                               r'[a-z0-9][a-z0-9-]*',
@@ -177,14 +186,14 @@ jobs:
                               'ABANDONED_NOT_ATTEMPTED': 'NOT_ATTEMPTED',
                           }.get(last.get('disposition'))
                           or not valid_sha(expected_main)
-                          or not valid_sha(target_sha)
-                          or not school.startswith('data/')):
+                          or not (read_only_not_attempted or mutation_target)):
                       fail('recovered-idle control does not bind a valid recovery manifest')
-                  remote_target = git(
-                      'candidate', 'ls-remote', 'origin', 'refs/heads/' + school
-                  ).split()
-                  if not remote_target or remote_target[0] != target_sha:
-                      fail('recovered-idle target no longer equals classified unpublished target')
+                  if mutation_target:
+                      remote_target = git(
+                          'candidate', 'ls-remote', 'origin', 'refs/heads/' + school
+                      ).split()
+                      if not remote_target or remote_target[0] != target_sha:
+                          fail('recovered-idle target no longer equals classified unpublished target')
               elif (last.get('operation') == 'STAGE2_CURRENT_MAIN_REFRESH'
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_current_main_refresh_equivalence') == 'PASS'):

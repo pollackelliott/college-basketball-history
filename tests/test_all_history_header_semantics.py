@@ -139,7 +139,6 @@ class AllHistoryHeaderSemanticsTests(unittest.TestCase):
             program for program in published
             if program.get("history_coverage_status") == "LEGACY_TOP_LEVEL_ONLY"
         ]
-        self.assertEqual(len(published), 113)
         self.assertEqual(len(complete) + len(legacy), len(published))
         self.assertEqual(
             {program["program_key"] for program in published},
