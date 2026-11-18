@@ -868,13 +868,13 @@ def _projection(
         # Keep the accepted state explicitly in notes; do not pick either city.
         location_note = ""
         provisional_city = _first(
-            row, "stage3b_venue_city", "stage3b_site_city", "curated_venue_city",
+            row, "stage3b_venue_city", "stage3b_site_city", "stage3b_city", "curated_venue_city",
             "stage3a_final_venue_city", "stage3a_final_city", "accepted_city",
             "stage3a_site_city", "stage3a2_venue_city", "stage3a3_venue_city",
             "curated_city", "city", "venue_city",
         )
         provisional_state = _first(
-            row, "stage3b_venue_state", "stage3b_site_state", "curated_venue_state",
+            row, "stage3b_venue_state", "stage3b_site_state", "stage3b_state", "curated_venue_state",
             "stage3a_final_venue_state", "stage3a_final_state", "accepted_state",
             "stage3a_site_state", "stage3a2_venue_state", "stage3a3_venue_state",
             "curated_state", "state", "venue_state",
@@ -954,6 +954,7 @@ def _projection(
                     row,
                     "stage3b_venue_city",
                     "stage3b_site_city",
+                    "stage3b_city",
                     "curated_venue_city",
                     "stage3a_final_venue_city",
                     "stage3a_final_city",
@@ -971,6 +972,7 @@ def _projection(
                     row,
                     "stage3b_venue_state",
                     "stage3b_site_state",
+                    "stage3b_state",
                     "curated_venue_state",
                     "stage3a_final_venue_state",
                     "stage3a_final_state",
@@ -985,7 +987,7 @@ def _projection(
                 or accepted_venue.get("state", "").strip()
                 or (literal_opponent_home[2] if literal_opponent_home else "")),
                 "country": _first(
-                    row, "curated_venue_country", "country", "venue_country"
+                    row, "stage3b_venue_country", "stage3b_site_country", "stage3b_country", "curated_venue_country", "country", "venue_country"
                 ),
                 "event_or_tournament": _first(
                     row, "event_or_tournament", "stage3b_event_name", "stage3a3_event_name"
@@ -1116,8 +1118,8 @@ def _semantic_projection_defects(
             defects.append({"reason": "ACCEPTED_SOURCE_FIELD_LOST",
                             "source_game_id": game_id, "field": target})
 
-    parent_state = _first(parent, "stage3b_venue_state", "stage3a_final_venue_state")
-    parent_city = _first(parent, "stage3b_venue_city", "stage3a_final_venue_city")
+    parent_state = _first(parent, "stage3b_venue_state", "stage3b_site_state", "stage3b_state", "stage3a_final_venue_state", "stage3a_final_state")
+    parent_city = _first(parent, "stage3b_venue_city", "stage3b_site_city", "stage3b_city", "stage3a_final_venue_city", "stage3a_final_city")
     if parent_state and not parent_city and not projected.get("state"):
         if (f"state={parent_state!r}" not in projected.get("notes", "")
             or "city remains contested" not in projected.get("notes", "")):
