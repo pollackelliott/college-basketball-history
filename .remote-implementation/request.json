@@ -1,15 +1,15 @@
 {
-  "approved_plan_hash": "2626333f0053bccfbc7e2669001dd2a2317b561a92c98540da27dba114f1d37c",
   "authority": {
+    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": false,
+    "recovery": true,
     "release": false,
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
-    "release_preview_verify": true,
+    "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
@@ -24,27 +24,20 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner's already-authorized Wyoming release-preparation Proceed carries exact connector-created PR #648 from fresh-verified readiness wyoming-release-readiness-0001 through read-only exact PR-head CI, clean mergeability and Vercel Preview verification to OWNER_GATE_2_READY. Packet-bound head 1fc9be9b0a400a60405da1cf487b8a967040687c, base protected main d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1, exact checkpointed PR body preserved. No Gate 2 approval, PR merge, Production proof, historical reinterpretation or tracked mutation authorized.",
-    "origin": "Same serialized Wyoming ordinary original-school Implementation Stage 4 release-preparation phase"
+    "authorization": "Owner-authorized Wyoming release preparation includes safe recovery of accepted failed read-only RELEASE_PREVIEW_VERIFY request wyoming-release-preview-verify-0001. Exact run #44327717501 failed because PR #648 required CI exposed six stale tests hard-coding the pre-Wyoming published cohort as 113 while the exact sealed candidate correctly makes it 114. Failed request SHA256 dc8fc6075b4141bbd7ce3e16932ae711dcd12904a5ad6496e792eb1ef1793764 matches durable active control; no write-ahead, prepared commit/tree, mutation lock, target publication, or PR-head mutation occurred. Exact sealed target 1fc9be9b0a400a60405da1cf487b8a967040687c and protected main d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1 remain unchanged. Authorize only permanent RECOVER to classify NOT_ATTEMPTED and abandon the failed read-only request, returning global control to IDLE. Do not replay the accepted request, alter Wyoming history/data, change PR #648, create historical authority, approve Gate 2, merge, deploy, or bypass failed CI. The already-authorized release-preparation phase remains pending narrow generic test repair and exact fresh Preview verification.",
+    "origin": "Wyoming ordinary Implementation — deterministic failed read-only Preview-verification recovery"
   },
   "expected_protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "pr_number": 648,
-  "previous_control_state_commit": "b936b4362990989eb8cb0348ddb265eda2cda51c",
-  "previous_control_state_sha256": "b5b095fb0d1212e5c43b99bb8d3abea76786bf380601153c825c8d6ddcf5c537",
-  "release_manifest_sha256": "09b4ad1cdb5ac26c837c0b49e2da18a23ed4e3ea99544f0e544d77f1d8483af5",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/wyoming/wyoming-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "e833cc03474938a8fc49b21bc950fecd8b24673d2b78fdeca924e839466ab1e1"
+  "operation": "RECOVER",
+  "previous_control_state_commit": "a3be35fbfd435c965407e3d648196cc7e05e1598",
+  "previous_control_state_sha256": "4536512b81ff732c9171e8c85d7bbcfcac97954f87526d34aae585a64d7ed8a8",
+  "recovery": {
+    "abandoned_request_id": "wyoming-release-preview-verify-0001",
+    "lock_commit": null,
+    "target_branch": null
   },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/wyoming/wyoming-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "e09b7fea87b2147b85de747e573e87a9c023a90ee1424b9661a01858113f9818"
-  },
-  "request_id": "wyoming-release-preview-verify-0001",
+  "request_id": "wyoming-release-preview-recover-0001",
   "schema_version": 1,
-  "school_key": "wyoming",
-  "target_branch": "data/wyoming-onboarding",
-  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c"
+  "school_key": "wyoming"
 }
