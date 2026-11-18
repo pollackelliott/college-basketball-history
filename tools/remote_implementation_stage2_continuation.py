@@ -349,9 +349,6 @@ def _resume_post_gate1_from_verified_replacement(
         or first_verification.get("kind")
         != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION"
         or first_verification.get("request_id") != first_id
-        or first_verification.get("remote_stage2_preseal_equivalence") != "PASS"
-        or first_verification.get("tracked_stage2_mutation") != "NONE"
-        or first.get("preseal_status") != first_verification.get("preseal_status")
     ):
         raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_EVIDENCE_INVALID")
 
@@ -361,12 +358,24 @@ def _resume_post_gate1_from_verified_replacement(
 
     first_status = first.get("preseal_status")
     if first_status == "BLOCKED":
+        if (
+            first_verification.get("preseal_status") != "BLOCKED"
+            or first_verification.get("remote_stage2_preseal_equivalence") != "PASS"
+            or first_verification.get("tracked_stage2_mutation") != "NONE"
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_NOT_VERIFIED_BLOCKED")
         if any(
             request_used(state, authorized[key])
             for key in ("seal_request_id", "apply_request_id")
         ):
             raise Stop("STAGE2_RESUME_ORIGINAL_CHILD_ALREADY_CONSUMED")
     elif first_status == "READY_TO_SEAL":
+        if (
+            first_verification.get("preseal_status") != "READY_TO_SEAL"
+            or first_verification.get("remote_stage2_preseal_equivalence") != "PASS"
+            or first_verification.get("tracked_stage2_mutation") != "NONE"
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_EVIDENCE_INVALID")
         seal_id = authorized["seal_request_id"]
         apply_id = authorized["apply_request_id"]
         accepted = set(state.get("accepted_request_ids") or [])
