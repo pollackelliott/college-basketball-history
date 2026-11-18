@@ -270,6 +270,35 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
         )
         self.assertIn("if mutation_target:", workflow)
 
+    def test_fresh_opponent_display_successor_supports_live_census_rehearsal(self):
+        workflow = (
+            ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "last.get('operation') == 'STAGE2_OPPONENT_DISPLAY_NORMALIZE'",
+            workflow,
+        )
+        self.assertIn(
+            "mode = 'LIVE_CENSUS_AFTER_OPPONENT_DISPLAY'",
+            workflow,
+        )
+        self.assertIn(
+            "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+            workflow,
+        )
+        self.assertIn(
+            "stage2_opponent_display_successor",
+            workflow,
+        )
+        self.assertIn(
+            "EXACT_LIVE_CENSUS_AFTER_OPPONENT_DISPLAY_REPLAY=PASS",
+            workflow,
+        )
+        self.assertIn(
+            'elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_OPPONENT_DISPLAY" ]]',
+            workflow,
+        )
+
     def test_prepared_recovery_still_requires_authenticated_data_target(self):
         workflow = (
             ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
