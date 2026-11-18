@@ -1,0 +1,90 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "neutral_missing_location": 7,
+    "neutral_missing_venue": 146,
+    "postseason_missing_venue": 1,
+    "public_gap_rows": 155,
+    "reciprocal_research_accounted_gap": 10,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2952,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 9
+  },
+  "errors": [],
+  "examples": {
+    "neutral_missing_location": [
+      "CBBG-0107233",
+      "CBBG-0210311",
+      "CBBG-0210312",
+      "CBBG-0210504",
+      "CBBG-0210937",
+      "CBBG-0211071",
+      "CBBG-0211098"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0003637",
+      "CBBG-0009636",
+      "CBBG-0020962",
+      "CBBG-0028232",
+      "CBBG-0030539",
+      "CBBG-0034747",
+      "CBBG-0040722",
+      "CBBG-0043665",
+      "CBBG-0043805",
+      "CBBG-0046310",
+      "CBBG-0049319",
+      "CBBG-0050816"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0107696"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0071971",
+      "CBBG-0072119",
+      "CBBG-0080873",
+      "CBBG-0080988",
+      "CBBG-0080989",
+      "CBBG-0099367",
+      "CBBG-0103920",
+      "CBBG-0107233",
+      "CBBG-0153013",
+      "CBBG-0177870"
+    ],
+    "unknown_site_type": [
+      "CBBG-0210126",
+      "CBBG-0210127",
+      "CBBG-0210128",
+      "CBBG-0210129",
+      "CBBG-0210130",
+      "CBBG-0210131",
+      "CBBG-0210139",
+      "CBBG-0210141",
+      "CBBG-0210142"
+    ]
+  },
+  "history_start_season": "1904-1905",
+  "school_key": "wyoming",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 153,
+    "neutral_missing_location": 8,
+    "neutral_missing_venue": 144,
+    "researched_gap_rows": 153,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 9
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2951
+  },
+  "status": "PASS",
+  "warnings": []
+}
