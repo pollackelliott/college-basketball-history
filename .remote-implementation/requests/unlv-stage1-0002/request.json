@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "unlv-stage1-0002",
+  "operation": "STAGE1_INVENTORY",
+  "school_key": "unlv",
+  "previous_control_state_commit": "98f6e3780a6c65d96d18703de831aa4d61925cfd",
+  "previous_control_state_sha256": "a506501e1e7e888dd0546b5bbcf0a8fcaec9511a39f1c08cb6a68d77e06344a9",
+  "expected_protected_main_sha": "4c39332f9f23fe545c780c3d725206d6c6360949",
+  "research_checkpoint": {
+    "sha256": "02e0e3ff19c5c02b014558d9f33b820b04354a5acfbb2eb333c9a84bd7d2b9b2",
+    "research_base_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
+    "transport": {
+      "kind": "git_gzip_base64_parts",
+      "commit_sha": "4c9a44899710fe4eb1a38d66599c750f9e640786",
+      "path_prefix": ".remote-implementation/transports/unlv/unlv-stage1-0001/part-",
+      "part_count": 14
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "ChatGPT serialized ordinary original-school UNLV Implementation lane",
+    "authorization": "Owner authorized refreshed UNLV Implementation Stage 1 after Control Center-approved VEN-000965 -> VEN-000028 maintenance merged to protected main. Rerun the complete read-only Stage 1 inventory against exact protected main and stop. No Phase 0, Stage 2, owner gate, sealed apply, release, merge, or Production authority."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_presentation_refresh": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "venue_identity_maintenance": false
+  }
+}
