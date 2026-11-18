@@ -9,6 +9,7 @@ import subprocess
 import sys
 from collections import defaultdict
 from pathlib import Path
+from game_assertion_store import read_game_assertions
 
 from location_safety import (
     append_note,
@@ -98,7 +99,7 @@ def main() -> int:
 
     try:
         canonical = read_csv(canonical_path)
-        assertions = read_csv(assertions_path)
+        _, assertions = read_game_assertions(repo)
         global_venues_by_id, _, _ = load_global_venue_reference(repo)
     except (FileNotFoundError, ValueError) as exc:
         print(f"FAIL: required venue input is invalid: {exc}")

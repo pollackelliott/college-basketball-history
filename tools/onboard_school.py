@@ -26,6 +26,7 @@ import sys
 import tempfile
 from contextlib import contextmanager
 from pathlib import Path
+from game_assertion_store import read_game_assertions
 from typing import Any
 
 import ingest_school
@@ -239,7 +240,14 @@ def allowed_apply_path(
     }
     if allow_school_venues:
         exact.add(f"schools/{school_key}/venues.csv")
-    return path in exact or path.startswith("site/data/")
+    return (
+        path in exact
+        or (
+            path.startswith("data/evidence/game-assertions-")
+            and path.endswith(".csv")
+        )
+        or path.startswith("site/data/")
+    )
 
 
 def _correction_summary_bindings(summary: dict[str, Any]) -> list[tuple[str, str]]:
@@ -558,7 +566,7 @@ def backfill_reciprocal_only_home_chronology(
     global_venues_path = repo / "data/reference/venues.csv"
 
     canonical_fields, canonical_rows = read_csv_table(canonical_path)
-    assertions = chronology_read_csv(assertions_path)
+    _, assertions = read_game_assertions(repo)
     source_games = (
         chronology_read_csv(source_games_path)
         if source_games_path.is_file()
@@ -879,7 +887,7 @@ def backfill_resolved_target_home_chronology(
     global_venues_path = repo / "data/reference/venues.csv"
 
     canonical_fields, canonical_rows = read_csv_table(canonical_path)
-    assertions = chronology_read_csv(assertions_path)
+    _, assertions = read_game_assertions(repo)
     discrepancies = chronology_read_csv(discrepancies_path)
     school_venues = chronology_read_csv(school_venues_path)
     global_venues = chronology_read_csv(global_venues_path)
@@ -1154,7 +1162,7 @@ def annotate_reciprocal_only_unknown_site_provenance(
     assertions_path = repo / "data/evidence/game-assertions.csv"
 
     canonical_fields, canonical_rows = read_csv_table(canonical_path)
-    assertions = chronology_read_csv(assertions_path)
+    _, assertions = read_game_assertions(repo)
 
     assertions_by_game: dict[str, list[dict[str, str]]] = {}
     for assertion in assertions:

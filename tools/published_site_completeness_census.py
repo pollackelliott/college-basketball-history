@@ -16,6 +16,7 @@ import csv
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
+from game_assertion_store import read_game_assertions
 from typing import Any, Iterable
 
 from implementation_site_gate import implementation_site_report
@@ -134,7 +135,7 @@ def _event_labels_by_game(assertions: Iterable[dict[str, str]]) -> dict[str, tup
 def build_census(repo: Path, *, example_limit: int = 10) -> dict[str, Any]:
     programs = read_csv(repo / "data/reference/programs.csv")
     canonical = read_csv(repo / "data/canonical/games.csv")
-    assertions = read_csv(repo / "data/evidence/game-assertions.csv")
+    _, assertions = read_game_assertions(repo)
 
     published: dict[str, dict[str, str]] = {}
     for row in programs:

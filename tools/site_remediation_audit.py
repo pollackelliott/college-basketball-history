@@ -22,6 +22,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
+from game_assertion_store import read_game_assertions
 from typing import Any, Iterable
 
 
@@ -330,7 +331,7 @@ def support_metadata(
 
 def build_audit(repo: Path) -> dict[str, Any]:
     _, canonical = read_csv(repo / "data/canonical/games.csv")
-    _, assertions = read_csv(repo / "data/evidence/game-assertions.csv")
+    _, assertions = read_game_assertions(repo)
     _, discrepancies = read_csv(repo / "data/reconciliation/discrepancies.csv")
     resolver = VenueResolver(repo)
 

@@ -13,6 +13,7 @@ import hashlib
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
+from game_assertion_store import assertion_store_fingerprint, read_game_assertions
 
 def scan(repo: Path) -> dict:
     path = repo / "data/canonical/games.csv"
@@ -42,25 +43,24 @@ def scan(repo: Path) -> dict:
                 "canonical_status": row.get("canonical_status", ""),
                 "source_assertions": [],
             }
-    assertions_path = repo / "data/evidence/game-assertions.csv"
-    assertion_sha = hashlib.sha256(assertions_path.read_bytes()).hexdigest()
+    assertion_sha = assertion_store_fingerprint(repo)
+    _, assertion_rows = read_game_assertions(repo)
     assertion_count = 0
-    with assertions_path.open(newline="", encoding="utf-8-sig") as handle:
-        for assertion in csv.DictReader(handle):
-            gid = assertion.get("canonical_game_id", "").strip()
-            if gid not in partial:
-                continue
-            assertion_count += 1
-            partial[gid]["source_assertions"].append({
-                "source_program_key": assertion.get("source_program_key", ""),
-                "source_game_id": assertion.get("source_game_id", ""),
-                "city": assertion.get("city", "").strip(),
-                "state": assertion.get("state", "").strip(),
-                "curated_site_type": assertion.get("curated_site_type", ""),
-                "source_venue_name": assertion.get("source_venue_name", ""),
-                "curated_venue_name": assertion.get("curated_venue_name", ""),
-                "raw_text": assertion.get("raw_text", "")[:360],
-            })
+    for assertion in assertion_rows:
+        gid = assertion.get("canonical_game_id", "").strip()
+        if gid not in partial:
+            continue
+        assertion_count += 1
+        partial[gid]["source_assertions"].append({
+            "source_program_key": assertion.get("source_program_key", ""),
+            "source_game_id": assertion.get("source_game_id", ""),
+            "city": assertion.get("city", "").strip(),
+            "state": assertion.get("state", "").strip(),
+            "curated_site_type": assertion.get("curated_site_type", ""),
+            "source_venue_name": assertion.get("source_venue_name", ""),
+            "curated_venue_name": assertion.get("curated_venue_name", ""),
+            "raw_text": assertion.get("raw_text", "")[:360],
+        })
     venue_path = repo / "data/reference/venues.csv"
     by_id = {}
     with venue_path.open(newline="", encoding="utf-8-sig") as handle:

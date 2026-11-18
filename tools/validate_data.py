@@ -17,6 +17,7 @@ import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+from game_assertion_store import read_game_assertions
 from typing import Any
 
 import ingest_school
@@ -312,7 +313,7 @@ def main() -> int:
 
     try:
         canonical_columns, canonical_rows = read_csv(canonical_path)
-        assertion_columns, assertion_rows = read_csv(assertions_path)
+        assertion_columns, assertion_rows = read_game_assertions(repo_root)
         discrepancy_columns, discrepancy_rows = read_csv(discrepancies_path)
         program_columns, program_rows = read_csv(programs_path)
         accomplishment_columns, accomplishment_rows = read_csv(
