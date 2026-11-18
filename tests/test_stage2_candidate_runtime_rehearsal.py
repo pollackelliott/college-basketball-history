@@ -255,5 +255,32 @@ class CandidateRuntimeClassificationTests(unittest.TestCase):
         )
 
 
+class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
+    def test_targetless_not_attempted_read_only_recovery_is_supported(self):
+        workflow = (
+            ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("read_only_not_attempted = (", workflow)
+        self.assertIn("classification == 'NOT_ATTEMPTED'", workflow)
+        self.assertIn("recovery.get('target_branch') is None", workflow)
+        self.assertIn("recovery.get('actual_target_sha') is None", workflow)
+        self.assertIn(
+            "not (read_only_not_attempted or mutation_target)",
+            workflow,
+        )
+        self.assertIn("if mutation_target:", workflow)
+
+    def test_prepared_recovery_still_requires_authenticated_data_target(self):
+        workflow = (
+            ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("valid_sha(target_sha)", workflow)
+        self.assertIn("school.startswith('data/')", workflow)
+        self.assertIn(
+            "recovered-idle target no longer equals classified unpublished target",
+            workflow,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
