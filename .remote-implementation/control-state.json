@@ -686,18 +686,19 @@
     "unlv-stage1-0003",
     "unlv-phase0-0002",
     "unlv-stage2-census-0001",
-    "unlv-stage2-opponent-display-normalize-0001"
+    "unlv-stage2-opponent-display-normalize-0001",
+    "unlv-stage2-current-main-refresh-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:44404452836:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "unlv-stage2-current-main-refresh-0001",
+  "active_request_sha256": "37075c30a54bb7ee777fd099cef24de314dcd6924c3aefb247bf0683bdaba741",
+  "active_school_key": "unlv",
+  "active_target_branch": "data/unlv-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1384,8 +1385,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/unlv/unlv-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "839d143e40c69ba7abcd7b25ad336ad76559e6ebda3a2172300ea8313552cf89"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44404452836",
+  "lock_acquisition_request_commit": "0742b86b32305b9614be462bf32bd41e6e9e6bc8",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
