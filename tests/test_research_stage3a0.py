@@ -274,6 +274,54 @@ def test_stage2_checkpoint_zip_is_direct_entrypoint(tmp_path):
     assert (out / "stage3a0-input-ledger.csv").exists()
 
 
+def test_zero_row_current_stage2_checkpoint_completes(tmp_path):
+    checkpoint = tmp_path / "stage2-zero-row.zip"
+    stream = io.StringIO()
+    fields = [
+        "research_game_id",
+        "season_label",
+        "source_opponent_label",
+        "opponent_key",
+        "site_type",
+        "game_type",
+        "source_site_token",
+        "source_locator",
+        "literal_raw_text",
+    ]
+    writer = csv.DictWriter(stream, fieldnames=fields)
+    writer.writeheader()
+    with zipfile.ZipFile(checkpoint, "w") as archive:
+        archive.writestr("structured-stage2-ledger.csv", stream.getvalue())
+
+    process, status, out = run_path(tmp_path, checkpoint)
+
+    assert process.returncode == 0
+    assert status["status"] == "COMPLETE"
+    assert status["entry_mode"] == "checkpoint_zip"
+    assert status["ledger_rows"] == 0
+    assert status["partition"] == {
+        "postseason": 0,
+        "regular_season": 0,
+        "unclassified": 0,
+    }
+    assert status["regular_season_site_census"] == {
+        "HOME": 0,
+        "OPPONENT_HOME": 0,
+        "NEUTRAL": 0,
+        "UNKNOWN": 0,
+    }
+    assert json.loads((out / "stage3a1-unknown-han-queue.json").read_text()) == []
+    assert json.loads((out / "stage3a2-home-queue.json").read_text()) == []
+    assert json.loads((out / "stage3a3-neutral-queue.json").read_text()) == []
+    assert json.loads((out / "stage3b-postseason-handoff.json").read_text()) == []
+    with (out / "stage3a0-input-ledger.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        reader = csv.DictReader(handle)
+        assert reader.fieldnames == fields
+        assert list(reader) == []
+
+
 def test_current_stage2_opponent_key_vocabulary_is_direct_entrypoint(tmp_path):
     checkpoint = tmp_path / "stage2-current-vocabulary.zip"
     current_rows = []
