@@ -1,0 +1,25 @@
+{
+  "allowed_paths": [
+    "schools/unlv/opponents.csv",
+    "schools/unlv/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "westminster-utah"
+  ],
+  "opponent_changed_row_count": 2,
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "unlv",
+  "source_game_changed_ids": [
+    "unlv-1962-63-016",
+    "unlv-1963-64-014",
+    "unlv-1965-66-021",
+    "unlv-1966-67-006"
+  ],
+  "source_game_changed_keys": [
+    "westminster-utah"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 4
+}

@@ -1,0 +1,51 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 1,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Westminster"
+      ],
+      "authority_signature": "westminster",
+      "canonical_opponent_key": "westminster-utah",
+      "from_names": [
+        "Westminster (UT)"
+      ],
+      "target_row_count": 2,
+      "to_name": "Westminster"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "unlv",
+  "source_game_display_change_keys": 1,
+  "source_game_display_change_rows": 4,
+  "source_game_display_changes": [
+    {
+      "from_name": "Westminster (UT)",
+      "normalized_opponent_key": "westminster-utah",
+      "source_game_id": "unlv-1962-63-016",
+      "to_name": "Westminster"
+    },
+    {
+      "from_name": "Westminster (UT)",
+      "normalized_opponent_key": "westminster-utah",
+      "source_game_id": "unlv-1963-64-014",
+      "to_name": "Westminster"
+    },
+    {
+      "from_name": "Westminster (UT)",
+      "normalized_opponent_key": "westminster-utah",
+      "source_game_id": "unlv-1965-66-021",
+      "to_name": "Westminster"
+    },
+    {
+      "from_name": "Westminster (UT)",
+      "normalized_opponent_key": "westminster-utah",
+      "source_game_id": "unlv-1966-67-006",
+      "to_name": "Westminster"
+    }
+  ],
+  "status": "PASS"
+}

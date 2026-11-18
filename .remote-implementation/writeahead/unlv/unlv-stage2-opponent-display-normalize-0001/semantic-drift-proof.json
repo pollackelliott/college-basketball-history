@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "integration_base_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+    "school_key": "unlv",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "integration_base_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+    "school_key": "unlv",
+    "status": "PASS"
+  }
+}
