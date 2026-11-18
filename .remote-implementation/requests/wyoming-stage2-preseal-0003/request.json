@@ -25,17 +25,17 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Same explicit Owner Gate 1 approval and already-authorized Stage 3 technical phase after generic assertion-shard reconciliation tooling PR #645 merged. Replacement pre-seal only against protected main 7497a6885d55ed2308c7421b07d8c96db5ce4c98. Preserves exact Gate 1 fill, owner approval, decision universe, recommendation map, filled review, target head and target tree. It is the bounded post-repair replacement for independently verified BLOCKED pre-seal wyoming-stage2-preseal-0002. No new historical authority, Owner Gate 2, release, merge, shared-data decision, or protected-main bypass.",
+    "authorization": "Same explicit Owner Gate 1 approval and already-authorized post-Gate-1 technical phase. Replacement pre-seal against current protected main dd9da18aea65294120c5ebd6fa32eccdeacb4deb, which linearly descends from assertion-shard repair main 7497a6885d55ed2308c7421b07d8c96db5ce4c98; the intervening protected-main change is confined to research Stage 4 tooling/tests. Preserves exact Gate 1 fill, owner approval, decision universe, recommendation map, filled review, target head and target tree. This activates the previously archived-but-never-accepted wyoming-stage2-preseal-0003 identity after request-envelope transport repair. No new historical authority, Owner Gate 2, release, merge, shared-data decision, or protected-main bypass.",
     "origin": "Same serialized Wyoming ordinary original-school Implementation lane"
   },
   "decision_id_set_sha256": "ad59ad4411714885ccd74f5d0004fca9b7a211b65577222e668def4e5403b2c6",
   "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
-  "expected_protected_main_sha": "7497a6885d55ed2308c7421b07d8c96db5ce4c98",
+  "expected_protected_main_sha": "dd9da18aea65294120c5ebd6fa32eccdeacb4deb",
   "filled_review_sha256": "a73d9ec96313ed2abf355a3fd116842b5263682f9f839823dd8c1ba45e1ae4a8",
   "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
   "operation": "STAGE2_PRESEAL_REHEARSAL",
-  "previous_control_state_commit": "25d5712cab0acf2181cf37b1eb70e1b165800833",
+  "previous_control_state_commit": "7e835505f25c4e285e6c20564ac5efd9d896fdc5",
   "previous_control_state_sha256": "985e68bd84891830f6117a3ad58bd7e2ffc2820fce33add453641fa1d60c22c0",
   "recommendation_map_sha256": "873b3c60a1f1d001ca2a1e7d50f9953935a061ef725d8af554f6ed2bb6c62c62",
   "request_id": "wyoming-stage2-preseal-0003",
