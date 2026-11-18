@@ -466,6 +466,25 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         self.assertEqual(report["counts"]["chronology_rows"], 1)
         self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
 
+    def test_exact_accepted_home_assignment_wording_passes_without_interval(self):
+        report = source_home_chronology_report(
+            [self.home_game("Mixed Use Arena", "1996-12-01")],
+            [
+                self.venue(
+                    "Mixed Use Arena",
+                    "GAME_SITE",
+                    site_rule=(
+                        "Exact accepted SJSU game assignments only: five HOME "
+                        "H+ games from 1993-94 through 1996-97."
+                    ),
+                )
+            ],
+            school_key="test",
+        )
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["counts"]["chronology_rows"], 1)
+        self.assertEqual(report["counts"]["home_chronology_conflicts"], 0)
+
     def test_hybrid_home_interval_and_per_game_support_passes_outside_interval(self):
         report = source_home_chronology_report(
             [
