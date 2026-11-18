@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "unlv-venue-maintenance-0002",
+  "school_key": "unlv",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "previous_control_state_commit": "c0d5c5f5379a1f2c982de529e77a2c50c7faf94a",
+  "previous_control_state_sha256": "86efe5853c2320dc410fbc1e4cdddf9eef9db6b8c3d92c9772b47fe37ed0c29f",
+  "expected_protected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "target_branch": "maintenance/unlv-stage1-meadowlands-identity",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/unlv-venue-maintenance-0002/venue-maintenance.json",
+    "sha256": "6286eeb7e57ca3da1d8a647ba9d2b27e99fb1fcc6d3fef5dbeee73531aa142e5"
+  },
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/unlv-stage1.json",
+  "expected_plan_sha256": "0ce2432b069a893713644b18e1ac5c6045cca1a1f92810319d3f45e620e18161",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the exact UNLV Stage 1 shared-reference maintenance merge VEN-000965 into VEN-000028, preserving historical names, aliases, and evidence with no other venue or historical changes.",
+    "spec_sha256": "6286eeb7e57ca3da1d8a647ba9d2b27e99fb1fcc6d3fef5dbeee73531aa142e5"
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT UNLV Implementation lane",
+    "authorization": "Replacement for failed unlv-venue-maintenance-0001, which stopped pre-mutation with STALE_CONTROL_STATE_HASH. Owner supplied explicit Control Center authorization for the exact VEN-000965 -> VEN-000028 maintenance batch and subsequent refreshed UNLV Stage 1 inventory."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": true
+  }
+}

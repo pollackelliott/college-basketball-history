@@ -680,18 +680,19 @@
     "wyoming-release-preview-verify-0002",
     "wyoming-release-gate2-approval-0001",
     "wyoming-release-production-proof-0001",
-    "unlv-stage1-0001"
+    "unlv-stage1-0001",
+    "unlv-venue-maintenance-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:44373711785:1",
+  "active_operation": "VENUE_IDENTITY_MAINTENANCE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "unlv-venue-maintenance-0002",
+  "active_request_sha256": "b78e74f67fd1dfc5c7d8b259c8d56fc32f580c27bfac4c8cca8b740b23facf68",
+  "active_school_key": "unlv",
+  "active_target_branch": "maintenance/unlv-stage1-meadowlands-identity",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1360,8 +1361,11 @@
     "stage1_reconciliation_sha256": "05a4544940c4a27dee8392f21b44d881d117a4d4d0dcdcc36309880b2aa0f4b4",
     "stage1_status": "BLOCKED"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44373711785",
+  "lock_acquisition_request_commit": "9e50b41c3283786085d418a364b9e70072e14d72",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
