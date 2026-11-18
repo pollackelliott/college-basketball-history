@@ -351,6 +351,25 @@ class HomeChronologyChallengeTests(unittest.TestCase):
         self.assertTrue(any("HOME relationship chronology" in x
                             for x in report["warnings"]))
 
+    def test_blank_researched_home_venue_without_chronology_is_clean(self):
+        game = row(
+            source_game_id="HOME-BLANK",
+            season_label="1940-1941",
+            curated_site_type="SOURCE_PROGRAM_HOME",
+            curated_venue_name="",
+            city="Example City",
+            state="EX",
+            site_research_status="RESEARCHED_UNRESOLVED_HOME_VENUE",
+            site_research_basis=(
+                "Institutional and reciprocal venue research exhausted; "
+                "physical building remains unsupported."
+            ),
+        )
+        report = source_home_chronology_report([game], [], school_key="test")
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["warnings"], [])
+        self.assertEqual(report["counts"]["home_rows_checked"], 0)
+
     def test_primary_home_relationship_passes(self):
         report = source_home_chronology_report(
             [self.home_game("Example Arena")],
