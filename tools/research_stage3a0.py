@@ -430,7 +430,15 @@ def load_input(path: Path, out: Path) -> tuple[list[dict[str, str]], dict[str, o
             raw = csv_bytes(source_data)
             normalized, defaulted_site_count = normalize_site_unknowns(raw)
             projected_path = out / "stage3a0-input-ledger.csv"
-            write_csv(projected_path, normalized)
+            if normalized:
+                write_csv(projected_path, normalized)
+            else:
+                # A current Stage 2 checkpoint may legitimately own a zero-row
+                # supplemental population (for example, a zero-delta All-History
+                # expansion). The header has already passed ledger_header_score(),
+                # so preserve that structured empty ledger byte-for-byte rather
+                # than manufacturing a game or rejecting valid zero population.
+                projected_path.write_bytes(source_data)
             return normalized, {
                 "entry_mode": "checkpoint_zip",
                 "input_artifact": str(path),
