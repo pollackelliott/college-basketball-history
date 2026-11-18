@@ -1,7 +1,6 @@
 {
   "approved_plan_hash_preview": "0d2d4c6148451a059396f3aa5f344b6aee08f8cffed32d7fd3e040b8f9e776e4",
   "authority": {
-    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -9,46 +8,53 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
-    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
+    "stage2_gate1_seal": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": true,
+    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Same explicit Owner Gate 1 approval and phase-persistent post-Gate-1 technical authority. Fresh replacement pre-seal after merged generic continuation repair PR #646, bound to protected main d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1 and immediate verified predecessor control b5ed360b45477b8437ef0534a3cdbe298faefcae. Preserves exact Gate 1 fill, owner approval, decision universe, recommendation map, filled review, target head and target tree. No new historical authority, Owner Gate 2, release, merge, shared-data decision, or protected-main bypass.",
-    "origin": "Same serialized Wyoming ordinary original-school Implementation lane"
+    "authorization": "phase-persistent owner/Control Center authority inherited from wyoming-stage2-preseal-0004",
+    "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "ad59ad4411714885ccd74f5d0004fca9b7a211b65577222e668def4e5403b2c6",
   "decision_universe_sha256": "1496b33f73a3f9cfacfc10b8259e870562ae6cc7b518667307b3167ccc59a7b1",
+  "equivalence_sha256": "0795bfc3a057305c06152637ef0f4bb14fb878d52135fe0eb5987f0dac21272a",
   "expected_protected_main_sha": "d89a23d9085f3431bbc31d3d7c1dd9d81efe8af1",
   "filled_review_sha256": "a73d9ec96313ed2abf355a3fd116842b5263682f9f839823dd8c1ba45e1ae4a8",
   "integration_freeze_sha256": "60c2fadc2895014c2bbd56964be41f23f6b1d3cef967d2a614d5ac29218bb0ea",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
-  "previous_control_state_commit": "b5ed360b45477b8437ef0534a3cdbe298faefcae",
-  "previous_control_state_sha256": "a35ba92632cbbf6c8efd612e45e64815ced36a13623e5bb6b37613d3b2d2331a",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "967e64b3b8d6cd560b5d0ee02e5076f15b9a7149855045f3807e962702ca4387",
+  "phase_continuation": {
+    "apply_request_id": "wyoming-stage2-preseal-0004-apply",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "wyoming-stage2-preseal-0004",
+    "seal_request_id": "wyoming-stage2-preseal-0004-seal"
+  },
+  "previous_control_state_commit": "5c301c48f1a2d86974b2dd4dfcadf8cd2420a1b7",
+  "previous_control_state_sha256": "9380335ddac2bd9f3edc2f582ea3a6fc1da2f81022ce60cdf4fe30a21c30ce22",
   "recommendation_map_sha256": "873b3c60a1f1d001ca2a1e7d50f9953935a061ef725d8af554f6ed2bb6c62c62",
-  "request_id": "wyoming-stage2-preseal-0004",
+  "request_id": "wyoming-stage2-preseal-0004-seal",
   "schema_version": 1,
   "school_key": "wyoming",
   "semantic_snapshot_sha256": "5005cbaefb5b537a9cb487b7173edf7797e36ca76a5e02a21b6e8bd5b0746c04",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "694c64d41bf064b476e40ba90cecfb01946489cab623c1d3de6613c313cb752c"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-stage2-preseal-0004/checkpoint-manifest.json",
+    "sha256": "d67951dcf893734703409ceb2a2902a878e27232facf4895adbebe8c0cb16fea"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/wyoming/wyoming-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "0626b6071d2d77f77275ac2eacd2bebe7a82b69a1835f28953dff1b89dfe6680"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/wyoming/wyoming-stage2-preseal-0004/stage2-preseal-rehearsal-verification.json",
+    "sha256": "4672384174e93f9e5135872e0683ccb25eec8f27f9ae436f240993247fa99cf9"
   },
   "target_branch": "data/wyoming-onboarding",
   "target_sha": "5c9d47e3c00690cbbe7d9057396b5734cedaffcf"
