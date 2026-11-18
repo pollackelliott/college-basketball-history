@@ -1,0 +1,99 @@
+{
+  "actual_published_target_sha": "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+  "changed_file_sha256": {
+    "schools/unlv/opponents.csv": "12d2520ae4afd14e5069ac2cd7dfaf5c0af670dfac7b1295d1e90e8d8bad607a",
+    "schools/unlv/source-games.csv": "422013c377baa901d15675678a5d0327f9d4df5c0dbfb4d6f94c2dd4d706ab37"
+  },
+  "changed_paths": [
+    "schools/unlv/opponents.csv",
+    "schools/unlv/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "westminster-utah"
+  ],
+  "expected_target_predecessor_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7",
+  "field_level_proof_sha256": "812df1da009c2fcfc5f1500137f9565351557ac66ccd798d1aaacb1cba641d80",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "e232d4b439aa55896a62fbc71d28f80b555d0374",
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "2390454560391a8a3e3f1236279bc7e6f26599ad9208e015ebfa39035ddb8486",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "b60937be4a16a2ac816b5d1c6680bf79e43baca60f0bc24db426bc4070649538",
+      "implementation-stage2-status.json": "d873a0c0a31074f2560886dcf922af2b5f5ca5ceef71a819d1e4dc1993f47aa1",
+      "plan.json": "e7b5a5f666496e32a0f384c69f8d086953ead34f2ebd8c8d076d3e7c8a82d635",
+      "review.csv": "6f426b24c865ddea7f5fa31dd8634795fb0e2c9535c8a4b4aacea012f99ade7f",
+      "review.md": "7117aee0d09abe3994a2abc64f31f4ef80580ab475ae3c4ad638da8098982efa"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "b60937be4a16a2ac816b5d1c6680bf79e43baca60f0bc24db426bc4070649538",
+      "implementation-stage2-status.json": "332981732ca2e80b1e52c3987b5bdba70ec1ef85f4d6620ac84f3cf7ef646cdf",
+      "plan.json": "2c2ea61592fc9ed85a8d1687d5df8e84577e4f26a31c474bfd0432eae58c571e",
+      "review.csv": "6f426b24c865ddea7f5fa31dd8634795fb0e2c9535c8a4b4aacea012f99ade7f",
+      "review.md": "6d96858f81f77b6c0545c5bbf9c530dc212345342a50f861367f9768ae09a6c2"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 5,
+        "topology": "site_or_han_review_population"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 7,
+    "decision_universe_sha256": "d4b7917fee42335c8506534089cb821d216f04239591703897d7c692daeec4ce",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+      "after_status": "",
+      "after_tree_sha": "3a20456eeacc038ee6525e3ac6c38084ffc1a898",
+      "before_head_sha": "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+      "before_status": "",
+      "before_tree_sha": "3a20456eeacc038ee6525e3ac6c38084ffc1a898",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+  "prepared_parent_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7",
+  "prepared_tree_sha": "3a20456eeacc038ee6525e3ac6c38084ffc1a898",
+  "protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "unlv-stage2-opponent-display-normalize-0001",
+  "request_sha256": "fff72d8edcac297c509f5bb1a848e2ac645117a120d68aa1de11b7ce33c037a8",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_drift_after": {
+    "baseline_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "integration_base_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+    "school_key": "unlv",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+    "integration_base_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+    "school_key": "unlv",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "source_game_normalized_name_row_count": 4,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/unlv/unlv-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "2a8785115c4b08e515c9f06316952ab19011490a074fda602ba12cfd59ee4556",
+  "target_branch": "data/unlv-onboarding",
+  "writeahead_commit": "25503df145a62625834c7283b8c9a5eef420dd48",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/unlv/unlv-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "839d143e40c69ba7abcd7b25ad336ad76559e6ebda3a2172300ea8313552cf89"
+}
