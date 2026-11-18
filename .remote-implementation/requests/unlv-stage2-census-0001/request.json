@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "unlv-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "unlv",
+  "previous_control_state_commit": "92d3daef2c418f3ab47615b6fcfe01c07bd6d44d",
+  "previous_control_state_sha256": "5350c06f58fa578b2fe60d97733a9828a9d0ccb8f8dffbf34523011213bc5d17",
+  "expected_protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",
+    "sha256": "1c13241d96283d7543dee0559a949e03f9b3c4061b1a787f965efd3b011a0b33"
+  },
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "creation_provenance": {
+    "origin": "ChatGPT UNLV serialized ordinary original-school Implementation lane — owner-authorized Stage 2 capability census",
+    "authorization": "Owner explicitly replied Proceed after UNLV Phase 0 completed with repository_validation=PASS, CREATE_ONCE_PASS, remote_phase0_equivalence=PASS, fresh_runner_verification=PASS, Integration Freeze SHA-256 d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af, semantic snapshot SHA-256 df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80, and onboarding head 03b374f65bf256ed4c1f9417683cbde86a8df5e7. This request performs exactly one bounded read-only STAGE2_CENSUS against protected main 35cc6cf377a269cf8d6d535a8945d537d0a5b19a and the exact independently verified Phase 0 successor. It must stop at CAPABILITY_CENSUS_READY or an honest durable BLOCKED checkpoint. No tracked repair, current-main refresh, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1, fill/seal/apply, release, Preview, merge, recovery, shared/global mutation, or protected-main mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
