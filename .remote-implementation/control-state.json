@@ -1351,7 +1351,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/wyoming/wyoming-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "af09a3ef9da921cc67f9b716f6e39c47ca9d68e545b91ff9a08bc03deaf503ec",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1361,7 +1361,7 @@
     "production_deployment_id": 7888872084,
     "production_json_checked_count": 90,
     "protected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "wyoming-release-production-proof-0001",
     "school_key": "wyoming"
   },

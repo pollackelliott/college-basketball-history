@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "af09a3ef9da921cc67f9b716f6e39c47ca9d68e545b91ff9a08bc03deaf503ec",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "pr_number": 648,
+  "production_deployment_id": 7888872084,
+  "production_json_checked_count": 90,
+  "production_proof": true,
+  "request_id": "wyoming-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "status": "COMPLETE"
+}
