@@ -689,7 +689,7 @@
     "unlv-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
-  "active_lock_commit": null,
+  "active_lock_commit": "e232d4b439aa55896a62fbc71d28f80b555d0374",
   "active_lock_owner": "github-actions:44388855981:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
