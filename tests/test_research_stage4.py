@@ -1282,6 +1282,80 @@ class Stage4AuthoringTests(unittest.TestCase):
             "  fallback source text  ",
         )
 
+    def test_projection_uses_current_transition_stage3b_locality(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        games, defects = mod._projection(
+            [
+                {
+                    "research_game_id": "STAGE3B-LOCALITY",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "2000-01",
+                    "game_date": "2001-03-01",
+                    "played_result": "W",
+                    "stage3b_site_type": "NEUTRAL",
+                    "stage3b_physical_venue_name": "Test Gym",
+                    "stage3b_city": "Accepted City",
+                    "stage3b_state": "AC",
+                    "stage3b_country": "USA",
+                    "curated_game_type": "POSTSEASON",
+                    "raw_text": "accepted Stage 3B locality",
+                }
+            ],
+            opponents,
+            venues,
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(games[0]["curated_venue_name"], "Test Gym")
+        self.assertEqual(games[0]["city"], "Accepted City")
+        self.assertEqual(games[0]["state"], "AC")
+        self.assertEqual(games[0]["country"], "USA")
+
+    def test_projection_normalizes_current_transition_forfeit_statuses(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        games, defects = mod._projection(
+            [
+                {
+                    "research_game_id": "ADMIN-FORFEIT-BY",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "1981-82",
+                    "played_result": "L",
+                    "administrative_status": "ADMIN_FORFEIT_BY_SOURCE_PROGRAM",
+                    "raw_text": "accepted forfeit by source program",
+                },
+                {
+                    "research_game_id": "ADMIN-FORFEIT-TO",
+                    "source_program_key": "test",
+                    "source_opponent_label": "Old College",
+                    "opponent_key": "old-college",
+                    "season_label": "1982-83",
+                    "played_result": "W",
+                    "administrative_status": "ADMIN_FORFEIT_TO_SOURCE_PROGRAM",
+                    "raw_text": "accepted forfeit to source program",
+                },
+            ],
+            opponents,
+            venues,
+        )
+        self.assertEqual(defects, [])
+        by_id = {row["source_game_id"]: row for row in games}
+        for game_id, legacy in (
+            ("ADMIN-FORFEIT-BY", "ADMIN_FORFEIT_BY_SOURCE_PROGRAM"),
+            ("ADMIN-FORFEIT-TO", "ADMIN_FORFEIT_TO_SOURCE_PROGRAM"),
+        ):
+            with self.subTest(game_id=game_id):
+                self.assertEqual(by_id[game_id]["administrative_status"], "FORFEIT")
+                self.assertIn(legacy, by_id[game_id]["administrative_note"])
+                self.assertIn(
+                    "on-court played_result=",
+                    by_id[game_id]["administrative_note"],
+                )
+
     def test_projection_expands_valid_compact_season_label(self):
         self.assertEqual(
             mod.project_season_label("1999-00"),
