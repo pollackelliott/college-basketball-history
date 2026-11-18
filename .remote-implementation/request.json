@@ -1,35 +1,40 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "unlv-stage2-opponent-display-normalize-0001",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "request_id": "unlv-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "unlv",
-  "previous_control_state_commit": "517363d2d1d4c71456621e20e9511c52e8e355d7",
-  "previous_control_state_sha256": "33fa8971dcdc2a022a97b721caa0c2fa0dbbfdd621899c50c7bbceecbf11f09a",
-  "expected_protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "previous_control_state_commit": "b2d89fffd434465431d67fd863195fc07bbae2c7",
+  "previous_control_state_sha256": "d4781646095f4f9a9ab0eb97db8907cf60974af4ec725f6dd04de97529ab45bd",
+  "expected_protected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
   "target_branch": "data/unlv-onboarding",
-  "target_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "2a8785115c4b08e515c9f06316952ab19011490a074fda602ba12cfd59ee4556"
+  "target_sha": "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",
+    "sha256": "1c13241d96283d7543dee0559a949e03f9b3c4061b1a787f965efd3b011a0b33"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "497ec4460359fa5e88731568ff3a88d0495b83e6614d62d40da1ca44fc8fbb55"
   },
   "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
   "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized UNLV Stage 2 persists after generic tooling PR #652 merged as f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3. Authenticated merge base 35cc6cf377a269cf8d6d535a8945d537d0a5b19a: UNLV target-only changed paths = 9 (data/reference/programs.csv, data/reference/venue-names.csv, data/reference/venues.csv, and six schools/unlv package members); intervening protected-main-only paths = 4 (.github/workflows/stage2-candidate-runtime-rehearsal.yml, tests/test_program_history_scope.py, tests/test_stage2_candidate_runtime_rehearsal.py, tools/onboarding_plan.py); overlap = 0 and protected main touched no schools/unlv path. Exact-head validations passed: Stage 2 candidate runtime rehearsal run 44400382305 and opponent identity tooling validation run 44400382253. The corrected candidate census is CAPABILITY_CENSUS_READY with 46 decisions, decision universe 6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982, and tracked Stage 2 mutation NONE. Because PR #652 intentionally changed planner coverage and invalidated the stale seven-decision universe, no pre-existing recommendation map is valid to bind before refresh; this request authorizes only the guarded disjoint current-main refresh and independent fresh verification. Same Stage 2 phase authority persists afterward for fresh census, recommendation-map maturation, and exact proposal rehearsal."
+  },
   "creation_provenance": {
-    "origin": "ChatGPT UNLV serialized ordinary original-school Implementation lane — Stage 2 deterministic opponent-display reconciliation",
-    "authorization": "Owner explicitly replied Proceed after fresh-verified UNLV census unlv-stage2-census-0001. That exact census is BLOCKED solely by one deterministic historical opponent-display conflict: westminster-utah with displays Westminster / Westminster (UT). The census records warning_count=0, decision_count=0, semantic drift PASS, tracked Stage 2 mutation NONE, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete one-key census population. The permanent helper may change only canonical_opponent_name in schools/unlv/opponents.csv and normalized_opponent_name in schools/unlv/source-games.csv using existing project display authority, followed by no-map Stage 2 regeneration and fresh equivalence verification. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, venue maintenance, or protected-main mutation authority."
+    "origin": "UNLV serialized ordinary original-school Implementation Stage 2 — post-PR #652 disjoint current-main refresh",
+    "authorization": "Owner replied Proceed after exact merge authentication of generic tooling PR #652. Preserve the immutable Research Freeze, Integration Freeze, semantic snapshot, exact post-normalization UNLV package, and accepted 1969-70+ top-level scope. Import only the four disjoint protected-main tooling/workflow/test paths through permanent STAGE2_CURRENT_MAIN_REFRESH. No historical recommendation, Owner Gate 1/2, opponent-display mutation, sealed apply, release, Preview, merge, Production, recovery, shared/global basketball maintenance, or protected-main mutation is authorized by this request."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "venue_identity_maintenance": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": true,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -40,6 +45,10 @@
     "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
   }
 }
