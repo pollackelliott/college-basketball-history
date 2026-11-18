@@ -29,7 +29,11 @@ from all_history_expansion_research import (
     expansion_season_disposition,
     validate_expansion_baseline_program,
 )
-from program_history import publication_history_games, valid_season_label
+from program_history import (
+    parse_history_scope_intervals,
+    publication_history_games,
+    valid_season_label,
+)
 
 
 SCHEMA_VERSION = 1
@@ -1029,10 +1033,6 @@ def _validate_scope_authority(
     else:
         # Extend supported forms only with corresponding validated projections.
         # No arbitrary scope expression may be accepted by this version.
-        if accepted_scope != "INCEPTION+":
-            raise ExpansionFreezeError(
-                "v2 scope supersession currently supports only INCEPTION+"
-            )
         if authority["authority_kind"] != "OWNER_SUPERSESSION":
             raise ExpansionFreezeError(
                 "changed scope requires explicit OWNER_SUPERSESSION"
@@ -1045,13 +1045,40 @@ def _validate_scope_authority(
             raise ExpansionFreezeError(
                 "scope supersession requires nonblank projected program scope notes"
             )
-        scope_projection = {
-            "history_start_season": researched_inception_season,
-            "history_scope_intervals": "",
-            "history_scope_status": "OWNER_CONFIRMED",
-            "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
-            "history_scope_notes": authority["scope_notes"],
-        }
+
+        if accepted_scope == "INCEPTION+":
+            scope_projection = {
+                "history_start_season": researched_inception_season,
+                "history_scope_intervals": "",
+                "history_scope_status": "OWNER_CONFIRMED",
+                "history_scope_basis": "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+                "history_scope_notes": authority["scope_notes"],
+            }
+        else:
+            try:
+                intervals = parse_history_scope_intervals(accepted_scope)
+            except ValueError as exc:
+                raise ExpansionFreezeError(
+                    "v2 scope supersession supports only INCEPTION+ or one open "
+                    "first-top-level interval"
+                ) from exc
+            if len(intervals) != 1 or intervals[0][1] is not None:
+                raise ExpansionFreezeError(
+                    "v2 scope supersession supports only INCEPTION+ or one open "
+                    "first-top-level interval"
+                )
+            first_top_level = intervals[0][0]
+            if first_top_level < researched_inception_season:
+                raise ExpansionFreezeError(
+                    "owner-superseded first top-level season predates researched inception"
+                )
+            scope_projection = {
+                "history_start_season": first_top_level,
+                "history_scope_intervals": "",
+                "history_scope_status": "OWNER_CONFIRMED",
+                "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                "history_scope_notes": authority["scope_notes"],
+            }
 
     return {
         **authority,
