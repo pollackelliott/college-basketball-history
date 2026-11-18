@@ -1069,9 +1069,44 @@ class ExpansionFreezeTests(unittest.TestCase):
         with self.assertRaisesRegex(ExpansionFreezeError, "inherited top-level scope"):
             self._freeze()
         authority["baseline_scope"] = "1970-71+"
+        authority["accepted_scope"] = "1968-69..1969-70|1971-72+"
+        self._write_scope_authority(authority)
+        with self.assertRaisesRegex(ExpansionFreezeError, "one open first-top-level interval"):
+            self._freeze()
+
+    def test_42a_v2_owner_supersession_supports_later_first_top_level_season(self):
+        self._write_v2_mixed_delta()
+        authority = json.loads(
+            (self.delta / "expansion-scope-authority.json").read_text(encoding="utf-8")
+        )
+        authority["accepted_scope"] = "1971-72+"
+        authority["scope_notes"] = "Owner moved accepted top-level start one season later"
+        self._write_scope_authority(authority)
+        report = self._freeze()
+        self.assertEqual(report["status"], "EXPANSION_RESEARCH_FROZEN")
+        manifest = self._manifest()
+        projected = manifest["scope_authority"]["target_program_scope_fields"]
+        self.assertEqual(projected["history_start_season"], "1971-1972")
+        self.assertEqual(projected["history_scope_intervals"], "")
+        self.assertEqual(projected["history_scope_status"], "OWNER_CONFIRMED")
+        self.assertEqual(projected["history_scope_basis"], "FIRST_TOP_LEVEL_SEASON")
+        self.assertEqual(
+            projected["history_scope_notes"],
+            "Owner moved accepted top-level start one season later",
+        )
+        self.assertEqual(
+            verify_expansion(self.repo, self.output)["status"],
+            "VERIFIED_EXPANSION_RESEARCH_FROZEN",
+        )
+
+    def test_42b_v2_first_top_level_supersession_cannot_predate_inception(self):
+        self._write_v2_mixed_delta()
+        authority = json.loads(
+            (self.delta / "expansion-scope-authority.json").read_text(encoding="utf-8")
+        )
         authority["accepted_scope"] = "1915-16+"
         self._write_scope_authority(authority)
-        with self.assertRaisesRegex(ExpansionFreezeError, "supports only INCEPTION"):
+        with self.assertRaisesRegex(ExpansionFreezeError, "predates researched inception"):
             self._freeze()
 
     def test_43_v2_rejects_duplicate_id_across_new_and_reused(self):
