@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly approved exact Wyoming PR #648 Preview ('Approved. Proceed'), fresh Gate 2 approval wyoming-release-gate2-approval-0001 independently verified PASS, and exact merge packet 4e55dae046f5229f87fd41532043a1abef521f2e1d66b66625e62dd4940f8151 required normal merge of PR #648 head 1fc9be9b0a400a60405da1cf487b8a967040687c from approved main 0c3f3948a6369d687459083c15e46ec89b82de57. GitHub connector merged exactly, producing c028c1ea1e6d3cef59e465106aa0cedd9e649998, now exact protected main with verified parents 0c3f3948a6369d687459083c15e46ec89b82de57 and 1fc9be9b0a400a60405da1cf487b8a967040687c. This request grants read-only exact-merge Production deployment/public JSON proof and independent fresh verification only. No new historical authority, main mutation, recovery, maintenance or additional merge.",
+    "origin": "Same serialized Wyoming ordinary original-school Implementation final phase — packet-bound post-merge Production proof"
+  },
+  "expected_protected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "merge_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "a601f3c60d14d12753a8cf2975b5a1d450af7b0cad0ae0ad01e4a3da67182be6"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/wyoming/wyoming-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "21de23993bd5497a1d093dde18ac22291b569c11ceefff4bd2ee9efe033519fb"
+  },
+  "pr_number": 648,
+  "previous_control_state_commit": "a0cdacd0ff04568dfee4ef55297cf9c9817ed49a",
+  "previous_control_state_sha256": "78673a635e723715bbe849a090c556b5facfcc30f4e4a267a44cd58699fb7b2b",
+  "request_id": "wyoming-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c"
+}
