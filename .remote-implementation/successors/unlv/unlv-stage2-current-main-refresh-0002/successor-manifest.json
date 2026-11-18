@@ -1,0 +1,73 @@
+{
+  "actual_published_target_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be",
+  "changed_file_sha256": {
+    "docs/research-stage4-authoring-contract.md": "eee2f62be432030ca93841b4dc9d886fdf07a44ae7d937f14495e120d8cd1a83",
+    "tests/test_research_stage4_expansion_coverage.py": "5cb028ec0ad101e4d036efa78b104cb6e034cf7152f872f2b9d61cd33511124c",
+    "tools/expansion_stage4_coverage.py": "e17747ba3a9f0ca9609668b412f4ed78d5066e59a9c884d53c0168eee85fbd83",
+    "tools/research_stage4_closeout.py": "b3a1a98e54ec18636420f421852d93fbae1ad5ed37c5657ae6173392374ef200"
+  },
+  "changed_paths": [
+    "docs/research-stage4-authoring-contract.md",
+    "tests/test_research_stage4_expansion_coverage.py",
+    "tools/expansion_stage4_coverage.py",
+    "tools/research_stage4_closeout.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "80f9a7bcf66cc12f3bef8be78f7960c894130576",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "docs/research-stage4-authoring-contract.md",
+    "tests/test_research_stage4_expansion_coverage.py",
+    "tools/expansion_stage4_coverage.py",
+    "tools/research_stage4_closeout.py"
+  ],
+  "merge_base_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "06937895a1b8afb6ec2519b324cbbb76a99079de9942ac0c893394f13f8cc2f8",
+    "notes.md": "665bdd43997ee46af07cd58199ded36ba9719653a69877dc63f501f6833fb66a",
+    "opponents.csv": "12d2520ae4afd14e5069ac2cd7dfaf5c0af670dfac7b1295d1e90e8d8bad607a",
+    "source-games.csv": "422013c377baa901d15675678a5d0327f9d4df5c0dbfb4d6f94c2dd4d706ab37",
+    "source-notes.md": "a6970d0a738116a55cda294df61d1ef8f835f4e5bdcb04bdf43c6c05a60233ae",
+    "venues.csv": "b2183137bbea5e1d00d5f16e75912effd1a66b19604f7cd705953122e389ebcb"
+  },
+  "predecessor_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "prepared_commit_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be",
+  "prepared_main_parent_sha": "71fa9541e758e623d849d5ef165e8874949673d9",
+  "prepared_parent_sha": "80f9a7bcf66cc12f3bef8be78f7960c894130576",
+  "prepared_parents": [
+    "80f9a7bcf66cc12f3bef8be78f7960c894130576",
+    "71fa9541e758e623d849d5ef165e8874949673d9"
+  ],
+  "prepared_tree_sha": "b35724e405ba63daf63c4f9cd7f03c1816ed1d1f",
+  "prior_refresh_successor_path": ".remote-implementation/successors/unlv/unlv-stage2-current-main-refresh-0001/successor-manifest.json",
+  "prior_refresh_successor_sha256": "3bfbb4d4b9e45c16e9df605951677e27908221eed1dca11cd89feb3d338767be",
+  "protected_main_sha": "71fa9541e758e623d849d5ef165e8874949673d9",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "2a728b716668a74cdc6bdd0d1e274865017bef5847cf3489a90b511bc2d72afa",
+  "repository_validation": "PASS",
+  "request_id": "unlv-stage2-current-main-refresh-0002",
+  "request_sha256": "13595e3469558a0c7db55f452de7dd256e82fc3c6d13b31c933fc8304ae0cba5",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "target_branch": "data/unlv-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/unlv/conferences.csv",
+    "schools/unlv/notes.md",
+    "schools/unlv/opponents.csv",
+    "schools/unlv/source-games.csv",
+    "schools/unlv/source-notes.md",
+    "schools/unlv/venues.csv"
+  ],
+  "writeahead_commit": "c74278aca08f21fb6029192540883941996eb909",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/unlv/unlv-stage2-current-main-refresh-0002/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "76e0af9223559469b79ff811405518ed5d508bfc2b60601a8e2cdb7b310188ab"
+}
