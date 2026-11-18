@@ -1,0 +1,66 @@
+{
+  "approved_plan_hash": "2626333f0053bccfbc7e2669001dd2a2317b561a92c98540da27dba114f1d37c",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": true,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner expressly answered 'Approved. Proceed' after exact Wyoming PR #648 Preview verification, exact sealed head 1fc9be9b0a400a60405da1cf487b8a967040687c and Preview deployment 7885435949. This authorizes the complete repository-defined final release phase through fresh Gate 2 approval, connector merge only from the exact fresh-verified packet, and exact Production proof with independent verification. This Gate 2 approval request itself is read-only and does not merge or publish; all prior authority constraints persist.",
+    "origin": "Same serialized Wyoming ordinary original-school Implementation lane — exact Owner Gate 2 approval"
+  },
+  "expected_protected_main_sha": "0c3f3948a6369d687459083c15e46ec89b82de57",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "wyoming-release-production-proof-0001"
+  },
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "owner_gate_2_approval": {
+    "approval_basis": "Owner explicitly responded 'Approved. Proceed' on 2026-11-18 immediately after presentation of the independently fresh-verified Wyoming Owner Gate 2 packet for PR #648, exact head 1fc9be9b0a400a60405da1cf487b8a967040687c, Preview deployment 7885435949 at https://college-basketball-history-ormlqm6ug-elliott-pollacks-projects.vercel.app, and explicit notice that this exact Preview required affirmative approval. This approves only the exact presented Preview and authorizes the repository-defined guarded final phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof and independent completion verification, subject to all existing identity and safety safeguards.",
+    "approved": true,
+    "pr_head_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+    "pr_number": 648,
+    "preview_checkpoint_sha256": "0f73af54b454551f22277ad22db7ef697111331b659269ec2c8f6981f70cf14e",
+    "preview_deployment_id": 7885435949,
+    "preview_url": "https://college-basketball-history-ormlqm6ug-elliott-pollacks-projects.vercel.app",
+    "preview_verification_sha256": "76876257426e6fe2df38135b5b2eace52da1e70021811f5100bf6edd587d7d22"
+  },
+  "pr_number": 648,
+  "preview_deployment_id": 7885435949,
+  "preview_url": "https://college-basketball-history-ormlqm6ug-elliott-pollacks-projects.vercel.app",
+  "previous_control_state_commit": "14b45cdc463d8b4f28794950c0a1448c2224963c",
+  "previous_control_state_sha256": "f94e83c6d0af32bbe5d9a65e1a16623df80f0461c6815b7862b932ee9177bcd0",
+  "release_manifest_sha256": "09b4ad1cdb5ac26c837c0b49e2da18a23ed4e3ea99544f0e544d77f1d8483af5",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/wyoming/wyoming-release-preview-verify-0002/checkpoint-manifest.json",
+    "sha256": "0f73af54b454551f22277ad22db7ef697111331b659269ec2c8f6981f70cf14e"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/wyoming/wyoming-release-preview-verify-0002/release-preview-verification.json",
+    "sha256": "76876257426e6fe2df38135b5b2eace52da1e70021811f5100bf6edd587d7d22"
+  },
+  "request_id": "wyoming-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "target_branch": "data/wyoming-onboarding",
+  "target_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c"
+}
