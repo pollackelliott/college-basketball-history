@@ -568,9 +568,86 @@ class AbandonedApplyResumeTests(VerifiedPresealReplacementTests):
         AbandonedApplyResumeTests.after_prepare(self)
         self.state["abandoned_request_ids"].clear()
 
+    def test_ready_bridge_can_trace_to_verified_blocked_ancestor(self):
+        original_after_prepare = self.after_prepare
+
+        def with_ready_bridge():
+            original_after_prepare()
+            blocked_prior = self.prior_states[self.PRIOR]
+            bridge_id = self.BLOCKED + "-ready-bridge"
+            bridge_prior = "e" * 40
+
+            bridge_request = {
+                "school_key": "school",
+                "operation": OP_STAGE2_PRESEAL_REHEARSAL,
+                "request_id": bridge_id,
+                "target_branch": self.identity["target_branch"],
+                "target_sha": self.identity["target_sha"],
+                "stage2_gate1_fill_checkpoint": copy.deepcopy(self.fill_ref),
+                "stage2_gate1_fill_verification": copy.deepcopy(
+                    self.fill_verification_ref
+                ),
+                "previous_control_state_commit": self.PRIOR,
+            }
+            bridge_path = (
+                f".remote-implementation/checkpoints/school/{bridge_id}/"
+                "checkpoint-manifest.json"
+            )
+            bridge_verification_path = (
+                f".remote-implementation/verifications/school/{bridge_id}/"
+                "stage2-preseal-rehearsal-verification.json"
+            )
+            bridge = {
+                **self.identity,
+                "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+                "request_id": bridge_id,
+                "request_sha256": resume.sha256_bytes(self.bytes(bridge_request)),
+                "preseal_status": "READY_TO_SEAL",
+            }
+            bridge_verification = {
+                **self.identity,
+                "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION",
+                "request_id": bridge_id,
+                "preseal_status": "READY_TO_SEAL",
+                "remote_stage2_preseal_equivalence": "PASS",
+                "tracked_stage2_mutation": "NONE",
+            }
+            self.extra_archives[bridge_id] = bridge_request
+            self.extra_files[bridge_path] = self.bytes(bridge)
+            self.extra_files[bridge_verification_path] = self.bytes(
+                bridge_verification
+            )
+
+            ready_prior = copy.deepcopy(blocked_prior)
+            ready_prior["accepted_request_ids"].append(bridge_id)
+            ready_prior["consumed_request_ids"].append(bridge_id)
+            ready_prior["last_operation"] = {
+                "operation": OP_STAGE2_PRESEAL_REHEARSAL,
+                "request_id": bridge_id,
+                "school_key": "school",
+                "target_branch": self.identity["target_branch"],
+                "target_sha": self.identity["target_sha"],
+                "preseal_status": "READY_TO_SEAL",
+                "fresh_runner_verification": "PASS",
+                "checkpoint_manifest_path": bridge_path,
+                "checkpoint_manifest_sha256": resume.sha256_bytes(
+                    self.extra_files[bridge_path]
+                ),
+            }
+            self.prior_states[bridge_prior] = ready_prior
+            self.parent["previous_control_state_commit"] = bridge_prior
+            self.state["accepted_request_ids"].append(bridge_id)
+            self.state["consumed_request_ids"].append(bridge_id)
+            self.state["used"].add(bridge_id)
+
+        self.after_prepare = with_ready_bridge
+        spec = self.call()
+        self.assertEqual(spec["preseal_request_id"], self.REPLACEMENT)
+        self.assertEqual(spec["seal_request_id"], self.REPLACEMENT + "-seal")
+
     def test_prior_control_state_must_be_verified_blocked_preseal(self):
         self.after_prepare = self._after_prepare_with_ready_prior
-        with self.assertRaisesRegex(Stop, "BLOCKED_PREDECESSOR_STATE_INVALID"):
+        with self.assertRaisesRegex(Stop, "PRESEAL_ANCESTRY"):
             self.call()
 
     def _after_prepare_with_ready_prior(self):
