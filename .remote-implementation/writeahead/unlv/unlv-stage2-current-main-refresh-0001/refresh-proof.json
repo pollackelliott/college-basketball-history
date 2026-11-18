@@ -1,0 +1,67 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "6f515874b63f5f91f74843d59c0a1c2eb5830ed2bc9146ce773202ce35cb0896",
+    "tests/test_program_history_scope.py": "07f287233ed0e3729fa4188a4e9087113e07ae7639336fc2b519bf7ba17aa890",
+    "tests/test_stage2_candidate_runtime_rehearsal.py": "2b92cc44b8d7b84b16360ae77d5f427bb0b18f4b2005c18b1b5cc761e4e8a674",
+    "tools/onboarding_plan.py": "e7f77dac24582f785accdb0fda144819fb85cdd0c3f0868ffd1c3869b5b90ee2"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_program_history_scope.py",
+    "tests/test_stage2_candidate_runtime_rehearsal.py",
+    "tools/onboarding_plan.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+  "main_changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_program_history_scope.py",
+    "tests/test_stage2_candidate_runtime_rehearsal.py",
+    "tools/onboarding_plan.py"
+  ],
+  "merge_base_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "06937895a1b8afb6ec2519b324cbbb76a99079de9942ac0c893394f13f8cc2f8",
+    "notes.md": "665bdd43997ee46af07cd58199ded36ba9719653a69877dc63f501f6833fb66a",
+    "opponents.csv": "12d2520ae4afd14e5069ac2cd7dfaf5c0af670dfac7b1295d1e90e8d8bad607a",
+    "source-games.csv": "422013c377baa901d15675678a5d0327f9d4df5c0dbfb4d6f94c2dd4d706ab37",
+    "source-notes.md": "a6970d0a738116a55cda294df61d1ef8f835f4e5bdcb04bdf43c6c05a60233ae",
+    "venues.csv": "b2183137bbea5e1d00d5f16e75912effd1a66b19604f7cd705953122e389ebcb"
+  },
+  "prepared_commit_sha": "80f9a7bcf66cc12f3bef8be78f7960c894130576",
+  "prepared_parents": [
+    "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+    "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3"
+  ],
+  "prepared_tree_sha": "97ff72eb19412aebef062651f5f34b1f178256a4",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "5c711c3a9c87ff77132a060a34b2e39137e9ab1674b4b1856b0085d238725808",
+    "data/reference/venue-names.csv": "571b784151464d807a56061aa44668abe29ebb3b5494cb37ea1196a8d051962a",
+    "data/reference/venues.csv": "cebfa71ff90d6db8bc593f697807eabf3ac2ae6e64e63c61a93ee3761491532e",
+    "schools/unlv/conferences.csv": "06937895a1b8afb6ec2519b324cbbb76a99079de9942ac0c893394f13f8cc2f8",
+    "schools/unlv/notes.md": "665bdd43997ee46af07cd58199ded36ba9719653a69877dc63f501f6833fb66a",
+    "schools/unlv/opponents.csv": "12d2520ae4afd14e5069ac2cd7dfaf5c0af670dfac7b1295d1e90e8d8bad607a",
+    "schools/unlv/source-games.csv": "422013c377baa901d15675678a5d0327f9d4df5c0dbfb4d6f94c2dd4d706ab37",
+    "schools/unlv/source-notes.md": "a6970d0a738116a55cda294df61d1ef8f835f4e5bdcb04bdf43c6c05a60233ae",
+    "schools/unlv/venues.csv": "b2183137bbea5e1d00d5f16e75912effd1a66b19604f7cd705953122e389ebcb"
+  },
+  "protected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "target_branch": "data/unlv-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/unlv/conferences.csv",
+    "schools/unlv/notes.md",
+    "schools/unlv/opponents.csv",
+    "schools/unlv/source-games.csv",
+    "schools/unlv/source-notes.md",
+    "schools/unlv/venues.csv"
+  ]
+}
