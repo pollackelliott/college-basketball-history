@@ -346,15 +346,261 @@ def _resume_post_gate1_from_verified_replacement(
         first.get("kind") != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT"
         or first.get("request_id") != first_id
         or first.get("request_sha256") != sha256_bytes(first_request_bytes)
-        or first.get("preseal_status") != "BLOCKED"
         or first_verification.get("kind")
         != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION"
         or first_verification.get("request_id") != first_id
-        or first_verification.get("preseal_status") != "BLOCKED"
-        or first_verification.get("remote_stage2_preseal_equivalence") != "PASS"
-        or first_verification.get("tracked_stage2_mutation") != "NONE"
     ):
-        raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_NOT_VERIFIED_BLOCKED")
+        raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_EVIDENCE_INVALID")
+
+    preseal_evidence = [(first, first_verification)]
+    seal_evidence: tuple[dict[str, Any], dict[str, Any]] | None = None
+    apply_writeahead: dict[str, Any] | None = None
+
+    first_status = first.get("preseal_status")
+    if first_status == "BLOCKED":
+        if (
+            first_verification.get("preseal_status") != "BLOCKED"
+            or first_verification.get("remote_stage2_preseal_equivalence") != "PASS"
+            or first_verification.get("tracked_stage2_mutation") != "NONE"
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_NOT_VERIFIED_BLOCKED")
+        if any(
+            request_used(state, authorized[key])
+            for key in ("seal_request_id", "apply_request_id")
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_CHILD_ALREADY_CONSUMED")
+    elif first_status == "READY_TO_SEAL":
+        if (
+            first_verification.get("preseal_status") != "READY_TO_SEAL"
+            or first_verification.get("remote_stage2_preseal_equivalence") != "PASS"
+            or first_verification.get("tracked_stage2_mutation") != "NONE"
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_EVIDENCE_INVALID")
+        seal_id = authorized["seal_request_id"]
+        apply_id = authorized["apply_request_id"]
+        accepted = set(state.get("accepted_request_ids") or [])
+        consumed = set(state.get("consumed_request_ids") or [])
+        abandoned = set(state.get("abandoned_request_ids") or [])
+        if (
+            seal_id not in accepted
+            or seal_id not in consumed
+            or apply_id not in accepted
+            or apply_id not in abandoned
+            or apply_id in consumed
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_CHILD_RECOVERY_INVALID")
+
+        first_ref = {
+            "path": first_checkpoint_path,
+            "sha256": sha256_bytes(git_show_bytes(control_head, first_checkpoint_path)),
+        }
+        first_verification_ref = {
+            "path": first_verification_path,
+            "sha256": sha256_bytes(
+                git_show_bytes(control_head, first_verification_path)
+            ),
+        }
+
+        seal_request, seal_request_bytes = _load_archived_request(control_head, seal_id)
+        seal_checkpoint_path = (
+            f".remote-implementation/checkpoints/{parent['school_key']}/"
+            f"{seal_id}/checkpoint-manifest.json"
+        )
+        seal_verification_path = (
+            f".remote-implementation/verifications/{parent['school_key']}/"
+            f"{seal_id}/stage2-gate1-seal-verification.json"
+        )
+        try:
+            seal = json.loads(git_show_bytes(control_head, seal_checkpoint_path))
+            seal_verification = json.loads(
+                git_show_bytes(control_head, seal_verification_path)
+            )
+        except (ValueError, TypeError) as exc:
+            raise Stop("STAGE2_RESUME_ORIGINAL_SEAL_EVIDENCE_INVALID") from exc
+
+        seal_ref = {
+            "path": seal_checkpoint_path,
+            "sha256": sha256_bytes(git_show_bytes(control_head, seal_checkpoint_path)),
+        }
+        seal_verification_ref = {
+            "path": seal_verification_path,
+            "sha256": sha256_bytes(
+                git_show_bytes(control_head, seal_verification_path)
+            ),
+        }
+        if (
+            seal_request.get("operation") != OP_STAGE2_GATE1_SEAL
+            or seal_request.get("school_key") != parent["school_key"]
+            or seal_request.get("phase_continuation") != authorized
+            or seal_request.get("stage2_preseal_checkpoint") != first_ref
+            or seal_request.get("stage2_preseal_verification") != first_verification_ref
+            or seal.get("kind")
+            != "REMOTE_IMPLEMENTATION_STAGE2_GATE1_SEAL_CHECKPOINT"
+            or seal.get("request_id") != seal_id
+            or seal.get("request_sha256") != sha256_bytes(seal_request_bytes)
+            or seal.get("seal_status") != "SEALED"
+            or seal.get("source_preseal_request_id") != first_id
+            or seal_verification.get("kind")
+            != "REMOTE_IMPLEMENTATION_STAGE2_GATE1_SEAL_VERIFICATION"
+            or seal_verification.get("request_id") != seal_id
+            or seal_verification.get("seal_status") != "SEALED"
+            or seal_verification.get("remote_stage2_gate1_seal_equivalence") != "PASS"
+            or seal_verification.get("tracked_stage2_mutation") != "NONE"
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_SEAL_EVIDENCE_INVALID")
+        seal_evidence = (seal, seal_verification)
+
+        apply_request, apply_request_bytes = _load_archived_request(control_head, apply_id)
+        writeahead_path = (
+            f".remote-implementation/writeahead/{parent['school_key']}/"
+            f"{apply_id}/writeahead-manifest.json"
+        )
+        try:
+            apply_writeahead = json.loads(git_show_bytes(control_head, writeahead_path))
+        except (ValueError, TypeError) as exc:
+            raise Stop("STAGE2_RESUME_ORIGINAL_APPLY_RECOVERY_INVALID") from exc
+        if (
+            apply_request.get("operation") != OP_STAGE2_SEALED_APPLY
+            or apply_request.get("school_key") != parent["school_key"]
+            or apply_request.get("stage2_gate1_seal_checkpoint") != seal_ref
+            or apply_request.get("stage2_gate1_seal_verification")
+            != seal_verification_ref
+            or apply_writeahead.get("kind") != "REMOTE_IMPLEMENTATION_WRITEAHEAD"
+            or apply_writeahead.get("operation") != OP_STAGE2_SEALED_APPLY
+            or apply_writeahead.get("request_id") != apply_id
+            or apply_writeahead.get("request_sha256")
+            != sha256_bytes(apply_request_bytes)
+            or apply_writeahead.get("mutation_state") != "PREPARED_NOT_PUBLISHED"
+            or apply_writeahead.get("target_branch") != parent["target_branch"]
+            or apply_writeahead.get("expected_target_predecessor_sha")
+            != parent["target_sha"]
+            or apply_writeahead.get("prepared_parent_sha") != parent["target_sha"]
+        ):
+            raise Stop("STAGE2_RESUME_ORIGINAL_APPLY_RECOVERY_INVALID")
+
+        # A tooling repair or protected-main advance may require one or more
+        # fresh READY replacement pre-seals before the live replacement can
+        # continue. Authenticate that exact control-state ancestry backward,
+        # through independently verified read-only READY replacements, until the
+        # first independently verified BLOCKED pre-seal in the same fill lineage.
+        # Bound the walk so malformed/cyclic history fails closed.
+        ancestry_commit = str(parent.get("previous_control_state_commit") or "")
+        visited_commits: set[str] = set()
+        visited_ids: set[str] = set()
+        blocked_found = False
+        for _ in range(8):
+            if not ancestry_commit or ancestry_commit in visited_commits:
+                raise Stop("STAGE2_RESUME_PRESEAL_ANCESTRY_STATE_INVALID")
+            visited_commits.add(ancestry_commit)
+            try:
+                ancestor_state = git_show_json(
+                    ancestry_commit, STATE_PATH.as_posix()
+                )
+                validate_control_state(ancestor_state)
+            except Exception as exc:
+                raise Stop("STAGE2_RESUME_PRESEAL_ANCESTRY_STATE_INVALID") from exc
+
+            ancestor_last = ancestor_state.get("last_operation") or {}
+            ancestor_id = str(ancestor_last.get("request_id") or "")
+            if (
+                ancestor_state.get("lifecycle_state") != LIFECYCLE_IDLE
+                or ancestor_state.get("transaction_state") != TX_COMPLETE
+                or ancestor_state.get("recovery_required") is not False
+                or ancestor_last.get("operation") != OP_STAGE2_PRESEAL_REHEARSAL
+                or ancestor_last.get("fresh_runner_verification") != "PASS"
+                or ancestor_last.get("school_key") != parent["school_key"]
+                or ancestor_last.get("target_branch") != parent["target_branch"]
+                or ancestor_last.get("target_sha") != parent["target_sha"]
+                or ancestor_id in {"", first_id, parent["request_id"]}
+                or ancestor_id in visited_ids
+                or ancestor_id
+                not in set(ancestor_state.get("consumed_request_ids") or [])
+                or not request_used(state, ancestor_id)
+            ):
+                raise Stop("STAGE2_RESUME_PRESEAL_ANCESTRY_STATE_INVALID")
+            visited_ids.add(ancestor_id)
+
+            ancestor_request, ancestor_request_bytes = _load_archived_request(
+                control_head, ancestor_id
+            )
+            if (
+                ancestor_request.get("operation") != OP_STAGE2_PRESEAL_REHEARSAL
+                or ancestor_request.get("school_key") != parent["school_key"]
+                or ancestor_request.get("target_branch") != parent["target_branch"]
+                or ancestor_request.get("target_sha") != parent["target_sha"]
+                or ancestor_request.get("phase_continuation") is not None
+                or ancestor_request.get("stage2_gate1_fill_checkpoint") != fill_ref
+                or ancestor_request.get("stage2_gate1_fill_verification")
+                != fill_verification_ref
+            ):
+                raise Stop("STAGE2_RESUME_PRESEAL_ANCESTRY_LINEAGE_INVALID")
+
+            ancestor_checkpoint_path = (
+                f".remote-implementation/checkpoints/{parent['school_key']}/"
+                f"{ancestor_id}/checkpoint-manifest.json"
+            )
+            ancestor_verification_path = (
+                f".remote-implementation/verifications/{parent['school_key']}/"
+                f"{ancestor_id}/stage2-preseal-rehearsal-verification.json"
+            )
+            try:
+                ancestor_bytes = git_show_bytes(
+                    control_head, ancestor_checkpoint_path
+                )
+                ancestor = json.loads(ancestor_bytes)
+                ancestor_verification = json.loads(
+                    git_show_bytes(control_head, ancestor_verification_path)
+                )
+            except (ValueError, TypeError) as exc:
+                raise Stop(
+                    "STAGE2_RESUME_PRESEAL_ANCESTRY_EVIDENCE_INVALID"
+                ) from exc
+
+            ancestor_status = ancestor.get("preseal_status")
+            if (
+                ancestor_last.get("checkpoint_manifest_path")
+                != ancestor_checkpoint_path
+                or ancestor_last.get("checkpoint_manifest_sha256")
+                != sha256_bytes(ancestor_bytes)
+                or ancestor.get("kind")
+                != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT"
+                or ancestor.get("request_id") != ancestor_id
+                or ancestor.get("request_sha256")
+                != sha256_bytes(ancestor_request_bytes)
+                or ancestor_status not in {"BLOCKED", "READY_TO_SEAL"}
+                or ancestor_last.get("preseal_status") != ancestor_status
+                or ancestor_verification.get("kind")
+                != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION"
+                or ancestor_verification.get("request_id") != ancestor_id
+                or ancestor_verification.get("preseal_status") != ancestor_status
+                or ancestor_verification.get("remote_stage2_preseal_equivalence")
+                != "PASS"
+                or ancestor_verification.get("tracked_stage2_mutation") != "NONE"
+            ):
+                raise Stop("STAGE2_RESUME_PRESEAL_ANCESTRY_EVIDENCE_INVALID")
+
+            preseal_evidence.append((ancestor, ancestor_verification))
+            if ancestor_status == "BLOCKED":
+                blocked_found = True
+                break
+
+            # A READY bridge is evidence only. If any child was ever used or is
+            # currently queued, it is not a harmless read-only bridge.
+            for child_id in (ancestor_id + "-seal", ancestor_id + "-apply"):
+                if (
+                    request_used(state, child_id)
+                    or _already_queued(control_head, state, child_id)
+                ):
+                    raise Stop("STAGE2_RESUME_READY_BRIDGE_CHILD_ALREADY_USED")
+
+            ancestry_commit = str(
+                ancestor_request.get("previous_control_state_commit") or ""
+            )
+
+        if not blocked_found:
+            raise Stop("STAGE2_RESUME_PRESEAL_ANCESTRY_BLOCKED_NOT_FOUND")
+    else:
+        raise Stop("STAGE2_RESUME_ORIGINAL_PRESEAL_NOT_RECOVERABLE")
 
     identity_fields = (
         "school_key",
@@ -373,12 +619,36 @@ def _resume_post_gate1_from_verified_replacement(
     for field in identity_fields:
         if (
             fill.get(field) is None
-            or fill.get(field) != first.get(field)
             or fill.get(field) != manifest.get(field)
             or fill_verification.get(field) != fill.get(field)
-            or first_verification.get(field) != first.get(field)
         ):
             raise Stop("STAGE2_RESUME_HISTORICAL_AUTHORITY_CHANGED:" + field)
+        for checkpoint, verification in preseal_evidence:
+            if (
+                checkpoint.get(field) != fill.get(field)
+                or verification.get(field) != checkpoint.get(field)
+            ):
+                raise Stop("STAGE2_RESUME_HISTORICAL_AUTHORITY_CHANGED:" + field)
+        if seal_evidence is not None:
+            seal, seal_verification = seal_evidence
+            if (
+                seal.get(field) != fill.get(field)
+                or seal_verification.get(field) != seal.get(field)
+            ):
+                raise Stop("STAGE2_RESUME_HISTORICAL_AUTHORITY_CHANGED:" + field)
+
+    if apply_writeahead is not None:
+        for field in (
+            "integration_freeze_sha256",
+            "semantic_snapshot_sha256",
+            "decision_universe_sha256",
+            "recommendation_map_sha256",
+            "filled_review_sha256",
+            "decision_id_set_sha256",
+            "owner_gate_1_approval_sha256",
+        ):
+            if apply_writeahead.get(field) != fill.get(field):
+                raise Stop("STAGE2_RESUME_HISTORICAL_AUTHORITY_CHANGED:" + field)
 
     if (
         manifest.get("source_gate1_fill_request_id") != fill_id
@@ -394,12 +664,6 @@ def _resume_post_gate1_from_verified_replacement(
         or manifest.get("preseal_status") != "READY_TO_SEAL"
     ):
         raise Stop("STAGE2_RESUME_REPLACEMENT_PRESEAL_BINDING_INVALID")
-
-    if any(
-        request_used(state, authorized[key])
-        for key in ("seal_request_id", "apply_request_id")
-    ):
-        raise Stop("STAGE2_RESUME_ORIGINAL_CHILD_ALREADY_CONSUMED")
 
     # These IDs can never represent a replay of the abandoned original chain.
     preseal_id = parent["request_id"]

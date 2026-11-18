@@ -17,6 +17,7 @@ import remote_implementation_stage2_continuation as resume  # noqa: E402
 from remote_implementation_control import (  # noqa: E402
     LIFECYCLE_IDLE,
     OP_STAGE2_GATE1_FILL,
+    initial_control_state,
     OP_STAGE2_GATE1_SEAL,
     OP_STAGE2_PRESEAL_REHEARSAL,
     STAGE2_POST_GATE1_CONTINUATION_KIND,
@@ -133,8 +134,14 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
             "recovery_required": False,
             "active_request_id": None,
             "active_lock_commit": None,
+            "accepted_request_ids": [],
+            "consumed_request_ids": [],
+            "abandoned_request_ids": [],
             "used": {self.FIRST},
         }
+        self.extra_archives = {}
+        self.extra_files = {}
+        self.prior_states = {}
         self.last = {
             "fresh_runner_verification": "PASS",
             "request_id": self.REPLACEMENT,
@@ -180,14 +187,19 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
             self.fill_verification_ref["sha256"]
         )
 
+    def after_prepare(self):
+        pass
+
     def call(self):
         self.prepare()
+        self.after_prepare()
+
         def archive(control_head, request_id):
             self.assertEqual(control_head, self.CONTROL)
             request = (
                 self.fill_request if request_id == self.FILL
                 else self.first_request if request_id == self.FIRST
-                else None
+                else self.extra_archives.get(request_id)
             )
             if request is None:
                 raise AssertionError("unexpected archived request " + request_id)
@@ -195,7 +207,16 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
 
         def show(control_head, path):
             self.assertEqual(control_head, self.CONTROL)
-            return self.files[path]
+            files = {**self.files, **self.extra_files}
+            return files[path]
+
+        def show_json(control_head, path):
+            if path == ".remote-implementation/control-state.json":
+                if control_head not in self.prior_states:
+                    raise AssertionError("unexpected prior state " + control_head)
+                return copy.deepcopy(self.prior_states[control_head])
+            self.assertEqual(control_head, self.CONTROL)
+            return {"request_id": self.REPLACEMENT}
 
         with (
             patch.object(resume, "_load_archived_request", side_effect=archive),
@@ -206,7 +227,7 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
             ),
             patch.object(
                 resume, "git_show_json",
-                return_value={"request_id": self.REPLACEMENT},
+                side_effect=show_json,
             ),
         ):
             return resume._resume_post_gate1_from_verified_replacement(
@@ -260,7 +281,7 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
 
     def test_earlier_preseal_must_be_blocked(self):
         self.first["preseal_status"] = "READY_TO_SEAL"
-        with self.assertRaisesRegex(Stop, "NOT_VERIFIED_BLOCKED"):
+        with self.assertRaisesRegex(Stop, "ORIGINAL_PRESEAL_EVIDENCE_INVALID"):
             self.call()
 
     def test_earlier_preseal_must_be_independently_verified(self):
@@ -351,6 +372,287 @@ class VerifiedPresealReplacementTests(unittest.TestCase):
         self.assertEqual(request["owner_gate_1_approval_sha256"], "9" * 64)
         self.assertEqual(request["equivalence_sha256"], "e" * 64)
         validate_request(request)
+
+
+class AbandonedApplyResumeTests(VerifiedPresealReplacementTests):
+    BLOCKED = "school-stage2-preseal-0002"
+    REPLACEMENT = "school-stage2-preseal-0003"
+    PRIOR = "d" * 40
+
+    def after_prepare(self):
+        self.first["preseal_status"] = "READY_TO_SEAL"
+        self.first_verification["preseal_status"] = "READY_TO_SEAL"
+        self.files[self.first_path] = self.bytes(self.first)
+        self.files[self.first_verification_path] = self.bytes(self.first_verification)
+
+        first_ref = {
+            "path": self.first_path,
+            "sha256": resume.sha256_bytes(self.files[self.first_path]),
+        }
+        first_verification_ref = {
+            "path": self.first_verification_path,
+            "sha256": resume.sha256_bytes(self.files[self.first_verification_path]),
+        }
+
+        seal_id = self.authorized["seal_request_id"]
+        apply_id = self.authorized["apply_request_id"]
+        seal_request = {
+            "school_key": "school",
+            "operation": OP_STAGE2_GATE1_SEAL,
+            "request_id": seal_id,
+            "phase_continuation": copy.deepcopy(self.authorized),
+            "stage2_preseal_checkpoint": first_ref,
+            "stage2_preseal_verification": first_verification_ref,
+        }
+        seal_path = (
+            f".remote-implementation/checkpoints/school/{seal_id}/"
+            "checkpoint-manifest.json"
+        )
+        seal_verification_path = (
+            f".remote-implementation/verifications/school/{seal_id}/"
+            "stage2-gate1-seal-verification.json"
+        )
+        seal = {
+            **self.identity,
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_SEAL_CHECKPOINT",
+            "request_id": seal_id,
+            "request_sha256": resume.sha256_bytes(self.bytes(seal_request)),
+            "seal_status": "SEALED",
+            "source_preseal_request_id": self.FIRST,
+        }
+        seal_verification = {
+            **self.identity,
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_SEAL_VERIFICATION",
+            "request_id": seal_id,
+            "seal_status": "SEALED",
+            "remote_stage2_gate1_seal_equivalence": "PASS",
+            "tracked_stage2_mutation": "NONE",
+        }
+        self.extra_files[seal_path] = self.bytes(seal)
+        self.extra_files[seal_verification_path] = self.bytes(seal_verification)
+        seal_ref = {
+            "path": seal_path,
+            "sha256": resume.sha256_bytes(self.extra_files[seal_path]),
+        }
+        seal_verification_ref = {
+            "path": seal_verification_path,
+            "sha256": resume.sha256_bytes(self.extra_files[seal_verification_path]),
+        }
+        apply_request = {
+            "school_key": "school",
+            "operation": "STAGE2_SEALED_APPLY",
+            "request_id": apply_id,
+            "stage2_gate1_seal_checkpoint": seal_ref,
+            "stage2_gate1_seal_verification": seal_verification_ref,
+        }
+        writeahead_path = (
+            f".remote-implementation/writeahead/school/{apply_id}/"
+            "writeahead-manifest.json"
+        )
+        writeahead = {
+            **{
+                key: self.identity[key]
+                for key in (
+                    "integration_freeze_sha256",
+                    "semantic_snapshot_sha256",
+                    "decision_universe_sha256",
+                    "recommendation_map_sha256",
+                    "filled_review_sha256",
+                    "decision_id_set_sha256",
+                    "owner_gate_1_approval_sha256",
+                )
+            },
+            "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+            "operation": "STAGE2_SEALED_APPLY",
+            "request_id": apply_id,
+            "request_sha256": resume.sha256_bytes(self.bytes(apply_request)),
+            "mutation_state": "PREPARED_NOT_PUBLISHED",
+            "target_branch": self.identity["target_branch"],
+            "expected_target_predecessor_sha": self.identity["target_sha"],
+            "prepared_parent_sha": self.identity["target_sha"],
+        }
+        self.extra_files[writeahead_path] = self.bytes(writeahead)
+        self.extra_archives[seal_id] = seal_request
+        self.extra_archives[apply_id] = apply_request
+
+        blocked_request = {
+            "school_key": "school",
+            "operation": OP_STAGE2_PRESEAL_REHEARSAL,
+            "request_id": self.BLOCKED,
+            "target_branch": self.identity["target_branch"],
+            "target_sha": self.identity["target_sha"],
+            "stage2_gate1_fill_checkpoint": copy.deepcopy(self.fill_ref),
+            "stage2_gate1_fill_verification": copy.deepcopy(self.fill_verification_ref),
+        }
+        blocked_path = (
+            f".remote-implementation/checkpoints/school/{self.BLOCKED}/"
+            "checkpoint-manifest.json"
+        )
+        blocked_verification_path = (
+            f".remote-implementation/verifications/school/{self.BLOCKED}/"
+            "stage2-preseal-rehearsal-verification.json"
+        )
+        blocked = {
+            **self.identity,
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+            "request_id": self.BLOCKED,
+            "request_sha256": resume.sha256_bytes(self.bytes(blocked_request)),
+            "preseal_status": "BLOCKED",
+        }
+        blocked_verification = {
+            **self.identity,
+            "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION",
+            "request_id": self.BLOCKED,
+            "preseal_status": "BLOCKED",
+            "remote_stage2_preseal_equivalence": "PASS",
+            "tracked_stage2_mutation": "NONE",
+        }
+        self.extra_archives[self.BLOCKED] = blocked_request
+        self.extra_files[blocked_path] = self.bytes(blocked)
+        self.extra_files[blocked_verification_path] = self.bytes(blocked_verification)
+
+        prior = initial_control_state()
+        prior["transaction_state"] = TX_COMPLETE
+        prior["accepted_request_ids"] = [self.FIRST, seal_id, apply_id, self.BLOCKED]
+        prior["consumed_request_ids"] = [self.FIRST, seal_id, self.BLOCKED]
+        prior["abandoned_request_ids"] = [apply_id]
+        prior["last_operation"] = {
+            "operation": OP_STAGE2_PRESEAL_REHEARSAL,
+            "request_id": self.BLOCKED,
+            "school_key": "school",
+            "target_branch": self.identity["target_branch"],
+            "target_sha": self.identity["target_sha"],
+            "preseal_status": "BLOCKED",
+            "fresh_runner_verification": "PASS",
+            "checkpoint_manifest_path": blocked_path,
+            "checkpoint_manifest_sha256": resume.sha256_bytes(
+                self.extra_files[blocked_path]
+            ),
+        }
+        self.prior_states[self.PRIOR] = prior
+        self.parent["previous_control_state_commit"] = self.PRIOR
+
+        self.state["accepted_request_ids"] = [self.FIRST, seal_id, apply_id, self.BLOCKED]
+        self.state["consumed_request_ids"] = [self.FIRST, seal_id, self.BLOCKED]
+        self.state["abandoned_request_ids"] = [apply_id]
+        self.state["used"].update({seal_id, apply_id, self.BLOCKED})
+
+    def test_abandoned_unpublished_apply_can_resume_from_exact_blocked_predecessor(self):
+        spec = self.call()
+        self.assertEqual(spec["preseal_request_id"], self.REPLACEMENT)
+        self.assertEqual(spec["seal_request_id"], self.REPLACEMENT + "-seal")
+        self.assertEqual(spec["apply_request_id"], self.REPLACEMENT + "-apply")
+
+    # These inherited test names describe the simpler #637 topology. In this
+    # subclass they assert the deliberately different abandoned-apply topology
+    # rather than importing mutually exclusive expectations from the parent.
+    def test_earlier_preseal_must_be_blocked(self):
+        spec = self.call()
+        self.assertEqual(spec["preseal_request_id"], self.REPLACEMENT)
+
+    def test_earlier_preseal_must_be_independently_verified(self):
+        self.first_verification["remote_stage2_preseal_equivalence"] = "FAIL"
+        with self.assertRaisesRegex(Stop, "ORIGINAL_PRESEAL_EVIDENCE_INVALID"):
+            self.call()
+
+    def test_original_seal_or_apply_cannot_have_run(self):
+        spec = self.call()
+        self.assertEqual(spec["seal_request_id"], self.REPLACEMENT + "-seal")
+
+    def test_abandoned_apply_must_be_recorded(self):
+        self.after_prepare = self._after_prepare_without_abandonment
+        with self.assertRaisesRegex(Stop, "ORIGINAL_CHILD_RECOVERY_INVALID"):
+            self.call()
+
+    def _after_prepare_without_abandonment(self):
+        AbandonedApplyResumeTests.after_prepare(self)
+        self.state["abandoned_request_ids"].clear()
+
+    def test_ready_bridge_can_trace_to_verified_blocked_ancestor(self):
+        original_after_prepare = self.after_prepare
+
+        def with_ready_bridge():
+            original_after_prepare()
+            blocked_prior = self.prior_states[self.PRIOR]
+            bridge_id = self.BLOCKED + "-ready-bridge"
+            bridge_prior = "e" * 40
+
+            bridge_request = {
+                "school_key": "school",
+                "operation": OP_STAGE2_PRESEAL_REHEARSAL,
+                "request_id": bridge_id,
+                "target_branch": self.identity["target_branch"],
+                "target_sha": self.identity["target_sha"],
+                "stage2_gate1_fill_checkpoint": copy.deepcopy(self.fill_ref),
+                "stage2_gate1_fill_verification": copy.deepcopy(
+                    self.fill_verification_ref
+                ),
+                "previous_control_state_commit": self.PRIOR,
+            }
+            bridge_path = (
+                f".remote-implementation/checkpoints/school/{bridge_id}/"
+                "checkpoint-manifest.json"
+            )
+            bridge_verification_path = (
+                f".remote-implementation/verifications/school/{bridge_id}/"
+                "stage2-preseal-rehearsal-verification.json"
+            )
+            bridge = {
+                **self.identity,
+                "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_CHECKPOINT",
+                "request_id": bridge_id,
+                "request_sha256": resume.sha256_bytes(self.bytes(bridge_request)),
+                "preseal_status": "READY_TO_SEAL",
+            }
+            bridge_verification = {
+                **self.identity,
+                "kind": "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION",
+                "request_id": bridge_id,
+                "preseal_status": "READY_TO_SEAL",
+                "remote_stage2_preseal_equivalence": "PASS",
+                "tracked_stage2_mutation": "NONE",
+            }
+            self.extra_archives[bridge_id] = bridge_request
+            self.extra_files[bridge_path] = self.bytes(bridge)
+            self.extra_files[bridge_verification_path] = self.bytes(
+                bridge_verification
+            )
+
+            ready_prior = copy.deepcopy(blocked_prior)
+            ready_prior["accepted_request_ids"].append(bridge_id)
+            ready_prior["consumed_request_ids"].append(bridge_id)
+            ready_prior["last_operation"] = {
+                "operation": OP_STAGE2_PRESEAL_REHEARSAL,
+                "request_id": bridge_id,
+                "school_key": "school",
+                "target_branch": self.identity["target_branch"],
+                "target_sha": self.identity["target_sha"],
+                "preseal_status": "READY_TO_SEAL",
+                "fresh_runner_verification": "PASS",
+                "checkpoint_manifest_path": bridge_path,
+                "checkpoint_manifest_sha256": resume.sha256_bytes(
+                    self.extra_files[bridge_path]
+                ),
+            }
+            self.prior_states[bridge_prior] = ready_prior
+            self.parent["previous_control_state_commit"] = bridge_prior
+            self.state["accepted_request_ids"].append(bridge_id)
+            self.state["consumed_request_ids"].append(bridge_id)
+            self.state["used"].add(bridge_id)
+
+        self.after_prepare = with_ready_bridge
+        spec = self.call()
+        self.assertEqual(spec["preseal_request_id"], self.REPLACEMENT)
+        self.assertEqual(spec["seal_request_id"], self.REPLACEMENT + "-seal")
+
+    def test_prior_control_state_must_be_verified_blocked_preseal(self):
+        self.after_prepare = self._after_prepare_with_ready_prior
+        with self.assertRaisesRegex(Stop, "PRESEAL_ANCESTRY"):
+            self.call()
+
+    def _after_prepare_with_ready_prior(self):
+        AbandonedApplyResumeTests.after_prepare(self)
+        self.prior_states[self.PRIOR]["last_operation"]["preseal_status"] = "READY_TO_SEAL"
 
 
 if __name__ == "__main__":
