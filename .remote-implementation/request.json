@@ -10,52 +10,39 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from unlv-stage2-current-main-refresh-0002",
+    "authorization": "phase-persistent owner/Control Center authority inherited from unlv-stage2-census-0003",
     "origin": "repository-owned Stage 2 phase continuation"
   },
+  "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
   "expected_protected_main_sha": "71fa9541e758e623d849d5ef165e8874949673d9",
   "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",
-    "sha256": "1c13241d96283d7543dee0559a949e03f9b3c4061b1a787f965efd3b011a0b33"
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "dadb26cdbf7de93d1b6b0ea718a65934b178eb0d",
+  "previous_control_state_sha256": "d18b3225bb4425dab5e9b2cd38e81fa7987f23b9f60be1077fb8f00540a4534f",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/unlv-stage2-current-main-refresh-0002/recommendation-map.json",
+    "sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395"
   },
-  "phase_continuation": {
-    "census_request_id": "unlv-stage2-census-0003",
-    "expected_decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "unlv-stage2-proposal-0001",
-    "recommendation_map": {
-      "path": ".remote-implementation/requests/unlv-stage2-current-main-refresh-0002/recommendation-map.json",
-      "sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395"
-    }
-  },
-  "previous_control_state_commit": "6a36525d9fd3bca8a379b577750481fae3491392",
-  "previous_control_state_sha256": "d1acd27e4956337a1be194ae3b5df357f4b9feabd8a191f2766efa951ea59e02",
-  "request_id": "unlv-stage2-census-0003",
+  "request_id": "unlv-stage2-proposal-0001",
   "schema_version": 1,
   "school_key": "unlv",
   "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/unlv/unlv-stage2-current-main-refresh-0002/successor-manifest.json",
-    "sha256": "3ccdfa6684c17c697003f5410827006279bd8c2733e662f6ad7c639375266135"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/unlv/unlv-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "497ec4460359fa5e88731568ff3a88d0495b83e6614d62d40da1ca44fc8fbb55"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "f8e0a464ee9cb517c68a51e540817a11f5d2dbda7f219da3bdfb012e1b78fa13"
   },
   "target_branch": "data/unlv-onboarding",
   "target_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be"
