@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "unlv-stage2-reconciliation-diagnostic-0001",
+  "request_id": "unlv-stage2-reconciliation-diagnostic-0002",
   "school_key": "unlv",
   "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "fd78308faaa9b9ac625620301128b9702321aeec",
+  "previous_control_state_commit": "766fed0adc98312e488bfa4c34a92d7fdf3d71a3",
   "previous_control_state_sha256": "2ff2b723dab394e223040e177593b2d0f5db6d3ace2498074e26f5f10e30f097",
-  "expected_protected_main_sha": "71fa9541e758e623d849d5ef165e8874949673d9",
+  "expected_protected_main_sha": "65b6d19d5ca5fd088f1628fa3fff4a4d9ce37474",
   "creation_provenance": {
-    "origin": "UNLV serialized Implementation Stage 2 — blocked proposal-rehearsal diagnostic",
-    "authorization": "Owner explicitly authorized one bounded diagnostic unit for DISCREPANCY-UNLV-1970-71-015-GAME_DATE at the current durable BLOCKED proposal boundary. Authorizes exactly one read-only reconciliation diagnostic for canonical game CBBG-0101077 against unlv-stage2-proposal-0001. Preserve the exact recommendation map, 46-decision universe, target branch, Integration Freeze, and historical authority. No tracked mutation, historical re-research, map rewrite, Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, recovery, current-main refresh, or repair authority."
+    "origin": "UNLV serialized Implementation Stage 2 — rebound blocked proposal-rehearsal diagnostic after pre-execution main movement",
+    "authorization": "Same owner-authorized bounded diagnostic unit for DISCREPANCY-UNLV-1970-71-015-GAME_DATE. Prior request unlv-stage2-reconciliation-diagnostic-0001 was never accepted or executed because protected main advanced before runtime authentication. Intervening main changes are limited to All-History expansion freeze docs/tests/tooling and are disjoint from UNLV target paths and Stage 2 reconciliation diagnostic runtime. Authorizes exactly one read-only reconciliation diagnostic for canonical game CBBG-0101077 against immutable blocked proposal unlv-stage2-proposal-0001. Preserve the exact recommendation map, 46-decision universe, target branch, Integration Freeze, and historical authority. No tracked mutation, historical re-research, map rewrite, Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, recovery, current-main refresh, or repair authority."
   },
   "authority": {
     "owner_gate_1": false,
