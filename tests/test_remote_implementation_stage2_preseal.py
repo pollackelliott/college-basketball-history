@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -418,6 +419,57 @@ class RemoteStage2PresealTests(unittest.TestCase):
             self.assertEqual(
                 result["tracked_mutation_proof"]["tracked_stage2_mutation"],
                 "NONE",
+            )
+
+    def test_permanent_rehearsal_binds_runtime_validator_only_for_subprocess(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            clean = {"head_sha": TARGET, "tree_sha": TREE, "status": ""}
+            log = (
+                "TECHNICAL READINESS PASSED\n"
+                f"Preview approved-plan hash: {PLAN_PREVIEW}\n"
+                "Changed paths: 12\n"
+            )
+            observed = {}
+
+            def fake_run(*args, **kwargs):
+                observed["override"] = os.environ.get(
+                    "CBB_VALIDATE_DATA_TOOL_OVERRIDE"
+                )
+                return subprocess.CompletedProcess([], 0, stdout=log)
+
+            with (
+                patch.dict(
+                    os.environ,
+                    {"CBB_VALIDATE_DATA_TOOL_OVERRIDE": "prior-validator"},
+                ),
+                patch.object(preseal, "restore_integration_freeze"),
+                patch.object(
+                    preseal,
+                    "tracked_worktree_state",
+                    side_effect=[clean, clean],
+                ),
+                patch.object(preseal, "run", side_effect=fake_run),
+            ):
+                result = preseal.run_stage2_preseal_rehearsal_tool(
+                    root,
+                    SCHOOL,
+                    freeze_bytes=b"freeze",
+                    plan_bytes=b"{}\n",
+                    filled_review_bytes=b"decision_id\n",
+                    expected_approved_plan_hash_preview=PLAN_PREVIEW,
+                    diag=root / "diag",
+                    tool_repo=ROOT,
+                )
+                self.assertEqual(
+                    os.environ["CBB_VALIDATE_DATA_TOOL_OVERRIDE"],
+                    "prior-validator",
+                )
+
+            self.assertEqual(result["preseal_status"], "READY_TO_SEAL")
+            self.assertEqual(
+                observed["override"],
+                str(ROOT / "tools/validate_data.py"),
             )
 
     def test_permanent_rehearsal_failure_is_durable_blocked_result(self):

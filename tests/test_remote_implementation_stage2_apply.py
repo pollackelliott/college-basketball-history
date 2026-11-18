@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -279,7 +280,12 @@ class RemoteStage2SealedApplyTests(unittest.TestCase):
                 "expected_changed_path_count": 1,
             }
 
+            observed = {}
+
             def fake_run(command, **kwargs):
+                observed["override"] = os.environ.get(
+                    "CBB_VALIDATE_DATA_TOOL_OVERRIDE"
+                )
                 (root / "data/test.txt").write_text("after\n", encoding="utf-8")
                 output = Path(command[command.index("--output-dir") + 1])
                 output.mkdir(parents=True, exist_ok=True)
@@ -306,6 +312,10 @@ class RemoteStage2SealedApplyTests(unittest.TestCase):
                 )
 
             with (
+                patch.dict(
+                    os.environ,
+                    {"CBB_VALIDATE_DATA_TOOL_OVERRIDE": "prior-validator"},
+                ),
                 patch.object(applymod, "restore_integration_freeze"),
                 patch.object(
                     applymod,
@@ -323,6 +333,14 @@ class RemoteStage2SealedApplyTests(unittest.TestCase):
                     tool_repo=ROOT,
                     prepare_commit=True,
                 )
+            self.assertEqual(
+                os.environ.get("CBB_VALIDATE_DATA_TOOL_OVERRIDE"),
+                None,
+            )
+            self.assertEqual(
+                observed["override"],
+                str(ROOT / "tools/validate_data.py"),
+            )
             self.assertEqual(result["prepared_parent_sha"], predecessor)
             self.assertEqual(result["changed_paths"], ["data/test.txt"])
             self.assertEqual(result["deleted_paths"], [])

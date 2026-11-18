@@ -812,6 +812,113 @@ class GenericReconciliationTests(unittest.TestCase):
             self.assertEqual(resolved["source_a_value"], "2020-12-30")
             self.assertEqual(resolved["status"], "RESOLVED")
 
+    def test_source_normalization_updates_numbered_assertion_shard(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            canonical = {field: "" for field in ingest_school.CANONICAL_FIELDS}
+            canonical.update(
+                {
+                    "canonical_game_id": "CBBG-1",
+                    "season_label": "2020-2021",
+                    "game_date": "2020-12-29",
+                    "date_precision": "EXACT",
+                    "team_a_key": "alpha",
+                    "team_b_key": "beta",
+                    "team_a_score": "70",
+                    "team_b_score": "60",
+                    "result_winner_team_key": "alpha",
+                    "site_type": "UNKNOWN",
+                    "game_type": "REGULAR_SEASON",
+                    "canonical_status": "PROVISIONAL",
+                }
+            )
+            source = {field: "" for field in ingest_school.ASSERTION_FIELDS}
+            source.update(
+                {
+                    "source_program_key": "alpha",
+                    "source_game_id": "ALPHA-1",
+                    "season_label": "2020-2021",
+                    "game_date": "2020-12-30",
+                    "normalized_opponent_key": "beta",
+                    "normalized_opponent_name": "Beta",
+                    "team_score": "70",
+                    "opponent_score": "60",
+                    "played_result": "W",
+                    "overtime_periods": "0",
+                    "curated_site_type": "UNKNOWN",
+                    "curated_game_type": "REGULAR_SEASON",
+                    "raw_text": "Dec. 30 Beta W 70-60",
+                }
+            )
+            assertion = dict(source)
+            assertion.update(
+                {
+                    "assertion_id": "ASRT-ALPHA-1",
+                    "canonical_game_id": "CBBG-1",
+                    "match_status": "MATCHED",
+                    "match_method": "FIXTURE",
+                }
+            )
+            discrepancy = {field: "" for field in ingest_school.DISCREPANCY_FIELDS}
+            discrepancy.update(
+                {
+                    "discrepancy_id": "DISC-1",
+                    "canonical_game_id": "CBBG-1",
+                    "field_name": "game_date",
+                    "source_a_program_key": "alpha",
+                    "source_a_value": "2020-12-30",
+                    "canonical_value": "2020-12-29",
+                    "status": "UNDER_REVIEW",
+                }
+            )
+            legacy = repo / "data/evidence/game-assertions.csv"
+            shard = repo / "data/evidence/game-assertions-0002.csv"
+            self.write_csv(
+                repo / "data/canonical/games.csv",
+                ingest_school.CANONICAL_FIELDS,
+                [canonical],
+            )
+            self.write_csv(legacy, ingest_school.ASSERTION_FIELDS, [])
+            self.write_csv(shard, ingest_school.ASSERTION_FIELDS, [assertion])
+            original_legacy = legacy.read_bytes()
+            self.write_csv(
+                repo / "data/reconciliation/discrepancies.csv",
+                ingest_school.DISCREPANCY_FIELDS,
+                [discrepancy],
+            )
+            self.write_csv(
+                repo / "schools/alpha/source-games.csv",
+                ingest_school.ASSERTION_FIELDS,
+                [source],
+            )
+            approved = {
+                "school_key": "alpha",
+                "approved_plan_hash": "a" * 64,
+                "decisions": [
+                    {
+                        "decision_id": "DATE-1",
+                        "category": "discrepancy",
+                        "source_game_id": "ALPHA-1",
+                        "canonical_game_id": "CBBG-1",
+                        "field_name": "game_date",
+                        "source_value": "2020-12-30",
+                        "canonical_value": "2020-12-29",
+                        "decision": "NORMALIZE_SOURCE_TO_CANONICAL",
+                        "resolution_basis": "Dated reciprocal official record controls.",
+                        "canonical_patch": {},
+                        "source_patch": {},
+                    }
+                ],
+            }
+
+            counts = apply_reconciliation_decisions(repo, approved)
+
+            self.assertEqual(counts["source_normalizations"], 1)
+            self.assertEqual(legacy.read_bytes(), original_legacy)
+            synced = self.read_one(shard)
+            self.assertEqual(synced["game_date"], "2020-12-29")
+            self.assertEqual(synced["raw_text"], "Dec. 30 Beta W 70-60")
+
     def test_shared_program_discrepancy_accepts_distinct_source_values_when_outcome_agrees(self):
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)

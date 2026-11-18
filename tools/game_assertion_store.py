@@ -89,6 +89,85 @@ def read_game_assertions(
     return _validated_union(tables)
 
 
+def _serialize_preserving_format(
+    path: Path,
+    fields: list[str],
+    rows: list[dict[str, str]],
+) -> bytes:
+    original = path.read_bytes()
+    has_bom = original.startswith(b"\xef\xbb\xbf")
+    line_ending = "\r\n" if b"\r\n" in original else "\n"
+    stream = io.StringIO(newline="")
+    writer = csv.DictWriter(
+        stream,
+        fieldnames=fields,
+        lineterminator=line_ending,
+    )
+    writer.writeheader()
+    writer.writerows(
+        {field: row.get(field, "") for field in fields}
+        for row in rows
+    )
+    raw = stream.getvalue().encode("utf-8")
+    return (b"\xef\xbb\xbf" + raw) if has_bom else raw
+
+
+def rewrite_game_assertions(
+    repo_root: Path,
+    fields: list[str],
+    rows: list[dict[str, str]],
+) -> list[Path]:
+    """Rewrite existing assertion rows without changing shard membership.
+
+    This operation is for reconciliation/maintenance of already-present rows.
+    It rejects schema, population, or ordering changes; append_game_assertions()
+    remains the only path for adding new assertion rows.
+    """
+    root = Path(repo_root).resolve()
+    tables = [
+        (path, *_read_csv_table(path))
+        for path in assertion_paths(root)
+    ]
+    existing_fields, existing_rows = _validated_union(tables)
+    if existing_fields != list(fields):
+        raise ValueError(
+            "assertion schema mismatch between rewriter and existing assertion store"
+        )
+
+    replacement_rows = list(rows)
+    existing_ids = [
+        row.get("assertion_id", "").strip()
+        for row in existing_rows
+    ]
+    replacement_ids = [
+        row.get("assertion_id", "").strip()
+        for row in replacement_rows
+    ]
+    if (
+        not all(existing_ids)
+        or replacement_ids != existing_ids
+    ):
+        raise ValueError(
+            "assertion rewrite must preserve exact nonblank assertion_id population "
+            "and order"
+        )
+
+    changed: list[Path] = []
+    offset = 0
+    for path, current_fields, current_rows in tables:
+        count = len(current_rows)
+        replacement = replacement_rows[offset:offset + count]
+        offset += count
+        if replacement == current_rows:
+            continue
+        raw = _serialize_preserving_format(path, current_fields, replacement)
+        _atomic_write(path, raw)
+        changed.append(path)
+    if offset != len(replacement_rows):
+        raise ValueError("assertion rewrite row population changed during partitioning")
+    return changed
+
+
 def assertion_store_fingerprint(repo_root: Path) -> str:
     root = Path(repo_root).resolve()
     digest = hashlib.sha256()

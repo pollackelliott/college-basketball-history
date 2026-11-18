@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 import ingest_school
+from game_assertion_store import read_game_assertions, rewrite_game_assertions
 from frozen_venue_authority import (
     FrozenVenueSplitAuthorityError,
     load_frozen_venue_split_authority as load_shared_frozen_venue_split_authority,
@@ -8399,7 +8400,7 @@ def apply_reconciliation_decisions(
     )
 
     canonical_fields, canonical_rows = read_csv_table(canonical_path)
-    assertion_fields, assertion_rows = read_csv_table(assertions_path)
+    assertion_fields, assertion_rows = read_game_assertions(repo)
     discrepancy_fields, discrepancy_rows = read_csv_table(discrepancies_path)
     source_fields, source_rows = read_csv_table(source_path)
     _ensure_source_research_patch_schema(
@@ -9490,7 +9491,7 @@ def apply_reconciliation_decisions(
     )
 
     write_csv_preserving_format(canonical_path, canonical_fields, canonical_rows)
-    write_csv_preserving_format(assertions_path, assertion_fields, assertion_rows)
+    rewrite_game_assertions(repo, assertion_fields, assertion_rows)
     write_csv_preserving_format(discrepancies_path, discrepancy_fields, discrepancy_rows)
     write_csv_preserving_format(source_path, source_fields, source_rows)
     return dict(counts)

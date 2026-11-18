@@ -82,6 +82,59 @@ class GameAssertionStoreTests(unittest.TestCase):
             _, rows = store.read_game_assertions(repo)
             self.assertEqual([row["assertion_id"] for row in rows], ["A1", "A2"])
 
+    def test_rewrite_changes_only_the_owning_shard(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            legacy = repo / store.LEGACY_RELATIVE_PATH
+            shard = repo / "data/evidence/game-assertions-0002.csv"
+            write_table(legacy, [{
+                "assertion_id": "A1",
+                "canonical_game_id": "G1",
+                "source_program_key": "alpha",
+                "source_game_id": "S1",
+            }])
+            write_table(shard, [{
+                "assertion_id": "A2",
+                "canonical_game_id": "G2",
+                "source_program_key": "beta",
+                "source_game_id": "S2",
+            }])
+            original_legacy = legacy.read_bytes()
+            fields, rows = store.read_game_assertions(repo)
+            rows[1]["canonical_game_id"] = "G9"
+
+            changed = store.rewrite_game_assertions(repo, fields, rows)
+
+            self.assertEqual(changed, [shard])
+            self.assertEqual(legacy.read_bytes(), original_legacy)
+            _, rewritten = store.read_game_assertions(repo)
+            self.assertEqual(
+                [row["canonical_game_id"] for row in rewritten],
+                ["G1", "G9"],
+            )
+
+    def test_rewrite_rejects_assertion_reordering(self):
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            legacy = repo / store.LEGACY_RELATIVE_PATH
+            write_table(legacy, [
+                {
+                    "assertion_id": "A1",
+                    "canonical_game_id": "G1",
+                    "source_program_key": "alpha",
+                    "source_game_id": "S1",
+                },
+                {
+                    "assertion_id": "A2",
+                    "canonical_game_id": "G2",
+                    "source_program_key": "beta",
+                    "source_game_id": "S2",
+                },
+            ])
+            fields, rows = store.read_game_assertions(repo)
+            with self.assertRaisesRegex(ValueError, "preserve exact"):
+                store.rewrite_game_assertions(repo, fields, list(reversed(rows)))
+
     def test_union_rejects_duplicate_assertion_ids_across_files(self):
         with tempfile.TemporaryDirectory() as td:
             repo = Path(td)
