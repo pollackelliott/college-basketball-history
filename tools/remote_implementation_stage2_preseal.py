@@ -8,6 +8,7 @@ and proves tracked basketball state remains unchanged. It never seals or applies
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -334,10 +335,13 @@ def run_stage2_preseal_rehearsal_tool(
     runtime_repo = (tool_repo or RUNTIME_ROOT).resolve()
     hardening_tool = runtime_repo / "tools/onboarding_hardening.py"
     onboard_tool = runtime_repo / "tools/onboard_school.py"
+    validator_tool = runtime_repo / "tools/validate_data.py"
     if not hardening_tool.is_file():
         raise Stop("STAGE2_PRESEAL_RUNTIME_HARDENING_TOOL_MISSING")
     if not onboard_tool.is_file():
         raise Stop("STAGE2_PRESEAL_RUNTIME_ONBOARD_TOOL_MISSING")
+    if not validator_tool.is_file():
+        raise Stop("STAGE2_PRESEAL_RUNTIME_VALIDATOR_TOOL_MISSING")
     runtime_tool_sha256 = {
         "tools/onboarding_hardening.py": sha256_file(hardening_tool),
         "tools/onboard_school.py": sha256_file(onboard_tool),
@@ -355,7 +359,15 @@ def run_stage2_preseal_rehearsal_tool(
         "--review-file",
         str(review_path),
     ]
-    cp = run(cmd, cwd=runtime_repo, check=False)
+    prior_validator_override = os.environ.get("CBB_VALIDATE_DATA_TOOL_OVERRIDE")
+    os.environ["CBB_VALIDATE_DATA_TOOL_OVERRIDE"] = str(validator_tool)
+    try:
+        cp = run(cmd, cwd=runtime_repo, check=False)
+    finally:
+        if prior_validator_override is None:
+            os.environ.pop("CBB_VALIDATE_DATA_TOOL_OVERRIDE", None)
+        else:
+            os.environ["CBB_VALIDATE_DATA_TOOL_OVERRIDE"] = prior_validator_override
     diag.mkdir(parents=True, exist_ok=True)
     log_text = cp.stdout or ""
     (diag / "stage2-preseal-rehearsal.log").write_text(
