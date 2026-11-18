@@ -1,0 +1,83 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 11,
+      "discrepancy": 29,
+      "identity": 4,
+      "publication": 1
+    },
+    "decision_count": 46,
+    "decision_fields": {
+      "game_date": 8,
+      "game_identity": 4,
+      "overtime_periods": 2,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 17,
+      "site_type": 12
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-UNLV-1979-80-022-CBBG-0210905-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UNLV-1987-88-019-CBBG-0179574-SITE_TYPE",
+      "DISCREPANCY-UNLV-1983-84-003-SITE_TYPE",
+      "DISCREPANCY-UNLV-1984-85-008-SITE_TYPE",
+      "DISCREPANCY-UNLV-1989-90-002-SITE_TYPE",
+      "DISCREPANCY-UNLV-1992-93-023-SITE_TYPE",
+      "DISCREPANCY-UNLV-2007-08-009-SITE_TYPE",
+      "DISCREPANCY-UNLV-2020-21-027-SITE_TYPE",
+      "DISCREPANCY-UNLV-2021-22-030-SITE_TYPE",
+      "DISCREPANCY-UNLV-2023-24-008-SITE_TYPE",
+      "DISCREPANCY-UNLV-2024-25-033-SITE_TYPE",
+      "DISCREPANCY-UNLV-2025-26-033-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 12,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0179574",
+          "fixed_confident_source_game_ids": [
+            "unlv-1987-88-028"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "unlv-1987-88-019"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0210905",
+          "fixed_confident_source_game_ids": [
+            "unlv-1979-80-027"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "unlv-1979-80-022"
+          ]
+        }
+      ],
+      "count": 2,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}

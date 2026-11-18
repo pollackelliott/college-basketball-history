@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "unlv-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "unlv",
+  "previous_control_state_commit": "203a7b12c276206ba91916aac5b77bddf2080948",
+  "previous_control_state_sha256": "7fd585544bdc811c1800c40011dbe2a17c836696f93f7588f1cdfd5136ba9cd6",
+  "expected_protected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "80f9a7bcf66cc12f3bef8be78f7960c894130576",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",
+    "sha256": "1c13241d96283d7543dee0559a949e03f9b3c4061b1a787f965efd3b011a0b33"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "497ec4460359fa5e88731568ff3a88d0495b83e6614d62d40da1ca44fc8fbb55"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "3bfbb4d4b9e45c16e9df605951677e27908221eed1dca11cd89feb3d338767be"
+  },
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "creation_provenance": {
+    "origin": "UNLV serialized ordinary original-school Implementation Stage 2 — fresh census after PR #652 coverage repair and verified current-main refresh",
+    "authorization": "Same owner-authorized UNLV Stage 2 phase. Fresh-verified STAGE2_CURRENT_MAIN_REFRESH unlv-stage2-current-main-refresh-0001 advanced the onboarding branch to 80f9a7bcf66cc12f3bef8be78f7960c894130576 against protected main f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3 while preserving the exact Integration Freeze, semantic snapshot, and all UNLV package bytes. PR #652 intentionally changed planner coverage semantics for ordinary complete-institutional unpublished schools whose inception precedes accepted top-level scope, so the prior seven-decision universe is invalidated by design. Exact-head candidate rehearsal produced corrected decision universe 6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982 with tracked Stage 2 mutation NONE. This request authorizes one ordinary read-only fresh Stage 2 census only, recomputing the complete decision universe from unchanged frozen authority under current protected-main tooling. No phase_continuation or stale map is supplied. No tracked basketball mutation, historical reinterpretation, Owner Gate 1 approval, fill, pre-seal, seal, apply, release, Preview, merge, Production, recovery, or shared/global historical mutation is authorized."
+  },
+  "authority": {
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
