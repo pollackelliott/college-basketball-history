@@ -169,7 +169,10 @@ jobs:
                   if (recovery.get('kind') != 'REMOTE_IMPLEMENTATION_RECOVERY'
                           or recovery.get('request_id') != last.get('request_id')
                           or recovery.get('recovered_request_id') != last.get('recovered_request_id')
-                          or classification != last.get('disposition').removeprefix('ABANDONED_')
+                          or classification != {
+                              'ABANDONED_PREPARED_NOT_PUBLISHED': 'PREPARED_NOT_PUBLISHED',
+                              'ABANDONED_NOT_ATTEMPTED': 'NOT_ATTEMPTED',
+                          }.get(last.get('disposition'))
                           or not valid_sha(expected_main)
                           or not valid_sha(target_sha)
                           or not school.startswith('data/')):
