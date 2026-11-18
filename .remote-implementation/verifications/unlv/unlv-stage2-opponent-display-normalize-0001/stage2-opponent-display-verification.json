@@ -1,0 +1,46 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "b60937be4a16a2ac816b5d1c6680bf79e43baca60f0bc24db426bc4070649538",
+    "implementation-stage2-status.json": "d873a0c0a31074f2560886dcf922af2b5f5ca5ceef71a819d1e4dc1993f47aa1",
+    "plan.json": "e7b5a5f666496e32a0f384c69f8d086953ead34f2ebd8c8d076d3e7c8a82d635",
+    "review.csv": "6f426b24c865ddea7f5fa31dd8634795fb0e2c9535c8a4b4aacea012f99ade7f",
+    "review.md": "7117aee0d09abe3994a2abc64f31f4ef80580ab475ae3c4ad638da8098982efa"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "b60937be4a16a2ac816b5d1c6680bf79e43baca60f0bc24db426bc4070649538",
+    "implementation-stage2-status.json": "332981732ca2e80b1e52c3987b5bdba70ec1ef85f4d6620ac84f3cf7ef646cdf",
+    "plan.json": "763a3c777cefc8d68a278896fd28ece5bc5d6e0a45a76cfa0d9ce0d12fa58583",
+    "review.csv": "6f426b24c865ddea7f5fa31dd8634795fb0e2c9535c8a4b4aacea012f99ade7f",
+    "review.md": "5efec4d7523e182e39c19b1a089905198735b6917d78b42583003876ab2fe803"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "changed_paths": [
+    "schools/unlv/opponents.csv",
+    "schools/unlv/source-games.csv"
+  ],
+  "decision_universe_sha256": "d4b7917fee42335c8506534089cb821d216f04239591703897d7c692daeec4ce",
+  "expected_blocker_keys": [
+    "westminster-utah"
+  ],
+  "field_level_proof_sha256": "812df1da009c2fcfc5f1500137f9565351557ac66ccd798d1aaacb1cba641d80",
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "2390454560391a8a3e3f1236279bc7e6f26599ad9208e015ebfa39035ddb8486",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "unlv-stage2-opponent-display-normalize-0001",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_branch": "data/unlv-onboarding",
+  "target_predecessor_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7",
+  "target_sha": "bec2db2fd3618588c8cba0466c3f4ffee7c10e17",
+  "target_tree_sha": "3a20456eeacc038ee6525e3ac6c38084ffc1a898",
+  "tracked_stage2_mutation": "NONE"
+}
