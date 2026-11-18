@@ -1,34 +1,36 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "unlv-stage1-0001",
-  "operation": "STAGE1_INVENTORY",
+  "request_id": "unlv-venue-maintenance-0001",
   "school_key": "unlv",
-  "previous_control_state_commit": "4c9a44899710fe4eb1a38d66599c750f9e640786",
-  "previous_control_state_sha256": "4c4a78be30de497f79429bb166f3e8266ddc714dd0339d9f8f4e059563fac69b",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "previous_control_state_commit": "6166660e6b69de34530b12d7f33353a5171c3093",
+  "previous_control_state_sha256": "680e1df4ba9919429cfeb2a6793cde7753ff51c880f0f60738838f353b9fb78e",
   "expected_protected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
-  "research_checkpoint": {
-    "sha256": "02e0e3ff19c5c02b014558d9f33b820b04354a5acfbb2eb333c9a84bd7d2b9b2",
-    "research_base_sha": "802006f8f30ec9fc2e7b7a528d482bd343dc8e3b",
-    "transport": {
-      "kind": "git_gzip_base64_parts",
-      "commit_sha": "4c9a44899710fe4eb1a38d66599c750f9e640786",
-      "path_prefix": ".remote-implementation/transports/unlv/unlv-stage1-0001/part-",
-      "part_count": 14
-    }
+  "target_branch": "maintenance/unlv-stage1-meadowlands-identity",
+  "venue_maintenance_spec": {
+    "path": ".remote-implementation/inputs/unlv-venue-maintenance-0001/venue-maintenance.json",
+    "sha256": "6286eeb7e57ca3da1d8a647ba9d2b27e99fb1fcc6d3fef5dbeee73531aa142e5"
   },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/unlv-stage1.json",
+  "expected_plan_sha256": "0ce2432b069a893713644b18e1ac5c6045cca1a1f92810319d3f45e620e18161",
+  "maintenance_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized the exact UNLV Stage 1 shared-reference maintenance merge VEN-000965 into VEN-000028, preserving historical names, aliases, and evidence with no other venue or historical changes.",
+    "spec_sha256": "6286eeb7e57ca3da1d8a647ba9d2b27e99fb1fcc6d3fef5dbeee73531aa142e5"
+  },
   "creation_provenance": {
-    "origin": "ChatGPT serialized ordinary original-school UNLV Implementation lane",
-    "authorization": "Owner authorized UNLV IMPLEMENTATION STAGE 1 ONLY; exact immutable UNLV Research Freeze SHA-256 02e0e3ff19c5c02b014558d9f33b820b04354a5acfbb2eb333c9a84bd7d2b9b2; authenticate, reconcile, checkpoint, and stop. No Phase 0, Stage 2, owner gate, sealed apply, release, merge, or Production authority."
+    "origin": "ChatGPT UNLV Implementation lane",
+    "authorization": "Owner supplied explicit Control Center authorization for the exact VEN-000965 -> VEN-000028 maintenance batch and subsequent refreshed UNLV Stage 1 inventory."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
     "phase0": false,
-    "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
@@ -36,14 +38,10 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "stage2_reconciliation_diagnostic": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
     "release_readiness": false,
     "release_preview_verify": false,
-    "release_presentation_refresh": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "release": false,
-    "venue_identity_maintenance": false
+    "venue_identity_maintenance": true
   }
 }
