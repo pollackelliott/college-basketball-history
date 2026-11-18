@@ -167,7 +167,10 @@ jobs:
                   target_sha = str(recovery.get('actual_target_sha') or '')
                   classification = str(recovery.get('mutation_classification') or '')
                   if (recovery.get('kind') != 'REMOTE_IMPLEMENTATION_RECOVERY'
-                          or recovery.get('request_id') != last.get('request_id')
+                          or not re.fullmatch(
+                              r'[a-z0-9][a-z0-9-]*',
+                              str(recovery.get('request_id') or ''),
+                          )
                           or recovery.get('recovered_request_id') != last.get('recovered_request_id')
                           or classification != {
                               'ABANDONED_PREPARED_NOT_PUBLISHED': 'PREPARED_NOT_PUBLISHED',
