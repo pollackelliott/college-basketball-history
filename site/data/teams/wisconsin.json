@@ -6092,7 +6092,7 @@
       "opponent_key": "wyoming",
       "opponent_name": "Wyoming",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -31921,7 +31921,7 @@
       "opponent_key": "wyoming",
       "opponent_name": "Wyoming",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 65,
       "opponent_score": 93,
       "score_known": true,
@@ -31931,8 +31931,8 @@
       "venue_key": null,
       "venue_id": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Albuquerque",
+      "site_state": "NM",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,

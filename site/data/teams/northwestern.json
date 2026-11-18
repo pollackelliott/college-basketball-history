@@ -5481,7 +5481,7 @@
       "opponent_key": "wyoming",
       "opponent_name": "Wyoming",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -27476,7 +27476,7 @@
       "opponent_key": "wyoming",
       "opponent_name": "Wyoming",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 79,
       "opponent_score": 77,
       "score_known": true,
@@ -27486,8 +27486,8 @@
       "venue_key": null,
       "venue_id": null,
       "venue_name": null,
-      "site_city": null,
-      "site_state": null,
+      "site_city": "Detroit",
+      "site_state": "MI",
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,

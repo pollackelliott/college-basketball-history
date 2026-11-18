@@ -9758,10 +9758,10 @@
       "state": "WY",
       "primary_hex": "#FFC425",
       "secondary_hex": "#492F24",
-      "history_start_season": null,
-      "published_history_start_season": null,
-      "d1_since_season": null,
-      "history_coverage_status": "UNMIGRATED",
+      "history_start_season": "1904-1905",
+      "published_history_start_season": "1904-1905",
+      "d1_since_season": "1904-1905",
+      "history_coverage_status": "COMPLETE_INSTITUTIONAL",
       "conference_regular_season_championships": 21,
       "conference_tournament_championships": 3,
       "ncaa_tournament_appearances": 16,
@@ -9770,7 +9770,7 @@
       "best_finish_key": "NATIONAL_CHAMPION",
       "best_finish_year": 1943,
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
