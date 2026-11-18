@@ -1,31 +1,35 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "unlv-stage2-census-0001",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "unlv-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "school_key": "unlv",
-  "previous_control_state_commit": "92d3daef2c418f3ab47615b6fcfe01c07bd6d44d",
-  "previous_control_state_sha256": "5350c06f58fa578b2fe60d97733a9828a9d0ccb8f8dffbf34523011213bc5d17",
+  "previous_control_state_commit": "517363d2d1d4c71456621e20e9511c52e8e355d7",
+  "previous_control_state_sha256": "33fa8971dcdc2a022a97b721caa0c2fa0dbbfdd621899c50c7bbceecbf11f09a",
   "expected_protected_main_sha": "35cc6cf377a269cf8d6d535a8945d537d0a5b19a",
   "target_branch": "data/unlv-onboarding",
   "target_sha": "03b374f65bf256ed4c1f9417683cbde86a8df5e7",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",
-    "sha256": "1c13241d96283d7543dee0559a949e03f9b3c4061b1a787f965efd3b011a0b33"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "2a8785115c4b08e515c9f06316952ab19011490a074fda602ba12cfd59ee4556"
   },
   "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
   "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
   "creation_provenance": {
-    "origin": "ChatGPT UNLV serialized ordinary original-school Implementation lane — owner-authorized Stage 2 capability census",
-    "authorization": "Owner explicitly replied Proceed after UNLV Phase 0 completed with repository_validation=PASS, CREATE_ONCE_PASS, remote_phase0_equivalence=PASS, fresh_runner_verification=PASS, Integration Freeze SHA-256 d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af, semantic snapshot SHA-256 df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80, and onboarding head 03b374f65bf256ed4c1f9417683cbde86a8df5e7. This request performs exactly one bounded read-only STAGE2_CENSUS against protected main 35cc6cf377a269cf8d6d535a8945d537d0a5b19a and the exact independently verified Phase 0 successor. It must stop at CAPABILITY_CENSUS_READY or an honest durable BLOCKED checkpoint. No tracked repair, current-main refresh, opponent-display normalization, recommendation map, proposal rehearsal, Owner Gate 1, fill/seal/apply, release, Preview, merge, recovery, shared/global mutation, or protected-main mutation is authorized."
+    "origin": "ChatGPT UNLV serialized ordinary original-school Implementation lane — Stage 2 deterministic opponent-display reconciliation",
+    "authorization": "Owner explicitly replied Proceed after fresh-verified UNLV census unlv-stage2-census-0001. That exact census is BLOCKED solely by one deterministic historical opponent-display conflict: westminster-utah with displays Westminster / Westminster (UT). The census records warning_count=0, decision_count=0, semantic drift PASS, tracked Stage 2 mutation NONE, fresh_runner_verification=PASS, and remote_stage2_census_equivalence=PASS. This request authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete one-key census population. The permanent helper may change only canonical_opponent_name in schools/unlv/opponents.csv and normalized_opponent_name in schools/unlv/source-games.csv using existing project display authority, followed by no-map Stage 2 regeneration and fresh equivalence verification. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, recommendation map, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, venue maintenance, or protected-main mutation authority."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
     "recovery": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
@@ -36,10 +40,6 @@
     "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
-    "release_production_proof": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "venue_identity_maintenance": false
+    "release_production_proof": false
   }
 }
