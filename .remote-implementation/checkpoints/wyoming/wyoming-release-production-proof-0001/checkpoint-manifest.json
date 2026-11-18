@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "0c3f3948a6369d687459083c15e46ec89b82de57",
+  "merge_parent_onboarding": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "merge_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "a601f3c60d14d12753a8cf2975b5a1d450af7b0cad0ae0ad01e4a3da67182be6",
+  "owner_gate_2_verification_sha256": "21de23993bd5497a1d093dde18ac22291b569c11ceefff4bd2ee9efe033519fb",
+  "pr_head_sha": "1fc9be9b0a400a60405da1cf487b8a967040687c",
+  "pr_number": 648,
+  "production_deployment_id": 7888872084,
+  "production_json_checked_count": 90,
+  "production_proof": true,
+  "production_proof_sha256": "74c51819e0f40dc038f13f733768f1504352a32a235065ff66d31bfc66c36c06",
+  "protected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "request_id": "wyoming-release-production-proof-0001",
+  "request_sha256": "fe931df995820d4c819ba92763d2b70c85c075a8fb248898fe64cfc60e1c323e",
+  "schema_version": 1,
+  "school_key": "wyoming",
+  "status": "PRODUCTION_PROOF_PASS"
+}
