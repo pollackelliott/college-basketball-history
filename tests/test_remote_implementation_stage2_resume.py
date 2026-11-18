@@ -543,6 +543,22 @@ class AbandonedApplyResumeTests(VerifiedPresealReplacementTests):
         self.assertEqual(spec["seal_request_id"], self.REPLACEMENT + "-seal")
         self.assertEqual(spec["apply_request_id"], self.REPLACEMENT + "-apply")
 
+    # These inherited test names describe the simpler #637 topology. In this
+    # subclass they assert the deliberately different abandoned-apply topology
+    # rather than importing mutually exclusive expectations from the parent.
+    def test_earlier_preseal_must_be_blocked(self):
+        spec = self.call()
+        self.assertEqual(spec["preseal_request_id"], self.REPLACEMENT)
+
+    def test_earlier_preseal_must_be_independently_verified(self):
+        self.first_verification["remote_stage2_preseal_equivalence"] = "FAIL"
+        with self.assertRaisesRegex(Stop, "ORIGINAL_PRESEAL_EVIDENCE_INVALID"):
+            self.call()
+
+    def test_original_seal_or_apply_cannot_have_run(self):
+        spec = self.call()
+        self.assertEqual(spec["seal_request_id"], self.REPLACEMENT + "-seal")
+
     def test_abandoned_apply_must_be_recorded(self):
         self.after_prepare = self._after_prepare_without_abandonment
         with self.assertRaisesRegex(Stop, "ORIGINAL_CHILD_RECOVERY_INVALID"):
