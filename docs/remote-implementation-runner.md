@@ -841,9 +841,14 @@ continuation helper may resume only through one of two fail-closed topologies:
 - the originally authorized child pre-seal was independently verified
   `READY_TO_SEAL`, its original seal completed with fresh verification, its
   original apply is durably abandoned with write-ahead
-  `PREPARED_NOT_PUBLISHED`, the target head never moved, and the replacement
-  request's exact `previous_control_state_commit` records a later consumed
+  `PREPARED_NOT_PUBLISHED`, the target head never moved, and the replacement's
+  bounded `previous_control_state_commit` ancestry reaches a later consumed
   independently verified `BLOCKED` pre-seal against the same fill authority.
+  Intervening ancestry entries may be independently fresh-verified
+  `READY_TO_SEAL` replacement pre-seals created only because tooling repair or
+  protected-main advancement required another current-main rehearsal; each such
+  bridge must preserve the exact fill/target/hash authority and have no used or
+  queued seal/apply child.
 
 Both topologies require the original approved fill request/checkpoint/fresh
 verification, unchanged target head/tree and complete historical/hash authority,
@@ -857,7 +862,8 @@ unrelated fresh pre-seal or to treat an abandoned apply as published.
 The resumed seal and apply request IDs are deterministic new single-use IDs
 suffixed to the exact replacement pre-seal request ID. Reused IDs, missing
 original authorization, changed historical hashes, an unsafe lock/recovery
-state, an unverified or non-BLOCKED exact predecessor, published/consumed
+state, ancestry that does not reach a verified `BLOCKED` pre-seal within
+the bounded walk, any READY bridge with a used/queued child, published/consumed
 original apply, or a second active child fail closed. The ordinary seal/apply
 commands, exact current-main binding, checkpoint validation, serialized lock,
 write-ahead, CAS, and independent verification remain unchanged. The helper
