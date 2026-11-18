@@ -413,6 +413,51 @@ class Stage4AuthoringTests(unittest.TestCase):
             self.assertEqual(result["conference_rows"], 1)
 
 
+    def test_institutional_scope_accepts_compact_inception_season(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            checkpoint = Path(temporary) / "scope.zip"
+            logical = "stage4-authoring/institutional-scope.json"
+            data = (
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "kind": "COMPLETE_INSTITUTIONAL_RESEARCH_SCOPE_V1",
+                        "school_key": "test",
+                        "research_base_sha": "a" * 40,
+                        "program_inception_season": "1909-10",
+                        "top_level_scope": "1937-38+",
+                        "publication_universe": "INCEPTION_THROUGH_PRESENT",
+                        "transition_mode": "NEW_LANE",
+                        "preservation_rule": (
+                            "PRESERVE_ACCEPTED_PARENT_WORK_EXCEPT_GENUINE_CONTRADICTION"
+                        ),
+                    },
+                    sort_keys=True,
+                )
+                + "\n"
+            ).encode()
+            with zipfile.ZipFile(checkpoint, "w") as archive:
+                archive.writestr(logical, data)
+            manifest = {
+                "files": {
+                    logical: {
+                        "size_bytes": len(data),
+                        "sha256": mod.sha256_bytes(data),
+                    }
+                }
+            }
+            with zipfile.ZipFile(checkpoint) as archive:
+                _payload, defects, summary = mod._institutional_scope_payload(
+                    archive,
+                    "",
+                    manifest,
+                    school_key="test",
+                    research_base_sha="a" * 40,
+                )
+            self.assertEqual(defects, [])
+            self.assertEqual(summary["program_inception_season"], "1909-10")
+
+
     def test_legacy_base_label_preflight_and_author_materialize_literal_mapping(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
