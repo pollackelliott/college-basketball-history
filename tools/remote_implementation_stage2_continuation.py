@@ -568,6 +568,7 @@ def _resume_post_gate1_from_verified_replacement(
                 or ancestor.get("request_sha256")
                 != sha256_bytes(ancestor_request_bytes)
                 or ancestor_status not in {"BLOCKED", "READY_TO_SEAL"}
+                or ancestor_last.get("preseal_status") != ancestor_status
                 or ancestor_verification.get("kind")
                 != "REMOTE_IMPLEMENTATION_STAGE2_PRESEAL_REHEARSAL_VERIFICATION"
                 or ancestor_verification.get("request_id") != ancestor_id
