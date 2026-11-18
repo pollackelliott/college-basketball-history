@@ -660,6 +660,8 @@ def project_administrative_status(
         "FORFEIT_LOSS": "FORFEIT",
         "FORFEIT_WIN": "FORFEIT",
         "FORFEITED_AFTER_PLAY": "FORFEIT",
+        "ADMIN_FORFEIT_BY_SOURCE_PROGRAM": "FORFEIT",
+        "ADMIN_FORFEIT_TO_SOURCE_PROGRAM": "FORFEIT",
         "VACATED": "VACATED_GAME",
     }.get(status)
     if target is not None:
@@ -839,8 +841,13 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "stage3b_curated_venue_name",
             "stage3b_venue_city",
             "stage3b_site_city",
+            "stage3b_city",
             "stage3b_venue_state",
             "stage3b_site_state",
+            "stage3b_state",
+            "stage3b_venue_country",
+            "stage3b_site_country",
+            "stage3b_country",
             "stage3b_current_main_venue_key",
             "stage3b_curated_venue_key",
             "stage3a_final_venue_name",
@@ -883,6 +890,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             row,
             "stage3b_venue_city",
             "stage3b_site_city",
+            "stage3b_city",
             "stage3a_final_venue_city",
             "stage3a_final_city",
             "accepted_city",
@@ -898,6 +906,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             row,
             "stage3b_venue_state",
             "stage3b_site_state",
+            "stage3b_state",
             "stage3a_final_venue_state",
             "stage3a_final_state",
             "accepted_state",
@@ -1002,7 +1011,8 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
         "city": city.strip(),
         "state": state.strip(),
         "country": _first_parent_value(
-            row, "curated_venue_country", "country", "venue_country"
+            row, "stage3b_venue_country", "stage3b_site_country", "stage3b_country",
+            "curated_venue_country", "country", "venue_country"
         ),
         "curated_game_type": effective_parent_game_type(row),
         "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"),
@@ -1251,8 +1261,14 @@ def _accepted_legacy_literal_enrichment_equivalent(
         return (package.get("team_score", "") == str(school_score)
             and package.get("opponent_score", "") == str(other_score))
     if field == "state":
-        source_state = _first_parent_value(parent, "stage3b_venue_state", "stage3a_final_venue_state")
-        source_city = _first_parent_value(parent, "stage3b_venue_city", "stage3a_final_venue_city")
+        source_state = _first_parent_value(
+            parent, "stage3b_venue_state", "stage3b_site_state", "stage3b_state",
+            "stage3a_final_venue_state", "stage3a_final_state"
+        )
+        source_city = _first_parent_value(
+            parent, "stage3b_venue_city", "stage3b_site_city", "stage3b_city",
+            "stage3a_final_venue_city", "stage3a_final_city"
+        )
         research_status = _first_parent_value(parent, "stage3a_site_research_status", "site_research_status")
         basis = _first_parent_value(parent, "stage3a_site_research_basis", "site_research_basis")
         notes = package.get("notes", "")

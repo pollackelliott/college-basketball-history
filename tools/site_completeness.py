@@ -311,10 +311,14 @@ def _per_game_home_support(
     # identify either venue or HOME meaning; HOME authority is separately
     # required below.
     per_game_assignment = re.search(
-        r"\bper-game\s+accepted\b[^.;\n]*\b(?:venue|home)\b[^.;\n]*\bassignment\b",
+        r"\bper-game\s+accepted\b[^.;\n]*\b(?:venue|home)\b[^.;\n]*\bassignments?\b",
         site_rule,
     )
-    if not per_game_assignment:
+    accepted_home_assignment = re.search(
+        r"\baccepted\b[^.;\n]*(?:\bhome\b[^.;\n]*\bassignments?\b|\bassignments?\b[^.;\n]*\bhome\b)",
+        site_rule,
+    )
+    if not (per_game_assignment or accepted_home_assignment):
         return False
 
     relationship = venue.get("relationship_type", "").strip().casefold()
@@ -324,7 +328,8 @@ def _per_game_home_support(
     )
     folded_authority = authority.casefold()
     return (
-        "home" in relationship
+        bool(accepted_home_assignment)
+        or "home" in relationship
         or "source_program_home" in folded_authority
         or bool(re.search(r"\bhome\b", authority, flags=re.IGNORECASE))
     )
