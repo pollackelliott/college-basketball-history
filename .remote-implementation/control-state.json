@@ -684,7 +684,7 @@
   "active_request_sha256": "13db4a5aa33a6bb9c698811fd83e36e6e363ba41d554375ebcebc48475ad6137",
   "active_school_key": "wyoming",
   "active_target_branch": "data/wyoming-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "abf870e8f94fbd403492d70eab31eb4eed4b5eb2",
   "active_writeahead_path": ".remote-implementation/writeahead/wyoming/wyoming-stage2-preseal-0004-apply/writeahead-manifest.json",
   "active_writeahead_sha256": "187d53f274c7f93fcf07cf79a6a129759d62ecc8a1298f2026c90fa639fa8d38",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
