@@ -1,0 +1,82 @@
+{
+  "actual_published_target_sha": "36db2ec0d58eaf49931f5a363d601bb00d33141f",
+  "apply_result": {
+    "assertion_rows_updated": 0,
+    "canonical_geography_rows_updated": 0,
+    "canonical_identity_rows_updated": 0,
+    "canonical_rows_updated": 0,
+    "ncaa_evidence_rows_updated": 0,
+    "plan_sha256": "0ce2432b069a893713644b18e1ac5c6045cca1a1f92810319d3f45e620e18161",
+    "provenance_markers_updated": 0,
+    "school_geography_rows_updated": 0,
+    "school_identity_rows_updated": 1,
+    "school_rows_updated": 1,
+    "site_files_refreshed": 0,
+    "venue_geography_corrections": 0,
+    "venue_name_rows_reassigned": 1,
+    "venues_retired": 1
+  },
+  "changed_file_sha256": {
+    "data/reconciliation/venue-identity-maintenance/unlv-stage1.json": "6286eeb7e57ca3da1d8a647ba9d2b27e99fb1fcc6d3fef5dbeee73531aa142e5",
+    "data/reference/venue-names.csv": "89dbd43ec06a19e316c43eaedbbea834712c8074eee2d81f0f70f01ddd0b717f",
+    "data/reference/venues.csv": "ce3c825fbfdc3b05824bacb79b8c2ddc299c312eaab8101bb00887d5ff8ce697",
+    "schools/long-island-university/venues.csv": "f69f0b87380127082c839bc213bf8b5aa7f9742b70841a2be69f467516186d24"
+  },
+  "changed_paths": [
+    "data/reconciliation/venue-identity-maintenance/unlv-stage1.json",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/long-island-university/venues.csv"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": null,
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "7d592f3bf9e42e7974a3e90ff2643260ce4795b0",
+  "kind": "REMOTE_IMPLEMENTATION_VENUE_IDENTITY_MAINTENANCE_SUCCESSOR",
+  "operation": "VENUE_IDENTITY_MAINTENANCE",
+  "plan_merges": [
+    {
+      "absorbed_venue_id": "VEN-000965",
+      "absorbed_venue_key": "liu-meadowlands-arena",
+      "assertion_rows": 0,
+      "canonical_rows": 0,
+      "city": "East Rutherford",
+      "expected_canonical_rows": 0,
+      "expected_school_rows": 1,
+      "ncaa_evidence_rows": 0,
+      "provenance_markers": 0,
+      "resolution_basis": "Control Center authorization for UNLV Stage 1: VEN-000965 (liu-meadowlands-arena, Meadowlands Arena (Brendan Byrne Arena), East Rutherford, NJ) is a duplicate physical identity of VEN-000028 (brendan-byrne-arena, Brendan Byrne Arena, East Rutherford, NJ). Retain VEN-000028 as survivor, retire VEN-000965, and preserve accepted historical names, aliases, and evidence.",
+      "school_files": [
+        {
+          "path": "schools/long-island-university/venues.csv",
+          "row_count": 1
+        }
+      ],
+      "school_rows": 1,
+      "state": "NJ",
+      "survivor_venue_id": "VEN-000028",
+      "survivor_venue_key": "brendan-byrne-arena",
+      "venue_name_rows": 1
+    }
+  ],
+  "plan_sha256": "0ce2432b069a893713644b18e1ac5c6045cca1a1f92810319d3f45e620e18161",
+  "prepared_commit_sha": "36db2ec0d58eaf49931f5a363d601bb00d33141f",
+  "prepared_parent_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "prepared_tree_sha": "d9bff71f5e0ff9706a044f7bf29f34cca64964f4",
+  "protected_main_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "publication_cas": "CREATE_ONCE_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_spec_path": "data/reconciliation/venue-identity-maintenance/unlv-stage1.json",
+  "repository_spec_sha256": "6286eeb7e57ca3da1d8a647ba9d2b27e99fb1fcc6d3fef5dbeee73531aa142e5",
+  "repository_validation": "PASS",
+  "request_id": "unlv-venue-maintenance-0002",
+  "request_sha256": "b78e74f67fd1dfc5c7d8b259c8d56fc32f580c27bfac4c8cca8b740b23facf68",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "site_data_freshness": "PASS",
+  "target_branch": "maintenance/unlv-stage1-meadowlands-identity",
+  "writeahead_commit": "092eff1a4a306eab0f1e6382a7da2bbfc6f92b02",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/unlv/unlv-venue-maintenance-0002/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "7b67499ab23eb7091da94b98653376d41b4fbacb9a40441c09a9b986e3af74d3"
+}
