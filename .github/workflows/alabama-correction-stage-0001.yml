@@ -1,0 +1,342 @@
+name: Alabama correction stage 0001
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/alabama-correction-stage-0001.yml
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact transport head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          path: transport
+
+      - name: Authenticate transport and current protected main
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd transport
+          expected_main="41766e0da09c7d703a8b5a753a386c9ba6cd2fa2"
+          git fetch --no-tags origin             "+refs/heads/main:refs/remotes/origin/main"             "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction"             "+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation"
+          [[ "$(git rev-parse refs/remotes/origin/main)" == "$expected_main" ]] || {
+            echo "protected main moved" >&2
+            exit 1
+          }
+          [[ "$(git rev-parse refs/remotes/origin/data/alabama-correction)" == "$expected_main" ]] || {
+            echo "data/alabama-correction is no longer exact protected main" >&2
+            exit 1
+          }
+          changed="$(git diff --name-only "$expected_main"..HEAD)"
+          [[ "$changed" == ".github/workflows/alabama-correction-stage-0001.yml" ]] || {
+            echo "transport branch changed unexpected paths:" >&2
+            printf '%s\n' "$changed" >&2
+            exit 1
+          }
+          python - <<'PY'
+          import json, subprocess
+          raw = subprocess.check_output(
+              ["git", "show", "refs/remotes/origin/control/remote-implementation:.remote-implementation/control-state.json"],
+              text=True,
+          )
+          state = json.loads(raw)
+          if state.get("lifecycle_state") != "IDLE":
+              raise SystemExit("global remote Implementation lifecycle is not IDLE")
+          if state.get("transaction_state") != "COMPLETE":
+              raise SystemExit("global remote Implementation transaction is not COMPLETE")
+          if state.get("recovery_required") is not False:
+              raise SystemExit("global remote Implementation recovery is required")
+          active = {
+              k: v for k, v in state.items()
+              if k.startswith("active_") and v not in (None, "", False, [], {})
+          }
+          if active:
+              raise SystemExit(f"global remote Implementation has active state: {active}")
+          print("GLOBAL_CONTROL_IDLE_COMPLETE_PASS")
+          PY
+
+      - name: Check out clean correction branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/alabama-correction
+          fetch-depth: 0
+          path: staging
+
+      - name: Download exact frozen correction authority
+        uses: actions/download-artifact@v4
+        with:
+          name: alabama-correction-freeze-0001
+          run-id: 44533730742
+          github-token: ${{ github.token }}
+          path: /tmp/alabama-freeze-artifact
+
+      - name: Authenticate frozen ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          freeze="/tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip"
+          [[ -f "$freeze" ]] || {
+            echo "frozen correction ZIP missing from exact workflow artifact" >&2
+            find /tmp/alabama-freeze-artifact -maxdepth 2 -type f -print >&2 || true
+            exit 1
+          }
+          actual="$(sha256sum "$freeze" | awk '{print $1}')"
+          [[ "$actual" == "5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5" ]] || {
+            echo "freeze SHA mismatch: $actual" >&2
+            exit 1
+          }
+          python - <<'PY'
+          import json, zipfile
+          p="/tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip"
+          with zipfile.ZipFile(p) as z:
+              m=json.loads(z.read("correction-freeze.json"))
+          expected={
+              "status":"CORRECTION_RESEARCH_FROZEN",
+              "workflow_kind":"POST_PUBLICATION_CORRECTION",
+              "school_key":"alabama",
+              "research_base_sha":"41766e0da09c7d703a8b5a753a386c9ba6cd2fa2",
+              "scope":"field-correction",
+              "correction_mode":"SOURCE_GAME_DELTA",
+              "correction_diff_sha256":"27de1f754a247f273498f8cdc89ced58959f90e764501223ed6496ad95229154",
+              "correction_source_game_ids":["ALARAW-01436"],
+          }
+          for k,v in expected.items():
+              if m.get(k)!=v:
+                  raise SystemExit(f"freeze manifest mismatch for {k}: {m.get(k)!r}")
+          if m.get("research_authority") != {
+              "ref":"miami-expansion-stage6-complete-0034",
+              "digest":"56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978",
+          }:
+              raise SystemExit("freeze research authority mismatch")
+          print("FROZEN_CORRECTION_AUTHORITY_PASS")
+          PY
+
+      - name: Dry-run permanent current-main correction stage
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd staging
+          [[ "$(git branch --show-current)" == "data/alabama-correction" ]] || {
+            echo "wrong staging branch" >&2
+            exit 1
+          }
+          git fetch --no-tags origin             "+refs/heads/main:refs/remotes/origin/main"             "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction"
+          [[ "$(git rev-parse HEAD)" == "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2" ]] || {
+            echo "staging checkout is not exact protected-main predecessor" >&2
+            exit 1
+          }
+          [[ "$(git rev-parse refs/remotes/origin/main)" == "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2" ]] || {
+            echo "protected main moved before dry run" >&2
+            exit 1
+          }
+          [[ "$(git rev-parse refs/remotes/origin/data/alabama-correction)" == "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2" ]] || {
+            echo "correction branch moved before dry run" >&2
+            exit 1
+          }
+          [[ -z "$(git status --porcelain --untracked-files=all)" ]] || {
+            echo "staging checkout is not clean" >&2
+            git status --short >&2
+            exit 1
+          }
+          python tools/correction_lifecycle.py stage alabama             /tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip             --expected-sha256 5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5             | tee /tmp/alabama-stage-dry-run.txt
+
+      - name: Apply, validate, and commit permanent correction stage
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd staging
+          git config user.name "College Basketball History Automation"
+          git config user.email "actions@users.noreply.github.com"
+          python tools/correction_lifecycle.py stage alabama             /tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip             --expected-sha256 5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5             --apply --commit             | tee /tmp/alabama-stage-apply.txt
+          stage_commit="$(git rev-parse HEAD)"
+          parent="$(git rev-parse HEAD^)"
+          [[ "$parent" == "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2" ]] || {
+            echo "staged correction commit parent mismatch: $parent" >&2
+            exit 1
+          }
+          mapfile -t changed < <(git diff-tree --no-commit-id --name-only -r HEAD^ HEAD)
+          printf '%s\n' "${changed[@]}" | sort > /tmp/staged-changed-paths.txt
+          expected=$'schools/alabama/opponents.csv\nschools/alabama/source-games.csv'
+          actual="$(cat /tmp/staged-changed-paths.txt)"
+          [[ "$actual" == "$expected" ]] || {
+            echo "unexpected staged commit paths:" >&2
+            cat /tmp/staged-changed-paths.txt >&2
+            exit 1
+          }
+          cp .onboarding/alabama/integration-freeze.json /tmp/alabama-integration-freeze.json
+          sha256sum /tmp/alabama-integration-freeze.json             | tee /tmp/alabama-integration-freeze.json.sha256
+          printf '%s\n' "$stage_commit" > /tmp/alabama-stage-commit.txt
+
+      - name: Authenticate INTEGRATION_FROZEN manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd staging
+          python - <<'PY'
+          import csv, hashlib, io, json, subprocess
+          from pathlib import Path
+
+          manifest_path=Path("/tmp/alabama-integration-freeze.json")
+          m=json.loads(manifest_path.read_text(encoding="utf-8"))
+          expected={
+              "schema_version":2,
+              "workflow_kind":"POST_PUBLICATION_CORRECTION",
+              "status":"INTEGRATION_FROZEN",
+              "school_key":"alabama",
+              "research_base_sha":"41766e0da09c7d703a8b5a753a386c9ba6cd2fa2",
+              "integration_base_sha":"41766e0da09c7d703a8b5a753a386c9ba6cd2fa2",
+              "origin_main_sha":"41766e0da09c7d703a8b5a753a386c9ba6cd2fa2",
+              "research_zip_sha256":"5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5",
+              "correction_freeze_sha256":"5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5",
+              "correction_diff_sha256":"27de1f754a247f273498f8cdc89ced58959f90e764501223ed6496ad95229154",
+              "correction_mode":"SOURCE_GAME_DELTA",
+              "correction_source_game_ids":["ALARAW-01436"],
+          }
+          for k,v in expected.items():
+              if m.get(k)!=v:
+                  raise SystemExit(f"Integration Freeze mismatch for {k}: {m.get(k)!r}")
+
+          expected_hashes={
+              "conferences.csv":"c67f7bb1542c74e7a297d03db366353f848418b9da81d9540b89a2767f7fa94d",
+              "notes.md":"accb9d9ec4c60e2a4cf37ace1ebb43392b5f87345de5df867905951b24423aa6",
+              "opponents.csv":"1670dfea415694555d8918e36e03d788ed8b50a72cbd9f0d404e77846648777e",
+              "source-games.csv":"e3d8ed07846d576e92a5789604d6d86b80c28f2e4ab8492df46e64b05f99143f",
+              "source-notes.md":"b3cddeb596c5917e62abd5a7a7830c79b2e1819d02c645d212f813ef77d6893d",
+              "venues.csv":"69a53090577e9ae01f17aba2aa80a071afadb5b10ade93080d17cbe6b67e4663",
+          }
+          if m.get("package_member_sha256") != expected_hashes:
+              raise SystemExit("Integration Freeze package hashes mismatch")
+
+          for name, expected_hash in expected_hashes.items():
+              data=Path("schools/alabama",name).read_bytes()
+              actual=hashlib.sha256(data).hexdigest()
+              if actual != expected_hash:
+                  raise SystemExit(f"staged package hash mismatch for {name}: {actual}")
+
+          pre=m.get("pre_correction_source_semantic_guard") or {}
+          post=m.get("source_game_semantic_guard") or {}
+          if not pre.get("snapshot_sha256") or not post.get("snapshot_sha256"):
+              raise SystemExit("missing pre/post source semantic guard")
+          if pre.get("snapshot_sha256") == post.get("snapshot_sha256"):
+              raise SystemExit("identity correction unexpectedly preserved identical semantic snapshot")
+          if "ALARAW-01436" not in (pre.get("snapshot") or {}).get("rows",{}):
+              raise SystemExit("target row missing from pre-correction semantic guard")
+          if "ALARAW-01436" not in (post.get("snapshot") or {}).get("rows",{}):
+              raise SystemExit("target row missing from post-correction semantic guard")
+
+          summary={
+              "status":m["status"],
+              "school_key":m["school_key"],
+              "research_base_sha":m["research_base_sha"],
+              "origin_main_sha":m["origin_main_sha"],
+              "correction_freeze_sha256":m["correction_freeze_sha256"],
+              "correction_diff_sha256":m["correction_diff_sha256"],
+              "correction_source_game_ids":m["correction_source_game_ids"],
+              "package_member_sha256":m["package_member_sha256"],
+              "pre_semantic_snapshot_sha256":pre["snapshot_sha256"],
+              "post_semantic_snapshot_sha256":post["snapshot_sha256"],
+              "stage_commit":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
+          }
+          Path("/tmp/alabama-integration-freeze-summary.json").write_text(
+              json.dumps(summary,indent=2,sort_keys=True)+"\n",encoding="utf-8"
+          )
+          print(json.dumps(summary,sort_keys=True))
+          PY
+
+      - name: Reauthenticate global serialization immediately before publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd staging
+          git fetch --no-tags origin             "+refs/heads/main:refs/remotes/origin/main"             "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction"             "+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation"
+          [[ "$(git rev-parse refs/remotes/origin/main)" == "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2" ]] || {
+            echo "protected main moved before correction-branch CAS" >&2
+            exit 1
+          }
+          [[ "$(git rev-parse refs/remotes/origin/data/alabama-correction)" == "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2" ]] || {
+            echo "correction branch moved before correction-branch CAS" >&2
+            exit 1
+          }
+          python - <<'PY'
+          import json, subprocess
+          raw=subprocess.check_output(
+              ["git","show","refs/remotes/origin/control/remote-implementation:.remote-implementation/control-state.json"],
+              text=True,
+          )
+          state=json.loads(raw)
+          if state.get("lifecycle_state")!="IDLE" or state.get("transaction_state")!="COMPLETE" or state.get("recovery_required") is not False:
+              raise SystemExit("global remote Implementation is no longer safely IDLE/COMPLETE")
+          active={k:v for k,v in state.items() if k.startswith("active_") and v not in (None,"",False,[],{})}
+          if active:
+              raise SystemExit(f"global remote Implementation acquired active state: {active}")
+          print("GLOBAL_SERIALIZATION_REAUTH_PASS")
+          PY
+
+      - name: Publish staged correction branch by exact predecessor CAS
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd staging
+          staged="$(git rev-parse HEAD)"
+          git push             --force-with-lease=refs/heads/data/alabama-correction:41766e0da09c7d703a8b5a753a386c9ba6cd2fa2             origin HEAD:refs/heads/data/alabama-correction
+          git fetch --no-tags origin             "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction"
+          actual="$(git rev-parse refs/remotes/origin/data/alabama-correction)"
+          [[ "$actual" == "$staged" ]] || {
+            echo "published correction branch does not equal staged commit: $actual" >&2
+            exit 1
+          }
+          printf '%s\n' "$actual" | tee /tmp/published-correction-head.txt
+
+      - name: Verify published correction branch and repository validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd staging
+          published="$(cat /tmp/published-correction-head.txt)"
+          git reset --hard "$published"
+          python tools/validate_data.py | tee /tmp/published-validate-data.txt
+          python - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          m=json.loads(Path("/tmp/alabama-integration-freeze.json").read_text())
+          expected=m["package_member_sha256"]
+          for name, digest in expected.items():
+              raw=subprocess.check_output(["git","show",f"HEAD:schools/alabama/{name}"])
+              actual=hashlib.sha256(raw).hexdigest()
+              if actual!=digest:
+                  raise SystemExit(f"published package hash mismatch for {name}: {actual}")
+          changed=subprocess.check_output(
+              ["git","diff-tree","--no-commit-id","--name-only","-r","HEAD^","HEAD"],
+              text=True,
+          ).splitlines()
+          if sorted(changed)!=["schools/alabama/opponents.csv","schools/alabama/source-games.csv"]:
+              raise SystemExit(f"published changed paths mismatch: {changed}")
+          print("PUBLISHED_CORRECTION_BRANCH_EQUIVALENCE_PASS")
+          PY
+
+      - name: Upload Integration Freeze authority
+        uses: actions/upload-artifact@v4
+        with:
+          name: alabama-correction-integration-freeze-0001
+          path: |
+            /tmp/alabama-integration-freeze.json
+            /tmp/alabama-integration-freeze.json.sha256
+            /tmp/alabama-integration-freeze-summary.json
+            /tmp/alabama-stage-commit.txt
+            /tmp/published-correction-head.txt
+            /tmp/staged-changed-paths.txt
+            /tmp/alabama-stage-dry-run.txt
+            /tmp/alabama-stage-apply.txt
+            /tmp/published-validate-data.txt
+          if-no-files-found: error
+          retention-days: 30
