@@ -1,0 +1,84 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "89b2254cfa59d945b09bf18c8d9dee53302e9bbdcd2ee5ba68ecb98ac1437d12",
+    "docs/all-history-expansion-lifecycle.md": "8d84d24e2bcd8c7565edf80a919e3e457b4cc759f0079c8a632328d0a47aaa6d",
+    "tests/test_all_history_expansion_freeze.py": "36d2419762e03516a4e8c21300472d6685db5637c9f0ce02710743278d03da80",
+    "tests/test_program_history_scope.py": "1c9a3e268bf138414f5236cce3c40782b577d7bcbdc1ccb0d60c5f3e54081303",
+    "tests/test_site_completeness.py": "8e1e85dafca2671d960ccb243556c441658e7c8664f9a8d2b3d6afdf96efc1ca",
+    "tools/all_history_expansion_freeze.py": "bf5c2274658cf440e708a69d68464f4d06cab87b0e77deaa9b056e6169edddd4",
+    "tools/onboard_school.py": "d58ad535c2df607c17d4d4f9d0310d7001e329c15d5d51d560da5d2421dc7b63",
+    "tools/onboarding_plan.py": "9d91428d6613569492ca5b1776f2888bf13c6809d8b92bde4b3b4f42ecb47499",
+    "tools/site_completeness.py": "ad635953daf1677fa2215bc6e841027d1350ece4e3178ee1bae90d985e93f434"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "docs/all-history-expansion-lifecycle.md",
+    "tests/test_all_history_expansion_freeze.py",
+    "tests/test_program_history_scope.py",
+    "tests/test_site_completeness.py",
+    "tools/all_history_expansion_freeze.py",
+    "tools/onboard_school.py",
+    "tools/onboarding_plan.py",
+    "tools/site_completeness.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be",
+  "global_lock_commit": "ab2ed813abb2a938609d4fefcf371fd88ddde05d",
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "docs/all-history-expansion-lifecycle.md",
+    "tests/test_all_history_expansion_freeze.py",
+    "tests/test_program_history_scope.py",
+    "tests/test_site_completeness.py",
+    "tools/all_history_expansion_freeze.py",
+    "tools/onboard_school.py",
+    "tools/onboarding_plan.py",
+    "tools/site_completeness.py"
+  ],
+  "merge_base_sha": "71fa9541e758e623d849d5ef165e8874949673d9",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "06937895a1b8afb6ec2519b324cbbb76a99079de9942ac0c893394f13f8cc2f8",
+    "notes.md": "665bdd43997ee46af07cd58199ded36ba9719653a69877dc63f501f6833fb66a",
+    "opponents.csv": "12d2520ae4afd14e5069ac2cd7dfaf5c0af670dfac7b1295d1e90e8d8bad607a",
+    "source-games.csv": "422013c377baa901d15675678a5d0327f9d4df5c0dbfb4d6f94c2dd4d706ab37",
+    "source-notes.md": "a6970d0a738116a55cda294df61d1ef8f835f4e5bdcb04bdf43c6c05a60233ae",
+    "venues.csv": "b2183137bbea5e1d00d5f16e75912effd1a66b19604f7cd705953122e389ebcb"
+  },
+  "predecessor_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "prepared_commit_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+  "prepared_main_parent_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "prepared_parent_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be",
+  "prepared_parents": [
+    "3c7a4d9b510ecfec4ed01cd252e03918328104be",
+    "fa91a766c42d108e18594ea55bd0f04b0bcc85eb"
+  ],
+  "prepared_tree_sha": "2dedf7d080aa725bae3404fdf951b23acfee19a9",
+  "protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "refresh_proof_sha256": "be1b2e3acc90f3d51893d219b521ec731c66d685c5abd19188d0bd4aa34fcf8e",
+  "repository_validation": "PASS",
+  "request_id": "unlv-stage2-current-main-refresh-0003",
+  "request_sha256": "915bbe684bc96475afa617884cf67148e869ce1dcd68d000ffd67027bd6888ea",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "sidecars": {
+    "integration-freeze.json": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+    "refresh-proof.json": "be1b2e3acc90f3d51893d219b521ec731c66d685c5abd19188d0bd4aa34fcf8e"
+  },
+  "target_branch": "data/unlv-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/unlv/conferences.csv",
+    "schools/unlv/notes.md",
+    "schools/unlv/opponents.csv",
+    "schools/unlv/source-games.csv",
+    "schools/unlv/source-notes.md",
+    "schools/unlv/venues.csv"
+  ]
+}
