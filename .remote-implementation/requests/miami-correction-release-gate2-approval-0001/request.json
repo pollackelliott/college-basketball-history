@@ -1,0 +1,66 @@
+{
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": true,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner expressly answered 'Approved. Proceed' after exact Miami correction PR #678 Preview verification, exact sealed head 7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a and Preview deployment 7926837152. This authorizes the complete repository-defined final release phase through fresh Gate 2 approval, connector merge only from the exact fresh-verified packet, and exact Production proof with independent verification. This Gate 2 approval request itself is read-only and does not merge or publish; all prior authority constraints persist.",
+    "origin": "Same serialized Miami post-publication package-only conference correction Implementation lane - exact Owner Gate 2 approval"
+  },
+  "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "miami-correction-release-production-proof-0001"
+  },
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "owner_gate_2_approval": {
+    "approval_basis": "Owner explicitly responded 'Approved. Proceed' immediately after presentation of the independently fresh-verified Miami correction Owner Gate 2 packet for PR #678, exact head 7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a, Preview deployment 7926837152 at https://college-basketball-history-homghtyxi-elliott-pollacks-projects.vercel.app, and explicit notice that this exact Preview required affirmative approval. This approves only the exact presented Preview and authorizes the repository-defined guarded final phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof and independent completion verification, subject to all existing identity and safety safeguards.",
+    "approved": true,
+    "pr_head_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+    "pr_number": 678,
+    "preview_checkpoint_sha256": "2cbbf4f78fbd861a037058abb319c16a26f5427154612a7372ce6751da9d583d",
+    "preview_deployment_id": 7926837152,
+    "preview_url": "https://college-basketball-history-homghtyxi-elliott-pollacks-projects.vercel.app",
+    "preview_verification_sha256": "83c4259e7a8d5c5de4bea8c2a895ed3525d0c4204db08497cb85cf4669907358"
+  },
+  "pr_number": 678,
+  "preview_deployment_id": 7926837152,
+  "preview_url": "https://college-basketball-history-homghtyxi-elliott-pollacks-projects.vercel.app",
+  "previous_control_state_commit": "5c25ad1df67640fafc1bf97557af35d68fad6ffb",
+  "previous_control_state_sha256": "d0f6500da64e5c07b4dbc579917f8e6dfc98618cfd670413e93667796860e24e",
+  "release_manifest_sha256": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-correction-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "2cbbf4f78fbd861a037058abb319c16a26f5427154612a7372ce6751da9d583d"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-correction-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "83c4259e7a8d5c5de4bea8c2a895ed3525d0c4204db08497cb85cf4669907358"
+  },
+  "request_id": "miami-correction-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "target_branch": "data/miami-correction",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a"
+}
