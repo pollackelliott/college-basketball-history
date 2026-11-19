@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "miami",
+  "created_at": "2026-11-19T19:16:47.980203+00:00",
+  "input_fingerprint": {
+    "sha256": "05c04a7054dc0418176a0ad58413f86bbb986f0f52114e90acb9f809ec290e19",
+    "git_head": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+    "files": {
+      "schools/miami/source-games.csv": "8c550cf9193cfffe1dfa5e506fd280f657034c1b44071c85af9e8aaf62eb9e73",
+      "schools/miami/opponents.csv": "37afe654674a02e557244988b3d9e3c3c92a2c50cb5c3a6039bbc5b6bb2419e9",
+      "schools/miami/venues.csv": "2b9d23dfd5e8aac92957118c8b4275235ba43c88118ff74e374b430e3c66b52d",
+      "schools/miami/conferences.csv": "d42a0b744e5df1ab8aa1363e12dfe484659bf633d47ddac56983bb5b73aaee39",
+      "schools/miami/notes.md": "919e64c913df9c69b576b35ebabd0f2a29f103b8943a090a0796b0395d8bf15b",
+      "schools/miami/source-notes.md": "216aa393089b7148062b5f31f19c54af975b2575e66557f8c3b593db8e47735f",
+      "data/canonical/games.csv": "8c95bb3d210d1c73e18a68153abbc3b76fe69000153a1c85e8dc5b7e0d95eaa5",
+      "data/evidence/game-assertions.csv": "36f75a73d7656ebb23f76767ab854f55eb97f3c90f55eedcb752594dad0d0e03",
+      "data/reconciliation/discrepancies.csv": "8305e254ea9f4572ae922202c5cc0596dbbe990cdb17f9fc055c57c3230c0231",
+      "data/reference/programs.csv": "9414f7026ae21887803de8d300399182ff7e0091437cc39b8929bc8289b186cf",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "b358fb536c14b2aafd7bfa226b837948222173e6ec3ee14596d269e6725d72ad",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "eed172cf80d1f27e1c1fe93079bf9b5787c44a1c522f6b1c44f0e5a2b19e9db0",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "844fc162cd8b1746f7682763e91c69d865843a535327c14bed79ef67a127e5e5",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "f616892effa58ab38fe22452ca7fe68faf427155f0531cfe748cc2c81c538aab",
+      "tools/onboarding_plan.py": "bf07ebe918f74c26a191c294b01a7a76e5a09ae8a794c58fc8c6cf0aa2de5027",
+      "tools/program_history.py": "d1b6d69e15a994dcefb628d7078e100f792c671db35e32bd5efef504b6c860da",
+      "tools/validate_data.py": "58a288b964b98af0f6a49a0afc7dfa1c9f7b665f0f03a05de1378d00ee58287b",
+      "tools/verify_program_accomplishments.py": "9b2cd4ec6bafcd9f825fd6d6a1c42a52ecce0497c523f3fbdb48f157aab59dcb"
+    }
+  },
+  "package": {
+    "errors": [],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 1842,
+      "correction_unchanged_published_rows": 1842,
+      "opponents": 295,
+      "venues": 63,
+      "conference_intervals": 6,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "summary": {
+    "source_rows": 1842,
+    "in_scope_source_rows": 0,
+    "top_level_source_rows": 0,
+    "pre_cutoff_rows": 0,
+    "existing_game_matches": 0,
+    "new_canonical_games": 0,
+    "identity_review_required": 0,
+    "assertions_to_add": 0,
+    "canonical_enrichment_games": 0,
+    "canonical_enrichment_fields": 0,
+    "discrepancies_to_add": 0,
+    "conditional_discrepancies": 0,
+    "canonical_site_patch_reviews": 0,
+    "affected_public_programs": [],
+    "already_public": true,
+    "correction_transaction_kind": "PACKAGE_ONLY_FIELD_CORRECTION",
+    "correction_package_members": [
+      "conferences.csv"
+    ],
+    "correction_diff_sha256": "443b093719406c8f8b73f7ac5fb8826411f831ffd41d36b80b7781aa1d627c84",
+    "inherited_unrelated_reviews_excluded": "ALL"
+  },
+  "decisions": [],
+  "identity_collision_groups": [],
+  "identity_cardinality_constraints": [],
+  "approval": {
+    "approved_by": "project-owner",
+    "approved_at": "2026-11-19T21:21:26.754625+00:00"
+  },
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11"
+}
