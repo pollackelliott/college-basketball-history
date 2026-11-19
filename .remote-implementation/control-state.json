@@ -1402,7 +1402,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/unlv/unlv-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "bdb89b315d3aea97b1ed905dea53e64c2d89d8ce1b5811bc4c14970add5550b2",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/unlv/unlv-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "3a82618461fd5ccf87080378ef5633be81f6bbb4d3af179b0ea70383128ea7bd",
     "merged": false,
@@ -1411,7 +1411,7 @@
     "pr_number": 658,
     "production_request_id": "unlv-release-production-proof-0001",
     "protected_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "unlv-release-gate2-approval-0001",
     "school_key": "unlv",
     "target_branch": "data/unlv-onboarding",
