@@ -1,0 +1,90 @@
+name: Miami correction Stage 2 proposal validation 0001
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/miami-correction-stage2-proposal-validate-0001.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - name: Authenticate authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main control/remote-implementation data/miami-correction
+          test "$(git rev-parse origin/main)" = "66795cf099c05e272f590fa6d2ffb10c262d6b56"
+          test "$(git rev-parse origin/control/remote-implementation)" = "121388e55d332a3912989b9b6deced6c52c6c8cc"
+          test "$(git rev-parse origin/data/miami-correction)" = "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+          test "$(git diff --name-only 66795cf099c05e272f590fa6d2ffb10c262d6b56...HEAD)" = ".github/workflows/miami-correction-stage2-proposal-validate-0001.yml"
+      - name: Validate exact proposal request
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/request.json <<'JSON'
+          {
+            "schema_version": 1,
+            "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+            "request_id": "miami-correction-stage2-proposal-0001",
+            "school_key": "miami",
+            "operation": "STAGE2_PROPOSAL_REHEARSAL",
+            "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+            "target_branch": "data/miami-correction",
+            "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+            "stage2_authority": {
+              "path": ".remote-implementation/checkpoints/miami/miami-correction-stage2-census-0002/checkpoint-manifest.json",
+              "sha256": "899b9ad687afffec0de7957bb459bbead6834420200deaa69d9580de77b41a97"
+            },
+            "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+            "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+            "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "recommendation_map": {
+              "path": ".remote-implementation/inputs/miami-correction-stage2-proposal-0001/recommendation-map.json",
+              "sha256": "9a604a0e79cc9bc86c61a330af232b95680ac0a785532a2f1925c73f65e5315c"
+            },
+            "creation_provenance": {
+              "origin": "Miami post-publication package-only conference correction from zero-decision Stage 2 census",
+              "authorization": "Owner authorized continuation of the bounded Miami conference correction. Stage 2 census miami-correction-stage2-census-0002 is fresh-runner verified with zero decisions, zero blockers, zero warnings, and no tracked mutation. This request authorizes only exact empty-map proposal rehearsal toward OWNER_GATE_1_READY. No historical judgment, Owner Gate 1 approval, sealed apply, release, merge, Production, expansion Stage 7, or unrelated mutation is authorized."
+            },
+            "authority": {
+              "owner_gate_1": false,
+              "owner_gate_2": false,
+              "release": false,
+              "phase0": false,
+              "phase0_scope_supersession": false,
+              "recovery": false,
+              "stage2_census": false,
+              "stage2_current_main_refresh": false,
+              "stage2_opponent_display_normalize": false,
+              "stage2_proposal_rehearsal": true,
+              "stage2_gate1_fill": false,
+              "stage2_preseal_rehearsal": false,
+              "stage2_gate1_seal": false,
+              "stage2_sealed_apply": false,
+              "stage2_reconciliation_diagnostic": false,
+              "release_readiness": false,
+              "release_preview_verify": false,
+              "release_gate2_approval": false,
+              "release_presentation_refresh": false,
+              "release_production_proof": false,
+              "venue_identity_maintenance": false
+            }
+          }
+          JSON
+          python tools/remote_implementation_request_submit.py --template /tmp/request.json | tee /tmp/validation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: miami-correction-stage2-proposal-request-packet-0001
+          path: |
+            /tmp/request.json
+            /tmp/validation.json
+          retention-days: 30
