@@ -1,0 +1,12 @@
+{
+  "school_key": "miami",
+  "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "stage6_checkpoint_sha256": "56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978",
+  "stage6_candidate_package_sha256": "abe4026bf182eb1f6f178a06b906ccac35fed479bdecf53fbf5edcbfb8e4eeec",
+  "stage3b_checkpoint_sha256": "86cb728dc442f4534160f27ea5379161242a6b4b7a273d0876078dfdf422523e",
+  "capsule_sha256": "b22c1ce1c3c284a52e79ddbc739b2733f07ac29eb056aec6672550e020ef960e",
+  "runner_sha256": "fc89d0fce3d5f0d7e97328b73efde59faf11ca56bec7e1080d8567b89ed9602b",
+  "researched_inception_season": "1927-1928",
+  "validation_mode": "PROTECTED_MAIN"
+}
