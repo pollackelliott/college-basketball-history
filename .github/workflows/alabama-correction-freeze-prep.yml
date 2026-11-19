@@ -1,9 +1,9 @@
 name: Alabama correction freeze preparation
 
 on:
-  push:
+  pull_request:
     branches:
-      - data/alabama-correction
+      - main
     paths:
       - .github/workflows/alabama-correction-freeze-prep.yml
 
@@ -14,9 +14,10 @@ jobs:
   freeze:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact transport commit
+      - name: Check out exact transport head
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: Authenticate transport and protected-main baseline
@@ -263,4 +264,4 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-# second push activates branch-local transport workflow
+# temporary PR activates branch-local transport workflow
