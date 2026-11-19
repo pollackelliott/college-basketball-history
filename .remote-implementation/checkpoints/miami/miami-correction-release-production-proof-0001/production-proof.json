@@ -1,0 +1,23 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "merge_parent_onboarding": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "merge_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "owner_gate_2_approval_checkpoint_sha256": "c04ce8ed67cd1ca66a37b0f2643fece32f31b1a89e1417dd65f00de27a9d8d7e",
+  "owner_gate_2_verification_sha256": "2d6f423808377587da17f45fbd9913a9c9abc00d10ee12d6aacfcb67203ec64f",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "pr_number": 678,
+  "production_deployment_id": 7928038555,
+  "production_deployment_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/miami.json"
+  ],
+  "production_json_checked_count": 3,
+  "school_key": "miami",
+  "status": "COMPLETE"
+}

@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "merge_parent_onboarding": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "merge_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "c04ce8ed67cd1ca66a37b0f2643fece32f31b1a89e1417dd65f00de27a9d8d7e",
+  "owner_gate_2_verification_sha256": "2d6f423808377587da17f45fbd9913a9c9abc00d10ee12d6aacfcb67203ec64f",
+  "pr_head_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "pr_number": 678,
+  "production_deployment_id": 7928038555,
+  "production_json_checked_count": 3,
+  "production_proof": true,
+  "production_proof_sha256": "7736c711da74115f5078f6c84ddbb46f5ac06bab1f7b47a43d3e1ca7d705c7f2",
+  "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "request_id": "miami-correction-release-production-proof-0001",
+  "request_sha256": "43b37a7e34ca2008e94f3cd769e032241c05cdc5dd757cef4c009c2a3f9a412e",
+  "schema_version": 1,
+  "school_key": "miami",
+  "status": "PRODUCTION_PROOF_PASS"
+}
