@@ -42,7 +42,9 @@ The remote runner must not reimplement their basketball, venue, opponent, confer
 
 ### Post-publication correction target authority
 
-For a staged post-publication correction, the remote Stage 2 chain may use the
+This section applies only to the **ordinary/full** correction path. A correction carrying a valid `MICRO_CORRECTION_READY` proof under `docs/post-publication-correction-lifecycle.md` does not enter the remote Stage 2 control plane and must not transport its Integration Freeze onto the control branch merely to manufacture Stage 2 authority. It proceeds through exact PR/CI/Preview, one explicit owner Preview approval, exact merge, and Production proof instead.
+
+For a staged post-publication correction that is not using the micro path, the remote Stage 2 chain may use the
 repository-owned correction branch instead of a normal onboarding branch.
 
 The first remote `STAGE2_CENSUS` request must bind exactly:
