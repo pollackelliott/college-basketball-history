@@ -1,0 +1,153 @@
+name: Miami correction Stage 2 census input 0001
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/miami-correction-stage2-census-input-0001.yml"
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact transport head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Authenticate current authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main control/remote-implementation data/miami-correction
+          test "$(git rev-parse origin/main)" = "301d9eb4a323a5d393f0e20a1508be6565376553"
+          test "$(git rev-parse origin/control/remote-implementation)" = "6694305db0677419db3e03a7137f74cd93cc307e"
+          test "$(git rev-parse origin/data/miami-correction)" = "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+          python - <<'PY'
+          import json, subprocess
+          raw=subprocess.check_output([
+              "git","show","origin/control/remote-implementation:.remote-implementation/control-state.json"
+          ])
+          c=json.loads(raw)
+          assert c["lifecycle_state"]=="IDLE"
+          assert c["transaction_state"]=="COMPLETE"
+          assert c["recovery_required"] is False
+          assert c.get("active_request_id") is None
+          assert c.get("active_lock_commit") is None
+          PY
+          test "$(git diff --name-only 301d9eb4a323a5d393f0e20a1508be6565376553...HEAD)" = ".github/workflows/miami-correction-stage2-census-input-0001.yml"
+
+      - name: Download exact Miami Integration Freeze
+        uses: actions/download-artifact@v4
+        with:
+          name: miami-conference-correction-integration-freeze-0001
+          path: /tmp/miami-if
+          github-token: ${{ github.token }}
+          run-id: 44575959301
+
+      - name: Authenticate Integration Freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          p="/tmp/miami-if/miami-integration-freeze.json"
+          echo "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618  $p" | sha256sum -c -
+          python - <<'PY'
+          import json
+          p="/tmp/miami-if/miami-integration-freeze.json"
+          m=json.load(open(p))
+          assert m["status"]=="INTEGRATION_FROZEN"
+          assert m["workflow_kind"]=="POST_PUBLICATION_CORRECTION"
+          assert m["correction_mode"]=="PACKAGE_ONLY_FIELD"
+          assert m["correction_package_members"]==["conferences.csv"]
+          assert m["correction_source_game_ids"]==[]
+          assert m["origin_main_sha"]=="301d9eb4a323a5d393f0e20a1508be6565376553"
+          assert m["integration_base_sha"]=="301d9eb4a323a5d393f0e20a1508be6565376553"
+          assert m["source_game_semantic_guard"]["snapshot_sha256"]=="c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d"
+          assert m["pre_correction_source_semantic_guard"]["snapshot_sha256"]=="c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d"
+          PY
+
+      - name: Commit only the exact Integration Freeze input to control branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          old="6694305db0677419db3e03a7137f74cd93cc307e"
+          git checkout -B remote-control origin/control/remote-implementation
+          mkdir -p .remote-implementation/inputs/miami-conference-correction-0001
+          cp /tmp/miami-if/miami-integration-freeze.json             .remote-implementation/inputs/miami-conference-correction-0001/integration-freeze.json
+          git add -- .remote-implementation/inputs/miami-conference-correction-0001/integration-freeze.json
+          test "$(git diff --cached --name-only)" = ".remote-implementation/inputs/miami-conference-correction-0001/integration-freeze.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add Miami correction Stage 2 census input"
+          input_commit="$(git rev-parse HEAD)"
+          test "$(git rev-parse HEAD^)" = "$old"
+          git push origin HEAD:control/remote-implementation             --force-with-lease=refs/heads/control/remote-implementation:$old
+          printf '%s\n' "$input_commit" > /tmp/miami-control-input-commit.txt
+
+      - name: Validate exact Stage 2 census request template
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout --detach 301d9eb4a323a5d393f0e20a1508be6565376553
+          cat > /tmp/miami-stage2-census-template.json <<'JSON'
+          {
+            "schema_version": 1,
+            "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+            "request_id": "miami-correction-stage2-census-0001",
+            "operation": "STAGE2_CENSUS",
+            "school_key": "miami",
+            "expected_protected_main_sha": "301d9eb4a323a5d393f0e20a1508be6565376553",
+            "target_branch": "data/miami-correction",
+            "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+            "correction_integration_freeze": {
+              "path": ".remote-implementation/inputs/miami-conference-correction-0001/integration-freeze.json",
+              "sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618"
+            },
+            "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+            "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+            "creation_provenance": {
+              "origin": "Miami post-publication package-only conference correction from Stage 6 checkpoint 0034",
+              "authorization": "Owner authorized the bounded Miami conferences.csv correction. CORRECTION_RESEARCH_FROZEN and current-main staging are complete. This request authorizes only the read-only correction-aware Stage 2 capability census from exact target 109fb1d5bcf880c8866380e8504b22a86dbed4f1 and exact Integration Freeze e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618. No historical decision, tracked Stage 2 repair, proposal rehearsal, Gate 1 approval, sealed apply, release, merge, Production, expansion Stage 7, or unrelated mutation is authorized."
+            },
+            "authority": {
+              "owner_gate_1": false,
+              "owner_gate_2": false,
+              "release": false,
+              "phase0": false,
+              "phase0_scope_supersession": false,
+              "venue_identity_maintenance": false,
+              "recovery": false,
+              "stage2_census": true,
+              "stage2_current_main_refresh": false,
+              "stage2_opponent_display_normalize": false,
+              "stage2_proposal_rehearsal": false,
+              "stage2_gate1_fill": false,
+              "stage2_preseal_rehearsal": false,
+              "stage2_gate1_seal": false,
+              "stage2_sealed_apply": false,
+              "stage2_reconciliation_diagnostic": false,
+              "release_readiness": false,
+              "release_preview_verify": false,
+              "release_gate2_approval": false,
+              "release_presentation_refresh": false,
+              "release_production_proof": false
+            }
+          }
+          JSON
+          python tools/remote_implementation_request_submit.py             --template /tmp/miami-stage2-census-template.json             | tee /tmp/miami-stage2-census-template-validation.json
+
+      - name: Upload validated submission packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: miami-correction-stage2-census-request-packet-0001
+          if-no-files-found: error
+          path: |
+            /tmp/miami-control-input-commit.txt
+            /tmp/miami-stage2-census-template.json
+            /tmp/miami-stage2-census-template-validation.json
+          retention-days: 30
