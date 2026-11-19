@@ -1,5 +1,6 @@
 {
-  "approved_plan_hash_preview": "adc56d43c3d16b48042835075d57523f9a4169649eb2446ee1bd6f9999c38668",
+  "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
+  "approved_plan_sha256": "d0bab2129e7121eaf97adb99c96cb1260ff14f69ed31cea9c97570235ca1da32",
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
@@ -14,47 +15,40 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": true,
+    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": false,
+    "stage2_sealed_apply": true,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from unlv-stage2-preseal-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from unlv-stage2-gate1-seal-0001",
     "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "ada05512beae3bf800e94cd236fed3ac68e1ce6aa53b8e5e6befd0351ee474d3",
   "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
-  "equivalence_sha256": "45698c7a9acfe99caa99900981ec5975fb6a57be7fb5353578243385d4ee9747",
   "expected_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
   "filled_review_sha256": "0cc1b15ce3bc831b95f30ec244a1fd78bceea595e325ff6b8c8cf90dcca687f3",
   "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_GATE1_SEAL",
+  "operation": "STAGE2_SEALED_APPLY",
   "owner_gate_1_approval_sha256": "645c418192f1ae5f560ed6bcb5a5a0273fdaebf11d396d5cc794083c94dc39c9",
-  "phase_continuation": {
-    "apply_request_id": "unlv-stage2-sealed-apply-0001",
-    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
-    "preseal_request_id": "unlv-stage2-preseal-0001",
-    "seal_request_id": "unlv-stage2-gate1-seal-0001"
-  },
-  "previous_control_state_commit": "a8141b03a6722ca2ccf74e9a1345ecfbb4b2a884",
-  "previous_control_state_sha256": "27c5ed2d8b59ba078039355a9148a7fa9a7fd28ff0f2ade2feb8f75bd754aee0",
+  "previous_control_state_commit": "c73b50ca4ebce7d9518b8b15149c172507ae532b",
+  "previous_control_state_sha256": "2155b0de2ae9c09032b09825b758eb9aaa9ee23673aec6d3fc04bc6ebf972de1",
   "recommendation_map_sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395",
-  "request_id": "unlv-stage2-gate1-seal-0001",
+  "request_id": "unlv-stage2-sealed-apply-0001",
   "schema_version": 1,
   "school_key": "unlv",
   "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
-  "stage2_preseal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-preseal-0001/checkpoint-manifest.json",
-    "sha256": "ab355081077b7f8073e2f2f0f09d405454bf37cf28a2a974d77f8c8cb5dd0b62"
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "2dfc1332c60faa5e0d7feac2e56e9919acf0e070c2577b3eba010ddc22ca4b27"
   },
-  "stage2_preseal_verification": {
-    "path": ".remote-implementation/verifications/unlv/unlv-stage2-preseal-0001/stage2-preseal-rehearsal-verification.json",
-    "sha256": "1c628c6a684ae4e8825c4ff1f80d799b95f6e38cbe98d18789035d72dd1c59d7"
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "b11389f28936fb742efcf158f5ee0e9078392551b3d1a47f9c951f7462518c7f"
   },
   "target_branch": "data/unlv-onboarding",
   "target_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249"
