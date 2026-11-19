@@ -705,15 +705,15 @@
   "active_lock_commit": "6f3a536cb5b31f6ab06b935d33e0b2c962fcdc79",
   "active_lock_owner": "github-actions:44441307040:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "active_prepared_tree_sha": "1aa79fd6573968365356294885cbad5863f4e1c7",
   "active_request_id": "unlv-stage2-sealed-apply-0001",
   "active_request_sha256": "0c15068b3702c572345ee1e695ba3f5fdf168231f9c6f97be3e0eb5648b8eff1",
   "active_school_key": "unlv",
   "active_target_branch": "data/unlv-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/unlv/unlv-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "8e32c984a6bbc34cea6f1a32ef2615074bb19a968c80b58b654ac7942ec1e969",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1419,5 +1419,5 @@
   "lock_acquisition_request_commit": "74493869dab3073a4f7c6a5cc623ed863e54d70b",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
