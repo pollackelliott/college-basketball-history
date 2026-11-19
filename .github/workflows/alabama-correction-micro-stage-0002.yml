@@ -1,4 +1,4 @@
-name: Alabama correction micro stage 0002
+name: Alabama micro-correction verification recovery 0002
 
 on:
   pull_request:
@@ -8,21 +8,20 @@ on:
       - .github/workflows/alabama-correction-micro-stage-0002.yml
 
 permissions:
-  actions: read
-  contents: write
+  contents: read
 
 jobs:
-  stage:
+  verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact transport head
+      - name: Check out exact recovery transport head
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           path: transport
 
-      - name: Authenticate transport, correction branch, and global control
+      - name: Authenticate recovery scope and current main
         shell: bash
         run: |
           set -euo pipefail
@@ -30,203 +29,166 @@ jobs:
           expected_main="50e834f05952a70f8e8fee3c7aee92994e252dc8"
           git fetch --no-tags origin \
             "+refs/heads/main:refs/remotes/origin/main" \
-            "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction" \
-            "+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation"
+            "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction"
           [[ "$(git rev-parse refs/remotes/origin/main)" == "$expected_main" ]] || { echo "protected main moved" >&2; exit 1; }
-          [[ "$(git rev-parse refs/remotes/origin/data/alabama-correction)" == "$expected_main" ]] || { echo "correction branch is not exact current main" >&2; exit 1; }
+          [[ "$(git rev-parse refs/remotes/origin/data/alabama-correction)" == "87721bd560a145e60c597ebfb1db723e72630956" ]] || { echo "published correction head changed" >&2; exit 1; }
           changed="$(git diff --name-only "$expected_main"..HEAD)"
-          [[ "$changed" == ".github/workflows/alabama-correction-micro-stage-0002.yml" ]] || { echo "unexpected transport paths:" >&2; printf '%s\n' "$changed" >&2; exit 1; }
-          python - <<'PY'
-          import json, subprocess
-          raw=subprocess.check_output(["git","show","refs/remotes/origin/control/remote-implementation:.remote-implementation/control-state.json"],text=True)
-          s=json.loads(raw)
-          if s.get("lifecycle_state")!="IDLE" or s.get("transaction_state")!="COMPLETE" or s.get("recovery_required") is not False:
-              raise SystemExit("global control is not IDLE/COMPLETE")
-          active={k:v for k,v in s.items() if k.startswith("active_") and v not in (None,"",False,[],{})}
-          if active: raise SystemExit(f"global control has active state: {active}")
-          print("GLOBAL_CONTROL_IDLE_COMPLETE_PASS")
-          PY
+          [[ "$changed" == ".github/workflows/alabama-correction-micro-stage-0002.yml" ]] || { echo "unexpected recovery transport paths:" >&2; printf '%s\n' "$changed" >&2; exit 1; }
 
-      - name: Check out clean correction branch
+      - name: Check out exact published micro-correction
         uses: actions/checkout@v4
         with:
-          ref: data/alabama-correction
+          ref: 87721bd560a145e60c597ebfb1db723e72630956
           fetch-depth: 0
-          path: staging
+          path: verification
 
-      - name: Download exact frozen correction authority
-        uses: actions/download-artifact@v4
-        with:
-          name: alabama-correction-freeze-0001
-          run-id: 44533730742
-          github-token: ${{ github.token }}
-          path: /tmp/alabama-freeze-artifact
-
-      - name: Authenticate frozen correction ZIP
+      - name: Verify exact commit topology and allow-list
         shell: bash
         run: |
           set -euo pipefail
-          freeze="/tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip"
-          [[ -f "$freeze" ]] || { echo "frozen correction ZIP missing" >&2; exit 1; }
-          actual="$(sha256sum "$freeze" | awk '{print $1}')"
-          [[ "$actual" == "5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5" ]] || { echo "freeze SHA mismatch: $actual" >&2; exit 1; }
+          cd verification
+          [[ "$(git rev-parse HEAD)" == "87721bd560a145e60c597ebfb1db723e72630956" ]] || exit 1
+          [[ "$(git rev-parse HEAD^)" == "50e834f05952a70f8e8fee3c7aee92994e252dc8" ]] || { echo "wrong parent" >&2; exit 1; }
+          git diff-tree --no-commit-id --name-only -r HEAD^ HEAD | sort > /tmp/actual-paths.txt
+          cat > /tmp/expected-paths.txt <<'EOF'
+          data/canonical/games.csv
+          data/evidence/game-assertions.csv
+          schools/alabama/opponents.csv
+          schools/alabama/source-games.csv
+          site/data/teams/alabama.json
+          EOF
+          sed -i 's/^          //' /tmp/expected-paths.txt
+          diff -u /tmp/expected-paths.txt /tmp/actual-paths.txt
+          echo "EXACT_MICRO_PATH_ALLOWLIST_PASS"
+
+      - name: Verify exact Alabama identity transaction
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd verification
           python - <<'PY'
-          import json, zipfile
-          p="/tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip"
-          with zipfile.ZipFile(p) as z:
-              m=json.loads(z.read("correction-freeze.json"))
-          expected={
-            "status":"CORRECTION_RESEARCH_FROZEN",
-            "workflow_kind":"POST_PUBLICATION_CORRECTION",
-            "school_key":"alabama",
-            "research_base_sha":"41766e0da09c7d703a8b5a753a386c9ba6cd2fa2",
-            "scope":"field-correction",
-            "correction_mode":"SOURCE_GAME_DELTA",
-            "correction_diff_sha256":"27de1f754a247f273498f8cdc89ced58959f90e764501223ed6496ad95229154",
-            "correction_source_game_ids":["ALARAW-01436"],
-          }
-          for k,v in expected.items():
-              if m.get(k)!=v: raise SystemExit(f"freeze manifest mismatch for {k}: {m.get(k)!r}")
-          if m.get("research_authority")!={"ref":"miami-expansion-stage6-complete-0034","digest":"56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978"}:
-              raise SystemExit("freeze research authority mismatch")
-          print("FROZEN_CORRECTION_AUTHORITY_PASS")
-          PY
-
-      - name: Dry-run permanent current-main micro stage
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd staging
-          git fetch --no-tags origin \
-            "+refs/heads/main:refs/remotes/origin/main" \
-            "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction"
-          [[ "$(git rev-parse HEAD)" == "50e834f05952a70f8e8fee3c7aee92994e252dc8" ]] || { echo "staging HEAD is not exact current main" >&2; exit 1; }
-          [[ "$(git rev-parse refs/remotes/origin/main)" == "50e834f05952a70f8e8fee3c7aee92994e252dc8" ]] || { echo "main moved before dry run" >&2; exit 1; }
-          [[ "$(git rev-parse refs/remotes/origin/data/alabama-correction)" == "50e834f05952a70f8e8fee3c7aee92994e252dc8" ]] || { echo "correction branch moved before dry run" >&2; exit 1; }
-          [[ -z "$(git status --porcelain --untracked-files=all)" ]] || { git status --short >&2; exit 1; }
-          python tools/correction_lifecycle.py stage alabama \
-            /tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip \
-            --expected-sha256 5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5 \
-            --micro-correction | tee /tmp/alabama-micro-dry-run.txt
-
-      - name: Apply, validate, commit, and authenticate MICRO_CORRECTION_READY
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd staging
-          git config user.name "College Basketball History Automation"
-          git config user.email "actions@users.noreply.github.com"
-          python tools/correction_lifecycle.py stage alabama \
-            /tmp/alabama-freeze-artifact/alabama-correction-research-frozen.zip \
-            --expected-sha256 5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5 \
-            --apply --commit --micro-correction | tee /tmp/alabama-micro-apply.txt
-          stage_commit="$(git rev-parse HEAD)"
-          [[ "$(git rev-parse HEAD^)" == "50e834f05952a70f8e8fee3c7aee92994e252dc8" ]] || { echo "micro commit parent mismatch" >&2; exit 1; }
-          cp .onboarding/alabama/integration-freeze.json /tmp/alabama-integration-freeze.json
-          cp .onboarding/alabama/micro-correction-ready.json /tmp/alabama-micro-correction-ready.json
-          sha256sum /tmp/alabama-integration-freeze.json | tee /tmp/alabama-integration-freeze.json.sha256
-          sha256sum /tmp/alabama-micro-correction-ready.json | tee /tmp/alabama-micro-correction-ready.json.sha256
-          printf '%s\n' "$stage_commit" > /tmp/alabama-micro-stage-commit.txt
-          git diff-tree --no-commit-id --name-only -r HEAD^ HEAD | sort | tee /tmp/alabama-micro-changed-paths.txt
-          python - <<'PY'
-          import json, subprocess
+          import csv, json
           from pathlib import Path
-          ready=json.loads(Path("/tmp/alabama-micro-correction-ready.json").read_text())
-          head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
-          expected={
-            "status":"MICRO_CORRECTION_READY",
-            "kind":"POST_PUBLICATION_MICRO_CORRECTION_READY",
-            "school_key":"alabama",
-            "micro_correction_class":"ONE_GAME_IDENTITY_NORMALIZATION",
-            "origin_main_sha":"50e834f05952a70f8e8fee3c7aee92994e252dc8",
-            "target_branch":"data/alabama-correction",
-            "target_sha":head,
-            "correction_freeze_sha256":"5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5",
-            "correction_diff_sha256":"27de1f754a247f273498f8cdc89ced58959f90e764501223ed6496ad95229154",
-            "correction_source_game_ids":["ALARAW-01436"],
-            "owner_approval_model":"SINGLE_EXACT_PREVIEW_APPROVAL",
-            "stage2_required":False,
-            "owner_gate_1_required":False,
-            "sealed_apply_required":False,
-          }
-          for k,v in expected.items():
-              if ready.get(k)!=v: raise SystemExit(f"ready mismatch for {k}: {ready.get(k)!r}")
-          changed=set(ready.get("changed_paths") or [])
-          required={
-            "schools/alabama/source-games.csv",
-            "schools/alabama/opponents.csv",
-            "data/canonical/games.csv",
-            "data/evidence/game-assertions.csv",
-          }
-          if not required.issubset(changed): raise SystemExit(f"required micro paths missing: {sorted(required-changed)}")
-          bad=[p for p in changed if p not in required and p!="data/reconciliation/discrepancies.csv" and not p.startswith("site/data/")]
-          if bad: raise SystemExit(f"unauthorized micro paths: {bad}")
-          if ready.get("research_authority")!={"ref":"miami-expansion-stage6-complete-0034","digest":"56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978"}:
-              raise SystemExit("ready research authority mismatch")
-          print(json.dumps(ready,sort_keys=True))
+
+          def rows(path):
+              with Path(path).open(newline="",encoding="utf-8-sig") as f:
+                  return list(csv.DictReader(f))
+
+          src=[r for r in rows("schools/alabama/source-games.csv") if r.get("source_game_id")=="ALARAW-01436"]
+          if len(src)!=1: raise SystemExit(f"expected one ALARAW-01436, got {len(src)}")
+          r=src[0]
+          if r.get("normalized_opponent_key")!="miami-oh" or r.get("normalized_opponent_name")!="Miami (OH)":
+              raise SystemExit(f"source row identity mismatch: {r.get('normalized_opponent_key')} / {r.get('normalized_opponent_name')}")
+
+          opp=[r for r in rows("schools/alabama/opponents.csv") if r.get("source_opponent")=="Miami @"]
+          if len(opp)!=1: raise SystemExit(f"expected one Miami @ opponent row, got {len(opp)}")
+          o=opp[0]
+          if o.get("normalized_opponent_key")!="miami-oh" or o.get("normalized_opponent_name")!="Miami (OH)":
+              raise SystemExit("supporting opponents row mismatch")
+
+          games=[r for r in rows("data/canonical/games.csv") if r.get("canonical_game_id")=="CBBG-0028763"]
+          if len(games)!=1: raise SystemExit(f"expected canonical CBBG-0028763 once, got {len(games)}")
+          g=games[0]
+          vals=set(g.values())
+          if "miami-oh" not in vals:
+              raise SystemExit("canonical game does not contain miami-oh identity")
+
+          assertions=[r for r in rows("data/evidence/game-assertions.csv") if r.get("canonical_game_id")=="CBBG-0028763" and r.get("source_game_id")=="ALARAW-01436"]
+          if len(assertions)!=1: raise SystemExit(f"expected one scoped assertion, got {len(assertions)}")
+          a=assertions[0]
+          if "miami-oh" not in set(a.values()):
+              raise SystemExit("scoped assertion does not contain miami-oh identity")
+          print("EXACT_ALABAMA_IDENTITY_TRANSACTION_PASS")
           PY
 
-      - name: Reauthenticate global control immediately before correction-branch CAS
+      - name: Fresh repository and public-data reproducibility verification
         shell: bash
         run: |
           set -euo pipefail
-          cd staging
-          git fetch --no-tags origin \
-            "+refs/heads/main:refs/remotes/origin/main" \
-            "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction" \
-            "+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation"
-          [[ "$(git rev-parse refs/remotes/origin/main)" == "50e834f05952a70f8e8fee3c7aee92994e252dc8" ]] || { echo "main moved before publication" >&2; exit 1; }
-          [[ "$(git rev-parse refs/remotes/origin/data/alabama-correction)" == "50e834f05952a70f8e8fee3c7aee92994e252dc8" ]] || { echo "correction branch moved before publication" >&2; exit 1; }
-          python - <<'PY'
-          import json, subprocess
-          raw=subprocess.check_output(["git","show","refs/remotes/origin/control/remote-implementation:.remote-implementation/control-state.json"],text=True)
-          s=json.loads(raw)
-          if s.get("lifecycle_state")!="IDLE" or s.get("transaction_state")!="COMPLETE" or s.get("recovery_required") is not False:
-              raise SystemExit("global control no longer safely IDLE/COMPLETE")
-          active={k:v for k,v in s.items() if k.startswith("active_") and v not in (None,"",False,[],{})}
-          if active: raise SystemExit(f"global control acquired active state: {active}")
-          print("GLOBAL_SERIALIZATION_REAUTH_PASS")
-          PY
-
-      - name: Publish exact MICRO_CORRECTION_READY commit by predecessor CAS
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd staging
-          staged="$(git rev-parse HEAD)"
-          git push --force-with-lease=refs/heads/data/alabama-correction:50e834f05952a70f8e8fee3c7aee92994e252dc8 origin HEAD:refs/heads/data/alabama-correction
-          git fetch --no-tags origin "+refs/heads/data/alabama-correction:refs/remotes/origin/data/alabama-correction"
-          actual="$(git rev-parse refs/remotes/origin/data/alabama-correction)"
-          [[ "$actual" == "$staged" ]] || { echo "published correction branch mismatch: $actual" >&2; exit 1; }
-          printf '%s\n' "$actual" | tee /tmp/published-correction-head.txt
-
-      - name: Verify published micro-correction commit
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd staging
-          published="$(cat /tmp/published-correction-head.txt)"
-          git reset --hard "$published"
-          python tools/validate_data.py | tee /tmp/published-validate-data.txt
-          python tools/build_site_data.py . --check | tee /tmp/published-build-site-check.txt
-          [[ "$(git status --porcelain --untracked-files=all)" == "" ]] || { echo "published micro correction is not reproducibly clean" >&2; git status --short >&2; exit 1; }
+          cd verification
+          python tools/validate_data.py | tee /tmp/validate-data.txt
+          python tools/build_site_data.py . --apply | tee /tmp/build-site-apply.txt
+          [[ -z "$(git status --porcelain --untracked-files=all)" ]] || {
+            echo "published micro-correction is not reproducibly clean" >&2
+            git status --short >&2
+            exit 1
+          }
           echo "PUBLISHED_MICRO_CORRECTION_EQUIVALENCE_PASS"
 
-      - name: Upload MICRO_CORRECTION_READY authority
+      - name: Reconstruct and authenticate exact permanent-tool ready bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          ready={
+            "canonical_game_id":"CBBG-0028763",
+            "canonical_transaction_sha256":"365b804826c9dd54a48f4a0496ac2d57aacc3f91c69e4cbc1113d00f0a9ae1ad",
+            "changed_package_members":["opponents.csv","source-games.csv"],
+            "changed_paths":["data/canonical/games.csv","data/evidence/game-assertions.csv","schools/alabama/opponents.csv","schools/alabama/source-games.csv","site/data/teams/alabama.json"],
+            "correction_diff_sha256":"27de1f754a247f273498f8cdc89ced58959f90e764501223ed6496ad95229154",
+            "correction_freeze_sha256":"5ff6b1754e7834819250cfe0bc2903c14f534b256f20b1336977bfe9a369e1f5",
+            "correction_package_members":[],
+            "correction_source_game_ids":["ALARAW-01436"],
+            "integration_freeze_sha256":"30ab018b2055b56c39026ffa2c2b66af5864af2a0597ffcf7515e0a1faff4bb6",
+            "kind":"POST_PUBLICATION_MICRO_CORRECTION_READY",
+            "micro_correction_class":"ONE_GAME_IDENTITY_NORMALIZATION",
+            "origin_main_sha":"50e834f05952a70f8e8fee3c7aee92994e252dc8",
+            "owner_approval_model":"SINGLE_EXACT_PREVIEW_APPROVAL",
+            "owner_gate_1_required":False,
+            "package_member_sha256":{
+              "conferences.csv":"c67f7bb1542c74e7a297d03db366353f848418b9da81d9540b89a2767f7fa94d",
+              "notes.md":"accb9d9ec4c60e2a4cf37ace1ebb43392b5f87345de5df867905951b24423aa6",
+              "opponents.csv":"1670dfea415694555d8918e36e03d788ed8b50a72cbd9f0d404e77846648777e",
+              "source-games.csv":"e3d8ed07846d576e92a5789604d6d86b80c28f2e4ab8492df46e64b05f99143f",
+              "source-notes.md":"b3cddeb596c5917e62abd5a7a7830c79b2e1819d02c645d212f813ef77d6893d",
+              "venues.csv":"69a53090577e9ae01f17aba2aa80a071afadb5b10ade93080d17cbe6b67e4663"
+            },
+            "required_release_proofs":["EXACT_PR_HEAD","REPOSITORY_CI_PASS","EXACT_PREVIEW_PASS","EXPLICIT_OWNER_PREVIEW_APPROVAL","EXACT_TWO_PARENT_MERGE","EXACT_PRODUCTION_DEPLOYMENT","PRODUCTION_PUBLIC_JSON_EQUIVALENCE"],
+            "research_authority":{"digest":"56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978","ref":"miami-expansion-stage6-complete-0034"},
+            "schema_version":1,
+            "school_key":"alabama",
+            "sealed_apply_required":False,
+            "stage2_required":False,
+            "status":"MICRO_CORRECTION_READY",
+            "target_branch":"data/alabama-correction",
+            "target_sha":"87721bd560a145e60c597ebfb1db723e72630956"
+          }
+          raw=(json.dumps(ready,indent=2,sort_keys=True)+"\n").encode()
+          digest=hashlib.sha256(raw).hexdigest()
+          expected="b0682578f59c4a7f698cb2f38068d5935f5be6d9dda7382d5cce5a1c6078f940"
+          if digest!=expected: raise SystemExit(f"ready-byte reconstruction mismatch: {digest}")
+          Path("/tmp/alabama-micro-correction-ready.json").write_bytes(raw)
+          Path("/tmp/alabama-micro-correction-ready.json.sha256").write_text(digest+"  alabama-micro-correction-ready.json\n")
+          verification={
+            "status":"MICRO_CORRECTION_READY_VERIFIED",
+            "classification":"MECHANICAL_POST_PUBLICATION_VERIFIER_FAILURE_RECOVERED",
+            "original_run_id":44560578228,
+            "original_failed_command":"python tools/build_site_data.py . --check",
+            "failure_reason":"unsupported verifier flag --check",
+            "published_target_sha":"87721bd560a145e60c597ebfb1db723e72630956",
+            "origin_main_sha":"50e834f05952a70f8e8fee3c7aee92994e252dc8",
+            "ready_sha256":digest,
+            "integration_freeze_sha256":"30ab018b2055b56c39026ffa2c2b66af5864af2a0597ffcf7515e0a1faff4bb6",
+            "canonical_transaction_sha256":"365b804826c9dd54a48f4a0496ac2d57aacc3f91c69e4cbc1113d00f0a9ae1ad",
+            "canonical_game_id":"CBBG-0028763",
+            "mutation_replayed":False
+          }
+          Path("/tmp/alabama-micro-correction-verification.json").write_text(json.dumps(verification,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(verification,sort_keys=True))
+          PY
+
+      - name: Upload verified MICRO_CORRECTION_READY authority
         uses: actions/upload-artifact@v4
         with:
-          name: alabama-micro-correction-ready-0002
+          name: alabama-micro-correction-ready-verification-0002
           path: |
-            /tmp/alabama-integration-freeze.json
-            /tmp/alabama-integration-freeze.json.sha256
             /tmp/alabama-micro-correction-ready.json
             /tmp/alabama-micro-correction-ready.json.sha256
-            /tmp/alabama-micro-stage-commit.txt
-            /tmp/published-correction-head.txt
-            /tmp/alabama-micro-changed-paths.txt
-            /tmp/alabama-micro-dry-run.txt
-            /tmp/alabama-micro-apply.txt
-            /tmp/published-validate-data.txt
-            /tmp/published-build-site-check.txt
+            /tmp/alabama-micro-correction-verification.json
+            /tmp/actual-paths.txt
+            /tmp/validate-data.txt
+            /tmp/build-site-apply.txt
           if-no-files-found: error
           retention-days: 30
