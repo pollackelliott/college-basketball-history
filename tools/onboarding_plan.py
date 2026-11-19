@@ -1037,12 +1037,15 @@ def _package_only_correction_context(
             raise WorkflowError(
                 f"package-only correction package member changed: {name}"
             )
+    correction_diff_sha256 = str(
+        manifest.get("correction_diff_sha256", "")
+    ).strip()
+    if not re.fullmatch(r"[0-9a-f]{64}", correction_diff_sha256):
+        raise WorkflowError("invalid package-only correction diff SHA")
     return {
         "research_base_sha": research_base_sha,
         "correction_package_members": list(members),
-        "correction_diff_sha256": str(
-            manifest.get("correction_diff_sha256", "")
-        ).strip(),
+        "correction_diff_sha256": correction_diff_sha256,
     }
 
 
