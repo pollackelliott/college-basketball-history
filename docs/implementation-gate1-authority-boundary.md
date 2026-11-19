@@ -82,6 +82,8 @@ A semantic-drift failure is not permission to update the baseline. Restore the f
 
 If a future deterministic historical normalization can truly be proven from already-frozen information alone, it must be implemented as a **specific permanent machine rule with tests**. Ad hoc editing plus an assertion that the change is "deterministic" does not bypass the guard.
 
+The repository now has one such explicit permanent exception for **representation-only post-publication micro-corrections**. When `tools/correction_lifecycle.py stage --micro-correction` proves `ONE_GAME_IDENTITY_NORMALIZATION` or `PACKAGE_ONLY_CONFERENCES` under `docs/post-publication-correction-lifecycle.md`, the correction does not enter Gate 1 because the machine proof establishes that no protected historical-semantic field changed. Any failure of that proof returns the correction to this ordinary Gate 1 boundary; owner preference alone cannot classify a correction as micro.
+
 ## 4. Pre-Gate execution model
 
 The normal path after Phase 0 is:
