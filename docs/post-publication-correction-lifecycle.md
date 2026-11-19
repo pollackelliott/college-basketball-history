@@ -145,9 +145,7 @@ This writes the ordinary ignored `.onboarding/<school>/integration-freeze.json` 
 A staged correction may bypass Stage 2, Owner Gate 1, pre-seal/seal, and sealed apply only when the permanent correction tool proves one of these exact machine classes with `--micro-correction`:
 
 1. **ONE_GAME_IDENTITY_NORMALIZATION** — exactly one existing source-game row changes; there are no additions or deletions; the only source fields changed are `normalized_opponent_key` and/or `normalized_opponent_name`; the historical semantic snapshot is identical before/after; and the only changed package files are `source-games.csv` plus, optionally, exactly one supporting row replacement in `opponents.csv`.
-2. **PACKAGE_ONLY_CONFERENCES** — the already-supported package-only correction changes exactly `conferences.csv`, changes no source-game row, carries no correction source IDs, and preserves the source semantic snapshot exactly.
-
-The tool emits ignored `.onboarding/<school>/micro-correction-ready.json` only after `stage --apply --commit --micro-correction` proves the exact current-main parent, correction Freeze, Integration Freeze, target commit, changed paths, package-member hashes, correction diff hash, and fast-path class.
+The tool emits ignored `.onboarding/<school>/micro-correction-ready.json` only after `stage --apply --commit --micro-correction` proves the exact current-main parent, correction Freeze, Integration Freeze, one-game source identity delta, the existing source-scoped canonical/assertion transaction, exact frozen package bytes after that transaction, rebuilt public JSON, target commit, changed paths, package-member hashes, correction diff hash, and fast-path class.
 
 The release sequence is:
 
@@ -165,7 +163,7 @@ CORRECTION_RESEARCH_FROZEN
 
 There is no Stage 2 census, recommendation map, Owner Gate 1, cryptographic seal, or sealed apply on this path. Eligibility itself proves that no protected historical-semantic field is being adjudicated. The single owner approval is the exact-Preview publication approval immediately before merge.
 
-The fast path is fail-closed. Any date, score, result, overtime, H/A/N, venue/location, event/game type, postseason round, literal source evidence, game inclusion/identity, source-game addition/deletion, new shared/global reference, second source-game row, extra supporting opponent row, or undeclared package member disqualifies the correction and returns it to the ordinary full correction lifecycle.
+The fast path is fail-closed. Any date, score, result, overtime, H/A/N, venue/location, event/game type, postseason round, literal source evidence, game inclusion/identity, source-game addition/deletion, new shared/global reference, second source-game row, multi-game literal-label population, canonical collision, discrepancy-producing reconciliation, extra supporting opponent row, or undeclared package member disqualifies the correction and returns it to the ordinary full correction lifecycle. Package-only `conferences.csv` corrections remain supported by the ordinary correction lifecycle but are **not** micro-eligible until a permanent deterministic `conference-membership.csv` publication mutation exists.
 
 A micro-correction is not a serialized school Implementation lane and does not enter the remote Stage 2 control plane. It may proceed only while global Implementation control is safely `IDLE / COMPLETE` with no recovery condition, reauthenticated again immediately before merge. Protected `main` is never mutated directly.
 
