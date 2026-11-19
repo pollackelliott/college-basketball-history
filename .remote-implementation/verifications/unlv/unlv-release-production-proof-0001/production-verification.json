@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "68926bb49a7d220ab7d3cb505b9d372dd179b7a10a85700b660f7c97bcda27c0",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "13bf5c01505c2ef312a16875e8657bdc884eb52c",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "pr_number": 658,
+  "production_deployment_id": 7904694449,
+  "production_json_checked_count": 89,
+  "production_proof": true,
+  "request_id": "unlv-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "status": "COMPLETE"
+}

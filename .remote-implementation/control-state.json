@@ -1404,7 +1404,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/unlv/unlv-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "68926bb49a7d220ab7d3cb505b9d372dd179b7a10a85700b660f7c97bcda27c0",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "13bf5c01505c2ef312a16875e8657bdc884eb52c",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1414,7 +1414,7 @@
     "production_deployment_id": 7904694449,
     "production_json_checked_count": 89,
     "protected_main_sha": "13bf5c01505c2ef312a16875e8657bdc884eb52c",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "unlv-release-production-proof-0001",
     "school_key": "unlv"
   },
