@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "unlv-release-preview-verify-0001",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "school_key": "unlv",
+  "previous_control_state_commit": "ad6ce4dc9adce748fbd748d2bb3bc6bc66f10cf2",
+  "previous_control_state_sha256": "12da4b90455513f7a43459f676ffade09b39ad2b6211864bc5c18b8f90a74f6e",
+  "expected_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "ccc04ac4ca5cd1651e82922749c4255e8460a08d214cde1b248c7da7a0421cf3"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "63e00256937f1c21fdb40882d9053faa13a63723a6f8d279670913c555566202"
+  },
+  "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
+  "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
+  "pr_number": 658,
+  "creation_provenance": {
+    "origin": "Same serialized UNLV ordinary original-school Implementation lane — fresh release-readiness continuation",
+    "authorization": "Continuation of the already owner-authorized UNLV release-preparation phase after unlv-release-readiness-0001 independently fresh-verified PASS. PR #658 was created through the authorized GitHub connector from the exact fresh readiness packet and is open, non-draft, base main, head data/unlv-onboarding at exact sealed head fdaaec65b68f217c337fb12fa087d7d7746c755b with the exact packet title/body. This request may only verify exact PR-head checks, clean mergeability, and the exact Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
