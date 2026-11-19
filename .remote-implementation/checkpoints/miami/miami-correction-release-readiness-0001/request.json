@@ -1,0 +1,49 @@
+{
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly authorized this bounded release-readiness phase. This request authorizes exactly one read-only RELEASE_READINESS operation against the independently fresh-verified correction successor 7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a. It grants no release PR creation, Preview verification, Owner Gate 2 approval, merge, Production proof, recovery, tracked basketball mutation, Miami expansion Stage 7, maintenance, or unrelated authority.",
+    "origin": "Miami post-publication package-only conference correction - release readiness after exact fresh-verified sealed apply"
+  },
+  "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "c01663393b38d97cd904f5a6e53a24e6a9e9aff9",
+  "previous_control_state_sha256": "246602f2d1ae06d599cd692ecf7e57dd262ccf4fa04399067229dc706aa29c97",
+  "release_manifest_sha256": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+  "request_id": "miami-correction-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/miami/miami-correction-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "b7be21b901d89888da73d97471cf7ae06ba3995e206e5130239c3ccbda24c4f3"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-correction-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "4a5e93a952bc7684d6a49d3d23d5f563b124b19aa074d7d3ba684f288453b032"
+  },
+  "target_branch": "data/miami-correction",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a"
+}

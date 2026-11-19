@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "apply_request_id": "miami-correction-stage2-sealed-apply-0001",
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "changed_path_count": 2,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "release_manifest_sha256": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+  "school_key": "miami",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "b7be21b901d89888da73d97471cf7ae06ba3995e206e5130239c3ccbda24c4f3",
+  "target_branch": "data/miami-correction",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "4a5e93a952bc7684d6a49d3d23d5f563b124b19aa074d7d3ba684f288453b032",
+  "writeahead_sha256": "efa90d42cf5b736f3990f19991a8a26fa9cbd36f48e513de7b60b39f592364af"
+}
