@@ -324,6 +324,7 @@ def correction_gate_kwargs_from_manifest(
     if expansion_proof is not None:
         if (
             summary.get("correction_transaction_kind") in BOUNDED_CORRECTION_KINDS
+            or summary.get("correction_transaction_kind") == PACKAGE_ONLY_CORRECTION_KIND
             or summary.get("already_public") is not True
             or not isinstance(expansion_proof, dict)
             or expansion_proof.get("mode") != EXPANSION_MODE
