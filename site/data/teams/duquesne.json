@@ -5538,7 +5538,7 @@
       "opponent_key": "unlv",
       "opponent_name": "UNLV",
       "current_d1": true,
-      "public_page_enabled": false,
+      "public_page_enabled": true,
       "current_conference": {
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
@@ -37019,7 +37019,7 @@
       "opponent_key": "unlv",
       "opponent_name": "UNLV",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 83,
       "opponent_score": 86,
       "score_known": true,
@@ -41869,7 +41869,7 @@
       "opponent_key": "unlv",
       "opponent_name": "UNLV",
       "opponent_current_d1": true,
-      "opponent_public_page_enabled": false,
+      "opponent_public_page_enabled": true,
       "team_score": 54,
       "opponent_score": 67,
       "score_known": true,

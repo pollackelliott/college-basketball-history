@@ -25,6 +25,7 @@ from integration_freeze_guard import (  # noqa: E402
     build_source_game_semantic_snapshot,
     semantic_snapshot_sha256,
 )
+from game_assertion_store import read_game_assertions  # noqa: E402
 from program_history import (  # noqa: E402
     BEST_FINISH_LABELS,
     accomplishment_row_issues,
@@ -935,21 +936,20 @@ class ProgramHistoryScopeTests(unittest.TestCase):
         self.assertEqual(public[0]["start_season"], "2000-2001")
         self.assertEqual(source[0]["start_season"], "1990-1991")
 
-    def test_games_outside_publication_history_are_reciprocal_only(self):
-        with (ROOT / "data/reference/programs.csv").open(
+    def _assert_games_outside_publication_history_are_reciprocal_only(
+        self, repo_root: Path
+    ) -> None:
+        with (repo_root / "data/reference/programs.csv").open(
             encoding="utf-8-sig", newline=""
         ) as f:
             programs = {
                 row["program_key"]: row for row in csv.DictReader(f)
             }
-        with (ROOT / "data/canonical/games.csv").open(
+        with (repo_root / "data/canonical/games.csv").open(
             encoding="utf-8-sig", newline=""
         ) as f:
             games = list(csv.DictReader(f))
-        with (ROOT / "data/evidence/game-assertions.csv").open(
-            encoding="utf-8-sig", newline=""
-        ) as f:
-            assertions = list(csv.DictReader(f))
+        _, assertions = read_game_assertions(repo_root)
 
         assertion_sources = {}
         for assertion in assertions:
@@ -997,6 +997,138 @@ class ProgramHistoryScopeTests(unittest.TestCase):
                 sources = assertion_sources.get(game["canonical_game_id"], set())
                 self.assertNotIn(key, sources, game["canonical_game_id"])
                 self.assertTrue(sources, game["canonical_game_id"])
+
+    def _write_publication_history_reciprocal_fixture(
+        self,
+        repo_root: Path,
+        *,
+        assertion_source: str | None,
+        shard_only: bool = True,
+    ) -> None:
+        def write_csv(
+            path: Path,
+            fieldnames: list[str],
+            rows: list[dict[str, str]],
+        ) -> None:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(
+                    handle,
+                    fieldnames=fieldnames,
+                    lineterminator="\n",
+                )
+                writer.writeheader()
+                writer.writerows(rows)
+
+        write_csv(
+            repo_root / "data/reference/programs.csv",
+            [
+                "program_key",
+                "public_page_enabled",
+                "history_start_season",
+                "history_scope_intervals",
+                "history_coverage_status",
+                "program_inception_season",
+            ],
+            [
+                {
+                    "program_key": "program-a",
+                    "public_page_enabled": "Yes",
+                    "history_start_season": "1970-1971",
+                    "history_scope_intervals": "",
+                    "history_coverage_status": "LEGACY_TOP_LEVEL_ONLY",
+                    "program_inception_season": "",
+                }
+            ],
+        )
+        write_csv(
+            repo_root / "data/canonical/games.csv",
+            [
+                "canonical_game_id",
+                "season_label",
+                "team_a_key",
+                "team_b_key",
+            ],
+            [
+                {
+                    "canonical_game_id": "CBBG-EXCLUDED",
+                    "season_label": "1965-1966",
+                    "team_a_key": "program-a",
+                    "team_b_key": "program-b",
+                }
+            ],
+        )
+        assertion_fields = [
+            "assertion_id",
+            "canonical_game_id",
+            "source_program_key",
+            "source_game_id",
+        ]
+        assertion_rows = (
+            [
+                {
+                    "assertion_id": "ASSERT-1",
+                    "canonical_game_id": "CBBG-EXCLUDED",
+                    "source_program_key": assertion_source,
+                    "source_game_id": "SOURCE-1",
+                }
+            ]
+            if assertion_source is not None
+            else []
+        )
+        write_csv(
+            repo_root / "data/evidence/game-assertions.csv",
+            assertion_fields,
+            [] if shard_only else assertion_rows,
+        )
+        if shard_only and assertion_rows:
+            write_csv(
+                repo_root / "data/evidence/game-assertions-0002.csv",
+                assertion_fields,
+                assertion_rows,
+            )
+
+    def test_games_outside_publication_history_are_reciprocal_only(self):
+        self._assert_games_outside_publication_history_are_reciprocal_only(ROOT)
+
+    def test_publication_history_reciprocal_invariant_reads_numbered_assertion_shards(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._write_publication_history_reciprocal_fixture(
+                repo,
+                assertion_source="program-b",
+            )
+            self._assert_games_outside_publication_history_are_reciprocal_only(repo)
+
+    def test_publication_history_reciprocal_invariant_fails_without_any_assertion(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._write_publication_history_reciprocal_fixture(
+                repo,
+                assertion_source=None,
+            )
+            with self.assertRaisesRegex(AssertionError, "CBBG-EXCLUDED"):
+                self._assert_games_outside_publication_history_are_reciprocal_only(
+                    repo
+                )
+
+    def test_publication_history_reciprocal_invariant_rejects_target_assertion(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._write_publication_history_reciprocal_fixture(
+                repo,
+                assertion_source="program-a",
+            )
+            with self.assertRaisesRegex(AssertionError, "CBBG-EXCLUDED"):
+                self._assert_games_outside_publication_history_are_reciprocal_only(
+                    repo
+                )
 
 
 class AccomplishmentTests(unittest.TestCase):

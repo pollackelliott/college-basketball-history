@@ -452,7 +452,12 @@ class PackageOnlyCorrectionTests(unittest.TestCase):
                 self.corrected_conferences(),
             )
             manifest = self.package_manifest(root)
-            pre = manifest["pre_correction_source_semantic_guard"]["snapshot"]
+            pre = json.loads(
+                json.dumps(
+                    manifest["pre_correction_source_semantic_guard"]["snapshot"]
+                )
+            )
+            manifest["pre_correction_source_semantic_guard"]["snapshot"] = pre
             pre["rows"]["MIA-BASE-1"]["game_date"] = "1966-01-02"
             manifest["pre_correction_source_semantic_guard"][
                 "snapshot_sha256"
