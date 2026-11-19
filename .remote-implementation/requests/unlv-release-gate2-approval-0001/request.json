@@ -1,0 +1,66 @@
+{
+  "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": true,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner expressly answered 'Approved. Proceed' after exact UNLV PR #658 Preview verification, exact sealed head fdaaec65b68f217c337fb12fa087d7d7746c755b and Preview deployment 7902086072. This authorizes the complete repository-defined final release phase through fresh Gate 2 approval, connector merge only from the exact fresh-verified packet, and exact Production proof with independent verification. This Gate 2 approval request itself is read-only and does not merge or publish; all prior authority constraints persist.",
+    "origin": "Same serialized UNLV ordinary original-school Implementation lane — exact Owner Gate 2 approval"
+  },
+  "expected_protected_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "unlv-release-production-proof-0001"
+  },
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "owner_gate_2_approval": {
+    "approval_basis": "Owner explicitly responded 'Approved. Proceed' immediately after presentation of the independently fresh-verified UNLV Owner Gate 2 packet for PR #658, exact head fdaaec65b68f217c337fb12fa087d7d7746c755b, Preview deployment 7902086072 at https://college-basketball-history-jvm3vibxg-elliott-pollacks-projects.vercel.app, and explicit notice that this exact Preview required affirmative approval. This approves only the exact presented Preview and authorizes the repository-defined guarded final phase through fresh Gate 2 verification, exact packet-bound merge, exact Production proof and independent completion verification, subject to all existing identity and safety safeguards.",
+    "approved": true,
+    "pr_head_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+    "pr_number": 658,
+    "preview_checkpoint_sha256": "b8f9192cdc9486f5489bb2fc35441f4dddae339dd1b6b0a2301c8e7d44e8f7e6",
+    "preview_deployment_id": 7902086072,
+    "preview_url": "https://college-basketball-history-jvm3vibxg-elliott-pollacks-projects.vercel.app",
+    "preview_verification_sha256": "693f7691f430113338b905f1cad02b7a41ba10e53bd8b70d898fd5db43d4a97b"
+  },
+  "pr_number": 658,
+  "preview_deployment_id": 7902086072,
+  "preview_url": "https://college-basketball-history-jvm3vibxg-elliott-pollacks-projects.vercel.app",
+  "previous_control_state_commit": "daa99219acde3f6b442ca64b3dc08add28a403f0",
+  "previous_control_state_sha256": "6279164196384dbce9b853f1cc1d3a888e35137b48e32dacbdf9ca36858659b1",
+  "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-release-preview-verify-0002/checkpoint-manifest.json",
+    "sha256": "b8f9192cdc9486f5489bb2fc35441f4dddae339dd1b6b0a2301c8e7d44e8f7e6"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-release-preview-verify-0002/release-preview-verification.json",
+    "sha256": "693f7691f430113338b905f1cad02b7a41ba10e53bd8b70d898fd5db43d4a97b"
+  },
+  "request_id": "unlv-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b"
+}
