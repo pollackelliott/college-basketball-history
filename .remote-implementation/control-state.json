@@ -702,7 +702,7 @@
     "unlv-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
-  "active_lock_commit": null,
+  "active_lock_commit": "6f3a536cb5b31f6ab06b935d33e0b2c962fcdc79",
   "active_lock_owner": "github-actions:44441307040:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
