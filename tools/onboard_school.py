@@ -333,6 +333,20 @@ def correction_gate_kwargs_from_manifest(
             raise WorkflowError("invalid sealed expansion site proof in release manifest")
         return {"expansion_site_proof": expansion_proof}
     kind = summary.get("correction_transaction_kind")
+    if kind == PACKAGE_ONLY_CORRECTION_KIND:
+        proof = execution.get("correction_site_nonregression", {})
+        if (
+            manifest.get("school_key") != school_key
+            or not isinstance(proof, dict)
+            or proof.get("mode") != PACKAGE_ONLY_MODE
+            or proof.get("school_key") != school_key
+            or summary.get("correction_package_members")
+            != list(PACKAGE_ONLY_CORRECTION_MEMBERS)
+        ):
+            raise WorkflowError(
+                "invalid sealed package-only correction proof in release manifest"
+            )
+        return {"correction_site_proof": proof}
     if kind not in BOUNDED_CORRECTION_KINDS:
         return {}
     proof = execution.get("correction_site_nonregression", {})
@@ -500,7 +514,15 @@ def run_gates(
         if label == "site_completeness" and (
             correction_site_proof is not None or expansion_site_proof is not None
         ):
-            if correction_site_proof is not None and not scoped_correction_source_ids:
+            package_only_site_proof = (
+                correction_site_proof is not None
+                and correction_site_proof.get("mode") == PACKAGE_ONLY_MODE
+            )
+            if (
+                correction_site_proof is not None
+                and not scoped_correction_source_ids
+                and not package_only_site_proof
+            ):
                 raise WorkflowError("correction site proof lacks source identity")
             # The independent full gate STILL runs and emits its complete report.
             failure = None
@@ -516,8 +538,16 @@ def run_gates(
             independent = json.loads(report_path.read_text(encoding="utf-8"))
             full = capture_correction_site_report(repo, school_key)
             if correction_site_proof is not None:
-                verify_correction_site_report(full, correction_site_proof, school_key)
-                prefix = "CORRECTION NONREGRESSION PASS"
+                if package_only_site_proof:
+                    verify_package_only_site_report(
+                        full, correction_site_proof, school_key
+                    )
+                    prefix = "PACKAGE-ONLY CORRECTION NONREGRESSION PASS"
+                else:
+                    verify_correction_site_report(
+                        full, correction_site_proof, school_key
+                    )
+                    prefix = "CORRECTION NONREGRESSION PASS"
             else:
                 verify_expansion_site_report(full, expansion_site_proof or {}, school_key)
                 prefix = "ALL-HISTORY EXPANSION NONREGRESSION PASS"
