@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "67218c1357edb7cf912395d05afa28a3b11df981f3b9dd5b93271d9a2aacab2e",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": null,
+  "pr_created": false,
+  "preview_request_id": null,
+  "preview_verified": false,
+  "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "readiness_proof_sha256": "cc95b8804c18a030082e9dbaaa14f359ada625e2b7c7bcf2bc97e90ed7a8b373",
+  "release_pr_packet_sha256": null,
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "miami-correction-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "target_branch": "data/miami-correction",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "tracked_mutation": "NONE"
+}
