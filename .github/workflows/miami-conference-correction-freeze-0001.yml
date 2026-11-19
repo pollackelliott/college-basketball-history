@@ -1,0 +1,176 @@
+name: Miami conference correction freeze 0001
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/miami-conference-correction-freeze-0001.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact transport head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Authenticate protected-main baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          actual="$(git rev-parse origin/main)"
+          expected="301d9eb4a323a5d393f0e20a1508be6565376553"
+          test "$actual" = "$expected"
+          test "$(git diff --name-only "$expected"...HEAD)" = ".github/workflows/miami-conference-correction-freeze-0001.yml"
+
+      - name: Materialize exact six-file candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/miami-correction-candidate
+          mkdir -p /tmp/miami-correction-candidate
+          cp schools/miami/source-games.csv /tmp/miami-correction-candidate/
+          cp schools/miami/opponents.csv /tmp/miami-correction-candidate/
+          cp schools/miami/venues.csv /tmp/miami-correction-candidate/
+          cp schools/miami/notes.md /tmp/miami-correction-candidate/
+          cp schools/miami/source-notes.md /tmp/miami-correction-candidate/
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          src = Path("schools/miami/conferences.csv")
+          dst = Path("/tmp/miami-correction-candidate/conferences.csv")
+          with src.open(newline="", encoding="utf-8") as f:
+              reader = csv.DictReader(f)
+              fields = reader.fieldnames
+              rows = list(reader)
+
+          assert fields == [
+              "source_program_key","start_season","end_season","conference_key",
+              "conference_name","membership_type","ongoing","basis","notes"
+          ]
+          assert rows[0]["start_season"] == "1948-1949"
+          assert rows[0]["end_season"] == "1970-1971"
+          assert rows[0]["conference_key"] == "independent"
+
+          basis = (
+              "Miami ALL_HISTORY_EXPANSION Stage 6 checkpoint 0034 accepted "
+              "pre-hiatus conference chronology."
+          )
+          replacement = [
+              {
+                  "source_program_key":"miami",
+                  "start_season":"1948-1949",
+                  "end_season":"1953-1954",
+                  "conference_key":"independent",
+                  "conference_name":"Independent",
+                  "membership_type":"independent",
+                  "ongoing":"False",
+                  "basis":basis,
+                  "notes":"Accepted Stage 6 correction authority; Independent through 1953-54.",
+              },
+              {
+                  "source_program_key":"miami",
+                  "start_season":"1954-1955",
+                  "end_season":"1964-1965",
+                  "conference_key":"florida-intercollegiate-conference",
+                  "conference_name":"Florida Intercollegiate Conference",
+                  "membership_type":"conference",
+                  "ongoing":"False",
+                  "basis":basis,
+                  "notes":"Accepted Stage 6 correction authority; Florida Intercollegiate Conference from 1954-55 through 1964-65.",
+              },
+              {
+                  "source_program_key":"miami",
+                  "start_season":"1965-1966",
+                  "end_season":"1970-1971",
+                  "conference_key":"independent",
+                  "conference_name":"Independent",
+                  "membership_type":"independent",
+                  "ongoing":"False",
+                  "basis":basis,
+                  "notes":"Accepted Stage 6 correction authority; Independent from 1965-66 through pre-hiatus 1970-71; Miami did not field a varsity team from 1971-72 through 1984-85.",
+              },
+          ]
+          out = replacement + rows[1:]
+          with dst.open("w", newline="", encoding="utf-8") as f:
+              writer = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
+              writer.writeheader()
+              writer.writerows(out)
+          PY
+          (
+            cd /tmp/miami-correction-candidate
+            zip -q /tmp/miami-conference-correction-candidate.zip               source-games.csv opponents.csv venues.csv conferences.csv notes.md source-notes.md
+          )
+
+      - name: Permanent report-only correction freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/correction_lifecycle.py freeze miami             /tmp/miami-conference-correction-candidate.zip             --research-base 301d9eb4a323a5d393f0e20a1508be6565376553             --scope package-field-correction             --package-member conferences.csv             --research-authority-ref miami-expansion-stage6-complete-0034             --research-authority-digest 56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978             --report-json /tmp/miami-conference-correction-report.json | tee /tmp/miami-conference-correction-report.txt
+
+      - name: Acknowledge exact diff and create Correction Freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          diff_sha="$(python - <<'PY'
+          import json
+          print(json.load(open("/tmp/miami-conference-correction-report.json"))["correction_diff_sha256"])
+          PY
+          )"
+          python tools/correction_lifecycle.py freeze miami             /tmp/miami-conference-correction-candidate.zip             --research-base 301d9eb4a323a5d393f0e20a1508be6565376553             --scope package-field-correction             --package-member conferences.csv             --research-authority-ref miami-expansion-stage6-complete-0034             --research-authority-digest 56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978             --expected-diff-sha256 "$diff_sha"             --output /tmp/miami-conference-correction-research-frozen.zip             | tee /tmp/miami-conference-correction-freeze.txt
+          sha256sum /tmp/miami-conference-correction-research-frozen.zip             > /tmp/miami-conference-correction-research-frozen.sha256
+
+      - name: Authenticate frozen manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, zipfile
+          p="/tmp/miami-conference-correction-research-frozen.zip"
+          with zipfile.ZipFile(p) as z:
+              m=json.loads(z.read("correction-freeze.json"))
+          assert m["status"] == "CORRECTION_RESEARCH_FROZEN"
+          assert m["school_key"] == "miami"
+          assert m["research_base_sha"] == "301d9eb4a323a5d393f0e20a1508be6565376553"
+          assert m["scope"] == "package-field-correction"
+          assert m["correction_mode"] == "PACKAGE_ONLY_FIELD"
+          assert m["correction_package_members"] == ["conferences.csv"]
+          assert m["correction_source_game_ids"] == []
+          assert m["research_authority"] == {
+              "ref":"miami-expansion-stage6-complete-0034",
+              "digest":"56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978",
+          }
+          changed=[
+              k for k,v in m["correction_diff"]["members"].items()
+              if v["changed"]
+          ]
+          assert changed == ["conferences.csv"], changed
+          assert m["scoped_acceptance"]["status"] == "PASS"
+          print(json.dumps({
+              "status":m["status"],
+              "correction_mode":m["correction_mode"],
+              "changed_members":changed,
+              "correction_diff_sha256":m["correction_diff_sha256"],
+              "scoped_acceptance":m["scoped_acceptance"]["status"],
+          }, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload Miami Correction Freeze authority
+        uses: actions/upload-artifact@v4
+        with:
+          name: miami-conference-correction-freeze-0001
+          if-no-files-found: error
+          path: |
+            /tmp/miami-conference-correction-research-frozen.zip
+            /tmp/miami-conference-correction-research-frozen.sha256
+            /tmp/miami-conference-correction-report.json
+            /tmp/miami-conference-correction-report.txt
+            /tmp/miami-conference-correction-freeze.txt
+          retention-days: 30
