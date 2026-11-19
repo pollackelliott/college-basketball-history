@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "apply_request_id": "unlv-stage2-sealed-apply-0001",
+  "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
+  "changed_path_count": 95,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
+  "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
+  "school_key": "unlv",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "034d8aa4cd0f2129f2347dc40eb365ec97c94d0f9b1cfa14774321a77ac0f4db",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "13e4d3401977a9275bf8aa62b772d814cb9d50ba7ff6adadbc3792130f4107d6",
+  "writeahead_sha256": "8e32c984a6bbc34cea6f1a32ef2615074bb19a968c80b58b654ac7942ec1e969"
+}
