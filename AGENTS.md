@@ -118,9 +118,7 @@ For a bounded correction to an already-published school, read
 `docs/post-publication-correction-lifecycle.md`. That workflow is additive and isolated:
 do not route a new school through it, do not weaken ordinary new-school Research acceptance
 or Phase 0 behavior, and do not turn a bounded correction into a whole-school re-research
-merely because current policy exposes unchanged legacy debt. Correction freeze authority is
-the exact accepted delta against an immutable published baseline; current-main staging and
-all downstream Gate 1 / sealed apply / Preview / Production-proof safeguards remain required.
+merely because current policy exposes unchanged legacy debt. Correction freeze authority is the exact accepted delta against an immutable published baseline. The ordinary correction path retains current-main staging and downstream Gate 1 / sealed apply / Preview / Production-proof safeguards. A correction may bypass Stage 2, Gate 1 and sealing only through the permanent machine-checked micro-correction rule in `docs/post-publication-correction-lifecycle.md`: exactly one representation-only opponent-normalization source row (plus at most its one supporting opponents row), or the supported package-only `conferences.csv` correction. That fast path still requires an exact current-main patch, normal PR/CI, exact PR-head Preview, one explicit owner Preview approval, exact merge proof and Production proof.
 
 Research lanes must read `data/reference/program-top-level-scope.csv` at startup. When the
 target school is present and authoritative evidence encountered during ordinary research
