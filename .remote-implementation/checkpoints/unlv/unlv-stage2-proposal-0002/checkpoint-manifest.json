@@ -1,0 +1,263 @@
+{
+  "action_counts": {
+    "APPLY_ACCOMPLISHMENT_PATCH": 1,
+    "ENABLE_PUBLIC_PAGE": 1,
+    "KEEP_CANONICAL": 26,
+    "LEAVE_UNRESOLVED": 3,
+    "MATCH_CANONICAL:CBBG-0173547": 1,
+    "MATCH_CANONICAL:CBBG-0179566": 1,
+    "MATCH_CANONICAL:CBBG-0195784": 1,
+    "MATCH_CANONICAL:CBBG-0210904": 1,
+    "NOT_APPLICABLE": 7,
+    "USE_SOURCE": 4
+  },
+  "approved_plan_hash_preview": "adc56d43c3d16b48042835075d57523f9a4169649eb2446ee1bd6f9999c38668",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "79c3a7eb7490b1c6c7516b65a10859a3df7edbc4f8cc8adc5a73af82d9a3d3ea",
+    "implementation-stage2-status.json": "9d313d37af4f6722516915ab71de8f485fb94622d466b48fd5dcf00aadaaab9e",
+    "last-rehearsal-site-gate.json": "32d318a3c744291dd6b1ff9eda2b280f076c563912c32c81255223bcee5bf8de",
+    "plan.json": "ee25baaf1f8c8dbb5480417600aa33362660d5364d602ca9dafbd7cd7ed98171",
+    "review.csv": "5cde9ecfc3598b25dcf2410eda5207d5859065eae7c7b60c772a2f00da13d9ad",
+    "review.md": "6db401213b0d1c617999d9bfca551dd568398201e26dd7c86dc9cdf496572acf"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "79c3a7eb7490b1c6c7516b65a10859a3df7edbc4f8cc8adc5a73af82d9a3d3ea",
+    "implementation-stage2-status.json": "0291bde8bfeab9467332c36ac37f8ea47b0407d00476fccd74aeb79984568084",
+    "last-rehearsal-site-gate.json": "32d318a3c744291dd6b1ff9eda2b280f076c563912c32c81255223bcee5bf8de",
+    "plan.json": "301a98e329e0417f2ca1b28b31995fd3f6eb21d33e1cec18c9b0eb94929310b3",
+    "review.csv": "5cde9ecfc3598b25dcf2410eda5207d5859065eae7c7b60c772a2f00da13d9ad",
+    "review.md": "20a5f03a5f7a405718ce9dd477aa551b285d39d232214968b779d9b2583ae494"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "PASS",
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 12,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0179574",
+          "fixed_confident_source_game_ids": [
+            "unlv-1987-88-028"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "unlv-1987-88-019"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0210905",
+          "fixed_confident_source_game_ids": [
+            "unlv-1979-80-027"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "unlv-1979-80-022"
+          ]
+        }
+      ],
+      "count": 2,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ],
+  "changed_path_count": 95,
+  "command_exit_code": 0,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "runtime_decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "unlv",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 11,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 11,
+      "discrepancy": 29,
+      "identity": 4,
+      "publication": 1
+    },
+    "decision_count": 46,
+    "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "discrepancies_to_add": 29,
+    "existing_game_matches": 826,
+    "identity_cardinality_constraints": 2,
+    "new_canonical_games": 1248,
+    "plan_path": ".onboarding/unlv/plan.json",
+    "review_path": ".onboarding/unlv/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 26,
+      "LEAVE_UNRESOLVED": 3,
+      "MATCH_CANONICAL:CBBG-0173547": 1,
+      "MATCH_CANONICAL:CBBG-0179566": 1,
+      "MATCH_CANONICAL:CBBG-0195784": 1,
+      "MATCH_CANONICAL:CBBG-0210904": 1,
+      "NOT_APPLICABLE": 7,
+      "USE_SOURCE": 4
+    },
+    "approved_plan_hash_preview": "adc56d43c3d16b48042835075d57523f9a4169649eb2446ee1bd6f9999c38668",
+    "changed_path_count": 95
+  },
+  "protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "recommendation_map": {
+    "action_counts": {
+      "APPLY_ACCOMPLISHMENT_PATCH": 1,
+      "ENABLE_PUBLIC_PAGE": 1,
+      "KEEP_CANONICAL": 26,
+      "LEAVE_UNRESOLVED": 3,
+      "MATCH_CANONICAL:CBBG-0173547": 1,
+      "MATCH_CANONICAL:CBBG-0179566": 1,
+      "MATCH_CANONICAL:CBBG-0195784": 1,
+      "MATCH_CANONICAL:CBBG-0210904": 1,
+      "NOT_APPLICABLE": 7,
+      "USE_SOURCE": 4
+    },
+    "approved_plan_hash_preview": "adc56d43c3d16b48042835075d57523f9a4169649eb2446ee1bd6f9999c38668",
+    "decision_count": 46,
+    "path": "/tmp/remote-stage2-proposal-map-crxqoifz/recommendation-map.json",
+    "sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/unlv/unlv-stage2-proposal-0002/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/requests/unlv-stage2-current-main-refresh-0002/recommendation-map.json",
+  "recommendation_map_sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395",
+  "request_id": "unlv-stage2-proposal-0002",
+  "request_sha256": "fab34550251d53291a51f2432062fdac295dae86de4172b6860dd8ef7b822c01",
+  "runtime_commit_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "runtime_decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+    "tools/onboard_school.py": "d58ad535c2df607c17d4d4f9d0310d7001e329c15d5d51d560da5d2421dc7b63",
+    "tools/onboarding_hardening.py": "9229f31cb2885b38e7ba6940d75d325d9b6e7ecafee46c7119edd8a640ddb28f",
+    "tools/onboarding_plan.py": "9d91428d6613569492ca5b1776f2888bf13c6809d8b92bde4b3b4f42ecb47499",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "site_diagnostic": {
+    "counts": {
+      "invalid_home_venue_exception_marker_rows": 0,
+      "lower_level_postseason_researched_nonblocking": 2,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 43,
+      "postseason_missing_venue": 2,
+      "public_gap_rows": 80,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2078,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 37
+    },
+    "errors": [],
+    "examples": {
+      "lower_level_postseason_researched_nonblocking": [
+        "CBBG-0212833",
+        "CBBG-0212834"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0212869",
+        "CBBG-0212870"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0013284",
+        "CBBG-0048264",
+        "CBBG-0049521",
+        "CBBG-0049808",
+        "CBBG-0066497",
+        "CBBG-0066587",
+        "CBBG-0110303",
+        "CBBG-0115112",
+        "CBBG-0134942",
+        "CBBG-0140606",
+        "CBBG-0161568",
+        "CBBG-0207260"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0212833",
+        "CBBG-0212834"
+      ],
+      "unknown_site_type": [
+        "CBBG-0211694",
+        "CBBG-0211704",
+        "CBBG-0211710",
+        "CBBG-0211712",
+        "CBBG-0211716",
+        "CBBG-0211721",
+        "CBBG-0211729",
+        "CBBG-0211747",
+        "CBBG-0211756",
+        "CBBG-0211781",
+        "CBBG-0211790",
+        "CBBG-0211798"
+      ]
+    },
+    "history_start_season": "1969-1970",
+    "school_key": "unlv",
+    "source_site_counts": {
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 80,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 43,
+      "postseason_missing_venue": 2,
+      "researched_gap_rows": 80,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "unaccounted_gap_rows": 0,
+      "unknown_site_type": 37
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2078
+    },
+    "status": "PASS",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/unlv/unlv-stage2-census-0004/checkpoint-manifest.json",
+  "stage2_authority_sha256": "3bf3f262600b512326b107fabbd65a899f6aa27c5b2fbd4de0a074a2e8b974ce",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+  "target_tree_sha": "2dedf7d080aa725bae3404fdf951b23acfee19a9",
+  "tracked_mutation_proof": {
+    "after_head_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+    "after_status": "",
+    "after_tree_sha": "2dedf7d080aa725bae3404fdf951b23acfee19a9",
+    "before_head_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+    "before_status": "",
+    "before_tree_sha": "2dedf7d080aa725bae3404fdf951b23acfee19a9",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
