@@ -713,18 +713,19 @@
     "miami-correction-stage2-gate1-fill-0001",
     "miami-correction-stage2-preseal-rehearsal-0001",
     "miami-correction-stage2-gate1-seal-0001",
-    "miami-correction-stage2-sealed-apply-0001"
+    "miami-correction-stage2-sealed-apply-0001",
+    "miami-correction-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "miami-correction-release-readiness-0001",
+  "active_request_sha256": "fb8a797413f2e0a8f74609a135e9e2f9731920585fdfa04583b3ba938f2a9b50",
+  "active_school_key": "miami",
+  "active_target_branch": "data/miami-correction",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1436,8 +1437,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/miami/miami-correction-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "efa90d42cf5b736f3990f19991a8a26fa9cbd36f48e513de7b60b39f592364af"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44626569981",
+  "lock_acquisition_request_commit": "5150b8b16a70a42fd61d4be2b3135c2fb3ae4dc9",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
