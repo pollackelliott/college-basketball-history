@@ -1400,7 +1400,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/unlv/unlv-release-preview-verify-0002/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "b8f9192cdc9486f5489bb2fc35441f4dddae339dd1b6b0a2301c8e7d44e8f7e6",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -1409,7 +1409,7 @@
     "preview_deployment_id": 7902086072,
     "preview_url": "https://college-basketball-history-jvm3vibxg-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "unlv-release-preview-verify-0002",
     "school_key": "unlv",
     "target_branch": "data/unlv-onboarding",
