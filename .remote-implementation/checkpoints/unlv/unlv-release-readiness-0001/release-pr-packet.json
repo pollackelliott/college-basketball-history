@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/unlv/unlv-release-readiness-0001/pr-body.md",
+  "body_sha256": "8b90bd00c5d3ee4d3ccb7965f7e5de0abb836ff9a8e87b478a2e54208ff11efb",
+  "head_branch": "data/unlv-onboarding",
+  "head_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish UNLV history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "unlv-release-preview-verify-0001",
+  "readiness_request_id": "unlv-release-readiness-0001",
+  "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
+  "schema_version": 1,
+  "school_key": "unlv"
+}
