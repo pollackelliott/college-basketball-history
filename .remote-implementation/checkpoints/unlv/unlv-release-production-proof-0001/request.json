@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly approved exact UNLV PR #658 Preview ('Approved. Proceed'), fresh Gate 2 approval unlv-release-gate2-approval-0001 independently verified PASS, and exact merge packet 3a82618461fd5ccf87080378ef5633be81f6bbb4d3af179b0ea70383128ea7bd required normal merge of PR #658 head fdaaec65b68f217c337fb12fa087d7d7746c755b from approved main 2249a9bc816da2fc922270a8abe2960e348030ee. GitHub connector merged exactly, producing 13bf5c01505c2ef312a16875e8657bdc884eb52c, now exact protected main with verified parents 2249a9bc816da2fc922270a8abe2960e348030ee and fdaaec65b68f217c337fb12fa087d7d7746c755b. This request grants read-only exact-merge Production deployment/public JSON proof and independent fresh verification only. No new historical authority, main mutation, recovery, maintenance or additional merge.",
+    "origin": "Same serialized UNLV ordinary original-school Implementation final phase — packet-bound post-merge Production proof"
+  },
+  "expected_protected_main_sha": "13bf5c01505c2ef312a16875e8657bdc884eb52c",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "merge_sha": "13bf5c01505c2ef312a16875e8657bdc884eb52c",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "bdb89b315d3aea97b1ed905dea53e64c2d89d8ce1b5811bc4c14970add5550b2"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "28a5740452235c47797903d1f7246cac7bc8403a68b6ccc9def8ca538162a148"
+  },
+  "pr_number": 658,
+  "previous_control_state_commit": "7410b515900f8da3976ba7deea3fa33d9c08a283",
+  "previous_control_state_sha256": "c4bd74b5db6c6cee301e627ac044e97f2eca2d78eeaebeb50ce9fe18b44ae460",
+  "request_id": "unlv-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b"
+}

@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "2249a9bc816da2fc922270a8abe2960e348030ee",
+  "merge_parent_onboarding": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "merge_sha": "13bf5c01505c2ef312a16875e8657bdc884eb52c",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "bdb89b315d3aea97b1ed905dea53e64c2d89d8ce1b5811bc4c14970add5550b2",
+  "owner_gate_2_verification_sha256": "28a5740452235c47797903d1f7246cac7bc8403a68b6ccc9def8ca538162a148",
+  "pr_head_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "pr_number": 658,
+  "production_deployment_id": 7904694449,
+  "production_json_checked_count": 89,
+  "production_proof": true,
+  "production_proof_sha256": "221c87b4c33fcf8c77e020e27415bb0e7b7f958404be80e5529e81a3fc0c22a9",
+  "protected_main_sha": "13bf5c01505c2ef312a16875e8657bdc884eb52c",
+  "request_id": "unlv-release-production-proof-0001",
+  "request_sha256": "8951d8fa08c5915af49e37cac7cad82a594fd08af212ca9719af80dbd3ce2650",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "status": "PRODUCTION_PROOF_PASS"
+}
