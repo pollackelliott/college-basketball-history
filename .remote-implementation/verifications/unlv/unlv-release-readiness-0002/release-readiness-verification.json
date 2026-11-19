@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "81cc185c42d180a6286fc2e4e27da490440011c42ad01d79e591b0ccdfca22d6",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "8b90bd00c5d3ee4d3ccb7965f7e5de0abb836ff9a8e87b478a2e54208ff11efb",
+  "pr_created": false,
+  "preview_request_id": "unlv-release-preview-verify-0002",
+  "preview_verified": false,
+  "protected_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
+  "readiness_proof_sha256": "0bdd172d8c70a48731dcb18900c1f335c0a8f98a748453d1d2d1719bdd50c166",
+  "release_pr_packet_sha256": "8e12196c1f7890ae950edca64837dd1443b61749ecc6fe6fa20ec4210ab9a9ce",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "unlv-release-readiness-0002",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "tracked_mutation": "NONE"
+}
