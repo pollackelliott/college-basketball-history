@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 from pathlib import Path
 
@@ -14,6 +15,7 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 import onboard_school  # noqa: E402
+import onboarding_plan  # noqa: E402
 from correction_lifecycle import (  # noqa: E402
     PACKAGE_ONLY_MODE,
     freeze,
@@ -139,6 +141,11 @@ class PackageOnlyCorrectionTests(unittest.TestCase):
         self.git(root, "init")
         self.git(root, "config", "user.email", "fixture@example.com")
         self.git(root, "config", "user.name", "Fixture")
+        write_csv(
+            root / "data/reference/programs.csv",
+            ["program_key", "public_page_enabled"],
+            [{"program_key": "miami", "public_page_enabled": "Yes"}],
+        )
         write_csv(
             root / "data/reference/conferences.csv",
             ["conference_key", "conference_name", "tournament_label", "status", "notes"],
@@ -302,6 +309,7 @@ class PackageOnlyCorrectionTests(unittest.TestCase):
             "correction_mode": PACKAGE_ONLY_MODE,
             "correction_package_members": ["conferences.csv"],
             "correction_source_game_ids": [],
+            "correction_diff_sha256": "b" * 64,
             "package_member_sha256": hashes,
             "pre_correction_source_semantic_guard": {
                 "schema_version": 1,
@@ -342,6 +350,52 @@ class PackageOnlyCorrectionTests(unittest.TestCase):
             )
             self.assertEqual([r["source_game_id"] for r in scoped], ["MIA-BASE-1"])
             self.assertEqual(info["scoped_source_games"], 1)
+
+    def test_stage2_package_only_context_has_zero_decision_universe(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.make_repo(root)
+            school = root / "schools/miami"
+            write_csv(
+                school / "conferences.csv",
+                HISTORY_FIELDS,
+                self.corrected_conferences(),
+            )
+            manifest = self.package_manifest(root)
+            onboard = root / ".onboarding/miami"
+            onboard.mkdir(parents=True)
+            (onboard / "integration-freeze.json").write_text(
+                json.dumps(manifest),
+                encoding="utf-8",
+            )
+            with (
+                patch.object(
+                    onboarding_plan,
+                    "validate_package",
+                    return_value={"errors": [], "warnings": []},
+                ),
+                patch.object(
+                    onboarding_plan,
+                    "input_fingerprint",
+                    return_value={"sha256": "c" * 64},
+                ),
+            ):
+                plan = onboarding_plan.build_plan(root, "miami")
+            self.assertEqual(plan["decisions"], [])
+            self.assertEqual(
+                plan["summary"]["correction_transaction_kind"],
+                "PACKAGE_ONLY_FIELD_CORRECTION",
+            )
+            self.assertEqual(
+                plan["summary"]["correction_package_members"],
+                ["conferences.csv"],
+            )
+            self.assertEqual(
+                plan["summary"]["correction_diff_sha256"],
+                "b" * 64,
+            )
+            self.assertEqual(plan["summary"]["assertions_to_add"], 0)
+            self.assertEqual(plan["summary"]["new_canonical_games"], 0)
 
     def test_package_only_transport_rejects_post_freeze_conference_drift(self):
         with tempfile.TemporaryDirectory() as td:
