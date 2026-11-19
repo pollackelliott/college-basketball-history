@@ -1426,7 +1426,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/miami/miami-correction-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "000a72c26c3b90f6cd408fa259a2cb4bfb9bd9dba6de50d723152ee1c5556716",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1436,7 +1436,7 @@
     "production_deployment_id": 7928038555,
     "production_json_checked_count": 3,
     "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "miami-correction-release-production-proof-0001",
     "school_key": "miami"
   },

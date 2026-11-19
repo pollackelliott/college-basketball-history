@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "000a72c26c3b90f6cd408fa259a2cb4bfb9bd9dba6de50d723152ee1c5556716",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "pr_number": 678,
+  "production_deployment_id": 7928038555,
+  "production_json_checked_count": 3,
+  "production_proof": true,
+  "request_id": "miami-correction-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "status": "COMPLETE"
+}
