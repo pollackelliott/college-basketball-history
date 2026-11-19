@@ -80,24 +80,23 @@ jobs:
           if r.get("normalized_opponent_key")!="miami-oh" or r.get("normalized_opponent_name")!="Miami (OH)":
               raise SystemExit(f"source row identity mismatch: {r.get('normalized_opponent_key')} / {r.get('normalized_opponent_name')}")
 
-          opp=[r for r in rows("schools/alabama/opponents.csv") if r.get("source_opponent")=="Miami @"]
+          opp=[r for r in rows("schools/alabama/opponents.csv") if r.get("source_opponent_label")=="Miami @"]
           if len(opp)!=1: raise SystemExit(f"expected one Miami @ opponent row, got {len(opp)}")
           o=opp[0]
-          if o.get("normalized_opponent_key")!="miami-oh" or o.get("normalized_opponent_name")!="Miami (OH)":
+          if o.get("canonical_opponent_key")!="miami-oh" or o.get("canonical_opponent_name")!="Miami (OH)":
               raise SystemExit("supporting opponents row mismatch")
 
           games=[r for r in rows("data/canonical/games.csv") if r.get("canonical_game_id")=="CBBG-0028763"]
           if len(games)!=1: raise SystemExit(f"expected canonical CBBG-0028763 once, got {len(games)}")
           g=games[0]
-          vals=set(g.values())
-          if "miami-oh" not in vals:
-              raise SystemExit("canonical game does not contain miami-oh identity")
+          if g.get("canonical_opponent_key")!="miami-oh" or g.get("canonical_opponent_name")!="Miami (OH)":
+              raise SystemExit("canonical identity mismatch")
 
           assertions=[r for r in rows("data/evidence/game-assertions.csv") if r.get("canonical_game_id")=="CBBG-0028763" and r.get("source_game_id")=="ALARAW-01436"]
           if len(assertions)!=1: raise SystemExit(f"expected one scoped assertion, got {len(assertions)}")
           a=assertions[0]
-          if "miami-oh" not in set(a.values()):
-              raise SystemExit("scoped assertion does not contain miami-oh identity")
+          if a.get("normalized_opponent_key")!="miami-oh" or a.get("normalized_opponent_name")!="Miami (OH)":
+              raise SystemExit("assertion identity mismatch")
           print("EXACT_ALABAMA_IDENTITY_TRANSACTION_PASS")
           PY
 
