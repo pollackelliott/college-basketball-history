@@ -65,7 +65,17 @@ class PackageOnlyCorrectionTests(unittest.TestCase):
         return result.stdout.strip()
 
     def source_fields(self) -> list[str]:
-        return list(dict.fromkeys(["source_game_id", "source_program_key", *SEMANTIC_SOURCE_GAME_FIELDS]))
+        return list(
+            dict.fromkeys(
+                [
+                    "source_game_id",
+                    "source_program_key",
+                    "normalized_opponent_key",
+                    "normalized_opponent_name",
+                    *SEMANTIC_SOURCE_GAME_FIELDS,
+                ]
+            )
+        )
 
     def source_row(self) -> dict[str, str]:
         row = {field: "" for field in self.source_fields()}
