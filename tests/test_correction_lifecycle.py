@@ -16,6 +16,7 @@ from correction_lifecycle import (  # noqa: E402
     source_game_diff,
     validate_correction_candidate,
     micro_correction_eligibility,
+    _micro_identity_transaction_plan,
 )
 import onboarding_plan  # noqa: E402
 from implementation_site_gate import _correction_source_validation_scope  # noqa: E402
@@ -1038,7 +1039,7 @@ class MicroCorrectionEligibilityTests(unittest.TestCase):
         )
         self.assertFalse(result["eligible"])
 
-    def test_package_only_conferences_is_eligible(self):
+    def test_package_only_conferences_is_not_yet_micro_eligible(self):
         frozen = {
             "workflow_kind": "POST_PUBLICATION_CORRECTION",
             "status": "CORRECTION_RESEARCH_FROZEN",
@@ -1063,5 +1064,63 @@ class MicroCorrectionEligibilityTests(unittest.TestCase):
             },
         }
         result = micro_correction_eligibility(frozen, self.integration(frozen))
-        self.assertTrue(result["eligible"])
-        self.assertEqual(result["micro_correction_class"], "PACKAGE_ONLY_CONFERENCES")
+        self.assertFalse(result["eligible"])
+        self.assertTrue(
+            any("published conference-membership mutation" in x for x in result["reasons"])
+        )
+
+    def test_identity_transaction_plan_requires_single_literal_label_population(self):
+        frozen = self.frozen_identity()
+        frozen["school_key"] = "example"
+        frozen["research_authority"] = {"ref": "checkpoint", "digest": "d" * 64}
+        source_rows = [{
+            "source_game_id": "G1",
+            "source_opponent_label": "Miami @",
+        }]
+        with patch("correction_lifecycle.csv_file", return_value=([], source_rows)), patch(
+            "correction_lifecycle.scoped_identity.build_plan"
+        ) as build:
+            build.return_value = {
+                "sha256": "e" * 64,
+                "payload": {
+                    "original_literal_label_games": 2,
+                    "remaining_old_identity_games": 1,
+                    "new_discrepancies": [],
+                    "in_place": True,
+                },
+            }
+            with self.assertRaisesRegex(Exception, "one-game literal-label population"):
+                _micro_identity_transaction_plan(Path("."), frozen)
+
+    def test_identity_transaction_plan_binds_existing_in_place_transaction(self):
+        frozen = self.frozen_identity()
+        frozen["school_key"] = "example"
+        frozen["research_authority"] = {"ref": "checkpoint", "digest": "d" * 64}
+        source_rows = [{
+            "source_game_id": "G1",
+            "source_opponent_label": "Miami @",
+        }]
+        with patch("correction_lifecycle.csv_file", return_value=([], source_rows)), patch(
+            "correction_lifecycle.scoped_identity.build_plan"
+        ) as build:
+            build.return_value = {
+                "sha256": "e" * 64,
+                "payload": {
+                    "original_literal_label_games": 1,
+                    "remaining_old_identity_games": 0,
+                    "new_discrepancies": [],
+                    "in_place": True,
+                    "stale_canonical_id": "CBBG-1",
+                },
+            }
+            plan = _micro_identity_transaction_plan(Path("."), frozen)
+            self.assertEqual(plan["sha256"], "e" * 64)
+            kwargs = build.call_args.kwargs
+            self.assertEqual(kwargs["source_program"], "example")
+            self.assertEqual(kwargs["source_label"], "Miami @")
+            self.assertEqual(kwargs["source_game_id"], "G1")
+            self.assertEqual(kwargs["old_key"], "miami")
+            self.assertEqual(kwargs["new_key"], "miami-oh")
+            self.assertEqual(kwargs["new_name"], "Miami (OH)")
+            self.assertTrue(kwargs["in_place"])
+            self.assertTrue(kwargs["target_current_d1"])
