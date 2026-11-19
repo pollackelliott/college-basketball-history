@@ -705,7 +705,7 @@
   "active_request_sha256": "915bbe684bc96475afa617884cf67148e869ce1dcd68d000ffd67027bd6888ea",
   "active_school_key": "unlv",
   "active_target_branch": "data/unlv-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "6d2ff5c90de612e9e8201c3d568f7842c857b1dd",
   "active_writeahead_path": ".remote-implementation/writeahead/unlv/unlv-stage2-current-main-refresh-0003/writeahead-manifest.json",
   "active_writeahead_sha256": "975a4e88099a39a5710c32b5288ac7cf9431fb604aeb8425131f9ccf6a4dede2",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
