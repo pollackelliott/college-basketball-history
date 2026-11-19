@@ -1,0 +1,111 @@
+name: Miami conference correction stage 0001
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/miami-conference-stage-0001.yml"
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out transport head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Authenticate execution authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main data/miami-correction
+          main="$(git rev-parse origin/main)"
+          target="$(git rev-parse origin/data/miami-correction)"
+          expected="301d9eb4a323a5d393f0e20a1508be6565376553"
+          test "$main" = "$expected"
+          test "$target" = "$expected"
+          test "$(git diff --name-only "$expected"...HEAD)" = ".github/workflows/miami-conference-stage-0001.yml"
+
+      - name: Download exact Correction Freeze
+        uses: actions/download-artifact@v4
+        with:
+          name: miami-conference-correction-freeze-0001
+          path: /tmp/miami-freeze
+          github-token: ${{ github.token }}
+          run-id: 44574400316
+
+      - name: Authenticate Correction Freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          p="/tmp/miami-freeze/miami-conference-correction-research-frozen.zip"
+          test -f "$p"
+          echo "4f818d25db972e0f7d949d342a4b668c1b957b627768d39c0fbc4fbbe1cf97cc  $p" | sha256sum -c -
+
+      - name: Check out exact correction branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout -B data/miami-correction origin/data/miami-correction
+          test "$(git rev-parse HEAD)" = "301d9eb4a323a5d393f0e20a1508be6565376553"
+          test -z "$(git status --porcelain --untracked-files=all)"
+
+      - name: Permanent stage dry-run
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/correction_lifecycle.py stage miami             /tmp/miami-freeze/miami-conference-correction-research-frozen.zip             --expected-sha256 4f818d25db972e0f7d949d342a4b668c1b957b627768d39c0fbc4fbbe1cf97cc             | tee /tmp/miami-stage-dry-run.txt
+
+      - name: Permanent stage apply and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python tools/correction_lifecycle.py stage miami             /tmp/miami-freeze/miami-conference-correction-research-frozen.zip             --expected-sha256 4f818d25db972e0f7d949d342a4b668c1b957b627768d39c0fbc4fbbe1cf97cc             --apply --commit             | tee /tmp/miami-stage-apply.txt
+          target="$(git rev-parse HEAD)"
+          parent="$(git rev-parse HEAD^)"
+          test "$parent" = "301d9eb4a323a5d393f0e20a1508be6565376553"
+          changed="$(git diff --name-only "$parent"..HEAD)"
+          test "$changed" = "schools/miami/conferences.csv"
+          cp .onboarding/miami/integration-freeze.json /tmp/miami-integration-freeze.json
+          sha256sum /tmp/miami-integration-freeze.json > /tmp/miami-integration-freeze.sha256
+          printf '%s\n' "$target" > /tmp/miami-target-sha.txt
+          git show --stat --oneline --decorate=short HEAD > /tmp/miami-target-show.txt
+
+      - name: Publish exact correction branch by lease
+        shell: bash
+        run: |
+          set -euo pipefail
+          git push origin HEAD:data/miami-correction             --force-with-lease=refs/heads/data/miami-correction:301d9eb4a323a5d393f0e20a1508be6565376553
+
+      - name: Fresh branch verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin data/miami-correction
+          target="$(cat /tmp/miami-target-sha.txt)"
+          test "$(git rev-parse origin/data/miami-correction)" = "$target"
+          test "$(git rev-parse "$target"^)" = "301d9eb4a323a5d393f0e20a1508be6565376553"
+          test "$(git diff --name-only 301d9eb4a323a5d393f0e20a1508be6565376553 "$target")" = "schools/miami/conferences.csv"
+          python tools/validate_data.py
+
+      - name: Upload staging authority
+        uses: actions/upload-artifact@v4
+        with:
+          name: miami-conference-correction-integration-freeze-0001
+          if-no-files-found: error
+          path: |
+            /tmp/miami-integration-freeze.json
+            /tmp/miami-integration-freeze.sha256
+            /tmp/miami-target-sha.txt
+            /tmp/miami-target-show.txt
+            /tmp/miami-stage-dry-run.txt
+            /tmp/miami-stage-apply.txt
+          retention-days: 30
