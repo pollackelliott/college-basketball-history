@@ -227,8 +227,8 @@ jobs:
           post=m.get("source_game_semantic_guard") or {}
           if not pre.get("snapshot_sha256") or not post.get("snapshot_sha256"):
               raise SystemExit("missing pre/post source semantic guard")
-          if pre.get("snapshot_sha256") == post.get("snapshot_sha256"):
-              raise SystemExit("identity correction unexpectedly preserved identical semantic snapshot")
+          if pre.get("snapshot_sha256") != post.get("snapshot_sha256"):
+              raise SystemExit("identity-only correction unexpectedly changed the historical semantic snapshot")
           if "ALARAW-01436" not in (pre.get("snapshot") or {}).get("rows",{}):
               raise SystemExit("target row missing from pre-correction semantic guard")
           if "ALARAW-01436" not in (post.get("snapshot") or {}).get("rows",{}):
