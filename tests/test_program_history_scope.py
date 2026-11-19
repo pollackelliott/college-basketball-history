@@ -213,7 +213,7 @@ class ProgramHistoryScopeTests(unittest.TestCase):
 
             with self.assertRaisesRegex(
                 WorkflowError,
-                "source-notes authority changed",
+                r"ordinary Integration Freeze package member changed: source-notes\.md",
             ):
                 onboard_school._validated_ordinary_integration_freeze_bytes(
                     repo,
