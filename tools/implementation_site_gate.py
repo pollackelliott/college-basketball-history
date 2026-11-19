@@ -63,6 +63,8 @@ def _correction_source_validation_scope(
 
     Standard/new-school Integration Freeze manifests do not carry workflow_kind and
     therefore retain the existing full-source validation behavior unchanged.
+    Package-only corrections begin with zero source rows in scope, but any later
+    source semantic drift is pulled back into the blocking gate.
     """
 
     manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
@@ -84,13 +86,24 @@ def _correction_source_validation_scope(
         for value in manifest.get("correction_source_game_ids", [])
         if str(value).strip()
     }
+    package_only = manifest.get("correction_mode") == "PACKAGE_ONLY_FIELD"
+    package_members = manifest.get("correction_package_members", [])
+    if package_only:
+        if correction_ids or package_members != ["conferences.csv"]:
+            raise ValueError(
+                "invalid package-only correction Integration Freeze authority"
+            )
+    elif not correction_ids:
+        raise ValueError(
+            "correction Integration Freeze lacks correction_source_game_ids"
+        )
+
     guard = manifest.get("pre_correction_source_semantic_guard", {})
     snapshot = guard.get("snapshot", {}) if isinstance(guard, dict) else {}
     baseline_rows = snapshot.get("rows", {}) if isinstance(snapshot, dict) else {}
-    if not correction_ids or not isinstance(baseline_rows, dict):
+    if not isinstance(baseline_rows, dict):
         raise ValueError(
-            "correction Integration Freeze lacks correction_source_game_ids or "
-            "pre-correction semantic baseline"
+            "correction Integration Freeze lacks pre-correction semantic baseline"
         )
 
     current_by_id = {
@@ -99,8 +112,6 @@ def _correction_source_validation_scope(
         if row.get("source_game_id", "").strip()
     }
 
-    # Include any later Gate-1 source patch as well as the original correction
-    # population, so a correction cannot hide a newly introduced source-side gap.
     scoped_ids = set(correction_ids)
     for source_id, row in current_by_id.items():
         current_semantics = {
@@ -111,6 +122,12 @@ def _correction_source_validation_scope(
         if baseline is None or current_semantics != baseline:
             scoped_ids.add(source_id)
 
+    deleted = sorted(set(baseline_rows) - set(current_by_id))
+    if deleted:
+        raise ValueError(
+            "correction source validation lost baseline source rows: "
+            + ", ".join(deleted[:20])
+        )
     missing = sorted(scoped_ids - set(current_by_id))
     if missing:
         raise ValueError(
@@ -124,7 +141,11 @@ def _correction_source_validation_scope(
         if row.get("source_game_id", "").strip() in scoped_ids
     ]
     return scoped, {
-        "mode": "CORRECTION_DELTA",
+        "mode": (
+            "PACKAGE_ONLY_CORRECTION"
+            if package_only
+            else "CORRECTION_DELTA"
+        ),
         "scoped_source_games": len(scoped),
         "correction_source_games": len(correction_ids),
     }
