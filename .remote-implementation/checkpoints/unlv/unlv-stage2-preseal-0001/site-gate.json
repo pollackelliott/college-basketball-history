@@ -1,0 +1,82 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "lower_level_postseason_researched_nonblocking": 2,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 43,
+    "postseason_missing_venue": 2,
+    "public_gap_rows": 80,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2078,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 37
+  },
+  "errors": [],
+  "examples": {
+    "lower_level_postseason_researched_nonblocking": [
+      "CBBG-0212833",
+      "CBBG-0212834"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0212869",
+      "CBBG-0212870"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0013284",
+      "CBBG-0048264",
+      "CBBG-0049521",
+      "CBBG-0049808",
+      "CBBG-0066497",
+      "CBBG-0066587",
+      "CBBG-0110303",
+      "CBBG-0115112",
+      "CBBG-0134942",
+      "CBBG-0140606",
+      "CBBG-0161568",
+      "CBBG-0207260"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0212833",
+      "CBBG-0212834"
+    ],
+    "unknown_site_type": [
+      "CBBG-0211694",
+      "CBBG-0211704",
+      "CBBG-0211710",
+      "CBBG-0211712",
+      "CBBG-0211716",
+      "CBBG-0211721",
+      "CBBG-0211729",
+      "CBBG-0211747",
+      "CBBG-0211756",
+      "CBBG-0211781",
+      "CBBG-0211790",
+      "CBBG-0211798"
+    ]
+  },
+  "history_start_season": "1969-1970",
+  "school_key": "unlv",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 80,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 43,
+    "postseason_missing_venue": 2,
+    "researched_gap_rows": 80,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 37
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2078
+  },
+  "status": "PASS",
+  "warnings": []
+}
