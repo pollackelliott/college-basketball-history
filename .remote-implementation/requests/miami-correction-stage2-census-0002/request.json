@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "correction_integration_freeze": {
+    "path": ".remote-implementation/inputs/miami-conference-correction-0001/integration-freeze.json",
+    "sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618"
+  },
+  "creation_provenance": {
+    "authorization": "Owner authorized the bounded Miami conferences.csv correction. CORRECTION_RESEARCH_FROZEN and INTEGRATION_FROZEN are complete. Generic remote Stage 2 package-only admission defect was repaired and merged as protected-main commit 66795cf099c05e272f590fa6d2ffb10c262d6b56. This request authorizes only the read-only correction-aware Stage 2 capability census from exact target 109fb1d5bcf880c8866380e8504b22a86dbed4f1 and exact Integration Freeze e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618. No historical decision, tracked Stage 2 repair, proposal rehearsal, Gate 1 approval, sealed apply, release, merge, Production, expansion Stage 7, or unrelated mutation is authorized.",
+    "origin": "Miami post-publication package-only conference correction from Stage 6 checkpoint 0034"
+  },
+  "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "e361b4ac4ed81a8fee7ad216f9aab41764be5018",
+  "previous_control_state_sha256": "d90d8ee09885bc53f3d5fcdba3369f66ef56f146a313591ec2ae5d247853bbff",
+  "request_id": "miami-correction-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "target_branch": "data/miami-correction",
+  "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+}
