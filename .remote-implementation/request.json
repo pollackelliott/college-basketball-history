@@ -9,9 +9,9 @@
     "release": false,
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
-    "release_preview_verify": false,
+    "release_preview_verify": true,
     "release_production_proof": false,
-    "release_readiness": true,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -24,30 +24,27 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner said 'Continue' after the generic shard-aware publication-history assertion repair merged to protected main. This continues the already-authorized reversible UNLV release-preparation phase against fresh current main through read-only RELEASE_READINESS, exact existing-PR reuse/refresh, CI/mergeability and exact Vercel Preview verification, ending at OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2 approval, PR merge, Production proof, new historical decisions, and unrelated shared/global mutations are NOT authorized.",
-    "origin": "Same serialized UNLV ordinary original-school Implementation lane — owner-authorized release-preparation phase"
+    "authorization": "Continuation of the already owner-authorized UNLV release-preparation phase after unlv-release-readiness-0002 independently fresh-verified PASS. Existing PR #658 was authenticated against the exact readiness packet, then closed and reopened once through the authorized GitHub connector to refresh required CI against protected main 2249a9bc816da2fc922270a8abe2960e348030ee while preserving exact body and frozen head fdaaec65b68f217c337fb12fa087d7d7746c755b. This request may only verify exact PR-head checks, clean mergeability, and the exact Vercel Preview through OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, recovery, protected-main mutation, and new historical authority remain forbidden.",
+    "origin": "Same serialized UNLV ordinary original-school Implementation lane — fresh release-readiness continuation"
   },
   "expected_protected_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "8c90cb72bb528b8f30ae8fc29eb3bf325823d02e",
-  "previous_control_state_sha256": "1941c5b5c1d5d00f699f65c80cf9c4a185a66fb96459a73c7ed1b56ddc7344d7",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "pr_number": 658,
+  "previous_control_state_commit": "0f2efab9429c6e1ea9526676728d457616a754f9",
+  "previous_control_state_sha256": "a81e6231d35365ad4c85220f0dcbffe0c82db6b86f5c1f3b49414030252dd45e",
   "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "unlv-release-preview-verify-0002"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-release-readiness-0002/checkpoint-manifest.json",
+    "sha256": "81cc185c42d180a6286fc2e4e27da490440011c42ad01d79e591b0ccdfca22d6"
   },
-  "request_id": "unlv-release-readiness-0002",
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-release-readiness-0002/release-readiness-verification.json",
+    "sha256": "5887344fe5de521fe8156394440d048c9639855774b1eb089d5011b752d48523"
+  },
+  "request_id": "unlv-release-preview-verify-0002",
   "schema_version": 1,
   "school_key": "unlv",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/unlv/unlv-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "034d8aa4cd0f2129f2347dc40eb365ec97c94d0f9b1cfa14774321a77ac0f4db"
-  },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/unlv/unlv-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "13e4d3401977a9275bf8aa62b772d814cb9d50ba7ff6adadbc3792130f4107d6"
-  },
   "target_branch": "data/unlv-onboarding",
   "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b"
 }
