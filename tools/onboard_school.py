@@ -40,11 +40,14 @@ from publish_historical_season_coverage import integrate_approved_coverage
 
 from correction_site_nonregression import (
     EXPANSION_MODE,
+    PACKAGE_ONLY_MODE,
     capture as capture_correction_site_report,
     prove as prove_correction_site_nonregression,
     prove_expansion as prove_expansion_site_nonregression,
+    prove_package_only as prove_package_only_site_nonregression,
     verify_current as verify_correction_site_report,
     verify_expansion_current as verify_expansion_site_report,
+    verify_package_only_current as verify_package_only_site_report,
 )
 from integration_freeze_guard import (
     SEMANTIC_SOURCE_GAME_FIELDS,
@@ -53,6 +56,7 @@ from integration_freeze_guard import (
     semantic_snapshot_sha256,
 )
 from onboarding_plan import (
+    REQUIRED_PACKAGE_FILES,
     WorkflowError,
     approve_plan,
     apply_pre_ingest_correction_identity_patches,
@@ -98,6 +102,9 @@ SINGLE_GAME_CORRECTION_KINDS = frozenset({
     "SINGLE_GAME_IDENTITY_SITE",
 })
 MULTI_GAME_IDENTITY_CORRECTION_KIND = "MULTI_GAME_IDENTITY_ONLY"
+PACKAGE_ONLY_CORRECTION_KIND = "PACKAGE_ONLY_FIELD_CORRECTION"
+PACKAGE_ONLY_CORRECTION_MODE = "PACKAGE_ONLY_FIELD"
+PACKAGE_ONLY_CORRECTION_MEMBERS = ("conferences.csv",)
 BOUNDED_CORRECTION_KINDS = SINGLE_GAME_CORRECTION_KINDS | frozenset({
     MULTI_GAME_IDENTITY_CORRECTION_KIND,
 })
