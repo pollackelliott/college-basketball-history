@@ -1,47 +1,68 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "unlv-stage2-reconciliation-diagnostic-0002",
+  "request_id": "unlv-stage2-current-main-refresh-0003",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "school_key": "unlv",
-  "operation": "STAGE2_RECONCILIATION_DIAGNOSTIC",
-  "previous_control_state_commit": "766fed0adc98312e488bfa4c34a92d7fdf3d71a3",
-  "previous_control_state_sha256": "2ff2b723dab394e223040e177593b2d0f5db6d3ace2498074e26f5f10e30f097",
-  "expected_protected_main_sha": "65b6d19d5ca5fd088f1628fa3fff4a4d9ce37474",
+  "previous_control_state_commit": "6bacdf670b2c755ee91f9a40fbce41ab4622baf3",
+  "previous_control_state_sha256": "7d35f4162df8f3f0ad2f01b0ba02b5e0248e210b31b97d08d0fb116b92285f4c",
+  "expected_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",
+    "sha256": "1c13241d96283d7543dee0559a949e03f9b3c4061b1a787f965efd3b011a0b33"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "497ec4460359fa5e88731568ff3a88d0495b83e6614d62d40da1ca44fc8fbb55"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-current-main-refresh-0002/successor-manifest.json",
+    "sha256": "3ccdfa6684c17c697003f5410827006279bd8c2733e662f6ad7c639375266135"
+  },
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Same owner-authorized UNLV Stage 2 continues after generic tooling PR #655 merged to protected main fa91a766c42d108e18594ea55bd0f04b0bcc85eb. The last fresh-verified UNLV current-main refresh is bound to 71fa9541e758e623d849d5ef165e8874949673d9 and published target 3c7a4d9b510ecfec4ed01cd252e03918328104be. Exact compare from that merge base shows nine UNLV target-only paths and nine protected-main-only tooling/docs/test paths with zero overlap; protected main touches no schools/unlv path. PR #655 candidate-runtime replay independently resolved the exact blocked proposal to OWNER_GATE_1_READY with the unchanged 46-decision universe, unchanged recommendation-map hash, and tracked Stage 2 mutation NONE. Authorize one guarded disjoint refresh plus repository-owned refresh->census->proposal continuation; stop at OWNER_GATE_1_READY or any blocker."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "unlv-stage2-census-0004",
+    "proposal_request_id": "unlv-stage2-proposal-0002",
+    "expected_decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/unlv-stage2-current-main-refresh-0002/recommendation-map.json",
+      "sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395"
+    }
+  },
   "creation_provenance": {
-    "origin": "UNLV serialized Implementation Stage 2 — rebound blocked proposal-rehearsal diagnostic after pre-execution main movement",
-    "authorization": "Same owner-authorized bounded diagnostic unit for DISCREPANCY-UNLV-1970-71-015-GAME_DATE. Prior request unlv-stage2-reconciliation-diagnostic-0001 was never accepted or executed because protected main advanced before runtime authentication. Intervening main changes are limited to All-History expansion freeze docs/tests/tooling and are disjoint from UNLV target paths and Stage 2 reconciliation diagnostic runtime. Authorizes exactly one read-only reconciliation diagnostic for canonical game CBBG-0101077 against immutable blocked proposal unlv-stage2-proposal-0001. Preserve the exact recommendation map, 46-decision universe, target branch, Integration Freeze, and historical authority. No tracked mutation, historical re-research, map rewrite, Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, recovery, current-main refresh, or repair authority."
+    "origin": "UNLV serialized ordinary original-school Implementation Stage 2 — post-PR #655 current-main refresh",
+    "authorization": "Owner Proceed resumes the same Stage 2 technical/reconciliation authority after the bounded generic ingestion-tool repair merged and was reauthenticated. Authorizes exact-current-main refresh, independent fresh verification, fresh census with exact decision-universe preservation, and exact mature-map proposal rehearsal only. No Owner Gate 1 approval/fill, preseal, seal, apply, release, Preview, merge, Production, new historical decision, recommendation-map rewrite, or unrelated mutation is authorized."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
+    "stage2_current_main_refresh": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "stage2_reconciliation_diagnostic": true,
+    "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
+    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
     "venue_identity_maintenance": false
-  },
-  "target_branch": "data/unlv-onboarding",
-  "target_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-proposal-0001/checkpoint-manifest.json",
-    "sha256": "05ab71aad69f549085bda1db329346949a7d9369a0ad8d6eea02101147edde45"
-  },
-  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
-  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
-  "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
-  "recommendation_map_sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395",
-  "canonical_game_id": "CBBG-0101077"
+  }
 }
