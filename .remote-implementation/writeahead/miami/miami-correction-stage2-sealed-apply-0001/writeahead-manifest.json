@@ -1,0 +1,70 @@
+{
+  "apply_runtime_tool_sha256": {
+    "tools/onboard_school.py": "f616892effa58ab38fe22452ca7fe68faf427155f0531cfe748cc2c81c538aab",
+    "tools/onboarding_plan.py": "bf07ebe918f74c26a191c294b01a7a76e5a09ae8a794c58fc8c6cf0aa2de5027",
+    "tools/validate_data.py": "58a288b964b98af0f6a49a0afc7dfa1c9f7b665f0f03a05de1378d00ee58287b"
+  },
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "approved_plan_sha256": "004da4724ca22e229144e6a799e514b045d425e9ce6f1f7486f94d005143f6b9",
+  "changed_file_sha256": {
+    "data/reconciliation/onboarding-decisions/miami-93c375569a92.json": "004da4724ca22e229144e6a799e514b045d425e9ce6f1f7486f94d005143f6b9",
+    "site/data/teams/miami.json": "15c801d643647c342892f81d2347a3531bfc58988f80b13f7900848c36e0ef12"
+  },
+  "changed_paths": [
+    "data/reconciliation/onboarding-decisions/miami-93c375569a92.json",
+    "site/data/teams/miami.json"
+  ],
+  "commit_message": "Apply sealed miami onboarding plan",
+  "current_main_preseal": {
+    "approved_plan_hash_preview": "20d23846891d8a2390d2f7f0395930304f90edd8ae2a1535479236e56db8a57d",
+    "changed_path_count": 2,
+    "equivalence_sha256": "4928d61d8cf6edda419b5dfe9ab664120c190695691f47a6da64d67cec41159b",
+    "preseal_status": "READY_TO_SEAL",
+    "runtime_tool_sha256": {
+      "tools/onboard_school.py": "f616892effa58ab38fe22452ca7fe68faf427155f0531cfe748cc2c81c538aab",
+      "tools/onboarding_hardening.py": "9229f31cb2885b38e7ba6940d75d325d9b6e7ecafee46c7119edd8a640ddb28f",
+      "tools/validate_data.py": "58a288b964b98af0f6a49a0afc7dfa1c9f7b665f0f03a05de1378d00ee58287b"
+    },
+    "site_gate_normalized_sha256": "c5093ffd29b8d65c0b73ac5167df197bd6a250508118c44ffef199024a7fec72",
+    "tracked_stage2_mutation": "NONE"
+  },
+  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+  "global_lock_commit": "4f9d5d5676ecda2378be649872c8117e88787be9",
+  "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "e04dcf7ad5952ec06e30c26dd6590f6c9fa90658d4a95bf1805a5d44e7317fe8",
+  "prepared_commit_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "prepared_parent_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "prepared_tree_sha": "33b56cd884046c4ed77040e71980a82d9cbcd6cb",
+  "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "recommendation_map_sha256": "a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77",
+  "release_manifest_changed_path_count": 2,
+  "release_manifest_sha256": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+  "repository_validation": "PASS",
+  "request_id": "miami-correction-stage2-sealed-apply-0001",
+  "request_sha256": "41fc6e8e97d201eca2d636ed14ff5a3fcb5d2d8db6b9ff633cf0da9326505600",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "sidecars": {
+    "approved-plan.json": "004da4724ca22e229144e6a799e514b045d425e9ce6f1f7486f94d005143f6b9",
+    "current-main-preseal.json": "782627798159ee47a93a6ebfef7ff2a3b5dc8d957ffe405535eef44700eaeaa2",
+    "integration-freeze.json": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+    "pr-body.md": "4fb5f2b5c039cee7b0488eb38f654978b26702c53842ef2273e7473d6e3956ec",
+    "release-manifest.json": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+    "seal-checkpoint-manifest.json": "f7b288079537cf0ea96d1f92bcc52fce5c5ad1fc995b3890eae41a4dc02b31a7",
+    "seal-verification.json": "03f696cb1d90dca2e329a3c984ca94d2a8e0e9d3a20b4a603e9bf6b3c69d2267",
+    "visual-qa.md": "78451798e6e828d2e837c0e4217d4b538f201bfeb1a3e4d0f18420ee6583fd29"
+  },
+  "stage2_gate1_seal_checkpoint_path": ".remote-implementation/checkpoints/miami/miami-correction-stage2-gate1-seal-0001/checkpoint-manifest.json",
+  "stage2_gate1_seal_checkpoint_sha256": "f7b288079537cf0ea96d1f92bcc52fce5c5ad1fc995b3890eae41a4dc02b31a7",
+  "stage2_gate1_seal_verification_path": ".remote-implementation/verifications/miami/miami-correction-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+  "stage2_gate1_seal_verification_sha256": "03f696cb1d90dca2e329a3c984ca94d2a8e0e9d3a20b4a603e9bf6b3c69d2267",
+  "target_branch": "data/miami-correction"
+}
