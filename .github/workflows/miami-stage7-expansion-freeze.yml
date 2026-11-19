@@ -1,0 +1,113 @@
+name: Miami Stage 7 expansion Research Freeze
+
+on:
+  push:
+    branches:
+      - 'research/stage7-freeze-requests/miami-0034-20261119'
+    paths:
+      - '.github/stage7-freeze-request.json'
+
+permissions:
+  contents: read
+
+jobs:
+  stage7-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out exact request branch with full Git history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate protected main, permanent tools, and request-only diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAIN='7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec'
+          BASE='33af595fcae2a17664379638f89ce64c2e63be08'
+          latest="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          test "$latest" = "$MAIN"
+          git merge-base --is-ancestor "$BASE" "$MAIN"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          request = json.loads(Path('.github/stage7-freeze-request.json').read_text())
+          expected = {
+              'school_key': 'miami',
+              'protected_main_sha': '7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec',
+              'research_base_sha': '33af595fcae2a17664379638f89ce64c2e63be08',
+              'stage6_checkpoint_sha256': '56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978',
+              'stage6_candidate_package_sha256': 'abe4026bf182eb1f6f178a06b906ccac35fed479bdecf53fbf5edcbfb8e4eeec',
+              'stage3b_checkpoint_sha256': '86cb728dc442f4534160f27ea5379161242a6b4b7a273d0876078dfdf422523e',
+              'capsule_sha256': 'b22c1ce1c3c284a52e79ddbc739b2733f07ac29eb056aec6672550e020ef960e',
+              'runner_sha256': 'fc89d0fce3d5f0d7e97328b73efde59faf11ca56bec7e1080d8567b89ed9602b',
+              'researched_inception_season': '1927-1928',
+              'validation_mode': 'PROTECTED_MAIN',
+          }
+          if request != expected:
+              raise SystemExit(f'FAIL: request packet mismatch: {request!r}')
+          PY
+
+          for p in             tools/all_history_expansion_freeze.py             tools/all_history_expansion_research.py             tools/program_history.py
+          do
+            git show "$MAIN:$p" > /tmp/expected-tool
+            cmp -s /tmp/expected-tool "$p" || {
+              echo "FAIL: request branch changed permanent tool $p"
+              exit 1
+            }
+          done
+
+          git diff --name-only "$MAIN"...HEAD | sort > /tmp/got-paths
+          cat > /tmp/expected-paths <<'EOF'
+          .github/stage7-freeze-request.json
+          .github/stage7-input/part-00.b64
+          .github/stage7-input/part-01.b64
+          .github/stage7-input/part-02.b64
+          .github/stage7-input/part-03.b64
+          .github/stage7-input/part-04.b64
+          .github/stage7-runner/part-00.b64
+          .github/stage7-runner/part-01.b64
+          .github/stage7-runner/part-02.b64
+          .github/stage7-runner/part-03.b64
+          .github/stage7-runner/part-04.b64
+          .github/stage7-runner/part-05.b64
+          .github/stage7-runner/part-06.b64
+          .github/workflows/miami-stage7-expansion-freeze.yml
+          EOF
+          sort -o /tmp/expected-paths /tmp/expected-paths
+          diff -u /tmp/expected-paths /tmp/got-paths
+
+      - name: Reconstruct and verify exact Stage 6 capsule and disposable Stage 7 runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/stage7-capsule"
+          cat .github/stage7-input/part-*.b64 | base64 -d > "$RUNNER_TEMP/stage7-capsule.tar.gz"
+          echo "b22c1ce1c3c284a52e79ddbc739b2733f07ac29eb056aec6672550e020ef960e  $RUNNER_TEMP/stage7-capsule.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/stage7-capsule.tar.gz" -C "$RUNNER_TEMP/stage7-capsule"
+
+          cat .github/stage7-runner/part-*.b64 | base64 -d > "$RUNNER_TEMP/stage7_freeze_runner.py"
+          echo "fc89d0fce3d5f0d7e97328b73efde59faf11ca56bec7e1080d8567b89ed9602b  $RUNNER_TEMP/stage7_freeze_runner.py" | sha256sum -c -
+          python -m py_compile "$RUNNER_TEMP/stage7_freeze_runner.py"
+
+      - name: Execute permanent Stage 7 freeze, fresh verify, and determinism proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "$RUNNER_TEMP/stage7_freeze_runner.py"             --capsule "$RUNNER_TEMP/stage7-capsule"             --output-dir "$RUNNER_TEMP/stage7-output"
+
+      - name: Publish immutable Stage 7 output
+        uses: actions/upload-artifact@v4
+        with:
+          name: miami-expansion-research-frozen-stage7-${{ github.run_id }}
+          path: ${{ runner.temp }}/stage7-output
+          if-no-files-found: error
+          retention-days: 30
