@@ -1424,7 +1424,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/miami/miami-correction-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "c04ce8ed67cd1ca66a37b0f2643fece32f31b1a89e1417dd65f00de27a9d8d7e",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/miami/miami-correction-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "e415fbc6f934c0cd98aa09f21d5372050acaf5b472196822e005a0c9308c1eb4",
     "merged": false,
@@ -1433,7 +1433,7 @@
     "pr_number": 678,
     "production_request_id": "miami-correction-release-production-proof-0001",
     "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "miami-correction-release-gate2-approval-0001",
     "school_key": "miami",
     "target_branch": "data/miami-correction",
