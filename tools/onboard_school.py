@@ -1575,6 +1575,135 @@ def _execute_multi_game_identity_correction(
     return {"correction_site_nonregression":site_proof,"correction_identity_patches":identity,"reconciliation":reconciliation,"transaction_kind":MULTI_GAME_IDENTITY_CORRECTION_KIND,"archive":archive.relative_to(repo).as_posix(),"site_output":site_output}
 
 
+
+def _git_show_package_member(
+    repo: Path,
+    commit: str,
+    school: str,
+    name: str,
+) -> bytes:
+    result = subprocess.run(
+        ["git", "show", f"{commit}:schools/{school}/{name}"],
+        cwd=repo,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode:
+        raise WorkflowError(
+            "cannot read immutable package-only correction baseline: "
+            + result.stderr.decode("utf-8", "replace").strip()
+        )
+    return result.stdout
+
+
+def _execute_package_only_correction(
+    repo: Path,
+    approved: dict[str, Any],
+) -> dict[str, Any]:
+    """Verify and release one zero-source package-only conference correction."""
+
+    school = approved["school_key"]
+    payload = _validated_correction_freeze_bytes(repo, school)
+    if payload is None:
+        raise WorkflowError(
+            "package-only correction lacks trusted Integration Freeze"
+        )
+    manifest = json.loads(payload)
+    summary = approved.get("summary", {})
+    if (
+        summary.get("correction_transaction_kind")
+        != PACKAGE_ONLY_CORRECTION_KIND
+        or summary.get("correction_package_members")
+        != list(PACKAGE_ONLY_CORRECTION_MEMBERS)
+        or manifest.get("correction_mode") != PACKAGE_ONLY_CORRECTION_MODE
+        or manifest.get("correction_package_members")
+        != list(PACKAGE_ONLY_CORRECTION_MEMBERS)
+        or manifest.get("correction_source_game_ids") != []
+        or approved.get("decisions") != []
+    ):
+        raise WorkflowError("invalid sealed package-only correction scope")
+    if (
+        summary.get("correction_diff_sha256")
+        != manifest.get("correction_diff_sha256")
+    ):
+        raise WorkflowError(
+            "package-only correction diff authority changed before sealed apply"
+        )
+
+    research_base = str(manifest.get("research_base_sha", "")).strip()
+    school_dir = repo / "schools" / school
+    changed_members: list[str] = []
+    for name in REQUIRED_PACKAGE_FILES:
+        current = (school_dir / name).read_bytes()
+        baseline = _git_show_package_member(
+            repo, research_base, school, name
+        )
+        if current != baseline:
+            changed_members.append(name)
+    if changed_members != list(PACKAGE_ONLY_CORRECTION_MEMBERS):
+        raise WorkflowError(
+            "package-only correction baseline delta changed: "
+            + json.dumps(changed_members)
+        )
+
+    before_games = _single_game_correction_snapshot(repo, school)
+    before_site = capture_correction_site_report(repo, school)
+
+    archive = archive_approved_plan(repo, approved)
+    print(f"Archived sealed decisions: {archive.relative_to(repo)}")
+
+    print("\n=== deterministic site build ===")
+    site_output = run(
+        [
+            sys.executable,
+            str(_runtime_tool("build_site_data.py")),
+            str(repo),
+            "--apply",
+        ],
+        cwd=repo,
+        label="site build apply",
+    )
+    first = site_hashes(repo)
+    run(
+        [
+            sys.executable,
+            str(_runtime_tool("build_site_data.py")),
+            str(repo),
+            "--apply",
+        ],
+        cwd=repo,
+        label="site build determinism replay",
+        echo=False,
+    )
+    if first != site_hashes(repo):
+        raise WorkflowError(
+            "package-only correction site build was not deterministic"
+        )
+
+    after_games = _single_game_correction_snapshot(repo, school)
+    if before_games != after_games:
+        raise WorkflowError(
+            "package-only correction changed source/canonical/assertion/discrepancy state"
+        )
+    site_proof = prove_package_only_site_nonregression(
+        before_site,
+        capture_correction_site_report(repo, school),
+    )
+    print(
+        "PASS: package-only correction changed no game/site-bearing state; "
+        "inherited full-gate status: "
+        + site_proof["corrected_site_status"]
+    )
+    return {
+        "correction_site_nonregression": site_proof,
+        "transaction_kind": PACKAGE_ONLY_CORRECTION_KIND,
+        "correction_package_members": list(PACKAGE_ONLY_CORRECTION_MEMBERS),
+        "archive": archive.relative_to(repo).as_posix(),
+        "site_output": site_output,
+    }
+
+
 def execute_approved_in_place(
     repo: Path,
     approved: dict[str, Any],
@@ -1587,6 +1716,8 @@ def execute_approved_in_place(
         return _execute_single_game_correction(repo, approved)
     if correction_kind == MULTI_GAME_IDENTITY_CORRECTION_KIND:
         return _execute_multi_game_identity_correction(repo, approved)
+    if correction_kind == PACKAGE_ONLY_CORRECTION_KIND:
+        return _execute_package_only_correction(repo, approved)
 
     try:
         load_frozen_venue_split_authority(repo, school_key)
