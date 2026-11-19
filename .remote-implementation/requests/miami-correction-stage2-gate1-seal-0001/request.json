@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "miami-correction-stage2-gate1-seal-0001",
+  "school_key": "miami",
+  "operation": "STAGE2_GATE1_SEAL",
+  "previous_control_state_commit": "c1dc2728ec6961fff1c07d7ad373f3861e539acf",
+  "previous_control_state_sha256": "f548626f1871362d77790a92270c9a010f5f03cc9c72a1712a84d8af884e196f",
+  "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "target_branch": "data/miami-correction",
+  "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-correction-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+    "sha256": "3adeaba3e018c52444cc05c2cc02128de91b95ed682dfc289280e87ad8f9631b"
+  },
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-correction-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "40513745d9a034d289a12231d910a5638e3f9229f2eabbf82870225ea4c74e6e"
+  },
+  "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+  "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "recommendation_map_sha256": "a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77",
+  "approved_plan_hash_preview": "20d23846891d8a2390d2f7f0395930304f90edd8ae2a1535479236e56db8a57d",
+  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "owner_gate_1_approval_sha256": "e04dcf7ad5952ec06e30c26dd6590f6c9fa90658d4a95bf1805a5d44e7317fe8",
+  "equivalence_sha256": "4928d61d8cf6edda419b5dfe9ab664120c190695691f47a6da64d67cec41159b",
+  "creation_provenance": {
+    "origin": "Miami post-publication package-only conference correction — cryptographic Gate 1 seal",
+    "authorization": "The exact explicit Owner Gate 1 authority has been encoded, the fresh-verified preseal rehearsal reached READY_TO_SEAL, and exact equivalence passed. Authorize exactly one bounded STAGE2_GATE1_SEAL carrying forward that existing authority: current-main preseal replay plus permanent onboard_school.py --approve cryptographic sealing only. No sealed apply, tracked basketball mutation, Preview, Owner Gate 2, merge, Production, Miami expansion Stage 7, recovery, maintenance, or unrelated authority is created."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": true,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
+}
