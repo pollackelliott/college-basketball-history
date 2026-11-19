@@ -11,35 +11,40 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
-  "correction_integration_freeze": {
-    "path": ".remote-implementation/inputs/miami-conference-correction-0001/integration-freeze.json",
-    "sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618"
-  },
   "creation_provenance": {
-    "authorization": "Owner authorized the bounded Miami conferences.csv correction. CORRECTION_RESEARCH_FROZEN and INTEGRATION_FROZEN are complete. Generic remote Stage 2 package-only admission defect was repaired and merged as protected-main commit 66795cf099c05e272f590fa6d2ffb10c262d6b56. This request authorizes only the read-only correction-aware Stage 2 capability census from exact target 109fb1d5bcf880c8866380e8504b22a86dbed4f1 and exact Integration Freeze e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618. No historical decision, tracked Stage 2 repair, proposal rehearsal, Gate 1 approval, sealed apply, release, merge, Production, expansion Stage 7, or unrelated mutation is authorized.",
-    "origin": "Miami post-publication package-only conference correction from Stage 6 checkpoint 0034"
+    "authorization": "Owner authorized continuation of the bounded Miami conference correction. Stage 2 census miami-correction-stage2-census-0002 is fresh-runner verified with zero decisions, zero blockers, zero warnings, and no tracked mutation. This request authorizes only exact empty-map proposal rehearsal toward OWNER_GATE_1_READY. No historical judgment, Owner Gate 1 approval, sealed apply, release, merge, Production, expansion Stage 7, or unrelated mutation is authorized.",
+    "origin": "Miami post-publication package-only conference correction from zero-decision Stage 2 census"
   },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
   "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "e361b4ac4ed81a8fee7ad216f9aab41764be5018",
-  "previous_control_state_sha256": "d90d8ee09885bc53f3d5fcdba3369f66ef56f146a313591ec2ae5d247853bbff",
-  "request_id": "miami-correction-stage2-census-0002",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "121388e55d332a3912989b9b6deced6c52c6c8cc",
+  "previous_control_state_sha256": "28871f71515cc17894031c171dfb856e09764e27593f016e1ddb510db85228f8",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/miami-correction-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "9a604a0e79cc9bc86c61a330af232b95680ac0a785532a2f1925c73f65e5315c"
+  },
+  "request_id": "miami-correction-stage2-proposal-0001",
   "schema_version": 1,
   "school_key": "miami",
   "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/miami/miami-correction-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "899b9ad687afffec0de7957bb459bbead6834420200deaa69d9580de77b41a97"
+  },
   "target_branch": "data/miami-correction",
   "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
 }
