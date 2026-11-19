@@ -1,0 +1,53 @@
+{
+  "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner said 'Continue' after the generic shard-aware publication-history assertion repair merged to protected main. This continues the already-authorized reversible UNLV release-preparation phase against fresh current main through read-only RELEASE_READINESS, exact existing-PR reuse/refresh, CI/mergeability and exact Vercel Preview verification, ending at OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2 approval, PR merge, Production proof, new historical decisions, and unrelated shared/global mutations are NOT authorized.",
+    "origin": "Same serialized UNLV ordinary original-school Implementation lane — owner-authorized release-preparation phase"
+  },
+  "expected_protected_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "8c90cb72bb528b8f30ae8fc29eb3bf325823d02e",
+  "previous_control_state_sha256": "1941c5b5c1d5d00f699f65c80cf9c4a185a66fb96459a73c7ed1b56ddc7344d7",
+  "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "unlv-release-preview-verify-0002"
+  },
+  "request_id": "unlv-release-readiness-0002",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "034d8aa4cd0f2129f2347dc40eb365ec97c94d0f9b1cfa14774321a77ac0f4db"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "13e4d3401977a9275bf8aa62b772d814cb9d50ba7ff6adadbc3792130f4107d6"
+  },
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b"
+}
