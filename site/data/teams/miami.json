@@ -50939,6 +50939,13 @@
     },
     {
       "start_season": "1954-1955",
+      "end_season": "1964-1965",
+      "conference_key": "florida-intercollegiate-conference",
+      "conference_name": "Florida Intercollegiate Conference",
+      "membership_type": "conference"
+    },
+    {
+      "start_season": "1965-1966",
       "end_season": "1970-1971",
       "conference_key": "independent",
       "conference_name": "Independent",
@@ -50969,11 +50976,13 @@
   "conference_names": {
     "acc": "ACC",
     "big-east": "Big East",
+    "florida-intercollegiate-conference": "Florida Intercollegiate Conference",
     "independent": "Independent"
   },
   "conference_tournament_labels": {
     "acc": "ACC",
-    "big-east": "Big East"
+    "big-east": "Big East",
+    "florida-intercollegiate-conference": "Florida Intercollegiate Conference"
   },
   "conference_tournament_review_flags": []
 }
