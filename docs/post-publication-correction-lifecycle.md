@@ -138,9 +138,40 @@ python tools/correction_lifecycle.py stage <school_key> <correction-frozen.zip> 
 
 This writes the ordinary ignored `.onboarding/<school>/integration-freeze.json` with `workflow_kind=POST_PUBLICATION_CORRECTION`, the pre-correction source semantic baseline, the correction source-game population, and the ordinary Integration Freeze semantic guard. It then runs repository validation and commits only the target school's six-file package changes.
 
-## 6. Downstream Implementation
+## 6. Downstream publication paths
 
-After correction staging, use the existing repository-owned Stage 2, Gate 1, sealed apply, verification, Preview/Gate 2, merge, and Production-proof workflow.
+### 6A. Micro-correction fast path
+
+A staged correction may bypass Stage 2, Owner Gate 1, pre-seal/seal, and sealed apply only when the permanent correction tool proves one of these exact machine classes with `--micro-correction`:
+
+1. **ONE_GAME_IDENTITY_NORMALIZATION** — exactly one existing source-game row changes; there are no additions or deletions; the only source fields changed are `normalized_opponent_key` and/or `normalized_opponent_name`; the historical semantic snapshot is identical before/after; and the only changed package files are `source-games.csv` plus, optionally, exactly one supporting row replacement in `opponents.csv`.
+2. **PACKAGE_ONLY_CONFERENCES** — the already-supported package-only correction changes exactly `conferences.csv`, changes no source-game row, carries no correction source IDs, and preserves the source semantic snapshot exactly.
+
+The tool emits ignored `.onboarding/<school>/micro-correction-ready.json` only after `stage --apply --commit --micro-correction` proves the exact current-main parent, correction Freeze, Integration Freeze, target commit, changed paths, package-member hashes, correction diff hash, and fast-path class.
+
+The release sequence is:
+
+```text
+CORRECTION_RESEARCH_FROZEN
+→ current-main stage --micro-correction
+→ MICRO_CORRECTION_READY
+→ exact correction PR
+→ repository CI + exact PR-head Preview
+→ one explicit owner approval of that exact PR head / Preview
+→ exact two-parent merge
+→ exact Production deployment + public JSON equivalence proof
+→ COMPLETE
+```
+
+There is no Stage 2 census, recommendation map, Owner Gate 1, cryptographic seal, or sealed apply on this path. Eligibility itself proves that no protected historical-semantic field is being adjudicated. The single owner approval is the exact-Preview publication approval immediately before merge.
+
+The fast path is fail-closed. Any date, score, result, overtime, H/A/N, venue/location, event/game type, postseason round, literal source evidence, game inclusion/identity, source-game addition/deletion, new shared/global reference, second source-game row, extra supporting opponent row, or undeclared package member disqualifies the correction and returns it to the ordinary full correction lifecycle.
+
+A micro-correction is not a serialized school Implementation lane and does not enter the remote Stage 2 control plane. It may proceed only while global Implementation control is safely `IDLE / COMPLETE` with no recovery condition, reauthenticated again immediately before merge. Protected `main` is never mutated directly.
+
+### 6B. Ordinary downstream Implementation
+
+Corrections that do not qualify for the permanent micro-correction rule use the existing repository-owned Stage 2, Gate 1, sealed apply, verification, Preview/Gate 2, merge, and Production-proof workflow.
 
 When serialized execution uses the guarded remote runner, the correction's
 `INTEGRATION_FROZEN` manifest is the initial Stage 2 target authority. Submit
