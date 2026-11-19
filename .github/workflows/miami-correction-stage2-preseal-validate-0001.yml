@@ -1,0 +1,109 @@
+name: Miami correction Stage 2 preseal validation 0001
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/miami-correction-stage2-preseal-validate-0001.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Authenticate exact authorities and build request
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main control/remote-implementation data/miami-correction
+          test "$(git rev-parse origin/main)" = "66795cf099c05e272f590fa6d2ffb10c262d6b56"
+          test "$(git rev-parse origin/control/remote-implementation)" = "e60274d80cd7a494b12ed1ffa0fd0cd5769557a5"
+          test "$(git rev-parse origin/data/miami-correction)" = "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+
+          python - <<'PY'
+          import hashlib, json, subprocess
+          def show(path):
+              return subprocess.check_output(["git","show",f"origin/control/remote-implementation:{path}"])
+          state=json.loads(show(".remote-implementation/control-state.json"))
+          assert state["lifecycle_state"]=="IDLE"
+          assert state["transaction_state"]=="COMPLETE"
+          assert state["recovery_required"] is False
+          assert state.get("active_request_id") is None
+          last=state["last_operation"]
+          assert last["request_id"]=="miami-correction-stage2-gate1-fill-0001"
+          assert last["gate1_fill_status"]=="FILLED"
+          assert last["fresh_runner_verification"]=="PASS"
+          assert last["remote_stage2_gate1_fill_equivalence"]=="PASS"
+
+          vpath=".remote-implementation/verifications/miami/miami-correction-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json"
+          vsha=hashlib.sha256(show(vpath)).hexdigest()
+
+          req={
+            "schema_version":1,
+            "kind":"REMOTE_IMPLEMENTATION_REQUEST",
+            "request_id":"miami-correction-stage2-preseal-rehearsal-0001",
+            "school_key":"miami",
+            "operation":"STAGE2_PRESEAL_REHEARSAL",
+            "expected_protected_main_sha":"66795cf099c05e272f590fa6d2ffb10c262d6b56",
+            "target_branch":"data/miami-correction",
+            "target_sha":"109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+            "stage2_gate1_fill_checkpoint":{
+              "path":".remote-implementation/checkpoints/miami/miami-correction-stage2-gate1-fill-0001/checkpoint-manifest.json",
+              "sha256":"040d5fdfa4aa40973c43e90e9ebd094459ea34c06e6974841d2448fe7a6dfc8e"
+            },
+            "stage2_gate1_fill_verification":{"path":vpath,"sha256":vsha},
+            "integration_freeze_sha256":"e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+            "semantic_snapshot_sha256":"c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+            "decision_universe_sha256":"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "recommendation_map_sha256":"a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77",
+            "approved_plan_hash_preview":"20d23846891d8a2390d2f7f0395930304f90edd8ae2a1535479236e56db8a57d",
+            "filled_review_sha256":"c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+            "decision_id_set_sha256":"01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+            "creation_provenance":{
+              "origin":"Miami post-publication package-only conference correction — approved Gate 1 fill preseal technical rehearsal",
+              "authorization":"The owner's explicit Gate 1 approval has been encoded by fresh-verified Gate 1 fill. Authorize exactly one bounded read-only STAGE2_PRESEAL_REHEARSAL against that exact fill checkpoint. Existing Gate 1 authority persists through this technical verification. No cryptographic seal, sealed apply, tracked basketball mutation, Preview, Owner Gate 2, merge, Production, Miami expansion Stage 7, recovery, or unrelated authority is created."
+            },
+            "authority":{
+              "owner_gate_1":false,
+              "owner_gate_2":false,
+              "release":false,
+              "phase0":false,
+              "phase0_scope_supersession":false,
+              "recovery":false,
+              "stage2_census":false,
+              "stage2_current_main_refresh":false,
+              "stage2_opponent_display_normalize":false,
+              "stage2_proposal_rehearsal":false,
+              "stage2_gate1_fill":false,
+              "stage2_preseal_rehearsal":true,
+              "stage2_gate1_seal":false,
+              "stage2_sealed_apply":false,
+              "stage2_reconciliation_diagnostic":false,
+              "release_readiness":false,
+              "release_preview_verify":false,
+              "release_gate2_approval":false,
+              "release_presentation_refresh":false,
+              "release_production_proof":false,
+              "venue_identity_maintenance":false
+            }
+          }
+          open("/tmp/request.json","w").write(json.dumps(req,indent=2)+"\n")
+          print("gate1_fill_verification_sha256="+vsha)
+          PY
+
+          python tools/remote_implementation_request_submit.py --template /tmp/request.json | tee /tmp/validation.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: miami-correction-stage2-preseal-request-packet-0001
+          path: |
+            /tmp/request.json
+            /tmp/validation.json
+          retention-days: 30
