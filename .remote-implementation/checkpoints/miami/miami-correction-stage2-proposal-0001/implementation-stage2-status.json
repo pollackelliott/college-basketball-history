@@ -1,0 +1,40 @@
+{
+  "branch": "remote-stage2-census/miami-109fb1d5bcf8",
+  "capability_census": {
+    "path": ".onboarding/miami/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 0
+  },
+  "head_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "integration_base_sha": "301d9eb4a323a5d393f0e20a1508be6565376553",
+  "integration_semantic_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "last_error": "site_gap_provenance requires exactly one publication decision row",
+  "next_action": "Diagnose this repository/tool failure from durable state and the authoritative permanent-tool output; do not replace the phase with assistant-authored orchestration.",
+  "origin_main_sha_at_integration_freeze": "301d9eb4a323a5d393f0e20a1508be6565376553",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/miami/plan.json",
+    "review_path": ".onboarding/miami/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "301d9eb4a323a5d393f0e20a1508be6565376553",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": null,
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
