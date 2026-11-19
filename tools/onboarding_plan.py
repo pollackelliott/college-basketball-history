@@ -9711,6 +9711,58 @@ def apply_reconciliation_decisions(
     return dict(counts)
 
 
+
+def prepare_pre_ingest_complete_institutional_coverage(
+    repo: Path,
+    approved: dict[str, Any],
+) -> dict[str, int]:
+    """Expose frozen complete-institutional coverage to ingestion inside a sealed transaction.
+
+    Stage 2 planning may project an unpublished UNMIGRATED program to
+    COMPLETE_INSTITUTIONAL from hash-authenticated frozen Research authority.  The
+    disposable/sealed apply path must use that same publication universe before
+    ingestion creates target assertions.  This helper deliberately does not enable
+    the public page; the existing publication decision remains the sole place that
+    flips public_page_enabled.
+    """
+
+    publication_items = [
+        item
+        for item in approved.get("decisions", [])
+        if item.get("category") == "publication"
+    ]
+    if not any(
+        item.get("decision") == "ENABLE_PUBLIC_PAGE"
+        for item in publication_items
+    ):
+        return {}
+
+    school_key = approved["school_key"]
+    programs_path = repo / "data/reference/programs.csv"
+    program_fields, program_rows = read_csv_table(programs_path)
+    matches = [
+        row for row in program_rows
+        if row.get("program_key", "").strip() == school_key
+    ]
+    if len(matches) != 1:
+        raise WorkflowError(
+            f"{school_key}: pre-ingest coverage transition requires exactly one program row"
+        )
+    program = matches[0]
+    if program.get("history_coverage_status", "").strip() != "UNMIGRATED":
+        return {}
+
+    projected = stage2_program_for_planning(repo, school_key, program)
+    if projected.get("history_coverage_status", "").strip() != "COMPLETE_INSTITUTIONAL":
+        return {}
+
+    program["program_inception_season"] = projected[
+        "program_inception_season"
+    ]
+    program["history_coverage_status"] = "COMPLETE_INSTITUTIONAL"
+    write_csv_preserving_format(programs_path, program_fields, program_rows)
+    return {"complete_institutional_coverage_transitions": 1}
+
 def apply_publication_decisions(
     repo: Path,
     approved: dict[str, Any],
