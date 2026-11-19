@@ -127,6 +127,71 @@ jobs:
                           or manifest.get('recommendation_map_sha256') != last.get('recommendation_map_sha256')
                           or manifest.get('decision_universe_sha256') != last.get('decision_universe_sha256')):
                       fail('checkpoint does not bind exact verified last operation')
+              elif (last.get('operation') == 'STAGE2_RECONCILIATION_DIAGNOSTIC'
+                    and last.get('fresh_runner_verification') == 'PASS'
+                    and last.get('remote_stage2_diagnostic_equivalence') == 'PASS'):
+                  mode = 'BLOCKED_PROPOSAL'
+                  diagnostic_checkpoint = str(last.get('checkpoint_manifest_path') or '')
+                  school = str(last.get('school_key') or '')
+                  expected_main = ''
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or not diagnostic_checkpoint.startswith(
+                              '.remote-implementation/checkpoints/' + school + '/'
+                          )
+                          or not diagnostic_checkpoint.endswith('/checkpoint-manifest.json')
+                          or '..' in Path(diagnostic_checkpoint).parts):
+                      fail('diagnostic checkpoint path not within selected school authority')
+                  diagnostic_raw = (
+                      Path('control') / diagnostic_checkpoint
+                  ).read_bytes()
+                  if (
+                      hashlib.sha256(diagnostic_raw).hexdigest()
+                      != last.get('checkpoint_manifest_sha256')
+                  ):
+                      fail('diagnostic checkpoint bytes do not match control-state hash')
+                  diagnostic = json.loads(diagnostic_raw)
+                  checkpoint = str(
+                      diagnostic.get('stage2_proposal_checkpoint_path') or ''
+                  )
+                  source_checkpoint_sha = str(
+                      diagnostic.get('stage2_proposal_checkpoint_sha256') or ''
+                  )
+                  if (
+                      diagnostic.get('kind')
+                      != 'REMOTE_IMPLEMENTATION_STAGE2_RECONCILIATION_DIAGNOSTIC_CHECKPOINT'
+                      or diagnostic.get('diagnostic_status') != 'PASS'
+                      or diagnostic.get('execution_status') != 'RECONCILIATION_BLOCKED'
+                      or diagnostic.get('school_key') != school
+                      or diagnostic.get('request_id') != last.get('request_id')
+                      or diagnostic.get('target_sha') != last.get('target_sha')
+                      or diagnostic.get('canonical_game_id') != last.get('canonical_game_id')
+                      or diagnostic.get('trace_sha256') != last.get('trace_sha256')
+                      or not checkpoint.startswith(
+                          '.remote-implementation/checkpoints/' + school + '/'
+                      )
+                      or not checkpoint.endswith('/checkpoint-manifest.json')
+                      or '..' in Path(checkpoint).parts
+                      or not re.fullmatch(r'[0-9a-f]{64}', source_checkpoint_sha)
+                  ):
+                      fail('diagnostic checkpoint does not bind exact verified last operation')
+                  proposal_raw = (Path('control') / checkpoint).read_bytes()
+                  if hashlib.sha256(proposal_raw).hexdigest() != source_checkpoint_sha:
+                      fail('diagnostic source proposal checkpoint hash mismatch')
+                  manifest = json.loads(proposal_raw)
+                  if (
+                      manifest.get('kind')
+                      != 'REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT'
+                      or manifest.get('stage2_status') != 'BLOCKED'
+                      or manifest.get('school_key') != school
+                      or manifest.get('request_id')
+                      != diagnostic.get('source_proposal_request_id')
+                      or manifest.get('target_sha') != diagnostic.get('target_sha')
+                      or manifest.get('decision_universe_sha256')
+                      != diagnostic.get('decision_universe_sha256')
+                      or manifest.get('recommendation_map_sha256')
+                      != diagnostic.get('recommendation_map_sha256')
+                  ):
+                      fail('diagnostic source proposal authority mismatch')
               elif (last.get('operation') == 'STAGE2_PRESEAL_REHEARSAL'
                     and last.get('preseal_status') == 'BLOCKED'
                     and last.get('fresh_runner_verification') == 'PASS'
