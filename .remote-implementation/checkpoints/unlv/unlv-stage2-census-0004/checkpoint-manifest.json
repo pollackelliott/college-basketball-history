@@ -1,0 +1,156 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "c6b336be4df801df07da18e740c628e51b1547b4ced4940af00ecd0b26fbb086",
+    "implementation-stage2-status.json": "e6ea3e75677d363c2bf88a82f9b1b82991c606a88e4e0c5a105c9394da783c96",
+    "plan.json": "ee25baaf1f8c8dbb5480417600aa33362660d5364d602ca9dafbd7cd7ed98171",
+    "review.csv": "5cde9ecfc3598b25dcf2410eda5207d5859065eae7c7b60c772a2f00da13d9ad",
+    "review.md": "6db401213b0d1c617999d9bfca551dd568398201e26dd7c86dc9cdf496572acf"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "c6b336be4df801df07da18e740c628e51b1547b4ced4940af00ecd0b26fbb086",
+    "implementation-stage2-status.json": "cf558c92f7f8260becc3884996c180aaa4d73c6e14eec2c02db8c7fff8fb22ca",
+    "plan.json": "716836034c11f844baea09f3bc0213a9011338f6696ebdcc14226bbb8dfffe3a",
+    "review.csv": "5cde9ecfc3598b25dcf2410eda5207d5859065eae7c7b60c772a2f00da13d9ad",
+    "review.md": "7cba9238660416ae81792cc387177fd9c7c8b8224f9887f3d5eb88937cf3b543"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "c6b336be4df801df07da18e740c628e51b1547b4ced4940af00ecd0b26fbb086",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 11,
+      "discrepancy": 29,
+      "identity": 4,
+      "publication": 1
+    },
+    "decision_count": 46,
+    "decision_fields": {
+      "game_date": 8,
+      "game_identity": 4,
+      "overtime_periods": 2,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 1,
+      "score": 17,
+      "site_type": 12
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-UNLV-1979-80-022-CBBG-0210905-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UNLV-1987-88-019-CBBG-0179574-SITE_TYPE",
+      "DISCREPANCY-UNLV-1983-84-003-SITE_TYPE",
+      "DISCREPANCY-UNLV-1984-85-008-SITE_TYPE",
+      "DISCREPANCY-UNLV-1989-90-002-SITE_TYPE",
+      "DISCREPANCY-UNLV-1992-93-023-SITE_TYPE",
+      "DISCREPANCY-UNLV-2007-08-009-SITE_TYPE",
+      "DISCREPANCY-UNLV-2020-21-027-SITE_TYPE",
+      "DISCREPANCY-UNLV-2021-22-030-SITE_TYPE",
+      "DISCREPANCY-UNLV-2023-24-008-SITE_TYPE",
+      "DISCREPANCY-UNLV-2024-25-033-SITE_TYPE",
+      "DISCREPANCY-UNLV-2025-26-033-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 12,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0179574",
+          "fixed_confident_source_game_ids": [
+            "unlv-1987-88-028"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "unlv-1987-88-019"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0210905",
+          "fixed_confident_source_game_ids": [
+            "unlv-1979-80-027"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "unlv-1979-80-022"
+          ]
+        }
+      ],
+      "count": 2,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "unlv"
+  ],
+  "phase0_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "phase0_successor_path": ".remote-implementation/successors/unlv/unlv-phase0-0002/successor-manifest.json",
+  "phase0_successor_sha256": "1c13241d96283d7543dee0559a949e03f9b3c4061b1a787f965efd3b011a0b33",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 11,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 11,
+      "discrepancy": 29,
+      "identity": 4,
+      "publication": 1
+    },
+    "decision_count": 46,
+    "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "discrepancies_to_add": 29,
+    "existing_game_matches": 826,
+    "identity_cardinality_constraints": 2,
+    "new_canonical_games": 1248,
+    "plan_path": ".onboarding/unlv/plan.json",
+    "review_path": ".onboarding/unlv/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "request_id": "unlv-stage2-census-0004",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "stage2_current_main_refresh_successor_path": ".remote-implementation/successors/unlv/unlv-stage2-current-main-refresh-0003/successor-manifest.json",
+  "stage2_current_main_refresh_successor_sha256": "1c5763c3b03d9450aff8f2326a42915559e027759d9858f77f73d14e00e9cd9d",
+  "stage2_current_main_refresh_verification_path": ".remote-implementation/verifications/unlv/unlv-stage2-current-main-refresh-0003/stage2-current-main-refresh-verification.json",
+  "stage2_opponent_display_successor_path": ".remote-implementation/successors/unlv/unlv-stage2-opponent-display-normalize-0001/successor-manifest.json",
+  "stage2_opponent_display_successor_sha256": "497ec4460359fa5e88731568ff3a88d0495b83e6614d62d40da1ca44fc8fbb55",
+  "stage2_opponent_display_verification_path": ".remote-implementation/verifications/unlv/unlv-stage2-opponent-display-normalize-0001/stage2-opponent-display-verification.json",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+  "target_tree_sha": "2dedf7d080aa725bae3404fdf951b23acfee19a9",
+  "tracked_mutation_proof": {
+    "after_head_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+    "after_status": "",
+    "after_tree_sha": "2dedf7d080aa725bae3404fdf951b23acfee19a9",
+    "before_head_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+    "before_status": "",
+    "before_tree_sha": "2dedf7d080aa725bae3404fdf951b23acfee19a9",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
