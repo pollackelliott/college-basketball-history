@@ -172,6 +172,96 @@ class CorrectionDiffTests(unittest.TestCase):
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["counts"]["changed_source_games"], 1)
 
+    def test_identity_only_change_does_not_reopen_unchanged_site_debt(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            before = row(
+                "G1",
+                season_label="1979-1980",
+                game_date="1979-12-22",
+                normalized_opponent_key="wrong-opponent",
+                normalized_opponent_name="Wrong Opponent",
+                curated_site_type="NEUTRAL",
+                source_venue_name="",
+                curated_venue_name="",
+                city="Roanoke",
+                state="VA",
+                event_or_tournament="Times World Tournament (Roanoke, Va.)",
+            )
+            after = dict(
+                before,
+                normalized_opponent_key="opponent",
+                normalized_opponent_name="Opponent",
+            )
+            write_csv(root / "source-games.csv", FIELDS, [after])
+            write_csv(
+                root / "opponents.csv",
+                [
+                    "source_program_key",
+                    "source_opponent_label",
+                    "canonical_opponent_key",
+                ],
+                [{
+                    "source_program_key": "example",
+                    "source_opponent_label": "Opponent",
+                    "canonical_opponent_key": "opponent",
+                }],
+            )
+            write_csv(
+                root / "venues.csv",
+                [
+                    "source_program_key",
+                    "venue_key",
+                    "venue_id",
+                    "canonical_name",
+                    "aliases",
+                    "city",
+                    "state",
+                    "relationship_type",
+                    "relationship_start",
+                    "relationship_end",
+                ],
+                [],
+            )
+            identity_diff = source_game_diff(
+                csv_bytes([before]),
+                csv_bytes([after]),
+            )
+            report = validate_correction_candidate(
+                root,
+                school_key="example",
+                changed_source_game_ids=["G1"],
+                source_diff=identity_diff,
+            )
+            self.assertEqual(report["status"], "PASS")
+            self.assertEqual(
+                report["counts"]["identity_only_site_exempt_source_games"],
+                1,
+            )
+            self.assertEqual(report["counts"]["site_checked_source_games"], 0)
+
+            non_identity_after = dict(after, game_date="1979-12-23")
+            write_csv(
+                root / "source-games.csv",
+                FIELDS,
+                [non_identity_after],
+            )
+            non_identity_diff = source_game_diff(
+                csv_bytes([before]),
+                csv_bytes([non_identity_after]),
+            )
+            report = validate_correction_candidate(
+                root,
+                school_key="example",
+                changed_source_game_ids=["G1"],
+                source_diff=non_identity_diff,
+            )
+            self.assertEqual(report["status"], "FAIL")
+            self.assertEqual(report["counts"]["site_checked_source_games"], 1)
+            self.assertTrue(
+                any("neutral_missing_venue" in error for error in report["errors"])
+            )
+
 
 class CorrectionStage2LegacyPackageScopeTests(unittest.TestCase):
     def git(self, repo, *args):

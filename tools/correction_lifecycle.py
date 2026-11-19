@@ -29,6 +29,10 @@ WORKFLOW_KIND = "POST_PUBLICATION_CORRECTION"
 PACKAGE_ONLY_SCOPE = "package-field-correction"
 PACKAGE_ONLY_MODE = "PACKAGE_ONLY_FIELD"
 PACKAGE_ONLY_SUPPORTED_MEMBERS = frozenset({"conferences.csv"})
+IDENTITY_ONLY_NORMALIZATION_FIELDS = frozenset({
+    "normalized_opponent_key",
+    "normalized_opponent_name",
+})
 
 
 def run(cmd: list[str], repo: Path, *, echo: bool = False) -> str:
@@ -144,7 +148,13 @@ def exact_diff(base: dict[str, bytes], root: Path) -> dict[str, Any]:
             "source_games": source_game_diff(base["source-games.csv"], (root / "source-games.csv").read_bytes())}
 
 
-def validate_correction_candidate(root: Path, school_key: str, changed_source_game_ids: list[str]) -> dict[str, Any]:
+def validate_correction_candidate(
+    root: Path,
+    school_key: str,
+    changed_source_game_ids: list[str],
+    *,
+    source_diff: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     fields, games = csv_file(root / "source-games.csv")
     _, opponents = csv_file(root / "opponents.csv")
     _, venues = csv_file(root / "venues.csv")
@@ -168,12 +178,48 @@ def validate_correction_candidate(root: Path, school_key: str, changed_source_ga
         venue = r.get("curated_venue_name", "").strip()
         if venue and venue.casefold() not in venue_names:
             errors.append(f"{sid}: curated venue {venue!r} absent from venues.csv")
-    site = source_site_completeness_report(fields, changed)
-    home = source_home_chronology_report(changed, venues, school_key=school)
+
+    site_scope_ids = set(ids)
+    identity_only_site_exempt_ids: list[str] = []
+    if source_diff is not None:
+        added_ids = {
+            str(item.get("source_game_id", "")).strip()
+            for item in source_diff.get("added", [])
+            if isinstance(item, dict)
+        }
+        for item in source_diff.get("modified", []):
+            if not isinstance(item, dict):
+                continue
+            sid = str(item.get("source_game_id", "")).strip()
+            changed_fields = set((item.get("fields") or {}).keys())
+            if (
+                sid
+                and sid not in added_ids
+                and changed_fields
+                and changed_fields.issubset(IDENTITY_ONLY_NORMALIZATION_FIELDS)
+            ):
+                site_scope_ids.discard(sid)
+                identity_only_site_exempt_ids.append(sid)
+
+    site_changed = [
+        rows[k] for k in ids
+        if k in rows and k in site_scope_ids
+    ]
+    site = source_site_completeness_report(fields, site_changed)
+    home = source_home_chronology_report(site_changed, venues, school_key=school)
     errors.extend(site["errors"]); errors.extend(home["errors"])
-    return {"status": "PASS" if not errors else "FAIL", "errors": errors,
-            "warnings": [*site["warnings"], *home["warnings"]],
-            "counts": {"changed_source_games": len(changed), "site": site["counts"], "home": home["counts"]}}
+    return {
+        "status": "PASS" if not errors else "FAIL",
+        "errors": errors,
+        "warnings": [*site["warnings"], *home["warnings"]],
+        "counts": {
+            "changed_source_games": len(changed),
+            "site_checked_source_games": len(site_changed),
+            "identity_only_site_exempt_source_games": len(identity_only_site_exempt_ids),
+            "site": site["counts"],
+            "home": home["counts"],
+        },
+    }
 
 
 def validate_package_only_candidate(
@@ -294,7 +340,10 @@ def freeze(args: argparse.Namespace, repo: Path) -> int:
             if not ids:
                 raise WorkflowError("candidate changes no source-game rows")
             acceptance = validate_correction_candidate(
-                root, args.school_key, ids
+                root,
+                args.school_key,
+                ids,
+                source_diff=diff["source_games"],
             )
             correction_mode = "SOURCE_GAME_DELTA"
 
@@ -480,7 +529,14 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
                 raise WorkflowError(
                     "source-game correction freeze has no correction source IDs"
                 )
-            acceptance = validate_correction_candidate(root, school, ids)
+            acceptance = validate_correction_candidate(
+                root,
+                school,
+                ids,
+                source_diff=(frozen.get("correction_diff") or {}).get(
+                    "source_games"
+                ),
+            )
             if acceptance["status"] != "PASS":
                 raise WorkflowError(
                     "frozen candidate no longer passes scoped acceptance"
