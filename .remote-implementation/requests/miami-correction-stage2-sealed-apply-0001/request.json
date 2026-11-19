@@ -1,0 +1,56 @@
+{
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "approved_plan_sha256": "004da4724ca22e229144e6a799e514b045d425e9ce6f1f7486f94d005143f6b9",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": true,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "The exact correction Gate 1 seal is independently fresh-verified. The owner has explicitly authorized deterministic progression through guarded sealed apply and exact successor verification. This request authorizes exactly one STAGE2_SEALED_APPLY of the exact sealed plan, durable write-ahead/CAS publication to data/miami-correction, and required independent exact-tree verification. It creates no new historical authority and grants no Owner Gate 2, merge, Production, Miami expansion Stage 7, recovery, maintenance, or unrelated authority.",
+    "origin": "Miami post-publication package-only conference correction - exact sealed apply"
+  },
+  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+  "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "e04dcf7ad5952ec06e30c26dd6590f6c9fa90658d4a95bf1805a5d44e7317fe8",
+  "previous_control_state_commit": "0b8f5152d828d90c7d8d0481e2f82a8361af94fb",
+  "previous_control_state_sha256": "adeea75d1e5e205daa1d199e29f3ba752916793248ee975e27872e0cb45e6fb0",
+  "recommendation_map_sha256": "a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77",
+  "request_id": "miami-correction-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-correction-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "f7b288079537cf0ea96d1f92bcc52fce5c5ad1fc995b3890eae41a4dc02b31a7"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-correction-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "03f696cb1d90dca2e329a3c984ca94d2a8e0e9d3a20b4a603e9bf6b3c69d2267"
+  },
+  "target_branch": "data/miami-correction",
+  "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+}
