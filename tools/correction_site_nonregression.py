@@ -14,6 +14,7 @@ FULL_POPULATION_LIMIT = 100000
 SINGLE_MODE = "SINGLE_GAME_CORRECTION_NONREGRESSION"
 MULTI_MODE = "MULTI_GAME_CORRECTION_NONREGRESSION"
 EXPANSION_MODE = "ALL_HISTORY_EXPANSION_NONREGRESSION"
+PACKAGE_ONLY_MODE = "PACKAGE_ONLY_CORRECTION_NONREGRESSION"
 
 # These are the canonical populations that the permanent implementation site
 # report turns into actual publication errors. Raw gap categories such as
@@ -98,6 +99,59 @@ def verify_current(report: dict[str, Any], proof: dict[str, Any], school: str) -
     target_ok = (bool(proof.get('target_game_id')) if mode==SINGLE_MODE else (isinstance(proof.get('target_game_ids'),list) and len(proof['target_game_ids'])>=2 and proof['target_game_ids']==sorted(set(proof['target_game_ids'])) and all(proof['target_game_ids'])) if mode==MULTI_MODE else False)
     if (not target_ok or proof.get('school_key') != school or report.get('school_key') != school or digest(report) != proof.get('corrected_report_sha256') or report.get('status') != proof.get('corrected_site_status')):
         raise WorkflowError("correction site proof does not match independent site gate")
+
+
+
+def prove_package_only(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
+    """Prove a package-only correction changed no game/site-bearing state."""
+
+    from onboarding_plan import WorkflowError
+    before_scope = before.get("source_validation_scope", {})
+    after_scope = after.get("source_validation_scope", {})
+    if (
+        before.get("school_key") != after.get("school_key")
+        or before.get("history_start_season") != after.get("history_start_season")
+        or before_scope != after_scope
+        or before_scope.get("mode") != "PACKAGE_ONLY_CORRECTION"
+        or int(before_scope.get("scoped_source_games", -1)) != 0
+    ):
+        raise WorkflowError(
+            "package-only site proof requires identical zero-source correction scope"
+        )
+    if before != after:
+        raise WorkflowError(
+            "package-only correction changed the independent site-completeness report"
+        )
+    report_hash = digest(after)
+    return {
+        "mode": PACKAGE_ONLY_MODE,
+        "school_key": before["school_key"],
+        "baseline_report_sha256": report_hash,
+        "corrected_report_sha256": report_hash,
+        "baseline_site_status": before["status"],
+        "corrected_site_status": after["status"],
+        "site_debt_remains": after["status"] != "PASS",
+    }
+
+
+def verify_package_only_current(
+    report: dict[str, Any], proof: dict[str, Any], school: str
+) -> None:
+    """Require the independent site gate to equal the package-only proved state."""
+
+    from onboarding_plan import WorkflowError
+    if (
+        proof.get("mode") != PACKAGE_ONLY_MODE
+        or proof.get("school_key") != school
+        or report.get("school_key") != school
+        or report.get("source_validation_scope", {}).get("mode")
+        != "PACKAGE_ONLY_CORRECTION"
+        or digest(report) != proof.get("corrected_report_sha256")
+        or report.get("status") != proof.get("corrected_site_status")
+    ):
+        raise WorkflowError(
+            "package-only correction site proof does not match independent site gate"
+        )
 
 
 def prove_expansion(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
