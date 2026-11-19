@@ -65,7 +65,40 @@ The Implementation lane must compare that exact diff to the accepted correction 
 
 For a completed-season supplement, also provide `--required-completed-season-cutoff`.
 
-A successful artifact has status `CORRECTION_RESEARCH_FROZEN`. The frozen ZIP contains the exact full six-file candidate plus `correction-freeze.json`, including baseline/candidate hashes, the exact correction diff, the accepted Research authority reference/digest, and the complete changed/new source-game ID population.
+### Package-only field correction
+
+When the accepted correction changes published package representation but no
+source-game row, use the separately bounded package-only scope:
+
+```bash
+python tools/correction_lifecycle.py freeze <school_key> <candidate.zip> \
+  --research-base <research_base_sha> \
+  --scope package-field-correction \
+  --package-member conferences.csv \
+  --research-authority-ref <checkpoint-name-or-ref> \
+  --research-authority-digest <checkpoint-digest>
+```
+
+The first supported package-only member is deliberately limited to
+`conferences.csv`. The candidate must preserve `source-games.csv` byte-for-byte
+against the immutable published baseline, the actual changed package-member set
+must exactly equal the declared `--package-member` set, and current conference
+history validation must pass against the registered conference identities.
+Opponent, venue, notes, source-notes, or other package-only corrections require
+an explicit future tooling extension rather than inheriting this authority.
+
+A package-only freeze records `correction_mode=PACKAGE_ONLY_FIELD`, the exact
+changed-member population, an empty `correction_source_game_ids` list, and
+identical pre/post source semantic guards. Stage 2 treats this as a zero-decision
+correction transaction: it does not reopen unrelated accepted published-game
+reviews or manufacture a second historical decision. Sealed apply does not run
+ingestion or reconciliation; it proves that only the declared package member
+differs from the immutable baseline, that source/canonical/assertion/discrepancy
+game-bearing state is unchanged, and that public-data rebuilds are deterministic.
+The independent site gate still runs and preserves any inherited published site
+debt through an exact package-only nonregression proof.
+
+A successful artifact has status `CORRECTION_RESEARCH_FROZEN`. The frozen ZIP contains the exact full six-file candidate plus `correction-freeze.json`, including baseline/candidate hashes, the exact correction diff, the accepted Research authority reference/digest, and the complete changed/new source-game ID population (empty for package-only corrections).
 
 Source-game deletion is intentionally unsupported by this first correction contract. A future correction that genuinely requires deletion must stop for an explicit tooling extension rather than weakening the invariant silently.
 
@@ -168,6 +201,7 @@ must stop for explicit tooling rather than inheriting this identity-only path.
 Stop rather than broadening the correction when any of these occurs:
 
 - candidate diff contains a source-game change not authorized by the accepted correction checkpoint;
+- a package-only correction changes any undeclared package member or attempts a package member outside the explicit supported allow-list;
 - a published source game would be deleted;
 - target six-file package drifted after the correction's `research_base_sha`;
 - correction requires a new/changed shared reference;
