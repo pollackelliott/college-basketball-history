@@ -24,6 +24,7 @@ from conference_reference import REQUIRED_HISTORY_COLUMNS, history_errors
 from integration_freeze_guard import build_source_game_semantic_snapshot, semantic_snapshot_sha256
 from onboarding_plan import REQUIRED_PACKAGE_FILES, WorkflowError
 from site_completeness import source_home_chronology_report, source_site_completeness_report
+import remediate_source_scoped_opponent_identity as scoped_identity
 
 WORKFLOW_KIND = "POST_PUBLICATION_CORRECTION"
 PACKAGE_ONLY_SCOPE = "package-field-correction"
@@ -37,7 +38,67 @@ IDENTITY_ONLY_NORMALIZATION_FIELDS = frozenset({
 MICRO_CORRECTION_READY_KIND = "POST_PUBLICATION_MICRO_CORRECTION_READY"
 MICRO_CORRECTION_READY_STATUS = "MICRO_CORRECTION_READY"
 MICRO_IDENTITY_CLASS = "ONE_GAME_IDENTITY_NORMALIZATION"
-MICRO_PACKAGE_CLASS = "PACKAGE_ONLY_CONFERENCES"
+
+
+def _micro_identity_transaction_plan(
+    repo: Path,
+    frozen: dict[str, Any],
+) -> dict[str, Any]:
+    """Build the existing source-scoped canonical/assertion transaction for one frozen identity row."""
+
+    source = ((frozen.get("correction_diff") or {}).get("source_games") or {})
+    modified = source.get("modified") or []
+    if len(modified) != 1:
+        raise WorkflowError("micro identity correction requires exactly one modified source row")
+    item = modified[0]
+    source_id = str(item.get("source_game_id", "")).strip()
+    fields = item.get("fields") or {}
+    key_change = fields.get("normalized_opponent_key") or {}
+    name_change = fields.get("normalized_opponent_name") or {}
+    old_key = str(key_change.get("before", "")).strip()
+    new_key = str(key_change.get("after", "")).strip()
+    new_name = str(name_change.get("after", "")).strip()
+    if not all((source_id, old_key, new_key, new_name)):
+        raise WorkflowError("micro identity correction lacks exact old/new opponent identity")
+
+    _, source_rows = csv_file(repo / "schools" / frozen["school_key"] / "source-games.csv")
+    matches = [row for row in source_rows if row.get("source_game_id", "").strip() == source_id]
+    if len(matches) != 1:
+        raise WorkflowError("micro identity correction source row is not uniquely present on current main")
+    source_label = matches[0].get("source_opponent_label", "").strip()
+    if not source_label:
+        raise WorkflowError("micro identity correction source row has no literal opponent label")
+
+    authority = frozen.get("research_authority") or {}
+    basis = (
+        "Frozen post-publication micro correction authority "
+        f"{authority.get('ref', '')} / {authority.get('digest', '')}"
+    ).strip()
+
+    plan = scoped_identity.build_plan(
+        repo,
+        source_program=frozen["school_key"],
+        source_label=source_label,
+        source_game_id=source_id,
+        old_key=old_key,
+        new_key=new_key,
+        new_name=new_name,
+        basis=basis,
+        in_place=True,
+        target_current_d1=True,
+    )
+    payload = plan.get("payload") or {}
+    if payload.get("original_literal_label_games") != 1:
+        raise WorkflowError(
+            "micro identity correction requires a one-game literal-label population"
+        )
+    if payload.get("remaining_old_identity_games") != 0:
+        raise WorkflowError("micro identity correction left old literal-label identity population")
+    if payload.get("new_discrepancies"):
+        raise WorkflowError("micro identity correction may not create discrepancy rows")
+    if payload.get("in_place") is not True:
+        raise WorkflowError("micro identity correction must be an in-place canonical rekey")
+    return plan
 
 
 def _micro_changed_members(frozen: dict[str, Any]) -> list[str]:
@@ -117,16 +178,10 @@ def micro_correction_eligibility(
         micro_class = MICRO_IDENTITY_CLASS
 
     elif mode == PACKAGE_ONLY_MODE:
-        source = ((frozen.get("correction_diff") or {}).get("source_games") or {})
-        if any(source.get(k) != 0 for k in ("added_count", "modified_count", "deleted_count")):
-            reasons.append("package-only micro correction may not change source games")
-        if frozen.get("correction_source_game_ids"):
-            reasons.append("package-only micro correction may not carry source IDs")
-        if frozen.get("correction_package_members") != ["conferences.csv"]:
-            reasons.append("package-only micro correction is limited to conferences.csv")
-        if changed_members != ["conferences.csv"]:
-            reasons.append("package-only micro correction changed-member set must be exactly conferences.csv")
-        micro_class = MICRO_PACKAGE_CLASS
+        reasons.append(
+            "package-only corrections are not micro-eligible until a deterministic "
+            "published conference-membership mutation is implemented"
+        )
     else:
         reasons.append("correction mode is not eligible for micro correction")
 
@@ -709,14 +764,22 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
             },
         }
         micro = micro_correction_eligibility(frozen, manifest)
+        micro_identity_plan = None
         if args.micro_correction:
             if not micro["eligible"]:
                 raise WorkflowError(
                     "micro-correction fast path rejected: " + "; ".join(micro["reasons"])
                 )
+            if micro["micro_correction_class"] != MICRO_IDENTITY_CLASS:
+                raise WorkflowError("unsupported micro-correction publication class")
+            micro_identity_plan = _micro_identity_transaction_plan(repo, frozen)
             print(
                 "Micro-correction fast path: ELIGIBLE "
                 f"({micro['micro_correction_class']})"
+            )
+            print(
+                "Micro canonical transaction: "
+                + str(micro_identity_plan["sha256"])
             )
 
         print(
@@ -743,6 +806,13 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
             manifest_path.read_bytes() if manifest_path.exists() else None
         )
         try:
+            if args.micro_correction:
+                assert micro_identity_plan is not None
+                scoped_identity.apply_plan(
+                    repo,
+                    micro_identity_plan,
+                    micro_identity_plan["sha256"],
+                )
             for n in REQUIRED_PACKAGE_FILES:
                 shutil.copy2(root / n, school_dir / n)
             manifest_path.write_text(
@@ -753,9 +823,28 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
                 repo,
                 echo=True,
             )
+            if args.micro_correction:
+                run(
+                    [
+                        sys.executable,
+                        str(repo / "tools/build_site_data.py"),
+                        str(repo),
+                        "--apply",
+                    ],
+                    repo,
+                    echo=True,
+                )
+                run(
+                    [sys.executable, str(repo / "tools/validate_data.py")],
+                    repo,
+                    echo=True,
+                )
         except Exception:
-            for n, data in old.items():
-                (school_dir / n).write_bytes(data)
+            if args.micro_correction:
+                run(["git", "restore", "--worktree", "--staged", "--", "."], repo)
+            else:
+                for n, data in old.items():
+                    (school_dir / n).write_bytes(data)
             if old_manifest is None:
                 manifest_path.unlink(missing_ok=True)
             else:
@@ -769,7 +858,32 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
             "PASS: correction package installed and repository validation passed."
         )
         if args.commit:
-            run(["git", "add", *expected], repo)
+            if args.micro_correction:
+                changed = sorted(
+                    x for x in git(repo, "diff", "--name-only").splitlines() if x
+                )
+                required_micro = {
+                    f"schools/{school}/source-games.csv",
+                    f"schools/{school}/opponents.csv",
+                    "data/canonical/games.csv",
+                    "data/evidence/game-assertions.csv",
+                }
+                if not required_micro.issubset(set(changed)):
+                    raise WorkflowError(
+                        "micro correction did not update all required publication layers"
+                    )
+                allowed_exact = required_micro | {"data/reconciliation/discrepancies.csv"}
+                bad = [
+                    path for path in changed
+                    if path not in allowed_exact and not path.startswith("site/data/")
+                ]
+                if bad:
+                    raise WorkflowError(
+                        "micro correction changed unauthorized paths: " + ", ".join(bad)
+                    )
+                run(["git", "add", "--", *changed], repo)
+            else:
+                run(["git", "add", *expected], repo)
             staged = [
                 x
                 for x in git(
@@ -777,18 +891,22 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
                 ).splitlines()
                 if x
             ]
-            if set(staged) - set(expected):
-                raise WorkflowError("unexpected staged paths")
             if not staged:
                 raise WorkflowError(
                     "correction staging produced no tracked changes"
                 )
+            if not args.micro_correction and set(staged) - set(expected):
+                raise WorkflowError("unexpected staged paths")
             run(
                 [
                     "git",
                     "commit",
                     "-m",
-                    f"Stage {school.replace('-', ' ').title()} correction package",
+                    (
+                        f"Apply {school.replace('-', ' ').title()} micro correction"
+                        if args.micro_correction
+                        else f"Stage {school.replace('-', ' ').title()} correction package"
+                    ),
                 ],
                 repo,
                 echo=True,
@@ -803,14 +921,26 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
                     f"{head}..{target_sha}",
                 ).splitlines() if x
             )
-            expected_paths = sorted(
-                f"schools/{school}/{name}"
-                for name in micro["changed_package_members"]
-            )
-            if changed_paths != expected_paths:
+            required_paths = {
+                f"schools/{school}/source-games.csv",
+                f"schools/{school}/opponents.csv",
+                "data/canonical/games.csv",
+                "data/evidence/game-assertions.csv",
+            }
+            if not required_paths.issubset(set(changed_paths)):
                 raise WorkflowError(
-                    "micro-correction commit changed paths differ from frozen package delta: "
-                    f"{changed_paths} != {expected_paths}"
+                    "micro-correction commit lacks required canonical publication paths"
+                )
+            bad_paths = [
+                path for path in changed_paths
+                if path not in required_paths
+                and path != "data/reconciliation/discrepancies.csv"
+                and not path.startswith("site/data/")
+            ]
+            if bad_paths:
+                raise WorkflowError(
+                    "micro-correction commit exceeds publication allow-list: "
+                    + ", ".join(bad_paths)
                 )
             ready = {
                 "schema_version": 1,
@@ -824,6 +954,13 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
                 "correction_freeze_sha256": freeze_sha,
                 "integration_freeze_sha256": sha_file(manifest_path),
                 "correction_diff_sha256": frozen["correction_diff_sha256"],
+                "canonical_transaction_sha256": (
+                    micro_identity_plan["sha256"] if micro_identity_plan else ""
+                ),
+                "canonical_game_id": (
+                    (micro_identity_plan.get("payload") or {}).get("stale_canonical_id", "")
+                    if micro_identity_plan else ""
+                ),
                 "research_authority": frozen.get("research_authority"),
                 "correction_source_game_ids": ids,
                 "correction_package_members": package_members,
