@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "unlv-stage2-gate1-fill-0001",
+  "operation": "STAGE2_GATE1_FILL",
+  "school_key": "unlv",
+  "previous_control_state_commit": "d0e79ce35a254c294d9dbc8ed2451acaf07e2c1d",
+  "previous_control_state_sha256": "51a7bea82fab98ea6820fedb5782897ed02034d7b3ec4e3926daf879ff8fbc52",
+  "expected_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-proposal-0002/checkpoint-manifest.json",
+    "sha256": "fbb9315daa443396bedca3c12093e3c384a42012c41059efbefcf884ba2c1a83"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
+    "sha256": "e1762785fdb6ebc81cc96c5f51376b9797fab31901c3dd245618922f550c661d"
+  },
+  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
+  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
+  "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+  "recommendation_map_sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395",
+  "approved_plan_hash_preview": "adc56d43c3d16b48042835075d57523f9a4169649eb2446ee1bd6f9999c38668",
+  "owner_gate_1_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly replied 'Approved. Proceed' on 2026-11-18 to the immediately preceding consolidated UNLV Owner Gate 1 packet for exact Stage 2 proposal unlv-stage2-proposal-0002. The approved packet binds all 46 decisions under decision universe 6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982, exact recommendation map f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395, and approved-plan preview adc56d43c3d16b48042835075d57523f9a4169649eb2446ee1bd6f9999c38668. This explicitly approves the recommendation set: 26 KEEP_CANONICAL dispositions; four MATCH_CANONICAL identities (unlv-1979-80-022 to CBBG-0210904, unlv-1987-88-019 to CBBG-0179566, unlv-1988-89-006 to CBBG-0195784, unlv-1965-66-008 to CBBG-0173547); four USE_SOURCE site corrections (1984-85 Kansas State HOME, 1989-90 California HOME, 2007-08 Fresno State NEUTRAL, 2023-24 Creighton NEUTRAL); three LEAVE_UNRESOLVED Wyoming residuals; seven NOT_APPLICABLE conditional branches; the conference regular-season championships patch from 12 to 14 while preserving 11 tournament titles; and ENABLE_PUBLIC_PAGE subject to all downstream safeguards. This approval authorizes the repository-defined mechanical Stage 3 fill→preseal→seal→sealed-apply sequence with independent verification. It is not Owner Gate 2, release, Preview, merge, Production, new Research, shared/global maintenance, or protected-main bypass authority.",
+    "proposal_checkpoint_sha256": "fbb9315daa443396bedca3c12093e3c384a42012c41059efbefcf884ba2c1a83",
+    "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+    "recommendation_map_sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395",
+    "approved_plan_hash_preview": "adc56d43c3d16b48042835075d57523f9a4169649eb2446ee1bd6f9999c38668"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "unlv-stage2-preseal-0001",
+    "seal_request_id": "unlv-stage2-gate1-seal-0001",
+    "apply_request_id": "unlv-stage2-sealed-apply-0001"
+  },
+  "creation_provenance": {
+    "origin": "Same serialized UNLV ordinary original-school Implementation lane",
+    "authorization": "Owner explicitly Approved. Proceed to the exact fresh-verified UNLV Gate 1 packet. This authorizes only the already-bound mechanical Stage 3 sequence: fill/encode, fresh verification, pre-seal rehearsal, fresh verification, cryptographic Gate 1 seal, fresh verification, transactional sealed apply, and fresh post-apply verification. All current-main, one-active-lane, Integration Freeze, semantic, historical, site-completeness, CAS, and owner-gate constraints remain. Stop before release preparation / exact Preview / Owner Gate 2."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": true,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}

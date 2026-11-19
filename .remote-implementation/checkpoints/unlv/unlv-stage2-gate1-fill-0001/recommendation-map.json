@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "school_key": "unlv",
+  "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "3bfbb4d4b9e45c16e9df605951677e27908221eed1dca11cd89feb3d338767be"
+  },
+  "prepared_against_protected_main_sha": "f5e6f453e0aadfbaf8ca7d4819162fd2c035b9b3",
+  "prepared_against_target_sha": "80f9a7bcf66cc12f3bef8be78f7960c894130576",
+  "defaults": {
+    "discrepancy": "KEEP_CANONICAL",
+    "selected_conditional": "KEEP_CANONICAL",
+    "basis": "Preserve established canonical date, score, result, overtime, and concrete H/A/N when UNLV's frozen source conflicts with an existing reciprocal canonical value and no stronger accepted authority overturns it. The UNLV source assertion remains preserved as provenance. Where the canonical value is UNKNOWN or a clearly stronger frozen venue/event classification exists, use the explicit per-decision override below instead of this default.",
+    "identity_basis": "One real game equals one canonical game. Match the reciprocal candidate supported by score/result, same-season companion-game cardinality, and reciprocal source context; do not duplicate an already represented canonical game.",
+    "not_applicable_basis": "This conditional discrepancy belongs to a canonical identity candidate not selected by the recommendation map."
+  },
+  "identity": {
+    "unlv-1979-80-022": "MATCH_CANONICAL:CBBG-0210904",
+    "unlv-1987-88-019": "MATCH_CANONICAL:CBBG-0179566",
+    "unlv-1988-89-006": "MATCH_CANONICAL:CBBG-0195784",
+    "unlv-1965-66-008": "MATCH_CANONICAL:CBBG-0173547"
+  },
+  "decisions": {
+    "CONDITIONAL-DISCREPANCY-UNLV-1979-80-022-CBBG-0210904-GAME_DATE": "LEAVE_UNRESOLVED",
+    "DISCREPANCY-UNLV-1984-85-008-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-UNLV-1989-90-002-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-UNLV-2007-08-009-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-UNLV-2019-20-018-SCORE": "LEAVE_UNRESOLVED",
+    "DISCREPANCY-UNLV-2021-22-030-SITE_TYPE": "LEAVE_UNRESOLVED",
+    "DISCREPANCY-UNLV-2023-24-008-SITE_TYPE": "USE_SOURCE",
+    "ACCOMPLISHMENTS-UNLV": "APPLY_ACCOMPLISHMENT_PATCH",
+    "PUBLICATION-UNLV": "ENABLE_PUBLIC_PAGE"
+  },
+  "basis_by_decision": {
+    "IDENTITY-UNLV-1979-80-022": "Select CBBG-0210904. UNLV's disputed source row is a 66-64 home win; CBBG-0210904 carries the same 66-64 result, while UNLV's separate 1980-02-27 Wyoming source row accounts for the alternate CBBG-0210905 candidate. The one-to-one season cardinality therefore resolves the identity without duplicating either game. The unsupported date difference remains separately unresolved.",
+    "IDENTITY-UNLV-1987-88-019": "Select CBBG-0179566. Fresno State's accepted reciprocal package has UNLV games on 1988-01-28 and 1988-02-27; UNLV's separate 1988-02-27 row already accounts for CBBG-0179574, leaving the same-result first reciprocal game as the one-to-one match for this row. Preserve the reciprocal date through the selected conditional discrepancy.",
+    "IDENTITY-UNLV-1988-89-006": "Select CBBG-0195784. Rhode Island's accepted reciprocal source records the same UNLV result on 1988-12-23; the two-day date difference is the only identity-level conflict and is adjudicated separately as KEEP_CANONICAL.",
+    "IDENTITY-UNLV-1965-66-008": "Select CBBG-0173547. Gonzaga's accepted reciprocal source records the same UNLV result on 1965-12-20; the two-day date difference is the only identity-level conflict and is adjudicated separately as KEEP_CANONICAL.",
+    "CONDITIONAL-DISCREPANCY-UNLV-1979-80-022-CBBG-0210904-GAME_DATE": "Identity is supported by the unique 66-64 result and season cardinality, but no reciprocal Wyoming source assertion is available to adjudicate 1980-02-01 versus 1980-02-13. Preserve both assertions and leave the date unresolved rather than manufacturing a tie-breaker.",
+    "DISCREPANCY-UNLV-1983-84-003-SITE_TYPE": "KEEP_CANONICAL because Hawai'i's accepted package contains an explicit owner historical-authority ruling that 1983-12-07 vs UNLV was Hawai'i HOME at Lahaina Civic Center; its source notes also record UNLV's own raw history as 'at Hawaii'. This supersedes UNLV's frozen NEUTRAL classification for canonical H/A/N while preserving the UNLV assertion as provenance.",
+    "DISCREPANCY-UNLV-1984-85-008-SITE_TYPE": "Use UNLV's accepted frozen HOME classification. The row is at Thomas & Mack Center, UNLV's primary home facility, and is explicitly labeled the UNLV/Budweiser Holiday Classic in Las Vegas. No reciprocal Kansas State source row is available to support the existing NEUTRAL value.",
+    "DISCREPANCY-UNLV-1989-90-002-SITE_TYPE": "Use UNLV's accepted frozen HOME classification at Thomas & Mack Center. California's reciprocal package is UNKNOWN for H/A/N, so the target-school frozen classification is affirmative enrichment rather than a conflict with competing concrete authority.",
+    "DISCREPANCY-UNLV-2007-08-009-SITE_TYPE": "Use UNLV's accepted frozen NEUTRAL classification. The source row explicitly says 'vs. Fresno State' at Orleans Arena, not UNLV's Thomas & Mack home floor. Fresno State's reciprocal row lacks venue/locality support for its OPPONENT_HOME label.",
+    "DISCREPANCY-UNLV-2019-20-018-SCORE": "No reciprocal Wyoming assertion is available to adjudicate UNLV 78-69 versus canonical 79-69. Preserve both assertions and leave the score unresolved.",
+    "DISCREPANCY-UNLV-2021-22-030-SITE_TYPE": "No reciprocal Wyoming assertion is available to adjudicate UNLV HOME versus canonical Wyoming HOME. Preserve both assertions and leave H/A/N unresolved rather than inferring from geography.",
+    "DISCREPANCY-UNLV-2023-24-008-SITE_TYPE": "Use UNLV's accepted frozen NEUTRAL classification. The row is explicitly the Jack Jones Classic at Dollar Loan Center in Henderson, a distinct venue from UNLV's Thomas & Mack home floor; Creighton's reciprocal row supplies no venue/locality evidence for its OPPONENT_HOME label.",
+    "ACCOMPLISHMENTS-UNLV": "Patch conference_regular_season_championships from the unverified project baseline 12 to 14. UNLV Athletics' Rebel Rundown separately lists 14 'Conference championships' and 11 'League tournament titles', supporting 14 as the non-tournament conference-title count while confirming the existing tournament count 11. NCAA-facing fields already match the current canonical cross-check: 20 NCAA appearances, four Final Fours, one national championship, best finish national champion in 1990. Official UNLV source: https://unlvrebels.com/documents/download/2018/5/29/09_guide_sec6.pdf",
+    "PUBLICATION-UNLV": "Recommend enabling UNLV only after explicit Owner Gate 1 approval of this exact recommendation map, sealed apply and independent verification, exact Preview approval at Owner Gate 2, protected-main merge, and Production proof."
+  },
+  "canonical_patch_by_decision": {
+    "ACCOMPLISHMENTS-UNLV": {
+      "conference_regular_season_championships": "14"
+    }
+  },
+  "source_patch_by_decision": {},
+  "notes_by_decision": {}
+}
