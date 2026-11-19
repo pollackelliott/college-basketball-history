@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash_preview": "20d23846891d8a2390d2f7f0395930304f90edd8ae2a1535479236e56db8a57d",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "5ba2ce5708be4aa9f2b934f3843990cc8cd330ad5e8c83294950190ca9ce5dea",
+    "implementation-stage2-status.json": "3381dd43bbbebd448e2c10e1da4160d044b7f0cee8512fb636d88fc4d179f512",
+    "last-rehearsal-site-gate.json": "1e655f1078030bf13f6093c89230303b7d2543ba1a97598c91af3e9cd76bee5c",
+    "plan.json": "82a81b07cbab8f64227e4ca88cd8b012d9ae5a812545b01b14205b465060d2a7",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "c71b971b52f063c83f0ec833ca4546773a39da498e83c8bb7c2164cfba465e7e"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "5ba2ce5708be4aa9f2b934f3843990cc8cd330ad5e8c83294950190ca9ce5dea",
+    "implementation-stage2-status.json": "c22b7ebf1c0ef3f0b2ca790b0871af5e7e41e65fdebe764601f0f85261db53bc",
+    "last-rehearsal-site-gate.json": "1e655f1078030bf13f6093c89230303b7d2543ba1a97598c91af3e9cd76bee5c",
+    "plan.json": "e3b2f26400875ea5af0fb5d12f337589fa4cd10a96ae99a43e9345e0ed1059e3",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "32e7f6681efa47fd0fb5f61e854fa2a031a018fef45c64b7a665661587ec5ce4"
+  },
+  "capability_census_status": "PASS",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "recommendation_map_sha256": "a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "miami-correction-stage2-proposal-0002",
+  "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/miami-correction",
+  "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "target_tree_sha": "a10c65302734cc305181139a0ff40cf520ffe48b",
+  "tracked_stage2_mutation": "NONE"
+}
