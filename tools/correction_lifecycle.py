@@ -34,6 +34,109 @@ IDENTITY_ONLY_NORMALIZATION_FIELDS = frozenset({
     "normalized_opponent_name",
 })
 
+MICRO_CORRECTION_READY_KIND = "POST_PUBLICATION_MICRO_CORRECTION_READY"
+MICRO_CORRECTION_READY_STATUS = "MICRO_CORRECTION_READY"
+MICRO_IDENTITY_CLASS = "ONE_GAME_IDENTITY_NORMALIZATION"
+MICRO_PACKAGE_CLASS = "PACKAGE_ONLY_CONFERENCES"
+
+
+def _micro_changed_members(frozen: dict[str, Any]) -> list[str]:
+    members = ((frozen.get("correction_diff") or {}).get("members") or {})
+    return sorted(
+        name for name, item in members.items()
+        if isinstance(item, dict) and item.get("changed") is True
+    )
+
+
+def _micro_unified_content_lines(value: str) -> tuple[list[str], list[str]]:
+    removed, added = [], []
+    for line in str(value or "").splitlines():
+        if line.startswith("---") or line.startswith("+++"):
+            continue
+        if line.startswith("-"):
+            removed.append(line[1:])
+        elif line.startswith("+"):
+            added.append(line[1:])
+    return removed, added
+
+
+def micro_correction_eligibility(
+    frozen: dict[str, Any],
+    integration: dict[str, Any],
+) -> dict[str, Any]:
+    """Return a fail-closed eligibility result for the narrow micro-correction path."""
+
+    reasons: list[str] = []
+    if frozen.get("workflow_kind") != WORKFLOW_KIND or frozen.get("status") != "CORRECTION_RESEARCH_FROZEN":
+        reasons.append("invalid correction freeze authority")
+    if integration.get("workflow_kind") != WORKFLOW_KIND or integration.get("status") != "INTEGRATION_FROZEN":
+        reasons.append("invalid correction Integration Freeze authority")
+    for field in ("school_key", "correction_mode", "correction_diff_sha256"):
+        if frozen.get(field) != integration.get(field):
+            reasons.append(f"freeze/integration mismatch: {field}")
+    if frozen.get("correction_source_game_ids") != integration.get("correction_source_game_ids"):
+        reasons.append("freeze/integration correction source IDs differ")
+
+    pre_semantic = ((integration.get("pre_correction_source_semantic_guard") or {}).get("snapshot_sha256"))
+    post_semantic = ((integration.get("source_game_semantic_guard") or {}).get("snapshot_sha256"))
+    if not pre_semantic or pre_semantic != post_semantic:
+        reasons.append("micro correction may not change historical semantic snapshot")
+
+    changed_members = _micro_changed_members(frozen)
+    mode = frozen.get("correction_mode")
+    micro_class = ""
+
+    if mode == "SOURCE_GAME_DELTA":
+        source = ((frozen.get("correction_diff") or {}).get("source_games") or {})
+        modified = source.get("modified") or []
+        if source.get("added_count") != 0 or source.get("deleted_count") != 0:
+            reasons.append("micro identity correction may not add or delete source games")
+        if source.get("modified_count") != 1 or len(modified) != 1:
+            reasons.append("micro identity correction must modify exactly one existing source game")
+        if modified:
+            fields = modified[0].get("fields") or {}
+            field_names = set(fields)
+            if not field_names or not field_names.issubset(IDENTITY_ONLY_NORMALIZATION_FIELDS):
+                reasons.append("source-game changes exceed normalized opponent key/name")
+        allowed_members = {"source-games.csv", "opponents.csv"}
+        if "source-games.csv" not in changed_members or not set(changed_members).issubset(allowed_members):
+            reasons.append("identity micro correction may change only source-games.csv and optional opponents.csv")
+        if "opponents.csv" in changed_members and modified:
+            diff = ((frozen.get("correction_diff") or {}).get("members") or {}).get("opponents.csv") or {}
+            removed, added = _micro_unified_content_lines(diff.get("unified_diff", ""))
+            if len(removed) != 1 or len(added) != 1:
+                reasons.append("supporting opponents.csv change must be exactly one row replacement")
+            else:
+                fields = modified[0].get("fields") or {}
+                for item in fields.values():
+                    before, after = str(item.get("before", "")), str(item.get("after", ""))
+                    if before and before not in removed[0]:
+                        reasons.append("opponents.csv removed row does not bind old normalized identity")
+                    if after and after not in added[0]:
+                        reasons.append("opponents.csv added row does not bind new normalized identity")
+        micro_class = MICRO_IDENTITY_CLASS
+
+    elif mode == PACKAGE_ONLY_MODE:
+        source = ((frozen.get("correction_diff") or {}).get("source_games") or {})
+        if any(source.get(k) != 0 for k in ("added_count", "modified_count", "deleted_count")):
+            reasons.append("package-only micro correction may not change source games")
+        if frozen.get("correction_source_game_ids"):
+            reasons.append("package-only micro correction may not carry source IDs")
+        if frozen.get("correction_package_members") != ["conferences.csv"]:
+            reasons.append("package-only micro correction is limited to conferences.csv")
+        if changed_members != ["conferences.csv"]:
+            reasons.append("package-only micro correction changed-member set must be exactly conferences.csv")
+        micro_class = MICRO_PACKAGE_CLASS
+    else:
+        reasons.append("correction mode is not eligible for micro correction")
+
+    return {
+        "eligible": not reasons,
+        "micro_correction_class": micro_class if not reasons else "",
+        "changed_package_members": changed_members,
+        "reasons": reasons,
+    }
+
 
 def run(cmd: list[str], repo: Path, *, echo: bool = False) -> str:
     p = subprocess.run(cmd, cwd=repo, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -605,6 +708,17 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
                 "history_scope_notes": "Post-publication bounded correction.",
             },
         }
+        micro = micro_correction_eligibility(frozen, manifest)
+        if args.micro_correction:
+            if not micro["eligible"]:
+                raise WorkflowError(
+                    "micro-correction fast path rejected: " + "; ".join(micro["reasons"])
+                )
+            print(
+                "Micro-correction fast path: ELIGIBLE "
+                f"({micro['micro_correction_class']})"
+            )
+
         print(
             f"School: {school}\n"
             f"Integration base: {head}\n"
@@ -679,6 +793,64 @@ def stage(args: argparse.Namespace, repo: Path) -> int:
                 repo,
                 echo=True,
             )
+        if args.micro_correction and args.apply:
+            if not args.commit:
+                raise WorkflowError("--micro-correction apply requires --commit")
+            target_sha = git(repo, "rev-parse", "HEAD").strip()
+            changed_paths = sorted(
+                x for x in git(
+                    repo, "diff-tree", "--no-commit-id", "--name-only", "-r",
+                    f"{head}..{target_sha}",
+                ).splitlines() if x
+            )
+            expected_paths = sorted(
+                f"schools/{school}/{name}"
+                for name in micro["changed_package_members"]
+            )
+            if changed_paths != expected_paths:
+                raise WorkflowError(
+                    "micro-correction commit changed paths differ from frozen package delta: "
+                    f"{changed_paths} != {expected_paths}"
+                )
+            ready = {
+                "schema_version": 1,
+                "kind": MICRO_CORRECTION_READY_KIND,
+                "status": MICRO_CORRECTION_READY_STATUS,
+                "school_key": school,
+                "micro_correction_class": micro["micro_correction_class"],
+                "origin_main_sha": origin,
+                "target_branch": branch,
+                "target_sha": target_sha,
+                "correction_freeze_sha256": freeze_sha,
+                "integration_freeze_sha256": sha_file(manifest_path),
+                "correction_diff_sha256": frozen["correction_diff_sha256"],
+                "research_authority": frozen.get("research_authority"),
+                "correction_source_game_ids": ids,
+                "correction_package_members": package_members,
+                "changed_package_members": micro["changed_package_members"],
+                "changed_paths": changed_paths,
+                "package_member_sha256": manifest["package_member_sha256"],
+                "owner_approval_model": "SINGLE_EXACT_PREVIEW_APPROVAL",
+                "stage2_required": False,
+                "owner_gate_1_required": False,
+                "sealed_apply_required": False,
+                "required_release_proofs": [
+                    "EXACT_PR_HEAD",
+                    "REPOSITORY_CI_PASS",
+                    "EXACT_PREVIEW_PASS",
+                    "EXPLICIT_OWNER_PREVIEW_APPROVAL",
+                    "EXACT_TWO_PARENT_MERGE",
+                    "EXACT_PRODUCTION_DEPLOYMENT",
+                    "PRODUCTION_PUBLIC_JSON_EQUIVALENCE",
+                ],
+            }
+            ready_path = onboard / "micro-correction-ready.json"
+            ready_path.write_text(
+                json.dumps(ready, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            print("MICRO_CORRECTION_READY: YES")
+            print(f"READY SHA-256: {sha_file(ready_path)}")
         return 0
     finally:
         temp.cleanup()
@@ -696,6 +868,7 @@ def parse_args() -> argparse.Namespace:
     f.add_argument("--report-json", type=Path); f.add_argument("--output", type=Path); f.add_argument("--repo", type=Path)
     s = sub.add_parser("stage"); s.add_argument("school_key"); s.add_argument("freeze_zip", type=Path); s.add_argument("--expected-sha256", required=True)
     s.add_argument("--apply", action="store_true"); s.add_argument("--commit", action="store_true"); s.add_argument("--repo", type=Path)
+    s.add_argument("--micro-correction", action="store_true", help="Require the narrow one-owner-gate micro-correction fast path and emit micro-correction-ready.json.")
     return p.parse_args()
 
 
@@ -704,6 +877,8 @@ def main() -> int:
     try:
         if args.command == "freeze": return freeze(args, repo)
         if args.commit and not args.apply: raise WorkflowError("--commit requires --apply")
+        if args.micro_correction and args.apply and not args.commit:
+            raise WorkflowError("--micro-correction apply requires --commit")
         return stage(args, repo)
     except (WorkflowError, FileNotFoundError, KeyError, ValueError, zipfile.BadZipFile) as exc:
         print(f"FAIL: {exc}"); return 1
