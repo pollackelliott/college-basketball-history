@@ -397,6 +397,40 @@ class PackageOnlyCorrectionTests(unittest.TestCase):
             self.assertEqual(plan["summary"]["assertions_to_add"], 0)
             self.assertEqual(plan["summary"]["new_canonical_games"], 0)
 
+    def test_disposable_copy_transports_exact_package_only_freeze(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source"
+            source.mkdir()
+            self.make_repo(source)
+            school = source / "schools/miami"
+            write_csv(
+                school / "conferences.csv",
+                HISTORY_FIELDS,
+                self.corrected_conferences(),
+            )
+            # The correction package itself is tracked before Integration Freeze staging.
+            self.git(source, "add", "schools/miami/conferences.csv")
+            self.git(source, "commit", "-m", "stage package-only correction")
+            manifest = self.package_manifest(source)
+            onboard = source / ".onboarding/miami"
+            onboard.mkdir(parents=True)
+            payload = json.dumps(manifest, sort_keys=True).encode("utf-8")
+            (onboard / "integration-freeze.json").write_bytes(payload)
+
+            destination = root / "copy"
+            onboard_school.copy_repository(
+                source,
+                destination,
+                school_key="miami",
+            )
+            copied = destination / ".onboarding/miami/integration-freeze.json"
+            self.assertEqual(copied.read_bytes(), payload)
+            self.assertEqual(
+                (destination / "schools/miami/conferences.csv").read_bytes(),
+                (source / "schools/miami/conferences.csv").read_bytes(),
+            )
+
     def test_package_only_transport_rejects_post_freeze_conference_drift(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
