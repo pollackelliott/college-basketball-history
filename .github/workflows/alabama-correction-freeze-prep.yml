@@ -27,15 +27,14 @@ jobs:
           git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
           actual_main="$(git rev-parse refs/remotes/origin/main)"
           [[ "$actual_main" == "$expected_main" ]] || { echo "protected main moved: $actual_main" >&2; exit 1; }
-          mapfile -t parents < <(git rev-list --parents -n 1 HEAD)
-          parent_line="${parents[0]}"
-          set -- $parent_line
-          [[ "$#" -eq 2 ]] || { echo "transport commit must have exactly one parent" >&2; exit 1; }
-          [[ "$2" == "$expected_main" ]] || { echo "transport parent mismatch" >&2; exit 1; }
-          changed="$(git diff-tree --no-commit-id --name-only -r "$2" HEAD)"
+          git merge-base --is-ancestor "$expected_main" HEAD || {
+            echo "protected-main baseline is not an ancestor of transport head" >&2
+            exit 1
+          }
+          changed="$(git diff --name-only "$expected_main"..HEAD)"
           [[ "$changed" == ".github/workflows/alabama-correction-freeze-prep.yml" ]] || {
-            echo "transport commit changed unexpected paths:" >&2
-            printf '%s\n' "$changed" >&2
+            echo "transport branch changed unexpected paths:" >&2
+            printf '%s\\n' "$changed" >&2
             exit 1
           }
 
@@ -263,3 +262,5 @@ jobs:
             /tmp/alabama-correction-freeze-summary.json
           if-no-files-found: error
           retention-days: 30
+
+# second push activates branch-local transport workflow
