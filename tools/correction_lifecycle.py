@@ -251,7 +251,9 @@ def freeze(args: argparse.Namespace, repo: Path) -> int:
             for name, member in diff["members"].items()
             if member["changed"]
         )
-        declared_members = sorted(set(args.package_member or []))
+        declared_members = sorted(
+            set(getattr(args, "package_member", []) or [])
+        )
         package_only = args.scope == PACKAGE_ONLY_SCOPE
 
         if package_only:
