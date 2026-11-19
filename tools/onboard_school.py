@@ -1694,10 +1694,11 @@ def execute_approved_in_place(
 def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes | None:
     """Authorize only an exact correction Integration Freeze for disposable execution.
 
-    Other ignored onboarding state must not cross this boundary. Both the frozen
-    pre-correction baseline and the post-correction snapshot are required to
-    prevent a forged or stale scope from suppressing unrelated source-site debt.
+    Source-game corrections retain their exact authorized-ID semantics. Package-only
+    corrections carry no source-game authority and may transport only one exact
+    conferences.csv correction with an unchanged source semantic snapshot.
     """
+
     path = source / ".onboarding" / school_key / "integration-freeze.json"
     if not path.is_file():
         return None
@@ -1710,7 +1711,6 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
         raise WorkflowError("Integration Freeze manifest must be an object")
     if manifest.get("workflow_kind") != "POST_PUBLICATION_CORRECTION":
         return None
-
     if (
         manifest.get("schema_version") != 2
         or manifest.get("status") != "INTEGRATION_FROZEN"
@@ -1718,8 +1718,17 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
     ):
         raise WorkflowError("invalid correction Integration Freeze identity/status")
 
+    package_only = (
+        manifest.get("correction_mode") == PACKAGE_ONLY_CORRECTION_MODE
+    )
     ids = manifest.get("correction_source_game_ids")
-    if (
+    members = manifest.get("correction_package_members", [])
+    if package_only:
+        if ids != [] or members != list(PACKAGE_ONLY_CORRECTION_MEMBERS):
+            raise WorkflowError(
+                "invalid package-only correction Integration Freeze scope"
+            )
+    elif (
         not isinstance(ids, list)
         or not ids
         or any(not isinstance(i, str) or not i.strip() for i in ids)
@@ -1728,7 +1737,10 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
         raise WorkflowError("invalid correction Integration Freeze source IDs")
 
     snapshots = []
-    for name in ("pre_correction_source_semantic_guard", "source_game_semantic_guard"):
+    for name in (
+        "pre_correction_source_semantic_guard",
+        "source_game_semantic_guard",
+    ):
         guard = manifest.get(name)
         if not isinstance(guard, dict) or guard.get("schema_version") != 1:
             raise WorkflowError(f"invalid correction Integration Freeze {name}")
@@ -1738,29 +1750,65 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
             or snapshot.get("schema_version") != 1
             or snapshot.get("fields") != list(SEMANTIC_SOURCE_GAME_FIELDS)
             or not isinstance(snapshot.get("rows"), dict)
-            or not all(isinstance(v, dict) for v in snapshot["rows"].values())
-            or guard.get("snapshot_sha256") != semantic_snapshot_sha256(snapshot)
+            or not all(
+                isinstance(v, dict) for v in snapshot["rows"].values()
+            )
+            or guard.get("snapshot_sha256")
+            != semantic_snapshot_sha256(snapshot)
         ):
-            raise WorkflowError(f"untrusted correction Integration Freeze {name}")
+            raise WorkflowError(
+                f"untrusted correction Integration Freeze {name}"
+            )
         snapshots.append(snapshot)
 
     before, after = (snap["rows"] for snap in snapshots)
     changed_ids = {
         i for i in set(before) | set(after) if before.get(i) != after.get(i)
     }
-    if not changed_ids.issubset(set(ids)):
-        raise WorkflowError("correction semantic delta exceeds authorized source IDs")
-    if not set(ids).issubset(set(after)):
-        raise WorkflowError("correction source IDs missing from frozen post-correction state")
+    if package_only:
+        if changed_ids or snapshots[0] != snapshots[1]:
+            raise WorkflowError(
+                "package-only correction may not change source-game semantics"
+            )
+    else:
+        if not changed_ids.issubset(set(ids)):
+            raise WorkflowError(
+                "correction semantic delta exceeds authorized source IDs"
+            )
+        if not set(ids).issubset(set(after)):
+            raise WorkflowError(
+                "correction source IDs missing from frozen post-correction state"
+            )
+
+    member_hashes = manifest.get("package_member_sha256")
+    if not isinstance(member_hashes, dict):
+        raise WorkflowError(
+            "correction Integration Freeze lacks package member hashes"
+        )
+    if package_only:
+        for name in REQUIRED_PACKAGE_FILES:
+            member = source / "schools" / school_key / name
+            expected = str(member_hashes.get(name, "")).strip()
+            if (
+                not re.fullmatch(r"[0-9a-f]{64}", expected)
+                or not member.is_file()
+                or file_sha(member) != expected
+            ):
+                raise WorkflowError(
+                    f"package-only correction package member changed: {name}"
+                )
+    else:
+        source_games = source / "schools" / school_key / "source-games.csv"
+        if member_hashes.get("source-games.csv") != file_sha(source_games):
+            raise WorkflowError(
+                "tracked source does not match correction Integration Freeze"
+            )
 
     source_games = source / "schools" / school_key / "source-games.csv"
-    member_hashes = manifest.get("package_member_sha256")
-    if (
-        not isinstance(member_hashes, dict)
-        or member_hashes.get("source-games.csv") != file_sha(source_games)
-        or build_source_game_semantic_snapshot(source_games) != snapshots[1]
-    ):
-        raise WorkflowError("tracked source does not match correction Integration Freeze")
+    if build_source_game_semantic_snapshot(source_games) != snapshots[1]:
+        raise WorkflowError(
+            "tracked source does not match correction Integration Freeze"
+        )
     return payload
 
 
