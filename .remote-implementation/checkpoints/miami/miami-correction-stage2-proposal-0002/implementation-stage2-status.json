@@ -1,0 +1,158 @@
+{
+  "branch": "remote-stage2-census/miami-109fb1d5bcf8",
+  "capability_census": {
+    "path": ".onboarding/miami/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 3
+  },
+  "head_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "integration_base_sha": "301d9eb4a323a5d393f0e20a1508be6565376553",
+  "integration_semantic_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "301d9eb4a323a5d393f0e20a1508be6565376553",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/miami/plan.json",
+    "review_path": ".onboarding/miami/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {},
+    "approved_plan_hash_preview": "20d23846891d8a2390d2f7f0395930304f90edd8ae2a1535479236e56db8a57d",
+    "changed_path_count": 2
+  },
+  "recommendation_map": {
+    "action_counts": {},
+    "approved_plan_hash_preview": "20d23846891d8a2390d2f7f0395930304f90edd8ae2a1535479236e56db8a57d",
+    "decision_count": 0,
+    "path": "/tmp/remote-stage2-proposal-map-7j00_ekq/recommendation-map.json",
+    "sha256": "a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77"
+  },
+  "research_base_sha": "301d9eb4a323a5d393f0e20a1508be6565376553",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 3,
+      "home_missing_location": 3,
+      "home_missing_venue": 285,
+      "invalid_home_venue_exception_marker": 1,
+      "invalid_home_venue_exception_marker_rows": 1,
+      "neutral_missing_location": 2,
+      "neutral_missing_venue": 41,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 326,
+      "reciprocal_research_accounted_gap": 2,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue": 282,
+      "researched_unresolved_home_venue_rows": 282,
+      "strict_home_gap": 3,
+      "strict_home_gap_rows": 3,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 1843,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap": 1,
+      "unaccounted_public_gap_rows": 1
+    },
+    "errors": [
+      "3 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception or exact protected-main owner-authorized HOME locality exception. Ordinary research statuses remain nonwaivable.",
+      "1 canonical game(s) carry a researched HOME exception marker for the target school without satisfying the source, location, H/A/N, NCAA, and reciprocal-evidence requirements.",
+      "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0132326",
+        "CBBG-0132399",
+        "CBBG-0132644"
+      ],
+      "home_missing_location": [
+        "CBBG-0132326",
+        "CBBG-0132399",
+        "CBBG-0132644"
+      ],
+      "home_missing_venue": [
+        "CBBG-0018105",
+        "CBBG-0018106",
+        "CBBG-0018122",
+        "CBBG-0018154",
+        "CBBG-0018183",
+        "CBBG-0018232",
+        "CBBG-0018253",
+        "CBBG-0018274",
+        "CBBG-0018298",
+        "CBBG-0018319",
+        "CBBG-0018341",
+        "CBBG-0018386"
+      ],
+      "invalid_home_venue_exception_marker": [
+        "CBBG-0132066"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0053319",
+        "CBBG-0069880"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0020885",
+        "CBBG-0021734",
+        "CBBG-0030662",
+        "CBBG-0034238",
+        "CBBG-0034687",
+        "CBBG-0039040",
+        "CBBG-0053319",
+        "CBBG-0057144",
+        "CBBG-0069452",
+        "CBBG-0069880",
+        "CBBG-0102867",
+        "CBBG-0115128"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0131850"
+      ],
+      "reciprocal_research_accounted_gap": [
+        "CBBG-0069880",
+        "CBBG-0132399"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0018105",
+        "CBBG-0018106",
+        "CBBG-0018122",
+        "CBBG-0018154",
+        "CBBG-0018183",
+        "CBBG-0018232",
+        "CBBG-0018253",
+        "CBBG-0018274",
+        "CBBG-0018298",
+        "CBBG-0018319",
+        "CBBG-0018341",
+        "CBBG-0018386"
+      ],
+      "strict_home_gap": [
+        "CBBG-0132326",
+        "CBBG-0132399",
+        "CBBG-0132644"
+      ],
+      "unaccounted_public_gap": [
+        "CBBG-0132644"
+      ]
+    },
+    "path": ".onboarding/miami/last-rehearsal-site-gate.json",
+    "status": "FAIL"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}

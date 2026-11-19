@@ -1,0 +1,50 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner authorized continuation of the bounded Miami conference correction. Proposal request 0001 was fresh-runner verified but BLOCKED solely because the empty recommendation map unnecessarily supplied optional site_gap_provenance despite there being zero publication decision rows. This retry changes only that map encoding by omitting the optional key. It preserves the exact zero-decision census authority, target, Integration Freeze, semantic snapshot, and decision universe. No historical judgment, Owner Gate 1 approval, sealed apply, release, merge, Production, expansion Stage 7, or unrelated mutation is authorized.",
+    "origin": "Miami post-publication package-only conference correction zero-decision Stage 2 proposal retry"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "9253d3fa0554233b44721c8cb90ec6eaee74f9f8",
+  "previous_control_state_sha256": "b5f5ee855860979098ea3d6e199dc9ac2a9e71dbbbe3afb7b01702970d3e55ce",
+  "recommendation_map": {
+    "path": ".remote-implementation/inputs/miami-correction-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77"
+  },
+  "request_id": "miami-correction-stage2-proposal-0002",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/miami/miami-correction-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "899b9ad687afffec0de7957bb459bbead6834420200deaa69d9580de77b41a97"
+  },
+  "target_branch": "data/miami-correction",
+  "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+}
