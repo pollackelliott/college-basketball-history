@@ -1,0 +1,111 @@
+name: Miami correction Stage 2 Gate 1 seal validation 0001
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/miami-correction-stage2-gate1-seal-validate-0001.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Authenticate exact authorities and build seal request
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main control/remote-implementation data/miami-correction
+          test "$(git rev-parse origin/main)" = "66795cf099c05e272f590fa6d2ffb10c262d6b56"
+          test "$(git rev-parse origin/control/remote-implementation)" = "c1dc2728ec6961fff1c07d7ad373f3861e539acf"
+          test "$(git rev-parse origin/data/miami-correction)" = "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+
+          python - <<'PY'
+          import hashlib, json, subprocess
+          def show(path):
+              return subprocess.check_output(["git","show",f"origin/control/remote-implementation:{path}"])
+          state=json.loads(show(".remote-implementation/control-state.json"))
+          assert state["lifecycle_state"]=="IDLE"
+          assert state["transaction_state"]=="COMPLETE"
+          assert state["recovery_required"] is False
+          assert state.get("active_request_id") is None
+          last=state["last_operation"]
+          assert last["request_id"]=="miami-correction-stage2-preseal-rehearsal-0001"
+          assert last["preseal_status"]=="READY_TO_SEAL"
+          assert last["fresh_runner_verification"]=="PASS"
+          assert last["remote_stage2_preseal_equivalence"]=="PASS"
+
+          vpath=".remote-implementation/verifications/miami/miami-correction-stage2-preseal-rehearsal-0001/stage2-preseal-rehearsal-verification.json"
+          vsha=hashlib.sha256(show(vpath)).hexdigest()
+
+          req={
+            "schema_version":1,
+            "kind":"REMOTE_IMPLEMENTATION_REQUEST",
+            "request_id":"miami-correction-stage2-gate1-seal-0001",
+            "school_key":"miami",
+            "operation":"STAGE2_GATE1_SEAL",
+            "expected_protected_main_sha":"66795cf099c05e272f590fa6d2ffb10c262d6b56",
+            "target_branch":"data/miami-correction",
+            "target_sha":"109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+            "stage2_preseal_checkpoint":{
+              "path":".remote-implementation/checkpoints/miami/miami-correction-stage2-preseal-rehearsal-0001/checkpoint-manifest.json",
+              "sha256":"3adeaba3e018c52444cc05c2cc02128de91b95ed682dfc289280e87ad8f9631b"
+            },
+            "stage2_preseal_verification":{"path":vpath,"sha256":vsha},
+            "integration_freeze_sha256":"e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+            "semantic_snapshot_sha256":"c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+            "decision_universe_sha256":"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "recommendation_map_sha256":"a1e9d918688481805370028100116a39d639541cf098599e7a397aa99cce8d77",
+            "approved_plan_hash_preview":"20d23846891d8a2390d2f7f0395930304f90edd8ae2a1535479236e56db8a57d",
+            "filled_review_sha256":"c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+            "decision_id_set_sha256":"01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+            "owner_gate_1_approval_sha256":"e04dcf7ad5952ec06e30c26dd6590f6c9fa90658d4a95bf1805a5d44e7317fe8",
+            "equivalence_sha256":"4928d61d8cf6edda419b5dfe9ab664120c190695691f47a6da64d67cec41159b",
+            "creation_provenance":{
+              "origin":"Miami post-publication package-only conference correction — cryptographic Gate 1 seal",
+              "authorization":"The exact explicit Owner Gate 1 authority has been encoded, the fresh-verified preseal rehearsal reached READY_TO_SEAL, and exact equivalence passed. Authorize exactly one bounded STAGE2_GATE1_SEAL carrying forward that existing authority: current-main preseal replay plus permanent onboard_school.py --approve cryptographic sealing only. No sealed apply, tracked basketball mutation, Preview, Owner Gate 2, merge, Production, Miami expansion Stage 7, recovery, maintenance, or unrelated authority is created."
+            },
+            "authority":{
+              "owner_gate_1":False,
+              "owner_gate_2":False,
+              "release":False,
+              "phase0":False,
+              "phase0_scope_supersession":False,
+              "recovery":False,
+              "stage2_census":False,
+              "stage2_current_main_refresh":False,
+              "stage2_opponent_display_normalize":False,
+              "stage2_proposal_rehearsal":False,
+              "stage2_gate1_fill":False,
+              "stage2_preseal_rehearsal":False,
+              "stage2_gate1_seal":True,
+              "stage2_sealed_apply":False,
+              "stage2_reconciliation_diagnostic":False,
+              "release_readiness":False,
+              "release_preview_verify":False,
+              "release_gate2_approval":False,
+              "release_presentation_refresh":False,
+              "release_production_proof":False,
+              "venue_identity_maintenance":False
+            }
+          }
+          open("/tmp/request.json","w").write(json.dumps(req,indent=2)+"\n")
+          print("preseal_verification_sha256="+vsha)
+          PY
+
+          python tools/remote_implementation_request_submit.py --template /tmp/request.json | tee /tmp/validation.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: miami-correction-stage2-gate1-seal-request-packet-0001
+          path: |
+            /tmp/request.json
+            /tmp/validation.json
+          retention-days: 30
