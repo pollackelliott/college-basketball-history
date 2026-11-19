@@ -57,6 +57,7 @@ from onboarding_plan import (
     approve_plan,
     apply_pre_ingest_correction_identity_patches,
     apply_pre_ingest_source_patches,
+    prepare_pre_ingest_complete_institutional_coverage,
     apply_publication_decisions,
     apply_reconciliation_decisions,
     archive_approved_plan,
@@ -1572,6 +1573,13 @@ def execute_approved_in_place(
     pre_ingest_source_patches = apply_pre_ingest_source_patches(repo, approved)
     print(json.dumps(pre_ingest_source_patches, sort_keys=True))
 
+    print("\n=== pre-ingest complete-institutional coverage ===")
+    pre_ingest_coverage = prepare_pre_ingest_complete_institutional_coverage(
+        repo,
+        approved,
+    )
+    print(json.dumps(pre_ingest_coverage, sort_keys=True))
+
     plan_path = write_plan_for_ingest(repo, approved)
     try:
         print("\n=== ingestion apply ===")
@@ -1662,6 +1670,7 @@ def execute_approved_in_place(
     return {
         "correction_identity_patches": correction_identity_patches,
         "pre_ingest_source_patches": pre_ingest_source_patches,
+        "pre_ingest_coverage": pre_ingest_coverage,
         "ingestion_output": ingestion_output,
         "reconciliation": reconciliation,
         "reciprocal_home_chronology": reciprocal_home_chronology,
@@ -1878,6 +1887,118 @@ def _validated_expansion_freeze_bytes(source: Path, school_key: str) -> bytes | 
     return payload
 
 
+
+def _validated_ordinary_integration_freeze_bytes(
+    source: Path,
+    school_key: str,
+) -> bytes | None:
+    """Transport one authenticated ordinary pre-publication Integration Freeze.
+
+    Ordinary Phase-0 authority is positively identified by its ordinary topology,
+    not merely by the absence of another workflow kind.  Unrelated/wrong-kind
+    manifests therefore decline ordinary authority and preserve normal copy
+    behavior.  Once ordinary topology is established, validation remains
+    fail-closed.
+    """
+
+    path = source / ".onboarding" / school_key / "integration-freeze.json"
+    if not path.is_file():
+        return None
+    payload = path.read_bytes()
+    try:
+        manifest = json.loads(payload)
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise WorkflowError("invalid Integration Freeze JSON") from exc
+    if not isinstance(manifest, dict):
+        raise WorkflowError("Integration Freeze manifest must be an object")
+
+    # Specialized workflows own manifests that declare an explicit kind.  An
+    # ordinary Phase-0 manifest declares neither field and instead carries the
+    # Stage-1/Phase-0 topology below.  Do not let an arbitrary unknown kind gain
+    # ordinary authority by falling through this validator.
+    if "kind" in manifest or "workflow_kind" in manifest:
+        return None
+    ordinary_identity_markers = {
+        "origin_main_sha",
+        "research_zip_sha256",
+        "history_scope",
+    }
+    if not ordinary_identity_markers.issubset(manifest):
+        return None
+
+    if (
+        manifest.get("schema_version") != 2
+        or manifest.get("status") != "INTEGRATION_FROZEN"
+        or manifest.get("school_key") != school_key
+        or not re.fullmatch(
+            r"[0-9a-f]{40}",
+            str(manifest.get("research_base_sha") or ""),
+        )
+        or not re.fullmatch(
+            r"[0-9a-f]{40}",
+            str(manifest.get("integration_base_sha") or ""),
+        )
+        or not re.fullmatch(
+            r"[0-9a-f]{40}",
+            str(manifest.get("origin_main_sha") or ""),
+        )
+        or not re.fullmatch(
+            r"[0-9a-f]{64}",
+            str(manifest.get("research_zip_sha256") or ""),
+        )
+    ):
+        raise WorkflowError("invalid ordinary Integration Freeze identity/status")
+
+    history_scope = manifest.get("history_scope")
+    if (
+        not isinstance(history_scope, dict)
+        or history_scope.get("history_scope_status") != "OWNER_CONFIRMED"
+        or not isinstance(history_scope.get("history_start_season"), str)
+        or not isinstance(history_scope.get("history_scope_basis"), str)
+        or not isinstance(history_scope.get("history_scope_intervals"), str)
+        or not isinstance(history_scope.get("history_scope_notes"), str)
+        or not isinstance(history_scope.get("top_level_scope_reference"), dict)
+        or not isinstance(manifest.get("venue_mapping"), list)
+        or not isinstance(manifest.get("program_alias_mapping"), list)
+        or not isinstance(manifest.get("conference_mapping"), list)
+    ):
+        raise WorkflowError("invalid ordinary Integration Freeze topology")
+
+    required_members = {
+        "conferences.csv",
+        "notes.md",
+        "opponents.csv",
+        "source-games.csv",
+        "source-notes.md",
+        "venues.csv",
+    }
+    member_hashes = manifest.get("package_member_sha256")
+    if (
+        not isinstance(member_hashes, dict)
+        or set(member_hashes) != required_members
+        or any(
+            not isinstance(digest, str)
+            or not re.fullmatch(r"[0-9a-f]{64}", digest)
+            for digest in member_hashes.values()
+        )
+    ):
+        raise WorkflowError("invalid ordinary Integration Freeze package-member hashes")
+
+    school_dir = source / "schools" / school_key
+    # Opponent/source-game display representation may have an authenticated
+    # Stage-2 successor.  Preserve strict byte identity for the other frozen
+    # package members, then use the semantic guard below for source-games.
+    for name in ("conferences.csv", "notes.md", "source-notes.md", "venues.csv"):
+        member = school_dir / name
+        if not member.is_file() or file_sha(member) != member_hashes[name]:
+            raise WorkflowError(
+                f"ordinary Integration Freeze package member changed: {name}"
+            )
+
+    assert_no_unapproved_semantic_drift(source, school_key)
+    return payload
+
+
 def copy_repository(
     source: Path, destination: Path, *, school_key: str | None = None
 ) -> None:
@@ -1905,7 +2026,23 @@ def copy_repository(
             )
         except FrozenVenueSplitAuthorityError as exc:
             raise WorkflowError(str(exc)) from exc
-    runtime_freeze = correction_freeze or expansion_freeze or split_authority_freeze
+    ordinary_freeze = None
+    if (
+        school_key is not None
+        and correction_freeze is None
+        and expansion_freeze is None
+        and split_authority_freeze is None
+    ):
+        ordinary_freeze = _validated_ordinary_integration_freeze_bytes(
+            source,
+            school_key,
+        )
+    runtime_freeze = (
+        correction_freeze
+        or expansion_freeze
+        or split_authority_freeze
+        or ordinary_freeze
+    )
     runtime_expansion_venue_reconciliation = None
     if expansion_freeze is not None:
         expansion_manifest = json.loads(expansion_freeze)

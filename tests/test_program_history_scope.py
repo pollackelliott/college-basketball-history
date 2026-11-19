@@ -12,12 +12,18 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 import build_site_data  # noqa: E402
+import onboard_school  # noqa: E402
 import validate_data  # noqa: E402
 from onboarding_plan import (  # noqa: E402
     WorkflowError,
     frozen_complete_institutional_scope_authority,
     prepare_publication_coverage_transition,
+    prepare_pre_ingest_complete_institutional_coverage,
     stage2_program_for_planning,
+)
+from integration_freeze_guard import (  # noqa: E402
+    build_source_game_semantic_snapshot,
+    semantic_snapshot_sha256,
 )
 from program_history import (  # noqa: E402
     BEST_FINISH_LABELS,
@@ -115,6 +121,171 @@ def complete_institutional_scope_repo(
 
 
 class ProgramHistoryScopeTests(unittest.TestCase):
+    def _ordinary_freeze_fixture(self, repo: Path) -> bytes:
+        complete_institutional_scope_repo(repo)
+        school = repo / "schools" / "program-a"
+        source_games = school / "source-games.csv"
+        source_games.write_text(
+            "source_game_id,season_label\n"
+            "PROGRAM-A-1,1966-1967\n",
+            encoding="utf-8",
+        )
+        for name in (
+            "conferences.csv",
+            "notes.md",
+            "opponents.csv",
+            "venues.csv",
+        ):
+            (school / name).write_text(f"{name} fixture\n", encoding="utf-8")
+        snapshot = build_source_game_semantic_snapshot(source_games)
+        member_hashes = {
+            name: hashlib.sha256((school / name).read_bytes()).hexdigest()
+            for name in (
+                "conferences.csv",
+                "notes.md",
+                "opponents.csv",
+                "source-games.csv",
+                "source-notes.md",
+                "venues.csv",
+            )
+        }
+        manifest = {
+            "schema_version": 2,
+            "school_key": "program-a",
+            "status": "INTEGRATION_FROZEN",
+            "research_base_sha": "a" * 40,
+            "integration_base_sha": "c" * 40,
+            "origin_main_sha": "d" * 40,
+            "research_zip_sha256": "e" * 64,
+            "package_member_sha256": member_hashes,
+            "source_game_semantic_guard": {
+                "schema_version": 1,
+                "snapshot_sha256": semantic_snapshot_sha256(snapshot),
+                "snapshot": snapshot,
+            },
+            "venue_mapping": [],
+            "program_alias_mapping": [],
+            "conference_mapping": [],
+            "conference_reconciliation": None,
+            "venue_reconciliation": None,
+            "history_scope": {
+                "history_start_season": "1978-1979",
+                "history_scope_status": "OWNER_CONFIRMED",
+                "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                "history_scope_intervals": "",
+                "history_scope_notes": "fixture",
+                "top_level_scope_reference": {},
+            },
+        }
+        payload = (
+            json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+        ).encode("utf-8")
+        freeze = (
+            repo
+            / ".onboarding"
+            / "program-a"
+            / "integration-freeze.json"
+        )
+        freeze.write_bytes(payload)
+        return payload
+
+    def test_ordinary_integration_freeze_transport_authenticates_complete_scope_authority(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            expected = self._ordinary_freeze_fixture(repo)
+
+            actual = onboard_school._validated_ordinary_integration_freeze_bytes(
+                repo,
+                "program-a",
+            )
+
+            self.assertEqual(actual, expected)
+
+    def test_ordinary_integration_freeze_transport_rejects_changed_source_notes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._ordinary_freeze_fixture(repo)
+            source_notes = repo / "schools" / "program-a" / "source-notes.md"
+            source_notes.write_text(
+                source_notes.read_text(encoding="utf-8") + "\ntampered\n",
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                r"ordinary Integration Freeze package member changed: source-notes\.md",
+            ):
+                onboard_school._validated_ordinary_integration_freeze_bytes(
+                    repo,
+                    "program-a",
+                )
+
+    def test_ordinary_integration_freeze_transport_declines_wrong_kind(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._ordinary_freeze_fixture(repo)
+            freeze = repo / ".onboarding/program-a/integration-freeze.json"
+            manifest = json.loads(freeze.read_text(encoding="utf-8"))
+            manifest["kind"] = "UNTRUSTED"
+            freeze.write_text(json.dumps(manifest), encoding="utf-8")
+
+            self.assertIsNone(
+                onboard_school._validated_ordinary_integration_freeze_bytes(
+                    repo,
+                    "program-a",
+                )
+            )
+
+    def test_ordinary_integration_freeze_transport_declines_nonordinary_workflow_kind(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._ordinary_freeze_fixture(repo)
+            freeze = repo / ".onboarding/program-a/integration-freeze.json"
+            manifest = json.loads(freeze.read_text(encoding="utf-8"))
+            manifest["workflow_kind"] = "NEW_SCHOOL"
+            freeze.write_text(json.dumps(manifest), encoding="utf-8")
+
+            self.assertIsNone(
+                onboard_school._validated_ordinary_integration_freeze_bytes(
+                    repo,
+                    "program-a",
+                )
+            )
+
+    def test_ordinary_integration_freeze_transport_rejects_malformed_authenticated_schema(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._ordinary_freeze_fixture(repo)
+            freeze = repo / ".onboarding/program-a/integration-freeze.json"
+            manifest = json.loads(freeze.read_text(encoding="utf-8"))
+            manifest["schema_version"] = 1
+            freeze.write_text(json.dumps(manifest), encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "invalid ordinary Integration Freeze identity/status",
+            ):
+                onboard_school._validated_ordinary_integration_freeze_bytes(
+                    repo,
+                    "program-a",
+                )
+
+    def test_ordinary_integration_freeze_transport_rejects_changed_immutable_member(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            self._ordinary_freeze_fixture(repo)
+            notes = repo / "schools/program-a/notes.md"
+            notes.write_text("changed\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "package member changed: notes.csv|package member changed: notes.md",
+            ):
+                onboard_school._validated_ordinary_integration_freeze_bytes(
+                    repo,
+                    "program-a",
+                )
+
     def test_owner_scope_is_required_before_target_ingestion(self):
         missing = {
             "history_start_season": "",
@@ -364,6 +535,151 @@ class ProgramHistoryScopeTests(unittest.TestCase):
                 program["history_coverage_status"],
                 "COMPLETE_INSTITUTIONAL",
             )
+
+    def _write_program_registry_fixture(self, repo: Path, row: dict[str, str]) -> Path:
+        path = repo / "data" / "reference" / "programs.csv"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        fields = [
+            "program_key",
+            "public_page_enabled",
+            "program_inception_season",
+            "history_coverage_status",
+            "history_start_season",
+            "history_scope_status",
+            "history_scope_basis",
+            "history_scope_intervals",
+        ]
+        with path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
+            writer.writeheader()
+            writer.writerow({field: row.get(field, "") for field in fields})
+        return path
+
+    def test_pre_ingest_complete_institutional_coverage_uses_frozen_authority(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            complete_institutional_scope_repo(repo)
+            programs_path = self._write_program_registry_fixture(
+                repo,
+                {
+                    "program_key": "program-a",
+                    "public_page_enabled": "No",
+                    "program_inception_season": "",
+                    "history_coverage_status": "UNMIGRATED",
+                    "history_start_season": "1978-1979",
+                    "history_scope_status": "OWNER_CONFIRMED",
+                    "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                    "history_scope_intervals": "",
+                },
+            )
+            approved = {
+                "school_key": "program-a",
+                "decisions": [
+                    {
+                        "category": "publication",
+                        "decision": "ENABLE_PUBLIC_PAGE",
+                    }
+                ],
+            }
+
+            counts = prepare_pre_ingest_complete_institutional_coverage(
+                repo,
+                approved,
+            )
+            with programs_path.open(encoding="utf-8", newline="") as handle:
+                program = next(csv.DictReader(handle))
+
+            self.assertEqual(
+                counts,
+                {"complete_institutional_coverage_transitions": 1},
+            )
+            self.assertEqual(
+                program["history_coverage_status"],
+                "COMPLETE_INSTITUTIONAL",
+            )
+            self.assertEqual(
+                program["program_inception_season"],
+                "1966-1967",
+            )
+            self.assertEqual(program["public_page_enabled"], "No")
+
+    def test_pre_ingest_complete_institutional_coverage_keeps_disabled_program_unmigrated(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            complete_institutional_scope_repo(repo)
+            programs_path = self._write_program_registry_fixture(
+                repo,
+                {
+                    "program_key": "program-a",
+                    "public_page_enabled": "No",
+                    "program_inception_season": "",
+                    "history_coverage_status": "UNMIGRATED",
+                    "history_start_season": "1978-1979",
+                    "history_scope_status": "OWNER_CONFIRMED",
+                    "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                    "history_scope_intervals": "",
+                },
+            )
+            approved = {
+                "school_key": "program-a",
+                "decisions": [
+                    {
+                        "category": "publication",
+                        "decision": "KEEP_DISABLED",
+                    }
+                ],
+            }
+
+            counts = prepare_pre_ingest_complete_institutional_coverage(
+                repo,
+                approved,
+            )
+            with programs_path.open(encoding="utf-8", newline="") as handle:
+                program = next(csv.DictReader(handle))
+
+            self.assertEqual(counts, {})
+            self.assertEqual(program["history_coverage_status"], "UNMIGRATED")
+            self.assertEqual(program["program_inception_season"], "")
+            self.assertEqual(program["public_page_enabled"], "No")
+
+    def test_pre_ingest_complete_institutional_coverage_rejects_scope_conflict(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            complete_institutional_scope_repo(
+                repo,
+                top_level_scope="1979-80+",
+            )
+            self._write_program_registry_fixture(
+                repo,
+                {
+                    "program_key": "program-a",
+                    "public_page_enabled": "No",
+                    "program_inception_season": "",
+                    "history_coverage_status": "UNMIGRATED",
+                    "history_start_season": "1978-1979",
+                    "history_scope_status": "OWNER_CONFIRMED",
+                    "history_scope_basis": "FIRST_TOP_LEVEL_SEASON",
+                    "history_scope_intervals": "",
+                },
+            )
+            approved = {
+                "school_key": "program-a",
+                "decisions": [
+                    {
+                        "category": "publication",
+                        "decision": "ENABLE_PUBLIC_PAGE",
+                    }
+                ],
+            }
+
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "top-level scope conflicts with accepted program scope",
+            ):
+                prepare_pre_ingest_complete_institutional_coverage(
+                    repo,
+                    approved,
+                )
 
     def test_complete_institutional_scope_authority_requires_frozen_source_notes(self):
         with tempfile.TemporaryDirectory() as tmp:
