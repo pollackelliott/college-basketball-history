@@ -1,6 +1,32 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "unlv-release-readiness-0001",
+  "operation": "RELEASE_READINESS",
+  "school_key": "unlv",
+  "previous_control_state_commit": "868360f60870d64ec620a7f5cb1c222cb262976b",
+  "previous_control_state_sha256": "88715a2774b9b7a885b058bf89fb2b6e30bfe7b6108974019568c84a5d875ca9",
+  "expected_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/unlv/unlv-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "034d8aa4cd0f2129f2347dc40eb365ec97c94d0f9b1cfa14774321a77ac0f4db"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/unlv/unlv-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "13e4d3401977a9275bf8aa62b772d814cb9d50ba7ff6adadbc3792130f4107d6"
+  },
   "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
-  "approved_plan_sha256": "d0bab2129e7121eaf97adb99c96cb1260ff14f69ed31cea9c97570235ca1da32",
+  "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "unlv-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "Same serialized UNLV ordinary original-school Implementation lane — owner-authorized release-preparation phase",
+    "authorization": "Owner said 'Continue' after UNLV Stage 2 sealed apply completed and was independently fresh-verified PASS. This authorizes the routine reversible release-preparation phase through read-only RELEASE_READINESS, exact GitHub connector PR creation/reuse, CI/mergeability and exact Vercel Preview verification, ending at OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2 approval, PR merge, Production proof, new historical decisions, and unrelated shared/global mutations are NOT authorized."
+  },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
@@ -9,9 +35,10 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
+    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -20,36 +47,7 @@
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from unlv-stage2-gate1-seal-0001",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_id_set_sha256": "ada05512beae3bf800e94cd236fed3ac68e1ce6aa53b8e5e6befd0351ee474d3",
-  "decision_universe_sha256": "6fa71313f160e60a977f56c85cd35c8e3bfd7df2e5b5dc0dd383cf76ff90c982",
-  "expected_protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
-  "filled_review_sha256": "0cc1b15ce3bc831b95f30ec244a1fd78bceea595e325ff6b8c8cf90dcca687f3",
-  "integration_freeze_sha256": "d0d1a25fd02f7c313c984cd881c638ca57db444b38643bce00a2a3a9737a43af",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_SEALED_APPLY",
-  "owner_gate_1_approval_sha256": "645c418192f1ae5f560ed6bcb5a5a0273fdaebf11d396d5cc794083c94dc39c9",
-  "previous_control_state_commit": "c73b50ca4ebce7d9518b8b15149c172507ae532b",
-  "previous_control_state_sha256": "2155b0de2ae9c09032b09825b758eb9aaa9ee23673aec6d3fc04bc6ebf972de1",
-  "recommendation_map_sha256": "f2c236d7f2371eaa303ab362e07d528e63eeb754128fccb8d1883c981bda4395",
-  "request_id": "unlv-stage2-sealed-apply-0001",
-  "schema_version": 1,
-  "school_key": "unlv",
-  "semantic_snapshot_sha256": "df576b358bb33839e0ce2a22ac844f8479c62d38200dabe8dcdaec01615b6a80",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/unlv/unlv-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "2dfc1332c60faa5e0d7feac2e56e9919acf0e070c2577b3eba010ddc22ca4b27"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/unlv/unlv-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "b11389f28936fb742efcf158f5ee0e9078392551b3d1a47f9c951f7462518c7f"
-  },
-  "target_branch": "data/unlv-onboarding",
-  "target_sha": "65e212c1fbe7b1e2c4e107dc304c35bbc410f249"
+  }
 }
