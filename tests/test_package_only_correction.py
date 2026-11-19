@@ -441,6 +441,37 @@ class PackageOnlyCorrectionTests(unittest.TestCase):
                 (source / "schools/miami/conferences.csv").read_bytes(),
             )
 
+    def test_stage2_rejects_package_only_pre_post_semantic_guard_drift(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.make_repo(root)
+            school = root / "schools/miami"
+            write_csv(
+                school / "conferences.csv",
+                HISTORY_FIELDS,
+                self.corrected_conferences(),
+            )
+            manifest = self.package_manifest(root)
+            pre = manifest["pre_correction_source_semantic_guard"]["snapshot"]
+            pre["rows"]["MIA-BASE-1"]["game_date"] = "1966-01-02"
+            manifest["pre_correction_source_semantic_guard"][
+                "snapshot_sha256"
+            ] = semantic_snapshot_sha256(pre)
+            onboard = root / ".onboarding/miami"
+            onboard.mkdir(parents=True)
+            (onboard / "integration-freeze.json").write_text(
+                json.dumps(manifest),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(
+                WorkflowError,
+                "may not change source-game semantics",
+            ):
+                onboarding_plan._package_only_correction_context(
+                    root,
+                    "miami",
+                )
+
     def test_package_only_transport_rejects_post_freeze_conference_drift(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
