@@ -1,0 +1,102 @@
+name: Miami correction Stage 2 census resubmit 0002
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/miami-correction-stage2-census-resubmit-0002.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact transport head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Authenticate exact authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main control/remote-implementation data/miami-correction
+          test "$(git rev-parse origin/main)" = "66795cf099c05e272f590fa6d2ffb10c262d6b56"
+          test "$(git rev-parse origin/control/remote-implementation)" = "e361b4ac4ed81a8fee7ad216f9aab41764be5018"
+          test "$(git rev-parse origin/data/miami-correction)" = "109fb1d5bcf880c8866380e8504b22a86dbed4f1"
+          test "$(git diff --name-only 66795cf099c05e272f590fa6d2ffb10c262d6b56...HEAD)" = ".github/workflows/miami-correction-stage2-census-resubmit-0002.yml"
+          python - <<'PY'
+          import json, subprocess
+          c=json.loads(subprocess.check_output([
+              "git","show","origin/control/remote-implementation:.remote-implementation/control-state.json"
+          ]))
+          assert c["lifecycle_state"]=="IDLE"
+          assert c["transaction_state"]=="COMPLETE"
+          assert c["recovery_required"] is False
+          assert c.get("active_request_id") is None
+          assert c.get("active_lock_commit") is None
+          PY
+
+      - name: Validate exact request template
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/miami-stage2-census-0002-template.json <<'JSON'
+          {
+            "schema_version": 1,
+            "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+            "request_id": "miami-correction-stage2-census-0002",
+            "operation": "STAGE2_CENSUS",
+            "school_key": "miami",
+            "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+            "target_branch": "data/miami-correction",
+            "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+            "correction_integration_freeze": {
+              "path": ".remote-implementation/inputs/miami-conference-correction-0001/integration-freeze.json",
+              "sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618"
+            },
+            "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+            "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+            "creation_provenance": {
+              "origin": "Miami post-publication package-only conference correction from Stage 6 checkpoint 0034",
+              "authorization": "Owner authorized the bounded Miami conferences.csv correction. CORRECTION_RESEARCH_FROZEN and INTEGRATION_FROZEN are complete. Generic remote Stage 2 package-only admission defect was repaired and merged as protected-main commit 66795cf099c05e272f590fa6d2ffb10c262d6b56. This request authorizes only the read-only correction-aware Stage 2 capability census from exact target 109fb1d5bcf880c8866380e8504b22a86dbed4f1 and exact Integration Freeze e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618. No historical decision, tracked Stage 2 repair, proposal rehearsal, Gate 1 approval, sealed apply, release, merge, Production, expansion Stage 7, or unrelated mutation is authorized."
+            },
+            "authority": {
+              "owner_gate_1": false,
+              "owner_gate_2": false,
+              "release": false,
+              "phase0": false,
+              "phase0_scope_supersession": false,
+              "venue_identity_maintenance": false,
+              "recovery": false,
+              "stage2_census": true,
+              "stage2_current_main_refresh": false,
+              "stage2_opponent_display_normalize": false,
+              "stage2_proposal_rehearsal": false,
+              "stage2_gate1_fill": false,
+              "stage2_preseal_rehearsal": false,
+              "stage2_gate1_seal": false,
+              "stage2_sealed_apply": false,
+              "stage2_reconciliation_diagnostic": false,
+              "release_readiness": false,
+              "release_preview_verify": false,
+              "release_gate2_approval": false,
+              "release_presentation_refresh": false,
+              "release_production_proof": false
+            }
+          }
+          JSON
+          python tools/remote_implementation_request_submit.py             --template /tmp/miami-stage2-census-0002-template.json             | tee /tmp/miami-stage2-census-0002-validation.json
+
+      - name: Upload validated request packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: miami-correction-stage2-census-request-packet-0002
+          if-no-files-found: error
+          path: |
+            /tmp/miami-stage2-census-0002-template.json
+            /tmp/miami-stage2-census-0002-validation.json
+          retention-days: 30
