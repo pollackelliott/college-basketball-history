@@ -1,0 +1,30 @@
+{
+  "approval_proof_sha256": "c2e521f670b5c88225a21717d77e030dba5ef8629475bb88fc2a9ea3bbe1bb0e",
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "miami-correction-release-production-proof-0001"
+  },
+  "gate2_merge_packet_path": ".remote-implementation/checkpoints/miami/miami-correction-release-gate2-approval-0001/gate2-merge-packet.json",
+  "gate2_merge_packet_sha256": "e415fbc6f934c0cd98aa09f21d5372050acaf5b472196822e005a0c9308c1eb4",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "pr_number": 678,
+  "preview_checkpoint_sha256": "2cbbf4f78fbd861a037058abb319c16a26f5427154612a7372ce6751da9d583d",
+  "preview_deployment_id": 7926837152,
+  "preview_url": "https://college-basketball-history-homghtyxi-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "83c4259e7a8d5c5de4bea8c2a895ed3525d0c4204db08497cb85cf4669907358",
+  "production_proof": false,
+  "production_request_id": "miami-correction-release-production-proof-0001",
+  "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "release_manifest_sha256": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+  "request_id": "miami-correction-release-gate2-approval-0001",
+  "request_sha256": "7f7785a469f98075d635c3973e53ecd09a27ba432b873ffeab1b9b0ba5ea4cbe",
+  "schema_version": 1,
+  "school_key": "miami",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/miami-correction",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a"
+}
