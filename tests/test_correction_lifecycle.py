@@ -12,7 +12,11 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
-from correction_lifecycle import source_game_diff, validate_correction_candidate  # noqa: E402
+from correction_lifecycle import (  # noqa: E402
+    source_game_diff,
+    validate_correction_candidate,
+    micro_correction_eligibility,
+)
 import onboarding_plan  # noqa: E402
 from implementation_site_gate import _correction_source_validation_scope  # noqa: E402
 
@@ -937,3 +941,127 @@ class CorrectionSiteScopeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class MicroCorrectionEligibilityTests(unittest.TestCase):
+    def frozen_identity(self, *, fields=None, modified_count=1, changed_members=None):
+        fields = fields or {
+            "normalized_opponent_key": {"before": "miami", "after": "miami-oh"},
+            "normalized_opponent_name": {"before": "Miami (FL)", "after": "Miami (OH)"},
+        }
+        changed_members = changed_members or ["source-games.csv", "opponents.csv"]
+        members = {
+            name: {"changed": name in changed_members, "unified_diff": ""}
+            for name in (
+                "source-games.csv", "opponents.csv", "venues.csv",
+                "conferences.csv", "notes.md", "source-notes.md",
+            )
+        }
+        if "opponents.csv" in changed_members:
+            members["opponents.csv"]["unified_diff"] = (
+                "--- baseline/opponents.csv\n"
+                "+++ candidate/opponents.csv\n"
+                "@@ -1 +1 @@\n"
+                "-example,Miami @,miami,Miami (FL),\n"
+                "+example,Miami @,miami-oh,Miami (OH),\n"
+            )
+        modified = [
+            {"source_game_id": f"G{i+1}", "fields": fields}
+            for i in range(modified_count)
+        ]
+        return {
+            "workflow_kind": "POST_PUBLICATION_CORRECTION",
+            "status": "CORRECTION_RESEARCH_FROZEN",
+            "school_key": "example",
+            "correction_mode": "SOURCE_GAME_DELTA",
+            "correction_diff_sha256": "a" * 64,
+            "correction_source_game_ids": [m["source_game_id"] for m in modified],
+            "correction_package_members": [],
+            "correction_diff": {
+                "members": members,
+                "source_games": {
+                    "added_count": 0,
+                    "modified_count": modified_count,
+                    "deleted_count": 0,
+                    "added": [],
+                    "modified": modified,
+                    "deleted": [],
+                    "changed_source_game_ids": [m["source_game_id"] for m in modified],
+                },
+            },
+        }
+
+    def integration(self, frozen, *, semantic_same=True):
+        return {
+            "workflow_kind": "POST_PUBLICATION_CORRECTION",
+            "status": "INTEGRATION_FROZEN",
+            "school_key": frozen["school_key"],
+            "correction_mode": frozen["correction_mode"],
+            "correction_diff_sha256": frozen["correction_diff_sha256"],
+            "correction_source_game_ids": frozen["correction_source_game_ids"],
+            "pre_correction_source_semantic_guard": {"snapshot_sha256": "b" * 64},
+            "source_game_semantic_guard": {
+                "snapshot_sha256": ("b" if semantic_same else "c") * 64
+            },
+        }
+
+    def test_one_game_identity_normalization_is_eligible(self):
+        frozen = self.frozen_identity()
+        result = micro_correction_eligibility(frozen, self.integration(frozen))
+        self.assertTrue(result["eligible"])
+        self.assertEqual(result["micro_correction_class"], "ONE_GAME_IDENTITY_NORMALIZATION")
+
+    def test_historical_field_change_is_not_eligible(self):
+        frozen = self.frozen_identity(fields={
+            "game_date": {"before": "1979-12-22", "after": "1979-12-23"}
+        }, changed_members=["source-games.csv"])
+        result = micro_correction_eligibility(frozen, self.integration(frozen))
+        self.assertFalse(result["eligible"])
+        self.assertTrue(any("normalized opponent" in x for x in result["reasons"]))
+
+    def test_two_game_identity_change_is_not_eligible(self):
+        frozen = self.frozen_identity(modified_count=2)
+        result = micro_correction_eligibility(frozen, self.integration(frozen))
+        self.assertFalse(result["eligible"])
+        self.assertTrue(any("exactly one" in x for x in result["reasons"]))
+
+    def test_extra_package_member_is_not_eligible(self):
+        frozen = self.frozen_identity(
+            changed_members=["source-games.csv", "opponents.csv", "venues.csv"]
+        )
+        result = micro_correction_eligibility(frozen, self.integration(frozen))
+        self.assertFalse(result["eligible"])
+
+    def test_semantic_drift_is_not_eligible(self):
+        frozen = self.frozen_identity()
+        result = micro_correction_eligibility(
+            frozen, self.integration(frozen, semantic_same=False)
+        )
+        self.assertFalse(result["eligible"])
+
+    def test_package_only_conferences_is_eligible(self):
+        frozen = {
+            "workflow_kind": "POST_PUBLICATION_CORRECTION",
+            "status": "CORRECTION_RESEARCH_FROZEN",
+            "school_key": "example",
+            "correction_mode": "PACKAGE_ONLY_FIELD",
+            "correction_diff_sha256": "d" * 64,
+            "correction_source_game_ids": [],
+            "correction_package_members": ["conferences.csv"],
+            "correction_diff": {
+                "members": {
+                    name: {"changed": name == "conferences.csv", "unified_diff": ""}
+                    for name in (
+                        "source-games.csv", "opponents.csv", "venues.csv",
+                        "conferences.csv", "notes.md", "source-notes.md",
+                    )
+                },
+                "source_games": {
+                    "added_count": 0, "modified_count": 0, "deleted_count": 0,
+                    "added": [], "modified": [], "deleted": [],
+                    "changed_source_game_ids": [],
+                },
+            },
+        }
+        result = micro_correction_eligibility(frozen, self.integration(frozen))
+        self.assertTrue(result["eligible"])
+        self.assertEqual(result["micro_correction_class"], "PACKAGE_ONLY_CONFERENCES")
