@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "unlv-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "pr_number": 658,
+  "preview_deployment_id": 7902086072,
+  "preview_url": "https://college-basketball-history-jvm3vibxg-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "unlv-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "unlv",
+  "target_branch": "data/unlv-onboarding"
+}

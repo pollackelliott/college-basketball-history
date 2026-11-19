@@ -1,0 +1,22 @@
+{
+  "approved_plan_hash": "1df14c1a0735416ae7ec491dedbb365ad1bbc5068e62b1c9db8f765f3c87fa25",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL",
+  "merge_authorized_exact_head_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b",
+  "merge_authorized_pr_number": 658,
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_body_sha256": "8b90bd00c5d3ee4d3ccb7965f7e5de0abb836ff9a8e87b478a2e54208ff11efb",
+  "pr_number": 658,
+  "preview_checkpoint_sha256": "b8f9192cdc9486f5489bb2fc35441f4dddae339dd1b6b0a2301c8e7d44e8f7e6",
+  "preview_deployment_id": 7902086072,
+  "preview_main_sha": "2249a9bc816da2fc922270a8abe2960e348030ee",
+  "preview_request_id": "unlv-release-preview-verify-0002",
+  "preview_url": "https://college-basketball-history-jvm3vibxg-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "693f7691f430113338b905f1cad02b7a41ba10e53bd8b70d898fd5db43d4a97b",
+  "production_proof": false,
+  "release_manifest_sha256": "7a5485453eb5b92054f8f86c01e7769b17763faa2cbcff72f6c4dc6d91c0b653",
+  "school_key": "unlv",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/unlv-onboarding",
+  "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b"
+}
