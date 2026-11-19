@@ -1023,6 +1023,36 @@ def _package_only_correction_context(
     research_base_sha = str(manifest.get("research_base_sha", "")).strip()
     if not re.fullmatch(r"[0-9a-f]{40}", research_base_sha):
         raise WorkflowError("invalid package-only correction research_base_sha")
+    guards: list[dict[str, Any]] = []
+    for key in (
+        "pre_correction_source_semantic_guard",
+        "source_game_semantic_guard",
+    ):
+        guard = manifest.get(key)
+        if (
+            not isinstance(guard, dict)
+            or guard.get("schema_version") != 1
+            or not isinstance(guard.get("snapshot"), dict)
+        ):
+            raise WorkflowError(
+                f"invalid package-only correction {key}"
+            )
+        snapshot = guard["snapshot"]
+        expected_hash = str(guard.get("snapshot_sha256", "")).strip()
+        actual_hash = sha256_text(canonical_json(snapshot))
+        if (
+            not re.fullmatch(r"[0-9a-f]{64}", expected_hash)
+            or expected_hash != actual_hash
+        ):
+            raise WorkflowError(
+                f"package-only correction {key} hash mismatch"
+            )
+        guards.append(snapshot)
+    if guards[0] != guards[1]:
+        raise WorkflowError(
+            "package-only correction may not change source-game semantics"
+        )
+
     expected = manifest.get("package_member_sha256")
     if not isinstance(expected, dict):
         raise WorkflowError("package-only correction lacks package member hashes")
