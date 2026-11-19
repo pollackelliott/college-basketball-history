@@ -40,11 +40,14 @@ from publish_historical_season_coverage import integrate_approved_coverage
 
 from correction_site_nonregression import (
     EXPANSION_MODE,
+    PACKAGE_ONLY_MODE,
     capture as capture_correction_site_report,
     prove as prove_correction_site_nonregression,
     prove_expansion as prove_expansion_site_nonregression,
+    prove_package_only as prove_package_only_site_nonregression,
     verify_current as verify_correction_site_report,
     verify_expansion_current as verify_expansion_site_report,
+    verify_package_only_current as verify_package_only_site_report,
 )
 from integration_freeze_guard import (
     SEMANTIC_SOURCE_GAME_FIELDS,
@@ -53,6 +56,7 @@ from integration_freeze_guard import (
     semantic_snapshot_sha256,
 )
 from onboarding_plan import (
+    REQUIRED_PACKAGE_FILES,
     WorkflowError,
     approve_plan,
     apply_pre_ingest_correction_identity_patches,
@@ -98,6 +102,9 @@ SINGLE_GAME_CORRECTION_KINDS = frozenset({
     "SINGLE_GAME_IDENTITY_SITE",
 })
 MULTI_GAME_IDENTITY_CORRECTION_KIND = "MULTI_GAME_IDENTITY_ONLY"
+PACKAGE_ONLY_CORRECTION_KIND = "PACKAGE_ONLY_FIELD_CORRECTION"
+PACKAGE_ONLY_CORRECTION_MODE = "PACKAGE_ONLY_FIELD"
+PACKAGE_ONLY_CORRECTION_MEMBERS = ("conferences.csv",)
 BOUNDED_CORRECTION_KINDS = SINGLE_GAME_CORRECTION_KINDS | frozenset({
     MULTI_GAME_IDENTITY_CORRECTION_KIND,
 })
@@ -317,6 +324,7 @@ def correction_gate_kwargs_from_manifest(
     if expansion_proof is not None:
         if (
             summary.get("correction_transaction_kind") in BOUNDED_CORRECTION_KINDS
+            or summary.get("correction_transaction_kind") == PACKAGE_ONLY_CORRECTION_KIND
             or summary.get("already_public") is not True
             or not isinstance(expansion_proof, dict)
             or expansion_proof.get("mode") != EXPANSION_MODE
@@ -326,6 +334,20 @@ def correction_gate_kwargs_from_manifest(
             raise WorkflowError("invalid sealed expansion site proof in release manifest")
         return {"expansion_site_proof": expansion_proof}
     kind = summary.get("correction_transaction_kind")
+    if kind == PACKAGE_ONLY_CORRECTION_KIND:
+        proof = execution.get("correction_site_nonregression", {})
+        if (
+            manifest.get("school_key") != school_key
+            or not isinstance(proof, dict)
+            or proof.get("mode") != PACKAGE_ONLY_MODE
+            or proof.get("school_key") != school_key
+            or summary.get("correction_package_members")
+            != list(PACKAGE_ONLY_CORRECTION_MEMBERS)
+        ):
+            raise WorkflowError(
+                "invalid sealed package-only correction proof in release manifest"
+            )
+        return {"correction_site_proof": proof}
     if kind not in BOUNDED_CORRECTION_KINDS:
         return {}
     proof = execution.get("correction_site_nonregression", {})
@@ -493,7 +515,15 @@ def run_gates(
         if label == "site_completeness" and (
             correction_site_proof is not None or expansion_site_proof is not None
         ):
-            if correction_site_proof is not None and not scoped_correction_source_ids:
+            package_only_site_proof = (
+                correction_site_proof is not None
+                and correction_site_proof.get("mode") == PACKAGE_ONLY_MODE
+            )
+            if (
+                correction_site_proof is not None
+                and not scoped_correction_source_ids
+                and not package_only_site_proof
+            ):
                 raise WorkflowError("correction site proof lacks source identity")
             # The independent full gate STILL runs and emits its complete report.
             failure = None
@@ -509,8 +539,16 @@ def run_gates(
             independent = json.loads(report_path.read_text(encoding="utf-8"))
             full = capture_correction_site_report(repo, school_key)
             if correction_site_proof is not None:
-                verify_correction_site_report(full, correction_site_proof, school_key)
-                prefix = "CORRECTION NONREGRESSION PASS"
+                if package_only_site_proof:
+                    verify_package_only_site_report(
+                        full, correction_site_proof, school_key
+                    )
+                    prefix = "PACKAGE-ONLY CORRECTION NONREGRESSION PASS"
+                else:
+                    verify_correction_site_report(
+                        full, correction_site_proof, school_key
+                    )
+                    prefix = "CORRECTION NONREGRESSION PASS"
             else:
                 verify_expansion_site_report(full, expansion_site_proof or {}, school_key)
                 prefix = "ALL-HISTORY EXPANSION NONREGRESSION PASS"
@@ -1538,6 +1576,135 @@ def _execute_multi_game_identity_correction(
     return {"correction_site_nonregression":site_proof,"correction_identity_patches":identity,"reconciliation":reconciliation,"transaction_kind":MULTI_GAME_IDENTITY_CORRECTION_KIND,"archive":archive.relative_to(repo).as_posix(),"site_output":site_output}
 
 
+
+def _git_show_package_member(
+    repo: Path,
+    commit: str,
+    school: str,
+    name: str,
+) -> bytes:
+    result = subprocess.run(
+        ["git", "show", f"{commit}:schools/{school}/{name}"],
+        cwd=repo,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode:
+        raise WorkflowError(
+            "cannot read immutable package-only correction baseline: "
+            + result.stderr.decode("utf-8", "replace").strip()
+        )
+    return result.stdout
+
+
+def _execute_package_only_correction(
+    repo: Path,
+    approved: dict[str, Any],
+) -> dict[str, Any]:
+    """Verify and release one zero-source package-only conference correction."""
+
+    school = approved["school_key"]
+    payload = _validated_correction_freeze_bytes(repo, school)
+    if payload is None:
+        raise WorkflowError(
+            "package-only correction lacks trusted Integration Freeze"
+        )
+    manifest = json.loads(payload)
+    summary = approved.get("summary", {})
+    if (
+        summary.get("correction_transaction_kind")
+        != PACKAGE_ONLY_CORRECTION_KIND
+        or summary.get("correction_package_members")
+        != list(PACKAGE_ONLY_CORRECTION_MEMBERS)
+        or manifest.get("correction_mode") != PACKAGE_ONLY_CORRECTION_MODE
+        or manifest.get("correction_package_members")
+        != list(PACKAGE_ONLY_CORRECTION_MEMBERS)
+        or manifest.get("correction_source_game_ids") != []
+        or approved.get("decisions") != []
+    ):
+        raise WorkflowError("invalid sealed package-only correction scope")
+    if (
+        summary.get("correction_diff_sha256")
+        != manifest.get("correction_diff_sha256")
+    ):
+        raise WorkflowError(
+            "package-only correction diff authority changed before sealed apply"
+        )
+
+    research_base = str(manifest.get("research_base_sha", "")).strip()
+    school_dir = repo / "schools" / school
+    changed_members: list[str] = []
+    for name in REQUIRED_PACKAGE_FILES:
+        current = (school_dir / name).read_bytes()
+        baseline = _git_show_package_member(
+            repo, research_base, school, name
+        )
+        if current != baseline:
+            changed_members.append(name)
+    if changed_members != list(PACKAGE_ONLY_CORRECTION_MEMBERS):
+        raise WorkflowError(
+            "package-only correction baseline delta changed: "
+            + json.dumps(changed_members)
+        )
+
+    before_games = _single_game_correction_snapshot(repo, school)
+    before_site = capture_correction_site_report(repo, school)
+
+    archive = archive_approved_plan(repo, approved)
+    print(f"Archived sealed decisions: {archive.relative_to(repo)}")
+
+    print("\n=== deterministic site build ===")
+    site_output = run(
+        [
+            sys.executable,
+            str(_runtime_tool("build_site_data.py")),
+            str(repo),
+            "--apply",
+        ],
+        cwd=repo,
+        label="site build apply",
+    )
+    first = site_hashes(repo)
+    run(
+        [
+            sys.executable,
+            str(_runtime_tool("build_site_data.py")),
+            str(repo),
+            "--apply",
+        ],
+        cwd=repo,
+        label="site build determinism replay",
+        echo=False,
+    )
+    if first != site_hashes(repo):
+        raise WorkflowError(
+            "package-only correction site build was not deterministic"
+        )
+
+    after_games = _single_game_correction_snapshot(repo, school)
+    if before_games != after_games:
+        raise WorkflowError(
+            "package-only correction changed source/canonical/assertion/discrepancy state"
+        )
+    site_proof = prove_package_only_site_nonregression(
+        before_site,
+        capture_correction_site_report(repo, school),
+    )
+    print(
+        "PASS: package-only correction changed no game/site-bearing state; "
+        "inherited full-gate status: "
+        + site_proof["corrected_site_status"]
+    )
+    return {
+        "correction_site_nonregression": site_proof,
+        "transaction_kind": PACKAGE_ONLY_CORRECTION_KIND,
+        "correction_package_members": list(PACKAGE_ONLY_CORRECTION_MEMBERS),
+        "archive": archive.relative_to(repo).as_posix(),
+        "site_output": site_output,
+    }
+
+
 def execute_approved_in_place(
     repo: Path,
     approved: dict[str, Any],
@@ -1550,6 +1717,8 @@ def execute_approved_in_place(
         return _execute_single_game_correction(repo, approved)
     if correction_kind == MULTI_GAME_IDENTITY_CORRECTION_KIND:
         return _execute_multi_game_identity_correction(repo, approved)
+    if correction_kind == PACKAGE_ONLY_CORRECTION_KIND:
+        return _execute_package_only_correction(repo, approved)
 
     try:
         load_frozen_venue_split_authority(repo, school_key)
@@ -1687,10 +1856,11 @@ def execute_approved_in_place(
 def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes | None:
     """Authorize only an exact correction Integration Freeze for disposable execution.
 
-    Other ignored onboarding state must not cross this boundary. Both the frozen
-    pre-correction baseline and the post-correction snapshot are required to
-    prevent a forged or stale scope from suppressing unrelated source-site debt.
+    Source-game corrections retain their exact authorized-ID semantics. Package-only
+    corrections carry no source-game authority and may transport only one exact
+    conferences.csv correction with an unchanged source semantic snapshot.
     """
+
     path = source / ".onboarding" / school_key / "integration-freeze.json"
     if not path.is_file():
         return None
@@ -1703,7 +1873,6 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
         raise WorkflowError("Integration Freeze manifest must be an object")
     if manifest.get("workflow_kind") != "POST_PUBLICATION_CORRECTION":
         return None
-
     if (
         manifest.get("schema_version") != 2
         or manifest.get("status") != "INTEGRATION_FROZEN"
@@ -1711,8 +1880,17 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
     ):
         raise WorkflowError("invalid correction Integration Freeze identity/status")
 
+    package_only = (
+        manifest.get("correction_mode") == PACKAGE_ONLY_CORRECTION_MODE
+    )
     ids = manifest.get("correction_source_game_ids")
-    if (
+    members = manifest.get("correction_package_members", [])
+    if package_only:
+        if ids != [] or members != list(PACKAGE_ONLY_CORRECTION_MEMBERS):
+            raise WorkflowError(
+                "invalid package-only correction Integration Freeze scope"
+            )
+    elif (
         not isinstance(ids, list)
         or not ids
         or any(not isinstance(i, str) or not i.strip() for i in ids)
@@ -1721,7 +1899,10 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
         raise WorkflowError("invalid correction Integration Freeze source IDs")
 
     snapshots = []
-    for name in ("pre_correction_source_semantic_guard", "source_game_semantic_guard"):
+    for name in (
+        "pre_correction_source_semantic_guard",
+        "source_game_semantic_guard",
+    ):
         guard = manifest.get(name)
         if not isinstance(guard, dict) or guard.get("schema_version") != 1:
             raise WorkflowError(f"invalid correction Integration Freeze {name}")
@@ -1731,29 +1912,65 @@ def _validated_correction_freeze_bytes(source: Path, school_key: str) -> bytes |
             or snapshot.get("schema_version") != 1
             or snapshot.get("fields") != list(SEMANTIC_SOURCE_GAME_FIELDS)
             or not isinstance(snapshot.get("rows"), dict)
-            or not all(isinstance(v, dict) for v in snapshot["rows"].values())
-            or guard.get("snapshot_sha256") != semantic_snapshot_sha256(snapshot)
+            or not all(
+                isinstance(v, dict) for v in snapshot["rows"].values()
+            )
+            or guard.get("snapshot_sha256")
+            != semantic_snapshot_sha256(snapshot)
         ):
-            raise WorkflowError(f"untrusted correction Integration Freeze {name}")
+            raise WorkflowError(
+                f"untrusted correction Integration Freeze {name}"
+            )
         snapshots.append(snapshot)
 
     before, after = (snap["rows"] for snap in snapshots)
     changed_ids = {
         i for i in set(before) | set(after) if before.get(i) != after.get(i)
     }
-    if not changed_ids.issubset(set(ids)):
-        raise WorkflowError("correction semantic delta exceeds authorized source IDs")
-    if not set(ids).issubset(set(after)):
-        raise WorkflowError("correction source IDs missing from frozen post-correction state")
+    if package_only:
+        if changed_ids or snapshots[0] != snapshots[1]:
+            raise WorkflowError(
+                "package-only correction may not change source-game semantics"
+            )
+    else:
+        if not changed_ids.issubset(set(ids)):
+            raise WorkflowError(
+                "correction semantic delta exceeds authorized source IDs"
+            )
+        if not set(ids).issubset(set(after)):
+            raise WorkflowError(
+                "correction source IDs missing from frozen post-correction state"
+            )
+
+    member_hashes = manifest.get("package_member_sha256")
+    if not isinstance(member_hashes, dict):
+        raise WorkflowError(
+            "correction Integration Freeze lacks package member hashes"
+        )
+    if package_only:
+        for name in REQUIRED_PACKAGE_FILES:
+            member = source / "schools" / school_key / name
+            expected = str(member_hashes.get(name, "")).strip()
+            if (
+                not re.fullmatch(r"[0-9a-f]{64}", expected)
+                or not member.is_file()
+                or file_sha(member) != expected
+            ):
+                raise WorkflowError(
+                    f"package-only correction package member changed: {name}"
+                )
+    else:
+        source_games = source / "schools" / school_key / "source-games.csv"
+        if member_hashes.get("source-games.csv") != file_sha(source_games):
+            raise WorkflowError(
+                "tracked source does not match correction Integration Freeze"
+            )
 
     source_games = source / "schools" / school_key / "source-games.csv"
-    member_hashes = manifest.get("package_member_sha256")
-    if (
-        not isinstance(member_hashes, dict)
-        or member_hashes.get("source-games.csv") != file_sha(source_games)
-        or build_source_game_semantic_snapshot(source_games) != snapshots[1]
-    ):
-        raise WorkflowError("tracked source does not match correction Integration Freeze")
+    if build_source_game_semantic_snapshot(source_games) != snapshots[1]:
+        raise WorkflowError(
+            "tracked source does not match correction Integration Freeze"
+        )
     return payload
 
 
@@ -2207,24 +2424,59 @@ def pr_body(
     decisions = approved.get("decisions", [])
     discrepancy_decisions = [item for item in decisions if item["category"] == "discrepancy"]
     identity_decisions = [item for item in decisions if item["category"] == "identity"]
+    package_only = (
+        summary.get("correction_transaction_kind")
+        == PACKAGE_ONLY_CORRECTION_KIND
+    )
     dispositions = {}
     for item in discrepancy_decisions:
         dispositions[item["decision"]] = dispositions.get(item["decision"], 0) + 1
-    lines = [
-        "## Summary",
-        "",
-        f"- onboards `{approved['school_key']}` through the permanent sealed-plan workflow",
-        f"- preserves {summary.get('source_rows', 0):,} source rows ({summary.get('pre_cutoff_rows', 0):,} pre-cutoff)",
-        f"- matches {summary.get('existing_game_matches', 0):,} existing games and creates {summary.get('new_canonical_games', 0):,}",
-        f"- applies {len(identity_decisions):,} owner-approved identity decisions",
-        f"- records {len(discrepancy_decisions):,} dated discrepancy decisions",
-        f"- approved plan `{approved['approved_plan_hash']}`",
-    ]
+    if package_only:
+        lines = [
+            "## Summary",
+            "",
+            (
+                f"- applies one bounded post-publication package-only correction "
+                f"for `{approved['school_key']}`"
+            ),
+            "- changes only the frozen, hash-bound `conferences.csv` package member",
+            "- changes zero source-game, canonical-game, assertion, or discrepancy rows",
+            "- carries zero new historical Gate 1 decisions",
+            f"- approved plan `{approved['approved_plan_hash']}`",
+        ]
+    else:
+        lines = [
+            "## Summary",
+            "",
+            f"- onboards `{approved['school_key']}` through the permanent sealed-plan workflow",
+            f"- preserves {summary.get('source_rows', 0):,} source rows ({summary.get('pre_cutoff_rows', 0):,} pre-cutoff)",
+            f"- matches {summary.get('existing_game_matches', 0):,} existing games and creates {summary.get('new_canonical_games', 0):,}",
+            f"- applies {len(identity_decisions):,} owner-approved identity decisions",
+            f"- records {len(discrepancy_decisions):,} dated discrepancy decisions",
+            f"- approved plan `{approved['approved_plan_hash']}`",
+        ]
     if dispositions:
         lines.append(
             "- discrepancy dispositions: "
             + ", ".join(f"{key}={value}" for key, value in sorted(dispositions.items()))
         )
+    site_validation_line = (
+        "- package-only correction site nonregression — PASS; inherited full-gate "
+        "failures remain reported"
+        if package_only
+        else (
+            "- correction-only site nonregression — PASS; inherited full-gate "
+            "failures remain reported"
+            if summary.get("correction_transaction_kind")
+            in BOUNDED_CORRECTION_KINDS
+            else (
+                "- All-History expansion site nonregression — PASS; inherited "
+                "full-gate failures remain reported"
+                if (execution or {}).get("expansion_site_nonregression")
+                else "- implementation site completeness — PASS"
+            )
+        )
+    )
     lines.extend(
         [
             "",
@@ -2232,18 +2484,7 @@ def pr_body(
             "",
             "- repository validation — PASS",
             "- target package no-op — PASS",
-            (
-                "- correction-only site nonregression — PASS; inherited full-gate "
-                "failures remain reported"
-                if summary.get("correction_transaction_kind")
-                in BOUNDED_CORRECTION_KINDS
-                else (
-                    "- All-History expansion site nonregression — PASS; inherited "
-                    "full-gate failures remain reported"
-                    if (execution or {}).get("expansion_site_nonregression")
-                    else "- implementation site completeness — PASS"
-                )
-            ),
+            site_validation_line,
             "- accomplishment cross-check — PASS",
             "- deterministic site build — PASS",
             "- unit tests — PASS",
@@ -2255,13 +2496,18 @@ def pr_body(
                 "The paths below are the transactional sealed-plan mutation boundary. "
                 "The full PR diff also includes committed Phase 0 package/reference "
                 "changes already present on the onboarding branch."
+                if not package_only
+                else (
+                    "The paths below are the sealed package-only verification/output "
+                    "boundary. The corrected conferences.csv member was already staged "
+                    "from the exact frozen correction package before Stage 2."
+                )
             ),
             "",
         ]
     )
     lines.extend(f"- `{path}`" for path in changed)
     return "\n".join(lines) + "\n"
-
 
 def transactional_apply(
     repo: Path,

@@ -989,6 +989,94 @@ def score_result_consistency_issue(row: dict[str, str]) -> dict[str, str] | None
 
 
 CORRECTION_WORKFLOW_KIND = "POST_PUBLICATION_CORRECTION"
+PACKAGE_ONLY_CORRECTION_MODE = "PACKAGE_ONLY_FIELD"
+PACKAGE_ONLY_CORRECTION_KIND = "PACKAGE_ONLY_FIELD_CORRECTION"
+PACKAGE_ONLY_CORRECTION_MEMBERS = frozenset({"conferences.csv"})
+
+
+def _package_only_correction_context(
+    repo: Path,
+    school_key: str,
+) -> dict[str, Any] | None:
+    """Authenticate one staged package-only correction without source-game authority."""
+
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        return None
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("workflow_kind") != CORRECTION_WORKFLOW_KIND:
+        return None
+    if manifest.get("correction_mode") != PACKAGE_ONLY_CORRECTION_MODE:
+        return None
+    if (
+        manifest.get("status") != "INTEGRATION_FROZEN"
+        or manifest.get("school_key") != school_key
+    ):
+        raise WorkflowError("invalid package-only correction Integration Freeze")
+    ids = manifest.get("correction_source_game_ids")
+    members = manifest.get("correction_package_members")
+    if ids != [] or members != ["conferences.csv"]:
+        raise WorkflowError(
+            "package-only correction must have zero source IDs and exactly "
+            "conferences.csv authority"
+        )
+    research_base_sha = str(manifest.get("research_base_sha", "")).strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", research_base_sha):
+        raise WorkflowError("invalid package-only correction research_base_sha")
+    guards: list[dict[str, Any]] = []
+    for key in (
+        "pre_correction_source_semantic_guard",
+        "source_game_semantic_guard",
+    ):
+        guard = manifest.get(key)
+        if (
+            not isinstance(guard, dict)
+            or guard.get("schema_version") != 1
+            or not isinstance(guard.get("snapshot"), dict)
+        ):
+            raise WorkflowError(
+                f"invalid package-only correction {key}"
+            )
+        snapshot = guard["snapshot"]
+        expected_hash = str(guard.get("snapshot_sha256", "")).strip()
+        actual_hash = sha256_text(canonical_json(snapshot))
+        if (
+            not re.fullmatch(r"[0-9a-f]{64}", expected_hash)
+            or expected_hash != actual_hash
+        ):
+            raise WorkflowError(
+                f"package-only correction {key} hash mismatch"
+            )
+        guards.append(snapshot)
+    if guards[0] != guards[1]:
+        raise WorkflowError(
+            "package-only correction may not change source-game semantics"
+        )
+
+    expected = manifest.get("package_member_sha256")
+    if not isinstance(expected, dict):
+        raise WorkflowError("package-only correction lacks package member hashes")
+    for name in REQUIRED_PACKAGE_FILES:
+        wanted = str(expected.get(name, "")).strip()
+        path = repo / "schools" / school_key / name
+        if (
+            not re.fullmatch(r"[0-9a-f]{64}", wanted)
+            or not path.is_file()
+            or sha256_file(path) != wanted
+        ):
+            raise WorkflowError(
+                f"package-only correction package member changed: {name}"
+            )
+    correction_diff_sha256 = str(
+        manifest.get("correction_diff_sha256", "")
+    ).strip()
+    if not re.fullmatch(r"[0-9a-f]{64}", correction_diff_sha256):
+        raise WorkflowError("invalid package-only correction diff SHA")
+    return {
+        "research_base_sha": research_base_sha,
+        "correction_package_members": list(members),
+        "correction_diff_sha256": correction_diff_sha256,
+    }
 
 
 def _correction_unchanged_published_source_ids(
@@ -1026,7 +1114,8 @@ def _correction_unchanged_published_source_ids(
         for value in manifest.get("correction_source_game_ids", [])
         if str(value).strip()
     }
-    if not research_base_sha or not correction_ids:
+    package_only = _package_only_correction_context(repo, school_key)
+    if not research_base_sha or (not correction_ids and package_only is None):
         raise WorkflowError(
             "correction Integration Freeze lacks research_base_sha or "
             "correction_source_game_ids"
@@ -1155,7 +1244,8 @@ def _correction_assertion_reconciliation_context(
         for value in manifest.get("correction_source_game_ids", [])
         if str(value).strip()
     }
-    if not correction_ids:
+    package_only = _package_only_correction_context(repo, school_key)
+    if not correction_ids and package_only is None:
         raise WorkflowError(
             "correction Integration Freeze lacks correction_source_game_ids"
         )
@@ -1199,6 +1289,12 @@ def _correction_assertion_reconciliation_context(
         raise WorkflowError(
             "correction Integration Freeze semantic snapshot field sets differ"
         )
+    if package_only is not None:
+        if pre["rows"] != post["rows"] or pre["sha256"] != post["sha256"]:
+            raise WorkflowError(
+                "package-only correction may not change source-game semantics"
+            )
+        return None
     missing_post = sorted(correction_ids - set(post["rows"]))
     if missing_post:
         raise WorkflowError(
@@ -3610,6 +3706,54 @@ def build_plan(
             "warnings": warnings,
             "summary": {},
             "decisions": [],
+        }
+
+    package_only = _package_only_correction_context(repo, school_key)
+    if package_only is not None:
+        programs = read_csv(repo / "data/reference/programs.csv")
+        program = next(
+            row for row in programs if row["program_key"] == school_key
+        )
+        all_sources = read_csv(
+            repo / "schools" / school_key / "source-games.csv"
+        )
+        return {
+            "schema_version": PLAN_SCHEMA_VERSION,
+            "workflow_version": WORKFLOW_VERSION,
+            "school_key": school_key,
+            "created_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "input_fingerprint": input_fingerprint(repo, school_key),
+            "package": package,
+            "blockers": [],
+            "warnings": warnings,
+            "summary": {
+                "source_rows": len(all_sources),
+                "in_scope_source_rows": 0,
+                "top_level_source_rows": 0,
+                "pre_cutoff_rows": 0,
+                "existing_game_matches": 0,
+                "new_canonical_games": 0,
+                "identity_review_required": 0,
+                "assertions_to_add": 0,
+                "canonical_enrichment_games": 0,
+                "canonical_enrichment_fields": 0,
+                "discrepancies_to_add": 0,
+                "conditional_discrepancies": 0,
+                "canonical_site_patch_reviews": 0,
+                "affected_public_programs": [],
+                "already_public": program.get("public_page_enabled") == "Yes",
+                "correction_transaction_kind": PACKAGE_ONLY_CORRECTION_KIND,
+                "correction_package_members": package_only[
+                    "correction_package_members"
+                ],
+                "correction_diff_sha256": package_only[
+                    "correction_diff_sha256"
+                ],
+                "inherited_unrelated_reviews_excluded": "ALL",
+            },
+            "decisions": [],
+            "identity_collision_groups": [],
+            "identity_cardinality_constraints": [],
         }
 
     source_path = repo / "schools" / school_key / "source-games.csv"

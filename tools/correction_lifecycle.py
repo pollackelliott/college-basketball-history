@@ -20,11 +20,15 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
+from conference_reference import REQUIRED_HISTORY_COLUMNS, history_errors
 from integration_freeze_guard import build_source_game_semantic_snapshot, semantic_snapshot_sha256
 from onboarding_plan import REQUIRED_PACKAGE_FILES, WorkflowError
 from site_completeness import source_home_chronology_report, source_site_completeness_report
 
 WORKFLOW_KIND = "POST_PUBLICATION_CORRECTION"
+PACKAGE_ONLY_SCOPE = "package-field-correction"
+PACKAGE_ONLY_MODE = "PACKAGE_ONLY_FIELD"
+PACKAGE_ONLY_SUPPORTED_MEMBERS = frozenset({"conferences.csv"})
 
 
 def run(cmd: list[str], repo: Path, *, echo: bool = False) -> str:
@@ -172,6 +176,62 @@ def validate_correction_candidate(root: Path, school_key: str, changed_source_ga
             "counts": {"changed_source_games": len(changed), "site": site["counts"], "home": home["counts"]}}
 
 
+def validate_package_only_candidate(
+    repo: Path,
+    root: Path,
+    school_key: str,
+    members: list[str],
+) -> dict[str, Any]:
+    """Validate a package-only correction without creating source-game authority."""
+
+    declared = sorted(set(members))
+    errors: list[str] = []
+    unsupported = sorted(set(declared) - PACKAGE_ONLY_SUPPORTED_MEMBERS)
+    if unsupported:
+        errors.append(
+            "unsupported package-only correction members: " + ", ".join(unsupported)
+        )
+    if declared != ["conferences.csv"]:
+        errors.append(
+            "package-only correction v1 requires exactly conferences.csv"
+        )
+
+    conference_errors: list[str] = []
+    if "conferences.csv" in declared:
+        fields, rows = csv_file(root / "conferences.csv")
+        missing = sorted(REQUIRED_HISTORY_COLUMNS - set(fields))
+        extra = sorted(set(fields) - REQUIRED_HISTORY_COLUMNS)
+        if missing or extra:
+            conference_errors.append(
+                "conferences.csv header mismatch; "
+                + (f"missing={missing} " if missing else "")
+                + (f"extra={extra}" if extra else "")
+            )
+        _, registry = csv_file(repo / "data/reference/conferences.csv")
+        registry_keys = {
+            row.get("conference_key", "").strip()
+            for row in registry
+            if row.get("conference_key", "").strip()
+        }
+        conference_errors.extend(
+            history_errors(
+                rows,
+                registry_keys,
+                expected_program_key=school_key,
+            )
+        )
+    errors.extend(conference_errors)
+    return {
+        "status": "PASS" if not errors else "FAIL",
+        "errors": errors,
+        "warnings": [],
+        "counts": {
+            "changed_package_members": len(declared),
+            "conference_history_errors": len(conference_errors),
+        },
+    }
+
+
 def write_freeze(path: Path, manifest: dict[str, Any], root: Path) -> None:
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("correction-freeze.json", json.dumps(manifest, indent=2, sort_keys=True) + "\n")
@@ -186,43 +246,135 @@ def freeze(args: argparse.Namespace, repo: Path) -> int:
         diff = exact_diff(base, root)
         diff_sha = sha_json(diff)
         ids = diff["source_games"]["changed_source_game_ids"]
-        if not ids:
-            raise WorkflowError("candidate changes no source-game rows")
-        acceptance = validate_correction_candidate(root, args.school_key, ids)
-        report = {"school_key": args.school_key, "research_base_sha": args.research_base,
-                  "scope": args.scope, "research_authority_ref": args.research_authority_ref,
-                  "research_authority_digest": args.research_authority_digest,
-                  "correction_diff_sha256": diff_sha, "correction_diff": diff,
-                  "scoped_acceptance": acceptance}
+        changed_members = sorted(
+            name
+            for name, member in diff["members"].items()
+            if member["changed"]
+        )
+        declared_members = sorted(
+            set(getattr(args, "package_member", []) or [])
+        )
+        package_only = args.scope == PACKAGE_ONLY_SCOPE
+
+        if package_only:
+            if ids:
+                raise WorkflowError(
+                    "package-field-correction may not change source-game rows"
+                )
+            if not declared_members:
+                raise WorkflowError(
+                    "package-field-correction requires --package-member"
+                )
+            unsupported = sorted(
+                set(declared_members) - PACKAGE_ONLY_SUPPORTED_MEMBERS
+            )
+            if unsupported:
+                raise WorkflowError(
+                    "unsupported package-only correction members: "
+                    + ", ".join(unsupported)
+                )
+            if changed_members != declared_members:
+                raise WorkflowError(
+                    "package-only changed-member population differs from declared "
+                    f"members: changed={changed_members}, declared={declared_members}"
+                )
+            if "source-games.csv" in changed_members:
+                raise WorkflowError(
+                    "package-only correction must preserve source-games.csv bytes"
+                )
+            acceptance = validate_package_only_candidate(
+                repo, root, args.school_key, declared_members
+            )
+            correction_mode = PACKAGE_ONLY_MODE
+        else:
+            if declared_members:
+                raise WorkflowError(
+                    "--package-member is valid only with package-field-correction"
+                )
+            if not ids:
+                raise WorkflowError("candidate changes no source-game rows")
+            acceptance = validate_correction_candidate(
+                root, args.school_key, ids
+            )
+            correction_mode = "SOURCE_GAME_DELTA"
+
+        report = {
+            "school_key": args.school_key,
+            "research_base_sha": args.research_base,
+            "scope": args.scope,
+            "research_authority_ref": args.research_authority_ref,
+            "research_authority_digest": args.research_authority_digest,
+            "correction_mode": correction_mode,
+            "correction_package_members": declared_members,
+            "correction_diff_sha256": diff_sha,
+            "correction_diff": diff,
+            "scoped_acceptance": acceptance,
+        }
         print(json.dumps(report, indent=2, sort_keys=True))
         if args.report_json:
-            args.report_json.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+            args.report_json.write_text(
+                json.dumps(report, indent=2, sort_keys=True) + "\n"
+            )
         if acceptance["status"] != "PASS":
-            raise WorkflowError("candidate failed scoped correction acceptance")
+            raise WorkflowError(
+                "candidate failed scoped correction acceptance"
+            )
         if not args.expected_diff_sha256:
-            print("\nCORRECTION DIFF REVIEW REQUIRED; rerun with --expected-diff-sha256 " + diff_sha)
+            print(
+                "\nCORRECTION DIFF REVIEW REQUIRED; rerun with "
+                "--expected-diff-sha256 " + diff_sha
+            )
             return 0
         if args.expected_diff_sha256.lower() != diff_sha.lower():
-            raise WorkflowError(f"correction diff SHA mismatch: expected {args.expected_diff_sha256}, found {diff_sha}")
-        if args.scope == "season-supplement" and not args.required_completed_season_cutoff:
-            raise WorkflowError("season-supplement requires --required-completed-season-cutoff")
+            raise WorkflowError(
+                "correction diff SHA mismatch: expected "
+                f"{args.expected_diff_sha256}, found {diff_sha}"
+            )
+        if (
+            args.scope == "season-supplement"
+            and not args.required_completed_season_cutoff
+        ):
+            raise WorkflowError(
+                "season-supplement requires --required-completed-season-cutoff"
+            )
         if not args.output:
-            raise WorkflowError("--output is required to freeze an acknowledged diff")
-        manifest = {"schema_version": 1, "workflow_kind": WORKFLOW_KIND,
-                    "status": "CORRECTION_RESEARCH_FROZEN", "school_key": args.school_key,
-                    "research_base_sha": args.research_base, "scope": args.scope,
-                    "research_authority": {"ref": args.research_authority_ref, "digest": args.research_authority_digest},
-                    "required_completed_season_cutoff": args.required_completed_season_cutoff,
-                    "baseline_package_sha256": {n: sha_bytes(v) for n, v in base.items()},
-                    "candidate_package_sha256": {n: sha_file(root / n) for n in REQUIRED_PACKAGE_FILES},
-                    "correction_diff_sha256": diff_sha, "correction_diff": diff,
-                    "correction_source_game_ids": ids, "scoped_acceptance": acceptance}
+            raise WorkflowError(
+                "--output is required to freeze an acknowledged diff"
+            )
+        manifest = {
+            "schema_version": 1,
+            "workflow_kind": WORKFLOW_KIND,
+            "status": "CORRECTION_RESEARCH_FROZEN",
+            "school_key": args.school_key,
+            "research_base_sha": args.research_base,
+            "scope": args.scope,
+            "correction_mode": correction_mode,
+            "correction_package_members": declared_members,
+            "research_authority": {
+                "ref": args.research_authority_ref,
+                "digest": args.research_authority_digest,
+            },
+            "required_completed_season_cutoff": (
+                args.required_completed_season_cutoff
+            ),
+            "baseline_package_sha256": {
+                n: sha_bytes(v) for n, v in base.items()
+            },
+            "candidate_package_sha256": {
+                n: sha_file(root / n) for n in REQUIRED_PACKAGE_FILES
+            },
+            "correction_diff_sha256": diff_sha,
+            "correction_diff": diff,
+            "correction_source_game_ids": ids,
+            "scoped_acceptance": acceptance,
+        }
         write_freeze(args.output.resolve(), manifest, root)
         print("\nCORRECTION_RESEARCH_FROZEN: YES")
         print(f"SHA-256: {sha_file(args.output.resolve())}")
         return 0
     finally:
         temp.cleanup()
+
 
 
 def extract_freeze(path: Path, expected_sha: str):
@@ -261,80 +413,229 @@ def validate_registered_venues(repo: Path, root: Path, ids: list[str]) -> None:
 
 
 def stage(args: argparse.Namespace, repo: Path) -> int:
-    temp, root, frozen, freeze_sha = extract_freeze(args.freeze_zip.resolve(), args.expected_sha256)
+    temp, root, frozen, freeze_sha = extract_freeze(
+        args.freeze_zip.resolve(), args.expected_sha256
+    )
     try:
         school = args.school_key
-        if frozen.get("school_key") != school: raise WorkflowError("freeze belongs to another school")
+        if frozen.get("school_key") != school:
+            raise WorkflowError("freeze belongs to another school")
         branch = git(repo, "branch", "--show-current").strip()
-        if branch != f"data/{school}-correction": raise WorkflowError(f"requires branch data/{school}-correction; current={branch}")
-        if git(repo, "status", "--porcelain", "--untracked-files=all").strip(): raise WorkflowError("requires clean working tree")
+        if branch != f"data/{school}-correction":
+            raise WorkflowError(
+                f"requires branch data/{school}-correction; current={branch}"
+            )
+        if git(repo, "status", "--porcelain", "--untracked-files=all").strip():
+            raise WorkflowError("requires clean working tree")
         run(["git", "fetch", "origin", "main"], repo)
-        head, origin = git(repo, "rev-parse", "HEAD").strip(), git(repo, "rev-parse", "origin/main").strip()
-        if head != origin: raise WorkflowError("correction branch must point exactly at current origin/main")
-        git(repo, "merge-base", "--is-ancestor", frozen["research_base_sha"], origin)
+        head = git(repo, "rev-parse", "HEAD").strip()
+        origin = git(repo, "rev-parse", "origin/main").strip()
+        if head != origin:
+            raise WorkflowError(
+                "correction branch must point exactly at current origin/main"
+            )
+        git(
+            repo,
+            "merge-base",
+            "--is-ancestor",
+            frozen["research_base_sha"],
+            origin,
+        )
         school_dir = repo / "schools" / school
-        current = {n: sha_file(school_dir / n) for n in REQUIRED_PACKAGE_FILES}
-        drift = [n for n in REQUIRED_PACKAGE_FILES if current[n] != frozen["baseline_package_sha256"][n]]
-        if drift: raise WorkflowError("target package changed since correction Research: " + ", ".join(drift))
+        current = {
+            n: sha_file(school_dir / n) for n in REQUIRED_PACKAGE_FILES
+        }
+        drift = [
+            n
+            for n in REQUIRED_PACKAGE_FILES
+            if current[n] != frozen["baseline_package_sha256"][n]
+        ]
+        if drift:
+            raise WorkflowError(
+                "target package changed since correction Research: "
+                + ", ".join(drift)
+            )
+
         ids = list(frozen["correction_source_game_ids"])
-        acceptance = validate_correction_candidate(root, school, ids)
-        if acceptance["status"] != "PASS": raise WorkflowError("frozen candidate no longer passes scoped acceptance")
-        validate_registered_venues(repo, root, ids)
-        pre = build_source_game_semantic_snapshot(school_dir / "source-games.csv")
+        correction_mode = str(
+            frozen.get("correction_mode", "SOURCE_GAME_DELTA")
+        )
+        package_members = list(
+            frozen.get("correction_package_members", [])
+        )
+        if correction_mode == PACKAGE_ONLY_MODE:
+            if ids:
+                raise WorkflowError(
+                    "package-only correction freeze unexpectedly carries source IDs"
+                )
+            acceptance = validate_package_only_candidate(
+                repo, root, school, package_members
+            )
+            if acceptance["status"] != "PASS":
+                raise WorkflowError(
+                    "frozen package-only candidate no longer passes scoped acceptance"
+                )
+        else:
+            if not ids:
+                raise WorkflowError(
+                    "source-game correction freeze has no correction source IDs"
+                )
+            acceptance = validate_correction_candidate(root, school, ids)
+            if acceptance["status"] != "PASS":
+                raise WorkflowError(
+                    "frozen candidate no longer passes scoped acceptance"
+                )
+            validate_registered_venues(repo, root, ids)
+
+        pre = build_source_game_semantic_snapshot(
+            school_dir / "source-games.csv"
+        )
         post = build_source_game_semantic_snapshot(root / "source-games.csv")
+        if correction_mode == PACKAGE_ONLY_MODE and pre != post:
+            raise WorkflowError(
+                "package-only correction changed source-game semantics"
+            )
+
         _, programs = csv_file(repo / "data/reference/programs.csv")
-        program = next((r for r in programs if r.get("program_key") == school), None)
-        if not program: raise WorkflowError(f"program registry has no row for {school}")
-        manifest = {"schema_version": 2, "workflow_kind": WORKFLOW_KIND, "status": "INTEGRATION_FROZEN",
-                    "school_key": school, "research_base_sha": frozen["research_base_sha"],
-                    "integration_base_sha": head, "origin_main_sha": origin,
-                    "research_zip_sha256": freeze_sha, "correction_freeze_sha256": freeze_sha,
-                    "correction_diff_sha256": frozen["correction_diff_sha256"],
-                    "correction_source_game_ids": ids,
-                    "package_member_sha256": {n: sha_file(root / n) for n in REQUIRED_PACKAGE_FILES},
-                    "pre_correction_source_semantic_guard": {"schema_version": 1, "snapshot_sha256": semantic_snapshot_sha256(pre), "snapshot": pre},
-                    "source_game_semantic_guard": {"schema_version": 1, "snapshot_sha256": semantic_snapshot_sha256(post), "snapshot": post},
-                    "venue_mapping": [], "program_alias_mapping": [], "conference_mapping": [], "conference_reconciliation": None,
-                    "history_scope": {"history_start_season": program.get("history_start_season", ""),
-                                      "history_scope_intervals": program.get("history_scope_intervals", ""),
-                                      "history_scope_status": "INHERITED_PUBLISHED",
-                                      "history_scope_basis": "Published protected-main scope; correction does not alter scope.",
-                                      "history_scope_notes": "Post-publication bounded correction."}}
-        print(f"School: {school}\nIntegration base: {head}\nCorrection freeze: {freeze_sha}\nCorrection source IDs: {len(ids)}")
+        program = next(
+            (r for r in programs if r.get("program_key") == school),
+            None,
+        )
+        if not program:
+            raise WorkflowError(f"program registry has no row for {school}")
+        manifest = {
+            "schema_version": 2,
+            "workflow_kind": WORKFLOW_KIND,
+            "status": "INTEGRATION_FROZEN",
+            "school_key": school,
+            "research_base_sha": frozen["research_base_sha"],
+            "integration_base_sha": head,
+            "origin_main_sha": origin,
+            "research_zip_sha256": freeze_sha,
+            "correction_freeze_sha256": freeze_sha,
+            "correction_diff_sha256": frozen["correction_diff_sha256"],
+            "correction_mode": correction_mode,
+            "correction_package_members": package_members,
+            "correction_source_game_ids": ids,
+            "package_member_sha256": {
+                n: sha_file(root / n) for n in REQUIRED_PACKAGE_FILES
+            },
+            "pre_correction_source_semantic_guard": {
+                "schema_version": 1,
+                "snapshot_sha256": semantic_snapshot_sha256(pre),
+                "snapshot": pre,
+            },
+            "source_game_semantic_guard": {
+                "schema_version": 1,
+                "snapshot_sha256": semantic_snapshot_sha256(post),
+                "snapshot": post,
+            },
+            "venue_mapping": [],
+            "program_alias_mapping": [],
+            "conference_mapping": [],
+            "conference_reconciliation": None,
+            "history_scope": {
+                "history_start_season": program.get(
+                    "history_start_season", ""
+                ),
+                "history_scope_intervals": program.get(
+                    "history_scope_intervals", ""
+                ),
+                "history_scope_status": "INHERITED_PUBLISHED",
+                "history_scope_basis": (
+                    "Published protected-main scope; correction does not alter "
+                    "scope."
+                ),
+                "history_scope_notes": "Post-publication bounded correction.",
+            },
+        }
+        print(
+            f"School: {school}\n"
+            f"Integration base: {head}\n"
+            f"Correction freeze: {freeze_sha}\n"
+            f"Correction mode: {correction_mode}\n"
+            f"Correction source IDs: {len(ids)}\n"
+            "Correction package members: "
+            + (", ".join(package_members) if package_members else "none")
+        )
         if not args.apply:
-            print("DRY RUN COMPLETE: no repository files changed."); return 0
-        onboard = repo / ".onboarding" / school; onboard.mkdir(parents=True, exist_ok=True)
+            print("DRY RUN COMPLETE: no repository files changed.")
+            return 0
+
+        onboard = repo / ".onboarding" / school
+        onboard.mkdir(parents=True, exist_ok=True)
         manifest_path = onboard / "integration-freeze.json"
-        old = {n: (school_dir / n).read_bytes() for n in REQUIRED_PACKAGE_FILES}
-        old_manifest = manifest_path.read_bytes() if manifest_path.exists() else None
+        old = {
+            n: (school_dir / n).read_bytes()
+            for n in REQUIRED_PACKAGE_FILES
+        }
+        old_manifest = (
+            manifest_path.read_bytes() if manifest_path.exists() else None
+        )
         try:
-            for n in REQUIRED_PACKAGE_FILES: shutil.copy2(root / n, school_dir / n)
-            manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
-            run([sys.executable, str(repo / "tools/validate_data.py")], repo, echo=True)
+            for n in REQUIRED_PACKAGE_FILES:
+                shutil.copy2(root / n, school_dir / n)
+            manifest_path.write_text(
+                json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+            )
+            run(
+                [sys.executable, str(repo / "tools/validate_data.py")],
+                repo,
+                echo=True,
+            )
         except Exception:
-            for n, data in old.items(): (school_dir / n).write_bytes(data)
-            if old_manifest is None: manifest_path.unlink(missing_ok=True)
-            else: manifest_path.write_bytes(old_manifest)
+            for n, data in old.items():
+                (school_dir / n).write_bytes(data)
+            if old_manifest is None:
+                manifest_path.unlink(missing_ok=True)
+            else:
+                manifest_path.write_bytes(old_manifest)
             raise
-        expected = [f"schools/{school}/{n}" for n in REQUIRED_PACKAGE_FILES]
-        print("PASS: correction package installed and repository validation passed.")
+
+        expected = [
+            f"schools/{school}/{n}" for n in REQUIRED_PACKAGE_FILES
+        ]
+        print(
+            "PASS: correction package installed and repository validation passed."
+        )
         if args.commit:
             run(["git", "add", *expected], repo)
-            staged = [x for x in git(repo, "diff", "--cached", "--name-only").splitlines() if x]
-            if set(staged) - set(expected): raise WorkflowError("unexpected staged paths")
-            if not staged: raise WorkflowError("correction staging produced no tracked changes")
-            run(["git", "commit", "-m", f"Stage {school.replace('-', ' ').title()} correction package"], repo, echo=True)
+            staged = [
+                x
+                for x in git(
+                    repo, "diff", "--cached", "--name-only"
+                ).splitlines()
+                if x
+            ]
+            if set(staged) - set(expected):
+                raise WorkflowError("unexpected staged paths")
+            if not staged:
+                raise WorkflowError(
+                    "correction staging produced no tracked changes"
+                )
+            run(
+                [
+                    "git",
+                    "commit",
+                    "-m",
+                    f"Stage {school.replace('-', ' ').title()} correction package",
+                ],
+                repo,
+                echo=True,
+            )
         return 0
     finally:
         temp.cleanup()
+
 
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     sub = p.add_subparsers(dest="command", required=True)
     f = sub.add_parser("freeze"); f.add_argument("school_key"); f.add_argument("candidate_zip", type=Path)
-    f.add_argument("--research-base", required=True); f.add_argument("--scope", choices=("season-supplement", "field-correction"), required=True)
+    f.add_argument("--research-base", required=True); f.add_argument("--scope", choices=("season-supplement", "field-correction", PACKAGE_ONLY_SCOPE), required=True)
     f.add_argument("--research-authority-ref", required=True); f.add_argument("--research-authority-digest", required=True)
+    f.add_argument("--package-member", action="append", default=[], help="Declared package-only changed member; repeat for each member.")
     f.add_argument("--required-completed-season-cutoff", default=""); f.add_argument("--expected-diff-sha256", default="")
     f.add_argument("--report-json", type=Path); f.add_argument("--output", type=Path); f.add_argument("--repo", type=Path)
     s = sub.add_parser("stage"); s.add_argument("school_key"); s.add_argument("freeze_zip", type=Path); s.add_argument("--expected-sha256", required=True)
