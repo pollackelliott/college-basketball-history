@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly approved exact Miami correction PR #678 Preview ('Approved. Proceed'), fresh Gate 2 approval miami-correction-release-gate2-approval-0001 independently verified PASS, and exact merge packet e415fbc6f934c0cd98aa09f21d5372050acaf5b472196822e005a0c9308c1eb4 required normal merge of PR #678 head 7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a from approved main 66795cf099c05e272f590fa6d2ffb10c262d6b56. GitHub connector merged exactly, producing 7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec, now exact protected main with verified parents 66795cf099c05e272f590fa6d2ffb10c262d6b56 and 7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a. This request grants read-only exact-merge Production deployment/public JSON proof and independent fresh verification only. No new historical authority, main mutation, recovery, Miami expansion Stage 7, maintenance or additional merge.",
+    "origin": "Same serialized Miami post-publication package-only conference correction final phase - packet-bound post-merge Production proof"
+  },
+  "expected_protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "merge_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-correction-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "c04ce8ed67cd1ca66a37b0f2643fece32f31b1a89e1417dd65f00de27a9d8d7e"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-correction-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "2d6f423808377587da17f45fbd9913a9c9abc00d10ee12d6aacfcb67203ec64f"
+  },
+  "pr_number": 678,
+  "previous_control_state_commit": "51571b9e880b41b0b8ffc5935b75a4b9522ba93f",
+  "previous_control_state_sha256": "b7777160fb0336d0d014c3c632d7ca22a98e256477369a140ef45a283e3c36ad",
+  "request_id": "miami-correction-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "target_branch": "data/miami-correction",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a"
+}
