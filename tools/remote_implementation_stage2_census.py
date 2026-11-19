@@ -505,7 +505,19 @@ def _verify_post_publication_correction_authority(
     if not isinstance(pre_semantic, str) or len(pre_semantic) != 64:
         raise Stop("STAGE2_CORRECTION_PRE_SEMANTIC_MISSING")
     correction_ids = integration.get("correction_source_game_ids")
-    if not isinstance(correction_ids, list) or not correction_ids:
+    if not isinstance(correction_ids, list):
+        raise Stop("STAGE2_CORRECTION_SOURCE_IDS_MISSING")
+    correction_mode = str(integration.get("correction_mode") or "")
+    correction_members = integration.get("correction_package_members")
+    package_only = correction_mode == "PACKAGE_ONLY_FIELD"
+    if package_only:
+        if correction_ids:
+            raise Stop("STAGE2_PACKAGE_ONLY_SOURCE_IDS_PRESENT")
+        if correction_members != ["conferences.csv"]:
+            raise Stop("STAGE2_PACKAGE_ONLY_MEMBERS_INVALID")
+        if pre_semantic != semantic:
+            raise Stop("STAGE2_PACKAGE_ONLY_SEMANTIC_DRIFT")
+    elif not correction_ids:
         raise Stop("STAGE2_CORRECTION_SOURCE_IDS_MISSING")
 
     origin_main = str(integration.get("origin_main_sha") or "")
