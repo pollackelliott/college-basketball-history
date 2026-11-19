@@ -1,0 +1,29 @@
+{
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "approved_plan_sha256": "004da4724ca22e229144e6a799e514b045d425e9ce6f1f7486f94d005143f6b9",
+  "changed_file_sha256": {
+    "data/reconciliation/onboarding-decisions/miami-93c375569a92.json": "004da4724ca22e229144e6a799e514b045d425e9ce6f1f7486f94d005143f6b9",
+    "site/data/teams/miami.json": "15c801d643647c342892f81d2347a3531bfc58988f80b13f7900848c36e0ef12"
+  },
+  "changed_path_count": 2,
+  "changed_paths": [
+    "data/reconciliation/onboarding-decisions/miami-93c375569a92.json",
+    "site/data/teams/miami.json"
+  ],
+  "deleted_paths": [],
+  "fresh_replayed_tree_sha": "33b56cd884046c4ed77040e71980a82d9cbcd6cb",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION",
+  "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "release_manifest_sha256": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+  "remote_stage2_sealed_apply_equivalence": "PASS",
+  "request_id": "miami-correction-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "stage2_gate1_seal_checkpoint_sha256": "f7b288079537cf0ea96d1f92bcc52fce5c5ad1fc995b3890eae41a4dc02b31a7",
+  "stage2_gate1_seal_verification_sha256": "03f696cb1d90dca2e329a3c984ca94d2a8e0e9d3a20b4a603e9bf6b3c69d2267",
+  "target_branch": "data/miami-correction",
+  "target_predecessor_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
+  "target_tree_sha": "33b56cd884046c4ed77040e71980a82d9cbcd6cb",
+  "tracked_stage2_mutation": "EXACT_SEALED_APPLY_SUCCESSOR"
+}
