@@ -692,18 +692,19 @@
     "unlv-stage2-current-main-refresh-0002",
     "unlv-stage2-census-0003",
     "unlv-stage2-proposal-0001",
-    "unlv-stage2-reconciliation-diagnostic-0002"
+    "unlv-stage2-reconciliation-diagnostic-0002",
+    "unlv-stage2-current-main-refresh-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:44432743102:1",
+  "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "unlv-stage2-current-main-refresh-0003",
+  "active_request_sha256": "915bbe684bc96475afa617884cf67148e869ce1dcd68d000ffd67027bd6888ea",
+  "active_school_key": "unlv",
+  "active_target_branch": "data/unlv-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1390,8 +1391,11 @@
     "target_sha": "3c7a4d9b510ecfec4ed01cd252e03918328104be",
     "trace_sha256": "057e1d10db56128edcdfc734a4ecb4e5622b5be77695dfb9699431fb2c974a41"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44432743102",
+  "lock_acquisition_request_commit": "da0f431bba83f9a42bdbb06dc8c44a27b7fd1641",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
