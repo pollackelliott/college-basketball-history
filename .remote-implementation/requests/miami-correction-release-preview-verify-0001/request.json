@@ -1,0 +1,50 @@
+{
+  "approved_plan_hash": "93c375569a92982b7fb415e1b8f3eba6f84258cd33c63ee7966b5cedb0a7bc11",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Existing Miami correction release authority persists through OWNER_GATE_2_READY. Protected main, correction HEAD, fresh-verified RELEASE_READINESS, PR #678 identity/head, successful repository checks, clean mergeability, and successful exact-head Vercel Preview were reauthenticated immediately before submission. Authorize exactly one read-only RELEASE_PREVIEW_VERIFY and its independent fresh verification. Do not create Owner Gate 2 approval, merge, Production proof, tracked basketball mutation, Miami expansion Stage 7, recovery, maintenance, or unrelated authority.",
+    "origin": "Miami post-publication package-only conference correction - exact PR-head Preview verification"
+  },
+  "expected_protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "pr_number": 678,
+  "previous_control_state_commit": "86cb39878eb186cceb1d5b103071a229c06b6d92",
+  "previous_control_state_sha256": "a0de6f461ba465fd5f474c7b50f5cc015bfce51b43ac17c9b1a08562f01be6d3",
+  "release_manifest_sha256": "b79be7d5839fb30a084ae988df6d57504b36c6bac5fd51fb0928cc517f5f4030",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-correction-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "67218c1357edb7cf912395d05afa28a3b11df981f3b9dd5b93271d9a2aacab2e"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-correction-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "969dcee87ce9b95d929b2dbbc25c8a35065fd73303c91ea1b480aec35b0c3a98"
+  },
+  "request_id": "miami-correction-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "target_branch": "data/miami-correction",
+  "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a"
+}

@@ -714,18 +714,19 @@
     "miami-correction-stage2-preseal-rehearsal-0001",
     "miami-correction-stage2-gate1-seal-0001",
     "miami-correction-stage2-sealed-apply-0001",
-    "miami-correction-release-readiness-0001"
+    "miami-correction-release-readiness-0001",
+    "miami-correction-release-preview-verify-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PREVIEW_VERIFY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "miami-correction-release-preview-verify-0001",
+  "active_request_sha256": "78e7211087525988e432a6ab8784f0ec14a9a595cdbf8bbe8ef6d7f22dce3c18",
+  "active_school_key": "miami",
+  "active_target_branch": "data/miami-correction",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1433,8 +1434,11 @@
     "target_branch": "data/miami-correction",
     "target_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44630084171",
+  "lock_acquisition_request_commit": "b3920670bd47ab57d1d3a7eaa588d17631765400",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PREVIEW_RUNNING"
 }
