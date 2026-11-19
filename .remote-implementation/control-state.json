@@ -28,7 +28,8 @@
     "arizona-state-expansion-release-preview-verify-0001",
     "ucf-expansion-stage2-opponent-display-normalize-0001",
     "wyoming-stage2-sealed-apply-0001",
-    "wyoming-release-preview-verify-0001"
+    "wyoming-release-preview-verify-0001",
+    "unlv-release-preview-verify-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -703,16 +704,16 @@
     "unlv-release-readiness-0001",
     "unlv-release-preview-verify-0001"
   ],
-  "active_expected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "RELEASE_PREVIEW_VERIFY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "unlv-release-preview-verify-0001",
-  "active_request_sha256": "c89a409720ee472f1bd3ce34edf16225457980ab3e2cd70200b8b745eae8d29c",
-  "active_school_key": "unlv",
-  "active_target_branch": "data/unlv-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1387,31 +1388,29 @@
     "unlv-stage2-preseal-0001",
     "unlv-stage2-gate1-seal-0001",
     "unlv-stage2-sealed-apply-0001",
-    "unlv-release-readiness-0001"
+    "unlv-release-readiness-0001",
+    "unlv-release-preview-recover-0001"
   ],
-  "current_sequence": 670,
+  "current_sequence": 671,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/unlv/unlv-release-readiness-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "ccc04ac4ca5cd1651e82922749c4255e8460a08d214cde1b248c7da7a0421cf3",
-    "fresh_runner_verification": "PASS",
-    "operation": "RELEASE_READINESS",
-    "preview_request_id": "unlv-release-preview-verify-0001",
-    "protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
-    "readiness_status": "RELEASE_READINESS_PASS",
-    "release_pr_packet_path": ".remote-implementation/checkpoints/unlv/unlv-release-readiness-0001/release-pr-packet.json",
-    "release_pr_packet_sha256": "e91c5dac6111563abe38bcca51ce1d97efaf0d6290a1f04858a2b7fa34cc74af",
-    "remote_release_readiness_equivalence": "PASS",
-    "request_id": "unlv-release-readiness-0001",
-    "school_key": "unlv",
-    "target_branch": "data/unlv-onboarding",
-    "target_sha": "fdaaec65b68f217c337fb12fa087d7d7746c755b"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "unlv-release-preview-verify-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": null,
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "fa91a766c42d108e18594ea55bd0f04b0bcc85eb",
+      "recovered_request_id": "unlv-release-preview-verify-0001",
+      "request_id": "unlv-release-preview-recover-0001",
+      "schema_version": 1,
+      "target_branch": null
+    }
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "44448733949",
-  "lock_acquisition_request_commit": "072a2451a26f9f748139b08745076ac48ee4cf36",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "RELEASE_PREVIEW_RUNNING"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
