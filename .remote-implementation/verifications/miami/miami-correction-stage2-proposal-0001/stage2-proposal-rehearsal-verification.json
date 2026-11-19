@@ -1,0 +1,47 @@
+{
+  "approved_plan_hash_preview": null,
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "85810eb56ff5b9ea844c34cd29dd57faba4f30c6b5f61d254407c027f77e4a8f",
+    "plan.json": "82a81b07cbab8f64227e4ca88cd8b012d9ae5a812545b01b14205b465060d2a7",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "c71b971b52f063c83f0ec833ca4546773a39da498e83c8bb7c2164cfba465e7e"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "fc3f4ddc467a05ed8ba682933b826364fdc9aede1e0e7d3a737acf13d806452a",
+    "implementation-stage2-status.json": "3777a482b19dd2320ec47610d0a2056bdc1bd1119acd8b1e6d2e071255eb793e",
+    "plan.json": "e07f4209f79ab2c1fc10a56e1c574c7363abff7431a0ba4455ebe886cd322616",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "660f30d985f81452f24bf4ba3b2622bbdebbadd452b0abdb9f22f1631ed173bf"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "e40e76155c6630d4650635ba0510ee166b5a2fa667cbb19dfa263fdbbf250618",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "66795cf099c05e272f590fa6d2ffb10c262d6b56",
+  "recommendation_map_sha256": "9a604a0e79cc9bc86c61a330af232b95680ac0a785532a2f1925c73f65e5315c",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "miami-correction-stage2-proposal-0001",
+  "runtime_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "c4021b044a82e8f9edf095cd1d35c0a3ae7ed2520ba048e8495a55eef11b385d",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/miami-correction",
+  "target_sha": "109fb1d5bcf880c8866380e8504b22a86dbed4f1",
+  "target_tree_sha": "a10c65302734cc305181139a0ff40cf520ffe48b",
+  "tracked_stage2_mutation": "NONE"
+}
