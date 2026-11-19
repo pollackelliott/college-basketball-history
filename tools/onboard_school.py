@@ -2424,24 +2424,59 @@ def pr_body(
     decisions = approved.get("decisions", [])
     discrepancy_decisions = [item for item in decisions if item["category"] == "discrepancy"]
     identity_decisions = [item for item in decisions if item["category"] == "identity"]
+    package_only = (
+        summary.get("correction_transaction_kind")
+        == PACKAGE_ONLY_CORRECTION_KIND
+    )
     dispositions = {}
     for item in discrepancy_decisions:
         dispositions[item["decision"]] = dispositions.get(item["decision"], 0) + 1
-    lines = [
-        "## Summary",
-        "",
-        f"- onboards `{approved['school_key']}` through the permanent sealed-plan workflow",
-        f"- preserves {summary.get('source_rows', 0):,} source rows ({summary.get('pre_cutoff_rows', 0):,} pre-cutoff)",
-        f"- matches {summary.get('existing_game_matches', 0):,} existing games and creates {summary.get('new_canonical_games', 0):,}",
-        f"- applies {len(identity_decisions):,} owner-approved identity decisions",
-        f"- records {len(discrepancy_decisions):,} dated discrepancy decisions",
-        f"- approved plan `{approved['approved_plan_hash']}`",
-    ]
+    if package_only:
+        lines = [
+            "## Summary",
+            "",
+            (
+                f"- applies one bounded post-publication package-only correction "
+                f"for `{approved['school_key']}`"
+            ),
+            "- changes only the frozen, hash-bound `conferences.csv` package member",
+            "- changes zero source-game, canonical-game, assertion, or discrepancy rows",
+            "- carries zero new historical Gate 1 decisions",
+            f"- approved plan `{approved['approved_plan_hash']}`",
+        ]
+    else:
+        lines = [
+            "## Summary",
+            "",
+            f"- onboards `{approved['school_key']}` through the permanent sealed-plan workflow",
+            f"- preserves {summary.get('source_rows', 0):,} source rows ({summary.get('pre_cutoff_rows', 0):,} pre-cutoff)",
+            f"- matches {summary.get('existing_game_matches', 0):,} existing games and creates {summary.get('new_canonical_games', 0):,}",
+            f"- applies {len(identity_decisions):,} owner-approved identity decisions",
+            f"- records {len(discrepancy_decisions):,} dated discrepancy decisions",
+            f"- approved plan `{approved['approved_plan_hash']}`",
+        ]
     if dispositions:
         lines.append(
             "- discrepancy dispositions: "
             + ", ".join(f"{key}={value}" for key, value in sorted(dispositions.items()))
         )
+    site_validation_line = (
+        "- package-only correction site nonregression — PASS; inherited full-gate "
+        "failures remain reported"
+        if package_only
+        else (
+            "- correction-only site nonregression — PASS; inherited full-gate "
+            "failures remain reported"
+            if summary.get("correction_transaction_kind")
+            in BOUNDED_CORRECTION_KINDS
+            else (
+                "- All-History expansion site nonregression — PASS; inherited "
+                "full-gate failures remain reported"
+                if (execution or {}).get("expansion_site_nonregression")
+                else "- implementation site completeness — PASS"
+            )
+        )
+    )
     lines.extend(
         [
             "",
@@ -2449,18 +2484,7 @@ def pr_body(
             "",
             "- repository validation — PASS",
             "- target package no-op — PASS",
-            (
-                "- correction-only site nonregression — PASS; inherited full-gate "
-                "failures remain reported"
-                if summary.get("correction_transaction_kind")
-                in BOUNDED_CORRECTION_KINDS
-                else (
-                    "- All-History expansion site nonregression — PASS; inherited "
-                    "full-gate failures remain reported"
-                    if (execution or {}).get("expansion_site_nonregression")
-                    else "- implementation site completeness — PASS"
-                )
-            ),
+            site_validation_line,
             "- accomplishment cross-check — PASS",
             "- deterministic site build — PASS",
             "- unit tests — PASS",
@@ -2472,6 +2496,12 @@ def pr_body(
                 "The paths below are the transactional sealed-plan mutation boundary. "
                 "The full PR diff also includes committed Phase 0 package/reference "
                 "changes already present on the onboarding branch."
+                if not package_only
+                else (
+                    "The paths below are the sealed package-only verification/output "
+                    "boundary. The corrected conferences.csv member was already staged "
+                    "from the exact frozen correction package before Stage 2."
+                )
             ),
             "",
         ]
@@ -2480,223 +2510,3 @@ def pr_body(
     return "\n".join(lines) + "\n"
 
 
-def transactional_apply(
-    repo: Path,
-    approved: dict[str, Any],
-    output_dir: Path,
-) -> dict[str, Any]:
-    ensure_clean_worktree(repo)
-    before = tree_hashes(repo)
-    with tempfile.TemporaryDirectory(prefix=f"onboard-{approved['school_key']}-") as temporary:
-        rehearsal = Path(temporary) / "repository"
-        print(f"Rehearsing the sealed plan in {rehearsal}")
-        copy_repository(repo, rehearsal, school_key=approved["school_key"])
-        execution = execute_approved_in_place(rehearsal, approved)
-        after = tree_hashes(rehearsal)
-        changed = changed_paths(before, after)
-        forbidden = [
-            path
-            for path in changed
-            if not allowed_apply_path(
-                path,
-                approved["school_key"],
-                approved["approved_plan_hash"],
-                allow_school_venues=any(
-                    bool(item.get("venue_relationship_patch"))
-                    for item in approved.get("decisions", [])
-                ),
-            )
-        ]
-        if forbidden:
-            raise WorkflowError(
-                "sealed apply attempted files outside the allow-list:\n  "
-                + "\n  ".join(forbidden)
-            )
-        run_gates(
-            rehearsal, approved["school_key"], changed, include_tests=True,
-            approved_plan=approved,
-            **correction_gate_kwargs_from_approved(approved, execution),
-        )
-        copy_validated_changes(rehearsal, repo, after, changed)
-
-    print("\n=== copied-state verification ===")
-    copied_outputs = run_gates(
-        repo,
-        approved["school_key"],
-        changed,
-        include_tests=False,
-        approved_plan=approved,
-        **correction_gate_kwargs_from_approved(approved, execution),
-    )
-    output_dir.mkdir(parents=True, exist_ok=True)
-    manifest = {
-        "schema_version": 1,
-        "school_key": approved["school_key"],
-        "approved_plan_hash": approved["approved_plan_hash"],
-        "base_commit": git(repo, "rev-parse", "HEAD").strip(),
-        "branch": git(repo, "branch", "--show-current").strip(),
-        "changed_paths": changed,
-        "summary": approved.get("summary", {}),
-        "execution": execution,
-        "copied_state_gates": copied_outputs,
-    }
-    (output_dir / "release-manifest.json").write_text(
-        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
-    (output_dir / "pr-body.md").write_text(
-        pr_body(approved, changed, execution=execution),
-        encoding="utf-8",
-    )
-    (output_dir / "visual-qa.md").write_text(
-        visual_qa_markdown(repo, approved["school_key"]),
-        encoding="utf-8",
-    )
-    return manifest
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Preflight, approve, transactionally apply, or verify one school onboarding."
-    )
-    parser.add_argument("school_key")
-    mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument("--preflight", action="store_true")
-    mode.add_argument("--approve", action="store_true")
-    mode.add_argument("--apply", action="store_true")
-    mode.add_argument("--verify", action="store_true")
-    parser.add_argument("--repo", type=Path, default=None)
-    parser.add_argument("--output-dir", type=Path, default=None)
-    parser.add_argument("--approved-by", default="project-owner")
-    parser.add_argument(
-        "--approved-plan",
-        default="",
-        help="Exact SHA-256 emitted by --approve; required by --apply.",
-    )
-    parser.add_argument("--plan-file", type=Path, default=None)
-    parser.add_argument("--review-file", type=Path, default=None)
-    parser.add_argument("--approved-plan-file", type=Path, default=None)
-    return parser.parse_args()
-
-
-def main() -> int:
-    args = parse_args()
-    repo = args.repo.resolve() if args.repo else Path(__file__).resolve().parents[1]
-    output_dir = (
-        args.output_dir.resolve()
-        if args.output_dir
-        else repo / ".onboarding" / args.school_key
-    )
-    plan_path = args.plan_file.resolve() if args.plan_file else output_dir / "plan.json"
-    review_path = args.review_file.resolve() if args.review_file else output_dir / "review.csv"
-    approved_path = (
-        args.approved_plan_file.resolve()
-        if args.approved_plan_file
-        else output_dir / "approved-plan.json"
-    )
-
-    try:
-        if args.preflight:
-            ensure_package_checkpoint(repo)
-            assert_no_unapproved_semantic_drift(repo, args.school_key)
-            plan = build_plan(repo, args.school_key)
-            paths = write_preflight_artifacts(plan, output_dir)
-            summary = plan.get("summary", {})
-            print("College Basketball History — sealed onboarding preflight")
-            print(f"School:      {args.school_key}")
-            print(f"Blockers:    {len(plan.get('blockers', [])):,}")
-            print(f"Warnings:    {len(plan.get('warnings', [])):,}")
-            print(f"Decisions:   {len(plan.get('decisions', [])):,}")
-            if summary:
-                print(
-                    "Prediction:  "
-                    f"{summary.get('existing_game_matches', 0):,} matches, "
-                    f"{summary.get('new_canonical_games', 0):,} new, "
-                    f"{summary.get('discrepancies_to_add', 0):,} definite / "
-                    f"{summary.get('conditional_discrepancies', 0):,} conditional discrepancies"
-                )
-                if summary.get("pre_cutoff_rows", 0):
-                    print(
-                        "PUBLIC SCOPE: published history begins with "
-                        f"{summary.get('history_start_season') or '[unknown]'}; "
-                        f"{summary.get('pre_cutoff_rows', 0):,} researched rows from "
-                        f"{summary.get('pre_cutoff_first_season') or '[unknown]'} through "
-                        f"{summary.get('pre_cutoff_last_season') or '[unknown]'} "
-                        "will remain outside the public page unless history scope changes."
-                    )
-            print(f"Review:      {paths['report']}")
-            print(f"Decision CSV:{paths['review']}")
-            if plan.get("blockers"):
-                print("\nSTOP: clear every blocker, then rerun --preflight.")
-                return 1
-            if plan.get("decisions"):
-                print(
-                    "\nOWNER GATE 1: fill decision and resolution_basis in review.csv, "
-                    "then run --approve."
-                )
-            else:
-                print("\nPASS: no owner decisions are pending for this already-complete state.")
-            return 0
-
-        if args.approve:
-            ensure_package_checkpoint(repo)
-            assert_no_unapproved_semantic_drift(repo, args.school_key)
-            approved, approved_hash = approve_plan(
-                repo,
-                plan_path,
-                review_path,
-                args.approved_by,
-            )
-            path = write_approved_plan(approved, output_dir)
-            print("OWNER GATE 1 SEALED")
-            print(f"Approved plan: {approved_hash}")
-            print(f"File:          {path}")
-            print(
-                "Apply exactly this reviewed state with:\n"
-                f"python tools/onboard_school.py {args.school_key} --apply "
-                f"--approved-plan {approved_hash}"
-            )
-            return 0
-
-        if args.apply:
-            assert_no_unapproved_semantic_drift(repo, args.school_key)
-            if not approved_path.is_file():
-                raise WorkflowError(f"approved plan file not found: {approved_path}")
-            approved = json.loads(approved_path.read_text(encoding="utf-8"))
-            verify_approved_plan(repo, approved, args.approved_plan)
-            manifest = transactional_apply(repo, approved, output_dir)
-            print("\nPASS: sealed plan applied transactionally and every automated gate passed.")
-            print(f"Changed files: {len(manifest['changed_paths']):,}")
-            print(f"Release manifest: {output_dir / 'release-manifest.json'}")
-            print(
-                "Next: python tools/release_school.py "
-                f"{args.school_key} --prepare"
-            )
-            return 0
-
-        changed = [
-            line.strip()
-            for line in git(repo, "diff", "--name-only", "HEAD").splitlines()
-            if line.strip()
-        ]
-        manifest_path = output_dir / "release-manifest.json"
-        gate_kwargs = {}
-        if manifest_path.is_file():
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-            if manifest.get("school_key") != args.school_key:
-                raise WorkflowError("verification manifest belongs to another school")
-            gate_kwargs = correction_gate_kwargs_from_manifest(
-                manifest, args.school_key,
-            )
-        run_gates(
-            repo, args.school_key, changed, include_tests=True, **gate_kwargs
-        )
-        print("\nPASS: verification suite completed.")
-        return 0
-    except (WorkflowError, FileNotFoundError, KeyError, ValueError) as exc:
-        print(f"FAIL: {exc}")
-        return 1
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
