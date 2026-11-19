@@ -1,0 +1,321 @@
+name: Alabama correction freeze 0001
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/alabama-correction-freeze-0001.yml
+
+permissions:
+  contents: read
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact transport head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Authenticate disposable transport and protected-main baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_main="41766e0da09c7d703a8b5a753a386c9ba6cd2fa2"
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+          actual_main="$(git rev-parse refs/remotes/origin/main)"
+          [[ "$actual_main" == "$expected_main" ]] || { echo "protected main moved: $actual_main" >&2; exit 1; }
+          git merge-base --is-ancestor "$expected_main" HEAD || {
+            echo "protected-main baseline is not an ancestor of transport head" >&2
+            exit 1
+          }
+          changed="$(git diff --name-only "$expected_main"..HEAD)"
+          [[ "$changed" == ".github/workflows/alabama-correction-freeze-0001.yml" ]] || {
+            echo "transport branch changed unexpected paths:" >&2
+            printf '%s\n' "$changed" >&2
+            exit 1
+          }
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Materialize byte-exact Alabama candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import csv, io, zipfile, hashlib
+
+          school = Path("schools/alabama")
+          out = Path("/tmp/alabama-candidate")
+          out.mkdir(parents=True, exist_ok=True)
+          members = (
+              "source-games.csv",
+              "opponents.csv",
+              "venues.csv",
+              "conferences.csv",
+              "notes.md",
+              "source-notes.md",
+          )
+          baseline = {}
+          for name in members:
+              data = (school / name).read_bytes()
+              baseline[name] = data
+              (out / name).write_bytes(data)
+
+          source_old = b",Miami @,Miami (FL),miami,Yes,87,69,W,"
+          source_new = b",Miami @,Miami (OH),miami-oh,Yes,87,69,W,"
+          source_bytes = baseline["source-games.csv"]
+          if source_bytes.count(source_old) != 1:
+              raise SystemExit(
+                  "expected exactly one source-games Miami (FL)/miami target byte sequence; "
+                  f"found {source_bytes.count(source_old)}"
+              )
+          source_candidate = source_bytes.replace(source_old, source_new, 1)
+          (out / "source-games.csv").write_bytes(source_candidate)
+          if source_candidate != source_bytes.replace(source_old, source_new, 1):
+              raise SystemExit("source-games candidate differs beyond exact byte replacement")
+
+          opp_old = b",Miami @,miami,Miami (FL),"
+          opp_new = b",Miami @,miami-oh,Miami (OH),"
+          opp_bytes = baseline["opponents.csv"]
+          if opp_bytes.count(opp_old) != 1:
+              raise SystemExit(
+                  "expected exactly one opponents Miami @ target byte sequence; "
+                  f"found {opp_bytes.count(opp_old)}"
+              )
+          opp_candidate = opp_bytes.replace(opp_old, opp_new, 1)
+          (out / "opponents.csv").write_bytes(opp_candidate)
+          if opp_candidate != opp_bytes.replace(opp_old, opp_new, 1):
+              raise SystemExit("opponents candidate differs beyond exact byte replacement")
+
+          for name in ("venues.csv", "conferences.csv", "notes.md", "source-notes.md"):
+              if (out / name).read_bytes() != baseline[name]:
+                  raise SystemExit(f"unchanged member drifted: {name}")
+
+          # Semantic assertions on the exact target rows.
+          with io.TextIOWrapper(
+              io.BytesIO(source_candidate), encoding="utf-8-sig", newline=""
+          ) as h:
+              rows = {r["source_game_id"]: r for r in csv.DictReader(h)}
+          r = rows["ALARAW-01436"]
+          expected = {
+              "game_date": "1979-12-22",
+              "normalized_opponent_key": "miami-oh",
+              "normalized_opponent_name": "Miami (OH)",
+              "team_score": "87",
+              "opponent_score": "69",
+              "played_result": "W",
+              "curated_site_type": "NEUTRAL",
+              "city": "Roanoke",
+              "state": "VA",
+              "event_or_tournament": "Times World Tournament (Roanoke, Va.)",
+          }
+          for key, value in expected.items():
+              if r.get(key, "") != value:
+                  raise SystemExit(f"unexpected ALARAW-01436 {key}: {r.get(key)!r}")
+
+          with io.TextIOWrapper(
+              io.BytesIO(opp_candidate), encoding="utf-8-sig", newline=""
+          ) as h:
+              rows = [r for r in csv.DictReader(h) if r.get("source_opponent_label") == "Miami @"]
+          if len(rows) != 1:
+              raise SystemExit(f"expected one Miami @ opponent row; found {len(rows)}")
+          r = rows[0]
+          if (
+              r.get("canonical_opponent_key") != "miami-oh"
+              or r.get("canonical_opponent_name") != "Miami (OH)"
+          ):
+              raise SystemExit("Miami @ opponent identity mismatch after exact replacement")
+
+          # Preserve a byte-level proof for audit.
+          proof = Path("/tmp/byte-proof.txt")
+          with proof.open("w", encoding="utf-8") as h:
+              for name in members:
+                  before = baseline[name]
+                  after = (out / name).read_bytes()
+                  h.write(
+                      f"{name} baseline={hashlib.sha256(before).hexdigest()} "
+                      f"candidate={hashlib.sha256(after).hexdigest()} "
+                      f"changed={before != after}\n"
+                  )
+
+          with zipfile.ZipFile("/tmp/alabama-candidate.zip", "w", zipfile.ZIP_DEFLATED) as z:
+              for name in members:
+                  z.write(out / name, name)
+          PY
+
+      - name: First-pass permanent correction diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/correction_lifecycle.py freeze alabama /tmp/alabama-candidate.zip             --research-base "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2"             --scope field-correction             --research-authority-ref miami-expansion-stage6-complete-0034             --research-authority-digest 56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978             --report-json /tmp/alabama-correction-report.json             | tee /tmp/freeze-pass1.txt
+
+      - name: Require exact settled correction delta
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          report = json.loads(Path("/tmp/alabama-correction-report.json").read_text())
+          if report.get("school_key") != "alabama":
+              raise SystemExit("wrong correction school")
+          if report.get("research_base_sha") != "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2":
+              raise SystemExit("wrong correction research base")
+          if report.get("scope") != "field-correction":
+              raise SystemExit("wrong correction scope")
+          if report.get("research_authority_ref") != "miami-expansion-stage6-complete-0034":
+              raise SystemExit("wrong research authority ref")
+          if report.get("research_authority_digest") != "56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978":
+              raise SystemExit("wrong research authority digest")
+          if report.get("correction_mode") != "SOURCE_GAME_DELTA":
+              raise SystemExit("wrong correction mode")
+          acceptance = report.get("scoped_acceptance") or {}
+          if acceptance.get("status") != "PASS":
+              raise SystemExit("scoped correction acceptance did not pass")
+          counts = acceptance.get("counts") or {}
+          if counts.get("changed_source_games") != 1:
+              raise SystemExit("unexpected changed-source count")
+          if counts.get("identity_only_site_exempt_source_games") != 1:
+              raise SystemExit("identity-only legacy-site scoping was not applied")
+          if counts.get("site_checked_source_games") != 0:
+              raise SystemExit("identity-only row unexpectedly re-entered site validation")
+
+          diff = report["correction_diff"]
+          source = diff["source_games"]
+          if source["added_count"] != 0 or source["deleted_count"] != 0 or source["modified_count"] != 1:
+              raise SystemExit("unexpected source-game correction population")
+          if source["changed_source_game_ids"] != ["ALARAW-01436"]:
+              raise SystemExit("unexpected correction source IDs")
+          mod = source["modified"][0]
+          expected_fields = {
+              "normalized_opponent_key": {"before": "miami", "after": "miami-oh"},
+              "normalized_opponent_name": {"before": "Miami (FL)", "after": "Miami (OH)"},
+          }
+          if mod["source_game_id"] != "ALARAW-01436" or mod["fields"] != expected_fields:
+              raise SystemExit("source-game delta exceeds the settled two fields")
+
+          changed_members = sorted(
+              name for name, data in diff["members"].items() if data["changed"]
+          )
+          if changed_members != ["opponents.csv", "source-games.csv"]:
+              raise SystemExit(f"unexpected package members changed: {changed_members}")
+
+          opponents_diff = diff["members"]["opponents.csv"]["unified_diff"]
+          changed_lines = [
+              line for line in opponents_diff.splitlines()
+              if (
+                  (line.startswith("+") and not line.startswith("+++"))
+                  or (line.startswith("-") and not line.startswith("---"))
+              )
+          ]
+          if len(changed_lines) != 2:
+              raise SystemExit(
+                  f"opponents.csv should have one removed and one added row; got {len(changed_lines)}"
+              )
+          if not any(",Miami @,miami,Miami (FL)," in line for line in changed_lines if line.startswith("-")):
+              raise SystemExit("missing exact removed Miami @ opponent row")
+          if not any(",Miami @,miami-oh,Miami (OH)," in line for line in changed_lines if line.startswith("+")):
+              raise SystemExit("missing exact added Miami @ opponent row")
+
+          sha = report["correction_diff_sha256"]
+          Path("/tmp/correction-diff-sha256.txt").write_text(sha + "\n")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as h:
+              h.write(f"sha={sha}\n")
+          print("EXACT_SETTLED_DELTA_PASS")
+          print("CORRECTION_DIFF_SHA256=" + sha)
+          PY
+
+      - name: Freeze acknowledged exact diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/correction_lifecycle.py freeze alabama /tmp/alabama-candidate.zip             --research-base "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2"             --scope field-correction             --research-authority-ref miami-expansion-stage6-complete-0034             --research-authority-digest 56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978             --expected-diff-sha256 "${{ steps.diff.outputs.sha }}"             --report-json /tmp/alabama-correction-report-final.json             --output /tmp/alabama-correction-research-frozen.zip             | tee /tmp/freeze-pass2.txt
+          sha256sum /tmp/alabama-correction-research-frozen.zip             | tee /tmp/alabama-correction-research-frozen.zip.sha256
+
+      - name: Authenticate frozen authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, zipfile
+          from pathlib import Path
+
+          zpath = Path("/tmp/alabama-correction-research-frozen.zip")
+          with zipfile.ZipFile(zpath) as z:
+              expected = sorted([
+                  "correction-freeze.json",
+                  "package/source-games.csv",
+                  "package/opponents.csv",
+                  "package/venues.csv",
+                  "package/conferences.csv",
+                  "package/notes.md",
+                  "package/source-notes.md",
+              ])
+              if sorted(z.namelist()) != expected:
+                  raise SystemExit("unexpected frozen ZIP members")
+              manifest = json.loads(z.read("correction-freeze.json"))
+
+          expected_diff = Path("/tmp/correction-diff-sha256.txt").read_text().strip()
+          if manifest.get("status") != "CORRECTION_RESEARCH_FROZEN":
+              raise SystemExit("freeze status mismatch")
+          if manifest.get("workflow_kind") != "POST_PUBLICATION_CORRECTION":
+              raise SystemExit("workflow kind mismatch")
+          if manifest.get("school_key") != "alabama":
+              raise SystemExit("freeze school mismatch")
+          if manifest.get("research_base_sha") != "41766e0da09c7d703a8b5a753a386c9ba6cd2fa2":
+              raise SystemExit("freeze baseline mismatch")
+          if manifest.get("scope") != "field-correction":
+              raise SystemExit("freeze scope mismatch")
+          if manifest.get("correction_mode") != "SOURCE_GAME_DELTA":
+              raise SystemExit("freeze correction mode mismatch")
+          if manifest.get("correction_source_game_ids") != ["ALARAW-01436"]:
+              raise SystemExit("freeze correction source IDs mismatch")
+          if manifest.get("correction_diff_sha256") != expected_diff:
+              raise SystemExit("freeze diff hash mismatch")
+          if manifest.get("research_authority") != {
+              "ref": "miami-expansion-stage6-complete-0034",
+              "digest": "56bf810b7879ce077e7d77091f876674d28df5ed8df088b5df5d2c1555e11978",
+          }:
+              raise SystemExit("freeze research authority mismatch")
+          if (manifest.get("scoped_acceptance") or {}).get("status") != "PASS":
+              raise SystemExit("frozen scoped acceptance mismatch")
+
+          summary = {
+              "freeze_sha256": hashlib.sha256(zpath.read_bytes()).hexdigest(),
+              "correction_diff_sha256": manifest["correction_diff_sha256"],
+              "research_base_sha": manifest["research_base_sha"],
+              "research_authority": manifest["research_authority"],
+              "correction_source_game_ids": manifest["correction_source_game_ids"],
+              "scoped_acceptance": manifest["scoped_acceptance"],
+              "candidate_package_sha256": manifest["candidate_package_sha256"],
+              "baseline_package_sha256": manifest["baseline_package_sha256"],
+          }
+          Path("/tmp/alabama-correction-freeze-summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(summary, sort_keys=True))
+          PY
+
+      - name: Upload frozen correction authority
+        uses: actions/upload-artifact@v4
+        with:
+          name: alabama-correction-freeze-0001
+          path: |
+            /tmp/alabama-correction-research-frozen.zip
+            /tmp/alabama-correction-research-frozen.zip.sha256
+            /tmp/alabama-correction-report-final.json
+            /tmp/alabama-correction-freeze-summary.json
+            /tmp/byte-proof.txt
+          if-no-files-found: error
+          retention-days: 30
