@@ -1,0 +1,93 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "07311e595e25f98f1d2e1bc9ddd6111126d407614f0cbad163d08d40dc3320d0",
+    "plan.json": "e62256d4a60a2143c965a722ec4a8a70f1e5338688603507b046fbb5343d5bc5",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "03ebd8e3f661c7efa4e1242906d3227554832c72cce14006ea0c7ff5a6a6b1f8"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "35092acfd4582ff3cc95c27e1bee43dd419b66c6f5ecab53c6fea1fe48553b8a",
+    "plan.json": "abe04a7943914fa71557bd01b07eb145ac515ec728b8fc50bbdc6ec11a4e2d44",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "1cbe66aa0ce90136e7d3cc07021f3995f42e863cd4e46fb333e964e20aebde23"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 2,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 2,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "kentucky"
+  ],
+  "phase0_protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "phase0_successor_path": ".remote-implementation/successors/kentucky/kentucky-expansion-phase0-0003/successor-manifest.json",
+  "phase0_successor_sha256": "82bc96fca234234663022bf2585e6517071b650eadcd9ed5fcd80ae50438cc62",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/kentucky/plan.json",
+    "review_path": ".onboarding/kentucky/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "request_id": "kentucky-expansion-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "PHASE0_SUCCESSOR",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+  "target_tree_sha": "d2085984ff44f1e69be75450dbe1f3028740616d",
+  "tracked_mutation_proof": {
+    "after_head_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+    "after_status": "",
+    "after_tree_sha": "d2085984ff44f1e69be75450dbe1f3028740616d",
+    "before_head_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+    "before_status": "",
+    "before_tree_sha": "d2085984ff44f1e69be75450dbe1f3028740616d",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

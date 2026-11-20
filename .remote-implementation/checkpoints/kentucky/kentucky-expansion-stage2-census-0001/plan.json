@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "kentucky",
+  "created_at": "2026-11-20T01:59:24.977375+00:00",
+  "input_fingerprint": {
+    "sha256": "a053a26ad620613ff95dd04afe2d9f8588d5f5192384aead8a7f257622fa9242",
+    "git_head": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+    "files": {
+      "schools/kentucky/source-games.csv": "64d363714d46bc0a31a0a9fbbaf5fe7efc46ac1d5f8474042005a9c7e3bed50e",
+      "schools/kentucky/opponents.csv": "e195ce82760db3a371abff490e84fac83c724a61d88ded3f0666549cb38cb1bf",
+      "schools/kentucky/venues.csv": "8d395ea653f68d88975da8d742d63389d8c163c0f7e330fcce3a85f08e5d9c3b",
+      "schools/kentucky/conferences.csv": "1e608210ff9c3223db1152affddbc5a5d351d3254505ae336678ee8d6384387e",
+      "schools/kentucky/notes.md": "91832f99dd5c881721ad3ff700c34674a77e17008b6f59f56c06c3c97b7bc86a",
+      "schools/kentucky/source-notes.md": "e5bf193e768366316d25d196b0cb14aeb28d04d0e92be012aa58f3f2110572ee",
+      "data/canonical/games.csv": "8c95bb3d210d1c73e18a68153abbc3b76fe69000153a1c85e8dc5b7e0d95eaa5",
+      "data/evidence/game-assertions.csv": "36f75a73d7656ebb23f76767ab854f55eb97f3c90f55eedcb752594dad0d0e03",
+      "data/reconciliation/discrepancies.csv": "8305e254ea9f4572ae922202c5cc0596dbbe990cdb17f9fc055c57c3230c0231",
+      "data/reference/programs.csv": "f8c03138071deaf917710b2f91ee4127ac6a750a4fd86ebd85303730b3b9b408",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "b358fb536c14b2aafd7bfa226b837948222173e6ec3ee14596d269e6725d72ad",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "eed172cf80d1f27e1c1fe93079bf9b5787c44a1c522f6b1c44f0e5a2b19e9db0",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "844fc162cd8b1746f7682763e91c69d865843a535327c14bed79ef67a127e5e5",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "f616892effa58ab38fe22452ca7fe68faf427155f0531cfe748cc2c81c538aab",
+      "tools/onboarding_plan.py": "bf07ebe918f74c26a191c294b01a7a76e5a09ae8a794c58fc8c6cf0aa2de5027",
+      "tools/program_history.py": "d1b6d69e15a994dcefb628d7078e100f792c671db35e32bd5efef504b6c860da",
+      "tools/validate_data.py": "58a288b964b98af0f6a49a0afc7dfa1c9f7b665f0f03a05de1378d00ee58287b",
+      "tools/verify_program_accomplishments.py": "9b2cd4ec6bafcd9f825fd6d6a1c42a52ecce0497c523f3fbdb48f157aab59dcb"
+    }
+  },
+  "package": {
+    "errors": [
+      "opponents.csv line 257: opponent key 'east-texas-a-m' is current D1 in programs.csv but the school package does not mark it current D1",
+      "opponents.csv line 304: opponent key 'william-mary' is current D1 in programs.csv but the school package does not mark it current D1"
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 3232,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 312,
+      "venues": 17,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "opponents.csv line 257: opponent key 'east-texas-a-m' is current D1 in programs.csv but the school package does not mark it current D1",
+    "opponents.csv line 304: opponent key 'william-mary' is current D1 in programs.csv but the school package does not mark it current D1"
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
