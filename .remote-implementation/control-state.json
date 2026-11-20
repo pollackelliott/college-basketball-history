@@ -29,7 +29,8 @@
     "ucf-expansion-stage2-opponent-display-normalize-0001",
     "wyoming-stage2-sealed-apply-0001",
     "wyoming-release-preview-verify-0001",
-    "unlv-release-preview-verify-0001"
+    "unlv-release-preview-verify-0001",
+    "kentucky-expansion-phase0-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -720,16 +721,16 @@
     "miami-correction-release-production-proof-0001",
     "kentucky-expansion-phase0-0001"
   ],
-  "active_expected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
-  "active_lock_commit": "b80693d3b14d6caa4415c52a71702a3cdc28aa50",
-  "active_lock_owner": "github-actions:44651898178:1",
-  "active_operation": "EXPANSION_PHASE0",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "kentucky-expansion-phase0-0001",
-  "active_request_sha256": "b64698cb605c96788ef9a2ccc8e284cd800625b56e54e68ea7c2d8620879a16c",
-  "active_school_key": "kentucky",
-  "active_target_branch": "data/kentucky-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1420,32 +1421,29 @@
     "miami-correction-release-readiness-0001",
     "miami-correction-release-preview-verify-0001",
     "miami-correction-release-gate2-approval-0001",
-    "miami-correction-release-production-proof-0001"
+    "miami-correction-release-production-proof-0001",
+    "kentucky-expansion-phase0-recover-0001"
   ],
-  "current_sequence": 686,
+  "current_sequence": 687,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/miami/miami-correction-release-production-proof-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "000a72c26c3b90f6cd408fa259a2cb4bfb9bd9dba6de50d723152ee1c5556716",
-    "fresh_runner_verification": "PASS",
-    "merge_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
-    "merged": true,
-    "operation": "RELEASE_PRODUCTION_PROOF",
-    "owner_gate_2_approved": true,
-    "pr_head_sha": "7b7a9dbfdbd02895a98d08b6e1abbc1031a3c43a",
-    "pr_number": 678,
-    "production_deployment_id": 7928038555,
-    "production_json_checked_count": 3,
-    "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
-    "remote_production_proof_equivalence": "PASS",
-    "request_id": "miami-correction-release-production-proof-0001",
-    "school_key": "miami"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "kentucky-expansion-phase0-0001",
+    "recovery_manifest": {
+      "actual_target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "b80693d3b14d6caa4415c52a71702a3cdc28aa50",
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+      "recovered_request_id": "kentucky-expansion-phase0-0001",
+      "request_id": "kentucky-expansion-phase0-recover-0001",
+      "schema_version": 1,
+      "target_branch": "data/kentucky-onboarding"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "44651898178",
-  "lock_acquisition_request_commit": "83aff38999fc2ae9bd13afb7c681d20517986a19",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }

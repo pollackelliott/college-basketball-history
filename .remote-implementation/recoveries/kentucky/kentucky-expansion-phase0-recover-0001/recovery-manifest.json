@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "b80693d3b14d6caa4415c52a71702a3cdc28aa50",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "recovered_request_id": "kentucky-expansion-phase0-0001",
+  "request_id": "kentucky-expansion-phase0-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/kentucky-onboarding"
+}
