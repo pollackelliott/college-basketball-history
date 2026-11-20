@@ -1,0 +1,44 @@
+{
+  "preflight": {
+    "blocker_count": 1,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "discrepancy": 13
+    },
+    "decision_count": 13,
+    "decision_fields": {
+      "overtime_periods": 2,
+      "score": 5,
+      "site_type": 6
+    },
+    "site_or_han_review_decision_ids": [
+      "DISCREPANCY-KYRAW-00326-SITE_TYPE",
+      "DISCREPANCY-KYRAW-00623-SITE_TYPE",
+      "DISCREPANCY-KYRAW-00669-SITE_TYPE",
+      "DISCREPANCY-KYRAW-00690-SITE_TYPE",
+      "DISCREPANCY-KYRAW-00731-SITE_TYPE",
+      "DISCREPANCY-KYRAW-00770-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "PREFLIGHT_BLOCKED",
+  "topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_blockers"
+    },
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 6,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
