@@ -460,6 +460,29 @@ def _verify_projected_hashes(
         )
 
 
+def _require_source_game_package_update(
+    *,
+    worktree: Path,
+    live_main: str,
+    request: dict[str, Any],
+    intent: dict[str, Any],
+    changed_paths: list[str],
+) -> None:
+    """Require a source-games mutation only when the frozen projection changes it."""
+
+    source_path = "schools/%s/source-games.csv" % request["school_key"]
+    projected = str(
+        (intent.get("projected_package_sha256") or {}).get("source-games.csv") or ""
+    )
+    if len(projected) != 64:
+        raise Stop("EXPANSION_PHASE0_PROJECTED_SOURCE_GAME_HASH_MISSING")
+    predecessor = sha256_bytes(
+        git_show_bytes(live_main, source_path, cwd=worktree)
+    )
+    if projected != predecessor and source_path not in changed_paths:
+        raise Stop("EXPANSION_PHASE0_SOURCE_GAME_PACKAGE_NOT_UPDATED")
+
+
 def _add_expansion_replay_worktree(
     bound_main: str,
     school_key: str,
@@ -557,8 +580,13 @@ def prepare_expansion_candidate(
         ).stdout.splitlines()
         if line.strip()
     )
-    if "schools/%s/source-games.csv" % request["school_key"] not in changed:
-        raise Stop("EXPANSION_PHASE0_SOURCE_GAME_PACKAGE_NOT_UPDATED")
+    _require_source_game_package_update(
+        worktree=worktree,
+        live_main=live_main,
+        request=request,
+        intent=authority["intent"],
+        changed_paths=changed,
+    )
     if not set(changed).issubset(set(allowed)):
         raise Stop(
             "EXPANSION_PHASE0_DIFF_OUTSIDE_CONTRACT:"
