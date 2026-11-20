@@ -30,6 +30,10 @@ DISPLAY_COLUMNS = {
     "opponents.csv": "canonical_opponent_name",
     "source-games.csv": "normalized_opponent_name",
 }
+OPPONENT_REPRESENTATION_COLUMNS = {
+    "canonical_opponent_name",
+    "current_d1",
+}
 PHASE0_VENUE_SUFFIX = " Integration rebase resolved final global venue ID {venue_id}."
 
 
@@ -79,22 +83,34 @@ def _package(root: Path, commit: str, school: str) -> dict[str, bytes] | None:
     return result
 
 
-def _column_only_changes(
-    before: bytes, after: bytes, column: str,
+def _columns_only_changes(
+    before: bytes,
+    after: bytes,
+    allowed_columns: set[str],
 ) -> list[tuple[dict[str, str], dict[str, str]]] | None:
     old_fields, old_rows = _rows(before)
     new_fields, new_rows = _rows(after)
-    if old_fields != new_fields or column not in old_fields or len(old_rows) != len(new_rows):
+    if (
+        old_fields != new_fields
+        or not allowed_columns.intersection(old_fields)
+        or len(old_rows) != len(new_rows)
+    ):
         return None
     result = []
     for old, new in zip(old_rows, new_rows):
-        if {k: v for k, v in old.items() if k != column} != {
-            k: v for k, v in new.items() if k != column
+        if {k: v for k, v in old.items() if k not in allowed_columns} != {
+            k: v for k, v in new.items() if k not in allowed_columns
         }:
             return None
-        if old[column] != new[column]:
+        if any(old.get(column, "") != new.get(column, "") for column in allowed_columns):
             result.append((old, new))
     return result
+
+
+def _column_only_changes(
+    before: bytes, after: bytes, column: str,
+) -> list[tuple[dict[str, str], dict[str, str]]] | None:
+    return _columns_only_changes(before, after, {column})
 
 
 def _package_preserving_first_parent(
@@ -377,9 +393,9 @@ def permits_authenticated_display_successor(
         ):
             return False
 
-    opponent_changes = _column_only_changes(
+    opponent_changes = _columns_only_changes(
         original["opponents.csv"], current["opponents.csv"],
-        DISPLAY_COLUMNS["opponents.csv"],
+        OPPONENT_REPRESENTATION_COLUMNS,
     )
     source_changes = _column_only_changes(
         original["source-games.csv"], current["source-games.csv"],
@@ -398,8 +414,20 @@ def permits_authenticated_display_successor(
     final_name_by_key: dict[str, str] = {}
     for old, new in opponent_changes:
         key = new.get("canonical_opponent_key", "").strip()
+        if not key:
+            return reject("opponent_representation_key_missing")
+
+        if old.get("current_d1", "") != new.get("current_d1", ""):
+            if new.get("current_d1", "") not in {"Yes", "No"}:
+                return reject("current_d1_value_invalid")
+
+        if old.get("canonical_opponent_name", "") == new.get(
+            "canonical_opponent_name", ""
+        ):
+            continue
+
         new_name = new.get("canonical_opponent_name", "").strip()
-        if not key or not new_name or key in registered:
+        if not new_name or key in registered:
             return reject("invalid_nonregistered_display_key")
         signatures = {
             normalization.build_site_data.normalized_name_signature(x)
