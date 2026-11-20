@@ -1,4 +1,6 @@
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -7,12 +9,21 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import onboard_school  # noqa: E402
+import release_school  # noqa: E402
 from onboarding_plan import WorkflowError  # noqa: E402
 
 
 class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
     def approved(self, **summary_overrides):
+        population = [
+            {"source_game_id": f"EX-{i:03}", "canonical_game_id": f"CBBG-{i:07}",
+             "field_name": "team_score", "source_value": "61", "canonical_value": "60"}
+            for i in range(13)
+        ]
         summary = {
+            "zero_delta_excluded_discrepancy_population": population,
+            "inherited_stale_accomplishment_blockers_excluded": 1,
+            "inherited_accomplishment_decisions_excluded": 0,
             "expansion_transaction_kind": "ZERO_DELTA_METADATA_ONLY",
             "zero_delta_inherited_source_game_count": 12,
             "new_canonical_games": 0,
@@ -98,8 +109,10 @@ class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
 
     def dry_run_output(
         self, *, discrepancies=13, assertions=0, matches=12, enrichments=0,
-        mirrors=0,
+        mirrors=0, population=None,
     ):
+        if population is None:
+            population = self.approved()["summary"]["zero_delta_excluded_discrepancy_population"]
         return "\n".join([
             "College Basketball History — school ingestion",
             "Mode:       DRY RUN",
@@ -112,6 +125,8 @@ class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
             f"Assertions to add:           {assertions}",
             f"Local assertion mirrors:     {mirrors}",
             f"Discrepancies to add:        {discrepancies}",
+            onboard_school.ZERO_DELTA_DISCREPANCY_AUDIT_MARKER
+            + json.dumps(population, sort_keys=True, separators=(",", ":")),
             "DRY RUN COMPLETE: no files changed.",
         ])
 
@@ -124,6 +139,7 @@ class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
         )
         command = runner.call_args.args[0]
         self.assertIn("--check-package", command)
+        self.assertIn("--zero-delta-discrepancy-audit", command)
         self.assertNotIn("--apply", command)
         self.assertIn("--identity-decisions", command)
         self.assertEqual(output, runner.return_value)
@@ -184,6 +200,180 @@ class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
         self.assertNotIn("--check-package", runner.call_args.args[0])
         self.assertEqual(output, runner.return_value)
         self.assertIsNone(proof)
+
+
+    @mock.patch.object(onboard_school, "run")
+    def test_same_count_swapped_discrepancy_identity_fails(self, runner):
+        altered = self.approved()["summary"]["zero_delta_excluded_discrepancy_population"]
+        altered[0]["canonical_game_id"] = "CBBG-9999999"
+        runner.return_value = self.dry_run_output(population=altered)
+        with self.assertRaisesRegex(WorkflowError, "discrepancy identities changed"):
+            onboard_school._run_approved_ingestion(
+                Path("."), "example", Path("plan.json"), self.approved(),
+                {"kind": "ZERO_DELTA_METADATA_ONLY", "inherited_source_game_count": 12},
+            )
+
+    @mock.patch.object(onboard_school, "run")
+    def test_missing_audit_marker_fails(self, runner):
+        runner.return_value = self.dry_run_output().replace(
+            onboard_school.ZERO_DELTA_DISCREPANCY_AUDIT_MARKER, "OTHER="
+        )
+        with self.assertRaisesRegex(WorkflowError, "lacks exact discrepancy population"):
+            onboard_school._run_approved_ingestion(
+                Path("."), "example", Path("plan.json"), self.approved(),
+                {"kind": "ZERO_DELTA_METADATA_ONLY", "inherited_source_game_count": 12},
+            )
+
+    def test_zero_delta_tracked_outputs_fail_closed(self):
+        h = "a" * 64
+        archive = "data/reconciliation/onboarding-decisions/example-" + h[:12] + ".json"
+        onboard_school._assert_zero_delta_apply_paths(
+            [archive, "site/data/teams/example.json"], "example", h
+        )
+        for forbidden in (
+            "data/reference/historical-season-accounting.csv",
+            "data/reference/programs.csv",
+            "site/data/teams/other-school.json",
+        ):
+            with self.subTest(path=forbidden), self.assertRaisesRegex(
+                WorkflowError, "unauthorized tracked paths"
+            ):
+                onboard_school._assert_zero_delta_apply_paths(
+                    [archive, forbidden], "example", h
+                )
+
+    def test_snapshot_protects_registry_and_coverage_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            names = sorted(set(
+                list(onboard_school.ZERO_DELTA_HISTORICAL_GLOBAL_PATHS)
+                + [f"schools/example/{x}" for x in onboard_school.REQUIRED_PACKAGE_FILES]
+                + ["data/reference/programs.csv",
+                   "data/reference/conference-membership.csv",
+                   "data/reference/historical-season-coverage.csv",
+                   "data/reference/historical-season-accounting.csv"]
+            ))
+            for name in names:
+                p = root / name
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.write_text("baseline\n")
+            with mock.patch.object(
+                onboard_school, "git", return_value="\0".join(names) + "\0"
+            ):
+                before = onboard_school._zero_delta_historical_state_snapshot(root, "example")
+                (root / "data/reference/historical-season-accounting.csv").write_text(
+                    "changed\n"
+                )
+                after = onboard_school._zero_delta_historical_state_snapshot(root, "example")
+            with self.assertRaisesRegex(
+                WorkflowError, "changed inherited historical state"
+            ):
+                onboard_school._assert_zero_delta_historical_state_unchanged(before, after)
+
+    def test_stale_accomplishment_exception_requires_exact_verdict_and_match(self):
+        output = (
+            "example: STALE_ADMIN_DIFFERENCE | since 2000-2001\n"
+            "FAIL: 1 program cross-check(s) need review."
+        )
+        def rows(path):
+            if path.name == "programs.csv":
+                return [], [{"program_key": "example",
+                             "history_start_season": "2000-2001",
+                             "history_scope_intervals": ""}]
+            if path.name == "program-accomplishments.csv":
+                return [], [{
+                    "program_key": "example",
+                    "verification_status": "OWNER_BASELINE_UNVERIFIED",
+                    "canonical_crosscheck_status": "EXPLAINED_ADMIN_DIFFERENCE",
+                    "ncaa_tournament_appearances": "1",
+                    "final_four_appearances": "0",
+                    "national_championships": "0",
+                    "best_finish_key": "", "best_finish_year": "",
+                }]
+            return [], [{"canonical_game_id": "CBBG-1"}]
+        derived = {
+            "ncaa_tournament_appearances": 1, "final_four_appearances": 0,
+            "national_championships": 0, "best_finish_key": None,
+            "best_finish_year": None,
+        }
+        with mock.patch.object(onboard_school, "read_csv_table", side_effect=rows):
+            with mock.patch("program_history.history_scope_errors", return_value=[]):
+                with mock.patch(
+                    "program_history.derive_top_level_ncaa_accomplishments",
+                    return_value=derived,
+                ):
+                    self.assertIn(
+                        "UNVERIFIED",
+                        onboard_school._assert_inherited_stale_accomplishment(
+                            Path("."), "example", output
+                        ),
+                    )
+                    derived["ncaa_tournament_appearances"] = 2
+                    with self.assertRaisesRegex(WorkflowError, "canonical conflict"):
+                        onboard_school._assert_inherited_stale_accomplishment(
+                            Path("."), "example", output
+                        )
+                    with self.assertRaisesRegex(WorkflowError, "different failure"):
+                        onboard_school._assert_inherited_stale_accomplishment(
+                            Path("."), "example",
+                            output.replace("STALE_ADMIN_DIFFERENCE", "CONFLICT"),
+                        )
+
+    def test_exact_manifest_proof_carries_to_standalone_verification(self):
+        summary = {**self.approved()["summary"], "already_public": True}
+        proof = {"status": "PASS", "tracked_path_count": 25,
+                 "snapshot_sha256": "a" * 64}
+        manifest = {
+            "school_key": "example", "approved_plan_hash": "b" * 64,
+            "summary": summary,
+            "execution": {
+                "expansion_site_nonregression": {
+                    "mode": onboard_school.EXPANSION_MODE,
+                    "school_key": "example",
+                },
+                "zero_delta_historical_state_proof": proof,
+            },
+        }
+        kwargs = onboard_school.correction_gate_kwargs_from_manifest(
+            manifest, "example"
+        )
+        self.assertEqual(kwargs["zero_delta_historical_state_proof"], proof)
+        self.assertEqual(kwargs["zero_delta_approved_plan_hash"], "b" * 64)
+        manifest["execution"]["zero_delta_historical_state_proof"] = None
+        with self.assertRaisesRegex(WorkflowError, "lacks sealed proofs"):
+            onboard_school.correction_gate_kwargs_from_manifest(
+                manifest, "example"
+            )
+
+    def test_legacy_release_requires_valid_expansion_freeze(self):
+        summary = self.approved()["summary"]
+        approved = {"school_key": "example", "summary": summary}
+        manifest = {"summary": summary}
+        with mock.patch.object(
+            release_school, "correction_integration_freeze_bytes",
+            return_value=None,
+        ), mock.patch.object(
+            onboard_school, "_validated_expansion_freeze_bytes",
+            return_value=b"immutable freeze",
+        ), mock.patch.object(
+            onboard_school, "_authenticated_zero_delta_execution_context",
+            return_value={"kind": "ZERO_DELTA_METADATA_ONLY"},
+        ):
+            self.assertEqual(
+                release_school.runtime_integration_freeze_bytes(
+                    Path("."), "example", manifest, approved
+                ),
+                (None, b"immutable freeze"),
+            )
+        with mock.patch.object(
+            release_school, "correction_integration_freeze_bytes", return_value=None
+        ), mock.patch.object(
+            onboard_school, "_validated_expansion_freeze_bytes", return_value=None
+        ):
+            with self.assertRaisesRegex(WorkflowError, "lacks authenticated"):
+                release_school.runtime_integration_freeze_bytes(
+                    Path("."), "example", manifest, approved
+                )
 
     def test_altered_inherited_historical_row_fails_nonmutation_proof(self):
         before = {
