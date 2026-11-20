@@ -39,6 +39,10 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from game_assertion_store import append_game_assertions, read_game_assertions
+from zero_delta_expansion_stage2 import (
+    normalized_inherited_discrepancies,
+    ZERO_DELTA_DISCREPANCY_AUDIT_MARKER,
+)
 
 from administrative_status import administrative_status_errors
 from frozen_venue_authority import (
@@ -1852,8 +1856,14 @@ def main() -> int:
             "Restricted to --check-package through permanent onboarding/release tooling."
         ),
     )
+    parser.add_argument(
+        "--zero-delta-discrepancy-audit", action="store_true",
+        help="Emit exact read-only candidate discrepancy identities for sealed zero-delta auditing.",
+    )
     parser.add_argument("--repo", type=Path, default=None)
     args = parser.parse_args()
+    if args.zero_delta_discrepancy_audit and (not args.check_package or args.apply):
+        parser.error("--zero-delta-discrepancy-audit requires read-only --check-package")
     if args.source_game_id and (not args.check_package or args.apply):
         parser.error("--source-game-id is restricted to --check-package without --apply")
     if len(set(args.source_game_id)) != len(args.source_game_id):
@@ -2204,6 +2214,7 @@ def main() -> int:
     new_local_assertions = []
     new_canonical = []
     new_discrepancies = []
+    zero_delta_discrepancy_audit = []
     canonical_enrichments = []
     canonical_enrichment_game_ids = set()
     next_disc_num = next_discrepancy_number(discrepancies)
@@ -2247,6 +2258,13 @@ def main() -> int:
                 if discrepancy_key in existing_discrepancy_keys:
                     continue
 
+                zero_delta_discrepancy_audit.append({
+                    "source_game_id": source.get("source_game_id", ""),
+                    "canonical_game_id": game_id,
+                    "field_name": field_name,
+                    "source_value": source_value,
+                    "canonical_value": canonical_value,
+                })
                 new_discrepancies.append({
                     "discrepancy_id": f"DISC-{next_disc_num:06d}",
                     "canonical_game_id": game_id,
@@ -2301,6 +2319,14 @@ def main() -> int:
     print()
 
     if not args.apply:
+        if args.zero_delta_discrepancy_audit:
+            print(
+                ZERO_DELTA_DISCREPANCY_AUDIT_MARKER
+                + json.dumps(
+                    normalized_inherited_discrepancies(zero_delta_discrepancy_audit),
+                    sort_keys=True, separators=(",", ":"),
+                )
+            )
         print("DRY RUN COMPLETE: no files changed.")
         if (
             not new_canonical

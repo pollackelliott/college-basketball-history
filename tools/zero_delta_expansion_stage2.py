@@ -52,6 +52,42 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+
+
+ZERO_DELTA_DISCREPANCY_AUDIT_MARKER = "ZERO_DELTA_DISCREPANCY_AUDIT_JSON="
+
+
+def normalized_inherited_discrepancies(
+    rows: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    """Exact historical discrepancy identities, not merely an aggregate count."""
+
+    keys = (
+        "source_game_id", "canonical_game_id", "field_name",
+        "source_value", "canonical_value",
+    )
+    normalized: list[dict[str, str]] = []
+    identities: set[tuple[str, str, str]] = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ZeroDeltaExpansionError("inherited discrepancy audit row is invalid")
+        if any(key not in row or not isinstance(row[key], str) for key in keys):
+            raise ZeroDeltaExpansionError("inherited discrepancy audit has missing fields")
+        item = {key: row[key] for key in keys}
+        identity = (
+            item["source_game_id"], item["canonical_game_id"], item["field_name"]
+        )
+        if not all(identity) or identity in identities:
+            raise ZeroDeltaExpansionError(
+                "inherited discrepancy audit has a blank/duplicate identity"
+            )
+        identities.add(identity)
+        normalized.append(item)
+    return sorted(
+        normalized,
+        key=lambda item: tuple(item[key] for key in keys),
+    )
+
 def authenticate_zero_delta_expansion(
     repo: Path,
     school_key: str,
@@ -288,6 +324,9 @@ def apply_zero_delta_projection(
         "inherited_source_game_count"
     ]
     summary["inherited_unrelated_reviews_excluded"] = len(inherited_discrepancies)
+    summary["zero_delta_excluded_discrepancy_population"] = (
+        normalized_inherited_discrepancies(inherited_discrepancies)
+    )
     summary["inherited_accomplishment_decisions_excluded"] = len(
         accomplishment_decisions
     )
