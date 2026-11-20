@@ -1,0 +1,20 @@
+{
+  "expected_target_predecessor_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "request_id": "kentucky-expansion-phase0-0003",
+  "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "research_freeze_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "33dbd2ea1a121cf2111ab08cab6b18710274674719b96a0560c865bacb247f44",
+    "integration-freeze.json": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+    "phase0-preview.json": "42e78e3962a345e90b07cd8ee304ec7876f9333a4e87a9ded67cc4f4882ca418",
+    "stage1-independent-proof.json": "78c13ff5abf0753018b4c648030e9b26b9dbf4ac5d9c494a66006920caf2ff8c"
+  },
+  "stage1_independent_proof_sha256": "78c13ff5abf0753018b4c648030e9b26b9dbf4ac5d9c494a66006920caf2ff8c",
+  "venue_reconciliation_sha256": ""
+}
