@@ -1429,11 +1429,11 @@
   "current_sequence": 688,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
     "operation": "EXPANSION_PHASE0",
     "protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "kentucky-expansion-phase0-0003",
     "school_key": "kentucky",
     "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",

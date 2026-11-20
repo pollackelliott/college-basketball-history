@@ -1,0 +1,28 @@
+{
+  "changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "schools/kentucky/notes.md",
+    "schools/kentucky/source-notes.md",
+    "schools/kentucky/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/kentucky.json"
+  ],
+  "expected_target_predecessor_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "independent_exact_tree_equivalence": "PASS",
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_VERIFICATION",
+  "observed_live_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "prepared_tree_sha": "d2085984ff44f1e69be75450dbe1f3028740616d",
+  "protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "kentucky-expansion-phase0-0003",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "status": "PASS",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+  "venue_reconciliation_sha256": ""
+}
