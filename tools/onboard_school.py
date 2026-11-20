@@ -37,6 +37,10 @@ from frozen_venue_authority import (
     sealed_pre_ingest_semantic_delta,
 )
 from publish_historical_season_coverage import integrate_approved_coverage
+from zero_delta_expansion_stage2 import (
+    ZeroDeltaExpansionError,
+    authenticate_zero_delta_expansion,
+)
 
 from correction_site_nonregression import (
     EXPANSION_MODE,
@@ -108,6 +112,23 @@ PACKAGE_ONLY_CORRECTION_MEMBERS = ("conferences.csv",)
 BOUNDED_CORRECTION_KINDS = SINGLE_GAME_CORRECTION_KINDS | frozenset({
     MULTI_GAME_IDENTITY_CORRECTION_KIND,
 })
+ZERO_DELTA_METADATA_ONLY_KIND = "ZERO_DELTA_METADATA_ONLY"
+ZERO_DELTA_REQUIRED_ZERO_SUMMARY_FIELDS = (
+    "new_canonical_games",
+    "identity_review_required",
+    "assertions_to_add",
+    "canonical_enrichment_games",
+    "canonical_enrichment_fields",
+    "conditional_discrepancies",
+    "canonical_site_patch_reviews",
+)
+ZERO_DELTA_HISTORICAL_GLOBAL_PATHS = (
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/discrepancies.csv",
+    "data/reference/program-accomplishments.csv",
+    "data/reference/venues.csv",
+)
 
 _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE = False
 
@@ -1705,6 +1726,111 @@ def _execute_package_only_correction(
     }
 
 
+def _authenticated_zero_delta_execution_context(
+    repo: Path,
+    approved: dict[str, Any],
+) -> dict[str, Any] | None:
+    """Authenticate the narrow metadata-only execution exception fail-closed."""
+
+    summary = approved.get("summary")
+    if not isinstance(summary, dict) or (
+        summary.get("expansion_transaction_kind") != ZERO_DELTA_METADATA_ONLY_KIND
+    ):
+        return None
+    if approved.get("decisions"):
+        raise WorkflowError(
+            "zero-delta metadata-only execution unexpectedly carries decisions"
+        )
+    unexpected = {
+        field: int(summary.get(field, 0) or 0)
+        for field in ZERO_DELTA_REQUIRED_ZERO_SUMMARY_FIELDS
+        if int(summary.get(field, 0) or 0) != 0
+    }
+    if unexpected:
+        raise WorkflowError(
+            "zero-delta metadata-only execution surfaced historical work: "
+            + json.dumps(unexpected, sort_keys=True)
+        )
+    try:
+        context = authenticate_zero_delta_expansion(repo, approved["school_key"])
+    except ZeroDeltaExpansionError as exc:
+        raise WorkflowError(str(exc)) from exc
+    if context is None or context.get("kind") != ZERO_DELTA_METADATA_ONLY_KIND:
+        raise WorkflowError(
+            "zero-delta metadata-only plan lacks authenticated zero-delta authority"
+        )
+    expected_count = int(summary.get("zero_delta_inherited_source_game_count", -1))
+    if expected_count != int(context.get("inherited_source_game_count", -2)):
+        raise WorkflowError(
+            "zero-delta metadata-only inherited source population changed"
+        )
+    return context
+
+
+def _zero_delta_historical_state_snapshot(
+    repo: Path,
+    school_key: str,
+) -> dict[str, str]:
+    """Hash historical/shared rows that a metadata-only expansion may not mutate."""
+
+    paths = list(ZERO_DELTA_HISTORICAL_GLOBAL_PATHS) + [
+        f"schools/{school_key}/{name}" for name in REQUIRED_PACKAGE_FILES
+    ]
+    snapshot: dict[str, str] = {}
+    for relative in paths:
+        path = repo / relative
+        if not path.is_file():
+            raise WorkflowError(
+                "zero-delta historical-state proof is missing tracked path: " + relative
+            )
+        snapshot[relative] = file_sha(path)
+    return snapshot
+
+
+def _assert_zero_delta_historical_state_unchanged(
+    before: dict[str, str],
+    after: dict[str, str],
+) -> dict[str, Any]:
+    """Reject any historical/shared mutation hidden behind zero-delta compatibility."""
+
+    changed = sorted(
+        path for path in set(before) | set(after)
+        if before.get(path) != after.get(path)
+    )
+    if changed:
+        raise WorkflowError(
+            "zero-delta metadata-only execution changed inherited historical state: "
+            + ", ".join(changed)
+        )
+    payload = json.dumps(before, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return {
+        "status": "PASS",
+        "tracked_path_count": len(before),
+        "snapshot_sha256": hashlib.sha256(payload).hexdigest(),
+    }
+
+
+def _run_inherited_baseline_site_compatibility(
+    repo: Path,
+    school_key: str,
+    *,
+    zero_delta_context: dict[str, Any] | None,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Run site remediation only when this transaction can contain changed/new games."""
+
+    if zero_delta_context is not None:
+        skipped = {
+            "skipped_zero_delta_inherited_baseline": True,
+            "transaction_kind": ZERO_DELTA_METADATA_ONLY_KIND,
+        }
+        return dict(skipped), dict(skipped), dict(skipped)
+    return (
+        backfill_reciprocal_only_home_chronology(repo, school_key),
+        backfill_resolved_target_home_chronology(repo, school_key),
+        annotate_reciprocal_only_unknown_site_provenance(repo, school_key),
+    )
+
+
 def execute_approved_in_place(
     repo: Path,
     approved: dict[str, Any],
@@ -1726,6 +1852,16 @@ def execute_approved_in_place(
         raise WorkflowError(str(exc)) from exc
 
     expansion_freeze = _all_history_expansion_integration_freeze(repo, school_key)
+    zero_delta_context = (
+        _authenticated_zero_delta_execution_context(repo, approved)
+        if expansion_freeze is not None
+        else None
+    )
+    zero_delta_historical_before = (
+        _zero_delta_historical_state_snapshot(repo, school_key)
+        if zero_delta_context is not None
+        else None
+    )
     expansion_site_before = (
         capture_correction_site_report(repo, school_key)
         if expansion_freeze is not None
@@ -1774,27 +1910,20 @@ def execute_approved_in_place(
     reconciliation = apply_reconciliation_decisions(repo, approved)
     print(json.dumps(reconciliation, sort_keys=True))
 
+    (
+        reciprocal_home_chronology,
+        resolved_target_home_chronology,
+        reciprocal_unknown_site_provenance,
+    ) = _run_inherited_baseline_site_compatibility(
+        repo,
+        school_key,
+        zero_delta_context=zero_delta_context,
+    )
     print("\n=== reciprocal-only HOME chronology ===")
-    reciprocal_home_chronology = backfill_reciprocal_only_home_chronology(
-        repo,
-        school_key,
-    )
     print(json.dumps(reciprocal_home_chronology, sort_keys=True))
-
     print("\n=== resolved target-conflict HOME chronology ===")
-    resolved_target_home_chronology = backfill_resolved_target_home_chronology(
-        repo,
-        school_key,
-    )
     print(json.dumps(resolved_target_home_chronology, sort_keys=True))
-
     print("\n=== reciprocal-only UNKNOWN site provenance ===")
-    reciprocal_unknown_site_provenance = (
-        annotate_reciprocal_only_unknown_site_provenance(
-            repo,
-            school_key,
-        )
-    )
     print(json.dumps(reciprocal_unknown_site_provenance, sort_keys=True))
 
     print("\n=== publication metadata ===")
@@ -1804,6 +1933,17 @@ def execute_approved_in_place(
     print("\n=== independently audited historical season coverage ===")
     historical_coverage = integrate_approved_coverage(repo, school_key)
     print(json.dumps(historical_coverage, sort_keys=True))
+
+    zero_delta_historical_state_proof = None
+    if zero_delta_historical_before is not None:
+        zero_delta_historical_state_proof = (
+            _assert_zero_delta_historical_state_unchanged(
+                zero_delta_historical_before,
+                _zero_delta_historical_state_snapshot(repo, school_key),
+            )
+        )
+        print("\n=== zero-delta inherited historical-state proof ===")
+        print(json.dumps(zero_delta_historical_state_proof, sort_keys=True))
 
     archive = archive_approved_plan(repo, approved)
     print(f"Archived sealed decisions: {archive.relative_to(repo)}")
@@ -1847,6 +1987,8 @@ def execute_approved_in_place(
         "reciprocal_unknown_site_provenance": reciprocal_unknown_site_provenance,
         "publication": publication,
         "historical_coverage": historical_coverage,
+        "zero_delta_execution_context": zero_delta_context,
+        "zero_delta_historical_state_proof": zero_delta_historical_state_proof,
         "expansion_site_nonregression": expansion_site_nonregression,
         "site_output": site_output,
         "archive": archive.relative_to(repo).as_posix(),
