@@ -37,6 +37,12 @@ from frozen_venue_authority import (
     sealed_pre_ingest_semantic_delta,
 )
 from publish_historical_season_coverage import integrate_approved_coverage
+from zero_delta_expansion_stage2 import (
+    ZeroDeltaExpansionError,
+    authenticate_zero_delta_expansion,
+    normalized_inherited_discrepancies,
+    ZERO_DELTA_DISCREPANCY_AUDIT_MARKER,
+)
 
 from correction_site_nonregression import (
     EXPANSION_MODE,
@@ -108,6 +114,23 @@ PACKAGE_ONLY_CORRECTION_MEMBERS = ("conferences.csv",)
 BOUNDED_CORRECTION_KINDS = SINGLE_GAME_CORRECTION_KINDS | frozenset({
     MULTI_GAME_IDENTITY_CORRECTION_KIND,
 })
+ZERO_DELTA_METADATA_ONLY_KIND = "ZERO_DELTA_METADATA_ONLY"
+ZERO_DELTA_REQUIRED_ZERO_SUMMARY_FIELDS = (
+    "new_canonical_games",
+    "identity_review_required",
+    "assertions_to_add",
+    "canonical_enrichment_games",
+    "canonical_enrichment_fields",
+    "conditional_discrepancies",
+    "canonical_site_patch_reviews",
+)
+ZERO_DELTA_HISTORICAL_GLOBAL_PATHS = (
+    "data/canonical/games.csv",
+    "data/evidence/game-assertions.csv",
+    "data/reconciliation/discrepancies.csv",
+    "data/reference/program-accomplishments.csv",
+    "data/reference/venues.csv",
+)
 
 _PRESERVE_CANDIDATE_VALIDATOR_OVERRIDE = False
 
@@ -321,6 +344,16 @@ def correction_gate_kwargs_from_manifest(
     summary = manifest.get("summary", {})
     execution = manifest.get("execution", {})
     expansion_proof = execution.get("expansion_site_nonregression")
+    zero_delta_kwargs = {}
+    if summary.get("expansion_transaction_kind") == ZERO_DELTA_METADATA_ONLY_KIND:
+        historical_proof = execution.get("zero_delta_historical_state_proof")
+        if not isinstance(historical_proof, dict) or not isinstance(expansion_proof, dict):
+            raise WorkflowError("zero-delta release manifest lacks sealed proofs")
+        zero_delta_kwargs = {
+            "zero_delta_summary": summary,
+            "zero_delta_historical_state_proof": historical_proof,
+            "zero_delta_approved_plan_hash": manifest.get("approved_plan_hash"),
+        }
     if expansion_proof is not None:
         if (
             summary.get("correction_transaction_kind") in BOUNDED_CORRECTION_KINDS
@@ -332,7 +365,7 @@ def correction_gate_kwargs_from_manifest(
             or manifest.get("school_key") != school_key
         ):
             raise WorkflowError("invalid sealed expansion site proof in release manifest")
-        return {"expansion_site_proof": expansion_proof}
+        return {"expansion_site_proof": expansion_proof, **zero_delta_kwargs}
     kind = summary.get("correction_transaction_kind")
     if kind == PACKAGE_ONLY_CORRECTION_KIND:
         proof = execution.get("correction_site_nonregression", {})
@@ -349,7 +382,7 @@ def correction_gate_kwargs_from_manifest(
             )
         return {"correction_site_proof": proof}
     if kind not in BOUNDED_CORRECTION_KINDS:
-        return {}
+        return zero_delta_kwargs
     proof = execution.get("correction_site_nonregression", {})
     if not isinstance(proof, dict):
         raise WorkflowError("invalid sealed correction site proof in release manifest")
@@ -406,8 +439,20 @@ def run_gates(
     correction_site_proof: dict[str, Any] | None = None,
     expansion_site_proof: dict[str, Any] | None = None,
     approved_plan: dict[str, Any] | None = None,
+    zero_delta_summary: dict[str, Any] | None = None,
+    zero_delta_historical_state_proof: dict[str, Any] | None = None,
+    zero_delta_approved_plan_hash: str | None = None,
 ) -> dict[str, str]:
     python = sys.executable
+    zero_delta = _zero_delta_gate_context(
+        repo, school_key, approved_plan, zero_delta_summary,
+        zero_delta_historical_state_proof,
+    )
+    if zero_delta is not None and changed:
+        approved_hash = str((approved_plan or {}).get("approved_plan_hash", "") or zero_delta_approved_plan_hash or "")
+        if not re.fullmatch(r"[0-9a-f]{64}", approved_hash):
+            raise WorkflowError("zero-delta gate needs exact approved plan hash")
+        _assert_zero_delta_apply_paths(changed, school_key, approved_hash)
     outputs: dict[str, str] = {}
     if correction_site_proof is not None and expansion_site_proof is not None:
         raise WorkflowError("site gate cannot combine correction and expansion proofs")
@@ -561,8 +606,42 @@ def run_gates(
                 + "; inherited published debt remains visible."
             )
             print(outputs[label])
+        elif label == "target_no_op" and zero_delta is not None:
+            command.append("--zero-delta-discrepancy-audit")
+            output = run(command, cwd=command_cwd, label=label)
+            audit = _assert_zero_delta_ingestion_dry_run(
+                output,
+                {"summary": zero_delta[0], "decisions": []},
+                zero_delta[1],
+            )
+            outputs[label] = "EXACT_ZERO_DELTA_TARGET_AUDIT_PASS:" + audit[
+                "discrepancy_population_sha256"
+            ]
+        elif label == "accomplishments" and zero_delta is not None and (
+            zero_delta[0]["inherited_stale_accomplishment_blockers_excluded"] == 1
+        ):
+            try:
+                output = run(command, cwd=command_cwd, label=label, echo=False)
+            except WorkflowError as exc:
+                details = str(exc).partition("\n")[2]
+                outputs[label] = _assert_inherited_stale_accomplishment(
+                    repo, school_key, details
+                )
+                print(details)
+                print(outputs[label])
+            else:
+                raise WorkflowError(
+                    "zero-delta inherited accomplishment verdict unexpectedly changed: "
+                    + output[-500:]
+                )
         else:
             outputs[label] = run(command, cwd=command_cwd, label=label)
+    if zero_delta is not None:
+        # Validate the immutable state again after every gate/test subprocess.
+        _zero_delta_gate_context(
+            repo, school_key, approved_plan, zero_delta_summary,
+            zero_delta_historical_state_proof,
+        )
     if changed is not None:
         bad = whitespace_errors(repo, changed)
         if bad:
@@ -1705,6 +1784,427 @@ def _execute_package_only_correction(
     }
 
 
+def _authenticated_zero_delta_execution_context(
+    repo: Path,
+    approved: dict[str, Any],
+) -> dict[str, Any] | None:
+    """Authenticate the narrow metadata-only execution exception fail-closed."""
+
+    summary = approved.get("summary")
+    if not isinstance(summary, dict) or (
+        summary.get("expansion_transaction_kind") != ZERO_DELTA_METADATA_ONLY_KIND
+    ):
+        return None
+    if approved.get("decisions"):
+        raise WorkflowError(
+            "zero-delta metadata-only execution unexpectedly carries decisions"
+        )
+    unexpected = {
+        field: int(summary.get(field, 0) or 0)
+        for field in ZERO_DELTA_REQUIRED_ZERO_SUMMARY_FIELDS
+        if int(summary.get(field, 0) or 0) != 0
+    }
+    if unexpected:
+        raise WorkflowError(
+            "zero-delta metadata-only execution surfaced historical work: "
+            + json.dumps(unexpected, sort_keys=True)
+        )
+    try:
+        context = authenticate_zero_delta_expansion(repo, approved["school_key"])
+    except ZeroDeltaExpansionError as exc:
+        raise WorkflowError(str(exc)) from exc
+    if context is None or context.get("kind") != ZERO_DELTA_METADATA_ONLY_KIND:
+        raise WorkflowError(
+            "zero-delta metadata-only plan lacks authenticated zero-delta authority"
+        )
+    expected_count = int(summary.get("zero_delta_inherited_source_game_count", -1))
+    if expected_count != int(context.get("inherited_source_game_count", -2)):
+        raise WorkflowError(
+            "zero-delta metadata-only inherited source population changed"
+        )
+    try:
+        population = normalized_inherited_discrepancies(
+            summary["zero_delta_excluded_discrepancy_population"]
+        )
+        if len(population) != int(summary["inherited_unrelated_reviews_excluded"]):
+            raise ValueError("inherited discrepancy population count differs")
+        if summary.get("inherited_stale_accomplishment_blockers_excluded") not in (0, 1):
+            raise ValueError("unexpected inherited accomplishment blocker count")
+        if int(summary.get("inherited_accomplishment_decisions_excluded", -1)) != 0:
+            raise ValueError("unapproved inherited accomplishment decision")
+    except (KeyError, ValueError, TypeError, ZeroDeltaExpansionError) as exc:
+        raise WorkflowError("zero-delta execution lacks exact inherited-debt authority") from exc
+    return context
+
+
+def _zero_delta_historical_state_snapshot(
+    repo: Path,
+    school_key: str,
+) -> dict[str, str]:
+    """Hash historical/shared rows that a metadata-only expansion may not mutate."""
+
+    # Protect the complete tracked shared-data and target-package surfaces,
+    # including coverage/accounting, registry rows, and local assertion mirrors.
+    # The sole explicitly administrative exception is the approved-plan archive,
+    # which is separately constrained by the transactional changed-path guard.
+    tracked = [
+        name for name in git(
+            repo, "ls-files", "-z", "--cached", "--", "data", f"schools/{school_key}"
+        ).split("\0") if name
+    ]
+    paths = sorted(
+        name for name in tracked
+        if not name.startswith("data/reconciliation/onboarding-decisions/")
+    )
+    required = set(ZERO_DELTA_HISTORICAL_GLOBAL_PATHS) | {
+        f"schools/{school_key}/{name}" for name in REQUIRED_PACKAGE_FILES
+    }
+    if not required.issubset(paths):
+        raise WorkflowError("zero-delta historical-state proof lacks required files")
+    snapshot: dict[str, str] = {}
+    for relative in paths:
+        path = repo / relative
+        if not path.is_file():
+            raise WorkflowError(
+                "zero-delta historical-state proof is missing tracked path: " + relative
+            )
+        snapshot[relative] = file_sha(path)
+    return snapshot
+
+
+def _assert_zero_delta_historical_state_unchanged(
+    before: dict[str, str],
+    after: dict[str, str],
+) -> dict[str, Any]:
+    """Reject any historical/shared mutation hidden behind zero-delta compatibility."""
+
+    changed = sorted(
+        path for path in set(before) | set(after)
+        if before.get(path) != after.get(path)
+    )
+    if changed:
+        raise WorkflowError(
+            "zero-delta metadata-only execution changed inherited historical state: "
+            + ", ".join(changed)
+        )
+    payload = json.dumps(before, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return {
+        "status": "PASS",
+        "tracked_path_count": len(before),
+        "snapshot_sha256": hashlib.sha256(payload).hexdigest(),
+    }
+
+
+
+def _assert_zero_delta_ingestion_dry_run(
+    output: str,
+    approved: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    """Prove ingestion has only the inherited reviews excluded by Stage 2."""
+
+    summary = approved.get("summary")
+    if (
+        not isinstance(summary, dict)
+        or summary.get("expansion_transaction_kind") != ZERO_DELTA_METADATA_ONLY_KIND
+        or context.get("kind") != ZERO_DELTA_METADATA_ONLY_KIND
+        or approved.get("decisions")
+        or int(summary.get("discrepancies_to_add", -1)) != 0
+    ):
+        raise WorkflowError("zero-delta ingestion audit lacks projected no-work authority")
+
+    if (
+        "DRY RUN COMPLETE: no files changed." not in output
+        or not re.search(r"(?m)^Mode:\s+DRY RUN\s*$", output)
+    ):
+        raise WorkflowError("zero-delta ingestion audit did not complete a dry run")
+
+    def count(label: str) -> int:
+        matches = re.findall(
+            rf"(?m)^{re.escape(label)}:\s*([0-9][0-9,]*)\s*$",
+            output,
+        )
+        if len(matches) != 1:
+            raise WorkflowError(
+                "zero-delta ingestion audit has missing/ambiguous count: " + label
+            )
+        return int(matches[0].replace(",", ""))
+
+    expected = {
+        "Source rows": int(summary.get("source_rows", -1)),
+        "Publication-eligible source rows": int(
+            summary.get("in_scope_source_rows", -1)
+        ),
+        "Existing-game matches": int(context["inherited_source_game_count"]),
+        "New canonical games": 0,
+        "Identity review required": 0,
+        "Assertions to add": 0,
+        "Discrepancies to add": int(
+            summary.get("inherited_unrelated_reviews_excluded", -1)
+        ),
+    }
+    if (
+        any(value < 0 for value in expected.values())
+        or int(summary.get("existing_game_matches", -1))
+        != expected["Existing-game matches"]
+    ):
+        raise WorkflowError("zero-delta ingestion audit has inconsistent plan counts")
+
+    actual = {label: count(label) for label in expected}
+    if actual != expected:
+        raise WorkflowError(
+            "zero-delta ingestion audit detected unapproved work: "
+            + json.dumps({"expected": expected, "actual": actual}, sort_keys=True)
+        )
+
+    enrichment = re.findall(
+        r"(?m)^Canonical enrichments:\s*([0-9][0-9,]*) games / "
+        r"([0-9][0-9,]*) fields\s*$",
+        output,
+    )
+    if len(enrichment) != 1 or any(
+        int(value.replace(",", "")) != 0 for value in enrichment[0]
+    ):
+        raise WorkflowError(
+            "zero-delta ingestion audit detected canonical enrichment work"
+        )
+
+    audit_lines = re.findall(
+        rf"(?m)^{re.escape(ZERO_DELTA_DISCREPANCY_AUDIT_MARKER)}([^\n]+)$",
+        output,
+    )
+    if len(audit_lines) != 1:
+        raise WorkflowError("zero-delta ingestion audit lacks exact discrepancy population")
+    try:
+        actual_population = normalized_inherited_discrepancies(
+            json.loads(audit_lines[0])
+        )
+        expected_population = normalized_inherited_discrepancies(
+            summary["zero_delta_excluded_discrepancy_population"]
+        )
+    except (KeyError, TypeError, ValueError, ZeroDeltaExpansionError) as exc:
+        raise WorkflowError("zero-delta ingestion discrepancy proof is invalid") from exc
+    if (
+        actual_population != expected_population
+        or len(actual_population) != actual["Discrepancies to add"]
+    ):
+        raise WorkflowError("zero-delta inherited discrepancy identities changed")
+
+    mirrors = re.findall(
+        r"(?m)^Local assertion mirrors:\s*([0-9][0-9,]*)\s*$",
+        output,
+    )
+    if len(mirrors) > 1 or (
+        mirrors and int(mirrors[0].replace(",", "")) != 0
+    ):
+        raise WorkflowError(
+            "zero-delta ingestion audit detected local assertion mirror work"
+        )
+
+    return {
+        "status": "PASS",
+        "kind": ZERO_DELTA_METADATA_ONLY_KIND,
+        "mode": "CHECK_PACKAGE_DRY_RUN",
+        "existing_game_matches": actual["Existing-game matches"],
+        "inherited_discrepancies_preserved": actual["Discrepancies to add"],
+        "discrepancy_population_sha256": hashlib.sha256(
+            json.dumps(actual_population, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+        "tracked_historical_write": "NONE",
+    }
+
+
+def _run_approved_ingestion(
+    repo: Path,
+    school_key: str,
+    plan_path: Path,
+    approved: dict[str, Any],
+    zero_delta_context: dict[str, Any] | None,
+) -> tuple[str, dict[str, Any] | None]:
+    """Use strict read-only ingestion for authenticated zero historical delta."""
+
+    command = [
+        sys.executable,
+        str(_runtime_tool("ingest_school.py")),
+        school_key,
+        "--identity-decisions",
+        str(plan_path),
+        "--repo",
+        str(repo),
+    ]
+    if zero_delta_context is not None:
+        command.insert(3, "--check-package")
+        command.insert(4, "--zero-delta-discrepancy-audit")
+        output = run(command, cwd=repo, label="zero-delta ingestion audit")
+        return output, _assert_zero_delta_ingestion_dry_run(
+            output, approved, zero_delta_context
+        )
+
+    command.insert(3, "--apply")
+    with _candidate_validator_override_for_ingestion():
+        return run(command, cwd=repo, label="ingestion apply"), None
+
+
+
+
+def _zero_delta_gate_context(
+    repo: Path,
+    school_key: str,
+    approved_plan: dict[str, Any] | None,
+    zero_delta_summary: dict[str, Any] | None,
+    zero_delta_historical_state_proof: dict[str, Any] | None,
+) -> tuple[dict[str, Any], dict[str, Any]] | None:
+    """Authenticate one immutable zero-delta transaction at every gate."""
+
+    summary = (approved_plan or {}).get("summary")
+    if summary is None:
+        summary = zero_delta_summary
+    if not isinstance(summary, dict) or (
+        summary.get("expansion_transaction_kind") != ZERO_DELTA_METADATA_ONLY_KIND
+    ):
+        if zero_delta_summary is not None or zero_delta_historical_state_proof is not None:
+            raise WorkflowError("untrusted zero-delta gate proof on ordinary transaction")
+        return None
+    if zero_delta_summary is not None and summary != zero_delta_summary:
+        raise WorkflowError("zero-delta gate summary differs from sealed transaction")
+    if approved_plan is not None and approved_plan.get("decisions"):
+        raise WorkflowError("zero-delta gate unexpectedly contains decisions")
+    context = _authenticated_zero_delta_execution_context(
+        repo, {"school_key": school_key, "summary": summary, "decisions": []}
+    )
+    if context is None or not isinstance(zero_delta_historical_state_proof, dict):
+        raise WorkflowError("zero-delta gate requires authenticated immutable proof")
+    current_snapshot = _zero_delta_historical_state_snapshot(repo, school_key)
+    current = _assert_zero_delta_historical_state_unchanged(
+        current_snapshot, current_snapshot
+    )
+    if (
+        zero_delta_historical_state_proof.get("status") != "PASS"
+        or zero_delta_historical_state_proof.get("snapshot_sha256")
+        != current["snapshot_sha256"]
+        or zero_delta_historical_state_proof.get("tracked_path_count")
+        != current["tracked_path_count"]
+    ):
+        raise WorkflowError("zero-delta inherited historical state drifted at gate")
+    return summary, context
+
+
+def _assert_zero_delta_apply_paths(
+    changed: list[str],
+    school_key: str,
+    approved_plan_hash: str,
+) -> None:
+    """Only administrative plan evidence and target-derived JSON may change."""
+
+    archive = (
+        "data/reconciliation/onboarding-decisions/"
+        f"{school_key}-{approved_plan_hash[:12]}.json"
+    )
+    permitted = {
+        archive,
+        "site/data/manifest.json",
+        "site/data/programs.json",
+        f"site/data/teams/{school_key}.json",
+    }
+    bad = sorted(set(changed) - permitted)
+    if bad:
+        raise WorkflowError(
+            "zero-delta execution changed unauthorized tracked paths: "
+            + ", ".join(bad)
+        )
+
+
+def _assert_inherited_stale_accomplishment(
+    repo: Path,
+    school_key: str,
+    verifier_output: str,
+) -> str:
+    """Retain the ordinary verifier failure as exact, unverified baseline debt."""
+
+    header = re.findall(
+        rf"(?m)^{re.escape(school_key)}: ([A-Z_]+) \|",
+        verifier_output,
+    )
+    if header != ["STALE_ADMIN_DIFFERENCE"] or (
+        verifier_output.count("FAIL: 1 program cross-check(s) need review.") != 1
+    ):
+        raise WorkflowError(
+            "zero-delta accomplishment verifier has a different failure"
+        )
+    from program_history import (
+        derive_top_level_ncaa_accomplishments,
+        history_scope_errors,
+    )
+
+    programs = [
+        row for row in read_csv_table(repo / "data/reference/programs.csv")[1]
+        if row.get("program_key") == school_key
+    ]
+    references = [
+        row for row in read_csv_table(
+            repo / "data/reference/program-accomplishments.csv"
+        )[1]
+        if row.get("program_key") == school_key
+    ]
+    if len(programs) != 1 or len(references) != 1:
+        raise WorkflowError("zero-delta accomplishment authority is missing/ambiguous")
+    program, reference = programs[0], references[0]
+    if (
+        reference.get("verification_status", "").strip() != "OWNER_BASELINE_UNVERIFIED"
+        or reference.get("canonical_crosscheck_status", "").strip()
+        != "EXPLAINED_ADMIN_DIFFERENCE"
+        or history_scope_errors(program, required=True)
+    ):
+        raise WorkflowError("zero-delta accomplishment is not the approved baseline state")
+    canonical = read_csv_table(repo / "data/canonical/games.csv")[1]
+    derived = derive_top_level_ncaa_accomplishments(
+        canonical, school_key, program.get("history_start_season", "").strip(),
+        program.get("history_scope_intervals", "").strip(),
+    )
+    comparisons = {
+        "ncaa_tournament_appearances": derived["ncaa_tournament_appearances"],
+        "final_four_appearances": derived["final_four_appearances"],
+        "national_championships": derived["national_championships"],
+        "best_finish_key": derived["best_finish_key"] or "",
+        "best_finish_year": (
+            str(derived["best_finish_year"])
+            if derived["best_finish_year"] is not None else ""
+        ),
+    }
+    if any(
+        str(reference.get(field, "")).strip() != str(value)
+        for field, value in comparisons.items()
+    ):
+        raise WorkflowError(
+            "zero-delta accomplishment has a newly introduced canonical conflict"
+        )
+    return (
+        "INHERITED_BASELINE_UNVERIFIED: ordinary verifier "
+        "STALE_ADMIN_DIFFERENCE retained; exact canonical aggregates MATCH"
+    )
+
+
+def _run_inherited_baseline_site_compatibility(
+    repo: Path,
+    school_key: str,
+    *,
+    zero_delta_context: dict[str, Any] | None,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Run site remediation only when this transaction can contain changed/new games."""
+
+    if zero_delta_context is not None:
+        skipped = {
+            "skipped_zero_delta_inherited_baseline": True,
+            "transaction_kind": ZERO_DELTA_METADATA_ONLY_KIND,
+        }
+        return dict(skipped), dict(skipped), dict(skipped)
+    return (
+        backfill_reciprocal_only_home_chronology(repo, school_key),
+        backfill_resolved_target_home_chronology(repo, school_key),
+        annotate_reciprocal_only_unknown_site_provenance(repo, school_key),
+    )
+
+
 def execute_approved_in_place(
     repo: Path,
     approved: dict[str, Any],
@@ -1726,6 +2226,16 @@ def execute_approved_in_place(
         raise WorkflowError(str(exc)) from exc
 
     expansion_freeze = _all_history_expansion_integration_freeze(repo, school_key)
+    zero_delta_context = (
+        _authenticated_zero_delta_execution_context(repo, approved)
+        if expansion_freeze is not None
+        else None
+    )
+    zero_delta_historical_before = (
+        _zero_delta_historical_state_snapshot(repo, school_key)
+        if zero_delta_context is not None
+        else None
+    )
     expansion_site_before = (
         capture_correction_site_report(repo, school_key)
         if expansion_freeze is not None
@@ -1751,22 +2261,14 @@ def execute_approved_in_place(
 
     plan_path = write_plan_for_ingest(repo, approved)
     try:
-        print("\n=== ingestion apply ===")
-        with _candidate_validator_override_for_ingestion():
-            ingestion_output = run(
-                [
-                    sys.executable,
-                    str(_runtime_tool("ingest_school.py")),
-                    school_key,
-                    "--apply",
-                    "--identity-decisions",
-                    str(plan_path),
-                    "--repo",
-                    str(repo),
-                ],
-                cwd=repo,
-                label="ingestion apply",
-            )
+        print(
+            "\n=== authenticated zero-delta ingestion audit ==="
+            if zero_delta_context is not None
+            else "\n=== ingestion apply ==="
+        )
+        ingestion_output, zero_delta_ingestion_audit = _run_approved_ingestion(
+            repo, school_key, plan_path, approved, zero_delta_context
+        )
     finally:
         plan_path.unlink(missing_ok=True)
 
@@ -1774,27 +2276,20 @@ def execute_approved_in_place(
     reconciliation = apply_reconciliation_decisions(repo, approved)
     print(json.dumps(reconciliation, sort_keys=True))
 
+    (
+        reciprocal_home_chronology,
+        resolved_target_home_chronology,
+        reciprocal_unknown_site_provenance,
+    ) = _run_inherited_baseline_site_compatibility(
+        repo,
+        school_key,
+        zero_delta_context=zero_delta_context,
+    )
     print("\n=== reciprocal-only HOME chronology ===")
-    reciprocal_home_chronology = backfill_reciprocal_only_home_chronology(
-        repo,
-        school_key,
-    )
     print(json.dumps(reciprocal_home_chronology, sort_keys=True))
-
     print("\n=== resolved target-conflict HOME chronology ===")
-    resolved_target_home_chronology = backfill_resolved_target_home_chronology(
-        repo,
-        school_key,
-    )
     print(json.dumps(resolved_target_home_chronology, sort_keys=True))
-
     print("\n=== reciprocal-only UNKNOWN site provenance ===")
-    reciprocal_unknown_site_provenance = (
-        annotate_reciprocal_only_unknown_site_provenance(
-            repo,
-            school_key,
-        )
-    )
     print(json.dumps(reciprocal_unknown_site_provenance, sort_keys=True))
 
     print("\n=== publication metadata ===")
@@ -1804,6 +2299,17 @@ def execute_approved_in_place(
     print("\n=== independently audited historical season coverage ===")
     historical_coverage = integrate_approved_coverage(repo, school_key)
     print(json.dumps(historical_coverage, sort_keys=True))
+
+    zero_delta_historical_state_proof = None
+    if zero_delta_historical_before is not None:
+        zero_delta_historical_state_proof = (
+            _assert_zero_delta_historical_state_unchanged(
+                zero_delta_historical_before,
+                _zero_delta_historical_state_snapshot(repo, school_key),
+            )
+        )
+        print("\n=== zero-delta inherited historical-state proof ===")
+        print(json.dumps(zero_delta_historical_state_proof, sort_keys=True))
 
     archive = archive_approved_plan(repo, approved)
     print(f"Archived sealed decisions: {archive.relative_to(repo)}")
@@ -1841,12 +2347,15 @@ def execute_approved_in_place(
         "pre_ingest_source_patches": pre_ingest_source_patches,
         "pre_ingest_coverage": pre_ingest_coverage,
         "ingestion_output": ingestion_output,
+        "zero_delta_ingestion_audit": zero_delta_ingestion_audit,
         "reconciliation": reconciliation,
         "reciprocal_home_chronology": reciprocal_home_chronology,
         "resolved_target_home_chronology": resolved_target_home_chronology,
         "reciprocal_unknown_site_provenance": reciprocal_unknown_site_provenance,
         "publication": publication,
         "historical_coverage": historical_coverage,
+        "zero_delta_execution_context": zero_delta_context,
+        "zero_delta_historical_state_proof": zero_delta_historical_state_proof,
         "expansion_site_nonregression": expansion_site_nonregression,
         "site_output": site_output,
         "archive": archive.relative_to(repo).as_posix(),
@@ -2485,7 +2994,14 @@ def pr_body(
             "- repository validation — PASS",
             "- target package no-op — PASS",
             site_validation_line,
-            "- accomplishment cross-check — PASS",
+            (
+                "- accomplishment cross-check — inherited baseline remains "
+                "OWNER_BASELINE_UNVERIFIED; unchanged STALE_ADMIN_DIFFERENCE accepted "
+                "by exact zero-delta compatibility proof"
+                if summary.get("expansion_transaction_kind") == ZERO_DELTA_METADATA_ONLY_KIND
+                and summary.get("inherited_stale_accomplishment_blockers_excluded") == 1
+                else "- accomplishment cross-check — PASS"
+            ),
             "- deterministic site build — PASS",
             "- unit tests — PASS",
             "- changed-file whitespace check — PASS",

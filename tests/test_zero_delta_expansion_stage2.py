@@ -99,6 +99,10 @@ class ZeroDeltaExpansionStage2Tests(unittest.TestCase):
                 "decision_id": f"DISCREPANCY-EX-{i:03d}",
                 "category": "discrepancy",
                 "source_game_id": f"EX-{i:03d}",
+                "canonical_game_id": f"CBBG-{i:07}",
+                "field_name": "team_score",
+                "source_value": "61",
+                "canonical_value": "60",
             }
             for i in range(13)
         ]
@@ -181,6 +185,9 @@ class ZeroDeltaExpansionStage2Tests(unittest.TestCase):
         self.assertEqual(plan["blockers"], [])
         self.assertEqual(plan["decisions"], [])
         self.assertEqual(plan["summary"]["inherited_unrelated_reviews_excluded"], 13)
+        self.assertEqual(
+            len(plan["summary"]["zero_delta_excluded_discrepancy_population"]), 13
+        )
         self.assertEqual(
             plan["summary"]["inherited_accomplishment_decisions_excluded"], 1
         )
