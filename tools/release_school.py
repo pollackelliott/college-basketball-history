@@ -177,6 +177,17 @@ def runtime_integration_freeze_bytes(
     correction = correction_integration_freeze_bytes(repo, school_key, manifest)
     if correction is not None:
         return correction, correction
+    if approved.get("summary", {}).get("expansion_transaction_kind") == "ZERO_DELTA_METADATA_ONLY":
+        from onboard_school import (
+            _authenticated_zero_delta_execution_context,
+            _validated_expansion_freeze_bytes,
+        )
+        if manifest.get("summary") != approved.get("summary"):
+            raise WorkflowError("zero-delta release summary differs from sealed plan")
+        freeze = _validated_expansion_freeze_bytes(repo, school_key)
+        if freeze is None or _authenticated_zero_delta_execution_context(repo, approved) is None:
+            raise WorkflowError("zero-delta release lacks authenticated Integration Freeze")
+        return None, freeze
     try:
         split = frozen_venue_split_freeze_bytes(
             repo,
