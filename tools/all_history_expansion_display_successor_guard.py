@@ -113,6 +113,25 @@ def _column_only_changes(
     return _columns_only_changes(before, after, {column})
 
 
+def _opponent_representation_changes(
+    before: bytes,
+    after: bytes,
+) -> list[tuple[dict[str, str], dict[str, str]]] | None:
+    changes = _columns_only_changes(
+        before,
+        after,
+        OPPONENT_REPRESENTATION_COLUMNS,
+    )
+    if changes is None:
+        return None
+    for old, new in changes:
+        if old.get("current_d1", "") != new.get("current_d1", "") and (
+            new.get("current_d1", "") not in {"Yes", "No"}
+        ):
+            return None
+    return changes
+
+
 def _package_preserving_first_parent(
     root: Path, commit: str, school: str,
 ) -> str | None:
@@ -393,9 +412,8 @@ def permits_authenticated_display_successor(
         ):
             return False
 
-    opponent_changes = _columns_only_changes(
+    opponent_changes = _opponent_representation_changes(
         original["opponents.csv"], current["opponents.csv"],
-        OPPONENT_REPRESENTATION_COLUMNS,
     )
     source_changes = _column_only_changes(
         original["source-games.csv"], current["source-games.csv"],
@@ -416,10 +434,6 @@ def permits_authenticated_display_successor(
         key = new.get("canonical_opponent_key", "").strip()
         if not key:
             return reject("opponent_representation_key_missing")
-
-        if old.get("current_d1", "") != new.get("current_d1", ""):
-            if new.get("current_d1", "") not in {"Yes", "No"}:
-                return reject("current_d1_value_invalid")
 
         if old.get("canonical_opponent_name", "") == new.get(
             "canonical_opponent_name", ""
