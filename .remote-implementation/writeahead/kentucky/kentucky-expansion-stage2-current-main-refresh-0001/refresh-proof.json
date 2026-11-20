@@ -1,0 +1,92 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "f382e5e22710416686df6bca44146e0e7d542cabc1f214255447915c2a3a2835",
+    "tests/test_normalize_historical_opponent_displays.py": "31a043358b09b3f7a93c9b276e981bac821ede7f80b1ec0119512fe464bf5277",
+    "tests/test_remote_implementation_stage2_census.py": "2e49494fa0040025adaa696788725ade6d0346271240c2e67d5c1ccaad53bf32",
+    "tests/test_remote_implementation_stage2_opponent_display.py": "ae8277b3c9d9d48105deab0b9ebb861b3a8acfb29da08662545b5a086615d2ac",
+    "tests/test_stage2_candidate_runtime_rehearsal.py": "aef253f95012eecb56722ab19e19537975bd4fe6e678a760c77e6ba7608cc2b0",
+    "tests/test_zero_delta_expansion_stage2.py": "5973edae53d478db19c9d5958817211e22eba0056a3ceff411b368f767600db7",
+    "tools/normalize_historical_opponent_displays.py": "7aeb728ae1f4fa966f9a628d06cfb4405e383ff721d3dff6f1271cd66547001f",
+    "tools/onboarding_plan.py": "4f01aaa35b402ac760e2288afeaec422330c0f3cb7f09af7fe61a0dadfb3780e",
+    "tools/remote_implementation_runner.py": "d763239266179a2f410831535085ee24f63ac8f2367f14ef6f9edae3d3932fd9",
+    "tools/remote_implementation_stage2_census.py": "54c2ac1a24eb079a1269a329155183e1785e0820654f130bd505200c2ad28e33",
+    "tools/remote_implementation_stage2_opponent_display.py": "3eacf8b5e4bf34241b92a0175071c0811e702a5be667488da8b00a3df992b7a8",
+    "tools/remote_implementation_verify.py": "657df02716e78526061a598d392526089c73aa95bc31eef94daec4117fbff2cf",
+    "tools/zero_delta_expansion_stage2.py": "5a735cd518073e2c9726a5aa9be416d00876c32198a2c9b1c95b1c75e1acc005"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_normalize_historical_opponent_displays.py",
+    "tests/test_remote_implementation_stage2_census.py",
+    "tests/test_remote_implementation_stage2_opponent_display.py",
+    "tests/test_stage2_candidate_runtime_rehearsal.py",
+    "tests/test_zero_delta_expansion_stage2.py",
+    "tools/normalize_historical_opponent_displays.py",
+    "tools/onboarding_plan.py",
+    "tools/remote_implementation_runner.py",
+    "tools/remote_implementation_stage2_census.py",
+    "tools/remote_implementation_stage2_opponent_display.py",
+    "tools/remote_implementation_verify.py",
+    "tools/zero_delta_expansion_stage2.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2",
+  "main_changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_normalize_historical_opponent_displays.py",
+    "tests/test_remote_implementation_stage2_census.py",
+    "tests/test_remote_implementation_stage2_opponent_display.py",
+    "tests/test_stage2_candidate_runtime_rehearsal.py",
+    "tests/test_zero_delta_expansion_stage2.py",
+    "tools/normalize_historical_opponent_displays.py",
+    "tools/onboarding_plan.py",
+    "tools/remote_implementation_runner.py",
+    "tools/remote_implementation_stage2_census.py",
+    "tools/remote_implementation_stage2_opponent_display.py",
+    "tools/remote_implementation_verify.py",
+    "tools/zero_delta_expansion_stage2.py"
+  ],
+  "merge_base_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "1e608210ff9c3223db1152affddbc5a5d351d3254505ae336678ee8d6384387e",
+    "notes.md": "91832f99dd5c881721ad3ff700c34674a77e17008b6f59f56c06c3c97b7bc86a",
+    "opponents.csv": "272c275cf53c3023dff0c7314bb7ca3eae033a65e461dae5e1246294951fe08c",
+    "source-games.csv": "64d363714d46bc0a31a0a9fbbaf5fe7efc46ac1d5f8474042005a9c7e3bed50e",
+    "source-notes.md": "e5bf193e768366316d25d196b0cb14aeb28d04d0e92be012aa58f3f2110572ee",
+    "venues.csv": "8d395ea653f68d88975da8d742d63389d8c163c0f7e330fcce3a85f08e5d9c3b"
+  },
+  "prepared_commit_sha": "927caae37d07ec26f737847d2696fcd5bea169e1",
+  "prepared_parents": [
+    "f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2",
+    "5dd2ce0ce7fba59ffe85811836c534e7356f3724"
+  ],
+  "prepared_tree_sha": "0f480b5b3cdcfdc15c04a070011ad75140de9305",
+  "preserved_target_file_sha256": {
+    "data/reference/program-top-level-scope.csv": "cf4ba7c1e72b83a017abdd522d69aa53e574d99a424fa41d3e13d189d67304b2",
+    "data/reference/programs.csv": "f8c03138071deaf917710b2f91ee4127ac6a750a4fd86ebd85303730b3b9b408",
+    "schools/kentucky/notes.md": "91832f99dd5c881721ad3ff700c34674a77e17008b6f59f56c06c3c97b7bc86a",
+    "schools/kentucky/opponents.csv": "272c275cf53c3023dff0c7314bb7ca3eae033a65e461dae5e1246294951fe08c",
+    "schools/kentucky/source-notes.md": "e5bf193e768366316d25d196b0cb14aeb28d04d0e92be012aa58f3f2110572ee",
+    "schools/kentucky/venues.csv": "8d395ea653f68d88975da8d742d63389d8c163c0f7e330fcce3a85f08e5d9c3b",
+    "site/data/programs.json": "1f2d20329b3fc045a10c8a1cfaa584b652840f17fe4228f2c776a3a35346cd3e",
+    "site/data/teams/kentucky.json": "e0a3db99dd66c59778f6271f0adeb17720828041c02ba3a75e9504cea2a7ef47"
+  },
+  "protected_main_sha": "5dd2ce0ce7fba59ffe85811836c534e7356f3724",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "target_branch": "data/kentucky-onboarding",
+  "target_changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "schools/kentucky/notes.md",
+    "schools/kentucky/opponents.csv",
+    "schools/kentucky/source-notes.md",
+    "schools/kentucky/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/kentucky.json"
+  ]
+}
