@@ -260,7 +260,7 @@ jobs:
                       if not remote_target or remote_target[0] != target_sha:
                           fail('recovered-idle target no longer equals classified unpublished target')
               elif (last.get('operation') == 'STAGE2_OPPONENT_DISPLAY_NORMALIZE'
-                    and last.get('stage2_status') == 'CAPABILITY_CENSUS_READY'
+                    and last.get('stage2_status') in ('CAPABILITY_CENSUS_READY', 'BLOCKED')
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_opponent_display_equivalence') == 'PASS'):
                   mode = 'LIVE_CENSUS_AFTER_OPPONENT_DISPLAY'
@@ -287,7 +287,7 @@ jobs:
                           or successor.get('final_transaction_state') != 'COMPLETE'
                           or successor.get('publication_cas') != 'EXISTING_REF_CAS_PASS'
                           or (successor.get('post_repair_stage2') or {}).get('stage2_status')
-                              != 'CAPABILITY_CENSUS_READY'):
+                              != last.get('stage2_status')):
                       fail('opponent-display successor does not bind exact verified last operation')
               elif (last.get('operation') == 'STAGE2_CENSUS'
                     and last.get('stage2_status') == 'BLOCKED'
