@@ -1,0 +1,44 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [],
+      "authority_signature": "",
+      "canonical_opponent_key": "east-texas-a-m",
+      "change_fields": [
+        "current_d1"
+      ],
+      "current_d1_from_values": [
+        ""
+      ],
+      "current_d1_to": "Yes",
+      "from_names": [],
+      "target_row_count": 1,
+      "to_name": ""
+    },
+    {
+      "authority_names": [],
+      "authority_signature": "",
+      "canonical_opponent_key": "william-mary",
+      "change_fields": [
+        "current_d1"
+      ],
+      "current_d1_from_values": [
+        ""
+      ],
+      "current_d1_to": "Yes",
+      "from_names": [],
+      "target_row_count": 1,
+      "to_name": ""
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "source_game_display_change_keys": 0,
+  "source_game_display_change_rows": 0,
+  "source_game_display_changes": [],
+  "status": "PASS"
+}

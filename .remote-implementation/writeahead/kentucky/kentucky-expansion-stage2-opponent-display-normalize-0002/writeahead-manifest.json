@@ -1,0 +1,65 @@
+{
+  "allowed_paths": [
+    "schools/kentucky/opponents.csv",
+    "schools/kentucky/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/kentucky/opponents.csv": "272c275cf53c3023dff0c7314bb7ca3eae033a65e461dae5e1246294951fe08c"
+  },
+  "changed_paths": [
+    "schools/kentucky/opponents.csv"
+  ],
+  "commit_message": "Normalize kentucky historical opponent display representation",
+  "expected_blocker_keys": [
+    "east-texas-a-m",
+    "william-mary"
+  ],
+  "expected_target_predecessor_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+  "field_level_proof_sha256": "feca93730be7008d2098287baadf9558d6135f3bc42df29cc9c4994ce60aca71",
+  "global_lock_commit": "e3156fede1792fd0369ac95b351558e7f9a8b7f5",
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "692d5558ea3a153d6f520ce30634273e472f346e15a4a3c7575ba229528b5b8a",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2",
+  "prepared_parent_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+  "prepared_tree_sha": "30370be9a190dab02831c280143f59a5366f365f",
+  "protected_main_sha": "7137ede6bf4a7725a4e2cfe766ac5f024ab8bb45",
+  "repository_validation": "PASS",
+  "request_id": "kentucky-expansion-stage2-opponent-display-normalize-0002",
+  "request_sha256": "a211d58234554a9ea17043fd1eb2972d215538391661b8881a095361e1ca9a9d",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_drift_after": {
+    "baseline_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+    "integration_base_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+    "school_key": "kentucky",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+    "integration_base_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+    "school_key": "kentucky",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "bef9a48b56f92441673b327f3636bbfba13744874cf65dcc406d041beb1634b2",
+    "field-level-proof.json": "feca93730be7008d2098287baadf9558d6135f3bc42df29cc9c4994ce60aca71",
+    "integration-freeze.json": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+    "normalization-report.json": "692d5558ea3a153d6f520ce30634273e472f346e15a4a3c7575ba229528b5b8a",
+    "semantic-drift-proof.json": "6c9798673fc6a6b4d6ce033897a8804c792f822f0622f3a817d0b4e9e9a25483"
+  },
+  "source_game_normalized_name_row_count": 0,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "bef9a48b56f92441673b327f3636bbfba13744874cf65dcc406d041beb1634b2",
+  "sync_current_d1": true,
+  "target_branch": "data/kentucky-onboarding"
+}

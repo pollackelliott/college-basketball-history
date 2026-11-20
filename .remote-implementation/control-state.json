@@ -728,15 +728,15 @@
   "active_lock_commit": "e3156fede1792fd0369ac95b351558e7f9a8b7f5",
   "active_lock_owner": "github-actions:44678230963:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2",
+  "active_prepared_tree_sha": "30370be9a190dab02831c280143f59a5366f365f",
   "active_request_id": "kentucky-expansion-stage2-opponent-display-normalize-0002",
   "active_request_sha256": "a211d58234554a9ea17043fd1eb2972d215538391661b8881a095361e1ca9a9d",
   "active_school_key": "kentucky",
   "active_target_branch": "data/kentucky-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/kentucky/kentucky-expansion-stage2-opponent-display-normalize-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "1a849bf6f5ce1c0cec277ba61b35507426e08729a7a2288081340540311113e5",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1452,5 +1452,5 @@
   "lock_acquisition_request_commit": "edc339d97d97871b690732b56e748ce7622a0e6b",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
