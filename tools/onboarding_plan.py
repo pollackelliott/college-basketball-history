@@ -90,6 +90,11 @@ from site_completeness import (
     researched_unresolved_home_venue,
 )
 from venue_reference import load_global_venue_reference, normalized_venue_name
+from zero_delta_expansion_stage2 import (
+    ZeroDeltaExpansionError,
+    apply_zero_delta_projection,
+    authenticate_zero_delta_expansion,
+)
 from remediate_source_scoped_opponent_identity import canonical_view as correction_canonical_view
 
 
@@ -4959,6 +4964,25 @@ def build_plan(
         summary["discrepancies_to_add"] = 0
         summary["new_canonical_games"] = 0
         summary["assertions_to_add"] = 0
+
+    try:
+        zero_delta_expansion = authenticate_zero_delta_expansion(repo, school_key)
+    except ZeroDeltaExpansionError as exc:
+        raise WorkflowError(str(exc)) from exc
+    if zero_delta_expansion is not None:
+        provisional_plan = {
+            "summary": summary,
+            "blockers": blockers,
+            "decisions": decisions,
+            "identity_collision_groups": identity_collision_groups,
+            "identity_cardinality_constraints": identity_cardinality_constraints,
+        }
+        try:
+            apply_zero_delta_projection(provisional_plan, zero_delta_expansion)
+        except ZeroDeltaExpansionError as exc:
+            raise WorkflowError(str(exc)) from exc
+        blockers = provisional_plan["blockers"]
+        decisions = provisional_plan["decisions"]
 
 
     result = {
