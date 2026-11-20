@@ -1893,6 +1893,8 @@ def verify_stage2_opponent_display_normalization(
     manifest = json.loads(writeahead_bytes)
     if manifest.get("operation") != OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
         raise Stop("OPPONENT_DISPLAY_FRESH_WRITEAHEAD_OPERATION_MISMATCH")
+    if bool(manifest.get("sync_current_d1")) != bool(authority["sync_current_d1"]):
+        raise Stop("OPPONENT_DISPLAY_FRESH_CURRENT_D1_MODE_MISMATCH")
     if manifest.get("expected_target_predecessor_sha") != predecessor:
         raise Stop("OPPONENT_DISPLAY_FRESH_PREDECESSOR_MISMATCH")
     if manifest.get("prepared_commit_sha") != prepared:
@@ -1946,6 +1948,7 @@ def verify_stage2_opponent_display_normalization(
         predecessor_sha=predecessor,
         prepared_sha=prepared,
         expected_blocker_keys=manifest["expected_blocker_keys"],
+        sync_current_d1=bool(manifest.get("sync_current_d1")),
     )
     stored_field_proof = json.loads(
         (bundle / "field-level-proof.json").read_bytes()
@@ -1978,6 +1981,7 @@ def verify_stage2_opponent_display_normalization(
         freeze_bytes,
         manifest["expected_blocker_keys"],
         DIAG / "opponent-display-dry-run",
+        sync_current_d1=bool(manifest.get("sync_current_d1")),
     )
     if dry["report_sha256"] != manifest["normalization_report_sha256"]:
         raise Stop("OPPONENT_DISPLAY_FRESH_NORMALIZATION_REPORT_MISMATCH")

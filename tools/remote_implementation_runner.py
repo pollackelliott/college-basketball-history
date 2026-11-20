@@ -2556,6 +2556,7 @@ def run_stage2_opponent_display_normalize(
         authority["freeze_bytes"],
         authority["blocker_keys"],
         DIAG / "opponent-display",
+        sync_current_d1=authority["sync_current_d1"],
     )
     prepared = apply_and_prepare_repair(
         worktree,
@@ -2565,6 +2566,7 @@ def run_stage2_opponent_display_normalize(
         dry_run,
         authority["blocker_keys"],
         DIAG / "opponent-display",
+        sync_current_d1=authority["sync_current_d1"],
     )
     assert_protected_main_unchanged(live_main)
     if remote_head(ROOT, target_branch) != target_sha:
@@ -2649,6 +2651,7 @@ def run_stage2_opponent_display_normalize(
             "stage2_census_checkpoint"
         ]["sha256"],
         "expected_blocker_keys": authority["blocker_keys"],
+        "sync_current_d1": authority["sync_current_d1"],
         "normalization_report_sha256": sidecars[
             "normalization-report.json"
         ],
@@ -4272,6 +4275,7 @@ def run_recovery(
                 predecessor_sha=manifest["expected_target_predecessor_sha"],
                 prepared_sha=prepared,
                 expected_blocker_keys=manifest["expected_blocker_keys"],
+                sync_current_d1=bool(manifest.get("sync_current_d1")),
             )
             stored_proof = json.loads(
                 git_show_bytes(

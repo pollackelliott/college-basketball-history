@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Narrow remote Stage 2 historical opponent-display normalization orchestration.
+"""Narrow remote Stage 2 opponent-representation normalization orchestration.
 
-This module never chooses opponent identities or display authority. It invokes the
-existing permanent normalize_historical_opponent_displays.py helper, proves the
-result is representation-only, and authenticates the exact Stage 2 census and
-Integration Freeze authority that bounded the repair.
+This module never chooses opponent identities. It invokes the existing permanent
+normalize_historical_opponent_displays.py helper, proves the result is limited to
+census-bound representation fields (historical display names and/or current_d1
+registry flags), and authenticates the exact Stage 2 census and Integration Freeze
+authority that bounded the repair.
 """
 from __future__ import annotations
 
@@ -38,6 +39,20 @@ from remote_implementation_stage2_census import (
 DISPLAY_BLOCKER_RE = re.compile(
     r"^historical opponent display conflict: ([a-z0-9][a-z0-9-]*):"
 )
+CURRENT_D1_BLOCKER_RES = (
+    re.compile(
+        r"^opponents\.csv line \d+: current-D1 opponent key '([a-z0-9][a-z0-9-]*)' "
+        r"is absent from programs\.csv$"
+    ),
+    re.compile(
+        r"^opponents\.csv line \d+: opponent key '([a-z0-9][a-z0-9-]*)' "
+        r"is marked current D1 in the school package but is not current D1 in programs\.csv$"
+    ),
+    re.compile(
+        r"^opponents\.csv line \d+: opponent key '([a-z0-9][a-z0-9-]*)' "
+        r"is current D1 in programs\.csv but the school package does not mark it current D1$"
+    ),
+)
 ALLOWED_REPAIR_PATH_NAMES = ("opponents.csv", "source-games.csv")
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
 
@@ -54,19 +69,37 @@ def _csv_from_bytes(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
     return list(reader.fieldnames or []), list(reader)
 
 
-def _display_blocker_keys(blockers: list[Any]) -> list[str]:
-    keys: list[str] = []
+def _representation_blocker_population(blockers: list[Any]) -> dict[str, list[str]]:
+    display_keys: list[str] = []
+    current_d1_keys: list[str] = []
     for blocker in blockers:
-        match = DISPLAY_BLOCKER_RE.match(str(blocker))
-        if not match:
-            raise Stop(
-                "STAGE2_OPPONENT_DISPLAY_CENSUS_HAS_OTHER_BLOCKER:"
-                + str(blocker)
-            )
-        keys.append(match.group(1))
-    if len(keys) != len(set(keys)):
-        raise Stop("STAGE2_OPPONENT_DISPLAY_DUPLICATE_BLOCKER_KEY")
-    return sorted(keys)
+        text = str(blocker)
+        match = DISPLAY_BLOCKER_RE.match(text)
+        if match:
+            display_keys.append(match.group(1))
+            continue
+        d1_match = None
+        for pattern in CURRENT_D1_BLOCKER_RES:
+            d1_match = pattern.match(text)
+            if d1_match:
+                break
+        if d1_match:
+            current_d1_keys.append(d1_match.group(1))
+            continue
+        raise Stop(
+            "STAGE2_OPPONENT_DISPLAY_CENSUS_HAS_OTHER_BLOCKER:" + text
+        )
+
+    if len(display_keys) != len(set(display_keys)):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_DUPLICATE_DISPLAY_BLOCKER_KEY")
+    if len(current_d1_keys) != len(set(current_d1_keys)):
+        raise Stop("STAGE2_OPPONENT_DISPLAY_DUPLICATE_CURRENT_D1_BLOCKER_KEY")
+
+    return {
+        "blocker_keys": sorted(set(display_keys) | set(current_d1_keys)),
+        "display_blocker_keys": sorted(display_keys),
+        "current_d1_blocker_keys": sorted(current_d1_keys),
+    }
 
 
 def verify_census_and_freeze_authority(
@@ -125,8 +158,9 @@ def verify_census_and_freeze_authority(
         raise Stop("STAGE2_OPPONENT_DISPLAY_STATUS_HASH_MISMATCH")
     status = json.loads(status_bytes)
     blockers = list(status.get("blockers") or [])
-    blocker_keys = _display_blocker_keys(blockers)
-    if len(blocker_keys) != int(preflight.get("blocker_count", -1)):
+    population = _representation_blocker_population(blockers)
+    blocker_keys = population["blocker_keys"]
+    if len(blockers) != int(preflight.get("blocker_count", -1)):
         raise Stop("STAGE2_OPPONENT_DISPLAY_BLOCKER_COUNT_MISMATCH")
     if not blocker_keys:
         raise Stop("STAGE2_OPPONENT_DISPLAY_EMPTY_BLOCKER_POPULATION")
@@ -213,6 +247,9 @@ def verify_census_and_freeze_authority(
         "status": status,
         "status_bytes": status_bytes,
         "blocker_keys": blocker_keys,
+        "display_blocker_keys": population["display_blocker_keys"],
+        "current_d1_blocker_keys": population["current_d1_blocker_keys"],
+        "sync_current_d1": bool(population["current_d1_blocker_keys"]),
         "phase0_successor": phase0,
         "phase0_successor_bytes": phase0_bytes,
         "phase0_writeahead": writeahead,
@@ -238,6 +275,7 @@ def run_normalizer_dry_run(
     diag: Path,
     *,
     tool_repo: Path | None = None,
+    sync_current_d1: bool = False,
 ) -> dict[str, Any]:
     restore_integration_freeze(repo, school_key, freeze_bytes)
     drift = _require_semantic_pass(repo, school_key, "before")
@@ -261,9 +299,10 @@ def run_normalizer_dry_run(
         str(repo),
         "--sync-source-games",
         "--limit-source-games-to-opponent-changes",
-        "--json-output",
-        str(report_path),
     ]
+    if sync_current_d1:
+        cmd.append("--sync-current-d1")
+    cmd.extend(["--json-output", str(report_path)])
     cp = run(cmd, cwd=runtime_repo, check=False)
     (diag / "opponent-display-normalization-dry-run.log").write_text(
         cp.stdout,
@@ -304,6 +343,9 @@ def run_normalizer_dry_run(
             school_key,
             "--sync-source-games",
             "--limit-source-games-to-opponent-changes",
+        ]
+        + (["--sync-current-d1"] if sync_current_d1 else [])
+        + [
             "--json-output",
             "<DIAG>/opponent-display-normalization-dry-run.json",
         ],
@@ -324,6 +366,7 @@ def field_level_mutation_proof(
     before_source_games: bytes,
     after_source_games: bytes,
     expected_blocker_keys: list[str],
+    allow_current_d1: bool = False,
 ) -> dict[str, Any]:
     opp_fields_before, opp_before = _csv_from_bytes(before_opponents)
     opp_fields_after, opp_after = _csv_from_bytes(after_opponents)
@@ -333,14 +376,23 @@ def field_level_mutation_proof(
         raise Stop("OPPONENT_DISPLAY_OPPONENT_KEY_COLUMN_MISSING")
     opponent_changed_rows = 0
     opponent_changed_keys: set[str] = set()
+    current_d1_changed_keys: set[str] = set()
     for index, (before, after) in enumerate(zip(opp_before, opp_after), start=2):
         for field in opp_fields_before:
             if before.get(field, "") == after.get(field, ""):
                 continue
-            if field != "canonical_opponent_name":
+            allowed_fields = {"canonical_opponent_name"}
+            if allow_current_d1:
+                allowed_fields.add("current_d1")
+            if field not in allowed_fields:
                 raise Stop(
                     "OPPONENT_DISPLAY_OPPONENT_FIELD_CHANGED line=%s field=%s"
                     % (index, field)
+                )
+            if field == "current_d1" and after.get(field, "") not in {"Yes", "No"}:
+                raise Stop(
+                    "OPPONENT_DISPLAY_CURRENT_D1_VALUE_INVALID line=%s value=%r"
+                    % (index, after.get(field, ""))
                 )
         if before != after:
             if (
@@ -349,9 +401,10 @@ def field_level_mutation_proof(
             ):
                 raise Stop("OPPONENT_DISPLAY_OPPONENT_KEY_CHANGED")
             opponent_changed_rows += 1
-            opponent_changed_keys.add(
-                before.get("canonical_opponent_key", "").strip()
-            )
+            changed_key = before.get("canonical_opponent_key", "").strip()
+            opponent_changed_keys.add(changed_key)
+            if before.get("current_d1", "") != after.get("current_d1", ""):
+                current_d1_changed_keys.add(changed_key)
 
     src_fields_before, src_before = _csv_from_bytes(before_source_games)
     src_fields_after, src_after = _csv_from_bytes(after_source_games)
@@ -391,6 +444,12 @@ def field_level_mutation_proof(
             "expected=%s actual=%s"
             % (expected, sorted(opponent_changed_keys))
         )
+    unexpected_current_d1_keys = sorted(current_d1_changed_keys - set(expected))
+    if unexpected_current_d1_keys:
+        raise Stop(
+            "OPPONENT_DISPLAY_CURRENT_D1_KEY_OUTSIDE_CENSUS:"
+            + ",".join(unexpected_current_d1_keys)
+        )
     unexpected_source_keys = sorted(source_changed_keys - set(expected))
     if unexpected_source_keys:
         raise Stop(
@@ -406,6 +465,8 @@ def field_level_mutation_proof(
         ],
         "opponent_changed_row_count": opponent_changed_rows,
         "opponent_changed_keys": sorted(opponent_changed_keys),
+        "opponent_current_d1_changed_keys": sorted(current_d1_changed_keys),
+        "opponent_current_d1_changed_key_count": len(current_d1_changed_keys),
         "source_game_normalized_name_row_count": source_changed_rows,
         "source_game_changed_keys": sorted(source_changed_keys),
         "source_game_changed_ids": source_changed_ids,
@@ -425,6 +486,7 @@ def apply_and_prepare_repair(
     diag: Path,
     *,
     tool_repo: Path | None = None,
+    sync_current_d1: bool = False,
 ) -> dict[str, Any]:
     before_state = tracked_worktree_state(repo)
     if before_state["head_sha"] != predecessor_sha or before_state["status"]:
@@ -452,8 +514,10 @@ def apply_and_prepare_repair(
         str(repo),
         "--sync-source-games",
         "--limit-source-games-to-opponent-changes",
-        "--apply",
     ]
+    if sync_current_d1:
+        cmd.append("--sync-current-d1")
+    cmd.append("--apply")
     cp = run(cmd, cwd=runtime_repo, check=False)
     diag.mkdir(parents=True, exist_ok=True)
     (diag / "opponent-display-normalization-apply.log").write_text(
@@ -498,6 +562,7 @@ def apply_and_prepare_repair(
         before_source_games=before_source_games,
         after_source_games=after_source_games,
         expected_blocker_keys=expected_blocker_keys,
+        allow_current_d1=sync_current_d1,
     )
     report = dry_run["report"]
     if proof["opponent_changed_row_count"] != int(report.get("change_row_count", -1)):
@@ -541,8 +606,9 @@ def apply_and_prepare_repair(
             school_key,
             "--sync-source-games",
             "--limit-source-games-to-opponent-changes",
-            "--apply",
-        ],
+        ]
+        + (["--sync-current-d1"] if sync_current_d1 else [])
+        + ["--apply"],
         "prepared_commit_sha": prepared,
         "prepared_tree_sha": tree,
         "prepared_parent_sha": parent,
@@ -561,6 +627,7 @@ def verify_prepared_commit_field_boundary(
     predecessor_sha: str,
     prepared_sha: str,
     expected_blocker_keys: list[str],
+    sync_current_d1: bool = False,
 ) -> dict[str, Any]:
     return field_level_mutation_proof(
         school_key=school_key,
@@ -585,6 +652,7 @@ def verify_prepared_commit_field_boundary(
             cwd=repo,
         ),
         expected_blocker_keys=expected_blocker_keys,
+        allow_current_d1=sync_current_d1,
     )
 
 
