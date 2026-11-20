@@ -1435,11 +1435,11 @@
   "current_sequence": 691,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "5dd2ce0ce7fba59ffe85811836c534e7356f3724",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "kentucky-expansion-stage2-current-main-refresh-0001",
     "school_key": "kentucky",
     "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
