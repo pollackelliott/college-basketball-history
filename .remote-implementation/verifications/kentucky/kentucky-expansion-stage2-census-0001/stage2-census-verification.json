@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "07311e595e25f98f1d2e1bc9ddd6111126d407614f0cbad163d08d40dc3320d0",
+    "plan.json": "e62256d4a60a2143c965a722ec4a8a70f1e5338688603507b046fbb5343d5bc5",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "03ebd8e3f661c7efa4e1242906d3227554832c72cce14006ea0c7ff5a6a6b1f8"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "35092acfd4582ff3cc95c27e1bee43dd419b66c6f5ecab53c6fea1fe48553b8a",
+    "plan.json": "bba2e11a4277f8b7f9924177b073c2903272e88204ccf68622723b2efd3c6469",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "f23f4f1fc7d2c6e50474a77580f5b15f563f685a7ed50ce659aa518bf8fb0519"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "kentucky-expansion-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+  "target_tree_sha": "d2085984ff44f1e69be75450dbe1f3028740616d",
+  "tracked_stage2_mutation": "NONE"
+}
