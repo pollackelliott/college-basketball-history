@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Normalize one staged school's historical opponent display names to project authority.
+"""Normalize one staged school's opponent representation to project authority.
 
 This is a representation-only Stage-2 helper. It never changes opponent keys,
-literal source labels, raw evidence, or historical game fields. Its opt-in
---sync-source-games mode also aligns normalized_opponent_name only. Existing
-integrated school packages provide the display-name authority for historical/non-registry keys.
+literal source labels, raw evidence, or historical game fields. By default it
+normalizes historical display names. Its opt-in --sync-current-d1 mode aligns
+only opponents.csv current_d1 flags to the authoritative programs.csv registry,
+and --sync-source-games aligns normalized_opponent_name only.
 
 Dry run:
     python tools/normalize_historical_opponent_displays.py <school_key>
@@ -12,9 +13,9 @@ Dry run:
 Apply:
     python tools/normalize_historical_opponent_displays.py <school_key> --apply
 
-Opt-in source-game display synchronization:
+Opt-in representation synchronization:
+    python tools/normalize_historical_opponent_displays.py <school_key> --sync-current-d1
     python tools/normalize_historical_opponent_displays.py <school_key> --sync-source-games
-    python tools/normalize_historical_opponent_displays.py <school_key> --sync-source-games --apply
 """
 
 from __future__ import annotations
@@ -62,12 +63,20 @@ def git(repo: Path, *args: str) -> str:
     ).strip()
 
 
-def project_program_keys(repo: Path) -> set[str]:
+def _truthy_flag(value: str) -> bool:
+    return (value or "").strip().lower() in {"true", "yes", "1", "y"}
+
+
+def project_program_registry(repo: Path) -> dict[str, dict[str, str]]:
     return {
-        row.get("program_key", "").strip()
+        row.get("program_key", "").strip(): row
         for row in build_site_data.read_csv(repo / "data/reference/programs.csv")
         if row.get("program_key", "").strip()
     }
+
+
+def project_program_keys(repo: Path) -> set[str]:
+    return set(project_program_registry(repo))
 
 
 def authority_names_by_key(
@@ -89,20 +98,33 @@ def authority_names_by_key(
     return dict(names)
 
 
-def build_normalization_plan(repo: Path, school_key: str) -> dict[str, Any]:
+def build_normalization_plan(
+    repo: Path,
+    school_key: str,
+    *,
+    sync_current_d1: bool = False,
+) -> dict[str, Any]:
     path = repo / "schools" / school_key / "opponents.csv"
     if not path.is_file():
         raise FileNotFoundError(path)
 
     fields, rows, encoding, line_ending = read_csv_preserving(path)
     required = {"canonical_opponent_key", "canonical_opponent_name"}
+    if sync_current_d1:
+        required.add("current_d1")
     missing = sorted(required - set(fields))
     if missing:
         raise ValueError(
             "opponents.csv missing required column(s): " + ", ".join(missing)
         )
 
-    program_keys = project_program_keys(repo)
+    program_registry = project_program_registry(repo)
+    program_keys = set(program_registry)
+    current_d1_keys = {
+        key
+        for key, row in program_registry.items()
+        if _truthy_flag(row.get("current_d1", ""))
+    }
     authority = authority_names_by_key(
         repo,
         school_key,
@@ -160,7 +182,41 @@ def build_normalization_plan(repo: Path, school_key: str) -> dict[str, Any]:
                 "authority_names": sorted(authority_names),
                 "authority_signature": authority_signature,
                 "target_row_count": target_counts[key],
+                "change_fields": ["canonical_opponent_name"],
             }
+
+    if sync_current_d1:
+        d1_from_by_key: dict[str, set[str]] = defaultdict(set)
+        d1_to_by_key: dict[str, str] = {}
+        for row in rows:
+            key = row.get("canonical_opponent_key", "").strip()
+            if not key:
+                continue
+            stored_current = _truthy_flag(row.get("current_d1", ""))
+            target_current = key in current_d1_keys
+            if stored_current == target_current:
+                continue
+            d1_from_by_key[key].add(row.get("current_d1", ""))
+            d1_to_by_key[key] = "Yes" if target_current else "No"
+
+        for key in sorted(d1_to_by_key):
+            item = changes_by_key.setdefault(
+                key,
+                {
+                    "canonical_opponent_key": key,
+                    "from_names": [],
+                    "to_name": "",
+                    "authority_names": [],
+                    "authority_signature": "",
+                    "target_row_count": target_counts.get(key, 0),
+                    "change_fields": [],
+                },
+            )
+            item["change_fields"] = sorted(
+                set(item.get("change_fields", [])) | {"current_d1"}
+            )
+            item["current_d1_from_values"] = sorted(d1_from_by_key[key])
+            item["current_d1_to"] = d1_to_by_key[key]
 
     changed_rows = 0
     output_rows = []
@@ -168,11 +224,22 @@ def build_normalization_plan(repo: Path, school_key: str) -> dict[str, Any]:
         updated = dict(row)
         key = row.get("canonical_opponent_key", "").strip()
         item = changes_by_key.get(key)
-        if item:
+        row_changed = False
+        if item and "canonical_opponent_name" in item.get("change_fields", []):
             current = row.get("canonical_opponent_name", "").strip()
-            if build_site_data.normalized_name_signature(current) != item["authority_signature"]:
+            if (
+                build_site_data.normalized_name_signature(current)
+                != item["authority_signature"]
+            ):
                 updated["canonical_opponent_name"] = item["to_name"]
-                changed_rows += 1
+                row_changed = True
+        if item and "current_d1" in item.get("change_fields", []):
+            target_current = item["current_d1_to"]
+            if _truthy_flag(row.get("current_d1", "")) != (target_current == "Yes"):
+                updated["current_d1"] = target_current
+                row_changed = True
+        if row_changed:
+            changed_rows += 1
         output_rows.append(updated)
 
     return {
@@ -301,6 +368,11 @@ def main() -> int:
     parser.add_argument("--sync-source-games", action="store_true",
                         help="Also align only source-games.csv normalized_opponent_name")
     parser.add_argument(
+        "--sync-current-d1",
+        action="store_true",
+        help="Also align opponents.csv current_d1 to programs.csv registry authority",
+    )
+    parser.add_argument(
         "--limit-source-games-to-opponent-changes",
         action="store_true",
         help="Limit source-game display sync to opponent keys changed by the plan",
@@ -328,7 +400,11 @@ def main() -> int:
         return 1
 
     try:
-        plan = build_normalization_plan(repo, args.school_key)
+        plan = build_normalization_plan(
+            repo,
+            args.school_key,
+            sync_current_d1=args.sync_current_d1,
+        )
     except (FileNotFoundError, ValueError) as exc:
         print(f"FAIL: {exc}")
         return 1
@@ -379,7 +455,7 @@ def main() -> int:
     if not plan["change_row_count"] and not (
         source_plan and source_plan["change_row_count"]
     ):
-        print("NO-OP: requested display representation already matches project authority.")
+        print("NO-OP: requested opponent representation already matches project authority.")
         return 0
 
     if not args.apply:
@@ -397,7 +473,7 @@ def main() -> int:
             source_plan["path"], source_plan["fields"], source_plan["rows"],
             source_plan["encoding"], source_plan["line_ending"],
         )
-    print("PASS: display representation normalized; opponent keys and frozen evidence unchanged.")
+    print("PASS: opponent representation normalized; opponent keys and frozen evidence unchanged.")
     return 0
 
 

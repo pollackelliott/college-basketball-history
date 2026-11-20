@@ -309,6 +309,72 @@ class HistoricalOpponentDisplayNormalizerTests(unittest.TestCase):
                 normalizer.build_source_display_plan(repo, "alpha", opponent_plan)
 
 
+    def test_sync_current_d1_uses_program_registry_without_touching_other_fields(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            write_csv(
+                repo / "data/reference/programs.csv",
+                ["program_key", "current_d1"],
+                [
+                    {"program_key": "east-texas-a-m", "current_d1": "Yes"},
+                    {"program_key": "former-d1", "current_d1": "No"},
+                ],
+            )
+            fields = [
+                "source_opponent_label",
+                "canonical_opponent_key",
+                "canonical_opponent_name",
+                "current_d1",
+                "audit_note",
+            ]
+            write_csv(
+                repo / "schools" / "alpha" / "opponents.csv",
+                fields,
+                [
+                    {
+                        "source_opponent_label": "Texas A&M-Commerce",
+                        "canonical_opponent_key": "east-texas-a-m",
+                        "canonical_opponent_name": "East Texas A&M",
+                        "current_d1": "",
+                        "audit_note": "preserve",
+                    },
+                    {
+                        "source_opponent_label": "Former D1",
+                        "canonical_opponent_key": "former-d1",
+                        "canonical_opponent_name": "Former D1",
+                        "current_d1": "Yes",
+                        "audit_note": "preserve too",
+                    },
+                    {
+                        "source_opponent_label": "Historical",
+                        "canonical_opponent_key": "historical",
+                        "canonical_opponent_name": "Historical",
+                        "current_d1": "",
+                        "audit_note": "unchanged",
+                    },
+                ],
+            )
+
+            plan = normalizer.build_normalization_plan(
+                repo,
+                "alpha",
+                sync_current_d1=True,
+            )
+
+            self.assertEqual(plan["status"], "PASS")
+            self.assertEqual(
+                [item["canonical_opponent_key"] for item in plan["changes"]],
+                ["east-texas-a-m", "former-d1"],
+            )
+            self.assertEqual(plan["change_key_count"], 2)
+            self.assertEqual(plan["change_row_count"], 2)
+            self.assertEqual(plan["rows"][0]["current_d1"], "Yes")
+            self.assertEqual(plan["rows"][1]["current_d1"], "No")
+            self.assertEqual(plan["rows"][2]["current_d1"], "")
+            self.assertEqual(plan["rows"][0]["audit_note"], "preserve")
+            self.assertEqual(plan["rows"][1]["audit_note"], "preserve too")
+            self.assertEqual(plan["rows"][2]["audit_note"], "unchanged")
+
 
 if __name__ == "__main__":
     unittest.main()
