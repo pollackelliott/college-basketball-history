@@ -1,24 +1,20 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "kentucky-expansion-stage2-census-0001",
+  "request_id": "kentucky-expansion-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "school_key": "kentucky",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "4011a4dfab43d905f725162cd4a8644a05c2ebb4",
-  "previous_control_state_sha256": "517b925db2a5d32a545f2199874c7e4be6a2fb9bc44eceb5c7c75239ed51172b",
+  "previous_control_state_commit": "66e263a18d61fc74120df961871ba773dfcde8d3",
+  "previous_control_state_sha256": "edf43277c5a14db24d3bfe7b3148ba649d0559a86eeb2665e2f3a54715edc473",
   "expected_protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
   "target_branch": "data/kentucky-onboarding",
   "target_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "bef9a48b56f92441673b327f3636bbfba13744874cf65dcc406d041beb1634b2"
+  },
   "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
   "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-phase0-0003/successor-manifest.json",
-    "sha256": "82bc96fca234234663022bf2585e6517071b650eadcd9ed5fcd80ae50438cc62"
-  },
-  "creation_provenance": {
-    "origin": "Kentucky ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census",
-    "authorization": "Owner said Proceed after independently fresh-verified EXPANSION_PHASE0 kentucky-expansion-phase0-0003 reached PASS on exact protected main f6d78412932689da0f4b6e89dfd42c557b92a445 and exact Kentucky onboarding successor 60e45fdde9dc7a5d592fd31e16e37144222b2df8. This request performs only permanent read-only STAGE2_CENSUS against that unchanged fresh-verified Phase 0 successor. It carries no tracked repair, current-main refresh, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority."
-  },
   "authority": {
     "expansion_phase0": false,
     "owner_gate_1": false,
@@ -32,15 +28,19 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Kentucky ALL_HISTORY_EXPANSION serialized Implementation lane — Stage 2 deterministic opponent representation normalization",
+    "authorization": "Existing owner-authorized Kentucky Stage 2 phase persists. Fresh-verified census kentucky-expansion-stage2-census-0001 is BLOCKED solely by exactly two same-topology opponent representation mismatches: east-texas-a-m and william-mary are current D1 in protected-main programs.csv while Kentucky opponents.csv does not mark them current D1. The census has zero warnings, zero owner decisions, semantic drift PASS, zero reconciliation decisions, and no other blocker topology. This authorizes exactly one coherent census-bound permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key population, under permanent field-level and semantic guards. No historical reinterpretation, unrelated opponent cleanup, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, or protected-main mutation authority."
   }
 }
