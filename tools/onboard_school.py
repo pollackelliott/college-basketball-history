@@ -1810,6 +1810,131 @@ def _assert_zero_delta_historical_state_unchanged(
     }
 
 
+
+def _assert_zero_delta_ingestion_dry_run(
+    output: str,
+    approved: dict[str, Any],
+    context: dict[str, Any],
+) -> dict[str, Any]:
+    """Prove ingestion has only the inherited reviews excluded by Stage 2."""
+
+    summary = approved.get("summary")
+    if (
+        not isinstance(summary, dict)
+        or summary.get("expansion_transaction_kind") != ZERO_DELTA_METADATA_ONLY_KIND
+        or context.get("kind") != ZERO_DELTA_METADATA_ONLY_KIND
+        or approved.get("decisions")
+        or int(summary.get("discrepancies_to_add", -1)) != 0
+    ):
+        raise WorkflowError("zero-delta ingestion audit lacks projected no-work authority")
+
+    if (
+        "DRY RUN COMPLETE: no files changed." not in output
+        or not re.search(r"(?m)^Mode:\s+DRY RUN\s*$", output)
+    ):
+        raise WorkflowError("zero-delta ingestion audit did not complete a dry run")
+
+    def count(label: str) -> int:
+        matches = re.findall(
+            rf"(?m)^{re.escape(label)}:\s*([0-9][0-9,]*)\s*$",
+            output,
+        )
+        if len(matches) != 1:
+            raise WorkflowError(
+                "zero-delta ingestion audit has missing/ambiguous count: " + label
+            )
+        return int(matches[0].replace(",", ""))
+
+    expected = {
+        "Source rows": int(summary.get("source_rows", -1)),
+        "Publication-eligible source rows": int(
+            summary.get("in_scope_source_rows", -1)
+        ),
+        "Existing-game matches": int(context["inherited_source_game_count"]),
+        "New canonical games": 0,
+        "Identity review required": 0,
+        "Assertions to add": 0,
+        "Discrepancies to add": int(
+            summary.get("inherited_unrelated_reviews_excluded", -1)
+        ),
+    }
+    if (
+        any(value < 0 for value in expected.values())
+        or int(summary.get("existing_game_matches", -1))
+        != expected["Existing-game matches"]
+    ):
+        raise WorkflowError("zero-delta ingestion audit has inconsistent plan counts")
+
+    actual = {label: count(label) for label in expected}
+    if actual != expected:
+        raise WorkflowError(
+            "zero-delta ingestion audit detected unapproved work: "
+            + json.dumps({"expected": expected, "actual": actual}, sort_keys=True)
+        )
+
+    enrichment = re.findall(
+        r"(?m)^Canonical enrichments:\s*([0-9][0-9,]*) games / "
+        r"([0-9][0-9,]*) fields\s*$",
+        output,
+    )
+    if len(enrichment) != 1 or any(
+        int(value.replace(",", "")) != 0 for value in enrichment[0]
+    ):
+        raise WorkflowError(
+            "zero-delta ingestion audit detected canonical enrichment work"
+        )
+
+    mirrors = re.findall(
+        r"(?m)^Local assertion mirrors:\s*([0-9][0-9,]*)\s*$",
+        output,
+    )
+    if len(mirrors) > 1 or (
+        mirrors and int(mirrors[0].replace(",", "")) != 0
+    ):
+        raise WorkflowError(
+            "zero-delta ingestion audit detected local assertion mirror work"
+        )
+
+    return {
+        "status": "PASS",
+        "kind": ZERO_DELTA_METADATA_ONLY_KIND,
+        "mode": "CHECK_PACKAGE_DRY_RUN",
+        "existing_game_matches": actual["Existing-game matches"],
+        "inherited_discrepancies_preserved": actual["Discrepancies to add"],
+        "tracked_historical_write": "NONE",
+    }
+
+
+def _run_approved_ingestion(
+    repo: Path,
+    school_key: str,
+    plan_path: Path,
+    approved: dict[str, Any],
+    zero_delta_context: dict[str, Any] | None,
+) -> tuple[str, dict[str, Any] | None]:
+    """Use strict read-only ingestion for authenticated zero historical delta."""
+
+    command = [
+        sys.executable,
+        str(_runtime_tool("ingest_school.py")),
+        school_key,
+        "--identity-decisions",
+        str(plan_path),
+        "--repo",
+        str(repo),
+    ]
+    if zero_delta_context is not None:
+        command.insert(3, "--check-package")
+        output = run(command, cwd=repo, label="zero-delta ingestion audit")
+        return output, _assert_zero_delta_ingestion_dry_run(
+            output, approved, zero_delta_context
+        )
+
+    command.insert(3, "--apply")
+    with _candidate_validator_override_for_ingestion():
+        return run(command, cwd=repo, label="ingestion apply"), None
+
+
 def _run_inherited_baseline_site_compatibility(
     repo: Path,
     school_key: str,
@@ -1887,22 +2012,14 @@ def execute_approved_in_place(
 
     plan_path = write_plan_for_ingest(repo, approved)
     try:
-        print("\n=== ingestion apply ===")
-        with _candidate_validator_override_for_ingestion():
-            ingestion_output = run(
-                [
-                    sys.executable,
-                    str(_runtime_tool("ingest_school.py")),
-                    school_key,
-                    "--apply",
-                    "--identity-decisions",
-                    str(plan_path),
-                    "--repo",
-                    str(repo),
-                ],
-                cwd=repo,
-                label="ingestion apply",
-            )
+        print(
+            "\n=== authenticated zero-delta ingestion audit ==="
+            if zero_delta_context is not None
+            else "\n=== ingestion apply ==="
+        )
+        ingestion_output, zero_delta_ingestion_audit = _run_approved_ingestion(
+            repo, school_key, plan_path, approved, zero_delta_context
+        )
     finally:
         plan_path.unlink(missing_ok=True)
 
@@ -1981,6 +2098,7 @@ def execute_approved_in_place(
         "pre_ingest_source_patches": pre_ingest_source_patches,
         "pre_ingest_coverage": pre_ingest_coverage,
         "ingestion_output": ingestion_output,
+        "zero_delta_ingestion_audit": zero_delta_ingestion_audit,
         "reconciliation": reconciliation,
         "reciprocal_home_chronology": reciprocal_home_chronology,
         "resolved_target_home_chronology": resolved_target_home_chronology,

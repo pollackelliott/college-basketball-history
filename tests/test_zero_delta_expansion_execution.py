@@ -22,6 +22,11 @@ class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
             "canonical_enrichment_fields": 0,
             "conditional_discrepancies": 0,
             "canonical_site_patch_reviews": 0,
+            "source_rows": 12,
+            "in_scope_source_rows": 12,
+            "existing_game_matches": 12,
+            "discrepancies_to_add": 0,
+            "inherited_unrelated_reviews_excluded": 13,
         }
         summary.update(summary_overrides)
         return {"school_key": "example", "summary": summary, "decisions": []}
@@ -89,6 +94,96 @@ class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
         reciprocal.assert_called_once()
         resolved.assert_called_once()
         unknown.assert_called_once()
+
+
+    def dry_run_output(
+        self, *, discrepancies=13, assertions=0, matches=12, enrichments=0,
+        mirrors=0,
+    ):
+        return "\n".join([
+            "College Basketball History — school ingestion",
+            "Mode:       DRY RUN",
+            "Source rows:                         12",
+            "Publication-eligible source rows:   12",
+            f"Existing-game matches:      {matches}",
+            "New canonical games:        0",
+            "Identity review required:   0",
+            f"Canonical enrichments:       0 games / {enrichments} fields",
+            f"Assertions to add:           {assertions}",
+            f"Local assertion mirrors:     {mirrors}",
+            f"Discrepancies to add:        {discrepancies}",
+            "DRY RUN COMPLETE: no files changed.",
+        ])
+
+    @mock.patch.object(onboard_school, "run")
+    def test_authenticated_zero_delta_uses_strict_read_only_ingestion(self, runner):
+        runner.return_value = self.dry_run_output()
+        output, proof = onboard_school._run_approved_ingestion(
+            Path("."), "example", Path("sealed-plan.json"), self.approved(),
+            {"kind": "ZERO_DELTA_METADATA_ONLY", "inherited_source_game_count": 12},
+        )
+        command = runner.call_args.args[0]
+        self.assertIn("--check-package", command)
+        self.assertNotIn("--apply", command)
+        self.assertIn("--identity-decisions", command)
+        self.assertEqual(output, runner.return_value)
+        self.assertEqual(proof["status"], "PASS")
+        self.assertEqual(proof["inherited_discrepancies_preserved"], 13)
+        self.assertEqual(proof["tracked_historical_write"], "NONE")
+
+    @mock.patch.object(onboard_school, "run")
+    def test_zero_delta_rejects_unplanned_discrepancy_population(self, runner):
+        runner.return_value = self.dry_run_output(discrepancies=14)
+        with self.assertRaisesRegex(WorkflowError, "unapproved work"):
+            onboard_school._run_approved_ingestion(
+                Path("."), "example", Path("sealed-plan.json"), self.approved(),
+                {"kind": "ZERO_DELTA_METADATA_ONLY", "inherited_source_game_count": 12},
+            )
+        self.assertNotIn("--apply", runner.call_args.args[0])
+
+    @mock.patch.object(onboard_school, "run")
+    def test_zero_delta_rejects_new_assertions_or_enrichments(self, runner):
+        context = {
+            "kind": "ZERO_DELTA_METADATA_ONLY",
+            "inherited_source_game_count": 12,
+        }
+        for output in [
+            self.dry_run_output(assertions=1),
+            self.dry_run_output(enrichments=1),
+            self.dry_run_output(mirrors=1),
+        ]:
+            with self.subTest(output=output):
+                runner.return_value = output
+                with self.assertRaisesRegex(
+                    WorkflowError, "unapproved work|enrichment work|mirror work"
+                ):
+                    onboard_school._run_approved_ingestion(
+                        Path("."), "example", Path("sealed-plan.json"),
+                        self.approved(), context,
+                    )
+
+    @mock.patch.object(onboard_school, "run")
+    def test_zero_delta_requires_dry_run_completion(self, runner):
+        runner.return_value = self.dry_run_output().replace(
+            "DRY RUN COMPLETE: no files changed.", "STOP: source identity review"
+        )
+        with self.assertRaisesRegex(WorkflowError, "did not complete"):
+            onboard_school._run_approved_ingestion(
+                Path("."), "example", Path("sealed-plan.json"), self.approved(),
+                {"kind": "ZERO_DELTA_METADATA_ONLY", "inherited_source_game_count": 12},
+            )
+
+    @mock.patch.object(onboard_school, "run")
+    def test_normal_ingestion_still_applies(self, runner):
+        runner.return_value = "PASS: ingestion applied"
+        output, proof = onboard_school._run_approved_ingestion(
+            Path("."), "example", Path("sealed-plan.json"),
+            {"school_key": "example", "summary": {}}, None,
+        )
+        self.assertIn("--apply", runner.call_args.args[0])
+        self.assertNotIn("--check-package", runner.call_args.args[0])
+        self.assertEqual(output, runner.return_value)
+        self.assertIsNone(proof)
 
     def test_altered_inherited_historical_row_fails_nonmutation_proof(self):
         before = {
