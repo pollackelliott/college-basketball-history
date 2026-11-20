@@ -1,57 +1,43 @@
 {
-  "authority": {
-    "expansion_phase0": true,
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "phase0": false,
-    "phase0_scope_supersession": false,
-    "recovery": false,
-    "release": false,
-    "release_gate2_approval": false,
-    "release_presentation_refresh": false,
-    "release_preview_verify": false,
-    "release_production_proof": false,
-    "release_readiness": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
-    "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": false,
-    "venue_identity_maintenance": false
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "kentucky-expansion-phase0-recover-0001",
+  "school_key": "kentucky",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "da089af77286ec04f504f5ae39be3a8378c2377c",
+  "previous_control_state_sha256": "d221aac2a967ef3c32977f9da18618cd0600422f451832dbdd2d4c3123d6ab5c",
+  "expected_protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "recovery": {
+    "abandoned_request_id": "kentucky-expansion-phase0-0001",
+    "lock_commit": "b80693d3b14d6caa4415c52a71702a3cdc28aa50",
+    "target_branch": "data/kentucky-onboarding"
   },
   "creation_provenance": {
-    "authorization": "The owner supplied explicit Control Center authorization for exactly one MISSING_SERIALIZED_ONBOARDING_REF_BOOTSTRAP of data/kentucky-onboarding at freshly authenticated protected main, then directed the same already-authorized Kentucky ALL_HISTORY_EXPANSION startup phase to continue only through the permanent remote_implementation_expansion_startup.py coordinator and guarded EXPANSION_PHASE0 child request. This grants no new Kentucky historical authority, no Research reopening, no shared-reference maintenance, no Stage 2, no Owner Gate 1 or 2, no release, merge, Production, or concurrency-policy authority. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
-    "origin": "Kentucky ALL_HISTORY_EXPANSION Implementation lane; Control Center-authorized missing serialized onboarding-ref bootstrap and initial expansion startup"
+    "origin": "Kentucky ALL_HISTORY_EXPANSION Implementation lane; same owner-authorized initial expansion phase",
+    "authorization": "Owner said Proceed after the guarded Kentucky EXPANSION_PHASE0 failed. Durable state shows the accepted request kentucky-expansion-phase0-0001 is ACTIVE/LOCKED with recovery_required=true; target data/kentucky-onboarding remains at the exact request predecessor 7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec and no Kentucky target publication is visible. Recovery authority is limited to the permanent RECOVER classifier for this exact active request/lock, preserving all Research/Stage1/Integration Freeze evidence and releasing the serialized lock only if permanent classification proves NOT_ATTEMPTED or PREPARED_NOT_PUBLISHED. No Phase0 retry, tooling repair, historical change, Stage2, owner gate, release, merge, or Production authority is granted by this recovery request."
   },
-  "expansion_research_checkpoint": {
-    "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
-    "sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
-    "transport": {
-      "commit_sha": "3a1f80065267f054a251c521be81b999867c8e9a",
-      "kind": "git_base64_parts",
-      "part_count": 4,
-      "path_prefix": ".remote-implementation/transports/kentucky/kentucky-expansion-startup-0002/part-"
-    }
-  },
-  "expected_protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
-  "integration_freeze_sha256": "0f5ef790bf4c29269532ba08aef6501bedae5643f80b27c66b88eff0c5f26039",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "EXPANSION_PHASE0",
-  "previous_control_state_commit": "609b9800b491924d095ea6f84da528bea4b7a4e0",
-  "previous_control_state_sha256": "7880f219ff47ed27aca6bedd50c1c3959784cd615ea9aac77be4cf94eb349e9d",
-  "request_id": "kentucky-expansion-phase0-0001",
-  "research_freeze_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
-  "schema_version": 1,
-  "school_key": "kentucky",
-  "stage1_independent_proof": {
-    "path": ".remote-implementation/startups/kentucky/kentucky-expansion-startup-0001/stage1-independent-proof.json",
-    "sha256": "311cb96275fbf8bd0e444681b20351f7d7ff0dae8ab815ec6369c5478acca526"
-  },
-  "stage1_independent_proof_sha256": "311cb96275fbf8bd0e444681b20351f7d7ff0dae8ab815ec6369c5478acca526",
-  "target_branch": "data/kentucky-onboarding",
-  "target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec"
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "expansion_phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false
+  }
 }
