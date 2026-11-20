@@ -1,0 +1,15 @@
+{
+  "errors": [],
+  "summary": {
+    "curated_lifecycle_suite": "PASS",
+    "portfolio": {
+      "complete": 96,
+      "eligible": 19,
+      "legacy": 19,
+      "published": 115
+    },
+    "stale_test_contract": "PASS",
+    "status": "PASS",
+    "workflow_contract": "PASS"
+  }
+}

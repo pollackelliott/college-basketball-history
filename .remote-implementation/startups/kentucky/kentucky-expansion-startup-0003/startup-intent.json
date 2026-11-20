@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
+  "startup_id": "kentucky-expansion-startup-0003",
+  "phase0_request_id": "kentucky-expansion-phase0-0003",
+  "school_key": "kentucky",
+  "expected_protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "research_freeze_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+  "expansion_research_checkpoint": {
+    "sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+    "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "0911896b18bb5a3f952a611fc50b4cac2434eb15",
+      "path_prefix": ".remote-implementation/transports/kentucky/kentucky-expansion-startup-0003/part-",
+      "part_count": 4
+    }
+  },
+  "creation_provenance": {
+    "origin": "Kentucky ALL_HISTORY_EXPANSION Implementation lane; same owner-authorized initial expansion phase after NOT_ATTEMPTED recovery and generic zero-delta Phase 0 tooling repair",
+    "authorization": "Owner said Proceed to continue the same Kentucky initial expansion phase. Startup 0002 stopped before child dispatch on the mechanical envelope guard EXPANSION_STARTUP_TRANSPORT_MUST_BE_IMMEDIATE_PREDECESSOR; no mutation transaction began. This startup uses a fresh immediate-predecessor transport commit containing the same authenticated Research Freeze bytes, binds current protected main f6d78412932689da0f4b6e89dfd42c557b92a445, unchanged Kentucky onboarding predecessor 7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec, and fresh child request identity kentucky-expansion-phase0-0003. It grants no Stage 2, owner gate, release, merge, Production, shared-reference maintenance, or new historical authority."
+  }
+}
