@@ -1,0 +1,41 @@
+{
+  "blockers": [
+    {
+      "class": "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"
+    }
+  ],
+  "candidate_sha256": {
+    "conferences.csv": "1e608210ff9c3223db1152affddbc5a5d351d3254505ae336678ee8d6384387e",
+    "expansion-stage1-reconciliation.json": "faece803295193dddbec8ab451ee609fca362a982218c1b40234b00f7e7b7398",
+    "notes.md": "91832f99dd5c881721ad3ff700c34674a77e17008b6f59f56c06c3c97b7bc86a",
+    "opponents.csv": "e195ce82760db3a371abff490e84fac83c724a61d88ded3f0666549cb38cb1bf",
+    "source-games.csv": "64d363714d46bc0a31a0a9fbbaf5fe7efc46ac1d5f8474042005a9c7e3bed50e",
+    "source-notes.md": "e5bf193e768366316d25d196b0cb14aeb28d04d0e92be012aa58f3f2110572ee",
+    "venues.csv": "8d395ea653f68d88975da8d742d63389d8c163c0f7e330fcce3a85f08e5d9c3b"
+  },
+  "freeze_zip_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+  "global_venue_counts": {
+    "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER": 0,
+    "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": 0,
+    "REUSE_REGISTERED_GLOBAL_VENUE": 0
+  },
+  "identity_counts": {
+    "IDENTITY_REVIEW_BLOCKER": 0,
+    "PROVISIONAL_NEW_CANONICAL": 0,
+    "REUSE_CANONICAL": 0
+  },
+  "integration_freeze_authorized": false,
+  "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "status": "INDEPENDENTLY_REPRODUCED_READ_ONLY_STAGE1",
+  "support_opponents": {
+    "EXTEND_INHERITED": 0,
+    "NEW_SUPPLEMENTAL": 0,
+    "REUSE_INHERITED": 0
+  },
+  "support_venues": {
+    "EXTEND_INHERITED": 0,
+    "NEW_SUPPLEMENTAL": 0,
+    "REUSE_INHERITED": 0
+  }
+}

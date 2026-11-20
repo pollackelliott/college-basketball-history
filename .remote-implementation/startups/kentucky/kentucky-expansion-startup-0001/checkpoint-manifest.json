@@ -1,0 +1,21 @@
+{
+  "implementation_acceptance_sha256": "a1e93793ca0c74683ed55eaebf764096b0181bc99276f1b57b805ef14b672d03",
+  "integration_freeze_sha256": "0f5ef790bf4c29269532ba08aef6501bedae5643f80b27c66b88eff0c5f26039",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_CHECKPOINT",
+  "next_operation": "EXPANSION_PHASE0",
+  "phase0_preview_sha256": "3d054f9dddc43a413daaff2648453ecad4cfac48f63fa4ef6653cb0c35d88060",
+  "phase0_request_id": "kentucky-expansion-phase0-0001",
+  "protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "research_freeze_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "stage1_independent_proof_sha256": "311cb96275fbf8bd0e444681b20351f7d7ff0dae8ab815ec6369c5478acca526",
+  "stage1_reconciliation_sha256": "faece803295193dddbec8ab451ee609fca362a982218c1b40234b00f7e7b7398",
+  "startup_id": "kentucky-expansion-startup-0001",
+  "startup_intent_sha256": "e721ab460fb55e41d69f4cc16058530869d92b5d8124ff492e85e22df7031530",
+  "status": "READY_TO_SUBMIT_GUARDED_EXPANSION_PHASE0",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "tracked_basketball_mutation": "NONE_PREPARATION_ONLY"
+}

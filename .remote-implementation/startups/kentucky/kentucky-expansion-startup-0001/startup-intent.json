@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
+  "startup_id": "kentucky-expansion-startup-0001",
+  "phase0_request_id": "kentucky-expansion-phase0-0001",
+  "school_key": "kentucky",
+  "expected_protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "research_freeze_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+  "expansion_research_checkpoint": {
+    "sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+    "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "3a1f80065267f054a251c521be81b999867c8e9a",
+      "path_prefix": ".remote-implementation/transports/kentucky/kentucky-expansion-startup-0002/part-",
+      "part_count": 4
+    }
+  },
+  "creation_provenance": {
+    "origin": "Kentucky ALL_HISTORY_EXPANSION Implementation lane; Control Center-authorized missing serialized onboarding-ref bootstrap and initial expansion startup",
+    "authorization": "The owner supplied explicit Control Center authorization for exactly one MISSING_SERIALIZED_ONBOARDING_REF_BOOTSTRAP of data/kentucky-onboarding at freshly authenticated protected main, then directed the same already-authorized Kentucky ALL_HISTORY_EXPANSION startup phase to continue only through the permanent remote_implementation_expansion_startup.py coordinator and guarded EXPANSION_PHASE0 child request. This grants no new Kentucky historical authority, no Research reopening, no shared-reference maintenance, no Stage 2, no Owner Gate 1 or 2, no release, merge, Production, or concurrency-policy authority."
+  }
+}
