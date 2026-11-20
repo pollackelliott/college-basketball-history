@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "kentucky-expansion-stage2-opponent-display-normalize-0001",
+  "request_id": "kentucky-expansion-stage2-opponent-display-normalize-0002",
   "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "school_key": "kentucky",
-  "previous_control_state_commit": "66e263a18d61fc74120df961871ba773dfcde8d3",
+  "previous_control_state_commit": "91f173f6fdde6ee82fda723ed29a3c5104e63dd1",
   "previous_control_state_sha256": "edf43277c5a14db24d3bfe7b3148ba649d0559a86eeb2665e2f3a54715edc473",
-  "expected_protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "expected_protected_main_sha": "7137ede6bf4a7725a4e2cfe766ac5f024ab8bb45",
   "target_branch": "data/kentucky-onboarding",
   "target_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
   "stage2_census_checkpoint": {
@@ -40,7 +40,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Kentucky ALL_HISTORY_EXPANSION serialized Implementation lane — Stage 2 deterministic opponent representation normalization",
-    "authorization": "Existing owner-authorized Kentucky Stage 2 phase persists. Fresh-verified census kentucky-expansion-stage2-census-0001 is BLOCKED solely by exactly two same-topology opponent representation mismatches: east-texas-a-m and william-mary are current D1 in protected-main programs.csv while Kentucky opponents.csv does not mark them current D1. The census has zero warnings, zero owner decisions, semantic drift PASS, zero reconciliation decisions, and no other blocker topology. This authorizes exactly one coherent census-bound permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete two-key population, under permanent field-level and semantic guards. No historical reinterpretation, unrelated opponent cleanup, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, or protected-main mutation authority."
+    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation — bounded census current_d1 representation repair after merged PR #682",
+    "authorization": "Owner/Control Center explicitly authorized only the already-bounded current_d1 repair and its immediate post-repair verification. Exact fresh-verified census kentucky-expansion-stage2-census-0001 contains only two original blockers: east-texas-a-m and william-mary current_d1 representation mismatches. PR #682 merged to protected main 7137ede6bf4a7725a4e2cfe766ac5f024ab8bb45 after exact Kentucky candidate replay proved those two rows normalize with zero source-game changes and that the next visible site_or_han_review_population is a demonstrably different blocker family. This request authorizes only the exact census-bound STAGE2_OPPONENT_DISPLAY_NORMALIZE mutation and independent verification. If the original current_d1 blockers clear and only a disjoint residual remains, stop for Control Center disposition. No historical review, source-game repair, proposal rehearsal, Owner Gate 1/2, sealed apply, release, shared/global maintenance, or protected-main mutation authority is included."
   }
 }
