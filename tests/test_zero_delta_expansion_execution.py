@@ -375,6 +375,44 @@ class ZeroDeltaExpansionExecutionTests(unittest.TestCase):
                     Path("."), "example", manifest, approved
                 )
 
+
+    def test_gate_proof_fails_closed_when_canonical_snapshot_differs(self):
+        summary = self.approved()["summary"]
+        snapshot = {"data/canonical/games.csv": "a" * 64}
+        proof = onboard_school._assert_zero_delta_historical_state_unchanged(
+            snapshot, dict(snapshot)
+        )
+        with mock.patch.object(
+            onboard_school, "_authenticated_zero_delta_execution_context",
+            return_value={"kind": "ZERO_DELTA_METADATA_ONLY"},
+        ), mock.patch.object(
+            onboard_school, "_zero_delta_historical_state_snapshot",
+            return_value=snapshot,
+        ):
+            self.assertIsNotNone(
+                onboard_school._zero_delta_gate_context(
+                    Path("."), "example", self.approved(), summary, proof
+                )
+            )
+            bad = dict(proof, snapshot_sha256="b" * 64)
+            with self.assertRaisesRegex(WorkflowError, "drifted at gate"):
+                onboard_school._zero_delta_gate_context(
+                    Path("."), "example", self.approved(), summary, bad
+                )
+            with self.assertRaisesRegex(WorkflowError, "differs from sealed"):
+                onboard_school._zero_delta_gate_context(
+                    Path("."), "example", self.approved(),
+                    dict(summary, inherited_unrelated_reviews_excluded=12), proof
+                )
+
+    def test_zero_delta_is_not_mistaken_for_correction_freeze(self):
+        manifest = {"summary": self.approved()["summary"]}
+        self.assertIsNone(
+            release_school.correction_integration_freeze_bytes(
+                Path("."), "example", manifest
+            )
+        )
+
     def test_altered_inherited_historical_row_fails_nonmutation_proof(self):
         before = {
             "data/canonical/games.csv": "a" * 64,
