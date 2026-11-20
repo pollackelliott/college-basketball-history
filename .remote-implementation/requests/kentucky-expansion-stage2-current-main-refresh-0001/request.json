@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "kentucky-expansion-stage2-current-main-refresh-0001",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "kentucky",
+  "previous_control_state_commit": "6a3bad5a24a661b93e4dd604135a904020b69415",
+  "previous_control_state_sha256": "2d534b717b6d9d96be3121c1042f438f672d4eee3557bf0d1f208f7007d46bbf",
+  "expected_protected_main_sha": "5dd2ce0ce7fba59ffe85811836c534e7356f3724",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "82bc96fca234234663022bf2585e6517071b650eadcd9ed5fcd80ae50438cc62"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "sha256": "ebd7be27eaf82c90f62ce0df8c4f2b9b9ce525b743e935b40293d2a27a9264ab"
+  },
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center explicitly authorized exactly one Kentucky STAGE2_CURRENT_MAIN_REFRESH from independently verified successor f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2 to protected main 5dd2ce0ce7fba59ffe85811836c534e7356f3724 after generic zero-delta Stage 2 compatibility PR #683 merged. Authenticated merge base f6d78412932689da0f4b6e89dfd42c557b92a445; target-only paths = 8; current-main-only paths = 13; overlap = 0; current-main touched no schools/kentucky path. The protected-main advancement from prior normalization binding 7137ede6bf4a7725a4e2cfe766ac5f024ab8bb45 to current main contains only six generic tooling/workflow/test paths and no basketball-data changes. Require permanent disjoint-path proof, package preservation, repository validation, semantic-drift PASS, write-ahead/CAS publication, and independent exact-tree verification."
+  },
+  "creation_provenance": {
+    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation — Control Center-authorized post-PR #683 current-main refresh",
+    "authorization": "Execute only one bounded STAGE2_CURRENT_MAIN_REFRESH of the exact parked Kentucky successor f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2 onto protected main 5dd2ce0ce7fba59ffe85811836c534e7356f3724. Preserve the immutable Research Freeze, Integration Freeze c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c, semantic snapshot 95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6, and exact post-normalization school package. No phase_continuation is supplied: do not run STAGE2_REFRESH_CENSUS_PROPOSAL_V1 because the Stage 2 decision universe is intentionally expected to change under the newly merged zero-delta compatibility rule. No census, historical review, repair, Gate 1, sealed apply, release, or other mutation is authorized in this unit."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
