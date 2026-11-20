@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "kentucky-expansion-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "school_key": "kentucky",
+  "previous_control_state_commit": "902ab29fe1200ba8a962087490279cf6b4c32e7e",
+  "previous_control_state_sha256": "f1fa0bf89f2fe31407e32cab45f726f73cf8f729735dee740c56aa90035082a8",
+  "expected_protected_main_sha": "5dd2ce0ce7fba59ffe85811836c534e7356f3724",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "927caae37d07ec26f737847d2696fcd5bea169e1",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "cac3ebea1d7b2dcbdee6e4bebc362b50af210c9110339237f5e38edc2d388c8e"
+  },
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/kentucky-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc"
+  },
+  "creation_provenance": {
+    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation Stage 2 — exact empty-universe proposal rehearsal",
+    "authorization": "Control Center explicitly authorized exactly one fresh STAGE2_PROPOSAL_REHEARSAL from independently verified Kentucky census kentucky-expansion-stage2-census-0002. The exact census is CAPABILITY_CENSUS_READY with 3,232 existing canonical matches, 0 new canonical games, 0 blockers, 0 warnings, 0 discrepancies, 0 conditional discrepancies, 0 site/H-A-N reviews, 0 owner decisions, tracked mutation NONE, and empty decision universe 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945. The immutable recommendation map contains zero identity or historical decisions and is bound to protected main 5dd2ce0ce7fba59ffe85811836c534e7356f3724, target 927caae37d07ec26f737847d2696fcd5bea169e1, census checkpoint cac3ebea1d7b2dcbdee6e4bebc362b50af210c9110339237f5e38edc2d388c8e, Integration Freeze c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c, and semantic snapshot 95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6. Authorize only read-only permanent proposal rehearsal and independent verification. No decisions may be invented; no inherited Kentucky history, repair, source-game mutation, Gate 1 approval, fill, seal, apply, release, Preview, merge, Production, or shared/global mutation is authorized."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
