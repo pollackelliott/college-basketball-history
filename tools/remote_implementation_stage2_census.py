@@ -346,12 +346,21 @@ def _verify_opponent_display_target_authority(
         raise Stop("STAGE2_OPPONENT_DISPLAY_BLOCKER_KEYS_MISSING")
     if sorted(str(x) for x in proof.get("opponent_changed_keys") or []) != blocker_keys:
         raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_OPPONENT_KEYS_MISMATCH")
-    if sorted(str(x) for x in proof.get("source_game_changed_keys") or []) != blocker_keys:
+    source_changed_keys = sorted(
+        str(x) for x in proof.get("source_game_changed_keys") or []
+    )
+    unexpected_source_keys = sorted(set(source_changed_keys) - set(blocker_keys))
+    if unexpected_source_keys:
         raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_SOURCE_KEYS_MISMATCH")
-    if int(proof.get("source_game_normalized_name_row_count", -1)) != int(
+    source_row_count = int(proof.get("source_game_normalized_name_row_count", -1))
+    if source_row_count != int(
         successor.get("source_game_normalized_name_row_count", -2)
     ):
         raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_ROW_COUNT_MISMATCH")
+    if source_row_count == 0 and source_changed_keys:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_SOURCE_KEYS_WITH_ZERO_ROWS")
+    if source_row_count > 0 and not source_changed_keys:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_FIELD_PROOF_SOURCE_KEYS_MISSING")
 
     verification_path = (
         ".remote-implementation/verifications/%s/%s/"
