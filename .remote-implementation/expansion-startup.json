@@ -1,29 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "ucf-expansion-startup-0003",
-  "phase0_request_id": "ucf-expansion-phase0-0003",
-  "school_key": "ucf",
-  "expected_protected_main_sha": "ed1164118f471b2a398bf6b53491035de17c7212",
-  "target_branch": "data/ucf-onboarding",
-  "target_sha": "e0fa9cc31e908529b9e13297621af8c04be76147",
-  "research_freeze_sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
+  "startup_id": "kentucky-expansion-startup-0001",
+  "phase0_request_id": "kentucky-expansion-phase0-0001",
+  "school_key": "kentucky",
+  "expected_protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "research_freeze_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
   "expansion_research_checkpoint": {
-    "sha256": "2e226ad65cd5191c7ebfa9507c56e54c52313070facc123455185244cc32c0e0",
-    "research_base_sha": "4682d528bf62eee1ad9cd3d8114663882cb78bdf",
+    "sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
+    "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "2a4685ec8d5d5fa4cc8881522d306e13b5bdbc2e",
-      "path_prefix": ".remote-implementation/transports/ucf/ucf-expansion-startup-0001/part-",
-      "part_count": 1
+      "commit_sha": "3a1f80065267f054a251c521be81b999867c8e9a",
+      "path_prefix": ".remote-implementation/transports/kentucky/kentucky-expansion-startup-0002/part-",
+      "part_count": 4
     }
   },
   "creation_provenance": {
-    "origin": "ChatGPT UCF ALL_HISTORY_EXPANSION Implementation lane; bounded correction of read-only startup #43974026389",
-    "authorization": "The owner's November 16 authorization for initial UCF expansion Implementation startup through independently verified guarded EXPANSION_PHASE0 persists. Earlier read-only coordinator startup #43974026389 failed at integration-freeze venue reconciliation because its map bound the supplemental expansion-venues SHA rather than the exact Stage 1 combined candidate venues SHA. This replacement changes only expected_venues_sha256 in the exact five-venue current-main identity reuse map; it retains the immutable v2 Research Freeze, published predecessor, 27 HOME exceptions, 90 cleared NON_D1 approvals, accepted 1984-85+ scope, all source history, and all inherited published games. It grants no new historical decision, shared mutation, Stage 2, owner gates, release, merge, or Production authority."
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/venue-reconciliation/ucf/ucf-expansion-startup-0003.json",
-    "sha256": "6ba37194e69c664758b75550070978260bb1e70ee3b6398108ee3abcf43f3348"
+    "origin": "Kentucky ALL_HISTORY_EXPANSION Implementation lane; Control Center-authorized missing serialized onboarding-ref bootstrap and initial expansion startup",
+    "authorization": "The owner supplied explicit Control Center authorization for exactly one MISSING_SERIALIZED_ONBOARDING_REF_BOOTSTRAP of data/kentucky-onboarding at freshly authenticated protected main, then directed the same already-authorized Kentucky ALL_HISTORY_EXPANSION startup phase to continue only through the permanent remote_implementation_expansion_startup.py coordinator and guarded EXPANSION_PHASE0 child request. This grants no new Kentucky historical authority, no Research reopening, no shared-reference maintenance, no Stage 2, no Owner Gate 1 or 2, no release, merge, Production, or concurrency-policy authority."
   }
 }
