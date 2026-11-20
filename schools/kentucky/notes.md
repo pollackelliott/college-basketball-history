@@ -69,3 +69,24 @@ Historical opponent-home and neutral-site arenas are not invented when the sourc
 ## Cross-source reconciliation
 
 Kentucky was previously reconciled against Missouri, Illinois, Northwestern and Kansas (81 verified shared games) and will also reconcile against the already-ingested Arkansas evidence during ingestion. The Kentucky source assertion is preserved even when another official/contemporary source supports a different canonical value. The Jan. 2, 1950 Arkansas game's site is reconciled as Arkansas home in Little Rock under the project's statewide-home policy.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Kentucky ALL_HISTORY_EXPANSION — frozen supplemental Research authority
+
+Workflow: ALL_HISTORY_EXPANSION
+School key: kentucky
+Research base SHA: c028c1ea1e6d3cef59e465106aa0cedd9e649998
+Researched institutional inception: 1902-1903
+
+The immutable published baseline is inherited authority and is not re-researched or reproduced by this supplemental artifact. Kentucky is the accepted zero-delta expansion case: the exact EXPANSION_REQUIRED active-season population is empty, so there are zero supplemental competitive games. The 1952-1953 season is the accepted one-season dormant/no-team hiatus and does not create a supplemental game population.
+
+The Stage 5 expansion-scoped NON_D1 owner sanity scan was explicitly approved with 0 identities / 0 games. Stage 6 pre-freeze self-challenge passed with zero material blockers, zero bounded repairs, and zero terminal researched-debt rows.
+
+Stage 6 parent checkpoint SHA-256: ff0e329f871f10c1312eb19ccafd520b23acb73bba797f19f27065530b9c93de
+Stage 5 parent checkpoint SHA-256: b72352f13b19b6f0a659cad46599f5f2781b0ad4d61222452659b082b643b4e9
+Stage 4 parent checkpoint SHA-256: 546b7a734dcaa6a9becd405b74fc5ced09ab81bcb45c3831cc417364fc7ec391
+
+This freeze creates Research authority only. It does not mutate protected main or begin serialized Implementation.

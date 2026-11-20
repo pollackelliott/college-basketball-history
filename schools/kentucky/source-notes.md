@@ -25,3 +25,15 @@ Kentucky's official record book says the NCAA vacated all three 1988 NCAA Tourna
 ## Early conference-tournament naming
 
 The detailed year-by-year game history labels the 1922 postseason event as the SIAA Tournament. For 1924, the detailed season page labels the event the Southern Conference Tournament, while a summary footnote appears to label that tournament differently. Since the project only exposes a generic conference-tournament game type and Kentucky's membership timeline is separately versioned, this internal naming discrepancy is documented without forcing an unsupported rewrite.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Kentucky ALL_HISTORY_EXPANSION — source and audit notes
+
+The supplemental population is intentionally empty. No new source-game rows, opponent support rows, venue support rows, inherited-unpublished source references, exclusions, residuals, baseline-correction questions, or expansion-scoped NON_D1 identities exist.
+
+Zero-delta basis is the hash-bound Research chain through Stage 6: durable Stage 1 season accounting established 124 institutional season slots from 1902-1903 through 2025-2026 as 123 active seasons already represented by inherited published history plus the documented 1952-1953 no-team hiatus; Stage 4 independently proved the inherited required completed season 2025-2026 with 36 inherited source rows and 36 publication-authorized canonical rows; Stage 6 adversarial review found no hidden expansion debt.
+
+Owner scope authority is preserved separately in expansion-scope-authority.json as OWNER_SUPERSESSION to INCEPTION+. The immutable baseline itself remains unchanged.
