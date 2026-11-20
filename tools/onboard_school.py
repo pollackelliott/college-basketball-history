@@ -352,6 +352,7 @@ def correction_gate_kwargs_from_manifest(
         zero_delta_kwargs = {
             "zero_delta_summary": summary,
             "zero_delta_historical_state_proof": historical_proof,
+            "zero_delta_approved_plan_hash": manifest.get("approved_plan_hash"),
         }
     if expansion_proof is not None:
         if (
@@ -440,6 +441,7 @@ def run_gates(
     approved_plan: dict[str, Any] | None = None,
     zero_delta_summary: dict[str, Any] | None = None,
     zero_delta_historical_state_proof: dict[str, Any] | None = None,
+    zero_delta_approved_plan_hash: str | None = None,
 ) -> dict[str, str]:
     python = sys.executable
     zero_delta = _zero_delta_gate_context(
@@ -447,8 +449,8 @@ def run_gates(
         zero_delta_historical_state_proof,
     )
     if zero_delta is not None and changed:
-        approved_hash = str((approved_plan or {}).get("approved_plan_hash", ""))
-        if not approved_hash:
+        approved_hash = str((approved_plan or {}).get("approved_plan_hash", "") or zero_delta_approved_plan_hash or "")
+        if not re.fullmatch(r"[0-9a-f]{64}", approved_hash):
             raise WorkflowError("zero-delta gate needs exact approved plan hash")
         _assert_zero_delta_apply_paths(changed, school_key, approved_hash)
     outputs: dict[str, str] = {}
@@ -2986,7 +2988,14 @@ def pr_body(
             "- repository validation — PASS",
             "- target package no-op — PASS",
             site_validation_line,
-            "- accomplishment cross-check — PASS",
+            (
+                "- accomplishment cross-check — inherited baseline remains "
+                "OWNER_BASELINE_UNVERIFIED; unchanged STALE_ADMIN_DIFFERENCE accepted "
+                "by exact zero-delta compatibility proof"
+                if summary.get("expansion_transaction_kind") == ZERO_DELTA_METADATA_ONLY_KIND
+                and summary.get("inherited_stale_accomplishment_blockers_excluded") == 1
+                else "- accomplishment cross-check — PASS"
+            ),
             "- deterministic site build — PASS",
             "- unit tests — PASS",
             "- changed-file whitespace check — PASS",
