@@ -1,0 +1,46 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "08cdd2f8540f3a192b9bfa64587125e7b440a63a40f8ba7415f40cf1814b151b",
+    "implementation-stage2-status.json": "151b25bb3b02815145ac08929b3a06068157272d21fa15ce6a0de740aa203d4c",
+    "plan.json": "f80dfe52ff3308682f8668697f098f21338e86d0128acc08e7ebd2a2529fa8b2",
+    "review.csv": "5ef033d02653fcd0583771b0f61f61ca02982b0b5b6d38bf5354aae0426b70fb",
+    "review.md": "0339da31a626bbb5aa3454b49555724da6b1edc6817606d8e36947b7fb92aac5"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "08cdd2f8540f3a192b9bfa64587125e7b440a63a40f8ba7415f40cf1814b151b",
+    "implementation-stage2-status.json": "f97c7b8bb0f7e09d72f7e6bdd51144d4e97a3f74ea12c579693f2969821a3965",
+    "plan.json": "717edea50b0b3c331c3951734cb9466b96c8e3ad0bc1cd303ef85f8f7e3cb22e",
+    "review.csv": "5ef033d02653fcd0583771b0f61f61ca02982b0b5b6d38bf5354aae0426b70fb",
+    "review.md": "d061665e0d2393409bdb6fccec47022fd6b3bfb96e74794b83211b76fb5cad00"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "changed_paths": [
+    "schools/kentucky/opponents.csv"
+  ],
+  "decision_universe_sha256": "6e02c9c4a85d95f5260276105c6a48fa79243661b3ebfdcd8ac2881c6d1e2aaf",
+  "expected_blocker_keys": [
+    "east-texas-a-m",
+    "william-mary"
+  ],
+  "field_level_proof_sha256": "feca93730be7008d2098287baadf9558d6135f3bc42df29cc9c4994ce60aca71",
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "692d5558ea3a153d6f520ce30634273e472f346e15a4a3c7575ba229528b5b8a",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "7137ede6bf4a7725a4e2cfe766ac5f024ab8bb45",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "kentucky-expansion-stage2-opponent-display-normalize-0002",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/kentucky-onboarding",
+  "target_predecessor_sha": "60e45fdde9dc7a5d592fd31e16e37144222b2df8",
+  "target_sha": "f53ec5f98bda9b4540304257ef32eb7bf7b5c4e2",
+  "target_tree_sha": "30370be9a190dab02831c280143f59a5366f365f",
+  "tracked_stage2_mutation": "NONE"
+}
