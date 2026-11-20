@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "kentucky-expansion-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "kentucky",
+  "previous_control_state_commit": "92090c26b148b436fc4bb8a09b080a50dcdcefcf",
+  "previous_control_state_sha256": "8b86b3796dcec0313c97854180c8a03feb7eae0dc03e0276f150470de99eacd3",
+  "expected_protected_main_sha": "5dd2ce0ce7fba59ffe85811836c534e7356f3724",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "927caae37d07ec26f737847d2696fcd5bea169e1",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "82bc96fca234234663022bf2585e6517071b650eadcd9ed5fcd80ae50438cc62"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "sha256": "ebd7be27eaf82c90f62ce0df8c4f2b9b9ce525b743e935b40293d2a27a9264ab"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "55da0532a50363503ae9f04f02a8968bf275a386d5a6a6c447921e079cfd57e7"
+  },
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation — fresh read-only Stage 2 census under merged zero-delta compatibility runtime",
+    "authorization": "Control Center authorized the next unit after independently verified current-main refresh as exactly one fresh read-only STAGE2_CENSUS against Kentucky successor 927caae37d07ec26f737847d2696fcd5bea169e1 on protected main 5dd2ce0ce7fba59ffe85811836c534e7356f3724. Bind the immutable Phase 0 successor, independently verified current-D1 normalization successor, fresh-verified current-main-refresh successor, Integration Freeze c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c, and semantic snapshot 95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6. Recompute Stage 2 from current protected-main zero-delta tooling. No phase_continuation or recommendation map is supplied. Authorize no tracked basketball mutation, historical review, opponent normalization, repair, Gate 1, fill, seal, apply, release, Preview, merge, Production, recovery, or shared/global mutation."
+  }
+}
