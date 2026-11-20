@@ -721,7 +721,7 @@
     "kentucky-expansion-phase0-0001"
   ],
   "active_expected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
-  "active_lock_commit": null,
+  "active_lock_commit": "b80693d3b14d6caa4415c52a71702a3cdc28aa50",
   "active_lock_owner": "github-actions:44651898178:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
