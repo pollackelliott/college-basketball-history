@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "kentucky-expansion-startup-0001",
-  "phase0_request_id": "kentucky-expansion-phase0-0001",
+  "startup_id": "kentucky-expansion-startup-0002",
+  "phase0_request_id": "kentucky-expansion-phase0-0002",
   "school_key": "kentucky",
-  "expected_protected_main_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
+  "expected_protected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
   "target_branch": "data/kentucky-onboarding",
   "target_sha": "7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec",
   "research_freeze_sha256": "0514392ebcd8d007ac9d3b217663ca932bf0cc31ed9d29a1074d646fd6845dcf",
@@ -19,7 +19,7 @@
     }
   },
   "creation_provenance": {
-    "origin": "Kentucky ALL_HISTORY_EXPANSION Implementation lane; Control Center-authorized missing serialized onboarding-ref bootstrap and initial expansion startup",
-    "authorization": "The owner supplied explicit Control Center authorization for exactly one MISSING_SERIALIZED_ONBOARDING_REF_BOOTSTRAP of data/kentucky-onboarding at freshly authenticated protected main, then directed the same already-authorized Kentucky ALL_HISTORY_EXPANSION startup phase to continue only through the permanent remote_implementation_expansion_startup.py coordinator and guarded EXPANSION_PHASE0 child request. This grants no new Kentucky historical authority, no Research reopening, no shared-reference maintenance, no Stage 2, no Owner Gate 1 or 2, no release, merge, Production, or concurrency-policy authority."
+    "origin": "Kentucky ALL_HISTORY_EXPANSION Implementation lane; same owner-authorized initial expansion phase after safe recovery and generic zero-delta Phase 0 tooling repair",
+    "authorization": "The prior child request kentucky-expansion-phase0-0001 was permanently recovered as NOT_ATTEMPTED and abandoned with controller returned to IDLE. Generic zero-delta Phase 0 tooling repair PR #681 merged to protected main as f6d78412932689da0f4b6e89dfd42c557b92a445. Owner said Proceed to continue the same Kentucky initial expansion phase. This fresh startup rebinds deterministic Stage 1 / Integration Freeze / guarded EXPANSION_PHASE0 to current protected main with new request identity kentucky-expansion-phase0-0002 while preserving immutable Research Freeze 0514392e... and unchanged onboarding predecessor 7b8287e.... It grants no Stage 2, Owner Gate 1 or 2, release, merge, Production, shared-reference maintenance, or new historical authority."
   }
 }
