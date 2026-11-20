@@ -1,0 +1,104 @@
+name: Connector request prepublication validation
+
+on:
+  push:
+    branches:
+      - 'request-validation/**'
+    paths:
+      - '.remote-implementation/validation-template.json'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact connector-submitted template commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: input
+          persist-credentials: false
+
+      - name: Check out protected-main validator runtime
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: runtime
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Execute unchanged permanent validator against live authorities
+        shell: bash
+        env:
+          TEMPLATE_PATH: ${{ github.workspace }}/input/.remote-implementation/validation-template.json
+          OUTPUT_PATH: ${{ github.workspace }}/validated-request
+          INPUT_COMMIT: ${{ github.sha }}
+        working-directory: runtime
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import sys
+
+          sys.path.insert(0, str(Path("tools").resolve()))
+          from remote_implementation_request_submit import (
+              fetch_exact_heads, read_control_snapshot, prepare_exact_request
+          )
+          from remote_implementation_control import canonical_json_bytes, sha256_bytes
+
+          repo = Path.cwd()
+          runtime_sha = __import__("subprocess").check_output(
+              ["git", "rev-parse", "HEAD"], text=True
+          ).strip()
+          main_sha, control_sha = fetch_exact_heads(repo)
+          if main_sha != runtime_sha:
+              raise SystemExit("FAIL: PROTECTED_MAIN_MOVED_DURING_RUNTIME_CHECKOUT")
+
+          template = json.loads(Path(os.environ["TEMPLATE_PATH"]).read_bytes())
+          state, state_bytes, previous_id = read_control_snapshot(repo, control_sha)
+          request = prepare_exact_request(
+              template, state=state, state_bytes=state_bytes,
+              control_head=control_sha, live_main=main_sha,
+              last_request_id=previous_id
+          )
+          # The validator has executed, but no request has been submitted.
+          # A connector publisher must independently reauthenticate both refs,
+          # exact artifact bytes, immediate parent and expected-head CAS.
+          fresh_main, fresh_control = fetch_exact_heads(repo)
+          if (fresh_main, fresh_control) != (main_sha, control_sha):
+              raise SystemExit("FAIL: AUTHORITATIVE_REFS_MOVED_AFTER_VALIDATION")
+
+          output = Path(os.environ["OUTPUT_PATH"])
+          output.mkdir(parents=True, exist_ok=True)
+          raw = canonical_json_bytes(request)
+          (output / "request.json").write_bytes(raw)
+          receipt = {
+              "kind": "CONNECTOR_REQUEST_VALIDATION_V1",
+              "status": "VALIDATED_NOT_PUBLISHED",
+              "input_commit": os.environ["INPUT_COMMIT"],
+              "runtime_main_sha": main_sha,
+              "control_parent_sha": control_sha,
+              "control_state_sha256": sha256_bytes(state_bytes),
+              "request_sha256": sha256_bytes(raw),
+              "request_id": request["request_id"],
+              "operation": request["operation"],
+          }
+          (output / "receipt.json").write_bytes(canonical_json_bytes(receipt))
+          print(json.dumps(receipt, sort_keys=True))
+          PY
+
+      - name: Publish exact validated request and receipt as read-only artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: connector-request-validation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: validated-request/
+          if-no-files-found: error
+          retention-days: 7
