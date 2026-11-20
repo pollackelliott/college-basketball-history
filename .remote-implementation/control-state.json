@@ -719,18 +719,19 @@
     "miami-correction-release-preview-verify-0001",
     "miami-correction-release-gate2-approval-0001",
     "miami-correction-release-production-proof-0001",
-    "kentucky-expansion-phase0-0001"
+    "kentucky-expansion-phase0-0001",
+    "kentucky-expansion-phase0-0003"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:44655963613:1",
+  "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "kentucky-expansion-phase0-0003",
+  "active_request_sha256": "1ec1ac32b1bac5e1f6ded4c53dc5a5c9ccb5d17f96be6a999edd1e015deb92b3",
+  "active_school_key": "kentucky",
+  "active_target_branch": "data/kentucky-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1442,8 +1443,11 @@
       "target_branch": "data/kentucky-onboarding"
     }
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44655963613",
+  "lock_acquisition_request_commit": "4a931997b5e403e69eea8ce8ec428cf816b8a5a3",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
+  "transaction_state": "LOCKED"
 }
