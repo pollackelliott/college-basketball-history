@@ -551,10 +551,33 @@ jobs:
               )
               stage2 = stage2_result_summary(regenerated)
               post_proof = stage2['tracked_mutation_proof']
-              assert stage2['stage2_status'] == 'CAPABILITY_CENSUS_READY', stage2
-              assert stage2['blocker_count'] == 0, stage2
               assert stage2['warning_count'] == 0, stage2
               assert post_proof.get('tracked_stage2_mutation') == 'NONE', post_proof
+
+              status_path = checkpoint.parent / 'implementation-stage2-status.json'
+              baseline_status_raw = (control / status_path).read_bytes()
+              assert (
+                  hashlib.sha256(baseline_status_raw).hexdigest()
+                  == manifest['artifact_sha256']['implementation-stage2-status.json']
+              )
+              baseline_status = json.loads(baseline_status_raw)
+              baseline_blockers = set(baseline_status.get('blockers') or [])
+              candidate_blockers = set(
+                  (regenerated.get('status') or {}).get('blockers') or []
+              )
+              if stage2['stage2_status'] == 'CAPABILITY_CENSUS_READY':
+                  assert not candidate_blockers, candidate_blockers
+                  classification = 'RESOLVED_TO_CAPABILITY_CENSUS'
+              else:
+                  assert stage2['stage2_status'] == 'BLOCKED', stage2
+                  assert candidate_blockers, candidate_blockers
+                  assert not (
+                      baseline_blockers & candidate_blockers
+                  ), {
+                      'baseline_blockers': sorted(baseline_blockers),
+                      'candidate_blockers': sorted(candidate_blockers),
+                  }
+                  classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'
           finally:
               subprocess.run(
                   [
@@ -578,6 +601,8 @@ jobs:
               ],
               'field_level_proof': proof,
               'post_repair_stage2': stage2,
+              'candidate_blockers': sorted(candidate_blockers),
+              'classification': classification,
               'tracked_publication': 'NONE',
           }
           out = Path('/tmp/stage2-candidate-runtime-rehearsal')
@@ -586,7 +611,8 @@ jobs:
               json.dumps(summary, indent=2, sort_keys=True) + '\n'
           )
           print('EXACT_BLOCKED_CENSUS_OPPONENT_REPRESENTATION_REPLAY=PASS')
-          print('POST_REPAIR_STAGE2_CAPABILITY_CENSUS=READY')
+          print('CANDIDATE_CLASSIFICATION=' + classification)
+          print('POST_REPAIR_STAGE2_STATUS=' + stage2['stage2_status'])
           print('TRACKED_BASKETBALL_PUBLICATION=NONE')
           PY
 

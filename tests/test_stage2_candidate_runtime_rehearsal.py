@@ -317,6 +317,14 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             workflow,
         )
         self.assertIn(
+            "classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'",
+            workflow,
+        )
+        self.assertIn(
+            "baseline_blockers & candidate_blockers",
+            workflow,
+        )
+        self.assertIn(
             "sync_current_d1=authority['sync_current_d1']",
             workflow,
         )
