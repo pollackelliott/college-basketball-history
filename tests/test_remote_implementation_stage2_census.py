@@ -455,13 +455,15 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         tamper_venues: bool = False,
         bad_predecessor: bool = False,
         verification_pass: bool = True,
+        opponent_only: bool = False,
     ):
         phase0_target = request["target_sha"]
         control_branch = self.git(repo, "branch", "--show-current")
         self.git(repo, "checkout", "-b", "display-target", phase0_target)
         school_dir = repo / "schools" / SCHOOL
         (school_dir / "opponents.csv").write_text("opponents.csv display\n")
-        (school_dir / "source-games.csv").write_text("source-games.csv display\n")
+        if not opponent_only:
+            (school_dir / "source-games.csv").write_text("source-games.csv display\n")
         if extra_school_change:
             (school_dir / "notes.md").write_text("notes.md unrelated\n")
         if tamper_venues:
@@ -476,8 +478,11 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             f"schools/{SCHOOL}/opponents.csv",
             f"schools/{SCHOOL}/source-games.csv",
         ]
+        changed_paths = [f"schools/{SCHOOL}/opponents.csv"]
+        if not opponent_only:
+            changed_paths.append(f"schools/{SCHOOL}/source-games.csv")
         changed_hashes = {}
-        for changed_path in allowed_paths:
+        for changed_path in changed_paths:
             data = subprocess.run(
                 ["git", "show", f"{display_sha}:{changed_path}"],
                 cwd=repo,
@@ -495,8 +500,8 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "opponent_key_changes": 0,
             "source_game_non_name_field_changes": 0,
             "opponent_changed_keys": blocker_keys,
-            "source_game_changed_keys": blocker_keys,
-            "source_game_normalized_name_row_count": 1,
+            "source_game_changed_keys": [] if opponent_only else blocker_keys,
+            "source_game_normalized_name_row_count": 0 if opponent_only else 1,
         }
         proof_bytes = (json.dumps(proof, indent=2, sort_keys=True) + "\n").encode()
         proof_sha = hashlib.sha256(proof_bytes).hexdigest()
@@ -521,7 +526,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "prepared_parent_sha": phase0_target,
             "prepared_commit_sha": display_sha,
             "prepared_tree_sha": display_tree,
-            "changed_paths": allowed_paths,
+            "changed_paths": changed_paths,
             "allowed_paths": allowed_paths,
             "changed_file_sha256": changed_hashes,
             "integration_freeze_sha256": request["integration_freeze_sha256"],
@@ -565,12 +570,12 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
             "semantic_drift_before": drift,
             "semantic_drift_after": drift,
-            "changed_paths": allowed_paths,
+            "changed_paths": changed_paths,
             "changed_file_sha256": changed_hashes,
             "expected_blocker_keys": blocker_keys,
             "field_level_proof_sha256": proof_sha,
             "normalization_report_sha256": normalization_sha,
-            "source_game_normalized_name_row_count": 1,
+            "source_game_normalized_name_row_count": 0 if opponent_only else 1,
             "writeahead_manifest_path": writeahead_path,
             "writeahead_manifest_sha256": writeahead_sha,
         }
@@ -597,7 +602,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
             "field_level_proof_sha256": proof_sha,
             "normalization_report_sha256": normalization_sha,
-            "changed_paths": allowed_paths,
+            "changed_paths": changed_paths,
             "expected_blocker_keys": blocker_keys,
             "semantic_drift": "PASS",
             "tracked_stage2_mutation": "NONE",
@@ -638,6 +643,26 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             ],
             request["target_sha"],
         )
+
+    def test_verified_opponent_only_display_successor_is_authenticated(self):
+        repo, _, request, _ = self.make_authority_repo()
+        control_sha, request = self.add_verified_display_successor(
+            repo,
+            request,
+            opponent_only=True,
+        )
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        proof = authority["opponent_display_authority"]["field_level_proof"]
+        self.assertEqual(
+            authority["target_authority_kind"],
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+        )
+        self.assertEqual(proof["source_game_changed_keys"], [])
+        self.assertEqual(proof["source_game_normalized_name_row_count"], 0)
 
     def test_expansion_reconciled_venues_survive_verified_display_successor(self):
         repo, _, request, _ = self.make_authority_repo(

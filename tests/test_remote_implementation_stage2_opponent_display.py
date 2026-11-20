@@ -655,5 +655,79 @@ raise SystemExit(0 if ready else 1)
             )
 
 
+    def test_census_current_d1_blockers_are_accepted_as_registry_representation(self):
+        repo, control_sha, request = self.make_authority_repo()
+        status_path = (
+            repo
+            / ".remote-implementation/checkpoints"
+            / SCHOOL
+            / "stage2-census"
+            / "implementation-stage2-status.json"
+        )
+        status = json.loads(status_path.read_text())
+        status["blockers"] = [
+            "opponents.csv line 257: opponent key 'alpha-academy' is current D1 in programs.csv but the school package does not mark it current D1",
+            "opponents.csv line 304: opponent key 'beta-club' is marked current D1 in the school package but is not current D1 in programs.csv",
+        ]
+        status_path.write_text(
+            json.dumps(status, indent=2, sort_keys=True) + "\n"
+        )
+        manifest_path = status_path.parent / "checkpoint-manifest.json"
+        manifest = json.loads(manifest_path.read_text())
+        manifest["artifact_sha256"][
+            "implementation-stage2-status.json"
+        ] = hashlib.sha256(status_path.read_bytes()).hexdigest()
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+        )
+        self.git(repo, "add", ".remote-implementation")
+        self.git(repo, "commit", "-m", "current d1 blockers")
+        control_sha = self.git(repo, "rev-parse", "HEAD")
+        request["stage2_census_checkpoint"]["sha256"] = hashlib.sha256(
+            manifest_path.read_bytes()
+        ).hexdigest()
+
+        authority = verify_census_and_freeze_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(authority["blocker_keys"], KEYS)
+        self.assertEqual(authority["current_d1_blocker_keys"], KEYS)
+        self.assertEqual(authority["display_blocker_keys"], [])
+        self.assertTrue(authority["sync_current_d1"])
+
+    def test_field_proof_allows_only_census_bound_current_d1_changes(self):
+        before_opp = (
+            "canonical_opponent_key,canonical_opponent_name,current_d1\n"
+            "alpha-academy,Alpha Academy,\n"
+            "beta-club,Beta Club,Yes\n"
+        ).encode()
+        after_opp = (
+            "canonical_opponent_key,canonical_opponent_name,current_d1\n"
+            "alpha-academy,Alpha Academy,Yes\n"
+            "beta-club,Beta Club,No\n"
+        ).encode()
+        source = (
+            "source_game_id,normalized_opponent_key,normalized_opponent_name\n"
+            "E-1,alpha-academy,Alpha Academy\n"
+            "E-2,beta-club,Beta Club\n"
+        ).encode()
+
+        proof = field_level_mutation_proof(
+            school_key=SCHOOL,
+            before_opponents=before_opp,
+            after_opponents=after_opp,
+            before_source_games=source,
+            after_source_games=source,
+            expected_blocker_keys=KEYS,
+            allow_current_d1=True,
+        )
+        self.assertEqual(proof["opponent_changed_keys"], KEYS)
+        self.assertEqual(proof["opponent_current_d1_changed_keys"], KEYS)
+        self.assertEqual(proof["source_game_normalized_name_row_count"], 0)
+        self.assertEqual(proof["literal_evidence_changes"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()
