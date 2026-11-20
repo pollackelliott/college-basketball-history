@@ -474,11 +474,15 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         display_tree = self.git(repo, "rev-parse", "HEAD^{tree}")
         self.git(repo, "checkout", control_branch)
 
-        allowed_paths = [f"schools/{SCHOOL}/opponents.csv"]
+        allowed_paths = [
+            f"schools/{SCHOOL}/opponents.csv",
+            f"schools/{SCHOOL}/source-games.csv",
+        ]
+        changed_paths = [f"schools/{SCHOOL}/opponents.csv"]
         if not opponent_only:
-            allowed_paths.append(f"schools/{SCHOOL}/source-games.csv")
+            changed_paths.append(f"schools/{SCHOOL}/source-games.csv")
         changed_hashes = {}
-        for changed_path in allowed_paths:
+        for changed_path in changed_paths:
             data = subprocess.run(
                 ["git", "show", f"{display_sha}:{changed_path}"],
                 cwd=repo,
@@ -522,7 +526,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "prepared_parent_sha": phase0_target,
             "prepared_commit_sha": display_sha,
             "prepared_tree_sha": display_tree,
-            "changed_paths": allowed_paths,
+            "changed_paths": changed_paths,
             "allowed_paths": allowed_paths,
             "changed_file_sha256": changed_hashes,
             "integration_freeze_sha256": request["integration_freeze_sha256"],
@@ -566,7 +570,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
             "semantic_drift_before": drift,
             "semantic_drift_after": drift,
-            "changed_paths": allowed_paths,
+            "changed_paths": changed_paths,
             "changed_file_sha256": changed_hashes,
             "expected_blocker_keys": blocker_keys,
             "field_level_proof_sha256": proof_sha,
@@ -598,7 +602,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "semantic_snapshot_sha256": request["semantic_snapshot_sha256"],
             "field_level_proof_sha256": proof_sha,
             "normalization_report_sha256": normalization_sha,
-            "changed_paths": allowed_paths,
+            "changed_paths": changed_paths,
             "expected_blocker_keys": blocker_keys,
             "semantic_drift": "PASS",
             "tracked_stage2_mutation": "NONE",
