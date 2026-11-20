@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   stage7-freeze:
@@ -48,8 +49,12 @@ jobs:
               'stage6_candidate_package_sha256': 'abe4026bf182eb1f6f178a06b906ccac35fed479bdecf53fbf5edcbfb8e4eeec',
               'stage3b_checkpoint_sha256': '86cb728dc442f4534160f27ea5379161242a6b4b7a273d0876078dfdf422523e',
               'capsule_sha256': 'b22c1ce1c3c284a52e79ddbc739b2733f07ac29eb056aec6672550e020ef960e',
-              'runner_sha256': 'fc89d0fce3d5f0d7e97328b73efde59faf11ca56bec7e1080d8567b89ed9602b',
+              'runner_sha256': '83939e35bb633dc1d8ca9e5d856f40ab75c6dfc17b9eef3b38f5f45e3369a307',
               'researched_inception_season': '1927-1928',
+              'transport_run_id': 44638554726,
+              'transport_artifact_id': 14585830316,
+              'transport_artifact_sha256': '92779d46c5ced8f5be38de64a3a2471032e354b6c9f68db17e6aeeae787e2c36',
+              'transport_bundle_sha256': '03ac42f123235748e5407b6c2273ef108866ba4457074524cc8d7ce2349c4c25',
               'validation_mode': 'PROTECTED_MAIN',
           }
           if request != expected:
@@ -95,14 +100,77 @@ jobs:
           tar -xzf "$RUNNER_TEMP/stage7-capsule.tar.gz" -C "$RUNNER_TEMP/stage7-capsule"
 
           cat .github/stage7-runner/part-*.b64 | base64 -d > "$RUNNER_TEMP/stage7_freeze_runner.py"
-          echo "fc89d0fce3d5f0d7e97328b73efde59faf11ca56bec7e1080d8567b89ed9602b  $RUNNER_TEMP/stage7_freeze_runner.py" | sha256sum -c -
+          echo "83939e35bb633dc1d8ca9e5d856f40ab75c6dfc17b9eef3b38f5f45e3369a307  $RUNNER_TEMP/stage7_freeze_runner.py" | sha256sum -c -
           python -m py_compile "$RUNNER_TEMP/stage7_freeze_runner.py"
+
+      - name: Retrieve existing authenticated Git-history transport artifact
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: 14585830316
+          path: ${{ runner.temp }}/stage7-auth-git
+          github-token: ${{ github.token }}
+          repository: pollackelliott/college-basketball-history
+          run-id: 44638554726
+
+      - name: Authenticate transport artifact and construct exact Git-object repository
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          MAIN='7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec'
+          BASE='33af595fcae2a17664379638f89ce64c2e63be08'
+          curl -fsSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/pollackelliott/college-basketball-history/actions/artifacts/14585830316" \
+            > "$RUNNER_TEMP/stage7-auth-git-artifact.json"
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          root = Path(os.environ['RUNNER_TEMP'])
+          meta = json.loads((root / 'stage7-auth-git-artifact.json').read_text())
+          assert meta['id'] == 14585830316
+          assert meta['expired'] is False
+          assert meta['digest'] == 'sha256:92779d46c5ced8f5be38de64a3a2471032e354b6c9f68db17e6aeeae787e2c36'
+          assert meta['workflow_run']['id'] == 44638554726
+          manifests = list((root / 'stage7-auth-git').rglob('research-stage4-history-manifest.json'))
+          assert len(manifests) == 1
+          manifest = json.loads(manifests[0].read_text())
+          expected = {
+              'bundle_bytes': 374937743,
+              'bundle_name': 'research-stage4-history.bundle',
+              'bundle_sha256': '03ac42f123235748e5407b6c2273ef108866ba4457074524cc8d7ce2349c4c25',
+              'protected_main_sha': '7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec',
+              'research_base_sha': '33af595fcae2a17664379638f89ce64c2e63be08',
+              'schema_version': 1,
+              'school_key': 'miami',
+              'stage3b_checkpoint_sha256': '86cb728dc442f4534160f27ea5379161242a6b4b7a273d0876078dfdf422523e',
+              'transport': 'AUTHENTICATED_GIT_OBJECT_BUNDLE',
+          }
+          assert manifest == expected
+          PY
+
+          BUNDLE="$(find "$RUNNER_TEMP/stage7-auth-git" -type f -name research-stage4-history.bundle -print -quit)"
+          test -n "$BUNDLE"
+          echo "03ac42f123235748e5407b6c2273ef108866ba4457074524cc8d7ce2349c4c25  $BUNDLE" | sha256sum -c -
+          rm -rf "$RUNNER_TEMP/stage7-auth-repo"
+          git clone "$BUNDLE" "$RUNNER_TEMP/stage7-auth-repo"
+          git -C "$RUNNER_TEMP/stage7-auth-repo" checkout --detach "$MAIN"
+          test "$(git -C "$RUNNER_TEMP/stage7-auth-repo" rev-parse HEAD)" = "$MAIN"
+          git -C "$RUNNER_TEMP/stage7-auth-repo" cat-file -e "$BASE^{commit}"
 
       - name: Execute permanent Stage 7 freeze, fresh verify, and determinism proof
         shell: bash
         run: |
           set -euo pipefail
-          python "$RUNNER_TEMP/stage7_freeze_runner.py"             --capsule "$RUNNER_TEMP/stage7-capsule"             --output-dir "$RUNNER_TEMP/stage7-output"
+          cd "$RUNNER_TEMP/stage7-auth-repo"
+          python "$RUNNER_TEMP/stage7_freeze_runner.py" \
+            --capsule "$RUNNER_TEMP/stage7-capsule" \
+            --output-dir "$RUNNER_TEMP/stage7-output"
 
       - name: Publish immutable Stage 7 output
         uses: actions/upload-artifact@v4

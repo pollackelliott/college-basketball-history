@@ -6,7 +6,11 @@
   "stage6_candidate_package_sha256": "abe4026bf182eb1f6f178a06b906ccac35fed479bdecf53fbf5edcbfb8e4eeec",
   "stage3b_checkpoint_sha256": "86cb728dc442f4534160f27ea5379161242a6b4b7a273d0876078dfdf422523e",
   "capsule_sha256": "b22c1ce1c3c284a52e79ddbc739b2733f07ac29eb056aec6672550e020ef960e",
-  "runner_sha256": "fc89d0fce3d5f0d7e97328b73efde59faf11ca56bec7e1080d8567b89ed9602b",
+  "runner_sha256": "83939e35bb633dc1d8ca9e5d856f40ab75c6dfc17b9eef3b38f5f45e3369a307",
   "researched_inception_season": "1927-1928",
+  "transport_run_id": 44638554726,
+  "transport_artifact_id": 14585830316,
+  "transport_artifact_sha256": "92779d46c5ced8f5be38de64a3a2471032e354b6c9f68db17e6aeeae787e2c36",
+  "transport_bundle_sha256": "03ac42f123235748e5407b6c2273ef108866ba4457074524cc8d7ce2349c4c25",
   "validation_mode": "PROTECTED_MAIN"
 }
