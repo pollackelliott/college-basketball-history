@@ -725,7 +725,7 @@
     "kentucky-expansion-stage2-opponent-display-normalize-0002"
   ],
   "active_expected_main_sha": "7137ede6bf4a7725a4e2cfe766ac5f024ab8bb45",
-  "active_lock_commit": null,
+  "active_lock_commit": "e3156fede1792fd0369ac95b351558e7f9a8b7f5",
   "active_lock_owner": "github-actions:44678230963:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
