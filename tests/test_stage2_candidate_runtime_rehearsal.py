@@ -299,6 +299,32 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             workflow,
         )
 
+
+    def test_fresh_blocked_census_supports_opponent_representation_rehearsal(self):
+        workflow = (
+            ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "last.get('operation') == 'STAGE2_CENSUS'",
+            workflow,
+        )
+        self.assertIn(
+            "mode = 'BLOCKED_CENSUS_OPPONENT_REPRESENTATION'",
+            workflow,
+        )
+        self.assertIn(
+            "EXACT_BLOCKED_CENSUS_OPPONENT_REPRESENTATION_REPLAY=PASS",
+            workflow,
+        )
+        self.assertIn(
+            "sync_current_d1=authority['sync_current_d1']",
+            workflow,
+        )
+        self.assertIn(
+            'elif [[ "$AUTHORITY_MODE" == "BLOCKED_CENSUS_OPPONENT_REPRESENTATION" ]]',
+            workflow,
+        )
+
     def test_prepared_recovery_still_requires_authenticated_data_target(self):
         workflow = (
             ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"

@@ -289,6 +289,45 @@ jobs:
                           or (successor.get('post_repair_stage2') or {}).get('stage2_status')
                               != 'CAPABILITY_CENSUS_READY'):
                       fail('opponent-display successor does not bind exact verified last operation')
+              elif (last.get('operation') == 'STAGE2_CENSUS'
+                    and last.get('stage2_status') == 'BLOCKED'
+                    and last.get('fresh_runner_verification') == 'PASS'
+                    and last.get('remote_stage2_census_equivalence') == 'PASS'):
+                  mode = 'BLOCKED_CENSUS_OPPONENT_REPRESENTATION'
+                  checkpoint = str(last.get('checkpoint_manifest_path') or '')
+                  school = str(last.get('school_key') or '')
+                  expected_main = str(last.get('protected_main_sha') or '')
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or not valid_sha(expected_main)
+                          or not checkpoint.startswith(
+                              '.remote-implementation/checkpoints/' + school + '/'
+                          )
+                          or not checkpoint.endswith('/checkpoint-manifest.json')
+                          or '..' in Path(checkpoint).parts):
+                      fail('blocked census checkpoint/main authority invalid')
+                  raw = (Path('control') / checkpoint).read_bytes()
+                  if hashlib.sha256(raw).hexdigest() != last.get(
+                      'checkpoint_manifest_sha256'
+                  ):
+                      fail('blocked census bytes do not match control-state hash')
+                  manifest = json.loads(raw)
+                  preflight = manifest.get('preflight') or {}
+                  if (
+                      manifest.get('kind')
+                      != 'REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT'
+                      or manifest.get('stage2_status') != 'BLOCKED'
+                      or manifest.get('capability_census_status')
+                      != 'PREFLIGHT_BLOCKED'
+                      or manifest.get('school_key') != school
+                      or manifest.get('request_id') != last.get('request_id')
+                      or manifest.get('target_branch') != last.get('target_branch')
+                      or manifest.get('target_sha') != last.get('target_sha')
+                      or manifest.get('protected_main_sha') != expected_main
+                      or int(preflight.get('blocker_count', 0)) <= 0
+                      or int(preflight.get('warning_count', -1)) != 0
+                      or int(preflight.get('decision_count', -1)) != 0
+                  ):
+                      fail('blocked census does not bind exact verified last operation')
               elif (last.get('operation') == 'STAGE2_CURRENT_MAIN_REFRESH'
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_current_main_refresh_equivalence') == 'PASS'):
@@ -374,6 +413,182 @@ jobs:
             exit 1
           fi
           git -C control cat-file -e "$control_commit^{commit}"
+
+      - name: Rehearse fresh-verified blocked census opponent representation repair
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'BLOCKED_CENSUS_OPPONENT_REPRESENTATION'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          candidate = Path('candidate').resolve()
+          control = Path('control').resolve()
+          sys.path.insert(0, str(candidate / 'tools'))
+
+          from remote_implementation_stage2_census import (
+              add_existing_onboarding_worktree,
+          )
+          from remote_implementation_stage2_opponent_display import (
+              apply_and_prepare_repair,
+              post_repair_stage2_result,
+              run_normalizer_dry_run,
+              stage2_result_summary,
+              verify_census_and_freeze_authority,
+          )
+          from stage2_candidate_runtime_rehearsal import (
+              candidate_changed_paths,
+              validate_candidate_scope,
+          )
+
+          state = json.loads(
+              (control / '.remote-implementation/control-state.json').read_text()
+          )
+          last = state.get('last_operation') or {}
+          checkpoint = Path(
+              '${{ steps.authority.outputs.proposal_checkpoint_path }}'
+          )
+          raw = (control / checkpoint).read_bytes()
+          assert (
+              hashlib.sha256(raw).hexdigest()
+              == last['checkpoint_manifest_sha256']
+          )
+          manifest = json.loads(raw)
+          candidate_sha = '${{ steps.authority.outputs.candidate_sha }}'
+          expected_main = '${{ steps.authority.outputs.expected_main_sha }}'
+          changed_paths, scoped_main = candidate_changed_paths(
+              candidate,
+              expected_main,
+              candidate_sha,
+          )
+          validate_candidate_scope(changed_paths)
+          assert scoped_main == expected_main, (scoped_main, expected_main)
+
+          request = {
+              'school_key': last['school_key'],
+              'target_branch': last['target_branch'],
+              'target_sha': last['target_sha'],
+              'expected_protected_main_sha': expected_main,
+              'stage2_census_checkpoint': {
+                  'path': checkpoint.as_posix(),
+                  'sha256': last['checkpoint_manifest_sha256'],
+              },
+              'integration_freeze_sha256': manifest[
+                  'integration_freeze_sha256'
+              ],
+              'semantic_snapshot_sha256': manifest[
+                  'semantic_snapshot_sha256'
+              ],
+          }
+          authority = verify_census_and_freeze_authority(
+              request,
+              '${{ steps.authority.outputs.control_commit }}',
+              source_repo=control,
+          )
+          blockers = authority['blocker_keys']
+          assert blockers
+          assert len(blockers) == manifest['preflight']['blocker_count']
+          assert manifest['preflight']['warning_count'] == 0
+          assert manifest['preflight']['decision_count'] == 0
+
+          worktree = add_existing_onboarding_worktree(
+              request['target_branch'],
+              request['target_sha'],
+              request['school_key'],
+              source_repo=candidate,
+          )
+          try:
+              dry = run_normalizer_dry_run(
+                  worktree,
+                  request['school_key'],
+                  authority['freeze_bytes'],
+                  blockers,
+                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
+                  tool_repo=candidate,
+                  sync_current_d1=authority['sync_current_d1'],
+              )
+              proposed = sorted(
+                  item['canonical_opponent_key']
+                  for item in dry['report']['changes']
+              )
+              assert proposed == blockers, (proposed, blockers)
+              prepared = apply_and_prepare_repair(
+                  worktree,
+                  request['school_key'],
+                  request['target_sha'],
+                  authority['freeze_bytes'],
+                  dry,
+                  blockers,
+                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
+                  tool_repo=candidate,
+                  sync_current_d1=authority['sync_current_d1'],
+              )
+              proof = prepared['field_level_proof']
+              assert proof['literal_evidence_changes'] == 0, proof
+              assert proof['source_game_non_name_field_changes'] == 0, proof
+              assert proof['opponent_changed_keys'] == blockers, proof
+              assert not (
+                  set(proof['source_game_changed_keys']) - set(blockers)
+              ), proof
+              if authority['sync_current_d1']:
+                  assert (
+                      proof['opponent_current_d1_changed_keys']
+                      == authority['current_d1_blocker_keys']
+                  ), proof
+
+              regenerated = post_repair_stage2_result(
+                  worktree,
+                  request['school_key'],
+                  authority['freeze_bytes'],
+                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
+                  tool_repo=candidate,
+              )
+              stage2 = stage2_result_summary(regenerated)
+              post_proof = stage2['tracked_mutation_proof']
+              assert stage2['stage2_status'] == 'CAPABILITY_CENSUS_READY', stage2
+              assert stage2['blocker_count'] == 0, stage2
+              assert stage2['warning_count'] == 0, stage2
+              assert post_proof.get('tracked_stage2_mutation') == 'NONE', post_proof
+          finally:
+              subprocess.run(
+                  [
+                      'git', '-C', str(candidate), 'worktree', 'remove',
+                      '--force', str(worktree),
+                  ],
+                  check=True,
+              )
+
+          summary = {
+              'kind': 'BLOCKED_CENSUS_OPPONENT_REPRESENTATION_CANDIDATE_REHEARSAL',
+              'candidate_sha': candidate_sha,
+              'control_commit': '${{ steps.authority.outputs.control_commit }}',
+              'school_key': request['school_key'],
+              'target_sha': request['target_sha'],
+              'protected_main_sha': expected_main,
+              'changed_paths': changed_paths,
+              'blocker_keys': blockers,
+              'current_d1_blocker_keys': authority[
+                  'current_d1_blocker_keys'
+              ],
+              'field_level_proof': proof,
+              'post_repair_stage2': stage2,
+              'tracked_publication': 'NONE',
+          }
+          out = Path('/tmp/stage2-candidate-runtime-rehearsal')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'blocked-census-opponent-representation-summary.json').write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + '\n'
+          )
+          print('EXACT_BLOCKED_CENSUS_OPPONENT_REPRESENTATION_REPLAY=PASS')
+          print('POST_REPAIR_STAGE2_CAPABILITY_CENSUS=READY')
+          print('TRACKED_BASKETBALL_PUBLICATION=NONE')
+          PY
 
       - name: Replay exact blocked proposal with candidate tooling
         if: >-
@@ -708,6 +923,8 @@ jobs:
           print(summary['candidate_scope_main_sha'])
           PY
           )"
+          elif [[ "$AUTHORITY_MODE" == "BLOCKED_CENSUS_OPPONENT_REPRESENTATION" ]]; then
+            scoped_main="$EXPECTED_MAIN_SHA"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_REFRESH" ]]; then
             scoped_main="$EXPECTED_MAIN_SHA"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_OPPONENT_DISPLAY" ]]; then
