@@ -636,6 +636,12 @@ def run_gates(
                 )
         else:
             outputs[label] = run(command, cwd=command_cwd, label=label)
+    if zero_delta is not None:
+        # Validate the immutable state again after every gate/test subprocess.
+        _zero_delta_gate_context(
+            repo, school_key, approved_plan, zero_delta_summary,
+            zero_delta_historical_state_proof,
+        )
     if changed is not None:
         bad = whitespace_errors(repo, changed)
         if bad:

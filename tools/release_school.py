@@ -131,6 +131,10 @@ def correction_integration_freeze_bytes(
     preparation hashes these exact bytes; merge rechecks that hash before the
     irreversible GitHub merge and transfers only these bytes into Production proof.
     """
+    # Zero-delta expansion proofs are not post-publication correction source IDs.
+    # Their exact Freeze is handled by runtime_integration_freeze_bytes below.
+    if manifest.get("summary", {}).get("expansion_transaction_kind") == "ZERO_DELTA_METADATA_ONLY":
+        return None
     gate_kwargs = correction_gate_kwargs_from_manifest(manifest, school_key)
     if not gate_kwargs:
         return None
