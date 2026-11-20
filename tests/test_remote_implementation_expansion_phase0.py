@@ -18,6 +18,7 @@ from remote_implementation_expansion_phase0 import (
     Stop,
     _install_scope_generated_projection,
     _require_repository_acceptance,
+    _require_source_game_package_update,
     _target_predecessor_authority,
     _verification_bound_main,
 )
@@ -341,6 +342,78 @@ class ExpansionFreshVerificationRegressionTests(unittest.TestCase):
                     {"protected_main_sha": "3" * 40},
                     "4" * 40,
                 )
+
+
+class ExpansionSourceGameUpdateGuardTests(unittest.TestCase):
+    def test_zero_delta_projection_allows_unchanged_source_games(self):
+        request = expansion_request()
+        intent = {
+            "projected_package_sha256": {
+                "source-games.csv": "a" * 64,
+            }
+        }
+        with patch(
+            "remote_implementation_expansion_phase0.git_show_bytes",
+            return_value=b"published source games",
+        ), patch(
+            "remote_implementation_expansion_phase0.sha256_bytes",
+            return_value="a" * 64,
+        ):
+            _require_source_game_package_update(
+                worktree=Path("/tmp/example"),
+                live_main=request["expected_protected_main_sha"],
+                request=request,
+                intent=intent,
+                changed_paths=["data/reference/programs.csv"],
+            )
+
+    def test_nonzero_projection_still_requires_source_games_update(self):
+        request = expansion_request()
+        intent = {
+            "projected_package_sha256": {
+                "source-games.csv": "b" * 64,
+            }
+        }
+        with patch(
+            "remote_implementation_expansion_phase0.git_show_bytes",
+            return_value=b"published source games",
+        ), patch(
+            "remote_implementation_expansion_phase0.sha256_bytes",
+            return_value="a" * 64,
+        ):
+            with self.assertRaisesRegex(
+                Stop,
+                "EXPANSION_PHASE0_SOURCE_GAME_PACKAGE_NOT_UPDATED",
+            ):
+                _require_source_game_package_update(
+                    worktree=Path("/tmp/example"),
+                    live_main=request["expected_protected_main_sha"],
+                    request=request,
+                    intent=intent,
+                    changed_paths=["data/reference/programs.csv"],
+                )
+
+    def test_nonzero_projection_accepts_explicit_source_games_update(self):
+        request = expansion_request()
+        intent = {
+            "projected_package_sha256": {
+                "source-games.csv": "b" * 64,
+            }
+        }
+        with patch(
+            "remote_implementation_expansion_phase0.git_show_bytes",
+            return_value=b"published source games",
+        ), patch(
+            "remote_implementation_expansion_phase0.sha256_bytes",
+            return_value="a" * 64,
+        ):
+            _require_source_game_package_update(
+                worktree=Path("/tmp/example"),
+                live_main=request["expected_protected_main_sha"],
+                request=request,
+                intent=intent,
+                changed_paths=["schools/example/source-games.csv"],
+            )
 
 
 class ExpansionRemoteRequestValidationTests(unittest.TestCase):
