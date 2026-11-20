@@ -18,6 +18,7 @@ from remote_implementation_expansion_phase0 import (
     Stop,
     _install_scope_generated_projection,
     _require_repository_acceptance,
+    _require_source_game_package_update,
     _target_predecessor_authority,
     _verification_bound_main,
 )
@@ -157,6 +158,32 @@ class ExpansionImplementationAcceptancePreflightTests(unittest.TestCase):
                 "EXPANSION_IMPLEMENTATION_ACCEPTANCE_RUNTIME_MISMATCH",
             ):
                 _require_repository_acceptance("3" * 40, Path(temporary))
+
+
+class ExpansionZeroDeltaSourceUpdateTests(unittest.TestCase):
+    def test_zero_delta_scope_only_change_does_not_require_source_games_diff(self):
+        intent={
+            "school_key":"example",
+            "supplemental_source_game_count":0,
+        }
+        _require_source_game_package_update(
+            intent,
+            ["data/reference/programs.csv"],
+        )
+
+    def test_nonzero_expansion_still_requires_source_games_diff(self):
+        intent={
+            "school_key":"example",
+            "supplemental_source_game_count":1,
+        }
+        with self.assertRaisesRegex(
+            Stop,
+            "EXPANSION_PHASE0_SOURCE_GAME_PACKAGE_NOT_UPDATED",
+        ):
+            _require_source_game_package_update(
+                intent,
+                ["data/reference/programs.csv"],
+            )
 
 
 class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):

@@ -73,6 +73,22 @@ def exact_paths(
     )
 
 
+def source_game_package_update_required(intent: dict[str, Any]) -> bool:
+    """Require a source-games diff unless the authenticated expansion is zero-delta."""
+    supplemental = intent.get("supplemental_source_game_count")
+    if supplemental is None:
+        # Backward compatibility for older durable intents: preserve the historical
+        # fail-closed requirement unless zero-delta authority was serialized explicitly.
+        return True
+    require(
+        isinstance(supplemental, int)
+        and not isinstance(supplemental, bool)
+        and supplemental >= 0,
+        "EXPANSION_SUPPLEMENTAL_SOURCE_GAME_COUNT_INVALID",
+    )
+    return supplemental > 0
+
+
 def expected_global_paths(manifest: dict[str, Any]) -> frozenset[str]:
     selected = set(MUTABLE_GLOBALS)
     if manifest.get("scope_mutation_authorized"):
@@ -236,6 +252,7 @@ def authenticate_intent(
         "stage1_proof_sha256":accepted_stage1_proof_sha256,
         "venue_reconciliation_sha256":reconciliation_sha,
         "source_game_count":preview["source_game_count"],
+        "supplemental_source_game_count":preview["supplemental_source_game_count"],
         "canonical_identity_counts":manifest["canonical_identity_counts"],
         "allowed_changed_paths":sorted(expected),
         "projected_package_sha256":preview["six_file_preview_sha256"],
@@ -313,9 +330,11 @@ def verify_exact_prepared(
             "EXPANSION_CHANGED_PATHS_DUPLICATE")
     # A complete six-file candidate need not change every inherited member.
     # The six expected file hashes below must all be present on the prepared
-    # commit; require only the expanded source game ledger to actually change.
-    require(f"schools/{intent['school_key']}/source-games.csv" in changed_paths,
-            "EXPANSION_SOURCE_GAME_PACKAGE_NOT_UPDATED")
+    # commit. A nonzero supplemental expansion must change source-games.csv;
+    # an authenticated zero-delta expansion may legitimately be scope-only.
+    if source_game_package_update_required(intent):
+        require(f"schools/{intent['school_key']}/source-games.csv" in changed_paths,
+                "EXPANSION_SOURCE_GAME_PACKAGE_NOT_UPDATED")
     require(set(changed_paths)<=set(intent["allowed_changed_paths"]),
             "EXPANSION_CHANGED_PATH_OUTSIDE_ALLOWLIST")
     expected={f"schools/{intent['school_key']}/{name}":digest

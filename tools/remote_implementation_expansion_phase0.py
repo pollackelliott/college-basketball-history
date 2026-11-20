@@ -30,6 +30,7 @@ from all_history_expansion_phase0_preview import preview_phase0
 from all_history_expansion_remote_contract import (
     authenticate_intent,
     exact_paths,
+    source_game_package_update_required,
     verify_exact_prepared,
 )
 from remote_implementation_control import (
@@ -509,6 +510,15 @@ def _add_expansion_replay_worktree(
     return path
 
 
+def _require_source_game_package_update(
+    intent: dict[str, Any],
+    changed_paths: list[str],
+) -> None:
+    source_path = f"schools/{intent['school_key']}/source-games.csv"
+    if source_game_package_update_required(intent) and source_path not in changed_paths:
+        raise Stop("EXPANSION_PHASE0_SOURCE_GAME_PACKAGE_NOT_UPDATED")
+
+
 def prepare_expansion_candidate(
     *,
     request: dict[str, Any],
@@ -557,8 +567,7 @@ def prepare_expansion_candidate(
         ).stdout.splitlines()
         if line.strip()
     )
-    if "schools/%s/source-games.csv" % request["school_key"] not in changed:
-        raise Stop("EXPANSION_PHASE0_SOURCE_GAME_PACKAGE_NOT_UPDATED")
+    _require_source_game_package_update(authority["intent"], changed)
     if not set(changed).issubset(set(allowed)):
         raise Stop(
             "EXPANSION_PHASE0_DIFF_OUTSIDE_CONTRACT:"

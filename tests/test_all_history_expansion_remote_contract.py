@@ -12,6 +12,7 @@ from all_history_expansion_integration import (
 from all_history_expansion_remote_contract import (
     OP_EXPANSION_PHASE0,authenticate_intent,prove_lock_contract,
     inspect_recovery,check_cas,verify_exact_prepared,exact_paths,
+    source_game_package_update_required,
 )
 from remote_implementation_control import initial_control_state, RemoteImplementationError
 
@@ -158,6 +159,74 @@ class ExpansionTransactionModelTests(unittest.TestCase):
                 IntegrationAuthorityError,"GLOBAL_PREVIEW_PATHS_FORBIDDEN"
             ):
                 self.authenticate(freeze,preview)
+
+    def test_zero_delta_intent_allows_scope_only_prepared_tree(self):
+        with tempfile.TemporaryDirectory() as temp:
+            freeze,preview,view=self.fixture(Path(temp))
+            manifest=json.loads((freeze/MANIFEST_NAME).read_bytes())
+            manifest["source_preservation"]={
+                "inherited_count":2,"supplemental_count":0,"combined_count":2
+            }
+            manifest["manifest_self_fingerprint_sha256"]=""
+            manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+            raw=canonical_bytes(manifest)
+            (freeze/MANIFEST_NAME).write_bytes(raw)
+            self.integration_sha=sha256(raw)
+            self.request["integration_freeze_sha256"]=self.integration_sha
+            view["integration_freeze_sha256"]=self.integration_sha
+            view["source_game_count"]=2
+            view["inherited_source_game_count"]=2
+            view["supplemental_source_game_count"]=0
+            (preview/"phase0-preview.json").write_bytes(canonical_bytes(view))
+
+            intent=self.authenticate(freeze,preview)
+            self.assertEqual(intent["supplemental_source_game_count"],0)
+            self.assertFalse(source_game_package_update_required(intent))
+            expected={
+                f"schools/{self.school}/{k}":v
+                for k,v in intent["projected_package_sha256"].items()
+            }
+            expected.update(intent["projected_global_sha256"])
+            result=verify_exact_prepared(
+                intent=intent,
+                prepared_parent_sha=self.main,
+                prepared_tree_sha="1"*40,
+                replay_tree_sha="1"*40,
+                changed_paths=["data/reference/programs.csv"],
+                committed_files_sha256=expected,
+                inherited_rows_preserved=True,
+                semantic_guard_hash="2"*64,
+            )
+            self.assertEqual(
+                result["status"],
+                "INDEPENDENT_DISPOSABLE_PREPARED_TREE_EQUIVALENCE",
+            )
+
+    def test_legacy_intent_without_zero_delta_binding_stays_fail_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            freeze,preview,_=self.fixture(Path(temp))
+            intent=self.authenticate(freeze,preview)
+            intent.pop("supplemental_source_game_count")
+            self.assertTrue(source_game_package_update_required(intent))
+            expected={
+                f"schools/{self.school}/{k}":v
+                for k,v in intent["projected_package_sha256"].items()
+            }
+            expected.update(intent["projected_global_sha256"])
+            with self.assertRaisesRegex(
+                IntegrationAuthorityError,
+                "SOURCE_GAME_PACKAGE_NOT_UPDATED",
+            ):
+                verify_exact_prepared(
+                    intent=intent,
+                    prepared_parent_sha=self.main,
+                    prepared_tree_sha="1"*40,
+                    replay_tree_sha="1"*40,
+                    changed_paths=["data/reference/programs.csv"],
+                    committed_files_sha256=expected,
+                    inherited_rows_preserved=True,
+                    semantic_guard_hash="2"*64,
+                )
 
     def test_hash_bound_venue_reconciliation_is_part_of_intent(self):
         with tempfile.TemporaryDirectory() as temp:
