@@ -1,0 +1,27 @@
+{
+  "approved_plan_hash": "3f83e4028c215cdd078921eb97b8c2c4b1a0b07c4f621f37545b2247a517ec2d",
+  "approved_plan_sha256": "53235b5b590920649b08bc6316d1788c833b1333b1492c41829191e2af4513b9",
+  "changed_file_sha256": {
+    "data/reconciliation/onboarding-decisions/kentucky-3f83e4028c21.json": "53235b5b590920649b08bc6316d1788c833b1333b1492c41829191e2af4513b9"
+  },
+  "changed_path_count": 1,
+  "changed_paths": [
+    "data/reconciliation/onboarding-decisions/kentucky-3f83e4028c21.json"
+  ],
+  "deleted_paths": [],
+  "fresh_replayed_tree_sha": "879850fdbe054147a03dc6cc5f2a4e151e949076",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_SEALED_APPLY_VERIFICATION",
+  "protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
+  "release_manifest_sha256": "5c23e0e7fba4c8a78b5b5ee41ba0708f9a5491ae3c3d8b9b6887ddcce2fad330",
+  "remote_stage2_sealed_apply_equivalence": "PASS",
+  "request_id": "kentucky-expansion-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "stage2_gate1_seal_checkpoint_sha256": "ada34ae4f532353d48709d2c252d26d140a8bb48c1a5936e73eaa3f942e3b649",
+  "stage2_gate1_seal_verification_sha256": "c990636748b193de45191a9c14f94f8f57b70d0ee2b21e90ae02efef2b933809",
+  "target_branch": "data/kentucky-onboarding",
+  "target_predecessor_sha": "40cc70f8aeb6603e3e18f78f00642da474d4fc20",
+  "target_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "target_tree_sha": "879850fdbe054147a03dc6cc5f2a4e151e949076",
+  "tracked_stage2_mutation": "EXACT_SEALED_APPLY_SUCCESSOR"
+}
