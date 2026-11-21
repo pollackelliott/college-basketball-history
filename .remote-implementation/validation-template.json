@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "kentucky-expansion-stage2-current-main-refresh-0002",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "kentucky",
+  "expected_protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "927caae37d07ec26f737847d2696fcd5bea169e1",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "82bc96fca234234663022bf2585e6517071b650eadcd9ed5fcd80ae50438cc62"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "sha256": "ebd7be27eaf82c90f62ce0df8c4f2b9b9ce525b743e935b40293d2a27a9264ab"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "55da0532a50363503ae9f04f02a8968bf275a386d5a6a6c447921e079cfd57e7"
+  },
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Control Center authorizes exactly one Kentucky STAGE2_CURRENT_MAIN_REFRESH from target 927caae37d07ec26f737847d2696fcd5bea169e1 to protected main 107936c06558c21cb914e063a35e89870dc09223. Fresh merge base is 5dd2ce0ce7fba59ffe85811836c534e7356f3724. Target-only changed paths = 8; current-main-only changed paths = 11; overlap = 0; current main touches no schools/kentucky path. Current-main-only changes are generic tooling/tests/workflow/docs, including merged PR #684 zero-delta compatibility work and merged PR #685 connector request-validation bridge. Preserve immutable Kentucky Research/Integration authority and exact package semantics. Continue only through repository-owned refresh -> fresh verification -> census -> fresh verification -> proposal -> fresh verification, stopping at the first exact blocker or durable OWNER_GATE_1_READY."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "kentucky-expansion-stage2-census-0003",
+    "proposal_request_id": "kentucky-expansion-stage2-proposal-0002",
+    "expected_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/kentucky-expansion-stage2-proposal-0001/recommendation-map.json",
+      "sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc"
+    }
+  },
+  "creation_provenance": {
+    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation — Control Center-authorized current-main refresh and Stage 2 continuation after PR #685",
+    "authorization": "Execute one bounded current-main refresh followed by the repository-owned STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation against unchanged frozen Kentucky authority and the exact zero-decision recommendation map. Stop at first blocker or durable OWNER_GATE_1_READY. No Owner Gate 1 approval, fill, seal, apply, release, merge, or historical-decision mutation authority."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
