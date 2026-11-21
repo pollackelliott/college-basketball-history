@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "cf2ba638a036418bca255a3f8e4f9389a413d863",
+  "merge_parent_onboarding": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "merge_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "249816a8dc3b430eb450aeaea236c9d6f13cf289e0f0503aa3134732ea681b78",
+  "owner_gate_2_verification_sha256": "428189574db7f317948d144a10978e673269b25fdc18c17d1670150cef8671f8",
+  "pr_head_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "pr_number": 686,
+  "production_deployment_id": 7969548414,
+  "production_json_checked_count": 3,
+  "production_proof": true,
+  "production_proof_sha256": "a0947dedfae06644b721b7d2c8f6e844de9a39e4bd4210e0435c7abfe489f6c6",
+  "protected_main_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "request_id": "kentucky-expansion-release-production-proof-0001",
+  "request_sha256": "e1147264e5de926ccedf21528821a751587ed81461afba98a03eb18d294062b4",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "status": "PRODUCTION_PROOF_PASS"
+}

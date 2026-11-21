@@ -1,0 +1,23 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "cf2ba638a036418bca255a3f8e4f9389a413d863",
+  "merge_parent_onboarding": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "merge_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "owner_gate_2_approval_checkpoint_sha256": "249816a8dc3b430eb450aeaea236c9d6f13cf289e0f0503aa3134732ea681b78",
+  "owner_gate_2_verification_sha256": "428189574db7f317948d144a10978e673269b25fdc18c17d1670150cef8671f8",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "pr_number": 686,
+  "production_deployment_id": 7969548414,
+  "production_deployment_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/kentucky.json"
+  ],
+  "production_json_checked_count": 3,
+  "school_key": "kentucky",
+  "status": "COMPLETE"
+}
