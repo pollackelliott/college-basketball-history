@@ -744,7 +744,7 @@
   "active_request_sha256": "54f678477637e08d56ef65f80477f785fc573a2b76cb0a363a2726e2f8b08a44",
   "active_school_key": "kentucky",
   "active_target_branch": "data/kentucky-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "f8e017b388ce527471709ef3aaeb8423bfbee63a",
   "active_writeahead_path": ".remote-implementation/writeahead/kentucky/kentucky-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "c940a98edcce67bce431e7abf61e6d95d6443ffe35d5d215f200451efe2ace0c",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
