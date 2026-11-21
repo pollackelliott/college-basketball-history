@@ -24,8 +24,8 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Execute one bounded current-main refresh followed by the repository-owned STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation against unchanged frozen Kentucky authority and the exact zero-decision recommendation map. Stop at first blocker or durable OWNER_GATE_1_READY. No Owner Gate 1 approval, fill, seal, apply, release, merge, or historical-decision mutation authority.",
-    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation — Control Center-authorized current-main refresh and Stage 2 continuation after PR #685"
+    "authorization": "Correct the pre-acceptance request-envelope transport defect only, then execute the already-authorized current-main refresh followed by repository-owned STAGE2_REFRESH_CENSUS_PROPOSAL_V1 continuation. Stop at first blocker or durable OWNER_GATE_1_READY. No Owner Gate 1 approval, fill, seal, apply, release, merge, or historical-decision mutation authority.",
+    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation — same Control Center-authorized Stage 2 phase; corrected connector envelope after pre-acceptance path typo"
   },
   "current_main_refresh_authorization": {
     "approved": true,
@@ -50,9 +50,9 @@
       "sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc"
     }
   },
-  "previous_control_state_commit": "76d413643d4a33c7cf7031d58971daf6355d6e2e",
+  "previous_control_state_commit": "844361d63b035e2a0728476066e76667ad6d66f1",
   "previous_control_state_sha256": "e315aa0ae435a08b6d3606d8521b323c4d0e3180c01e4ab8a8772a4734447aff",
-  "request_id": "kentucky-expansion-stage2-current-main-refresh-0002",
+  "request_id": "kentucky-expansion-stage2-current-main-refresh-0003",
   "schema_version": 1,
   "school_key": "kentucky",
   "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
@@ -61,7 +61,7 @@
     "sha256": "55da0532a50363503ae9f04f02a8968bf275a386d5a6a6c447921e079cfd57e7"
   },
   "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/succcessors/kentucky/kentucky-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
     "sha256": "ebd7be27eaf82c90f62ce0df8c4f2b9b9ce525b743e935b40293d2a27a9264ab"
   },
   "target_branch": "data/kentucky-onboarding",
