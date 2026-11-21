@@ -12,6 +12,7 @@ import subprocess
 
 
 CONTROL_BRANCH = "control/remote-implementation"
+PUBLICATION_BRANCH_PREFIXES = ("data/", "maintenance/")
 
 
 def should_skip(*, ref: str, parent_available: bool, site_diff_returncode: int) -> bool:
@@ -20,6 +21,11 @@ def should_skip(*, ref: str, parent_available: bool, site_diff_returncode: int) 
         return False
     if ref == CONTROL_BRANCH:
         return True
+    # School/shared publication branches require an exact-head Preview for
+    # release verification. Their cumulative PR can change site output even
+    # when the final sealed/apply commit itself does not touch site/.
+    if ref.startswith(PUBLICATION_BRANCH_PREFIXES):
+        return False
     if not parent_available:
         return False
     # git diff --quiet: 0 = no deployable change, 1 = change, >1 = error.
