@@ -1,0 +1,59 @@
+{
+  "approved_plan_hash_preview": "b36a2e7c09fd5b2987e0546410aa8cc1509f4dd9ffb0945efa6665d3a95b3fab",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from kentucky-expansion-stage2-gate1-fill-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "expected_protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
+  "filled_review_sha256": "c2cd10ee18e16ec27c42227d8b89292311bdf3c59233855afd07a02419251e4d",
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "phase_continuation": {
+    "apply_request_id": "kentucky-expansion-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "kentucky-expansion-stage2-preseal-0001",
+    "seal_request_id": "kentucky-expansion-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "8bfeca2974cca1fc6b20a8852834c61295eae31d",
+  "previous_control_state_sha256": "8b6ed59b0665947a081064dbced410061449cfcc04031bf1a5f70d4575ebc785",
+  "recommendation_map_sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc",
+  "request_id": "kentucky-expansion-stage2-preseal-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "778fedd3faf4cd1c08758afd79a7e232eba024108aadedb27556ee030e35b77a"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/kentucky/kentucky-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "5251f15db26f5a5d45085e12aef6c55e1e64630e3e9b1254850abfeeacb7cf14"
+  },
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "40cc70f8aeb6603e3e18f78f00642da474d4fc20"
+}
