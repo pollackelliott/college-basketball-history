@@ -4,8 +4,6 @@
   "request_id": "kentucky-expansion-release-preview-verify-0001",
   "operation": "RELEASE_PREVIEW_VERIFY",
   "school_key": "kentucky",
-  "previous_control_state_commit": "c4781144df8e757042066084dc3904661ab66bf6",
-  "previous_control_state_sha256": "ada9680612f8516bdee6cd6cd5f21b004b3687955139fc01fa2f41d20734d440",
   "expected_protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
   "target_branch": "data/kentucky-onboarding",
   "target_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
