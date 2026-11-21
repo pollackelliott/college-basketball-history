@@ -1,0 +1,19 @@
+{
+  "basis_by_decision": {},
+  "canonical_patch_by_decision": {},
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "decisions": {},
+  "defaults": {},
+  "identity": {},
+  "notes_by_decision": {},
+  "prepared_against_protected_main_sha": "5dd2ce0ce7fba59ffe85811836c534e7356f3724",
+  "prepared_against_target_sha": "927caae37d07ec26f737847d2696fcd5bea169e1",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "source_patch_by_decision": {},
+  "source_stage2_census": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "cac3ebea1d7b2dcbdee6e4bebc362b50af210c9110339237f5e38edc2d388c8e"
+  },
+  "venue_relationship_patch_by_decision": {}
+}

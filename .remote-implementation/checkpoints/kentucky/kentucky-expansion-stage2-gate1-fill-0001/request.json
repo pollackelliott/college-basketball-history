@@ -1,0 +1,67 @@
+{
+  "approved_plan_hash_preview": "b36a2e7c09fd5b2987e0546410aa8cc1509f4dd9ffb0945efa6665d3a95b3fab",
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": true,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": true,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly Approved. Proceed to the exact fresh-verified Kentucky zero-decision Gate 1 packet. This authorizes only the already-bound mechanical sequence: Gate 1 fill, fresh verification, pre-seal rehearsal, fresh verification, cryptographic Gate 1 seal, fresh verification, transactional sealed apply, and independent post-apply verification. All current-main, one-active-lane, Integration Freeze, semantic, site-completeness, CAS, and owner-gate constraints remain. Stop before release preparation, exact Preview, Owner Gate 2, merge, or Production.",
+    "origin": "Same serialized Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation lane — exact explicit Owner Gate 1 approval"
+  },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "expected_protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
+  "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_GATE1_FILL",
+  "owner_gate_1_approval": {
+    "approval_basis": "Owner explicitly replied 'Approved. Proceed' on 2026-11-21 to the immediately preceding consolidated Kentucky Owner Gate 1 packet for exact Stage 2 proposal kentucky-expansion-stage2-proposal-0002. The approved packet binds 3,232 existing canonical matches, 0 new games, 0 historical decisions, 0 recommendation actions, 0 preflight blockers, 0 warnings, decision-universe SHA-256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, recommendation-map SHA-256 56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc, proposal checkpoint SHA-256 dae0f1ef02df7b2b6e1b082b33714d61785534b63bdee4280839222b80fec188, and approved-plan preview b36a2e7c09fd5b2987e0546410aa8cc1509f4dd9ffb0945efa6665d3a95b3fab. The packet also disclosed inherited site-completeness diagnostics, including 143 strict HOME gaps and 353 unaccounted public site-gap games, which were not part of the historical decision universe. This approval authorizes only the repository-defined mechanical Gate 1 fill -> pre-seal rehearsal -> cryptographic seal -> sealed apply sequence with independent verification. It is not Owner Gate 2, release, Preview, merge, Production, new Research, shared/global maintenance, or protected-main bypass authority.",
+    "approved": true,
+    "approved_plan_hash_preview": "b36a2e7c09fd5b2987e0546410aa8cc1509f4dd9ffb0945efa6665d3a95b3fab",
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "proposal_checkpoint_sha256": "dae0f1ef02df7b2b6e1b082b33714d61785534b63bdee4280839222b80fec188",
+    "recommendation_map_sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc"
+  },
+  "phase_continuation": {
+    "apply_request_id": "kentucky-expansion-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "kentucky-expansion-stage2-preseal-0001",
+    "seal_request_id": "kentucky-expansion-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "263830ee3a28e731790870b3fd22bbedb2767f69",
+  "previous_control_state_sha256": "a161f260cff461794d8ccd9003f58c3d56128db376e2fd3375e0cbc34b70dfc1",
+  "recommendation_map_sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc",
+  "request_id": "kentucky-expansion-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "stage2_proposal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-stage2-proposal-0002/checkpoint-manifest.json",
+    "sha256": "dae0f1ef02df7b2b6e1b082b33714d61785534b63bdee4280839222b80fec188"
+  },
+  "stage2_proposal_verification": {
+    "path": ".remote-implementation/verifications/kentucky/kentucky-expansion-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
+    "sha256": "469203bd712420b77a4d88b785113ab8df9d56d8317a373356b999790b541ab3"
+  },
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "40cc70f8aeb6603e3e18f78f00642da474d4fc20"
+}
