@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "kentucky",
+  "created_at": "2026-11-21T04:44:33.131304+00:00",
+  "input_fingerprint": {
+    "sha256": "27f483b33d7226222b1b3afcc0571560d4ca23307c60bc8d5540bd82dc952de0",
+    "git_head": "40cc70f8aeb6603e3e18f78f00642da474d4fc20",
+    "files": {
+      "schools/kentucky/source-games.csv": "64d363714d46bc0a31a0a9fbbaf5fe7efc46ac1d5f8474042005a9c7e3bed50e",
+      "schools/kentucky/opponents.csv": "272c275cf53c3023dff0c7314bb7ca3eae033a65e461dae5e1246294951fe08c",
+      "schools/kentucky/venues.csv": "8d395ea653f68d88975da8d742d63389d8c163c0f7e330fcce3a85f08e5d9c3b",
+      "schools/kentucky/conferences.csv": "1e608210ff9c3223db1152affddbc5a5d351d3254505ae336678ee8d6384387e",
+      "schools/kentucky/notes.md": "91832f99dd5c881721ad3ff700c34674a77e17008b6f59f56c06c3c97b7bc86a",
+      "schools/kentucky/source-notes.md": "e5bf193e768366316d25d196b0cb14aeb28d04d0e92be012aa58f3f2110572ee",
+      "data/canonical/games.csv": "8c95bb3d210d1c73e18a68153abbc3b76fe69000153a1c85e8dc5b7e0d95eaa5",
+      "data/evidence/game-assertions.csv": "36f75a73d7656ebb23f76767ab854f55eb97f3c90f55eedcb752594dad0d0e03",
+      "data/reconciliation/discrepancies.csv": "8305e254ea9f4572ae922202c5cc0596dbbe990cdb17f9fc055c57c3230c0231",
+      "data/reference/programs.csv": "f8c03138071deaf917710b2f91ee4127ac6a750a4fd86ebd85303730b3b9b408",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "b358fb536c14b2aafd7bfa226b837948222173e6ec3ee14596d269e6725d72ad",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "eed172cf80d1f27e1c1fe93079bf9b5787c44a1c522f6b1c44f0e5a2b19e9db0",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "17037f63b16793a694e875beecc1c17bdb6678c0eea6efce1ab7a98aeec612d2",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "100bbf38d2a2dd3fe58cd3c7a9bf4f0cb436fd7013206b115ef7436ec89612e5",
+      "tools/onboarding_plan.py": "4f01aaa35b402ac760e2288afeaec422330c0f3cb7f09af7fe61a0dadfb3780e",
+      "tools/program_history.py": "d1b6d69e15a994dcefb628d7078e100f792c671db35e32bd5efef504b6c860da",
+      "tools/validate_data.py": "58a288b964b98af0f6a49a0afc7dfa1c9f7b665f0f03a05de1378d00ee58287b",
+      "tools/verify_program_accomplishments.py": "9b2cd4ec6bafcd9f825fd6d6a1c42a52ecce0497c523f3fbdb48f157aab59dcb"
+    }
+  },
+  "package": {
+    "errors": [],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 3232,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 312,
+      "venues": 17,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "summary": {
+    "source_rows": 3232,
+    "in_scope_source_rows": 3232,
+    "top_level_source_rows": 3232,
+    "pre_cutoff_rows": 0,
+    "history_start_season": "1902-1903",
+    "history_scope_intervals": "",
+    "pre_cutoff_first_season": "",
+    "pre_cutoff_last_season": "",
+    "existing_game_matches": 3232,
+    "new_canonical_games": 0,
+    "identity_review_required": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "identity_cardinality_constraints": 0,
+    "assertions_to_add": 0,
+    "canonical_enrichment_games": 0,
+    "canonical_enrichment_fields": 0,
+    "discrepancies_to_add": 0,
+    "conditional_discrepancies": 0,
+    "canonical_site_patch_reviews": 0,
+    "affected_public_programs": [],
+    "already_public": true,
+    "expansion_transaction_kind": "ZERO_DELTA_METADATA_ONLY",
+    "zero_delta_inherited_source_game_count": 3232,
+    "inherited_unrelated_reviews_excluded": 13,
+    "zero_delta_excluded_discrepancy_population": [
+      {
+        "source_game_id": "KYRAW-00105",
+        "canonical_game_id": "CBBG-0014631",
+        "field_name": "score",
+        "source_value": "21-14",
+        "canonical_value": "20-14"
+      },
+      {
+        "source_game_id": "KYRAW-00326",
+        "canonical_game_id": "CBBG-0014851",
+        "field_name": "site_type",
+        "source_value": "TEAM_A_HOME",
+        "canonical_value": "TEAM_B_HOME"
+      },
+      {
+        "source_game_id": "KYRAW-00550",
+        "canonical_game_id": "CBBG-0015075",
+        "field_name": "overtime_periods",
+        "source_value": "1",
+        "canonical_value": "2"
+      },
+      {
+        "source_game_id": "KYRAW-00623",
+        "canonical_game_id": "CBBG-0015147",
+        "field_name": "site_type",
+        "source_value": "TEAM_A_HOME",
+        "canonical_value": "NEUTRAL"
+      },
+      {
+        "source_game_id": "KYRAW-00669",
+        "canonical_game_id": "CBBG-0015191",
+        "field_name": "site_type",
+        "source_value": "TEAM_A_HOME",
+        "canonical_value": "NEUTRAL"
+      },
+      {
+        "source_game_id": "KYRAW-00690",
+        "canonical_game_id": "CBBG-0015211",
+        "field_name": "site_type",
+        "source_value": "TEAM_A_HOME",
+        "canonical_value": "NEUTRAL"
+      },
+      {
+        "source_game_id": "KYRAW-00731",
+        "canonical_game_id": "CBBG-0015252",
+        "field_name": "site_type",
+        "source_value": "TEAM_A_HOME",
+        "canonical_value": "NEUTRAL"
+      },
+      {
+        "source_game_id": "KYRAW-00770",
+        "canonical_game_id": "CBBG-0015291",
+        "field_name": "site_type",
+        "source_value": "TEAM_A_HOME",
+        "canonical_value": "NEUTRAL"
+      },
+      {
+        "source_game_id": "KYRAW-02482",
+        "canonical_game_id": "CBBG-0016932",
+        "field_name": "score",
+        "source_value": "86-62",
+        "canonical_value": "76-62"
+      },
+      {
+        "source_game_id": "KYRAW-02503",
+        "canonical_game_id": "CBBG-0016952",
+        "field_name": "score",
+        "source_value": "51-57",
+        "canonical_value": "52-57"
+      },
+      {
+        "source_game_id": "KYRAW-02571",
+        "canonical_game_id": "CBBG-0017017",
+        "field_name": "overtime_periods",
+        "source_value": "1",
+        "canonical_value": "2"
+      },
+      {
+        "source_game_id": "KYRAW-02983",
+        "canonical_game_id": "CBBG-0017400",
+        "field_name": "score",
+        "source_value": "87-62",
+        "canonical_value": "87-52"
+      },
+      {
+        "source_game_id": "KYRAW-03088",
+        "canonical_game_id": "CBBG-0017495",
+        "field_name": "score",
+        "source_value": "71-63",
+        "canonical_value": "77-71"
+      }
+    ],
+    "inherited_accomplishment_decisions_excluded": 0,
+    "inherited_stale_accomplishment_blockers_excluded": 1
+  },
+  "decisions": [],
+  "identity_collision_groups": [],
+  "identity_cardinality_constraints": []
+}

@@ -1,0 +1,38 @@
+{
+  "branch": "remote-stage2-census/kentucky-40cc70f8aeb6",
+  "capability_census": {
+    "path": ".onboarding/kentucky/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 0
+  },
+  "head_sha": "40cc70f8aeb6603e3e18f78f00642da474d4fc20",
+  "integration_base_sha": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "integration_semantic_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "f6d78412932689da0f4b6e89dfd42c557b92a445",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 3232,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/kentucky/plan.json",
+    "review_path": ".onboarding/kentucky/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}
