@@ -2,14 +2,14 @@
   "approved_plan_hash": "3f83e4028c215cdd078921eb97b8c2c4b1a0b07c4f621f37545b2247a517ec2d",
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": false,
+    "owner_gate_2": true,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": false,
+    "release_gate2_approval": true,
     "release_presentation_refresh": false,
-    "release_preview_verify": true,
+    "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
@@ -24,25 +24,41 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner-authorized Kentucky release preparation persists through OWNER_GATE_2_READY. Fresh release readiness kentucky-expansion-release-readiness-0003 independently verified PASS on protected main cf2ba638a036418bca255a3f8e4f9389a413d863 and durably binds this distinct Preview request ID kentucky-expansion-release-preview-verify-0002. Frozen PR #686 remains open/non-draft at exact head 2f17c3ba9100f0a7fbbb619363339c42e63a5a9b with exact packet body, fresh live-main validation run #44942177724 passed, mergeability is clean, and exact-head Vercel Preview deployment dpl_8yJ68csDWyxQxNdfnDtCiXSUutrr is READY. This request may only verify exact PR identity, required checks, clean mergeability, and exact PR-head Preview through independently verified OWNER_GATE_2_READY. Owner Gate 2 approval, merge, Production proof, tracked mutation, new historical authority, unrelated shared/global mutation, and protected-main bypass remain forbidden.",
-    "origin": "Same serialized Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation release-preparation phase — fresh packet-bound Preview verification after recovered abandoned Preview request 0001"
+    "authorization": "Owner explicitly approved the exact Kentucky Preview by stating “It succeeded. I also approve that preview” immediately after fresh-verified OWNER_GATE_2_READY for PR #686, exact frozen head 2f17c3ba9100f0a7fbbb619363339c42e63a5a9b, Preview deployment 7968404791 and URL https://college-basketball-history-5rwk9rilq-elliott-pollacks-projects.vercel.app. This authorizes the repository-defined final release phase through fresh Gate 2 approval verification, exact connector merge only from the emitted merge packet, exact Production proof and independent COMPLETE verification while identities remain unchanged. This request itself records only Gate 2 approval and grants no altered-PR/head authority, new historical authority, unrelated maintenance, recovery, protected-main bypass, or arbitrary mutation.",
+    "origin": "Same serialized Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation lane — exact Owner Gate 2 approval"
   },
   "expected_protected_main_sha": "cf2ba638a036418bca255a3f8e4f9389a413d863",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "kentucky-expansion-release-production-proof-0001"
+  },
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "RELEASE_PREVIEW_VERIFY",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "owner_gate_2_approval": {
+    "approval_basis": "Owner's exact statement on 2026-11-21: “It succeeded. I also approve that preview” in direct response to the exact fresh-verified Kentucky PR #686 Preview at head 2f17c3ba9100f0a7fbbb619363339c42e63a5a9b and Vercel Preview deployment 7968404791, with OWNER_GATE_2_READY already durably established.",
+    "approved": true,
+    "pr_head_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+    "pr_number": 686,
+    "preview_checkpoint_sha256": "77a0e681dedfd710a804b3a68fe1c887d75142b45dee9bc234c704ace618f659",
+    "preview_deployment_id": 7968404791,
+    "preview_url": "https://college-basketball-history-5rwk9rilq-elliott-pollacks-projects.vercel.app",
+    "preview_verification_sha256": "e9142d590f08bcb0eb5c62e71092d8ebf2477ba5d593ba6740410d81e13d8d2f"
+  },
   "pr_number": 686,
-  "previous_control_state_commit": "8f0c54fbd1435514e71fe8666c6dc8c3a16722e4",
-  "previous_control_state_sha256": "362a2e6760d6f09f4c9ebcc09080a1998eac130a3ca22678eeb53ff9f62932b0",
+  "preview_deployment_id": 7968404791,
+  "preview_url": "https://college-basketball-history-5rwk9rilq-elliott-pollacks-projects.vercel.app",
+  "previous_control_state_commit": "6ddc4045af4051dcd754bee9dea70745be2df526",
+  "previous_control_state_sha256": "8b37ac40389ee606fe85bb6b5402881e853c0c7277f1ad5eb068c3dd12f9be00",
   "release_manifest_sha256": "5c23e0e7fba4c8a78b5b5ee41ba0708f9a5491ae3c3d8b9b6887ddcce2fad330",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-release-readiness-0003/checkpoint-manifest.json",
-    "sha256": "5b6b4d30ad89e866ebe8b3308d234df3d849507193df26dc9d6094187f16cce5"
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-release-preview-verify-0002/checkpoint-manifest.json",
+    "sha256": "77a0e681dedfd710a804b3a68fe1c887d75142b45dee9bc234c704ace618f659"
   },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/kentucky/kentucky-expansion-release-readiness-0003/release-readiness-verification.json",
-    "sha256": "bceb7aa2fca451f2ae8dd3724f322c73fa02742df4f4b3c3d405d5b133b38450"
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/kentucky/kentucky-expansion-release-preview-verify-0002/release-preview-verification.json",
+    "sha256": "e9142d590f08bcb0eb5c62e71092d8ebf2477ba5d593ba6740410d81e13d8d2f"
   },
-  "request_id": "kentucky-expansion-release-preview-verify-0002",
+  "request_id": "kentucky-expansion-release-gate2-approval-0001",
   "schema_version": 1,
   "school_key": "kentucky",
   "target_branch": "data/kentucky-onboarding",
