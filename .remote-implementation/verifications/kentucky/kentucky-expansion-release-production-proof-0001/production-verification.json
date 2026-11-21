@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "50c1a8a6c4e51bb3781d95df0b30eb19761193edac675ba192f74e327635d8e0",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "pr_number": 686,
+  "production_deployment_id": 7969548414,
+  "production_json_checked_count": 3,
+  "production_proof": true,
+  "request_id": "kentucky-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "status": "COMPLETE"
+}
