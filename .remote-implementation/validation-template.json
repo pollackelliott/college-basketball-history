@@ -4,8 +4,6 @@
   "request_id": "kentucky-expansion-release-gate2-approval-0001",
   "school_key": "kentucky",
   "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "6ddc4045af4051dcd754bee9dea70745be2df526",
-  "previous_control_state_sha256": "8b37ac40389ee606fe85bb6b5402881e853c0c7277f1ad5eb068c3dd12f9be00",
   "expected_protected_main_sha": "cf2ba638a036418bca255a3f8e4f9389a413d863",
   "target_branch": "data/kentucky-onboarding",
   "target_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
