@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "78f1ac3ca6373ba98a3a8ee8607575fedb7aeecf13163c29074783ed0b087451",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": null,
+  "pr_created": false,
+  "preview_request_id": null,
+  "preview_verified": false,
+  "protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
+  "readiness_proof_sha256": "9bb0533c65939581919b83d77c1e146dee839b872f181583d867d9bf3bf14d3f",
+  "release_pr_packet_sha256": null,
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "kentucky-expansion-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "tracked_mutation": "NONE"
+}
