@@ -10,52 +10,39 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from kentucky-expansion-stage2-current-main-refresh-0003",
+    "authorization": "phase-persistent owner/Control Center authority inherited from kentucky-expansion-stage2-census-0003",
     "origin": "repository-owned Stage 2 phase continuation"
   },
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "expected_protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
   "integration_freeze_sha256": "c020dbadfbe20bbe6e0d018ab999f72367c3750255e3ffd018b4e6877f7a722c",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-phase0-0003/successor-manifest.json",
-    "sha256": "82bc96fca234234663022bf2585e6517071b650eadcd9ed5fcd80ae50438cc62"
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "d7a9ea974a63974d1f803a6bab600fbfcab958d2",
+  "previous_control_state_sha256": "75bf9e4974805d5927f0e208f0bc865176108e3ae4e9422ecebdc07f9f38c78d",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/kentucky-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc"
   },
-  "phase_continuation": {
-    "census_request_id": "kentucky-expansion-stage2-census-0003",
-    "expected_decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "kentucky-expansion-stage2-proposal-0002",
-    "recommendation_map": {
-      "path": ".remote-implementation/requests/kentucky-expansion-stage2-proposal-0001/recommendation-map.json",
-      "sha256": "56ce7b4e333716e70ae6b8fda98d9f1c1f21175d517ff29c770764e2f73d5afc"
-    }
-  },
-  "previous_control_state_commit": "f02bf5c5d71292415b6bdb17769e59d375c1e544",
-  "previous_control_state_sha256": "f29a6beaf22a3380d6c0bd287e275dcb40fa89747a3e02df5ae035f792df82fb",
-  "request_id": "kentucky-expansion-stage2-census-0003",
+  "request_id": "kentucky-expansion-stage2-proposal-0002",
   "schema_version": 1,
   "school_key": "kentucky",
   "semantic_snapshot_sha256": "95e2fb61a8492ad591e1f5a36be3398f015537c4f6e6b23ecb61542ccf54cad6",
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-current-main-refresh-0003/successor-manifest.json",
-    "sha256": "774863d70e8a7f214da038fc336a680c8a4f77ffc96a3900833014b265c0faf0"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
-    "sha256": "ebd7be27eaf82c90f62ce0df8c4f2b9b9ce525b743e935b40293d2a27a9264ab"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "5852733b4f5db0d777ac3a7baffe0de1ccb6e5db183f368820a705fc686f84d1"
   },
   "target_branch": "data/kentucky-onboarding",
   "target_sha": "40cc70f8aeb6603e3e18f78f00642da474d4fc20"
