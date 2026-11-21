@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "249816a8dc3b430eb450aeaea236c9d6f13cf289e0f0503aa3134732ea681b78",
+  "gate2_merge_packet_sha256": "1f7c3981c0979bb517ab25da2ff02c2b514f7327910b69be5b70d5b60403d60c",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "pr_number": 686,
+  "preview_deployment_id": 7968404791,
+  "preview_url": "https://college-basketball-history-5rwk9rilq-elliott-pollacks-projects.vercel.app",
+  "production_request_id": "kentucky-expansion-release-production-proof-0001",
+  "remote_gate2_approval_equivalence": "PASS",
+  "request_id": "kentucky-expansion-release-gate2-approval-0001",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "status": "PASS"
+}

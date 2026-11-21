@@ -1468,7 +1468,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "249816a8dc3b430eb450aeaea236c9d6f13cf289e0f0503aa3134732ea681b78",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "1f7c3981c0979bb517ab25da2ff02c2b514f7327910b69be5b70d5b60403d60c",
     "merged": false,
@@ -1477,7 +1477,7 @@
     "pr_number": 686,
     "production_request_id": "kentucky-expansion-release-production-proof-0001",
     "protected_main_sha": "cf2ba638a036418bca255a3f8e4f9389a413d863",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "kentucky-expansion-release-gate2-approval-0001",
     "school_key": "kentucky",
     "target_branch": "data/kentucky-onboarding",
