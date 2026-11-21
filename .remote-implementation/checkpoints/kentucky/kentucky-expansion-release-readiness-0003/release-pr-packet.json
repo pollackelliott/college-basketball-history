@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "3f83e4028c215cdd078921eb97b8c2c4b1a0b07c4f621f37545b2247a517ec2d",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-release-readiness-0003/pr-body.md",
+  "body_sha256": "3300051350b312c87326f48d55804fec0443f1cb87d0d5b6ece4df7f11ea4b6d",
+  "head_branch": "data/kentucky-onboarding",
+  "head_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish Kentucky history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "kentucky-expansion-release-preview-verify-0002",
+  "readiness_request_id": "kentucky-expansion-release-readiness-0003",
+  "release_manifest_sha256": "5c23e0e7fba4c8a78b5b5ee41ba0708f9a5491ae3c3d8b9b6887ddcce2fad330",
+  "schema_version": 1,
+  "school_key": "kentucky"
+}
