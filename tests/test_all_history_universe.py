@@ -57,6 +57,7 @@ LEGACY_PUBLISHED_KEYS = {
 # release lands, without weakening the legacy baseline for unrelated programs.
 LEGACY_INCEPTION_SCOPE_SUPERSESSION_KEYS = {
     "arizona-state",
+    "kentucky",
 }
 
 
