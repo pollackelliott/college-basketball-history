@@ -1,0 +1,53 @@
+{
+  "approved_plan_hash": "3f83e4028c215cdd078921eb97b8c2c4b1a0b07c4f621f37545b2247a517ec2d",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner said 'Continue' after kentucky-expansion-release-readiness-0001 independently fresh-verified PASS. The immediately preceding Control Center identified the next owner-facing phase as exact release PR creation/reuse plus CI/mergeability and exact Vercel Preview verification through OWNER_GATE_2_READY. Because readiness-0001 was deliberately narrow and generated no PR packet/body, this deterministic readiness refresh reproduces current-main release readiness with RELEASE_READINESS_TO_PREVIEW_V1 to emit the exact connector-owned PR packet/body and bind preview request kentucky-expansion-release-preview-verify-0001. This authorizes only the reversible release-preparation phase through OWNER_GATE_2_READY or an authentic blocker. Owner Gate 2 approval, merge, Production proof, new historical decisions, unrelated shared/global mutation, and protected-main bypass remain forbidden.",
+    "origin": "Same serialized Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation lane — owner-authorized release-preparation phase after fresh-verified readiness-only checkpoint"
+  },
+  "expected_protected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "34733e87faf007f17df80fe9d4cf050fce794e05",
+  "previous_control_state_sha256": "4d9a075644d714885c12c69ed520e2e14b2f35ac2240955fd3e45eed818f1eaf",
+  "release_manifest_sha256": "5c23e0e7fba4c8a78b5b5ee41ba0708f9a5491ae3c3d8b9b6887ddcce2fad330",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "kentucky-expansion-release-preview-verify-0001"
+  },
+  "request_id": "kentucky-expansion-release-readiness-0002",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "ea5f813ae2c9b0a9e22031dfa5f632e2f529f61a4762dd6f30ef1dbbd038cc3f"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/kentucky/kentucky-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "acd145380c71fcf4a7ea196a7bd3b15d386284e09641cca9ae1f72762f559d31"
+  },
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b"
+}
