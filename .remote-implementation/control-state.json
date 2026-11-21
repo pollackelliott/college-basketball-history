@@ -729,7 +729,7 @@
     "kentucky-expansion-stage2-current-main-refresh-0003"
   ],
   "active_expected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
-  "active_lock_commit": null,
+  "active_lock_commit": "63a946ce47d9047a521cf9e9779dfdbf4ca9284d",
   "active_lock_owner": "github-actions:44867025843:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
