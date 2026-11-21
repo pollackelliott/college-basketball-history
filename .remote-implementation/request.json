@@ -1,34 +1,17 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "kentucky-expansion-release-preview-recover-0001",
-  "school_key": "kentucky",
-  "operation": "RECOVER",
-  "previous_control_state_commit": "40b8c9f9ff1e8aaadb448f16461f64d993fa1d7a",
-  "previous_control_state_sha256": "f337ea8ba02de38f293d987fbc9ee38c02a7aefe855136f142069040e4808687",
-  "expected_protected_main_sha": "cf2ba638a036418bca255a3f8e4f9389a413d863",
-  "recovery": {
-    "abandoned_request_id": "kentucky-expansion-release-preview-verify-0001",
-    "lock_commit": null,
-    "target_branch": null
-  },
-  "creation_provenance": {
-    "origin": "Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation — deterministic failed read-only Preview-verification recovery after authorized global Vercel deployment-gate repair",
-    "authorization": "Owner-authorized Kentucky release preparation plus explicit bounded global Vercel deployment-gate repair includes safe recovery of accepted failed read-only RELEASE_PREVIEW_VERIFY request kentucky-expansion-release-preview-verify-0001. Exact run #44938614675 failed only because Vercel canceled the exact-head Preview under the prior per-commit Ignored Build Step policy. No write-ahead, prepared commit/tree, mutation lock, or target publication occurred; exact frozen Kentucky target remains 2f17c3ba9100f0a7fbbb619363339c42e63a5a9b. Protected main advanced only through authorized generic deployment-gate PR #688 to cf2ba638a036418bca255a3f8e4f9389a413d863. Authorize only permanent RECOVER to classify NOT_ATTEMPTED and abandon the failed read-only request, returning global control to IDLE. Do not replay the accepted request, mutate Kentucky basketball/generated data, change historical authority, approve Gate 2, merge Kentucky, or bypass exact-head Preview proof."
-  },
+  "approved_plan_hash": "3f83e4028c215cdd078921eb97b8c2c4b1a0b07c4f621f37545b2247a517ec2d",
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "expansion_phase0": false,
-    "recovery": true,
+    "recovery": false,
     "release": false,
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -39,5 +22,32 @@
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "Owner-authorized Kentucky release preparation persists through OWNER_GATE_2_READY. The earlier packet-bound Preview request kentucky-expansion-release-preview-verify-0001 was accepted, failed read-only because the exact-head Vercel Preview was suppressed by the prior deployment gate, and was durably recovered ABANDONED_NOT_ATTEMPTED by kentucky-expansion-release-preview-recover-0001. Generic deployment-gate repair PR #688 is merged at protected main cf2ba638a036418bca255a3f8e4f9389a413d863. Frozen PR #686 was controlled-close/reopened without changing exact head 2f17c3ba9100f0a7fbbb619363339c42e63a5a9b or packet body; fresh exact live-main validation run #44942177724 passed. Exact frozen-head Vercel deployment dpl_8yJ68csDWyxQxNdfnDtCiXSUutrr is READY. This fresh read-only RELEASE_READINESS request only renews the exact connector PR packet and binds distinct future Preview request kentucky-expansion-release-preview-verify-0002. It authorizes no historical change, target mutation, Owner Gate 2 approval, merge, Production proof, or unrelated shared/global mutation.",
+    "origin": "Same serialized Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation lane — deterministic release-preparation recovery after abandoned Preview request 0001 and exact-head Vercel deployment-gate repair"
+  },
+  "expected_protected_main_sha": "cf2ba638a036418bca255a3f8e4f9389a413d863",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "9f93321492da132d87f3bdda1420f9198a612dec",
+  "previous_control_state_sha256": "18da345fb279285596de05f341cc29baed6db639ded6286e9daa3a62cb64aa0d",
+  "release_manifest_sha256": "5c23e0e7fba4c8a78b5b5ee41ba0708f9a5491ae3c3d8b9b6887ddcce2fad330",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "kentucky-expansion-release-preview-verify-0002"
+  },
+  "request_id": "kentucky-expansion-release-readiness-0003",
+  "schema_version": 1,
+  "school_key": "kentucky",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/kentucky/kentucky-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "ea5f813ae2c9b0a9e22031dfa5f632e2f529f61a4762dd6f30ef1dbbd038cc3f"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/kentucky/kentucky-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "acd145380c71fcf4a7ea196a7bd3b15d386284e09641cca9ae1f72762f559d31"
+  },
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b"
 }
