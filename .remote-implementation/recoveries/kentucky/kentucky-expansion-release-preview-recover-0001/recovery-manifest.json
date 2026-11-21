@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "cf2ba638a036418bca255a3f8e4f9389a413d863",
+  "recovered_request_id": "kentucky-expansion-release-preview-verify-0001",
+  "request_id": "kentucky-expansion-release-preview-recover-0001",
+  "schema_version": 1,
+  "target_branch": null
+}
