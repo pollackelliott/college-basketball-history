@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "kentucky-expansion-release-production-proof-0001",
+  "school_key": "kentucky",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "expected_protected_main_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "target_branch": "data/kentucky-onboarding",
+  "target_sha": "2f17c3ba9100f0a7fbbb619363339c42e63a5a9b",
+  "pr_number": 686,
+  "merge_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/kentucky/kentucky-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "249816a8dc3b430eb450aeaea236c9d6f13cf289e0f0503aa3134732ea681b78"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/kentucky/kentucky-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "428189574db7f317948d144a10978e673269b25fdc18c17d1670150cef8671f8"
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Kentucky ZERO-DELTA ALL_HISTORY_EXPANSION Implementation final phase — packet-bound post-merge Production proof",
+    "authorization": "Owner explicitly approved the exact Kentucky PR #686 Preview. Fresh Gate 2 approval verification passed and emitted exact merge packet 1f7c3981c0979bb517ab25da2ff02c2b514f7327910b69be5b70d5b60403d60c, requiring merge method merge for PR #686 head 2f17c3ba9100f0a7fbbb619363339c42e63a5a9b against approved main cf2ba638a036418bca255a3f8e4f9389a413d863 and binding Production request kentucky-expansion-release-production-proof-0001. The authorized GitHub connector executed exactly that merge, producing 0cd2b05c920485dd43a0b4e7f85c51bf36b919c9, now exact protected main with parents cf2ba638a036418bca255a3f8e4f9389a413d863 and 2f17c3ba9100f0a7fbbb619363339c42e63a5a9b. This request grants read-only exact-merge Production deployment/public JSON proof and independent fresh verification only. No new historical authority, merge authority, recovery, maintenance, protected-main mutation, onboarding mutation, or unrelated authority is granted."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
