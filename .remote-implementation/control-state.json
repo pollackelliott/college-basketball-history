@@ -727,18 +727,19 @@
     "kentucky-expansion-stage2-census-0002",
     "kentucky-expansion-stage2-proposal-0001",
     "kentucky-expansion-stage2-current-main-refresh-0003",
-    "kentucky-expansion-stage2-census-0003"
+    "kentucky-expansion-stage2-census-0003",
+    "kentucky-expansion-stage2-proposal-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "107936c06558c21cb914e063a35e89870dc09223",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "kentucky-expansion-stage2-proposal-0002",
+  "active_request_sha256": "8019a6529f14e906b48febbc4d6ae86765aa650ee48a18ca143e6591ce3eb4e3",
+  "active_school_key": "kentucky",
+  "active_target_branch": "data/kentucky-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1457,8 +1458,11 @@
     "target_branch": "data/kentucky-onboarding",
     "target_sha": "40cc70f8aeb6603e3e18f78f00642da474d4fc20"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "44867766689",
+  "lock_acquisition_request_commit": "c21f7c4626a75478ff19ca24fde7d169244aec90",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
