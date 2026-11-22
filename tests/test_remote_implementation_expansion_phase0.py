@@ -17,6 +17,7 @@ from remote_implementation_control import (
 from remote_implementation_expansion_phase0 import (
     Stop,
     _install_scope_generated_projection,
+    _pin_stage1_control_authority,
     _require_repository_acceptance,
     _require_source_game_package_update,
     _target_predecessor_authority,
@@ -63,6 +64,7 @@ def expansion_request() -> dict:
         "target_sha": "6" * 40,
         "research_freeze_sha256": research_sha,
         "stage1_independent_proof_sha256": proof_sha,
+        "stage1_control_authority_sha": "a" * 40,
         "integration_freeze_sha256": "7" * 64,
         "expansion_research_checkpoint": {
             "sha256": research_sha,
@@ -89,6 +91,8 @@ def expansion_request() -> dict:
 class ExpansionImplementationAcceptancePreflightTests(unittest.TestCase):
     def test_preflight_passes_and_preserves_json_proof(self):
         import json
+import os
+import subprocess
         import tempfile
 
         payload = {
@@ -282,6 +286,101 @@ class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
                     )
 
 
+class ExpansionPinnedControlAuthorityTests(unittest.TestCase):
+    def _git(self, repo: Path, *args: str, check: bool = True):
+        return subprocess.run(
+            ["git", "-C", str(repo), *args],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=check,
+        )
+
+    def test_pin_survives_later_control_commits(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            control_repo = root / "control"
+            replay = root / "replay"
+            control_repo.mkdir()
+            replay.mkdir()
+            for repo in (control_repo, replay):
+                self._git(repo, "init")
+                self._git(repo, "config", "user.email", "test@example.com")
+                self._git(repo, "config", "user.name", "Test")
+
+            (control_repo / "authority").write_text("startup\n", encoding="utf-8")
+            self._git(control_repo, "add", "authority")
+            self._git(control_repo, "commit", "-m", "startup authority")
+            pinned = self._git(control_repo, "rev-parse", "HEAD").stdout.strip()
+            (control_repo / "later").write_text("lock\n", encoding="utf-8")
+            self._git(control_repo, "add", "later")
+            self._git(control_repo, "commit", "-m", "later control")
+            current = self._git(control_repo, "rev-parse", "HEAD").stdout.strip()
+
+            previous = Path.cwd()
+            os.chdir(control_repo)
+            try:
+                request = expansion_request()
+                request["stage1_control_authority_sha"] = pinned
+                observed = _pin_stage1_control_authority(
+                    request,
+                    current,
+                    replay,
+                )
+            finally:
+                os.chdir(previous)
+
+            self.assertEqual(observed, pinned)
+            self.assertEqual(
+                self._git(
+                    replay,
+                    "rev-parse",
+                    "refs/remotes/origin/remote-control",
+                ).stdout.strip(),
+                pinned,
+            )
+
+    def test_pin_rejects_nonancestor_control(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            control_repo = root / "control"
+            replay = root / "replay"
+            control_repo.mkdir()
+            replay.mkdir()
+            self._git(control_repo, "init")
+            self._git(control_repo, "config", "user.email", "test@example.com")
+            self._git(control_repo, "config", "user.name", "Test")
+            self._git(replay, "init")
+
+            (control_repo / "main").write_text("one\n", encoding="utf-8")
+            self._git(control_repo, "add", "main")
+            self._git(control_repo, "commit", "-m", "one")
+            current = self._git(control_repo, "rev-parse", "HEAD").stdout.strip()
+            self._git(control_repo, "checkout", "--orphan", "other")
+            self._git(control_repo, "rm", "-rf", ".")
+            (control_repo / "other").write_text("two\n", encoding="utf-8")
+            self._git(control_repo, "add", "other")
+            self._git(control_repo, "commit", "-m", "two")
+            pinned = self._git(control_repo, "rev-parse", "HEAD").stdout.strip()
+
+            previous = Path.cwd()
+            os.chdir(control_repo)
+            try:
+                request = expansion_request()
+                request["stage1_control_authority_sha"] = pinned
+                with self.assertRaisesRegex(
+                    Stop,
+                    "EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_NOT_ANCESTOR",
+                ):
+                    _pin_stage1_control_authority(
+                        request,
+                        current,
+                        replay,
+                    )
+            finally:
+                os.chdir(previous)
+
+
 class ExpansionFreshVerificationRegressionTests(unittest.TestCase):
     def test_live_predecessor_movement_still_fails_closed(self):
         request = expansion_request()
@@ -418,6 +517,22 @@ class ExpansionRemoteRequestValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(
             RemoteImplementationError,
             "EXPANSION_PHASE0_TARGET_SHA_INVALID",
+        ):
+            validate_request(request)
+
+    def test_expansion_requires_pinned_stage1_control_authority(self):
+        request = expansion_request()
+        request.pop("stage1_control_authority_sha")
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_INVALID",
+        ):
+            validate_request(request)
+        request = expansion_request()
+        request["stage1_control_authority_sha"] = "not-a-sha"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_INVALID",
         ):
             validate_request(request)
 

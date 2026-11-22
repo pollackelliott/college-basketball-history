@@ -322,6 +322,7 @@ class ExpansionStartupProofTests(unittest.TestCase):
         )
         validate_request(request)
         self.assertEqual(request["operation"], "EXPANSION_PHASE0")
+        self.assertEqual(request["stage1_control_authority_sha"], "a" * 40)
         self.assertTrue(request["authority"]["expansion_phase0"])
         self.assertFalse(request["authority"]["phase0"])
         self.assertFalse(request["authority"]["owner_gate_1"])
