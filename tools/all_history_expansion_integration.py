@@ -34,6 +34,10 @@ from integration_freeze_guard import (
     semantic_snapshot_sha256,
 )
 from stage1_venue_reconciliation import load_venue_reconciliation
+from all_history_expansion_opponent_display_reconciliation import (
+    OpponentDisplayReconciliationError,
+    reconcile_opponent_display,
+)
 from stage_research_portfolio import (
     load_existing_school_venues,
     venue_reconciliation_inventory,
@@ -191,6 +195,7 @@ def freeze_authority(
     research_base: str, main_sha: str, proof_path: Path, proof_sha: str,
     output: Path, *, retain: bool = True,
     venue_reconciliation_path: Path | None = None,
+    opponent_display_reconciliation_path: Path | None = None,
 ) -> dict[str, Any]:
     """Fresh-verifies accepted frozen evidence and independently replays Stage 1."""
     repo, artifact, proof_path, output = (
@@ -198,6 +203,10 @@ def freeze_authority(
     )
     if venue_reconciliation_path is not None:
         venue_reconciliation_path = venue_reconciliation_path.resolve()
+    if opponent_display_reconciliation_path is not None:
+        opponent_display_reconciliation_path = (
+            opponent_display_reconciliation_path.resolve()
+        )
     for digest in (zip_sha, proof_sha):
         check_sha(digest, 64)
     for digest in (research_base, main_sha):
@@ -304,6 +313,21 @@ def freeze_authority(
                 venue_reconciliation_census["blocker_count"] == 0,
                 "EXPANSION_VENUE_RECONCILIATION_STILL_BLOCKED",
             )
+        opponent_display_reconciliation_meta: dict[str, Any] | None = None
+        if opponent_display_reconciliation_path is not None:
+            try:
+                display_projection = reconcile_opponent_display(
+                    repo=repo,
+                    school_key=school,
+                    protected_main_sha=main_sha,
+                    research_freeze_sha256=zip_sha,
+                    opponents_bytes=(candidate / "opponents.csv").read_bytes(),
+                    source_games_bytes=(candidate / "source-games.csv").read_bytes(),
+                    spec_bytes=opponent_display_reconciliation_path.read_bytes(),
+                )
+            except OpponentDisplayReconciliationError as exc:
+                raise IntegrationAuthorityError(str(exc)) from exc
+            opponent_display_reconciliation_meta = display_projection["metadata"]
         hashes = {name: sha256((candidate / name).read_bytes())
                   for name in (*PACKAGE_FILES, STAGE1_REPORT)}
         require(report["candidate_member_sha256"] == {
@@ -419,6 +443,13 @@ def freeze_authority(
                 if venue_reconciliation_meta is not None else ""
             ),
             "venue_reconciliation_census": venue_reconciliation_census,
+            "opponent_display_reconciliation": (
+                opponent_display_reconciliation_meta
+            ),
+            "opponent_display_reconciliation_sha256": (
+                opponent_display_reconciliation_meta["spec_sha256"]
+                if opponent_display_reconciliation_meta is not None else ""
+            ),
             "baseline_package_member_sha256": baseline["package_member_sha256"],
             "accepted_predecessor_package_member_sha256": predecessor_package_hashes,
             "baseline_program_row_sha256": canonical_row_sha256(baseline["program"]),
@@ -453,6 +484,11 @@ def freeze_authority(
                 shutil.copyfile(
                     venue_reconciliation_path,
                     output / "venue-reconciliation.json",
+                )
+            if opponent_display_reconciliation_path is not None:
+                shutil.copyfile(
+                    opponent_display_reconciliation_path,
+                    output / "opponent-display-reconciliation.json",
                 )
             (output / MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
         return manifest
@@ -492,6 +528,33 @@ def verify_manifest_bytes(manifest_bytes: bytes, candidate: Path) -> dict[str, A
     else:
         require(reconciliation_sha == "",
                 "INTEGRATION_FREEZE_UNEXPECTED_VENUE_RECONCILIATION_HASH")
+    display_reconciliation = manifest.get("opponent_display_reconciliation")
+    display_reconciliation_sha = str(
+        manifest.get("opponent_display_reconciliation_sha256") or ""
+    )
+    if display_reconciliation is not None:
+        require(
+            isinstance(display_reconciliation, dict),
+            "INTEGRATION_FREEZE_OPPONENT_DISPLAY_RECONCILIATION_INVALID",
+        )
+        require(
+            display_reconciliation_sha == display_reconciliation.get("spec_sha256"),
+            "INTEGRATION_FREEZE_OPPONENT_DISPLAY_RECONCILIATION_HASH_BINDING",
+        )
+        sidecar = candidate / "opponent-display-reconciliation.json"
+        require(
+            sidecar.is_file(),
+            "INTEGRATION_FREEZE_OPPONENT_DISPLAY_RECONCILIATION_MISSING",
+        )
+        require(
+            sha256(sidecar.read_bytes()) == display_reconciliation_sha,
+            "INTEGRATION_FREEZE_OPPONENT_DISPLAY_RECONCILIATION_CHANGED",
+        )
+    else:
+        require(
+            display_reconciliation_sha == "",
+            "INTEGRATION_FREEZE_UNEXPECTED_OPPONENT_DISPLAY_RECONCILIATION_HASH",
+        )
     require(manifest["tracked_mutation"] == "NONE"
             and manifest["release_authority"] is False,
             "INTEGRATION_FREEZE_CANNOT_AUTHORIZE_MUTATION")
@@ -548,6 +611,7 @@ def main(argv: list[str] | None = None) -> int:
     freeze.add_argument("--repo", type=Path, required=True)
     freeze.add_argument("--output", type=Path, required=True)
     freeze.add_argument("--venue-reconciliation", type=Path)
+    freeze.add_argument("--opponent-display-reconciliation", type=Path)
     verify = sub.add_parser("verify")
     verify.add_argument("candidate", type=Path)
     prepare = sub.add_parser("prepare-phase0")
@@ -561,6 +625,9 @@ def main(argv: list[str] | None = None) -> int:
                 args.research_base,args.main_sha,args.independent_proof,
                 args.independent_proof_sha256,args.output,
                 venue_reconciliation_path=args.venue_reconciliation,
+                opponent_display_reconciliation_path=(
+                    args.opponent_display_reconciliation
+                ),
             )
         elif args.command == "verify":
             result = verify_manifest_bytes(

@@ -26,6 +26,10 @@ from stage_research_portfolio import (
 from stage1_venue_reconciliation import load_venue_reconciliation
 from expansion_implementation_stage1 import render_csv
 from all_history_expansion_venue_guard import census as venue_identity_census, require_clean as require_venue_identity_clean
+from all_history_expansion_opponent_display_reconciliation import (
+    OpponentDisplayReconciliationError,
+    reconcile_opponent_display,
+)
 
 
 def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
@@ -256,6 +260,31 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_GLOBAL_REGISTRATION_COUNT_CHANGED")
     candidate={name:(frozen/name).read_bytes() for name in PACKAGE_FILES}
     candidate["venues.csv"]=render_csv(venue_fields,rebased_local)
+    display_reconciliation_meta = manifest.get(
+        "opponent_display_reconciliation"
+    )
+    if display_reconciliation_meta is not None:
+        sidecar = frozen / "opponent-display-reconciliation.json"
+        try:
+            display_projection = reconcile_opponent_display(
+                repo=repo,
+                school_key=school,
+                protected_main_sha=main,
+                research_freeze_sha256=manifest[
+                    "research_freeze_zip_sha256"
+                ],
+                opponents_bytes=candidate["opponents.csv"],
+                source_games_bytes=candidate["source-games.csv"],
+                spec_bytes=sidecar.read_bytes(),
+            )
+        except OpponentDisplayReconciliationError as exc:
+            raise IntegrationAuthorityError(str(exc)) from exc
+        require(
+            display_projection["metadata"] == display_reconciliation_meta,
+            "PHASE0_PREVIEW_OPPONENT_DISPLAY_RECONCILIATION_AUTHORITY_DRIFT",
+        )
+        candidate["opponents.csv"] = display_projection["opponents_bytes"]
+        candidate["source-games.csv"] = display_projection["source_games_bytes"]
     # These are staged bytes only. Reference CSV serialization is deterministic.
     global_changes={
         "data/reference/programs.csv":render_csv(program_fields,post_programs),
@@ -270,9 +299,24 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_UNRELATED_PROGRAM_REGISTRY_CHANGE")
     frozen_ids=[r["source_game_id"] for r in sources]
     _,reparsed=csv_rows(candidate["source-games.csv"],"rebased source games")
-    require([r["source_game_id"] for r in reparsed]==frozen_ids
-            and reparsed==sources,
-            "PHASE0_PREVIEW_SOURCE_EVIDENCE_CHANGED")
+    require(
+        [r["source_game_id"] for r in reparsed] == frozen_ids,
+        "PHASE0_PREVIEW_SOURCE_IDENTITY_CHANGED",
+    )
+    if display_reconciliation_meta is None:
+        require(
+            reparsed == sources,
+            "PHASE0_PREVIEW_SOURCE_EVIDENCE_CHANGED",
+        )
+    else:
+        proof = display_reconciliation_meta.get("field_level_proof") or {}
+        require(
+            proof.get("opponent_key_changes") == 0
+            and proof.get("source_game_non_name_field_changes") == 0
+            and proof.get("literal_evidence_changes") == 0
+            and proof.get("opponent_current_d1_changed_key_count") == 0,
+            "PHASE0_PREVIEW_OPPONENT_DISPLAY_NONREPRESENTATIONAL_DELTA",
+        )
     require(git_revision(repo,"refs/remotes/origin/main")==main,
             "PHASE0_PREVIEW_CURRENT_MAIN_MOVED_DURING_REBASE")
     proposal={
@@ -290,6 +334,10 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         "venue_identity_census":venue_identity,
         "venue_reconciliation_sha256":manifest.get("venue_reconciliation_sha256",""),
         "venue_reconciliation_census":venue_reconciliation_census,
+        "opponent_display_reconciliation_sha256":manifest.get(
+            "opponent_display_reconciliation_sha256",""
+        ),
+        "opponent_display_reconciliation":display_reconciliation_meta,
         "new_global_venue_ids_and_keys":[{"venue_id":x["venue_id"],
                     "venue_key":x["venue_key"]} for x in registered],
         "rebased_venue_mapping_count":len(venue_mappings),

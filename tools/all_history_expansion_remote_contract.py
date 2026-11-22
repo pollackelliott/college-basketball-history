@@ -158,6 +158,22 @@ def authenticate_intent(
     else:
         require(reconciliation_ref is None,
                 "EXPANSION_UNEXPECTED_VENUE_RECONCILIATION_REQUEST")
+    display_reconciliation_sha=str(
+        manifest.get("opponent_display_reconciliation_sha256") or ""
+    )
+    display_reconciliation_ref=request.get("opponent_display_reconciliation")
+    if display_reconciliation_sha:
+        require(
+            isinstance(display_reconciliation_ref,dict)
+            and display_reconciliation_ref.get("sha256")
+            == display_reconciliation_sha,
+            "EXPANSION_OPPONENT_DISPLAY_RECONCILIATION_REQUEST_BINDING_MISMATCH",
+        )
+    else:
+        require(
+            display_reconciliation_ref is None,
+            "EXPANSION_UNEXPECTED_OPPONENT_DISPLAY_RECONCILIATION_REQUEST",
+        )
     require(manifest["canonical_identity_counts"].get("IDENTITY_REVIEW_BLOCKER")==0,
             "EXPANSION_CANONICAL_AMBIGUITY")
     require(manifest["global_venue_reconciliation"].get(
@@ -198,6 +214,16 @@ def authenticate_intent(
             "EXPANSION_PHASE0_VENUE_RECONCILIATION_HASH_DRIFT")
     require(preview.get("venue_reconciliation_census")==reconciliation_census,
             "EXPANSION_PHASE0_VENUE_RECONCILIATION_CENSUS_DRIFT")
+    require(
+        preview.get("opponent_display_reconciliation_sha256","")
+        == display_reconciliation_sha,
+        "EXPANSION_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_HASH_DRIFT",
+    )
+    require(
+        preview.get("opponent_display_reconciliation")
+        == manifest.get("opponent_display_reconciliation"),
+        "EXPANSION_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_PROOF_DRIFT",
+    )
     require(preview.get("authorized_live_mutation") is False and
             preview.get("branch_published") is False and
             preview.get("lock_acquired") is False,
@@ -251,6 +277,7 @@ def authenticate_intent(
         "research_freeze_sha256":original_research_sha256,
         "stage1_proof_sha256":accepted_stage1_proof_sha256,
         "venue_reconciliation_sha256":reconciliation_sha,
+        "opponent_display_reconciliation_sha256":display_reconciliation_sha,
         "source_game_count":preview["source_game_count"],
         "supplemental_source_game_count":preview["supplemental_source_game_count"],
         "canonical_identity_counts":manifest["canonical_identity_counts"],
