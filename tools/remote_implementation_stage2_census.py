@@ -750,22 +750,90 @@ def _verify_phase0_package_member(
     """Authenticate one Phase 0 school-package member.
 
     Ordinary Phase 0 requires the Integration Freeze member to remain byte-identical
-    in the published successor. Expansion Phase 0 may legitimately canonicalize only
-    venues.csv when an exact explicit venue reconciliation was already authenticated
-    and carried through durable write-ahead/successor authority. In that one case,
-    require both the original candidate member hash and the exact final school-file
-    hash to be independently bound; never infer a representation change from content.
+    in the published successor. Expansion Phase 0 may legitimately canonicalize
+    venues.csv under exact venue-reconciliation authority, and may normalize only
+    opponents.csv canonical_opponent_name plus source-games.csv
+    normalized_opponent_name under exact pre-Phase0 opponent-display reconciliation
+    authority. In either case require both the original frozen member hash and the
+    exact projected final hash to be independently bound; never infer a
+    representation change from content.
     """
     if not expected:
         raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISSING:%s" % name)
     if actual == expected:
         return
-    if name != "venues.csv":
-        raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
     if (
         successor.get("operation") != "EXPANSION_PHASE0"
         or writeahead.get("operation") != "EXPANSION_PHASE0"
     ):
+        raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
+
+    if name in OPPONENT_DISPLAY_PACKAGE_FILES:
+        display_sha = str(
+            integration.get("opponent_display_reconciliation_sha256") or ""
+        )
+        if not display_sha:
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_BINDING_MISSING"
+            )
+        if (
+            successor.get("opponent_display_reconciliation_sha256")
+            != display_sha
+            or writeahead.get("opponent_display_reconciliation_sha256")
+            != display_sha
+        ):
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_BINDING_MISMATCH"
+            )
+        display = integration.get("opponent_display_reconciliation")
+        if not isinstance(display, dict):
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_INVALID"
+            )
+        projected = display.get("projected_candidate_sha256") or {}
+        if projected.get(name) != actual:
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_PROJECTED_HASH_MISMATCH:%s"
+                % name
+            )
+        pre = display.get("pre_candidate_sha256") or {}
+        if pre.get(name) != expected:
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_PRE_HASH_MISMATCH:%s" % name
+            )
+        proof = display.get("field_level_proof") or {}
+        for field in (
+            "literal_evidence_changes",
+            "opponent_key_changes",
+            "source_game_key_changes",
+            "source_game_non_name_field_changes",
+            "current_d1_changes",
+        ):
+            if int(proof.get(field, -1)) != 0:
+                raise Stop(
+                    "STAGE2_PHASE0_OPPONENT_DISPLAY_NONREPRESENTATIONAL:%s"
+                    % field
+                )
+        if (
+            (writeahead.get("package_member_sha256") or {}).get(name)
+            != expected
+        ):
+            raise Stop("STAGE2_PHASE0_SOURCE_PACKAGE_HASH_MISMATCH:%s" % name)
+        school_path = "schools/%s/%s" % (school_key, name)
+        successor_changed = successor.get("changed_file_sha256") or {}
+        writeahead_changed = writeahead.get("changed_file_sha256") or {}
+        if (
+            school_path not in set(successor.get("changed_paths") or [])
+            or school_path not in set(writeahead.get("changed_paths") or [])
+            or successor_changed.get(school_path) != actual
+            or writeahead_changed.get(school_path) != actual
+        ):
+            raise Stop(
+                "STAGE2_PHASE0_RECONCILED_PACKAGE_HASH_MISMATCH:%s" % name
+            )
+        return
+
+    if name != "venues.csv":
         raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
 
     reconciliation_sha = str(integration.get("venue_reconciliation_sha256") or "")
