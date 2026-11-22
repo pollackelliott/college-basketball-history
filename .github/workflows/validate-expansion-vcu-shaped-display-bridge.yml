@@ -24,7 +24,7 @@ jobs:
       - name: Check out exact candidate source
         uses: actions/checkout@v4
         with:
-          ref: 0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9
+          ref: 91106d9bb1850014fde80b577e3ebac67310bfef
           path: candidate
           fetch-depth: 0
           persist-credentials: false
@@ -54,7 +54,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
-          test "$(git -C candidate rev-parse HEAD)" = "0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9"
+          test "$(git -C candidate rev-parse HEAD)" = "91106d9bb1850014fde80b577e3ebac67310bfef"
 
           files=(
             tests/test_remote_implementation_expansion_phase0.py
@@ -64,8 +64,8 @@ jobs:
             tools/remote_implementation_expansion_startup.py
           )
           for path in "${files[@]}"; do
-            git -C candidate show "0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9:$path" > "runtime/$path"
-            candidate_blob="$(git -C candidate rev-parse "0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9:$path")"
+            git -C candidate show "91106d9bb1850014fde80b577e3ebac67310bfef:$path" > "runtime/$path"
+            candidate_blob="$(git -C candidate rev-parse "91106d9bb1850014fde80b577e3ebac67310bfef:$path")"
             runtime_blob="$(git -C runtime hash-object "$path")"
             test "$runtime_blob" = "$candidate_blob"
           done
@@ -102,7 +102,7 @@ jobs:
                   ["git", "-C", "runtime", "rev-parse", "HEAD"],
                   text=True,
               ).strip(),
-              "candidate_sha": "0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9",
+              "candidate_sha": "91106d9bb1850014fde80b577e3ebac67310bfef",
               "overlays": {},
           }
           for path in files:
@@ -110,7 +110,7 @@ jobs:
                   "candidate_blob_sha": subprocess.check_output(
                       [
                           "git", "-C", "candidate", "rev-parse",
-                          "0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9:" + path,
+                          "91106d9bb1850014fde80b577e3ebac67310bfef:" + path,
                       ],
                       text=True,
                   ).strip(),
@@ -413,7 +413,7 @@ jobs:
 
           summary = {
               "status": "PASS",
-              "candidate_sha": "0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9",
+              "candidate_sha": "91106d9bb1850014fde80b577e3ebac67310bfef",
               "runtime_git_head_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
               "protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
               "synthetic_startup_sha": synthetic,
@@ -723,7 +723,7 @@ jobs:
 
           summary = {
               "status": "PASS",
-              "candidate_sha": "0b0e87a7ea1cb765f3aa3332475ca33a4718d1d9",
+              "candidate_sha": "91106d9bb1850014fde80b577e3ebac67310bfef",
               "protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
               "phase0_fresh_verification": "PASS",
               "stage2_initial_status": "BLOCKED_SINGLE_RIO_GRANDE_DISPLAY",
