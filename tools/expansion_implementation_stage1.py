@@ -434,6 +434,7 @@ def _completed_post_freeze_package_correction_authorities(
         matches.append({
             "member": member,
             "path": member_path,
+            "control_authority_sha": control_sha,
             "request_id": request_id,
             "merge_sha": merge_sha,
             "merge_parent_main": parent_main,
@@ -630,6 +631,12 @@ def prepare_current_main_identity_rebase(
     metadata["completed_package_corrections"] = package_authorities
     metadata["accepted_package_members"] = sorted(
         authority["member"] for authority in package_authorities
+    )
+    control_authorities = sorted({
+        authority["control_authority_sha"] for authority in package_authorities
+    })
+    metadata["control_authority_sha"] = (
+        control_authorities[0] if len(control_authorities) == 1 else ""
     )
 
     identity_members_changed = bool(set(changed_members) & allowed_members)
