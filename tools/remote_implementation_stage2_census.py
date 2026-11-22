@@ -182,6 +182,7 @@ def _verify_opponent_display_target_authority(
     phase0_successor: dict[str, Any],
     phase0_writeahead: dict[str, Any],
     integration: dict[str, Any],
+    phase0_preview: dict[str, Any] | None,
     source_repo: Path,
 ) -> dict[str, Any]:
     ref = request.get("stage2_opponent_display_successor")
@@ -447,6 +448,7 @@ def _verify_opponent_display_target_authority(
                 successor=phase0_successor,
                 writeahead=phase0_writeahead,
                 integration=integration,
+                phase0_preview=phase0_preview,
             )
         except Stop as exc:
             message = str(exc)
@@ -737,6 +739,92 @@ def _verify_current_main_refresh_target_authority(
     return result
 
 
+def _verify_safe_global_venue_reuse(
+    *,
+    school_key: str,
+    actual: str,
+    successor: dict[str, Any],
+    integration: dict[str, Any],
+    phase0_preview: dict[str, Any] | None,
+) -> None:
+    """Authenticate a Phase 0 venues.csv delta caused only by safe global reuse."""
+    if not isinstance(phase0_preview, dict):
+        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING")
+
+    if phase0_preview.get("kind") != "ALL_HISTORY_EXPANSION_PHASE0_DISPOSABLE_PREVIEW":
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_KIND_MISMATCH")
+    if phase0_preview.get("school_key") != school_key:
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_SCHOOL_MISMATCH")
+    if (
+        phase0_preview.get("integration_freeze_sha256")
+        != successor.get("integration_freeze_sha256")
+    ):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_FREEZE_MISMATCH")
+    if (
+        phase0_preview.get("protected_main_sha")
+        != successor.get("protected_main_sha")
+    ):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_MAIN_MISMATCH")
+    if str(phase0_preview.get("venue_reconciliation_sha256") or ""):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_RECONCILIATION_PRESENT")
+
+    reconciliation = integration.get("global_venue_reconciliation")
+    if not isinstance(reconciliation, dict):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_AUTHORITY_MISSING")
+    counts = reconciliation.get("counts")
+    if not isinstance(counts, dict):
+        counts = reconciliation
+
+    try:
+        reuse_count = int(counts.get("REUSE_REGISTERED_GLOBAL_VENUE", -1))
+        new_count = int(counts.get("NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED", -1))
+        blocker_count = int(counts.get("GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER", -1))
+        rebased_count = int(phase0_preview.get("rebased_venue_mapping_count", -1))
+        supplemental_rebased = int(
+            phase0_preview.get("supplemental_venue_rows_rebased", -1)
+        )
+        global_registration_count = int(
+            phase0_preview.get("global_venue_registration_count", -1)
+        )
+    except (TypeError, ValueError) as exc:
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_INVALID") from exc
+
+    if (
+        reuse_count <= 0
+        or new_count != 0
+        or blocker_count != 0
+        or rebased_count != reuse_count
+        or supplemental_rebased != reuse_count
+        or global_registration_count != 0
+        or list(phase0_preview.get("new_global_venue_ids_and_keys") or [])
+    ):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_MISMATCH")
+
+    census = phase0_preview.get("venue_identity_census")
+    if (
+        not isinstance(census, dict)
+        or census.get("status") != "PASS"
+        or int(census.get("blocker_count", -1)) != 0
+    ):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_CENSUS_NOT_CLEAN")
+    rows = census.get("rows")
+    if not isinstance(rows, list) or len(rows) != reuse_count:
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_ROW_COUNT_MISMATCH")
+    for row in rows:
+        if not isinstance(row, dict) or row.get("registration_safe") is not True:
+            raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_ROW_NOT_SAFE")
+        reuse_id = str(row.get("existing_key_reuse_id") or "")
+        candidates = [str(value) for value in row.get("possible_existing_global_ids") or []]
+        if not reuse_id or candidates != [reuse_id]:
+            raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
+
+    preview_hash = (
+        phase0_preview.get("six_file_preview_sha256") or {}
+    ).get("venues.csv")
+    if preview_hash != actual:
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_FINAL_HASH_MISMATCH")
+
+
 def _verify_phase0_package_member(
     *,
     name: str,
@@ -746,6 +834,7 @@ def _verify_phase0_package_member(
     successor: dict[str, Any],
     writeahead: dict[str, Any],
     integration: dict[str, Any],
+    phase0_preview: dict[str, Any] | None = None,
 ) -> None:
     """Authenticate one Phase 0 school-package member.
 
@@ -769,16 +858,23 @@ def _verify_phase0_package_member(
         raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
 
     reconciliation_sha = str(integration.get("venue_reconciliation_sha256") or "")
-    if not reconciliation_sha:
-        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING")
-    if (
-        successor.get("venue_reconciliation_sha256") != reconciliation_sha
-        or writeahead.get("venue_reconciliation_sha256") != reconciliation_sha
-    ):
-        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISMATCH")
-    census = integration.get("venue_reconciliation_census")
-    if not isinstance(census, dict) or census.get("blocker_count") != 0:
-        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_NOT_CLEAN")
+    if reconciliation_sha:
+        if (
+            successor.get("venue_reconciliation_sha256") != reconciliation_sha
+            or writeahead.get("venue_reconciliation_sha256") != reconciliation_sha
+        ):
+            raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISMATCH")
+        census = integration.get("venue_reconciliation_census")
+        if not isinstance(census, dict) or census.get("blocker_count") != 0:
+            raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_NOT_CLEAN")
+    else:
+        _verify_safe_global_venue_reuse(
+            school_key=school_key,
+            actual=actual,
+            successor=successor,
+            integration=integration,
+            phase0_preview=phase0_preview,
+        )
     if (
         (writeahead.get("package_member_sha256") or {}).get(name)
         != expected
@@ -844,6 +940,7 @@ def _verify_refresh_then_display_target_authority(
         phase0_successor=prior["successor"],
         phase0_writeahead=prior["writeahead"],
         integration=json.loads(prior["freeze_bytes"]),
+        phase0_preview=prior.get("phase0_preview"),
         source_repo=source_repo,
     )
     result = dict(prior)
@@ -980,6 +1077,24 @@ def verify_phase0_authority(
     if semantic != request["semantic_snapshot_sha256"]:
         raise Stop("STAGE2_INTEGRATION_FREEZE_SEMANTIC_MISMATCH")
 
+    phase0_preview: dict[str, Any] | None = None
+    preview_sha = str((writeahead.get("sidecars") or {}).get("phase0-preview.json") or "")
+    if preview_sha:
+        preview_path = (
+            Path(writeahead_path).parent / "phase0-preview.json"
+        ).as_posix()
+        preview_bytes = git_show_bytes(
+            control_commit,
+            preview_path,
+            cwd=source_repo,
+        )
+        if sha256_bytes(preview_bytes) != preview_sha:
+            raise Stop("STAGE2_PHASE0_PREVIEW_SIDECAR_HASH_MISMATCH")
+        try:
+            phase0_preview = json.loads(preview_bytes)
+        except (TypeError, ValueError) as exc:
+            raise Stop("STAGE2_PHASE0_PREVIEW_SIDECAR_JSON_INVALID") from exc
+
     package_hashes = integration.get("package_member_sha256") or {}
     for name in REQUIRED_PACKAGE_FILES:
         expected = package_hashes.get(name)
@@ -997,6 +1112,7 @@ def verify_phase0_authority(
             successor=successor,
             writeahead=writeahead,
             integration=integration,
+            phase0_preview=phase0_preview,
         )
 
     display_authority: dict[str, Any] | None = None
@@ -1013,6 +1129,7 @@ def verify_phase0_authority(
             phase0_successor=successor,
             phase0_writeahead=writeahead,
             integration=integration,
+            phase0_preview=phase0_preview,
             source_repo=source_repo,
         )
         target_authority_kind = "STAGE2_OPPONENT_DISPLAY_SUCCESSOR"
@@ -1024,6 +1141,7 @@ def verify_phase0_authority(
         "writeahead_bytes": writeahead_bytes,
         "freeze_bytes": freeze_bytes,
         "freeze_path": freeze_path,
+        "phase0_preview": phase0_preview,
         "phase0_target_sha": phase0_target_sha,
         "phase0_protected_main_sha": successor.get("protected_main_sha"),
         "target_authority_kind": target_authority_kind,
