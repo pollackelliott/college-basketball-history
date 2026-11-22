@@ -1,3 +1,4 @@
+# Trigger after workflow registration.
 name: Validate VCU-shaped expansion Phase 0 display bridge through Stage 2
 
 on:
