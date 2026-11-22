@@ -1276,5 +1276,98 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             )
 
 
+
+    def _assert_prephase_display_member(
+        self,
+        name: str,
+        *,
+        proof_override: dict | None = None,
+        projected_override: str | None = None,
+    ):
+        expected_data = ("frozen-" + name).encode()
+        actual_data = ("projected-" + name).encode()
+        expected = hashlib.sha256(expected_data).hexdigest()
+        actual = hashlib.sha256(actual_data).hexdigest()
+        other = (
+            "source-games.csv" if name == "opponents.csv" else "opponents.csv"
+        )
+        other_pre = hashlib.sha256(("frozen-" + other).encode()).hexdigest()
+        other_post = hashlib.sha256(("projected-" + other).encode()).hexdigest()
+        display_sha = "7" * 64
+        proof = {
+            "literal_evidence_changes": 0,
+            "opponent_key_changes": 0,
+            "source_game_key_changes": 0,
+            "source_game_non_name_field_changes": 0,
+            "current_d1_changes": 0,
+        }
+        if proof_override:
+            proof.update(proof_override)
+        meta = {
+            "spec_sha256": display_sha,
+            "pre_candidate_sha256": {
+                name: expected,
+                other: other_pre,
+            },
+            "projected_candidate_sha256": {
+                name: projected_override or actual,
+                other: other_post,
+            },
+            "field_level_proof": proof,
+        }
+        school_path = f"schools/{SCHOOL}/{name}"
+        successor = {
+            "operation": "EXPANSION_PHASE0",
+            "opponent_display_reconciliation_sha256": display_sha,
+            "changed_paths": [school_path],
+            "changed_file_sha256": {school_path: actual},
+        }
+        writeahead = {
+            "operation": "EXPANSION_PHASE0",
+            "opponent_display_reconciliation_sha256": display_sha,
+            "package_member_sha256": {name: expected},
+            "changed_paths": [school_path],
+            "changed_file_sha256": {school_path: actual},
+        }
+        integration = {
+            "opponent_display_reconciliation_sha256": display_sha,
+            "opponent_display_reconciliation": meta,
+        }
+        stage2_runtime._verify_phase0_package_member(
+            name=name,
+            expected=expected,
+            actual=actual,
+            school_key=SCHOOL,
+            successor=successor,
+            writeahead=writeahead,
+            integration=integration,
+        )
+
+    def test_expansion_prephase_opponent_display_member_is_authenticated(self):
+        self._assert_prephase_display_member("opponents.csv")
+
+    def test_expansion_prephase_source_display_member_is_authenticated(self):
+        self._assert_prephase_display_member("source-games.csv")
+
+    def test_expansion_prephase_display_rejects_nonrepresentation_proof(self):
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_NONREPRESENTATIONAL",
+        ):
+            self._assert_prephase_display_member(
+                "source-games.csv",
+                proof_override={"literal_evidence_changes": 1},
+            )
+
+    def test_expansion_prephase_display_rejects_stale_projected_hash(self):
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_PROJECTED_HASH_MISMATCH",
+        ):
+            self._assert_prephase_display_member(
+                "opponents.csv",
+                projected_override="0" * 64,
+            )
+
 if __name__ == "__main__":
     unittest.main()
