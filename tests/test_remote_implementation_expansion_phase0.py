@@ -1,6 +1,7 @@
 """Remote control-plane validation for guarded ALL_HISTORY_EXPANSION Phase 0."""
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import sys
