@@ -55,10 +55,14 @@ def _rows(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
 
 
 def _csv_bytes(
-    fields: list[str], rows: list[dict[str, str]], *, bom: bool = False,
+    fields: list[str],
+    rows: list[dict[str, str]],
+    *,
+    bom: bool = False,
+    line_ending: str = "\n",
 ) -> bytes:
     value = io.StringIO(newline="")
-    writer = csv.DictWriter(value, fieldnames=fields, lineterminator="\n")
+    writer = csv.DictWriter(value, fieldnames=fields, lineterminator=line_ending)
     writer.writeheader()
     writer.writerows(rows)
     data = value.getvalue().encode("utf-8")
@@ -302,6 +306,267 @@ def _reconstruct_frozen_venues(
     return True
 
 
+def _phase0_commit_identity(
+    root: Path,
+    school: str,
+    phase0_commit: str,
+    integration_freeze: dict[str, Any],
+    *,
+    diagnostics: list[str] | None = None,
+) -> bool:
+    def reject(reason: str) -> bool:
+        if diagnostics is not None:
+            diagnostics.append(reason)
+        return False
+
+    integration_base = str(integration_freeze.get("integration_base_sha") or "")
+    if not re.fullmatch(r"[0-9a-f]{40}", integration_base):
+        return reject("phase0_integration_base_invalid")
+    lineage = _git(root, "rev-list", "--parents", "-n", "1", phase0_commit)
+    if lineage is None:
+        return reject("phase0_lineage_unavailable")
+    parts = lineage.decode().split()
+    if len(parts) != 2 or parts[0] != phase0_commit or parts[1] != integration_base:
+        return reject("phase0_integration_base_mismatch")
+    message = _git(root, "show", "-s", "--format=%s", phase0_commit)
+    if message is None or message.decode().strip() != (
+        f"Stage {school} all-history expansion Phase 0"
+    ):
+        return reject("phase0_commit_message_invalid")
+    return True
+
+
+def _reconstruct_frozen_opponent_display(
+    root: Path,
+    school: str,
+    projected_package: dict[str, bytes],
+    freeze_hashes: dict[str, str],
+    integration_freeze: dict[str, Any],
+    *,
+    diagnostics: list[str] | None = None,
+) -> bool:
+    def reject(reason: str) -> bool:
+        if diagnostics is not None:
+            diagnostics.append(reason)
+        return False
+
+    meta = integration_freeze.get("opponent_display_reconciliation")
+    meta_sha = str(
+        integration_freeze.get("opponent_display_reconciliation_sha256") or ""
+    )
+    if not isinstance(meta, dict) or not re.fullmatch(r"[0-9a-f]{64}", meta_sha):
+        return reject("phase0_display_authority_missing")
+    if meta.get("spec_sha256") != meta_sha:
+        return reject("phase0_display_authority_hash_mismatch")
+
+    projected_hashes = meta.get("projected_candidate_sha256")
+    pre_hashes = meta.get("pre_candidate_sha256")
+    if (
+        not isinstance(projected_hashes, dict)
+        or not isinstance(pre_hashes, dict)
+        or set(projected_hashes) != set(DISPLAY_COLUMNS)
+        or set(pre_hashes) != set(DISPLAY_COLUMNS)
+    ):
+        return reject("phase0_display_hash_population_invalid")
+
+    proof = meta.get("field_level_proof")
+    if not isinstance(proof, dict):
+        return reject("phase0_display_field_proof_missing")
+    for field in (
+        "literal_evidence_changes",
+        "opponent_key_changes",
+        "source_game_key_changes",
+        "source_game_non_name_field_changes",
+        "current_d1_changes",
+    ):
+        if int(proof.get(field, -1)) != 0:
+            return reject("phase0_display_nonrepresentation_delta")
+
+    working: dict[str, tuple[list[str], list[dict[str, str]], bool, str]] = {}
+    for name in DISPLAY_COLUMNS:
+        data = projected_package[name]
+        if _sha(data) != projected_hashes.get(name):
+            return reject("phase0_display_projected_hash_mismatch:" + name)
+        fields, rows = _rows(data)
+        working[name] = (
+            fields,
+            rows,
+            data.startswith(b"\xef\xbb\xbf"),
+            "\r\n" if b"\r\n" in data else "\n",
+        )
+
+    opponent_changes = meta.get("opponent_changes")
+    source_changes = meta.get("source_game_changes")
+    if not isinstance(opponent_changes, list) or not isinstance(source_changes, list):
+        return reject("phase0_display_change_population_invalid")
+
+    opp_fields, opp_rows, opp_bom, opp_eol = working["opponents.csv"]
+    if "canonical_opponent_name" not in opp_fields:
+        return reject("phase0_display_opponent_column_missing")
+    changed_keys: set[str] = set()
+    for change in opponent_changes:
+        if not isinstance(change, dict):
+            return reject("phase0_display_opponent_change_invalid")
+        line = change.get("line")
+        if not isinstance(line, int) or line < 2 or line - 2 >= len(opp_rows):
+            return reject("phase0_display_opponent_line_invalid")
+        row = opp_rows[line - 2]
+        key = str(change.get("canonical_opponent_key") or "").strip()
+        if (
+            row.get("canonical_opponent_key", "").strip() != key
+            or row.get("source_opponent_label", "")
+            != str(change.get("source_opponent_label") or "")
+            or row.get("canonical_opponent_name", "")
+            != str(change.get("to_name") or "")
+        ):
+            return reject("phase0_display_opponent_change_mismatch")
+        row["canonical_opponent_name"] = str(change.get("from_name") or "")
+        changed_keys.add(key)
+
+    src_fields, src_rows, src_bom, src_eol = working["source-games.csv"]
+    if "normalized_opponent_name" not in src_fields:
+        return reject("phase0_display_source_column_missing")
+    for change in source_changes:
+        if not isinstance(change, dict):
+            return reject("phase0_display_source_change_invalid")
+        line = change.get("line")
+        if not isinstance(line, int) or line < 2 or line - 2 >= len(src_rows):
+            return reject("phase0_display_source_line_invalid")
+        row = src_rows[line - 2]
+        if (
+            row.get("source_game_id", "")
+            != str(change.get("source_game_id") or "")
+            or row.get("normalized_opponent_key", "").strip()
+            != str(change.get("normalized_opponent_key") or "").strip()
+            or row.get("normalized_opponent_name", "")
+            != str(change.get("to_name") or "")
+        ):
+            return reject("phase0_display_source_change_mismatch")
+        row["normalized_opponent_name"] = str(change.get("from_name") or "")
+
+    reconstructed_opponents = _csv_bytes(
+        opp_fields, opp_rows, bom=opp_bom, line_ending=opp_eol
+    )
+    reconstructed_sources = _csv_bytes(
+        src_fields, src_rows, bom=src_bom, line_ending=src_eol
+    )
+    for name, data in (
+        ("opponents.csv", reconstructed_opponents),
+        ("source-games.csv", reconstructed_sources),
+    ):
+        if _sha(data) != freeze_hashes[name] or _sha(data) != pre_hashes.get(name):
+            return reject("phase0_display_frozen_bytes_mismatch:" + name)
+
+    declared_keys = sorted(str(x) for x in meta.get("changed_keys") or [])
+    if sorted(changed_keys) != declared_keys or proof.get("changed_keys") != declared_keys:
+        return reject("phase0_display_changed_key_population_mismatch")
+
+    try:
+        registered = normalization.project_program_keys(root)
+        established = normalization.authority_names_by_key(
+            root, school, program_keys=registered,
+        )
+    except (OSError, ValueError, KeyError):
+        return reject("phase0_display_identity_authority_unavailable")
+
+    final_names: dict[str, str] = {}
+    _, final_opp_rows = _rows(projected_package["opponents.csv"])
+    for row in final_opp_rows:
+        key = row.get("canonical_opponent_key", "").strip()
+        if key not in changed_keys:
+            continue
+        name = row.get("canonical_opponent_name", "").strip()
+        if not name or key in registered:
+            return reject("phase0_display_final_key_invalid")
+        if key in final_names and final_names[key] != name:
+            return reject("phase0_display_final_name_not_unique")
+        final_names[key] = name
+
+    for key, name in final_names.items():
+        signatures = {
+            normalization.build_site_data.normalized_name_signature(value)
+            for value in established.get(key, ())
+            if normalization.build_site_data.normalized_name_signature(value)
+        }
+        if (
+            len(signatures) != 1
+            or normalization.build_site_data.normalized_name_signature(name)
+            not in signatures
+        ):
+            return reject("phase0_display_established_identity_mismatch")
+
+    _, final_source_rows = _rows(projected_package["source-games.csv"])
+    for row in final_source_rows:
+        key = row.get("normalized_opponent_key", "").strip()
+        if key in changed_keys and row.get("normalized_opponent_name", "") != final_names.get(
+            key, ""
+        ):
+            return reject("phase0_display_source_not_aligned")
+    return True
+
+
+def _phase0_package_matches_frozen_authority(
+    root: Path,
+    school: str,
+    phase0_commit: str,
+    package: dict[str, bytes],
+    freeze_hashes: dict[str, str],
+    integration_freeze: dict[str, Any],
+    *,
+    diagnostics: list[str] | None = None,
+) -> bool:
+    def reject(reason: str) -> bool:
+        if diagnostics is not None:
+            diagnostics.append(reason)
+        return False
+
+    if not _phase0_commit_identity(
+        root,
+        school,
+        phase0_commit,
+        integration_freeze,
+        diagnostics=diagnostics,
+    ):
+        return False
+
+    display_meta = integration_freeze.get("opponent_display_reconciliation")
+    for name in PACKAGE_NAMES:
+        if name in DISPLAY_COLUMNS or name == "venues.csv":
+            continue
+        if _sha(package[name]) != freeze_hashes[name]:
+            return reject("phase0_nonrepresentation_package_mismatch:" + name)
+
+    if display_meta is None:
+        if any(
+            _sha(package[name]) != freeze_hashes[name]
+            for name in DISPLAY_COLUMNS
+        ):
+            return reject("phase0_unbound_display_package_mismatch")
+    else:
+        if not _reconstruct_frozen_opponent_display(
+            root,
+            school,
+            package,
+            freeze_hashes,
+            integration_freeze,
+            diagnostics=diagnostics,
+        ):
+            return False
+
+    if _sha(package["venues.csv"]) != freeze_hashes["venues.csv"]:
+        if not _reconstruct_frozen_venues(
+            root,
+            school,
+            phase0_commit,
+            package["venues.csv"],
+            freeze_hashes["venues.csv"],
+            integration_freeze,
+            diagnostics=diagnostics,
+        ):
+            return False
+    return True
+
+
 def permits_authenticated_display_successor(
     root: Path,
     school: str,
@@ -351,6 +616,35 @@ def permits_authenticated_display_successor(
         if current_git is None or current_git != current[name]:
             return reject("working_tree_not_equal_head")
 
+    # A pre-Phase0 display reconciliation is already representation authority.
+    # If no later package-changing normalization exists, accept the exact
+    # authenticated Phase-0 composition directly after stripping only
+    # package-preserving first-parent commits.
+    if integration_freeze is not None and integration_freeze.get(
+        "opponent_display_reconciliation"
+    ) is not None:
+        phase0_cursor = cursor
+        for _ in range(12):
+            preserving_parent = _package_preserving_first_parent(
+                root, phase0_cursor, school
+            )
+            if preserving_parent is None:
+                break
+            phase0_cursor = preserving_parent
+        else:
+            return reject("phase0_lineage_depth_limit")
+        phase0_package = _package(root, phase0_cursor, school)
+        if phase0_package is not None and _phase0_package_matches_frozen_authority(
+            root,
+            school,
+            phase0_cursor,
+            phase0_package,
+            freeze_hashes,
+            integration_freeze,
+            diagnostics=diagnostics,
+        ):
+            return True
+
     normalization_commit = ""
     normalization_parent = ""
     for _ in range(12):
@@ -395,22 +689,18 @@ def permits_authenticated_display_successor(
     if original is None:
         return reject("normalization_predecessor_package_unavailable")
 
-    nonvenue = [name for name in PACKAGE_NAMES if name != "venues.csv"]
-    if any(_sha(original[name]) != freeze_hashes[name] for name in nonvenue):
-        return reject("phase0_nonvenue_package_mismatch")
-    if _sha(original["venues.csv"]) != freeze_hashes["venues.csv"]:
-        if integration_freeze is None:
-            return reject("phase0_venue_authority_missing")
-        if not _reconstruct_frozen_venues(
-            root,
-            school,
-            base_cursor,
-            original["venues.csv"],
-            freeze_hashes["venues.csv"],
-            integration_freeze,
-            diagnostics=diagnostics,
-        ):
-            return False
+    if integration_freeze is None:
+        return reject("phase0_authority_missing")
+    if not _phase0_package_matches_frozen_authority(
+        root,
+        school,
+        base_cursor,
+        original,
+        freeze_hashes,
+        integration_freeze,
+        diagnostics=diagnostics,
+    ):
+        return False
 
     opponent_changes = _opponent_representation_changes(
         original["opponents.csv"], current["opponents.csv"],
