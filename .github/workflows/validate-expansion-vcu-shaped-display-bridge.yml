@@ -491,7 +491,7 @@ jobs:
               "operation": "STAGE2_CENSUS",
               "expected_protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
               "target_branch": "data/miami-onboarding",
-              "target_sha": successor["target_sha"],
+              "target_sha": successor["actual_published_target_sha"],
               "integration_freeze_sha256": successor["integration_freeze_sha256"],
               "semantic_snapshot_sha256": successor["semantic_snapshot_sha256"],
               "phase0_successor": {"path": rel, "sha256": digest},
