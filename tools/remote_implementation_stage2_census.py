@@ -753,6 +753,8 @@ def _verify_safe_global_venue_reuse(
 
     if phase0_preview.get("kind") != "ALL_HISTORY_EXPANSION_PHASE0_DISPOSABLE_PREVIEW":
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_KIND_MISMATCH")
+    if phase0_preview.get("status") != "DISPOSABLE_ONLY_NOT_PUBLISHED":
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_STATUS_MISMATCH")
     if phase0_preview.get("school_key") != school_key:
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_PREVIEW_SCHOOL_MISMATCH")
     if (
