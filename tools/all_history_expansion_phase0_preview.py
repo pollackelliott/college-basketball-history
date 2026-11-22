@@ -96,6 +96,8 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "source_game_changed_ids": display_proof[
                 "source_game_changed_ids"
             ],
+            "opponent_changes": display_doc["opponent_changes"],
+            "source_game_changes": display_doc["source_game_changes"],
             "pre_candidate_sha256": display_doc[
                 "pre_candidate_sha256"
             ],
