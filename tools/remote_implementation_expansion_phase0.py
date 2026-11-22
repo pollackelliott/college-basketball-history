@@ -337,6 +337,24 @@ def _external_authority(
         ):
             raise Stop("EXPANSION_PHASE0_VENUE_RECONCILIATION_HASH_MISMATCH")
 
+    opponent_display_reconciliation = materialize_payload(
+        control_commit,
+        request.get("opponent_display_reconciliation"),
+        scratch / "opponent-display-reconciliation.json",
+    )
+    if request.get("opponent_display_reconciliation") is not None:
+        if opponent_display_reconciliation is None:
+            raise Stop(
+                "EXPANSION_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_MISSING"
+            )
+        if (
+            sha256_file(opponent_display_reconciliation)
+            != request["opponent_display_reconciliation"]["sha256"]
+        ):
+            raise Stop(
+                "EXPANSION_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_HASH_MISMATCH"
+            )
+
     frozen = scratch / "integration-freeze"
     manifest = freeze_authority(
         worktree,
@@ -349,6 +367,9 @@ def _external_authority(
         request["stage1_independent_proof_sha256"],
         frozen,
         venue_reconciliation_path=venue_reconciliation,
+        opponent_display_reconciliation_path=(
+            opponent_display_reconciliation
+        ),
     )
     manifest_bytes = (frozen / MANIFEST_NAME).read_bytes()
     manifest_sha = sha256_bytes(manifest_bytes)
@@ -400,6 +421,9 @@ def _external_authority(
         "stage1_control_authority_sha": stage1_control_authority_sha,
         "proof_path": proof,
         "venue_reconciliation_path": venue_reconciliation,
+        "opponent_display_reconciliation_path": (
+            opponent_display_reconciliation
+        ),
         "frozen": frozen,
         "manifest": manifest,
         "manifest_bytes": manifest_bytes,
@@ -802,6 +826,11 @@ def run_expansion_phase0(
             authority["venue_reconciliation_path"].read_bytes()
         )
         sidecar_names.append("venue-reconciliation.json")
+    if authority["opponent_display_reconciliation_path"] is not None:
+        (input_dir / "opponent-display-reconciliation.json").write_bytes(
+            authority["opponent_display_reconciliation_path"].read_bytes()
+        )
+        sidecar_names.append("opponent-display-reconciliation.json")
     sidecars = {
         name: sha256_file(input_dir / name)
         for name in sidecar_names
@@ -828,6 +857,9 @@ def run_expansion_phase0(
             "integration_freeze_sha256": request["integration_freeze_sha256"],
             "venue_reconciliation_sha256": authority["manifest"].get(
                 "venue_reconciliation_sha256",""
+            ),
+            "opponent_display_reconciliation_sha256": authority["manifest"].get(
+                "opponent_display_reconciliation_sha256",""
             ),
             "semantic_snapshot_sha256": authority[
                 "semantic_snapshot_sha256"
@@ -892,6 +924,9 @@ def run_expansion_phase0(
         "integration_freeze_sha256": request["integration_freeze_sha256"],
         "venue_reconciliation_sha256": authority["manifest"].get(
             "venue_reconciliation_sha256",""
+        ),
+        "opponent_display_reconciliation_sha256": authority["manifest"].get(
+            "opponent_display_reconciliation_sha256",""
         ),
         "package_member_sha256": authority["manifest"][
             "package_member_sha256"
@@ -968,6 +1003,9 @@ def run_expansion_phase0(
         "venue_reconciliation_sha256": authority["manifest"].get(
             "venue_reconciliation_sha256",""
         ),
+        "opponent_display_reconciliation_sha256": authority["manifest"].get(
+            "opponent_display_reconciliation_sha256",""
+        ),
         "semantic_snapshot_sha256": authority[
             "semantic_snapshot_sha256"
         ],
@@ -995,6 +1033,9 @@ def run_expansion_phase0(
             "integration_freeze_sha256": request["integration_freeze_sha256"],
             "venue_reconciliation_sha256": authority["manifest"].get(
                 "venue_reconciliation_sha256",""
+            ),
+            "opponent_display_reconciliation_sha256": authority["manifest"].get(
+                "opponent_display_reconciliation_sha256",""
             ),
             "semantic_snapshot_sha256": authority[
                 "semantic_snapshot_sha256"
@@ -1072,6 +1113,7 @@ def verify_expansion_phase0_equivalence(
         "stage1_control_authority_sha",
         "integration_freeze_sha256",
         "venue_reconciliation_sha256",
+        "opponent_display_reconciliation_sha256",
         "semantic_snapshot_sha256",
         "repository_validation",
     ):
@@ -1106,6 +1148,23 @@ def verify_expansion_phase0_equivalence(
     elif "venue-reconciliation.json" in sidecars:
         raise Stop(
             "EXPANSION_PHASE0_FRESH_UNEXPECTED_VENUE_RECONCILIATION_SIDECAR"
+        )
+    display_reconciliation_sha = str(
+        successor.get("opponent_display_reconciliation_sha256") or ""
+    )
+    if display_reconciliation_sha:
+        if (
+            sidecars.get("opponent-display-reconciliation.json")
+            != display_reconciliation_sha
+        ):
+            raise Stop(
+                "EXPANSION_PHASE0_FRESH_OPPONENT_DISPLAY_RECONCILIATION_"
+                "SIDECAR_BINDING_MISMATCH"
+            )
+    elif "opponent-display-reconciliation.json" in sidecars:
+        raise Stop(
+            "EXPANSION_PHASE0_FRESH_UNEXPECTED_OPPONENT_DISPLAY_RECONCILIATION_"
+            "SIDECAR"
         )
 
     request_path = (
@@ -1162,6 +1221,15 @@ def verify_expansion_phase0_equivalence(
     ):
         raise Stop("EXPANSION_PHASE0_FRESH_VENUE_RECONCILIATION_MISMATCH")
     if (
+        reconstructed["authority"]["manifest"].get(
+            "opponent_display_reconciliation_sha256",""
+        )
+        != successor.get("opponent_display_reconciliation_sha256","")
+    ):
+        raise Stop(
+            "EXPANSION_PHASE0_FRESH_OPPONENT_DISPLAY_RECONCILIATION_MISMATCH"
+        )
+    if (
         reconstructed["authority"]["semantic_snapshot_sha256"]
         != successor["semantic_snapshot_sha256"]
     ):
@@ -1197,6 +1265,9 @@ def verify_expansion_phase0_equivalence(
         ],
         "venue_reconciliation_sha256": successor.get(
             "venue_reconciliation_sha256",""
+        ),
+        "opponent_display_reconciliation_sha256": successor.get(
+            "opponent_display_reconciliation_sha256",""
         ),
         "semantic_snapshot_sha256": successor[
             "semantic_snapshot_sha256"
