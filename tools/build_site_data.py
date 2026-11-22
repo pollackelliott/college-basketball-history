@@ -604,6 +604,8 @@ def preferred_display_name(names: set[str]) -> str:
 def opponent_names_by_key(
     repo_root: Path,
     programs: dict[str, dict[str, str]],
+    *,
+    exclude_school: str | None = None,
 ) -> dict[str, set[str]]:
     """Collect every registered/source display label for each opponent key."""
     names_by_key: dict[str, set[str]] = defaultdict(set)
@@ -614,6 +616,8 @@ def opponent_names_by_key(
     schools_dir = repo_root / "schools"
     if schools_dir.exists():
         for path in sorted(schools_dir.glob("*/opponents.csv")):
+            if exclude_school and path.parent.name == exclude_school:
+                continue
             for row in read_csv(path):
                 key = row.get("canonical_opponent_key", "").strip()
                 name = row.get("canonical_opponent_name", "").strip()
@@ -641,22 +645,90 @@ def historical_opponent_display_conflicts(
 def load_opponent_names(
     repo_root: Path,
     programs: dict[str, dict[str, str]],
+    *,
+    pending_opponent_display_school: str | None = None,
 ) -> dict[str, str]:
+    """Resolve public opponent displays, with one fail-closed pre-Stage-2 mode.
+
+    Normal publication remains strict: every historical opponent key must have one
+    normalized display identity project-wide.
+
+    A scope-mutating expansion may need to regenerate derived public JSON before
+    Stage 2 can perform its existing target-package display normalization. When
+    pending_opponent_display_school is supplied, tolerate only conflicts caused
+    by that exact target school and only when the rest of the repository already
+    supplies one unambiguous display identity. The target package is never changed;
+    this affects derived JSON display selection only.
+    """
     names_by_key = opponent_names_by_key(repo_root, programs)
     true_conflicts = historical_opponent_display_conflicts(repo_root, programs)
 
+    pending_school = str(pending_opponent_display_school or "").strip()
+    target_names_by_key: dict[str, set[str]] = defaultdict(set)
+    external_names_by_key: dict[str, set[str]] = {}
+    if pending_school:
+        target_path = repo_root / "schools" / pending_school / "opponents.csv"
+        if not target_path.is_file():
+            raise ValueError(
+                "Pending opponent-display school has no opponents.csv: "
+                + pending_school
+            )
+        for row in read_csv(target_path):
+            key = row.get("canonical_opponent_key", "").strip()
+            name = row.get("canonical_opponent_name", "").strip()
+            if key and name:
+                target_names_by_key[key].add(name)
+        external_names_by_key = opponent_names_by_key(
+            repo_root,
+            programs,
+            exclude_school=pending_school,
+        )
+
+    unresolved_conflicts: dict[str, list[str]] = {}
     resolved_names: dict[str, str] = {}
     for key, names in names_by_key.items():
         if key in programs:
-            resolved_names[key] = (programs[key].get("display_name", "").strip() or programs[key]["program_name"].strip())
+            resolved_names[key] = (
+                programs[key].get("display_name", "").strip()
+                or programs[key]["program_name"].strip()
+            )
             continue
         if key not in true_conflicts:
             resolved_names[key] = preferred_display_name(names)
+            continue
 
-    if true_conflicts:
+        if not pending_school:
+            unresolved_conflicts[key] = true_conflicts[key]
+            continue
+
+        target_names = set(target_names_by_key.get(key, set()))
+        external_names = set(external_names_by_key.get(key, set()))
+        target_signatures = {
+            normalized_name_signature(name)
+            for name in target_names
+            if normalized_name_signature(name)
+        }
+        external_signatures = {
+            normalized_name_signature(name)
+            for name in external_names
+            if normalized_name_signature(name)
+        }
+
+        target_causes_conflict = bool(
+            target_names
+            and external_names
+            and target_signatures - external_signatures
+        )
+        if not target_causes_conflict or len(external_signatures) != 1:
+            unresolved_conflicts[key] = true_conflicts[key]
+            continue
+
+        resolved_names[key] = preferred_display_name(external_names)
+
+    if unresolved_conflicts:
         sample = "; ".join(
             f"{key}: {names}"
-            for key, names in list(true_conflicts.items())[:10]
+            for key, names in list(unresolved_conflicts.items())[:10]
         )
         raise ValueError(
             "Conflicting historical opponent display names found after "
@@ -665,8 +737,6 @@ def load_opponent_names(
         )
 
     return resolved_names
-
-
 
 def load_venue_names(repo_root: Path) -> dict[str, str]:
     """Map permanent venue_id to project-stable display_name."""
@@ -759,6 +829,16 @@ def main() -> int:
         "--apply",
         action="store_true",
         help="Write generated JSON to site/data/.",
+    )
+    parser.add_argument(
+        "--pending-opponent-display-school",
+        default=None,
+        help=(
+            "Pre-Stage-2 expansion projection only: for historical display "
+            "conflicts caused by this target school, use one unambiguous "
+            "external project display in generated JSON without mutating "
+            "the target package."
+        ),
     )
     args = parser.parse_args()
 
@@ -928,7 +1008,11 @@ def main() -> int:
         if row["season_label"] == reference_season
     }
 
-    opponent_names = load_opponent_names(repo_root, programs)
+    opponent_names = load_opponent_names(
+        repo_root,
+        programs,
+        pending_opponent_display_school=args.pending_opponent_display_school,
+    )
     venue_names = load_venue_names(repo_root)
 
     enabled_keys = sorted(
