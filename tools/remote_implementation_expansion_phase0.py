@@ -18,6 +18,7 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
+import normalize_historical_opponent_displays as opponent_display_normalization
 from all_history_expansion_freeze import ZIP_MEMBERS, ZIP_MEMBERS_V2
 from all_history_expansion_integration import (
     MANIFEST_NAME,
@@ -440,29 +441,155 @@ def _install_scope_generated_projection(
     authority: dict[str, Any],
     diag: Path,
 ) -> list[str]:
+    """Build scope-derived public JSON from a disposable display-normalized view.
+
+    Historical opponent-display conflicts are a Stage-2 representation concern.
+    Scope-derived public JSON generation was added after the proven VCU expansion
+    path and invokes build_site_data before Stage 2.  To avoid moving that Stage-2
+    invariant into Phase 0, temporarily normalize only the target school's
+    historical display representation to unique current-project authority while
+    generating the two scope-derived JSON files, then restore the exact Phase-0
+    package bytes before any commit/hash proof is constructed.
+    """
     expected = sorted(authority["intent"].get("scope_generated_paths") or [])
     if not expected:
         return []
 
-    cp = run(
-        [
-            sys.executable,
-            str(worktree / "tools" / "build_site_data.py"),
-            str(worktree),
-            "--apply",
-        ],
+    school = request["school_key"]
+    opponent_path = worktree / "schools" / school / "opponents.csv"
+    source_path = worktree / "schools" / school / "source-games.csv"
+    if not opponent_path.is_file() or not source_path.is_file():
+        raise Stop("EXPANSION_PHASE0_SCOPE_DISPLAY_PACKAGE_MISSING")
+
+    original_opponents = opponent_path.read_bytes()
+    original_source_games = source_path.read_bytes()
+
+    try:
+        try:
+            opponent_plan = opponent_display_normalization.build_normalization_plan(
+                worktree,
+                school,
+                sync_current_d1=False,
+            )
+            if opponent_plan.get("status") != "PASS":
+                raise Stop(
+                    "EXPANSION_PHASE0_SCOPE_DISPLAY_AUTHORITY_AMBIGUOUS:"
+                    + ",".join(
+                        str(item.get("canonical_opponent_key") or "")
+                        for item in opponent_plan.get("ambiguous") or []
+                    )
+                )
+            source_plan = opponent_display_normalization.build_source_display_plan(
+                worktree,
+                school,
+                opponent_plan,
+                limit_to_opponent_changes=True,
+            )
+        except (FileNotFoundError, ValueError) as exc:
+            raise Stop(
+                "EXPANSION_PHASE0_SCOPE_DISPLAY_NORMALIZATION_FAILED:" + str(exc)
+            ) from exc
+
+        changed_keys = sorted(
+            str(item.get("canonical_opponent_key") or "")
+            for item in opponent_plan.get("changes") or []
+        )
+        for item in opponent_plan.get("changes") or []:
+            if item.get("change_fields") != ["canonical_opponent_name"]:
+                raise Stop(
+                    "EXPANSION_PHASE0_SCOPE_DISPLAY_NONREPRESENTATIONAL_OPPONENT_CHANGE"
+                )
+        source_keys = sorted(
+            {
+                str(item.get("normalized_opponent_key") or "")
+                for item in source_plan.get("changes") or []
+            }
+        )
+        if not set(source_keys).issubset(set(changed_keys)):
+            raise Stop(
+                "EXPANSION_PHASE0_SCOPE_DISPLAY_SOURCE_KEY_OUTSIDE_OPPONENT_CHANGE"
+            )
+
+        if opponent_plan.get("change_row_count"):
+            opponent_display_normalization.write_csv_preserving(
+                opponent_plan["path"],
+                opponent_plan["fields"],
+                opponent_plan["rows"],
+                opponent_plan["encoding"],
+                opponent_plan["line_ending"],
+            )
+        if source_plan.get("change_row_count"):
+            opponent_display_normalization.write_csv_preserving(
+                source_plan["path"],
+                source_plan["fields"],
+                source_plan["rows"],
+                source_plan["encoding"],
+                source_plan["line_ending"],
+            )
+
+        diag.mkdir(parents=True, exist_ok=True)
+        write_json(
+            diag / "expansion-phase0-disposable-opponent-display.json",
+            {
+                "schema_version": 1,
+                "kind": "EXPANSION_PHASE0_DISPOSABLE_OPPONENT_DISPLAY_PROJECTION",
+                "school_key": school,
+                "status": "PASS",
+                "changed_keys": changed_keys,
+                "opponent_changed_row_count": int(
+                    opponent_plan.get("change_row_count") or 0
+                ),
+                "source_game_changed_row_count": int(
+                    source_plan.get("change_row_count") or 0
+                ),
+                "source_game_changed_keys": source_keys,
+                "allowed_fields": {
+                    "opponents.csv": ["canonical_opponent_name"],
+                    "source-games.csv": ["normalized_opponent_name"],
+                },
+                "committed_package_mutation": "NONE",
+                "stage2_representation_authority": "UNCHANGED_EXISTING_PATH",
+            },
+        )
+
+        cp = run(
+            [
+                sys.executable,
+                str(worktree / "tools" / "build_site_data.py"),
+                str(worktree),
+                "--apply",
+            ],
+            cwd=worktree,
+            check=False,
+        )
+        (diag / "expansion-phase0-build-site-data.log").write_text(
+            cp.stdout or "",
+            encoding="utf-8",
+        )
+        if cp.returncode != 0:
+            raise Stop(
+                "EXPANSION_PHASE0_SCOPE_SITE_PROJECTION_FAILED\n"
+                + (cp.stdout or "")[-10000:]
+            )
+    finally:
+        opponent_path.write_bytes(original_opponents)
+        source_path.write_bytes(original_source_games)
+
+    if opponent_path.read_bytes() != original_opponents:
+        raise Stop("EXPANSION_PHASE0_SCOPE_DISPLAY_OPPONENT_RESTORE_FAILED")
+    if source_path.read_bytes() != original_source_games:
+        raise Stop("EXPANSION_PHASE0_SCOPE_DISPLAY_SOURCE_RESTORE_FAILED")
+    residual = git(
+        "diff",
+        "--name-only",
+        "--",
+        "schools/%s/opponents.csv" % school,
+        "schools/%s/source-games.csv" % school,
         cwd=worktree,
-        check=False,
-    )
-    diag.mkdir(parents=True, exist_ok=True)
-    (diag / "expansion-phase0-build-site-data.log").write_text(
-        cp.stdout or "",
-        encoding="utf-8",
-    )
-    if cp.returncode != 0:
+    ).stdout.strip()
+    if residual:
         raise Stop(
-            "EXPANSION_PHASE0_SCOPE_SITE_PROJECTION_FAILED\n"
-            + (cp.stdout or "")[-10000:]
+            "EXPANSION_PHASE0_SCOPE_DISPLAY_RESTORE_WORKTREE_DRIFT:" + residual
         )
 
     changed = sorted(
