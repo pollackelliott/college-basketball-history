@@ -192,9 +192,65 @@ class ExpansionZeroDeltaSourceUpdateTests(unittest.TestCase):
 
 
 class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
-    def test_scope_projection_stages_only_target_generated_files(self):
-        import tempfile
+    @staticmethod
+    def _seed_target(worktree: Path) -> tuple[bytes, bytes]:
+        school = worktree / "schools" / "example"
+        school.mkdir(parents=True, exist_ok=True)
+        opponents = (
+            "source_opponent_label,canonical_opponent_key,"
+            "canonical_opponent_name,current_d1\n"
+            "Rio Grande,rio-grande,Rio Grande College (Ohio),No\n"
+        ).encode()
+        source_games = (
+            "source_game_id,normalized_opponent_key,normalized_opponent_name,"
+            "source_opponent_label,raw_text\n"
+            "EX-1,rio-grande,Rio Grande College (Ohio),Rio Grande,"
+            "12/19 Rio Grande L 88-98\n"
+        ).encode()
+        (school / "opponents.csv").write_bytes(opponents)
+        (school / "source-games.csv").write_bytes(source_games)
+        return opponents, source_games
 
+    @staticmethod
+    def _noop_plans(worktree: Path):
+        school = worktree / "schools" / "example"
+        opponent_plan = {
+            "status": "PASS",
+            "ambiguous": [],
+            "changes": [],
+            "change_row_count": 0,
+            "path": school / "opponents.csv",
+            "fields": [],
+            "rows": [],
+            "encoding": "utf-8",
+            "line_ending": "\n",
+        }
+        source_plan = {
+            "changes": [],
+            "change_row_count": 0,
+            "path": school / "source-games.csv",
+            "fields": [],
+            "rows": [],
+            "encoding": "utf-8",
+            "line_ending": "\n",
+        }
+        return opponent_plan, source_plan
+
+    @staticmethod
+    def _git_for_projection(expected):
+        def fake_git(*args, **kwargs):
+            if args[:3] == ("diff", "--name-only", "--") and (
+                "schools/example/opponents.csv" in args
+            ):
+                return SimpleNamespace(stdout="")
+            if args[:4] == ("diff", "--name-only", "--", "site/data"):
+                return SimpleNamespace(stdout="\n".join(expected) + "\n")
+            if args[:2] == ("add", "--"):
+                return SimpleNamespace(stdout="")
+            raise AssertionError(f"unexpected git call: {args}")
+        return fake_git
+
+    def test_scope_projection_stages_only_target_generated_files(self):
         expected = [
             "site/data/programs.json",
             "site/data/teams/example.json",
@@ -204,27 +260,27 @@ class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
             worktree = Path(temporary) / "repo"
             diag = Path(temporary) / "diag"
             (worktree / "tools").mkdir(parents=True)
-            for path in expected:
-                target = worktree / path
+            self._seed_target(worktree)
+            for item in expected:
+                target = worktree / item
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text("{}\n", encoding="utf-8")
-
-            def fake_run(*args, **kwargs):
-                return SimpleNamespace(returncode=0, stdout="PASS\n")
-
-            def fake_git(*args, **kwargs):
-                if args[:4] == ("diff", "--name-only", "--", "site/data"):
-                    return SimpleNamespace(stdout="\n".join(expected) + "\n")
-                if args[:2] == ("add", "--"):
-                    return SimpleNamespace(stdout="")
-                raise AssertionError(f"unexpected git call: {args}")
+            opponent_plan, source_plan = self._noop_plans(worktree)
 
             with patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_normalization_plan",
+                return_value=opponent_plan,
+            ), patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_source_display_plan",
+                return_value=source_plan,
+            ), patch(
                 "remote_implementation_expansion_phase0.run",
-                side_effect=fake_run,
+                return_value=SimpleNamespace(returncode=0, stdout="PASS\n"),
             ) as run_mock, patch(
                 "remote_implementation_expansion_phase0.git",
-                side_effect=fake_git,
+                side_effect=self._git_for_projection(expected),
             ) as git_mock:
                 observed = _install_scope_generated_projection(
                     worktree,
@@ -238,16 +294,9 @@ class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
                 (diag / "expansion-phase0-build-site-data.log").is_file()
             )
             run_mock.assert_called_once()
-            git_mock.assert_any_call(
-                "add",
-                "--",
-                *expected,
-                cwd=worktree,
-            )
+            git_mock.assert_any_call("add", "--", *expected, cwd=worktree)
 
     def test_scope_projection_rejects_unrelated_generated_drift(self):
-        import tempfile
-
         expected = [
             "site/data/programs.json",
             "site/data/teams/example.json",
@@ -257,23 +306,42 @@ class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
             worktree = Path(temporary) / "repo"
             diag = Path(temporary) / "diag"
             (worktree / "tools").mkdir(parents=True)
-            for path in expected:
-                target = worktree / path
+            self._seed_target(worktree)
+            for item in expected:
+                target = worktree / item
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text("{}\n", encoding="utf-8")
+            opponent_plan, source_plan = self._noop_plans(worktree)
+
+            def fake_git(*args, **kwargs):
+                if args[:3] == ("diff", "--name-only", "--") and (
+                    "schools/example/opponents.csv" in args
+                ):
+                    return SimpleNamespace(stdout="")
+                if args[:4] == ("diff", "--name-only", "--", "site/data"):
+                    return SimpleNamespace(
+                        stdout=(
+                            "site/data/programs.json\n"
+                            "site/data/teams/example.json\n"
+                            "site/data/teams/other.json\n"
+                        )
+                    )
+                raise AssertionError(f"unexpected git call: {args}")
 
             with patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_normalization_plan",
+                return_value=opponent_plan,
+            ), patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_source_display_plan",
+                return_value=source_plan,
+            ), patch(
                 "remote_implementation_expansion_phase0.run",
                 return_value=SimpleNamespace(returncode=0, stdout="PASS\n"),
             ), patch(
                 "remote_implementation_expansion_phase0.git",
-                return_value=SimpleNamespace(
-                    stdout=(
-                        "site/data/programs.json\n"
-                        "site/data/teams/example.json\n"
-                        "site/data/teams/other.json\n"
-                    )
-                ),
+                side_effect=fake_git,
             ):
                 with self.assertRaisesRegex(
                     Stop,
@@ -285,6 +353,199 @@ class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
                         authority,
                         diag,
                     )
+
+    def test_scope_projection_uses_disposable_display_then_restores_exact_bytes(self):
+        expected = [
+            "site/data/programs.json",
+            "site/data/teams/example.json",
+        ]
+        authority = {"intent": {"scope_generated_paths": expected}}
+        with tempfile.TemporaryDirectory() as temporary:
+            worktree = Path(temporary) / "repo"
+            diag = Path(temporary) / "diag"
+            (worktree / "tools").mkdir(parents=True)
+            original_opponents, original_sources = self._seed_target(worktree)
+            for item in expected:
+                target = worktree / item
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text("{}\n", encoding="utf-8")
+            school = worktree / "schools" / "example"
+            opponent_plan = {
+                "status": "PASS",
+                "ambiguous": [],
+                "changes": [{
+                    "canonical_opponent_key": "rio-grande",
+                    "change_fields": ["canonical_opponent_name"],
+                }],
+                "change_row_count": 1,
+                "path": school / "opponents.csv",
+                "fields": [
+                    "source_opponent_label",
+                    "canonical_opponent_key",
+                    "canonical_opponent_name",
+                    "current_d1",
+                ],
+                "rows": [{
+                    "source_opponent_label": "Rio Grande",
+                    "canonical_opponent_key": "rio-grande",
+                    "canonical_opponent_name": "Rio Grande",
+                    "current_d1": "No",
+                }],
+                "encoding": "utf-8",
+                "line_ending": "\n",
+            }
+            source_plan = {
+                "changes": [{
+                    "source_game_id": "EX-1",
+                    "normalized_opponent_key": "rio-grande",
+                    "from_name": "Rio Grande College (Ohio)",
+                    "to_name": "Rio Grande",
+                }],
+                "change_row_count": 1,
+                "path": school / "source-games.csv",
+                "fields": [
+                    "source_game_id",
+                    "normalized_opponent_key",
+                    "normalized_opponent_name",
+                    "source_opponent_label",
+                    "raw_text",
+                ],
+                "rows": [{
+                    "source_game_id": "EX-1",
+                    "normalized_opponent_key": "rio-grande",
+                    "normalized_opponent_name": "Rio Grande",
+                    "source_opponent_label": "Rio Grande",
+                    "raw_text": "12/19 Rio Grande L 88-98",
+                }],
+                "encoding": "utf-8",
+                "line_ending": "\n",
+            }
+
+            def fake_run(*args, **kwargs):
+                self.assertIn(
+                    ",rio-grande,Rio Grande,No\n",
+                    (school / "opponents.csv").read_text(encoding="utf-8"),
+                )
+                self.assertIn(
+                    ",rio-grande,Rio Grande,Rio Grande,",
+                    (school / "source-games.csv").read_text(encoding="utf-8"),
+                )
+                return SimpleNamespace(returncode=0, stdout="PASS\n")
+
+            with patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_normalization_plan",
+                return_value=opponent_plan,
+            ), patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_source_display_plan",
+                return_value=source_plan,
+            ), patch(
+                "remote_implementation_expansion_phase0.run",
+                side_effect=fake_run,
+            ), patch(
+                "remote_implementation_expansion_phase0.git",
+                side_effect=self._git_for_projection(expected),
+            ):
+                _install_scope_generated_projection(
+                    worktree,
+                    expansion_request(),
+                    authority,
+                    diag,
+                )
+
+            self.assertEqual(
+                (school / "opponents.csv").read_bytes(),
+                original_opponents,
+            )
+            self.assertEqual(
+                (school / "source-games.csv").read_bytes(),
+                original_sources,
+            )
+            diagnostic = json.loads(
+                (
+                    diag / "expansion-phase0-disposable-opponent-display.json"
+                ).read_text(encoding="utf-8")
+            )
+            self.assertEqual(diagnostic["changed_keys"], ["rio-grande"])
+            self.assertEqual(diagnostic["committed_package_mutation"], "NONE")
+
+    def test_scope_projection_failure_still_restores_exact_package_bytes(self):
+        expected = [
+            "site/data/programs.json",
+            "site/data/teams/example.json",
+        ]
+        authority = {"intent": {"scope_generated_paths": expected}}
+        with tempfile.TemporaryDirectory() as temporary:
+            worktree = Path(temporary) / "repo"
+            diag = Path(temporary) / "diag"
+            (worktree / "tools").mkdir(parents=True)
+            original_opponents, original_sources = self._seed_target(worktree)
+            school = worktree / "schools" / "example"
+            opponent_plan = {
+                "status": "PASS",
+                "ambiguous": [],
+                "changes": [{
+                    "canonical_opponent_key": "rio-grande",
+                    "change_fields": ["canonical_opponent_name"],
+                }],
+                "change_row_count": 1,
+                "path": school / "opponents.csv",
+                "fields": [
+                    "source_opponent_label",
+                    "canonical_opponent_key",
+                    "canonical_opponent_name",
+                    "current_d1",
+                ],
+                "rows": [{
+                    "source_opponent_label": "Rio Grande",
+                    "canonical_opponent_key": "rio-grande",
+                    "canonical_opponent_name": "Rio Grande",
+                    "current_d1": "No",
+                }],
+                "encoding": "utf-8",
+                "line_ending": "\n",
+            }
+            source_plan = {
+                "changes": [],
+                "change_row_count": 0,
+                "path": school / "source-games.csv",
+                "fields": [],
+                "rows": [],
+                "encoding": "utf-8",
+                "line_ending": "\n",
+            }
+            with patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_normalization_plan",
+                return_value=opponent_plan,
+            ), patch(
+                "remote_implementation_expansion_phase0."
+                "opponent_display_normalization.build_source_display_plan",
+                return_value=source_plan,
+            ), patch(
+                "remote_implementation_expansion_phase0.run",
+                return_value=SimpleNamespace(returncode=1, stdout="generator failed"),
+            ):
+                with self.assertRaisesRegex(
+                    Stop,
+                    "EXPANSION_PHASE0_SCOPE_SITE_PROJECTION_FAILED",
+                ):
+                    _install_scope_generated_projection(
+                        worktree,
+                        expansion_request(),
+                        authority,
+                        diag,
+                    )
+            self.assertEqual(
+                (school / "opponents.csv").read_bytes(),
+                original_opponents,
+            )
+            self.assertEqual(
+                (school / "source-games.csv").read_bytes(),
+                original_sources,
+            )
+
 
 
 class ExpansionPinnedControlAuthorityTests(unittest.TestCase):
