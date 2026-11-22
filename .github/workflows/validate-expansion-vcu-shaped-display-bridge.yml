@@ -1,0 +1,761 @@
+name: Validate VCU-shaped expansion Phase 0 display bridge through Stage 2
+
+on:
+  push:
+    branches:
+      - 'request-validation/expansion-vcu-shaped-bridge-cbf684'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact protected-main runtime
+        uses: actions/checkout@v4
+        with:
+          ref: 19dc85c18902234c2241e39d3ba34006d2903e80
+          path: runtime
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out exact candidate source
+        uses: actions/checkout@v4
+        with:
+          ref: cbf6843d2f2227a39a752854cb7d1d1c0097a448
+          path: candidate
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out exact Miami transport parent
+        uses: actions/checkout@v4
+        with:
+          ref: cb1c4eac8af27f622ad148fa51bc9f666eeca38b
+          path: control
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out independent live observer
+        uses: actions/checkout@v4
+        with:
+          ref: 19dc85c18902234c2241e39d3ba34006d2903e80
+          path: observer
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Overlay exact complete candidate delta onto exact-main runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C candidate rev-parse HEAD)" = "cbf6843d2f2227a39a752854cb7d1d1c0097a448"
+
+          files=(
+            tests/test_remote_implementation_expansion_phase0.py
+            tests/test_remote_implementation_expansion_startup.py
+            tools/remote_implementation_control.py
+            tools/remote_implementation_expansion_phase0.py
+            tools/remote_implementation_expansion_startup.py
+          )
+          for path in "${files[@]}"; do
+            git -C candidate show "cbf6843d2f2227a39a752854cb7d1d1c0097a448:$path" > "runtime/$path"
+            candidate_blob="$(git -C candidate rev-parse "cbf6843d2f2227a39a752854cb7d1d1c0097a448:$path")"
+            runtime_blob="$(git -C runtime hash-object "$path")"
+            test "$runtime_blob" = "$candidate_blob"
+          done
+
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          mapfile -t dirty < <(git -C runtime diff --name-only)
+          test "${#dirty[@]}" -eq 5
+          for i in "${!files[@]}"; do
+            test "${dirty[$i]}" = "${files[$i]}"
+          done
+
+          python -m py_compile \
+            runtime/tools/remote_implementation_control.py \
+            runtime/tools/remote_implementation_expansion_startup.py \
+            runtime/tools/remote_implementation_expansion_phase0.py \
+            runtime/tests/test_remote_implementation_expansion_startup.py \
+            runtime/tests/test_remote_implementation_expansion_phase0.py
+
+          mkdir -p /tmp/vcu-shaped-expansion-bridge
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          files = [
+              "tests/test_remote_implementation_expansion_phase0.py",
+              "tests/test_remote_implementation_expansion_startup.py",
+              "tools/remote_implementation_control.py",
+              "tools/remote_implementation_expansion_phase0.py",
+              "tools/remote_implementation_expansion_startup.py",
+          ]
+          proof = {
+              "runtime_head_sha": subprocess.check_output(
+                  ["git", "-C", "runtime", "rev-parse", "HEAD"],
+                  text=True,
+              ).strip(),
+              "candidate_sha": "cbf6843d2f2227a39a752854cb7d1d1c0097a448",
+              "overlays": {},
+          }
+          for path in files:
+              proof["overlays"][path] = {
+                  "candidate_blob_sha": subprocess.check_output(
+                      [
+                          "git", "-C", "candidate", "rev-parse",
+                          "cbf6843d2f2227a39a752854cb7d1d1c0097a448:" + path,
+                      ],
+                      text=True,
+                  ).strip(),
+                  "runtime_blob_sha": subprocess.check_output(
+                      ["git", "-C", "runtime", "hash-object", path],
+                      text=True,
+                  ).strip(),
+              }
+              assert (
+                  proof["overlays"][path]["candidate_blob_sha"]
+                  == proof["overlays"][path]["runtime_blob_sha"]
+              )
+          Path(
+              "/tmp/vcu-shaped-expansion-bridge/runtime-overlay-proof.json"
+          ).write_text(
+              json.dumps(proof, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+      - name: Run focused regression and expansion acceptance suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          (
+            cd runtime
+            python -m unittest discover -s tests -p 'test_remote_implementation_expansion_startup.py' -q
+            python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -q
+            python -m unittest discover -s tests -p 'test_remote_implementation_stage2_census.py' -q
+            python -m unittest discover -s tests -p 'test_remote_implementation_stage2_opponent_display.py' -q
+            python -m unittest discover -s tests -p 'test_normalize_historical_opponent_displays.py' -q
+            python tools/all_history_expansion_implementation_acceptance.py --json               | tee /tmp/vcu-shaped-expansion-bridge/acceptance.json
+          )
+
+      - name: Build isolated origin and fresh startup event
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C control rev-parse HEAD)" = "cb1c4eac8af27f622ad148fa51bc9f666eeca38b"
+
+          git -C runtime fetch --no-tags origin \
+            "+refs/heads/data/miami-onboarding:refs/remotes/origin/live-miami"
+          test "$(git -C runtime rev-parse refs/remotes/origin/live-miami)" = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+
+          git -C control fetch --no-tags origin "85c0573c0a9bf74db90cf5e59a0319a7122aed93"
+          git -C control config user.name "validation-only"
+          git -C control config user.email "validation-only@example.com"
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          control = Path("control")
+          raw = subprocess.check_output(
+              [
+                  "git", "-C", str(control), "show",
+                  "85c0573c0a9bf74db90cf5e59a0319a7122aed93:.remote-implementation/expansion-startup.json",
+              ]
+          )
+          intent = json.loads(raw)
+          intent["startup_id"] = "miami-expansion-startup-isolated-vcu-bridge-0001"
+          intent["phase0_request_id"] = "miami-expansion-phase0-isolated-vcu-bridge-0001"
+          intent["expected_protected_main_sha"] = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          intent["target_sha"] = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          intent["creation_provenance"] = {
+              "origin": "Control Center exact-main complete-candidate-overlay validation",
+              "authorization": (
+                  "Validation-only proof of startup, guarded EXPANSION_PHASE0, "
+                  "and independent fresh verification using the exact complete "
+                  "candidate delta over an exact protected-main Git runtime."
+              ),
+          }
+          path = control / ".remote-implementation" / "expansion-startup.json"
+          path.write_text(
+              json.dumps(intent, sort_keys=True, separators=(",", ":")) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+          git -C control add .remote-implementation/expansion-startup.json
+          git -C control commit -m "validation only: Miami exact-main overlay v2 startup"
+          synthetic_startup="$(git -C control rev-parse HEAD)"
+          test "$(git -C control rev-parse HEAD^)" = "cb1c4eac8af27f622ad148fa51bc9f666eeca38b"
+          echo "$synthetic_startup" > /tmp/synthetic-startup-sha
+
+          git init --bare "$GITHUB_WORKSPACE/isolated-origin.git"
+
+          git -C runtime remote add isolated "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C runtime push isolated \
+            "19dc85c18902234c2241e39d3ba34006d2903e80:refs/heads/main" \
+            "refs/remotes/origin/live-miami:refs/heads/data/miami-onboarding"
+
+          git -C control remote add isolated "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C control push isolated \
+            "HEAD:refs/heads/control/remote-implementation"
+
+          git -C runtime remote set-url origin "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C control remote set-url origin "$GITHUB_WORKSPACE/isolated-origin.git"
+
+          mkdir -p /tmp/fake-bin
+          cat > /tmp/fake-bin/gh <<'SH'
+          #!/usr/bin/env bash
+          echo "validation-only fake dispatch: $*"
+          exit 0
+          SH
+          chmod +x /tmp/fake-bin/gh
+
+      - name: Run actual startup coordinator
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GH_TOKEN: validation-only
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          export PATH="/tmp/fake-bin:$PATH"
+          export REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_DIAG=/tmp/vcu-shaped-expansion-bridge/startup-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_expansion_startup.py" \
+              | tee /tmp/vcu-shaped-expansion-bridge/startup-result.json
+          )
+
+          synthetic="$(cat /tmp/synthetic-startup-sha)"
+          request_commit="$(git -C control rev-parse HEAD)"
+          test "$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)" = "$request_commit"
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          control = Path("control")
+          synthetic = Path("/tmp/synthetic-startup-sha").read_text().strip()
+          request = json.loads(
+              (control / ".remote-implementation/request.json").read_text()
+          )
+          assert request["operation"] == "EXPANSION_PHASE0", request
+          assert request["request_id"] == "miami-expansion-phase0-isolated-vcu-bridge-0001"
+          assert request["expected_protected_main_sha"] == "19dc85c18902234c2241e39d3ba34006d2903e80"
+          assert request["target_sha"] == "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          assert request["stage1_control_authority_sha"] == synthetic, request
+
+          proof = json.loads(
+              subprocess.check_output(
+                  [
+                      "git", "-C", str(control), "show",
+                      "HEAD:" + request["stage1_independent_proof"]["path"],
+                  ]
+              )
+          )
+          assert proof["control_authority_sha"] == synthetic, proof
+          Path(
+              "/tmp/vcu-shaped-expansion-bridge/startup-proof-summary.json"
+          ).write_text(
+              json.dumps(
+                  {
+                      "status": "PASS",
+                      "synthetic_startup_sha": synthetic,
+                      "request_commit": subprocess.check_output(
+                          ["git", "-C", str(control), "rev-parse", "HEAD"],
+                          text=True,
+                      ).strip(),
+                      "stage1_control_authority_sha": request[
+                          "stage1_control_authority_sha"
+                      ],
+                  },
+                  indent=2,
+                  sort_keys=True,
+              )
+              + "\n"
+          )
+          PY
+
+      - name: Run actual guarded EXPANSION_PHASE0 runner
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GITHUB_RUN_ID: '991003'
+          GITHUB_RUN_ATTEMPT: '1'
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/runner-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_runner.py" \
+              | tee /tmp/vcu-shaped-expansion-bridge/runner.log
+          )
+
+          control_head="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          target_head="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/data/miami-onboarding)"
+          test "$target_head" != "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          echo "$control_head" > /tmp/runner-control-head
+          echo "$target_head" > /tmp/runner-target-head
+
+          git -C control fetch --no-tags origin \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$control_head"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          synthetic = Path("/tmp/synthetic-startup-sha").read_text().strip()
+          state = json.loads(
+              (control / ".remote-implementation/control-state.json").read_text()
+          )
+          assert state["lifecycle_state"] == "IDLE", state
+          assert state["transaction_state"] == "COMPLETE", state
+          last = state["last_operation"]
+          assert last["operation"] == "EXPANSION_PHASE0", last
+          assert last["request_id"] == "miami-expansion-phase0-isolated-vcu-bridge-0001"
+          assert last["fresh_runner_verification"] == "PENDING", last
+
+          successor = json.loads(
+              (control / last["successor_manifest_path"]).read_text()
+          )
+          assert successor["stage1_control_authority_sha"] == synthetic
+          assert successor["prepared_parent_sha"] == "19dc85c18902234c2241e39d3ba34006d2903e80"
+          assert successor["expected_target_predecessor_sha"] == "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+
+          writeahead = json.loads(
+              (control / successor["writeahead_manifest_path"]).read_text()
+          )
+          assert writeahead["stage1_control_authority_sha"] == synthetic
+          Path(
+              "/tmp/vcu-shaped-expansion-bridge/runner-proof-summary.json"
+          ).write_text(
+              json.dumps(
+                  {
+                      "status": "PASS",
+                      "runner_control_head": Path(
+                          "/tmp/runner-control-head"
+                      ).read_text().strip(),
+                      "published_target_sha": Path(
+                          "/tmp/runner-target-head"
+                      ).read_text().strip(),
+                      "stage1_control_authority_sha": synthetic,
+                  },
+                  indent=2,
+                  sort_keys=True,
+              )
+              + "\n"
+          )
+          PY
+
+      - name: Run actual independent fresh Phase 0 verifier
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/verifier-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py" \
+              | tee /tmp/vcu-shaped-expansion-bridge/verifier.log
+          )
+
+          verified_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$verified_control"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          synthetic = Path("/tmp/synthetic-startup-sha").read_text().strip()
+          state = json.loads(
+              (control / ".remote-implementation/control-state.json").read_text()
+          )
+          assert state["lifecycle_state"] == "IDLE", state
+          assert state["transaction_state"] == "COMPLETE", state
+          last = state["last_operation"]
+          assert last["operation"] == "EXPANSION_PHASE0", last
+          assert last["fresh_runner_verification"] == "PASS", last
+          assert last["remote_phase0_equivalence"] == "PASS", last
+
+          verify_path = (
+              control
+              / ".remote-implementation"
+              / "verifications"
+              / "miami"
+              / "miami-expansion-phase0-isolated-vcu-bridge-0001"
+              / "expansion-phase0-verification.json"
+          )
+          verification = json.loads(verify_path.read_text())
+          assert verification["status"] == "PASS", verification
+          assert verification["stage1_control_authority_sha"] == synthetic
+          assert verification["independent_exact_tree_equivalence"] == "PASS"
+
+          target_head = Path("/tmp/runner-target-head").read_text().strip()
+          assert verification["target_sha"] == target_head
+
+          summary = {
+              "status": "PASS",
+              "candidate_sha": "cbf6843d2f2227a39a752854cb7d1d1c0097a448",
+              "runtime_git_head_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+              "protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+              "synthetic_startup_sha": synthetic,
+              "request_id": "miami-expansion-phase0-isolated-vcu-bridge-0001",
+              "stage1_control_authority_sha": verification[
+                  "stage1_control_authority_sha"
+              ],
+              "published_target_sha": target_head,
+              "fresh_runner_verification": last["fresh_runner_verification"],
+              "remote_phase0_equivalence": last["remote_phase0_equivalence"],
+              "independent_exact_tree_equivalence": verification[
+                  "independent_exact_tree_equivalence"
+              ],
+              "live_control_mutation": "NONE",
+              "live_miami_mutation": "NONE",
+          }
+          Path(
+              "/tmp/vcu-shaped-expansion-bridge/summary.json"
+          ).write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(summary, sort_keys=True))
+          PY
+
+      - name: Submit isolated Stage 2 census from fresh-verified Phase 0
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$latest_control"
+
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          request_id = "miami-expansion-phase0-isolated-vcu-bridge-0001"
+          successor_path = (
+              control / ".remote-implementation" / "successors" / "miami"
+              / request_id / "successor-manifest.json"
+          )
+          successor = json.loads(successor_path.read_text())
+          rel = successor_path.relative_to(control).as_posix()
+          digest = hashlib.sha256(successor_path.read_bytes()).hexdigest()
+          flags = {
+              "expansion_phase0": False,
+              "owner_gate_1": False,
+              "owner_gate_2": False,
+              "phase0": False,
+              "phase0_scope_supersession": False,
+              "recovery": False,
+              "release": False,
+              "release_gate2_approval": False,
+              "release_preview_verify": False,
+              "release_production_proof": False,
+              "release_readiness": False,
+              "stage2_census": True,
+              "stage2_current_main_refresh": False,
+              "stage2_gate1_fill": False,
+              "stage2_gate1_seal": False,
+              "stage2_opponent_display_normalize": False,
+              "stage2_preseal_rehearsal": False,
+              "stage2_proposal_rehearsal": False,
+              "stage2_reconciliation_diagnostic": False,
+              "stage2_sealed_apply": False,
+              "venue_identity_maintenance": False,
+          }
+          template = {
+              "schema_version": 1,
+              "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+              "request_id": "miami-expansion-stage2-census-isolated-vcu-bridge-0001",
+              "school_key": "miami",
+              "operation": "STAGE2_CENSUS",
+              "expected_protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+              "target_branch": "data/miami-onboarding",
+              "target_sha": successor["target_sha"],
+              "integration_freeze_sha256": successor["integration_freeze_sha256"],
+              "semantic_snapshot_sha256": successor["semantic_snapshot_sha256"],
+              "phase0_successor": {"path": rel, "sha256": digest},
+              "creation_provenance": {
+                  "origin": "Control Center isolated VCU-shaped expansion bridge proof",
+                  "authorization": (
+                      "Validation-only Stage 2 census after independently verified "
+                      "isolated Miami Phase 0. No live repository mutation."
+                  ),
+              },
+              "authority": flags,
+          }
+          Path("/tmp/vcu-shaped-expansion-bridge/stage2-census-template.json").write_text(
+              json.dumps(template, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+          env -u GITHUB_ACTIONS -u GITHUB_SHA             python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_request_submit.py"               --repo control               --template /tmp/vcu-shaped-expansion-bridge/stage2-census-template.json               --submit               | tee /tmp/vcu-shaped-expansion-bridge/stage2-census-submit.json
+
+          latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$latest_control"
+
+      - name: Run isolated Stage 2 census and independent verifier
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GITHUB_RUN_ID: '991004'
+          GITHUB_RUN_ATTEMPT: '1'
+        run: |
+          set -euo pipefail
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/stage2-census-runner-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_runner.py"               | tee /tmp/vcu-shaped-expansion-bridge/stage2-census-runner.log
+          )
+
+          latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$latest_control"
+
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/stage2-census-verifier-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"               | tee /tmp/vcu-shaped-expansion-bridge/stage2-census-verifier.log
+          )
+
+          latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$latest_control"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("control")
+          request_id = "miami-expansion-stage2-census-isolated-vcu-bridge-0001"
+          checkpoint = (
+              root / ".remote-implementation" / "checkpoints" / "miami"
+              / request_id / "checkpoint-manifest.json"
+          )
+          status_path = checkpoint.parent / "implementation-stage2-status.json"
+          manifest = json.loads(checkpoint.read_text())
+          status = json.loads(status_path.read_text())
+          blockers = status.get("blockers") or []
+          assert manifest["stage2_status"] == "BLOCKED", manifest
+          assert manifest["capability_preflight"]["blocker_count"] == 1, manifest
+          assert manifest["capability_preflight"]["warning_count"] == 0, manifest
+          assert len(blockers) == 1, blockers
+          assert blockers[0].startswith(
+              "historical opponent display conflict: rio-grande:"
+          ), blockers
+          assert "Rio Grande" in blockers[0] and "Rio Grande College (Ohio)" in blockers[0]
+          assert status["semantic_drift"]["status"] == "PASS", status
+          summary = {
+              "status": "PASS_EXPECTED_DISPLAY_BLOCKER",
+              "request_id": request_id,
+              "blocker": blockers[0],
+              "checkpoint_sha256": __import__("hashlib").sha256(
+                  checkpoint.read_bytes()
+              ).hexdigest(),
+              "target_sha": manifest["target_sha"],
+              "integration_freeze_sha256": manifest["integration_freeze_sha256"],
+              "semantic_snapshot_sha256": manifest["semantic_snapshot_sha256"],
+          }
+          Path(
+              "/tmp/vcu-shaped-expansion-bridge/stage2-census-proof-summary.json"
+          ).write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
+          PY
+
+      - name: Submit isolated existing Stage 2 opponent-display normalization
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          census_id = "miami-expansion-stage2-census-isolated-vcu-bridge-0001"
+          checkpoint = (
+              control / ".remote-implementation" / "checkpoints" / "miami"
+              / census_id / "checkpoint-manifest.json"
+          )
+          census = json.loads(checkpoint.read_text())
+          flags = {
+              "expansion_phase0": False,
+              "owner_gate_1": False,
+              "owner_gate_2": False,
+              "phase0": False,
+              "phase0_scope_supersession": False,
+              "recovery": False,
+              "release": False,
+              "release_gate2_approval": False,
+              "release_preview_verify": False,
+              "release_production_proof": False,
+              "release_readiness": False,
+              "stage2_census": False,
+              "stage2_current_main_refresh": False,
+              "stage2_gate1_fill": False,
+              "stage2_gate1_seal": False,
+              "stage2_opponent_display_normalize": True,
+              "stage2_preseal_rehearsal": False,
+              "stage2_proposal_rehearsal": False,
+              "stage2_reconciliation_diagnostic": False,
+              "stage2_sealed_apply": False,
+              "venue_identity_maintenance": False,
+          }
+          template = {
+              "schema_version": 1,
+              "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+              "request_id": "miami-expansion-stage2-opponent-display-isolated-vcu-bridge-0001",
+              "school_key": "miami",
+              "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+              "expected_protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+              "target_branch": "data/miami-onboarding",
+              "target_sha": census["target_sha"],
+              "integration_freeze_sha256": census["integration_freeze_sha256"],
+              "semantic_snapshot_sha256": census["semantic_snapshot_sha256"],
+              "stage2_census_checkpoint": {
+                  "path": checkpoint.relative_to(control).as_posix(),
+                  "sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
+              },
+              "creation_provenance": {
+                  "origin": "Control Center isolated VCU-shaped expansion bridge proof",
+                  "authorization": (
+                      "Validation-only use of the existing census-bound "
+                      "STAGE2_OPPONENT_DISPLAY_NORMALIZE path for the exact "
+                      "single rio-grande blocker population."
+                  ),
+              },
+              "authority": flags,
+          }
+          Path("/tmp/vcu-shaped-expansion-bridge/stage2-normalize-template.json").write_text(
+              json.dumps(template, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+          env -u GITHUB_ACTIONS -u GITHUB_SHA             python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_request_submit.py"               --repo control               --template /tmp/vcu-shaped-expansion-bridge/stage2-normalize-template.json               --submit               | tee /tmp/vcu-shaped-expansion-bridge/stage2-normalize-submit.json
+
+          latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$latest_control"
+
+      - name: Run isolated existing Stage 2 display normalization and verifier
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GITHUB_RUN_ID: '991005'
+          GITHUB_RUN_ATTEMPT: '1'
+        run: |
+          set -euo pipefail
+          phase0_target="$(cat /tmp/runner-target-head)"
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/stage2-normalize-runner-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_runner.py"               | tee /tmp/vcu-shaped-expansion-bridge/stage2-normalize-runner.log
+          )
+
+          normalized_target="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/data/miami-onboarding)"
+          test "$normalized_target" != "$phase0_target"
+          echo "$normalized_target" > /tmp/normalized-target-head
+
+          latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$latest_control"
+
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/stage2-normalize-verifier-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"               | tee /tmp/vcu-shaped-expansion-bridge/stage2-normalize-verifier.log
+          )
+
+          latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$latest_control"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          request_id = "miami-expansion-stage2-opponent-display-isolated-vcu-bridge-0001"
+          verification_path = (
+              control / ".remote-implementation" / "verifications" / "miami"
+              / request_id / "stage2-opponent-display-verification.json"
+          )
+          verification = json.loads(verification_path.read_text())
+          assert verification["remote_stage2_opponent_display_equivalence"] == "PASS", verification
+          assert verification["semantic_drift"] == "PASS", verification
+          assert verification["stage2_status"] == "CAPABILITY_CENSUS_READY", verification
+          assert verification["expected_blocker_keys"] == ["rio-grande"], verification
+          assert sorted(verification["changed_paths"]) == [
+              "schools/miami/opponents.csv",
+              "schools/miami/source-games.csv",
+          ], verification
+
+          writeahead = (
+              control / ".remote-implementation" / "writeahead" / "miami"
+              / request_id / "field-level-proof.json"
+          )
+          proof = json.loads(writeahead.read_text())
+          assert proof["opponent_changed_keys"] == ["rio-grande"], proof
+          assert proof["source_game_changed_keys"] == ["rio-grande"], proof
+          assert proof["opponent_key_changes"] == 0, proof
+          assert proof["source_game_non_name_field_changes"] == 0, proof
+          assert proof["literal_evidence_changes"] == 0, proof
+
+          summary = {
+              "status": "PASS",
+              "candidate_sha": "cbf6843d2f2227a39a752854cb7d1d1c0097a448",
+              "protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+              "phase0_fresh_verification": "PASS",
+              "stage2_initial_status": "BLOCKED_SINGLE_RIO_GRANDE_DISPLAY",
+              "stage2_normalization_equivalence": "PASS",
+              "stage2_final_status": verification["stage2_status"],
+              "normalized_target_sha": Path("/tmp/normalized-target-head").read_text().strip(),
+              "live_control_mutation": "NONE",
+              "live_miami_mutation": "NONE",
+          }
+          Path("/tmp/vcu-shaped-expansion-bridge/final-summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(summary, sort_keys=True))
+          PY
+
+      - name: Reauthenticate live repository untouched
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C observer fetch --no-tags origin \
+            "+refs/heads/main:refs/remotes/origin/live-main" \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/live-control" \
+            "+refs/heads/data/miami-onboarding:refs/remotes/origin/live-miami"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-main)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-control)" = "9f151e5c478da2ceccc6c1fadf0e3a3b50b14d58"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-miami)" = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+
+      - name: Upload exact-main complete-candidate-overlay transaction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vcu-shaped-expansion-bridge-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/vcu-shaped-expansion-bridge/
+          if-no-files-found: warn
+          retention-days: 14
