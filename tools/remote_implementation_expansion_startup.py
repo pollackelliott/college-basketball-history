@@ -23,7 +23,10 @@ from all_history_expansion_integration import (
     PACKAGE_FILES,
     STAGE1_REPORT,
 )
-from all_history_expansion_opponent_display import derive_reconciliation
+from all_history_expansion_opponent_display import (
+    OpponentDisplayReconciliationError,
+    derive_reconciliation,
+)
 from remote_implementation_control import (
     canonical_json_bytes,
     sha256_bytes,
@@ -990,6 +993,7 @@ def main() -> int:
         return 0
     except (
         Stop,
+        OpponentDisplayReconciliationError,
         OSError,
         ValueError,
         KeyError,
