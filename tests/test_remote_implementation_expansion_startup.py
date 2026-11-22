@@ -290,6 +290,7 @@ class ExpansionStartupProofTests(unittest.TestCase):
                 protected_main_sha="2" * 40,
                 research_base_sha="4" * 40,
                 freeze_zip_sha256="1" * 64,
+                stage1_control_authority_sha="a" * 40,
             )
         self.assertEqual(
             proof["status"],
@@ -299,6 +300,7 @@ class ExpansionStartupProofTests(unittest.TestCase):
             set(proof["candidate_sha256"]),
             set((*PACKAGE_FILES, STAGE1_REPORT)),
         )
+        self.assertEqual(proof["control_authority_sha"], "a" * 40)
         self.assertFalse(proof["integration_freeze_authorized"])
         self.assertEqual(
             proof["identity_counts"]["PROVISIONAL_NEW"],

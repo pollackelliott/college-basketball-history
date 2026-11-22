@@ -271,6 +271,7 @@ def build_stage1_proof(
     protected_main_sha: str,
     research_base_sha: str,
     freeze_zip_sha256: str,
+    stage1_control_authority_sha: str,
 ) -> dict[str, Any]:
     """Build the exact generic proof consumed by Integration Freeze."""
     return {
@@ -284,11 +285,7 @@ def build_stage1_proof(
         "support_opponents": report["census"]["opponent_support_actions"],
         "support_venues": report["census"]["venue_support_actions"],
         "blockers": report["blockers"],
-        "control_authority_sha": (
-            (report.get("current_main_reconciliation") or {}).get(
-                "control_authority_sha", ""
-            )
-        ),
+        "control_authority_sha": stage1_control_authority_sha,
         "integration_freeze_authorized": False,
     }
 
@@ -719,6 +716,7 @@ def run_startup() -> dict[str, Any]:
         protected_main_sha=live_main,
         research_base_sha=meta["research_base_sha"],
         freeze_zip_sha256=meta["research_freeze_sha256"],
+        stage1_control_authority_sha=durable_head,
     )
     proof_path = scratch / "stage1-independent-proof.json"
     proof_path.write_bytes(canonical_json_bytes(proof))
