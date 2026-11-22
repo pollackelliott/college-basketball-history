@@ -287,6 +287,167 @@ def _resolved_external_correction_source_ids(
     return result
 
 
+def _git_lines(repo: Path, *args: str) -> list[str]:
+    cp = subprocess.run(
+        ["git", "-C", str(repo), *args],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+    )
+    if cp.returncode:
+        return []
+    return [line.strip() for line in cp.stdout.splitlines() if line.strip()]
+
+
+def _completed_post_freeze_package_correction_authorities(
+    repo: Path,
+    school: str,
+    research_base_sha: str,
+    main_sha: str,
+    member: str,
+    current_raw: bytes,
+) -> list[dict[str, Any]]:
+    """Authenticate exact completed correction authority for one inherited package member.
+
+    Expansion Research remains immutable.  A later package member may be inherited only
+    when control preserves a completed correction Production proof, its independent
+    verification passes, the exact two-parent correction merge is after the Research
+    base and an ancestor of current main, the correction merge changed this exact school
+    package path, and current main still contains byte-identical correction output.
+    """
+    if not research_base_sha:
+        return []
+    try:
+        control_sha = git_revision(repo, "refs/remotes/origin/remote-control")
+    except Stage1Stop:
+        return []
+    prefix = f".remote-implementation/checkpoints/{school}"
+    paths = _git_lines(
+        repo, "ls-tree", "-r", "--name-only", control_sha, "--", prefix
+    )
+    request_paths = sorted(
+        path for path in paths
+        if path.endswith("/request.json") and "release-production-proof" in path
+    )
+    member_path = f"schools/{school}/{member}"
+    matches: list[dict[str, Any]] = []
+    for request_path in request_paths:
+        try:
+            request_raw = git_bytes(repo, control_sha, request_path)
+            request = json.loads(request_raw)
+        except (Stage1Stop, json.JSONDecodeError, TypeError):
+            continue
+        request_id = str(request.get("request_id") or "")
+        merge_sha = str(request.get("merge_sha") or "")
+        target_sha = str(request.get("target_sha") or "")
+        if (
+            request.get("kind") != "REMOTE_IMPLEMENTATION_REQUEST"
+            or request.get("operation") != "RELEASE_PRODUCTION_PROOF"
+            or request.get("school_key") != school
+            or request.get("target_branch") != f"data/{school}-correction"
+            or len(merge_sha) != 40
+            or len(target_sha) != 40
+        ):
+            continue
+        checkpoint_path = (
+            request_path.rsplit("/", 1)[0] + "/checkpoint-manifest.json"
+        )
+        verification_path = (
+            f".remote-implementation/verifications/{school}/{request_id}/"
+            "production-verification.json"
+        )
+        try:
+            checkpoint_raw = git_bytes(repo, control_sha, checkpoint_path)
+            verification_raw = git_bytes(repo, control_sha, verification_path)
+            checkpoint = json.loads(checkpoint_raw)
+            verification = json.loads(verification_raw)
+        except (Stage1Stop, json.JSONDecodeError, TypeError):
+            continue
+        if (
+            checkpoint.get("kind") != "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT"
+            or checkpoint.get("status") != "PRODUCTION_PROOF_PASS"
+            or checkpoint.get("request_id") != request_id
+            or checkpoint.get("school_key") != school
+            or checkpoint.get("merge_sha") != merge_sha
+            or checkpoint.get("merged") is not True
+            or checkpoint.get("production_proof") is not True
+            or checkpoint.get("request_sha256") != sha256(request_raw)
+        ):
+            continue
+        if (
+            verification.get("kind") != "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION"
+            or verification.get("status") != "COMPLETE"
+            or verification.get("exact_production_equivalence") != "PASS"
+            or verification.get("request_id") != request_id
+            or verification.get("school_key") != school
+            or verification.get("merge_sha") != merge_sha
+            or verification.get("merged") is not True
+            or verification.get("production_proof") is not True
+            or verification.get("checkpoint_sha256") != sha256(checkpoint_raw)
+            or verification.get("pr_number") != checkpoint.get("pr_number")
+            or verification.get("pr_head_sha") != checkpoint.get("pr_head_sha")
+            or verification.get("production_deployment_id")
+            != checkpoint.get("production_deployment_id")
+        ):
+            continue
+        ancestry_after_base = subprocess.run(
+            ["git", "-C", str(repo), "merge-base", "--is-ancestor",
+             research_base_sha, merge_sha],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+        ).returncode == 0
+        ancestry_to_main = subprocess.run(
+            ["git", "-C", str(repo), "merge-base", "--is-ancestor",
+             merge_sha, main_sha],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+        ).returncode == 0
+        if not ancestry_after_base or not ancestry_to_main:
+            continue
+        parent_line = _git_lines(repo, "rev-list", "--parents", "-n", "1", merge_sha)
+        if len(parent_line) != 1:
+            continue
+        parents = parent_line[0].split()
+        if len(parents) != 3:
+            continue
+        parent_main, parent_target = parents[1], parents[2]
+        if (
+            checkpoint.get("merge_parent_main") != parent_main
+            or checkpoint.get("merge_parent_onboarding") != parent_target
+            or target_sha != parent_target
+            or checkpoint.get("pr_head_sha") != parent_target
+        ):
+            continue
+        changed_paths = set(
+            _git_lines(
+                repo, "diff", "--name-only", parent_main, merge_sha,
+                "--", f"schools/{school}",
+            )
+        )
+        if member_path not in changed_paths:
+            continue
+        try:
+            corrected_raw = git_bytes(repo, merge_sha, member_path)
+        except Stage1Stop:
+            continue
+        if corrected_raw != current_raw:
+            continue
+        matches.append({
+            "member": member,
+            "path": member_path,
+            "request_id": request_id,
+            "merge_sha": merge_sha,
+            "merge_parent_main": parent_main,
+            "merge_parent_correction": parent_target,
+            "target_branch": request["target_branch"],
+            "pr_number": checkpoint.get("pr_number"),
+            "production_deployment_id": checkpoint.get("production_deployment_id"),
+            "checkpoint_sha256": sha256(checkpoint_raw),
+            "verification_sha256": sha256(verification_raw),
+            "member_sha256": sha256(corrected_raw),
+        })
+    return matches
+
+
 def _season_sort_key(value: str) -> tuple[int, str]:
     text = str(value or "").strip()
     try:
@@ -398,6 +559,8 @@ def prepare_current_main_identity_rebase(
     main_sha: str,
     baseline: dict[str, Any],
     validated: dict[str, Any],
+    *,
+    research_base_sha: str = "",
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
     """Preserve one narrowly authenticated class of accepted post-freeze correction.
 
@@ -433,13 +596,47 @@ def prepare_current_main_identity_rebase(
     blockers: list[dict[str, Any]] = []
     allowed_members = {"source-games.csv", "opponents.csv"}
     unsupported_members = sorted(set(changed_members) - allowed_members)
-    if unsupported_members:
-        blockers.extend({
-            "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
-            "path": f"schools/{school}/{name}",
-            "reason": "UNSUPPORTED_POST_FREEZE_MEMBER_DRIFT",
-        } for name in unsupported_members)
+    package_authorities: list[dict[str, Any]] = []
+    for name in unsupported_members:
+        matches = _completed_post_freeze_package_correction_authorities(
+            repo,
+            school,
+            research_base_sha,
+            main_sha,
+            name,
+            current_bytes[name],
+        )
+        if len(matches) != 1:
+            blockers.append({
+                "class": "CURRENT_MAIN_INHERITED_PACKAGE_DRIFT",
+                "path": f"schools/{school}/{name}",
+                "reason": (
+                    "NO_COMPLETED_POST_FREEZE_PACKAGE_CORRECTION_AUTHORITY"
+                    if not matches
+                    else "AMBIGUOUS_POST_FREEZE_PACKAGE_CORRECTION_AUTHORITY"
+                ),
+                "matching_authority_count": len(matches),
+            })
+            continue
+        package_authorities.append(matches[0])
+    if blockers:
         return baseline, validated, metadata, blockers
+
+    package_rebased_baseline = dict(baseline)
+    package_rebased_bytes = dict(baseline["package_bytes"])
+    for authority in package_authorities:
+        package_rebased_bytes[authority["member"]] = current_bytes[authority["member"]]
+    package_rebased_baseline["package_bytes"] = package_rebased_bytes
+    metadata["completed_package_corrections"] = package_authorities
+    metadata["accepted_package_members"] = sorted(
+        authority["member"] for authority in package_authorities
+    )
+
+    identity_members_changed = bool(set(changed_members) & allowed_members)
+    if not identity_members_changed:
+        if package_authorities:
+            metadata["status"] = "APPLIED_RESOLVED_EXTERNAL_PACKAGE_CORRECTION"
+        return package_rebased_baseline, validated, metadata, []
 
     allowed_source_ids = set(metadata["resolved_external_source_game_ids"])
     if not allowed_source_ids:
@@ -572,7 +769,7 @@ def prepare_current_main_identity_rebase(
         })
         return baseline, validated, metadata, blockers
 
-    rebased_baseline = dict(baseline)
+    rebased_baseline = dict(package_rebased_baseline)
     rebased_baseline.update({
         "package_bytes": current_bytes,
         "source_fields": current_source_fields,
@@ -585,7 +782,11 @@ def prepare_current_main_identity_rebase(
     rebased_validated = dict(validated)
     rebased_validated["opponent_support_rows"] = opponent_support
     metadata.update({
-        "status": "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION",
+        "status": (
+            "APPLIED_RESOLVED_EXTERNAL_PACKAGE_AND_IDENTITY_CORRECTIONS"
+            if package_authorities
+            else "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
+        ),
         "changed_source_game_ids": sorted(changed_source_ids),
         "changed_opponent_identities": [
             "|".join(value) for value in changed_opponent_identities
@@ -834,7 +1035,12 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
                                       manifest["researched_inception_season"])
     materialization_baseline, materialized_validated, current_main_reconciliation, rebase_blockers = (
         prepare_current_main_identity_rebase(
-            repo, school, main_sha, baseline, validated
+            repo,
+            school,
+            main_sha,
+            baseline,
+            validated,
+            research_base_sha=research_base,
         )
     )
     candidate, census = build_candidate(
