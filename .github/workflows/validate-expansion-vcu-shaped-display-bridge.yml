@@ -539,6 +539,18 @@ jobs:
           git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
           git -C control reset --hard "$latest_control"
 
+          # Production fresh verification runs in a separate clean job checkout.
+          # Clear validation-runner-only local worktree branches before reusing this
+          # checkout so the verifier sees the same fresh branch namespace.
+          git -C runtime worktree prune
+          while IFS= read -r local_branch; do
+            local_branch="${local_branch#  }"
+            local_branch="${local_branch#* }"
+            if [[ -n "$local_branch" ]]; then
+              git -C runtime branch -D "$local_branch"
+            fi
+          done < <(git -C runtime branch --list 'remote-stage2-*')
+
           export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/stage2-census-verifier-diag
           (
             cd control
@@ -685,6 +697,18 @@ jobs:
           latest_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
           git -C control fetch --no-tags origin             "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
           git -C control reset --hard "$latest_control"
+
+          # Production fresh verification runs in a separate clean job checkout.
+          # Clear validation-runner-only local worktree branches before reusing this
+          # checkout so the verifier sees the same fresh branch namespace.
+          git -C runtime worktree prune
+          while IFS= read -r local_branch; do
+            local_branch="${local_branch#  }"
+            local_branch="${local_branch#* }"
+            if [[ -n "$local_branch" ]]; then
+              git -C runtime branch -D "$local_branch"
+            fi
+          done < <(git -C runtime branch --list 'remote-stage2-*')
 
           export REMOTE_IMPLEMENTATION_DIAG=/tmp/vcu-shaped-expansion-bridge/stage2-normalize-verifier-diag
           (
