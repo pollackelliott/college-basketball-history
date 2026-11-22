@@ -59,9 +59,11 @@ jobs:
           files=(
             tests/test_remote_implementation_expansion_phase0.py
             tests/test_remote_implementation_expansion_startup.py
+            tests/test_remote_implementation_stage2_census.py
             tools/remote_implementation_control.py
             tools/remote_implementation_expansion_phase0.py
             tools/remote_implementation_expansion_startup.py
+            tools/remote_implementation_stage2_census.py
           )
           for path in "${files[@]}"; do
             git -C candidate show "91106d9bb1850014fde80b577e3ebac67310bfef:$path" > "runtime/$path"
@@ -72,7 +74,7 @@ jobs:
 
           test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
           mapfile -t dirty < <(git -C runtime diff --name-only)
-          test "${#dirty[@]}" -eq 5
+          test "${#dirty[@]}" -eq 7
           for i in "${!files[@]}"; do
             test "${dirty[$i]}" = "${files[$i]}"
           done
@@ -81,8 +83,10 @@ jobs:
             runtime/tools/remote_implementation_control.py \
             runtime/tools/remote_implementation_expansion_startup.py \
             runtime/tools/remote_implementation_expansion_phase0.py \
+            runtime/tools/remote_implementation_stage2_census.py \
             runtime/tests/test_remote_implementation_expansion_startup.py \
-            runtime/tests/test_remote_implementation_expansion_phase0.py
+            runtime/tests/test_remote_implementation_expansion_phase0.py \
+            runtime/tests/test_remote_implementation_stage2_census.py
 
           mkdir -p /tmp/vcu-shaped-expansion-bridge
           python - <<'PY'
@@ -93,9 +97,11 @@ jobs:
           files = [
               "tests/test_remote_implementation_expansion_phase0.py",
               "tests/test_remote_implementation_expansion_startup.py",
+              "tests/test_remote_implementation_stage2_census.py",
               "tools/remote_implementation_control.py",
               "tools/remote_implementation_expansion_phase0.py",
               "tools/remote_implementation_expansion_startup.py",
+              "tools/remote_implementation_stage2_census.py",
           ]
           proof = {
               "runtime_head_sha": subprocess.check_output(
