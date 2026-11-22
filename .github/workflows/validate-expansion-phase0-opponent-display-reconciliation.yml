@@ -1,0 +1,530 @@
+name: Validate expansion Phase 0 opponent display reconciliation
+
+on:
+  push:
+    branches:
+      - 'request-validation/expansion-phase0-opponent-display-reconciliation-e1abec'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact candidate
+        uses: actions/checkout@v4
+        with:
+          ref: e1abecb71e49751ac11053a62bfa4bc554396fc5
+          path: candidate
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Focused compile, regressions, and expansion acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd candidate
+          python -m py_compile \
+            tools/opponent_display_representation.py \
+            tools/all_history_expansion_opponent_display_reconciliation.py \
+            tools/all_history_expansion_integration.py \
+            tools/all_history_expansion_phase0_preview.py \
+            tools/all_history_expansion_remote_contract.py \
+            tools/remote_implementation_control.py \
+            tools/remote_implementation_expansion_startup.py \
+            tools/remote_implementation_expansion_phase0.py \
+            tools/remote_implementation_stage2_census.py \
+            tools/remote_implementation_stage2_opponent_display.py \
+            tests/test_all_history_expansion_opponent_display_reconciliation.py \
+            tests/test_remote_implementation_expansion_startup.py \
+            tests/test_remote_implementation_expansion_phase0.py \
+            tests/test_remote_implementation_stage2_census.py
+          python -m unittest discover -s tests -p 'test_all_history_expansion_opponent_display_reconciliation.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_startup.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_stage2_census.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_stage2_opponent_display.py' -q
+          python -m unittest discover -s tests -p 'test_expansion_implementation_stage1.py' -q
+          mkdir -p /tmp/expansion-display-reconciliation
+          python tools/all_history_expansion_implementation_acceptance.py --json \
+            | tee /tmp/expansion-display-reconciliation/acceptance.json
+
+      - name: Check out exact protected-main runtime
+        uses: actions/checkout@v4
+        with:
+          ref: 19dc85c18902234c2241e39d3ba34006d2903e80
+          path: runtime
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out exact Miami transport parent
+        uses: actions/checkout@v4
+        with:
+          ref: cb1c4eac8af27f622ad148fa51bc9f666eeca38b
+          path: control
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out independent live observer
+        uses: actions/checkout@v4
+        with:
+          ref: 19dc85c18902234c2241e39d3ba34006d2903e80
+          path: observer
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Overlay exact candidate delta onto exact-main runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C candidate rev-parse HEAD)" = "e1abecb71e49751ac11053a62bfa4bc554396fc5"
+
+          files=(
+            tests/test_all_history_expansion_opponent_display_reconciliation.py
+            tests/test_remote_implementation_expansion_phase0.py
+            tests/test_remote_implementation_expansion_startup.py
+            tests/test_remote_implementation_stage2_census.py
+            tools/all_history_expansion_integration.py
+            tools/all_history_expansion_opponent_display_reconciliation.py
+            tools/all_history_expansion_phase0_preview.py
+            tools/all_history_expansion_remote_contract.py
+            tools/opponent_display_representation.py
+            tools/remote_implementation_control.py
+            tools/remote_implementation_expansion_phase0.py
+            tools/remote_implementation_expansion_startup.py
+            tools/remote_implementation_stage2_census.py
+            tools/remote_implementation_stage2_opponent_display.py
+          )
+          for path in "${files[@]}"; do
+            mkdir -p "runtime/$(dirname "$path")"
+            git -C candidate show "e1abecb71e49751ac11053a62bfa4bc554396fc5:$path" > "runtime/$path"
+            candidate_blob="$(git -C candidate rev-parse "e1abecb71e49751ac11053a62bfa4bc554396fc5:$path")"
+            runtime_blob="$(git -C runtime hash-object "$path")"
+            test "$runtime_blob" = "$candidate_blob"
+          done
+
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          mapfile -t dirty < <(git -C runtime status --porcelain | sed 's/^...//')
+          test "${#dirty[@]}" -eq 14
+
+          python -m py_compile \
+            runtime/tools/opponent_display_representation.py \
+            runtime/tools/all_history_expansion_opponent_display_reconciliation.py \
+            runtime/tools/all_history_expansion_integration.py \
+            runtime/tools/all_history_expansion_phase0_preview.py \
+            runtime/tools/all_history_expansion_remote_contract.py \
+            runtime/tools/remote_implementation_control.py \
+            runtime/tools/remote_implementation_expansion_startup.py \
+            runtime/tools/remote_implementation_expansion_phase0.py \
+            runtime/tools/remote_implementation_stage2_census.py \
+            runtime/tools/remote_implementation_stage2_opponent_display.py
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          files = [
+              "tests/test_all_history_expansion_opponent_display_reconciliation.py",
+              "tests/test_remote_implementation_expansion_phase0.py",
+              "tests/test_remote_implementation_expansion_startup.py",
+              "tests/test_remote_implementation_stage2_census.py",
+              "tools/all_history_expansion_integration.py",
+              "tools/all_history_expansion_opponent_display_reconciliation.py",
+              "tools/all_history_expansion_phase0_preview.py",
+              "tools/all_history_expansion_remote_contract.py",
+              "tools/opponent_display_representation.py",
+              "tools/remote_implementation_control.py",
+              "tools/remote_implementation_expansion_phase0.py",
+              "tools/remote_implementation_expansion_startup.py",
+              "tools/remote_implementation_stage2_census.py",
+              "tools/remote_implementation_stage2_opponent_display.py",
+          ]
+          proof = {
+              "runtime_head_sha": subprocess.check_output(
+                  ["git", "-C", "runtime", "rev-parse", "HEAD"], text=True
+              ).strip(),
+              "candidate_sha": "e1abecb71e49751ac11053a62bfa4bc554396fc5",
+              "overlays": {},
+          }
+          for path in files:
+              proof["overlays"][path] = {
+                  "candidate_blob_sha": subprocess.check_output(
+                      ["git", "-C", "candidate", "rev-parse", "e1abecb71e49751ac11053a62bfa4bc554396fc5:" + path],
+                      text=True,
+                  ).strip(),
+                  "runtime_blob_sha": subprocess.check_output(
+                      ["git", "-C", "runtime", "hash-object", path], text=True
+                  ).strip(),
+              }
+              assert (
+                  proof["overlays"][path]["candidate_blob_sha"]
+                  == proof["overlays"][path]["runtime_blob_sha"]
+              )
+          Path("/tmp/expansion-display-reconciliation/runtime-overlay-proof.json").write_text(
+              json.dumps(proof, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+      - name: Build isolated origin, exact display sidecar transport, and startup event
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C control rev-parse HEAD)" = "cb1c4eac8af27f622ad148fa51bc9f666eeca38b"
+
+          git -C runtime fetch --no-tags origin \
+            "+refs/heads/data/miami-onboarding:refs/remotes/origin/live-miami"
+          test "$(git -C runtime rev-parse refs/remotes/origin/live-miami)" = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+
+          git -C control fetch --no-tags origin "85c0573c0a9bf74db90cf5e59a0319a7122aed93"
+          git -C control config user.name "validation-only"
+          git -C control config user.email "validation-only@example.com"
+
+          mkdir -p control/.remote-implementation/transports/miami
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          sidecar = {
+              "schema_version": 1,
+              "kind": "ALL_HISTORY_EXPANSION_OPPONENT_DISPLAY_RECONCILIATION",
+              "school_key": "miami",
+              "protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+              "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+              "opponent_changes": [
+                  {
+                      "source_opponent_label": "Rio Grande",
+                      "canonical_opponent_key": "rio-grande",
+                      "from_name": "Rio Grande College (Ohio)",
+                      "to_name": "Rio Grande",
+                  }
+              ],
+              "source_game_changes": [
+                  {
+                      "source_game_id": "MIA-EXP-S1-1953-002",
+                      "normalized_opponent_key": "rio-grande",
+                      "from_name": "Rio Grande College (Ohio)",
+                      "to_name": "Rio Grande",
+                  }
+              ],
+          }
+          raw = (json.dumps(sidecar, indent=2, sort_keys=True) + "\n").encode()
+          path = Path(
+              "control/.remote-implementation/transports/miami/"
+              "opponent-display-reconciliation.json"
+          )
+          path.write_bytes(raw)
+          Path("/tmp/display-sidecar-sha").write_text(
+              hashlib.sha256(raw).hexdigest() + "\n"
+          )
+          PY
+          git -C control add .remote-implementation/transports/miami/opponent-display-reconciliation.json
+          git -C control commit -m "validation only: exact Miami display reconciliation transport"
+          synthetic_transport="$(git -C control rev-parse HEAD)"
+          test "$(git -C control rev-parse HEAD^)" = "cb1c4eac8af27f622ad148fa51bc9f666eeca38b"
+          echo "$synthetic_transport" > /tmp/synthetic-transport-sha
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          control = Path("control")
+          raw = subprocess.check_output(
+              [
+                  "git", "-C", str(control), "show",
+                  "85c0573c0a9bf74db90cf5e59a0319a7122aed93:.remote-implementation/expansion-startup.json",
+              ]
+          )
+          intent = json.loads(raw)
+          transport = Path("/tmp/synthetic-transport-sha").read_text().strip()
+          sidecar_sha = Path("/tmp/display-sidecar-sha").read_text().strip()
+          intent["startup_id"] = "miami-expansion-startup-isolated-display-0001"
+          intent["phase0_request_id"] = "miami-expansion-phase0-isolated-display-0001"
+          intent["expected_protected_main_sha"] = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          intent["target_sha"] = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          intent["expansion_research_checkpoint"]["transport"]["commit_sha"] = transport
+          intent["opponent_display_reconciliation"] = {
+              "path": (
+                  ".remote-implementation/transports/miami/"
+                  "opponent-display-reconciliation.json"
+              ),
+              "sha256": sidecar_sha,
+          }
+          intent["creation_provenance"] = {
+              "origin": "Control Center exact-main isolated display reconciliation validation",
+              "authorization": (
+                  "Validation-only proof of pinned startup authority plus exact "
+                  "pre-Phase0 opponent display reconciliation through guarded "
+                  "Phase 0 and independent fresh verification."
+              ),
+          }
+          path = control / ".remote-implementation" / "expansion-startup.json"
+          path.write_text(
+              json.dumps(intent, sort_keys=True, separators=(",", ":")) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+          git -C control add .remote-implementation/expansion-startup.json
+          git -C control commit -m "validation only: Miami display reconciliation startup"
+          synthetic_startup="$(git -C control rev-parse HEAD)"
+          test "$(git -C control rev-parse HEAD^)" = "$synthetic_transport"
+          echo "$synthetic_startup" > /tmp/synthetic-startup-sha
+
+          git init --bare "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C runtime remote add isolated "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C runtime push isolated \
+            "19dc85c18902234c2241e39d3ba34006d2903e80:refs/heads/main" \
+            "refs/remotes/origin/live-miami:refs/heads/data/miami-onboarding"
+
+          git -C control remote add isolated "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C control push isolated "HEAD:refs/heads/control/remote-implementation"
+
+          git -C runtime remote set-url origin "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C control remote set-url origin "$GITHUB_WORKSPACE/isolated-origin.git"
+
+          mkdir -p /tmp/fake-bin
+          cat > /tmp/fake-bin/gh <<'SH'
+          #!/usr/bin/env bash
+          echo "validation-only fake dispatch: $*"
+          exit 0
+          SH
+          chmod +x /tmp/fake-bin/gh
+
+      - name: Run actual startup coordinator
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GH_TOKEN: validation-only
+        run: |
+          set -euo pipefail
+          export PATH="/tmp/fake-bin:$PATH"
+          export REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_DIAG=/tmp/expansion-display-reconciliation/startup-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_expansion_startup.py" \
+              | tee /tmp/expansion-display-reconciliation/startup-result.json
+          )
+
+          synthetic="$(cat /tmp/synthetic-startup-sha)"
+          request_commit="$(git -C control rev-parse HEAD)"
+          test "$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)" = "$request_commit"
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          control = Path("control")
+          synthetic = Path("/tmp/synthetic-startup-sha").read_text().strip()
+          sidecar_sha = Path("/tmp/display-sidecar-sha").read_text().strip()
+          request = json.loads(
+              (control / ".remote-implementation/request.json").read_text()
+          )
+          assert request["operation"] == "EXPANSION_PHASE0", request
+          assert request["request_id"] == "miami-expansion-phase0-isolated-display-0001"
+          assert request["stage1_control_authority_sha"] == synthetic, request
+          assert request["opponent_display_reconciliation"]["sha256"] == sidecar_sha
+          proof = json.loads(
+              subprocess.check_output(
+                  [
+                      "git", "-C", str(control), "show",
+                      "HEAD:" + request["stage1_independent_proof"]["path"],
+                  ]
+              )
+          )
+          assert proof["control_authority_sha"] == synthetic, proof
+          PY
+
+      - name: Run actual guarded EXPANSION_PHASE0 runner
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GITHUB_RUN_ID: '991004'
+          GITHUB_RUN_ATTEMPT: '1'
+        run: |
+          set -euo pipefail
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/expansion-display-reconciliation/runner-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_runner.py" \
+              | tee /tmp/expansion-display-reconciliation/runner.log
+          )
+
+          control_head="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          target_head="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/data/miami-onboarding)"
+          test "$target_head" != "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          echo "$control_head" > /tmp/runner-control-head
+          echo "$target_head" > /tmp/runner-target-head
+
+          git -C control fetch --no-tags origin \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$control_head"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          sidecar_sha = Path("/tmp/display-sidecar-sha").read_text().strip()
+          state = json.loads(
+              (control / ".remote-implementation/control-state.json").read_text()
+          )
+          assert state["lifecycle_state"] == "IDLE", state
+          assert state["transaction_state"] == "COMPLETE", state
+          last = state["last_operation"]
+          assert last["operation"] == "EXPANSION_PHASE0", last
+          assert last["fresh_runner_verification"] == "PENDING", last
+          assert last["opponent_display_reconciliation_sha256"] == sidecar_sha
+          successor = json.loads(
+              (control / last["successor_manifest_path"]).read_text()
+          )
+          assert successor["opponent_display_reconciliation_sha256"] == sidecar_sha
+          assert successor["prepared_parent_sha"] == "19dc85c18902234c2241e39d3ba34006d2903e80"
+          assert successor["expected_target_predecessor_sha"] == "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          PY
+
+      - name: Run actual independent fresh Phase 0 verifier
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+        run: |
+          set -euo pipefail
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/expansion-display-reconciliation/verifier-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py" \
+              | tee /tmp/expansion-display-reconciliation/verifier.log
+          )
+
+          verified_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          echo "$verified_control" > /tmp/verified-control-head
+          git -C control fetch --no-tags origin \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$verified_control"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          sidecar_sha = Path("/tmp/display-sidecar-sha").read_text().strip()
+          state = json.loads(
+              (control / ".remote-implementation/control-state.json").read_text()
+          )
+          last = state["last_operation"]
+          assert last["fresh_runner_verification"] == "PASS", last
+          assert last["remote_phase0_equivalence"] == "PASS", last
+          verify_path = (
+              control / ".remote-implementation" / "verifications" / "miami"
+              / "miami-expansion-phase0-isolated-display-0001"
+              / "expansion-phase0-verification.json"
+          )
+          verification = json.loads(verify_path.read_text())
+          assert verification["status"] == "PASS", verification
+          assert verification["independent_exact_tree_equivalence"] == "PASS"
+          assert verification["opponent_display_reconciliation_sha256"] == sidecar_sha
+          target_head = Path("/tmp/runner-target-head").read_text().strip()
+          assert verification["target_sha"] == target_head
+          PY
+
+      - name: Authenticate the isolated Phase 0 successor through Stage 2 boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          verified_control="$(cat /tmp/verified-control-head)"
+          target_head="$(cat /tmp/runner-target-head)"
+          git -C runtime fetch --no-tags origin \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control" \
+            "+refs/heads/data/miami-onboarding:refs/remotes/origin/remote-miami"
+          test "$(git -C runtime rev-parse refs/remotes/origin/remote-control)" = "$verified_control"
+          test "$(git -C runtime rev-parse refs/remotes/origin/remote-miami)" = "$target_head"
+
+          python - <<'PY'
+          import hashlib
+          import json
+          import sys
+          from pathlib import Path
+
+          runtime = Path("runtime").resolve()
+          sys.path.insert(0, str(runtime / "tools"))
+          from remote_implementation_stage2_census import verify_phase0_authority
+
+          control = Path("control")
+          verified_control = Path("/tmp/verified-control-head").read_text().strip()
+          state = json.loads(
+              (control / ".remote-implementation/control-state.json").read_text()
+          )
+          last = state["last_operation"]
+          successor_path = last["successor_manifest_path"]
+          successor_bytes = (control / successor_path).read_bytes()
+          successor = json.loads(successor_bytes)
+          request = {
+              "school_key": "miami",
+              "target_branch": successor["target_branch"],
+              "target_sha": successor["actual_published_target_sha"],
+              "phase0_successor": {
+                  "path": successor_path,
+                  "sha256": hashlib.sha256(successor_bytes).hexdigest(),
+              },
+              "integration_freeze_sha256": successor["integration_freeze_sha256"],
+              "semantic_snapshot_sha256": successor["semantic_snapshot_sha256"],
+          }
+          authority = verify_phase0_authority(
+              request,
+              verified_control,
+              source_repo=runtime,
+          )
+          display = authority["phase0_opponent_display_reconciliation"]
+          assert display is not None, authority
+          assert display["changed_opponent_keys"] == ["rio-grande"], display
+          assert display["changed_source_game_ids"] == ["MIA-EXP-S1-1953-002"], display
+          assert display["field_level_proof"]["opponent_key_changes"] == 0
+          assert display["field_level_proof"]["literal_evidence_changes"] == 0
+          Path(
+              "/tmp/expansion-display-reconciliation/stage2-boundary-summary.json"
+          ).write_text(
+              json.dumps(
+                  {
+                      "status": "PASS",
+                      "target_sha": request["target_sha"],
+                      "changed_opponent_keys": display["changed_opponent_keys"],
+                      "changed_source_game_ids": display["changed_source_game_ids"],
+                      "target_authority_kind": authority["target_authority_kind"],
+                  },
+                  indent=2,
+                  sort_keys=True,
+              ) + "\n"
+          )
+          PY
+
+      - name: Reauthenticate live repository untouched
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C observer fetch --no-tags origin \
+            "+refs/heads/main:refs/remotes/origin/live-main" \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/live-control" \
+            "+refs/heads/data/miami-onboarding:refs/remotes/origin/live-miami"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-main)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-control)" = "9f151e5c478da2ceccc6c1fadf0e3a3b50b14d58"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-miami)" = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: expansion-phase0-opponent-display-reconciliation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/expansion-display-reconciliation/
+          if-no-files-found: warn
+          retention-days: 14
