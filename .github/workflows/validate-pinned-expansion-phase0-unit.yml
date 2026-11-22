@@ -1,0 +1,43 @@
+name: Validate pinned expansion Phase 0 authority unit contract
+
+on:
+  push:
+    branches:
+      - 'request-validation/expansion-phase0-pinned-authority-unit-ffd73f'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ffd73ff507edb0a73e015698d405b76ea4d8a3f4
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and run focused regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            tools/remote_implementation_control.py \
+            tools/remote_implementation_expansion_startup.py \
+            tools/remote_implementation_expansion_phase0.py
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_startup.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -q
+          python -m unittest discover -s tests -p 'test_expansion_implementation_stage1.py' -q
+          mkdir -p /tmp/pinned-phase0-unit
+          python tools/all_history_expansion_implementation_acceptance.py --json \
+            | tee /tmp/pinned-phase0-unit/acceptance.json
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinned-expansion-phase0-unit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/pinned-phase0-unit/
+          if-no-files-found: warn
+          retention-days: 14
