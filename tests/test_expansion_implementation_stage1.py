@@ -1,6 +1,7 @@
 """Fail-closed Stage 1 adapter tests. Synthetic authority is never published."""
 import json
 import tempfile
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -9,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from expansion_implementation_stage1 import (
     Stage1Stop, build_candidate, classify_current_main_canonical_drift,
     csv_rows, materialize_support, prepare_current_main_identity_rebase,
-    reconcile_canonical, render_csv, sha256, stage1,
+    canonical_bytes, reconcile_canonical, render_csv, sha256, stage1,
 )
 from all_history_expansion_freeze import canonical_row_sha256, OPPONENT_EXTENSION_FIELDS
 
@@ -219,6 +220,240 @@ class Stage1FoundationTests(unittest.TestCase):
                 with self.assertRaisesRegex(Stage1Stop,"SHA-256 mismatch"):
                     stage1(root,"sample",artifact,"0"*64,"b"*40,"a"*40,root.parent/"new-expansion-test-output")
         
+
+class PostFreezePackageCorrectionTests(unittest.TestCase):
+    def _git(self, repo: Path, *args: str) -> str:
+        cp = subprocess.run(
+            ["git", "-C", str(repo), *args],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+        return cp.stdout.strip()
+
+    def _build_repo(
+        self,
+        root: Path,
+        package: dict[str, bytes],
+        *,
+        publish_proof: bool = True,
+        target_branch: str = "data/sample-correction",
+        mutate_after: bytes | None = None,
+    ) -> tuple[str, str, bytes]:
+        repo = root / "repo"
+        repo.mkdir()
+        self._git(repo, "init")
+        self._git(repo, "config", "user.email", "test@example.com")
+        self._git(repo, "config", "user.name", "Test")
+        school = repo / "schools" / "sample"
+        school.mkdir(parents=True)
+        for name, raw in package.items():
+            (school / name).write_bytes(raw)
+        self._git(repo, "add", ".")
+        self._git(repo, "commit", "-m", "research baseline")
+        base = self._git(repo, "rev-parse", "HEAD")
+
+        self._git(repo, "checkout", "-b", "correction")
+        corrected = b"school,conference\nsample,Accepted Conference\n"
+        (school / "conferences.csv").write_bytes(corrected)
+        self._git(repo, "add", "schools/sample/conferences.csv")
+        self._git(repo, "commit", "-m", "correct conference")
+        correction_head = self._git(repo, "rev-parse", "HEAD")
+
+        self._git(repo, "checkout", "-b", "main", base)
+        self._git(repo, "merge", "--no-ff", "correction", "-m", "merge correction")
+        merge_sha = self._git(repo, "rev-parse", "HEAD")
+        parents = self._git(repo, "rev-list", "--parents", "-n", "1", merge_sha).split()
+        self.assertEqual(len(parents), 3)
+        main_sha = merge_sha
+        if mutate_after is not None:
+            (school / "conferences.csv").write_bytes(mutate_after)
+            self._git(repo, "add", "schools/sample/conferences.csv")
+            self._git(repo, "commit", "-m", "later unproven conference drift")
+            main_sha = self._git(repo, "rev-parse", "HEAD")
+
+        if publish_proof:
+            self._git(repo, "checkout", "-b", "control")
+            request_id = "sample-correction-release-production-proof-0001"
+            request = {
+                "schema_version": 1,
+                "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+                "request_id": request_id,
+                "school_key": "sample",
+                "operation": "RELEASE_PRODUCTION_PROOF",
+                "target_branch": target_branch,
+                "target_sha": correction_head,
+                "merge_sha": merge_sha,
+                "pr_number": 1,
+            }
+            request_raw = canonical_bytes(request)
+            checkpoint = {
+                "schema_version": 1,
+                "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+                "status": "PRODUCTION_PROOF_PASS",
+                "request_id": request_id,
+                "request_sha256": sha256(request_raw),
+                "school_key": "sample",
+                "merge_sha": merge_sha,
+                "merge_parent_main": parents[1],
+                "merge_parent_onboarding": parents[2],
+                "pr_number": 1,
+                "pr_head_sha": correction_head,
+                "production_deployment_id": 123,
+                "merged": True,
+                "production_proof": True,
+            }
+            checkpoint_raw = canonical_bytes(checkpoint)
+            verification = {
+                "schema_version": 1,
+                "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+                "status": "COMPLETE",
+                "exact_production_equivalence": "PASS",
+                "request_id": request_id,
+                "school_key": "sample",
+                "merge_sha": merge_sha,
+                "pr_number": 1,
+                "pr_head_sha": correction_head,
+                "production_deployment_id": 123,
+                "checkpoint_sha256": sha256(checkpoint_raw),
+                "merged": True,
+                "production_proof": True,
+            }
+            checkpoint_dir = (
+                repo / ".remote-implementation" / "checkpoints" / "sample" / request_id
+            )
+            verification_dir = (
+                repo / ".remote-implementation" / "verifications" / "sample" / request_id
+            )
+            checkpoint_dir.mkdir(parents=True)
+            verification_dir.mkdir(parents=True)
+            (checkpoint_dir / "request.json").write_bytes(request_raw)
+            (checkpoint_dir / "checkpoint-manifest.json").write_bytes(checkpoint_raw)
+            (verification_dir / "production-verification.json").write_bytes(
+                canonical_bytes(verification)
+            )
+            self._git(repo, "add", ".remote-implementation")
+            self._git(repo, "commit", "-m", "preserve correction production proof")
+            control = self._git(repo, "rev-parse", "HEAD")
+            self._git(
+                repo, "update-ref",
+                "refs/remotes/origin/remote-control",
+                control,
+            )
+        self._git(repo, "checkout", "--detach", main_sha)
+        return base, main_sha, corrected
+
+    def test_completed_post_freeze_conference_correction_is_inherited(self):
+        fixture = Stage1FoundationTests()
+        fixture.setUp()
+        baseline, validated, payload = fixture.fixture()
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary) / "fixture"
+            repo.mkdir()
+            base, main, corrected = self._build_repo(
+                repo,
+                baseline["package_bytes"],
+            )
+            rebased, adjusted, metadata, blockers = (
+                prepare_current_main_identity_rebase(
+                    repo / "repo",
+                    "sample",
+                    main,
+                    baseline,
+                    validated,
+                    research_base_sha=base,
+                )
+            )
+        self.assertEqual(blockers, [])
+        self.assertEqual(
+            metadata["status"],
+            "APPLIED_RESOLVED_EXTERNAL_PACKAGE_CORRECTION",
+        )
+        self.assertEqual(metadata["accepted_package_members"], ["conferences.csv"])
+        self.assertEqual(
+            metadata["completed_package_corrections"][0]["member"],
+            "conferences.csv",
+        )
+        self.assertEqual(rebased["package_bytes"]["conferences.csv"], corrected)
+        candidate, _ = build_candidate(rebased, payload, adjusted)
+        self.assertEqual(candidate["conferences.csv"], corrected)
+
+    def test_unproven_post_freeze_conference_drift_remains_blocking(self):
+        fixture = Stage1FoundationTests()
+        fixture.setUp()
+        baseline, validated, _ = fixture.fixture()
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary) / "fixture"
+            repo.mkdir()
+            base, main, _ = self._build_repo(
+                repo,
+                baseline["package_bytes"],
+                publish_proof=False,
+            )
+            _, _, _, blockers = prepare_current_main_identity_rebase(
+                repo / "repo",
+                "sample",
+                main,
+                baseline,
+                validated,
+                research_base_sha=base,
+            )
+        self.assertEqual(
+            blockers[0]["reason"],
+            "NO_COMPLETED_POST_FREEZE_PACKAGE_CORRECTION_AUTHORITY",
+        )
+
+    def test_wrong_correction_branch_proof_is_not_authority(self):
+        fixture = Stage1FoundationTests()
+        fixture.setUp()
+        baseline, validated, _ = fixture.fixture()
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary) / "fixture"
+            repo.mkdir()
+            base, main, _ = self._build_repo(
+                repo,
+                baseline["package_bytes"],
+                target_branch="data/sample-onboarding",
+            )
+            _, _, _, blockers = prepare_current_main_identity_rebase(
+                repo / "repo",
+                "sample",
+                main,
+                baseline,
+                validated,
+                research_base_sha=base,
+            )
+        self.assertEqual(
+            blockers[0]["reason"],
+            "NO_COMPLETED_POST_FREEZE_PACKAGE_CORRECTION_AUTHORITY",
+        )
+
+    def test_later_unproven_change_after_completed_correction_is_blocking(self):
+        fixture = Stage1FoundationTests()
+        fixture.setUp()
+        baseline, validated, _ = fixture.fixture()
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary) / "fixture"
+            repo.mkdir()
+            base, main, _ = self._build_repo(
+                repo,
+                baseline["package_bytes"],
+                mutate_after=b"school,conference\nsample,Unproven Later Value\n",
+            )
+            _, _, _, blockers = prepare_current_main_identity_rebase(
+                repo / "repo",
+                "sample",
+                main,
+                baseline,
+                validated,
+                research_base_sha=base,
+            )
+        self.assertEqual(
+            blockers[0]["reason"],
+            "NO_COMPLETED_POST_FREEZE_PACKAGE_CORRECTION_AUTHORITY",
+        )
+
 
 class CurrentMainIdentityRebaseTests(unittest.TestCase):
     def test_resolved_external_identity_correction_is_preserved_and_extended(self):

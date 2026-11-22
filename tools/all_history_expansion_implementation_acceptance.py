@@ -62,6 +62,7 @@ REQUIRED_REMOTE_CONTINUATIONS = (
 )
 
 ACCEPTANCE_TEST_PATTERNS = (
+    "test_expansion_implementation_stage1.py",
     "test_all_history_expansion_implementation_composition.py",
     "test_all_history_expansion_integration.py",
     "test_all_history_expansion_phase0_preview.py",

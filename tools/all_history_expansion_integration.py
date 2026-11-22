@@ -311,9 +311,8 @@ def freeze_authority(
         }, "CANDIDATE_SHA_MAP_CHANGED")
         authenticate_proof(proof, report, hashes, main_sha, research_base, zip_sha)
         preservation_baseline = baseline
-        if report.get("current_main_reconciliation", {}).get("status") == (
-            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
-        ):
+        reconciliation = report.get("current_main_reconciliation", {})
+        if reconciliation.get("changed_source_game_ids"):
             current_source_fields, current_source_rows = csv_rows(
                 git_bytes(repo, main_sha, f"schools/{school}/source-games.csv"),
                 "current-main inherited source games",
@@ -365,8 +364,8 @@ def freeze_authority(
         semantic_sha = semantic_snapshot_sha256(semantic_snapshot)
         package_hashes = {k: hashes[k] for k in PACKAGE_FILES}
         predecessor_package_hashes = dict(baseline["package_member_sha256"])
-        if report.get("current_main_reconciliation", {}).get("status") == (
-            "APPLIED_RESOLVED_EXTERNAL_IDENTITY_CORRECTION"
+        if str(reconciliation.get("status") or "").startswith(
+            "APPLIED_RESOLVED_EXTERNAL_"
         ):
             predecessor_package_hashes = dict(
                 report["current_main_reconciliation"][
