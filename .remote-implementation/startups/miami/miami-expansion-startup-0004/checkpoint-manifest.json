@@ -1,0 +1,21 @@
+{
+  "implementation_acceptance_sha256": "e35a84717fd32216b9206f52b02652b8b0a7cf3fdc3d7baeb2c124a661dee27f",
+  "integration_freeze_sha256": "d40eec676d281b8dd523a4c2182df6ac608b786ad2ac6eb0ceaf6973e4932056",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_CHECKPOINT",
+  "next_operation": "EXPANSION_PHASE0",
+  "phase0_preview_sha256": "3b7b19da38c489870582fb1e0bdfe0a66d648020995c694eddec70efd64972a7",
+  "phase0_request_id": "miami-expansion-phase0-0004",
+  "protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+  "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "schema_version": 1,
+  "school_key": "miami",
+  "stage1_independent_proof_sha256": "d2003bbe24e38021e12cfb812b512fd170795f2b9e7a846078722b542bd61226",
+  "stage1_reconciliation_sha256": "c18630ae58cf7cbb99b255bea116de4beadd11c0c18e1a22b2a8437dd78489e1",
+  "startup_id": "miami-expansion-startup-0004",
+  "startup_intent_sha256": "bbba2a51e9e68babfce5a19740006a174c00159d62f01913fce5e74870a8df56",
+  "status": "READY_TO_SUBMIT_GUARDED_EXPANSION_PHASE0",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "817197e3410a893bd1f481d4cce5aa630cc1c7e3",
+  "tracked_basketball_mutation": "NONE_PREPARATION_ONLY"
+}
