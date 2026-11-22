@@ -963,6 +963,10 @@ def validate_request(request: dict[str, Any]) -> None:
             request.get("venue_reconciliation"),
             "venue_reconciliation",
         )
+        _validate_payload_ref(
+            request.get("opponent_display_reconciliation"),
+            "opponent_display_reconciliation",
+        )
         _require_sha(
             request.get("integration_freeze_sha256"),
             64,
