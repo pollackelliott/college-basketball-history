@@ -540,8 +540,15 @@ jobs:
           git -C control reset --hard "$latest_control"
 
           # Production fresh verification runs in a separate clean job checkout.
-          # Clear validation-runner-only local worktree branches before reusing this
-          # checkout so the verifier sees the same fresh branch namespace.
+          # Remove only validation-created Stage 2 worktrees/branches before reusing
+          # this checkout so the verifier sees the same fresh branch namespace.
+          while IFS= read -r worktree_path; do
+            case "$worktree_path" in
+              /tmp/remote-stage2-*)
+                git -C runtime worktree remove --force "$worktree_path"
+                ;;
+            esac
+          done < <(git -C runtime worktree list --porcelain | sed -n 's/^worktree //p')
           git -C runtime worktree prune
           while IFS= read -r local_branch; do
             local_branch="${local_branch#  }"
@@ -699,8 +706,15 @@ jobs:
           git -C control reset --hard "$latest_control"
 
           # Production fresh verification runs in a separate clean job checkout.
-          # Clear validation-runner-only local worktree branches before reusing this
-          # checkout so the verifier sees the same fresh branch namespace.
+          # Remove only validation-created Stage 2 worktrees/branches before reusing
+          # this checkout so the verifier sees the same fresh branch namespace.
+          while IFS= read -r worktree_path; do
+            case "$worktree_path" in
+              /tmp/remote-stage2-*)
+                git -C runtime worktree remove --force "$worktree_path"
+                ;;
+            esac
+          done < <(git -C runtime worktree list --porcelain | sed -n 's/^worktree //p')
           git -C runtime worktree prune
           while IFS= read -r local_branch; do
             local_branch="${local_branch#  }"
