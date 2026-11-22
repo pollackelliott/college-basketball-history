@@ -238,6 +238,10 @@ class ExpansionScopeGeneratedProjectionTests(unittest.TestCase):
                 (diag / "expansion-phase0-build-site-data.log").is_file()
             )
             run_mock.assert_called_once()
+            build_command = run_mock.call_args.args[0]
+            self.assertIn("--pending-opponent-display-school", build_command)
+            pending_index = build_command.index("--pending-opponent-display-school")
+            self.assertEqual(build_command[pending_index + 1], "example")
             git_mock.assert_any_call(
                 "add",
                 "--",
