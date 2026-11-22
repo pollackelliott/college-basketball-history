@@ -1,0 +1,57 @@
+{
+  "authority": {
+    "expansion_phase0": true,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly authorized resumption of the SAME Miami (FL) ALL_HISTORY_EXPANSION initial Implementation phase after the complete generic startup repair family, with entirely fresh live startup and guarded EXPANSION_PHASE0 identities. This startup binds protected main 19dc85c18902234c2241e39d3ba34006d2903e80, unchanged Miami onboarding predecessor 817197e3410a893bd1f481d4cce5aa630cc1c7e3, immutable Research base 33af595fcae2a17664379638f89ce64c2e63be08, exact frozen Research ZIP a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb, fresh startup identity miami-expansion-startup-0004, and fresh child request identity miami-expansion-phase0-0004. It authorizes repository-owned deterministic startup through guarded EXPANSION_PHASE0 and independent fresh verification only; it grants no Stage 2, Owner Gate 1, release, merge, Production, shared-reference maintenance, or new historical authority. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "Miami (FL) ALL_HISTORY_EXPANSION Implementation lane; Control Center released the same initial-phase authority after generic expansion-startup repair family PR #690 was merged and post-merge proven."
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+    "sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+    "transport": {
+      "commit_sha": "cb1c4eac8af27f622ad148fa51bc9f666eeca38b",
+      "kind": "git_base64_parts",
+      "part_count": 275,
+      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0004/part-"
+    }
+  },
+  "expected_protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+  "integration_freeze_sha256": "d40eec676d281b8dd523a4c2182df6ac608b786ad2ac6eb0ceaf6973e4932056",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "08f69aaeca13ea3064740bfc0ab86dac9496ef7d",
+  "previous_control_state_sha256": "d5e8267e6a35f19d2ce74d61ada7574dc71a62250f590aa31294aa208dc45a6c",
+  "request_id": "miami-expansion-phase0-0004",
+  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "schema_version": 1,
+  "school_key": "miami",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/miami/miami-expansion-startup-0004/stage1-independent-proof.json",
+    "sha256": "d2003bbe24e38021e12cfb812b512fd170795f2b9e7a846078722b542bd61226"
+  },
+  "stage1_independent_proof_sha256": "d2003bbe24e38021e12cfb812b512fd170795f2b9e7a846078722b542bd61226",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+}
