@@ -1188,6 +1188,57 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                     source_repo=Path("/tmp/synthetic-correction-authority"),
                 )
 
+    def test_phase0_display_reconciliation_allows_only_bound_display_members(self):
+        expected = "a" * 64
+        actual = "b" * 64
+        school_path = f"schools/{SCHOOL}/opponents.csv"
+        successor = {
+            "operation": "EXPANSION_PHASE0",
+            "changed_paths": [school_path],
+            "changed_file_sha256": {school_path: actual},
+        }
+        writeahead = {
+            "operation": "EXPANSION_PHASE0",
+            "changed_paths": [school_path],
+            "changed_file_sha256": {school_path: actual},
+        }
+        stage2_runtime._verify_phase0_package_member(
+            name="opponents.csv",
+            expected=expected,
+            actual=actual,
+            school_key=SCHOOL,
+            successor=successor,
+            writeahead=writeahead,
+            integration={},
+            display_reconciliation={
+                "before_sha256": {
+                    "opponents.csv": expected,
+                    "source-games.csv": "c" * 64,
+                },
+                "after_sha256": {
+                    "opponents.csv": actual,
+                    "source-games.csv": "d" * 64,
+                },
+            },
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:notes.md",
+        ):
+            stage2_runtime._verify_phase0_package_member(
+                name="notes.md",
+                expected=expected,
+                actual=actual,
+                school_key=SCHOOL,
+                successor=successor,
+                writeahead=writeahead,
+                integration={},
+                display_reconciliation={
+                    "before_sha256": {},
+                    "after_sha256": {},
+                },
+            )
+
     def test_expansion_phase0_reconciled_venues_are_authenticated(self):
         repo, control_sha, request, _ = self.make_authority_repo(
             reconciled_venues=True,

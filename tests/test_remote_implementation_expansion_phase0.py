@@ -91,6 +91,25 @@ def expansion_request() -> dict:
     }
 
 
+class ExpansionOpponentDisplayRequestTests(unittest.TestCase):
+    def test_optional_opponent_display_reconciliation_ref_is_validated(self):
+        request = expansion_request()
+        request["opponent_display_reconciliation"] = {
+            "path": ".remote-implementation/payloads/example/display.json",
+            "sha256": "b" * 64,
+        }
+        validate_request(request)
+
+    def test_bad_opponent_display_reconciliation_hash_is_rejected(self):
+        request = expansion_request()
+        request["opponent_display_reconciliation"] = {
+            "path": ".remote-implementation/payloads/example/display.json",
+            "sha256": "bad",
+        }
+        with self.assertRaises(RemoteImplementationError):
+            validate_request(request)
+
+
 class ExpansionImplementationAcceptancePreflightTests(unittest.TestCase):
     def test_preflight_passes_and_preserves_json_proof(self):
         import json

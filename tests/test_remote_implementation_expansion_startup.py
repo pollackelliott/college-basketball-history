@@ -331,6 +331,36 @@ class ExpansionStartupProofTests(unittest.TestCase):
         self.assertFalse(request["authority"]["owner_gate_1"])
         self.assertFalse(request["authority"]["owner_gate_2"])
 
+    def test_optional_opponent_display_reconciliation_is_carried_not_invented(self):
+        intent = startup_intent()
+        intent["opponent_display_reconciliation"] = {
+            "path": ".transport/opponent-display.json",
+            "sha256": "b" * 64,
+        }
+        validate_startup_intent(intent)
+        request = build_phase0_request(
+            intent,
+            predecessor_commit="6" * 40,
+            predecessor_state_sha256="7" * 64,
+            proof_path=".remote-implementation/startups/example/proof.json",
+            proof_sha256="8" * 64,
+            integration_freeze_sha256="9" * 64,
+            stage1_control_authority_sha="a" * 40,
+            venue_reconciliation_ref=None,
+            opponent_display_reconciliation_ref={
+                "path": (
+                    ".remote-implementation/startups/example/"
+                    "opponent-display-reconciliation.json"
+                ),
+                "sha256": "b" * 64,
+            },
+        )
+        validate_request(request)
+        self.assertEqual(
+            request["opponent_display_reconciliation"]["sha256"],
+            "b" * 64,
+        )
+
     def test_optional_venue_reconciliation_is_carried_not_invented(self):
         intent = startup_intent()
         request = build_phase0_request(
