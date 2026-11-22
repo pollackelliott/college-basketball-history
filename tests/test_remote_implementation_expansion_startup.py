@@ -318,10 +318,12 @@ class ExpansionStartupProofTests(unittest.TestCase):
             ),
             proof_sha256="8" * 64,
             integration_freeze_sha256="9" * 64,
+            stage1_control_authority_sha="a" * 40,
             venue_reconciliation_ref=None,
         )
         validate_request(request)
         self.assertEqual(request["operation"], "EXPANSION_PHASE0")
+        self.assertEqual(request["stage1_control_authority_sha"], "a" * 40)
         self.assertTrue(request["authority"]["expansion_phase0"])
         self.assertFalse(request["authority"]["phase0"])
         self.assertFalse(request["authority"]["owner_gate_1"])
@@ -336,6 +338,7 @@ class ExpansionStartupProofTests(unittest.TestCase):
             proof_path=".remote-implementation/startups/example/proof.json",
             proof_sha256="8" * 64,
             integration_freeze_sha256="9" * 64,
+            stage1_control_authority_sha="a" * 40,
             venue_reconciliation_ref={
                 "path": (
                     ".remote-implementation/startups/example/"

@@ -954,6 +954,11 @@ def validate_request(request: dict[str, Any]) -> None:
             "stage1_independent_proof",
             required=True,
         )
+        _require_sha(
+            request.get("stage1_control_authority_sha"),
+            40,
+            "EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_INVALID",
+        )
         _validate_payload_ref(
             request.get("venue_reconciliation"),
             "venue_reconciliation",
