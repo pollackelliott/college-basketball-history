@@ -26,6 +26,10 @@ from stage_research_portfolio import (
 from stage1_venue_reconciliation import load_venue_reconciliation
 from expansion_implementation_stage1 import render_csv
 from all_history_expansion_venue_guard import census as venue_identity_census, require_clean as require_venue_identity_clean
+from all_history_expansion_opponent_display import (
+    OpponentDisplayReconciliationError,
+    validate_reconciliation,
+)
 
 
 def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
@@ -63,6 +67,58 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
     source_fields,sources=csv_rows((frozen/"source-games.csv").read_bytes(),"candidate source games")
     opponent_fields,opponents=csv_rows((frozen/"opponents.csv").read_bytes(),"candidate opponents")
     venue_fields,venues=csv_rows((frozen/"venues.csv").read_bytes(),"candidate venues")
+
+    opponent_display_projection: dict[str,bytes] | None = None
+    opponent_display_meta = manifest.get("opponent_display_reconciliation")
+    if opponent_display_meta is not None:
+        display = validate_reconciliation(
+            repo,
+            school,
+            frozen,
+            frozen/"opponent-display-reconciliation.json",
+            protected_main_sha=main,
+            research_freeze_sha256=manifest["research_freeze_zip_sha256"],
+        )
+        display_doc = display["document"]
+        display_proof = display_doc["field_level_proof"]
+        expected_display_meta = {
+            "spec_path": "opponent-display-reconciliation.json",
+            "spec_sha256": sha256(
+                (frozen/"opponent-display-reconciliation.json").read_bytes()
+            ),
+            "changed_keys": display_doc["changed_keys"],
+            "opponent_changed_row_count": display_proof[
+                "opponent_changed_row_count"
+            ],
+            "source_game_changed_row_count": display_proof[
+                "source_game_changed_row_count"
+            ],
+            "source_game_changed_ids": display_proof[
+                "source_game_changed_ids"
+            ],
+            "pre_candidate_sha256": display_doc[
+                "pre_candidate_sha256"
+            ],
+            "projected_candidate_sha256": display_doc[
+                "projected_candidate_sha256"
+            ],
+            "field_level_proof": display_proof,
+        }
+        require(
+            opponent_display_meta == expected_display_meta,
+            "PHASE0_PREVIEW_OPPONENT_DISPLAY_AUTHORITY_DRIFT",
+        )
+        require(
+            manifest.get("opponent_display_reconciliation_sha256")
+            == expected_display_meta["spec_sha256"],
+            "PHASE0_PREVIEW_OPPONENT_DISPLAY_HASH_DRIFT",
+        )
+        opponent_display_projection = display["projected_bytes"]
+    else:
+        require(
+            not manifest.get("opponent_display_reconciliation_sha256"),
+            "PHASE0_PREVIEW_UNBOUND_OPPONENT_DISPLAY_RECONCILIATION",
+        )
     require(len(sources)==manifest["source_preservation"]["combined_count"],
             "PHASE0_PREVIEW_SOURCE_COUNT_CHANGED")
     require(manifest["frozen_program_projection"] is not None,
@@ -256,6 +312,9 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_GLOBAL_REGISTRATION_COUNT_CHANGED")
     candidate={name:(frozen/name).read_bytes() for name in PACKAGE_FILES}
     candidate["venues.csv"]=render_csv(venue_fields,rebased_local)
+    if opponent_display_projection is not None:
+        candidate["opponents.csv"]=opponent_display_projection["opponents.csv"]
+        candidate["source-games.csv"]=opponent_display_projection["source-games.csv"]
     # These are staged bytes only. Reference CSV serialization is deterministic.
     global_changes={
         "data/reference/programs.csv":render_csv(program_fields,post_programs),
@@ -270,9 +329,23 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             "PHASE0_PREVIEW_UNRELATED_PROGRAM_REGISTRY_CHANGE")
     frozen_ids=[r["source_game_id"] for r in sources]
     _,reparsed=csv_rows(candidate["source-games.csv"],"rebased source games")
-    require([r["source_game_id"] for r in reparsed]==frozen_ids
-            and reparsed==sources,
-            "PHASE0_PREVIEW_SOURCE_EVIDENCE_CHANGED")
+    require(
+        [r["source_game_id"] for r in reparsed]==frozen_ids,
+        "PHASE0_PREVIEW_SOURCE_ID_POPULATION_CHANGED",
+    )
+    if opponent_display_projection is None:
+        require(
+            reparsed==sources,
+            "PHASE0_PREVIEW_SOURCE_EVIDENCE_CHANGED",
+        )
+    else:
+        proof=opponent_display_meta["field_level_proof"]
+        require(
+            proof.get("source_game_non_name_field_changes")==0
+            and proof.get("literal_evidence_changes")==0
+            and proof.get("source_game_key_changes")==0,
+            "PHASE0_PREVIEW_OPPONENT_DISPLAY_SOURCE_CONTRACT_INVALID",
+        )
     require(git_revision(repo,"refs/remotes/origin/main")==main,
             "PHASE0_PREVIEW_CURRENT_MAIN_MOVED_DURING_REBASE")
     proposal={
@@ -290,6 +363,10 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         "venue_identity_census":venue_identity,
         "venue_reconciliation_sha256":manifest.get("venue_reconciliation_sha256",""),
         "venue_reconciliation_census":venue_reconciliation_census,
+        "opponent_display_reconciliation_sha256":manifest.get(
+            "opponent_display_reconciliation_sha256",""
+        ),
+        "opponent_display_reconciliation":opponent_display_meta,
         "new_global_venue_ids_and_keys":[{"venue_id":x["venue_id"],
                     "venue_key":x["venue_key"]} for x in registered],
         "rebased_venue_mapping_count":len(venue_mappings),
@@ -337,7 +414,14 @@ def main() -> int:
             "status","global_venue_registration_count","source_game_count",
             "rebased_venue_mapping_count","residual_blocker")},sort_keys=True))
         return 0
-    except (IntegrationAuthorityError,WorkflowError,ValueError,OSError,KeyError) as exc:
+    except (
+        IntegrationAuthorityError,
+        OpponentDisplayReconciliationError,
+        WorkflowError,
+        ValueError,
+        OSError,
+        KeyError,
+    ) as exc:
         print("STOP: "+str(exc),file=sys.stderr)
         return 1
 
