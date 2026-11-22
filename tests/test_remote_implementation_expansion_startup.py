@@ -290,6 +290,7 @@ class ExpansionStartupProofTests(unittest.TestCase):
                 protected_main_sha="2" * 40,
                 research_base_sha="4" * 40,
                 freeze_zip_sha256="1" * 64,
+                stage1_control_authority_sha="a" * 40,
             )
         self.assertEqual(
             proof["status"],
@@ -299,6 +300,7 @@ class ExpansionStartupProofTests(unittest.TestCase):
             set(proof["candidate_sha256"]),
             set((*PACKAGE_FILES, STAGE1_REPORT)),
         )
+        self.assertEqual(proof["control_authority_sha"], "a" * 40)
         self.assertFalse(proof["integration_freeze_authorized"])
         self.assertEqual(
             proof["identity_counts"]["PROVISIONAL_NEW"],
@@ -318,10 +320,12 @@ class ExpansionStartupProofTests(unittest.TestCase):
             ),
             proof_sha256="8" * 64,
             integration_freeze_sha256="9" * 64,
+            stage1_control_authority_sha="a" * 40,
             venue_reconciliation_ref=None,
         )
         validate_request(request)
         self.assertEqual(request["operation"], "EXPANSION_PHASE0")
+        self.assertEqual(request["stage1_control_authority_sha"], "a" * 40)
         self.assertTrue(request["authority"]["expansion_phase0"])
         self.assertFalse(request["authority"]["phase0"])
         self.assertFalse(request["authority"]["owner_gate_1"])
@@ -336,6 +340,7 @@ class ExpansionStartupProofTests(unittest.TestCase):
             proof_path=".remote-implementation/startups/example/proof.json",
             proof_sha256="8" * 64,
             integration_freeze_sha256="9" * 64,
+            stage1_control_authority_sha="a" * 40,
             venue_reconciliation_ref={
                 "path": (
                     ".remote-implementation/startups/example/"
