@@ -307,8 +307,11 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         self,
         *,
         reconciled_venues: bool = False,
+        safe_reuse_venues: bool = False,
         missing_reconciliation_binding: bool = False,
         bad_final_venue_proof: bool = False,
+        safe_reuse_bad_preview_hash: bool = False,
+        safe_reuse_new_registration: bool = False,
         unrelated_package_mismatch: bool = False,
     ):
         repo = Path(tempfile.mkdtemp(prefix="stage2-authority-test-"))
@@ -330,8 +333,12 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         ):
             candidate_data = (name + "\n").encode()
             final_data = candidate_data
-            if reconciled_venues and name == "venues.csv":
-                final_data = b"venues.csv canonicalized explicit reuse\n"
+            if (reconciled_venues or safe_reuse_venues) and name == "venues.csv":
+                final_data = (
+                    b"venues.csv canonicalized explicit reuse\n"
+                    if reconciled_venues
+                    else b"venues.csv canonicalized safe registered reuse\n"
+                )
             if unrelated_package_mismatch and name == "notes.md":
                 final_data = b"notes.md unrelated mismatch\n"
             (school_dir / name).write_bytes(final_data)
@@ -358,6 +365,14 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                     "SAFE_REPRESENTATION_REUSE": 1,
                 },
             }
+        if safe_reuse_venues:
+            freeze["global_venue_reconciliation"] = {
+                "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER": 0,
+                "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": (
+                    1 if safe_reuse_new_registration else 0
+                ),
+                "REUSE_REGISTERED_GLOBAL_VENUE": 1,
+            }
         freeze_bytes = (
             json.dumps(freeze, indent=2, sort_keys=True) + "\n"
         ).encode()
@@ -378,15 +393,65 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             "semantic_snapshot_sha256": SEMANTIC,
             "sidecars": {"integration-freeze.json": freeze_sha},
         }
+        if safe_reuse_venues:
+            preview_venue_hash = final_hashes["venues.csv"]
+            if safe_reuse_bad_preview_hash:
+                preview_venue_hash = "0" * 64
+            preview = {
+                "schema_version": 1,
+                "kind": "ALL_HISTORY_EXPANSION_PHASE0_DISPOSABLE_PREVIEW",
+                "status": "DISPOSABLE_ONLY_NOT_PUBLISHED",
+                "school_key": SCHOOL,
+                "protected_main_sha": "1" * 40,
+                "integration_freeze_sha256": freeze_sha,
+                "venue_reconciliation_sha256": "",
+                "rebased_venue_mapping_count": 1,
+                "supplemental_venue_rows_rebased": 1,
+                "global_venue_registration_count": (
+                    1 if safe_reuse_new_registration else 0
+                ),
+                "new_global_venue_ids_and_keys": (
+                    [["VEN-999999", "new-venue"]]
+                    if safe_reuse_new_registration
+                    else []
+                ),
+                "venue_identity_census": {
+                    "status": "PASS",
+                    "blocker_count": 0,
+                    "new_support_count": 1,
+                    "rows": [{
+                        "venue_key": "existing-venue",
+                        "registration_safe": True,
+                        "existing_key_reuse_id": "VEN-000123",
+                        "possible_existing_global_ids": ["VEN-000123"],
+                    }],
+                },
+                "six_file_preview_sha256": {
+                    "venues.csv": preview_venue_hash,
+                },
+            }
+            preview_bytes = (
+                json.dumps(preview, indent=2, sort_keys=True) + "\n"
+            ).encode()
+            preview_path = str(
+                Path(writeahead_path).parent / "phase0-preview.json"
+            )
+            (repo / preview_path).write_bytes(preview_bytes)
+            writeahead["sidecars"]["phase0-preview.json"] = (
+                hashlib.sha256(preview_bytes).hexdigest()
+            )
+
         successor_extra = {}
-        if reconciled_venues:
+        if reconciled_venues or safe_reuse_venues:
             school_venue_path = f"schools/{SCHOOL}/venues.csv"
             final_venue_hash = final_hashes["venues.csv"]
             if bad_final_venue_proof:
                 final_venue_hash = "0" * 64
             writeahead.update({
                 "operation": "EXPANSION_PHASE0",
-                "venue_reconciliation_sha256": reconciliation_sha,
+                "venue_reconciliation_sha256": (
+                    reconciliation_sha if reconciled_venues else ""
+                ),
                 "package_member_sha256": package_hashes,
                 "changed_paths": [school_venue_path],
                 "changed_file_sha256": {
@@ -395,7 +460,9 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             })
             successor_extra = {
                 "operation": "EXPANSION_PHASE0",
-                "venue_reconciliation_sha256": reconciliation_sha,
+                "venue_reconciliation_sha256": (
+                    reconciliation_sha if reconciled_venues else ""
+                ),
                 "changed_paths": [school_venue_path],
                 "changed_file_sha256": {
                     school_venue_path: final_venue_hash,
@@ -681,6 +748,25 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         self.assertEqual(
             authority["successor"]["operation"],
             "EXPANSION_PHASE0",
+        )
+
+    def test_safe_registered_venue_reuse_survives_verified_display_successor(self):
+        repo, _, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+        )
+        control_sha, request = self.add_verified_display_successor(repo, request)
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["target_authority_kind"],
+            "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+        )
+        self.assertEqual(
+            authority["phase0_preview"]["rebased_venue_mapping_count"],
+            1,
         )
 
     def test_expansion_display_chain_rejects_missing_venue_reconciliation_binding(self):
@@ -1201,6 +1287,54 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             authority["successor"]["operation"],
             "EXPANSION_PHASE0",
         )
+
+    def test_expansion_phase0_safe_registered_venue_reuse_is_authenticated(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+        )
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["successor"]["operation"],
+            "EXPANSION_PHASE0",
+        )
+        self.assertEqual(
+            authority["phase0_preview"]["global_venue_registration_count"],
+            0,
+        )
+
+    def test_safe_registered_venue_reuse_requires_exact_preview_hash(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            safe_reuse_bad_preview_hash=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_SAFE_VENUE_REUSE_FINAL_HASH_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_safe_registered_venue_reuse_rejects_new_global_registration(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            safe_reuse_new_registration=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
 
     def test_expansion_reconciled_venues_require_reconciliation_binding(self):
         repo, control_sha, request, _ = self.make_authority_repo(
