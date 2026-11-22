@@ -38,6 +38,122 @@ RUNTIME_ROOT = Path(__file__).resolve().parents[1]
 OPPONENT_DISPLAY_PACKAGE_FILES = ("opponents.csv", "source-games.csv")
 
 
+def _verify_phase0_opponent_display_reconciliation(
+    *,
+    school_key: str,
+    phase0_target_sha: str,
+    integration: dict[str, Any],
+    successor: dict[str, Any],
+    writeahead: dict[str, Any],
+    control_commit: str,
+    source_repo: Path,
+) -> dict[str, Any] | None:
+    metadata = integration.get("opponent_display_reconciliation")
+    reconciliation_sha = str(
+        integration.get("opponent_display_reconciliation_sha256") or ""
+    )
+    if metadata is None:
+        if reconciliation_sha:
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_METADATA_MISSING"
+            )
+        return None
+    if not isinstance(metadata, dict) or not reconciliation_sha:
+        raise Stop("STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_INVALID")
+    if metadata.get("spec_sha256") != reconciliation_sha:
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_FREEZE_BINDING_MISMATCH"
+        )
+    if (
+        successor.get("opponent_display_reconciliation_sha256") != reconciliation_sha
+        or writeahead.get("opponent_display_reconciliation_sha256")
+        != reconciliation_sha
+    ):
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_DURABLE_BINDING_MISMATCH"
+        )
+    sidecars = writeahead.get("sidecars") or {}
+    if sidecars.get("opponent-display-reconciliation.json") != reconciliation_sha:
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_SIDECAR_MISMATCH"
+        )
+    sidecar_path = (
+        Path(successor["writeahead_manifest_path"]).parent
+        / "opponent-display-reconciliation.json"
+    ).as_posix()
+    sidecar_bytes = git_show_bytes(control_commit, sidecar_path, cwd=source_repo)
+    if sha256_bytes(sidecar_bytes) != reconciliation_sha:
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_BYTES_MISMATCH"
+        )
+    try:
+        sidecar = json.loads(sidecar_bytes)
+    except ValueError as exc:
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_JSON_INVALID"
+        ) from exc
+    if (
+        sidecar.get("kind")
+        != "ALL_HISTORY_EXPANSION_OPPONENT_DISPLAY_RECONCILIATION"
+        or sidecar.get("school_key") != school_key
+        or sidecar.get("protected_main_sha") != integration.get("protected_main_sha")
+        or sidecar.get("research_freeze_sha256")
+        != integration.get("research_freeze_zip_sha256")
+    ):
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_IDENTITY_MISMATCH"
+        )
+    before = metadata.get("before_sha256") or {}
+    after = metadata.get("after_sha256") or {}
+    if (
+        set(before) != set(OPPONENT_DISPLAY_PACKAGE_FILES)
+        or set(after) != set(OPPONENT_DISPLAY_PACKAGE_FILES)
+    ):
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_HASH_SET_INVALID"
+        )
+    package_hashes = integration.get("package_member_sha256") or {}
+    for name in OPPONENT_DISPLAY_PACKAGE_FILES:
+        if before.get(name) != package_hashes.get(name):
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_BEFORE_HASH_MISMATCH:"
+                + name
+            )
+        actual = _school_package_hash(
+            phase0_target_sha, school_key, name, source_repo=source_repo
+        )
+        if actual != after.get(name):
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_AFTER_HASH_MISMATCH:"
+                + name
+            )
+    proof = metadata.get("field_level_proof") or {}
+    for field in (
+        "literal_evidence_changes",
+        "opponent_key_changes",
+        "source_game_non_name_field_changes",
+        "opponent_current_d1_changed_key_count",
+    ):
+        if int(proof.get(field, -1)) != 0:
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_NONREPRESENTATIONAL:"
+                + field
+            )
+    if sorted(proof.get("opponent_changed_keys") or []) != sorted(
+        metadata.get("changed_opponent_keys") or []
+    ):
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_KEY_PROOF_MISMATCH"
+        )
+    if sorted(proof.get("source_game_changed_ids") or []) != sorted(
+        metadata.get("changed_source_game_ids") or []
+    ):
+        raise Stop(
+            "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILIATION_SOURCE_PROOF_MISMATCH"
+        )
+    return metadata
+
+
 
 def normalize_artifact_bytes(
     name: str,
@@ -746,6 +862,7 @@ def _verify_phase0_package_member(
     successor: dict[str, Any],
     writeahead: dict[str, Any],
     integration: dict[str, Any],
+    display_reconciliation: dict[str, Any] | None = None,
 ) -> None:
     """Authenticate one Phase 0 school-package member.
 
@@ -759,6 +876,31 @@ def _verify_phase0_package_member(
     if not expected:
         raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISSING:%s" % name)
     if actual == expected:
+        return
+    if (
+        name in OPPONENT_DISPLAY_PACKAGE_FILES
+        and display_reconciliation is not None
+    ):
+        before = display_reconciliation.get("before_sha256") or {}
+        after = display_reconciliation.get("after_sha256") or {}
+        if before.get(name) != expected or after.get(name) != actual:
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILED_PACKAGE_HASH_MISMATCH:%s"
+                % name
+            )
+        school_path = "schools/%s/%s" % (school_key, name)
+        successor_changed = successor.get("changed_file_sha256") or {}
+        writeahead_changed = writeahead.get("changed_file_sha256") or {}
+        if (
+            school_path not in set(successor.get("changed_paths") or [])
+            or school_path not in set(writeahead.get("changed_paths") or [])
+            or successor_changed.get(school_path) != actual
+            or writeahead_changed.get(school_path) != actual
+        ):
+            raise Stop(
+                "STAGE2_PHASE0_OPPONENT_DISPLAY_RECONCILED_PACKAGE_PROOF_MISMATCH:%s"
+                % name
+            )
         return
     if name != "venues.csv":
         raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
@@ -981,6 +1123,15 @@ def verify_phase0_authority(
         raise Stop("STAGE2_INTEGRATION_FREEZE_SEMANTIC_MISMATCH")
 
     package_hashes = integration.get("package_member_sha256") or {}
+    display_reconciliation = _verify_phase0_opponent_display_reconciliation(
+        school_key=request["school_key"],
+        phase0_target_sha=phase0_target_sha,
+        integration=integration,
+        successor=successor,
+        writeahead=writeahead,
+        control_commit=control_commit,
+        source_repo=source_repo,
+    )
     for name in REQUIRED_PACKAGE_FILES:
         expected = package_hashes.get(name)
         actual = _school_package_hash(
@@ -997,6 +1148,7 @@ def verify_phase0_authority(
             successor=successor,
             writeahead=writeahead,
             integration=integration,
+            display_reconciliation=display_reconciliation,
         )
 
     display_authority: dict[str, Any] | None = None
@@ -1028,6 +1180,7 @@ def verify_phase0_authority(
         "phase0_protected_main_sha": successor.get("protected_main_sha"),
         "target_authority_kind": target_authority_kind,
         "opponent_display_authority": display_authority,
+        "phase0_opponent_display_reconciliation": display_reconciliation,
     }
 
 
