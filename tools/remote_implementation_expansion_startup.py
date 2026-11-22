@@ -23,6 +23,7 @@ from all_history_expansion_integration import (
     PACKAGE_FILES,
     STAGE1_REPORT,
 )
+from all_history_expansion_opponent_display import derive_reconciliation
 from remote_implementation_control import (
     canonical_json_bytes,
     sha256_bytes,
@@ -323,6 +324,7 @@ def build_phase0_request(
     integration_freeze_sha256: str,
     stage1_control_authority_sha: str,
     venue_reconciliation_ref: dict[str, str] | None,
+    opponent_display_reconciliation_ref: dict[str, str] | None,
 ) -> dict[str, Any]:
     meta = validate_startup_intent(intent)
     provenance = intent["creation_provenance"]
@@ -362,6 +364,10 @@ def build_phase0_request(
     }
     if venue_reconciliation_ref is not None:
         request["venue_reconciliation"] = venue_reconciliation_ref
+    if opponent_display_reconciliation_ref is not None:
+        request["opponent_display_reconciliation"] = (
+            opponent_display_reconciliation_ref
+        )
     validate_request(request)
     return request
 
@@ -723,6 +729,23 @@ def run_startup() -> dict[str, Any]:
     proof_sha = sha256_file(proof_path)
     preserve_preintegration_diagnostics(stage1_b, proof_path)
 
+    opponent_display_path: Path | None = None
+    opponent_display_ref: dict[str, str] | None = None
+    display = derive_reconciliation(
+        ROOT,
+        meta["school_key"],
+        stage1_b,
+        protected_main_sha=live_main,
+        research_freeze_sha256=meta["research_freeze_sha256"],
+    )
+    if display["required"]:
+        opponent_display_path = (
+            scratch / "opponent-display-reconciliation.json"
+        )
+        opponent_display_path.write_bytes(
+            canonical_json_bytes(display["document"])
+        )
+
     integration = scratch / "integration-freeze"
     cmd = [
         sys.executable,
@@ -752,6 +775,13 @@ def run_startup() -> dict[str, Any]:
     if venue_path is not None:
         cmd.extend(
             ["--venue-reconciliation", str(venue_path)]
+        )
+    if opponent_display_path is not None:
+        cmd.extend(
+            [
+                "--opponent-display-reconciliation",
+                str(opponent_display_path),
+            ]
         )
     cp = run(cmd, cwd=ROOT, check=False)
     if cp.returncode != 0:
@@ -855,6 +885,16 @@ def run_startup() -> dict[str, Any]:
             "path": durable_venue.as_posix(),
             "sha256": durable_venue_sha,
         }
+    if opponent_display_path is not None:
+        durable_display, durable_display_sha = _copy_payload(
+            opponent_display_path,
+            directory,
+            "opponent-display-reconciliation.json",
+        )
+        opponent_display_ref = {
+            "path": durable_display.as_posix(),
+            "sha256": durable_display_sha,
+        }
 
     manifest = {
         "schema_version": 1,
@@ -881,6 +921,10 @@ def run_startup() -> dict[str, Any]:
         "stage1_control_authority_sha": durable_head,
         "integration_freeze_sha256": integration_sha,
         "phase0_preview_sha256": preview_sha,
+        "opponent_display_reconciliation_sha256": (
+            opponent_display_ref["sha256"]
+            if opponent_display_ref is not None else ""
+        ),
         "tracked_basketball_mutation": (
             "NONE_PREPARATION_ONLY"
         ),
@@ -906,6 +950,7 @@ def run_startup() -> dict[str, Any]:
         integration_freeze_sha256=integration_sha,
         stage1_control_authority_sha=durable_head,
         venue_reconciliation_ref=venue_ref,
+        opponent_display_reconciliation_ref=opponent_display_ref,
     )
     request_path = Path(
         ".remote-implementation/request.json"
