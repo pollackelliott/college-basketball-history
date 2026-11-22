@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from expansion_implementation_stage1 import (
     Stage1Stop, build_candidate, classify_current_main_canonical_drift,
     csv_rows, materialize_support, prepare_current_main_identity_rebase,
-    reconcile_canonical, render_csv, sha256, stage1,
+    canonical_bytes, reconcile_canonical, render_csv, sha256, stage1,
 )
 from all_history_expansion_freeze import canonical_row_sha256, OPPONENT_EXTENSION_FIELDS
 
