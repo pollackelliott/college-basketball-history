@@ -1,4 +1,4 @@
-name: Validate expansion pre-Phase0 opponent display reconciliation
+# Validation trigger after workflow registration.\nname: Validate expansion pre-Phase0 opponent display reconciliation
 
 on:
   push:
