@@ -911,16 +911,52 @@ def _verify_phase0_package_member(
         raise Stop("STAGE2_PHASE0_PACKAGE_HASH_MISMATCH:%s" % name)
 
     reconciliation_sha = str(integration.get("venue_reconciliation_sha256") or "")
-    if not reconciliation_sha:
-        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING")
-    if (
-        successor.get("venue_reconciliation_sha256") != reconciliation_sha
-        or writeahead.get("venue_reconciliation_sha256") != reconciliation_sha
-    ):
-        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISMATCH")
-    census = integration.get("venue_reconciliation_census")
-    if not isinstance(census, dict) or census.get("blocker_count") != 0:
-        raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_NOT_CLEAN")
+    if reconciliation_sha:
+        if (
+            successor.get("venue_reconciliation_sha256") != reconciliation_sha
+            or writeahead.get("venue_reconciliation_sha256") != reconciliation_sha
+        ):
+            raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISMATCH")
+        census = integration.get("venue_reconciliation_census")
+        if not isinstance(census, dict) or census.get("blocker_count") != 0:
+            raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_NOT_CLEAN")
+    else:
+        # The Integration Freeze requires an explicit sidecar only when a
+        # supplemental venue identity needs adjudicated conflict resolution.
+        # A clean Stage-1 census may instead classify every new venue support
+        # as either deterministic reuse of a registered global identity or a
+        # deterministic new global registration. Phase 0 is the permanent
+        # projector for that ordinary case, and its exact final bytes remain
+        # independently bound by write-ahead/successor hashes.
+        global_counts = integration.get("global_venue_reconciliation")
+        support_counts = integration.get("venue_support_actions")
+        if not isinstance(global_counts, dict) or not isinstance(
+            support_counts, dict
+        ):
+            raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING")
+        blockers = int(
+            global_counts.get("GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER", -1)
+        )
+        reused = int(global_counts.get("REUSE_REGISTERED_GLOBAL_VENUE", -1))
+        registered = int(
+            global_counts.get("NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED", -1)
+        )
+        new_support = int(support_counts.get("NEW_SUPPLEMENTAL", -1))
+        if (
+            blockers != 0
+            or reused < 0
+            or registered < 0
+            or new_support <= 0
+            or new_support != reused + registered
+        ):
+            raise Stop("STAGE2_PHASE0_VENUE_RECONCILIATION_BINDING_MISSING")
+        if (
+            str(successor.get("venue_reconciliation_sha256") or "")
+            or str(writeahead.get("venue_reconciliation_sha256") or "")
+        ):
+            raise Stop(
+                "STAGE2_PHASE0_UNEXPECTED_VENUE_RECONCILIATION_BINDING"
+            )
     if (
         (writeahead.get("package_member_sha256") or {}).get(name)
         != expected

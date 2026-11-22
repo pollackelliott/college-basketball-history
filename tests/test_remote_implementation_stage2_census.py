@@ -307,6 +307,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         self,
         *,
         reconciled_venues: bool = False,
+        automatic_venue_rebase: bool = False,
         missing_reconciliation_binding: bool = False,
         bad_final_venue_proof: bool = False,
         unrelated_package_mismatch: bool = False,
@@ -342,14 +343,22 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         self.git(repo, "commit", "-m", "target")
         target_sha = self.git(repo, "rev-parse", "HEAD")
 
-        reconciliation_sha = "7" * 64 if reconciled_venues else ""
+        reconciliation_sha = (
+            "7" * 64
+            if reconciled_venues and not automatic_venue_rebase
+            else ""
+        )
         freeze = {
             "status": "INTEGRATION_FROZEN",
             "school_key": SCHOOL,
             "package_member_sha256": package_hashes,
             "source_game_semantic_guard": {"snapshot_sha256": SEMANTIC},
         }
-        if reconciled_venues and not missing_reconciliation_binding:
+        if (
+            reconciled_venues
+            and not automatic_venue_rebase
+            and not missing_reconciliation_binding
+        ):
             freeze["venue_reconciliation_sha256"] = reconciliation_sha
             freeze["venue_reconciliation_census"] = {
                 "blocker_count": 0,
@@ -357,6 +366,19 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                     "NEW_GLOBAL_IDENTITY": 0,
                     "SAFE_REPRESENTATION_REUSE": 1,
                 },
+            }
+        if reconciled_venues and automatic_venue_rebase:
+            freeze["venue_reconciliation_sha256"] = ""
+            freeze["venue_reconciliation_census"] = None
+            freeze["global_venue_reconciliation"] = {
+                "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER": 0,
+                "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": 0,
+                "REUSE_REGISTERED_GLOBAL_VENUE": 1,
+            }
+            freeze["venue_support_actions"] = {
+                "EXTEND_INHERITED": 0,
+                "NEW_SUPPLEMENTAL": 1,
+                "REUSE_INHERITED": 0,
             }
         freeze_bytes = (
             json.dumps(freeze, indent=2, sort_keys=True) + "\n"
@@ -1251,6 +1273,21 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         self.assertEqual(
             authority["successor"]["operation"],
             "EXPANSION_PHASE0",
+        )
+
+    def test_expansion_automatic_venue_rebase_is_authenticated_without_sidecar(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            reconciled_venues=True,
+            automatic_venue_rebase=True,
+        )
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["successor"]["venue_reconciliation_sha256"],
+            "",
         )
 
     def test_expansion_reconciled_venues_require_reconciliation_binding(self):
