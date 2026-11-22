@@ -1473,11 +1473,11 @@
   "current_sequence": 709,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "ed9e3c9ea7d0089147694d239057d8f54177d45ce8a31b960f4bb9b01e80deb2",
     "operation": "EXPANSION_PHASE0",
     "protected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "miami-expansion-phase0-0005",
     "school_key": "miami",
     "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
