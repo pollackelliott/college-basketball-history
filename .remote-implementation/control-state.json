@@ -755,7 +755,7 @@
   "active_request_sha256": "f56a99da9c87eec8ae776cfa2bf7373ea9dd980eba3cee7f4d422d76ab96264a",
   "active_school_key": "miami",
   "active_target_branch": "data/miami-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "e100ec2ca6ec37c01425af1ea3af982952991c5d",
   "active_writeahead_path": ".remote-implementation/writeahead/miami/miami-expansion-phase0-0005/writeahead-manifest.json",
   "active_writeahead_sha256": "556357a2d2bb4320075bebcf413461b2000cc2470c70682ac0928fd0759838f6",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
