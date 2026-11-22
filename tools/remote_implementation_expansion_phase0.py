@@ -450,6 +450,8 @@ def _install_scope_generated_projection(
             str(worktree / "tools" / "build_site_data.py"),
             str(worktree),
             "--apply",
+            "--pending-opponent-display-school",
+            request["school_key"],
         ],
         cwd=worktree,
         check=False,
