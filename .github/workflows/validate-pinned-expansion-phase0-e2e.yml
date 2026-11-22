@@ -1,0 +1,354 @@
+name: Validate pinned expansion Phase 0 full isolated transaction
+
+on:
+  push:
+    branches:
+      - 'request-validation/pinned-expansion-phase0-e2e-f89715'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact candidate runtime
+        uses: actions/checkout@v4
+        with:
+          ref: f8971522216323c00e1ba289d4f382192fecaf48
+          path: runtime
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out exact Miami transport parent
+        uses: actions/checkout@v4
+        with:
+          ref: cb1c4eac8af27f622ad148fa51bc9f666eeca38b
+          path: control
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out independent live observer
+        uses: actions/checkout@v4
+        with:
+          ref: 19dc85c18902234c2241e39d3ba34006d2903e80
+          path: observer
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build isolated origin and fresh startup event
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C runtime rev-parse HEAD)" = "f8971522216323c00e1ba289d4f382192fecaf48"
+          test "$(git -C control rev-parse HEAD)" = "cb1c4eac8af27f622ad148fa51bc9f666eeca38b"
+
+          git -C runtime fetch --no-tags origin \
+            "+refs/heads/main:refs/remotes/origin/live-main" \
+            "+refs/heads/data/miami-onboarding:refs/remotes/origin/live-miami"
+          test "$(git -C runtime rev-parse refs/remotes/origin/live-main)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C runtime rev-parse refs/remotes/origin/live-miami)" = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+
+          git -C control fetch --no-tags origin "85c0573c0a9bf74db90cf5e59a0319a7122aed93"
+          git -C control config user.name "validation-only"
+          git -C control config user.email "validation-only@example.com"
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          control = Path("control")
+          raw = subprocess.check_output(
+              [
+                  "git", "-C", str(control), "show",
+                  "85c0573c0a9bf74db90cf5e59a0319a7122aed93:.remote-implementation/expansion-startup.json",
+              ]
+          )
+          intent = json.loads(raw)
+          intent["startup_id"] = "miami-expansion-startup-isolated-e2e-0001"
+          intent["phase0_request_id"] = "miami-expansion-phase0-isolated-e2e-0001"
+          intent["expected_protected_main_sha"] = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          intent["target_sha"] = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          intent["creation_provenance"] = {
+              "origin": "Control Center isolated full transaction validation",
+              "authorization": (
+                  "Validation-only generic repair proof. Execute startup, guarded "
+                  "EXPANSION_PHASE0, and independent fresh verifier exclusively "
+                  "against an isolated local origin. No live authority is created."
+              ),
+          }
+          path = control / ".remote-implementation" / "expansion-startup.json"
+          path.write_text(
+              json.dumps(intent, sort_keys=True, separators=(",", ":")) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+          git -C control add .remote-implementation/expansion-startup.json
+          git -C control commit -m "validation only: fresh Miami isolated e2e startup"
+          synthetic_startup="$(git -C control rev-parse HEAD)"
+          test "$(git -C control rev-parse HEAD^)" = "cb1c4eac8af27f622ad148fa51bc9f666eeca38b"
+          echo "$synthetic_startup" > /tmp/synthetic-startup-sha
+
+          git init --bare "$GITHUB_WORKSPACE/isolated-origin.git"
+
+          git -C runtime remote add isolated "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C runtime push isolated \
+            "19dc85c18902234c2241e39d3ba34006d2903e80:refs/heads/main" \
+            "refs/remotes/origin/live-miami:refs/heads/data/miami-onboarding"
+
+          git -C control remote add isolated "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C control push isolated \
+            "HEAD:refs/heads/control/remote-implementation"
+
+          git -C runtime remote set-url origin "$GITHUB_WORKSPACE/isolated-origin.git"
+          git -C control remote set-url origin "$GITHUB_WORKSPACE/isolated-origin.git"
+
+          mkdir -p /tmp/pinned-phase0-e2e /tmp/fake-bin
+          cat > /tmp/fake-bin/gh <<'SH'
+          #!/usr/bin/env bash
+          echo "validation-only fake dispatch: $*"
+          exit 0
+          SH
+          chmod +x /tmp/fake-bin/gh
+
+      - name: Run actual startup coordinator
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GH_TOKEN: validation-only
+        run: |
+          set -euo pipefail
+          export PATH="/tmp/fake-bin:$PATH"
+          export REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_DIAG=/tmp/pinned-phase0-e2e/startup-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_expansion_startup.py" \
+              | tee /tmp/pinned-phase0-e2e/startup-result.json
+          )
+
+          synthetic="$(cat /tmp/synthetic-startup-sha)"
+          request_commit="$(git -C control rev-parse HEAD)"
+          test "$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)" = "$request_commit"
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          control = Path("control")
+          synthetic = Path("/tmp/synthetic-startup-sha").read_text().strip()
+          request = json.loads(
+              (control / ".remote-implementation/request.json").read_text()
+          )
+          assert request["operation"] == "EXPANSION_PHASE0", request
+          assert request["request_id"] == "miami-expansion-phase0-isolated-e2e-0001"
+          assert request["expected_protected_main_sha"] == "19dc85c18902234c2241e39d3ba34006d2903e80"
+          assert request["target_sha"] == "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          assert request["stage1_control_authority_sha"] == synthetic, request
+
+          proof = json.loads(
+              subprocess.check_output(
+                  [
+                      "git", "-C", str(control), "show",
+                      "HEAD:" + request["stage1_independent_proof"]["path"],
+                  ]
+              )
+          )
+          assert proof["control_authority_sha"] == synthetic, proof
+          print(
+              json.dumps(
+                  {
+                      "startup_status": "PASS",
+                      "synthetic_startup_sha": synthetic,
+                      "request_commit": subprocess.check_output(
+                          ["git", "-C", str(control), "rev-parse", "HEAD"],
+                          text=True,
+                      ).strip(),
+                      "stage1_control_authority_sha": request[
+                          "stage1_control_authority_sha"
+                      ],
+                  },
+                  sort_keys=True,
+              )
+          )
+          PY
+
+      - name: Run actual guarded EXPANSION_PHASE0 runner
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+          GITHUB_RUN_ID: '990001'
+          GITHUB_RUN_ATTEMPT: '1'
+        run: |
+          set -euo pipefail
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/pinned-phase0-e2e/runner-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_runner.py" \
+              | tee /tmp/pinned-phase0-e2e/runner.log
+          )
+
+          control_head="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          target_head="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/data/miami-onboarding)"
+          test "$target_head" != "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+          echo "$control_head" > /tmp/runner-control-head
+          echo "$target_head" > /tmp/runner-target-head
+
+          git -C control fetch --no-tags origin \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$control_head"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          synthetic = Path("/tmp/synthetic-startup-sha").read_text().strip()
+          state = json.loads(
+              (control / ".remote-implementation/control-state.json").read_text()
+          )
+          assert state["lifecycle_state"] == "IDLE", state
+          assert state["transaction_state"] == "COMPLETE", state
+          last = state["last_operation"]
+          assert last["operation"] == "EXPANSION_PHASE0", last
+          assert last["request_id"] == "miami-expansion-phase0-isolated-e2e-0001"
+          assert last["fresh_runner_verification"] == "PENDING", last
+
+          successor = json.loads(
+              (
+                  control
+                  / last["successor_manifest_path"]
+              ).read_text()
+          )
+          assert successor["stage1_control_authority_sha"] == synthetic, successor
+          assert successor["prepared_parent_sha"] == "19dc85c18902234c2241e39d3ba34006d2903e80", successor
+          assert successor["expected_target_predecessor_sha"] == "817197e3410a893bd1f481d4cce5aa630cc1c7e3", successor
+
+          writeahead = json.loads(
+              (
+                  control
+                  / successor["writeahead_manifest_path"]
+              ).read_text()
+          )
+          assert writeahead["stage1_control_authority_sha"] == synthetic, writeahead
+
+          print(
+              json.dumps(
+                  {
+                      "runner_status": "PASS",
+                      "runner_control_head": Path(
+                          "/tmp/runner-control-head"
+                      ).read_text().strip(),
+                      "published_target": Path(
+                          "/tmp/runner-target-head"
+                      ).read_text().strip(),
+                      "stage1_control_authority_sha": synthetic,
+                      "transaction_state": state["transaction_state"],
+                  },
+                  sort_keys=True,
+              )
+          )
+          PY
+
+      - name: Run actual independent fresh Phase 0 verifier
+        shell: bash
+        env:
+          GITHUB_REPOSITORY: pollackelliott/college-basketball-history
+        run: |
+          set -euo pipefail
+          export REMOTE_IMPLEMENTATION_DIAG=/tmp/pinned-phase0-e2e/verifier-diag
+          (
+            cd control
+            env -u GITHUB_SHA python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py" \
+              | tee /tmp/pinned-phase0-e2e/verifier.log
+          )
+
+          verified_control="$(git --git-dir="$GITHUB_WORKSPACE/isolated-origin.git" rev-parse refs/heads/control/remote-implementation)"
+          git -C control fetch --no-tags origin \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/remote-control"
+          git -C control reset --hard "$verified_control"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          control = Path("control")
+          synthetic = Path("/tmp/synthetic-startup-sha").read_text().strip()
+          state = json.loads(
+              (control / ".remote-implementation/control-state.json").read_text()
+          )
+          assert state["lifecycle_state"] == "IDLE", state
+          assert state["transaction_state"] == "COMPLETE", state
+          last = state["last_operation"]
+          assert last["operation"] == "EXPANSION_PHASE0", last
+          assert last["fresh_runner_verification"] == "PASS", last
+          assert last["remote_phase0_equivalence"] == "PASS", last
+
+          verify_path = (
+              control
+              / ".remote-implementation"
+              / "verifications"
+              / "miami"
+              / "miami-expansion-phase0-isolated-e2e-0001"
+              / "expansion-phase0-verification.json"
+          )
+          verification = json.loads(verify_path.read_text())
+          assert verification["status"] == "PASS", verification
+          assert verification["stage1_control_authority_sha"] == synthetic, verification
+          assert verification["independent_exact_tree_equivalence"] == "PASS", verification
+
+          target_head = Path("/tmp/runner-target-head").read_text().strip()
+          assert verification["target_sha"] == target_head, verification
+
+          summary = {
+              "status": "PASS",
+              "candidate_runtime_sha": "f8971522216323c00e1ba289d4f382192fecaf48",
+              "protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+              "transport_parent_sha": "cb1c4eac8af27f622ad148fa51bc9f666eeca38b",
+              "synthetic_startup_sha": synthetic,
+              "startup_request_id": "miami-expansion-phase0-isolated-e2e-0001",
+              "stage1_control_authority_sha": verification[
+                  "stage1_control_authority_sha"
+              ],
+              "published_target_sha": target_head,
+              "fresh_runner_verification": last["fresh_runner_verification"],
+              "remote_phase0_equivalence": last["remote_phase0_equivalence"],
+              "independent_exact_tree_equivalence": verification[
+                  "independent_exact_tree_equivalence"
+              ],
+              "live_control_mutation": "NONE",
+              "live_miami_mutation": "NONE",
+          }
+          Path("/tmp/pinned-phase0-e2e/summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(summary, sort_keys=True))
+          PY
+
+      - name: Reauthenticate live repository untouched
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C observer fetch --no-tags origin \
+            "+refs/heads/main:refs/remotes/origin/live-main" \
+            "+refs/heads/control/remote-implementation:refs/remotes/origin/live-control" \
+            "+refs/heads/data/miami-onboarding:refs/remotes/origin/live-miami"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-main)" = "19dc85c18902234c2241e39d3ba34006d2903e80"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-control)" = "9f151e5c478da2ceccc6c1fadf0e3a3b50b14d58"
+          test "$(git -C observer rev-parse refs/remotes/origin/live-miami)" = "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+
+      - name: Upload full isolated transaction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinned-expansion-phase0-e2e-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/pinned-phase0-e2e/
+          if-no-files-found: warn
+          retention-days: 14
