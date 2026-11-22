@@ -271,6 +271,7 @@ def build_stage1_proof(
     protected_main_sha: str,
     research_base_sha: str,
     freeze_zip_sha256: str,
+    stage1_control_authority_sha: str,
 ) -> dict[str, Any]:
     """Build the exact generic proof consumed by Integration Freeze."""
     return {
@@ -284,11 +285,7 @@ def build_stage1_proof(
         "support_opponents": report["census"]["opponent_support_actions"],
         "support_venues": report["census"]["venue_support_actions"],
         "blockers": report["blockers"],
-        "control_authority_sha": (
-            (report.get("current_main_reconciliation") or {}).get(
-                "control_authority_sha", ""
-            )
-        ),
+        "control_authority_sha": stage1_control_authority_sha,
         "integration_freeze_authorized": False,
     }
 
@@ -324,6 +321,7 @@ def build_phase0_request(
     proof_path: str,
     proof_sha256: str,
     integration_freeze_sha256: str,
+    stage1_control_authority_sha: str,
     venue_reconciliation_ref: dict[str, str] | None,
 ) -> dict[str, Any]:
     meta = validate_startup_intent(intent)
@@ -341,6 +339,7 @@ def build_phase0_request(
         "target_sha": meta["target_sha"],
         "research_freeze_sha256": meta["research_freeze_sha256"],
         "stage1_independent_proof_sha256": proof_sha256,
+        "stage1_control_authority_sha": stage1_control_authority_sha,
         "integration_freeze_sha256": integration_freeze_sha256,
         "expansion_research_checkpoint": intent[
             "expansion_research_checkpoint"
@@ -717,6 +716,7 @@ def run_startup() -> dict[str, Any]:
         protected_main_sha=live_main,
         research_base_sha=meta["research_base_sha"],
         freeze_zip_sha256=meta["research_freeze_sha256"],
+        stage1_control_authority_sha=durable_head,
     )
     proof_path = scratch / "stage1-independent-proof.json"
     proof_path.write_bytes(canonical_json_bytes(proof))
@@ -878,6 +878,7 @@ def run_startup() -> dict[str, Any]:
         "implementation_acceptance_sha256": acceptance_sha,
         "stage1_reconciliation_sha256": stage1_sha,
         "stage1_independent_proof_sha256": proof_sha,
+        "stage1_control_authority_sha": durable_head,
         "integration_freeze_sha256": integration_sha,
         "phase0_preview_sha256": preview_sha,
         "tracked_basketball_mutation": (
@@ -903,6 +904,7 @@ def run_startup() -> dict[str, Any]:
         proof_path=durable_proof.as_posix(),
         proof_sha256=proof_sha,
         integration_freeze_sha256=integration_sha,
+        stage1_control_authority_sha=durable_head,
         venue_reconciliation_ref=venue_ref,
     )
     request_path = Path(

@@ -217,6 +217,81 @@ def _verification_bound_main(
     return bound_main
 
 
+def _pin_stage1_control_authority(
+    request: dict[str, Any],
+    control_commit: str,
+    worktree: Path,
+) -> str:
+    """Pin replay to the exact control authority that produced Stage 1."""
+    pinned = str(request.get("stage1_control_authority_sha") or "")
+    if len(pinned) != 40 or any(c not in "0123456789abcdef" for c in pinned):
+        raise Stop("EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_INVALID")
+
+    control_repo = Path.cwd().resolve()
+    pinned_commit = git(
+        "rev-parse",
+        "--verify",
+        pinned + "^{commit}",
+        cwd=control_repo,
+        check=False,
+    )
+    if pinned_commit.returncode != 0 or pinned_commit.stdout.strip() != pinned:
+        raise Stop("EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_MISSING")
+
+    current_commit = git(
+        "rev-parse",
+        "--verify",
+        control_commit + "^{commit}",
+        cwd=control_repo,
+        check=False,
+    )
+    if (
+        current_commit.returncode != 0
+        or current_commit.stdout.strip() != control_commit
+    ):
+        raise Stop("EXPANSION_PHASE0_CONTROL_COMMIT_MISSING")
+
+    ancestor = git(
+        "merge-base",
+        "--is-ancestor",
+        pinned,
+        control_commit,
+        cwd=control_repo,
+        check=False,
+    )
+    if ancestor.returncode != 0:
+        raise Stop(
+            "EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_NOT_ANCESTOR "
+            "pinned=%s control=%s" % (pinned, control_commit)
+        )
+
+    git(
+        "fetch",
+        "--no-tags",
+        str(control_repo),
+        pinned,
+        cwd=worktree,
+    )
+    git(
+        "update-ref",
+        "refs/remotes/origin/remote-control",
+        pinned,
+        cwd=worktree,
+    )
+    observed = git(
+        "rev-parse",
+        "--verify",
+        "refs/remotes/origin/remote-control",
+        cwd=worktree,
+    ).stdout.strip()
+    if observed != pinned:
+        raise Stop(
+            "EXPANSION_PHASE0_STAGE1_CONTROL_AUTHORITY_PIN_MISMATCH "
+            "expected=%s actual=%s" % (pinned, observed)
+        )
+    return pinned
+
+
 def _external_authority(
     *,
     request: dict[str, Any],
@@ -226,6 +301,11 @@ def _external_authority(
     scratch: Path,
     authenticated_published_target_sha: str | None = None,
 ) -> dict[str, Any]:
+    stage1_control_authority_sha = _pin_stage1_control_authority(
+        request,
+        control_commit,
+        worktree,
+    )
     research_zip = scratch / "expansion-research-frozen.zip"
     checkpoint_info = materialize_expansion_research_checkpoint(request, research_zip)
     proof = materialize_payload(
@@ -237,6 +317,12 @@ def _external_authority(
         raise Stop("EXPANSION_PHASE0_STAGE1_PROOF_MISSING")
     if sha256_file(proof) != request["stage1_independent_proof_sha256"]:
         raise Stop("EXPANSION_PHASE0_STAGE1_PROOF_HASH_MISMATCH")
+    proof_payload = json.loads(proof.read_bytes())
+    if (
+        str(proof_payload.get("control_authority_sha") or "")
+        != stage1_control_authority_sha
+    ):
+        raise Stop("EXPANSION_PHASE0_STAGE1_PROOF_CONTROL_AUTHORITY_MISMATCH")
     venue_reconciliation = materialize_payload(
         control_commit,
         request.get("venue_reconciliation"),
@@ -311,6 +397,7 @@ def _external_authority(
 
     return {
         "checkpoint_info": checkpoint_info,
+        "stage1_control_authority_sha": stage1_control_authority_sha,
         "proof_path": proof,
         "venue_reconciliation_path": venue_reconciliation,
         "frozen": frozen,
@@ -363,6 +450,8 @@ def _install_scope_generated_projection(
             str(worktree / "tools" / "build_site_data.py"),
             str(worktree),
             "--apply",
+            "--pending-opponent-display-school",
+            request["school_key"],
         ],
         cwd=worktree,
         check=False,
@@ -735,6 +824,9 @@ def run_expansion_phase0(
             "stage1_independent_proof_sha256": request[
                 "stage1_independent_proof_sha256"
             ],
+            "stage1_control_authority_sha": request[
+                "stage1_control_authority_sha"
+            ],
             "integration_freeze_sha256": request["integration_freeze_sha256"],
             "venue_reconciliation_sha256": authority["manifest"].get(
                 "venue_reconciliation_sha256",""
@@ -785,6 +877,9 @@ def run_expansion_phase0(
         ],
         "stage1_independent_proof_sha256": request[
             "stage1_independent_proof_sha256"
+        ],
+        "stage1_control_authority_sha": request[
+            "stage1_control_authority_sha"
         ],
         "target_branch": target_branch,
         "expected_target_predecessor_sha": target,
@@ -868,6 +963,9 @@ def run_expansion_phase0(
         "target_branch": target_branch,
         "changed_paths": changed,
         "changed_file_sha256": changed_hashes,
+        "stage1_control_authority_sha": request[
+            "stage1_control_authority_sha"
+        ],
         "integration_freeze_sha256": request["integration_freeze_sha256"],
         "venue_reconciliation_sha256": authority["manifest"].get(
             "venue_reconciliation_sha256",""
@@ -973,6 +1071,7 @@ def verify_expansion_phase0_equivalence(
         "target_branch",
         "changed_paths",
         "changed_file_sha256",
+        "stage1_control_authority_sha",
         "integration_freeze_sha256",
         "venue_reconciliation_sha256",
         "semantic_snapshot_sha256",
@@ -1092,6 +1191,9 @@ def verify_expansion_phase0_equivalence(
         ],
         "target_sha": successor["prepared_commit_sha"],
         "prepared_tree_sha": tree,
+        "stage1_control_authority_sha": request[
+            "stage1_control_authority_sha"
+        ],
         "integration_freeze_sha256": successor[
             "integration_freeze_sha256"
         ],
