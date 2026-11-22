@@ -520,7 +520,16 @@ def _phase0_package_matches_frozen_authority(
             diagnostics.append(reason)
         return False
 
-    if not _phase0_commit_identity(
+    display_meta = integration_freeze.get("opponent_display_reconciliation")
+    venue_changed = _sha(package["venues.csv"]) != freeze_hashes["venues.csv"]
+    phase0_representation_transition = display_meta is not None or venue_changed
+
+    # Preserve the established post-Phase0 display-normalization topology:
+    # its normalization predecessor may itself be the byte-identical immutable
+    # Integration Freeze package rather than a synthetic/recorded Phase-0 commit.
+    # Require Phase-0 Git identity only when this predecessor actually contains
+    # a representation transition authorized by the Integration Freeze.
+    if phase0_representation_transition and not _phase0_commit_identity(
         root,
         school,
         phase0_commit,
@@ -529,7 +538,6 @@ def _phase0_package_matches_frozen_authority(
     ):
         return False
 
-    display_meta = integration_freeze.get("opponent_display_reconciliation")
     for name in PACKAGE_NAMES:
         if name in DISPLAY_COLUMNS or name == "venues.csv":
             continue
