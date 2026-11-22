@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "miami-expansion-startup-0001",
-  "phase0_request_id": "miami-expansion-phase0-0001",
+  "startup_id": "miami-expansion-startup-0002",
+  "phase0_request_id": "miami-expansion-phase0-0002",
   "school_key": "miami",
-  "expected_protected_main_sha": "0cd2b05c920485dd43a0b4e7f85c51bf36b919c9",
+  "expected_protected_main_sha": "c20ff9a4d947b0915b667707b147a88feed25dba",
   "target_branch": "data/miami-onboarding",
   "target_sha": "817197e3410a893bd1f481d4cce5aa630cc1c7e3",
   "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
@@ -13,13 +13,13 @@
     "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "a22bb3d242c3059ef839297d9ae3b5315468027e",
-      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0001/part-",
+      "commit_sha": "55557a921da067a1c15c3ee25a0db63bb29c4140",
+      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0002/part-",
       "part_count": 275
     }
   },
   "creation_provenance": {
-    "origin": "Miami (FL) ALL_HISTORY_EXPANSION Implementation lane; owner-authorized initial bounded startup preparation consuming the terminal VERIFIED_EXPANSION_RESEARCH_FROZEN Stage 7 authority.",
-    "authorization": "Owner explicitly opened the new serialized Miami (FL) ALL_HISTORY_EXPANSION Implementation lane and authorized the bounded first unit through the repository-defined expansion startup preparation boundary, including the already-authorized guarded EXPANSION_PHASE0 child when current policy carries that continuation automatically. This startup binds protected main 0cd2b05c920485dd43a0b4e7f85c51bf36b919c9, unchanged Miami onboarding predecessor 817197e3410a893bd1f481d4cce5aa630cc1c7e3, immutable Research base 33af595fcae2a17664379638f89ce64c2e63be08, exact frozen Research ZIP a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb, and child request identity miami-expansion-phase0-0001. It grants no Stage 2, Owner Gate 1, release, merge, Production, shared-reference maintenance, or new historical authority."
+    "origin": "Miami (FL) ALL_HISTORY_EXPANSION Implementation lane; Control Center released the same initial-phase authority after generic expansion-startup repair PR #689 was merged and accepted on protected main.",
+    "authorization": "Owner explicitly authorized resumption of the SAME Miami (FL) ALL_HISTORY_EXPANSION initial Implementation phase after generic startup repair, with fresh startup and guarded EXPANSION_PHASE0 identities only. This startup binds repaired protected main c20ff9a4d947b0915b667707b147a88feed25dba, unchanged Miami onboarding predecessor 817197e3410a893bd1f481d4cce5aa630cc1c7e3, immutable Research base 33af595fcae2a17664379638f89ce64c2e63be08, exact frozen Research ZIP a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb, fresh startup identity miami-expansion-startup-0002, and fresh child request identity miami-expansion-phase0-0002. It authorizes repository-owned deterministic startup through guarded EXPANSION_PHASE0 and independent fresh verification only; it grants no Stage 2, Owner Gate 1, release, merge, Production, shared-reference maintenance, or new historical authority."
   }
 }
