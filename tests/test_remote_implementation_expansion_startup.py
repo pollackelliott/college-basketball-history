@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -23,9 +25,11 @@ from remote_implementation_expansion_startup import (  # noqa: E402
     build_phase0_request,
     build_stage1_proof,
     preserve_preintegration_diagnostics,
+    require_stage1_control_authority,
     require_startup_idle_control,
     validate_startup_intent,
 )
+from remote_implementation_io import fetch_operational_refs  # noqa: E402
 
 
 def startup_intent() -> dict:
@@ -85,6 +89,111 @@ def recovered_idle_state(disposition: str) -> dict:
         },
     }
     return state
+
+
+class ExpansionStartupRuntimeControlRefTests(unittest.TestCase):
+    def _git(
+        self,
+        cwd: Path,
+        *args: str,
+        check: bool = True,
+    ) -> subprocess.CompletedProcess:
+        return subprocess.run(
+            ["git", "-C", str(cwd), *args],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=check,
+        )
+
+    def test_operational_refs_are_fetched_into_explicit_runtime_checkout(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            origin = root / "origin.git"
+            seed = root / "seed"
+            control = root / "control"
+            runtime = root / "runtime"
+            subprocess.run(
+                ["git", "init", "--bare", str(origin)],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=True,
+            )
+            seed.mkdir()
+            self._git(seed, "init")
+            self._git(seed, "config", "user.email", "test@example.com")
+            self._git(seed, "config", "user.name", "Test")
+            (seed / "README").write_text("main\n", encoding="utf-8")
+            self._git(seed, "add", "README")
+            self._git(seed, "commit", "-m", "main")
+            main_sha = self._git(seed, "rev-parse", "HEAD").stdout.strip()
+            self._git(seed, "branch", "-M", "main")
+            self._git(seed, "checkout", "-b", "control/remote-implementation")
+            (seed / "CONTROL").write_text("control\n", encoding="utf-8")
+            self._git(seed, "add", "CONTROL")
+            self._git(seed, "commit", "-m", "control")
+            control_sha = self._git(seed, "rev-parse", "HEAD").stdout.strip()
+            self._git(seed, "remote", "add", "origin", str(origin))
+            self._git(
+                seed,
+                "push",
+                "origin",
+                "main:refs/heads/main",
+                "control/remote-implementation:refs/heads/control/remote-implementation",
+            )
+            for repo in (control, runtime):
+                repo.mkdir()
+                self._git(repo, "init")
+                self._git(repo, "remote", "add", "origin", str(origin))
+
+            previous = Path.cwd()
+            os.chdir(control)
+            try:
+                live_main, durable_control = fetch_operational_refs(cwd=runtime)
+            finally:
+                os.chdir(previous)
+
+            self.assertEqual(live_main, main_sha)
+            self.assertEqual(durable_control, control_sha)
+            self.assertEqual(
+                self._git(
+                    runtime,
+                    "rev-parse",
+                    "refs/remotes/origin/remote-control",
+                ).stdout.strip(),
+                control_sha,
+            )
+            self.assertNotEqual(
+                self._git(
+                    control,
+                    "rev-parse",
+                    "--verify",
+                    "refs/remotes/origin/remote-control",
+                    check=False,
+                ).returncode,
+                0,
+            )
+
+    def test_stage1_package_correction_must_bind_exact_startup_control(self):
+        control_sha = "a" * 40
+        report = {
+            "current_main_reconciliation": {
+                "control_authority_sha": control_sha,
+                "completed_package_corrections": [
+                    {
+                        "member": "conferences.csv",
+                        "control_authority_sha": control_sha,
+                    }
+                ],
+            }
+        }
+        require_stage1_control_authority(report, control_sha)
+        with self.assertRaisesRegex(
+            Stop,
+            "EXPANSION_STARTUP_STAGE1_CONTROL_AUTHORITY_MISMATCH",
+        ):
+            require_stage1_control_authority(report, "b" * 40)
 
 
 class ExpansionStartupIdleControlTests(unittest.TestCase):

@@ -284,8 +284,36 @@ def build_stage1_proof(
         "support_opponents": report["census"]["opponent_support_actions"],
         "support_venues": report["census"]["venue_support_actions"],
         "blockers": report["blockers"],
+        "control_authority_sha": (
+            (report.get("current_main_reconciliation") or {}).get(
+                "control_authority_sha", ""
+            )
+        ),
         "integration_freeze_authorized": False,
     }
+
+
+def require_stage1_control_authority(
+    report: dict[str, Any],
+    expected_control_sha: str,
+) -> None:
+    """Bind any inherited post-Freeze package correction to exact startup control."""
+    reconciliation = report.get("current_main_reconciliation") or {}
+    corrections = reconciliation.get("completed_package_corrections") or []
+    if not corrections:
+        return
+    consumed = str(reconciliation.get("control_authority_sha") or "")
+    require(
+        consumed == expected_control_sha,
+        "EXPANSION_STARTUP_STAGE1_CONTROL_AUTHORITY_MISMATCH",
+    )
+    require(
+        all(
+            str(item.get("control_authority_sha") or "") == expected_control_sha
+            for item in corrections
+        ),
+        "EXPANSION_STARTUP_STAGE1_CORRECTION_CONTROL_AUTHORITY_MISMATCH",
+    )
 
 
 def build_phase0_request(
@@ -541,7 +569,17 @@ def run_startup() -> dict[str, Any]:
     )
 
     live_main, durable_head = fetch_operational_refs(
-        meta["target_branch"]
+        meta["target_branch"],
+        cwd=ROOT,
+    )
+    runtime_control_head = git(
+        "rev-parse",
+        "refs/remotes/origin/remote-control",
+        cwd=ROOT,
+    ).stdout.strip()
+    require(
+        runtime_control_head == durable_head,
+        "EXPANSION_STARTUP_RUNTIME_CONTROL_REF_MISMATCH",
     )
     require(
         durable_head == startup_commit,
@@ -671,6 +709,7 @@ def run_startup() -> dict[str, Any]:
         output=stage1_b,
     )
     _require_deterministic_stage1(stage1_a, stage1_b)
+    require_stage1_control_authority(report, durable_head)
 
     proof = build_stage1_proof(
         report,

@@ -132,7 +132,13 @@ def commit_control(expected_remote: str, message: str, paths: list[Path | str]) 
     return push_control(expected_remote)
 
 
-def fetch_operational_refs(target_branch: str | None = None) -> tuple[str, str]:
+def fetch_operational_refs(
+    target_branch: str | None = None,
+    *,
+    cwd: Path | None = None,
+) -> tuple[str, str]:
+    """Fetch operational refs into the exact Git checkout that will consume them."""
+    repo = cwd or ROOT
     args = [
         "fetch",
         "--no-tags",
@@ -140,14 +146,22 @@ def fetch_operational_refs(target_branch: str | None = None) -> tuple[str, str]:
         "+refs/heads/main:refs/remotes/origin/main",
         "+refs/heads/%s:refs/remotes/origin/remote-control" % CONTROL_BRANCH,
     ]
-    if target_branch and remote_head(ROOT, target_branch):
+    if target_branch and remote_head(repo, target_branch):
         args.append(
             "+refs/heads/%s:refs/remotes/origin/remote-target" % target_branch
         )
-    git(*args)
+    git(*args, cwd=repo)
     return (
-        git("rev-parse", "refs/remotes/origin/main").stdout.strip(),
-        git("rev-parse", "refs/remotes/origin/remote-control").stdout.strip(),
+        git(
+            "rev-parse",
+            "refs/remotes/origin/main",
+            cwd=repo,
+        ).stdout.strip(),
+        git(
+            "rev-parse",
+            "refs/remotes/origin/remote-control",
+            cwd=repo,
+        ).stdout.strip(),
     )
 
 
