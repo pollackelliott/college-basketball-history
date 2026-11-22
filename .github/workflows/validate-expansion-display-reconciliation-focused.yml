@@ -1,0 +1,61 @@
+name: Validate expansion pre-Phase0 opponent display reconciliation
+
+on:
+  push:
+    branches:
+      - 'request-validation/expansion-display-reconciliation-focused-6ab4ae'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 6ab4ae6e30a5f8ca815af95963639c459c02789c
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile modified Python
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            tools/all_history_expansion_opponent_display.py \
+            tools/all_history_expansion_integration.py \
+            tools/all_history_expansion_phase0_preview.py \
+            tools/all_history_expansion_remote_contract.py \
+            tools/all_history_expansion_display_successor_guard.py \
+            tools/remote_implementation_control.py \
+            tools/remote_implementation_expansion_startup.py \
+            tools/remote_implementation_expansion_phase0.py \
+            tools/remote_implementation_stage2_census.py \
+            tests/test_all_history_expansion_opponent_display.py \
+            tests/test_remote_implementation_stage2_census.py
+      - name: Run focused and expansion regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_all_history_expansion*.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_startup.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -q
+          python -m unittest discover -s tests -p 'test_remote_implementation_stage2_census.py' -q
+          python -m unittest discover -s tests -p 'test_normalize_historical_opponent_displays.py' -q
+      - name: Run full expansion implementation acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/expansion-display-focused
+          python tools/all_history_expansion_implementation_acceptance.py --json \
+            | tee /tmp/expansion-display-focused/acceptance.json
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: expansion-display-focused-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/expansion-display-focused/
+          if-no-files-found: warn
+          retention-days: 14
