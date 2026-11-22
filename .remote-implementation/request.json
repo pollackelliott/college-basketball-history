@@ -1,11 +1,27 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "miami-expansion-phase0-recover-0001",
+  "school_key": "miami",
+  "operation": "RECOVER",
+  "previous_control_state_commit": "79a27b579a40c809679e9598b450fb2409d24b3a",
+  "previous_control_state_sha256": "67fbe792e7b2c2060b0ee0f5f7ae6d6514b9bd08333942b4ed9ce6ead0f4647a",
+  "expected_protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
+  "recovery": {
+    "abandoned_request_id": "miami-expansion-phase0-0004",
+    "lock_commit": "eef18c1a6e0fdc5933676bfe3ba5c5b567c803c7",
+    "target_branch": "data/miami-onboarding"
+  },
+  "creation_provenance": {
+    "origin": "Same Miami (FL) ALL_HISTORY_EXPANSION initial Implementation phase; deterministic recovery after failed guarded EXPANSION_PHASE0 child.",
+    "authorization": "Owner authorized the Miami initial expansion phase through guarded EXPANSION_PHASE0 and deterministic internal recovery under current repository policy. Failed request miami-expansion-phase0-0004 stopped at STAGE1_INDEPENDENT_PROOF_CANDIDATE_HASH_MISMATCH after lock acquisition but before any write-ahead, prepared commit, or target publication; data/miami-onboarding remains exactly 817197e3410a893bd1f481d4cce5aa630cc1c7e3. Authorize only permanent RECOVER to classify exact durable mutation state, abandon the failed nonreplayable request if MUTATION_NOT_ATTEMPTED, release the one-active mutation lock, and preserve all startup/Phase0 diagnostics. No Phase 0 retry, tooling repair, historical change, shared-reference mutation, Owner Gate, release, merge, or Production authority is granted."
+  },
   "authority": {
-    "expansion_phase0": true,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
-    "recovery": false,
+    "recovery": true,
     "release": false,
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
@@ -21,37 +37,7 @@
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
-    "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "Owner explicitly authorized resumption of the SAME Miami (FL) ALL_HISTORY_EXPANSION initial Implementation phase after the complete generic startup repair family, with entirely fresh live startup and guarded EXPANSION_PHASE0 identities. This startup binds protected main 19dc85c18902234c2241e39d3ba34006d2903e80, unchanged Miami onboarding predecessor 817197e3410a893bd1f481d4cce5aa630cc1c7e3, immutable Research base 33af595fcae2a17664379638f89ce64c2e63be08, exact frozen Research ZIP a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb, fresh startup identity miami-expansion-startup-0004, and fresh child request identity miami-expansion-phase0-0004. It authorizes repository-owned deterministic startup through guarded EXPANSION_PHASE0 and independent fresh verification only; it grants no Stage 2, Owner Gate 1, release, merge, Production, shared-reference maintenance, or new historical authority. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
-    "origin": "Miami (FL) ALL_HISTORY_EXPANSION Implementation lane; Control Center released the same initial-phase authority after generic expansion-startup repair family PR #690 was merged and post-merge proven."
-  },
-  "expansion_research_checkpoint": {
-    "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
-    "sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
-    "transport": {
-      "commit_sha": "cb1c4eac8af27f622ad148fa51bc9f666eeca38b",
-      "kind": "git_base64_parts",
-      "part_count": 275,
-      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0004/part-"
-    }
-  },
-  "expected_protected_main_sha": "19dc85c18902234c2241e39d3ba34006d2903e80",
-  "integration_freeze_sha256": "d40eec676d281b8dd523a4c2182df6ac608b786ad2ac6eb0ceaf6973e4932056",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "EXPANSION_PHASE0",
-  "previous_control_state_commit": "08f69aaeca13ea3064740bfc0ab86dac9496ef7d",
-  "previous_control_state_sha256": "d5e8267e6a35f19d2ce74d61ada7574dc71a62250f590aa31294aa208dc45a6c",
-  "request_id": "miami-expansion-phase0-0004",
-  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
-  "schema_version": 1,
-  "school_key": "miami",
-  "stage1_independent_proof": {
-    "path": ".remote-implementation/startups/miami/miami-expansion-startup-0004/stage1-independent-proof.json",
-    "sha256": "d2003bbe24e38021e12cfb812b512fd170795f2b9e7a846078722b542bd61226"
-  },
-  "stage1_independent_proof_sha256": "d2003bbe24e38021e12cfb812b512fd170795f2b9e7a846078722b542bd61226",
-  "target_branch": "data/miami-onboarding",
-  "target_sha": "817197e3410a893bd1f481d4cce5aa630cc1c7e3"
+    "venue_identity_maintenance": false,
+    "expansion_phase0": false
+  }
 }
