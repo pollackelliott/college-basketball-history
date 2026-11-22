@@ -190,6 +190,22 @@ def validate_startup_intent(intent: dict[str, Any]) -> dict[str, Any]:
             64,
             "EXPANSION_STARTUP_VENUE_RECONCILIATION_SHA_INVALID",
         )
+    display = intent.get("opponent_display_reconciliation")
+    if display is not None:
+        require(
+            isinstance(display, dict),
+            "EXPANSION_STARTUP_OPPONENT_DISPLAY_RECONCILIATION_INVALID",
+        )
+        path = str(display.get("path") or "")
+        require(
+            path and ".." not in path and not path.startswith("/"),
+            "EXPANSION_STARTUP_OPPONENT_DISPLAY_RECONCILIATION_PATH_INVALID",
+        )
+        _sha(
+            display.get("sha256"),
+            64,
+            "EXPANSION_STARTUP_OPPONENT_DISPLAY_RECONCILIATION_SHA_INVALID",
+        )
 
     return {
         "startup_id": startup_id,
@@ -323,6 +339,7 @@ def build_phase0_request(
     integration_freeze_sha256: str,
     stage1_control_authority_sha: str,
     venue_reconciliation_ref: dict[str, str] | None,
+    opponent_display_reconciliation_ref: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     meta = validate_startup_intent(intent)
     provenance = intent["creation_provenance"]
@@ -362,6 +379,10 @@ def build_phase0_request(
     }
     if venue_reconciliation_ref is not None:
         request["venue_reconciliation"] = venue_reconciliation_ref
+    if opponent_display_reconciliation_ref is not None:
+        request["opponent_display_reconciliation"] = (
+            opponent_display_reconciliation_ref
+        )
     validate_request(request)
     return request
 
@@ -672,6 +693,8 @@ def run_startup() -> dict[str, Any]:
 
     venue_path: Path | None = None
     venue_ref: dict[str, str] | None = None
+    opponent_display_path: Path | None = None
+    opponent_display_ref: dict[str, str] | None = None
     if intent.get("venue_reconciliation") is not None:
         ref = intent["venue_reconciliation"]
         raw = git(
@@ -688,6 +711,22 @@ def run_startup() -> dict[str, Any]:
         )
         venue_path = scratch / "venue-reconciliation.json"
         venue_path.write_bytes(raw)
+
+    if intent.get("opponent_display_reconciliation") is not None:
+        ref = intent["opponent_display_reconciliation"]
+        raw = git(
+            "show",
+            f"{meta['transport_commit']}:{ref['path']}",
+            text=False,
+        ).stdout
+        require(
+            sha256_bytes(raw) == ref["sha256"],
+            "EXPANSION_STARTUP_OPPONENT_DISPLAY_RECONCILIATION_HASH_MISMATCH",
+        )
+        opponent_display_path = (
+            scratch / "opponent-display-reconciliation.json"
+        )
+        opponent_display_path.write_bytes(raw)
 
     stage1_a = scratch / "stage1-a"
     stage1_b = scratch / "stage1-b"
@@ -752,6 +791,13 @@ def run_startup() -> dict[str, Any]:
     if venue_path is not None:
         cmd.extend(
             ["--venue-reconciliation", str(venue_path)]
+        )
+    if opponent_display_path is not None:
+        cmd.extend(
+            [
+                "--opponent-display-reconciliation",
+                str(opponent_display_path),
+            ]
         )
     cp = run(cmd, cwd=ROOT, check=False)
     if cp.returncode != 0:
@@ -855,6 +901,16 @@ def run_startup() -> dict[str, Any]:
             "path": durable_venue.as_posix(),
             "sha256": durable_venue_sha,
         }
+    if opponent_display_path is not None:
+        durable_display, durable_display_sha = _copy_payload(
+            opponent_display_path,
+            directory,
+            "opponent-display-reconciliation.json",
+        )
+        opponent_display_ref = {
+            "path": durable_display.as_posix(),
+            "sha256": durable_display_sha,
+        }
 
     manifest = {
         "schema_version": 1,
@@ -881,6 +937,10 @@ def run_startup() -> dict[str, Any]:
         "stage1_control_authority_sha": durable_head,
         "integration_freeze_sha256": integration_sha,
         "phase0_preview_sha256": preview_sha,
+        "opponent_display_reconciliation_sha256": (
+            opponent_display_ref["sha256"]
+            if opponent_display_ref is not None else ""
+        ),
         "tracked_basketball_mutation": (
             "NONE_PREPARATION_ONLY"
         ),
@@ -906,6 +966,7 @@ def run_startup() -> dict[str, Any]:
         integration_freeze_sha256=integration_sha,
         stage1_control_authority_sha=durable_head,
         venue_reconciliation_ref=venue_ref,
+        opponent_display_reconciliation_ref=opponent_display_ref,
     )
     request_path = Path(
         ".remote-implementation/request.json"
