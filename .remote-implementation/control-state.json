@@ -746,7 +746,7 @@
     "miami-expansion-phase0-0005"
   ],
   "active_expected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
-  "active_lock_commit": null,
+  "active_lock_commit": "f12f9836897566edf385975fe3b9c2ba4fe61553",
   "active_lock_owner": "github-actions:45085598744:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
