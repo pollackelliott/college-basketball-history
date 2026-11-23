@@ -750,7 +750,7 @@
     "miami-expansion-rebootstrap-0001"
   ],
   "active_expected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
-  "active_lock_commit": null,
+  "active_lock_commit": "b8efbe6026b6228de656378f488b49c4cfeb8ad9",
   "active_lock_owner": "github-actions:45244282761:1",
   "active_operation": "EXPANSION_REBOOTSTRAP_FROM_FREEZE",
   "active_prepared_commit_sha": null,
