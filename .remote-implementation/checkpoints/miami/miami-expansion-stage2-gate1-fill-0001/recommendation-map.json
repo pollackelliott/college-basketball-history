@@ -1,0 +1,18 @@
+{
+  "decisions": {
+    "DISCREPANCY-MIA-EXP-S1-1939-006-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-MIA-EXP-S1-1947-003-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-004-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-005-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-MIA-EXP-S1-1947-015-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-016-SITE_TYPE": "KEEP_CANONICAL"
+  },
+  "basis_by_decision": {
+    "DISCREPANCY-MIA-EXP-S1-1939-006-SITE_TYPE": "Miami's accepted February 5, 1940 institutional result explicitly says 'at Wake Forest' (Miami 17, Wake Forest 46); Wake Forest's matching record supplies no exact date or site classification, rather than contrary home evidence. Recommend Wake Forest HOME from explicit Miami source, without inferring a building; Gate 1 authority required.",
+    "DISCREPANCY-MIA-EXP-S1-1947-003-SITE_TYPE": "Miami frozen December 19, 1947 row says Miami HOME at Coral Gables but literal result has no site token. Florida's official source explicitly records the same 67-50 Miami win as Florida H at New Gymnasium, Gainesville. Sources disagree; conservatively preserve incumbent Florida-home canonical site with both assertions visible for owner Gate 1.",
+    "DISCREPANCY-MIA-EXP-S1-1947-004-SITE_TYPE": "Miami frozen December 20, 1947 row says Miami HOME at Coral Gables but its literal result omits a site token. Florida's official source explicitly marks its same-date 58-55 win H in Gainesville. Preserve the incumbent Florida-home canonical site provisionally and present the conflicting Miami assertion for Gate 1.",
+    "DISCREPANCY-MIA-EXP-S1-1947-005-SITE_TYPE": "Miami's December 26, 1947 accepted 43-40 Pittsburgh result assigns Miami HOME. Pittsburgh's own literal result independently says 'at Miami [Fla.]' for the same game; its curated Pittsburgh-home site/venue contradicts that original source notation. Recommend Miami HOME from convergent literal institutional records without guessing a building; Gate 1 required.",
+    "DISCREPANCY-MIA-EXP-S1-1947-015-SITE_TYPE": "Miami February 20, 1948 literal result says 'at Florida' (50-72), while Florida's dated official 72-50 result is marked A. Direct reciprocal conflict; retain inherited Miami-home canonical provisionally, without erasing Miami's preserved opponent-home evidence, for owner Gate 1.",
+    "DISCREPANCY-MIA-EXP-S1-1947-016-SITE_TYPE": "Miami February 21, 1948 literal result says 'at Florida' (52-49), while Florida's dated official 49-52 result is marked A. Direct reciprocal conflict; retain inherited Miami-home canonical provisionally while preserving both source assertions for owner Gate 1."
+  }
+}
