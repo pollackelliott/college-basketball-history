@@ -1,0 +1,36 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 1,
+  "change_row_count": 1,
+  "changes": [
+    {
+      "authority_names": [
+        "Rio Grande"
+      ],
+      "authority_signature": "riogrande",
+      "canonical_opponent_key": "rio-grande",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Rio Grande College (Ohio)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Rio Grande"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "miami",
+  "source_game_display_change_keys": 1,
+  "source_game_display_change_rows": 1,
+  "source_game_display_changes": [
+    {
+      "from_name": "Rio Grande College (Ohio)",
+      "normalized_opponent_key": "rio-grande",
+      "source_game_id": "MIA-EXP-S1-1953-002",
+      "to_name": "Rio Grande"
+    }
+  ],
+  "status": "PASS"
+}

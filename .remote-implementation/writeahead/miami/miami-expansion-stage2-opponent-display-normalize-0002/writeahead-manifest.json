@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/miami/opponents.csv",
+    "schools/miami/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/miami/opponents.csv": "3d4a26328ce4333afde39e600e333b63b70fbb2cf6c03e1d98667c13c9945c08",
+    "schools/miami/source-games.csv": "c8103bf8caee2d68a19e4bf0c6555f2afe29dea846445744620c852bb662b443"
+  },
+  "changed_paths": [
+    "schools/miami/opponents.csv",
+    "schools/miami/source-games.csv"
+  ],
+  "commit_message": "Normalize miami historical opponent display representation",
+  "expected_blocker_keys": [
+    "rio-grande"
+  ],
+  "expected_target_predecessor_sha": "427dc0b1be51e7fcc4a6847a76357cf4a71cc7d5",
+  "field_level_proof_sha256": "bdc7b42cfbe9f87d57b7f77e99782d8a157ca2a8a09d4aa49e69217dbf4a3797",
+  "global_lock_commit": "a3b5649811a18ac7d81a08720502eb9d5f173ed6",
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "3886c3d5d2969725d5566498d844ed016a635c1d25b08a3c4456f64ab1451c24",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "1f88c7a3f40f099547b05f6d2e4edce447c493a3",
+  "prepared_parent_sha": "427dc0b1be51e7fcc4a6847a76357cf4a71cc7d5",
+  "prepared_tree_sha": "655a9071b03edb904a9f312c22becf81495a187d",
+  "protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "repository_validation": "PASS",
+  "request_id": "miami-expansion-stage2-opponent-display-normalize-0002",
+  "request_sha256": "e99850f11f919fe4652b2d116e9547e284d70157d0d4374863de99941c2957a3",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_drift_after": {
+    "baseline_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "integration_base_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+    "school_key": "miami",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "integration_base_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+    "school_key": "miami",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "d07cc07053bfc81e8cf61d3e62fd49283f13bca498f22de6adbe3ff7bceb2467",
+    "field-level-proof.json": "bdc7b42cfbe9f87d57b7f77e99782d8a157ca2a8a09d4aa49e69217dbf4a3797",
+    "integration-freeze.json": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+    "normalization-report.json": "3886c3d5d2969725d5566498d844ed016a635c1d25b08a3c4456f64ab1451c24",
+    "semantic-drift-proof.json": "3c6bd047ea9ad334a8454f24d24120fd5fe9cab1746fdf03606442f24f9a02f9"
+  },
+  "source_game_normalized_name_row_count": 1,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/miami/miami-expansion-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "d07cc07053bfc81e8cf61d3e62fd49283f13bca498f22de6adbe3ff7bceb2467",
+  "sync_current_d1": false,
+  "target_branch": "data/miami-onboarding"
+}
