@@ -1,25 +1,39 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "miami-expansion-stage2-proposal-0003",
+  "request_id": "miami-expansion-stage2-refresh-0001",
   "school_key": "miami",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "8b860c98545fe494b335513365bccdc3f58292e0",
-  "previous_control_state_sha256": "14166e1bf3251ceebacb9576d8abf8d2c657279d50c623beddfe4ba5d3613eec",
-  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "previous_control_state_commit": "5814141c95c807f2b5bb68401775bdb5dd0f78b3",
+  "previous_control_state_sha256": "a526746ea16b5ad94dee8e276095dbcbd0a235d790237d47e7dfa2dcb3ae77d3",
+  "expected_protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
   "target_branch": "data/miami-onboarding",
   "target_sha": "1f88c7a3f40f099547b05f6d2e4edce447c493a3",
-  "stage2_authority": {
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/miami/miami-expansion-phase0-0006/successor-manifest.json",
+    "sha256": "3dd289a0c874b2017b5d8cf2e9383425adfac4a0ad79f4617759e9bc04f61581"
+  },
+  "stage2_opponent_display_successor": {
     "path": ".remote-implementation/successors/miami/miami-expansion-stage2-opponent-display-normalize-0002/successor-manifest.json",
     "sha256": "4319f2cb7c6cdc7c84e1ab1bc6911db63913b14b8c322d647495f84eaaa0bd8a"
   },
-  "recommendation_map": {
-    "path": ".remote-implementation/payloads/miami/miami-expansion-stage2-proposal-0003/recommendation-map.json",
-    "sha256": "0c20c5e2d660515634335ef54ede61287e6344b461706172c66adec9056c377f"
-  },
   "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
   "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
-  "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+  "current_main_refresh_authorization": {
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "approved": true,
+    "authorization_basis": "Existing Miami (FL) same Stage 2 Implementation owner authority; owner 'proceed' after merged generic PR #694. Merge base 2611979bc8c22b0d26c02598c56cfc5337ef8b2c; exact changed-path census main-only 5 generic tooling/tests/docs paths versus target-only 10 basketball/site paths, intersection 0. Protected main did not touch schools/miami. No historical/shared authority mutation."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "miami-expansion-stage2-census-0003",
+    "proposal_request_id": "miami-expansion-stage2-proposal-0004",
+    "expected_decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+    "recommendation_map": {
+      "path": ".remote-implementation/payloads/miami/miami-expansion-stage2-proposal-0003/recommendation-map.json",
+      "sha256": "0c20c5e2d660515634335ef54ede61287e6344b461706172c66adec9056c377f"
+    }
+  },
   "authority": {
     "expansion_phase0": false,
     "expansion_rebootstrap_from_freeze": false,
@@ -35,18 +49,18 @@
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
-    "stage2_current_main_refresh": false,
+    "stage2_current_main_refresh": true,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation: exact independent post-reset Stage 2 decision universe from fresh-verified Rio Grande successor.",
-    "authorization": "Owner's Continue authorizes bounded Stage 2 technical/reconciliation work, including this read-only proposal rehearsal. The six actions were freshly reviewed against current source facts; recommendation rehearsal grants no owner historical approval, tracked historical mutation, new Research, Gate 1, release, merge, or Production."
+    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation after fresh-validated generic no-sidecar venue tooling PR #694 merge.",
+    "authorization": "Owner 'proceed' authorizes ordinary disjoint Stage 2 current-main refresh with repository-owned serial census/proposal continuation, contingent on exact fresh verification and unchanged six-decision universe. No new historical Research, owner gate, approval, release, merge or Production permission."
   }
 }
