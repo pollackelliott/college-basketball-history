@@ -346,29 +346,51 @@ def main() -> int:
                 git(control_repo, "rev-parse", "--verify", control_commit + "^{commit}").stdout.strip(),
             )
         runtime_commit = git(runtime_repo, "rev-parse", "HEAD").stdout.strip()
-        results = [
-            replay(control_repo, runtime_repo, control_commit, witness, args.diag.resolve())
-            for witness in WITNESSES
-        ]
-        summary = {
-            "schema_version": 1,
-            "kind": "ALL_HISTORY_EXPANSION_KNOWN_GOOD_CONFORMANCE",
-            "status": "PASS",
-            "control_commit": control_commit,
-            "runtime_commit": runtime_commit,
-            "witness_count": len(results),
-            "witnesses": results,
-        }
     except Stop as exc:
         print("FAIL: " + str(exc))
         return 1
+
+    results: list[dict[str, Any]] = []
+    failures = 0
+    for witness in WITNESSES:
+        school = witness[0]
+        try:
+            results.append(
+                replay(
+                    control_repo,
+                    runtime_repo,
+                    control_commit,
+                    witness,
+                    args.diag.resolve(),
+                )
+            )
+        except Stop as exc:
+            failures += 1
+            results.append(
+                {
+                    "school_key": school,
+                    "status": "FAIL",
+                    "error": str(exc),
+                }
+            )
+
+    summary = {
+        "schema_version": 1,
+        "kind": "ALL_HISTORY_EXPANSION_KNOWN_GOOD_CONFORMANCE",
+        "status": "PASS" if failures == 0 else "FAIL",
+        "control_commit": control_commit,
+        "runtime_commit": runtime_commit,
+        "witness_count": len(results),
+        "failure_count": failures,
+        "witnesses": results,
+    }
 
     payload = json.dumps(summary, indent=2, sort_keys=True) + "\n"
     if args.json_out:
         args.json_out.parent.mkdir(parents=True, exist_ok=True)
         args.json_out.write_text(payload, encoding="utf-8")
     print(payload, end="")
-    return 0
+    return 0 if failures == 0 else 1
 
 
 if __name__ == "__main__":
