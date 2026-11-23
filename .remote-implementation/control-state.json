@@ -745,18 +745,19 @@
     "miami-expansion-phase0-0004",
     "miami-expansion-phase0-0005",
     "miami-expansion-stage2-census-0001",
-    "miami-expansion-stage2-opponent-display-normalize-0001"
+    "miami-expansion-stage2-opponent-display-normalize-0001",
+    "miami-expansion-stage2-proposal-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_PROPOSAL_REHEARSAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "miami-expansion-stage2-proposal-0002",
+  "active_request_sha256": "c4fc257ceccce362a31291963a48c260cad2fce054c592055db49ab6897576e8",
+  "active_school_key": "miami",
+  "active_target_branch": "data/miami-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1498,8 +1499,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/miami/miami-expansion-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "c7fdc6e6234137ea031d3ff4087488d86cc80c81c85b42cf4005435255fd4983"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45102310093",
+  "lock_acquisition_request_commit": "dbd3ad252a1599c42720c000019c9492f1813383",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_PROPOSAL_REHEARSAL_RUNNING"
 }
