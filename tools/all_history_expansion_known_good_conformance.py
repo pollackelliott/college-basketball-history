@@ -143,8 +143,20 @@ def historical_worktree(runtime_repo: Path, target_sha: str, school: str) -> Pat
     require_equal(school + ":target-sha", target_sha, observed)
     worktree = Path(tempfile.mkdtemp(prefix="known-good-" + school + "-"))
     shutil.rmtree(worktree)
-    git(runtime_repo, "worktree", "add", "--detach", str(worktree), target_sha)
+    local_branch = "data/" + school + "-onboarding"
+    existing_branch = git(
+        runtime_repo,
+        "show-ref",
+        "--verify",
+        "--quiet",
+        "refs/heads/" + local_branch,
+        check=False,
+    )
+    if existing_branch.returncode == 0:
+        git(runtime_repo, "branch", "-D", local_branch)
+    git(runtime_repo, "worktree", "add", "-b", local_branch, str(worktree), target_sha)
     require_equal(school + ":worktree-head", target_sha, git(worktree, "rev-parse", "HEAD").stdout.strip())
+    require_equal(school + ":worktree-branch", local_branch, git(worktree, "branch", "--show-current").stdout.strip())
     if git(worktree, "status", "--porcelain").stdout.strip():
         raise Stop("KNOWN_GOOD_WORKTREE_DIRTY:" + school)
     return worktree
@@ -153,7 +165,10 @@ def historical_worktree(runtime_repo: Path, target_sha: str, school: str) -> Pat
 def cleanup_worktree(runtime_repo: Path, worktree: Path | None) -> None:
     if worktree is None:
         return
+    branch = git(worktree, "branch", "--show-current", check=False).stdout.strip()
     git(runtime_repo, "worktree", "remove", "--force", str(worktree), check=False)
+    if branch:
+        git(runtime_repo, "branch", "-D", branch, check=False)
     shutil.rmtree(worktree, ignore_errors=True)
 
 
