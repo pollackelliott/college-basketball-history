@@ -56,7 +56,7 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
 
-    def test_pending_refresh_or_expansion_verification_uses_current_verifier_only_after_linear_advance(self):
+    def test_pending_refresh_expansion_or_rebootstrap_verification_uses_current_verifier_only_after_linear_advance(self):
         text = self.workflow
         self.assertIn(
             "pending_operation: ${{ steps.detect.outputs.pending_operation }}",
@@ -75,7 +75,7 @@ class RemoteImplementationWorkflowRuntimeAuthorityTests(unittest.TestCase):
             text,
         )
         self.assertIn(
-            'if [[ "$pending_operation" != "STAGE2_CURRENT_MAIN_REFRESH" && "$pending_operation" != "EXPANSION_PHASE0" ]]; then',
+            'if [[ "$pending_operation" != "STAGE2_CURRENT_MAIN_REFRESH" && "$pending_operation" != "EXPANSION_PHASE0" && "$pending_operation" != "EXPANSION_REBOOTSTRAP_FROM_FREEZE" ]]; then',
             text,
         )
         self.assertIn(

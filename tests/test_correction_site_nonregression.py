@@ -131,6 +131,44 @@ class CorrectionSiteNonregressionTests(unittest.TestCase):
         verify_expansion_current(after, proof, "houston")
 
 
+    def test_expansion_nonregression_allows_classified_error_count_to_shrink(self):
+        before = report(gaps=(), lost=0)
+        after = report(gaps=(), lost=0)
+        for value in (before, after):
+            value["school_key"] = "houston"
+            value["history_start_season"] = "1950-1951"
+            value["source_validation_scope"] = {
+                "mode": "FULL_SOURCE_PACKAGE",
+                "scoped_source_games": 2394,
+            }
+            value["source_site_counts"] = {"material_gap_rows": 11}
+            value["status"] = "FAIL"
+        before["counts"]["target_canonical_games"] = 2296
+        after["counts"]["target_canonical_games"] = 2395
+
+        before["counts"]["strict_home_gap"] = 2
+        before["examples"]["strict_home_gap"] = ["CBBG-OLD", "CBBG-0101041"]
+        after["counts"]["strict_home_gap"] = 1
+        after["examples"]["strict_home_gap"] = ["CBBG-0101041"]
+
+        before["errors"] = [
+            "2 in-scope target HOME canonical game(s) are missing venue and/or "
+            "complete location without a valid researched-unresolved HOME venue "
+            "exception or exact protected-main owner-authorized HOME locality "
+            "exception. Ordinary research statuses remain nonwaivable."
+        ]
+        after["errors"] = [
+            "1 in-scope target HOME canonical game(s) are missing venue and/or "
+            "complete location without a valid researched-unresolved HOME venue "
+            "exception or exact protected-main owner-authorized HOME locality "
+            "exception. Ordinary research statuses remain nonwaivable."
+        ]
+
+        proof = prove_expansion(before, after)
+        self.assertEqual(proof["removed_site_findings"], 1)
+        self.assertTrue(proof["site_debt_remains"])
+
+
     def test_expansion_nonregression_allows_new_researched_nonblocking_categories(self):
         before = report(gaps=(), lost=0)
         after = report(gaps=(), lost=0)

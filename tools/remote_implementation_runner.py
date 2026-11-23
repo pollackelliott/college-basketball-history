@@ -18,6 +18,7 @@ from remote_implementation_control import (
     MUTATION_PUBLISHED,
     OP_PHASE0,
     OP_EXPANSION_PHASE0,
+    OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_STAGE1,
@@ -86,6 +87,11 @@ from remote_implementation_scope_supersession_transaction import (
     scope_supersession_changed_paths,
 )
 from remote_implementation_expansion_phase0 import run_expansion_phase0
+from remote_implementation_expansion_rebootstrap import (
+    finalize_expansion_rebootstrap_successor,
+    run_expansion_rebootstrap,
+    verify_superseded_bundle,
+)
 from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
     add_existing_onboarding_worktree,
@@ -4119,6 +4125,83 @@ def run_recovery(
         prepared = manifest["prepared_commit_sha"]
         if not target_branch or actual_target != prepared:
             raise Stop("RECOVERY_TARGET_NOT_EXACT_PREPARED_COMMIT")
+
+        if state.get("active_operation") == OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE:
+            if manifest.get("operation") != OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE:
+                raise Stop("RECOVERY_EXPANSION_REBOOTSTRAP_OPERATION_MISMATCH")
+            if (
+                manifest.get("protected_main_sha") != live_main
+                or prepared != live_main
+            ):
+                raise Stop("RECOVERY_EXPANSION_REBOOTSTRAP_MAIN_MISMATCH")
+            tree = git("rev-parse", "%s^{tree}" % prepared).stdout.strip()
+            if tree != manifest.get("prepared_tree_sha"):
+                raise Stop("RECOVERY_EXPANSION_REBOOTSTRAP_TREE_MISMATCH")
+            prefix = Path(state["active_writeahead_path"]).parent
+            bundle_bytes = git_show_bytes(
+                predecessor_commit,
+                (prefix / "superseded-target.bundle").as_posix(),
+            )
+            expected_bundle_sha = (manifest.get("sidecars") or {}).get(
+                "superseded-target.bundle"
+            )
+            if sha256_bytes(bundle_bytes) != expected_bundle_sha:
+                raise Stop("RECOVERY_EXPANSION_REBOOTSTRAP_BUNDLE_HASH_MISMATCH")
+            scratch = Path(
+                tempfile.mkdtemp(prefix="recovery-expansion-rebootstrap-")
+            )
+            try:
+                bundle_path = scratch / "superseded-target.bundle"
+                bundle_path.write_bytes(bundle_bytes)
+                verify_superseded_bundle(
+                    bundle_path,
+                    expected_sha256=manifest["superseded_bundle_sha256"],
+                    expected_target_sha=manifest[
+                        "expected_target_predecessor_sha"
+                    ],
+                    expected_ref=manifest["superseded_bundle_ref"],
+                    expected_merge_base_sha=manifest[
+                        "superseded_merge_base_sha"
+                    ],
+                    repo=ROOT,
+                )
+            finally:
+                shutil.rmtree(scratch, ignore_errors=True)
+            original_request_id = state["active_request_id"]
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_request_bytes = git_show_bytes(
+                predecessor_commit,
+                original_request_path,
+            )
+            if sha256_bytes(original_request_bytes) != state[
+                "active_request_sha256"
+            ]:
+                raise Stop("RECOVERY_EXPANSION_REBOOTSTRAP_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_request_bytes)
+            commit = finalize_expansion_rebootstrap_successor(
+                active=state,
+                original_request=original_request,
+                request_sha256=state["active_request_sha256"],
+                live_main=live_main,
+                writeahead=manifest,
+                writeahead_path=state["active_writeahead_path"],
+                writeahead_sha256=state["active_writeahead_sha256"],
+                writeahead_commit=state.get("active_writeahead_commit"),
+                expected_remote=request_commit,
+                publication_cas="RECOVERY_ADOPTION_EXACT_MATCH",
+                extra_commit_paths=[directory],
+                recovery_request_id=request["request_id"],
+                recovery_classification=classification,
+            )
+            print(
+                "REMOTE EXPANSION RE-BOOTSTRAP RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
         parent = git("rev-parse", "%s^" % prepared).stdout.strip()
         tree = git("rev-parse", "%s^{tree}" % prepared).stdout.strip()
         if parent != manifest["prepared_parent_sha"]:
@@ -4715,6 +4798,15 @@ def main() -> int:
                 request_commit,
                 predecessor_commit,
                 live_main,
+            )
+        elif request["operation"] == OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE:
+            run_expansion_rebootstrap(
+                state=state,
+                request=request,
+                request_bytes=request_bytes,
+                request_commit=request_commit,
+                predecessor_commit=predecessor_commit,
+                live_main=live_main,
             )
         elif request["operation"] == OP_EXPANSION_PHASE0:
             run_expansion_phase0(

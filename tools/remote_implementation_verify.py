@@ -13,6 +13,7 @@ from remote_implementation_control import (
     LIFECYCLE_IDLE,
     OP_PHASE0,
     OP_EXPANSION_PHASE0,
+    OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_STAGE2_CENSUS,
@@ -59,6 +60,9 @@ from remote_implementation_scope_supersession_transaction import (
 )
 from remote_implementation_expansion_phase0 import (
     verify_expansion_phase0_equivalence,
+)
+from remote_implementation_expansion_rebootstrap import (
+    verify_expansion_rebootstrap_equivalence,
 )
 from remote_implementation_stage2_census import (
     STAGE2_ARTIFACT_NAMES,
@@ -2813,6 +2817,13 @@ def main() -> int:
         if state.get("lifecycle_state") != LIFECYCLE_IDLE:
             raise Stop("FRESH_VERIFY_CONTROL_NOT_IDLE")
         last = state.get("last_operation") or {}
+        if last.get("operation") == OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE:
+            return verify_expansion_rebootstrap_equivalence(
+                live_main=live_main,
+                control_head=control_head,
+                state=state,
+                diag=DIAG,
+            )
         if last.get("operation") == OP_EXPANSION_PHASE0:
             return verify_expansion_phase0_equivalence(
                 live_main=live_main,

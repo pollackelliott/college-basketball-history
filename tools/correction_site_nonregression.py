@@ -34,6 +34,30 @@ EXPANSION_BLOCKING_CATEGORIES = frozenset({
     "unaccounted_public_gap",
 })
 
+# Canonical site-gate error text includes live population counts. Those counts may
+# legitimately decrease during an expansion repair even when no new failing game
+# is introduced. The structured blocking populations above are authoritative for
+# those known families. Any error outside these explicitly classified families
+# remains fail-closed and must already exist in the baseline report.
+EXPANSION_CLASSIFIED_ERROR_MARKERS = (
+    "in-scope target HOME canonical game(s) are missing ",
+    "canonical game(s) carry a researched HOME exception marker ",
+    "in-scope NCAA canonical game(s) are missing ",
+    "target source evidence was lost in the canonical result:",
+    "safe reciprocal assertion evidence is available but remains ",
+    "canonical public site-gap game(s) are not backed by explicit ",
+)
+
+def _unclassified_expansion_errors(errors: list[Any]) -> list[Any]:
+    return [
+        error
+        for error in errors
+        if not (
+            isinstance(error, str)
+            and any(marker in error for marker in EXPANSION_CLASSIFIED_ERROR_MARKERS)
+        )
+    ]
+
 def stable(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
@@ -205,7 +229,21 @@ def prove_expansion(before: dict[str, Any], after: dict[str, Any]) -> dict[str, 
     after_errors = after.get("errors", [])
     if not isinstance(before_errors, list) or not isinstance(after_errors, list):
         raise WorkflowError("expansion site proof requires structured site errors")
-    new_errors = [error for error in after_errors if error not in before_errors]
+
+    # Known canonical publication-error families are already proven above by
+    # complete canonical-game populations. Their rendered sentences include live
+    # counts, so a population shrinking from N to N-1 must not be misclassified as
+    # a new failure merely because the human-readable sentence changed.
+    #
+    # Unknown/future error families remain fail-closed: an unclassified error may
+    # appear after expansion only if the exact same error already existed before.
+    before_unclassified_errors = _unclassified_expansion_errors(before_errors)
+    after_unclassified_errors = _unclassified_expansion_errors(after_errors)
+    new_errors = [
+        error
+        for error in after_unclassified_errors
+        if error not in before_unclassified_errors
+    ]
     if new_errors:
         raise WorkflowError(
             "expansion introduced site failure report-error: "
