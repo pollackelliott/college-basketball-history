@@ -339,6 +339,115 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
             )
 
 
+    def make_automatic_phase0_venue_successor(
+        self, src: Path, *, variant: str = "valid", frozen_prebound_id: bool = False
+    ) -> None:
+        self.make_git_fixture(src)
+        authority = src / ".onboarding/example/integration-freeze.json"
+        manifest = json.loads(authority.read_text(encoding="utf-8"))
+        school_venues = src / "schools/example/venues.csv"
+
+        frozen_id = "VEN-000011" if frozen_prebound_id else ""
+        frozen = (
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            "example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,Inherited note\n"
+            f"example,new-gym,{frozen_id},New Gym,Example,EX,New note\n"
+        )
+        frozen_sha = hashlib.sha256(frozen.encode("utf-8")).hexdigest()
+        manifest["candidate_member_sha256"]["venues.csv"] = frozen_sha
+        manifest["package_member_sha256"]["venues.csv"] = frozen_sha
+        manifest["venue_reconciliation"] = None
+        manifest["venue_reconciliation_sha256"] = ""
+        manifest["venue_reconciliation_census"] = None
+        manifest["venue_support_actions"] = {
+            "EXTEND_INHERITED": 0,
+            "NEW_SUPPLEMENTAL": 1,
+            "REUSE_INHERITED": 0,
+        }
+
+        school_venues.write_text(
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            "example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,Inherited note\n",
+            encoding="utf-8",
+        )
+        self.git(src, "add", "schools/example/venues.csv")
+        self.git(src, "commit", "-m", "Synthetic protected main integration base")
+        baseline = self.git(src, "rev-parse", "HEAD")
+        manifest["protected_main_sha"] = baseline
+        manifest["integration_base_sha"] = baseline
+        manifest["manifest_self_fingerprint_sha256"] = fingerprint(manifest)
+        authority.write_text(
+            json.dumps(manifest, sort_keys=True) + "\n", encoding="utf-8"
+        )
+
+        final_key = "changed-new-gym" if variant == "wrong_key" else "new-gym"
+        final_city = "Changed City" if variant == "wrong_city" else "Example"
+        school_venues.write_text(
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            "example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,Inherited note\n"
+            f"example,{final_key},VEN-000011,New Gym,{final_city},EX,"
+            "New note Integration rebase resolved final global venue ID VEN-000011.\n",
+            encoding="utf-8",
+        )
+        registry = src / "data/reference/venues.csv"
+        registry.write_text(
+            registry.read_text(encoding="utf-8")
+            + f"VEN-000011,{final_key},New Gym,{final_city},EX\n",
+            encoding="utf-8",
+        )
+        self.git(src, "add", "schools/example/venues.csv", "data/reference/venues.csv")
+        self.git(src, "commit", "-m", "Stage example all-history expansion Phase 0")
+        self.commit_display(src)
+
+    def test_automatic_phase0_venue_projection_survives_display_successor(self):
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "source", Path(temp) / "copy"
+            self.make_automatic_phase0_venue_successor(src)
+            with mock.patch.object(
+                onboard_school,
+                "frozen_venue_split_freeze_bytes",
+                side_effect=[None, None],
+            ):
+                onboard_school.copy_repository(src, dst, school_key="example")
+            self.assertTrue(
+                (dst / ".onboarding/example/integration-freeze.json").is_file()
+            )
+            self.assertFalse(
+                (dst / ".onboarding/example/venue-reconciliation.json").exists()
+            )
+
+    def test_automatic_phase0_prebound_venue_id_projection_survives_display_successor(self):
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "source", Path(temp) / "copy"
+            self.make_automatic_phase0_venue_successor(
+                src, frozen_prebound_id=True
+            )
+            with mock.patch.object(
+                onboard_school,
+                "frozen_venue_split_freeze_bytes",
+                side_effect=[None, None],
+            ):
+                onboard_school.copy_repository(src, dst, school_key="example")
+            self.assertTrue(
+                (dst / ".onboarding/example/integration-freeze.json").is_file()
+            )
+
+    def test_automatic_phase0_venue_projection_rejects_other_row_changes(self):
+        for variant in ("wrong_key", "wrong_city"):
+            with self.subTest(variant=variant), tempfile.TemporaryDirectory() as temp:
+                src, dst = Path(temp) / "source", Path(temp) / "copy"
+                self.make_automatic_phase0_venue_successor(src, variant=variant)
+                with mock.patch.object(
+                    onboard_school,
+                    "frozen_venue_split_freeze_bytes",
+                    side_effect=[None, None],
+                ):
+                    with self.assertRaisesRegex(
+                        WorkflowError, "Integration Freeze package mismatch"
+                    ):
+                        onboard_school.copy_repository(src, dst, school_key="example")
+                self.assertFalse(dst.exists())
+
     def make_phase0_venue_successor(
         self, src: Path, *, variant: str = "valid"
     ) -> bytes:
