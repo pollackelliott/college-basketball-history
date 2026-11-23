@@ -1,0 +1,37 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "discrepancy": 6
+    },
+    "decision_count": 6,
+    "decision_fields": {
+      "site_type": 6
+    },
+    "site_or_han_review_decision_ids": [
+      "DISCREPANCY-MIA-EXP-S1-1939-006-SITE_TYPE",
+      "DISCREPANCY-MIA-EXP-S1-1947-003-SITE_TYPE",
+      "DISCREPANCY-MIA-EXP-S1-1947-004-SITE_TYPE",
+      "DISCREPANCY-MIA-EXP-S1-1947-005-SITE_TYPE",
+      "DISCREPANCY-MIA-EXP-S1-1947-015-SITE_TYPE",
+      "DISCREPANCY-MIA-EXP-S1-1947-016-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 6,
+      "topology": "site_or_han_review_population"
+    }
+  ]
+}
