@@ -743,18 +743,19 @@
     "kentucky-expansion-release-gate2-approval-0001",
     "kentucky-expansion-release-production-proof-0001",
     "miami-expansion-phase0-0004",
-    "miami-expansion-phase0-0005"
+    "miami-expansion-phase0-0005",
+    "miami-expansion-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "miami-expansion-stage2-census-0001",
+  "active_request_sha256": "cefabb4d0f2a6bba2ed04fb55c6eec84f8cd6595fc25ecd3c9a71375d6f1499c",
+  "active_school_key": "miami",
+  "active_target_branch": "data/miami-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1489,8 +1490,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/miami/miami-expansion-phase0-0005/writeahead-manifest.json",
     "writeahead_manifest_sha256": "556357a2d2bb4320075bebcf413461b2000cc2470c70682ac0928fd0759838f6"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45094832312",
+  "lock_acquisition_request_commit": "5a4a4c88ab7c2785113fe48ce99ac0030baeef20",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
