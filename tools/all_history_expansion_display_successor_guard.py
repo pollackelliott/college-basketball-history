@@ -209,6 +209,68 @@ def _reconstruct_frozen_venues(
         return reject("phase0_commit_message_invalid")
 
     census = integration_freeze.get("venue_reconciliation_census")
+    if census is None:
+        # Phase 0 can deterministically assign the final global VEN ID to
+        # supplemental venue rows without an explicit reconciliation sidecar.
+        # Authenticate that legacy/no-sidecar topology by reversing only that
+        # automatic ID + integration-note projection on the exact supplemental
+        # tail and requiring byte-identical recovery of frozen venues.csv.
+        if (
+            integration_freeze.get("venue_reconciliation") is not None
+            or str(integration_freeze.get("venue_reconciliation_sha256") or "")
+        ):
+            return reject("phase0_venue_census_invalid")
+        support_actions = integration_freeze.get("venue_support_actions")
+        expected_new = (
+            support_actions.get("NEW_SUPPLEMENTAL")
+            if isinstance(support_actions, dict) else None
+        )
+        if not isinstance(expected_new, int) or expected_new <= 0:
+            return reject("phase0_automatic_venue_population_invalid")
+
+        fields, rows = _rows(phase0_venues)
+        if not {"venue_key", "venue_id", "notes"}.issubset(fields):
+            return reject("phase0_venue_schema_invalid")
+        parent_venues = _blob(root, integration_base, school, "venues.csv")
+        if parent_venues is None:
+            return reject("phase0_parent_venues_unavailable")
+        parent_fields, parent_rows = _rows(parent_venues)
+        if parent_fields != fields:
+            return reject("phase0_parent_venue_schema_mismatch")
+        if (
+            len(rows) != len(parent_rows) + expected_new
+            or rows[:len(parent_rows)] != parent_rows
+        ):
+            return reject("phase0_automatic_venue_population_mismatch")
+
+        registry = _registry_ids_by_key(root, phase0_commit)
+        if registry is None:
+            return reject("phase0_global_venue_registry_unavailable")
+        restored = [dict(row) for row in rows]
+        for index in range(len(parent_rows), len(restored)):
+            row = restored[index]
+            key = row.get("venue_key", "").strip()
+            venue_id = row.get("venue_id", "").strip()
+            if (
+                not key
+                or not re.fullmatch(r"VEN-[0-9]{6}", venue_id)
+                or registry.get(key) != venue_id
+            ):
+                return reject("phase0_automatic_venue_id_authority_mismatch")
+            suffix = PHASE0_VENUE_SUFFIX.format(venue_id=venue_id)
+            notes = row.get("notes", "")
+            if not notes.endswith(suffix):
+                return reject("phase0_automatic_venue_note_suffix_invalid")
+            row["venue_id"] = ""
+            row["notes"] = notes[:-len(suffix)]
+
+        reconstructed = _csv_bytes(
+            fields, restored, bom=phase0_venues.startswith(b"\xef\xbb\xbf")
+        )
+        if _sha(reconstructed) != freeze_venue_sha256:
+            return reject("phase0_automatic_venue_reconstruction_mismatch")
+        return True
+
     if (
         not isinstance(census, dict)
         or census.get("schema_version") != 1
