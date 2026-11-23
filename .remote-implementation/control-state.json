@@ -758,15 +758,15 @@
   "active_lock_commit": "0721bd7ec4d67c07b7d2815f00cfe1f10e383377",
   "active_lock_owner": "github-actions:45265656471:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829",
+  "active_prepared_tree_sha": "5577a9c04f468977eaa2e3ba66dc7b8bb5336b8b",
   "active_request_id": "miami-expansion-stage2-refresh-0001",
   "active_request_sha256": "abf66e93b7a37e88e0ed8fdc3925e7da83dff991226bcd8e494265bdd82a8396",
   "active_school_key": "miami",
   "active_target_branch": "data/miami-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/miami/miami-expansion-stage2-refresh-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "fe089eb0be96571cd141d6951efceb717f9c9623a81ca6f76ec1413f76615d05",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1520,5 +1520,5 @@
   "lock_acquisition_request_commit": "d92697953bb008921a0bc878dd0413f1fdef313e",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

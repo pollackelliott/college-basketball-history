@@ -1,0 +1,72 @@
+{
+  "changed_file_sha256": {
+    "docs/remote-implementation-runner.md": "d9b762f967b984f41a184d42daec82b63bf78c9fcc7b9329cd76621bde9b5d71",
+    "tests/test_all_history_expansion_integration.py": "cd282cdaff58a4b5a663a948201df4b08dcadb303e536103c21e57126f8edd9b",
+    "tests/test_all_history_expansion_rehearsal_freeze.py": "d17ec0ee4b60b47d33926659d57fd783ec23b447ade83cdfe87388da5b736afd",
+    "tools/all_history_expansion_display_successor_guard.py": "10699c7e42cfe4a5b4f932127b883516fbc06a0bfd5deea322a3d9d7a72eda76",
+    "tools/all_history_expansion_integration.py": "aa888527c48e9819fbb52eda2824dc9184d66e4e2e65933a416886932d3f68f7"
+  },
+  "changed_paths": [
+    "docs/remote-implementation-runner.md",
+    "tests/test_all_history_expansion_integration.py",
+    "tests/test_all_history_expansion_rehearsal_freeze.py",
+    "tools/all_history_expansion_display_successor_guard.py",
+    "tools/all_history_expansion_integration.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "1f88c7a3f40f099547b05f6d2e4edce447c493a3",
+  "main_changed_paths": [
+    "docs/remote-implementation-runner.md",
+    "tests/test_all_history_expansion_integration.py",
+    "tests/test_all_history_expansion_rehearsal_freeze.py",
+    "tools/all_history_expansion_display_successor_guard.py",
+    "tools/all_history_expansion_integration.py"
+  ],
+  "merge_base_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "d42a0b744e5df1ab8aa1363e12dfe484659bf633d47ddac56983bb5b73aaee39",
+    "notes.md": "9452627ea51a119e6afbce59a89be1486644fd627222ddc9df32b53c8ed998e2",
+    "opponents.csv": "3d4a26328ce4333afde39e600e333b63b70fbb2cf6c03e1d98667c13c9945c08",
+    "source-games.csv": "c8103bf8caee2d68a19e4bf0c6555f2afe29dea846445744620c852bb662b443",
+    "source-notes.md": "22519c9eddb03bd6fdb942539610a9d61721a0053b50db9cae2ed60c1061cc46",
+    "venues.csv": "a5c13340795b56455cdb00f3a99500c8f740304910f3f16f29aea5a90cac587c"
+  },
+  "prepared_commit_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829",
+  "prepared_parents": [
+    "1f88c7a3f40f099547b05f6d2e4edce447c493a3",
+    "8189b49651171b032d1c1d19f54f0d39ee1ed675"
+  ],
+  "prepared_tree_sha": "5577a9c04f468977eaa2e3ba66dc7b8bb5336b8b",
+  "preserved_target_file_sha256": {
+    "data/reference/program-top-level-scope.csv": "dbf44ece112190bad82fa326e4d6eab567df1e59ae2e9b399922c3ef3c6b7468",
+    "data/reference/programs.csv": "cebd8dbac5ee00b5f79db430b9897098eda793e9ddf20ce95b7bf80b71aeb38f",
+    "data/reference/venue-names.csv": "8519617c4e52f1ca442c928fe23eb132b99e539fedebd7e8601c0d997d173838",
+    "schools/miami/notes.md": "9452627ea51a119e6afbce59a89be1486644fd627222ddc9df32b53c8ed998e2",
+    "schools/miami/opponents.csv": "3d4a26328ce4333afde39e600e333b63b70fbb2cf6c03e1d98667c13c9945c08",
+    "schools/miami/source-games.csv": "c8103bf8caee2d68a19e4bf0c6555f2afe29dea846445744620c852bb662b443",
+    "schools/miami/source-notes.md": "22519c9eddb03bd6fdb942539610a9d61721a0053b50db9cae2ed60c1061cc46",
+    "schools/miami/venues.csv": "a5c13340795b56455cdb00f3a99500c8f740304910f3f16f29aea5a90cac587c",
+    "site/data/programs.json": "0d8b93983f3ffd2fc5b96c7a5e38d85ea5054bd57aef002607137abf1184adeb",
+    "site/data/teams/miami.json": "b73b3d6ad9117b3af160a3ecb2907b6ef9833903abbc0ebd79630c8efaf1ec61"
+  },
+  "protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "target_branch": "data/miami-onboarding",
+  "target_changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "schools/miami/notes.md",
+    "schools/miami/opponents.csv",
+    "schools/miami/source-games.csv",
+    "schools/miami/source-notes.md",
+    "schools/miami/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/miami.json"
+  ]
+}

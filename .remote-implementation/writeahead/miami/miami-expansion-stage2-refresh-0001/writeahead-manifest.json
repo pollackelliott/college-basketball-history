@@ -1,0 +1,73 @@
+{
+  "changed_file_sha256": {
+    "docs/remote-implementation-runner.md": "d9b762f967b984f41a184d42daec82b63bf78c9fcc7b9329cd76621bde9b5d71",
+    "tests/test_all_history_expansion_integration.py": "cd282cdaff58a4b5a663a948201df4b08dcadb303e536103c21e57126f8edd9b",
+    "tests/test_all_history_expansion_rehearsal_freeze.py": "d17ec0ee4b60b47d33926659d57fd783ec23b447ade83cdfe87388da5b736afd",
+    "tools/all_history_expansion_display_successor_guard.py": "10699c7e42cfe4a5b4f932127b883516fbc06a0bfd5deea322a3d9d7a72eda76",
+    "tools/all_history_expansion_integration.py": "aa888527c48e9819fbb52eda2824dc9184d66e4e2e65933a416886932d3f68f7"
+  },
+  "changed_paths": [
+    "docs/remote-implementation-runner.md",
+    "tests/test_all_history_expansion_integration.py",
+    "tests/test_all_history_expansion_rehearsal_freeze.py",
+    "tools/all_history_expansion_display_successor_guard.py",
+    "tools/all_history_expansion_integration.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "1f88c7a3f40f099547b05f6d2e4edce447c493a3",
+  "global_lock_commit": "0721bd7ec4d67c07b7d2815f00cfe1f10e383377",
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    "docs/remote-implementation-runner.md",
+    "tests/test_all_history_expansion_integration.py",
+    "tests/test_all_history_expansion_rehearsal_freeze.py",
+    "tools/all_history_expansion_display_successor_guard.py",
+    "tools/all_history_expansion_integration.py"
+  ],
+  "merge_base_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "d42a0b744e5df1ab8aa1363e12dfe484659bf633d47ddac56983bb5b73aaee39",
+    "notes.md": "9452627ea51a119e6afbce59a89be1486644fd627222ddc9df32b53c8ed998e2",
+    "opponents.csv": "3d4a26328ce4333afde39e600e333b63b70fbb2cf6c03e1d98667c13c9945c08",
+    "source-games.csv": "c8103bf8caee2d68a19e4bf0c6555f2afe29dea846445744620c852bb662b443",
+    "source-notes.md": "22519c9eddb03bd6fdb942539610a9d61721a0053b50db9cae2ed60c1061cc46",
+    "venues.csv": "a5c13340795b56455cdb00f3a99500c8f740304910f3f16f29aea5a90cac587c"
+  },
+  "predecessor_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "prepared_commit_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829",
+  "prepared_main_parent_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "prepared_parent_sha": "1f88c7a3f40f099547b05f6d2e4edce447c493a3",
+  "prepared_parents": [
+    "1f88c7a3f40f099547b05f6d2e4edce447c493a3",
+    "8189b49651171b032d1c1d19f54f0d39ee1ed675"
+  ],
+  "prepared_tree_sha": "5577a9c04f468977eaa2e3ba66dc7b8bb5336b8b",
+  "protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "refresh_proof_sha256": "de8cca2510f3c0300351617327d24bfcda08be68466c1f597b29dbf84d79ab70",
+  "repository_validation": "PASS",
+  "request_id": "miami-expansion-stage2-refresh-0001",
+  "request_sha256": "abf66e93b7a37e88e0ed8fdc3925e7da83dff991226bcd8e494265bdd82a8396",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "sidecars": {
+    "integration-freeze.json": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+    "refresh-proof.json": "de8cca2510f3c0300351617327d24bfcda08be68466c1f597b29dbf84d79ab70"
+  },
+  "target_branch": "data/miami-onboarding",
+  "target_changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "schools/miami/notes.md",
+    "schools/miami/opponents.csv",
+    "schools/miami/source-games.csv",
+    "schools/miami/source-notes.md",
+    "schools/miami/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/miami.json"
+  ]
+}
