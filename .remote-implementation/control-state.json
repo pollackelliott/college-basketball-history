@@ -756,18 +756,19 @@
     "miami-expansion-stage2-census-0003",
     "miami-expansion-stage2-proposal-0004",
     "miami-expansion-stage2-gate1-fill-0001",
-    "miami-expansion-stage2-preseal-0001"
+    "miami-expansion-stage2-preseal-0001",
+    "miami-expansion-stage2-gate1-seal-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_GATE1_SEAL",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "miami-expansion-stage2-gate1-seal-0001",
+  "active_request_sha256": "a169d807090cb6aa3fa1a5e8846d7d3f7cf34a825e85a3785c9bcc13ec2899ac",
+  "active_school_key": "miami",
+  "active_target_branch": "data/miami-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1524,8 +1525,11 @@
     "target_branch": "data/miami-onboarding",
     "target_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45274389277",
+  "lock_acquisition_request_commit": "b48e42a1fd743b023805b337a9be763c927d5b3e",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_GATE1_SEAL_RUNNING"
 }
