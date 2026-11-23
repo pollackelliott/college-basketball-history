@@ -1,0 +1,21 @@
+{
+  "expected_target_predecessor_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "request_id": "miami-expansion-phase0-0006",
+  "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "4248640afb25a269750fcf5a20e4e76ee19538267ed5a471d1e3245fd807a5a4",
+    "integration-freeze.json": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+    "phase0-preview.json": "234d9140e6882f8e0a4fb9826e71595c8132478257540202292a7fe815628dc7",
+    "stage1-independent-proof.json": "352c2b4519b3b13fd00948e67ea85f5de59c5ecd6b4fcafb5074393443f30e03"
+  },
+  "stage1_control_authority_sha": "a8e30799b2d456a23d5116e0fea4ee35c84f9968",
+  "stage1_independent_proof_sha256": "352c2b4519b3b13fd00948e67ea85f5de59c5ecd6b4fcafb5074393443f30e03",
+  "venue_reconciliation_sha256": ""
+}
