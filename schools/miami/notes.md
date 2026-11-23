@@ -174,3 +174,18 @@ Stage 6 stops before Stage 7 immutable packaging. `RESEARCH_FROZEN` has not been
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=34d43832b403db09123bc7c8860b85dfdf8460f3` from `research_base_sha=5fa4d84e6b646a7c5e29f426905435c130caeee1`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Miami (FL) ALL_HISTORY_EXPANSION Research Freeze
+
+research_base_sha=33af595fcae2a17664379638f89ce64c2e63be08
+researched institutional inception=1927-1928
+
+This artifact freezes the accepted supplemental expansion Research against the immutable inherited baseline. The inherited published package is not re-researched or rewritten by this freeze.
+
+Stage 6 checkpoint 0034 remains the terminal pre-freeze historical authority: 176 supplemental competitive games; 75 researched unresolved exact dates; 0 UNKNOWN H/A/N; 104 explicitly researched unresolved HOME exact venues; owner NON_D1 sanity scan APPROVED; pre-freeze adversarial self-challenge PASS.
+
+The two external inherited-baseline blockers are now durably resolved on protected main 7b8287e79b6bd4a8ee2b028b5b8d777f7f5c7cec. PR #667 corrected Alabama ALARAW-01436 to Miami (OH) / miami-oh. PR #678 corrected Miami's published pre-hiatus conference chronology to Independent (1948-49 through 1953-54), Florida Intercollegiate Conference (1954-55 through 1964-65), Independent (1965-66 through 1970-71). Those corrections remain outside supplemental expansion mutation authority.

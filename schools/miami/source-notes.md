@@ -148,3 +148,40 @@ Only recognized competitive varsity games in the accepted top-level scope are re
 Protected-main compare from immutable `research_base_sha` `5fa4d84e6b646a7c5e29f426905435c130caeee1` to Stage 6 protected main `953837e1da328fe4c8c99529b04ef91535194e4d` contains only Stage 3A-0 portable-tooling/policy files and no basketball data/reference or school source-game changes. Broad refetch of canonical/evidence datasets was therefore unnecessary for the defined challenge.
 
 For the surviving neutral exact-building debt that already preserved published-reciprocal provenance, Stage 6 checked the exact protected-main reciprocal rows only. Clemson (`CLEM-R-1955-011`, `CLEM-R-1958-006`, `CLEM-R-1966-003`), TCU (`TCU-R-00850`), Stanford (`STAN-R-1716`), and Tennessee (`TENRAW-00812`, `TENRAW-01817`) remain locality-only. Michigan `MICHRAW-01588` explicitly supplies Sullivan Arena, Anchorage, AK, so Miami `MIA-S1-1987-001` is repaired to that venue and linked to protected-main `VEN-000361`.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Miami (FL) ALL_HISTORY_EXPANSION freeze source notes
+
+Stage 7 preserves Stage 6 accepted source provenance without new historical research.
+
+# miami source notes
+
+Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.
+
+## Research coverage declaration
+
+- Primary-source historical results cutoff: 2024-2025
+- Required completed-season cutoff: 2025-2026
+- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.
+
+## Durable row-level source families
+
+
+## Stage 6 reciprocal date recovery
+
+Florida Southern College official men’s basketball opponent history versus the University of Miami was used as a field-specific reciprocal date source for nine 1939-40 through 1941-42 games. Exact dates were adopted only where season/opponent/score context uniquely matched the accepted Miami row. Existing Miami H/A/N and score authority was preserved where reciprocal fields conflicted.
+
+Source: https://fscmocs.com/sports/mens-basketball/opponent-history/university-of-miami/200
+
+### Stage 6 conference-history sources
+
+- University of Miami, *Basketball 1961-1962* guide: https://storage.googleapis.com/miamihurricanes-com-prod/2015/10/557686dc-2729593.pdf — year-by-year results mark F.I.C. games in 1954-55, 1955-56, and 1956-57; the “Perennial Champions” section lists Miami's complete conference record beginning in calendar 1955 (1954-55 season) through 1961.
+- University of Miami athletics, “Men’s Basketball Gets Ready For Columbia” (Nov. 20, 2000): https://miamihurricanes.com/news/2000/11/20/205546980-2 — states Miami went 10-0 in 1964-65 for its eighth straight Florida Intercollegiate Conference championship and that the league was disbanded the following year.
+- Florida Southern institutional 1965-66 record: https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/fscmocs.com/documents/2024/10/20/MB_2017-18.pdf — explicitly marks FIC games against Rollins, Stetson, and Tampa but not either 1965-66 Miami game.
+- Stetson institutional record book (1965-66 season): https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/stetson.sidearmsports.com/documents/2025/10/13/MBB_Record_Book_6.30.24.pdf — likewise marks FIC games while its two Miami games are non-conference.
+
+Together these sources support Miami FIC membership in 1954-55 through 1964-65 and Independent status beginning 1965-66.
+
