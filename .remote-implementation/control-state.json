@@ -753,15 +753,15 @@
   "active_lock_commit": "b8efbe6026b6228de656378f488b49c4cfeb8ad9",
   "active_lock_owner": "github-actions:45244282761:1",
   "active_operation": "EXPANSION_REBOOTSTRAP_FROM_FREEZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "active_prepared_tree_sha": "59019521315d1d0c3ef5bad701663a7d326618d7",
   "active_request_id": "miami-expansion-rebootstrap-0001",
   "active_request_sha256": "8847cd8e88a832bfc762218483532f2baa32b125bcc58f15bb850f28bc51b95e",
   "active_school_key": "miami",
   "active_target_branch": "data/miami-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/miami/miami-expansion-rebootstrap-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "b8c54a83832a7d600881ef4a9948c00dc7ca78de5e5bfec9199dde8b5f1880bb",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1510,5 +1510,5 @@
   "lock_acquisition_request_commit": "85170d6aac5c88c1cb339cc75cea02f77c410e27",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
