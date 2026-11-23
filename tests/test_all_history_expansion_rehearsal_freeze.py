@@ -445,6 +445,127 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
         self.commit_display(src)
         return sidecar
 
+    def make_no_sidecar_phase0_venue_successor(
+        self, src: Path, *, variant: str = "valid", frozen_with_id: bool = False
+    ) -> None:
+        """Reproduce a pre-fix null-census automatic registered venue reuse."""
+        self.make_git_fixture(src)
+        authority = src / ".onboarding/example/integration-freeze.json"
+        manifest = json.loads(authority.read_text(encoding="utf-8"))
+        venues = src / "schools/example/venues.csv"
+        inherited = (
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            "example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,Inherited note\n"
+        )
+        frozen_id = "VEN-000010" if frozen_with_id else ""
+        frozen = (
+            inherited
+            + f"example,reuse-gym,{frozen_id},Reuse Gym,Example,EX,Reuse note\n"
+        )
+        manifest["candidate_member_sha256"]["venues.csv"] = hashlib.sha256(
+            frozen.encode("utf-8")
+        ).hexdigest()
+        manifest["package_member_sha256"]["venues.csv"] = manifest[
+            "candidate_member_sha256"
+        ]["venues.csv"]
+        manifest["venue_reconciliation"] = None
+        manifest["venue_reconciliation_sha256"] = ""
+        manifest["venue_reconciliation_census"] = None
+        manifest["venue_support_actions"] = {
+            "NEW_SUPPLEMENTAL": 1, "EXTEND_INHERITED": 0, "REUSE_INHERITED": 0,
+        }
+        manifest["global_venue_reconciliation"] = {
+            "REUSE_REGISTERED_GLOBAL_VENUE": 1,
+            "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": 0,
+            "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER": 0,
+        }
+
+        venues.write_text(inherited, encoding="utf-8")
+        self.git(src, "add", "schools/example/venues.csv")
+        self.git(src, "commit", "-m", "Synthetic protected main integration base")
+        parent = self.git(src, "rev-parse", "HEAD")
+        manifest["integration_base_sha"] = parent
+        manifest["protected_main_sha"] = parent
+        if variant == "population_mismatch":
+            manifest["venue_support_actions"]["NEW_SUPPLEMENTAL"] = 2
+        if variant == "unexpected_sidecar":
+            manifest["venue_reconciliation"] = {"spec_path": "missing-sidecar"}
+        manifest["manifest_self_fingerprint_sha256"] = fingerprint(manifest)
+        authority.write_text(
+            json.dumps(manifest, sort_keys=True) + "\n", encoding="utf-8"
+        )
+
+        key = "wrong-global-key" if variant == "wrong_key" else "reuse-gym"
+        venue_id = "VEN-000999" if variant == "wrong_id" else "VEN-000010"
+        city = "Elsewhere" if variant == "wrong_city" else "Example"
+        state = "XX" if variant == "wrong_state" else "EX"
+        if variant == "missing_suffix":
+            suffix = ""
+        elif variant == "wrong_suffix":
+            suffix = " Integration rebase resolved final global venue ID VEN-000999."
+        else:
+            suffix = " Integration rebase resolved final global venue ID VEN-000010."
+        inherited_note = (
+            "Changed note" if variant == "inherited_tamper" else "Inherited note"
+        )
+        phase0 = (
+            "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
+            f"example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,{inherited_note}\n"
+            f"example,{key},{venue_id},Reuse Gym,{city},{state},Reuse note{suffix}\n"
+        )
+        if variant == "extra_row":
+            phase0 += (
+                "example,extra-gym,VEN-000011,Extra Gym,Example,EX,Extra note\n"
+            )
+        venues.write_text(phase0, encoding="utf-8")
+        self.git(src, "add", "schools/example/venues.csv")
+        self.git(src, "commit", "-m", "Stage example all-history expansion Phase 0")
+        self.commit_display(src)
+
+    def test_legacy_no_sidecar_phase0_successor_preserves_exact_freeze(self):
+        for frozen_with_id in (False, True):
+            with self.subTest(
+                frozen_with_id=frozen_with_id
+            ), tempfile.TemporaryDirectory() as temp:
+                src, dst = Path(temp) / "source", Path(temp) / "copy"
+                self.make_no_sidecar_phase0_venue_successor(
+                    src, frozen_with_id=frozen_with_id
+                )
+                with mock.patch.object(
+                    onboard_school, "frozen_venue_split_freeze_bytes",
+                    return_value=None,
+                ):
+                    onboard_school.copy_repository(src, dst, school_key="example")
+                self.assertEqual(
+                    (dst / ".onboarding/example/integration-freeze.json").read_bytes(),
+                    (src / ".onboarding/example/integration-freeze.json").read_bytes(),
+                )
+
+    def test_legacy_no_sidecar_phase0_rejects_venue_drift(self):
+        for variant in (
+            "wrong_key", "wrong_city", "wrong_state", "wrong_id",
+            "wrong_suffix", "missing_suffix", "extra_row",
+            "inherited_tamper", "population_mismatch", "unexpected_sidecar",
+        ):
+            with self.subTest(
+                variant=variant
+            ), tempfile.TemporaryDirectory() as temp:
+                src, dst = Path(temp) / "source", Path(temp) / "copy"
+                self.make_no_sidecar_phase0_venue_successor(
+                    src, variant=variant
+                )
+                with mock.patch.object(
+                    onboard_school, "frozen_venue_split_freeze_bytes",
+                    return_value=None,
+                ):
+                    with self.assertRaisesRegex(
+                        WorkflowError, "Integration Freeze package mismatch"
+                    ):
+                        onboard_school.copy_repository(
+                            src, dst, school_key="example"
+                        )
+                self.assertFalse(dst.exists())
+
     def test_phase0_venue_rebase_then_display_successor_survives_nested_rehearsal(self):
         with tempfile.TemporaryDirectory() as temp:
             src, dst = Path(temp) / "source", Path(temp) / "copy"
