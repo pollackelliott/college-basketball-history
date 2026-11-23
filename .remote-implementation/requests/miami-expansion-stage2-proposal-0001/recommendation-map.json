@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "school_key": "miami",
+  "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+  "source_stage2_successor": {
+    "path": ".remote-implementation/successors/miami/miami-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "a89559dbe72c1765f2fa9da9813ff1ea952e383de997a89942dddd160c1b86b3"
+  },
+  "prepared_against_protected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
+  "prepared_against_target_sha": "8165cc903c27fe10fa4584c1cdef160531d70e59",
+  "identity": {},
+  "decisions": {
+    "DISCREPANCY-MIA-EXP-S1-1939-006-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-003-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-004-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-005-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-015-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-MIA-EXP-S1-1947-016-SITE_TYPE": "KEEP_CANONICAL"
+  },
+  "basis_by_decision": {
+    "DISCREPANCY-MIA-EXP-S1-1939-006-SITE_TYPE": "Keep canonical site_type UNKNOWN for the Feb. 5, 1940 Miami-Wake Forest game. Miami's frozen expansion row asserts TEAM_B_HOME, while the existing canonical/reciprocal state remains UNKNOWN. The current evidence does not justify upgrading accepted canonical H/A/N from unknown on the strength of this one conflicting source assertion alone; preserve Miami's TEAM_B_HOME assertion as evidence rather than silently normalizing it.",
+    "DISCREPANCY-MIA-EXP-S1-1947-003-SITE_TYPE": "Keep canonical TEAM_A_HOME for Florida-Miami on Dec. 19, 1947. Florida's preserved reciprocal project evidence for the exact dated game records TEAM_A_HOME, while Miami's frozen expansion row records TEAM_B_HOME. Preserve Miami's conflicting assertion as evidence without overwriting the existing reciprocal-supported canonical H/A/N.",
+    "DISCREPANCY-MIA-EXP-S1-1947-004-SITE_TYPE": "Keep canonical TEAM_A_HOME for Florida-Miami on Dec. 20, 1947. Florida's preserved reciprocal project evidence for the exact dated game records TEAM_A_HOME, while Miami's frozen expansion row records TEAM_B_HOME. Preserve Miami's conflicting assertion as evidence without overwriting the existing reciprocal-supported canonical H/A/N.",
+    "DISCREPANCY-MIA-EXP-S1-1947-005-SITE_TYPE": "Keep canonical TEAM_B_HOME for Miami-Pittsburgh on Dec. 26, 1947. Pittsburgh's preserved reciprocal project evidence for the exact dated game records TEAM_B_HOME, while Miami's frozen expansion row records TEAM_A_HOME. Preserve Miami's conflicting assertion as evidence without overwriting the existing reciprocal-supported canonical H/A/N.",
+    "DISCREPANCY-MIA-EXP-S1-1947-015-SITE_TYPE": "Keep canonical TEAM_B_HOME for Florida-Miami on Feb. 20, 1948. Florida's preserved reciprocal project evidence for the exact dated game records TEAM_B_HOME, while Miami's frozen expansion row records TEAM_A_HOME. Preserve Miami's conflicting assertion as evidence without overwriting the existing reciprocal-supported canonical H/A/N.",
+    "DISCREPANCY-MIA-EXP-S1-1947-016-SITE_TYPE": "Keep canonical TEAM_B_HOME for Florida-Miami on Feb. 21, 1948. Florida's preserved reciprocal project evidence for the exact dated game records TEAM_B_HOME, while Miami's frozen expansion row records TEAM_A_HOME. Preserve Miami's conflicting assertion as evidence without overwriting the existing reciprocal-supported canonical H/A/N."
+  },
+  "canonical_patch_by_decision": {},
+  "source_patch_by_decision": {},
+  "notes_by_decision": {},
+  "venue_relationship_patch_by_decision": {},
+  "defaults": {}
+}
