@@ -1,0 +1,27 @@
+{
+  "action_counts": {
+    "KEEP_CANONICAL": 4,
+    "USE_SOURCE": 2
+  },
+  "approved_plan_hash_preview": "6a11495cd6f96ddf7fedc00006f5f39de571c81b36fbfedae82cf939bb1b73b4",
+  "decision_count": 6,
+  "decision_id_set_sha256": "e2717be027b381f7453997502ad8ea5cb539f1c71780668c3098351f08916063",
+  "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+  "filled_review_sha256": "e61f8bc72fc01662307d64bcbd4d4092ab0e63da3a1fcb214b24e8780e0c5424",
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_GATE1_FILL_VERIFICATION",
+  "owner_gate_1_approval_sha256": "02f25f376c544b3ab3853ac77b42bc8c5f85648d836caad25ea2dbaa2e5c2152",
+  "protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "recommendation_map_sha256": "0c20c5e2d660515634335ef54ede61287e6344b461706172c66adec9056c377f",
+  "remote_stage2_gate1_fill_equivalence": "PASS",
+  "request_id": "miami-expansion-stage2-gate1-fill-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "stage2_proposal_checkpoint_sha256": "3175f40faa56f61417f16b34056e27144252969710cdc28133d306f23a2f7e03",
+  "stage2_proposal_verification_sha256": "08f2ee891ff34daff39f84b75c89b558ac1ad809600a44aafc27b72dddc2eeed",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829",
+  "target_tree_sha": "5577a9c04f468977eaa2e3ba66dc7b8bb5336b8b",
+  "tracked_stage2_mutation": "NONE"
+}
