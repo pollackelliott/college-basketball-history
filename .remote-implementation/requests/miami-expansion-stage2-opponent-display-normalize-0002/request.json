@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "miami-expansion-stage2-opponent-display-normalize-0002",
+  "school_key": "miami",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "b760a61a5bf0db401cef378d0958cf6ee8f2478c",
+  "previous_control_state_sha256": "8928f8b65b66b7f8e062e1ba988d46ef1e4890d917edd1e05b42fcb6af5131dd",
+  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "427dc0b1be51e7fcc4a6847a76357cf4a71cc7d5",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-expansion-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "d07cc07053bfc81e8cf61d3e62fd49283f13bca498f22de6adbe3ff7bceb2467"
+  },
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Miami (FL) same ALL_HISTORY_EXPANSION Implementation lane, ordinary post-hard-reset Stage 2 representation normalization from independently verified census 0002.",
+    "authorization": "Owner said 'continue' during the already-authorized Miami Stage 2 phase. Fresh verified census 0002 has exactly one opponent historical display blocker for rio-grande with zero warnings and owner decisions. Authorize only the repository-owned census-bound display-only normalization and post-repair Stage 2 regeneration, no substantive historical mutation, new Research, Owner Gate 1, Preview, release, or merge."
+  }
+}
