@@ -1,7 +1,31 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "miami-expansion-release-readiness-0001",
+  "school_key": "miami",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "fcc041411ed5f2c95bb0ae64b2ab7a23b127b716",
+  "previous_control_state_sha256": "617d789811009a326d261d2545d264118e6d9c5fce58151be9b8b747c9d113f7",
+  "expected_protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/miami/miami-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "494c88102419892260b827ab0533714a04e9a7dc4009e410a23cad5c71f00931"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "045f34fc71fcdbbc263147e70b56040b4ed968bed00b7c5dcbbe7cfbc50af643"
+  },
   "approved_plan_hash": "f70993370c276fa6d762d2b4e1d4216a1978014f1838e087ff22172c9cbfaa36",
-  "approved_plan_sha256": "35198ac7e32c36a7973fc1f66b09a1ef71ab69c1bae0e32e18b33911171528e0",
+  "release_manifest_sha256": "04fe3f8ec161aa49fe8d106f38bde75bb783e62e74c7209de21c320f0ce5f329",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "miami-expansion-release-preview-0001"
+  },
   "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -9,9 +33,10 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
+    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -20,36 +45,11 @@
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from miami-expansion-stage2-gate1-seal-0001",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_id_set_sha256": "e2717be027b381f7453997502ad8ea5cb539f1c71780668c3098351f08916063",
-  "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
-  "expected_protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
-  "filled_review_sha256": "e61f8bc72fc01662307d64bcbd4d4092ab0e63da3a1fcb214b24e8780e0c5424",
-  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_SEALED_APPLY",
-  "owner_gate_1_approval_sha256": "02f25f376c544b3ab3853ac77b42bc8c5f85648d836caad25ea2dbaa2e5c2152",
-  "previous_control_state_commit": "81b7fb9257b76094670f6ec9fafb812f5eee37a0",
-  "previous_control_state_sha256": "fd9112c9d28b421c834732b96defaed7c645378b1193e055b1149b87605f6ea3",
-  "recommendation_map_sha256": "0c20c5e2d660515634335ef54ede61287e6344b461706172c66adec9056c377f",
-  "request_id": "miami-expansion-stage2-sealed-apply-0001",
-  "schema_version": 1,
-  "school_key": "miami",
-  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/miami/miami-expansion-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "7d5c3e2ff169fa7d738a226f58a0361513e22ff467145f7d40fb90d65985cbe2"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/miami/miami-expansion-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "327e2a64dba2aaff6a7cccb9f12024e79a1b55931cbbdc0e04d2bf5878981e53"
-  },
-  "target_branch": "data/miami-onboarding",
-  "target_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829"
+    "origin": "Miami (FL) same ALL_HISTORY_EXPANSION Implementation: protected-main authenticated release preparation following independently verified sealed apply.",
+    "authorization": "Owner 'Continue' after exact Stage 3 sealed apply completion authorizes reversible release-readiness, exact connector PR preparation and Preview verification to OWNER_GATE_2_READY only. No Gate 2 approval, merge or Production proof is authorized."
+  }
 }
