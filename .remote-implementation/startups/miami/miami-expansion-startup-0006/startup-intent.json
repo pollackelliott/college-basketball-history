@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
+  "startup_id": "miami-expansion-startup-0006",
+  "phase0_request_id": "miami-expansion-phase0-0006",
+  "school_key": "miami",
+  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "expansion_research_checkpoint": {
+    "sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+    "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9ebf1617d4511f9d81fc0468257ae4d0215f22bc",
+      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0006/part-",
+      "part_count": 275
+    }
+  },
+  "creation_provenance": {
+    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation lane; fresh successor after Control Center generic Expansion Hard Reset PR #693 and fresh-verified re-bootstrap request miami-expansion-rebootstrap-0001.",
+    "authorization": "Owner supplied the Miami Implementation successor instructions authorizing continuation of the same Miami ALL_HISTORY_EXPANSION through ordinary fresh current-main startup and independently verified guarded EXPANSION_PHASE0. It does not authorize new Research, historical mutation beyond settled frozen authority, an Owner Gate, Stage 2, release, merge, Production, or Miami-specific tooling repairs."
+  }
+}
