@@ -753,7 +753,7 @@
     "miami-expansion-stage2-opponent-display-normalize-0002"
   ],
   "active_expected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
-  "active_lock_commit": null,
+  "active_lock_commit": "a3b5649811a18ac7d81a08720502eb9d5f173ed6",
   "active_lock_owner": "github-actions:45251480949:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
