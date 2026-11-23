@@ -69,6 +69,7 @@ ACCEPTANCE_TEST_PATTERNS = (
     "test_all_history_expansion_venue_guard.py",
     "test_remote_implementation_expansion_phase0.py",
     "test_remote_implementation_expansion_startup.py",
+    "test_remote_implementation_expansion_rebootstrap.py",
     "test_all_history_expansion_known_good_conformance.py",
     "test_program_history_scope.py",
     "test_implementation_stage2.py",

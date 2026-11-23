@@ -123,7 +123,7 @@ jobs:
               exit 1
             fi
             pending_operation="${{ steps.detect.outputs.pending_operation }}"
-            if [[ "$pending_operation" != "STAGE2_CURRENT_MAIN_REFRESH" && "$pending_operation" != "EXPANSION_PHASE0" ]]; then
+            if [[ "$pending_operation" != "STAGE2_CURRENT_MAIN_REFRESH" && "$pending_operation" != "EXPANSION_PHASE0" && "$pending_operation" != "EXPANSION_REBOOTSTRAP_FROM_FREEZE" ]]; then
               echo "Protected main changed while this verification is pending: operation=$pending_operation expected=$expected_main actual=$actual_main" >&2
               exit 1
             fi
@@ -844,7 +844,7 @@ jobs:
 
   fresh-phase0-verification:
     needs: process-request
-    if: needs.process-request.result == 'success' && (needs.process-request.outputs.operation == 'PHASE0' || needs.process-request.outputs.operation == 'EXPANSION_PHASE0' || needs.process-request.outputs.operation == 'PHASE0_SCOPE_SUPERSESSION' || needs.process-request.outputs.operation == 'RECOVER')
+    if: needs.process-request.result == 'success' && (needs.process-request.outputs.operation == 'PHASE0' || needs.process-request.outputs.operation == 'EXPANSION_PHASE0' || needs.process-request.outputs.operation == 'EXPANSION_REBOOTSTRAP_FROM_FREEZE' || needs.process-request.outputs.operation == 'PHASE0_SCOPE_SUPERSESSION' || needs.process-request.outputs.operation == 'RECOVER')
     runs-on: ubuntu-latest
     steps:
       - name: Check out latest durable control state

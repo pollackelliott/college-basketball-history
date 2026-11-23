@@ -443,7 +443,7 @@ An expansion Implementation already beyond Gate 1 when this boundary is introduc
 ## Git safety
 
 - Never use `git add -A` for onboarding.
-- Never force-push shared history.
+- Never force-push shared history. The sole repository-owned exception is the guarded pre-Gate-1 `EXPANSION_REBOOTSTRAP_FROM_FREEZE` transaction: after explicit Control Center authorization, exact stale-target/fresh-verification/Research-Freeze authentication, and durable verified Git-bundle preservation, it may use expected-predecessor force-with-lease/CAS to reset only `data/<school>-onboarding` to exact protected `main`. No manual reset, deletion, or school-specific force push is permitted.
 - Never merge when the sealed input fingerprint, release file boundary, branch SHA,
   PR head SHA, or deployment SHA differs from the reviewed state.
 - Keep generated `.onboarding/` plans local; the sealed decision plan is archived

@@ -288,6 +288,19 @@ Before a **new** expansion Implementation acquires the serialized mutation lane,
 
 This fail-closed preflight checks portfolio/publication invariants and the current generic expansion workflow contracts. A failure is a generic repository-readiness blocker to repair before choosing the next school; it is not target-school historical authority and must not be deferred until that school is mid-Implementation.
 
+A stale unmerged expansion onboarding ref that is no longer an ancestor of
+current protected `main` must not be manually reset, deleted, or special-cased
+inside Phase 0. Before Owner Gate 1, the Control Center may instead use the
+guarded `EXPANSION_REBOOTSTRAP_FROM_FREEZE` operation. It authenticates the
+existing fresh-verified pre-Gate-1 lineage and the same immutable Research
+Freeze, durably preserves the superseded target-only Git lineage as a verified
+control-side bundle, and CAS-resets only `data/<school>-onboarding` to the
+exact request-bound protected-main commit. It carries no basketball mutation,
+historical decision, Stage 2, or owner-gate authority. After fresh verification,
+the school must re-enter the ordinary expansion startup below; the re-bootstrap
+operation itself may not synthesize or bypass Stage 1, Integration Freeze, Phase
+0, or Stage 2.
+
 The repository-owned initial expansion startup coordinator is
 `tools/remote_implementation_expansion_startup.py`. The school lane stages the immutable
 Freeze with the existing hash-bound Git-part transport and commits one

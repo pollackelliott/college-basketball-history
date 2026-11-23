@@ -19,6 +19,7 @@ from remote_implementation_control import (  # noqa: E402
     MUTATION_PREPARED,
     MUTATION_PUBLISHED,
     OP_PHASE0,
+    OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_RECOVER,
     OP_RELEASE_PRODUCTION_PROOF,
@@ -78,6 +79,9 @@ def request(operation=OP_STAGE1, request_id="request-001"):
             "owner_gate_2": False,
             "release": False,
             "phase0": operation == OP_PHASE0,
+            "expansion_rebootstrap_from_freeze": (
+                operation == OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE
+            ),
             "phase0_scope_supersession": operation == OP_PHASE0_SCOPE_SUPERSESSION,
             "stage2_census": operation == OP_STAGE2_CENSUS,
             "stage2_opponent_display_normalize": (
@@ -105,6 +109,42 @@ def request(operation=OP_STAGE1, request_id="request-001"):
         }
         base["venue_reconciliation"] = None
         base["conference_reconciliation"] = None
+    if operation == OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE:
+        base["target_branch"] = "data/example-school-onboarding"
+        base["target_sha"] = "6" * 40
+        base["research_freeze_sha256"] = "1" * 64
+        base["expansion_research_checkpoint"] = {
+            "sha256": "1" * 64,
+            "research_base_sha": "2" * 40,
+            "transport": {
+                "kind": "git_base64_parts",
+                "commit_sha": "3" * 40,
+                "path_prefix": "checkpoints/example-expansion.zip.part",
+                "part_count": 2,
+            },
+        }
+        base["superseded_phase0_successor"] = {
+            "path": ".remote-implementation/successors/example-school/phase0/successor-manifest.json",
+            "sha256": "4" * 64,
+        }
+        base["superseded_successor"] = {
+            "path": ".remote-implementation/successors/example-school/current/successor-manifest.json",
+            "sha256": "5" * 64,
+        }
+        base["superseded_successor_verification"] = {
+            "path": ".remote-implementation/verifications/example-school/current/verification.json",
+            "sha256": "6" * 64,
+        }
+        base["superseded_integration_freeze_sha256"] = "7" * 64
+        base["superseded_semantic_snapshot_sha256"] = "8" * 64
+        base["expansion_rebootstrap_authorization"] = {
+            "approved": True,
+            "authority_kind": "CONTROL_CENTER_EXPLICIT",
+            "authorization_basis": "Owner-authorized generic expansion hard reset.",
+            "target_sha": "6" * 40,
+            "protected_main_sha": MAIN,
+            "research_freeze_sha256": "1" * 64,
+        }
     if operation == OP_STAGE2_CENSUS:
         base["target_branch"] = "data/example-school-onboarding"
         base["target_sha"] = "6" * 40
@@ -231,6 +271,44 @@ class RemoteImplementationControlTests(unittest.TestCase):
 
     def test_valid_bounded_phase0_request(self):
         validate_request(request(OP_PHASE0))
+
+    def test_valid_expansion_rebootstrap_request(self):
+        validate_request(request(OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE))
+
+    def test_expansion_rebootstrap_requires_control_center_authority(self):
+        req = request(OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE)
+        req["expansion_rebootstrap_authorization"]["approved"] = False
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "EXPANSION_REBOOTSTRAP_CONTROL_CENTER_APPROVAL_REQUIRED",
+        ):
+            validate_request(req)
+
+    def test_expansion_rebootstrap_requires_exact_onboarding_target(self):
+        req = request(OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE)
+        req["target_branch"] = "data/other-school-onboarding"
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "EXPANSION_REBOOTSTRAP_TARGET_BRANCH_INVALID",
+        ):
+            validate_request(req)
+
+    def test_expansion_rebootstrap_uses_global_mutation_lock(self):
+        state = initial_control_state()
+        active = begin_request(
+            state,
+            request(OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE),
+            HASH,
+            run_id="123",
+            run_attempt="1",
+            request_commit=PRED,
+        )
+        self.assertEqual(active["lifecycle_state"], LIFECYCLE_ACTIVE)
+        self.assertEqual(active["transaction_state"], "LOCKED")
+        self.assertEqual(
+            active["active_target_branch"],
+            "data/example-school-onboarding",
+        )
 
     def test_valid_venue_identity_maintenance_request(self):
         validate_request(request(OP_VENUE_IDENTITY_MAINTENANCE))

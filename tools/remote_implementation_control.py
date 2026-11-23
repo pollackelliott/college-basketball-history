@@ -24,6 +24,7 @@ REQUEST_SCHEMA_VERSION = 1
 OP_STAGE1 = "STAGE1_INVENTORY"
 OP_PHASE0 = "PHASE0"
 OP_EXPANSION_PHASE0 = "EXPANSION_PHASE0"
+OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE = "EXPANSION_REBOOTSTRAP_FROM_FREEZE"
 OP_PHASE0_SCOPE_SUPERSESSION = "PHASE0_SCOPE_SUPERSESSION"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_STAGE2_CURRENT_MAIN_REFRESH = "STAGE2_CURRENT_MAIN_REFRESH"
@@ -45,6 +46,7 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE1,
     OP_PHASE0,
     OP_EXPANSION_PHASE0,
+    OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE,
     OP_PHASE0_SCOPE_SUPERSESSION,
     OP_STAGE2_CENSUS,
     OP_STAGE2_CURRENT_MAIN_REFRESH,
@@ -614,6 +616,17 @@ def validate_request(request: dict[str, Any]) -> None:
             "REQUEST_SCOPE_SUPERSESSION_AUTHORITY_FORBIDDEN",
         )
 
+    if operation == OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE:
+        _require(
+            authority.get("expansion_rebootstrap_from_freeze") is True,
+            "EXPANSION_REBOOTSTRAP_REQUEST_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("expansion_rebootstrap_from_freeze") is not True,
+            "REQUEST_EXPANSION_REBOOTSTRAP_AUTHORITY_FORBIDDEN",
+        )
+
     if operation == OP_STAGE2_CURRENT_MAIN_REFRESH:
         _require(
             authority.get("stage2_current_main_refresh") is True,
@@ -913,6 +926,96 @@ def validate_request(request: dict[str, Any]) -> None:
             authority.get("stage2_reconciliation_diagnostic") is not True,
             "STAGE1_REQUEST_STAGE2_DIAGNOSTIC_AUTHORITY_FORBIDDEN",
         )
+
+    if operation == OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE:
+        for key in (
+            "phase0", "expansion_phase0", "phase0_scope_supersession",
+            "recovery", "stage2_census", "stage2_current_main_refresh",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "release_readiness",
+            "release_preview_verify", "release_gate2_approval",
+            "release_production_proof", "venue_identity_maintenance",
+            "release", "release_presentation_refresh",
+        ):
+            _require(
+                authority.get(key) is not True,
+                "EXPANSION_REBOOTSTRAP_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        _require(
+            request.get("target_branch") == f"data/{school_key}-onboarding",
+            "EXPANSION_REBOOTSTRAP_TARGET_BRANCH_INVALID",
+        )
+        _require_sha(
+            request.get("target_sha"),
+            40,
+            "EXPANSION_REBOOTSTRAP_TARGET_SHA_INVALID",
+        )
+        checkpoint = request.get("expansion_research_checkpoint")
+        _require(
+            isinstance(checkpoint, dict),
+            "EXPANSION_REBOOTSTRAP_RESEARCH_CHECKPOINT_MISSING",
+        )
+        _require_sha(
+            checkpoint.get("sha256"),
+            64,
+            "EXPANSION_REBOOTSTRAP_RESEARCH_CHECKPOINT_SHA_INVALID",
+        )
+        _require_sha(
+            checkpoint.get("research_base_sha"),
+            40,
+            "EXPANSION_REBOOTSTRAP_RESEARCH_BASE_INVALID",
+        )
+        _validate_transport(checkpoint.get("transport"))
+        _require_sha(
+            request.get("research_freeze_sha256"),
+            64,
+            "EXPANSION_REBOOTSTRAP_RESEARCH_FREEZE_SHA_INVALID",
+        )
+        _require(
+            request.get("research_freeze_sha256") == checkpoint.get("sha256"),
+            "EXPANSION_REBOOTSTRAP_RESEARCH_FREEZE_BINDING_MISMATCH",
+        )
+        for field in (
+            "superseded_phase0_successor",
+            "superseded_successor",
+            "superseded_successor_verification",
+        ):
+            _validate_payload_ref(request.get(field), field, required=True)
+        _require_sha(
+            request.get("superseded_integration_freeze_sha256"),
+            64,
+            "EXPANSION_REBOOTSTRAP_OLD_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("superseded_semantic_snapshot_sha256"),
+            64,
+            "EXPANSION_REBOOTSTRAP_OLD_SEMANTIC_SHA_INVALID",
+        )
+        authorization = request.get("expansion_rebootstrap_authorization")
+        _require(
+            isinstance(authorization, dict)
+            and authorization.get("approved") is True,
+            "EXPANSION_REBOOTSTRAP_CONTROL_CENTER_APPROVAL_REQUIRED",
+        )
+        _require(
+            authorization.get("authority_kind") == "CONTROL_CENTER_EXPLICIT",
+            "EXPANSION_REBOOTSTRAP_AUTHORITY_KIND_INVALID",
+        )
+        _require(
+            bool(str(authorization.get("authorization_basis") or "").strip()),
+            "EXPANSION_REBOOTSTRAP_AUTHORIZATION_BASIS_REQUIRED",
+        )
+        for field, expected in (
+            ("target_sha", request["target_sha"]),
+            ("protected_main_sha", request["expected_protected_main_sha"]),
+            ("research_freeze_sha256", request["research_freeze_sha256"]),
+        ):
+            _require(
+                authorization.get(field) == expected,
+                "EXPANSION_REBOOTSTRAP_AUTHORIZATION_SCOPE_MISMATCH:" + field,
+            )
 
     if operation == OP_EXPANSION_PHASE0:
         _require(
@@ -1864,6 +1967,7 @@ def verify_request_predecessor(
         elif state.get("active_operation") in {
             OP_PHASE0,
             OP_EXPANSION_PHASE0,
+            OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE,
             OP_PHASE0_SCOPE_SUPERSESSION,
             OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
         }:

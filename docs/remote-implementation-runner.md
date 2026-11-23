@@ -149,7 +149,7 @@ Every push-driven transition is an explicit JSON request bound to:
 Supported operations are:
 
 - `STAGE1_INVENTORY`
-- `PHASE0`\n- `EXPANSION_PHASE0`\n- `PHASE0_SCOPE_SUPERSESSION`\n- `STAGE2_CENSUS`
+- `PHASE0`\n- `EXPANSION_PHASE0`\n- `EXPANSION_REBOOTSTRAP_FROM_FREEZE`\n- `PHASE0_SCOPE_SUPERSESSION`\n- `STAGE2_CENSUS`
 - `STAGE2_OPPONENT_DISPLAY_NORMALIZE`
 - `STAGE2_PROPOSAL_REHEARSAL`
 - `STAGE2_GATE1_FILL`
@@ -255,6 +255,38 @@ main-drift, target-drift, or acceptance failure stops before the child
 One owner `Proceed` for the initial expansion Implementation phase persists through this
 deterministic startup and the child guarded `EXPANSION_PHASE0` transaction through its
 independent fresh verification. The owner must not be asked to schedule the child request.
+
+### 4.1A Guarded pre-Gate-1 expansion re-bootstrap
+
+`EXPANSION_REBOOTSTRAP_FROM_FREEZE` is an exceptional Control Center recovery
+operation for an All-History expansion whose unmerged
+`data/<school>-onboarding` ref has advanced beyond protected `main` and can no
+longer enter the ordinary expansion startup. It is **not** a second Phase 0,
+does not interpret basketball history, and is forbidden at or after Owner Gate 1.
+
+The request must bind the exact stale target head, the original expansion Phase 0
+successor, the latest target-changing pre-Gate-1 successor and its fresh
+verification, the immutable Research Freeze transport/hash/base, the superseded
+Integration Freeze and semantic snapshot hashes, and explicit Control Center
+authorization scoped to that target, protected-main SHA, and Research Freeze.
+
+Before changing the ref, the runner requires the global control to be idle and
+the latest same-school stopping point to be fresh-verified and pre-Gate-1. It
+authenticates the complete durable lineage and immutable Freeze, creates a Git
+bundle containing the target-only superseded commits, verifies that bundle, and
+commits the bundle plus write-ahead to the control branch. Only then may it
+force-with-lease/CAS the single onboarding ref from the exact stale head back to
+the exact request-bound protected-main commit. No basketball file is authored or
+changed by this transaction.
+
+Fresh verification reauthenticates the superseded lineage and Freeze, verifies
+the preserved Git bundle and exact reset tree, and requires the onboarding ref to
+remain at the bound reset-main commit. A later linear protected-main advance is
+permitted because the reset commit remains an ancestor. The operation does not
+queue Phase 0 or Stage 2. After it is fresh-verified, the school returns to the
+ordinary repository-owned expansion startup, which reruns the normal acceptance
+gate, Stage 1, Integration Freeze, preview, and ordinary `EXPANSION_PHASE0`
+transaction. No school-specific execution path exists.
 
 ### 4.2 Guarded All-History expansion Phase 0
 
