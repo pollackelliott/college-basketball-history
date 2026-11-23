@@ -766,6 +766,16 @@ source-only, or broader package mutation continues to fail closed. This is
 a package-transport compatibility proof and does **not** change the original
 Freeze or grant new historical, Gate 1, or publication authority.
 
+A future All-History expansion Integration Freeze always freezes the deterministic
+supplemental-venue census, including automatic reuse of a registered global
+venue without an explicit sidecar. The sidecar remains optional and supplies
+explicit reconciliation choices only when needed. Older, immutable no-sidecar
+Freezes with a null census can use the bounded legacy guard solely for a
+hash-proven automatic registered-venue reuse: exact Phase 0 ancestry, the
+frozen supplemental population, unchanged inherited venues, exact registry IDs
+and deterministic note suffixes, and byte-identical frozen venue reconstruction.
+It never confers historical, shared-reference, or owner-gate authority.
+
 The runner authenticates the request-bound Stage 2 authority, restores only the exact ignored `.onboarding/<school>/integration-freeze.json`, creates an exact worktree at the request-bound onboarding SHA, and invokes current production runtime tooling conceptually as:
 
 ```bash

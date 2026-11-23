@@ -209,22 +209,19 @@ def _reconstruct_frozen_venues(
         return reject("phase0_commit_message_invalid")
 
     census = integration_freeze.get("venue_reconciliation_census")
-    if (
+    legacy_no_sidecar = (
+        census is None
+        and integration_freeze.get("venue_reconciliation") is None
+        and integration_freeze.get("venue_reconciliation_sha256") == ""
+        and not (root / ".onboarding" / school / "venue-reconciliation.json").exists()
+    )
+    if not legacy_no_sidecar and (
         not isinstance(census, dict)
         or census.get("schema_version") != 1
         or census.get("blocker_count") != 0
         or not isinstance(census.get("rows"), list)
     ):
         return reject("phase0_venue_census_invalid")
-    census_rows = census["rows"]
-    if (
-        not census_rows
-        or census.get("venue_count") != len(census_rows)
-        or len(census_rows) != len({
-            str(row.get("venue_key") or "").strip() for row in census_rows
-        })
-    ):
-        return reject("phase0_venue_census_population_invalid")
 
     fields, rows = _rows(phase0_venues)
     if not {"venue_key", "venue_id", "notes"}.issubset(fields):
@@ -235,14 +232,52 @@ def _reconstruct_frozen_venues(
     parent_fields, parent_rows = _rows(parent_venues)
     if parent_fields != fields:
         return reject("phase0_parent_venue_schema_mismatch")
-    if len(rows) != len(parent_rows) + len(census_rows):
-        return reject("phase0_supplemental_venue_population_mismatch")
     if rows[:len(parent_rows)] != parent_rows:
         return reject("phase0_inherited_venue_rows_changed")
-
     registry = _registry_ids_by_key(root, phase0_commit)
     if registry is None:
         return reject("phase0_global_venue_registry_unavailable")
+
+    if legacy_no_sidecar:
+        support = integration_freeze.get("venue_support_actions") or {}
+        global_counts = integration_freeze.get("global_venue_reconciliation") or {}
+        supplemental_count = len(rows) - len(parent_rows)
+        # Legacy pre-fix authority: exact automatic registered reuse with no
+        # sidecar.  The cap bounds a search over blank/already-assigned IDs.
+        if (
+            not 1 <= supplemental_count <= 8
+            or type(support.get("NEW_SUPPLEMENTAL")) is not int
+            or support["NEW_SUPPLEMENTAL"] != supplemental_count
+            or type(global_counts.get("REUSE_REGISTERED_GLOBAL_VENUE")) is not int
+            or global_counts["REUSE_REGISTERED_GLOBAL_VENUE"] < supplemental_count
+            or global_counts.get("NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED") != 0
+            or global_counts.get("GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER") != 0
+        ):
+            return reject("phase0_legacy_venue_population_invalid")
+        census_rows = [
+            {
+                "venue_key": row.get("venue_key", "").strip(),
+                "classification": "SAFE_REPRESENTATION_REUSE",
+                "target_venue_key": row.get("venue_key", "").strip(),
+                "target_venue_id": registry.get(
+                    row.get("venue_key", "").strip(), ""
+                ),
+            }
+            for row in rows[len(parent_rows):]
+        ]
+    else:
+        census_rows = census["rows"]
+        if (
+            not census_rows
+            or census.get("venue_count") != len(census_rows)
+            or len(census_rows) != len({
+                str(row.get("venue_key") or "").strip() for row in census_rows
+            })
+        ):
+            return reject("phase0_venue_census_population_invalid")
+
+    if len(rows) != len(parent_rows) + len(census_rows):
+        return reject("phase0_supplemental_venue_population_mismatch")
 
     positions: dict[str, list[int]] = {}
     for index in range(len(parent_rows), len(rows)):
@@ -250,6 +285,7 @@ def _reconstruct_frozen_venues(
         positions.setdefault(row.get("venue_key", "").strip(), []).append(index)
 
     transformed: set[int] = set()
+    legacy_id_options: list[tuple[int, str]] = []
     for item in census_rows:
         if not isinstance(item, dict):
             return reject("phase0_venue_census_row_invalid")
@@ -262,6 +298,7 @@ def _reconstruct_frozen_venues(
             or classification not in {
                 "SAFE_REPRESENTATION_REUSE", "NEW_GLOBAL_IDENTITY",
             }
+            or (legacy_no_sidecar and current_key != frozen_key)
         ):
             return reject("phase0_venue_census_row_unsupported")
         matches = positions.get(current_key, [])
@@ -288,18 +325,36 @@ def _reconstruct_frozen_venues(
         notes = row.get("notes", "")
         if not notes.endswith(suffix):
             return reject("phase0_venue_note_suffix_invalid")
+        research_id = str(item.get("research_venue_id") or "").strip()
+        if not legacy_no_sidecar and research_id not in {"", expected_id}:
+            return reject("phase0_frozen_venue_id_invalid")
         row["venue_key"] = frozen_key
-        row["venue_id"] = ""
+        row["venue_id"] = research_id if not legacy_no_sidecar else ""
         row["notes"] = notes[:-len(suffix)]
+        if legacy_no_sidecar:
+            legacy_id_options.append((index, expected_id))
 
     if len(transformed) != len(census_rows):
         return reject("phase0_venue_transform_population_mismatch")
-    reconstructed = _csv_bytes(
-        fields, rows, bom=phase0_venues.startswith(b"\xef\xbb\xbf")
-    )
-    if _sha(reconstructed) != freeze_venue_sha256:
-        return reject("phase0_frozen_venue_bytes_mismatch")
-    return True
+    bom = phase0_venues.startswith(b"\xef\xbb\xbf")
+    if not legacy_no_sidecar:
+        if _sha(_csv_bytes(fields, rows, bom=bom)) != freeze_venue_sha256:
+            return reject("phase0_frozen_venue_bytes_mismatch")
+        return True
+
+    # The frozen six-file hash certifies all key/name/locality/chronology
+    # fields byte-for-byte.  A frozen VEN ID may be blank or already equal
+    # to the authoritative registry ID; no other candidate value is legal.
+    from itertools import product
+
+    for assignments in product((False, True), repeat=len(legacy_id_options)):
+        recovered = [dict(row) for row in rows]
+        for (index, venue_id), keep in zip(legacy_id_options, assignments):
+            if keep:
+                recovered[index]["venue_id"] = venue_id
+        if _sha(_csv_bytes(fields, recovered, bom=bom)) == freeze_venue_sha256:
+            return True
+    return reject("phase0_frozen_venue_bytes_mismatch")
 
 
 def permits_authenticated_display_successor(
