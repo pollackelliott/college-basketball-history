@@ -1,0 +1,48 @@
+{
+  "approved_plan_hash_preview": "3a19da534c13b4a31e5d2c80050b9f3734a98697f803343de73124ef5792605a",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "645e90f2f52f90deaf5b5af81758ec440aec415ac98bd876ed53fb3d0c46bde8",
+    "implementation-stage2-status.json": "4498f0b823d54240855f705a84c25bdb0bf7e07e1cf2e8f3e3193042bede7308",
+    "plan.json": "70c52ba10a57257f9cd12234f059a4798a75c34e6c83a2a85bccc18e00bd4f6e",
+    "review.csv": "b20f06df15f6f431d5545215581b69dce5e31784dbe277360be8374aeef72f85",
+    "review.md": "8d868a54be04389b9f14417d46e5acb26bd4e8bb7653abf112c22c083153aaa6"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "645e90f2f52f90deaf5b5af81758ec440aec415ac98bd876ed53fb3d0c46bde8",
+    "implementation-stage2-status.json": "0424f82eb8d34b4e7c879667ee15bdd2e11265aa31c300b0323a0170686496cf",
+    "plan.json": "8c76c16e28cc0d1dff6533c74ca4042381dabfee5ff9de49befb1560e88102e3",
+    "review.csv": "b20f06df15f6f431d5545215581b69dce5e31784dbe277360be8374aeef72f85",
+    "review.md": "86f547c7393f7bac914cb442c999129b4caa685ee38daf635d25d42468329af2"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+    "runtime_decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "ed9e3c9ea7d0089147694d239057d8f54177d45ce8a31b960f4bb9b01e80deb2",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "implementation-stage2-status.json",
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
+  "recommendation_map_sha256": "c1acbc19d9e484390259bc7fd95c5cecefbaa07e960e949fe93d2f133ae7ab43",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "miami-expansion-stage2-proposal-0002",
+  "runtime_decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "8165cc903c27fe10fa4584c1cdef160531d70e59",
+  "target_tree_sha": "42f999532fecec90a2a2c2dc36e1f03dd5acc84d",
+  "tracked_stage2_mutation": "NONE"
+}

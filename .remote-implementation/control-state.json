@@ -1491,11 +1491,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
     "recommendation_map_sha256": "c1acbc19d9e484390259bc7fd95c5cecefbaa07e960e949fe93d2f133ae7ab43",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "miami-expansion-stage2-proposal-0002",
     "runtime_decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
     "school_key": "miami",
