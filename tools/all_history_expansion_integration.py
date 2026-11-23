@@ -186,6 +186,24 @@ def source_preservation(
             "inherited_rows_sha256": sha256(canonical_bytes(inherited))}
 
 
+def supplemental_venue_census(
+    repo: Path, school: str,
+    new_venues: list[dict[str, str]],
+    global_venues: list[dict[str, str]],
+    global_names: list[dict[str, str]],
+    venue_reconciliation: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    """Inventory supplemental venues even when no explicit sidecar is needed."""
+    return venue_reconciliation_inventory(
+        new_venues, global_venues, global_names,
+        school_key=school,
+        existing_school_venues=load_existing_school_venues(
+            repo, exclude_school_key=school
+        ),
+        venue_reconciliation=venue_reconciliation,
+    )
+
+
 def freeze_authority(
     repo: Path, school: str, artifact: Path, zip_sha: str,
     research_base: str, main_sha: str, proof_path: Path, proof_sha: str,
@@ -242,20 +260,21 @@ def freeze_authority(
 
         venue_reconciliation: dict[str, dict[str, Any]] = {}
         venue_reconciliation_meta: dict[str, Any] | None = None
-        venue_reconciliation_census: dict[str, Any] | None = None
+        candidate_venues_raw = (candidate / "venues.csv").read_bytes()
+        _, candidate_venues = csv_rows(
+            candidate_venues_raw, "expansion candidate venues"
+        )
+        _, global_venues = csv_rows(
+            git_bytes(repo, main_sha, "data/reference/venues.csv"),
+            "current global venues",
+        )
+        _, global_names = csv_rows(
+            git_bytes(repo, main_sha, "data/reference/venue-names.csv"),
+            "current global venue names",
+        )
+        inherited_venue_count = len(baseline["venue_rows"])
+        new_venues = candidate_venues[inherited_venue_count:]
         if venue_reconciliation_path is not None:
-            candidate_venues_raw = (candidate / "venues.csv").read_bytes()
-            _, candidate_venues = csv_rows(
-                candidate_venues_raw, "expansion candidate venues"
-            )
-            _, global_venues = csv_rows(
-                git_bytes(repo, main_sha, "data/reference/venues.csv"),
-                "current global venues",
-            )
-            _, global_names = csv_rows(
-                git_bytes(repo, main_sha, "data/reference/venue-names.csv"),
-                "current global venue names",
-            )
             venue_reconciliation, venue_reconciliation_meta = (
                 load_venue_reconciliation(
                     venue_reconciliation_path,
@@ -276,8 +295,6 @@ def freeze_authority(
                 ),
                 "EXPANSION_VENUE_RECONCILIATION_ACTION_UNSUPPORTED",
             )
-            inherited_venue_count = len(baseline["venue_rows"])
-            new_venues = candidate_venues[inherited_venue_count:]
             new_keys = {
                 row.get("venue_key", "").strip()
                 for row in new_venues
@@ -290,20 +307,17 @@ def freeze_authority(
                 ),
                 "EXPANSION_VENUE_RECONCILIATION_NOT_NEW_SUPPORT",
             )
-            venue_reconciliation_census = venue_reconciliation_inventory(
-                new_venues,
-                global_venues,
-                global_names,
-                school_key=school,
-                existing_school_venues=load_existing_school_venues(
-                    repo, exclude_school_key=school
-                ),
-                venue_reconciliation=venue_reconciliation,
-            )
-            require(
-                venue_reconciliation_census["blocker_count"] == 0,
-                "EXPANSION_VENUE_RECONCILIATION_STILL_BLOCKED",
-            )
+
+        # A null sidecar is not a null census.  Automatic global reuse and
+        # registrations must be deterministic Freeze authority as well.
+        venue_reconciliation_census = supplemental_venue_census(
+            repo, school, new_venues, global_venues, global_names,
+            venue_reconciliation,
+        )
+        require(
+            venue_reconciliation_census["blocker_count"] == 0,
+            "EXPANSION_VENUE_RECONCILIATION_STILL_BLOCKED",
+        )
         hashes = {name: sha256((candidate / name).read_bytes())
                   for name in (*PACKAGE_FILES, STAGE1_REPORT)}
         require(report["candidate_member_sha256"] == {

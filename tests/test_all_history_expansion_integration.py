@@ -229,6 +229,52 @@ class ExpansionIntegrationAuthorityTests(unittest.TestCase):
         (root/MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
         return manifest
 
+    def test_no_sidecar_supplemental_registered_reuse_is_in_census(self):
+        from all_history_expansion_integration import supplemental_venue_census
+
+        registered = [{
+            "venue_id": "VEN-000791",
+            "venue_key": "sample-reuse-gym",
+            "display_name": "Sample Reuse Gym",
+            "city": "Bowling Green",
+            "state": "KY",
+        }]
+        new = [{
+            "venue_key": "sample-reuse-gym",
+            "venue_id": "",
+            "canonical_name": "Sample Reuse Gym",
+            "aliases": "",
+            "city": "Bowling Green",
+            "state": "KY",
+            "notes": "",
+        }]
+        with patch(
+            "all_history_expansion_integration.load_existing_school_venues",
+            return_value=[],
+        ):
+            census = supplemental_venue_census(
+                Path("/unused-repo"), "sample", new, registered, [], {},
+            )
+        self.assertEqual(census["blocker_count"], 0)
+        self.assertEqual(census["venue_count"], 1)
+        self.assertEqual(
+            census["rows"][0]["classification"], "SAFE_REPRESENTATION_REUSE"
+        )
+        self.assertEqual(census["rows"][0]["target_venue_id"], "VEN-000791")
+        self.assertEqual(census["rows"][0]["research_venue_id"], "")
+
+        new[0]["venue_id"] = "VEN-000791"
+        with patch(
+            "all_history_expansion_integration.load_existing_school_venues",
+            return_value=[],
+        ):
+            preassigned = supplemental_venue_census(
+                Path("/unused-repo"), "sample", new, registered, [], {},
+            )
+        self.assertEqual(
+            preassigned["rows"][0]["research_venue_id"], "VEN-000791"
+        )
+
     def test_manifest_verification_accepts_unchanged_bytes(self):
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/"f"
