@@ -755,7 +755,7 @@
     "miami-expansion-stage2-refresh-0001"
   ],
   "active_expected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
-  "active_lock_commit": null,
+  "active_lock_commit": "0721bd7ec4d67c07b7d2815f00cfe1f10e383377",
   "active_lock_owner": "github-actions:45265656471:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
