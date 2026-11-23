@@ -247,6 +247,7 @@ def _reconstruct_frozen_venues(
         if registry is None:
             return reject("phase0_global_venue_registry_unavailable")
         restored = [dict(row) for row in rows]
+        assigned_ids: list[str] = []
         for index in range(len(parent_rows), len(restored)):
             row = restored[index]
             key = row.get("venue_key", "").strip()
@@ -261,15 +262,29 @@ def _reconstruct_frozen_venues(
             notes = row.get("notes", "")
             if not notes.endswith(suffix):
                 return reject("phase0_automatic_venue_note_suffix_invalid")
-            row["venue_id"] = ""
+            assigned_ids.append(venue_id)
             row["notes"] = notes[:-len(suffix)]
 
+        # Some frozen supplemental rows already carry the exact authoritative
+        # VEN ID (for example a current-main identity reuse); others are
+        # intentionally blank until Phase 0 assigns a new/current ID.  Prove
+        # the transformation by trying only those two permanent-tool shapes.
+        # No key, geography, name, relationship, or other field is altered.
         reconstructed = _csv_bytes(
             fields, restored, bom=phase0_venues.startswith(b"\xef\xbb\xbf")
         )
-        if _sha(reconstructed) != freeze_venue_sha256:
-            return reject("phase0_automatic_venue_reconstruction_mismatch")
-        return True
+        if _sha(reconstructed) == freeze_venue_sha256:
+            return True
+
+        blanked = [dict(row) for row in restored]
+        for index in range(len(parent_rows), len(blanked)):
+            blanked[index]["venue_id"] = ""
+        reconstructed_blanked = _csv_bytes(
+            fields, blanked, bom=phase0_venues.startswith(b"\xef\xbb\xbf")
+        )
+        if _sha(reconstructed_blanked) == freeze_venue_sha256:
+            return True
+        return reject("phase0_automatic_venue_reconstruction_mismatch")
 
     if (
         not isinstance(census, dict)
