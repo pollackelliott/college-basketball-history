@@ -17968,8 +17968,8 @@ CBBG-0017967,1940-1941,1941-02-03,EXACT,florida,union-college-ky,46,26,florida,0
 CBBG-0017968,1940-1941,1941-02-10,EXACT,florida,georgia,40,46,georgia,0,TEAM_B_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00543;venue_key=woodruff-hall;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0017969,1940-1941,1941-02-11,EXACT,florida,georgia,46,44,florida,0,TEAM_B_HOME,georgia,woodruff-hall,VEN-000279,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-00544;venue_key=woodruff-hall;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0017970,1940-1941,1941-02-18,EXACT,florida,stetson,51,42,florida,0,TEAM_A_HOME,florida,new-gymnasium-florida,VEN-000151,Gainesville,FL,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0017971,1940-1941,1941-02-21,EXACT,florida,miami,48,35,florida,0,TEAM_B_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0017972,1940-1941,1941-02-22,EXACT,florida,miami,62,50,florida,0,TEAM_B_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0017971,1940-1941,1941-02-21,EXACT,florida,miami,48,35,florida,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-012]
+CBBG-0017972,1940-1941,1941-02-22,EXACT,florida,miami,62,50,florida,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-013]
 CBBG-0017973,1940-1941,1941-02-24,EXACT,florida,rollins,65,35,florida,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0017974,1940-1941,1941-02-28,EXACT,florida,vanderbilt,48,41,florida,0,NEUTRAL,,,,,,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,
 CBBG-0017975,1940-1941,1941-03-01,EXACT,florida,tennessee,26,47,tennessee,0,NEUTRAL,,,,Louisville,,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,
@@ -18048,8 +18048,8 @@ CBBG-0018047,1946-1947,1946-12-13,EXACT,florida,mississippi-state,25,55,mississi
 CBBG-0018048,1946-1947,1946-12-15,EXACT,alabama,florida,45,18,alabama,0,TEAM_A_HOME,alabama,foster-auditorium,VEN-000067,Tuscaloosa,AL,REGULAR_SEASON,,,,PROVISIONAL,[HOME_CHRONOLOGY_BACKFILL program=alabama source_game_id=ALARAW-00590 venue_key=foster-auditorium; canonical HOME independently established; venue/location supplied by documented school HOME chronology]
 CBBG-0018049,1946-1947,1946-12-17,EXACT,duke,florida,44,37,duke,0,NEUTRAL,,,,Jacksonville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0018050,1946-1947,1946-12-19,EXACT,banana-river-nas,florida,44,54,florida,0,TEAM_A_HOME,banana-river-nas,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0018051,1946-1947,1946-12-20,EXACT,florida,miami,33,36,miami,0,TEAM_B_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0018052,1946-1947,1946-12-21,EXACT,florida,miami,35,39,miami,0,TEAM_B_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0018051,1946-1947,1946-12-20,EXACT,florida,miami,33,36,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-003]
+CBBG-0018052,1946-1947,1946-12-21,EXACT,florida,miami,35,39,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-004]
 CBBG-0018053,1946-1947,1947-01-03,EXACT,florida,miami,42,28,florida,0,TEAM_A_HOME,florida,new-gymnasium-florida,VEN-000151,Gainesville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0018054,1946-1947,1947-01-04,EXACT,florida,miami,61,28,florida,0,TEAM_A_HOME,florida,new-gymnasium-florida,VEN-000151,Gainesville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0018055,1946-1947,1947-01-07,EXACT,florida,jacksonville-nas,50,44,florida,0,TEAM_B_HOME,jacksonville-nas,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -18206,7 +18206,7 @@ CBBG-0018205,1952-1953,1953-02-28,EXACT,florida,ole-miss,61,64,ole-miss,0,TEAM_A
 CBBG-0018206,1952-1953,1953-03-02,EXACT,florida,georgia,79,73,florida,0,TEAM_A_HOME,florida,florida-gymnasium,VEN-000064,Gainesville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0018207,1953-1954,1953-12-05,EXACT,florida,stetson,55,74,stetson,0,TEAM_A_HOME,florida,florida-gymnasium,VEN-000064,Gainesville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0018208,1953-1954,1953-12-09,EXACT,florida,wofford,100,63,florida,0,TEAM_B_HOME,wofford,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0018209,1953-1954,1953-12-12,EXACT,florida,miami,75,85,miami,0,TEAM_B_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0018209,1953-1954,1953-12-12,EXACT,florida,miami,75,85,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-001]
 CBBG-0018210,1953-1954,1953-12-18,EXACT,florida,tampa,89,65,florida,0,TEAM_A_HOME,florida,florida-gymnasium,VEN-000064,Gainesville,FL,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0018211,1953-1954,1953-12-28,EXACT,florida,georgia-southern,86,99,georgia-southern,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0018212,1953-1954,1953-12-29,EXACT,florida,georgia,72,84,georgia,0,NEUTRAL,,,,Jacksonville,FL,REGULAR_SEASON,,,,PROVISIONAL,
@@ -45647,7 +45647,7 @@ CBBG-0045654,1953-1954,1953-12-05,EXACT,butler,ohio-state,78,93,ohio-state,0,TEA
 CBBG-0045655,1953-1954,1953-12-08,EXACT,ohio-state,saint-louis,91,86,ohio-state,0,TEAM_B_HOME,saint-louis,kiel-auditorium,VEN-000500,St. Louis,MO,REGULAR_SEASON,,,,PROVISIONAL,"[OPPONENT_IDENTITY_RECONCILIATION in_place_remap=st-louis->saint-louis] [VENUE_REGISTRY_FALLBACK source=saint-louis/saint-louis-1953-54-002;venue_key=kiel-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0045656,1953-1954,1953-12-12,EXACT,ohio-state,oklahoma,73,64,ohio-state,0,TEAM_A_HOME,ohio-state,ohio-state-coliseum,VEN-000286,Columbus,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ohio-state/OSURAW-00956;venue_key=ohio-state-coliseum;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0045657,1953-1954,1953-12-19,EXACT,louisville,ohio-state,85,76,louisville,0,TEAM_A_HOME,louisville,jefferson-county-armory,VEN-000248,Louisville,KY,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=louisville/LOU-STG1-000696;venue_key=jefferson-county-armory;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0045658,1953-1954,1953-12-21,EXACT,miami,ohio-state,81,106,ohio-state,0,TEAM_A_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_RECONCILIATION in_place_remap=miami-fl->miami]
+CBBG-0045658,1953-1954,1953-12-21,EXACT,miami,ohio-state,81,106,ohio-state,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_RECONCILIATION in_place_remap=miami-fl->miami] [RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-003]
 CBBG-0045659,1953-1954,1953-12-26,EXACT,ohio-state,oregon-state,60,62,oregon-state,0,TEAM_A_HOME,ohio-state,ohio-state-coliseum,VEN-000286,Columbus,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ohio-state/OSURAW-00959;venue_key=ohio-state-coliseum;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0045660,1953-1954,1953-12-29,EXACT,denver,ohio-state,56,74,ohio-state,0,TEAM_B_HOME,ohio-state,ohio-state-coliseum,VEN-000286,Columbus,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ohio-state/OSURAW-00960;venue_key=ohio-state-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0045661,1953-1954,1954-01-04,EXACT,michigan,ohio-state,85,76,michigan,0,TEAM_A_HOME,michigan,yost-field-house,VEN-000299,Ann Arbor,MI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=michigan/MICHRAW-00703;venue_key=yost-field-house;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
@@ -56792,7 +56792,7 @@ CBBG-0056799,1953-1954,1954-01-11,EXACT,maryland,richmond,71,73,richmond,0,TEAM_
 CBBG-0056800,1953-1954,1954-01-15,EXACT,george-washington,maryland,61,68,maryland,0,TEAM_B_HOME,maryland,ritchie-coliseum,VEN-000323,College Park,MD,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=maryland/MDRAW-00679;venue_key=ritchie-coliseum;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0056801,1953-1954,1954-01-18,EXACT,maryland,virginia,70,56,maryland,0,TEAM_B_HOME,virginia,virginia-memorial-gymnasium,VEN-000330,Charlottesville,VA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=virginia/UVA-R-1953-015;venue_key=virginia-memorial-gymnasium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0056802,1953-1954,1954-01-30,EXACT,maryland,tampa,61,51,maryland,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0056803,1953-1954,1954-02-01,EXACT,maryland,miami,63,57,maryland,0,TEAM_B_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0056803,1953-1954,1954-02-01,EXACT,maryland,miami,63,57,maryland,0,TEAM_B_HOME,miami,,,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-009]
 CBBG-0056804,1953-1954,1954-02-04,EXACT,maryland,washington-and-lee,51,25,maryland,0,TEAM_B_HOME,washington-and-lee,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0056805,1953-1954,1954-02-05,EXACT,maryland,virginia-tech,54,41,maryland,0,TEAM_B_HOME,virginia-tech,war-memorial-gymnasium-blacksburg,VEN-000706,Blacksburg,VA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=virginia-tech/VTST1-000812;venue_key=war-memorial-gymnasium-blacksburg;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0056806,1953-1954,1954-02-11,EXACT,maryland,washington-and-lee,76,43,maryland,0,TEAM_A_HOME,maryland,ritchie-coliseum,VEN-000323,College Park,MD,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=maryland/MDRAW-00685;venue_key=ritchie-coliseum;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
@@ -70277,7 +70277,7 @@ CBBG-0070337,2021-2022,2022-03-01,EXACT,arizona,usc,91,71,arizona,0,TEAM_B_HOME,
 CBBG-0070338,2021-2022,2022-03-05,EXACT,ucla,usc,75,68,ucla,0,TEAM_A_HOME,ucla,pauley-pavilion,VEN-000161,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ucla/UCLARAW-02841;venue_key=pauley-pavilion;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0070339,2021-2022,2022-03-10,EXACT,usc,washington,65,61,usc,0,NEUTRAL,,t-mobile-arena,VEN-000201,Las Vegas,NV,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02928;venue_key=t-mobile-arena;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0070340,2021-2022,2022-03-11,EXACT,ucla,usc,69,59,ucla,0,NEUTRAL,,t-mobile-arena,VEN-000201,Las Vegas,NV,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02929;venue_key=t-mobile-arena;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0070341,2021-2022,2022-03-18,EXACT,miami,usc,68,66,miami,0,NEUTRAL,,bon-secours-wellness-arena,VEN-000025,Greenville,SC,NCAA_TOURNAMENT,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02930;venue_key=bon-secours-wellness-arena;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0070341,2021-2022,2022-03-18,EXACT,miami,usc,68,66,miami,0,NEUTRAL,,bon-secours-wellness-arena,VEN-000025,Greenville,SC,NCAA_TOURNAMENT,R64,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02930;venue_key=bon-secours-wellness-arena;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0070342,2022-2023,2022-11-07,EXACT,florida-gulf-coast,usc,74,61,florida-gulf-coast,0,TEAM_B_HOME,usc,galen-center,VEN-000071,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02931;venue_key=galen-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0070343,2022-2023,2022-11-10,EXACT,alabama-state,usc,58,96,usc,0,TEAM_B_HOME,usc,galen-center,VEN-000071,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02932;venue_key=galen-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0070344,2022-2023,2022-11-15,EXACT,usc,vermont,59,57,usc,0,TEAM_A_HOME,usc,galen-center,VEN-000071,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-02933;venue_key=galen-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -121680,7 +121680,7 @@ CBBG-0121741,1946-1947,1947-01-17,EXACT,cincinnati,ohio,41,36,cincinnati,0,TEAM_
 CBBG-0121742,1946-1947,1947-01-25,EXACT,cincinnati,louisville,52,71,louisville,0,TEAM_B_HOME,louisville,,,Louisville,KY,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=louisville/LOU-STG1-000499]
 CBBG-0121743,1946-1947,1947-01-27,EXACT,cincinnati,dayton,58,46,cincinnati,0,TEAM_A_HOME,cincinnati,schmidlapp-gym,VEN-000684,Cincinnati,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=cincinnati/CIN-STG1-00675;venue_key=schmidlapp-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0121744,1946-1947,1947-01-31,EXACT,cincinnati,marshall,66,54,cincinnati,0,TEAM_B_HOME,marshall,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0121745,1946-1947,1947-02-06,EXACT,cincinnati,miami,54,57,miami,0,TEAM_B_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0121745,1946-1947,1947-02-06,EXACT,cincinnati,miami,54,57,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-017]
 CBBG-0121746,1946-1947,1947-02-08,EXACT,cincinnati,ohio,65,67,ohio,0,TEAM_B_HOME,ohio,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0121747,1946-1947,1947-02-11,EXACT,cincinnati,dayton,42,45,dayton,0,TEAM_B_HOME,dayton,montgomery-county-fairgrounds-coliseum,VEN-001039,Dayton,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=dayton/DAYTON-1946-47-015;venue_key=montgomery-county-fairgrounds-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0121748,1946-1947,1947-02-12,EXACT,cincinnati,manhattan,57,51,cincinnati,0,TEAM_A_HOME,cincinnati,music-hall,VEN-000321,Cincinnati,OH,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=cincinnati/CIN-STG1-00680;venue_key=music-hall;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -127281,7 +127281,7 @@ CBBG-0127342,1939-1940,,SEASON,wake-forest,washington-and-lee,38,29,wake-forest,
 CBBG-0127343,1939-1940,,SEASON,davidson,wake-forest,26,48,wake-forest,0,TEAM_A_HOME,davidson,alumni-gymnasium-davidson,VEN-001045,Davidson,NC,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=davidson/DAV-S1-1939-40-008;venue_key=alumni-gymnasium-davidson;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0127344,1939-1940,,SEASON,vmi,wake-forest,34,46,wake-forest,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0127345,1939-1940,,SEASON,hanes-hosiery,wake-forest,47,45,hanes-hosiery,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0127346,1939-1940,,SEASON,miami,wake-forest,17,46,wake-forest,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE target=miami reciprocal=wake-forest/WF-STG1-00540]
+CBBG-0127346,1939-1940,1940-02-05,EXACT,miami,wake-forest,17,46,wake-forest,0,TEAM_B_HOME,wake-forest,,,,,REGULAR_SEASON,,,,PROVISIONAL,[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE target=miami reciprocal=wake-forest/WF-STG1-00540]
 CBBG-0127347,1939-1940,,SEASON,nc-state,wake-forest,38,32,nc-state,0,TEAM_A_HOME,nc-state,thompson-gym,VEN-000328,Raleigh,NC,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=nc-state/NCS-STG1-00482;venue_key=thompson-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0127348,1939-1940,,SEASON,university-of-baltimore,wake-forest,48,46,university-of-baltimore,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0127349,1939-1940,,SEASON,davidson,wake-forest,37,57,wake-forest,0,TEAM_B_HOME,wake-forest,gore-gymnasium,VEN-000707,Wake Forest,NC,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wake-forest/WF-STG1-00543;venue_key=gore-gymnasium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -132334,7 +132334,7 @@ CBBG-0132395,1993-1994,1994-02-19,EXACT,miami,seton-hall,63,85,seton-hall,0,TEAM
 CBBG-0132396,1993-1994,1994-02-22,EXACT,miami,uconn,49,74,uconn,0,TEAM_A_HOME,miami,miami-arena,VEN-000134,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-S1-1993-023;venue_key=miami-arena;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0132397,1993-1994,1994-02-26,EXACT,miami,providence,60,88,providence,0,TEAM_A_HOME,miami,miami-arena,VEN-000134,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-S1-1993-024;venue_key=miami-arena;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0132398,1993-1994,1994-03-01,EXACT,miami,syracuse,69,71,syracuse,0,TEAM_A_HOME,miami,miami-arena,VEN-000134,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-S1-1993-025;venue_key=miami-arena;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0132399,1993-1994,1994-03-05,EXACT,miami,villanova,63,83,villanova,0,TEAM_A_HOME,miami,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0132399,1993-1994,1994-03-05,EXACT,miami,villanova,63,83,villanova,0,TEAM_A_HOME,miami,miami-arena,VEN-000134,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESOLVED_TARGET_HOME_CHRONOLOGY_BACKFILL target=miami source_game_id=MIA-S1-1993-026 venue_key=miami-arena; canonical HOME preserved by resolved target-source site discrepancy; venue/location supplied by documented target-school HOME chronology]
 CBBG-0132400,1993-1994,1994-03-10,EXACT,miami,seton-hall,51,69,seton-hall,0,NEUTRAL,,madison-square-garden-1968,VEN-000124,New York,NY,CONFERENCE_TOURNAMENT,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-S1-1993-027;venue_key=madison-square-garden-1968;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0132401,1994-1995,1994-11-25,EXACT,miami,northeastern-illinois,66,48,miami,0,TEAM_A_HOME,miami,miami-arena,VEN-000134,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-S1-1994-001;venue_key=miami-arena;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0132402,1994-1995,1994-11-28,EXACT,florida-atlantic,miami,59,76,miami,0,TEAM_B_HOME,miami,miami-arena,VEN-000134,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-S1-1994-002;venue_key=miami-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -137794,7 +137794,7 @@ CBBG-0137855,1946-1947,1947-02-16,EXACT,allegheny,pittsburgh,38,40,pittsburgh,,T
 CBBG-0137856,1946-1947,1947-02-19,EXACT,geneva,pittsburgh,47,57,pittsburgh,,TEAM_B_HOME,pittsburgh,pitt-pavilion,VEN-000744,Pittsburgh,PA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=pittsburgh/PITT-STG1-00726;venue_key=pitt-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0137857,1946-1947,1947-02-22,EXACT,pittsburgh,westminster-pennsylvania,44,39,pittsburgh,,TEAM_B_HOME,westminster-pennsylvania,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0137858,1947-1948,1947-12-20,EXACT,louisville,pittsburgh,64,42,louisville,,TEAM_A_HOME,louisville,,,Louisville,KY,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=louisville/LOU-STG1-000515]
-CBBG-0137859,1947-1948,1947-12-26,EXACT,miami,pittsburgh,43,40,miami,,TEAM_B_HOME,pittsburgh,pitt-pavilion,VEN-000744,Pittsburgh,PA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=pittsburgh/PITT-STG1-00734;venue_key=pitt-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0137859,1947-1948,1947-12-26,EXACT,miami,pittsburgh,43,40,miami,,TEAM_A_HOME,miami,,,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1947-005]
 CBBG-0137860,1947-1948,1947-12-28,EXACT,loyola-new-orleans,pittsburgh,45,47,pittsburgh,,TEAM_A_HOME,loyola-new-orleans,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0137861,1947-1948,1948-01-07,EXACT,carnegie-mellon,pittsburgh,40,46,pittsburgh,,TEAM_B_HOME,pittsburgh,pitt-pavilion,VEN-000744,Pittsburgh,PA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=pittsburgh/PITT-STG1-00737;venue_key=pitt-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0137862,1947-1948,1948-01-10,EXACT,army,pittsburgh,41,42,pittsburgh,,TEAM_A_HOME,army,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -212869,3 +212869,156 @@ CBBG-0212930,1968-1969,1969-02-28,EXACT,long-beach-state,unlv,111,82,long-beach-
 CBBG-0212931,1968-1969,1969-03-02,EXACT,university-of-albuquerque,unlv,105,118,unlv,0,TEAM_B_HOME,unlv,las-vegas-convention-center,VEN-000448,Las Vegas,NV,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=unlv/unlv-1968-69-026;venue_key=las-vegas-convention-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0212932,1968-1969,1969-03-07,EXACT,uc-davis,unlv,81,84,unlv,0,TEAM_B_HOME,unlv,las-vegas-convention-center,VEN-000448,Las Vegas,NV,POSTSEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=unlv/unlv-1968-69-027;venue_key=las-vegas-convention-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0212933,1968-1969,1969-03-08,EXACT,san-francisco-state,unlv,77,74,san-francisco-state,0,TEAM_B_HOME,unlv,las-vegas-convention-center,VEN-000448,Las Vegas,NV,POSTSEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=unlv/unlv-1968-69-028;venue_key=las-vegas-convention-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0212934,1927-1928,1928-01-14,EXACT,miami,rollins,52,15,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1927-001]
+CBBG-0212935,1927-1928,1928-01-20,EXACT,miami,stetson,33,25,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1927-002]
+CBBG-0212936,1927-1928,1928-01-23,EXACT,miami,rollins,21,32,rollins,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212937,1927-1928,1928-01-24,EXACT,miami,stetson,26,32,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212938,1927-1928,1928-01-25,EXACT,florida-southern,miami,40,26,florida-southern,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212939,1927-1928,1928-02-03,EXACT,havana,miami,14,38,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1927-006]
+CBBG-0212940,1927-1928,1928-02-10,EXACT,miami,volks-ac,26,42,volks-ac,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1927-007]
+CBBG-0212941,1927-1928,1928-02-16,EXACT,miami,sebring-ac,36,23,miami,0,TEAM_B_HOME,sebring-ac,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212942,1927-1928,1928-02-18,EXACT,florida-southern,miami,18,38,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1927-010]
+CBBG-0212943,1927-1928,1928-02-21,EXACT,miami,miami-beach-canoe-club,52,21,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1927-011]
+CBBG-0212944,1927-1928,1928-02-23,EXACT,miami,miami-beach-canoe-club,18,9,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1927-012]
+CBBG-0212945,1928-1929,,SEASON,miami,rollins,34,15,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-001]
+CBBG-0212946,1928-1929,,SEASON,havana,miami,26,22,havana,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-002]
+CBBG-0212947,1928-1929,,SEASON,miami,ponce-de-leon,11,12,ponce-de-leon,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-003]
+CBBG-0212948,1928-1929,,SEASON,miami,miami-beach-1929,66,18,miami,0,TEAM_A_HOME,miami,,,Miami,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-004]
+CBBG-0212949,1928-1929,,SEASON,miami,stetson,35,13,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-005]
+CBBG-0212950,1928-1929,,SEASON,agoga,miami,19,49,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-006]
+CBBG-0212951,1928-1929,,SEASON,miami,rollins,34,13,miami,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212952,1928-1929,,SEASON,florida-southern,miami,39,15,florida-southern,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212953,1928-1929,,SEASON,miami,stetson,13,20,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212954,1928-1929,,SEASON,church-league-all-stars,miami,23,68,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-010]
+CBBG-0212955,1928-1929,,SEASON,miami,turners-sports-shop,43,17,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-011]
+CBBG-0212956,1928-1929,,SEASON,miami,turners-sports-shop,36,17,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-012]
+CBBG-0212957,1928-1929,,SEASON,florida-southern,miami,29,36,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-013]
+CBBG-0212958,1928-1929,,SEASON,junior-c-of-c,miami,24,25,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-014]
+CBBG-0212959,1928-1929,,SEASON,agoga,miami,33,63,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-015]
+CBBG-0212960,1928-1929,,SEASON,junior-c-of-c,miami,28,23,junior-c-of-c,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-016]
+CBBG-0212961,1928-1929,,SEASON,miami,redland,42,11,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-017]
+CBBG-0212962,1928-1929,,SEASON,city-hall,miami,20,28,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-018]
+CBBG-0212963,1928-1929,,SEASON,miami,turners-sports-shop,27,36,turners-sports-shop,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1928-019]
+CBBG-0212964,1930-1931,,SEASON,miami,turners-sports-shop,24,33,turners-sports-shop,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1930-001]
+CBBG-0212965,1930-1931,,SEASON,miami,rollins,22,32,rollins,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1930-002]
+CBBG-0212966,1930-1931,,SEASON,miami,rollins,41,39,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1930-003]
+CBBG-0212967,1930-1931,,SEASON,florida-southern,miami,24,27,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1930-004]
+CBBG-0212968,1930-1931,,SEASON,miami,stetson,16,36,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1930-005]
+CBBG-0212969,1930-1931,,SEASON,miami,sebring-fireman,38,35,miami,0,TEAM_B_HOME,sebring-fireman,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212970,1930-1931,,SEASON,miami,stetson,15,37,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212971,1930-1931,,SEASON,florida-southern,miami,40,21,florida-southern,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212972,1930-1931,,SEASON,miami,rollins,26,29,rollins,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212973,1930-1931,,SEASON,miami,rollins,22,26,rollins,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212974,1938-1939,,SEASON,havana,miami,34,38,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1938-001]
+CBBG-0212975,1938-1939,,SEASON,havana,miami,40,46,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1938-002]
+CBBG-0212976,1938-1939,,SEASON,miami,rollins,48,29,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1938-003]
+CBBG-0212977,1938-1939,,SEASON,miami,rollins,45,49,rollins,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1938-004]
+CBBG-0212978,1938-1939,,SEASON,miami,rollins,52,39,miami,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212979,1938-1939,,SEASON,miami,rollins,28,42,rollins,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212980,1938-1939,,SEASON,mercer,miami,56,37,mercer,0,TEAM_A_HOME,mercer,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212981,1938-1939,,SEASON,georgia,miami,41,19,georgia,0,TEAM_A_HOME,georgia,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212982,1938-1939,,SEASON,jewish-progressive-aa-atlanta,miami,39,24,jewish-progressive-aa-atlanta,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1938-009]
+CBBG-0212983,1938-1939,,SEASON,albany-ga-blues,miami,53,35,albany-ga-blues,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1938-010]
+CBBG-0212984,1939-1940,,SEASON,miami,stetson,29,33,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-001]
+CBBG-0212985,1939-1940,,SEASON,miami,stetson,27,39,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-002]
+CBBG-0212986,1939-1940,,SEASON,miami,rollins,50,51,rollins,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-003]
+CBBG-0212987,1939-1940,,SEASON,miami,rollins,25,38,rollins,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-004]
+CBBG-0212988,1939-1940,,SEASON,elon,miami,58,30,elon,0,TEAM_A_HOME,elon,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212989,1939-1940,,SEASON,miami,tampa,39,31,miami,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212990,1939-1940,1940-02-12,EXACT,florida-southern,miami,42,43,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212991,1939-1940,,SEASON,miami,rollins,49,56,rollins,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212992,1939-1940,,SEASON,miami,rollins,50,49,miami,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212993,1939-1940,,SEASON,miami,stetson,43,48,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212994,1939-1940,,SEASON,miami,stetson,37,46,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212995,1939-1940,1940-02-23,EXACT,florida-southern,miami,30,37,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212996,1939-1940,,SEASON,eastern-air-lines,miami,25,30,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-017]
+CBBG-0212997,1939-1940,,SEASON,boynton,miami,29,41,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,POSTSEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-018]
+CBBG-0212998,1939-1940,,SEASON,miami,pi-chi,42,29,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,POSTSEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-019]
+CBBG-0212999,1939-1940,,SEASON,miami,miami-freshmen,43,39,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,POSTSEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1939-020]
+CBBG-0213000,1940-1941,,SEASON,miami,stetson,29,46,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-001]
+CBBG-0213001,1940-1941,,SEASON,miami,stetson,41,51,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-002]
+CBBG-0213002,1940-1941,,SEASON,miami,ymha,48,39,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-003]
+CBBG-0213003,1940-1941,,SEASON,miami,rollins,55,29,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-004]
+CBBG-0213004,1940-1941,,SEASON,miami,rollins,57,41,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-005]
+CBBG-0213005,1940-1941,1941-02-04,EXACT,florida-southern,miami,43,57,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213006,1940-1941,,SEASON,miami,rollins,44,35,miami,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213007,1940-1941,,SEASON,miami,stetson,40,45,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213008,1940-1941,,SEASON,miami,stetson,40,35,miami,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213009,1940-1941,1941-02-14,EXACT,florida-southern,miami,33,41,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-010]
+CBBG-0213010,1940-1941,1941-02-15,EXACT,florida-southern,miami,50,38,florida-southern,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-011]
+CBBG-0213011,1940-1941,,SEASON,miami,pi-chi,45,27,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,POSTSEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-014]
+CBBG-0213012,1940-1941,,SEASON,miami,shenandoah-presbyterian,50,36,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,POSTSEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-015]
+CBBG-0213013,1940-1941,,SEASON,miami,miami-freshmen,37,34,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,POSTSEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1940-016]
+CBBG-0213014,1941-1942,,SEASON,marshall,miami,37,33,marshall,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-001]
+CBBG-0213015,1941-1942,,SEASON,jacksonville-navy,miami,18,44,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-002]
+CBBG-0213016,1941-1942,1942-01-22,EXACT,florida-southern,miami,21,41,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-003]
+CBBG-0213017,1941-1942,1942-01-23,EXACT,florida-southern,miami,25,40,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-004]
+CBBG-0213018,1941-1942,,SEASON,miami,miami-alumni,52,32,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-005]
+CBBG-0213019,1941-1942,1942-02-09,EXACT,florida-southern,miami,34,41,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213020,1941-1942,1942-02-10,EXACT,florida-southern,miami,32,38,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213021,1941-1942,,SEASON,miami,stetson,42,47,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213022,1941-1942,,SEASON,miami,stetson,34,42,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213023,1941-1942,,SEASON,miami,tampa,38,34,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-012]
+CBBG-0213024,1941-1942,,SEASON,miami,tampa,52,38,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-013]
+CBBG-0213025,1941-1942,,SEASON,jacksonville-navy,miami,46,25,jacksonville-navy,0,TEAM_A_HOME,jacksonville-navy,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213026,1941-1942,,SEASON,miami,stetson,37,44,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-015]
+CBBG-0213027,1941-1942,,SEASON,miami,stetson,46,36,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1941-016]
+CBBG-0213028,1945-1946,1946-01-11,EXACT,coast-guard-1945,miami,45,46,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-001]
+CBBG-0213029,1945-1946,1946-01-16,EXACT,miami,navy-rec-barracks,43,46,navy-rec-barracks,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-002]
+CBBG-0213030,1945-1946,1946-01-17,EXACT,7th-naval-district,miami,53,19,7th-naval-district,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-003]
+CBBG-0213031,1945-1946,1946-01-25,EXACT,boca-raton-aaf,miami,55,40,boca-raton-aaf,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-004]
+CBBG-0213032,1945-1946,1946-01-26,EXACT,coast-guard-1945,miami,45,54,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-005]
+CBBG-0213033,1945-1946,1946-02-04,EXACT,ft-lauderdale-nas,miami,32,31,ft-lauderdale-nas,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-006]
+CBBG-0213034,1945-1946,1946-02-05,EXACT,boca-raton-aaf,miami,48,41,boca-raton-aaf,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-007]
+CBBG-0213035,1945-1946,1946-02-09,EXACT,caribbean-a-s,miami,41,46,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-008]
+CBBG-0213036,1945-1946,1946-02-11,EXACT,florida-southern,miami,40,45,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-009]
+CBBG-0213037,1945-1946,1946-02-12,EXACT,florida-southern,miami,47,53,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1945-010]
+CBBG-0213038,1945-1946,1946-02-18,EXACT,miami,tampa,44,23,miami,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213039,1945-1946,1946-02-19,EXACT,macdill-field,miami,50,54,miami,0,TEAM_A_HOME,macdill-field,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213040,1945-1946,1946-02-20,EXACT,florida-southern,miami,43,46,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213041,1946-1947,1946-12-13,EXACT,florida-southern,miami,25,38,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-001]
+CBBG-0213042,1946-1947,1946-12-14,EXACT,florida-southern,miami,41,25,florida-southern,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-002]
+CBBG-0213043,1946-1947,1947-01-10,EXACT,miami,tampa,53,27,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-007]
+CBBG-0213044,1946-1947,1947-01-11,EXACT,miami,tampa,52,34,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-008]
+CBBG-0213045,1946-1947,1947-01-17,EXACT,miami,miami-oh,44,60,miami-oh,0,TEAM_B_HOME,miami-oh,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213046,1946-1947,1947-01-18,EXACT,miami,morehead-state,61,56,miami,0,TEAM_B_HOME,morehead-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213047,1946-1947,1947-01-22,EXACT,miami,tulane,39,60,tulane,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-011]
+CBBG-0213048,1946-1947,1947-01-24,EXACT,miami,stetson,46,53,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-012]
+CBBG-0213049,1946-1947,1947-01-25,EXACT,miami,stetson,74,50,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-013]
+CBBG-0213050,1946-1947,1947-01-29,EXACT,boca-raton-aaf,miami,43,61,miami,0,TEAM_A_HOME,boca-raton-aaf,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213051,1946-1947,1947-01-31,EXACT,miami,tampa,53,25,miami,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213052,1946-1947,1947-02-01,EXACT,miami,tampa,82,36,miami,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213053,1946-1947,1947-02-07,EXACT,florida-southern,miami,43,55,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213054,1946-1947,1947-02-08,EXACT,florida-southern,miami,43,61,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213055,1946-1947,1947-02-14,EXACT,miami,pensacola-nas,69,50,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-020]
+CBBG-0213056,1946-1947,1947-02-15,EXACT,miami,pensacola-nas,64,36,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-021]
+CBBG-0213057,1946-1947,1947-02-21,EXACT,miami,stetson,54,41,miami,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213058,1946-1947,1947-02-22,EXACT,miami,stetson,44,38,miami,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213059,1946-1947,1947-02-28,EXACT,banana-river-af,miami,48,68,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1946-024]
+CBBG-0213060,1946-1947,1947-03-06,EXACT,charleston,miami,52,56,miami,0,NEUTRAL,,wku-health-physical-education-building,VEN-000791,Bowling Green,KY,POSTSEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-EXP-S1-1946-025;venue_key=wku-health-physical-education-building;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213061,1946-1947,1947-03-07,EXACT,miami,tennessee-tech,55,51,miami,0,NEUTRAL,,wku-health-physical-education-building,VEN-000791,Bowling Green,KY,POSTSEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-EXP-S1-1946-026;venue_key=wku-health-physical-education-building;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213062,1946-1947,1947-03-08,EXACT,miami,western-kentucky,46,55,western-kentucky,0,TEAM_B_HOME,western-kentucky,wku-health-physical-education-building,VEN-000791,Bowling Green,KY,POSTSEASON,Championship,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=miami/MIA-EXP-S1-1946-027;venue_key=wku-health-physical-education-building;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213063,1947-1948,1947-12-12,EXACT,miami,tampa,35,47,tampa,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1947-001]
+CBBG-0213064,1947-1948,1947-12-13,EXACT,miami,tampa,58,46,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1947-002]
+CBBG-0213065,1947-1948,1948-01-02,EXACT,miami,pennsylvania,46,53,pennsylvania,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1947-006]
+CBBG-0213066,1947-1948,1948-01-16,EXACT,miami,stetson,46,49,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213067,1947-1948,1948-01-17,EXACT,miami,stetson,59,39,miami,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213068,1947-1948,1948-01-31,EXACT,macdill-field,miami,38,67,miami,0,TEAM_A_HOME,macdill-field,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213069,1947-1948,1948-02-03,EXACT,miami,tampa,60,55,miami,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213070,1947-1948,1948-02-04,EXACT,miami,tampa,86,67,miami,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213071,1947-1948,1948-02-06,EXACT,florida-southern,miami,59,50,florida-southern,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213072,1947-1948,1948-02-07,EXACT,florida-southern,miami,43,52,miami,0,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213073,1947-1948,1948-02-14,EXACT,miami,stetson,36,41,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1947-014]
+CBBG-0213074,1947-1948,1948-02-27,EXACT,florida-southern,miami,44,76,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1947-017]
+CBBG-0213075,1947-1948,1948-02-28,EXACT,florida-southern,miami,42,59,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1947-018]
+CBBG-0213076,1953-1954,1953-12-19,EXACT,miami,rio-grande,88,98,rio-grande,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-002]
+CBBG-0213077,1953-1954,1953-12-28,EXACT,miami,pennsylvania,54,67,pennsylvania,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-004]
+CBBG-0213078,1953-1954,1954-01-04,EXACT,brandeis,miami,68,48,brandeis,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-005]
+CBBG-0213079,1953-1954,1954-01-09,EXACT,florida-state,miami,61,78,miami,0,TEAM_B_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-006]
+CBBG-0213080,1953-1954,1954-01-18,EXACT,miami,stetson,63,85,stetson,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-008]
+CBBG-0213081,1953-1954,1954-02-04,EXACT,miami,rollins,71,85,rollins,0,TEAM_B_HOME,rollins,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213082,1953-1954,1954-02-05,EXACT,florida-state,miami,76,69,florida-state,0,TEAM_A_HOME,florida-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213083,1953-1954,1954-02-11,EXACT,miami,stetson,56,108,stetson,0,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213084,1953-1954,1954-02-12,EXACT,miami,tampa,69,65,miami,0,TEAM_B_HOME,tampa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213085,1953-1954,1954-02-13,EXACT,florida-southern,miami,70,77,miami,2,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213086,1953-1954,1954-02-22,EXACT,miami,tampa,67,59,miami,0,TEAM_A_HOME,miami,,,Coral Gables,FL,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=miami/MIA-EXP-S1-1953-015]
