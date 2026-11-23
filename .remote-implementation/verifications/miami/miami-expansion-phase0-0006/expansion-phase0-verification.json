@@ -1,0 +1,32 @@
+{
+  "changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "schools/miami/notes.md",
+    "schools/miami/opponents.csv",
+    "schools/miami/source-games.csv",
+    "schools/miami/source-notes.md",
+    "schools/miami/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/miami.json"
+  ],
+  "expected_target_predecessor_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "independent_exact_tree_equivalence": "PASS",
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_VERIFICATION",
+  "observed_live_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "prepared_tree_sha": "03428fa57ce06ccc2db64e5209abf77add0532b4",
+  "protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "miami-expansion-phase0-0006",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "stage1_control_authority_sha": "a8e30799b2d456a23d5116e0fea4ee35c84f9968",
+  "status": "PASS",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "427dc0b1be51e7fcc4a6847a76357cf4a71cc7d5",
+  "venue_reconciliation_sha256": ""
+}
