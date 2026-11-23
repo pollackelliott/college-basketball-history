@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "apply_request_id": "miami-expansion-stage2-sealed-apply-0001",
+  "approved_plan_hash": "f70993370c276fa6d762d2b4e1d4216a1978014f1838e087ff22172c9cbfaa36",
+  "changed_path_count": 15,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "release_manifest_sha256": "04fe3f8ec161aa49fe8d106f38bde75bb783e62e74c7209de21c320f0ce5f329",
+  "school_key": "miami",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "494c88102419892260b827ab0533714a04e9a7dc4009e410a23cad5c71f00931",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "045f34fc71fcdbbc263147e70b56040b4ed968bed00b7c5dcbbe7cfbc50af643",
+  "writeahead_sha256": "d2839b70b6e27a0f022fbd85fe04b80003177aab48929b405ddd2f5e0a0ef682"
+}
