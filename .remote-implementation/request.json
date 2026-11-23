@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "miami-expansion-stage2-census-0001",
+  "request_id": "miami-expansion-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "school_key": "miami",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "28bb1eabf254b23a71f90560d2e7383dfd71b477",
-  "previous_control_state_sha256": "c3f1f6cf98e44ebb5aa7d14f3edeb6b384416677a22e2a981ea9dcda64bbece5",
+  "previous_control_state_commit": "de043bcf86ea0d83fb203db79c86dfed36e316be",
+  "previous_control_state_sha256": "bf1f2d8184ca78159546fc30bb02543e133fe50a15744bc31af64bbe48d3dfa7",
   "expected_protected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
   "target_branch": "data/miami-onboarding",
   "target_sha": "07fb16a718b3a0113861bcf9a1dfee6521e2fd15",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/miami/miami-expansion-phase0-0005/successor-manifest.json",
-    "sha256": "26ff94dccaec6c8b1ef305ff34c2136eb7cca5478f67b1e0fae5ebb296b6e93e"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-expansion-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "be5d8e3cf2eb6038e1f093fa83dbe627118f5ce0e21ab29a728b15962d8ea6a8"
   },
   "integration_freeze_sha256": "ed9e3c9ea7d0089147694d239057d8f54177d45ce8a31b960f4bb9b01e80deb2",
   "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
@@ -28,11 +28,11 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
@@ -40,7 +40,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "ChatGPT Miami (FL) ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 capability census",
-    "authorization": "Owner said Continue after independently fresh-verified Miami EXPANSION_PHASE0 miami-expansion-phase0-0005 at target 07fb16a718b3a0113861bcf9a1dfee6521e2fd15. This authorizes the ordinary Stage 2 technical/reconciliation phase. This request performs only the permanent read-only STAGE2_CENSUS against the unchanged fresh-verified Phase 0 successor, through independently verified CAPABILITY_CENSUS_READY or an honest BLOCKED checkpoint. Any exact census-bound Rio Grande representation-only normalization remains a later policy-permitted deterministic Stage 2 substep; this request itself carries no tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, recovery, shared/global maintenance, merge, or Owner Gate 2 authority."
+    "origin": "ChatGPT Miami (FL) ALL_HISTORY_EXPANSION serialized Implementation lane — Stage 2 deterministic opponent-display normalization",
+    "authorization": "Existing owner-authorized Miami (FL) ALL_HISTORY_EXPANSION Stage 2 phase persists through OWNER_GATE_1_READY. Fresh-verified census miami-expansion-stage2-census-0001 found exactly one historical opponent-display representation conflict for rio-grande ('Rio Grande' versus 'Rio Grande College (Ohio)'), zero warnings, zero owner decisions, semantic drift PASS, and no other blocker topology. This authorizes exactly one coherent permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE operation over that complete one-key census population. The permanent helper may change only representation-only opponent display fields under its field-level and semantic guards, normalizing the Miami package to existing project display authority while preserving canonical historical key rio-grande. No historical reinterpretation, unrelated opponent cleanup, current-main refresh, proposal rehearsal, Owner Gate 1/2, sealing, sealed apply, release, Preview, merge, Production, recovery, shared/global maintenance, or protected-main mutation authority."
   }
 }
