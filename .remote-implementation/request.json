@@ -1,11 +1,9 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "miami-expansion-stage2-proposal-0001",
+  "request_id": "miami-expansion-stage2-proposal-0002",
   "school_key": "miami",
   "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "20489ee0b93af7c57ba4774d6b0026c0651a7505",
-  "previous_control_state_sha256": "606f871a534d742086f79ce61d329d42475b65960a8f1ff7dc9914584f5f0a21cbbb9d5d629a292a9159015a152fecd8673326678eb44a87db0c2e0d47b5481dae5f9156cf6c85d32f73477d6d1826ca8b43d457e360b5961c4560026f196331d94ebeb10cc4a611261dc1f25815a7be70b7ed67a1513c6944f93635720dcdfdb467369eca320b7534e0d42e49c7d9bd87abb9f2c463a2fcec3fc3f327277f6d610bebf27420b49ed1fd8a33e4773594092197f61b530c95869d6342eee52e4f1107668921fba37b43ab9fb675a9f91d86305019d7cd817307fe00ff379f513f66b651a8764ab842a4b06be1c3578c15d2962a531e039f40857b7beea29bf2de",
   "expected_protected_main_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
   "target_branch": "data/miami-onboarding",
   "target_sha": "8165cc903c27fe10fa4584c1cdef160531d70e59",
@@ -14,8 +12,8 @@
     "sha256": "a89559dbe72c1765f2fa9da9813ff1ea952e383de997a89942dddd160c1b86b3"
   },
   "recommendation_map": {
-    "path": ".remote-implementation/requests/miami-expansion-stage2-proposal-0001/recommendation-map.json",
-    "sha256": "c1acbc19d9e484390259bc7fd95c5cecefbaa07e960e949fe93d2f133ae7ab43cbbb9d5d629a292a9159015a152fecd8673326678eb44a87db0c2e0d47b5481dae5f9156cf6c85d32f73477d6d1826ca8b43d457e360b5961c4560026f196331d94ebeb10cc4a611261dc1f25815a7be70b7ed67a1513c6944f93635720dcdfdb467369eca320b7534e0d42e49c7d9bd87abb9f2c463a2fcec3fc3f327277f6d610bebf27420b49ed1fd8a33e4773594092197f61b530c95869d6342eee52e4f1107668921fba37b43ab9fb675a9f91d86305019d7cd817307fe00ff379f513f66b651a8764ab842a4b06be1c3578c15d2962a531e039f40857b7beea29bf2de"
+    "path": ".remote-implementation/requests/miami-expansion-stage2-proposal-0002/recommendation-map.json",
+    "sha256": "c1acbc19d9e484390259bc7fd95c5cecefbaa07e960e949fe93d2f133ae7ab43"
   },
   "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
   "integration_freeze_sha256": "ed9e3c9ea7d0089147694d239057d8f54177d45ce8a31b960f4bb9b01e80deb2",
@@ -45,7 +43,9 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "ChatGPT Miami (FL) ALL_HISTORY_EXPANSION serialized Implementation lane — mature six-decision Stage 2 recommendation-map rehearsal",
+    "origin": "ChatGPT Miami (FL) ALL_HISTORY_EXPANSION serialized Implementation lane — repository-prevalidated six-decision Stage 2 recommendation-map rehearsal",
     "authorization": "The existing owner-authorized Miami (FL) ALL_HISTORY_EXPANSION Stage 2 technical/reconciliation phase persists through OWNER_GATE_1_READY. Fresh-verified opponent-display normalization miami-expansion-stage2-opponent-display-normalize-0001 produced CAPABILITY_CENSUS_READY with zero blockers, zero warnings, semantic drift PASS, and exactly six site_type discrepancy decisions. This exact recommendation map keeps the existing canonical H/A/N on all six while preserving Miami's conflicting frozen source assertions: five exact-date reciprocal project rows support the current canonical H/A/N, and the 1940 Wake Forest row remains canonical UNKNOWN rather than manufacturing certainty from one conflicting assertion. Run only the permanent read-only proposal rehearsal. No Owner Gate 1 approval/fill, seal/apply, release, Preview, merge, Production, recovery, tracked basketball mutation, or Owner Gate 2 authority."
-  }
+  },
+  "previous_control_state_commit": "beafe8bbbe7f02a3ab33a7105bfa80c1ce7771c0",
+  "previous_control_state_sha256": "606f871a534d742086f79ce61d329d42475b65960a8f1ff7dc9914584f5f0a21"
 }
