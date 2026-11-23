@@ -1,0 +1,58 @@
+{
+  "authority": {
+    "expansion_phase0": true,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner supplied the Miami Implementation successor instructions authorizing continuation of the same Miami ALL_HISTORY_EXPANSION through ordinary fresh current-main startup and independently verified guarded EXPANSION_PHASE0. It does not authorize new Research, historical mutation beyond settled frozen authority, an Owner Gate, Stage 2, release, merge, Production, or Miami-specific tooling repairs. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation lane; fresh successor after Control Center generic Expansion Hard Reset PR #693 and fresh-verified re-bootstrap request miami-expansion-rebootstrap-0001."
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+    "sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+    "transport": {
+      "commit_sha": "9ebf1617d4511f9d81fc0468257ae4d0215f22bc",
+      "kind": "git_base64_parts",
+      "part_count": 275,
+      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0006/part-"
+    }
+  },
+  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "4b2c6f4ec1bc1c802c6cd5741e4c79539a2588b3",
+  "previous_control_state_sha256": "7bfa35d72ad3ac2e0867bf834d58715d6757cfa3bb0459271b26af104eaaf497",
+  "request_id": "miami-expansion-phase0-0006",
+  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "schema_version": 1,
+  "school_key": "miami",
+  "stage1_control_authority_sha": "a8e30799b2d456a23d5116e0fea4ee35c84f9968",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/miami/miami-expansion-startup-0006/stage1-independent-proof.json",
+    "sha256": "352c2b4519b3b13fd00948e67ea85f5de59c5ecd6b4fcafb5074393443f30e03"
+  },
+  "stage1_independent_proof_sha256": "352c2b4519b3b13fd00948e67ea85f5de59c5ecd6b4fcafb5074393443f30e03",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c"
+}
