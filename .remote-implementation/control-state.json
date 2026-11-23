@@ -746,18 +746,19 @@
     "miami-expansion-phase0-0005",
     "miami-expansion-stage2-census-0001",
     "miami-expansion-stage2-opponent-display-normalize-0001",
-    "miami-expansion-stage2-proposal-0002"
+    "miami-expansion-stage2-proposal-0002",
+    "miami-expansion-rebootstrap-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:45244282761:1",
+  "active_operation": "EXPANSION_REBOOTSTRAP_FROM_FREEZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "miami-expansion-rebootstrap-0001",
+  "active_request_sha256": "8847cd8e88a832bfc762218483532f2baa32b125bcc58f15bb850f28bc51b95e",
+  "active_school_key": "miami",
+  "active_target_branch": "data/miami-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1503,8 +1504,11 @@
     "target_branch": "data/miami-onboarding",
     "target_sha": "8165cc903c27fe10fa4584c1cdef160531d70e59"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45244282761",
+  "lock_acquisition_request_commit": "85170d6aac5c88c1cb339cc75cea02f77c410e27",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }

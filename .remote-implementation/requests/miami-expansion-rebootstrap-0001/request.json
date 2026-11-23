@@ -1,0 +1,74 @@
+{
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": true,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "Owner explicitly authorized this one bounded Control Center re-bootstrap unit with 'Proceed'. The operation is limited to preserving Miami's exact pre-Gate-1 superseded Git lineage and resetting the single onboarding ref to current protected main so the ordinary expansion startup can resume in the Miami Implementation chat.",
+    "origin": "Repository-wide College Basketball History Control Center — generic All-History expansion hard-reset recovery after merged PR #693."
+  },
+  "expansion_rebootstrap_authorization": {
+    "approved": true,
+    "authority_kind": "CONTROL_CENTER_EXPLICIT",
+    "authorization_basis": "Owner explicitly said Proceed in the repository-wide Control Center after PR #693 merged the generic expansion hard-reset contract, authorizing the guarded Miami pre-Gate-1 re-bootstrap only. This preserves the immutable Miami Research Freeze and superseded lineage, CAS-resets only data/miami-onboarding to exact protected main, and grants no Stage 1, Phase 0, Stage 2, Owner Gate 1, release, merge, Production, or new historical authority.",
+    "protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+    "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+    "target_sha": "8165cc903c27fe10fa4584c1cdef160531d70e59"
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+    "sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+    "transport": {
+      "commit_sha": "3bcdf01e732f67e0a253fcce36ca803af7dcbb44",
+      "kind": "git_base64_parts",
+      "part_count": 275,
+      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0005/part-"
+    }
+  },
+  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_REBOOTSTRAP_FROM_FREEZE",
+  "previous_control_state_commit": "c83cd9ab92830601d589b697349fdbde806e141f",
+  "previous_control_state_sha256": "7092da2313522b439a526c8a47bc62d94e2c4e3874130d30035d3bdd1b8e3516",
+  "request_id": "miami-expansion-rebootstrap-0001",
+  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "schema_version": 1,
+  "school_key": "miami",
+  "superseded_integration_freeze_sha256": "ed9e3c9ea7d0089147694d239057d8f54177d45ce8a31b960f4bb9b01e80deb2",
+  "superseded_phase0_successor": {
+    "path": ".remote-implementation/successors/miami/miami-expansion-phase0-0005/successor-manifest.json",
+    "sha256": "26ff94dccaec6c8b1ef305ff34c2136eb7cca5478f67b1e0fae5ebb296b6e93e"
+  },
+  "superseded_semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "superseded_successor": {
+    "path": ".remote-implementation/successors/miami/miami-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "a89559dbe72c1765f2fa9da9813ff1ea952e383de997a89942dddd160c1b86b3"
+  },
+  "superseded_successor_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-expansion-stage2-opponent-display-normalize-0001/stage2-opponent-display-verification.json",
+    "sha256": "e168eed71bc5b1d0408a6f1375d0a389b6828b32b751e0189138e0022a69ce43"
+  },
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "8165cc903c27fe10fa4584c1cdef160531d70e59"
+}
