@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "request_id": "miami-expansion-release-preview-0001",
+  "school_key": "miami",
+  "previous_control_state_commit": "de34e27eeaf68ab2cf6d3e5c250e551f61b2058d",
+  "previous_control_state_sha256": "4f7e472760564dbfbed7ff8c84d909feef2613635ef2033c7472fbe440285d3e",
+  "expected_protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-expansion-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "e9fa5e613c39b6933f030365e210b2be70200f1c3a615f21b811bed9cc4ccbd7"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-expansion-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "e4b60ff5379d59cc6bac650ce9e53ff1bc1f64aaa8b098f01112306c8061e3b2"
+  },
+  "approved_plan_hash": "f70993370c276fa6d762d2b4e1d4216a1978014f1838e087ff22172c9cbfaa36",
+  "release_manifest_sha256": "04fe3f8ec161aa49fe8d106f38bde75bb783e62e74c7209de21c320f0ce5f329",
+  "pr_number": 695,
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation: connector-created exact PR #695 from verified release-pr packet after release-readiness PASS.",
+    "authorization": "Owner-authorized RELEASE_READINESS_TO_PREVIEW_V1 release preparation; queue exact PR-head checks/mergeability/Vercel Preview verification to OWNER_GATE_2_READY only. No Gate 2 approval, merge or Production authority."
+  }
+}
