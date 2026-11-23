@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "integration_base_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
+    "school_key": "miami",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+    "integration_base_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
+    "school_key": "miami",
+    "status": "PASS"
+  }
+}
