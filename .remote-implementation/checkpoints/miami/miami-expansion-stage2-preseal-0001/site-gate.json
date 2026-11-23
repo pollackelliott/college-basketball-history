@@ -1,0 +1,133 @@
+{
+  "counts": {
+    "home_missing_both": 4,
+    "home_missing_location": 4,
+    "home_missing_venue": 388,
+    "invalid_home_venue_exception_marker": 1,
+    "invalid_home_venue_exception_marker_rows": 1,
+    "neutral_missing_location": 2,
+    "neutral_missing_venue": 41,
+    "postseason_missing_venue": 7,
+    "public_gap_rows": 429,
+    "reciprocal_research_accounted_gap": 1,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue": 384,
+    "researched_unresolved_home_venue_rows": 384,
+    "strict_home_gap": 4,
+    "strict_home_gap_rows": 4,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2019,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap": 1,
+    "unaccounted_public_gap_rows": 1
+  },
+  "errors": [
+    "4 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception or exact protected-main owner-authorized HOME locality exception. Ordinary research statuses remain nonwaivable.",
+    "1 canonical game(s) carry a researched HOME exception marker for the target school without satisfying the source, location, H/A/N, NCAA, and reciprocal-evidence requirements.",
+    "1 canonical public site-gap game(s) are not backed by explicit research-accounting metadata or field-specific reconciliation provenance."
+  ],
+  "examples": {
+    "home_missing_both": [
+      "CBBG-0018091",
+      "CBBG-0018092",
+      "CBBG-0132326",
+      "CBBG-0132644"
+    ],
+    "home_missing_location": [
+      "CBBG-0018091",
+      "CBBG-0018092",
+      "CBBG-0132326",
+      "CBBG-0132644"
+    ],
+    "home_missing_venue": [
+      "CBBG-0017971",
+      "CBBG-0017972",
+      "CBBG-0018051",
+      "CBBG-0018052",
+      "CBBG-0018091",
+      "CBBG-0018092",
+      "CBBG-0018105",
+      "CBBG-0018106",
+      "CBBG-0018122",
+      "CBBG-0018154",
+      "CBBG-0018183",
+      "CBBG-0018209"
+    ],
+    "invalid_home_venue_exception_marker": [
+      "CBBG-0132066"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0053319",
+      "CBBG-0069880"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0020885",
+      "CBBG-0021734",
+      "CBBG-0030662",
+      "CBBG-0034238",
+      "CBBG-0034687",
+      "CBBG-0039040",
+      "CBBG-0053319",
+      "CBBG-0057144",
+      "CBBG-0069452",
+      "CBBG-0069880",
+      "CBBG-0102867",
+      "CBBG-0115128"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0131850",
+      "CBBG-0212997",
+      "CBBG-0212998",
+      "CBBG-0212999",
+      "CBBG-0213011",
+      "CBBG-0213012",
+      "CBBG-0213013"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0069880"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0017971",
+      "CBBG-0017972",
+      "CBBG-0018051",
+      "CBBG-0018052",
+      "CBBG-0018105",
+      "CBBG-0018106",
+      "CBBG-0018122",
+      "CBBG-0018154",
+      "CBBG-0018183",
+      "CBBG-0018209",
+      "CBBG-0018232",
+      "CBBG-0018253"
+    ],
+    "strict_home_gap": [
+      "CBBG-0018091",
+      "CBBG-0018092",
+      "CBBG-0132326",
+      "CBBG-0132644"
+    ],
+    "unaccounted_public_gap": [
+      "CBBG-0132644"
+    ]
+  },
+  "history_start_season": "1927-1928",
+  "school_key": "miami",
+  "source_site_counts": {
+    "home_missing_venue": 390,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 430,
+    "neutral_missing_venue": 40,
+    "postseason_missing_venue": 7,
+    "researched_gap_rows": 430,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 390,
+    "unaccounted_gap_rows": 0
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2018
+  },
+  "status": "FAIL",
+  "warnings": []
+}
