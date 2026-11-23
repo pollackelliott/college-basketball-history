@@ -14,45 +14,47 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
+    "stage2_gate1_seal": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": true,
+    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from miami-expansion-stage2-gate1-fill-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from miami-expansion-stage2-preseal-0001",
     "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "e2717be027b381f7453997502ad8ea5cb539f1c71780668c3098351f08916063",
   "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+  "equivalence_sha256": "0ce23e3e862375966e50aa93a7a2f9fa327eff726a926f1d39dfea20a71e98e1",
   "expected_protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
   "filled_review_sha256": "e61f8bc72fc01662307d64bcbd4d4092ab0e63da3a1fcb214b24e8780e0c5424",
   "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "02f25f376c544b3ab3853ac77b42bc8c5f85648d836caad25ea2dbaa2e5c2152",
   "phase_continuation": {
     "apply_request_id": "miami-expansion-stage2-sealed-apply-0001",
     "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
     "preseal_request_id": "miami-expansion-stage2-preseal-0001",
     "seal_request_id": "miami-expansion-stage2-gate1-seal-0001"
   },
-  "previous_control_state_commit": "5961a8d5b710fae226c4f7c4383dd65bd198818d",
-  "previous_control_state_sha256": "ca56d8193f84409d4f9c87fe2b26581b6557a8420f2846a89583c03eb07700b0",
+  "previous_control_state_commit": "4c3cb90895df165cb5452c14adc8b228c9ef00df",
+  "previous_control_state_sha256": "45c35a5a6195327cbf7a7820e0698c684ab31af5cbca462092689fb09d6ad03c",
   "recommendation_map_sha256": "0c20c5e2d660515634335ef54ede61287e6344b461706172c66adec9056c377f",
-  "request_id": "miami-expansion-stage2-preseal-0001",
+  "request_id": "miami-expansion-stage2-gate1-seal-0001",
   "schema_version": 1,
   "school_key": "miami",
   "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/miami/miami-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "3cd72cec01bffe1c27cb063f8e1af17bfaac9c78043d3bd5c5d447ac838e52b0"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-expansion-stage2-preseal-0001/checkpoint-manifest.json",
+    "sha256": "999070f702b27e006bd6e68f606286a9a8424eb5da923bf67c88d2306ebf87aa"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/miami/miami-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "7da1a64c06056ecf36de12a5501ddd39ca2c493c18a76814f1fea73fccb8c589"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-expansion-stage2-preseal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "abdec78664dcaa01c5869b8eb15da3c63ba33998c46815176e6658469f341d5a"
   },
   "target_branch": "data/miami-onboarding",
   "target_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829"
