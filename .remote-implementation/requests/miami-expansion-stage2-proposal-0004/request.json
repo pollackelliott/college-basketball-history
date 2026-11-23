@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from miami-expansion-stage2-census-0003",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_universe_sha256": "a314952fdb46a0715dd381756b48b7f346eaad6f3e0b909c88ad274bd9c0af5f",
+  "expected_protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "29f8236ba6dfe109effaf2e330d9e994738aecc2",
+  "previous_control_state_sha256": "ff2ce47ac8d58bc117bbba2f165f1be723e559fc1877047d544e07c292714002",
+  "recommendation_map": {
+    "path": ".remote-implementation/payloads/miami/miami-expansion-stage2-proposal-0003/recommendation-map.json",
+    "sha256": "0c20c5e2d660515634335ef54ede61287e6344b461706172c66adec9056c377f"
+  },
+  "request_id": "miami-expansion-stage2-proposal-0004",
+  "schema_version": 1,
+  "school_key": "miami",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/miami/miami-expansion-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "d3ccec90a89856f34aebbb56a7e85c0689e9e48c196044c63691e98c8976ecf2"
+  },
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "d9b8ddaf4bb49ca4f8da510428397d044ab97829"
+}
