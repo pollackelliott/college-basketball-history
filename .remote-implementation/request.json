@@ -1,6 +1,23 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "miami-expansion-stage2-census-0002",
+  "school_key": "miami",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "7421d274bcf567e7bda18e39aca26ebca963abd0",
+  "previous_control_state_sha256": "31ff578dc667a190be2655b3224d57c309c52a3b5228b7d1e5571ea642d9b9b5",
+  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "427dc0b1be51e7fcc4a6847a76357cf4a71cc7d5",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/miami/miami-expansion-phase0-0006/successor-manifest.json",
+    "sha256": "3dd289a0c874b2017b5d8cf2e9383425adfac4a0ad79f4617759e9bc04f61581"
+  },
+  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
+  "semantic_snapshot_sha256": "bd412a65b0dfd8b9b0cf68bd301c101968652d3bd2768ad914ab5f4f6913bd2d",
   "authority": {
-    "expansion_phase0": true,
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -12,7 +29,7 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
@@ -24,35 +41,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner supplied the Miami Implementation successor instructions authorizing continuation of the same Miami ALL_HISTORY_EXPANSION through ordinary fresh current-main startup and independently verified guarded EXPANSION_PHASE0. It does not authorize new Research, historical mutation beyond settled frozen authority, an Owner Gate, Stage 2, release, merge, Production, or Miami-specific tooling repairs. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
-    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation lane; fresh successor after Control Center generic Expansion Hard Reset PR #693 and fresh-verified re-bootstrap request miami-expansion-rebootstrap-0001."
-  },
-  "expansion_research_checkpoint": {
-    "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
-    "sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
-    "transport": {
-      "commit_sha": "9ebf1617d4511f9d81fc0468257ae4d0215f22bc",
-      "kind": "git_base64_parts",
-      "part_count": 275,
-      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0006/part-"
-    }
-  },
-  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
-  "integration_freeze_sha256": "43be4d04314603d81f0885521f3df36e656cf5e4a00f167b35062af90fc57fae",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "EXPANSION_PHASE0",
-  "previous_control_state_commit": "4b2c6f4ec1bc1c802c6cd5741e4c79539a2588b3",
-  "previous_control_state_sha256": "7bfa35d72ad3ac2e0867bf834d58715d6757cfa3bb0459271b26af104eaaf497",
-  "request_id": "miami-expansion-phase0-0006",
-  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
-  "schema_version": 1,
-  "school_key": "miami",
-  "stage1_control_authority_sha": "a8e30799b2d456a23d5116e0fea4ee35c84f9968",
-  "stage1_independent_proof": {
-    "path": ".remote-implementation/startups/miami/miami-expansion-startup-0006/stage1-independent-proof.json",
-    "sha256": "352c2b4519b3b13fd00948e67ea85f5de59c5ecd6b4fcafb5074393443f30e03"
-  },
-  "stage1_independent_proof_sha256": "352c2b4519b3b13fd00948e67ea85f5de59c5ecd6b4fcafb5074393443f30e03",
-  "target_branch": "data/miami-onboarding",
-  "target_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c"
+    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation lane; ordinary Stage 2 capability census after verified generic hard-reset startup and fresh-verified expansion Phase 0 miami-expansion-phase0-0006.",
+    "authorization": "Owner explicitly said 'success. continue' to advance the same Miami Implementation after Phase 0; authorized only ordinary read-only Stage 2 capability census and later separately gated ordinary Stage 2 work, not historical adjudication, Owner Gate 1, release, merge, or Production."
+  }
 }
