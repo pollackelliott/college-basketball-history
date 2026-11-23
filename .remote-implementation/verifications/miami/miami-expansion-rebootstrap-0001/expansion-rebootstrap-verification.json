@@ -1,0 +1,19 @@
+{
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_REBOOTSTRAP_VERIFICATION",
+  "observed_live_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "remote_expansion_rebootstrap_equivalence": "PASS",
+  "request_id": "miami-expansion-rebootstrap-0001",
+  "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "reset_target_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
+  "reset_target_tree_sha": "59019521315d1d0c3ef5bad701663a7d326618d7",
+  "schema_version": 1,
+  "school_key": "miami",
+  "superseded_bundle_ref": "refs/rebootstrap/miami/8165cc903c27fe10",
+  "superseded_bundle_sha256": "d541ac22493b5804f8dc6e7d27394b1df7b108ddf70e65279126d5b01c46419a",
+  "superseded_merge_base_sha": "8d6c6348ef3fb7107f58f5b99e8f0b4d05ed9802",
+  "superseded_target_sha": "8165cc903c27fe10fa4584c1cdef160531d70e59",
+  "target_branch": "data/miami-onboarding",
+  "tracked_basketball_mutation": "NONE"
+}
