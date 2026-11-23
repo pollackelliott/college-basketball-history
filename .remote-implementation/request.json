@@ -49,7 +49,7 @@
   "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
   "operation": "EXPANSION_REBOOTSTRAP_FROM_FREEZE",
-  "previous_control_state_commit": "621a7761e5acdb3d4f962f59b822a23c427e60bb",
+  "previous_control_state_commit": "c83cd9ab92830601d589b697349fdbde806e141f",
   "previous_control_state_sha256": "7092da2313522b439a526c8a47bc62d94e2c4e3874130d30035d3bdd1b8e3516",
   "request_id": "miami-expansion-rebootstrap-0001",
   "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
