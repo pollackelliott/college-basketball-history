@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_CENTRAL_WASHINGTON_SOURCE_LIMITS_V1",
+  "source_family": "Central Washington University Athletics historical men's basketball schedules",
+  "accepted_rows": 13,
+  "accepted_regular_season_rows": 9,
+  "accepted_postseason_rows": 4,
+  "searched_schedule_years": [
+    "1930",
+    "1931",
+    "1935",
+    "1936",
+    "1937",
+    "1938",
+    "1939",
+    "1941",
+    "1942",
+    "1945",
+    "1946",
+    "1947",
+    "1948",
+    "1949",
+    "1950",
+    "1951",
+    "1952",
+    "1953",
+    "1954",
+    "1955",
+    "1956",
+    "1957"
+  ],
+  "inaccessible_schedule_years_attempted": [
+    "1932",
+    "1933",
+    "1934",
+    "1940",
+    "1943",
+    "1944"
+  ],
+  "notes": [
+    "No Gonzaga row was present on the accessible 1931, 1935, 1937, 1938, 1941, 1942, 1945, 1946, 1947, 1950, 1952, 1954, 1955, or 1956 schedule pages.",
+    "The 2018 Central Washington article says the schools played 28 regular-season games and also says CWU won at Gonzaga on Nov. 29, 1918, 64-63, while the same paragraph calls Jan. 29, 1931 the first meeting. Because that article is internally contradictory on chronology, the 1918 assertion is preserved as unaccepted source conflict and no game row is created from it.",
+    "Rows with third-city locations but no explicit source H/A/N relationship keep site_type UNKNOWN. Geography is not used to infer neutral.",
+    "Evergreen Conference Tournament games are classified as POSTSEASON because Gonzaga was outside its accepted top-level scope during these seasons."
+  ],
+  "unaccepted_article_assertion": {
+    "date": "1918-11-29",
+    "claimed_result": "Central Washington W 64-63 at Gonzaga",
+    "disposition": "NOT_ADMITTED_INTERNAL_SOURCE_CONTRADICTION",
+    "source_url": "https://wildcatsports.com/news/2018/10/31/mens-basketball-takes-on-no-3-gonzaga-and-george-fox-in-exhibitions.aspx"
+  }
+}
