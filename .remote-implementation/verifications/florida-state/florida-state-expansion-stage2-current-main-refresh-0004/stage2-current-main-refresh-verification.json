@@ -1,0 +1,44 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "2cd9f370a4407b2ae4bdd95715c72c506b5e5f82fd6aefab4643d640d98bc5fb",
+    "tests/test_remote_implementation_stage2_proposal.py": "bb49be1fd8edd91e1bf3a8f128df26d0b38e0fca24b872c6530d49b3addf4dc5",
+    "tests/test_stage2_candidate_runtime_rehearsal.py": "ab8334f1b41cb3b1e943f658cb89a4d193e9f4c4647073da06b3b42e73198c82",
+    "tools/remote_implementation_stage2_proposal.py": "a7dea8347234c8015cdbeb041276de01f88f9de5aaae8d889ffb65ee94d5665f"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_remote_implementation_stage2_proposal.py",
+    "tests/test_stage2_candidate_runtime_rehearsal.py",
+    "tools/remote_implementation_stage2_proposal.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "observed_live_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "package_member_sha256": {
+    "conferences.csv": "e2e1e2d08d20a4c388c715cb30cefcfd83ee0b9fd74cd3774959553b06ffe586",
+    "notes.md": "90906f744346362ea6af22a63f4185ddcea5b77ec7a0208b00f0757b918a8e9f",
+    "opponents.csv": "94c51a56b92328613129ac58827b9bcdac97be71cc877a272e99f5b3926e2e3d",
+    "source-games.csv": "c4d05db6b7d04de0ea5e64cb03b417ef8141381ea4cee97be18df57d1f7b4289",
+    "source-notes.md": "3ae20ec45354bd22dcafbf612ec5243395720488d8d93dca525947969fc6e3d9",
+    "venues.csv": "c5db138677cf3a2c8ad32555d9b1f0d66d9bb213c11229e5e8921980e87057e5"
+  },
+  "prepared_parents": [
+    "da2944f0487fe661eded2bbec8f9205ccb1af357",
+    "17e61efd0786671df593859c2b73f720217cef1e"
+  ],
+  "protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "florida-state-expansion-stage2-current-main-refresh-0004",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "target_branch": "data/florida-state-onboarding",
+  "target_predecessor_sha": "da2944f0487fe661eded2bbec8f9205ccb1af357",
+  "target_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0",
+  "target_tree_sha": "bb56b47b591147393ef0c0af83b8abac12998d50",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
