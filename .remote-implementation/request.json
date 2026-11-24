@@ -1,27 +1,6 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "miami-expansion-release-production-proof-0001",
-  "school_key": "miami",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "previous_control_state_commit": "0f380c2e0b024152776dedbefc13493c0ddc382a",
-  "previous_control_state_sha256": "c11480727e3120c8707455e710ad3d8f0a4a20be6c63e8788b7e6993dc34f61c",
-  "expected_protected_main_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
-  "target_branch": "data/miami-onboarding",
-  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/miami/miami-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "9379692931ecb34752576583074ed689eef4e7c4deb6dea2d5a2b477638dbf40"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/miami/miami-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "362761dfb7a262ad90401dc06ef00ffd69974c6542776e0e8e8857f746599197"
-  },
-  "pr_number": 695,
-  "merge_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
   "authority": {
-    "expansion_phase0": false,
-    "expansion_rebootstrap_from_freeze": false,
+    "expansion_phase0": true,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -31,7 +10,7 @@
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
-    "release_production_proof": true,
+    "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -45,7 +24,35 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Same Miami (FL) ALL_HISTORY_EXPANSION final release after explicit Owner Gate 2 and independently verified exact connector merge packet.",
-    "authorization": "Owner expressly said 'approved. Proceed' for exact PR #695 Preview, followed by fresh Gate 2 PASS and exact two-parent merge. Read-only Production proof only; no other mutation."
-  }
+    "authorization": "Existing owner startup-phase authority persists through deterministic safe recovery. Generic tooling repairs PR #698 and PR #701 are merged in protected main. This replacement startup uses fresh exact current-main binding and fresh child request ID; it authorizes only acceptance, current-main Stage 1 reproduction and proof, Integration Freeze, disposable Phase 0 preview, ordinary guarded EXPANSION_PHASE0, and independent fresh verification. No new Research, shared/global basketball maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, or merge authority. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "Same owner-authorized Florida State ALL_HISTORY_EXPANSION initial Implementation phase, resumed after startup 0002 stopped before child request publication on generic expansion venue-guard alias handling."
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+    "sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
+    "transport": {
+      "commit_sha": "9e235c2b7ddd297043f435d8a56be22658e7d64a",
+      "kind": "git_base64_parts",
+      "part_count": 8,
+      "path_prefix": ".remote-implementation/transports/florida-state/florida-state-expansion-startup-0003/freeze.part-"
+    }
+  },
+  "expected_protected_main_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "previous_control_state_commit": "58262ebcaff01ac0f8de5127b9d32cf834ca5b3d",
+  "previous_control_state_sha256": "a00c51cc6c81d2d789464724e502d5d8f2f22b5ab506204a4ac8d5c1ed60ab3c",
+  "request_id": "florida-state-expansion-phase0-0003",
+  "research_freeze_sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "stage1_control_authority_sha": "deae0a9e03d0ded10f0bd50f7cb571079351b21c",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/florida-state/florida-state-expansion-startup-0003/stage1-independent-proof.json",
+    "sha256": "487618aaf125c9c6def54f25870bb20617b58166f5fecfc87b440e0ebf0d4867"
+  },
+  "stage1_independent_proof_sha256": "487618aaf125c9c6def54f25870bb20617b58166f5fecfc87b440e0ebf0d4867",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "b8782d618711169759b178613c2ebc2af611b8a8"
 }
