@@ -773,15 +773,15 @@
   "active_lock_commit": "b8d26db96a987492f34a02c5c5abb997df96029c",
   "active_lock_owner": "github-actions:45435102678:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "f2b39e222ca4ef33ff351bf4e74e3a246e3c3874",
+  "active_prepared_tree_sha": "ffeed1e8ca7d0eb1f625413232ef3b9309459bd4",
   "active_request_id": "florida-state-expansion-stage2-current-main-refresh-0001",
   "active_request_sha256": "493045c605ff5ad698d7bf202009d36959d4a3f203499d8346b24aab35734006",
   "active_school_key": "florida-state",
   "active_target_branch": "data/florida-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/florida-state/florida-state-expansion-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "8ee5827a1485b8d44f8d7964e1025607943a2f0ad2c87a52a2a5097cf61377e6",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1541,5 +1541,5 @@
   "lock_acquisition_request_commit": "fd05b92928f0b38ffea792bc6324ee7461bf9c01",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
