@@ -290,6 +290,67 @@ jobs:
                               != last.get('stage2_status')):
                       fail('opponent-display successor does not bind exact verified last operation')
               elif (last.get('operation') == 'STAGE2_CENSUS'
+                    and last.get('stage2_status') == 'CAPABILITY_CENSUS_READY'
+                    and last.get('fresh_runner_verification') == 'PASS'
+                    and last.get('remote_stage2_census_equivalence') == 'PASS'):
+                  mode = 'LIVE_PROPOSAL_AFTER_CENSUS'
+                  checkpoint = str(last.get('checkpoint_manifest_path') or '')
+                  school = str(last.get('school_key') or '')
+                  expected_main = str(last.get('protected_main_sha') or '')
+                  live_request = json.loads(
+                      Path('control/.remote-implementation/request.json').read_text()
+                  )
+                  stage2_ref = live_request.get('stage2_authority') or {}
+                  authority_flags = live_request.get('authority') or {}
+                  used_ids = set(state.get('accepted_request_ids') or [])
+                  used_ids.update(state.get('consumed_request_ids') or [])
+                  used_ids.update(state.get('abandoned_request_ids') or [])
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or not valid_sha(expected_main)
+                          or not checkpoint.startswith(
+                              '.remote-implementation/checkpoints/' + school + '/'
+                          )
+                          or not checkpoint.endswith('/checkpoint-manifest.json')
+                          or '..' in Path(checkpoint).parts
+                          or live_request.get('kind') != 'REMOTE_IMPLEMENTATION_REQUEST'
+                          or live_request.get('operation') != 'STAGE2_PROPOSAL_REHEARSAL'
+                          or live_request.get('school_key') != school
+                          or live_request.get('target_branch') != last.get('target_branch')
+                          or live_request.get('target_sha') != last.get('target_sha')
+                          or live_request.get('expected_protected_main_sha') != expected_main
+                          or live_request.get('decision_universe_sha256')
+                              != last.get('decision_universe_sha256')
+                          or stage2_ref.get('path') != checkpoint
+                          or stage2_ref.get('sha256')
+                              != last.get('checkpoint_manifest_sha256')
+                          or authority_flags.get('stage2_proposal_rehearsal') is not True
+                          or authority_flags.get('owner_gate_1') is not False
+                          or authority_flags.get('owner_gate_2') is not False
+                          or live_request.get('request_id') in used_ids):
+                      fail('live proposal does not bind exact fresh-verified census authority')
+                  raw = (Path('control') / checkpoint).read_bytes()
+                  if hashlib.sha256(raw).hexdigest() != last.get(
+                      'checkpoint_manifest_sha256'
+                  ):
+                      fail('live proposal census bytes do not match control-state hash')
+                  manifest = json.loads(raw)
+                  preflight = manifest.get('preflight') or {}
+                  if (
+                      manifest.get('kind')
+                      != 'REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT'
+                      or manifest.get('stage2_status') != 'CAPABILITY_CENSUS_READY'
+                      or manifest.get('school_key') != school
+                      or manifest.get('request_id') != last.get('request_id')
+                      or manifest.get('target_branch') != last.get('target_branch')
+                      or manifest.get('target_sha') != last.get('target_sha')
+                      or manifest.get('protected_main_sha') != expected_main
+                      or manifest.get('decision_universe_sha256')
+                          != last.get('decision_universe_sha256')
+                      or int(preflight.get('blocker_count', -1)) != 0
+                      or int(preflight.get('warning_count', -1)) < 0
+                  ):
+                      fail('live proposal census does not bind exact verified last operation')
+              elif (last.get('operation') == 'STAGE2_CENSUS'
                     and last.get('stage2_status') == 'BLOCKED'
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_census_equivalence') == 'PASS'):
@@ -790,6 +851,156 @@ jobs:
           print('TRACKED_BASKETBALL_PUBLICATION=NONE')
           PY
 
+      - name: Replay live proposal after fresh census with candidate tooling
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'LIVE_PROPOSAL_AFTER_CENSUS' &&
+          !startsWith(github.event.pull_request.head.ref, 'tooling/stage2-display-')
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          import sys
+          import tempfile
+          from pathlib import Path
+
+          candidate = Path('candidate').resolve()
+          control = Path('control').resolve()
+          sys.path.insert(0, str(candidate / 'tools'))
+          from remote_implementation_stage2_census import (
+              add_existing_onboarding_worktree,
+              run_stage2_census_tool,
+          )
+          from remote_implementation_stage2_proposal import (
+              run_stage2_proposal_tool,
+              verify_stage2_proposal_authority,
+          )
+          from stage2_candidate_runtime_rehearsal import (
+              candidate_census_decision_universe,
+              candidate_changed_paths,
+              validate_candidate_scope,
+          )
+
+          control_commit = '${{ steps.authority.outputs.control_commit }}'
+          candidate_sha = '${{ steps.authority.outputs.candidate_sha }}'
+          request = json.loads(
+              (control / '.remote-implementation/request.json').read_text()
+          )
+          changed_paths, scoped_main = candidate_changed_paths(
+              candidate,
+              request['expected_protected_main_sha'],
+              candidate_sha,
+          )
+          validate_candidate_scope(changed_paths)
+          authority = verify_stage2_proposal_authority(
+              request,
+              control_commit,
+              source_repo=control,
+          )
+
+          map_ref = request['recommendation_map']
+          map_bytes = (control / map_ref['path']).read_bytes()
+          assert hashlib.sha256(map_bytes).hexdigest() == map_ref['sha256']
+          scratch = Path(tempfile.mkdtemp(prefix='live-proposal-candidate-'))
+          map_path = scratch / 'recommendation-map.json'
+          map_path.write_bytes(map_bytes)
+
+          challenge_path = None
+          challenge_ref = authority.get('historical_game_type_challenge')
+          if challenge_ref:
+              challenge_bytes = (control / challenge_ref['path']).read_bytes()
+              assert (
+                  hashlib.sha256(challenge_bytes).hexdigest()
+                  == challenge_ref['sha256']
+              )
+              challenge_path = scratch / 'historical-game-type-challenge.json'
+              challenge_path.write_bytes(challenge_bytes)
+
+          target = add_existing_onboarding_worktree(
+              request['target_branch'],
+              request['target_sha'],
+              request['school_key'],
+              source_repo=control,
+          )
+          try:
+              census = run_stage2_census_tool(
+                  target,
+                  request['school_key'],
+                  authority['freeze_bytes'],
+                  scratch / 'candidate-census',
+                  tool_repo=candidate,
+                  historical_game_type_challenge_path=challenge_path,
+              )
+              candidate_universe = candidate_census_decision_universe(census)
+              preflight = (census.get('status') or {}).get('preflight') or {}
+              assert census['stage2_status'] == 'CAPABILITY_CENSUS_READY', census
+              assert int(preflight.get('blocker_count', -1)) == 0, preflight
+              assert (
+                  candidate_universe == request['decision_universe_sha256']
+              ), (candidate_universe, request['decision_universe_sha256'])
+              assert (
+                  int(preflight.get('warning_count', -1))
+                  == len(authority.get('accepted_legacy_warnings') or [])
+              ), preflight
+              census_proof = census.get('tracked_mutation_proof') or {}
+              assert census_proof.get('tracked_stage2_mutation') == 'NONE', census_proof
+
+              result = run_stage2_proposal_tool(
+                  target,
+                  request['school_key'],
+                  authority['freeze_bytes'],
+                  map_path,
+                  request['decision_universe_sha256'],
+                  scratch / 'candidate-proposal',
+                  tool_repo=candidate,
+                  historical_game_type_challenge_path=challenge_path,
+                  venue_reconciliation_bytes=authority.get(
+                      'venue_reconciliation_bytes'
+                  ),
+              )
+              assert result['stage2_status'] == 'OWNER_GATE_1_READY', result
+              proposal_proof = result.get('tracked_mutation_proof') or {}
+              assert (
+                  proposal_proof.get('tracked_stage2_mutation') == 'NONE'
+              ), proposal_proof
+          finally:
+              subprocess.run(
+                  ['git', '-C', str(control), 'worktree', 'remove',
+                   '--force', str(target)],
+                  check=True,
+              )
+
+          summary = {
+              'kind': 'LIVE_PROPOSAL_AFTER_CENSUS_CANDIDATE_REHEARSAL',
+              'candidate_sha': candidate_sha,
+              'candidate_scope_main_sha': scoped_main,
+              'control_commit': control_commit,
+              'request_id': request['request_id'],
+              'school_key': request['school_key'],
+              'target_sha': request['target_sha'],
+              'decision_universe_sha256': request['decision_universe_sha256'],
+              'candidate_decision_universe_sha256': candidate_universe,
+              'recommendation_map_sha256': map_ref['sha256'],
+              'accepted_legacy_warnings': authority.get(
+                  'accepted_legacy_warnings'
+              ) or [],
+              'candidate_stage2_status': result['stage2_status'],
+              'changed_paths': changed_paths,
+              'tracked_mutation_proof': proposal_proof,
+          }
+          out = Path('/tmp/stage2-candidate-runtime-rehearsal')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'live-proposal-candidate-summary.json').write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + '\n'
+          )
+          print('EXACT_LIVE_PROPOSAL_AFTER_CENSUS_REPLAY=PASS')
+          print('UNCHANGED_HISTORICAL_DECISION_UNIVERSE=PASS')
+          print('TRACKED_STAGE2_MUTATION=NONE')
+          PY
+
       - name: Replay exact blocked proposal with candidate tooling
         if: >-
           github.event_name == 'workflow_dispatch' ||
@@ -1107,7 +1318,15 @@ jobs:
           candidate="$(git -C candidate ls-remote origin "refs/heads/$PR_HEAD_REF" | awk '{print $1}')"
           test -n "$control" && test "$control" = "$SELECTED_CONTROL"
           test -n "$candidate" && test "$candidate" = "$SELECTED_CANDIDATE"
-          if [[ "$AUTHORITY_MODE" == "BLOCKED_PROPOSAL" ]]; then
+          if [[ "$AUTHORITY_MODE" == "LIVE_PROPOSAL_AFTER_CENSUS" ]]; then
+            scoped_main="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/live-proposal-candidate-summary.json').read_text())
+          print(summary['candidate_scope_main_sha'])
+          PY
+          )"
+          elif [[ "$AUTHORITY_MODE" == "BLOCKED_PROPOSAL" ]]; then
             scoped_main="$(python - <<'PY'
           import json
           from pathlib import Path
