@@ -104,6 +104,50 @@ class ExpansionVenueGuardTest(unittest.TestCase):
         self.assertEqual(require_clean(outcome)["rows"][0]["existing_key_reuse_id"],
                          "VEN-000933")
 
+    def test_exact_frozen_id_key_locality_beats_unrelated_generic_name_alias(self):
+        registered=self.registered+[
+            {"venue_id":"VEN-000143","venue_key":"municipal-auditorium-kc",
+             "display_name":"Municipal Auditorium","city":"Kansas City","state":"MO"},
+            {"venue_id":"VEN-000274","venue_key":"atlanta-municipal-auditorium",
+             "display_name":"Atlanta Municipal Auditorium","city":"Atlanta","state":"GA"},
+        ]
+        aliases=self.aliases+[
+            {"venue_id":"VEN-000143","venue_name":"Municipal Auditorium",
+             "normalized_name":"municipalauditorium","name_type":"PROJECT_DISPLAY"},
+            {"venue_id":"VEN-000274","venue_name":"Municipal Auditorium",
+             "normalized_name":"municipalauditorium","name_type":"HISTORICAL_OR_ALIAS"},
+        ]
+        venue={"venue_key":"municipal-auditorium-kc","venue_id":"VEN-000143",
+               "canonical_name":"Municipal Auditorium","aliases":"",
+               "city":"Kansas City","state":"MO"}
+        outcome=census([venue],registered,aliases)
+        self.assertEqual(outcome["status"],"PASS")
+        self.assertEqual(outcome["blocker_count"],0)
+        self.assertEqual(
+            outcome["rows"][0]["existing_key_reuse_id"],"VEN-000143"
+        )
+
+    def test_exact_key_without_frozen_id_still_blocks_unrelated_generic_name_alias(self):
+        registered=self.registered+[
+            {"venue_id":"VEN-000143","venue_key":"municipal-auditorium-kc",
+             "display_name":"Municipal Auditorium","city":"Kansas City","state":"MO"},
+            {"venue_id":"VEN-000274","venue_key":"atlanta-municipal-auditorium",
+             "display_name":"Atlanta Municipal Auditorium","city":"Atlanta","state":"GA"},
+        ]
+        aliases=self.aliases+[
+            {"venue_id":"VEN-000143","venue_name":"Municipal Auditorium",
+             "normalized_name":"municipalauditorium","name_type":"PROJECT_DISPLAY"},
+            {"venue_id":"VEN-000274","venue_name":"Municipal Auditorium",
+             "normalized_name":"municipalauditorium","name_type":"HISTORICAL_OR_ALIAS"},
+        ]
+        venue={"venue_key":"municipal-auditorium-kc","venue_id":"",
+               "canonical_name":"Municipal Auditorium","aliases":"",
+               "city":"Kansas City","state":"MO"}
+        outcome=census([venue],registered,aliases)
+        self.assertEqual(outcome["status"],"BLOCKED_VENUE_IDENTITY_RECONCILIATION")
+        self.assertEqual(outcome["blocker_count"],1)
+        self.assertEqual(outcome["blockers"][0]["global_venue_id"],"VEN-000274")
+
     def test_known_new_distinct_local_venue_can_register(self):
         outcome=census([dict(self.umbc,venue_key="new-unique-gym",
                               canonical_name="Unique Town Gym")],
