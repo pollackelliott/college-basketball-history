@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "miami-expansion-release-readiness-0002",
+  "school_key": "miami",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "d97660bce86b8d2453d5b7db77face7bd485f0c4",
+  "previous_control_state_sha256": "5abcb28ef56028165288659f0aec73ef1441af2988bfcc9dea1b323b4c7bf6e5",
+  "expected_protected_main_sha": "814eb6d57110a27744aadc3766f0053e81709987",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/miami/miami-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "494c88102419892260b827ab0533714a04e9a7dc4009e410a23cad5c71f00931"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "045f34fc71fcdbbc263147e70b56040b4ed968bed00b7c5dcbbe7cfbc50af643"
+  },
+  "approved_plan_hash": "f70993370c276fa6d762d2b4e1d4216a1978014f1838e087ff22172c9cbfaa36",
+  "release_manifest_sha256": "04fe3f8ec161aa49fe8d106f38bde75bb783e62e74c7209de21c320f0ce5f329",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "miami-expansion-release-preview-0002"
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Miami (FL) same ALL_HISTORY_EXPANSION release-preparation phase, after safe abandonment of Preview request 0001 and merge of tests-only PR #696.",
+    "authorization": "Existing owner-approved release-preparation phase continues. Immutable old readiness bound abandoned Preview id 0001; issue fresh readiness 0002 under verified current main to bind new Preview id 0002 and reverify exact frozen PR #695 at unchanged head. No Gate 2 or merge authority."
+  }
+}
