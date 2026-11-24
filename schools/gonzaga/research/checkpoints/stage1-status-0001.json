@@ -14,7 +14,7 @@
   "official_expansion_aggregate_wins": 477,
   "official_expansion_aggregate_losses": 500,
   "official_expansion_aggregate_games": 977,
-  "accepted_stage1_identified_game_count": 1,
+  "accepted_stage1_identified_game_count": 10,
   "inception_boundary_status": "RESOLVED_OWNER_DISPOSITION_A",
   "candidate_inception_seasons": [
     "1905-06",
@@ -23,7 +23,7 @@
   ],
   "blocking_residuals": [],
   "historical_core_data_changed": false,
-  "next_bounded_unit": "Bounded early-game evidence harvest for the first official expansion seasons, beginning 1907-08; preserve season aggregates and never create anonymous rows.",
+  "next_bounded_unit": "Continue Stage 1 with the next highest-yield systematic reciprocal/institutional source family for 1907-08 through early history; prioritize source families that identify multiple games and stop before open-ended opponent-by-opponent archaeology.",
   "accepted_program_inception_season": "1907-08",
   "pre_inception_activity_seasons": [
     "1905-06",
@@ -34,5 +34,15 @@
     "accepted_inception": "1907-08",
     "provenance": "Owner explicitly agreed with Research recommendation A in Gonzaga Research chat on 2026-11-24.",
     "interpretation": "1905-06 and 1906-07 remain preserved precursor/organized/intercollegiate activity outside the repository-recognized varsity game universe."
+  },
+  "first_early_reciprocal_tranche": {
+    "season_range": "1907-08..1913-14",
+    "aggregate_games": 65,
+    "identified_games": 10,
+    "unidentified_aggregate_remainder": 55,
+    "source_families": [
+      "Washington State official record-vs-opponents series",
+      "Washington official all-time results"
+    ]
   }
 }
