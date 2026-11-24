@@ -770,7 +770,7 @@
     "florida-state-expansion-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
-  "active_lock_commit": null,
+  "active_lock_commit": "b8d26db96a987492f34a02c5c5abb997df96029c",
   "active_lock_owner": "github-actions:45435102678:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
