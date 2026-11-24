@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_ALL_HISTORY_EXPANSION_STAGE1_ACTIVE_V13",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "d998e70f0cb4daf921e687159cf32c09c705b8d6",
+  "accepted_top_level_scope": "1958-59+",
+  "accepted_program_inception_season": "1907-08",
+  "expansion_required_seasons": {
+    "start": "1907-08",
+    "end": "1957-58",
+    "count": 51
+  },
+  "official_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "identified_game_count": 376,
+  "known_result_game_count": 376,
+  "aggregate_minus_identified_diagnostic": 601,
+  "active_discrepancy_research_blocker_count": 0,
+  "research_exhausted_closeout_debt_count": 4,
+  "research_exhausted_closeout_debts": [
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1915-16",
+      "identified_state": "0-9 / 9 identified vs target literal 2-7 / 9",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1930-31",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1930-31",
+      "identified_state": "4-9 / 13 identified vs target literal 7-8 / 15",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1936-37",
+      "identified_state": "4-5 / 9 identified vs target literal 1-5 / 6",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1937-38",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1937-38",
+      "identified_state": "0-6 / 6 identified vs target literal 0-4 / 4",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    }
+  ],
+  "accepted_source_families": [
+    {
+      "family": "Washington State reciprocal historical series",
+      "rows": 84,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Washington reciprocal all-time results",
+      "rows": 3,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Montana reciprocal opponent-series history",
+      "rows": 105,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Montana State official historical records",
+      "ledger_game_identities": 21,
+      "status": "ACCEPTED_AFTER_DISCREPANCY_TRANCHE"
+    },
+    {
+      "family": "Seattle University target-school opponent series",
+      "rows": 24,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Idaho official all-time results",
+      "rows": 39,
+      "seasons_or_source_blocks": 20,
+      "gonzaga_wins": 13,
+      "gonzaga_losses": 26,
+      "status": "ACCEPTED_BOUNDED_FAMILY_WITH_SOURCE_LAYOUT_LIMITS"
+    },
+    {
+      "family": "Central Washington official historical schedule archive",
+      "rows": 13,
+      "regular_season_rows": 9,
+      "postseason_rows": 4,
+      "gonzaga_wins": 9,
+      "gonzaga_losses": 4,
+      "status": "ACCEPTED_BOUNDED_FAMILY_WITH_ARCHIVE_LIMITS"
+    },
+    {
+      "family": "Eastern Washington official 1945-46 team history",
+      "rows": 2,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Whitman target-school exact-game evidence",
+      "rows": 2,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Whitworth target-school plus authoritative fallback exact-game evidence",
+      "rows": 1,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Portland official game-by-game Gonzaga series",
+      "rows": 48,
+      "seasons_with_rows": 12,
+      "gonzaga_wins": 20,
+      "gonzaga_losses": 28,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_PORTLAND_SERIES_AUTHORITY"
+    },
+    {
+      "family": "Oregon State official Gonzaga opponent-series table",
+      "rows": 16,
+      "gonzaga_wins": 2,
+      "gonzaga_losses": 14,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_OSU_SERIES_AUTHORITY"
+    },
+    {
+      "family": "Oregon official year-by-year results",
+      "rows": 18,
+      "gonzaga_wins": 3,
+      "gonzaga_losses": 15,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_CURRENT_OREGON_YEAR_BY_YEAR_AUTHORITY"
+    }
+  ],
+  "controlling_ledger": "stage1-identified-game-ledger-0012.csv",
+  "historical_core_data_changed": false,
+  "next_bounded_unit": "Continue owner-efficient Stage 1 harvesting against the 376-row ledger: prefer one substantial institutional family, otherwise bundle compatible regional families; do not reopen the four research-exhausted accounting contradictions absent genuinely new concrete evidence."
+}
