@@ -855,22 +855,40 @@ class ExpansionFreezeTests(unittest.TestCase):
         baseline = authenticate_baseline(self.repo, "legacy", self.base)
         inherited = baseline["venue_rows"][0]
         candidate = dict(inherited)
+        candidate["relationship_type"] = "primary_home_with_exceptions"
         candidate["relationship_start"] = "1968"
+        candidate["site_rule"] = (
+            "Primary HOME relationship from 1968 with accepted earlier HOME "
+            "exception at 1967-12-01."
+        )
         candidate["source_basis"] = "accepted baseline plus supplemental chronology evidence"
         venue_support = {
             "support_id": "VEN-EXT",
             "support_action": "EXTEND_INHERITED",
             "venue_key": "legacy-gym",
             "baseline_row_sha256": canonical_row_sha256(inherited),
-            "changed_fields": "relationship_start;source_basis",
+            "changed_fields": (
+                "relationship_type;relationship_start;site_rule;source_basis"
+            ),
             "candidate_row_json": json.dumps(candidate, sort_keys=True, separators=(",", ":")),
-            "evidence_basis": "supplemental HOME chronology extension",
+            "evidence_basis": "supplemental HOME chronology topology extension",
         }
         self._rewrite("expansion-venues.csv", VENUE_SUPPORT_FIELDS, [venue_support])
         self._freeze()
         manifest = self._manifest()
         self.assertEqual(manifest["expansion"]["venue_support_count"], 1)
         verify_expansion(self.repo, self.output)
+
+        forbidden = dict(candidate)
+        forbidden["canonical_name"] = "Different Physical Venue"
+        bad_support = dict(venue_support)
+        bad_support["changed_fields"] += ";canonical_name"
+        bad_support["candidate_row_json"] = json.dumps(
+            forbidden, sort_keys=True, separators=(",", ":")
+        )
+        self._rewrite("expansion-venues.csv", VENUE_SUPPORT_FIELDS, [bad_support])
+        with self.assertRaises(ExpansionFreezeError):
+            self._freeze()
 
     def test_29_freeze_contains_no_complete_inherited_package(self):
         self._freeze()
