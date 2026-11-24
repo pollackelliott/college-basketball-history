@@ -511,6 +511,10 @@ jobs:
               'decision_universe_sha256'
           )
 
+          scratch_branch = (
+              'remote-stage2-census/%s-%s'
+              % (request['school_key'], request['target_sha'][:12])
+          )
           worktree = add_existing_onboarding_worktree(
               request['target_branch'],
               request['target_sha'],
@@ -531,6 +535,10 @@ jobs:
                       'git', '-C', str(candidate), 'worktree', 'remove',
                       '--force', str(worktree),
                   ],
+                  check=True,
+              )
+              subprocess.run(
+                  ['git', '-C', str(candidate), 'branch', '-D', scratch_branch],
                   check=True,
               )
 
