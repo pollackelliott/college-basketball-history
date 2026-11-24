@@ -90,8 +90,13 @@ def census(
                               "venue_key":key,
                               "global_ids":sorted({x.get("venue_id","") for x in expected_key_rows})})
         same_key_id=expected_key_rows[0].get("venue_id","") if len(expected_key_rows)==1 else ""
+        frozen_exact_reuse=False
         if same_key_id:
             registered=expected_key_rows[0]
+            frozen_exact_reuse = (
+                local.get("venue_id","").strip() == same_key_id
+                and _locality(registered) == _locality(local)
+            )
             explicit_same = (
                 explicit is not None
                 and explicit.get("action") == "REUSE_CURRENT_IDENTITY"
@@ -120,6 +125,12 @@ def census(
                 continue
             row=registered[0]
             if row.get("venue_key","") == key:
+                continue
+            # A frozen supplemental row that already carries the exact current
+            # global ID, exact key, and matching locality has authenticated the
+            # physical identity. Generic same-name aliases on unrelated venues
+            # must not override that stronger exact identity binding.
+            if frozen_exact_reuse:
                 continue
             explicit_reuse = (
                 explicit is not None
