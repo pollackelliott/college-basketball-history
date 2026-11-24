@@ -184,6 +184,32 @@
       "identified_rows": 2967,
       "legacy_evidence_mode": "MANIFESTED_RESIDUAL_SUMMARY",
       "notes": "Owner-approved Saint Joseph's five-season founding-era aggregate coverage closeout. Preserve only identified games as rows; the unidentified W-L/game delta remains season-level historical coverage debt. No anonymous or inferred game rows."
+    },
+    {
+      "identified_ledger_sha256": "05b19687e95ad6cdad84388eee12064fe2139d4481dcda1d3a19172e5f6842dc",
+      "identified_record": {
+        "games": 9,
+        "losses": 2,
+        "wins": 7
+      },
+      "identified_rows": 812,
+      "institutional_record": {
+        "games": 10,
+        "losses": 3,
+        "wins": 7
+      },
+      "maximum_eligible_season_start_year": 1930,
+      "notes": "Owner-approved Hawai'i 1924-25 founding-era aggregate coverage closeout. Preserve nine individually identified 7-2 game rows; the remaining 0-1 / one-game residual is season-level accounting only after bounded research exhaustion. No anonymous or inferred game row.",
+      "owner_disposition": "https://github.com/pollackelliott/college-basketball-history/issues/697",
+      "parent_checkpoint_sha256": "b8719dc04562a2e0198bd626112bb7aad573d9e76e4b3e3c2ea6d974f7d4d01c",
+      "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+      "school_key": "hawai-i",
+      "season": "1924-25",
+      "unidentified_record": {
+        "games": 1,
+        "losses": 1,
+        "wins": 0
+      }
     }
   ]
 }
