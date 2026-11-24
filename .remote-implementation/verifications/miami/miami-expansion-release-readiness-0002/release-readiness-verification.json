@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "27eb853b6dfc939a65d65ecbac96a13bc11d19500f5af9657c7dfac3fbf73780",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "f93776de0d8894e8e21cd5708547ff55ae62638a503f02b39ab9cd38e825c7a2",
+  "pr_created": false,
+  "preview_request_id": "miami-expansion-release-preview-0002",
+  "preview_verified": false,
+  "protected_main_sha": "814eb6d57110a27744aadc3766f0053e81709987",
+  "readiness_proof_sha256": "a1ebbe7113ae4f88cbb9bc5a1236c0a9a1173ac3bb99c654aba4936d255637a0",
+  "release_pr_packet_sha256": "4432f8fe32d822bf611fdfe148932f65a3d3c694a4fcca2484cc93236796f5b1",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "miami-expansion-release-readiness-0002",
+  "schema_version": 1,
+  "school_key": "miami",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "tracked_mutation": "NONE"
+}
