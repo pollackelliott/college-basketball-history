@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_SEASON_FIRST_1941_1947_SOURCE_LIMITS_V1",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "branch_head_before_tranche": "af7e858042fd9fcb46cb4f166748065afd50a7b6",
+  "method": "SEASON_FIRST_BULK_RECONSTRUCTION",
+  "chronological_block": [
+    "1941-42",
+    "1942-43",
+    "1943-44",
+    "1944-45",
+    "1945-46",
+    "1946-47"
+  ],
+  "accepted_rows": 17,
+  "accepted_rows_by_season": {
+    "1941-42": 7,
+    "1942-43": 0,
+    "1943-44": 5,
+    "1944-45": 0,
+    "1945-46": 0,
+    "1946-47": 5
+  },
+  "accepted_source_mode": [
+    "contemporary United Press / Associated Press game reports and score lists preserved by Oregon Historic Newspapers",
+    "explicit contemporary series/schedule context used only where it mechanically fixes a game date"
+  ],
+  "conservative_field_rules": [
+    "schedule-only mentions were not admitted",
+    "publication date alone did not force a game date",
+    "city/location alone did not force H/A/N",
+    "score conflict on 1944-02-06 Albina Hellships preserved with Gonzaga score blank"
+  ],
+  "source_limit_dispositions": [
+    {
+      "season": "1942-43",
+      "status": "BOUNDED_CLASSIFICATION_HOLD",
+      "candidate_count": 4,
+      "reason": "Late-season contemporary played-game evidence materially conflicts with the official 2-9 / 11 aggregate. Candidates are preserved separately; they were neither silently admitted nor discarded in this bulk tranche."
+    },
+    {
+      "season": "1944-45",
+      "status": "NO_NEW_SAFE_ROWS_IN_THIS_PASS",
+      "reason": "Current systematic corpus produced corroboration/duplicates of already-ledgered Washington, Washington State, Idaho and Montana evidence, not a safe new identity. Season remains active residual, not source-exhausted."
+    },
+    {
+      "season": "1945-46",
+      "status": "NO_NEW_SAFE_ROWS_IN_THIS_PASS",
+      "reason": "Current systematic corpus primarily corroborated already-ledgered Idaho, Montana and Eastern Washington evidence. Season remains active residual, not source-exhausted."
+    },
+    {
+      "source_family": "WCC historical record-book PDF",
+      "status": "PRIOR_REJECTION_PRESERVED_NOT_RETRIED",
+      "reason": "Prior tranche found interleaved multi-column extraction unsafe for bulk admission."
+    }
+  ],
+  "exact_date_collision_count": 0,
+  "same_season_opponent_score_duplicate_signal_count": 0
+}
