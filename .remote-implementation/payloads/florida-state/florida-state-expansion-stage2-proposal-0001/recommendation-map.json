@@ -1,0 +1,30 @@
+{
+  "decisions": {
+    "IDENTITY-FSU-EXP-S1-00075": "MATCH_CANONICAL:CBBG-0032433",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032433-GAME_DATE": "USE_SOURCE",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-GAME_DATE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-SITE_TYPE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-RESULT_WINNER_TEAM_KEY": "NOT_APPLICABLE",
+    "DISCREPANCY-FSU-EXP-S1-00102-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-FSU-EXP-S1-00104-SITE_TYPE": "USE_SOURCE",
+    "DISCREPANCY-FSU-EXP-S1-00128-SCORE": "USE_SOURCE",
+    "DISCREPANCY-FSU-EXP-S1-00167-GAME_DATE": "USE_SOURCE",
+    "DISCREPANCY-FSU-EXP-S1-00183-GAME_TYPE": "USE_SOURCE",
+    "DISCREPANCY-FSU-EXP-S1-00210-GAME_TYPE": "USE_SOURCE"
+  },
+  "basis_by_decision": {
+    "IDENTITY-FSU-EXP-S1-00075": "The frozen Florida State row is a 63-58 win over Ole Miss. CBBG-0032433 is the same 63-58 matchup, while CBBG-0032437 is the distinct 75-79 Ole Miss game already confidently matched to FSU-EXP-S1-00084. Select CBBG-0032433; this also satisfies the permanent one-target-match cardinality constraint for CBBG-0032437.",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032433-GAME_DATE": "Florida State's frozen institutional row explicitly dates the 63-58 Ole Miss win to 1951-01-09. The reciprocal canonical representation dates the same score to 1951-01-11. Preserve the accepted Florida State research date in the proposed canonical reconciliation while retaining the reciprocal assertion as evidence.",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-GAME_DATE": "Not applicable because FSU-EXP-S1-00075 is proposed to match CBBG-0032433, while CBBG-0032437 is already the distinct 75-79 game represented by FSU-EXP-S1-00084.",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-SCORE": "Not applicable because FSU-EXP-S1-00075 is proposed to match CBBG-0032433, while CBBG-0032437 is already the distinct 75-79 game represented by FSU-EXP-S1-00084.",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-SITE_TYPE": "Not applicable because FSU-EXP-S1-00075 is proposed to match CBBG-0032433, while CBBG-0032437 is already the distinct 75-79 game represented by FSU-EXP-S1-00084.",
+    "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-RESULT_WINNER_TEAM_KEY": "Not applicable because FSU-EXP-S1-00075 is proposed to match CBBG-0032433, while CBBG-0032437 is already the distinct 75-79 game represented by FSU-EXP-S1-00084.",
+    "DISCREPANCY-FSU-EXP-S1-00102-GAME_DATE": "The frozen Florida State source explicitly records the Georgia game as D27 in the Gator Bowl Tournament at Jacksonville, Florida, and the accepted research row is dated 1951-12-27. Recommend the accepted source date over the reciprocal canonical 1951-12-26 representation.",
+    "DISCREPANCY-FSU-EXP-S1-00104-SITE_TYPE": "Florida State's frozen row explicitly says 'vs Florida' and identifies the Gator Bowl Tournament at Jacksonville, Florida. Its accepted research basis specifically preserves NEUTRAL despite the existing canonical Florida State-home conflict. Recommend the frozen neutral classification.",
+    "DISCREPANCY-FSU-EXP-S1-00128-SCORE": "Florida State's frozen institutional row explicitly records a 63-93 loss at Miami on 1953-01-09. The reciprocal canonical representation has 65-93. The accepted Florida State research package preserves 63-93 without an unresolved-score designation; recommend the frozen source score while retaining reciprocal evidence.",
+    "DISCREPANCY-FSU-EXP-S1-00167-GAME_DATE": "The frozen Florida State source explicitly records the Florida game as D27 in the Gator Bowl Tournament at Jacksonville, Florida, and the accepted research row is dated 1954-12-27. Recommend the accepted source date over the reciprocal canonical 1954-12-28 representation.",
+    "DISCREPANCY-FSU-EXP-S1-00183-GAME_TYPE": "Florida State's frozen row identifies the 1955-02-25 game at Miami as the Florida Intercollegiate Conference Championship, source round Championship, with accepted curated game type POSTSEASON. The postseason site research was explicitly exhausted and preserved. Recommend POSTSEASON over the reciprocal canonical regular-season representation.",
+    "DISCREPANCY-FSU-EXP-S1-00210-GAME_TYPE": "Florida State's frozen row identifies the 1956-02-25 game at Miami as the Florida Intercollegiate Conference Championship, source round Championship, with accepted curated game type POSTSEASON. The postseason site research was explicitly exhausted and preserved. Recommend POSTSEASON over the reciprocal canonical regular-season representation."
+  }
+}
