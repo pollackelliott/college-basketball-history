@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "miami-expansion-startup-0006",
-  "phase0_request_id": "miami-expansion-phase0-0006",
-  "school_key": "miami",
-  "expected_protected_main_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
-  "target_branch": "data/miami-onboarding",
-  "target_sha": "2611979bc8c22b0d26c02598c56cfc5337ef8b2c",
-  "research_freeze_sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
+  "startup_id": "florida-state-expansion-startup-0001",
+  "phase0_request_id": "florida-state-expansion-phase0-0001",
+  "school_key": "florida-state",
+  "expected_protected_main_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "b8782d618711169759b178613c2ebc2af611b8a8",
+  "research_freeze_sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
   "expansion_research_checkpoint": {
-    "sha256": "a2bda215915a929b31aab4a9df798aef92a015805d3ac737fa458344d5b4baeb",
-    "research_base_sha": "33af595fcae2a17664379638f89ce64c2e63be08",
+    "sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
+    "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "9ebf1617d4511f9d81fc0468257ae4d0215f22bc",
-      "path_prefix": ".remote-implementation/transports/miami/miami-expansion-startup-0006/part-",
-      "part_count": 275
+      "commit_sha": "f16e4edc85415a6523c4b639268873161dc455a1",
+      "path_prefix": ".remote-implementation/transports/florida-state/florida-state-expansion-startup-0001/freeze.part-",
+      "part_count": 8
     }
   },
   "creation_provenance": {
-    "origin": "Miami (FL) SAME ALL_HISTORY_EXPANSION Implementation lane; fresh successor after Control Center generic Expansion Hard Reset PR #693 and fresh-verified re-bootstrap request miami-expansion-rebootstrap-0001.",
-    "authorization": "Owner supplied the Miami Implementation successor instructions authorizing continuation of the same Miami ALL_HISTORY_EXPANSION through ordinary fresh current-main startup and independently verified guarded EXPANSION_PHASE0. It does not authorize new Research, historical mutation beyond settled frozen authority, an Owner Gate, Stage 2, release, merge, Production, or Miami-specific tooling repairs."
+    "origin": "Owner-authorized new serialized Florida State ALL_HISTORY_EXPANSION Implementation lane from the immutable verified Research Freeze, using the repository-owned ordinary expansion startup coordinator.",
+    "authorization": "Existing owner startup-phase authority covers deterministic acceptance, current-main Stage 1 reproduction and independent proof, Integration Freeze, disposable Phase 0 preview, and ordinary guarded EXPANSION_PHASE0 execution through fresh verification. It does not authorize new Research, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, or merge."
   }
 }
