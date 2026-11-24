@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_COLLEGE_OF_IDAHO_SOURCE_LIMITS_V1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "parent_checkpoint_sha": "d3bb6c626d98ee7419ea952847dd92ae5ebaf8b0",
+  "family": "College of Idaho",
+  "official_all_time_series": {
+    "college_of_idaho_wins": 0,
+    "college_of_idaho_losses": 10,
+    "first_year": 1926,
+    "last_year": 1961,
+    "source_url": "https://yoteathletics.com/sports/2012/8/31/MBB_0831123138.aspx?id=62"
+  },
+  "accepted_prebaseline_rows": 9,
+  "derived_gonzaga_prebaseline_record": "9-0",
+  "accepted_prebaseline_seasons": [
+    "1925-26",
+    "1940-41",
+    "1953-54",
+    "1954-55",
+    "1955-56",
+    "1957-58"
+  ],
+  "inherited_baseline_series_member": {
+    "season": "1960-61",
+    "date": "1960-12-02",
+    "result": "Gonzaga W 95-61",
+    "source": "Gonzaga 2026-27 Men's Basketball Record Book",
+    "note": "This inherited-baseline game is not added to the supplemental ledger; it is used only to close the 10-game College of Idaho all-time series accounting."
+  },
+  "completeness_basis": [
+    "College of Idaho's official all-time-opponent table reports 0-10 vs Gonzaga, first year 1926 and last year 1961.",
+    "College of Idaho's official historical season-result pages expose nine pre-1958-59 Gonzaga rows.",
+    "Gonzaga's inherited schedule section contains the tenth series game on 1960-12-02, a 95-61 Gonzaga win.",
+    "Gonzaga's 1958-59 and 1959-60 inherited schedules contain no College of Idaho game.",
+    "Therefore the nine supplemental rows plus the inherited 1960-61 game account for the entire 10-game series."
+  ],
+  "date_residuals": [
+    {
+      "season": "1925-26",
+      "literal_source_date": "1925-26",
+      "disposition": "NONBLOCKING_DATE_UNKNOWN",
+      "note": "Source provides only the season label as date."
+    },
+    {
+      "season": "1953-54",
+      "literal_source_date": "01/29/53",
+      "disposition": "NONBLOCKING_SOURCE_DATE_TYPO",
+      "note": "The source embeds the row in the 1953-54 table immediately before 01/30/54. The exact calendar year is not silently corrected; canonical game_date remains blank."
+    }
+  ],
+  "additional_discovery_only_opportunity": {
+    "family": "Pacific Lutheran",
+    "official_series_record_for_plu": "7-9",
+    "total_meetings": 16,
+    "span": "1938-39 through 1959-60",
+    "known_postbaseline_meetings": 2,
+    "implied_prebaseline_meetings": 14,
+    "disposition": "DISCOVERY_ONLY_NO_ROWS",
+    "note": "Current official series aggregate is insufficient to create individual games. Preserve as a future systematic archival opportunity."
+  }
+}
