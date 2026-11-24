@@ -1,0 +1,26 @@
+{
+  "preflight": {
+    "blocker_count": 3,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "PREFLIGHT_BLOCKED",
+  "topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 3,
+      "topology": "preflight_blockers"
+    }
+  ]
+}
