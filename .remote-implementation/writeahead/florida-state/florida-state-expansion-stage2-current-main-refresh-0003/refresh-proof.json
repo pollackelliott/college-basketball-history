@@ -1,0 +1,92 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "c57a717674285baf8bb85d1cb3e1a641d138199d1497a4542a6423b2bc338630",
+    "docs/vercel-deployment-policy.md": "be25c3a650e73bd1cbb539a5f7f67b5c6217d1f4c6f5f2f54110266566b291f2",
+    "tests/test_all_history_expansion_freeze.py": "c841a501ba8ee9bc20b505ee5246add97ce011ac63b3ae81ea7c0d1d3c05b9aa",
+    "tests/test_remote_implementation_stage2_opponent_display.py": "da260e590922624b2569ad2a2a1b2573ffd8dd64967c43279f5ecdfd9cdb7301",
+    "tests/test_stage2_candidate_runtime_rehearsal.py": "c870a345c1dbbd9c532adc359d1f3ad1a62fd3325723146bd86d00d2d12885b1",
+    "tests/test_vercel_deployment_gate.py": "649bdc083a250a1a206fff88910de6d4f25741463974a82aebf4150eb4e9d6fc",
+    "tests/test_vercel_deployment_policy.py": "e29e1654851dfbfd457cddcc0710d0becc2bf2889cf999351c0e656fbc54eec0",
+    "tools/all_history_expansion_freeze.py": "d4c7410c8a86d7a418bf5fa143c40ea03699c04b5bda71fd9b5ce3336da1b6fe",
+    "tools/remote_implementation_stage2_opponent_display.py": "6420708b86db36bcd913c85e72e473bb354890ad9f258e41ffe69edb6f23b424",
+    "tools/vercel_deployment_gate.py": "aeaf8ba2ff0fb607f71d28ca086156fb980a087fea95a39c78b7b3acea742d1a",
+    "vercel.json": "8f08d80eb2d014e3710c2f7fe589fe4e34766c115bc40da48f6961418926eaf7"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "docs/vercel-deployment-policy.md",
+    "tests/test_all_history_expansion_freeze.py",
+    "tests/test_remote_implementation_stage2_opponent_display.py",
+    "tests/test_stage2_candidate_runtime_rehearsal.py",
+    "tests/test_vercel_deployment_gate.py",
+    "tests/test_vercel_deployment_policy.py",
+    "tools/all_history_expansion_freeze.py",
+    "tools/remote_implementation_stage2_opponent_display.py",
+    "tools/vercel_deployment_gate.py",
+    "vercel.json"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "3293ca0b6bca24b3237c45e1f2528ee168ab1bdc",
+  "main_changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "docs/vercel-deployment-policy.md",
+    "tests/test_all_history_expansion_freeze.py",
+    "tests/test_remote_implementation_stage2_opponent_display.py",
+    "tests/test_stage2_candidate_runtime_rehearsal.py",
+    "tests/test_vercel_deployment_gate.py",
+    "tests/test_vercel_deployment_policy.py",
+    "tools/all_history_expansion_freeze.py",
+    "tools/remote_implementation_stage2_opponent_display.py",
+    "tools/vercel_deployment_gate.py",
+    "vercel.json"
+  ],
+  "merge_base_sha": "6734d2efd3a14b2cb9754c4fe286d7859a67c131",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "e2e1e2d08d20a4c388c715cb30cefcfd83ee0b9fd74cd3774959553b06ffe586",
+    "notes.md": "90906f744346362ea6af22a63f4185ddcea5b77ec7a0208b00f0757b918a8e9f",
+    "opponents.csv": "e042b939aa7ab14920a16f150d53925be26fe5975d9f5c87d01e678860af5792",
+    "source-games.csv": "66700d2bb25b15f20212151b5c79cf4d22d7edc44a74331f1247840495db225f",
+    "source-notes.md": "3ae20ec45354bd22dcafbf612ec5243395720488d8d93dca525947969fc6e3d9",
+    "venues.csv": "c5db138677cf3a2c8ad32555d9b1f0d66d9bb213c11229e5e8921980e87057e5"
+  },
+  "prepared_commit_sha": "f6333bd2f6e8c3c3e61719a6dfebc053844ca134",
+  "prepared_parents": [
+    "3293ca0b6bca24b3237c45e1f2528ee168ab1bdc",
+    "1a1d1758b40f2fedaec56f3c3d6528647a6c909d"
+  ],
+  "prepared_tree_sha": "be67fb363c2e8567a4b52a91acfc0f7702fd2e74",
+  "preserved_target_file_sha256": {
+    "data/reference/program-top-level-scope.csv": "feaeb2c0b0724450b4c0a51a75874ac66b86dda9617cbeb1e509c59b99622b5e",
+    "data/reference/programs.csv": "c3e7886ab5e7bd807e48550b1b68b318095bca1fe5d3dff56113d111fbc79501",
+    "data/reference/venue-names.csv": "c6418b4466f76a3451f52da23d4c38debafc121fa88aa101741403f383e4d34b",
+    "data/reference/venues.csv": "f8471bcb64004d284052c0345438b3a700c6e227edac6f3830783b8a6308add5",
+    "schools/florida-state/notes.md": "90906f744346362ea6af22a63f4185ddcea5b77ec7a0208b00f0757b918a8e9f",
+    "schools/florida-state/opponents.csv": "e042b939aa7ab14920a16f150d53925be26fe5975d9f5c87d01e678860af5792",
+    "schools/florida-state/source-games.csv": "66700d2bb25b15f20212151b5c79cf4d22d7edc44a74331f1247840495db225f",
+    "schools/florida-state/source-notes.md": "3ae20ec45354bd22dcafbf612ec5243395720488d8d93dca525947969fc6e3d9",
+    "schools/florida-state/venues.csv": "c5db138677cf3a2c8ad32555d9b1f0d66d9bb213c11229e5e8921980e87057e5",
+    "site/data/programs.json": "c9c6a39c7966c793422a0d988299f29b4da5d1b24f067c353f11df34e8f742ad",
+    "site/data/teams/florida-state.json": "ce9772b913addd14d1f542cc68ebaa64fc84777853f91e76e13ebac0e99859ef"
+  },
+  "protected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "target_branch": "data/florida-state-onboarding",
+  "target_changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/florida-state/notes.md",
+    "schools/florida-state/opponents.csv",
+    "schools/florida-state/source-games.csv",
+    "schools/florida-state/source-notes.md",
+    "schools/florida-state/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/florida-state.json"
+  ]
+}
