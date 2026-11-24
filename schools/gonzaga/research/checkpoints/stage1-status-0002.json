@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_ALL_HISTORY_EXPANSION_STAGE1_ACTIVE_V2",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "accepted_top_level_scope": "1958-59+",
+  "accepted_program_inception_season": "1907-08",
+  "inception_authority": "OWNER_ACCEPTED_OPTION_A",
+  "inception_parent_checkpoint": "e5c67ca16e4457739e75e814887c81b71fe87e90",
+  "pre_inception_activity_preserved": [
+    "1905-06",
+    "1906-07"
+  ],
+  "expansion_required_seasons": {
+    "start": "1907-08",
+    "end": "1957-58",
+    "count": 51
+  },
+  "official_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "published_baseline_source_game_count": 2053,
+  "accepted_stage1_identified_game_count": 1,
+  "blocking_residuals": [],
+  "historical_core_data_changed": false,
+  "next_bounded_unit": "Harvest one high-yield authoritative reciprocal opponent family into the identified-game ledger and reconcile its rows against season aggregates."
+}
