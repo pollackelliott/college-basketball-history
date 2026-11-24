@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_REGIONAL_SMALL_FAMILY_BUNDLE_V1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "fd1b5dca8e6e66e13aa68b8b24a5582fdc75a7e5",
+  "parent_checkpoint_sha": "49868caa512a420b295a119045d4460ddcc54d21",
+  "bundle_mode": "MULTIPLE_SMALL_FAMILIES_SAME_REGIONAL_INSTITUTIONAL_RESEARCH_MODE",
+  "accepted_rows": 5,
+  "families": [
+    {
+      "family": "Eastern Washington",
+      "accepted_rows": 2,
+      "source": "Eastern Washington University Athletics Hall of Fame 1945-46 team history",
+      "source_url": "https://goeags.com/honors/eastern-washington-university-athletics-hall-of-fame/1945-46-team-mens-basketball/76/kiosk",
+      "accepted_facts": [
+        "1945-46 Gonzaga L 32-98",
+        "1945-46 Gonzaga L 42-84"
+      ],
+      "unresolved_fields": "Exact dates and H/A/N"
+    },
+    {
+      "family": "Whitman",
+      "accepted_rows": 2,
+      "source": "Gonzaga 2026-27 Men's Basketball Record Book",
+      "accepted_facts": [
+        "1951-01-13 Gonzaga W 90-39",
+        "1953-12-16 Gonzaga W; final score unknown"
+      ],
+      "evidence_note": "The 1953-12-16 game identity comes from Jerry Vermillion's 44-point game entry; the all-time Whitman series is 12-0, which establishes the Gonzaga win without inventing a score."
+    },
+    {
+      "family": "Whitworth",
+      "accepted_rows": 1,
+      "source": "Gonzaga institutional history plus Spokane historical newspaper account",
+      "source_urls": [
+        "https://www.gonzaga.edu/news-events/stories/the-eiffel-rifle-zags-first-7footer-jean-claude-lefebvre-debuted-in-1957-to-international-fanfare",
+        "https://www.spokesman.com/stories/2017/feb/21/jean-claude-lefebvre-brought-national-attention-to/"
+      ],
+      "accepted_fact": "1958-02-18 Gonzaga W 75-72",
+      "unresolved_fields": "H/A/N"
+    }
+  ],
+  "non_row_series_evidence": [
+    {
+      "family": "Eastern Washington",
+      "fact": "Modern Eastern sources describe a very large all-time Gonzaga series, but accessible official current web material did not expose a reliable complete pre-1958 row list in this pass.",
+      "disposition": "DISCOVERY_ONLY_NO_ANONYMOUS_ROWS"
+    },
+    {
+      "family": "Whitman",
+      "fact": "Gonzaga current all-time record vs Whitman is 12-0.",
+      "disposition": "USED_ONLY_TO SUPPORT RESULT OF AN EXACT DATED GAME; NOT EXPANDED INTO 12 ROWS"
+    },
+    {
+      "family": "Whitworth",
+      "fact": "Gonzaga current all-time record vs Whitworth is 32-4.",
+      "disposition": "DISCOVERY_ONLY_NO_ANONYMOUS_ROWS"
+    }
+  ],
+  "stopping_note": "The obvious institutional web paths for this combined regional bundle were exhausted without opening an archival/newspaper row-by-row campaign. Further family recovery remains a future systematic opportunity, not a blocker to these exact rows."
+}
