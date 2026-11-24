@@ -1,0 +1,69 @@
+{
+  "actual_published_target_sha": "f2b39e222ca4ef33ff351bf4e74e3a246e3c3874",
+  "changed_file_sha256": {
+    "tests/test_remote_implementation_stage2_census.py": "06ea87834329b60fa1cec02445949bf0071ad06e3fb36e81870aa3f17c800121",
+    "tools/remote_implementation_stage2_census.py": "d1cc429268cde599095ed6e29b09c80c25ec369a520acd493efc6bf062a6c148"
+  },
+  "changed_paths": [
+    "tests/test_remote_implementation_stage2_census.py",
+    "tools/remote_implementation_stage2_census.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "ea3a0483e0847933471a90590ed88704038c8312",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "tests/test_remote_implementation_stage2_census.py",
+    "tools/remote_implementation_stage2_census.py"
+  ],
+  "merge_base_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "e2e1e2d08d20a4c388c715cb30cefcfd83ee0b9fd74cd3774959553b06ffe586",
+    "notes.md": "90906f744346362ea6af22a63f4185ddcea5b77ec7a0208b00f0757b918a8e9f",
+    "opponents.csv": "e042b939aa7ab14920a16f150d53925be26fe5975d9f5c87d01e678860af5792",
+    "source-games.csv": "66700d2bb25b15f20212151b5c79cf4d22d7edc44a74331f1247840495db225f",
+    "source-notes.md": "3ae20ec45354bd22dcafbf612ec5243395720488d8d93dca525947969fc6e3d9",
+    "venues.csv": "c5db138677cf3a2c8ad32555d9b1f0d66d9bb213c11229e5e8921980e87057e5"
+  },
+  "predecessor_authority_kind": "PHASE0_SUCCESSOR",
+  "prepared_commit_sha": "f2b39e222ca4ef33ff351bf4e74e3a246e3c3874",
+  "prepared_main_parent_sha": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
+  "prepared_parent_sha": "ea3a0483e0847933471a90590ed88704038c8312",
+  "prepared_parents": [
+    "ea3a0483e0847933471a90590ed88704038c8312",
+    "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9"
+  ],
+  "prepared_tree_sha": "ffeed1e8ca7d0eb1f625413232ef3b9309459bd4",
+  "prior_refresh_successor_path": null,
+  "prior_refresh_successor_sha256": null,
+  "protected_main_sha": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "df37700a3726fbab9a7bc69fbbd7fd4a478d9b78acb9d6a738b4c739cdb51b05",
+  "repository_validation": "PASS",
+  "request_id": "florida-state-expansion-stage2-current-main-refresh-0001",
+  "request_sha256": "493045c605ff5ad698d7bf202009d36959d4a3f203499d8346b24aab35734006",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "target_branch": "data/florida-state-onboarding",
+  "target_changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/florida-state/notes.md",
+    "schools/florida-state/opponents.csv",
+    "schools/florida-state/source-games.csv",
+    "schools/florida-state/source-notes.md",
+    "schools/florida-state/venues.csv",
+    "site/data/programs.json",
+    "site/data/teams/florida-state.json"
+  ],
+  "writeahead_commit": "1c2e95702f447440f3d20dd990505b9586378304",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/florida-state/florida-state-expansion-stage2-current-main-refresh-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "8ee5827a1485b8d44f8d7964e1025607943a2f0ad2c87a52a2a5097cf61377e6"
+}
