@@ -468,7 +468,6 @@ jobs:
               candidate_sha,
           )
           validate_candidate_scope(changed_paths)
-          assert scoped_main == expected_main, (scoped_main, expected_main)
 
           request = {
               'school_key': last['school_key'],
@@ -594,6 +593,7 @@ jobs:
               'school_key': request['school_key'],
               'target_sha': request['target_sha'],
               'protected_main_sha': expected_main,
+              'candidate_scope_main_sha': scoped_main,
               'changed_paths': changed_paths,
               'blocker_keys': blockers,
               'current_d1_blocker_keys': authority[
@@ -950,7 +950,13 @@ jobs:
           PY
           )"
           elif [[ "$AUTHORITY_MODE" == "BLOCKED_CENSUS_OPPONENT_REPRESENTATION" ]]; then
-            scoped_main="$EXPECTED_MAIN_SHA"
+            scoped_main="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/blocked-census-opponent-representation-summary.json').read_text())
+          print(summary['candidate_scope_main_sha'])
+          PY
+          )"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_REFRESH" ]]; then
             scoped_main="$EXPECTED_MAIN_SHA"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_OPPONENT_DISPLAY" ]]; then
