@@ -312,6 +312,8 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         bad_final_venue_proof: bool = False,
         safe_reuse_bad_preview_hash: bool = False,
         safe_reuse_new_registration: bool = False,
+        safe_reuse_bad_registration_count: bool = False,
+        safe_reuse_missing_reuse_candidate: bool = False,
         unrelated_package_mismatch: bool = False,
     ):
         repo = Path(tempfile.mkdtemp(prefix="stage2-authority-test-"))
@@ -366,12 +368,29 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                 },
             }
         if safe_reuse_venues:
+            new_count = 1 if safe_reuse_new_registration else 0
             freeze["global_venue_reconciliation"] = {
                 "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER": 0,
-                "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": (
-                    1 if safe_reuse_new_registration else 0
-                ),
+                "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": new_count,
                 "REUSE_REGISTERED_GLOBAL_VENUE": 1,
+            }
+            freeze["venue_reconciliation_census"] = {
+                "blocker_count": 0,
+                "classification_counts": {
+                    "NEW_GLOBAL_IDENTITY": new_count,
+                    "SAFE_REPRESENTATION_REUSE": 1,
+                },
+                "rows": [{
+                    "classification": "SAFE_REPRESENTATION_REUSE",
+                    "venue_key": "existing-venue",
+                    "target_venue_id": "VEN-000123",
+                    "target_venue_key": "existing-venue",
+                }] + ([{
+                    "classification": "NEW_GLOBAL_IDENTITY",
+                    "venue_key": "new-venue",
+                    "target_venue_id": "",
+                    "target_venue_key": "new-venue",
+                }] if safe_reuse_new_registration else []),
             }
         freeze_bytes = (
             json.dumps(freeze, indent=2, sort_keys=True) + "\n"
@@ -397,6 +416,11 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             preview_venue_hash = final_hashes["venues.csv"]
             if safe_reuse_bad_preview_hash:
                 preview_venue_hash = "0" * 64
+            new_count = 1 if safe_reuse_new_registration else 0
+            total_count = 1 + new_count
+            preview_registration_count = new_count
+            if safe_reuse_bad_registration_count:
+                preview_registration_count += 1
             preview = {
                 "schema_version": 1,
                 "kind": "ALL_HISTORY_EXPANSION_PHASE0_DISPOSABLE_PREVIEW",
@@ -405,26 +429,33 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                 "protected_main_sha": "1" * 40,
                 "integration_freeze_sha256": freeze_sha,
                 "venue_reconciliation_sha256": "",
-                "rebased_venue_mapping_count": 1,
-                "supplemental_venue_rows_rebased": 1,
-                "global_venue_registration_count": (
-                    1 if safe_reuse_new_registration else 0
-                ),
+                "rebased_venue_mapping_count": total_count,
+                "supplemental_venue_rows_rebased": total_count,
+                "global_venue_registration_count": preview_registration_count,
                 "new_global_venue_ids_and_keys": (
-                    [["VEN-999999", "new-venue"]]
+                    [{"venue_id": "VEN-999999", "venue_key": "new-venue"}]
                     if safe_reuse_new_registration
                     else []
                 ),
                 "venue_identity_census": {
                     "status": "PASS",
                     "blocker_count": 0,
-                    "new_support_count": 1,
+                    "new_support_count": total_count,
                     "rows": [{
                         "venue_key": "existing-venue",
                         "registration_safe": True,
                         "existing_key_reuse_id": "VEN-000123",
-                        "possible_existing_global_ids": ["VEN-000123"],
-                    }],
+                        "possible_existing_global_ids": (
+                            ["VEN-000999"]
+                            if safe_reuse_missing_reuse_candidate
+                            else ["VEN-000123", "VEN-000999"]
+                        ),
+                    }] + ([{
+                        "venue_key": "new-venue",
+                        "registration_safe": True,
+                        "existing_key_reuse_id": "",
+                        "possible_existing_global_ids": [],
+                    }] if safe_reuse_new_registration else []),
                 },
                 "six_file_preview_sha256": {
                     "venues.csv": preview_venue_hash,
@@ -1321,14 +1352,46 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                 source_repo=repo,
             )
 
-    def test_safe_registered_venue_reuse_rejects_new_global_registration(self):
+    def test_mixed_safe_reuse_and_new_global_registration_is_authenticated(self):
         repo, control_sha, request, _ = self.make_authority_repo(
             safe_reuse_venues=True,
             safe_reuse_new_registration=True,
         )
+        authority = verify_phase0_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(
+            authority["phase0_preview"]["global_venue_registration_count"],
+            1,
+        )
+
+    def test_mixed_venue_rebase_rejects_registration_count_drift(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            safe_reuse_new_registration=True,
+            safe_reuse_bad_registration_count=True,
+        )
         with self.assertRaisesRegex(
             RemoteImplementationError,
             "STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
+
+    def test_safe_reuse_requires_exact_target_id_among_alias_candidates(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            safe_reuse_new_registration=True,
+            safe_reuse_missing_reuse_candidate=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH",
         ):
             verify_phase0_authority(
                 request,
