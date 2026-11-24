@@ -414,7 +414,7 @@ jobs:
           fi
           git -C control cat-file -e "$control_commit^{commit}"
 
-      - name: Rehearse fresh-verified blocked census opponent representation repair
+      - name: Replay exact blocked census with candidate tooling
         if: >-
           github.event_name == 'pull_request' &&
           steps.authority.outputs.mode == 'BLOCKED_CENSUS_OPPONENT_REPRESENTATION'
@@ -434,13 +434,8 @@ jobs:
 
           from remote_implementation_stage2_census import (
               add_existing_onboarding_worktree,
-          )
-          from remote_implementation_stage2_opponent_display import (
-              apply_and_prepare_repair,
-              post_repair_stage2_result,
-              run_normalizer_dry_run,
-              stage2_result_summary,
-              verify_census_and_freeze_authority,
+              run_stage2_census_tool,
+              verify_phase0_authority,
           )
           from stage2_candidate_runtime_rehearsal import (
               candidate_changed_paths,
@@ -460,41 +455,44 @@ jobs:
               == last['checkpoint_manifest_sha256']
           )
           manifest = json.loads(raw)
+
+          checkpoint_dir = checkpoint.parent
+          request_path = checkpoint_dir / 'request.json'
+          request_raw = (control / request_path).read_bytes()
+          expected_request_sha = str(manifest.get('request_sha256') or '')
+          if expected_request_sha:
+              assert hashlib.sha256(request_raw).hexdigest() == expected_request_sha
+          request = json.loads(request_raw)
+          assert request['request_id'] == manifest['request_id']
+          assert request['school_key'] == manifest['school_key']
+          assert request['target_branch'] == manifest['target_branch']
+          assert request['target_sha'] == manifest['target_sha']
+          assert request['expected_protected_main_sha'] == manifest['protected_main_sha']
+
           candidate_sha = '${{ steps.authority.outputs.candidate_sha }}'
-          expected_main = '${{ steps.authority.outputs.expected_main_sha }}'
+          authority_main = '${{ steps.authority.outputs.expected_main_sha }}'
           changed_paths, scoped_main = candidate_changed_paths(
               candidate,
-              expected_main,
+              authority_main,
               candidate_sha,
           )
           validate_candidate_scope(changed_paths)
 
-          request = {
-              'school_key': last['school_key'],
-              'target_branch': last['target_branch'],
-              'target_sha': last['target_sha'],
-              'expected_protected_main_sha': expected_main,
-              'stage2_census_checkpoint': {
-                  'path': checkpoint.as_posix(),
-                  'sha256': last['checkpoint_manifest_sha256'],
-              },
-              'integration_freeze_sha256': manifest[
-                  'integration_freeze_sha256'
-              ],
-              'semantic_snapshot_sha256': manifest[
-                  'semantic_snapshot_sha256'
-              ],
-          }
-          authority = verify_census_and_freeze_authority(
+          authority = verify_phase0_authority(
               request,
               '${{ steps.authority.outputs.control_commit }}',
               source_repo=control,
           )
-          blockers = authority['blocker_keys']
-          assert blockers
-          assert len(blockers) == manifest['preflight']['blocker_count']
-          assert manifest['preflight']['warning_count'] == 0
-          assert manifest['preflight']['decision_count'] == 0
+
+          status_path = checkpoint_dir / 'implementation-stage2-status.json'
+          baseline_status_raw = (control / status_path).read_bytes()
+          assert (
+              hashlib.sha256(baseline_status_raw).hexdigest()
+              == manifest['artifact_sha256']['implementation-stage2-status.json']
+          )
+          baseline_status = json.loads(baseline_status_raw)
+          baseline_blockers = set(baseline_status.get('blockers') or [])
+          assert baseline_blockers
 
           worktree = add_existing_onboarding_worktree(
               request['target_branch'],
@@ -503,80 +501,13 @@ jobs:
               source_repo=candidate,
           )
           try:
-              dry = run_normalizer_dry_run(
+              result = run_stage2_census_tool(
                   worktree,
                   request['school_key'],
                   authority['freeze_bytes'],
-                  blockers,
-                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
-                  tool_repo=candidate,
-                  sync_current_d1=authority['sync_current_d1'],
-              )
-              proposed = sorted(
-                  item['canonical_opponent_key']
-                  for item in dry['report']['changes']
-              )
-              assert proposed == blockers, (proposed, blockers)
-              prepared = apply_and_prepare_repair(
-                  worktree,
-                  request['school_key'],
-                  request['target_sha'],
-                  authority['freeze_bytes'],
-                  dry,
-                  blockers,
-                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
-                  tool_repo=candidate,
-                  sync_current_d1=authority['sync_current_d1'],
-              )
-              proof = prepared['field_level_proof']
-              assert proof['literal_evidence_changes'] == 0, proof
-              assert proof['source_game_non_name_field_changes'] == 0, proof
-              assert proof['opponent_changed_keys'] == blockers, proof
-              assert not (
-                  set(proof['source_game_changed_keys']) - set(blockers)
-              ), proof
-              if authority['sync_current_d1']:
-                  assert (
-                      proof['opponent_current_d1_changed_keys']
-                      == authority['current_d1_blocker_keys']
-                  ), proof
-
-              regenerated = post_repair_stage2_result(
-                  worktree,
-                  request['school_key'],
-                  authority['freeze_bytes'],
-                  Path('/tmp/stage2-candidate-runtime-rehearsal'),
+                  Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-census'),
                   tool_repo=candidate,
               )
-              stage2 = stage2_result_summary(regenerated)
-              post_proof = stage2['tracked_mutation_proof']
-              assert stage2['warning_count'] == 0, stage2
-              assert post_proof.get('tracked_stage2_mutation') == 'NONE', post_proof
-
-              status_path = checkpoint.parent / 'implementation-stage2-status.json'
-              baseline_status_raw = (control / status_path).read_bytes()
-              assert (
-                  hashlib.sha256(baseline_status_raw).hexdigest()
-                  == manifest['artifact_sha256']['implementation-stage2-status.json']
-              )
-              baseline_status = json.loads(baseline_status_raw)
-              baseline_blockers = set(baseline_status.get('blockers') or [])
-              candidate_blockers = set(
-                  (regenerated.get('status') or {}).get('blockers') or []
-              )
-              if stage2['stage2_status'] == 'CAPABILITY_CENSUS_READY':
-                  assert not candidate_blockers, candidate_blockers
-                  classification = 'RESOLVED_TO_CAPABILITY_CENSUS'
-              else:
-                  assert stage2['stage2_status'] == 'BLOCKED', stage2
-                  assert candidate_blockers, candidate_blockers
-                  assert not (
-                      baseline_blockers & candidate_blockers
-                  ), {
-                      'baseline_blockers': sorted(baseline_blockers),
-                      'candidate_blockers': sorted(candidate_blockers),
-                  }
-                  classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'
           finally:
               subprocess.run(
                   [
@@ -586,33 +517,56 @@ jobs:
                   check=True,
               )
 
+          status = result.get('status') or {}
+          preflight = status.get('preflight') or {}
+          candidate_blockers = set(status.get('blockers') or [])
+          proof = result.get('tracked_mutation_proof') or {}
+          assert proof.get('tracked_stage2_mutation') == 'NONE', proof
+
+          stage2_status = result.get('stage2_status')
+          if stage2_status == 'CAPABILITY_CENSUS_READY':
+              assert not candidate_blockers, candidate_blockers
+              classification = 'RESOLVED_TO_CAPABILITY_CENSUS'
+          else:
+              assert stage2_status == 'BLOCKED', stage2_status
+              assert candidate_blockers, candidate_blockers
+              if baseline_blockers <= candidate_blockers:
+                  raise SystemExit(
+                      'FAIL: CANDIDATE_REHEARSAL_NO_PROGRESS_SAME_BLOCKER'
+                  )
+              classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'
+
           summary = {
-              'kind': 'BLOCKED_CENSUS_OPPONENT_REPRESENTATION_CANDIDATE_REHEARSAL',
+              'kind': 'BLOCKED_CENSUS_CANDIDATE_REHEARSAL',
               'candidate_sha': candidate_sha,
               'control_commit': '${{ steps.authority.outputs.control_commit }}',
               'school_key': request['school_key'],
               'target_sha': request['target_sha'],
-              'protected_main_sha': expected_main,
+              'protected_main_sha': authority_main,
               'candidate_scope_main_sha': scoped_main,
               'changed_paths': changed_paths,
-              'blocker_keys': blockers,
-              'current_d1_blocker_keys': authority[
-                  'current_d1_blocker_keys'
-              ],
-              'field_level_proof': proof,
-              'post_repair_stage2': stage2,
+              'baseline_blockers': sorted(baseline_blockers),
               'candidate_blockers': sorted(candidate_blockers),
+              'removed_blockers': sorted(baseline_blockers - candidate_blockers),
+              'added_blockers': sorted(candidate_blockers - baseline_blockers),
+              'candidate_warning_count': int(preflight.get('warning_count', 0) or 0),
+              'candidate_decision_count': int(preflight.get('decision_count', 0) or 0),
+              'candidate_decision_universe_sha256': preflight.get(
+                  'decision_universe_sha256'
+              ),
+              'candidate_stage2_status': stage2_status,
               'classification': classification,
+              'tracked_mutation_proof': proof,
               'tracked_publication': 'NONE',
           }
           out = Path('/tmp/stage2-candidate-runtime-rehearsal')
           out.mkdir(parents=True, exist_ok=True)
-          (out / 'blocked-census-opponent-representation-summary.json').write_text(
+          (out / 'blocked-census-candidate-summary.json').write_text(
               json.dumps(summary, indent=2, sort_keys=True) + '\n'
           )
-          print('EXACT_BLOCKED_CENSUS_OPPONENT_REPRESENTATION_REPLAY=PASS')
+          print('EXACT_BLOCKED_CENSUS_CANDIDATE_REPLAY=PASS')
           print('CANDIDATE_CLASSIFICATION=' + classification)
-          print('POST_REPAIR_STAGE2_STATUS=' + stage2['stage2_status'])
+          print('POST_REPLAY_STAGE2_STATUS=' + stage2_status)
           print('TRACKED_BASKETBALL_PUBLICATION=NONE')
           PY
 
@@ -953,7 +907,7 @@ jobs:
             scoped_main="$(python - <<'PY'
           import json
           from pathlib import Path
-          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/blocked-census-opponent-representation-summary.json').read_text())
+          summary = json.loads(Path('/tmp/stage2-candidate-runtime-rehearsal/blocked-census-candidate-summary.json').read_text())
           print(summary['candidate_scope_main_sha'])
           PY
           )"
