@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "814eb6d57110a27744aadc3766f0053e81709987",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "miami-expansion-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "pr_number": 695,
+  "preview_deployment_id": 8012707830,
+  "preview_url": "https://college-basketball-history-eca6wl0ls-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "miami-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "miami",
+  "target_branch": "data/miami-onboarding"
+}
