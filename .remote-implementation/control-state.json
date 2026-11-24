@@ -32,7 +32,8 @@
     "unlv-release-preview-verify-0001",
     "kentucky-expansion-phase0-0001",
     "kentucky-expansion-release-preview-verify-0001",
-    "miami-expansion-phase0-0004"
+    "miami-expansion-phase0-0004",
+    "miami-expansion-release-preview-0001"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -762,16 +763,16 @@
     "miami-expansion-release-readiness-0001",
     "miami-expansion-release-preview-0001"
   ],
-  "active_expected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "RELEASE_PREVIEW_VERIFY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "miami-expansion-release-preview-0001",
-  "active_request_sha256": "4a7d476b4dd144ea2e116dce281437d509c9ad804fe0efc4773b829f6493905d",
-  "active_school_key": "miami",
-  "active_target_branch": "data/miami-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1501,31 +1502,29 @@
     "miami-expansion-stage2-preseal-0001",
     "miami-expansion-stage2-gate1-seal-0001",
     "miami-expansion-stage2-sealed-apply-0001",
-    "miami-expansion-release-readiness-0001"
+    "miami-expansion-release-readiness-0001",
+    "miami-expansion-release-preview-recovery-0001"
   ],
-  "current_sequence": 725,
+  "current_sequence": 726,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/miami/miami-expansion-release-readiness-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "e9fa5e613c39b6933f030365e210b2be70200f1c3a615f21b811bed9cc4ccbd7",
-    "fresh_runner_verification": "PASS",
-    "operation": "RELEASE_READINESS",
-    "preview_request_id": "miami-expansion-release-preview-0001",
-    "protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
-    "readiness_status": "RELEASE_READINESS_PASS",
-    "release_pr_packet_path": ".remote-implementation/checkpoints/miami/miami-expansion-release-readiness-0001/release-pr-packet.json",
-    "release_pr_packet_sha256": "9fcfa6122b33b022b13c9c0d4dd4b40108761014551e5a3607b9307d4a80573e",
-    "remote_release_readiness_equivalence": "PASS",
-    "request_id": "miami-expansion-release-readiness-0001",
-    "school_key": "miami",
-    "target_branch": "data/miami-onboarding",
-    "target_sha": "0cd6db88db745394151014c23d82105ef910b46d"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "miami-expansion-release-preview-0001",
+    "recovery_manifest": {
+      "actual_target_sha": null,
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": null,
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "8189b49651171b032d1c1d19f54f0d39ee1ed675",
+      "recovered_request_id": "miami-expansion-release-preview-0001",
+      "request_id": "miami-expansion-release-preview-recovery-0001",
+      "schema_version": 1,
+      "target_branch": null
+    }
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "45291461319",
-  "lock_acquisition_request_commit": "cef4bc363698dea1509d7a70a402e67ca195613c",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "RELEASE_PREVIEW_RUNNING"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
