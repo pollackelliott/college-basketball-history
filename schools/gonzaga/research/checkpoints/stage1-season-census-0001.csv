@@ -1,6 +1,6 @@
 season_label,activity,publication_disposition,source_aggregate_wins,source_aggregate_losses,source_aggregate_games,source_basis,status
-1905-06,ACTIVITY_EVIDENCED,INCEPTION_BOUNDARY_UNRESOLVED,,,,Gonzaga historical archive + Spokane historical reporting,PRECURSOR_OR_VARSITY_IDENTITY_UNRESOLVED
-1906-07,ACTIVITY_EVIDENCED,INCEPTION_BOUNDARY_UNRESOLVED,,,,Gonzaga Special Collections intercollegiate-1906 statement + Jan. 1907 Whitman game evidence,PRECURSOR_OR_VARSITY_IDENTITY_UNRESOLVED
+1905-06,ACTIVITY_EVIDENCED,PRE_INCEPTION,,,,Gonzaga historical archive + Spokane historical reporting,OWNER_DISPOSITION_A__PRECURSOR_ACTIVITY_OUTSIDE_RECOGNIZED_VARSITY_UNIVERSE
+1906-07,ACTIVITY_EVIDENCED,PRE_INCEPTION,,,,Gonzaga Special Collections intercollegiate-1906 statement + Jan. 1907 Whitman game evidence,OWNER_DISPOSITION_A__PRECURSOR_INTERCOLLEGIATE_ACTIVITY_OUTSIDE_RECOGNIZED_VARSITY_UNIVERSE
 1907-08,ACTIVE,EXPANSION_REQUIRED,9,2,11,Gonzaga 2026-27 Men's Basketball Record Book p.58 all-time coaching records,OFFICIAL_SEASON_AGGREGATE_ACCEPTED__GAME_LEDGER_PENDING
 1908-09,ACTIVE,EXPANSION_REQUIRED,10,2,12,Gonzaga 2026-27 Men's Basketball Record Book p.58 all-time coaching records,OFFICIAL_SEASON_AGGREGATE_ACCEPTED__GAME_LEDGER_PENDING
 1909-10,ACTIVE,EXPANSION_REQUIRED,11,3,14,Gonzaga 2026-27 Men's Basketball Record Book p.58 all-time coaching records,OFFICIAL_SEASON_AGGREGATE_ACCEPTED__GAME_LEDGER_PENDING
