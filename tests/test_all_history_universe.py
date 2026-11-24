@@ -58,6 +58,7 @@ LEGACY_PUBLISHED_KEYS = {
 LEGACY_INCEPTION_SCOPE_SUPERSESSION_KEYS = {
     "arizona-state",
     "kentucky",
+    "miami",
 }
 
 
@@ -196,6 +197,56 @@ class AllHistoryUniverseSemanticTests(unittest.TestCase):
         self.assertTrue(
             all(row["program_inception_season"] == "" for row in unpublished)
         )
+
+    def test_miami_approved_expansion_preserves_cohort_before_and_after_release(self):
+        # The exact accepted Miami expansion changes the scope from legacy
+        # intervals to INCEPTION+ in the proposed merge tree, not on main yet.
+        # Both states must satisfy the same strict published-cohort census.
+        self.assertIn("miami", LEGACY_PUBLISHED_KEYS)
+        self.assertIn("miami", LEGACY_INCEPTION_SCOPE_SUPERSESSION_KEYS)
+        miami = next(
+            row for row in self.programs if row["program_key"] == "miami"
+        )
+        baseline_programs = self.programs
+        baseline_scopes = self.scope_by_school
+        scenarios = (
+            (
+                "1948-49..1952-53|1954-55..1970-71|1985-86+",
+                "LEGACY_TOP_LEVEL_ONLY",
+                "",
+                "1948-1949",
+                "TOP_LEVEL_INTERVALS",
+            ),
+            (
+                "INCEPTION+",
+                "COMPLETE_INSTITUTIONAL",
+                "1927-1928",
+                "1927-1928",
+                "ALWAYS_TOP_LEVEL_FROM_INCEPTION",
+            ),
+        )
+        try:
+            for scope, status, inception, start, basis in scenarios:
+                with self.subTest(scope=scope):
+                    candidate_miami = {
+                        **miami,
+                        "history_coverage_status": status,
+                        "program_inception_season": inception,
+                        "history_start_season": start,
+                        "history_scope_basis": basis,
+                    }
+                    self.programs = [
+                        candidate_miami if row["program_key"] == "miami" else row
+                        for row in baseline_programs
+                    ]
+                    self.scope_by_school = {
+                        **baseline_scopes,
+                        "Miami": scope,
+                    }
+                    self.test_current_published_cohort_is_classified_deterministically()
+        finally:
+            self.programs = baseline_programs
+            self.scope_by_school = baseline_scopes
 
     def test_expansion_does_not_redefine_george_mason_top_level_scope(self):
         mason = next(
