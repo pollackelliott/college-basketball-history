@@ -775,15 +775,15 @@
   "active_lock_commit": "dc5a5e0816dddf92ccb0b6d1f3bfbd74794c2bf9",
   "active_lock_owner": "github-actions:45468623499:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "3293ca0b6bca24b3237c45e1f2528ee168ab1bdc",
+  "active_prepared_tree_sha": "3bb13777ba421e66dc3e6b1578b8b45d848b8f8a",
   "active_request_id": "florida-state-expansion-stage2-current-main-refresh-0002",
   "active_request_sha256": "a32166f174619a93fef5c9d07ccb9dcb2153dd44f1ce0b4d378e48aa9ef1ef12",
   "active_school_key": "florida-state",
   "active_target_branch": "data/florida-state-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/florida-state/florida-state-expansion-stage2-current-main-refresh-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "b2d0a00e612c90caeea28fd9542bf92839fb6963532d3ebf17be3c4f9b882bc5",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1543,5 +1543,5 @@
   "lock_acquisition_request_commit": "f5506c644f41998a8c5d7e2dd37e73301deabba7",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
