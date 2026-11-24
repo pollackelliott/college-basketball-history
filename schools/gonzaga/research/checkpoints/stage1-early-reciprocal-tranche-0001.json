@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_EARLY_RECIPROCAL_TRANCHE_0001",
+  "school_key": "gonzaga",
+  "accepted_inception_season": "1907-08",
+  "season_range": "1907-08..1913-14",
+  "evidence_families": [
+    {
+      "source": "Washington State official men's basketball record book (2026)",
+      "games_accepted": 7
+    },
+    {
+      "source": "Washington official men's basketball record book (2011-12)",
+      "games_accepted": 3
+    }
+  ],
+  "aggregate_games_in_tranche_seasons": 65,
+  "identified_games": 10,
+  "unidentified_aggregate_remainder": 55,
+  "season_accounting": [
+    {
+      "season": "1907-08",
+      "aggregate_games": 11,
+      "identified_games": 1,
+      "unidentified_remainder": 10
+    },
+    {
+      "season": "1908-09",
+      "aggregate_games": 12,
+      "identified_games": 1,
+      "unidentified_remainder": 11
+    },
+    {
+      "season": "1909-10",
+      "aggregate_games": 14,
+      "identified_games": 2,
+      "unidentified_remainder": 12
+    },
+    {
+      "season": "1910-11",
+      "aggregate_games": 9,
+      "identified_games": 1,
+      "unidentified_remainder": 8
+    },
+    {
+      "season": "1911-12",
+      "aggregate_games": 6,
+      "identified_games": 2,
+      "unidentified_remainder": 4
+    },
+    {
+      "season": "1912-13",
+      "aggregate_games": 6,
+      "identified_games": 2,
+      "unidentified_remainder": 4
+    },
+    {
+      "season": "1913-14",
+      "aggregate_games": 7,
+      "identified_games": 1,
+      "unidentified_remainder": 6
+    }
+  ],
+  "blocker_status": "ACTIVE_STAGE1_GAME_IDENTITY_RECONSTRUCTION",
+  "note": "The 55-game remainder is aggregate accounting only. No anonymous rows are created and W/L is not allocated by arithmetic."
+}
