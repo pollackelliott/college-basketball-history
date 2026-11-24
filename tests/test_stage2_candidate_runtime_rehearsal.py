@@ -332,6 +332,18 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             'elif [[ "$AUTHORITY_MODE" == "BLOCKED_CENSUS_OPPONENT_REPRESENTATION" ]]',
             workflow,
         )
+        self.assertIn(
+            "'candidate_scope_main_sha': scoped_main",
+            workflow,
+        )
+        self.assertIn(
+            "blocked-census-opponent-representation-summary.json",
+            workflow,
+        )
+        self.assertNotIn(
+            "assert scoped_main == expected_main, (scoped_main, expected_main)",
+            workflow,
+        )
 
     def test_prepared_recovery_still_requires_authenticated_data_target(self):
         workflow = (
