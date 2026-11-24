@@ -1756,7 +1756,6 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
         "counts": {
             "source_games": len(games),
             "correction_unchanged_published_rows": len(correction_legacy_ids),
-            "expansion_unchanged_published_rows": len(expansion_legacy_ids),
             "opponents": len(opponents),
             "venues": len(venues),
             "conference_intervals": len(conferences),
