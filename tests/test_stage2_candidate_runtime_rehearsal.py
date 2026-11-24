@@ -300,7 +300,7 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
         )
 
 
-    def test_fresh_blocked_census_supports_opponent_representation_rehearsal(self):
+    def test_fresh_blocked_census_replays_candidate_before_specialized_repairs(self):
         workflow = (
             ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
         ).read_text(encoding="utf-8")
@@ -313,19 +313,23 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             workflow,
         )
         self.assertIn(
-            "EXACT_BLOCKED_CENSUS_OPPONENT_REPRESENTATION_REPLAY=PASS",
+            "EXACT_BLOCKED_CENSUS_CANDIDATE_REPLAY=PASS",
+            workflow,
+        )
+        self.assertIn(
+            "verify_phase0_authority(",
+            workflow,
+        )
+        self.assertIn(
+            "run_stage2_census_tool(",
+            workflow,
+        )
+        self.assertIn(
+            "baseline_blockers <= candidate_blockers",
             workflow,
         )
         self.assertIn(
             "classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'",
-            workflow,
-        )
-        self.assertIn(
-            "baseline_blockers & candidate_blockers",
-            workflow,
-        )
-        self.assertIn(
-            "sync_current_d1=authority['sync_current_d1']",
             workflow,
         )
         self.assertIn(
@@ -337,7 +341,7 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             workflow,
         )
         self.assertIn(
-            "blocked-census-opponent-representation-summary.json",
+            "blocked-census-candidate-summary.json",
             workflow,
         )
         self.assertNotIn(
