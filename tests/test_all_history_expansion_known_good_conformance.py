@@ -29,6 +29,22 @@ class AllHistoryExpansionKnownGoodConformanceTests(unittest.TestCase):
         with self.assertRaisesRegex(Stop, "KNOWN_GOOD_UNKNOWN_WITNESS"):
             conformance.select_witnesses("not-a-witness")
 
+    def test_workflow_parallelizes_full_witness_cohort_and_cancels_stale_runs(self):
+        workflow = (
+            ROOT / ".github/workflows/all-history-expansion-known-good-conformance.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "school: [vcu, arizona-state, houston, ucf]",
+            workflow,
+        )
+        self.assertIn("cancel-in-progress: true", workflow)
+        self.assertIn("--school \"$WITNESS_SCHOOL\"", workflow)
+        self.assertIn("needs: known-good-witness", workflow)
+        self.assertIn(
+            "ALL_HISTORY_EXPANSION_KNOWN_GOOD_CONFORMANCE=PASS",
+            workflow,
+        )
+
     def test_stable_contract_covers_gate1_and_site_integrity(self):
         self.assertIn("decision_universe_sha256", conformance.PREFLIGHT_KEYS)
         self.assertIn("decision_count", conformance.PREFLIGHT_KEYS)
