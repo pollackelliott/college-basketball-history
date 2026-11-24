@@ -1,0 +1,10 @@
+evidence_id,season_label,game_date,literal_opponent_assertion,literal_source_result,literal_score,literal_site_or_location,source_version,stage1_disposition,notes
+GONZAGA-MSU-EV-001,1913-14,1914-02-20,Gonzaga,MSU W,29-17,Bozeman,older MSU year-by-year,CURATED_SCORE_SUPERSEDED_BY_CURRENT_OFFICIAL,Current MSU and current Gonzaga sources both say 29-16; identity/result/site stable.
+GONZAGA-MSU-EV-002,1913-14,1914-02-20,Gonzaga,MSU W,29-16,Bozeman,current MSU 2026 series preview + current Gonzaga series note,ACCEPTED_CURRENT_SCORE,Current reciprocal and target sources agree.
+GONZAGA-MSU-EV-003,1914-15,1915-02-20,Gonzaga,MSU W,12-9,at Montana State,current 2025-26 MSU year-by-year,BLOCKING_RESULT_CONFLICT,Conflicts with older official edition.
+GONZAGA-MSU-EV-004,1914-15,1915-02-20,Gonzaga,MSU L,12-9,at Montana State,older 2023-24 MSU year-by-year,BLOCKING_RESULT_CONFLICT,Conflicts with current official edition; game identity is stable.
+GONZAGA-MSU-EV-005,1919-20,,Gonzaga,MSU W,32-7,Bozeman,older MSU opponent-series history,BLOCKING_OPPONENT_IDENTITY_CONFLICT,Older series table assigns this game to Gonzaga.
+GONZAGA-MSU-EV-006,1919-20,,Montana,MSU W,32-7,,current 2025-26 MSU year-by-year,BLOCKING_OPPONENT_IDENTITY_CONFLICT,Current year-by-year assigns same 32-7 game to Montana; not admitted to Gonzaga ledger.
+GONZAGA-MSU-EV-007,1921-22,1922-01-28,Gonzaga,MSU W,33-23,at Gonzaga,current 2025-26 MSU year-by-year,NONBLOCKING_DATE_SITE_CONFLICT,Current date differs from older edition and site conflicts with series table.
+GONZAGA-MSU-EV-008,1921-22,1922-01-30,Gonzaga,MSU W,33-23,at Gonzaga,older 2023-24 MSU year-by-year,NONBLOCKING_DATE_SITE_CONFLICT,Older date; identity/result/score stable.
+GONZAGA-MSU-EV-009,1921-22,,Gonzaga,MSU W,33-23,Bozeman,MSU opponent-series history,NONBLOCKING_DATE_SITE_CONFLICT,Series location conflicts with year-by-year at-Gonzaga assertion.
