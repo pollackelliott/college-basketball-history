@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_ACCOUNTING_DEBT_UPDATE_AFTER_CENTRAL_WASHINGTON_V1",
+  "protected_main_sha_at_checkpoint": "fd1b5dca8e6e66e13aa68b8b24a5582fdc75a7e5",
+  "parent_checkpoint_sha": "0c51e5b02868945184199bcd53e19d8d26d29b59",
+  "debts": [
+    {
+      "season": "1915-16",
+      "target_literal_record": "2-7 / 9",
+      "identified_state": "0-8 / 8 among harvested source families",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "changed_by_cwu": false
+    },
+    {
+      "season": "1936-37",
+      "target_literal_record": "1-5 / 6",
+      "identified_state": "4-4 / 8 identified",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "changed_by_cwu": true,
+      "note": "Central Washington adds Gonzaga W 29-24 on 1937-02-28."
+    },
+    {
+      "season": "1937-38",
+      "target_literal_record": "0-4 / 4",
+      "identified_state": "0-6 / 6 identified",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "changed_by_cwu": false
+    }
+  ],
+  "active_discrepancy_research_blockers": 0
+}
