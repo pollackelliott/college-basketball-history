@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "florida-state",
+  "created_at": "2026-11-24T19:25:05.636244+00:00",
+  "input_fingerprint": {
+    "sha256": "0435ab382c5d3410935a0ec5bd3e9b90be7ef7dbdfded1e79f693e742aa4379f",
+    "git_head": "3293ca0b6bca24b3237c45e1f2528ee168ab1bdc",
+    "files": {
+      "schools/florida-state/source-games.csv": "66700d2bb25b15f20212151b5c79cf4d22d7edc44a74331f1247840495db225f",
+      "schools/florida-state/opponents.csv": "e042b939aa7ab14920a16f150d53925be26fe5975d9f5c87d01e678860af5792",
+      "schools/florida-state/venues.csv": "c5db138677cf3a2c8ad32555d9b1f0d66d9bb213c11229e5e8921980e87057e5",
+      "schools/florida-state/conferences.csv": "e2e1e2d08d20a4c388c715cb30cefcfd83ee0b9fd74cd3774959553b06ffe586",
+      "schools/florida-state/notes.md": "90906f744346362ea6af22a63f4185ddcea5b77ec7a0208b00f0757b918a8e9f",
+      "schools/florida-state/source-notes.md": "3ae20ec45354bd22dcafbf612ec5243395720488d8d93dca525947969fc6e3d9",
+      "data/canonical/games.csv": "f576af36529c20f26cc86328b88cb52ccafb3f009d44973f8cc58e0d6e94f348",
+      "data/evidence/game-assertions.csv": "36f75a73d7656ebb23f76767ab854f55eb97f3c90f55eedcb752594dad0d0e03",
+      "data/reconciliation/discrepancies.csv": "80a766c899db353c905ff0ff138e5f7f07125516a7245f2cd0554ad5ea368879",
+      "data/reference/programs.csv": "c3e7886ab5e7bd807e48550b1b68b318095bca1fe5d3dff56113d111fbc79501",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "b358fb536c14b2aafd7bfa226b837948222173e6ec3ee14596d269e6725d72ad",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "61c782959d044a5341721b535d0d1d09f98d4d1db15d089e46c2dee8df923053",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "17037f63b16793a694e875beecc1c17bdb6678c0eea6efce1ab7a98aeec612d2",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "100bbf38d2a2dd3fe58cd3c7a9bf4f0cb436fd7013206b115ef7436ec89612e5",
+      "tools/onboarding_plan.py": "649a672152f59050f596b50f62c07dc8e5b0f6776fcf5e780e32e7725b9f86e0",
+      "tools/program_history.py": "d1b6d69e15a994dcefb628d7078e100f792c671db35e32bd5efef504b6c860da",
+      "tools/validate_data.py": "58a288b964b98af0f6a49a0afc7dfa1c9f7b665f0f03a05de1378d00ee58287b",
+      "tools/verify_program_accomplishments.py": "9b2cd4ec6bafcd9f825fd6d6a1c42a52ecce0497c523f3fbdb48f157aab59dcb"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: central-methodist: ['Central Methodist', 'Central Methodist (MO)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: culver-stockton: ['Culver-Stockton', 'Culver-Stockton College (MO)']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [
+      "FSU-STG1-00253: curated venue 'Allen Fieldhouse' absent from venues.csv (unchanged published legacy debt outside this expansion)"
+    ],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2291,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 398,
+      "venues": 78,
+      "conference_intervals": 4,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: central-methodist: ['Central Methodist', 'Central Methodist (MO)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: culver-stockton: ['Culver-Stockton', 'Culver-Stockton College (MO)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [
+    "FSU-STG1-00253: curated venue 'Allen Fieldhouse' absent from venues.csv (unchanged published legacy debt outside this expansion)"
+  ],
+  "summary": {},
+  "decisions": []
+}
