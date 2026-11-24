@@ -772,18 +772,19 @@
     "florida-state-expansion-stage2-current-main-refresh-0002",
     "florida-state-expansion-stage2-census-0003",
     "florida-state-expansion-stage2-current-main-refresh-0003",
-    "florida-state-expansion-stage2-census-0005"
+    "florida-state-expansion-stage2-census-0005",
+    "florida-state-expansion-stage2-opponent-display-normalize-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:45491568837:1",
+  "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "florida-state-expansion-stage2-opponent-display-normalize-0001",
+  "active_request_sha256": "1451c5be9843adcaef60ac67719778a13e9c221adcdc396c46f3587357b6f3fd",
+  "active_school_key": "florida-state",
+  "active_target_branch": "data/florida-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1544,8 +1545,11 @@
     "target_branch": "data/florida-state-onboarding",
     "target_sha": "f6333bd2f6e8c3c3e61719a6dfebc053844ca134"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45491568837",
+  "lock_acquisition_request_commit": "3877df8416298a1be3ad44f8da1f80a373f2c7b6",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "LOCKED"
 }
