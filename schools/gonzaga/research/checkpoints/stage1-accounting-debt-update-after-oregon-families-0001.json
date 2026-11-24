@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_ACCOUNTING_DEBT_UPDATE_AFTER_OREGON_FAMILIES_V1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "d998e70f0cb4daf921e687159cf32c09c705b8d6",
+  "parent_checkpoint_sha": "29be4951089dfe296ae11f3dfe8231e2bc3b1192",
+  "debts": [
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_record": "2-7 / 9 games",
+      "identified_state": "0 wins, 9 losses, 9 games",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "changed_by_tranche": true,
+      "note": "Oregon State adds a season-specific 27-15 win over Gonzaga, creating a ninth identified Gonzaga loss."
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1930-31",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_record": "7-8 / 15 games",
+      "identified_state": "4 wins, 9 losses, 13 games",
+      "source_families": [
+        "Washington State",
+        "Montana",
+        "Central Washington",
+        "Oregon State",
+        "Oregon"
+      ],
+      "research_status": "RESEARCH_EXHAUSTED",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "new_in_tranche": true,
+      "note": "Nine losses are distributed across five distinct institutional opponent families. Oregon State contributes three season-specific losses; Oregon contributes two exact dated losses. No cross-opponent duplicate mechanism exists."
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_record": "1-5 / 6 games",
+      "identified_state": "4 wins, 5 losses, 9 games",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "changed_by_tranche": true,
+      "note": "Oregon adds exact Gonzaga L 22-58 on 1937-02-22."
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1937-38",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_record": "0-4 / 4 games",
+      "identified_state": "0 wins, 6 losses, 6 games",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "changed_by_tranche": false
+    }
+  ],
+  "active_discrepancy_research_blockers": 0
+}
