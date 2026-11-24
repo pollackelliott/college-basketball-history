@@ -3,10 +3,10 @@
   "outputDirectory": "site",
   "git": {
     "deploymentEnabled": {
-      "control/remote-implementation": false,
-      "transport/*": false,
-      "hardening/*": false,
-      "docs/*": false
+      "**": false,
+      "main": true,
+      "data/**": true,
+      "maintenance/**": true
     }
   }
 }
