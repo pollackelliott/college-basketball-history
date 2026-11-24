@@ -773,18 +773,19 @@
     "florida-state-expansion-stage2-census-0003",
     "florida-state-expansion-stage2-current-main-refresh-0003",
     "florida-state-expansion-stage2-census-0005",
-    "florida-state-expansion-stage2-opponent-display-normalize-0001"
+    "florida-state-expansion-stage2-opponent-display-normalize-0001",
+    "florida-state-expansion-stage2-census-0006"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "florida-state-expansion-stage2-census-0006",
+  "active_request_sha256": "b2ee389623d0834c3910f0d1bb1f2a14774d0540ef79193e2bf6651827985b45",
+  "active_school_key": "florida-state",
+  "active_target_branch": "data/florida-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1553,8 +1554,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/florida-state/florida-state-expansion-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "542318fbceb2b27234311a2ccda1e7c5728b4ffd1123e1c00d3f3486ddcef597"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45493436458",
+  "lock_acquisition_request_commit": "f9c9ccb177d176f3b5803d0dfc4df57238db28db",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
