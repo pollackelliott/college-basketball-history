@@ -1516,7 +1516,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/miami/miami-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "9379692931ecb34752576583074ed689eef4e7c4deb6dea2d5a2b477638dbf40",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/miami/miami-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "36bc5a6f513e2f739fae19e310b5eb08bb5c57db8f29f5106d2b2c064388ab38",
     "merged": false,
@@ -1525,7 +1525,7 @@
     "pr_number": 695,
     "production_request_id": "miami-expansion-release-production-proof-0001",
     "protected_main_sha": "814eb6d57110a27744aadc3766f0053e81709987",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "miami-expansion-release-gate2-approval-0001",
     "school_key": "miami",
     "target_branch": "data/miami-onboarding",
