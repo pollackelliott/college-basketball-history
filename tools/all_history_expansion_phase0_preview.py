@@ -177,8 +177,16 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
         require(revalidated_census==venue_reconciliation_census,
                 "PHASE0_PREVIEW_VENUE_RECONCILIATION_CENSUS_DRIFT")
     else:
-        require(venue_reconciliation_census is None,
-                "PHASE0_PREVIEW_UNBOUND_VENUE_RECONCILIATION_CENSUS")
+        require(manifest.get("venue_reconciliation_sha256", "") == "",
+                "PHASE0_PREVIEW_UNEXPECTED_VENUE_RECONCILIATION_SHA")
+        revalidated_census=venue_reconciliation_inventory(
+            new_venues,global_venues,global_names,
+            school_key=school,
+            existing_school_venues=existing_other_venues,
+            venue_reconciliation=venue_reconciliation,
+        )
+        require(revalidated_census==venue_reconciliation_census,
+                "PHASE0_PREVIEW_VENUE_RECONCILIATION_CENSUS_DRIFT")
     # Preserve the whole conflict census for review. Explicit reuse may clear
     # only the exact already-authenticated mapping; unresolved alias/locality
     # collisions remain blockers.
