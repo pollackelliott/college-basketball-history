@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_ACCOUNTING_DEBT_UPDATE_AFTER_WASHINGTON_IDAHO_STATE_V1",
+  "protected_main_sha_at_checkpoint": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "parent_checkpoint_sha": "30a0d24151d5c07feebc6b848a493e96ac7005d6",
+  "active_discrepancy_research_blockers": 0,
+  "debts": [
+    {
+      "season": "1915-16",
+      "target_literal_record": "2-7 / 9",
+      "identified_state": "0-9 / 9",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "changed_by_tranche": false
+    },
+    {
+      "season": "1930-31",
+      "target_literal_record": "7-8 / 15",
+      "identified_state": "4-10 / 14",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "changed_by_tranche": true,
+      "note": "Washington adds exact Gonzaga L 25-33 on 1931-01-30."
+    },
+    {
+      "season": "1936-37",
+      "target_literal_record": "1-5 / 6",
+      "identified_state": "4-5 / 9",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "changed_by_tranche": false
+    },
+    {
+      "season": "1937-38",
+      "target_literal_record": "0-4 / 4",
+      "identified_state": "0-6 / 6",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "changed_by_tranche": false
+    }
+  ]
+}
