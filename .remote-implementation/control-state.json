@@ -779,7 +779,7 @@
   "active_request_sha256": "493045c605ff5ad698d7bf202009d36959d4a3f203499d8346b24aab35734006",
   "active_school_key": "florida-state",
   "active_target_branch": "data/florida-state-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "1c2e95702f447440f3d20dd990505b9586378304",
   "active_writeahead_path": ".remote-implementation/writeahead/florida-state/florida-state-expansion-stage2-current-main-refresh-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "8ee5827a1485b8d44f8d7964e1025607943a2f0ad2c87a52a2a5097cf61377e6",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
