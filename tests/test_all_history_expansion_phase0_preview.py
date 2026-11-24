@@ -11,7 +11,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"tools"))
 from all_history_expansion_integration import (
     MANIFEST_NAME, PACKAGE_FILES, STAGE1_REPORT, IntegrationAuthorityError,
-    canonical_bytes, csv_rows, sha256,
+    canonical_bytes, csv_rows, sha256, venue_reconciliation_inventory,
 )
 from all_history_expansion_freeze import canonical_row_sha256
 from all_history_expansion_phase0_preview import preview_phase0
@@ -77,6 +77,8 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             "scope_authority":None,
             "opponent_support_actions":{"NEW_SUPPLEMENTAL":1,"EXTEND_INHERITED":0,"REUSE_INHERITED":0},
             "venue_support_actions":{"NEW_SUPPLEMENTAL":1,"EXTEND_INHERITED":0,"REUSE_INHERITED":0},
+            "venue_reconciliation":None,
+            "venue_reconciliation_sha256":"",
             "source_preservation":{"combined_count":1,"inherited_count":0,
                                    "supplemental_count":1},
             "frozen_program_projection":target,
@@ -91,6 +93,14 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
                       "display_name":"Older Gym","city":"Elsewhere","state":"VA"}
         new_global={"venue_id":"VEN-000002","venue_key":"gym",
                       "display_name":"Sample Gym","city":"Sampleville","state":"VA"}
+        manifest=json.loads((frozen/MANIFEST_NAME).read_bytes())
+        manifest["venue_reconciliation_census"]=venue_reconciliation_inventory(
+            [venue],[global_venue],[],school_key="sample",
+            existing_school_venues=[],venue_reconciliation={},
+        )
+        manifest["manifest_self_fingerprint_sha256"]=""
+        manifest["manifest_self_fingerprint_sha256"]=sha256(canonical_bytes(manifest))
+        (frozen/MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
         fake_git={}
         for n in PACKAGE_FILES:
             fake_git["schools/sample/"+n]=inherited[n]
@@ -169,6 +179,15 @@ class ExpansionPhase0PreviewTests(unittest.TestCase):
             self.assertFalse(result["authorized_live_mutation"])
             self.assertEqual(result["source_game_count"],1)
             self.assertFalse((repo/"schools").exists())
+
+    def test_no_sidecar_nonnull_venue_census_is_revalidated(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo=Path(tmp)/"repo";repo.mkdir()
+            result=self.evaluate(repo)
+            census=result["venue_reconciliation_census"]
+            self.assertIsInstance(census,dict)
+            self.assertEqual(census["blocker_count"],0)
+            self.assertEqual(census["venue_count"],1)
 
     def test_frozen_v2_scope_supersession_is_staged_exactly(self):
         with tempfile.TemporaryDirectory() as tmp:
