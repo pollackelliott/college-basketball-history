@@ -325,6 +325,14 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             workflow,
         )
         self.assertIn(
+            "scratch_branch = (",
+            workflow,
+        )
+        self.assertIn(
+            "['git', '-C', str(candidate), 'branch', '-D', scratch_branch]",
+            workflow,
+        )
+        self.assertIn(
             "baseline_blockers <= candidate_blockers",
             workflow,
         )
