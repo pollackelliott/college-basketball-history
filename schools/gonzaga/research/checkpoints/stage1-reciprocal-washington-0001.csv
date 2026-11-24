@@ -1,0 +1,4 @@
+season_label,game_date,source_program,source_opponent_label,source_site_for_washington,source_result_for_washington,source_washington_score,source_gonzaga_score,derived_gonzaga_result,derived_gonzaga_site_type,source_url,source_lines,status
+1909-10,1910-02-14,Washington,Gonzaga,A,W,23,14,L,HOME,https://static.gohuskies.com/old_site/pdf/m-baskbl/2010-11-recordbook-1015.pdf?db_oem_id=30200,6608,ACCEPTED_RECIPROCAL_STAGE1
+1911-12,1912-02-06,Washington,Gonzaga,A,W,37,17,L,HOME,https://static.gohuskies.com/old_site/pdf/m-baskbl/2010-11-recordbook-1015.pdf?db_oem_id=30200,6641,ACCEPTED_RECIPROCAL_STAGE1
+1912-13,1913-02-05,Washington,Gonzaga,A,W,37,20,L,HOME,https://static.gohuskies.com/old_site/pdf/m-baskbl/2010-11-recordbook-1015.pdf?db_oem_id=30200,6670,ACCEPTED_RECIPROCAL_STAGE1
