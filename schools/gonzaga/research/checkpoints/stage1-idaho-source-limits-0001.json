@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_IDAHO_SOURCE_LIMITS_V1",
+  "source": "Idaho 2025-26 Men's Basketball Record Book",
+  "source_url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/govandals.com/documents/2025/5/21/MBB_Record_Book_25-26.pdf",
+  "accepted_rows": 39,
+  "accepted_span": "1933-34 through 1954-55",
+  "excluded_or_deferred_source_zones": [
+    {
+      "season": "1946-47",
+      "reason": "The current PDF extraction prints the season heading but no game table; no Gonzaga assertion is created from absence."
+    },
+    {
+      "season": "1950-51",
+      "reason": "The current PDF extraction exposes only the opening four rows before the next heading; no Gonzaga assertion is inferred from incomplete extraction."
+    },
+    {
+      "source_zone": "unnamed continuation tables between 1948-49 and 1949-50 headings",
+      "reason": "Only the first continuation table is mapped to 1948-49 because it directly follows the 1948-49 heading and, together with the opening Whitman row, yields exactly the source's 32-game 17-15 season. Later unnamed continuation tables are not season-assigned in this tranche."
+    }
+  ],
+  "screenshot_note": "The web PDF screenshot endpoint was attempted for this source but returned an internal fetch error. Acceptance relies on the official PDF's parsed all-time-results tables; no visual-only fact is asserted."
+}
