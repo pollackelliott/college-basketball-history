@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_FIVE_BLOCKER_DISPOSITION_V1",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
+  "parent_checkpoint_sha": "35ebdf86343bbf50aae7309381ff61c6ff670232",
+  "bounded_research_status": "COMPLETE",
+  "dispositions": [
+    {
+      "blocker_id": "GONZAGA-S1-WSU-RESULT-1907-08",
+      "disposition": "RESOLVED",
+      "accepted_fact": "1907-12-16 Washington State at Gonzaga; Gonzaga L 18-21; HOME",
+      "basis": [
+        "Washington State current official record-vs-opponents table: WSU A W 21-18 on Dec. 16, 1907.",
+        "Gonzaga official 2015 game notes: FIRST MEETING 1907 - WSU won 21-18 in Spokane.",
+        "Later Gonzaga 2025/26 notes reversing the winner are an isolated modern summary defect."
+      ],
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": false
+    },
+    {
+      "blocker_id": "GONZAGA-S1-MSU-RESULT-1914-15",
+      "disposition": "RESOLVED",
+      "accepted_fact": "1915-02-20 Gonzaga at Montana State; Gonzaga W 12-9; AWAY",
+      "basis": [
+        "Montana State 2024-25 official detailed year-by-year results explicitly record MSU L 12-9.",
+        "Montana State's 1914-15 season heading is 4-6 in both 2024-25 and 2025-26 editions.",
+        "The 2025-26 detailed row alone changes the result to MSU W 12-9 and is treated as a current-edition literal defect."
+      ],
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": false
+    },
+    {
+      "blocker_id": "GONZAGA-S1-MSU-OPPONENT-1919-20",
+      "disposition": "RESOLVED_EXCLUDED_SOURCE_ASSERTION",
+      "accepted_fact": "Do not admit the disputed Montana State 32-7 assertion as a Gonzaga game.",
+      "basis": [
+        "Montana State 2024-25 opponent/year-by-year history assigns 32-7 to Gonzaga.",
+        "Montana State 2025-26 year-by-year reassigns 32-7 to at Montana.",
+        "Montana's own current year-by-year has no corresponding 32-7 loss to Montana State.",
+        "The assertion is therefore unstable/misattributed and insufficient Gonzaga game authority."
+      ],
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": false
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "disposition": "RESEARCH_EXHAUSTED_CLOSEOUT_DEBT",
+      "terminal_class_candidate": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_aggregate": "2-7 / 9 games",
+      "independently_source_backed_minimum_losses": 8,
+      "evidence_families": {
+        "Washington State": 2,
+        "Montana": 4,
+        "Montana State": 2
+      },
+      "finding": "The eight losses are distinct by opponent/date-or-series-position/site/score and survive bounded direct/reciprocal research. No concrete evidence was found that invalidates one of them. The Gonzaga season aggregate is therefore preserved as a conflicting target literal, not used to delete a game or manufacture a corrected record.",
+      "research_exhausted": true,
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "owner_action_now": "NONE",
+      "later_closeout_note": "If still surviving at Stage 1 closeout, route through the repository's exact early-history accounting-authority/closeout mechanism rather than reopening broad research."
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "disposition": "RESEARCH_EXHAUSTED_CLOSEOUT_DEBT",
+      "terminal_class_candidate": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_aggregate": "1-5 / 6 games",
+      "independently_source_backed_minimum_wins": 2,
+      "evidence_families": {
+        "Montana": "Gonzaga W 42-41",
+        "Montana State": "Gonzaga W 49-39"
+      },
+      "finding": "The two wins are distinct and independently preserved by official opponent histories; no bounded direct evidence was found invalidating either game. Gonzaga's 1-5 aggregate remains a conflicting target literal and is not arithmetically corrected.",
+      "research_exhausted": true,
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "owner_action_now": "NONE",
+      "later_closeout_note": "If still surviving at Stage 1 closeout, route through the repository's exact early-history accounting-authority/closeout mechanism rather than reopening broad research."
+    }
+  ],
+  "post_tranche_state": {
+    "active_discrepancy_research_blockers": 0,
+    "research_exhausted_closeout_debt": 2,
+    "identified_game_count": 213,
+    "known_result_game_count": 213,
+    "continued_stage1_source_harvest_authorized": true
+  }
+}
