@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_PORTLAND_SOURCE_LIMITS_V1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "d998e70f0cb4daf921e687159cf32c09c705b8d6",
+  "source": "University of Portland 2009-10 Men's Basketball Media Guide",
+  "source_url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/portlandpilots.com/documents/2009/11/19/2009-10_UP-MBB-Media-Guide-reduced.pdf",
+  "accepted_rows": 48,
+  "accepted_span": "1946-47 through 1957-58",
+  "completeness_basis": [
+    "Portland's game-by-game Gonzaga table supplies four rows in every season from 1946-47 through 1957-58.",
+    "Portland's independent series note states that from 1946-50 Portland went 7-9 against Gonzaga; the first 16 game-by-game rows reproduce exactly that 7-9 Portland record.",
+    "The guide states that some records prior to 1950 were incomplete, so no broader claim is made beyond the exact Gonzaga series rows and the independently matching 1946-50 series accounting."
+  ],
+  "date_policy": "The series table does not print game dates. Dates remain blank rather than being reconstructed from secondary chronology.",
+  "site_policy": "Portland H/A is inverted reciprocally to Gonzaga A/H. Portland X remains Gonzaga UNKNOWN.",
+  "game_type_policy": "Rows are accepted as regular-season series games. Portland's documented NAIA national-tournament opponent lists for the period do not identify Gonzaga, and the Gonzaga series table carries no postseason marker on these rows.",
+  "pdf_screenshot_attempt": "The web screenshot endpoint was invoked on the official PDF but failed because the 35.8 MB file exceeded the screenshot fetch limit. The official PDF's parsed game-by-game table was available and used; no visual-only fact is asserted."
+}
