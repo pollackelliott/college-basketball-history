@@ -167,9 +167,11 @@ VENUE_EXTENSION_FIELDS = {
     "games_currently_assigned",
     "first_assigned_game",
     "last_assigned_game",
+    "relationship_type",
     "relationship_start",
     "relationship_end",
     "relationship_date_precision",
+    "site_rule",
     "source_basis",
     "notes",
 }

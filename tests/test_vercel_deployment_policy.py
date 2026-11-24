@@ -16,59 +16,59 @@ class VercelDeploymentGateTests(unittest.TestCase):
             gate.should_skip(ref="main", parent_available=True, site_diff_returncode=0)
         )
 
-    def test_control_branch_always_skips(self):
-        self.assertTrue(
-            gate.should_skip(
-                ref="control/remote-implementation",
-                parent_available=True,
-                site_diff_returncode=1,
+    def test_publication_branch_families_always_build(self):
+        for ref in (
+            "data/florida-state-onboarding",
+            "maintenance/shared-reference-publication",
+        ):
+            self.assertFalse(
+                gate.should_skip(
+                    ref=ref,
+                    parent_available=False,
+                    site_diff_returncode=2,
+                ),
+                ref,
             )
-        )
 
-    def test_non_main_branch_skips_without_site_or_config_change(self):
-        self.assertTrue(
-            gate.should_skip(
-                ref="hardening/docs-only",
-                parent_available=True,
-                site_diff_returncode=0,
-            )
-        )
+    def test_non_publication_branch_families_always_skip(self):
+        for ref in (
+            "control/remote-implementation",
+            "tooling/stage2-repair",
+            "research/uc-davis-stage3a1",
+            "control-center/vercel-repair",
+            "transport/freeze-parts",
+            "hardening/vercel-policy",
+            "docs/policy-update",
+            "feature/site-change",
+        ):
+            for parent_available, diff_rc in (
+                (True, 0),
+                (True, 1),
+                (True, 2),
+                (False, 2),
+            ):
+                self.assertTrue(
+                    gate.should_skip(
+                        ref=ref,
+                        parent_available=parent_available,
+                        site_diff_returncode=diff_rc,
+                    ),
+                    (ref, parent_available, diff_rc),
+                )
 
-    def test_non_main_branch_builds_when_site_or_config_changes(self):
-        self.assertFalse(
-            gate.should_skip(
-                ref="maintenance/forum",
-                parent_available=True,
-                site_diff_returncode=1,
-            )
-        )
-
-    def test_missing_parent_fails_open(self):
-        self.assertFalse(
-            gate.should_skip(
-                ref="hardening/initial",
-                parent_available=False,
-                site_diff_returncode=2,
-            )
-        )
-
-    def test_git_diff_error_fails_open(self):
-        self.assertFalse(
-            gate.should_skip(
-                ref="hardening/tooling",
-                parent_available=True,
-                site_diff_returncode=2,
-            )
-        )
-
-    def test_vercel_config_disables_control_branch(self):
+    def test_vercel_config_is_exact_fail_closed_allow_list(self):
         config = json.loads((ROOT / "vercel.json").read_text())
         self.assertEqual(config["outputDirectory"], "site")
-        disabled = config["git"]["deploymentEnabled"]
-        self.assertIs(disabled["control/remote-implementation"], False)
-        self.assertIs(disabled["transport/*"], False)
-        self.assertIs(disabled["hardening/*"], False)
-        self.assertIs(disabled["docs/*"], False)
+        deployment = config["git"]["deploymentEnabled"]
+        self.assertEqual(
+            deployment,
+            {
+                "**": False,
+                "main": True,
+                "data/**": True,
+                "maintenance/**": True,
+            },
+        )
 
 
 if __name__ == "__main__":
