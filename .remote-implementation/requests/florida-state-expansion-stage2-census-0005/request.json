@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "florida-state-expansion-stage2-census-0005",
+  "school_key": "florida-state",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "d54b06feaf9182195c6f54a020b2f603a921cc10",
+  "previous_control_state_sha256": "c5b9f677b5837b3e660e66f3e6c56cd3651ffb7e0f070ab8885eb028ea6ba2eb",
+  "expected_protected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "f6333bd2f6e8c3c3e61719a6dfebc053844ca134",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "5f210b8e607b86988bfe00ffcb1404d644a2e089d89514d601f55a222fc1e95b"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-current-main-refresh-0003/successor-manifest.json",
+    "sha256": "d852918ccb4eeea2817a1056f87f07e5e6b3e9ed4be775f65310ef0d0b1f27c9"
+  },
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — fresh Stage 2 census replacement after request 0004 failed before durable acceptance because GitHub returned an Internal Server Error on the first control-ref CAS push.",
+    "authorization": "Existing owner-authorized Florida State Stage 2 persists unchanged. Failed run 45486347463 for census 0004 reached permanent runner execution but GitHub rejected the first control acceptance push with CONTROL_REF_CAS_FAILED / Internal Server Error; durable control remained IDLE at sequence 736, request 0004 remained unused, protected main and target remained unchanged, and no tracked basketball mutation occurred. This fresh request uses a new ID and exact current authority only; it does not replay 0004 or add historical, repair, Gate 1, release, Preview, merge, Owner Gate 2, or shared/global authority."
+  }
+}
