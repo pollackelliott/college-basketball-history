@@ -660,6 +660,7 @@ def project_administrative_status(
         "FORFEIT_LOSS": "FORFEIT",
         "FORFEIT_WIN": "FORFEIT",
         "FORFEITED_AFTER_PLAY": "FORFEIT",
+        "LATER_FORFEITED": "FORFEIT",
         "ADMIN_FORFEIT_BY_SOURCE_PROGRAM": "FORFEIT",
         "ADMIN_FORFEIT_TO_SOURCE_PROGRAM": "FORFEIT",
         "VACATED": "VACATED_GAME",
