@@ -1,0 +1,63 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 5,
+      "discrepancy": 6,
+      "identity": 1
+    },
+    "decision_count": 12,
+    "decision_fields": {
+      "game_date": 4,
+      "game_identity": 1,
+      "game_type": 2,
+      "result_winner_team_key": 1,
+      "score": 2,
+      "site_type": 2
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-SITE_TYPE",
+      "DISCREPANCY-FSU-EXP-S1-00104-SITE_TYPE"
+    ],
+    "warning_count": 1
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_warnings"
+    },
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 2,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0032437",
+          "fixed_confident_source_game_ids": [
+            "FSU-EXP-S1-00084"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "FSU-EXP-S1-00075"
+          ]
+        }
+      ],
+      "count": 1,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}
