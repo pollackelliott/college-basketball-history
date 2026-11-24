@@ -1,68 +1,59 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "florida-state-expansion-stage2-gate1-fill-0001",
-  "school_key": "florida-state",
-  "operation": "STAGE2_GATE1_FILL",
-  "previous_control_state_commit": "e57394542c78b8a9e13523b9a7cc63345268e86d",
-  "previous_control_state_sha256": "c71dea6d301d7e16cd93c3614c4c992c3f8e699687d530588e2fb464554247dd",
-  "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
-  "target_branch": "data/florida-state-onboarding",
-  "target_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0",
-  "stage2_proposal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-stage2-proposal-0002/checkpoint-manifest.json",
-    "sha256": "a7ad365536920a8ada3ef61f31767cd93072ce44911b5574771fbad152ebc1a1"
-  },
-  "stage2_proposal_verification": {
-    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-stage2-proposal-0002/stage2-proposal-rehearsal-verification.json",
-    "sha256": "392b6df96d4721ddd7ddb30732213dfece15dc0604d6d7b598723b1d82bd025f"
-  },
-  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
-  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
-  "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
-  "recommendation_map_sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd",
   "approved_plan_hash_preview": "f44364c2f2cde47722000022130f589780ebfb277d248e43ae66015d73b95a2d",
-  "owner_gate_1_approval": {
-    "approved": true,
-    "approval_basis": "Owner explicitly replied 'APPROVED. Proceed' on 2026-11-24 to the immediately preceding consolidated Florida State Owner Gate 1 packet for exact Stage 2 proposal florida-state-expansion-stage2-proposal-0002. The approved packet binds 12 decisions: one MATCH_CANONICAL:CBBG-0032433 for FSU-EXP-S1-00075, four NOT_APPLICABLE conditionals against distinct game CBBG-0032437, and seven USE_SOURCE dispositions covering the 1951 Ole Miss date, 1951 Georgia date, 1951 Florida neutral site classification, 1953 Miami 63-93 score, 1954 Florida date, and POSTSEASON classifications for the 1955 and 1956 Florida Intercollegiate Conference Championship games at Miami. This approves only those historical dispositions and the repository-defined mechanical Gate 1 fill -> pre-seal -> seal -> sealed apply sequence. It does not waive the proposal checkpoint's separate site-completeness diagnostics, authorize new Research or shared/global basketball mutation, or approve release, Preview, Owner Gate 2, merge, or Production.",
-    "proposal_checkpoint_sha256": "a7ad365536920a8ada3ef61f31767cd93072ce44911b5574771fbad152ebc1a1",
-    "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
-    "recommendation_map_sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd",
-    "approved_plan_hash_preview": "f44364c2f2cde47722000022130f589780ebfb277d248e43ae66015d73b95a2d"
-  },
-  "phase_continuation": {
-    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
-    "preseal_request_id": "florida-state-expansion-stage2-preseal-0001",
-    "seal_request_id": "florida-state-expansion-stage2-gate1-seal-0001",
-    "apply_request_id": "florida-state-expansion-stage2-sealed-apply-0001"
-  },
   "authority": {
-    "expansion_phase0": false,
-    "expansion_rebootstrap_from_freeze": false,
-    "owner_gate_1": true,
+    "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
-    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": true,
+    "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
+    "stage2_preseal_rehearsal": true,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Same serialized Florida State ALL_HISTORY_EXPANSION Implementation lane — explicit Owner Gate 1 approval of independently verified proposal 0002.",
-    "authorization": "Owner 'APPROVED. Proceed' on the exact 12-decision Florida State Gate 1 packet. Carry forward unchanged exact historical authority through guarded fill -> fresh verification -> pre-seal -> fresh verification -> cryptographic seal -> fresh verification -> sealed apply -> independent verification. Separate site-completeness failures remain nonwaivable; stop automatically if pre-seal is BLOCKED. Stop before release preparation or Owner Gate 2."
-  }
+    "authorization": "phase-persistent owner/Control Center authority inherited from florida-state-expansion-stage2-gate1-fill-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "c580df715adfb6dbad0397626c11cf34cf8bbdff1552dd1c7311d5f7aa23168b",
+  "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+  "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "filled_review_sha256": "e625d684949fbc37fd7aa50688c7ec7927b96bddd446b8a636ac57f789384061",
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "phase_continuation": {
+    "apply_request_id": "florida-state-expansion-stage2-sealed-apply-0001",
+    "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
+    "preseal_request_id": "florida-state-expansion-stage2-preseal-0001",
+    "seal_request_id": "florida-state-expansion-stage2-gate1-seal-0001"
+  },
+  "previous_control_state_commit": "21188a0b07efcbd462bc647661192d8ef865fe14",
+  "previous_control_state_sha256": "b868289f9f95984f93b8e2de97c586c529a64b8c8d3521c54b343b7524a7797a",
+  "recommendation_map_sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd",
+  "request_id": "florida-state-expansion-stage2-preseal-0001",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "stage2_gate1_fill_checkpoint": {
+    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
+    "sha256": "8fb380e14a0a617d894da4a4407132c02c58f18d10080f690af8c907c32a9d73"
+  },
+  "stage2_gate1_fill_verification": {
+    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
+    "sha256": "6238d332c4c8a25b9642ba96faec6fd991e6d3ca3fa1f55854d2162356c06186"
+  },
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0"
 }
