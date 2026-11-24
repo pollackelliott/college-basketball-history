@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "811b32866ec2cfc7b789d1767d78e6a91c8453e578d40cc88b5be1d370e46618",
+    "implementation-stage2-status.json": "1e437b83358d94ca15663f1ba8eeeeedcf59ba981d8b8f1a5dc1d18fcb4a8602",
+    "plan.json": "b9a8c18e9fd9602eddf7319dd1cd4a4905ea953ee8c35950dd9ebff5758cd107",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "63ea69eff699d0ecae001091f2d8ae081758411eedc8085e6a8cffb5ffadd8e2"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "811b32866ec2cfc7b789d1767d78e6a91c8453e578d40cc88b5be1d370e46618",
+    "implementation-stage2-status.json": "dbbbf997e590cba4eceac4a3e2f515dae929a90d093024e1c7104764543ecf4a",
+    "plan.json": "d1c72beded58f7e1c2ec77e27992220e0c5214018fa8675525d03f14810ff566",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "b0e8a27ba52cf77990fc87fa4ad054067001394297c997a0a3bac9b00d5c1f2e"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "florida-state-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "f2b39e222ca4ef33ff351bf4e74e3a246e3c3874",
+  "target_tree_sha": "ffeed1e8ca7d0eb1f625413232ef3b9309459bd4",
+  "tracked_stage2_mutation": "NONE"
+}
