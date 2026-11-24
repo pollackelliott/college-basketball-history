@@ -1,0 +1,32 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "814eb6d57110a27744aadc3766f0053e81709987",
+  "merge_parent_onboarding": "0cd6db88db745394151014c23d82105ef910b46d",
+  "merge_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "owner_gate_2_approval_checkpoint_sha256": "9379692931ecb34752576583074ed689eef4e7c4deb6dea2d5a2b477638dbf40",
+  "owner_gate_2_verification_sha256": "362761dfb7a262ad90401dc06ef00ffd69974c6542776e0e8e8857f746599197",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "pr_number": 695,
+  "production_deployment_id": 8016588943,
+  "production_deployment_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/cincinnati.json",
+    "/data/teams/florida.json",
+    "/data/teams/georgia.json",
+    "/data/teams/maryland.json",
+    "/data/teams/miami.json",
+    "/data/teams/ohio-state.json",
+    "/data/teams/pittsburgh.json",
+    "/data/teams/usc.json",
+    "/data/teams/villanova.json",
+    "/data/teams/wake-forest.json"
+  ],
+  "production_json_checked_count": 12,
+  "school_key": "miami",
+  "status": "COMPLETE"
+}

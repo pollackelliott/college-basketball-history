@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "814eb6d57110a27744aadc3766f0053e81709987",
+  "merge_parent_onboarding": "0cd6db88db745394151014c23d82105ef910b46d",
+  "merge_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "9379692931ecb34752576583074ed689eef4e7c4deb6dea2d5a2b477638dbf40",
+  "owner_gate_2_verification_sha256": "362761dfb7a262ad90401dc06ef00ffd69974c6542776e0e8e8857f746599197",
+  "pr_head_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "pr_number": 695,
+  "production_deployment_id": 8016588943,
+  "production_json_checked_count": 12,
+  "production_proof": true,
+  "production_proof_sha256": "d59c64ac7b23947303505cbdf1dfb23ee08020d621acb0e060340da0b9eea349",
+  "protected_main_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "request_id": "miami-expansion-release-production-proof-0001",
+  "request_sha256": "7d61c3ee433983c1a7eb99d4ef1aed01b6fe9e2315930772844eb9a1557e63b6",
+  "schema_version": 1,
+  "school_key": "miami",
+  "status": "PRODUCTION_PROOF_PASS"
+}

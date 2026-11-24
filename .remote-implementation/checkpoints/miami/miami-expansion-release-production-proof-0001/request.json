@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "miami-expansion-release-production-proof-0001",
+  "school_key": "miami",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "0f380c2e0b024152776dedbefc13493c0ddc382a",
+  "previous_control_state_sha256": "c11480727e3120c8707455e710ad3d8f0a4a20be6c63e8788b7e6993dc34f61c",
+  "expected_protected_main_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "9379692931ecb34752576583074ed689eef4e7c4deb6dea2d5a2b477638dbf40"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "362761dfb7a262ad90401dc06ef00ffd69974c6542776e0e8e8857f746599197"
+  },
+  "pr_number": 695,
+  "merge_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same Miami (FL) ALL_HISTORY_EXPANSION final release after explicit Owner Gate 2 and independently verified exact connector merge packet.",
+    "authorization": "Owner expressly said 'approved. Proceed' for exact PR #695 Preview, followed by fresh Gate 2 PASS and exact two-parent merge. Read-only Production proof only; no other mutation."
+  }
+}
