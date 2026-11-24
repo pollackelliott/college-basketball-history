@@ -776,7 +776,7 @@
     "florida-state-expansion-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
-  "active_lock_commit": null,
+  "active_lock_commit": "11fcb743e7c5e28e8309006b904131aed269a7e6",
   "active_lock_owner": "github-actions:45491568837:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
