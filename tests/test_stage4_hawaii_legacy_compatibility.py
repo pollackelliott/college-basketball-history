@@ -103,6 +103,32 @@ class Stage4HawaiiLegacyCompatibilityTests(unittest.TestCase):
             [],
         )
 
+    def test_hawaii_later_forfeited_projects_to_forfeit_without_changing_played_loss(self):
+        row = self.legacy_row(
+            administrative_status="LATER_FORFEITED",
+            on_court_result="L",
+            score_for="75",
+            score_against="91",
+            source_raw_line="D 29 vs. Kent State% L 75-91",
+        )
+        status, note = project_administrative_status(row)
+        self.assertEqual(status, "FORFEIT")
+        self.assertIn("played_result=L", note)
+        self.assertIn("score=75-91", note)
+        games, defects = author._projection(
+            [row], self.opponents(), [], school_key="hawai-i"
+        )
+        self.assertEqual(defects, [])
+        self.assertEqual(games[0]["administrative_status"], "FORFEIT")
+        self.assertEqual(games[0]["played_result"], "L")
+        self.assertEqual(games[0]["team_score"], "75")
+        self.assertEqual(games[0]["opponent_score"], "91")
+        self.assertIn("75-91", games[0]["administrative_note"])
+        self.assertEqual(
+            compare_parent_semantics([row], games, [], school_key="hawai-i"),
+            [],
+        )
+
     def test_legacy_vacated_win_gets_deterministic_note_only_for_legacy_shape(self):
         row = self.legacy_row(administrative_status="VACATED_WIN")
         status, note = project_administrative_status(row)
