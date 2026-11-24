@@ -1,0 +1,2 @@
+research_game_id,season_label,game_date,source_opponent_label,played_result,team_score,opponent_score,game_type,site_type,source,source_locator,status,notes
+GONZAGA-EXP-1907-08-001,1907-08,1907-12-16,Washington State,L,18,21,REGULAR_SEASON,SOURCE_PROGRAM_HOME,Washington State 2026 men's basketball record book,"1907-08: Dec. 16 at Gonzaga, WSU W 21-18",ACCEPTED_RECIPROCAL_STAGE1,H/A is source-explicit from WSU 'at Gonzaga'; no venue inferred.
