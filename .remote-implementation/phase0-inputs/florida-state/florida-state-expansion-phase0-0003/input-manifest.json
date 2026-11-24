@@ -1,0 +1,21 @@
+{
+  "expected_target_predecessor_sha": "b8782d618711169759b178613c2ebc2af611b8a8",
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "request_id": "florida-state-expansion-phase0-0003",
+  "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "research_freeze_sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "91bb53eb7af209c9cdc385994e3b1d5fa470cfc1188a5471a3eba97d725ad506",
+    "integration-freeze.json": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+    "phase0-preview.json": "15dcc6f1f8e3fae7bc94332998d13f44bb1799cc165a19eaf27ba9c6ec4b13d0",
+    "stage1-independent-proof.json": "487618aaf125c9c6def54f25870bb20617b58166f5fecfc87b440e0ebf0d4867"
+  },
+  "stage1_control_authority_sha": "deae0a9e03d0ded10f0bd50f7cb571079351b21c",
+  "stage1_independent_proof_sha256": "487618aaf125c9c6def54f25870bb20617b58166f5fecfc87b440e0ebf0d4867",
+  "venue_reconciliation_sha256": ""
+}
