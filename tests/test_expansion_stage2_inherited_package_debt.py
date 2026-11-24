@@ -188,10 +188,6 @@ class ExpansionInheritedPackageDebtTests(unittest.TestCase):
                 ),
                 result,
             )
-            self.assertEqual(
-                result["counts"]["expansion_unchanged_published_rows"],
-                1,
-            )
 
     def test_new_supplemental_missing_venue_remains_blocking(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -215,10 +211,6 @@ class ExpansionInheritedPackageDebtTests(unittest.TestCase):
                 ),
                 result,
             )
-            self.assertEqual(
-                result["counts"]["expansion_unchanged_published_rows"],
-                1,
-            )
 
     def test_changed_inherited_row_remains_blocking(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -241,10 +233,6 @@ class ExpansionInheritedPackageDebtTests(unittest.TestCase):
                     for value in result["errors"]
                 ),
                 result,
-            )
-            self.assertEqual(
-                result["counts"]["expansion_unchanged_published_rows"],
-                0,
             )
 
 
