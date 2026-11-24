@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_ALL_HISTORY_EXPANSION_STAGE1_ACTIVE_V3",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "accepted_top_level_scope": "1958-59+",
+  "accepted_program_inception_season": "1907-08",
+  "inception_authority": "OWNER_ACCEPTED_OPTION_A",
+  "expansion_required_seasons": {
+    "start": "1907-08",
+    "end": "1957-58",
+    "count": 51
+  },
+  "official_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "accepted_stage1_identified_game_count": 84,
+  "accepted_source_families": [
+    {
+      "family": "Washington State reciprocal historical series",
+      "rows": 84,
+      "seasons_with_rows": 45,
+      "gonzaga_wins": 25,
+      "gonzaga_losses": 59,
+      "status": "ACCEPTED"
+    }
+  ],
+  "blocking_residuals": [],
+  "historical_core_data_changed": false,
+  "next_bounded_unit": "Harvest one additional high-yield authoritative reciprocal opponent family and mechanically deduplicate/reconcile it against the accepted WSU family and official season aggregates."
+}
