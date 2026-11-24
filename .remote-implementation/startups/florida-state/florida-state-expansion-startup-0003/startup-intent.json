@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
+  "startup_id": "florida-state-expansion-startup-0003",
+  "phase0_request_id": "florida-state-expansion-phase0-0003",
+  "school_key": "florida-state",
+  "expected_protected_main_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "b8782d618711169759b178613c2ebc2af611b8a8",
+  "research_freeze_sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
+  "expansion_research_checkpoint": {
+    "sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
+    "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "9e235c2b7ddd297043f435d8a56be22658e7d64a",
+      "path_prefix": ".remote-implementation/transports/florida-state/florida-state-expansion-startup-0003/freeze.part-",
+      "part_count": 8
+    }
+  },
+  "creation_provenance": {
+    "origin": "Same owner-authorized Florida State ALL_HISTORY_EXPANSION initial Implementation phase, resumed after startup 0002 stopped before child request publication on generic expansion venue-guard alias handling.",
+    "authorization": "Existing owner startup-phase authority persists through deterministic safe recovery. Generic tooling repairs PR #698 and PR #701 are merged in protected main. This replacement startup uses fresh exact current-main binding and fresh child request ID; it authorizes only acceptance, current-main Stage 1 reproduction and proof, Integration Freeze, disposable Phase 0 preview, ordinary guarded EXPANSION_PHASE0, and independent fresh verification. No new Research, shared/global basketball maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, or merge authority."
+  }
+}
