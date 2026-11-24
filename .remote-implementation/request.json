@@ -10,52 +10,39 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from florida-state-expansion-stage2-current-main-refresh-0004",
+    "authorization": "phase-persistent owner/Control Center authority inherited from florida-state-expansion-stage2-census-0007",
     "origin": "repository-owned Stage 2 phase continuation"
   },
+  "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
   "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
   "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-phase0-0003/successor-manifest.json",
-    "sha256": "5f210b8e607b86988bfe00ffcb1404d644a2e089d89514d601f55a222fc1e95b"
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "476fe79401a0611314897f8f7ebb5cd99c7fbdb5",
+  "previous_control_state_sha256": "a04e2284bbdc1554da5e17d04db187cb43af332e26551c2580fc3b0b514b36ed",
+  "recommendation_map": {
+    "path": ".remote-implementation/payloads/florida-state/florida-state-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd"
   },
-  "phase_continuation": {
-    "census_request_id": "florida-state-expansion-stage2-census-0007",
-    "expected_decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "florida-state-expansion-stage2-proposal-0002",
-    "recommendation_map": {
-      "path": ".remote-implementation/payloads/florida-state/florida-state-expansion-stage2-proposal-0001/recommendation-map.json",
-      "sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd"
-    }
-  },
-  "previous_control_state_commit": "f780611168987dc43e2f160b99c8b89ef55ef474",
-  "previous_control_state_sha256": "ad5d8eca6a5a27b071219bd4be1635a869cad4019563e84615b2fcb8888d56e0",
-  "request_id": "florida-state-expansion-stage2-census-0007",
+  "request_id": "florida-state-expansion-stage2-proposal-0002",
   "schema_version": 1,
   "school_key": "florida-state",
   "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-current-main-refresh-0004/successor-manifest.json",
-    "sha256": "8eacc94edd82f54cb717738dffdec55015e6799e49d0dae715f7bfc71df48c15"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "f227794be23d41f29c664f7942353d2fdf585847c7e54e6d44de99e0c26b323a"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-stage2-census-0007/checkpoint-manifest.json",
+    "sha256": "6e7ce402852310b03d5896ccff34f09753e41d0354600d46aaecbfade3239849"
   },
   "target_branch": "data/florida-state-onboarding",
   "target_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0"
