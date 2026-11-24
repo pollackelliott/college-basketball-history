@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_WASHINGTON_IDAHO_STATE_SOURCE_LIMITS_V1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "parent_checkpoint_sha": "30a0d24151d5c07feebc6b848a493e96ac7005d6",
+  "families": [
+    {
+      "family": "Washington",
+      "source": "Washington 2022-23 Men's Basketball Game Notes vs Gonzaga — Series History",
+      "source_url": "https://gohuskies.com/documents/download/2022/12/7/UW_MBB_GameNotes_22-23_Gonzaga.pdf",
+      "existing_rows_before_tranche": 3,
+      "new_rows": 23,
+      "total_pre_baseline_rows_after_tranche": 26,
+      "accepted_span": "1909-10 through 1944-45",
+      "completeness_basis": "Washington's current game-notes Series History enumerates every Washington-Gonzaga meeting in chronological order. Exactly 26 occur before Gonzaga's 1958-59 baseline; the next meeting is 1971-01-30.",
+      "source_fields": "Exact date, Washington H/A, Washington result, exact score.",
+      "screenshot_status": "Successfully visually verified with the required PDF screenshot on page 5."
+    },
+    {
+      "family": "Idaho State",
+      "source": "Idaho State University Athletics — Men's Basketball Year by Year Results",
+      "source_url": "https://isubengals.com/sports/2014/6/18/MBB_0618144002.aspx?id=214",
+      "new_rows": 5,
+      "accepted_span": "1954-55 through 1956-57",
+      "completeness_basis": "Current Idaho State year-by-year results show two Gonzaga games in 1954-55, two in 1955-56, one in 1956-57, and no Gonzaga game in the 1957-58 table. Earlier 1952-54 tables likewise show none.",
+      "source_fields": "Exact date, result, score, and explicit at/no-at source convention."
+    }
+  ],
+  "note": "No aggregate series total is converted into anonymous games."
+}
