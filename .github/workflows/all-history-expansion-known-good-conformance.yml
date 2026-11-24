@@ -10,14 +10,22 @@ on:
       - '.github/workflows/all-history-expansion-known-good-conformance.yml'
   workflow_dispatch:
 
+concurrency:
+  group: all-history-expansion-known-good-conformance-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
 jobs:
-  known-good-conformance:
+  known-good-witness:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event.pull_request.head.repo.full_name == github.repository
+    strategy:
+      fail-fast: false
+      matrix:
+        school: [vcu, arizona-state, houston, ucf]
     runs-on: ubuntu-latest
     steps:
       - name: Check out durable control authority
@@ -41,8 +49,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Replay VCU, Arizona State, Houston, and UCF
+      - name: Replay ${{ matrix.school }}
         shell: bash
+        env:
+          WITNESS_SCHOOL: ${{ matrix.school }}
         run: |
           set -euo pipefail
           control_commit="$(git -C control rev-parse HEAD)"
@@ -51,34 +61,48 @@ jobs:
             --control-repo control \
             --runtime-repo candidate \
             --control-commit "$control_commit" \
-            --diag /tmp/all-history-expansion-known-good-conformance \
-            --json-out /tmp/all-history-expansion-known-good-conformance/summary.json
+            --school "$WITNESS_SCHOOL" \
+            --diag "/tmp/all-history-expansion-known-good-conformance/$WITNESS_SCHOOL" \
+            --json-out "/tmp/all-history-expansion-known-good-conformance/$WITNESS_SCHOOL/summary.json"
           python - <<'PY'
           import json
+          import os
           from pathlib import Path
 
+          school = os.environ['WITNESS_SCHOOL']
           summary = json.loads(
-              Path('/tmp/all-history-expansion-known-good-conformance/summary.json').read_text()
+              Path(
+                  '/tmp/all-history-expansion-known-good-conformance'
+                  f'/{school}/summary.json'
+              ).read_text()
           )
           assert summary['status'] == 'PASS', summary
-          assert summary['witness_count'] == 4, summary
-          assert [row['school_key'] for row in summary['witnesses']] == [
-              'vcu', 'arizona-state', 'houston', 'ucf'
-          ], summary
-          assert all(
-              row.get('tracked_stage2_mutation') == 'NONE'
-              for row in summary['witnesses']
-          ), summary
-          print('ALL_HISTORY_EXPANSION_KNOWN_GOOD_CONFORMANCE=PASS')
+          assert summary['witness_count'] == 1, summary
+          assert [row['school_key'] for row in summary['witnesses']] == [school], summary
+          assert summary['witnesses'][0].get('tracked_stage2_mutation') == 'NONE', summary
+          print('ALL_HISTORY_EXPANSION_KNOWN_GOOD_WITNESS=PASS')
+          print('WITNESS_SCHOOL=' + school)
           print('CONTROL_COMMIT=' + summary['control_commit'])
           print('RUNTIME_COMMIT=' + summary['runtime_commit'])
           PY
           test "$(git -C candidate rev-parse HEAD)" = "$candidate_commit"
 
-      - name: Upload conformance diagnostics
+      - name: Upload witness diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: all-history-expansion-known-good-conformance
-          path: /tmp/all-history-expansion-known-good-conformance
+          name: all-history-expansion-known-good-conformance-${{ matrix.school }}
+          path: /tmp/all-history-expansion-known-good-conformance/${{ matrix.school }}
           if-no-files-found: warn
+
+  known-good-conformance:
+    if: always()
+    needs: known-good-witness
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require all four authenticated witnesses
+        env:
+          MATRIX_RESULT: ${{ needs.known-good-witness.result }}
+        run: |
+          test "$MATRIX_RESULT" = "success"
+          echo 'ALL_HISTORY_EXPANSION_KNOWN_GOOD_CONFORMANCE=PASS'
