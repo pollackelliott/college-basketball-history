@@ -132,6 +132,26 @@ class CandidateRuntimeDecisionUniverseTests(unittest.TestCase):
             )
 
 
+    def test_repaired_nonempty_universe_need_not_equal_blocked_empty_universe(self):
+        blocked_empty_universe = (
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        )
+        repaired_universe = "a" * 64
+        repaired = {
+            "status": {
+                "preflight": {
+                    "decision_count": 12,
+                    "decision_universe_sha256": repaired_universe,
+                }
+            }
+        }
+        self.assertEqual(
+            candidate_census_decision_universe(repaired),
+            repaired_universe,
+        )
+        self.assertNotEqual(repaired_universe, blocked_empty_universe)
+
+
 class CandidateRuntimeClassificationTests(unittest.TestCase):
     def test_gate1_ready_is_terminal_success(self):
         self.assertEqual(
@@ -325,7 +345,77 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             workflow,
         )
         self.assertIn(
+            "scratch_branch = (",
+            workflow,
+        )
+        self.assertIn(
+            "['git', '-C', str(candidate), 'branch', '-D', scratch_branch]",
+            workflow,
+        )
+        self.assertIn(
             "baseline_blockers <= candidate_blockers",
+            workflow,
+        )
+        self.assertIn(
+            "int(preflight.get('warning_count', -1)) < 0",
+            workflow,
+        )
+        self.assertNotIn(
+            "int(preflight.get('warning_count', -1)) != 0",
+            workflow,
+        )
+        self.assertIn(
+            "verify_census_and_freeze_authority(",
+            workflow,
+        )
+        self.assertIn(
+            "run_normalizer_dry_run(",
+            workflow,
+        )
+        self.assertIn(
+            "classification = 'RESOLVED_BY_OPPONENT_REPRESENTATION'",
+            workflow,
+        )
+        self.assertIn(
+            "'accepted_legacy_warnings': repair_authority[",
+            workflow,
+        )
+        self.assertIn(
+            "baseline_decision_count == 0",
+            workflow,
+        )
+        self.assertIn(
+            "repaired_decision_count > 0",
+            workflow,
+        )
+        self.assertIn(
+            "repaired_universe != baseline_universe",
+            workflow,
+        )
+        self.assertIn(
+            "repeated_universe == repaired_universe",
+            workflow,
+        )
+        self.assertIn(
+            "repeated_stage2['artifact_normalized_sha256']",
+            workflow,
+        )
+        self.assertIn(
+            "== 'CAPABILITY_CENSUS_READY'",
+            workflow,
+        )
+        self.assertIn(
+            "list(repaired_plan.get('warnings') or [])",
+            workflow,
+        )
+        self.assertNotIn(
+            "int(repaired_preflight.get('decision_count', 0) or 0)\n"
+            "                      == baseline_decision_count",
+            workflow,
+        )
+        self.assertNotIn(
+            "repaired_preflight.get('decision_universe_sha256')\n"
+            "                      == baseline_universe",
             workflow,
         )
         self.assertIn(
