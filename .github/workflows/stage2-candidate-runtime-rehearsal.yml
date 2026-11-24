@@ -445,6 +445,7 @@ jobs:
               verify_census_and_freeze_authority,
           )
           from stage2_candidate_runtime_rehearsal import (
+              candidate_census_decision_universe,
               candidate_changed_paths,
               validate_candidate_scope,
           )
@@ -635,6 +636,70 @@ jobs:
                           tool_repo=candidate,
                       )
                       repaired_stage2 = stage2_result_summary(regenerated)
+                      repaired_universe = candidate_census_decision_universe(
+                          regenerated
+                      )
+                      assert len(repaired_universe) == 64
+                      assert all(
+                          ch in '0123456789abcdef'
+                          for ch in repaired_universe
+                      ), repaired_universe
+                      repaired_plan = json.loads(
+                          (
+                              repair_worktree
+                              / '.onboarding'
+                              / request['school_key']
+                              / 'plan.json'
+                          ).read_text()
+                      )
+                      accepted_warnings = repair_authority[
+                          'accepted_legacy_warnings'
+                      ]
+                      assert (
+                          list(repaired_plan.get('warnings') or [])
+                          == accepted_warnings
+                      ), repaired_plan.get('warnings')
+                      assert (
+                          list(
+                              (repaired_plan.get('package') or {}).get(
+                                  'warnings'
+                              )
+                              or []
+                          )
+                          == accepted_warnings
+                      ), (repaired_plan.get('package') or {}).get('warnings')
+
+                      repeated = post_repair_stage2_result(
+                          repair_worktree,
+                          request['school_key'],
+                          repair_authority['freeze_bytes'],
+                          repair_diag / 'determinism-repeat',
+                          tool_repo=candidate,
+                      )
+                      repeated_stage2 = stage2_result_summary(repeated)
+                      repeated_universe = candidate_census_decision_universe(
+                          repeated
+                      )
+                      assert repeated_universe == repaired_universe, (
+                          repeated_universe,
+                          repaired_universe,
+                      )
+                      assert (
+                          repeated_stage2['stage2_status']
+                          == repaired_stage2['stage2_status']
+                      ), repeated_stage2
+                      assert (
+                          repeated_stage2['warning_count']
+                          == repaired_stage2['warning_count']
+                      ), repeated_stage2
+                      assert (
+                          repeated_stage2['decision_count']
+                          == repaired_stage2['decision_count']
+                      ), repeated_stage2
+                      assert (
+                          repeated_stage2['artifact_normalized_sha256']
+                          == repaired_stage2['artifact_normalized_sha256']
+                      ), repeated_stage2
                   finally:
                       subprocess.run(
                           [
@@ -648,36 +713,35 @@ jobs:
                   repaired_preflight = repaired_status.get('preflight') or {}
                   repaired_blockers = set(repaired_status.get('blockers') or [])
                   assert (
+                      baseline_warning_count
+                      == len(repair_authority['accepted_legacy_warnings'])
+                  ), repair_authority['accepted_legacy_warnings']
+                  assert (
                       int(repaired_preflight.get('warning_count', 0) or 0)
-                      == baseline_warning_count
+                      == len(repair_authority['accepted_legacy_warnings'])
                   ), repaired_preflight
-                  assert (
-                      int(repaired_preflight.get('decision_count', 0) or 0)
-                      == baseline_decision_count
-                  ), repaired_preflight
-                  assert (
-                      repaired_preflight.get('decision_universe_sha256')
-                      == baseline_universe
-                  ), repaired_preflight
+                  repaired_decision_count = int(
+                      repaired_preflight.get('decision_count', 0) or 0
+                  )
+                  if (
+                      baseline_decision_count == 0
+                      and repaired_decision_count > 0
+                  ):
+                      assert repaired_universe != baseline_universe, (
+                          repaired_universe,
+                          baseline_universe,
+                      )
                   repaired_proof = repaired_stage2['tracked_mutation_proof']
                   assert (
                       repaired_proof.get('tracked_stage2_mutation') == 'NONE'
                   ), repaired_proof
-                  if repaired_stage2['stage2_status'] == 'CAPABILITY_CENSUS_READY':
-                      assert not repaired_blockers, repaired_blockers
-                      classification = 'RESOLVED_BY_OPPONENT_REPRESENTATION'
-                  else:
-                      assert (
-                          repaired_stage2['stage2_status'] == 'BLOCKED'
-                      ), repaired_stage2
-                      assert repaired_blockers, repaired_blockers
-                      assert not (
-                          baseline_blockers & repaired_blockers
-                      ), {
-                          'baseline_blockers': sorted(baseline_blockers),
-                          'repaired_blockers': sorted(repaired_blockers),
-                      }
-                      classification = 'ADVANCED_BY_OPPONENT_REPRESENTATION'
+                  assert (
+                      repaired_stage2['stage2_status']
+                      == 'CAPABILITY_CENSUS_READY'
+                  ), repaired_stage2
+                  assert repaired_stage2['blocker_count'] == 0, repaired_stage2
+                  assert not repaired_blockers, repaired_blockers
+                  classification = 'RESOLVED_BY_OPPONENT_REPRESENTATION'
                   opponent_representation_rehearsal = {
                       'blocker_keys': repair_authority['blocker_keys'],
                       'accepted_legacy_warnings': repair_authority[
@@ -686,6 +750,7 @@ jobs:
                       'field_level_proof': field_proof,
                       'post_repair_stage2': repaired_stage2,
                       'post_repair_blockers': sorted(repaired_blockers),
+                      'post_repair_decision_universe_sha256': repaired_universe,
                   }
               else:
                   classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'
