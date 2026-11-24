@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_ALL_HISTORY_EXPANSION_STAGE1_ACTIVE_V9",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "fd1b5dca8e6e66e13aa68b8b24a5582fdc75a7e5",
+  "accepted_top_level_scope": "1958-59+",
+  "accepted_program_inception_season": "1907-08",
+  "expansion_required_seasons": {
+    "start": "1907-08",
+    "end": "1957-58",
+    "count": 51
+  },
+  "official_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "identified_game_count": 276,
+  "known_result_game_count": 276,
+  "aggregate_minus_identified_diagnostic": 701,
+  "active_discrepancy_research_blocker_count": 0,
+  "research_exhausted_closeout_debt_count": 3,
+  "research_exhausted_closeout_debts": [
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1915-16",
+      "identified_state": "0-8 / 8 currently identified",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1936-37",
+      "identified_state": "3-4 / 7 identified vs target literal 1-5 / 6",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1937-38",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1937-38",
+      "identified_state": "0-6 / 6 identified vs target literal 0-4 / 4",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    }
+  ],
+  "accepted_source_families": [
+    {
+      "family": "Washington State reciprocal historical series",
+      "rows": 84,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Washington reciprocal all-time results",
+      "rows": 3,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Montana reciprocal opponent-series history",
+      "rows": 105,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Montana State official historical records",
+      "ledger_game_identities": 21,
+      "status": "ACCEPTED_AFTER_DISCREPANCY_TRANCHE"
+    },
+    {
+      "family": "Seattle University target-school opponent series",
+      "rows": 24,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Idaho official all-time results",
+      "rows": 39,
+      "seasons_or_source_blocks": 20,
+      "gonzaga_wins": 13,
+      "gonzaga_losses": 26,
+      "status": "ACCEPTED_BOUNDED_FAMILY_WITH_SOURCE_LAYOUT_LIMITS"
+    }
+  ],
+  "controlling_ledger": "stage1-identified-game-ledger-0008.csv",
+  "historical_core_data_changed": false,
+  "next_bounded_unit": "Harvest one additional high-yield authoritative family/systematic source opportunity against the 276-row ledger; do not reopen the three research-exhausted accounting contradictions absent genuinely new concrete evidence."
+}
