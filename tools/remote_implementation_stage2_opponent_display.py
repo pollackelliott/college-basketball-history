@@ -54,6 +54,17 @@ CURRENT_D1_BLOCKER_RES = (
     ),
 )
 ALLOWED_REPAIR_PATH_NAMES = ("opponents.csv", "source-games.csv")
+EXPANSION_FREEZE_KIND = "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE"
+EXPANSION_LEGACY_WARNING_RES = (
+    re.compile(
+        r"^[^:\r\n]+: normalized city/state must be both populated or both blank "
+        r"\(unchanged published legacy debt outside this expansion\)$"
+    ),
+    re.compile(
+        r"^[^:\r\n]+: curated venue .+ absent from venues\.csv "
+        r"\(unchanged published legacy debt outside this expansion\)$"
+    ),
+)
 RUNTIME_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -143,8 +154,9 @@ def verify_census_and_freeze_authority(
         raise Stop("STAGE2_OPPONENT_DISPLAY_CENSUS_NOT_PREFLIGHT_BLOCKED")
 
     preflight = manifest.get("preflight") or {}
-    if int(preflight.get("warning_count", -1)) != 0:
-        raise Stop("STAGE2_OPPONENT_DISPLAY_CENSUS_WARNINGS_PRESENT")
+    warning_count = int(preflight.get("warning_count", -1))
+    if warning_count < 0:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_CENSUS_WARNING_COUNT_INVALID")
     if int(preflight.get("decision_count", -1)) != 0:
         raise Stop("STAGE2_OPPONENT_DISPLAY_CENSUS_DECISIONS_PRESENT")
 
@@ -241,6 +253,34 @@ def verify_census_and_freeze_authority(
     if snapshot != request["semantic_snapshot_sha256"]:
         raise Stop("STAGE2_OPPONENT_DISPLAY_FREEZE_SEMANTIC_MISMATCH")
 
+    accepted_legacy_warnings: list[str] = []
+    if warning_count:
+        if freeze.get("kind") != EXPANSION_FREEZE_KIND:
+            raise Stop(
+                "STAGE2_OPPONENT_DISPLAY_WARNINGS_REQUIRE_EXPANSION_FREEZE"
+            )
+        plan_path = (checkpoint_dir / "plan.json").as_posix()
+        plan_bytes = git_show_bytes(control_commit, plan_path, cwd=source_repo)
+        expected_plan_sha = (manifest.get("artifact_sha256") or {}).get("plan.json")
+        if not expected_plan_sha or sha256_bytes(plan_bytes) != expected_plan_sha:
+            raise Stop("STAGE2_OPPONENT_DISPLAY_PLAN_HASH_MISMATCH")
+        plan = json.loads(plan_bytes)
+        warnings = list(plan.get("warnings") or [])
+        if len(warnings) != warning_count:
+            raise Stop("STAGE2_OPPONENT_DISPLAY_WARNING_COUNT_MISMATCH")
+        package_warnings = list((plan.get("package") or {}).get("warnings") or [])
+        if package_warnings != warnings:
+            raise Stop("STAGE2_OPPONENT_DISPLAY_PACKAGE_WARNING_MISMATCH")
+        for warning in warnings:
+            if not isinstance(warning, str) or not any(
+                pattern.fullmatch(warning)
+                for pattern in EXPANSION_LEGACY_WARNING_RES
+            ):
+                raise Stop(
+                    "STAGE2_OPPONENT_DISPLAY_UNSUPPORTED_WARNING:" + str(warning)
+                )
+        accepted_legacy_warnings = warnings
+
     return {
         "census_manifest": manifest,
         "census_manifest_bytes": manifest_bytes,
@@ -250,6 +290,7 @@ def verify_census_and_freeze_authority(
         "display_blocker_keys": population["display_blocker_keys"],
         "current_d1_blocker_keys": population["current_d1_blocker_keys"],
         "sync_current_d1": bool(population["current_d1_blocker_keys"]),
+        "accepted_legacy_warnings": accepted_legacy_warnings,
         "phase0_successor": phase0,
         "phase0_successor_bytes": phase0_bytes,
         "phase0_writeahead": writeahead,
