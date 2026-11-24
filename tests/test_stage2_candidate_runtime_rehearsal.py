@@ -320,6 +320,40 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
         )
 
 
+    def test_live_unaccepted_proposal_after_verified_census_is_rehearsed(self):
+        workflow = (
+            ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "mode = 'LIVE_PROPOSAL_AFTER_CENSUS'",
+            workflow,
+        )
+        self.assertIn(
+            "live_request.get('operation') != 'STAGE2_PROPOSAL_REHEARSAL'",
+            workflow,
+        )
+        self.assertIn(
+            "stage2_ref.get('sha256')",
+            workflow,
+        )
+        self.assertIn(
+            "verify_stage2_proposal_authority(",
+            workflow,
+        )
+        self.assertIn(
+            "run_stage2_proposal_tool(",
+            workflow,
+        )
+        self.assertIn(
+            "EXACT_LIVE_PROPOSAL_AFTER_CENSUS_REPLAY=PASS",
+            workflow,
+        )
+        self.assertIn(
+            'if [[ "$AUTHORITY_MODE" == "LIVE_PROPOSAL_AFTER_CENSUS" ]]',
+            workflow,
+        )
+
+
     def test_fresh_blocked_census_replays_candidate_before_specialized_repairs(self):
         workflow = (
             ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
