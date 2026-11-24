@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "florida-state-expansion-stage2-census-0001",
+  "request_id": "florida-state-expansion-stage2-current-main-refresh-0001",
   "school_key": "florida-state",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "006c7a9bbfb0b9b8de41e300d8be6d079c0626fa",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "previous_control_state_commit": "6a651aff89af91fd48d18025e843b18eb55bca77",
   "previous_control_state_sha256": "2f8bad0af38efcf73600e4a031f6b4ecabed46811a9369b9b4e851e88e3afcc0",
-  "expected_protected_main_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "expected_protected_main_sha": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
   "target_branch": "data/florida-state-onboarding",
   "target_sha": "ea3a0483e0847933471a90590ed88704038c8312",
   "phase0_successor": {
@@ -15,6 +15,11 @@
   },
   "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
   "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized Florida State ALL_HISTORY_EXPANSION Stage 2 phase. Exact merge base / Phase 0 protected-main parent is 848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d. Florida State target-only population from that base to ea3a0483e0847933471a90590ed88704038c8312 is 11 paths; intervening protected-main population to 6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9 is exactly 2 generic tooling/test paths (tools/remote_implementation_stage2_census.py and tests/test_remote_implementation_stage2_census.py); changed-path intersection is zero; protected main did not touch schools/florida-state or Florida State generated site paths. No historical/shared authority conflict."
+  },
   "authority": {
     "expansion_phase0": false,
     "expansion_rebootstrap_from_freeze": false,
@@ -29,8 +34,8 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
@@ -41,7 +46,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — owner-authorized Stage 2 technical/reconciliation phase.",
-    "authorization": "Owner explicitly said 'Proceed' after independently fresh-verified Florida State EXPANSION_PHASE0 florida-state-expansion-phase0-0003 at target ea3a0483e0847933471a90590ed88704038c8312. Stage 2 authority persists through census, policy-permitted deterministic representation repair when required, recommendation-map preparation/rehearsal, and OWNER_GATE_1_READY. This request performs only the permanent read-only STAGE2_CENSUS against the unchanged fresh-verified Phase 0 successor; it carries no tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, shared/global maintenance, merge, or Owner Gate 2 authority."
+    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — disjoint Stage 2 current-main refresh after generic Stage 2 venue-authentication tooling repair PR #702.",
+    "authorization": "Owner's explicit Florida State Stage 2 Proceed remains phase-persistent. The first census attempt failed before any Stage 2 checkpoint on a generic authority-consumer defect; PR #702 repaired only generic tooling/tests and advanced protected main. This request authorizes only the repository-owned disjoint current-main refresh and independent fresh verification. No stale decision universe or recommendation map is carried forward because the first census never completed. No Owner Gate 1 approval, fill/seal/apply, release, merge, Owner Gate 2, or unrelated historical/shared mutation is authorized."
   }
 }
