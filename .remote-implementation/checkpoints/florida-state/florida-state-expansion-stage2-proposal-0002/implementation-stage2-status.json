@@ -1,0 +1,145 @@
+{
+  "branch": "remote-stage2-census/florida-state-a5a9f180361f",
+  "capability_census": {
+    "path": ".onboarding/florida-state/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 4
+  },
+  "head_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0",
+  "integration_base_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "integration_semantic_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 5,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 5,
+      "discrepancy": 6,
+      "identity": 1
+    },
+    "decision_count": 12,
+    "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+    "discrepancies_to_add": 6,
+    "existing_game_matches": 2111,
+    "identity_cardinality_constraints": 1,
+    "new_canonical_games": 179,
+    "plan_path": ".onboarding/florida-state/plan.json",
+    "review_path": ".onboarding/florida-state/review.csv",
+    "warning_count": 1
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "MATCH_CANONICAL:CBBG-0032433": 1,
+      "NOT_APPLICABLE": 4,
+      "USE_SOURCE": 7
+    },
+    "approved_plan_hash_preview": "f44364c2f2cde47722000022130f589780ebfb277d248e43ae66015d73b95a2d",
+    "changed_path_count": 12
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "MATCH_CANONICAL:CBBG-0032433": 1,
+      "NOT_APPLICABLE": 4,
+      "USE_SOURCE": 7
+    },
+    "approved_plan_hash_preview": "f44364c2f2cde47722000022130f589780ebfb277d248e43ae66015d73b95a2d",
+    "decision_count": 12,
+    "path": "/tmp/remote-stage2-proposal-map-7_bg9xe1/recommendation-map.json",
+    "sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd"
+  },
+  "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 2,
+      "home_missing_location": 2,
+      "home_missing_venue": 2,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "lower_level_postseason_researched_nonblocking": 9,
+      "neutral_missing_venue": 131,
+      "postseason_missing_venue": 12,
+      "public_gap_rows": 136,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap": 2,
+      "strict_home_gap_rows": 2,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2292,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [
+      "2 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception or exact protected-main owner-authorized HOME locality exception. Ordinary research statuses remain nonwaivable."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "home_missing_location": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "home_missing_venue": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "lower_level_postseason_researched_nonblocking": [
+        "CBBG-0213126",
+        "CBBG-0213127",
+        "CBBG-0213128",
+        "CBBG-0213171",
+        "CBBG-0213173",
+        "CBBG-0213174",
+        "CBBG-0213195",
+        "CBBG-0213213",
+        "CBBG-0213214"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0001459",
+        "CBBG-0001549",
+        "CBBG-0009974",
+        "CBBG-0012657",
+        "CBBG-0016044",
+        "CBBG-0018172",
+        "CBBG-0018233",
+        "CBBG-0018572",
+        "CBBG-0018809",
+        "CBBG-0018835",
+        "CBBG-0018863",
+        "CBBG-0019204"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0131850",
+        "CBBG-0131883",
+        "CBBG-0131904",
+        "CBBG-0213126",
+        "CBBG-0213127",
+        "CBBG-0213128",
+        "CBBG-0213171",
+        "CBBG-0213173",
+        "CBBG-0213174",
+        "CBBG-0213195",
+        "CBBG-0213213",
+        "CBBG-0213214"
+      ],
+      "strict_home_gap": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ]
+    },
+    "path": ".onboarding/florida-state/last-rehearsal-site-gate.json",
+    "status": "FAIL"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}

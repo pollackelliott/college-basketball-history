@@ -1,0 +1,143 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 5,
+      "discrepancy": 6,
+      "identity": 1
+    },
+    "decision_count": 12,
+    "decision_fields": {
+      "game_date": 4,
+      "game_identity": 1,
+      "game_type": 2,
+      "result_winner_team_key": 1,
+      "score": 2,
+      "site_type": 2
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-FSU-EXP-S1-00075-CBBG-0032437-SITE_TYPE",
+      "DISCREPANCY-FSU-EXP-S1-00104-SITE_TYPE"
+    ],
+    "warning_count": 1
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 2,
+      "home_missing_location": 2,
+      "home_missing_venue": 2,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "lower_level_postseason_researched_nonblocking": 9,
+      "neutral_missing_venue": 131,
+      "postseason_missing_venue": 12,
+      "public_gap_rows": 136,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap": 2,
+      "strict_home_gap_rows": 2,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2292,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "home_missing_location": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "home_missing_venue": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "lower_level_postseason_researched_nonblocking": [
+        "CBBG-0213126",
+        "CBBG-0213127",
+        "CBBG-0213128",
+        "CBBG-0213171",
+        "CBBG-0213173",
+        "CBBG-0213174",
+        "CBBG-0213195",
+        "CBBG-0213213",
+        "CBBG-0213214"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0001459",
+        "CBBG-0001549",
+        "CBBG-0009974",
+        "CBBG-0012657",
+        "CBBG-0016044",
+        "CBBG-0018172",
+        "CBBG-0018233",
+        "CBBG-0018572",
+        "CBBG-0018809",
+        "CBBG-0018835",
+        "CBBG-0018863",
+        "CBBG-0019204"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0131850",
+        "CBBG-0131883",
+        "CBBG-0131904",
+        "CBBG-0213126",
+        "CBBG-0213127",
+        "CBBG-0213128",
+        "CBBG-0213171",
+        "CBBG-0213173",
+        "CBBG-0213174",
+        "CBBG-0213195",
+        "CBBG-0213213",
+        "CBBG-0213214"
+      ],
+      "strict_home_gap": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ]
+    },
+    "status": "FAIL"
+  },
+  "status": "PASS",
+  "topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_warnings"
+    },
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 2,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0032437",
+          "fixed_confident_source_game_ids": [
+            "FSU-EXP-S1-00084"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "FSU-EXP-S1-00075"
+          ]
+        }
+      ],
+      "count": 1,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 2,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    }
+  ]
+}

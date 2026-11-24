@@ -1,0 +1,257 @@
+{
+  "action_counts": {
+    "MATCH_CANONICAL:CBBG-0032433": 1,
+    "NOT_APPLICABLE": 4,
+    "USE_SOURCE": 7
+  },
+  "approved_plan_hash_preview": "f44364c2f2cde47722000022130f589780ebfb277d248e43ae66015d73b95a2d",
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "c7e4f83bc076e0838fdc122a3ed9f3fa6769e5222e27a4a76c56ac9549ff20a4",
+    "implementation-stage2-status.json": "c53902ed74416a64e0cc1a3a945d269a2d15da1bbae68ba3acf44b8997aedc42",
+    "last-rehearsal-site-gate.json": "149bf6fce4f1584cd2404495b774f17c6d012dce673b1f03bfea994e3d0be2b1",
+    "plan.json": "ab50df44818538b35775fba12d3a22f2daafaca96bd90ce03f33425bbeff97f0",
+    "review.csv": "42c74140598580fa62644e59e336a9a5fa774fa7d0c7d8eedc1a336a60ab5ae7",
+    "review.md": "ecad2a30049e36b5aa91a80b413d5d8138e7d67ba63a3e5a5c66585619011a99"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "c7e4f83bc076e0838fdc122a3ed9f3fa6769e5222e27a4a76c56ac9549ff20a4",
+    "implementation-stage2-status.json": "7c57331e640fdd80060679c5ed13a59547fdfe7e1229b8f0b4cfb2b770559de1",
+    "last-rehearsal-site-gate.json": "149bf6fce4f1584cd2404495b774f17c6d012dce673b1f03bfea994e3d0be2b1",
+    "plan.json": "715641ed7b9eb865b9d316cbc4aeea4b8cfc996047ceb782ee547972fa26d5d4",
+    "review.csv": "42c74140598580fa62644e59e336a9a5fa774fa7d0c7d8eedc1a336a60ab5ae7",
+    "review.md": "a22a422cbd90e5699d7009d58bb5d6e8d43389dcaa2b2fec2be229793f347f0a"
+  },
+  "authority_statement": "Read-only remote Stage 2 proposal rehearsal checkpoint. OWNER_GATE_1_READY means only that this exact recommendation map survived the permanent disposable rehearsal. No Owner Gate 1 approval, fill/seal/apply, Preview, merge, or release authority is included.",
+  "capability_census_status": "PASS",
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_warnings"
+    },
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 2,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0032437",
+          "fixed_confident_source_game_ids": [
+            "FSU-EXP-S1-00084"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "FSU-EXP-S1-00075"
+          ]
+        }
+      ],
+      "count": 1,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    },
+    {
+      "classification": "UNCLASSIFIED_CAPABILITY_OR_HISTORY",
+      "count": 2,
+      "examples": [],
+      "topology": "strict_home_gap_rows"
+    }
+  ],
+  "changed_path_count": 12,
+  "command_exit_code": 0,
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+    "runtime_decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "florida-state",
+    "--map",
+    "<MAP>"
+  ],
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 5,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 5,
+      "discrepancy": 6,
+      "identity": 1
+    },
+    "decision_count": 12,
+    "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+    "discrepancies_to_add": 6,
+    "existing_game_matches": 2111,
+    "identity_cardinality_constraints": 1,
+    "new_canonical_games": 179,
+    "plan_path": ".onboarding/florida-state/plan.json",
+    "review_path": ".onboarding/florida-state/review.csv",
+    "warning_count": 1
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "MATCH_CANONICAL:CBBG-0032433": 1,
+      "NOT_APPLICABLE": 4,
+      "USE_SOURCE": 7
+    },
+    "approved_plan_hash_preview": "f44364c2f2cde47722000022130f589780ebfb277d248e43ae66015d73b95a2d",
+    "changed_path_count": 12
+  },
+  "protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "recommendation_map": {
+    "action_counts": {
+      "MATCH_CANONICAL:CBBG-0032433": 1,
+      "NOT_APPLICABLE": 4,
+      "USE_SOURCE": 7
+    },
+    "approved_plan_hash_preview": "f44364c2f2cde47722000022130f589780ebfb277d248e43ae66015d73b95a2d",
+    "decision_count": 12,
+    "path": "/tmp/remote-stage2-proposal-map-7_bg9xe1/recommendation-map.json",
+    "sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd"
+  },
+  "recommendation_map_checkpoint_path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-stage2-proposal-0002/recommendation-map.json",
+  "recommendation_map_request_path": ".remote-implementation/payloads/florida-state/florida-state-expansion-stage2-proposal-0001/recommendation-map.json",
+  "recommendation_map_sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd",
+  "request_id": "florida-state-expansion-stage2-proposal-0002",
+  "request_sha256": "4080b052cabc158e2fe0dd2a6290eef5cce85b43c07bb34aa80ae6b687d69682",
+  "runtime_commit_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "runtime_decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+  "runtime_tool_manifest_sha256": {
+    "tools/implementation_stage2.py": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+    "tools/onboard_school.py": "100bbf38d2a2dd3fe58cd3c7a9bf4f0cb436fd7013206b115ef7436ec89612e5",
+    "tools/onboarding_hardening.py": "9229f31cb2885b38e7ba6940d75d325d9b6e7ecafee46c7119edd8a640ddb28f",
+    "tools/onboarding_plan.py": "649a672152f59050f596b50f62c07dc8e5b0f6776fcf5e780e32e7725b9f86e0",
+    "tools/reconciliation_trace.py": "b127a9e1ad5db37eb9f6b6dadf03ed69db6817f5de455e2df804a35b2e73125d"
+  },
+  "runtime_tool_sha256": "ed609320902bbfdfe13df247e2160a5798b4f6c5120e2be96065ab982c1cb5dd",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_both": 2,
+      "home_missing_location": 2,
+      "home_missing_venue": 2,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "lower_level_postseason_researched_nonblocking": 9,
+      "neutral_missing_venue": 131,
+      "postseason_missing_venue": 12,
+      "public_gap_rows": 136,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "strict_home_gap": 2,
+      "strict_home_gap_rows": 2,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2292,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0
+    },
+    "errors": [
+      "2 in-scope target HOME canonical game(s) are missing venue and/or complete location without a valid researched-unresolved HOME venue exception or exact protected-main owner-authorized HOME locality exception. Ordinary research statuses remain nonwaivable."
+    ],
+    "examples": {
+      "home_missing_both": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "home_missing_location": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "home_missing_venue": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ],
+      "lower_level_postseason_researched_nonblocking": [
+        "CBBG-0213126",
+        "CBBG-0213127",
+        "CBBG-0213128",
+        "CBBG-0213171",
+        "CBBG-0213173",
+        "CBBG-0213174",
+        "CBBG-0213195",
+        "CBBG-0213213",
+        "CBBG-0213214"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0001459",
+        "CBBG-0001549",
+        "CBBG-0009974",
+        "CBBG-0012657",
+        "CBBG-0016044",
+        "CBBG-0018172",
+        "CBBG-0018233",
+        "CBBG-0018572",
+        "CBBG-0018809",
+        "CBBG-0018835",
+        "CBBG-0018863",
+        "CBBG-0019204"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0131850",
+        "CBBG-0131883",
+        "CBBG-0131904",
+        "CBBG-0213126",
+        "CBBG-0213127",
+        "CBBG-0213128",
+        "CBBG-0213171",
+        "CBBG-0213173",
+        "CBBG-0213174",
+        "CBBG-0213195",
+        "CBBG-0213213",
+        "CBBG-0213214"
+      ],
+      "strict_home_gap": [
+        "CBBG-0130859",
+        "CBBG-0131133"
+      ]
+    },
+    "history_start_season": "1957-1958",
+    "school_key": "florida-state",
+    "source_site_counts": {
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 137,
+      "neutral_missing_venue": 134,
+      "postseason_missing_venue": 12,
+      "researched_gap_rows": 137,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 0,
+      "unaccounted_gap_rows": 0
+    },
+    "source_validation_scope": {
+      "mode": "FULL_SOURCE_PACKAGE",
+      "scoped_source_games": 2291
+    },
+    "status": "FAIL",
+    "warnings": []
+  },
+  "stage2_authority_kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "stage2_authority_path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-stage2-census-0007/checkpoint-manifest.json",
+  "stage2_authority_sha256": "6e7ce402852310b03d5896ccff34f09753e41d0354600d46aaecbfade3239849",
+  "stage2_status": "OWNER_GATE_1_READY",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0",
+  "target_tree_sha": "bb56b47b591147393ef0c0af83b8abac12998d50",
+  "tracked_mutation_proof": {
+    "after_head_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0",
+    "after_status": "",
+    "after_tree_sha": "bb56b47b591147393ef0c0af83b8abac12998d50",
+    "before_head_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0",
+    "before_status": "",
+    "before_tree_sha": "bb56b47b591147393ef0c0af83b8abac12998d50",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
