@@ -100,6 +100,7 @@ from remediate_source_scoped_opponent_identity import canonical_view as correcti
 
 WORKFLOW_VERSION = 1
 PLAN_SCHEMA_VERSION = 1
+EXPANSION_INTEGRATION_FREEZE_KIND = "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE"
 REQUIRED_PACKAGE_FILES = (
     "source-games.csv",
     "opponents.csv",
@@ -1165,6 +1166,115 @@ def _correction_unchanged_published_source_ids(
     return unchanged
 
 
+
+def _expansion_unchanged_published_source_ids(
+    repo: Path,
+    school_key: str,
+    game_fields: list[str],
+    games: list[dict[str, str]],
+) -> set[str]:
+    """Return exact unchanged inherited rows for a frozen All-History expansion.
+
+    This is not a general expansion validation bypass. It authenticates the immutable
+    pre-expansion source-games.csv at the freeze's research_base_sha against the exact
+    baseline package hash, requires the frozen inherited/supplemental row counts to match
+    the current package population, and exempts only current rows that are byte-for-byte
+    equal at the CSV-field level to that immutable published baseline. Supplemental rows
+    and any changed inherited row remain subject to ordinary current validation.
+    """
+
+    manifest_path = repo / ".onboarding" / school_key / "integration-freeze.json"
+    if not manifest_path.is_file():
+        return set()
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("kind") != EXPANSION_INTEGRATION_FREEZE_KIND:
+        return set()
+    if manifest.get("status") != "INTEGRATION_FROZEN":
+        raise WorkflowError(
+            "expansion Integration Freeze must have status INTEGRATION_FROZEN "
+            "before Stage 2 package scoping"
+        )
+    if manifest.get("school_key") != school_key:
+        raise WorkflowError("expansion Integration Freeze belongs to another school")
+
+    research_base_sha = str(manifest.get("research_base_sha", "")).strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", research_base_sha):
+        raise WorkflowError("expansion Integration Freeze has invalid research_base_sha")
+
+    preservation = manifest.get("source_preservation")
+    if not isinstance(preservation, dict):
+        raise WorkflowError("expansion Integration Freeze lacks source_preservation")
+    try:
+        inherited_count = int(preservation.get("inherited_count", -1))
+        supplemental_count = int(preservation.get("supplemental_count", -1))
+        combined_count = int(preservation.get("combined_count", -1))
+    except (TypeError, ValueError) as exc:
+        raise WorkflowError("expansion source_preservation counts are invalid") from exc
+    if (
+        inherited_count < 0
+        or supplemental_count < 0
+        or combined_count != inherited_count + supplemental_count
+        or combined_count != len(games)
+    ):
+        raise WorkflowError("expansion source_preservation counts do not match package")
+
+    baseline_hashes = manifest.get("baseline_package_member_sha256")
+    expected_source_hash = (
+        str(baseline_hashes.get("source-games.csv", "")).strip()
+        if isinstance(baseline_hashes, dict)
+        else ""
+    )
+    if not re.fullmatch(r"[0-9a-f]{64}", expected_source_hash):
+        raise WorkflowError(
+            "expansion Integration Freeze lacks exact baseline source-games hash"
+        )
+
+    relative = f"schools/{school_key}/source-games.csv"
+    try:
+        baseline_bytes = subprocess.check_output(
+            ["git", "show", f"{research_base_sha}:{relative}"],
+            cwd=repo,
+            stderr=subprocess.PIPE,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise WorkflowError(
+            "cannot read immutable published source baseline for expansion Stage 2"
+        ) from exc
+    if hashlib.sha256(baseline_bytes).hexdigest() != expected_source_hash:
+        raise WorkflowError(
+            "expansion immutable source baseline does not match frozen baseline hash"
+        )
+
+    baseline_text = baseline_bytes.decode("utf-8-sig")
+    reader = csv.DictReader(io.StringIO(baseline_text, newline=""))
+    baseline_fields = list(reader.fieldnames or [])
+    if baseline_fields != list(game_fields):
+        raise WorkflowError(
+            "expansion source-games.csv header differs from immutable published baseline"
+        )
+    baseline_list = list(reader)
+    baseline_rows = {
+        row.get("source_game_id", "").strip(): row
+        for row in baseline_list
+        if row.get("source_game_id", "").strip()
+    }
+    if (
+        len(baseline_list) != inherited_count
+        or len(baseline_rows) != inherited_count
+        or "" in baseline_rows
+    ):
+        raise WorkflowError(
+            "expansion immutable published baseline row population is invalid"
+        )
+
+    unchanged: set[str] = set()
+    for row in games:
+        source_id = row.get("source_game_id", "").strip()
+        if source_id and source_id in baseline_rows and row == baseline_rows[source_id]:
+            unchanged.add(source_id)
+    return unchanged
+
 def _correction_inherited_current_d1_errors(repo: Path, school_key: str) -> set[str]:
     """Return only opponent metadata errors proven present in published baseline.
 
@@ -1425,6 +1535,9 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     correction_legacy_ids = _correction_unchanged_published_source_ids(
         repo, school_key, game_fields, games
     )
+    expansion_legacy_ids = _expansion_unchanged_published_source_ids(
+        repo, school_key, game_fields, games
+    )
 
     required_game_fields = {
         "source_game_id",
@@ -1543,6 +1656,10 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
                 warnings.append(
                     message + " (unchanged published legacy debt outside this correction)"
                 )
+            elif label in expansion_legacy_ids:
+                warnings.append(
+                    message + " (unchanged published legacy debt outside this expansion)"
+                )
             else:
                 errors.append(message)
         city = row.get("city", "").strip()
@@ -1569,6 +1686,11 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
                 warnings.append(
                     message
                     + " (unchanged published legacy debt outside this correction)"
+                )
+            elif label in expansion_legacy_ids:
+                warnings.append(
+                    message
+                    + " (unchanged published legacy debt outside this expansion)"
                 )
             else:
                 errors.append(message)
