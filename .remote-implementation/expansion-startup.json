@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "florida-state-expansion-startup-0001",
-  "phase0_request_id": "florida-state-expansion-phase0-0001",
+  "startup_id": "florida-state-expansion-startup-0002",
+  "phase0_request_id": "florida-state-expansion-phase0-0002",
   "school_key": "florida-state",
-  "expected_protected_main_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "expected_protected_main_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
   "target_branch": "data/florida-state-onboarding",
   "target_sha": "b8782d618711169759b178613c2ebc2af611b8a8",
   "research_freeze_sha256": "a3bf09395a060da2de803fdc56bc68709edd1b5952feba1c923e04c070cc3af1",
@@ -13,13 +13,13 @@
     "research_base_sha": "c028c1ea1e6d3cef59e465106aa0cedd9e649998",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "f16e4edc85415a6523c4b639268873161dc455a1",
-      "path_prefix": ".remote-implementation/transports/florida-state/florida-state-expansion-startup-0001/freeze.part-",
+      "commit_sha": "4585ab3c00a20aae1bfe6b42523aa2527ac90079",
+      "path_prefix": ".remote-implementation/transports/florida-state/florida-state-expansion-startup-0002/freeze.part-",
       "part_count": 8
     }
   },
   "creation_provenance": {
-    "origin": "Owner-authorized new serialized Florida State ALL_HISTORY_EXPANSION Implementation lane from the immutable verified Research Freeze, using the repository-owned ordinary expansion startup coordinator.",
-    "authorization": "Existing owner startup-phase authority covers deterministic acceptance, current-main Stage 1 reproduction and independent proof, Integration Freeze, disposable Phase 0 preview, and ordinary guarded EXPANSION_PHASE0 execution through fresh verification. It does not authorize new Research, shared/global maintenance, Owner Gate 1, Owner Gate 2, release, or merge."
+    "origin": "Same owner-authorized Florida State ALL_HISTORY_EXPANSION initial Implementation phase, resumed after the prior startup stopped before child request publication on generic Phase 0 preview tooling defect PHASE0_PREVIEW_UNBOUND_VENUE_RECONCILIATION_CENSUS.",
+    "authorization": "Existing owner startup-phase authority persists through deterministic safe recovery. Generic tooling repair PR #698 is merged in protected main. This replacement startup uses fresh exact current-main binding and fresh child request ID; it authorizes only acceptance, current-main Stage 1 reproduction and proof, Integration Freeze, disposable Phase 0 preview, ordinary guarded EXPANSION_PHASE0, and independent fresh verification. No new Research, shared/global basketball maintenance, Stage 2, Owner Gate 1, Owner Gate 2, release, or merge authority."
   }
 }
