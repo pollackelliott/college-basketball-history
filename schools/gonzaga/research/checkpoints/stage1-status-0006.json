@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_ALL_HISTORY_EXPANSION_STAGE1_ACTIVE_V6",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
+  "accepted_top_level_scope": "1958-59+",
+  "accepted_program_inception_season": "1907-08",
+  "expansion_required_seasons": {
+    "start": "1907-08",
+    "end": "1957-58",
+    "count": 51
+  },
+  "official_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "identified_game_count": 213,
+  "known_result_game_count": 212,
+  "unresolved_result_game_count": 1,
+  "aggregate_minus_identified_diagnostic": 764,
+  "controlling_ledger": "stage1-identified-game-ledger-0005.csv",
+  "accepted_source_families": [
+    {
+      "family": "Washington State reciprocal historical series",
+      "rows": 84,
+      "status": "ACCEPTED_WITH_ONE_NEW_RESULT_CONFLICT_TO_RESEARCH"
+    },
+    {
+      "family": "Washington reciprocal all-time results",
+      "rows": 3,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Montana reciprocal opponent-series history",
+      "rows": 105,
+      "status": "ACCEPTED_WITH_ACCOUNTING_CONTRADICTIONS_EXPOSED"
+    },
+    {
+      "family": "Montana State official historical records",
+      "candidate_assertions": 22,
+      "ledger_game_identities_added": 21,
+      "status": "PARTIALLY_ACCEPTED_WITH_BLOCKERS"
+    }
+  ],
+  "blocker_count": 5,
+  "blockers": [
+    {
+      "blocker_id": "GONZAGA-S1-MSU-RESULT-1914-15",
+      "class": "IDENTIFIED_GAME_RESULT_CONFLICT",
+      "season": "1914-15"
+    },
+    {
+      "blocker_id": "GONZAGA-S1-MSU-OPPONENT-1919-20",
+      "class": "OPPONENT_IDENTITY_CONFLICT",
+      "season": "1919-20"
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1915-16"
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1936-37"
+    },
+    {
+      "blocker_id": "GONZAGA-S1-WSU-RESULT-1907-08",
+      "class": "IDENTIFIED_GAME_RESULT_CONFLICT",
+      "season": "1907-08"
+    }
+  ],
+  "nonblocking_residual_count": 2,
+  "historical_core_data_changed": false,
+  "next_bounded_unit": "Research the exact five blocker population as one discrepancy tranche before opening another broad reciprocal family."
+}
