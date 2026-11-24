@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_WHITWORTH_LATE_ERA_SOURCE_LIMITS_V1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "parent_checkpoint_sha": "aae9fa2b7636349767a705783b4444e43483cf30",
+  "family": "Whitworth",
+  "current_gonzaga_all_time_series_record": "32-4",
+  "current_series_source": "Gonzaga 2026-27 Men's Basketball Record Book p.42",
+  "previously_accepted_rows": 1,
+  "new_rows": 9,
+  "total_identified_prebaseline_rows_after_tranche": 10,
+  "newly_covered_seasons": [
+    "1952-53",
+    "1954-55",
+    "1956-57",
+    "1957-58"
+  ],
+  "score_conflict_1958_02_18": {
+    "accepted_final": "Gonzaga 75-72 Whitworth",
+    "accepted_basis": "Spokesman-Review retrospective quotes the contemporary Spokane Daily Chronicle: Whitworth had possession trailing 73-72 with 20 seconds left; Gonzaga scored the final basket.",
+    "conflicting_report": "A United Press wire report printed Gonzaga 75-52 Whitworth.",
+    "disposition": "NONBLOCKING_WIRE_SCORE_DEFECT_RESOLVED_IN_FAVOR_OF_DETAILED_LOCAL_CONTEMPORARY_ACCOUNT"
+  },
+  "institutional_archive_opportunity": {
+    "source": "Whitworth University Digital Commons",
+    "collections": [
+      "Natsihi Yearbook",
+      "The Whitworthian Student Newspaper"
+    ],
+    "coverage_note": "Digitized annual volumes cover the 1940s-1950s and are strong future row-level recovery candidates.",
+    "access_limit": "Current browser environment can open item landing pages but the full-text cgi/viewcontent download returns HTTP 403.",
+    "stopping_disposition": "DEFERRED_SYSTEMATIC_ARCHIVE_OPPORTUNITY_NOT_A_STAGE1_BLOCKER"
+  },
+  "aggregate_policy": "The current Gonzaga 32-4 Whitworth series record is not expanded into anonymous game rows. Only individually source-backed identities enter the ledger.",
+  "remaining_family_status": "ACCEPTED_PARTIAL_FAMILY"
+}
