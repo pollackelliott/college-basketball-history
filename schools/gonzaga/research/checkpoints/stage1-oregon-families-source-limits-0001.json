@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_OREGON_FAMILIES_SOURCE_LIMITS_V1",
+  "sources": [
+    {
+      "family": "Oregon State",
+      "source": "Oregon State 2011-12 Men's Basketball Media Guide — yearly results/opponent series",
+      "source_url": "https://osubeavers.com/documents/download/2016/6/6/yearly_results.pdf",
+      "accepted_rows": 16,
+      "accepted_span": "1911-12 through 1957-58",
+      "completeness_basis": "Dedicated GONZAGA 25-2 opponent-series table enumerates the full Oregon State series; exactly 16 entries fall before Gonzaga's 1958-59 published baseline.",
+      "date_policy": "Opponent-series table does not print exact dates; game_date remains blank.",
+      "site_policy": "OSU A -> Gonzaga HOME; OSU H -> Gonzaga AWAY; blank -> UNKNOWN.",
+      "screenshot_note": "PDF screenshot was attempted through the web PDF renderer but returned an internal fetch error; parsed table remained available."
+    },
+    {
+      "family": "Oregon",
+      "source": "Oregon 2026-27 Men's Basketball Record Book — year-by-year results",
+      "source_url": "https://goducks.com/documents/download/2026/11/2/2026-27_Record_Book.pdf",
+      "accepted_rows": 18,
+      "accepted_span": "1911-12 through 1954-55",
+      "completeness_basis": "Current Oregon athletics states 16 of the first 26 meetings occurred before 1950. The current year-by-year record book yields exactly 16 pre-1950 Gonzaga rows plus one in 1953-54 and one in 1954-55; no Gonzaga rows appear in the intervening 1950-53 or 1955-58 year-by-year tables.",
+      "site_policy": "Oregon's '*' is explicitly defined as Home Games and is inverted to Gonzaga AWAY. Unstarred rows remain UNKNOWN unless another Oregon institutional statement explicitly locates the game; the 1912 opener is explicitly stated by Oregon to have been in Spokane.",
+      "screenshot_note": "PDF screenshot was attempted through the web PDF renderer but the source exceeded the renderer's size limit; parsed year-by-year tables remained available."
+    }
+  ]
+}
