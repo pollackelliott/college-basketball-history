@@ -27,8 +27,8 @@
     }
   },
   "summary": {
-    "games": 2960,
-    "wins": 1537,
+    "games": 2961,
+    "wins": 1538,
     "losses": 1423,
     "ties": 0,
     "first_season": "1905-1906",
@@ -647,8 +647,8 @@
     },
     {
       "season_label": "1938-1939",
-      "games": 17,
-      "wins": 11,
+      "games": 18,
+      "wins": 12,
       "losses": 6,
       "ties": 0
     },
@@ -3065,10 +3065,10 @@
         "conference_key": "acc",
         "conference_name": "ACC"
       },
-      "first_season": "1985-1986",
+      "first_season": "1938-1939",
       "last_season": "2023-2024",
-      "games": 4,
-      "wins": 2,
+      "games": 5,
+      "wins": 3,
       "losses": 2,
       "ties": 0
     },
@@ -17943,6 +17943,31 @@
       "site_city": "Knoxville",
       "site_state": "TN",
       "game_type": "CONFERENCE_TOURNAMENT",
+      "postseason_round": null,
+      "administrative_status": null,
+      "administrative_note": null
+    },
+    {
+      "canonical_game_id": "CBBG-0212981",
+      "season_label": "1938-1939",
+      "game_date": null,
+      "date_precision": "SEASON",
+      "opponent_key": "miami",
+      "opponent_name": "Miami (FL)",
+      "opponent_current_d1": true,
+      "opponent_public_page_enabled": true,
+      "team_score": 41,
+      "opponent_score": 19,
+      "score_known": true,
+      "result": "W",
+      "overtime_periods": 0,
+      "site": "HOME",
+      "venue_key": null,
+      "venue_id": null,
+      "venue_name": null,
+      "site_city": null,
+      "site_state": null,
+      "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
       "administrative_note": null
