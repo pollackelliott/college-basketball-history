@@ -1687,6 +1687,11 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
                     message
                     + " (unchanged published legacy debt outside this correction)"
                 )
+            elif label in expansion_legacy_ids:
+                warnings.append(
+                    message
+                    + " (unchanged published legacy debt outside this expansion)"
+                )
             else:
                 errors.append(message)
         if exhibition_warning_required(
