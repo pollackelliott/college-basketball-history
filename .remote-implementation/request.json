@@ -1,37 +1,53 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "request_id": "miami-expansion-release-preview-0002",
+  "request_id": "miami-expansion-release-gate2-approval-0001",
   "school_key": "miami",
-  "previous_control_state_commit": "c9500ddb7067fe87cd8cea2a57e2fded4b11d92b",
-  "previous_control_state_sha256": "6a5a4f1f2f1ea3a252bd385fcec5dcbd39ab5816247254c9052174e8ceafbc99",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "previous_control_state_commit": "419f18b9049804d3ff9e74e7adee6525576f03e9",
+  "previous_control_state_sha256": "76cb6c075ad64ba8f1b6a9be03196f370fddd0b55ba039d2ab64c38fd4e65a14",
   "expected_protected_main_sha": "814eb6d57110a27744aadc3766f0053e81709987",
   "target_branch": "data/miami-onboarding",
   "target_sha": "0cd6db88db745394151014c23d82105ef910b46d",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/miami/miami-expansion-release-readiness-0002/checkpoint-manifest.json",
-    "sha256": "27eb853b6dfc939a65d65ecbac96a13bc11d19500f5af9657c7dfac3fbf73780"
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/miami/miami-expansion-release-preview-0002/checkpoint-manifest.json",
+    "sha256": "5df0d65d0efea5f41cf608137fb39a44cdf3c4e16149688214cc83455a5bf201"
   },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/miami/miami-expansion-release-readiness-0002/release-readiness-verification.json",
-    "sha256": "4a118735f4220ade8bcabbee7c81f2b24bfd8629c99c5dc4460ad78ddffec5c3"
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/miami/miami-expansion-release-preview-0002/release-preview-verification.json",
+    "sha256": "7c5fc8935bb4e5e00ad11534e5f0a65cb219ea6003b982b68137358fe1791049"
   },
   "approved_plan_hash": "f70993370c276fa6d762d2b4e1d4216a1978014f1838e087ff22172c9cbfaa36",
   "release_manifest_sha256": "04fe3f8ec161aa49fe8d106f38bde75bb783e62e74c7209de21c320f0ce5f329",
   "pr_number": 695,
+  "preview_deployment_id": 8012707830,
+  "preview_url": "https://college-basketball-history-eca6wl0ls-elliott-pollacks-projects.vercel.app",
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly approved the exact Miami (FL) PR #695 Preview with 'approved. Proceed' in the school Implementation chat after presentation of independently verified OWNER_GATE_2_READY, exact PR-head SHA and Preview URL.",
+    "preview_checkpoint_sha256": "5df0d65d0efea5f41cf608137fb39a44cdf3c4e16149688214cc83455a5bf201",
+    "preview_verification_sha256": "7c5fc8935bb4e5e00ad11534e5f0a65cb219ea6003b982b68137358fe1791049",
+    "pr_number": 695,
+    "pr_head_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+    "preview_deployment_id": 8012707830,
+    "preview_url": "https://college-basketball-history-eca6wl0ls-elliott-pollacks-projects.vercel.app"
+  },
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "miami-expansion-release-production-proof-0001"
+  },
   "authority": {
     "expansion_phase0": false,
     "expansion_rebootstrap_from_freeze": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
+    "owner_gate_2": true,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": false,
+    "release_gate2_approval": true,
     "release_presentation_refresh": false,
-    "release_preview_verify": true,
+    "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
@@ -46,7 +62,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Miami (FL) same sealed ALL_HISTORY_EXPANSION release-preparation lane; fresh verified release-readiness 0002 after repaired main, existing exact PR #695 and successful refreshed PR-head CI.",
-    "authorization": "Owner-authorized RELEASE_READINESS_TO_PREVIEW_V1 continuation; execute read-only exact PR-head Preview verification to OWNER_GATE_2_READY only. No Gate 2 approval, merge, or Production authority."
+    "origin": "Same Miami (FL) ALL_HISTORY_EXPANSION Implementation; explicit owner approval of exact Gate 2 Preview.",
+    "authorization": "Owner's 'approved. Proceed' authorizes exact Preview Gate 2 binding and connector merge only after independent Gate 2 verification, followed by exact Production proof. No different PR, head, Preview, merge method or historical change."
   }
 }
