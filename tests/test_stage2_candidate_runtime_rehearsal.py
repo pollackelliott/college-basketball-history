@@ -329,6 +329,30 @@ class CandidateRuntimeWorkflowRecoveryTests(unittest.TestCase):
             workflow,
         )
         self.assertIn(
+            "int(preflight.get('warning_count', -1)) < 0",
+            workflow,
+        )
+        self.assertNotIn(
+            "int(preflight.get('warning_count', -1)) != 0",
+            workflow,
+        )
+        self.assertIn(
+            "verify_census_and_freeze_authority(",
+            workflow,
+        )
+        self.assertIn(
+            "run_normalizer_dry_run(",
+            workflow,
+        )
+        self.assertIn(
+            "classification = 'RESOLVED_BY_OPPONENT_REPRESENTATION'",
+            workflow,
+        )
+        self.assertIn(
+            "'accepted_legacy_warnings': repair_authority[",
+            workflow,
+        )
+        self.assertIn(
             "classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'",
             workflow,
         )
