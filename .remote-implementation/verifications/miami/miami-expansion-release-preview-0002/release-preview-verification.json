@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "5df0d65d0efea5f41cf608137fb39a44cdf3c4e16149688214cc83455a5bf201",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "pr_number": 695,
+  "preview_deployment_id": 8012707830,
+  "preview_deployment_sha": "0cd6db88db745394151014c23d82105ef910b46d",
+  "preview_url": "https://college-basketball-history-eca6wl0ls-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "814eb6d57110a27744aadc3766f0053e81709987",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "miami-expansion-release-preview-0002",
+  "schema_version": 1,
+  "school_key": "miami",
+  "target_branch": "data/miami-onboarding",
+  "target_sha": "0cd6db88db745394151014c23d82105ef910b46d"
+}
