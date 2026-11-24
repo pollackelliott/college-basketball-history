@@ -32,6 +32,10 @@ from remote_implementation_stage2_census import (
     restore_integration_freeze,
     tracked_worktree_state,
 )
+from remote_implementation_stage2_opponent_display import (
+    EXPANSION_FREEZE_KIND,
+    EXPANSION_LEGACY_WARNING_RES,
+)
 
 SITE_DIAGNOSTIC = "last-rehearsal-site-gate.json"
 PROPOSAL_ARTIFACT_NAMES = (*STAGE2_ARTIFACT_NAMES, SITE_DIAGNOSTIC)
@@ -156,6 +160,61 @@ def _freeze_from_writeahead(
     if semantic != request["semantic_snapshot_sha256"]:
         raise Stop("STAGE2_PROPOSAL_FREEZE_SEMANTIC_MISMATCH")
     return freeze_bytes, writeahead
+
+
+def _accepted_expansion_legacy_warnings(
+    *,
+    kind: str,
+    authority: dict[str, Any],
+    authority_path: str,
+    warning_count: int,
+    freeze_bytes: bytes,
+    control_commit: str,
+    source_repo: Path,
+) -> list[str]:
+    """Authenticate the narrow expansion-only legacy warning compatibility."""
+
+    if warning_count == 0:
+        return []
+    if warning_count < 0:
+        raise Stop("STAGE2_PROPOSAL_AUTHORITY_WARNINGS_PRESENT")
+
+    try:
+        freeze = json.loads(freeze_bytes)
+    except (TypeError, ValueError) as exc:
+        raise Stop("STAGE2_PROPOSAL_FREEZE_JSON_INVALID") from exc
+    if freeze.get("kind") != EXPANSION_FREEZE_KIND:
+        raise Stop("STAGE2_PROPOSAL_AUTHORITY_WARNINGS_PRESENT")
+
+    if kind == "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT":
+        expected_plan_sha = (authority.get("artifact_sha256") or {}).get("plan.json")
+    elif kind == "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR":
+        expected_plan_sha = (
+            (authority.get("post_repair_stage2") or {}).get("artifact_sha256") or {}
+        ).get("plan.json")
+    else:
+        raise Stop("STAGE2_PROPOSAL_AUTHORITY_WARNINGS_PRESENT")
+
+    plan_path = (Path(authority_path).parent / "plan.json").as_posix()
+    plan_bytes = git_show_bytes(control_commit, plan_path, cwd=source_repo)
+    if not expected_plan_sha or sha256_bytes(plan_bytes) != expected_plan_sha:
+        raise Stop("STAGE2_PROPOSAL_AUTHORITY_PLAN_HASH_MISMATCH")
+    try:
+        plan = json.loads(plan_bytes)
+    except (TypeError, ValueError) as exc:
+        raise Stop("STAGE2_PROPOSAL_AUTHORITY_PLAN_JSON_INVALID") from exc
+
+    warnings = list(plan.get("warnings") or [])
+    package_warnings = list((plan.get("package") or {}).get("warnings") or [])
+    if len(warnings) != warning_count or package_warnings != warnings:
+        raise Stop("STAGE2_PROPOSAL_AUTHORITY_WARNING_SET_MISMATCH")
+    for warning in warnings:
+        if not isinstance(warning, str) or not any(
+            pattern.fullmatch(warning)
+            for pattern in EXPANSION_LEGACY_WARNING_RES
+        ):
+            raise Stop("STAGE2_PROPOSAL_AUTHORITY_WARNINGS_PRESENT")
+    return warnings
 
 
 def _phase0_venue_reconciliation_bytes(
@@ -361,8 +420,6 @@ def verify_stage2_proposal_authority(
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_NOT_READY")
     if blocker_count != 0:
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_BLOCKERS_PRESENT")
-    if warning_count != 0:
-        raise Stop("STAGE2_PROPOSAL_AUTHORITY_WARNINGS_PRESENT")
     if decision_sha != request["decision_universe_sha256"]:
         raise Stop("STAGE2_PROPOSAL_AUTHORITY_DECISION_UNIVERSE_MISMATCH")
     if integration_freeze_sha != request["integration_freeze_sha256"]:
@@ -387,6 +444,15 @@ def verify_stage2_proposal_authority(
             request=request,
             source_repo=source_repo,
         )
+    accepted_legacy_warnings = _accepted_expansion_legacy_warnings(
+        kind=kind,
+        authority=authority,
+        authority_path=request["stage2_authority"]["path"],
+        warning_count=warning_count,
+        freeze_bytes=freeze_bytes,
+        control_commit=control_commit,
+        source_repo=source_repo,
+    )
     venue_reconciliation_bytes = (
         None
         if correction_freeze_bytes is not None
@@ -407,6 +473,7 @@ def verify_stage2_proposal_authority(
         "writeahead": writeahead,
         "venue_reconciliation_bytes": venue_reconciliation_bytes,
         "historical_game_type_challenge": authority_challenge,
+        "accepted_legacy_warnings": accepted_legacy_warnings,
     }
 
 

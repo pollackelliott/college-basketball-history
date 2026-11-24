@@ -260,6 +260,217 @@ class RemoteStage2ProposalTests(unittest.TestCase):
         self.assertEqual(result["target_tree_sha"], TREE)
         self.assertEqual(sha(result["freeze_bytes"]), request["integration_freeze_sha256"])
 
+    def test_expansion_census_legacy_warning_is_authenticated(self):
+        warning = (
+            "LEGACY-001: curated venue 'Allen Fieldhouse' absent from venues.csv "
+            "(unchanged published legacy debt outside this expansion)"
+        )
+        freeze = canonical_json_bytes(
+            {
+                "kind": proposal.EXPANSION_FREEZE_KIND,
+                "status": "INTEGRATION_FROZEN",
+                "school_key": SCHOOL,
+                "source_game_semantic_guard": {
+                    "snapshot_sha256": SEMANTIC_SHA,
+                },
+            }
+        )
+        freeze_sha = sha(freeze)
+        writeahead_path = (
+            ".remote-implementation/writeahead/example-school/phase0/"
+            "writeahead-manifest.json"
+        )
+        writeahead = canonical_json_bytes(
+            {
+                "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+                "school_key": SCHOOL,
+                "target_branch": BRANCH,
+                "integration_freeze_sha256": freeze_sha,
+                "semantic_snapshot_sha256": SEMANTIC_SHA,
+                "sidecars": {"integration-freeze.json": freeze_sha},
+            }
+        )
+        phase0_path = (
+            ".remote-implementation/successors/example-school/phase0/"
+            "successor-manifest.json"
+        )
+        phase0 = canonical_json_bytes(
+            {
+                "writeahead_manifest_path": writeahead_path,
+                "writeahead_manifest_sha256": sha(writeahead),
+            }
+        )
+        plan = canonical_json_bytes(
+            {
+                "warnings": [warning],
+                "package": {"warnings": [warning]},
+            }
+        )
+        authority_path = (
+            ".remote-implementation/checkpoints/example-school/census/"
+            "checkpoint-manifest.json"
+        )
+        plan_path = (Path(authority_path).parent / "plan.json").as_posix()
+        census = canonical_json_bytes(
+            {
+                "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+                "school_key": SCHOOL,
+                "target_branch": BRANCH,
+                "target_sha": TARGET,
+                "target_tree_sha": TREE,
+                "target_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+                "stage2_status": "CAPABILITY_CENSUS_READY",
+                "preflight": {
+                    "blocker_count": 0,
+                    "warning_count": 1,
+                },
+                "artifact_sha256": {"plan.json": sha(plan)},
+                "decision_universe_sha256": DECISION_SHA,
+                "integration_freeze_sha256": freeze_sha,
+                "semantic_snapshot_sha256": SEMANTIC_SHA,
+                "phase0_successor_path": phase0_path,
+                "phase0_successor_sha256": sha(phase0),
+            }
+        )
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": BRANCH,
+            "target_sha": TARGET,
+            "stage2_authority": {
+                "path": authority_path,
+                "sha256": sha(census),
+            },
+            "integration_freeze_sha256": freeze_sha,
+            "semantic_snapshot_sha256": SEMANTIC_SHA,
+            "decision_universe_sha256": DECISION_SHA,
+        }
+        freeze_path = (
+            Path(writeahead_path).parent / "integration-freeze.json"
+        ).as_posix()
+        mapping = {
+            authority_path: census,
+            phase0_path: phase0,
+            writeahead_path: writeahead,
+            freeze_path: freeze,
+            plan_path: plan,
+        }
+
+        with patch.object(
+            proposal,
+            "git_show_bytes",
+            side_effect=lambda commit, path, **kwargs: mapping[path],
+        ):
+            result = proposal.verify_stage2_proposal_authority(
+                request,
+                "f" * 40,
+            )
+        self.assertEqual(result["accepted_legacy_warnings"], [warning])
+
+    def test_expansion_census_unrelated_warning_is_refused(self):
+        warning = "LEGACY-001: unrelated warning"
+        freeze = canonical_json_bytes(
+            {
+                "kind": proposal.EXPANSION_FREEZE_KIND,
+                "status": "INTEGRATION_FROZEN",
+                "school_key": SCHOOL,
+                "source_game_semantic_guard": {
+                    "snapshot_sha256": SEMANTIC_SHA,
+                },
+            }
+        )
+        freeze_sha = sha(freeze)
+        writeahead_path = (
+            ".remote-implementation/writeahead/example-school/phase0/"
+            "writeahead-manifest.json"
+        )
+        writeahead = canonical_json_bytes(
+            {
+                "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+                "school_key": SCHOOL,
+                "target_branch": BRANCH,
+                "integration_freeze_sha256": freeze_sha,
+                "semantic_snapshot_sha256": SEMANTIC_SHA,
+                "sidecars": {"integration-freeze.json": freeze_sha},
+            }
+        )
+        phase0_path = (
+            ".remote-implementation/successors/example-school/phase0/"
+            "successor-manifest.json"
+        )
+        phase0 = canonical_json_bytes(
+            {
+                "writeahead_manifest_path": writeahead_path,
+                "writeahead_manifest_sha256": sha(writeahead),
+            }
+        )
+        plan = canonical_json_bytes(
+            {
+                "warnings": [warning],
+                "package": {"warnings": [warning]},
+            }
+        )
+        authority_path = (
+            ".remote-implementation/checkpoints/example-school/census/"
+            "checkpoint-manifest.json"
+        )
+        plan_path = (Path(authority_path).parent / "plan.json").as_posix()
+        census = canonical_json_bytes(
+            {
+                "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+                "school_key": SCHOOL,
+                "target_branch": BRANCH,
+                "target_sha": TARGET,
+                "target_tree_sha": TREE,
+                "stage2_status": "CAPABILITY_CENSUS_READY",
+                "preflight": {
+                    "blocker_count": 0,
+                    "warning_count": 1,
+                },
+                "artifact_sha256": {"plan.json": sha(plan)},
+                "decision_universe_sha256": DECISION_SHA,
+                "integration_freeze_sha256": freeze_sha,
+                "semantic_snapshot_sha256": SEMANTIC_SHA,
+                "phase0_successor_path": phase0_path,
+                "phase0_successor_sha256": sha(phase0),
+            }
+        )
+        request = {
+            "school_key": SCHOOL,
+            "target_branch": BRANCH,
+            "target_sha": TARGET,
+            "stage2_authority": {
+                "path": authority_path,
+                "sha256": sha(census),
+            },
+            "integration_freeze_sha256": freeze_sha,
+            "semantic_snapshot_sha256": SEMANTIC_SHA,
+            "decision_universe_sha256": DECISION_SHA,
+        }
+        freeze_path = (
+            Path(writeahead_path).parent / "integration-freeze.json"
+        ).as_posix()
+        mapping = {
+            authority_path: census,
+            phase0_path: phase0,
+            writeahead_path: writeahead,
+            freeze_path: freeze,
+            plan_path: plan,
+        }
+
+        with patch.object(
+            proposal,
+            "git_show_bytes",
+            side_effect=lambda commit, path, **kwargs: mapping[path],
+        ):
+            with self.assertRaisesRegex(
+                Stop,
+                "STAGE2_PROPOSAL_AUTHORITY_WARNINGS_PRESENT",
+            ):
+                proposal.verify_stage2_proposal_authority(
+                    request,
+                    "f" * 40,
+                )
+
     def test_stale_decision_universe_is_refused(self):
         request, mapping = self.authority_fixture()
         request["decision_universe_sha256"] = "0" * 64
