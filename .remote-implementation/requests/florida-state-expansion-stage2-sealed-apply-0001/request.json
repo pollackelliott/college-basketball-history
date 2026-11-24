@@ -1,0 +1,55 @@
+{
+  "approved_plan_hash": "f7b69d314b01fa533968bc3b4d670a71c3c0a3dae0005635733153427ea1220f",
+  "approved_plan_sha256": "c57d3338e3e709669dfc69b64994d8a8736dfd8b8fb9f979df2c6c3fd5ecdef8",
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": true,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from florida-state-expansion-stage2-gate1-seal-0001",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_id_set_sha256": "c580df715adfb6dbad0397626c11cf34cf8bbdff1552dd1c7311d5f7aa23168b",
+  "decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+  "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "filled_review_sha256": "e625d684949fbc37fd7aa50688c7ec7927b96bddd446b8a636ac57f789384061",
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_SEALED_APPLY",
+  "owner_gate_1_approval_sha256": "469a35f83d627296a8c05c1f8f43cbc893033438e42e0e92955c84e8e442b4c5",
+  "previous_control_state_commit": "6ddbf021b285b9783b5a0bf57eb1d1d4ec1f7db3",
+  "previous_control_state_sha256": "a1f2ebb0422d74582e71f1c5473227a20f85b427545fa6f2e2bb22ac28fda0f8",
+  "recommendation_map_sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd",
+  "request_id": "florida-state-expansion-stage2-sealed-apply-0001",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "stage2_gate1_seal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-stage2-gate1-seal-0001/checkpoint-manifest.json",
+    "sha256": "b032c2cfb8233a9f2a87d76549916f9310585bd497d55efdca1b92204f670029"
+  },
+  "stage2_gate1_seal_verification": {
+    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
+    "sha256": "33ab3489f06c3cf26d340cdbfa86b2436073651cfc409afc08f689b27ba64b0b"
+  },
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0"
+}
