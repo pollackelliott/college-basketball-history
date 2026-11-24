@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_ACCOUNTING_DEBT_UPDATE_AFTER_IDAHO_V1",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "fd1b5dca8e6e66e13aa68b8b24a5582fdc75a7e5",
+  "parent_checkpoint_sha": "29ad78437b02b5b5497c5287f13b97fc412f5e07",
+  "debts": [
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_record": "2-7 / 9 games",
+      "identified_state": "0 wins, 8 losses, 8 games among currently harvested source families",
+      "research_status": "RESEARCH_EXHAUSTED",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "changed_by_idaho_tranche": false
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_record": "1-5 / 6 games",
+      "identified_state": "3 wins, 4 losses, 7 games",
+      "source_families": [
+        "Washington State",
+        "Montana",
+        "Montana State",
+        "Idaho"
+      ],
+      "research_status": "RESEARCH_EXHAUSTED",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "changed_by_idaho_tranche": true,
+      "note": "Idaho contributes Gonzaga L 22-35 on 1936-12-20 and W 36-29 on 1937-02-08. Both are exact dated reciprocal rows."
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1937-38",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "target_literal_record": "0-4 / 4 games",
+      "identified_state": "0 wins, 6 losses, 6 games",
+      "source_families": [
+        "Washington State",
+        "Montana State",
+        "Idaho"
+      ],
+      "research_status": "RESEARCH_EXHAUSTED",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true,
+      "new_in_idaho_tranche": true,
+      "note": "Six distinct exact dates are preserved: WSU 1937-12-31 and 1938-02-05; Idaho 1938-01-17 and 1938-02-17; Montana State 1938-01-21 and 1938-01-22. No duplicate or season ambiguity exists, so no additional open-ended discrepancy campaign is warranted."
+    }
+  ]
+}
