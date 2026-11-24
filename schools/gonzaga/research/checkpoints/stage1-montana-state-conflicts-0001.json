@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_MONTANA_STATE_CONFLICTS_V1",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
+  "blockers": [
+    {
+      "blocker_id": "GONZAGA-S1-MSU-RESULT-1914-15",
+      "class": "IDENTIFIED_GAME_RESULT_CONFLICT",
+      "season": "1914-15",
+      "game_identity": "Montana State at Montana State, 1915-02-20, literal score 12-9",
+      "detail": "Current Montana State official edition records MSU W 12-9; older official edition records MSU L 12-9. The game identity is stable but Gonzaga result and score-side allocation are unresolved.",
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-MSU-OPPONENT-1919-20",
+      "class": "OPPONENT_IDENTITY_CONFLICT",
+      "season": "1919-20",
+      "game_identity": "Montana State 32-7 game, date unresolved",
+      "detail": "Older Montana State opponent-series history assigns the 32-7 game to Gonzaga in Bozeman; current Montana State year-by-year assigns the 32-7 game to Montana. It is not admitted to the Gonzaga identified-game ledger pending reconciliation.",
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1915-16",
+      "target_official_record": "2-7 / 9 games",
+      "source_backed_identified_losses": 8,
+      "evidence_families": [
+        "Washington State (2 losses)",
+        "Montana (4 losses)",
+        "Montana State (2 losses)"
+      ],
+      "detail": "Eight concrete reciprocal losses are identified, exceeding Gonzaga's official seven-loss season aggregate. No game is removed or reclassified by arithmetic.",
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1936-37",
+      "target_official_record": "1-5 / 6 games",
+      "source_backed_identified_wins": 2,
+      "evidence_families": [
+        "Montana (Gonzaga W 42-41)",
+        "Montana State (Gonzaga W 49-39)"
+      ],
+      "detail": "Two concrete reciprocal wins are identified, exceeding Gonzaga's official one-win season aggregate. No game is removed or reclassified by arithmetic.",
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-WSU-RESULT-1907-08",
+      "class": "IDENTIFIED_GAME_RESULT_CONFLICT",
+      "season": "1907-08",
+      "game_identity": "Washington State, 1907-12-16, score 21-18",
+      "detail": "Current Gonzaga official series notes describe Gonzaga as winning the first meeting 21-18, while current Washington State official history records Washington State winning 21-18. This contradiction was discovered incidentally and is routed to the next bounded discrepancy family rather than resolved inside the Montana State family.",
+      "blocks_stage1_closeout": true
+    }
+  ],
+  "nonblocking_residuals": [
+    {
+      "residual_id": "GONZAGA-S1-MSU-SCORE-1913-14",
+      "class": "SCORE_SOURCE_EDITION_CONFLICT",
+      "game_identity": "Montana State, 1914-02-20",
+      "curated_value": "Gonzaga L 16-29",
+      "basis": "Current Montana State and current Gonzaga official sources agree on 29-16; older Montana State guides say 29-17.",
+      "reopen_condition": "Concrete primary evidence contradicting current reciprocal/target agreement."
+    },
+    {
+      "residual_id": "GONZAGA-S1-MSU-DATE-SITE-1921-22",
+      "class": "DATE_SITE_SOURCE_CONFLICT",
+      "game_identity": "Montana State 33-23 Gonzaga game, 1921-22",
+      "curated_date": "",
+      "curated_site": "UNKNOWN",
+      "basis": "Current/older year-by-year disagree on date and opponent-series table disagrees with year-by-year on location; identity/result/score remain stable."
+    }
+  ]
+}
