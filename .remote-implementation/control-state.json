@@ -1528,11 +1528,11 @@
   "current_sequence": 736,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "florida-state-expansion-stage2-current-main-refresh-0003",
     "school_key": "florida-state",
     "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
