@@ -324,7 +324,7 @@ jobs:
                       or manifest.get('target_sha') != last.get('target_sha')
                       or manifest.get('protected_main_sha') != expected_main
                       or int(preflight.get('blocker_count', 0)) <= 0
-                      or int(preflight.get('warning_count', -1)) != 0
+                      or int(preflight.get('warning_count', -1)) < 0
                       or int(preflight.get('decision_count', -1)) != 0
                   ):
                       fail('blocked census does not bind exact verified last operation')
@@ -437,6 +437,13 @@ jobs:
               run_stage2_census_tool,
               verify_phase0_authority,
           )
+          from remote_implementation_stage2_opponent_display import (
+              apply_and_prepare_repair,
+              post_repair_stage2_result,
+              run_normalizer_dry_run,
+              stage2_result_summary,
+              verify_census_and_freeze_authority,
+          )
           from stage2_candidate_runtime_rehearsal import (
               candidate_changed_paths,
               validate_candidate_scope,
@@ -493,6 +500,16 @@ jobs:
           baseline_status = json.loads(baseline_status_raw)
           baseline_blockers = set(baseline_status.get('blockers') or [])
           assert baseline_blockers
+          baseline_preflight = baseline_status.get('preflight') or {}
+          baseline_warning_count = int(
+              baseline_preflight.get('warning_count', 0) or 0
+          )
+          baseline_decision_count = int(
+              baseline_preflight.get('decision_count', 0) or 0
+          )
+          baseline_universe = baseline_preflight.get(
+              'decision_universe_sha256'
+          )
 
           worktree = add_existing_onboarding_worktree(
               request['target_branch'],
@@ -524,6 +541,7 @@ jobs:
           assert proof.get('tracked_stage2_mutation') == 'NONE', proof
 
           stage2_status = result.get('stage2_status')
+          opponent_representation_rehearsal = None
           if stage2_status == 'CAPABILITY_CENSUS_READY':
               assert not candidate_blockers, candidate_blockers
               classification = 'RESOLVED_TO_CAPABILITY_CENSUS'
@@ -531,10 +549,138 @@ jobs:
               assert stage2_status == 'BLOCKED', stage2_status
               assert candidate_blockers, candidate_blockers
               if baseline_blockers <= candidate_blockers:
-                  raise SystemExit(
-                      'FAIL: CANDIDATE_REHEARSAL_NO_PROGRESS_SAME_BLOCKER'
+                  repair_request = {
+                      'school_key': request['school_key'],
+                      'target_branch': request['target_branch'],
+                      'target_sha': request['target_sha'],
+                      'stage2_census_checkpoint': {
+                          'path': checkpoint.as_posix(),
+                          'sha256': last['checkpoint_manifest_sha256'],
+                      },
+                      'integration_freeze_sha256': manifest[
+                          'integration_freeze_sha256'
+                      ],
+                      'semantic_snapshot_sha256': manifest[
+                          'semantic_snapshot_sha256'
+                      ],
+                  }
+                  repair_authority = verify_census_and_freeze_authority(
+                      repair_request,
+                      '${{ steps.authority.outputs.control_commit }}',
+                      source_repo=control,
                   )
-              classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'
+                  repair_worktree = add_existing_onboarding_worktree(
+                      request['target_branch'],
+                      request['target_sha'],
+                      request['school_key'],
+                      source_repo=candidate,
+                  )
+                  repair_diag = Path(
+                      '/tmp/stage2-candidate-runtime-rehearsal/'
+                      'candidate-opponent-representation'
+                  )
+                  try:
+                      dry = run_normalizer_dry_run(
+                          repair_worktree,
+                          request['school_key'],
+                          repair_authority['freeze_bytes'],
+                          repair_authority['blocker_keys'],
+                          repair_diag,
+                          tool_repo=candidate,
+                          sync_current_d1=repair_authority['sync_current_d1'],
+                      )
+                      proposed = sorted(
+                          item['canonical_opponent_key']
+                          for item in dry['report']['changes']
+                      )
+                      assert proposed == repair_authority['blocker_keys'], (
+                          proposed,
+                          repair_authority['blocker_keys'],
+                      )
+                      prepared = apply_and_prepare_repair(
+                          repair_worktree,
+                          request['school_key'],
+                          request['target_sha'],
+                          repair_authority['freeze_bytes'],
+                          dry,
+                          repair_authority['blocker_keys'],
+                          repair_diag,
+                          tool_repo=candidate,
+                          sync_current_d1=repair_authority['sync_current_d1'],
+                      )
+                      field_proof = prepared['field_level_proof']
+                      assert field_proof['literal_evidence_changes'] == 0, field_proof
+                      assert field_proof['source_game_non_name_field_changes'] == 0, field_proof
+                      assert (
+                          field_proof['opponent_changed_keys']
+                          == repair_authority['blocker_keys']
+                      ), field_proof
+                      assert not (
+                          set(field_proof['source_game_changed_keys'])
+                          - set(repair_authority['blocker_keys'])
+                      ), field_proof
+                      regenerated = post_repair_stage2_result(
+                          repair_worktree,
+                          request['school_key'],
+                          repair_authority['freeze_bytes'],
+                          repair_diag,
+                          tool_repo=candidate,
+                      )
+                      repaired_stage2 = stage2_result_summary(regenerated)
+                  finally:
+                      subprocess.run(
+                          [
+                              'git', '-C', str(candidate), 'worktree', 'remove',
+                              '--force', str(repair_worktree),
+                          ],
+                          check=True,
+                      )
+
+                  repaired_status = regenerated.get('status') or {}
+                  repaired_preflight = repaired_status.get('preflight') or {}
+                  repaired_blockers = set(repaired_status.get('blockers') or [])
+                  assert (
+                      int(repaired_preflight.get('warning_count', 0) or 0)
+                      == baseline_warning_count
+                  ), repaired_preflight
+                  assert (
+                      int(repaired_preflight.get('decision_count', 0) or 0)
+                      == baseline_decision_count
+                  ), repaired_preflight
+                  assert (
+                      repaired_preflight.get('decision_universe_sha256')
+                      == baseline_universe
+                  ), repaired_preflight
+                  repaired_proof = repaired_stage2['tracked_mutation_proof']
+                  assert (
+                      repaired_proof.get('tracked_stage2_mutation') == 'NONE'
+                  ), repaired_proof
+                  if repaired_stage2['stage2_status'] == 'CAPABILITY_CENSUS_READY':
+                      assert not repaired_blockers, repaired_blockers
+                      classification = 'RESOLVED_BY_OPPONENT_REPRESENTATION'
+                  else:
+                      assert (
+                          repaired_stage2['stage2_status'] == 'BLOCKED'
+                      ), repaired_stage2
+                      assert repaired_blockers, repaired_blockers
+                      assert not (
+                          baseline_blockers & repaired_blockers
+                      ), {
+                          'baseline_blockers': sorted(baseline_blockers),
+                          'repaired_blockers': sorted(repaired_blockers),
+                      }
+                      classification = 'ADVANCED_BY_OPPONENT_REPRESENTATION'
+                  opponent_representation_rehearsal = {
+                      'blocker_keys': repair_authority['blocker_keys'],
+                      'accepted_legacy_warnings': repair_authority[
+                          'accepted_legacy_warnings'
+                      ],
+                      'field_level_proof': field_proof,
+                      'post_repair_stage2': repaired_stage2,
+                      'post_repair_blockers': sorted(repaired_blockers),
+                  }
+              else:
+                  classification = 'ADVANCED_TO_DIFFERENT_BLOCKER'
 
           summary = {
               'kind': 'BLOCKED_CENSUS_CANDIDATE_REHEARSAL',
@@ -556,6 +702,7 @@ jobs:
               ),
               'candidate_stage2_status': stage2_status,
               'classification': classification,
+              'opponent_representation_rehearsal': opponent_representation_rehearsal,
               'tracked_mutation_proof': proof,
               'tracked_publication': 'NONE',
           }
