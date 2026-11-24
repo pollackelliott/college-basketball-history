@@ -777,10 +777,26 @@ def _verify_safe_global_venue_reuse(
     if not isinstance(counts, dict):
         counts = reconciliation
 
+    reconciliation_census = integration.get("venue_reconciliation_census")
+    if (
+        not isinstance(reconciliation_census, dict)
+        or int(reconciliation_census.get("blocker_count", -1)) != 0
+    ):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_AUTHORITY_MISSING")
+    classification_counts = reconciliation_census.get("classification_counts")
+    if not isinstance(classification_counts, dict):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_INVALID")
+
     try:
         reuse_count = int(counts.get("REUSE_REGISTERED_GLOBAL_VENUE", -1))
         new_count = int(counts.get("NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED", -1))
         blocker_count = int(counts.get("GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER", -1))
+        classified_reuse_count = int(
+            classification_counts.get("SAFE_REPRESENTATION_REUSE", -1)
+        )
+        classified_new_count = int(
+            classification_counts.get("NEW_GLOBAL_IDENTITY", -1)
+        )
         rebased_count = int(phase0_preview.get("rebased_venue_mapping_count", -1))
         supplemental_rebased = int(
             phase0_preview.get("supplemental_venue_rows_rebased", -1)
@@ -791,34 +807,104 @@ def _verify_safe_global_venue_reuse(
     except (TypeError, ValueError) as exc:
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_INVALID") from exc
 
+    total_count = reuse_count + new_count
+    new_global = list(phase0_preview.get("new_global_venue_ids_and_keys") or [])
     if (
-        reuse_count <= 0
-        or new_count != 0
+        reuse_count < 0
+        or new_count < 0
+        or total_count <= 0
         or blocker_count != 0
-        or rebased_count != reuse_count
-        or supplemental_rebased != reuse_count
-        or global_registration_count != 0
-        or list(phase0_preview.get("new_global_venue_ids_and_keys") or [])
+        or classified_reuse_count != reuse_count
+        or classified_new_count != new_count
+        or rebased_count != total_count
+        or supplemental_rebased != total_count
+        or global_registration_count != new_count
+        or len(new_global) != new_count
     ):
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_MISMATCH")
+
+    new_by_key: dict[str, str] = {}
+    for item in new_global:
+        if not isinstance(item, dict):
+            raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_NEW_REGISTRATION_INVALID")
+        venue_id = str(item.get("venue_id") or "")
+        venue_key = str(item.get("venue_key") or "")
+        if not venue_id or not venue_key or venue_key in new_by_key:
+            raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_NEW_REGISTRATION_INVALID")
+        new_by_key[venue_key] = venue_id
 
     census = phase0_preview.get("venue_identity_census")
     if (
         not isinstance(census, dict)
         or census.get("status") != "PASS"
         or int(census.get("blocker_count", -1)) != 0
+        or int(census.get("new_support_count", -1)) != total_count
     ):
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_CENSUS_NOT_CLEAN")
     rows = census.get("rows")
-    if not isinstance(rows, list) or len(rows) != reuse_count:
+    reconciliation_rows = reconciliation_census.get("rows")
+    if (
+        not isinstance(rows, list)
+        or len(rows) != total_count
+        or not isinstance(reconciliation_rows, list)
+        or len(reconciliation_rows) != total_count
+    ):
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_ROW_COUNT_MISMATCH")
+
+    preview_by_key: dict[str, dict[str, Any]] = {}
     for row in rows:
         if not isinstance(row, dict) or row.get("registration_safe") is not True:
             raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_ROW_NOT_SAFE")
-        reuse_id = str(row.get("existing_key_reuse_id") or "")
-        candidates = [str(value) for value in row.get("possible_existing_global_ids") or []]
-        if not reuse_id or candidates != [reuse_id]:
+        venue_key = str(row.get("venue_key") or "")
+        if not venue_key or venue_key in preview_by_key:
             raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
+        preview_by_key[venue_key] = row
+
+    seen_new_keys: set[str] = set()
+    seen_reuse = 0
+    seen_new = 0
+    for row in reconciliation_rows:
+        if not isinstance(row, dict):
+            raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
+        venue_key = str(row.get("venue_key") or "")
+        preview_row = preview_by_key.get(venue_key)
+        if preview_row is None:
+            raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
+        classification = str(row.get("classification") or "")
+        if classification == "SAFE_REPRESENTATION_REUSE":
+            seen_reuse += 1
+            reuse_id = str(row.get("target_venue_id") or "")
+            target_key = str(row.get("target_venue_key") or "")
+            preview_reuse_id = str(preview_row.get("existing_key_reuse_id") or "")
+            candidates = [
+                str(value)
+                for value in preview_row.get("possible_existing_global_ids") or []
+            ]
+            if (
+                not reuse_id
+                or target_key != venue_key
+                or preview_reuse_id != reuse_id
+                or reuse_id not in candidates
+                or venue_key in new_by_key
+            ):
+                raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
+        elif classification == "NEW_GLOBAL_IDENTITY":
+            seen_new += 1
+            if (
+                str(preview_row.get("existing_key_reuse_id") or "")
+                or venue_key not in new_by_key
+            ):
+                raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
+            seen_new_keys.add(venue_key)
+        else:
+            raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
+
+    if (
+        seen_reuse != reuse_count
+        or seen_new != new_count
+        or seen_new_keys != set(new_by_key)
+    ):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
 
     preview_hash = (
         phase0_preview.get("six_file_preview_sha256") or {}
