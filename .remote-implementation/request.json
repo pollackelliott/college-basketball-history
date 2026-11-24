@@ -1,50 +1,5 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "florida-state-expansion-stage2-current-main-refresh-0004",
-  "school_key": "florida-state",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
-  "previous_control_state_commit": "5139df5f29e3e0c58d74082ce8d63ab7b374d15e",
-  "previous_control_state_sha256": "e6b2deb16db0ea255a7dcb4b08d66fcbf1b5e40446ef0370df7b2d8224de9319",
-  "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
-  "target_branch": "data/florida-state-onboarding",
-  "target_sha": "da2944f0487fe661eded2bbec8f9205ccb1af357",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-phase0-0003/successor-manifest.json",
-    "sha256": "5f210b8e607b86988bfe00ffcb1404d644a2e089d89514d601f55a222fc1e95b"
-  },
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-current-main-refresh-0003/successor-manifest.json",
-    "sha256": "d852918ccb4eeea2817a1056f87f07e5e6b3e9ed4be775f65310ef0d0b1f27c9"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "f227794be23d41f29c664f7942353d2fdf585847c7e54e6d44de99e0c26b323a"
-  },
-  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
-  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
-  "phase_continuation": {
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "census_request_id": "florida-state-expansion-stage2-census-0007",
-    "proposal_request_id": "florida-state-expansion-stage2-proposal-0002",
-    "expected_decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
-    "recommendation_map": {
-      "path": ".remote-implementation/payloads/florida-state/florida-state-expansion-stage2-proposal-0001/recommendation-map.json",
-      "sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd"
-    }
-  },
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
-    "authorization_basis": "Existing owner-authorized Florida State ALL_HISTORY_EXPANSION Stage 2 persists after generic tooling PR #709 merged as protected main 17e61efd0786671df593859c2b73f720217cef1e. Exact merge base between current onboarding target da2944f0487fe661eded2bbec8f9205ccb1af357 and current main is 1a1d1758b40f2fedaec56f3c3d6528647a6c909d. The target has 11 target-only paths; current main has exactly 4 main-only paths (.github/workflows/stage2-candidate-runtime-rehearsal.yml, tests/test_remote_implementation_stage2_proposal.py, tests/test_stage2_candidate_runtime_rehearsal.py, tools/remote_implementation_stage2_proposal.py); overlap is zero and protected main changes no schools/florida-state path. PR #709 exact candidate run 45501534802 proved the same Florida State 12-decision recommendation map reaches OWNER_GATE_1_READY with unchanged decision universe and tracked Stage 2 mutation NONE. Preserve exact Phase 0, refresh-0003, opponent-display successor, Integration Freeze, semantic snapshot, and frozen historical authority. Execute only the guarded disjoint refresh and repository-owned refresh -> census -> proposal continuation; stop on changed universe, blocker, moved authority, or durable OWNER_GATE_1_READY."
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — fourth disjoint Stage 2 current-main refresh after merged generic proposal-warning repair PR #709.",
-    "authorization": "Existing Florida State Stage 2 authority persists. This request authorizes only the guarded disjoint current-main refresh plus repository-owned STAGE2_REFRESH_CENSUS_PROPOSAL_V1 scheduling using the exact already-rehearsed recommendation map. It does not authorize Owner Gate 1 approval, fill, pre-seal, seal, apply, release, Preview, merge, Owner Gate 2, historical reinterpretation, or shared/global basketball mutation."
-  },
   "authority": {
-    "expansion_phase0": false,
-    "expansion_rebootstrap_from_freeze": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -52,12 +7,11 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
-    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
@@ -66,5 +20,43 @@
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  }
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from florida-state-expansion-stage2-current-main-refresh-0004",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_CENSUS",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "5f210b8e607b86988bfe00ffcb1404d644a2e089d89514d601f55a222fc1e95b"
+  },
+  "phase_continuation": {
+    "census_request_id": "florida-state-expansion-stage2-census-0007",
+    "expected_decision_universe_sha256": "878756a278c4170cfd17ab192304be7a15bc3b002bf46f8c0215d7fbf8d5e6a9",
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "proposal_request_id": "florida-state-expansion-stage2-proposal-0002",
+    "recommendation_map": {
+      "path": ".remote-implementation/payloads/florida-state/florida-state-expansion-stage2-proposal-0001/recommendation-map.json",
+      "sha256": "bd006a65016ac64cc21ef943e7b2130c72da833d860194dec91ce64897ab8afd"
+    }
+  },
+  "previous_control_state_commit": "f780611168987dc43e2f160b99c8b89ef55ef474",
+  "previous_control_state_sha256": "ad5d8eca6a5a27b071219bd4be1635a869cad4019563e84615b2fcb8888d56e0",
+  "request_id": "florida-state-expansion-stage2-census-0007",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-current-main-refresh-0004/successor-manifest.json",
+    "sha256": "8eacc94edd82f54cb717738dffdec55015e6799e49d0dae715f7bfc71df48c15"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "f227794be23d41f29c664f7942353d2fdf585847c7e54e6d44de99e0c26b323a"
+  },
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "a5a9f180361f2866fda01c1e27bb8734eede14a0"
 }
