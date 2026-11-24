@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "florida-state-expansion-stage2-census-0004",
+  "request_id": "florida-state-expansion-stage2-census-0005",
   "school_key": "florida-state",
   "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "10887399b74a411cf32d11817ed533aa2ecaaa40",
+  "previous_control_state_commit": "d54b06feaf9182195c6f54a020b2f603a921cc10",
   "previous_control_state_sha256": "c5b9f677b5837b3e660e66f3e6c56cd3651ffb7e0f070ab8885eb028ea6ba2eb",
   "expected_protected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
   "target_branch": "data/florida-state-onboarding",
@@ -45,7 +45,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — fresh permanent Stage 2 capability census after independently fresh-verified current-main refresh 0003.",
-    "authorization": "Existing owner-authorized Florida State Stage 2 persists. This census is bound to refresh successor florida-state-expansion-stage2-current-main-refresh-0003 at target f6333bd2f6e8c3c3e61719a6dfebc053844ca134 and protected main 1a1d1758b40f2fedaec56f3c3d6528647a6c909d. It must freshly regenerate the permanent Stage 2 blocker/warning/decision population on the refreshed target. No Research reopening, tracked repair, opponent-display normalization, recommendation-map rehearsal, Owner Gate 1 approval, fill/seal/apply, release, shared/global maintenance, merge, Preview, or Owner Gate 2 authority is carried by this request."
+    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — fresh Stage 2 census replacement after request 0004 failed before durable acceptance because GitHub returned an Internal Server Error on the first control-ref CAS push.",
+    "authorization": "Existing owner-authorized Florida State Stage 2 persists unchanged. Failed run 45486347463 for census 0004 reached permanent runner execution but GitHub rejected the first control acceptance push with CONTROL_REF_CAS_FAILED / Internal Server Error; durable control remained IDLE at sequence 736, request 0004 remained unused, protected main and target remained unchanged, and no tracked basketball mutation occurred. This fresh request uses a new ID and exact current authority only; it does not replay 0004 or add historical, repair, Gate 1, release, Preview, merge, Owner Gate 2, or shared/global authority."
   }
 }
