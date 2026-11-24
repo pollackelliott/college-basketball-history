@@ -96,7 +96,10 @@ jobs:
           if-no-files-found: warn
 
   known-good-conformance:
-    if: always()
+    if: >-
+      always() &&
+      (github.event_name == 'workflow_dispatch' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
     needs: known-good-witness
     runs-on: ubuntu-latest
     steps:
