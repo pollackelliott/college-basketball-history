@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_MONTANA_NEUTRAL_LOCATION_EVIDENCE_V1",
+  "school_key": "gonzaga",
+  "purpose": "Preserve same-source location evidence discovered during the accepted Montana reciprocal-family harvest; this is evidence capture, not Stage 3 site adjudication.",
+  "source": {
+    "title": "Montana Basketball Records & History",
+    "publisher": "University of Montana Athletics",
+    "series_history_page": 29,
+    "game_by_game_history_page": 8,
+    "url": "https://gogriz.com/documents/download/2023/8/16/Records___History.pdf"
+  },
+  "rows": [
+    {
+      "season": "1951-52",
+      "montana_series_result": "W 70-56",
+      "derived_gonzaga_result": "L 56-70",
+      "site_type": "NEUTRAL",
+      "location": "Kalispell, Montana",
+      "source_marker": "^ Played in Kalispell"
+    },
+    {
+      "season": "1951-52",
+      "montana_series_result": "L 62-69",
+      "derived_gonzaga_result": "W 69-62",
+      "site_type": "NEUTRAL",
+      "location": "Anaconda, Montana",
+      "source_marker": "% Played in Anaconda"
+    },
+    {
+      "season": "1951-52",
+      "montana_series_result": "W 83-64",
+      "derived_gonzaga_result": "L 64-83",
+      "site_type": "NEUTRAL",
+      "location": "Great Falls, Montana",
+      "source_marker": "$ Played in Great Falls"
+    },
+    {
+      "season": "1952-53",
+      "montana_series_result": "L 69-77",
+      "derived_gonzaga_result": "W 77-69",
+      "site_type": "NEUTRAL",
+      "location": "Kalispell, Montana",
+      "source_marker": "$ Played in Kalispell"
+    },
+    {
+      "season": "1952-53",
+      "montana_series_result": "W 89-75",
+      "derived_gonzaga_result": "L 75-89",
+      "site_type": "NEUTRAL",
+      "location": "Butte, Montana",
+      "source_marker": "^ Played in Butte"
+    }
+  ],
+  "postseason_indicator_found": false,
+  "note": "The same game-by-game source uses explicit tournament markers elsewhere (e.g. NAIB Tournament), but these five Gonzaga neutral games carry location footnotes only. Stage 1 therefore preserves them as competitive neutral games with source-supported city locations; exact buildings remain unknown and later site policy still controls."
+}
