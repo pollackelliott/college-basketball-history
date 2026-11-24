@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "florida-state-expansion-stage2-census-0002",
+  "request_id": "florida-state-expansion-stage2-current-main-refresh-0002",
   "school_key": "florida-state",
-  "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "982e8c7c7445074f08bf54524513dbe30d571117",
-  "previous_control_state_sha256": "5fbaa0fc55e0bbc8ec092c6c48af8b59bf5a4a23c1ec67de7e11071e4f73b33e",
-  "expected_protected_main_sha": "6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "previous_control_state_commit": "e2604dcd5b0e7f62971abd837f8fc4a20ecc7235",
+  "previous_control_state_sha256": "ce24ec6536b89c61ffb4821f2752a65e1070382868c66653f47ac128abd4925f",
+  "expected_protected_main_sha": "6734d2efd3a14b2cb9754c4fe286d7859a67c131",
   "target_branch": "data/florida-state-onboarding",
   "target_sha": "f2b39e222ca4ef33ff351bf4e74e3a246e3c3874",
   "phase0_successor": {
@@ -19,6 +19,15 @@
   },
   "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
   "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized Florida State ALL_HISTORY_EXPANSION Stage 2 persists through merged generic tooling/workflow repairs #703 and #706. Exact prior Stage 2 main authority is 6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9; current onboarding target is fresh-verified refresh successor f2b39e222ca4ef33ff351bf4e74e3a246e3c3874. GitHub compare proves 11 target-only paths versus 9 intervening protected-main-only generic tooling/workflow/test paths, zero overlap, and no schools/florida-state path changed on protected main. Preserve exact Phase0, prior refresh, Integration Freeze, semantic snapshot, frozen Research authority, and durable blocked-census history. This request performs only the guarded disjoint current-main refresh with independent exact-tree verification; Stage 2 must regenerate afterward rather than carrying the old blocker set or decision universe by assertion."
+  },
+  "creation_provenance": {
+    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — second disjoint Stage 2 current-main refresh after merged generic validation/tooling repairs #703 and #706.",
+    "authorization": "Owner explicitly continued the same Florida State Stage 2 authority and instructed that no new authorization is required for the approved generic validation repair. Existing Stage 2 phase authority therefore covers this repository-owned disjoint refresh and fresh verification only. No Florida State Research reopening, historical decision, recommendation map, Owner Gate 1 approval, fill/seal/apply, release, Preview, merge, Owner Gate 2, or shared/global basketball mutation is authorized by this request."
+  },
   "authority": {
     "expansion_phase0": false,
     "expansion_rebootstrap_from_freeze": false,
@@ -33,8 +42,8 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
-    "stage2_current_main_refresh": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
@@ -43,9 +52,5 @@
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "origin": "ChatGPT Florida State ALL_HISTORY_EXPANSION serialized Implementation lane — Stage 2 capability census after fresh-verified disjoint current-main refresh.",
-    "authorization": "Owner's explicit Florida State Stage 2 Proceed remains phase-persistent through census, permitted deterministic Stage 2 normalization/reconciliation, recommendation-map rehearsal, and OWNER_GATE_1_READY. The prior census request never reached a durable Stage 2 checkpoint. This fresh census is bound to independently verified refresh successor florida-state-expansion-stage2-current-main-refresh-0001 at target f2b39e222ca4ef33ff351bf4e74e3a246e3c3874 and repaired protected main 6f54dbd7d3d0c08a9135d6884e83cf6f162a75e9. No tracked repair, proposal rehearsal, Owner Gate 1 approval, fill/seal/apply, release, shared/global maintenance, merge, or Owner Gate 2 authority is carried by this request."
   }
 }
