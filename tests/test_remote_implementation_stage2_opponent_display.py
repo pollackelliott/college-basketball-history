@@ -249,6 +249,7 @@ raise SystemExit(0 if ready else 1)
         )
         semantic = semantic_snapshot_sha256(snapshot)
         freeze = {
+            "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
             "status": "INTEGRATION_FROZEN",
             "school_key": SCHOOL,
             "integration_base_sha": "1" * 40,
@@ -612,6 +613,125 @@ raise SystemExit(0 if ready else 1)
             hashlib.sha256(authority["freeze_bytes"]).hexdigest(),
             request["integration_freeze_sha256"],
         )
+
+    def test_census_with_authenticated_expansion_legacy_warning_is_accepted(self):
+        repo, control_sha, request = self.make_authority_repo()
+        checkpoint_dir = (
+            repo
+            / ".remote-implementation/checkpoints"
+            / SCHOOL
+            / "stage2-census"
+        )
+        warning = (
+            "LEGACY-001: curated venue 'Allen Fieldhouse' absent from venues.csv "
+            "(unchanged published legacy debt outside this expansion)"
+        )
+        plan = {
+            "blockers": [],
+            "warnings": [warning],
+            "package": {"warnings": [warning]},
+            "decisions": [],
+        }
+        plan_bytes = (
+            json.dumps(plan, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        (checkpoint_dir / "plan.json").write_bytes(plan_bytes)
+
+        status_path = checkpoint_dir / "implementation-stage2-status.json"
+        status = json.loads(status_path.read_text())
+        status["preflight"]["warning_count"] = 1
+        status_bytes = (
+            json.dumps(status, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        status_path.write_bytes(status_bytes)
+
+        manifest_path = checkpoint_dir / "checkpoint-manifest.json"
+        manifest = json.loads(manifest_path.read_text())
+        manifest["preflight"]["warning_count"] = 1
+        manifest["artifact_sha256"][
+            "implementation-stage2-status.json"
+        ] = hashlib.sha256(status_bytes).hexdigest()
+        manifest["artifact_sha256"]["plan.json"] = hashlib.sha256(
+            plan_bytes
+        ).hexdigest()
+        manifest_bytes = (
+            json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        manifest_path.write_bytes(manifest_bytes)
+
+        self.git(repo, "add", ".remote-implementation")
+        self.git(repo, "commit", "-m", "authenticated expansion legacy warning")
+        control_sha = self.git(repo, "rev-parse", "HEAD")
+        request["stage2_census_checkpoint"]["sha256"] = hashlib.sha256(
+            manifest_bytes
+        ).hexdigest()
+
+        authority = verify_census_and_freeze_authority(
+            request,
+            control_sha,
+            source_repo=repo,
+        )
+        self.assertEqual(authority["accepted_legacy_warnings"], [warning])
+        self.assertEqual(authority["blocker_keys"], KEYS)
+
+    def test_census_with_unrelated_warning_is_refused(self):
+        repo, control_sha, request = self.make_authority_repo()
+        checkpoint_dir = (
+            repo
+            / ".remote-implementation/checkpoints"
+            / SCHOOL
+            / "stage2-census"
+        )
+        warning = "LEGACY-001: exhibition-like wording requires manual confirmation"
+        plan = {
+            "blockers": [],
+            "warnings": [warning],
+            "package": {"warnings": [warning]},
+            "decisions": [],
+        }
+        plan_bytes = (
+            json.dumps(plan, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        (checkpoint_dir / "plan.json").write_bytes(plan_bytes)
+
+        status_path = checkpoint_dir / "implementation-stage2-status.json"
+        status = json.loads(status_path.read_text())
+        status["preflight"]["warning_count"] = 1
+        status_bytes = (
+            json.dumps(status, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        status_path.write_bytes(status_bytes)
+
+        manifest_path = checkpoint_dir / "checkpoint-manifest.json"
+        manifest = json.loads(manifest_path.read_text())
+        manifest["preflight"]["warning_count"] = 1
+        manifest["artifact_sha256"][
+            "implementation-stage2-status.json"
+        ] = hashlib.sha256(status_bytes).hexdigest()
+        manifest["artifact_sha256"]["plan.json"] = hashlib.sha256(
+            plan_bytes
+        ).hexdigest()
+        manifest_bytes = (
+            json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        manifest_path.write_bytes(manifest_bytes)
+
+        self.git(repo, "add", ".remote-implementation")
+        self.git(repo, "commit", "-m", "unrelated warning")
+        control_sha = self.git(repo, "rev-parse", "HEAD")
+        request["stage2_census_checkpoint"]["sha256"] = hashlib.sha256(
+            manifest_bytes
+        ).hexdigest()
+
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "UNSUPPORTED_WARNING",
+        ):
+            verify_census_and_freeze_authority(
+                request,
+                control_sha,
+                source_repo=repo,
+            )
 
     def test_census_with_unrelated_blocker_is_refused(self):
         repo, control_sha, request = self.make_authority_repo()
