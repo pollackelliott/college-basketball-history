@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_SEASON_FIRST_1947_1952_SOURCE_LIMITS_V1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "parent_checkpoint_sha": "4dbf446604bfaaef21658b279c4624d983cb5f7b",
+  "method_change": {
+    "prior_mode": "OPPONENT_FAMILY_FIRST",
+    "current_mode": "SEASON_FIRST_BULK_RECONSTRUCTION",
+    "reason": "Opponent-family harvesting had reached diminishing returns at 422 identified games. Stage 1 policy calls for candidate-universe extraction first and opponent/source families as bounded repair, so the unit was changed to multi-opponent season reconstruction."
+  },
+  "tranche_seasons": [
+    "1947-48",
+    "1948-49",
+    "1949-50",
+    "1950-51",
+    "1951-52"
+  ],
+  "accepted_rows": 37,
+  "source_mix": [
+    "official opponent schedule/history pages",
+    "contemporary Associated Press / United Press / local college-score reporting preserved by Oregon Historic Newspapers",
+    "NAIA historical championship records"
+  ],
+  "admission_rule": "Only played-game identities with a stable on-court W/L result were admitted. Schedule-only mentions were discovery/control evidence and were not added as games.",
+  "date_policy": "Exact game_date is written only when printed directly or mechanically fixed by publication date plus an explicit 'last night', weekday, weekend-series, or official-schedule statement. Otherwise blank.",
+  "site_policy": "H/A/N is written only when source-explicit. Geography alone never creates site_type.",
+  "score_conflicts": [
+    {
+      "season": "1949-50",
+      "opponent": "Whitman",
+      "stable_fields": "Gonzaga win; Gonzaga score 65",
+      "conflicting_opponent_scores": [
+        "20",
+        "29"
+      ],
+      "disposition": "NONBLOCKING_SCORE_CONFLICT; opponent_score blank"
+    },
+    {
+      "season": "1951-52",
+      "opponent": "Eastern Oregon",
+      "date": "1952-01-14",
+      "stable_fields": "Gonzaga win; Gonzaga score 90; neutral at Baker",
+      "conflicting_opponent_scores": [
+        "63",
+        "62",
+        "41"
+      ],
+      "disposition": "NONBLOCKING_SCORE_CONFLICT; opponent_score blank"
+    }
+  ],
+  "rejected_bulk_source": {
+    "source": "West Coast Conference historical men's basketball record book",
+    "disposition": "REJECTED_AS_BULK_EXTRACTOR_IN_CURRENT_INTERFACE",
+    "reason": "Multi-column PDF text was interleaved and produced impossible season grouping; screenshot renderer could not provide a reliable visual verification. No rows in this tranche rely on that scrambled extraction."
+  },
+  "season_reconciliation_after_tranche": [
+    {
+      "season": "1947-48",
+      "official_record": "24-11 / 35",
+      "identified_record": "15-7 / 22",
+      "arithmetic_difference": 13
+    },
+    {
+      "season": "1948-49",
+      "official_record": "17-12 / 29",
+      "identified_record": "7-7 / 14",
+      "arithmetic_difference": 15
+    },
+    {
+      "season": "1949-50",
+      "official_record": "18-11 / 29",
+      "identified_record": "14-11 / 25",
+      "arithmetic_difference": 4
+    },
+    {
+      "season": "1950-51",
+      "official_record": "8-22 / 30",
+      "identified_record": "5-9 / 14",
+      "arithmetic_difference": 16
+    },
+    {
+      "season": "1951-52",
+      "official_record": "19-16 / 35",
+      "identified_record": "13-13 / 26",
+      "arithmetic_difference": 9
+    }
+  ],
+  "stopping_note": "This is a bulk candidate-universe expansion checkpoint, not a claim that the five seasons are fully closed. Remaining arithmetic differences are research diagnostics only and never authorize anonymous games."
+}
