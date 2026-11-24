@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_ALL_HISTORY_EXPANSION_STAGE1_ACTIVE_V1",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+  "accepted_top_level_scope": "1958-59+",
+  "published_baseline_source_game_count": 2053,
+  "inherited_unpublished_prescope_source_game_count": 0,
+  "official_expansion_season_count_1907_08_through_1957_58": 51,
+  "official_expansion_aggregate_wins": 477,
+  "official_expansion_aggregate_losses": 500,
+  "official_expansion_aggregate_games": 977,
+  "accepted_stage1_identified_game_count": 1,
+  "inception_boundary_status": "UNRESOLVED_PRE_1907_FORMAL_VARSITY_IDENTITY",
+  "candidate_inception_seasons": [
+    "1905-06",
+    "1906-07",
+    "1907-08"
+  ],
+  "blocking_residuals": [
+    {
+      "blocker_id": "GONZAGA-S1-INCEPTION-001",
+      "class": "INSTITUTIONAL_INCEPTION_IDENTITY_CONFLICT",
+      "blocking": "YES",
+      "detail": "Official Gonzaga athletics all-time accounting and repeated first-year statements begin at 1907-08, while Gonzaga historical/archive evidence documents basketball activity from 1905 and says intercollegiate competition began in 1906, with a concrete Whitman game in January 1907. Direct evidence must distinguish formal collegiate varsity program from precursor/mixed-division activity before freezing inception."
+    }
+  ],
+  "historical_core_data_changed": false,
+  "next_bounded_unit": "Direct-source pre-1907 team-identity adjudication: 1905-06 roster/division and 1906-07 intercollegiate team evidence; do not broaden into general 1907-58 harvesting until inception boundary is settled."
+}
