@@ -1,0 +1,63 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Central Methodist"
+      ],
+      "authority_signature": "centralmethodist",
+      "canonical_opponent_key": "central-methodist",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Central Methodist (MO)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Central Methodist"
+    },
+    {
+      "authority_names": [
+        "Culver-Stockton College (MO)"
+      ],
+      "authority_signature": "culverstocktoncollegemo",
+      "canonical_opponent_key": "culver-stockton",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Culver-Stockton"
+      ],
+      "target_row_count": 1,
+      "to_name": "Culver-Stockton College (MO)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 3,
+  "source_game_display_changes": [
+    {
+      "from_name": "Central Methodist (MO)",
+      "normalized_opponent_key": "central-methodist",
+      "source_game_id": "FSU-EXP-S1-00047",
+      "to_name": "Central Methodist"
+    },
+    {
+      "from_name": "Culver-Stockton",
+      "normalized_opponent_key": "culver-stockton",
+      "source_game_id": "FSU-EXP-S1-00096",
+      "to_name": "Culver-Stockton College (MO)"
+    },
+    {
+      "from_name": "Central Methodist (MO)",
+      "normalized_opponent_key": "central-methodist",
+      "source_game_id": "FSU-EXP-S1-00124",
+      "to_name": "Central Methodist"
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+    "integration_base_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+    "school_key": "florida-state",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+    "integration_base_sha": "848e9cebc9c5b5ff7f769920a7bd8fa9b50a3f8d",
+    "school_key": "florida-state",
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "36ca9aaf972eca44a62b878c3cbbdf4adc81b0105ecf4a357a4b2aee7aeb7983",
+    "implementation-stage2-status.json": "2bc605cb4c3f3fee3ba9f6e7c742fc24432b789ce1704e33d15874756615cce2",
+    "plan.json": "62d74f0e7509105830a656f189fed131fbeaab673115b29bc58c9cdbb5777d7b",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "a360486afe7b484e1d4381a2f746a857441d45610e907201be1b89f57aa9659b"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "36ca9aaf972eca44a62b878c3cbbdf4adc81b0105ecf4a357a4b2aee7aeb7983",
+    "implementation-stage2-status.json": "165888852a083485267d1bd4ead1db65fc7fa19c7e2d8b180cd187f0e1c2fee3",
+    "plan.json": "55ec75e8ca35f24ee8dc819e588fdec227fdd043538c183e094ca84228339a56",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "0ca23823e2f908468b67047675d171887cbdcd663fadc3d1d38818ec15ec0d9e"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "36ca9aaf972eca44a62b878c3cbbdf4adc81b0105ecf4a357a4b2aee7aeb7983",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 2,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 1
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 2,
+      "topology": "preflight_blockers"
+    },
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 1,
+      "topology": "preflight_warnings"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "cd223ac65f2462e0eae76e7c980081ca6ed4734fed8d0ea1519b338d5d094b15",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "florida-state"
+  ],
+  "phase0_protected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "phase0_successor_path": ".remote-implementation/successors/florida-state/florida-state-expansion-phase0-0003/successor-manifest.json",
+  "phase0_successor_sha256": "5f210b8e607b86988bfe00ffcb1404d644a2e089d89514d601f55a222fc1e95b",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/florida-state/plan.json",
+    "review_path": ".onboarding/florida-state/review.csv",
+    "warning_count": 1
+  },
+  "protected_main_sha": "1a1d1758b40f2fedaec56f3c3d6528647a6c909d",
+  "request_id": "florida-state-expansion-stage2-census-0005",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "semantic_snapshot_sha256": "5b456382a069b70684dd5cb1e88b703bc6fedf8e0727c09ef12d8a0f909d0f6b",
+  "stage2_current_main_refresh_successor_path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-current-main-refresh-0003/successor-manifest.json",
+  "stage2_current_main_refresh_successor_sha256": "d852918ccb4eeea2817a1056f87f07e5e6b3e9ed4be775f65310ef0d0b1f27c9",
+  "stage2_current_main_refresh_verification_path": ".remote-implementation/verifications/florida-state/florida-state-expansion-stage2-current-main-refresh-0003/stage2-current-main-refresh-verification.json",
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "f6333bd2f6e8c3c3e61719a6dfebc053844ca134",
+  "target_tree_sha": "be67fb363c2e8567a4b52a91acfc0f7702fd2e74",
+  "tracked_mutation_proof": {
+    "after_head_sha": "f6333bd2f6e8c3c3e61719a6dfebc053844ca134",
+    "after_status": "",
+    "after_tree_sha": "be67fb363c2e8567a4b52a91acfc0f7702fd2e74",
+    "before_head_sha": "f6333bd2f6e8c3c3e61719a6dfebc053844ca134",
+    "before_status": "",
+    "before_tree_sha": "be67fb363c2e8567a4b52a91acfc0f7702fd2e74",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
