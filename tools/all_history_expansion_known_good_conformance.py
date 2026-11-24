@@ -47,6 +47,18 @@ WITNESSES = (
     ),
 )
 
+WITNESS_BY_SCHOOL = {row[0]: row for row in WITNESSES}
+
+
+def select_witnesses(school: str | None) -> tuple[tuple[str, str, str], ...]:
+    if school is None:
+        return WITNESSES
+    witness = WITNESS_BY_SCHOOL.get(school)
+    if witness is None:
+        raise Stop("KNOWN_GOOD_UNKNOWN_WITNESS:" + school)
+    return (witness,)
+
+
 PREFLIGHT_KEYS = (
     "blocker_count",
     "warning_count",
@@ -331,6 +343,11 @@ def main() -> int:
     parser.add_argument("--control-commit", default="HEAD")
     parser.add_argument("--diag", type=Path, default=Path("/tmp/all-history-expansion-known-good"))
     parser.add_argument("--json-out", type=Path)
+    parser.add_argument(
+        "--school",
+        choices=tuple(WITNESS_BY_SCHOOL),
+        help="Replay only one authenticated known-good witness.",
+    )
     args = parser.parse_args()
 
     control_repo = args.control_repo.resolve()
@@ -352,7 +369,7 @@ def main() -> int:
 
     results: list[dict[str, Any]] = []
     failures = 0
-    for witness in WITNESSES:
+    for witness in select_witnesses(args.school):
         school = witness[0]
         try:
             results.append(
