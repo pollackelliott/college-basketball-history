@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-expansion-stage2-census-0002",
+  "school_key": "hawai-i",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "913f7a00f14aef4f01d9f3e8ddd9492184075bf7",
+  "previous_control_state_sha256": "ef7718ba66e41b1fa65430c3db592ead1897af2d36ff8e7e5d8cb87f2c0d2340",
+  "expected_protected_main_sha": "2ab62661ce0ca13547b2eb8b80461f71e49fd3bd",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "2c4b017ac3e2656f78e1e522fe4c5d66fe85e49e6910ad075d1c048e211b7908"
+  },
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same immutable Hawai‘i 812-game ALL_HISTORY_EXPANSION Research Freeze; independently fresh-verified Phase 0 hawai-i-expansion-phase0-0003 and original Integration Freeze unchanged. Generic Stage 2 venue-authentication repair PR #713 merged after exact-school candidate replay and all eight checks passed.",
+    "authorization": "Owner Continue within already-authorized Hawai‘i Stage 2 technical phase; fresh read-only Stage 2 capability census only, through independently verified CAPABILITY_CENSUS_READY or durable BLOCKED. Previous census 0001 was rejected before checkpoint and is NOT replayed. New main delta contains tooling/workflow/test paths only, disjoint from the unchanged seven-path Hawai‘i Phase 0 target. No historical adjudication, tracked data repair, Gate 1, release, Preview, merge, or production authority."
+  }
+}
