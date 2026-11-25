@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_SAINT_MARTINS_WHOLE_HISTORY_SOURCE_FEASIBILITY_NO_LEDGER_ADMISSION_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "parent_research_head": "f44ae011fe22de74448fab0b89424b32a5f2125b",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "target_institution": "Saint Martin's University / historically Saint Martin's College (Lacey, Washington)",
+  "assessment_interval": "1940-41 through 1957-58 (pre-1940 college team not established by the institutional timeline)",
+  "systematic_first_party_sources_screened": [
+    {
+      "title": "Saint Martin's athletics centennial retrospective",
+      "url": "https://www.stmartin.edu/news-and-stories/news/2026-honors-saint-martins-universitys-athletics-centennial-century-champions",
+      "finding": "University says first men's college basketball team formed 1940; no original dated game-by-game Saint Martin's vs Gonzaga results on this page",
+      "role": "college-vs-high-school and era scope plausibility only"
+    },
+    {
+      "title": "Saint Martin's University institutional history",
+      "url": "https://www.stmartin.edu/mission-vision/history",
+      "finding": "Men's college basketball team first formed 1940 and reestablished after WWII 1946",
+      "role": "institutional history, not a score ledger"
+    },
+    {
+      "title": "Saint Martin's official men's basketball opponent-history page",
+      "url": "https://smusaints.com/sports/mens-basketball/opponent-history",
+      "finding": "Web-accessible rendered extraction exposes modern opponent summary table only; no extractable chronological Gonzaga appearances in pre-1958 period",
+      "role": "not an exhaustive pre-1958 primary results census",
+      "access_limit": "Fetched page displayed only short alphabetic opponent-list fragment; absence of Gonzaga in this fragment is NOT evidence Gonzaga games did not occur."
+    },
+    {
+      "title": "Saint Martin's University Archives and Special Collections",
+      "url": "https://www.stmartin.edu/directory/offices-departments-directory/ogrady-library/archives-and-special-collections",
+      "finding": "Official page says Archives and Special Collections is currently closed for research consultations; archives include Saint Martin's College and Saint Martin's High School holdings.",
+      "role": "documented source access and identity caution"
+    },
+    {
+      "title": "Gonzaga 2015 official game preview vs Saint Martin's",
+      "url": "https://gozags.com/news/2015/12/13/No_20_17_MBB_Hosts_Saint_Martin_s_on_Monday",
+      "finding": "Gonzaga claims 10-0 all-time series through previous 1998 meeting, without date-scored pre-1958 individual game rows.",
+      "role": "aggregate series lead only; not sufficient to admit or date any pre-1958 game"
+    },
+    {
+      "title": "Notre Dame Joyce Sports Collection historic college basketball guide catalog (index)",
+      "url": "https://rarebooks.library.nd.edu/collections/sports/basketball/media_guides-college.html",
+      "finding": "Search index suggests Saint Martin's media-guide collection; target opened as 403 Forbidden.",
+      "role": "unreadable catalog/archival guide lead, not extracted source evidence"
+    }
+  ],
+  "contemporary_or_secondary_discovery_screen": {
+    "method": "Bounded targeted search of historical Saint Martin's vs Gonzaga 1940s-1950s results",
+    "conclusion": "No sufficiently authenticated new played Gonzaga vs Saint Martin's game identity with season/date/result/score recovered in this source family. Cross-institution match tables for other Saint Martin's opponents do not establish Gonzaga meetings."
+  },
+  "verified_individual_gonzaga_source_appearances_reviewed": 0,
+  "important_interpretation": "Zero readable Gonzaga game-by-game source rows is a source-access limitation; it is NOT zero historical Gonzaga-Saint Martin's meetings.",
+  "existing_gonzaga_ledger_saint_martins_rows": 0,
+  "newly_admitted_distinct_games": 0,
+  "unresolved_future_opportunity": "If a complete Saint Martin's first-party historical scorebook, original season schedule, or archive issue becomes accessible, perform a fresh scoped game census; do not retry same inaccessible archive without changed access.",
+  "prior_accepted_games": 552,
+  "after_identified_games": 552,
+  "wins": 212,
+  "losses": 340,
+  "official_expansion_games": 977,
+  "aggregate_minus_identified_arithmetic": 425,
+  "held_candidates_preserved": 6,
+  "parked_accounting_debts_preserved": 4,
+  "recommended_next_family": {
+    "institution": "Pacific Lutheran University",
+    "basis": "Official Pacific Lutheran men's basketball series history shows Gonzaga 7-9 across 1938-39 to 1959-60; individual-game dates/scores and overlap still require evaluation.",
+    "url": "https://golutes.com/sports/2018/5/10/mens-basketball-series-history",
+    "limitation": "Opponents aggregate page is not alone sufficient for new game identities; obtain original historical game-by-game series or contemporaneous schedules and reconcile prior accepted PLU games."
+  },
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "source_family_classification": "FEASIBILITY_SCREEN__NOT_CENSUSED__NO_ACCEPTED_NEW_GAME"
+}
