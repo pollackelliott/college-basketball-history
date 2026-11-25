@@ -1,0 +1,46 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "b53ff5fb13e5c808e4eb7c25062781cad58b77b94c8327e1e0fc3ffa3f419f51",
+    "implementation-stage2-status.json": "5d43878756a50ccbf6b8768fed4a4ea55a28e36a5dcdc20118fbf8f2bebe5e1d",
+    "plan.json": "50163f567d46f58be1ae29205cca16dc04ae7d3251c01091a21314f4c6daa5bc",
+    "review.csv": "16b8cb1e096b98eaa4ca44ad1d22b4ebb747a41bea187531654bf5426850178b",
+    "review.md": "e90e074351c10a7dbedf61d24db34506523790bc9b108a914e01f0de8028608d"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "b53ff5fb13e5c808e4eb7c25062781cad58b77b94c8327e1e0fc3ffa3f419f51",
+    "implementation-stage2-status.json": "35833fbba5bf4b0f549f8e6d5e9eef512b22e45b1ffd6af565d7af63ed7ce442",
+    "plan.json": "e23ac484f61eb5320fe3f78862c4bdc9f4a5ec17df3e4e1a41c8a1d34fa6fd86",
+    "review.csv": "16b8cb1e096b98eaa4ca44ad1d22b4ebb747a41bea187531654bf5426850178b",
+    "review.md": "db7058ec2735ee5e9587c0ba95b7de4790377ff5d58f47a8472641569bc85db2"
+  },
+  "capability_census_status": "REPAIR_SCOPE_REQUIRED",
+  "changed_paths": [
+    "schools/hawai-i/opponents.csv",
+    "schools/hawai-i/source-games.csv"
+  ],
+  "decision_universe_sha256": "fe9522c8a8e0ffd8e3739f1fa4f26885e316ef7f9b77ac202751b503e73fa65b",
+  "expected_blocker_keys": [
+    "regis-colorado"
+  ],
+  "field_level_proof_sha256": "5908bdf8fa60b8f9ab4de249f9869e61ebb38d69743c8e1931cfaee5ba5b596e",
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_VERIFICATION",
+  "normalization_report_sha256": "801ce8d0acd8544a67528066bbf3a098bfd516d1eb7b41766d6e257caecca67e",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "4d91da1800d9d7b535ae2e191f309bfc391ea2ee",
+  "remote_stage2_opponent_display_equivalence": "PASS",
+  "request_id": "hawai-i-expansion-stage2-opponent-display-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_predecessor_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "target_sha": "19541a39fef8e4a8f144dba3d35a8f83e37598b8",
+  "target_tree_sha": "c4acf95aa8c6fb9b80f555d673973944cab1c242",
+  "tracked_stage2_mutation": "NONE"
+}
