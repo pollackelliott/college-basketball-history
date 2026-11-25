@@ -1,0 +1,16 @@
+{
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "checkpoint": 18,
+  "filename": "boise-state-expansion-stage1-nnc-1950-51-four-games-0018.zip",
+  "sha256": "d64c1a4ff2fd3d57087a8f33634c4761c6daf4e981693df352dda12bf3359ef8",
+  "parent_sha256": "dee333e37f9f354c6a41d378ce6f7a36f33f4b8b46db74d910274e3121571003",
+  "research_parent_head": "95e7e9a52d63a7174ee7121b21c4b38bd1306bad",
+  "immutable_research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "protected_main": "48823b191b76671ce794b9ac0fe540f7a1260956",
+  "status": "STAGE_1_IN_PROGRESS",
+  "accepted_games": 198,
+  "junior_college_games": 143,
+  "official_seasons_identified": 142,
+  "aggregate_arithmetic_difference_not_game_id_count": 645,
+  "accounting_rows": 38
+}
