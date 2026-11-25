@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+    "implementation-stage2-status.json": "ab0fe45fa87a7fb2c08102651932a324692b2462d95e8eabffec8ba511861875",
+    "plan.json": "b0f43e3e0d6b2cf21611c9c921b65fbeb189c5edd7dc35dab13e467cea09c7a1",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "1a8c46c02d46b215fada6471ffea810817ec4aad15cc497209d5b22fe337e8cb"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "9bfb385062fd17647dd12cce994e83a071a1259108bea49bd630d05b5795b1d8",
+    "implementation-stage2-status.json": "9e2bffc77da96626011c769452b2719f19885ec37460a44902e5efe84305ae31",
+    "plan.json": "726ee80228d0be5485a192bf9baec040948bb4e07e14254f4c23448be2be315f",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "5946ba6e84de95d4820da0e0b384fd485bd4f6b50dd207da205def9003e3aacf"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "2ab62661ce0ca13547b2eb8b80461f71e49fd3bd",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "hawai-i-expansion-stage2-census-0002",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "target_tree_sha": "22c76d8c1c68123989d4a09ffc613570c89d482b",
+  "tracked_stage2_mutation": "NONE"
+}
