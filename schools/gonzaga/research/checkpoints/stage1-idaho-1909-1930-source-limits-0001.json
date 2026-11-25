@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_IDAHO_2024_25_EARLY_INSTITUTIONAL_RECIPROCAL_0001",
+  "school_key": "gonzaga",
+  "parent_research_head": "9256157de989486238ec366af2fa90e95fc5c17f",
+  "authenticated_protected_main_sha": "9bbe5d4ead518b37e5bd80810d20f1fe21d8dddd",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "method": "ONE_COHERENT_AUTHENTICATED_IDAHO_INSTITUTIONAL_2024_RECORD_BOOK_1909_1930",
+  "source_url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/govandals.com/documents/2024/7/26/MBB_Record_Book_24-25.pdf",
+  "contemporaneous_original_1928_urls": [
+    "https://objects.lib.uidaho.edu/argonaut/pdf/arg-1928-01-27.pdf",
+    "https://objects.lib.uidaho.edu/argonaut/pdf/arg-1928-03-02.pdf"
+  ],
+  "previous_idaho_source": "University of Idaho 2025-26 official record book; previous accepted family starts at 1933-34",
+  "current_idaho_source": "2024-25 official record book historical ALL-TIME RESULTS contains older 1909-30 season tables",
+  "accepted_count": 25,
+  "accepted_wins": 7,
+  "accepted_losses": 18,
+  "accepted_seasons": [
+    "1909-10",
+    "1913-14",
+    "1916-17",
+    "1918-19",
+    "1920-21",
+    "1921-22",
+    "1922-23",
+    "1923-24",
+    "1924-25",
+    "1925-26",
+    "1926-27",
+    "1927-28",
+    "1928-29",
+    "1929-30"
+  ],
+  "verified_original_row_prefix_shall_remain": "6c2d18fe845b478c858274efbed0a040815eead8",
+  "exact_id_range": [
+    "GONZAGA-EXP-IDAHOEARLY-001",
+    "GONZAGA-EXP-IDAHOEARLY-025"
+  ],
+  "field_uncertainty": [
+    {
+      "research_game_id": "GONZAGA-EXP-IDAHOEARLY-006",
+      "season": "1920-21",
+      "issue": "Idaho official 1921-01-21 result W has literal missing score '-----'; Gonzaga team and opponent scores blank, no inference."
+    },
+    {
+      "research_game_id": "GONZAGA-EXP-IDAHOEARLY-020",
+      "season": "1927-28",
+      "issue": "Idaho retrospective gives 1/26/1928 W28-15 while contemporaneous Jan27 describes upcoming Saturday contest and original March2 season recap calls first Gonzaga win 25-18; game identity (first of two Idaho wins) stable but exact date AND score unresolved. Leave both blank."
+    },
+    {
+      "research_game_id": "GONZAGA-EXP-IDAHOEARLY-021",
+      "season": "1927-28",
+      "issue": "Idaho official gives 2/29 W H 32-21; contemporaneous Mar2 Argonaut corroborates Wednesday Feb29 W32-21 at Spokane, conflicting with Idaho source H designation. Site UNKNOWN; no H/A from geography."
+    }
+  ],
+  "old_held_candidates": 6,
+  "added_held_candidates": 0,
+  "parked_accounting_contradictions": 4,
+  "additional_scoped_rows_not_adjudicated": [
+    {
+      "season": "1930-31",
+      "source_row": "1/6 Idaho L34-39 Gonzaga",
+      "reason": "Previously parked 1930-31 institutional season outcome/total contradiction; classify in one future independent single-family scoped census, do not silently amend parked accounting debt in this bounded 25-game tranche."
+    },
+    {
+      "season": "1932-33",
+      "source_row": "2/3 Idaho W55-19 Gonzaga",
+      "reason": "Beyond selected 1909-30 source-census tranche; known candidate for future bounded 1930s systematic reciprocal pass, not marked negative."
+    }
+  ],
+  "limits": "Idaho official historical tables vary in completeness and occasional retrospective transcription; two 1927-28 entries explicitly checked against contemporaneous campus reporting and uncertainties preserved. No invented opponent games, dates, venues, results, site classifications, or fabricated season aggregate rows.",
+  "next_unit": "One material multi-season 1930s first-party schedule/results corpus, using 1930-31 and 1932-33 Idaho items as exact locators and checking parked 1930-31 source-accounting contradiction before any admission; avoid searching isolated old rows without material new evidence. Stage2 unauthorized."
+}
