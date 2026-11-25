@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "cdc27ec7615825c2d8341089235bbf3d06597f17a052b0e04e31aedcfebbfcd8",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "d32b58342892ba0ae4785dc70ea75db6bc2bd3e33e44410753f5fff7ac68ae13",
+  "pr_created": false,
+  "preview_request_id": "florida-state-expansion-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "readiness_proof_sha256": "b4efc00e8524a5e526b898a381f29febdf65d92de37848d77814f7bb21cdc453",
+  "release_pr_packet_sha256": "9d28c6a445b84594fb3f57cee6585337d90452097d4348fbc8999fe15b2a22ce",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "florida-state-expansion-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "tracked_mutation": "NONE"
+}
