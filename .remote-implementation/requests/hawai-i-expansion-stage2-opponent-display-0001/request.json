@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-expansion-stage2-opponent-display-0001",
+  "school_key": "hawai-i",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "96b3eef2d7bf3779203c1fa6d0c21d88f991bc18",
+  "previous_control_state_sha256": "5e4c4a7d5f5d25935206332bfdeec1e215ab504bb6a944e962bacce441214cff",
+  "expected_protected_main_sha": "4d91da1800d9d7b535ae2e191f309bfc391ea2ee",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "5a9f87923c1e2da312c528d195da4d44c7c30e656e43fd53d89c24d8d74fe497"
+  },
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Hawai‘i 812-game ALL_HISTORY_EXPANSION Research Freeze and independently verified Stage 2 census 0002; exact single opponent-display conflict regis-colorado: Regis vs Regis (CO); zero warnings and zero owner decisions.",
+    "authorization": "Same owner-authorized Hawai‘i Stage 2 phase; narrow permanent STAGE2_OPPONENT_DISPLAY_NORMALIZE only, bound to exact fresh-verified census with sole deterministic display blocker. Permanent tool chooses authoritative display; only canonical_opponent_name and normalized_opponent_name may change; historical source labels, game identity/results/HAN/site and Research Freeze immutable. Full guarded writeahead, lock, CAS, and independent verification required. No Gate 1, map/proposal, release or historical decision approval. PR #714 main tooling-only delta disjoint from Hawai‘i package."
+  }
+}
