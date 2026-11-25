@@ -314,6 +314,8 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         safe_reuse_new_registration: bool = False,
         safe_reuse_bad_registration_count: bool = False,
         safe_reuse_missing_reuse_candidate: bool = False,
+        inherited_venue_reuses: int = 0,
+        safe_reuse_bad_inherited_count: bool = False,
         unrelated_package_mismatch: bool = False,
     ):
         repo = Path(tempfile.mkdtemp(prefix="stage2-authority-test-"))
@@ -372,7 +374,15 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             freeze["global_venue_reconciliation"] = {
                 "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER": 0,
                 "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": new_count,
-                "REUSE_REGISTERED_GLOBAL_VENUE": 1,
+                "REUSE_REGISTERED_GLOBAL_VENUE": (
+                    1 + inherited_venue_reuses
+                    + int(safe_reuse_bad_inherited_count)
+                ),
+            }
+            freeze["venue_support_actions"] = {
+                "EXTEND_INHERITED": inherited_venue_reuses,
+                "REUSE_INHERITED": 0,
+                "NEW_SUPPLEMENTAL": 1 + new_count,
             }
             freeze["venue_reconciliation_census"] = {
                 "blocker_count": 0,
@@ -1336,6 +1346,39 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             authority["phase0_preview"]["global_venue_registration_count"],
             0,
         )
+
+    def test_inherited_venue_reuse_does_not_inflate_supplemental_phase0_count(self):
+        # Same topology as Hawai‘i: two inherited support extensions reuse
+        # global venues, but only one NEW_SUPPLEMENTAL local venue is rebased.
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            inherited_venue_reuses=2,
+        )
+        authority = verify_phase0_authority(
+            request, control_sha, source_repo=repo,
+        )
+        self.assertEqual(
+            authority["phase0_preview"]["rebased_venue_mapping_count"], 1,
+        )
+        self.assertEqual(
+            authority["integration_freeze"]["global_venue_reconciliation"][
+                "REUSE_REGISTERED_GLOBAL_VENUE"
+            ], 3,
+        )
+
+    def test_inherited_venue_reuse_population_mismatch_is_rejected(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            inherited_venue_reuses=2,
+            safe_reuse_bad_inherited_count=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request, control_sha, source_repo=repo,
+            )
 
     def test_safe_registered_venue_reuse_requires_exact_preview_hash(self):
         repo, control_sha, request, _ = self.make_authority_repo(
