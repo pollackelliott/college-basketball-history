@@ -346,6 +346,19 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
         authority = src / ".onboarding/example/integration-freeze.json"
         manifest = json.loads(authority.read_text(encoding="utf-8"))
 
+        if variant in {"frozen_inherited_update", "frozen_inherited_tamper"}:
+            # The expansion Freeze can revise inherited HOME chronology and
+            # assignment summaries, not only append new venue relationships.
+            # The published integration-base row remains the old predecessor.
+            venue_path = src / "schools/example/venues.csv"
+            frozen = venue_path.read_bytes().replace(
+                b"Inherited note\\n", b"Frozen expansion chronology\\n", 1
+            )
+            assert frozen != venue_path.read_bytes()
+            venue_hash = hashlib.sha256(frozen).hexdigest()
+            manifest["candidate_member_sha256"]["venues.csv"] = venue_hash
+            manifest["package_member_sha256"]["venues.csv"] = venue_hash
+
         # The protected-main parent carries only inherited rows.  The immutable
         # Integration Freeze is an ignored preview containing the inherited row
         # plus the two supplemental rows that Phase 0 will publish.
@@ -419,7 +432,12 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
             if variant == "wrong_suffix"
             else " Integration rebase resolved final global venue ID VEN-000010."
         )
-        inherited_note = "Inherited changed" if variant == "inherited_tamper" else "Inherited note"
+        inherited_note = (
+            "Frozen expansion chronology" if variant == "frozen_inherited_update"
+            else "Tampered after Freeze" if variant == "frozen_inherited_tamper"
+            else "Inherited changed" if variant == "inherited_tamper"
+            else "Inherited note"
+        )
         phase0 = (
             "source_program_key,venue_key,venue_id,canonical_name,city,state,notes\n"
             f"example,inherited-arena,VEN-000001,Inherited Arena,Example,EX,{inherited_note}\n"
@@ -594,6 +612,43 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
                     ).encode("utf-8")
                 ).hexdigest(),
             )
+
+    def test_frozen_inherited_venue_chronology_survives_display_successor(self):
+        # Regression: Hawai‘i expansion legitimately updated already-published
+        # HOME venue chronology in the immutable Freeze, then Phase 0 appended
+        # supplemental venues. The preceding published row is not the Freeze.
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "source", Path(temp) / "copy"
+            self.make_phase0_venue_successor(src, variant="frozen_inherited_update")
+            with mock.patch.object(
+                onboard_school, "frozen_venue_split_freeze_bytes",
+                side_effect=[None, None],
+            ):
+                onboard_school.copy_repository(src, dst, school_key="example")
+            self.assertEqual(
+                (dst / ".onboarding/example/integration-freeze.json").read_bytes(),
+                (src / ".onboarding/example/integration-freeze.json").read_bytes(),
+            )
+            self.assertIn(
+                "Frozen expansion chronology",
+                (dst / "schools/example/venues.csv").read_text(),
+            )
+
+    def test_frozen_inherited_venue_chronology_rejects_later_tamper(self):
+        # An unapproved edit to the inherited row after Freeze must still fail
+        # exact reconstructed frozen-byte/hash authentication.
+        with tempfile.TemporaryDirectory() as temp:
+            src, dst = Path(temp) / "source", Path(temp) / "copy"
+            self.make_phase0_venue_successor(src, variant="frozen_inherited_tamper")
+            with mock.patch.object(
+                onboard_school, "frozen_venue_split_freeze_bytes",
+                side_effect=[None, None],
+            ):
+                with self.assertRaisesRegex(
+                    WorkflowError, "Integration Freeze package mismatch"
+                ):
+                    onboard_school.copy_repository(src, dst, school_key="example")
+            self.assertFalse(dst.exists())
 
     def test_phase0_venue_rebase_rejects_non_census_or_inexact_mutations(self):
         for variant in (
