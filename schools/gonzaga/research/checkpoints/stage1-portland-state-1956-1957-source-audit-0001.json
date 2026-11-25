@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_PORTLAND_STATE_COMPLETE_GONZAGA_SERIES_AND_ORIGINAL_1956_57_SEASON_CENSUS",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "parent_research_head": "7589d398143736993eb906ebd4b698ff1e744de5",
+  "source_institution": "Portland State University",
+  "source_documents": [
+    {
+      "title": "2025-26 Men's Basketball Media Guide",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/pdx.sidearmsports.com/documents/2025/11/4/2025-26_Portland_State_Basketball_Media_Guide.pdf",
+      "section": "All-time series against Gonzaga (opponent table; 27 games total)",
+      "literal": "GONZAGA | Gonzaga leads 20-7 | 1956-57 — A — L — 63 — 75",
+      "source_perspective": "PSU"
+    },
+    {
+      "title": "2023-24 Viking Basketball Record Book",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/pdx.sidearmsports.com/documents/2023/11/6/2324_record_book.pdf",
+      "section": "Season-by-season results — 1956-57 (11-17)",
+      "literal": "L | D.10 | at Gonzaga | 63-75",
+      "source_perspective": "PSU"
+    },
+    {
+      "title": "Medford Mail Tribune, 1956-12-11, p.11, original United Press newspaper dispatch",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn97071090/1956-12-11/ed-1/seq-11/ocr/",
+      "section": "PORTLAND STATE LOSES",
+      "literal": "Gonzaga won ... last night ... Portland State 75-63",
+      "source_perspective": "contemporary reporting",
+      "provenance_limit": "Transcribed newspaper OCR contains errors in unrelated score-strip text; separate explicit article clearly reports 75-63, and official PSU record books match"
+    }
+  ],
+  "scope_examined": "PSU entire 27-appearance Gonzaga opponent series with first season 1956-57 and next 1964-65, separately checked against its original 1956-57 season schedule",
+  "series_appearances_reviewed": 27,
+  "expansion_eligible_appearances": 1,
+  "preexisting_games_matched": 0,
+  "new_distinct_games_accepted": 1,
+  "inherited_published_baseline_appearances_excluded": 26,
+  "new_game": {
+    "research_game_id": "GONZAGA-EXP-PORTLANDSTATE-195657-001",
+    "season_label": "1956-57",
+    "game_date": "1956-12-10",
+    "opponent": "Portland State",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "HOME",
+    "site_basis": "Portland State official 'at Gonzaga' and all-time-series PSU A",
+    "facility": "UNKNOWN",
+    "result": "W",
+    "gonzaga_points": 75,
+    "portland_state_points": 63,
+    "first_party_literal": "L D.10 at Gonzaga 63-75",
+    "contemporary_next_day_confirmation": "Medford Mail Tribune 1956-12-11 United Press result 75-63 last night",
+    "ledger_duplicate_census": "No Portland State appearance among 551 previously accepted Gonzaga game rows"
+  },
+  "prior_identified_game_count": 551,
+  "updated_identified_game_count": 552,
+  "prior_results": {
+    "wins": 211,
+    "losses": 340
+  },
+  "updated_results": {
+    "wins": 212,
+    "losses": 340
+  },
+  "official_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "arithmetic_coverage_diagnostic_before": 426,
+  "arithmetic_coverage_diagnostic_after": 425,
+  "preserved_holds": 6,
+  "parked_accounting_debts": [
+    "1915-16",
+    "1930-31",
+    "1936-37",
+    "1937-38"
+  ],
+  "exclusions": "No 1958-59 or later games copied into supplemental ledger. Complete 27-game series is not 27 expansion games.",
+  "confidence_limit": "Contemporary paper reports Spokane dateline but HOME is based independently on PSU explicit at Gonzaga; exact Gonzaga facility is not established.",
+  "stage2_authorized": false
+}
