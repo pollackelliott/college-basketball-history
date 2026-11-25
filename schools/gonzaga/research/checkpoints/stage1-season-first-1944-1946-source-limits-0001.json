@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_SEASON_FIRST_1944_1946_SOURCE_LIMITS_V1",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "17e61efd0786671df593859c2b73f720217cef1e",
+  "parent_research_head": "c22f00249f4777ebc6ea255b57dbdeb5bdf14d41",
+  "method": "SEASON_FIRST_BULK_RECONSTRUCTION",
+  "focus_seasons": [
+    "1944-45",
+    "1945-46"
+  ],
+  "accepted_rows": 3,
+  "accepted_rows_by_season": {
+    "1944-45": 3,
+    "1945-46": 0
+  },
+  "source_mix": [
+    "contemporary Associated Press / United Press / local college-score reporting preserved by Oregon Historic Newspapers",
+    "official opponent historical series/season records used as a systematic 1945-46 completeness cross-check"
+  ],
+  "admission_rule": "Only distinct played-game identities with a stable on-court W/L result were admitted; schedule-only mentions and identity-ambiguous score-list lines were not admitted.",
+  "date_policy": "Exact game_date is written only when directly stated or mechanically fixed by explicit report timing.",
+  "site_policy": "H/A/N is written only from source-explicit relationship evidence. Whitman 1945-01-26 is AWAY because the report explicitly calls Gonzaga the visitors; other geography was not converted into site_type.",
+  "source_limit_dispositions": [
+    {
+      "season": "1945-46",
+      "status": "NO_NEW_SAFE_ROWS_IN_THIS_PASS__ACTIVE_RESIDUAL_REMAINS",
+      "checked_systematic_sources": [
+        "Washington State official Gonzaga series — both 1945-46 games already ledgered",
+        "Montana official 1945-46 season table — all four Gonzaga games already ledgered",
+        "Eastern Washington official 1945-46 team history — both Gonzaga games already ledgered",
+        "Idaho official historical results — existing Gonzaga loss already ledgered",
+        "indexed Oregon Historic Newspapers score/result pass"
+      ],
+      "reason": "The obvious indexed contemporary and official reciprocal opportunities produced corroboration rather than a defensible new identity. This is not a terminal source-exhaustion ruling; the season remains an active residual for a materially different coherent source corpus."
+    },
+    {
+      "candidate_literal": "Washington 52, Gonzaga 29",
+      "source": "Albany Democrat-Herald, 1946-02-06 college score list",
+      "status": "REJECTED_AMBIGUOUS_IDENTITY_NOT_ADMITTED",
+      "reason": "The isolated score-list line conflicts with Washington's official 1945-46 schedule and Washington-Gonzaga historical series, both of which show no such game. It is not admitted without a stable same-game identity."
+    },
+    {
+      "candidate_literal": "British Columbia / Gonzaga schedule mention",
+      "status": "SCHEDULE_ONLY_NOT_ADMITTED",
+      "reason": "A future/schedule mention does not establish that a competitive game was played."
+    },
+    {
+      "source_family": "West Coast Conference historical record-book PDF",
+      "status": "PRIOR_REJECTION_PRESERVED_NOT_RETRIED",
+      "reason": "Prior tranche found its current multi-column extraction unsafe as a bulk extractor."
+    }
+  ],
+  "stopping_note": "This bounded pass stopped when the same indexed newspaper/opponent-source mode reached diminishing yield. Do not immediately repeat the same low-yield search family. 1944-45 and 1945-46 remain active residual seasons; neither is terminalized by this checkpoint."
+}
