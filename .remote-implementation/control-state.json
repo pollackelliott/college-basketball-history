@@ -781,18 +781,19 @@
     "florida-state-expansion-stage2-gate1-fill-0001",
     "florida-state-expansion-stage2-preseal-0001",
     "florida-state-expansion-stage2-gate1-seal-0001",
-    "florida-state-expansion-stage2-sealed-apply-0001"
+    "florida-state-expansion-stage2-sealed-apply-0001",
+    "florida-state-expansion-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "florida-state-expansion-release-readiness-0001",
+  "active_request_sha256": "7864d879ea1dbdeba2af5981812d47e5f3feae653298580904e7f7704cf48168",
+  "active_school_key": "florida-state",
+  "active_target_branch": "data/florida-state-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1568,8 +1569,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/florida-state/florida-state-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "3f4a968ecfb0a2c55c3c548ba7986b752ec78fd908c1450f7c4b25dd3c08de8a"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45518079885",
+  "lock_acquisition_request_commit": "ee799d2c00b0dc98bec568f58934e2cb2a1a1032",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
