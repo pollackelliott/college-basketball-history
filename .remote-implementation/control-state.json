@@ -786,18 +786,19 @@
     "florida-state-expansion-release-preview-verify-0001",
     "florida-state-expansion-release-gate2-approval-0001",
     "florida-state-expansion-release-production-proof-0001",
-    "hawai-i-expansion-phase0-0003"
+    "hawai-i-expansion-phase0-0003",
+    "hawai-i-expansion-stage2-census-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "2ab62661ce0ca13547b2eb8b80461f71e49fd3bd",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "hawai-i-expansion-stage2-census-0002",
+  "active_request_sha256": "b0bcaeaf8bc5df52999191b59a3f456afc5244b4942df40a0b404b216e714cae",
+  "active_school_key": "hawai-i",
+  "active_target_branch": "data/hawai-i-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1574,8 +1575,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/hawai-i/hawai-i-expansion-phase0-0003/writeahead-manifest.json",
     "writeahead_manifest_sha256": "de7c29393bc864070d20528cf9efe560c65f347a7944d4f82906133ba329c3eb"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45554682774",
+  "lock_acquisition_request_commit": "5c2f06d38050266e5eacf19a5412471cc6b81a6f",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
