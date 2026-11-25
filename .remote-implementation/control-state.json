@@ -804,15 +804,15 @@
   "active_lock_commit": "a4c30a369f60897ca645780ce2597e7aac5fbcee",
   "active_lock_owner": "github-actions:45661146396:1",
   "active_operation": "STAGE2_SEALED_APPLY",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "0730d706a3084cbcd4647584052ad61ace040eb2",
+  "active_prepared_tree_sha": "59d266d8bb4c7d73ab473babd898a66aaff21702",
   "active_request_id": "hawai-i-expansion-stage2-sealed-apply-0001",
   "active_request_sha256": "3ffe2c6457926666b4dc4be6dfc325c91f496318cc303e9d281d2cc06d4d3a5d",
   "active_school_key": "hawai-i",
   "active_target_branch": "data/hawai-i-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/hawai-i/hawai-i-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "fe8c7211ec237e6e98c9ea0ec00e807aa66f16ca0fb7b0d7aa092ea0bf34f131",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1612,5 +1612,5 @@
   "lock_acquisition_request_commit": "08c4461fd658473b55edbced66164407f505199f",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
