@@ -21101,7 +21101,7 @@ CBBG-0021100,1965-1966,1965-12-07,EXACT,tennessee,vanderbilt,50,53,vanderbilt,0,
 CBBG-0021101,1965-1966,1965-12-17,EXACT,louisiana-tech,tennessee,55,71,tennessee,0,NEUTRAL,,,,Shreveport,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021102,1965-1966,1965-12-18,EXACT,centenary,tennessee,43,49,tennessee,0,NEUTRAL,,,,Shreveport,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021103,1965-1966,1965-12-27,EXACT,saint-louis,tennessee,59,57,saint-louis,0,NEUTRAL,,international-center-honolulu,VEN-001017,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=saint-louis/saint-louis-1965-66-009;venue_key=international-center-honolulu;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0021104,1965-1966,1965-12-29,EXACT,hawai-i,tennessee,41,88,tennessee,0,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0021104,1965-1966,1965-12-29,EXACT,hawai-i,tennessee,41,88,tennessee,0,NEUTRAL,,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021105,1965-1966,1966-01-03,EXACT,tennessee,tulane,64,46,tennessee,0,TEAM_A_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021106,1965-1966,1966-01-05,EXACT,furman,tennessee,63,82,tennessee,0,TEAM_B_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021107,1965-1966,1966-01-08,EXACT,ole-miss,tennessee,55,102,tennessee,0,TEAM_B_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
