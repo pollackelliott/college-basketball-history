@@ -1283,6 +1283,32 @@ function updateOpponentBreakdown(key) {
   body.innerHTML = opponentBreakdown(key);
 }
 
+// Consecutive synthetic Non-D1 blocks describe one classification era, even
+// when an inactive/no-team hiatus prevents the source builder from joining
+// active seasons. Keep the provenance rows intact; collapse for display only.
+function conferenceTimelineDisplayHistory(history) {
+  const display = [];
+  for (const membership of history) {
+    const previous = display[display.length - 1];
+    if (previous
+        && previous.classification === "NON_D1_CLASSIFICATION"
+        && membership.classification === "NON_D1_CLASSIFICATION"
+        && previous.membership_type === "classification"
+        && membership.membership_type === "classification"
+        && !previous.conference_key && !membership.conference_key
+        && previous.conference_name === "Non-D1"
+        && membership.conference_name === "Non-D1"
+        && /^\d{4}-\d{4}$/.test(String(previous.end_season || ""))
+        && /^\d{4}-\d{4}$/.test(String(membership.start_season || ""))
+        && previous.end_season < membership.start_season) {
+      previous.end_season = membership.end_season;
+    } else {
+      display.push({ ...membership });
+    }
+  }
+  return display;
+}
+
 function conferenceTimelineDisplayName(key, membership) {
   const approvedOverrides = {
     "pac-10": "Pac-10",
@@ -1340,15 +1366,16 @@ function conferenceHistoryMarkup(key) {
   const history = DB.conferenceHistory[key] || [];
   if (!team || !history.length) return "";
 
-  const displayNames = conferenceTimelineDisplayNames(key, history);
+  const displayHistory = conferenceTimelineDisplayHistory(history);
+  const displayNames = conferenceTimelineDisplayNames(key, displayHistory);
 
-  const desktop = history.map((membership, index) => {
+  const desktop = displayHistory.map((membership, index) => {
     const current = !membership.end_season;
     const name = displayNames[index];
     return `<div class="conference-era${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-name">${esc(name)}</div><div class="conference-era-seasons">${esc(conferenceMembershipYearRange(membership))}</div><div class="conference-era-dot" aria-hidden="true"></div></div>`;
   }).join("");
 
-  const mobile = history.map((membership, index) => {
+  const mobile = displayHistory.map((membership, index) => {
     const current = !membership.end_season;
     const name = displayNames[index];
     return `<div class="conference-era-mobile${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-mobile-name">${esc(name)}</div><div class="conference-era-mobile-seasons">${esc(conferenceMembershipYearRange(membership))}</div></div>`;
