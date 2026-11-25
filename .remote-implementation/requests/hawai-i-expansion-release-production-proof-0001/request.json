@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-expansion-release-production-proof-0001",
+  "school_key": "hawai-i",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "3e04cad94a364c160aed9140f80c5e202ebda36f",
+  "previous_control_state_sha256": "627d61f7d4e4ca7207a65e9729bef2586894b64a9afa184eedf535df42ac87de",
+  "expected_protected_main_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "891ec9240ca3015b4312e138184c7590a7290179804d5202e1ae6d451d44d640"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "cfa107bc016e88f98427e4ee2882643eba1d51ac3d4ba9d92d9206efdc378f94"
+  },
+  "pr_number": 717,
+  "merge_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Hawai‘i ALL_HISTORY_EXPANSION final release, exact owner-approved Gate 2 and connector merge.",
+    "authorization": "Owner explicitly approved exact Hawai‘i PR #717 Preview deployment 8069822111. Independent Gate 2 approval verification PASS; exact merge packet 7105ddda5d6644605d5ca3976ebe07df47ac47b17bfa4f72f29c931a98bbe3e5 authorized two-parent merge method merge of PR #717 head 3126f7504ef909c15a1d5dd3942d937b65f039fd into protected main predecessor 48823b191b76671ce794b9ac0fe540f7a1260956. GitHub connector executed approved merge 4f99623c4ab916deaa080d32536e70eef0b3b751, now exact protected main with verified ordered parents. Read-only release Production-proof request checks exact SHA deployment and target plus every changed generated public JSON, with independent fresh equivalence and no new mutation/owner authority."
+  }
+}
