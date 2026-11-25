@@ -1,0 +1,21 @@
+{
+  "expected_target_predecessor_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_PHASE0_INPUTS",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "request_id": "hawai-i-expansion-phase0-0003",
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "research_freeze_sha256": "b41c303904d0baf21c7935d8111852f12501ceb5efc416e8fc60dcd56b42d54d",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "e5e0bfe06c9e0698e357abc0c8d30dcd580e63266c635ac7baa197c71eaa0bb5",
+    "integration-freeze.json": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+    "phase0-preview.json": "0bf189edbee5bb87a65d22be963202160ff4d303862fe30296f63d3bd23b132d",
+    "stage1-independent-proof.json": "ea9ffd6f09e4b5d846e2baa10828217886870c5caaf5c993b02d894fb8bf6496"
+  },
+  "stage1_control_authority_sha": "131a628b239d8df4732118b6427d6ac39e946a93",
+  "stage1_independent_proof_sha256": "ea9ffd6f09e4b5d846e2baa10828217886870c5caaf5c993b02d894fb8bf6496",
+  "venue_reconciliation_sha256": ""
+}
