@@ -1347,6 +1347,27 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             0,
         )
 
+    def test_candidate_runtime_replays_pre_census_phase0_authority(self):
+        # Initial census failures have a verified Phase 0 successor, but no
+        # blocked proposal/census checkpoint. Candidate CI must replay that
+        # exact Phase 0->census transition rather than demand later authority.
+        workflow = (
+            ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("LIVE_CENSUS_AFTER_PHASE0", workflow)
+        self.assertIn(
+            "last.get('operation') == 'EXPANSION_PHASE0'", workflow,
+        )
+        self.assertIn(
+            "last.get('remote_phase0_equivalence') == 'PASS'", workflow,
+        )
+        self.assertIn(
+            "phase0_ref.get('sha256') != last.get('successor_manifest_sha256')",
+            workflow,
+        )
+        self.assertIn("EXACT_PHASE0_AUTHENTICATED_WITH_CANDIDATE=PASS", workflow)
+        self.assertIn("TRACKED_STAGE2_MUTATION=NONE", workflow)
+
     def test_inherited_venue_reuse_does_not_inflate_supplemental_phase0_count(self):
         # Same topology as Hawai‘i: two inherited support extensions reuse
         # global venues, but only one NEW_SUPPLEMENTAL local venue is rebased.
