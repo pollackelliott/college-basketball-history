@@ -1,0 +1,39 @@
+season,source_record_w,source_record_l,source_record_games,identified_game_rows,identified_w,identified_l,aggregate_unmatched_game_count,coach,activity_status,source
+1932-33,,,,0,0,0,,,UNVERIFIED_NOT_LISTED,Mountain West official 2024-25 year-by-year
+1933-34,6,2,8,0,0,0,8,Staton Hale,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1934-35,0,12,12,4,0,4,8,Max Eiden,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1935-36,12,3,15,0,0,0,15,Max Eiden,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1936-37,12,7,19,0,0,0,19,Max Eiden,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1937-38,,,,1,0,1,,,DOCUMENTED_GAME_OFFICIAL_SEASON_UNLISTED,Mountain West official 2024-25 year-by-year
+1938-39,,,,0,0,0,,,UNVERIFIED_NOT_LISTED,Mountain West official 2024-25 year-by-year
+1939-40,12,7,19,7,3,4,12,Harry Jacoby,SOURCE_RECONCILED_RECORD_PARTIAL_CONTEMPORARY_NEWSPAPER,Mountain West official MBB Record Book 2024-25
+1940-41,12,14,26,2,1,1,24,Harry Jacoby,PARTIAL_IDAHO_VARSITY_1940_0009,Mountain West official MBB Record Book 2024-25
+1941-42,14,13,27,4,3,1,23,Stub Allison,PARTIAL_ISU_OFFICIAL_RECIPROCAL_0011,Mountain West official MBB Record Book 2024-25
+1942-43,7,12,19,6,1,5,13,John Glasby,PARTIAL_ISU_OFFICIAL_RECIPROCAL_0011,Mountain West official MBB Record Book 2024-25
+1943-44,7,12,19,0,0,0,19,John Glasby,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1944-45,18,16,34,7,3,4,27,Rex Engleking,PARTIAL_ISU_OFFICIAL_RECIPROCAL_0011,Mountain West official MBB Record Book 2024-25
+1945-46,5,17,22,7,2,5,15,Carl Warner,PARTIAL_ISU_OFFICIAL_RECIPROCAL_0011,Mountain West official MBB Record Book 2024-25
+1946-47,24,9,33,2,2,0,31,Lyle Smith,PARTIAL_ISU_OFFICIAL_RECIPROCAL_0011,Mountain West official MBB Record Book 2024-25
+1947-48,4,21,25,4,1,3,21,Bill Richter,SOURCE_RECONCILED_RECORD_PARTIAL_CONTEMPORARY_NEWSPAPER,Mountain West official MBB Record Book 2024-25
+1948-49,17,9,26,2,1,1,24,George Blankley,SOURCE_RECONCILED_RECORD_PARTIAL_CONTEMPORARY_NEWSPAPER,Mountain West official MBB Record Book 2024-25
+1949-50,16,10,26,6,4,2,20,George Blankley,PARTIAL_REGIONAL_SCOREBOARDS_RECONCILED,Mountain West official MBB Record Book 2024-25
+1950-51,8,16,24,1,0,1,23,George Blankley,PARTIAL_REGIONAL_SCOREBOARDS_RECONCILED,Mountain West official MBB Record Book 2024-25
+1951-52,10,8,18,1,1,0,17,George Blankley,PARTIAL_REGIONAL_SCOREBOARDS_RECONCILED,Mountain West official MBB Record Book 2024-25
+1952-53,14,8,22,3,2,1,19,George Blankley,PARTIAL_REGIONAL_SCOREBOARDS_RECONCILED,Mountain West official MBB Record Book 2024-25
+1953-54,14,12,26,1,0,1,25,George Blankley,PARTIAL_NNC_RECIPROCAL,Mountain West official MBB Record Book 2024-25
+1954-55,18,11,29,6,5,1,23,George Blankley,ACTIVE_RECORDED_PARTIAL_LEDGER,Mountain West official MBB Record Book 2024-25
+1955-56,18,11,29,8,5,3,21,George Blankley,PARTIAL_REGIONAL_SCOREBOARDS_RECONCILED,Mountain West official MBB Record Book 2024-25
+1956-57,25,6,31,9,7,2,22,George Blankley,PARTIAL_NNC_FIRST_PARTY_SWEEP_0010,Mountain West official MBB Record Book 2024-25
+1957-58,17,5,22,0,0,0,22,George Blankley,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1958-59,6,13,19,0,0,0,19,George Blankley,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1959-60,15,9,24,0,0,0,24,George Blankley,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1960-61,9,13,22,2,1,1,20,George Blankley,ACTIVE_RECORDED_PARTIAL_LEDGER,Mountain West official MBB Record Book 2024-25
+1961-62,19,8,27,1,1,0,26,George Blankley,PARTIAL_SCOREBOARDS_AND_FIRST_PARTY_SERIES_0008,Mountain West official MBB Record Book 2024-25
+1962-63,15,9,24,0,0,0,24,Dale Chatterton,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1963-64,13,13,26,0,0,0,26,Dale Chatterton,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1964-65,8,15,23,0,0,0,23,Dale Chatterton,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1965-66,14,11,25,0,0,0,25,Murray Satterfield,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1966-67,26,9,35,3,1,2,32,Murray Satterfield,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1967-68,26,5,31,4,2,2,27,Murray Satterfield,ACTIVE_RECORDED,Mountain West official MBB Record Book 2024-25
+1968-69,19,8,27,27,19,8,0,Murray Satterfield,ACTIVE_RECORDED,Boise State MBB Record Book 2024
+1969-70,20,8,28,28,20,8,0,Murray Satterfield,ACTIVE_RECORDED,Boise State MBB Record Book 2024
