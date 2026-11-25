@@ -21101,7 +21101,7 @@ CBBG-0021100,1965-1966,1965-12-07,EXACT,tennessee,vanderbilt,50,53,vanderbilt,0,
 CBBG-0021101,1965-1966,1965-12-17,EXACT,louisiana-tech,tennessee,55,71,tennessee,0,NEUTRAL,,,,Shreveport,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021102,1965-1966,1965-12-18,EXACT,centenary,tennessee,43,49,tennessee,0,NEUTRAL,,,,Shreveport,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021103,1965-1966,1965-12-27,EXACT,saint-louis,tennessee,59,57,saint-louis,0,NEUTRAL,,international-center-honolulu,VEN-001017,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=saint-louis/saint-louis-1965-66-009;venue_key=international-center-honolulu;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0021104,1965-1966,1965-12-29,EXACT,hawai-i,tennessee,41,88,tennessee,0,NEUTRAL,,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0021104,1965-1966,1965-12-29,EXACT,hawai-i,tennessee,41,88,tennessee,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1965-66-008]
 CBBG-0021105,1965-1966,1966-01-03,EXACT,tennessee,tulane,64,46,tennessee,0,TEAM_A_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021106,1965-1966,1966-01-05,EXACT,furman,tennessee,63,82,tennessee,0,TEAM_B_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0021107,1965-1966,1966-01-08,EXACT,ole-miss,tennessee,55,102,tennessee,0,TEAM_B_HOME,tennessee,armory-fieldhouse,VEN-000199,Knoxville,TN,REGULAR_SEASON,,,,PROVISIONAL,
@@ -34402,7 +34402,7 @@ CBBG-0034406,1968-1969,1968-12-02,EXACT,louisiana-college,mississippi-state,69,7
 CBBG-0034407,1968-1969,1968-12-06,EXACT,louisiana-tech,mississippi-state,73,83,mississippi-state,0,TEAM_B_HOME,mississippi-state,mccarthy-gymnasium,VEN-000250,Starkville,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=mississippi-state/MSURAW-01099;venue_key=mccarthy-gymnasium;site_type=TEAM_B_HOME;fields=venue_id,venue_key]"
 CBBG-0034408,1968-1969,1968-12-09,EXACT,mississippi-state,samford,59,68,samford,0,TEAM_A_HOME,mississippi-state,mccarthy-gymnasium,VEN-000250,Starkville,MS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=mississippi-state/MSURAW-01100;venue_key=mccarthy-gymnasium;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
 CBBG-0034409,1968-1969,1968-12-20,EXACT,louisiana,mississippi-state,81,70,louisiana,0,TEAM_A_HOME,louisiana,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0034410,1968-1969,1968-12-21,EXACT,hawai-i,mississippi-state,74,69,hawai-i,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0034410,1968-1969,1968-12-21,EXACT,hawai-i,mississippi-state,74,69,hawai-i,0,NEUTRAL,,,,Lafayette,LA,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0034411,1968-1969,1968-12-27,EXACT,detroit-mercy,mississippi-state,86,62,detroit-mercy,0,TEAM_A_HOME,detroit-mercy,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0034412,1968-1969,1968-12-28,EXACT,miami-oh,mississippi-state,76,56,miami-oh,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,[OPPONENT_IDENTITY_RECONCILIATION in_place_remap=miami-ohio->miami-oh]
 CBBG-0034413,1968-1969,1969-01-27,EXACT,georgia,mississippi-state,71,73,mississippi-state,0,TEAM_A_HOME,georgia,stegeman-coliseum,VEN-000198,Athens,GA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=georgia/UGARAW-01211;venue_key=stegeman-coliseum;site_type=TEAM_A_HOME;fields=venue_id,venue_key]"
@@ -68374,7 +68374,7 @@ CBBG-0068434,1951-1952,1952-01-11,EXACT,ucla,usc,55,48,ucla,0,TEAM_B_HOME,usc,pa
 CBBG-0068435,1951-1952,1952-01-12,EXACT,ucla,usc,67,58,ucla,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00876;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068436,1951-1952,1952-01-18,EXACT,stanford,usc,58,63,usc,1,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00877;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068437,1951-1952,1952-01-19,EXACT,stanford,usc,64,75,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00878;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0068438,1951-1952,1952-01-30,EXACT,hawai-i,usc,67,56,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068438,1951-1952,1952-01-30,EXACT,hawai-i,usc,67,56,hawai-i,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-011]
 CBBG-0068439,1951-1952,1952-02-01,EXACT,universal-motors,usc,58,60,usc,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0068440,1951-1952,1952-02-02,EXACT,military-air-transport,usc,69,75,usc,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0068441,1951-1952,1952-02-05,EXACT,loyola-marymount,usc,61,67,usc,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -68401,7 +68401,7 @@ CBBG-0068461,1952-1953,1953-01-10,EXACT,ucla,usc,72,62,ucla,0,TEAM_A_HOME,ucla,m
 CBBG-0068462,1952-1953,1953-01-16,EXACT,california,usc,78,63,california,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00903;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068463,1952-1953,1953-01-17,EXACT,california,usc,71,63,california,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00904;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068464,1952-1953,1953-01-30,EXACT,uc-santa-barbara,usc,48,74,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00905;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0068465,1952-1953,1953-02-07,EXACT,hawai-i,usc,66,91,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068465,1952-1953,1953-02-07,EXACT,hawai-i,usc,66,91,usc,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1952-53-020]
 CBBG-0068466,1952-1953,1953-02-13,EXACT,stanford,usc,56,93,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00907;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068467,1952-1953,1953-02-14,EXACT,stanford,usc,76,74,stanford,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00908;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068468,1952-1953,1953-02-20,EXACT,california,usc,66,68,usc,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00880;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -68420,8 +68420,8 @@ CBBG-0068480,1953-1954,1954-01-08,EXACT,stanford,usc,61,59,stanford,0,TEAM_B_HOM
 CBBG-0068481,1953-1954,1954-01-09,EXACT,stanford,usc,69,71,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00926;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068482,1953-1954,1954-01-15,EXACT,ucla,usc,65,68,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00927;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068483,1953-1954,1954-01-16,EXACT,ucla,usc,81,63,ucla,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00928;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0068484,1953-1954,1954-01-27,EXACT,hawai-i,usc,77,57,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0068485,1953-1954,1954-01-30,EXACT,hawai-i,usc,63,56,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068484,1953-1954,1954-01-27,EXACT,hawai-i,usc,77,57,hawai-i,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-025]
+CBBG-0068485,1953-1954,1954-01-30,EXACT,hawai-i,usc,63,56,hawai-i,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-026]
 CBBG-0068486,1953-1954,1954-02-05,EXACT,california,usc,49,53,usc,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00902;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068487,1953-1954,1954-02-06,EXACT,california,usc,46,32,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00903;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068488,1953-1954,1954-02-12,EXACT,stanford,usc,53,57,usc,0,TEAM_A_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0875;venue_key=stanford-pavilion;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -68451,8 +68451,8 @@ CBBG-0068511,1954-1955,1955-01-07,EXACT,california,usc,56,63,usc,0,TEAM_B_HOME,u
 CBBG-0068512,1954-1955,1955-01-08,EXACT,california,usc,65,81,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-00958;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068513,1954-1955,1955-01-14,EXACT,ucla,usc,70,67,ucla,0,TEAM_A_HOME,ucla,men-s-gym,VEN-000408,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ucla/UCLARAW-00754;venue_key=men-s-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068514,1954-1955,1955-01-15,EXACT,ucla,usc,76,64,ucla,0,TEAM_A_HOME,ucla,men-s-gym,VEN-000408,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=ucla/UCLARAW-00755;venue_key=men-s-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0068515,1954-1955,1955-01-28,EXACT,hawai-i,usc,42,76,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0068516,1954-1955,1955-01-29,EXACT,hawai-i,usc,58,84,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068515,1954-1955,1955-01-28,EXACT,hawai-i,usc,42,76,usc,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-020]
+CBBG-0068516,1954-1955,1955-01-29,EXACT,hawai-i,usc,58,84,usc,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-021]
 CBBG-0068517,1954-1955,1955-02-04,EXACT,stanford,usc,92,78,stanford,0,TEAM_A_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0897;venue_key=stanford-pavilion;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068518,1954-1955,1955-02-05,EXACT,stanford,usc,76,60,stanford,0,TEAM_A_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0898;venue_key=stanford-pavilion;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068519,1954-1955,1955-02-11,EXACT,california,usc,58,57,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00929;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -68498,8 +68498,8 @@ CBBG-0068558,1956-1957,1957-01-04,EXACT,usc,washington,72,76,washington,0,TEAM_A
 CBBG-0068559,1956-1957,1957-01-05,EXACT,usc,washington,78,80,washington,0,TEAM_A_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01008;venue_key=pan-pacific-auditorium;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068560,1956-1957,1957-01-11,EXACT,oregon-state,usc,49,55,usc,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001282;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068561,1956-1957,1957-01-12,EXACT,oregon-state,usc,67,54,oregon-state,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001283;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0068562,1956-1957,1957-02-01,EXACT,hawai-i,usc,66,67,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0068563,1956-1957,1957-02-02,EXACT,hawai-i,usc,73,67,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068562,1956-1957,1957-02-01,EXACT,hawai-i,usc,66,67,usc,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1956-57-024]
+CBBG-0068563,1956-1957,1957-02-02,EXACT,hawai-i,usc,73,67,hawai-i,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1956-57-025]
 CBBG-0068564,1956-1957,1957-02-08,EXACT,idaho,usc,88,89,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01013;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068565,1956-1957,1957-02-09,EXACT,idaho,usc,69,78,usc,0,TEAM_B_HOME,usc,pan-pacific-auditorium,VEN-000381,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01014;venue_key=pan-pacific-auditorium;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068566,1956-1957,1957-02-15,EXACT,usc,washington-state,73,68,usc,0,TEAM_B_HOME,washington-state,bohler-gym,VEN-000639,Pullman,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington-state/WSURAW-01337;venue_key=bohler-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -68630,9 +68630,9 @@ CBBG-0068690,1961-1962,1962-03-09,EXACT,california,usc,61,60,california,0,TEAM_A
 CBBG-0068691,1961-1962,1962-03-10,EXACT,stanford,usc,68,66,stanford,0,TEAM_A_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-1074;venue_key=stanford-pavilion;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068692,1962-1963,1962-11-30,EXACT,santa-clara,usc,70,77,usc,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01157;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068693,1962-1963,1962-12-01,EXACT,denver,usc,62,70,usc,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01158;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0068694,1962-1963,1962-12-05,EXACT,hawai-i,usc,46,59,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068694,1962-1963,1962-12-05,EXACT,hawai-i,usc,46,59,usc,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-010;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068695,1962-1963,1962-12-07,EXACT,meiji-university,usc,71,130,usc,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0068696,1962-1963,1962-12-08,EXACT,hawai-i,usc,59,78,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068696,1962-1963,1962-12-08,EXACT,hawai-i,usc,59,78,usc,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-012;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068697,1962-1963,1962-12-26,EXACT,colorado-state,usc,72,54,colorado-state,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01166;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068698,1962-1963,1962-12-27,EXACT,stanford,usc,57,65,usc,0,NEUTRAL,,,,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0068699,1962-1963,1962-12-28,EXACT,usc,utah-state,65,78,utah-state,0,NEUTRAL,,,,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,
@@ -68702,8 +68702,8 @@ CBBG-0068762,1964-1965,1965-03-05,EXACT,ucla,usc,77,71,ucla,0,TEAM_B_HOME,usc,lo
 CBBG-0068763,1964-1965,1965-03-06,EXACT,ucla,usc,52,50,ucla,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01237;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068764,1965-1966,1965-12-03,EXACT,butler,usc,77,75,butler,0,TEAM_A_HOME,butler,hinkle-fieldhouse,VEN-000080,Indianapolis,IN,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=butler/BUTRAW-01136;venue_key=hinkle-fieldhouse;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068765,1965-1966,1965-12-04,EXACT,saint-louis,usc,77,72,saint-louis,0,TEAM_A_HOME,saint-louis,kiel-auditorium,VEN-000500,St. Louis,MO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=saint-louis/saint-louis-1965-66-002;venue_key=kiel-auditorium;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0068766,1965-1966,1965-12-10,EXACT,hawai-i,usc,55,90,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0068767,1965-1966,1965-12-11,EXACT,hawai-i,usc,52,69,usc,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0068766,1965-1966,1965-12-10,EXACT,hawai-i,usc,55,90,usc,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-003;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0068767,1965-1966,1965-12-11,EXACT,hawai-i,usc,52,69,usc,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-004;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068768,1965-1966,1965-12-17,EXACT,cincinnati,usc,65,77,usc,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01242;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068769,1965-1966,1965-12-21,EXACT,ucla,usc,86,67,ucla,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01244;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0068770,1965-1966,1965-12-30,EXACT,ucla,usc,94,76,ucla,0,TEAM_B_HOME,usc,los-angeles-memorial-sports-arena,VEN-000118,Los Angeles,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=usc/USCRAW-01247;venue_key=los-angeles-memorial-sports-arena;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -71098,7 +71098,7 @@ CBBG-0071158,1940-1941,1941-03-07,EXACT,oregon,washington,37,48,washington,0,TEA
 CBBG-0071159,1940-1941,1941-03-08,EXACT,oregon,washington,46,49,washington,0,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-0721;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0071160,1940-1941,1941-04-03,EXACT,honolulu-coca-colas,oregon,50,51,oregon,0,TEAM_A_HOME,honolulu-coca-colas,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0071161,1940-1941,1941-04-05,EXACT,honolulu-elks,oregon,38,71,oregon,0,TEAM_A_HOME,honolulu-elks,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0071162,1940-1941,1941-04-07,EXACT,hawai-i,oregon,42,52,oregon,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0071162,1940-1941,1941-04-07,EXACT,hawai-i,oregon,42,52,oregon,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1940-41-016]
 CBBG-0071163,1940-1941,1941-04-08,EXACT,charlie-chans,oregon,47,77,oregon,0,TEAM_A_HOME,charlie-chans,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0071164,1940-1941,1941-04-10,EXACT,honolulu-coca-colas,oregon,50,44,honolulu-coca-colas,0,TEAM_A_HOME,honolulu-coca-colas,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0071165,1941-1942,1941-11-21,EXACT,oregon,signal-oil,48,31,oregon,0,TEAM_A_HOME,oregon,mcarthur-court,VEN-000126,Eugene,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon/ORERAW-00729;venue_key=mcarthur-court;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -71768,8 +71768,8 @@ CBBG-0071828,1965-1966,1966-03-04,EXACT,oregon,oregon-state,42,49,oregon-state,0
 CBBG-0071829,1965-1966,1966-03-05,EXACT,oregon,oregon-state,54,68,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001541;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0071830,1966-1967,1966-12-03,EXACT,kansas-state,oregon,52,45,kansas-state,0,TEAM_A_HOME,kansas-state,ahearn-field-house,VEN-000001,Manhattan,KS,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=kansas-state/kansas-state-1202;venue_key=ahearn-field-house;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0071831,1966-1967,1966-12-07,EXACT,idaho-state,oregon,68,107,oregon,0,TEAM_B_HOME,oregon,mcarthur-court,VEN-000126,Eugene,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon/ORERAW-01432;venue_key=mcarthur-court;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0071832,1966-1967,1966-12-19,EXACT,hawai-i,oregon,69,77,oregon,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0071833,1966-1967,1966-12-22,EXACT,hawai-i,oregon,64,73,oregon,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0071832,1966-1967,1966-12-19,EXACT,hawai-i,oregon,69,77,oregon,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-006;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0071833,1966-1967,1966-12-22,EXACT,hawai-i,oregon,64,73,oregon,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-007;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0071834,1966-1967,1966-12-29,EXACT,oregon,washington-state,56,77,washington-state,0,NEUTRAL,,veterans-memorial-coliseum-portland,VEN-000297,Portland,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington-state/WSURAW-01584;venue_key=veterans-memorial-coliseum-portland;site_type=NEUTRAL;fields=venue_id,venue_key]"
 CBBG-0071835,1966-1967,1967-01-06,EXACT,oregon,stanford,65,68,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-1182;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0071836,1966-1967,1967-01-07,EXACT,california,oregon,74,61,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01225;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -78506,7 +78506,7 @@ CBBG-0078567,1937-1938,,SEASON,kauai-stars-all-stars,washington,12,70,washington
 CBBG-0078568,1937-1938,,SEASON,lihue-all-stars,washington,14,44,washington,0,TEAM_A_HOME,lihue-all-stars,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0078569,1937-1938,,SEASON,east-kauai-all-stars,washington,14,80,washington,0,TEAM_A_HOME,east-kauai-all-stars,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0078570,1937-1938,,SEASON,luke-field-army,washington,43,79,washington,0,TEAM_A_HOME,luke-field-army,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0078571,1937-1938,,SEASON,hawai-i,washington,25,76,washington,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0078571,1937-1938,,SEASON,hawai-i,washington,25,76,washington,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1937-38-014]
 CBBG-0078572,1937-1938,,SEASON,dragon-associates-aau,washington,31,72,washington,0,TEAM_A_HOME,dragon-associates-aau,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0078573,1937-1938,,SEASON,honolulu-all-stars,washington,30,73,washington,0,TEAM_A_HOME,honolulu-all-stars,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0078574,1937-1938,1938-01-05,EXACT,johnson-paint-aau,washington,29,45,washington,0,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-0626;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -78848,7 +78848,7 @@ CBBG-0078909,1952-1953,1953-01-16,EXACT,oregon-state,washington,54,77,washington
 CBBG-0078910,1952-1953,1953-01-17,EXACT,oregon-state,washington,56,68,washington,0,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1065;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0078911,1952-1953,1953-01-23,EXACT,washington,washington-state,75,41,washington,0,TEAM_B_HOME,washington-state,bohler-gym,VEN-000639,Pullman,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington-state/WSURAW-01227;venue_key=bohler-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0078912,1952-1953,1953-01-24,EXACT,washington,washington-state,60,48,washington,0,TEAM_B_HOME,washington-state,bohler-gym,VEN-000639,Pullman,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington-state/WSURAW-01228;venue_key=bohler-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0078913,1952-1953,1953-01-31,EXACT,hawai-i,washington,55,83,washington,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0078913,1952-1953,1953-01-31,EXACT,hawai-i,washington,55,83,washington,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1952-53-019]
 CBBG-0078914,1952-1953,1953-02-06,EXACT,washington,washington-state,79,51,washington,0,TEAM_A_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1069;venue_key=hec-edmundson-pavilion;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0078915,1952-1953,1953-02-07,EXACT,washington,washington-state,69,56,washington,0,TEAM_A_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1070;venue_key=hec-edmundson-pavilion;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0078916,1952-1953,1953-02-13,EXACT,oregon-state,washington,53,69,washington,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001179;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -78978,8 +78978,8 @@ CBBG-0079039,1959-1960,1960-01-16,EXACT,california,washington,79,39,california,0
 CBBG-0079040,1959-1960,1960-01-23,EXACT,stanford,washington,54,42,stanford,0,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1254;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079041,1959-1960,1960-01-29,EXACT,washington,washington-state,71,79,washington-state,0,NEUTRAL,,spokane-coliseum,VEN-000640,Spokane,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington-state/WSURAW-01415;venue_key=spokane-coliseum;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079042,1959-1960,1960-02-05,EXACT,california,washington,68,53,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01060;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0079043,1959-1960,1960-02-12,EXACT,hawai-i,washington,62,64,washington,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0079044,1959-1960,1960-02-13,EXACT,hawai-i,washington,64,74,washington,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0079043,1959-1960,1960-02-12,EXACT,hawai-i,washington,62,64,washington,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-026;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0079044,1959-1960,1960-02-13,EXACT,hawai-i,washington,64,74,washington,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-027;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079045,1959-1960,1960-02-20,EXACT,oregon-state,washington,52,62,washington,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001370;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079046,1959-1960,1960-02-26,EXACT,california,washington,54,47,california,0,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1262;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079047,1959-1960,1960-03-04,EXACT,idaho,washington,45,58,washington,0,TEAM_A_HOME,idaho,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -79071,7 +79071,7 @@ CBBG-0079132,1964-1965,1965-03-08,EXACT,idaho,washington,87,99,washington,0,TEAM
 CBBG-0079133,1965-1966,1965-12-03,EXACT,oregon-state,washington,44,45,washington,0,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1395;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079134,1965-1966,1965-12-18,EXACT,marquette,washington,75,74,marquette,0,TEAM_A_HOME,marquette,uw-milwaukee-panther-arena,VEN-000224,Milwaukee,WI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=marquette/MARQ-STG1-00983;venue_key=uw-milwaukee-panther-arena;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079135,1965-1966,1965-12-28,EXACT,tulsa,washington,92,76,tulsa,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0079136,1965-1966,1965-12-30,EXACT,hawai-i,washington,70,83,washington,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0079136,1965-1966,1965-12-30,EXACT,hawai-i,washington,70,83,washington,0,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-009;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079137,1965-1966,1966-01-08,EXACT,stanford,washington,83,78,stanford,1,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1404;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079138,1965-1966,1966-01-10,EXACT,california,washington,79,80,washington,1,TEAM_B_HOME,washington,hec-edmundson-pavilion,VEN-000078,Seattle,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington/washington-1405;venue_key=hec-edmundson-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0079139,1965-1966,1966-01-15,EXACT,oregon-state,washington,67,59,oregon-state,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001528;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -104736,8 +104736,8 @@ CBBG-0104797,1953-1954,1954-01-22,EXACT,utah,utah-state,74,62,utah,0,TEAM_A_HOME
 CBBG-0104798,1953-1954,1954-01-23,EXACT,montana,utah,62,73,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-00848;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104799,1953-1954,1954-01-29,EXACT,california,utah,70,59,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00900;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104800,1953-1954,1954-01-30,EXACT,california,utah,95,63,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00901;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0104801,1953-1954,1954-02-03,EXACT,hawai-i,utah,76,57,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0104802,1953-1954,1954-02-06,EXACT,hawai-i,utah,61,62,utah,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0104801,1953-1954,1954-02-03,EXACT,hawai-i,utah,76,57,hawai-i,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-027]
+CBBG-0104802,1953-1954,1954-02-06,EXACT,hawai-i,utah,61,62,utah,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-028]
 CBBG-0104803,1953-1954,1954-02-12,EXACT,colorado-state,utah,66,62,colorado-state,0,TEAM_A_HOME,colorado-state,glenn-morris-field-house,VEN-000992,Fort Collins,CO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=colorado-state/CSU-S1-00684;venue_key=glenn-morris-field-house;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104804,1953-1954,1954-02-13,EXACT,utah,wyoming,45,56,wyoming,0,TEAM_B_HOME,wyoming,war-memorial-fieldhouse-wyoming,VEN-001141,Laramie,WY,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wyoming/WYO-S1-1953-54-P155C1Y5450;venue_key=war-memorial-fieldhouse-wyoming;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104805,1953-1954,1954-02-19,EXACT,byu,utah,85,76,byu,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-00855;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -104786,8 +104786,8 @@ CBBG-0104847,1955-1956,1956-01-12,EXACT,denver,utah,72,83,utah,0,TEAM_A_HOME,den
 CBBG-0104848,1955-1956,1956-01-14,EXACT,new-mexico,utah,73,87,utah,0,TEAM_A_HOME,new-mexico,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0104849,1955-1956,1956-01-16,EXACT,montana,utah,60,89,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-00902;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104850,1955-1956,1956-01-20,EXACT,oklahoma-city,utah,58,60,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-00903;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0104851,1955-1956,1956-01-25,EXACT,hawai-i,utah,77,97,utah,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0104852,1955-1956,1956-01-28,EXACT,hawai-i,utah,85,89,utah,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0104851,1955-1956,1956-01-25,EXACT,hawai-i,utah,77,97,utah,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1955-56-016]
+CBBG-0104852,1955-1956,1956-01-28,EXACT,hawai-i,utah,85,89,utah,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1955-56-017]
 CBBG-0104853,1955-1956,1956-02-03,EXACT,colorado-state,utah,62,59,colorado-state,0,TEAM_A_HOME,colorado-state,glenn-morris-field-house,VEN-000992,Fort Collins,CO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=colorado-state/CSU-S1-00733;venue_key=glenn-morris-field-house;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104854,1955-1956,1956-02-04,EXACT,utah,wyoming,54,59,wyoming,0,TEAM_B_HOME,wyoming,war-memorial-fieldhouse-wyoming,VEN-001141,Laramie,WY,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wyoming/WYO-S1-1955-56-P155C2Y3003;venue_key=war-memorial-fieldhouse-wyoming;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104855,1955-1956,1956-02-06,EXACT,byu,utah,63,82,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-00908;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -104834,8 +104834,8 @@ CBBG-0104895,1957-1958,1958-01-11,EXACT,utah,utah-state,81,57,utah,0,TEAM_A_HOME
 CBBG-0104896,1957-1958,1958-01-16,EXACT,new-mexico,utah,55,86,utah,0,TEAM_A_HOME,new-mexico,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0104897,1957-1958,1958-01-18,EXACT,denver,utah,73,57,denver,0,TEAM_A_HOME,denver,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0104898,1957-1958,1958-01-24,EXACT,byu,utah,81,67,byu,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-00958;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0104899,1957-1958,1958-01-31,EXACT,hawai-i,utah,54,66,utah,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0104900,1957-1958,1958-02-01,EXACT,hawai-i,utah,51,82,utah,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0104899,1957-1958,1958-01-31,EXACT,hawai-i,utah,54,66,utah,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1957-58-010;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0104900,1957-1958,1958-02-01,EXACT,hawai-i,utah,51,82,utah,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1957-58-011;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104901,1957-1958,1958-02-07,EXACT,colorado-state,utah,62,44,colorado-state,0,TEAM_A_HOME,colorado-state,glenn-morris-field-house,VEN-000992,Fort Collins,CO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=colorado-state/CSU-S1-00784;venue_key=glenn-morris-field-house;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104902,1957-1958,1958-02-08,EXACT,utah,wyoming,63,64,wyoming,0,TEAM_B_HOME,wyoming,war-memorial-fieldhouse-wyoming,VEN-001141,Laramie,WY,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wyoming/WYO-S1-1957-58-P155C3Y0796;venue_key=war-memorial-fieldhouse-wyoming;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0104903,1957-1958,1958-02-15,EXACT,montana,utah,60,69,utah,0,TEAM_A_HOME,montana,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -104986,8 +104986,8 @@ CBBG-0105047,1963-1964,1964-01-01,EXACT,cincinnati,utah,68,76,utah,0,TEAM_B_HOME
 CBBG-0105048,1963-1964,1964-01-06,EXACT,utah,utah-state,72,84,utah-state,0,TEAM_B_HOME,utah-state,george-nelson-fieldhouse,VEN-000987,Logan,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah-state/UST-S1-01068;venue_key=george-nelson-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105049,1963-1964,1964-01-10,EXACT,utah,wyoming,76,75,utah,0,TEAM_A_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01124;venue_key=nielsen-fieldhouse;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105050,1963-1964,1964-01-11,EXACT,new-mexico,utah,65,67,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01125;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0105051,1963-1964,1964-01-14,EXACT,hawai-i,utah,80,63,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0105052,1963-1964,1964-01-15,EXACT,hawai-i,utah,61,67,utah,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0105051,1963-1964,1964-01-14,EXACT,hawai-i,utah,80,63,hawai-i,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1963-64-015;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0105052,1963-1964,1964-01-15,EXACT,hawai-i,utah,61,67,utah,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1963-64-016;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105053,1963-1964,1964-01-25,EXACT,colorado-state,utah,68,78,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01128;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105054,1963-1964,1964-01-27,EXACT,stanford,utah,81,87,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01129;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105055,1963-1964,1964-02-01,EXACT,utah,utah-state,79,67,utah,0,TEAM_A_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01130;venue_key=nielsen-fieldhouse;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -105035,7 +105035,7 @@ CBBG-0105096,1965-1966,1966-01-07,EXACT,arizona,utah,78,87,utah,0,TEAM_B_HOME,ut
 CBBG-0105097,1965-1966,1966-01-08,EXACT,arizona-state,utah,83,102,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01177;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105098,1965-1966,1966-01-13,EXACT,utah,wyoming,93,91,utah,0,TEAM_B_HOME,wyoming,war-memorial-fieldhouse-wyoming,VEN-001141,Laramie,WY,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wyoming/WYO-S1-1965-66-P156C2Y5690;venue_key=war-memorial-fieldhouse-wyoming;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105099,1965-1966,1966-01-15,EXACT,new-mexico,utah,55,57,utah,0,TEAM_A_HOME,new-mexico,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0105100,1965-1966,1966-01-19,EXACT,hawai-i,utah,67,122,utah,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0105100,1965-1966,1966-01-19,EXACT,hawai-i,utah,67,122,utah,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-014;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105101,1965-1966,1966-01-29,EXACT,utah,utah-state,94,79,utah,0,TEAM_B_HOME,utah-state,george-nelson-fieldhouse,VEN-000987,Logan,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah-state/UST-S1-01131;venue_key=george-nelson-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105102,1965-1966,1966-02-05,EXACT,byu,utah,94,93,byu,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01182;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0105103,1965-1966,1966-02-07,EXACT,hawai-i,utah,50,88,utah,0,TEAM_B_HOME,utah,nielsen-fieldhouse,VEN-000582,Salt Lake City,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah/UTA-S1-01183;venue_key=nielsen-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -111552,7 +111552,7 @@ CBBG-0111613,1964-1965,1964-12-19,EXACT,arizona-state,murray-state,107,96,arizon
 CBBG-0111614,1964-1965,1964-12-22,EXACT,arizona-state,pacific,87,92,pacific,0,TEAM_B_HOME,pacific,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0111615,1964-1965,1964-12-26,EXACT,arizona-state,cal-state-la,97,98,cal-state-la,0,NEUTRAL,,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=arizona-state/ASUSTG1-000367;venue_key=neal-s-blaisdell-center;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0111616,1964-1965,1964-12-29,EXACT,arizona-state,utah-state,96,98,utah-state,0,NEUTRAL,,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=arizona-state/ASUSTG1-000368;venue_key=neal-s-blaisdell-center;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0111617,1964-1965,1964-12-29,EXACT,arizona-state,hawai-i,83,69,arizona-state,0,TEAM_B_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0111617,1964-1965,1964-12-29,EXACT,arizona-state,hawai-i,83,69,arizona-state,0,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1964-65-008;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0111618,1964-1965,1965-01-02,EXACT,arizona-state,rhode-island,102,93,arizona-state,0,TEAM_A_HOME,arizona-state,sun-devil-gymnasium,VEN-000485,Tempe,AZ,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=arizona-state/ASUSTG1-000370;venue_key=sun-devil-gymnasium;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0111619,1964-1965,1965-01-07,EXACT,arizona-state,new-mexico,48,69,new-mexico,0,TEAM_B_HOME,new-mexico,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0111620,1964-1965,1965-01-09,EXACT,arizona-state,wyoming,82,105,wyoming,0,TEAM_B_HOME,wyoming,war-memorial-fieldhouse-wyoming,VEN-001141,Laramie,WY,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wyoming/WYO-S1-1964-65-P156C2Y3243;venue_key=war-memorial-fieldhouse-wyoming;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -113098,7 +113098,7 @@ CBBG-0113159,1950-1951,1951-01-26,EXACT,california,santa-clara,52,53,santa-clara
 CBBG-0113160,1950-1951,1951-01-27,EXACT,california,long-island-university,69,67,california,0,TEAM_A_HOME,california,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113161,1950-1951,1951-01-30,EXACT,california,oldsmobile-rockets,69,37,california,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113162,1950-1951,1951-01-31,EXACT,california,universal-motors,61,63,universal-motors,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0113163,1950-1951,1951-02-02,EXACT,california,hawai-i,54,36,california,0,TEAM_B_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0113163,1950-1951,1951-02-02,EXACT,california,hawai-i,54,36,california,0,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1950-51-011]
 CBBG-0113164,1950-1951,1951-02-03,EXACT,california,service-center,79,52,california,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113165,1950-1951,1951-03-02,EXACT,california,stanford,57,75,stanford,0,NEUTRAL,,,,San Francisco,CA,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113166,1950-1951,1951-03-03,EXACT,california,stanford,56,57,stanford,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00829;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -113113,7 +113113,7 @@ CBBG-0113174,1951-1952,1952-01-11,EXACT,california,stanford,74,81,stanford,0,TEA
 CBBG-0113175,1951-1952,1952-01-12,EXACT,california,stanford,72,63,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00845;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113176,1951-1952,,SEASON,california,hilo-all-stars,95,41,california,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113177,1951-1952,,SEASON,california,hilo-all-stars,102,48,california,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0113178,1951-1952,,SEASON,california,hawai-i,72,46,california,0,TEAM_B_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0113178,1951-1952,1952-02-06,EXACT,california,hawai-i,72,46,california,0,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-012]
 CBBG-0113179,1951-1952,,SEASON,california,universal-motors,54,50,california,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113180,1951-1952,,SEASON,california,universal-motors,73,65,california,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113181,1951-1952,,SEASON,california,military-air-transport,48,57,military-air-transport,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -113138,7 +113138,7 @@ CBBG-0113199,1953-1954,1953-12-19,EXACT,california,washington-state,61,49,califo
 CBBG-0113200,1953-1954,1953-12-21,EXACT,california,hawai-i,77,56,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00892;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113201,1953-1954,1953-12-22,EXACT,california,hawai-i,73,70,california,2,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00893;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113202,1953-1954,1953-12-26,EXACT,california,pacific,90,51,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00894;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0113203,1953-1954,,SEASON,california,hawai-i,61,51,california,0,TEAM_B_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0113203,1953-1954,1953-12-30,EXACT,california,hawai-i,61,51,california,0,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-019]
 CBBG-0113204,1953-1954,1954-01-15,EXACT,california,stanford,83,68,california,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0868;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113205,1953-1954,1954-01-16,EXACT,california,stanford,56,50,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00899;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113206,1953-1954,1954-02-26,EXACT,california,stanford,98,80,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-00908;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -113289,7 +113289,7 @@ CBBG-0113350,1965-1966,1966-03-05,EXACT,california,stanford,88,73,california,0,T
 CBBG-0113351,1966-1967,1966-12-03,EXACT,california,saint-mary-s,74,55,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01216;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113352,1966-1967,1966-12-09,EXACT,california,san-francisco,59,51,california,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01218;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113353,1966-1967,1966-12-27,EXACT,california,notre-dame,69,63,california,0,NEUTRAL,,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01222;venue_key=neal-s-blaisdell-center;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0113354,1966-1967,1966-12-28,EXACT,california,hawai-i,83,69,california,0,NEUTRAL,,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01223;venue_key=neal-s-blaisdell-center;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0113354,1966-1967,1966-12-28,EXACT,california,hawai-i,83,69,california,0,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-009;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113355,1966-1967,1967-01-06,EXACT,california,oregon-state,42,45,oregon-state,0,TEAM_A_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01224;venue_key=harmon-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0113356,1966-1967,1967-01-28,EXACT,california,santa-clara,80,77,california,0,TEAM_B_HOME,santa-clara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0113357,1966-1967,1967-02-03,EXACT,air-force,california,55,59,california,0,TEAM_B_HOME,california,harmon-gym,VEN-000393,Berkeley,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=california/CAL-R1-01229;venue_key=harmon-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -114675,11 +114675,11 @@ CBBG-0114736,1952-1953,1952-12-19,EXACT,la-salle,stanford,95,80,la-salle,0,TEAM_
 CBBG-0114737,1952-1953,,SEASON,san-jose-state,stanford,68,62,san-jose-state,0,TEAM_A_HOME,san-jose-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0114738,1952-1953,,SEASON,loyola-marymount,stanford,57,67,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0840;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114739,1952-1953,1952-12-29,EXACT,oregon-state,stanford,58,46,oregon-state,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0841;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0114740,1952-1953,,SEASON,hawai-i,stanford,70,58,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0114740,1952-1953,1953-01-24,EXACT,hawai-i,stanford,70,58,hawai-i,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1952-53-018]
 CBBG-0114741,1952-1953,,SEASON,santa-clara,stanford,81,71,santa-clara,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0849;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114742,1952-1953,,SEASON,saint-mary-s,stanford,65,66,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0850;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114743,1952-1953,1953-02-07,EXACT,bradley,stanford,73,87,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0851;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0114744,1953-1954,,SEASON,hawai-i,stanford,71,82,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0860;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0114744,1953-1954,1953-12-19,EXACT,hawai-i,stanford,71,82,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0860;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114745,1953-1954,,SEASON,loyola-marymount,stanford,64,77,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0861;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114746,1953-1954,,SEASON,fresno-state,stanford,70,95,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0862;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114747,1953-1954,,SEASON,pacific,stanford,51,76,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0863;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -114692,8 +114692,8 @@ CBBG-0114753,1954-1955,,SEASON,saint-mary-s,stanford,71,92,stanford,0,TEAM_B_HOM
 CBBG-0114754,1954-1955,,SEASON,hawai-i,stanford,55,85,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0883;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114755,1954-1955,,SEASON,stanford,tulane,62,67,tulane,0,TEAM_B_HOME,tulane,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0114756,1954-1955,1954-12-27,EXACT,seton-hall,stanford,63,65,stanford,0,TEAM_A_HOME,seton-hall,walsh-gymnasium-seton-hall,VEN-000868,South Orange,NJ,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=seton-hall/SHU-S1-00727;venue_key=walsh-gymnasium-seton-hall;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0114757,1954-1955,,SEASON,hawai-i,stanford,51,71,stanford,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0114758,1954-1955,,SEASON,hawai-i,stanford,51,58,stanford,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0114757,1954-1955,,SEASON,hawai-i,stanford,51,71,stanford,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-018]
+CBBG-0114758,1954-1955,,SEASON,hawai-i,stanford,51,58,stanford,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-019]
 CBBG-0114759,1954-1955,,SEASON,san-francisco,stanford,76,60,san-francisco,0,TEAM_A_HOME,san-francisco,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0114760,1954-1955,,SEASON,santa-clara,stanford,67,72,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0896;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0114761,1955-1956,,SEASON,dartmouth,stanford,55,56,stanford,0,TEAM_B_HOME,stanford,stanford-pavilion,VEN-000422,Stanford,CA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=stanford/STAN-R-0907;venue_key=stanford-pavilion;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -116445,7 +116445,7 @@ CBBG-0116506,1951-1952,1952-02-12,EXACT,washington-state,whitworth,62,57,washing
 CBBG-0116507,1951-1952,1952-02-16,EXACT,central-washington,washington-state,41,45,washington-state,0,TEAM_A_HOME,central-washington,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0116508,1951-1952,1952-03-05,EXACT,university-motors,washington-state,64,50,university-motors,0,TEAM_A_HOME,university-motors,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0116509,1951-1952,1952-03-07,EXACT,university-motors,washington-state,60,47,university-motors,0,TEAM_A_HOME,university-motors,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0116510,1951-1952,1952-03-08,EXACT,hawai-i,washington-state,54,67,washington-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0116510,1951-1952,1952-03-08,EXACT,hawai-i,washington-state,54,67,washington-state,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-018]
 CBBG-0116511,1951-1952,1952-03-09,EXACT,hickam-field,washington-state,43,64,washington-state,0,TEAM_A_HOME,hickam-field,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0116512,1952-1953,1952-12-01,EXACT,eastern-washington,washington-state,72,71,eastern-washington,1,TEAM_B_HOME,washington-state,bohler-gym,VEN-000639,Pullman,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington-state/WSURAW-01204;venue_key=bohler-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0116513,1952-1953,1952-12-03,EXACT,university-motors,washington-state,57,61,washington-state,0,TEAM_B_HOME,washington-state,bohler-gym,VEN-000639,Pullman,WA,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=washington-state/WSURAW-01205;venue_key=bohler-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -117818,7 +117818,7 @@ CBBG-0117879,1939-1940,,SEASON,idaho,oregon-state,18,20,oregon-state,0,TEAM_A_HO
 CBBG-0117880,1939-1940,,SEASON,coca-cola,oregon-state,35,41,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0117881,1939-1940,,SEASON,cromwells,oregon-state,20,43,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0117882,1939-1940,,SEASON,charlie-chans,oregon-state,33,53,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0117883,1939-1940,,SEASON,hawai-i,oregon-state,39,49,oregon-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0117883,1939-1940,1940-04-08,EXACT,hawai-i,oregon-state,39,49,oregon-state,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1939-40-013]
 CBBG-0117884,1939-1940,,SEASON,oregon-state,south-seas,56,38,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0117885,1939-1940,,SEASON,ewa-plantation,oregon-state,25,83,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0117886,1939-1940,,SEASON,all-stars,oregon-state,25,38,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -117968,7 +117968,7 @@ CBBG-0118029,1950-1951,1951-01-03,EXACT,idaho,oregon-state,55,38,idaho,0,TEAM_A_
 CBBG-0118030,1950-1951,,SEASON,oregon-state,portland,55,43,oregon-state,0,TEAM_B_HOME,portland,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118031,1950-1951,1951-02-09,EXACT,idaho,oregon-state,29,34,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001119;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118032,1950-1951,1951-02-10,EXACT,idaho,oregon-state,39,31,idaho,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001120;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0118033,1950-1951,,SEASON,hawai-i,oregon-state,43,55,oregon-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0118033,1950-1951,,SEASON,hawai-i,oregon-state,43,55,oregon-state,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1950-51-020]
 CBBG-0118034,1950-1951,,SEASON,oregon-state,univ-motors,57,50,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118035,1950-1951,,SEASON,bradley,oregon-state,45,75,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118036,1950-1951,,SEASON,oregon-state,subpac,65,50,oregon-state,0,NEUTRAL,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -117992,7 +117992,7 @@ CBBG-0118053,1952-1953,1953-01-23,EXACT,idaho,oregon-state,65,49,idaho,0,TEAM_A_
 CBBG-0118054,1952-1953,1953-01-24,EXACT,idaho,oregon-state,55,59,oregon-state,0,TEAM_A_HOME,idaho,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118055,1952-1953,1953-02-03,EXACT,idaho,oregon-state,64,62,idaho,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001177;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118056,1952-1953,1953-02-04,EXACT,idaho,oregon-state,52,78,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001178;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0118057,1952-1953,1953-03-07,EXACT,hawai-i,oregon-state,74,58,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0118057,1952-1953,1953-03-07,EXACT,hawai-i,oregon-state,74,58,hawai-i,0,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1952-53-027]
 CBBG-0118058,1953-1954,1953-12-04,EXACT,hawai-i,oregon-state,54,73,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001186;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118059,1953-1954,1953-12-05,EXACT,hawai-i,oregon-state,50,55,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001187;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118060,1953-1954,1953-12-12,EXACT,oregon-state,portland,84,65,oregon-state,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001188;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -118037,8 +118037,8 @@ CBBG-0118098,1958-1959,1958-12-13,EXACT,oregon-state,wichita-state,72,55,oregon-
 CBBG-0118099,1958-1959,1958-12-27,EXACT,air-force,oregon-state,47,49,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001331;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118100,1958-1959,1959-01-22,EXACT,idaho,oregon-state,84,87,oregon-state,0,TEAM_A_HOME,idaho,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118101,1958-1959,1959-02-28,EXACT,idaho,oregon-state,42,46,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001346;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0118102,1959-1960,1959-12-02,EXACT,hawai-i,oregon-state,56,51,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0118103,1959-1960,1959-12-03,EXACT,hawai-i,oregon-state,46,72,oregon-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0118102,1959-1960,1959-12-02,EXACT,hawai-i,oregon-state,56,51,hawai-i,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-004;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0118103,1959-1960,1959-12-03,EXACT,hawai-i,oregon-state,46,72,oregon-state,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-005;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118104,1959-1960,1959-12-11,EXACT,montana,oregon-state,52,67,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001351;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118105,1959-1960,1959-12-12,EXACT,montana,oregon-state,58,78,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001352;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118106,1959-1960,1959-12-26,EXACT,new-mexico-state,oregon-state,50,54,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001355;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -118084,8 +118084,8 @@ CBBG-0118145,1963-1964,1963-12-06,EXACT,british-columbia,oregon-state,47,87,oreg
 CBBG-0118146,1963-1964,1963-12-27,EXACT,colorado-state,oregon-state,51,53,oregon-state,0,NEUTRAL,,veterans-memorial-coliseum-portland,VEN-000297,Portland,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001470;venue_key=veterans-memorial-coliseum-portland;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118147,1963-1964,1964-01-03,EXACT,cincinnati,oregon-state,57,53,cincinnati,0,NEUTRAL,,veterans-memorial-coliseum-portland,VEN-000297,Portland,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=cincinnati/CIN-STG1-01122;venue_key=veterans-memorial-coliseum-portland;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118148,1963-1964,1964-01-04,EXACT,cincinnati,oregon-state,61,82,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001473;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0118149,1963-1964,1964-01-12,EXACT,hawai-i,oregon-state,55,71,oregon-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0118150,1963-1964,1964-01-13,EXACT,hawai-i,oregon-state,44,70,oregon-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0118149,1963-1964,1964-01-12,EXACT,hawai-i,oregon-state,55,71,oregon-state,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1963-64-013;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0118150,1963-1964,1964-01-13,EXACT,hawai-i,oregon-state,44,70,oregon-state,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1963-64-014;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118151,1963-1964,1964-01-31,EXACT,oregon-state,seattle-u,85,79,oregon-state,0,TEAM_B_HOME,seattle-u,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118152,1963-1964,1964-02-07,EXACT,oregon-state,portland,97,68,oregon-state,0,TEAM_B_HOME,portland,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118153,1963-1964,1964-02-08,EXACT,oregon-state,portland,95,61,oregon-state,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001483;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -118104,8 +118104,8 @@ CBBG-0118165,1965-1966,1965-12-11,EXACT,oregon-state,villanova,65,59,oregon-stat
 CBBG-0118166,1965-1966,1965-12-18,EXACT,oregon-state,portland,73,63,oregon-state,0,TEAM_B_HOME,portland,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0118167,1965-1966,1965-12-27,EXACT,air-force,oregon-state,42,53,oregon-state,0,NEUTRAL,,veterans-memorial-coliseum-portland,VEN-000297,Portland,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001522;venue_key=veterans-memorial-coliseum-portland;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118168,1965-1966,1966-02-01,EXACT,hawai-i,oregon-state,36,72,oregon-state,0,TEAM_B_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001531;venue_key=gill-coliseum;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0118169,1966-1967,1966-12-02,EXACT,hawai-i,oregon-state,56,61,oregon-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0118170,1966-1967,1966-12-03,EXACT,hawai-i,oregon-state,54,58,oregon-state,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0118169,1966-1967,1966-12-02,EXACT,hawai-i,oregon-state,56,61,oregon-state,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-001;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0118170,1966-1967,1966-12-03,EXACT,hawai-i,oregon-state,54,58,oregon-state,0,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-002;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118171,1966-1967,1966-12-09,EXACT,oregon-state,portland,64,44,oregon-state,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001546;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118172,1966-1967,1966-12-28,EXACT,oregon-state,saint-louis,52,64,saint-louis,0,NEUTRAL,,veterans-memorial-coliseum-portland,VEN-000297,Portland,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001551;venue_key=veterans-memorial-coliseum-portland;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0118173,1966-1967,1967-01-30,EXACT,oregon-state,saint-mary-s,61,40,oregon-state,0,TEAM_A_HOME,oregon-state,gill-coliseum,VEN-000373,Corvallis,OR,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=oregon-state/OSU-S1-001559;venue_key=gill-coliseum;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
@@ -175293,7 +175293,7 @@ CBBG-0175354,1946-1947,1947-02-01,EXACT,colorado-state,utah-state,38,55,utah-sta
 CBBG-0175355,1946-1947,1947-02-07,EXACT,colorado-state,utah-state,35,43,utah-state,0,TEAM_A_HOME,colorado-state,glenn-morris-field-house,VEN-000992,Fort Collins,CO,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=colorado-state/CSU-S1-00486;venue_key=glenn-morris-field-house;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0175356,1946-1947,1947-02-08,EXACT,utah-state,wyoming,45,60,wyoming,0,TEAM_B_HOME,wyoming,half-acre-gym,VEN-000604,Laramie,WY,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=wyoming/WYO-S1-1946-47-P154C1Y5610;venue_key=half-acre-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0175357,1946-1947,1947-03-01,EXACT,denver,utah-state,44,39,denver,0,TEAM_B_HOME,utah-state,george-nelson-fieldhouse,VEN-000987,Logan,UT,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=utah-state/UST-S1-00612;venue_key=george-nelson-fieldhouse;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
-CBBG-0175358,1946-1947,1947-03-07,EXACT,hawai-i,utah-state,37,51,utah-state,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE target=hawai-i reciprocal=utah-state/UST-S1-00614]
+CBBG-0175358,1946-1947,1947-03-07,EXACT,hawai-i,utah-state,37,51,utah-state,0,TEAM_B_HOME,utah-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,[RECIPROCAL_ONLY_UNKNOWN_SITE_PROVENANCE target=hawai-i reciprocal=utah-state/UST-S1-00614]
 CBBG-0175359,1947-1948,,SEASON,idaho-state,utah-state,42,49,utah-state,0,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0175360,1947-1948,1947-11-28,EXACT,montana-state,utah-state,66,58,montana-state,0,TEAM_A_HOME,montana-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0175361,1947-1948,1947-11-29,EXACT,montana-state,utah-state,57,50,montana-state,0,TEAM_A_HOME,montana-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
@@ -212839,8 +212839,8 @@ CBBG-0212900,1967-1968,1968-02-05,EXACT,northern-arizona,unlv,91,117,unlv,0,TEAM
 CBBG-0212901,1967-1968,1968-02-12,EXACT,southern-utah,unlv,106,109,unlv,0,TEAM_A_HOME,southern-utah,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0212902,1967-1968,1968-02-16,EXACT,san-diego,unlv,83,87,unlv,0,TEAM_A_HOME,san-diego,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0212903,1967-1968,1968-02-17,EXACT,uc-irvine,unlv,82,81,uc-irvine,1,TEAM_A_HOME,uc-irvine,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0212904,1967-1968,1968-02-23,EXACT,hawai-i,unlv,80,68,hawai-i,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
-CBBG-0212905,1967-1968,1968-02-24,EXACT,hawai-i,unlv,74,77,unlv,0,TEAM_A_HOME,hawai-i,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0212904,1967-1968,1968-02-23,EXACT,hawai-i,unlv,80,68,hawai-i,0,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1967-68-024;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0212905,1967-1968,1968-02-24,EXACT,hawai-i,unlv,74,77,unlv,0,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1967-68-025;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0212906,1967-1968,1968-03-04,EXACT,hiram-scott-college,unlv,87,95,unlv,0,TEAM_B_HOME,unlv,las-vegas-convention-center,VEN-000448,Las Vegas,NV,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=unlv/unlv-1967-68-026;venue_key=las-vegas-convention-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0212907,1967-1968,1968-03-08,EXACT,uc-davis,unlv,91,96,unlv,0,NEUTRAL,,peterson-gym,VEN-000995,San Diego,CA,POSTSEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=unlv/unlv-1967-68-027;venue_key=peterson-gym;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
 CBBG-0212908,1967-1968,1968-03-09,EXACT,uc-irvine,unlv,74,79,unlv,0,NEUTRAL,,peterson-gym,VEN-000995,San Diego,CA,POSTSEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=unlv/unlv-1967-68-028;venue_key=peterson-gym;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
@@ -213201,3 +213201,686 @@ CBBG-0213262,1955-1956,1956-02-13,EXACT,florida-southern,florida-state,74,92,flo
 CBBG-0213263,1955-1956,1956-02-18,EXACT,florida-southern,florida-state,81,85,florida-state,,TEAM_A_HOME,florida-southern,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0213264,1955-1956,1956-02-20,EXACT,florida-state,stetson,89,83,florida-state,,TEAM_B_HOME,stetson,,,,,REGULAR_SEASON,,,,PROVISIONAL,
 CBBG-0213265,1955-1956,1956-03-03,EXACT,florida-state,loyola-new-orleans,72,75,loyola-new-orleans,,TEAM_B_HOME,loyola-new-orleans,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213266,1921-1922,,SEASON,hawai-i,palama-maroons,44,20,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213267,1921-1922,,SEASON,hawai-i,navy-service-team,31,18,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213268,1921-1922,,SEASON,hawai-i,historical-luke-field,41,12,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213269,1921-1922,,SEASON,hawai-i,historical-marines,28,18,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213270,1921-1922,,SEASON,hawai-i,historical-outrigger-canoe-club,39,36,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213271,1921-1922,,SEASON,hawai-i,historical-all-chinese-athletes,28,33,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213272,1921-1922,,SEASON,hawai-i,historical-national-guard,16,25,historical-national-guard,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213273,1921-1922,,SEASON,hawai-i,historical-outrigger-canoe-club,32,34,historical-outrigger-canoe-club,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213274,1921-1922,,SEASON,hawai-i,historical-national-guard,26,37,historical-national-guard,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213275,1921-1922,,SEASON,hawai-i,palama-maroons,22,16,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213276,1921-1922,,SEASON,hawai-i,historical-hilo-school-alumni,20,21,historical-hilo-school-alumni,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213277,1921-1922,,SEASON,hawai-i,historical-35th-infantry,29,14,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213278,1921-1922,,SEASON,hawai-i,historical-kauai-hs,44,17,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213279,1921-1922,,SEASON,hawai-i,historical-lihue,35,19,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213280,1921-1922,,SEASON,hawai-i,historical-makaweli,31,23,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213281,1921-1922,,SEASON,hawai-i,historical-all-kauai,37,15,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213282,1922-1923,,SEASON,hawai-i,historical-national-guard,,,,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213283,1922-1923,,SEASON,hawai-i,historical-fort-shafter,32,20,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213284,1922-1923,,SEASON,hawai-i,historical-knights-of-colombus,49,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213285,1922-1923,,SEASON,hawai-i,palama-maroons,23,29,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213286,1922-1923,,SEASON,hawai-i,historical-all-chinese-athletes,27,28,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213287,1923-1924,,SEASON,hawai-i,historical-central-ymca,35,25,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213288,1923-1924,,SEASON,hawai-i,palama-maroons,14,54,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213289,1923-1924,,SEASON,hawai-i,schofield-barracks,36,49,schofield-barracks,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213290,1923-1924,,SEASON,hawai-i,navy-service-team,26,29,navy-service-team,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213291,1923-1924,,SEASON,hawai-i,historical-all-chinese-athletes,35,3,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213292,1923-1924,,SEASON,hawai-i,historical-fort-shafter,27,24,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213293,1923-1924,,SEASON,hawai-i,historical-national-guard,17,42,historical-national-guard,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213294,1924-1925,,SEASON,hawai-i,historical-central-ymca,25,2,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213295,1924-1925,,SEASON,hawai-i,historical-27th-infantry,32,27,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213296,1924-1925,,SEASON,hawai-i,historical-sub-base,41,23,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213297,1924-1925,,SEASON,hawai-i,palama-maroons,20,22,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213298,1924-1925,,SEASON,hawai-i,historical-all-chinese-athletes,24,29,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213299,1924-1925,,SEASON,hawai-i,historical-marines,32,14,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213300,1924-1925,,SEASON,hawai-i,historical-nuuanu-ymca,38,19,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213301,1924-1925,,SEASON,hawai-i,historical-normal-school,26,18,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213302,1924-1925,,SEASON,hawai-i,historical-tokyo-all-stars,36,11,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213303,1925-1926,,SEASON,hawai-i,historical-fort-shafter,19,40,historical-fort-shafter,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213304,1925-1926,,SEASON,hawai-i,historical-all-chinese-athletes,29,24,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213305,1925-1926,,SEASON,hawai-i,historical-central-ymca,19,9,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213306,1925-1926,,SEASON,hawai-i,historical-national-guard,19,28,historical-national-guard,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213307,1925-1926,,SEASON,hawai-i,palama-maroons,24,27,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213308,1925-1926,,SEASON,hawai-i,historical-normal-school,9,14,historical-normal-school,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213309,1926-1927,,SEASON,hawai-i,historical-all-chinese-athletes,29,37,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213310,1926-1927,,SEASON,hawai-i,historical-marines,30,22,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213311,1926-1927,,SEASON,hawai-i,historical-bachelots,24,17,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213312,1926-1927,,SEASON,hawai-i,historical-normal-school,19,14,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213313,1926-1927,,SEASON,hawai-i,historical-all-chinese-athletes,13,37,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213314,1926-1927,,SEASON,hawai-i,palama-maroons,32,24,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213315,1926-1927,,SEASON,hawai-i,historical-honolulu-ac,26,19,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213316,1926-1927,,SEASON,hawai-i,historical-all-chinese-athletes,24,22,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213317,1927-1928,,SEASON,hawai-i,historical-central-ymca,27,2,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213318,1927-1928,,SEASON,hawai-i,historical-kalihi-ac,27,29,historical-kalihi-ac,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213319,1927-1928,,SEASON,hawai-i,historical-normal-school,27,15,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213320,1927-1928,,SEASON,hawai-i,historical-nuuanu-ymca,37,30,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213321,1927-1928,,SEASON,hawai-i,historical-honolulu-ac,25,31,historical-honolulu-ac,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213322,1927-1928,,SEASON,hawai-i,palama-maroons,2,29,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213323,1927-1928,,SEASON,hawai-i,historical-all-chinese-athletes,25,31,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213324,1928-1929,,SEASON,hawai-i,historical-nuuanu-ymca,30,28,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213325,1928-1929,,SEASON,hawai-i,historical-normal-school,,,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213326,1928-1929,,SEASON,hawai-i,palama-maroons,28,47,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213327,1928-1929,,SEASON,hawai-i,historical-honolulu-ac,23,37,historical-honolulu-ac,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213328,1928-1929,,SEASON,hawai-i,historical-all-chinese-athletes,29,31,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213329,1928-1929,,SEASON,hawai-i,historical-central-ymca,2,33,historical-central-ymca,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213330,1928-1929,,SEASON,hawai-i,historical-korean-delta-frats,31,22,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213331,1929-1930,,SEASON,hawai-i,historical-honolulu-ac,19,36,historical-honolulu-ac,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213332,1929-1930,,SEASON,hawai-i,historical-nuuanu-ymca,2,37,historical-nuuanu-ymca,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213333,1929-1930,,SEASON,hawai-i,historical-korean-delta-frats,37,28,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213334,1929-1930,,SEASON,hawai-i,palama-maroons,24,45,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213335,1929-1930,,SEASON,hawai-i,historical-central-ymca,33,22,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213336,1929-1930,,SEASON,hawai-i,historical-all-chinese-athletes,26,38,historical-all-chinese-athletes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213337,1929-1930,,SEASON,hawai-i,historical-normal-school,34,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213338,1930-1931,,SEASON,hawai-i,historical-aloha-amateurs,31,28,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213339,1930-1931,,SEASON,hawai-i,historical-central-ymca,32,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213340,1930-1931,,SEASON,hawai-i,historical-normal-school,4,2,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213341,1930-1931,,SEASON,hawai-i,historical-mckinley-hs,30,2,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213342,1930-1931,,SEASON,hawai-i,historical-latter-day-saints,38,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213343,1930-1931,,SEASON,hawai-i,historical-korean-delta-frats,43,2,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213344,1930-1931,,SEASON,hawai-i,palama-maroons,35,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213345,1930-1931,,SEASON,hawai-i,historical-all-chinese-athletes,35,31,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213346,1931-1932,,SEASON,hawai-i,historical-all-chinese-athletes,36,2,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213347,1931-1932,,SEASON,hawai-i,palama-maroons,53,37,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213348,1931-1932,,SEASON,hawai-i,historical-aloha-amateurs,44,40,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213349,1931-1932,,SEASON,hawai-i,historical-all-chinese-athletes,38,25,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213350,1931-1932,,SEASON,hawai-i,palama-maroons,29,23,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213351,1931-1932,,SEASON,hawai-i,historical-aloha-amateurs,48,4,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213352,1931-1932,,SEASON,hawai-i,historical-hilo-wreckers,65,22,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213353,1931-1932,,SEASON,hawai-i,historical-hanalei,38,36,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213354,1931-1932,,SEASON,hawai-i,historical-matson,24,19,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213355,1932-1933,,SEASON,hawai-i,historical-hawaiian-department,49,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213356,1932-1933,,SEASON,hawai-i,historical-luke-field,29,37,historical-luke-field,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213357,1932-1933,,SEASON,hawai-i,historical-luke-field,39,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213358,1932-1933,,SEASON,hawai-i,historical-all-chinese-athletes,39,26,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213359,1932-1933,,SEASON,hawai-i,palama-maroons,29,30,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213360,1932-1933,,SEASON,hawai-i,historical-aloha-amateurs,37,26,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213361,1932-1933,,SEASON,hawai-i,historical-kahului-ac,55,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213362,1932-1933,,SEASON,hawai-i,historical-spartan-radio,45,3,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213363,1932-1933,,SEASON,hawai-i,historical-lahaina-pirates,43,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213364,1932-1933,,SEASON,hawai-i,historical-wailuku-japanese-ac,46,23,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213365,1932-1933,,SEASON,hawai-i,historical-all-chinese-athletes,39,37,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213366,1932-1933,,SEASON,hawai-i,palama-maroons,34,44,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213367,1932-1933,,SEASON,hawai-i,historical-aloha-amateurs,38,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213368,1932-1933,,SEASON,hawai-i,palama-maroons,35,45,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213369,1932-1933,,SEASON,hawai-i,meiji-university,45,40,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213370,1932-1933,,SEASON,hawai-i,historical-wichita-henrys,42,64,historical-wichita-henrys,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213371,1933-1934,,SEASON,hawai-i,historical-nuuanu-ymca,33,40,historical-nuuanu-ymca,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213372,1933-1934,,SEASON,hawai-i,historical-kilby-florists,40,44,historical-kilby-florists,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213373,1933-1934,,SEASON,hawai-i,historical-vagabonds,30,41,historical-vagabonds,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213374,1933-1934,,SEASON,hawai-i,historical-blookie-bullets,33,20,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213375,1933-1934,,SEASON,hawai-i,historical-citywide-ac,53,27,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213376,1933-1934,,SEASON,hawai-i,palama-maroons,38,46,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213377,1934-1935,,SEASON,hawai-i,historical-aloha-amateurs,50,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213378,1934-1935,,SEASON,hawai-i,historical-elks,30,37,historical-elks,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213379,1934-1935,,SEASON,hawai-i,historical-vagabonds,28,30,historical-vagabonds,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213380,1934-1935,,SEASON,hawai-i,historical-waiakea-pirates,50,26,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213381,1934-1935,,SEASON,hawai-i,historical-hilo-hs,56,36,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213382,1934-1935,,SEASON,hawai-i,historical-hilo-chinese,49,32,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213383,1934-1935,,SEASON,hawai-i,historical-korean-delta-frats,49,32,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213384,1934-1935,,SEASON,hawai-i,historical-elks,45,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213385,1934-1935,,SEASON,hawai-i,historical-nuuanu-ymca,44,36,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213386,1934-1935,,SEASON,hawai-i,historical-nuuanu-ymca,36,39,historical-nuuanu-ymca,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213387,1934-1935,,SEASON,hawai-i,historical-nuuanu-ymca,40,32,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213388,1935-1936,,SEASON,hawai-i,historical-3rd-engineers,26,65,historical-3rd-engineers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213389,1935-1936,,SEASON,hawai-i,palama-maroons,50,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213390,1935-1936,,SEASON,hawai-i,historical-vagabonds,31,25,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213391,1935-1936,,SEASON,hawai-i,historical-matson,40,35,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213392,1935-1936,,SEASON,hawai-i,palama-maroons,28,29,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213393,1935-1936,,SEASON,hawai-i,historical-elks,24,32,historical-elks,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213394,1935-1936,,SEASON,hawai-i,historical-vagabonds,38,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213395,1935-1936,,SEASON,hawai-i,historical-matson,40,51,historical-matson,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213396,1935-1936,,SEASON,hawai-i,historical-chong-clothiers,50,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213397,1935-1936,,SEASON,hawai-i,historical-elks,27,43,historical-elks,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213398,1935-1936,,SEASON,hawai-i,navy-service-team,47,43,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213399,1935-1936,,SEASON,hawai-i,historical-fort-kamehameha,37,47,historical-fort-kamehameha,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213400,1935-1936,,SEASON,hawai-i,historical-3rd-engineers,37,72,historical-3rd-engineers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213401,1935-1936,,SEASON,hawai-i,historical-chong-clothiers,44,4,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213402,1935-1936,,SEASON,hawai-i,historical-3rd-engineers,46,32,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213403,1936-1937,,SEASON,hawai-i,historical-vagabonds,28,34,historical-vagabonds,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213404,1936-1937,,SEASON,hawai-i,historical-nuuanu-ymca,43,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213405,1936-1937,,SEASON,hawai-i,historical-elks,40,44,historical-elks,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213406,1936-1937,,SEASON,hawai-i,historical-aiea-aa,59,18,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213407,1936-1937,,SEASON,hawai-i,historical-chinese,52,22,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213408,1936-1937,,SEASON,hawai-i,historical-matson,47,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213409,1936-1937,,SEASON,hawai-i,historical-apollo,45,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213410,1936-1937,,SEASON,hawai-i,log-cabins,44,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213411,1936-1937,,SEASON,hawai-i,historical-elks,34,30,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213412,1936-1937,,SEASON,hawai-i,historical-matson,4,46,historical-matson,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213413,1936-1937,,SEASON,hawai-i,log-cabins,58,48,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213414,1936-1937,,SEASON,hawai-i,historical-matson,46,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213415,1937-1938,,SEASON,hawai-i,historical-tam-maluhian,39,11,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213416,1937-1938,,SEASON,hawai-i,historical-jaac,26,29,historical-jaac,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213417,1937-1938,,SEASON,hawai-i,historical-wailuku-aa,58,72,historical-wailuku-aa,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213418,1937-1938,,SEASON,hawai-i,historical-matson,39,47,historical-matson,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213419,1937-1938,,SEASON,hawai-i,historical-aiea-aa,61,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213420,1937-1938,,SEASON,hawai-i,historical-apollo,29,32,historical-apollo,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213421,1937-1938,,SEASON,hawai-i,historical-dragons,35,61,historical-dragons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213422,1937-1938,,SEASON,hawai-i,historical-hawaiian-pine,36,3,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213423,1937-1938,,SEASON,hawai-i,log-cabins,26,27,log-cabins,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213424,1937-1938,,SEASON,hawai-i,historical-matson,28,26,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213425,1937-1938,,SEASON,hawai-i,palama-maroons,30,42,palama-maroons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213426,1937-1938,,SEASON,hawai-i,historical-matson,39,26,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213427,1937-1938,,SEASON,hawai-i,historical-wailuku-aa,27,32,historical-wailuku-aa,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213428,1938-1939,,SEASON,hawai-i,palama-maroons,57,30,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213429,1938-1939,,SEASON,hawai-i,historical-confederation-life,38,28,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213430,1938-1939,,SEASON,hawai-i,historical-cromwell-hawaiians,24,30,historical-cromwell-hawaiians,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213431,1938-1939,,SEASON,hawai-i,historical-aiea-aa,53,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213432,1938-1939,,SEASON,hawai-i,historical-hoffman-cafe,41,43,historical-hoffman-cafe,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213433,1938-1939,,SEASON,hawai-i,historical-dragons,36,48,historical-dragons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213434,1938-1939,,SEASON,hawai-i,historical-confederation-life,35,40,historical-confederation-life,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213435,1938-1939,,SEASON,hawai-i,historical-elks,28,53,historical-elks,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213436,1938-1939,,SEASON,hawai-i,historical-cromwell-hawaiians,39,45,historical-cromwell-hawaiians,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213437,1938-1939,,SEASON,hawai-i,historical-maui-agricultural-co,42,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213438,1938-1939,,SEASON,hawai-i,historical-dragons,56,41,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213439,1938-1939,,SEASON,hawai-i,historical-wailuku-sugar-co,40,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213440,1938-1939,,SEASON,hawai-i,historical-hoffman-cafe,47,44,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213441,1939-1940,,SEASON,hawai-i,historical-empire-billiards,38,41,historical-empire-billiards,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213442,1939-1940,,SEASON,hawai-i,historical-south-seas,56,55,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213443,1939-1940,,SEASON,hawai-i,historical-alex-sandwich,47,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213444,1939-1940,,SEASON,hawai-i,palama-maroons,49,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213445,1939-1940,,SEASON,hawai-i,historical-coca-cola,45,52,historical-coca-cola,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213446,1939-1940,,SEASON,hawai-i,historical-empire-billiards,56,36,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213447,1939-1940,,SEASON,hawai-i,historical-elks,56,40,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213448,1939-1940,,SEASON,hawai-i,historical-south-seas,56,48,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213449,1939-1940,,SEASON,hawai-i,historical-coca-cola,58,4,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213450,1939-1940,,SEASON,hawai-i,historical-matson,46,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213451,1939-1940,,SEASON,hawai-i,historical-cromwell-hawaiians,44,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213452,1939-1940,,SEASON,hawai-i,historical-wailuku-aa,37,28,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213453,1939-1940,,SEASON,hawai-i,historical-coca-cola,48,60,historical-coca-cola,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213454,1940-1941,,SEASON,fresno-state,hawai-i,41,34,fresno-state,,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1940-41-001]
+CBBG-0213455,1940-1941,,SEASON,hawai-i,historical-army-all-stars,58,52,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213456,1940-1941,,SEASON,hawai-i,historical-coca-cola,23,33,historical-coca-cola,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213457,1940-1941,,SEASON,hawai-i,historical-matson,38,37,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213458,1940-1941,,SEASON,hawai-i,historical-mainland-collegians,34,42,historical-mainland-collegians,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213459,1940-1941,,SEASON,hawai-i,palama-maroons,66,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213460,1940-1941,,SEASON,hawai-i,historical-charlie-chan,68,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213461,1940-1941,,SEASON,hawai-i,historical-south-seas,56,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213462,1940-1941,,SEASON,hawai-i,historical-empire-billiards,64,47,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213463,1940-1941,,SEASON,hawai-i,historical-elks,51,35,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213464,1940-1941,,SEASON,hawai-i,historical-coca-cola,43,4,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213465,1940-1941,,SEASON,hawai-i,historical-mainland-collegians,34,41,historical-mainland-collegians,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213466,1940-1941,,SEASON,hawai-i,historical-matson,50,35,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213467,1940-1941,,SEASON,hawai-i,historical-hvaa,57,26,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213468,1940-1941,,SEASON,hawai-i,palama-maroons,66,5,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213469,1940-1941,,SEASON,hawai-i,historical-coca-cola,32,38,historical-coca-cola,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213470,1941-1942,,SEASON,hawai-i,historical-coca-cola,46,61,historical-coca-cola,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213471,1941-1942,,SEASON,hawai-i,historical-red-hill,54,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213472,1941-1942,,SEASON,hawai-i,historical-dragons,49,53,historical-dragons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213473,1941-1942,,SEASON,hawai-i,historical-na-aliis,48,53,historical-na-aliis,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213474,1941-1942,,SEASON,hawai-i,historical-hawaii-training-grads,44,52,historical-hawaii-training-grads,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213475,1941-1942,,SEASON,hawai-i,historical-alex-sandwich,61,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213476,1941-1942,,SEASON,hawai-i,historical-alex-sandwich,48,44,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213477,1941-1942,,SEASON,hawai-i,historical-dragons,38,49,historical-dragons,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213478,1946-1947,,SEASON,hawai-i,historical-navy-badgers,58,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213479,1946-1947,,SEASON,hawai-i,historical-cyo,51,49,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213480,1946-1947,,SEASON,hawai-i,historical-ewa,61,25,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213481,1946-1947,,SEASON,hawai-i,historical-sports-stars,49,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213482,1946-1947,,SEASON,hawai-i,historical-dragons,68,31,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213483,1946-1947,,SEASON,hawai-i,historical-hickam,64,44,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213484,1946-1947,,SEASON,hawai-i,historical-nuuanu-ymca,63,44,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213485,1946-1947,,SEASON,hawai-i,historical-kalihi-ac,50,43,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213486,1946-1947,,SEASON,hawai-i,historical-navy-all-stars,60,59,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213487,1946-1947,1947-02-24,EXACT,hawai-i,muhlenberg,64,77,muhlenberg,,TEAM_B_HOME,muhlenberg,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213488,1946-1947,1947-02-27,EXACT,canisius,hawai-i,45,43,canisius,,TEAM_A_HOME,canisius,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213489,1946-1947,1947-03-01,EXACT,hawai-i,western-kentucky,37,67,western-kentucky,,TEAM_B_HOME,western-kentucky,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213490,1946-1947,1947-03-03,EXACT,hawai-i,marshall,57,84,marshall,,TEAM_B_HOME,marshall,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213491,1946-1947,1947-03-10,EXACT,hawai-i,nevada,50,57,nevada,,TEAM_B_HOME,nevada,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213492,1947-1948,,SEASON,hawai-i,historical-138th-truckers,50,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213493,1947-1948,,SEASON,hawai-i,historical-valley-forge,60,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213494,1947-1948,,SEASON,hawai-i,historical-liberty-house,75,63,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213495,1947-1948,,SEASON,hawai-i,historical-maid-rites,65,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213496,1947-1948,,SEASON,hawai-i,historical-army-special-troops,72,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213497,1947-1948,,SEASON,hawai-i,historical-navy-receiving,52,35,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213498,1947-1948,,SEASON,hawai-i,historical-ewa,37,36,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213499,1947-1948,,SEASON,hawai-i,historical-7th-fighter-wing,58,24,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213500,1947-1948,,SEASON,hawai-i,historical-maui-agricultural-co,73,41,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213501,1947-1948,,SEASON,hawai-i,historical-wailuku-sugar-co,57,39,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213502,1947-1948,,SEASON,hawai-i,navy-service-team,58,35,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213503,1947-1948,,SEASON,hawai-i,historical-593rd-qm-service-co,68,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213504,1947-1948,,SEASON,hawai-i,historical-sports-stars,63,44,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213505,1947-1948,,SEASON,hawai-i,hawaii-marines,62,27,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213506,1947-1948,,SEASON,hawai-i,historical-honolulu-police,69,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213507,1947-1948,,SEASON,hawai-i,historical-cyo,44,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213508,1947-1948,,SEASON,hawai-i,historical-islanders,76,30,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213509,1947-1948,,SEASON,hawai-i,historical-hickam,58,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213510,1947-1948,,SEASON,hawai-i,navy-service-team,61,29,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213511,1947-1948,,SEASON,hawai-i,historical-maid-rites,69,41,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213512,1947-1948,,SEASON,hawai-i,historical-ewa,57,23,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213513,1947-1948,1948-02-21,EXACT,hawai-i,seattle-u,47,34,hawai-i,,TEAM_B_HOME,seattle-u,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213514,1947-1948,1948-02-23,EXACT,central-washington,hawai-i,57,41,central-washington,,TEAM_A_HOME,central-washington,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213515,1947-1948,1948-02-25,EXACT,hawai-i,pacific-lutheran,54,65,pacific-lutheran,,TEAM_B_HOME,pacific-lutheran,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213516,1947-1948,1948-02-26,EXACT,hawai-i,southern-oregon,49,46,hawai-i,,TEAM_B_HOME,southern-oregon,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213517,1947-1948,1948-02-28,EXACT,hawai-i,nevada,47,53,nevada,,TEAM_B_HOME,nevada,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213518,1947-1948,,SEASON,hawai-i,historical-eagles,60,45,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213519,1948-1949,,SEASON,hawai-i,historical-nisei-all-stars,56,30,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213520,1948-1949,,SEASON,hawai-i,historical-puerto-rican-all-stars,69,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213521,1948-1949,,SEASON,hawai-i,historical-oakland-bittners,32,55,historical-oakland-bittners,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213522,1948-1949,,SEASON,hawai-i,historical-mikimiki,74,41,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213523,1948-1949,,SEASON,hawai-i,historical-hilo-collegians,71,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213524,1948-1949,,SEASON,hawai-i,navy-service-team,54,48,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213525,1948-1949,,SEASON,hawai-i,historical-south-sector,89,51,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213526,1948-1949,,SEASON,hawai-i,historical-liberty-house,57,49,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213527,1948-1949,,SEASON,hawai-i,historical-commercial-all-stars,44,41,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213528,1948-1949,,SEASON,hawai-i,historical-national-photo,51,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213529,1948-1949,,SEASON,hawai-i,historical-55th-medium-port,72,49,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213530,1948-1949,,SEASON,hawai-i,historical-weyenberg-shoes,51,63,historical-weyenberg-shoes,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213531,1948-1949,,SEASON,hawai-i,historical-hawaiian-all-stars,47,39,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213532,1948-1949,,SEASON,hawai-i,historical-aiea-aa,76,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213533,1948-1949,,SEASON,hawai-i,historical-shop-07,66,40,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213534,1948-1949,,SEASON,hawai-i,historical-charlies-arcade,64,58,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213535,1948-1949,,SEASON,hawai-i,historical-south-sector,64,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213536,1948-1949,,SEASON,hawai-i,historical-south-stars,70,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213537,1948-1949,,SEASON,hawai-i,historical-hickam-aacs,85,40,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213538,1948-1949,,SEASON,hawai-i,historical-aja-all-stars,76,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213539,1948-1949,,SEASON,hawai-i,historical-chinen-service,64,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213540,1948-1949,,SEASON,hawai-i,historical-20th-century,68,33,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213541,1948-1949,,SEASON,hawai-i,historical-oakland-bittners,53,71,historical-oakland-bittners,,TEAM_B_HOME,historical-oakland-bittners,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213542,1948-1949,,SEASON,hawai-i,nevada,51,70,nevada,,TEAM_B_HOME,nevada,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213543,1948-1949,,SEASON,hawai-i,regis-colorado,58,72,regis-colorado,,TEAM_B_HOME,regis-colorado,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213544,1948-1949,,SEASON,emporia-state,hawai-i,56,64,hawai-i,,TEAM_A_HOME,emporia-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213545,1948-1949,1949-03-08,EXACT,hawai-i,north-dakota,53,70,north-dakota,,NEUTRAL,,municipal-auditorium-kc,VEN-000143,Kansas City,MO,POSTSEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1948-49-027;venue_key=municipal-auditorium-kc;site_type=NEUTRAL;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213546,1949-1950,,SEASON,hawai-i,schofield-barracks,43,20,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213547,1949-1950,,SEASON,hawai-i,subpac-raiders,70,63,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213548,1949-1950,,SEASON,hawai-i,historical-wreckers-hilo,86,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213549,1949-1950,,SEASON,hawai-i,historical-hilo-eagles,86,47,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213550,1949-1950,,SEASON,hawai-i,schofield-barracks,55,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213551,1949-1950,,SEASON,hawai-i,historical-national-dollar,49,68,historical-national-dollar,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213552,1949-1950,,SEASON,hawai-i,historical-waimea-ac,90,37,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213553,1949-1950,,SEASON,hawai-i,historical-lihue-aja,73,36,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213554,1949-1950,1949-12-30,EXACT,hamline,hawai-i,75,49,hamline,,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1949-50-009]
+CBBG-0213555,1949-1950,1950-01-04,EXACT,hamline,hawai-i,59,49,hamline,,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1949-50-010]
+CBBG-0213556,1949-1950,,SEASON,hawai-i,historical-20th-century,67,43,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213557,1949-1950,,SEASON,hawai-i,historical-weyenberg-shoes,60,35,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213558,1949-1950,,SEASON,hawai-i,historical-naval-base,80,39,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213559,1949-1950,,SEASON,hawai-i,subpac-raiders,52,65,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213560,1949-1950,,SEASON,hawai-i,historical-hickam-aacs,68,52,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213561,1949-1950,,SEASON,hawai-i,historical-hickam-mats,68,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213562,1949-1950,,SEASON,hawai-i,historical-orel-co,82,45,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213563,1949-1950,1950-02-09,EXACT,bradley,hawai-i,77,53,bradley,,TEAM_A_HOME,bradley,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213564,1949-1950,1950-02-11,EXACT,hawai-i,valparaiso,60,78,valparaiso,,TEAM_B_HOME,valparaiso,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213565,1949-1950,1950-02-13,EXACT,beloit,hawai-i,80,52,beloit,,TEAM_A_HOME,beloit,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213566,1949-1950,1950-02-16,EXACT,hawai-i,lawrence-tech,48,58,lawrence-tech,,TEAM_B_HOME,lawrence-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213567,1949-1950,1950-02-17,EXACT,hawai-i,john-carroll,65,61,hawai-i,,TEAM_B_HOME,john-carroll,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213568,1949-1950,1950-02-18,EXACT,buffalo,hawai-i,69,50,buffalo,,TEAM_A_HOME,buffalo,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213569,1949-1950,1950-02-20,EXACT,bridgeport,hawai-i,70,68,bridgeport,,TEAM_A_HOME,bridgeport,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213570,1949-1950,1950-02-24,EXACT,hawai-i,st-francis-brooklyn,54,76,st-francis-brooklyn,,TEAM_B_HOME,st-francis-brooklyn,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213571,1949-1950,1950-02-25,EXACT,hawai-i,siena,43,65,siena,,TEAM_B_HOME,siena,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213572,1949-1950,,SEASON,hawai-i,historical-chinen-service,54,58,historical-chinen-service,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213573,1949-1950,,SEASON,hawai-i,historical-sports-stars,77,40,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213574,1949-1950,,SEASON,hawai-i,historical-national-photo,58,44,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213575,1949-1950,,SEASON,hawai-i,historical-mckinley-auto-paint,68,51,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213576,1949-1950,,SEASON,hawai-i,historical-weyenberg-shoes,84,48,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213577,1949-1950,,SEASON,hawai-i,historical-20th-century,63,40,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213578,1949-1950,,SEASON,hawai-i,historical-chinen-service,80,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213579,1949-1950,,SEASON,hawai-i,historical-chinen-service,61,21,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213580,1949-1950,,SEASON,hawai-i,historical-maui,86,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213581,1950-1951,,SEASON,hawai-i,schofield-barracks,86,28,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213582,1950-1951,,SEASON,hawai-i,historical-sleet-marines,59,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213583,1950-1951,,SEASON,hawai-i,historical-hickam-mats,57,48,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213584,1950-1951,,SEASON,hawai-i,historical-barbers-point-pointers,62,57,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213585,1950-1951,,SEASON,hawai-i,historical-hickam-mats,53,51,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213586,1950-1951,,SEASON,hawai-i,subpac-raiders,58,60,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213587,1950-1951,,SEASON,hawai-i,historical-universal-motors,60,56,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213588,1950-1951,,SEASON,hawai-i,historical-oldsmobile-rockets,65,48,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213589,1950-1951,,SEASON,hawai-i,historical-service-center,43,45,historical-service-center,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213590,1950-1951,,SEASON,hawai-i,subpac-raiders,51,49,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213591,1950-1951,,SEASON,hawai-i,historical-naval-base,54,50,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213592,1950-1951,,SEASON,hawai-i,historical-oldsmobile-rockets,74,51,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213593,1950-1951,,SEASON,hawai-i,historical-service-center,42,56,historical-service-center,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213594,1950-1951,,SEASON,hawai-i,historical-barbers-point-pointers,49,42,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213595,1950-1951,,SEASON,hawai-i,historical-universal-motors,55,69,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213596,1950-1951,,SEASON,hawai-i,subpac-raiders,73,70,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213597,1950-1951,,SEASON,hawai-i,historical-communicators,62,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213598,1950-1951,,SEASON,hawai-i,historical-hickam-mats,65,52,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213599,1950-1951,,SEASON,bradley,hawai-i,88,57,bradley,,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1950-51-021]
+CBBG-0213600,1950-1951,,SEASON,hawai-i,historical-universal-motors,58,61,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213601,1950-1951,,SEASON,hawai-i,historical-west-maui,75,54,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213602,1950-1951,,SEASON,hawai-i,historical-universal-motors,48,50,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213603,1950-1951,,SEASON,hawai-i,historical-universal-motors,64,63,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213604,1950-1951,,SEASON,hawai-i,historical-hickam-mats,56,59,historical-hickam-mats,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213605,1950-1951,,SEASON,hawai-i,historical-steward-chevrolet,42,89,historical-steward-chevrolet,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213606,1951-1952,1951-12-18,EXACT,hawai-i,historical-haba-all-stars,52,47,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213607,1951-1952,1951-12-20,EXACT,hawai-i,subpac-raiders,46,47,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213608,1951-1952,1951-12-26,EXACT,hawai-i,historical-hi-infantry,54,65,historical-hi-infantry,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213609,1951-1952,1951-12-27,EXACT,hawai-i,historical-hi-infantry,57,61,historical-hi-infantry,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213610,1951-1952,1951-12-29,EXACT,hawai-i,historical-barbers-point-pointers,58,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213611,1951-1952,1952-01-02,EXACT,hawai-i,memphis,68,61,hawai-i,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-006]
+CBBG-0213612,1951-1952,1952-01-09,EXACT,hawai-i,historical-universal-motors,54,58,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213613,1951-1952,1952-01-12,EXACT,hawai-i,historical-hickam-mats,47,66,historical-hickam-mats,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213614,1951-1952,1952-01-16,EXACT,hawai-i,portland,46,58,portland,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-009]
+CBBG-0213615,1951-1952,1952-01-23,EXACT,hawai-i,san-jose-state,42,44,san-jose-state,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-010]
+CBBG-0213616,1951-1952,1952-02-13,EXACT,hawai-i,saint-mary-s,61,60,hawai-i,2,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-013]
+CBBG-0213617,1951-1952,1952-02-21,EXACT,hawai-i,historical-hickam-mats,67,63,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213618,1951-1952,1952-02-22,EXACT,hawai-i,historical-universal-motors,57,71,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213619,1951-1952,1952-02-23,EXACT,hawai-i,subpac-raiders,58,56,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213620,1951-1952,1952-02-27,EXACT,hawai-i,santa-clara,52,71,santa-clara,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1951-52-017]
+CBBG-0213621,1952-1953,1952-11-13,EXACT,hawai-i,historical-pearl-harbor-marines,67,77,historical-pearl-harbor-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213622,1952-1953,1952-11-18,EXACT,hawai-i,subpac-raiders,59,56,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213623,1952-1953,,SEASON,hawai-i,historical-barbers-point-pointers,67,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213624,1952-1953,,SEASON,hawai-i,historical-hawaii-all-stars,59,57,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213625,1952-1953,1952-11-29,EXACT,hawai-i,historical-hi-infantry,65,43,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213626,1952-1953,1952-12-08,EXACT,hawai-i,pepperdine,75,53,hawai-i,,TEAM_B_HOME,pepperdine,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213627,1952-1953,1952-12-10,EXACT,hawai-i,loyola-marymount,51,57,loyola-marymount,,TEAM_B_HOME,loyola-marymount,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213628,1952-1953,1952-12-13,EXACT,hawai-i,saint-mary-s,68,81,saint-mary-s,,TEAM_B_HOME,saint-mary-s,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213629,1952-1953,1952-12-16,EXACT,hawai-i,lewis-clark-college,41,61,lewis-clark-college,,TEAM_B_HOME,lewis-clark-college,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213630,1952-1953,1952-12-17,EXACT,hawai-i,willamette,70,56,hawai-i,,TEAM_B_HOME,willamette,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213631,1952-1953,1953-01-07,EXACT,hawai-i,historical-naval-base,110,54,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213632,1952-1953,1953-01-08,EXACT,hawai-i,historical-nisei-ac,92,68,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213633,1952-1953,1953-01-14,EXACT,hawai-i,historical-universal-motors,61,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213634,1952-1953,1953-01-16,EXACT,hawai-i,historical-universal-motors,56,83,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213635,1952-1953,1953-02-14,EXACT,hawai-i,santa-clara,55,80,santa-clara,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1952-53-021]
+CBBG-0213636,1952-1953,1953-02-21,EXACT,hawai-i,saint-mary-s,63,71,saint-mary-s,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1952-53-022]
+CBBG-0213637,1952-1953,1953-02-22,EXACT,hawai-i,saint-mary-s,47,57,saint-mary-s,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1952-53-023]
+CBBG-0213638,1952-1953,1953-02-25,EXACT,hawai-i,historical-universal-motors,53,50,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213639,1952-1953,,SEASON,hawai-i,historical-universal-motors,67,77,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213640,1952-1953,1953-03-04,EXACT,hawai-i,historical-hilo-all-stars,88,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213641,1953-1954,1953-11-10,EXACT,hawai-i,historical-pearl-harbor-admirals,66,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213642,1953-1954,1953-11-12,EXACT,hawai-i,subpac-raiders,90,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213643,1953-1954,1953-11-17,EXACT,hawai-i,historical-barbers-point-pointers,58,64,historical-barbers-point-pointers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213644,1953-1954,1953-11-19,EXACT,hawai-i,historical-hickam-flyers,84,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213645,1953-1954,1953-11-25,EXACT,hawai-i,historical-barbers-point-pointers,34,54,historical-barbers-point-pointers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213646,1953-1954,1953-11-27,EXACT,hawai-i,historical-pearl-harbor-admirals,72,57,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213647,1953-1954,1953-12-03,EXACT,hawai-i,willamette,69,50,hawai-i,,TEAM_B_HOME,willamette,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213648,1953-1954,1953-12-07,EXACT,eastern-washington,hawai-i,42,46,hawai-i,,TEAM_A_HOME,eastern-washington,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213649,1953-1954,1953-12-08,EXACT,hawai-i,idaho,39,65,idaho,,TEAM_B_HOME,idaho,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213650,1953-1954,1953-12-18,EXACT,hawai-i,santa-clara,49,68,santa-clara,,TEAM_B_HOME,santa-clara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213651,1953-1954,1954-01-11,EXACT,hawai-i,historical-universal-motors,75,62,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213652,1953-1954,1954-01-13,EXACT,hawai-i,historical-universal-motors,69,59,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213653,1953-1954,1954-01-14,EXACT,hawai-i,historical-universal-motors,60,66,historical-universal-motors,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213654,1953-1954,1954-01-20,EXACT,hawai-i,whitworth,84,60,hawai-i,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-023]
+CBBG-0213655,1953-1954,1954-01-22,EXACT,hawai-i,subpac-raiders,86,65,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213656,1953-1954,1954-02-10,EXACT,hawai-i,santa-clara,55,72,santa-clara,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-029]
+CBBG-0213657,1953-1954,1954-02-13,EXACT,hawai-i,santa-clara,60,77,santa-clara,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1953-54-030]
+CBBG-0213658,1953-1954,,SEASON,army-service-team,hawai-i,70,65,army-service-team,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213659,1954-1955,,SEASON,comservpac-packers,hawai-i,65,61,comservpac-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213660,1954-1955,,SEASON,hawai-i,historical-barbers-point-pointers,62,57,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213661,1954-1955,,SEASON,hawai-i,historical-communications,63,54,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213662,1954-1955,,SEASON,hawai-i,historical-hickam-flyers,92,62,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213663,1954-1955,1954-12-20,EXACT,hawai-i,santa-clara,61,67,santa-clara,,TEAM_B_HOME,santa-clara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213664,1954-1955,1954-12-30,EXACT,hawai-i,santa-clara,67,71,santa-clara,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-014]
+CBBG-0213665,1954-1955,1955-01-01,EXACT,hawai-i,santa-clara,59,63,santa-clara,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-015]
+CBBG-0213666,1954-1955,,SEASON,cal-state-los-angeles,hawai-i,48,54,hawai-i,,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-016]
+CBBG-0213667,1954-1955,,SEASON,cal-state-los-angeles,hawai-i,49,61,hawai-i,,TEAM_B_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1954-55-017]
+CBBG-0213668,1955-1956,,SEASON,hawai-i,historical-tripler,96,85,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213669,1955-1956,,SEASON,hawai-i,historical-marines,53,70,historical-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213670,1955-1956,,SEASON,hawai-i,historical-naval-base,72,63,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213671,1955-1956,,SEASON,hawai-i,historical-hickam-flyers,62,66,historical-hickam-flyers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213672,1955-1956,,SEASON,hawai-i,historical-fort-shafter,83,88,historical-fort-shafter,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213673,1955-1956,,SEASON,hawai-i,historical-navy-packers,68,64,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213674,1955-1956,,SEASON,hawai-i,historical-tripler,95,76,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213675,1955-1956,,SEASON,hawai-i,hawaii-marines,60,61,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213676,1955-1956,,SEASON,hawai-i,historical-naval-base,76,72,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213677,1955-1956,,SEASON,hawai-i,historical-hickam-flyers,63,74,historical-hickam-flyers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213678,1955-1956,,SEASON,hawai-i,historical-fort-shafter,82,87,historical-fort-shafter,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213679,1955-1956,,SEASON,hawai-i,historical-navy-packers,57,62,historical-navy-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213680,1955-1956,,SEASON,hawai-i,historical-tripler,92,62,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213681,1955-1956,,SEASON,hawai-i,hawaii-marines,75,74,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213682,1955-1956,,SEASON,hawai-i,historical-naval-base,60,67,historical-naval-base,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213683,1955-1956,,SEASON,hawai-i,historical-fort-shafter,84,82,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213684,1955-1956,,SEASON,hawai-i,historical-navy-packers,104,97,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213685,1955-1956,,SEASON,hawai-i,historical-hickam-flyers,80,63,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213686,1955-1956,,SEASON,hawai-i,historical-tripler,90,70,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213687,1955-1956,,SEASON,hawai-i,hawaii-marines,82,85,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213688,1955-1956,,SEASON,hawai-i,historical-naval-base,107,72,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213689,1955-1956,,SEASON,hawai-i,historical-fort-shafter,80,68,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213690,1955-1956,,SEASON,hawai-i,historical-navy-packers,90,89,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213691,1955-1956,,SEASON,hawai-i,historical-hickam-flyers,81,82,historical-hickam-flyers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213692,1956-1957,,SEASON,comservpac-packers,hawai-i,76,75,comservpac-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213693,1956-1957,1956-12-07,EXACT,hawai-i,idaho-state,74,83,idaho-state,,TEAM_B_HOME,idaho-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213694,1956-1957,1956-12-08,EXACT,hawai-i,idaho-state,72,84,idaho-state,,TEAM_B_HOME,idaho-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213695,1956-1957,,SEASON,hawai-i,loyola-marymount,58,81,loyola-marymount,,TEAM_B_HOME,loyola-marymount,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213696,1956-1957,,SEASON,hawai-i,loyola-marymount,61,70,loyola-marymount,,TEAM_B_HOME,loyola-marymount,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213697,1956-1957,,SEASON,hawai-i,seattle-u,79,94,seattle-u,,TEAM_B_HOME,seattle-u,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213698,1956-1957,,SEASON,hawai-i,subpac-raiders,79,74,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213699,1956-1957,,SEASON,hawai-i,hawaii-marines,85,87,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213700,1956-1957,,SEASON,hawai-i,historical-hickam-flyers,90,62,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213701,1956-1957,,SEASON,hawai-i,historical-naval-base,123,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213702,1956-1957,,SEASON,hawai-i,historical-barbers-point-pointers,84,80,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213703,1956-1957,,SEASON,comservpac-packers,hawai-i,75,97,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213704,1956-1957,,SEASON,hawai-i,subpac-raiders,79,94,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213705,1956-1957,,SEASON,hawai-i,hawaii-marines,90,122,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213706,1956-1957,,SEASON,hawai-i,historical-hickam-flyers,108,96,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213707,1956-1957,,SEASON,comservpac-packers,hawai-i,70,65,comservpac-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213708,1956-1957,,SEASON,hawai-i,historical-naval-base,85,67,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213709,1956-1957,,SEASON,hawai-i,loyola-marymount,79,62,hawai-i,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1956-57-022]
+CBBG-0213710,1956-1957,,SEASON,hawai-i,loyola-marymount,91,68,hawai-i,,TEAM_A_HOME,hawai-i,,,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,[RESEARCHED_UNRESOLVED_HOME_VENUE source=hawai-i/hawai-i-exp-1956-57-023]
+CBBG-0213711,1956-1957,,SEASON,hawai-i,hawaii-marines,94,110,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213712,1956-1957,,SEASON,hawai-i,historical-naval-base,113,71,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213713,1956-1957,,SEASON,hawai-i,historical-barbers-point-pointers,71,70,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213714,1956-1957,,SEASON,comservpac-packers,hawai-i,76,66,comservpac-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213715,1956-1957,,SEASON,hawai-i,historical-25th-division,59,73,historical-25th-division,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213716,1957-1958,1957-12-02,EXACT,hawai-i,historical-coast-guard,67,34,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213717,1957-1958,1957-12-13,EXACT,ford-island-islanders,hawai-i,37,54,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213718,1957-1958,1957-12-18,EXACT,hawai-i,historical-pearl-harbor-navy,57,65,historical-pearl-harbor-navy,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213719,1957-1958,1957-12-21,EXACT,hawai-i,historical-cincpacfleet,95,46,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213720,1957-1958,1958-01-08,EXACT,hawai-i,hawaii-marines,61,83,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213721,1957-1958,1958-01-11,EXACT,hawai-i,historical-army-special-troops,65,78,historical-army-special-troops,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213722,1957-1958,1958-01-16,EXACT,hawai-i,historical-35th-infantry-cacti,64,57,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213723,1957-1958,1958-01-18,EXACT,hawai-i,historical-35th-infantry-cacti,51,78,historical-35th-infantry-cacti,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213724,1957-1958,1958-01-25,EXACT,hawai-i,hawai-i-alumni,50,62,hawai-i-alumni,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213725,1957-1958,1958-02-07,EXACT,hawai-i,idaho-state,38,77,idaho-state,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1957-58-012;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213726,1957-1958,1958-02-08,EXACT,hawai-i,idaho-state,53,85,idaho-state,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1957-58-013;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213727,1957-1958,1958-02-11,EXACT,hawai-i,historical-coast-guard,73,56,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213728,1957-1958,1958-02-19,EXACT,hawai-i,historical-pearl-harbor-navy,63,67,historical-pearl-harbor-navy,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213729,1957-1958,1958-02-24,EXACT,hawai-i,historical-division-armor,80,58,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213730,1957-1958,1958-02-26,EXACT,hawai-i,historical-35th-infantry,75,65,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213731,1957-1958,1958-02-28,EXACT,ford-island-islanders,hawai-i,56,67,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213732,1957-1958,1958-03-03,EXACT,hawai-i,historical-special-troops,67,86,historical-special-troops,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213733,1958-1959,1958-11-22,EXACT,hawai-i,hawai-i-alumni,71,50,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213734,1958-1959,1958-11-25,EXACT,hawai-i,subpac-raiders,88,55,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213735,1958-1959,1958-11-29,EXACT,hawai-i,historical-hickam-flyers,96,69,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213736,1958-1959,1958-12-02,EXACT,hawai-i,historical-35th-infantry-cacti,81,66,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213737,1958-1959,1958-12-04,EXACT,hawai-i,historical-division-trains,95,68,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213738,1958-1959,1958-12-10,EXACT,hawai-i,lewis-clark-college,61,76,lewis-clark-college,,TEAM_B_HOME,lewis-clark-college,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213739,1958-1959,1958-12-20,EXACT,cal-state-los-angeles,hawai-i,93,68,cal-state-los-angeles,,TEAM_A_HOME,cal-state-los-angeles,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213740,1958-1959,1958-12-23,EXACT,hawai-i,westmont,73,71,hawai-i,,TEAM_B_HOME,westmont,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213741,1958-1959,1958-12-27,EXACT,hawai-i,uc-santa-barbara,69,67,hawai-i,,TEAM_B_HOME,uc-santa-barbara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213742,1958-1959,1958-12-29,EXACT,hawai-i,kent-state,75,91,kent-state,,NEUTRAL,,,,Santa Maria,CA,REGULAR_SEASON,,FORFEIT,Attached record book notes '(later forfeited)'; played_result remains the on-court loss. Stage 4 representation normalization: accepted legacy administrative_status LATER_FORFEITED projected to FORFEIT; on-court played_result=L and score=75-91 unchanged.,PROVISIONAL,
+CBBG-0213743,1958-1959,1959-01-09,EXACT,hawai-i,hawaii-marines,59,65,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213744,1958-1959,1959-01-14,EXACT,hawai-i,seattle-u,67,81,seattle-u,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1958-59-016;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213745,1958-1959,1959-01-16,EXACT,hawai-i,seattle-u,62,79,seattle-u,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1958-59-017;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213746,1958-1959,1959-01-28,EXACT,hawai-i,usc,60,56,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1958-59-018;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213747,1958-1959,1959-01-30,EXACT,hawai-i,usc,74,87,usc,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1958-59-019;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213748,1958-1959,1959-02-04,EXACT,cal-state-los-angeles,hawai-i,89,93,hawai-i,,TEAM_B_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1958-59-020;venue_key=klum-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213749,1958-1959,1959-02-06,EXACT,cal-state-los-angeles,hawai-i,107,116,hawai-i,,TEAM_B_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1958-59-021;venue_key=klum-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213750,1958-1959,1959-02-13,EXACT,comservpac-packers,hawai-i,82,75,comservpac-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213751,1958-1959,1959-02-14,EXACT,hawai-i,historical-naval-air,80,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213752,1958-1959,1959-02-17,EXACT,hawai-i,nationalist-china,85,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213753,1959-1960,1959-11-21,EXACT,hawai-i,hawai-i-alumni,87,59,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213754,1959-1960,1959-11-23,EXACT,hawai-i,historical-pearl-harbor-admirals,84,62,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213755,1959-1960,1959-11-25,EXACT,hawai-i,subpac-raiders,74,65,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213756,1959-1960,1959-12-07,EXACT,hawai-i,seattle-u,54,83,seattle-u,,TEAM_B_HOME,seattle-u,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213757,1959-1960,1959-12-08,EXACT,hawai-i,seattle-u,68,102,seattle-u,,TEAM_B_HOME,seattle-u,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213758,1959-1960,1959-12-11,EXACT,hawai-i,lewis-clark-college,56,45,hawai-i,,TEAM_B_HOME,lewis-clark-college,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213759,1959-1960,1959-12-14,EXACT,hawai-i,santa-clara,47,70,santa-clara,,TEAM_B_HOME,santa-clara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213760,1959-1960,1959-12-15,EXACT,hawai-i,santa-clara,55,63,santa-clara,,TEAM_B_HOME,santa-clara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213761,1959-1960,1959-12-17,EXACT,hawai-i,westmont,45,61,westmont,,TEAM_B_HOME,westmont,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213762,1959-1960,1959-12-18,EXACT,hawai-i,loyola-marymount,53,71,loyola-marymount,,TEAM_B_HOME,loyola-marymount,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213763,1959-1960,1959-12-28,EXACT,denver,hawai-i,76,59,denver,,TEAM_B_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-016;venue_key=klum-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213764,1959-1960,1959-12-29,EXACT,hawai-i,portland,52,65,portland,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-017;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213765,1959-1960,1960-01-06,EXACT,hawai-i,lewis-clark-college,79,55,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-018;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213766,1959-1960,1960-01-08,EXACT,hawai-i,lewis-clark-college,85,62,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-019;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213767,1959-1960,1960-01-13,EXACT,hawai-i,santa-clara,59,60,santa-clara,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-020;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213768,1959-1960,1960-01-15,EXACT,hawai-i,santa-clara,81,80,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-021;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213769,1959-1960,1960-01-27,EXACT,hawai-i,usc,61,69,usc,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-022;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213770,1959-1960,1960-01-29,EXACT,hawai-i,usc,59,69,usc,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-023;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213771,1959-1960,1960-02-05,EXACT,hawai-i,uc-santa-barbara,77,70,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-024;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213772,1959-1960,1960-02-06,EXACT,hawai-i,uc-santa-barbara,49,77,uc-santa-barbara,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1959-60-025;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213773,1960-1961,1960-11-12,EXACT,hawai-i,hawai-i-alumni,68,55,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213774,1960-1961,1960-11-16,EXACT,hawai-i,historical-mutual-express,67,55,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213775,1960-1961,1960-11-18,EXACT,hawai-i,historical-pearl-harbor-admirals,82,47,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213776,1960-1961,1960-11-23,EXACT,hawai-i,subpac-raiders,68,78,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213777,1960-1961,1960-11-26,EXACT,hawai-i,hawaii-marines,67,81,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213778,1960-1961,1960-11-30,EXACT,hawai-i,san-francisco,58,68,san-francisco,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1960-61-006;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213779,1960-1961,1960-12-01,EXACT,hawai-i,san-francisco,63,61,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1960-61-007;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213780,1960-1961,1960-12-07,EXACT,cal-state-northridge,hawai-i,54,82,hawai-i,,TEAM_B_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1960-61-008;venue_key=klum-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213781,1960-1961,1960-12-09,EXACT,cal-state-northridge,hawai-i,68,85,hawai-i,,TEAM_B_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1960-61-009;venue_key=klum-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213782,1960-1961,1960-12-14,EXACT,hawai-i,seattle-u,53,73,seattle-u,,TEAM_B_HOME,seattle-u,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213783,1960-1961,1960-12-16,EXACT,hawai-i,seattle-pacific,71,66,hawai-i,2,TEAM_B_HOME,seattle-pacific,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213784,1960-1961,1960-12-19,EXACT,hawai-i,san-francisco,38,67,san-francisco,,TEAM_B_HOME,san-francisco,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213785,1960-1961,1960-12-20,EXACT,hawai-i,san-francisco,54,65,san-francisco,,TEAM_B_HOME,san-francisco,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213786,1960-1961,1960-12-26,EXACT,cal-state-northridge,hawai-i,67,73,hawai-i,,TEAM_A_HOME,cal-state-northridge,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213787,1960-1961,1960-12-27,EXACT,cal-state-northridge,hawai-i,75,83,hawai-i,,TEAM_A_HOME,cal-state-northridge,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213788,1960-1961,1961-01-11,EXACT,hawai-i,santa-clara,49,63,santa-clara,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1960-61-019;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213789,1960-1961,1961-01-13,EXACT,hawai-i,santa-clara,54,74,santa-clara,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1960-61-020;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213790,1960-1961,1961-01-18,EXACT,hawai-i,historical-naval-air,95,77,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213791,1961-1962,1961-11-04,EXACT,hawai-i,hawai-i-alumni,81,50,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213792,1961-1962,1961-11-07,EXACT,hawai-i,historical-mutual-express,55,53,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213793,1961-1962,1961-11-09,EXACT,hawai-i,historical-hickam-flyers,91,70,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213794,1961-1962,1961-11-14,EXACT,hawai-i,subpac-raiders,70,79,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213795,1961-1962,1961-11-16,EXACT,comservpac-packers,hawai-i,55,53,comservpac-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213796,1961-1962,1961-11-22,EXACT,hawai-i,historical-pearl-harbor-admirals,73,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213797,1961-1962,1961-11-24,EXACT,hawai-i,hawaii-marines,63,57,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213798,1961-1962,1961-12-01,EXACT,hawai-i,hawaii-marines,65,66,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213799,1961-1962,1961-12-06,EXACT,hawai-i,pepperdine,65,70,pepperdine,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1961-62-009;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213800,1961-1962,1961-12-08,EXACT,hawai-i,pepperdine,57,55,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1961-62-010;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213801,1961-1962,1961-12-12,EXACT,hawai-i,loyola-marymount,60,79,loyola-marymount,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1961-62-011;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213802,1961-1962,1961-12-15,EXACT,hawai-i,loyola-marymount,57,75,loyola-marymount,,NEUTRAL,,,,Hilo,HI,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213803,1961-1962,1961-12-16,EXACT,hawai-i,loyola-marymount,66,67,loyola-marymount,,NEUTRAL,,,,Hilo,HI,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213804,1961-1962,1961-12-18,EXACT,hawai-i,santa-clara,50,66,santa-clara,,TEAM_B_HOME,santa-clara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213805,1961-1962,1961-12-19,EXACT,hawai-i,santa-clara,53,67,santa-clara,,TEAM_B_HOME,santa-clara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213806,1961-1962,1961-12-23,EXACT,hawai-i,san-francisco,67,77,san-francisco,,TEAM_B_HOME,san-francisco,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213807,1961-1962,1961-12-28,EXACT,hawai-i,westmont,66,63,hawai-i,,TEAM_B_HOME,westmont,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213808,1961-1962,1961-12-29,EXACT,hawai-i,uc-santa-barbara,65,69,uc-santa-barbara,,TEAM_B_HOME,uc-santa-barbara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213809,1961-1962,1962-01-03,EXACT,hawai-i,loyola-marymount,55,82,loyola-marymount,,TEAM_B_HOME,loyola-marymount,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213810,1961-1962,1962-01-04,EXACT,hawai-i,pepperdine,52,74,pepperdine,,TEAM_B_HOME,pepperdine,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213811,1961-1962,1962-01-16,EXACT,hawai-i,hawaii-marines,76,72,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213812,1962-1963,,SEASON,hawai-i,hawai-i-alumni,96,52,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213813,1962-1963,,SEASON,hawai-i,subpac-raiders,68,52,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213814,1962-1963,,SEASON,comservpac-packers,hawai-i,81,62,comservpac-packers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213815,1962-1963,,SEASON,hawai-i,historical-mutual-express,63,73,historical-mutual-express,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213816,1962-1963,,SEASON,hawai-i,historical-hickam-flyers,51,63,historical-hickam-flyers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213817,1962-1963,1962-11-20,EXACT,byu-hawaii,hawai-i,43,110,hawai-i,,TEAM_B_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-006;venue_key=klum-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213818,1962-1963,,SEASON,hawai-i,hawaii-marines,70,59,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213819,1962-1963,,SEASON,byu-hawaii,hawai-i,43,72,hawai-i,,TEAM_B_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-008;venue_key=klum-gym;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213820,1962-1963,,SEASON,hawai-i,historical-pearl-harbor-admirals,50,38,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213821,1962-1963,1962-12-06,EXACT,hawai-i,meiji-university,107,86,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213822,1962-1963,1962-12-12,EXACT,hawai-i,uc-santa-barbara,67,56,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-013;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213823,1962-1963,1962-12-14,EXACT,hawai-i,uc-santa-barbara,60,59,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-014;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213824,1962-1963,1962-12-19,EXACT,hawai-i,tennessee-state,85,97,tennessee-state,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-015;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213825,1962-1963,1962-12-21,EXACT,hawai-i,tennessee-state,78,79,tennessee-state,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-016;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213826,1962-1963,1962-12-22,EXACT,hawai-i,tennessee-state,67,71,tennessee-state,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-017;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213827,1962-1963,1962-12-28,EXACT,hawai-i,westmont,71,70,hawai-i,,TEAM_B_HOME,westmont,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213828,1962-1963,1962-12-29,EXACT,hawai-i,uc-santa-barbara,49,71,uc-santa-barbara,,TEAM_B_HOME,uc-santa-barbara,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213829,1962-1963,1963-01-02,EXACT,hawai-i,loyola-new-orleans,59,74,loyola-new-orleans,,TEAM_B_HOME,loyola-new-orleans,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213830,1962-1963,1963-01-03,EXACT,hawai-i,tennessee-tech,58,67,tennessee-tech,,TEAM_B_HOME,tennessee-tech,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213831,1962-1963,1963-01-05,EXACT,hawai-i,tennessee-state,68,73,tennessee-state,,TEAM_B_HOME,tennessee-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213832,1962-1963,1963-01-07,EXACT,hawai-i,memphis,60,96,memphis,,TEAM_B_HOME,memphis,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213833,1962-1963,1963-01-10,EXACT,hawai-i,pepperdine,59,64,pepperdine,,TEAM_B_HOME,pepperdine,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213834,1962-1963,1963-01-12,EXACT,hawai-i,pepperdine,61,93,pepperdine,,TEAM_B_HOME,pepperdine,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213835,1962-1963,,SEASON,hawai-i,historical-japan-steel,72,50,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213836,1962-1963,,SEASON,hawai-i,historical-mutual-express,82,57,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213837,1962-1963,1963-01-16,EXACT,hawai-i,pepperdine,54,65,pepperdine,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1962-63-028;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213838,1963-1964,,SEASON,hawai-i,hawai-i-alumni,71,59,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213839,1963-1964,,SEASON,hawai-i,historical-hawaii-panthers,80,85,historical-hawaii-panthers,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213840,1963-1964,,SEASON,hawai-i,historical-pearl-harbor-admirals,92,79,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213841,1963-1964,,SEASON,hawai-i,hawaii-marines,83,68,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213842,1963-1964,1963-12-18,EXACT,hawai-i,tennessee-state,64,66,tennessee-state,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1963-64-005;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213843,1963-1964,1963-12-20,EXACT,hawai-i,tennessee-state,67,65,hawai-i,2,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1963-64-006;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213844,1963-1964,1963-12-21,EXACT,hawai-i,tennessee-state,67,70,tennessee-state,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1963-64-007;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213845,1963-1964,,SEASON,cal-state-los-angeles,hawai-i,100,76,cal-state-los-angeles,,TEAM_A_HOME,cal-state-los-angeles,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213846,1963-1964,,SEASON,cal-state-los-angeles,hawai-i,82,77,cal-state-los-angeles,,TEAM_A_HOME,cal-state-los-angeles,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213847,1963-1964,,SEASON,hawai-i,historical-sd-marines,78,77,hawai-i,,TEAM_B_HOME,historical-sd-marines,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213848,1963-1964,,SEASON,hawai-i,us-international,49,57,us-international,,TEAM_B_HOME,us-international,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213849,1963-1964,,SEASON,hawai-i,pacific,60,104,pacific,,TEAM_B_HOME,pacific,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213850,1963-1964,,SEASON,hawai-i,historical-army-redlanders,75,61,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213851,1963-1964,,SEASON,hawai-i,historical-hickam-flyers,72,66,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213852,1963-1964,,SEASON,hawai-i,subpac-raiders,74,82,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213853,1964-1965,,SEASON,hawai-i,hawai-i-alumni,105,61,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213854,1964-1965,,SEASON,hawai-i,historical-army-redlanders,94,89,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213855,1964-1965,,SEASON,hawai-i,subpac-raiders,78,79,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213856,1964-1965,,SEASON,hawai-i,hawaii-marines,63,84,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213857,1964-1965,1964-12-14,EXACT,hawai-i,san-francisco,72,95,san-francisco,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1964-65-005;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213858,1964-1965,1964-12-27,EXACT,hawai-i,subpac-raiders,68,75,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213859,1964-1965,,SEASON,hawai-i,historical-hickam-flyers,81,74,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213860,1964-1965,,SEASON,hawai-i,subpac-raiders,89,96,subpac-raiders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213861,1964-1965,,SEASON,hawai-i,historical-army-redlanders,102,90,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213862,1964-1965,,SEASON,hawai-i,hawaii-marines,83,108,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213863,1964-1965,,SEASON,hawai-i,oklahoma-city,79,88,oklahoma-city,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1964-65-013;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213864,1964-1965,,SEASON,hawai-i,oklahoma-city,84,100,oklahoma-city,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1964-65-014;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213865,1964-1965,,SEASON,hawai-i,historical-pearl-harbor-admirals,71,60,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213866,1964-1965,1965-02-05,EXACT,hawai-i,new-mexico,39,76,new-mexico,,TEAM_B_HOME,new-mexico,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213867,1964-1965,1965-02-06,EXACT,hawai-i,new-mexico,59,89,new-mexico,,TEAM_B_HOME,new-mexico,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213868,1964-1965,1965-02-10,EXACT,hawai-i,seattle-u,62,98,seattle-u,,TEAM_B_HOME,seattle-u,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213869,1964-1965,1965-02-15,EXACT,hawai-i,idaho,75,89,idaho,,TEAM_B_HOME,idaho,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213870,1964-1965,1965-02-16,EXACT,hawai-i,montana-state,73,69,hawai-i,,TEAM_B_HOME,montana-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213871,1965-1966,,SEASON,hawai-i,hawai-i-alumni,72,75,hawai-i-alumni,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213872,1965-1966,,SEASON,hawai-i,historical-pearl-harbor-admirals,85,75,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213873,1965-1966,1965-12-17,EXACT,hawai-i,new-mexico,42,72,new-mexico,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-005;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213874,1965-1966,1965-12-18,EXACT,hawai-i,new-mexico,48,99,new-mexico,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-006;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213875,1965-1966,1965-12-27,EXACT,army-service-team,hawai-i,87,73,army-service-team,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213876,1965-1966,,SEASON,hawai-i,historical-army-redlanders,73,88,historical-army-redlanders,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213877,1965-1966,,SEASON,hawai-i,hawaii-marines,52,78,hawaii-marines,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213878,1965-1966,,SEASON,hawai-i,historical-hawaii-movers,68,58,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213879,1965-1966,1966-01-21,EXACT,hawai-i,santa-clara,57,90,santa-clara,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-013;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213880,1965-1966,,SEASON,british-columbia,hawai-i,63,61,british-columbia,,TEAM_A_HOME,british-columbia,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213881,1965-1966,,SEASON,british-columbia,hawai-i,68,59,british-columbia,,TEAM_A_HOME,british-columbia,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213882,1965-1966,1966-02-04,EXACT,hawai-i,montana,72,94,montana,,TEAM_B_HOME,montana,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213883,1965-1966,1966-02-05,EXACT,hawai-i,idaho,72,95,idaho,,TEAM_B_HOME,idaho,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213884,1965-1966,1966-02-23,EXACT,hawai-i,oklahoma-city,77,104,oklahoma-city,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-025;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213885,1965-1966,1966-02-26,EXACT,hawai-i,oklahoma-city,76,104,oklahoma-city,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1965-66-026;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213886,1966-1967,1966-12-14,EXACT,hawai-i,tulsa,58,84,tulsa,,TEAM_B_HOME,tulsa,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213887,1966-1967,1966-12-27,EXACT,hawai-i,montana,61,55,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-008;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213888,1966-1967,1966-12-30,EXACT,hawai-i,portland,64,68,portland,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-010;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213889,1966-1967,1967-01-07,EXACT,hawai-i,loyola-new-orleans,90,81,hawai-i,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-011;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213890,1966-1967,,SEASON,hawai-i,hawaii-marines,95,82,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213891,1966-1967,1967-01-28,EXACT,hawai-i,oklahoma-city,85,133,oklahoma-city,,TEAM_B_HOME,oklahoma-city,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213892,1966-1967,1967-01-29,EXACT,hawai-i,oklahoma-city,62,116,oklahoma-city,,TEAM_B_HOME,oklahoma-city,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213893,1966-1967,1967-01-31,EXACT,hawai-i,north-texas,64,89,north-texas,,TEAM_B_HOME,north-texas,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213894,1966-1967,1967-02-02,EXACT,centenary-la,hawai-i,85,78,centenary-la,,TEAM_A_HOME,centenary-la,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213895,1966-1967,1967-02-24,EXACT,hawai-i,idaho,66,69,idaho,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-022;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213896,1966-1967,1967-02-25,EXACT,hawai-i,idaho,68,69,idaho,,TEAM_A_HOME,hawai-i,klum-gym,VEN-001124,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1966-67-023;venue_key=klum-gym;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213897,1966-1967,,SEASON,hawai-i,japan-national-team,76,71,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213898,1967-1968,,SEASON,hawai-i,historical-hickam-flyers,92,85,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213899,1967-1968,1967-12-15,EXACT,hawai-i,weber-state,57,68,weber-state,,TEAM_B_HOME,weber-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213900,1967-1968,1967-12-16,EXACT,hawai-i,new-mexico,75,84,new-mexico,,TEAM_B_HOME,new-mexico,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213901,1967-1968,1967-12-29,EXACT,hawai-i,subpac-raiders,86,79,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213902,1967-1968,1968-01-03,EXACT,hawai-i,seattle-u,59,58,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1967-68-012;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213903,1967-1968,,SEASON,hawai-i,historical-philips-oilers,94,84,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213904,1967-1968,,SEASON,hawai-i,historical-service-center,84,91,historical-service-center,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213905,1967-1968,1968-01-22,EXACT,hawai-i,nevada,85,72,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1967-68-015;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213906,1967-1968,1968-01-23,EXACT,hawai-i,nevada,63,43,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1967-68-016;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213907,1967-1968,1968-01-26,EXACT,alaska-fairbanks,hawai-i,68,84,hawai-i,,TEAM_A_HOME,alaska-fairbanks,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213908,1967-1968,1968-01-27,EXACT,alaska-fairbanks,hawai-i,68,86,hawai-i,,TEAM_A_HOME,alaska-fairbanks,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213909,1967-1968,1968-01-29,EXACT,alaska-methodist,hawai-i,68,95,hawai-i,,TEAM_A_HOME,alaska-methodist,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213910,1967-1968,1968-02-01,EXACT,hawai-i,puget-sound,95,80,hawai-i,,TEAM_B_HOME,puget-sound,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213911,1967-1968,1968-02-02,EXACT,hawai-i,portland-state,73,90,portland-state,,TEAM_B_HOME,portland-state,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213912,1968-1969,1968-12-05,EXACT,hawai-i,new-mexico,56,63,new-mexico,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-001;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213913,1968-1969,1968-12-06,EXACT,hawai-i,new-mexico,62,77,new-mexico,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-002;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213914,1968-1969,1968-12-09,EXACT,hawai-i,weber-state,67,81,weber-state,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-003;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213915,1968-1969,1968-12-13,EXACT,hawai-i,weber-state,68,72,weber-state,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-004;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213916,1968-1969,1968-12-27,EXACT,hawai-i,subpac-raiders,88,86,hawai-i,,UNKNOWN,,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213917,1968-1969,1968-12-28,EXACT,hawai-i,santa-clara,59,81,santa-clara,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-009;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213918,1968-1969,1969-01-03,EXACT,alaska-fairbanks,hawai-i,69,86,hawai-i,,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-011;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213919,1968-1969,1969-01-04,EXACT,alaska-fairbanks,hawai-i,70,89,hawai-i,,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-012;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213920,1968-1969,1969-01-06,EXACT,hawai-i,oklahoma-city,58,70,oklahoma-city,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-013;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213921,1968-1969,1969-01-27,EXACT,hawai-i,jacksonville,65,89,jacksonville,,TEAM_B_HOME,jacksonville,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213922,1968-1969,1969-01-28,EXACT,hawai-i,jacksonville,61,72,jacksonville,,TEAM_B_HOME,jacksonville,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213923,1968-1969,1969-02-05,EXACT,centenary-la,hawai-i,73,75,hawai-i,1,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-019;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213924,1968-1969,1969-02-06,EXACT,centenary-la,hawai-i,81,84,hawai-i,1,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-020;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213925,1968-1969,1969-02-11,EXACT,hawai-i,puget-sound,85,84,hawai-i,1,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-021;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213926,1968-1969,1969-02-15,EXACT,hawai-i,puget-sound,84,95,puget-sound,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-022;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213927,1968-1969,1969-02-27,EXACT,hawai-i,louisiana,75,67,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-023;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213928,1968-1969,1969-03-01,EXACT,hawai-i,louisiana,57,70,louisiana,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1968-69-024;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213929,1969-1970,1969-12-12,EXACT,hawai-i,portland-state,82,79,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-003;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213930,1969-1970,1969-12-13,EXACT,hawai-i,portland-state,94,79,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-004;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213931,1969-1970,1969-12-20,EXACT,hawai-i,tahoe-college,84,93,tahoe-college,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-005;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213932,1969-1970,1969-12-23,EXACT,hawai-i,tahoe-college,102,94,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-006;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213933,1969-1970,1969-12-26,EXACT,hawai-i,yale,77,88,yale,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-007;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213934,1969-1970,1969-12-29,EXACT,drake,hawai-i,102,76,drake,,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-008;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213935,1969-1970,1970-01-02,EXACT,hawai-i,jacksonville,78,100,jacksonville,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-010;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213936,1969-1970,1970-01-05,EXACT,hawai-i,jacksonville,58,63,jacksonville,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-012;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213937,1969-1970,1970-01-09,EXACT,hawai-i,linfield,64,77,linfield,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-013;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213938,1969-1970,1970-01-10,EXACT,hawai-i,linfield,89,78,hawai-i,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-014;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213939,1969-1970,1970-01-12,EXACT,hawai-i,redlands,78,89,redlands,,TEAM_B_HOME,redlands,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213940,1969-1970,1970-01-13,EXACT,hawai-i,whittier,72,93,whittier,,TEAM_B_HOME,whittier,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213941,1969-1970,1970-01-26,EXACT,centenary-la,hawai-i,89,74,centenary-la,,TEAM_A_HOME,centenary-la,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213942,1969-1970,1970-01-28,EXACT,hawai-i,loyola-new-orleans,70,95,loyola-new-orleans,,TEAM_B_HOME,loyola-new-orleans,,,,,REGULAR_SEASON,,,,PROVISIONAL,
+CBBG-0213943,1969-1970,1970-02-06,EXACT,hawai-i,long-beach-state,59,61,long-beach-state,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-021;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213944,1969-1970,1970-02-07,EXACT,hawai-i,long-beach-state,63,67,long-beach-state,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-022;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213945,1969-1970,1970-02-20,EXACT,hawai-i,louisiana,66,83,louisiana,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-023;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213946,1969-1970,1970-02-21,EXACT,hawai-i,louisiana,72,86,louisiana,,TEAM_A_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-024;venue_key=neal-s-blaisdell-center;site_type=TEAM_A_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213947,1969-1970,1970-02-26,EXACT,eastern-washington,hawai-i,67,82,hawai-i,,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-025;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
+CBBG-0213948,1969-1970,1970-02-27,EXACT,eastern-washington,hawai-i,64,86,hawai-i,,TEAM_B_HOME,hawai-i,neal-s-blaisdell-center,VEN-000149,Honolulu,HI,REGULAR_SEASON,,,,PROVISIONAL,"[VENUE_REGISTRY_FALLBACK source=hawai-i/hawai-i-exp-1969-70-026;venue_key=neal-s-blaisdell-center;site_type=TEAM_B_HOME;fields=site_city,site_state,venue_id,venue_key]"
