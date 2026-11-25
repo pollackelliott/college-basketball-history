@@ -1,0 +1,66 @@
+{
+  "allowed_paths": [
+    "schools/hawai-i/opponents.csv",
+    "schools/hawai-i/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/hawai-i/opponents.csv": "083a037b4f8fcc2bf09576852bc4dfbbc3ab291d0ad00143395e7ac475338db5",
+    "schools/hawai-i/source-games.csv": "4059b2635b158599d50da91b86530a51d7b7e3ee64ba7e97f17eaa270066c31d"
+  },
+  "changed_paths": [
+    "schools/hawai-i/opponents.csv",
+    "schools/hawai-i/source-games.csv"
+  ],
+  "commit_message": "Normalize hawai-i historical opponent display representation",
+  "expected_blocker_keys": [
+    "regis-colorado"
+  ],
+  "expected_target_predecessor_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "field_level_proof_sha256": "5908bdf8fa60b8f9ab4de249f9869e61ebb38d69743c8e1931cfaee5ba5b596e",
+  "global_lock_commit": "489bf40399fce18785195d016ec031beaf2d699b",
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "801ce8d0acd8544a67528066bbf3a098bfd516d1eb7b41766d6e257caecca67e",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "19541a39fef8e4a8f144dba3d35a8f83e37598b8",
+  "prepared_parent_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "prepared_tree_sha": "c4acf95aa8c6fb9b80f555d673973944cab1c242",
+  "protected_main_sha": "4d91da1800d9d7b535ae2e191f309bfc391ea2ee",
+  "repository_validation": "PASS",
+  "request_id": "hawai-i-expansion-stage2-opponent-display-0001",
+  "request_sha256": "7f092e2777a16c74664abdbc3da5a38eb2b16b3a254c0365f16e0597048577a9",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_drift_after": {
+    "baseline_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "integration_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+    "school_key": "hawai-i",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "integration_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+    "school_key": "hawai-i",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "5a9f87923c1e2da312c528d195da4d44c7c30e656e43fd53d89c24d8d74fe497",
+    "field-level-proof.json": "5908bdf8fa60b8f9ab4de249f9869e61ebb38d69743c8e1931cfaee5ba5b596e",
+    "integration-freeze.json": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+    "normalization-report.json": "801ce8d0acd8544a67528066bbf3a098bfd516d1eb7b41766d6e257caecca67e",
+    "semantic-drift-proof.json": "a8eed04df26eb5351116daa9beee6cd12d16d8cdb12bab71355059a8b1dc1428"
+  },
+  "source_game_normalized_name_row_count": 1,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "5a9f87923c1e2da312c528d195da4d44c7c30e656e43fd53d89c24d8d74fe497",
+  "sync_current_d1": false,
+  "target_branch": "data/hawai-i-onboarding"
+}

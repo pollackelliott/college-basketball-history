@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "integration_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+    "school_key": "hawai-i",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+    "integration_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+    "school_key": "hawai-i",
+    "status": "PASS"
+  }
+}
