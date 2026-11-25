@@ -813,7 +813,7 @@
   "active_request_sha256": "65861eb7d087c5a07e9752094627640cf94a2218116118227efcba34e6cfaadd",
   "active_school_key": "hawai-i",
   "active_target_branch": "data/hawai-i-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "5216af147854c4f8adaad46da7cd89d5157864db",
   "active_writeahead_path": ".remote-implementation/writeahead/hawai-i/hawai-i-expansion-release-presentation-refresh-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "18903c9ee8d85286ec1ced78f9fd726a30c3858e979722d3148c41697d8d733e",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
