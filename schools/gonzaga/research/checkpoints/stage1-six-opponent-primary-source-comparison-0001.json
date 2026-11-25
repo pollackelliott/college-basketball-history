@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_OPPONENT_RETROSPECTIVE_SOURCE_COMPARISON_V1",
+  "school_key": "gonzaga",
+  "parent_research_head": "756daefe20902ad01c10adfbe767e0da1cb7d152",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "scope": "One bounded source-family feasibility screen of Washington, Washington State, Idaho State, Eastern Washington, Oregon, Oregon State, against 545-game exact parent",
+  "source_note": "Ranked priorities reflect existing identified-row coverage, availability of dated institutional historical results, and whether a genuinely distinct old/new source representation offers material novelty; NOT proof other programs have no additional games.",
+  "source_urls": {
+    "oregon_state_2026": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/oregonstate.sidearmsports.com/documents/2026/9/30/Full_Guide.pdf?timestamp=20260930074819",
+    "wsu_2008": "https://wsu_ftp.sidearmsports.com/old_site/pdf/m-baskbl/2008-09MBBMediaGuide.pdf",
+    "wsu_current": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/wsu.sidearmsports.com/documents/2026/2/9/MBB_Record_Book_260209_Incomplete.pdf?timestamp=20260209105644",
+    "washington_2024": "https://gohuskies.com/documents/download/2024/3/19/History_23-24.pdf",
+    "oregon_2025": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/uoregon.sidearmsports.com/documents/2025/11/3/2025-26_Record_Book.pdf",
+    "ew_archives": "https://goeags.com/sports/2016/1/7/MBB_Other%20Links-Archive.aspx",
+    "idaho_state": "https://isubengals.com/sports/2019/1/9/mens-basketball-year-by-year-results-2018-present.aspx"
+  },
+  "evidence": [
+    "Oregon State 2026-27 printed p76 PDF index75 original page screenshot verifies distinct 1928-29 36-20 and 32-30 OSU victories against Gonzaga, OSU away on 32-30.",
+    "Prior Gonzaga accepted OSU 1928-29 one 20-36 game only; the 30-32 loss not found in 545 ledger, so one new canonical candidate admitted.",
+    "Eastern Washington's verified athletic archive offers records sections and year-by-year aggregate information, but older original EWU student-paper PDFs are access-limited; must verify readable issue/result lists first.",
+    "Washington State 2008 record-vs-opponents, 2026 version, and 84 accepted Gonzaga results make an undifferentiated replay low-yield.",
+    "Oregon current year-by-year, Washington old historical all-time series, and Idaho State 1950s records already used in branch; older edition differences may still be investigated if specific primary evidence appears."
+  ],
+  "families": [
+    {
+      "family": "Eastern Washington",
+      "accepted": 12,
+      "priority": "HIGH_BUT_ARCHIVE_ACCESS_DEPENDENT",
+      "finding": "Only 12 identified pre-1958 Gonzaga games across 7 accepted seasons. University 2020-21 Fact Book archives and student paper indices locate institutional source families; older issue full text is access-limited. Prioritize a readable season-by-season EWU results chronology or issue run; no unnamed games."
+    },
+    {
+      "family": "Oregon State",
+      "accepted": 16,
+      "priority": "TARGETED_NEW_EDITION_FOLLOWUP",
+      "finding": "2011-12 OSU opponent series gave 16 accepted pre-1958 games. Newly accessed 2026-27 official year-by-year includes two 1928-29 Gonzaga games (36-20 and 32-30, OSU wins), versus only 36-20 previously accepted. One source-backed new game accepted this tranche. Perform exact full-season guide vs old opponent series only if another material discrepancy appears."
+    },
+    {
+      "family": "Washington State",
+      "accepted": 84,
+      "priority": "LOW_UNLESS_NEW_CONTRADICTORY_OLD_SOURCE",
+      "finding": "84 previously identified games over 45 supplemental seasons, current 2026 official record-vs-opponents plus 2008-09 historical series book already covered. Older 2008 edition displays 1907-1944 results; do not reopen full series absent a concrete discordance."
+    },
+    {
+      "family": "Washington",
+      "accepted": 26,
+      "priority": "LOW_UNLESS_NEW_DATE_OR_SERIES_EVIDENCE",
+      "finding": "26 accepted games, official all-time historical series and 2024 record-book year-by-year checked previously. Jan 1926 Washington vs Coliseum date conflict remains a separately held candidate, not reason for broad Washington replay."
+    },
+    {
+      "family": "Oregon",
+      "accepted": 18,
+      "priority": "LOW_TO_MEDIUM_ON_NEW_OLD_GUIDE_DIFFERENCE",
+      "finding": "18 identified games already harvested via official Oregon year-by-year, with 2021-22 and 2025-26 official record books searchable. This is a good consistency source but currently no independently established unseen Gonzaga game."
+    },
+    {
+      "family": "Idaho State",
+      "accepted": 5,
+      "priority": "LOW_SMALL_EARLY_SERIES",
+      "finding": "Five accepted Idaho State reciprocal games in 1954-55 through 1956-57; published ISU year-by-year results support these. Earlier Gonzaga source period within 1907-58 is shorter than EWU/WSU. Do not assert historic series exhaustive without all-game source verification."
+    }
+  ],
+  "admitted": "GONZAGA-EXP-OSU2026-001",
+  "old_ledger_blob_sha": "abb068ed7ba206d946c5e7df939df002fe1fd0f5",
+  "old_identified_count": 545,
+  "new_identified_count": 546,
+  "change": "ONE_ADMISSION_NO_PREVIOUS_GAME_MUTATION",
+  "held_candidates_unchanged": 6,
+  "accounting_debt_seasons_unchanged": [
+    "1915-16",
+    "1930-31",
+    "1936-37",
+    "1937-38"
+  ],
+  "next_bounded_unit": "Verify genuine readable EWU original game-by-game schedule or systematic 1935-58 season result family first (rather than EWU annual aggregates). If found, harvest a multi-season tranche and deduplicate against 546 games. Avoid broad re-audits of already complete WSU and UW series."
+}
