@@ -1,6 +1,22 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-expansion-stage2-census-0001",
+  "school_key": "hawai-i",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "4e0687ab27f4cde5f2a763f5f8b209d67ded4a2f",
+  "previous_control_state_sha256": "ef7718ba66e41b1fa65430c3db592ead1897af2d36ff8e7e5d8cb87f2c0d2340",
+  "expected_protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "2c4b017ac3e2656f78e1e522fe4c5d66fe85e49e6910ad075d1c048e211b7908"
+  },
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
   "authority": {
-    "expansion_phase0": true,
+    "expansion_phase0": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -12,7 +28,7 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
@@ -24,35 +40,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "Owner's standing same-phase Hawai‘i startup and guarded Phase 0 authorization persists through deterministic, fail-closed main-drift recovery. Fresh new IDs and exact current main; no Stage 2, owner gate, release, Preview, merge, or Production authority. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
-    "origin": "Same immutable owner-designated Hawai‘i Stage 7 EXPANSION_RESEARCH_FROZEN ZIP SHA-256 b41c303904d0baf21c7935d8111852f12501ceb5efc416e8fc60dcd56b42d54d; reused unchanged 13-part Git transport. Prior startup #0002 stopped read-only at EXPANSION_STARTUP_PROTECTED_MAIN_CHANGED when unrelated Stage 4 Research PR #712 merged to main."
-  },
-  "expansion_research_checkpoint": {
-    "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
-    "sha256": "b41c303904d0baf21c7935d8111852f12501ceb5efc416e8fc60dcd56b42d54d",
-    "transport": {
-      "commit_sha": "6ba19a936f60fe53153fa1273050b62eabca20c7",
-      "kind": "git_base64_parts",
-      "part_count": 13,
-      "path_prefix": ".remote-implementation/phase0-inputs/hawai-i/hawai-i-expansion-startup-0001/freeze-part-"
-    }
-  },
-  "expected_protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
-  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "EXPANSION_PHASE0",
-  "previous_control_state_commit": "09d78f596551898ba5c71f09f846d9989484d643",
-  "previous_control_state_sha256": "6f0886268c36cdede831e8a314794fe0c321b2bd60bda89aef7b486f9e11792b",
-  "request_id": "hawai-i-expansion-phase0-0003",
-  "research_freeze_sha256": "b41c303904d0baf21c7935d8111852f12501ceb5efc416e8fc60dcd56b42d54d",
-  "schema_version": 1,
-  "school_key": "hawai-i",
-  "stage1_control_authority_sha": "131a628b239d8df4732118b6427d6ac39e946a93",
-  "stage1_independent_proof": {
-    "path": ".remote-implementation/startups/hawai-i/hawai-i-expansion-startup-0003/stage1-independent-proof.json",
-    "sha256": "ea9ffd6f09e4b5d846e2baa10828217886870c5caaf5c993b02d894fb8bf6496"
-  },
-  "stage1_independent_proof_sha256": "ea9ffd6f09e4b5d846e2baa10828217886870c5caaf5c993b02d894fb8bf6496",
-  "target_branch": "data/hawai-i-onboarding",
-  "target_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7"
+    "origin": "Hawai‘i 812-game ALL_HISTORY_EXPANSION Research Freeze, canonical Stage 1 reconciliation repair merged PR #711; independently fresh-verified guarded Phase 0 #0003 on exact protected main and onboarding successor.",
+    "authorization": "Owner explicitly said Proceed to Hawai‘i Stage 2 capability census after successful independent Phase 0 proof. Read-only STAGE2_CENSUS through CAPABILITY_CENSUS_READY or durable BLOCKED checkpoint only; no tracked repair, proposal rehearsal, owner gate, apply, release, Preview, merge, or Production authority."
+  }
 }
