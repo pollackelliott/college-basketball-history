@@ -1,0 +1,41 @@
+{
+  "accepted_asset_blob_sha": "db2186a01c87c2c71c2e3573fd79a4f3d4be3822",
+  "approved_plan_hash": "c94266df230a682d6a955b9705d342f75a65cc9536bd994da2f1be8fb76635dc",
+  "changed_file_sha256": {
+    "site/index.html": "920a5da85a247152efeb2404e600250ea05c799468142de6c25b221653b1d122"
+  },
+  "changed_paths": [
+    "site/index.html"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "0730d706a3084cbcd4647584052ad61ace040eb2",
+  "global_lock_commit": "4fdb838ddb7aec80304d56513055463e533d73b5",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "RELEASE_PRESENTATION_REFRESH",
+  "owner_gate_2_approved": false,
+  "prepared_commit_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
+  "prepared_parent_sha": "0730d706a3084cbcd4647584052ad61ace040eb2",
+  "prepared_tree_sha": "a8885590513dc0878dc4d508bafbd65b51ba727c",
+  "protected_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
+  "release_manifest_sha256": "bc286921fae7ac2ff988c7f47ede7014e4442d715d2c64e7f6a3c8bc61514c66",
+  "repair_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
+  "repository_validation": "PASS",
+  "request_id": "hawai-i-expansion-release-presentation-refresh-0001",
+  "request_sha256": "65861eb7d087c5a07e9752094627640cf94a2218116118227efcba34e6cfaadd",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "sealed_tree_sha": "59d266d8bb4c7d73ab473babd898a66aaff21702",
+  "sidecars": {
+    "prepared-proof.json": "d63852756239023a361d258a051eb375de2f5b84628ce0f6919fb3b6272eda56"
+  },
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "646c890a9012d89bdd3938a2d4852d88a7648f8c1468c0385c90461c0536fa0e"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "94bd4b81e89f6017230fe6be125077062749ab7a47605ec41555c3c80f2ec12f"
+  },
+  "target_branch": "data/hawai-i-onboarding"
+}
