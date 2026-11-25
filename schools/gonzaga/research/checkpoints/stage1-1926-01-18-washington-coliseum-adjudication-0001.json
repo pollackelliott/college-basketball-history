@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1926_01_18_TWO_COMPETING_SOURCE_DATE_ADJUDICATION_V1",
+  "school_key": "gonzaga",
+  "parent_research_head": "162823ab9f517fa56cb2ad3dc531b540509cb513",
+  "authenticated_protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "stage": "STAGE_1",
+  "identified_games_unchanged": 518,
+  "accepted_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0023.csv",
+  "accepted_ledger_blob_sha": "6c2d18fe845b478c858274efbed0a040815eead8",
+  "previous_hold_id": "GONZAGA-HOLD-NW2528-001",
+  "previous_hold_artifact": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-held-candidates-0001.csv",
+  "hold_disposition": "UNADMITTED__CURRENT_1926_DATE_COLLISION_UNRESOLVED",
+  "candidate_summary": {
+    "season": "1925-26",
+    "source_label": "Coliseum Checkerboards",
+    "result": "Gonzaga L",
+    "source_body_score": "29-30",
+    "source_heading_score": "OCR looks 20-30",
+    "newspaper_dateline": "Portland Jan 18 1926",
+    "inclusion": "HOLD"
+  },
+  "existing_accepted_competing_identity": {
+    "game_id": "GONZAGA-EXP-UW-008",
+    "season": "1925-26",
+    "opponent": "Washington",
+    "score": "Gonzaga L 12-35",
+    "accepted_date": "1926-01-18",
+    "site": "AWAY",
+    "unchanged": true
+  },
+  "evidence": [
+    {
+      "evidence_id": "UW_INSTITUTIONAL_2025_26",
+      "kind": "INSTITUTIONAL_RECIPROCAL_YEAR_BY_YEAR",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/washington.sidearmsports.com/documents/2025/12/9/Records_25-26.pdf?timestamp=20260130125645",
+      "observation": "Washington 1925-26 all-time results lists Jan.18 Gonzaga W35-12; same date/score appears in earlier UW record books and 2022-23 official UW Gonzaga game notes.",
+      "weight": "AUTHORITATIVE_INSTITUTIONAL_COMPOSITE_FOR_GAME_IDENTITY_AND_SCORE__DATE_CONTROVERTED_BY_OTHER_DATE_AWARE_EVIDENCE",
+      "limit": "2025-26 UW PDF screenshot unavailable because document too large in reader; text extraction confirmed season table and repeated books, not a fresh original 1926 date proof."
+    },
+    {
+      "evidence_id": "OREGON_STATESMAN_1926_01_19",
+      "kind": "ORIGINAL_CONTEMPORARY_AP",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1926-01-19/ed-1/seq-2/",
+      "observation": "Original Jan.19 page cites 'PORTLAND, Or., Jan.18 (By Associated Press)' and says Gonzaga University basketball team lost a fast game to Coliseum Checkerboards 'tonight', 30 to 29 in the body. Header OCR reads 'COLISEUM 30; GOXZAGA .20'.",
+      "weight": "FIRST_ORDER_CONTEMPORARY_EVIDENCE_FOR_COMPETITIVE_GAME_AND_1926_01_18_PORTLAND_DATELINE",
+      "limit": "Printed image is available in browser but body and header OCR disagree on Gonzaga score; score remains source-conflicted. Gonzaga 29 inferred only from body, not imposed onto canonical ledger."
+    },
+    {
+      "evidence_id": "SEATTLE_UNION_RECORD_SECONDARY_CITATION_1926_01_15",
+      "kind": "CONTEMPORARY_CLIPPING_BIBLIOGRAPHIC_LEAD_NOT_ORIGINAL_READ",
+      "url": "https://en.wikipedia.org/wiki/Gonzaga%E2%80%93Washington_men%27s_basketball_rivalry",
+      "original_clipping_url": "https://www.newspapers.com/article/seattle-union-record-1926-uw-washington/162691599/",
+      "observation": "The rivalry reference links a Seattle Union Record clipping dated January 15, 1926, with the user-provided clipping title '1926 UW Washington Gonzaga Basketball date wrong in UW records book'. The citation may indicate institutional Jan.18 date error, but original clip content was not readable.",
+      "weight": "DIAGNOSTIC_DATE_ERROR_LEAD_ONLY__NOT_PRIMARY_WITNESSED_GAME_DATE",
+      "limit": "Newspapers.com clipping retrieval restricted; title/date alone cannot establish which day Washington actually played Gonzaga or whether reporter was describing a scheduled versus played game. Do NOT backdate Washington ledger from this source."
+    },
+    {
+      "evidence_id": "UW_OFFICIAL_GAME_NOTES_2022",
+      "kind": "INSTITUTIONAL_REPEAT_SAME_DATE",
+      "url": "https://gohuskies.com/documents/download/2022/12/7/UW_MBB_GameNotes_22-23_Gonzaga.pdf",
+      "observation": "Washington 2022-23 Gonzaga game notes list 01-18-26 (H) W 35-12, corroborating the institutional representation but not independent 1926-era date authority.",
+      "weight": "SAME_INSTITUTION_REPEATED_NOT_INDEPENDENT_DATE_PROOF"
+    },
+    {
+      "evidence_id": "EWU_STUDENT_NEWS_INDEX_1926_01_15",
+      "kind": "UNREADABLE_ADJACENT_SOURCE_LEAD_NO_DISPOSITION",
+      "url": "https://dc.ewu.edu/student_newspapers/1482/",
+      "observation": "The original student newspaper index describes a separately reported Gonzaga 18-27 loss to Cheney Normal in Jan.15,1926 issue.",
+      "weight": "SOURCE_DISCOVERY_LEAD_ONLY__NO_NEW_GAME_ADMITTED_IN_THIS_SINGLE_COLLISION_UNIT",
+      "limit": "Full-text issue download returned HTTP 403; cannot prove whether opponent is university varsity or Gonzaga High, game date, or competitive inclusion. Not a negative source conclusion."
+    }
+  ],
+  "bounded_research_disposition": {
+    "played_coliseum_candidate_evidence": "SOURCE_BACKED_COMPETITIVE_REPORT",
+    "resolution": "DATE_COLLISION_UNRESOLVED",
+    "safe_admission_now": false,
+    "accepted_washington_game_date_revised": false,
+    "new_ledger_games": 0,
+    "new_held_candidates": 0,
+    "original_held_candidate_preserved_byte_for_byte": true,
+    "owner_gate_required_now": false,
+    "stage2_authorized": false
+  },
+  "next_concrete_source_needed": "Readable 1926 Jan 15 Seattle Union Record original clipping that explicitly states Gonzaga–UW final score and played-game date, or equivalent original UW The Daily issue. If dates independently resolve Jan.18 collision, adjudicate only the date and inclusion, not unrelated accepted season work.",
+  "stop_reason": "One bounded two-claim date-check complete; contemporaneous Jan.19 AP Portland game corroborated while UW old/modern institutional Jan.18 entry and unreadable older dated UW clipping leave exact identity/date collision open. No safe same-day double booking or fabricated date supported."
+}
