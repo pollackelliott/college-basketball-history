@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "9525263191d07cf7f1d382deaf0c09cb628994700f67dee7130eb32024f3b693",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "pr_number": 710,
+  "production_deployment_id": 8045854072,
+  "production_json_checked_count": 9,
+  "production_proof": true,
+  "request_id": "florida-state-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "status": "COMPLETE"
+}

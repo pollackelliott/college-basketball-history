@@ -1558,7 +1558,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "9525263191d07cf7f1d382deaf0c09cb628994700f67dee7130eb32024f3b693",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1568,7 +1568,7 @@
     "production_deployment_id": 8045854072,
     "production_json_checked_count": 9,
     "protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "florida-state-expansion-release-production-proof-0001",
     "school_key": "florida-state"
   },
