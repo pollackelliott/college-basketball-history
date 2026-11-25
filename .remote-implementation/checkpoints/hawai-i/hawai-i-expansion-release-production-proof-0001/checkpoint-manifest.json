@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "48823b191b76671ce794b9ac0fe540f7a1260956",
+  "merge_parent_onboarding": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
+  "merge_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "891ec9240ca3015b4312e138184c7590a7290179804d5202e1ae6d451d44d640",
+  "owner_gate_2_verification_sha256": "cfa107bc016e88f98427e4ee2882643eba1d51ac3d4ba9d92d9206efdc378f94",
+  "pr_head_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
+  "pr_number": 717,
+  "production_deployment_id": 8071324773,
+  "production_json_checked_count": 16,
+  "production_proof": true,
+  "production_proof_sha256": "b3a57d22937e7583c1bb7b90c9dc039d79ae85ae6dbe495fce7a3258e9000cbb",
+  "protected_main_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
+  "request_id": "hawai-i-expansion-release-production-proof-0001",
+  "request_sha256": "14adddc3632de41ab8e3fd8684cd888ba9cc7a3e0f953da78f6e6c5e49c0055c",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "status": "PRODUCTION_PROOF_PASS"
+}
