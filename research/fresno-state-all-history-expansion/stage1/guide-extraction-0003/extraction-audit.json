@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_ALL_HISTORY_EXPANSION_STAGE1_SOURCE_EXTRACTION_0003",
+  "status": "1943_44_TO_1969_70_EXTRACTED_AND_PRIOR_78_RECONCILED__STAGE1_OPEN",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_commit_sha": "7f49681e79c8c66b62e8261e4376e2bba0a53482",
+  "source_pdf_sha256": "b960369400bb42be27caa0331a1be2c9defd1e9163e4ea14f567c38e262693ba",
+  "source_raw_guide_git_blob_sha": "fc72b2862aa283481d498873af0a17fa1d7e405a",
+  "prior_excluded_research_git_blob_sha": "ef6188b36675cd188a5bc5f1059f10084c70430f",
+  "source_time_span": "1943-44..1969-70",
+  "source_guide_pdf_pages": [
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "season_population": 27,
+  "season_with_explicit_results": 26,
+  "season_n_a_no_intercollegiate_records": 1,
+  "result_entries": 661,
+  "new_candidate_entries": 583,
+  "prior_research_original_rows_reconciled_without_new_ids": 78,
+  "prior_raw_literal_exact": 76,
+  "prior_raw_literal_overtime_spacing_only": 2,
+  "total_pre1970_guide_result_entries": 1034,
+  "official_pre1970_aggregate_games": 1034,
+  "total_pre1970_new_source_candidate_entries_including_checkpoint_0002": 956,
+  "total_pre1970_original_excluded_source_references": 78,
+  "three_administrative_forfeits": 3,
+  "source_explicit_exhibition_entries": 1,
+  "additional_alumni_status_review_entries": 8,
+  "review_duplicate_groups": [
+    {
+      "key": "1965-66|san diego state|L|69-66",
+      "source_ids": [
+        "FRESNO-EXP-CAND-1965-66-017",
+        "FRESNO-EXP-CAND-1965-66-022"
+      ]
+    }
+  ],
+  "unexplained_WL_seasons": [
+    "1965-66",
+    "1969-70"
+  ],
+  "source_game_entries_are_not_unique_accepted_games": true,
+  "original_owner_publication_scope_exclusion_unchanged": true,
+  "top_level_scope_unchanged": "1970-71+",
+  "published_1708_rows_untouched": true
+}
