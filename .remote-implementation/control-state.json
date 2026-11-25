@@ -1596,7 +1596,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "891ec9240ca3015b4312e138184c7590a7290179804d5202e1ae6d451d44d640",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "7105ddda5d6644605d5ca3976ebe07df47ac47b17bfa4f72f29c931a98bbe3e5",
     "merged": false,
@@ -1605,7 +1605,7 @@
     "pr_number": 717,
     "production_request_id": "hawai-i-expansion-release-production-proof-0001",
     "protected_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "hawai-i-expansion-release-gate2-approval-0001",
     "school_key": "hawai-i",
     "target_branch": "data/hawai-i-onboarding",
