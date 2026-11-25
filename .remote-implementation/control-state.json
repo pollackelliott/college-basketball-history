@@ -799,18 +799,19 @@
     "hawai-i-expansion-stage2-preseal-0001",
     "hawai-i-expansion-stage2-gate1-seal-0001",
     "hawai-i-expansion-stage2-sealed-apply-0001",
-    "hawai-i-expansion-release-readiness-0001"
+    "hawai-i-expansion-release-readiness-0001",
+    "hawai-i-expansion-release-preview-verify-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PREVIEW_VERIFY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "hawai-i-expansion-release-preview-verify-0001",
+  "active_request_sha256": "04b082ed27346b58f0265b04b8c849e01dab0dcd880f7408b6fa46da53645033",
+  "active_school_key": "hawai-i",
+  "active_target_branch": "data/hawai-i-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1599,8 +1600,11 @@
     "target_branch": "data/hawai-i-onboarding",
     "target_sha": "0730d706a3084cbcd4647584052ad61ace040eb2"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45688896659",
+  "lock_acquisition_request_commit": "009d3c815df2d4c4735be869d511d055d603d5d2",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PREVIEW_RUNNING"
 }
