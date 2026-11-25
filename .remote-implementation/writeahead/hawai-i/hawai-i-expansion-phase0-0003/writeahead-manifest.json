@@ -1,0 +1,68 @@
+{
+  "allowed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/hawai-i/conferences.csv",
+    "schools/hawai-i/notes.md",
+    "schools/hawai-i/opponents.csv",
+    "schools/hawai-i/source-games.csv",
+    "schools/hawai-i/source-notes.md",
+    "schools/hawai-i/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "c35905e5a2044e84bf743894187abf92fb90d50137f30167f18ac38cee3f8994",
+    "data/reference/venue-names.csv": "60a49b554c8824c98dc592ecc1b61da198c855e1e038e96a86fecc732c45f100",
+    "schools/hawai-i/notes.md": "ebd93e39d2e7a86aa20c8e8c56cc4c9258e5fe9b21aac5b01905e0793f131966",
+    "schools/hawai-i/opponents.csv": "cdb026a65a0bbd73dbb59409e072b14c25718dcb11a811db2ded43158e8162f7",
+    "schools/hawai-i/source-games.csv": "6c95ee2b749a57be326b4e68646b2b0ee3638dc633035cdadc5c968ea8df6d20",
+    "schools/hawai-i/source-notes.md": "57fc84c09d693819c2ecd38c71924466e7589e12ccd4182095bdf86a852f2cba",
+    "schools/hawai-i/venues.csv": "64c2d6b8a6244f093376657cb884403691f46cdc2afee5b3e8aa07ac87ac24ad"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "schools/hawai-i/notes.md",
+    "schools/hawai-i/opponents.csv",
+    "schools/hawai-i/source-games.csv",
+    "schools/hawai-i/source-notes.md",
+    "schools/hawai-i/venues.csv"
+  ],
+  "commit_message": "Stage hawai-i all-history expansion Phase 0",
+  "expected_target_predecessor_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
+  "global_lock_commit": "fddd397a2d03cfabe2cfa01535845889521ba537",
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "EXPANSION_PHASE0",
+  "package_member_sha256": {
+    "conferences.csv": "b88a0dd44668ea4cb26b3c214c5bfe96a26023d9c6e411dba90422f55fe17b74",
+    "notes.md": "ebd93e39d2e7a86aa20c8e8c56cc4c9258e5fe9b21aac5b01905e0793f131966",
+    "opponents.csv": "cdb026a65a0bbd73dbb59409e072b14c25718dcb11a811db2ded43158e8162f7",
+    "source-games.csv": "6c95ee2b749a57be326b4e68646b2b0ee3638dc633035cdadc5c968ea8df6d20",
+    "source-notes.md": "57fc84c09d693819c2ecd38c71924466e7589e12ccd4182095bdf86a852f2cba",
+    "venues.csv": "510e016619b2055b29f2e3cd55956280d1f40184e93e987b01f2ef2367b24565"
+  },
+  "prepared_commit_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
+  "prepared_parent_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "prepared_tree_sha": "22c76d8c1c68123989d4a09ffc613570c89d482b",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "repository_validation": "PASS",
+  "request_id": "hawai-i-expansion-phase0-0003",
+  "request_sha256": "882b2275b75998343000ff76d730d77a32607faee485f9f3801c599e53c4cefb",
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "research_checkpoint_sha256": "b41c303904d0baf21c7935d8111852f12501ceb5efc416e8fc60dcd56b42d54d",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "sidecars": {
+    "expansion-stage1-reconciliation.json": "e5e0bfe06c9e0698e357abc0c8d30dcd580e63266c635ac7baa197c71eaa0bb5",
+    "integration-freeze.json": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+    "phase0-preview.json": "0bf189edbee5bb87a65d22be963202160ff4d303862fe30296f63d3bd23b132d",
+    "stage1-independent-proof.json": "ea9ffd6f09e4b5d846e2baa10828217886870c5caaf5c993b02d894fb8bf6496"
+  },
+  "stage1_control_authority_sha": "131a628b239d8df4732118b6427d6ac39e946a93",
+  "stage1_independent_proof_sha256": "ea9ffd6f09e4b5d846e2baa10828217886870c5caaf5c993b02d894fb8bf6496",
+  "target_branch": "data/hawai-i-onboarding",
+  "venue_reconciliation_sha256": ""
+}
