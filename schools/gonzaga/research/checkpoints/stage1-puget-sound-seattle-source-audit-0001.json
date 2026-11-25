@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_PUGET_SOUND_SEATTLE_SOURCE_CENSUS_V1",
+  "school_key": "gonzaga",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "parent_research_head": "9c18b0719d0d05ad6ab1af1a70c5e46c28cc15b9",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "old_ledger_git_blob_sha": "46e0e781c2a67366d2ec59e2155e145a4d6462a0",
+  "old_game_count": 549,
+  "new_game_count": 550,
+  "accepted_game_id": "GONZAGA-EXP-PUGETSOUND-193536-001",
+  "accepted_evidence": [
+    {
+      "source": "Puget Sound Trail played report",
+      "url": "https://sounddata.pugetsound.edu/The%20Trail%2C%201936-01-13.pdf",
+      "issue": "1936-01-13",
+      "page": 6,
+      "grounded_fact": "CPS college varsity holiday tour first game versus Gonzaga, Puget W41-39; Gonzaga ahead 21-20 at half",
+      "text_extract": "READABLE",
+      "web_screenshot": "HTTP 503; NOT VISUALLY VERIFIED"
+    },
+    {
+      "source": "Puget Sound Trail pregame schedule",
+      "url": "https://sounddata.pugetsound.edu/The%20Trail%2C%201935-12-16.pdf",
+      "issue": "1935-12-16",
+      "grounded_fact": "Dec 26 Gonzaga at Spokane is a future fixture, followed by WSU and Idaho road trip",
+      "text_extract": "READABLE",
+      "web_screenshot": "HTTP 503; NOT VISUALLY VERIFIED",
+      "date_classification": "SCHEDULED_ONLY__PLAYED_EXACT_DATE_UNKNOWN",
+      "venue_classification": "CITY_ONLY__HOST_NOT_PROVEN"
+    }
+  ],
+  "deduplication": [
+    {
+      "source": "https://sounddata.pugetsound.edu/The%20Trail%2C%201947-02-06.pdf",
+      "classification": "ALREADY_ACCEPTED_TWO_1946_47_GAMES",
+      "reason": "February 6 1947 paper reports CPS W30-28 to even two-game series; two existing 1946-47 Gonzaga-ledger results account for it"
+    },
+    {
+      "source": "https://sounddata.pugetsound.edu/The%20Trail%2C%201947-03-13.pdf",
+      "classification": "ALREADY_ACCEPTED_CORROBORATION",
+      "reason": "March 1947 college recap references loss to Gonzaga; no third distinct identity"
+    }
+  ],
+  "source_limits": [
+    {
+      "source": "https://loggerathletics.com/sports/2021/5/25/sports-mbkb-archive.aspx",
+      "conclusion": "Official athletic online archive lists mostly 1969-70 onward old results and photo galleries for several early-1950s seasons; no whole pre-1958 game list established"
+    },
+    {
+      "source": "https://goseattleu.com/mens-basketball-statistics-archive",
+      "conclusion": "Online Seattle men basketball statistics available only from 2006-07 onward; no pre-1958 itemized schedule there"
+    },
+    {
+      "source": "https://seattleu.libraryhost.com/agents/corporate_entities/65",
+      "conclusion": "Seattle archival finding aids list 1947-50 and 1951-59 player/program/scrapbook collections but not web-readable game tables; no new Seattle game identified"
+    }
+  ],
+  "held_prior_candidates_unchanged": 6,
+  "parked_accounting_debts_unchanged": 4,
+  "game_date": "UNKNOWN",
+  "site_type": "UNKNOWN",
+  "remaining_aggregate_arithmetic_difference": 427,
+  "next_bounded_unit": "Test one truly readable Puget Sound Tamanawas 1920-58 basketball season-by-season results corpus, not repeated low-yield Trail issue microsearches. If unavailable choose distinct institutionally backed whole-season original sources. Stage 2 unauthorized."
+}
