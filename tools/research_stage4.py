@@ -42,6 +42,7 @@ from research_stage4_closeout import (
     resolve_stage3b_parent_layout,
     sha256_bytes,
     stage3b_preflight_admissible_status,
+    accepted_source_date_iso,
     validate_checkpoint_manifest,
     write_json,
 )
@@ -490,6 +491,12 @@ def _legacy_date_projection(row: dict[str, str], game_id: str) -> tuple[str, str
     date = _first(row, "game_date")
     if date:
         return date, "", []
+    source_date = row.get("source_date", "").strip()
+    if source_date:
+        exact = accepted_source_date_iso(row)
+        if exact:
+            return exact, f"Accepted original source_date={source_date!r}; exact date projected from explicit source year and recorded season.", []
+        return "", f"Accepted original source_date={source_date!r}; no exact ISO date inferred.", []
     raw = row.get("source_date_raw", "").strip()
     if not raw:
         return "", "", []
@@ -525,8 +532,8 @@ def _legacy_score_projection(
     played result remain unchanged; only package-field orientation changes.
     """
 
-    team = _first(row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for")
-    opponent = _first(row, "opponent_score", "opponent_points", "score_against", "source_points_against")
+    team = _first(row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for")
+    opponent = _first(row, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against")
     result = _first(
         row, "played_result", "on_court_result", "source_result", "result"
     ).upper()
@@ -575,7 +582,7 @@ def _legacy_score_projection(
         and not row.get("season_label", "").strip()
         and not row.get("source_program_key", "").strip()
     )
-    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw")
+    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "source_result_text")
     literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
     literal_pairs = [
         (int(match.group("a")), int(match.group("b")))
@@ -859,6 +866,10 @@ def _projection(
             "POSTSEASON is the controlled package taxonomy."
             if literal_type.upper() in {"CBI", "CIT"} else ""
         )
+        source_postseason_note = (
+            f"Accepted original source_postseason_text={row['source_postseason_text']!r}."
+            if row.get("source_postseason_text", "").strip() else ""
+        )
         raw_score_note = (
             f"Accepted original source_score_raw={row['source_score_raw']!r}."
             if row.get("source_score_raw", "").strip() else ""
@@ -919,7 +930,7 @@ def _projection(
                     "result",
                 ),
                 "overtime_periods": _project_overtime(
-                    _first(row, "overtime_periods", "overtime", "source_overtime_token")
+                    _first(row, "overtime_periods", "overtime", "source_overtime_token", "overtime_text")
                 ),
                 "source_site_candidate": _first(
                     row, "source_site_candidate", "source_site_token"
@@ -990,14 +1001,14 @@ def _projection(
                     row, "stage3b_venue_country", "stage3b_site_country", "stage3b_country", "curated_venue_country", "country", "venue_country"
                 ),
                 "event_or_tournament": _first(
-                    row, "event_or_tournament", "stage3b_event_name", "stage3a3_event_name"
+                    row, "event_or_tournament", "stage3b_event_or_tournament", "stage3b_event_name", "stage3a3_event_name", "source_postseason_text"
                 ),
                 "source_round": source_round,
                 "curated_game_type": effective_parent_game_type(row),
                 "curated_postseason_round": curated_round,
                 "source_page": _first(row, "source_page", "source_pdf_page", "source_locator"),
                 "raw_text": first_literal(
-                    row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw"
+                    row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "source_result_text"
                 ),
                 "normalization_status": _first(row, "normalization_status")
                 or "RESEARCH_ACCEPTED",
@@ -1005,7 +1016,7 @@ def _projection(
                 "administrative_note": administrative_note,
                 "notes": " ".join(part for part in (
                     _first(row, "notes", "stage1_notes"), round_note, score_note,
-                    date_note, raw_score_note, type_note, location_note
+                    date_note, raw_score_note, type_note, location_note, source_postseason_note
                 ) if part),
                 "site_research_status": research_status,
                 "site_research_basis": research_basis if research_status else "",
@@ -1060,8 +1071,8 @@ def _semantic_projection_defects(
             "opponent_key",
             "canonical_opponent_key",
         ),
-        "team_score": ("team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"),
-        "opponent_score": ("opponent_score", "opponent_points", "score_against", "source_points_against"),
+        "team_score": ("team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"),
+        "opponent_score": ("opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"),
         "played_result": (
             "played_result",
             "on_court_result",
@@ -1069,9 +1080,9 @@ def _semantic_projection_defects(
             "result",
         ),
         "source_page": ("source_page", "source_pdf_page", "source_locator"),
-        "overtime_periods": ("overtime_periods", "overtime", "source_overtime_token"),
+        "overtime_periods": ("overtime_periods", "overtime", "source_overtime_token", "overtime_text"),
         "source_venue_name": ("source_venue_name", "source_venue_token"),
-        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw"),
+        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "source_result_text"),
     }
     defects = []
     game_id = projected["source_game_id"]
@@ -1092,10 +1103,10 @@ def _semantic_projection_defects(
         if projected[target] != expected:
             if target in {"team_score", "opponent_score"}:
                 original_team = _first(
-                    parent, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"
+                    parent, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
                 )
                 original_opponent = _first(
-                    parent, "opponent_score", "opponent_points", "score_against", "source_points_against"
+                    parent, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"
                 )
                 projected_team = projected.get("team_score", "").strip()
                 projected_opponent = projected.get("opponent_score", "").strip()
@@ -1117,6 +1128,15 @@ def _semantic_projection_defects(
                         continue
             defects.append({"reason": "ACCEPTED_SOURCE_FIELD_LOST",
                             "source_game_id": game_id, "field": target})
+
+    accepted_source_date = accepted_source_date_iso(parent)
+    if accepted_source_date and projected.get("game_date") != accepted_source_date:
+        defects.append({"reason":"ACCEPTED_SOURCE_FIELD_LOST", "source_game_id":game_id,"field":"game_date"})
+    source_postseason = parent.get("source_postseason_text", "").strip()
+    if source_postseason and source_postseason not in (
+        projected.get("event_or_tournament", "") + " " + projected.get("notes", "")
+    ):
+        defects.append({"reason":"ACCEPTED_SOURCE_FIELD_LOST", "source_game_id":game_id,"field":"source_postseason_text"})
 
     parent_state = _first(parent, "stage3b_venue_state", "stage3b_site_state", "stage3b_state", "stage3a_final_venue_state", "stage3a_final_state")
     parent_city = _first(parent, "stage3b_venue_city", "stage3b_site_city", "stage3b_city", "stage3a_final_venue_city", "stage3a_final_city")
