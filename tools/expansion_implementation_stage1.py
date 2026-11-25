@@ -17,6 +17,7 @@ import subprocess
 import sys
 import zipfile
 from collections import Counter, defaultdict
+from datetime import date
 from pathlib import Path
 from game_assertion_store import read_game_assertions_at_git
 from typing import Any, Mapping
@@ -26,7 +27,10 @@ from all_history_expansion_freeze import (
     authenticate_baseline, canonical_row_sha256, validate_delta_payload,
     verify_expansion,
 )
-from match_games import CONFIDENT, NEW_GAME, REVIEW, identify_game, ordered_pair, compare_fields
+from match_games import (
+    CONFIDENT, NEW_GAME, REVIEW, identify_game, ordered_pair, compare_fields,
+    scores_match, source_scores_in_canonical_orientation,
+)
 
 PACKAGE_FILES = (
     "source-games.csv", "opponents.csv", "venues.csv",
@@ -865,6 +869,128 @@ def _frozen_reciprocal_source_assertion_match(
     return match, "FROZEN_RECIPROCAL_SOURCE_ASSERTION_" + method
 
 
+
+def _expansion_known_source_home(source: dict[str, str]) -> str:
+    """Use only explicitly researched H/A; neither city nor venue name implies home."""
+    site = source.get("curated_site_type", "").strip()
+    if site == "SOURCE_PROGRAM_HOME":
+        return source.get("source_program_key", "").strip()
+    if site == "OPPONENT_HOME":
+        return source.get("normalized_opponent_key", "").strip()
+    return ""
+
+
+def _expansion_known_canonical_home(candidate: dict[str, str]) -> str:
+    """Require a consistent, explicitly designated canonical home team."""
+    site = candidate.get("site_type", "").strip()
+    team_field = {
+        "TEAM_A_HOME": "team_a_key",
+        "TEAM_B_HOME": "team_b_key",
+    }.get(site)
+    if not team_field:
+        return ""
+    derived = candidate.get(team_field, "").strip()
+    designated = candidate.get("designated_home_team_key", "").strip()
+    if designated and designated != derived:
+        return ""
+    return derived
+
+
+def _expansion_exact_day_gap(left: str, right: str) -> int | None:
+    if not left or not right:
+        return None
+    try:
+        return abs((date.fromisoformat(left) - date.fromisoformat(right)).days)
+    except ValueError:
+        return None
+
+
+def _expansion_numeric_scores(
+    source: dict[str, str], candidate: dict[str, str]
+) -> tuple[int, int, int, int] | None:
+    sa, sb = source_scores_in_canonical_orientation(source)
+    ca = candidate.get("team_a_score", "").strip()
+    cb = candidate.get("team_b_score", "").strip()
+    if not all(x.isdigit() for x in (sa, sb, ca, cb)):
+        return None
+    return int(sa), int(sb), int(ca), int(cb)
+
+
+def _expansion_safe_identity_tiebreak(
+    source: dict[str, str],
+    candidates: list[dict[str, str]],
+    status: str, match: str, method: str,
+) -> tuple[str, str, str]:
+    """Resolve only documented, independently distinguishable Stage 1 topologies.
+
+    Identity is distinct from score/date authority. Any conflicting evidence stays
+    unchanged and visible to later Gate 1 reconciliation. No guessed venue,
+    score, date, canonical ID or unbound identity assertion is authored here.
+    """
+    src_date = source.get("game_date", "").strip()
+    src_home = _expansion_known_source_home(source)
+
+    # When a conflicting exact-date row matches a DIFFERENT candidate's full
+    # score on an adjacent day, prefer the full-score identity. The generic
+    # ingestion matcher already accepts this narrowly bounded topology.
+    if status == CONFIDENT and match and src_date:
+        current = next((c for c in candidates
+                        if c["canonical_game_id"] == match), None)
+        if current is not None and not scores_match(source, current):
+            score_matches = [c for c in candidates if scores_match(source, c)]
+            if (len(score_matches) == 1
+                    and score_matches[0]["canonical_game_id"] != match
+                    and (_expansion_exact_day_gap(
+                        src_date, score_matches[0].get("game_date", "").strip()
+                    ) is not None)
+                    and _expansion_exact_day_gap(
+                        src_date, score_matches[0].get("game_date", "").strip()
+                    ) <= 1):
+                return (CONFIDENT, score_matches[0]["canonical_game_id"],
+                        "UNIQUE_PAIR_SEASON_SCORE_OVERRIDES_CONFLICTING_EXACT_DATE")
+
+    if status != REVIEW or not src_home or not candidates:
+        return status, match, method
+
+    # A single reciprocal game can be identified by an independently agreed
+    # home side, result direction, and one exact team score, while the other
+    # published score disagrees. Do not silently resolve that score conflict.
+    partial: list[dict[str, str]] = []
+    for candidate in candidates:
+        if _expansion_known_canonical_home(candidate) != src_home:
+            continue
+        can_date = candidate.get("game_date", "").strip()
+        if src_date and can_date and src_date != can_date:
+            continue
+        scores = _expansion_numeric_scores(source, candidate)
+        if scores is None:
+            continue
+        sa, sb, ca, cb = scores
+        if ((sa == ca) != (sb == cb)
+                and (sa > sb) - (sa < sb) == (ca > cb) - (ca < cb)):
+            partial.append(candidate)
+    if len(partial) == 1:
+        return (CONFIDENT, partial[0]["canonical_game_id"],
+                "UNIQUE_PAIR_SEASON_PARTIAL_SCORE_AND_HOME")
+
+    # Clearly separate trips can be provisionally NEW despite earlier same-
+    # season meetings. Require every published candidate to have a known exact
+    # date at least seven days away, a different explicit home side and no
+    # shared team score. Any missing/ambiguous evidence remains REVIEW.
+    if src_date and all(
+        _expansion_known_canonical_home(c)
+        and _expansion_known_canonical_home(c) != src_home
+        and (gap := _expansion_exact_day_gap(
+            src_date, c.get("game_date", "").strip()
+        )) is not None and gap >= 7
+        and (sc := _expansion_numeric_scores(source, c)) is not None
+        and sc[0] != sc[2] and sc[1] != sc[3]
+        for c in candidates
+    ):
+        return NEW_GAME, "", "DISTINCT_EXACT_DATES_HOME_SIDES_AND_SCORES"
+    return status, match, method
+
+
 def reconcile_canonical(
     school: str,
     supplemental: list[dict[str, str]],
@@ -890,6 +1016,10 @@ def reconcile_canonical(
         pair = ordered_pair(school, src["normalized_opponent_key"])
         candidates = index.get((src["season_label"], pair), [])
         status, match, method = identify_game(src, candidates)
+        if src.get("identity_override", "").strip() != "MATCH_SOURCE_ASSERTION":
+            status, match, method = _expansion_safe_identity_tiebreak(
+                src, candidates, status, match, method,
+            )
         if src.get("identity_override", "").strip() == "MATCH_SOURCE_ASSERTION":
             if repo is None or not research_base:
                 status, method = REVIEW, "SOURCE_ASSERTION_AUTHORITY_UNAVAILABLE"
