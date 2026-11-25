@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_PACIFIC_LUTHERAN_1938_1960_BOUNDED_HISTORICAL_SERIES_PARTIAL_CENSUS_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "parent_research_head": "91954d474af284b3ac958065aa800e18c105f759",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "source_summary": {
+    "institution": "Pacific Lutheran University",
+    "document": "Men's Basketball Series History",
+    "url": "https://golutes.com/sports/2018/5/10/mens-basketball-series-history",
+    "literal": "Gonzaga (Wash.) | 7-9 | .438 | 1938-39 | 1959-60 | Lost 1",
+    "series_aggregate_games": 16,
+    "expansion_boundary": "1907-08..1957-58; later 1958-59+ Gonzaga games remain inherited published baseline",
+    "individual_results_are_not_supplied": true
+  },
+  "scope": "One bounded PLU opponent-family screen plus multi-season 1953 and 1957 contemporary NAIA playoff results; not a complete individual 16-game series extraction",
+  "original_sources": [
+    {
+      "url": "https://oregonnews.uoregon.edu/lccn/sn97071090/1953-03-05/ed-1/seq-10/ocr/",
+      "publication": "Medford Mail Tribune",
+      "date": "1953-03-05",
+      "printed_page": 10,
+      "original_literal": "Washington NAIA Tourney / Gonzaga 71, Pacific Lutheran 67, overtime (championship)",
+      "game_id": "GONZAGA-EXP-PLU-195253-001",
+      "interpretation": "1952-53 Gonzaga W71-67 NAIA district final; exact played date withheld"
+    },
+    {
+      "url": "https://oregonnews.uoregon.edu/lccn/sn96088460/1957-03-05/ed-1/seq-10.pdf",
+      "publication": "Albany Democrat-Herald",
+      "date": "1957-03-05",
+      "printed_page": 10,
+      "original_literal": "NAIA Tournament / Pacific Lutheran 72, Gonzaga 68",
+      "game_id": "GONZAGA-EXP-PLU-195657-001",
+      "interpretation": "1957-03-04 first playoff game; PLU result 72 disputed"
+    },
+    {
+      "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1957-03-05/ed-1/seq-9.pdf",
+      "publication": "The Oregon Statesman",
+      "date": "1957-03-05",
+      "printed_page": 9,
+      "original_literal": "SPOKANE, March 4 ... Pacific Lutheran ... whipping the host, Gonzaga University Bulldogs 78-68 ... two teams meet again tomorrow night in second game of best of three",
+      "game_id": "GONZAGA-EXP-PLU-195657-001",
+      "interpretation": "Confirmed competitive date, Gonzaga HOME, NAIA best-of-three, 78 vs 72 score conflict",
+      "original_pdf_screenshot_examined": true
+    },
+    {
+      "url": "https://oregonnews.uoregon.edu/lccn/sn97071090/1957-03-06/ed-1/seq-8/ocr/",
+      "publication": "Medford Mail Tribune",
+      "date": "1957-03-06",
+      "printed_page": 8,
+      "original_literal": "TUESDAY COLLEGE GAMES ... Pacific Luthern 93 Gonzaga 85",
+      "game_id": "GONZAGA-EXP-PLU-195657-002",
+      "interpretation": "1957-03-05 second separate playoff game result"
+    },
+    {
+      "url": "https://oregonnews.uoregon.edu/lccn/sn96088460/1957-03-06/ed-1/seq-11.pdf",
+      "publication": "Albany Democrat-Herald",
+      "date": "1957-03-06",
+      "printed_page": 11,
+      "original_literal": "NAIA Tournament / Pacific Lutheran 93, Gonzaga 85",
+      "game_id": "GONZAGA-EXP-PLU-195657-002",
+      "interpretation": "Independent same-day confirming score; original PDF indexed",
+      "original_pdf_screenshot_examined": false
+    }
+  ],
+  "preexisting_accepted_Pacific_Lutheran_game_count": 5,
+  "preexisting_accepted_Pacific_Lutheran_ids": [
+    "GONZAGA-EXP-SF4752-007",
+    "GONZAGA-EXP-SF4147-014",
+    "GONZAGA-EXP-NW5558-003",
+    "GONZAGA-EXP-NW5558-004",
+    "GONZAGA-EXP-NW5558-011"
+  ],
+  "newly_admitted_distinct": 3,
+  "newly_admitted_ids": [
+    "GONZAGA-EXP-PLU-195253-001",
+    "GONZAGA-EXP-PLU-195657-001",
+    "GONZAGA-EXP-PLU-195657-002"
+  ],
+  "now_accepted_individually_identified_PLU_games": 8,
+  "officially_summarized_PLU_series_games": 16,
+  "unadjudicated_series_difference_not_an_accepted_game_population": 8,
+  "series_difference_caveat": "Aggregate includes at least last 1959-60 encounter after inherited baseline begins. No dates/scores available for all unmatched summary appearances, so no additional 8 games may be materialized from subtraction.",
+  "candidate_not_admitted": {
+    "lead": "Secondary community 1955 NAIA District Regional bracket snippet suggests potential Gonzaga-PLU meetings; original detailed and independent first-party matches not recovered in this pass",
+    "url": "https://college-sports.fandom.com/wiki/1955_NAIA_Men%27s_Basketball_District_Regionals",
+    "disposition": "UNVERIFIED_EXTERNAL_LEAD_ONLY__NOT_AN_ADMITTED_OR_NEW_HELD_RESEARCH_GAME",
+    "do_not_infer_count": true
+  },
+  "conflict": {
+    "game_id": "GONZAGA-EXP-PLU-195657-001",
+    "date": "1957-03-04",
+    "gonzaga_score": 68,
+    "portland_press_PLU_score": 72,
+    "oregon_statesman_AP_PLU_score": 78,
+    "accepted_PLU_score": "UNKNOWN",
+    "accepted_game_identity": true,
+    "accepted_gonzaga_result": "L",
+    "exact_game_type": "POSTSEASON",
+    "gonzaga_home_based_on_explicit_source_host": true
+  },
+  "identified_games_before": 552,
+  "identified_games_after": 555,
+  "identified_results_before": {
+    "W": 212,
+    "L": 340
+  },
+  "identified_results_after": {
+    "W": 213,
+    "L": 342
+  },
+  "aggregate": {
+    "W": 477,
+    "L": 500,
+    "games": 977
+  },
+  "arithmetic_gap_before": 425,
+  "arithmetic_gap_after": 422,
+  "preserved_unadmitted_hold_count": 6,
+  "preserved_parked_accounting_debt_count": 4,
+  "all_earlier_552_rows_preserved_in_order": true,
+  "stage1_complete": false,
+  "stage2_authorized": false
+}
