@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-expansion-stage2-census-0001",
+  "request_id": "hawai-i-expansion-stage2-census-0002",
   "school_key": "hawai-i",
   "operation": "STAGE2_CENSUS",
-  "previous_control_state_commit": "4e0687ab27f4cde5f2a763f5f8b209d67ded4a2f",
+  "previous_control_state_commit": "913f7a00f14aef4f01d9f3e8ddd9492184075bf7",
   "previous_control_state_sha256": "ef7718ba66e41b1fa65430c3db592ead1897af2d36ff8e7e5d8cb87f2c0d2340",
-  "expected_protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "expected_protected_main_sha": "2ab62661ce0ca13547b2eb8b80461f71e49fd3bd",
   "target_branch": "data/hawai-i-onboarding",
   "target_sha": "441c35456b72231f77f81070bdf3a9e1121abb20",
   "phase0_successor": {
@@ -40,7 +40,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Hawai‘i 812-game ALL_HISTORY_EXPANSION Research Freeze, canonical Stage 1 reconciliation repair merged PR #711; independently fresh-verified guarded Phase 0 #0003 on exact protected main and onboarding successor.",
-    "authorization": "Owner explicitly said Proceed to Hawai‘i Stage 2 capability census after successful independent Phase 0 proof. Read-only STAGE2_CENSUS through CAPABILITY_CENSUS_READY or durable BLOCKED checkpoint only; no tracked repair, proposal rehearsal, owner gate, apply, release, Preview, merge, or Production authority."
+    "origin": "Same immutable Hawai‘i 812-game ALL_HISTORY_EXPANSION Research Freeze; independently fresh-verified Phase 0 hawai-i-expansion-phase0-0003 and original Integration Freeze unchanged. Generic Stage 2 venue-authentication repair PR #713 merged after exact-school candidate replay and all eight checks passed.",
+    "authorization": "Owner Continue within already-authorized Hawai‘i Stage 2 technical phase; fresh read-only Stage 2 capability census only, through independently verified CAPABILITY_CENSUS_READY or durable BLOCKED. Previous census 0001 was rejected before checkpoint and is NOT replayed. New main delta contains tooling/workflow/test paths only, disjoint from the unchanged seven-path Hawai‘i Phase 0 target. No historical adjudication, tracked data repair, Gate 1, release, Preview, merge, or production authority."
   }
 }
