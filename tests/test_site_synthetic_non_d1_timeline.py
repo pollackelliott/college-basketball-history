@@ -163,8 +163,12 @@ class SyntheticNonD1TimelineTests(unittest.TestCase):
                 rendered["markup"].count(f'<div class="{name_class}">Non-D1</div>'), 1,
             )
         self.assertIn("1921-1970", rendered["markup"])
-        for name in ("Independent", "WAC", "Big West", "Mountain West"):
+        for name in ("Independent", "Big West", "Mountain West"):
             self.assertIn(name, rendered["markup"])
+        self.assertEqual(
+            [row["conference_key"] for row in rendered["displayed"]
+             if row.get("conference_key") == "wac"], ["wac"],
+        )
 
         # Reconstruct G+C from actual G index/tree, no school-ref write,
         # and prove the changed path population is only site/index.html.
