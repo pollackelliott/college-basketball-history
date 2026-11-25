@@ -1,0 +1,56 @@
+{
+  "kind": "FRESNO_ALL_HISTORY_EXPANSION_STAGE1_GUIDE_EXTRACT_V1",
+  "status": "1921_22_THROUGH_1942_43_SOURCE_ENTRIES_RECOVERED__STAGE1_OPEN",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_checkpoint_commit_sha": "b7a8d3434cc675d53867ccba875c53807de319f6",
+  "source_raw_blob_sha": "fc72b2862aa283481d498873af0a17fa1d7e405a",
+  "source_guide_pdf_sha256": "b960369400bb42be27caa0331a1be2c9defd1e9163e4ea14f567c38e262693ba",
+  "source_pdf_pages": [
+    41,
+    42,
+    43
+  ],
+  "seasons": 22,
+  "source_game_entries": 373,
+  "source_line_wins": 189,
+  "source_line_losses": 184,
+  "institutional_aggregate_wins": 191,
+  "institutional_aggregate_losses": 182,
+  "season_entry_count_mismatches": 0,
+  "season_WL_mismatches": [
+    {
+      "season": "1939-40",
+      "guide_record": "10-9",
+      "list_W": 8,
+      "list_L": 11
+    }
+  ],
+  "intra_program_review_entries": 8,
+  "possible_duplicate_pairs": [
+    {
+      "source_key": "1922-23|uc davis|L|30-17",
+      "source_ids": [
+        "FRESNO-EXP-CAND-1922-23-010",
+        "FRESNO-EXP-CAND-1922-23-015"
+      ]
+    },
+    {
+      "source_key": "1926-27|uc davis|W|31-18",
+      "source_ids": [
+        "FRESNO-EXP-CAND-1926-27-006",
+        "FRESNO-EXP-CAND-1926-27-013"
+      ]
+    }
+  ],
+  "mixed_score_order_exception": [
+    {
+      "id": "FRESNO-EXP-CAND-1942-43-004",
+      "raw": "Pacific L 51-52"
+    }
+  ],
+  "unresolved_review_queue_records": 12,
+  "ledger_is_source_entries_not_accepted_game_identities": true,
+  "original_1955_58_78_excluded_rows_unmodified": true,
+  "published_baseline_game_rows_unmodified": 1708,
+  "scope_unmodified": "1970-71+"
+}

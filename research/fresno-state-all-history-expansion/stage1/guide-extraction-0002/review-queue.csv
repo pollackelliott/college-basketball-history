@@ -1,0 +1,13 @@
+review_id,review_class,season_label,candidate_ids,original_evidence,needed_resolution
+"FS-INC-001","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1922-23","FRESNO-EXP-CAND-1922-23-003","Fresno State Frosh W 48-27","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-INC-002","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1922-23","FRESNO-EXP-CAND-1922-23-009","Fresno State Frosh W 40-23","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-INC-003","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1923-24","FRESNO-EXP-CAND-1923-24-002","Fresno State Frosh W 27-24","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-INC-004","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1924-25","FRESNO-EXP-CAND-1924-25-004","Fresno State Frosh W 29-11","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-INC-005","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1937-38","FRESNO-EXP-CAND-1937-38-003","Fresno State Alumni L 39-34","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-INC-006","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1938-39","FRESNO-EXP-CAND-1938-39-008","Fresno State Alumni W 43-42","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-INC-007","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1939-40","FRESNO-EXP-CAND-1939-40-010","Fresno State Alumni W 42-30","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-INC-008","INTRA_PROGRAM_POTENTIAL_EXHIBITION","1939-40","FRESNO-EXP-CAND-1939-40-011","Fresno State Alumni W 32-29","Determine recognized varsity competitive status; do not silently include or exclude"
+"FS-EXP-EXACT-PAIR-01","POSSIBLE_DUPLICATE_REPRESENTATION","1922-23","FRESNO-EXP-CAND-1922-23-010|FRESNO-EXP-CAND-1922-23-015","UC Davis L 30-17 || UC Davis L 30-17","Investigate two real games versus repeated evidence; do not infer dates or delete an entry"
+"FS-EXP-EXACT-PAIR-02","POSSIBLE_DUPLICATE_REPRESENTATION","1926-27","FRESNO-EXP-CAND-1926-27-006|FRESNO-EXP-CAND-1926-27-013","UC Davis W 31-18 || UC Davis W 31-18","Investigate two real games versus repeated evidence; do not infer dates or delete an entry"
+"FS-ACC-1939-40","OFFICIAL_RECORD_VS_LISTED_RESULTS","1939-40","SEASON_LEVEL","Official record 10-9; listed 19 rows 8-11","Investigate source aggregation and independently documented results; do not change W/L labels without evidence"
+"FS-SCORE-1942-43","MIXED_SCORE_ORDER_PROVENANCE","1942-43","FRESNO-EXP-CAND-1942-43-004","Pacific L 51-52","Source L 51-52 is internally consistent in team-first order; preserve exact literal and provenance for later field audit; not a game-universe blocker"
