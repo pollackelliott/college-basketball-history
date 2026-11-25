@@ -1,37 +1,53 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "florida-state-expansion-release-preview-verify-0001",
-  "operation": "RELEASE_PREVIEW_VERIFY",
+  "request_id": "florida-state-expansion-release-gate2-approval-0001",
   "school_key": "florida-state",
-  "previous_control_state_commit": "3ff824f49d3c36150fa8cd75a528f100ddb52819",
-  "previous_control_state_sha256": "e197249c18261a5737a3746b0f871ec811442b767303124ff17da2cd2f75eadd",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "previous_control_state_commit": "8381d24234f00809b2b8edcf4163e72917b1c570",
+  "previous_control_state_sha256": "7d96db788aa6947946e55923cf890af189bf7ea78857f730c3bf1071e60d0358",
   "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
   "target_branch": "data/florida-state-onboarding",
   "target_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "1b9551d5c90634340317cb683b2a321dfbcdaeea1a51281566ebe965e5bbab4d"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "993322dcc3207536a917601a37ff2f9344b7934bac34ee5cb2748d4843bccc69"
+  },
   "approved_plan_hash": "f7b69d314b01fa533968bc3b4d670a71c3c0a3dae0005635733153427ea1220f",
   "release_manifest_sha256": "8d1e5dd7d33524297d29250f3b4a15e04a81282cc57ba33812e8ec922698d309",
   "pr_number": 710,
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "cdc27ec7615825c2d8341089235bbf3d06597f17a052b0e04e31aedcfebbfcd8"
+  "preview_deployment_id": 8044339672,
+  "preview_url": "https://college-basketball-history-ak78cbogv-elliott-pollacks-projects.vercel.app",
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly replied 'approved. proceed' on 2026-11-24 immediately following the independently verified Florida State ALL_HISTORY_EXPANSION Owner Gate 2 packet for PR #710, exact PR head 046605df7f05ffc730e74de3969609d4c002ea3b and successful Vercel Preview deployment 8044339672 at https://college-basketball-history-ak78cbogv-elliott-pollacks-projects.vercel.app. This approves that exact Preview and authorizes the repository-defined guarded Gate 2 approval, fresh independent verification, exact two-parent PR merge through authorized connector, and exact Production proof with independent completion verification. No change of PR, head, Preview, protected-main predecessor, historical disposition or release controls is authorized.",
+    "preview_checkpoint_sha256": "1b9551d5c90634340317cb683b2a321dfbcdaeea1a51281566ebe965e5bbab4d",
+    "preview_verification_sha256": "993322dcc3207536a917601a37ff2f9344b7934bac34ee5cb2748d4843bccc69",
+    "pr_number": 710,
+    "pr_head_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+    "preview_deployment_id": 8044339672,
+    "preview_url": "https://college-basketball-history-ak78cbogv-elliott-pollacks-projects.vercel.app"
   },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "00f5fcba22a8123530d5ff575e313525e88aa2f0f995295839d584fdc72e4f3b"
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "florida-state-expansion-release-production-proof-0001"
   },
   "authority": {
     "expansion_phase0": false,
     "expansion_rebootstrap_from_freeze": false,
     "owner_gate_1": false,
-    "owner_gate_2": false,
+    "owner_gate_2": true,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": false,
+    "release_gate2_approval": true,
     "release_presentation_refresh": false,
-    "release_preview_verify": true,
+    "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
@@ -46,7 +62,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Same serialized Florida State ALL_HISTORY_EXPANSION release-preparation phase; exact GitHub connector-created PR #710 from fresh-verified readiness 0001.",
-    "authorization": "Owner-authorized RELEASE_READINESS_TO_PREVIEW_V1 continuation permits only exact read-only verification of PR #710 against protected main 17e61efd0786671df593859c2b73f720217cef1e and onboarding head 046605df7f05ffc730e74de3969609d4c002ea3b, with bound PR body SHA-256 d32b58342892ba0ae4785dc70ea75db6bc2bd3e33e44410753f5fff7ac68ae13. Require CI, clean mergeability, exact PR-head Vercel Preview, and fresh verification before OWNER_GATE_2_READY. No Gate 2 approval, PR merge, Production proof, historical changes, or tracked mutation."
+    "origin": "Same serialized Florida State ALL_HISTORY_EXPANSION Implementation lane — explicit Owner Gate 2 approval of the exact PR-head Preview.",
+    "authorization": "Owner 'approved. proceed' authorizes exact read-only Gate 2 approval and independently verified connector merge packet, followed only by packet-exact protected main merge and bound Production proof. No additional owner relay is required within these verified safeguards; stop on genuine drift or blockers."
   }
 }
