@@ -789,7 +789,7 @@
     "hawai-i-expansion-phase0-0003"
   ],
   "active_expected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
-  "active_lock_commit": null,
+  "active_lock_commit": "fddd397a2d03cfabe2cfa01535845889521ba537",
   "active_lock_owner": "github-actions:45545267046:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
