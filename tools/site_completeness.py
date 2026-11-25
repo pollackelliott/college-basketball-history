@@ -642,7 +642,21 @@ def source_site_completeness_report(
             invalid_home_location_exception_rows.append(source_game_id)
 
         if not categories:
-            if status or basis:
+            # Stage 3A-4 can preserve RESEARCHED_PARTIAL accounting on
+            # regular-season OPPONENT_HOME rows whose opponent-host building
+            # is outside the source school's venue-research responsibility.
+            # Preserve this provenance even if same-game evidence independently
+            # identifies an exact building. All other surplus research metadata
+            # still warns, and original source-venue evidence still has its
+            # separate fail-closed preservation check.
+            documented_away_scope = (
+                row.get("curated_site_type", "").strip().upper() == "OPPONENT_HOME"
+                and row.get("curated_game_type", "").strip().upper() == "REGULAR_SEASON"
+                and not row.get("source_venue_name", "").strip()
+                and status == "RESEARCHED_PARTIAL"
+                and bool(basis)
+            )
+            if (status or basis) and not documented_away_scope:
                 unnecessary_status_rows.append(source_game_id)
             continue
 
