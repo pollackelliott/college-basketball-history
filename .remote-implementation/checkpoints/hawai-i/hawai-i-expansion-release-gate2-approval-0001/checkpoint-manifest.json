@@ -1,0 +1,30 @@
+{
+  "approval_proof_sha256": "4c4b451be109413453bccd42f82bcbfcb3d2aa003515ac5596d79460a14c17f9",
+  "approved_plan_hash": "c94266df230a682d6a955b9705d342f75a65cc9536bd994da2f1be8fb76635dc",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "hawai-i-expansion-release-production-proof-0001"
+  },
+  "gate2_merge_packet_path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
+  "gate2_merge_packet_sha256": "7105ddda5d6644605d5ca3976ebe07df47ac47b17bfa4f72f29c931a98bbe3e5",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
+  "pr_number": 717,
+  "preview_checkpoint_sha256": "2e87397d04f089a90d36831dae3c3ae63bc733a4e6a4d6f578061662167614c6",
+  "preview_deployment_id": 8069822111,
+  "preview_url": "https://college-basketball-history-9oiitjoa4-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "e0edc0573b18e162982c9d750e1c8756d95cb2261302377fdeb96235a5e3d2f2",
+  "production_proof": false,
+  "production_request_id": "hawai-i-expansion-release-production-proof-0001",
+  "protected_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
+  "release_manifest_sha256": "bc286921fae7ac2ff988c7f47ede7014e4442d715d2c64e7f6a3c8bc61514c66",
+  "request_id": "hawai-i-expansion-release-gate2-approval-0001",
+  "request_sha256": "8218748561f719ccf7fb82dc1a9685972b98462112ba5a33e42694cd6d230ce3",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd"
+}
