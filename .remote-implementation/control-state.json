@@ -791,7 +791,7 @@
     "hawai-i-expansion-stage2-opponent-display-0001"
   ],
   "active_expected_main_sha": "4d91da1800d9d7b535ae2e191f309bfc391ea2ee",
-  "active_lock_commit": null,
+  "active_lock_commit": "489bf40399fce18785195d016ec031beaf2d699b",
   "active_lock_owner": "github-actions:45556492957:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
