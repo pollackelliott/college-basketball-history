@@ -1,0 +1,5 @@
+season_label,issue_publication_date,source_url,literal_source_description,disposition,reason
+1920-21,1921-01-14,https://dc.ewu.edu/student_newspapers/218/,Normal School's basketball victory over Gonzaga,UNADMITTED_METADATA_ONLY_LEAD,"No original body, game score, opponent identity or detailed varsity context accessible; don't collapse Gonzaga Prep/High vs Gonzaga University ambiguity into accepted identity."
+1925-26,1926-02-05,https://dc.ewu.edu/student_newspapers/index.15.html,Midgets Beat Gonzaga High by Score 24-12,EXCLUDED_CLEAR_GONZAGA_HIGH_NOT_TARGET_UNIVERSITY,Catalog names Gonzaga High and EWU Midgets separately from collegiate Normal/Savages; not Gonzaga University varsity.
+1925-26,1926-04-16,https://dc.ewu.edu/student_newspapers/1494/,Savages Trim Gonzaga Nine by Score 7-6,EXCLUDED_BASEBALL,"Nine and spring baseball match, not basketball."
+1925-26,1926-05-21,https://dc.ewu.edu/student_newspapers/1499/,Savages Trim Gonzaga Univ. by Score 8-7,EXCLUDED_BASEBALL,"Spring season game, score 8-7, adjacent 4/16 baseball evidence; not men basketball."

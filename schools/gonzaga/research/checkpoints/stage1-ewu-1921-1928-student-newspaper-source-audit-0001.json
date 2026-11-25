@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_EWU_STUDENT_NEWSPAPER_ARCHIVE_CATALOG_1921_1928",
+  "parent_research_head": "97052521af36679ac8b1d2feb3d11305a658683b",
+  "main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "source_family": "Eastern Washington University Digital Commons original State Normal School Journal accession catalog",
+  "original_pdfs_readable": false,
+  "accessible_layer": "EWU librarian-curated issue description with literal front-page article titles and printed results",
+  "pdf_access_attempts": [
+    {
+      "url": "https://dc.ewu.edu/cgi/viewcontent.cgi?article=2525&context=student_newspapers",
+      "result": "HTTP403"
+    },
+    {
+      "url": "https://dc.ewu.edu/cgi/viewcontent.cgi?article=2528&context=student_newspapers",
+      "result": "HTTP403"
+    },
+    {
+      "url": "https://dc.ewu.edu/cgi/viewcontent.cgi?article=2481&context=student_newspapers",
+      "result": "HTTP403"
+    }
+  ],
+  "accepted_game_identities": [
+    {
+      "id": "GONZAGA-EXP-EWU-ARCH-001",
+      "season": "1925-26",
+      "opponent": "Eastern Washington (Cheney Normal School)",
+      "result": "L",
+      "score": "18-27",
+      "game_date": "",
+      "site_type": "UNKNOWN"
+    },
+    {
+      "id": "GONZAGA-EXP-EWU-ARCH-002",
+      "season": "1927-28",
+      "opponent": "Eastern Washington (Cheney Normal School)",
+      "result": "L",
+      "score": "27-43",
+      "game_date": "",
+      "site_type": "UNKNOWN"
+    },
+    {
+      "id": "GONZAGA-EXP-EWU-ARCH-003",
+      "season": "1927-28",
+      "opponent": "Eastern Washington (Cheney Normal School)",
+      "result": "L",
+      "score": "26-40",
+      "game_date": "",
+      "site_type": "UNKNOWN"
+    }
+  ],
+  "literal_issue_evidence": [
+    {
+      "id": "GONZAGA-EXP-EWU-ARCH-001",
+      "season": "1925-26",
+      "issue": "1926-01-15",
+      "score_eastern": 27,
+      "score_gonzaga": 18,
+      "url": "https://dc.ewu.edu/student_newspapers/1482/",
+      "title": "Normal Wins Gonzaga Game by Score 27-18",
+      "place": "State Normal School Journal Vol. 10 No. 14; archive description is accessible, issue full PDF 403"
+    },
+    {
+      "id": "GONZAGA-EXP-EWU-ARCH-002",
+      "season": "1927-28",
+      "issue": "1928-01-25",
+      "score_eastern": 43,
+      "score_gonzaga": 27,
+      "url": "https://dc.ewu.edu/student_newspapers/1525/",
+      "title": "Savages Trim Gonzaga 43-27",
+      "place": "State Normal School Journal Vol. 12 No. 16; archive description is accessible, issue full PDF 403"
+    },
+    {
+      "id": "GONZAGA-EXP-EWU-ARCH-003",
+      "season": "1927-28",
+      "issue": "1928-02-15",
+      "score_eastern": 40,
+      "score_gonzaga": 26,
+      "url": "https://dc.ewu.edu/student_newspapers/1528/",
+      "title": "Savages Capture Second Game from Gonzaga by Score 40-26",
+      "place": "State Normal School Journal Vol. 12 No. 19; archive description is accessible, issue full PDF 403"
+    }
+  ],
+  "external_archive_urls": [
+    "https://dc.ewu.edu/student_newspapers/1482/",
+    "https://dc.ewu.edu/student_newspapers/1525/",
+    "https://dc.ewu.edu/student_newspapers/1528/"
+  ],
+  "nonadmissions_and_exclusions": [
+    {
+      "season": "1920-21",
+      "issue": "1921-01-14",
+      "url": "https://dc.ewu.edu/student_newspapers/218/",
+      "literal": "Normal School's basketball victory over Gonzaga",
+      "disposition": "UNADMITTED_METADATA_ONLY_LEAD",
+      "reason": "No original body, game score, opponent identity or detailed varsity context accessible; don't collapse Gonzaga Prep/High vs Gonzaga University ambiguity into accepted identity."
+    },
+    {
+      "season": "1925-26",
+      "issue": "1926-02-05",
+      "url": "https://dc.ewu.edu/student_newspapers/index.15.html",
+      "literal": "Midgets Beat Gonzaga High by Score 24-12",
+      "disposition": "EXCLUDED_CLEAR_GONZAGA_HIGH_NOT_TARGET_UNIVERSITY",
+      "reason": "Catalog names Gonzaga High and EWU Midgets separately from collegiate Normal/Savages; not Gonzaga University varsity."
+    },
+    {
+      "season": "1925-26",
+      "issue": "1926-04-16",
+      "url": "https://dc.ewu.edu/student_newspapers/1494/",
+      "literal": "Savages Trim Gonzaga Nine by Score 7-6",
+      "disposition": "EXCLUDED_BASEBALL",
+      "reason": "Nine and spring baseball match, not basketball."
+    },
+    {
+      "season": "1925-26",
+      "issue": "1926-05-21",
+      "url": "https://dc.ewu.edu/student_newspapers/1499/",
+      "literal": "Savages Trim Gonzaga Univ. by Score 8-7",
+      "disposition": "EXCLUDED_BASEBALL",
+      "reason": "Spring season game, score 8-7, adjacent 4/16 baseball evidence; not men basketball."
+    }
+  ],
+  "evidence_interpretation": "Two 1928 headline summaries explicitly give distinct Gonzaga scores, and the February title names the 'second game.' 1926 varsity-context headline describes Normal team beating Gonzaga, distinct from a separate explicit high-school Midgets article. Catalog descriptions support played result/game identity; original complete articles remain unavailable. Preserve no exact date, location, host, court or H/A/N.",
+  "old_ledger_sha": "7de1ea17fa078d1707ef8a7ac63452107933d4f2",
+  "old_game_count": 546,
+  "new_game_count": 549,
+  "source_metadata_counted_as_original_article_read": false,
+  "unadmitted_prior_candidates_preserved": 6,
+  "parked_accounting_seasons_preserved": [
+    "1915-16",
+    "1930-31",
+    "1936-37",
+    "1937-38"
+  ],
+  "next_unit": "Test EWU official older box-score/schedule collections 1930s-1950s for a truly readable game-by-game corpus; don't mine catalog issue descriptions one game at a time indefinitely. If no corpus, checkpoint access limits and move to next high-yield distinct source."
+}
