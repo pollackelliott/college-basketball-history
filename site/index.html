@@ -1283,6 +1283,32 @@ function updateOpponentBreakdown(key) {
   body.innerHTML = opponentBreakdown(key);
 }
 
+// Consecutive synthetic Non-D1 blocks describe one classification era, even
+// when an inactive/no-team hiatus prevents the source builder from joining
+// active seasons. Keep the provenance rows intact; collapse for display only.
+function conferenceTimelineDisplayHistory(history) {
+  const display = [];
+  for (const membership of history) {
+    const previous = display[display.length - 1];
+    if (previous
+        && previous.classification === "NON_D1_CLASSIFICATION"
+        && membership.classification === "NON_D1_CLASSIFICATION"
+        && previous.membership_type === "classification"
+        && membership.membership_type === "classification"
+        && !previous.conference_key && !membership.conference_key
+        && previous.conference_name === "Non-D1"
+        && membership.conference_name === "Non-D1"
+        && /^\d{4}-\d{4}$/.test(String(previous.end_season || ""))
+        && /^\d{4}-\d{4}$/.test(String(membership.start_season || ""))
+        && previous.end_season < membership.start_season) {
+      previous.end_season = membership.end_season;
+    } else {
+      display.push({ ...membership });
+    }
+  }
+  return display;
+}
+
 function conferenceTimelineDisplayName(key, membership) {
   const approvedOverrides = {
     "pac-10": "Pac-10",
@@ -1337,7 +1363,7 @@ function conferenceMembershipYearRange(membership) {
 
 function conferenceHistoryMarkup(key) {
   const team = DB.teams[key];
-  const history = DB.conferenceHistory[key] || [];
+  const history = conferenceTimelineDisplayHistory(DB.conferenceHistory[key] || []);
   if (!team || !history.length) return "";
 
   const displayNames = conferenceTimelineDisplayNames(key, history);
