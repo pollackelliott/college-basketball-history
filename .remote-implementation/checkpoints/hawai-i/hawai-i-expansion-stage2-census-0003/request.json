@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-expansion-stage2-census-0003",
+  "school_key": "hawai-i",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "baf52130a061fcebe13c3fedec9f38483ea8a2e9",
+  "previous_control_state_sha256": "18893f3e55b4edd6f4d2db6014a3de8c9f20c77bb864ab1e4fb8d6340606f054",
+  "expected_protected_main_sha": "76a955a9461f3882a645beff7e935ab0b18d38a2",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "9cbb1dcc12ccb67e7ec62bb3f4451b1d6eeaaf8e",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "2c4b017ac3e2656f78e1e522fe4c5d66fe85e49e6910ad075d1c048e211b7908"
+  },
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same Hawai‘i ALL_HISTORY_EXPANSION Implementation Stage 2; merged Honolulu canonical locality PR #715 and exact refreshed main 76a955a9461f3882a645beff7e935ab0b18d38a2; independently fresh-verified current-main refresh 0001 produced Hawai‘i target 9cbb1dcc12ccb67e7ec62bb3f4451b1d6eeaaf8e.",
+    "authorization": "Existing authorized Hawai‘i Stage 2 technical continuation; one read-only Stage 2 census with proven Phase 0, prior display repair, original immutable Integration Freeze and fresh current-main refresh. Regenerate 96-decision universe without asserting unchanged fingerprint; no map rehearsal, historical adjudication, tracked basketball mutation, owner gate, seal, apply, release or merge authorized."
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-opponent-display-0001/successor-manifest.json",
+    "sha256": "a4a4425e00b9ba65c70b83020ceabfea5be84a6d377c33ef6c2d86947d17b0ae"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "423f13828f7f3a16cde13ae40a6cc5d084d7ac6dd010b1b996ba4853b0b65cc6"
+  }
+}
