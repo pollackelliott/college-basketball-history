@@ -33,3 +33,24 @@ The owner explicitly ruled the following three accepted competitive games SOURCE
 
 No other H/A/N classification is changed by this ruling.
 
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Hawai'i All-History expansion source notes
+
+Primary target source: official Hawai'i Men's Basketball Record Book (uploaded source SHA-256 `4f130435a3fd286f47fafc2a280bb9806662eaf7499a323fa551bdbb566b41ef`), including all-time detailed results and HOME COURTS chronology.
+
+The supplemental source-game rows preserve literal institutional evidence in `raw_text` and row-level source locators. Reciprocal/current-project evidence was used field-specifically under accepted Stage 2/3A/3B policy; unsupported H/A/N, exact dates, and buildings remain explicitly researched residuals rather than inferred facts.
+
+Postseason exact-site authority for the 1949-03-08 North Dakota NAIB National Tournament game uses the Hawai'i record book event footnote plus North Dakota institutional history, NAIA tournament history, and Municipal Auditorium/Kansas City evidence; accepted site is Municipal Auditorium, Kansas City, MO.
+
+Stage 6 exact-date source addition:
+- University of San Francisco official year-by-year results identifies Dec. 14, 1964 at Hawaii, USF 95-72, matching the accepted Hawai'i opponent/score/result row exactly.
+
+Owner historical H/A/N authority retained:
+- 1965-12-29 Tennessee: Hawai'i HOME in Honolulu; exact building remains researched unresolved because institutional building evidence conflicts.
+- 1966-12-29 California: Hawai'i HOME at source-era Honolulu International Center / current physical identity Neal S. Blaisdell Center; accepted date discrepancy remains explicit residual debt.
+
+The inherited published baseline package is authenticated from exact `research_base_sha=2f6a0d7525cff222cfec0f286ed8e1c456707a54` and is not reproduced by this supplemental freeze.
