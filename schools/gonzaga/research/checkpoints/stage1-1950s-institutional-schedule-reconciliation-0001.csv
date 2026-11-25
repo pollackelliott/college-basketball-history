@@ -1,0 +1,4 @@
+season_label,official_wins,official_losses,official_games,prior_identified_wins,prior_identified_losses,prior_identified_games,added_wins,added_losses,identified_wins,identified_losses,identified_games,arithmetic_diagnostic,status
+1953-54,12,16,28,6,12,18,1,0,7,12,19,9,ACTIVE_STAGE1_DISCOVERY__AGGREGATE_DIFFERENCE_DIAGNOSTIC_ONLY
+1954-55,16,13,29,13,11,24,1,1,14,12,26,3,ACTIVE_STAGE1_DISCOVERY__AGGREGATE_DIFFERENCE_DIAGNOSTIC_ONLY
+1955-56,13,15,28,6,11,17,1,1,7,12,19,9,ACTIVE_STAGE1_DISCOVERY__AGGREGATE_DIFFERENCE_DIAGNOSTIC_ONLY

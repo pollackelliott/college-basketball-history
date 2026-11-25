@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1950S_INSTITUTIONAL_SEASON_SCHEDULE_CROSSCHECK_0001",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_research_head": "e8efa66d0a360e4f013469f595f45e37dfcf5bc2",
+  "authenticated_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "method": "SEASON_FIRST_BULK_RECONSTRUCTION__SCHEDULE_INDEX_DISCOVERY_WITH_INSTITUTIONAL_RECIPROCAL_PROOF",
+  "coverage_seasons": [
+    "1952-53",
+    "1953-54",
+    "1954-55",
+    "1955-56",
+    "1956-57",
+    "1957-58"
+  ],
+  "accepted_new_game_ids": [
+    "GONZAGA-EXP-SCHED-001",
+    "GONZAGA-EXP-SCHED-002",
+    "GONZAGA-EXP-SCHED-003",
+    "GONZAGA-EXP-SCHED-004",
+    "GONZAGA-EXP-SCHED-005"
+  ],
+  "accepted_count": 5,
+  "primary_institutional_sources": [
+    "Gonzaga official Loyola Marymount and Saint Mary's opponent-series notes",
+    "Gonzaga official 1954 Seton Hall meeting note",
+    "Siena University 1954-55 official historical results",
+    "Saint Francis University 1955-56 official historical results"
+  ],
+  "index_source": "Sports-Reference historical season schedules, with Hoopsipedia schedule index used as a discovery locator",
+  "index_limitation": "These season schedules are incomplete against Gonzaga's official institutional season W-L totals and existing accepted ledger; absence from them is NOT negative evidence and their W/L totals do not supersede Gonzaga institutional season accounting.",
+  "date_and_site_basis": "Exact dates cross-checked against indexed target and/or reciprocal calendars; H/A only from explicit indexed @ conventions or first-party Saint Francis @ Gonzaga, not from geography.",
+  "unaccepted_index_discrepancies": "Index treatment of several already-accepted opponent-series rows differs from original accepted families; those families were not reopened or modified. Exact discrepancy-by-discrepancy adjudication is outside this bounded tranche.",
+  "primary_vs_secondary_authority": "Five game identities and results supported by independent institutional source; index supports calendar and source-explicit site notation only.",
+  "remaining_source_limits": [
+    "Incomplete modern historical index cannot certify exhaustive game universe.",
+    "Previous protected-main reciprocal census not repeated.",
+    "Previously accepted opponent-family results not overwritten.",
+    "1942-43 held wartime candidates unchanged.",
+    "Four parked account-closeout contradictions unchanged."
+  ]
+}
