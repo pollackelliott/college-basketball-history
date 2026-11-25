@@ -1588,7 +1588,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-preview-verify-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "57b26af8bce6a6e289bef4244d8eb88b24d24577806c753aaa79e98a18795d5e",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -1597,7 +1597,7 @@
     "preview_deployment_id": 8064421770,
     "preview_url": "https://college-basketball-history-9fl000zbq-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "hawai-i-expansion-release-preview-verify-0001",
     "school_key": "hawai-i",
     "target_branch": "data/hawai-i-onboarding",
