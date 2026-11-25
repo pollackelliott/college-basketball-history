@@ -1,0 +1,277 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "480be7b096348c74a6802c8b1cf812c790ca9b5c39f0b99318b6b924252e6c27",
+    "implementation-stage2-status.json": "6fda9d03de1534529788a1be6f8187d3bcb0f504914d323ac478cabaa6842c4c",
+    "plan.json": "8654f8a04f0ebb3fbd37bff8203baa494daabfd2a3cbc16cc7f626fea642057c",
+    "review.csv": "16b8cb1e096b98eaa4ca44ad1d22b4ebb747a41bea187531654bf5426850178b",
+    "review.md": "c9a6ee21dced749b98d6f161cc472c23df3a5ad692f5f5c41cac1b89a192f31a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "480be7b096348c74a6802c8b1cf812c790ca9b5c39f0b99318b6b924252e6c27",
+    "implementation-stage2-status.json": "e14f0b1caad44825ced414c943aa26ac22c01ce98ec2ea8c5cb3f6cdf7ed2a37",
+    "plan.json": "adf64b4cbd274dc725108337f7cc50e25d0bc25dabf755fe0f3cfa7309073fb0",
+    "review.csv": "16b8cb1e096b98eaa4ca44ad1d22b4ebb747a41bea187531654bf5426850178b",
+    "review.md": "a7907b121589f14049099dab56291472b12184c6420f3ae13165225c552895ab"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "480be7b096348c74a6802c8b1cf812c790ca9b5c39f0b99318b6b924252e6c27",
+  "capability_census_status": "CENSUS_CAPTURED",
+  "capability_preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 63,
+      "discrepancy": 17,
+      "identity": 16
+    },
+    "decision_count": 96,
+    "decision_fields": {
+      "game_date": 34,
+      "game_identity": 16,
+      "result_winner_team_key": 3,
+      "score": 28,
+      "site_type": 15
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1954-55-012-CBBG-0114757-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1954-55-012-CBBG-0114758-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-018-CBBG-0068600-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-018-CBBG-0068601-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-019-CBBG-0068600-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-019-CBBG-0068601-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-022-CBBG-0068626-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-022-CBBG-0068627-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-023-CBBG-0068626-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-023-CBBG-0068627-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1965-66-014-CBBG-0105103-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1967-68-025-CBBG-0212888-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-EXP-1946-47-016-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-EXP-1965-66-008-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-EXP-1966-67-009-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 15,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0068600",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1958-59-009"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1958-59-018",
+            "hawai-i-exp-1958-59-019"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068601",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1958-59-010"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1958-59-018",
+            "hawai-i-exp-1958-59-019"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068626",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1959-60-013"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1959-60-022",
+            "hawai-i-exp-1959-60-023"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068627",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1959-60-014"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1959-60-022",
+            "hawai-i-exp-1959-60-023"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068767",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1965-66-004"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1965-66-003"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0079044",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1959-60-027"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1959-60-026"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0104852",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1955-56-017"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1955-56-016"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0105103",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1965-66-023"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1965-66-014"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114757",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1954-55-018"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1954-55-012"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114758",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1954-55-019"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1954-55-012"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0118169",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1966-67-001"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1966-67-002"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0212888",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1967-68-008"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1967-68-025"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0212904",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1967-68-024"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1967-68-025"
+          ]
+        }
+      ],
+      "count": 13,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ],
+  "command_exit_code": 0,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "fe9522c8a8e0ffd8e3739f1fa4f26885e316ef7f9b77ac202751b503e73fa65b",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "hawai-i"
+  ],
+  "phase0_protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "phase0_successor_path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-phase0-0003/successor-manifest.json",
+  "phase0_successor_sha256": "2c4b017ac3e2656f78e1e522fe4c5d66fe85e49e6910ad075d1c048e211b7908",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 63,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 63,
+      "discrepancy": 17,
+      "identity": 16
+    },
+    "decision_count": 96,
+    "decision_universe_sha256": "fe9522c8a8e0ffd8e3739f1fa4f26885e316ef7f9b77ac202751b503e73fa65b",
+    "discrepancies_to_add": 17,
+    "existing_game_matches": 1766,
+    "identity_cardinality_constraints": 13,
+    "new_canonical_games": 679,
+    "plan_path": ".onboarding/hawai-i/plan.json",
+    "review_path": ".onboarding/hawai-i/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "request_id": "hawai-i-expansion-stage2-census-0004",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "stage2_current_main_refresh_successor_path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-current-main-refresh-0002/successor-manifest.json",
+  "stage2_current_main_refresh_successor_sha256": "d88c2ed38dfc30b5a1a8b89d9e6b195778a67e41fb1750c3b6b69fbdc1457e9c",
+  "stage2_current_main_refresh_verification_path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-stage2-current-main-refresh-0002/stage2-current-main-refresh-verification.json",
+  "stage2_opponent_display_successor_path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-opponent-display-0001/successor-manifest.json",
+  "stage2_opponent_display_successor_sha256": "a4a4425e00b9ba65c70b83020ceabfea5be84a6d377c33ef6c2d86947d17b0ae",
+  "stage2_opponent_display_verification_path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-stage2-opponent-display-0001/stage2-opponent-display-verification.json",
+  "stage2_status": "CAPABILITY_CENSUS_READY",
+  "target_authority_kind": "STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "dddd4fd32b4bfb239e6d81b3b8b88c9981a24571",
+  "target_tree_sha": "edef33a119118cfed0177d0e41c104ae6b756b86",
+  "tracked_mutation_proof": {
+    "after_head_sha": "dddd4fd32b4bfb239e6d81b3b8b88c9981a24571",
+    "after_status": "",
+    "after_tree_sha": "edef33a119118cfed0177d0e41c104ae6b756b86",
+    "before_head_sha": "dddd4fd32b4bfb239e6d81b3b8b88c9981a24571",
+    "before_status": "",
+    "before_tree_sha": "edef33a119118cfed0177d0e41c104ae6b756b86",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
