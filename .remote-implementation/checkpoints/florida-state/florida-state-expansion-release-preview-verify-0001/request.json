@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "florida-state-expansion-release-preview-verify-0001",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "school_key": "florida-state",
+  "previous_control_state_commit": "3ff824f49d3c36150fa8cd75a528f100ddb52819",
+  "previous_control_state_sha256": "e197249c18261a5737a3746b0f871ec811442b767303124ff17da2cd2f75eadd",
+  "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "approved_plan_hash": "f7b69d314b01fa533968bc3b4d670a71c3c0a3dae0005635733153427ea1220f",
+  "release_manifest_sha256": "8d1e5dd7d33524297d29250f3b4a15e04a81282cc57ba33812e8ec922698d309",
+  "pr_number": 710,
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "cdc27ec7615825c2d8341089235bbf3d06597f17a052b0e04e31aedcfebbfcd8"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "00f5fcba22a8123530d5ff575e313525e88aa2f0f995295839d584fdc72e4f3b"
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Florida State ALL_HISTORY_EXPANSION release-preparation phase; exact GitHub connector-created PR #710 from fresh-verified readiness 0001.",
+    "authorization": "Owner-authorized RELEASE_READINESS_TO_PREVIEW_V1 continuation permits only exact read-only verification of PR #710 against protected main 17e61efd0786671df593859c2b73f720217cef1e and onboarding head 046605df7f05ffc730e74de3969609d4c002ea3b, with bound PR body SHA-256 d32b58342892ba0ae4785dc70ea75db6bc2bd3e33e44410753f5fff7ac68ae13. Require CI, clean mergeability, exact PR-head Vercel Preview, and fresh verification before OWNER_GATE_2_READY. No Gate 2 approval, PR merge, Production proof, historical changes, or tracked mutation."
+  }
+}
