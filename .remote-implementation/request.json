@@ -1,54 +1,37 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-expansion-release-gate2-approval-0001",
+  "request_id": "hawai-i-expansion-release-production-proof-0001",
   "school_key": "hawai-i",
-  "operation": "RELEASE_GATE2_APPROVAL",
-  "previous_control_state_commit": "609b2c0a2f0e69908a7ac445d62a5e49edf853ed",
-  "previous_control_state_sha256": "fa31238a695c4d06e6d4a52808072ec4ec43febd0e238442c4805825a4fc9bf7",
-  "expected_protected_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "3e04cad94a364c160aed9140f80c5e202ebda36f",
+  "previous_control_state_sha256": "627d61f7d4e4ca7207a65e9729bef2586894b64a9afa184eedf535df42ac87de",
+  "expected_protected_main_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
   "target_branch": "data/hawai-i-onboarding",
   "target_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
-  "release_preview_checkpoint": {
-    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-preview-verify-0002/checkpoint-manifest.json",
-    "sha256": "2e87397d04f089a90d36831dae3c3ae63bc733a4e6a4d6f578061662167614c6"
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "891ec9240ca3015b4312e138184c7590a7290179804d5202e1ae6d451d44d640"
   },
-  "release_preview_verification": {
-    "path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-release-preview-verify-0002/release-preview-verification.json",
-    "sha256": "e0edc0573b18e162982c9d750e1c8756d95cb2261302377fdeb96235a5e3d2f2"
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "cfa107bc016e88f98427e4ee2882643eba1d51ac3d4ba9d92d9206efdc378f94"
   },
-  "approved_plan_hash": "c94266df230a682d6a955b9705d342f75a65cc9536bd994da2f1be8fb76635dc",
-  "release_manifest_sha256": "bc286921fae7ac2ff988c7f47ede7014e4442d715d2c64e7f6a3c8bc61514c66",
   "pr_number": 717,
-  "preview_deployment_id": 8069822111,
-  "preview_url": "https://college-basketball-history-9oiitjoa4-elliott-pollacks-projects.vercel.app",
-  "owner_gate_2_approval": {
-    "approved": true,
-    "approval_basis": "On 2026-11-25, immediately after the independently fresh-verified Hawai‘i OWNER_GATE_2_READY status and exact Preview URL were presented for release PR #717, the owner explicitly replied 'Approved. Proceed.' This approves Preview deployment 8069822111 at https://college-basketball-history-9oiitjoa4-elliott-pollacks-projects.vercel.app for immutable PR head 3126f7504ef909c15a1d5dd3942d937b65f039fd and the identified checkpoint/independent verification. This authorizes the guarded Gate 2 approval, exact packet-authorized merge and Production proof only while all exact identities remain unchanged; not a different Preview/head/main, historical revision, or bypass.",
-    "preview_checkpoint_sha256": "2e87397d04f089a90d36831dae3c3ae63bc733a4e6a4d6f578061662167614c6",
-    "preview_verification_sha256": "e0edc0573b18e162982c9d750e1c8756d95cb2261302377fdeb96235a5e3d2f2",
-    "pr_number": 717,
-    "pr_head_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
-    "preview_deployment_id": 8069822111,
-    "preview_url": "https://college-basketball-history-9oiitjoa4-elliott-pollacks-projects.vercel.app"
-  },
-  "final_release_continuation": {
-    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
-    "production_request_id": "hawai-i-expansion-release-production-proof-0001"
-  },
+  "merge_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
   "authority": {
     "expansion_phase0": false,
     "expansion_rebootstrap_from_freeze": false,
     "owner_gate_1": false,
-    "owner_gate_2": true,
+    "owner_gate_2": false,
     "phase0": false,
     "phase0_scope_supersession": false,
     "recovery": false,
     "release": false,
-    "release_gate2_approval": true,
+    "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
-    "release_production_proof": false,
+    "release_production_proof": true,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -62,7 +45,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Same serialized Hawai‘i ALL_HISTORY_EXPANSION Implementation lane — owner explicit Gate 2 approval of independently verified exact PR-head Preview.",
-    "authorization": "Owner explicitly said 'Approved. Proceed.' after the exact fresh-verified PR #717 Preview was presented. Gate 2 approval request is read-only, independently verified, then emits an exact connector-owned merge packet and bound Production proof request. No merge prior to fresh Gate 2 verification, no main/target changes by this request, no unrelated mutation."
+    "origin": "Same serialized Hawai‘i ALL_HISTORY_EXPANSION final release, exact owner-approved Gate 2 and connector merge.",
+    "authorization": "Owner explicitly approved exact Hawai‘i PR #717 Preview deployment 8069822111. Independent Gate 2 approval verification PASS; exact merge packet 7105ddda5d6644605d5ca3976ebe07df47ac47b17bfa4f72f29c931a98bbe3e5 authorized two-parent merge method merge of PR #717 head 3126f7504ef909c15a1d5dd3942d937b65f039fd into protected main predecessor 48823b191b76671ce794b9ac0fe540f7a1260956. GitHub connector executed approved merge 4f99623c4ab916deaa080d32536e70eef0b3b751, now exact protected main with verified ordered parents. Read-only release Production-proof request checks exact SHA deployment and target plus every changed generated public JSON, with independent fresh equivalence and no new mutation/owner authority."
   }
 }
