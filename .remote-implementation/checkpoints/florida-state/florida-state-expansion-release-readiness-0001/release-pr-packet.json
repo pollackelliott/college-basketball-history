@@ -1,0 +1,18 @@
+{
+  "approved_plan_hash": "f7b69d314b01fa533968bc3b4d670a71c3c0a3dae0005635733153427ea1220f",
+  "authority_statement": "Exact connector-owned PR creation packet after fresh release readiness. The school Implementation lane may create or reuse only this exact head/base/body PR (using new_pr_title when creating a new PR), then queue the bound Preview verification request. This packet grants no Owner Gate 2, merge, Production, or tracked mutation authority.",
+  "base_branch": "main",
+  "body_checkpoint_path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-readiness-0001/pr-body.md",
+  "body_sha256": "d32b58342892ba0ae4785dc70ea75db6bc2bd3e33e44410753f5fff7ac68ae13",
+  "head_branch": "data/florida-state-onboarding",
+  "head_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_PR_PACKET",
+  "new_pr_title": "Ingest and publish Florida State history",
+  "owner_gate_2": false,
+  "pr_created_by_runner": false,
+  "preview_request_id": "florida-state-expansion-release-preview-verify-0001",
+  "readiness_request_id": "florida-state-expansion-release-readiness-0001",
+  "release_manifest_sha256": "8d1e5dd7d33524297d29250f3b4a15e04a81282cc57ba33812e8ec922698d309",
+  "schema_version": 1,
+  "school_key": "florida-state"
+}

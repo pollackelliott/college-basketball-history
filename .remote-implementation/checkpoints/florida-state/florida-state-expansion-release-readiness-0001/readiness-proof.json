@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "apply_request_id": "florida-state-expansion-stage2-sealed-apply-0001",
+  "approved_plan_hash": "f7b69d314b01fa533968bc3b4d670a71c3c0a3dae0005635733153427ea1220f",
+  "changed_path_count": 12,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "release_manifest_sha256": "8d1e5dd7d33524297d29250f3b4a15e04a81282cc57ba33812e8ec922698d309",
+  "school_key": "florida-state",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "72edfb977886ba8af96e36f6486500f2ebf8f9e1e9edac6bbbbe987eb12ba7b4",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "1fc9679c50736720e4e4fe2c552dbc25b8bc253d41b8c041a23e6df47a9f2825",
+  "writeahead_sha256": "3f4a968ecfb0a2c55c3c548ba7986b752ec78fd908c1450f7c4b25dd3c08de8a"
+}
