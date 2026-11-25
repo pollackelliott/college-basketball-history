@@ -55320,7 +55320,7 @@
       "site_city": "Louisville",
       "site_state": "KY",
       "game_type": "NCAA_TOURNAMENT",
-      "postseason_round": null,
+      "postseason_round": "R64",
       "administrative_status": null,
       "administrative_note": null
     },

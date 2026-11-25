@@ -142,3 +142,22 @@ Stage 6 stops here. Immutable final Research Freeze packaging is the separately 
 ## Integration staging
 
 Current-main shared-reference rebase completed against `integration_base_sha=3e888ecc2c4269b4a2e82e23a2123f0a6af9d740` from `research_base_sha=7834d87207761087dfdbc19d5259042564cd4fb0`. The authoritative final venue-ID mapping is recorded in the ignored `.onboarding/<school>/integration-freeze.json` manifest. Status: **INTEGRATION_FROZEN**.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Florida State ALL_HISTORY_EXPANSION frozen Research notes
+
+- research_base_sha: c028c1ea1e6d3cef59e465106aa0cedd9e649998
+- researched institutional inception: 1947-1948
+- inherited baseline scope at the immutable Research base: 1956-57+
+- owner-superseded accepted top-level scope: 1957-58+
+- Stage 4 supplemental package SHA-256: dec6ace491020d398605da7f2fa41584e763d9e67ad76c9d9acbc126c7054c9c
+- Stage 6 checkpoint SHA-256: 12e03c0668ec55665f0a0bbbe85c21006be99b2e09fd75703e17dcf420a6dd7d
+
+The published baseline at c028c1ea1e6d3cef59e465106aa0cedd9e649998 is inherited accepted authority and is not re-researched or copied into this supplemental freeze. The expansion delta contains the recognized competitive varsity history for 1947-48 through 1955-56, plus explicit supplemental support rows, researched residual debt, the approved NON_D1 scan disposition, and the separate no-expansion-impact baseline correction question.
+
+The owner explicitly superseded the top-level classification from 1956-57+ to 1957-58+. The inherited 1956-57 published season remains baseline publication authority and is not duplicated as a supplemental source row.
+
+PRE-FREEZE SELF-CHALLENGE: PASS

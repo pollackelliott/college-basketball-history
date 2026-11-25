@@ -126,3 +126,32 @@ No unsupported score was inferred from result flags or schedule order.
 
 - `FSU-STG4-REP-001`: HP Field House is physically resolved as research-base `VEN-000084`. The accepted 2009 Old Spice Classic source locality is Lake Buena Vista, Florida, while the research-base physical venue registry stores Orlando, Florida. Stage 4 preserves the accepted source locality and carries this as a representation/current-main-rebase observation rather than reopening the physical-site conclusion.
 - Informational current-D1 self-corrections: **98 canonical identities / 138 literal source-label mappings**. Literal labels remain preserved in `source-games.csv`; normalization is already resolved and is not part of the owner NON_D1 decision checkpoint.
+
+---
+
+## Accepted supplemental All-History expansion
+
+# Florida State supplemental source notes
+
+# florida-state source notes
+
+Generated mechanically from durable Research checkpoint evidence. Literal row-level evidence remains preserved in source-games.csv.
+
+## Research coverage declaration
+
+- Primary-source historical results cutoff: 2025-2026
+- Required completed-season cutoff: 2025-2026
+- These cutoffs come from explicit Research source inventory and target coverage. A media-guide title or filename never establishes the results cutoff.
+
+## Durable row-level source families
+
+
+## Durable source register: stage3b-source-register.json
+
+- source
+- source
+- source — https://www.mercer.edu/wp-content/uploads/2026/04/Mercerian_Spr26-7RGB_smpl.pdf
+- source — https://www.naia.org/about/
+- source
+
+Freeze provenance: source-game rows are byte-for-byte the accepted Stage 4 supplemental package authored from the Stage 3B checkpoint. Stage 6 introduced no package repairs. Historical regular-season neutral building blanks and lower-level postseason building blanks remain explicit NONBLOCKING_RESEARCHED residual debt under the controlling policies.
