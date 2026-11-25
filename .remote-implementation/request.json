@@ -1,27 +1,24 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "florida-state-expansion-release-readiness-0001",
+  "request_id": "florida-state-expansion-release-preview-verify-0001",
+  "operation": "RELEASE_PREVIEW_VERIFY",
   "school_key": "florida-state",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "8f3eceef877823de01ae70b33655b062cc603c36",
-  "previous_control_state_sha256": "7ba25e5e6a9040971fe0762120862662c12edc2dc457267085556625b9150914",
+  "previous_control_state_commit": "3ff824f49d3c36150fa8cd75a528f100ddb52819",
+  "previous_control_state_sha256": "e197249c18261a5737a3746b0f871ec811442b767303124ff17da2cd2f75eadd",
   "expected_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
   "target_branch": "data/florida-state-onboarding",
   "target_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/florida-state/florida-state-expansion-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "72edfb977886ba8af96e36f6486500f2ebf8f9e1e9edac6bbbbe987eb12ba7b4"
-  },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "1fc9679c50736720e4e4fe2c552dbc25b8bc253d41b8c041a23e6df47a9f2825"
-  },
   "approved_plan_hash": "f7b69d314b01fa533968bc3b4d670a71c3c0a3dae0005635733153427ea1220f",
   "release_manifest_sha256": "8d1e5dd7d33524297d29250f3b4a15e04a81282cc57ba33812e8ec922698d309",
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "florida-state-expansion-release-preview-verify-0001"
+  "pr_number": 710,
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "cdc27ec7615825c2d8341089235bbf3d06597f17a052b0e04e31aedcfebbfcd8"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/florida-state/florida-state-expansion-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "00f5fcba22a8123530d5ff575e313525e88aa2f0f995295839d584fdc72e4f3b"
   },
   "authority": {
     "expansion_phase0": false,
@@ -34,9 +31,9 @@
     "release": false,
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
-    "release_preview_verify": false,
+    "release_preview_verify": true,
     "release_production_proof": false,
-    "release_readiness": true,
+    "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -49,7 +46,7 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Same serialized Florida State ALL_HISTORY_EXPANSION Implementation lane — next owner-authorized release-preparation phase after exact sealed apply and fresh verification PASS.",
-    "authorization": "Owner said 'Continue' after Florida State Gate 1 seal and sealed apply completed successfully. This authorizes the routine reversible release-preparation phase through read-only readiness, exact connector-owned PR creation/reuse, CI/mergeability and exact Preview verification, ending at OWNER_GATE_2_READY or the first authentic blocker. Owner Gate 2 approval, PR merge, Production proof, new historical decisions, and unrelated shared/global mutations are NOT authorized."
+    "origin": "Same serialized Florida State ALL_HISTORY_EXPANSION release-preparation phase; exact GitHub connector-created PR #710 from fresh-verified readiness 0001.",
+    "authorization": "Owner-authorized RELEASE_READINESS_TO_PREVIEW_V1 continuation permits only exact read-only verification of PR #710 against protected main 17e61efd0786671df593859c2b73f720217cef1e and onboarding head 046605df7f05ffc730e74de3969609d4c002ea3b, with bound PR body SHA-256 d32b58342892ba0ae4785dc70ea75db6bc2bd3e33e44410753f5fff7ac68ae13. Require CI, clean mergeability, exact PR-head Vercel Preview, and fresh verification before OWNER_GATE_2_READY. No Gate 2 approval, PR merge, Production proof, historical changes, or tracked mutation."
   }
 }
