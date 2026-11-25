@@ -13,7 +13,6 @@
 The Boise State Athletics *Men's Basketball Tradition* identifies **1933 junior-college** basketball and gives **441-346 (1933-1968)** for its junior-college era. Boise State University Archives' official timeline dates the basketball program to **December 1, 1932**. First candidate season is **1932-33**, subject to direct confirmation of its season-specific game records; **1933-34 remains a live alternative** until the calendar-year/inaugural-season difference is resolved. The 1968-69 four-year/NAIA start is NOT institutional inception.
 
 Sources:
-- https://broncosports.com/sports/2018/5/18/sports-m-baskbl-spec-rel-bosu-m_baskbl_tradition_html (if redirect fails, use canonical URL below)
 - https://broncosports.com/sports/2018/5/18/sports-m-baskbl-spec-rel-bosu-m-baskbl-tradition-html
 - https://www.boisestate.edu/archives/university-archives/the-boise-state-story/timelines/
 - https://scholarworks.boisestate.edu/uni_books/7/ (University-published athletics history, downloadable chapters returned 403 during first bounded pass; NOT analyzed)
