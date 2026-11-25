@@ -1,0 +1,2 @@
+residual_id,affected_game_id,source_1,source_2,issue,disposition
+BOISE-S1-0013-WEBER-1961-COLLISION,BOISE-EXP-S1-HON-0008-006,https://digital.weber.edu/details?id=109384,https://oregonnews.uoregon.edu/lccn/sn90051770/1962-01-22/ed-1/seq-2/,Weber 1962 original yearbook prints Boise W85-66; contemporary Bend Bulletin prints Boise W83-68; 2 regular and 3 postseason Weber-Boise games in original source,ONE_GAME_ID_RETAINED; score field W83-68 unchanged; field conflict remains open
