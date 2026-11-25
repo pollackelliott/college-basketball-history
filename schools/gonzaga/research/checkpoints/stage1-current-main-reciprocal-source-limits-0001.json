@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_CURRENT_MAIN_RECIPROCAL_CENSUS_0001",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_research_head": "021547a13948c492e4eaeac1702c61444e547000",
+  "authenticated_protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "method": "SEASON_FIRST_BULK_RECONSTRUCTION_WITH_BATCHED_EXISTING_PROJECT_RECIPROCAL_CENSUS",
+  "tranche_type": "READABLE_CURRENT_MAIN_INSTITUTIONAL_SOURCE_GAMES_ACROSS_MULTIPLE_PROGRAMS_AND_SEASONS",
+  "accepted_identified_games": 10,
+  "accepted_institutional_reciprocal_rows": 9,
+  "accepted_contemporary_student_newspaper_series_row": 1,
+  "source_program_counts": {
+    "missouri": 1,
+    "colorado-state": 2,
+    "utah-state": 4,
+    "depaul": 1,
+    "creighton": 1,
+    "puget-sound-student-newspaper": 1
+  },
+  "accepted_source_references": [
+    {
+      "label": "miz",
+      "source_program": "missouri",
+      "source_game_id": "MIZ-HIST-00598",
+      "source_row_blob": "9e20eabb64fd9c7ef123dcc64019a10eba68f3bb",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/missouri/source-games.csv",
+      "source_page": "24",
+      "literal": "Dec. 16 @ Gonzaga W 55-46"
+    },
+    {
+      "label": "csu1",
+      "source_program": "colorado-state",
+      "source_game_id": "CSU-S1-00586",
+      "source_row_blob": "58692503ea49508890f27c306145c17ce3a08507",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/colorado-state/source-games.csv",
+      "source_page": "180",
+      "literal": "12/20/1950 at Gonzaga L 57-71"
+    },
+    {
+      "label": "csu2",
+      "source_program": "colorado-state",
+      "source_game_id": "CSU-S1-00587",
+      "source_row_blob": "58692503ea49508890f27c306145c17ce3a08507",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/colorado-state/source-games.csv",
+      "source_page": "180",
+      "literal": "12/21/1950 vs Gonzaga W 68-48; Wallace ID locality"
+    },
+    {
+      "label": "usu1",
+      "source_program": "utah-state",
+      "source_game_id": "UST-S1-00776",
+      "source_row_blob": "fac694d3d74c844d936d12ed2492268d1ffee0ae",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/utah-state/source-games.csv",
+      "source_page": "124",
+      "literal": "Gonzaga L 72 83"
+    },
+    {
+      "label": "usu2",
+      "source_program": "utah-state",
+      "source_game_id": "UST-S1-00796",
+      "source_row_blob": "fac694d3d74c844d936d12ed2492268d1ffee0ae",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/utah-state/source-games.csv",
+      "source_page": "124",
+      "literal": "Gonzaga W 83 64"
+    },
+    {
+      "label": "usu3",
+      "source_program": "utah-state",
+      "source_game_id": "UST-S1-00797",
+      "source_row_blob": "fac694d3d74c844d936d12ed2492268d1ffee0ae",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/utah-state/source-games.csv",
+      "source_page": "124",
+      "literal": "Gonzaga W 67 65"
+    },
+    {
+      "label": "dep",
+      "source_program": "depaul",
+      "source_game_id": "DEPRAW-00592",
+      "source_row_blob": "61546964c2b8d7d5c27c306145c17ce3a085e",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/depaul/source-games.csv",
+      "source_page": "historical game row",
+      "literal": "11/28/52 Gonzaga W, 97-90"
+    },
+    {
+      "label": "cre",
+      "source_program": "creighton",
+      "source_game_id": "CREIGHTON-STG1-00741",
+      "source_row_blob": "cb231877508f2ddb6b4e61b69439e9c79bc06c0c",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/creighton/source-games.csv",
+      "source_page": "Creighton.pdf guide p.166 (PDF p.168)",
+      "literal": "01/04 Gonzaga L 85-96"
+    },
+    {
+      "label": "usu4",
+      "source_program": "utah-state",
+      "source_game_id": "UST-S1-00851",
+      "source_row_blob": "fac694d3d74c844d936d12ed2492268d1ffee0ae",
+      "source_url": "https://github.com/pollackelliott/college-basketball-history/blob/17e61efd0786671df593859c2b73f720217cef1e/schools/utah-state/source-games.csv",
+      "source_page": "125",
+      "literal": "Gonzaga W 92 91"
+    },
+    {
+      "label": "trail",
+      "source_program": "puget-sound",
+      "source_game_id": "TRAIL-1947-02-06-SECOND-OF-TWO",
+      "source_row_blob": null,
+      "source_url": "https://sounddata.pugetsound.edu/The%20Trail%2C%201947-02-06.pdf",
+      "source_page": "The Trail, Feb. 6 1947 p.4",
+      "literal": "Puget Sound's 30-28 win over Gonzaga evened their two-game season series"
+    }
+  ],
+  "source_family_dispositions": [
+    {
+      "family": "published current-main institutional source-games.csv",
+      "status": "BOUNDED_RECONCILIATION_CENSUS__NOT_FULL_UNIVERSE_EXHAUSTION",
+      "reason": "Scanned batched readable current-main school packages, including many western and other schools. Several very large packages (e.g. Arizona, UCLA, Utah, Wyoming, Notre Dame) yielded empty/oversized connector reads, not negative evidence; do not count them as successfully exhausted."
+    },
+    {
+      "family": "previously completed reciprocal opponent families",
+      "status": "REUSED_AS_DEDUP_AUTHORITY_NOT_REOPENED",
+      "reason": "Previously accepted Washington State, Montana, Idaho, Washington, Oregon, Oregon State, Portland and other families were not re-extracted."
+    },
+    {
+      "family": "Gonzaga Bulletin / Spires digitized campus corpus",
+      "status": "INDEXED_BUT_UNREADABLE_IN_CURRENT_INTERFACE",
+      "reason": "Gonzaga institutional collection exists, but external site requires JavaScript and API raw endpoints were not accessible to current web tool; did not manufacture game entries from snippets."
+    },
+    {
+      "family": "Puget Sound Trail 1947-02-06",
+      "status": "ADMITTED_ONE_UNSCORED_SAME_SEASON_SERIES_GAME",
+      "reason": "Article explicitly says the published 30-28 Puget Sound win evened a two-game season series. Existing 30-28 defeat remains separately ledgered; the other game's Gonzaga win is stable but its date and scores are not."
+    },
+    {
+      "family": "Puget Sound Trail 1947-02-06 PDF screenshot",
+      "status": "SCREENSHOT_ATTEMPT_UNAVAILABLE",
+      "reason": "PDF text and indexed article section were readable, but web screenshot fetch returned 503. No visual-only site/score inference was made."
+    },
+    {
+      "family": "1942-43 four held wartime candidates",
+      "status": "HELD_PARENT_AUTHORITY_UNCHANGED",
+      "reason": "This unit did not reopen 1942-43 accounting classification."
+    }
+  ],
+  "admission_policy": "No schedule-only rows; every admitted row has a distinct competitive game identity and source-backed on-court result; score and exact-date unknowns remain explicit.",
+  "site_policy": "Site relationships translated only from explicit reciprocal source-site classifications; no geographic inference.",
+  "next_priority": "Use meaningful season-first source blocks and unsearched major systematic published reciprocal/primary evidence, not repeat the now-low-yield 1944-46 Oregon newspaper pass; work the four 1942-43 held candidates separately."
+}
