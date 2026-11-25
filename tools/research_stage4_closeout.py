@@ -1065,7 +1065,7 @@ def accepted_source_date_iso(row: dict[str, str]) -> str:
     raw = row.get("source_date", "").strip()
     if not raw:
         return ""
-    m = re.fullmatch(r"(\\d{1,2})/(\\d{1,2})/(\\d{2})", raw)
+    m = re.fullmatch(r"(\d{1,2})/(\d{1,2})/(\d{2})", raw)
     if not m:
         return ""
     try:
