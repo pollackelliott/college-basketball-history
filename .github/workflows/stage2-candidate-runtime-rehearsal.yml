@@ -355,6 +355,56 @@ jobs:
                       or int(preflight.get('warning_count', -1)) < 0
                   ):
                       fail('live proposal census does not bind exact verified last operation')
+              elif (last.get('operation') == 'EXPANSION_PHASE0'
+                    and last.get('fresh_runner_verification') == 'PASS'
+                    and last.get('remote_phase0_equivalence') == 'PASS'):
+                  # An initial Stage 2 census can fail during Phase 0 authentication
+                  # before a census/proposal checkpoint exists. Verify the exact
+                  # Phase 0 successor and replay the *read-only census* instead
+                  # of demanding an inapplicable blocked proposal checkpoint.
+                  mode = 'LIVE_CENSUS_AFTER_PHASE0'
+                  checkpoint = ''
+                  live_request = json.loads(
+                      Path('control/.remote-implementation/request.json').read_text()
+                  )
+                  school = str(last.get('school_key') or '')
+                  expected_main = str(last.get('protected_main_sha') or '')
+                  phase0_ref = live_request.get('phase0_successor') or {}
+                  flags = live_request.get('authority') or {}
+                  used_ids = set(state.get('accepted_request_ids') or [])
+                  used_ids.update(state.get('consumed_request_ids') or [])
+                  used_ids.update(state.get('abandoned_request_ids') or [])
+                  if (not re.fullmatch(r'[a-z0-9][a-z0-9-]*', school)
+                          or not valid_sha(expected_main)
+                          or last.get('operation') != 'EXPANSION_PHASE0'
+                          or live_request.get('kind') != 'REMOTE_IMPLEMENTATION_REQUEST'
+                          or live_request.get('operation') != 'STAGE2_CENSUS'
+                          or live_request.get('school_key') != school
+                          or live_request.get('target_branch') != last.get('target_branch')
+                          or live_request.get('target_sha') != last.get('target_sha')
+                          or live_request.get('expected_protected_main_sha') != expected_main
+                          or phase0_ref.get('path') != last.get('successor_manifest_path')
+                          or phase0_ref.get('sha256') != last.get('successor_manifest_sha256')
+                          or live_request.get('integration_freeze_sha256')
+                              != last.get('integration_freeze_sha256')
+                          or live_request.get('semantic_snapshot_sha256')
+                              != last.get('semantic_snapshot_sha256')
+                          or flags.get('stage2_census') is not True
+                          or flags.get('owner_gate_1') is not False
+                          or flags.get('owner_gate_2') is not False
+                          or live_request.get('request_id') in used_ids):
+                      fail('initial Stage 2 census does not bind verified Phase 0')
+                  raw = (Path('control') / phase0_ref['path']).read_bytes()
+                  if hashlib.sha256(raw).hexdigest() != phase0_ref['sha256']:
+                      fail('initial census Phase 0 successor hash mismatch')
+                  successor = json.loads(raw)
+                  if (successor.get('kind') != 'REMOTE_IMPLEMENTATION_SUCCESSOR'
+                          or successor.get('operation') != 'EXPANSION_PHASE0'
+                          or successor.get('school_key') != school
+                          or successor.get('actual_published_target_sha')
+                              != last.get('target_sha')
+                          or successor.get('protected_main_sha') != expected_main):
+                      fail('initial census Phase 0 successor authority mismatch')
               elif (last.get('operation') == 'STAGE2_CENSUS'
                     and last.get('stage2_status') == 'BLOCKED'
                     and last.get('fresh_runner_verification') == 'PASS'
@@ -479,6 +529,103 @@ jobs:
             exit 1
           fi
           git -C control cat-file -e "$control_commit^{commit}"
+
+      - name: Replay initial Stage 2 census from verified Phase 0 with candidate tooling
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'LIVE_CENSUS_AFTER_PHASE0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          candidate = Path('candidate').resolve()
+          control = Path('control').resolve()
+          sys.path.insert(0, str(candidate / 'tools'))
+          from remote_implementation_stage2_census import (
+              add_existing_onboarding_worktree,
+              run_stage2_census_tool,
+              verify_phase0_authority,
+          )
+          from stage2_candidate_runtime_rehearsal import (
+              candidate_changed_paths,
+              validate_candidate_scope,
+          )
+
+          state = json.loads(
+              (control / '.remote-implementation/control-state.json').read_text()
+          )
+          request = json.loads(
+              (control / '.remote-implementation/request.json').read_text()
+          )
+          last = state['last_operation']
+          assert request['operation'] == 'STAGE2_CENSUS'
+          assert last['operation'] == 'EXPANSION_PHASE0'
+          candidate_sha = '${{ steps.authority.outputs.candidate_sha }}'
+          control_commit = '${{ steps.authority.outputs.control_commit }}'
+          changed_paths, scoped_main = candidate_changed_paths(
+              candidate, request['expected_protected_main_sha'], candidate_sha,
+          )
+          validate_candidate_scope(changed_paths)
+          authority = verify_phase0_authority(
+              request, control_commit, source_repo=control,
+          )
+          assert authority['target_authority_kind'] == 'PHASE0_SUCCESSOR'
+          assert authority['phase0_target_sha'] == request['target_sha']
+          assert authority['phase0_protected_main_sha'] == scoped_main
+
+          worktree = add_existing_onboarding_worktree(
+              request['target_branch'], request['target_sha'],
+              request['school_key'], source_repo=candidate,
+          )
+          scratch_branch = (
+              'remote-stage2-census/%s-%s'
+              % (request['school_key'], request['target_sha'][:12])
+          )
+          try:
+              result = run_stage2_census_tool(
+                  worktree, request['school_key'], authority['freeze_bytes'],
+                  Path('/tmp/stage2-candidate-runtime-rehearsal/candidate-census'),
+                  tool_repo=candidate,
+              )
+          finally:
+              subprocess.run(
+                  ['git', '-C', str(candidate), 'worktree', 'remove',
+                   '--force', str(worktree)],
+                  check=True,
+              )
+              subprocess.run(
+                  ['git', '-C', str(candidate), 'branch', '-D', scratch_branch],
+                  check=True,
+              )
+          status = result['stage2_status']
+          assert status in {'CAPABILITY_CENSUS_READY', 'BLOCKED'}, status
+          proof = result.get('tracked_mutation_proof') or {}
+          assert proof.get('tracked_stage2_mutation') == 'NONE', proof
+          summary = {
+              'kind': 'LIVE_CENSUS_AFTER_PHASE0_CANDIDATE_REHEARSAL',
+              'candidate_sha': candidate_sha,
+              'control_commit': control_commit,
+              'school_key': request['school_key'],
+              'target_sha': request['target_sha'],
+              'expected_protected_main_sha': scoped_main,
+              'changed_paths': changed_paths,
+              'stage2_status': status,
+              'tracked_mutation_proof': proof,
+          }
+          out = Path('/tmp/stage2-candidate-runtime-rehearsal')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'live-census-after-phase0-summary.json').write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + '\n'
+          )
+          print('EXACT_PHASE0_AUTHENTICATED_WITH_CANDIDATE=PASS')
+          print('CANDIDATE_STAGE2_CENSUS=' + status)
+          print('TRACKED_STAGE2_MUTATION=NONE')
+          PY
 
       - name: Replay exact blocked census with candidate tooling
         if: >-
@@ -1355,6 +1502,8 @@ jobs:
           print(summary['candidate_scope_main_sha'])
           PY
           )"
+          elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_PHASE0" ]]; then
+            scoped_main="$EXPECTED_MAIN_SHA"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_REFRESH" ]]; then
             scoped_main="$EXPECTED_MAIN_SHA"
           elif [[ "$AUTHORITY_MODE" == "LIVE_CENSUS_AFTER_OPPONENT_DISPLAY" ]]; then
