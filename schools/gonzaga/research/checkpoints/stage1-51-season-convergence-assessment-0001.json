@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_V25_51_SEASON_CONVERGENCE_ASSESSMENT",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "authenticated_protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "parent_research_head": "e0b96130988bc1a4bc5be92e728fdc1a9433a118",
+  "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "controlling_ledger": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0022.csv",
+    "git_blob_sha": "5caac8d7457f0356da8b75341bd2a6b93e32ab02",
+    "identified_games": 513
+  },
+  "controlling_season_census": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-season-census-0002.csv",
+    "git_blob_sha": "3d5937323ad921aac1aac3e3afe7ab24352916a5",
+    "expansion_required_seasons": 51
+  },
+  "official_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "identified_results": {
+    "wins": 199,
+    "losses": 314,
+    "games": 513,
+    "unknown_results": 0
+  },
+  "arithmetic_diagnostics_not_game_identities": {
+    "wins": 278,
+    "losses": 186,
+    "games": 464,
+    "sum_positive_season_deltas": 469,
+    "sum_negative_season_deltas": -5
+  },
+  "mechanical_season_classes": {
+    "positive_game_count_delta": 48,
+    "negative_game_count_delta": 2,
+    "zero_game_count_delta": 1,
+    "underidentified_without_official_result_overcount": 47,
+    "over_official_or_result_conflicting": 4,
+    "completely_empty_ledger_seasons": [
+      "1917-18",
+      "1918-19"
+    ],
+    "over_official_or_conflicting_seasons": [
+      "1915-16",
+      "1930-31",
+      "1936-37",
+      "1937-38"
+    ]
+  },
+  "parked_debt": {
+    "count": 4,
+    "seasons": [
+      "1915-16",
+      "1930-31",
+      "1936-37",
+      "1937-38"
+    ],
+    "scope": "FOUR_ACCT_CONTRADICTIONS_ONLY__NOT_AUTHORITY_FOR_47_OTHER_UNDERIDENTIFIED_SEASONS"
+  },
+  "held_candidates": {
+    "total": 5,
+    "wartime_1942_43": 4,
+    "plu_1956_57": 1,
+    "source_artifacts": [
+      "schools/gonzaga/research/checkpoints/stage1-season-first-1942-1943-held-candidates-0001.csv",
+      "schools/gonzaga/research/checkpoints/stage1-1955-1958-pacific-northwest-held-candidates-0001.csv"
+    ],
+    "disposition": "STILL_UNADMITTED__COMPETITIVE_IDENTITY_INCLUSION_OR_GAME_TYPE_AUDIT_REQUIRED"
+  },
+  "protected_main_owner_authority": {
+    "early_history_accounting_registry_sha": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+    "early_aggregate_coverage_registry_sha": "8164c5953fa3091cea2163d325602e5804e72cf2",
+    "gonzaga_case_present": false,
+    "interpretation": "No owner-authorized Gonzaga terminal closeout under the two checked protected-main registries; cannot self-authorize early-accounting exception."
+  },
+  "source_check": {
+    "institutional_census_basis": "Gonzaga 2026-27 record book all-time coaching records season W/L",
+    "research_coverage_from": "Exact archived Gonzaga branch census and 513-game ledger",
+    "new_external_discovery": "Search for season-by-season original played results yielded no new complete university-source game list in this bounded check",
+    "promising_new_distinct_corpus": "Gonzaga University Archives school publication 1887-1930 may offer systematically recoverable early-era game reporting if collection issues are actually readable; publication gaps are acknowledged and not proof of absent games.",
+    "potential_source_url": "https://digital.gonzaga.edu/digital/collection/p15486coll10",
+    "older_1944_1947_source_access_limits": "schools/gonzaga/research/checkpoints/stage1-1944-1947-source-access-limits-0001.json"
+  },
+  "decision": {
+    "stage1_closeout_ready": false,
+    "reason": "47 underidentified season populations plus five classified-but-unadmitted candidate games remain independently material; four parked contradictions do not cover the broad ledger/census shortfall. Mere arithmetic 464 cannot be assigned to canonical games or categorically declared exact missing-game count.",
+    "owner_question_now": "NONE__NO_CANDIDATE_ELIGIBLE_FOR_EXACT_OWNER_CLOSEOUT_GATE",
+    "stage2_authorized": false
+  },
+  "next_bounded_unit": "Investigate ONE genuinely readable systematic source corpus for 1907-30 high-gap seasons (Gonzaga original student publication or university archive), first prove readable issue availability then harvest multiple explicit game identities. If inaccessible, checkpoint exact source limits and consider population-level convergence only under an eligible repository-defined exception. Do not open Stage 2 or request blanket waiver."
+}
