@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_PUGET_SOUND_TAMANAWAS_YEARBOOK_COHERENT_SOURCE_FEASIBILITY_V1",
+  "school_key": "gonzaga",
+  "research_lane": "research/gonzaga-expansion-stage1-inception-20261124",
+  "parent_research_head": "b6f7f8d8983c63c0ef6a467cf32f35a273c97be7",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "scope": "One bounded source-family feasibility assessment for institutional Tamanawas yearbooks 1920-58, with 1934 volume content inspection for Gonzaga basketball; no recursive per-issue research or full-collection claim",
+  "source_paths": [
+    {
+      "source": "University of Puget Sound Collins Memorial Library official archive guide",
+      "url": "https://library.pugetsound.edu/c.php?g=304406&p=2031028",
+      "kind": "OFFICIAL_INSTITUTIONAL_COLLECTION_INVENTORY",
+      "finding": "Lists Tamanawas as digitized yearbook collection, broad historical run 1913-2016 and cross-linked Sound Ideas repository",
+      "disposition": "YEARBOOK_FAMILY_EXISTS__NOT_ITS_GAME_LIST"
+    },
+    {
+      "source": "University of Puget Sound Collins Library 2019 announcement",
+      "url": "https://blogs.pugetsound.edu/collinsunbound/hack-hack-chop-chop-yearbooks-online/",
+      "kind": "OFFICIAL_INSTITUTIONAL_ANNOUNCEMENT",
+      "finding": "Original 1913 Klahowya; Tamanawas resumed 1920 and produced annually; student life annuals digitized by university",
+      "disposition": "COLLECTION_SCOPE_AUTHENTICATED"
+    },
+    {
+      "source": "Original yearbook repository listing",
+      "url": "https://soundideas.pugetsound.edu/ups_yearbooks/",
+      "kind": "ORIGINAL_INSTITUTIONAL_YEARBOOK_INDEX",
+      "access": "HTTP_502_VIA_WEB_OPEN_AND_CLICK",
+      "finding": "Index endpoint returned 502 in bounded verification, so exact volumes other than separately indexed 1934 were not reliably browsable/extractable",
+      "disposition": "CANNOT_ASSERT_COMPLETE_1920_1958_EXTRACTION"
+    },
+    {
+      "source": "TAMANAWAS 1934 indexed text-bearing PDF",
+      "url": "https://files.core.ac.uk/download/228303112.pdf",
+      "kind": "YEARBOOK_1934_INSTITUTIONAL_TEXT_ARCHIVED_BY_CORE",
+      "access": "WEB_SEARCH_DOCUMENT_TEXT_INDEX_AND_LINE_FIND_READABLE__PDF_SCREENSHOT_403_FORBIDDEN",
+      "content_scope": "Original printed pages 58-59 intercollegiate varsity BASKETBALL season 1933-34; printed page 62 TENNIS",
+      "basketball_finding": "Basketball section printed pp.58-59 is a narrative of CPS team and selected results versus Bellingham, Whitman, Montana, Oregon-area teams and others. Does not identify a new Gonzaga basketball game, complete 1933-34 fixture list, or dated CPS-Gonzaga played-result score.",
+      "cross_sport_disambiguation": "Indexed 'Gonzaga' appears on printed p.62 in TENNIS passage 'wins over Ellensburg Normal at Ellensburg, Gonzaga at Spokane ...', not the preceding men's BASKETBALL section.",
+      "disposition": "NO_GAME_IDENTITY_ACCEPTED__TENNIS_FALSE_POSITIVE"
+    },
+    {
+      "source": "JSTOR Shared Collections Tamanawas 1986 metadata",
+      "url": "https://www.jstor.org/stable/community.34492544",
+      "kind": "YEARBOOK_METADATA_ONLY_OUTSIDE_RESEARCH_INTERVAL",
+      "finding": "Confirms a second host catalog for a later yearbook and original Sound Ideas identifier; no readable pre-1958 Gonzaga basketball scores yielded in this bounded access test",
+      "disposition": "NO_ADMISSION"
+    }
+  ],
+  "validation_attempts": {
+    "web_pdf_screenshot": "Invoked on original CORE PDF reference; failed HTTP403 Forbidden",
+    "original_pdf_file_download": "Container-based local DNS/network unavailable in this session, so no independent image render; index text still readable",
+    "yearbook_collection_host": "Sound Ideas collection landing returned HTTP502",
+    "source_conclusions_not_claimed": [
+      "All Tamanawas yearbooks examined",
+      "Tamanawas contains no unrecorded Gonzaga games",
+      "1934 issue's tennis wins are basketball results",
+      "1934 basketball narrative is a complete competitive game list",
+      "A score or opponent result not directly supported by indexed source"
+    ]
+  },
+  "prior_games_identified": 550,
+  "added_games": 0,
+  "now_games_identified": 550,
+  "unchanged_ledger": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0028.csv",
+    "git_blob_sha": "eb8f1dd933e9060653be8f7365c9d0ece8572b9c",
+    "all_bytes_unchanged": true
+  },
+  "official_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "identified_results": {
+    "wins": 210,
+    "losses": 340,
+    "games": 550
+  },
+  "arithmetic_difference_only": 427,
+  "previously_held_candidates_unchanged": 6,
+  "accounting_debt_seasons_unchanged": [
+    "1915-16",
+    "1930-31",
+    "1936-37",
+    "1937-38"
+  ],
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "next_bounded_unit": "Move to a genuinely different already-readable whole-season primary results source covering Gonzaga's underidentified seasons (e.g. Western Washington or 1930s–1940s institutional schedule/score annuals). Tamanawas merits revisiting ONLY when exact pre-1958 yearbook content/archives are reliably accessible and a sample proves explicit basketball game lists, rather than one tennis false positive. No Stage2."
+}
