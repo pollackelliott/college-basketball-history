@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "startup_id": "hawai-i-expansion-startup-0001",
-  "phase0_request_id": "hawai-i-expansion-phase0-0001",
+  "startup_id": "hawai-i-expansion-startup-0002",
+  "phase0_request_id": "hawai-i-expansion-phase0-0002",
   "school_key": "hawai-i",
-  "expected_protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "expected_protected_main_sha": "9bbe5d4ead518b37e5bd80810d20f1fe21d8dddd",
   "target_branch": "data/hawai-i-onboarding",
   "target_sha": "c79bc5be0b96718d47c5f4c61c2497ee3d8d3ca7",
   "research_freeze_sha256": "b41c303904d0baf21c7935d8111852f12501ceb5efc416e8fc60dcd56b42d54d",
@@ -13,13 +13,13 @@
     "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
     "transport": {
       "kind": "git_base64_parts",
-      "commit_sha": "4f3908824979d0eb87b61fb55d9149606cfe32da",
+      "commit_sha": "692e03467f027826400b25739cc7ebb218c665fd",
       "path_prefix": ".remote-implementation/phase0-inputs/hawai-i/hawai-i-expansion-startup-0001/freeze-part-",
       "part_count": 13
     }
   },
   "creation_provenance": {
-    "origin": "Owner-designated final Hawai‘i EXPANSION_RESEARCH_FROZEN Stage 7 artifact, exact ZIP SHA-256 and member hashes independently verified at school Implementation intake on 2026-11-24.",
-    "authorization": "Owner selected Hawai‘i as next serialized ALL_HISTORY_EXPANSION Implementation following Florida State Production completion and explicitly authorized initial repository-owned startup and guarded EXPANSION_PHASE0 through independent verification. No Stage 2, Owner Gate 1, Owner Gate 2, release, merge, or Production authority."
+    "origin": "Same exact owner-designated Hawai‘i Stage 7 EXPANSION_RESEARCH_FROZEN ZIP (SHA-256 b41c3039...), inherited untouched 13-part Git transport; initial startup failed only on Stage 1 reconciliation. Repair PR #711 merged to protected main 9bbe5d4ead518b37e5bd80810d20f1fe21d8dddd.",
+    "authorization": "Owner's prior initial Hawai‘i Implementation authorization persists through safe deterministic tooling repair and fresh startup after merge; latest owner Continue on 2026-11-24 authorizes second same-phase startup and guarded EXPANSION_PHASE0 through independent fresh verification. No Stage 2, owner gate, release, merge, or Production authority."
   }
 }
