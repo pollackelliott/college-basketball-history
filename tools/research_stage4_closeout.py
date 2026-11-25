@@ -984,7 +984,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
     expected = {
         "source_program_key": row.get("source_program_key", "").strip(),
         "season_start": season_start(_first_parent_value(row, "season_label", "season")),
-        "game_date": row.get("game_date", "").strip(),
+        "game_date": row.get("game_date", "").strip() or accepted_source_date_iso(row),
         "normalized_opponent_key": _first_parent_value(
             row,
             "opponent_program_key",
@@ -994,14 +994,14 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "canonical_opponent_key",
         ),
         "team_score": _first_parent_value(
-            row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"
+            row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
         ),
-        "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points", "score_against", "source_points_against"),
+        "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"),
         "played_result": _first_parent_value(
             row, "played_result", "on_court_result", "source_result", "result"
         ),
         "overtime_periods": _project_overtime(
-            _first_parent_value(row, "overtime_periods", "overtime", "source_overtime_token")
+            _first_parent_value(row, "overtime_periods", "overtime", "source_overtime_token", "overtime_text")
         ),
         "curated_site_type": normalize_site(site),
         "source_venue_name": _first_parent_value(
@@ -1016,7 +1016,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "curated_venue_country", "country", "venue_country"
         ),
         "curated_game_type": effective_parent_game_type(row),
-        "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line"),
+        "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_result_text"),
     }
     expected["administrative_status"], expected["administrative_note"] = (
         project_administrative_status(row)
@@ -1056,6 +1056,31 @@ def _score_result_consistent(team: int, opponent: int, result: str) -> bool:
     return False
 
 
+def accepted_source_date_iso(row: dict[str, str]) -> str:
+    """Project only an exact m/d/yy source date within its recorded season.
+
+    The explicit source year must match exactly one season year. This refuses
+    geographic, source-order, century, or seasonal-date inference.
+    """
+    raw = row.get("source_date", "").strip()
+    if not raw:
+        return ""
+    m = re.fullmatch(r"(\\d{1,2})/(\\d{1,2})/(\\d{2})", raw)
+    if not m:
+        return ""
+    try:
+        mm, dd, yy = (int(x) for x in m.groups())
+        season = project_season_label(_first_parent_value(row, "season_label", "season"))
+        start, end = (int(x) for x in season.split("-"))
+        eligible_years = [year for year in (start, end) if year % 100 == yy]
+        if len(eligible_years) != 1:
+            return ""
+        from datetime import date
+        return date(eligible_years[0], mm, dd).isoformat()
+    except (ValueError, TypeError):
+        return ""
+
+
 def _legacy_score_orientation_equivalent(
     parent_row: dict[str, str],
     package_row: dict[str, str],
@@ -1071,10 +1096,10 @@ def _legacy_score_orientation_equivalent(
     """
 
     parent_team = _first_parent_value(
-        parent_row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for"
+        parent_row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
     )
     parent_opponent = _first_parent_value(
-        parent_row, "opponent_score", "opponent_points", "score_against", "source_points_against"
+        parent_row, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"
     )
     parent_result = _first_parent_value(
         parent_row, "played_result", "on_court_result", "source_result", "result"
