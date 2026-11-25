@@ -807,11 +807,15 @@ def _verify_safe_global_venue_reuse(
         reuse_count = int(counts.get("REUSE_REGISTERED_GLOBAL_VENUE", -1))
         new_count = int(counts.get("NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED", -1))
         blocker_count = int(counts.get("GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER", -1))
+        # Integration Freeze serializes a sparse Counter: an omitted class
+        # means zero, not missing authority.  Nonzero classes remain
+        # independently checked against global totals, supplemental support,
+        # the exact census rows, and Phase 0 preview evidence below.
         classified_reuse_count = int(
-            classification_counts.get("SAFE_REPRESENTATION_REUSE", -1)
+            classification_counts.get("SAFE_REPRESENTATION_REUSE", 0)
         )
         classified_new_count = int(
-            classification_counts.get("NEW_GLOBAL_IDENTITY", -1)
+            classification_counts.get("NEW_GLOBAL_IDENTITY", 0)
         )
         rebased_count = int(phase0_preview.get("rebased_venue_mapping_count", -1))
         supplemental_rebased = int(
