@@ -1,0 +1,244 @@
+name: Exact Hawai‘i 1965 Honolulu canonical locality maintenance
+
+on:
+  push:
+    branches:
+      - maintenance/hawai-i-1965-canonical-honolulu-locality
+    paths:
+      - .github/workflows/hawaii-1965-honolulu-canonical-locality.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hawai-i-1965-honolulu-canonical-locality
+  cancel-in-progress: false
+
+jobs:
+  exact-authorized-locality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out exact maintenance branch
+        uses: actions/checkout@v4
+        with:
+          ref: maintenance/hawai-i-1965-canonical-honolulu-locality
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate Control Center scope, canonical predecessor and both institutional sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain)"
+          git fetch --no-tags origin \
+            +refs/heads/main:refs/remotes/origin/main \
+            +refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation \
+            +refs/heads/data/hawai-i-onboarding:refs/remotes/origin/data/hawai-i-onboarding
+          python - <<'PY'
+          import csv
+          import json
+          import subprocess
+          from pathlib import Path
+
+          MAIN = "4d91da1800d9d7b535ae2e191f309bfc391ea2ee"
+          CONTROL = "88e0552eaa5247dc6d814fe1e177c024a9b79dc4"
+          HAWAII = "19541a39fef8e4a8f144dba3d35a8f83e37598b8"
+          CANONICAL_BLOB = "6f548cbdab4de8218c8b0bb25ad9f6b009db1b60"
+
+          def git(*args):
+              return subprocess.check_output(["git", *args], text=True).strip()
+
+          for branch, sha in [
+              ("origin/main", MAIN),
+              ("origin/control/remote-implementation", CONTROL),
+              ("origin/data/hawai-i-onboarding", HAWAII),
+          ]:
+              assert git("rev-parse", branch) == sha, f"Authority drift: {branch}"
+          assert git("merge-base", "HEAD", "origin/main") == MAIN
+          assert git("rev-parse", "HEAD^") == MAIN, "Unexpected maintenance base"
+          assert git("rev-parse", "origin/main:data/canonical/games.csv") == CANONICAL_BLOB
+
+          state = json.loads(git(
+              "show", "origin/control/remote-implementation:.remote-implementation/control-state.json"
+          ))
+          assert state["lifecycle_state"] == "IDLE"
+          assert state["transaction_state"] == "COMPLETE"
+          assert state["recovery_required"] is False
+          assert not state.get("active_request_id")
+          assert not state.get("active_lock_owner")
+          assert not state.get("active_lock_commit")
+
+          def source(path, id):
+              with Path(path).open(newline="", encoding="utf-8-sig") as fh:
+                  rows = [r for r in csv.DictReader(fh) if r["source_game_id"] == id]
+              assert len(rows) == 1, f"Missing/duplicate source: {id}"
+              return rows[0]
+
+          t = source("schools/tennessee/source-games.csv", "TENRAW-01070")
+          for key, expected in {
+              "source_program_key": "tennessee",
+              "game_date": "1965-12-29",
+              "normalized_opponent_key": "hawai-i",
+              "team_score": "88",
+              "opponent_score": "41",
+              "city": "Honolulu",
+              "curated_site_type": "NEUTRAL",
+          }.items():
+              assert t[key] == expected, f"Tennessee evidence drift: {key}"
+          assert "Honolulu" in t["raw_text"]
+
+          h = source("schools/hawai-i/source-games.csv", "hawai-i-exp-1965-66-008")
+          for key, expected in {
+              "source_program_key": "hawai-i",
+              "game_date": "1965-12-29",
+              "normalized_opponent_key": "tennessee",
+              "team_score": "41",
+              "opponent_score": "88",
+              "city": "Honolulu",
+              "state": "HI",
+              "curated_site_type": "SOURCE_PROGRAM_HOME",
+          }.items():
+              assert h[key] == expected, f"Hawai‘i accepted evidence drift: {key}"
+
+          canonical = Path("data/canonical/games.csv")
+          with canonical.open(newline="", encoding="utf-8") as fh:
+              rows = [r for r in csv.DictReader(fh)
+                      if r["canonical_game_id"] == "CBBG-0021104"]
+          assert len(rows) == 1
+          row = rows[0]
+          expected = {
+              "canonical_game_id": "CBBG-0021104",
+              "season_label": "1965-1966",
+              "game_date": "1965-12-29",
+              "date_precision": "EXACT",
+              "team_a_key": "hawai-i",
+              "team_b_key": "tennessee",
+              "team_a_score": "41",
+              "team_b_score": "88",
+              "result_winner_team_key": "tennessee",
+              "overtime_periods": "0",
+              "site_type": "NEUTRAL",
+              "designated_home_team_key": "",
+              "venue_key": "",
+              "venue_id": "",
+              "site_city": "Honolulu",
+              "site_state": "",
+              "game_type": "REGULAR_SEASON",
+              "postseason_round": "",
+              "canonical_status": "PROVISIONAL",
+          }
+          for key, value in expected.items():
+              assert row[key] == value, f"Canonical field changed: {key}={row[key]!r}"
+
+          raw = canonical.read_bytes()
+          before = (b"CBBG-0021104,1965-1966,1965-12-29,EXACT,hawai-i,tennessee,"
+                    b"41,88,tennessee,0,NEUTRAL,,,,Honolulu,,REGULAR_SEASON,,,,PROVISIONAL,\r\n")
+          after = before.replace(
+              b",Honolulu,,REGULAR_SEASON",
+              b",Honolulu,HI,REGULAR_SEASON",
+          )
+          assert raw.count(before) == 1, "Canonical byte-level predecessor mismatch"
+          assert len(after) == len(before) + 2
+          updated = raw.replace(before, after, 1)
+          assert updated.replace(after, before, 1) == raw
+          canonical.write_bytes(updated)
+
+          with canonical.open(newline="", encoding="utf-8") as fh:
+              new_rows = [r for r in csv.DictReader(fh)
+                          if r["canonical_game_id"] == "CBBG-0021104"]
+          assert len(new_rows) == 1
+          assert new_rows[0] == {**row, "site_state": "HI"}, "Unexpected field mutation"
+          print("PASS: exact canonical record, Tennessee and Hawai‘i institutional sources")
+          print("PASS: single-byte-sequence patch changed only site_state blank -> HI")
+          print("PASS: canonical NEUTRAL, unset venue identity and Hawai‘i HOME source preserved")
+          PY
+
+      - name: Regenerate deterministic public team data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/build_site_data.py . --apply > "$RUNNER_TEMP/site-build.log" 2>&1 || {
+            tail -70 "$RUNNER_TEMP/site-build.log"; exit 1;
+          }
+          tail -8 "$RUNNER_TEMP/site-build.log"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          doc = json.loads(Path("site/data/teams/tennessee.json").read_text())
+          rows = [r for r in doc["games"] if r["canonical_game_id"] == "CBBG-0021104"]
+          assert len(rows) == 1
+          row = rows[0]
+          assert row["site_city"] == "Honolulu" and row["site_state"] == "HI"
+          assert row["site"] == "NEUTRAL"
+          assert row["venue_id"] is None and row["venue_key"] is None
+          assert row["team_score"] == 88 and row["opponent_score"] == 41
+          print("PASS: Tennessee published public game has exact new city/state, no venue")
+          PY
+
+      - name: Permanent repository validation, site freshness and regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_data.py > "$RUNNER_TEMP/validate.log" 2>&1 || {
+            tail -100 "$RUNNER_TEMP/validate.log"; exit 1;
+          }
+          tail -10 "$RUNNER_TEMP/validate.log"
+          python tools/check_site_data_freshness.py > "$RUNNER_TEMP/site-freshness.log" 2>&1 || {
+            tail -100 "$RUNNER_TEMP/site-freshness.log"; exit 1;
+          }
+          tail -10 "$RUNNER_TEMP/site-freshness.log"
+          python -m unittest discover -s tests -v > "$RUNNER_TEMP/tests.log" 2>&1 || {
+            tail -100 "$RUNNER_TEMP/tests.log"; exit 1;
+          }
+          tail -14 "$RUNNER_TEMP/tests.log"
+
+      - name: Reauthenticate global lock and exact changed paths, then publish branch commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check
+          python - <<'PY'
+          import subprocess
+          expected = {
+              "data/canonical/games.csv",
+              "site/data/teams/tennessee.json",
+          }
+          changed = set(subprocess.check_output(
+              ["git", "diff", "--name-only"], text=True
+          ).splitlines())
+          assert changed == expected, f"Unauthorized changed paths: {sorted(changed ^ expected)}"
+          print("PASS: exact canonical + one affected published team document")
+          PY
+          git fetch --no-tags origin \
+            +refs/heads/main:refs/remotes/origin/main \
+            +refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation \
+            +refs/heads/data/hawai-i-onboarding:refs/remotes/origin/data/hawai-i-onboarding
+          python - <<'PY'
+          import json
+          import subprocess
+
+          def git(*args):
+              return subprocess.check_output(["git", *args], text=True).strip()
+
+          assert git("rev-parse", "origin/main") == "4d91da1800d9d7b535ae2e191f309bfc391ea2ee"
+          assert git("rev-parse", "origin/control/remote-implementation") == "88e0552eaa5247dc6d814fe1e177c024a9b79dc4"
+          assert git("rev-parse", "origin/data/hawai-i-onboarding") == "19541a39fef8e4a8f144dba3d35a8f83e37598b8"
+          state = json.loads(git("show", "origin/control/remote-implementation:.remote-implementation/control-state.json"))
+          assert state["lifecycle_state"] == "IDLE"
+          assert state["transaction_state"] == "COMPLETE"
+          assert state["recovery_required"] is False
+          assert not state.get("active_request_id") and not state.get("active_lock_owner")
+          print("PASS: protected main, onboarding head and idle mutation lock unchanged")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/canonical/games.csv site/data/teams/tennessee.json
+          git commit -m "[canonical-site-maintenance] Set Hawai‘i–Tennessee 1965 Honolulu site_state HI"
+          git push origin HEAD:refs/heads/maintenance/hawai-i-1965-canonical-honolulu-locality
+          echo "EXACT_HAWAII_1965_LOCALITY_SUCCESSOR=$(git rev-parse HEAD)"
