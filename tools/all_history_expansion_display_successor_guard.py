@@ -232,8 +232,16 @@ def _reconstruct_frozen_venues(
     parent_fields, parent_rows = _rows(parent_venues)
     if parent_fields != fields:
         return reject("phase0_parent_venue_schema_mismatch")
-    if rows[:len(parent_rows)] != parent_rows:
-        return reject("phase0_inherited_venue_rows_changed")
+    # Expansion Freeze may legitimately revise published inherited venue
+    # chronology or assignment summaries before Phase 0. Those revisions are
+    # historical source-package authority, not a post-Freeze mutation. Require
+    # stable inherited venue identity/order here; the reconstructed entire-file
+    # SHA-256 check below independently authenticates *every* inherited field
+    # against the immutable Freeze, and still rejects any unsealed change.
+    if [row.get("venue_key") for row in rows[:len(parent_rows)]] != [
+        row.get("venue_key") for row in parent_rows
+    ]:
+        return reject("phase0_inherited_venue_identity_changed")
     registry = _registry_ids_by_key(root, phase0_commit)
     if registry is None:
         return reject("phase0_global_venue_registry_unavailable")
