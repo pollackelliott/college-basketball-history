@@ -1,0 +1,877 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_ALL_PUBLISHED_ORIGINAL_SOURCE_GONZAGA_NAME_1907_1958_CENSUS_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "authenticated_protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_research_head": "d74e476670eb196b53f24b604cbd31bdfda63af2",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "scope": {
+    "source_population": "115 school directories at protected-main SHA; excluding Gonzaga target leaves 114 original reciprocal source-games.csv files, all successfully read",
+    "season_start_year_min": 1907,
+    "season_start_year_max": 1957,
+    "source_game_paths": "schools/<other-school>/source-games.csv",
+    "source_version": "exact blob in source_files inventory",
+    "match_fields": [
+      "source_opponent_label",
+      "normalized_opponent_name",
+      "normalized_opponent_key"
+    ],
+    "match_regex": "/gonza/i",
+    "csv_rule": "RFC-style quoting; preserve source raw text, score, season and record orientation"
+  },
+  "reconciliation": {
+    "source_schools_scanned": 114,
+    "source_games_scanned": 302578,
+    "source_schools_with_eligible_literal_hits": 13,
+    "source_schools_without_eligible_literal_hits": 101,
+    "gonzaga_named_source_rows": 158,
+    "previously_identified_research_games": 158,
+    "unique_canonical_game_ids": 158,
+    "unmatched_source_rows": 0,
+    "score_collisions_resolved_by_exact_source_date": 2,
+    "unresolved_identity_matches": 0,
+    "new_competitive_games": 0,
+    "excluded_high_school_or_other_gonzaga_named_matches": 0,
+    "held_new_candidates": 0,
+    "preexisting_six_candidate_holds_unchanged": 6,
+    "preexisting_four_parked_accounting_contradictions_unchanged": 4,
+    "identified_games_before": 557,
+    "identified_games_after": 557,
+    "official_aggregate_game_count": 977,
+    "aggregate_minus_identified_arithmetic_only": 420
+  },
+  "audit_crosswalk": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-all-published-source-games-1907-1958-crosswalk-0001.csv",
+    "git_blob_sha": "fd5d0e60ddf75aec11df9d43f0822004e1021378",
+    "rows": 158,
+    "columns_include": [
+      "source_game_id",
+      "source_school_key",
+      "source_games_blob_sha",
+      "source_season_label",
+      "source_game_date",
+      "literal_opponent_label",
+      "normalized_opponent_name",
+      "normalized_opponent_key",
+      "source_team_score",
+      "source_opponent_score",
+      "source_played_result",
+      "source_game_type",
+      "source_site_token",
+      "source_raw_text",
+      "canonical_game_id",
+      "gonzaga_research_game_id",
+      "identity_basis"
+    ],
+    "join_method": "school/opponent key + season + reciprocal scoreboard and result, with exact date disambiguation for two equal-score 1929-30 Oregon wins"
+  },
+  "source_files": [
+    {
+      "school": "alabama",
+      "source_path": "schools/alabama/source-games.csv",
+      "source_blob_sha": "edc19902c0ac60fb1f2bc6e94576262591021a39",
+      "game_rows": 2968,
+      "matched_rows": 0
+    },
+    {
+      "school": "arizona",
+      "source_path": "schools/arizona/source-games.csv",
+      "source_blob_sha": "8d9847cf49d06030692be05da50327db373348b7",
+      "game_rows": 3019,
+      "matched_rows": 0
+    },
+    {
+      "school": "arizona-state",
+      "source_path": "schools/arizona-state/source-games.csv",
+      "source_blob_sha": "3dea4183eb3e4a867df0712e7503c9d50fe4c6ad",
+      "game_rows": 2690,
+      "matched_rows": 0
+    },
+    {
+      "school": "arkansas",
+      "source_path": "schools/arkansas/source-games.csv",
+      "source_blob_sha": "3e7491007719571b0a463cd3d8e37e1c11e5c6b0",
+      "game_rows": 2886,
+      "matched_rows": 0
+    },
+    {
+      "school": "auburn",
+      "source_path": "schools/auburn/source-games.csv",
+      "source_blob_sha": "0bc8cc7f17110c4ac7c4db0da32bb93e3a829835",
+      "game_rows": 2806,
+      "matched_rows": 0
+    },
+    {
+      "school": "baylor",
+      "source_path": "schools/baylor/source-games.csv",
+      "source_blob_sha": "e06475d7a9e21e8303f9712b2dffa946e64845ed",
+      "game_rows": 2960,
+      "matched_rows": 0
+    },
+    {
+      "school": "boise-state",
+      "source_path": "schools/boise-state/source-games.csv",
+      "source_blob_sha": "72a6e95cb87101a24c609e427a2c543a365fa860",
+      "game_rows": 1670,
+      "matched_rows": 0
+    },
+    {
+      "school": "boston-college",
+      "source_path": "schools/boston-college/source-games.csv",
+      "source_blob_sha": "90195feaae03af5d79f4860fbfc5ac8f57c6fbb2",
+      "game_rows": 2422,
+      "matched_rows": 0
+    },
+    {
+      "school": "butler",
+      "source_path": "schools/butler/source-games.csv",
+      "source_blob_sha": "ae51fe3c5c16697bf1d26893b3a3a093082c87a8",
+      "game_rows": 2966,
+      "matched_rows": 0
+    },
+    {
+      "school": "byu",
+      "source_path": "schools/byu/source-games.csv",
+      "source_blob_sha": "feb777980beb611a3a06ff25b9580271bb00c916",
+      "game_rows": 3157,
+      "matched_rows": 1
+    },
+    {
+      "school": "california",
+      "source_path": "schools/california/source-games.csv",
+      "source_blob_sha": "23c9f1d13b6c3f4211aa3bf687ca51856f75eb5f",
+      "game_rows": 3012,
+      "matched_rows": 0
+    },
+    {
+      "school": "central-connecticut",
+      "source_path": "schools/central-connecticut/source-games.csv",
+      "source_blob_sha": "f5b81f6da35c96e1e4abe572728326bb6ecca889",
+      "game_rows": 1170,
+      "matched_rows": 0
+    },
+    {
+      "school": "chicago-state",
+      "source_path": "schools/chicago-state/source-games.csv",
+      "source_blob_sha": "6b94fe396a3566be97e30d93ffc1672e57ec52eb",
+      "game_rows": 1220,
+      "matched_rows": 0
+    },
+    {
+      "school": "cincinnati",
+      "source_path": "schools/cincinnati/source-games.csv",
+      "source_blob_sha": "bdd29b77340fed68ad20d7ef5aab36a329563be8",
+      "game_rows": 3058,
+      "matched_rows": 0
+    },
+    {
+      "school": "clemson",
+      "source_path": "schools/clemson/source-games.csv",
+      "source_blob_sha": "af66d96ddaadabc481d457da29ff6d67cd084d98",
+      "game_rows": 2867,
+      "matched_rows": 0
+    },
+    {
+      "school": "colorado",
+      "source_path": "schools/colorado/source-games.csv",
+      "source_blob_sha": "3beb2a8bc1a5436454bd238d1c1d145c6905784a",
+      "game_rows": 2768,
+      "matched_rows": 0
+    },
+    {
+      "school": "colorado-state",
+      "source_path": "schools/colorado-state/source-games.csv",
+      "source_blob_sha": "58692503ea49508890f27c306145c17ce3a08507",
+      "game_rows": 2765,
+      "matched_rows": 2
+    },
+    {
+      "school": "creighton",
+      "source_path": "schools/creighton/source-games.csv",
+      "source_blob_sha": "cb231877508f2ddb6b4e61b69439e9c79bc06c0c",
+      "game_rows": 2862,
+      "matched_rows": 2
+    },
+    {
+      "school": "davidson",
+      "source_path": "schools/davidson/source-games.csv",
+      "source_blob_sha": "14636d793ae3f8a3b558fbe13ba99c6e6a0b3518",
+      "game_rows": 2899,
+      "matched_rows": 0
+    },
+    {
+      "school": "dayton",
+      "source_path": "schools/dayton/source-games.csv",
+      "source_blob_sha": "12d15c7ab615a323c48dd93dfe98744a6225a9f1",
+      "game_rows": 2990,
+      "matched_rows": 0
+    },
+    {
+      "school": "depaul",
+      "source_path": "schools/depaul/source-games.csv",
+      "source_blob_sha": "61546964c2b8d7d5c27c5ef42f65ed5e7e5191aa",
+      "game_rows": 2706,
+      "matched_rows": 1
+    },
+    {
+      "school": "duke",
+      "source_path": "schools/duke/source-games.csv",
+      "source_blob_sha": "10ac636a5a2eff59e881d522badbd49fe2f2324d",
+      "game_rows": 3306,
+      "matched_rows": 0
+    },
+    {
+      "school": "duquesne",
+      "source_path": "schools/duquesne/source-games.csv",
+      "source_blob_sha": "ada1d6077d235e15473f052e6ec16c834b374f18",
+      "game_rows": 2741,
+      "matched_rows": 0
+    },
+    {
+      "school": "fairleigh-dickinson",
+      "source_path": "schools/fairleigh-dickinson/source-games.csv",
+      "source_blob_sha": "fd1a37b6b4983e139080ff99ac65e03d2277115e",
+      "game_rows": 1678,
+      "matched_rows": 0
+    },
+    {
+      "school": "florida",
+      "source_path": "schools/florida/source-games.csv",
+      "source_blob_sha": "0adb3e899368e6b5518efe8e83177fc1563b7424",
+      "game_rows": 2787,
+      "matched_rows": 0
+    },
+    {
+      "school": "florida-state",
+      "source_path": "schools/florida-state/source-games.csv",
+      "source_blob_sha": "a2fdaf5f3b86f3442411239b61aa5b8639e28592",
+      "game_rows": 2291,
+      "matched_rows": 0
+    },
+    {
+      "school": "fordham",
+      "source_path": "schools/fordham/source-games.csv",
+      "source_blob_sha": "0a545cd82b3410592b24f76bf442c94ec6868da1",
+      "game_rows": 2917,
+      "matched_rows": 0
+    },
+    {
+      "school": "fresno-state",
+      "source_path": "schools/fresno-state/source-games.csv",
+      "source_blob_sha": "bd53bdae5238aa8172cb44759570b44463398fa6",
+      "game_rows": 1708,
+      "matched_rows": 0
+    },
+    {
+      "school": "george-mason",
+      "source_path": "schools/george-mason/source-games.csv",
+      "source_blob_sha": "0978c30dd7600a1d2666c1101e385424ed05690d",
+      "game_rows": 1769,
+      "matched_rows": 0
+    },
+    {
+      "school": "george-washington",
+      "source_path": "schools/george-washington/source-games.csv",
+      "source_blob_sha": "c433187425e39106375d9c0904cf1fec3d80dfad",
+      "game_rows": 2741,
+      "matched_rows": 0
+    },
+    {
+      "school": "georgetown",
+      "source_path": "schools/georgetown/source-games.csv",
+      "source_blob_sha": "cfec6f6e55f327ccbb908ffbb0eb76969214f604",
+      "game_rows": 2943,
+      "matched_rows": 0
+    },
+    {
+      "school": "georgia",
+      "source_path": "schools/georgia/source-games.csv",
+      "source_blob_sha": "7f4bdbde5489d06233376cc1d25e13f3cbe9a789",
+      "game_rows": 2958,
+      "matched_rows": 0
+    },
+    {
+      "school": "georgia-tech",
+      "source_path": "schools/georgia-tech/source-games.csv",
+      "source_blob_sha": "8ac79bc51e3585fb22ad031f58dc5ec61e30df7b",
+      "game_rows": 2839,
+      "matched_rows": 0
+    },
+    {
+      "school": "hawai-i",
+      "source_path": "schools/hawai-i/source-games.csv",
+      "source_blob_sha": "a88917acbedd32e7d6752ae7ab1108465465ca88",
+      "game_rows": 1649,
+      "matched_rows": 0
+    },
+    {
+      "school": "houston",
+      "source_path": "schools/houston/source-games.csv",
+      "source_blob_sha": "191542d4a43cc5d575ae849407f3bb9cd9459ea4",
+      "game_rows": 2394,
+      "matched_rows": 0
+    },
+    {
+      "school": "illinois",
+      "source_path": "schools/illinois/source-games.csv",
+      "source_blob_sha": "219105332ada96b316d969b184f4c91953da11cb",
+      "game_rows": 3040,
+      "matched_rows": 0
+    },
+    {
+      "school": "indiana",
+      "source_path": "schools/indiana/source-games.csv",
+      "source_blob_sha": "c768ed38fbb578b484280e57a157c1525b2b139f",
+      "game_rows": 3112,
+      "matched_rows": 0
+    },
+    {
+      "school": "iowa",
+      "source_path": "schools/iowa/source-games.csv",
+      "source_blob_sha": "0085e8a0a0142b598015440952c3422f4e10c1dd",
+      "game_rows": 3045,
+      "matched_rows": 0
+    },
+    {
+      "school": "iowa-state",
+      "source_path": "schools/iowa-state/source-games.csv",
+      "source_blob_sha": "035d0d39b3fe0df31a1e1eed81386e16f3587bb1",
+      "game_rows": 2932,
+      "matched_rows": 0
+    },
+    {
+      "school": "kansas",
+      "source_path": "schools/kansas/source-games.csv",
+      "source_blob_sha": "0ea0407411ad5d0b62d1a2f92fdcc4e45ab3157c",
+      "game_rows": 3373,
+      "matched_rows": 0
+    },
+    {
+      "school": "kansas-state",
+      "source_path": "schools/kansas-state/source-games.csv",
+      "source_blob_sha": "5ed3739443449338220334ebb5d75a6e19b821c2",
+      "game_rows": 3039,
+      "matched_rows": 0
+    },
+    {
+      "school": "kentucky",
+      "source_path": "schools/kentucky/source-games.csv",
+      "source_blob_sha": "e9c7404d17cae6069642b617c3a1c02570f6e686",
+      "game_rows": 3232,
+      "matched_rows": 0
+    },
+    {
+      "school": "la-salle",
+      "source_path": "schools/la-salle/source-games.csv",
+      "source_blob_sha": "5597f142ee91c1b3238be1523f2cf59e959978eb",
+      "game_rows": 2587,
+      "matched_rows": 0
+    },
+    {
+      "school": "le-moyne",
+      "source_path": "schools/le-moyne/source-games.csv",
+      "source_blob_sha": "1b8256ce65707d3fd78be370bc1038205035584c",
+      "game_rows": 96,
+      "matched_rows": 0
+    },
+    {
+      "school": "long-island-university",
+      "source_path": "schools/long-island-university/source-games.csv",
+      "source_blob_sha": "6b753a0a9d0cb8d6f3bf12f8ab145bbb0e93855d",
+      "game_rows": 2193,
+      "matched_rows": 0
+    },
+    {
+      "school": "louisville",
+      "source_path": "schools/louisville/source-games.csv",
+      "source_blob_sha": "98cb155e75293126752ccff0c4055cc143611faf",
+      "game_rows": 2991,
+      "matched_rows": 0
+    },
+    {
+      "school": "loyola-chicago",
+      "source_path": "schools/loyola-chicago/source-games.csv",
+      "source_blob_sha": "77cc17a5b1871b093ae4b00d38ffc0ff0d79081e",
+      "game_rows": 2727,
+      "matched_rows": 0
+    },
+    {
+      "school": "lsu",
+      "source_path": "schools/lsu/source-games.csv",
+      "source_blob_sha": "9a0c782d896e3fc8d5bf649457df4033c6dbb75e",
+      "game_rows": 2973,
+      "matched_rows": 0
+    },
+    {
+      "school": "marquette",
+      "source_path": "schools/marquette/source-games.csv",
+      "source_blob_sha": "4f527da415e5557d6d53e7a65f265e06f3bd1c78",
+      "game_rows": 2868,
+      "matched_rows": 0
+    },
+    {
+      "school": "maryland",
+      "source_path": "schools/maryland/source-games.csv",
+      "source_blob_sha": "415ac089f39211f70de6c5248733a6e321db2d14",
+      "game_rows": 2875,
+      "matched_rows": 0
+    },
+    {
+      "school": "mercyhurst",
+      "source_path": "schools/mercyhurst/source-games.csv",
+      "source_blob_sha": "0527c500a482f2523f143255b70d511747bb4d4e",
+      "game_rows": 65,
+      "matched_rows": 0
+    },
+    {
+      "school": "miami",
+      "source_path": "schools/miami/source-games.csv",
+      "source_blob_sha": "718b6d9586a5ecde4ec682a7db2e3f5191071095",
+      "game_rows": 2018,
+      "matched_rows": 0
+    },
+    {
+      "school": "michigan",
+      "source_path": "schools/michigan/source-games.csv",
+      "source_blob_sha": "f0b97e367941fbf31ce3a1887623b070de9cc8da",
+      "game_rows": 2896,
+      "matched_rows": 0
+    },
+    {
+      "school": "michigan-state",
+      "source_path": "schools/michigan-state/source-games.csv",
+      "source_blob_sha": "da4227a747c2e4c76dd794a8178ead7569ae67b7",
+      "game_rows": 3059,
+      "matched_rows": 0
+    },
+    {
+      "school": "minnesota",
+      "source_path": "schools/minnesota/source-games.csv",
+      "source_blob_sha": "548ec6ad59b35b32fced661da5684b97ba65a5c8",
+      "game_rows": 3083,
+      "matched_rows": 0
+    },
+    {
+      "school": "mississippi-state",
+      "source_path": "schools/mississippi-state/source-games.csv",
+      "source_blob_sha": "5b85322b84128847c97e2afc8cf36b7cf4838f3c",
+      "game_rows": 2856,
+      "matched_rows": 0
+    },
+    {
+      "school": "missouri",
+      "source_path": "schools/missouri/source-games.csv",
+      "source_blob_sha": "9e20eabb64fd9c7ef123dcc64019a10eba68f3bb",
+      "game_rows": 3028,
+      "matched_rows": 1
+    },
+    {
+      "school": "nc-state",
+      "source_path": "schools/nc-state/source-games.csv",
+      "source_blob_sha": "ecdd47b9cdd1057cfc8d014c4c615b750001e16a",
+      "game_rows": 3049,
+      "matched_rows": 0
+    },
+    {
+      "school": "nebraska",
+      "source_path": "schools/nebraska/source-games.csv",
+      "source_blob_sha": "59dc6cffdd25397fd626628f25899221ccac4725",
+      "game_rows": 3104,
+      "matched_rows": 0
+    },
+    {
+      "school": "new-haven",
+      "source_path": "schools/new-haven/source-games.csv",
+      "source_blob_sha": "137553697c85fab5632d09a73f2b07c89e63969a",
+      "game_rows": 31,
+      "matched_rows": 0
+    },
+    {
+      "school": "north-carolina",
+      "source_path": "schools/north-carolina/source-games.csv",
+      "source_blob_sha": "011a3a1b58c26fe2759ff4a3979a372a743d7f4a",
+      "game_rows": 3302,
+      "matched_rows": 0
+    },
+    {
+      "school": "northwestern",
+      "source_path": "schools/northwestern/source-games.csv",
+      "source_blob_sha": "c7384dfe8542015aa2787f1490c8e46e57ca71e4",
+      "game_rows": 2829,
+      "matched_rows": 0
+    },
+    {
+      "school": "notre-dame",
+      "source_path": "schools/notre-dame/source-games.csv",
+      "source_blob_sha": "33b7e49de3a87e4f8ad9cc9799625b0df1230531",
+      "game_rows": 3137,
+      "matched_rows": 0
+    },
+    {
+      "school": "ohio-state",
+      "source_path": "schools/ohio-state/source-games.csv",
+      "source_blob_sha": "4f45ede76312406af889c1b884306bfbd8f9cba7",
+      "game_rows": 3125,
+      "matched_rows": 0
+    },
+    {
+      "school": "oklahoma",
+      "source_path": "schools/oklahoma/source-games.csv",
+      "source_blob_sha": "2babc94cfb4f6958de0f01709de71d1e1630f3e1",
+      "game_rows": 2996,
+      "matched_rows": 0
+    },
+    {
+      "school": "oklahoma-state",
+      "source_path": "schools/oklahoma-state/source-games.csv",
+      "source_blob_sha": "da7699bfac8a7edb4424238c83da4c67d0f35b14",
+      "game_rows": 3067,
+      "matched_rows": 0
+    },
+    {
+      "school": "ole-miss",
+      "source_path": "schools/ole-miss/source-games.csv",
+      "source_blob_sha": "37e5884745de11cc4301b7ca9a08bb8486ea83a0",
+      "game_rows": 2856,
+      "matched_rows": 0
+    },
+    {
+      "school": "oregon",
+      "source_path": "schools/oregon/source-games.csv",
+      "source_blob_sha": "d09f6a890746fd80bbacd679721f61c634d0d766",
+      "game_rows": 3264,
+      "matched_rows": 18
+    },
+    {
+      "school": "oregon-state",
+      "source_path": "schools/oregon-state/source-games.csv",
+      "source_blob_sha": "3dfe26978fc3d0f93490bb4acb77414810bd3032",
+      "game_rows": 3325,
+      "matched_rows": 16
+    },
+    {
+      "school": "penn-state",
+      "source_path": "schools/penn-state/source-games.csv",
+      "source_blob_sha": "752de51d31713533239a15a2cbfb199c1c6999f4",
+      "game_rows": 2884,
+      "matched_rows": 0
+    },
+    {
+      "school": "pittsburgh",
+      "source_path": "schools/pittsburgh/source-games.csv",
+      "source_blob_sha": "605285438548eeef3c3234d11eb2cfd498f2a7d2",
+      "game_rows": 3012,
+      "matched_rows": 0
+    },
+    {
+      "school": "providence",
+      "source_path": "schools/providence/source-games.csv",
+      "source_blob_sha": "df59f2a23d7a26a552b9a42419047cc602e23751",
+      "game_rows": 2670,
+      "matched_rows": 0
+    },
+    {
+      "school": "purdue",
+      "source_path": "schools/purdue/source-games.csv",
+      "source_blob_sha": "eed645dff4886ee40504d3ff7b27cc989226b06f",
+      "game_rows": 3086,
+      "matched_rows": 0
+    },
+    {
+      "school": "rhode-island",
+      "source_path": "schools/rhode-island/source-games.csv",
+      "source_blob_sha": "5b4011180624c6ce80612dde8a9359265de95dc7",
+      "game_rows": 2866,
+      "matched_rows": 0
+    },
+    {
+      "school": "richmond",
+      "source_path": "schools/richmond/source-games.csv",
+      "source_blob_sha": "8eea3bf59196451136e29f39a8df6e66fddfc801",
+      "game_rows": 2825,
+      "matched_rows": 0
+    },
+    {
+      "school": "rutgers",
+      "source_path": "schools/rutgers/source-games.csv",
+      "source_blob_sha": "d7aa69fca887a1bf174c3cf879c11908f99b315f",
+      "game_rows": 2696,
+      "matched_rows": 0
+    },
+    {
+      "school": "saint-joseph-s",
+      "source_path": "schools/saint-joseph-s/source-games.csv",
+      "source_blob_sha": "806bf9feabbf3b850451ea328a08fed94accbe05",
+      "game_rows": 2967,
+      "matched_rows": 0
+    },
+    {
+      "school": "saint-louis",
+      "source_path": "schools/saint-louis/source-games.csv",
+      "source_blob_sha": "75d0e55a576be30152660b944b928a515dd2846d",
+      "game_rows": 2892,
+      "matched_rows": 0
+    },
+    {
+      "school": "san-diego-state",
+      "source_path": "schools/san-diego-state/source-games.csv",
+      "source_blob_sha": "36f3357bf62d1a4765fc417407492cb4cbb3d6dc",
+      "game_rows": 1709,
+      "matched_rows": 0
+    },
+    {
+      "school": "seton-hall",
+      "source_path": "schools/seton-hall/source-games.csv",
+      "source_blob_sha": "30298fe6b1d826777de724d493ad1bcaa4cd7a69",
+      "game_rows": 2825,
+      "matched_rows": 1
+    },
+    {
+      "school": "smu",
+      "source_path": "schools/smu/source-games.csv",
+      "source_blob_sha": "a621923aac300118bc2908b18d8beadfa26cc02e",
+      "game_rows": 2798,
+      "matched_rows": 0
+    },
+    {
+      "school": "south-carolina",
+      "source_path": "schools/south-carolina/source-games.csv",
+      "source_blob_sha": "36593170715d69feeb9e528cf46a691d951f0ee7",
+      "game_rows": 2895,
+      "matched_rows": 0
+    },
+    {
+      "school": "st-bonaventure",
+      "source_path": "schools/st-bonaventure/source-games.csv",
+      "source_blob_sha": "69569df063c0a7ecb837c944ea444af940f4afc7",
+      "game_rows": 2614,
+      "matched_rows": 1
+    },
+    {
+      "school": "st-john-s",
+      "source_path": "schools/st-john-s/source-games.csv",
+      "source_blob_sha": "d31abfa70c00cbc4285d70738b341363698861a0",
+      "game_rows": 3158,
+      "matched_rows": 0
+    },
+    {
+      "school": "stanford",
+      "source_path": "schools/stanford/source-games.csv",
+      "source_blob_sha": "ca05dc844f5cbcbd729de77cbfb90e2f8a36aadc",
+      "game_rows": 2917,
+      "matched_rows": 0
+    },
+    {
+      "school": "stonehill",
+      "source_path": "schools/stonehill/source-games.csv",
+      "source_blob_sha": "8a41485620836358aeedd679d88b0aa01626af3d",
+      "game_rows": 127,
+      "matched_rows": 0
+    },
+    {
+      "school": "syracuse",
+      "source_path": "schools/syracuse/source-games.csv",
+      "source_blob_sha": "7ff68a9313e5922e09b4dbe70dd6b475739b7464",
+      "game_rows": 3135,
+      "matched_rows": 0
+    },
+    {
+      "school": "tcu",
+      "source_path": "schools/tcu/source-games.csv",
+      "source_blob_sha": "f82b011ba43551a747b5b2b8bcdc06b7e3ab87bd",
+      "game_rows": 2862,
+      "matched_rows": 0
+    },
+    {
+      "school": "tennessee",
+      "source_path": "schools/tennessee/source-games.csv",
+      "source_blob_sha": "f50f89a7ee0febabe3b0d7a427e56fc176495e8f",
+      "game_rows": 2952,
+      "matched_rows": 0
+    },
+    {
+      "school": "texas",
+      "source_path": "schools/texas/source-games.csv",
+      "source_blob_sha": "6216b763277e171889672e53b4978901f2e14313",
+      "game_rows": 3112,
+      "matched_rows": 0
+    },
+    {
+      "school": "texas-a-m",
+      "source_path": "schools/texas-a-m/source-games.csv",
+      "source_blob_sha": "98c463e67fe2575b68db76b56a9d1a403221f1c9",
+      "game_rows": 2926,
+      "matched_rows": 0
+    },
+    {
+      "school": "texas-state",
+      "source_path": "schools/texas-state/source-games.csv",
+      "source_blob_sha": "0ba24af9d4c6b5d670fc84f1b4b3e492feb1aa91",
+      "game_rows": 1249,
+      "matched_rows": 0
+    },
+    {
+      "school": "texas-tech",
+      "source_path": "schools/texas-tech/source-games.csv",
+      "source_blob_sha": "9d90df7445ca327c737bddc2484dd9a30c95b235",
+      "game_rows": 2773,
+      "matched_rows": 0
+    },
+    {
+      "school": "uc-davis",
+      "source_path": "schools/uc-davis/source-games.csv",
+      "source_blob_sha": "c98163cd6e99db4640167e9895c27e647b316ab3",
+      "game_rows": 668,
+      "matched_rows": 0
+    },
+    {
+      "school": "ucf",
+      "source_path": "schools/ucf/source-games.csv",
+      "source_blob_sha": "d1a1529e5b7dcee7d0b94cea0781d524a66662d1",
+      "game_rows": 1646,
+      "matched_rows": 0
+    },
+    {
+      "school": "ucla",
+      "source_path": "schools/ucla/source-games.csv",
+      "source_blob_sha": "80570282d39f1ecc246a7bb94685ba8aa3c09d3b",
+      "game_rows": 2986,
+      "matched_rows": 0
+    },
+    {
+      "school": "uconn",
+      "source_path": "schools/uconn/source-games.csv",
+      "source_blob_sha": "2128e2a1ba23bd5d7ebf0b86de0039bb44cd0a31",
+      "game_rows": 2909,
+      "matched_rows": 0
+    },
+    {
+      "school": "unlv",
+      "source_path": "schools/unlv/source-games.csv",
+      "source_blob_sha": "45841286ad5f9644b7ef8d349e7f360b56e8f840",
+      "game_rows": 2078,
+      "matched_rows": 0
+    },
+    {
+      "school": "usc",
+      "source_path": "schools/usc/source-games.csv",
+      "source_blob_sha": "9e4e6be08ee9e7c78503c42f8e1ea4767bacb319",
+      "game_rows": 3063,
+      "matched_rows": 0
+    },
+    {
+      "school": "utah",
+      "source_path": "schools/utah/source-games.csv",
+      "source_blob_sha": "49705d1eb85171019b0d66cb9095bd523e3e0f5a",
+      "game_rows": 3047,
+      "matched_rows": 1
+    },
+    {
+      "school": "utah-state",
+      "source_path": "schools/utah-state/source-games.csv",
+      "source_blob_sha": "fac694d3d74c844d936d12ed2492268d1ffee0ae",
+      "game_rows": 2964,
+      "matched_rows": 4
+    },
+    {
+      "school": "vanderbilt",
+      "source_path": "schools/vanderbilt/source-games.csv",
+      "source_blob_sha": "e7b474b9aa5300833706207332e9c74cfa838658",
+      "game_rows": 3006,
+      "matched_rows": 0
+    },
+    {
+      "school": "vcu",
+      "source_path": "schools/vcu/source-games.csv",
+      "source_blob_sha": "bd69ab8d84a7d5256a095f5a37c4e1ee430a4745",
+      "game_rows": 1759,
+      "matched_rows": 0
+    },
+    {
+      "school": "villanova",
+      "source_path": "schools/villanova/source-games.csv",
+      "source_blob_sha": "a4955a8dff073a4b67e678bacb34cd8960cb4a8d",
+      "game_rows": 2944,
+      "matched_rows": 0
+    },
+    {
+      "school": "virginia",
+      "source_path": "schools/virginia/source-games.csv",
+      "source_blob_sha": "efe91bf4f8cc7ad462b273e167a52c5ce0e34af2",
+      "game_rows": 3026,
+      "matched_rows": 0
+    },
+    {
+      "school": "virginia-tech",
+      "source_path": "schools/virginia-tech/source-games.csv",
+      "source_blob_sha": "edcd773fdac6cd6cd5d319b302d6bd3f751fc439",
+      "game_rows": 2906,
+      "matched_rows": 0
+    },
+    {
+      "school": "wagner",
+      "source_path": "schools/wagner/source-games.csv",
+      "source_blob_sha": "a3f292a3533d422f95e7382fe859a6123a5b7513",
+      "game_rows": 1435,
+      "matched_rows": 0
+    },
+    {
+      "school": "wake-forest",
+      "source_path": "schools/wake-forest/source-games.csv",
+      "source_blob_sha": "2f7f66120d97bf3d408c68672683280b7baff7b6",
+      "game_rows": 2991,
+      "matched_rows": 0
+    },
+    {
+      "school": "washington",
+      "source_path": "schools/washington/source-games.csv",
+      "source_blob_sha": "7c0de6fedd81a8eb45ac8576f86828653f1c9b8f",
+      "game_rows": 3217,
+      "matched_rows": 26
+    },
+    {
+      "school": "washington-state",
+      "source_path": "schools/washington-state/source-games.csv",
+      "source_blob_sha": "a7ce1f6bd9706fc1155baec4da7851a1a3d3c922",
+      "game_rows": 3351,
+      "matched_rows": 84
+    },
+    {
+      "school": "west-virginia",
+      "source_path": "schools/west-virginia/source-games.csv",
+      "source_blob_sha": "5ad331d217023a50d395a6fa54c64902bc9eafc5",
+      "game_rows": 3097,
+      "matched_rows": 0
+    },
+    {
+      "school": "wisconsin",
+      "source_path": "schools/wisconsin/source-games.csv",
+      "source_blob_sha": "d2b54f833523c0ea0f487c7fef9c539c28a93d79",
+      "game_rows": 3067,
+      "matched_rows": 0
+    },
+    {
+      "school": "wyoming",
+      "source_path": "schools/wyoming/source-games.csv",
+      "source_blob_sha": "db8c1ef49288534ce949718ca77d63a18ed56ae5",
+      "game_rows": 2951,
+      "matched_rows": 0
+    },
+    {
+      "school": "xavier",
+      "source_path": "schools/xavier/source-games.csv",
+      "source_blob_sha": "ec0264f352389a1f073b1fcf7e76604b3bb9ff09",
+      "game_rows": 2762,
+      "matched_rows": 0
+    }
+  ],
+  "limits": [
+    "This is an exhaustive named-Gonzaga-stem census only for 114 protected-main original reciprocal source-games.csv files as authenticated; it is NOT a fresh canonical census and does NOT cover original opponent records outside these files.",
+    "Nickname-only Zags, abbreviated GU, unlabeled opponents, and other variants without 'gonza' in these three fields are not certified exhausted; do not infer them as Gonzaga University.",
+    "Published school histories may omit early seasons or previously unresearched games, and unpublished opponent school sources remain outside these 114 files.",
+    "The arithmetic official aggregate-minus-ledger delta is not 420 established identifiable missing games; no invented rows or changes to accepted game identities.",
+    "No Stage 2, Implementation, protected-main, canonical, shared references, or school published package changes authorized."
+  ]
+}
