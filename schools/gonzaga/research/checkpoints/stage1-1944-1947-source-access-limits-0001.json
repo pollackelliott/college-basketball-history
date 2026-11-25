@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1944_1947_BOUNDED_NEW_SOURCE_ACCESS_PROBE_0001",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_research_head": "23149459d3b65986ff9302b65f31315658936fe7",
+  "authenticated_protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "stage": "STAGE_1",
+  "source_mode": "BOUNDED_NEW_READABLE_1944_47_ARCHIVE_AND_INSTITUTIONAL_SOURCE_FAMILY_ACCESS_PROBE",
+  "previous_identified_game_count": 513,
+  "new_accepted_game_count": 0,
+  "unchanged_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0022.csv",
+  "unchanged_ledger_blob_sha": "5caac8d7457f0356da8b75341bd2a6b93e32ab02",
+  "sources": [
+    {
+      "source": "University of Idaho men's basketball 2025-26 record book, ALL-TIME RESULTS",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/govandals.com/documents/2025/5/21/MBB_Record_Book_25-26.pdf",
+      "disposition": "READABLE_TEXT_EXTRACTION_PARTIAL_SECTION__NO_NEW_ADMISSIBLE_1944_1947_GAMES",
+      "evidence": [
+        "1944-45 institutional Idaho at-home 47-39 and 49-43 Gonzaga results already exist in ledger 1944-12-15 and 1944-12-16.",
+        "1945-46 Idaho 67-38 Gonzaga score already exists in prior identified 1945-46 ledger.",
+        "1946-47 season heading 4-24 is present, but accessible extracted all-time results skip detailed 1946-47 table; not counted as game-by-game negative evidence.",
+        "Adjacent 1947-48 source lists Idaho L 33-34 vs Gonzaga 1947-12-02 and L 55-61 vs Gonzaga 1948-01-06, both already in accepted Gonzaga ledger.",
+        "Original PDF screenshot retrieval was attempted and failed; no new row is admitted based on partial extraction alone."
+      ],
+      "limitations": "This is not a complete census of Idaho or Gonzaga opponents for 1944-47; inability to read a detailed 1946-47 table is unverified source coverage."
+    },
+    {
+      "source": "Eastern Washington University Digital Commons Student Newspapers",
+      "url": "https://dc.ewu.edu/student_newspapers/",
+      "disposition": "INDEX_FOUND__COLLECTION_INCOMPLETE_OR_BROWSE_COVERAGE_NOT_VERIFIABLE_FOR_TARGET_SEASONS",
+      "evidence": [
+        "University explains its historical weekly newspaper collection is an ongoing digitization project and not all issues are online.",
+        "Indexed pages sampled do not establish a complete 1944-47 run of readable basketball issues."
+      ],
+      "limitations": "No issue-level Gonzaga game evidence harvested from this route; archive access/availability is not negative evidence of missing historical games."
+    },
+    {
+      "source": "Original Oregon statewide digitized newspaper score archives: 1945-46/1946-47 game-result search",
+      "url": "https://oregonnews.uoregon.edu/",
+      "disposition": "BOUNDED_INDEXED_PASS_LOW_YIELD_AND_NO_NEW_ROW_ADMITTED",
+      "evidence": [
+        "Searches for Gonzaga against Whitworth, Pacific Lutheran, Seattle, and other Northwest opponents returned repeated older/adjacent-year or already-accounted score reports.",
+        "A 1947-48 game-schedule report establishes opponent categories but not a played-game result in the 1946-47 target season."
+      ],
+      "limitations": "The indexed search result population is not an exhaustive contemporary newspaper calendar; no negative game conclusion is supported."
+    },
+    {
+      "source": "Gonzaga University Digital Collections Bulletin/Spires",
+      "url": "https://digital.gonzaga.edu/",
+      "disposition": "PREVIOUSLY_UNREADABLE_JS_ROUTE_NOT_RETRIED",
+      "evidence": [
+        "Institutional Digital Collections acknowledges that historic Bulletin issues are digitized with numerous early missing issues."
+      ],
+      "limitations": "Unretrieved sources remain potential future evidence; not marked researched-negative."
+    }
+  ],
+  "historical_facts_preserved": {
+    "official_aggregate": {
+      "wins": 477,
+      "losses": 500,
+      "games": 977
+    },
+    "identified_games": 513,
+    "known_results": 513,
+    "aggregate_difference_diagnostic": 464,
+    "parked_accounting_debt_count": 4,
+    "held_wartime_1942_43_count": 4,
+    "held_plu_1957_count": 1
+  },
+  "stop_reason": "New readable 1944-47 systematic source opportunity did not yield source-backed games independently absent from the 513-game ledger. Two meaningfully different source access/discovery families sampled; further index retries would violate bounded/stopping policy.",
+  "next_safely_bounded_unit": "Select an authenticated primary 1945-47 institutional year-by-year played-game list or usable original Spokane-area newspaper issue corpus that is materially different from these low-yield inaccessible routes; otherwise assess Stage 1 convergence and blocked closeout debt under exact repository contract. Do not restart accepted families, fabricate games, or enter Stage 2."
+}
