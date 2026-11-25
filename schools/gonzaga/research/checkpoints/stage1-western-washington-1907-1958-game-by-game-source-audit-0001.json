@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_WWU_COMPLETE_PRE1958_OFFICIAL_GAME_BY_GAME_GONZAGA_CENSUS_V1",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "parent_research_head": "663f9772db40711e306b510c16d4e29bffba67dc",
+  "scope": "One bounded official WWU all-season scorebook Gonzaga-only reciprocal harvest from 1902-03–1957-58 and explicit university historical identity cross-check",
+  "authoritative_scorebook": {
+    "institution": "Western Washington University",
+    "document": "2024-25 Men's Basketball Record Book",
+    "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/wwuvikings.com/documents/2025/2/25/MBB_2024-25_Record_Book.pdf",
+    "readable_web_pdf": true,
+    "source_pdf_pages": "22-25 (0-index), printed pp23-26, visually screened via four original PDF screenshots",
+    "all_pre1958_Gonzaga_rows": [
+      {
+        "season": "1907-08",
+        "literal": "12 Gonzaga 17",
+        "wwu_result": "LOSS",
+        "gonzaga_result": "WIN",
+        "wwu_score": 12,
+        "gonzaga_score": 17,
+        "pdf_index": 22,
+        "disposition": "NEW_ACCEPTED",
+        "research_game_id": "GONZAGA-EXP-WWU-190708-001"
+      },
+      {
+        "season": "1957-58",
+        "literal": "53 Gonzaga 94",
+        "wwu_result": "LOSS",
+        "gonzaga_result": "WIN",
+        "wwu_score": 53,
+        "gonzaga_score": 94,
+        "pdf_index": 25,
+        "disposition": "EXACT_PREEXISTING_GONZAGA-EXP-NW5558-015",
+        "research_game_id": "GONZAGA-EXP-NW5558-015"
+      }
+    ],
+    "historical_concern": "A separate third game in 1960-61, WWU 53–Gonzaga 94, is outside Gonzaga's 1907-08–1957-58 expansion and belongs to inherited baseline; do not append."
+  },
+  "identity_crosscheck": {
+    "institution": "Western Washington University institutional timeline",
+    "url": "https://www.wwu.edu/history-of-wwu",
+    "literal": "1907: The first intercollegiate athletics competitions begin with men's basketball games with normal schools in Cheney and Ellensburg, and with Gonzaga College in Spokane.",
+    "implication": "Confirms Gonzaga College as collegiate intercollegiate opponent of 1907 Bellingham Normal, not Gonzaga High.",
+    "date_inference": "None (1907 timeline year is not an exact playing date).",
+    "site_inference": "None (Spokane is identifying college location, not an explicit site/home designation)."
+  },
+  "older_official_corroboration": {
+    "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/wwuvikings.com/documents/2018/5/23/MBB_Game-by-Game.pdf",
+    "title": "WWU original official game-by-game PDF",
+    "indexed_quote": "1907-08 (8-4) / 12 Gonzaga 17",
+    "purpose": "Duplicate institutional edition, not a second game identity"
+  },
+  "excluded_sources_and_scope": [
+    {
+      "class": "EXISTING_GAME_DO_NOT_DOUBLE_COUNT",
+      "season": "1957-58",
+      "id": "GONZAGA-EXP-NW5558-015",
+      "result": "Gonzaga W94–53"
+    },
+    {
+      "class": "INHERITED_PUBLISHED_BASELINE_NOT_EXPANSION",
+      "season": "1960-61",
+      "result": "Gonzaga W94–53; WWU official 1960-61 original line 53 Gonzaga 94"
+    },
+    {
+      "class": "SEASON_HEADING_DOES_NOT_PROVE_ALL_SCHEDULE_ROWS_IN_EARLY_VOLUMES",
+      "season": "1907-08",
+      "note": "WWU printed season heading is 8–4 (12 games) but only 6 rows printed under heading; source itself is not complete for WWU 1907-08. No anonymous games created."
+    }
+  ],
+  "old_ledger_sha": "eb8f1dd933e9060653be8f7365c9d0ece8572b9c",
+  "old_accepted_games": 550,
+  "added_game_rows": 1,
+  "now_accepted_games": 551,
+  "now_gonzaga_identified_wins": 211,
+  "now_gonzaga_identified_losses": 340,
+  "official_gonzaga_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "arithmetic_difference_only": 426,
+  "prior_six_held_candidates_unchanged": 6,
+  "prior_parked_accounting_debts_unchanged": [
+    "1915-16",
+    "1930-31",
+    "1936-37",
+    "1937-38"
+  ],
+  "next_bounded_unit": "Seek another materially distinct whole-history game-by-game opponent record for underidentified 1908-57 seasons, preferably an institution already confirmed to have an archival scorebook rather than repeated manual one-game newspaper searches. Maintain scope exact; do not assume 977-551 named missing games; Stage 2 unauthorized."
+}
