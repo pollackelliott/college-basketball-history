@@ -42,6 +42,7 @@ jobs:
             +refs/heads/data/hawai-i-onboarding:refs/remotes/origin/data/hawai-i-onboarding
           python - <<'PY'
           import csv
+          import io
           import json
           import subprocess
           from pathlib import Path
@@ -61,7 +62,8 @@ jobs:
           ]:
               assert git("rev-parse", branch) == sha, f"Authority drift: {branch}"
           assert git("merge-base", "HEAD", "origin/main") == MAIN
-          assert git("rev-parse", "HEAD^") == MAIN, "Unexpected maintenance base"
+          assert git("rev-parse", "HEAD^") == "d3ab1b77bc8e8761c033a2b9746e0824135c90ee", "Unexpected workflow-repair predecessor"
+          assert git("rev-parse", "HEAD^^") == MAIN, "Unexpected maintenance base"
           assert git("rev-parse", "origin/main:data/canonical/games.csv") == CANONICAL_BLOB
 
           state = json.loads(git(
@@ -74,13 +76,14 @@ jobs:
           assert not state.get("active_lock_owner")
           assert not state.get("active_lock_commit")
 
-          def source(path, id):
-              with Path(path).open(newline="", encoding="utf-8-sig") as fh:
+          def source(path, id, ref):
+              source_bytes = subprocess.check_output(["git", "show", f"{ref}:{path}"])
+              with io.StringIO(source_bytes.decode("utf-8-sig"), newline="") as fh:
                   rows = [r for r in csv.DictReader(fh) if r["source_game_id"] == id]
               assert len(rows) == 1, f"Missing/duplicate source: {id}"
               return rows[0]
 
-          t = source("schools/tennessee/source-games.csv", "TENRAW-01070")
+          t = source("schools/tennessee/source-games.csv", "TENRAW-01070", "origin/main")
           for key, expected in {
               "source_program_key": "tennessee",
               "game_date": "1965-12-29",
@@ -93,7 +96,7 @@ jobs:
               assert t[key] == expected, f"Tennessee evidence drift: {key}"
           assert "Honolulu" in t["raw_text"]
 
-          h = source("schools/hawai-i/source-games.csv", "hawai-i-exp-1965-66-008")
+          h = source("schools/hawai-i/source-games.csv", "hawai-i-exp-1965-66-008", "origin/data/hawai-i-onboarding")
           for key, expected in {
               "source_program_key": "hawai-i",
               "game_date": "1965-12-29",
