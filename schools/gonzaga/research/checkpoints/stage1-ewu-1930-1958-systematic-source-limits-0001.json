@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_EWU_1930_1958_READABLE_GAME_BY_GAME_CORPUS_FEASIBILITY_V1",
+  "school_key": "gonzaga",
+  "parent_research_head": "85f5a45539825ae2ef4c6210dfb0d760e76301fb",
+  "authenticated_protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "scope": "One bounded accessible EWU game-by-game 1930s-1950s official record-book/archive feasibility pass; no re-harvest of blocked 1920s PDFs",
+  "previous_ew_archived_games": 15,
+  "parent_accepted_games": 549,
+  "new_identified_games": 0,
+  "candidate_admissions": [],
+  "ledger_preservation": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0027.csv",
+    "blob_sha": "46e0e781c2a67366d2ec59e2155e145a4d6462a0",
+    "byte_for_byte_unchanged": true,
+    "accepted_rows": 549
+  },
+  "source_corpus_checks": [
+    {
+      "source": "EWU 2025-26 official men's basketball media guide",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/ewu.sidearmsports.com/documents/2025/11/24/2025-26_MBB_Season_Media_Guide.indd2.pdf",
+      "readability": "FULL_TEXT_AND_WEB_SCREENSHOT_READABLE",
+      "locations": "Printed p.13 Year-by-Year Team Results; printed p.17 Record vs. Opponents; original PDF screenshot page index 16",
+      "finding": "Prints historical team-level season W/L 1903-04 through 1982-83, and Gonzaga opponent aggregate Eastern W52 L82 across the whole recorded series, including Eastern NCAA Division-I-era W5 L35. Does NOT print an itemized 1930s–1950s Gonzaga played-game list or year-specific Gonzaga series game counts.",
+      "inference_bounds": "The arithmetic pre-EWU-Division-I component (Eastern 47 W / 47 L; 94 games) spans all pre-1983-84 years, including 1958-59–1982-83, which are ALREADY IN GONZAGA'S INHERITED BASELINE. NOT a 1907-08–1957-58 supplemental delta or claim of 94 newly identifiable expansion games."
+    },
+    {
+      "source": "EWU official 2019-20 Fact Book",
+      "url": "https://embed-rech-01.dialog.cm/ewueagles/docs/20mbfactbookallpages",
+      "readability": "INDEXED_READABLE_TEXT",
+      "locations": "Record Versus Opponents (including Pre-Division I historical opponents), Year-by-Year",
+      "finding": "Provides opponents' series totals and annually aggregated Eastern W/L, not dates, Gonzaga scores, or an EWU-Gonzaga game-by-game log for 1930s–1950s; no safe individual additions."
+    },
+    {
+      "source": "EWU official Men's Basketball Other Links & Archives",
+      "url": "https://goeags.com/sports/2016/1/7/MBB_Other%20Links-Archive",
+      "readability": "READABLE_OFFICIAL_NAVIGATION",
+      "finding": "Linked game-by-game final-statistics/summaries are for late-1990s onward (earliest listed 1997–98). Historical 2016–21 fact books contain records summaries, not old season-by-season game lists. 1930s–1950s results are not exposed by this archive index."
+    },
+    {
+      "source": "EWU Student Newspapers Digital Commons",
+      "url": "https://dc.ewu.edu/student_newspapers/",
+      "readability": "CATALOG_DESCRIPTIONS_READABLE__ORIGINAL_EARLY_ISSUE_PDFS_BLOCKED",
+      "finding": "Earlier checkpoint admitted three score-explicit 1925-26/1927-28 catalog-headline results and proved original early PDFs inaccessible; no new systematically readable 1930s-1950s corpus emerged in this bounded cross-source probe.",
+      "prior_exact_audit_blob": "9ca7cc57cb6ddb902c8607b3e22e23be2ff3e70c"
+    },
+    {
+      "source": "EWU Hall of Fame — Dick Eicher",
+      "url": "https://goeags.com/honors/eastern-washington-university-athletics-hall-of-fame/dick-eicher/21/kiosk",
+      "readability": "OFFICIAL_FULL_TEXT_READ",
+      "finding": "Biographical retrospective: Eicher played at Eastern 1947–51 and his championship teams beat Gonzaga among other opponents. No date, exact season, score or distinguishable game identity. Gonzaga ledger already has 1950–51 Gonzaga L42–69 to Eastern; cannot prove the narrative references another game.",
+      "classification": "SOURCE_FAMILY_CONTEXT_ONLY__NO_NEW_CANONICAL_ID"
+    }
+  ],
+  "series_math": {
+    "ewu_all_time_w": 52,
+    "ewu_all_time_l": 82,
+    "ewu_division_1_w": 5,
+    "ewu_division_1_l": 35,
+    "pre_ewu_di_w": 47,
+    "pre_ewu_di_l": 47,
+    "pre_ewu_di_games": 94,
+    "ewu_di_start_season": "1983-84",
+    "gonzaga_expansion_last_season": "1957-58",
+    "baseline_overlap": "1958-59–1982-83 included in pre-EWU-D1 count; cannot allocate 94 to expansion",
+    "no_game_row_deduction": true
+  },
+  "decision": "NO_READABLE_EXACT_MATCHED_MULTI_SEASON_EWU_GAME_LIST_FOUND_WITHIN_CHECKED_CORPORA__NO_NEW_CANONICAL_ADMISSIONS",
+  "confidence": "SOURCE_ACCESS_LIMIT_CLASSIFICATION_NOT_PROOF_THAT_NO_ADDITIONAL_HISTORICAL_EWU_GAMES_EXIST",
+  "previously_unadmitted_ew_1920_21_index_lead": "UNCHANGED",
+  "previously_held_candidate_count": 6,
+  "parked_source_accounting_seasons": [
+    "1915-16",
+    "1930-31",
+    "1936-37",
+    "1937-38"
+  ],
+  "next_bounded_unit": "Stop recursive EWU catalog/PDF searches unless new original full text or multi-season game list access is materially available. Evaluate ONE distinct high-yield institutionally backed reciprocal game-by-game source (e.g. Puget Sound or Seattle's early-year schedules) against unchanged 549-game ledger. Never derive game identities from old series W/L totals. Stage 2 unauthorized."
+}
