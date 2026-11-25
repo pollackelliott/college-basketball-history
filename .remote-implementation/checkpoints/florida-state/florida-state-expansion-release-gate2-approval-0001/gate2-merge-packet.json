@@ -1,0 +1,19 @@
+{
+  "approved_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "authority_statement": "Exact connector-owned merge packet after fresh Owner Gate 2 approval. The school Implementation lane may merge only this PR at this exact head with a two-parent merge commit while protected main remains at approved_main_sha, then submit only the bound Production-proof request. No other merge or release authority is granted.",
+  "base_branch": "main",
+  "gate2_request_id": "florida-state-expansion-release-gate2-approval-0001",
+  "kind": "REMOTE_IMPLEMENTATION_GATE2_MERGE_PACKET",
+  "merge_method": "merge",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "pr_number": 710,
+  "preview_deployment_id": 8044339672,
+  "preview_url": "https://college-basketball-history-ak78cbogv-elliott-pollacks-projects.vercel.app",
+  "production_proof": false,
+  "production_request_id": "florida-state-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "target_branch": "data/florida-state-onboarding"
+}
