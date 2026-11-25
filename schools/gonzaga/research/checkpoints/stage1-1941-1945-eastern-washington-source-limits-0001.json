@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1941_1945_EWU_RECIPROCAL_NEWSPAPER_CENSUS",
+  "school_key": "gonzaga",
+  "parent_research_head": "09a9c5778a2083365b77442ad58a9df0b9e35461",
+  "authenticated_protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "method": "ONE_BOUNDED_FAMILY_EASTERN_WASHINGTON_1941_1945_ORIGINAL_AP_UP_NEWS_REPORTS",
+  "accepted_game_count": 4,
+  "accepted_ids": [
+    "GONZAGA-EXP-EWU4145-001",
+    "GONZAGA-EXP-EWU4145-002",
+    "GONZAGA-EXP-EWU4145-003",
+    "GONZAGA-EXP-EWU4145-004"
+  ],
+  "source_urls": [
+    "https://oregonnews.uoregon.edu/lccn/sn85042472/1942-01-09/ed-1/seq-10/ocr/",
+    "https://oregonnews.uoregon.edu/lccn/sn85042472/1943-12-07/ed-1/seq-10/ocr/",
+    "https://oregonnews.uoregon.edu/lccn/sn85042472/1944-01-11/ed-1/seq-5.pdf",
+    "https://oregonnews.uoregon.edu/lccn/sn85042472/1944-12-02/ed-1/seq-6.pdf"
+  ],
+  "source_limits": [
+    {
+      "source": "Whitworth Digital Commons 1946-47 student newspaper",
+      "url": "https://digitalcommons.whitworth.edu/whitworthian/36/",
+      "status": "FULL_TEXT_DOWNLOAD_UNREADABLE_403",
+      "interpretation": "archive index exists; retrieval failure is not evidence of absent Gonzaga games"
+    },
+    {
+      "source": "Gonzaga University Bulletin digital collection",
+      "url": "https://digital.gonzaga.edu/",
+      "status": "JAVASCRIPT_REQUIRED_PREVIOUSLY_INACCESSIBLE",
+      "interpretation": "no repeated source access attempt in this pass; not negative evidence"
+    },
+    {
+      "source": "Eugene Register-Guard 1941-45 targeted Eastern Washington game results",
+      "status": "BOUNDED_PASS_NEW_GAME_EVIDENCE",
+      "interpretation": "4 new distinct games from 1942 Jan, 1943 Dec, 1944 Jan, 1944 Dec; printed score/next-day game-date logic; not an exhaustive all-opponent census"
+    }
+  ],
+  "reported_1943_44_record_disparity": {
+    "accepted_season_reference": "22-4 / 26 (retained unchanged)",
+    "Gonzaga_athletics_hall_of_fame": "24-2",
+    "Spokesman_2016_retrospective": "21-2",
+    "first_party_url": "https://gozags.com/honors/gonzaga-athletic-hall-of-fame/navy-v-basketball-team/5",
+    "secondary_url": "https://www.spokesman.com/stories/2016/dec/06/wartime-zags-team-beat-uw-in-three-out-of-four-thr/",
+    "status": "RETAIN_LITERAL_RECORD_CONTRADICTION_DIAGNOSTIC_NOT_OWNER_REOPENED",
+    "notes": "No unilateral aggregate override; no anonymous balancing rows; season-level alternate retrospective summaries cannot decide canonical result of an individual game."
+  },
+  "additional_observations": [
+    "1943-44 prior accepted 1944 Jan 7 Whitman 49-34 win has a conflict with wording in 2016 Spokesman retrospective; not reopened in this pass.",
+    "1942-43 contemporary early-February Fort Hennings 65-60 result located, but wartime season has preexisting game-inclusion contradictions; not admitted or merged into accepted four holds by this unrelated EWU tranche.",
+    "Earlier accepted 1943-44 Albina Hellships row 57-47 is corroborated by a February 7, 1944 contemporary report; no modification to accepted row in this tranche.",
+    "H/A/N kept UNKNOWN for all four, including 'at Cheney' locality because city alone does not prove opponent-home host authority.",
+    "1944-12-01 Eastern Washington 72-40 is explicitly a season-opening victory in original AP; generic phrase 'pre-season practice sessions' does not state exhibition, but original vocabulary is retained in tranche note."
+  ],
+  "legacy_held_1942_43_count": 4,
+  "legacy_held_1957_plu_count": 1,
+  "parked_accounting_debts": 4
+}
