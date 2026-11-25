@@ -1,0 +1,17 @@
+{
+  "accepted_asset_blob_sha": "db2186a01c87c2c71c2e3573fd79a4f3d4be3822",
+  "branch_published_exact": true,
+  "changed_paths": [
+    "site/index.html"
+  ],
+  "fresh_presentation_tree_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_PRESENTATION_REFRESH_FRESH_PROOF",
+  "original_sealed_apply_equivalence": "PASS",
+  "original_sealed_sha": "0730d706a3084cbcd4647584052ad61ace040eb2",
+  "owner_gate_2_approved": false,
+  "protected_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
+  "request_id": "hawai-i-expansion-release-presentation-refresh-0001",
+  "school_key": "hawai-i",
+  "successor_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
+  "successor_tree_sha": "a8885590513dc0878dc4d508bafbd65b51ba727c"
+}
