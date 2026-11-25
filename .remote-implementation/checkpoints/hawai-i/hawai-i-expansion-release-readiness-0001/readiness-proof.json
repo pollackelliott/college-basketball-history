@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "apply_request_id": "hawai-i-expansion-stage2-sealed-apply-0001",
+  "approved_plan_hash": "c94266df230a682d6a955b9705d342f75a65cc9536bd994da2f1be8fb76635dc",
+  "changed_path_count": 20,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "release_manifest_sha256": "bc286921fae7ac2ff988c7f47ede7014e4442d715d2c64e7f6a3c8bc61514c66",
+  "school_key": "hawai-i",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "646c890a9012d89bdd3938a2d4852d88a7648f8c1468c0385c90461c0536fa0e",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "0730d706a3084cbcd4647584052ad61ace040eb2",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "94bd4b81e89f6017230fe6be125077062749ab7a47605ec41555c3c80f2ec12f",
+  "writeahead_sha256": "fe8c7211ec237e6e98c9ea0ec00e807aa66f16ca0fb7b0d7aa092ea0bf34f131"
+}

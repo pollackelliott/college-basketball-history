@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-expansion-release-readiness-0001",
+  "school_key": "hawai-i",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "af56627d6fa7ceff6235d3dddcfd0407faf54946",
+  "previous_control_state_sha256": "447ce7e55307962188770fb67ce2df10153e4824a2510388bf5c7a8d41d0eb8b",
+  "expected_protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "0730d706a3084cbcd4647584052ad61ace040eb2",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "646c890a9012d89bdd3938a2d4852d88a7648f8c1468c0385c90461c0536fa0e"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "94bd4b81e89f6017230fe6be125077062749ab7a47605ec41555c3c80f2ec12f"
+  },
+  "approved_plan_hash": "c94266df230a682d6a955b9705d342f75a65cc9536bd994da2f1be8fb76635dc",
+  "release_manifest_sha256": "bc286921fae7ac2ff988c7f47ede7014e4442d715d2c64e7f6a3c8bc61514c66",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "hawai-i-expansion-release-preview-verify-0001"
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Hawai‘i ALL_HISTORY_EXPANSION Implementation — release preparation after exact independent sealed-apply verification and owner Continue.",
+    "authorization": "Owner 'Continue' after successfully completed, independently fresh-verified Hawai‘i sealed apply. Authorizes the single reversible release-preparation phase through read-only release readiness, connector-owned exact PR creation/reuse, required CI/mergeability, and exact Preview verification ending only at OWNER_GATE_2_READY or an authentic blocker. Does not authorize Owner Gate 2 approval, merge, Production proof, historical reopening or any unrelated/global mutation."
+  }
+}
