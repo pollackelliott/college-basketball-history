@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "17e61efd0786671df593859c2b73f720217cef1e",
+  "merge_parent_onboarding": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "merge_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "731881834ae0e9f95978c44a07169c5c8f5f4a45446bf3303d41c54cc9447762",
+  "owner_gate_2_verification_sha256": "7d31cbfaf52daa658bce54a627cb9061a15086abbb2cf5a82e2f54ec3f718943",
+  "pr_head_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "pr_number": 710,
+  "production_deployment_id": 8045854072,
+  "production_json_checked_count": 9,
+  "production_proof": true,
+  "production_proof_sha256": "9e8182562be9cd3da06e48ed0703e4b8e7ce49df487eb63a91b90e8a6811e2cd",
+  "protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "request_id": "florida-state-expansion-release-production-proof-0001",
+  "request_sha256": "eaf9564fe80a526250831b1837ddaa5b4e0a0eb794023aac3266655729d0e6f6",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "status": "PRODUCTION_PROOF_PASS"
+}

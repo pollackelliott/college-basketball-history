@@ -1,0 +1,29 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "17e61efd0786671df593859c2b73f720217cef1e",
+  "merge_parent_onboarding": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "merge_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "owner_gate_2_approval_checkpoint_sha256": "731881834ae0e9f95978c44a07169c5c8f5f4a45446bf3303d41c54cc9447762",
+  "owner_gate_2_verification_sha256": "7d31cbfaf52daa658bce54a627cb9061a15086abbb2cf5a82e2f54ec3f718943",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "pr_number": 710,
+  "production_deployment_id": 8045854072,
+  "production_deployment_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/florida-state.json",
+    "/data/teams/florida.json",
+    "/data/teams/georgia.json",
+    "/data/teams/miami.json",
+    "/data/teams/mississippi-state.json",
+    "/data/teams/ole-miss.json",
+    "/data/teams/usc.json"
+  ],
+  "production_json_checked_count": 9,
+  "school_key": "florida-state",
+  "status": "COMPLETE"
+}
