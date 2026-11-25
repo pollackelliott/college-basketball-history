@@ -801,7 +801,7 @@
     "hawai-i-expansion-stage2-sealed-apply-0001"
   ],
   "active_expected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
-  "active_lock_commit": null,
+  "active_lock_commit": "a4c30a369f60897ca645780ce2597e7aac5fbcee",
   "active_lock_owner": "github-actions:45661146396:1",
   "active_operation": "STAGE2_SEALED_APPLY",
   "active_prepared_commit_sha": null,
