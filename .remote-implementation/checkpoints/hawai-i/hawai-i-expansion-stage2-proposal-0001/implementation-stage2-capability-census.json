@@ -1,0 +1,206 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 63,
+      "discrepancy": 17,
+      "identity": 16
+    },
+    "decision_count": 96,
+    "decision_fields": {
+      "game_date": 34,
+      "game_identity": 16,
+      "result_winner_team_key": 3,
+      "score": 28,
+      "site_type": 15
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1954-55-012-CBBG-0114757-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1954-55-012-CBBG-0114758-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-018-CBBG-0068600-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-018-CBBG-0068601-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-019-CBBG-0068600-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1958-59-019-CBBG-0068601-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-022-CBBG-0068626-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-022-CBBG-0068627-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-023-CBBG-0068626-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1959-60-023-CBBG-0068627-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1965-66-014-CBBG-0105103-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-HAWAI-I-EXP-1967-68-025-CBBG-0212888-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-EXP-1946-47-016-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-EXP-1965-66-008-SITE_TYPE",
+      "DISCREPANCY-HAWAI-I-EXP-1966-67-009-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 15,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0068600",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1958-59-009"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1958-59-018",
+            "hawai-i-exp-1958-59-019"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068601",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1958-59-010"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1958-59-018",
+            "hawai-i-exp-1958-59-019"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068626",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1959-60-013"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1959-60-022",
+            "hawai-i-exp-1959-60-023"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068627",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1959-60-014"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1959-60-022",
+            "hawai-i-exp-1959-60-023"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0068767",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1965-66-004"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1965-66-003"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0079044",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1959-60-027"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1959-60-026"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0104852",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1955-56-017"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1955-56-016"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0105103",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1965-66-023"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1965-66-014"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114757",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1954-55-018"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1954-55-012"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114758",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1954-55-019"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1954-55-012"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0118169",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1966-67-001"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1966-67-002"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0212888",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1967-68-008"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1967-68-025"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0212904",
+          "fixed_confident_source_game_ids": [
+            "hawai-i-exp-1967-68-024"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "hawai-i-exp-1967-68-025"
+          ]
+        }
+      ],
+      "count": 13,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}
