@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "e723154a43f573b166d7d5b02544a35bc02d32f4abef8b54d9e2aae2fe43a322",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
+  "pr_number": 717,
+  "production_deployment_id": 8071324773,
+  "production_json_checked_count": 16,
+  "production_proof": true,
+  "request_id": "hawai-i-expansion-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "status": "COMPLETE"
+}
