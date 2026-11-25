@@ -801,18 +801,19 @@
     "hawai-i-expansion-stage2-sealed-apply-0001",
     "hawai-i-expansion-release-readiness-0001",
     "hawai-i-expansion-release-preview-verify-0001",
-    "hawai-i-expansion-release-presentation-refresh-0001"
+    "hawai-i-expansion-release-presentation-refresh-0001",
+    "hawai-i-expansion-release-readiness-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "hawai-i-expansion-release-readiness-0002",
+  "active_request_sha256": "ef96ad866ecf71b0453f2176a8d770eec312ba89c676e1030b9155ec1bc06dbd",
+  "active_school_key": "hawai-i",
+  "active_target_branch": "data/hawai-i-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1610,8 +1611,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/hawai-i/hawai-i-expansion-release-presentation-refresh-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "18903c9ee8d85286ec1ced78f9fd726a30c3858e979722d3148c41697d8d733e"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "45705055174",
+  "lock_acquisition_request_commit": "8789638118d9522b0efe3b18e054b8231b466aaf",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
