@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "request_id": "hawai-i-expansion-release-preview-verify-0001",
+  "school_key": "hawai-i",
+  "previous_control_state_commit": "bf8a1f564d9900a025edad44fdbff66f736c8eb9",
+  "previous_control_state_sha256": "ea063ad5a28f3e86a7b434bae68aa8192c364f78b553bfc2307c4d39fc07607b",
+  "expected_protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "0730d706a3084cbcd4647584052ad61ace040eb2",
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "fd4035191e30c93a80ea9f0eed27b1bc298df533f576325d5e548c05e25adbff"
+  },
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "37c94f003adf3890e6ba7273570e48ad8ed9b207c9d1697e46c8a7018413437f"
+  },
+  "approved_plan_hash": "c94266df230a682d6a955b9705d342f75a65cc9536bd994da2f1be8fb76635dc",
+  "release_manifest_sha256": "bc286921fae7ac2ff988c7f47ede7014e4442d715d2c64e7f6a3c8bc61514c66",
+  "pr_number": 717,
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": true,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same serialized Hawai‘i ALL_HISTORY_EXPANSION Implementation release preparation, exact connector-created PR #717 after independent fresh verified readiness 0001.",
+    "authorization": "Owner Continue authorized RELEASE_READINESS_TO_PREVIEW_V1 phase. Connector-created exact GitHub PR #717 with immutable head 0730d706a3084cbcd4647584052ad61ace040eb2 and exact packet body SHA256 cd902d6aaf681b0f07704962ab0ed15c71cc34710b0a20368a70e7a716c2cde2. This request verifies required CI, clean mergeability, and exact PR-head Vercel Preview to OWNER_GATE_2_READY only. Does not approve Owner Gate 2, authorize merge, Production, historical changes, or tracked mutation."
+  }
+}
