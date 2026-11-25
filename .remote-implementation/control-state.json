@@ -804,7 +804,7 @@
     "hawai-i-expansion-release-presentation-refresh-0001"
   ],
   "active_expected_main_sha": "48823b191b76671ce794b9ac0fe540f7a1260956",
-  "active_lock_commit": null,
+  "active_lock_commit": "4fdb838ddb7aec80304d56513055463e533d73b5",
   "active_lock_owner": "github-actions:45703506176:1",
   "active_operation": "RELEASE_PRESENTATION_REFRESH",
   "active_prepared_commit_sha": null,
