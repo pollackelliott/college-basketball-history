@@ -1363,18 +1363,19 @@ function conferenceMembershipYearRange(membership) {
 
 function conferenceHistoryMarkup(key) {
   const team = DB.teams[key];
-  const history = conferenceTimelineDisplayHistory(DB.conferenceHistory[key] || []);
+  const history = DB.conferenceHistory[key] || [];
   if (!team || !history.length) return "";
 
-  const displayNames = conferenceTimelineDisplayNames(key, history);
+  const displayHistory = conferenceTimelineDisplayHistory(history);
+  const displayNames = conferenceTimelineDisplayNames(key, displayHistory);
 
-  const desktop = history.map((membership, index) => {
+  const desktop = displayHistory.map((membership, index) => {
     const current = !membership.end_season;
     const name = displayNames[index];
     return `<div class="conference-era${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-name">${esc(name)}</div><div class="conference-era-seasons">${esc(conferenceMembershipYearRange(membership))}</div><div class="conference-era-dot" aria-hidden="true"></div></div>`;
   }).join("");
 
-  const mobile = history.map((membership, index) => {
+  const mobile = displayHistory.map((membership, index) => {
     const current = !membership.end_season;
     const name = displayNames[index];
     return `<div class="conference-era-mobile${current ? " current" : ""}" style="--team:${team.primary}"><div class="conference-era-mobile-name">${esc(name)}</div><div class="conference-era-mobile-seasons">${esc(conferenceMembershipYearRange(membership))}</div></div>`;

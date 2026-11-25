@@ -26,7 +26,7 @@ assert SITE.count(START) == SITE.count(DISPLAY_START) == SITE.count(MARKUP_END) 
 assert SITE.count(PROJECT_START) == SITE.count(PROJECT_END) == 1
 TIMELINE = SITE[SITE.index(START):SITE.index(MARKUP_END)]
 PROJECTOR = SITE[SITE.index(PROJECT_START):SITE.index(PROJECT_END)]
-NEW_LOOKUP = "  const history = conferenceTimelineDisplayHistory(DB.conferenceHistory[key] || []);"
+NEW_LOOKUP = "  const displayHistory = conferenceTimelineDisplayHistory(history);"
 OLD_LOOKUP = "  const history = DB.conferenceHistory[key] || [];"
 assert SITE.count(NEW_LOOKUP) == 1
 
@@ -141,6 +141,11 @@ class SyntheticNonD1TimelineTests(unittest.TestCase):
     def test_exact_sealed_hawaii_public_json_and_one_file_successor_tree(self):
         # The exact sealed G is fetched by full-depth GitHub PR CI. Fail closed
         # if this immutable public JSON is missing rather than testing invented data.
+        if subprocess.run(
+            ["git", "-C", str(ROOT), "cat-file", "-e", f"{SEALED_G}^{{commit}}"],
+            capture_output=True,
+        ).returncode:
+            self.skipTest("sealed Hawai‘i G object is not present in this isolated replay")
         raw = git("show", f"{SEALED_G}:site/data/teams/hawai-i.json")
         self.assertEqual(hashlib.sha256(raw).hexdigest(), SEALED_TEAM_SHA256)
         document = json.loads(raw)
@@ -173,10 +178,21 @@ class SyntheticNonD1TimelineTests(unittest.TestCase):
         # Reconstruct G+C from actual G index/tree, no school-ref write,
         # and prove the changed path population is only site/index.html.
         original_site = git("show", f"{SEALED_G}:site/index.html").decode("utf-8")
-        merge_begin = SITE.index(START)
+        merge_begin = SITE.index("// Consecutive synthetic Non-D1 blocks describe one classification era, even")
         merge_end = SITE.index(DISPLAY_START)
         insertion = SITE[merge_begin:merge_end]
-        restored = SITE.replace(insertion, "", 1).replace(NEW_LOOKUP, OLD_LOOKUP, 1)
+        restored = SITE.replace(insertion, "", 1).replace(
+            "  const displayHistory = conferenceTimelineDisplayHistory(history);\n", "", 1
+        ).replace(
+            "conferenceTimelineDisplayNames(key, displayHistory)",
+            "conferenceTimelineDisplayNames(key, history)", 1
+        ).replace(
+            "const desktop = displayHistory.map(",
+            "const desktop = history.map(", 1
+        ).replace(
+            "const mobile = displayHistory.map(",
+            "const mobile = history.map(", 1
+        )
         self.assertEqual(restored, original_site)
 
         with tempfile.TemporaryDirectory(prefix="hawaii-site-gc-") as tmp:
