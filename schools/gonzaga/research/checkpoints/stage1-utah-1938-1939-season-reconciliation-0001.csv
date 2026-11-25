@@ -1,0 +1,2 @@
+season_label,official_wins,official_losses,official_games,prior_identified_wins,prior_identified_losses,prior_identified_games,new_wins,new_losses,new_games,current_identified_wins,current_identified_losses,current_identified_games,prior_arithmetic_difference,current_arithmetic_difference,classification
+1938-39,7,10,17,1,6,7,0,1,1,1,7,8,10,9,UNDERIDENTIFICATION_DIAGNOSTIC_ONLY__NO_INFERRED_ROWS

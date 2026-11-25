@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_UTAH_WHOLE_HISTORICAL_GONZAGA_SERIES_AND_1938_39_GAME_BY_GAME_TRANCHE_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "parent_research_head": "189850af8154769443ee08ac6d49919efc1ea48f",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "institution": "University of Utah",
+  "systematic_series_scope": "Utah official 1938-39 full game ledger plus long-range university series history identifying first game 1938-12-23 and second 1962-12-08; therefore exactly one pre-1958 Utah-Gonzaga appearance in institutional history",
+  "first_party_sources": [
+    {
+      "document": "Utah 2010-11 official Men's Basketball year-by-year results section",
+      "url": "https://utahutes.com/documents/download/2016/6/16/mbb_1011_mg_sec_10.pdf",
+      "original_literal": "Dec. 23 Gonzaga W 50-29 Spokane, WA",
+      "season": "1938-39",
+      "record": "13-7",
+      "verified_as_one_of_20_season_result_rows": true
+    },
+    {
+      "document": "Utah 2019-20 official Men's Basketball Media Guide",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/utahutes.com/documents/2019/11/8/2019_20_MBB_Media_Guide.pdf?timestamp=20191125014415",
+      "printed_page": 117,
+      "original_literal": "12/23 | at Gonzaga | W | 50-29",
+      "year": "1938-39",
+      "record": "13-7"
+    },
+    {
+      "document": "University of Utah 2002 original athletics series preview",
+      "url": "https://utahutes.com/news/2002/11/24/Utes_Open_Maui_Invitational_Monday_Against_No_22_Gonzaga",
+      "original_literal": "In the first game of the series, the Utes defeated the Zags, 50-29, on Dec. 23, 1938 in Spokane, Wash.; last previous meeting Dec 8, 1962 Utah 100-79",
+      "classification": "original first-party retrospectively counted series game",
+      "pre_1958_appearances_established": 1
+    },
+    {
+      "document": "Utah 2010-11 institutional road-and-neutral winning-streak section",
+      "url": "https://utahutes.com/documents/download/2010/11/13/mbb-1011-mg-sec-9.pdf",
+      "original_literal": "Jan. 8, 1938 at Hastings (58-31) until Dec. 23, 1938 at Gonzaga (50-29). Broken by Idaho",
+      "classification": "Independent official season-statistical inclusion"
+    }
+  ],
+  "contemporaneous_corroboration": {
+    "publication": "La Grande Evening Observer",
+    "date": "1938-12-23",
+    "printed_page": 4,
+    "url": "https://oregonnews.uoregon.edu/lccn/2006260039/1938-12-23/ed-1/seq-4/ocr/",
+    "original_literal": "The barnstorming University of Utah basketball team defeated Gonzaga university, 50 to 29, in a practice game last night.",
+    "accepted_fact": "a 50-29 played Utah win over Gonzaga University contemporaneous with official game",
+    "conflict": "Period report calls game 'practice game' and 'last night' whereas official university season/result/series records treat the game as a counted 1938-39 contest dated December 23.",
+    "disposition": "Do not erase practice-game wording; official institution includes as a season win, all-time series result and road winning streak, supporting official competitive recognition. Treat as REGULAR_SEASON for this ledger, not exhibition, under institutional counting authority.",
+    "played_date_disposition": "UNKNOWN — original Dec23 newspaper 'last night' suggests Dec22, though school multiple independent editions date Dec23.",
+    "identity_disposition": "Original explicitly says Gonzaga university, excluding Gonzaga High."
+  },
+  "source_reviewed_appearances": {
+    "pre1958": 1,
+    "inherited_1958_59_plus": 1,
+    "second_meeting": "1962-12-08",
+    "considered": 2,
+    "previously_identified": 0,
+    "newly_accepted": 1
+  },
+  "new_game": {
+    "research_game_id": "GONZAGA-EXP-UTAH-193839-001",
+    "season": "1938-39",
+    "opponent": "Utah",
+    "gonzaga_result": "L",
+    "gonzaga_score": 29,
+    "opponent_score": 50,
+    "game_date": "UNKNOWN",
+    "site_type": "HOME",
+    "site_basis": "Utah official at Gonzaga",
+    "game_type": "REGULAR_SEASON",
+    "venue": "UNKNOWN"
+  },
+  "previous_games": 555,
+  "now_accepted_games": 556,
+  "previous_WL": {
+    "W": 213,
+    "L": 342
+  },
+  "current_WL": {
+    "W": 213,
+    "L": 343
+  },
+  "official_aggregate": {
+    "W": 477,
+    "L": 500,
+    "games": 977
+  },
+  "arithmetic_difference_before": 422,
+  "arithmetic_difference_after": 421,
+  "prior_candidate_holds_unchanged": 6,
+  "prior_accounting_debts_unchanged": 4,
+  "screenshot_access_limit": "Web PDF screenshot attempts for Utah 2019-20 and 2010-11 files returned large-PDF content-length errors; original structured PDF-text results corroborated by first-party HTML 2002 preview and original newspaper OCR.",
+  "stage1_complete": false,
+  "stage2_authorized": false
+}
