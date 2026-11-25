@@ -1,0 +1,7 @@
+source_family,source_url,observation,disposition,action
+Northwest Nazarene original historical season statistics,https://nnusports.com/sports/2018/7/6/nnu-mens-basketball-statistics.aspx,Index 18 seasons 1952-53 to 1969-70 accessible but Sidearm PDF links show download shell,NOT_EXTRACTED,No game rows inferred or proof of absence; high-yield candidate if bytes available
+Oregon Tech historical result index,https://static.oregontechowls.com/custompages/Athletics/Basketball/Men/Records/histresu.htm,Indexed archive lacks Boise matches despite independently verified 1956 regional game,COVERAGE_LIMITATION,No absence inference
+College of Idaho official home opener retrospective,https://yoteathletics.com/news/2020/12/30/2020-21-mens-basketball-notebook-week-5.aspx,Lists Jan22 1945 first home game vs Boise Junior College; no final score,PLAYED_RESULT_UNVERIFIED,Candidate distinct chronologically from Jan6 victory; not counted
+Original 1942 La Grande newspaper,https://oregonnews.uoregon.edu/lccn/2026234413/1942-01-24/ed-1/seq-8.pdf,Boise L26-33 College of Idaho college basketball score confirmed,NEW_INCLUDED,Issue date not game date
+Original 1945 Twin Falls newspaper,https://tfpl.sfo2.digitaloceanspaces.com/Newspapers/Times-News_TF074/PDF/1945_01_08.pdf,Boise W50-37 College of Idaho Saturday Jan6 confirmed,NEW_INCLUDED,H/A/N unverified
+Original 1943 Bend newspaper,https://oregonnews.uoregon.edu/lccn/sn90051770/1943-02-24/ed-1/seq-9/,Boise L39-57 College of Idaho college basketball score,SAME_GAME_SCORE_REPAIR,Prior 1942-43 CoI loss retained
