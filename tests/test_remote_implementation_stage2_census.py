@@ -1361,7 +1361,7 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             authority["phase0_preview"]["rebased_venue_mapping_count"], 1,
         )
         self.assertEqual(
-            authority["integration_freeze"]["global_venue_reconciliation"][
+            json.loads(authority["freeze_bytes"])["global_venue_reconciliation"][
                 "REUSE_REGISTERED_GLOBAL_VENUE"
             ], 3,
         )
