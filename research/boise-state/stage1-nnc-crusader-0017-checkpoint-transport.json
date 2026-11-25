@@ -1,0 +1,12 @@
+{
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "checkpoint": 17,
+  "zip_sha256": "dee333e37f9f354c6a41d378ce6f7a36f33f4b8b46db74d910274e3121571003",
+  "parent_zip_sha256": "38fdaccba94223ceeb1948fafd494e2cc3b60f6b8635d66cbcb5d4a303306e5a",
+  "research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "accepted_games": 194,
+  "prior_games": 192,
+  "source_census_seasons": 38,
+  "aggregate_difference": 649,
+  "status": "STAGE_1_IN_PROGRESS"
+}
