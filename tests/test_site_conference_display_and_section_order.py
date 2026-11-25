@@ -90,7 +90,23 @@ class SitePresentationTests(unittest.TestCase):
             "\nfunction ", 1
         )[0]
         self.assertIn(
-            "const displayNames = conferenceTimelineDisplayNames(key, history);",
+            "const history = DB.conferenceHistory[key] || [];",
+            timeline,
+        )
+        self.assertIn(
+            "const displayHistory = conferenceTimelineDisplayHistory(history);",
+            timeline,
+        )
+        self.assertIn(
+            "const displayNames = conferenceTimelineDisplayNames(key, displayHistory);",
+            timeline,
+        )
+        self.assertIn(
+            "const desktop = displayHistory.map(",
+            timeline,
+        )
+        self.assertIn(
+            "const mobile = displayHistory.map(",
             timeline,
         )
         self.assertEqual(timeline.count("const name = displayNames[index];"), 2)
