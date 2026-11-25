@@ -1556,7 +1556,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "731881834ae0e9f95978c44a07169c5c8f5f4a45446bf3303d41c54cc9447762",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/florida-state/florida-state-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "bcd37fd03aa262d968ffbbff87d2b9aab8410cf5c3420b0698bb6f73aa5bf497",
     "merged": false,
@@ -1565,7 +1565,7 @@
     "pr_number": 710,
     "production_request_id": "florida-state-expansion-release-production-proof-0001",
     "protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "florida-state-expansion-release-gate2-approval-0001",
     "school_key": "florida-state",
     "target_branch": "data/florida-state-onboarding",
