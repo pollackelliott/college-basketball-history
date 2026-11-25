@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1925_1928_NORTHWEST_ORIGINAL_PUBLICATIONS_AND_CLUB_RESULTS_0001",
+  "school_key": "gonzaga",
+  "parent_research_head": "c379749132cff8f016020bac674b640472752c8d",
+  "authenticated_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "primary_discovery_goal": "TEST ORIGINAL GONZAGA STUDENT QUARTERLY PUBLISHED 1926-28; FALL BACK TO ONE READABLE 1925-28 ORIGINAL NORTHWEST CAMPUS/CONTEMPORARY GAME SOURCE FAMILY",
+  "accepted_games": 5,
+  "held_competitive_candidate_count": 1,
+  "collection_access": [
+    {
+      "source": "Gonzaga (Student Publication) 1887–1930 digital collection",
+      "url": "https://digital.gonzaga.edu/digital/collection/p15486coll10",
+      "finding": "University states 1926-27 and 1927-28 Gonzaga Quarterly v.15-v.16 published and scanned; other explicitly nonpublished years include 1923-24,1924-25,1928-29,1933-34,1934-35,1935-36.",
+      "access": "CONTENTDM_COLLECTION_PAGE_ONLY_JAVASCRIPT_REQUIRED__NO_READABLE_INDIVIDUAL_1926_1928_SCAN",
+      "limitation": "Cannot extract basketball game claims from scanned pages until an independent readable issue pathway exists; publication does not prove basketball games by itself."
+    },
+    {
+      "source": "University of Idaho Argonaut, January 27, 1928, p.4",
+      "url": "https://objects.lib.uidaho.edu/argonaut/pdf/arg-1928-01-27.pdf",
+      "access": "FULL_PAGE_PDF_TEXT_AND_VISUAL_SCREENSHOT_READ",
+      "finding": "Article introduces Gonzaga varsity against Idaho and enumerates three distinct city-league results against Levitich's Sparklers, Spokane Athletic Club and Brownson Motors."
+    },
+    {
+      "source": "Eugene Morning Register, January 20, 1927, p.8",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn96088115/1927-01-20/ed-1/seq-8/",
+      "access": "HISTORIC_NEWSPAPER_READABLE_ORIGINAL_PAGE_TEXT",
+      "finding": "January 19 Gonzaga win over Multnomah Athletic Club 18-17 with university basketball lineup."
+    },
+    {
+      "source": "Eugene Morning Register, January 31, 1928, p.9",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn96088115/1928-01-31/ed-1/seq-9/ocr/",
+      "access": "HISTORIC_NEWSPAPER_READABLE_ORIGINAL_PAGE_TEXT",
+      "finding": "January 30 Gonzaga win 51-36 over College of Puget Sound."
+    },
+    {
+      "source": "Oregon Statesman January 19, 1926, p.2",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1926-01-19/ed-1/seq-2/",
+      "access": "HISTORIC_NEWSPAPER_TEXT_READ; PDF_SCREENSHOT_FAILED",
+      "finding": "Coliseum Checkerboards reportedly won 30-29 over Gonzaga on Jan.18 in Portland, which collides with accepted Jan.18 Washington loss in Seattle. Not admitted; future bounded independent date-game identity check necessary."
+    }
+  ],
+  "source_uncertainties": [
+    "Idaho Argonaut provides no exact dates/scores for three city-league results, so fields remain UNKNOWN.",
+    "Gonzaga published campus sports as a recognized competitive varsity side even while playing city-league clubs; original page context and varsity roster are preserved.",
+    "H/A/N not inferred from Spokane or Portland datelines, or from a school's home city.",
+    "Jan. 18, 1926 Coliseum story conflicts in date with an accepted Washington game; it is held without forcing duplicate or changing earlier row.",
+    "The explicit 1926-27/1927-28 Gonzaga Quarterly scans are inaccessible through current read-only JS page; that is not no-game evidence.",
+    "No opening of accepted WSU, Montana, Idaho, Oregon or Washington opponent families; prior 513 rows byte-for-byte preserved."
+  ],
+  "previous_1942_43_held": 4,
+  "previous_1957_plu_held": 1,
+  "new_collision_held": 1,
+  "parked_historical_accounting_contradictions": 4,
+  "future_unit": "One bounded source-backed game/date classification for exact Jan.18,1926 Coliseum/Washington date collision only if a materially new original source is available, OR a new readable Gonzaga Quarterly 1926-28 article/page corpus; avoid repeated whole-archive searches and do not begin Stage 2."
+}

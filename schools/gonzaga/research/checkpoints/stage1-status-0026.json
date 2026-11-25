@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_ALL_HISTORY_EXPANSION_STAGE1_ACTIVE_V26",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha_at_checkpoint": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "accepted_top_level_scope": "1958-59+",
+  "accepted_program_inception_season": "1907-08",
+  "expansion_required_seasons": {
+    "start": "1907-08",
+    "end": "1957-58",
+    "count": 51
+  },
+  "official_expansion_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "identified_game_count": 518,
+  "known_result_game_count": 518,
+  "aggregate_minus_identified_diagnostic": 459,
+  "active_discrepancy_research_blocker_count": 0,
+  "research_exhausted_closeout_debt_count": 4,
+  "research_exhausted_closeout_debts": [
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1915-16",
+      "identified_state": "0-9 / 9 identified vs target literal 2-7 / 9",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1930-31",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1930-31",
+      "identified_state": "4-10 / 14 identified vs target literal 7-8 / 15",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1936-37",
+      "identified_state": "4-5 / 9 identified vs target literal 1-5 / 6",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    },
+    {
+      "blocker_id": "GONZAGA-S1-ACCOUNTING-1937-38",
+      "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+      "season": "1937-38",
+      "identified_state": "0-6 / 6 identified vs target literal 0-4 / 4",
+      "blocks_continued_stage1_research": false,
+      "blocks_stage1_closeout": true
+    }
+  ],
+  "accepted_source_families": [
+    {
+      "family": "Washington State reciprocal historical series",
+      "rows": 84,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Montana reciprocal opponent-series history",
+      "rows": 105,
+      "status": "ACCEPTED"
+    },
+    {
+      "family": "Montana State official historical records",
+      "ledger_game_identities": 21,
+      "status": "ACCEPTED_AFTER_DISCREPANCY_TRANCHE"
+    },
+    {
+      "family": "Seattle University target-school opponent series",
+      "rows": 24,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Idaho official all-time results",
+      "rows": 39,
+      "seasons_or_source_blocks": 20,
+      "gonzaga_wins": 13,
+      "gonzaga_losses": 26,
+      "status": "ACCEPTED_BOUNDED_FAMILY_WITH_SOURCE_LAYOUT_LIMITS"
+    },
+    {
+      "family": "Central Washington official historical schedule archive",
+      "rows": 13,
+      "regular_season_rows": 9,
+      "postseason_rows": 4,
+      "gonzaga_wins": 9,
+      "gonzaga_losses": 4,
+      "status": "ACCEPTED_BOUNDED_FAMILY_WITH_ARCHIVE_LIMITS"
+    },
+    {
+      "family": "Eastern Washington official 1945-46 team history",
+      "rows": 2,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Whitman target-school exact-game evidence",
+      "rows": 2,
+      "status": "ACCEPTED_PARTIAL_FAMILY"
+    },
+    {
+      "family": "Portland official game-by-game Gonzaga series",
+      "rows": 48,
+      "seasons_with_rows": 12,
+      "gonzaga_wins": 20,
+      "gonzaga_losses": 28,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_PORTLAND_SERIES_AUTHORITY"
+    },
+    {
+      "family": "Oregon State official Gonzaga opponent-series table",
+      "rows": 16,
+      "gonzaga_wins": 2,
+      "gonzaga_losses": 14,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_OSU_SERIES_AUTHORITY"
+    },
+    {
+      "family": "Oregon official year-by-year results",
+      "rows": 18,
+      "gonzaga_wins": 3,
+      "gonzaga_losses": 15,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_CURRENT_OREGON_YEAR_BY_YEAR_AUTHORITY"
+    },
+    {
+      "family": "Washington official complete pre-baseline Gonzaga series",
+      "rows": 26,
+      "new_rows_in_completion_tranche": 23,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_CURRENT_WASHINGTON_SERIES_AUTHORITY"
+    },
+    {
+      "family": "Idaho State official year-by-year results",
+      "rows": 5,
+      "gonzaga_wins": 0,
+      "gonzaga_losses": 5,
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_CURRENT_IDAHO_STATE_YEAR_BY_YEAR_AUTHORITY"
+    },
+    {
+      "family": "College of Idaho official all-time series + historical season results",
+      "rows": 9,
+      "gonzaga_wins": 9,
+      "gonzaga_losses": 0,
+      "full_series_accounting": "9 supplemental pre-baseline + 1 inherited 1960-61 = 10-0 Gonzaga",
+      "status": "ACCEPTED_COMPLETE_PRE_BASELINE_FAMILY_UNDER_COLLEGE_OF_IDAHO_SERIES_AND_SEASON_AUTHORITY"
+    },
+    {
+      "family": "Whitworth late-era contemporary/archival evidence",
+      "rows": 10,
+      "new_rows_in_tranche": 9,
+      "status": "ACCEPTED_PARTIAL_FAMILY",
+      "archive_opportunity": "Whitworth Digital Commons full text currently inaccessible via 403"
+    },
+    {
+      "family": "Season-first contemporary/official reconstruction 1947-48 through 1951-52",
+      "rows": 37,
+      "seasons": 5,
+      "method": "SEASON_FIRST_BULK_RECONSTRUCTION",
+      "status": "ACCEPTED_BULK_SEASON_FIRST_TRANCHE"
+    },
+    {
+      "family": "Season-first contemporary reconstruction 1941-42 through 1946-47",
+      "rows": 17,
+      "seasons_scanned": 6,
+      "rows_by_season": {
+        "1941-42": 7,
+        "1942-43": 0,
+        "1943-44": 5,
+        "1944-45": 0,
+        "1945-46": 0,
+        "1946-47": 5
+      },
+      "method": "SEASON_FIRST_BULK_RECONSTRUCTION",
+      "status": "ACCEPTED_BULK_SEASON_FIRST_TRANCHE"
+    },
+    {
+      "family": "Season-first contemporary reconstruction 1944-45 / 1945-46 indexed pass",
+      "rows": 3,
+      "seasons_scanned": 2,
+      "rows_by_season": {
+        "1944-45": 3,
+        "1945-46": 0
+      },
+      "method": "SEASON_FIRST_BULK_RECONSTRUCTION",
+      "status": "ACCEPTED_BOUNDED_SEASON_FIRST_TRANCHE_WITH_SOURCE_LIMITS"
+    },
+    {
+      "family": "Protected-main published institutional reciprocal census across 1941-42 and 1950s",
+      "rows": 9,
+      "source_programs": [
+        "missouri",
+        "colorado-state",
+        "utah-state",
+        "depaul",
+        "creighton"
+      ],
+      "method": "SEASON_FIRST_MULTI_PROGRAM_EXISTING_SOURCE_CENSUS",
+      "status": "ACCEPTED_BOUNDED_RECIPROCAL_CENSUS__LARGE_FILE_GAPS_NOT_EXHAUSTED"
+    },
+    {
+      "family": "Puget Sound Trail original 1946-47 season-series account",
+      "rows": 1,
+      "status": "ACCEPTED_SOURCE_BACKED_GAME_RESULT_WITH_UNKNOWN_DATE_AND_SCORE"
+    },
+    {
+      "family": "1950s multi-season schedule-index discovery with independent institutional opponent-series/record-book confirmation",
+      "rows": 5,
+      "seasons": [
+        "1953-54",
+        "1954-55",
+        "1955-56"
+      ],
+      "method": "SEASON_FIRST_BULK_RECONSTRUCTION__INSTITUTIONALLY_AUTHENTICATED_SCHEDULE_DISCOVERY",
+      "status": "ACCEPTED_BOUNDED_PRIMARY_CORROBORATED_SCHEDULE_TRANCHE_WITH_INDEX_COMPLETENESS_LIMIT"
+    },
+    {
+      "family": "1955-58 Pacific Northwest contemporary multi-opponent historical reporting and institutional reciprocal results",
+      "rows": 15,
+      "seasons": [
+        "1955-56",
+        "1956-57",
+        "1957-58"
+      ],
+      "method": "SEASON_FIRST_BULK_RECONSTRUCTION__CONTEMPORARY_SCORE_WITH_INSTITUTIONAL_CROSSCHECK",
+      "status": "ACCEPTED_BOUNDED_15_GAME_TRANCHE_WITH_EXPLICIT_SCORE_AND_POSTSEASON_CLASSIFICATION_DEBT"
+    },
+    {
+      "family": "1941-45 original AP/UP Eastern Washington game reporting, multi-season score-and-date census",
+      "rows": 4,
+      "seasons": [
+        "1941-42",
+        "1943-44",
+        "1944-45"
+      ],
+      "method": "SEASON_FIRST_MULTI_SEASON_SOURCE_FAMILY_WITH_NEW_READABLE_PRIMARY_NEWSPAPER_PAGES",
+      "status": "ACCEPTED_BOUNDED_SOURCE_BACKED_4_GAME_TRANCHE_WITH_RECORD_DISCREPANCY_DIAGNOSTIC"
+    },
+    {
+      "family": "1925-28 original Idaho student-press Gonzaga city-league results plus AP Multnomah/Puget Sound games",
+      "rows": 5,
+      "seasons": [
+        "1926-27",
+        "1927-28"
+      ],
+      "method": "MULTI_SEASON_BOUNDED_PRIMARY_ORIGINAL_CAMPUS_NEWSPAPER_AND_AP_REPORTING",
+      "status": "ACCEPTED_BOUNDED_5_GAME_PRIMARY_TRANCHE_WITH_EXPLICIT_ONE_DATE_COLLISION_HOLD"
+    }
+  ],
+  "controlling_ledger": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0023.csv",
+  "historical_core_data_changed": false,
+  "next_bounded_unit": "One bounded Jan.18 1926 Portland Coliseum vs accepted Washington date-collision check using materially new primary date authority, OR gain access to complete 1926-28 Gonzaga Quarterly issue pages for multi-season harvest. Do not start Stage 2.",
+  "bounded_candidate_hold_count": 4,
+  "bounded_candidate_holds": [
+    {
+      "season": "1942-43",
+      "artifact": "schools/gonzaga/research/checkpoints/stage1-season-first-1942-1943-held-candidates-0001.csv",
+      "candidate_count": 4,
+      "status": "BOUNDED_CLASSIFICATION_HOLD__NONBLOCKING_FOR_CONTINUED_DISCOVERY",
+      "reason": "Late-season contemporary played-game evidence materially conflicts with the official 2-9 / 11 aggregate; requires bounded inclusion/accounting classification before admission or exclusion."
+    }
+  ],
+  "latest_season_first_checkpoint": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-checkpoint-20261124.md",
+  "latest_season_reconciliation": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-reconciliation-0001.csv",
+  "latest_1950s_institutional_schedule_tranche": "schools/gonzaga/research/checkpoints/stage1-1950s-institutional-schedule-tranche-0001.csv",
+  "latest_1950s_institutional_schedule_source_limits": "schools/gonzaga/research/checkpoints/stage1-1950s-institutional-schedule-source-limits-0001.json",
+  "latest_1955_1958_northwest_tranche": "schools/gonzaga/research/checkpoints/stage1-1955-1958-pacific-northwest-primary-tranche-0001.csv",
+  "latest_1955_1958_source_limits": "schools/gonzaga/research/checkpoints/stage1-1955-1958-pacific-northwest-source-limits-0001.json",
+  "additional_unadmitted_stage1_classification_hold_count": 1,
+  "additional_unadmitted_stage1_classification_hold_artifact": "schools/gonzaga/research/checkpoints/stage1-1955-1958-pacific-northwest-held-candidates-0001.csv",
+  "latest_1941_1945_ewu_tranche": "schools/gonzaga/research/checkpoints/stage1-1941-1945-eastern-washington-primary-tranche-0001.csv",
+  "latest_1941_1945_ewu_source_limits": "schools/gonzaga/research/checkpoints/stage1-1941-1945-eastern-washington-source-limits-0001.json",
+  "last_bounded_unit_kind": "51_SEASON_MECHANICAL_CONVERGENCE_ASSESSMENT__ZERO_GAME_MUTATION",
+  "last_bounded_unit_result": "STAGE1_CLOSEOUT_NOT_READY__47_UNDERIDENTIFIED_SEASONS__4_ACCOUNTING_CONTRADICTIONS__5_HELD_CANDIDATES",
+  "latest_source_limit_probe": "schools/gonzaga/research/checkpoints/stage1-1944-1947-source-access-limits-0001.json",
+  "latest_bounded_research_checkpoint": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-checkpoint-20261124.md",
+  "latest_convergence_reconciliation": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0001.csv",
+  "latest_convergence_assessment": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-assessment-0001.json",
+  "latest_1925_1928_northwest_tranche": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-clubs-and-puget-tranche-0001.csv",
+  "latest_1925_1928_source_limits": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-source-limits-0001.json",
+  "additional_unadmitted_stage1_identity_collision_hold_count": 1,
+  "additional_unadmitted_stage1_identity_collision_hold_artifact": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-held-candidates-0001.csv",
+  "total_unadmitted_stage1_candidate_count": 6
+}
