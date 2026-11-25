@@ -1558,11 +1558,11 @@
   "current_sequence": 751,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
     "operation": "EXPANSION_PHASE0",
     "protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "hawai-i-expansion-phase0-0003",
     "school_key": "hawai-i",
     "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
