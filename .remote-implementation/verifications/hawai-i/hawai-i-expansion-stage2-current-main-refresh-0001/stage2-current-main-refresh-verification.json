@@ -1,0 +1,50 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "58245d93eeb3d139ef5122badc3b321e8686857f98c802f436cb9ba80446c037",
+    "data/canonical/games.csv": "4652751fabf93ed47259c56baae5c71ced4d6c8236a6a976e59289230565a537",
+    "site/data/teams/tennessee.json": "2f2721548d0060d70181f597a94e6159b2e66156ef5bc7eaf04f679a7cebb743",
+    "tests/test_opponent_home_nonmaterial_metadata.py": "e59988205f3d45c9222a131bf892aaf392c461a127fb1c6f9b065845cf3f1750",
+    "tests/test_remote_implementation_stage2_census.py": "76a04c50f67e9dd82483437317c5a5bc4437c4248f0a060cd6e61a8ae25f4c11",
+    "tools/remote_implementation_stage2_census.py": "ea49db16e5029d9514fbd6f418e5dcdc389a88d2b5f433bfbf5c09f90f7c65c9",
+    "tools/site_completeness.py": "f87edc2a5d3018e2b34a7cdf14e1468e3351e894e8ab0c9fea84e4b030797b23"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "data/canonical/games.csv",
+    "site/data/teams/tennessee.json",
+    "tests/test_opponent_home_nonmaterial_metadata.py",
+    "tests/test_remote_implementation_stage2_census.py",
+    "tools/remote_implementation_stage2_census.py",
+    "tools/site_completeness.py"
+  ],
+  "deleted_paths": [],
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_VERIFICATION",
+  "merge_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "observed_live_main_sha": "76a955a9461f3882a645beff7e935ab0b18d38a2",
+  "package_member_sha256": {
+    "conferences.csv": "b88a0dd44668ea4cb26b3c214c5bfe96a26023d9c6e411dba90422f55fe17b74",
+    "notes.md": "ebd93e39d2e7a86aa20c8e8c56cc4c9258e5fe9b21aac5b01905e0793f131966",
+    "opponents.csv": "083a037b4f8fcc2bf09576852bc4dfbbc3ab291d0ad00143395e7ac475338db5",
+    "source-games.csv": "4059b2635b158599d50da91b86530a51d7b7e3ee64ba7e97f17eaa270066c31d",
+    "source-notes.md": "57fc84c09d693819c2ecd38c71924466e7589e12ccd4182095bdf86a852f2cba",
+    "venues.csv": "64c2d6b8a6244f093376657cb884403691f46cdc2afee5b3e8aa07ac87ac24ad"
+  },
+  "prepared_parents": [
+    "19541a39fef8e4a8f144dba3d35a8f83e37598b8",
+    "76a955a9461f3882a645beff7e935ab0b18d38a2"
+  ],
+  "protected_main_sha": "76a955a9461f3882a645beff7e935ab0b18d38a2",
+  "remote_stage2_current_main_refresh_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "hawai-i-expansion-stage2-current-main-refresh-0001",
+  "schema_version": 1,
+  "school_key": "hawai-i",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_predecessor_sha": "19541a39fef8e4a8f144dba3d35a8f83e37598b8",
+  "target_sha": "9cbb1dcc12ccb67e7ec62bb3f4451b1d6eeaaf8e",
+  "target_tree_sha": "282722c642ecaf4242027376a14a0e98ad474c5d",
+  "tracked_stage2_mutation": "EXACT_CURRENT_MAIN_REFRESH_SUCCESSOR"
+}
