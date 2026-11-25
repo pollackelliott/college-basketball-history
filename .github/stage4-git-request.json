@@ -1,0 +1,7 @@
+{
+  "protected_main_sha": "4d91da1800d9d7b535ae2e191f309bfc391ea2ee",
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "stage3b_checkpoint_sha256": "d6fb67b757c8f60f400ff6820ea72fda0868b424d56ab74fcb7d7625e1f0d687",
+  "school_key": "uc-davis",
+  "validation_mode": "PROTECTED_MAIN"
+}
