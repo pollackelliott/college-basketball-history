@@ -786,16 +786,36 @@ def _verify_safe_global_venue_reuse(
     classification_counts = reconciliation_census.get("classification_counts")
     if not isinstance(classification_counts, dict):
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_INVALID")
+    # Stage 1 global venue counts cover both inherited-support extensions
+    # and NEW_SUPPLEMENTAL support.  Phase 0 rebases only the supplemental
+    # rows.  Keep both populations accounted for rather than equating them.
+    venue_support_actions = integration.get("venue_support_actions")
+    if venue_support_actions is not None and not isinstance(venue_support_actions, dict):
+        raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_INVALID")
 
     try:
+        inherited_reuse_count = (
+            sum(int(venue_support_actions.get(k, 0)) for k in (
+                "REUSE_INHERITED", "EXTEND_INHERITED",
+            ))
+            if venue_support_actions is not None else 0
+        )
+        expected_supplemental_count = (
+            int(venue_support_actions.get("NEW_SUPPLEMENTAL", -1))
+            if venue_support_actions is not None else None
+        )
         reuse_count = int(counts.get("REUSE_REGISTERED_GLOBAL_VENUE", -1))
         new_count = int(counts.get("NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED", -1))
         blocker_count = int(counts.get("GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER", -1))
+        # Integration Freeze serializes a sparse Counter: an omitted class
+        # means zero, not missing authority.  Nonzero classes remain
+        # independently checked against global totals, supplemental support,
+        # the exact census rows, and Phase 0 preview evidence below.
         classified_reuse_count = int(
-            classification_counts.get("SAFE_REPRESENTATION_REUSE", -1)
+            classification_counts.get("SAFE_REPRESENTATION_REUSE", 0)
         )
         classified_new_count = int(
-            classification_counts.get("NEW_GLOBAL_IDENTITY", -1)
+            classification_counts.get("NEW_GLOBAL_IDENTITY", 0)
         )
         rebased_count = int(phase0_preview.get("rebased_venue_mapping_count", -1))
         supplemental_rebased = int(
@@ -807,15 +827,20 @@ def _verify_safe_global_venue_reuse(
     except (TypeError, ValueError) as exc:
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_INVALID") from exc
 
-    total_count = reuse_count + new_count
+    total_count = classified_reuse_count + classified_new_count
     new_global = list(phase0_preview.get("new_global_venue_ids_and_keys") or [])
     if (
         reuse_count < 0
         or new_count < 0
+        or inherited_reuse_count < 0
         or total_count <= 0
         or blocker_count != 0
-        or classified_reuse_count != reuse_count
+        or reuse_count != classified_reuse_count + inherited_reuse_count
         or classified_new_count != new_count
+        or (
+            expected_supplemental_count is not None
+            and expected_supplemental_count != total_count
+        )
         or rebased_count != total_count
         or supplemental_rebased != total_count
         or global_registration_count != new_count
@@ -900,8 +925,8 @@ def _verify_safe_global_venue_reuse(
             raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")
 
     if (
-        seen_reuse != reuse_count
-        or seen_new != new_count
+        seen_reuse != classified_reuse_count
+        or seen_new != classified_new_count
         or seen_new_keys != set(new_by_key)
     ):
         raise Stop("STAGE2_PHASE0_SAFE_VENUE_REUSE_IDENTITY_MISMATCH")

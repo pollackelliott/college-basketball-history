@@ -314,6 +314,10 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
         safe_reuse_new_registration: bool = False,
         safe_reuse_bad_registration_count: bool = False,
         safe_reuse_missing_reuse_candidate: bool = False,
+        inherited_venue_reuses: int = 0,
+        safe_reuse_bad_inherited_count: bool = False,
+        safe_reuse_sparse_classification: bool = False,
+        safe_reuse_omit_positive_new_classification: bool = False,
         unrelated_package_mismatch: bool = False,
     ):
         repo = Path(tempfile.mkdtemp(prefix="stage2-authority-test-"))
@@ -372,7 +376,15 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             freeze["global_venue_reconciliation"] = {
                 "GLOBAL_VENUE_IDENTITY_REVIEW_BLOCKER": 0,
                 "NEW_GLOBAL_VENUE_REGISTRATION_REQUIRED": new_count,
-                "REUSE_REGISTERED_GLOBAL_VENUE": 1,
+                "REUSE_REGISTERED_GLOBAL_VENUE": (
+                    1 + inherited_venue_reuses
+                    + int(safe_reuse_bad_inherited_count)
+                ),
+            }
+            freeze["venue_support_actions"] = {
+                "EXTEND_INHERITED": inherited_venue_reuses,
+                "REUSE_INHERITED": 0,
+                "NEW_SUPPLEMENTAL": 1 + new_count,
             }
             freeze["venue_reconciliation_census"] = {
                 "blocker_count": 0,
@@ -392,6 +404,20 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
                     "target_venue_key": "new-venue",
                 }] if safe_reuse_new_registration else []),
             }
+            if safe_reuse_sparse_classification:
+                # The real Integration Freeze stores Counter nonzero entries.
+                freeze["venue_reconciliation_census"]["classification_counts"] = {
+                    key: value
+                    for key, value in freeze["venue_reconciliation_census"][
+                        "classification_counts"
+                    ].items()
+                    if value
+                }
+            if safe_reuse_omit_positive_new_classification:
+                # Missing nonzero authority must not become accepted as zero.
+                freeze["venue_reconciliation_census"]["classification_counts"].pop(
+                    "NEW_GLOBAL_IDENTITY"
+                )
         freeze_bytes = (
             json.dumps(freeze, indent=2, sort_keys=True) + "\n"
         ).encode()
@@ -1336,6 +1362,74 @@ raise SystemExit(1 if status["status"] == "BLOCKED" else 0)
             authority["phase0_preview"]["global_venue_registration_count"],
             0,
         )
+
+    def test_candidate_runtime_replays_pre_census_phase0_authority(self):
+        # Initial census failures have a verified Phase 0 successor, but no
+        # blocked proposal/census checkpoint. Candidate CI must replay that
+        # exact Phase 0->census transition rather than demand later authority.
+        workflow = (
+            ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("LIVE_CENSUS_AFTER_PHASE0", workflow)
+        self.assertIn(
+            "last.get('operation') == 'EXPANSION_PHASE0'", workflow,
+        )
+        self.assertIn(
+            "last.get('remote_phase0_equivalence') == 'PASS'", workflow,
+        )
+        self.assertIn(
+            "phase0_ref.get('sha256') != last.get('successor_manifest_sha256')",
+            workflow,
+        )
+        self.assertIn("EXACT_PHASE0_AUTHENTICATED_WITH_CANDIDATE=PASS", workflow)
+        self.assertIn("TRACKED_STAGE2_MUTATION=NONE", workflow)
+
+    def test_inherited_venue_reuse_does_not_inflate_supplemental_phase0_count(self):
+        # Exact Hawai‘i shape: two inherited extensions, one supplemental
+        # reuse, and absent NEW_GLOBAL_IDENTITY (legitimate zero Counter).
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            inherited_venue_reuses=2,
+            safe_reuse_sparse_classification=True,
+        )
+        authority = verify_phase0_authority(
+            request, control_sha, source_repo=repo,
+        )
+        self.assertEqual(
+            authority["phase0_preview"]["rebased_venue_mapping_count"], 1,
+        )
+        self.assertEqual(
+            json.loads(authority["freeze_bytes"])["global_venue_reconciliation"][
+                "REUSE_REGISTERED_GLOBAL_VENUE"
+            ], 3,
+        )
+
+    def test_missing_positive_global_venue_classification_is_rejected(self):
+        # Sparse zero counts are valid; missing positive counts remain fatal.
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            safe_reuse_new_registration=True,
+            safe_reuse_omit_positive_new_classification=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_MISMATCH",
+        ):
+            verify_phase0_authority(request, control_sha, source_repo=repo)
+
+    def test_inherited_venue_reuse_population_mismatch_is_rejected(self):
+        repo, control_sha, request, _ = self.make_authority_repo(
+            safe_reuse_venues=True,
+            inherited_venue_reuses=2,
+            safe_reuse_bad_inherited_count=True,
+        )
+        with self.assertRaisesRegex(
+            RemoteImplementationError,
+            "STAGE2_PHASE0_SAFE_VENUE_REUSE_COUNTS_MISMATCH",
+        ):
+            verify_phase0_authority(
+                request, control_sha, source_repo=repo,
+            )
 
     def test_safe_registered_venue_reuse_requires_exact_preview_hash(self):
         repo, control_sha, request, _ = self.make_authority_repo(
