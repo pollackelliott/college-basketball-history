@@ -1,0 +1,18 @@
+{
+  "checkpoint_manifest_sha256": "1b9551d5c90634340317cb683b2a321dfbcdaeea1a51281566ebe965e5bbab4d",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_READY_VERIFICATION",
+  "merged": false,
+  "owner_gate_2_approved": false,
+  "pr_head_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "pr_number": 710,
+  "preview_deployment_id": 8044339672,
+  "preview_deployment_sha": "046605df7f05ffc730e74de3969609d4c002ea3b",
+  "preview_url": "https://college-basketball-history-ak78cbogv-elliott-pollacks-projects.vercel.app",
+  "protected_main_sha": "17e61efd0786671df593859c2b73f720217cef1e",
+  "remote_release_preview_equivalence": "PASS",
+  "request_id": "florida-state-expansion-release-preview-verify-0001",
+  "schema_version": 1,
+  "school_key": "florida-state",
+  "target_branch": "data/florida-state-onboarding",
+  "target_sha": "046605df7f05ffc730e74de3969609d4c002ea3b"
+}
