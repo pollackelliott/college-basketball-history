@@ -28,7 +28,7 @@ One bounded multi-season Northwest contemporary basketball reporting pass; cross
 - GONZAGA-EXP-NW5558-015 — 1957-58 DATE UNKNOWN Western Washington: Gonzaga W 94-53; REGULAR_SEASON; UNKNOWN. Source locator: WWU 1957-58 53 Gonzaga 94; university game-by-game results PDF p5; URL: https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/wwuvikings.com/documents/2018/5/23/MBB_Game-by-Game.pdf
 
 ## Season reconciliation
-Previous **494** + **15** (**10 W, 5 L**) = **509** identified games with known W/L, not necessarily known score. Official expansion aggregate **477 W–500 L / 977**. Arithmetic difference **468** is NOT the count of individually identified missing-game identities.
+Previous **494** + **15** (**11 W, 4 L**) = **509** identified games with known W/L, not necessarily known score. Official expansion aggregate **477 W–500 L / 977**. Arithmetic difference **468** is NOT the count of individually identified missing-game identities.
 - 1955-56: before 7-12/19; now 9-14/23; official 13-15/28; numerical difference 5
 - 1956-57: before 6-9/15; now 8-11/19; official 11-16/27; numerical difference 8
 - 1957-58: before 5-10/15; now 12-10/22; official 16-10/26; numerical difference 4
