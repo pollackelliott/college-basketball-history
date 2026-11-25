@@ -1,0 +1,14 @@
+{
+  "kind": "EXPANSION_STARTUP_TRANSPORT_REUSE_PROVENANCE",
+  "school_key": "hawai-i",
+  "startup_id": "hawai-i-expansion-startup-0003",
+  "research_freeze_sha256": "b41c303904d0baf21c7935d8111852f12501ceb5efc416e8fc60dcd56b42d54d",
+  "source_transport_prefix": ".remote-implementation/phase0-inputs/hawai-i/hawai-i-expansion-startup-0001/freeze-part-",
+  "source_research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "source_part_count": 13,
+  "source_transport_unchanged": true,
+  "prior_attempt": "hawai-i-expansion-startup-0002",
+  "prior_run": "https://github.com/pollackelliott/college-basketball-history/actions/runs/45543783090",
+  "main_drift_merge": "https://github.com/pollackelliott/college-basketball-history/pull/712",
+  "new_protected_main_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089"
+}
