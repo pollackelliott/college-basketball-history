@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1955_1958_BOUNDED_NORTHWEST_GAME_DISCOVERY",
+  "school_key": "gonzaga",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_research_head": "9af27aa4a7edb98b8ab4a52f70590ac9d93aef4d",
+  "authenticated_protected_main_sha": "968079657a95f1e116f1f4ee6282f92c47c412a9",
+  "method": "MULTI_SEASON_CONTEMPORARY_NORTHWEST_NEWSPAPER_REPORTING_WITH_INSTITUTIONAL_RECIPROCAL_CROSSCHECK",
+  "source_families": [
+    "University of Oregon Historic Newspapers/AP/UP contemporary basketball scores",
+    "University of North Dakota 2010-11 year-by-year records",
+    "University of South Dakota 2024-25 year-by-year records",
+    "Seattle Pacific University original Historical Records mirrored index",
+    "Western Washington original full historical game-by-game ledger"
+  ],
+  "accepted_games": 15,
+  "accepted_ids": [
+    "GONZAGA-EXP-NW5558-001",
+    "GONZAGA-EXP-NW5558-002",
+    "GONZAGA-EXP-NW5558-003",
+    "GONZAGA-EXP-NW5558-004",
+    "GONZAGA-EXP-NW5558-005",
+    "GONZAGA-EXP-NW5558-006",
+    "GONZAGA-EXP-NW5558-007",
+    "GONZAGA-EXP-NW5558-008",
+    "GONZAGA-EXP-NW5558-009",
+    "GONZAGA-EXP-NW5558-010",
+    "GONZAGA-EXP-NW5558-011",
+    "GONZAGA-EXP-NW5558-012",
+    "GONZAGA-EXP-NW5558-013",
+    "GONZAGA-EXP-NW5558-014",
+    "GONZAGA-EXP-NW5558-015"
+  ],
+  "accepted_per_season": {
+    "1955-56": 4,
+    "1956-57": 4,
+    "1957-58": 7
+  },
+  "source_limits": [
+    "Scores 1956-03-03 PLU 80 to 72/73 for Gonzaga conflict: team_score blank.",
+    "Scores 1957-02-01 Seattle Pacific 67-66 newspaper vs 66-65 institutional: both score fields blank, result reliable.",
+    "1957-03-05 PLU 93-85 held until postseason game_type independently established, not counted.",
+    "WWU 1957-58 institutional 53-94 has no dated row, so game_date blank.",
+    "Earlier four 1942-43 inclusion holds and four historical accounting contradictions unchanged.",
+    "Unknown H/A/N preserved when source notation is absent; never inferred from dateline or geography.",
+    "Newspaper snapshots are not a complete season census; absence is not negative evidence.",
+    "Current prior ledger 494 rows preserved byte-for-byte; older source family work not reopened."
+  ]
+}
