@@ -792,7 +792,7 @@
     "hawai-i-expansion-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "76a955a9461f3882a645beff7e935ab0b18d38a2",
-  "active_lock_commit": null,
+  "active_lock_commit": "7521beae2cca87c76233acff90713180c4f9a979",
   "active_lock_owner": "github-actions:45629829459:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
