@@ -352,7 +352,7 @@ class AuthenticatedDisplaySuccessorFreezeTests(unittest.TestCase):
             # The published integration-base row remains the old predecessor.
             venue_path = src / "schools/example/venues.csv"
             frozen = venue_path.read_bytes().replace(
-                b"Inherited note\\n", b"Frozen expansion chronology\\n", 1
+                b"Inherited note\n", b"Frozen expansion chronology\n", 1
             )
             assert frozen != venue_path.read_bytes()
             venue_hash = hashlib.sha256(frozen).hexdigest()
