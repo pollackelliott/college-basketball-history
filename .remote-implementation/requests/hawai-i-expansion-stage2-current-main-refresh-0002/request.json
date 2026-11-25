@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "hawai-i-expansion-stage2-current-main-refresh-0002",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "hawai-i",
+  "previous_control_state_commit": "a0627fc4071020bffe579118f16461a14bc0e02b",
+  "previous_control_state_sha256": "d3c2a6e0f481f44eed2180fbae1172e7c43d797d94262edc3145e07cc8e0db5e",
+  "expected_protected_main_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "target_branch": "data/hawai-i-onboarding",
+  "target_sha": "9cbb1dcc12ccb67e7ec62bb3f4451b1d6eeaaf8e",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-phase0-0003/successor-manifest.json",
+    "sha256": "2c4b017ac3e2656f78e1e522fe4c5d66fe85e49e6910ad075d1c048e211b7908"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-opponent-display-0001/successor-manifest.json",
+    "sha256": "a4a4425e00b9ba65c70b83020ceabfea5be84a6d377c33ef6c2d86947d17b0ae"
+  },
+  "integration_freeze_sha256": "62d80d2cc2ea5f5d5ac56d4c7136f2a89191c8b3ffb824f9884f2c2e849c4bfc",
+  "semantic_snapshot_sha256": "e1d82eafcedcfd2f35bcb122b9ec06ee4815068b7d36e9731181f727870c8c91",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Owner Continue within existing Hawai‘i ALL_HISTORY_EXPANSION Stage 2 after protected-main generic tooling-only PR #716 merged at 087ac5dedc65780b65b7ae8d61e239d2033e2eea. Exact compare relative to previously accepted protected main 76a955a9461f3882a645beff7e935ab0b18d38a2 proves main-only changes exactly tools/all_history_expansion_display_successor_guard.py and tests/test_all_history_expansion_rehearsal_freeze.py, while Hawai‘i target-only changed paths are data/reference/programs.csv, data/reference/venue-names.csv and the five changed Hawai‘i school package paths; no overlap. Candidate runtime exact-head PR #716 replay reached OWNER_GATE_1_READY with original 96 decisions, no tracked data mutation. Guarded refresh must independently prove merge, current-main import, complete frozen package preservation, validation, and CAS."
+  },
+  "creation_provenance": {
+    "origin": "Same Hawai‘i ALL_HISTORY_EXPANSION serialized Implementation Stage 2. On protected main 087ac5dedc65780b65b7ae8d61e239d2033e2eea, PR #716 repaired generic display-successor rehearsal guard; PR head exact 2582ef39ee8e9801c021f468e9bdc9426776558d passed validation and exact blocked Hawai‘i candidate rehearsal reaching OWNER_GATE_1_READY. Earlier Stage 2 proposal checkpoint and fresh verification remain durably BLOCKED on old main.",
+    "authorization": "Owner Continue advances one already-authorized Stage 2 deterministic phase: guarded current-main refresh and repository-owned STAGE2_REFRESH_CENSUS_PROPOSAL_V1 chained ordinary fresh-verification census and unchanged 96-decision map proposal. Enforce expected decision-universe SHA and map SHA, stop on drift or genuine blocker. No Owner Gate 1 historical approval, Gate 1 fill/seal/apply, shared reference mutation beyond authenticated disjoint merge, release, Preview, Gate 2, or Production authority."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release_presentation_refresh": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/hawai-i/hawai-i-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "423f13828f7f3a16cde13ae40a6cc5d084d7ac6dd010b1b996ba4853b0b65cc6"
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "hawai-i-expansion-stage2-census-0004",
+    "proposal_request_id": "hawai-i-expansion-stage2-proposal-0002",
+    "expected_decision_universe_sha256": "fe9522c8a8e0ffd8e3739f1fa4f26885e316ef7f9b77ac202751b503e73fa65b",
+    "recommendation_map": {
+      "path": ".remote-implementation/inputs/hawai-i-expansion-stage2-proposal-0001/recommendation-map.json",
+      "sha256": "9c4b36b853cd702303a2cd776dec1f92b5f2f9acffc6324c167f362c598eab45"
+    }
+  }
+}
