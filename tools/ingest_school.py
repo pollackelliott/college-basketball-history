@@ -77,6 +77,8 @@ from site_completeness import (
 )
 from venue_reference import (
     load_global_venue_reference,
+    normalized_venue_name,
+    registered_opponent_home_venue,
     school_venue_reference_errors,
 )
 
@@ -89,6 +91,7 @@ NEW_GAME = "NEW_GAME"
 # ordinary name lookup can never collide with this key.
 FROZEN_VENUE_SPLIT_AUTHORITY_KEY = "\x00frozen-source-game-venue-authority"
 REGISTERED_VENUE_NAME_PERIODS_FIELD = "\x00registered-venue-name-periods"
+REGISTERED_OPPONENT_HOME_GLOBAL_VENUES_KEY = "\x00registered-opponent-home-global-venues"
 
 CANONICAL_FIELDS = [
     "canonical_game_id",
@@ -876,10 +879,30 @@ def load_venue_metadata_map_with_name_periods(
     )
     name_period_path = repo_root / "data/reference/venue-names.csv"
     if name_period_path.is_file():
+        name_rows = read_csv(name_period_path)
         bind_registered_venue_name_periods(
             venue_metadata_map,
-            read_csv(name_period_path),
+            name_rows,
         )
+        # This is a read-only reference channel, not an invented local
+        # venue relationship. The source-scoped resolver below checks exact
+        # opponent-host classification, registered name, locality and date.
+        name_ids: dict[str, set[str]] = defaultdict(set)
+        for name_row in name_rows:
+            venue_id = name_row.get("venue_id", "").strip()
+            label = name_row.get("venue_name", "").strip()
+            normalized = normalized_venue_name(label)
+            if (
+                venue_id in global_venues_by_id
+                and normalized
+                and name_row.get("normalized_name", "").strip() == normalized
+            ):
+                name_ids[normalized].add(venue_id)
+        venue_metadata_map[REGISTERED_OPPONENT_HOME_GLOBAL_VENUES_KEY] = {
+            "global_venues_by_id": global_venues_by_id,
+            "global_name_ids": name_ids,
+            "local_venues": read_csv(venue_path),
+        }
     return venue_metadata_map
 
 
@@ -992,6 +1015,27 @@ def resolve_venue_metadata(
         return matching[0]
 
     if not candidates:
+        global_context = venue_metadata_map.get(
+            REGISTERED_OPPONENT_HOME_GLOBAL_VENUES_KEY, {}
+        )
+        if isinstance(global_context, dict):
+            external = registered_opponent_home_venue(
+                source,
+                global_context.get("local_venues", []),
+                global_context.get("global_venues_by_id", {}),
+                global_context.get("global_name_ids", {}),
+            )
+            if external is not None:
+                return {
+                    "venue_key": external["venue_key"],
+                    "venue_id": external["venue_id"],
+                    "city": external["city"],
+                    "state": external["state"],
+                    "local_valid_from": "",
+                    "local_valid_to": "",
+                    "physical_opened": external.get("opened", "").strip(),
+                    "physical_closed": external.get("closed", "").strip(),
+                }
         return {}
     if len(candidates) == 1:
         return candidates[0]
