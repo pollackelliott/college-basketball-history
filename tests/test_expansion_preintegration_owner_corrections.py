@@ -59,7 +59,7 @@ class OwnerCorrectionTests(unittest.TestCase):
              "curated_venue_name": "", "city": "Beta City", "state": "OH"},
             {"game_date": "1963-12-20", "team_score": "66",
              "curated_site_type": "OPPONENT_HOME", "curated_venue_name": "Gamma Hall",
-             "city": "Gamma City", "state": "CA"},
+             "city": "Gamma City", "state": "NY"},
         ]
         approved_rows = []
         for row, patches in zip(self.original, patch_values):
