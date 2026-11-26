@@ -164,6 +164,100 @@ def canonical_venue_geography_errors(
     return errors
 
 
+
+def _verified_distinct_historical_local_alias(
+    local: dict[str, str],
+    physical: dict[str, str],
+    alias: str,
+    venues_by_id: dict[str, dict[str, str]],
+    name_ids: dict[str, set[str]],
+) -> bool:
+    """Permit a source-school historical alias *without* a second global alias.
+
+    A documented former facility may have the exact historical label now
+    registered to a distinct newer physical building on the same campus.
+    Registering that bare name to two VEN IDs would reintroduce ambiguous
+    physical-site matching. This is not a name-to-identity inference: the
+    original keyed venue must already be globally registered, its *canonical*
+    name must remain registered, and complete facility/relationship chronology
+    must independently prove that the later same-locality identity cannot have
+    hosted the older relationship. Missing evidence fails closed.
+    """
+
+    def year(value: str) -> int | None:
+        s = (value or "").strip()
+        return int(s) if re.fullmatch(r"\d{4}", s) else None
+
+    def season(value: str) -> tuple[int, int] | None:
+        m = re.fullmatch(r"(\d{4})-(\d{4})", (value or "").strip())
+        if not m:
+            return None
+        start, end = int(m[1]), int(m[2])
+        return (start, end) if end == start + 1 else None
+
+    def locality(value: dict[str, str]) -> tuple[str, str]:
+        return (
+            (value.get("city") or "").strip().casefold(),
+            (value.get("state") or "").strip().upper(),
+        )
+
+    venue_id = local.get("venue_id", "").strip()
+    if (
+        not venue_id or physical.get("venue_id", "").strip() != venue_id
+        or physical.get("venue_key", "").strip() != local.get("venue_key", "").strip()
+        or not all(locality(local)) or locality(local) != locality(physical)
+        or not local.get("source_basis", "").strip()
+        or not local.get("site_rule", "").strip()
+        or not local.get("notes", "").strip()
+        or not physical.get("source_basis", "").strip()
+    ):
+        return False
+
+    canonical = normalized_venue_name(local.get("canonical_name", ""))
+    normalized_alias = normalized_venue_name(alias)
+    if (
+        not canonical or canonical == normalized_alias
+        or venue_id not in name_ids.get(canonical, set())
+    ):
+        return False
+
+    closed = year(local.get("known_closed", ""))
+    registered_closed = year(physical.get("closed", ""))
+    start = season(local.get("relationship_start", ""))
+    end = season(local.get("relationship_end", ""))
+    if (
+        closed is None or registered_closed != closed
+        or start is None or end is None
+        or start[0] > end[0] or end[1] > closed
+    ):
+        return False
+    older_opened = year(local.get("known_opened", ""))
+    if older_opened is not None and older_opened > start[0]:
+        return False
+    if local.get("known_opened", "").strip() and older_opened is None:
+        return False
+
+    # Only one *other* building in the same complete locality may own this
+    # historical alias. Different-city name homonyms convey no identity.
+    same_locality = [
+        row for candidate_id in name_ids.get(normalized_alias, set())
+        if candidate_id != venue_id
+        for row in [venues_by_id.get(candidate_id)]
+        if row is not None and locality(row) == locality(local)
+    ]
+    if len(same_locality) != 1:
+        return False
+    newer = same_locality[0]
+    newer_opened = year(newer.get("opened", ""))
+    return (
+        bool(newer.get("venue_key", "").strip())
+        and bool(newer.get("source_basis", "").strip())
+        and normalized_venue_name(newer.get("display_name", "")) != normalized_alias
+        and newer_opened is not None
+        and closed < newer_opened
+        and end[1] < newer_opened
+    )
+
 def school_venue_reference_errors(
     venue_path: Path,
     rows: list[dict[str, str]],
@@ -196,10 +290,15 @@ def school_venue_reference_errors(
             if alias.strip()
         )
 
-        for name in names:
+        physical = venues_by_id[venue_id]
+        for name_index, name in enumerate(names):
             if not name:
                 continue
             if venue_id not in name_ids.get(normalized_venue_name(name), set()):
+                if name_index > 0 and _verified_distinct_historical_local_alias(
+                    row, physical, name, venues_by_id, name_ids
+                ):
+                    continue
                 errors.append(
                     f"line {line_number}: name/alias {name!r} is not "
                     f"registered to {venue_id}"

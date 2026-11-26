@@ -60,6 +60,34 @@ remain unchanged. Any requested change to the existing global alias, canonicals
 or other schools is **not** covered by this exception and requires a new
 Control Center shared-reference specification.
 
+## Post-registration local-alias validator compatibility
+
+After the exact sidecar has authenticated a different physical building and
+guarded Phase 0 has allocated its new keyed global identity, a source-school
+historical alias may still be absent from the new global VEN's name table.
+That is intentional: the same unqualified name remains registered to the
+incumbent, different physical building.
+
+The ordinary repository validator accepts this representation only for a
+secondary **local** alias where the new physical ID/key and canonical display
+name already resolve in the global registries; the school and new physical
+reference agree on complete geography; both preserve documentary evidence;
+the local and global closing years agree; an explicit dated school relationship
+falls within the older building's era; and exactly one *other* same-locality
+registered name owner opened strictly after the older building closed.
+Additional same-locality alias matches, missing/overlapping dates, missing
+documentation, changed keys or geography, unregistered canonical names, and
+unrelated unqualified aliases still fail closed. Distant homonyms do not
+establish shared physical identity.
+
+This is a post-registration **validation rule** for independently resolved
+physical chronology, not a shortcut to choose historic identities, invent a
+venue, alter source rows, register a second ambiguous global alias, change
+published canonicals, or bypass the original hash-bound split authorization.
+The candidate must also pass full-repository validation in an isolated
+exact-current-main Phase 0 rehearsal; the earlier preview-only test was
+insufficient to detect this downstream validator topology.
+
 ## Mandatory replay
 
 The original Freeze is independently validated before Integration Freeze.
