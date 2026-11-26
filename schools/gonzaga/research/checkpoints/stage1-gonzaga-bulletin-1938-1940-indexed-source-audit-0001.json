@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_GONZAGA_BULLETIN_1938_1940_INDEXED_ORIGINAL_SOURCE_PILOT_0001",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "pilot_status": "CLOSED_BOUNDED_SOURCE_ACCESS_LIMIT__NO_GAME_ADMISSIONS",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "authority": {
+    "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+    "parent_research_head": "4b5f0c0b84d318866a25073894906cf365d2dd81",
+    "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "previous_status_blob_sha": "ead47d0551ff78fe5b0649da12cf1ca7eb039460",
+    "ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0033.csv",
+    "ledger_blob_sha": "336f6b8a4f59f874b4aa2a22aa54d34414f79d90",
+    "ledger_games": 557,
+    "accepted_wins": 214,
+    "accepted_losses": 343
+  },
+  "declared_scope": {
+    "primary_source": "Gonzaga University student newspaper The Bulletin",
+    "collection_url": "https://digital.gonzaga.edu/digital/collection/p16011coll5",
+    "seasons": [
+      "1938-39",
+      "1939-40"
+    ],
+    "winter_target_months": [
+      "1939-01",
+      "1939-02",
+      "1939-03",
+      "1940-01",
+      "1940-02",
+      "1940-03"
+    ],
+    "maximum_distinct_issues_to_screen": 24,
+    "achieved_issue_level_screening": 0,
+    "achieved_page_transcript_screening": 2,
+    "distinct_issue_titles_indexed": 2
+  },
+  "corpus_observations": [
+    {
+      "source_id": "GONZAGA-BULLETIN-1939-03-22-P3",
+      "date": "1939-03-22",
+      "season": "1938-39",
+      "issue": "Vol.20 no.22",
+      "page": 3,
+      "url": "https://digital.gonzaga.edu/digital/collection/p16011coll5/id/907/",
+      "access": "SEARCH_ENGINE_EXPOSED_PAGE_LEVEL_ORIGINAL_OCR_TRANSCRIPT__DIRECT_ORIGINAL_JS_REQUIRED",
+      "sports_content": "Predominantly Gonzaga hockey, spring football, boxing, tennis; an unrelated Carnegie Tech college basketball passage.",
+      "in_scope_played_gonzaga_basketball_result": false,
+      "identity_candidate": false,
+      "limitation": "Only one original page indexed, not full issue; no claim about other pages or issues."
+    },
+    {
+      "source_id": "GONZAGA-BULLETIN-1939-10-26-P1",
+      "date": "1939-10-26",
+      "season": "1939-40",
+      "issue": "Vol.21 no.6",
+      "page": 1,
+      "url": "https://digital.gonzaga.edu/digital/collection/p16011coll5/id/969/",
+      "access": "SEARCH_ENGINE_EXPOSED_PAGE_LEVEL_ORIGINAL_OCR_TRANSCRIPT__DIRECT_ORIGINAL_JS_REQUIRED",
+      "sports_content": "First varsity basketball turnout announced; football coverage and other campus reporting.",
+      "in_scope_played_gonzaga_basketball_result": false,
+      "identity_candidate": false,
+      "limitation": "Preseason basketball announcement, not a played result. Outside target Jan–Mar winter window, included as feasibility evidence only."
+    }
+  ],
+  "access_and_discovery_limits": [
+    {
+      "mode": "TARGET_COLLECTION_DIRECT_ITEM_OPEN",
+      "urls": [
+        "https://digital.gonzaga.edu/digital/collection/p16011coll5/id/907/",
+        "https://digital.gonzaga.edu/digital/collection/p16011coll5/id/969/"
+      ],
+      "result": "JAVASCRIPT_REQUIRED__NO_MACHINE_READABLE_PAGE_TRANSCRIPT_FROM_DIRECT_OPEN"
+    },
+    {
+      "mode": "CONTENTDM_REST_AND_IIIF_API_ATTEMPT",
+      "examples": [
+        "https://digital.gonzaga.edu/digital/api/singleitem/collection/p16011coll5/id/907/",
+        "https://digital.gonzaga.edu/digital/iiif/p16011coll5/907/manifest.json"
+      ],
+      "result": "UNAVAILABLE_TO_WEB_RETRIEVAL__NO_VERIFIED_INDEXED_ISSUE_CENSUS"
+    },
+    {
+      "mode": "TARGETED_SEARCH_INDEX",
+      "query_classes": [
+        "Collection-specific 1939/1940 Gonzaga basketball played-result search",
+        "Vol.20 January/February/March 1939 issue-date discovery",
+        "Vol.21 January/February/March 1940 issue-date discovery",
+        "Exact 1938–39 / 1939–40 Bulletin season-term searches"
+      ],
+      "result": "TWO_SOURCE_PAGE_RECORDS_FOUND_BUT_NO_BASKETBALL_PLAYED_RESULTS_AND_NO_JAN_MAR_1940_PAGE_RECORD"
+    },
+    {
+      "mode": "ARCHIVE_COVERAGE_DISCLOSURE",
+      "url": "https://digital.gonzaga.edu/",
+      "result": "Gonzaga University states early newspaper issues are missing and digitization is ongoing; absence of index hits is not missing-game evidence."
+    }
+  ],
+  "season_baseline_crosscheck": [
+    {
+      "season": "1938-39",
+      "official_record": {
+        "wins": 7,
+        "losses": 10,
+        "games": 17
+      },
+      "accepted_record": {
+        "wins": 1,
+        "losses": 7,
+        "games": 8
+      },
+      "diagnostic_games_difference": 9
+    },
+    {
+      "season": "1939-40",
+      "official_record": {
+        "wins": 9,
+        "losses": 15,
+        "games": 24
+      },
+      "accepted_record": {
+        "wins": 2,
+        "losses": 7,
+        "games": 9
+      },
+      "diagnostic_games_difference": 15
+    }
+  ],
+  "result": {
+    "new_source_backed_competitive_games": 0,
+    "new_accepted_game_rows": 0,
+    "new_holds": 0,
+    "field_repairs": 0,
+    "ledger_changed": false,
+    "existing_candidate_holds": 6,
+    "existing_accounting_closeout_blockers": 4,
+    "broader_numeric_underidentified_seasons": 46,
+    "source_exhaustion_claim": "NO__PILOT_ACCESS_PATH_ONLY",
+    "scope_exhaustion_claim": "NO__NOT_ALL_BULLETIN_ISSUES_SCREENED",
+    "stage1_closeout_eligible": false
+  },
+  "new_concrete_next_source_lead": {
+    "source_family": "Spokane Public Library historical Spokane Chronicle / Spokesman-Review full-page original newspaper corpus",
+    "reference_url": "https://www.spokanelibrary.org/turn-back-time-with-historical-newspapers/",
+    "coverage": "Spokane newspapers 1883–2009 and Chronicle 1890–1992 through ProQuest Historical Newspapers",
+    "access_caveat": "The library describes an institutional database access route; this Research lane has not authenticated public full-page search/readability and must not assume accessible original pages.",
+    "next_scope": "One read-only accessibility and source-result materiality probe in Jan–Mar 1939 and Jan–Mar 1940, with a small predeclared cap. Only proceed to evidence harvesting if original game-result pages are really readable; otherwise stop with explicit access limits.",
+    "status": "LEAD_IDENTIFIED_NOT_RESEARCHED__NO_GAMES_INFERRED"
+  },
+  "next_bounded_unit": "One narrow original Spokane newspaper full-page accessibility/materiality probe for Jan-Mar 1939/1940, not another Gonzaga Bulletin index retry. Stage 1 remains ACTIVE; no Stage 2 or owner decision until policy prerequisites."
+}
