@@ -1,0 +1,34 @@
+{
+  "decisions": {
+    "IDENTITY-UC-DAVIS-EXP-1914-15-004": "FORCE_NEW",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1914-15-004-CBBG-0114369-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1914-15-004-CBBG-0114369-SITE_TYPE": "NOT_APPLICABLE",
+    "IDENTITY-UC-DAVIS-EXP-1936-37-001": "MATCH_CANONICAL:CBBG-0114571",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1936-37-001-CBBG-0114571-SCORE": "KEEP_CANONICAL",
+    "IDENTITY-UC-DAVIS-EXP-1942-43-005": "FORCE_NEW",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1942-43-005-CBBG-0113018-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1942-43-005-CBBG-0113018-SITE_TYPE": "NOT_APPLICABLE",
+    "IDENTITY-UC-DAVIS-EXP-1947-48-006": "FORCE_NEW",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1947-48-006-CBBG-0113104-SCORE": "NOT_APPLICABLE",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1947-48-006-CBBG-0113104-SITE_TYPE": "NOT_APPLICABLE",
+    "DISCREPANCY-UC-DAVIS-EXP-1973-74-001-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-UC-DAVIS-EXP-1973-74-002-SITE_TYPE": "KEEP_CANONICAL",
+    "DISCREPANCY-UC-DAVIS-EXP-1973-74-004-SITE_TYPE": "KEEP_CANONICAL"
+  },
+  "basis_by_decision": {
+    "IDENTITY-UC-DAVIS-EXP-1914-15-004": "UC Davis's year-by-year source independently lists two 1914-15 losses to Stanford: 23-16 (this row) and 36-31 (UC-DAVIS-EXP-1914-15-005). Stanford's established STAN-R-0083 and CBBG-0114369 are explicitly the 36-31 game already matched to row 005. The 23-16 meeting is separate; force a new identity, never reuse one canonical game for both.",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1914-15-004-CBBG-0114369-SCORE": "Not applicable: the 23-16 Stanford loss is a different UC Davis game; the 36-31 CBBG-0114369 belongs exclusively to UC-DAVIS-EXP-1914-15-005.",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1914-15-004-CBBG-0114369-SITE_TYPE": "Not applicable: the 23-16 Stanford loss is distinct from CBBG-0114369. No home/site inference is made for the new undated game; preserve UC Davis UNKNOWN.",
+    "IDENTITY-UC-DAVIS-EXP-1936-37-001": "UC Davis independently records a 1936-37 42-16 loss at Stanford; Stanford's institutional STAN-R-0469 reports one California Aggies home win 41-16 in the same season at Stanford Pavilion. Same program pairing, season, winner, losing team's 16 points, and a one-point winning-score variance favor one contested-score game over manufacturing an uncorroborated second 41/42-16 meeting. Match the established CBBG-0114571 while retaining both literal source scores.",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1936-37-001-CBBG-0114571-SCORE": "Stanford's reciprocal STAN-R-0469 and published canonical CBBG-0114571 record 41-16; UC Davis's independent year-by-year list records 42-16. Neither source conclusively adjudicates the single-point difference. Conservatively retain the published canonical 41-16, preserve UC Davis's 42-16 raw/source assertion as the documented discrepancy, and present the conflict to Owner Gate 1.",
+    "IDENTITY-UC-DAVIS-EXP-1942-43-005": "UC Davis explicitly lists two distinct 1942-43 California losses, 50-20 (UC-DAVIS-EXP-1942-43-001) and 43-32 (this row). California's CAL-R1-00588 reports the 50-20 Berkeley/Harmon Gym win and is already the confident match to CBBG-0113018. The 43-32 game cannot also match that canonical identity under the one-game/one-canonical rule. Force new; preserve unknown H/A/N.",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1942-43-005-CBBG-0113018-SCORE": "Not applicable: California's 50-20 CBBG-0113018 is already the distinct UC-DAVIS-EXP-1942-43-001 game, not the 43-32 game.",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1942-43-005-CBBG-0113018-SITE_TYPE": "Not applicable: CBBG-0113018 is the other, 50-20 Berkeley game. The 43-32 game's H/A/N remains UNKNOWN and no opponent-home venue is inferred.",
+    "IDENTITY-UC-DAVIS-EXP-1947-48-006": "UC Davis lists two 1947-48 California losses: dated 1947-12-13 58-42 (UC-DAVIS-EXP-1947-48-003), and undated 54-39 (this row). California's CAL-R1-00710 explicitly reports Dec 13 58-42 at Harmon Gym, already confidently matched to CBBG-0113104. The 54-39 game is a separate meeting and cannot be assigned to that same canonical identity. Force new, preserving date/site uncertainty.",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1947-48-006-CBBG-0113104-SCORE": "Not applicable: CBBG-0113104 is the dated 58-42 game already assigned to UC-DAVIS-EXP-1947-48-003, not the separate 54-39 loss.",
+    "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1947-48-006-CBBG-0113104-SITE_TYPE": "Not applicable: California's Dec 13 58-42 home game is distinct. Preserve the 54-39 game's UNKNOWN site classification rather than copying Berkeley geography.",
+    "DISCREPANCY-UC-DAVIS-EXP-1973-74-001-SITE_TYPE": "UC Davis's 1973-12-01 Minnesota loss 45-55 carries a generic 'vs.' cue and Hickey Gymnasium inference, but Minnesota's dated institutional MINRAW-01436 records the exact 55-45 win as HOME at Williams Arena, Minneapolis. The reciprocal exact-score/date and explicit venue favor the established Minnesota-home canonical site. Recommend KEEP_CANONICAL, retain UC Davis's original source and record the opposing presentation for owner review.",
+    "DISCREPANCY-UC-DAVIS-EXP-1973-74-002-SITE_TYPE": "UC Davis's 1973-12-03 53-97 Wisconsin loss is coded from 'vs.' and Hickey Gymnasium, but Wisconsin's WISCRAW-01405 explicitly records the 97-53 win on the same date HOME at Wisconsin Field House, Madison. Strong date/score/facility reciprocal evidence favors the existing Wisconsin-home canonical classification. Recommend KEEP_CANONICAL and preserve source evidence for owner review.",
+    "DISCREPANCY-UC-DAVIS-EXP-1973-74-004-SITE_TYPE": "UC Davis's 1973-12-19 59-82 Oregon loss carries a generic 'vs.' and Hickey Gymnasium inference; Oregon's ORERAW-01617 explicitly documents the 82-59 win at home (McArthur Court, Eugene) on that date. Retain the independently corroborated Oregon-home canonical site with KEEP_CANONICAL and preserve UC Davis's alternate curated representation for the owner."
+  }
+}
