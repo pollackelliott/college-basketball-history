@@ -1,0 +1,65 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml": "02c7ca9d238e7f2bd6898aae8ff852313d8515f848806bbe86c012877fe65219",
+    "tests/test_expansion_approved_venue_count_guard.py": "75f6f113813129c19833bf8b20fd5448f0d6a9b3d5fe49602737fa42eec5187f",
+    "tools/all_history_expansion_display_successor_guard.py": "57e74691b9eff811359eeca151f302f6cead444435dc3e87f3e62b4e1ca14a3d"
+  },
+  "changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_expansion_approved_venue_count_guard.py",
+    "tools/all_history_expansion_display_successor_guard.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "global_lock_commit": "995a6ed63fd01a62135ee2983965c5a1ffab601c",
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "main_changed_paths": [
+    ".github/workflows/stage2-candidate-runtime-rehearsal.yml",
+    "tests/test_expansion_approved_venue_count_guard.py",
+    "tools/all_history_expansion_display_successor_guard.py"
+  ],
+  "merge_base_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "05a14189a2e80c4c34908f1382e959cc0905a1aa3ecf1badd1ad1b05c31fe10e",
+    "notes.md": "8f85869bbbfa213a57e798a745500e5d0e5de80951b5469093ccab37e2f28535",
+    "opponents.csv": "f5d276824bf4b55e36fd8e8c0269be6e5145d39a49fc28f50603deedb0ad3e72",
+    "source-games.csv": "2bb4172144004e10aaaf48b642196b9115914a9c1ba3cd369a0f7fa917717953",
+    "source-notes.md": "823126f1afac161846cdc606e7a824b5d31b96589fd04ef44f96dc4fcf5bb23e",
+    "venues.csv": "5249c542d0cea3e747dde6b04eaa40df2df33412b3001435d6c6674b57321852"
+  },
+  "predecessor_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "prepared_commit_sha": "8fac24e2ba8ba8deb8ea933f7d73a67875e1c423",
+  "prepared_main_parent_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "prepared_parent_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "prepared_parents": [
+    "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+    "5b840a354fb5cd792239ff8b93cba223a18dd87a"
+  ],
+  "prepared_tree_sha": "df2a86099f35459e8b86b95112ae45ba2f43276a",
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "refresh_proof_sha256": "40e7b0ae2f9ce0d99dcda0eff3eb09398bbd6d0018c39b5ad66c1eb094a57316",
+  "repository_validation": "PASS",
+  "request_id": "uc-davis-expansion-stage2-current-main-refresh-0002",
+  "request_sha256": "46652530765825e01bfb419eb329e8999b728af32b688c8d187e7d9b751946a2",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "sidecars": {
+    "integration-freeze.json": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+    "refresh-proof.json": "40e7b0ae2f9ce0d99dcda0eff3eb09398bbd6d0018c39b5ad66c1eb094a57316"
+  },
+  "target_branch": "data/uc-davis-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/uc-davis/notes.md",
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv",
+    "schools/uc-davis/source-notes.md",
+    "schools/uc-davis/venues.csv"
+  ]
+}
