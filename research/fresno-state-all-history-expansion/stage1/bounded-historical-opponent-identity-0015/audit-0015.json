@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_BOUNDED_HISTORICAL_OPPONENT_IDENTITY_REVIEW_0015",
+  "status": "STAGE1_OPEN__TWO_MATERIAL_IDENTITY_FAMILIES_UNRESOLVED__NO_HISTORICAL_GAME_MUTATION",
+  "protected_main_at_recovery": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "research_parent_commit_sha": "24b9916283e072fac9c3a2ac8d935318e763577d",
+  "parent_tree_sha": "af3e7e657c31cc371971b6847d755b4476995c06",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "preserved_git_blobs": {
+    "accepted_working_ledger": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "source_dispositions": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "pending_groups": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+    "season_census": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+    "raw_guide": "fc72b2862aa283481d498873af0a17fa1d7e405a"
+  },
+  "parent_mechanically_audited_working_games": 1009,
+  "parent_reconciled_seasons": 49,
+  "inherited_preserved_games": 78,
+  "previous_unaccepted_source_groups": 6,
+  "previous_unaccepted_source_groups_remaining": 6,
+  "new_material_identity_replacements_proven": 0,
+  "accepted_game_rows_added": 0,
+  "accepted_game_rows_removed": 0,
+  "accepted_game_rows_modified": 0,
+  "family_findings": [
+    {
+      "family": "1922-23_BAKERSFIELD",
+      "source_entry_id": "FRESNO-EXP-CAND-1922-23-006",
+      "modern_csub_identity": "CHRONOLOGICALLY_IMPOSSIBLE",
+      "bakersfield_jc_context": "SEPARATE_FRESNO_FOOTBALL_1922_1923_1924_PROVES_PERIOD_ATHLETIC_OPPONENT_NOT_BASKETBALL_GAME",
+      "real_1923_basketball_opponent": "UNRESOLVED",
+      "working_game_row": "PRESERVED_PROVISIONAL"
+    },
+    {
+      "family": "1926-27_UC_DAVIS",
+      "fresno_source_rows": 4,
+      "uc_davis_complete_season_opponent_rows": 2,
+      "uc_davis_rows_have_scores": false,
+      "paired_fresno_scores": 0,
+      "status": "STAGE1_BLOCKING_UNPAIRED_GAME_IDENTITY"
+    }
+  ],
+  "other_blockers_unchanged": [
+    "1935-36_BROADWAY_CLOWNS_INCLUSION",
+    "1953-54_HARLEM_CLOWNS_INCLUSION",
+    "1965-66_W21_L7_LEDGER_VS_W21_L8_AGGREGATE",
+    "1943-44_WARTIME_UNQUANTIFIED_ACTIVITY_AND_PRIOR_DOCUMENTED_RESIDUALS"
+  ],
+  "parent_accepted_blobs_unchanged": true,
+  "protected_main_modified": false,
+  "published_fresno_modified": false,
+  "stage2_authorized": false,
+  "next_unit": "Match-specific contemporary primary basketball evidence only when directly accessible; otherwise preserve bounded identity exhaustion and work remaining Stage 1 material inclusion/accounting families."
+}
