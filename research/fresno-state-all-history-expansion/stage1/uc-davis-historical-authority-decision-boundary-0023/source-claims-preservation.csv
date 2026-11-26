@@ -1,0 +1,5 @@
+source_entry_id,source_order,original_literal,source_result,fresno_points,uc_davis_points,current_stage1_status,match_to_davis_slot_4,match_to_davis_slot_5,proven_duplicate,approved_repair_status
+"FRESNO-EXP-CAND-1926-27-006","6","UC Davis W 31-18","W","31","18","BLOCKED_RECIPROCAL_GAME_IDENTITY","UNRESOLVED","UNRESOLVED","NO","NOT_APPROVED"
+"FRESNO-EXP-CAND-1926-27-007","7","UC Davis W 25-13","W","25","13","BLOCKED_RECIPROCAL_GAME_IDENTITY","UNRESOLVED","UNRESOLVED","NO","NOT_APPROVED"
+"FRESNO-EXP-CAND-1926-27-012","12","UC Davis W 31-14","W","31","14","BLOCKED_RECIPROCAL_GAME_IDENTITY","UNRESOLVED","UNRESOLVED","NO","NOT_APPROVED"
+"FRESNO-EXP-CAND-1926-27-013","13","UC Davis W 31-18","W","31","18","BLOCKED_RECIPROCAL_GAME_IDENTITY","UNRESOLVED","UNRESOLVED","NO","NOT_APPROVED"

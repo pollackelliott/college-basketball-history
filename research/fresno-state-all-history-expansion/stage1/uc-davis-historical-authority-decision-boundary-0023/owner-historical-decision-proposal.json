@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_1926_27_UC_DAVIS_TWO_VERSUS_FOUR_EXACT_OWNER_HISTORICAL_PROPOSAL",
+  "status": "PROPOSAL_UNAPPROVED__DO_NOT_MUTATE",
+  "research_parent_sha": "9b3aba5d77ed4583328018bed4601a527a494c28",
+  "protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "historical_sources": {
+    "target_school_guide_source_result_count": 4,
+    "target_source_exact_ids": [
+      "FRESNO-EXP-CAND-1926-27-006",
+      "FRESNO-EXP-CAND-1926-27-007",
+      "FRESNO-EXP-CAND-1926-27-012",
+      "FRESNO-EXP-CAND-1926-27-013"
+    ],
+    "target_source_scores": [
+      "31-18",
+      "25-13",
+      "31-14",
+      "31-18"
+    ],
+    "target_printed_season_record": "12-8",
+    "reciprocal_uc_davis_1926_27_complete_season_record": "2-8",
+    "reciprocal_uc_davis_fresno_opponent_rows": 2,
+    "reciprocal_row_ordinals": [
+      4,
+      5
+    ],
+    "reciprocal_scores_and_dates": "UNKNOWN"
+  },
+  "approved_option": null,
+  "recommended_option": "A_TWO_DAVIS_MATCHES_UNKNOWN_SCORES_PRESERVE_FOUR_FRESNO_UNATTRIBUTED_CONFLICTING_CLAIMS",
+  "options": [
+    {
+      "key": "A",
+      "description": "Accept Davis documented TWO games as Fresno two wins with scores/dates UNKNOWN; preserve four Fresno source claims as unattributed conflict; mark 12-8 season heading as source contradiction; require validated representation before ledger changes",
+      "game_count_if_approved_and_validated": 18,
+      "wins": 10,
+      "losses": 8,
+      "source_game_claims_retained": 4,
+      "source_score_pair_assignments": 0,
+      "automatically_authorized": false
+    },
+    {
+      "key": "B",
+      "description": "Prefer Fresno four source wins as distinct games over Davis complete two-loss schedule; current research does NOT recommend this absent specific contrary evidence",
+      "game_count_if_explicitly_approved_and_proven": 20,
+      "wins": 12,
+      "losses": 8,
+      "automatically_authorized": false
+    },
+    {
+      "key": "C",
+      "description": "Defer until new primary period game source; preserve current working accepted 16 8-8 plus four blocked source claims",
+      "accepted_count_remains": 16,
+      "wins": 8,
+      "losses": 8
+    }
+  ],
+  "exact_owner_question": "For Fresno State 1926–27, do you approve treating UC Davis's two separately recorded losses to Fresno State as the authoritative count of TWO Fresno competitive wins, with dates/scores unknown, while preserving ALL FOUR Fresno State scored UC Davis source lines as unassigned conflicting evidence and retaining the printed Fresno 12–8 record separately from the proposed 10–8 game-derived season?",
+  "owner_approval_received": false,
+  "source_assignment_proven": false,
+  "game_rows_mutation_authorized": false,
+  "downstream_guards": [
+    "Exact owner historical ruling only",
+    "No source literal changed",
+    "No individual Fresno scored row marked proven duplicate",
+    "No game IDs generated until validated stage1 representation",
+    "No 1965-66 missing-loss creation",
+    "No Stage2 and no global/shared main mutation"
+  ]
+}

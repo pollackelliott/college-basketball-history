@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_UC_DAVIS_OWNER_HISTORICAL_AUTHORITY_BOUNDARY_0023",
+  "status": "STAGE1_OPEN__EXPLICIT_HISTORICAL_DECISION_PREPARED_NOT_APPROVED__NO_GAME_MUTATION",
+  "main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "parent_research_head": "9b3aba5d77ed4583328018bed4601a527a494c28",
+  "parent_tree_sha": "429f69b5eaaead30fb8c2f529baf044d32464627",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "preserved_input_blobs": {
+    "bulk-acceptance-and-game-types-0013/stage1-working-accepted-game-ledger.csv": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "bulk-acceptance-and-game-types-0013/stage1-pending-source-groups.csv": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+    "bulk-acceptance-and-game-types-0013/49-season-bulk-acceptance-census.csv": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+    "bulk-acceptance-and-game-types-0013/stage1-bulk-source-dispositions.csv": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "uc-davis-two-slot-representation-feasibility-0022/audit-0022.json": "0c52680933794fff750955a3e2c617eaff28b2f2"
+  },
+  "protected_main_registries": {
+    "data/reference/early-history-accounting-authorities.json": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+    "data/reference/early-aggregate-coverage-authorities.json": "8164c5953fa3091cea2163d325602e5804e72cf2"
+  },
+  "UC_DAVIS_four_source_entries": [
+    "FRESNO-EXP-CAND-1926-27-006",
+    "FRESNO-EXP-CAND-1926-27-007",
+    "FRESNO-EXP-CAND-1926-27-012",
+    "FRESNO-EXP-CAND-1926-27-013"
+  ],
+  "UC_DAVIS_two_reciprocal_losses": 2,
+  "current_accepted_fresno_game_total": 1009,
+  "current_accepted_1926_27": 16,
+  "current_accepted_1926_27_record": "8-8",
+  "conditional_two_slot_games": 18,
+  "conditional_two_slot_record": "10-8",
+  "literal_fresno_source_results_1926_27": 20,
+  "literal_source_heading": "12-8",
+  "owner_action_requested_but_not_obtained": true,
+  "owner_approval_received": false,
+  "generic_auto_exception_available": false,
+  "source_pairing_proven": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "accepted_game_rows_changed": 0,
+  "accepted_source_rows_changed": 0,
+  "source_group_rows_changed": 0,
+  "protected_main_mutated": false,
+  "published_fresno_mutated": false,
+  "global_shared_reference_mutated": false,
+  "next_action": "Only explicit owner exact A/B/C historical authority or truly novel 1927 match-specific primary evidence; even A requires validated safe source-preserving reconciliation before games are committed."
+}
