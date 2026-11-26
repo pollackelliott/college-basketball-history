@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "kind": "EXPANSION_STARTUP_IMMUTABLE_TRANSPORT_RECEIPT",
+  "school_key": "uc-davis",
+  "startup_id": "uc-davis-expansion-startup-0003",
+  "purpose": "Bind an original unchanged Research Freeze and already approved owner/venue sidecars as direct predecessor to a new guarded startup intent; no data or authority mutation",
+  "expected_protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "original_transport_commit_sha": "3b24750c2a78780d0916948b3733dd9c7155ef58",
+  "research_freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "transport_path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-",
+  "transport_part_count": 1,
+  "owner_correction_path": ".remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json",
+  "owner_correction_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+  "venue_reconciliation_path": ".remote-implementation/transports/uc-davis/uc-davis-expansion-distinct-venue-registration-0008.json",
+  "venue_reconciliation_sha256": "c207fb50bb745e148684fe7008383bb10ba854c0aed12bb7bcaefb7a21226181",
+  "evidence": "PR #723 merged exact-head PASS; distinct venue and cross-jurisdiction alias false positives verified; no original source bytes reauthored"
+}
