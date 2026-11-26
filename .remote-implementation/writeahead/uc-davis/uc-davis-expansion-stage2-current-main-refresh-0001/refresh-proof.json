@@ -1,0 +1,71 @@
+{
+  "changed_file_sha256": {
+    ".github/workflows/all-history-expansion-stage1-validation.yml": "d90efcfe104d700d2eedf56638a1e188b0a8497842212ddda33df7e405415667",
+    "docs/implementation-pre-gate-adversarial-challenge.md": "89d692d56c89874d0f4de1df7d44644ed1fd7e4ff6509d12e0adb2bf27ad18cc",
+    "tests/test_registered_opponent_home_venue.py": "046b0ab5391c2deb57892945f2f4e3eaeed18a205fa8b67fdc15340a3538a8d8",
+    "tools/ingest_school.py": "27e44339ca8f7e859ed50c1ded5c79bd9f373d7bb87f43012787752e6f7d47e1",
+    "tools/onboarding_plan.py": "b21ce785a2423c80f59999c83e48bc549b5da858b895d0c25bffb9fcdd98025b",
+    "tools/venue_reference.py": "937b2cacca4132fe91b064c0111a9b3c416f52962ddce3e3522988fe5541ead0"
+  },
+  "changed_paths": [
+    ".github/workflows/all-history-expansion-stage1-validation.yml",
+    "docs/implementation-pre-gate-adversarial-challenge.md",
+    "tests/test_registered_opponent_home_venue.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py",
+    "tools/venue_reference.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "948468477bf2159094f3c3935b95117c10434e11",
+  "main_changed_paths": [
+    ".github/workflows/all-history-expansion-stage1-validation.yml",
+    "docs/implementation-pre-gate-adversarial-challenge.md",
+    "tests/test_registered_opponent_home_venue.py",
+    "tools/ingest_school.py",
+    "tools/onboarding_plan.py",
+    "tools/venue_reference.py"
+  ],
+  "merge_base_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "overlap_paths": [],
+  "package_member_sha256": {
+    "conferences.csv": "05a14189a2e80c4c34908f1382e959cc0905a1aa3ecf1badd1ad1b05c31fe10e",
+    "notes.md": "8f85869bbbfa213a57e798a745500e5d0e5de80951b5469093ccab37e2f28535",
+    "opponents.csv": "5c826483d667ea9e978dd3604d86783675ab4c6753fa493bd0ad89d60c782ef2",
+    "source-games.csv": "9382223ec169872826c842a836a43e73fb1073ec88082b28d4975f925c53b618",
+    "source-notes.md": "823126f1afac161846cdc606e7a824b5d31b96589fd04ef44f96dc4fcf5bb23e",
+    "venues.csv": "5249c542d0cea3e747dde6b04eaa40df2df33412b3001435d6c6674b57321852"
+  },
+  "prepared_commit_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
+  "prepared_parents": [
+    "948468477bf2159094f3c3935b95117c10434e11",
+    "4a9a18090523f5240bdd0fc2dc361430bab98a51"
+  ],
+  "prepared_tree_sha": "7cee1c51d88693167e62a07d67cd2c52dcd9e7a1",
+  "preserved_target_file_sha256": {
+    "data/reference/programs.csv": "45ec2888a6c8d50bbb5d65797babdd3797163d3f0b579e3e0488d37abe032d15",
+    "data/reference/venue-names.csv": "f18f50b55b14ee06e082916b1c4d0cfee5d787532ae7aa1ee4907db52c6cd636",
+    "data/reference/venues.csv": "69cc21ccfce39c4602aabedd0b49d1aa821dec30f9e7603f6879dd1f0805698e",
+    "schools/uc-davis/notes.md": "8f85869bbbfa213a57e798a745500e5d0e5de80951b5469093ccab37e2f28535",
+    "schools/uc-davis/opponents.csv": "5c826483d667ea9e978dd3604d86783675ab4c6753fa493bd0ad89d60c782ef2",
+    "schools/uc-davis/source-games.csv": "9382223ec169872826c842a836a43e73fb1073ec88082b28d4975f925c53b618",
+    "schools/uc-davis/source-notes.md": "823126f1afac161846cdc606e7a824b5d31b96589fd04ef44f96dc4fcf5bb23e",
+    "schools/uc-davis/venues.csv": "5249c542d0cea3e747dde6b04eaa40df2df33412b3001435d6c6674b57321852"
+  },
+  "protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "repository_validation": "PASS",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift": "PASS",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/uc-davis/notes.md",
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv",
+    "schools/uc-davis/source-notes.md",
+    "schools/uc-davis/venues.csv"
+  ]
+}
