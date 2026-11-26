@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_CONSOLIDATED_CLOSEOUT_FEASIBILITY_0021",
+  "status": "STAGE1_OPEN__MECHANICAL_COUNTS_VERIFIED__FOUR_HISTORICAL_MATERIAL_FAMILIES_REMAIN__NO_GAME_MUTATION",
+  "authority": {
+    "protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+    "research_branch_parent_sha": "2b1864c60b241fabd9469895d0a4e23a2a0f59fd",
+    "research_parent_tree_sha": "77188f4f4e8e33dc09af8ac0e37df6a178c56f11",
+    "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+    "preserved_git_blobs": {
+      "accepted_1009": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+      "source_dispositions_1034": "5ada1c5e75f54445577577c92d6576ebde56e811",
+      "pending_source_groups_6": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+      "accepted_season_census_49": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+      "source_raw_guide": "fc72b2862aa283481d498873af0a17fa1d7e405a",
+      "independent_season_audit_49": "c608d55f7f7bc5d6d6e2684ebefd33a1525d19dc"
+    }
+  },
+  "read_only_git_rederivation": {
+    "source_row_count": 1034,
+    "source_status_counts": {
+      "ACCEPTED_NEW_COMPETITIVE_SOURCE_GAME": 931,
+      "BLOCKED_RECIPROCAL_GAME_IDENTITY": 4,
+      "BLOCKED_TOURING_CLOWNS_MATCH_INCLUSION": 2,
+      "DUPLICATE_SOURCE_REPRESENTATION_NO_EXTRA_GAME": 2,
+      "EXCLUDED_NONCOMPETITIVE_EVENT": 17,
+      "INHERITED_PRIOR_ACCEPTED_RESEARCH_ID": 78
+    },
+    "accepted_working_game_count": 1009,
+    "accepted_unique_ids": 1009,
+    "accepted_game_type_counts": {
+      "NCAA_TOURNAMENT": 16,
+      "POSTSEASON": 1,
+      "REGULAR_SEASON": 992
+    },
+    "source_partition": {
+      "raw_source_rows": 1034,
+      "accepted_games": 1009,
+      "excluded_source_rows": 17,
+      "duplicate_source_representations": 2,
+      "pending_source_groups": 6,
+      "accepted_wins": 530,
+      "accepted_losses": 479
+    },
+    "source_balance_pass": true,
+    "season_count": 49,
+    "season_range": [
+      "1921-22",
+      "1969-70"
+    ],
+    "seasons_with_accepted_games": 48,
+    "uncounted_source_groups": [
+      "FRESNO-EXP-CAND-1926-27-006",
+      "FRESNO-EXP-CAND-1926-27-007",
+      "FRESNO-EXP-CAND-1926-27-012",
+      "FRESNO-EXP-CAND-1926-27-013",
+      "FRESNO-EXP-CAND-1935-36-019",
+      "FRESNO-EXP-CAND-1953-54-018"
+    ],
+    "source_group_blocked_seasons": [
+      "1926-27",
+      "1935-36",
+      "1953-54"
+    ],
+    "aggregate_only_blocker_seasons": [
+      "1965-66"
+    ],
+    "seasons_49_mechanical_audit_PASS": 49
+  },
+  "material_family_ids": [
+    "FS-S1-1926-27-UC-DAVIS-COUNT",
+    "FS-S1-1935-36-BROADWAY",
+    "FS-S1-1953-54-HARLEM",
+    "FS-S1-1965-66-AGGREGATE",
+    "FS-S1-1922-23-CSUB"
+  ],
+  "nonblocking_or_caution_family_ids": [
+    "FS-S1-1943-44-WARTIME",
+    "FS-S1-1939-40-HEADING",
+    "FS-S1-1969-70-HEADING",
+    "FS-S1-1952-53-HEADING",
+    "FS-S1-1922-23-UC-DAVIS-SCORE",
+    "FS-S1-ADMIN-FORFEITS"
+  ],
+  "no_current_exception_applies_to_entire_mixed_blocker_population": true,
+  "source_acknowledged_missing_game_exception_1965_66_eligible": false,
+  "founding_era_exception_1965_66_auto_eligible": false,
+  "owner_decision_invented": false,
+  "source_exhaustion_claimed": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "research_started_anew": false,
+  "accepted_game_rows_added": 0,
+  "accepted_game_rows_removed": 0,
+  "accepted_game_rows_modified": 0,
+  "published_games_mutated": false,
+  "protected_main_mutated": false,
+  "shared_reference_mutated": false,
+  "old_readiness_0012_pending_925_status": "SUPERSEDED_BY_0013_BULK_ACCEPTANCE",
+  "old_readiness_0012_937_untyped_new_game_status": "SUPERSEDED_BY_0013_TYPED_ACCEPTED_UNIVERSE",
+  "next_bounded_unit": "READ_ONLY_UC_DAVIS_TWO_RECIPROCAL_SLOTS_REPRESENTATION_FEASIBILITY__NO_AUTOMATIC_GAME_ACCEPTANCE_OR_SCORE_GUESS"
+}
