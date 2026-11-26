@@ -1,0 +1,5 @@
+candidate,season,scheduled_date,classification,reason
+NNC-1953-DEC01,1953-54,1953-12-01,SCHEDULE_ONLY_POSSIBLE_PRIOR_DUPLICATE,Existing 51-69 loss may match December fixture; no exact game date proof
+NNC-1953-DEC10,1953-54,1953-12-10,SCHEDULE_ONLY_POSSIBLE_PRIOR_DUPLICATE,Existing 51-69 loss may match December fixture; no exact game date proof
+NNC-1954-JAN05,1953-54,1954-01-05,SCHEDULE_ONLY_NOT_ACCEPTED,No independent played result verified
+NNC-1954-FEB08,1953-54,1954-02-08,SCHEDULE_ONLY_NOT_ACCEPTED,No independent played result verified in sampled subsequent issue

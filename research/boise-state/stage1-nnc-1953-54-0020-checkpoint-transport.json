@@ -1,0 +1,18 @@
+{
+  "checkpoint": "boise-state-expansion-stage1-nnc-1953-54-tournament-0020",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1_IN_PROGRESS",
+  "school_key": "boise-state",
+  "research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "protected_main_at_start": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "research_parent_sha": "a9da54361a98d25220c696a95c3c10d684a07853",
+  "parent_zip_sha256": "3f8e16ca0bac8c19cbc80b8d0890e43e8eda007b63f153fe92cdd3f4e0b29a7d",
+  "identity_rows": 202,
+  "new_identity_rows": 1,
+  "repaired_existing_row_count": 0,
+  "source_recorded_jc_identified": 146,
+  "source_recorded_jc_aggregate_unmatched": 641,
+  "filename": "boise-state-expansion-stage1-nnc-1953-54-tournament-0020.zip",
+  "sha256": "e621a0fdc6ff7960a51b6f63ecdd5df36c40b2620dbbb47b0f68635c19dae0c6",
+  "manifested_members": 45
+}
