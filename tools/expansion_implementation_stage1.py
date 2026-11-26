@@ -1053,6 +1053,75 @@ def reconcile_canonical(
             key = (src["season_label"], src["game_date"], src["normalized_opponent_key"],
                    src["team_score"], src["opponent_score"])
             seen_strong[key].append(sid)
+
+    # Two distinct games in one verified frozen season ledger may face only one
+    # previously published canonical game.  If one frozen row has independently
+    # claimed that canonical game by its FULL exact score, the other frozen row
+    # cannot be forced onto the already-claimed game merely because the pair and
+    # season match.  This is an identity-only proof: it never alters or chooses
+    # between dates, sites, scores, or the source's opponent assertion.
+    #
+    # Require exactly two rows for the pair/season, one uniquely confident
+    # canonical claim, and disjoint complete score pairs.  Any competing
+    # candidate, unbound identity override, repeated exact date, missing score,
+    # partial-score overlap, or conflicting canonical claim remains a REVIEW.
+    grouped_frozen: dict[
+        tuple[str, tuple[str, str]], list[tuple[dict[str, str], dict[str, Any]]]
+    ] = defaultdict(list)
+    for src, item in zip(supplemental, rows):
+        grouped_frozen[
+            (src["season_label"], ordered_pair(school, src["normalized_opponent_key"]))
+        ].append((src, item))
+    canonical_by_id = {c["canonical_game_id"]: c for c in canonical}
+    for pair_rows in grouped_frozen.values():
+        if len(pair_rows) != 2:
+            continue
+        reused = [(s, r) for s, r in pair_rows if r["classification"] == "REUSE_CANONICAL"]
+        reviewing = [(s, r) for s, r in pair_rows if r["classification"] == "IDENTITY_REVIEW_BLOCKER"]
+        if len(reused) != 1 or len(reviewing) != 1:
+            continue
+        matched_src, matched = reused[0]
+        other_src, other = reviewing[0]
+        cid = matched["canonical_game_id"]
+        candidate = canonical_by_id.get(cid)
+        if (
+            candidate is None
+            or other["candidate_canonical_game_id"] != cid
+            or other["match_method"] != "UNIQUE_PAIR_SEASON_ONLY"
+            or other["same_pair_season_candidate_count"] != 1
+            or len(reuse_by_id[cid]) != 1
+            or matched_src.get("identity_override", "").strip()
+            or other_src.get("identity_override", "").strip()
+        ):
+            continue
+        matched_scores = (
+            matched_src.get("team_score", "").strip(),
+            matched_src.get("opponent_score", "").strip(),
+        )
+        other_scores = (
+            other_src.get("team_score", "").strip(),
+            other_src.get("opponent_score", "").strip(),
+        )
+        if not all(value.isdigit() for value in (*matched_scores, *other_scores)):
+            continue
+        if (
+            int(matched_scores[0]) == int(other_scores[0])
+            or int(matched_scores[1]) == int(other_scores[1])
+        ):
+            continue
+        matched_date = matched_src.get("game_date", "").strip()
+        other_date = other_src.get("game_date", "").strip()
+        if matched_date and matched_date == other_date:
+            continue
+        if not scores_match(matched_src, candidate) or scores_match(other_src, candidate):
+            continue
+
+        other["classification"] = "PROVISIONAL_NEW_CANONICAL"
+        other["candidate_canonical_game_id"] = ""
+        other["match_method"] = "DISTINCT_FROZEN_PEER_FULL_SCORE_CANONICAL_CLAIM"
+        counts["IDENTITY_REVIEW_BLOCKER"] -= 1
+        counts["PROVISIONAL_NEW_CANONICAL"] += 1
+
     return {
         "counts": {label: counts[label] for label in (
             "REUSE_CANONICAL", "PROVISIONAL_NEW_CANONICAL", "IDENTITY_REVIEW_BLOCKER")},
