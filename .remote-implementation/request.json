@@ -1,27 +1,6 @@
 {
-  "schema_version": 1,
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "hawai-i-expansion-release-production-proof-0001",
-  "school_key": "hawai-i",
-  "operation": "RELEASE_PRODUCTION_PROOF",
-  "previous_control_state_commit": "3e04cad94a364c160aed9140f80c5e202ebda36f",
-  "previous_control_state_sha256": "627d61f7d4e4ca7207a65e9729bef2586894b64a9afa184eedf535df42ac87de",
-  "expected_protected_main_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
-  "target_branch": "data/hawai-i-onboarding",
-  "target_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
-  "owner_gate_2_checkpoint": {
-    "path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
-    "sha256": "891ec9240ca3015b4312e138184c7590a7290179804d5202e1ae6d451d44d640"
-  },
-  "owner_gate_2_verification": {
-    "path": ".remote-implementation/verifications/hawai-i/hawai-i-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
-    "sha256": "cfa107bc016e88f98427e4ee2882643eba1d51ac3d4ba9d92d9206efdc378f94"
-  },
-  "pr_number": 717,
-  "merge_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
   "authority": {
-    "expansion_phase0": false,
-    "expansion_rebootstrap_from_freeze": false,
+    "expansion_phase0": true,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -31,7 +10,7 @@
     "release_gate2_approval": false,
     "release_presentation_refresh": false,
     "release_preview_verify": false,
-    "release_production_proof": true,
+    "release_production_proof": false,
     "release_readiness": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -45,7 +24,53 @@
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "origin": "Same serialized Hawai‘i ALL_HISTORY_EXPANSION final release, exact owner-approved Gate 2 and connector merge.",
-    "authorization": "Owner explicitly approved exact Hawai‘i PR #717 Preview deployment 8069822111. Independent Gate 2 approval verification PASS; exact merge packet 7105ddda5d6644605d5ca3976ebe07df47ac47b17bfa4f72f29c931a98bbe3e5 authorized two-parent merge method merge of PR #717 head 3126f7504ef909c15a1d5dd3942d937b65f039fd into protected main predecessor 48823b191b76671ce794b9ac0fe540f7a1260956. GitHub connector executed approved merge 4f99623c4ab916deaa080d32536e70eef0b3b751, now exact protected main with verified ordered parents. Read-only release Production-proof request checks exact SHA deployment and target plus every changed generated public JSON, with independent fresh equivalence and no new mutation/owner authority."
+    "authorization": "Owner Proceed authorizes ordinary UC Davis Stage 1/Integration Freeze/guarded Phase 0 through independent verification. Control Center issue #720 authorized the three settled source corrections; issue #722 authorized exact seven-case generic venue tooling. Generic tooling PRs #719, #721 and #723 merged. Only current-main deterministic stage preparation and existing guarded EXPANSION_PHASE0 child; no new historical, shared registry, Gate 1, Gate 2, Stage 2, release, or Production authority. Generic repository-owned expansion startup coordinator completed deterministic Stage 1 / Integration Freeze preparation; the child request authorizes only guarded EXPANSION_PHASE0.",
+    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION Implementation lane; new exact-main startup after former 0001/0002 pre-integration diagnostics, with original immutable Research Freeze 0025 and owner-correction 0005 hashes unchanged, seven-case venue sidecar 0008 hash-bound."
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+    "sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+    "transport": {
+      "commit_sha": "062a07471a4a76973e5ee029f52e02a8f97bc67b",
+      "kind": "git_base64_parts",
+      "part_count": 1,
+      "path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-"
+    }
+  },
+  "expected_protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "integration_freeze_sha256": "518052e3b3135416e3b08e3247bf2f945749e6e696fb0d50733cd20debca4b63",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "EXPANSION_PHASE0",
+  "owner_correction": {
+    "approval_issue_url": "https://github.com/pollackelliott/college-basketball-history/issues/720",
+    "approved_source_game_ids": [
+      "UC-DAVIS-EXP-1963-64-002",
+      "UC-DAVIS-EXP-1963-64-003",
+      "UC-DAVIS-EXP-1976-77-008"
+    ],
+    "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+    "freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+    "owner_checkpoint_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+    "path": ".remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json",
+    "school_key": "uc-davis",
+    "sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e"
+  },
+  "previous_control_state_commit": "eab5dd555647634528f84972c768ae02d4ac19d5",
+  "previous_control_state_sha256": "c2afa8b536acd5c4b009d76e2bf3cb832c5295952959f2eff6fe76e2c675629b",
+  "request_id": "uc-davis-expansion-phase0-0003",
+  "research_freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "stage1_control_authority_sha": "b7f6961f1c228a169feee96f3da95cba9538e8fb",
+  "stage1_independent_proof": {
+    "path": ".remote-implementation/startups/uc-davis/uc-davis-expansion-startup-0003/stage1-independent-proof.json",
+    "sha256": "5f1eb1c6a4c93d50b72143d3c16142b59f8efbba51c6de4f80dd61b6b2527449"
+  },
+  "stage1_independent_proof_sha256": "5f1eb1c6a4c93d50b72143d3c16142b59f8efbba51c6de4f80dd61b6b2527449",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "venue_reconciliation": {
+    "path": ".remote-implementation/startups/uc-davis/uc-davis-expansion-startup-0003/venue-reconciliation.json",
+    "sha256": "c207fb50bb745e148684fe7008383bb10ba854c0aed12bb7bcaefb7a21226181"
   }
 }
