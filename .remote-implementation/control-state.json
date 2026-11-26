@@ -1605,11 +1605,11 @@
   "current_sequence": 774,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "uc-davis-expansion-stage2-current-main-refresh-0001",
     "school_key": "uc-davis",
     "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
