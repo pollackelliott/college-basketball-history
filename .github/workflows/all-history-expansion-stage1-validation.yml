@@ -204,6 +204,10 @@ jobs:
                   ["git", "-C", str(candidate), "checkout", "--detach", main],
                   check=True, stdout=subprocess.DEVNULL,
               )
+              # Data is exact protected main plus the projected package;
+              # validator *software* must come from the PR candidate.
+              shutil.copyfile(repo / "tools" / "venue_reference.py",
+                              candidate / "tools" / "venue_reference.py")
               for name in ("conferences.csv", "notes.md", "opponents.csv",
                            "source-games.csv", "source-notes.md", "venues.csv"):
                   shutil.copyfile(preview / name,
