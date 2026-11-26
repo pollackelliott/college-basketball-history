@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-expansion-stage2-current-main-refresh-0002",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "5e39dad86134701e17a4a498ceff0a83e207aa9f",
+  "previous_control_state_sha256": "0396ddfbefc5730cd3f1fad20b1ed862d03d53f8492d56485a1dcd8fcaae1cc7",
+  "expected_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-phase0-0004/successor-manifest.json",
+    "sha256": "89c3ff2dd7ab7bf901d32041897bc2f905c1ae7cab51ff2c7a2d7320b0168c41"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "48b24252a6ab7e413598a71c48a11f9209df6984ff3b5514b2f051949935036a"
+  },
+  "stage2_opponent_display_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "151b0bd5c88385edc703e1dbff2345f654ba77ba3b0ba1eaad1b677624ec9d6a"
+  },
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized UC Davis ALL_HISTORY_EXPANSION Stage 2 lane; merged generic frozen-venue compatibility tooling PR #728 at protected main 5b840a354fb5cd792239ff8b93cba223a18dd87a, exact candidate-runtime rehearsal 45902964800 RESOLVED_TO_GATE1, unchanged 14-decision universe and semantic drift. GitHub compared merge base 4a9a18090523f5240bdd0fc2dc361430bab98a51: UC Davis target-only school/registered reference changes and main-only 3 generic tooling/test/workflow paths are disjoint. Permanent runner must reprove path populations, original Integration Freeze and all package hashes, and require guarded writeahead/CAS and independent fresh exact-tree verification. No owner gate or historical mutation."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "uc-davis-expansion-stage2-census-0003",
+    "proposal_request_id": "uc-davis-expansion-stage2-proposal-0002",
+    "expected_decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/uc-davis-expansion-stage2-proposal-0001/recommendation-map.json",
+      "sha256": "4e26098e026b516c9240500b17a86bea3cce6d642d84fc40ee22b445739eb2ba"
+    }
+  },
+  "creation_provenance": {
+    "origin": "UC Davis existing serialized All-History expansion Implementation Stage 2; continuation from blocked proposal checkpoint 0001 after candidate-tested generic tooling repair PR #728; preserve immutable historical authority and exact 14-decision map.",
+    "authorization": "Owner Proceed persists within existing Stage 2. Stage 2 candidate workflow run https://github.com/pollackelliott/college-basketball-history/actions/runs/45902964800 returned RESOLVED_TO_GATE1 with 12+4 tests PASS, unchanged decision universe, no tracked basketball mutation. School-lane delegated exact disjoint current-main refresh to merged main 5b840a354fb5cd792239ff8b93cba223a18dd87a, with repository-owned fresh verify -> census -> exact-map proposal continuation; STOP on changed universe, authority, current main, package bytes, historical decision or any other blocker. Does not authorize Gate 1, filling, sealing, applying, release, shared data mutation, Gate 2, merge or Production."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "release_presentation_refresh": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "venue_identity_maintenance": false
+  }
+}
