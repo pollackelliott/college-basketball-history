@@ -1,0 +1,148 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 7,
+      "discrepancy": 3,
+      "identity": 4
+    },
+    "decision_count": 14,
+    "decision_fields": {
+      "game_identity": 4,
+      "score": 4,
+      "site_type": 6
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1914-15-004-CBBG-0114369-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1942-43-005-CBBG-0113018-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1947-48-006-CBBG-0113104-SITE_TYPE",
+      "DISCREPANCY-UC-DAVIS-EXP-1973-74-001-SITE_TYPE",
+      "DISCREPANCY-UC-DAVIS-EXP-1973-74-002-SITE_TYPE",
+      "DISCREPANCY-UC-DAVIS-EXP-1973-74-004-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 2,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "lower_level_postseason_researched_nonblocking": 1,
+      "neutral_missing_location": 4,
+      "neutral_missing_venue": 22,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 535,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue": 2,
+      "researched_unresolved_home_venue_rows": 2,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2633,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 511
+    },
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0214019",
+        "CBBG-0214289"
+      ],
+      "lower_level_postseason_researched_nonblocking": [
+        "CBBG-0215473"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0215267",
+        "CBBG-0215427",
+        "CBBG-0215474",
+        "CBBG-0215475"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0214601",
+        "CBBG-0214623",
+        "CBBG-0214624",
+        "CBBG-0214625",
+        "CBBG-0214737",
+        "CBBG-0214815",
+        "CBBG-0214848",
+        "CBBG-0214874",
+        "CBBG-0214916",
+        "CBBG-0214918",
+        "CBBG-0215267",
+        "CBBG-0215427"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0215473"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0214019",
+        "CBBG-0214289"
+      ],
+      "unknown_site_type": [
+        "CBBG-0112690",
+        "CBBG-0112695",
+        "CBBG-0213949",
+        "CBBG-0213950",
+        "CBBG-0213951",
+        "CBBG-0213952",
+        "CBBG-0213953",
+        "CBBG-0213954",
+        "CBBG-0213955",
+        "CBBG-0213956",
+        "CBBG-0213957",
+        "CBBG-0213958"
+      ]
+    },
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 6,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0113018",
+          "fixed_confident_source_game_ids": [
+            "UC-DAVIS-EXP-1942-43-001"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "UC-DAVIS-EXP-1942-43-005"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0113104",
+          "fixed_confident_source_game_ids": [
+            "UC-DAVIS-EXP-1947-48-003"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "UC-DAVIS-EXP-1947-48-006"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114369",
+          "fixed_confident_source_game_ids": [
+            "UC-DAVIS-EXP-1914-15-005"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "UC-DAVIS-EXP-1914-15-004"
+          ]
+        }
+      ],
+      "count": 3,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "branch": "remote-stage2-census/uc-davis-8fac24e2ba8b",
+  "capability_census": {
+    "path": ".onboarding/uc-davis/implementation-stage2-capability-census.json",
+    "status": "PASS",
+    "topology_group_count": 2
+  },
+  "head_sha": "8fac24e2ba8ba8deb8ea933f7d73a67875e1c423",
+  "integration_base_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "integration_semantic_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "next_action": "Present the single consolidated Owner Gate 1 reconciliation packet. Do not fill, seal, or apply the real owner review until explicit approval.",
+  "origin_main_sha_at_integration_freeze": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 7,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 7,
+      "discrepancy": 3,
+      "identity": 4
+    },
+    "decision_count": 14,
+    "decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
+    "discrepancies_to_add": 3,
+    "existing_game_matches": 737,
+    "identity_cardinality_constraints": 3,
+    "new_canonical_games": 1891,
+    "plan_path": ".onboarding/uc-davis/plan.json",
+    "review_path": ".onboarding/uc-davis/review.csv",
+    "warning_count": 0
+  },
+  "proposal_rehearsal": {
+    "action_counts": {
+      "FORCE_NEW": 3,
+      "KEEP_CANONICAL": 4,
+      "MATCH_CANONICAL:CBBG-0114571": 1,
+      "NOT_APPLICABLE": 6
+    },
+    "approved_plan_hash_preview": "3df1f3f29f6d32eb696b8d0fdf03042cb61a2ad47767e5a454dca4e87ac3df4b",
+    "changed_path_count": 12
+  },
+  "recommendation_map": {
+    "action_counts": {
+      "FORCE_NEW": 3,
+      "KEEP_CANONICAL": 4,
+      "MATCH_CANONICAL:CBBG-0114571": 1,
+      "NOT_APPLICABLE": 6
+    },
+    "approved_plan_hash_preview": "3df1f3f29f6d32eb696b8d0fdf03042cb61a2ad47767e5a454dca4e87ac3df4b",
+    "decision_count": 14,
+    "path": "/tmp/remote-stage2-proposal-map-tfa95zs7/recommendation-map.json",
+    "sha256": "4e26098e026b516c9240500b17a86bea3cce6d642d84fc40ee22b445739eb2ba"
+  },
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "site_diagnostic": {
+    "counts": {
+      "home_missing_venue": 2,
+      "invalid_home_venue_exception_marker_rows": 0,
+      "lower_level_postseason_researched_nonblocking": 1,
+      "neutral_missing_location": 4,
+      "neutral_missing_venue": 22,
+      "postseason_missing_venue": 1,
+      "public_gap_rows": 535,
+      "reciprocal_unpropagated": 0,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue": 2,
+      "researched_unresolved_home_venue_rows": 2,
+      "strict_home_gap_rows": 0,
+      "strict_ncaa_gap_rows": 0,
+      "target_canonical_games": 2633,
+      "target_source_information_loss": 0,
+      "unaccounted_public_gap_rows": 0,
+      "unknown_site_type": 511
+    },
+    "errors": [],
+    "examples": {
+      "home_missing_venue": [
+        "CBBG-0214019",
+        "CBBG-0214289"
+      ],
+      "lower_level_postseason_researched_nonblocking": [
+        "CBBG-0215473"
+      ],
+      "neutral_missing_location": [
+        "CBBG-0215267",
+        "CBBG-0215427",
+        "CBBG-0215474",
+        "CBBG-0215475"
+      ],
+      "neutral_missing_venue": [
+        "CBBG-0214601",
+        "CBBG-0214623",
+        "CBBG-0214624",
+        "CBBG-0214625",
+        "CBBG-0214737",
+        "CBBG-0214815",
+        "CBBG-0214848",
+        "CBBG-0214874",
+        "CBBG-0214916",
+        "CBBG-0214918",
+        "CBBG-0215267",
+        "CBBG-0215427"
+      ],
+      "postseason_missing_venue": [
+        "CBBG-0215473"
+      ],
+      "researched_unresolved_home_venue": [
+        "CBBG-0214019",
+        "CBBG-0214289"
+      ],
+      "unknown_site_type": [
+        "CBBG-0112690",
+        "CBBG-0112695",
+        "CBBG-0213949",
+        "CBBG-0213950",
+        "CBBG-0213951",
+        "CBBG-0213952",
+        "CBBG-0213953",
+        "CBBG-0213954",
+        "CBBG-0213955",
+        "CBBG-0213956",
+        "CBBG-0213957",
+        "CBBG-0213958"
+      ]
+    },
+    "path": ".onboarding/uc-davis/last-rehearsal-site-gate.json",
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "OWNER_GATE_1_READY"
+}

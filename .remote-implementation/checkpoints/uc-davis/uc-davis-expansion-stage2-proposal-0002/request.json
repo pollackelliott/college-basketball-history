@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "authorization": "phase-persistent owner/Control Center authority inherited from uc-davis-expansion-stage2-census-0003",
+    "origin": "repository-owned Stage 2 phase continuation"
+  },
+  "decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
+  "expected_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "936eccbdf1d217785ec500e3a0837ed2e148088f",
+  "previous_control_state_sha256": "08a1a6bbc8ef4f0aa9ee47233327314a1004c2765b2eb278f1f86d00afaa550a",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/uc-davis-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "4e26098e026b516c9240500b17a86bea3cce6d642d84fc40ee22b445739eb2ba"
+  },
+  "request_id": "uc-davis-expansion-stage2-proposal-0002",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-census-0003/checkpoint-manifest.json",
+    "sha256": "37b2bf26df821781701a201eb4056654b5df0fbe6d957abcd441ecbcdf3a4008"
+  },
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "8fac24e2ba8ba8deb8ea933f7d73a67875e1c423"
+}
