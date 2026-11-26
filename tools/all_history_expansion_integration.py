@@ -101,6 +101,9 @@ def authenticate_proof(
         require(proof.get("support_" + kind) == report["census"][item],
                 "STAGE1_PROOF_SUPPORT_ACTIONS:" + kind)
     require(proof.get("blockers") == report["blockers"], "STAGE1_PROOF_BLOCKERS_MISMATCH")
+    require(proof.get("owner_preintegration_correction") ==
+            report.get("owner_preintegration_correction"),
+            "STAGE1_PROOF_OWNER_CORRECTION_BINDING_MISMATCH")
     require(proof.get("integration_freeze_authorized") is False,
             "STAGE1_PROOF_CANNOT_PREAUTHORIZE_INTEGRATION")
 
@@ -209,6 +212,8 @@ def freeze_authority(
     research_base: str, main_sha: str, proof_path: Path, proof_sha: str,
     output: Path, *, retain: bool = True,
     venue_reconciliation_path: Path | None = None,
+    owner_correction_path: Path | None = None,
+    owner_correction_reference: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Fresh-verifies accepted frozen evidence and independently replays Stage 1."""
     repo, artifact, proof_path, output = (
@@ -216,6 +221,8 @@ def freeze_authority(
     )
     if venue_reconciliation_path is not None:
         venue_reconciliation_path = venue_reconciliation_path.resolve()
+    if owner_correction_path is not None:
+        owner_correction_path = owner_correction_path.resolve()
     for digest in (zip_sha, proof_sha):
         check_sha(digest, 64)
     for digest in (research_base, main_sha):
@@ -243,7 +250,9 @@ def freeze_authority(
         root = Path(tmp)
         candidate = root / "candidate"
         report = stage1(repo, school, artifact, zip_sha, research_base,
-                        main_sha, candidate)
+                        main_sha, candidate,
+                        owner_correction_path=owner_correction_path,
+                        owner_correction_reference=owner_correction_reference)
         require(report.get("write_authority") == "NONE_REHEARSAL_ONLY",
                 "STAGE1_REHEARSAL_WRITE_AUTHORITY_INVALID")
         require([x["class"] for x in report["blockers"]] == [KNOWN_STAGE1_BLOCKER],
@@ -410,6 +419,13 @@ def freeze_authority(
                 "inherited_reused_source_reference_count", 0
             ),
             "scope_authority": report.get("scope_authority"),
+            "owner_preintegration_correction": report.get(
+                "owner_preintegration_correction"
+            ),
+            "owner_preintegration_correction_sha256": (
+                owner_correction_reference["sha256"]
+                if owner_correction_reference is not None else ""
+            ),
             "independent_stage1_proof_sha256": proof_sha,
             "stage1_report_sha256": hashes[STAGE1_REPORT],
             "candidate_member_sha256": package_hashes,
@@ -468,6 +484,11 @@ def freeze_authority(
                     venue_reconciliation_path,
                     output / "venue-reconciliation.json",
                 )
+            if owner_correction_path is not None:
+                shutil.copyfile(
+                    owner_correction_path,
+                    output / "owner-preintegration-correction.json",
+                )
             (output / MANIFEST_NAME).write_bytes(canonical_bytes(manifest))
         return manifest
 
@@ -506,6 +527,25 @@ def verify_manifest_bytes(manifest_bytes: bytes, candidate: Path) -> dict[str, A
     else:
         require(reconciliation_sha == "",
                 "INTEGRATION_FREEZE_UNEXPECTED_VENUE_RECONCILIATION_HASH")
+    receipt = manifest.get("owner_preintegration_correction")
+    correction_sha = manifest.get("owner_preintegration_correction_sha256", "")
+    stage1_report = read_json(candidate / STAGE1_REPORT)
+    require(receipt == stage1_report.get("owner_preintegration_correction"),
+            "INTEGRATION_FREEZE_OWNER_RECEIPT_REPORT_MISMATCH")
+    if receipt is not None:
+        require(isinstance(receipt, dict) and receipt.get("owner_approved") is True
+                and receipt.get("owner_gate_1_approval") is False,
+                "INTEGRATION_FREEZE_OWNER_RECEIPT_INVALID")
+        require(receipt.get("artifact_sha256") == correction_sha,
+                "INTEGRATION_FREEZE_OWNER_CORRECTION_HASH_BINDING")
+        sidecar = candidate / "owner-preintegration-correction.json"
+        require(sidecar.is_file() and sha256(sidecar.read_bytes()) == correction_sha,
+                "INTEGRATION_FREEZE_OWNER_CORRECTION_SIDECAR_CHANGED")
+        check_sha(correction_sha, 64)
+    else:
+        require(correction_sha == ""
+                and not (candidate / "owner-preintegration-correction.json").exists(),
+                "INTEGRATION_FREEZE_UNEXPECTED_OWNER_CORRECTION")
     require(manifest["tracked_mutation"] == "NONE"
             and manifest["release_authority"] is False,
             "INTEGRATION_FREEZE_CANNOT_AUTHORIZE_MUTATION")
@@ -562,6 +602,8 @@ def main(argv: list[str] | None = None) -> int:
     freeze.add_argument("--repo", type=Path, required=True)
     freeze.add_argument("--output", type=Path, required=True)
     freeze.add_argument("--venue-reconciliation", type=Path)
+    freeze.add_argument("--owner-correction", type=Path)
+    freeze.add_argument("--owner-correction-reference", type=Path)
     verify = sub.add_parser("verify")
     verify.add_argument("candidate", type=Path)
     prepare = sub.add_parser("prepare-phase0")
@@ -575,6 +617,11 @@ def main(argv: list[str] | None = None) -> int:
                 args.research_base,args.main_sha,args.independent_proof,
                 args.independent_proof_sha256,args.output,
                 venue_reconciliation_path=args.venue_reconciliation,
+                owner_correction_path=args.owner_correction,
+                owner_correction_reference=(
+                    read_json(args.owner_correction_reference)
+                    if args.owner_correction_reference is not None else None
+                ),
             )
         elif args.command == "verify":
             result = verify_manifest_bytes(
