@@ -1,0 +1,42 @@
+{
+  "kind": "FRESNO_EXPANSION_STAGE1_IDENTITY_BASELINE_V1",
+  "status": "STAGE1_PROVISIONAL_IDENTITY_UNIVERSE_SERIALIZED__STAGE1_OPEN",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_checkpoint_commit_sha": "aaa59adfe13ca30edaf2691a170408accca9ae7f",
+  "source_guide_pdf_sha256": "b960369400bb42be27caa0331a1be2c9defd1e9163e4ea14f567c38e262693ba",
+  "total_seasons": 49,
+  "seasons_without_results": [
+    "1943-44"
+  ],
+  "source_entries": 1034,
+  "source_candidate_new_ids": 956,
+  "original_accepted_research_ids_referenced_not_copied": 78,
+  "raw_source_exclusion_rows": 1,
+  "same_documented_game_duplicate_source_rows": 1,
+  "source_entry_group_count_before_exhibition": 1033,
+  "nonexhibition_distinct_group_keys_before_unresolved_inclusion": 1032,
+  "identity_status_counts": {
+    "SOURCE_ENTRY_PENDING_ADJUDICATION": 929,
+    "INTRA_PROGRAM_INCLUSION_PENDING": 16,
+    "EARLY_SAME_SCORE_DUPLICATE_RISK_PENDING": 4,
+    "NON_VARSITY_OPPONENT_INCLUSION_PENDING": 1,
+    "ENTERTAINMENT_OPPONENT_INCLUSION_PENDING": 1,
+    "ORIGINAL_RESEARCH_ID_PRESERVED__OWNER_SCOPE_EXCLUDED": 78,
+    "EXCLUDED__EXPLICIT_SOURCE_EXHIBITION": 1,
+    "SUPPORTED_DATED_RESULT__STILL_GAME_UNIVERSE_PENDING": 1,
+    "SOURCE_REPRESENTATION_OF_ONE_DOCUMENTED_GAME__PRIMARY": 1,
+    "DUPLICATED_GUIDE_SOURCE_REPRESENTATION__NO_SECOND_GAME": 1,
+    "OPPONENT_SERIES_UNMATCHED_SOURCE_GAME_PENDING": 1
+  },
+  "unstaged_proposed_publication_rows": 0,
+  "immutable_existing_publication_rows": 1708,
+  "original_owner_top_level_scope": "1970-71+",
+  "pending_class_questions": 10,
+  "source_identity_group_policy": "one real game one provisional game identity; no new game identity from redundant source text; no canonical publication implied",
+  "source_evidence_urls": [
+    "https://gobulldogs.com/news/2002/11/11/Men_s_Basketball_Begins_Exhibition_Season",
+    "https://mcubed.net/ncaab/yearly/fresnost/1970.shtml",
+    "https://gobulldogs.com/documents/download/2016/6/28/20816__m_baskbl_2012_13_release__release_20130310aaa.pdf"
+  ],
+  "no_protected_main_mutation": true
+}
