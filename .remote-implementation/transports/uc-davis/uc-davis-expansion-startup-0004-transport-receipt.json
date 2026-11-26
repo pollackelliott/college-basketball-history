@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "kind": "EXPANSION_STARTUP_IMMUTABLE_TRANSPORT_RECEIPT",
+  "school_key": "uc-davis",
+  "startup_id": "uc-davis-expansion-startup-0004",
+  "purpose": "Exact protected-main refresh after generic local-alias validator PR #724. Bind unchanged original Research Freeze and already approved correction and venue sidecars as direct predecessor to a fresh guarded startup. No basketball or historical mutation.",
+  "expected_protected_main_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "original_transport_commit_sha": "062a07471a4a76973e5ee029f52e02a8f97bc67b",
+  "research_freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "transport_path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-",
+  "transport_part_count": 1,
+  "owner_correction_path": ".remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json",
+  "owner_correction_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+  "venue_reconciliation_path": ".remote-implementation/transports/uc-davis/uc-davis-expansion-distinct-venue-registration-0008.json",
+  "venue_reconciliation_sha256": "c207fb50bb745e148684fe7008383bb10ba854c0aed12bb7bcaefb7a21226181",
+  "evidence": "Exact-head PR #724 merged with Phase 0 projected candidate repository validation PASS, full 2200 regression tests PASS, and all four conformance witnesses PASS. Failed Phase 0 0003 recovered with NOT_ATTEMPTED, IDLE control sequence 771."
+}
