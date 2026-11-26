@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_51_SEASON_CONVERGENCE_AFTER_1939_MEXICO_ADMISSION_0003",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "parent_research_head": "a6a908ece990aa1724fef6cf745ea25549626ded",
+  "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "prior_assessment_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-assessment-0002.json",
+  "parent_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0033.csv",
+  "parent_ledger_blob_sha": "336f6b8a4f59f874b4aa2a22aa54d34414f79d90",
+  "successor_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0034.csv",
+  "new_research_id": "GONZAGA-EXP-MEXICO-193839-001",
+  "accepted_game_count": 558,
+  "accepted_wins": 215,
+  "accepted_losses": 343,
+  "official_aggregate_wins": 477,
+  "official_aggregate_losses": 500,
+  "official_aggregate_games": 977,
+  "arithmetic_games_difference_not_independently_identified_games": 419,
+  "season_class_counts": {
+    "positive": 46,
+    "negative": 2,
+    "zero": 3
+  },
+  "sum_positive_game_deltas": 424,
+  "sum_negative_game_deltas": -5,
+  "source_accounting_closeout_blockers": [
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "season": "1915-16",
+      "blocks_closeout": true
+    },
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1930-31",
+      "season": "1930-31",
+      "blocks_closeout": true
+    },
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "season": "1936-37",
+      "blocks_closeout": true
+    },
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1937-38",
+      "season": "1937-38",
+      "blocks_closeout": true
+    }
+  ],
+  "unadmitted_holds_unchanged": 6,
+  "season_reconciliation_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0003.csv",
+  "stage1_closeout_eligible": false,
+  "owner_gate_required_now": false,
+  "next_bounded_unit": "Classify one homogeneous existing held family: 1956-57 Pacific Lutheran dated March 5 1957 Gonzaga 85-93 vs already-accepted 1957 NAIA postseason opponent games, using official bracket and original reports. If source exhausted, preserve unresolved game-type/inclusion without invented identity; do not open Stage 2."
+}

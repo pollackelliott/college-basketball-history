@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_FEBRUARY_1939_UNIVERSITY_OF_MEXICO_EXACT_COMPETITIVE_GAME_ADJUDICATION_0001",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "parent_research_head": "a6a908ece990aa1724fef6cf745ea25549626ded",
+  "source_lead_parent": {
+    "id": "GONZAGA-LEAD-193839-MEXICO-001",
+    "artifact": "schools/gonzaga/research/checkpoints/stage1-spokane-historical-newspapers-1939-1940-access-audit-0001.json",
+    "git_blob_sha": "2703f9b59ef2f266123373ad70b913dae5015099"
+  },
+  "accepted_game": {
+    "research_game_id": "GONZAGA-EXP-MEXICO-193839-001",
+    "season_label": "1938-39",
+    "game_date": "1939-02-07",
+    "source_opponent_label": "University of Mexico",
+    "played_result": "W",
+    "team_score": "58",
+    "opponent_score": "40",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "UNKNOWN",
+    "source": "La Grande Evening Observer, 1939-02-08 p.7 (original United Press); The News and the Herald, 1939-02-08 p.8 (college scoreboard)",
+    "source_locator": "https://oregonnews.uoregon.edu/lccn/2006260039/1939-02-08/ed-1/seq-7/ ; https://oregonnews.uoregon.edu/lccn/sn99063812/1939-02-08/ed-1/seq-8/",
+    "status": "ACCEPTED_PRIMARY_COMPETITIVE_UNIVERSITY_VARSITY__DATE_FROM_LAST_NIGHT_REPORT",
+    "notes": "Original Feb.8 UP item: Gonzaga defeated touring University of Mexico basketball team 58-40 'last night' (Feb.7). Feb.8 News and Herald independent college-scoreboard publication repeats 58-40. Feb.3 La Grande Observer calls touring National University of Mexico squad university varsity; Montana official 1938-39 varsity game ledger records same opponent Feb.8 and counts result in 17-13 season, corroborating varsity competitive status but not itself Gonzaga classification. Not described as exhibition in preserved game reports. Spokane UP dateline is NOT proof of physical venue or HOME, so site_type UNKNOWN. Distinct Gonzaga Feb.7 date/opponent/score not found in 557-row ledger. Earlier source lead GONZAGA-LEAD-193839-MEXICO-001 accepted under Research identity; do not assign global key until Stage 2."
+  },
+  "disposition": "ACCEPTED_ONE_DISTINCT_VARSITY_COMPETITIVE_REGULAR_SEASON_GAME",
+  "game_count_delta": 1,
+  "evidence": [
+    {
+      "kind": "PRIMARY_CONTEMPORARY_GAME_REPORT",
+      "publication": "La Grande Evening Observer",
+      "publication_date": "1939-02-08",
+      "page": 7,
+      "url": "https://oregonnews.uoregon.edu/lccn/2006260039/1939-02-08/ed-1/seq-7/",
+      "pdf_url": "https://oregonnews.uoregon.edu/lccn/2006260039/1939-02-08/ed-1/seq-7.pdf",
+      "literal": "GONZAGA BEATS MEXICO / Spokane Wash Feb 8 (UP), Gonzaga university defeated the touring University of Mexico basketball team 58 to 40 last night.",
+      "weight": "DIRECT_FOR_RESULT_OPPONENT_AND_DATE_DERIVED_FROM_EXPLICIT_LAST_NIGHT",
+      "limit": "Dateline does not prove game location or Gonzaga home status."
+    },
+    {
+      "kind": "CONTEMPORARY_INDEPENDENT_PRINTED_SCOREBOARD",
+      "publication": "The News and the Herald (Klamath Falls)",
+      "publication_date": "1939-02-08",
+      "page": 8,
+      "url": "https://oregonnews.uoregon.edu/lccn/sn99063812/1939-02-08/ed-1/seq-8/",
+      "literal": "College basketball results: Gonzaga 58, University of Mexico 40.",
+      "weight": "SEPARATE_NEWSPAPER_CONFIRMS_RESULT_AND_COLLEGE_GAME_CLASSIFICATION",
+      "limit": "May share wire-score origin; independent publication not necessarily independent reporting."
+    },
+    {
+      "kind": "ORIGINAL_VARSITY_TOUR_IDENTITY",
+      "publication": "La Grande Evening Observer",
+      "publication_date": "1939-02-03",
+      "page": 5,
+      "url": "https://oregonnews.uoregon.edu/lccn/2006260039/1939-02-03/ed-1/seq-5/",
+      "literal": "The varsity basketball team of the National University of Mexico now on a goodwill tour ... will play Eastern Oregon Normal School.",
+      "weight": "SOURCE_EVIDENCE_TOURING_OPPONENT_WAS_A_UNIVERSITY_VARSITY_TEAM",
+      "limit": "This pregame article describes different opponent game and does not establish Gonzaga's on-court result."
+    },
+    {
+      "kind": "OFFICIAL_RECIPROCAL_OPPONENT_INSTITUTIONAL_CLASSIFICATION_CONTEXT",
+      "publication": "University of Montana Historical Redbook 1938-39",
+      "url": "https://gogriz.com/documents/download/2018/1/17/redbook_08_1935_1940.pdf",
+      "locator": "1938–1939 Varsity Basketball schedule p.225; Montana Feb 8 1939 W53-51 over University of Mexico in Missoula; Montana 17-13 official season",
+      "weight": "INDEPENDENT_INSTITUTION_TREATED_SAME_TOURING_TEAM_AS_VARSITY_SEASON_GAME",
+      "limit": "Not Gonzaga's own explicit game-inclusion designation; Montana PDF web-screenshot retrieval oversized, text/table verified."
+    }
+  ],
+  "adjudication": {
+    "game_played": true,
+    "team_gonzaga_university": true,
+    "opponent_is_university_varsity": true,
+    "on_court_result": "GONZAGA_W_58_40",
+    "played_date": "1939-02-07",
+    "date_basis": "Feb.8 newspaper explicitly says last night; print PDF visually confirmed, not inferred from archive filename alone",
+    "competitive_inclusion": "YES__UNIVERSITY_VARSITY_INTERCOLLEGIATE_RESULT_WITH_NO_EXHIBITION_DESIGNATION_IN_REPORTS",
+    "structured_game_type": "REGULAR_SEASON",
+    "site_type": "UNKNOWN",
+    "site_reason": "Spokane wire dateline and intercity itinerary are insufficient for HOME or physical venue assignment",
+    "opponent_global_key": "UNRESOLVED_STAGE2_NOT_REGISTERED",
+    "on_court_vs_administrative_difference": "NONE_REPORTED",
+    "same_game_duplicate": false
+  },
+  "deduplication": {
+    "parent_accepted_game_count": 557,
+    "season_1938_39_parent_games": 8,
+    "same_date": "NONE_IN_PARENT",
+    "same_opponent_name": "NONE_IN_PARENT",
+    "same_score": "NONE_IN_PARENT",
+    "existing_1938_39_scores": [
+      "29-32 WSU Dec 19",
+      "22-42 WSU Feb 21",
+      "33-38 Montana",
+      "34-54 Montana",
+      "36-42 Montana",
+      "25-15 Idaho",
+      "27-49 Idaho",
+      "29-50 Utah"
+    ],
+    "distinct_game_reason": "No same date/opponent/score accepted identity; opponent independent university, unrelated to accepted Montana/Idaho/Washington State/Utah game identities",
+    "new_research_id": "GONZAGA-EXP-MEXICO-193839-001"
+  },
+  "season_accounting": {
+    "season": "1938-39",
+    "official": {
+      "wins": 7,
+      "losses": 10,
+      "games": 17
+    },
+    "parent_accepted": {
+      "wins": 1,
+      "losses": 7,
+      "games": 8
+    },
+    "successor_accepted": {
+      "wins": 2,
+      "losses": 7,
+      "games": 9
+    },
+    "arithmetic_game_difference_before": 9,
+    "arithmetic_game_difference_after": 8
+  },
+  "all_expansion_accounting": {
+    "official": {
+      "wins": 477,
+      "losses": 500,
+      "games": 977
+    },
+    "parent_identified": {
+      "wins": 214,
+      "losses": 343,
+      "games": 557
+    },
+    "successor_identified": {
+      "wins": 215,
+      "losses": 343,
+      "games": 558
+    },
+    "aggregate_minus_identified_diagnostic_after": 419,
+    "positive_delta_seasons": 46,
+    "negative_delta_seasons": 2,
+    "zero_delta_seasons": 3,
+    "positive_arithmetic_deltas_sum": 424,
+    "negative_arithmetic_deltas_sum": -5
+  },
+  "residual_preservation": {
+    "prior_unadmitted_candidate_holds": 6,
+    "unchanged_unadmitted_candidate_holds": 6,
+    "research_exhausted_closeout_blockers": 4,
+    "zero_result_unknown": true,
+    "stage1_closeout_eligible": false,
+    "stage2_authorized": false
+  },
+  "next_bounded_unit": "Classify one homogeneous existing held family: 1956-57 Pacific Lutheran dated March 5 1957 Gonzaga 85-93 vs already-accepted 1957 NAIA postseason opponent games, using official bracket and original reports. If source exhausted, preserve unresolved game-type/inclusion without invented identity; do not open Stage 2.",
+  "owner_decision_required_now": false
+}
