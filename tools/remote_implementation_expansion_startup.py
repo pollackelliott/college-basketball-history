@@ -18,6 +18,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from expansion_preintegration_owner_corrections import validate_reference
 from all_history_expansion_integration import (
     MANIFEST_NAME,
     PACKAGE_FILES,
@@ -174,6 +175,12 @@ def validate_startup_intent(intent: dict[str, Any]) -> dict[str, Any]:
         "EXPANSION_STARTUP_PROVENANCE_AUTHORIZATION_MISSING",
     )
 
+    owner_correction = intent.get("owner_correction")
+    if owner_correction is not None:
+        validate_reference(
+            owner_correction, school=school, freeze_sha=freeze_sha
+        )
+
     venue = intent.get("venue_reconciliation")
     if venue is not None:
         require(
@@ -285,6 +292,7 @@ def build_stage1_proof(
         "support_opponents": report["census"]["opponent_support_actions"],
         "support_venues": report["census"]["venue_support_actions"],
         "blockers": report["blockers"],
+        "owner_preintegration_correction": report.get("owner_preintegration_correction"),
         "control_authority_sha": stage1_control_authority_sha,
         "integration_freeze_authorized": False,
     }
@@ -362,6 +370,8 @@ def build_phase0_request(
     }
     if venue_reconciliation_ref is not None:
         request["venue_reconciliation"] = venue_reconciliation_ref
+    if intent.get("owner_correction") is not None:
+        request["owner_correction"] = intent["owner_correction"]
     validate_request(request)
     return request
 
@@ -405,9 +415,10 @@ def _run_stage1(
     research_base: str,
     main_sha: str,
     output: Path,
+    owner_correction_path: Path | None = None,
+    owner_correction_reference_path: Path | None = None,
 ) -> dict[str, Any]:
-    cp = run(
-        [
+    cmd = [
             sys.executable,
             str(ROOT / "tools" / "expansion_implementation_stage1.py"),
             school,
@@ -422,10 +433,15 @@ def _run_stage1(
             str(ROOT),
             "--output",
             str(output),
-        ],
-        cwd=ROOT,
-        check=False,
-    )
+        ]
+    if owner_correction_path is not None:
+        require(owner_correction_reference_path is not None,
+                "EXPANSION_STARTUP_OWNER_REFERENCE_MISSING")
+        cmd.extend([
+            "--owner-correction", str(owner_correction_path),
+            "--owner-correction-reference", str(owner_correction_reference_path),
+        ])
+    cp = run(cmd, cwd=ROOT, check=False)
     if cp.returncode != 0:
         raise Stop(
             "EXPANSION_STARTUP_STAGE1_FAILED\n" + cp.stdout[-10000:]
@@ -689,6 +705,22 @@ def run_startup() -> dict[str, Any]:
         venue_path = scratch / "venue-reconciliation.json"
         venue_path.write_bytes(raw)
 
+    owner_correction_path: Path | None = None
+    owner_correction_reference_path: Path | None = None
+    if intent.get("owner_correction") is not None:
+        ref = intent["owner_correction"]
+        raw = git(
+            "show",
+            f"{meta['transport_commit']}:{ref['path']}",
+            text=False,
+        ).stdout
+        require(sha256_bytes(raw) == ref["sha256"],
+                "EXPANSION_STARTUP_OWNER_CORRECTION_HASH_MISMATCH")
+        owner_correction_path = scratch / "owner-preintegration-correction.json"
+        owner_correction_path.write_bytes(raw)
+        owner_correction_reference_path = scratch / "owner-correction-reference.json"
+        owner_correction_reference_path.write_bytes(canonical_json_bytes(ref))
+
     stage1_a = scratch / "stage1-a"
     stage1_b = scratch / "stage1-b"
     _run_stage1(
@@ -698,6 +730,8 @@ def run_startup() -> dict[str, Any]:
         research_base=meta["research_base_sha"],
         main_sha=live_main,
         output=stage1_a,
+        owner_correction_path=owner_correction_path,
+        owner_correction_reference_path=owner_correction_reference_path,
     )
     report = _run_stage1(
         school=meta["school_key"],
@@ -706,6 +740,8 @@ def run_startup() -> dict[str, Any]:
         research_base=meta["research_base_sha"],
         main_sha=live_main,
         output=stage1_b,
+        owner_correction_path=owner_correction_path,
+        owner_correction_reference_path=owner_correction_reference_path,
     )
     _require_deterministic_stage1(stage1_a, stage1_b)
     require_stage1_control_authority(report, durable_head)
@@ -753,6 +789,11 @@ def run_startup() -> dict[str, Any]:
         cmd.extend(
             ["--venue-reconciliation", str(venue_path)]
         )
+    if owner_correction_path is not None:
+        cmd.extend([
+            "--owner-correction", str(owner_correction_path),
+            "--owner-correction-reference", str(owner_correction_reference_path),
+        ])
     cp = run(cmd, cwd=ROOT, check=False)
     if cp.returncode != 0:
         raise Stop(
@@ -845,6 +886,18 @@ def run_startup() -> dict[str, Any]:
         "EXPANSION_STARTUP_FREEZE_COPY_MISMATCH",
     )
 
+    if owner_correction_path is not None:
+        _copy_payload(
+            owner_correction_path,
+            directory,
+            "owner-preintegration-correction.json",
+        )
+        _copy_payload(
+            owner_correction_reference_path,
+            directory,
+            "owner-correction-reference.json",
+        )
+
     if venue_path is not None:
         durable_venue, durable_venue_sha = _copy_payload(
             venue_path,
@@ -877,6 +930,13 @@ def run_startup() -> dict[str, Any]:
         "startup_intent_sha256": sha256_bytes(intent_bytes),
         "implementation_acceptance_sha256": acceptance_sha,
         "stage1_reconciliation_sha256": stage1_sha,
+        "owner_preintegration_correction_sha256": (
+            intent["owner_correction"]["sha256"]
+            if owner_correction_path is not None else ""
+        ),
+        "owner_preintegration_receipt": report.get(
+            "owner_preintegration_correction"
+        ),
         "stage1_independent_proof_sha256": proof_sha,
         "stage1_control_authority_sha": durable_head,
         "integration_freeze_sha256": integration_sha,
