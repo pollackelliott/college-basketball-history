@@ -293,13 +293,17 @@ def freeze_authority(
                     global_venues=global_venues,
                     frozen_venues_bytes=candidate_venues_raw,
                     source_games_bytes=(candidate / "source-games.csv").read_bytes(),
+                    global_name_rows=global_names,
                 )
             )
             venue_reconciliation_meta = dict(venue_reconciliation_meta)
             venue_reconciliation_meta["spec_path"] = "venue-reconciliation.json"
             require(
                 all(
-                    item.get("action") == "REUSE_CURRENT_IDENTITY"
+                    item.get("action") in {
+                        "REUSE_CURRENT_IDENTITY",
+                        "REGISTER_DISTINCT_KEYED_IDENTITY",
+                    }
                     for item in venue_reconciliation.values()
                 ),
                 "EXPANSION_VENUE_RECONCILIATION_ACTION_UNSUPPORTED",
