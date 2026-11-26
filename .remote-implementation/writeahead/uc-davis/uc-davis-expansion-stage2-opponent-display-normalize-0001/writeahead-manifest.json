@@ -1,0 +1,72 @@
+{
+  "allowed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/uc-davis/opponents.csv": "f5d276824bf4b55e36fd8e8c0269be6e5145d39a49fc28f50603deedb0ad3e72",
+    "schools/uc-davis/source-games.csv": "2bb4172144004e10aaaf48b642196b9115914a9c1ba3cd369a0f7fa917717953"
+  },
+  "changed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "commit_message": "Normalize uc-davis historical opponent display representation",
+  "expected_blocker_keys": [
+    "colorado-colorado-springs",
+    "concordia-new-york",
+    "loyola-new-orleans",
+    "pacific-oregon",
+    "saint-marys-minnesota",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "expected_target_predecessor_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
+  "field_level_proof_sha256": "3a07be05076e856598ef0ed9fefa79cdea7d3220d125a9044aae42defce64e42",
+  "global_lock_commit": "24b1bb26873b7bf6c9b14d93035d78a432b1896b",
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "3b4dfb6dca6fca7223a0e0b7c5b9e9d09f63d678850fe5fd2a693bff1fdfac60",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "prepared_parent_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
+  "prepared_tree_sha": "f0467fd70e6a05565464c63ab35f1a1605a20355",
+  "protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "repository_validation": "PASS",
+  "request_id": "uc-davis-expansion-stage2-opponent-display-normalize-0001",
+  "request_sha256": "0b75b68fe45d9426f270cf2ba1572600f701c3fdd421a9d402ddf088f5d069fa",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift_after": {
+    "baseline_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "integration_base_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "integration_base_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "ae8ef01f52a3c43047da50ad5dabd0e4b0e00b504a6d5be58a791fae8e9b1d00",
+    "field-level-proof.json": "3a07be05076e856598ef0ed9fefa79cdea7d3220d125a9044aae42defce64e42",
+    "integration-freeze.json": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+    "normalization-report.json": "3b4dfb6dca6fca7223a0e0b7c5b9e9d09f63d678850fe5fd2a693bff1fdfac60",
+    "semantic-drift-proof.json": "ccec258115e4a800d325e87a876d0cad2c18c33fec67dc6feba9bc4e81dca539"
+  },
+  "source_game_normalized_name_row_count": 12,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "ae8ef01f52a3c43047da50ad5dabd0e4b0e00b504a6d5be58a791fae8e9b1d00",
+  "sync_current_d1": false,
+  "target_branch": "data/uc-davis-onboarding"
+}

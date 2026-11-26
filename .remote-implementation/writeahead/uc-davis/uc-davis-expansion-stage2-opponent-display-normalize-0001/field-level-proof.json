@@ -1,0 +1,47 @@
+{
+  "allowed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "literal_evidence_changes": 0,
+  "opponent_changed_keys": [
+    "colorado-colorado-springs",
+    "concordia-new-york",
+    "loyola-new-orleans",
+    "pacific-oregon",
+    "saint-marys-minnesota",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "opponent_changed_row_count": 9,
+  "opponent_current_d1_changed_key_count": 0,
+  "opponent_current_d1_changed_keys": [],
+  "opponent_key_changes": 0,
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "source_game_changed_ids": [
+    "UC-DAVIS-EXP-1939-40-006",
+    "UC-DAVIS-EXP-1959-60-007",
+    "UC-DAVIS-EXP-1961-62-003",
+    "UC-DAVIS-EXP-1961-62-004",
+    "UC-DAVIS-EXP-1963-64-013",
+    "UC-DAVIS-EXP-1969-70-003",
+    "UC-DAVIS-EXP-1975-76-008",
+    "UC-DAVIS-EXP-1979-80-018",
+    "UC-DAVIS-EXP-1984-85-017",
+    "UC-DAVIS-EXP-1987-88-005",
+    "UC-DAVIS-EXP-1994-95-003",
+    "UC-DAVIS-EXP-1995-96-005"
+  ],
+  "source_game_changed_keys": [
+    "colorado-colorado-springs",
+    "concordia-new-york",
+    "loyola-new-orleans",
+    "pacific-oregon",
+    "saint-marys-minnesota",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "source_game_non_name_field_changes": 0,
+  "source_game_normalized_name_row_count": 12
+}

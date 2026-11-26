@@ -1,0 +1,195 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 7,
+  "change_row_count": 9,
+  "changes": [
+    {
+      "authority_names": [
+        "UCCS"
+      ],
+      "authority_signature": "uccs",
+      "canonical_opponent_key": "colorado-colorado-springs",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Colorado-Colorado Springs"
+      ],
+      "target_row_count": 1,
+      "to_name": "UCCS"
+    },
+    {
+      "authority_names": [
+        "Concordia College (NY)"
+      ],
+      "authority_signature": "concordiacollegeny",
+      "canonical_opponent_key": "concordia-new-york",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Concordia (N.Y.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Concordia College (NY)"
+    },
+    {
+      "authority_names": [
+        "Loyola (New Orleans)",
+        "Loyola (new Orleans)",
+        "Loyola New Orleans",
+        "Loyola-New Orleans"
+      ],
+      "authority_signature": "loyolaneworleans",
+      "canonical_opponent_key": "loyola-new-orleans",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Loyola (La.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Loyola New Orleans"
+    },
+    {
+      "authority_names": [
+        "Pacific (Oregon)"
+      ],
+      "authority_signature": "pacificoregon",
+      "canonical_opponent_key": "pacific-oregon",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Pacific (Ore.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Pacific (Oregon)"
+    },
+    {
+      "authority_names": [
+        "Saint Mary's University of Minnesota"
+      ],
+      "authority_signature": "saintmarysuniversityofminnesota",
+      "canonical_opponent_key": "saint-marys-minnesota",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Saint Mary's (Minn.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Saint Mary's University of Minnesota"
+    },
+    {
+      "authority_names": [
+        "United States International University"
+      ],
+      "authority_signature": "unitedstatesinternationaluniversity",
+      "canonical_opponent_key": "united-states-international",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "United States International"
+      ],
+      "target_row_count": 3,
+      "to_name": "United States International University"
+    },
+    {
+      "authority_names": [
+        "Washington (St. Louis)"
+      ],
+      "authority_signature": "washingtonstlouis",
+      "canonical_opponent_key": "washington-st-louis",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Washington (Mo.)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Washington (St. Louis)"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "source_game_display_change_keys": 7,
+  "source_game_display_change_rows": 12,
+  "source_game_display_changes": [
+    {
+      "from_name": "Loyola (La.)",
+      "normalized_opponent_key": "loyola-new-orleans",
+      "source_game_id": "UC-DAVIS-EXP-1939-40-006",
+      "to_name": "Loyola New Orleans"
+    },
+    {
+      "from_name": "Washington (Mo.)",
+      "normalized_opponent_key": "washington-st-louis",
+      "source_game_id": "UC-DAVIS-EXP-1959-60-007",
+      "to_name": "Washington (St. Louis)"
+    },
+    {
+      "from_name": "Loyola (La.)",
+      "normalized_opponent_key": "loyola-new-orleans",
+      "source_game_id": "UC-DAVIS-EXP-1961-62-003",
+      "to_name": "Loyola New Orleans"
+    },
+    {
+      "from_name": "Pacific (Ore.)",
+      "normalized_opponent_key": "pacific-oregon",
+      "source_game_id": "UC-DAVIS-EXP-1961-62-004",
+      "to_name": "Pacific (Oregon)"
+    },
+    {
+      "from_name": "United States International",
+      "normalized_opponent_key": "united-states-international",
+      "source_game_id": "UC-DAVIS-EXP-1963-64-013",
+      "to_name": "United States International University"
+    },
+    {
+      "from_name": "United States International",
+      "normalized_opponent_key": "united-states-international",
+      "source_game_id": "UC-DAVIS-EXP-1969-70-003",
+      "to_name": "United States International University"
+    },
+    {
+      "from_name": "Pacific (Ore.)",
+      "normalized_opponent_key": "pacific-oregon",
+      "source_game_id": "UC-DAVIS-EXP-1975-76-008",
+      "to_name": "Pacific (Oregon)"
+    },
+    {
+      "from_name": "United States International",
+      "normalized_opponent_key": "united-states-international",
+      "source_game_id": "UC-DAVIS-EXP-1979-80-018",
+      "to_name": "United States International University"
+    },
+    {
+      "from_name": "Concordia (N.Y.)",
+      "normalized_opponent_key": "concordia-new-york",
+      "source_game_id": "UC-DAVIS-EXP-1984-85-017",
+      "to_name": "Concordia College (NY)"
+    },
+    {
+      "from_name": "Saint Mary's (Minn.)",
+      "normalized_opponent_key": "saint-marys-minnesota",
+      "source_game_id": "UC-DAVIS-EXP-1987-88-005",
+      "to_name": "Saint Mary's University of Minnesota"
+    },
+    {
+      "from_name": "Colorado-Colorado Springs",
+      "normalized_opponent_key": "colorado-colorado-springs",
+      "source_game_id": "UC-DAVIS-EXP-1994-95-003",
+      "to_name": "UCCS"
+    },
+    {
+      "from_name": "Colorado-Colorado Springs",
+      "normalized_opponent_key": "colorado-colorado-springs",
+      "source_game_id": "UC-DAVIS-EXP-1995-96-005",
+      "to_name": "UCCS"
+    }
+  ],
+  "status": "PASS"
+}

@@ -818,15 +818,15 @@
   "active_lock_commit": "24b1bb26873b7bf6c9b14d93035d78a432b1896b",
   "active_lock_owner": "github-actions:45888587127:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "active_prepared_tree_sha": "f0467fd70e6a05565464c63ab35f1a1605a20355",
   "active_request_id": "uc-davis-expansion-stage2-opponent-display-normalize-0001",
   "active_request_sha256": "0b75b68fe45d9426f270cf2ba1572600f701c3fdd421a9d402ddf088f5d069fa",
   "active_school_key": "uc-davis",
   "active_target_branch": "data/uc-davis-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/uc-davis/uc-davis-expansion-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "active_writeahead_sha256": "1b515e726d99e76989d8eb511167b4671c94247a2af6ea28e14a0fa152e02f2d",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1628,5 +1628,5 @@
   "lock_acquisition_request_commit": "4b1b5403dbb69c9650ae678f9f1fabcb044ef560",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
