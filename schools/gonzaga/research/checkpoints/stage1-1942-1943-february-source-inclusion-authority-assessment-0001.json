@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1942_43_FOUR_FEBRUARY_INCLUSION_AUTHORITY_ASSESSMENT_0001",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "authority": {
+    "main": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+    "branch_parent": "f75d2a9d60933250bb50628dab30356968d54ff5",
+    "immutable_research_base": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "prior_status_blob": "685fd85d6ffc4a195e1bef5a76c29c7c9ec61b45",
+    "ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0035.csv",
+    "ledger_blob": "16e865dde9203b08c743d3cde7a418c50cdceafb",
+    "season_reconciliation_blob": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "held_evidence_blob": "cbbd21a614e678d78ac017c74078b1318bea2e21",
+    "hold_inventory_blob": "5352a9ab2e37c78f54439b26688d49b7abec6da1"
+  },
+  "scope": "Only classify recognized university varsity inclusion and official 2–9/11 aggregate conflict of four preserved February 1943 source-backed reports; read-only current-main policy and bounded institutional explanation evidence",
+  "official_source": {
+    "season": "1942-43",
+    "historical_aggregate": "2-9 / 11",
+    "accepted_game_ledger": "2-9 / 11",
+    "games": 11,
+    "source": "Gonzaga all-time coaching records",
+    "caution": "Season aggregate alone does not identify exclusions or establish four February games were nonvarsity/exhibitions"
+  },
+  "cases": [
+    {
+      "id": "GONZAGA-HOLD-4243-001",
+      "opponent": "Whitworth College",
+      "date": "1943-02-20",
+      "result": "W89-69",
+      "source": "https://oregonnews.uoregon.edu/lccn/sn90066132/1943-02-22/ed-1/seq-5/ocr/",
+      "caveat": "Distinct contemporary Gonzaga University–Whitworth report; no positive evidence it was exhibition"
+    },
+    {
+      "id": "GONZAGA-HOLD-4243-002",
+      "opponent": "Whitman College",
+      "date": "1943-02-22",
+      "result": "W79-48",
+      "source": "https://oregonnews.uoregon.edu/lccn/sn85042470/1943-02-23/ed-1/seq-2/",
+      "caveat": "Named Gonzaga players and detailed story; older 78-48 source discrepancy retained"
+    },
+    {
+      "id": "GONZAGA-HOLD-4243-003",
+      "opponent": "Whitman College",
+      "date": null,
+      "probable_date": "1943-02-23",
+      "result": "W89-68",
+      "source": "https://oregonnews.uoregon.edu/lccn/sn90051770/1943-02-24/ed-1/seq-9.pdf",
+      "caveat": "Distinct contemporary college result; exact date not proven"
+    },
+    {
+      "id": "GONZAGA-HOLD-4243-004",
+      "opponent": "Geiger Field military team",
+      "date": "1943-02-25",
+      "result": "W101-55",
+      "source": "https://oregonnews.uoregon.edu/lccn/sn85042470/1943-02-27/ed-1/seq-7.pdf",
+      "caveat": "Gonzaga University basketball reported as player; military opponent alone neither proves exhibition nor institutional official inclusion"
+    }
+  ],
+  "institutional_checks": [
+    {
+      "source": "The Spokesman-Review wartime 2016 historical retrospective",
+      "url": "https://www.spokesman.com/stories/2016/dec/06/wartime-zags-team-beat-uw-in-three-out-of-four-thr/",
+      "finding": "Repeats 1942–43 Gonzaga 2–9 season result; gives no identity-specific February inclusion or exclusion evidence",
+      "class": "RETROSPECTIVE_REPEATS_INSTITUTIONAL_AGGREGATE"
+    },
+    {
+      "source": "Gonzaga University WWII archival chronology",
+      "url": "https://researchguides.gonzaga.edu/c.php?g=67718&p=1599264",
+      "finding": "V-12 approved by March 1943; Navy V-12 cadets arrived July 1943, thus Feb 1943 games cannot simply be attributed to the later 1943–44 V-12 varsity",
+      "class": "INSTITUTIONAL_TIMELINE_EXCLUDES_1943_44_V12_SHORTCUT"
+    },
+    {
+      "source": "Gonzaga Athletics Navy V-12 Hall of Fame history",
+      "url": "https://gozags.com/honors/gonzaga-athletic-hall-of-fame/navy-v-basketball-team/5",
+      "finding": "Explicitly describes 1943–44 team; does not classify February 1943 as exhibition or outside program",
+      "class": "SEPARATE_SEASON_V12_HISTORY"
+    }
+  ],
+  "governing_contract": {
+    "policy_blob_shas": {
+      "AGENTS.md": "d7de2e7f743b6ce585be5d2fe1666a635a728387",
+      "docs/stage1-game-universe-contract.md": "ef5e124d93c1266a380d2bb6574e11212dab0595",
+      "docs/research-convergence-and-stopping.md": "835e6f6ded01d5b0ef0ed3fd24326e2fad8d2515",
+      "docs/all-history-expansion-lifecycle.md": "37e165f47eadaf3d9a66a7da475b44271b9bb6df"
+    },
+    "rules": [
+      "Expansion includes recognized competitive varsity games and excludes positively established exhibitions",
+      "A cumulative season total is not individual-game exhibition or duplicate proof",
+      "Unknown dates and scores are field debt; game inclusion and season counting inconsistency are materially blocking",
+      "Genuine substantive inclusion/scope choice affecting publication requires historical owner judgment, never a default Proceed",
+      "Owner-authorized early-history accounting closeout cannot waive unrelated source-game inclusion blockers"
+    ],
+    "registries": {
+      "early_accounting": {
+        "path": "data/reference/early-history-accounting-authorities.json",
+        "sha": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+        "gonzaga_case": false
+      },
+      "early_aggregate": {
+        "path": "data/reference/early-aggregate-coverage-authorities.json",
+        "sha": "8164c5953fa3091cea2163d325602e5804e72cf2",
+        "gonzaga_case": false
+      }
+    }
+  },
+  "finding": {
+    "historical_source_results_are_distinct": true,
+    "no_positive_exhibition_or_outside_scope_evidence": true,
+    "no_1943_44_V12_reallocation": true,
+    "official_record_matches_accepted_only": true,
+    "conflict": "FOUR_REPORTED_PLAYED_COMPETITIVE_GONZAGA_UNIVERSITY_BASKETBALL_RESULTS_VS_OFFICIAL_RECORD_MATCHING_ELEVEN_ALREADY_ACCEPTED_GAMES",
+    "bounded_probe_exhausted": true,
+    "full_1943_press_corpus_exhausted": false,
+    "material_owner_inclusion_decision_required_before_admit_or_exclude": true,
+    "owner_approval_this_turn": false
+  },
+  "options_for_explicit_substantive_owner_disposition": [
+    {
+      "option": "COUNT_ALL_FOUR_AS_COMPETITIVE_VARSITY_SOURCE_GAMES",
+      "hypothetical_season_games": 15,
+      "hypothetical_season_record": "6-9",
+      "hypothetical_expansion_games": 564,
+      "hypothetical_expansion_record": "220-344",
+      "historical_aggregate_remains": "2-9 / 11",
+      "necessary_note": "Preserve explicit +4 wins/+4 games game-vs-institution source accounting contradiction; do not overwrite university record; any closeout requires policy-compliant authority"
+    },
+    {
+      "option": "RETAIN_ALL_FOUR_UNADMITTED_PENDING_HISTORICAL_AUTHORITY",
+      "existing_season_games": 11,
+      "existing_season_record": "2-9",
+      "existing_expansion_games": 560,
+      "existing_expansion_record": "216-344",
+      "necessary_note": "Keep all four active source-backed inclusion holds; Stage1 cannot close on unresolved inclusion"
+    },
+    {
+      "option": "EXCLUDE_ONE_OR_MORE_AS_EXHIBITION_OR_OUTSIDE_RECOGNIZED_VARSITY",
+      "necessary_note": "Needs affirmative source evidence or an informed explicit owner scope ruling for each named result; aggregate equality is not such evidence"
+    }
+  ],
+  "no_mutation": {
+    "accepted_game_count": 560,
+    "accepted_record": "216-344",
+    "numeric_aggregate_gap": 417,
+    "active_held_candidates": 5,
+    "war_1942_43_holds": 4,
+    "jan_1926_hold": 1,
+    "old_accounting_closeout_blockers": 4,
+    "season_numeric_shortfalls": 45,
+    "stage1_complete": false,
+    "stage2_authorized": false,
+    "owner_registry_mutation": false,
+    "canonical_or_published_mutation": false
+  },
+  "next_bounded_unit": "Independent 1915–16 season-only source-accounting contradiction classification using exact existing ledger/census and bounded source proof; do not change February 1943 inclusion before explicit owner ruling. Do not initiate Stage2."
+}
