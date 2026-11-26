@@ -1,3 +1,4 @@
+import copy
 import csv
 import sys
 import unittest
@@ -61,6 +62,113 @@ class GlobalVenueReferenceTests(unittest.TestCase):
                 ),
                 ("Las Vegas", "NV"),
             )
+
+
+    def test_documented_historical_alias_stays_local_across_distinct_buildings(self):
+        # The generic physical-site topology behind UC Davis's accepted older
+        # Recreation Hall versus the facility opened in 1977. No literal
+        # school-specific exception and no second unqualified global alias.
+        local = {
+            "source_program_key": "fixture",
+            "venue_key": "former-hall",
+            "venue_id": "VEN-999970",
+            "canonical_name": "Old Academic Hall",
+            "aliases": "Academic Hall",
+            "city": "College Town", "state": "CA",
+            "known_opened": "", "known_closed": "1938",
+            "relationship_start": "1921-1922",
+            "relationship_end": "1936-1937",
+            "site_rule": "Documented HOME facility for accepted early games",
+            "source_basis": "https://example.edu/archive/early-building",
+            "notes": "Former standalone building closed in 1938",
+        }
+        older = {
+            "venue_id": "VEN-999970", "venue_key": "former-hall",
+            "display_name": "Old Academic Hall",
+            "city": "College Town", "state": "CA",
+            "opened": "", "closed": "1938",
+            "source_basis": "https://example.edu/archive/early-building",
+        }
+        newer = {
+            "venue_id": "VEN-999971", "venue_key": "modern-hall",
+            "display_name": "University Sports Center",
+            "city": "College Town", "state": "CA",
+            "opened": "1977", "closed": "",
+            "source_basis": "https://example.edu/archive/modern-building",
+        }
+        distant = {
+            "venue_id": "VEN-999972", "venue_key": "distant-hall",
+            "display_name": "Academic Hall",
+            "city": "Faraway", "state": "PA",
+            "opened": "1900", "closed": "",
+            "source_basis": "https://example.edu/archive/distant-building",
+        }
+        venue_rows = {r["venue_id"]: r for r in (older, newer, distant)}
+        names = {
+            "oldacademichall": {"VEN-999970"},
+            "academic hall": set(),  # normalized key cannot create authority
+            "academichall": {"VEN-999971", "VEN-999972"},
+            "universitysportscenter": {"VEN-999971"},
+        }
+
+        def check(row=local, venues=venue_rows, labels=names):
+            return venue_reference.school_venue_reference_errors(
+                Path("schools/fixture/venues.csv"), [row], venues, labels,
+            )
+
+        self.assertEqual(check(), [])
+        self.assertNotIn("VEN-999970", names["academichall"])
+        self.assertEqual(
+            check(dict(local, aliases="Academic Hall;Unregistered Other Alias")),
+            ["line 2: name/alias 'Unregistered Other Alias' is not registered to VEN-999970"],
+        )
+
+        # Any evidence gap, chronology overlap, or changed physical key
+        # restores the ordinary failure. Canonical names never receive
+        # historical-alias treatment.
+        for field, value in (
+            ("source_basis", ""),
+            ("site_rule", ""),
+            ("notes", ""),
+            ("known_closed", ""),
+            ("known_closed", "1939"),
+            ("relationship_end", ""),
+            ("relationship_end", "1940-1941"),
+            ("relationship_start", "1938-1939"),
+            ("venue_key", "another-hall"),
+            ("city", "Other City"),
+            ("canonical_name", "Academic Hall"),
+        ):
+            with self.subTest(local_field=field, value=value):
+                self.assertTrue(check(dict(local, **{field: value})))
+
+        for field, value in (
+            ("opened", ""), ("opened", "1937"),
+            ("display_name", "Academic Hall"), ("source_basis", ""),
+            ("city", "Other City"),
+        ):
+            with self.subTest(newer_field=field, value=value):
+                changed = copy.deepcopy(venue_rows)
+                changed["VEN-999971"][field] = value
+                self.assertTrue(check(venues=changed))
+
+        changed = copy.deepcopy(venue_rows)
+        changed["VEN-999970"]["closed"] = ""
+        self.assertTrue(check(venues=changed))
+        changed = copy.deepcopy(venue_rows)
+        changed["VEN-999970"]["venue_key"] = "different-key"
+        self.assertTrue(check(venues=changed))
+
+        without_newer = copy.deepcopy(names)
+        without_newer["academichall"] = {"VEN-999972"}
+        self.assertTrue(check(labels=without_newer))
+        ambiguous = copy.deepcopy(venue_rows)
+        ambiguous["VEN-999973"] = dict(
+            newer, venue_id="VEN-999973", venue_key="another-modern-hall"
+        )
+        ambiguous_names = copy.deepcopy(names)
+        ambiguous_names["academichall"].add("VEN-999973")
+        self.assertTrue(check(venues=ambiguous, labels=ambiguous_names))
 
     def test_all_school_rows_reference_global_identity(self):
         total = 0
