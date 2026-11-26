@@ -1,20 +1,29 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "uc-davis-expansion-stage2-opponent-display-normalize-0001",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "request_id": "uc-davis-expansion-stage2-proposal-0001",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
   "school_key": "uc-davis",
-  "previous_control_state_commit": "81d24e64631af5bd98ab5760525b1bb8f728c679",
-  "previous_control_state_sha256": "6ba7f39b87e28e152549fa4651cc55fc275f585955022d26dfebb55bce695d4c",
+  "previous_control_state_commit": "dc9e32e5c26d66313132162ecedfb2184119b777",
+  "previous_control_state_sha256": "b1b3050fd5334abcce31e6cca129379fbaa982c1740960338bcc3e80ce4b4328",
   "expected_protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
   "target_branch": "data/uc-davis-onboarding",
-  "target_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-census-0002/checkpoint-manifest.json",
-    "sha256": "ae8ef01f52a3c43047da50ad5dabd0e4b0e00b504a6d5be58a791fae8e9b1d00"
+  "target_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "151b0bd5c88385edc703e1dbff2345f654ba77ba3b0ba1eaad1b677624ec9d6a"
   },
   "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
   "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/uc-davis-expansion-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "4e26098e026b516c9240500b17a86bea3cce6d642d84fc40ee22b445739eb2ba"
+  },
+  "creation_provenance": {
+    "origin": "UC Davis existing ALL_HISTORY_EXPANSION serialized Implementation Stage 2; 14-case evidence-backed recommendation map, after seven-key representation-only normalization and independently fresh-verified CAPABILITY_CENSUS_READY.",
+    "authorization": "Owner Continue persists within already authorized Stage 2, not an owner gate. Exact seven-key normalization 0001 passed semantic drift, repository validation, CAS, controller sequence 776, and independent fresh verification, exposing 14 material planner decisions with zero blockers or warnings. Proposed full map recommends FORCE_NEW for the 1914-15 23-16 Stanford, 1942-43 43-32 California, and 1947-48 54-39 California games, since separate exact-score source rows already match their canonical candidates; MATCH_CANONICAL on the 1936-37 UC Davis 42-16 / Stanford 41-16 one-point reciprocal dispute with KEEP_CANONICAL published 41-16 pending owner review; corresponding six irrelevant conditional rows NOT_APPLICABLE; and KEEP_CANONICAL for the three 1973-74 Minnesota/Wisconsin/Oregon reciprocal confirmed home-site conflicts, preserving contrary UC Davis 'vs.' source assertions. Fourteen nonempty evidence bases cite exact school/reciprocal source IDs. This request authorizes ONLY read-only permanent Stage 2 --map full disposable adversarial proposal rehearsal, with immutable Integration Freeze, no tracked basketball mutation, no historical owner decision approval, no fill/seal/apply, shared registry change, release, Preview, Gate 2, merge, or Production. If BLOCKED preserve permanent diagnostics and stop."
+  },
   "authority": {
     "expansion_phase0": false,
     "owner_gate_1": false,
@@ -32,15 +41,11 @@
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": true,
+    "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "origin": "UC Davis existing ALL_HISTORY_EXPANSION serialized Implementation Stage 2, after independently verified guarded current-main refresh 0001 and read-only census 0002. Existing owner Proceed authorizes this bounded deterministic generic representation repair.",
-    "authorization": "Exact fresh-verified census 0002 at control sequence 775 is BLOCKED solely by seven deterministic historical opponent-display key conflicts: colorado-colorado-springs, concordia-new-york, loyola-new-orleans, pacific-oregon, saint-marys-minnesota, united-states-international, washington-st-louis. Zero warnings, zero Stage 2 decisions, semantic drift PASS. Authorized operation is ONLY permanent guarded STAGE2_OPPONENT_DISPLAY_NORMALIZE: exactly seven census keys; canonical opponent names in schools/uc-davis/opponents.csv and matching normalized opponent names in schools/uc-davis/source-games.csv alone. The permanent tool chooses the names; no source literal wording, raw text, score, date, identity, result, H/A/N, site, game type, frozen semantic meaning, global/shared basketball registries, other school, historical judgment, Owner Gate 1/2, recommendation map, release, merge, Preview or Production mutation. Require independent verification and correct CAS/lock proof before any next step."
   }
 }
