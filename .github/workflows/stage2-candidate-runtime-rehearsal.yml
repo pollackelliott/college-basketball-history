@@ -35,12 +35,15 @@ jobs:
     # other tooling PR and every explicit Stage 2 workflow_dispatch.
     # This is an applicability boundary, not a substitute for the required
     # actual-Freeze/owner-correction Stage 1 and guarded Phase 0 replay.
+    # The pre-Integration expansion venue reconciliation family also uses
+    # this Stage 1 path; no Stage 2 proposal checkpoint exists for it yet.
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event.pull_request.head.repo.full_name == github.repository &&
        startsWith(github.event.pull_request.head.ref, 'tooling/') &&
        !contains(github.event.pull_request.head.ref, 'expansion-stage1-') &&
-       !startsWith(github.event.pull_request.head.ref, 'tooling/expansion-preintegration-'))
+       !startsWith(github.event.pull_request.head.ref, 'tooling/expansion-preintegration-') &&
+       !startsWith(github.event.pull_request.head.ref, 'tooling/expansion-venue-'))
     runs-on: ubuntu-latest
     steps:
       - name: Check out control authority

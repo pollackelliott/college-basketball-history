@@ -163,6 +163,7 @@ def preview_phase0(repo: Path, frozen: Path, output: Path) -> dict:
             source_games_bytes=(frozen/"source-games.csv").read_bytes(),
             local_venues=venues,
             global_venues=global_venues,
+            global_name_rows=global_names,
         )
         revalidated_meta=dict(revalidated_meta)
         revalidated_meta["spec_path"]="venue-reconciliation.json"

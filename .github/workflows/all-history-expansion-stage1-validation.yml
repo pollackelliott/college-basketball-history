@@ -8,6 +8,8 @@ on:
       - 'tools/all_history_expansion_venue_guard.py'
       - 'tests/test_all_history_expansion_venue_guard.py'
       - 'tools/stage1_venue_reconciliation.py'
+      - 'tools/expansion_distinct_venue_registration.py'
+      - 'tests/test_expansion_distinct_venue_registration.py'
       - 'tests/test_stage1_venue_reconciliation.py'
       - 'tools/all_history_expansion_remote_contract.py'
       - 'tests/test_all_history_expansion_remote_contract.py'
@@ -49,6 +51,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_all_history_expansion_venue_guard.py' -v
           python -m unittest discover -s tests -p 'test_stage1_venue_reconciliation.py' -v
+          python -m unittest discover -s tests -p 'test_expansion_distinct_venue_registration.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_remote_contract.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_disposable_git_transaction.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
@@ -56,6 +59,144 @@ jobs:
           python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -v
           python -m unittest discover -s tests -p 'test_remote_implementation_expansion_startup.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_implementation_acceptance.py' -v
+      - name: Rehearse actual immutable UC Davis seven-case venue population (read-only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin '+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation'
+          test "$(git rev-parse refs/remotes/origin/main)" = a1268416813a896a45002733facbf8dded01dbe2
+          mkdir -p /tmp/ucd-expansion-venue-readonly
+          git show e3156d4c611149bea24e026afefc78b53c6b9a1b:.remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-0001.txt | base64 --decode > /tmp/ucd-expansion-venue-readonly/freeze.zip
+          git show 3b24750c2a78780d0916948b3733dd9c7155ef58:.remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json > /tmp/ucd-expansion-venue-readonly/owner.json
+          git show dcc58af8022f9e05021ade8d7e3078d66fd0906a:.remote-implementation/expansion-startup.json > /tmp/ucd-expansion-venue-readonly/startup.json
+          git show 43b8664e96b9411be06861afa16fb5d4866f158b:.remote-implementation/transports/uc-davis/uc-davis-expansion-distinct-venue-registration-0008.json > /tmp/ucd-expansion-venue-readonly/venue.json
+          echo '1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f  /tmp/ucd-expansion-venue-readonly/freeze.zip' | sha256sum -c -
+          echo '70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e  /tmp/ucd-expansion-venue-readonly/owner.json' | sha256sum -c -
+          echo 'c207fb50bb745e148684fe7008383bb10ba854c0aed12bb7bcaefb7a21226181  /tmp/ucd-expansion-venue-readonly/venue.json' | sha256sum -c -
+          python - <<'PY'
+          import csv, hashlib, json, sys, tempfile, zipfile
+          from pathlib import Path
+          sys.path.insert(0, str(Path.cwd() / "tools"))
+          from all_history_expansion_integration import freeze_authority, canonical_bytes
+          from all_history_expansion_phase0_preview import preview_phase0
+          from expansion_implementation_stage1 import stage1
+          from remote_implementation_expansion_startup import build_stage1_proof
+          repo = Path.cwd()
+          root = Path("/tmp/ucd-expansion-venue-readonly")
+          original = root / "freeze.zip"
+          startup = json.loads((root / "startup.json").read_bytes())
+          reference = startup["owner_correction"]
+          main = "a1268416813a896a45002733facbf8dded01dbe2"
+          frozen_hash = "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f"
+          research_base = "2f6a0d7525cff222cfec0f286ed8e1c456707a54"
+          first = root / "stage1-a"
+          second = root / "stage1-b"
+          kw = dict(owner_correction_path=root / "owner.json",
+                    owner_correction_reference=reference)
+          a = stage1(repo, "uc-davis", original, frozen_hash,
+                     research_base, main, first, **kw)
+          b = stage1(repo, "uc-davis", original, frozen_hash,
+                     research_base, main, second, **kw)
+          assert canonical_bytes(a) == canonical_bytes(b)
+          assert a["candidate_member_sha256"] == b["candidate_member_sha256"]
+          assert a["canonical_identity_census"]["counts"] == {
+              "REUSE_CANONICAL": 70,
+              "PROVISIONAL_NEW_CANONICAL": 1894,
+              "IDENTITY_REVIEW_BLOCKER": 0,
+          }
+          assert [x["class"] for x in a["blockers"]] == [
+              "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"
+          ]
+          control = "43b8664e96b9411be06861afa16fb5d4866f158b"
+          proof = build_stage1_proof(
+              a, first,
+              protected_main_sha=main, research_base_sha=research_base,
+              freeze_zip_sha256=frozen_hash,
+              stage1_control_authority_sha=control,
+          )
+          proof_bytes = canonical_bytes(proof)
+          proof_path = root / "stage1-proof.json"
+          proof_path.write_bytes(proof_bytes)
+          proof_sha = hashlib.sha256(proof_bytes).hexdigest()
+          frozen = root / "integration-freeze"
+          manifest = freeze_authority(
+              repo, "uc-davis", original, frozen_hash, research_base,
+              main, proof_path, proof_sha, frozen,
+              venue_reconciliation_path=root / "venue.json",
+              owner_correction_path=root / "owner.json",
+              owner_correction_reference=reference,
+          )
+          census = manifest["venue_reconciliation_census"]
+          assert census["blocker_count"] == 0, census["blockers"]
+          assert census["venue_count"] == 22
+          assert census["classification_counts"] == {
+              "NEW_GLOBAL_IDENTITY": 17,
+              "SAFE_REPRESENTATION_REUSE": 5,
+          }, census["classification_counts"]
+          preview = root / "disposable-preview"
+          try:
+              proposal = preview_phase0(repo, frozen, preview)
+          except Exception:
+              diagnostic = preview / "phase0-venue-identity-blockers.json"
+              if diagnostic.is_file():
+                  print("UC_DAVIS_READONLY_VENUE_BLOCKER_CENSUS=" +
+                        diagnostic.read_text(), flush=True)
+              raise
+          assert proposal["global_venue_registration_count"] == 17, proposal
+          assert proposal["venue_identity_census"]["blocker_count"] == 0
+          assert manifest["venue_reconciliation_sha256"] == hashlib.sha256(
+              (root / "venue.json").read_bytes()
+          ).hexdigest()
+          with (preview / "references" / "venues.csv").open(newline="") as f:
+              global_rows = list(csv.DictReader(f))
+          with (preview / "references" / "venue-names.csv").open(newline="") as f:
+              global_names = list(csv.DictReader(f))
+          with (preview / "venues.csv").open(newline="") as f:
+              school_rows = list(csv.DictReader(f))
+          local = next(r for r in school_rows if r["venue_key"] == "old-recreation-hall-uc-davis")
+          old_id = local["venue_id"]
+          assert old_id.startswith("VEN-") and old_id != "VEN-001129"
+          assert local["aliases"] == "Recreation Hall"
+          assert local["relationship_start"] == "1921-1922"
+          assert local["relationship_end"] == "1936-1937"
+          assert sum(r["venue_id"] == "VEN-001129" for r in global_rows) == 1
+          assert sum(r["venue_id"] == "VEN-001129" and
+                     r["normalized_name"] == "recreationhall"
+                     for r in global_names) == 1
+          assert not any(r["venue_id"] == old_id and
+                         r["normalized_name"] == "recreationhall"
+                         for r in global_names)
+          with zipfile.ZipFile(original) as archive:
+              supports = list(csv.DictReader(
+                  __import__("io").StringIO(
+                      archive.read("expansion-venues.csv").decode("utf-8")
+                  )))
+          for row in supports:
+              if row["support_id"] not in {
+                  "UC-DAVIS-EXP-VEN-0007", "UC-DAVIS-EXP-VEN-0008",
+                  "UC-DAVIS-EXP-VEN-0009", "UC-DAVIS-EXP-VEN-0010",
+                  "UC-DAVIS-EXP-VEN-0011", "UC-DAVIS-EXP-VEN-0012",
+              }:
+                  continue
+              original_venue = json.loads(row["candidate_row_json"])
+              actual = [r for r in school_rows if r["venue_key"] == row["venue_key"]]
+              assert len(actual) == 1
+              for field in ("aliases", "relationship_type", "site_rule",
+                            "games_currently_assigned", "relationship_date_precision"):
+                  assert actual[0][field] == original_venue[field], (row["support_id"],field)
+          assert hashlib.sha256(original.read_bytes()).hexdigest() == frozen_hash
+          print(json.dumps({
+              "status": "PASS_ACTUAL_UC_DAVIS_VENUE_RECONCILIATION",
+              "games": 1964, "venue_supports": 22,
+              "venue_registration_count": 17,
+              "venue_reuse_count": 5,
+              "venue_blockers": 0,
+              "old_hall_global_venue_id": old_id,
+              "later_hall_preserved": "VEN-001129",
+              "owner_gate_1_approved": False,
+              "published_mutation": False,
+          }, sort_keys=True))
+          PY
       - name: All-History expansion implementation acceptance
         run: python tools/all_history_expansion_implementation_acceptance.py --json
       - name: Full repository unittest nonregression

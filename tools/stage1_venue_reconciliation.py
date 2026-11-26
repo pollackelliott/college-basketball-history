@@ -16,6 +16,10 @@ from pathlib import Path
 from typing import Any
 
 from onboarding_plan import WorkflowError
+from expansion_distinct_venue_registration import (
+    ACTION as DISTINCT_KEYED_REGISTRATION,
+    validate_distinct_keyed_registration,
+)
 from venue_geography import normalize_jurisdiction
 
 
@@ -208,6 +212,7 @@ def load_venue_reconciliation(
     expected_package_sha256: str | None = None,
     frozen_venues_bytes: bytes | None = None,
     source_games_bytes: bytes | None = None,
+    global_name_rows: list[dict[str, str]] | None = None,
 ) -> tuple[dict[str, dict[str, Any]], dict[str, Any] | None]:
     """Validate an explicit identity map and return mappings + durable provenance.
 
@@ -232,8 +237,8 @@ def load_venue_reconciliation(
     if not isinstance(doc, dict):
         raise WorkflowError("venue reconciliation document must be an object")
     schema_version = doc.get("schema_version")
-    if schema_version not in {1, 2}:
-        raise WorkflowError("venue reconciliation schema_version must be 1 or 2")
+    if schema_version not in {1, 2, 3}:
+        raise WorkflowError("venue reconciliation schema_version must be 1, 2 or 3")
     if doc.get("school_key") != school_key:
         raise WorkflowError("venue reconciliation school_key mismatch")
     approval = str(doc.get("owner_approval_basis") or "").strip()
@@ -263,6 +268,11 @@ def load_venue_reconciliation(
                     if "source-games.csv" in archive.namelist()
                     else b""
                 )
+                frozen_support_member = (
+                    archive.read("expansion-venues.csv")
+                    if "expansion-venues.csv" in archive.namelist()
+                    else b""
+                )
         except (OSError, ValueError, KeyError, zipfile.BadZipFile) as exc:
             raise WorkflowError(
                 f"venue reconciliation cannot read frozen package members: {exc}"
@@ -270,10 +280,35 @@ def load_venue_reconciliation(
     else:
         member = frozen_venues_bytes
         source_games_member = source_games_bytes or b""
+        frozen_support_member = b""
     source_games = (
         _csv_rows(source_games_member)
         if source_games_member
         else []
+    )
+    # For an expansion freeze, frozen_venues_bytes is the deterministic
+    # effective Stage 1 candidate while package_path is still the *original*
+    # immutable expansion ZIP. Reopen that ZIP specifically to prove the
+    # physical-building source-support row against authentic Research bytes.
+    if package_path is not None:
+        try:
+            with zipfile.ZipFile(package_path) as archive:
+                if "expansion-venues.csv" in archive.namelist():
+                    frozen_support_member = archive.read("expansion-venues.csv")
+        except (OSError, ValueError, zipfile.BadZipFile) as exc:
+            raise WorkflowError(
+                "venue reconciliation cannot authenticate expansion venue support"
+            ) from exc
+    frozen_support_rows = (
+        _csv_rows(frozen_support_member)
+        if frozen_support_member else None
+    )
+    # The caller's explicitly authenticated effective candidate source-games
+    # bytes take precedence over the ZIP's expansion-source-games.csv. This
+    # binds approved pre-Integration source corrections without changing ZIP.
+    source_games_sha256 = _sha256_bytes(
+        source_games_bytes if source_games_bytes is not None
+        else source_games_member
     )
     expected_venues = str(doc.get("expected_venues_sha256") or "").lower().strip()
     actual_venues = _sha256_bytes(member)
@@ -393,6 +428,35 @@ def load_venue_reconciliation(
             raise WorkflowError(
                 f"venue reconciliation frozen local identity drift for {selector!r}"
             )
+
+        if action == DISTINCT_KEYED_REGISTRATION:
+            if schema_version != 3 or row_index is not None:
+                raise WorkflowError(
+                    "REGISTER_DISTINCT_KEYED_IDENTITY requires schema-v3 "
+                    "and one existing, nonblank frozen local_venue_key"
+                )
+            if len(local_rows) != 1:
+                raise WorkflowError(
+                    "REGISTER_DISTINCT_KEYED_IDENTITY requires exactly one keyed local row"
+                )
+            validated = validate_distinct_keyed_registration(
+                raw, local_rows[0], local_venues, global_venues,
+                global_name_rows,
+                frozen_support_rows=frozen_support_rows,
+                source_games_sha256=source_games_sha256,
+                school_key=school_key,
+            )
+            if validated["new_global_venue_key"] in new_identity_specs:
+                raise WorkflowError(
+                    "REGISTER_DISTINCT_KEYED_IDENTITY repeats new identity key"
+                )
+            new_identity_specs[validated["new_global_venue_key"]] = (
+                item["expected_local_name"], item["expected_local_city"],
+                item["expected_local_state"],
+            )
+            item.update(validated)
+            mappings[selector] = item
+            continue
 
         if action == "REGISTER_NEW_IDENTITY":
             if row_index is None:

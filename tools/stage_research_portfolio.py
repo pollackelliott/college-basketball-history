@@ -992,6 +992,45 @@ def research_declares_pending_shared_venue(local: dict[str, str]) -> bool:
     )
 
 
+def _settled_frozen_venue_registration_evidence(local: dict[str, str]) -> bool:
+    """Recognize a complete, researched physical-site registration handoff.
+
+    No synthetic wording is appended to the immutable venue notes. The
+    accepted exact-game/site relationship and documentary basis must already
+    be present; otherwise pending registration alone is not a resolution.
+    Later current-main geography/name/identity checks remain mandatory.
+    """
+    if not all(
+        local.get(field, "").strip()
+        for field in (
+            "source_program_key", "venue_key", "canonical_name",
+            "city", "state", "source_basis", "site_rule",
+            "relationship_type", "relationship_date_precision",
+        )
+    ):
+        return False
+    if local.get("relationship_date_precision", "").strip() != "EXACT_GAME_SET":
+        return False
+    if local.get("relationship_type", "").strip() not in {
+        "POSTSEASON_GAME_SITE", "NEUTRAL_GAME_SITE", "OPPONENT_HOME_SITE",
+        "primary_home", "PRIMARY_HOME",
+    }:
+        return False
+    try:
+        if int(local.get("games_currently_assigned", "").strip()) <= 0:
+            return False
+    except (TypeError, ValueError):
+        return False
+    basis = local.get("source_basis", "")
+    if "https://" not in basis and "http://" not in basis:
+        return False
+    notes = local.get("notes", "").casefold()
+    return (
+        "global venue registration pending current-main rebase" in notes
+        or "global registration pending current-main rebase" in notes
+    )
+
+
 def research_declares_registration_only_pending(local: dict[str, str]) -> bool:
     """Recognize a frozen, settled identity awaiting mechanical registration.
 
@@ -1029,6 +1068,12 @@ def research_declares_registration_only_pending(local: dict[str, str]) -> bool:
             "conflicting physical",
             "multiple physical",
         )
+    )
+    # The immutable source bundle can state a settled physical facility by
+    # its documentary source, keyed locality, and exact game-site scope
+    # without repeating one particular parser magic phrase.
+    settled_identity = (
+        settled_identity or _settled_frozen_venue_registration_evidence(local)
     )
     return registration_only and settled_identity and not unresolved_identity
 
@@ -1151,6 +1196,18 @@ def venue_reconciliation_inventory(
                 item["target_venue_key"] = "|".join(
                     target["global_venue_key"]
                     for target in explicit.get("split_targets", [])
+                )
+                results.append(item)
+                continue
+            if explicit_action == "REGISTER_DISTINCT_KEYED_IDENTITY":
+                item["classification"] = "NEW_GLOBAL_IDENTITY"
+                item["resolution"] = "REGISTER_DISTINCT_KEYED_IDENTITY"
+                item["target_venue_key"] = explicit["new_global_venue_key"]
+                item["issues"].append(
+                    "EXACT_HASH_BOUND_DIFFERENT_PHYSICAL_BUILDING"
+                )
+                item["issues"].append(
+                    "HISTORICAL_GLOBAL_ALIAS_COLLISION_SUPPRESSED"
                 )
                 results.append(item)
                 continue
@@ -1771,6 +1828,7 @@ def rebase_venues(
             venue_reconciliation, local, row_index
         )
         register_new_key = ""
+        suppressed_global_aliases: set[str] = set()
         if explicit is not None:
             explicit_action = str(
                 explicit.get("action") or "REUSE_CURRENT_IDENTITY"
@@ -1844,6 +1902,16 @@ def rebase_venues(
                             }
                         )
                         continue
+            if explicit_action == "REGISTER_DISTINCT_KEYED_IDENTITY":
+                register_new_key = explicit["new_global_venue_key"]
+                suppressed_global_aliases = set(
+                    explicit["excluded_global_alias_names"]
+                )
+                if register_new_key != key or register_new_key in global_by_key:
+                    raise WorkflowError(
+                        "keyed historical venue registration changed its "
+                        "frozen identity or collided with current main"
+                    )
             if explicit_action == "REGISTER_NEW_IDENTITY":
                 register_new_key = explicit["new_global_venue_key"]
                 already_created = global_by_key.get(register_new_key)
@@ -2022,7 +2090,12 @@ def rebase_venues(
                         "explicit new venue key conflicts with an existing "
                         f"school-local representation: {register_new_key!r}"
                     )
-                reason = "NEW_GLOBAL_IDENTITY_EXPLICIT_REGISTRATION"
+                reason = (
+                    "NEW_GLOBAL_IDENTITY_DISTINCT_KEYED"
+                    if explicit is not None
+                    and explicit_action == "REGISTER_DISTINCT_KEYED_IDENTITY"
+                    else "NEW_GLOBAL_IDENTITY_EXPLICIT_REGISTRATION"
+                )
             else:
                 reason = "NEW_GLOBAL_IDENTITY"
                 if collisions:
@@ -2115,6 +2188,14 @@ def rebase_venues(
 
         for candidate_name, name_type in candidate_names:
             normalized_candidate = normalize_name(candidate_name)
+            if (
+                normalized_candidate in suppressed_global_aliases
+                and name_type == "HISTORICAL_OR_ALIAS"
+            ):
+                # Keep the immutable school's literal alias and site rules.
+                # Do not add a second unbounded global name-only mapping
+                # that could redirect games to the wrong physical building.
+                continue
             if not normalized_candidate:
                 continue
             if normalized_candidate in registered_names_by_id.get(final_id, set()):
