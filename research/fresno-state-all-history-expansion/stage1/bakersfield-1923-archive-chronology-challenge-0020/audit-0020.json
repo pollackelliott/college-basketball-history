@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_BAKERSFIELD_1923_ARCHIVE_CHRONOLOGY_CHALLENGE_0020",
+  "status": "STAGE1_OPEN__BAKERSFIELD_1922_23_HISTORICAL_OPPONENT_STILL_UNKNOWN__ARCHIVE_CATALOG_DATE_INCONSISTENCY_DOCUMENTED__NO_GAME_MUTATION",
+  "authority": {
+    "main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+    "research_parent_sha": "46e11ac5561c93245c27f89bf1aa768f1b67253d",
+    "parent_tree_sha": "d30f210bd3795c4a4af7dc42f89d20919161519f",
+    "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+    "guide_raw_blob": "fc72b2862aa283481d498873af0a17fa1d7e405a",
+    "working_ledger_1009_blob": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "source_dispositions_1034_blob": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "census_49_blob": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+    "pending_six_groups_blob": "485047f0a0806bc4407be334d8cbd7112aaf0f7b"
+  },
+  "specific_historical_result": {
+    "id": "FRESNO-EXP-CAND-1922-23-006",
+    "season": "1922-23",
+    "source_literal": "CSU Bakersfield W 70-13",
+    "working_result": "W",
+    "team_score": 70,
+    "opponent_score": 13,
+    "working_inclusion": "ACCEPTED_NEW_COMPETITIVE_SOURCE_GAME",
+    "opponent_historical_identity": "UNKNOWN",
+    "modern_csub_invalid": true,
+    "bakersfield_jc_proven_as_basketball_opponent": false,
+    "high_school_alternative_proven": false,
+    "actual_1923_box_score_obtained": false
+  },
+  "archival_challenge": {
+    "new_accessible_newspaper_scan": "https://www.bakersfieldcollege.edu/_resources/assets/documents/archives/renegade-rip-archives/1920s/1923-January-8.pdf",
+    "original_pdf_pages_visually_checked": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "catalog_filename": "1923-January-8.pdf",
+    "internal_weekday": "Tuesday",
+    "jan8_1923_weekday": "Monday",
+    "jan8_1924_weekday": "Tuesday",
+    "jan15_1924_weekday": "Tuesday",
+    "internal_printed_year_independently_proved": false,
+    "full_1923_basketball_schedule_proved": false,
+    "match_report_read": false
+  },
+  "unchanged": {
+    "parent_working_games": 1009,
+    "season_census_rows": 49,
+    "inherited_original_research_games": 78,
+    "pending_unaccepted_source_groups": 6,
+    "accepted_game_additions": 0,
+    "accepted_game_removals": 0,
+    "accepted_game_field_mutations": 0,
+    "source_row_mutations": 0,
+    "protected_main_mutations": 0,
+    "published_fresno_mutations": 0,
+    "shared_reference_mutations": 0
+  },
+  "stage2_authorized": false,
+  "next_bounded_unit": "Reopen this identity only with dated period basketball box score or reciprocal match. Otherwise Stage1 remaining blocker feasibility/convergence audit; do not repeat generic archive searches."
+}
