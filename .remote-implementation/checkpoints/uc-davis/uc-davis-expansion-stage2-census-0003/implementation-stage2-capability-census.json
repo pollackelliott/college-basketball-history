@@ -1,0 +1,81 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "conditional_discrepancy": 7,
+      "discrepancy": 3,
+      "identity": 4
+    },
+    "decision_count": 14,
+    "decision_fields": {
+      "game_identity": 4,
+      "score": 4,
+      "site_type": 6
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1914-15-004-CBBG-0114369-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1942-43-005-CBBG-0113018-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-UC-DAVIS-EXP-1947-48-006-CBBG-0113104-SITE_TYPE",
+      "DISCREPANCY-UC-DAVIS-EXP-1973-74-001-SITE_TYPE",
+      "DISCREPANCY-UC-DAVIS-EXP-1973-74-002-SITE_TYPE",
+      "DISCREPANCY-UC-DAVIS-EXP-1973-74-004-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 6,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0113018",
+          "fixed_confident_source_game_ids": [
+            "UC-DAVIS-EXP-1942-43-001"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "UC-DAVIS-EXP-1942-43-005"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0113104",
+          "fixed_confident_source_game_ids": [
+            "UC-DAVIS-EXP-1947-48-003"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "UC-DAVIS-EXP-1947-48-006"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114369",
+          "fixed_confident_source_game_ids": [
+            "UC-DAVIS-EXP-1914-15-005"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "UC-DAVIS-EXP-1914-15-004"
+          ]
+        }
+      ],
+      "count": 3,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}
