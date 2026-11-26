@@ -1,0 +1,109 @@
+{
+  "actual_published_target_sha": "948468477bf2159094f3c3935b95117c10434e11",
+  "changed_file_sha256": {
+    "data/reference/programs.csv": "45ec2888a6c8d50bbb5d65797babdd3797163d3f0b579e3e0488d37abe032d15",
+    "data/reference/venue-names.csv": "f18f50b55b14ee06e082916b1c4d0cfee5d787532ae7aa1ee4907db52c6cd636",
+    "data/reference/venues.csv": "69cc21ccfce39c4602aabedd0b49d1aa821dec30f9e7603f6879dd1f0805698e",
+    "schools/uc-davis/notes.md": "8f85869bbbfa213a57e798a745500e5d0e5de80951b5469093ccab37e2f28535",
+    "schools/uc-davis/opponents.csv": "5c826483d667ea9e978dd3604d86783675ab4c6753fa493bd0ad89d60c782ef2",
+    "schools/uc-davis/source-games.csv": "9382223ec169872826c842a836a43e73fb1073ec88082b28d4975f925c53b618",
+    "schools/uc-davis/source-notes.md": "823126f1afac161846cdc606e7a824b5d31b96589fd04ef44f96dc4fcf5bb23e",
+    "schools/uc-davis/venues.csv": "5249c542d0cea3e747dde6b04eaa40df2df33412b3001435d6c6674b57321852"
+  },
+  "changed_paths": [
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/uc-davis/notes.md",
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv",
+    "schools/uc-davis/source-notes.md",
+    "schools/uc-davis/venues.csv"
+  ],
+  "expected_target_predecessor_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "96edd84f03670b929586b22d863d610b0691dae6",
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "kind": "REMOTE_IMPLEMENTATION_SUCCESSOR",
+  "operation": "EXPANSION_PHASE0",
+  "owner_preintegration_correction_receipt": {
+    "approval_issue_url": "https://github.com/pollackelliott/college-basketball-history/issues/720",
+    "approved_source_game_ids": [
+      "UC-DAVIS-EXP-1963-64-002",
+      "UC-DAVIS-EXP-1963-64-003",
+      "UC-DAVIS-EXP-1976-77-008"
+    ],
+    "artifact_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+    "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+    "effective_source_rows_sha256": "113a45faa3e0c40375cfa415c7a9482bf6788e18c524da6d04356b2014246e7a",
+    "freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+    "kind": "PREINTEGRATION_OWNER_CORRECTION_RECEIPT",
+    "owner_approved": true,
+    "owner_checkpoint_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+    "owner_gate_1_approval": false,
+    "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+    "schema_version": 1,
+    "school_key": "uc-davis",
+    "source_row_receipts": [
+      {
+        "effective_row_sha256": "9d1681244d62af7840aa4fb32563cd145f4f108aef1dafa6f1425b74246ec4cc",
+        "field_names": [
+          "city",
+          "curated_site_type",
+          "curated_venue_name",
+          "game_date",
+          "opponent_score",
+          "state",
+          "team_score"
+        ],
+        "immutable_original_row_sha256": "812f1b525b274f2a84cc6a1a3261db8a8632899317ef0bc44e1e32fcdab2df60",
+        "source_game_id": "UC-DAVIS-EXP-1963-64-002"
+      },
+      {
+        "effective_row_sha256": "b93fd65315b1e2374c65005d1bb7c5ba623469043818403f95f80e09633a036a",
+        "field_names": [
+          "city",
+          "curated_site_type",
+          "curated_venue_name",
+          "game_date",
+          "opponent_score",
+          "state",
+          "team_score"
+        ],
+        "immutable_original_row_sha256": "a026286b9997a038b285da19e99853b294d042e87596f251cc07b7c423343c85",
+        "source_game_id": "UC-DAVIS-EXP-1963-64-003"
+      },
+      {
+        "effective_row_sha256": "14c69d485939cd264f23ec1dba23fc85a4cb17e60ed5793df35c97200173be33",
+        "field_names": [
+          "city",
+          "curated_site_type",
+          "curated_venue_name",
+          "game_date",
+          "team_score"
+        ],
+        "immutable_original_row_sha256": "febd028331a251ea05339ffb5ecf5c42f0d341701a907c931d4a84a5ba713ae7",
+        "source_game_id": "UC-DAVIS-EXP-1976-77-008"
+      }
+    ],
+    "tracked_mutation": "NONE"
+  },
+  "owner_preintegration_correction_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+  "prepared_commit_sha": "948468477bf2159094f3c3935b95117c10434e11",
+  "prepared_parent_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "prepared_tree_sha": "bb8b434c6facba4df867c02b92d65b669870a99e",
+  "protected_main_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "repository_validation": "PASS",
+  "request_id": "uc-davis-expansion-phase0-0004",
+  "request_sha256": "44dedd8b0216533c05c20bdb3618010b1c5ba9f629347e0835fcb409f061c6aa",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "stage1_control_authority_sha": "306a816b22e21b65b29a1ce3451352e79a5e59b2",
+  "target_branch": "data/uc-davis-onboarding",
+  "venue_reconciliation_sha256": "c207fb50bb745e148684fe7008383bb10ba854c0aed12bb7bcaefb7a21226181",
+  "writeahead_commit": "c819193dcb7fdf89f0abffec2c7b6e4069e84d99",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/uc-davis/uc-davis-expansion-phase0-0004/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "fbe6836ef1b1828b2ac855b31ea3bcd3fdb992ae152e494982286acc114b28aa"
+}
