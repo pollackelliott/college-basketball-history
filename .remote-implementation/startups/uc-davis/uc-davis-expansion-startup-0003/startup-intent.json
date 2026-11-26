@@ -1,0 +1,43 @@
+{
+  "creation_provenance": {
+    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION Implementation lane; new exact-main startup after former 0001/0002 pre-integration diagnostics, with original immutable Research Freeze 0025 and owner-correction 0005 hashes unchanged, seven-case venue sidecar 0008 hash-bound.",
+    "authorization": "Owner Proceed authorizes ordinary UC Davis Stage 1/Integration Freeze/guarded Phase 0 through independent verification. Control Center issue #720 authorized the three settled source corrections; issue #722 authorized exact seven-case generic venue tooling. Generic tooling PRs #719, #721 and #723 merged. Only current-main deterministic stage preparation and existing guarded EXPANSION_PHASE0 child; no new historical, shared registry, Gate 1, Gate 2, Stage 2, release, or Production authority."
+  },
+  "expansion_research_checkpoint": {
+    "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+    "sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+    "transport": {
+      "commit_sha": "062a07471a4a76973e5ee029f52e02a8f97bc67b",
+      "kind": "git_base64_parts",
+      "part_count": 1,
+      "path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-"
+    }
+  },
+  "expected_protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
+  "phase0_request_id": "uc-davis-expansion-phase0-0003",
+  "research_freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "startup_id": "uc-davis-expansion-startup-0003",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "owner_correction": {
+    "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+    "approval_issue_url": "https://github.com/pollackelliott/college-basketball-history/issues/720",
+    "school_key": "uc-davis",
+    "freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+    "sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+    "owner_checkpoint_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+    "path": ".remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json",
+    "approved_source_game_ids": [
+      "UC-DAVIS-EXP-1963-64-002",
+      "UC-DAVIS-EXP-1963-64-003",
+      "UC-DAVIS-EXP-1976-77-008"
+    ]
+  },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/transports/uc-davis/uc-davis-expansion-distinct-venue-registration-0008.json",
+    "sha256": "c207fb50bb745e148684fe7008383bb10ba854c0aed12bb7bcaefb7a21226181"
+  }
+}

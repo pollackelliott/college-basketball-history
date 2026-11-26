@@ -1,0 +1,85 @@
+{
+  "implementation_acceptance_sha256": "0eaf3d3d86adce19dc8f2673c2aa148d8cfc3dbb09c236ea02356a2481d983f4",
+  "integration_freeze_sha256": "518052e3b3135416e3b08e3247bf2f945749e6e696fb0d50733cd20debca4b63",
+  "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP_CHECKPOINT",
+  "next_operation": "EXPANSION_PHASE0",
+  "owner_preintegration_correction_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+  "owner_preintegration_receipt": {
+    "approval_issue_url": "https://github.com/pollackelliott/college-basketball-history/issues/720",
+    "approved_source_game_ids": [
+      "UC-DAVIS-EXP-1963-64-002",
+      "UC-DAVIS-EXP-1963-64-003",
+      "UC-DAVIS-EXP-1976-77-008"
+    ],
+    "artifact_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+    "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+    "effective_source_rows_sha256": "113a45faa3e0c40375cfa415c7a9482bf6788e18c524da6d04356b2014246e7a",
+    "freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+    "kind": "PREINTEGRATION_OWNER_CORRECTION_RECEIPT",
+    "owner_approved": true,
+    "owner_checkpoint_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+    "owner_gate_1_approval": false,
+    "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+    "schema_version": 1,
+    "school_key": "uc-davis",
+    "source_row_receipts": [
+      {
+        "effective_row_sha256": "9d1681244d62af7840aa4fb32563cd145f4f108aef1dafa6f1425b74246ec4cc",
+        "field_names": [
+          "city",
+          "curated_site_type",
+          "curated_venue_name",
+          "game_date",
+          "opponent_score",
+          "state",
+          "team_score"
+        ],
+        "immutable_original_row_sha256": "812f1b525b274f2a84cc6a1a3261db8a8632899317ef0bc44e1e32fcdab2df60",
+        "source_game_id": "UC-DAVIS-EXP-1963-64-002"
+      },
+      {
+        "effective_row_sha256": "b93fd65315b1e2374c65005d1bb7c5ba623469043818403f95f80e09633a036a",
+        "field_names": [
+          "city",
+          "curated_site_type",
+          "curated_venue_name",
+          "game_date",
+          "opponent_score",
+          "state",
+          "team_score"
+        ],
+        "immutable_original_row_sha256": "a026286b9997a038b285da19e99853b294d042e87596f251cc07b7c423343c85",
+        "source_game_id": "UC-DAVIS-EXP-1963-64-003"
+      },
+      {
+        "effective_row_sha256": "14c69d485939cd264f23ec1dba23fc85a4cb17e60ed5793df35c97200173be33",
+        "field_names": [
+          "city",
+          "curated_site_type",
+          "curated_venue_name",
+          "game_date",
+          "team_score"
+        ],
+        "immutable_original_row_sha256": "febd028331a251ea05339ffb5ecf5c42f0d341701a907c931d4a84a5ba713ae7",
+        "source_game_id": "UC-DAVIS-EXP-1976-77-008"
+      }
+    ],
+    "tracked_mutation": "NONE"
+  },
+  "phase0_preview_sha256": "31f6af39be1d3e75753081d847816a5d4cc82d818245c46040c7d3ed359c2e2b",
+  "phase0_request_id": "uc-davis-expansion-phase0-0003",
+  "protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "research_freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "stage1_control_authority_sha": "b7f6961f1c228a169feee96f3da95cba9538e8fb",
+  "stage1_independent_proof_sha256": "5f1eb1c6a4c93d50b72143d3c16142b59f8efbba51c6de4f80dd61b6b2527449",
+  "stage1_reconciliation_sha256": "1795c321142220f291b3d64c1712f95ecc0f26cd55eccc8611177a07f11ee078",
+  "startup_id": "uc-davis-expansion-startup-0003",
+  "startup_intent_sha256": "53e063f6ba4f21e4e2343b76e33ae7748a2f5d099643d7649e5ac1c1eb975d53",
+  "status": "READY_TO_SUBMIT_GUARDED_EXPANSION_PHASE0",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "tracked_basketball_mutation": "NONE_PREPARATION_ONLY"
+}

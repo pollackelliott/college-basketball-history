@@ -1,0 +1,14 @@
+{
+  "approval_issue_url": "https://github.com/pollackelliott/college-basketball-history/issues/720",
+  "approved_source_game_ids": [
+    "UC-DAVIS-EXP-1963-64-002",
+    "UC-DAVIS-EXP-1963-64-003",
+    "UC-DAVIS-EXP-1976-77-008"
+  ],
+  "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+  "freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+  "owner_checkpoint_sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e",
+  "path": ".remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json",
+  "school_key": "uc-davis",
+  "sha256": "70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e"
+}
