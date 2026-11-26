@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_JAN_18_1926_UW_PORTLAND_CHECKERBOARDS_DATE_COLLISION_ADJUDICATION_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "status": "BOUNDED_REVIEW_EXHAUSTED__ORIGINAL_DATE_COLLISION_UNRESOLVED",
+  "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_research_head": "70070652cb9fcb4affd874f086dafebd025dcc0d",
+  "authority": {
+    "original_status_blob": "28e035008e42d8cde16254d918f919fdc19d561e",
+    "accepted_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0034.csv",
+    "accepted_ledger_blob": "52f4c5db7e13c0b1f99b7c196a97295e42e3f173",
+    "original_held_candidate_path": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-held-candidates-0001.csv",
+    "original_held_candidate_blob": "0b30a56eb2feabe3f4cb1a5f6a4a885121f76639",
+    "prior_held_disposition_inventory_blob": "4d43f36c8100a58a9c8b2f4eb896ff707ad5d82c"
+  },
+  "accepted_washington": {
+    "id": "GONZAGA-EXP-UW-008",
+    "date": "1926-01-18",
+    "opponent": "Washington",
+    "result": "L",
+    "score": "12-35",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "AWAY",
+    "disposition": "RETAIN_UNCHANGED"
+  },
+  "unadmitted_portland": {
+    "id": "GONZAGA-HOLD-NW2528-001",
+    "reported_date": "1926-01-18",
+    "opponent": "Portland Coliseum Checkerboards",
+    "result": "L",
+    "reported_body_score": "29-30",
+    "headline_conflict": "Oregon Statesman headline 20-30, story 29-30; La Grande Evening Observer 29-30",
+    "game_type": "UNRESOLVED_UNADMITTED",
+    "site_type": "UNKNOWN",
+    "disposition": "ACTIVE_DATE_IDENTITY_COLLISION_HOLD__BOUNDED_REVIEW_EXHAUSTED"
+  },
+  "sources": [
+    {
+      "type": "OFFICIAL_UW_HISTORICAL",
+      "url": "https://washington_ftp.sidearmsports.com/old_site/pdf/m-baskbl/05guide-results.pdf",
+      "locator": "2004-05 printed p.163 PDF zero-index 6, 1926 season Jan.18 Gonzaga W35–12; next Jan.19 Montana",
+      "original_pdf_screenshot_inspected": true,
+      "interpretation": "University of Washington Jan.18 1926 Gonzaga W35–12 on home-listed schedule; reciprocal accepted Gonzaga away L12–35"
+    },
+    {
+      "type": "SECOND_UW_OFFICIAL_EDITION",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/washington.sidearmsports.com/documents/2025/12/9/Records_25-26.pdf",
+      "locator": "2025-26 All-Time Results 1925-26 Jan.18 Gonzaga W35–12",
+      "original_pdf_screenshot_inspected": false,
+      "interpretation": "Same institutional lineage confirms date and score; oversized PDF screenshot retrieval failed; indexed record readable"
+    },
+    {
+      "type": "ORIGINAL_SALEM_AP_WIRE",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1926-01-19/ed-1/seq-2/",
+      "publication": "Oregon Statesman",
+      "printed_date": "1926-01-19",
+      "printed_page": 2,
+      "literal": "PORTLAND, Or., Jan.18 (By Associated Press) ... Gonzaga ... Coliseum Checkerboards defeated it 30 to 29",
+      "headline": "COLISEUM 30; GONZAGA 20",
+      "source_kind": "Contemporary Associated Press wire",
+      "visual_status": "Original page transcript inspected; PDF screenshot attempt failed; OCR headline not visually verified"
+    },
+    {
+      "type": "ORIGINAL_LA_GRANDE_AP_REPRINT",
+      "url": "https://oregonnews.uoregon.edu/lccn/2006260039/1926-01-19/ed-1/seq-5.pdf",
+      "publication": "La Grande Evening Observer",
+      "printed_date": "1926-01-19",
+      "printed_page": 5,
+      "literal": "GONZAGA LOSES BY POINT ... Portland Jan.18 ... Coliseum Checkerboards defeated it 30 to 29 last night",
+      "source_kind": "Same Associated Press wire family, separate local printing; not an independent game witness",
+      "visual_status": "Web PDF original screenshot inspected, top-center of printed p.5"
+    }
+  ],
+  "bounded_probe": {
+    "targets": [
+      "Exact Jan 18-20 Gonzaga Washington 35–12 original newspapers",
+      "Exact Jan 18-20 Gonzaga Checkerboards 30–29 newspaper sources",
+      "Two original Jan.19 Oregon paper pages",
+      "University of Washington official 2004 and 2025 season records"
+    ],
+    "results": "NO_POSITIVE_INDEPENDENT_DIFFERENT_PLAY_DATE_OR_TEAM_IDENTITY_DOCUMENTED",
+    "exhaustion_scope": "THIS_BOUNDED_REVIEW_ONLY_NOT_ENTIRE_1926_PRESS_CORPUS"
+  },
+  "adjudication": {
+    "accepted_washington_game_kept": true,
+    "portland_candidate_admitted": false,
+    "reason": "The Washington official schedule dates a Gonzaga away game January 18; both Oregon prints derive from same AP account of January 18 Portland game. Neither an alternative Portland date nor error in accepted Washington schedule is proved. Do not invent a same-night Seattle-Portland two-game Gonzaga itinerary.",
+    "physical_game_identity_conflict_unresolved": true,
+    "portland_reported_score_preferred": "Gonzaga L29–30 as a report claim only; no admission",
+    "h_a_n_from_portland_dateline": "NOT_INFERRED",
+    "possible_new_game_count_from_hold": 0,
+    "original_hold_source_preserved": true
+  },
+  "season_accounting": {
+    "season": "1925-26",
+    "official_record": "16-7",
+    "official_games": 23,
+    "accepted_record": "6-5",
+    "accepted_games": 11,
+    "game_count_arithmetic_difference": 12,
+    "arithmetic_not_an_individually_verified_game": true
+  },
+  "after": {
+    "accepted_games": 558,
+    "accepted_wins": 215,
+    "accepted_losses": 343,
+    "official_aggregate_games": 977,
+    "net_arithmetic_gap": 419,
+    "active_holds": 5,
+    "historical_held_rows": 6,
+    "resolved_previous_PLU_duplicate": 1,
+    "other_active_1942_43_holds": 4,
+    "research_exhausted_accounting_closeout_blockers": 4,
+    "stage1_complete": false,
+    "stage2_authorized": false,
+    "no_owner_gate_now": true
+  },
+  "next_bounded_unit": "One coherent four-held-candidate 1942-43 source and varsity-inclusion/official 2-9 eleven-game accounting adjudication; no broad new research and no Stage 2."
+}
