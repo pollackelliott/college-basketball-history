@@ -1,0 +1,37 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "a9e6f7d3723312a9672b1c700d5f03887e8016a9f4ac253c4d8e6640859bf196",
+    "implementation-stage2-status.json": "8daa1927b9fd409e7526d3d1b7484c7fed23731df59ff7e670aa212945b3e0d1",
+    "plan.json": "6f4d866f15305da89312c891e2479f87aa81a5ae2c4ffc134d4ad3be98cf04fb",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "3b757c6a78af74a71e0ca30aa1a9886066bcefe57e09695981fbf338affe9b0a"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "a9e6f7d3723312a9672b1c700d5f03887e8016a9f4ac253c4d8e6640859bf196",
+    "implementation-stage2-status.json": "4abac27d9ec037ea6cbcdf35bab4ceb689f43833e7fea888a8734eff4b550b5f",
+    "plan.json": "a3fdc280b726697ee3528e3b675d435af8a02c23c87ce179da5d5b00bb23aa70",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "ce484690e246d8f8148fd2ed2b215f9ed57e674491a7dc5f5165c2d7c7fa0256"
+  },
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_VERIFICATION",
+  "normalized_path_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "remote_stage2_census_equivalence": "PASS",
+  "request_id": "uc-davis-expansion-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "948468477bf2159094f3c3935b95117c10434e11",
+  "target_tree_sha": "bb8b434c6facba4df867c02b92d65b669870a99e",
+  "tracked_stage2_mutation": "NONE"
+}
