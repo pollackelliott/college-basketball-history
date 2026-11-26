@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_1926_27_EXACT_OWNER_HISTORICAL_RULING_RECEIPT",
+  "status": "OWNER_APPROVED_SUBSTANTIVE_TWO_GAME_COUNT__REPRESENTATION_CANDIDATE_ONLY",
+  "research_parent_sha": "27962e1206964ee504967238d8cd69afa9e5adf6",
+  "original_proposal_sha": "7ce40766570aefa1210cf9833341c94488a64388",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "main_sha_at_recovery": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "owner_reply_literal": "Approved. Proceed",
+  "approved_proposal_option": "A",
+  "approved_meaning": {
+    "fresno_1926_27_vs_uc_davis_unique_competitive_games": 2,
+    "uc_davis_row_ordinals": [
+      4,
+      5
+    ],
+    "fresno_result_each": "W",
+    "exact_scores": "UNKNOWN",
+    "exact_dates": "UNKNOWN",
+    "preserve_all_four_original_fresno_claims_with_original_source_literal": true,
+    "do_not_claim_any_fresno_score_matches_particular_davis_game": true,
+    "do_not_mark_specific_source_claim_as_proven_duplicate": true,
+    "fresno_guide_aggregate": "12-8 (20 source rows)",
+    "approved_game_derived_1926_27": "10-8 (18 game rows)"
+  },
+  "scope_exclusions": [
+    "No other game or historical decision approved",
+    "No general score or missing-game inference",
+    "No authority registry changes",
+    "No protected main or published data mutation",
+    "No Stage 1 COMPLETE or Stage 2"
+  ],
+  "receipt_not_an_external_signature": true,
+  "terminal_status": "HISTORICAL_DECISION_ACCEPTED__CURRENT_DURABLE_CANDIDATE_PENDING_PERMANENT_GATES"
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_UC_DAVIS_OWNER_APPROVED_TWO_GAME_CANDIDATE_0024",
+  "status": "OWNER_APPROVED_TWO_GAME_COUNT__SOURCE_PRESERVING_MATERIALIZED_CANDIDATE__PERMANENT_STAGE1_CLOSEOUT_NOT_RUN__STAGE1_OPEN",
+  "main_at_recovery": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_sha": "27962e1206964ee504967238d8cd69afa9e5adf6",
+  "parent_tree_sha": "2d6f3257fb2b17c421e968e97e1682d6b17757d1",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "original_git_blobs": {
+    "bulk-acceptance-and-game-types-0013/stage1-working-accepted-game-ledger.csv": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "bulk-acceptance-and-game-types-0013/stage1-bulk-source-dispositions.csv": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "bulk-acceptance-and-game-types-0013/stage1-pending-source-groups.csv": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+    "bulk-acceptance-and-game-types-0013/49-season-bulk-acceptance-census.csv": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+    "uc-davis-historical-authority-decision-boundary-0023/owner-historical-decision-proposal.json": "7ce40766570aefa1210cf9833341c94488a64388"
+  },
+  "owner_approval": {
+    "approved_option": "A",
+    "literal": "Approved. Proceed",
+    "parent_proposal_blob": "7ce40766570aefa1210cf9833341c94488a64388",
+    "scope": "1926-27 UC Davis two wins, score/date unknown, four Fresno source claims unassigned",
+    "owner_gate_for_stage2": false
+  },
+  "proofs": {
+    "parent_accepted_1009_semantically_unchanged": true,
+    "source_changes_only_four_status_columns": true,
+    "original_4_source_score_literals_preserved": true,
+    "two_unique_reciprocal_source_entries": true,
+    "all_48_unrelated_season_census_rows_identical": true,
+    "unknown_score_source_raw_text_contains_numeric_score": false,
+    "all_accepted_ids_unique": true,
+    "source_partition_pass": true
+  },
+  "counts": {
+    "source_target_guide_rows": 1034,
+    "source_total_including_new_reciprocal": 1036,
+    "accepted_game_ids": 1011,
+    "inherited_research_games": 78,
+    "accepted_new_competitive": 933,
+    "other_old_fresno_source_claims_conflicting_unassigned": 4,
+    "excluded": 17,
+    "proven_duplicates": 2,
+    "pending_exhibition_inclusion": 2,
+    "accepted_record_fresno_pre1970": "532-479",
+    "accepted_regular_season": 994,
+    "accepted_NCAA": 16,
+    "accepted_lower_postseason": 1,
+    "season_1926_27_accepted_games": 18,
+    "season_1926_27_accepted_W": 10,
+    "season_1926_27_accepted_L": 8,
+    "season_1926_27_guide_record": "12-8",
+    "source_count_accounting": "1034 original target source rows plus 2 reciprocal source rows, rather than changing original media-guide source count"
+  },
+  "source_stage1_candidate_statuses": {
+    "ACCEPTED_NEW_COMPETITIVE_SOURCE_GAME": 933,
+    "EXCLUDED_NONCOMPETITIVE_EVENT": 17,
+    "DUPLICATE_SOURCE_REPRESENTATION_NO_EXTRA_GAME": 2,
+    "OWNER_APPROVED_UNATTRIBUTED_CONFLICTING_FRESNO_SCORE_CLAIM": 4,
+    "BLOCKED_TOURING_CLOWNS_MATCH_INCLUSION": 2,
+    "INHERITED_PRIOR_ACCEPTED_RESEARCH_ID": 78
+  },
+  "candidate_game_types": {
+    "REGULAR_SEASON": 994,
+    "POSTSEASON": 1,
+    "NCAA_TOURNAMENT": 16
+  },
+  "clowns_remaining": [
+    "FRESNO-EXP-CAND-1935-36-019",
+    "FRESNO-EXP-CAND-1953-54-018"
+  ],
+  "material_other_blockers": [
+    "1965-66_UNMAPPED_INSTITUTIONAL_LOSS",
+    "1922-23_BAKERSFIELD_OPPONENT_ANACHRONISM"
+  ],
+  "validation_level": "REPOSITORY_CONTENT_AND_ROW_INVARIANTS_VERIFIED__NOT_PERMANENT_STAGE1_AUDIT_OR_STAGE4_PREVIEW",
+  "main_mutated": false,
+  "published_fresno_mutated": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "next_bounded_unit": "Re-run permanent Stage 1 acceptance against candidate in true checkout if available; research separate remaining historical material families without reopening 1926-27 four score claims."
+}
