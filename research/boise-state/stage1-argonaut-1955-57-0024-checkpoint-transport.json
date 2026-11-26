@@ -1,0 +1,22 @@
+{
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "checkpoint": 24,
+  "school_key": "boise-state",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "status": "STAGE_1_IN_PROGRESS",
+  "zip_filename": "boise-state-expansion-stage1-argonaut-idaho-frosh-1955-57-0024.zip",
+  "zip_sha256": "7c1b8c979d03869f263e574498bf67e350c91e77c688cf24e579027019ee914b",
+  "parent_zip_sha256": "b8bfd083af928f768f881d2b12ef972dbc23bd0c5e084be54d06bc65e488e352",
+  "research_parent_sha": "0042016531abee2e41cce1e7626cdd6b6ddcb0b8",
+  "protected_main_at_unit_start": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "immutable_research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "manifested_members": 67,
+  "accepted_games": 211,
+  "new_accepted": 5,
+  "repaired_existing_game_fields": 0,
+  "junior_college_accepted": 156,
+  "official_seasons_jc_accepted": 155,
+  "official_jc_aggregate_games": 787,
+  "arithmetic_difference_not_proven_game_identities": 632,
+  "accounting_seasons": 38
+}
