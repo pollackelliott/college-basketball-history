@@ -1,28 +1,20 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "uc-davis-expansion-stage2-census-0002",
-  "operation": "STAGE2_CENSUS",
+  "request_id": "uc-davis-expansion-stage2-opponent-display-normalize-0001",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "school_key": "uc-davis",
-  "previous_control_state_commit": "271abaa70fb2d9ed9de18adad9c7a5b5a3098caf",
-  "previous_control_state_sha256": "0a8393f3aa48ee4ec20a76a2d1994a24e9f19174ac6d7175dd78ae0c542740bf",
+  "previous_control_state_commit": "81d24e64631af5bd98ab5760525b1bb8f728c679",
+  "previous_control_state_sha256": "6ba7f39b87e28e152549fa4651cc55fc275f585955022d26dfebb55bce695d4c",
   "expected_protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
   "target_branch": "data/uc-davis-onboarding",
   "target_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-phase0-0004/successor-manifest.json",
-    "sha256": "89c3ff2dd7ab7bf901d32041897bc2f905c1ae7cab51ff2c7a2d7320b0168c41"
-  },
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
-    "sha256": "48b24252a6ab7e413598a71c48a11f9209df6984ff3b5514b2f051949935036a"
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "ae8ef01f52a3c43047da50ad5dabd0e4b0e00b504a6d5be58a791fae8e9b1d00"
   },
   "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
   "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
-  "creation_provenance": {
-    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION serialized Implementation lane; fresh read-only Stage 2 census after verified disjoint current-main refresh 0001 on merged generic venue tooling PR #726.",
-    "authorization": "Existing owner-authorized Stage 2 persists. Control sequence 774 IDLE COMPLETE, fresh verified refresh predecessor 51f84766ecb2df83681d91124c61d4c81be9a6cb, exact Phase 0 authority and frozen historical source unchanged. Previous census 0001 was mechanically blocked by one registered Dayton opponent-host venue and seven historical opponent-display conflicts. Exact candidate-runtime PR #726 removed Dayton alone without new blockers; permanent Stage 2 census must now independently confirm the full population on current main. This authorizes read-only discovery and independently fresh-verified checkpoint only. No tracked opponent display mutation, owner choices, proposal/map, seal, apply, release, merge, Preview, Gate 1/2 or Production."
-  },
   "authority": {
     "expansion_phase0": false,
     "owner_gate_1": false,
@@ -36,15 +28,19 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
-    "stage2_opponent_display_normalize": false,
+    "stage2_opponent_display_normalize": true,
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "UC Davis existing ALL_HISTORY_EXPANSION serialized Implementation Stage 2, after independently verified guarded current-main refresh 0001 and read-only census 0002. Existing owner Proceed authorizes this bounded deterministic generic representation repair.",
+    "authorization": "Exact fresh-verified census 0002 at control sequence 775 is BLOCKED solely by seven deterministic historical opponent-display key conflicts: colorado-colorado-springs, concordia-new-york, loyola-new-orleans, pacific-oregon, saint-marys-minnesota, united-states-international, washington-st-louis. Zero warnings, zero Stage 2 decisions, semantic drift PASS. Authorized operation is ONLY permanent guarded STAGE2_OPPONENT_DISPLAY_NORMALIZE: exactly seven census keys; canonical opponent names in schools/uc-davis/opponents.csv and matching normalized opponent names in schools/uc-davis/source-games.csv alone. The permanent tool chooses the names; no source literal wording, raw text, score, date, identity, result, H/A/N, site, game type, frozen semantic meaning, global/shared basketball registries, other school, historical judgment, Owner Gate 1/2, recommendation map, release, merge, Preview or Production mutation. Require independent verification and correct CAS/lock proof before any next step."
   }
 }
