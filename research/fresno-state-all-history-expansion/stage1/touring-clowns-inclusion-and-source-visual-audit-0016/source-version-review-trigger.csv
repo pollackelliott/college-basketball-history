@@ -1,0 +1,2 @@
+issue_id,season,earlier_source,earlier_printed_record,later_source,later_printed_record,source_row_population,disposition,scope_boundary
+"FS-S1-1952-53-RETROSPECTIVE-VERSION-RECORD","1952-53","Fresno State 2019-20 media supplement printed p30","8-21","Fresno State 2025 guide preserved raw checkpoint 0001","10-19","29 in accepted checkpoint 0013","REVIEW_TRIGGER_ONLY__PRESERVE_ACCEPTED_PARENT_RESULTS_UNCHANGED","Do not infer result reversals from aggregate; a later bounded literal row-by-row version comparison is required before accepting material contradiction"

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_TOURING_CLOWNS_INCLUSION_AND_SOURCE_VISUAL_AUDIT_0016",
+  "status": "STAGE1_OPEN__TWO_TOURING_CLOWNS_INCLUSION_BLOCKERS_STILL_UNRESOLVED__NO_GAME_MUTATION",
+  "protected_main_at_recovery": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "research_parent_commit_sha": "6ee1dbf570bcceca4775a72692cd31310acc6a96",
+  "parent_tree_sha": "1f9dbd9a77d6d9e52eb8c20816c4975b38980ae7",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "preserved_git_blobs": {
+    "working_accepted_ledger": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "source_dispositions": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "pending_source_groups": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+    "season_census": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+    "guide_raw": "fc72b2862aa283481d498873af0a17fa1d7e405a"
+  },
+  "parent_mechanically_audited_games": 1009,
+  "parent_reconciled_seasons": 49,
+  "inherited_preserved_games": 78,
+  "material_clowns_source_groups_challenged": 2,
+  "clowns_game_groups_accepted_this_unit": 0,
+  "clowns_groups_excluded_this_unit": 0,
+  "total_pending_source_groups_before": 6,
+  "total_pending_source_groups_after": 6,
+  "clowns_parent_source_results": [
+    {
+      "source_entry_id": "FRESNO-EXP-CAND-1935-36-019",
+      "result": "L",
+      "target_score": 34,
+      "opponent_score": 37,
+      "target_aggregate": "10-17",
+      "working_without": "10-16",
+      "inclusion": "BLOCKED_MATCH_SPECIFIC"
+    },
+    {
+      "source_entry_id": "FRESNO-EXP-CAND-1953-54-018",
+      "result": "W",
+      "target_score": 82,
+      "opponent_score": 61,
+      "target_aggregate": "13-16",
+      "working_without": "12-16",
+      "inclusion": "BLOCKED_MATCH_SPECIFIC"
+    }
+  ],
+  "source_visual_reconciliation": {
+    "fresno_2019_20_pdf_indices_checked": [
+      27,
+      28
+    ],
+    "clowns_in_1952_53": false,
+    "harlem_1953_54": true,
+    "fresno_2016_duplicate_extraction_treated_as_game_evidence": false
+  },
+  "additional_source_version_review_trigger": {
+    "season": "1952-53",
+    "earlier_2019_20_aggregate": "8-21",
+    "later_2025_aggregate": "10-19",
+    "parent_accepted_rows_reopened": false
+  },
+  "accepted_game_rows_added": 0,
+  "accepted_game_rows_removed": 0,
+  "accepted_game_rows_modified": 0,
+  "main_modified": false,
+  "published_game_modified": false,
+  "stage2_authorized": false,
+  "next_bounded_unit": "1965-66 unmatched institutional loss or exact 1952-53 source-version comparison; never infer a game from aggregate; preserve other pending source-group blockers"
+}
