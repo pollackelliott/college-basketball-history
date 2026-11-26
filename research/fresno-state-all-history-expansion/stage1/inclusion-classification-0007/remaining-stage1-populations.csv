@@ -1,0 +1,7 @@
+family,population,status,required_followup
+"ALUMNI_FROSH_SAME_INSTITUTION","16 excluded source entries","CLASS_EXCLUSION_RESEARCH_ACCEPTED","None unless directly contradictory primary evidence"
+"EXTERNAL_FROSH","One Occidental Frosh 1922-23 game","GAME_INCLUSION_PENDING","Focused original opponent varsity/freshman inclusion evidence"
+"HARLEM_CLOWNS","One 1953-54 game","PROBABLE_EXHIBITION__SPECIFIC_MATCH_UNVERIFIED","Bounded 1953-54 source-specific game characterization, not global circus history"
+"SEASON_SUMMARIES","15 affected seasons plus inherited 1922/1939/1965/1969 issues","SOURCE_AGGREGATE_MAY_INCLUDE_EXCLUDED_EVENTS","Reconcile season per-game W/L after final accepted exclusions; no anonymous games"
+"UC_DAVIS_1926_27","Four Fresno guide entries, two UC Davis dated-unknown source results","STILL_BLOCKING_SOURCE_IDENTITY","One bounded contemporary-game evidence pass only if archive available"
+"WARTIME_1943_44","No individual guide result rows","UNQUANTIFIED_LOCAL_LEAGUE_ACTIVITY_PRESERVED","No invented varsity rows; follow founding-era exception if necessary"

@@ -1,0 +1,23 @@
+{
+  "kind": "FRESNO_STAGE1_INCLUSION_CLASSIFICATION_0007",
+  "status": "SAME_INSTITUTION_SOURCE_EXCLUSION_CLASS_COMPLETE__STAGE1_OPEN",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "predecessor_research_commit_sha": "32ec6828c2050f7c2ac273a2e907776475596fed",
+  "main_policy_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
+  "source_ledger_blob_sha": "a566710a97d9aed2a3973daef43b38bb6cd3b8db",
+  "source_rows": 1034,
+  "source_original_research_rows_unchanged": 78,
+  "source_rows_changed_with_classification": 18,
+  "excluded_now": 17,
+  "added_intrasquad_exclusions": 4,
+  "added_alumni_exclusions": 12,
+  "previous_explicit_exhibition_excluded": 1,
+  "prior_provisional_nonexhibition_identity_groups": 1031,
+  "remaining_provisional_groups_after_class_exclusions": 1015,
+  "affected_seasons": 15,
+  "pending_external_frosh_entries": 1,
+  "pending_probable_harlem_exhibition_entries": 1,
+  "published_1708_rows_untouched": true,
+  "owner_publication_scope_unchanged": "1970-71+",
+  "historical_caveat": "Source count/aggregate unchanged. 1015 is provisional source-based identity-group count; not final accepted real-game count; exclusions are class-based eligibility decisions, not denial original exhibition play occurred."
+}
