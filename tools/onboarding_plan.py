@@ -89,7 +89,11 @@ from site_completeness import (
     has_supported_foreign_locality,
     researched_unresolved_home_venue,
 )
-from venue_reference import load_global_venue_reference, normalized_venue_name
+from venue_reference import (
+    load_global_venue_reference,
+    normalized_venue_name,
+    registered_opponent_home_venue,
+)
 from zero_delta_expansion_stage2 import (
     ZeroDeltaExpansionError,
     apply_zero_delta_projection,
@@ -1574,6 +1578,7 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
     }
     city_contamination_names = venue_names_for_city_contamination(venues)
     venue_names: set[str] = set()
+    global_opponent_host_reference = None
     for row in venues:
         canonical_name = row.get("canonical_name", "").strip().casefold()
         if canonical_name:
@@ -1681,19 +1686,35 @@ def validate_package(repo: Path, school_key: str) -> dict[str, Any]:
 
         venue = row.get("curated_venue_name", "").strip()
         if venue and venue.casefold() not in venue_names:
-            message = f"{label}: curated venue {venue!r} absent from venues.csv"
-            if label in correction_legacy_ids:
-                warnings.append(
-                    message
-                    + " (unchanged published legacy debt outside this correction)"
-                )
-            elif label in expansion_legacy_ids:
-                warnings.append(
-                    message
-                    + " (unchanged published legacy debt outside this expansion)"
+            # Only an exact, source-established opponent-host venue already
+            # registered to one physical global identity may forgo a school-
+            # local relationship. Do not infer H/A/N or patch source evidence.
+            if row.get("curated_site_type", "").strip() == "OPPONENT_HOME":
+                if global_opponent_host_reference is None:
+                    try:
+                        by_id, _, name_ids = load_global_venue_reference(repo)
+                        global_opponent_host_reference = (by_id, name_ids)
+                    except (FileNotFoundError, ValueError):
+                        global_opponent_host_reference = ({}, {})
+                registered = registered_opponent_home_venue(
+                    row, venues, *global_opponent_host_reference
                 )
             else:
-                errors.append(message)
+                registered = None
+            if registered is None:
+                message = f"{label}: curated venue {venue!r} absent from venues.csv"
+                if label in correction_legacy_ids:
+                    warnings.append(
+                        message
+                        + " (unchanged published legacy debt outside this correction)"
+                    )
+                elif label in expansion_legacy_ids:
+                    warnings.append(
+                        message
+                        + " (unchanged published legacy debt outside this expansion)"
+                    )
+                else:
+                    errors.append(message)
         if exhibition_warning_required(
             row.get("raw_text", ""),
             row.get("event_or_tournament", ""),
