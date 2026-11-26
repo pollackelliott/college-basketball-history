@@ -1,0 +1,17 @@
+{
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "checkpoint": 19,
+  "filename": "boise-state-expansion-stage1-nnc-1951-52-series-0019.zip",
+  "sha256": "3f8e16ca0bac8c19cbc80b8d0890e43e8eda007b63f153fe92cdd3f4e0b29a7d",
+  "parent_zip_sha256": "d64c1a4ff2fd3d57087a8f33634c4761c6daf4e981693df352dda12bf3359ef8",
+  "parent_research_head": "50fec6711dde88bfef7f4dfa22c5a37cfd061a55",
+  "protected_main_at_unit_start": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "original_accepted": 198,
+  "final_accepted": 201,
+  "new_accepted": 3,
+  "listed_jc_accepted": 145,
+  "listed_jc_arithmetic_residual": 642,
+  "season_accounting_rows": 38,
+  "status": "STAGE_1_IN_PROGRESS"
+}
