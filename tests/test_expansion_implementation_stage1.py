@@ -124,6 +124,112 @@ class Stage1FoundationTests(unittest.TestCase):
         multiple=reconcile_canonical("sample",[src],[can,{**can,"canonical_game_id":"CB-2"}])
         self.assertEqual(multiple["counts"]["IDENTITY_REVIEW_BLOCKER"],1)
 
+    def test_frozen_two_game_claim_recovers_distinct_other_game(self):
+        # These are generic fixtures for a known score-claim plus a second
+        # independently frozen game from the same opponent/season; no school
+        # key or game ID is encoded in the production implementation.
+        cases = (
+            ("1914-1915", "31", "36", "16", "23", ""),
+            ("1942-1943", "20", "50", "32", "43", ""),
+            ("1947-1948", "42", "58", "39", "54", "1947-12-13"),
+        )
+        for season, claim_score, claim_opp, other_score, other_opp, claim_date in cases:
+            with self.subTest(season=season):
+                claimed = {
+                    "source_game_id": "CLAIMED", "source_program_key": "sample",
+                    "season_label": season, "normalized_opponent_key": "a",
+                    "game_date": claim_date, "team_score": claim_score,
+                    "opponent_score": claim_opp, "played_result": "L",
+                    "curated_site_type": "OPPONENT_HOME",
+                }
+                separate = {
+                    **claimed, "source_game_id": "SEPARATE", "game_date": "",
+                    "team_score": other_score, "opponent_score": other_opp,
+                    "curated_site_type": "UNKNOWN",
+                }
+                can = {
+                    "canonical_game_id": "CB-1", "season_label": season,
+                    "team_a_key": "a", "team_b_key": "sample",
+                    "team_a_score": claim_opp, "team_b_score": claim_score,
+                    "game_date": claim_date, "site_type": "TEAM_A_HOME",
+                    "designated_home_team_key": "a", "overtime_periods": "0",
+                }
+                original = separate.copy(), claimed.copy(), can.copy()
+                result = reconcile_canonical("sample", [separate, claimed], [can])
+                self.assertEqual(result["counts"]["REUSE_CANONICAL"], 1)
+                self.assertEqual(result["counts"]["PROVISIONAL_NEW_CANONICAL"], 1)
+                self.assertEqual(result["counts"]["IDENTITY_REVIEW_BLOCKER"], 0)
+                rows = {r["source_game_id"]: r for r in result["game_rows"]}
+                self.assertEqual(rows["CLAIMED"]["canonical_game_id"], "CB-1")
+                self.assertEqual(rows["SEPARATE"]["classification"], "PROVISIONAL_NEW_CANONICAL")
+                self.assertEqual(rows["SEPARATE"]["canonical_game_id"], "")
+                self.assertEqual(rows["SEPARATE"]["candidate_canonical_game_id"], "")
+                self.assertEqual(rows["SEPARATE"]["match_method"],
+                                 "DISTINCT_FROZEN_PEER_FULL_SCORE_CANONICAL_CLAIM")
+                self.assertEqual((separate, claimed, can), original)
+
+    def test_frozen_peer_identity_never_assumes_distinct_without_full_proof(self):
+        claim = {
+            "source_game_id": "CLAIMED", "source_program_key": "sample",
+            "season_label": "1942-1943", "normalized_opponent_key": "a",
+            "game_date": "", "team_score": "20", "opponent_score": "50",
+            "played_result": "L", "curated_site_type": "OPPONENT_HOME",
+        }
+        other = {
+            **claim, "source_game_id": "OTHER", "team_score": "32",
+            "opponent_score": "43", "curated_site_type": "UNKNOWN",
+        }
+        can = {
+            "canonical_game_id": "CB-1", "season_label": "1942-1943",
+            "team_a_key": "a", "team_b_key": "sample",
+            "team_a_score": "50", "team_b_score": "20",
+            "game_date": "", "site_type": "TEAM_A_HOME",
+            "designated_home_team_key": "a",
+        }
+        # One frozen row only: a score disagreement is not an identity proof.
+        lone = reconcile_canonical("sample", [other], [can])
+        self.assertEqual(lone["counts"]["IDENTITY_REVIEW_BLOCKER"], 1)
+
+        # A shared exact source score may be a transcription disagreement.
+        partial = reconcile_canonical(
+            "sample", [{**other, "team_score": "20"}, claim], [can],
+        )
+        self.assertEqual(partial["counts"]["PROVISIONAL_NEW_CANONICAL"], 0)
+
+        # Three same-pair frozen rows no longer provide the exact two-row proof.
+        third = {**other, "source_game_id": "THIRD",
+                 "team_score": "33", "opponent_score": "42"}
+        triple = reconcile_canonical("sample", [other, claim, third], [can])
+        self.assertEqual(triple["counts"]["IDENTITY_REVIEW_BLOCKER"], 2)
+
+        # Two plausible published candidates: no unique-identity assertion.
+        alternate = {**can, "canonical_game_id": "CB-2",
+                     "team_a_score": "62", "team_b_score": "44"}
+        ambiguous = reconcile_canonical("sample", [other, claim], [can, alternate])
+        self.assertEqual(ambiguous["counts"]["PROVISIONAL_NEW_CANONICAL"], 0)
+
+        # A full-score peer matched by exact date but conflicting with canonical
+        # scores cannot release the second row.
+        dated_can = {**can, "game_date": "1942-12-04",
+                     "team_a_score": "51", "team_b_score": "21"}
+        dated_claim = {**claim, "game_date": "1942-12-04"}
+        conflicted = reconcile_canonical(
+            "sample", [other, dated_claim], [dated_can],
+        )
+        self.assertEqual(conflicted["counts"]["PROVISIONAL_NEW_CANONICAL"], 0)
+
+        # Explicit same-day rows must never be auto-split by this rule.
+        same_day_other = {**other, "game_date": "1942-12-04"}
+        same_day = reconcile_canonical(
+            "sample", [same_day_other, dated_claim], [dated_can],
+        )
+        self.assertEqual(same_day["counts"]["PROVISIONAL_NEW_CANONICAL"], 0)
+
+        # A frozen asserted-identity override is not silently replaced.
+        asserted = {**other, "identity_override": "MATCH_SOURCE_ASSERTION"}
+        overridden = reconcile_canonical("sample", [asserted, claim], [can])
+        self.assertEqual(overridden["counts"]["PROVISIONAL_NEW_CANONICAL"], 0)
+
     def test_frozen_reciprocal_source_assertion_resolves_unique_candidate(self):
         from unittest.mock import patch
 
