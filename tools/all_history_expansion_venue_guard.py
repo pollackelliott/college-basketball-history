@@ -84,6 +84,58 @@ def census(
         explicit = venue_reconciliation_for_row(
             venue_reconciliation, local, row_index
         )
+        if explicit is not None and explicit.get(
+            "action"
+        ) == "REGISTER_DISTINCT_KEYED_IDENTITY":
+            excluded = set(explicit.get("excluded_global_alias_names") or [])
+            incumbent_id = explicit.get("conflicting_global_venue_id")
+            incumbent_key = explicit.get("conflicting_global_venue_key")
+            incumbent = by_id.get(incumbent_id, [])
+            if (
+                not key or explicit.get("new_global_venue_key") != key
+                or key in by_key or len(incumbent) != 1
+                or incumbent[0].get("venue_key") != incumbent_key
+                or not excluded
+                or normalize_name(local.get("canonical_name", "")) in excluded
+            ):
+                conflicts.append({
+                    "class": "VENUE_EXPLICIT_DISTINCT_REGISTRATION_STALE",
+                    "venue_key": key,
+                })
+                continue
+            all_local_names = {
+                normalize_name(value)
+                for value in [local.get("canonical_name", ""),
+                              *(local.get("aliases", "") or "").split(";")]
+                if normalize_name(value)
+            }
+            if not excluded <= all_local_names:
+                conflicts.append({
+                    "class": "VENUE_EXPLICIT_DISTINCT_ALIAS_SUPPRESSION_NOT_FROZEN",
+                    "venue_key": key,
+                })
+                continue
+            unresolved = set()
+            for label in all_local_names - excluded:
+                unresolved.update(alias_by_name.get(label, set()))
+            if unresolved:
+                conflicts.append({
+                    "class": "VENUE_EXPLICIT_DISTINCT_UNRESOLVED_NAME_COLLISION",
+                    "venue_key": key,
+                    "global_ids": sorted(unresolved),
+                })
+                continue
+            classification.append({
+                "venue_key": key,
+                "existing_key_reuse_id": "",
+                "explicit_reuse_id": "",
+                "explicit_distinct_registration": True,
+                "conflicting_existing_global_venue_id": incumbent_id,
+                "excluded_global_alias_names": sorted(excluded),
+                "possible_existing_global_ids": [incumbent_id],
+                "registration_safe": True,
+            })
+            continue
         expected_key_rows=by_key.get(key,[])
         if len(expected_key_rows)>1:
             conflicts.append({"class":"VENUE_GLOBAL_DUPLICATE_KEY",
