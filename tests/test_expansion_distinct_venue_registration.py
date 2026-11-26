@@ -261,7 +261,7 @@ class DistinctKeyedPhysicalVenueTests(unittest.TestCase):
             self.load()
 
     def test_chronology_cannot_overlap_or_be_inferred(self):
-        for change in ("1935", "", "1977", "2000"):
+        for change in ("1935", "", "1938"):
             original = self.incumbent["opened"]
             self.incumbent["opened"] = change
             self.mapping["expected_conflicting_global_opened"] = change
@@ -271,6 +271,14 @@ class DistinctKeyedPhysicalVenueTests(unittest.TestCase):
             self.incumbent["opened"] = original
             self.mapping["expected_conflicting_global_opened"] = original
             self.mapping["expected_conflicting_global_row_sha256"] = sha(self.incumbent)
+
+        # A later replacement opens after the earlier building closes; this
+        # is the positive proof, not a chronology-overlap failure.
+        for change in ("1977", "2000"):
+            self.incumbent["opened"] = change
+            self.mapping["expected_conflicting_global_opened"] = change
+            self.mapping["expected_conflicting_global_row_sha256"] = sha(self.incumbent)
+            self.load()
 
     def test_same_physical_building_cannot_register_twice(self):
         other = copy.deepcopy(self.local)

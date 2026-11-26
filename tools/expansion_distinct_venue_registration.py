@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 import unicodedata
+import datetime as dt
 from typing import Any
 
 from onboarding_plan import WorkflowError
@@ -55,12 +56,16 @@ def norm(value: str) -> str:
 
 
 def year(value: str) -> int | None:
-    # Conservative calendar year, also handles existing YEAR date notation.
+    """Validate a year or an actual calendar date before comparing chronology."""
     if not value:
         return None
-    match = re.fullmatch(r"(\d{4})(?:-\d{2}-\d{2})?", value.strip())
-    if match:
-        return int(match.group(1))
+    if re.fullmatch(r"\d{4}", value.strip()):
+        return int(value.strip())
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value.strip()):
+        try:
+            return dt.date.fromisoformat(value.strip()).year
+        except ValueError:
+            return None
     return None
 
 
@@ -191,15 +196,31 @@ def validate_distinct_keyed_registration(
         or closed_year >= incumbent_opened_year
     ):
         _fail("DISTINCT_PHYSICAL_CHRONOLOGY_NOT_PROVEN")
+    relationship_start = local.get("relationship_start", "").strip()
     relationship_end = local.get("relationship_end", "").strip()
-    match_end = re.fullmatch(r"\d{4}-(\d{4})", relationship_end)
-    if not match_end or int(match_end.group(1)) > closed_year:
+    match_start = re.fullmatch(r"(\d{4})-(\d{4})", relationship_start)
+    match_end = re.fullmatch(r"(\d{4})-(\d{4})", relationship_end)
+    if (
+        match_start is None or match_end is None
+        or int(match_start.group(2)) != int(match_start.group(1)) + 1
+        or int(match_end.group(2)) != int(match_end.group(1)) + 1
+        or int(match_start.group(1)) > int(match_end.group(1))
+        or int(match_end.group(2)) > closed_year
+    ):
         _fail("FROZEN_RELATIONSHIP_CHRONOLOGY_UNPROVEN")
-    if local.get("known_opened", "") and (
-        year(local["known_opened"]) is None
-        or year(local["known_opened"]) > closed_year
+    local_opened = local.get("known_opened", "").strip()
+    if local_opened and (
+        year(local_opened) is None
+        or year(local_opened) > int(match_start.group(1))
+        or year(local_opened) > closed_year
     ):
         _fail("FROZEN_OPENING_CHRONOLOGY_INVALID")
+    incumbent_closed = incumbent.get("closed", "").strip()
+    if incumbent_closed and (
+        year(incumbent_closed) is None
+        or year(incumbent_closed) < incumbent_opened_year
+    ):
+        _fail("INCUMBENT_PHYSICAL_CHRONOLOGY_INVALID")
 
     # Shared name-only matching could silently choose the wrong building.
     # The local alias is preserved, but collided labels are NOT globally
