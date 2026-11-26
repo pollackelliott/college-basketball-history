@@ -9,6 +9,8 @@ on:
       - 'tests/test_all_history_expansion_venue_guard.py'
       - 'tools/stage1_venue_reconciliation.py'
       - 'tools/expansion_distinct_venue_registration.py'
+      - 'tools/venue_reference.py'
+      - 'tests/test_global_venue_reference.py'
       - 'tests/test_expansion_distinct_venue_registration.py'
       - 'tests/test_stage1_venue_reconciliation.py'
       - 'tools/all_history_expansion_remote_contract.py'
@@ -52,6 +54,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_all_history_expansion_venue_guard.py' -v
           python -m unittest discover -s tests -p 'test_stage1_venue_reconciliation.py' -v
           python -m unittest discover -s tests -p 'test_expansion_distinct_venue_registration.py' -v
+          python -m unittest discover -s tests -p 'test_global_venue_reference.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_remote_contract.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_disposable_git_transaction.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
@@ -64,17 +67,17 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --no-tags origin '+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation'
-          test "$(git rev-parse refs/remotes/origin/main)" = a1268416813a896a45002733facbf8dded01dbe2
+          test "$(git rev-parse refs/remotes/origin/main)" = 2ca9239c979f5517b0c776285cf5072e2a2f2b36
           mkdir -p /tmp/ucd-expansion-venue-readonly
           git show e3156d4c611149bea24e026afefc78b53c6b9a1b:.remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-0001.txt | base64 --decode > /tmp/ucd-expansion-venue-readonly/freeze.zip
           git show 3b24750c2a78780d0916948b3733dd9c7155ef58:.remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json > /tmp/ucd-expansion-venue-readonly/owner.json
-          git show dcc58af8022f9e05021ade8d7e3078d66fd0906a:.remote-implementation/expansion-startup.json > /tmp/ucd-expansion-venue-readonly/startup.json
+          git show b7f6961f1c228a169feee96f3da95cba9538e8fb:.remote-implementation/expansion-startup.json > /tmp/ucd-expansion-venue-readonly/startup.json
           git show 43b8664e96b9411be06861afa16fb5d4866f158b:.remote-implementation/transports/uc-davis/uc-davis-expansion-distinct-venue-registration-0008.json > /tmp/ucd-expansion-venue-readonly/venue.json
           echo '1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f  /tmp/ucd-expansion-venue-readonly/freeze.zip' | sha256sum -c -
           echo '70c1217646b0167584248dfecc586d5c4b03035cd423854ea29c5ce19c8b8e9e  /tmp/ucd-expansion-venue-readonly/owner.json' | sha256sum -c -
           echo 'c207fb50bb745e148684fe7008383bb10ba854c0aed12bb7bcaefb7a21226181  /tmp/ucd-expansion-venue-readonly/venue.json' | sha256sum -c -
           python - <<'PY'
-          import csv, hashlib, json, sys, tempfile, zipfile
+          import csv, hashlib, json, shutil, subprocess, sys, tempfile, zipfile
           from pathlib import Path
           sys.path.insert(0, str(Path.cwd() / "tools"))
           from all_history_expansion_integration import freeze_authority, canonical_bytes
@@ -86,7 +89,7 @@ jobs:
           original = root / "freeze.zip"
           startup = json.loads((root / "startup.json").read_bytes())
           reference = startup["owner_correction"]
-          main = "a1268416813a896a45002733facbf8dded01dbe2"
+          main = "2ca9239c979f5517b0c776285cf5072e2a2f2b36"
           frozen_hash = "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f"
           research_base = "2f6a0d7525cff222cfec0f286ed8e1c456707a54"
           first = root / "stage1-a"
@@ -107,7 +110,7 @@ jobs:
           assert [x["class"] for x in a["blockers"]] == [
               "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"
           ]
-          control = "43b8664e96b9411be06861afa16fb5d4866f158b"
+          control = "b7f6961f1c228a169feee96f3da95cba9538e8fb"
           proof = build_stage1_proof(
               a, first,
               protected_main_sha=main, research_base_sha=research_base,
@@ -185,6 +188,43 @@ jobs:
                             "games_currently_assigned", "relationship_date_precision"):
                   assert actual[0][field] == original_venue[field], (row["support_id"],field)
           assert hashlib.sha256(original.read_bytes()).hexdigest() == frozen_hash
+
+          # Exercise the actual final repository validator against the complete
+          # projected Phase 0 tree in a disposable *local* clone. The previous
+          # preview-only rehearsal could not detect a deliberately local,
+          # documented historical alias absent from the global name registry.
+          with tempfile.TemporaryDirectory(prefix="ucd-phase0-validation-") as temp:
+              candidate = Path(temp) / "candidate"
+              subprocess.run(
+                  ["git", "clone", "--local", "--no-hardlinks",
+                   str(repo), str(candidate)],
+                  check=True, stdout=subprocess.DEVNULL,
+              )
+              subprocess.run(
+                  ["git", "-C", str(candidate), "checkout", "--detach", main],
+                  check=True, stdout=subprocess.DEVNULL,
+              )
+              for name in ("conferences.csv", "notes.md", "opponents.csv",
+                           "source-games.csv", "source-notes.md", "venues.csv"):
+                  shutil.copyfile(preview / name,
+                                  candidate / "schools" / "uc-davis" / name)
+              for name in ("programs.csv", "venues.csv", "venue-names.csv"):
+                  shutil.copyfile(preview / "references" / name,
+                                  candidate / "data" / "reference" / name)
+              validation = subprocess.run(
+                  [sys.executable, str(candidate / "tools" / "validate_data.py")],
+                  cwd=candidate, capture_output=True, text=True,
+              )
+              if validation.returncode:
+                  print("UC_DAVIS_PROJECTED_REPOSITORY_VALIDATION_FAILURE=" +
+                        validation.stdout[-12000:], flush=True)
+                  raise AssertionError(
+                      "Exact UC Davis projected Phase 0 failed validate_data.py"
+                  )
+              assert "PASS" in validation.stdout, validation.stdout[-2000:]
+              print("UC_DAVIS_PROJECTED_REPOSITORY_VALIDATION=PASS",
+                    flush=True)
+
           print(json.dumps({
               "status": "PASS_ACTUAL_UC_DAVIS_VENUE_RECONCILIATION",
               "games": 1964, "venue_supports": 22,
