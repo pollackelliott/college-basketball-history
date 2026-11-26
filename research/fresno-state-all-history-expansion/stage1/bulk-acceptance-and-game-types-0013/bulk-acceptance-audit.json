@@ -1,0 +1,40 @@
+{
+  "kind": "FRESNO_STAGE1_BULK_SOURCE_ACCEPTANCE_0013",
+  "status": "931_NEW_GAMES_WITH_SOURCE_BACKED_TYPES__78_ORIGINAL_REUSED__SIX_NEW_GROUPS_BLOCKED__STAGE1_OPEN",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "authenticated_protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "parent_research_commit_sha": "504f6902792f8854b7104c2740aa6dcba0a5a8bf",
+  "source_ledger_blob_sha": "62ccc32bba43c5870a641fac6ac182266603865e",
+  "all_source_rows": 1034,
+  "new_source_rows": 956,
+  "excluded_source_events": 17,
+  "proven_source_duplicates": 2,
+  "prior_provisional_group_keys": 1015,
+  "new_accepted_game_ids": 931,
+  "inherited_accepted_game_ids": 78,
+  "total_working_accepted_ids": 1009,
+  "source_generic_pending_rows_reclassified_to_accepted": 924,
+  "new_exhibition_touring_blocker_broadway": 1,
+  "remaining_source_groups_blocked": 6,
+  "remaining_blockers": {
+    "uc_davis_1926_27": 4,
+    "broadway_clowns_1935_36": 1,
+    "harlem_clowns_1953_54": 1,
+    "season_1965_66_aggregate_unidentified_loss": "1 arithmetic discrepancy, not accepted played game"
+  },
+  "new_games_by_type": {
+    "REGULAR_SEASON": 916,
+    "POSTSEASON": 1,
+    "NCAA_TOURNAMENT": 14
+  },
+  "total_working_games_by_type": {
+    "REGULAR_SEASON": 992,
+    "NCAA_TOURNAMENT": 16,
+    "POSTSEASON": 1
+  },
+  "stage1_final_complete": false,
+  "all_original_literals_and_78_prior_ids_preserved": true,
+  "all_1708_published_games_unmodified": true,
+  "no_unidentified_games_inferred": true,
+  "no_stage2_started": true
+}
