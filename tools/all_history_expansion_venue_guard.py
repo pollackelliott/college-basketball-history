@@ -12,7 +12,8 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Any
 
-from stage_research_portfolio import normalize_name, normalize_jurisdiction
+from stage_research_portfolio import (normalize_name, normalize_jurisdiction,
+                                      geography_compatible)
 from stage1_venue_reconciliation import (
     explicit_reuse_locality_compatible,
     venue_reconciliation_for_row,
@@ -35,6 +36,40 @@ def _names(row: dict[str,str]) -> set[str]:
     labels.extend(x.strip() for x in (row.get("aliases") or "").split(";"))
     return {n for x in labels if (n:=normalize_name(x))}
 
+
+
+def _independently_disjoint_alias_match(
+    local: dict[str, str], registered: dict[str, str],
+    matching_labels: list[str],
+) -> bool:
+    """Reject name-only *false* candidates, not unresolved physical identity.
+
+    Only independent source-grounded local venue authority and complete,
+    conflicting recorded geography can disqualify a global alias match. Missing
+    locality remains ambiguous. Within one jurisdiction, different city names
+    alone can refer to a single campus or a mailing/campus distinction (e.g.
+    Baltimore/Catonsville), so the stronger requirement is that only the local
+    *secondary* label, not its canonical physical name, matches the other
+    registered venue's *display name*. Exact-key reuse and explicitly bound
+    distinct registrations remain governed by their separate guards.
+    """
+    lc, ls = _locality(local)
+    gc, gs = _locality(registered)
+    if not all((lc, ls, gc, gs)):
+        return False
+    if not (local.get("source_basis") or "").strip() or not (
+        local.get("site_rule") or ""
+    ).strip():
+        return False
+    if geography_compatible(local, registered):
+        return False
+    if ls != gs:
+        return True
+    return (
+        lc != gc
+        and normalize_name(local.get("canonical_name", "")) not in matching_labels
+        and normalize_name(registered.get("display_name", "")) in matching_labels
+    )
 
 def census(
     new_school_venues: list[dict[str,str]],
@@ -167,6 +202,7 @@ def census(
                     "registered_state":registered.get("state",""),
                 })
         matches=set()
+        disjoint_matches: list[str] = []
         for name in labels:
             matches.update(alias_by_name.get(name,set()))
         for vid in sorted(matches):
@@ -195,6 +231,13 @@ def census(
                 continue
             matching_labels=sorted(n for n in labels
                                    if vid in alias_by_name.get(n,set()))
+            if not same_key_id and _independently_disjoint_alias_match(
+                local, row, matching_labels
+            ):
+                # A remote generic name is not physical identity evidence.
+                # Keep it in the audit row, not the blocker population.
+                disjoint_matches.append(vid)
+                continue
             historical=sorted({x.get("name_type","") for n in matching_labels
                          for x in alias_rows.get((vid,n),[])})
             conflicts.append({
@@ -221,7 +264,8 @@ def census(
                 and explicit.get("action") == "REUSE_CURRENT_IDENTITY"
                 else ""
             ),
-            "possible_existing_global_ids":sorted(matches),
+            "possible_existing_global_ids":sorted(matches - set(disjoint_matches)),
+            "disjoint_alias_global_ids":sorted(disjoint_matches),
             "registration_safe":not any(x.get("venue_key")==key for x in conflicts),
         })
     return {"schema_version":1,
