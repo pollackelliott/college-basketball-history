@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_TWO_JANUARY_1943_GAMES_EXACT_DISTINCT_INCLUSION_ADJUDICATION_0001",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "status": "TWO_DISTINCT_COMPETITIVE_GAMES_ACCEPTED__ONE_EXACT_SCORE_CONFLICT_NONBLOCKING__FOUR_FEBRUARY_HOLDS_UNCHANGED",
+  "authority": {
+    "protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+    "parent_research_head": "ea8215bb7fbc267b2904c39ac3d4a24d33a35319",
+    "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "parent_status_blob": "9797338f98dd48b87771d724c6c11a84d92b7bab",
+    "parent_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0034.csv",
+    "parent_ledger_blob": "52f4c5db7e13c0b1f99b7c196a97295e42e3f173",
+    "parent_reconciliation_blob": "8907bf33b8c16e01e4f1064b6e55b947491de227",
+    "parent_1943_family_audit_blob": "444182b9ef2e09b0f8d2a6744dc5b83a1d5d3aa3",
+    "parent_historical_hold_inventory_blob": "5352a9ab2e37c78f54439b26688d49b7abec6da1",
+    "parent_census_blob": "3d5937323ad921aac1aac3e3afe7ab24352916a5"
+  },
+  "source_adjudication": [
+    {
+      "id": "GONZAGA-EXP-WHITMAN-194243-001",
+      "date": "1943-01-15",
+      "opponent": "Whitman",
+      "result": "GONZAGA_W53_40",
+      "game_type": "REGULAR_SEASON",
+      "site_type": "UNKNOWN",
+      "source_url": "https://oregonnews.uoregon.edu/lccn/sn85042472/1943-01-16/ed-1/seq-6/ocr/",
+      "source": "Original Jan16 Eugene Register-Guard United Press Walla Walla game report",
+      "literal_summary": "Gonzaga spurted late to defeat Whitman 53-40 last night, Ebaugh and Lewis 12 each",
+      "exact_date_from": "Jan16 last night means Jan15",
+      "classification": "Competitive university-college played result, explicitly not Gonzaga Prep, no exhibition indication",
+      "duplicate_proof": "Prior nine 1942-43 Gonzaga accepted games include WSU, Montana, Idaho, UW; zero Whitman games; date Jan15 not shared"
+    },
+    {
+      "id": "GONZAGA-EXP-PASCO-NAVAL-194243-001",
+      "date": "1943-01-08",
+      "opponent": "Pasco Naval Flyers / Pasco Naval Air Station",
+      "result": "GONZAGA_LOSS_POINTS_UNKNOWN",
+      "source_score_pairs": [
+        {
+          "publication": "Eugene Register-Guard",
+          "publication_date": "1943-01-09",
+          "page": 6,
+          "source_url": "https://oregonnews.uoregon.edu/lccn/sn85042472/1943-01-09/ed-1/seq-6/",
+          "pasco": 36,
+          "gonzaga": 28,
+          "source_kind": "College basketball results list"
+        },
+        {
+          "publication": "La Grande Evening Observer",
+          "publication_date": "1943-01-09",
+          "page": 6,
+          "source_url": "https://oregonnews.uoregon.edu/lccn/2026234413/1943-01-09/ed-1/seq-6.pdf",
+          "pasco": 39,
+          "gonzaga": 32,
+          "source_kind": "United Press Pasco dateline narrative, original PDF text rendering; original page screenshot examined"
+        }
+      ],
+      "exact_date_from": "Jan9 UP explicitly says 'last night', so Jan8",
+      "score_handling": "BOTH_GONZAGA_AND_PASCO_POINTS_BLANK; DIFFERENCE_PRESERVED_NOT_ARITHMETICALLY_CHOSEN",
+      "game_type": "REGULAR_SEASON",
+      "site_type": "UNKNOWN",
+      "military_opponent_classification": "CONTEMPORARY_GAME_UNIVERSITY_VS_NAVAL_BASE; NO_EXHIBITION_LABEL_IN_SOURCE; OFFICIAL_WASHINGTON_AND_WSU_SCHEDULES_COUNT_PASCO_SERVICE_OPPONENTS_IN_SAME_1942_43_SEASON_BUT_DO_NOT_INDEPENDENTLY_DECIDE_GONZAGA_ADMINISTRATIVE_INCLUSION",
+      "official_comparison_urls": [
+        "https://static.wsucougars.com/old_site/pdf/m-baskbl/2008-09mbbmediaguide.pdf?db_oem_id=30400",
+        "https://static.gohuskies.com/old_site/pdf/m-baskbl/2010-11-recordbook-1015.pdf?db_oem_id=30200"
+      ],
+      "duplicate_proof": "Prior nine include no Pasco Naval Flyers or Jan8 game; Pasco not conflated with preexisting Idaho Jan7 L37–55"
+    }
+  ],
+  "outcomes": {
+    "rows_before": 558,
+    "rows_after": 560,
+    "w_before": 215,
+    "l_before": 343,
+    "w_after": 216,
+    "l_after": 344,
+    "known_results_after": 560,
+    "points_blank_new_games": 1,
+    "official_expansion_games": 977,
+    "official_expansion_wins": 477,
+    "official_expansion_losses": 500,
+    "arithmetic_net_difference_before": 419,
+    "arithmetic_net_difference_after": 417,
+    "season_1942_43": {
+      "official": "2-9 / 11",
+      "identified_before": "1-8 / 9",
+      "identified_after": "2-9 / 11",
+      "status": "OFFICIAL_COUNTS_AND_RESULTS_EQUAL__FOUR_LATER_PLAYED_REPORTS_STILL_UNADMITTED_ACTIVE_INCLUSION_HOLDS"
+    },
+    "season_delta_counts_after": {
+      "positive": 45,
+      "negative": 2,
+      "zero": 4
+    },
+    "sum_positive_deltas": 422,
+    "sum_negative_deltas": -5,
+    "unchanged_active_1942_43_february_holds": 4,
+    "unchanged_active_1926_collision_hold": 1,
+    "total_active_candidate_holds": 5,
+    "unchanged_researched_exhausted_accounting_closeout_blockers": 4,
+    "stage1_complete": false,
+    "stage2_authorized": false
+  },
+  "scope_caveat": "Official arithmetic is not an inclusion verdict; this admission is based on separate played-game source identities and eligible basketball classification. It does not prove four subsequent Feb 1943 played result reports are exhibitions, junior team games, duplicates, or outside the official year. Their active source-inclusion contradictions remain blocking Stage 1.",
+  "historical_provenance": "Parent ledger 0034 and prior 0049 checkpoints stay intact; new successor 0035 appends exactly two rows. No protected-main or canonical games mutations. Pasco is one game notwithstanding conflicting scores. No site/H/A/N inference from dateline.",
+  "next_bounded_unit": "One read-only, single-season 1942–43 source-inclusion/accounting contradiction disposition: reconcile the newly exact 2–9/11 accepted January-inclusive ledger against four preserved February varsity reports and determine whether an institutional scope authority or genuine owner judgment is needed. Do not repeat broad source retrieval, modify source games, or start Stage 2.",
+  "owner_judgment_now": false
+}

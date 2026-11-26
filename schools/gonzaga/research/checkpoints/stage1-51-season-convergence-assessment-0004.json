@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_51_SEASON_CONVERGENCE_AFTER_JAN1943_TWO_GAMES_0004",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "parent_research_head": "ea8215bb7fbc267b2904c39ac3d4a24d33a35319",
+  "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0034.csv",
+  "parent_ledger_git_blob": "52f4c5db7e13c0b1f99b7c196a97295e42e3f173",
+  "controlling_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0035.csv",
+  "new_research_ids": [
+    "GONZAGA-EXP-WHITMAN-194243-001",
+    "GONZAGA-EXP-PASCO-NAVAL-194243-001"
+  ],
+  "accepted_game_count": 560,
+  "accepted_wins": 216,
+  "accepted_losses": 344,
+  "official_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "net_arithmetic_gap_not_game_identities": 417,
+  "season_classes": {
+    "positive": 45,
+    "negative": 2,
+    "zero": 4
+  },
+  "sum_positive_arithmetic_game_deltas": 422,
+  "sum_negative_arithmetic_game_deltas": -5,
+  "zero_arithmetic_game_delta_1942_43_does_not_resolve_four_february_inclusion_holds": true,
+  "active_candidate_holds": 5,
+  "research_exhausted_accounting_closeout_blockers": [
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1915-16",
+      "season": "1915-16"
+    },
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1930-31",
+      "season": "1930-31"
+    },
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1936-37",
+      "season": "1936-37"
+    },
+    {
+      "id": "GONZAGA-S1-ACCOUNTING-1937-38",
+      "season": "1937-38"
+    }
+  ],
+  "new_season_reconciliation": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0004.csv",
+  "next_bounded_unit": "One read-only, single-season 1942–43 source-inclusion/accounting contradiction disposition: reconcile the newly exact 2–9/11 accepted January-inclusive ledger against four preserved February varsity reports and determine whether an institutional scope authority or genuine owner judgment is needed. Do not repeat broad source retrieval, modify source games, or start Stage 2.",
+  "stage1_closeout_eligible": false
+}
