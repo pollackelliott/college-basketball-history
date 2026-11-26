@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_UC_DAVIS_1926_27_OLDER_RECIPROCAL_AND_ARCHIVE_0019",
+  "status": "STAGE1_OPEN__UC_DAVIS_FOUR_SOURCE_GROUPS_STILL_UNPAIRED_AGAINST_TWO_DAVIS_1926_27_GAMES__NO_GAME_MUTATION",
+  "main_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "research_parent_sha": "5cc218df35fdd140893b18108ee692aea74ed958",
+  "research_parent_tree_sha": "978c19e616081512cdeb9eabebea1fd63a7037cd",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "preserved_git_blobs": {
+    "accepted_working_game_ledger": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "source_dispositions": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "season_census": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+    "six_blocked_groups": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+    "guide_raw": "fc72b2862aa283481d498873af0a17fa1d7e405a"
+  },
+  "game_counts": {
+    "all_parent_accepted": 1009,
+    "all_seasons": 49,
+    "original_inherited_research": 78,
+    "source_pending_groups_total": 6,
+    "source_pending_groups_1926_27_uc_davis": 4,
+    "source_groups_in_fresno_1926_27": 20,
+    "accepted_working_games_1926_27": 16,
+    "accepted_working_w_1926_27": 8,
+    "accepted_working_l_1926_27": 8,
+    "uc_davis_1926_27_full_season_games": 10,
+    "uc_davis_1926_27_fresno_losses": 2
+  },
+  "source_identities_held": [
+    "FRESNO-EXP-CAND-1926-27-006",
+    "FRESNO-EXP-CAND-1926-27-007",
+    "FRESNO-EXP-CAND-1926-27-012",
+    "FRESNO-EXP-CAND-1926-27-013"
+  ],
+  "reciprocal_2007_08_old_edition": {
+    "season": "1926-27",
+    "record": "2-8",
+    "fresno_loss_count": 2,
+    "exact_scores": "N/A",
+    "source_edition_not_independent_from_2026": true,
+    "pdf_text_read": true,
+    "pdf_screenshot_verified": false,
+    "pdf_screenshot_failure": "content length 10997455"
+  },
+  "contemporary_archive": {
+    "title": "California Aggie",
+    "official_uc_davis_library_announcement": "https://library.ucdavis.edu/news/aggie-archive/",
+    "digitization_back_to_year": 1915,
+    "collection_url": "https://cdnc.ucr.edu/?a=cl&cl=CL1&sp=UCD&e=-------en--20--1--txt-txIN--------1",
+    "exact_1927_content_inspected": false,
+    "access_status": "CDNC_REDIRECT_TOOL_INACCESSIBLE"
+  },
+  "new_contemporaneous_match_specific_scores": 0,
+  "accepted_games_added": 0,
+  "accepted_games_removed": 0,
+  "accepted_games_modified": 0,
+  "blocked_source_groups_before": 6,
+  "blocked_source_groups_after": 6,
+  "protected_main_mutated": false,
+  "published_fresno_mutated": false,
+  "stage2_authorized": false,
+  "next_material_action": "New accessible match-specific 1927 article or direct contemporary schedule score evidence only; no more retrospective source loops"
+}
