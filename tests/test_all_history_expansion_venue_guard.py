@@ -165,6 +165,89 @@ class ExpansionVenueGuardTest(unittest.TestCase):
         venue=dict(self.umbc,canonical_name="Alternative Gym",aliases="UMBC Fieldhouse;Short Name")
         self.assertEqual(census([venue],self.registered,self.aliases)["blocker_count"],1)
 
+
+    def test_remote_name_aliases_do_not_create_cross_city_physical_identity(self):
+        # Reproduces all three UC Davis Phase 0 topology classes without
+        # embedding any UC Davis school-specific exception in the guard.
+        registered = [
+            {"venue_id": "VEN-100001", "venue_key": "la-pe",
+             "display_name": "Physical Education Building",
+             "city": "Los Angeles", "state": "CA"},
+            {"venue_id": "VEN-100002", "venue_key": "va-pe",
+             "display_name": "Physical Education Building",
+             "city": "Fairfax", "state": "VA"},
+            {"venue_id": "VEN-100003", "venue_key": "indiana-fieldhouse",
+             "display_name": "University Fieldhouse",
+             "city": "South Bend", "state": "IN"},
+            {"venue_id": "VEN-100004", "venue_key": "illinois-memorial",
+             "display_name": "Robertson Memorial Fieldhouse",
+             "city": "Peoria", "state": "IL"},
+            {"venue_id": "VEN-100005", "venue_key": "wv-memorial",
+             "display_name": "Memorial Field House",
+             "city": "Huntington", "state": "WV"},
+        ]
+        names = [
+            {"venue_id": "VEN-100003", "venue_name": "Fieldhouse",
+             "normalized_name": "fieldhouse", "name_type": "HISTORICAL_OR_ALIAS"},
+            {"venue_id": "VEN-100004", "venue_name": "Memorial Field House",
+             "normalized_name": "memorialfieldhouse",
+             "name_type": "HISTORICAL_OR_ALIAS"},
+        ]
+        source = {
+            "source_basis": "https://example.edu/official-historical-gymnasium",
+            "site_rule": "Independently researched exact-game site relationship",
+        }
+        local = [
+            dict(source, venue_key="historic-local-gym", venue_id="",
+                 canonical_name="Hickey Gymnasium",
+                 aliases="Physical Education Building",
+                 city="Davis", state="CA"),
+            dict(source, venue_key="opponent-arena", venue_id="",
+                 canonical_name="Ed & Bertha Fitzpatrick Arena",
+                 aliases="Fieldhouse",
+                 city="Turlock", state="CA"),
+            dict(source, venue_key="puget-sound-memorial", venue_id="",
+                 canonical_name="Memorial Fieldhouse",
+                 aliases="", city="Tacoma", state="WA"),
+        ]
+        report = census(local, registered, names)
+        self.assertEqual(report["blocker_count"], 0, report["blockers"])
+        self.assertEqual(report["status"], "PASS")
+        self.assertEqual([r["disjoint_alias_global_ids"] for r in report["rows"]], [
+            ["VEN-100001", "VEN-100002"],
+            ["VEN-100003"],
+            ["VEN-100004", "VEN-100005"],
+        ])
+        self.assertTrue(all(r["registration_safe"] for r in report["rows"]))
+
+        # A genuine same-city potential identity remains a blocker.
+        colocated = [dict(v) for v in registered]
+        colocated[0]["city"] = "Davis"
+        self.assertEqual(census([local[0]], colocated, names)["blocker_count"], 1)
+
+        # Incomplete or unsupported locality cannot be used as evidence
+        # that two physical sites are different.
+        for change in (
+            {"city": ""},
+            {"source_basis": ""},
+            {"site_rule": ""},
+            {"canonical_name": "Physical Education Building"},
+        ):
+            altered = dict(local[0], **change)
+            with self.subTest(change=change):
+                self.assertGreater(
+                    census([altered], registered, names)["blocker_count"], 0
+                )
+
+        # A same-jurisdiction historical alias (rather than the other venue's
+        # generic display name) may still refer to one site across nearby towns.
+        global_alias = names + [{
+            "venue_id": "VEN-100001", "venue_name": "Campus Gym",
+            "normalized_name": "campusgym", "name_type": "HISTORICAL_OR_ALIAS",
+        }]
+        renamed = dict(local[0], aliases="Campus Gym")
+        self.assertGreater(census([renamed], registered, global_alias)["blocker_count"], 0)
+
     def test_duplicate_new_key_blocks(self):
         venue=dict(self.umbc,venue_key="new-town-gym",canonical_name="Unique Town Gym")
         outcome=census([venue,dict(venue,city="Other")],self.registered,self.aliases)
