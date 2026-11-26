@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1957_PACIFIC_LUTHERAN_EXACT_DUPLICATE_HOLD_DISPOSITION_0001",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_research_head": "b996f2baaf24bb94e9461c66877bc06e7855acb3",
+  "source_ledger": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0034.csv",
+    "git_blob_sha": "52f4c5db7e13c0b1f99b7c196a97295e42e3f173",
+    "accepted_game_count": 558,
+    "accepted_wins": 215,
+    "accepted_losses": 343
+  },
+  "source_hold": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-1955-1958-pacific-northwest-held-candidates-0001.csv",
+    "git_blob_sha": "7313d45c9cda02a79bbecc06d8edb509e0ee2c0f",
+    "held_candidate": {
+      "candidate_id": "GONZAGA-HOLD-5657-PLU-001",
+      "season_label": "1956-57",
+      "game_date": "1957-03-05",
+      "source_opponent_label": "Pacific Lutheran",
+      "played_result": "L",
+      "team_score": "85",
+      "opponent_score": "93",
+      "game_type": "UNKNOWN",
+      "source_url": "https://oregonnews.uoregon.edu/lccn/sn96088460/1957-03-06/ed-1/seq-11.pdf",
+      "status": "BOUNDED_GAME_TYPE_CLASSIFICATION_HOLD",
+      "notes": "1957-03-06 newspaper Gonzaga 85 PLU 93. Earlier Feb21 preview describes future NAIA playoff against Gonzaga; must prove whether this game is a postseason tournament match; not in ledger pending positive classification."
+    }
+  },
+  "source_prior_audit": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-pacific-lutheran-1938-1960-partial-series-audit-0001.json",
+    "git_blob_sha": "fc2eb953593e12a3dfb65b82a1b61690d92bb1a5"
+  },
+  "source_prior_tranche": {
+    "path": "schools/gonzaga/research/checkpoints/stage1-pacific-lutheran-1953-1957-postseason-tranche-0001.csv",
+    "git_blob_sha": "6bad8903b7b137ab7a26ffb2335ec4109ec1ceb7"
+  },
+  "determination": {
+    "held_candidate_id": "GONZAGA-HOLD-5657-PLU-001",
+    "disposition": "RESOLVED_DUPLICATE_OF_EXISTING_ACCEPTED_GAME",
+    "accepted_same_game_research_id": "GONZAGA-EXP-PLU-195657-002",
+    "exact_identity_match": {
+      "season": "1956-57",
+      "date": "1957-03-05",
+      "opponent": "Pacific Lutheran",
+      "played_result": "L",
+      "gonzaga_score": 85,
+      "opponent_score": 93
+    },
+    "accepted_game_type": "POSTSEASON",
+    "competition": "1957 NAIA District 1 Pacific Lutheran–Gonzaga best-of-three qualification series",
+    "playoff_series_context": {
+      "first_game": {
+        "id": "GONZAGA-EXP-PLU-195657-001",
+        "date": "1957-03-04",
+        "result": "GONZAGA_LOSS",
+        "gonzaga_points": 68,
+        "pacific_lutheran_points": "UNKNOWN_CONFLICT_72_VS_78",
+        "site_type": "HOME"
+      },
+      "second_game": {
+        "id": "GONZAGA-EXP-PLU-195657-002",
+        "date": "1957-03-05",
+        "result": "GONZAGA_LOSS",
+        "gonzaga_points": 85,
+        "pacific_lutheran_points": 93,
+        "site_type": "UNKNOWN"
+      }
+    },
+    "physical_game_count": "TWO_DISTINCT_PLAYED_GAMES_ALREADY_ACCEPTED__HELD_SECOND_GAME_NOT_THIRD",
+    "no_new_row": true,
+    "no_existing_game_mutation": true,
+    "explanation": "Prior March 5 hold predates the original NAIA series source-family tranche that later admitted exact March 5 opponent/result/date as 195657-002; classification has been established as POSTSEASON and cannot remain an unadmitted distinct candidate. No more historical evidence needed to reconcile identity."
+  },
+  "contemporary_source_evidence": [
+    {
+      "publication": "Medford Mail Tribune",
+      "date": "1957-03-06",
+      "kind": "Original next-day United Press Tuesday college score list",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn97071090/1957-03-06/ed-1/seq-8/ocr/",
+      "content": "Pacific Lutheran 93 Gonzaga 85 in Tuesday college games; game date March 5."
+    },
+    {
+      "publication": "Albany Democrat-Herald",
+      "date": "1957-03-06",
+      "kind": "Original NAIA Tournament page",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn96088460/1957-03-06/ed-1/seq-11.pdf",
+      "content": "Pacific Lutheran 93 Gonzaga 85; original-page screenshot inspected during current assessment."
+    },
+    {
+      "publication": "Oregon Statesman",
+      "date": "1957-03-05",
+      "kind": "Original previous-day AP first playoff result report",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1957-03-05/ed-1/seq-9.pdf",
+      "content": "Reports the March 4 first game of best-of-three NAIA contest, with teams to meet again Tuesday; previous checkpoint recorded original PDF screenshot and first-game opponent points contradiction."
+    }
+  ],
+  "historical_provenance_rule": "Do not delete or rewrite the prior held-candidate CSV. Preserve immutable historical hold source and append exact resolution, while current outstanding inventory lists it RESOLVED.",
+  "after": {
+    "accepted_games": 558,
+    "wins": 215,
+    "losses": 343,
+    "net_institutional_arithmetic_difference": 419,
+    "original_held_records": 6,
+    "now_resolved_historical_held_records": 1,
+    "active_holds": 5,
+    "active_holds_1942_43": 4,
+    "active_holds_1925_26": 1,
+    "research_exhausted_accounting_closeout_blockers": 4,
+    "stage1_complete": false,
+    "stage2_authorized": false
+  },
+  "next_bounded_unit": "One bounded Jan 18 1926 date/identity collision adjudication: accepted Gonzaga–Washington L12-35 vs Portland Coliseum Checkerboards reported L29-30; test contemporaneous dates/venues and separate-day game identity, preserve old authority and evidence if unresolved; no other 1942-43 research or Stage 2.",
+  "owner_action_required": false
+}
