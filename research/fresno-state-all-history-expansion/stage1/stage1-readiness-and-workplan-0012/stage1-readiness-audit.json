@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_CRITICAL_PATH_READINESS_AND_OWNER_PROCEED_BUDGET_0012",
+  "status": "EXACT_GAME_UNIVERSE_BACKLOG_QUANTIFIED__NO_STAGE1_ACCEPTANCE_OR_NEW_HISTORICAL_ADJUDICATION__STAGE1_OPEN",
+  "protected_main_at_read": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "research_head_parent": "faf7232b2120a9a3e99476e73553477fd1531296",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "authenticated_inputs": {
+    "ledger": "62ccc32bba43c5870a641fac6ac182266603865e",
+    "census": "143248cae39e672cf5e1e833266e9bbd8a02acad",
+    "queue": "ec7d23fcf418fe7f6f2fd6a36039aa28107c537c",
+    "other_queue": "da80ee11ff9769c53ddbc97646b6fb14f589f7a4",
+    "original": "ef6188b36675cd188a5bc5f1059f10084c70430f"
+  },
+  "source_entries_total": 1034,
+  "new_source_entries_total": 956,
+  "original_inherited_accepted_research_rows": 78,
+  "original_owner_excluded_ids_crossmatched": 78,
+  "source_excluded_events": 17,
+  "proven_duplicate_source_representations": 2,
+  "provisional_source_identity_groups": 1015,
+  "provisional_new_game_groups": 937,
+  "new_source_entries_with_generic_pending_status": 925,
+  "new_source_entries_without_legacy_game_type": 956,
+  "retained_new_groups_needing_final_structured_game_type": 937,
+  "retained_legacy_groups_with_original_game_type": 78,
+  "stage1_game_universe_acceptance_is_complete": false,
+  "retained_groups_by_route": {
+    "BULK_STAGE1_SOURCE_CANDIDATE_REQUIRES_ACCEPTANCE_AND_GAME_TYPE": 925,
+    "HISTORICAL_EVIDENCE_ANNOTATED__NEEDS_FINAL_STAGE1_ACCEPTANCE_AND_GAME_TYPE": 7,
+    "BLOCKING_UC_DAVIS_UNIQUE_GAME_COUNT": 4,
+    "BLOCKING_HARLEM_INCLUSION": 1,
+    "INHERITED_ACCEPTED_RESEARCH_GAME__NO_REOPEN": 78
+  },
+  "source_seasons_in_guide": 49,
+  "new_source_seasons": 45,
+  "no_intercollegiate_guide_result_seasons": [
+    "1943-44"
+  ],
+  "known_material_historical_blockers": [
+    "1965-66 one aggregate loss not source-game backed",
+    "1926-27 UC Davis two-versus-four group identity",
+    "1953-54 Harlem Clowns match-specific inclusion"
+  ],
+  "additional_activity_or_accounting_obligation": [
+    "1943-44 documented wartime withdrawal/local unquantified activity",
+    "1939-40 and 1969-70 header contradictions, provenance-only when game universe stable"
+  ],
+  "newly_accepted_game_ids_in_this_checkpoint": 0,
+  "new_game_type_filled_in_this_checkpoint": 0,
+  "any_source_row_modification": false,
+  "planning_envelope_additional_substantive_owner_proceeds": "5–8 if evidence/authority resolves blockers; not a guaranteed upper bound, may honestly stop BLOCKED",
+  "unbounded_repeat_search_prohibited": true,
+  "next_bounded_unit": "Begin one systematic and evidence-carrying 45-season batch game-universe normalization and structured-game-type draft, not one-off recurring source searches. Preserve the three material blockers and 1943-44 wartime note."
+}
