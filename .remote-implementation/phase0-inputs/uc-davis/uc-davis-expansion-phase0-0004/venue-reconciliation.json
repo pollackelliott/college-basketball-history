@@ -1,0 +1,41 @@
+{
+  "expected_research_zip_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+  "expected_venues_sha256": "e7a5725429139ef4a0b31cc63cfa81a9fc010189436b8682b6bb2e9ed01f701e",
+  "mappings": [
+    {
+      "action": "REGISTER_DISTINCT_KEYED_IDENTITY",
+      "conflicting_global_venue_id": "VEN-001129",
+      "conflicting_global_venue_key": "university-credit-union-center",
+      "excluded_global_alias_names": [
+        "Recreation Hall"
+      ],
+      "expected_conflicting_global_closed": "",
+      "expected_conflicting_global_name_rows_sha256": "d5ed80aea594e8884bfe0c4649188f8042df3e64d93a28b81012b32291ae8ad7",
+      "expected_conflicting_global_opened": "1977",
+      "expected_conflicting_global_row_sha256": "1d054b3daa110ef156b15ef2b5736fb380acac9b0c86e2018134e923db4551e0",
+      "expected_local_city": "Davis",
+      "expected_local_name": "Old Recreation Hall",
+      "expected_local_row_sha256": "c6ccf575efb0b2560424e1dccd52d3b17b7def60168de96510f9413395e15d24",
+      "expected_local_state": "CA",
+      "expected_source_games_sha256": "9382223ec169872826c842a836a43e73fb1073ec88082b28d4975f925c53b618",
+      "local_venue_key": "old-recreation-hall-uc-davis",
+      "new_global_venue_key": "old-recreation-hall-uc-davis",
+      "physical_separation_basis": "UC Davis Library buildings history and UC Davis Magazine place the old wood-shingle Recreation Hall around 1920–21 with accepted closure in 1938; UC Davis official venue chronology opens the successor Recreation Hall in 1977. Distinct buildings with non-overlapping facility eras, not synonyms for one physical identity.",
+      "resolution_basis": "Issue #722 Control Center authorization: old 1921 Recreation Hall separate from the Recreation Hall/University Credit Union Center opened 1977; preserve accepted HOME chronology and original venue key.",
+      "source_support_id": "UC-DAVIS-EXP-VEN-0001",
+      "source_support_row": {
+        "baseline_row_sha256": "",
+        "candidate_row_json": "{\"aliases\":\"Recreation Hall\",\"canonical_name\":\"Old Recreation Hall\",\"city\":\"Davis\",\"first_assigned_game\":\"\",\"games_currently_assigned\":\"30\",\"known_closed\":\"1938\",\"known_opened\":\"\",\"last_assigned_game\":\"\",\"notes\":\"UC Davis Library timeline says Rec Hall completed in 1920; UC Davis Magazine describes the old Recreation Hall as a 1921 wood-shingle building. Research avoids claiming a more precise opening date. Physical identity is resolved for the supported 1921-22 through 1936-37 HOME default; global venue registration remains Implementation-owned. Stage 3A-4 assignment count covers this supplemental expansion ledger only.\",\"relationship_date_precision\":\"SEASON\",\"relationship_end\":\"1936-1937\",\"relationship_start\":\"1921-1922\",\"relationship_type\":\"primary_home\",\"site_rule\":\"Default accepted SOURCE_PROGRAM_HOME venue for 1921-22 through 1936-37; apply only to games independently classified HOME; explicit game-level evidence overrides.\",\"source_basis\":\"https://library.ucdavis.edu/archives-and-special-collections/our-collections/university-archives/history-of-uc-davis/uc-davis-buildings-land-use-history/ | https://www.ucdavis.edu/news/freeborn-hall-history-music-and-more | https://library.ucdavis.edu/archives-and-special-collections/historical-information-uc-davis-campus-buildings-2/\",\"source_program_key\":\"uc-davis\",\"state\":\"CA\",\"venue_date_precision\":\"YEAR\",\"venue_id\":\"\",\"venue_key\":\"old-recreation-hall-uc-davis\",\"venue_type\":\"gymnasium\"}",
+        "changed_fields": "",
+        "evidence_basis": "Accepted Stage 4/6 supplemental venue authority; venue key absent from immutable base UC Davis venue identity inventory.",
+        "support_action": "NEW_SUPPLEMENTAL",
+        "support_id": "UC-DAVIS-EXP-VEN-0001",
+        "venue_key": "old-recreation-hall-uc-davis"
+      },
+      "source_support_row_sha256": "c2ae3f74fd808693b37dae1a9b189402f05cfb67d7424eb27d1c9f1ceb76a9c7"
+    }
+  ],
+  "owner_approval_basis": "Explicit Control Center AUTHORIZED decision — https://github.com/pollackelliott/college-basketball-history/issues/722 — one different physical Old Recreation Hall",
+  "schema_version": 3,
+  "school_key": "uc-davis"
+}

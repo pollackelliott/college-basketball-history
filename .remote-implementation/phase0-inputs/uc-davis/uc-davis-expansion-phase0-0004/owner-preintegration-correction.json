@@ -1,0 +1,185 @@
+{
+  "approval": {
+    "approved_on": "2026-11-25",
+    "authentication_note": "This is a conversation-level owner decision receipt, not a cryptographic GitHub owner signature; exact owner statement and prior three-row decision table are the provenance.",
+    "exact_scope": "Three UC Davis source-game rows only, dates, result scores, HOME/AWAY classification, venue/locality as shown",
+    "owner_gate_1_approval": "NOT_IMPLIED",
+    "owner_gate_2_approval": "NOT_IMPLIED",
+    "owner_response": "APPROVED. Proceed"
+  },
+  "approved_source_rows": [
+    {
+      "application_state": "NOT_APPLIED",
+      "current_main_canonical_identity": "CBBG-0187499",
+      "exact_owner_approved_field_changes": {
+        "city": {
+          "approved_after": "Dayton",
+          "before": "Davis"
+        },
+        "curated_site_type": {
+          "approved_after": "OPPONENT_HOME",
+          "before": "SOURCE_PROGRAM_HOME"
+        },
+        "curated_venue_name": {
+          "approved_after": "University of Dayton Fieldhouse",
+          "before": "Hickey Gymnasium"
+        },
+        "game_date": {
+          "approved_after": "1963-12-04",
+          "before": ""
+        },
+        "opponent_score": {
+          "approved_after": "74",
+          "before": "76"
+        },
+        "state": {
+          "approved_after": "OH",
+          "before": "CA"
+        },
+        "team_score": {
+          "approved_after": "48",
+          "before": "47"
+        }
+      },
+      "hypothetical_approved_overlay_row_sha256": "9d1681244d62af7840aa4fb32563cd145f4f108aef1dafa6f1425b74246ec4cc",
+      "immutable_original_row_sha256": "812f1b525b274f2a84cc6a1a3261db8a8632899317ef0bc44e1e32fcdab2df60",
+      "immutable_preserved_fields": [
+        "source_game_id",
+        "source_opponent_label",
+        "normalized_opponent_key",
+        "raw_text",
+        "source_site_candidate",
+        "source_page",
+        "played_result",
+        "curated_game_type"
+      ],
+      "source_game_id": "UC-DAVIS-EXP-1963-64-002"
+    },
+    {
+      "application_state": "NOT_APPLIED",
+      "current_main_canonical_identity": "NONE_AT_LAST_STAGE1",
+      "exact_owner_approved_field_changes": {
+        "city": {
+          "approved_after": "Toledo",
+          "before": "Davis"
+        },
+        "curated_site_type": {
+          "approved_after": "OPPONENT_HOME",
+          "before": "SOURCE_PROGRAM_HOME"
+        },
+        "curated_venue_name": {
+          "approved_after": "",
+          "before": "Hickey Gymnasium"
+        },
+        "game_date": {
+          "approved_after": "1963-12-02",
+          "before": ""
+        },
+        "opponent_score": {
+          "approved_after": "76",
+          "before": "74"
+        },
+        "state": {
+          "approved_after": "OH",
+          "before": "CA"
+        },
+        "team_score": {
+          "approved_after": "47",
+          "before": "48"
+        }
+      },
+      "hypothetical_approved_overlay_row_sha256": "b93fd65315b1e2374c65005d1bb7c5ba623469043818403f95f80e09633a036a",
+      "immutable_original_row_sha256": "a026286b9997a038b285da19e99853b294d042e87596f251cc07b7c423343c85",
+      "immutable_preserved_fields": [
+        "source_game_id",
+        "source_opponent_label",
+        "normalized_opponent_key",
+        "raw_text",
+        "source_site_candidate",
+        "source_page",
+        "played_result",
+        "curated_game_type"
+      ],
+      "source_game_id": "UC-DAVIS-EXP-1963-64-003"
+    },
+    {
+      "application_state": "NOT_APPLIED",
+      "current_main_canonical_identity": "CBBG-0114986",
+      "exact_owner_approved_field_changes": {
+        "city": {
+          "approved_after": "Stanford",
+          "before": "Davis"
+        },
+        "curated_site_type": {
+          "approved_after": "OPPONENT_HOME",
+          "before": "SOURCE_PROGRAM_HOME"
+        },
+        "curated_venue_name": {
+          "approved_after": "Maples Pavilion",
+          "before": "Hickey Gymnasium"
+        },
+        "game_date": {
+          "approved_after": "1976-12-20",
+          "before": ""
+        },
+        "team_score": {
+          "approved_after": "66",
+          "before": "65"
+        }
+      },
+      "hypothetical_approved_overlay_row_sha256": "14c69d485939cd264f23ec1dba23fc85a4cb17e60ed5793df35c97200173be33",
+      "immutable_original_row_sha256": "febd028331a251ea05339ffb5ecf5c42f0d341701a907c931d4a84a5ba713ae7",
+      "immutable_preserved_fields": [
+        "source_game_id",
+        "source_opponent_label",
+        "normalized_opponent_key",
+        "raw_text",
+        "source_site_candidate",
+        "source_page",
+        "played_result",
+        "curated_game_type"
+      ],
+      "source_game_id": "UC-DAVIS-EXP-1976-77-008"
+    }
+  ],
+  "authority": {
+    "control_sequence": 770,
+    "control_sha": "c4447572a3317bd4db28097671064164270a1fbb",
+    "frozen_original_zip_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
+    "frozen_original_zip_size": 2568663,
+    "generic_stage1_repair_merge": "9888bc6161952199e6f49c5f2b614459a44f029d",
+    "onboarding_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+    "original_failed_startup": "https://github.com/pollackelliott/college-basketball-history/actions/runs/45727628286",
+    "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+    "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+    "school": "uc-davis"
+  },
+  "checkpoint_number": "0005",
+  "kind": "UC_DAVIS_EXPANSION_OWNER_APPROVED_PREINTEGRATION_HISTORICAL_CORRECTION_PROPOSAL",
+  "mechanical_prediction_not_certified": {
+    "independent_acceptance_not_rerun": true,
+    "phase0_not_started": true,
+    "requires_exact_current_main_reproduction": true,
+    "stage1_identity_blockers": 0,
+    "stage1_identity_reuse": 70,
+    "stage1_provisional_new": 1894
+  },
+  "original_source_preservation": {
+    "freeze_zip_unchanged": true,
+    "literal_raw_text_unchanged": true,
+    "literal_source_site_candidate_unchanged": true,
+    "new_unnamed_toledo_venue_invented": false,
+    "opponent_identity_unchanged": true,
+    "result_direction_unchanged": true
+  },
+  "policy_gap": {
+    "cannot_fix_by": "Alter original Freeze, edit published canonical, treat owner-approved historical edits as generic identity-only changes, or submit an unchanged startup intent",
+    "control_center_boundary": "Introducing a new historical-mutation authority/phase before Integration Freeze materially changes the existing policy/authority contract; needs repository Control Center authorization prior to code deployment.",
+    "current_gate1_history_patch": "Requires already constructed Integration Freeze and stable Phase 0, which the two identity blockers prevent",
+    "current_stage1_input": "One authenticated original Freeze plus current-main; no pre-Integration Freeze historical correction sidecar",
+    "permanent_freeze_zip_is_immutable": true,
+    "required_design_decision": "A narrow authorized and independently verified pre-Integration Freeze owner-approved historical correction representation, or an independently proven alternative that preserves the old Freeze and retains ordinary Gate 1 safeguards."
+  },
+  "repository_actions_this_turn": "NO tracked basketball mutation, no new startup request, no protected-main modification, no control-branch push",
+  "status": "APPROVAL_RECORDED_EXECUTION_NOT_AUTHORIZED_BY_EXISTING_STAGE1_CONTRACT"
+}
