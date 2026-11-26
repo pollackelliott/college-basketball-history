@@ -1,0 +1,31 @@
+{
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "checkpoint": 27,
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "school_key": "boise-state",
+  "status": "STAGE_1_IN_PROGRESS",
+  "filename": "boise-state-expansion-stage1-argonaut-1964-66-access-census-0027.zip",
+  "sha256": "f9a0e85a1a2c4a19076a55e6321f1c9df956bc72915038ec2167bc3346d42925",
+  "parent_zip_sha256": "5378bcfeac891b04e2c1ec7a36d651c8ef1dc5bf5895d93ffdf353e0c343bbdd",
+  "parent_research_head": "ecc3be1d0703b976a60162b716bddc9b85fe60c7",
+  "protected_main_at_start": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "immutable_research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "manifested_members": 81,
+  "accepted_games": 217,
+  "new_accepted": 0,
+  "existing_repairs": 0,
+  "junior_college_accepted": 162,
+  "official_listed_junior_college_accepted": 161,
+  "arithmetic_unmatched_not_missing_verified_ids": 626,
+  "annual_accounting_seasons": 38,
+  "targeted_seasons": {
+    "1964-65": {
+      "record": "8-15",
+      "identified": 0
+    },
+    "1965-66": {
+      "record": "14-11",
+      "identified": 0
+    }
+  }
+}
