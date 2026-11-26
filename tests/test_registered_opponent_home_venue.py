@@ -86,7 +86,7 @@ class RegisteredOpponentHomeVenueTests(unittest.TestCase):
             ("curated_site_type", "NEUTRAL"),
             ("curated_site_type", "UNKNOWN"),
             ("curated_venue_name", ""),
-            ("curated_venue_name", "University of Dayton Arena"),
+            ("curated_venue_name", "Unregistered Dayton Hall"),
             ("city", ""),
             ("city", "Davis"),
             ("state", ""),
