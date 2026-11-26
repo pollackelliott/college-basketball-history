@@ -533,6 +533,56 @@ class ExpansionRemoteRequestValidationTests(unittest.TestCase):
         ):
             validate_request(request)
 
+
+    def test_expansion_owner_correction_reference_is_exactly_bound(self):
+        request = expansion_request()
+        correction = {
+            "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+            "approval_issue_url": "https://github.com/example/repository/issues/720",
+            "school_key": "example",
+            "freeze_sha256": request["research_freeze_sha256"],
+            "sha256": "a" * 64,
+            "owner_checkpoint_sha256": "a" * 64,
+            "path": ".remote-implementation/transports/example/owner-correction.json",
+            "approved_source_game_ids": ["EXP-1", "EXP-2"],
+        }
+        request["owner_correction"] = correction
+        validate_request(request)
+        for key, replacement in (
+            ("school_key", "wrong-school"),
+            ("freeze_sha256", "f" * 64),
+            ("sha256", "f" * 64),
+            ("owner_checkpoint_sha256", "f" * 64),
+            ("approved_source_game_ids", ["EXP-1", "EXP-1"]),
+            ("path", "../untrusted.json"),
+        ):
+            with self.subTest(key=key):
+                changed = expansion_request()
+                changed["owner_correction"] = dict(correction, **{key: replacement})
+                with self.assertRaises(ValueError):
+                    validate_request(changed)
+
+    def test_expansion_owner_correction_cannot_grant_gate_authority(self):
+        request = expansion_request()
+        request["owner_correction"] = {
+            "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+            "approval_issue_url": "https://github.com/example/repository/issues/720",
+            "school_key": "example",
+            "freeze_sha256": request["research_freeze_sha256"],
+            "sha256": "a" * 64,
+            "owner_checkpoint_sha256": "a" * 64,
+            "path": ".remote-implementation/transports/example/owner-correction.json",
+            "approved_source_game_ids": ["EXP-1"],
+        }
+        for flag in ("owner_gate_1", "owner_gate_2", "stage2_census"):
+            altered = expansion_request()
+            altered["owner_correction"] = request["owner_correction"]
+            altered["authority"][flag] = True
+            with self.subTest(flag=flag), self.assertRaises(
+                RemoteImplementationError
+            ):
+                validate_request(altered)
+
     def test_expansion_requires_explicit_expansion_authority(self):
         request = expansion_request()
         request["authority"]["expansion_phase0"] = False

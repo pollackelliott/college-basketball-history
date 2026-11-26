@@ -337,6 +337,18 @@ def _external_authority(
         ):
             raise Stop("EXPANSION_PHASE0_VENUE_RECONCILIATION_HASH_MISMATCH")
 
+    owner_ref = request.get("owner_correction")
+    owner_correction = materialize_payload(
+        control_commit,
+        owner_ref,
+        scratch / "owner-preintegration-correction.json",
+    )
+    if owner_ref is not None and (
+        owner_correction is None
+        or sha256_file(owner_correction) != owner_ref["sha256"]
+    ):
+        raise Stop("EXPANSION_PHASE0_OWNER_CORRECTION_HASH_MISMATCH")
+
     frozen = scratch / "integration-freeze"
     manifest = freeze_authority(
         worktree,
@@ -349,7 +361,17 @@ def _external_authority(
         request["stage1_independent_proof_sha256"],
         frozen,
         venue_reconciliation_path=venue_reconciliation,
+        owner_correction_path=owner_correction,
+        owner_correction_reference=owner_ref,
     )
+    if manifest.get("owner_preintegration_correction") != proof_payload.get(
+        "owner_preintegration_correction"
+    ):
+        raise Stop("EXPANSION_PHASE0_OWNER_CORRECTION_PROOF_MISMATCH")
+    if manifest.get("owner_preintegration_correction_sha256", "") != (
+        owner_ref["sha256"] if owner_ref is not None else ""
+    ):
+        raise Stop("EXPANSION_PHASE0_OWNER_CORRECTION_REF_MISMATCH")
     manifest_bytes = (frozen / MANIFEST_NAME).read_bytes()
     manifest_sha = sha256_bytes(manifest_bytes)
     if manifest_sha != request["integration_freeze_sha256"]:
@@ -400,6 +422,7 @@ def _external_authority(
         "stage1_control_authority_sha": stage1_control_authority_sha,
         "proof_path": proof,
         "venue_reconciliation_path": venue_reconciliation,
+        "owner_correction_path": owner_correction,
         "frozen": frozen,
         "manifest": manifest,
         "manifest_bytes": manifest_bytes,
@@ -799,6 +822,11 @@ def run_expansion_phase0(
         "phase0-preview.json",
         "stage1-independent-proof.json",
     ]
+    if authority["owner_correction_path"] is not None:
+        (input_dir / "owner-preintegration-correction.json").write_bytes(
+            authority["owner_correction_path"].read_bytes()
+        )
+        sidecar_names.append("owner-preintegration-correction.json")
     if authority["venue_reconciliation_path"] is not None:
         (input_dir / "venue-reconciliation.json").write_bytes(
             authority["venue_reconciliation_path"].read_bytes()
@@ -831,6 +859,12 @@ def run_expansion_phase0(
             "venue_reconciliation_sha256": authority["manifest"].get(
                 "venue_reconciliation_sha256",""
             ),
+        "owner_preintegration_correction_sha256": authority["manifest"].get(
+            "owner_preintegration_correction_sha256", ""
+        ),
+        "owner_preintegration_correction_receipt": authority["manifest"].get(
+            "owner_preintegration_correction"
+        ),
             "semantic_snapshot_sha256": authority[
                 "semantic_snapshot_sha256"
             ],
@@ -894,6 +928,12 @@ def run_expansion_phase0(
         "integration_freeze_sha256": request["integration_freeze_sha256"],
         "venue_reconciliation_sha256": authority["manifest"].get(
             "venue_reconciliation_sha256",""
+        ),
+        "owner_preintegration_correction_sha256": authority["manifest"].get(
+            "owner_preintegration_correction_sha256", ""
+        ),
+        "owner_preintegration_correction_receipt": authority["manifest"].get(
+            "owner_preintegration_correction"
         ),
         "package_member_sha256": authority["manifest"][
             "package_member_sha256"
@@ -970,6 +1010,12 @@ def run_expansion_phase0(
         "venue_reconciliation_sha256": authority["manifest"].get(
             "venue_reconciliation_sha256",""
         ),
+        "owner_preintegration_correction_sha256": authority["manifest"].get(
+            "owner_preintegration_correction_sha256", ""
+        ),
+        "owner_preintegration_correction_receipt": authority["manifest"].get(
+            "owner_preintegration_correction"
+        ),
         "semantic_snapshot_sha256": authority[
             "semantic_snapshot_sha256"
         ],
@@ -998,6 +1044,12 @@ def run_expansion_phase0(
             "venue_reconciliation_sha256": authority["manifest"].get(
                 "venue_reconciliation_sha256",""
             ),
+        "owner_preintegration_correction_sha256": authority["manifest"].get(
+            "owner_preintegration_correction_sha256", ""
+        ),
+        "owner_preintegration_correction_receipt": authority["manifest"].get(
+            "owner_preintegration_correction"
+        ),
             "semantic_snapshot_sha256": authority[
                 "semantic_snapshot_sha256"
             ],
@@ -1074,6 +1126,8 @@ def verify_expansion_phase0_equivalence(
         "stage1_control_authority_sha",
         "integration_freeze_sha256",
         "venue_reconciliation_sha256",
+        "owner_preintegration_correction_sha256",
+        "owner_preintegration_correction_receipt",
         "semantic_snapshot_sha256",
         "repository_validation",
     ):
@@ -1109,6 +1163,17 @@ def verify_expansion_phase0_equivalence(
         raise Stop(
             "EXPANSION_PHASE0_FRESH_UNEXPECTED_VENUE_RECONCILIATION_SIDECAR"
         )
+    correction_sha = str(successor.get("owner_preintegration_correction_sha256") or "")
+    if correction_sha:
+        if sidecars.get("owner-preintegration-correction.json") != correction_sha:
+            raise Stop("EXPANSION_PHASE0_FRESH_OWNER_CORRECTION_SIDECAR_MISMATCH")
+        receipt = successor.get("owner_preintegration_correction_receipt")
+        if not isinstance(receipt, dict) or receipt.get(
+            "artifact_sha256"
+        ) != correction_sha:
+            raise Stop("EXPANSION_PHASE0_FRESH_OWNER_CORRECTION_RECEIPT_MISMATCH")
+    elif "owner-preintegration-correction.json" in sidecars:
+        raise Stop("EXPANSION_PHASE0_FRESH_UNEXPECTED_OWNER_CORRECTION_SIDECAR")
 
     request_path = (
         ".remote-implementation/requests/%s/request.json"
@@ -1168,6 +1233,15 @@ def verify_expansion_phase0_equivalence(
         != successor["semantic_snapshot_sha256"]
     ):
         raise Stop("EXPANSION_PHASE0_FRESH_SEMANTIC_MISMATCH")
+    if (
+        reconstructed["authority"]["manifest"].get(
+            "owner_preintegration_correction_sha256", ""
+        ) != successor.get("owner_preintegration_correction_sha256", "")
+        or reconstructed["authority"]["manifest"].get(
+            "owner_preintegration_correction"
+        ) != successor.get("owner_preintegration_correction_receipt")
+    ):
+        raise Stop("EXPANSION_PHASE0_FRESH_OWNER_CORRECTION_REPLAY_MISMATCH")
     if reconstructed["changed_paths"] != successor["changed_paths"]:
         raise Stop("EXPANSION_PHASE0_FRESH_CHANGED_PATH_MISMATCH")
 
@@ -1199,6 +1273,12 @@ def verify_expansion_phase0_equivalence(
         ],
         "venue_reconciliation_sha256": successor.get(
             "venue_reconciliation_sha256",""
+        ),
+        "owner_preintegration_correction_sha256": successor.get(
+            "owner_preintegration_correction_sha256", ""
+        ),
+        "owner_preintegration_correction_receipt": successor.get(
+            "owner_preintegration_correction_receipt"
         ),
         "semantic_snapshot_sha256": successor[
             "semantic_snapshot_sha256"

@@ -67,6 +67,20 @@ def startup_intent() -> dict:
     }
 
 
+
+def owner_correction_reference() -> dict:
+    return {
+        "authority_kind": "CONTROL_CENTER_OWNER_APPROVED_PREINTEGRATION_V1",
+        "approval_issue_url": "https://github.com/example/repository/issues/720",
+        "school_key": "example",
+        "freeze_sha256": "1" * 64,
+        "sha256": "a" * 64,
+        "owner_checkpoint_sha256": "a" * 64,
+        "path": ".remote-implementation/transports/example/owner-correction.json",
+        "approved_source_game_ids": ["EXP-1", "EXP-2"],
+    }
+
+
 def recovered_idle_state(disposition: str) -> dict:
     state = initial_control_state()
     failed_request = "example-expansion-phase0-failed"
@@ -220,6 +234,41 @@ class ExpansionStartupIntentTests(unittest.TestCase):
             "example-expansion-phase0-0001",
         )
 
+
+    def test_owner_correction_is_bound_from_startup_to_guarded_phase0(self):
+        intent = startup_intent()
+        ref = owner_correction_reference()
+        intent["owner_correction"] = ref
+        validate_startup_intent(intent)
+        request = build_phase0_request(
+            intent,
+            predecessor_commit="6" * 40,
+            predecessor_state_sha256="7" * 64,
+            proof_path=".remote-implementation/startups/example/proof.json",
+            proof_sha256="8" * 64,
+            integration_freeze_sha256="9" * 64,
+            stage1_control_authority_sha="a" * 40,
+            venue_reconciliation_ref=None,
+        )
+        validate_request(request)
+        self.assertEqual(request["owner_correction"], ref)
+        self.assertFalse(request["authority"]["owner_gate_1"])
+        self.assertFalse(request["authority"]["owner_gate_2"])
+
+    def test_owner_correction_cannot_be_rebound_to_other_school_or_freeze(self):
+        for key, replacement in (
+            ("school_key", "other"),
+            ("freeze_sha256", "0" * 64),
+            ("owner_checkpoint_sha256", "0" * 64),
+            ("approved_source_game_ids", ["EXP-1", "EXP-1"]),
+        ):
+            with self.subTest(key=key):
+                intent = startup_intent()
+                intent["owner_correction"] = owner_correction_reference()
+                intent["owner_correction"][key] = replacement
+                with self.assertRaises(ValueError):
+                    validate_startup_intent(intent)
+
     def test_target_branch_is_exact_school_onboarding_predecessor(self):
         value = startup_intent()
         value["target_branch"] = "data/other-onboarding"
@@ -306,6 +355,37 @@ class ExpansionStartupProofTests(unittest.TestCase):
             proof["identity_counts"]["PROVISIONAL_NEW"],
             101,
         )
+
+
+    def test_owner_correction_receipt_is_carried_into_independent_proof(self):
+        report = {
+            "canonical_identity_census": {"counts": {
+                "REUSE_CANONICAL": 1, "PROVISIONAL_NEW_CANONICAL": 2,
+                "IDENTITY_REVIEW_BLOCKER": 0}},
+            "global_venue_reconciliation": {"counts": {}},
+            "census": {
+                "opponent_support_actions": {},
+                "venue_support_actions": {}},
+            "blockers": [{"class": "DOWNSTREAM_EXPANSION_INTEGRATION_FREEZE_AND_GUARDED_PHASE0_MISSING"}],
+            "owner_preintegration_correction": {
+                "kind": "PREINTEGRATION_OWNER_CORRECTION_RECEIPT",
+                "artifact_sha256": "a" * 64,
+                "owner_gate_1_approval": False,
+            },
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for name in (*PACKAGE_FILES, STAGE1_REPORT):
+                (root / name).write_text(name, encoding="utf-8")
+            proof = build_stage1_proof(
+                report, root, protected_main_sha="1" * 40,
+                research_base_sha="2" * 40,
+                freeze_zip_sha256="3" * 64,
+                stage1_control_authority_sha="4" * 40)
+        self.assertEqual(
+            proof["owner_preintegration_correction"],
+            report["owner_preintegration_correction"])
+        self.assertFalse(proof["integration_freeze_authorized"])
 
     def test_child_request_is_ordinary_guarded_expansion_phase0(self):
         intent = startup_intent()

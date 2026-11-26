@@ -388,6 +388,18 @@ site, venue, opponent, or a controlling canonical fact merely to make the workfl
 pass. Preserve source `raw_text`, explicit researched-unresolved metadata, and approved
 unresolved discrepancies.
 
+### Exceptional owner-approved pre-Integration expansion corrections
+
+A genuine and explicitly owner-approved historical correction needed before
+All-History expansion Integration Freeze may use only the narrow, hash-bound
+candidate-only overlay defined by
+`docs/expansion-preintegration-owner-correction-contract.md` after explicit
+Control Center authorization for that exact scope. It never changes the
+original Research Freeze, never creates a generic historical override, and
+never substitutes for complete Owner Gate 1. All original Stage 1, Integration
+Freeze, guarded Phase 0, independent replay, seal, Preview and Production
+boundaries remain in force.
+
 ## All-History expansion Implementation acceptance boundary
 
 Before any **new** ALL_HISTORY_EXPANSION school acquires the serialized Implementation lane, current protected `main` must pass:

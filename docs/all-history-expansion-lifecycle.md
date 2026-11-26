@@ -278,6 +278,18 @@ baseline package through Research acceptance rules adopted after that package
 was accepted.
 
 
+### Explicitly approved pre-Integration historical correction exception
+
+Where an owner-approved historical correction is required to clear an otherwise
+unavoidable Stage 1 identity deadlock, and the Control Center has authorized
+the exact scope, a generic hash-bound *candidate-only* overlay may be consumed
+from a separately authenticated artifact. The original Research Freeze remains
+unchanged. The strict allowed fields, source-row evidence preservation, receipt
+binding, complete Integration Freeze / Phase 0 replay and later mandatory owner
+gates are defined by
+`docs/expansion-preintegration-owner-correction-contract.md`.
+This does not make other historical disputes pre-Gate editable.
+
 ## 12. Implementation boundary
 
 Research completion alone does not expand publication.

@@ -75,6 +75,18 @@ class AllHistoryExpansionImplementationAcceptanceTests(unittest.TestCase):
         self.assertIn("  validate:", bundled)
         self.assertIn("  rehearse:", bundled)
 
+    def test_preintegration_tooling_requires_stage1_suite_not_stage2_checkpoint(self):
+        workflow = (ROOT / ".github/workflows/stage2-candidate-runtime-rehearsal.yml").read_text(encoding="utf-8")
+        # No Stage 2 checkpoint exists before Expansion Phase 0; this narrowly
+        # scoped tooling family has its own required Stage 1 and known-good CI.
+        self.assertIn(
+            "!startsWith(github.event.pull_request.head.ref, 'tooling/expansion-preintegration-')",
+            workflow,
+        )
+        self.assertIn("github.event_name == 'workflow_dispatch' ||", workflow)
+        self.assertIn("!contains(github.event.pull_request.head.ref, 'expansion-stage1-')", workflow)
+        self.assertIn("startsWith(github.event.pull_request.head.ref, 'tooling/')", workflow)
+
     def test_curated_suite_includes_all_owner_phase_boundaries(self):
         patterns = set(acceptance.ACCEPTANCE_TEST_PATTERNS)
         required = {
