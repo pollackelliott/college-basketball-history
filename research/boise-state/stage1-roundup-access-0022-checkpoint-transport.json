@@ -1,0 +1,20 @@
+{
+  "checkpoint": 22,
+  "kind": "ALL_HISTORY_EXPANSION_STAGE1_PORTABLE_RESEARCH_CHECKPOINT",
+  "school_key": "boise-state",
+  "status": "STAGE_1_IN_PROGRESS",
+  "zip_filename": "boise-state-expansion-stage1-roundup-access-0022.zip",
+  "zip_sha256": "0bac46619ee87550f80ff0d19c33d3624ef16f363c93ea64588eff6152fcf918",
+  "parent_zip_sha256": "dc136bdf385bb9a120a21da7e640b040f3b71b311bbf4ccf7cfd1634933cf00d",
+  "parent_research_head": "2950ed0d7d3f464c3dd05eb7b75bb80581cc0fe7",
+  "protected_main_at_start": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "manifested_members": 55,
+  "accepted_games": 202,
+  "new_accepted": 0,
+  "repaired_games": 0,
+  "junior_college_accepted": 147,
+  "official_season_jc_accepted": 146,
+  "aggregate_arithmetic_difference_not_proven_missing_games": 641,
+  "accounting_seasons": 38
+}
