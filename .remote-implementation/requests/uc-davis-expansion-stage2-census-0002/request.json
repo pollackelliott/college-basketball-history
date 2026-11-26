@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-expansion-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "271abaa70fb2d9ed9de18adad9c7a5b5a3098caf",
+  "previous_control_state_sha256": "0a8393f3aa48ee4ec20a76a2d1994a24e9f19174ac6d7175dd78ae0c542740bf",
+  "expected_protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-phase0-0004/successor-manifest.json",
+    "sha256": "89c3ff2dd7ab7bf901d32041897bc2f905c1ae7cab51ff2c7a2d7320b0168c41"
+  },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "48b24252a6ab7e413598a71c48a11f9209df6984ff3b5514b2f051949935036a"
+  },
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "creation_provenance": {
+    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION serialized Implementation lane; fresh read-only Stage 2 census after verified disjoint current-main refresh 0001 on merged generic venue tooling PR #726.",
+    "authorization": "Existing owner-authorized Stage 2 persists. Control sequence 774 IDLE COMPLETE, fresh verified refresh predecessor 51f84766ecb2df83681d91124c61d4c81be9a6cb, exact Phase 0 authority and frozen historical source unchanged. Previous census 0001 was mechanically blocked by one registered Dayton opponent-host venue and seven historical opponent-display conflicts. Exact candidate-runtime PR #726 removed Dayton alone without new blockers; permanent Stage 2 census must now independently confirm the full population on current main. This authorizes read-only discovery and independently fresh-verified checkpoint only. No tracked opponent display mutation, owner choices, proposal/map, seal, apply, release, merge, Preview, Gate 1/2 or Production."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
