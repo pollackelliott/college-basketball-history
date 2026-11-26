@@ -1,0 +1,43 @@
+{
+  "kind": "FRESNO_ALL_HISTORY_EXPANSION_STAGE1_RECIPROCAL_SOURCE_BOUNDARY_0006",
+  "status": "CONTEMPORANEOUS_SOURCE_FANOUT_BOUNDED__EXACT_UNRESOLVED_POPULATION_PRESERVED__STAGE1_OPEN",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_commit_sha": "dde02b74f0a16231b57cf07a7bb70a795ef7a7c7",
+  "observed_protected_main_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
+  "parent_ledger_git_blob_sha": "a566710a97d9aed2a3973daef43b38bb6cd3b8db",
+  "parent_queue_git_blob_sha": "bb9a6c9d39fad61ff4a8cecc0c1ef8d961f28a38",
+  "parent_audit_git_blob_sha": "380da58ac7d11e15390cac80e05a9a6624eb6197",
+  "parent_source_entries": 1034,
+  "parent_provisional_nonexhibition_identity_groups": 1031,
+  "changed_source_entry_ids": [],
+  "number_of_newly_accepted_real_game_identities": 0,
+  "number_of_newly_merged_source_rows": 0,
+  "number_of_new_opponent_corrections": 0,
+  "verified_uc_davis_reciprocal_seasons": [
+    {
+      "season": "1922-23",
+      "season_result_rows": 13,
+      "total_fresno_results": 2
+    },
+    {
+      "season": "1926-27",
+      "season_result_rows": 10,
+      "total_fresno_results": 2
+    }
+  ],
+  "primary_contemporary_article_directly_inspected": false,
+  "archival_access_limitations": [
+    "CDNC 403",
+    "Fresno contentDM timeout",
+    "Fresno 1927 Campus yearbook catalog only",
+    "UC Davis 1927 The Rodeo yearbook catalog only"
+  ],
+  "material_residual_population": [
+    "FS-1926-27-UCD-COUNT",
+    "FS-1922-23-SEASON-COUNT"
+  ],
+  "explicit_prior_78_rows_unmodified": true,
+  "published_1708_baseline_unmodified": true,
+  "accepted_publication_scope": "1970-71+",
+  "next_unit_scope": "Stage 1 coherent intraprogram and other exhibition inclusion review, or direct contemporaneous 1926-27 Davis source if genuinely accessible; no owner gate"
+}
