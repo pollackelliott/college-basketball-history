@@ -1,0 +1,24 @@
+{
+  "kind": "FRESNO_STAGE1_UNUSUAL_OPPONENT_0008",
+  "status": "OCCIDENTAL_EXTERNAL_FROSH_COMPETITIVE_INCLUSION_SUPPORTED__HARLEM_INCLUSION_PENDING__STAGE1_OPEN",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_research_commit_sha": "0467c8d31ef167f8e19bcb87b4a25092add1e31c",
+  "source_ledger_blob_sha": "adb243c1fa62a240a7dc60de49eb6f4246c8ba7d",
+  "source_checkpoint_0007_audit_blob_sha": "028f7a6f29cbb433e086a1337c9ba4c16e10e074",
+  "ledger_source_entry_count": 1034,
+  "original_owner_excluded_research_rows": 78,
+  "annotated_source_entry_ids": [
+    "FRESNO-EXP-CAND-1922-23-013",
+    "FRESNO-EXP-CAND-1953-54-018"
+  ],
+  "known_source_exclusion_count": 17,
+  "provisional_nonexhibition_identity_group_count": 1015,
+  "accepted_source_game_inclusion_refinements": 1,
+  "unresolved_specific_harlem_inclusion_count": 1,
+  "no_new_game_ids": true,
+  "no_identity_group_merges": true,
+  "no_source_literal_score_or_result_changes": true,
+  "published_fresno_rows_unchanged": 1708,
+  "owner_published_scope_unchanged": "1970-71+",
+  "next_recommended_bounded_unit": "Stage 1 season-level accounting, 1922-23 and 1965-66 without new anonymous games."
+}
