@@ -1,0 +1,23 @@
+{
+  "checkpoint": 26,
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "school_key": "boise-state",
+  "status": "STAGE_1_IN_PROGRESS",
+  "zip_filename": "boise-state-expansion-stage1-argonaut-1966-frosh-columbia-basin-0026.zip",
+  "zip_sha256": "5378bcfeac891b04e2c1ec7a36d651c8ef1dc5bf5895d93ffdf353e0c343bbdd",
+  "parent_zip_sha256": "fb202268a100e8fa87d10274a3633eba795bb6d3dfa3628317a3c9a4c2c03352",
+  "parent_research_head": "036f4306ea6c9970e4154e2ffaed044a7b6c8d4b",
+  "protected_main_at_unit_start": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "immutable_research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "manifested_members": 77,
+  "accepted_games": 217,
+  "inherited_accepted": 213,
+  "new_accepted": 4,
+  "existing_repairs": 0,
+  "junior_college_accepted": 162,
+  "official_listed_junior_college_accepted": 161,
+  "official_jc_aggregate": 787,
+  "arithmetic_difference_not_verified_missing_game_identities": 626,
+  "season_rows": 38
+}
