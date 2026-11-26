@@ -811,7 +811,7 @@
     "uc-davis-expansion-phase0-0004"
   ],
   "active_expected_main_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
-  "active_lock_commit": null,
+  "active_lock_commit": "96edd84f03670b929586b22d863d610b0691dae6",
   "active_lock_owner": "github-actions:45834456339:1",
   "active_operation": "EXPANSION_PHASE0",
   "active_prepared_commit_sha": null,
