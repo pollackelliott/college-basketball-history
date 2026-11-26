@@ -814,15 +814,15 @@
   "active_lock_commit": "96edd84f03670b929586b22d863d610b0691dae6",
   "active_lock_owner": "github-actions:45834456339:1",
   "active_operation": "EXPANSION_PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "948468477bf2159094f3c3935b95117c10434e11",
+  "active_prepared_tree_sha": "bb8b434c6facba4df867c02b92d65b669870a99e",
   "active_request_id": "uc-davis-expansion-phase0-0004",
   "active_request_sha256": "44dedd8b0216533c05c20bdb3618010b1c5ba9f629347e0835fcb409f061c6aa",
   "active_school_key": "uc-davis",
   "active_target_branch": "data/uc-davis-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/uc-davis/uc-davis-expansion-phase0-0004/writeahead-manifest.json",
+  "active_writeahead_sha256": "fbe6836ef1b1828b2ac855b31ea3bcd3fdb992ae152e494982286acc114b28aa",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1621,5 +1621,5 @@
   "lock_acquisition_request_commit": "89122fb6d2bfbb2a2b6362091104970deb70ac49",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }
