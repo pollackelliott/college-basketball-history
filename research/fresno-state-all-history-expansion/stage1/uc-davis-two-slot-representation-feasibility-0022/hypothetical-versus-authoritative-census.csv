@@ -1,0 +1,4 @@
+scenario,season,game_count,fresno_wins,fresno_losses,uc_davis_source_games_attached,uc_davis_scored_claims_attached,source_representation_status,is_actual_authoritative_stage1_ledger
+"CURRENT_AUTHENTICATED_0013_WORKING","1926-27","16","8","8","0","0","FOUR_PENDING_UNACCEPTED_SOURCE_GROUPS","YES"
+"TWO_SLOT_NONMUTATING_FEASIBILITY_ONLY","1926-27","18","10","8","2","0","FOUR_FRESNO_CLAIMS_UNPAIRED__TWO_SOURCE_POSITIONS_SCORE_UNKNOWN","NO"
+"FRESNO_GUIDE_LITERAL_SOURCE_LAYER","1926-27","20","12","8","4","4","FOUR_SCORED_LINES_UNAUTHENTICATED_AS_FOUR_DISTINCT_GAMES","NO"

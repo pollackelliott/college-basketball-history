@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_UC_DAVIS_1926_27_TWO_OPPONENT_SLOTS_FEASIBILITY_0022",
+  "status": "READ_ONLY_ANALYTICAL_TWO_SLOT_MODEL_FEASIBLE__STAGE1_RECONCILIATION_STILL_BLOCKED__NO_GAME_MUTATIONS",
+  "protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "research_parent_commit_sha": "495f0d87d1c81265f70b6d58a7430834ec3090ce",
+  "research_parent_tree_sha": "b0615240b2ca4003d6548ad7b2fc0eb3e15f0bbe",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "preserved_git_blobs": {
+    "accepted_games": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "source_rows": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "pending_groups": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+    "census": "4b120557181c5beaaed5911bc239b0c91dd9ea81",
+    "raw_guide": "fc72b2862aa283481d498873af0a17fa1d7e405a",
+    "checkpoint0021_audit": "2155427f9de370668ba34f4d0080d37c594b0f86"
+  },
+  "source_proof": {
+    "uc_davis_official_2026_url": "https://ucdavisaggies.com/sports/2026/5/19/mens-basketball-record-book.aspx",
+    "uc_davis_1926_27_record": "2-8",
+    "uc_davis_total_games": 10,
+    "fresno_opponent_row_ordinals": [
+      4,
+      5
+    ],
+    "uc_davis_recorded_results": [
+      "L",
+      "L"
+    ],
+    "source_dates": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "source_scores": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "uc_davis_2007_08_edition_same_institution_lineage": true,
+    "fresno_2025_four_result_source_ids": [
+      "FRESNO-EXP-CAND-1926-27-006",
+      "FRESNO-EXP-CAND-1926-27-007",
+      "FRESNO-EXP-CAND-1926-27-012",
+      "FRESNO-EXP-CAND-1926-27-013"
+    ],
+    "fresno_four_scores": [
+      "31-18",
+      "25-13",
+      "31-14",
+      "31-18"
+    ],
+    "match_specific_source_pairing_proven": false
+  },
+  "accounting": {
+    "authenticated_1926_27_working_games": 16,
+    "authenticated_1926_27_working_w": 8,
+    "authenticated_1926_27_working_l": 8,
+    "analytical_reciprocal_fresno_win_slots": 2,
+    "analytical_game_count_if_both_included": 18,
+    "analytical_record_if_both_included": "10-8",
+    "retrospective_fresno_guide_result_rows": 20,
+    "retrospective_fresno_guide_record": "12-8",
+    "difference_of_guide_v_candidate": "2 W and 2 games",
+    "accepted_total_games_before": 1009,
+    "accepted_total_games_after": 1009,
+    "candidate_total_if_safely_accepted_in_future": 1011
+  },
+  "policy_test": {
+    "unknown_score_permitted_only_after_identity_stable": true,
+    "unknown_date_permitted_only_after_identity_stable": true,
+    "two_source_slots_alone_close_1926_27": false,
+    "surplus_four_claims_adjudicated": false,
+    "source_aggregate_12_8_explained": false,
+    "source_explicit_missing_game_exception_eligible": false,
+    "owner_historical_choice_generated": false
+  },
+  "unchanged": {
+    "accepted_game_count": 1009,
+    "accepted_game_ids_mutated": 0,
+    "accepted_game_rows_added": 0,
+    "accepted_game_rows_removed": 0,
+    "source_claims_reclassified": 0,
+    "uc_davis_pending_group_count": 4,
+    "total_pending_source_groups": 6,
+    "season_census_rows": 49,
+    "stage1_complete": false,
+    "stage2_authorized": false,
+    "main_mutated": false,
+    "published_history_mutated": false,
+    "shared_registry_mutated": false
+  },
+  "next_unit": "One genuine contemporary 1927 exact game source or precise historical-authority decision about class-level 4-to-2 conflicting source representation with preserved literal scores; no blind score selection."
+}

@@ -1,0 +1,9 @@
+test_id,criterion,result,reason,research_row_mutation_authorized
+"SOURCE_2_DAVIS_ROWS","Davis complete 1926-27 ledger contains two Fresno losses","PASS","Consecutive fourth and fifth listed Davis season games; distinct opponent result representations","NO"
+"SOURCE_FRESNO_RESULT","Can infer Fresno W for both Davis losses","PASS_SOURCE_ONLY","Davis source result L in both rows","NO"
+"DATE_SCORE_BLANK","Can hold exact score and date UNKNOWN when game identity independently established","CONDITIONAL_PASS","Stage1 section 3 nonblocking field debt only after identity and inclusion stable","NO"
+"TYPE","REGULAR_SEASON game type definitively stable","CANDIDATE_ONLY","Year-by-year records without postseason marker; cannot write type without acceptance","NO"
+"RESEARCH_IDS","Stable accepted Fresno research local IDs for two Davis slots","NOT_ATTEMPTED","Diagnostic row ordinal is not approved source/research game identity","NO"
+"FOUR_FRESNO_SOURCE_ROWS","Exact disposition and attribution of all four Fresno scored entries","FAIL","No dates, scores, or proof to map or dedup any particular row","NO"
+"SEASON_COUNTS","Fresno guide 12-8 vs proposed 10-8 explained with a safe game universe","FAIL_FOR_CLOSEOUT","Difference two wins/two games, cannot assert any particular row is duplicate","NO"
+"STAGE1_COMPLETE","All Stage1 game-universe and accounting blockers resolved","FAIL","Four Davis groups plus two Clowns, extra 1965-66 loss and 1923 opponent chronology remain","NO"
