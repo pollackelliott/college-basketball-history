@@ -1,28 +1,27 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "uc-davis-expansion-stage2-current-main-refresh-0001",
-  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "request_id": "uc-davis-expansion-stage2-census-0002",
+  "operation": "STAGE2_CENSUS",
   "school_key": "uc-davis",
-  "previous_control_state_commit": "2eeeaf3c9af26a3ff2482fd773ff00364d260ab8",
-  "previous_control_state_sha256": "5699f72941f884e35a5bc2272581ac47ae54ccb36b42680a9ae18009947c59ef",
+  "previous_control_state_commit": "271abaa70fb2d9ed9de18adad9c7a5b5a3098caf",
+  "previous_control_state_sha256": "0a8393f3aa48ee4ec20a76a2d1994a24e9f19174ac6d7175dd78ae0c542740bf",
   "expected_protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
   "target_branch": "data/uc-davis-onboarding",
-  "target_sha": "948468477bf2159094f3c3935b95117c10434e11",
+  "target_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
   "phase0_successor": {
     "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-phase0-0004/successor-manifest.json",
     "sha256": "89c3ff2dd7ab7bf901d32041897bc2f905c1ae7cab51ff2c7a2d7320b0168c41"
   },
+  "stage2_current_main_refresh_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-current-main-refresh-0001/successor-manifest.json",
+    "sha256": "48b24252a6ab7e413598a71c48a11f9209df6984ff3b5514b2f051949935036a"
+  },
   "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
   "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
-  "current_main_refresh_authorization": {
-    "approved": true,
-    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
-    "authorization_basis": "Existing owner-authorized UC Davis ALL_HISTORY_EXPANSION Implementation Stage 2 persists after generic tooling-only PR #726 merged as exact protected main 4a9a18090523f5240bdd0fc2dc361430bab98a51. Permanent read-only Stage 2 census 0001 is fresh verified BLOCKED only by eight preflight representation items on main 31cccfdac5b676bde3f914c63e7239ef7cb132d5; exact PR #726 candidate-runtime rehearsal removed only the settled Dayton VEN-001043 package validator blocker without adding any blocker, leaving exactly seven existing historical opponent-display naming conflicts, with no tracked mutation. Exact merge base between current UC Davis target 948468477bf2159094f3c3935b95117c10434e11 and current main is 31cccfdac5b676bde3f914c63e7239ef7cb132d5. Target-only paths (8): data/reference/programs.csv, data/reference/venue-names.csv, data/reference/venues.csv, schools/uc-davis/notes.md, schools/uc-davis/opponents.csv, schools/uc-davis/source-games.csv, schools/uc-davis/source-notes.md, schools/uc-davis/venues.csv. Main-only paths (6): .github/workflows/all-history-expansion-stage1-validation.yml, docs/implementation-pre-gate-adversarial-challenge.md, tests/test_registered_opponent_home_venue.py, tools/ingest_school.py, tools/onboarding_plan.py, tools/venue_reference.py. Overlap zero; protected main changed no UC Davis school package path. Preserve original independently verified Phase 0 successor, immutable Integration Freeze and semantic snapshot. Execute one guarded disjoint-path target refresh only; the resulting exact successor must pass fresh independent verifier before a separately authorized read-only census. No prior recommendation map or nonempty decision universe exists, so automatic refresh-census-proposal carry-forward is inapplicable."
-  },
   "creation_provenance": {
-    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION serialized Implementation lane. Owner Continue during Stage 2 after exact-head PR #726 merged; no new Research, new school lane, or policy gate.",
-    "authorization": "Existing Stage 2 authority only: one guarded disjoint current-main refresh and independent equivalence verification. The next census must be independently regenerated from refreshed authority, with separate exact request. No Phase 0 restart, opponent-display mutation, historical judgment, shared/global reference decision, Owner Gate 1 or 2, seal/apply, release, Preview, merge, or Production authorized by this request."
+    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION serialized Implementation lane; fresh read-only Stage 2 census after verified disjoint current-main refresh 0001 on merged generic venue tooling PR #726.",
+    "authorization": "Existing owner-authorized Stage 2 persists. Control sequence 774 IDLE COMPLETE, fresh verified refresh predecessor 51f84766ecb2df83681d91124c61d4c81be9a6cb, exact Phase 0 authority and frozen historical source unchanged. Previous census 0001 was mechanically blocked by one registered Dayton opponent-host venue and seven historical opponent-display conflicts. Exact candidate-runtime PR #726 removed Dayton alone without new blockers; permanent Stage 2 census must now independently confirm the full population on current main. This authorizes read-only discovery and independently fresh-verified checkpoint only. No tracked opponent display mutation, owner choices, proposal/map, seal, apply, release, merge, Preview, Gate 1/2 or Production."
   },
   "authority": {
     "expansion_phase0": false,
@@ -37,8 +36,8 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": false,
-    "stage2_current_main_refresh": true,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
