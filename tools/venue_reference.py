@@ -134,10 +134,10 @@ def _registry_venue_boundary(value: str, *, end: bool) -> dt.date | None:
     if not value:
         return None
     try:
-        if re.fullmatch(r"\\d{4}", value):
+        if re.fullmatch(r"\d{4}", value):
             year = int(value)
             return dt.date(year, 12 if end else 1, 31 if end else 1)
-        if re.fullmatch(r"\\d{4}-\\d{2}", value):
+        if re.fullmatch(r"\d{4}-\d{2}", value):
             year, month = map(int, value.split("-"))
             return dt.date(year, month, calendar.monthrange(year, month)[1] if end else 1)
         return dt.date.fromisoformat(value)
