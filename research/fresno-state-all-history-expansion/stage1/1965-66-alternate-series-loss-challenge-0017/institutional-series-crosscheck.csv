@@ -1,0 +1,10 @@
+opponent,season,target_year_by_year_source_results,older_fresno_2023_24_series_result,source_match_count,additional_distinct_game_found,independence_status,effect
+"Pacific","1965-66","Fresno L62-82","Pacific W82-62 (Fresno L62-82)","1","NO","SAME_TARGET_INSTITUTION_RETROSPECTIVE","CONFIRMS_INTERNAL_LOSS_VARIANT"
+"Texas Western (UTEP)","1965-66","Raw W75-73 and L65-83; corrected curated Fresno L73-75 and L65-83","2023-24 series lists both Fresno losses","2","NO","UTEP_INDEPENDENT_RECIPROCAL_AND_FRESNO_TARGET","PRESERVE_0010_RESULT_CORRECTION"
+"San Diego State","1965-66","W86-49; L66-69 twice printed","Dated Fresno opponent series one W and one L","2","NO","SAME_TARGET_INSTITUTION_RETROSPECTIVE","PRESERVE_DUPLICATE_SOURCE_REPRESENTATION_OF_ONE_LOSS"
+"U.S. International","1965-66","Fresno W68-50 and L58-68","Fresno W68-50 (H); U.S. International W68-58 (A)","2","NO","SAME_TARGET_INSTITUTION_RETROSPECTIVE","NO_ADDITIONAL_LOSS"
+"Cal Poly Pomona","1965-66","Fresno W80-72 and L70-72","Fresno W80-72 (H); Cal Poly Pomona W72-70 (A)","2","NO","SAME_TARGET_INSTITUTION_RETROSPECTIVE","NO_ADDITIONAL_LOSS"
+"CSU Los Angeles","1965-66","Fresno W73-69 and W74-69","Fresno W73-69 (A) and W74-69 (H)","2","NO","SAME_TARGET_INSTITUTION_RETROSPECTIVE","NO_ADDITIONAL_LOSS"
+"Chico State","1965-66","Fresno W79-49","Fresno W79-49 (H)","1","NO","SAME_TARGET_INSTITUTION_RETROSPECTIVE","NO_ADDITIONAL_LOSS"
+"Seattle Pacific","1965-66","Fresno W64-58 (NCAA)","Fresno W68-53 (H^), same score listed 1963-64","1_GAME__SCORE_CONFLICT","NO","CCAA_NCAA_TOURNAMENT_AND_TARGET_RETROSPECTIVE","PRESERVE_CURATED_W64_58;QUEUE_SCORED_SOURCE_VARIANT"
+"Southern Illinois","1965-66","Fresno L70-93 (NCAA)","No new 2023-24 series evidence relied upon","1","NO","INDEPENDENT_CCAA_NCAA_TOURNAMENT","PRESERVE_CURATED_POSTSEASON_LOSS"
