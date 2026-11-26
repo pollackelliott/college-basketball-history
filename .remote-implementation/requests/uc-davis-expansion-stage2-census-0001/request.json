@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-expansion-stage2-census-0001",
+  "operation": "STAGE2_CENSUS",
+  "school_key": "uc-davis",
+  "previous_control_state_commit": "9840a60a50389983c9e013c93dbf7198cb6892e7",
+  "previous_control_state_sha256": "f08fd253bc67b1816cd9290eb66e1e3fb1d24cabf820fa5eb4e9a2e6b72d49a4",
+  "expected_protected_main_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "948468477bf2159094f3c3935b95117c10434e11",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-phase0-0004/successor-manifest.json",
+    "sha256": "89c3ff2dd7ab7bf901d32041897bc2f905c1ae7cab51ff2c7a2d7320b0168c41"
+  },
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "creation_provenance": {
+    "origin": "Existing UC Davis ALL_HISTORY_EXPANSION serialized Implementation lane: owner-authorized Stage 2 capability census after independently verified guarded expansion Phase 0 0004.",
+    "authorization": "Owner replied Proceed after successful fresh Phase 0 verification, complete stable source portfolio (1964 supplemental, 668 inherited), zero venue blockers and control IDLE COMPLETE sequence 772. This exact standalone read-only STAGE2_CENSUS uses only existing Phase0 successor, Integration Freeze and semantic snapshot. Stage 2 phase authority persists to later separately validated deterministic reconciliation and proposal work but this request does not authorize tracked repairs, opponent-display mutation, proposal/map, Owner Gate 1/2, seal/apply, release, shared/global maintenance, merge, or Production."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}
