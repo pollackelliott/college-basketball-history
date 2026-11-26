@@ -1,0 +1,47 @@
+{
+  "blockers": [
+    "historical opponent display conflict: colorado-colorado-springs: ['Colorado-Colorado Springs', 'UCCS']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: concordia-new-york: ['Concordia (N.Y.)', 'Concordia College (NY)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: loyola-new-orleans: ['Loyola (La.)', 'Loyola (New Orleans)', 'Loyola (new Orleans)', 'Loyola New Orleans', 'Loyola-New Orleans']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: pacific-oregon: ['Pacific (Ore.)', 'Pacific (Oregon)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: saint-marys-minnesota: [\"Saint Mary's (Minn.)\", \"Saint Mary's University of Minnesota\"]. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: united-states-international: ['United States International', 'United States International University']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: washington-st-louis: ['Washington (Mo.)', 'Washington (St. Louis)']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "branch": "remote-stage2-census/uc-davis-51f84766ecb2",
+  "capability_census": {
+    "path": ".onboarding/uc-davis/implementation-stage2-capability-census.json",
+    "status": "PREFLIGHT_BLOCKED",
+    "topology_group_count": 1
+  },
+  "head_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
+  "integration_base_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "integration_semantic_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "next_action": "Classify the complete durable capability census before the first generic tooling repair. Resolve the authoritative preflight blockers as one coherent repair scope where they share a topology, then rerun this same Stage-2 command.",
+  "origin_main_sha_at_integration_freeze": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+  "preflight": {
+    "blocker_count": 7,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/uc-davis/plan.json",
+    "review_path": ".onboarding/uc-davis/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "BLOCKED"
+}
