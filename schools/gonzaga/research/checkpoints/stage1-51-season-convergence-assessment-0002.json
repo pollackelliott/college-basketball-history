@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_CHECKPOINT0043_51_SEASON_CURRENT_LEDGER_CONVERGENCE_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "authority": {
+    "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+    "parent_research_head": "c6cd9046bb9f0584126cdfd7e17f422723ffaa6c",
+    "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "prior_status_path": "schools/gonzaga/research/checkpoints/stage1-status-0042.json",
+    "prior_status_git_blob_sha": "fa8a5dbc9fbce2b56207661be043229b18a83569",
+    "prior_assessment_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-assessment-0001.json",
+    "prior_assessment_git_blob_sha": "cc41bd697803af40a34c3cb4347d3e4ee6e13a9a",
+    "prior_assessment_ledger_rows": 513,
+    "ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0033.csv",
+    "ledger_git_blob_sha": "336f6b8a4f59f874b4aa2a22aa54d34414f79d90",
+    "season_census_path": "schools/gonzaga/research/checkpoints/stage1-season-census-0002.csv",
+    "season_census_git_blob_sha": "3d5937323ad921aac1aac3e3afe7ab24352916a5"
+  },
+  "authoritative_ledger": {
+    "game_count": 557,
+    "unique_ids": 557,
+    "known_result_wins": 214,
+    "known_result_losses": 343,
+    "unknown_results": 0,
+    "games_changed": 0,
+    "field_repairs": 0,
+    "ledger_unchanged": true
+  },
+  "official_season_aggregate": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977,
+    "seasons": 51
+  },
+  "arithmetic_diagnostic_only": {
+    "wins": 263,
+    "losses": 157,
+    "games": 420,
+    "positive_game_count_seasons": 46,
+    "negative_game_count_seasons": 2,
+    "zero_game_count_delta_seasons": 3,
+    "sum_positive_deltas": 425,
+    "sum_negative_deltas": -5,
+    "zero_identified_seasons": [
+      "1917-18"
+    ],
+    "note": "Arithmetic total is not a set of independently established missing games or assignable W/L results."
+  },
+  "population": {
+    "underidentified_season_count": 46,
+    "underidentified_seasons": [
+      {
+        "season": "1907-08",
+        "arithmetic_delta": 9
+      },
+      {
+        "season": "1908-09",
+        "arithmetic_delta": 11
+      },
+      {
+        "season": "1909-10",
+        "arithmetic_delta": 11
+      },
+      {
+        "season": "1910-11",
+        "arithmetic_delta": 8
+      },
+      {
+        "season": "1911-12",
+        "arithmetic_delta": 2
+      },
+      {
+        "season": "1912-13",
+        "arithmetic_delta": 4
+      },
+      {
+        "season": "1913-14",
+        "arithmetic_delta": 2
+      },
+      {
+        "season": "1914-15",
+        "arithmetic_delta": 4
+      },
+      {
+        "season": "1916-17",
+        "arithmetic_delta": 6
+      },
+      {
+        "season": "1917-18",
+        "arithmetic_delta": 5
+      },
+      {
+        "season": "1918-19",
+        "arithmetic_delta": 11
+      },
+      {
+        "season": "1919-20",
+        "arithmetic_delta": 11
+      },
+      {
+        "season": "1920-21",
+        "arithmetic_delta": 9
+      },
+      {
+        "season": "1921-22",
+        "arithmetic_delta": 6
+      },
+      {
+        "season": "1922-23",
+        "arithmetic_delta": 8
+      },
+      {
+        "season": "1923-24",
+        "arithmetic_delta": 9
+      },
+      {
+        "season": "1924-25",
+        "arithmetic_delta": 11
+      },
+      {
+        "season": "1925-26",
+        "arithmetic_delta": 12
+      },
+      {
+        "season": "1926-27",
+        "arithmetic_delta": 14
+      },
+      {
+        "season": "1927-28",
+        "arithmetic_delta": 10
+      },
+      {
+        "season": "1928-29",
+        "arithmetic_delta": 14
+      },
+      {
+        "season": "1931-32",
+        "arithmetic_delta": 2
+      },
+      {
+        "season": "1932-33",
+        "arithmetic_delta": 16
+      },
+      {
+        "season": "1933-34",
+        "arithmetic_delta": 18
+      },
+      {
+        "season": "1934-35",
+        "arithmetic_delta": 11
+      },
+      {
+        "season": "1935-36",
+        "arithmetic_delta": 12
+      },
+      {
+        "season": "1938-39",
+        "arithmetic_delta": 9
+      },
+      {
+        "season": "1939-40",
+        "arithmetic_delta": 15
+      },
+      {
+        "season": "1940-41",
+        "arithmetic_delta": 15
+      },
+      {
+        "season": "1941-42",
+        "arithmetic_delta": 12
+      },
+      {
+        "season": "1942-43",
+        "arithmetic_delta": 2
+      },
+      {
+        "season": "1943-44",
+        "arithmetic_delta": 10
+      },
+      {
+        "season": "1944-45",
+        "arithmetic_delta": 15
+      },
+      {
+        "season": "1945-46",
+        "arithmetic_delta": 11
+      },
+      {
+        "season": "1946-47",
+        "arithmetic_delta": 13
+      },
+      {
+        "season": "1947-48",
+        "arithmetic_delta": 13
+      },
+      {
+        "season": "1948-49",
+        "arithmetic_delta": 14
+      },
+      {
+        "season": "1949-50",
+        "arithmetic_delta": 4
+      },
+      {
+        "season": "1950-51",
+        "arithmetic_delta": 14
+      },
+      {
+        "season": "1951-52",
+        "arithmetic_delta": 9
+      },
+      {
+        "season": "1952-53",
+        "arithmetic_delta": 7
+      },
+      {
+        "season": "1953-54",
+        "arithmetic_delta": 9
+      },
+      {
+        "season": "1954-55",
+        "arithmetic_delta": 3
+      },
+      {
+        "season": "1955-56",
+        "arithmetic_delta": 5
+      },
+      {
+        "season": "1956-57",
+        "arithmetic_delta": 5
+      },
+      {
+        "season": "1957-58",
+        "arithmetic_delta": 4
+      }
+    ],
+    "source_accounting_blockers": [
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+        "season": "1915-16",
+        "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "identified_state": "0-9 / 9 identified vs target literal 2-7 / 9",
+        "blocks_continued_stage1_research": false,
+        "blocks_stage1_closeout": true,
+        "disposition": "RESEARCH_EXHAUSTED__PRESERVE_LITERAL_ACCOUNTING_CONTRADICTION__TERMINAL_AUTHORITY_NOT_ESTABLISHED"
+      },
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1930-31",
+        "season": "1930-31",
+        "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "identified_state": "5-10 / 15 identified vs target literal 7-8 / 15",
+        "blocks_continued_stage1_research": false,
+        "blocks_stage1_closeout": true,
+        "disposition": "RESEARCH_EXHAUSTED__PRESERVE_LITERAL_ACCOUNTING_CONTRADICTION__TERMINAL_AUTHORITY_NOT_ESTABLISHED"
+      },
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+        "season": "1936-37",
+        "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "identified_state": "4-5 / 9 identified vs target literal 1-5 / 6",
+        "blocks_continued_stage1_research": false,
+        "blocks_stage1_closeout": true,
+        "disposition": "RESEARCH_EXHAUSTED__PRESERVE_LITERAL_ACCOUNTING_CONTRADICTION__TERMINAL_AUTHORITY_NOT_ESTABLISHED"
+      },
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1937-38",
+        "season": "1937-38",
+        "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "identified_state": "0-6 / 6 identified vs target literal 0-4 / 4",
+        "blocks_continued_stage1_research": false,
+        "blocks_stage1_closeout": true,
+        "disposition": "RESEARCH_EXHAUSTED__PRESERVE_LITERAL_ACCOUNTING_CONTRADICTION__TERMINAL_AUTHORITY_NOT_ESTABLISHED"
+      }
+    ],
+    "unadmitted_candidate_holds": [
+      {
+        "candidate_id": "GONZAGA-HOLD-4243-001",
+        "season": "1942-43",
+        "opponent_label": "Whitworth",
+        "reported_date": "1943-02-20",
+        "held_status": "BOUNDED_CLASSIFICATION_HOLD",
+        "artifact": "schools/gonzaga/research/checkpoints/stage1-season-first-1942-1943-held-candidates-0001.csv"
+      },
+      {
+        "candidate_id": "GONZAGA-HOLD-4243-002",
+        "season": "1942-43",
+        "opponent_label": "Whitman",
+        "reported_date": null,
+        "held_status": "BOUNDED_CLASSIFICATION_HOLD",
+        "artifact": "schools/gonzaga/research/checkpoints/stage1-season-first-1942-1943-held-candidates-0001.csv"
+      },
+      {
+        "candidate_id": "GONZAGA-HOLD-4243-003",
+        "season": "1942-43",
+        "opponent_label": "Whitman",
+        "reported_date": null,
+        "held_status": "BOUNDED_CLASSIFICATION_HOLD",
+        "artifact": "schools/gonzaga/research/checkpoints/stage1-season-first-1942-1943-held-candidates-0001.csv"
+      },
+      {
+        "candidate_id": "GONZAGA-HOLD-4243-004",
+        "season": "1942-43",
+        "opponent_label": "Geiger Field",
+        "reported_date": "1943-02-25",
+        "held_status": "BOUNDED_CLASSIFICATION_HOLD",
+        "artifact": "schools/gonzaga/research/checkpoints/stage1-season-first-1942-1943-held-candidates-0001.csv"
+      },
+      {
+        "candidate_id": "GONZAGA-HOLD-5657-PLU-001",
+        "season": "1956-57",
+        "opponent_label": "Pacific Lutheran",
+        "reported_date": "1957-03-05",
+        "held_status": "BOUNDED_GAME_TYPE_CLASSIFICATION_HOLD",
+        "artifact": "schools/gonzaga/research/checkpoints/stage1-1955-1958-pacific-northwest-held-candidates-0001.csv"
+      },
+      {
+        "candidate_id": "GONZAGA-HOLD-NW2528-001",
+        "season": "1925-26",
+        "opponent_label": "Portland Coliseum Checkerboards",
+        "reported_date": "1926-01-18",
+        "held_status": "DATE_COLLISION_INCLUSION_HOLD__NOT_ADMITTED",
+        "artifact": "schools/gonzaga/research/checkpoints/stage1-1925-1928-northwest-varsity-held-candidates-0001.csv"
+      }
+    ]
+  },
+  "permanent_policy_eligibility": {
+    "source_acknowledged_unidentified_game_gap": {
+      "eligible": false,
+      "audit_run": false,
+      "reason": "Gonzaga record-book institutional season W/L aggregate is not an explicit primary-source count of unidentified omitted games; 6 held identified candidate inclusion/identity issues and 4 accounting blockers remain."
+    },
+    "founding_era_aggregate_coverage": {
+      "eligible": false,
+      "audit_run": false,
+      "authority_registry": "data/reference/early-aggregate-coverage-authorities.json",
+      "authority_git_blob_sha": "8164c5953fa3091cea2163d325602e5804e72cf2",
+      "gonzaga_case_present": false,
+      "reason": "Requires school/season/parent/base exact owner-approved registry and zero unrelated blockers; cannot cover all 46 underidentified seasons by generic inference."
+    },
+    "early_history_multi_season_accounting": {
+      "eligible": false,
+      "audit_run": false,
+      "authority_registry": "data/reference/early-history-accounting-authorities.json",
+      "authority_git_blob_sha": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+      "gonzaga_case_present": false,
+      "reason": "No Gonzaga exact-parent owner authority; 46 season deficits plus 6 held candidates prevent terminal zero-unrelated-blocker audit."
+    },
+    "terminal_early_history_uncertainty": {
+      "eligible": false,
+      "audit_run": false,
+      "reason": "All 557 accepted game outcomes are known; remaining early seasons have explicit quantified official W/L totals, not unquantified established history; not a general mid-century aggregate waiver."
+    },
+    "audit_disposition": "READ_ONLY_AUDITS_NOT_RUN__EACH_PATH_LACKS_CONTRACT_PREREQUISITES__DO_NOT_CLAIM_PERMANENT_TOOL_ELIGIBILITY"
+  },
+  "current_main_delta_check": {
+    "compared_from": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+    "compared_to": "9888bc6161952199e6f49c5f2b614459a44f029d",
+    "commits_ahead": 13,
+    "changed_files": 32,
+    "published_source_game_changed_paths": [
+      "schools/hawai-i/source-games.csv"
+    ],
+    "hawai_i_source_blob_sha": "ce4c462fe773ea039d00b69b8859b273d2358038",
+    "named_gonzaga_matches_in_hawaii_current_source_file": 4,
+    "in_expansion_1907_1958_matches": 0,
+    "note": "Four Hawai'i source matches occur in 1977-78 (2), 1997-98, 2011-12; this one-file delta audit does not rerun canonical/114-school censuses. Canonical file was modified on main; full canonical re-scan not indicated absent specific new in-scope claim."
+  },
+  "unexamined_high_yield_family_candidate": {
+    "source_family": "Gonzaga University original Bulletin student newspaper, indexed full-text transcripts (not the distinct Gonzaga student magazine)",
+    "source_collection_url": "https://digital.gonzaga.edu/digital/collection/p16011coll5",
+    "sample_source_page_urls": [
+      "https://digital.gonzaga.edu/digital/collection/p16011coll5/id/907/",
+      "https://digital.gonzaga.edu/digital/collection/p16011coll5/id/969/"
+    ],
+    "readability": "INDEXED_TRANSCRIPTS_READABLE_IN_SEARCH__DIRECT_COLLECTION_INTERFACE_JAVASCRIPT_REQUIRED",
+    "prior_limit": "1944-47 collection-interface-only probe was inaccessible; not proof that indexed item transcripts cannot be read",
+    "pilot_seasons": [
+      "1938-39",
+      "1939-40"
+    ],
+    "pilot_priority_window": "January-March 1939 and January-March 1940 basketball-season issues",
+    "max_issues_to_screen": 24,
+    "season_game_count_arithmetic_differences": {
+      "1938-39": 9,
+      "1939-40": 15
+    },
+    "objective": "Source-first game-date/opponent/result/score harvest, exact same-game comparison against 557 accepted identities; seek multiple candidate identities, avoid forced inference.",
+    "outcome": "PILOT_DEFINED_NOT_EXECUTED__NO_ACCEPTED_GAMES_PRODUCED",
+    "stop_if": "No systematically readable game results or all hits already accepted after bounded issue window; preserve coverage limits without re-search."
+  },
+  "closeout": {
+    "eligible": false,
+    "stage1_complete": false,
+    "stage2_authorized": false,
+    "owner_decision_required_now": false,
+    "why": "Unadmitted candidate identity/inclusion/type holds, 46 season coverage deficits and four still-blocking contradictions; no matching exact owner authority or terminal audit eligibility.",
+    "next_bounded_unit": "One indexed-text-only Gonzaga Bulletin 1938-39/1939-40 original-source pilot (capped 24 issues), then commit deduplicated evidence/limits and re-evaluate; do not reopen accepted row authority, do not start Stage 2."
+  }
+}
