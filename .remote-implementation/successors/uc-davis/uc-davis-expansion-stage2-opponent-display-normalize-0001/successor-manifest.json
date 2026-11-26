@@ -1,0 +1,145 @@
+{
+  "actual_published_target_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "changed_file_sha256": {
+    "schools/uc-davis/opponents.csv": "f5d276824bf4b55e36fd8e8c0269be6e5145d39a49fc28f50603deedb0ad3e72",
+    "schools/uc-davis/source-games.csv": "2bb4172144004e10aaaf48b642196b9115914a9c1ba3cd369a0f7fa917717953"
+  },
+  "changed_paths": [
+    "schools/uc-davis/opponents.csv",
+    "schools/uc-davis/source-games.csv"
+  ],
+  "expected_blocker_keys": [
+    "colorado-colorado-springs",
+    "concordia-new-york",
+    "loyola-new-orleans",
+    "pacific-oregon",
+    "saint-marys-minnesota",
+    "united-states-international",
+    "washington-st-louis"
+  ],
+  "expected_target_predecessor_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
+  "field_level_proof_sha256": "3a07be05076e856598ef0ed9fefa79cdea7d3220d125a9044aae42defce64e42",
+  "final_transaction_state": "COMPLETE",
+  "global_lock_commit": "24b1bb26873b7bf6c9b14d93035d78a432b1896b",
+  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "normalization_report_sha256": "3b4dfb6dca6fca7223a0e0b7c5b9e9d09f63d678850fe5fd2a693bff1fdfac60",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "post_repair_stage2": {
+    "artifact_normalized_sha256": {
+      "implementation-stage2-capability-census.json": "28229ecdf58434389b99b10cff047a5f54e5110c46c63cc6384ce92c0e3fdd31",
+      "implementation-stage2-status.json": "2a56664d657c2a95e28c1e1bff8ea2e71ef5660b2c1a7057c626556c7a0768c7",
+      "plan.json": "bd3cbc038ad685c01dbfaacec7d47261576f14885f29cbb1810478f7c60cfd53",
+      "review.csv": "0fbd9cd54f75fb0b0aa41b797f19673a53325000eb1ed3f94709bcefd70974c8",
+      "review.md": "1eb9bc23eadb54050d753b166b4f3142db85d69d7e3c09e416f9a2bcadb8404f"
+    },
+    "artifact_sha256": {
+      "implementation-stage2-capability-census.json": "28229ecdf58434389b99b10cff047a5f54e5110c46c63cc6384ce92c0e3fdd31",
+      "implementation-stage2-status.json": "25e01ad4c288e07509141a9d3ac49ec35a88341f80d6f7797979874a746f52af",
+      "plan.json": "0d565236537a8d04249a12a2fd24a749edd9d17d508bb9bc05ad303db5c74b9f",
+      "review.csv": "0fbd9cd54f75fb0b0aa41b797f19673a53325000eb1ed3f94709bcefd70974c8",
+      "review.md": "3e8a40b10695a327003406a547d752e84e7ef81956e75315a4fca1660697d6fd"
+    },
+    "blocker_count": 0,
+    "capability_census_status": "CENSUS_CAPTURED",
+    "capability_topology_groups": [
+      {
+        "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+        "count": 6,
+        "topology": "site_or_han_review_population"
+      },
+      {
+        "classification": "PERMANENT_MAP_VALIDATION",
+        "constraints": [
+          {
+            "canonical_game_id": "CBBG-0113018",
+            "fixed_confident_source_game_ids": [
+              "UC-DAVIS-EXP-1942-43-001"
+            ],
+            "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+            "required_total_target_matches": 1,
+            "review_source_game_ids": [
+              "UC-DAVIS-EXP-1942-43-005"
+            ]
+          },
+          {
+            "canonical_game_id": "CBBG-0113104",
+            "fixed_confident_source_game_ids": [
+              "UC-DAVIS-EXP-1947-48-003"
+            ],
+            "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+            "required_total_target_matches": 1,
+            "review_source_game_ids": [
+              "UC-DAVIS-EXP-1947-48-006"
+            ]
+          },
+          {
+            "canonical_game_id": "CBBG-0114369",
+            "fixed_confident_source_game_ids": [
+              "UC-DAVIS-EXP-1914-15-005"
+            ],
+            "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+            "required_total_target_matches": 1,
+            "review_source_game_ids": [
+              "UC-DAVIS-EXP-1914-15-004"
+            ]
+          }
+        ],
+        "count": 3,
+        "topology": "target_canonical_identity_cardinality_constraints"
+      }
+    ],
+    "command_exit_code": 0,
+    "decision_count": 14,
+    "decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
+    "stage2_status": "CAPABILITY_CENSUS_READY",
+    "tracked_mutation_proof": {
+      "after_head_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+      "after_status": "",
+      "after_tree_sha": "f0467fd70e6a05565464c63ab35f1a1605a20355",
+      "before_head_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+      "before_status": "",
+      "before_tree_sha": "f0467fd70e6a05565464c63ab35f1a1605a20355",
+      "tracked_stage2_mutation": "NONE"
+    },
+    "warning_count": 0
+  },
+  "prepared_commit_sha": "4581d6c9a22abb10f4ccd29297c5c7623582d501",
+  "prepared_parent_sha": "51f84766ecb2df83681d91124c61d4c81be9a6cb",
+  "prepared_tree_sha": "f0467fd70e6a05565464c63ab35f1a1605a20355",
+  "protected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "repository_validation": "PASS",
+  "request_id": "uc-davis-expansion-stage2-opponent-display-normalize-0001",
+  "request_sha256": "0b75b68fe45d9426f270cf2ba1572600f701c3fdd421a9d402ddf088f5d069fa",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "semantic_drift_after": {
+    "baseline_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "integration_base_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+    "integration_base_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
+    "school_key": "uc-davis",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
+  "source_game_normalized_name_row_count": 12,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-census-0002/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "ae8ef01f52a3c43047da50ad5dabd0e4b0e00b504a6d5be58a791fae8e9b1d00",
+  "target_branch": "data/uc-davis-onboarding",
+  "writeahead_commit": "3ac3f6399b6e3d3d0f12c45bae401bca0ac0361b",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/uc-davis/uc-davis-expansion-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "1b515e726d99e76989d8eb511167b4671c94247a2af6ea28e14a0fa152e02f2d"
+}
