@@ -28,15 +28,19 @@ permissions:
 
 jobs:
   rehearse-candidate-runtime:
-    # Expansion Stage 1 tooling has its own exact-head reconciliation/nonregression
-    # suite. There is no Stage 2 proposal checkpoint until Phase 0 is verified.
-    # Preserve the candidate-runtime requirement for all other tooling PRs and
-    # for explicit Stage 2 workflow_dispatch rehearsals.
+    # Expansion Stage 1 and exceptional pre-Integration correction tooling
+    # have their own exact-head Stage 1/nonregression + known-good conformance
+    # suites. A Stage 2 proposal checkpoint DOES NOT EXIST before Phase 0.
+    # Preserve exact checkpoint-bound candidate-runtime rehearsal for every
+    # other tooling PR and every explicit Stage 2 workflow_dispatch.
+    # This is an applicability boundary, not a substitute for the required
+    # actual-Freeze/owner-correction Stage 1 and guarded Phase 0 replay.
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event.pull_request.head.repo.full_name == github.repository &&
        startsWith(github.event.pull_request.head.ref, 'tooling/') &&
-       !contains(github.event.pull_request.head.ref, 'expansion-stage1-'))
+       !contains(github.event.pull_request.head.ref, 'expansion-stage1-') &&
+       !startsWith(github.event.pull_request.head.ref, 'tooling/expansion-preintegration-'))
     runs-on: ubuntu-latest
     steps:
       - name: Check out control authority
