@@ -8,6 +8,8 @@ existing permanent repository tools.
 """
 from __future__ import annotations
 
+from expansion_preintegration_owner_corrections import validate_reference
+
 import copy
 import hashlib
 import json
@@ -1066,6 +1068,16 @@ def validate_request(request: dict[str, Any]) -> None:
             request.get("venue_reconciliation"),
             "venue_reconciliation",
         )
+        owner_correction = request.get("owner_correction")
+        if owner_correction is not None:
+            _validate_payload_ref(
+                owner_correction, "owner_correction", required=True,
+            )
+            validate_reference(
+                owner_correction,
+                school=school_key,
+                freeze_sha=checkpoint["sha256"],
+            )
         _require_sha(
             request.get("integration_freeze_sha256"),
             64,
