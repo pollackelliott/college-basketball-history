@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_SPOKANE_1939_1940_NEWSPAPER_PRIMARY_ARCHIVE_ACCESS_MATERIALITY_AUDIT_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "pilot_status": "BOUNDED_ACCESS_PROBE_COMPLETE__SPOKANE_ORIGINAL_PAGES_NOT_READABLE__ONE_SEPARATE_WIRE_SOURCE_LEAD_FOUND",
+  "research_authority": {
+    "protected_main_sha": "9888bc6161952199e6f49c5f2b614459a44f029d",
+    "parent_research_head": "fa29399a9357cfe283be1b2dbfa0d3b8511e2044",
+    "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "status_0044_git_blob_sha": "2883fbafeb011ede8770b7735c5ddcc350f437b9",
+    "ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0033.csv",
+    "ledger_git_blob_sha": "336f6b8a4f59f874b4aa2a22aa54d34414f79d90",
+    "accepted_game_count": 557,
+    "accepted_wins": 214,
+    "accepted_losses": 343
+  },
+  "declared_scope": {
+    "corpus": "Spokane Public Library historical Spokesman-Review and Spokane Daily Chronicle original newspaper full-page archives",
+    "research_target_seasons": [
+      "1938-39",
+      "1939-40"
+    ],
+    "research_target_dates": "1939 Jan-Mar and 1940 Jan-Mar",
+    "purpose": "One bounded archive accessibility and original game reporting materiality probe; not bulk content harvesting",
+    "limit": "Two named historical newspaper titles, ProQuest and Google News Archive accessible paths, bounded direct/dated archive tests"
+  },
+  "access_checks": [
+    {
+      "source_family": "Spokane Public Library ProQuest Historical Newspapers: Washington Collection",
+      "owner": "Spokane Public Library",
+      "discovery_url": "https://www.spokanelibrary.org/turn-back-time-with-historical-newspapers/",
+      "proquest_provider_url": "https://www.proquest.com/hnpwashingtoncollection?accountid=308",
+      "coverage": "Spokesman-Review and Spokane Chronicle 1883-2009, documented full-text searchable full-page original PDFs",
+      "selected_archive_result": "LIBRARY_CARD_LOGIN_REQUIRED",
+      "login_url": "https://login.spokane-public.idm.oclc.org/login?qurl=https://www.proquest.com/hnpwashingtoncollection?accountid=308",
+      "observed_login_fields": [
+        "Library Barcode",
+        "PIN"
+      ],
+      "machine_access": "NOT_AUTHENTICATED__NO_ORIGINAL_1939_OR_1940_PAGE_READ",
+      "historical_conclusion": "NONE"
+    },
+    {
+      "source_family": "Spokane Public Library Newspapers.com-West",
+      "discovery_url": "https://www.spokanelibrary.org/inland-northwest-special-collections",
+      "selected_archive_result": "LIBRARY_PROXY_CREDENTIAL_REQUIRED",
+      "login_url": "https://spokane-public.idm.oclc.org/login?url=https://newspaperslibrary.proquest.com/?accountid=308",
+      "machine_access": "NOT_AUTHENTICATED__NOT_TREATED_AS_PRIMARY_READ"
+    },
+    {
+      "source_family": "Google News Archive — Spokane Daily Chronicle",
+      "discovery_url": "https://news.google.com/newspapers",
+      "title_url": "https://news.google.com/newspapers?nid=ddB7do2jUx8C",
+      "discovery_evidence": "The index lists 27,154 Spokane Daily Chronicle issues dated Nov 12 1884–Jan 15 1982",
+      "direct_title_result": "TITLE_METADATA_READABLE_ONLY__NO_LIST_OF_DATED_ISSUES_RENDERED",
+      "dated_issue_attempts": [
+        "https://news.google.com/newspapers?nid=ddB7do2jUx8C&dat=19390208&printsec=frontpage",
+        "https://news.google.com/newspapers?nid=ddB7do2jUx8C&dat=19400208&printsec=frontpage"
+      ],
+      "dated_issue_result": "RETRIEVAL_NOT_ACCESSIBLE_IN_CURRENT_RESEARCH_INTERFACE__NO_ACTUAL_PAGE_INSPECTION",
+      "historical_conclusion": "UNVERIFIED_WHETHER_THESE_EXACT_DATES_PRESENT_OR_ABSENT"
+    },
+    {
+      "source_family": "Spokesman-Review historical newspaper official publisher",
+      "information_url": "https://pics.spokesman.com/order-page-reprints",
+      "finding": "Publisher independently states Google News Archive digitized newspaper microfilm including Chronicle; does not supply direct readable article text for target dates.",
+      "machine_access": "NO_ORIGINAL_1939_1940_BASKETBALL_PAGES_RETRIEVED"
+    }
+  ],
+  "spokane_archive_verified_game_reports": 0,
+  "spokane_new_game_candidates": 0,
+  "game_admissions": 0,
+  "field_repairs": 0,
+  "source_absence_claim": false,
+  "incidental_independent_source_lead": {
+    "lead_id": "GONZAGA-LEAD-193839-MEXICO-001",
+    "status": "UNADMITTED__OUTSIDE_SPOKANE_ARCHIVE_PILOT__MATERIAL_NEXT_UNIT",
+    "source": "La Grande Evening Observer, February 8 1939, original Oregon newspaper United Press report",
+    "source_url": "https://oregonnews.uoregon.edu/lccn/2006260039/1939-02-08/ed-1/seq-7/",
+    "primary_report_observation": "Newspaper OCR: GONZAGA BEATS MEXICO / SPOKANE, Wash., Feb. 8 (UP) Gonzaga university defeated the touring University of Mexico basketball team, 58 to 40, [last ...].",
+    "season": "1938-39",
+    "reported_team": "Gonzaga University",
+    "opponent_literal": "touring University of Mexico basketball team",
+    "gonzaga_result": "W",
+    "reported_gonzaga_score": 58,
+    "reported_opponent_score": 40,
+    "game_date": null,
+    "reported_date": "1939-02-08",
+    "competitive_classification": "UNVERIFIED__POSSIBLE_TOURING_EXHIBITION_OR_ELIGIBLE_COLLEGE_COMPETITIVE_GAME",
+    "venue_site_type": null,
+    "duplicate_check": "CURRENT_557_ROW_LEDGER_CASE_INSENSITIVE_SEARCH_FOR_MEXIC_OR_58-40_FINDS_NO_MATCH; NAME_ABSENCE_ALONE_NOT_A_COMPLETE_SAME_GAME_DEDUPLICATION",
+    "admit_now": false,
+    "reason": "Not an original Spokane item; one wire result cannot establish exact game date or exhibition versus competitive inclusion and duplicate identity under current Stage 1 criteria.",
+    "next_proof": "Bounded corroboration using contemporary independent reporting or institution schedule to establish actual Gonzaga varsity competitive inclusion; preserve original source date, compare all accepted February 1939 identities before admission."
+  },
+  "accepted_population_preserved": {
+    "games": 557,
+    "wins": 214,
+    "losses": 343,
+    "unadmitted_prior_candidate_holds": 6,
+    "parked_stage1_accounting_closeout_blockers": 4,
+    "season_level_positive_count_delta_seasons": 46,
+    "aggregate_minus_identified_arithmetic_only": 420,
+    "stage1_complete": false,
+    "stage2_authorized": false
+  },
+  "next_bounded_unit": "One exact Gonzaga vs touring University of Mexico February 1939 eligibility, date and duplicate adjudication using original contemporary reporting; if established competitive, append one uniquely identified game with exact evidence and update season accounting; otherwise preserve an unadmitted lead. Avoid new archive login or bulk press hunts.",
+  "owner_decision_required_now": false,
+  "policy_notes": "Source access is not negative evidence. Institutional aggregate arithmetic is not authority for anonymous games. Do not use credentials or assume off-platform library access. Research base and published basketball state unchanged."
+}
