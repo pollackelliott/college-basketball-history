@@ -55,6 +55,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_stage1_venue_reconciliation.py' -v
           python -m unittest discover -s tests -p 'test_expansion_distinct_venue_registration.py' -v
           python -m unittest discover -s tests -p 'test_global_venue_reference.py' -v
+          python -m unittest discover -s tests -p 'test_registered_opponent_home_venue.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_remote_contract.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_disposable_git_transaction.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_phase0_preview.py' -v
@@ -67,7 +68,7 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --no-tags origin '+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation'
-          test "$(git rev-parse refs/remotes/origin/main)" = 2ca9239c979f5517b0c776285cf5072e2a2f2b36
+          test "$(git rev-parse refs/remotes/origin/main)" = 31cccfdac5b676bde3f914c63e7239ef7cb132d5
           mkdir -p /tmp/ucd-expansion-venue-readonly
           git show e3156d4c611149bea24e026afefc78b53c6b9a1b:.remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-0001.txt | base64 --decode > /tmp/ucd-expansion-venue-readonly/freeze.zip
           git show 3b24750c2a78780d0916948b3733dd9c7155ef58:.remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json > /tmp/ucd-expansion-venue-readonly/owner.json
@@ -89,7 +90,7 @@ jobs:
           original = root / "freeze.zip"
           startup = json.loads((root / "startup.json").read_bytes())
           reference = startup["owner_correction"]
-          main = "2ca9239c979f5517b0c776285cf5072e2a2f2b36"
+          main = "31cccfdac5b676bde3f914c63e7239ef7cb132d5"
           frozen_hash = "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f"
           research_base = "2f6a0d7525cff222cfec0f286ed8e1c456707a54"
           first = root / "stage1-a"
