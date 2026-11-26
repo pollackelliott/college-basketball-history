@@ -286,11 +286,30 @@ def load_venue_reconciliation(
         if source_games_member
         else []
     )
+    # For an expansion freeze, frozen_venues_bytes is the deterministic
+    # effective Stage 1 candidate while package_path is still the *original*
+    # immutable expansion ZIP. Reopen that ZIP specifically to prove the
+    # physical-building source-support row against authentic Research bytes.
+    if package_path is not None:
+        try:
+            with zipfile.ZipFile(package_path) as archive:
+                if "expansion-venues.csv" in archive.namelist():
+                    frozen_support_member = archive.read("expansion-venues.csv")
+        except (OSError, ValueError, zipfile.BadZipFile) as exc:
+            raise WorkflowError(
+                "venue reconciliation cannot authenticate expansion venue support"
+            ) from exc
     frozen_support_rows = (
         _csv_rows(frozen_support_member)
         if frozen_support_member else None
     )
-    source_games_sha256 = _sha256_bytes(source_games_member)
+    # The caller's explicitly authenticated effective candidate source-games
+    # bytes take precedence over the ZIP's expansion-source-games.csv. This
+    # binds approved pre-Integration source corrections without changing ZIP.
+    source_games_sha256 = _sha256_bytes(
+        source_games_bytes if source_games_bytes is not None
+        else source_games_member
+    )
     expected_venues = str(doc.get("expected_venues_sha256") or "").lower().strip()
     actual_venues = _sha256_bytes(member)
     if expected_venues != actual_venues:
