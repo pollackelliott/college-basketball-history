@@ -1,25 +1,25 @@
 {
   "creation_provenance": {
-    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION Implementation lane; new exact-main startup after former 0001/0002 pre-integration diagnostics, with original immutable Research Freeze 0025 and owner-correction 0005 hashes unchanged, seven-case venue sidecar 0008 hash-bound.",
-    "authorization": "Owner Proceed authorizes ordinary UC Davis Stage 1/Integration Freeze/guarded Phase 0 through independent verification. Control Center issue #720 authorized the three settled source corrections; issue #722 authorized exact seven-case generic venue tooling. Generic tooling PRs #719, #721 and #723 merged. Only current-main deterministic stage preparation and existing guarded EXPANSION_PHASE0 child; no new historical, shared registry, Gate 1, Gate 2, Stage 2, release, or Production authority."
+    "origin": "Same existing UC Davis ALL_HISTORY_EXPANSION Implementation lane. Fresh startup against exact protected-main merge of PR #724, after successful NOT_ATTEMPTED recovery of failed Phase 0 0003. Original accepted Research Freeze 0025, owner corrections 0005, and seven-case venue reconciliation sidecar 0008 remain SHA-bound and unchanged.",
+    "authorization": "Owner Proceed for fresh same-lane current-main Stage 1 reproduction, Integration Freeze, disposable Phase 0 preview and guarded EXPANSION_PHASE0 through independent exact-tree verification. Control Center historical/venue outcomes issue #720 and issue #722 remain controlling, with generic permanent tooling PRs #719, #721, #723 and #724 merged. No new historical approval, shared mutation outside scoped school Phase 0, Owner Gate 1, Owner Gate 2, Stage 2, arbitrary release, merge, or Production authority."
   },
   "expansion_research_checkpoint": {
     "research_base_sha": "2f6a0d7525cff222cfec0f286ed8e1c456707a54",
     "sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
     "transport": {
-      "commit_sha": "062a07471a4a76973e5ee029f52e02a8f97bc67b",
+      "commit_sha": "a5320150cf2a86e2d996e34d6573bb6d26647e1a",
       "kind": "git_base64_parts",
       "part_count": 1,
       "path_prefix": ".remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-"
     }
   },
-  "expected_protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "expected_protected_main_sha": "31cccfdac5b676bde3f914c63e7239ef7cb132d5",
   "kind": "REMOTE_IMPLEMENTATION_EXPANSION_STARTUP",
-  "phase0_request_id": "uc-davis-expansion-phase0-0003",
+  "phase0_request_id": "uc-davis-expansion-phase0-0004",
   "research_freeze_sha256": "1cd62fa8d817413a6911e37d9a93293177b3a7a4b2bbc9348349bf31827dc22f",
   "schema_version": 1,
   "school_key": "uc-davis",
-  "startup_id": "uc-davis-expansion-startup-0003",
+  "startup_id": "uc-davis-expansion-startup-0004",
   "target_branch": "data/uc-davis-onboarding",
   "target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
   "owner_correction": {
