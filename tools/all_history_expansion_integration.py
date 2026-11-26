@@ -529,10 +529,10 @@ def verify_manifest_bytes(manifest_bytes: bytes, candidate: Path) -> dict[str, A
                 "INTEGRATION_FREEZE_UNEXPECTED_VENUE_RECONCILIATION_HASH")
     receipt = manifest.get("owner_preintegration_correction")
     correction_sha = manifest.get("owner_preintegration_correction_sha256", "")
-    stage1_report = read_json(candidate / STAGE1_REPORT)
-    require(receipt == stage1_report.get("owner_preintegration_correction"),
-            "INTEGRATION_FREEZE_OWNER_RECEIPT_REPORT_MISMATCH")
     if receipt is not None:
+        stage1_report = read_json(candidate / STAGE1_REPORT)
+        require(receipt == stage1_report.get("owner_preintegration_correction"),
+                "INTEGRATION_FREEZE_OWNER_RECEIPT_REPORT_MISMATCH")
         require(isinstance(receipt, dict) and receipt.get("owner_approved") is True
                 and receipt.get("owner_gate_1_approval") is False,
                 "INTEGRATION_FREEZE_OWNER_RECEIPT_INVALID")
