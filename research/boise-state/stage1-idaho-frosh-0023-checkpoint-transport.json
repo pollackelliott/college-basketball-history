@@ -1,0 +1,22 @@
+{
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "checkpoint": 23,
+  "school_key": "boise-state",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "status": "STAGE_1_IN_PROGRESS",
+  "filename": "boise-state-expansion-stage1-idaho-frosh-1961-63-0023.zip",
+  "zip_sha256": "b8bfd083af928f768f881d2b12ef972dbc23bd0c5e084be54d06bc65e488e352",
+  "parent_zip_sha256": "0bac46619ee87550f80ff0d19c33d3624ef16f363c93ea64588eff6152fcf918",
+  "parent_research_head": "d27651506d412d5ece57cee12cef281acd8d66c8",
+  "protected_main_at_start": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "immutable_research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "manifested_members": 61,
+  "accepted_games": 206,
+  "new_accepted": 4,
+  "existing_repairs": 0,
+  "junior_college_accepted": 151,
+  "official_listed_junior_college_accepted": 150,
+  "official_junior_college_total": 787,
+  "arithmetic_difference_not_proven_missing_games": 637,
+  "annual_accounting_seasons": 38
+}
