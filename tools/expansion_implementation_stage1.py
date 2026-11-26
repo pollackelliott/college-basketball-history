@@ -20,6 +20,7 @@ from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 from game_assertion_store import read_game_assertions_at_git
+from expansion_preintegration_owner_corrections import project_effective_source_rows
 from typing import Any, Mapping
 
 from all_history_expansion_freeze import (
@@ -1216,7 +1217,9 @@ def read_csv_at_git(repo: Path, commit: str, path: str) -> list[dict[str, str]]:
 
 
 def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
-           research_base: str, main_sha: str, output: Path) -> dict[str, Any]:
+           research_base: str, main_sha: str, output: Path, *,
+           owner_correction_path: Path | None = None,
+           owner_correction_reference: dict[str, Any] | None = None) -> dict[str, Any]:
     repo, artifact, output = repo.resolve(), artifact.resolve(), output.resolve()
     if output == repo or repo in output.parents:
         raise Stage1Stop("Stage 1 rehearsal output must be outside tracked repository")
@@ -1249,6 +1252,20 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
             research_base_sha=research_base,
         )
     )
+    owner_receipt: dict[str, Any] | None = None
+    if (owner_correction_path is None) != (owner_correction_reference is None):
+        raise Stage1Stop("OWNER_PREINTEGRATION_CORRECTION_REFERENCE_PAIR_REQUIRED")
+    if owner_correction_path is not None:
+        effective_rows, owner_receipt = project_effective_source_rows(
+            owner_correction_path.read_bytes(),
+            owner_correction_reference,
+            materialized_validated["source_rows"],
+            school=school,
+            freeze_sha=expected_sha,
+            research_base=research_base,
+        )
+        materialized_validated = dict(materialized_validated)
+        materialized_validated["source_rows"] = effective_rows
     candidate, census = build_candidate(
         materialization_baseline, payload, materialized_validated
     )
@@ -1347,7 +1364,7 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
                              "opponent_key": item["canonical_opponent_key"]})
     identity = reconcile_canonical(
         school,
-        validated["source_rows"],
+        materialized_validated["source_rows"],
         main_canonical,
         repo=repo,
         research_base=research_base,
@@ -1384,6 +1401,7 @@ def stage1(repo: Path, school: str, artifact: Path, expected_sha: str,
         "census": census, "global_venue_reconciliation": global_venue_reconciliation,
         "canonical_identity_census": identity, "blockers": blockers,
         "current_main_reconciliation": current_main_reconciliation,
+        "owner_preintegration_correction": owner_receipt,
         "write_authority": "NONE_REHEARSAL_ONLY",
     }
     output.mkdir(parents=True)
@@ -1402,10 +1420,17 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--main-sha", required=True)
     p.add_argument("--repo", required=True, type=Path)
     p.add_argument("--output", required=True, type=Path)
+    p.add_argument("--owner-correction", type=Path)
+    p.add_argument("--owner-correction-reference", type=Path)
     args = p.parse_args(argv)
     try:
         report = stage1(args.repo,args.school_key,args.freeze_zip,args.expected_sha256,
-                        args.research_base,args.main_sha,args.output)
+                        args.research_base,args.main_sha,args.output,
+                        owner_correction_path=args.owner_correction,
+                        owner_correction_reference=(
+                            json.loads(args.owner_correction_reference.read_bytes())
+                            if args.owner_correction_reference is not None else None
+                        ))
         print(json.dumps({"status": report["status"], "school": args.school_key,
              "candidate": str(args.output), "identity": report["canonical_identity_census"]["counts"],
              "blocker_classes": [x["class"] for x in report["blockers"]]}, indent=2))
