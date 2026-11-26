@@ -170,6 +170,168 @@ def _registry_ids_by_key(root: Path, commit: str) -> dict[str, str] | None:
     return result
 
 
+
+def _approved_preintegration_site_moves(
+    root: Path,
+    school: str,
+    phase0_commit: str,
+    integration_base: str,
+    integration_freeze: dict[str, Any],
+) -> tuple[list[dict[str, str]], int] | None:
+    """Authenticate the entire corrected supplemental source population.
+
+    The original owner approval was checked at Integration Freeze and Phase 0.
+    Here its frozen receipt must still describe the exact source rows at the
+    committed Phase 0 predecessor. Only explicit HOME-to-opponent-venue moves
+    are eligible to explain a subsequently refreshed venue count.
+    """
+    receipt = integration_freeze.get("owner_preintegration_correction")
+    if (
+        not isinstance(receipt, dict)
+        or receipt.get("kind") != "PREINTEGRATION_OWNER_CORRECTION_RECEIPT"
+        or receipt.get("owner_approved") is not True
+        or receipt.get("owner_gate_1_approval") is not False
+        or receipt.get("school_key") != school
+        or receipt.get("artifact_sha256")
+        != integration_freeze.get("owner_preintegration_correction_sha256")
+        or not receipt.get("approval_issue_url")
+    ):
+        return None
+    parent_bytes = _blob(root, integration_base, school, "source-games.csv")
+    phase0_bytes = _blob(root, phase0_commit, school, "source-games.csv")
+    if parent_bytes is None or phase0_bytes is None:
+        return None
+    parent_fields, inherited = _rows(parent_bytes)
+    fields, phase0_sources = _rows(phase0_bytes)
+    if (
+        fields != parent_fields
+        or phase0_sources[:len(inherited)] != inherited
+        or len(phase0_sources) <= len(inherited)
+    ):
+        return None
+    supplemental = phase0_sources[len(inherited):]
+    canonical = lambda value: (json.dumps(
+        value, sort_keys=True, ensure_ascii=False, separators=(",", ":")
+    ) + "\n").encode("utf-8")
+    if _sha(canonical(supplemental)) != receipt.get(
+        "effective_source_rows_sha256"
+    ):
+        return None
+    receipts = receipt.get("source_row_receipts")
+    approved_ids = receipt.get("approved_source_game_ids")
+    if (
+        not isinstance(receipts, list)
+        or not receipts
+        or not isinstance(approved_ids, list)
+        or approved_ids != sorted(set(approved_ids))
+        or sorted(item.get("source_game_id") for item in receipts
+                  if isinstance(item, dict)) != approved_ids
+        or len(receipts) != len(approved_ids)
+    ):
+        return None
+    indexed = {row.get("source_game_id"): row for row in supplemental}
+    if len(indexed) != len(supplemental):
+        return None
+    moved_to_opponent = 0
+    for item in receipts:
+        if not isinstance(item, dict):
+            return None
+        row = indexed.get(item["source_game_id"])
+        field_names = item.get("field_names")
+        if (
+            row is None
+            or not isinstance(field_names, list)
+            or len(field_names) != len(set(field_names))
+            or _sha(canonical(row)) != item.get("effective_row_sha256")
+        ):
+            return None
+        if {
+            "curated_site_type", "curated_venue_name"
+        }.issubset(field_names) and row.get("curated_site_type") == "OPPONENT_HOME":
+            moved_to_opponent += 1
+    return (supplemental, moved_to_opponent) if moved_to_opponent else None
+
+
+def _replay_one_owner_approved_venue_count(
+    root: Path,
+    school: str,
+    phase0_commit: str,
+    integration_base: str,
+    fields: list[str],
+    rows: list[dict[str, str]],
+    inherited_row_count: int,
+    freeze_venue_sha256: str,
+    integration_freeze: dict[str, Any],
+    *,
+    bom: bool,
+) -> bool:
+    """Prove an exact frozen-byte inverse AND Phase 0's derived count refresh.
+
+    Only one numeric supplemental count may differ, by exactly the number of
+    authenticated owner-approved HOME-to-opponent moves. Reconstructing the
+    frozen hash alone is insufficient: the permanent Phase 0 refresh must
+    reproduce every post-rebase venue summary from corrected source evidence.
+    No other frozen venue column, row or source assertion can change.
+    """
+    authority = _approved_preintegration_site_moves(
+        root, school, phase0_commit, integration_base, integration_freeze,
+    )
+    if authority is None:
+        return False
+    supplemental_sources, approved_moves = authority
+    if not 0 < approved_moves <= len(supplemental_sources):
+        return False
+    marker = b"__FROZEN_VENUE_APPROVED_COUNT_PROOF__"
+    matches: list[tuple[int, int]] = []
+    for index in range(inherited_row_count, len(rows)):
+        stated = rows[index].get("games_currently_assigned", "")
+        if not stated.isdigit():
+            continue
+        current = int(stated)
+        if current > len(supplemental_sources):
+            return False
+        marked_rows = [dict(row) for row in rows]
+        marked_rows[index]["games_currently_assigned"] = marker.decode()
+        marked_bytes = _csv_bytes(fields, marked_rows, bom=bom)
+        if marked_bytes.count(marker) != 1:
+            return False
+        prefix, suffix = marked_bytes.split(marker)
+        # The 3-move Hickey topology takes seven candidate hashes, not
+        # a free-form search through unbounded historical counts.
+        for frozen_count in range(
+            max(0, current - approved_moves),
+            min(len(supplemental_sources), current + approved_moves) + 1,
+        ):
+            if frozen_count == current:
+                continue
+            if _sha(prefix + str(frozen_count).encode("ascii") + suffix) == (
+                freeze_venue_sha256
+            ):
+                matches.append((index, frozen_count))
+    if len(matches) != 1:
+        return False
+    index, frozen_count = matches[0]
+    if frozen_count - int(rows[index]["games_currently_assigned"]) != approved_moves:
+        return False
+    original = [dict(row) for row in rows]
+    original[index]["games_currently_assigned"] = str(frozen_count)
+    if _sha(_csv_bytes(fields, original, bom=bom)) != freeze_venue_sha256:
+        return False
+
+    # Use precisely the existing deterministic Phase 0 summary refresh. No
+    # change to the accepted H/A/N, venue identity, geography or game meaning.
+    from stage_research_portfolio import (  # local import avoids default cost
+        WorkflowError, refresh_local_venue_assignment_summaries,
+    )
+    try:
+        refresh_local_venue_assignment_summaries(
+            original[inherited_row_count:], supplemental_sources,
+        )
+    except (WorkflowError, ValueError, KeyError, TypeError):
+        return False
+    return original == rows
+
+
 def _reconstruct_frozen_venues(
     root: Path,
     school: str,
@@ -347,7 +509,12 @@ def _reconstruct_frozen_venues(
     bom = phase0_venues.startswith(b"\xef\xbb\xbf")
     if not legacy_no_sidecar:
         if _sha(_csv_bytes(fields, rows, bom=bom)) != freeze_venue_sha256:
-            return reject("phase0_frozen_venue_bytes_mismatch")
+            if not _replay_one_owner_approved_venue_count(
+                root, school, phase0_commit, integration_base,
+                fields, rows, len(parent_rows), freeze_venue_sha256,
+                integration_freeze, bom=bom,
+            ):
+                return reject("phase0_frozen_venue_bytes_mismatch")
         return True
 
     # The frozen six-file hash certifies all key/name/locality/chronology
