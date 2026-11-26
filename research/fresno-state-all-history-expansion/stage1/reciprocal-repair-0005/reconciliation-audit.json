@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_RECIPROCAL_REPAIR_0005",
+  "status": "BOUNDED_RECIPROCAL_AND_OPPONENT_REPAIR__STAGE1_OPEN",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "predecessor_research_commit_sha": "ae4f6bb55324b706003b3672c0bc220d4b333ec5",
+  "input_0004_ledger_git_blob_sha": "67afaa2581dfcd39c68f31906b416abd00fc3b1e",
+  "input_0004_queue_blob_sha": "306c71d7497066b532ff8d07b0d76736e98a91d4",
+  "source_entry_population": 1034,
+  "new_source_entry_ids": 956,
+  "original_owner_excluded_research_ids": 78,
+  "prior_non_exhibition_identity_groups": 1032,
+  "now_non_exhibition_provisional_identity_groups": 1031,
+  "additional_source_duplicate_consolidation": 1,
+  "total_proven_source_duplicate_representations_so_far": 2,
+  "excluded_explicit_exhibition_source_entries": 1,
+  "repaired_opponent_identity_research_rows": 1,
+  "repaired_opponent_identity_note": "1965-66 W67-63 was against San Diego University, not San Diego State in newer year-by-year guide; 2016/2017/2019 Fresno San Diego series confirms",
+  "unresolved_1926_27_davis_game_count": true,
+  "unresolved_1922_23_score_variation": true,
+  "unresolved_1922_23_season_aggregate_after_duplicate": true,
+  "unresolved_1965_66_aggregate_after_duplicate": true,
+  "source_1922_23_after_dedup": {
+    "entry_lines": 21,
+    "group_keys": 20,
+    "group_results": {
+      "W": 14,
+      "L": 6
+    },
+    "guide_official_record": "14-7"
+  },
+  "source_1965_66_after_dedup": {
+    "entry_lines": 29,
+    "group_keys": 28,
+    "group_results": {
+      "W": 22,
+      "L": 6
+    },
+    "guide_official_record": "21-8"
+  },
+  "changed_source_entry_ids": [
+    "FRESNO-EXP-CAND-1922-23-010",
+    "FRESNO-EXP-CAND-1922-23-015",
+    "FRESNO-EXP-CAND-1922-23-007",
+    "FRESNO-EXP-CAND-1926-27-006",
+    "FRESNO-EXP-CAND-1926-27-007",
+    "FRESNO-EXP-CAND-1926-27-012",
+    "FRESNO-EXP-CAND-1926-27-013",
+    "FRESNO-EXP-CAND-1965-66-026"
+  ],
+  "unchanged_all_original_source_literal_labels": true,
+  "unchanged_accepted_78_research_source_ids": true,
+  "publish_1708_baseline_untouched": true,
+  "owner_scope_1970_71_plus_unchanged": true,
+  "current_main_not_modified": true
+}
