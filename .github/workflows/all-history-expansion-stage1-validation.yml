@@ -134,7 +134,14 @@ jobs:
               "SAFE_REPRESENTATION_REUSE": 5,
           }, census["classification_counts"]
           preview = root / "disposable-preview"
-          proposal = preview_phase0(repo, frozen, preview)
+          try:
+              proposal = preview_phase0(repo, frozen, preview)
+          except Exception:
+              diagnostic = preview / "phase0-venue-identity-blockers.json"
+              if diagnostic.is_file():
+                  print("UC_DAVIS_READONLY_VENUE_BLOCKER_CENSUS=" +
+                        diagnostic.read_text(), flush=True)
+              raise
           assert proposal["global_venue_registration_count"] == 17, proposal
           assert proposal["venue_identity_census"]["blocker_count"] == 0
           assert manifest["venue_reconciliation_sha256"] == hashlib.sha256(
