@@ -67,6 +67,16 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Test frozen venue-count compatibility guard
+        shell: bash
+        run: |
+          if [[ -f candidate/tests/test_expansion_approved_venue_count_guard.py ]]; then
+            (cd candidate && python -m unittest discover -s tests \
+              -p 'test_expansion_approved_venue_count_guard.py' -v)
+          fi
+          (cd candidate && python -m unittest discover -s tests \
+            -p 'test_all_history_expansion_display_successor_guard.py' -v)
+
       - name: Resolve exact PR-head and durable blocked-proposal authority
         if: >-
           github.event_name == 'workflow_dispatch' ||
