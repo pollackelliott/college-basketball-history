@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "f8164c33cb568925c42c595dc134284bb7b2ef12",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+  "recovered_request_id": "uc-davis-expansion-phase0-0003",
+  "request_id": "uc-davis-expansion-recover-0001",
+  "schema_version": 1,
+  "target_branch": "data/uc-davis-onboarding"
+}

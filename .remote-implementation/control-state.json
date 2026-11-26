@@ -33,7 +33,8 @@
     "kentucky-expansion-phase0-0001",
     "kentucky-expansion-release-preview-verify-0001",
     "miami-expansion-phase0-0004",
-    "miami-expansion-release-preview-0001"
+    "miami-expansion-release-preview-0001",
+    "uc-davis-expansion-phase0-0003"
   ],
   "accepted_request_ids": [
     "liu-stage1-0001",
@@ -808,16 +809,16 @@
     "hawai-i-expansion-release-production-proof-0001",
     "uc-davis-expansion-phase0-0003"
   ],
-  "active_expected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
-  "active_lock_commit": "f8164c33cb568925c42c595dc134284bb7b2ef12",
-  "active_lock_owner": "github-actions:45823599232:1",
-  "active_operation": "EXPANSION_PHASE0",
+  "active_expected_main_sha": null,
+  "active_lock_commit": null,
+  "active_lock_owner": null,
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "uc-davis-expansion-phase0-0003",
-  "active_request_sha256": "2d4275165432d2e790d45412660a26213cc23dba086eae9f6c6300446f1ec253",
-  "active_school_key": "uc-davis",
-  "active_target_branch": "data/uc-davis-onboarding",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
+  "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1592,32 +1593,29 @@
     "hawai-i-expansion-release-readiness-0002",
     "hawai-i-expansion-release-preview-verify-0002",
     "hawai-i-expansion-release-gate2-approval-0001",
-    "hawai-i-expansion-release-production-proof-0001"
+    "hawai-i-expansion-release-production-proof-0001",
+    "uc-davis-expansion-recover-0001"
   ],
-  "current_sequence": 770,
+  "current_sequence": 771,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/hawai-i/hawai-i-expansion-release-production-proof-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "e723154a43f573b166d7d5b02544a35bc02d32f4abef8b54d9e2aae2fe43a322",
-    "fresh_runner_verification": "PASS",
-    "merge_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
-    "merged": true,
-    "operation": "RELEASE_PRODUCTION_PROOF",
-    "owner_gate_2_approved": true,
-    "pr_head_sha": "3126f7504ef909c15a1d5dd3942d937b65f039fd",
-    "pr_number": 717,
-    "production_deployment_id": 8071324773,
-    "production_json_checked_count": 16,
-    "protected_main_sha": "4f99623c4ab916deaa080d32536e70eef0b3b751",
-    "remote_production_proof_equivalence": "PASS",
-    "request_id": "hawai-i-expansion-release-production-proof-0001",
-    "school_key": "hawai-i"
+    "disposition": "ABANDONED_NOT_ATTEMPTED",
+    "operation": "RECOVER",
+    "recovered_request_id": "uc-davis-expansion-phase0-0003",
+    "recovery_manifest": {
+      "actual_target_sha": "f83219268b85b44314fba7b53256767f19ed3004",
+      "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+      "lock_commit": "f8164c33cb568925c42c595dc134284bb7b2ef12",
+      "mutation_classification": "NOT_ATTEMPTED",
+      "protected_main_sha": "2ca9239c979f5517b0c776285cf5072e2a2f2b36",
+      "recovered_request_id": "uc-davis-expansion-phase0-0003",
+      "request_id": "uc-davis-expansion-recover-0001",
+      "schema_version": 1,
+      "target_branch": "data/uc-davis-onboarding"
+    }
   },
-  "lifecycle_state": "ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "45823599232",
-  "lock_acquisition_request_commit": "526842f36f6e625849b79d8c1450496a4191ef97",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "LOCKED"
+  "transaction_state": "ABANDONED_NOT_ATTEMPTED"
 }
