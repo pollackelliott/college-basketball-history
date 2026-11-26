@@ -59,6 +59,30 @@ Treat reciprocal existence as evidence of game identity, not automatically as pr
 
 For every proposed `KEEP_CANONICAL` disposition involving `site_type`, venue, or location, compare the target source, agreeing/conflicting reciprocal assertions, and the predicted canonical publication result. A recommendation that would discard stronger supported H/A/N, venue, or locality evidence must be corrected before Gate 1 or presented as an explicit owner decision.
 
+### Already-registered opponent-host venue representation
+
+When a source game's **curated** site is explicitly `OPPONENT_HOME`,
+the source has a complete independently researched venue name, city/state and
+exact game date, and its venue label is absent from the target school's local
+`venues.csv`, the permanent preflight and canonical resolver may reuse an
+**existing global registered physical venue** without manufacturing a new
+target-school HOME or GAME_SITE relationship.
+
+This is a read-only identity lookup: the registered name and city/state must
+select exactly one same-locality physical VEN ID, any recorded opening/closing
+bound must contain the game date, and no matching target-local name/alias may
+have priority. If any condition fails, the ordinary package-validation error
+remains. The lookup does not infer H/A/N, override a frozen split, rewrite
+source evidence, invent a source-school venue row, register a new identity,
+choose between physically ambiguous facilities, or waive the pre-Gate site
+and opponent-display challenge.
+
+This compatibility applies to a visiting school's already-researched
+opponent-host venue, not to missing target HOME or neutral-site archaeology.
+Its purpose is to preserve established global venue identity and avoid
+requiring a redundant local opponent facility merely to make Stage 2 preflight
+enumerate its actual decision population.
+
 ### 3. Predicted post-reconciliation site completeness
 
 Before Gate 1, simulate or otherwise deterministically inspect the site shape that would result from the proposed recommendations. Run the same substantive invariants enforced by `tools/implementation_site_gate.py` wherever the current tooling permits without mutating tracked canonical state.

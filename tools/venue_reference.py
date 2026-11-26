@@ -3,7 +3,9 @@
 
 from __future__ import annotations
 
+import calendar
 import csv
+import datetime as dt
 import re
 import unicodedata
 from collections import Counter, defaultdict
@@ -124,6 +126,94 @@ def load_global_venue_reference(
 
     return venues_by_id, venues_by_key, name_ids
 
+
+
+def _registry_venue_boundary(value: str, *, end: bool) -> dt.date | None:
+    """Parse only stated YEAR/MONTH/DAY physical bounds, never guess an era."""
+    value = (value or "").strip()
+    if not value:
+        return None
+    try:
+        if re.fullmatch(r"\d{4}", value):
+            year = int(value)
+            return dt.date(year, 12 if end else 1, 31 if end else 1)
+        if re.fullmatch(r"\d{4}-\d{2}", value):
+            year, month = map(int, value.split("-"))
+            return dt.date(year, month, calendar.monthrange(year, month)[1] if end else 1)
+        return dt.date.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def registered_opponent_home_venue(
+    source: dict[str, str],
+    local_venues: list[dict[str, str]],
+    global_venues_by_id: dict[str, dict[str, str]],
+    global_name_ids: dict[str, set[str]],
+) -> dict[str, str] | None:
+    """Resolve an explicitly researched opponent-host site already registered globally.
+
+    An opponent's facility need not be copied into every visiting school's
+    local venue relationship list. This lookup never establishes H/A/N, never
+    infers a building from geography, and does not alter frozen source data.
+    Name *and* complete locality must identify exactly one registered physical
+    identity, with an exact game date respecting every stated physical bound.
+    A local name relationship, whether valid or conflicting, always takes
+    precedence and must pass the existing local-name resolver.
+    """
+    if source.get("curated_site_type", "").strip() != "OPPONENT_HOME":
+        return None
+    if (
+        not source.get("source_program_key", "").strip()
+        or not source.get("normalized_opponent_key", "").strip()
+        or source["source_program_key"].strip() == source["normalized_opponent_key"].strip()
+    ):
+        return None
+    raw_name = source.get("curated_venue_name", "").strip()
+    city = source.get("city", "").strip()
+    state = source.get("state", "").strip()
+    if not raw_name or not city or not state:
+        return None
+    try:
+        game_date = dt.date.fromisoformat(source.get("game_date", "").strip())
+    except ValueError:
+        return None
+
+    name = normalized_venue_name(raw_name)
+    if not name:
+        return None
+    for local in local_venues:
+        local_names = [local.get("canonical_name", "")]
+        local_names.extend(local.get("aliases", "").split(";"))
+        if any(normalized_venue_name(value.strip()) == name for value in local_names if value.strip()):
+            return None
+
+    possibilities: list[dict[str, str]] = []
+    for venue_id in sorted(global_name_ids.get(name, set())):
+        identity = global_venues_by_id.get(venue_id)
+        if identity is None:
+            return None
+        if (
+            identity.get("city", "").strip().casefold() != city.casefold()
+            or identity.get("state", "").strip().upper() != state.upper()
+        ):
+            continue
+        opened = identity.get("opened", "").strip()
+        closed = identity.get("closed", "").strip()
+        start = _registry_venue_boundary(opened, end=False)
+        finish = _registry_venue_boundary(closed, end=True)
+        # A matching registered identity with impossible/unknown stated
+        # chronology cannot be silently discarded in favor of another.
+        if (opened and start is None) or (closed and finish is None):
+            return None
+        if (start is not None and game_date < start) or (
+            finish is not None and game_date > finish
+        ):
+            return None
+        if not identity.get("venue_key", "").strip() or not identity.get("venue_id", "").strip():
+            return None
+        possibilities.append(identity)
+    return possibilities[0] if len(possibilities) == 1 else None
 
 def canonical_venue_geography_errors(
     canonical_rows: list[dict[str, str]],
