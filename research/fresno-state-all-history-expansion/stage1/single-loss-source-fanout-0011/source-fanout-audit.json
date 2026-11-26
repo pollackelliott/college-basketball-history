@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_1965_66_PRIMARY_SCOREBOOK_SOURCE_FANOUT_0011",
+  "status": "BOUNDED_ORIGINAL_SCOREBOOK_DISCOVERY_EXHAUSTED_IN_THIS_PASS__ONE_ARITHMETIC_LOSS_RESIDUAL_REMAINS__STAGE1_OPEN",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_research_commit_sha": "dccff92e131ba5ce9ad22bd20aea3bc2a311eb3a",
+  "authenticated_input_git_blobs": {
+    "ledger": "62ccc32bba43c5870a641fac6ac182266603865e",
+    "audit": "f74bca695f02dfc69300a32a29eb13395126d67b",
+    "crosswalk": "b69639a3f6e5129797c5270421dbf06e291c486f",
+    "queue": "da80ee11ff9769c53ddbc97646b6fb14f589f7a4",
+    "year": "485e1ddb3914d39eabed48e21ab8d93e03b665c8"
+  },
+  "protected_main_authenticated": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "all_source_entries_unchanged": 1034,
+  "original_78_authorities_unchanged": true,
+  "previous_source_exclusion_count": 17,
+  "previous_proven_duplicate_representations": 2,
+  "all_provisional_nonexhibition_source_identity_groups_unchanged": 1015,
+  "source_1965_season_rows": 29,
+  "provisional_1965_distinct_groups": 28,
+  "source_1965_distinct_curated_played_W": 21,
+  "source_1965_distinct_curated_played_L": 7,
+  "official_season_heading_W": 21,
+  "official_season_heading_L": 8,
+  "year_1965_independently_institutionally_verified_row_representations": 11,
+  "year_1965_only_alternative_Fresno_institutional_series": 1,
+  "year_1965_guide_only_without_direct_independent_result_in_this_pass": 17,
+  "new_recipient_result_evidence_source_ids": [
+    "FRESNO-EXP-CAND-1965-66-003"
+  ],
+  "newly_adjudicated_distinct_game_ids": 0,
+  "newly_adjudicated_source_row_edits": 0,
+  "direct_1965_66_contemporary_game_by_game_schedule_examined": false,
+  "archive_obstacles": [
+    "Cal State Collegian 403",
+    "Fresno digitized yearbook Timeout",
+    "Fresno UA-1068 Sports Collection finding aid only"
+  ],
+  "missing_game_identity_authenticated": false,
+  "no_anonymous_game_allowed": true,
+  "all_published_fresno_1708_games_unchanged": true,
+  "top_level_scope_1970_plus_unchanged": true,
+  "next_bounded_scope": "Shift from repeated 1965-66 derivative schedule search to Stage 1 exact remaining blockers (1926-27 UC Davis or Harlem Clowns match-specific inclusion), or direct contemporaneous 1965-66 scorebook only if accessible. No Stage 2."
+}
