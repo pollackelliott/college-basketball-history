@@ -813,7 +813,7 @@
     "uc-davis-expansion-stage2-current-main-refresh-0001"
   ],
   "active_expected_main_sha": "4a9a18090523f5240bdd0fc2dc361430bab98a51",
-  "active_lock_commit": null,
+  "active_lock_commit": "fb227fc7d930106e2879f17989e632058478984a",
   "active_lock_owner": "github-actions:45885584023:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
