@@ -1,0 +1,22 @@
+{
+  "kind": "BOISE_STATE_STAGE1_PORTABLE_CHECKPOINT",
+  "checkpoint": 21,
+  "school_key": "boise-state",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "status": "STAGE_1_IN_PROGRESS",
+  "zip_filename": "boise-state-expansion-stage1-nnc-1957-59-coverage-0021.zip",
+  "zip_sha256": "dc136bdf385bb9a120a21da7e640b040f3b71b311bbf4ccf7cfd1634933cf00d",
+  "parent_zip_sha256": "e621a0fdc6ff7960a51b6f63ecdd5df36c40b2620dbbb47b0f68635c19dae0c6",
+  "research_parent_head": "dacbe99541a5f031a596bb31acdab9470051f010",
+  "protected_main_at_unit_start": "9888bc6161952199e6f49c5f2b614459a44f029d",
+  "immutable_research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "manifested_members": 51,
+  "accepted_games": 202,
+  "new_accepted": 0,
+  "junior_college_games": 147,
+  "listed_season_junior_college_identified": 146,
+  "official_listed_seasons_games": 787,
+  "arithmetic_unmatched_not_authenticated_identities": 641,
+  "annual_accounting_seasons": 38,
+  "new_unaccepted_candidates": 3
+}

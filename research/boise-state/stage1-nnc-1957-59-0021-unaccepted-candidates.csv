@@ -1,0 +1,4 @@
+candidate_id,season,opponent,date_window,source,result_status,score_status,site_type,classification,disposition
+BOISE-S1-NNC-1957-58-FEB-UNSCORED,1957-58,Northwest Nazarene College,before 1958-02-28,The NNC Crusader 1958-02-28 p3,UNVERIFIED,UNKNOWN,UNKNOWN,PLAYED_REFERENCE_OUTCOME_UNVERIFIED,New completed-game reference but no accepted game row; score/date/outcome not established
+BOISE-S1-NNC-1958-59-NOV29,1958-59,Northwest Nazarene College,scheduled 1958-11-29,The NNC Crusader 1958-11-21 schedule,UNVERIFIED,UNKNOWN,UNKNOWN,SCHEDULE_ONLY,No evidence completed
+BOISE-S1-NNC-1958-59-JAN23,1958-59,Northwest Nazarene College,scheduled 1959-01-23,The NNC Crusader 1958-11-21 schedule,UNVERIFIED,UNKNOWN,UNKNOWN,SCHEDULE_ONLY,No evidence completed

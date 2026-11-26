@@ -1,0 +1,8 @@
+source_id,source_family,season,issue_date,url,evidence_class,disposition,limitation
+NNC-0021-A,The NNC Crusader,1957-58,1958-02-14,https://www.whdl.org/sites/default/files/resource/periodical/1958.02.14.pdf?language=en,INDEXED_PRIMARY_TEXT_SAMPLED,No NNC-BJC played game score in inspected text,PDF screenshot exceeds web size
+NNC-0021-B,The NNC Crusader,1957-58,1958-02-28,https://www.whdl.org/sites/default/files/resource/periodical/1958.02.28.pdf?language=en,ORIGINAL_PRIMARY_TEXT,New NNC-BJC played-reference candidate unverified result,16 MB PDF screenshot too large and direct download failed
+NNC-0021-C,The NNC Crusader,1958-59,1958-11-21,https://www.whdl.org/sites/default/files/resource/periodical/1958.11.21.pdf?language=en,ORIGINAL_VARSITY_SCHEDULE,Nov29 and Jan23 Boise meetings scheduled only,No score or proof of completion
+NNC-0021-D,The NNC Crusader,1958-59,1959-03-13,https://www.whdl.org/sites/default/files/resource/periodical/1959.03.13.pdf?language=en,SPORT_DISAMBIGUATION,April-May BJC schedule is BASEBALL excluded,Not basketball
+NNC-0021-E,The Crusader Vol XVII,1957-58,1957-1958,https://nazarc.whdl.org/en/browse/resources/10199,INSTITUTIONAL_ISSUE_INDEX,12 original issues indexed,No all-issue extraction and oversized PDFs
+NNC-0021-F,The Crusader Vol XVIII,1958-59,1958-1959,https://nmi.whdl.org/en/browse/resources/10200,INSTITUTIONAL_ISSUE_INDEX,Original volume indexed,Not archive exhausted
+BOISE-0021-LOCATOR,Boise Junior College Roundup,1957-58,1958-04-29,https://scholarworks.boisestate.edu/student_newspapers/340/,FUTURE_TARGET_PRIMARY_SOURCE,Boise original institutional student newspaper available as indexed item,Not separately harvested; prior Roundup source transport problem
