@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_CLOWNS_CONTEMPORARY_COMPARATOR_ARCHIVE_BOUNDARY_0026",
+  "status": "TWO_TARGET_MATCH_INCLUSION_BLOCKERS_UNCHANGED__NEW_PERIOD_COMPARATOR_VISUALLY_VERIFIED__CENSUS_UNCHANGED",
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "research_parent_sha": "33d896a96e8bff1fb74f5bea07bd96351914f822",
+  "research_parent_tree_sha": "1d327bbbcef6285cceae8ca8cdad31067266029f",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "input_blobs": {
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-working-accepted-game-ledger-CANDIDATE.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-bulk-source-dispositions-CANDIDATE.csv": "b00974af230d617c40b94165d4fb23da16374058",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-pending-source-groups-CANDIDATE.csv": "f082a07b72a10a449736cba7e3be54b6eac409b8",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/49-season-bulk-acceptance-census-CANDIDATE.csv": "cc786d8c18a478bf1b89f955eaf19a26e1724728",
+    "touring-clowns-inclusion-and-source-visual-audit-0016/clowns-inclusion-challenge.csv": "7f082c8eca368e7f39eafea764a0b84ef6b4a0f2",
+    "touring-clowns-inclusion-and-source-visual-audit-0016/source-provenance-boundary.csv": "9475744904232811427885d80d204aaa3d61cb48"
+  },
+  "period_comparator": {
+    "source": "https://files.bakersfieldcollege.edu/archives/raconteur/1953_Renegade_Raconteur.pdf",
+    "source_school": "Bakersfield College",
+    "season": "1952-53",
+    "original_pdf_pages_visually_verified": [
+      125,
+      127
+    ],
+    "printed_pages": [
+      119,
+      121
+    ],
+    "literal_harlem_clowns_result": "Bakersfield College 46 Harlem Clowns 52",
+    "literal_alumni_result": "Bakersfield College 56 Alumni 56",
+    "printed_overall_record": "19-10",
+    "apparent_game_list": "30 listed results",
+    "game_list_manual_WLT": "18-11-1",
+    "aggregate_reconciliation_unproven": true,
+    "different_fresno_game": true,
+    "match_specific_fresno_competitive_status_supported": false,
+    "match_specific_fresno_exhibition_status_supported": false
+  },
+  "digital_archive": {
+    "current_official_page": "https://guides.library.fresnostate.edu/mcj/newspapers",
+    "range": "1922-1998",
+    "archive_collection": "https://archives.calstate.edu/collections/bk128x43n",
+    "access": "HTTP_403_FORBIDDEN",
+    "period_fresno_1936_1954_issue_read": false
+  },
+  "counts": {
+    "parent_candidate_games": 1011,
+    "source_representations": 1036,
+    "season_rows": 49,
+    "clowns_inclusion_blockers_before": 2,
+    "clowns_inclusion_blockers_after": 2,
+    "pending_source_groups_after": 2,
+    "accepted_game_rows_added": 0,
+    "accepted_game_rows_removed": 0,
+    "accepted_game_rows_modified": 0,
+    "source_status_rows_reclassified": 0
+  },
+  "clowns_source_ids": [
+    "FRESNO-EXP-CAND-1935-36-019",
+    "FRESNO-EXP-CAND-1953-54-018"
+  ],
+  "independent_other_material_issues": [
+    "1965-66_ONE_UNMAPPED_AGGREGATE_LOSS",
+    "1922-23_BAKERSFIELD_HISTORICAL_OPPONENT_IDENTITY"
+  ],
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "protected_main_mutated": false,
+  "published_fresno_mutated": false,
+  "shared_registries_mutated": false,
+  "next_valid_progress": "Genuine Fresno match-specific 1936/1954 documentary status evidence, or narrow explicit owner historical-inclusion decision; no inference from unrelated college Clowns games or Fresno guide arithmetic alone"
+}
