@@ -1,0 +1,34 @@
+{
+  "school_key": "san-diego-state",
+  "stage": "STAGE_1",
+  "original_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "source": "2026-27 SDSU Men's Basketball Media Guide printed p88 (PDF p90)",
+  "season": "1921-22",
+  "original_source_record": {
+    "W": 14,
+    "L": 8,
+    "outcomes": 22
+  },
+  "original_source_note": "1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.",
+  "source_named_rows": 17,
+  "recognized_competitive_rows": 14,
+  "excluded_named_rows": {
+    "alumni_at_stanford": 2,
+    "own_JV": 1
+  },
+  "awarded_forfeits_not_played": 2,
+  "unknown_opponents": {
+    "W": 1,
+    "L": 2,
+    "count": 3,
+    "new_game_ids": 0
+  },
+  "source_count_check": "17 named + 2 forfeits + 3 unknown = 22 original results/awards. Original record is distinct from game-derived competitive W/L after exclusions.",
+  "identified_game_inclusion_blockers": 0,
+  "identified_game_type_blockers": 0,
+  "coverage_gap_audit": "NOT_RUN",
+  "required_permanent_tool": "tools/research_stage1_coverage_gap.py",
+  "tool_inputs": "SHA256-pinned archive with stage1-manifest.json, structured-stage1-ledger.csv, season-census.csv, blocking-residuals.json, source research-exhaustion evidence",
+  "representation_caution": "Permanent tool primary_source_state.listed_game_rows must truthfully distinguish 17 printed source named rows and 14 accepted competitive rows. Do not misstate 17 as 14 to pass a validation.",
+  "stage1_complete": false
+}

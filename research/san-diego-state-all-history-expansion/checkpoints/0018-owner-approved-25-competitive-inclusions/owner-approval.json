@@ -1,0 +1,22 @@
+{
+  "kind": "EXPLICIT_OWNER_APPROVED_EXACT_25_COMPETITIVE_INCLUSIONS",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "parent_research_head": "98e9743be6889f922a09eb0b08829910d6313da4",
+  "checkpoint_approved": "0017-remaining-25-institutional-counting-authority-review",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "owner_question": "Do you approve accepting the exact 25 games identified in checkpoint 0017 as competitive varsity games?",
+  "owner_response": "Approved. Proceed",
+  "exact_id_count": 25,
+  "exact_sorted_ids_sha256": "af978d15eab345c9a54efc1b078c3558c8418b38ecfca3c195fdea0cb13a2176",
+  "source_W": 14,
+  "source_L": 11,
+  "old_status": "HELD_INCLUSION",
+  "new_status": "ACCEPTED_COMPETITIVE",
+  "game_type": "REGULAR_SEASON",
+  "game_type_basis": "Original source lists each outside postseason event headings; no event tag attached in raw candidate evidence. March 1943 20th Century Fox and March 1946 Kansas City All-Stars are ordinary season schedule lines.",
+  "previous_1061_acceptances_preserved": true,
+  "previous_40_exclusions_preserved": true,
+  "source_coverage_gap_not_waived": true,
+  "stage1_complete": false
+}

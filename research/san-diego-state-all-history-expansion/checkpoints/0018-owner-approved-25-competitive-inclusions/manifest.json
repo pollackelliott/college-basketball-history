@@ -1,0 +1,58 @@
+{
+  "checkpoint": "0018-owner-approved-25-competitive-inclusions",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "98e9743be6889f922a09eb0b08829910d6313da4",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "approved_25_id_set_sha256": "af978d15eab345c9a54efc1b078c3558c8418b38ecfca3c195fdea0cb13a2176",
+  "counts": {
+    "source_rows": 1126,
+    "accepted": 1086,
+    "regular": 1043,
+    "postseason": 43,
+    "held_inclusion": 0,
+    "held_game_type": 0,
+    "excluded": 40,
+    "approved_acceptance_delta": 25,
+    "source_seasons": 49,
+    "unidentified_1921_22": 3,
+    "forfeits": 5
+  },
+  "files": {
+    "owner-approved-25-inclusions.csv": {
+      "sha256": "3d9ae63fc92bcc396784e956c716d059a1604b88b5f62f54c636fcc2aad4f437",
+      "bytes_utf8": 4120
+    },
+    "all-49-season-dispositions.csv": {
+      "sha256": "3a6773521752f0307659009de60224c2c1de2c00c61737da9bef7f9f927cfdae",
+      "bytes_utf8": 98962
+    },
+    "49-season-disposition-reconciliation.csv": {
+      "sha256": "d19060fed367d2cfb522ec3b471e614f7a5885c63cb6b3a391076fb1b2406176",
+      "bytes_utf8": 3797
+    },
+    "founding-source-administrative-and-unidentified.csv": {
+      "sha256": "1394ab82309838f6dd88ca59fa4670ea876d84bf61636be5508944151e6b93f4",
+      "bytes_utf8": 1525
+    },
+    "owner-approval.json": {
+      "sha256": "7dc37ca5d7b43b1ef4c3c11b8ec94028d3d705b013dd2b1a96d15e3ddf6e21e7",
+      "bytes_utf8": 1203
+    },
+    "1921-22-coverage-gap-preflight.json": {
+      "sha256": "774e11e8a08592b4beabeb5d60fdecaed342bfb1df2af21188cdfffdd8531c13",
+      "bytes_utf8": 1496
+    },
+    "research-findings.md": {
+      "sha256": "3c1c3bfb448d87331bca1899d443626191374690fc62efe300dff1b7aedc8307",
+      "bytes_utf8": 2266
+    },
+    "research-status.json": {
+      "sha256": "4a66bfd4b0cf5336bb79f1b94ff27788dadf25cde75e2b967919aea8f04c9ada",
+      "bytes_utf8": 1676
+    }
+  }
+}
