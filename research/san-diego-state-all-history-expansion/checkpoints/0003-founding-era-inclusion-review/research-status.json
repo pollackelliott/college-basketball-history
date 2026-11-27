@@ -1,0 +1,41 @@
+{
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_review": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "e1e9b7f10fa24800ba72c7809f55e519b03b7fe0",
+  "stage": "STAGE_1",
+  "checkpoint": "0003-founding-era-inclusion-review",
+  "stage1_complete": false,
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "source_pages": [
+    88,
+    89
+  ],
+  "season_range": "1921-22..1935-36",
+  "cohort_seasons": 15,
+  "whole_expansion_seasons": 49,
+  "cohort_official_aggregate_games": 250,
+  "whole_expansion_official_aggregate_games": 1134,
+  "source_identified_candidates": 242,
+  "accepted_supplemental_competitive_games": 215,
+  "accepted_game_type_population": {
+    "REGULAR_SEASON": 215
+  },
+  "held_source_candidate_rows": 26,
+  "held_inclusion": 13,
+  "held_game_type": 13,
+  "excluded_own_jv": 1,
+  "named_forfeit_awards_not_games": 5,
+  "source_acknowledged_unidentified_results": 3,
+  "annotations_unresolved_D": 28,
+  "source_scores_missing": 5,
+  "source_date_tokens_missing": 10,
+  "duplicate_exact_source_signatures": 0,
+  "unextracted_seasons": 34,
+  "unextracted_aggregate_official_games": 884,
+  "top_level_scope": "1970-71+",
+  "baseline_published_game_rows": 1709,
+  "stage1_acceptance_scope": "Research-local accepted 215; not final 49-season universe, no production writes",
+  "next_bounded_action": "One coherent source review of 13 inclusion-held and 13 event-type-held rows; then continue extraction 1936-37 onward"
+}

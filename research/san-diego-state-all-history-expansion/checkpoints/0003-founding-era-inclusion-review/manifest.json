@@ -1,0 +1,45 @@
+{
+  "checkpoint": "0003-founding-era-inclusion-review",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "e1e9b7f10fa24800ba72c7809f55e519b03b7fe0",
+  "parent_checkpoint": "0002-founding-era-ledger-1921-1936",
+  "created_date": "2026-11-26",
+  "files": {
+    "inclusion-review.csv": {
+      "sha256": "2741080c346e3c832846b87a8e2a46dde335c64ecce5aadbd3bedda63ab0b051",
+      "bytes_utf8": 60018
+    },
+    "accepted-regular-season-ledger.csv": {
+      "sha256": "0be5848a0c18e1142362bb5de75104dbfa860792d9fd740f2a086582a2c5d87b",
+      "bytes_utf8": 61378
+    },
+    "reviewed-season-census.csv": {
+      "sha256": "b5aa8962a00970bc996be656c1e77400bd3488b4932966dd3cab9afe7eb2fd3e",
+      "bytes_utf8": 1959
+    },
+    "research-residuals.csv": {
+      "sha256": "1831eed4190ec56220978f5c79ccfc3c73634c76d21207759ebda33e50107f14",
+      "bytes_utf8": 2260
+    },
+    "source-findings.md": {
+      "sha256": "37642881a254768df2e93bf19731a8c672970b64027150b6d789ffdee1d6d0a9",
+      "bytes_utf8": 5104
+    },
+    "research-status.json": {
+      "sha256": "47e0e18f19c6a15d93493b96d53bccb2a2c28cee49fcf6ccb856e42d3fa60a72",
+      "bytes_utf8": 1622
+    }
+  },
+  "counts": {
+    "source_candidates": 242,
+    "accepted": 215,
+    "held_inclusion": 13,
+    "held_tournament": 13,
+    "excluded_self_jv": 1,
+    "named_forfeits": 5,
+    "unidentified": 3
+  }
+}

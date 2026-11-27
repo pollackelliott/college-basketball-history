@@ -1,0 +1,11 @@
+issue_id,issue_class,count,binding_to_checkpoint_0002,research_disposition,next_action
+"SDSU-EXP-R3-01","UNQUALIFIED_ALUMNI_FIXTURES","8","game_id in inclusion-review.csv","BLOCKING_STAGE1_INCLUSION","Check source-season notes + one contemporaneous institutional newspaper family; distinguish own-alumni exhibitions versus recognized varsity opponents"
+"SDSU-EXP-R3-02","ALUMNI_AT_STANFORD_FIXTURES","3","game_id in inclusion-review.csv","BLOCKING_STAGE1_INCLUSION","Identify external Stanford alumni opponent vs other interpretation; do not alias to Stanford varsity"
+"SDSU-EXP-R3-03","SAN_DIEGO_STATE_ALL_STARS","2","game_id in inclusion-review.csv","BLOCKING_STAGE1_INCLUSION","Test actual team identity/competitive classification; potential intra-school exhibition"
+"SDSU-EXP-R3-04","AAU_YMCA_TOURNAMENT_GAME_TYPE","13","game_id in inclusion-review.csv","BLOCKING_STAGE1_GAME_TYPE","Review actual event competition status and postseason versus regular-season type as a single five-event family"
+"SDSU-EXP-R3-05","SOURCE_ACKNOWLEDGED_UNIDENTIFIED_1921_22","3","parent administrative-and-unidentified.csv","BLOCKING_STAGE1_COVERAGE","Bounded authoritative archive attempt to identify three official games; preserve season-level debt if not found"
+"SDSU-EXP-R3-06","SOURCE_D_ANNOTATION_UNDECODED","28","source_D_annotation in parent candidate ledger","DOCUMENTED_ANNOTATION_DEBT","Seek source-owned legend; do not infer abbreviation or change play results"
+"SDSU-EXP-R3-07","SCORE_BLANK_WITH_RESULT_KNOWN","5","parent candidate ledger score blanks","NONBLOCKING_FIELD_DEBT","Optional targeted source-backed score recovery, preserve W result"
+"SDSU-EXP-R3-08","SOURCE_DATE_TOKEN_MISSING","10","parent candidate ledger date tokens","NONBLOCKING_FIELD_DEBT","Recover exact date only if evidence encountered; do not inherit adjacent date"
+"SDSU-EXP-R3-09","ADMINISTRATIVE_FORFEIT_AWARDS","5","parent administrative-and-unidentified.csv","EXCLUDED_NO_PLAYED_GAME_IDENTITY","Retain as season-level official W account; only reopen if proven played games"
+"SDSU-EXP-R3-10","SAN_DIEGO_STATE_JV","1","game_id in inclusion-review.csv","EXCLUDED_INTRA_SCHOOL_NON_VARSITY","Preserve in institutional record reconciliation; do not publish own JV as inter-varsity opponent"
