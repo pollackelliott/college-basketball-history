@@ -835,15 +835,15 @@
   "active_lock_commit": "c9571adcb8189cb1129629c6a120aad389ffd61f",
   "active_lock_owner": "github-actions:46062955036:1",
   "active_operation": "PHASE0",
-  "active_prepared_commit_sha": null,
-  "active_prepared_tree_sha": null,
+  "active_prepared_commit_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "active_prepared_tree_sha": "b9821257df510bea5d8d01576206a8f40a748473",
   "active_request_id": "nevada-phase0-0002",
   "active_request_sha256": "4850a56201e03c5cd2ee8f37bb569734b9442fec317050f0a38e2a0771435715",
   "active_school_key": "nevada",
   "active_target_branch": "data/nevada-onboarding",
   "active_writeahead_commit": null,
-  "active_writeahead_path": null,
-  "active_writeahead_sha256": null,
+  "active_writeahead_path": ".remote-implementation/writeahead/nevada/nevada-phase0-0002/writeahead-manifest.json",
+  "active_writeahead_sha256": "8dc7dd16d3213d4900bd60790dd4c448f7faf6dfb3ac146c5cf47e1778c4a848",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
   "consumed_request_ids": [
     "liu-stage1-0001",
@@ -1662,5 +1662,5 @@
   "lock_acquisition_request_commit": "d54f1e7e611c1ef48eca3e75214010bf0ebdeef9",
   "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "INPUTS_VERIFIED"
+  "transaction_state": "PREPARED_NOT_PUBLISHED"
 }

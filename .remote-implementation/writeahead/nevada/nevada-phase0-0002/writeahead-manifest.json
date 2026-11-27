@@ -1,0 +1,708 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/nevada/conferences.csv",
+    "schools/nevada/notes.md",
+    "schools/nevada/opponents.csv",
+    "schools/nevada/source-games.csv",
+    "schools/nevada/source-notes.md",
+    "schools/nevada/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/program-top-level-scope.csv": "4c408b1b82fc365431e89b0ba4a28a820241b67d865bbde51fe161bc59e664f1",
+    "data/reference/programs.csv": "cba73d2aa86d9e0af6f987bd3b879cff23617c2a5581d2041c48a1738e1f5766",
+    "data/reference/venue-names.csv": "121591c5227911b9e8dc11cf5d08fd2a2b87db30c0a190751327ea4045c60701",
+    "data/reference/venues.csv": "41b941637cddd3debdf2cd8b0b56e004519fdbe836fbf468bc437d29b9d186ac",
+    "schools/nevada/conferences.csv": "2589551198cb0317c450e587af20316802893e8369cb6745c2797b776972a8f4",
+    "schools/nevada/notes.md": "5d586d7f1012ef8009d4fcbf8335f3fb72401747fd20c673819c986f04b002e2",
+    "schools/nevada/opponents.csv": "cab71c577d1cdebc7ed2748ed902ccb9cc801ae10e1ae4865c0ffa742839f1e1",
+    "schools/nevada/source-games.csv": "e3809d3c9f58f2bb45852a099e480627b5c9e6c4bac21972af3a0775dfd64770",
+    "schools/nevada/source-notes.md": "b2170e88bbc6f44db4836419e6d97959c09d2c7cbf344c3ce7523f8ac8639cad",
+    "schools/nevada/venues.csv": "4aafc663d1b525102c6dbf14cfae3c2e6c1f867f9ed79d6cd24a6c8b5f834da3"
+  },
+  "changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/nevada/conferences.csv",
+    "schools/nevada/notes.md",
+    "schools/nevada/opponents.csv",
+    "schools/nevada/source-games.csv",
+    "schools/nevada/source-notes.md",
+    "schools/nevada/venues.csv"
+  ],
+  "commit_message": "Add Nevada onboarding source package",
+  "conference_mapping": [],
+  "conference_reconciliation": null,
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "c9571adcb8189cb1129629c6a120aad389ffd61f",
+  "history_scope": {
+    "history_scope_basis": "TOP_LEVEL_INTERVALS",
+    "history_scope_intervals": "1969-70+",
+    "history_scope_notes": "Owner-settled top-level classification begins 1969-70+; history_start_season 1969-1970 is the first accepted top-level interval and is NOT institutional inception. Independently accepted institutional varsity inception 1912-13 and INCEPTION_THROUGH_PRESENT coverage remain immutably bound to the original six-file FROZEN_SUCCESSOR Research Freeze. Reconcile only Nevada's stale target top-level-scope row 1947-48..1947-48|1969-70+ to accepted 1969-70+, preserving all 2,763 research-frozen games and their original historical authority.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "1969-1970",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "1969-70+",
+      "action": "UPDATED",
+      "changed": true,
+      "prior_top_level_scope": "1947-48..1947-48|1969-70+",
+      "school": "Nevada"
+    }
+  },
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "2589551198cb0317c450e587af20316802893e8369cb6745c2797b776972a8f4",
+    "notes.md": "5d586d7f1012ef8009d4fcbf8335f3fb72401747fd20c673819c986f04b002e2",
+    "opponents.csv": "cab71c577d1cdebc7ed2748ed902ccb9cc801ae10e1ae4865c0ffa742839f1e1",
+    "source-games.csv": "e3809d3c9f58f2bb45852a099e480627b5c9e6c4bac21972af3a0775dfd64770",
+    "source-notes.md": "b2170e88bbc6f44db4836419e6d97959c09d2c7cbf344c3ce7523f8ac8639cad",
+    "venues.csv": "4aafc663d1b525102c6dbf14cfae3c2e6c1f867f9ed79d6cd24a6c8b5f834da3"
+  },
+  "prepared_commit_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "prepared_parent_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "prepared_tree_sha": "b9821257df510bea5d8d01576206a8f40a748473",
+  "program_alias_mapping": [],
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "repository_validation": "PASS",
+  "request_id": "nevada-phase0-0002",
+  "request_sha256": "4850a56201e03c5cd2ee8f37bb569734b9442fec317050f0a38e2a0771435715",
+  "research_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "research_checkpoint_sha256": "631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "sidecars": {
+    "integration-freeze.json": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+    "stage1-reconciliation.json": "62d4115176ff6bf92a51e7848dedd78dc42909a0007d2fe83e3deaf9a0d9489a",
+    "venue-reconciliation.json": "b6d84b4b75e30f5379b3eab67c1191e5d503c95586af6ba966c2c99e08a9160e"
+  },
+  "target_branch": "data/nevada-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Acrisure Arena",
+      "final_venue_id": "VEN-000242",
+      "final_venue_key": "acrisure-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "acrisure-arena"
+    },
+    {
+      "canonical_name": "Alaska Airlines Center",
+      "final_venue_id": "VEN-000567",
+      "final_venue_key": "alaska-airlines-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "alaska-airlines-center"
+    },
+    {
+      "canonical_name": "Blaisdell Center",
+      "final_venue_id": "VEN-000149",
+      "final_venue_key": "neal-s-blaisdell-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "blaisdell-center"
+    },
+    {
+      "canonical_name": "Centennial Coliseum",
+      "final_venue_id": "VEN-001167",
+      "final_venue_key": "centennial-coliseum",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "centennial-coliseum"
+    },
+    {
+      "canonical_name": "Charles E. Smith Center",
+      "final_venue_id": "VEN-000434",
+      "final_venue_key": "charles-e-smith-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charles-e-smith-center"
+    },
+    {
+      "canonical_name": "Chase Center",
+      "final_venue_id": "VEN-000042",
+      "final_venue_key": "chase-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "chase-center"
+    },
+    {
+      "canonical_name": "Dollar Loan Center",
+      "final_venue_id": "VEN-000399",
+      "final_venue_key": "lees-family-forum",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "dollar-loan-center"
+    },
+    {
+      "canonical_name": "HP Pavilion",
+      "final_venue_id": "VEN-000183",
+      "final_venue_key": "sap-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "hp-pavilion"
+    },
+    {
+      "canonical_name": "Hilton Coliseum",
+      "final_venue_id": "VEN-000079",
+      "final_venue_key": "hilton-coliseum",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hilton-coliseum"
+    },
+    {
+      "canonical_name": "Hofheinz Pavilion",
+      "final_venue_id": "VEN-000291",
+      "final_venue_key": "hofheinz-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hofheinz-pavilion"
+    },
+    {
+      "canonical_name": "Honda Center",
+      "final_venue_id": "VEN-000082",
+      "final_venue_key": "honda-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "honda-center"
+    },
+    {
+      "canonical_name": "John Gray Gym",
+      "final_venue_id": "VEN-000470",
+      "final_venue_key": "provisional-john-gray-gym",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "john-gray-gym"
+    },
+    {
+      "canonical_name": "KeyArena",
+      "final_venue_id": "VEN-000102",
+      "final_venue_key": "keyarena",
+      "research_venue_id": "VEN-000102",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keyarena"
+    },
+    {
+      "canonical_name": "Lawlor Events Center",
+      "final_venue_id": "VEN-000579",
+      "final_venue_key": "lawlor-events-center",
+      "research_venue_id": "VEN-000579",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "lawlor-events-center"
+    },
+    {
+      "canonical_name": "Mabee Center",
+      "final_venue_id": "VEN-000121",
+      "final_venue_key": "mabee-center",
+      "research_venue_id": "VEN-000121",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mabee-center"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Pauley Pavilion",
+      "final_venue_id": "VEN-000161",
+      "final_venue_key": "pauley-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pauley-pavilion"
+    },
+    {
+      "canonical_name": "Pinnacle Bank Arena",
+      "final_venue_id": "VEN-000165",
+      "final_venue_key": "pinnacle-bank-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pinnacle-bank-arena"
+    },
+    {
+      "canonical_name": "Rip Griffin Center",
+      "final_venue_id": "VEN-000989",
+      "final_venue_key": "rip-griffin-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "rip-griffin-center"
+    },
+    {
+      "canonical_name": "Sanford Pentagon",
+      "final_venue_id": "VEN-000251",
+      "final_venue_key": "sanford-pentagon",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sanford-pentagon"
+    },
+    {
+      "canonical_name": "Sears Centre",
+      "final_venue_id": "VEN-000443",
+      "final_venue_key": "now-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "sears-centre"
+    },
+    {
+      "canonical_name": "Selland Arena",
+      "final_venue_id": "VEN-000374",
+      "final_venue_key": "selland-arena",
+      "research_venue_id": "VEN-000374",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "selland-arena"
+    },
+    {
+      "canonical_name": "South Point Arena",
+      "final_venue_id": "VEN-000724",
+      "final_venue_key": "south-point-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "south-point-arena"
+    },
+    {
+      "canonical_name": "Stan Sheriff Center",
+      "final_venue_id": "VEN-000194",
+      "final_venue_key": "stan-sheriff-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "stan-sheriff-center"
+    },
+    {
+      "canonical_name": "Staples Center",
+      "final_venue_id": "VEN-000051",
+      "final_venue_key": "crypto-com-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "staples-center"
+    },
+    {
+      "canonical_name": "Sullivan Arena",
+      "final_venue_id": "VEN-000361",
+      "final_venue_key": "sullivan-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sullivan-arena"
+    },
+    {
+      "canonical_name": "TD Arena",
+      "final_venue_id": "VEN-000280",
+      "final_venue_key": "td-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "td-arena"
+    },
+    {
+      "canonical_name": "Talking Stick Resort Arena",
+      "final_venue_id": "VEN-000065",
+      "final_venue_key": "footprint-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "talking-stick-resort-arena"
+    },
+    {
+      "canonical_name": "U.P.S. Fieldhouse",
+      "final_venue_id": "VEN-001168",
+      "final_venue_key": "u-p-s-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "u-p-s-fieldhouse"
+    },
+    {
+      "canonical_name": "UVI Sports and Fitness Center",
+      "final_venue_id": "VEN-000191",
+      "final_venue_key": "sports-and-fitness-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "uvi-sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "Virginia Street Gym",
+      "final_venue_id": "VEN-001169",
+      "final_venue_key": "virginia-street-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "virginia-street-gym"
+    },
+    {
+      "canonical_name": "Kibbie Dome",
+      "final_venue_id": "VEN-000978",
+      "final_venue_key": "kibbie-dome",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kibbie-dome"
+    },
+    {
+      "canonical_name": "Dee Events Center",
+      "final_venue_id": "VEN-000054",
+      "final_venue_key": "dee-events-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dee-events-center"
+    },
+    {
+      "canonical_name": "ExtraMile Arena",
+      "final_venue_id": "VEN-000061",
+      "final_venue_key": "extramile-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "extramile-arena"
+    },
+    {
+      "canonical_name": "Walkup Skydome",
+      "final_venue_id": "VEN-000981",
+      "final_venue_key": "walkup-skydome",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "walkup-skydome"
+    },
+    {
+      "canonical_name": "Brick Breeden Fieldhouse",
+      "final_venue_id": "VEN-000447",
+      "final_venue_key": "brick-breeden-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "brick-breeden-fieldhouse"
+    },
+    {
+      "canonical_name": "Dahlberg Arena",
+      "final_venue_id": "VEN-000559",
+      "final_venue_key": "dahlberg-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "dahlberg-arena"
+    },
+    {
+      "canonical_name": "Thomas & Mack Center",
+      "final_venue_id": "VEN-000377",
+      "final_venue_key": "thomas-and-mack-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "thomas-mack-center"
+    },
+    {
+      "canonical_name": "Reynolds Center",
+      "final_venue_id": "VEN-000583",
+      "final_venue_key": "reynolds-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "reynolds-center"
+    },
+    {
+      "canonical_name": "Save Mart Center",
+      "final_venue_id": "VEN-000798",
+      "final_venue_key": "save-mart-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "save-mart-center"
+    },
+    {
+      "canonical_name": "Pan American Center",
+      "final_venue_id": "VEN-000322",
+      "final_venue_key": "pan-american-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "pan-american-center"
+    },
+    {
+      "canonical_name": "Beasley Coliseum",
+      "final_venue_id": "VEN-000283",
+      "final_venue_key": "beasley-coliseum",
+      "research_venue_id": "VEN-000283",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "beasley-coliseum"
+    },
+    {
+      "canonical_name": "The Pit",
+      "final_venue_id": "VEN-000208",
+      "final_venue_key": "the-pit",
+      "research_venue_id": "VEN-000208",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-pit"
+    },
+    {
+      "canonical_name": "The Dome at America's Center",
+      "final_venue_id": "VEN-000204",
+      "final_venue_key": "the-dome-at-america-s-center",
+      "research_venue_id": "VEN-000204",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "the-dome-at-america-s-center"
+    },
+    {
+      "canonical_name": "Hoosier Dome",
+      "final_venue_id": "VEN-000083",
+      "final_venue_key": "hoosier-dome",
+      "research_venue_id": "VEN-000083",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hoosier-dome"
+    },
+    {
+      "canonical_name": "Jon M. Huntsman Center",
+      "final_venue_id": "VEN-000097",
+      "final_venue_key": "jon-m-huntsman-center",
+      "research_venue_id": "VEN-000097",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jon-m-huntsman-center"
+    },
+    {
+      "canonical_name": "Smoothie King Center",
+      "final_venue_id": "VEN-000188",
+      "final_venue_key": "smoothie-king-center",
+      "research_venue_id": "VEN-000188",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "smoothie-king-center"
+    },
+    {
+      "canonical_name": "Bradley Center",
+      "final_venue_id": "VEN-000026",
+      "final_venue_key": "bradley-center",
+      "research_venue_id": "VEN-000026",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bradley-center"
+    },
+    {
+      "canonical_name": "Bridgestone Arena",
+      "final_venue_id": "VEN-000031",
+      "final_venue_key": "bridgestone-arena",
+      "research_venue_id": "VEN-000031",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "bridgestone-arena"
+    },
+    {
+      "canonical_name": "State Farm Arena",
+      "final_venue_id": "VEN-000195",
+      "final_venue_key": "state-farm-arena",
+      "research_venue_id": "VEN-000195",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "state-farm-arena"
+    },
+    {
+      "canonical_name": "Wells Fargo Arena",
+      "final_venue_id": "VEN-000228",
+      "final_venue_key": "wells-fargo-arena",
+      "research_venue_id": "VEN-000228",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wells-fargo-arena"
+    },
+    {
+      "canonical_name": "University of Dayton Arena",
+      "final_venue_id": "VEN-000221",
+      "final_venue_key": "university-of-dayton-arena",
+      "research_venue_id": "VEN-000221",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-of-dayton-arena"
+    },
+    {
+      "canonical_name": "Delta Center",
+      "final_venue_id": "VEN-000055",
+      "final_venue_key": "delta-center",
+      "research_venue_id": "VEN-000055",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "delta-center"
+    },
+    {
+      "canonical_name": "Gill Coliseum",
+      "final_venue_id": "VEN-000373",
+      "final_venue_key": "gill-coliseum",
+      "research_venue_id": "VEN-000373",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gill-coliseum"
+    },
+    {
+      "canonical_name": "United Supermarkets Arena",
+      "final_venue_id": "VEN-000218",
+      "final_venue_key": "united-supermarkets-arena",
+      "research_venue_id": "VEN-000218",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "united-supermarkets-arena"
+    },
+    {
+      "canonical_name": "Charles Koch Arena",
+      "final_venue_id": "VEN-000039",
+      "final_venue_key": "charles-koch-arena",
+      "research_venue_id": "VEN-000039",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "charles-koch-arena"
+    },
+    {
+      "canonical_name": "Ryan Center",
+      "final_venue_id": "VEN-000885",
+      "final_venue_key": "ryan-center-kingston-ri",
+      "research_venue_id": "VEN-000885",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ryan-center-kingston-ri"
+    },
+    {
+      "canonical_name": "Maples Pavilion",
+      "final_venue_id": "VEN-000542",
+      "final_venue_key": "maples-pavilion",
+      "research_venue_id": "VEN-000542",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "maples-pavilion"
+    },
+    {
+      "canonical_name": "Neville Arena",
+      "final_venue_id": "VEN-000150",
+      "final_venue_key": "neville-arena",
+      "research_venue_id": "VEN-000150",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "neville-arena"
+    },
+    {
+      "canonical_name": "Ellis T. Johnson Arena",
+      "final_venue_id": "VEN-000994",
+      "final_venue_key": "ellis-t-johnson-arena",
+      "research_venue_id": "VEN-000994",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ellis-t-johnson-arena"
+    },
+    {
+      "canonical_name": "Original University Gymnasium",
+      "final_venue_id": "VEN-001170",
+      "final_venue_key": "original-university-gymnasium-1896",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "original-university-gymnasium-1896"
+    },
+    {
+      "canonical_name": "Cow Palace",
+      "final_venue_id": "VEN-000289",
+      "final_venue_key": "cow-palace",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "cow-palace-daly-city"
+    },
+    {
+      "canonical_name": "Convention Hall",
+      "final_venue_id": "VEN-000050",
+      "final_venue_key": "convention-hall-kc",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "kansas-city-convention-hall"
+    },
+    {
+      "canonical_name": "Municipal Auditorium",
+      "final_venue_id": "VEN-000143",
+      "final_venue_key": "municipal-auditorium-kc",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "kansas-city-municipal-auditorium"
+    },
+    {
+      "canonical_name": "Fresno State North Gym",
+      "final_venue_id": "VEN-001171",
+      "final_venue_key": "fresno-state-north-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "fresno-state-north-gym"
+    },
+    {
+      "canonical_name": "Hickey Gymnasium",
+      "final_venue_id": "VEN-001151",
+      "final_venue_key": "hickey-gymnasium-uc-davis",
+      "research_venue_id": "VEN-001151",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "hickey-gymnasium-uc-davis"
+    }
+  ],
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "b9de88125230f991943c259d9f67d4c826869059dc309a26209b657542e09159",
+    "mappings": [
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "George Town",
+        "expected_global_state": "Cayman Islands",
+        "expected_local_city": "George Town",
+        "expected_local_name": "John Gray Gym",
+        "expected_local_state": "Cayman Islands",
+        "global_venue_id": "VEN-000470",
+        "global_venue_key": "provisional-john-gray-gym",
+        "local_venue_key": "john-gray-gym",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Nevada accepted 2022-11-21 to 2022-11-23 Cayman Islands Classic exact neutral site; protected main VEN-000470 explicitly identifies John Gray Gym in George Town Cayman Islands with the same name and physical locality. Existing separate VEN-001096 is a preexisting other-school global identity; this Nevada-only reuse neither creates nor repairs that shared registry duplication."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Hoffman Estates",
+        "expected_global_state": "IL",
+        "expected_local_city": "Hoffman Estates",
+        "expected_local_name": "Sears Centre",
+        "expected_local_state": "IL",
+        "global_venue_id": "VEN-000443",
+        "global_venue_key": "now-arena",
+        "local_venue_key": "sears-centre",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Nevada accepted 2011-11-25 and 2011-11-26 exact neutral games at Sears Centre; existing VEN-000443 Sears Centre/NOW Arena matches exact historical display name and Hoffman Estates Illinois physical site."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Las Vegas",
+        "expected_global_state": "NV",
+        "expected_local_city": "Las Vegas",
+        "expected_local_name": "Thomas & Mack Center",
+        "expected_local_state": "NV",
+        "global_venue_id": "VEN-000377",
+        "global_venue_key": "thomas-and-mack-center",
+        "local_venue_key": "thomas-mack-center",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Nevada exact game-set conference tournament research 1994 to 2026 identifies Thomas & Mack Center Las Vegas; existing VEN-000377 has identical building name and geography, only a normalized-key difference."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Daly City",
+        "expected_global_state": "CA",
+        "expected_local_city": "Daly City",
+        "expected_local_name": "Cow Palace",
+        "expected_local_state": "CA",
+        "global_venue_id": "VEN-000289",
+        "global_venue_key": "cow-palace",
+        "local_venue_key": "cow-palace-daly-city",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Santa Clara original official record-book source independently places the Nevada 1947-12-13 neutral at Cow Palace Daly City; current VEN-000289 explicitly locates this building in Daly City California, distinct from the unrelated LSU John M. Parker Agricultural Coliseum Cow Palace alias."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Kansas City",
+        "expected_global_state": "MO",
+        "expected_local_city": "Kansas City",
+        "expected_local_name": "Convention Hall",
+        "expected_local_state": "MO",
+        "global_venue_id": "VEN-000050",
+        "global_venue_key": "convention-hall-kc",
+        "local_venue_key": "kansas-city-convention-hall",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Nevada accepted three 1921 AAU postseason exact game venue statements use Kansas City Missouri Convention Hall, explicitly not 1935 Municipal Auditorium; protected main VEN-000050 Kansas City Convention Hall identity and Butler research corroborate the same historic building, distinct from Philadelphia/Washington Convention Halls."
+      }
+    ],
+    "owner_approval_basis": "Owner approved continuation of the already certified Nevada Research Freeze through Implementation Stage 1. All five entries are research-evidenced current-main identity reuses determined mechanically under existing Stage 1 reconciliation policy, without any new historical site inference or changes to other-school/global venue registries. Exact local geography and exact existing protected-main venue IDs/keys are authenticated; no Phase 0 is authorized.",
+    "research_zip_sha256": "631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103",
+    "schema_version": 1,
+    "spec_path": "/tmp/remote-phase0-inputs-qkc1_8ck/venue-reconciliation.json",
+    "spec_sha256": "b6d84b4b75e30f5379b3eab67c1191e5d503c95586af6ba966c2c99e08a9160e"
+  }
+}
