@@ -1,0 +1,46 @@
+{
+  "checkpoint": "0011-broadway-house-david-inclusion-evidence-boundary",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "51b2decb559a2655289bf1462d8e515656fd58aa",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "counts": {
+    "family_game_ids": 16,
+    "accepted_game_ids_unchanged": 2,
+    "held_game_ids_unchanged": 14,
+    "material_status_delta": 0,
+    "overall_accepted": 1061,
+    "overall_held": 64,
+    "overall_source_results": 1126
+  },
+  "primary_source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "files": {
+    "family-game-review.csv": {
+      "sha256": "0f30dea197e9effce3053118bccfd7bcf550a0c63abc2cf20aeb617238fca9ce",
+      "bytes_utf8": 4219
+    },
+    "family-held-exact-residuals.csv": {
+      "sha256": "e821514ff5dadcda42ea7ae43162e53d2e17832ac4a4512ac0f42ccf10b1c087",
+      "bytes_utf8": 4755
+    },
+    "family-aggregate-matrix.csv": {
+      "sha256": "a2679f8585208d228adae41ec0d2cad69af35daee417af683e3cba73ee6bd9ad",
+      "bytes_utf8": 654
+    },
+    "source-evidence-matrix.csv": {
+      "sha256": "39499a4a02cc8b4ff4cc197421c5def42aa84fadd13f56946ba40df096110ddd",
+      "bytes_utf8": 2966
+    },
+    "source-findings.md": {
+      "sha256": "a2bf1ae906d7a3b4094bc30faebaee734c21dab2ccb6b540aa3ef39958a95da7",
+      "bytes_utf8": 5891
+    },
+    "research-status.json": {
+      "sha256": "744deee8be32f4d06b672e4a20eda3544b84c43572c40b028f7372cce5c43a6d",
+      "bytes_utf8": 1556
+    }
+  }
+}
