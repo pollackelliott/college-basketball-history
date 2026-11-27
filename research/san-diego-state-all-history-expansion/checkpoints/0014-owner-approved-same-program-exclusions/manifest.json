@@ -1,0 +1,50 @@
+{
+  "checkpoint": "0014-owner-approved-same-program-exclusions",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "75d02e3ea631f94a53542c0cef791983b5499434",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "approved_ids_sha256": "646252a1951e52841ce2e5d4f6f29ffd1017c2565e91581bae2a36e108fcba84",
+  "counts": {
+    "named_source": 1126,
+    "accepted": 1061,
+    "held": 26,
+    "excluded_owner": 38,
+    "excluded_jv": 1,
+    "changed_status": 38,
+    "source_seasons": 49
+  },
+  "files": {
+    "owner-approved-exclusions.csv": {
+      "sha256": "5fc337d9d9da6e4f6604ed01ce699a94c0691e4cc06603c90d31cbf0aa521656",
+      "bytes_utf8": 6215
+    },
+    "remaining-26-held-inclusion.csv": {
+      "sha256": "5002791caec98abab377e1f76482e025048aff19638ecfb35e89da25e38e711b",
+      "bytes_utf8": 4529
+    },
+    "all-49-season-dispositions.csv": {
+      "sha256": "6b5f2683b2393bded0e0dd8427ef9a1ddc0273c9967130eb8e10982c392e9ddd",
+      "bytes_utf8": 98442
+    },
+    "49-season-disposition-reconciliation.csv": {
+      "sha256": "4e3a0e746da98b1a2dc7c4602f40027c8cbe01d307223ea753b27a9df83e4b75",
+      "bytes_utf8": 3628
+    },
+    "owner-approval.json": {
+      "sha256": "60a566512beab28e9667d77b3a9d24e7755feb2e879e5c1890f78cc3fac46115",
+      "bytes_utf8": 1258
+    },
+    "research-findings.md": {
+      "sha256": "0d4ee240e81d9aa73c12a7d8f62484ba98883af976e01f8b034801e92f32877f",
+      "bytes_utf8": 2173
+    },
+    "research-status.json": {
+      "sha256": "4c80bd7d4402fa9e05b46f3099e49f35dc48f283527e8593c4a30b785286a9ac",
+      "bytes_utf8": 1361
+    }
+  }
+}

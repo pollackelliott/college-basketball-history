@@ -1,0 +1,35 @@
+{
+  "checkpoint": "0014-owner-approved-same-program-exclusions",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_state": "STAGE_1_BLOCKED_REMAINING_26_INCLUSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "75d02e3ea631f94a53542c0cef791983b5499434",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "owner_approved_scope": "SAME_PROGRAM_ALUMNI_38",
+  "approved_id_set_sha256": "646252a1951e52841ce2e5d4f6f29ffd1017c2565e91581bae2a36e108fcba84",
+  "owner_approved_excluded": 38,
+  "previously_accepted_games_preserved": 1061,
+  "out_of_scope_status_changes": 0,
+  "identified_named_results": 1126,
+  "accepted_games": 1061,
+  "accepted_game_types": {
+    "REGULAR_SEASON": 1018,
+    "POSTSEASON": 43
+  },
+  "held_inclusion": 26,
+  "excluded_same_program": 38,
+  "excluded_own_jv": 1,
+  "total_excluded": 39,
+  "unidentified_source_results": 3,
+  "administrative_forfeit_awards": 5,
+  "original_source_outcomes": 1134,
+  "remaining_held_classes": {
+    "TOURING_ENTERTAINMENT": 18,
+    "ATHLETES_IN_ACTION": 1,
+    "OTHER_INDEPENDENT_TEAMS": 7
+  },
+  "next_bounded_unit": "The exact 26 remaining independent-opponent inclusion decisions; preserve this 38-game terminal owner ruling"
+}

@@ -1,0 +1,24 @@
+{
+  "school_key": "san-diego-state",
+  "kind": "EXPLICIT_OWNER_APPROVED_STAGE1_SAME_PROGRAM_EXCLUSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_exact_research_head": "75d02e3ea631f94a53542c0cef791983b5499434",
+  "parent_checkpoint": "0013-stage1-inclusion-authority-convergence-assessment",
+  "owner_question": "Do you authorize classifying the exact 38 San Diego State Alumni, Alumni at Stanford, and San Diego State All-Stars games in checkpoint 0013 as noncompetitive same-program contests and excluding them from the supplemental competitive-game universe?",
+  "owner_reply": "Approved. Proceed",
+  "approved_scope": "Exactly 38 previously held SAME_PROGRAM_ALUMNI rows from checkpoint 0013",
+  "approval_id_count": 38,
+  "sorted_id_set_sha256": "646252a1951e52841ce2e5d4f6f29ffd1017c2565e91581bae2a36e108fcba84",
+  "approved_family_counts": {
+    "Alumni": 33,
+    "Alumni at Stanford": 3,
+    "San Diego State All-Stars": 2
+  },
+  "source_record_wins": 27,
+  "source_record_losses": 11,
+  "old_disposition": "HELD_INCLUSION",
+  "new_disposition": "EXCLUDED_NONCOMPETITIVE_SAME_PROGRAM",
+  "all_26_independent_opponents_unchanged": true,
+  "no_automatic_stage1_complete": true,
+  "no_shared_policy_mutation": true
+}
