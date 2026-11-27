@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "96053545e59c9f92cba8fbe6b3fadea4a408938f2c0c0a9320d66f7584d27815",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "5a1cbd1bb393b9af5af0e75bc9b6b572ec781e143aa186aa2cb961905b3f2bbb",
+  "pr_created": false,
+  "preview_request_id": "uc-davis-expansion-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "readiness_proof_sha256": "aabcdf181ff3a325f9a67a0c82e05f6209a1fa8b71170c6f67cc57a7d9700959",
+  "release_pr_packet_sha256": "0442572a74788d62a6861544bea335f015a4a337acf6032b15b5731f7a7b17df",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "uc-davis-expansion-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "tracked_mutation": "NONE"
+}
