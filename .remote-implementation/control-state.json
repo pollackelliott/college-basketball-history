@@ -829,18 +829,19 @@
     "nevada-stage1-0001",
     "nevada-stage1-0002",
     "nevada-phase0-0001",
-    "nevada-phase0-0002"
+    "nevada-phase0-0002",
+    "nevada-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "nevada-stage2-census-0001",
+  "active_request_sha256": "adf80b77b342560501122fa033988b58b53fc71604fb781f2c8a9f5a55f51bd2",
+  "active_school_key": "nevada",
+  "active_target_branch": "data/nevada-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1656,8 +1657,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/nevada/nevada-phase0-0002/writeahead-manifest.json",
     "writeahead_manifest_sha256": "8dc7dd16d3213d4900bd60790dd4c448f7faf6dfb3ac146c5cf47e1778c4a848"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "46069842690",
+  "lock_acquisition_request_commit": "10f239961f486fe311b1c58568fad249106d17ae",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }

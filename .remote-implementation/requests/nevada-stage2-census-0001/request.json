@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "nevada-stage2-census-0001",
+  "school_key": "nevada",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "38c2b232b4a2053bde4b1eefdfa1f872a094ae43",
+  "previous_control_state_sha256": "5936d358f0881e85d5e0744672373b78c3f27b6fa97062538e38a6aef54eeabf",
+  "expected_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/nevada/nevada-phase0-0002/successor-manifest.json",
+    "sha256": "85f52ca63ff1743ae506c0e7baeec338079213143a474695fbcc4a6b241de009"
+  },
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "creation_provenance": {
+    "origin": "Nevada ordinary serialized Implementation: first read-only Stage 2 capability census after verified Phase 0.",
+    "authorization": "Owner said Continue. Independently fresh-verified guarded Phase 0 nevada-phase0-0002 is COMPLETE and equivalent PASS on protected main a11cccf944492e4d968edbeef4111ebad150fcec, immutable target be03db65347decfeb700fae3ee62fc6ca5a92fe1, Integration Freeze 6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739, and source-game semantic snapshot a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317. Advance exactly one bounded unit: read-only STAGE2_CENSUS with no tracked mutation. No repair, recommendation-map submission, owner historical ruling or gate, seal/apply, Preview, release, merge, or Production."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
