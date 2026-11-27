@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "nevada-stage1-0001",
+  "request_id": "nevada-stage1-0002",
   "school_key": "nevada",
   "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "0e6d26d61b56b09827c6986a153290426019309f",
-  "previous_control_state_sha256": "1b2713e55289ec6b2bac71b87609c5e66beb9e2ef192a133338fa2f260473dd2",
+  "previous_control_state_commit": "d5728d5d4c5a4599691424408d58a9b6c8fddcc6",
+  "previous_control_state_sha256": "7fabc8857c9ffe3c5408b567fe147667315b964ccbad6a7ae7ff0b3ce45c18cd",
   "expected_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
   "research_checkpoint": {
     "sha256": "631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103",
@@ -17,9 +17,13 @@
       "part_count": 4
     }
   },
+  "venue_reconciliation": {
+    "path": ".remote-implementation/inputs/nevada-stage1-0002/venue-reconciliation.json",
+    "sha256": "b6d84b4b75e30f5379b3eab67c1191e5d503c95586af6ba966c2c99e08a9160e"
+  },
   "creation_provenance": {
-    "origin": "Nevada ordinary Implementation Stage 1 - recovered certified Research Freeze and immutable Git transport.",
-    "authorization": "Owner explicitly approved resumption of existing Nevada Implementation Stage 1 on November 27 2026. Original certified authority bundle SHA-256 c6472d5141e0138a8255c96defe237ba3d7b5e95f6d3b87f3701e5dec4b9c32b. Stage 5 full NON_D1 approval, Stage 6 adversarial self-challenge, final Stage 7 notes-only audit and original research-check PASS verified. Exact accepted Freeze SHA-256 631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103. Perform read-only permanent Stage 1 inventory only; NO Phase 0, Stage 2, Owner Gate, Research reopening, shared/global or protected-main mutation."
+    "origin": "Nevada ordinary Implementation Stage 1 continuation - complete prior blocked inventory, five explicit existing identity reuses.",
+    "authorization": "Owner APPROVED resumption of Nevada Stage 1. Prior permanent nevada-stage1-0001 complete Stage 1 census is BLOCKED solely by five physical match candidates, with zero global maintenance blockers. Use unchanged certified Research Freeze and exact existing current-main venue IDs to resolve those five representation-only cases with hash-bound venue reconciliation. Preserve all frozen game meaning, source rows and original evidence; no protected main mutation, global venue registry maintenance, Phase 0, Stage 2, historical approvals, Gate 1, Gate 2 or release authority."
   },
   "authority": {
     "phase0": false,
