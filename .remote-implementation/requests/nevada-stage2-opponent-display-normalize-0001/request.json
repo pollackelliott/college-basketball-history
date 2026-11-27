@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "nevada-stage2-opponent-display-normalize-0001",
+  "school_key": "nevada",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "previous_control_state_commit": "e3ba1a0855f474d90629da83b3ed890db2a8cfb3",
+  "previous_control_state_sha256": "66e0656bcda8af65e40d67d04cb69fb46de38218d3379a8df9ab0eca5ad9566a",
+  "expected_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "stage2_census_checkpoint": {
+    "path": ".remote-implementation/checkpoints/nevada/nevada-stage2-census-0001/checkpoint-manifest.json",
+    "sha256": "4781f4374da2f9568ad98aafe634a134cb5636c618d5e3e3f5638bde046aa43d"
+  },
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "creation_provenance": {
+    "origin": "Nevada ordinary serialized Implementation Stage 2; exact census-bound deterministic historical opponent-display normalization.",
+    "authorization": "Owner said Proceed after fresh-verified Nevada Stage 2 census nevada-stage2-census-0001. Census is BLOCKED solely on exactly two historical opponent-display conflicts, augustana-south-dakota and cal-state-los-angeles; zero warnings, zero owner decisions, zero semantic drift, tracked mutation NONE. Existing Stage 2 phase authorization permits one coherent guarded normalizer operation exactly census-bound. Permanent normalizer chooses existing project display authorities, dry-run must reproduce only these two keys, and may alter only opponents.csv canonical_opponent_name plus source-games.csv normalized_opponent_name. Preserve opponent keys, game identities, literal source labels, H/A/N, dates, scores, type, venue, every other historical field, semantic Freeze, and main. No broad cleanup, Stage 2 proposal/map, Gate 1, seal/apply, Preview, release, merger, or Production authority."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": true,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
