@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "workflow_version": 1,
+  "school_key": "nevada",
+  "created_at": "2026-11-27T21:23:35.561012+00:00",
+  "input_fingerprint": {
+    "sha256": "8c91408b383be63e7c27f1471468d3fce7b30e1c856bc9d4f5f5ef82a8c20d7d",
+    "git_head": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+    "files": {
+      "schools/nevada/source-games.csv": "e3809d3c9f58f2bb45852a099e480627b5c9e6c4bac21972af3a0775dfd64770",
+      "schools/nevada/opponents.csv": "cab71c577d1cdebc7ed2748ed902ccb9cc801ae10e1ae4865c0ffa742839f1e1",
+      "schools/nevada/venues.csv": "4aafc663d1b525102c6dbf14cfae3c2e6c1f867f9ed79d6cd24a6c8b5f834da3",
+      "schools/nevada/conferences.csv": "2589551198cb0317c450e587af20316802893e8369cb6745c2797b776972a8f4",
+      "schools/nevada/notes.md": "5d586d7f1012ef8009d4fcbf8335f3fb72401747fd20c673819c986f04b002e2",
+      "schools/nevada/source-notes.md": "b2170e88bbc6f44db4836419e6d97959c09d2c7cbf344c3ce7523f8ac8639cad",
+      "data/canonical/games.csv": "c6b7f66d70e5da8b5db21629cc641eaa84ee9754aa3f97b09342827a7fbb52f6",
+      "data/evidence/game-assertions.csv": "36f75a73d7656ebb23f76767ab854f55eb97f3c90f55eedcb752594dad0d0e03",
+      "data/reconciliation/discrepancies.csv": "323b7a514900ae30116f3f959d3c60138d57ff3a4ff3077a60341dba96263a8e",
+      "data/reference/programs.csv": "cba73d2aa86d9e0af6f987bd3b879cff23617c2a5581d2041c48a1738e1f5766",
+      "data/reference/program-names.csv": "61dab03e6dd3f7a8121583837bb90ab2b17d0514a8d73a6e44f106ae30d01367",
+      "data/reference/program-accomplishments.csv": "b358fb536c14b2aafd7bfa226b837948222173e6ec3ee14596d269e6725d72ad",
+      "data/reference/conference-membership.csv": "beb2ab5514fa88a7b1a221ea49a66b7c465b36e727d5d98b29f13854e529d2ef",
+      "data/reference/conferences.csv": "741ed108d14c1112ed86bef23c33c9ab9fa3e3d0bed26c63df6e3918d87d0bc8",
+      "tools/administrative_status.py": "0c33f2963c5b9bcfdd78345b45dfe45a414429a91402f675188420a5f62436a7",
+      "tools/build_site_data.py": "61c782959d044a5341721b535d0d1d09f98d4d1db15d089e46c2dee8df923053",
+      "tools/conference_reference.py": "4b53595c9546f023ab87e26e96bd68f3d23093ebd588fb9f659f7c8c07630bbc",
+      "tools/ingest_school.py": "27e44339ca8f7e859ed50c1ded5c79bd9f373d7bb87f43012787752e6f7d47e1",
+      "tools/location_safety.py": "03a9a3a192d3f5e2207e1846e26e4f02ff84e0d5b11436dc78a08dc95bdf5c3c",
+      "tools/ncaa_safety.py": "fdec6a5b252dbf44ef6cd5e0ca1b2e46702bdb37a6437945b413ff925c9ed29f",
+      "tools/onboard_school.py": "100bbf38d2a2dd3fe58cd3c7a9bf4f0cb436fd7013206b115ef7436ec89612e5",
+      "tools/onboarding_plan.py": "b21ce785a2423c80f59999c83e48bc549b5da858b895d0c25bffb9fcdd98025b",
+      "tools/program_history.py": "d1b6d69e15a994dcefb628d7078e100f792c671db35e32bd5efef504b6c860da",
+      "tools/validate_data.py": "58a288b964b98af0f6a49a0afc7dfa1c9f7b665f0f03a05de1378d00ee58287b",
+      "tools/verify_program_accomplishments.py": "9b2cd4ec6bafcd9f825fd6d6a1c42a52ecce0497c523f3fbdb48f157aab59dcb"
+    }
+  },
+  "package": {
+    "errors": [
+      "historical opponent display conflict: augustana-south-dakota: ['Augustana (SD)', 'Augustana University (South Dakota)']. Normalize the school opponent display to existing project authority before Gate 1.",
+      "historical opponent display conflict: cal-state-los-angeles: ['Cal State LA', 'Cal State Los Angeles']. Normalize the school opponent display to existing project authority before Gate 1."
+    ],
+    "warnings": [],
+    "source_consistency_issues": [],
+    "counts": {
+      "source_games": 2763,
+      "correction_unchanged_published_rows": 0,
+      "opponents": 550,
+      "venues": 66,
+      "conference_intervals": 5,
+      "source_consistency_issues": 0
+    }
+  },
+  "blockers": [
+    "historical opponent display conflict: augustana-south-dakota: ['Augustana (SD)', 'Augustana University (South Dakota)']. Normalize the school opponent display to existing project authority before Gate 1.",
+    "historical opponent display conflict: cal-state-los-angeles: ['Cal State LA', 'Cal State Los Angeles']. Normalize the school opponent display to existing project authority before Gate 1."
+  ],
+  "warnings": [],
+  "summary": {},
+  "decisions": []
+}
