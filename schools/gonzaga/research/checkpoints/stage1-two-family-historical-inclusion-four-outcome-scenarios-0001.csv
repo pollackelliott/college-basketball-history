@@ -1,0 +1,5 @@
+scenario,include_1937_38_whitman,include_1942_43_february,net_added,added_W,added_L,hypothetical_expansion_games,hypothetical_record,hypothetical_1937_38_source_record,hypothetical_1942_43_source_record
+NO_FAMILY_INCLUDED,false,false,0,0,0,560,216-344,0-6 / 6,2-9 / 11
+1937_38_WHITMAN_FOUR_INCLUDED_ONLY,true,false,4,1,3,564,217-347,1-9 / 10,2-9 / 11
+1942_43_FEB_FOUR_INCLUDED_ONLY,false,true,4,4,0,564,220-344,0-6 / 6,6-9 / 15
+BOTH_FAMILIES_ALL_EIGHT_INCLUDED,true,true,8,5,3,568,221-347,1-9 / 10,6-9 / 15
