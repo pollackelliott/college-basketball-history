@@ -1,0 +1,31 @@
+{
+  "checkpoint_id": "0001-inception-source-inventory",
+  "research_stage": "STAGE_1",
+  "stage1_complete": false,
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "school_key": "san-diego-state",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "created_date": "2026-11-26",
+  "files": {
+    "season-census.csv": {
+      "sha256": "4f003c8d7edb352b6dbd4c3aaf2630101de40ae8c4a610dfae2f44a31bf1b156",
+      "bytes": 3724
+    },
+    "source-inventory.md": {
+      "sha256": "dc8079c1f4c10fd3f1a77a24bf7187b83e8f36c816716eea727903d4fbef8e62",
+      "bytes": 5230
+    },
+    "initial-discrepancies.md": {
+      "sha256": "e64e5c4112e17038dbf25f3a483cf6d45836e0bcd2769212aabb8d2f383bf91a",
+      "bytes": 2189
+    },
+    "research-status.json": {
+      "sha256": "220688dd106e72b02d61329f289874f27ff9dd280930891b7e1bc7d237bc6c3d",
+      "bytes": 2047
+    }
+  },
+  "total_seasons": 49,
+  "official_pre_1970_games": 1134,
+  "accepted_supplemental_games": 0
+}
