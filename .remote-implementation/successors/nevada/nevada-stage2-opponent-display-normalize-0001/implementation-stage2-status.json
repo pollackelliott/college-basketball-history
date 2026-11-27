@@ -1,0 +1,44 @@
+{
+  "branch": "remote-stage2-census/nevada-698639f0c826",
+  "capability_census": {
+    "path": ".onboarding/nevada/implementation-stage2-capability-census.json",
+    "status": "CENSUS_CAPTURED",
+    "topology_group_count": 2
+  },
+  "head_sha": "698639f0c826804b2504f642d1616ac61fb171c4",
+  "integration_base_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "integration_semantic_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "next_action": "Review the durable capability census, complete the bounded deterministic/adversarial review and supported historical recommendations, then write one compact recommendation map and rerun this command with --map <path>. Do not merge the first generic tooling repair until the complete currently detected repair scope is classified.",
+  "origin_main_sha_at_integration_freeze": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "preflight": {
+    "blocker_count": 0,
+    "conditional_discrepancies": 93,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 93,
+      "discrepancy": 36,
+      "identity": 39,
+      "publication": 1
+    },
+    "decision_count": 170,
+    "decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+    "discrepancies_to_add": 36,
+    "existing_game_matches": 830,
+    "identity_cardinality_constraints": 24,
+    "new_canonical_games": 1894,
+    "plan_path": ".onboarding/nevada/plan.json",
+    "review_path": ".onboarding/nevada/review.csv",
+    "warning_count": 0
+  },
+  "research_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "semantic_drift": {
+    "change_count": 0,
+    "status": "PASS"
+  },
+  "stage": "IMPLEMENTATION_STAGE_2",
+  "status": "CAPABILITY_CENSUS_READY"
+}

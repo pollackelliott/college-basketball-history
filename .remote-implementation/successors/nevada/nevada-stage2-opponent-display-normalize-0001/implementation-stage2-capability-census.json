@@ -1,0 +1,344 @@
+{
+  "preflight": {
+    "blocker_count": 0,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {
+      "accomplishments": 1,
+      "conditional_discrepancy": 93,
+      "discrepancy": 36,
+      "identity": 39,
+      "publication": 1
+    },
+    "decision_count": 170,
+    "decision_fields": {
+      "game_date": 18,
+      "game_identity": 39,
+      "program_accomplishments": 1,
+      "public_page_enabled": 1,
+      "result_winner_team_key": 8,
+      "score": 72,
+      "site_type": 31
+    },
+    "site_or_han_review_decision_ids": [
+      "CONDITIONAL-DISCREPANCY-NEVADA-1914-19-004-CBBG-0114373-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1921-19-003-CBBG-0214040-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1925-19-009-CBBG-0214082-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1925-19-009-CBBG-0214083-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1937-19-007-CBBG-0175252-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1938-19-015-CBBG-0214314-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1938-19-015-CBBG-0214315-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1959-19-018-CBBG-0214694-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1959-19-018-CBBG-0214702-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1959-19-018-CBBG-0214703-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1961-19-020-CBBG-0173454-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1962-19-024-CBBG-0214763-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1963-19-015-CBBG-0212786-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1968-19-018-CBBG-0214908-SITE_TYPE",
+      "CONDITIONAL-DISCREPANCY-NEVADA-1997-98-022-CBBG-0172571-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1915-19-007-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1921-19-008-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1921-19-009-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1921-19-015-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1925-19-010-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1932-19-021-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1938-19-014-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1956-19-018-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1959-19-017-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1963-19-021-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1964-19-003-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1965-19-009-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1966-19-021-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1973-74-008-SITE_TYPE",
+      "DISCREPANCY-NEVADA-1980-81-010-SITE_TYPE",
+      "DISCREPANCY-NEVADA-2017-18-023-SITE_TYPE"
+    ],
+    "warning_count": 0
+  },
+  "repair_rule": "If any topology is a generic permanent-tool defect, classify the complete currently detected defect population and define one consolidated repair scope before merging the first tooling repair. Rerun/regeneration is verification, not the discovery mechanism.",
+  "schema_version": 1,
+  "site_diagnostic": {
+    "counts": {},
+    "examples": {},
+    "status": ""
+  },
+  "status": "CENSUS_CAPTURED",
+  "topology_groups": [
+    {
+      "classification": "HISTORICAL_OR_REPRESENTATION_REVIEW",
+      "count": 31,
+      "topology": "site_or_han_review_population"
+    },
+    {
+      "classification": "PERMANENT_MAP_VALIDATION",
+      "constraints": [
+        {
+          "canonical_game_id": "CBBG-0070665",
+          "fixed_confident_source_game_ids": [
+            "nevada-1921-19-011"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1921-19-010"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0104268",
+          "fixed_confident_source_game_ids": [
+            "nevada-1929-19-004"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1929-19-003"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0106922",
+          "fixed_confident_source_game_ids": [
+            "nevada-1929-19-005"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1929-19-006"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0107181",
+          "fixed_confident_source_game_ids": [
+            "nevada-1941-19-002"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1941-19-001"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0112761",
+          "fixed_confident_source_game_ids": [
+            "nevada-1923-19-005"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1923-19-004"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0112772",
+          "fixed_confident_source_game_ids": [
+            "nevada-1924-19-009"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1924-19-008"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0112785",
+          "fixed_confident_source_game_ids": [
+            "nevada-1925-19-011"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1925-19-012"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114475",
+          "fixed_confident_source_game_ids": [
+            "nevada-1925-19-013"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1925-19-014"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0114485",
+          "fixed_confident_source_game_ids": [
+            "nevada-1926-19-008"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1926-19-009"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0172571",
+          "fixed_confident_source_game_ids": [
+            "nevada-1997-98-015"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1997-98-022"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0173454",
+          "fixed_confident_source_game_ids": [
+            "nevada-1961-19-001"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1961-19-020"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0210484",
+          "fixed_confident_source_game_ids": [
+            "nevada-1946-19-019"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1946-19-020"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0212786",
+          "fixed_confident_source_game_ids": [
+            "nevada-1963-19-009"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1963-19-015"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214036",
+          "fixed_confident_source_game_ids": [
+            "nevada-1921-19-002"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1921-19-003"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214040",
+          "fixed_confident_source_game_ids": [
+            "nevada-1921-19-015"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1921-19-003"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214077",
+          "fixed_confident_source_game_ids": [
+            "nevada-1924-19-013"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1924-19-012"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214083",
+          "fixed_confident_source_game_ids": [
+            "nevada-1925-19-010"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1925-19-009"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214133",
+          "fixed_confident_source_game_ids": [
+            "nevada-1929-19-009"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1929-19-010"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214179",
+          "fixed_confident_source_game_ids": [
+            "nevada-1931-19-017"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1931-19-016"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214314",
+          "fixed_confident_source_game_ids": [
+            "nevada-1938-19-014"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1938-19-015"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214702",
+          "fixed_confident_source_game_ids": [
+            "nevada-1959-19-017"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1959-19-010",
+            "nevada-1959-19-018"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214728",
+          "fixed_confident_source_game_ids": [
+            "nevada-1960-19-020"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1960-19-015"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214763",
+          "fixed_confident_source_game_ids": [
+            "nevada-1962-19-017"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1962-19-024"
+          ]
+        },
+        {
+          "canonical_game_id": "CBBG-0214908",
+          "fixed_confident_source_game_ids": [
+            "nevada-1968-19-021"
+          ],
+          "reason": "CONFIDENT_MATCH_WITH_REVIEW_CANDIDATES",
+          "required_total_target_matches": 1,
+          "review_source_game_ids": [
+            "nevada-1968-19-018"
+          ]
+        }
+      ],
+      "count": 24,
+      "topology": "target_canonical_identity_cardinality_constraints"
+    }
+  ]
+}
