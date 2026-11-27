@@ -1,0 +1,220 @@
+research_game_id,season_label,game_date,source_opponent_literal,source_site_token,site_type,played_result,team_score,opponent_score,game_type,source_event,source_page
+BOISE-EXP-S1-RECIP-1934-001,1934-35,,Idaho State (then University of Idaho Southern Branch),Boise JC,UNKNOWN,L,19,63,REGULAR_SEASON,,
+BOISE-EXP-S1-RECIP-1934-002,1934-35,,Idaho State (then University of Idaho Southern Branch),Boise JC,UNKNOWN,L,36,53,REGULAR_SEASON,,
+BOISE-EXP-S1-RECIP-1934-003,1934-35,,Idaho State (then University of Idaho Southern Branch),at Boise JC,UNKNOWN,L,30,57,REGULAR_SEASON,,
+BOISE-EXP-S1-RECIP-1934-004,1934-35,,Idaho State (then University of Idaho Southern Branch),at Boise JC,UNKNOWN,L,36,45,REGULAR_SEASON,,
+BOISE-EXP-S1-RECIP-1939-001,1939-40,,Idaho State (then University of Idaho Southern Branch),at Boise JC,UNKNOWN,L,26,56,REGULAR_SEASON,,
+BOISE-EXP-S1-RECIP-1939-002,1939-40,,Idaho State (then University of Idaho Southern Branch),Boise JC,UNKNOWN,L,28,44,REGULAR_SEASON,,
+BOISE-EXP-S1-RECIP-1939-003,1939-40,1940-03-18,Denver,"Regional AAU Tournament (Denver, Colo.) #",UNKNOWN,L,35,77,POSTSEASON,Regional AAU Tournament,
+BOISE-EXP-S1-1968-001,1968-69,1968-11-30,Idaho State,A,OPPONENT_HOME,L,63,67,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-002,1968-69,1968-12-06,Eastern Oregon,H,SOURCE_PROGRAM_HOME,W,87,63,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-003,1968-69,1968-12-07,College of Idaho,A,OPPONENT_HOME,W,72,56,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-004,1968-69,1968-12-09,Hardin-Simmons,H,SOURCE_PROGRAM_HOME,L,85,96,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-005,1968-69,1968-12-12,Whitworth,A,OPPONENT_HOME,L,72,76,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-006,1968-69,1968-12-13,Carroll College,A,OPPONENT_HOME,W,82,75,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-007,1968-69,1968-12-20,Portland State,A,OPPONENT_HOME,W,85,82,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-008,1968-69,1969-01-03,Westminster College,A,OPPONENT_HOME,L,88,89,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-009,1968-69,1969-01-04,Weber State,A,OPPONENT_HOME,L,63,90,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-010,1968-69,1969-01-06,Western Montana,A,OPPONENT_HOME,W,79,66,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-011,1968-69,1969-01-07,Western Montana,A,OPPONENT_HOME,L,70,76,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-012,1968-69,1969-01-11,Idaho State,H,SOURCE_PROGRAM_HOME,W,93,75,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-013,1968-69,1969-01-14,Eastern Oregon,A,OPPONENT_HOME,W,75,57,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-014,1968-69,1969-01-21,Northwest Nazarene,H,SOURCE_PROGRAM_HOME,W,93,68,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-015,1968-69,1969-01-23,College of Idaho,H,SOURCE_PROGRAM_HOME,W,92,67,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-016,1968-69,1969-01-24,Portland State,H,SOURCE_PROGRAM_HOME,W,92,75,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-017,1968-69,1969-01-27,Warner Pacific,H,SOURCE_PROGRAM_HOME,W,85,55,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-018,1968-69,1969-01-31,Eastern Washington,A,OPPONENT_HOME,W,87,78,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-019,1968-69,1969-02-04,Northwest Nazarene,H,SOURCE_PROGRAM_HOME,W,85,67,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-020,1968-69,1969-02-07,Northwest Nazarene,A,OPPONENT_HOME,W,102,79,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-021,1968-69,1969-02-08,College of Idaho,A,OPPONENT_HOME,W,79,73,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-022,1968-69,1969-02-10,Westminster College,H,SOURCE_PROGRAM_HOME,W,78,65,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-023,1968-69,1969-02-14,Hiram Scott,H,SOURCE_PROGRAM_HOME,W,94,75,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-024,1968-69,1969-02-15,Hiram Scott,H,SOURCE_PROGRAM_HOME,W,86,76,REGULAR_SEASON,,33
+BOISE-EXP-S1-1968-025,1968-69,1969-03-01,Southern Oregon ^,N,NEUTRAL,W,101,70,POSTSEASON,NAIA Tournament,33
+BOISE-EXP-S1-1968-026,1968-69,1969-03-03,Linfield ^,A,OPPONENT_HOME,L,81,90,POSTSEASON,NAIA Tournament,33
+BOISE-EXP-S1-1968-027,1968-69,1969-03-04,Linfield ^,A,OPPONENT_HOME,L,80,83,POSTSEASON,NAIA Tournament,33
+BOISE-EXP-S1-1969-001,1969-70,1969-12-01,Idaho State,A,OPPONENT_HOME,L,89,119,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-002,1969-70,1969-12-05,Pacific,H,SOURCE_PROGRAM_HOME,W,94,67,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-003,1969-70,1969-12-06,Pacific,H,SOURCE_PROGRAM_HOME,W,99,52,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-004,1969-70,1969-12-12,Eastern Montana,A,OPPONENT_HOME,L,71,80,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-005,1969-70,1969-12-13,Montana State,A,OPPONENT_HOME,W,69,58,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-006,1969-70,1969-12-18,Gonzaga,H,SOURCE_PROGRAM_HOME,W,90,74,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-007,1969-70,1969-12-20,Chico State,H,SOURCE_PROGRAM_HOME,W,60,49,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-008,1969-70,1969-12-30,Eastern Oregon,A,OPPONENT_HOME,W,87,78,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-009,1969-70,1970-01-02,Whitworth,H,SOURCE_PROGRAM_HOME,W,97,78,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-010,1969-70,1970-01-03,Weber State,H,SOURCE_PROGRAM_HOME,L,75,78,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-011,1969-70,1970-01-06,Eastern Oregon,H,SOURCE_PROGRAM_HOME,W,79,51,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-012,1969-70,1970-01-07,Eastern Montana,H,SOURCE_PROGRAM_HOME,W,100,85,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-013,1969-70,1970-01-10,Montana,A,OPPONENT_HOME,W,89,77,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-014,1969-70,1970-01-16,College of Idaho,H,SOURCE_PROGRAM_HOME,W,93,51,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-015,1969-70,1970-01-23,College of Great Falls,H,SOURCE_PROGRAM_HOME,W,80,74,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-016,1969-70,1970-01-24,Northwest Nazarene,A,OPPONENT_HOME,W,85,67,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-017,1969-70,1970-01-29,Idaho State,H,SOURCE_PROGRAM_HOME,W,98,88,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-018,1969-70,1970-01-31,Weber State,A,OPPONENT_HOME,L,81,92,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-019,1969-70,1970-02-05,Carroll College,A,OPPONENT_HOME,W,107,72,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-020,1969-70,1970-02-06,Carroll College,A,OPPONENT_HOME,W,96,86,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-021,1969-70,1970-02-07,Northwest Nazarene,H,SOURCE_PROGRAM_HOME,W,70,62,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-022,1969-70,1970-02-10,College of Idaho,A,OPPONENT_HOME,W,106,78,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-023,1969-70,1970-02-13,Hiram Scott,A,OPPONENT_HOME,W,87,67,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-024,1969-70,1970-02-14,Hiram Scott,A,OPPONENT_HOME,L,79,80,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-025,1969-70,1970-02-21,Hardin-Simmons,A,OPPONENT_HOME,L,82,100,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-026,1969-70,1970-02-23,New Mexico State (5),A,OPPONENT_HOME,L,79,105,REGULAR_SEASON,,33
+BOISE-EXP-S1-1969-027,1969-70,1970-03-05,UC Riverside ^,N,NEUTRAL,L,71,83,POSTSEASON,NCAA Division II Tournament,33
+BOISE-EXP-S1-1969-028,1969-70,1970-03-07,Sacramento State ^,N,NEUTRAL,W,63,61,POSTSEASON,NCAA Division II Tournament,33
+BOISE-EXP-S1-1966-001,1966-67,1967-03-14,Dodge City College (KS),Tournament location only; H/A/N unverified,UNKNOWN,W,91,77,POSTSEASON,NJCAA National Tournament,
+BOISE-EXP-S1-1966-002,1966-67,1967-03-16,Moberly Junior College (MO),Tournament location only; H/A/N unverified,UNKNOWN,L,50,70,POSTSEASON,NJCAA National Tournament,
+BOISE-EXP-S1-1966-003,1966-67,1967-03-17,Northwest Junior College (WY),Tournament location only; H/A/N unverified,UNKNOWN,L,71,84,POSTSEASON,NJCAA National Tournament,
+BOISE-EXP-S1-1967-004,1967-68,1968-03-05,College of Southern Idaho,Tournament location only; H/A/N unverified,UNKNOWN,W,78,61,POSTSEASON,NJCAA Regional Championship,
+BOISE-EXP-S1-1967-005,1967-68,1968-03-19,Miami-Dade Junior College (FL),Tournament location only; H/A/N unverified,UNKNOWN,L,55,62,POSTSEASON,NJCAA National Tournament,
+BOISE-EXP-S1-1967-006,1967-68,1968-03-21,Missouri Baptist College,Tournament location only; H/A/N unverified,UNKNOWN,W,66,64,POSTSEASON,NJCAA National Tournament,
+BOISE-EXP-S1-1967-007,1967-68,1968-03-22,Iowa Central Community College,Tournament location only; H/A/N unverified,UNKNOWN,L,68,85,POSTSEASON,NJCAA National Tournament,
+BOISE-EXP-S1-1952-001,1952-53,,Snow College,Tournament source locality only,UNKNOWN,W,59,48,POSTSEASON,NJCAA Region IV playoffs,
+BOISE-EXP-S1-1952-002,1952-53,,Eastern Arizona College,Tournament source locality only,UNKNOWN,L,68,69,POSTSEASON,NJCAA Region IV playoffs,
+BOISE-EXP-S1-1954-001,1954-55,,College of Southern Utah,Tournament source locality only,UNKNOWN,W,65,59,POSTSEASON,NJCAA Region IV playoffs,
+BOISE-EXP-S1-1954-002,1954-55,,Weber College,Tournament source locality only,UNKNOWN,W,77,74,POSTSEASON,NJCAA Region IV playoffs,
+BOISE-EXP-S1-1954-003,1954-55,1955-03-16,Coffeyville College (KS),Tournament source locality only,UNKNOWN,L,70,78,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1954-004,1954-55,1955-03-17,Howard County Junior College (TX),Tournament source locality only,UNKNOWN,W,70,63,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1954-005,1954-55,1955-03-18,Pueblo Junior College (CO),Tournament source locality only,UNKNOWN,W,70,61,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1954-006,1954-55,1955-03-19,Tyler Junior College (TX),Tournament source locality only,UNKNOWN,W,60,54,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1955-001,1955-56,1956-01-06,Snow College,Times-News scoreboard,UNKNOWN,W,72,58,REGULAR_SEASON,College game results,
+BOISE-EXP-S1-1955-002,1955-56,1956-01-07,Carbon College,Times-News scoreboard,UNKNOWN,W,79,50,REGULAR_SEASON,College game results,
+BOISE-EXP-S1-1955-003,1955-56,1956-03-20,Arkansas State–Beebe,Tournament source locality only,UNKNOWN,W,70,57,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1955-004,1955-56,1956-03-21,Moberly Junior College (MO),Tournament source locality only,UNKNOWN,L,51,52,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1955-005,1955-56,1956-03-22,Graceland College (IA),Tournament source locality only,UNKNOWN,L,58,61,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1956-001,1956-57,,Ricks College,Tournament source locality only,UNKNOWN,W,54,53,POSTSEASON,NJCAA regional playoffs,
+BOISE-EXP-S1-1956-002,1956-57,1957-03-19,Arkansas City Junior College (KS),Tournament source locality only,UNKNOWN,W,68,63,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1956-003,1956-57,1957-03-20,Pueblo Junior College (CO),Tournament source locality only,UNKNOWN,L,54,72,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1956-004,1956-57,1957-03-21,North Greenville Junior College (SC),Tournament source locality only,UNKNOWN,W,94,78,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1956-005,1956-57,1957-03-23,Brewton–Parker Junior College (GA),Tournament source locality only,UNKNOWN,W,81,74,POSTSEASON,NJCAA national tournament,
+BOISE-EXP-S1-1960-001,1960-61,1960-12-09,University of Idaho freshmen (Idaho Frosh),Idaho Frosh at Moscow,UNKNOWN,L,51,57,REGULAR_SEASON,Idaho Frosh home doubleheader at Moscow,
+BOISE-EXP-S1-1960-002,1960-61,1960-12-10,University of Idaho freshmen (Idaho Frosh),Idaho Frosh at Moscow,UNKNOWN,W,64,58,REGULAR_SEASON,Idaho Frosh home doubleheader at Moscow,
+BOISE-EXP-S1-1937-001,1937-38,1938-02-11,Northwest Nazarene College,NNC institutional diary: defeated Boise JC; score absent,UNKNOWN,L,,,REGULAR_SEASON,,
+BOISE-EXP-S1-1944-001,1944-45,,Northwest Nazarene College,NNC 1945 Oasis varsity schedule #1,UNKNOWN,L,29,33,REGULAR_SEASON,,
+BOISE-EXP-S1-1944-002,1944-45,,Northwest Nazarene College,NNC 1945 Oasis varsity schedule #2,UNKNOWN,W,45,29,REGULAR_SEASON,,
+BOISE-EXP-S1-1944-003,1944-45,,Northwest Nazarene College,NNC 1945 Oasis varsity schedule #3,UNKNOWN,L,28,32,REGULAR_SEASON,,
+BOISE-EXP-S1-1944-004,1944-45,,Northwest Nazarene College,NNC 1945 Oasis varsity schedule #4,UNKNOWN,W,27,26,REGULAR_SEASON,,
+BOISE-EXP-S1-1944-005,1944-45,,Northwest Nazarene College,NNC 1945 Oasis varsity schedule #5,UNKNOWN,W,53,40,REGULAR_SEASON,,
+BOISE-EXP-S1-1944-006,1944-45,,Northwest Nazarene College,NNC 1945 Oasis varsity schedule #6,UNKNOWN,L,28,37,REGULAR_SEASON,,
+BOISE-EXP-S1-1953-001,1953-54,,Northwest Nazarene College,NNC Crusader 1953-12-15 score retrospective,UNKNOWN,L,51,69,REGULAR_SEASON,,
+BOISE-EXP-S1-1955-006,1955-56,1956-01-27,Northwest Nazarene College,in Boise; NNC Crusader Feb 3 last Friday,UNKNOWN,W,42,37,REGULAR_SEASON,,
+BOISE-EXP-S1-1955-007,1955-56,1956-01-30,Northwest Nazarene College,in Central; NNC Crusader Feb 3 last Monday,UNKNOWN,L,55,81,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1939-001,1939-40,1940-02-10,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,,,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1939-002,1939-40,1940-02-19,College of Idaho,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,,,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1939-003,1939-40,1940-02-20,College of Idaho,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,47,37,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1939-004,1939-40,1940-02-22,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,49,40,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1942-001,1942-43,1943-01-06,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,45,50,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1942-002,1942-43,1943-02-26,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,36,63,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1942-003,1942-43,1943-02-27,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,42,53,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1945-001,1945-46,1946-01-24,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,,,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1945-002,1945-46,1946-01-25,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,52,48,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1945-003,1945-46,1946-02-11,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,46,40,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1945-004,1945-46,,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,,,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1947-001,1947-48,1948-01-02,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,58,49,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1947-002,1947-48,1948-01-03,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,55,56,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1947-003,1947-48,1948-01-30,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,57,67,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1947-004,1947-48,1948-01-31,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,51,53,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1948-001,1948-49,1949-03-11,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,73,76,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1948-002,1948-49,1949-03-12,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,57,33,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1949-001,1949-50,1949-12-09,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,48,45,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1949-002,1949-50,1949-12-10,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,L,38,45,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1949-003,1949-50,1950-01-16,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,62,54,REGULAR_SEASON,,
+BOISE-EXP-S1-ORE-1949-004,1949-50,1950-01-17,Eastern Oregon College,Contemporary Oregon newspaper; site type unverified,UNKNOWN,W,,34,REGULAR_SEASON,,
+BOISE-EXP-S1-WEST-0007-001,1949-50,1949-12-22,College of Idaho,Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,L,44,56,REGULAR_SEASON,,
+BOISE-EXP-S1-WEST-0007-002,1949-50,1950-02-08,Southern Idaho,Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,W,56,46,REGULAR_SEASON,,
+BOISE-EXP-S1-WEST-0007-003,1950-51,1951-01-16,College of Idaho,Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,L,59,,REGULAR_SEASON,,
+BOISE-EXP-S1-WEST-0007-004,1951-52,1951-12-12,College of Idaho,Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,W,69,50,REGULAR_SEASON,,
+BOISE-EXP-S1-WEST-0007-005,1952-53,1952-12-16,Northwest Nazarene College,Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,W,74,71,REGULAR_SEASON,,
+BOISE-EXP-S1-WEST-0007-006,1955-56,1956-03-13,Oregon Tech,Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,W,70,56,POSTSEASON,NJCAA Region 1 championship,
+BOISE-EXP-S1-WEST-0007-007,1956-57,1956-12-14,University of Idaho freshmen (Idaho Frosh),Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,L,53,64,REGULAR_SEASON,,
+BOISE-EXP-S1-WEST-0007-008,1956-57,1956-12-21,College of Idaho,Contemporary newspaper; source event locality only; H/A/N unknown,UNKNOWN,W,51,43,REGULAR_SEASON,,"; 0031 CoI first-party Dec21 1956 51-42; Medford Mail Tribune Dec23 p8 Friday scoreboard 51-43: one game, unresolved score difference"
+BOISE-EXP-S1-HON-0008-001,1940-41,,Eastern Oregon College,Bend Bulletin 1941-02-12 scoreboard,UNKNOWN,W,52,50,REGULAR_SEASON,,
+BOISE-EXP-S1-HON-0008-002,1941-42,1941-12-22,Willamette University,Willamette pregame itinerary: Boise Dec 22; result Dec23,UNKNOWN,W,49,21,REGULAR_SEASON,,
+BOISE-EXP-S1-HON-0008-003,1941-42,,Lewiston Normal School,La Grande Evening Observer 1942-01-14 scoreboard,UNKNOWN,W,57,36,REGULAR_SEASON,,
+BOISE-EXP-S1-HON-0008-004,1942-43,,College of Idaho,1943-02-25 source confirms series split; win,UNKNOWN,W,,,REGULAR_SEASON,,
+BOISE-EXP-S1-HON-0008-005,1942-43,,College of Idaho,Bend Bulletin 1943-02-24 College Basketball 57-39; prior 1-1 series,UNKNOWN,L,39,57,REGULAR_SEASON,,
+BOISE-EXP-S1-HON-0008-006,1961-62,,Weber,Bend Bulletin 1962-01-22 UPI scoreboard,UNKNOWN,W,83,68,REGULAR_SEASON,,
+BOISE-EXP-S1-IDAHO-1940-001,1940-41,,University of Idaho varsity,Idaho varsity first-string players; H/A/N not verified,UNKNOWN,L,21,35,REGULAR_SEASON,,
+BOISE-EXP-S1-NNC-1956-001,1956-57,1957-02-08,Northwest Nazarene College,NNC Central auditorium and Crusaders home floor,UNKNOWN,W,65,56,REGULAR_SEASON,,NNC Crusader 1957-02-13 p4
+BOISE-EXP-S1-NNC-1956-002,1956-57,1957-02-09,Northwest Nazarene College,NNC Crusader first-party game result; venue unverified,UNKNOWN,W,62,50,REGULAR_SEASON,,NNC Crusader 1957-02-13 p4
+BOISE-EXP-S1-ISU-1941-001,1941-42,,Idaho State (contemporary institutional name not asserted),at Boise JC,UNKNOWN,L,36,44,REGULAR_SEASON,,ISU year-by-year 1941-42 row 20
+BOISE-EXP-S1-ISU-1941-002,1941-42,,Idaho State (contemporary institutional name not asserted),at Boise JC,UNKNOWN,W,53,37,REGULAR_SEASON,,ISU year-by-year 1941-42 row 21
+BOISE-EXP-S1-ISU-1942-001,1942-43,,Idaho State (contemporary institutional name not asserted),Boise JC,UNKNOWN,L,44,48,REGULAR_SEASON,,ISU year-by-year 1942-43 row 1
+BOISE-EXP-S1-ISU-1944-001,1944-45,,Idaho State (contemporary institutional name not asserted),at Boise JC,UNKNOWN,L,35,49,REGULAR_SEASON,,ISU year-by-year 1944-45 row 4
+BOISE-EXP-S1-ISU-1945-001,1945-46,,Idaho State (contemporary institutional name not asserted),Boise JC,UNKNOWN,L,17,55,REGULAR_SEASON,,ISU year-by-year 1945-46 row 2
+BOISE-EXP-S1-ISU-1945-002,1945-46,,Idaho State (contemporary institutional name not asserted),at Boise JC,UNKNOWN,L,32,51,REGULAR_SEASON,,ISU year-by-year 1945-46 row 7
+BOISE-EXP-S1-ISU-1945-003,1945-46,,Idaho State (contemporary institutional name not asserted),at Boise JC,UNKNOWN,L,23,50,REGULAR_SEASON,,ISU year-by-year 1945-46 row 8
+BOISE-EXP-S1-ISU-1946-001,1946-47,,Idaho State (contemporary institutional name not asserted),vs. Boise JC,UNKNOWN,W,46,41,REGULAR_SEASON,,ISU year-by-year 1946-47 row 27
+BOISE-EXP-S1-ISU-1946-002,1946-47,,Idaho State (contemporary institutional name not asserted),Boise JC,UNKNOWN,W,94,39,REGULAR_SEASON,,ISU year-by-year 1946-47 row 28
+BOISE-EXP-S1-COI-1949-001,1949-50,1949-12-20,College of Idaho,"COLLEGE OF IDAHO source: at Boise State; locality printed Boise, ID; some archive labels internally inconsistent",UNKNOWN,W,54,51,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1950-001,1950-51,1951-01-28,College of Idaho,"COLLEGE OF IDAHO source: at Boise State; locality printed Boise, ID; some archive labels internally inconsistent",UNKNOWN,L,50,69,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1951-001,1951-52,1951-12-07,College of Idaho,"COLLEGE OF IDAHO source: BOISE STATE; locality printed Caldwell, ID; some archive labels internally inconsistent",UNKNOWN,W,48,45,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1952-001,1952-53,1952-12-19,College of Idaho,"COLLEGE OF IDAHO source: at Boise State; locality printed Boise, ID; some archive labels internally inconsistent",UNKNOWN,W,77,61,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1952-002,1952-53,1952-12-20,College of Idaho,"COLLEGE OF IDAHO source: BOISE STATE; locality printed Caldwell, ID; some archive labels internally inconsistent",UNKNOWN,L,62,64,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1956-001,1956-57,1956-12-22,College of Idaho,"COLLEGE OF IDAHO source: at Boise State; locality printed Caldwell, ID; some archive labels internally inconsistent",UNKNOWN,W,81,54,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1957-001,1957-58,1957-12-11,College of Idaho,"COLLEGE OF IDAHO source: BOISE STATE; locality printed Caldwell, ID; some archive labels internally inconsistent",UNKNOWN,W,64,48,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1957-002,1957-58,1957-12-19,College of Idaho,"COLLEGE OF IDAHO source: at Boise State; locality printed Boise, ID; some archive labels internally inconsistent",UNKNOWN,W,63,51,REGULAR_SEASON,,
+BOISE-EXP-S1-WEBER-1948-001,1948-49,,Weber College,yearbook SCORE table,UNKNOWN,L,54,62,REGULAR_SEASON,,FIRST_PARTY_YEARBOOK_OCR
+BOISE-EXP-S1-WEBER-1948-002,1948-49,,Weber College,yearbook SCORE table,UNKNOWN,W,74,59,REGULAR_SEASON,,FIRST_PARTY_YEARBOOK_OCR
+BOISE-EXP-S1-WEBER-1948-003,1948-49,,Weber College,yearbook SCORE table,UNKNOWN,L,63,65,REGULAR_SEASON,,FIRST_PARTY_YEARBOOK_OCR
+BOISE-EXP-S1-WEBER-1948-004,1948-49,,Weber College,yearbook SCORE table,UNKNOWN,W,54,50,REGULAR_SEASON,,FIRST_PARTY_YEARBOOK_OCR
+BOISE-EXP-S1-WEBER-1949-001,1949-50,,Weber College,vs Boise,UNKNOWN,L,59,61,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1949-002,1949-50,,Weber College,vs Boise,UNKNOWN,L,51,58,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1949-003,1949-50,,Weber College,at Boise,UNKNOWN,W,56,55,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1949-004,1949-50,,Weber College,at Boise,UNKNOWN,L,57,59,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1949-005,1949-50,,Weber College,region vs Boise,UNKNOWN,L,55,69,POSTSEASON,NJCAA regional elimination,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1950-001,1950-51,,Weber College,vs Boise,UNKNOWN,L,47,85,REGULAR_SEASON,,SECONDARY_COMPILATION_WITH_ARCHIVED_CONTEMPORARY_CLIPPING
+BOISE-EXP-S1-WEBER-1950-002,1950-51,,Weber College,vs Boise,UNKNOWN,L,46,73,REGULAR_SEASON,,SECONDARY_COMPILATION_WITH_ARCHIVED_CONTEMPORARY_CLIPPING
+BOISE-EXP-S1-WEBER-1950-003,1950-51,,Weber College,at Boise,UNKNOWN,W,73,66,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1950-004,1950-51,,Weber College,at Boise,UNKNOWN,L,51,81,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1952-001,1952-53,,Weber College,vs Boise,UNKNOWN,L,53,61,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1952-002,1952-53,,Weber College,vs Boise,UNKNOWN,L,61,67,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1952-003,1952-53,,Weber College,at Boise,UNKNOWN,W,83,75,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1952-004,1952-53,,Weber College,at Boise,UNKNOWN,W,91,70,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1954-001,1954-55,,Weber College,at Boise,UNKNOWN,W,78,56,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1954-002,1954-55,,Weber College,vs Boise,UNKNOWN,L,78,81,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1955-001,1955-56,,Weber College,vs Boise,UNKNOWN,W,77,48,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1955-002,1955-56,,Weber College,vs Boise,UNKNOWN,L,69,75,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1957-001,1957-58,1958-01-10,Weber College,at Boise,UNKNOWN,W,65,61,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1957-002,1957-58,,Weber College,vs Boise,UNKNOWN,L,62,80,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1958-001,1958-59,1959-01-12,Weber College,at Boise,UNKNOWN,W,58,56,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1958-002,1958-59,,Weber College,vs Boise,UNKNOWN,L,52,83,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1959-001,1959-60,,Weber College,vs Boise,UNKNOWN,L,54,89,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1959-002,1959-60,,Weber College,vs Boise,UNKNOWN,L,43,56,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1959-003,1959-60,,Weber College,at Boise,UNKNOWN,W,72,63,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1959-004,1959-60,,Weber College,at Boise,UNKNOWN,L,63,65,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1960-001,1960-61,,Weber College,at Boise,UNKNOWN,L,49,54,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1960-002,1960-61,,Weber College,vs Boise,UNKNOWN,L,56,70,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1961-001,1961-62,,Weber College,vs Boise,UNKNOWN,L,61,63,REGULAR_SEASON,,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1961-002,1961-62,,Weber College,region vs Boise,UNKNOWN,W,73,70,POSTSEASON,NJCAA regional elimination,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1961-003,1961-62,,Weber College,region vs Boise,UNKNOWN,L,64,66,POSTSEASON,NJCAA regional elimination,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-1961-004,1961-62,,Weber College,region vs Boise,UNKNOWN,L,55,65,POSTSEASON,NJCAA regional elimination,SECONDARY_COMPILATION
+BOISE-EXP-S1-WEBER-SCRAP-1950-001,1950-51,,Branch Aggies (Branch Agricultural College),NJCAA Region IV third-place game; reported in Weber Whip Club scrapbook; H/A/N unknown,UNKNOWN,W,51,49,POSTSEASON,NJCAA Region IV third-place,Whip Club Scrapbook p291
+BOISE-EXP-S1-COI-1941-001,1941-42,,College of Idaho,La Grande Evening Observer Jan24 1942 p8; H/A/N unverified,UNKNOWN,L,26,33,REGULAR_SEASON,,
+BOISE-EXP-S1-COI-1944-001,1944-45,1945-01-06,College of Idaho Coyotes,Twin Falls Times-News Jan8 1945 p6; H/A/N unverified,UNKNOWN,W,50,37,REGULAR_SEASON,,
+BOISE-EXP-S1-NNC-1956-003,1956-57,1956-12-08,Northwest Nazarene College,"NNC 1956-11-21 schedule, Boise JC Dec 8 There",UNKNOWN,L,69,72,REGULAR_SEASON,,NNC Crusader 1956-12-12 p6 and 1956-11-21 schedule
+BOISE-EXP-S1-NNC-1959-001,1959-60,1959-12-11,Northwest Nazarene College,,UNKNOWN,L,54,66,REGULAR_SEASON,,NNC Crusader 1960-01-15 p4
+BOISE-EXP-S1-NNC-1950-001,1950-51,1950-12-11,Northwest Nazarene College,Source scheduled Dec 11: BJC at NNC; retrospective links played NNC Nampa win,UNKNOWN,L,,,REGULAR_SEASON,,NNC Crusader 1950-12-08 schedule + 1951-02-16 completed retrospective (NNC won Nampa game)
+BOISE-EXP-S1-NNC-1950-002,1950-51,1950-12-12,Northwest Nazarene College,Source scheduled Dec 12: NNC at BJC; retrospective links played BJC Boise win,UNKNOWN,W,,,REGULAR_SEASON,,NNC Crusader 1950-12-08 schedule + 1951-02-16 completed retrospective (BJC won Boise game)
+BOISE-EXP-S1-NNC-1950-003,1950-51,1951-02-19,Northwest Nazarene College,Source scheduled Feb 19: BJC vs NNC at Central Auditorium; venue not independently confirmed as actual game site,UNKNOWN,L,53,68,REGULAR_SEASON,,NNC Crusader 1951-03-02 p3 NNC68 BJC53 boxscore; 1951-02-02 schedule
+BOISE-EXP-S1-NNC-1950-004,1950-51,1951-02-20,Northwest Nazarene College,"Source scheduled Feb 20: NNC at BJC, Boise High gym; venue not independently confirmed as actual game site",UNKNOWN,L,55,56,REGULAR_SEASON,,NNC Crusader 1951-03-02 p3 NNC56 BJC55 boxscore; 1951-02-02 schedule
+BOISE-EXP-S1-NNC-1951-001,1951-52,1952-01-14,Northwest Nazarene College,NNC Crusader 1952-01-18 p3 Central gym visiting Broncos,OPPONENT_HOME,W,62,58,REGULAR_SEASON,,The NNC Crusader 1952-01-18 p3
+BOISE-EXP-S1-NNC-1951-002,1951-52,,Northwest Nazarene College,,UNKNOWN,L,52,61,REGULAR_SEASON,,The NNC Crusader 1952-02-08 p3; between semesters
+BOISE-EXP-S1-NNC-1951-003,1951-52,1952-02-18,Northwest Nazarene College,NNC Crusader 1952-02-22 p3 NNC collegiate home season finale,OPPONENT_HOME,L,60,70,REGULAR_SEASON,,The NNC Crusader 1952-02-22 p3
+BOISE-EXP-S1-NNC-1953-002,1953-54,1953-12-30,Northwest Nazarene College,"BJC Invitational tournament at Boise, Dec 29-30; NNC defeated host Boise in final",UNKNOWN,L,79,83,REGULAR_SEASON,1953 Boise Junior College Invitational,NNC Crusader 1954-01-15 p3 original tournament recap
+BOISE-EXP-S1-IDF-1961-001,1961-62,1961-12-08,University of Idaho freshmen (Idaho Vandal Babes),Original Idaho Argonaut: two-game Frosh vs BJC series reported in Boise; venue/HAN unverified,UNKNOWN,W,58,57,REGULAR_SEASON,Idaho Frosh vs Boise Junior College weekend series,Argonaut 1961-12-12 p2 Friday Idaho Frosh lost to Boise JC 57-58; location Boise
+BOISE-EXP-S1-IDF-1961-002,1961-62,1961-12-09,University of Idaho freshmen (Idaho Vandal Babes),Original Idaho Argonaut: two-game Frosh vs BJC series reported in Boise; venue/HAN unverified,UNKNOWN,L,,,REGULAR_SEASON,Idaho Frosh vs Boise Junior College weekend series,Argonaut 1961-12-12 p2 Idaho Frosh comeback victory Saturday at Boise; numerical final uncertain
+BOISE-EXP-S1-IDF-1962-001,1962-63,1962-11-30,University of Idaho freshmen (Idaho Vandal Babes),Original Idaho Argonaut: two-game Frosh vs BJC series reported in Boise; venue/HAN unverified,UNKNOWN,L,56,57,REGULAR_SEASON,Idaho Frosh vs Boise Junior College weekend series,Argonaut 1962-12-04 p4 Idaho Frosh won Friday 57-56 at Boise
+BOISE-EXP-S1-IDF-1962-002,1962-63,1962-12-01,University of Idaho freshmen (Idaho Vandal Babes),Original Idaho Argonaut: two-game Frosh vs BJC series reported in Boise; venue/HAN unverified,UNKNOWN,W,59,43,REGULAR_SEASON,Idaho Frosh vs Boise Junior College weekend series,Argonaut 1962-12-04 p4 Boise JC won Saturday 59-43; Idaho Argonaut 1962-12-07 p5 confirms split
+BOISE-EXP-S1-IDF-1955-001,1955-56,1955-12-09,University of Idaho freshmen (Vandal Babes),Idaho Frosh explicit home schedule; preliminary to varsity games,OPPONENT_HOME,L,50,66,REGULAR_SEASON,,Idaho Argonaut 1955-12-13 p4; 1955-12-09 p6
+BOISE-EXP-S1-IDF-1955-002,1955-56,1955-12-10,University of Idaho freshmen (Vandal Babes),Idaho Frosh explicit home schedule; preliminary to varsity games,OPPONENT_HOME,L,53,71,REGULAR_SEASON,,Idaho Argonaut 1955-12-13 p4; 1955-12-09 p6
+BOISE-EXP-S1-IDF-1955-003,1955-56,1955-12-12,University of Idaho freshmen (Vandal Babes),Original Boise Junior College first home stand,SOURCE_PROGRAM_HOME,L,47,55,REGULAR_SEASON,,Idaho Argonaut 1955-12-16 p6 Frosh Split At BJC / Yearlings Win Third
+BOISE-EXP-S1-IDF-1955-004,1955-56,1955-12-13,University of Idaho freshmen (Vandal Babes),Original Boise Junior College first home stand,SOURCE_PROGRAM_HOME,W,60,50,REGULAR_SEASON,,Idaho Argonaut 1955-12-16 p6 BJC Avenges Two Losses
+BOISE-EXP-S1-IDF-1957-001,1957-58,1957-12-13,University of Idaho freshmen (Vandal Babes),"Idaho Argonaut reports Boise city, tournament context; H/A/N unverified",UNKNOWN,W,77,51,REGULAR_SEASON,1957 North-South basketball tournament,Idaho Argonaut 1957-12-17 p4; 1957-12-13 p6
+BOISE-EXP-S1-IDF-1963-001,1963-64,1963-12-06,University of Idaho freshmen (Vandal Babes),Boise Junior College vs Idaho freshmen weekend series; exact location and H/A/N not established,UNKNOWN,L,53,75,REGULAR_SEASON,,Idaho Argonaut 1963-12-10 p4 Babes Take Two Games From BJC
+BOISE-EXP-S1-IDF-1963-002,1963-64,1963-12-07,University of Idaho freshmen (Vandal Babes),Boise Junior College vs Idaho freshmen weekend series; exact location and H/A/N not established,UNKNOWN,L,69,76,REGULAR_SEASON,,Idaho Argonaut 1963-12-10 p4 Babes Take Two Games From BJC
+BOISE-EXP-S1-IDF-1966-001,1966-67,1966-12-09,University of Idaho freshmen (Vandal Babes),Argonaut reports Boise home team; exact building not established,SOURCE_PROGRAM_HOME,W,83,53,REGULAR_SEASON,,Idaho Argonaut 1966-12-13 p4 Boise sweep
+BOISE-EXP-S1-IDF-1966-002,1966-67,1966-12-10,University of Idaho freshmen (Vandal Babes),Argonaut reports Boise home team; exact building not established,SOURCE_PROGRAM_HOME,W,79,66,REGULAR_SEASON,,Idaho Argonaut 1966-12-13 p4 Boise sweep
+BOISE-EXP-S1-CBC-1966-001,1966-67,,Columbia Basin (Hawks),,UNKNOWN,L,,,REGULAR_SEASON,,Idaho Argonaut 1966-12-09 p4 two-game Columbia Basin split; first loss by ten
+BOISE-EXP-S1-CBC-1966-002,1966-67,,Columbia Basin (Hawks),,UNKNOWN,W,,,REGULAR_SEASON,,Idaho Argonaut 1966-12-09 p4 two-game Columbia Basin split; second win
+BOISE-EXP-S1-UIVAR-1946-001,1946-47,1946-12-18,University of Idaho varsity (Vandals),Idaho official guide says A (away); 1946 Argonaut scheduled at Boise Junior College; exact building unknown,SOURCE_PROGRAM_HOME,L,35,60,REGULAR_SEASON,,Idaho Athletics official 2017-18 All-Time Results 1946-47; Idaho Argonaut 1946-11-19 p4
+BOISE-EXP-S1-UIVAR-1948-001,1948-49,,University of Idaho varsity (Vandals),"Idaho original 1949 Gem yearbook result, exact venue and H/A/N unknown",UNKNOWN,L,35,51,REGULAR_SEASON,,University of Idaho Gem of the Mountains 1949 p236 preconference scorebox; Idaho 2017-18 official results

@@ -1,0 +1,5 @@
+residual_id,status,interpretation
+BOISE-S1-R-COI1956,SAME_GAME_RECONCILED_SCORE_CONFLICT_NONBLOCKING,Boise 51-43 from contemporary paper and 51-42 from first-party CoI for Dec21; preserved both; no extra game
+BOISE-S1-R-COI1950,OPEN,Jan17 1951 newspaper ambiguity versus Feb13 1951 67-59 official log; no merge
+BOISE-S1-R-COI1951,OPEN,Dec13 Boise69-50 newspaper versus Dec6 60-50 official log; no merge
+BOISE-S1-R-COIHAN,OPEN,No H/A/N inferred from source token/city conflict
