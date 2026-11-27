@@ -1,0 +1,8 @@
+season,first_party_url,boise_games_in_source,access_and_coverage_limit
+1933-34,https://static.yoteathletics.com/custompages/stats/mbasketball/1933.htm,6,Exact per-game dates absent: source uses season-only label; all six score and home-away literals verified
+1934-35,https://static.yoteathletics.com/custompages/stats/mbasketball/1934.htm,1,Exact date absent: first-party season-only label
+1935-36,https://yoteathletics.com/sports/2012/8/31/MBB_0831122932.aspx?id=61,0,No CoI basketball year; does not determine Boise own season activity
+1936-37,https://static.yoteathletics.com/custompages/stats/mbasketball/1936.htm,1,Explicit CoI home result January 5 1937
+1937-38,https://static.yoteathletics.com/custompages/stats/mbasketball/1937.htm,0,No CoI opponent game in source; preexisting independent NNC result unchanged
+1938-39,https://static.yoteathletics.com/custompages/stats/mbasketball/1938.htm,4,Four dated CoI games prove omitted Boise season active; full institutional Boise record unknown
+1939-40,https://static.yoteathletics.com/custompages/stats/mbasketball/1939.htm,4,Three nonduplicative candidates and one same-game February 20 await separately bounded assessment
