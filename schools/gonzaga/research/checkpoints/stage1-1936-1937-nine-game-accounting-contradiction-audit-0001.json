@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1936_37_NINE_SOURCE_GAMES_ACCOUNTING_OVERRUN_AND_TWO_MONTANA_DATES_0001",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "classification": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+  "subtype": "COUNT_OVERRUN_SOURCE_ACCOUNTING_CONTRADICTION",
+  "research_status": "BOUNDED_INSTITUTIONAL_SOURCE_AUDIT_DONE__ACCOUNTING_CONTRADICTION_RESEARCH_EXHAUSTED",
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "original_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "parent_research_head": "505942ec4bbf7ff88d6eaf1d4e1f8cac9a9fb9d8",
+  "prior_authority": {
+    "status_path": "schools/gonzaga/research/checkpoints/stage1-status-0053.json",
+    "status_git_blob": "6dc428366b8aa4b1a527d397bd074fe28e066067",
+    "ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0036.csv",
+    "ledger_git_blob": "31c7b2042f928ade2033a909097c11a80fa0c133",
+    "reconciliation_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0004.csv",
+    "reconciliation_git_blob": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "census_path": "schools/gonzaga/research/checkpoints/stage1-season-census-0002.csv",
+    "census_git_blob": "3d5937323ad921aac1aac3e3afe7ab24352916a5",
+    "existing_1942_43_1926_hold_inventory_path": "schools/gonzaga/research/checkpoints/stage1-six-historical-hold-current-disposition-0003.csv",
+    "existing_hold_inventory_git_blob": "5352a9ab2e37c78f54439b26688d49b7abec6da1"
+  },
+  "institutional_aggregate": {
+    "source": "Gonzaga 2026–27 official Men's Basketball Record Book, All-Time Coaching Records printed page 58",
+    "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/gozags.com/documents/2026/8/27/2026-27_Record_Book.pdf",
+    "original_pdf_screenshot_inspected": true,
+    "season": "1936-37",
+    "coach": "Claude McGrath",
+    "wins": 1,
+    "losses": 5,
+    "games": 6
+  },
+  "individual_games": {
+    "wins": 4,
+    "losses": 5,
+    "game_count": 9,
+    "distinct_ids": 9,
+    "by_opponent": {
+      "Washington State": {
+        "games": 2,
+        "wins": 0,
+        "losses": 2
+      },
+      "Montana": {
+        "games": 2,
+        "wins": 1,
+        "losses": 1
+      },
+      "Montana State": {
+        "games": 1,
+        "wins": 1,
+        "losses": 0
+      },
+      "Idaho": {
+        "games": 2,
+        "wins": 1,
+        "losses": 1
+      },
+      "Central Washington": {
+        "games": 1,
+        "wins": 1,
+        "losses": 0
+      },
+      "Oregon": {
+        "games": 1,
+        "wins": 0,
+        "losses": 1
+      }
+    },
+    "source_matrix_path": "schools/gonzaga/research/checkpoints/stage1-1936-1937-nine-source-game-matrix-0001.csv",
+    "unique_physical_game_identities": true,
+    "game_type": "REGULAR_SEASON",
+    "explicitly_exhibition_count": 0,
+    "uncertainty": "No source proves any of nine accepted games were exhibition or wrong-season; exact dates previously blank for 2 Montana games; no site inferred from city."
+  },
+  "exact_field_repairs": [
+    {
+      "research_game_id": "GONZAGA-EXP-MONTANA-046",
+      "old_date": "",
+      "new_date": "1937-01-29",
+      "opponent": "Montana",
+      "score": "42-41",
+      "gonzaga_site_type_preserved": "HOME",
+      "source_pdf": "https://gogriz.com/documents/download/2018/1/17/redbook_08_1935_1940.pdf",
+      "source_table": "University of Montana Red Book 1936–1937 Varsity Basketball Schedule, printed page 211; source row says Montana Jan29 1937 scored 41, Gonzaga scored 42, played Spokane",
+      "visual_status": "PDF parsed text checked, screenshot attempt failed due PDF content-length cap",
+      "prior_result_score_game_type_unchanged": true
+    },
+    {
+      "research_game_id": "GONZAGA-EXP-MONTANA-047",
+      "old_date": "",
+      "new_date": "1937-02-13",
+      "opponent": "Montana",
+      "score": "35-39",
+      "gonzaga_site_type_preserved": "AWAY",
+      "source_pdf": "https://gogriz.com/documents/download/2018/1/17/redbook_08_1935_1940.pdf",
+      "source_table": "University of Montana Red Book 1936–1937 Varsity Basketball Schedule, printed page 211; source row says Montana Feb13 1937 scored 39, Gonzaga scored 35, played Missoula",
+      "visual_status": "PDF parsed text checked, screenshot attempt failed due PDF content-length cap",
+      "prior_result_score_game_type_unchanged": true
+    }
+  ],
+  "other_source_crosschecks": [
+    {
+      "source": "University of Washington State 1936–37 official basketball schedule",
+      "url": "https://wsucougars.com/sports/mens-basketball/schedule/season/1936-37",
+      "results": [
+        "1937-01-02 WSU H W56-25 vs Gonzaga",
+        "1937-01-04 WSU at Gonzaga W48-34"
+      ],
+      "status": "TWO_SEPARATE_DATED_WSU_LOSSES"
+    },
+    {
+      "source": "University of Idaho Argonaut Feb 9 1937 primary game report",
+      "url": "https://objects.lib.uidaho.edu/argonaut/pdf/arg-1937-02-09.pdf",
+      "result": "Monday Feb 8 Gonzaga overcame Idaho 22–14 halftime deficit to win 36–29 at Idaho",
+      "visual_status": "Original PDF scanned page 4 screenshot inspected; detailed contemporary game report corroborates Gonzaga W and on-court identity"
+    },
+    {
+      "source": "Montana State 2024-25 official year-by-year results",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/msubobcats.com/documents/2024/10/23/2024-25_MBBMediaGuide.pdf",
+      "result": "Dec. 28 at Gonzaga Montana State L39–49, supporting Gonzaga W49–39",
+      "visual_status": "PDF indexed text checked, not visually asserted"
+    },
+    {
+      "source": "Central Washington University Athletics official 1936 season schedule",
+      "url": "https://wildcatsports.com/sports/mens-basketball/schedule/1936",
+      "result": "Sunday Feb 28 1937 at Gonzaga CWU L24–29, Gonzaga W29–24; recognized official varsity schedule",
+      "visual_status": "Official HTML schedule read"
+    },
+    {
+      "source": "Oregon 2026-27 official basketball year-by-year records",
+      "result": "1937-02-22 Oregon H W58–22 vs Gonzaga",
+      "source_authority": "Original accepted institutional Oregon reciprocal ledger preserved; no independent 1936-37 correction or duplication substantiated"
+    }
+  ],
+  "accounting": {
+    "institutional_record": "1-5 / 6",
+    "accepted_game_record": "4-5 / 9",
+    "accepted_minus_official": {
+      "wins": 3,
+      "losses": 0,
+      "games": 3
+    },
+    "difference_is_not_3_verified_duplicate_games": true,
+    "no_automatic_exclusion_or_same_game_merging": true,
+    "minimum_concrete_source_wins_exceed_official_wins": true,
+    "genuine_historical_accounting_discrepancy": true,
+    "source_level_individual_game_eligibility_stable_in_this_unit": true,
+    "unknown_exact_date_is_nonblocking_if_identified_game_stable": true,
+    "owner_authority_not_self_issued": true,
+    "owner_gate_not_approved": true,
+    "early_history_accounting_authority_in_protected_main": false,
+    "registry": "data/reference/early-history-accounting-authorities.json",
+    "registry_git_blob": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+    "blocks_final_stage1_closeout": true,
+    "blocks_independent_next_research_unit": false
+  },
+  "scope": {
+    "one_season_only": true,
+    "broader_1930_31_1915_16_1942_43_decisions_reopened": false,
+    "new_games": 0,
+    "accepted_rows_changed": 2,
+    "changed_fields": [
+      "game_date",
+      "source",
+      "source_locator",
+      "notes"
+    ],
+    "all_other_game_rows_bytewise_equivalent_by_CSV_fields": true,
+    "protected_main_untouched": true,
+    "season_census_unchanged": true,
+    "season_reconciliation_unchanged": true,
+    "hold_inventory_unchanged": true
+  },
+  "after": {
+    "accepted_games": 560,
+    "accepted_record": "216-344",
+    "official_expansion_games": 977,
+    "net_arithmetic_difference_not_distinct_game_ids": 417,
+    "active_unadmitted_holds": 5,
+    "research_exhausted_accounting_closeout_blockers": 4,
+    "positive_arithmetic_deficit_seasons": 45,
+    "stage1_complete": false,
+    "stage2_authorized": false
+  },
+  "next_bounded_unit": "Audit only 1937–38 six individual reciprocal losses against Gonzaga's official 0–4 / four-game season, distinguishing source-dated identities from unresolved institutional accounting. Preserve any research-exhausted contradiction without inventing duplicates, owner authority, or Stage 2."
+}
