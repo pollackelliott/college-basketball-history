@@ -1,0 +1,49 @@
+{
+  "checkpoint": "0005-1936-1951-source-census",
+  "parent_research_head": "29bb037291c8acee7d332dffd4e4c8df0f159b9a",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "school_key": "san-diego-state",
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "counts": {
+    "new_seasons": 15,
+    "new_source_rows": 391,
+    "cumulative_source_rows": 633,
+    "accepted_prior": 226,
+    "accepted_this_checkpoint": 0,
+    "remaining_seasons": 19,
+    "corrected_parent_member_hashes": 5
+  },
+  "warning": "Original checkpoint 0004 manifest invalid; see append-only parent-0004-hash-erratum.json",
+  "files": {
+    "source-game-candidates.csv": {
+      "sha256": "d1d7b3429605945f984002e0278f044feaa6fb85c5d18676a15daa358fdd0699",
+      "bytes_utf8": 81824
+    },
+    "season-accounting.csv": {
+      "sha256": "6bc3394f37890282c09009aeebdcec69f894b5bb168854d525934e3e9902ff6f",
+      "bytes_utf8": 1911
+    },
+    "source-annotations.csv": {
+      "sha256": "a4e7d384a11e482f86886fcadb310975a96634d2c76bf71ba94e033ed214b4d2",
+      "bytes_utf8": 1789
+    },
+    "source-review-queues.csv": {
+      "sha256": "b824c8f44548a135e03a1be4e94f0151cbc5e89ef118c0b0d72a6e3ec97e9d03",
+      "bytes_utf8": 5238
+    },
+    "parent-0004-hash-erratum.json": {
+      "sha256": "9977c868531131cb00ece93517cd4f07f9edc824b9b81f150fd25521f6d506ec",
+      "bytes_utf8": 2356
+    },
+    "source-findings.md": {
+      "sha256": "f8c145650a4b5604f64db823197ea8c44bd8456b9b1214a38c934c8a81609665",
+      "bytes_utf8": 2737
+    },
+    "research-status.json": {
+      "sha256": "f961b808446491906a848cc169d02740809879ecb31a673bca9aec26b66f0ef8",
+      "bytes_utf8": 1444
+    }
+  }
+}

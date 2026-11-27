@@ -1,0 +1,50 @@
+{
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "checkpoint": "0005-1936-1951-source-census",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "29bb037291c8acee7d332dffd4e4c8df0f159b9a",
+  "cohort_first": "1936-37",
+  "cohort_last": "1950-51",
+  "cohort_seasons": 15,
+  "cohort_source_rows": 391,
+  "cohort_w": 232,
+  "cohort_l": 159,
+  "cohort_t": 0,
+  "source_NAIA_postseason_candidates": 17,
+  "source_midseason_invitation_candidates": 3,
+  "Alumni_candidates": 15,
+  "Harlem_Globetrotters_candidates": 4,
+  "source_dates_missing": 1,
+  "source_scores_missing": 0,
+  "source_D_annotations": 4,
+  "point_total_discrepancy": [
+    {
+      "season": "1945-46",
+      "listed": [
+        1161,
+        1018
+      ],
+      "printed": [
+        1184,
+        1050
+      ],
+      "difference": [
+        23,
+        32
+      ]
+    }
+  ],
+  "cumulative_seasons_source_extracted": 30,
+  "cumulative_source_rows": 633,
+  "aggregate_historical_outcomes_accounted": 641,
+  "accepted_game_rows_carried": 226,
+  "newly_accepted_game_rows": 0,
+  "remaining_seasons": 19,
+  "remaining_aggregate_historical_outcomes": 493,
+  "parent_0004_original_manifest_invalid": true,
+  "parent_0004_hash_erratum_present": true,
+  "next_bounded_action": "Extract 1951–52 through 1969–70 source ledger, then game-inclusion adjudication"
+}

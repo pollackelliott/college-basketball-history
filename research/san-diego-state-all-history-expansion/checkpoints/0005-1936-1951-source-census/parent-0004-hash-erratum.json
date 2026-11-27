@@ -1,0 +1,49 @@
+{
+  "parent_exact_research_sha": "29bb037291c8acee7d332dffd4e4c8df0f159b9a",
+  "parent_manifest_blob_sha1": "1480ad1b9d6e90a55862d03d48ee96ea98cf3b91",
+  "scope": "HASH_METADATA_ONLY_APPEND_ONLY; original checkpoint files and manifest remain unchanged; original manifest standalone verification still fails",
+  "cause": "Earlier handwritten hash function had wrong round constant",
+  "independent_hash_test_vectors_pass": true,
+  "member_repairs": [
+    {
+      "file": "tournament-and-alumni-overlay.csv",
+      "blob_git_sha1": "1a34b4be1d62206d7dd8634d53dc5aab2b3f8628",
+      "published_manifest_digest": "4629f1e2a8da525f779acd8ca2dc4aae9c0d3f9d4045f4aa978d08a7f2714923",
+      "actual_sha256": "2a6897be7412a7ee9e80fa6a51b1b5c02f68c0805ec60e7016d2b047463cf5dc",
+      "published_size": 60455,
+      "actual_utf8_size": 60455
+    },
+    {
+      "file": "newly-accepted-postseason.csv",
+      "blob_git_sha1": "55756b9da0f6032b2e40c10f5a8bfceae865ee00",
+      "published_manifest_digest": "e38be2d99f075f9d532bdb2b6eb63f3c56fe7a3b10a1f153bc538cf8b18b94bf",
+      "actual_sha256": "e5ac3040f50976e9de8c366d71281e2c78579d6837f836684d5329d5de042224",
+      "published_size": 3647,
+      "actual_utf8_size": 3647
+    },
+    {
+      "file": "held-15-source-evidence.csv",
+      "blob_git_sha1": "f569f56da3e71bf08a1964b981c22a9917671368",
+      "published_manifest_digest": "1b121d2d871a98f793a5cbc527e4e2ae6280d738ae3daedddc3ed5bbd197ff07",
+      "actual_sha256": "4f276ebb0867fdb509991353c9079e33625cf2acbd33c11ac154242915e9452b",
+      "published_size": 8046,
+      "actual_utf8_size": 8046
+    },
+    {
+      "file": "source-family-research.md",
+      "blob_git_sha1": "a0b43eeda4bae46c1e30756fa6366df864fd8cce",
+      "published_manifest_digest": "f6b7429142516adac879c6c728ba68dcf5614994956d325f794b56fe227aec94",
+      "actual_sha256": "12c45b93ef935aa6fe56d21a8d442b891752c3c777cc2e0ab19ffa887a0cae2a",
+      "published_size": 5654,
+      "actual_utf8_size": 5654
+    },
+    {
+      "file": "research-status.json",
+      "blob_git_sha1": "fcfd7717f28b22ee83b49878007c018c0e6ee7c5",
+      "published_manifest_digest": "c6f3a73da7d23568e729e8146994753270753fc2a7a238977c5f7241c9232d74",
+      "actual_sha256": "c8d2766a3bb3eb9755ff6fafe520911ae887ca547a3a4b74954fa1028f33c7ef",
+      "published_size": 2453,
+      "actual_utf8_size": 2453
+    }
+  ]
+}
