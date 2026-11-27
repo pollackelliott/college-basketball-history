@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_CONVERGENCE_AND_OWNER_DEPENDENCY_EXACT_CHECKPOINT_0057",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "scope": "Deterministic read-only-to-history crosswalk of existing exact 51-season official aggregates, 560 accepted source rows, all held candidates, terminal accounting debts and material owner-dependent boundaries; no new archival family or stage advancement.",
+  "authority": {
+    "protected_main_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+    "parent_research_head": "83101a06af069c9a79efc212378c0770880b451e",
+    "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "parent_status_path": "schools/gonzaga/research/checkpoints/stage1-status-0056.json",
+    "parent_status_git_blob": "e0b45fe8ae46c11e00a0ad4743a7f6cc579e49a1",
+    "accepted_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0038.csv",
+    "accepted_ledger_blob": "9e0fbf4280a4944e035985d4570d01b618f5078d",
+    "reconciliation_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0004.csv",
+    "reconciliation_blob": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "hold_inventory_path": "schools/gonzaga/research/checkpoints/stage1-ten-historical-plus-whitman-holds-current-disposition-0002.csv",
+    "hold_inventory_blob": "dd1b89780ddc23a1ba9d08a5a4fb7e5822f08237",
+    "season_census_path": "schools/gonzaga/research/checkpoints/stage1-season-census-0002.csv",
+    "season_census_blob": "3d5937323ad921aac1aac3e3afe7ab24352916a5",
+    "prior_assessment_blob": "29557855ad3deadb9640a2e3e30fef63036f80a3",
+    "whitman_original_audit_blob": "3a3e9e84314d4c44abfc151fbb5d09af8b2c84a1",
+    "wartime_original_audit_blob": "877c4414b4302b18e1bfd90f2db5d71f3f65df00",
+    "current_main_accounting_authorities_sha": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+    "current_main_aggregate_authorities_sha": "8164c5953fa3091cea2163d325602e5804e72cf2",
+    "gonzaga_owner_approval_registry_entry_exists": false
+  },
+  "accepted_source_games": {
+    "total": 560,
+    "wins": 216,
+    "losses": 344,
+    "regular_season": 543,
+    "postseason": 17,
+    "unique_research_ids": 560,
+    "known_result_games": 560,
+    "unchanged": true
+  },
+  "official_expansion_universe": {
+    "wins": 477,
+    "losses": 500,
+    "games": 977
+  },
+  "season_arithmetic": {
+    "season_count": 51,
+    "positive_delta_seasons": 45,
+    "positive_delta_sum": 422,
+    "negative_delta_seasons": 2,
+    "negative_delta_sum": -5,
+    "zero_delta_seasons": 4,
+    "zero_delta_season_labels": [
+      "1915-16",
+      "1929-30",
+      "1930-31",
+      "1942-43"
+    ],
+    "zero_count_but_wl_conflict_seasons": [
+      "1915-16",
+      "1930-31"
+    ],
+    "one_zero_identified_game_season": "1917-18",
+    "net_arithmetic_coverage_difference": 417,
+    "interpretation": "Official minus accepted is numeric diagnostic, not 417 or 422 source-proven missing games; both source-coverage gaps and incompatible season headings coexist; 1942-43 equal count does not resolve active February inclusion held candidates.",
+    "era_breakdown": [
+      {
+        "era": "1907–1919",
+        "seasons": 13,
+        "positive_count": 12,
+        "positive_sum": 84,
+        "negative_count": 0,
+        "negative_sum": 0,
+        "count_equal": 1
+      },
+      {
+        "era": "1920–1929",
+        "seasons": 10,
+        "positive_count": 9,
+        "positive_sum": 93,
+        "negative_count": 0,
+        "negative_sum": 0,
+        "count_equal": 1
+      },
+      {
+        "era": "1930–1939",
+        "seasons": 10,
+        "positive_count": 7,
+        "positive_sum": 82,
+        "negative_count": 2,
+        "negative_sum": -5,
+        "count_equal": 1
+      },
+      {
+        "era": "1940–1949",
+        "seasons": 10,
+        "positive_count": 9,
+        "positive_sum": 107,
+        "negative_count": 0,
+        "negative_sum": 0,
+        "count_equal": 1
+      },
+      {
+        "era": "1950–1957",
+        "seasons": 8,
+        "positive_count": 8,
+        "positive_sum": 56,
+        "negative_count": 0,
+        "negative_sum": 0,
+        "count_equal": 0
+      }
+    ],
+    "exact_season_inventory_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-owner-dependency-inventory-0001.csv"
+  },
+  "candidate_docket": {
+    "total_historical_disposition_records": 10,
+    "active": 9,
+    "resolved_duplicate": 1,
+    "active_families": [
+      {
+        "season": "1937-38",
+        "kind": "FOUR_WHITMAN_GAMES_DISTINCT",
+        "count": 4,
+        "source_scope": "FOUR_REPORTED_GONZAGA_UNIVERSITY_VARSITY_RESULTS_ALL_EXACT_DATED; SCORE_FIELD_CONFLICT_IN_THREE",
+        "remaining_authority": "INCLUSION_VS_OFFICIAL_0_4_4",
+        "owner_material_choice_required": true
+      },
+      {
+        "season": "1942-43",
+        "kind": "FOUR_FEBRUARY_GONZAGA_UNIVERSITY_GAMES_DISTINCT",
+        "count": 4,
+        "source_scope": "FOUR_REPORTED_COMPETITIVE_RESULTS; ONE_EXACT_DATE_UNKNOWN, ONE_SERVICE_OPPONENT",
+        "remaining_authority": "INCLUSION_VS_OFFICIAL_2_9_11",
+        "owner_material_choice_required": true
+      },
+      {
+        "season": "1925-26",
+        "kind": "JAN18_PORTLAND_CHECKERBOARDS_SAME_DAY_COLLISION",
+        "count": 1,
+        "source_scope": "WASHINGTON_OFFICIAL_AND_PORTLAND_WIRE_FAMILY_INCOMPATIBLE_SAME_DATE",
+        "remaining_authority": "BOUNDED_SOURCE_EXHAUSTED; OWNER_ONLY_IF_GENUINELY_NEEDED",
+        "owner_material_choice_required": false
+      }
+    ],
+    "inventory_path": "schools/gonzaga/research/checkpoints/stage1-ten-historical-hold-decision-path-inventory-0001.csv",
+    "no_auto_acceptance": true,
+    "no_auto_exhibition_exclusion": true
+  },
+  "accounting_closeout": {
+    "count": 4,
+    "cases": [
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+        "season": "1915-16",
+        "exception_class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "official_record": "2-7 / 9",
+        "identified_record": "0-9 / 9",
+        "official_minus_identified_game_count": 0,
+        "active_individual_game_holds": 0,
+        "status": "RESEARCH_EXHAUSTED__NOT_CLOSEOUT_APPROVED",
+        "continued_research_blocking": "NO",
+        "final_stage1_closeout_blocking": "YES",
+        "owner_permission": "NOT_GRANTED_GONZAGA_HAS_NO_CASE_IN_PROTECTED_MAIN_REGISTRY",
+        "auditor_gate": "REQUIRES_EXACT_PARENT_RESEARCH_BASE_LEDGER_HASH_EVIDENCE_ZERO_UNRELATED_BLOCKERS_AND_OWNER_APPROVAL",
+        "explanation": "Historical source-game evidence remains preserved; incompatible official cumulative season accounting is not a game-removal, result-flip or same-game-overlap rule"
+      },
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1930-31",
+        "season": "1930-31",
+        "exception_class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "official_record": "7-8 / 15",
+        "identified_record": "5-10 / 15",
+        "official_minus_identified_game_count": 0,
+        "active_individual_game_holds": 0,
+        "status": "RESEARCH_EXHAUSTED__NOT_CLOSEOUT_APPROVED",
+        "continued_research_blocking": "NO",
+        "final_stage1_closeout_blocking": "YES",
+        "owner_permission": "NOT_GRANTED_GONZAGA_HAS_NO_CASE_IN_PROTECTED_MAIN_REGISTRY",
+        "auditor_gate": "REQUIRES_EXACT_PARENT_RESEARCH_BASE_LEDGER_HASH_EVIDENCE_ZERO_UNRELATED_BLOCKERS_AND_OWNER_APPROVAL",
+        "explanation": "Historical source-game evidence remains preserved; incompatible official cumulative season accounting is not a game-removal, result-flip or same-game-overlap rule"
+      },
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1936-37",
+        "season": "1936-37",
+        "exception_class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "official_record": "1-5 / 6",
+        "identified_record": "4-5 / 9",
+        "official_minus_identified_game_count": -3,
+        "active_individual_game_holds": 0,
+        "status": "RESEARCH_EXHAUSTED__NOT_CLOSEOUT_APPROVED",
+        "continued_research_blocking": "NO",
+        "final_stage1_closeout_blocking": "YES",
+        "owner_permission": "NOT_GRANTED_GONZAGA_HAS_NO_CASE_IN_PROTECTED_MAIN_REGISTRY",
+        "auditor_gate": "REQUIRES_EXACT_PARENT_RESEARCH_BASE_LEDGER_HASH_EVIDENCE_ZERO_UNRELATED_BLOCKERS_AND_OWNER_APPROVAL",
+        "explanation": "Historical source-game evidence remains preserved; incompatible official cumulative season accounting is not a game-removal, result-flip or same-game-overlap rule"
+      },
+      {
+        "blocker_id": "GONZAGA-S1-ACCOUNTING-1937-38",
+        "season": "1937-38",
+        "exception_class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+        "official_record": "0-4 / 4",
+        "identified_record": "0-6 / 6",
+        "official_minus_identified_game_count": -2,
+        "active_individual_game_holds": 4,
+        "status": "RESEARCH_EXHAUSTED__NOT_CLOSEOUT_APPROVED",
+        "continued_research_blocking": "NO",
+        "final_stage1_closeout_blocking": "YES",
+        "owner_permission": "NOT_GRANTED_GONZAGA_HAS_NO_CASE_IN_PROTECTED_MAIN_REGISTRY",
+        "auditor_gate": "REQUIRES_EXACT_PARENT_RESEARCH_BASE_LEDGER_HASH_EVIDENCE_ZERO_UNRELATED_BLOCKERS_AND_OWNER_APPROVAL",
+        "explanation": "Historical source-game evidence remains preserved; incompatible official cumulative season accounting is not a game-removal, result-flip or same-game-overlap rule"
+      }
+    ],
+    "terminal_class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+    "existing_classification": "RESEARCH_EXHAUSTED",
+    "eligible_for_immediate_closeout": false,
+    "reason": "Protected main has no Gonzaga exact owner authorization; active historical inclusion and duplicate candidate holds remain; exact population eligibility / evidence for 45 positive seasons not independently authorized.",
+    "per_case_inventory_path": "schools/gonzaga/research/checkpoints/stage1-four-accounting-closeout-case-inventory-0001.csv"
+  },
+  "independent_vs_owner": {
+    "independently_mechanical_now": "Exact checkpoint check of 45 positive-delta season-by-season source coverage and whether any existing evidence meets repository narrow counted-gap / early-history-accounting terminal prerequisites; never infer source game identity from numeric difference.",
+    "owner_authority_only_with_explicit_user_disposition": "Whether source-proven four 1937-38 Whitman and four 1942-43 February Gonzaga University games are recognized competitive varsity expansion games despite incompatible official season-heading aggregates. Individual game identities must remain separate; score defects don't force false games.",
+    "conditional_historical_judgment": "1926 same-night Portland-vs-Washington game date collision; no owner question fabricated absent material new evidence or necessary owner-level source-identity choice.",
+    "terminal_accounting_owner_step_later": "Four researched-exhausted early accounting contradictions require exact authorized registry and permanent audit/closeout/verify-closeout under current stage1 contract, and zero unrelated blockers; no authorizations inferred by ordinary Proceed.",
+    "not_automatically_owner_approved": "All 45 positive season arithmetic differences are unverified source-game identities or terminal source-accounting coverage; no blanket eligibility or exact missing game number has been proven."
+  },
+  "checks": {
+    "no_game_additions": true,
+    "accepted_ledger_intact": true,
+    "no_held_candidate_reclassification": true,
+    "prior_hold_inventory_intact": true,
+    "season_census_intact": true,
+    "no_sharing_registry_modification": true,
+    "owner_gate_not_approved": true,
+    "stage1_complete": false,
+    "stage2_authorized": false
+  },
+  "next_bounded_unit": "One source-evidence-only, local/mechanical 51-season coverage-exception eligibility classification: test 45 positive game-count diagnostic seasons against already accepted checkpoint source-feasibility/exhaustion evidence and the repository's exact terminal exception requirements; output an exact eligible/insufficient/owner-dependent population WITHOUT any new broad source searching, owner approval, source-game admission, or Stage 2."
+}
