@@ -1,0 +1,32 @@
+{
+  "checkpoint": "0009-stage1-adversarial-identity-and-residual-census",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "65a0fff1f8af92152a08e0296f85e49852bc6375",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "seasons": 49,
+  "source_rows": 1126,
+  "accepted": 1059,
+  "accepted_regular": 1016,
+  "accepted_postseason": 43,
+  "held_inclusion": 64,
+  "held_game_type": 2,
+  "own_jv_excluded": 1,
+  "non_game_forfeits": 5,
+  "unidentified_source_outcomes": 3,
+  "missing_date_rows": 11,
+  "missing_score_rows": 5,
+  "strict_duplicate_candidates": 0,
+  "same_score_other_date_review_pairs": 2,
+  "source_aggregate": {
+    "W": 688,
+    "L": 445,
+    "T": 1,
+    "total": 1134
+  },
+  "current_main_target_baseline_source_games": 1709,
+  "next_unit": "One bounded source-family challenge for exact identified inclusion and game-type residuals; no automatic stage advancement"
+}

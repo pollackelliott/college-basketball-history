@@ -1,0 +1,53 @@
+{
+  "checkpoint": "0009-stage1-adversarial-identity-and-residual-census",
+  "school_key": "san-diego-state",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "65a0fff1f8af92152a08e0296f85e49852bc6375",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "counts": {
+    "seasons": 49,
+    "source_rows": 1126,
+    "accepted": 1059,
+    "held_inclusion": 64,
+    "held_game_type": 2,
+    "excluded_own_jv": 1,
+    "admin_awards": 5,
+    "unknown_source_outcomes": 3,
+    "missing_dates": 11,
+    "missing_scores": 5,
+    "repeated_score_pairs": 2,
+    "strict_duplicates": 0
+  },
+  "files": {
+    "49-season-adversarial-census.csv": {
+      "sha256": "6a7af5ecc2b1d3093fcb8833c842830936124af87ab1cd92385e20e52693077e",
+      "bytes_utf8": 3601
+    },
+    "held-identities.csv": {
+      "sha256": "2e45fdb9439dd4487382b93cb052cbd5652ffcfc262d0d7507c12472f364634c",
+      "bytes_utf8": 7798
+    },
+    "field-unknowns.csv": {
+      "sha256": "de7613e2947d06e3b48d945507f4c525d91450a33efa2c3a8b93010a06de40a0",
+      "bytes_utf8": 1929
+    },
+    "aggregate-only-accounting.csv": {
+      "sha256": "9e1458cfc898e4d435415409347ebfb9f7bed86161a67e8ba1b3ae4fed34e09c",
+      "bytes_utf8": 1504
+    },
+    "adversarial-repeat-pairs.csv": {
+      "sha256": "a209cbfc6dc9f783f8389df2e2b8bd93fa80056186b9677f8b8597f3b580aa0c",
+      "bytes_utf8": 901
+    },
+    "source-findings.md": {
+      "sha256": "1e0593fed848215d7a850914a4e153d0d015e95cf7b11605670895c7b516344e",
+      "bytes_utf8": 3298
+    },
+    "research-status.json": {
+      "sha256": "804aa0bd0d5b308e625a88b08f8abd9a3b1a0a43d35383ba343070654d935f44",
+      "bytes_utf8": 1088
+    }
+  }
+}

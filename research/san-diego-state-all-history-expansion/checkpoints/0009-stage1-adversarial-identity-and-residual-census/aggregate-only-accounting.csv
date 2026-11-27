@@ -1,0 +1,9 @@
+accounting_id,season,source_class,literal_opponent,WLT,source_note,game_id_created
+"SDSU-EXP-S1-1921-22-UNKNOWN-W-01","1921-22","SOURCE_ACKNOWLEDGED_UNIDENTIFIED_RESULT","","W","1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.","NO"
+"SDSU-EXP-S1-1921-22-UNKNOWN-L-01","1921-22","SOURCE_ACKNOWLEDGED_UNIDENTIFIED_RESULT","","L","1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.","NO"
+"SDSU-EXP-S1-1921-22-UNKNOWN-L-02","1921-22","SOURCE_ACKNOWLEDGED_UNIDENTIFIED_RESULT","","L","1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.","NO"
+"SDSU-EXP-S1-1921-22-FORFEIT-01","1921-22","FORFEIT_AWARD_NOT_DOCUMENTED_PLAYED_GAME","Riverside JC","W","1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.","NO"
+"SDSU-EXP-S1-1921-22-FORFEIT-02","1921-22","FORFEIT_AWARD_NOT_DOCUMENTED_PLAYED_GAME","Fullerton JC","W","1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.","NO"
+"SDSU-EXP-S1-1924-25-FORFEIT-01","1924-25","FORFEIT_AWARD_NOT_DOCUMENTED_PLAYED_GAME","Santa Ana JC","W","Forfeit Wins vs. Santa Ana JC, El Centro JC & Pomona JC.","NO"
+"SDSU-EXP-S1-1924-25-FORFEIT-02","1924-25","FORFEIT_AWARD_NOT_DOCUMENTED_PLAYED_GAME","El Centro JC","W","Forfeit Wins vs. Santa Ana JC, El Centro JC & Pomona JC.","NO"
+"SDSU-EXP-S1-1924-25-FORFEIT-03","1924-25","FORFEIT_AWARD_NOT_DOCUMENTED_PLAYED_GAME","Pomona JC","W","Forfeit Wins vs. Santa Ana JC, El Centro JC & Pomona JC.","NO"
