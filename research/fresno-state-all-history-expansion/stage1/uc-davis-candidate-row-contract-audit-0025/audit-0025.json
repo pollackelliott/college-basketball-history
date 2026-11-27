@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_0024_CANDIDATE_READONLY_CONTRACT_VALIDATION_0025",
+  "status": "ROW_LEVEL_CONTRACT_AUDIT_PASS_ZERO_ERRORS__PERMANENT_STAGE4_PORTFOLIO_ACCEPTANCE_NOT_RUN__STAGE1_OPEN",
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "research_parent_sha": "9498f464076c51ef253f9d30b52b2ae79a486852",
+  "research_parent_tree_sha": "6d45bfceb542c76583e1628b3938f1247df1f5d6",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "input_git_blobs": {
+    "0024/ledger": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "0024/source_dispositions": "b00974af230d617c40b94165d4fb23da16374058",
+    "0024/pending_source_groups": "f082a07b72a10a449736cba7e3be54b6eac409b8",
+    "0024/census": "cc786d8c18a478bf1b89f955eaf19a26e1724728",
+    "0024/reciprocal_provenance": "043ed5ca4a3846ed82cd87ad01125c83e3fab534",
+    "0024/four_source_claims": "573d73ec5c61dec2d30443873f73d93c4f9672ec",
+    "0024/owner_receipt": "896249cad18ab9a80aa3bab6b7b5a4b7b61422a0",
+    "0013/ledger": "19830f0e75fbd807371d946210c9660f1c4bcf4e",
+    "0013/source": "5ada1c5e75f54445577577c92d6576ebde56e811",
+    "0013/pending": "485047f0a0806bc4407be334d8cbd7112aaf0f7b",
+    "0013/census": "4b120557181c5beaaed5911bc239b0c91dd9ea81"
+  },
+  "check_count": 23,
+  "passed_checks": 20,
+  "not_run_or_not_eligible": [
+    {
+      "id": "P21",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "P22",
+      "status": "NOT_ELIGIBLE"
+    },
+    {
+      "id": "P23",
+      "status": "NOT_AUTHORIZED"
+    }
+  ],
+  "row_errors": 0,
+  "accepted_rows": 1011,
+  "source_representations": 1036,
+  "pending_source_groups": 2,
+  "unassigned_fresno_score_claims": 4,
+  "census_rows": 49,
+  "preserved_prior_accepted_rows": 1009,
+  "record_played_W": 532,
+  "record_played_L": 479,
+  "game_type_counts": {
+    "REGULAR_SEASON": 994,
+    "NCAA_TOURNAMENT": 16,
+    "POSTSEASON": 1
+  },
+  "source_disposition_counts": {
+    "ACCEPTED_NEW_COMPETITIVE_SOURCE_GAME": 933,
+    "INHERITED_PRIOR_ACCEPTED_RESEARCH_ID": 78,
+    "EXCLUDED_NONCOMPETITIVE_EVENT": 17,
+    "DUPLICATE_SOURCE_REPRESENTATION_NO_EXTRA_GAME": 2,
+    "OWNER_APPROVED_UNATTRIBUTED_CONFLICTING_FRESNO_SCORE_CLAIM": 4,
+    "BLOCKED_TOURING_CLOWNS_MATCH_INCLUSION": 2
+  },
+  "score_unknown_reciprocal_ids": [
+    "FRESNO-EXP-RECIP-UCD-1926-27-04",
+    "FRESNO-EXP-RECIP-UCD-1926-27-05"
+  ],
+  "validated_by": "CONNECTOR_FETCH_EXACT_GIT_BLOBS_PLUS_READONLY_JS_ROW_LEVEL_INVARIANT_AUDIT__NOT_EXECUTION_OF_REPOSITORY_PYTHON_SUITE",
+  "permanent_tool_boundary": {
+    "research_portfolio_tool": "tools/onboarding_hardening.py:research_portfolio_report",
+    "requires": "valid Research Freeze; not applicable prior to Stage2–6",
+    "stage4_authoring_tool": "tools/research_stage4.py",
+    "implementation_tool": "tools/expansion_implementation_stage1.py",
+    "actual_permanent_portfolio_report_run": false,
+    "existing_generic_stage1_research_candidate_runner_verified": false,
+    "current_dry_run_is_reproducible_from_specific_sha_pinned_source_files": true
+  },
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "game_history_changed": false,
+  "main_changed": false,
+  "next_bounded_unit": "Work one remaining specific inclusion blocker (two touring Clowns games) by a new genuine match-specific source, or stop with exact evidence limitation; do not re-open UC Davis approved two-game decision."
+}
