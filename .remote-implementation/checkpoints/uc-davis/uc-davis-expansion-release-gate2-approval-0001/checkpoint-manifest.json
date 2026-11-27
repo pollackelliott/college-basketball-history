@@ -1,0 +1,30 @@
+{
+  "approval_proof_sha256": "01c6b8596005560b0b9fd93a5aa569432835fb7e58d76723e1fc9ce71e7ea01c",
+  "approved_plan_hash": "498257f67cc96306ffcda3f25ff872bc6569ccd83df8abe6a9f1ee3a250f326d",
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "uc-davis-expansion-release-production-proof-0001"
+  },
+  "gate2_merge_packet_path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-release-gate2-approval-0001/gate2-merge-packet.json",
+  "gate2_merge_packet_sha256": "01024fb35966df54e75c659793f820132bd09a532ed29fc57934d295afe583b7",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVED_CHECKPOINT",
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "pr_number": 729,
+  "preview_checkpoint_sha256": "6a7c848bb3ac4f3805b222bde1452a12b037ad39729c6302277d15bc5556332f",
+  "preview_deployment_id": 8100374243,
+  "preview_url": "https://college-basketball-history-9yy4x32ai-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "dea1fa2bed819ece1ac1dde7f167c1279ad2ef4118db2ec07ce354f544274255",
+  "production_proof": false,
+  "production_request_id": "uc-davis-expansion-release-production-proof-0001",
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "release_manifest_sha256": "8594eac07eb2b07fab6ea05fbe7502587beed2a653fb6da2fb1f31d470e3bdc5",
+  "request_id": "uc-davis-expansion-release-gate2-approval-0001",
+  "request_sha256": "0fd38f4ad34fafe9136cb4e6735a6a6be0388df585241f72efcddfde7f3bea70",
+  "schema_version": 1,
+  "school_key": "uc-davis",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7"
+}
