@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-expansion-release-production-proof-0001",
+  "school_key": "uc-davis",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "6cf71c1274871a4cfac6df9618b741a030918a6a",
+  "previous_control_state_sha256": "693d2de1afe674cd751a4f397847956476ede9aeb9bebf14a93a0808642a0cfc",
+  "expected_protected_main_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "d9be275465200094d21c8511dbce02e40826efb35a895a5a6be2115ebdac3e28"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/uc-davis/uc-davis-expansion-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "56b9f432cc784683d64c5fe945ab4a7b1819fa0eb15c508298375846ca4e3bdc"
+  },
+  "pr_number": 729,
+  "merge_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": true,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Same UC Davis ALL_HISTORY_EXPANSION Implementation final release phase; explicit owner Gate 2 approval, independently verified, exact authorized GitHub connector merge.",
+    "authorization": "Owner 'APPROVED. Proceed' for exact PR #729 Preview deployment 8100374243. Fresh Gate 2 verification PASS issued merge packet SHA256 01024fb35966df54e75c659793f820132bd09a532ed29fc57934d295afe583b7, exact merge method `merge` head e2c347e3f2658bef820f23b07327e993e9e558c7 against main 5b840a354fb5cd792239ff8b93cba223a18dd87a. Authorized GitHub connector produced two-parent protected main merge 3f5a15458aa468347e56e669327d6fe4c9c6ee69 with correct ordered parents. This read-only request proves exact Production deployment and all changed generated public JSON; it grants no further mutation, Gate, historical change, or other-school authority."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "exact_production_json": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_PROOF",
+  "merge_parent_main": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "merge_parent_onboarding": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "merge_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "owner_gate_2_approval_checkpoint_sha256": "d9be275465200094d21c8511dbce02e40826efb35a895a5a6be2115ebdac3e28",
+  "owner_gate_2_verification_sha256": "56b9f432cc784683d64c5fe945ab4a7b1819fa0eb15c508298375846ca4e3bdc",
+  "permanent_merged_main_gates": "PASS",
+  "pr_head_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "pr_number": 729,
+  "production_deployment_id": 8102027985,
+  "production_deployment_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "production_environment": "Production",
+  "production_json_checked": [
+    "/data/manifest.json",
+    "/data/programs.json",
+    "/data/teams/byu.json",
+    "/data/teams/california.json",
+    "/data/teams/colorado-state.json",
+    "/data/teams/fresno-state.json",
+    "/data/teams/stanford.json",
+    "/data/teams/uc-davis.json"
+  ],
+  "production_json_checked_count": 8,
+  "school_key": "uc-davis",
+  "status": "COMPLETE"
+}
