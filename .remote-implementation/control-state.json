@@ -830,7 +830,7 @@
     "nevada-phase0-0001"
   ],
   "active_expected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
-  "active_lock_commit": null,
+  "active_lock_commit": "09193136df1e91442e4b9116538aed42e464dd26",
   "active_lock_owner": "github-actions:46059637302:1",
   "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
