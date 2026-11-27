@@ -1,0 +1,42 @@
+{
+  "checkpoint": "0015-contemporaneous-broadway-exhibition-source-challenge",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "b613d2378a54391af83621ace0507b32814509ea",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "counts": {
+    "named_source": 1126,
+    "accepted": 1061,
+    "held": 26,
+    "owner_excluded": 38,
+    "own_jv_excluded": 1,
+    "source_rows_reviewed": 26,
+    "fixture_priority_updates": 1,
+    "game_disposition_changes": 0
+  },
+  "files": {
+    "26-fixture-evidence-updates.csv": {
+      "sha256": "15e903b5f1760eef95c29d9494da287765dcdde055bf0c3cdbeba6d7d743b31f",
+      "bytes_utf8": 7380
+    },
+    "1937-broadway-specific-evidence.csv": {
+      "sha256": "e0ca8906e1d4d724ed556684b00af1787f267e3b8a8dd1d37690b45a630b6768",
+      "bytes_utf8": 515
+    },
+    "source-access-and-evidence-matrix.csv": {
+      "sha256": "7257477bc8aa72d86837b08bf1e44771945171225774062745cb7b2d20ca52ae",
+      "bytes_utf8": 4553
+    },
+    "research-findings.md": {
+      "sha256": "c5360504a8f684e4f24185443308046a99ee5c5de19cfc82ab1e2eb05b55584d",
+      "bytes_utf8": 5128
+    },
+    "research-status.json": {
+      "sha256": "215aa13a6c9f1fe21c78c8dbe00179557ebcc9defceba55d38e2998cf5e92639",
+      "bytes_utf8": 1521
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "checkpoint": "0015-contemporaneous-broadway-exhibition-source-challenge",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_state": "STAGE_1_BLOCKED_26_HISTORICAL_INCLUSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "b613d2378a54391af83621ace0507b32814509ea",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "game_universe_changes": 0,
+  "latest_contemporaneous_evidence": "1937-03-04 Medford Mail Tribune Broadway Clowns same-season named SDSU opponent and touring exhibition descriptions",
+  "priority_fixture": "SDSU-EXP-S1-1936-37-0010",
+  "priority_fixture_status": "HELD_INCLUSION",
+  "priority_fixture_evidence_rank": "SAME_TOUR_CONTEMPORANEOUS_EXHIBITION_STYLE_WITHOUT_EXACT_EXHIBITION_TAG",
+  "accepted_competitive": 1061,
+  "held_inclusion": 26,
+  "excluded_same_program": 38,
+  "excluded_own_jv": 1,
+  "accepted_types": {
+    "REGULAR_SEASON": 1018,
+    "POSTSEASON": 43
+  },
+  "named_source_rows": 1126,
+  "protected_main_unchanged": true,
+  "source_fanout_exhausted_by_category": "OPEN_WEB_SEARCHES_LOW_YIELD",
+  "archival_sources_locator_only": [
+    "SDSU The Aztec student newspapers Jan 1937",
+    "Fontius thesis 1921–1971"
+  ],
+  "next_bounded_unit": "Either genuine exact Jan1937 fixture exhibition evidence/owner historical decision or separately justified independent-opponent source path; no global inference"
+}
