@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-expansion-release-readiness-0001",
+  "school_key": "uc-davis",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "9698985fbe6ca242196d47ca920fe263fb517b47",
+  "previous_control_state_sha256": "23585d8d1287dd8725f2439411327d1727f226079d30536a02d035578da1ae94",
+  "expected_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "approved_plan_hash": "498257f67cc96306ffcda3f25ff872bc6569ccd83df8abe6a9f1ee3a250f326d",
+  "release_manifest_sha256": "8594eac07eb2b07fab6ea05fbe7502587beed2a653fb6da2fb1f31d470e3bdc5",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "4219cf847e047651ff7a4fb64f3ae9e163702a3b071dfbeeaeb0d2c4f30e8c04"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/uc-davis/uc-davis-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "006b2c5b16e7dc88de07d377003cf038cb2591a0bc7be074098ec451783932eb"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "uc-davis-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "UC Davis ALL_HISTORY_EXPANSION serialized Implementation lane — owner 'Continue' after exact fresh-verified sealed apply; advancing owner-authorized release-preparation phase.",
+    "authorization": "Owner authorized the routine next release-preparation phase following independently verified sealed apply. Read-only release readiness against exact approved school head; record connector-owned PR packet and exact future Preview verification ID, then school lane will create/reuse exact-head release PR and verify CI/Vercel Preview to OWNER_GATE_2_READY. Stop for explicit Owner Gate 2, no owner Gate 2 approval, protected main merge, Production, or historical change."
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": false,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": true,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  }
+}

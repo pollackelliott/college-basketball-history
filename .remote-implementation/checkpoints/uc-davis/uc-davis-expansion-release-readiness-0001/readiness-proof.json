@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "apply_request_id": "uc-davis-expansion-stage2-sealed-apply-0001",
+  "approved_plan_hash": "498257f67cc96306ffcda3f25ff872bc6569ccd83df8abe6a9f1ee3a250f326d",
+  "changed_path_count": 12,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "release_manifest_sha256": "8594eac07eb2b07fab6ea05fbe7502587beed2a653fb6da2fb1f31d470e3bdc5",
+  "school_key": "uc-davis",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "4219cf847e047651ff7a4fb64f3ae9e163702a3b071dfbeeaeb0d2c4f30e8c04",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "006b2c5b16e7dc88de07d377003cf038cb2591a0bc7be074098ec451783932eb",
+  "writeahead_sha256": "1d4182c267d18f4eb3c80ac2149147eb3866e84693ed6be93a823ac886dced0f"
+}
