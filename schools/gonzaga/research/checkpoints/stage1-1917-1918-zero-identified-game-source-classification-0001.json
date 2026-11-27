@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1917_18_ZERO_IDENTIFIED_GAMES_BOUNDED_PROVENANCE_SCREEN_0001",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "status": "BOUNDED_SINGLE_SEASON_CHECK_COMPLETE__ZERO_NEW_IDENTITIES__NOT_SOURCE_EXHAUSTED",
+  "authority": {
+    "protected_main_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+    "parent_research_head": "4c36f400826451b1fdd17b6ec0c0e01879d660d0",
+    "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "parent_status_blob": "a4f7315fec75b06276b241b6047c4709315251bf",
+    "parent_ledger_blob": "9e0fbf4280a4944e035985d4570d01b618f5078d",
+    "parent_reconciliation_blob": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "parent_census_blob": "3d5937323ad921aac1aac3e3afe7ab24352916a5",
+    "parent_positive_coverage_blob": "c618b12014218a65dd1b52d103bfb7a5a8da30a0",
+    "parent_holds_blob": "dd1b89780ddc23a1ba9d08a5a4fb7e5822f08237"
+  },
+  "season": {
+    "label": "1917-18",
+    "institutional": {
+      "wins": 3,
+      "losses": 2,
+      "games": 5
+    },
+    "identified": {
+      "wins": 0,
+      "losses": 0,
+      "games": 0
+    },
+    "numeric_official_minus_identified": {
+      "wins": 3,
+      "losses": 2,
+      "games": 5
+    },
+    "separately_explicit_missing_game_note": false
+  },
+  "sources_checked": [
+    {
+      "source_id": "GONZAGA_OFFICIAL_1917_18",
+      "source": "Gonzaga 2026–27 Men's Basketball Record Book coaching records",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/gozags.com/documents/2026/8/27/2026-27_Record_Book.pdf",
+      "period": "1917–18",
+      "finding": "Official 3–2, five-game season aggregate",
+      "new_games": 0,
+      "limit": "No dated opponent-level rows or primary institutional explicit note counting games absent from a detailed list"
+    },
+    {
+      "source_id": "WSU_OFFICIAL_YEAR_BY_YEAR",
+      "source": "Washington State 2026 official basketball year-by-year",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/wsu.sidearmsports.com/documents/2026/2/9/MBB_Record_Book_260209_Incomplete.pdf",
+      "period": "1917–18 7–12 schedule",
+      "finding": "Detailed source-opponent schedule contains no Gonzaga game",
+      "new_games": 0,
+      "limit": "One institutional reciprocal schedule; cannot establish absence from other Gonzaga games"
+    },
+    {
+      "source_id": "IDAHO_OFFICIAL_YEAR_BY_YEAR",
+      "source": "Idaho 2025–26 official basketball all-time results",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/govandals.com/documents/2025/5/21/MBB_Record_Book_25-26.pdf",
+      "period": "1917–18 12–1 schedule",
+      "finding": "Opponent series lists Whitman, Montana, Washington State, not Gonzaga",
+      "new_games": 0,
+      "limit": "One institutional reciprocal schedule; Idaho Gonzaga Jan25 1919 is 1918–19, not 1917–18"
+    },
+    {
+      "source_id": "GONZAGA_ATHLETICS_JIMMIE_CONDON",
+      "source": "Gonzaga Athletics 1995 Hall of Fame biography Jimmie Condon",
+      "url": "https://d2jpxbzntgxotn.cloudfront.net/honors/gonzaga-athletic-hall-of-fame/jimmie-condon/15",
+      "period": "Gonzaga student-athlete 1914–1918",
+      "finding": "Basketball participation and volunteer coaching acknowledged; graduated 1918",
+      "new_games": 0,
+      "limit": "No 1917–18 opponent, score, game date, site, or varsity game-inclusion report"
+    },
+    {
+      "source_id": "GONZAGA_DIGITAL_STUDENT_MAGAZINE",
+      "source": "Gonzaga student publication 1910s Digital Collections and 2024 university retrospective",
+      "url": "https://digital.gonzaga.edu/digital/collection/p15486coll10",
+      "period": "1910–1922/23 student publication, potentially 1917–18",
+      "finding": "Authentic first-party archive exists; direct CONTENTdm issue-level query was inaccessible to web retrieval",
+      "new_games": 0,
+      "limit": "No original 1917–18 issue authenticated; source access impediment is not exhaustion or negative evidence"
+    },
+    {
+      "source_id": "OREGON_INDEX_TARGETED_JAN_FEB_1918",
+      "source": "Historic Oregon Newspapers narrow Gonzaga basketball 1918 original news index",
+      "url": "https://oregonnews.uoregon.edu/",
+      "period": "1917–18 winter, with year-boundary checks",
+      "finding": "No safe Gonzaga game identity from bounded index lookup",
+      "new_games": 0,
+      "limit": "Index has unknown OCR coverage; Jan 1917 Idaho–Gonzaga and Dec 1918 schedules are outside target season"
+    }
+  ],
+  "year_boundary_false_positives_excluded": [
+    {
+      "source": "Morning Register original Jan12 1917",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn96088115/1917-01-12/ed-1/seq-2/",
+      "literal": "Idaho Gonzaga L32–30 Jan11 1917",
+      "classification": "1916-17_PREVIOUS_SEASON_NOT_1917_18"
+    },
+    {
+      "source": "Idaho 2025–26 official",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/govandals.com/documents/2025/5/21/MBB_Record_Book_25-26.pdf",
+      "literal": "Jan25 1919 Idaho 34–13 Gonzaga",
+      "classification": "1918-19_FOLLOWING_SEASON_NOT_1917_18"
+    },
+    {
+      "source": "Dec15 1918 Sunday Oregonian",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn83045782/1918-12-15/ed-1/seq-25/ocr/",
+      "literal": "Whitman or Gonzaga 1919 potential opponent preview",
+      "classification": "1918-19_SCHEDULE_MENTION_NOT_PLAYED_GAME"
+    }
+  ],
+  "decision": {
+    "new_identified_games": 0,
+    "new_holds": 0,
+    "researched_season_conclusion": "INSTITUTION_AGGREGATE_ONLY_NO_CONFIRMED_GAME_IDENTITIES",
+    "source_corpus_exhausted": false,
+    "season_research_stopped_this_unit": true,
+    "archive_1917_18_issues_read": false,
+    "game_type_result_score_opponent_site_not_inferred": true,
+    "not_eligible_for_any_current_terminal_exception": true,
+    "source_acknowledged_missing_game_note_not_proven": true,
+    "owner_early_aggregate_authority_exists": false,
+    "other_source_game_inclusion_holds": 9,
+    "permanent_closeout_audit_not_run": true
+  },
+  "preservation": {
+    "total_accepted": 560,
+    "accepted_record": "216-344",
+    "official_51_season_aggregate_games": 977,
+    "net_arithmetic_coverage_difference": 417,
+    "positive_seasons": 45,
+    "positive_difference_sum": 422,
+    "active_holds": 9,
+    "research_exhausted_accounting_cases": 4,
+    "stage1_complete": false,
+    "stage2_authorized": false,
+    "protected_main_mutated": false
+  },
+  "next_bounded_unit": "One narrowly bounded Whitman College 1917–18 official basketball historical opponent-series or contemporary student-archive availability check for an actual played Gonzaga game; if not readable, record exact source limits and stop without widening to more source families."
+}
