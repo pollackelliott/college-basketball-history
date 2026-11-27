@@ -1,0 +1,4 @@
+decision_option,hypothetical_new_acceptances,hypothetical_new_exclusions,hypothetical_retained_holds,total_accepted_competitive_if_approved,total_excluded_if_approved,source_results_remain_named,approval_received
+"NO_NEW_RULING_CONTROLLING","0","0","25","1061","40","YES","NO"
+"OWNER_APPROVES_ALL_EXACT_25_EXTERNAL_OPPONENTS_AS_COMPETITIVE","25","0","0","1086","40","YES","NO"
+"OWNER_APPROVES_ONLY_24_PRE_1948_EXTERNAL_TEAM_GAMES_AS_COMPETITIVE","24","0","1","1085","40","YES","NO"

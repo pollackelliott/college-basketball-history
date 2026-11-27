@@ -1,0 +1,45 @@
+{
+  "checkpoint": "0017-remaining-25-institutional-counting-authority-review",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "parent_research_head": "91b75c7a0138d41c245bedf6378118b8e2aa4989",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "exact_held_id_set_sha256": "af978d15eab345c9a54efc1b078c3558c8418b38ecfca3c195fdea0cb13a2176",
+  "counts": {
+    "source_game_rows": 1126,
+    "accepted": 1061,
+    "held": 25,
+    "held_W": 14,
+    "held_L": 11,
+    "exclusions": 40,
+    "source_seasons": 49,
+    "comparative_annual_records": 7,
+    "game_status_changes": 0,
+    "owner_approval_received": 0
+  },
+  "files": {
+    "25-proposed-inclusion-docket.csv": {
+      "sha256": "5745ef7ddd348ea65d87cc9cd0d7ca02e691bfa0447ef194c8774315b4c75d22",
+      "bytes_utf8": 10934
+    },
+    "cross-institution-counting-matrix.csv": {
+      "sha256": "5a4ef1584625edbe81f9767153f22998e674b80c1626c98858d9c25ab4352b84",
+      "bytes_utf8": 2896
+    },
+    "decision-impact-scenarios.csv": {
+      "sha256": "28d55b579220916925c6c54ffc589086cc80801b9c0f819fd0fca2d21bc71b0d",
+      "bytes_utf8": 482
+    },
+    "research-findings.md": {
+      "sha256": "c9b698dafa224b04ce9a3fdb19b6e890e6e960eb85b4281f153cd109f50a69fc",
+      "bytes_utf8": 5653
+    },
+    "research-status.json": {
+      "sha256": "d5911af905b7f71e5a825d3308035f3d7624f169c9222334137dfb34d16b1a2f",
+      "bytes_utf8": 1680
+    }
+  }
+}
