@@ -157,6 +157,66 @@ class Stage1SourceAcknowledgedGapTests(unittest.TestCase):
         )
         self.assertIsNone(mod._count_missing("record has ten wins and seven losses; archive incomplete"))
 
+    def test_counted_outcomes_against_unknown_teams_are_explicit(self):
+        literal = ("1 win, 2 losses vs. unknown teams. "
+                   "Forfeit wins vs. Riverside & Fullerton JC.")
+        self.assertEqual(mod._count_missing(literal), 3)
+        self.assertEqual(mod._count_missing("one win and two losses against unnamed opponents"), 3)
+        self.assertIsNone(mod._count_missing("14 wins, 8 losses in 1921-22"))
+        self.assertIsNone(mod._count_missing("opponents unknown; 14-8"))
+        self.assertIsNone(mod._count_missing("1 win, 2 losses vs. known teams"))
+        self.assertIsNone(mod._count_missing("1 win, 2 losses, unknown opponents"))
+
+    @staticmethod
+    def excluded_source_rows():
+        return [
+            {"source_row_id": "X1", "opponent_literal": "Alumni at Stanford",
+             "exclusion_reason": "alumni result excluded from varsity schedule"},
+            {"source_row_id": "X2", "opponent_literal": "Own JV",
+             "exclusion_reason": "same-school junior-varsity opponent"},
+            {"source_row_id": "X3", "opponent_literal": "Alumni at Stanford (return)",
+             "exclusion_reason": "alumni result excluded from varsity schedule"},
+        ]
+
+    def test_unknown_opponents_with_three_documented_exclusions_pass(self):
+        def mutation(doc):
+            evidence = json.loads(doc["missing-game-evidence.json"])
+            primary = evidence["seasons"][1]["primary_source_state"]
+            primary["explicit_note"] = "1 win, 1 loss vs. unknown teams."
+            primary["listed_game_rows"] = 4
+            primary["excluded_listed_rows"] = self.excluded_source_rows()
+            doc["missing-game-evidence.json"] = json.dumps(evidence).encode()
+        result = self.audit(mutation)
+        self.assertEqual(result["status"], "ELIGIBLE_FOR_SOURCE_ACKNOWLEDGED_COVERAGE_GAP")
+        self.assertEqual(result["defects"], [])
+        self.assertEqual(result["identified_competitive_games"], 3)
+        self.assertEqual(result["unidentified_games_not_added"], 3)
+
+    def test_exclusions_must_be_complete_and_individually_accounted(self):
+        def mutation(doc):
+            evidence = json.loads(doc["missing-game-evidence.json"])
+            primary = evidence["seasons"][1]["primary_source_state"]
+            primary["listed_game_rows"] = 4
+            primary["excluded_listed_rows"] = self.excluded_source_rows()[:2]
+            doc["missing-game-evidence.json"] = json.dumps(evidence).encode()
+        self.assertIn("SOURCE_LISTED_ROWS_MISMATCH:1930-1931", self.audit(mutation)["defects"])
+
+    def test_invalid_duplicate_and_accepted_exclusion_rows_fail_closed(self):
+        def mutation(doc):
+            evidence = json.loads(doc["missing-game-evidence.json"])
+            primary = evidence["seasons"][1]["primary_source_state"]
+            primary["listed_game_rows"] = 4
+            excluded = self.excluded_source_rows()
+            excluded[0]["source_row_id"] = "G3"
+            excluded[1]["source_row_id"] = "G3"
+            excluded[2]["exclusion_reason"] = ""
+            primary["excluded_listed_rows"] = excluded
+            doc["missing-game-evidence.json"] = json.dumps(evidence).encode()
+        defects = self.audit(mutation)["defects"]
+        self.assertIn("INVALID_OR_DUPLICATE_EXCLUSION_IDS:1930-1931", defects)
+        self.assertIn("INVALID_SOURCE_LISTED_EXCLUSION_ROW:1930-1931", defects)
+        self.assertIn("EXCLUDED_SOURCE_ROW_IN_LEDGER:1930-1931", defects)
+
     def test_partial_source_gap_recovery_counts_only_remaining_unknown_games(self):
         def mutation(doc):
             rows = list(csv.DictReader(io.StringIO(

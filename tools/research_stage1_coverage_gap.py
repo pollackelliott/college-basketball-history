@@ -33,28 +33,37 @@ def _csv(data: bytes):
 
 
 def _count_missing(note: str) -> int | None:
-    """Return an explicit source count of missing games, including outcome wording.
+    """Return source-explicit unidentified-game counts, never aggregate inferences.
 
-    Institutions sometimes describe an omitted population as "one win missing" or
-    "one win and one loss missing" rather than using the noun "game". Each explicit
-    win/loss/tie count represents one missing played game. Counts remain source-explicit;
-    vague aggregate language is never inferred.
+    Accept either counted missing games/outcomes or counted outcomes expressly
+    played against unknown opponents. A season's ordinary W/L summary, or an
+    unquantified statement about unknown opponents, is not evidence of a gap.
     """
     count_token = r"(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)"
     unit = r"(?:games?|wins?|loss(?:es)?|ties?)"
     item = rf"\b{count_token}\s+{unit}\b"
-    counted_item = re.compile(
-        rf"\b(?P<count>{count_token})\s+{unit}\b",
-        re.IGNORECASE,
+    items = rf"(?P<items>{item}(?:\s*(?:,|and|plus)\s*{item})*)"
+    counted_item = re.compile(rf"\b(?P<count>{count_token})\s+{unit}\b",
+                              re.IGNORECASE)
+    patterns = (
+        re.compile(rf"{items}\s+(?:(?:is|are)\s+)?missing\b", re.IGNORECASE),
+        re.compile(
+            rf"{items}\s+(?:vs\.?|versus|against)\s+"
+            r"(?:unknown|unidentified|unnamed)\s+(?:teams?|opponents?)\b",
+            re.IGNORECASE,
+        ),
     )
-    clause = re.compile(
-        rf"(?P<items>{item}(?:\s*(?:,|and|plus)\s*{item})*)"
-        rf"\s+(?:(?:is|are)\s+)?missing\b",
-        re.IGNORECASE,
+    clauses = sorted(
+        (match.start(), match.end(), match.group("items"))
+        for pattern in patterns for match in pattern.finditer(note)
     )
+    if not clauses or any(
+        prior[1] > current[0] for prior, current in zip(clauses, clauses[1:])
+    ):
+        return None
     total = 0
-    for match in clause.finditer(note):
-        for counted in counted_item.finditer(match.group("items")):
+    for _, _, source_items in clauses:
+        for counted in counted_item.finditer(source_items):
             word = counted.group("count").lower()
             n = int(word) if word.isdecimal() else WORDS[word]
             if not 0 < n <= 10:
@@ -180,7 +189,35 @@ def audit_checkpoint(checkpoint: Path, *, evidence_member: str,
             source_listed_rows = int(primary.get("listed_game_rows", "-1"))
         except (TypeError, ValueError):
             source_listed_rows = -1
-        if (source_listed_rows + recovered_count != row_counts.get(season) or
+        # A primary source can print noncompetitive named results alongside
+        # accepted varsity games. Exclusions must be individually documented;
+        # a free-floating subtraction/count cannot authorize omitted games.
+        excluded_listed = primary.get("excluded_listed_rows", [])
+        if not isinstance(excluded_listed, list):
+            defects.append("INVALID_SOURCE_LISTED_EXCLUSIONS:" + season)
+            excluded_listed = []
+        excluded_ids = []
+        for excluded in excluded_listed:
+            if not isinstance(excluded, dict) or any(
+                not isinstance(excluded.get(field), str) or
+                not excluded[field].strip()
+                for field in ("source_row_id", "opponent_literal", "exclusion_reason")
+            ):
+                defects.append("INVALID_SOURCE_LISTED_EXCLUSION_ROW:" + season)
+                continue
+            excluded_ids.append(excluded["source_row_id"].strip())
+        if (len(excluded_ids) != len(excluded_listed) or
+                len(excluded_ids) != len(set(excluded_ids))):
+            defects.append("INVALID_OR_DUPLICATE_EXCLUSION_IDS:" + season)
+        season_game_ids = {
+            row.get("research_game_id", "").strip() for row in ledger
+            if row.get("season_label") == season
+        }
+        if season_game_ids.intersection(excluded_ids):
+            defects.append("EXCLUDED_SOURCE_ROW_IN_LEDGER:" + season)
+        if (source_listed_rows < len(excluded_listed) or
+                source_listed_rows - len(excluded_listed) + recovered_count
+                != row_counts.get(season) or
                 int(c.get("observed_games", "-1")) != row_counts.get(season)):
             defects.append("SOURCE_LISTED_ROWS_MISMATCH:" + season)
         outcome_fields = ("unidentified_wins", "unidentified_losses", "unidentified_ties")
