@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_45_POSITIVE_GAME_DELTA_TERMINAL_ELIGIBILITY_EVIDENCE_AUDIT_0001",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "audit_scope": "Read-only existing-evidence screening of 45 positive-diagnostic seasons against current-main terminal-policy prerequisites, preserving source-family scope and rejecting numeric game fabrication. NOT an independent permanent auditor result or owner authorization.",
+  "authority": {
+    "main_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+    "parent_research_head": "7a7b060fc9975acf525264b2ce7126c91e79649e",
+    "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "parent_status_path": "schools/gonzaga/research/checkpoints/stage1-status-0057.json",
+    "parent_status_blob": "ac07ca31afd4db2abcd89d3bf21a80de4cc3cb84",
+    "parent_51_season_dependency_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-owner-dependency-inventory-0001.csv",
+    "parent_51_season_dependency_blob": "ddcebd8f777515e98848740b8704db450fbc940a",
+    "parent_hold_decision_path": "schools/gonzaga/research/checkpoints/stage1-ten-historical-hold-decision-path-inventory-0001.csv",
+    "parent_hold_decision_blob": "40f12b3b7e91c8f46a6f806fcf35fdee34e1a163",
+    "accepted_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0038.csv",
+    "accepted_ledger_blob_sha": "9e0fbf4280a4944e035985d4570d01b618f5078d",
+    "reconciliation_blob_sha": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "official_census_blob_sha": "3d5937323ad921aac1aac3e3afe7ab24352916a5",
+    "main_registry_early_aggregate": "8164c5953fa3091cea2163d325602e5804e72cf2",
+    "main_registry_early_accounting": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+    "gonzaga_cases_registered_in_both": false
+  },
+  "controlling_rules": {
+    "source_acknowledged_gap": "Primary institution must explicitly state exact count of missing games in affected season beyond mere season aggregate, manifest systematic research and pass exact coverage_gap.py; no other Stage1 blockers.",
+    "early_founder_aggregate": "Exact institutional W/L and count + individually identified source ledger + bounded per-season exhaustive source evidence + exact protected-main owner approval/period authority + zero unrelated blockers + independent permanent audit and closeout.",
+    "mixed_accounting": "Early aggregate source coverage combined with contradictory detailed seasons requires exact per-season research evidence, explicit owner authority for complete population and no unrelated blockers; terminal audit/closeout/verify-closeout. Positive count delta is diagnostic and does not prove missing-game identities.",
+    "founding_period_policy": "No automatic founding-era cutoff applied; maximum eligible season start year is school+case-specific in owner registry, which has no Gonzaga case."
+  },
+  "universe": {
+    "seasons_in_institutional_expansion_census": 51,
+    "positive_difference_seasons": 45,
+    "positive_difference_sum": 422,
+    "negative_difference_seasons": 2,
+    "negative_difference_sum": -5,
+    "count_equal_seasons": 4,
+    "net_official_minus_accepted": 417,
+    "accepted_source_games": 560,
+    "accepted_record": "216-344",
+    "official_expansion_games": 977,
+    "official_record": "477-500",
+    "zero_accepted_game_season": "1917-18",
+    "active_historical_game_holds": 9,
+    "research_exhausted_accounting_closeout_seasons": [
+      "1915-16",
+      "1930-31",
+      "1936-37",
+      "1937-38"
+    ]
+  },
+  "eligibility": {
+    "immediate_exact_terminal_eligible": 0,
+    "source_acknowledged_explicit_missing_note_proven": 0,
+    "owner_registered_case_for_gonzaga": 0,
+    "source_family_evidence_previously_checked_nonterminal": {
+      "with_explicit_season_listed_bounded_family": 34,
+      "without_exact_season_list_in_seven_structured_source_limit_artifacts": 11,
+      "explicit_source_scope_not_terminal": 13,
+      "documented_zero_accepted_games_season": [
+        "1917-18"
+      ],
+      "all_45_ineligible_current_exact_parent": true
+    },
+    "all_45_seasons_individually_listed_in_csv": "schools/gonzaga/research/checkpoints/stage1-45-positive-season-coverage-exception-eligibility-0001.csv",
+    "no_full_source_exhaustion_claim_from_a_family_probe": true,
+    "formal_permanent_auditor_not_run": true,
+    "admissions_or_exclusions_in_this_unit": 0
+  },
+  "selected_source_limits": [
+    {
+      "id": "EARLY_RECIPROCAL_1907_1913",
+      "path": "schools/gonzaga/research/checkpoints/stage1-early-reciprocal-tranche-0001.json",
+      "blob_sha": "b982034f480677c1ab8ae647c387e83340ef4f74",
+      "explicit_seasons": [
+        "1907-08",
+        "1908-09",
+        "1909-10",
+        "1910-11",
+        "1911-12",
+        "1912-13",
+        "1913-14"
+      ],
+      "scope": "SEASON_LISTED_IN_BOUNDED_RECIPROCAL_TRANCHE_NOT_FULL_SEASON_EXHAUSTION",
+      "materiality_limit": "Only this source family/range was checked; not proof all Gonzaga opponent teams or each season complete."
+    },
+    {
+      "id": "IDAHO_EARLY_1909_1930",
+      "path": "schools/gonzaga/research/checkpoints/stage1-idaho-1909-1930-source-limits-0001.json",
+      "blob_sha": "cb6790baf0345b6333964aadd398b0ba4f95ce89",
+      "explicit_seasons": [
+        "1909-10",
+        "1913-14",
+        "1916-17",
+        "1918-19",
+        "1920-21",
+        "1921-22",
+        "1922-23",
+        "1923-24",
+        "1924-25",
+        "1925-26",
+        "1926-27",
+        "1927-28",
+        "1928-29",
+        "1929-30"
+      ],
+      "scope": "ONE_OPPONENT_RECIPROCAL_NOT_GONZAGA_COMPLETE_GAME_UNIVERSE",
+      "materiality_limit": "Only this source family/range was checked; not proof all Gonzaga opponent teams or each season complete."
+    },
+    {
+      "id": "SEASON_FIRST_1941_1947",
+      "path": "schools/gonzaga/research/checkpoints/stage1-season-first-1941-1947-source-limits-0001.json",
+      "blob_sha": "179839edab81aea5418f46da11d7021240422c96",
+      "explicit_seasons": [
+        "1941-42",
+        "1942-43",
+        "1943-44",
+        "1944-45",
+        "1945-46",
+        "1946-47"
+      ],
+      "scope": "BOUNDED_MULTIOPPONENT_PASS_NOT_TERMINAL_EXHAUSTION",
+      "materiality_limit": "Only this source family/range was checked; not proof all Gonzaga opponent teams or each season complete."
+    },
+    {
+      "id": "SEASON_FIRST_1944_1946",
+      "path": "schools/gonzaga/research/checkpoints/stage1-season-first-1944-1946-source-limits-0001.json",
+      "blob_sha": "1563b07ed74d83fceafa4d63be3d2456028f4898",
+      "explicit_seasons": [
+        "1944-45",
+        "1945-46"
+      ],
+      "scope": "EXPLICITLY_NOT_TERMINAL_SOURCE_EXHAUSTED",
+      "materiality_limit": "Only this source family/range was checked; not proof all Gonzaga opponent teams or each season complete."
+    },
+    {
+      "id": "SEASON_FIRST_1947_1952",
+      "path": "schools/gonzaga/research/checkpoints/stage1-season-first-1947-1952-source-limits-0001.json",
+      "blob_sha": "469c9425a6543352ab10fc11a1724927422baa16",
+      "explicit_seasons": [
+        "1947-48",
+        "1948-49",
+        "1949-50",
+        "1950-51",
+        "1951-52"
+      ],
+      "scope": "EXPLICITLY_NOT_COMPLETE_SEASON_UNIVERSE",
+      "materiality_limit": "Only this source family/range was checked; not proof all Gonzaga opponent teams or each season complete."
+    },
+    {
+      "id": "INSTITUTIONAL_SCHEDULE_1952_1958",
+      "path": "schools/gonzaga/research/checkpoints/stage1-1950s-institutional-schedule-source-limits-0001.json",
+      "blob_sha": "c5dbc5efb64f71d760001b1202902d0753cae7f3",
+      "explicit_seasons": [
+        "1952-53",
+        "1953-54",
+        "1954-55",
+        "1955-56",
+        "1956-57",
+        "1957-58"
+      ],
+      "scope": "EXPLICIT_SOURCE_INDEX_INCOMPLETE_AND_NOT_NEGATIVE_EVIDENCE",
+      "materiality_limit": "Only this source family/range was checked; not proof all Gonzaga opponent teams or each season complete."
+    },
+    {
+      "id": "NORTHWEST_1955_1958",
+      "path": "schools/gonzaga/research/checkpoints/stage1-1955-1958-pacific-northwest-source-limits-0001.json",
+      "blob_sha": "37b7d8392c92c0238b50fcfcdca7e227e24178b4",
+      "explicit_seasons": [
+        "1955-56",
+        "1956-57",
+        "1957-58"
+      ],
+      "scope": "SOURCE_FAMILY_ONLY_NOT_COMPLETE_GONZAGA_SEASON",
+      "materiality_limit": "Only this source family/range was checked; not proof all Gonzaga opponent teams or each season complete."
+    }
+  ],
+  "next_bounded_unit": "One single-season 1917–18 five-game institutional aggregate / ZERO accepted identity bounded evidence classification: check already preserved reciprocal families and original corpus source feasibility for a concrete played-game identity or an exact terminal research-evidence limit, preserving all 5 as season-level aggregate only. No multiple-season bulk re-harvest, owner approval, or Stage 2."
+}
