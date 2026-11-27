@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE1_CHECKPOINT_GIT_BLOB_MANIFEST",
+  "checkpoint": "early-top-level-game-extraction-0008",
+  "status": "STAGE1_IN_PROGRESS_WITH_BLOCKING_1982_83_GAME_UNIVERSE_CONFLICT",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "parent_commit_sha": "80bb98b8378ba65c98fa553d94d055f7e630ede2",
+  "scope": {
+    "inception": "1956-57",
+    "top_level": "1957-58+",
+    "historical_cutoff": "2025-26"
+  },
+  "parent_accepted_games": 604,
+  "added_accepted_games": 82,
+  "combined_accepted_games": 686,
+  "accepted_seasons": 28,
+  "total_seasons": 70,
+  "blocking_disputed_seasons": [
+    "1982-83"
+  ],
+  "unextracted_later_seasons": 41,
+  "remaining_unaccepted_seasons": 42,
+  "remaining_source_aggregate_expected_games": 1242,
+  "source_1982_83": {
+    "current_guide_heading": "11-16",
+    "current_guide_detailed_rows": 26,
+    "current_guide_detail_wl": "12-14",
+    "archived_guide_heading": "10-17",
+    "archived_guide_detailed_rows": 25,
+    "archived_guide_detail_wl": "9-16",
+    "admitted_games": 0
+  },
+  "accepted_tranche": [
+    {
+      "season": "1981-82",
+      "games": 27,
+      "w": 8,
+      "l": 19,
+      "conference_wins": 3,
+      "conference_losses": 13,
+      "conference_tournament": 0,
+      "site": {
+        "H": [
+          6,
+          7
+        ],
+        "A": [
+          1,
+          11
+        ],
+        "N": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "season": "1983-84",
+      "games": 27,
+      "w": 8,
+      "l": 19,
+      "conference_wins": 3,
+      "conference_losses": 13,
+      "conference_tournament": 1,
+      "site": {
+        "H": [
+          7,
+          7
+        ],
+        "A": [
+          0,
+          10
+        ],
+        "N": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "season": "1984-85",
+      "games": 28,
+      "w": 8,
+      "l": 20,
+      "conference_wins": 2,
+      "conference_losses": 14,
+      "conference_tournament": 2,
+      "site": {
+        "H": [
+          5,
+          9
+        ],
+        "A": [
+          3,
+          9
+        ],
+        "N": [
+          0,
+          2
+        ]
+      }
+    }
+  ],
+  "postseason_game_ids": [
+    "AF-1983-84-027",
+    "AF-1984-85-027",
+    "AF-1984-85-028"
+  ],
+  "files": [
+    {
+      "name": "stage1-ledger.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/stage1-ledger.csv",
+      "sha": "c4697e32490dff7bdd54f5977ca4ecf910878f97"
+    },
+    {
+      "name": "season-census.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/season-census.csv",
+      "sha": "9b103316e8dffb5cd6dbaa82e77c956d5c71fdf3"
+    },
+    {
+      "name": "1982-83-2026-raw-source-candidates.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/1982-83-2026-raw-source-candidates.csv",
+      "sha": "ccf235894178453acdefee9c752f46b270626a86"
+    },
+    {
+      "name": "conference-source-observations.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/conference-source-observations.csv",
+      "sha": "cf5719cbcab1ca5b49328fbf30cec9d1c74bfa0b"
+    },
+    {
+      "name": "stage1-residuals.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/stage1-residuals.csv",
+      "sha": "8b13f0ab970e9ceea04fbe1a77710699d6c2b1c1"
+    },
+    {
+      "name": "source-inventory.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/source-inventory.csv",
+      "sha": "bdf0f8d823a6bc8fdddf5203b3e77756a2c1faa8"
+    },
+    {
+      "name": "1982-83-source-disagreement.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/1982-83-source-disagreement.md",
+      "sha": "9d81affce9841eeb3f42a1796711b3394793d1d8"
+    },
+    {
+      "name": "README.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/README.md",
+      "sha": "693eed8e1ef44bae2c10e66b772276001258ab4e"
+    },
+    {
+      "name": "administrative-results.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/administrative-results.csv",
+      "sha": "383040972ba51b917cd6e9f8ad80651aeaf6fd71"
+    },
+    {
+      "name": "stage1-exclusions.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0008/stage1-exclusions.csv",
+      "sha": "45b3c27f885bcb02e6b48bd43ffb4b25db918daf"
+    }
+  ]
+}
