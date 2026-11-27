@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE1_CHECKPOINT_GIT_BLOB_MANIFEST",
+  "checkpoint": "early-top-level-game-extraction-0005",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "parent_commit_sha": "e23d9cc2918cbc15e92496442098b01447aa263e",
+  "protected_main_sha_at_execution": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "scope": {
+    "inception": "1956-57",
+    "top_level": "1957-58+",
+    "cutoff": "2025-26"
+  },
+  "guide_reconciliation": [
+    {
+      "season": "1969-70",
+      "guide_rows": 24,
+      "w": 12,
+      "l": 12,
+      "site_partitions": {
+        "H": [
+          10,
+          5
+        ],
+        "A": [
+          2,
+          7
+        ],
+        "N": [
+          0,
+          0
+        ]
+      },
+      "site_evidence": "OFFICIAL_ONLINE",
+      "guide_pdf_page": 60
+    },
+    {
+      "season": "1970-71",
+      "guide_rows": 26,
+      "w": 12,
+      "l": 14,
+      "site_partitions": {
+        "H": [
+          10,
+          5
+        ],
+        "A": [
+          2,
+          8
+        ],
+        "N": [
+          0,
+          1
+        ]
+      },
+      "site_evidence": "OFFICIAL_ONLINE",
+      "guide_pdf_page": 60
+    },
+    {
+      "season": "1971-72",
+      "guide_rows": 25,
+      "w": 12,
+      "l": 13,
+      "site_partitions": {
+        "H": [
+          8,
+          4
+        ],
+        "A": [
+          3,
+          9
+        ],
+        "N": [
+          1,
+          0
+        ]
+      },
+      "site_evidence": "OFFICIAL_ONLINE",
+      "guide_pdf_page": 60
+    },
+    {
+      "season": "1972-73",
+      "guide_rows": 24,
+      "w": 14,
+      "l": 10,
+      "site_partitions": {
+        "H": [
+          10,
+          3
+        ],
+        "A": [
+          2,
+          6
+        ],
+        "N": [
+          2,
+          1
+        ]
+      },
+      "site_evidence": "SECONDARY_MCUBED_PENDING_OFFICIAL_SITE_CHECK",
+      "guide_pdf_page": 61
+    }
+  ],
+  "parent_games": 302,
+  "added_games": 99,
+  "combined_identified_games": 401,
+  "identified_seasons": 17,
+  "census_seasons": 70,
+  "unextracted_seasons": 53,
+  "remaining_source_aggregate_expected_games": 1527,
+  "files": [
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0005/README.md",
+      "sha": "61551b1bc05e63e000524e2e81f0b536f4626403",
+      "utf8_characters": 4555
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0005/stage1-ledger.csv",
+      "sha": "6ca3772274aed3ec9b81d128fd1b6a9a8963aef2",
+      "utf8_characters": 239128
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0005/season-census.csv",
+      "sha": "c72c67802ce3eee3b76c360ae0a69d9135c1c88d",
+      "utf8_characters": 6617
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0005/stage1-residuals.csv",
+      "sha": "bd97202f4b958674bade0ee7831f1773a3e79082",
+      "utf8_characters": 6599
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0005/stage1-exclusions.csv",
+      "sha": "45b3c27f885bcb02e6b48bd43ffb4b25db918daf",
+      "utf8_characters": 61
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0005/source-inventory.csv",
+      "sha": "e0f7d16700dc9db20b50cc08eebbd82562ea8ad3",
+      "utf8_characters": 8768
+    }
+  ]
+}
