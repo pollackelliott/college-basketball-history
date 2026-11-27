@@ -1,45 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "nevada-phase0-0002",
+  "request_id": "nevada-stage2-census-0001",
   "school_key": "nevada",
-  "operation": "PHASE0",
-  "previous_control_state_commit": "8b5501cbf978fce85a240691f08e24acee2c63d4",
-  "previous_control_state_sha256": "fa7af40dda9460804f11fef7dc7f0e79a5b8985cc3a2055d77ace3b8ffd66741",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "38c2b232b4a2053bde4b1eefdfa1f872a094ae43",
+  "previous_control_state_sha256": "5936d358f0881e85d5e0744672373b78c3f27b6fa97062538e38a6aef54eeabf",
   "expected_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
   "target_branch": "data/nevada-onboarding",
-  "research_checkpoint": {
-    "sha256": "631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103",
-    "research_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
-    "transport": {
-      "kind": "git_base64_parts",
-      "commit_sha": "6438d915e5b0089615c6f27433ec5a32a2a0d40b",
-      "path_prefix": "transport/nevada/631f0263/part-",
-      "part_count": 4
-    }
+  "target_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/nevada/nevada-phase0-0002/successor-manifest.json",
+    "sha256": "85f52ca63ff1743ae506c0e7baeec338079213143a474695fbcc4a6b241de009"
   },
-  "stage1_checkpoint": {
-    "path": ".remote-implementation/checkpoints/nevada/nevada-stage1-0002/checkpoint-manifest.json",
-    "sha256": "ff8b16dd99a26fe291034faf34e6f1bd3c985b8a086e353f78435f29ef66fe57"
-  },
-  "venue_reconciliation": {
-    "path": ".remote-implementation/inputs/nevada-stage1-0002/venue-reconciliation.json",
-    "sha256": "b6d84b4b75e30f5379b3eab67c1191e5d503c95586af6ba966c2c99e08a9160e"
-  },
-  "history_scope": {
-    "start_season": "1969-1970",
-    "basis": "TOP_LEVEL_INTERVALS",
-    "intervals": "1969-70+",
-    "notes": "Owner-settled top-level classification begins 1969-70+; history_start_season 1969-1970 is the first accepted top-level interval and is NOT institutional inception. Independently accepted institutional varsity inception 1912-13 and INCEPTION_THROUGH_PRESENT coverage remain immutably bound to the original six-file FROZEN_SUCCESSOR Research Freeze. Reconcile only Nevada's stale target top-level-scope row 1947-48..1947-48|1969-70+ to accepted 1969-70+, preserving all 2,763 research-frozen games and their original historical authority."
-  },
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
   "creation_provenance": {
-    "origin": "Nevada ordinary Implementation Phase 0 — corrected request-envelope retry after independently successful NOT_ATTEMPTED recovery.",
-    "authorization": "Owner authorized Nevada guarded Phase 0 / Integration Freeze on 2026-11-27. Original nevada-phase0-0001 failed before target write with scope field 1912-1913; exact recovery nevada-phase0-recovery-0001 independently classified NOT_ATTEMPTED, abandoned the original request, released global lock, and verified target absent. This new request changes only history_scope.start_season to 1969-1970 (first TOP_LEVEL_INTERVALS start), preserves accepted top-level 1969-70+, institution inception 1912-13 separately in immutable Research authority, exact six-file Freeze, exact Stage 1 PASS and five venue-reuse mapping, immutable transport, and current main. Authorize only single guarded Phase 0/Integration Freeze, validation, target create-once, independent proof; no Stage 2, other-school/global maintenance, protected-main write, owner gates or release."
+    "origin": "Nevada ordinary serialized Implementation: first read-only Stage 2 capability census after verified Phase 0.",
+    "authorization": "Owner said Continue. Independently fresh-verified guarded Phase 0 nevada-phase0-0002 is COMPLETE and equivalent PASS on protected main a11cccf944492e4d968edbeef4111ebad150fcec, immutable target be03db65347decfeb700fae3ee62fc6ca5a92fe1, Integration Freeze 6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739, and source-game semantic snapshot a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317. Advance exactly one bounded unit: read-only STAGE2_CENSUS with no tracked mutation. No repair, recommendation-map submission, owner historical ruling or gate, seal/apply, Preview, release, merge, or Production."
   },
   "authority": {
-    "phase0": true,
+    "phase0": false,
     "recovery": false,
-    "stage2_census": false,
+    "stage2_census": true,
     "stage2_opponent_display_normalize": false,
     "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
