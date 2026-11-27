@@ -1,0 +1,133 @@
+name: San Diego State Stage 1 coverage audit (immutable read-only)
+on:
+  push:
+    branches:
+      - research-exec/san-diego-state-stage1-audit-0023
+
+permissions:
+  contents: read
+
+jobs:
+  exact-sha-source-coverage-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact protected-main auditor
+        uses: actions/checkout@v4
+        with:
+          ref: a11cccf944492e4d968edbeef4111ebad150fcec
+          path: protected-main
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Checkout exact Research checkpoint
+        uses: actions/checkout@v4
+        with:
+          ref: be7b82b788ed46539a3f8494a464c3f7ca8f1d6d
+          path: research-checkpoint
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute SHA-pinned permanent auditor and certify honest noneligibility
+        shell: bash
+        env:
+          PIN_MAIN: a11cccf944492e4d968edbeef4111ebad150fcec
+          PIN_RESEARCH: be7b82b788ed46539a3f8494a464c3f7ca8f1d6d
+          PIN_ZIP: 0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867
+          PIN_TOOL_GIT_BLOB: 0f77c191c36576bfd30b86592554d6ea76d965ac
+        run: |
+          set -euo pipefail
+          archive="research-checkpoint/research/san-diego-state-all-history-expansion/checkpoints/0023-corrected-audit-zip-transport/san-diego-state-stage1-audit-input.zip"
+          tool="protected-main/tools/research_stage1_coverage_gap.py"
+          test "$(git -C protected-main rev-parse HEAD)" = "$PIN_MAIN"
+          test "$(git -C research-checkpoint rev-parse HEAD)" = "$PIN_RESEARCH"
+          test "$(git -C protected-main hash-object tools/research_stage1_coverage_gap.py)" = "$PIN_TOOL_GIT_BLOB"
+          echo "$PIN_ZIP  $archive" | sha256sum -c -
+          python - "$archive" <<'PY'
+          import hashlib, json, sys, zipfile
+          from pathlib import Path
+          p = Path(sys.argv[1])
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None, "ZIP CRC failed"
+              names = z.namelist()
+              assert len(names) == len(set(names)) == 7, names
+              manifest = json.loads(z.read("checkpoint/stage1-manifest.json"))
+              assert manifest["game_rows"] == 1086
+              assert manifest["blocking_residuals"] == 1
+              assert manifest["unknown_real_games"] == 3
+              assert set(names) == {"checkpoint/stage1-manifest.json"} | {
+                  "checkpoint/" + name for name in manifest["members"]
+              }
+              for name, meta in manifest["members"].items():
+                  raw = z.read("checkpoint/" + name)
+                  assert len(raw) == meta["size"], name
+                  assert hashlib.sha256(raw).hexdigest() == meta["sha256"], name
+              evidence = json.loads(z.read("checkpoint/missing-game-evidence.json"))
+              assert evidence["policy_result"] == "RESEARCH_EXHAUSTION_NOT_CERTIFIED"
+              assert len(evidence["seasons"]) == 1
+              assert evidence["seasons"][0]["season"] == "1921-22"
+          print("CHECKPOINT_ZIP_MANIFEST_AND_CRC=PASS")
+          PY
+          set +e
+          python "$tool" "$archive" \
+            --expected-sha256 "$PIN_ZIP" \
+            --evidence-member missing-game-evidence.json \
+            --output audit-report.json > audit-stdout.json
+          actual_exit=$?
+          set -e
+          test "$actual_exit" -eq 2
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          report = json.loads(Path("audit-report.json").read_text())
+          assert report["status"] == "FAIL", report
+          assert report["stage1_complete"] is False, report
+          assert report["checkpoint_sha256"] == os.environ["PIN_ZIP"], report
+          assert report["identified_competitive_games"] == 1086, report
+          assert report["unidentified_games_not_added"] == 3, report
+          assert "RESEARCH_NOT_EXHAUSTED" in report["defects"], report
+          assert "NOT_EXPLICITLY_UNRESOLVED:1921-22" in report["defects"], report
+          assert len(report["source_coverage_gaps"]) == 1, report
+          assert report["source_coverage_gaps"][0]["remaining_unidentified_count"] == 3
+          canonical = json.dumps(report, sort_keys=True, indent=2) + "\n"
+          assert canonical == Path("audit-stdout.json").read_text()
+          proof = {
+              "kind": "SDSU_STAGE1_EXACT_PERMANENT_AUDIT_PROOF",
+              "status": "PERMANENT_AUDITOR_EXECUTED_FAIL_CLOSED",
+              "protected_main_sha": os.environ["PIN_MAIN"],
+              "research_checkpoint_sha": os.environ["PIN_RESEARCH"],
+              "checkpoint_zip_sha256": os.environ["PIN_ZIP"],
+              "permanent_tool_git_blob": os.environ["PIN_TOOL_GIT_BLOB"],
+              "tool_return_code": 2,
+              "report_sha256": hashlib.sha256(Path("audit-report.json").read_bytes()).hexdigest(),
+              "actual_defects": report["defects"],
+              "identified_competitive_games": 1086,
+              "unidentified_historical_results": 3,
+              "stage1_complete": False,
+              "source_exhaustion_certified": False,
+              "historic_game_mutation": False,
+          }
+          Path("audit-execution-proof.json").write_text(
+              json.dumps(proof, indent=2, sort_keys=True) + "\n"
+          )
+          print("PERMANENT_AUDITOR=EXECUTED")
+          print("PERMANENT_AUDITOR_EXIT=2")
+          print("AUDIT_STATUS=FAIL")
+          print("DEFECTS=" + json.dumps(report["defects"]))
+          print("AUDIT_REPORT_SHA256=" + proof["report_sha256"])
+          PY
+          test -z "$(git -C protected-main status --porcelain --untracked-files=no)"
+          test -z "$(git -C research-checkpoint status --porcelain --untracked-files=no)"
+      - name: Preserve exact report and proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: san-diego-state-0023-permanent-coverage-audit
+          path: |
+            audit-report.json
+            audit-stdout.json
+            audit-execution-proof.json
+          retention-days: 90
+          if-no-files-found: warn
