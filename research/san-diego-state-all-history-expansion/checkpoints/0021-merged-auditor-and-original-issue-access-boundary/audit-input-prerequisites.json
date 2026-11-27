@@ -1,0 +1,36 @@
+{
+  "stage": "STAGE_1",
+  "school_key": "san-diego-state",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "permanent_auditor_path": "tools/research_stage1_coverage_gap.py",
+  "permanent_auditor_git_blob_sha": "0f77c191c36576bfd30b86592554d6ea76d965ac",
+  "accepted_game_rows": 1086,
+  "source_printed_rows": 1126,
+  "excluded_named_rows": 40,
+  "founding_1921_22": {
+    "primary_named_rows": 17,
+    "accepted_competitive_rows": 14,
+    "excluded_named_rows": 3,
+    "explicit_unknown_w": 1,
+    "explicit_unknown_l": 2,
+    "unknown_games": 3,
+    "admin_forfeit_awards_not_played": 2
+  },
+  "required_input_members": [
+    "structured-stage1-ledger.csv",
+    "season-census.csv",
+    "blocking-residuals.json",
+    "stage1-status.json",
+    "missing-game-evidence.json",
+    "stage1-manifest.json"
+  ],
+  "missing_preconditions": [
+    "full_1086_row_structured_ledger_not_yet_serialized_as_sha_pinned_zip",
+    "original_1921_22_issue_path_unread",
+    "original_reciprocal_season_logs_unread",
+    "genuine_exhaustion_policy_result_not_certified"
+  ],
+  "audit_command_executed": false,
+  "eligibility_claimed": false,
+  "stage1_complete": false
+}

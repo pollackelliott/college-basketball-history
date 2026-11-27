@@ -1,0 +1,38 @@
+{
+  "checkpoint": "0021-merged-auditor-and-original-issue-access-boundary",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "4e3d64907cc4a18d58209db7148a34ba96ecb760",
+  "protected_main_sha_at_checkpoint": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "previous_checkpoint": "0020-1922-yearbook-source-family-corroboration",
+  "counts": {
+    "accepted": 1086,
+    "regular": 1043,
+    "postseason": 43,
+    "excluded": 40,
+    "held": 0,
+    "unknown_1921_22": 3,
+    "changed_historical_dispositions": 0
+  },
+  "files": {
+    "research-findings.md": {
+      "sha256": "3a4bbe93c7d91ba86236c90660509c4faedabcb5a22131a1bd7a244201603cec",
+      "bytes_utf8": 5458
+    },
+    "1921-22-investigation.csv": {
+      "sha256": "a75cfe8f5800c8f28be0bff3de9e00c5691e08c7d4f071556c874ac5efe783dc",
+      "bytes_utf8": 1282
+    },
+    "research-status.json": {
+      "sha256": "40f90c349976df27855aa7c6438758ebe9223e13c4e60feeb2641f8b12b590ba",
+      "bytes_utf8": 1419
+    },
+    "audit-input-prerequisites.json": {
+      "sha256": "71f3e4d59e064cc9fd3ee2c6f10cebb87859ad16acf84c2e2d1a604154e459be",
+      "bytes_utf8": 1176
+    }
+  }
+}

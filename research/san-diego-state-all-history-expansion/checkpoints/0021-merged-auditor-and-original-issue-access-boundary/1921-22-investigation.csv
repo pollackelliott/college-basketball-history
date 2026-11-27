@@ -1,0 +1,7 @@
+source_family,attempted_locator,access_result,identity_result,exhaustion_credit
+"SDSU student newspaper","https://ibase.sdsu.edu/index.php?a=ViewItem&i=21","Redirect to inaccessible digitalcollections viewer; individual 1921-22 issues not read","None","NO"
+"SDSU student newspaper alternate","https://digitalcollections.sdsu.edu/the-daily-aztec","403 access refusal; no issue content inspected","None","NO"
+"Pomona institutional reciprocal publications","https://www.pomona.edu/administration/archives/collections/collection-descriptions","1921-22 historical publication family described; exact original basketball logs not retrieved","None","NO"
+"Santa Ana / Chaffey / Pomona contemporary reciprocal","targeted exact-season indexed searches","No independently authenticated reciprocal result list retrieved","None","NO"
+"Mcubed 1921-22 secondary schedule","https://mcubed.net/ncaab/yearly/sandst/1922.shtml","Indexed summary repeats 17 known outcomes and 1 unknown W plus 2 unknown L","None; source independence not established","NO"
+"1922 Del Sudoeste yearbook","https://doczz.net/doc/5471938/del-sudoeste---sdsu-library-and-information-access","Earlier checkpoint 0020 mirrored OCR; original scan inaccessible","20 played outcomes arithmetic only","CORROBORATION_NOT_EXHAUSTION"
