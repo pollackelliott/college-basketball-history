@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE1_CHECKPOINT_GIT_BLOB_MANIFEST",
+  "checkpoint": "early-top-level-game-extraction-0003",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "parent_commit_sha": "4cd8cba885c1037a232d2549ca59838183ef0bbc",
+  "protected_main_sha_at_execution": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "scope": {
+    "inception": "1956-57",
+    "top_level": "1957-58+",
+    "cutoff": "2025-26"
+  },
+  "game_counts": [
+    {
+      "season": "1961-62",
+      "guide_games": 23,
+      "wins": 16,
+      "losses": 7,
+      "site": {
+        "H": [
+          11,
+          1
+        ],
+        "A": [
+          4,
+          5
+        ],
+        "N": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "season": "1962-63",
+      "guide_games": 22,
+      "wins": 10,
+      "losses": 12,
+      "site": {
+        "H": [
+          9,
+          2
+        ],
+        "A": [
+          1,
+          10
+        ],
+        "N": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "season": "1963-64",
+      "guide_games": 23,
+      "wins": 11,
+      "losses": 12,
+      "site": {
+        "H": [
+          6,
+          5
+        ],
+        "A": [
+          4,
+          6
+        ],
+        "N": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "season": "1964-65",
+      "guide_games": 23,
+      "wins": 9,
+      "losses": 14,
+      "site": {
+        "H": [
+          7,
+          4
+        ],
+        "A": [
+          2,
+          8
+        ],
+        "N": [
+          0,
+          2
+        ]
+      }
+    }
+  ],
+  "previous_game_count": 113,
+  "added_games": 91,
+  "combined_identified_games": 204,
+  "identified_seasons": 9,
+  "census_seasons": 70,
+  "unextracted_seasons": 61,
+  "remaining_source_aggregate_expected_games": 1724,
+  "files": [
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0003/README.md",
+      "sha": "8af5373cf7ae6deff24d04dee6a010b2930dba00",
+      "utf8_characters": 4350
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0003/stage1-ledger.csv",
+      "sha": "be6181b1703c869a2470bd1d10187ca53648f409",
+      "utf8_characters": 114929
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0003/season-census.csv",
+      "sha": "57525f105086b34b18437ed07fa0eff6bd74ca4c",
+      "utf8_characters": 6418
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0003/stage1-residuals.csv",
+      "sha": "e1358d27af64f7bf4434738662f240ed345b4385",
+      "utf8_characters": 3808
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0003/stage1-exclusions.csv",
+      "sha": "45b3c27f885bcb02e6b48bd43ffb4b25db918daf",
+      "utf8_characters": 61
+    },
+    {
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0003/source-inventory.csv",
+      "sha": "ed1ac6ea3b9b4afe75a65b40bb001f89b2a157b3",
+      "utf8_characters": 5445
+    }
+  ]
+}
