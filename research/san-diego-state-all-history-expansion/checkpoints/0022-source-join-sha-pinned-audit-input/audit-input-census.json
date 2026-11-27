@@ -1,0 +1,63 @@
+{
+  "checkpoint": "0022-source-join-sha-pinned-audit-input",
+  "school": "san-diego-state",
+  "source_named_rows": 1126,
+  "accepted_competitive": 1086,
+  "excluded_named_rows": 40,
+  "regular_season": 1043,
+  "postseason": 43,
+  "season_count": 49,
+  "source_unmatched": 0,
+  "source_duplicate": 0,
+  "source_disposition_unmatched": 0,
+  "founding_1921_22": {
+    "source_named": 17,
+    "accepted": 14,
+    "excluded": 3,
+    "explicit_unidentified": 3,
+    "unidentified_wins": 1,
+    "unidentified_losses": 2,
+    "awarded_forfeit_wins_not_played": 2,
+    "excluded_ids": [
+      "SDSU-EXP-S1-1921-22-0003",
+      "SDSU-EXP-S1-1921-22-0004",
+      "SDSU-EXP-S1-1921-22-0010"
+    ]
+  },
+  "zip_sha256": "d7df2d03d91be2ccb9a3e7bd0d35d87357b893542dc9363120317a7cd85fb926",
+  "zip_bytes": 312110,
+  "zip_method": "stored",
+  "source_exhaustion_certified": false,
+  "permanent_audit_executed": false,
+  "stage1_complete": false,
+  "internal_zip_members": {
+    "structured-stage1-ledger.csv": {
+      "sha256": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e",
+      "bytes": 299704
+    },
+    "season-census.csv": {
+      "sha256": "c870d32762f4b0edbd88f578b4fd9597b5772d6a17117442eae009430e75ab7d",
+      "bytes": 4604
+    },
+    "blocking-residuals.json": {
+      "sha256": "cb8763b3b01eac987dc469535bc06707d30a710f844217205d1679b943762d86",
+      "bytes": 699
+    },
+    "stage1-status.json": {
+      "sha256": "71528f25af55c90ccff14344dbeac4f5921e2be30d7274bd69d54b528e837bcb",
+      "bytes": 538
+    },
+    "missing-game-evidence.json": {
+      "sha256": "140ecceb9794b597597d24dd6941f81c3f07ffe95608b94e310d6cbb298a7b94",
+      "bytes": 2458
+    },
+    "source-provenance.json": {
+      "sha256": "ef17a9c46465174d276ef6c7bfdfbc3658ba7ab866045fc8bc9f30037f5397b7",
+      "bytes": 2073
+    },
+    "stage1-manifest.json": {
+      "sha256": "b6f43a9cfd5f29f06b81d1710e507eaebd13c44525b8b58a8b1d8a69a8b4b422",
+      "bytes": 1018
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "checkpoint": "0022-source-join-sha-pinned-audit-input",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "39b2d115a86abe85ee9a50d3690240a1df2eb5b2",
+  "protected_main_sha_at_checkpoint": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "files": {
+    "research-findings.md": {
+      "sha256": "cff46cb330e03c4bc79292ffcd8d1ba28592ecfadb61be47abef52e9a2a0d60f",
+      "bytes_utf8": 2416
+    },
+    "audit-input-census.json": {
+      "sha256": "6ef83e17e1a9fead486c12f9eac71c7ff83c9f1634e03784e64638fbfc2dc6a8",
+      "bytes_utf8": 1962
+    },
+    "research-status.json": {
+      "sha256": "37f76729e93cc7f831230c228ab08ad3cb6e9366d9294556fb72278ebbe66cfb",
+      "bytes_utf8": 944
+    },
+    "san-diego-state-stage1-audit-input.zip": {
+      "sha256": "d7df2d03d91be2ccb9a3e7bd0d35d87357b893542dc9363120317a7cd85fb926",
+      "bytes": 312110
+    }
+  }
+}

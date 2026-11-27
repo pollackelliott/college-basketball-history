@@ -1,0 +1,22 @@
+{
+  "checkpoint": "0022-source-join-sha-pinned-audit-input",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_state": "STAGE1_FULL_AUDIT_INPUT_PREPARED_BUT_NOT_ELIGIBLE",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "39b2d115a86abe85ee9a50d3690240a1df2eb5b2",
+  "protected_main_sha_at_checkpoint": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "accepted_competitive": 1086,
+  "regular_season": 1043,
+  "postseason": 43,
+  "excluded_total": 40,
+  "unidentified_1921_22": 3,
+  "source_exhaustion_certified": false,
+  "permanent_audit_executed": false,
+  "zip_sha256": "d7df2d03d91be2ccb9a3e7bd0d35d87357b893542dc9363120317a7cd85fb926",
+  "zip_bytes": 312110,
+  "historical_mutations": 0,
+  "next_bounded_unit": "independently verify and execute read-only exact permanent tool with honest noneligibility"
+}
