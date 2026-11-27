@@ -1,0 +1,20 @@
+{
+  "after": {
+    "baseline_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "integration_base_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+    "school_key": "nevada",
+    "status": "PASS"
+  },
+  "before": {
+    "baseline_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "integration_base_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+    "school_key": "nevada",
+    "status": "PASS"
+  }
+}

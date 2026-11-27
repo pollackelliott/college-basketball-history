@@ -1,0 +1,57 @@
+{
+  "ambiguous": [],
+  "ambiguous_key_count": 0,
+  "change_key_count": 2,
+  "change_row_count": 2,
+  "changes": [
+    {
+      "authority_names": [
+        "Augustana University (South Dakota)"
+      ],
+      "authority_signature": "augustanauniversitysouthdakota",
+      "canonical_opponent_key": "augustana-south-dakota",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Augustana (SD)"
+      ],
+      "target_row_count": 1,
+      "to_name": "Augustana University (South Dakota)"
+    },
+    {
+      "authority_names": [
+        "Cal State Los Angeles"
+      ],
+      "authority_signature": "calstatelosangeles",
+      "canonical_opponent_key": "cal-state-los-angeles",
+      "change_fields": [
+        "canonical_opponent_name"
+      ],
+      "from_names": [
+        "Cal State LA"
+      ],
+      "target_row_count": 1,
+      "to_name": "Cal State Los Angeles"
+    }
+  ],
+  "schema_version": 1,
+  "school_key": "nevada",
+  "source_game_display_change_keys": 2,
+  "source_game_display_change_rows": 2,
+  "source_game_display_changes": [
+    {
+      "from_name": "Cal State LA",
+      "normalized_opponent_key": "cal-state-los-angeles",
+      "source_game_id": "nevada-1956-19-024",
+      "to_name": "Cal State Los Angeles"
+    },
+    {
+      "from_name": "Augustana (SD)",
+      "normalized_opponent_key": "augustana-south-dakota",
+      "source_game_id": "nevada-1966-19-007",
+      "to_name": "Augustana University (South Dakota)"
+    }
+  ],
+  "status": "PASS"
+}

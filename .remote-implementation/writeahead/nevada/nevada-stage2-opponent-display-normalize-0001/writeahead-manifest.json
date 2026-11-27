@@ -1,0 +1,67 @@
+{
+  "allowed_paths": [
+    "schools/nevada/opponents.csv",
+    "schools/nevada/source-games.csv"
+  ],
+  "changed_file_sha256": {
+    "schools/nevada/opponents.csv": "fbbceb6a897732618b0d3f11162a307b3cd5128292f2deed477be6ed90c4ae8e",
+    "schools/nevada/source-games.csv": "97256e0476bce710031cacc7b0e968ba329c25809c3b1475da79357c5b7cddc6"
+  },
+  "changed_paths": [
+    "schools/nevada/opponents.csv",
+    "schools/nevada/source-games.csv"
+  ],
+  "commit_message": "Normalize nevada historical opponent display representation",
+  "expected_blocker_keys": [
+    "augustana-south-dakota",
+    "cal-state-los-angeles"
+  ],
+  "expected_target_predecessor_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "field_level_proof_sha256": "0681fabae23ceeb7d2aaf8998bb4fe94e41e6270f8f5a484c9451203521fc9c3",
+  "global_lock_commit": "f2e126cba17858e671663f70c7eb80fa7862e8a1",
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "normalization_report_sha256": "e29bfc0b4280b6ace89120acb3f9a5c8729f194dfe169216166cd0c6eb17cdf9",
+  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
+  "prepared_commit_sha": "698639f0c826804b2504f642d1616ac61fb171c4",
+  "prepared_parent_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "prepared_tree_sha": "d0373aa242052eae0285ee8781fbbfc2cc259297",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "repository_validation": "PASS",
+  "request_id": "nevada-stage2-opponent-display-normalize-0001",
+  "request_sha256": "dce4162e970ea409b5f4cb740bf4fb2075f3f1963a22f773d2c80d57b869c7bb",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "semantic_drift_after": {
+    "baseline_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "integration_base_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+    "school_key": "nevada",
+    "status": "PASS"
+  },
+  "semantic_drift_before": {
+    "baseline_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "category_counts": {},
+    "changes": [],
+    "current_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+    "integration_base_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+    "school_key": "nevada",
+    "status": "PASS"
+  },
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "sidecars": {
+    "census-checkpoint-manifest.json": "4781f4374da2f9568ad98aafe634a134cb5636c618d5e3e3f5638bde046aa43d",
+    "field-level-proof.json": "0681fabae23ceeb7d2aaf8998bb4fe94e41e6270f8f5a484c9451203521fc9c3",
+    "integration-freeze.json": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+    "normalization-report.json": "e29bfc0b4280b6ace89120acb3f9a5c8729f194dfe169216166cd0c6eb17cdf9",
+    "semantic-drift-proof.json": "a0d8856bc0b360468c6251ab9574d6a5a7a8ce035c8e7bc9ce362a033a6ff092"
+  },
+  "source_game_normalized_name_row_count": 2,
+  "stage2_census_checkpoint_path": ".remote-implementation/checkpoints/nevada/nevada-stage2-census-0001/checkpoint-manifest.json",
+  "stage2_census_checkpoint_sha256": "4781f4374da2f9568ad98aafe634a134cb5636c618d5e3e3f5638bde046aa43d",
+  "sync_current_d1": false,
+  "target_branch": "data/nevada-onboarding"
+}

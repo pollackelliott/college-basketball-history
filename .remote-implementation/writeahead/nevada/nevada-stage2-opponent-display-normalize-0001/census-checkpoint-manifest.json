@@ -1,0 +1,93 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "95d2e199f9d4c3e1a8381bd11fa924b6e559c9c8841989942dc59b71a93c492d",
+    "plan.json": "318202dc2381e277528b0d9559a910055135b0ff9fbeb95a86778d6414bd8a76",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "0fd33f754e1fd792028888df8aa117ef22d99ae18c82907de644907fc788a720"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+    "implementation-stage2-status.json": "e42217827953abdf6012e7170ec317b4d5a1f212fb884b8bf3115e36122cc850",
+    "plan.json": "dc611e8c329b995365d0aacd8d6b27b4041a726ebccbebfa159973b34eafd189",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "b223985513e7f4dd33de7b4d2f85bb9742b3a6352fafbfb546a3b249a2e41876"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "1cbd80905bba7a99c83e81d1bd5685a7a78cf4453542a5794893b7037a1272d1",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 2,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 2,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "nevada"
+  ],
+  "phase0_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "phase0_successor_path": ".remote-implementation/successors/nevada/nevada-phase0-0002/successor-manifest.json",
+  "phase0_successor_sha256": "85f52ca63ff1743ae506c0e7baeec338079213143a474695fbcc4a6b241de009",
+  "preflight": {
+    "blocker_count": 2,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/nevada/plan.json",
+    "review_path": ".onboarding/nevada/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "request_id": "nevada-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "PHASE0_SUCCESSOR",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "target_tree_sha": "b9821257df510bea5d8d01576206a8f40a748473",
+  "tracked_mutation_proof": {
+    "after_head_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+    "after_status": "",
+    "after_tree_sha": "b9821257df510bea5d8d01576206a8f40a748473",
+    "before_head_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+    "before_status": "",
+    "before_tree_sha": "b9821257df510bea5d8d01576206a8f40a748473",
+    "tracked_stage2_mutation": "NONE"
+  }
+}
