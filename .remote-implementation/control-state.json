@@ -832,7 +832,7 @@
   "active_request_sha256": "ff7625ee2cf28c5ffd601324ddf2b4954d2815b2fae1cebf587818fb43cb5e09",
   "active_school_key": "uc-davis",
   "active_target_branch": "data/uc-davis-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "e4ba83d6651c2a6db09f2eeba7d04f15d2c29b59",
   "active_writeahead_path": ".remote-implementation/writeahead/uc-davis/uc-davis-expansion-stage2-sealed-apply-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "1d4182c267d18f4eb3c80ac2149147eb3866e84693ed6be93a823ac886dced0f",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
