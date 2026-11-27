@@ -834,7 +834,7 @@
     "nevada-stage2-opponent-display-normalize-0001"
   ],
   "active_expected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
-  "active_lock_commit": null,
+  "active_lock_commit": "f2e126cba17858e671663f70c7eb80fa7862e8a1",
   "active_lock_owner": "github-actions:46070487360:1",
   "active_operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
   "active_prepared_commit_sha": null,
