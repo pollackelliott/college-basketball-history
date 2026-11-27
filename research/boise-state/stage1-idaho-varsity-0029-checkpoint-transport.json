@@ -1,0 +1,27 @@
+{
+  "checkpoint": 29,
+  "kind": "BOISE_STATE_STAGE1_FULL_STRUCTURED_OVERLAY",
+  "status": "STAGE_1_IN_PROGRESS",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "filename": "boise-state-stage1-idaho-varsity-1946-1948-0029.zip",
+  "sha256": "e40ffd05f6edc83ddd187c4f7b1618d01e8a9b2ca3058cbbf3844d8875ac35df",
+  "manifested_members": 9,
+  "parent_full_zip_sha256": "f9a0e85a1a2c4a19076a55e6321f1c9df956bc72915038ec2167bc3346d42925",
+  "parent_diagnostic_zip_sha256": "040edc01e7e81765e682c0831734a1d8218906b004ca33cdcae7215a7e091553",
+  "parent_archives_embedded": false,
+  "research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "parent_research_head": "e33d4bda8e8a8fe7230a6557efb8bcd508bab727",
+  "main_at_start": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "accepted_before": 217,
+  "new_game_count": 2,
+  "accepted_after": 219,
+  "listed_jc_identified": 163,
+  "arithmetic_difference": 624,
+  "resolved_residual_ids": [
+    "BOISE-S1-R020",
+    "BOISE-S1-R021",
+    "BOISE-S1-R024"
+  ],
+  "stage1_complete": false,
+  "stage2_authorized": false
+}
