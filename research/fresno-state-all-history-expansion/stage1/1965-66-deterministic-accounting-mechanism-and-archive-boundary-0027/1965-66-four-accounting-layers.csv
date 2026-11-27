@@ -1,0 +1,5 @@
+layer,games,wins,losses,method,status
+"ORIGINAL_GUIDE_29_PRINTED_LINES","29","22","7","Count 29 source line literal W/L values","ORIGINAL_LITERAL_ONLY"
+"CORRECT_TEXAS_WESTERN_KEEP_DUPLICATE","29","21","8","Flip source 007 from W to L but count duplicate SDSU source 022 again","MATCHES_PRINTED_21_8__CAUSAL_METHOD_UNPROVEN"
+"CORRECT_TEXAS_WESTERN_DEDUP_SDSU","28","21","7","Flip 007 and collapse 022 to 017 same Feb 18 1966 loss","SUPPORTED_DISTINCT_PLAYED_GAMES"
+"PUBLISHED_FRESNO_INSTITUTIONAL_AGGREGATE","29","21","8","Fresno season summary and Ed Gregory first year record","INDEPENDENT_SOURCE_LAYER_PRESERVED"

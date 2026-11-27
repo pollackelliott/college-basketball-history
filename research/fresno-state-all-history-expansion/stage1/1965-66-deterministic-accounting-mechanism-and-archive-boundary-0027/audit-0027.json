@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_1965_66_EXACT_SOURCE_AGGREGATE_MECHANISM_0027",
+  "status": "THREE_LAYER_SOURCE_ARITHMETIC_VERIFIED__EDITORIAL_CAUSE_UNPROVEN__STAGE1_OPEN",
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "research_parent_sha": "58d7bc4df6eda1e9fe81fd11ac27c8cb09b7cb84",
+  "research_parent_tree_sha": "cbb04ff3c82c6c8d8ce8db7ae12bdfe113167ad5",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "input_blobs": {
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-bulk-source-dispositions-CANDIDATE.csv": "b00974af230d617c40b94165d4fb23da16374058",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-working-accepted-game-ledger-CANDIDATE.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/49-season-bulk-acceptance-census-CANDIDATE.csv": "cc786d8c18a478bf1b89f955eaf19a26e1724728",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-pending-source-groups-CANDIDATE.csv": "f082a07b72a10a449736cba7e3be54b6eac409b8",
+    "1965-66-alternate-series-loss-challenge-0017/seven-documented-losses.csv": "207cc94d312ffe100427b8c9c60501cb6a639116",
+    "1965-66-alternate-series-loss-challenge-0017/audit-0017.json": "70a5f1866d1c9ab60e2a596949572e51eb31fc1d"
+  },
+  "source_arithmetic": {
+    "literal": {
+      "games": 29,
+      "W": 22,
+      "L": 7
+    },
+    "corrected_including_duplicate": {
+      "games": 29,
+      "W": 21,
+      "L": 8
+    },
+    "distinct": {
+      "games": 28,
+      "W": 21,
+      "L": 7
+    },
+    "institutional_aggregate": {
+      "games": 29,
+      "W": 21,
+      "L": 8
+    }
+  },
+  "proof_ids": {
+    "texas_western_result_correction": "FRESNO-EXP-CAND-1965-66-007",
+    "original_SDSU": "FRESNO-EXP-CAND-1965-66-017",
+    "duplicate_SDSU": "FRESNO-EXP-CAND-1965-66-022"
+  },
+  "equation_match": true,
+  "editorial_causation_proven": false,
+  "unlisted_real_29th_game_proven": false,
+  "unlisted_real_29th_game_disproven": false,
+  "yearbook_1966": {
+    "physical_holding": "Fresno County Public Library Campus 1931-1967",
+    "digital_series": "Fresno State digitized yearbook collection 1911-1991",
+    "period_basketball_page_read": false,
+    "digital_page_fetch": "TIMEOUT",
+    "older_digital_page_fetch": "TIMEOUT"
+  },
+  "candidate_games": 1011,
+  "pending_source_game_groups": 2,
+  "season_census": 49,
+  "accepted_game_rows_added": 0,
+  "accepted_game_rows_removed": 0,
+  "accepted_games_modified": 0,
+  "source_rows_mutated": 0,
+  "protected_main_mutated": false,
+  "published_history_mutated": false,
+  "global_reference_mutated": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "coverage_gap_exception_applicable": false,
+  "next_valid_path": "Original 1966 Campus yearbook basketball source page or 1965-66 contemporary primary game ledger; do not create anonymous loss or presume editor computed header by this mechanism."
+}
