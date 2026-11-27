@@ -1,0 +1,65 @@
+{
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "parent_research_head": "b7fad334949786ef0fda92b8b7fadb9821d1a893",
+  "checkpoint": "0004-founding-era-tournament-adjudication",
+  "prior_game_candidates": 242,
+  "cohort_seasons": 15,
+  "cohort_official_aggregate_games": 250,
+  "accepted_identified_competitive_games": 226,
+  "accepted_supplemental_competitive_games": 226,
+  "accepted_regular_season": 215,
+  "accepted_lower_level_postseason": 11,
+  "held_inclusion": 13,
+  "held_tournament_type": 2,
+  "excluded_intra_school_jv": 1,
+  "source_explicit_awarded_forfeits_not_games": 5,
+  "source_explicit_unidentified_results_no_game_identity": 3,
+  "held_source_rows": 15,
+  "source_index_additional_evidence": {
+    "pdf_page": 106,
+    "printed_page": 104,
+    "alumni_opponent_index": {
+      "GP": 33,
+      "W": 26,
+      "L": 7,
+      "range": "D.28.28..D.2.60"
+    },
+    "sdsu_alumni_at_stanford_index": {
+      "GP": 3,
+      "W": 0,
+      "L": 3,
+      "range": "D.26.21..D.26.23"
+    },
+    "sdsu_all_stars_index": {
+      "GP": 1,
+      "W": 1,
+      "L": 0
+    },
+    "detailed_1922_23_all_stars": {
+      "GP": 2,
+      "W": 1,
+      "L": 1
+    },
+    "conflict": "INSTITUTIONAL_1922_23_ALL_STARS_DETAILED_VERSUS_OPPONENT_INDEX_DISAGREEMENT"
+  },
+  "source_D_annotation_unexplained": 28,
+  "missing_score_token_rows": 5,
+  "missing_date_token_rows": 10,
+  "unextracted_seasons": 34,
+  "official_aggregate_remaining": 884,
+  "evidence_sources": [
+    "Owner 2026-27 SDSU Basketball Media Guide printed 88-89 PDF 90-91",
+    "Owner guide opponent index printed 104 PDF 106",
+    "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml",
+    "https://mcubed.net/ncaab/series/sandst/nd1_stanfordalumni.shtml",
+    "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2024/2/28/San_Diego_State_2023-24_Media_Guide.pdf",
+    "https://library.sdsu.edu/collections",
+    "https://libguides.sdsu.edu/newspapers/local"
+  ],
+  "next_bounded_action": "Resume mechanical Stage 1 candidate harvest 1936-37 onward (bounded tranche). Preserve 15 held founding-era rows for one later focused archive source pass; do not allow remote archive access limits to stall deterministic extraction."
+}
