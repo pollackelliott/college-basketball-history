@@ -1642,11 +1642,11 @@
   "current_sequence": 792,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
     "operation": "PHASE0",
     "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "nevada-phase0-0002",
     "school_key": "nevada",
     "successor_manifest_path": ".remote-implementation/successors/nevada/nevada-phase0-0002/successor-manifest.json",

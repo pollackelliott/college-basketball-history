@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
+  "prepared_parent_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "prepared_tree_sha": "b9821257df510bea5d8d01576206a8f40a748473",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "nevada-phase0-0002",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1"
+}
