@@ -1,0 +1,6 @@
+season,url,status,new_games,existing_or_potential_same_game,comment
+1940-41,https://static.yoteathletics.com/custompages/stats/mbasketball/1940.htm,FIRST_PARTY_REVIEWED,0,0,"No Boise results in this opponent ledger, not absence proof"
+1941-42,https://static.yoteathletics.com/custompages/stats/mbasketball/1941.htm,FIRST_PARTY_REVIEWED,3,1,Four CoI game entries; one score matches accepted Boise L26-33
+1942-43,https://static.yoteathletics.com/custompages/stats/mbasketball/1942.htm,FIRST_PARTY_REVIEWED,2,2,Four CoI games; two could match existing Boise CoI win and loss
+1942-43,https://oregonnews.uoregon.edu/lccn/sn90051770/1943-02-24/ed-1/seq-9.pdf,ORIGINAL_PDF_PAGE_SCREENSHOT,0,1,Feb24 college roundup Boise L39-57 CoI; month conflicts with opponent Jan23
+1942-43,https://oregonnews.uoregon.edu/lccn/2026234413/1943-02-25/ed-1/seq-8/,CONTEMPORANEOUS_NEWS_TEXT,0,2,"Feb25 article Boise split CoI games, does not date or individually score pair"
