@@ -1,0 +1,35 @@
+{
+  "school_key": "san-diego-state",
+  "season": "1921-22",
+  "source": "owner-supplied 2026-27 guide pp. 88 + contemporary 1922 yearbook OCR pp. 76-77",
+  "yearbook_original_scan_authenticated": false,
+  "named_source_outcomes": {
+    "W": 11,
+    "L": 6,
+    "total": 17
+  },
+  "explicit_unnamed_source_outcomes": {
+    "W": 1,
+    "L": 2,
+    "total": 3
+  },
+  "raw_played_outcomes_combined": {
+    "W": 12,
+    "L": 8,
+    "total": 20
+  },
+  "nonplayed_awarded_forfeit_wins": 2,
+  "institutional_record_after_awards": {
+    "W": 14,
+    "L": 8,
+    "total": 22
+  },
+  "excluded_named_results": {
+    "same_program_alumni_losses": 2,
+    "own_jv_wins": 1,
+    "total": 3
+  },
+  "accepted_named_competitive": 14,
+  "named_or_anonymous_games_added": 0,
+  "comment": "Outcome arithmetic corroboration only, NOT accepted-game count or missing-identity proof; points and game identities not inferred."
+}

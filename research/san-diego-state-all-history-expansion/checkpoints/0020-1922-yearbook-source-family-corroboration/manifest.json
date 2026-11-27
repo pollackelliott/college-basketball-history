@@ -1,0 +1,38 @@
+{
+  "checkpoint": "0020-1922-yearbook-source-family-corroboration",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "d28309c522be58ac373de2430fe210eabdda4cd2",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "previous_checkpoint": "0019-1921-22-coverage-audit-contract-diagnostic",
+  "counts": {
+    "accepted": 1086,
+    "regular": 1043,
+    "postseason": 43,
+    "excluded": 40,
+    "held": 0,
+    "unknown_1921_22": 3,
+    "changed_historical_dispositions": 0
+  },
+  "files": {
+    "research-findings.md": {
+      "sha256": "9a709b32b533eeacdf8342d10932b159c3f01d272dd028e3e40e9f97243efa7e",
+      "bytes_utf8": 3976
+    },
+    "1921-22-source-family-inventory.csv": {
+      "sha256": "815879cac429b85ec86c21c836989a37f95227dc7ae297b8179b1bbf5c5fa752",
+      "bytes_utf8": 1651
+    },
+    "founding-arithmetic.json": {
+      "sha256": "966397ae93b93a07e58e39c24724c0d9817dd83be29916b65f8c792093cc8369",
+      "bytes_utf8": 902
+    },
+    "research-status.json": {
+      "sha256": "5877b014dacc3891f7d399f32a40d59e2c0ecedc950bd424a084f1ffbc918a19",
+      "bytes_utf8": 1188
+    }
+  }
+}
