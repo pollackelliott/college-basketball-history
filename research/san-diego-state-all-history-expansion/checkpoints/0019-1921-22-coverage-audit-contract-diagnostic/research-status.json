@@ -1,0 +1,33 @@
+{
+  "checkpoint": "0019-1921-22-coverage-audit-contract-diagnostic",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_state": "STAGE_1_BLOCKED_FOUNDING_COVERAGE_AUDIT_CONTRACT_AND_EXHAUSTION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "659edca0d2bb582f97ca43d700bbb5f582f801d4",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "accepted_competitive": 1086,
+  "accepted_game_types": {
+    "REGULAR_SEASON": 1043,
+    "POSTSEASON": 43
+  },
+  "held_inclusion": 0,
+  "held_game_type": 0,
+  "excluded_total": 40,
+  "identified_source_results": 1126,
+  "source_official_outcomes": 1134,
+  "unknown_1921_22": 3,
+  "nonplayed_forfeit_awards": 5,
+  "game_disposition_changes": 0,
+  "all_49_original_heading_values_recovered": true,
+  "previous_checkpoint_blank_heading_fields": 49,
+  "contract_parser": "FAIL_STATIC_EXACT_NOTE",
+  "contract_row_partition": "FAIL_STATIC_17_VS_14_PLUS_3_EXCLUSIONS",
+  "research_exhaustion_certified": false,
+  "permanent_audit_executed": false,
+  "audit_eligible": false,
+  "requires_control_center_generic_tool_review": true,
+  "next_bounded_unit": "Control Center evaluate generic source-note and exclusion-aware permanent audit capability; independently pursue bounded 1921–22 evidence exhaustion; no historical status changes"
+}
