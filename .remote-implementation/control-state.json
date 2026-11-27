@@ -825,17 +825,18 @@
     "uc-davis-expansion-release-preview-verify-0001",
     "uc-davis-expansion-release-gate2-approval-0001",
     "uc-davis-expansion-release-production-proof-0001",
-    "nevada-stage1-0001"
+    "nevada-stage1-0001",
+    "nevada-stage1-0002"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE1_INVENTORY",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
+  "active_request_id": "nevada-stage1-0002",
+  "active_request_sha256": "63f6794ce0eab8206d67c8a3229714cbd6b5848084e9c1a5b3c6cd46808451a6",
+  "active_school_key": "nevada",
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -1644,8 +1645,11 @@
     "stage1_reconciliation_sha256": "475b7e71f5b75e2042cb0b2de6e9f769d41a95ebb168cd2d7e65b6e8799c894d",
     "stage1_status": "BLOCKED"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "46057137200",
+  "lock_acquisition_request_commit": "fd3e97c9008e88a4dd34453d391d6e47333288a1",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "STAGE1_RUNNING"
 }
