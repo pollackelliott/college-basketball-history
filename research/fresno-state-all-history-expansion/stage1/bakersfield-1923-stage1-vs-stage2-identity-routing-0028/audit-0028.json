@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_1922_23_BAKERSFIELD_IDENTITY_PHASE_ROUTING_0028",
+  "status": "SOURCE_GAME_IDENTITY_PRESERVED__STAGE1_OPPONENT_FIELD_DEBT_NONBLOCKING__STAGE2_MODERN_CSUB_IDENTITY_HARD_VETO__NO_GAME_MUTATION",
+  "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "research_parent_sha": "6d164b49a9ca1b1f927c22cd3e1195e15fafd5ad",
+  "parent_tree_sha": "dab6cb33500d4d080063d4c977d201b6a830f853",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "pinned_input_blobs": {
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-working-accepted-game-ledger-CANDIDATE.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-bulk-source-dispositions-CANDIDATE.csv": "b00974af230d617c40b94165d4fb23da16374058",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/stage1-pending-source-groups-CANDIDATE.csv": "f082a07b72a10a449736cba7e3be54b6eac409b8",
+    "uc-davis-owner-approved-two-game-reconciliation-0024/49-season-bulk-acceptance-census-CANDIDATE.csv": "cc786d8c18a478bf1b89f955eaf19a26e1724728",
+    "bakersfield-1923-archive-chronology-challenge-0020/source-specific-historical-opponent-boundary.csv": "552dc1094df20e3fca45db6e1188ddf52b333057",
+    "bakersfield-1923-archive-chronology-challenge-0020/audit-0020.json": "e76fc8ed6564cb123d8ef9bc3f24c3828b8c1ecc",
+    "1965-66-deterministic-accounting-mechanism-and-archive-boundary-0027/audit-0027.json": "5a22e9af70aedac23f400fcff92822da8c9c6742"
+  },
+  "checks_passed": 26,
+  "checks_failed": 0,
+  "source_id": "FRESNO-EXP-CAND-1922-23-006",
+  "source_game_result": "FRESNO_W70_13",
+  "source_season": "1922-23",
+  "source_literal": "CSU Bakersfield W 70-13",
+  "modern_csub_1970_sources": [
+    "https://www.csub.edu/50/50-defining-moments-csub-history.shtml",
+    "https://www.csub.edu/isp/about-csub.shtml"
+  ],
+  "bakersfield_junior_college_exists_source": "https://www.bakersfieldcollege.edu/about/history-of-bc.html",
+  "modern_csub_binding_prohibited": true,
+  "guessed_bakersfield_jc_mapping_prohibited": true,
+  "unknown_historical_opponent_identity_still_open": true,
+  "stage1_identity_duplicate_candidates_same_season": 0,
+  "source_result_unique_current_candidate": true,
+  "candidate_accepted_game_rows": 1011,
+  "source_representations": 1036,
+  "pending_clowns_source_groups": 2,
+  "accepted_1922_23_games": 18,
+  "accepted_1922_23_w": 12,
+  "accepted_1922_23_l": 6,
+  "remaining_stage1_material_families": [
+    "TOURING_CLOWNS_TWO_INCLUSION_MATCHES",
+    "1965_66_AGGREGATE_UNMAPPED_LOSS"
+  ],
+  "stage2_explicit_identity_debt": [
+    "1922_23_BAKERSFIELD_MODERN_CSUB_ANACHRONISM"
+  ],
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "all_original_rows_unchanged": true,
+  "protected_main_mutated": false,
+  "published_fresno_mutated": false,
+  "shared_reference_mutated": false,
+  "phase_boundary_basis": "Stage1 game universe and source-backed label; Stage2 opponent identity research; explicit NON_D1 historic false-merge stopping rule. Stage1 nonblocking is CONDITIONAL on no new duplicate/game inclusion contradiction; it is not historical identity acceptance."
+}

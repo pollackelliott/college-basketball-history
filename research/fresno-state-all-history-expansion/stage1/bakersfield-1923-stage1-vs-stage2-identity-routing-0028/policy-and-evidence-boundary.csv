@@ -1,0 +1,10 @@
+test,evidence_or_rule,classification
+"Current 1922–23 Fresno guide source result","CSU Bakersfield W70–13, one source ID FRESNO-EXP-CAND-1922-23-006","PROVEN_SOURCE_LITERAL_AND_WORKING_GAME"
+"Same-season identity duplicate candidate","The current candidate has one Bakersfield-labeled row and one W70–13 row for 1922–23","NO_KNOWN_SAME_GAME_DUPLICATE__NOT_A_GLOBAL_HISTORICAL_PROOF"
+"CSU Bakersfield historical existence","University states instruction began October 1 1970","IMPOSSIBLE_1923_REFEREE_TO_MODERN_SCHOOL"
+"Bakersfield College historical existence","BC founded 1913 / Bakersfield Junior College present during period","POSSIBLE_SCHOOL_EXISTS__NOT_GAME_IDENTITY"
+"Fresno and Bakersfield JC football games","1922, 1923 and 1924 football series in Fresno guide","NOT_BASKETBALL_GAME_PROOF"
+"1923 digital Bakersfield student newspaper","Early scan indexed 1923 but issue weekday corresponds to 1924; no 70-13 score verified","DO_NOT_USE_TO_ASSIGN_BASKERSFIELD_JC"
+"Stage1 responsibility","One source-backed 70–13 game identity and W/L/source game count stable in candidate","NONBLOCKING_FIELD_DEBT_ONLY_AS_LONG_AS_NO_NEW_SAME_GAME_EVIDENCE"
+"Stage2 responsibility","Later opponent identity normalization, distinct modern and historical schools, NON_D1 scan","HARD_VETO_NO_FALSE_MODERN_CSUB_LINK"
+"Freeze/Implementation safety","No guessed modern opponent key or generic anonymous school key","REQUIRES_DEFENSIBLE_HISTORICAL_OPPONENT_OR_EXPLICIT_RESEARCHED_UNRESOLVED_MEANING"
