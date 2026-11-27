@@ -1,0 +1,50 @@
+{
+  "checkpoint": "0012-remaining-50-inclusion-family-challenge",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "84190d28e6cc2e9823c984706caa453b740bcb85",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "source_population": 1126,
+  "accepted_competitive": 1061,
+  "game_types": {
+    "REGULAR_SEASON": 1018,
+    "POSTSEASON": 43
+  },
+  "held_inclusion": 64,
+  "held_game_type": 0,
+  "excluded_own_jv": 1,
+  "inclusion_held_covered_this_unit": 50,
+  "previous_family_held_preserved": 14,
+  "held_this_unit_by_family": {
+    "Alumni": 33,
+    "Alumni at Stanford": 3,
+    "San Diego State All-Stars": 2,
+    "Harlem Globetrotters": 4,
+    "San Diego Dons": 3,
+    "Ryan All-Stars": 2,
+    "Kansas City All-Stars": 1,
+    "20th Century Fox": 1,
+    "Athletes in Action": 1
+  },
+  "reviewed_same_program_labeled_rows": 38,
+  "reviewed_other_opponent_rows": 12,
+  "new_status_changes": 0,
+  "newly_accepted_games": 0,
+  "source_exhibition_evidence": {
+    "exact_sdsu_1967_12_16_aia": "NOT_ESTABLISHED",
+    "nearby_california_1967_12_19_aia": "OFFICIAL_EXHIBITION_MARKER",
+    "strength": "MATERIAL_CONTEXT_NOT_SDSU_FIXTURE_PROOF"
+  },
+  "recognized_sdsu_1922_23_allstar_rows": 2,
+  "secondary_1922_23_allstar_rows": 2,
+  "source_index_1922_23_allstar_rows": 1,
+  "stage1_blocker_counts": {
+    "identified_inclusion": 64,
+    "unidentified_1921_22_source_results": 3,
+    "nonplayed_forfeit_awards": 5
+  },
+  "next_bounded_unit": "Source-specific inclusion-authority/convergence assessment; no new unbounded source hunt or automatic stage advance"
+}

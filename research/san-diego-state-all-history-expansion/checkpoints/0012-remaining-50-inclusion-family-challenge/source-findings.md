@@ -1,0 +1,31 @@
+# San Diego State ALL_HISTORY_EXPANSION — Stage 1 checkpoint 0012
+## Bounded inclusion-source challenge of the 50 families not covered in checkpoint 0011
+
+**Authority:** same Research lane; exact parent `84190d28e6cc2e9823c984706caa453b740bcb85`, immutable research_base_sha `5b840a354fb5cd792239ff8b93cba223a18dd87a`; protected main `3f5a15458aa468347e56e669327d6fe4c9c6ee69`. Owner-uploaded primary 2026–27 San Diego State Men's Basketball Media Guide SHA256 `9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad`, exact relevant year-by-year pages 88–93, and opponent index p104/PDF106 reopened this unit. Research-only **append-only** bounded source challenge. Stage 1 remains **IN PROGRESS**; no published, baseline, or prior accepted game was changed.
+
+## Mechanical population
+The prior checkpoint 0011 preserved **64** inclusion-held source rows. Fourteen Broadway Clowns (9) / House of David (5) rows belong to checkpoint 0011's already independently researched exact opponent-family boundary and are **not re-researched here**. This unit covers the other **50** exact held source IDs across nine named families. Every source W/L, score, original ID and raw institutional source line remains in `50-held-fixture-evidence.csv`.
+
+### Same-school / alumni source families: 38 rows
+- **Alumni:** 33 institutional games (W26-L7). SDSU's guide opponent index explicitly counts all 33; Mcubed normalizes to San Diego State(Alumni) and copies dates/results. This proves the results were listed, not that each represented recognized non-exhibition varsity competition.
+- **Alumni at Stanford:** three losses; the same SDSU index prints **SDSU Alumni at Stanford**, not Stanford University varsity. Do not promote to Stanford varsity, assert exact alumni roster, or interpret geography as a neutral/away site classification. Source results exist but competitive inclusion uncertain.
+- **San Diego State All-Stars:** 1922–23 loss 9–13 on Jan 18 and win 33–28 of unknown literal date; detailed owner guide lists TWO games whereas all-opponents index lists one win. Secondary Mcubed series separately lists both outcomes, supporting two distinct documented results; it may derive from SDSU source and does not certify either as a recognized varsity competitive game.
+
+The 2007–08 SDSU all-opponents index and owner guide also include same-school **SDSU JV**, known under this Research lane as a noncompetitive exclusion. This is a critical negative control: **appearing in an institutional all-opponents/season-results table is not proof of competitive eligibility**. Neither same-school label nor alumni label alone was used to manufacture an exclusion ruling, because the contemporaneous historical fixture classification remains missing.
+
+### Independent touring, AAU, studio and all-star families: 12 rows
+- **Harlem Globetrotters 4** (W1-L3): traveling entertainment-team context; exact-game exhibition marker not recovered.
+- **San Diego Dons 3** (0W-L3): independent historical AAU/semi-professional context; historical team identity alone does not classify the three exact SDSU contests.
+- **Ryan All-Stars 2** (2W-0L); **Kansas City All-Stars 1** (1W-0L): dates and scores are documented; label 'All-Stars' not equivalent to a historical exhibition designation.
+- **20th Century Fox 1** (0W-1L): LMU institutional records separately list the studio team as a basketball opponent to other schools; no evidence marks SDSU's March 6, 1943 loss as exhibition or sanctioned varsity.
+- **Athletes in Action 1** (1W-0L): SDSU official **December 16, 1967** W102–91. New **important same-season primary institutional context**: California official 1967–68 year-by-year guide lists a **December 19, 1967** W92–73 against **Athletes in Action (Ex.)**, explicitly an **exhibition** only three days later. An older Cal year-by-year edition and 2020–21 Cal guide retain the same designation. Cal's clear label materially increases concern that SDSU's contest may also have been exhibition, but **does not prove the SDSU Dec16 game was labeled exhibition**. No assumptions about roster/tour identity or SDSU official eligibility.
+
+Source matrix `evidence-limits.csv` separates SDSU literal facts, corroborating but potentially source-derived secondary results, independently observed opponent-type conventions, and a near-date primary exhibition indicator from case-specific SDSU eligibility. Secondary output replay, current generalized NCAA practices, and later school games cannot answer exact 1920–1960s classification by inference.
+
+### Decision/stopping boundary
+This one bounded source-family challenge did not recover an authoritative per-fixture exhibition/recognized-competitive label. **No source identity is in dispute** and **no game inclusion is manufactured from suggestive category evidence**. All 50 remain `HELD_INCLUSION`; the previous checkpoint 0011's 14 remain held; full **64** held remains exact. The 1,061 accepted and one same-school JV exclusion remain unchanged. The unquantified/unknown-result or counted-gap early history exceptions cannot waive identified inclusion blockers.
+
+Further generic searches that merely reproduce the owner's same dates/scores are low yield. Stage 1 should not enter a recurring open-ended research loop. The next materially different boundary is a **single inclusion-authority/convergence decision** on same-program alumni/all-star scrimmages and touring/exhibition opponent fixtures, tied to independently source-supported criteria rather than opponent labels alone; if historical classification remains genuinely unresolved, preserve a BLOCKED Research checkpoint and return the exact class counts. The owner should be asked only if repository policy genuinely requires a substantive inclusion judgment; no unapproved automatic Stage 2, Stage 1 COMPLETE, owner gate, or global mutation.
+
+## Whole-lane accounting unchanged
+Identified 49-season source rows: **1126**, accepted **1061** (REGULAR_SEASON 1018; POSTSEASON 43), held inclusion **64**, held game type **0**, excluded JV **1**. Three 1921–22 source-acknowledged unnamed results and five administrative forfeit awards remain only aggregate accounting (1134 outcomes). Date/score unknowns remain nonblocking per contract, but eligibility of 64 identified games remains blocking.
