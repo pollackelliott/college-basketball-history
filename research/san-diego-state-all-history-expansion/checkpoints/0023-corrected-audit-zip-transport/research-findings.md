@@ -1,0 +1,11 @@
+# San Diego State — checkpoint 0023: correct ZIP transport, no change to game authority
+
+The immediately preceding checkpoint 0022 preserved a valid, manifest-hash-verified 1,086-game/source-input population but emitted a malformed ZIP wrapper (incorrect local/central header sizes). It must be treated as INVALID BINARY TRANSPORT. This successor repairs **only the ZIP container**, not any source, ledger, exclusion, game type, historical or research-exhaustion decision.
+
+Source bytes recovered exactly from original archive blob `ec29b4a588cbfa692959d4936c669feba1c43448`; verified original SHA-256 `d7df2d03d91be2ccb9a3e7bd0d35d87357b893542dc9363120317a7cd85fb926`, extracted all seven original member payloads with unchanged CRC32; independently matched six payloads against original Stage 1 manifest SHA-256 and byte lengths.
+
+The replacement binary ZIP has standard local-file headers, central-directory entries and EOCD and passes an independent traversal of all seven members: every name, original payload SHA-256, size and CRC32 matches. Verified seven of seven, with six of six Stage 1 member-manifest identities. Corrected ZIP SHA-256: `0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867`; bytes: 312110.
+
+Protected main: `a11cccf944492e4d968edbeef4111ebad150fcec`. Research parent: `0b2e08318d88dce7717c45cec5447c9a310cb4a2`. Research base unchanged: `5b840a354fb5cd792239ff8b93cba223a18dd87a`. The 1,126 named outcomes still partition into 1,086 accepted and 40 excluded. Three explicit 1921–22 unidentified opponents remain outside the accepted game ledger. The ZIP's evidence still says `RESEARCH_EXHAUSTION_NOT_CERTIFIED` and its blocker state still says `SOURCE_ACCESS_PENDING`.
+
+The exact Python permanent auditor has **NOT** been executed. Do not claim audit eligibility, historical exhaustion, Stage 1 COMPLETE, a freeze, or Stage 2. Next bounded action: exercise current protected-main `tools/research_stage1_coverage_gap.py` against the verified corrected ZIP, using `--expected-sha256 0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867 --evidence-member missing-game-evidence.json`. Expect honest FAIL until actual archival exhaustion criteria are met. If a source becomes accessible, inspect it before changing any evidence state; do not simply flip flags.

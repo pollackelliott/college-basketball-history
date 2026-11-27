@@ -1,0 +1,27 @@
+{
+  "checkpoint": "0023-corrected-audit-zip-transport",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "parent_research_head": "0b2e08318d88dce7717c45cec5447c9a310cb4a2",
+  "protected_main_sha_at_checkpoint": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "files": {
+    "research-findings.md": {
+      "sha256": "9b9dc0d110e5ba186d82eb2d1808f618b9a6835d58518b4f7ed2d1c8996db722",
+      "bytes_utf8": 2314
+    },
+    "research-status.json": {
+      "sha256": "0e00cc33593d2c4bcfa99429df008be92ac5e5da3d109ab7f779071d76a5db0e",
+      "bytes_utf8": 1275
+    },
+    "zip-transport-verification.json": {
+      "sha256": "4509dd0a14e4a384ede0bce75e6e34bac5aec2523827d4c97d33f626dfdf62eb",
+      "bytes_utf8": 1984
+    },
+    "san-diego-state-stage1-audit-input.zip": {
+      "sha256": "0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867",
+      "bytes": 312110,
+      "encoding": "ZIP_STORED_STANDARD"
+    }
+  }
+}
