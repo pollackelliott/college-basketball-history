@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_CLOWNS_EXACT_HISTORICAL_INCLUSION_OWNER_PROPOSAL_0029",
+  "status": "HISTORICAL_OWNER_DECISION_PENDING__NO_GAME_MUTATION",
+  "main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "research_parent_sha": "68aff0160dcca9c7574d23c29563502ca0f7709c",
+  "research_parent_tree_sha": "4d5ed397db388c4de4434f650fd44581ea0b5ff0",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "source_ids": [
+    "FRESNO-EXP-CAND-1935-36-019",
+    "FRESNO-EXP-CAND-1953-54-018"
+  ],
+  "recommendation": "INCLUDE_BOTH_AS_FRESNO_INSTITUTION_RECOGNIZED_COMPETITIVE_GAME_RESULTS",
+  "reason": "Both separate official Fresno scored year-by-year results reconcile season W-L headers; no Fresno match-specific Exh marker. However touring troupe classified as comedy/exhibition generally, so exact match status is unresolved and owner ruling is necessary.",
+  "owner_question": "Do you approve including BOTH Fresno State Clowns results as recognized competitive varsity games for 1935–36 (Broadway Clowns, Fresno L34–37) and 1953–54 (Harlem Clowns, Fresno W82–61), giving controlling weight to Fresno's official scored season results and W–L headings despite the touring troupe's general exhibition classification? If you want either game excluded, specify which.",
+  "approved_option": null,
+  "owner_approval_received": false,
+  "not_permitted": [
+    "No automatic inference from generic Proceed",
+    "No global exhibition-policy change",
+    "No all-Clowns-games classification",
+    "No declared Stage1 COMPLETE",
+    "No Stage2 or Implementation"
+  ],
+  "source_exhaustion": [
+    "2019-20 Fresno guide visually checked",
+    "2025 Fresno raw guide preserved",
+    "Notre Dame touring team-class archive",
+    "Nevada and Bakersfield period other-game context",
+    "Fresno Collegian exact-issue collection inaccessible via HTTP403",
+    "Generic source mirrors exhausted"
+  ],
+  "if_both_included": {
+    "accepted_games": 1013,
+    "W": 533,
+    "L": 480,
+    "source_representations": 1036,
+    "pending_groups": 0,
+    "season_1935_36": "27 games 10-17",
+    "season_1953_54": "29 games 13-16"
+  },
+  "if_both_excluded": {
+    "accepted_games": 1011,
+    "W": 532,
+    "L": 479,
+    "source_representations": 1036,
+    "pending_groups": 0,
+    "conflicting_printed_aggregates_remain": true
+  },
+  "remaining_independent_stage1_family": "1965-66 corrected 28 unique 21-7 vs printed 29 21-8 (not closed)",
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

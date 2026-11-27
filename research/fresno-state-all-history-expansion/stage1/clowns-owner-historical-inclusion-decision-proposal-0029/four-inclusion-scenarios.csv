@@ -1,0 +1,6 @@
+scenario,total_games,total_W,total_L,broadway_season_games,broadway_record,harlem_season_games,harlem_record,pending_groups,additional_clowns_exclusions,approval_status
+"RETAIN_UNRESOLVED","1011","532","479","26","10-16","28","12-16","2","0","NO_OWNER_DECISION"
+"INCLUDE_BOTH_RECOMMENDED","1013","533","480","27","10-17","29","13-16","0","0","EXPLICIT_OWNER_APPROVAL_REQUIRED"
+"INCLUDE_BROADWAY_ONLY","1012","532","480","27","10-17","28","12-16","1","0","OWNER_APPROVAL_BROADWAY_ONLY"
+"INCLUDE_HARLEM_ONLY","1012","533","479","26","10-16","29","13-16","1","0","OWNER_APPROVAL_HARLEM_ONLY"
+"EXCLUDE_BOTH","1011","532","479","26","10-16","28","12-16","0","2","EXPLICIT_OWNER_EXHIBITION_DISPOSITION_REQUIRED"
