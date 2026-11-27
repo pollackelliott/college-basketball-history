@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1937_38_SIX_GAME_AUDIT_IDAHO_DATE_CORRECTION_AND_WHITMAN_DISCOVERY_0001",
+  "school_key": "gonzaga",
+  "stage": "STAGE_1",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+  "protected_main_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "parent_research_head": "f7b52fbcf85dcfded34f3d0ac06c6eef18a7bbf1",
+  "predecessor": {
+    "status_path": "schools/gonzaga/research/checkpoints/stage1-status-0054.json",
+    "status_blob": "d2f558d0f775c894f495f386c25a36ee9646e331",
+    "ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0037.csv",
+    "ledger_blob": "f0799e8c647da331e9ec3b589e138664a650cd2b",
+    "reconciliation_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0004.csv",
+    "reconciliation_blob": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "held_inventory_blob": "5352a9ab2e37c78f54439b26688d49b7abec6da1",
+    "season_census_blob": "3d5937323ad921aac1aac3e3afe7ab24352916a5"
+  },
+  "six_game_inherited": {
+    "gonzaga_official_record": "0-4 / 4",
+    "accepted_source_record": "0-6 / 6",
+    "accepted_games_count": 6,
+    "game_research_ids": [
+      "GONZAGA-EXP-WSU-045",
+      "GONZAGA-EXP-WSU-046",
+      "GONZAGA-EXP-MSU-015",
+      "GONZAGA-EXP-MSU-016",
+      "GONZAGA-EXP-IDAHO-008",
+      "GONZAGA-EXP-IDAHO-009"
+    ],
+    "source_family_counts": {
+      "Washington State": 2,
+      "Montana State": 2,
+      "Idaho": 2
+    },
+    "all_six_unique_dates": true,
+    "all_six_losses": true,
+    "year": "1937-38",
+    "no_duplicate_found": true,
+    "prior_accounting_class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+    "arithmetic_overrun_games": 2
+  },
+  "original_source_comparisons": [
+    {
+      "source": "Gonzaga 2026-27 Record Book",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/gozags.com/documents/2026/8/27/2026-27_Record_Book.pdf",
+      "locator": "Printed page 58 All-Time Coaching Records, Claude McGrath 1937-38 0-4",
+      "pdf_screenshot_examined": true,
+      "evidence_kind": "INSTITUTION_AGGREGATE_NOT_GAME_INDIVIDUALIZATION"
+    },
+    {
+      "source": "Washington State 1937-38 official schedule",
+      "url": "https://wsucougars.com/sports/mens-basketball/schedule/season/1937-38",
+      "literal": [
+        "1937-12-31 WSU at Gonzaga W38–20",
+        "1938-02-05 WSU vs Gonzaga W58–19"
+      ],
+      "evidence_kind": "TWO_DISTINCT_GAMES_UNCHANGED"
+    },
+    {
+      "source": "Montana State 2023-24 official opponent series",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/msubobcats.com/documents/2023/11/2/2023-24_MBBMediaGuide.pdf",
+      "literal": [
+        "1938-01-21 MSU W55–53 vs Gonzaga in Bozeman",
+        "1938-01-22 MSU W57–34 vs Gonzaga in Bozeman"
+      ],
+      "visual_status": "PDF indexed text read; screenshot failed due provider file-size cap"
+    },
+    {
+      "source": "Montana State 2024-25 official opponent series",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/msubobcats.com/documents/2024/10/23/2024-25_MBBMediaGuide.pdf",
+      "literal": [
+        "1938-01-21 MSU W55–33 vs Gonzaga in Bozeman",
+        "1938-01-22 MSU W57–34 vs Gonzaga in Bozeman"
+      ],
+      "visual_status": "PDF indexed text read; screenshot failed due provider file-size cap",
+      "interpretation": "Same institution edition discrepancy in first game's Gonzaga points (53 vs 33), not evidence of a second Jan21 game; preserve original accepted L53–55, exact score remains source-conflicted"
+    },
+    {
+      "source": "Idaho 2025-26 official all-time season results",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/govandals.com/documents/2025/5/21/MBB_Record_Book_25-26.pdf",
+      "locator": "1937-38 Jan17 Idaho H W54–24 vs Gonzaga and Feb17 Idaho A W35–24",
+      "pdf_indexed_text_read": true,
+      "source_limit": "Feb17 date conflicts with detailed Feb8 contemporaneous original same-game report"
+    },
+    {
+      "source": "Idaho Argonaut Feb8 1938 original printed page 3",
+      "url": "https://objects.lib.uidaho.edu/argonaut/pdf/arg-1938-02-08.pdf",
+      "locator": "Idaho Reserves Beat Gonzaga 35-24 Last Night; game at Gonzaga in Spokane; article calls Idaho's reserves (with Lyle Smith sole first stringer)",
+      "pdf_screenshot_examined": true,
+      "conclusion": "Monday Feb7 1938 Idaho university team played Gonzaga and won 35-24; same score/opponent/site as Idaho official Feb17 entry; record as one game, update earlier schedule date to Feb7; no separate additional Idaho contest"
+    },
+    {
+      "source": "La Grande Evening Observer Dec15 1937 original page",
+      "url": "https://oregonnews.uoregon.edu/lccn/2006260039/1937-12-15/ed-1/seq-6/ocr/",
+      "literal": "Whitman beat Gonzaga 53–46 last night (Dec14); Gonzaga won previous night's Whitman game 43–38 (Dec13) in Spokane",
+      "source_scope": "TWO_EXPLICIT_DISTINCT_DECEMBER_1937_GONZAGA_WHITMAN_GAMES"
+    },
+    {
+      "source": "La Grande Evening Observer Feb21 1938 Whitman season-to-date retrospective results",
+      "url": "https://oregonnews.uoregon.edu/lccn/2006260039/1938-02-21/ed-1/seq-4/",
+      "literal": [
+        "Whitman 38, Gonzaga 42",
+        "Whitman 53, Gonzaga 40",
+        "Whitman 64, Gonzaga 27",
+        "Whitman 62, Gonzaga 43"
+      ],
+      "source_scope": "FOUR_DISTINCT_REPORTED_WHITMAN_GONZAGA_RESULTS_BEFORE_FEB21, PRIOR TWO LIKELY CROSSWALK WITH DIFFERENT SCORES"
+    }
+  ],
+  "idaho_one_game_date_repair": {
+    "id": "GONZAGA-EXP-IDAHO-009",
+    "prior_date": "1938-02-17",
+    "repaired_date": "1938-02-07",
+    "opponent": "Idaho",
+    "score": "Gonzaga L24–35",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "HOME",
+    "original_day_evidence": "Idaho Argonaut Tuesday Feb8 original scanned edition last night",
+    "same_game_identity": "Exact source opponent, score, reciprocal site and source season; one canonical game, not duplicate or new ID",
+    "confidence": "HIGH_SOURCE_EXPLICIT",
+    "protected_inherited_other_fields": true
+  },
+  "msu_1938_01_21_score_discrepancy": {
+    "id": "GONZAGA-EXP-MSU-015",
+    "game_date": "1938-01-21",
+    "same_game_identity": true,
+    "older_2023_24_MSU_official": "MSU W55–53 Gonzaga",
+    "newer_2024_25_MSU_official": "MSU W55–33 Gonzaga",
+    "accepted_source_score_unmodified": "Gonzaga L53–55",
+    "classification": "SOURCE_EDITION_LITERAL_SCORE_CONFLICT__FIELD_DEBT_ONLY",
+    "requires_positive_contemporary_evidence_for_score_change": true,
+    "not_duplicate": false
+  },
+  "whitman_provisional_holds": [
+    {
+      "candidate_id": "GONZAGA-HOLD-3738-WHITMAN-001",
+      "season_label": "1937-38",
+      "played_date": "1937-12-13",
+      "opponent": "Whitman",
+      "reported_gonzaga_result": "W",
+      "reported_gonzaga_points": "43",
+      "reported_opponent_points": "38",
+      "season_list_gonzaga_points": "42",
+      "season_list_opponent_points": "38",
+      "source_date_status": "CONTEMPORARY_DEC15_EXPLICIT_PREVIOUS_NIGHT_OF_DEC14",
+      "correspondence_status": "PROBABLE_MATCH_TO_FEB21_WHITMAN_38_GONZAGA_42_ENTRY__SCORE_DISAGREEMENT",
+      "source_primary": "https://oregonnews.uoregon.edu/lccn/2006260039/1937-12-15/ed-1/seq-6/ocr/",
+      "source_crosswalk": "https://oregonnews.uoregon.edu/lccn/2006260039/1938-02-21/ed-1/seq-4/",
+      "site_type": "UNKNOWN",
+      "status": "ACTIVE_UNADMITTED_SOURCE_GAME_INCLUSION_AND_SCORE_CROSSWALK_HOLD",
+      "notes": "Dec15 Spokane report: Whitman won last night, Gonzaga won previous night's match 43-38 (Dec13). Feb21 Whitman season result list says Whitman 38 Gonzaga 42; same likely first matchup but one-point Gonzaga score difference. Do not silently merge exact score records or treat official 0-4 as proof of exhibition. Date is anchored to previous-night chronology; site H/A/N not inferred from city."
+    },
+    {
+      "candidate_id": "GONZAGA-HOLD-3738-WHITMAN-002",
+      "season_label": "1937-38",
+      "played_date": "1937-12-14",
+      "opponent": "Whitman",
+      "reported_gonzaga_result": "L",
+      "reported_gonzaga_points": "46",
+      "reported_opponent_points": "53",
+      "season_list_gonzaga_points": "40",
+      "season_list_opponent_points": "53",
+      "source_date_status": "CONTEMPORARY_DEC15_LAST_NIGHT",
+      "correspondence_status": "PROBABLE_MATCH_TO_FEB21_WHITMAN_53_GONZAGA_40_ENTRY__SCORE_DISAGREEMENT",
+      "source_primary": "https://oregonnews.uoregon.edu/lccn/2006260039/1937-12-15/ed-1/seq-6/ocr/",
+      "source_crosswalk": "https://oregonnews.uoregon.edu/lccn/2006260039/1938-02-21/ed-1/seq-4/",
+      "site_type": "UNKNOWN",
+      "status": "ACTIVE_UNADMITTED_SOURCE_GAME_INCLUSION_AND_SCORE_CROSSWALK_HOLD",
+      "notes": "Dec15 contemporaneous report Whitman W53–46 at Gonzaga on Dec14, while Feb21 Whitman full-season-to-date list says Whitman 53 Gonzaga 40. Opponent and winner align but Gonzaga score differs; preserve both literals and crosswalk uncertainty."
+    },
+    {
+      "candidate_id": "GONZAGA-HOLD-3738-WHITMAN-003",
+      "season_label": "1937-38",
+      "played_date": "",
+      "opponent": "Whitman",
+      "reported_gonzaga_result": "L",
+      "reported_gonzaga_points": "27",
+      "reported_opponent_points": "64",
+      "season_list_gonzaga_points": "27",
+      "season_list_opponent_points": "64",
+      "source_date_status": "BY_1938_02_21_NO_EXACT_PLAYED_DATE",
+      "correspondence_status": "SEPARATE_THIRD_WHITMAN_RESULT_IN_WHITMAN_SEASON_TO_DATE_LIST",
+      "source_primary": "https://oregonnews.uoregon.edu/lccn/2006260039/1938-02-21/ed-1/seq-4/",
+      "source_crosswalk": "",
+      "site_type": "UNKNOWN",
+      "status": "ACTIVE_UNADMITTED_SOURCE_GAME_INCLUSION_AND_DATE_HOLD",
+      "notes": "Whitman season-to-date tally in Feb21 1938 La Grande Evening Observer lists Whitman 64 Gonzaga 27 separately; no exact played date, venue H/A/N or source-program inclusion established."
+    },
+    {
+      "candidate_id": "GONZAGA-HOLD-3738-WHITMAN-004",
+      "season_label": "1937-38",
+      "played_date": "",
+      "opponent": "Whitman",
+      "reported_gonzaga_result": "L",
+      "reported_gonzaga_points": "43",
+      "reported_opponent_points": "62",
+      "season_list_gonzaga_points": "43",
+      "season_list_opponent_points": "62",
+      "source_date_status": "BY_1938_02_21_NO_EXACT_PLAYED_DATE",
+      "correspondence_status": "SEPARATE_FOURTH_WHITMAN_RESULT_IN_WHITMAN_SEASON_TO_DATE_LIST",
+      "source_primary": "https://oregonnews.uoregon.edu/lccn/2006260039/1938-02-21/ed-1/seq-4/",
+      "source_crosswalk": "",
+      "site_type": "UNKNOWN",
+      "status": "ACTIVE_UNADMITTED_SOURCE_GAME_INCLUSION_AND_DATE_HOLD",
+      "notes": "Whitman season-to-date tally in Feb21 1938 La Grande Evening Observer lists Whitman 62 Gonzaga 43 separately; exact played date H/A/N and institutional inclusion not established."
+    }
+  ],
+  "whitman_holds_new": 4,
+  "new_whitman_result_population_eligible_for_unconditional_admission_now": false,
+  "reason": "Two different contemporaneous report representations disagree on exact Dec13/14 score crosswalk; two later-season Whitman games remain undated; official Gonzaga 0-4 aggregate also conflicts with one Gonzaga Whitman win and any added games. Identity/inclusion must be separately reconciled before admission.",
+  "post": {
+    "accepted_games": 560,
+    "record": "216-344",
+    "season_1937_38_accepted": "0-6/6",
+    "official_season_1937_38": "0-4/4",
+    "overall_official_aggregate_games": 977,
+    "net_arithmetic_gap": 417,
+    "old_active_holds": 5,
+    "new_whitman_unadmitted_holds": 4,
+    "total_current_active_holds": 9,
+    "one_resolved_original_PLU_hold": 1,
+    "prior_four_research_exhausted_accounting_contradictions_still_preserved": true,
+    "new_whitman_family_active_discrepancy_blocker": true,
+    "stage1_complete": false,
+    "stage2_authorized": false
+  },
+  "next_bounded_unit": "One bounded 1937–38 Whitman four-game primary-source identity/season-scope reconciliation: crosswalk Dec13/14 contemporary W43-38 and L46-53 against Whitman cumulative W42-38 and L40-53 claims; independently test later 64-27 and 62-43, venue/season, and recognized Gonzaga varsity inclusion. Do not invent four accepted games or alter Gonzaga official 0-4/4, and stop with exact residuals if identity/inclusion remains unresolved."
+}
