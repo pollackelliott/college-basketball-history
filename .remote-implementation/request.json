@@ -14,45 +14,47 @@
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
+    "stage2_gate1_seal": true,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": true,
+    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from uc-davis-expansion-stage2-gate1-fill-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from uc-davis-expansion-stage2-preseal-0001",
     "origin": "repository-owned Stage 2 phase continuation"
   },
   "decision_id_set_sha256": "875969abe349ea9420c8ec842646e6704ec84982e5ab84eef5cf754b8ab79138",
   "decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
+  "equivalence_sha256": "308942928e0c1f6dc2354aa54355cc7cc44f2c1da1384e1123aab725502c00e7",
   "expected_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
   "filled_review_sha256": "794048424be1d6c87d06ce4dbc9da690e02090b3f2e8287efaf9e752e96e5b9d",
   "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_PRESEAL_REHEARSAL",
+  "operation": "STAGE2_GATE1_SEAL",
+  "owner_gate_1_approval_sha256": "125c228a2cfcbf693e34211f1d94983d24e82205f7e430344b3afe9badbfd4cc",
   "phase_continuation": {
     "apply_request_id": "uc-davis-expansion-stage2-sealed-apply-0001",
     "kind": "STAGE2_GATE1_FILL_TO_APPLY_V1",
     "preseal_request_id": "uc-davis-expansion-stage2-preseal-0001",
     "seal_request_id": "uc-davis-expansion-stage2-gate1-seal-0001"
   },
-  "previous_control_state_commit": "77f4f54f6bb16d0d86b06ec797011517b3493fcc",
-  "previous_control_state_sha256": "e6fec6a769116f603428569e68b027687b61732a1afaf9c002beae5ddd6be4ec",
+  "previous_control_state_commit": "32839d766dae2704be400a94276737f1d072fcb9",
+  "previous_control_state_sha256": "48efe322e1af89cb35ce512307247e72af4105db54a30850288825fc956f135b",
   "recommendation_map_sha256": "4e26098e026b516c9240500b17a86bea3cce6d642d84fc40ee22b445739eb2ba",
-  "request_id": "uc-davis-expansion-stage2-preseal-0001",
+  "request_id": "uc-davis-expansion-stage2-gate1-seal-0001",
   "schema_version": 1,
   "school_key": "uc-davis",
   "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
-  "stage2_gate1_fill_checkpoint": {
-    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-gate1-fill-0001/checkpoint-manifest.json",
-    "sha256": "8c566b60bf48b4eb26841241c411b2ce7badb24a3fac8f29e7e70d7c60485993"
+  "stage2_preseal_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-preseal-0001/checkpoint-manifest.json",
+    "sha256": "24f741d3a8faf2ca74461afd58e59bbc0b00f89c74c7c6b9545791062cc13e36"
   },
-  "stage2_gate1_fill_verification": {
-    "path": ".remote-implementation/verifications/uc-davis/uc-davis-expansion-stage2-gate1-fill-0001/stage2-gate1-fill-verification.json",
-    "sha256": "966ee040ccfb551c7a29317c513d83e8dc883672b75018eeaecd7f20ea9f2091"
+  "stage2_preseal_verification": {
+    "path": ".remote-implementation/verifications/uc-davis/uc-davis-expansion-stage2-preseal-0001/stage2-preseal-rehearsal-verification.json",
+    "sha256": "5b018bcc506ac968aab1ee6c38e89cdc0c25b367b5e127b91f3d3e241d4d51b8"
   },
   "target_branch": "data/uc-davis-onboarding",
   "target_sha": "8fac24e2ba8ba8deb8ea933f7d73a67875e1c423"
