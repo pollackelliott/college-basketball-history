@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1930_31_FIFTEEN_GAME_ACCOUNTING_CONTRADICTION_AND_ONE_DATE_REPAIR_0001",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "authority": {
+    "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+    "parent_research_head": "01a159b883f1cd8e51f0cf47902fba73fb11e694",
+    "immutable_research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "prior_status_path": "schools/gonzaga/research/checkpoints/stage1-status-0052.json",
+    "prior_status_blob": "4e83eb12c6d86999c3c9bcaf9f1b923aa054e953",
+    "parent_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0035.csv",
+    "parent_ledger_blob": "16e865dde9203b08c743d3cde7a418c50cdceafb",
+    "parent_convergence_reconciliation_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0004.csv",
+    "parent_convergence_reconciliation_blob": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "prior_oregon_accounting_delta_blob": "df71ff63c814878335a2ce2a6d12480c75ec5ce6",
+    "prior_washington_accounting_delta_blob": "de63b73b407a13b7396e945ae85b88344ca40531"
+  },
+  "official_source": {
+    "institution": "Gonzaga University Athletics",
+    "source": "2026–27 Gonzaga men's basketball Record Book",
+    "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/gozags.com/documents/2026/8/27/2026-27_Record_Book.pdf",
+    "locator": "Printed page 58 All-Time Coaching Records, 1930-31",
+    "original_pdf_screenshot_examined": true,
+    "coach": "Maurice Smith",
+    "wins": 7,
+    "losses": 8,
+    "games": 15,
+    "meaning": "SEASON_AGGREGATE_ONLY__NO_ITEMIZED_GAMES_ON_PAGE"
+  },
+  "game_level_reconstruction": {
+    "source_id_count": 15,
+    "distinct_source_research_ids": 15,
+    "game_results": {
+      "wins": 5,
+      "losses": 10
+    },
+    "source_institution_count": 7,
+    "source_opponent_counts": {
+      "Washington State": 2,
+      "Montana": 4,
+      "Central Washington": 2,
+      "Oregon State": 3,
+      "Oregon": 2,
+      "Washington": 1,
+      "Idaho": 1
+    },
+    "source_matrix_path": "schools/gonzaga/research/checkpoints/stage1-1930-1931-fifteen-source-game-matrix-0001.csv",
+    "no_placeholder_rows": true,
+    "structured_game_type_all": "REGULAR_SEASON",
+    "unique_score_and_opponent_results_preserved": true,
+    "dated_games_after_repair": [
+      {
+        "id": "GONZAGA-EXP-WSU-030",
+        "date": "1930-12-29",
+        "opponent": "Washington State",
+        "score": "22-35",
+        "WL": "L"
+      },
+      {
+        "id": "GONZAGA-EXP-OSU-013",
+        "date": "1931-01-02",
+        "opponent": "Oregon State",
+        "score": "30-43",
+        "WL": "L"
+      },
+      {
+        "id": "GONZAGA-EXP-OREGON-011",
+        "date": "1931-01-03",
+        "opponent": "Oregon",
+        "score": "27-48",
+        "WL": "L"
+      },
+      {
+        "id": "GONZAGA-EXP-WSU-031",
+        "date": "1931-01-05",
+        "opponent": "Washington State",
+        "score": "40-39",
+        "WL": "W"
+      },
+      {
+        "id": "GONZAGA-EXP-IDAHO3033-001",
+        "date": "1931-01-06",
+        "opponent": "Idaho",
+        "score": "39-34",
+        "WL": "W"
+      },
+      {
+        "id": "GONZAGA-EXP-CWU-001",
+        "date": "1931-01-29",
+        "opponent": "Central Washington",
+        "score": "17-12",
+        "WL": "W"
+      },
+      {
+        "id": "GONZAGA-EXP-UW-016",
+        "date": "1931-01-30",
+        "opponent": "Washington",
+        "score": "25-33",
+        "WL": "L"
+      },
+      {
+        "id": "GONZAGA-EXP-OREGON-012",
+        "date": "1931-02-11",
+        "opponent": "Oregon",
+        "score": "31-40",
+        "WL": "L"
+      },
+      {
+        "id": "GONZAGA-EXP-CWU-002",
+        "date": "1931-02-23",
+        "opponent": "Central Washington",
+        "score": "15-37",
+        "WL": "L"
+      }
+    ]
+  },
+  "source_validation": [
+    {
+      "source": "Central Washington University Athletics original institutional historical schedules",
+      "url": "https://wildcatsports.com/sports/mens-basketball/schedule/1930?grid=true",
+      "literal": "1931-01-29 at Ellensburg CWU L12–17 Gonzaga; 1931-02-23 at Gonzaga CWU W37–15",
+      "result": "Two distinct reciprocal source games in separate months, different scores/played dates; accepted Gonzaga W17–12 and L15–37 unchanged"
+    },
+    {
+      "source": "University of Washington official historical 2010–11 record book",
+      "url": "https://washington_ftp.sidearmsports.com/old_site/pdf/m-baskbl/2010-11-recordbook-1015.pdf",
+      "literal": "1931 UW W33–25 against Gonzaga, UW site H",
+      "result": "Confirm January 30 1931 UW 33–25 Gonzaga as one accepted reciprocal loss; same UW institution as prior accepted source"
+    },
+    {
+      "source": "Original Eugene Register-Guard newspaper printed Sunday Jan 4 1931 page 8",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn85042472/1931-01-04/ed-1/seq-8/",
+      "pdf_url": "https://oregonnews.uoregon.edu/lccn/sn85042472/1931-01-04/ed-1/seq-8.pdf",
+      "literal": "University of Oregon defeated Gonzaga 48–27 Saturday night; Oregon State defeated Gonzaga at Corvallis Friday evening 43–30",
+      "date_interpretation": "Saturday Jan 3 1931 Oregon 48–27; Friday Jan 2 1931 Oregon State 43–30",
+      "pdf_screenshot_inspected": true,
+      "result": "Contemporaneous independently published opponent/date/score evidence confirms two DISTINCT consecutive-day defeats; specifically establishes exact Friday Jan2 date for previously undated OSU L30–43 row"
+    },
+    {
+      "source": "Other official reciprocal institutions already accepted",
+      "family": [
+        "Washington State",
+        "Montana",
+        "Oregon State",
+        "Oregon",
+        "Idaho"
+      ],
+      "result": "Preserve literal opponent series year-by-year identities in 15-game ledger. No row-level source explicitly reverses two source-backed losses or establishes duplicate/wrong-season game. Do not infer a hidden correction from official aggregate."
+    }
+  ],
+  "accepted_field_repair": {
+    "research_game_id": "GONZAGA-EXP-OSU-013",
+    "season": "1930-31",
+    "opponent": "Oregon State",
+    "prior_game_date": "",
+    "successor_game_date": "1931-01-02",
+    "gonzaga_result": "L",
+    "score": "30-43",
+    "site_type": "AWAY",
+    "game_type": "REGULAR_SEASON",
+    "exact_date_basis": "Jan4 Sunday original item says Corvallis Friday evening. Friday Jan 2, 1931.",
+    "source_provenance": "Original scanned university-region newspaper article examined; official OSU source originally established opponent/score/site",
+    "site_caveat": "AWAY already established reciprocally from Oregon State official H; NOT inferred from newspaper's location",
+    "one_field_and_provenance_only": true
+  },
+  "accounting": {
+    "official": {
+      "wins": 7,
+      "losses": 8,
+      "games": 15
+    },
+    "individually_identified": {
+      "wins": 5,
+      "losses": 10,
+      "games": 15
+    },
+    "identified_minus_official": {
+      "wins": -2,
+      "losses": 2,
+      "games": 0
+    },
+    "classification": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+    "subtype": "SAME_COUNT_RESULT_SOURCE_ACCOUNTING_CONTRADICTION",
+    "before_and_after_identical": true,
+    "researched_exhausted_status_preserved": true,
+    "no_source_justification_to_flip_results": true,
+    "no_cross_opponent_duplicate_found": true,
+    "no_wrong_season_reallocation_found": true,
+    "unknown_date_fields_are_nonblocking": false
+  },
+  "owner_authority": {
+    "case_registered_in_current_main_early_history_accounting_registry": false,
+    "registry_path": "data/reference/early-history-accounting-authorities.json",
+    "registry_blob_sha": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+    "not_eligible_for_missing_game_exception_because_both_game_counts_equal": true,
+    "terminal_closeout_still_requires_exact_owner_authority_and_unrelated_game_inclusion_blockers_resolved": true,
+    "owner_approval_not_implied_by_proceed": true
+  },
+  "after": {
+    "new_competitive_games": 0,
+    "accepted_source_games": 560,
+    "source_game_record": "216-344",
+    "official_total_games": 977,
+    "net_official_minus_accepted_games": 417,
+    "source_game_count_changed": false,
+    "source_on_court_results_changed": false,
+    "only_accepted_osu_date_changed": true,
+    "active_holds": 5,
+    "other_closeout_blockers": [
+      "1915-16",
+      "1936-37",
+      "1937-38"
+    ],
+    "all_research_exhausted_closeout_blockers": 4,
+    "stage1_complete": false,
+    "stage2_authorized": false,
+    "protected_main_mutation": false
+  },
+  "next_bounded_unit": "One independent 1936–37 exact nine-game source-accounting contradiction audit of official 1–5/6 versus identified 4–5/9, testing duplicate/wrong-season proof without reopening the 1930–31 residual. No Stage2 or owner-registry mutations."
+}
