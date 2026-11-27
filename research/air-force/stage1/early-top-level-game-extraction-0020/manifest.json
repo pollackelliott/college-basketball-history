@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE1_CHECKPOINT_GIT_BLOB_MANIFEST",
+  "checkpoint": "early-top-level-game-extraction-0020",
+  "status": "STAGE1_COMPLETE",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "parent_commit_sha": "b00e1d0df269ba05e8b6ff25fc3b4fdeeb964902",
+  "parent_checkpoint": "early-top-level-game-extraction-0019",
+  "scope": {
+    "inception": "1956-57",
+    "top_level": "1957-58+",
+    "primary_source_historical_cutoff": "2025-26",
+    "required_completed_season_cutoff": "2025-26"
+  },
+  "parent_accepted_games": 1901,
+  "added_accepted_games": 27,
+  "combined_accepted_games": 1928,
+  "accepted_seasons": 70,
+  "census_seasons": 70,
+  "blocking_disputed_seasons": [],
+  "unextracted_later_seasons": 0,
+  "remaining_unaccepted_seasons": 0,
+  "remaining_source_aggregate_expected_games": 0,
+  "season_reconciliations": {
+    "1982-83": {
+      "games": 27,
+      "wins": 10,
+      "losses": 17,
+      "conference_wins": 2,
+      "conference_losses": 14,
+      "types": {
+        "REGULAR_SEASON": 27
+      },
+      "site_classification": "UNKNOWN_GAME_LEVEL_NONBLOCKING_STAGED_3_RESEARCH",
+      "primary_accepted_source": "AIR_FORCE_2010_11_OFFICIAL_ARCHIVED_YEAR_BY_YEAR_PRINTED_P98",
+      "original_source_extraction_correction": "2010 official printed page 98 contains 27 scored results, including last two March 5 SIU-Edwardsville W59-51 and March 12 at Utah L55-67, not 25 as claimed by inherited 0019 research summary",
+      "latest_2026_guide_literal_heading": "11-16",
+      "latest_2026_guide_raw_candidate_rows": 26
+    }
+  },
+  "added_game_types": {
+    "REGULAR_SEASON": 27
+  },
+  "parent_residual_notes": 125,
+  "added_residual_notes": 4,
+  "total_residual_notes": 129,
+  "source_inventory_entries": 170,
+  "excluded_known_and_announced_nongames": 18,
+  "accepted_game_ids_start": "AF-1982-83-001",
+  "accepted_game_ids_end": "AF-1982-83-027",
+  "all_predecessor_game_rows_unchanged": true,
+  "previous_1982_83_raw_2026_candidates_preserved": true,
+  "prior_1982_83_dispute_memo_preserved": true,
+  "prior_1982_83_stage1_blockers_resolved": [
+    "AF-0008-001",
+    "AF-0008-002",
+    "AF-0008-003"
+  ],
+  "next_research_stage": "STAGE_2_PENDING_SEPARATE_OWNER_PROCEED",
+  "files": [
+    {
+      "name": "1982-83-2010-accepted-rows-0020.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/1982-83-2010-accepted-rows-0020.csv",
+      "sha": "4fa783e6ce9a980d3da8e8ef4ed921a576d3dc96"
+    },
+    {
+      "name": "1982-83-2026-raw-source-candidates.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/1982-83-2026-raw-source-candidates.csv",
+      "sha": "ccf235894178453acdefee9c752f46b270626a86"
+    },
+    {
+      "name": "1982-83-adjudication-0020.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/1982-83-adjudication-0020.md",
+      "sha": "3713fe7f9ee6ba15c808f5025fdac8dc95fd46e6"
+    },
+    {
+      "name": "1982-83-source-disagreement.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/1982-83-source-disagreement.md",
+      "sha": "9d81affce9841eeb3f42a1796711b3394793d1d8"
+    },
+    {
+      "name": "README.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/README.md",
+      "sha": "a714bac32a88b08183464e312aa9887cbdee2a89"
+    },
+    {
+      "name": "administrative-results.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/administrative-results.csv",
+      "sha": "383040972ba51b917cd6e9f8ad80651aeaf6fd71"
+    },
+    {
+      "name": "conference-source-observations.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/conference-source-observations.csv",
+      "sha": "7c390f7030b92f8bd156e12842c261844cad240e"
+    },
+    {
+      "name": "season-census.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/season-census.csv",
+      "sha": "ea829921f1aa228575c38379515f86b49cabfb93"
+    },
+    {
+      "name": "source-inventory.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/source-inventory.csv",
+      "sha": "f1857490ceb5b79ffecb059c95f87d451ae8c543"
+    },
+    {
+      "name": "stage1-exclusions.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/stage1-exclusions.csv",
+      "sha": "85868e4de581cc40eb276b92feef3aa2b5134005"
+    },
+    {
+      "name": "stage1-ledger.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/stage1-ledger.csv",
+      "sha": "4bf28b42481600ed4d07b04220981bdeb86536a8"
+    },
+    {
+      "name": "stage1-residuals.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0020/stage1-residuals.csv",
+      "sha": "fe4b064242e5b0709d3cda873a87c1c43e3b218c"
+    }
+  ]
+}
