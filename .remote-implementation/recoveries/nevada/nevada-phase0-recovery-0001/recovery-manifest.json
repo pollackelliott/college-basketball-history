@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": "09193136df1e91442e4b9116538aed42e464dd26",
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "recovered_request_id": "nevada-phase0-0001",
+  "request_id": "nevada-phase0-recovery-0001",
+  "schema_version": 1,
+  "target_branch": "data/nevada-onboarding"
+}
