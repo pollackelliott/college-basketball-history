@@ -1,0 +1,47 @@
+{
+  "checkpoint": "0010-1928-29-type-resolution-and-held-family-review",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "15e1bf619832835e97dc82e76d1c9544a45d004f",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "counts": {
+    "named_results": 1126,
+    "accepted": 1061,
+    "accepted_regular": 1018,
+    "accepted_postseason": 43,
+    "held_inclusion": 64,
+    "held_type": 0,
+    "excluded_own_jv": 1,
+    "new_accepted": 2
+  },
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "files": {
+    "1928-29-game-type-decisions.csv": {
+      "sha256": "4a79d322ec25677240e273a4c308fece9baf48ad1c60adc58b0039cc18daadbf",
+      "bytes_utf8": 759
+    },
+    "newly-accepted-games.csv": {
+      "sha256": "273441dc8a2a9c0c23f831287ab2a05cf3b8d1b4f79720e86843f133565c2428",
+      "bytes_utf8": 877
+    },
+    "held-inclusion-evidence.csv": {
+      "sha256": "f20cabe23765d1deed46800650ebc20e2ec942088e2cb00ee1b56331cd6992ab",
+      "bytes_utf8": 24712
+    },
+    "all-49-season-dispositions.csv": {
+      "sha256": "775d6d3bca7057b8f6b000867d8e9e6ba05a67b476212e4f08ff9f723f7e6daa",
+      "bytes_utf8": 97606
+    },
+    "source-family-findings.md": {
+      "sha256": "7b8115ce0f259084e0d3173ce5a6fda0bb036c9ca7af6f03c119dc06e9687b35",
+      "bytes_utf8": 8614
+    },
+    "research-status.json": {
+      "sha256": "6886d1e1290c5d65a97c77708618bc47c6a8c8a0773e4feaac5350ce7cbacf1d",
+      "bytes_utf8": 1662
+    }
+  }
+}

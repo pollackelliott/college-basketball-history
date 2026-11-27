@@ -1,0 +1,3 @@
+research_game_id,season,date_literal,opponent_literal,result,score,old_stage1_status,new_stage1_status,accepted_game_type,source_conference_star,source_tournament_heading,classification_evidence,site_type
+"SDSU-EXP-S1-1928-29-0015","1928-29","F.20","San Diego Athletic Club ‘B’","L","24-28","HELD_GAME_TYPE","ACCEPTED_COMPETITIVE","REGULAR_SEASON","","SAN DIEGO YMCA TOURNAMENT","In-season YMCA event on Feb20; remaining March2 conference game proves event preceded regular-season completion","UNKNOWN"
+"SDSU-EXP-S1-1928-29-0016","1928-29","M.2","*Redlands","L","13-20","HELD_GAME_TYPE","ACCEPTED_COMPETITIVE","REGULAR_SEASON","*","SAN DIEGO YMCA TOURNAMENT","Last of 7 conference-starred games, exactly 3W–4L, same as official SCIAC heading","UNKNOWN"
