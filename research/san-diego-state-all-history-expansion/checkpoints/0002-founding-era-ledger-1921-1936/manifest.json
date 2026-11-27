@@ -1,0 +1,39 @@
+{
+  "checkpoint": "0002-founding-era-ledger-1921-1936",
+  "parent_research_head": "98d6b843fa2be17922b16a760cd8932ba0bbf290",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "files": {
+    "source-game-candidates.csv": {
+      "sha256": "b6daf68dcbb46ffedc79f3b6f8704e4f4816c92d013c354419d8a64108d044f8",
+      "bytes_utf8": 46215
+    },
+    "season-accounting.csv": {
+      "sha256": "be51bb52f058ecae092f787a2ead1f7e399c219919bf5bbaf1e2e9a55b2c5787",
+      "bytes_utf8": 2867
+    },
+    "administrative-and-unidentified.csv": {
+      "sha256": "25ce8a6e75056d462acb679ec5fcd1e291414689b3e8abe0e845ae7716d7c849",
+      "bytes_utf8": 1634
+    },
+    "research-notes.md": {
+      "sha256": "6904cf95c81cc45e684618692888b9681e53f8c8fc76fecdd8c78d9c2d1ec5d4",
+      "bytes_utf8": 4230
+    },
+    "research-status.json": {
+      "sha256": "c37522bca80b93efb51cf7fb9a285ffedc7b60fba5b97cc2770e35f3bea47c72",
+      "bytes_utf8": 2476
+    }
+  },
+  "counts": {
+    "seasons": 15,
+    "official_aggregate_games": 250,
+    "source_identified_candidates": 242,
+    "forfeit_awards": 5,
+    "unidentified_results": 3,
+    "accepted_supplemental_games": 0
+  }
+}

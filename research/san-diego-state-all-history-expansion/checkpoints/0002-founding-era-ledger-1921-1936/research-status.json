@@ -1,0 +1,59 @@
+{
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_creation": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "checkpoint": "0002-founding-era-ledger-1921-1936",
+  "parent_checkpoint": "0001-inception-source-inventory",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "source": "owner-provided 2026-27 San Diego State Men's Basketball Media Guide PDF",
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "source_pdf_pages": [
+    90,
+    91
+  ],
+  "source_printed_pages": [
+    88,
+    89
+  ],
+  "researched_early_seasons": 15,
+  "researched_season_first": "1921-22",
+  "researched_season_last": "1935-36",
+  "official_early_w": 163,
+  "official_early_l": 86,
+  "official_early_t": 1,
+  "official_early_aggregate_games": 250,
+  "identified_source_game_candidates": 242,
+  "identified_candidate_w": 157,
+  "identified_candidate_l": 84,
+  "identified_candidate_t": 1,
+  "candidates_with_scores_missing": 5,
+  "candidates_with_source_date_token_missing": 10,
+  "source_D_annotation_rows": 28,
+  "candidates_in_named_tournament_context": 13,
+  "source_identified_same_school_or_same_name_squad_entries": 3,
+  "source_explicit_forgeit_awards": 5,
+  "source_explicit_unidentified_outcomes": 3,
+  "source_accounting_seasons_exact_without_notes": 13,
+  "source_accounting_seasons_exact_with_notes": 2,
+  "accepted_supplemental_competitive_games": 0,
+  "game_inclusion_review_state": "PENDING; NO SOURCE_CANDIDATE CLAIMED ACCEPTED",
+  "all_program_expansion_aggregate_games": 1134,
+  "outstanding_post_1935_36_seasons": 34,
+  "hard_blocker_classes": {
+    "source_identified_game_inclusion_and_type_review": 242,
+    "source_explicit_unidentified_results": 3,
+    "source_forfeit_awards_to_exclude_from_played_game_population": 5,
+    "D_annotation_meaning_unknown_rows": 28,
+    "same_school_JV_or_All_Stars_inclusion_review": 3,
+    "tournament_classification_review": 13
+  },
+  "nonblocking_raw_field_omissions": {
+    "source_score_missing": 5,
+    "source_date_token_missing": 10
+  },
+  "latest_completed_season": "2025-26",
+  "top_level_scope": "1970-71+",
+  "next_bounded_action": "Stage 1 source-authority inclusion/taxonomy and explicit tournament/forfeit accounting adjudication for extracted founding-era ledger; preserve 242 raw rows. Then proceed systematically into 1936-37 onward in coherent batches."
+}
