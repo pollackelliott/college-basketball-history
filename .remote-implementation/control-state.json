@@ -843,7 +843,7 @@
   "active_request_sha256": "dce4162e970ea409b5f4cb740bf4fb2075f3f1963a22f773d2c80d57b869c7bb",
   "active_school_key": "nevada",
   "active_target_branch": "data/nevada-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "f5158d0b17dd602ea84f36492e6002ff0eadc689",
   "active_writeahead_path": ".remote-implementation/writeahead/nevada/nevada-stage2-opponent-display-normalize-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "14932577d7a6d6299b7ee01b04a48d0bead487fbadbe9143b3da4ef968d31dfe",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
