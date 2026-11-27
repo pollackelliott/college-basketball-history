@@ -1,7 +1,35 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-expansion-release-readiness-0001",
+  "school_key": "uc-davis",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "9698985fbe6ca242196d47ca920fe263fb517b47",
+  "previous_control_state_sha256": "23585d8d1287dd8725f2439411327d1727f226079d30536a02d035578da1ae94",
+  "expected_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
   "approved_plan_hash": "498257f67cc96306ffcda3f25ff872bc6569ccd83df8abe6a9f1ee3a250f326d",
-  "approved_plan_sha256": "9c9370f3cbe4f12d113a21e45d4e6998dab7589b5e09d6f8cc402c10991b109c",
+  "release_manifest_sha256": "8594eac07eb2b07fab6ea05fbe7502587beed2a653fb6da2fb1f31d470e3bdc5",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/uc-davis/uc-davis-expansion-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "4219cf847e047651ff7a4fb64f3ae9e163702a3b071dfbeeaeb0d2c4f30e8c04"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/uc-davis/uc-davis-expansion-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "006b2c5b16e7dc88de07d377003cf038cb2591a0bc7be074098ec451783932eb"
+  },
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "uc-davis-expansion-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "UC Davis ALL_HISTORY_EXPANSION serialized Implementation lane — owner 'Continue' after exact fresh-verified sealed apply; advancing owner-authorized release-preparation phase.",
+    "authorization": "Owner authorized the routine next release-preparation phase following independently verified sealed apply. Read-only release readiness against exact approved school head; record connector-owned PR packet and exact future Preview verification ID, then school lane will create/reuse exact-head release PR and verify CI/Vercel Preview to OWNER_GATE_2_READY. Stop for explicit Owner Gate 2, no owner Gate 2 approval, protected main merge, Production, or historical change."
+  },
   "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
     "owner_gate_1": false,
     "owner_gate_2": false,
     "phase0": false,
@@ -9,9 +37,10 @@
     "recovery": false,
     "release": false,
     "release_gate2_approval": false,
+    "release_presentation_refresh": false,
     "release_preview_verify": false,
     "release_production_proof": false,
-    "release_readiness": false,
+    "release_readiness": true,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
@@ -20,36 +49,7 @@
     "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
+    "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from uc-davis-expansion-stage2-gate1-seal-0001",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_id_set_sha256": "875969abe349ea9420c8ec842646e6704ec84982e5ab84eef5cf754b8ab79138",
-  "decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
-  "expected_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
-  "filled_review_sha256": "794048424be1d6c87d06ce4dbc9da690e02090b3f2e8287efaf9e752e96e5b9d",
-  "integration_freeze_sha256": "c9142f041a0382a5585e235e8c50e32966124fc9db5f9d057ee4aa15323d9e48",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_SEALED_APPLY",
-  "owner_gate_1_approval_sha256": "125c228a2cfcbf693e34211f1d94983d24e82205f7e430344b3afe9badbfd4cc",
-  "previous_control_state_commit": "7484a0b16cee51a5ffc6f8c8ca15df829413566d",
-  "previous_control_state_sha256": "f6c3909be89043aaaaa68355e7042cf0cdf05519ef7a391066ee539175ace21f",
-  "recommendation_map_sha256": "4e26098e026b516c9240500b17a86bea3cce6d642d84fc40ee22b445739eb2ba",
-  "request_id": "uc-davis-expansion-stage2-sealed-apply-0001",
-  "schema_version": 1,
-  "school_key": "uc-davis",
-  "semantic_snapshot_sha256": "aeb82abda6a0d222bce7bb64065d825e99f337d86209ac0a96cb01effc807a7b",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "57228adae3e014e189b24f56baa52aeb348b5f7a6208cb3eab47cede3554124e"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/uc-davis/uc-davis-expansion-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "1e7fd1d9e4750af42b8578e32baaa9c3b42f23fd0160d2940e365bdbd3c299ba"
-  },
-  "target_branch": "data/uc-davis-onboarding",
-  "target_sha": "8fac24e2ba8ba8deb8ea933f7d73a67875e1c423"
+  }
 }
