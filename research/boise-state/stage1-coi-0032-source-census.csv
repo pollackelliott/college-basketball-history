@@ -1,0 +1,11 @@
+case,source,source_date,game_date,score_from_boise,url,status,disposition
+COI1950,Oregon Statesman basketball scoreboard,1951-01-17,1951-01-16 inferred,Boise L59 to CoI C7 OCR,https://oregonnews.uoregon.edu/lccn/sn85042470/1951-01-17/ed-1/seq-8/ocr/,INDEXED_OCR_READ_ORIGINAL_PDF_UNAVAILABLE,"Existing Boise WEST-0007-003, independent first digit unconfirmed"
+COI1950,College of Idaho full official results,1950-51,1951-02-13,Boise L59–67,https://static.yoteathletics.com/custompages/stats/mbasketball/1950.htm,FIRST_PARTY_LOG_READ,Not proven same as Jan16 newspaper; no new ID
+COI1950,College of Idaho full official results,1950-51,1951-01-28,Boise L50–69,https://static.yoteathletics.com/custompages/stats/mbasketball/1950.htm,FIRST_PARTY_LOG_READ,Already accepted COI-1950-001
+COI1951,College of Idaho full official results,1951-52,1951-12-06,Boise W60–50,https://static.yoteathletics.com/custompages/stats/mbasketball/1951.htm,FIRST_PARTY_LOG_READ,Not proven same as Dec13 W69–50 newspaper; no new ID
+COI1951,College of Idaho full official results,1951-52,1951-12-07,Boise W48–45,https://static.yoteathletics.com/custompages/stats/mbasketball/1951.htm,FIRST_PARTY_LOG_READ,Already accepted COI-1951-001
+COI1951,Eugene Register-Guard original p20 Hoop Scores,1951-12-13,1951-12-12 inferred,Boise W69–50,https://oregonnews.uoregon.edu/lccn/sn85042472/1951-12-13/ed-1/seq-20.pdf,ORIGINAL_PDF_SCREENSHOT_READ,Existing WEST-0007-004; no explicitly printed played date
+COI1950,Twin Falls Times-News 1951 Feb14 route,1951-02-14,,,https://tfpl.sfo2.digitaloceanspaces.com/Newspapers/Times-News_TF177/PDF/1951_02_14.pdf,FETCH_UNAVAILABLE,No source evidence
+COI1951,Twin Falls Times-News 1951 Dec07 route,1951-12-07,,,https://tfpl.sfo2.digitaloceanspaces.com/Newspapers/Times-News_TF177/PDF/1951_12_07.pdf,FETCH_UNAVAILABLE,No source evidence
+COI1951,Twin Falls Times-News 1951 Dec13 route,1951-12-13,,,https://tfpl.sfo2.digitaloceanspaces.com/Newspapers/Times-News_TF177/PDF/1951_12_13.pdf,FETCH_UNAVAILABLE,No source evidence
+COI1951,1952 College of Idaho Trail yearbook listing,1952,,,https://www.ebay.com/itm/327361223648,METADATA_ONLY,No original yearbook pages checked
