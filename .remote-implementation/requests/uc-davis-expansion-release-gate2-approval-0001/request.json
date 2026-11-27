@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "uc-davis-expansion-release-gate2-approval-0001",
+  "school_key": "uc-davis",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "previous_control_state_commit": "87b3cba7c76c9ec2e1ce458e4d7a353e7ca543da",
+  "previous_control_state_sha256": "75a59c51af595d896e77c34c639ec65bbb4fa6e52ade04010c92c30a6a8fc030",
+  "expected_protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "target_branch": "data/uc-davis-onboarding",
+  "target_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/uc-davis/uc-davis-expansion-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "6a7c848bb3ac4f3805b222bde1452a12b037ad39729c6302277d15bc5556332f"
+  },
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/uc-davis/uc-davis-expansion-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "dea1fa2bed819ece1ac1dde7f167c1279ad2ef4118db2ec07ce354f544274255"
+  },
+  "approved_plan_hash": "498257f67cc96306ffcda3f25ff872bc6569ccd83df8abe6a9f1ee3a250f326d",
+  "release_manifest_sha256": "8594eac07eb2b07fab6ea05fbe7502587beed2a653fb6da2fb1f31d470e3bdc5",
+  "pr_number": 729,
+  "preview_deployment_id": 8100374243,
+  "preview_url": "https://college-basketball-history-9yy4x32ai-elliott-pollacks-projects.vercel.app",
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly replied 'APPROVED. Proceed' immediately after UC Davis ALL_HISTORY_EXPANSION independently verified OWNER_GATE_2_READY was presented for PR #729, exact immutable head e2c347e3f2658bef820f23b07327e993e9e558c7, exact Vercel Preview deployment 8100374243 at https://college-basketball-history-9yy4x32ai-elliott-pollacks-projects.vercel.app, and the required explicit Owner Gate 2 approval prompt. This approves only that verified Preview and the guarded Gate 2 record, exact packet-authorized merge and Production proof if all identities remain unchanged; no different PR/head/Preview, historical amendment, changed main, or bypass.",
+    "preview_checkpoint_sha256": "6a7c848bb3ac4f3805b222bde1452a12b037ad39729c6302277d15bc5556332f",
+    "preview_verification_sha256": "dea1fa2bed819ece1ac1dde7f167c1279ad2ef4118db2ec07ce354f544274255",
+    "pr_number": 729,
+    "pr_head_sha": "e2c347e3f2658bef820f23b07327e993e9e558c7",
+    "preview_deployment_id": 8100374243,
+    "preview_url": "https://college-basketball-history-9yy4x32ai-elliott-pollacks-projects.vercel.app"
+  },
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "uc-davis-expansion-release-production-proof-0001"
+  },
+  "authority": {
+    "expansion_phase0": false,
+    "expansion_rebootstrap_from_freeze": false,
+    "owner_gate_1": false,
+    "owner_gate_2": true,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "recovery": false,
+    "release": false,
+    "release_gate2_approval": true,
+    "release_presentation_refresh": false,
+    "release_preview_verify": false,
+    "release_production_proof": false,
+    "release_readiness": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_gate1_fill": false,
+    "stage2_gate1_seal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_sealed_apply": false,
+    "venue_identity_maintenance": false
+  },
+  "creation_provenance": {
+    "origin": "Existing UC Davis ALL_HISTORY_EXPANSION Implementation lane, explicit owner Gate 2 approval for exact independently verified PR-head Preview.",
+    "authorization": "Owner 'APPROVED. Proceed' after exact PR #729 Preview packet. Request records Gate 2 approval only and independently verifies the same identity. On fresh PASS the school Implementation lane may consume the exact connector-owned merge packet, merge once with expected head and required merge method, then submit the reserved Production proof. No historic reinterpretation, changed authority, direct main mutation, release bypass or unrelated mutation."
+  }
+}
