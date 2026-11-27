@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "school_key": "nevada",
+  "owner_approval_basis": "Owner approved continuation of the already certified Nevada Research Freeze through Implementation Stage 1. All five entries are research-evidenced current-main identity reuses determined mechanically under existing Stage 1 reconciliation policy, without any new historical site inference or changes to other-school/global venue registries. Exact local geography and exact existing protected-main venue IDs/keys are authenticated; no Phase 0 is authorized.",
+  "expected_research_zip_sha256": "631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103",
+  "expected_venues_sha256": "b9de88125230f991943c259d9f67d4c826869059dc309a26209b657542e09159",
+  "mappings": [
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "john-gray-gym",
+      "expected_local_name": "John Gray Gym",
+      "expected_local_city": "George Town",
+      "expected_local_state": "Cayman Islands",
+      "global_venue_id": "VEN-000470",
+      "global_venue_key": "provisional-john-gray-gym",
+      "expected_global_city": "George Town",
+      "expected_global_state": "Cayman Islands",
+      "resolution_basis": "Nevada accepted 2022-11-21 to 2022-11-23 Cayman Islands Classic exact neutral site; protected main VEN-000470 explicitly identifies John Gray Gym in George Town Cayman Islands with the same name and physical locality. Existing separate VEN-001096 is a preexisting other-school global identity; this Nevada-only reuse neither creates nor repairs that shared registry duplication."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "sears-centre",
+      "expected_local_name": "Sears Centre",
+      "expected_local_city": "Hoffman Estates",
+      "expected_local_state": "IL",
+      "global_venue_id": "VEN-000443",
+      "global_venue_key": "now-arena",
+      "expected_global_city": "Hoffman Estates",
+      "expected_global_state": "IL",
+      "resolution_basis": "Nevada accepted 2011-11-25 and 2011-11-26 exact neutral games at Sears Centre; existing VEN-000443 Sears Centre/NOW Arena matches exact historical display name and Hoffman Estates Illinois physical site."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "thomas-mack-center",
+      "expected_local_name": "Thomas & Mack Center",
+      "expected_local_city": "Las Vegas",
+      "expected_local_state": "NV",
+      "global_venue_id": "VEN-000377",
+      "global_venue_key": "thomas-and-mack-center",
+      "expected_global_city": "Las Vegas",
+      "expected_global_state": "NV",
+      "resolution_basis": "Nevada exact game-set conference tournament research 1994 to 2026 identifies Thomas & Mack Center Las Vegas; existing VEN-000377 has identical building name and geography, only a normalized-key difference."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "cow-palace-daly-city",
+      "expected_local_name": "Cow Palace",
+      "expected_local_city": "Daly City",
+      "expected_local_state": "CA",
+      "global_venue_id": "VEN-000289",
+      "global_venue_key": "cow-palace",
+      "expected_global_city": "Daly City",
+      "expected_global_state": "CA",
+      "resolution_basis": "Santa Clara original official record-book source independently places the Nevada 1947-12-13 neutral at Cow Palace Daly City; current VEN-000289 explicitly locates this building in Daly City California, distinct from the unrelated LSU John M. Parker Agricultural Coliseum Cow Palace alias."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "kansas-city-convention-hall",
+      "expected_local_name": "Convention Hall",
+      "expected_local_city": "Kansas City",
+      "expected_local_state": "MO",
+      "global_venue_id": "VEN-000050",
+      "global_venue_key": "convention-hall-kc",
+      "expected_global_city": "Kansas City",
+      "expected_global_state": "MO",
+      "resolution_basis": "Nevada accepted three 1921 AAU postseason exact game venue statements use Kansas City Missouri Convention Hall, explicitly not 1935 Municipal Auditorium; protected main VEN-000050 Kansas City Convention Hall identity and Butler research corroborate the same historic building, distinct from Philadelphia/Washington Convention Halls."
+    }
+  ]
+}
