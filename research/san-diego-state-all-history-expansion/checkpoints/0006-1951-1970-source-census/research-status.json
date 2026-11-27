@@ -1,0 +1,64 @@
+{
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "checkpoint": "0006-1951-1970-source-census",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "895c80ccf2c4cafa76344d3be0e90d4c20b1363a",
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "source_pdf_pages": [
+    93,
+    94,
+    95
+  ],
+  "source_printed_pages": [
+    91,
+    92,
+    93
+  ],
+  "new_seasons": 19,
+  "new_source_rows": 493,
+  "new_record": {
+    "W": 293,
+    "L": 200,
+    "T": 0
+  },
+  "seasons_exact_WLT_and_points": 19,
+  "source_score_blanks": 0,
+  "source_date_token_blanks": 0,
+  "source_events": 14,
+  "source_event_bracket_rows": 29,
+  "source_alumni_rows": 10,
+  "source_Athletes_in_Action_rows": 1,
+  "source_D_rows": 1,
+  "source_SA_rows": 3,
+  "source_PG_rows": 10,
+  "all_seasons_source_extracted": 49,
+  "all_source_result_rows": 1126,
+  "official_aggregate_result_and_awards": 1134,
+  "official_aggregate_record": {
+    "W": 688,
+    "L": 445,
+    "T": 1
+  },
+  "unidentified_results": {
+    "W": 1,
+    "L": 2,
+    "T": 0
+  },
+  "awarded_forfeit_W": 5,
+  "standalone_Alumni_cross_index": {
+    "founding": 8,
+    "middle": 15,
+    "last": 10,
+    "total": 33,
+    "W": 26,
+    "L": 7
+  },
+  "accepted_games_prior": 226,
+  "accepted_games_new": 0,
+  "remaining_extraction_seasons": 0,
+  "parent_0004_hash_manifest_erratum": "IN_CHECKPOINT_0005",
+  "next_bounded_unit": "Stage 1 game inclusion, exhibition, duplication, and tournament game-type adjudication for complete source result population"
+}

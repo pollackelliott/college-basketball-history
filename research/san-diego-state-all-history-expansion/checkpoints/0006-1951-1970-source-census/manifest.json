@@ -1,0 +1,56 @@
+{
+  "checkpoint": "0006-1951-1970-source-census",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "school_key": "san-diego-state",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "895c80ccf2c4cafa76344d3be0e90d4c20b1363a",
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "counts": {
+    "new_seasons": 19,
+    "new_source_rows": 493,
+    "all_source_extracted_seasons": 49,
+    "all_source_result_rows": 1126,
+    "all_official_aggregate_outcomes": 1134,
+    "accepted_prior": 226,
+    "new_accepted": 0,
+    "source_tournament_groups": 14,
+    "grouped_event_rows": 29,
+    "remaining_extraction_seasons": 0
+  },
+  "parent_integrity_caveat": "Original checkpoint 0004 member digests are invalid; append-only 0005 erratum binds actual Git objects; 0004 original unchanged",
+  "files": {
+    "source-game-candidates.csv": {
+      "sha256": "b6a4d9d4887d4eb7151eaef806147acefe5745a2c2f3b10f45851e2977e7ed7a",
+      "bytes_utf8": 98205
+    },
+    "season-accounting.csv": {
+      "sha256": "784ed4fb945100a87e7f99ece0d4946ea3f8ffbc0f4b8fd70e18dac5cb360431",
+      "bytes_utf8": 2295
+    },
+    "source-event-brackets.csv": {
+      "sha256": "85ca81ec9b3abfd38b5b8014189c49b0af8a5bce32d141a4421145170310736d",
+      "bytes_utf8": 2797
+    },
+    "source-event-game-evidence.csv": {
+      "sha256": "42e5b43af42b09c057f775553041ce3795e3756c00002b02111b37f987b53d44",
+      "bytes_utf8": 5385
+    },
+    "source-annotations.csv": {
+      "sha256": "9f7b1e3ab2c7dca9bd691d58302a054fb5aee085f73e386219e65558c883e964",
+      "bytes_utf8": 4690
+    },
+    "source-review-queues.csv": {
+      "sha256": "2ff6f80886f80b637a0e012e0ca5bfec7d331a72fb2fe59ac66ecb0d170b73e6",
+      "bytes_utf8": 7057
+    },
+    "source-findings.md": {
+      "sha256": "ee90b6b28ac795e4983bfe0542a02e680eb2201488424b5b4761775886943c20",
+      "bytes_utf8": 4549
+    },
+    "research-status.json": {
+      "sha256": "84314a2b2a8895b817b3c3205745e01c83e5110ae79a374639dd1ea25312c76c",
+      "bytes_utf8": 1652
+    }
+  }
+}
