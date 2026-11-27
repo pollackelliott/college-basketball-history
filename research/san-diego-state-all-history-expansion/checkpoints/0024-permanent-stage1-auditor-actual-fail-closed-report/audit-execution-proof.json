@@ -1,0 +1,19 @@
+{
+  "actual_defects": [
+    "NOT_EXPLICITLY_UNRESOLVED:1921-22",
+    "RESEARCH_NOT_EXHAUSTED"
+  ],
+  "checkpoint_zip_sha256": "0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867",
+  "historic_game_mutation": false,
+  "identified_competitive_games": 1086,
+  "kind": "SDSU_STAGE1_EXACT_PERMANENT_AUDIT_PROOF",
+  "permanent_tool_git_blob": "0f77c191c36576bfd30b86592554d6ea76d965ac",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "report_sha256": "971878660ff3585f2ce8df1f3cdc84df6c5752538724012186487163dbd59a46",
+  "research_checkpoint_sha": "be7b82b788ed46539a3f8494a464c3f7ca8f1d6d",
+  "source_exhaustion_certified": false,
+  "stage1_complete": false,
+  "status": "PERMANENT_AUDITOR_EXECUTED_FAIL_CLOSED",
+  "tool_return_code": 2,
+  "unidentified_historical_results": 3
+}

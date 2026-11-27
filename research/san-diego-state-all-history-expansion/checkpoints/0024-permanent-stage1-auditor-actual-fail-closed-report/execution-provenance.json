@@ -1,0 +1,41 @@
+{
+  "kind": "GITHUB_ACTIONS_EXACT_SHA_AUDITOR_ACTUAL_RESULT",
+  "run_id": 46053447065,
+  "run_attempt": 1,
+  "run_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46053447065",
+  "run_status": "completed",
+  "run_conclusion": "success",
+  "run_head_sha": "04ea6fc3b5c36d9d2f403b45f87683594ecf2b35",
+  "job_id": 140690177130,
+  "job_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46053447065/job/140690177130",
+  "original_artifact_id": 15224769369,
+  "original_artifact_name": "san-diego-state-0023-permanent-coverage-audit",
+  "original_artifact_zip_sha256": "c51cab6762a0f5c4f1450d0b808765d11825126da3e82ba18378d1d7642a6a2f",
+  "original_artifact_zip_bytes": 2262,
+  "original_artifact_expiration": "2027-02-25T18:59:30Z",
+  "artifact_crc_validation": "PASS",
+  "reported_stdout_sha256": "971878660ff3585f2ce8df1f3cdc84df6c5752538724012186487163dbd59a46",
+  "tool_return_code": 2,
+  "tool_status": "FAIL",
+  "audited_ledger_rows": 1086,
+  "unidentified_1921_22_results": 3,
+  "no_stage1_complete": true,
+  "no_stage2_advance": true,
+  "exact_member_checks": [
+    {
+      "name": "audit-report.json",
+      "sha256": "971878660ff3585f2ce8df1f3cdc84df6c5752538724012186487163dbd59a46",
+      "bytes": 1127
+    },
+    {
+      "name": "audit-stdout.json",
+      "sha256": "971878660ff3585f2ce8df1f3cdc84df6c5752538724012186487163dbd59a46",
+      "bytes": 1127
+    },
+    {
+      "name": "audit-execution-proof.json",
+      "sha256": "be115204394b3f09546ebd1d814e9e2756df174b7a3f34cda0a3bead18c617af",
+      "bytes": 811
+    }
+  ]
+}

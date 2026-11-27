@@ -1,0 +1,27 @@
+{
+  "checkpoint_sha256": "0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867",
+  "defects": [
+    "NOT_EXPLICITLY_UNRESOLVED:1921-22",
+    "RESEARCH_NOT_EXHAUSTED"
+  ],
+  "identified_competitive_games": 1086,
+  "next_action": "Create one separately hashed Stage 1 closeout successor retaining this exact parent and unchanged identified-game ledger. Preserve all season-level coverage gaps; stop before Stage 2.",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "schema_version": 1,
+  "school": "san-diego-state",
+  "source_coverage_gaps": [
+    {
+      "identified_game_rows": 14,
+      "identified_recovered_from_gap": 0,
+      "institutional_missing_count": 3,
+      "remaining_unidentified_count": 3,
+      "residual_class": "SOURCE_EXPLICIT_GAME_MISSING",
+      "season": "1921-22",
+      "source_heading": "14-8 institutional source aggregate, includes two administrative forfeit awards",
+      "source_note": "1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC."
+    }
+  ],
+  "stage1_complete": false,
+  "status": "FAIL",
+  "unidentified_games_not_added": 3
+}
