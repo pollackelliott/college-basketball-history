@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE1_CHECKPOINT_GIT_BLOB_MANIFEST",
+  "checkpoint": "early-top-level-game-extraction-0015",
+  "status": "STAGE1_IN_PROGRESS_WITH_BLOCKING_1982_83_GAME_UNIVERSE_CONFLICT",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "parent_commit_sha": "0bfd786529d915832507f2226336a04f90869e61",
+  "parent_checkpoint": "early-top-level-game-extraction-0014",
+  "parent_checkpoint_path": "research/air-force/stage1/early-top-level-game-extraction-0014/",
+  "scope": {
+    "inception": "1956-57",
+    "top_level": "1957-58+",
+    "primary_source_historical_cutoff": "2025-26",
+    "required_completed_season_cutoff": "2025-26"
+  },
+  "parent_accepted_games": 1375,
+  "added_accepted_games": 124,
+  "combined_accepted_games": 1499,
+  "accepted_seasons": 56,
+  "census_seasons": 70,
+  "blocking_disputed_seasons": [
+    "1982-83"
+  ],
+  "unextracted_later_seasons": 13,
+  "remaining_unaccepted_seasons": 14,
+  "remaining_source_aggregate_expected_games": 429,
+  "prospective_later_aggregate_games": 402,
+  "disputed_1982_83_aggregate": 27,
+  "season_reconciliations": {
+    "2009-10": {
+      "games": 31,
+      "w": 10,
+      "l": 21,
+      "mwc_w": 1,
+      "mwc_l": 15,
+      "H": [
+        8,
+        9
+      ],
+      "A": [
+        0,
+        10
+      ],
+      "N": [
+        2,
+        2
+      ]
+    },
+    "2010-11": {
+      "games": 32,
+      "w": 16,
+      "l": 16,
+      "mwc_w": 6,
+      "mwc_l": 10,
+      "H": [
+        12,
+        5
+      ],
+      "A": [
+        3,
+        10
+      ],
+      "N": [
+        1,
+        1
+      ]
+    },
+    "2011-12": {
+      "games": 29,
+      "w": 13,
+      "l": 16,
+      "mwc_w": 3,
+      "mwc_l": 11,
+      "H": [
+        10,
+        7
+      ],
+      "A": [
+        2,
+        7
+      ],
+      "N": [
+        1,
+        2
+      ]
+    },
+    "2012-13": {
+      "games": 32,
+      "w": 18,
+      "l": 14,
+      "mwc_w": 8,
+      "mwc_l": 8,
+      "H": [
+        13,
+        2
+      ],
+      "A": [
+        4,
+        11
+      ],
+      "N": [
+        1,
+        1
+      ]
+    }
+  },
+  "new_game_types": {
+    "REGULAR_SEASON": 115,
+    "CONFERENCE_TOURNAMENT": 5,
+    "POSTSEASON": 4
+  },
+  "added_postseason_game_ids": [
+    "AF-2009-10-030",
+    "AF-2009-10-031",
+    "AF-2010-11-030",
+    "AF-2010-11-031",
+    "AF-2010-11-032",
+    "AF-2011-12-029",
+    "AF-2012-13-030",
+    "AF-2012-13-031",
+    "AF-2012-13-032"
+  ],
+  "parent_residual_notes": 67,
+  "added_residual_notes": 12,
+  "total_residual_notes": 79,
+  "source_inventory_entries": 123,
+  "excluded_known_or_announced_nongames": 7,
+  "files": [
+    {
+      "name": "1982-83-2026-raw-source-candidates.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/1982-83-2026-raw-source-candidates.csv",
+      "sha": "ccf235894178453acdefee9c752f46b270626a86"
+    },
+    {
+      "name": "1982-83-source-disagreement.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/1982-83-source-disagreement.md",
+      "sha": "9d81affce9841eeb3f42a1796711b3394793d1d8"
+    },
+    {
+      "name": "README.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/README.md",
+      "sha": "ea01242e1239a3bbb9f380ef3bc92f56321bfbbe"
+    },
+    {
+      "name": "administrative-results.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/administrative-results.csv",
+      "sha": "383040972ba51b917cd6e9f8ad80651aeaf6fd71"
+    },
+    {
+      "name": "conference-source-observations.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/conference-source-observations.csv",
+      "sha": "ad484b8cd0150dee2357fc8c5015a4b19fadfae6"
+    },
+    {
+      "name": "season-census.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/season-census.csv",
+      "sha": "144821bfbda4733d584008a3645f82049864941f"
+    },
+    {
+      "name": "source-inventory.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/source-inventory.csv",
+      "sha": "a1529fb9c532b445ec9b5f7df2dcb9835f7249a0"
+    },
+    {
+      "name": "stage1-exclusions.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/stage1-exclusions.csv",
+      "sha": "75232750799c380a4809917a171ff9f4afee87e2"
+    },
+    {
+      "name": "stage1-ledger.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/stage1-ledger.csv",
+      "sha": "800a64222fd54b7918152f2719f1137538bc2bd7"
+    },
+    {
+      "name": "stage1-residuals.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0015/stage1-residuals.csv",
+      "sha": "df75c492c64524329778e3aa89079b22ae4036eb"
+    }
+  ]
+}
