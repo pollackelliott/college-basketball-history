@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "kind": "GONZAGA_STAGE1_1915_16_NINE_SOURCE_GAME_OUTCOME_CONTRADICTION_TERMINAL_CLASSIFICATION_V1",
+  "school_key": "gonzaga",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "status": "BOUNDED_SINGLE_SEASON_AUDIT_COMPLETE__RESEARCH_EXHAUSTED_ACCOUNTING_CONTRADICTION_RETAINED__NOT_CLOSED",
+  "authority": {
+    "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+    "parent_research_head": "ccc7dbf57ea3dbfca62e8837e9f159f9e36c947f",
+    "research_base_sha": "f64ce23988faa04a304eb15d9ad96c2144ed5777",
+    "parent_status_git_blob": "f57348523f00de055ef8a87357ef2f37ae134c4c",
+    "parent_ledger_path": "schools/gonzaga/research/checkpoints/stage1-identified-game-ledger-0035.csv",
+    "parent_ledger_git_blob": "16e865dde9203b08c743d3cde7a418c50cdceafb",
+    "parent_reconciliation_path": "schools/gonzaga/research/checkpoints/stage1-51-season-convergence-reconciliation-0004.csv",
+    "parent_reconciliation_git_blob": "055652bd912c8945c34114e31b4b1a77ab25c93d",
+    "prior_five_blocker_report_git_blob": "ce51af18fa68ae7b1bcbc2d2731f36127026f1be",
+    "prior_oregon_accounting_delta_git_blob": "df71ff63c814878335a2ce2a6d12480c75ec5ce6"
+  },
+  "source_claims": [
+    {
+      "source_family": "Gonzaga official record book 2025-26",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/gozags.com/documents/2026/5/8/2025-26_Record_Book.pdf",
+      "locator": "All-Time Coaching Records printed page 58 (zero-based pdf screenshot page 57)",
+      "literal_record": "1915-16 2 W 7 L William Higgins",
+      "classification": "OFFICIAL_GONZAGA_CUMULATIVE_AGGREGATE_NOT_ITEMIZED_GAME_LIST",
+      "original_pdf_screenshot_inspected": true
+    },
+    {
+      "source_family": "Washington State official 2026 men's basketball record book",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/wsu.sidearmsports.com/documents/2026/2/9/MBB_Record_Book_260209_Incomplete.pdf",
+      "locator": "Year-by-year 1915–16 printed page 16 (zero-based screenshot page 15)",
+      "literal_results": [
+        "1916-01-15 Gonzaga WSU W43–18",
+        "1916-02-11 at Gonzaga WSU W19–14"
+      ],
+      "classification": "TWO_DISTINCT_EXACT_DATED_SOURCE_OPPONENT_COMPETITIVE_GAMES",
+      "original_pdf_screenshot_inspected": true
+    },
+    {
+      "source_family": "Montana official Records and History 2023",
+      "url": "https://gogriz.com/documents/download/2023/8/16/Records___History.pdf",
+      "locator": "Series History printed page 29, Gonzaga series (zero-based screenshot page 28)",
+      "literal_results": [
+        "1915–16 Montana H W40–20",
+        "1915–16 Montana H W36–15",
+        "1915–16 Montana A W22–21",
+        "1915–16 Montana A W17–13"
+      ],
+      "classification": "FOUR_DISTINCT_SOURCE_OPPONENT_GAMES_UNIQUE_SCORE_AND_TWO_HOST_PAIRS",
+      "original_pdf_screenshot_inspected": true,
+      "date_note": "Specific dates absent; no opponent-game deletion or Gonzaga H/A assumption by geography"
+    },
+    {
+      "source_family": "Montana State official historical year by year",
+      "locator": "1915–16 Montana State official year-by-year results; research IDs GONZAGA-EXP-MSU-005/006",
+      "literal_results": [
+        "1916-02-04 Gonzaga L26–54 at Montana State",
+        "1916-02-05 Gonzaga L16–26 at Montana State"
+      ],
+      "classification": "TWO_DISTINCT_DATED_RECIPROCAL_RESULTS_ALREADY_ACCEPTED",
+      "note": "Source locator preserved directly from authenticated nine-row ledger; no new unverified date/site claims"
+    },
+    {
+      "source_family": "Oregon State official 2011-12 men's basketball media guide",
+      "locator": "Gonzaga series 1915–16 Oregon State A W27–15 / Gonzaga L15–27 HOME",
+      "literal_results": [
+        "Gonzaga L15–27 against Oregon State, undated"
+      ],
+      "classification": "ONE_DISTINCT_FOURTH_SOURCE_FAMILY",
+      "note": "Official Oregon State opponent series source already accepted at prior checkpoint and preserved as original source literal"
+    }
+  ],
+  "identified_source_games": [
+    {
+      "id": "GONZAGA-EXP-WSU-008",
+      "season": "1915-16",
+      "opponent": "Washington State",
+      "played_date": "1916-01-15",
+      "gonzaga_result": "L",
+      "gonzaga_points": "18",
+      "opponent_points": "43",
+      "site_type": "AWAY",
+      "source_family": "Washington State 2011-12 Men's Basketball Information Guide",
+      "source_locator": "GONZAGA series, p.31; 1916-01-15; WSU site H; WSU W 43-18",
+      "date_status": "EXACT_SOURCE_DATE",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-WSU-009",
+      "season": "1915-16",
+      "opponent": "Washington State",
+      "played_date": "1916-02-11",
+      "gonzaga_result": "L",
+      "gonzaga_points": "14",
+      "opponent_points": "19",
+      "site_type": "HOME",
+      "source_family": "Washington State 2011-12 Men's Basketball Information Guide",
+      "source_locator": "GONZAGA series, p.31; 1916-02-11; WSU site A; WSU W 19-14",
+      "date_status": "EXACT_SOURCE_DATE",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-MONTANA-001",
+      "season": "1915-16",
+      "opponent": "Montana",
+      "played_date": "",
+      "gonzaga_result": "L",
+      "gonzaga_points": "20",
+      "opponent_points": "40",
+      "site_type": "AWAY",
+      "source_family": "Montana Basketball Records & History",
+      "source_locator": "Series History p.29; Gonzaga series",
+      "date_status": "SOURCE_DATE_UNKNOWN_NOT_GAME_IDENTITY_BLOCKER",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-MONTANA-002",
+      "season": "1915-16",
+      "opponent": "Montana",
+      "played_date": "",
+      "gonzaga_result": "L",
+      "gonzaga_points": "15",
+      "opponent_points": "36",
+      "site_type": "AWAY",
+      "source_family": "Montana Basketball Records & History",
+      "source_locator": "Series History p.29; Gonzaga series",
+      "date_status": "SOURCE_DATE_UNKNOWN_NOT_GAME_IDENTITY_BLOCKER",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-MONTANA-003",
+      "season": "1915-16",
+      "opponent": "Montana",
+      "played_date": "",
+      "gonzaga_result": "L",
+      "gonzaga_points": "21",
+      "opponent_points": "22",
+      "site_type": "HOME",
+      "source_family": "Montana Basketball Records & History",
+      "source_locator": "Series History p.29; Gonzaga series",
+      "date_status": "SOURCE_DATE_UNKNOWN_NOT_GAME_IDENTITY_BLOCKER",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-MONTANA-004",
+      "season": "1915-16",
+      "opponent": "Montana",
+      "played_date": "",
+      "gonzaga_result": "L",
+      "gonzaga_points": "13",
+      "opponent_points": "17",
+      "site_type": "HOME",
+      "source_family": "Montana Basketball Records & History",
+      "source_locator": "Series History p.29; Gonzaga series",
+      "date_status": "SOURCE_DATE_UNKNOWN_NOT_GAME_IDENTITY_BLOCKER",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-MSU-005",
+      "season": "1915-16",
+      "opponent": "Montana State",
+      "played_date": "1916-02-04",
+      "gonzaga_result": "L",
+      "gonzaga_points": "26",
+      "opponent_points": "54",
+      "site_type": "AWAY",
+      "source_family": "Montana State official men's basketball records/history",
+      "source_locator": "1915-16 Montana State year-by-year; at Montana State",
+      "date_status": "EXACT_SOURCE_DATE",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-MSU-006",
+      "season": "1915-16",
+      "opponent": "Montana State",
+      "played_date": "1916-02-05",
+      "gonzaga_result": "L",
+      "gonzaga_points": "16",
+      "opponent_points": "26",
+      "site_type": "AWAY",
+      "source_family": "Montana State official men's basketball records/history",
+      "source_locator": "1915-16 Montana State year-by-year; at Montana State",
+      "date_status": "EXACT_SOURCE_DATE",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    },
+    {
+      "id": "GONZAGA-EXP-OSU-003",
+      "season": "1915-16",
+      "opponent": "Oregon State",
+      "played_date": "",
+      "gonzaga_result": "L",
+      "gonzaga_points": "15",
+      "opponent_points": "27",
+      "site_type": "HOME",
+      "source_family": "Oregon State 2011-12 Men's Basketball Media Guide — yearly results/opponent series",
+      "source_locator": "GONZAGA 25-2 opponent-series table; 1915-16; OSU A W 27-15",
+      "date_status": "SOURCE_DATE_UNKNOWN_NOT_GAME_IDENTITY_BLOCKER",
+      "game_status": "RETAIN_SOURCE_BACKED__NO_ARITHMETIC_RESULT_REVERSAL"
+    }
+  ],
+  "official": {
+    "wins": 2,
+    "losses": 7,
+    "games": 9
+  },
+  "accepted": {
+    "wins": 0,
+    "losses": 9,
+    "games": 9
+  },
+  "difference_accepted_minus_official": {
+    "wins": -2,
+    "losses": 2,
+    "games": 0
+  },
+  "unique_research_ids": 9,
+  "source_family_game_counts": {
+    "Washington State": 2,
+    "Montana": 4,
+    "Montana State": 2,
+    "Oregon State": 1
+  },
+  "independent_institution_source_families": 4,
+  "classification": {
+    "class": "EARLY_HISTORY_SOURCE_ACCOUNTING_CONTRADICTION",
+    "subtype": "SAME_COUNT_RESULT_SOURCE_ACCOUNTING_CONTRADICTION",
+    "prior_blocker_id": "GONZAGA-S1-ACCOUNTING-1915-16",
+    "read_only_research_exhausted": true,
+    "blocks_new_ordinary_source_harvest": false,
+    "blocks_stage1_closeout": true,
+    "no_anonymous_games": true,
+    "no_reversed_results": true,
+    "no_forced_same_game_merge": true,
+    "no_wrong_season_reassignment": true,
+    "nine_game_identity_reconstruction_stable": true,
+    "unknown_dates_are_field_level_only": true,
+    "eligible_for_source_acknowledged_unidentified_game_exception": false,
+    "why_not_counted_gap": "Both sides count nine games; this is two-win/two-loss result-accounting disagreement, not source-explicit missing games",
+    "early_history_accounting_owner_authority_registered": false,
+    "registry": "data/reference/early-history-accounting-authorities.json",
+    "registry_git_blob": "3a1934cc2201e0fa4fd4f63156584c6b2e62d5ee",
+    "owner_exception_cannot_be_self_approved": true,
+    "other_stage1_holds_still_exist": true,
+    "closeout_audit_not_run_or_passed": true
+  },
+  "material_new_source_findings": {
+    "new_accepted_games": 0,
+    "new_source_family_leads": 0,
+    "previous_researched_exhaustion_upheld": true,
+    "notes": "No additional itemized Gonzaga official game list or individual outcome correction proof in exact-scope institutional+obvious reciprocal checks; continuing generic 1915 newspaper archaeology lacks a concrete material lead."
+  },
+  "preservation": {
+    "accepted_games": 560,
+    "accepted_record": "216-344",
+    "official_expansion_games": 977,
+    "official_expansion_record": "477-500",
+    "aggregate_minus_identified_arithmetic_only": 417,
+    "active_holds": 5,
+    "four_february_1943_inclusion_owner_question_unchanged": true,
+    "jan_1926_collision_hold_unchanged": true,
+    "research_exhausted_accounting_closeout_blockers": 4,
+    "remaining_accounting_seasons": [
+      "1915-16",
+      "1930-31",
+      "1936-37",
+      "1937-38"
+    ],
+    "stage1_complete": false,
+    "stage2_authorized": false,
+    "protected_main_mutation": false
+  },
+  "next_bounded_unit": "One independent read-only 1930–31 accounting contradiction classification against its 15 accepted source-backed game identities and official Gonzaga 7–8/15 aggregate. Do not reopen 1915–16 without new specific corrective evidence or invoke owner registry/Stage2 without authority."
+}
