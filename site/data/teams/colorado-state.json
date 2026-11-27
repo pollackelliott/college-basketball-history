@@ -27,9 +27,9 @@
     }
   },
   "summary": {
-    "games": 2776,
+    "games": 2777,
     "wins": 1419,
-    "losses": 1357,
+    "losses": 1358,
     "ties": 0,
     "first_season": "1901-1902",
     "last_season": "2025-2026",
@@ -451,9 +451,9 @@
     },
     {
       "season_label": "1966-1967",
-      "games": 23,
+      "games": 24,
       "wins": 13,
-      "losses": 10,
+      "losses": 11,
       "ties": 0
     },
     {
@@ -4660,11 +4660,11 @@
         "conference_key": "mountain-west",
         "conference_name": "Mountain West"
       },
-      "first_season": "2009-2010",
+      "first_season": "1966-1967",
       "last_season": "2009-2010",
-      "games": 1,
+      "games": 2,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "ties": 0
     },
     {
@@ -30197,6 +30197,31 @@
       "venue_name": "Moby Arena",
       "site_city": "Fort Collins",
       "site_state": "CO",
+      "game_type": "REGULAR_SEASON",
+      "postseason_round": null,
+      "administrative_status": null,
+      "administrative_note": null
+    },
+    {
+      "canonical_game_id": "CBBG-0214838",
+      "season_label": "1966-1967",
+      "game_date": "1966-12-06",
+      "date_precision": "EXACT",
+      "opponent_key": "uc-davis",
+      "opponent_name": "UC Davis",
+      "opponent_current_d1": true,
+      "opponent_public_page_enabled": true,
+      "team_score": 71,
+      "opponent_score": 111,
+      "score_known": true,
+      "result": "L",
+      "overtime_periods": 0,
+      "site": "HOME",
+      "venue_key": null,
+      "venue_id": null,
+      "venue_name": null,
+      "site_city": null,
+      "site_state": null,
       "game_type": "REGULAR_SEASON",
       "postseason_round": null,
       "administrative_status": null,
