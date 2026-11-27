@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE1_CHECKPOINT_GIT_BLOB_MANIFEST",
+  "checkpoint": "early-top-level-game-extraction-0009",
+  "status": "STAGE1_IN_PROGRESS_WITH_BLOCKING_1982_83_GAME_UNIVERSE_CONFLICT",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "parent_commit_sha": "4e57cc01096984aa6b4fad48cf34915c535e78fb",
+  "scope": {
+    "inception": "1956-57",
+    "top_level": "1957-58+",
+    "historical_cutoff": "2025-26"
+  },
+  "parent_accepted_games": 686,
+  "added_accepted_games": 112,
+  "combined_accepted_games": 798,
+  "accepted_seasons": 32,
+  "census_seasons": 70,
+  "blocking_disputed_seasons": [
+    "1982-83"
+  ],
+  "unextracted_later_seasons": 37,
+  "remaining_unaccepted_seasons": 38,
+  "remaining_source_aggregate_expected_games": 1130,
+  "season_reconciliations": [
+    {
+      "season": "1985-86",
+      "games": 29,
+      "w": 10,
+      "l": 19,
+      "site": {
+        "H": [
+          7,
+          8
+        ],
+        "A": [
+          2,
+          9
+        ],
+        "N": [
+          1,
+          2
+        ]
+      },
+      "conference_wins": 3,
+      "conference_losses": 13,
+      "conference_tournament": 2,
+      "site_authority": "OFFICIAL_AIR_FORCE_SCHEDULE"
+    },
+    {
+      "season": "1986-87",
+      "games": 27,
+      "w": 12,
+      "l": 15,
+      "site": {
+        "H": [
+          9,
+          6
+        ],
+        "A": [
+          2,
+          8
+        ],
+        "N": [
+          1,
+          1
+        ]
+      },
+      "conference_wins": 5,
+      "conference_losses": 11,
+      "conference_tournament": 1,
+      "site_authority": "OFFICIAL_AIR_FORCE_SCHEDULE"
+    },
+    {
+      "season": "1987-88",
+      "games": 28,
+      "w": 11,
+      "l": 17,
+      "site": {
+        "H": [
+          9,
+          4
+        ],
+        "A": [
+          1,
+          10
+        ],
+        "N": [
+          1,
+          3
+        ]
+      },
+      "conference_wins": 4,
+      "conference_losses": 12,
+      "conference_tournament": 1,
+      "site_authority": "EXACT_GAME_SECONDARY_PROVISIONAL"
+    },
+    {
+      "season": "1988-89",
+      "games": 28,
+      "w": 14,
+      "l": 14,
+      "site": {
+        "H": [
+          9,
+          5
+        ],
+        "A": [
+          4,
+          8
+        ],
+        "N": [
+          1,
+          1
+        ]
+      },
+      "conference_wins": 6,
+      "conference_losses": 10,
+      "conference_tournament": 1,
+      "site_authority": "EXACT_GAME_SECONDARY_PROVISIONAL"
+    }
+  ],
+  "postseason_game_ids": [
+    "AF-1985-86-028",
+    "AF-1985-86-029",
+    "AF-1986-87-027",
+    "AF-1987-88-028",
+    "AF-1988-89-028"
+  ],
+  "parent_residual_notes": 25,
+  "added_residual_notes": 5,
+  "total_residual_notes": 30,
+  "source_inventory_entries": 56,
+  "files": [
+    {
+      "name": "stage1-ledger.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/stage1-ledger.csv",
+      "sha": "55dfc4d2ceea754e193673582602e25ca85a7b3c"
+    },
+    {
+      "name": "season-census.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/season-census.csv",
+      "sha": "be218f8fcced692c67197817de20bec853f97bec"
+    },
+    {
+      "name": "conference-source-observations.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/conference-source-observations.csv",
+      "sha": "6affac41823b962912bd608de249d88c534f055b"
+    },
+    {
+      "name": "stage1-residuals.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/stage1-residuals.csv",
+      "sha": "9f233eb494a377e1627e27a73b8f753aca62d61c"
+    },
+    {
+      "name": "source-inventory.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/source-inventory.csv",
+      "sha": "23b99967fbfaa2c83a9ab500ac2b14f7bc7f54f8"
+    },
+    {
+      "name": "README.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/README.md",
+      "sha": "9e204a0212046f4e4210725880f034a0cb90cc23"
+    },
+    {
+      "name": "administrative-results.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/administrative-results.csv",
+      "sha": "383040972ba51b917cd6e9f8ad80651aeaf6fd71"
+    },
+    {
+      "name": "stage1-exclusions.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/stage1-exclusions.csv",
+      "sha": "45b3c27f885bcb02e6b48bd43ffb4b25db918daf"
+    },
+    {
+      "name": "1982-83-2026-raw-source-candidates.csv",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/1982-83-2026-raw-source-candidates.csv",
+      "sha": "ccf235894178453acdefee9c752f46b270626a86"
+    },
+    {
+      "name": "1982-83-source-disagreement.md",
+      "path": "research/air-force/stage1/early-top-level-game-extraction-0009/1982-83-source-disagreement.md",
+      "sha": "9d81affce9841eeb3f42a1796711b3394793d1d8"
+    }
+  ]
+}
