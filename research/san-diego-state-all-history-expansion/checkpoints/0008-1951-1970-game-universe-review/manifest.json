@@ -1,0 +1,51 @@
+{
+  "checkpoint": "0008-1951-1970-game-universe-review",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "8e794c715f00e1babad54f8f77d905a9cd7a38d3",
+  "protected_main_sha_at_governance_refresh": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "counts": {
+    "late_results": 493,
+    "late_accepted": 482,
+    "late_regular": 467,
+    "late_postseason": 15,
+    "late_held": 11,
+    "cumulative_accepted": 1059,
+    "cumulative_held_inclusion": 64,
+    "cumulative_held_type": 2,
+    "cumulative_excluded": 1,
+    "all_source_results": 1126,
+    "unreviewed": 0
+  },
+  "files": {
+    "late-cohort-review.csv": {
+      "sha256": "e979c40fcdbb4494f88f8492dd191b06d1c4c0b2064bf16aa348121b31057d6f",
+      "bytes_utf8": 100842
+    },
+    "newly-accepted-games.csv": {
+      "sha256": "3460dcaa85c88d262087fe1776f8188be3d9a3ba3056bcd190fb9c307babdd7d",
+      "bytes_utf8": 113835
+    },
+    "held-inclusion-games.csv": {
+      "sha256": "1897400790221b2a7db1af3467d799fb08d178ddd54144209ea010885f0f2d16",
+      "bytes_utf8": 1660
+    },
+    "all-49-season-dispositions.csv": {
+      "sha256": "53cf39b5836f94ba0d18a750813fc615d04ca9d1f1b07ae1bed6cd7f467a3e41",
+      "bytes_utf8": 97556
+    },
+    "late-reviewed-season-census.csv": {
+      "sha256": "60d8876862f4dc1f941677752a2f4f6db18ad82a5eff57c1124c71cbb950ad12",
+      "bytes_utf8": 836
+    },
+    "research-findings.md": {
+      "sha256": "82467103367963968d3d417bcea19748fdb6c53444d527ee11b9be9c8a0ed1f8",
+      "bytes_utf8": 2725
+    },
+    "research-status.json": {
+      "sha256": "715503599b3f51054cad4057323cf4a1212af5a7294cf06ae0926fd735a19482",
+      "bytes_utf8": 915
+    }
+  }
+}
