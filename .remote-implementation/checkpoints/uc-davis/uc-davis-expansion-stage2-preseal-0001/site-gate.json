@@ -1,0 +1,93 @@
+{
+  "counts": {
+    "home_missing_venue": 2,
+    "invalid_home_venue_exception_marker_rows": 0,
+    "lower_level_postseason_researched_nonblocking": 1,
+    "neutral_missing_location": 4,
+    "neutral_missing_venue": 22,
+    "postseason_missing_venue": 1,
+    "public_gap_rows": 535,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue": 2,
+    "researched_unresolved_home_venue_rows": 2,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2633,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 511
+  },
+  "errors": [],
+  "examples": {
+    "home_missing_venue": [
+      "CBBG-0214019",
+      "CBBG-0214289"
+    ],
+    "lower_level_postseason_researched_nonblocking": [
+      "CBBG-0215473"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0215267",
+      "CBBG-0215427",
+      "CBBG-0215474",
+      "CBBG-0215475"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0214601",
+      "CBBG-0214623",
+      "CBBG-0214624",
+      "CBBG-0214625",
+      "CBBG-0214737",
+      "CBBG-0214815",
+      "CBBG-0214848",
+      "CBBG-0214874",
+      "CBBG-0214916",
+      "CBBG-0214918",
+      "CBBG-0215267",
+      "CBBG-0215427"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0215473"
+    ],
+    "researched_unresolved_home_venue": [
+      "CBBG-0214019",
+      "CBBG-0214289"
+    ],
+    "unknown_site_type": [
+      "CBBG-0112690",
+      "CBBG-0112695",
+      "CBBG-0213949",
+      "CBBG-0213950",
+      "CBBG-0213951",
+      "CBBG-0213952",
+      "CBBG-0213953",
+      "CBBG-0213954",
+      "CBBG-0213955",
+      "CBBG-0213956",
+      "CBBG-0213957",
+      "CBBG-0213958"
+    ]
+  },
+  "history_start_season": "2004-2005",
+  "school_key": "uc-davis",
+  "source_site_counts": {
+    "home_missing_venue": 2,
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 535,
+    "neutral_missing_location": 4,
+    "neutral_missing_venue": 22,
+    "postseason_missing_venue": 1,
+    "researched_gap_rows": 535,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 2,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 511
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2632
+  },
+  "status": "PASS",
+  "warnings": []
+}
