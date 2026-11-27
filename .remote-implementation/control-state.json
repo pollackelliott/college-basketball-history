@@ -1629,11 +1629,11 @@
       "status": "EXACT"
     },
     "decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "operation": "STAGE2_PROPOSAL_REHEARSAL",
     "protected_main_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
     "recommendation_map_sha256": "4e26098e026b516c9240500b17a86bea3cce6d642d84fc40ee22b445739eb2ba",
-    "remote_stage2_proposal_equivalence": "PENDING",
+    "remote_stage2_proposal_equivalence": "PASS",
     "request_id": "uc-davis-expansion-stage2-proposal-0002",
     "runtime_decision_universe_sha256": "5feb4005eec1ff71ba288f0662eced5b32a709b96caed8a55b5a59f099c4b340",
     "school_key": "uc-davis",
