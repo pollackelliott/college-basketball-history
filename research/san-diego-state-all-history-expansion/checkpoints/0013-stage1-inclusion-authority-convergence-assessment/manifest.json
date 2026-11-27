@@ -1,0 +1,40 @@
+{
+  "checkpoint": "0013-stage1-inclusion-authority-convergence-assessment",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "parent_research_head": "54560c773098a8263aff1359fbe17e02ff0a82bb",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "counts": {
+    "all_named": 1126,
+    "accepted": 1061,
+    "held_inclusion": 64,
+    "excluded_own_JV": 1,
+    "owner_decisions_granted": 0,
+    "exact_historical_review_rows": 64,
+    "coherent_historical_class_groups": 4
+  },
+  "files": {
+    "exact-historical-inclusion-docket.csv": {
+      "sha256": "b9a25babc62ccc93e0861e6443918e7c118dc4925838001739aa0717be209245",
+      "bytes_utf8": 32159
+    },
+    "authority-populations.csv": {
+      "sha256": "75eb46756fc73823d66d7fa1335150d9a9bd2a90df1199bf158f3858db1e0ba8",
+      "bytes_utf8": 2468
+    },
+    "nonbinding-scenario-impact.csv": {
+      "sha256": "23d40f1da7510bac15b702c08876e9659477b0cb0e224fae2ca535f5872e3059",
+      "bytes_utf8": 771
+    },
+    "research-findings.md": {
+      "sha256": "f0f274fc68a8420a7786d1a3576a4011f18feca743ae1d669e416c8c8fece1d6",
+      "bytes_utf8": 6446
+    },
+    "research-status.json": {
+      "sha256": "d57b4ee7739ffa10513910d99f690580d897b9005c97a1bff8c136882c73e00b",
+      "bytes_utf8": 2304
+    }
+  }
+}

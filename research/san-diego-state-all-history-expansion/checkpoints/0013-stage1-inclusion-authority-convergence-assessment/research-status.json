@@ -1,0 +1,75 @@
+{
+  "checkpoint": "0013-stage1-inclusion-authority-convergence-assessment",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "research_state": "STAGE_1_BLOCKED_HISTORICAL_INCLUSION_AUTHORITY",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "54560c773098a8263aff1359fbe17e02ff0a82bb",
+  "protected_main_sha_at_checkpoint": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "identified_source_rows": 1126,
+  "accepted_competitive": 1061,
+  "accepted_game_types": {
+    "REGULAR_SEASON": 1018,
+    "POSTSEASON": 43
+  },
+  "held_inclusion": 64,
+  "held_game_type": 0,
+  "excluded_own_jv": 1,
+  "identities_unique": 1126,
+  "source_aggregate_outcomes": 1134,
+  "source_named_results": 1126,
+  "source_unidentified_results": 3,
+  "forfeit_awards_not_games": 5,
+  "source_field_unknown_date": 11,
+  "source_field_unknown_score": 5,
+  "held_literal_W": 41,
+  "held_literal_L": 23,
+  "authority_populations": {
+    "SAME_PROGRAM_ALUMNI": {
+      "n": 38,
+      "w": 27,
+      "l": 11,
+      "families": [
+        "Alumni",
+        "Alumni at Stanford",
+        "San Diego State All-Stars"
+      ]
+    },
+    "TOURING_ENTERTAINMENT": {
+      "n": 18,
+      "w": 10,
+      "l": 8,
+      "families": [
+        "Broadway Clowns",
+        "House of David",
+        "Harlem Globetrotters"
+      ]
+    },
+    "ATHLETES_IN_ACTION": {
+      "n": 1,
+      "w": 1,
+      "l": 0,
+      "families": [
+        "Athletes in Action"
+      ]
+    },
+    "OTHER_INDEPENDENT_TEAMS": {
+      "n": 7,
+      "w": 3,
+      "l": 4,
+      "families": [
+        "San Diego Dons",
+        "Ryan All-Stars",
+        "Kansas City All-Stars",
+        "20th Century Fox"
+      ]
+    }
+  },
+  "historical_inclusion_mutations": 0,
+  "owner_historical_disposition_approved": false,
+  "proposed_first_owner_question": "Authorize excluding the exact 38 Alumni, Alumni at Stanford and San Diego State All-Stars held source IDs as noncompetitive same-program games, leaving the other 26 held?",
+  "exact_owner_approval_required": true,
+  "next_bounded_unit": "On explicit owner authority, update only exact approved row statuses with preserved literal evidence; otherwise STOP until materially new fixture-specific evidence."
+}

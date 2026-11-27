@@ -1,0 +1,5 @@
+scenario_id,previously_held_included_hypothetically,previously_held_excluded_hypothetically,remaining_held,total_accepted_hypothetically,total_excluded_including_one_own_JV,valid_historical_approval_received,scope_note
+"CURRENT_NO_DECISION","0","0","64","1061","1","NO","CONTROLLING; no inclusion or exclusion after 0012"
+"SAME_PROGRAM_38_EXCLUDED_ONLY","0","38","26","1061","39","NO","ILLUSTRATIVE ONLY; would require explicit owner school-specific authority"
+"ALL_HELD_64_EXCLUDED","0","64","0","1061","65","NO","ILLUSTRATIVE ONLY; no evidence for a blanket ruling on all independent opponents"
+"ALL_HELD_64_ACCEPTED","64","0","0","1125","1","NO","ILLUSTRATIVE ONLY; would violate provenance-based caution and cannot be inferred from institutional all-opponents index"
