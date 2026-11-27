@@ -1,0 +1,46 @@
+{
+  "checkpoint": "0007-1936-1951-game-universe-review",
+  "parent_research_head": "99d5c6bb8afc837c11a4f1643d091c307ecc07b9",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "source_pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+  "counts": {
+    "newly_accepted": 351,
+    "accepted_total": 577,
+    "held_total": 55,
+    "late_unadjudicated": 493,
+    "source_rows": 1126
+  },
+  "files": {
+    "middle-cohort-review.csv": {
+      "sha256": "1f6e06b0079895caf414d17915d96763359711fb6a7953ca6c9a611529aaecf3",
+      "bytes_utf8": 89301
+    },
+    "newly-accepted-games.csv": {
+      "sha256": "2d8c26905ba125bf1afa1ff2d5c733edaacb4b4d47da9b3551dcec982bbd47dc",
+      "bytes_utf8": 93789
+    },
+    "held-inclusion-games.csv": {
+      "sha256": "e7fe6f431bf7a33bf9dee02298c8a38c46f5bab75f5ca5ce9c3dbadbc8cdf870",
+      "bytes_utf8": 5733
+    },
+    "middle-reviewed-season-census.csv": {
+      "sha256": "b603f071bfab9e694834d1c9abd4081440438e58eabf6ce488bf8aacf33c2bfb",
+      "bytes_utf8": 1063
+    },
+    "all-49-season-dispositions.csv": {
+      "sha256": "85646ae06ea6458ae1ba819099a7d846391cf64210a3237d70b1d6bb7b375e36",
+      "bytes_utf8": 88469
+    },
+    "research-findings.md": {
+      "sha256": "af2aeeecd3512da5d7e724e1287f3679b18b7674b410161f6d269244b3800a22",
+      "bytes_utf8": 3683
+    },
+    "research-status.json": {
+      "sha256": "4455aca6e02faeb11c7dba9d000f6403b40106d7779eddfe256aeec1d08b5f2f",
+      "bytes_utf8": 1455
+    }
+  }
+}

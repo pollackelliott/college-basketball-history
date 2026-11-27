@@ -1,0 +1,53 @@
+{
+  "checkpoint": "0007-1936-1951-game-universe-review",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "99d5c6bb8afc837c11a4f1643d091c307ecc07b9",
+  "all_source_seasons": 49,
+  "all_source_result_rows": 1126,
+  "official_aggregate_outcomes": 1134,
+  "middle_source_rows": 391,
+  "new_accepted": 351,
+  "new_accepted_regular": 334,
+  "new_accepted_postseason": 17,
+  "new_held": 40,
+  "new_held_by_opponent": {
+    "Alumni": 15,
+    "Broadway Clowns": 9,
+    "House of David": 5,
+    "Harlem Globetrotters": 4,
+    "20th Century Fox": 1,
+    "Ryan All-Stars": 2,
+    "San Diego Dons": 3,
+    "Kansas City All-Stars": 1
+  },
+  "new_accepted_WLT": {
+    "W": 209,
+    "L": 142,
+    "T": 0
+  },
+  "new_held_WLT": {
+    "W": 23,
+    "L": 17,
+    "T": 0
+  },
+  "total_accepted": 577,
+  "total_game_types": {
+    "REGULAR_SEASON": 549,
+    "POSTSEASON": 28
+  },
+  "full_disposition_counts": {
+    "ACCEPTED_COMPETITIVE": 577,
+    "HELD_INCLUSION": 53,
+    "EXCLUDED_OWN_JV": 1,
+    "HELD_GAME_TYPE": 2,
+    "SOURCE_UNADJUDICATED": 493
+  },
+  "exact_middle_source_duplicates": 0,
+  "full_duplicate_research_ids": 0,
+  "prior_0004_hash_issue": "Preserved 0005 erratum, no parent mutation",
+  "next_unit": "1951-70 source inclusion and structured game-type review; Stage 1 remains open"
+}
