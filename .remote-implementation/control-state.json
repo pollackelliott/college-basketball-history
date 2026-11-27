@@ -828,15 +828,15 @@
     "nevada-stage1-0001",
     "nevada-stage1-0002"
   ],
-  "active_expected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "nevada-stage1-0002",
-  "active_request_sha256": "63f6794ce0eab8206d67c8a3229714cbd6b5848084e9c1a5b3c6cd46808451a6",
-  "active_school_key": "nevada",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -1631,25 +1631,23 @@
     "uc-davis-expansion-release-preview-verify-0001",
     "uc-davis-expansion-release-gate2-approval-0001",
     "uc-davis-expansion-release-production-proof-0001",
-    "nevada-stage1-0001"
+    "nevada-stage1-0001",
+    "nevada-stage1-0002"
   ],
-  "current_sequence": 789,
+  "current_sequence": 790,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/nevada/nevada-stage1-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "2b2ed2c7d100800de272c9a223deb5a8cbc480763766f4dccf622cdccc4a21a7",
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/nevada/nevada-stage1-0002/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "ff8b16dd99a26fe291034faf34e6f1bd3c985b8a086e353f78435f29ef66fe57",
     "operation": "STAGE1_INVENTORY",
     "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
-    "request_id": "nevada-stage1-0001",
+    "request_id": "nevada-stage1-0002",
     "school_key": "nevada",
-    "stage1_reconciliation_sha256": "475b7e71f5b75e2042cb0b2de6e9f769d41a95ebb168cd2d7e65b6e8799c894d",
-    "stage1_status": "BLOCKED"
+    "stage1_reconciliation_sha256": "ada459e15bacb638cf3edbe9d7dc52dfb4890db1f73b2b0d4608eb7e77cfb248",
+    "stage1_status": "PASS"
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "46057137200",
-  "lock_acquisition_request_commit": "fd3e97c9008e88a4dd34453d391d6e47333288a1",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }

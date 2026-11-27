@@ -1,0 +1,25 @@
+{
+  "authority_statement": "Durable remote Stage 1 checkpoint only. A new bounded PHASE0 request is required before tracked mutation.",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE1_CHECKPOINT",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "request_id": "nevada-stage1-0002",
+  "research_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+  "research_checkpoint_sha256": "631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103",
+  "research_member_sha256": {
+    "conferences.csv": "2589551198cb0317c450e587af20316802893e8369cb6745c2797b776972a8f4",
+    "notes.md": "67653ac675262217dfbc9c40b0058d0898dab33cc09022dd07c3e78729d708d8",
+    "opponents.csv": "cab71c577d1cdebc7ed2748ed902ccb9cc801ae10e1ae4865c0ffa742839f1e1",
+    "source-games.csv": "e3809d3c9f58f2bb45852a099e480627b5c9e6c4bac21972af3a0775dfd64770",
+    "source-notes.md": "b2170e88bbc6f44db4836419e6d97959c09d2c7cbf344c3ce7523f8ac8639cad",
+    "venues.csv": "b9de88125230f991943c259d9f67d4c826869059dc309a26209b657542e09159"
+  },
+  "schema_version": 1,
+  "school_key": "nevada",
+  "sidecars": {
+    "request.json": "63f6794ce0eab8206d67c8a3229714cbd6b5848084e9c1a5b3c6cd46808451a6",
+    "stage1-reconciliation.json": "ada459e15bacb638cf3edbe9d7dc52dfb4890db1f73b2b0d4608eb7e77cfb248",
+    "venue-reconciliation.json": "b6d84b4b75e30f5379b3eab67c1191e5d503c95586af6ba966c2c99e08a9160e"
+  },
+  "stage1_blocker_count": 0,
+  "stage1_status": "PASS"
+}
