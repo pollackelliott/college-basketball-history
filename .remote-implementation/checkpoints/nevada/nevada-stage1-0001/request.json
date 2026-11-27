@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "nevada-stage1-0001",
+  "school_key": "nevada",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "0e6d26d61b56b09827c6986a153290426019309f",
+  "previous_control_state_sha256": "1b2713e55289ec6b2bac71b87609c5e66beb9e2ef192a133338fa2f260473dd2",
+  "expected_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "research_checkpoint": {
+    "sha256": "631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103",
+    "research_base_sha": "2aedc8051d2031c0ad4ccb87f60226839da0c48a",
+    "transport": {
+      "kind": "git_base64_parts",
+      "commit_sha": "6438d915e5b0089615c6f27433ec5a32a2a0d40b",
+      "path_prefix": "transport/nevada/631f0263/part-",
+      "part_count": 4
+    }
+  },
+  "creation_provenance": {
+    "origin": "Nevada ordinary Implementation Stage 1 - recovered certified Research Freeze and immutable Git transport.",
+    "authorization": "Owner explicitly approved resumption of existing Nevada Implementation Stage 1 on November 27 2026. Original certified authority bundle SHA-256 c6472d5141e0138a8255c96defe237ba3d7b5e95f6d3b87f3701e5dec4b9c32b. Stage 5 full NON_D1 approval, Stage 6 adversarial self-challenge, final Stage 7 notes-only audit and original research-check PASS verified. Exact accepted Freeze SHA-256 631f026304767a6ec456d888ed94e12bcbdd2eda5005d860331d4ffdbca9a103. Perform read-only permanent Stage 1 inventory only; NO Phase 0, Stage 2, Owner Gate, Research reopening, shared/global or protected-main mutation."
+  },
+  "authority": {
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "stage2_reconciliation_diagnostic": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
+  }
+}
