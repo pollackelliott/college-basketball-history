@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_SHARED_REFERENCE_0043_MANIFEST",
+  "school_key": "air-force",
+  "status": "STAGE3B_IN_PROGRESS_SHARED_REFERENCE_PASS_COMPLETE",
+  "stage": "STAGE3B",
+  "parent_commit_sha": "25a6c12383a62ffe7cc25915cde4921bfd4b5a5d",
+  "parent_stage3a4_manifest_blob_sha": "cc8dbbe8803597217b6d1b95717083fe246295a6",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "source_reference_blob_sha": "efa131053d3a5e34e67169a1048fda7f403e297e",
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "5bc852a99bdea687ce779704e9e205093e82c318",
+      "chars": 1978
+    },
+    {
+      "path": "status.json",
+      "git_blob_sha": "acbef5f3c037071b55590ecc47f6cdc7a3348bf1",
+      "chars": 1034
+    },
+    {
+      "path": "qa.json",
+      "git_blob_sha": "5e60e89edb2991ae6db27d49393a2f6931bc5d69",
+      "chars": 2010
+    },
+    {
+      "path": "shared-reference-wac-mountain-west.json",
+      "git_blob_sha": "e2d82a12762793a216ceaf764d825e9a3b4adede",
+      "chars": 44864
+    },
+    {
+      "path": "conference-site-decisions.json",
+      "git_blob_sha": "12037b63ee42049d300b2ff077005c031347cdaf",
+      "chars": 33993
+    },
+    {
+      "path": "postseason-residual-queue.json",
+      "git_blob_sha": "21c7a59bb39a20f7605e544bd301cc2479997cb4",
+      "chars": 5945
+    },
+    {
+      "path": "stage3b-working-ledger.csv",
+      "git_blob_sha": "9a43a8c0caae0a818583caa31cbcfbb21a46cd0f",
+      "chars": 2035968
+    },
+    {
+      "path": "stage4-authoring/venues.csv",
+      "git_blob_sha": "1cf324a8b7c30a556a4a4256a0f1f18020f4a97d",
+      "chars": 31865
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "git_blob_sha": "8eb9d65d52485e8714c8a2afc99b8feb59795739",
+      "inherited_from": "0042"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "git_blob_sha": "3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff",
+      "inherited_from": "0042"
+    }
+  ],
+  "counts": {
+    "postseason": 62,
+    "site_complete_shared": 46,
+    "site_remaining": 16,
+    "conference_site_remaining": 4,
+    "other_site_remaining": 12
+  }
+}

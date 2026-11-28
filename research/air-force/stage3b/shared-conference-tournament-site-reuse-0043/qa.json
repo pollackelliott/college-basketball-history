@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_SHARED_SITE_REUSE_0043_QA",
+  "status": "PASS",
+  "reference": {
+    "path": "data/reference/conference-tournament-sites.csv.gz.b64",
+    "git_blob_sha": "efa131053d3a5e34e67169a1048fda7f403e297e",
+    "source_workbook_sha256": "156a88311c2d76159dd22edd22c13a2b6cb422ec626745d6f9e183200fed80e0",
+    "school_subset_snapshot": "shared-reference-wac-mountain-west.json"
+  },
+  "parent_stage3a_ledger_blob_sha": "0164ea449ab09d1ce0f4253cb15bcf9a20269bdc",
+  "rows_1928_verified": 1928,
+  "core_source_mutations": 0,
+  "postseason_han_mutations": 0,
+  "regular_season_mutations": 0,
+  "site_rows_written": 46,
+  "updated_site_fields": 276,
+  "conference_tournament_total": 50,
+  "unmatched_campus_rounds": 4,
+  "other_postseason_untouched": 12,
+  "accepted_site_group_count": 9,
+  "venue_table_count": 47,
+  "venue_table_actions": [
+    {
+      "key": "postseason-arena-auditorium-laramie-wy",
+      "action": "ADDED",
+      "postseason_added": 2
+    },
+    {
+      "key": "postseason-ball-arena-denver-co",
+      "action": "ADDED",
+      "postseason_added": 3
+    },
+    {
+      "key": "postseason-delta-center-salt-lake-city-ut",
+      "action": "ADDED",
+      "postseason_added": 2
+    },
+    {
+      "key": "neutral-don-haskins-center-el-paso-tx",
+      "action": "UPDATED_EXISTING",
+      "postseason_added": 3
+    },
+    {
+      "key": "postseason-jon-m-huntsman-center-salt-lake-city-ut",
+      "action": "ADDED",
+      "postseason_added": 1
+    },
+    {
+      "key": "postseason-mariott-center-provo-ut",
+      "action": "ADDED",
+      "postseason_added": 1
+    },
+    {
+      "key": "postseason-moby-arena-fort-collins-co",
+      "action": "ADDED",
+      "postseason_added": 1
+    },
+    {
+      "key": "postseason-the-pit-albuquerque-nm",
+      "action": "ADDED",
+      "postseason_added": 3
+    },
+    {
+      "key": "postseason-thomas-mack-center-las-vegas-nv",
+      "action": "ADDED",
+      "postseason_added": 30
+    }
+  ],
+  "qa_defects": []
+}
