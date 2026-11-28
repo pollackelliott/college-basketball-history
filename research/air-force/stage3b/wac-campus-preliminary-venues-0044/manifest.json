@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_WAC_CAMPUS_0044_MANIFEST",
+  "school_key": "air-force",
+  "status": "IN_PROGRESS_CAMPUS_ROUND_COMPLETE",
+  "parent_commit_sha": "e96685d750037ecd6037b65cdc1dbd65ca9c63f2",
+  "parent_checkpoint": "research/air-force/stage3b/shared-conference-tournament-site-reuse-0043/",
+  "parent_manifest_blob_sha": "7e6944afce95a2ceca9444cb47f7885815c9da37",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "0edc401121e4273d94fe204a644a8eba0bc4688b",
+      "chars": 1611
+    },
+    {
+      "path": "status.json",
+      "git_blob_sha": "2eb978404e667c166ec2c28a37770460387f736f",
+      "chars": 921
+    },
+    {
+      "path": "qa.json",
+      "git_blob_sha": "c77279deecefe0f84a2a811210bd35d9f029b16f",
+      "chars": 1193
+    },
+    {
+      "path": "wac-campus-venue-adjudications.json",
+      "git_blob_sha": "6d753a18c8cdd0daca8ab454cd637eb58f86e0cd",
+      "chars": 4500
+    },
+    {
+      "path": "postseason-residual-queue.json",
+      "git_blob_sha": "35d926316b5344a67a326ba7ad4aa6a007cba099",
+      "chars": 4337
+    },
+    {
+      "path": "stage3b-working-ledger.csv",
+      "git_blob_sha": "0586988d7a53994ee3f3bf88ad5b5fecdb386054",
+      "chars": 2038573
+    },
+    {
+      "path": "stage4-authoring/venues.csv",
+      "git_blob_sha": "5c3069ee21818e5ae9f6a48df638af11dc2efc50",
+      "chars": 34129
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "git_blob_sha": "8eb9d65d52485e8714c8a2afc99b8feb59795739",
+      "inherited_from": "0043"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "git_blob_sha": "3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff",
+      "inherited_from": "0043"
+    }
+  ],
+  "counts": {
+    "postseason": 62,
+    "accepted_exact_venues": 50,
+    "remaining_nCAA": 4,
+    "remaining_other": 8,
+    "remaining": 12
+  }
+}
