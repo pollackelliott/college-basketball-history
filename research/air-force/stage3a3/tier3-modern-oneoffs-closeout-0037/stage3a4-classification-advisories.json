@@ -1,0 +1,14 @@
+[
+  {
+    "id": "AF-2006-07-008",
+    "scope": "STAGE3A4_FUTURE_ADVERSARIAL_CLASSIFICATION_REVIEW",
+    "target": "Air Force official 2006-07 schedule labels game vs Wake Forest and accepted Stage3A1 source H/A/N is NEUTRAL",
+    "opponent": "Wake Forest official 2006-11-29 game box score labels Air Force HOME, contemporaneous schedule names at Air Force",
+    "evidence_urls": [
+      "https://godeacs.com/news/2006/11/30/air_force_94_wake_forest_58",
+      "https://godeacs.com/news/2006/11/26/deacon_game_notes_wake_forest_vs_air_force",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2006-07"
+    ],
+    "ruling": "No Tier3 H/A/N change. Venue site acceptance independently grounded. Isolate on Stage3A4 only if controlling contract calls for further review."
+  }
+]

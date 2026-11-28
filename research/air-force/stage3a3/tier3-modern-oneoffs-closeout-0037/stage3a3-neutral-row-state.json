@@ -1,0 +1,2938 @@
+[
+  {
+    "research_game_id": "AF-1956-57-010",
+    "season": "1956-57",
+    "game_date": "1957-01-19",
+    "opponent_key": "colorado-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Denver Auditorium",
+      "city": "Denver",
+      "state": "CO",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "CSU-S1-00756",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1956-57-011",
+    "season": "1956-57",
+    "game_date": "1957-01-26",
+    "opponent_key": "northern-colorado",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1956-57-013",
+    "season": "1956-57",
+    "game_date": "1957-02-02",
+    "opponent_key": "omaha",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1956-57-020",
+    "season": "1956-57",
+    "game_date": "1957-03-02",
+    "opponent_key": "regis-colorado",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1957-58-005",
+    "season": "1957-58",
+    "game_date": "1957-12-14",
+    "opponent_key": "colorado-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Denver Auditorium",
+      "city": "Denver",
+      "state": "CO",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "CSU-S1-00770",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1957-58-010",
+    "season": "1957-58",
+    "game_date": "1958-01-11",
+    "opponent_key": "loyola-chicago",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1957-58-012",
+    "season": "1957-58",
+    "game_date": "1958-01-18",
+    "opponent_key": "washington-st-louis",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1958-59-007",
+    "season": "1958-59",
+    "game_date": "1958-12-29",
+    "opponent_key": "wyoming",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Corvallis",
+      "state": "OR",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "WYO-S1-1958-59-P155C3Y2501",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wyoming/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1958-59-008",
+    "season": "1958-59",
+    "game_date": "1959-01-03",
+    "opponent_key": "valparaiso",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1959-60-012",
+    "season": "1959-60",
+    "game_date": "1960-01-07",
+    "opponent_key": "omaha",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1959-60-022",
+    "season": "1959-60",
+    "game_date": "1960-02-10",
+    "opponent_key": "colorado-school-of-mines",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1961-62-010",
+    "season": "1961-62",
+    "game_date": "1962-01-24",
+    "opponent_key": "denver",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1963-64-006",
+    "season": "1963-64",
+    "game_date": "1963-12-26",
+    "opponent_key": "florida-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Jacksonville",
+      "state": "FL",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "FSU-STG1-00179",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/florida-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1963-64-007",
+    "season": "1963-64",
+    "game_date": "1963-12-27",
+    "opponent_key": "florida",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1964-65-002",
+    "season": "1964-65",
+    "game_date": "1964-12-04",
+    "opponent_key": "colorado-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Denver",
+      "state": "CO",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "CSU-S1-00938",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1964-65-003",
+    "season": "1964-65",
+    "game_date": "1964-12-05",
+    "opponent_key": "colorado",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Denver Auditorium",
+      "city": "Denver",
+      "state": "CO",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "COL-S1-000927",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1965-66-002",
+    "season": "1965-66",
+    "game_date": "1965-12-03",
+    "opponent_key": "wyoming",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Denver",
+      "state": "CO",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "WYO-S1-1965-66-P156C2Y4730",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wyoming/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1965-66-003",
+    "season": "1965-66",
+    "game_date": "1965-12-04",
+    "opponent_key": "denver",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1965-66-006",
+    "season": "1965-66",
+    "game_date": "1965-12-18",
+    "opponent_key": "california",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Memorial Coliseum",
+      "city": "Lexington",
+      "state": "KY",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "CAL-R1-01196",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/california/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1965-66-008",
+    "season": "1965-66",
+    "game_date": "1965-12-27",
+    "opponent_key": "oregon-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Veterans Memorial Coliseum",
+      "city": "Portland",
+      "state": "OR",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "OSU-S1-001522",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/oregon-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1965-66-009",
+    "season": "1965-66",
+    "game_date": "1965-12-28",
+    "opponent_key": "michigan",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1965-66-010",
+    "season": "1965-66",
+    "game_date": "1965-12-29",
+    "opponent_key": "oregon",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1966-67-006",
+    "season": "1966-67",
+    "game_date": "1966-12-29",
+    "opponent_key": "south-carolina",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Raleigh",
+      "state": "NC",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "SCARAW-01106",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/south-carolina/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1966-67-007",
+    "season": "1966-67",
+    "game_date": "1966-12-30",
+    "opponent_key": "pittsburgh",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Raleigh",
+      "state": "NC",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "PITT-STG1-01187",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/pittsburgh/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1967-68-004",
+    "season": "1967-68",
+    "game_date": "1967-12-09",
+    "opponent_key": "massachusetts",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1968-69-006",
+    "season": "1968-69",
+    "game_date": "1968-12-26",
+    "opponent_key": "virginia",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1968-69-007",
+    "season": "1968-69",
+    "game_date": "1968-12-27",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1968-69-008",
+    "season": "1968-69",
+    "game_date": "1968-12-28",
+    "opponent_key": "william-mary",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1970-71-007",
+    "season": "1970-71",
+    "game_date": "1970-12-30",
+    "opponent_key": "california",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Rochester War Memorial",
+      "city": "Rochester",
+      "state": "NY",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "CAL-R1-01325",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/california/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1971-72-007",
+    "season": "1971-72",
+    "game_date": "1971-12-29",
+    "opponent_key": "xavier",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1972-73-004",
+    "season": "1972-73",
+    "game_date": "1972-12-09",
+    "opponent_key": "nebraska",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1972-73-006",
+    "season": "1972-73",
+    "game_date": "1972-12-29",
+    "opponent_key": "seton-hall",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Evansville",
+      "state": "IN",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "SHU-S1-01169",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/seton-hall/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1972-73-007",
+    "season": "1972-73",
+    "game_date": "1972-12-30",
+    "opponent_key": "boston-university",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1973-74-004",
+    "season": "1973-74",
+    "game_date": "1973-12-08",
+    "opponent_key": "san-diego-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Omaha",
+      "state": "NE",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "SDSU-S1-000082",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/san-diego-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1976-77-010",
+    "season": "1976-77",
+    "game_date": "1976-12-30",
+    "opponent_key": "loyola-chicago",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Normal",
+      "state": "IL",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "LOY-STG1-01230",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/loyola-chicago/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1977-78-008",
+    "season": "1977-78",
+    "game_date": "1977-12-30",
+    "opponent_key": "minnesota",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Williams Arena",
+      "city": "Minneapolis",
+      "state": "MN",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "MINRAW-01545",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/minnesota/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1977-78-009",
+    "season": "1977-78",
+    "game_date": "1977-12-31",
+    "opponent_key": "tulane",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1978-79-007",
+    "season": "1978-79",
+    "game_date": "1978-12-29",
+    "opponent_key": "texas-a-m",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1978-79-008",
+    "season": "1978-79",
+    "game_date": "1978-12-30",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1979-80-008",
+    "season": "1979-80",
+    "game_date": "1979-12-29",
+    "opponent_key": "american-university",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1980-81-007",
+    "season": "1980-81",
+    "game_date": "1980-12-29",
+    "opponent_key": "auburn",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1981-82-007",
+    "season": "1981-82",
+    "game_date": "1981-12-28",
+    "opponent_key": "nebraska",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1981-82-008",
+    "season": "1981-82",
+    "game_date": "1981-12-29",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1983-84-001",
+    "season": "1983-84",
+    "game_date": "1983-11-25",
+    "opponent_key": "marquette",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Clemson",
+      "state": "SC",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "MARQ-STG1-01502",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/marquette/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1983-84-002",
+    "season": "1983-84",
+    "game_date": "1983-11-26",
+    "opponent_key": "wagner",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Clemson",
+      "state": "SC",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "WAG-S1-00188",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wagner/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1983-84-008",
+    "season": "1983-84",
+    "game_date": "1983-12-28",
+    "opponent_key": "texas-a-m",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1984-85-008",
+    "season": "1984-85",
+    "game_date": "1984-12-28",
+    "opponent_key": "st-bonaventure",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "University of Dayton Arena",
+      "city": "Dayton",
+      "state": "OH",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "STB-1984-85-007",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/st-bonaventure/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1984-85-009",
+    "season": "1984-85",
+    "game_date": "1984-12-29",
+    "opponent_key": "brown",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1985-86-008",
+    "season": "1985-86",
+    "game_date": "1985-12-21",
+    "opponent_key": "navy",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1985-86-009",
+    "season": "1985-86",
+    "game_date": "1985-12-22",
+    "opponent_key": "army",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1986-87-009",
+    "season": "1986-87",
+    "game_date": "1986-12-30",
+    "opponent_key": "georgia-southern",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1987-88-001",
+    "season": "1987-88",
+    "game_date": "1987-11-27",
+    "opponent_key": "manhattan",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1987-88-002",
+    "season": "1987-88",
+    "game_date": "1987-11-28",
+    "opponent_key": "army",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1987-88-008",
+    "season": "1987-88",
+    "game_date": "1987-12-29",
+    "opponent_key": "niagara",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1988-89-010",
+    "season": "1988-89",
+    "game_date": "1988-12-28",
+    "opponent_key": "davidson",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Hartford",
+      "state": "CT",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "DAV-S1-1988-89-010",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/davidson/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1989-90-003",
+    "season": "1989-90",
+    "game_date": "1989-12-01",
+    "opponent_key": "pepperdine",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1989-90-004",
+    "season": "1989-90",
+    "game_date": "1989-12-02",
+    "opponent_key": "harvard",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1989-90-009",
+    "season": "1989-90",
+    "game_date": "1989-12-29",
+    "opponent_key": "southern-illinois",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1989-90-010",
+    "season": "1989-90",
+    "game_date": "1989-12-30",
+    "opponent_key": "st-bonaventure",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "UTC Arena",
+      "city": "Chattanooga",
+      "state": "TN",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "STB-1989-90-008",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/st-bonaventure/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1990-91-008",
+    "season": "1990-91",
+    "game_date": "1990-12-21",
+    "opponent_key": "utah-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "San Francisco",
+      "state": "CA",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "UST-S1-01808",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/utah-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1990-91-009",
+    "season": "1990-91",
+    "game_date": "1990-12-22",
+    "opponent_key": "vermont",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1991-92-009",
+    "season": "1991-92",
+    "game_date": "1991-12-28",
+    "opponent_key": "hofstra",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1992-93-009",
+    "season": "1992-93",
+    "game_date": "1992-12-29",
+    "opponent_key": "rider",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1994-95-008",
+    "season": "1994-95",
+    "game_date": "1994-12-29",
+    "opponent_key": "the-citadel",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1994-95-009",
+    "season": "1994-95",
+    "game_date": "1994-12-30",
+    "opponent_key": "gonzaga",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "Wichita",
+      "state": "KS",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "GONZAGA-1994-95-010",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/gonzaga/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-1995-96-008",
+    "season": "1995-96",
+    "game_date": "1995-12-29",
+    "opponent_key": "austin-peay",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1995-96-009",
+    "season": "1995-96",
+    "game_date": "1995-12-30",
+    "opponent_key": "william-mary",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  },
+  {
+    "research_game_id": "AF-1996-97-008",
+    "season": "1996-97",
+    "game_date": "1996-12-28",
+    "opponent_key": "tennessee-tech",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_RESEARCHED_EXACT_BUILDING_UNRESOLVED",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": [],
+    "tier2_tranche_checkpoint": "0036",
+    "tier2_event_family": "HOLIDAY_STORES_CLASSIC_1996",
+    "unsatisfied_requirement": "exact_venue",
+    "rejected_candidate_venue": "Brick Breeden Fieldhouse",
+    "source_challenge_summary": "Source proves exact 1996 event/city, but recovered directly sourced host information does not explicitly bind the 1996 tournament edition to that building; 1995 edition/site or host arena chronology cannot substitute.",
+    "attempted_source_urls": [
+      "https://goairforcefalcons.com/documents/download/2018/10/3/History.pdf",
+      "https://msubobcats.com/honors/hall-of-fame/-mens-basketball-team-team/95",
+      "https://goairforcefalcons.com/documents/download/2018/6/20/21645__m_baskbl_2015_16_release__release_20151115aaa.pdf"
+    ]
+  },
+  {
+    "research_game_id": "AF-1998-99-008",
+    "season": "1998-99",
+    "game_date": "1998-12-29",
+    "opponent_key": "drexel",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_RESEARCHED_EXACT_BUILDING_UNRESOLVED",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": [],
+    "tier2_tranche_checkpoint": "0036",
+    "tier2_event_family": "UWGB_ONEIDA_CLASSIC_1998",
+    "unsatisfied_requirement": "exact_venue",
+    "rejected_candidate_venue": "Brown County Arena",
+    "source_challenge_summary": "Official Green Bay, Drexel and Air Force institutional schedules corroborate the Dec 29–30 1998 tournament and exact game, but available institutional edition record does not explicitly assign physical arena to the Dec 29 neutral game; aggregator venue claim not accepted as authoritative source.",
+    "attempted_source_urls": [
+      "https://greenbayphoenix.com/sports/mens-basketball/schedule/1998-99",
+      "https://drexeldragons.com/sports/mens-basketball/schedule/text/1998-99",
+      "https://goairforcefalcons.com/documents/download/2018/10/3/History.pdf"
+    ]
+  },
+  {
+    "research_game_id": "AF-1999-00-002",
+    "season": "1999-00",
+    "game_date": "1999-11-14",
+    "opponent_key": "northern-iowa",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Kiel Center",
+      "city": "St. Louis",
+      "state": "MO",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://files.core.ac.uk/download/222999644.pdf",
+      "https://goairforcefalcons.com/documents/download/2018/10/3/History.pdf"
+    ],
+    "tier2_tranche_checkpoint": "0036",
+    "tier2_event_family": "EARTH_GRAINS_CLASSIC_1999"
+  },
+  {
+    "research_game_id": "AF-2000-01-001",
+    "season": "2000-01",
+    "game_date": "2000-11-16",
+    "opponent_key": "houston",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Joel Coliseum",
+      "city": "Winston-Salem",
+      "state": "NC",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "HOU-R-01431",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/houston/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-2000-01-011",
+    "season": "2000-01",
+    "game_date": "2000-12-29",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Dee Glen Smith Spectrum",
+      "city": "Logan",
+      "state": "UT",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://utahstateaggies.com/news/2000/12/18/Basketball_Notes_For_The_Week_Of_Dec_18_2000.aspx",
+      "https://utahstateaggies.com/news/2000/12/21/Basketball_Game_Notes_Versus_Weber_State.aspx"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "GOSSNER_FOODS_CLASSIC_2000"
+  },
+  {
+    "research_game_id": "AF-2001-02-001",
+    "season": "2001-02",
+    "game_date": "2001-11-13",
+    "opponent_key": "yale",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Hearnes Center",
+      "city": "Columbia",
+      "state": "MO",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://mutigers.com/news/2001/07/05/mens-basketball-to-take-part-in-inaugural-guardians-classic",
+      "https://goairforcefalcons.com/news/2001/11/13/Men_s_Basketball_Defeats_Yale_68_62"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "GUARDIANS_CLASSIC_2001"
+  },
+  {
+    "research_game_id": "AF-2001-02-005",
+    "season": "2001-02",
+    "game_date": "2001-11-30",
+    "opponent_key": "montana-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Selland Arena",
+      "city": "Fresno",
+      "state": "CA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://gobulldogs.com/documents/download/2016/10/11/16_17_MBB_Media_Guide_Web.pdf",
+      "https://goairforcefalcons.com/news/2001/11/30/Falcons_Take_Down_Montana_State_70_65",
+      "https://gobulldogs.com/news/2002/12/2/Men_s_Basketball_Takes_on_Pair_of_WCC_Foes"
+    ],
+    "tier2_tranche_checkpoint": "0036",
+    "tier2_event_family": "MCCAFFREY_CLASSIC_2001"
+  },
+  {
+    "research_game_id": "AF-2002-03-009",
+    "season": "2002-03",
+    "game_date": "2002-12-27",
+    "opponent_key": "uab",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Don Haskins Center",
+      "city": "El Paso",
+      "state": "TX",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://uabsports.com/news/2002/12/27/UAB_69_Air_Force_59"
+    ]
+  },
+  {
+    "research_game_id": "AF-2003-04-007",
+    "season": "2003-04",
+    "game_date": "2003-12-27",
+    "opponent_key": "prairie-view-a-m",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Haas Pavilion",
+      "city": "Berkeley",
+      "state": "CA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://calbears.com/sports/2003/7/14/207734430",
+      "https://calbears.com/sports/mens-basketball/schedule/2003-04?grid=true",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2003-04"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "GOLDEN_BEAR_CLASSIC"
+  },
+  {
+    "research_game_id": "AF-2004-05-001",
+    "season": "2004-05",
+    "game_date": "2004-11-14",
+    "opponent_key": "jacksonville-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Bradley Center",
+      "city": "Milwaukee",
+      "state": "WI",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://olemisssports.com/news/2004/11/12/Ole_Miss_Basketball_Game_Notes",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2004-05"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "BCA_CLASSIC_2004"
+  },
+  {
+    "research_game_id": "AF-2004-05-002",
+    "season": "2004-05",
+    "game_date": "2004-11-15",
+    "opponent_key": "ole-miss",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Bradley Center",
+      "city": "Milwaukee",
+      "state": "WI",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://olemisssports.com/news/2004/11/12/Ole_Miss_Basketball_Game_Notes",
+      "https://olemisssports.com/news/2004/11/15/Ole_Miss_Falls_to_Air_Force_at_BCA_Classic"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "BCA_CLASSIC_2004"
+  },
+  {
+    "research_game_id": "AF-2005-06-001",
+    "season": "2005-06",
+    "game_date": "2005-11-13",
+    "opponent_key": "northern-arizona",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Bank of America Arena",
+      "city": "Seattle",
+      "state": "WA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://gohuskies.com/sports/2005/6/23/208013801",
+      "https://goairforcefalcons.com/news/2005/9/23/Falcons_to_Open_Season_Against_Northern_Arizona_Add_Exhibition_Game",
+      "https://utamavs.com/news/2005/8/11/mavs_to_open_season_at_bca_classic"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "BCA_CLASSIC_2005_SEATTLE"
+  },
+  {
+    "research_game_id": "AF-2005-06-002",
+    "season": "2005-06",
+    "game_date": "2005-11-14",
+    "opponent_key": "miami",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Hec Edmundson Pavilion",
+      "city": "Seattle",
+      "state": "WA",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "MIA-S1-2005-002",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/miami/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-2006-07-002",
+    "season": "2006-07",
+    "game_date": "2006-11-14",
+    "opponent_key": "long-beach-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Maples Pavilion",
+      "city": "Stanford",
+      "state": "CA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://longbeachstate.com/news/2006/11/7/49ers_Meet_Air_Force_In_Opener?path=mbball",
+      "https://goairforcefalcons.com/news/2006/11/13/Air_Force_Battles_Long_Beach_State_at_CBE_Classic"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "CBE_CLASSIC_2006_STANFORD"
+  },
+  {
+    "research_game_id": "AF-2006-07-005",
+    "season": "2006-07",
+    "game_date": "2006-11-20",
+    "opponent_key": "duke",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Municipal Auditorium",
+      "city": "Kansas City",
+      "state": "MO",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2006/9/19/16_Team_CBE_Classic_Field_Set",
+      "https://goduke.com/news/2006/11/20/694461"
+    ],
+    "tier2_tranche_checkpoint": "0036",
+    "tier2_event_family": "CBE_CLASSIC_2006_CHAMPIONSHIP"
+  },
+  {
+    "research_game_id": "AF-2006-07-006",
+    "season": "2006-07",
+    "game_date": "2006-11-21",
+    "opponent_key": "texas-tech",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Municipal Auditorium",
+      "city": "Kansas City",
+      "state": "MO",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "TTRAW-02115",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/texas-tech/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-2006-07-008",
+    "season": "2006-07",
+    "game_date": "2006-11-29",
+    "opponent_key": "wake-forest",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER3_MODERN_ONEOFF_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Colorado Springs World Arena",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://godeacs.com/news/2006/11/30/air_force_94_wake_forest_58",
+      "https://godeacs.com/news/2006/11/26/deacon_game_notes_wake_forest_vs_air_force",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2006-07"
+    ],
+    "tier3_tranche_checkpoint": "0037",
+    "tier3_site_review": "EXACT_GAME_INSTITUTIONAL_DOCUMENTATION",
+    "stage3a4_classification_advisory": {
+      "kind": "CROSS_SOURCE_HOME_NEUTRAL_NOTATION_DIFFERENCE_FOR_LATER_STAGE3A4_CHALLENGE",
+      "target_school_official": "Air Force schedule lists vs Wake Forest in Colorado Springs; accepted neutral research row",
+      "opponent_official": "Wake Forest final score and preview label Air Force HOME and game 'at Air Force', while venue expressly off-campus at World Arena",
+      "action": "Do not reopen accepted H/A/N within bounded Tier 3; flag competing first-party wording for Stage 3A-4, no immediate owner decision requested"
+    }
+  },
+  {
+    "research_game_id": "AF-2006-07-013",
+    "season": "2006-07",
+    "game_date": "2006-12-28",
+    "opponent_key": "george-washington",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Leavey Center",
+      "city": "Santa Clara",
+      "state": "CA",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "GW-2006-07-010",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/george-washington/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-2007-08-005",
+    "season": "2007-08",
+    "game_date": "2007-11-23",
+    "opponent_key": "mississippi-valley-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Spokane Arena",
+      "city": "Spokane",
+      "state": "WA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://mvsusports.com/sports/mens-basketball/schedule/2007-2008?grid=true",
+      "https://goairforcefalcons.com/news/2007/9/17/Air_Force_Releases_2007_08_Men_s_Basketball_Schedule"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "COUGAR_HISPANIC_COLLEGE_FUND_CHALLENGE_2007"
+  },
+  {
+    "research_game_id": "AF-2007-08-006",
+    "season": "2007-08",
+    "game_date": "2007-11-24",
+    "opponent_key": "montana",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Spokane Arena",
+      "city": "Spokane",
+      "state": "WA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://wsucougars.com/news/2007/11/24/no-9-wsu-rolls-to-fifth-straight-win",
+      "https://gogriz.com/documents/download/2022/3/11/2021_22_Montana_men_s_basketball_yearbook.pdf",
+      "https://goairforcefalcons.com/news/2007/9/17/Air_Force_Releases_2007_08_Men_s_Basketball_Schedule"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "COUGAR_HISPANIC_COLLEGE_FUND_CHALLENGE_2007"
+  },
+  {
+    "research_game_id": "AF-2008-09-011",
+    "season": "2008-09",
+    "game_date": "2008-12-27",
+    "opponent_key": "portland",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Haas Pavilion",
+      "city": "Berkeley",
+      "state": "CA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://calbears.com/sports/mens-basketball/schedule/2008-09?grid=true",
+      "https://calbears.com/sports/2008/5/19/207749107",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2008-09"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "GOLDEN_BEAR_CLASSIC"
+  },
+  {
+    "research_game_id": "AF-2008-09-012",
+    "season": "2008-09",
+    "game_date": "2008-12-28",
+    "opponent_key": "dartmouth",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Haas Pavilion",
+      "city": "Berkeley",
+      "state": "CA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://calbears.com/sports/mens-basketball/schedule/2008-09?grid=true",
+      "https://calbears.com/sports/2008/5/19/207749107",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2008-09"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "GOLDEN_BEAR_CLASSIC"
+  },
+  {
+    "research_game_id": "AF-2009-10-008",
+    "season": "2009-10",
+    "game_date": "2009-12-12",
+    "opponent_key": "washington-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Spokane Arena",
+      "city": "Spokane",
+      "state": "WA",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "WSURAW-02808",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/washington-state/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-2009-10-011",
+    "season": "2009-10",
+    "game_date": "2009-12-28",
+    "opponent_key": "niagara",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Don Haskins Center",
+      "city": "El Paso",
+      "state": "TX",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://utepminers.com/news/2009/12/28/UTEP_Cruises_to_Sun_Bowl_Invitational_Title_Game.aspx",
+      "https://goairforcefalcons.com/news/2009/12/29/Air_Force_Defeats_Niagara_77_71"
+    ]
+  },
+  {
+    "research_game_id": "AF-2010-11-011",
+    "season": "2010-11",
+    "game_date": "2010-12-28",
+    "opponent_key": "sam-houston",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Don Haskins Center",
+      "city": "El Paso",
+      "state": "TX",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2010/9/7/Falcons_Announce_2010_11_Men_s_Basketball_Schedule",
+      "https://goairforcefalcons.com/news/2010/12/27/falcons_set_to_battle_sam_houston_state_at_sun_bowl_invitational"
+    ]
+  },
+  {
+    "research_game_id": "AF-2011-12-010",
+    "season": "2011-12",
+    "game_date": "2011-12-29",
+    "opponent_key": "wagner",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER1_ACCEPTED_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Leavey Center",
+      "city": "Santa Clara",
+      "state": "CA",
+      "country": ""
+    },
+    "evidence_refs": [
+      {
+        "evidence_game_id": "WAG-S1-01001",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wagner/source-games.csv"
+      }
+    ]
+  },
+  {
+    "research_game_id": "AF-2011-12-011",
+    "season": "2011-12",
+    "game_date": "2011-12-30",
+    "opponent_key": "eastern-michigan",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Leavey Center",
+      "city": "Santa Clara",
+      "state": "CA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://emueagles.com/sports/mens-basketball/stats/2011/air-force/boxscore/3351",
+      "https://goairforcefalcons.com/news/2011/12/30/Air_Force_Tops_Eastern_Michigan_42_37"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "CABLE_CAR_CLASSIC_2011"
+  },
+  {
+    "research_game_id": "AF-2012-13-001",
+    "season": "2012-13",
+    "game_date": "2012-11-10",
+    "opponent_key": "army",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "McAlister Field House",
+      "city": "Charleston",
+      "state": "SC",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2012/11/7/falcons_open_season_vs_army_at_all_military_classic",
+      "https://citadelsports.com/news/2014/7/29/MBB_0729141258"
+    ]
+  },
+  {
+    "research_game_id": "AF-2012-13-011",
+    "season": "2012-13",
+    "game_date": "2012-12-29",
+    "opponent_key": "florida",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "BB&T Center",
+      "city": "Sunrise",
+      "state": "FL",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://d2b5htfb6s9xp9.cloudfront.net/news/2012/12/29/24558",
+      "https://goairforcefalcons.com/documents/download/2018/6/20/16746__m_baskbl_2012_13_misc_non_event__OrangeBowlRelease.pdf"
+    ],
+    "tier2_tranche_checkpoint": "0036",
+    "tier2_event_family": "ORANGE_BOWL_BASKETBALL_CLASSIC_2012"
+  },
+  {
+    "research_game_id": "AF-2013-14-001",
+    "season": "2013-14",
+    "game_date": "2013-11-08",
+    "opponent_key": "army",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Cameron Hall",
+      "city": "Lexington",
+      "state": "VA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://vmikeydets.com/sports/2013/9/20/209264586.aspx",
+      "https://goairforcefalcons.com/news/2013/11/8/Air_Force_Opens_Season_with_79_68_Win_Over_Army"
+    ]
+  },
+  {
+    "research_game_id": "AF-2014-15-002",
+    "season": "2014-15",
+    "game_date": "2014-11-15",
+    "opponent_key": "the-citadel",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Christl Arena",
+      "city": "West Point",
+      "state": "NY",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://citadelsports.com/sports/mens-basketball/stats/2014-15/air-force/boxscore/3365",
+      "https://goairforcefalcons.com/news/2014/11/15/Air_Force_downs_Citadel_to_finish_third_in_All_Military_Classic"
+    ]
+  },
+  {
+    "research_game_id": "AF-2016-17-006",
+    "season": "2016-17",
+    "game_date": "2016-11-25",
+    "opponent_key": "akron",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Savannah Civic Center",
+      "city": "Savannah",
+      "state": "GA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://gozips.com/news/2016/11/21/11_21_2016_2928",
+      "https://goairforcefalcons.com/news/2016/11/25/Air_Force_Falls_to_Akron_84_75"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "SAVANNAH_INVITATIONAL_2016"
+  },
+  {
+    "research_game_id": "AF-2016-17-007",
+    "season": "2016-17",
+    "game_date": "2016-11-26",
+    "opponent_key": "east-carolina",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Savannah Civic Center",
+      "city": "Savannah",
+      "state": "GA",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://ecupirates.com/news/2016/11/10/mens-basketball-gameday-pirates-open-2016-17-against-grambling-state",
+      "https://goairforcefalcons.com/news/2016/11/26/Air_Force_Falls_to_East_Carolina_70_63"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "SAVANNAH_INVITATIONAL_2016"
+  },
+  {
+    "research_game_id": "AF-2017-18-011",
+    "season": "2017-18",
+    "game_date": "2017-12-17",
+    "opponent_key": "army",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER3_MODERN_ONEOFF_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Madison Square Garden",
+      "city": "New York",
+      "state": "NY",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goarmywestpoint.com/sports/mens-basketball/stats/2017/air-force/boxscore/10046",
+      "https://goairforcefalcons.com/news/2017/12/17/Army_West_Point_downs_Air_Force"
+    ],
+    "tier3_tranche_checkpoint": "0037",
+    "tier3_site_review": "EXACT_GAME_INSTITUTIONAL_DOCUMENTATION"
+  },
+  {
+    "research_game_id": "AF-2018-19-003",
+    "season": "2018-19",
+    "game_date": "2018-11-16",
+    "opponent_key": "umbc",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/sports/mens-basketball/stats/2018/umbc/boxscore/11409",
+      "https://goyotes.com/news/2018/5/22/mens-basketball-selected-for-bimini-jam-in-bahamas"
+    ]
+  },
+  {
+    "research_game_id": "AF-2018-19-004",
+    "season": "2018-19",
+    "game_date": "2018-11-18",
+    "opponent_key": "south-dakota",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "evidence_refs": [
+      "https://goyotes.com/news/2018/5/22/mens-basketball-selected-for-bimini-jam-in-bahamas",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2018-19"
+    ]
+  },
+  {
+    "research_game_id": "AF-2018-19-005",
+    "season": "2018-19",
+    "game_date": "2018-11-19",
+    "opponent_key": "high-point",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "evidence_refs": [
+      "https://goyotes.com/news/2018/5/22/mens-basketball-selected-for-bimini-jam-in-bahamas",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2018-19"
+    ]
+  },
+  {
+    "research_game_id": "AF-2019-20-005",
+    "season": "2019-20",
+    "game_date": "2019-11-21",
+    "opponent_key": "loyola-marymount",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2019/11/21/mens-basketball-air-force-falls-to-loyola-marymount-at-junkanoo-jam",
+      "https://goairforcefalcons.com/news/2019/11/20/mens-basketball-air-force-travels-to-junkanoo-jam-in-bimini-bahamas"
+    ]
+  },
+  {
+    "research_game_id": "AF-2019-20-006",
+    "season": "2019-20",
+    "game_date": "2019-11-22",
+    "opponent_key": "duquesne",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2019/11/22/mens-basketball-late-rally-note-enough-as-air-force-downed-by-duquesne-at-junkanoo-jam",
+      "https://goairforcefalcons.com/news/2019/11/20/mens-basketball-air-force-travels-to-junkanoo-jam-in-bimini-bahamas"
+    ]
+  },
+  {
+    "research_game_id": "AF-2019-20-007",
+    "season": "2019-20",
+    "game_date": "2019-11-24",
+    "opponent_key": "indiana-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2019/11/20/mens-basketball-air-force-travels-to-junkanoo-jam-in-bimini-bahamas",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2019-20"
+    ]
+  },
+  {
+    "research_game_id": "AF-2020-21-001",
+    "season": "2020-21",
+    "game_date": "2020-11-28",
+    "opponent_key": "cal-state-northridge",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "T-Mobile Arena",
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2020/11/28/mens-basketball-air-force-opens-with-66-61-win-over-csun-at-mens-vegas-bubble",
+      "https://gomatadors.com/sports/mens-basketball/schedule/text/2020-21"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "MENS_VEGAS_BUBBLE_2020"
+  },
+  {
+    "research_game_id": "AF-2020-21-002",
+    "season": "2020-21",
+    "game_date": "2020-11-29",
+    "opponent_key": "seattle-u",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "T-Mobile Arena",
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/news/2020/11/29/mens-basketball-air-force-downed-by-seattle-sunday-at-mens-vegas-bubble",
+      "https://goairforcefalcons.com/news/2020/11/28/mens-basketball-air-force-opens-with-66-61-win-over-csun-at-mens-vegas-bubble"
+    ],
+    "tier2_tranche_checkpoint": "0035",
+    "tier2_event_family": "MENS_VEGAS_BUBBLE_2020"
+  },
+  {
+    "research_game_id": "AF-2021-22-001",
+    "season": "2021-22",
+    "game_date": "2021-11-11",
+    "opponent_key": "south-dakota",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER3_MODERN_ONEOFF_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Sanford Pentagon",
+      "city": "Sioux Falls",
+      "state": "SD",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/sports/mens-basketball/stats/2021-22/south-dakota/boxscore/14321",
+      "https://goyotes.com/news/2021/9/24/mens-basketball-mens-basketball-completes-schedule.aspx"
+    ],
+    "tier3_tranche_checkpoint": "0037",
+    "tier3_site_review": "EXACT_GAME_INSTITUTIONAL_DOCUMENTATION"
+  },
+  {
+    "research_game_id": "AF-2021-22-004",
+    "season": "2021-22",
+    "game_date": "2021-11-20",
+    "opponent_key": "holy-cross",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Ocean Center",
+      "city": "Daytona Beach",
+      "state": "FL",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goholycross.com/news/2021/11/20/mens-basketball-mens-basketball-falls-to-air-force-at-sunshine-slam.aspx",
+      "https://goholycross.com/sports/mens-basketball/stats/2021-22/air-force/boxscore/9479"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "SUNSHINE_SLAM_2021"
+  },
+  {
+    "research_game_id": "AF-2021-22-005",
+    "season": "2021-22",
+    "game_date": "2021-11-21",
+    "opponent_key": "bethune-cookman",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER2_MODERN_RECURRING_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Ocean Center",
+      "city": "Daytona Beach",
+      "state": "FL",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://bcuathletics.com/sports/mens-basketball/schedule/2021-22?grid=true",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2021-22"
+    ],
+    "tier2_tranche_checkpoint": "0034",
+    "tier2_event_family": "SUNSHINE_SLAM_2021"
+  },
+  {
+    "research_game_id": "AF-2023-24-011",
+    "season": "2023-24",
+    "game_date": "2023-12-16",
+    "opponent_key": "ut-arlington",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER3_MODERN_ONEOFF_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Dickies Arena",
+      "city": "Fort Worth",
+      "state": "TX",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/sports/mens-basketball/stats/2023/ut-arlington/boxscore/15707",
+      "https://utamavs.com/news/2023/12/16/mens-basketball-russell-powers-uta-to-win-over-air-force-in-season-debut"
+    ],
+    "tier3_tranche_checkpoint": "0037",
+    "tier3_site_review": "EXACT_GAME_INSTITUTIONAL_DOCUMENTATION"
+  },
+  {
+    "research_game_id": "AF-2024-25-010",
+    "season": "2024-25",
+    "game_date": "2024-12-07",
+    "opponent_key": "stony-brook",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER3_MODERN_ONEOFF_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Comerica Center",
+      "city": "Frisco",
+      "state": "TX",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/sports/mens-basketball/stats/2024/stony-brook/boxscore/19529",
+      "https://stonybrookathletics.com/news/2024/12/7/mens-basketball-luster-o-connor-combine-to-score-40-stony-brook-falls-to-air-force-69-61.aspx"
+    ],
+    "tier3_tranche_checkpoint": "0037",
+    "tier3_site_review": "EXACT_GAME_INSTITUTIONAL_DOCUMENTATION"
+  },
+  {
+    "research_game_id": "AF-2025-26-009",
+    "season": "2025-26",
+    "game_date": "2025-11-29",
+    "opponent_key": "south-dakota",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "TIER3_MODERN_ONEOFF_COMPLETE",
+    "accepted_site": {
+      "venue_name": "Summit Arena at The Monument",
+      "city": "Rapid City",
+      "state": "SD",
+      "country": "United States"
+    },
+    "evidence_refs": [
+      "https://goairforcefalcons.com/sports/mens-basketball/stats/2025/south-dakota/boxscore/21550",
+      "https://goyotes.com/sports/mens-basketball/stats/2025-26/air-force/boxscore/9188",
+      "https://www.themonument.live/events/detail/goyotes25"
+    ],
+    "tier3_tranche_checkpoint": "0037",
+    "tier3_site_review": "EXACT_GAME_INSTITUTIONAL_DOCUMENTATION",
+    "site_precision_note": "Source guide's The Monument identifies facility complex, official exact box scores locate the physical building as Summit Arena at The Monument"
+  },
+  {
+    "research_game_id": "AF-1982-83-008",
+    "season": "1982-83",
+    "game_date": "1982-12-29",
+    "opponent_key": "lafayette",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "original_stage3a2_fields": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "status": "REMAINS_UNRESOLVED_AFTER_TIER1",
+    "accepted_site": {
+      "venue_name": "",
+      "city": "",
+      "state": "",
+      "country": ""
+    },
+    "evidence_refs": []
+  }
+]
