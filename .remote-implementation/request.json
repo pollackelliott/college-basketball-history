@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "grand-canyon-stage1-0001",
+  "request_id": "grand-canyon-stage1-0002",
   "school_key": "grand-canyon",
   "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "b73ffb6448ecfdbfdf5bae216c225073c6d00697",
-  "previous_control_state_sha256": "ec51f8a96e03c31cd87329bd2dc1a15fcac077a42048aaca365ce4f1c02085ec",
+  "previous_control_state_commit": "7291eee5299782c0372f6eb9c98bf788e813dd6f",
+  "previous_control_state_sha256": "d573dc6b640087a9a2dfa30a502255eb1c4cbcd101c201eb3fb2cfb3a4e3366b",
   "expected_protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
   "research_checkpoint": {
     "sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
@@ -17,11 +17,17 @@
       "part_count": 1
     }
   },
-  "venue_reconciliation": null,
-  "conference_reconciliation": null,
+  "venue_reconciliation": {
+    "path": ".remote-implementation/requests/grand-canyon-stage1-0002/venue-reconciliation.json",
+    "sha256": "d8b522afca8413ba722994965c5bc9427eb7144e7411490601408b971cd0cd0c"
+  },
+  "conference_reconciliation": {
+    "path": ".remote-implementation/requests/grand-canyon-stage1-0002/conference-reconciliation.json",
+    "sha256": "cb3508344aafc53125f63cd6abc3badcfe1006451230f7a1a2e3a07841631fb7"
+  },
   "creation_provenance": {
-    "origin": "Grand Canyon ordinary complete-institutional Implementation lane; owner-designated final RESEARCH_FROZEN ZIP and matched final status card, 2026-11-28.",
-    "authorization": "Owner authorized Grand Canyon original ordinary Implementation and instructed continuation of the existing Stage 1 phase. Final Research Freeze SHA-256 bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479, final card confirms Stage 6 checkpoint, NON_D1 APPROVED_NO_FLAGS, pre-freeze self-challenge PASS, research acceptance PASS 0 errors 0 warnings, and no remaining owner questions. Execute one bounded READ-ONLY Stage 1 current-main reconciliation inventory and permanent Research acceptance. Do not run Phase 0, Stage 2, any Owner Gate, Research reopening, global/shared mutation, release or merge."
+    "origin": "Grand Canyon ordinary serialized Implementation Stage 1 bounded deterministic reconciliation of six authenticated grand-canyon-stage1-0001 blockers.",
+    "authorization": "Owner explicitly authorized existing Stage 1 continuation and largest safe deterministic reconciliation unit on 2026-11-28. Exact source checkpoint .remote-implementation/checkpoints/grand-canyon/grand-canyon-stage1-0001/checkpoint-manifest.json has SHA-256 18e785b305d82d1546dbabb07664b39352d4664f67e5dfc6c7e42f751f712848 and reconciliation SHA-256 076a0f264f3fc572430120cf4c9a0e0785a342325920a6776ffaaa7b39199e01. Reuse four same physical global venue identities and register two research-settled historical conference keys under guarded Phase 0 only, with seven frozen conference membership rows preserved exactly. Read-only permanent STAGE1_INVENTORY recheck. No historical change, no dedicated global maintenance PR, no Phase0/Stage2/Gate/release/merge authorization."
   },
   "authority": {
     "owner_gate_1": false,
