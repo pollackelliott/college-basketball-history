@@ -1,0 +1,35 @@
+{
+  "accepted_by_evidence_class": {
+    "EXACT_CURRENT_MAIN_PUBLISHED_RECIPROCAL_GAME": 25,
+    "TARGET_INSTITUTIONAL_GUIDE_AT_CONVENTION_CORROBORATED_BY_PUBLISHED_BASELINE": 409
+  },
+  "accepted_site_decisions": 434,
+  "current_main_reciprocal_candidate_count": 48,
+  "external_historical_web_research_used": false,
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "independent_historical_row_adjudications": 0,
+  "input_stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+  "kind": "SDSU_STAGE3A1_0054_PROJECT_SOURCE_FAMILY_EVIDENCE_PASS_V1",
+  "next_bounded_assignment": "Continue Stage 3A-1 with target-school and obvious opponent institutional evidence for exact remaining class, respecting <=25 independent-row adjudications and source fanout",
+  "parent_research_head": "48f83aab80b952c522550be6a77fd4b154699ace",
+  "postseason_stage3b_handoff": 43,
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "regular_season_games": 1043,
+  "regular_site_census": {
+    "HOME": 23,
+    "NEUTRAL": 1,
+    "OPPONENT_HOME": 410,
+    "UNKNOWN": 609
+  },
+  "remaining_unknown_regular": 609,
+  "school_key": "san-diego-state",
+  "source_or_reciprocal_conflict_count": 2,
+  "source_research_mode": "ONE_SYSTEMATIC_ACCEPTED_PROJECT_AND_TARGET_GUIDE_CONVENTION_PASS",
+  "stage": "STAGE_3A1",
+  "stage3a0_complete_checkpoint": "0053-stage3a0-local-mechanical-census",
+  "stage3a1_complete": false,
+  "stage3a2_started": false,
+  "stage3a3_started": false,
+  "status": "IN_PROGRESS",
+  "total_games": 1086
+}

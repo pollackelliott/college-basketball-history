@@ -1,0 +1,46 @@
+{
+  "files": {
+    "stage3a1-reciprocal-candidates.json": {
+      "bytes": 9722,
+      "sha256": "d232da7ed3d5166f8e0569ffd4f68a37adcaa85f7d7445927dba8960fe938f1e"
+    },
+    "stage3a1-reciprocal-conflicts.json": {
+      "bytes": 461,
+      "sha256": "90f3a5982ee97d3fe108df3e7e4ff37b404c0b2473231c6662d6ce52903d25e9"
+    },
+    "stage3a1-remaining-unknown-queue.csv": {
+      "bytes": 118055,
+      "sha256": "ebde6166986a4a0d713ce16efe89475b2aeda3eb64cfbde956a1a8bd70df2aad"
+    },
+    "stage3a1-source-family-precedent.json": {
+      "bytes": 1484,
+      "sha256": "e5af936926035b868c5d21906a01b0dc2de74b4187ceb92e98dc52193334c4b1"
+    },
+    "stage3a1-summary.json": {
+      "bytes": 1584,
+      "sha256": "8f89517c0e4744f00fbd7a40007309dd8ebd39751313b584236c19cebad10765"
+    },
+    "stage3a1-supported-site-decisions.csv": {
+      "bytes": 201364,
+      "sha256": "693f4f43bded19701ff57154ecc0332e00621f441ef21227d39edcf5736f2bcd"
+    },
+    "stage3a1-working-ledger.csv": {
+      "bytes": 1747836,
+      "sha256": "20f67bb358d4dc25dde6483e53899f337c8a7e8b816e6d4471b2c434f6cfaed4"
+    },
+    "stage4-authoring/opponents.csv": {
+      "bytes": 289478,
+      "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d"
+    },
+    "stage4-authoring/season-coverage.json": {
+      "bytes": 505,
+      "sha256": "ca3922abb628ebccc810263e9e068fb1964940e00d668dd8ee7660a3699195f2"
+    }
+  },
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "input_stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+  "kind": "SDSU_STAGE3A1_0054_PARTIAL_DURABLE_MANIFEST_V1",
+  "parent_research_head": "48f83aab80b952c522550be6a77fd4b154699ace",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "stage3a1_complete": false
+}

@@ -1,0 +1,338 @@
+[
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1924-25-0005",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "UCLARAW-00063",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1925-26-0001",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00080",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1926-27-0006",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "UCLARAW-00103",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1934-35-0004",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00251",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1934-35-0005",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00252",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/usc/source-games.csv",
+    "id": "SDSU-EXP-S1-1938-39-0002",
+    "site_type": "HOME",
+    "source_game_id": "USCRAW-00552",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/usc/source-games.csv",
+    "id": "SDSU-EXP-S1-1938-39-0003",
+    "site_type": "HOME",
+    "source_game_id": "USCRAW-00553",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1938-39-0004",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00336",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1938-39-0005",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00337",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1939-40-0001",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00360",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1939-40-0002",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00361",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/california/source-games.csv",
+    "id": "SDSU-EXP-S1-1939-40-0009",
+    "site_type": "HOME",
+    "source_game_id": "CAL-R1-00511",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1940-41-0001",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00385",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1940-41-0002",
+    "site_type": "HOME",
+    "source_game_id": "UCLARAW-00386",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/byu/source-games.csv",
+    "id": "SDSU-EXP-S1-1940-41-0005",
+    "site_type": "HOME",
+    "source_game_id": "BYURAW-00630",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/byu/source-games.csv",
+    "id": "SDSU-EXP-S1-1940-41-0006",
+    "site_type": "HOME",
+    "source_game_id": "BYURAW-00631",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/california/source-games.csv",
+    "id": "SDSU-EXP-S1-1940-41-0008",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "CAL-R1-00536",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/california/source-games.csv",
+    "id": "SDSU-EXP-S1-1941-42-0006",
+    "site_type": "HOME",
+    "source_game_id": "CAL-R1-00568",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1946-47-0004",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ARIZ-STG1-PRE-00599",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1947-48-0006",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ARIZ-STG1-00005",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1948-49-0002",
+    "site_type": "HOME",
+    "source_game_id": "ASU-STG2-PRE1950-1948-49-002",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1948-49-0005",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ARIZ-STG1-PRE-00620",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/creighton/source-games.csv",
+    "id": "SDSU-EXP-S1-1948-49-0006",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "CREIGHTON-STG1-00582",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/marquette/source-games.csv",
+    "id": "SDSU-EXP-S1-1948-49-0008",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "MARQ-STG1-00553",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1949-50-0003",
+    "site_type": "HOME",
+    "source_game_id": "ASU-STG2-PRE1950-1949-50-004",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1949-50-0004",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "UCLARAW-00603",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1950-51-0003",
+    "site_type": "HOME",
+    "source_game_id": "1950-51-G03",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/usc/source-games.csv",
+    "id": "SDSU-EXP-S1-1950-51-0006",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "USCRAW-00838",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1950-51-0007",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ARIZ-STG1-00033",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/usc/source-games.csv",
+    "id": "SDSU-EXP-S1-1951-52-0002",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "USCRAW-00862",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1952-53-0005",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ARIZ-STG1-00085",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/ucla/source-games.csv",
+    "id": "SDSU-EXP-S1-1952-53-0019",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "UCLARAW-00708",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/usc/source-games.csv",
+    "id": "SDSU-EXP-S1-1953-54-0001",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "USCRAW-00913",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1953-54-0005",
+    "site_type": "HOME",
+    "source_game_id": "ASUSTG1-000075",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/arizona-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1953-54-0009",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ASUSTG1-000080",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1955-56-0001",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ARIZ-STG1-00157",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1957-58-0011",
+    "site_type": "HOME",
+    "source_game_id": "ARIZ-STG1-00222",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/arizona-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1958-59-0008",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ASUSTG1-000206",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/arizona/source-games.csv",
+    "id": "SDSU-EXP-S1-1959-60-0006",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ARIZ-STG1-00264",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/gonzaga/source-games.csv",
+    "id": "SDSU-EXP-S1-1959-60-0008",
+    "site_type": "NEUTRAL",
+    "source_game_id": "GONZAGA-1959-60-006",
+    "source_site": "NEUTRAL"
+  },
+  {
+    "file": "schools/utah-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1962-63-0008",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "UST-S1-01038",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/iowa-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1962-63-0010",
+    "site_type": "HOME",
+    "source_game_id": "ISURAW-01004",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/iowa-state/source-games.csv",
+    "id": "SDSU-EXP-S1-1963-64-0005",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "ISURAW-01026",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/unlv/source-games.csv",
+    "id": "SDSU-EXP-S1-1965-66-0013",
+    "site_type": "HOME",
+    "source_game_id": "unlv-1965-66-013",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/unlv/source-games.csv",
+    "id": "SDSU-EXP-S1-1966-67-0018",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "unlv-1966-67-018",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/minnesota/source-games.csv",
+    "id": "SDSU-EXP-S1-1968-69-0007",
+    "site_type": "HOME",
+    "source_game_id": "MINRAW-01319",
+    "source_site": "OPPONENT_HOME"
+  },
+  {
+    "file": "schools/unlv/source-games.csv",
+    "id": "SDSU-EXP-S1-1968-69-0008",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "unlv-1968-69-008",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  },
+  {
+    "file": "schools/minnesota/source-games.csv",
+    "id": "SDSU-EXP-S1-1969-70-0008",
+    "site_type": "OPPONENT_HOME",
+    "source_game_id": "MINRAW-01343",
+    "source_site": "SOURCE_PROGRAM_HOME"
+  }
+]
