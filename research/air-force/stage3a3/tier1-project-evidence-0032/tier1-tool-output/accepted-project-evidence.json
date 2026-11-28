@@ -1,0 +1,515 @@
+[
+  {
+    "city": "Denver",
+    "downstream_complete": true,
+    "game_date": "1957-01-19",
+    "missing_required_fields": [],
+    "opponent_key": "colorado-state",
+    "provenance": [
+      {
+        "evidence_game_id": "CSU-S1-00756",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1956-57-010",
+    "state": "CO",
+    "venue_name": "Denver Auditorium"
+  },
+  {
+    "city": "Denver",
+    "downstream_complete": true,
+    "game_date": "1957-12-14",
+    "missing_required_fields": [],
+    "opponent_key": "colorado-state",
+    "provenance": [
+      {
+        "evidence_game_id": "CSU-S1-00770",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1957-58-005",
+    "state": "CO",
+    "venue_name": "Denver Auditorium"
+  },
+  {
+    "city": "Corvallis",
+    "downstream_complete": true,
+    "game_date": "1958-12-29",
+    "missing_required_fields": [],
+    "opponent_key": "wyoming",
+    "provenance": [
+      {
+        "evidence_game_id": "WYO-S1-1958-59-P155C3Y2501",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wyoming/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1958-59-007",
+    "state": "OR",
+    "venue_name": ""
+  },
+  {
+    "city": "Jacksonville",
+    "downstream_complete": true,
+    "game_date": "1963-12-26",
+    "missing_required_fields": [],
+    "opponent_key": "florida-state",
+    "provenance": [
+      {
+        "evidence_game_id": "FSU-STG1-00179",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/florida-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1963-64-006",
+    "state": "FL",
+    "venue_name": ""
+  },
+  {
+    "city": "Denver",
+    "downstream_complete": true,
+    "game_date": "1964-12-04",
+    "missing_required_fields": [],
+    "opponent_key": "colorado-state",
+    "provenance": [
+      {
+        "evidence_game_id": "CSU-S1-00938",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1964-65-002",
+    "state": "CO",
+    "venue_name": ""
+  },
+  {
+    "city": "Denver",
+    "downstream_complete": true,
+    "game_date": "1964-12-05",
+    "missing_required_fields": [],
+    "opponent_key": "colorado",
+    "provenance": [
+      {
+        "evidence_game_id": "COL-S1-000927",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/colorado/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1964-65-003",
+    "state": "CO",
+    "venue_name": "Denver Auditorium"
+  },
+  {
+    "city": "Denver",
+    "downstream_complete": true,
+    "game_date": "1965-12-03",
+    "missing_required_fields": [],
+    "opponent_key": "wyoming",
+    "provenance": [
+      {
+        "evidence_game_id": "WYO-S1-1965-66-P156C2Y4730",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wyoming/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1965-66-002",
+    "state": "CO",
+    "venue_name": ""
+  },
+  {
+    "city": "Lexington",
+    "downstream_complete": true,
+    "game_date": "1965-12-18",
+    "missing_required_fields": [],
+    "opponent_key": "california",
+    "provenance": [
+      {
+        "evidence_game_id": "CAL-R1-01196",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/california/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1965-66-006",
+    "state": "KY",
+    "venue_name": "Memorial Coliseum"
+  },
+  {
+    "city": "Portland",
+    "downstream_complete": true,
+    "game_date": "1965-12-27",
+    "missing_required_fields": [],
+    "opponent_key": "oregon-state",
+    "provenance": [
+      {
+        "evidence_game_id": "OSU-S1-001522",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/oregon-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1965-66-008",
+    "state": "OR",
+    "venue_name": "Veterans Memorial Coliseum"
+  },
+  {
+    "city": "Raleigh",
+    "downstream_complete": true,
+    "game_date": "1966-12-29",
+    "missing_required_fields": [],
+    "opponent_key": "south-carolina",
+    "provenance": [
+      {
+        "evidence_game_id": "SCARAW-01106",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/south-carolina/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1966-67-006",
+    "state": "NC",
+    "venue_name": ""
+  },
+  {
+    "city": "Raleigh",
+    "downstream_complete": true,
+    "game_date": "1966-12-30",
+    "missing_required_fields": [],
+    "opponent_key": "pittsburgh",
+    "provenance": [
+      {
+        "evidence_game_id": "PITT-STG1-01187",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/pittsburgh/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1966-67-007",
+    "state": "NC",
+    "venue_name": ""
+  },
+  {
+    "city": "Rochester",
+    "downstream_complete": true,
+    "game_date": "1970-12-30",
+    "missing_required_fields": [],
+    "opponent_key": "california",
+    "provenance": [
+      {
+        "evidence_game_id": "CAL-R1-01325",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/california/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1970-71-007",
+    "state": "NY",
+    "venue_name": "Rochester War Memorial"
+  },
+  {
+    "city": "Evansville",
+    "downstream_complete": true,
+    "game_date": "1972-12-29",
+    "missing_required_fields": [],
+    "opponent_key": "seton-hall",
+    "provenance": [
+      {
+        "evidence_game_id": "SHU-S1-01169",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/seton-hall/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1972-73-006",
+    "state": "IN",
+    "venue_name": ""
+  },
+  {
+    "city": "Omaha",
+    "downstream_complete": true,
+    "game_date": "1973-12-08",
+    "missing_required_fields": [],
+    "opponent_key": "san-diego-state",
+    "provenance": [
+      {
+        "evidence_game_id": "SDSU-S1-000082",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/san-diego-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1973-74-004",
+    "state": "NE",
+    "venue_name": ""
+  },
+  {
+    "city": "Normal",
+    "downstream_complete": true,
+    "game_date": "1976-12-30",
+    "missing_required_fields": [],
+    "opponent_key": "loyola-chicago",
+    "provenance": [
+      {
+        "evidence_game_id": "LOY-STG1-01230",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/loyola-chicago/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1976-77-010",
+    "state": "IL",
+    "venue_name": ""
+  },
+  {
+    "city": "Minneapolis",
+    "downstream_complete": true,
+    "game_date": "1977-12-30",
+    "missing_required_fields": [],
+    "opponent_key": "minnesota",
+    "provenance": [
+      {
+        "evidence_game_id": "MINRAW-01545",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/minnesota/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1977-78-008",
+    "state": "MN",
+    "venue_name": "Williams Arena"
+  },
+  {
+    "city": "Clemson",
+    "downstream_complete": true,
+    "game_date": "1983-11-25",
+    "missing_required_fields": [],
+    "opponent_key": "marquette",
+    "provenance": [
+      {
+        "evidence_game_id": "MARQ-STG1-01502",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/marquette/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1983-84-001",
+    "state": "SC",
+    "venue_name": ""
+  },
+  {
+    "city": "Clemson",
+    "downstream_complete": true,
+    "game_date": "1983-11-26",
+    "missing_required_fields": [],
+    "opponent_key": "wagner",
+    "provenance": [
+      {
+        "evidence_game_id": "WAG-S1-00188",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wagner/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1983-84-002",
+    "state": "SC",
+    "venue_name": ""
+  },
+  {
+    "city": "Dayton",
+    "downstream_complete": true,
+    "game_date": "1984-12-28",
+    "missing_required_fields": [],
+    "opponent_key": "st-bonaventure",
+    "provenance": [
+      {
+        "evidence_game_id": "STB-1984-85-007",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/st-bonaventure/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1984-85-008",
+    "state": "OH",
+    "venue_name": "University of Dayton Arena"
+  },
+  {
+    "city": "Hartford",
+    "downstream_complete": true,
+    "game_date": "1988-12-28",
+    "missing_required_fields": [],
+    "opponent_key": "davidson",
+    "provenance": [
+      {
+        "evidence_game_id": "DAV-S1-1988-89-010",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/davidson/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1988-89-010",
+    "state": "CT",
+    "venue_name": ""
+  },
+  {
+    "city": "Chattanooga",
+    "downstream_complete": true,
+    "game_date": "1989-12-30",
+    "missing_required_fields": [],
+    "opponent_key": "st-bonaventure",
+    "provenance": [
+      {
+        "evidence_game_id": "STB-1989-90-008",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/st-bonaventure/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1989-90-010",
+    "state": "TN",
+    "venue_name": "UTC Arena"
+  },
+  {
+    "city": "San Francisco",
+    "downstream_complete": true,
+    "game_date": "1990-12-21",
+    "missing_required_fields": [],
+    "opponent_key": "utah-state",
+    "provenance": [
+      {
+        "evidence_game_id": "UST-S1-01808",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/utah-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1990-91-008",
+    "state": "CA",
+    "venue_name": ""
+  },
+  {
+    "city": "Wichita",
+    "downstream_complete": true,
+    "game_date": "1994-12-30",
+    "missing_required_fields": [],
+    "opponent_key": "gonzaga",
+    "provenance": [
+      {
+        "evidence_game_id": "GONZAGA-1994-95-010",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/gonzaga/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-1994-95-009",
+    "state": "KS",
+    "venue_name": ""
+  },
+  {
+    "city": "Winston-Salem",
+    "downstream_complete": true,
+    "game_date": "2000-11-16",
+    "missing_required_fields": [],
+    "opponent_key": "houston",
+    "provenance": [
+      {
+        "evidence_game_id": "HOU-R-01431",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/houston/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-2000-01-001",
+    "state": "NC",
+    "venue_name": "Joel Coliseum"
+  },
+  {
+    "city": "Seattle",
+    "downstream_complete": true,
+    "game_date": "2005-11-14",
+    "missing_required_fields": [],
+    "opponent_key": "miami",
+    "provenance": [
+      {
+        "evidence_game_id": "MIA-S1-2005-002",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/miami/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-2005-06-002",
+    "state": "WA",
+    "venue_name": "Hec Edmundson Pavilion"
+  },
+  {
+    "city": "Kansas City",
+    "downstream_complete": true,
+    "game_date": "2006-11-21",
+    "missing_required_fields": [],
+    "opponent_key": "texas-tech",
+    "provenance": [
+      {
+        "evidence_game_id": "TTRAW-02115",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/texas-tech/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-2006-07-006",
+    "state": "MO",
+    "venue_name": "Municipal Auditorium"
+  },
+  {
+    "city": "Santa Clara",
+    "downstream_complete": true,
+    "game_date": "2006-12-28",
+    "missing_required_fields": [],
+    "opponent_key": "george-washington",
+    "provenance": [
+      {
+        "evidence_game_id": "GW-2006-07-010",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/george-washington/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-2006-07-013",
+    "state": "CA",
+    "venue_name": "Leavey Center"
+  },
+  {
+    "city": "Spokane",
+    "downstream_complete": true,
+    "game_date": "2009-12-12",
+    "missing_required_fields": [],
+    "opponent_key": "washington-state",
+    "provenance": [
+      {
+        "evidence_game_id": "WSURAW-02808",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/washington-state/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-2009-10-008",
+    "state": "WA",
+    "venue_name": "Spokane Arena"
+  },
+  {
+    "city": "Santa Clara",
+    "downstream_complete": true,
+    "game_date": "2011-12-29",
+    "missing_required_fields": [],
+    "opponent_key": "wagner",
+    "provenance": [
+      {
+        "evidence_game_id": "WAG-S1-01001",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/wagner/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-2011-12-010",
+    "state": "CA",
+    "venue_name": "Leavey Center"
+  },
+  {
+    "city": "Bimini",
+    "downstream_complete": false,
+    "game_date": "2019-11-22",
+    "missing_required_fields": [
+      "state",
+      "venue_name"
+    ],
+    "opponent_key": "duquesne",
+    "provenance": [
+      {
+        "evidence_game_id": "DUQ-S1-2019-20-005",
+        "kind": "published_reciprocal",
+        "path": "/home/runner/work/_temp/air-force-snapshot/schools/duquesne/source-games.csv"
+      }
+    ],
+    "research_game_id": "AF-2019-20-006",
+    "state": "",
+    "venue_name": ""
+  }
+]

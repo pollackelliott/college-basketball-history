@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A3_TIER1_PORTABLE_PREFLIGHT_CHECKPOINT_GIT_BLOB_MANIFEST_V1",
+  "checkpoint": "tier1-execution-preflight-0031",
+  "status": "TIER1_TOOL_NOT_RUN_INPUT_TRANSPORT_BLOCKED",
+  "school_key": "air-force",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "parent_research_commit_sha": "dd0cc9eb15b69aa4a9fd8fb3995d76a0eda01032",
+  "parent_stage3a2_checkpoint": "research/air-force/stage3a2/home-completion-0030/",
+  "neutral_rows": 116,
+  "tool_status_generated": false,
+  "accepted_project_evidence_scanned": false,
+  "files": [
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-open-early-home-queue.json",
+      "git_blob_sha": "d4220c2c3d16265b54985ee249266c861f31d7c8",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/source-register.json",
+      "git_blob_sha": "fbe14326cca6c95aa3e455a563f6084d994ec027",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage4-authoring/venues.csv",
+      "git_blob_sha": "9b709da7f83d7897139ed6d3f445065f8a06004d",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage4-authoring/opponents.csv",
+      "git_blob_sha": "8eb9d65d52485e8714c8a2afc99b8feb59795739",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage4-authoring/institutional-scope.json",
+      "git_blob_sha": "3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-home-original-queue.json",
+      "git_blob_sha": "ef3227cc0d6330533d67bf65a982e0aedf12778a",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/parent-structured-stage3a1-ledger.csv",
+      "git_blob_sha": "4e07deea8c9381864a660518ebb6f84f049811e1",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a1-han-adjudications.csv",
+      "git_blob_sha": "a8c6f5a5322301f984f95885a96f56b92a3fb2ad",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a0-opponent-home-queue.json",
+      "git_blob_sha": "c84d4ee9727fa6238feac33dd943755bdd9b3e03",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a3-neutral-queue.json",
+      "git_blob_sha": "6dec993a3b2f7f563db2bb5973e51b6debcd5d50",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a3-modern-neutral-queue.json",
+      "git_blob_sha": "7b49cea175a53d73a3317971659edc41e1833cbf",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a3-historical-neutral-queue.json",
+      "git_blob_sha": "6221fd6d5c2cc535361c93a01bac1f59cdf5c7fd",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3b-postseason-handoff.json",
+      "git_blob_sha": "33965bb8ce16905a3d53d14e8e30f4dc450aa517",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-early-home-evidence.csv",
+      "git_blob_sha": "c708228ad70eb9e4f56f4934b9931df47a2a1497",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/early-home-site-audit.json",
+      "git_blob_sha": "074380e13852494f5e01e0099fb6bb94d827d442",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-early-home-geography-evidence.csv",
+      "git_blob_sha": "6232e4f1259c52204d2dfe620fc978adc8f01333",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/parent-stage3a2-home-building-open-queue.json",
+      "git_blob_sha": "7cfbd3345754d823a4cc8728df29c5b23ebf24de",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-geography-reconciliation.json",
+      "git_blob_sha": "20187b210a32dc057de8f01cf70ef8645d76966e",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/structured-stage3a2-ledger.csv",
+      "git_blob_sha": "e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-home-assignments.csv",
+      "git_blob_sha": "fca6c037cb5d38d34a693aca6a426cb9cac96cc8",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-researched-home-venue-exceptions.csv",
+      "git_blob_sha": "695fb46e0598a4110f567b000100e88e6ec9be30",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-home-terminal-exception-audit.json",
+      "git_blob_sha": "4bfde00da02ef5c38018ca9b5467e62918fa5dfc",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/stage3a2-status.json",
+      "git_blob_sha": "8ec35444b6422b9cc699f8be551acb14f36c50f5",
+      "carried_byte_exact": true
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/tier1-execution-preflight.json",
+      "git_blob_sha": "ef1b52dbd00f189d7e69ca850055b3e73fdf86fe",
+      "carried_byte_exact": false
+    },
+    {
+      "path": "research/air-force/stage3a3/tier1-execution-preflight-0031/README.md",
+      "git_blob_sha": "eff2369790053efc39daab2b3f393352d784f14b",
+      "carried_byte_exact": false
+    }
+  ]
+}

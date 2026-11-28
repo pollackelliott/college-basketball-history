@@ -1,0 +1,214 @@
+{
+  "files": [
+    {
+      "git_blob_sha": "64c2f547b200e97b6b7fb42ff5fbe41d7fa65210",
+      "path": "README.md",
+      "sha256": "db781649804b066d6a0b90fbda3dc24d67323701a0ea54f75c6386621b8b27a5",
+      "size_bytes": 998
+    },
+    {
+      "git_blob_sha": "ceb36ed59e264ceb57100eecbb12c22498586519",
+      "path": "execution-provenance.json",
+      "sha256": "1b6762033df8510acd87eacf3cbbe09b33a0eea7635dc4455b75151a3675e78f",
+      "size_bytes": 2111
+    },
+    {
+      "git_blob_sha": "eff2369790053efc39daab2b3f393352d784f14b",
+      "path": "parent-0031/README.md",
+      "sha256": "03f6ab45e06f70c344b77c7eba28d9b813fac48c9f929d1646ecf05529c6815a",
+      "size_bytes": 2230
+    },
+    {
+      "git_blob_sha": "074380e13852494f5e01e0099fb6bb94d827d442",
+      "path": "parent-0031/early-home-site-audit.json",
+      "sha256": "c44515da246a0d0ccce903044499a9e9bd24bf4a96f5887e884cbee45137801b",
+      "size_bytes": 7201
+    },
+    {
+      "git_blob_sha": "4cadbd7708a032ec73a901f1fbca28af41b8500f",
+      "path": "parent-0031/manifest.json",
+      "sha256": "7c5030282aeeae0125fa0a36099a77c6a487567053ff7ea6d89426e0a9064232",
+      "size_bytes": 6200
+    },
+    {
+      "git_blob_sha": "7cfbd3345754d823a4cc8728df29c5b23ebf24de",
+      "path": "parent-0031/parent-stage3a2-home-building-open-queue.json",
+      "sha256": "0d0a45a9c3641893596accf6dc7c3f281a776869fc81e64307a7ffdc2b0e0ff0",
+      "size_bytes": 13130
+    },
+    {
+      "git_blob_sha": "4e07deea8c9381864a660518ebb6f84f049811e1",
+      "path": "parent-0031/parent-structured-stage3a1-ledger.csv",
+      "sha256": "52e669e710d8901e6a755915ab19b4b07e011ceaaa9608071cd15b8e0f13ef98",
+      "size_bytes": 1516998
+    },
+    {
+      "git_blob_sha": "fbe14326cca6c95aa3e455a563f6084d994ec027",
+      "path": "parent-0031/source-register.json",
+      "sha256": "affd688370f3f0c5e04059054768841ec5de9aa459f3c5d06990355181b8d445",
+      "size_bytes": 2726
+    },
+    {
+      "git_blob_sha": "c84d4ee9727fa6238feac33dd943755bdd9b3e03",
+      "path": "parent-0031/stage3a0-opponent-home-queue.json",
+      "sha256": "b0f7ea7b9c4dfdc188125ff87d96f69dd2e6b394121486e4ab758daad5ac936e",
+      "size_bytes": 1260079
+    },
+    {
+      "git_blob_sha": "a8c6f5a5322301f984f95885a96f56b92a3fb2ad",
+      "path": "parent-0031/stage3a1-han-adjudications.csv",
+      "sha256": "530ebb4bf899b5dea937f5ae8bfd5cc4ecb9f5b98e955b31d86bf59cb97e9aac",
+      "size_bytes": 12087
+    },
+    {
+      "git_blob_sha": "c708228ad70eb9e4f56f4934b9931df47a2a1497",
+      "path": "parent-0031/stage3a2-early-home-evidence.csv",
+      "sha256": "ba2ff448e60b93e708a2b3cb477b3c674825199523845d2afa6e6833a849b1df",
+      "size_bytes": 9917
+    },
+    {
+      "git_blob_sha": "6232e4f1259c52204d2dfe620fc978adc8f01333",
+      "path": "parent-0031/stage3a2-early-home-geography-evidence.csv",
+      "sha256": "0af81e5048e80c83ea3bd6404af092815a070febf01f81a41e020992ad57be03",
+      "size_bytes": 18618
+    },
+    {
+      "git_blob_sha": "20187b210a32dc057de8f01cf70ef8645d76966e",
+      "path": "parent-0031/stage3a2-geography-reconciliation.json",
+      "sha256": "ae724d23febc1a23afc466542ead759d7f8112b6a4742c40f9dd2589fbf67d19",
+      "size_bytes": 3735
+    },
+    {
+      "git_blob_sha": "fca6c037cb5d38d34a693aca6a426cb9cac96cc8",
+      "path": "parent-0031/stage3a2-home-assignments.csv",
+      "sha256": "5c677dc72303ef73e041ca1af4bb9a50d7be9ba3ee5705c3d3aa316857455599",
+      "size_bytes": 514140
+    },
+    {
+      "git_blob_sha": "ef3227cc0d6330533d67bf65a982e0aedf12778a",
+      "path": "parent-0031/stage3a2-home-original-queue.json",
+      "sha256": "dad81d97d34c71b5b9731ded6d947e53369fd21766c35c2b9ace07e6d6f21dd7",
+      "size_bytes": 1576294
+    },
+    {
+      "git_blob_sha": "4bfde00da02ef5c38018ca9b5467e62918fa5dfc",
+      "path": "parent-0031/stage3a2-home-terminal-exception-audit.json",
+      "sha256": "42a784357890a3e1b941f6e24fb041f70e6c35c96e34e6a2f9532b18e72d5722",
+      "size_bytes": 26368
+    },
+    {
+      "git_blob_sha": "d4220c2c3d16265b54985ee249266c861f31d7c8",
+      "path": "parent-0031/stage3a2-open-early-home-queue.json",
+      "sha256": "261fdbfca0209e5d0bb355f3515674ed5da9871dbb72e6fc1e7601c424d05472",
+      "size_bytes": 7556
+    },
+    {
+      "git_blob_sha": "695fb46e0598a4110f567b000100e88e6ec9be30",
+      "path": "parent-0031/stage3a2-researched-home-venue-exceptions.csv",
+      "sha256": "4374a00f2567e1fac89d05d1cbd109ea1d21cfa7a1d49daf9e0e662286f4ebaf",
+      "size_bytes": 16511
+    },
+    {
+      "git_blob_sha": "8ec35444b6422b9cc699f8be551acb14f36c50f5",
+      "path": "parent-0031/stage3a2-status.json",
+      "sha256": "2967d77f81275b5d697edec62b4f7f2219764fe6823ebab682ab99751802391b",
+      "size_bytes": 1512
+    },
+    {
+      "git_blob_sha": "6221fd6d5c2cc535361c93a01bac1f59cdf5c7fd",
+      "path": "parent-0031/stage3a3-historical-neutral-queue.json",
+      "sha256": "bbc02af3baa78ae925c68b6021f17a18b95bae59ef04cf687e163785022dafeb",
+      "size_bytes": 110805
+    },
+    {
+      "git_blob_sha": "7b49cea175a53d73a3317971659edc41e1833cbf",
+      "path": "parent-0031/stage3a3-modern-neutral-queue.json",
+      "sha256": "126c7b2c269771edb993c113514994f79ad23eeab677d79ca288c3217d7ac5dc",
+      "size_bytes": 79670
+    },
+    {
+      "git_blob_sha": "6dec993a3b2f7f563db2bb5973e51b6debcd5d50",
+      "path": "parent-0031/stage3a3-neutral-queue.json",
+      "sha256": "2d5af55bb498837dc6fb1046efb95be8263ec37bd391fcc9d27a989b6b4b6cb1",
+      "size_bytes": 190472
+    },
+    {
+      "git_blob_sha": "33965bb8ce16905a3d53d14e8e30f4dc450aa517",
+      "path": "parent-0031/stage3b-postseason-handoff.json",
+      "sha256": "12479277261b7b214640665eba1eb04f373f6a57142c00b610de15ab0a6b59e5",
+      "size_bytes": 98016
+    },
+    {
+      "git_blob_sha": "3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff",
+      "path": "parent-0031/stage4-authoring/institutional-scope.json",
+      "sha256": "415057e65eaa502a9de35b696a35911ad1629f654c1801d051e3dc52facad9e9",
+      "size_bytes": 616
+    },
+    {
+      "git_blob_sha": "8eb9d65d52485e8714c8a2afc99b8feb59795739",
+      "path": "parent-0031/stage4-authoring/opponents.csv",
+      "sha256": "9291d8880d8fdcb0cdac7cfade612fab9a46559bde9d31761047030b4900512f",
+      "size_bytes": 178752
+    },
+    {
+      "git_blob_sha": "9b709da7f83d7897139ed6d3f445065f8a06004d",
+      "path": "parent-0031/stage4-authoring/venues.csv",
+      "sha256": "918691eb9eefc35a7441a2097847d836419bf4257bd2c610fe8649b47a8e97c4",
+      "size_bytes": 3022
+    },
+    {
+      "git_blob_sha": "e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e",
+      "path": "parent-0031/structured-stage3a2-ledger.csv",
+      "sha256": "5b7b0b7b4c7c7a5f282490f14e3255742bf91d07bb2329080a1ac03b48431f32",
+      "size_bytes": 1981969
+    },
+    {
+      "git_blob_sha": "ef1b52dbd00f189d7e69ca850055b3e73fdf86fe",
+      "path": "parent-0031/tier1-execution-preflight.json",
+      "sha256": "177648fb2caa4c0ab7c1283ddaf9cde9bfcab49bc753679cbc04256ffaa04be2",
+      "size_bytes": 3171
+    },
+    {
+      "git_blob_sha": "973eed3c967f8f1eb6f846f07c446a159b856d80",
+      "path": "tier1-tool-output/accepted-project-evidence.json",
+      "sha256": "c398438b6970e54c642b7f195eea20c1529d8b1196eda1333823bd965b3b7f6e",
+      "size_bytes": 14574
+    },
+    {
+      "git_blob_sha": "b5e445af924d57395b8de75cf0f2866af122806e",
+      "path": "tier1-tool-output/manifest.json",
+      "sha256": "49d2ed80c02bfef2f3f1ec43b58e8c0e13af38fe279d2d9bdada79261a910d97",
+      "size_bytes": 965
+    },
+    {
+      "git_blob_sha": "4e3315003292c4ef4a9ee456007d910b742e7af3",
+      "path": "tier1-tool-output/remaining-neutral-queue.json",
+      "sha256": "fc7d74221930705dd14cd6460558143ba3598cc4475cd5601b1c3dd500dc85cd",
+      "size_bytes": 168942
+    },
+    {
+      "git_blob_sha": "d6bacee542900dbebe35b0b23b866d3e5ecf1ac0",
+      "path": "tier1-tool-output/stage3a3-tier1-status.json",
+      "sha256": "c0d9d88201b0bb4f95a2e7611d241f77b3e0f8585b3eb8eba90b7502d2372d26",
+      "size_bytes": 600
+    },
+    {
+      "git_blob_sha": "fe51488c7066f6687ef680d6bfaa4f7768ef205c",
+      "path": "tier1-tool-output/tier1-contradictions.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "size_bytes": 3
+    },
+    {
+      "git_blob_sha": "6a96d1299e977254078cdbcd4ac3b6e0c118aa64",
+      "path": "tier1-tool-output/tier1-unresolved.json",
+      "sha256": "692c07375934eae53ddfaa2830f87a899b694974c98d6ca3dfda20795b7f6244",
+      "size_bytes": 14540
+    }
+  ],
+  "kind": "AIR_FORCE_STAGE3A3_TIER1_CHECKPOINT_0032_MANIFEST_V1",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_parent_commit_sha": "4731f18332a67058801c9f9d0f449df862d67833",
+  "schema_version": 1,
+  "school_key": "air-force",
+  "status": "TIER1_COMPLETE"
+}

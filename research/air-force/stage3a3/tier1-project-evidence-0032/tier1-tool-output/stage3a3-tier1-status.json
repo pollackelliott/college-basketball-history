@@ -1,0 +1,18 @@
+{
+  "accepted_complete_count": 29,
+  "accepted_count": 30,
+  "accepted_partial_count": 1,
+  "contradiction_count": 0,
+  "defects": [],
+  "external_research_used": false,
+  "input_ledger_sha256": "5b7b0b7b4c7c7a5f282490f14e3255742bf91d07bb2329080a1ac03b48431f32",
+  "neutral_rows": 116,
+  "next_bounded_assignment": "Stage 3A-3 \u2014 modern recurring event/site families",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "remaining_historical": 45,
+  "remaining_modern": 42,
+  "schema_version": 1,
+  "school_key": "air-force",
+  "status": "COMPLETE",
+  "unresolved_count": 86
+}

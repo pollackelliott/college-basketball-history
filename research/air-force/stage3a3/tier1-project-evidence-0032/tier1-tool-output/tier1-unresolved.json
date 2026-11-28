@@ -1,0 +1,518 @@
+[
+  {
+    "game_date": "1957-01-26",
+    "opponent_key": "northern-colorado",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1956-57-011"
+  },
+  {
+    "game_date": "1957-02-02",
+    "opponent_key": "omaha",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1956-57-013"
+  },
+  {
+    "game_date": "1957-03-02",
+    "opponent_key": "regis-colorado",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1956-57-020"
+  },
+  {
+    "game_date": "1958-01-11",
+    "opponent_key": "loyola-chicago",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1957-58-010"
+  },
+  {
+    "game_date": "1958-01-18",
+    "opponent_key": "washington-st-louis",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1957-58-012"
+  },
+  {
+    "game_date": "1959-01-03",
+    "opponent_key": "valparaiso",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1958-59-008"
+  },
+  {
+    "game_date": "1960-01-07",
+    "opponent_key": "omaha",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1959-60-012"
+  },
+  {
+    "game_date": "1960-02-10",
+    "opponent_key": "colorado-school-of-mines",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1959-60-022"
+  },
+  {
+    "game_date": "1962-01-24",
+    "opponent_key": "denver",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1961-62-010"
+  },
+  {
+    "game_date": "1963-12-27",
+    "opponent_key": "florida",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1963-64-007"
+  },
+  {
+    "game_date": "1965-12-04",
+    "opponent_key": "denver",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1965-66-003"
+  },
+  {
+    "game_date": "1965-12-28",
+    "opponent_key": "michigan",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1965-66-009"
+  },
+  {
+    "game_date": "1965-12-29",
+    "opponent_key": "oregon",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1965-66-010"
+  },
+  {
+    "game_date": "1967-12-09",
+    "opponent_key": "massachusetts",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1967-68-004"
+  },
+  {
+    "game_date": "1968-12-26",
+    "opponent_key": "virginia",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1968-69-006"
+  },
+  {
+    "game_date": "1968-12-27",
+    "opponent_key": "cornell",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1968-69-007"
+  },
+  {
+    "game_date": "1968-12-28",
+    "opponent_key": "william-mary",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1968-69-008"
+  },
+  {
+    "game_date": "1971-12-29",
+    "opponent_key": "xavier",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1971-72-007"
+  },
+  {
+    "game_date": "1972-12-09",
+    "opponent_key": "nebraska",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1972-73-004"
+  },
+  {
+    "game_date": "1972-12-30",
+    "opponent_key": "boston-university",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1972-73-007"
+  },
+  {
+    "game_date": "1977-12-31",
+    "opponent_key": "tulane",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1977-78-009"
+  },
+  {
+    "game_date": "1978-12-29",
+    "opponent_key": "texas-a-m",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1978-79-007"
+  },
+  {
+    "game_date": "1978-12-30",
+    "opponent_key": "cornell",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1978-79-008"
+  },
+  {
+    "game_date": "1979-12-29",
+    "opponent_key": "american-university",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1979-80-008"
+  },
+  {
+    "game_date": "1980-12-29",
+    "opponent_key": "auburn",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1980-81-007"
+  },
+  {
+    "game_date": "1981-12-28",
+    "opponent_key": "nebraska",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1981-82-007"
+  },
+  {
+    "game_date": "1981-12-29",
+    "opponent_key": "cornell",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1981-82-008"
+  },
+  {
+    "game_date": "1983-12-28",
+    "opponent_key": "texas-a-m",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1983-84-008"
+  },
+  {
+    "game_date": "1984-12-29",
+    "opponent_key": "brown",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1984-85-009"
+  },
+  {
+    "game_date": "1985-12-21",
+    "opponent_key": "navy",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1985-86-008"
+  },
+  {
+    "game_date": "1985-12-22",
+    "opponent_key": "army",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1985-86-009"
+  },
+  {
+    "game_date": "1986-12-30",
+    "opponent_key": "georgia-southern",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1986-87-009"
+  },
+  {
+    "game_date": "1987-11-27",
+    "opponent_key": "manhattan",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1987-88-001"
+  },
+  {
+    "game_date": "1987-11-28",
+    "opponent_key": "army",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1987-88-002"
+  },
+  {
+    "game_date": "1987-12-29",
+    "opponent_key": "niagara",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1987-88-008"
+  },
+  {
+    "game_date": "1989-12-01",
+    "opponent_key": "pepperdine",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1989-90-003"
+  },
+  {
+    "game_date": "1989-12-02",
+    "opponent_key": "harvard",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1989-90-004"
+  },
+  {
+    "game_date": "1989-12-29",
+    "opponent_key": "southern-illinois",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1989-90-009"
+  },
+  {
+    "game_date": "1990-12-22",
+    "opponent_key": "vermont",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1990-91-009"
+  },
+  {
+    "game_date": "1991-12-28",
+    "opponent_key": "hofstra",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1991-92-009"
+  },
+  {
+    "game_date": "1992-12-29",
+    "opponent_key": "rider",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1992-93-009"
+  },
+  {
+    "game_date": "1994-12-29",
+    "opponent_key": "the-citadel",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1994-95-008"
+  },
+  {
+    "game_date": "1995-12-29",
+    "opponent_key": "austin-peay",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1995-96-008"
+  },
+  {
+    "game_date": "1995-12-30",
+    "opponent_key": "william-mary",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1995-96-009"
+  },
+  {
+    "game_date": "1996-12-28",
+    "opponent_key": "tennessee-tech",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1996-97-008"
+  },
+  {
+    "game_date": "1998-12-29",
+    "opponent_key": "drexel",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1998-99-008"
+  },
+  {
+    "game_date": "1999-11-14",
+    "opponent_key": "northern-iowa",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1999-00-002"
+  },
+  {
+    "game_date": "2000-12-29",
+    "opponent_key": "cornell",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2000-01-011"
+  },
+  {
+    "game_date": "2001-11-13",
+    "opponent_key": "yale",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2001-02-001"
+  },
+  {
+    "game_date": "2001-11-30",
+    "opponent_key": "montana-state",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2001-02-005"
+  },
+  {
+    "game_date": "2002-12-27",
+    "opponent_key": "uab",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2002-03-009"
+  },
+  {
+    "game_date": "2003-12-27",
+    "opponent_key": "prairie-view-a-m",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2003-04-007"
+  },
+  {
+    "game_date": "2004-11-14",
+    "opponent_key": "jacksonville-state",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2004-05-001"
+  },
+  {
+    "game_date": "2004-11-15",
+    "opponent_key": "ole-miss",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2004-05-002"
+  },
+  {
+    "game_date": "2005-11-13",
+    "opponent_key": "northern-arizona",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2005-06-001"
+  },
+  {
+    "game_date": "2006-11-14",
+    "opponent_key": "long-beach-state",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2006-07-002"
+  },
+  {
+    "game_date": "2006-11-20",
+    "opponent_key": "duke",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2006-07-005"
+  },
+  {
+    "game_date": "2006-11-29",
+    "opponent_key": "wake-forest",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2006-07-008"
+  },
+  {
+    "game_date": "2007-11-23",
+    "opponent_key": "mississippi-valley-state",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2007-08-005"
+  },
+  {
+    "game_date": "2007-11-24",
+    "opponent_key": "montana",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2007-08-006"
+  },
+  {
+    "game_date": "2008-12-27",
+    "opponent_key": "portland",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2008-09-011"
+  },
+  {
+    "game_date": "2008-12-28",
+    "opponent_key": "dartmouth",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2008-09-012"
+  },
+  {
+    "game_date": "2009-12-28",
+    "opponent_key": "niagara",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2009-10-011"
+  },
+  {
+    "game_date": "2010-12-28",
+    "opponent_key": "sam-houston",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2010-11-011"
+  },
+  {
+    "game_date": "2011-12-30",
+    "opponent_key": "eastern-michigan",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2011-12-011"
+  },
+  {
+    "game_date": "2012-11-10",
+    "opponent_key": "army",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2012-13-001"
+  },
+  {
+    "game_date": "2012-12-29",
+    "opponent_key": "florida",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2012-13-011"
+  },
+  {
+    "game_date": "2013-11-08",
+    "opponent_key": "army",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2013-14-001"
+  },
+  {
+    "game_date": "2014-11-15",
+    "opponent_key": "the-citadel",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2014-15-002"
+  },
+  {
+    "game_date": "2016-11-25",
+    "opponent_key": "akron",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2016-17-006"
+  },
+  {
+    "game_date": "2016-11-26",
+    "opponent_key": "east-carolina",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2016-17-007"
+  },
+  {
+    "game_date": "2017-12-17",
+    "opponent_key": "army",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2017-18-011"
+  },
+  {
+    "game_date": "2018-11-16",
+    "opponent_key": "umbc",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2018-19-003"
+  },
+  {
+    "game_date": "2018-11-18",
+    "opponent_key": "south-dakota",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2018-19-004"
+  },
+  {
+    "game_date": "2018-11-19",
+    "opponent_key": "high-point",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2018-19-005"
+  },
+  {
+    "game_date": "2019-11-21",
+    "opponent_key": "loyola-marymount",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2019-20-005"
+  },
+  {
+    "game_date": "2019-11-24",
+    "opponent_key": "indiana-state",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2019-20-007"
+  },
+  {
+    "game_date": "2020-11-28",
+    "opponent_key": "cal-state-northridge",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2020-21-001"
+  },
+  {
+    "game_date": "2020-11-29",
+    "opponent_key": "seattle-u",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2020-21-002"
+  },
+  {
+    "game_date": "2021-11-11",
+    "opponent_key": "south-dakota",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2021-22-001"
+  },
+  {
+    "game_date": "2021-11-20",
+    "opponent_key": "holy-cross",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2021-22-004"
+  },
+  {
+    "game_date": "2021-11-21",
+    "opponent_key": "bethune-cookman",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2021-22-005"
+  },
+  {
+    "game_date": "2023-12-16",
+    "opponent_key": "ut-arlington",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2023-24-011"
+  },
+  {
+    "game_date": "2024-12-07",
+    "opponent_key": "stony-brook",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2024-25-010"
+  },
+  {
+    "game_date": "2025-11-29",
+    "opponent_key": "south-dakota",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-2025-26-009"
+  },
+  {
+    "game_date": "1982-12-29",
+    "opponent_key": "lafayette",
+    "reason": "NO_ACCEPTED_EXACT_GAME_SITE_EVIDENCE",
+    "research_game_id": "AF-1982-83-008"
+  }
+]

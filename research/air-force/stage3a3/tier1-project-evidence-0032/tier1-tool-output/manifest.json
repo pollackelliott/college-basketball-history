@@ -1,0 +1,22 @@
+{
+  "accepted": {
+    "path": "/home/runner/work/_temp/air-force-tier1-output/accepted-project-evidence.json",
+    "sha256": "c398438b6970e54c642b7f195eea20c1529d8b1196eda1333823bd965b3b7f6e"
+  },
+  "contradictions": {
+    "path": "/home/runner/work/_temp/air-force-tier1-output/tier1-contradictions.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "remaining": {
+    "path": "/home/runner/work/_temp/air-force-tier1-output/remaining-neutral-queue.json",
+    "sha256": "fc7d74221930705dd14cd6460558143ba3598cc4475cd5601b1c3dd500dc85cd"
+  },
+  "status": {
+    "path": "/home/runner/work/_temp/air-force-tier1-output/stage3a3-tier1-status.json",
+    "sha256": "c0d9d88201b0bb4f95a2e7611d241f77b3e0f8585b3eb8eba90b7502d2372d26"
+  },
+  "unresolved": {
+    "path": "/home/runner/work/_temp/air-force-tier1-output/tier1-unresolved.json",
+    "sha256": "692c07375934eae53ddfaa2830f87a899b694974c98d6ca3dfda20795b7f6244"
+  }
+}

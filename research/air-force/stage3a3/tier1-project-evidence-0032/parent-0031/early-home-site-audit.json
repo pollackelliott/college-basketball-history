@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A2_1956_1958_HOME_SITE_AUDIT_V1",
+  "school_key": "air-force",
+  "status": "RESEARCH_OPEN_GENUINE_SITE_CONFLICT",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "early_home_game_count": 19,
+  "early_home_ids": [
+    "AF-1956-57-001",
+    "AF-1956-57-003",
+    "AF-1956-57-005",
+    "AF-1956-57-007",
+    "AF-1956-57-009",
+    "AF-1956-57-012",
+    "AF-1956-57-014",
+    "AF-1956-57-015",
+    "AF-1956-57-016",
+    "AF-1957-58-001",
+    "AF-1957-58-003",
+    "AF-1957-58-006",
+    "AF-1957-58-009",
+    "AF-1957-58-011",
+    "AF-1957-58-014",
+    "AF-1957-58-016",
+    "AF-1957-58-018",
+    "AF-1957-58-020",
+    "AF-1957-58-022"
+  ],
+  "early_home_seasons": {
+    "1956-57": 9,
+    "1957-58": 10
+  },
+  "sources": [
+    {
+      "key": "1955-58-lowry-campus",
+      "source": "United States Air Force Academy — The Building Years",
+      "url": "https://www.usafa.edu/about/history/building-years/",
+      "observed": "Academy resided at temporary Lowry AFB, Denver, 1955 to 1958; permanently relocated August 1958.",
+      "type": "OFFICIAL_INSTITUTIONAL_CHRONOLOGY",
+      "effect": "Campus geography only, not exact 1956-58 varsity game venue/site."
+    },
+    {
+      "key": "1955-lowry-cadet-gym",
+      "source": "Lowry Foundation — Academy Campus Locator",
+      "url": "https://lowryfoundation.org/lowry-legacy/air-force-academy/campus-locator/",
+      "observed": "1955 Lowry Academy campus map identifies Building 863 Cadet Gymnasium and Building 867 Gymnasium Annex.",
+      "type": "OFFICIAL_HISTORIC_SITE_INVENTORY",
+      "effect": "Evidence of two Lowry gym structures, no direct varsity home contest attribution."
+    },
+    {
+      "key": "1958-new-campus-cadet-gym",
+      "source": "Air Force Academy Athletics — Cadet Gym",
+      "url": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html",
+      "observed": "Permanent Academy Cadet Gymnasium completed in 1958; distinct physical building from Lowry Building 863.",
+      "type": "OFFICIAL_INSTITUTIONAL_FACILITY_HISTORY",
+      "effect": "Prohibits projecting permanent 1958 Cadet Gymnasium backward into 1956-58."
+    },
+    {
+      "key": "1956-57-target",
+      "source": "Air Force Academy Athletics — 1956-57 MBB schedule",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1956-57",
+      "observed": "Accepted HOME games are retrospectively labeled USAFA, CO; other same-season non-home games have explicit Denver, CO.",
+      "type": "TARGET_OFFICIAL_RETROSPECTIVE_SCHEDULE",
+      "effect": "Preserve raw schedule locality; USAFA, CO is not physical venue/city proof during Lowry era."
+    },
+    {
+      "key": "1957-58-target",
+      "source": "Air Force Academy Athletics — 1957-58 MBB schedule",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1957-58",
+      "observed": "Historic HOME queue records show USAFA, CO without verified 1957-58 venue.",
+      "type": "TARGET_OFFICIAL_RETROSPECTIVE_SCHEDULE",
+      "effect": "No independent era-specific gym or city identified."
+    },
+    {
+      "key": "1957-12-18-drake-site",
+      "source": "Drake Athletics 2020 game notes (official reciprocal)",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/drake.sidearmsports.com/documents/2020/12/11/123020_AirForce.pdf",
+      "observed": "Series table says 1957 Dec. 18 at 'El Paso, Colo.' Drake win 74-69.",
+      "type": "OPPONENT_OFFICIAL_RETROSPECTIVE_GAME_SITE",
+      "effect": "Affirmative game-specific conflicting location notation; cannot claim uniform Lowry Denver for all 19."
+    },
+    {
+      "key": "1957-12-18-target-site",
+      "source": "Air Force Academy 2020 game notes (official target)",
+      "url": "https://goairforcefalcons.com/documents/download/2020/12/10/AF_MBB_2020_21_Notes_04_Drake.pdf",
+      "observed": "Target reciprocal series lists 12/18/57 location USAFA, Drake 74-69.",
+      "type": "TARGET_OFFICIAL_RETROSPECTIVE_GAME_SITE",
+      "effect": "USAFA is ambiguous institutional label, not independent address or facility."
+    },
+    {
+      "key": "1957-12-18-thirdparty-gym",
+      "source": "Hoopsipedia Air Force 1957-58 game list",
+      "url": "https://www.hoopsipedia.com/teams/air-force-falcons/1957-58",
+      "observed": "One 1957-12-18 game vs Drake listed at 'Cadet Gymnasium'; site has incomplete 9-game 1957-58 log and no contemporary first-party citation.",
+      "type": "SECONDARY_GAME_SITE_CLUE_UNCORROBORATED",
+      "effect": "Venue name may refer to Lowry Building 863 or erroneous later campus facility backfill; not enough to assign building."
+    },
+    {
+      "key": "unrelated-lowry-team-exclusion",
+      "source": "Denver Athletics all-time 1940s results",
+      "url": "https://denverpioneers.com/news/2010/5/13/All_Time_Results_1940_49_",
+      "observed": "1940s games against a team called Lowry Air Force Base predate USAFA intercollegiate program; different basketball identity.",
+      "type": "NEGATIVE_IDENTITY_CONTROL",
+      "effect": "Do not use 1940s Lowry team site or home record as reciprocal evidence for USAFA 1956-58."
+    }
+  ],
+  "settled_conclusions": [
+    "The 1955 Lowry Academy campus did have a named Cadet Gymnasium, Building 863, physically distinct from the Academy's permanent-campus Cadet Gymnasium completed in 1958.",
+    "The 1956-58 institutional headquarters were in the Denver area, but institutional headquarters do not alone establish a HOME game's physical site.",
+    "The accepted 19 H/A/N HOME classifications are unchanged.",
+    "A retrospective official Drake record for 1957-12-18 says 'El Paso, Colo.' while the target uses USAFA and a secondary site uses Cadet Gymnasium; evidence does not safely establish that game's geography.",
+    "No game in this tranche has sufficient exact-site/era facility evidence to close the physical venue and city/state with the standard of proof required."
+  ],
+  "prohibited_inferences": [
+    "Do not assign Lowry Building 863 to all 19 solely from facility existence and campus location.",
+    "Do not conflate pre-1958 Lowry Building 863 Cadet Gymnasium and 1958 Colorado Springs permanent Cadet Gymnasium.",
+    "Do not treat El Paso, Colo. as an exact building or silently normalize it to Colorado Springs without corroboration.",
+    "Do not label these 19 RESEARCHED_UNRESOLVED_HOME_LOCATION without exact protected-main owner-authority registry entries.",
+    "Do not reopen accepted 1958-59+ HOME chronology or H/A/N to force a matching venue."
+  ],
+  "remaining_named_high_yield_paths": [
+    "1956-57 and 1957-58 contemporaneous Air Force game programs/yearbook basketball venue lines (not later generic schedule template).",
+    "Drake 1957-58 contemporary press game-location/arena summary; if 'El Paso' is a retrospective artifact, source correction should be documented.",
+    "Original 1950s schedules or box scores from remaining 18 opponents with exact venue/geography; prioritize reciprocal archival season-level sources."
+  ],
+  "resolution": "STAGE3A2_REMAINS_IN_PROGRESS_19_OPEN"
+}

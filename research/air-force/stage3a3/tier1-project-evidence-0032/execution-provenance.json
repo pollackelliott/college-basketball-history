@@ -1,0 +1,49 @@
+{
+  "kind": "AIR_FORCE_STAGE3A3_TIER1_EXACT_TOOL_EXECUTION_CHECKPOINT_0032",
+  "ledger": {
+    "git_blob_sha": "e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e",
+    "regular_neutral": 116,
+    "rows": 1928,
+    "sha256": "5b7b0b7b4c7c7a5f282490f14e3255742bf91d07bb2329080a1ac03b48431f32",
+    "source_commit": "4731f18332a67058801c9f9d0f449df862d67833",
+    "source_path": "research/air-force/stage3a3/tier1-execution-preflight-0031/structured-stage3a2-ledger.csv"
+  },
+  "no_external_historical_research": true,
+  "no_protected_main_or_published_data_mutation": true,
+  "outcome": "STAGE_3A3_TIER1_COMPLETE_STAY_IN_STAGE_3A3",
+  "parent_checkpoint_protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "research_parent_commit_sha": "4731f18332a67058801c9f9d0f449df862d67833",
+  "result_counts": {
+    "accepted_complete_count": 29,
+    "accepted_count": 30,
+    "accepted_partial_count": 1,
+    "contradiction_count": 0,
+    "neutral_rows": 116,
+    "remaining_historical": 45,
+    "remaining_modern": 42,
+    "unresolved_count": 86
+  },
+  "schema_version": 1,
+  "school_key": "air-force",
+  "snapshot": {
+    "artifact_id": 15266857325,
+    "artifact_sha256_digest": "sha256:e82a70187952ed5fb2cb67aba5a17bc5d32faa603c7a03ffb7acc478e360deab",
+    "file_count": 119,
+    "manifest_sha256": "87284502f579c8c1fed4d9901c780dfc26180d51f806af0094dea90f46e319a9",
+    "name": "research-stage3a3-tier1-state-242370fc551fd749c157c74d92917ddfafbe40e0",
+    "reciprocal_file_count": 116,
+    "run_id": 46153935925
+  },
+  "status": "COMPLETE",
+  "tool": {
+    "algorithm_modified": false,
+    "git_blob_sha": "f0027e9ef6ec7e3fc322eec7f2805ee1f927050e",
+    "path": "tools/research_stage3a3_tier1.py",
+    "source": "verified protected-main snapshot"
+  },
+  "workflow_execution_commit_sha": "68ac6617c31e568b4f507489d1b88af41443df0c",
+  "workflow_run_id": 46158659175,
+  "workflow_run_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46158659175"
+}
