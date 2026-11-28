@@ -1,0 +1,548 @@
+{
+  "kind": "SDSU_STAGE2_REGISTRY_COMPLETION_AND_HISTORICAL_POMONA_CALWESTERN_0037_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "parent_research_head": "b79b6cef0fba955f4a9c7390d0f5ea543104361f",
+  "prior_checkpoint": "0036-stage2-single-key-research-base-registry-cohort",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "prior_opponents_sha256": "866268c40e159fb9b4d64d0444f75d11058295e4a32295c562983d73e2565614",
+  "prior_unresolved_queue_sha256": "4b13507dfb8396b24ecfee866ccca65b2df5ae32b26bb9a7142a5785711512f8",
+  "base_programs_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "base_published_sdsu_opponents_git_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "selection": "All 21 single-key residual source-label candidates already documented in original source census plus all four distinct Pomona and two distinct Cal Western/USIU labels, handled as two coherent institutional-name family adjudications; 27 total literal labels, six requiring class-level historical evidence. Historical original source labels, result and game type remain unmodified.",
+  "source_label_counts": {
+    "single_key_existing": 21,
+    "pomona_college": 4,
+    "cal_western": 2
+  },
+  "new_accepted_labels": 27,
+  "new_accepted_games": 39,
+  "institutional_identity_families": [
+    {
+      "historical_name": "Pomona College",
+      "canonical_key": "pomona-pitzer",
+      "canonical_display": "Pomona-Pitzer",
+      "current_d1": "No",
+      "source_years": "1926-27..1944-45",
+      "source_label_members": [
+        {
+          "literal": "*at Pomona",
+          "games": 3,
+          "first": "1927-28",
+          "last": "1933-34"
+        },
+        {
+          "literal": "*Pomona",
+          "games": 7,
+          "first": "1926-27",
+          "last": "1938-39"
+        },
+        {
+          "literal": "at Pomona",
+          "games": 1,
+          "first": "1944-45",
+          "last": "1944-45"
+        },
+        {
+          "literal": "Pomona",
+          "games": 1,
+          "first": "1939-40",
+          "last": "1939-40"
+        }
+      ],
+      "evidence_summary": "Official Pomona-Pitzer athletics: Pomona competed alone until 1946; Pomona-Claremont from 1946; Pomona joined Pitzer in 1970. Pomona College timeline establishes men’s basketball and 1945 wartime return. SDSU alumni specifically documents basketball at Pomona College January 1928. Explicitly different from Pomona JC and Cal Poly Pomona.",
+      "urls": [
+        "https://sagehens.com/sports/2023/7/27/information-history.aspx",
+        "https://www.pomona.edu/timeline/1900s/1906",
+        "https://www.pomona.edu/timeline/1940s/1945",
+        "https://www.pomona.edu/timeline/1970s/1970",
+        "https://sdsu-alumni.us.hivebrite.com/page/schoolspirit"
+      ]
+    },
+    {
+      "historical_name": "California Western University",
+      "canonical_key": "us-international",
+      "canonical_display": "U.S. International",
+      "current_d1": "No",
+      "source_years": "1964-65..1968-69",
+      "source_label_members": [
+        {
+          "literal": "at Cal Western",
+          "games": 2,
+          "first": "1965-66",
+          "last": "1967-68"
+        },
+        {
+          "literal": "Cal Western",
+          "games": 4,
+          "first": "1964-65",
+          "last": "1968-69"
+        }
+      ],
+      "evidence_summary": "Alliant University primary institutional history: name California Western University 1952-1968; renamed U.S. International University in 1968. Basketball continuity also documented in college athletics history; same institution, later new name, not University of San Diego or Cal Poly.",
+      "urls": [
+        "https://www.alliant.edu/alliant-legacy",
+        "https://www.lostcolleges.com/california-western-university",
+        "https://www.sandiegoreader.com/news/1986/apr/24/cover-tales-out-of-school/"
+      ]
+    }
+  ],
+  "accepted_source_label_rows": [
+    {
+      "literal": "at Toledo",
+      "games": 1,
+      "first_season": "1961-62",
+      "last_season": "1961-62",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "original_census_key_candidates": [
+        "toledo",
+        "toledo"
+      ],
+      "canonical_opponent_key": "toledo",
+      "canonical_opponent_display": "Toledo",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "at U.S. International",
+      "games": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "original_census_key_candidates": [
+        "us-international"
+      ],
+      "canonical_opponent_key": "us-international",
+      "canonical_opponent_display": "U.S. International",
+      "current_d1": "No",
+      "resolution_method": "UNIQUE_INHERITED_PUBLISHED_SDSU_OPPONENT_KEY",
+      "source_basis": "IMMUTABLE_PUBLISHED_SDSU_OPPONENTS"
+    },
+    {
+      "literal": "at UC Irvine",
+      "games": 1,
+      "first_season": "1968-69",
+      "last_season": "1968-69",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "original_census_key_candidates": [
+        "uc-irvine",
+        "uc-irvine"
+      ],
+      "canonical_opponent_key": "uc-irvine",
+      "canonical_opponent_display": "UC Irvine",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "at Utah State",
+      "games": 1,
+      "first_season": "1962-63",
+      "last_season": "1962-63",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "original_census_key_candidates": [
+        "utah-state",
+        "utah-state"
+      ],
+      "canonical_opponent_key": "utah-state",
+      "canonical_opponent_display": "Utah State",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "at Western Michigan",
+      "games": 1,
+      "first_season": "1961-62",
+      "last_season": "1961-62",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "original_census_key_candidates": [
+        "western-michigan"
+      ],
+      "canonical_opponent_key": "western-michigan",
+      "canonical_opponent_display": "Western Michigan",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Cal State Northridge",
+      "games": 1,
+      "first_season": "1960-61",
+      "last_season": "1960-61",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "cal-state-northridge",
+        "cal-state-northridge",
+        "cal-state-northridge"
+      ],
+      "canonical_opponent_key": "cal-state-northridge",
+      "canonical_opponent_display": "CSUN",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Cal State Northridge (PG)",
+      "games": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "cal-state-northridge"
+      ],
+      "canonical_opponent_key": "cal-state-northridge",
+      "canonical_opponent_display": "CSUN",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Colorado State",
+      "games": 1,
+      "first_season": "1961-62",
+      "last_season": "1961-62",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "colorado-state",
+        "colorado-state"
+      ],
+      "canonical_opponent_key": "colorado-state",
+      "canonical_opponent_display": "Colorado State",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Denver",
+      "games": 1,
+      "first_season": "1958-59",
+      "last_season": "1958-59",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "denver",
+        "denver"
+      ],
+      "canonical_opponent_key": "denver",
+      "canonical_opponent_display": "Denver",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Indiana State",
+      "games": 1,
+      "first_season": "1950-51",
+      "last_season": "1950-51",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "indiana-state",
+        "indiana-state"
+      ],
+      "canonical_opponent_key": "indiana-state",
+      "canonical_opponent_display": "Indiana State",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Iowa State",
+      "games": 1,
+      "first_season": "1962-63",
+      "last_season": "1962-63",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "iowa-state",
+        "iowa-state"
+      ],
+      "canonical_opponent_key": "iowa-state",
+      "canonical_opponent_display": "Iowa State",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Marshall",
+      "games": 1,
+      "first_season": "1947-48",
+      "last_season": "1947-48",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "marshall",
+        "marshall"
+      ],
+      "canonical_opponent_key": "marshall",
+      "canonical_opponent_display": "Marshall",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Minnesota",
+      "games": 1,
+      "first_season": "1968-69",
+      "last_season": "1968-69",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "minnesota",
+        "minnesota"
+      ],
+      "canonical_opponent_key": "minnesota",
+      "canonical_opponent_display": "Minnesota",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Murray State",
+      "games": 1,
+      "first_season": "1940-41",
+      "last_season": "1940-41",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "murray-state",
+        "murray-state"
+      ],
+      "canonical_opponent_key": "murray-state",
+      "canonical_opponent_display": "Murray State",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Northern Illinois",
+      "games": 1,
+      "first_season": "1968-69",
+      "last_season": "1968-69",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "northern-illinois",
+        "northern-illinois"
+      ],
+      "canonical_opponent_key": "northern-illinois",
+      "canonical_opponent_display": "Northern Illinois",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Portland",
+      "games": 1,
+      "first_season": "1954-55",
+      "last_season": "1954-55",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "portland",
+        "portland"
+      ],
+      "canonical_opponent_key": "portland",
+      "canonical_opponent_display": "Portland",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "Seattle",
+      "games": 1,
+      "first_season": "1951-52",
+      "last_season": "1951-52",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "seattle-u",
+        "seattle-u"
+      ],
+      "canonical_opponent_key": "seattle-u",
+      "canonical_opponent_display": "Seattle",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "UC Davis",
+      "games": 1,
+      "first_season": "1963-64",
+      "last_season": "1963-64",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "uc-davis",
+        "uc-davis"
+      ],
+      "canonical_opponent_key": "uc-davis",
+      "canonical_opponent_display": "UC Davis",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "UC Riverside",
+      "games": 1,
+      "first_season": "1966-67",
+      "last_season": "1966-67",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "uc-riverside",
+        "uc-riverside",
+        "uc-riverside"
+      ],
+      "canonical_opponent_key": "uc-riverside",
+      "canonical_opponent_display": "UC Riverside",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "UNLV",
+      "games": 1,
+      "first_season": "1965-66",
+      "last_season": "1965-66",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "unlv",
+        "unlv"
+      ],
+      "canonical_opponent_key": "unlv",
+      "canonical_opponent_display": "UNLV",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "vs. Fresno State",
+      "games": 1,
+      "first_season": "1957-58",
+      "last_season": "1957-58",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [
+        "fresno-state"
+      ],
+      "canonical_opponent_key": "fresno-state",
+      "canonical_opponent_display": "Fresno State",
+      "current_d1": "Yes",
+      "resolution_method": "UNIQUE_RESEARCH_BASE_REGISTRY_OR_PUBLISHED_CENSUS_KEY",
+      "source_basis": "IMMUTABLE_PROGRAMS_CSV_AND_OR_PUBLISHED_SDSU_CENSUS"
+    },
+    {
+      "literal": "*at Pomona",
+      "games": 3,
+      "first_season": "1927-28",
+      "last_season": "1933-34",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+      "original_census_key_candidates": [],
+      "canonical_opponent_key": "pomona-pitzer",
+      "canonical_opponent_display": "Pomona-Pitzer",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_POMONA_COLLEGE_CONTINUITY_INHERITED_NON_D1",
+      "source_basis": "POMONA_SAGEHENS_ATHLETICS_OFFICIAL_TIMELINE"
+    },
+    {
+      "literal": "*Pomona",
+      "games": 7,
+      "first_season": "1926-27",
+      "last_season": "1938-39",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "LEADING_ASTERISK",
+      "original_census_key_candidates": [],
+      "canonical_opponent_key": "pomona-pitzer",
+      "canonical_opponent_display": "Pomona-Pitzer",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_POMONA_COLLEGE_CONTINUITY_INHERITED_NON_D1",
+      "source_basis": "POMONA_SAGEHENS_ATHLETICS_OFFICIAL_TIMELINE"
+    },
+    {
+      "literal": "at Cal Western",
+      "games": 2,
+      "first_season": "1965-66",
+      "last_season": "1967-68",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "original_census_key_candidates": [],
+      "canonical_opponent_key": "us-international",
+      "canonical_opponent_display": "U.S. International",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_CALIFORNIA_WESTERN_TO_USIU_INHERITED_NON_D1",
+      "source_basis": "ALLIANT_UNIVERSITY_OFFICIAL_LEGACY"
+    },
+    {
+      "literal": "at Pomona",
+      "games": 1,
+      "first_season": "1944-45",
+      "last_season": "1944-45",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "original_census_key_candidates": [],
+      "canonical_opponent_key": "pomona-pitzer",
+      "canonical_opponent_display": "Pomona-Pitzer",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_POMONA_COLLEGE_CONTINUITY_INHERITED_NON_D1",
+      "source_basis": "POMONA_SAGEHENS_ATHLETICS_OFFICIAL_TIMELINE"
+    },
+    {
+      "literal": "Cal Western",
+      "games": 4,
+      "first_season": "1964-65",
+      "last_season": "1968-69",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [],
+      "canonical_opponent_key": "us-international",
+      "canonical_opponent_display": "U.S. International",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_CALIFORNIA_WESTERN_TO_USIU_INHERITED_NON_D1",
+      "source_basis": "ALLIANT_UNIVERSITY_OFFICIAL_LEGACY"
+    },
+    {
+      "literal": "Pomona",
+      "games": 1,
+      "first_season": "1939-40",
+      "last_season": "1939-40",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "original_census_key_candidates": [],
+      "canonical_opponent_key": "pomona-pitzer",
+      "canonical_opponent_display": "Pomona-Pitzer",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_POMONA_COLLEGE_CONTINUITY_INHERITED_NON_D1",
+      "source_basis": "POMONA_SAGEHENS_ATHLETICS_OFFICIAL_TIMELINE"
+    }
+  ],
+  "all_previous_128_label_rows_preserved_byte_for_byte": true,
+  "accepted_cumulative_labels": 155,
+  "accepted_cumulative_games": 797,
+  "accepted_distinct_keys": 64,
+  "remaining_unresolved_labels": 186,
+  "remaining_game_rows": 289,
+  "full_stage2_game_level_ledger_not_yet_authored": true,
+  "original_stage1_competitive_games": 1086,
+  "unidentified_1921_22_played_results_not_fabricated": 3,
+  "source_game_result_type_literal_mutations": 0,
+  "site_type_inferences": 0,
+  "venue_inferences": 0,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "non_d1_owner_sanity_scan_pending": true
+}
