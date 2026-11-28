@@ -1,0 +1,508 @@
+{
+  "kind": "SDSU_STAGE2_LOCAL_AMATEUR_CIVIC_ALUMNI_0044_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "338421970cf1385340f62aa57bd1b41bc466fc2a",
+  "parent_checkpoint": "0043-stage2-historical-small-college-institutional-continuities",
+  "parent_opponents_sha256": "8df3b986de7a972fd8e076770ccb46bd49f8f1d3658c0ac0cd2da002afae8b6b",
+  "parent_unresolved_queue_sha256": "314feb39ee5734baaf9b1c0fad917719a67708505dc15e37edf1cd172bd7b4ee",
+  "immutable_research_base_program_registry_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "method": "One bounded 24-source-label early-history local amateur/prep/church/fraternity/civic/AAU identity tranche; source-named organizations preserved without unsupported legal genealogy or roster continuity. Identity adjudication only; accepted Stage 1 game universe not reopened.",
+  "source_identity_families": [
+    {
+      "provisional_key": "army-navy-academy-junior-college",
+      "canonical_display": "San Diego Army-Navy Academy (junior-college squad)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "HISTORICAL_JUNIOR_COLLEGE_PREP_TEAM",
+      "identity_basis": "SDSU original 1921-22 opponent explicitly identifies Army-Navy Academy (JC). Contemporary 1921 academy advertisement lists curriculum from seventh grade through Junior College at Pacific Beach; early 1921 school identity predates the 1936 move to Carlsbad. Preserve its historic academy college-level opponent apart from later secondary-school cadet programs.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_armynavyacademy.shtml",
+        "https://thecoastnews.com/hit-the-road-army-navy-academy-alumni-pens-military-school-history-book/",
+        "https://library.sfo2.cdn.digitaloceanspaces.com/publications/sports/periodicals/literary-digest/LITDG-1921-07-02-literary-digest-4FS2G.pdf"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "Army-Navy Academy (JC)",
+          "game_count": 1,
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "buchan-bakers",
+      "canonical_display": "Buchan Bakers",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "HISTORICAL_AMATEUR_BASKETBALL_TEAM",
+      "identity_basis": "Original source identifies a Buchan Bakers team, not an educational institution. Independent SDSU-specific opponent series corroborates a single 1954-55 match. Canonical identity is the named team only; exact bakery company, geography and organization charter are not proved by this source.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_buchanbakers.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "at Buchan Bakers",
+          "game_count": 1,
+          "first_season": "1954-55",
+          "last_season": "1954-55",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "central-christian-church-source-squad",
+      "canonical_display": "Central Christian Church (source squad)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_CHURCH_BASKETBALL_TEAM",
+      "identity_basis": "The primary team name is explicitly Central Christian Church in 1924-25. Preserve its source-defined church team independently from University Christian Church; no proof establishes that either congregation, team or venue is the other.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "at Central Christian Church",
+          "game_count": 1,
+          "first_season": "1924-25",
+          "last_season": "1924-25",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "escondido-creamery",
+      "canonical_display": "Escondido Creamery",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_BUSINESS_AMATEUR_TEAM",
+      "identity_basis": "Source identifies an Escondido Creamery-affiliated opponent for 1927-28, not Escondido High School or a varsity college. Company legal entity and basketball roster remain unverified; use the source-named business team without invented corporate history.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "at Escondido Creamery",
+          "game_count": 1,
+          "first_season": "1927-28",
+          "last_season": "1927-28",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "national-city-all-stars",
+      "canonical_display": "National City All-Stars",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "HISTORICAL_LOCAL_ALL_STAR_SQUAD",
+      "identity_basis": "Source names a specifically designated All-Star squad associated with National City in 1927-28. Keep distinct from the 1921-22 'National City' source-named team and the 1925-26 National City Baptists; no shared membership inferred.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "at National City All-Stars",
+          "game_count": 1,
+          "first_season": "1927-28",
+          "last_season": "1927-28",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "national-city-baptists",
+      "canonical_display": "National City Baptists",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_CHURCH_BASKETBALL_TEAM",
+      "identity_basis": "Independent opponent series validates the 1925-26 National City Baptists label and a single match. Baptists church basketball team distinct from other National City and National City All-Stars opponents, despite same city qualifier.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_nationalcitybaptists.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "at National City Baptists",
+          "game_count": 1,
+          "first_season": "1925-26",
+          "last_season": "1925-26",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "bank-league-all-stars",
+      "canonical_display": "Bank League All-Stars",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LEAGUE_ALL_STAR_SQUAD",
+      "identity_basis": "Source says Bank League All-Stars rather than a specific bank-sponsored club. Preserve distinct from accepted First National Bank SDSU team and unadjudicated Bank of Italy team; composition and league charter unknown.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "Bank League All-Stars",
+          "game_count": 1,
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "san-diego-demolay-source-team",
+      "canonical_display": "DeMolay (San Diego source squad)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_DEMOLAY_TEAM",
+      "identity_basis": "SDSU source enumerates four 1926-27 through 1930-31 DeMolay games; independent SDSU series reproduces four, including one source-designated postseason game. DeMolay is a separate source-named youth fraternal-team identity, without presuming a particular chapter or that 'DeMolay' equals any other YMCA/church squad.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_demolay.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "DeMolay",
+          "game_count": 4,
+          "first_season": "1926-27",
+          "last_season": "1930-31",
+          "original_game_types": "POSTSEASON|REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "eta-omega-delta-hods",
+      "canonical_display": "Eta Omega Delta (Hods) fraternity squad",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "LOCAL_SDSU_FRATERNITY_BASKETBALL_TEAM",
+      "identity_basis": "San Diego History Center historical research records the SDSU-associated Hod Club becoming Eta Omega Delta fraternity, and a City of San Diego 1997 resolution documents its separate fraternity existence through the 1947 Kappa Sigma initiation. This is the campus FRATERNITY opponent basketball team named in 1923-26 source records, never the SDSU varsity team or a fabricated duplicate SDSU game.",
+      "source_urls": [
+        "https://sandiegohistory.org/journal/1981/july/student/",
+        "https://docs.sandiego.gov/council_reso_ordinance/rao1997/R-289494.pdf"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "Eta Omega Delta (Hods)",
+          "game_count": 2,
+          "first_season": "1923-24",
+          "last_season": "1925-26",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "fletcher-five",
+      "canonical_display": "Fletcher Five",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LOCAL_FIVE_TEAM",
+      "identity_basis": "Independent SDSU series enumerates exactly two Fletcher Five games matching original 1925-26 and 1931-32 literals. No assumption that same five individuals played in both seasons; original '(D)' retained as raw source notation.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_fletcherfive.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "Fletcher Five",
+          "game_count": 1,
+          "first_season": "1925-26",
+          "last_season": "1925-26",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        },
+        {
+          "literal": "Fletcher Five (D)",
+          "game_count": 1,
+          "first_season": "1931-32",
+          "last_season": "1931-32",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "grossmont-high-school-alumni",
+      "canonical_display": "Grossmont High School Alumni",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "HIGH_SCHOOL_ALUMNI_TEAM",
+      "identity_basis": "Independent historical SDSU series explicitly calls the 1926-27 opponent Grossmont HS Alumni, distinct from the separately mapped Grossmont High School varsity program. Preserve accepted source postseason category; not evidence of ordinary NCAA postseason format.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_grossmonthsalumni.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "Grossmont HS Alumni",
+          "game_count": 1,
+          "first_season": "1926-27",
+          "last_season": "1926-27",
+          "original_game_types": "POSTSEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "national-city-source-team",
+      "canonical_display": "National City (1921 source team)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_UNSPECIFIED_LOCAL_TEAM",
+      "identity_basis": "The 1921-22 SDSU literal says only National City, without organization suffix. Do not claim this was the later Baptist or All-Star squad, a high school, or any particular club. Provisional source-specific identity with membership uncertainty declared.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "National City",
+          "game_count": 1,
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "ramona-high-school-source-team",
+      "canonical_display": "Ramona High School (1924 source team)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_HIGH_SCHOOL_TEAM",
+      "identity_basis": "Original 1924-25 source explicitly identifies a Ramona High School opponent. This is a high-school team, not a college or generic 'Ramona' municipality; precise campus/history beyond the source is not claimed; original '(D)' preserved.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "Ramona High School (D)",
+          "game_count": 1,
+          "first_season": "1924-25",
+          "last_season": "1924-25",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "san-diego-basketball-coaches",
+      "canonical_display": "San Diego Basketball Coaches",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "COACHES_AMATEUR_BASKETBALL_SQUAD",
+      "identity_basis": "A source-named team of San Diego basketball coaches in 1928-29, corroborated by independent 1928-12-13 SDSU opponent series. This is not a current-D1 institution or a team called San Diego State; refrain from roster and site inferences.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series5.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "San Diego Basketball Coaches (D)",
+          "game_count": 1,
+          "first_season": "1928-29",
+          "last_season": "1928-29",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "san-diego-county-all-stars",
+      "canonical_display": "San Diego County All-Stars",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "LOCAL_COUNTY_ALL_STAR_TEAM",
+      "identity_basis": "Independent SDSU series confirms original 1921-22 30-13 game against explicitly county-wide All-Star named team. Distinct from San Diego YMCA All-Stars and other city specific teams; no roster or geographic site assumptions.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_sandiegocountyallstars.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "San Diego County All Stars",
+          "game_count": 1,
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "san-diego-dons-aau",
+      "canonical_display": "San Diego Dons (AAU)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "HISTORICAL_AMATEUR_ATHLETIC_UNION_TEAM",
+      "identity_basis": "Contemporary March 1946 Oklahoma City Times identifies San Diego Dons as an AAU team, runner-up in 1946 national AAU tournament; independent San Diego State series confirms three 1944-47 SDSU meetings. This is a San Diego AAU team and NOT University of San Francisco Dons or University of San Diego Toreros; exact year-to-year sponsorship/roster not asserted.",
+      "source_urls": [
+        "https://gateway.okhistory.org/ark:/67531/metadc1765311/m1/15/ocr/",
+        "https://mcubed.net/ncaab/series/sandst/nd1_sandiegodons.shtml",
+        "https://www.oocities.org/Colosseum/Arena/6925/aau.html"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "San Diego Dons",
+          "game_count": 3,
+          "first_season": "1944-45",
+          "last_season": "1946-47",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "sweetwater-high-school-alumni",
+      "canonical_display": "Sweetwater High School Alumni",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "HIGH_SCHOOL_ALUMNI_TEAM",
+      "identity_basis": "Original SDSU 1927-28 label and independent SDSU series explicitly identify an ALUMNI squad distinct from the previously resolved Sweetwater High School varsity opponent. Keep original source game type, including any postseason note, unchanged.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_sweetwaterhsalumni.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "Sweetwater HS Alumni",
+          "game_count": 1,
+          "first_season": "1927-28",
+          "last_season": "1927-28",
+          "original_game_types": "POSTSEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "todds-all-stars",
+      "canonical_display": "Todd's All-Stars",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LOCAL_ALL_STAR_SQUAD",
+      "identity_basis": "Independent SDSU opponent series corroborates exactly two 1925-26 Todd's All-Stars games. Source team preserved without inventing which Todd, sponsoring entity, court or roster.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_toddsallstars.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "Todd’s All-Stars",
+          "game_count": 2,
+          "first_season": "1925-26",
+          "last_season": "1925-26",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "university-christian-church-team",
+      "canonical_display": "University Christian Church (source squad)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_CHURCH_BASKETBALL_TEAM",
+      "identity_basis": "Original 1922-23 label and independent SDSU series corroborate precisely one University Christian Church opponent. Distinct from source-named Central Christian Church in 1924-25; 'University' in a church name does NOT imply a college program.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_universitychristianchurch.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "University Christian Church",
+          "game_count": 1,
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "usc-dental-school-team",
+      "canonical_display": "USC Dentists (dental-school squad)",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "INSTITUTIONAL_SUBUNIT_BASKETBALL_TEAM",
+      "identity_basis": "Original source names USC Dentists, not the University of Southern California varsity Trojans. Keep separate amateur dental-student/faculty subunit opponent identity. No unsupported inference regarding the exact roster, school affiliation beyond USC suffix or an on-campus physical site.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "USC Dentists",
+          "game_count": 1,
+          "first_season": "1925-26",
+          "last_season": "1925-26",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "whittier-junior-chamber-team",
+      "canonical_display": "Whittier Junior Chamber of Commerce",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_CIVIC_ORGANIZATION_TEAM",
+      "identity_basis": "Independent SDSU opponent series validates one 1937-38 contest against a Whittier Junior Chamber of Commerce basketball team. Not Whittier College's varsity Poets or Whittier High School; no exact civic club charter presumed.",
+      "source_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_whittierjuniorchamberofcommerce.shtml"
+      ],
+      "accepted_source_labels": [
+        {
+          "literal": "Whittier Junior Chamber of Commerce",
+          "game_count": 1,
+          "first_season": "1937-38",
+          "last_season": "1937-38",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "hancocks-all-comets",
+      "canonical_display": "Hancock's All-Comets",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LOCAL_ALL_STAR_SQUAD",
+      "identity_basis": "Original SDSU source uniquely names Hancock's All-Comets in 1922-23. Retain this exact historical team label instead of merging with other 'All-Stars', and do not assume Hancock's business, player's identity or home location.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "Hancock’s All-Comets",
+          "game_count": 1,
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "hansons-all-stars",
+      "canonical_display": "Hanson's All-Stars",
+      "current_D1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LOCAL_ALL_STAR_SQUAD",
+      "identity_basis": "Original 1934-35 source names Hanson’s All-Stars team, distinct from the named Hancock's All-Comets, Todd's All-Stars and later San Diego County All-Stars. No unproven captain, roster, employer or venue assertions.",
+      "source_urls": [],
+      "accepted_source_labels": [
+        {
+          "literal": "Hanson’s All-Stars",
+          "game_count": 1,
+          "first_season": "1934-35",
+          "last_season": "1934-35",
+          "original_game_types": "REGULAR_SEASON",
+          "original_prefix": ""
+        }
+      ]
+    }
+  ],
+  "key_separations": [
+    "National City (1921 source team) distinct from National City Baptists and National City All-Stars",
+    "University Christian Church distinct from Central Christian Church",
+    "Grossmont High School Alumni distinct from Grossmont High School varsity",
+    "Sweetwater High School Alumni distinct from Sweetwater High School varsity",
+    "San Diego Dons AAU distinct from University of San Francisco Dons or USD Toreros",
+    "Army-Navy Academy historical junior-college unit distinct from modern secondary-prep team",
+    "Eta Omega Delta Hods fraternity opponent distinct from San Diego State varsity",
+    "USC Dentists subunit distinct from USC varsity",
+    "Fletcher Five two source notations retain separate dates, no invariant roster inference"
+  ],
+  "excluded_from_this_tranche_due_to_different_historical_question": [
+    "Broadway Clowns",
+    "Harlem Globetrotters",
+    "House of David",
+    "Olson’s Swedes",
+    "Bank of Italy"
+  ],
+  "exclusion_reason": "Remaining labels have distinct touring-team or historical game-inclusion/forfeit concerns; source-named local amateur identity tranche does not authorize Stage 1 reopening or blanket exhibition classification.",
+  "prior_284_source_labels_byte_for_byte_preserved": true,
+  "new_accepted_labels": 24,
+  "new_accepted_games": 31,
+  "new_provisional_non_d1_keys": 23,
+  "cumulative_labels": 308,
+  "cumulative_mapped_games": 1029,
+  "distinct_opponent_keys": 171,
+  "remaining_unresolved_labels": 33,
+  "remaining_games": 57,
+  "stage1_accepted_universe": 1086,
+  "unidentified_1921_22_results_not_synthetic_games": 3,
+  "source_game_rows_mutated": 0,
+  "venue_or_HAN_inferences": 0,
+  "full_stage2_game_level_ledger_authored": false,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "formal_NON_D1_owner_sanity_scan_pending": true,
+  "global_shared_reference_mutated": false
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "SDSU_STAGE2_LOCAL_AMATEUR_CHECKPOINT_0044_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "checkpoint": "0044-stage2-local-amateur-civic-and-school-squads",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "338421970cf1385340f62aa57bd1b41bc466fc2a",
+  "parent_checkpoint": "0043-stage2-historical-small-college-institutional-continuities",
+  "parent_mapping_sha256": "8df3b986de7a972fd8e076770ccb46bd49f8f1d3658c0ac0cd2da002afae8b6b",
+  "parent_remaining_queue_sha256": "314feb39ee5734baaf9b1c0fad917719a67708505dc15e37edf1cd172bd7b4ee",
+  "new_accepted_labels": 24,
+  "new_accepted_game_rows": 31,
+  "new_provisional_NON_D1_keys": 23,
+  "cumulative_mapped_labels": 308,
+  "cumulative_mapped_games": 1029,
+  "distinct_canonical_keys": 171,
+  "remaining_unresolved_labels": 33,
+  "remaining_accepted_game_rows": 57,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "ebd0fd91442497169a5526677163cdd4e64d859b6a49292504c37750f10da88c",
+      "bytes_utf8": 255397
+    },
+    "accepted-local-amateur-civic-squad-evidence.json": {
+      "sha256": "938bec067616b44aafe697895726c22c8233424eeebf1fb106d6e9c1f1a40653",
+      "bytes_utf8": 23923
+    },
+    "research-status.json": {
+      "sha256": "55c742ca0349e48b55e607abbc71f792dd5a5c17fef5802f92bf56ca598a9a29",
+      "bytes_utf8": 1535
+    },
+    "research-findings.md": {
+      "sha256": "ca69a648ba2e7a275be141c21f2c31edd08001020ee6d7bb2b0668ac6ff38d6c",
+      "bytes_utf8": 13225
+    },
+    "remaining-unresolved-opponent-labels.csv": {
+      "sha256": "b9f4c8763c89ec1ccfd689ef8b66bd9d90d6e4dcd72c840f04fe8cccc1acfe8b",
+      "bytes_utf8": 4717
+    }
+  }
+}
