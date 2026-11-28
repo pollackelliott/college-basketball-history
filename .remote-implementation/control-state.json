@@ -848,18 +848,19 @@
     "nevada-release-production-proof-0001",
     "grand-canyon-stage1-0001",
     "grand-canyon-stage1-0002",
-    "grand-canyon-phase0-0001"
+    "grand-canyon-phase0-0001",
+    "grand-canyon-stage2-census-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "STAGE2_CENSUS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "grand-canyon-stage2-census-0001",
+  "active_request_sha256": "12e64347fb0a180f4d2c5d38734b2f674f7d1dc7649e67dfb4b244e4101ec9f2",
+  "active_school_key": "grand-canyon",
+  "active_target_branch": "data/grand-canyon-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1693,8 +1694,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/grand-canyon/grand-canyon-phase0-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "a1d906c320b3d3db0b494824628e7fc42efa18716477b46722d46618a07c96a6"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "46165737219",
+  "lock_acquisition_request_commit": "a573959b69ca37cdbc9f1b25fe6300f8255eecb3",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "STAGE2_CENSUS_RUNNING"
 }
