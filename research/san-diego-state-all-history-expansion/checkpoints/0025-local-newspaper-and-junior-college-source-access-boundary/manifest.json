@@ -1,0 +1,25 @@
+{
+  "checkpoint": "0025-local-newspaper-and-junior-college-source-access-boundary",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "parent_research_head": "e33f93aac405c19eed1ac82bac15bb4542f93918",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "previous_checkpoint": "0024-permanent-stage1-auditor-actual-fail-closed-report",
+  "files": {
+    "research-findings.md": {
+      "sha256": "a0064dff3ff1a081cf73b7749bb86f3f9ea515389c2ed8b9ca2ce1a95b0871a8",
+      "bytes_utf8": 4498
+    },
+    "1921-22-primary-news-access-inventory.csv": {
+      "sha256": "0eb78e88a20308d09d21a83ae7f7f903e0d8bcc0f2e1d45304f664ea19585fae",
+      "bytes_utf8": 2758
+    },
+    "research-status.json": {
+      "sha256": "6a7857a00a56fffac95bf6fff3a0e87a230548b480250ce9e6cf148033933b3f",
+      "bytes_utf8": 1589
+    }
+  }
+}
