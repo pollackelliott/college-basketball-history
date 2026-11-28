@@ -1,0 +1,47 @@
+{
+  "approved_plan_hash_preview": null,
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "0b78315087a3e046a79c74ed78e5232614dd3442cc3fc994c15d318f58ff5a90",
+    "implementation-stage2-status.json": "e251b8e48ce793548b597f7d55a33405a09e46b5fe5485a881ca252fb6a35798",
+    "plan.json": "9d6fd3a77c76f6c5d927aac6e30cf1b4cd31f389eee286e06442f49a2ac4c2e0",
+    "review.csv": "470ecf38ba0ff0232f69ce3acea2e3ff9e0625b85f72e66b440bb52859225eb7",
+    "review.md": "4e4deca32b86be5ca06890ba9795ca77ed8c217db0bd96b54528df7a50935579"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "0b78315087a3e046a79c74ed78e5232614dd3442cc3fc994c15d318f58ff5a90",
+    "implementation-stage2-status.json": "be61829f40414749de1c2d00d8ca53d5fbee02a96c82fb7bb44dc50c31c2a58a",
+    "plan.json": "89c8f5a3b729d58ac1cf01f0143c9950d83e0a7ce6398b049976ba5436af25d2",
+    "review.csv": "470ecf38ba0ff0232f69ce3acea2e3ff9e0625b85f72e66b440bb52859225eb7",
+    "review.md": "f13228dbaedf326f64dd79fe5b69f2ee0c74c1ec2eaa2228de3f50584ea44246"
+  },
+  "capability_census_status": "CENSUS_CAPTURED",
+  "decision_universe_compatibility": {
+    "authority_decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+    "kind": "EXACT_DECISION_UNIVERSE",
+    "legacy_compatible_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+    "runtime_decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+    "status": "EXACT"
+  },
+  "decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_PROPOSAL_REHEARSAL_VERIFICATION",
+  "normalized_equivalence_artifacts": [
+    "plan.json",
+    "review.md"
+  ],
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "recommendation_map_sha256": "2664d971fc0b7d258afb924fccdb9b3628ba04360015c140d6053055c34e8ed0",
+  "remote_stage2_proposal_equivalence": "PASS",
+  "request_id": "nevada-stage2-proposal-0002",
+  "runtime_decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "stage2_status": "BLOCKED",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "57c953748ace901d764b287bb8a625b01cb54091",
+  "target_tree_sha": "edc2e557ef184bac8dfea588d32ca380380f84ff",
+  "tracked_stage2_mutation": "NONE"
+}
