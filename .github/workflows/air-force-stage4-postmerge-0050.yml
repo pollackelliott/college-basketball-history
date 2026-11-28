@@ -1,0 +1,151 @@
+name: Air Force Stage 4 0050 postmerge permanent replay
+on:
+  push:
+    branches: [research/air-force-stage4-postmerge-0050-transport]
+    paths: [.github/workflows/air-force-stage4-postmerge-0050.yml]
+permissions:
+  contents: write
+concurrency:
+  group: air-force-stage4-postmerge-0050
+  cancel-in-progress: false
+jobs:
+  permanent-stage4-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout isolated evidence transport
+        uses: actions/checkout@v4
+        with:
+          ref: research/air-force-stage4-postmerge-0050-transport
+          path: transport
+      - name: Checkout immutable accepted Stage 3B completion
+        uses: actions/checkout@v4
+        with:
+          ref: 53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745
+          path: accepted
+          persist-credentials: false
+      - name: Checkout exact merged protected-main permanent tools
+        uses: actions/checkout@v4
+        with:
+          ref: 229c8302b67112e1b86b8c24006fd904269b4b42
+          path: permanent
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate input and package deterministic original Stage 3B
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C accepted rev-parse HEAD)" = "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745"
+          test "$(git -C permanent rev-parse HEAD)" = "229c8302b67112e1b86b8c24006fd904269b4b42"
+          mkdir -p "$RUNNER_TEMP/stage4"
+          python - <<'PY'
+          import os,hashlib,json,zipfile
+          from pathlib import Path
+          root=Path("accepted/research/air-force/stage3b/completion-0048")
+          manifest=json.loads((root/"manifest.json").read_text())
+          status=json.loads((root/"status.json").read_text())
+          assert manifest["status"]=="COMPLETE" and status["status"]=="COMPLETE"
+          assert manifest["protected_main_sha"]=="242370fc551fd749c157c74d92917ddfafbe40e0"
+          assert len(manifest["files"])==16
+          for item in manifest["files"]:
+              data=(root/item["name"]).read_bytes()
+              assert hashlib.sha256(data).hexdigest()==item["sha256"],item["name"]
+              assert len(data)==item["bytes"],item["name"]
+          dest=Path(os.environ["RUNNER_TEMP"])/"input-stage3b-0048.zip"
+          with zipfile.ZipFile(dest,"w",compression=zipfile.ZIP_STORED) as archive:
+              for path in sorted(root.rglob("*")):
+                  if path.is_file():
+                      zi=zipfile.ZipInfo(path.relative_to(root).as_posix(),date_time=(1980,1,1,0,0,0))
+                      zi.compress_type=zipfile.ZIP_STORED
+                      zi.external_attr=0o100644<<16
+                      archive.writestr(zi,path.read_bytes())
+          digest=hashlib.sha256(dest.read_bytes()).hexdigest()
+          assert digest=="c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",digest
+          print("IMMUTABLE_INPUT_SHA256:",digest)
+          PY
+      - name: Run current-protected-main permanent Stage 4 coordinator
+        shell: bash
+        run: |
+          set +e
+          (cd permanent && PYTHONPATH=tools python tools/research_stage4.py author air-force "$RUNNER_TEMP/input-stage3b-0048.zip" --main-sha 229c8302b67112e1b86b8c24006fd904269b4b42 --output-dir "$RUNNER_TEMP/stage4") > "$RUNNER_TEMP/stage4/permanent-author-console.log" 2>&1
+          rc=$?
+          echo "$rc" > "$RUNNER_TEMP/stage4/permanent-author-exit-code.txt"
+          exit 0
+      - name: Prove exactly one residual historical classification and full source parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,os,json
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"stage4"
+          accepted=Path("accepted/research/air-force/stage3b/completion-0048")
+          report=json.loads((root/"stage4-authoring-preflight.json").read_text())
+          assert report["status"]=="PASS" and not report["defects"]
+          result=json.loads((root/"closeout/stage4-research-check.json").read_text())
+          assert result["status"]=="FAIL" and len(result["errors"])==1,result["errors"][:10]
+          error=result["errors"][0]
+          assert "AF-1959-60-006" in error and "Alumni Hall" in error and "SOURCE_PROGRAM_HOME" in error,error
+          assert (root/"permanent-author-exit-code.txt").read_text().strip()=="1"
+          with (root/"package/source-games.csv").open(newline="") as f:
+              package=list(csv.DictReader(f))
+          assert len(package)==1928
+          assert all(x["team_score"].isdigit() and x["opponent_score"].isdigit() for x in package)
+          assert sum(bool(x["raw_text"]) for x in package)==1928
+          assert sum(bool(x["source_page"]) for x in package)==1865
+          ids={x["source_game_id"]:x for x in package}
+          for key,ot in {"AF-1999-00-014":"3","AF-1999-00-019":"1","AF-2000-01-009":"1"}.items():
+              assert ids[key]["overtime_periods"]==ot
+          for key in ("AF-1985-86-008","AF-1985-86-009","AF-1996-97-008","AF-1998-99-008"):
+              assert ids[key]["site_research_status"] in ("RESEARCHED_PARTIAL","RESEARCHED_UNRESOLVED")
+              assert ids[key]["site_research_basis"]
+          assert "goairforcefalcons.com" in (root/"package/source-notes.md").read_text()
+          summary={
+              "schema_version":1,"kind":"STAGE4_POSTMERGE_PERMANENT_REPLAY",
+              "school_key":"air-force","status":"BLOCKED_ONE_HISTORICAL_HAN_CONTRADICTION",
+              "protected_main_sha":"229c8302b67112e1b86b8c24006fd904269b4b42",
+              "accepted_stage3b_research_commit":"53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745",
+              "accepted_stage3b_sha256":"c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",
+              "exact_competitive_games":1928,"scores_present":1928,
+              "guide_raw_text_present":1928,"primary_page_present":1865,
+              "overtime_token_reparations":3,"already_researched_neutral_statuses":4,
+              "remaining_historical_game":"AF-1959-60-006","error_count":1,"error":error,
+              "stage4_complete":False,"stage5_started":False,"basketball_data_mutations":0,
+          }
+          (root/"postmerge-proof.json").write_text(json.dumps(summary,indent=2)+"\n")
+          print(json.dumps(summary,indent=2))
+          PY
+      - name: Commit complete read-only permanent results to isolated branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="$PWD/transport/research/air-force/stage4/postmerge-replay-0050"
+          mkdir -p "$target"
+          cp -a "$RUNNER_TEMP/stage4/." "$target/"
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root=Path("transport/research/air-force/stage4/postmerge-replay-0050")
+          lines=[f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(root).as_posix()}"
+                 for p in sorted(root.rglob("*")) if p.is_file() and p.name!="SHA256SUMS.txt"]
+          (root/"SHA256SUMS.txt").write_text("\n".join(lines)+"\n")
+          PY
+          cd transport
+          git config user.name "Research Stage 4 postmerge exact verification"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/air-force/stage4/postmerge-replay-0050
+          if ! git diff --cached --quiet; then
+            git commit -m "research(air-force): preserve postmerge permanent Stage 4 0050 replay"
+            git push origin HEAD:research/air-force-stage4-postmerge-0050-transport
+          fi
+      - name: Upload exact postmerge recovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: air-force-stage4-0050-postmerge-replay
+          path: transport/research/air-force/stage4/postmerge-replay-0050/
+          if-no-files-found: warn
+          retention-days: 14
