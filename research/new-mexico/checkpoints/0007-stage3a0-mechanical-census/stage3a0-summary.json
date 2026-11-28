@@ -1,0 +1,45 @@
+{
+  "entry_mode": "ledger_csv",
+  "external_historical_research_used": false,
+  "input_artifact": "research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/structured-stage2-ledger.csv",
+  "input_artifact_sha256": "66e25de084f79ea1a03cdf62df05199c93ca1d637cda8683ec05f8197159eaad",
+  "input_ledger": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a0-input-ledger.csv",
+  "input_ledger_sha256": "3085e86b7a16ec89e6bc270134fee6f02f53498af53231ab620825162129bcb0",
+  "ledger_rows": 2891,
+  "neutral_era_census": {},
+  "next_action": "STOP_AT_STAGE_3A0_BOUNDARY",
+  "next_bounded_assignment": "Stage 3A-1 \u2014 H/A/N completion",
+  "partition": {
+    "postseason": 164,
+    "regular_season": 2727,
+    "unclassified": 0
+  },
+  "project_evidence_reuse": {
+    "deferred_to": [
+      "STAGE_3A1",
+      "STAGE_3A2",
+      "STAGE_3A3_TIER1"
+    ],
+    "performed_in_stage3a0": false,
+    "reason": "Stage 3A-0 is checkpoint-only census/partition."
+  },
+  "project_evidence_reuse_deferred": true,
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "readiness": {
+    "blocking_defects": {},
+    "date_blank_count": 2891,
+    "ready": true
+  },
+  "regular_season_site_census": {
+    "HOME": 0,
+    "NEUTRAL": 0,
+    "OPPONENT_HOME": 0,
+    "UNKNOWN": 2727
+  },
+  "repository_state_required": false,
+  "schema_version": 5,
+  "school_key": "new-mexico",
+  "site_type_defaulted_to_unknown_count": 0,
+  "source_ledger_sha256": "66e25de084f79ea1a03cdf62df05199c93ca1d637cda8683ec05f8197159eaad",
+  "status": "COMPLETE"
+}

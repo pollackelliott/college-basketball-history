@@ -1,0 +1,81 @@
+{
+  "external_historical_research_used": false,
+  "files": [
+    {
+      "bytes": 1195,
+      "path": "README.md",
+      "sha256": "51924ff7ba31d9abfc00267884e75902838f5b6650da491c289fe32ba221cf65"
+    },
+    {
+      "bytes": 2167,
+      "path": "manifest.json",
+      "sha256": "0d6ba75f6d7f63a6ddac55e2ece91373506cdb8c555b2921cdc91dae89e8fdb6"
+    },
+    {
+      "bytes": 1208030,
+      "path": "stage3a0-input-ledger.csv",
+      "sha256": "3085e86b7a16ec89e6bc270134fee6f02f53498af53231ab620825162129bcb0"
+    },
+    {
+      "bytes": 3,
+      "path": "stage3a0-opponent-home-queue.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 1567,
+      "path": "stage3a0-status.json",
+      "sha256": "638dc221ccc47e6b4f7dd604d1f87fcc7077441669aa95740bc8eed7c9b4f751"
+    },
+    {
+      "bytes": 1567,
+      "path": "stage3a0-summary.json",
+      "sha256": "638dc221ccc47e6b4f7dd604d1f87fcc7077441669aa95740bc8eed7c9b4f751"
+    },
+    {
+      "bytes": 4195911,
+      "path": "stage3a1-unknown-han-queue.json",
+      "sha256": "f641e79863e179c3ca95de500d86c3ea329b0421cc67fa8d99ece4a7843c477b"
+    },
+    {
+      "bytes": 3,
+      "path": "stage3a2-home-queue.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 3,
+      "path": "stage3a3-historical-neutral-queue.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 3,
+      "path": "stage3a3-modern-neutral-queue.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 3,
+      "path": "stage3a3-neutral-queue.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 255731,
+      "path": "stage3b-postseason-handoff.json",
+      "sha256": "7116e9b2c73363a6c56d651168777bf476ec5c4b85f8799ad019758c9bc06f2f"
+    },
+    {
+      "bytes": 840,
+      "path": "stage4-authoring/institutional-scope.json",
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e"
+    },
+    {
+      "bytes": 242748,
+      "path": "stage4-authoring/opponents.csv",
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44"
+    }
+  ],
+  "kind": "NEW_MEXICO_STAGE3A0_PORTABLE_CHECKPOINT_V1",
+  "parent_research_commit_sha": "41432f70177b7c270cc611ae8c568a55f22f7bf3",
+  "parent_stage2_ledger_git_blob_sha": "8c9c501f35a35a8813c250bad20c74783e6f9a8e",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "schema_version": 1,
+  "stage3a0_status": "COMPLETE"
+}

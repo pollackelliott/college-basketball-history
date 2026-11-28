@@ -1,0 +1,42 @@
+{
+  "home_queue": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a2-home-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "input_ledger": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a0-input-ledger.csv",
+    "sha256": "3085e86b7a16ec89e6bc270134fee6f02f53498af53231ab620825162129bcb0"
+  },
+  "neutral_historical_queue": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a3-historical-neutral-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "neutral_modern_queue": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a3-modern-neutral-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "neutral_queue": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a3-neutral-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "opponent_home_queue": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a0-opponent-home-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "postseason_queue": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3b-postseason-handoff.json",
+    "sha256": "7116e9b2c73363a6c56d651168777bf476ec5c4b85f8799ad019758c9bc06f2f"
+  },
+  "status": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a0-status.json",
+    "sha256": "638dc221ccc47e6b4f7dd604d1f87fcc7077441669aa95740bc8eed7c9b4f751"
+  },
+  "summary": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a0-summary.json",
+    "sha256": "638dc221ccc47e6b4f7dd604d1f87fcc7077441669aa95740bc8eed7c9b4f751"
+  },
+  "unknown_queue": {
+    "path": "research/new-mexico/checkpoints/0007-stage3a0-mechanical-census/stage3a1-unknown-han-queue.json",
+    "sha256": "f641e79863e179c3ca95de500d86c3ea329b0421cc67fa8d99ece4a7843c477b"
+  }
+}
