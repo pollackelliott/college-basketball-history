@@ -1671,7 +1671,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/nevada/nevada-release-preview-verify-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "e980c8fb41c29ae4f1a5d8204a95cf41370d1c80325a17e3f997f6f35c621c05",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_status": "OWNER_GATE_2_READY",
     "operation": "RELEASE_PREVIEW_VERIFY",
     "owner_gate_2_approved": false,
@@ -1680,7 +1680,7 @@
     "preview_deployment_id": 8125268623,
     "preview_url": "https://college-basketball-history-7hzsgcua0-elliott-pollacks-projects.vercel.app",
     "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
-    "remote_release_preview_equivalence": "PENDING",
+    "remote_release_preview_equivalence": "PASS",
     "request_id": "nevada-release-preview-verify-0001",
     "school_key": "nevada",
     "target_branch": "data/nevada-onboarding",
