@@ -1,0 +1,86 @@
+{
+  "kind": "SDSU_STAGE2_ARCHIVE_PARITY_EXECUTION_BLOCKED_0048_V1",
+  "stage": "STAGE_2",
+  "school_key": "san-diego-state",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "e23aedfb59151f2d2428210c694b5a12ebacb124",
+  "stage1_authority": {
+    "checkpoint": "0029-stage1-complete-source-acknowledged-coverage-gap",
+    "zip_git_blob": "e71dc178f8b360dd19fad5c2e14075fcb999dbb9",
+    "zip_bytes_declared": 451387,
+    "zip_sha256_declared_not_recomputed": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+    "zip_url": "https://github.com/pollackelliott/college-basketball-history/blob/e23aedfb59151f2d2428210c694b5a12ebacb124/research/san-diego-state-all-history-expansion/checkpoints/0029-stage1-complete-source-acknowledged-coverage-gap/san-diego-state-stage1-complete-checkpoint.zip",
+    "stage1_published_closeout_rows": 1086,
+    "source_named_rows": 1126,
+    "excluded_rows": 40,
+    "stage1_0027_inner_game_ledger_sha256_recovered_from_archived_derivation": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e",
+    "stage1_0027_inner_game_ledger_byte_parity_with_0029_unverified": true
+  },
+  "stage2_authority": {
+    "checkpoint": "0047-stage2-game-level-ledger-derived-source-authority",
+    "structured_ledger_sha256": "1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89",
+    "structured_ledger_git_blob": "4865c0b823394a7b47ed938df7f762aa6c77b5ad",
+    "structured_ledger_bytes": 1364414,
+    "opponents_csv_sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d",
+    "opponents_csv_git_blob": "fe7314fa2b8c0b8ca24d8b938b677edff997c4ba",
+    "accepted_games": 1086,
+    "distinct_raw_labels": 341,
+    "distinct_opponent_keys": 203,
+    "regular_season": 1043,
+    "postseason": 43,
+    "source_outcomes": {
+      "W": 654,
+      "L": 431,
+      "T": 1
+    },
+    "site_types": {
+      "UNKNOWN": 1086
+    },
+    "complete_game_level_ledger_authored": true,
+    "all_341_source_label_counts_verified": true
+  },
+  "read_only_transport_attempts": [
+    {
+      "route": "GitHub connector fetch_blob on Stage1 ZIP Git blob",
+      "outcome": "FAILED_BINARY_UTF8_DECODE",
+      "detail": "UnicodeDecodeError: 0xe8 at position 14; text connector does not expose binary bytes"
+    },
+    {
+      "route": "GitHub fetch URL to git/blobs/<sha> and contents at exact Research commit",
+      "outcome": "REJECTED_BINARY",
+      "detail": "HTTP 400 non-UTF-8 content refused by connector"
+    },
+    {
+      "route": "local runtime HTTPS access to exact GitHub raw archive",
+      "outcome": "FAILED_NETWORK_DNS",
+      "detail": "raw.githubusercontent.com DNS lookup unavailable; no live repository network access"
+    },
+    {
+      "route": "GitHub Actions run 46104691486 artifact census",
+      "outcome": "NO_EXACT_0029_ZIP",
+      "detail": "Only 0027 auditor diagnostic artifact listed, not 0029 final Stage1 ZIP"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "STAGE2_EXACT_STAGE1_ARCHIVE_INNER_GAME_LEDGER_PARITY_NOT_EXECUTED",
+      "kind": "EXECUTION_TRANSPORT",
+      "population": 1,
+      "required_proof": "Independently extract 0029 ZIP by exact SHA-256 in authorized ZIP-capable environment; authenticate manifest/hash inventory, identify its accepted 1086-row inner Stage1 ledger, compare original source-game ID and every accepted original game field against derived 0047 game ledger, including W/L/T, five blank-score pairs, 40 excluded rows, 1921-22 coverage debt and source site token convention. Then run bounded permanent-policy Stage2 readiness; checkpoint PASS or exact mismatch population.",
+      "is_historical_identity_research_blocker": false,
+      "is_owner_decision": false,
+      "requires_tooling_environment_not_approval": true
+    }
+  ],
+  "historical_opponent_mapping_residual_labels": 0,
+  "historical_opponent_mapping_residual_games": 0,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "owner_NON_D1_scan_later": true,
+  "shared_registry_mutations": 0,
+  "source_game_mutations": 0,
+  "github_pending_process": null,
+  "has_pending_external_job": false,
+  "next_boundary": "Do not retry inaccessible binary reads in the same text-only environment. Recover exact 0029 ZIP bytes through authorized archive-capable execution, run parity and readiness; stop if access remains unavailable. Do not initiate Stage3A-0 on this checkpoint."
+}

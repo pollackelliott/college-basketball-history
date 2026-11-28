@@ -1,0 +1,48 @@
+{
+  "kind": "SDSU_STAGE2_PARITY_TRANSPORT_BLOCKED_CHECKPOINT_0048_V1",
+  "checkpoint": "0048-stage2-archive-parity-transport-blocked",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "parent_research_head": "e23aedfb59151f2d2428210c694b5a12ebacb124",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "stage1_zip_sha256_declared": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "stage1_zip_parity_unverified": true,
+  "opponent_label_residuals": 0,
+  "game_level_ledger_rows": 1086,
+  "mechanical_execution_transport_blocker_count": 1,
+  "files": {
+    "structured-stage2-ledger.csv": {
+      "sha256": "1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89",
+      "bytes_utf8": 1364414,
+      "git_blob": "4865c0b823394a7b47ed938df7f762aa6c77b5ad",
+      "carried_unchanged": true
+    },
+    "stage2-game-level-ledger-audit.json": {
+      "sha256": "f630135cef47a2c2e387de4ab969b19cec78ce28d94fa18337826bbd0452ad4a",
+      "bytes_utf8": 6024,
+      "git_blob": "4ebae00850b45f73e89917c62c8f7dc95fe676b6",
+      "carried_unchanged": true
+    },
+    "stage4-authoring/opponents.csv": {
+      "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d",
+      "bytes_utf8": 289478,
+      "git_blob": "fe7314fa2b8c0b8ca24d8b938b677edff997c4ba",
+      "carried_unchanged": true
+    },
+    "stage2-parity-transport-diagnostic.json": {
+      "sha256": "dc237cb422e2f8b650c5f53d1ebde3bc33b73c7ffc76acb2e89df7c5ff3b24c9",
+      "bytes_utf8": 4482
+    },
+    "research-status.json": {
+      "sha256": "9d095d2957451a6ed015ce99acd73327382cf3bb4f2f49edc4512dca204bf700",
+      "bytes_utf8": 1664
+    },
+    "research-findings.md": {
+      "sha256": "fb516f66fef425654c46dd0321c14b29af5a1c60f03e727da823c11d2d067c27",
+      "bytes_utf8": 3150
+    }
+  }
+}
