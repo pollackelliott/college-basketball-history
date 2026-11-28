@@ -217,6 +217,30 @@ def _accepted_expansion_legacy_warnings(
     return warnings
 
 
+def _expected_venue_reconciliation_sha256(freeze: dict[str, Any]) -> str | None:
+    """Respect immutable Phase 0 venue-sidecar binding in both freeze schemas.
+
+    Ordinary Integration Freeze schema 2 embeds the exact sidecar digest as
+    venue_reconciliation.spec_sha256; expansion freezes may use the legacy
+    top-level venue_reconciliation_sha256. Never manufacture a missing digest.
+    """
+    reconciliation = freeze.get("venue_reconciliation")
+    top_level = str(freeze.get("venue_reconciliation_sha256") or "")
+    if reconciliation is None:
+        if top_level:
+            raise Stop("STAGE2_PROPOSAL_UNEXPECTED_VENUE_RECONCILIATION_HASH")
+        return None
+    if not isinstance(reconciliation, dict):
+        raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_INVALID")
+    embedded = str(reconciliation.get("spec_sha256") or "")
+    if top_level and embedded and top_level != embedded:
+        raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_HASH_CONFLICT")
+    expected = top_level or embedded
+    if len(expected) != 64 or any(c not in "0123456789abcdef" for c in expected):
+        raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_HASH_INVALID")
+    return expected
+
+
 def _phase0_venue_reconciliation_bytes(
     *,
     control_commit: str,
@@ -230,14 +254,10 @@ def _phase0_venue_reconciliation_bytes(
         freeze = json.loads(freeze_bytes)
     except (TypeError, ValueError) as exc:
         raise Stop("STAGE2_PROPOSAL_FREEZE_JSON_INVALID") from exc
-    reconciliation = freeze.get("venue_reconciliation")
-    expected = str(freeze.get("venue_reconciliation_sha256") or "")
-    if reconciliation is None:
-        if expected:
-            raise Stop("STAGE2_PROPOSAL_UNEXPECTED_VENUE_RECONCILIATION_HASH")
+    expected = _expected_venue_reconciliation_sha256(freeze)
+    if expected is None:
         return None
-    if len(expected) != 64 or any(c not in "0123456789abcdef" for c in expected):
-        raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_HASH_INVALID")
+    is_expansion = freeze.get("kind") == EXPANSION_FREEZE_KIND
 
     authority_kind = stage2_authority.get("kind")
     if authority_kind == "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT":
@@ -270,9 +290,14 @@ def _phase0_venue_reconciliation_bytes(
     if sha256_bytes(phase0_bytes) != phase0_sha:
         raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_SUCCESSOR_HASH_MISMATCH")
     phase0 = json.loads(phase0_bytes)
+    phase0_operation = phase0.get("operation")
     if (
         phase0.get("kind") != "REMOTE_IMPLEMENTATION_SUCCESSOR"
-        or phase0.get("operation") != "EXPANSION_PHASE0"
+        or (
+            phase0_operation != "EXPANSION_PHASE0"
+            if is_expansion
+            else phase0_operation not in (None, "PHASE0")
+        )
         or phase0.get("school_key") != request["school_key"]
         or phase0.get("target_branch") != request["target_branch"]
         or phase0.get("integration_freeze_sha256")
@@ -290,13 +315,19 @@ def _phase0_venue_reconciliation_bytes(
     if sha256_bytes(writeahead_bytes) != writeahead_sha:
         raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_WRITEAHEAD_HASH_MISMATCH")
     writeahead = json.loads(writeahead_bytes)
+    writeahead_operation = writeahead.get("operation")
     if (
         writeahead.get("kind") != "REMOTE_IMPLEMENTATION_WRITEAHEAD"
-        or writeahead.get("operation") != "EXPANSION_PHASE0"
+        or (
+            writeahead_operation != "EXPANSION_PHASE0"
+            if is_expansion
+            else writeahead_operation not in (None, "PHASE0")
+        )
         or writeahead.get("school_key") != request["school_key"]
         or writeahead.get("target_branch") != request["target_branch"]
         or writeahead.get("integration_freeze_sha256")
         != request["integration_freeze_sha256"]
+        or phase0.get("request_id") != writeahead.get("request_id")
     ):
         raise Stop("STAGE2_PROPOSAL_PHASE0_VENUE_WRITEAHEAD_MISMATCH")
     if (writeahead.get("sidecars") or {}).get("venue-reconciliation.json") != expected:
@@ -538,9 +569,8 @@ def run_stage2_proposal_tool(
             freeze = json.loads(freeze_bytes)
         except (TypeError, ValueError) as exc:
             raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_FREEZE_INVALID") from exc
-        reconciliation = freeze.get("venue_reconciliation")
-        reconciliation_sha = str(freeze.get("venue_reconciliation_sha256") or "")
-        if not isinstance(reconciliation, dict):
+        reconciliation_sha = _expected_venue_reconciliation_sha256(freeze)
+        if reconciliation_sha is None:
             raise Stop("STAGE2_PROPOSAL_UNEXPECTED_VENUE_RECONCILIATION_BYTES")
         if sha256_bytes(venue_reconciliation_bytes) != reconciliation_sha:
             raise Stop("STAGE2_PROPOSAL_VENUE_RECONCILIATION_BYTES_MISMATCH")
