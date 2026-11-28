@@ -1,0 +1,22 @@
+{
+  "approved_plan_hash": "d842daa2ee517e5ab00da4d8a96312b7dc501cca20ad3d5e4fe6aa69acbd8d91",
+  "kind": "REMOTE_IMPLEMENTATION_OWNER_GATE_2_APPROVAL",
+  "merge_authorized_exact_head_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "merge_authorized_pr_number": 735,
+  "merged": false,
+  "owner_gate_2_approved": true,
+  "pr_body_sha256": "ed5d09f5cbdd0220bdf4f265b4397e479601099d221395aabdfe0948b5301e2d",
+  "pr_number": 735,
+  "preview_checkpoint_sha256": "e980c8fb41c29ae4f1a5d8204a95cf41370d1c80325a17e3f997f6f35c621c05",
+  "preview_deployment_id": 8125268623,
+  "preview_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "preview_request_id": "nevada-release-preview-verify-0001",
+  "preview_url": "https://college-basketball-history-7hzsgcua0-elliott-pollacks-projects.vercel.app",
+  "preview_verification_sha256": "7217c6fd8d8b71347296960ea4c42c2578cc190b4a35d59b307626f964871685",
+  "production_proof": false,
+  "release_manifest_sha256": "0e91f8b8e2d7df91d2c5262465b73d31fabc399f35534768896993dbb975a51e",
+  "school_key": "nevada",
+  "status": "OWNER_GATE_2_APPROVED",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9"
+}
