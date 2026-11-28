@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "RESEARCH_STAGE2_CHECKPOINT_MANIFEST_V1",
+  "school_key": "new-mexico",
+  "checkpoint": "0005-stage2-identity-census-and-high-confidence-reuse",
+  "checkpoint_state": "STAGE_2_IN_PROGRESS",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "e3b4c945ad3793b93f79e639099b5961c6ee4e7f",
+  "immutable_stage1_complete_blob_sha": "63490b3398c94193da324911b1d002aafcac2d06",
+  "programs_reference_blob_sha": "db9d85853c1d85fe27f84bdab94c3a812c23d630",
+  "verified_program_names_reference_blob_sha": "e645609aacfb749ee201c41b9c3e5d364f6552cf",
+  "institutional_scope_authority_blob_sha": "0c1e3d61cebd444008e8c6e520c78e6444843b70",
+  "game_rows": 2891,
+  "resolved_games": 2670,
+  "unresolved_games": 221,
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "d84e7a7e41a35403f3dd654a1f876c11773ce955",
+      "bytes": 3231
+    },
+    {
+      "path": "structured-stage2-working-ledger.csv",
+      "git_blob_sha": "8a66e1153aa87eb069ea49bf42c48478ce7ac93e",
+      "bytes": 1164102
+    },
+    {
+      "path": "source-label-identity-census.csv",
+      "git_blob_sha": "16e217a38a4f5ebfd0190df7fc822dbe2f8653df",
+      "bytes": 242247
+    },
+    {
+      "path": "unresolved-identity-queue.csv",
+      "git_blob_sha": "b854c4c0e465fc253df8129993a5416a72b6cced",
+      "bytes": 23206
+    },
+    {
+      "path": "documented-identity-families.csv",
+      "git_blob_sha": "24fddfd4e6b7bab6e0f27911285c30cba4ffb4bb",
+      "bytes": 5917
+    },
+    {
+      "path": "stage2-status.json",
+      "git_blob_sha": "fadf7ca557c5db9496dc3bdfa2720ef73f460999",
+      "bytes": 3777
+    }
+  ]
+}

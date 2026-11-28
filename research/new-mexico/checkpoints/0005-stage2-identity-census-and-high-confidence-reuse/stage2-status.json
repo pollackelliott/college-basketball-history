@@ -1,0 +1,134 @@
+{
+  "kind": "NEW_MEXICO_STAGE2_INITIAL_IDENTITY_CENSUS_V1",
+  "state": "STAGE_2_IN_PROGRESS",
+  "school_key": "new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "stage1_complete_parent_commit": "e3b4c945ad3793b93f79e639099b5961c6ee4e7f",
+  "stage1_accepted_game_blob_sha": "63490b3398c94193da324911b1d002aafcac2d06",
+  "source_pdf_sha256": "94a121232efa82a71ebb448139d4e72c799ac032128cb625ce2a5178b6bbdcc7",
+  "accepted_top_level_scope": "INCEPTION+",
+  "program_inception_season": "1899-00",
+  "game_rows": 2891,
+  "literal_opponent_labels": 986,
+  "resolved_games": 2670,
+  "unresolved_games": 221,
+  "resolved_literal_labels": 822,
+  "unresolved_literal_labels": 164,
+  "unresolved_normalized_roots": 157,
+  "source_game_type_count": {
+    "REGULAR_SEASON": 2727,
+    "POSTSEASON": 44,
+    "NCAA_TOURNAMENT": 27,
+    "CONFERENCE_TOURNAMENT": 93
+  },
+  "unresolved_top_20": [
+    {
+      "root": "Montezuma",
+      "games": 8
+    },
+    {
+      "root": "Albuquerque Bankers",
+      "games": 6
+    },
+    {
+      "root": "Kirtland AFB",
+      "games": 6
+    },
+    {
+      "root": "Albuquerque Business College",
+      "games": 5
+    },
+    {
+      "root": "Albuquerque Indian School",
+      "games": 5
+    },
+    {
+      "root": "Simon Fraser",
+      "games": 5
+    },
+    {
+      "root": "U.S. International",
+      "games": 5
+    },
+    {
+      "root": "Albuquerque Sports Shop",
+      "games": 4
+    },
+    {
+      "root": "Belen Merchants",
+      "games": 4
+    },
+    {
+      "root": "Albuquerque Kids",
+      "games": 3
+    },
+    {
+      "root": "Albuquerque Minors",
+      "games": 3
+    },
+    {
+      "root": "Albuquerque Troopers",
+      "games": 3
+    },
+    {
+      "root": "Hawaiian All-Stars",
+      "games": 3
+    },
+    {
+      "root": "Phillips 66 Oilers",
+      "games": 3
+    },
+    {
+      "root": "Camp Luna",
+      "games": 2
+    },
+    {
+      "root": "Centenary",
+      "games": 2
+    },
+    {
+      "root": "Kentucky Wesleyan",
+      "games": 2
+    },
+    {
+      "root": "Las Vegas YMCA",
+      "games": 2
+    },
+    {
+      "root": "Menaul High School",
+      "games": 2
+    },
+    {
+      "root": "Midwestern State",
+      "games": 2
+    }
+  ],
+  "identity_method_game_counts": {
+    "UNRESOLVED_IDENTITY_NOT_GUESSED": 221,
+    "EXPLICIT_HIGH_SCHOOL_SOURCE_LABEL": 12,
+    "IMMUTABLE_BASE_PROGRAM_NAME": 1956,
+    "NCAA_DII_INSTITUTION": 30,
+    "ACCEPTED_PROJECT_HISTORICAL_IDENTITY": 110,
+    "HISTORICAL_INSTITUTIONAL_RENAME": 40,
+    "INSTITUTIONAL_NAME_IDENTIFICATION": 16,
+    "SOURCE_TYPO_SAME_INSTITUTION": 1,
+    "DISTINCT_HISTORICAL_NON_D1_TEAM": 3,
+    "IMMUTABLE_BASE_CURRENT_PROGRAM_PLUS_SOURCE_ANNOTATION": 452,
+    "ACCEPTED_PROJECT_HISTORICAL_IDENTITY_ANNOTATED": 11,
+    "LITERAL_DISTINCT_HISTORICAL_NON_D1": 2,
+    "LITERAL_DISTINCT_HISTORICAL_NON_D1_ANNOTATED": 1,
+    "HISTORICAL_SHORT_FORM_CURRENT_PROGRAM_ANNOTATED": 2,
+    "IMMUTABLE_BASE_PROGRAM_DISPLAY": 12,
+    "DOCUMENTED_SOURCE_SHORT_FORM": 6,
+    "INSTITUTIONAL_RENAME_CURRENT_PROGRAM": 3,
+    "UNAMBIGUOUS_CURRENT_PROGRAM_SHORT_FORM_ANNOTATED": 2,
+    "DISAMBIGUATED_CURRENT_PROGRAM": 2,
+    "ACCEPTED_PROJECT_CURRENT_PROGRAM_ALIAS": 4,
+    "INSTITUTIONAL_SHORT_FORM_CURRENT_PROGRAM_ANNOTATED": 1,
+    "INSTITUTIONAL_SHORT_FORM_CURRENT_PROGRAM": 2,
+    "DOCUMENTED_SOURCE_SHORT_FORM_ANNOTATED": 1,
+    "HISTORICAL_SHORT_FORM_CURRENT_PROGRAM": 1
+  },
+  "stage2_authoring_capsule_status": "NOT_YET_PACKAGE_READY",
+  "next_assignment": "Bounded historical/local non-D1 source family and unresolved competing identity-key review; fill exactly the unmapped row populations; Stage 2 completion only after every literal label has an accepted identity and package-ready stage4-authoring/opponents.csv is manifested. Do not start Stage 3."
+}
