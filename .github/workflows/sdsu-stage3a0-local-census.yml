@@ -1,0 +1,172 @@
+name: SDSU Stage 3A-0 checkpoint-only permanent-tool census
+on:
+  push:
+    branches:
+      - research/san-diego-state-all-history-expansion
+    paths:
+      - .github/workflows/sdsu-stage3a0-local-census.yml
+permissions:
+  actions: read
+  contents: write
+jobs:
+  stage3a0-local-census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TOOL_BUNDLE: ${{ runner.temp }}/stage3a0-tool
+    steps:
+      - name: Check out exact Research predecessor
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Retrieve exact protected-main Stage 3A-0 portable tool artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: research-stage3a0-tool-242370fc551fd749c157c74d92917ddfafbe40e0
+          run-id: 46153935899
+          repository: pollackelliott/college-basketball-history
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ env.TOOL_BUNDLE }}
+      - name: Verify repository-owned tool artifact and Git object identities
+        shell: bash
+        run: |
+          python "$TOOL_BUNDLE/tools/research_stage3a0_portable.py" verify "$TOOL_BUNDLE" --main-sha "242370fc551fd749c157c74d92917ddfafbe40e0"
+          test "$(git hash-object "$TOOL_BUNDLE/tools/research_stage3a0.py")" = "17afe677c8a107935afb72f86b0eb0023f2ad76b"
+          test "$(git hash-object "$TOOL_BUNDLE/tools/research_authoring_capsule.py")" = "98874d4ca599887eb5535af27fec5d6c0c8c4973"
+      - name: Run permanent checkpoint-only Stage 3A-0 against exact certified Stage 2 authority
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,hashlib,io,json,os,pathlib,subprocess,sys,zipfile
+          from collections import Counter
+          root=pathlib.Path("research/san-diego-state-all-history-expansion")
+          source=root/"stage2/0052-stage2-complete-exact-source-provenance"
+          out=root/"stage3a/0053-stage3a0-local-mechanical-census"
+          main="242370fc551fd749c157c74d92917ddfafbe40e0"
+          parent="83671d9088c103711920a7d6bcc416a3c8f397e1"
+          research_base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          def sha(data):return hashlib.sha256(data).hexdigest()
+          def check(ok,note):
+              if not ok:raise RuntimeError("STAGE3A0_AUTHORITY_OR_OUTPUT_CHECK_FAILED: "+note)
+          def load(p):return json.loads(p.read_text(encoding="utf-8"))
+          def countjson(p):return len(load(p))
+          def rows(p):
+              with p.open(newline="",encoding="utf-8-sig") as f:return list(csv.DictReader(f))
+          check(subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()==parent,"research HEAD")
+          check(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main advanced")
+          check(subprocess.run(["git","cat-file","-e",research_base+"^{commit}"],capture_output=True).returncode==0,"immutable base unavailable")
+          m=load(source/"manifest.json")
+          s=load(source/"research-status.json")
+          check(m["stage2_complete"] is True and s["stage2_complete"] is True,"Stage 2 not complete")
+          check(m["parent_research_head"]=="8ce570bbe263f1116453fc7b72c5e70119ea1321" and m["immutable_research_base_sha"]==research_base,"original checkpoint provenance")
+          check(s["authoritative_stage2_ledger_sha256"]=="2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95","accepted ledger SHA")
+          check(s["stage3_started"] is False,"existing later stage")
+          files=m["files"]
+          check(set(files)==set(p.as_posix() for p in [path.relative_to(source) for path in source.rglob("*") if path.is_file() and path.name!="manifest.json"]),"Stage 2 exact member set")
+          for name,spec in files.items():
+              value=(source/name).read_bytes()
+              check(len(value)==spec["bytes"] and sha(value)==spec["sha256"],"member "+name)
+          check(len(rows(source/"structured-stage2-ledger.csv"))==1086,"1086 accepted games")
+          game_rows=rows(source/"structured-stage2-ledger.csv")
+          check(Counter(r["game_type"] for r in game_rows)=={"REGULAR_SEASON":1043,"POSTSEASON":43},"accepted game types")
+          check(Counter(r["site_type"] for r in game_rows)=={"UNKNOWN":1086},"explicit unknown H/A/N; no inference")
+          check(len({r["research_game_id"] for r in game_rows})==1086 and all(r["canonical_opponent_key"] for r in game_rows),"unique IDs & identities")
+          check(len(rows(source/"stage4-authoring/opponents.csv"))==341,"opponent map")
+          gap=load(source/"source-acknowledged-coverage-gaps.json")
+          check(gap["total_unidentified_games"]==3 and gap["terminal_gaps"][0]["new_game_ids"]==0,"accepted coverage debt")
+          out.mkdir(parents=True,exist_ok=False)
+          archive=out/"stage2-authority-input.zip"
+          with zipfile.ZipFile(archive,"w",compression=zipfile.ZIP_STORED,strict_timestamps=True) as z:
+              for name in sorted(["manifest.json"]+list(files)):
+                  info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0))
+                  info.compress_type=zipfile.ZIP_STORED
+                  info.external_attr=0o644<<16
+                  z.writestr(info,(source/name).read_bytes())
+          with zipfile.ZipFile(archive) as z:
+              check(z.testzip() is None,"input ZIP CRC")
+              check(len(z.namelist())==len(files)+1,"input ZIP member count")
+              for name in z.namelist():check(z.read(name)==(source/name).read_bytes(),"unchanged input archive member "+name)
+          binroot=pathlib.Path(os.environ["TOOL_BUNDLE"])
+          cmd=[sys.executable,str(binroot/"tools/research_stage3a0.py"),"san-diego-state",str(archive),"--main-sha",main,"--output-dir",str(out)]
+          result=subprocess.run(cmd,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+          (out/"stage3a0-permanent-tool-output.txt").write_text(result.stdout,encoding="utf-8")
+          check((out/"stage3a0-status.json").is_file(),"permanent tool did not emit status")
+          status=load(out/"stage3a0-status.json")
+          completed=result.returncode==0 and status["status"]=="COMPLETE"
+          if completed:
+              check(status["external_historical_research_used"] is False,"external research")
+              check(status["protected_main_sha"]==main,"tool SHA")
+              check(status["input_artifact_sha256"]==sha(archive.read_bytes()),"tool ZIP input SHA")
+              check(status["source_ledger_sha256"]==m["files"]["structured-stage2-ledger.csv"]["sha256"],"source ledger SHA")
+              check(status["ledger_rows"]==1086 and status["partition"]=={"regular_season":1043,"postseason":43,"unclassified":0},"exact partition")
+              check(status["regular_season_site_census"]=={"HOME":0,"OPPONENT_HOME":0,"NEUTRAL":0,"UNKNOWN":1043},"exact site census (unknown is legitimate)")
+              check(all(v==0 for v in status["neutral_era_census"].values()),"neutral queue census")
+              check(status["next_action"]=="STOP_AT_STAGE_3A0_BOUNDARY","stop boundary")
+              expected_queue_counts={
+                  "stage3a2-home-queue.json":0,
+                  "stage3a0-opponent-home-queue.json":0,
+                  "stage3a1-unknown-han-queue.json":1043,
+                  "stage3a3-neutral-queue.json":0,
+                  "stage3a3-modern-neutral-queue.json":0,
+                  "stage3a3-historical-neutral-queue.json":0,
+                  "stage3b-postseason-handoff.json":43,
+              }
+              for name,count in expected_queue_counts.items():check(countjson(out/name)==count,"queue "+name)
+              ck_stage4=status["stage4_authoring_carried"]
+              check(set(ck_stage4)=={"opponents.csv","season-coverage.json"},"Stage4 carry keys")
+              for name in ck_stage4:
+                  check((out/"stage4-authoring"/name).read_bytes()==(source/"stage4-authoring"/name).read_bytes(),"Stage4 exact carried "+name)
+              manifest=load(out/"manifest.json")
+              check(len(manifest)==12,"permanent manifest member count")
+              for name,item in manifest.items():
+                  path=pathlib.Path(item["path"])
+                  check(path.is_file() and sha(path.read_bytes())==item["sha256"],"permanent manifest "+name)
+              check(len(rows(out/"stage3a0-input-ledger.csv"))==1086,"preserved full input ledger")
+          else:
+              print("Permanent Stage 3A-0 execution returned non-complete status:",status["status"])
+          durable={
+              "kind":"SDSU_STAGE3A0_0053_EXECUTION_PROVENANCE_V1",
+              "school_key":"san-diego-state",
+              "checkpoint":"0053-stage3a0-local-mechanical-census",
+              "parent_research_head":parent,
+              "immutable_research_base_sha":research_base,
+              "protected_main_sha":main,
+              "stage2_certification_run":"https://github.com/pollackelliott/college-basketball-history/actions/runs/46167444155",
+              "stage2_ledger_sha256":m["files"]["structured-stage2-ledger.csv"]["sha256"],
+              "stage2_input_zip_sha256":sha(archive.read_bytes()),
+              "input_zip_members":len(files)+1,
+              "permanent_tool_main_git_blob":"17afe677c8a107935afb72f86b0eb0023f2ad76b",
+              "permanent_dependency_main_git_blob":"98874d4ca599887eb5535af27fec5d6c0c8c4973",
+              "authenticated_portable_bundle_run":"https://github.com/pollackelliott/college-basketball-history/actions/runs/46153935899",
+              "historical_external_research_used":False,
+              "result":status["status"],
+              "permanent_tool_exit_code":result.returncode,
+              "next_action":"STOP_AT_STAGE_3A0_BOUNDARY" if completed else "STOP_AND_DIAGNOSE_STAGE3A0_ENTRY",
+          }
+          (out/"stage3a0-execution-provenance.json").write_text(json.dumps(durable,indent=2,sort_keys=True)+"\n")
+          print(json.dumps({"status":status["status"],"tool_exit":result.returncode,"input_zip_sha256":durable["stage2_input_zip_sha256"],"stage3a0_output":str(out),"counts":status.get("partition"),"site_census":status.get("regular_season_site_census"),"stage4_carried":list(status.get("stage4_authoring_carried",{}))},indent=2))
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+              f.write("## San Diego State Stage 3A-0\n\n**"+status["status"]+"** — performed only permanent-tool local census; historical external research: none.\n\n")
+              if completed:f.write("1,086 ledger rows; 1,043 regular season UNKNOWN H/A/N; 43 postseason handoff. Stop at Stage 3A-0 boundary.\n")
+          (out/"stage3a0-workflow-conclusion.json").write_text(json.dumps({"status":status["status"],"tool_exit_code":result.returncode,"pass":completed},indent=2)+"\n")
+          PY
+      - name: Commit durable Stage 3A-0 mechanical checkpoint (Research branch only)
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/
+          git commit -m "research(sdsu): permanent Stage 3A-0 mechanical census and bounded queues"
+          git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
+      - name: Stop at Stage 3A-0 substage boundary
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a0-workflow-conclusion.json")
+          j=json.loads(p.read_text())
+          if not j["pass"]:
+              raise SystemExit("STAGE 3A-0: STOP WITH DURABLE NONCOMPLETE DIAGNOSTIC")
+          print("STAGE 3A-0: COMPLETE. STOP. No Stage 3A-1 was started.")
+          PY
