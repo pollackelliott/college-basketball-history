@@ -19,6 +19,7 @@ from remote_implementation_control import (
     OP_STAGE2_CENSUS,
     OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+    OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_STAGE2_GATE1_FILL,
     OP_STAGE2_PRESEAL_REHEARSAL,
@@ -102,6 +103,7 @@ from remote_implementation_stage2_diagnostic import (
     run_stage2_reconciliation_diagnostic_tool,
     verify_stage2_diagnostic_authority,
 )
+from remote_implementation_stage2_key_rebase import verify_key_rebase
 from remote_implementation_stage2_opponent_display import (
     run_normalizer_dry_run,
     verify_census_and_freeze_authority,
@@ -2898,6 +2900,8 @@ def main() -> int:
                 control_head,
                 state,
             )
+        if last.get("operation") == OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE:
+            return verify_key_rebase(live_main, control_head, state)
         if last.get("operation") == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
             return verify_stage2_opponent_display_normalization(
                 live_main,
