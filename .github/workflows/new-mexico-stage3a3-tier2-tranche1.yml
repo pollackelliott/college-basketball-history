@@ -1,0 +1,90 @@
+name: New Mexico Stage 3A-3 Tier 2 2012-2017 official-event checkpoint
+on:
+  push:
+    branches: [research/new-mexico-stage3a3-tier2-transport]
+    paths: [.github/workflows/new-mexico-stage3a3-tier2-tranche1.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  tier2-tranche1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout isolated research transport branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Checkout immutable accepted research-base registry
+        uses: actions/checkout@v4
+        with:
+          repository: pollackelliott/college-basketball-history
+          ref: 242370fc551fd749c157c74d92917ddfafbe40e0
+          path: .exact-main
+          persist-credentials: false
+      - name: Verify permanent authority and execute one exact sourced tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .exact-main rev-parse HEAD)" = "242370fc551fd749c157c74d92917ddfafbe40e0"
+          test "$(git ls-remote origin refs/heads/research/new-mexico | cut -f1)" = "9a1930309b5f01f10ab4f1eec469ad7d377546d3"
+          python research/new-mexico/.transport-stage3a3-tier2.py
+      - name: Independently revalidate serialized candidate against immutable parent
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,hashlib,json,pathlib
+          base=pathlib.Path("research/new-mexico/checkpoints")
+          parent=base/"0013-stage3a3-tier1-accepted-evidence"
+          out=base/"0014-stage3a3-tier2-modern-events-tranche1"
+          s=json.loads((out/"stage3a3-tier2-status.json").read_text())
+          m=json.loads((out/"checkpoint-content-hashes.json").read_text())
+          assert s["state"]=="TRANCHE1_COMPLETE_TIER2_IN_PROGRESS" and s["accepted_exact_venue_rows"]==17
+          assert (s["remaining_modern"],s["remaining_historical"])==(40,42)
+          assert s["unchanged_regular_season_unknown_han"]==2 and s["unchanged_home_rows"]==1564
+          assert m["parent_research_commit_sha"]=="9a1930309b5f01f10ab4f1eec469ad7d377546d3"
+          for f in m["files"]:
+              p=out/f["path"]; b=p.read_bytes()
+              assert len(b)==f["bytes"] and hashlib.sha256(b).hexdigest()==f["sha256"],f["path"]
+          def rows(path):
+              with path.open(newline="",encoding="utf-8") as f:
+                  return list(csv.DictReader(f))
+          a=rows(parent/"parent-stage3a2-working-ledger.csv")
+          b=rows(out/"stage3a3-tier2-working-ledger.csv")
+          assert len(a)==len(b)==2891
+          allow={"curated_venue_name","curated_venue_city","curated_venue_state","curated_venue_country","accepted_venue_key","curation_provenance"}
+          modified=[]
+          for old,new in zip(a,b):
+              assert old["research_game_id"]==new["research_game_id"]
+              delta={k for k in old if old[k]!=new[k]}
+              if delta:
+                  assert delta==allow, (old["research_game_id"],delta)
+                  assert new["game_type"]=="REGULAR_SEASON" and new["site_type"]=="NEUTRAL"
+                  modified.append(old["research_game_id"])
+          assert len(modified)==17
+          assert set(modified)=={x["research_game_id"] for x in json.loads((out/"stage3a3-tier2-evidence.json").read_text())}
+          assert len(json.loads((out/"remaining-neutral-queue.json").read_text()))==82
+          assert len(rows(out/"stage4-authoring/venues.csv"))==10
+          for n in ("opponents.csv","institutional-scope.json"):
+              assert (parent/"stage4-authoring"/n).read_bytes()==(out/"stage4-authoring"/n).read_bytes()
+          print("INDEPENDENT_VERIFICATION_COMPLETE",len(modified),s["remaining_modern"],s["remaining_historical"])
+          PY
+      - name: Upload checkpoint artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-mexico-stage3a3-tier2-tranche1-0014
+          path: research/new-mexico/checkpoints/0014-stage3a3-tier2-modern-events-tranche1
+          if-no-files-found: error
+          retention-days: 3
+      - name: Publish checkpoint to disposable transport branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "New Mexico Research Tier2 CI"
+          git config user.email "new-mexico-tier2-ci@users.noreply.github.com"
+          git add research/new-mexico/checkpoints/0014-stage3a3-tier2-modern-events-tranche1
+          git diff --cached --quiet && exit 1
+          git commit -m "Generate New Mexico Tier 2 official-event checkpoint 0014"
+          git push origin HEAD:refs/heads/research/new-mexico-stage3a3-tier2-transport
