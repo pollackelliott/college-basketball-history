@@ -1,0 +1,13 @@
+issue_id,level,season,type,source_evidence,status,next_evidence
+NM-S1-0002-B01,BLOCKING,1918-19,SOURCE_SEASON_WL_CONTRADICTION,p.121; heading 4-1; 6 explicit result rows 2-4,UNRESOLVED,Reconcile with same-source detailed results/coaching totals and official program history; no arithmetic force
+NM-S1-0002-B02,BLOCKING,1940-41,SOURCE_SEASON_WL_CONTRADICTION,p.122; heading 5-17; 23 explicit result rows 5-18,UNRESOLVED,Reconcile with same-source detailed results/coaching totals and official program history; no arithmetic force
+NM-S1-0002-B03,BLOCKING,1979-80,SOURCE_SEASON_WL_CONTRADICTION,p.126; heading 6-22; 28 explicit result rows 7-21,UNRESOLVED,Reconcile with same-source detailed results/coaching totals and official program history; no arithmetic force
+NM-S1-0002-N01,NONBLOCKING,1933-34,SOURCE_SCORE_UNRECOVERED,p.122: at Belen Merchants W,PRESERVED_UNKNOWN_SCORE,Do not manufacture score without direct source corroboration
+NM-S1-0002-N02,NONBLOCKING,1948-49,SOURCE_SCORE_UNRECOVERED,p.123: F4 at UTEP L 5153,PRESERVED_UNKNOWN_SCORE,Do not manufacture score without direct source corroboration
+NM-S1-0002-N03,NONBLOCKING,1956-57,SOURCE_SCORE_UNRECOVERED,p.124: D28 vs. UTEP 2 L 65=78,PRESERVED_UNKNOWN_SCORE,Do not manufacture score without direct source corroboration
+NM-S1-0002-N04,NONBLOCKING,1973-74,SOURCE_SCORE_UNRECOVERED,p.126: J26 [19] Colorado State W 5449,PRESERVED_UNKNOWN_SCORE,Do not manufacture score without direct source corroboration
+NM-S1-0002-N05,NONBLOCKING,1987-88,SOURCE_SCORE_UNRECOVERED,p.127: D26 North Texas Lobo Inv W 77=69,PRESERVED_UNKNOWN_SCORE,Do not manufacture score without direct source corroboration
+NM-S1-0002-N06,NONBLOCKING,1989-90,SOURCE_SCORE_UNRECOVERED,p.128: N24 Hardin-Simmons Lobo Class W 9157,PRESERVED_UNKNOWN_SCORE,Do not manufacture score without direct source corroboration
+NM-S1-0002-N07,NONBLOCKING,2005-06,SOURCE_SCORE_UNRECOVERED,p.130: F4 Utah W 6453,PRESERVED_UNKNOWN_SCORE,Do not manufacture score without direct source corroboration
+NM-S1-0002-A01,AGGREGATE,ALL,OFFICIAL_OVERALL_RECORD_DIFFERENCE,"page 3 overall record 1,667-1,223; detailed candidate result lines 1,667-1,224",REVIEW_REQUIRED,Investigate 1940-41 extra source-listed loss and overall record accounting; do not omit a listed game
+NM-S1-0002-N06,NONBLOCKING,1917-18,SOURCE_SEASON_LABEL_TYPO,page 121 printed 1907-18 (No Team) between 1916-17 and 1918-19,NORMALIZED_WITH_LITERAL_PRESERVED,Use 1917-18 based on chronological source layout; no games included

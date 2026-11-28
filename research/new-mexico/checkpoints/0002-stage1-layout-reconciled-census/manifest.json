@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "RESEARCH_STAGE1_CHECKPOINT_MANIFEST_V1",
+  "checkpoint": "0002-stage1-layout-reconciled-census",
+  "school_key": "new-mexico",
+  "research_branch": "research/new-mexico",
+  "parent_research_commit_sha": "69a1953795334b8c6c64edc0766237f1ddb336bf",
+  "prior_checkpoint": "0001-stage1-primary-source-inventory",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "source_pdf_sha256": "94a121232efa82a71ebb448139d4e72c799ac032128cb625ce2a5178b6bbdcc7",
+  "checkpoint_state": "STAGE_1_IN_PROGRESS",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3874,
+      "sha256": "a5c2fb10adb96df4ed50e32af376c6647c29fac39dd99e81a0bc9ed8d029181b",
+      "git_blob_sha": "eea88ceb1957a82b7c22102af090aaa9f8d820f6"
+    },
+    {
+      "path": "source-game-candidates.csv",
+      "bytes": 784347,
+      "sha256": "00aa3c96562842f85119994e268d06db9219f2e79c0279b39eba21c141d90a1a",
+      "git_blob_sha": "f29e55b9b5e9091291278ad8e584b3c3cabbe8d6"
+    },
+    {
+      "path": "season-census.csv",
+      "bytes": 8400,
+      "sha256": "00c59ff2464d459e5f589aba0cc69e854a311cbc83c219ef629a856d6990a6ea",
+      "git_blob_sha": "ac4891e462a148f420d7b360c251d49df5a5aefb"
+    },
+    {
+      "path": "rejected-layout-fragments.csv",
+      "bytes": 6006,
+      "sha256": "92d5794c363fe3951a05becacbefe66ee71b923c678e782d0fb11e24a8fb042e",
+      "git_blob_sha": "4c219c898658b19a888cf9b2f7ad9207bb417fa9"
+    },
+    {
+      "path": "open-issues.csv",
+      "bytes": 2506,
+      "sha256": "6375abd81384a0ef8d3335ff774dd446260b47d3c2ba629981d7cc1b267a1790",
+      "git_blob_sha": "b87f0d2ef14faef6c01491c80db366fdc084c7e6"
+    },
+    {
+      "path": "stage1-status.json",
+      "bytes": 1643,
+      "sha256": "e64bc9526b2b4fdc7f105d378f1422a2194d5f107e4397c4565841cdb075a297",
+      "git_blob_sha": "f8b20b71cc1b5157c6b128dc7652047eb945347b"
+    }
+  ]
+}

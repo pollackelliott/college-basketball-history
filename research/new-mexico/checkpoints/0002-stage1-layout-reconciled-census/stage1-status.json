@@ -1,0 +1,58 @@
+{
+  "checkpoint_id": "0002",
+  "research_type": "NEW_ORIGINAL_SCHOOL",
+  "state": "STAGE_1_IN_PROGRESS",
+  "immutable_research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "school_key": "new-mexico",
+  "accepted_top_level_scope": "INCEPTION+",
+  "primary_source_pdf_sha256": "94a121232efa82a71ebb448139d4e72c799ac032128cb625ce2a5178b6bbdcc7",
+  "source_pdf_pages": "121-132",
+  "complete_season_cutoff": "2025-26",
+  "heading_count": 127,
+  "no_team_seasons": [
+    "1900-01",
+    "1903-04",
+    "1917-18",
+    "1920-21"
+  ],
+  "candidate_game_rows": 2891,
+  "candidate_results": {
+    "L": 1224,
+    "W": 1667
+  },
+  "season_heading_mismatches": [
+    {
+      "season": "1918-19",
+      "heading": "4-1",
+      "detailed": "2-4",
+      "pdf_page": "121",
+      "candidate_games": 6
+    },
+    {
+      "season": "1940-41",
+      "heading": "5-17",
+      "detailed": "5-18",
+      "pdf_page": "122",
+      "candidate_games": 23
+    },
+    {
+      "season": "1979-80",
+      "heading": "6-22",
+      "detailed": "7-21",
+      "pdf_page": "126",
+      "candidate_games": 28
+    }
+  ],
+  "unmatched_non_games_classified": 44,
+  "rescue_rows": 5,
+  "unresolved_source_score_rows": 7,
+  "game_type_counts": {
+    "REGULAR_SEASON": 2727,
+    "POSTSEASON": 44,
+    "NCAA_TOURNAMENT": 27,
+    "CONFERENCE_TOURNAMENT": 93
+  },
+  "site_type_unknown_rows": 2891,
+  "owner_scope_provenance": "Final owner INCEPTION+ ruling superseding current 1950-51+ reference row; no protected-main change.",
+  "reconciliation_warning": "Provisional source-extracted candidate games; no confirmed unique competitive-game freeze yet; no Stage 2 authority."
+}
