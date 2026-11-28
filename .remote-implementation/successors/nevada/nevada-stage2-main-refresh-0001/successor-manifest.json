@@ -1,0 +1,68 @@
+{
+  "actual_published_target_sha": "57c953748ace901d764b287bb8a625b01cb54091",
+  "changed_file_sha256": {
+    "tests/test_remote_implementation_stage2_proposal_venue_reconciliation.py": "393c52bb27a603d693277c57884f9c1500f4a99c8540c03bb28facbf05f32028",
+    "tools/remote_implementation_stage2_proposal.py": "b41b9fb0fc05653f76c6d3c2be872e653a1e684812b2383103c6e0c359201c2e"
+  },
+  "changed_paths": [
+    "tests/test_remote_implementation_stage2_proposal_venue_reconciliation.py",
+    "tools/remote_implementation_stage2_proposal.py"
+  ],
+  "deleted_paths": [],
+  "expected_target_predecessor_sha": "698639f0c826804b2504f642d1616ac61fb171c4",
+  "final_transaction_state": "COMPLETE",
+  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CURRENT_MAIN_REFRESH_SUCCESSOR",
+  "main_changed_paths": [
+    "tests/test_remote_implementation_stage2_proposal_venue_reconciliation.py",
+    "tools/remote_implementation_stage2_proposal.py"
+  ],
+  "merge_base_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "package_member_sha256": {
+    "conferences.csv": "2589551198cb0317c450e587af20316802893e8369cb6745c2797b776972a8f4",
+    "notes.md": "5d586d7f1012ef8009d4fcbf8335f3fb72401747fd20c673819c986f04b002e2",
+    "opponents.csv": "fbbceb6a897732618b0d3f11162a307b3cd5128292f2deed477be6ed90c4ae8e",
+    "source-games.csv": "97256e0476bce710031cacc7b0e968ba329c25809c3b1475da79357c5b7cddc6",
+    "source-notes.md": "b2170e88bbc6f44db4836419e6d97959c09d2c7cbf344c3ce7523f8ac8639cad",
+    "venues.csv": "4aafc663d1b525102c6dbf14cfae3c2e6c1f867f9ed79d6cd24a6c8b5f834da3"
+  },
+  "predecessor_authority_kind": "STAGE2_OPPONENT_DISPLAY_SUCCESSOR",
+  "prepared_commit_sha": "57c953748ace901d764b287bb8a625b01cb54091",
+  "prepared_main_parent_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "prepared_parent_sha": "698639f0c826804b2504f642d1616ac61fb171c4",
+  "prepared_parents": [
+    "698639f0c826804b2504f642d1616ac61fb171c4",
+    "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9"
+  ],
+  "prepared_tree_sha": "edc2e557ef184bac8dfea588d32ca380380f84ff",
+  "prior_refresh_successor_path": null,
+  "prior_refresh_successor_sha256": null,
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "publication_cas": "EXISTING_REF_CAS_PASS",
+  "recovery_classification": null,
+  "recovery_request_id": null,
+  "refresh_proof_sha256": "8cb22c34437b1f1eff6c706d300a56ec51e223cb7e541fd12398ea38a082bcbd",
+  "repository_validation": "PASS",
+  "request_id": "nevada-stage2-main-refresh-0001",
+  "request_sha256": "9c43dd7b5768e82191a364c68365d0e900697c46c5875337fc3175bf6eed0a4a",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "target_branch": "data/nevada-onboarding",
+  "target_changed_paths": [
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/nevada/conferences.csv",
+    "schools/nevada/notes.md",
+    "schools/nevada/opponents.csv",
+    "schools/nevada/source-games.csv",
+    "schools/nevada/source-notes.md",
+    "schools/nevada/venues.csv"
+  ],
+  "writeahead_commit": "5bb1e74f0d5dc632ed829de11b4b1916e2a4be09",
+  "writeahead_manifest_path": ".remote-implementation/writeahead/nevada/nevada-stage2-main-refresh-0001/writeahead-manifest.json",
+  "writeahead_manifest_sha256": "97eeea34fb488e07968e8d8758d3664aa72833d8a0faf639541916ef46db2c06"
+}
