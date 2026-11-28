@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A3_TIER1_PREFLIGHT_IDENTITY_V1",
+  "status": "TIER1_TOOL_NOT_RUN_INPUT_TRANSPORT_BLOCKED",
+  "school_key": "air-force",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "parent_research_commit_sha": "dd0cc9eb15b69aa4a9fd8fb3995d76a0eda01032",
+  "parent_checkpoint": "research/air-force/stage3a2/home-completion-0030/",
+  "stage3a2_ledger": {
+    "path": "research/air-force/stage3a2/home-completion-0030/structured-stage3a2-ledger.csv",
+    "git_blob_sha": "e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e",
+    "rows": 1928,
+    "regular_home": 972,
+    "regular_opponent_home": 778,
+    "regular_neutral": 116,
+    "postseason": 62
+  },
+  "mandatory_tool": {
+    "path": "tools/research_stage3a3_tier1.py",
+    "source_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+    "command": "python tools/research_stage3a3_tier1.py air-force <EXACT_AUTHORITY_STAGE3A2_LEDGER_PATH> --repo-root <VERIFIED_EXACT_MAIN_SNAPSHOT> --main-sha 0181255ebb1a91d624cc62ef80a3edb6453d2fd0 --output-dir <OUTPUT_DIR>",
+    "executed": false,
+    "reason": "Cannot materialize the 1,981,067-character GitHub connector text blob (1,960,246 Git blob bytes) as a local file in the same runtime as the authenticated exact-SHA Tier-1 snapshot with the currently available transport; no synthetic/neutral-only input substituted."
+  },
+  "snapshot_artifact": {
+    "source_run_id": 46110520556,
+    "source_run_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46110520556",
+    "artifact_id": 15249417494,
+    "artifact_name": "research-stage3a3-tier1-state-0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+    "local_download_sha256": "fdd0190a5050f20816f122565c8fa453f8ee27d96abe82a786e736e7b0cbae75",
+    "snapshot_verifier_status": "COMPLETE",
+    "snapshot_file_count": 118,
+    "published_reciprocal_file_count": 115,
+    "verified_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0"
+  },
+  "neutral_population": {
+    "modern_1996_plus": 48,
+    "historical_1995_and_earlier": 68,
+    "distinct_regular_neutral_game_ids": 116,
+    "modern_original_queue_git_blob_sha": "7b49cea175a53d73a3317971659edc41e1833cbf",
+    "historical_original_queue_git_blob_sha": "6221fd6d5c2cc535361c93a01bac1f59cdf5c7fd",
+    "combined_queue_git_blob_sha": "6dec993a3b2f7f563db2bb5973e51b6debcd5d50"
+  },
+  "permitted_next_action": "Co-materialize the exact Stage3A2 committed ledger byte-for-byte using a verified current GitHub connector/file transport and invoke unchanged permanent Tier-1 tool against verified protected-main snapshot, then durably checkpoint the tool-generated status, accepted/partial/contradiction/residual outputs before starting modern recurring research.",
+  "excluded_actions": [
+    "Do not infer or manually construct Tier-1 match output",
+    "Do not substitute hand-selected or partial project evidence",
+    "Do not run modern recurring event web research until permanent Tier-1 completes",
+    "Do not reopen Stage3A2 or change source games",
+    "Do not alter protected main or implementation lane"
+  ]
+}
