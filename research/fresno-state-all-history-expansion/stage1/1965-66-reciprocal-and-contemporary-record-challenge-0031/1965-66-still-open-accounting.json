@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_1965_66_SOURCE_ACCOUNTING_RESIDUAL_AFTER_0031",
+  "season": "1965-66",
+  "printed_aggregate": {
+    "games": 29,
+    "wins": 21,
+    "losses": 8
+  },
+  "literal_source_representations": {
+    "games": 29,
+    "wins": 22,
+    "losses": 7
+  },
+  "corrected_duplicate_inclusive": {
+    "games": 29,
+    "wins": 21,
+    "losses": 8
+  },
+  "unique_game_ledger": {
+    "games": 28,
+    "wins": 21,
+    "losses": 7
+  },
+  "unique_loss_source_ids": [
+    "FRESNO-EXP-CAND-1965-66-002",
+    "FRESNO-EXP-CAND-1965-66-007",
+    "FRESNO-EXP-CAND-1965-66-008",
+    "FRESNO-EXP-CAND-1965-66-017",
+    "FRESNO-EXP-CAND-1965-66-018",
+    "FRESNO-EXP-CAND-1965-66-024",
+    "FRESNO-EXP-CAND-1965-66-029"
+  ],
+  "duplicate_loss_source_id": "FRESNO-EXP-CAND-1965-66-022",
+  "duplicate_of": "FRESNO-EXP-CAND-1965-66-017",
+  "corrected_target_misprint": "FRESNO-EXP-CAND-1965-66-007",
+  "new_proven_identity_proof": {
+    "source_id": "FRESNO-EXP-CAND-1965-66-026",
+    "accepted_game_kept": true,
+    "opponent": "University of San Diego",
+    "already_research_classified_in_parent": true,
+    "independent_reciprocal_now_confirmed": true
+  },
+  "new_contemporary_aggregate_evidence": "Cal Poly Pomona 1966-67 guide independently reports Fresno previous-season 21-8",
+  "hypothesis": "Counting the duplicate SDSU loss after the independently proven UTEP result reversal reproduces the printed aggregate mathematically.",
+  "causation_proven": false,
+  "independent_distinct_29th_loss_found": false,
+  "unidentified_game_created": false,
+  "source_explicit_missing_game_note_found": false,
+  "nonblocking_reclassification_approved": false,
+  "blocking_residual": "ONE_UNRECONCILED_AGGREGATE_LOSS_OR_UNIDENTIFIED_29TH_GAME_POSSIBILITY",
+  "stage1_complete": false,
+  "open_source_access_limitations": [
+    "Fresno 1966 Campus yearbook content not inspected",
+    "Fresno Collegian period issues inaccessible through CSU digital collection HTTP403"
+  ],
+  "recommended_next_bounded_work": "Only if a newly accessible period 1966 basketball game-level record appears, compare against exact 28 unique source rows; otherwise require separately justified Stage1 closeout determination under current policy; do not repeat generic searches or fabricate."
+}

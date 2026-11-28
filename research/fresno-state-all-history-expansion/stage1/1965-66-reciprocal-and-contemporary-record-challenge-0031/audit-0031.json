@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_1965_66_RECIPROCAL_AND_CONTEMPORARY_AUDIT_0031",
+  "school_key": "fresno-state",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "status": "ONE_HISTORICAL_OPPONENT_RECIPROCAL_CORROBORATION__AGGREGATE_BLOCKER_OPEN",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "research_parent_sha": "32f4b3125f194567aab96df8b7e0d918aa9c81c5",
+  "parent_tree_sha": "2444bef84d608626543ea442e7095974a2394111",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_checkpoint": "clowns-owner-directed-exhibition-exclusions-0030",
+  "source_disposition_old_git_blob_sha": "adba9e60520fe0345837b6807cf58a9342d95cda",
+  "source_disposition_successor_git_blob_sha": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+  "accepted_ledger_git_blob_sha": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+  "census_git_blob_sha": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+  "pending_source_queue_git_blob_sha": "3f447691fc161edf14c2131eb97fa9abdbaf46eb",
+  "accepted_games": 1011,
+  "accepted_record": {
+    "W": 532,
+    "L": 479
+  },
+  "source_representations": 1036,
+  "season_census_rows": 49,
+  "owner_exhibition_exclusions": 2,
+  "clowns_inclusion_holds": 0,
+  "target_proven_source_id": "FRESNO-EXP-CAND-1965-66-026",
+  "prior_research_opponent": "San Diego (University of San Diego)",
+  "new_independent_source": "University of San Diego exact reciprocal 1965-66 L63-67",
+  "changed_source_rows": 1,
+  "changed_source_fields": [
+    "stage1_identity_status",
+    "research_opponent_disposition",
+    "research_source_reference"
+  ],
+  "changed_game_rows": 0,
+  "changed_census_rows": 0,
+  "remaining_stage1_blocker_seasons": [
+    "1965-66"
+  ],
+  "no_new_game_identified": true,
+  "causal_duplicate_accounting_method_unproven": true,
+  "permanent_stage1_terminal_closeout_tool_ran": false,
+  "mechanical_check_count": 17,
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

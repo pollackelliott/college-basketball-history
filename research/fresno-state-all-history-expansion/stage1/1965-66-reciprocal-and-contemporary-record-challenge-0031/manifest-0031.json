@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_1965_66_RECIPROCAL_CONTEMPORARY_MANIFEST_0031",
+  "school_key": "fresno-state",
+  "research_branch": "research/fresno-state-all-history-expansion",
+  "checkpoint_path": "research/fresno-state-all-history-expansion/stage1/1965-66-reciprocal-and-contemporary-record-challenge-0031/",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "research_parent_sha": "32f4b3125f194567aab96df8b7e0d918aa9c81c5",
+  "parent_tree_sha": "2444bef84d608626543ea442e7095974a2394111",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "hash_algorithm": "git_blob_sha1",
+  "members": {
+    "README.md": "7188d2a7c0a2b7c5c75207d0b9b314d8d603609c",
+    "1965-66-evidence-crosscheck.csv": "fc15fc295feb2bd7dd59ef7383ea76e7e654d5b9",
+    "1965-66-opponent-proof.csv": "d61c8c031e10178c905158711a196e4f288b90c5",
+    "1965-66-still-open-accounting.json": "7e5ae3f330800bb386ce1a6abd75768bb8b46032",
+    "stage1-mechanical-checks.json": "e8f1bd606652860fb260a5b1052d4d0d525d0e41",
+    "audit-0031.json": "a76bea76722620335da99985dcdf8a6dba6cbf7b",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb"
+  },
+  "prior_source_disposition_sha": "adba9e60520fe0345837b6807cf58a9342d95cda",
+  "changed_source_entry_ids": [
+    "FRESNO-EXP-CAND-1965-66-026"
+  ],
+  "accepted_games": 1011,
+  "accepted_record": {
+    "W": 532,
+    "L": 479
+  },
+  "source_representations": 1036,
+  "clowns_exhibition_exclusions": 2,
+  "clowns_holds": 0,
+  "stage1_open_blocker_seasons": [
+    "1965-66"
+  ],
+  "stage1_complete": false
+}
