@@ -1,0 +1,18 @@
+{
+  "kind": "SDSU_STAGE2_0049_ARCHIVE_VERIFICATION_CHECKPOINT_V1",
+  "checkpoint": "0049-stage2-exact-archive-parity-verification",
+  "parent_research_head": "d7c620dbd95bd0e9928bb29abcc75f26ee22fd1f",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "stage2_complete": false,
+  "files": {
+    "parity-report.json": {
+      "sha256": "7dcaba1bbdf926f902b0e149a3565fd086e57445f72bb75e5c3060a4c1aa276e",
+      "bytes_utf8": 1065633
+    },
+    "research-status.json": {
+      "sha256": "4bddf27d7301d2c2f97603b3a6ac515bdd192134da8bc40367dc70869f69609d",
+      "bytes_utf8": 4122
+    }
+  },
+  "source_checkpoint_0048_unmodified": true
+}

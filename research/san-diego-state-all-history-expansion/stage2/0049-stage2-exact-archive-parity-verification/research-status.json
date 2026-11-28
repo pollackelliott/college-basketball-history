@@ -1,0 +1,20 @@
+{
+  "checkpoint": "0049-stage2-exact-archive-parity-verification",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "stage2_state": "BLOCKED_EXACT_ARCHIVE_PARITY_VERIFICATION",
+  "parent_research_head": "d7c620dbd95bd0e9928bb29abcc75f26ee22fd1f",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "original_stage1_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "accepted_game_rows": 1086,
+  "previous_ledger_sha256": "1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89",
+  "previous_opponent_map_sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d",
+  "stage3_started": false,
+  "unresolved_verification_checks": [
+    "stage1_internal_manifest_present: ['checkpoint/stage1-manifest.json', 'checkpoint/audited-parent/stage1-manifest.json']",
+    "stage1_internal_manifest_member_hashes_verified: {'verified_member_entries': 0}",
+    "all_preserved_stage1_fields_exactly_equal: {'mismatch_count': 7381, 'distinct_columns': ['game_universe_state', 'literal_source_line', 'opponent_literal', 'source_checkpoint', 'source_cohort_git_blob', 'source_result_token', 'source_row_json_sha256', 'source_row_order'], 'sample': [{'game_id': 'SDSU-EXP-S1-1921-22-0001', 'column': 'opponent_literal', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0001', 'column': 'game_universe_state', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0001', 'column': 'source_checkpoint', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0001', 'column': 'source_row_order', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0001', 'column': 'source_cohort_git_blob', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0001', 'column': 'source_row_json_sha256', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0002', 'column': 'opponent_literal', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0002', 'column': 'game_universe_state', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0002', 'column': 'source_checkpoint', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0002', 'column': 'source_row_order', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0002', 'column': 'source_cohort_git_blob', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0002', 'column': 'source_row_json_sha256', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0005', 'column': 'opponent_literal', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0005', 'column': 'game_universe_state', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0005', 'column': 'source_checkpoint', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0005', 'column': 'source_row_order', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0005', 'column': 'source_cohort_git_blob', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0005', 'column': 'source_row_json_sha256', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0006', 'column': 'opponent_literal', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0006', 'column': 'game_universe_state', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0006', 'column': 'source_checkpoint', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0006', 'column': 'source_row_order', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0006', 'column': 'source_cohort_git_blob', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0006', 'column': 'source_row_json_sha256', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}, {'game_id': 'SDSU-EXP-S1-1921-22-0007', 'column': 'opponent_literal', 'kind': 'SOURCE_FIELD_NOT_PRESERVED'}]}"
+  ]
+}
