@@ -1,0 +1,17 @@
+{
+  "checkpoint_sha256": "29a6a8716c08e718a4bfa0a0efbae603ead193fc6babb99205ea47319be00c3d",
+  "exact_production_equivalence": "PASS",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_VERIFICATION",
+  "merge_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "pr_head_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "pr_number": 735,
+  "production_deployment_id": 8130713064,
+  "production_json_checked_count": 79,
+  "production_proof": true,
+  "request_id": "nevada-release-production-proof-0001",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "status": "COMPLETE"
+}

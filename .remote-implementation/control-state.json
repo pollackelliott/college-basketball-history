@@ -1675,7 +1675,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/nevada/nevada-release-production-proof-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "29a6a8716c08e718a4bfa0a0efbae603ead193fc6babb99205ea47319be00c3d",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "merge_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
     "merged": true,
     "operation": "RELEASE_PRODUCTION_PROOF",
@@ -1685,7 +1685,7 @@
     "production_deployment_id": 8130713064,
     "production_json_checked_count": 79,
     "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
-    "remote_production_proof_equivalence": "PENDING",
+    "remote_production_proof_equivalence": "PASS",
     "request_id": "nevada-release-production-proof-0001",
     "school_key": "nevada"
   },
