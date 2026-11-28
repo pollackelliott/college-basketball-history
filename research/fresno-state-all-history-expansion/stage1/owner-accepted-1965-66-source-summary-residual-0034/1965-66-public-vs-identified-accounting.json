@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_1965_66_PRINTED_VS_RESEARCHED_ACCOUNTING_PROVENANCE",
+  "season": "1965-66",
+  "official_published": {
+    "games": 29,
+    "wins": 21,
+    "losses": 8
+  },
+  "separately_identified": {
+    "games": 28,
+    "wins": 21,
+    "losses": 7
+  },
+  "source_lines_original": {
+    "games": 29,
+    "wins": 22,
+    "losses": 7
+  },
+  "source_lines_corrected_without_dedup": {
+    "games": 29,
+    "wins": 21,
+    "losses": 8
+  },
+  "source_lines_corrected_and_deduplicated": {
+    "games": 28,
+    "wins": 21,
+    "losses": 7
+  },
+  "owner_treatment": "PROVISIONALLY_NONBLOCKING_HISTORICAL_TYPO_WITH_RISK_EXPLICIT",
+  "possible_unidentified_loss": true,
+  "unidentified_game_count_asserted": false,
+  "unidentified_game_added": false,
+  "editors_causation_known": false,
+  "history_research_web_access_limitation": "1966 Campus yearbook and Collegian game-level pages inaccessible, despite item locators",
+  "contemporary_21_8_independent_source": "1966-67 Cal Poly Pomona media guide",
+  "reopen_only_for": "new exact-source game-level evidence establishes a separate real game",
+  "stage1_closeout_mechanical_status": "NOT_YET_RUN"
+}

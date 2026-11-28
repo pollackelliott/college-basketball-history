@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_0034_OWNER_ACCEPTED_SOURCE_SUMMARY_RULING_MANIFEST",
+  "school_key": "fresno-state",
+  "branch": "research/fresno-state-all-history-expansion",
+  "checkpoint_path": "research/fresno-state-all-history-expansion/stage1/owner-accepted-1965-66-source-summary-residual-0034/",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_parent_sha": "167201f7e42b5407bf41e96d5d83d923b89bd05a",
+  "parent_tree_sha": "204ca7a76b92472bc1051a3a0378039901a5557d",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "hash_algorithm": "git_blob_sha1",
+  "members": {
+    "README.md": "2db73d137d60bf07bad8f1ec6b6475163cbd32e1",
+    "owner-1965-66-ruling.json": "f4467d7ebda06a504c223b5de207fc866e18958a",
+    "1965-66-public-vs-identified-accounting.json": "57cbfa8f57db5c33d39bf0b78fc9eaff2a04fe48",
+    "49-season-stage1-census-owner-ruling-CANDIDATE.csv": "fddd0c045cbe2b7c86abb177fc2ffe680f7641bd",
+    "stage1-owner-ruling-mechanical-checks.json": "5929c0317a5173efaf758bd386a090057ad76416",
+    "audit-0034.json": "c642647ea49725b7cd9106365c51684b6b34b180",
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb"
+  },
+  "accepted_games": 1011,
+  "accepted_record": {
+    "wins": 532,
+    "losses": 479
+  },
+  "source_representations": 1036,
+  "owner_exhibition_exclusions": 2,
+  "owner_1965_66_ruling_recorded": true,
+  "owner_ruling_census_candidate_status": "OWNER_ACCEPTED_NONBLOCKING_SOURCE_AGGREGATE_TYPO__POSSIBLE_UNIDENTIFIED_LOSS_RETAINED",
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

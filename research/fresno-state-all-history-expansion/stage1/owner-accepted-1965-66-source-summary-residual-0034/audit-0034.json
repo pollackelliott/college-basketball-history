@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_0034_OWNER_DECISION_CANDIDATE_AUDIT",
+  "research_parent_sha": "167201f7e42b5407bf41e96d5d83d923b89bd05a",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_tree_sha": "204ca7a76b92472bc1051a3a0378039901a5557d",
+  "prior_source_blobs": {
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb"
+  },
+  "proposed_census_changes": [
+    {
+      "season": "1965-66",
+      "column": "final_status",
+      "before": "ONE_AGGREGATE_LOSS_UNMAPPED",
+      "after": "OWNER_ACCEPTED_NONBLOCKING_SOURCE_AGGREGATE_TYPO__POSSIBLE_UNIDENTIFIED_LOSS_RETAINED"
+    }
+  ],
+  "accepted_games": 1011,
+  "accepted_record": {
+    "wins": 532,
+    "losses": 479
+  },
+  "source_representations": 1036,
+  "season_count": 49,
+  "owner_exhibition_exclusions": [
+    "FRESNO-EXP-CAND-1935-36-019",
+    "FRESNO-EXP-CAND-1953-54-018"
+  ],
+  "pending_source_groups": 0,
+  "owner_decision_recorded": true,
+  "game_mutations": 0,
+  "source_mutations": 0,
+  "census_mutations_applied_to_authoritative_carry_forward": 0,
+  "optional_census_candidate_mutations": 1,
+  "permanent_closeout_tool_executed": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "mechanical_checks": 16
+}
