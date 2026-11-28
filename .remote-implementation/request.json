@@ -10,52 +10,39 @@
     "release_preview_verify": false,
     "release_production_proof": false,
     "release_readiness": false,
-    "stage2_census": true,
+    "stage2_census": false,
     "stage2_current_main_refresh": false,
     "stage2_gate1_fill": false,
     "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
     "stage2_preseal_rehearsal": false,
-    "stage2_proposal_rehearsal": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_reconciliation_diagnostic": false,
     "stage2_sealed_apply": false,
     "venue_identity_maintenance": false
   },
   "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from nevada-stage2-main-refresh-0001",
+    "authorization": "phase-persistent owner/Control Center authority inherited from nevada-stage2-census-0002",
     "origin": "repository-owned Stage 2 phase continuation"
   },
+  "decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
   "expected_protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
   "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_CENSUS",
-  "phase0_successor": {
-    "path": ".remote-implementation/successors/nevada/nevada-phase0-0002/successor-manifest.json",
-    "sha256": "85f52ca63ff1743ae506c0e7baeec338079213143a474695fbcc4a6b241de009"
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "1a8e8d03deb11c63b8674c7199c51b6b30a27083",
+  "previous_control_state_sha256": "efcae96d6676fcb33024049952d5643440fbcc4f03ccb426ebf700f417b70781",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/nevada-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "2664d971fc0b7d258afb924fccdb9b3628ba04360015c140d6053055c34e8ed0"
   },
-  "phase_continuation": {
-    "census_request_id": "nevada-stage2-census-0002",
-    "expected_decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
-    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
-    "proposal_request_id": "nevada-stage2-proposal-0002",
-    "recommendation_map": {
-      "path": ".remote-implementation/requests/nevada-stage2-proposal-0001/recommendation-map.json",
-      "sha256": "2664d971fc0b7d258afb924fccdb9b3628ba04360015c140d6053055c34e8ed0"
-    }
-  },
-  "previous_control_state_commit": "e563659afe798607252f18ddf9c6c9d85379d5b9",
-  "previous_control_state_sha256": "47ae66460422ad99bcafc937b4086c3d1665087be716fbbf26109dc3b8194dd0",
-  "request_id": "nevada-stage2-census-0002",
+  "request_id": "nevada-stage2-proposal-0002",
   "schema_version": 1,
   "school_key": "nevada",
   "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
-  "stage2_current_main_refresh_successor": {
-    "path": ".remote-implementation/successors/nevada/nevada-stage2-main-refresh-0001/successor-manifest.json",
-    "sha256": "8e780d67e342c13049aa22730ca124660416806259de3cf961bf879aa64dcf72"
-  },
-  "stage2_opponent_display_successor": {
-    "path": ".remote-implementation/successors/nevada/nevada-stage2-opponent-display-normalize-0001/successor-manifest.json",
-    "sha256": "6e93f1064a7e19c8ba2ba9cabbd2da5f060c223d27efbc9ec07ec27c8435b5e2"
+  "stage2_authority": {
+    "path": ".remote-implementation/checkpoints/nevada/nevada-stage2-census-0002/checkpoint-manifest.json",
+    "sha256": "1fb1aad183fa5448d5e7fe0d87604b8d3ae65b29f4e5376e96287147ace8a405"
   },
   "target_branch": "data/nevada-onboarding",
   "target_sha": "57c953748ace901d764b287bb8a625b01cb54091"
