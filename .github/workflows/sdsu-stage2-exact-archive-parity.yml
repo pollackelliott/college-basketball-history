@@ -22,13 +22,13 @@ jobs:
           python - <<'PY'
           import collections, csv, hashlib, io, json, os, pathlib, shutil, subprocess, zipfile
           ROOT=pathlib.Path("research/san-diego-state-all-history-expansion")
-          BASE="d4e702f4ef164f5682b10a36ddd6eb8ec5f8fe94"
+          BASE="cc34d45c4d7d77982eb71f02b7f7e6348afd8cb8"
           MAIN="242370fc551fd749c157c74d92917ddfafbe40e0"
           RESEARCH_BASE="5b840a354fb5cd792239ff8b93cba223a18dd87a"
           s1_path=ROOT/"checkpoints/0029-stage1-complete-source-acknowledged-coverage-gap/san-diego-state-stage1-complete-checkpoint.zip"
           s2_path=ROOT/"stage2/0048-stage2-archive-parity-transport-blocked/structured-stage2-ledger.csv"
           map_path=ROOT/"stage2/0048-stage2-archive-parity-transport-blocked/stage4-authoring/opponents.csv"
-          dest=ROOT/"stage2/0050-stage2-complete-original-archive-field-parity"
+          dest=ROOT/"stage2/0051-stage2-complete-original-archive-field-parity"
           checks={}; errors=[]; details={}; mismatch_examples=[]; mismatch_count=0
           def digest(b): return hashlib.sha256(b).hexdigest()
           def record(name,ok,detail=None):
@@ -77,13 +77,20 @@ jobs:
                       if digest(data)!=meta.get("sha256") or len(data)!=meta.get("size"):
                           bad.append({"member":path,"error":"HASH_OR_LENGTH"});continue
                       verified.append(path)
+                  original_parent_relocated=[]
                   for name,meta in parent_specs.items():
-                      if name not in members:
-                          bad.append({"member":name,"error":"MISSING_PARENT"});continue
-                      data=archive.read(name)
-                      if digest(data)!=meta.get("sha256") or len(data)!=meta.get("size"):
-                          bad.append({"member":name,"error":"PARENT_HASH_OR_LENGTH"})
-                  record("stage1_manifest_member_bytes_and_hashes",len(member_specs)>=20 and len(verified)==len(member_specs) and not bad,{"member_count":len(member_specs),"verified":len(verified),"original_parent_members":len(parent_specs),"errors":bad[:15]})
+                      alternate="checkpoint/audited-parent/"+name.removeprefix("checkpoint/")
+                      original_location=name
+                      if name in members and digest(archive.read(name))==meta.get("sha256") and len(archive.read(name))==meta.get("size"):
+                          pass
+                      elif alternate in members and digest(archive.read(alternate))==meta.get("sha256") and len(archive.read(alternate))==meta.get("size"):
+                          original_location=alternate
+                          original_parent_relocated.append(name)
+                      else:
+                          bad.append({"member":name,"alternate":alternate,"error":"PARENT_BYTES_UNVERIFIED"});continue
+                  expected_relocated={"checkpoint/blocking-residuals.json","checkpoint/stage1-status.json","checkpoint/stage1-manifest.json"}
+                  record("stage1_parent_closeout_overrides_exactly_classified",set(original_parent_relocated)==expected_relocated,sorted(original_parent_relocated))
+                  record("stage1_manifest_member_bytes_and_hashes",len(member_specs)>=20 and len(verified)==len(member_specs) and not bad,{"member_count":len(member_specs),"verified":len(verified),"original_parent_members":len(parent_specs),"original_parent_relocated":original_parent_relocated,"errors":bad[:15]})
                   s1=rows(archive.read("checkpoint/structured-stage1-ledger.csv"))
                   census=rows(archive.read("checkpoint/season-census.csv"))
                   dispositions=rows(archive.read("checkpoint/source-authority/all-49-season-dispositions.csv"))
@@ -130,6 +137,7 @@ jobs:
                   stage2_existing_cols=list(s2[0]); original_cols=list(s1[0]); newly_carried=[c for c in original_cols if c not in stage2_existing_cols]
                   record("exact_eight_stage1_provenance_columns_identified",set(newly_carried)=={"opponent_literal","game_universe_state","source_checkpoint","source_row_order","source_result_token","literal_source_line","source_cohort_git_blob","source_row_json_sha256"},newly_carried)
                   augmented=[]
+                  candidate_tokens=collections.Counter()
                   for row in s2:
                       src=original_by_id.get(row["research_game_id"])
                       if not src:continue
@@ -143,14 +151,27 @@ jobs:
                           mismatch(row["research_game_id"],"source_opponent_label",src["opponent_literal"],row["source_opponent_label"])
                       if row["source_literal_line"]!=src["literal_source_line"]:
                           mismatch(row["research_game_id"],"source_literal_line",src["literal_source_line"],row["source_literal_line"])
+                      if row["result"]!=src["source_result_token"]:
+                          mismatch(row["research_game_id"],"accepted_on_court_result",src["source_result_token"],row["result"])
                       candidate=json.loads(row["original_candidate_fields_json"])
-                      if candidate.get("source_result_token","")!=src["source_result_token"]:
-                          mismatch(row["research_game_id"],"embedded_source_result_token",src["source_result_token"],candidate.get("source_result_token",""))
+                      candidate_token=candidate.get("source_result_token","")
+                      accepted_token=src["source_result_token"]
+                      if candidate_token==accepted_token:
+                          candidate_tokens["RAW_CANDIDATE_EQUALS_ACCEPTED"]+=1
+                      elif candidate_token=="":
+                          candidate_tokens["RAW_CANDIDATE_BLANK_ACCEPTED_STAGE1_AUTHORITATIVE"]+=1
+                      elif candidate_token.startswith("ot-") and candidate_token[3:]==accepted_token:
+                          candidate_tokens["RAW_CANDIDATE_OVERTIME_PREFIX_ACCEPTED_STAGE1_AUTHORITATIVE"]+=1
+                      else:
+                          candidate_tokens["ACTUAL_RAW_CANDIDATE_RESULT_CONFLICT"]+=1
+                          mismatch(row["research_game_id"],"raw_candidate_result_conflict",accepted_token,candidate_token)
                       augmented.append(new)
+                  record("raw_candidate_tokens_classified_without_overwriting_stage1_results",candidate_tokens.get("ACTUAL_RAW_CANDIDATE_RESULT_CONFLICT",0)==0 and sum(candidate_tokens.values())==1086,dict(candidate_tokens))
                   record("complete_field_by_field_stage1_and_stage2_parity",mismatch_count==0 and len(augmented)==1086,{"comparisons":len(augmented)*len(original_cols),"mismatch_count":mismatch_count,"samples":mismatch_examples})
                   details["source_member_manifest_sha256"]=digest(archive.read("checkpoint/stage1-manifest.json"))
                   details["original_stage1_ledger_sha256"]=digest(archive.read("checkpoint/structured-stage1-ledger.csv"))
                   details["new_source_columns"]=newly_carried
+                  details["original_candidate_token_disposition"]=dict(candidate_tokens)
                   if not errors:
                       dest.mkdir(parents=True,exist_ok=False)
                       out=io.StringIO(newline="")
@@ -167,13 +188,13 @@ jobs:
           dest.mkdir(parents=True,exist_ok=True)
           details.update({"checks":checks,"errors":errors,"mismatch_count":mismatch_count,"mismatch_examples":mismatch_examples,"pass":not errors,"accepted_games":1086,"source_labels":341,"opponent_keys":203,"stage3_started":False,"stage1_zip_sha256":"25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6"})
           (dest/"parity-and-readiness-audit.json").write_text(json.dumps(details,indent=2,ensure_ascii=False)+"\n")
-          status={"checkpoint":"0050-stage2-complete-original-archive-field-parity","school_key":"san-diego-state","workflow_kind":"ALL_HISTORY_EXPANSION","stage":"STAGE_2","stage2_complete":not errors,"stage2_state":"COMPLETE" if not errors else "BLOCKED_EXACT_ARCHIVE_PARITY_VERIFICATION","parent_research_head":BASE,"immutable_research_base_sha":RESEARCH_BASE,"protected_main_sha_at_checkpoint":MAIN,"stage1_complete":True,"accepted_game_rows":1086,"resolved_labels":341,"distinct_opponent_keys":203,"unresolved_opponent_labels":0,"unresolved_opponent_games":0,"stage1_zip_sha256":"25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6","stage3_started":False,"non_d1_owner_scan_pending":True,"blockers":errors}
+          status={"checkpoint":"0051-stage2-complete-original-archive-field-parity","school_key":"san-diego-state","workflow_kind":"ALL_HISTORY_EXPANSION","stage":"STAGE_2","stage2_complete":not errors,"stage2_state":"COMPLETE" if not errors else "BLOCKED_EXACT_ARCHIVE_PARITY_VERIFICATION","parent_research_head":BASE,"immutable_research_base_sha":RESEARCH_BASE,"protected_main_sha_at_checkpoint":MAIN,"stage1_complete":True,"accepted_game_rows":1086,"resolved_labels":341,"distinct_opponent_keys":203,"unresolved_opponent_labels":0,"unresolved_opponent_games":0,"stage1_zip_sha256":"25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6","stage3_started":False,"non_d1_owner_scan_pending":True,"blockers":errors}
           (dest/"research-status.json").write_text(json.dumps(status,indent=2,ensure_ascii=False)+"\n")
           files={}
           for p in sorted(dest.rglob("*")):
               if p.is_file():
                   d=p.read_bytes();files[str(p.relative_to(dest))]={"sha256":digest(d),"bytes":len(d)}
-          (dest/"manifest.json").write_text(json.dumps({"kind":"SDSU_STAGE2_COMPLETE_0050_MANIFEST_V1","checkpoint":dest.name,"stage2_complete":not errors,"protected_main_sha":MAIN,"parent_research_head":BASE,"immutable_research_base_sha":RESEARCH_BASE,"original_stage1_archive_sha256":"25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6","accepted_stage2_parent_sha256":"1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89","files":files},indent=2)+"\n")
+          (dest/"manifest.json").write_text(json.dumps({"kind":"SDSU_STAGE2_COMPLETE_0051_MANIFEST_V1","checkpoint":dest.name,"stage2_complete":not errors,"protected_main_sha":MAIN,"parent_research_head":BASE,"immutable_research_base_sha":RESEARCH_BASE,"original_stage1_archive_sha256":"25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6","accepted_stage2_parent_sha256":"1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89","files":files},indent=2)+"\n")
           print(json.dumps({"stage2":"COMPLETE" if not errors else "BLOCKED","checks":len(checks),"errors":errors[:7],"mismatches":mismatch_count,"files":list(files)}))
           with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:f.write("## SDSU Stage 2 exact ZIP parity & readiness\n\n**"+("COMPLETE" if not errors else "BLOCKED")+"** — "+str(len(checks))+" checks; "+str(mismatch_count)+" mismatches\n\n"+("Errors: "+str(errors[:5]) if errors else "Original source columns preserved; Stage 2 complete. Stage 3 not started.")+"\n")
           PY
@@ -182,7 +203,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/san-diego-state-all-history-expansion/stage2/0050-stage2-complete-original-archive-field-parity/
+          git add research/san-diego-state-all-history-expansion/stage2/0051-stage2-complete-original-archive-field-parity/
           git commit -m "research(sdsu): verify exact archive parity and Stage 2 readiness"
           git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
       - name: Fail closed on Stage 2 verification blockers
@@ -190,9 +211,9 @@ jobs:
         run: |
           python - <<'PY'
           import json, pathlib
-          path=pathlib.Path('research/san-diego-state-all-history-expansion/stage2/0050-stage2-complete-original-archive-field-parity/research-status.json')
+          path=pathlib.Path('research/san-diego-state-all-history-expansion/stage2/0051-stage2-complete-original-archive-field-parity/research-status.json')
           state=json.loads(path.read_text())
           if not state.get('stage2_complete'):
-              raise SystemExit('BLOCKED: see committed Stage 2 checkpoint 0050 diagnostic')
+              raise SystemExit('BLOCKED: see committed Stage 2 checkpoint 0051 diagnostic')
           print('STAGE 2 COMPLETE — exact ZIP, inner manifest, all original source fields verified')
           PY
