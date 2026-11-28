@@ -1,0 +1,257 @@
+[
+  {
+    "research_game_id": "AF-2003-04-007",
+    "season": "2003-04",
+    "game_date": "2003-12-27",
+    "opponent_key": "prairie-view-a-m",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "GOLDEN_BEAR_CLASSIC",
+    "accepted_site": {
+      "venue_name": "Haas Pavilion",
+      "city": "Berkeley",
+      "state": "CA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://calbears.com/sports/2003/7/14/207734430",
+        "role": "California 2003-04 announcement lists Air Force and Prairie View in its Dec. 27–28 Golden Bear Classic at home"
+      },
+      {
+        "url": "https://calbears.com/sports/mens-basketball/schedule/2003-04?grid=true",
+        "role": "California exact tournament edition schedule identifies Haas Pavilion for the Golden Bear Classic"
+      },
+      {
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2003-04",
+        "role": "Air Force exact first-round Prairie View matchup and game date"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2008-09-011",
+    "season": "2008-09",
+    "game_date": "2008-12-27",
+    "opponent_key": "portland",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "GOLDEN_BEAR_CLASSIC",
+    "accepted_site": {
+      "venue_name": "Haas Pavilion",
+      "city": "Berkeley",
+      "state": "CA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://calbears.com/sports/mens-basketball/schedule/2008-09?grid=true",
+        "role": "California 2008 edition Golden Bear Classic schedule lists Haas Pavilion on exact event dates"
+      },
+      {
+        "url": "https://calbears.com/sports/2008/5/19/207749107",
+        "role": "California identifies Air Force, Portland and Dartmouth as 2008 event participants"
+      },
+      {
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2008-09",
+        "role": "Air Force exact 2008-12-27 Portland game"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2008-09-012",
+    "season": "2008-09",
+    "game_date": "2008-12-28",
+    "opponent_key": "dartmouth",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "GOLDEN_BEAR_CLASSIC",
+    "accepted_site": {
+      "venue_name": "Haas Pavilion",
+      "city": "Berkeley",
+      "state": "CA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://calbears.com/sports/mens-basketball/schedule/2008-09?grid=true",
+        "role": "California identifies Haas Pavilion for 2008 Golden Bear Classic games on Dec 27–28"
+      },
+      {
+        "url": "https://calbears.com/sports/2008/5/19/207749107",
+        "role": "California names Dartmouth and Air Force in the edition field"
+      },
+      {
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2008-09",
+        "role": "Air Force exact Dartmouth consolation game on 2008-12-28"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2004-05-001",
+    "season": "2004-05",
+    "game_date": "2004-11-14",
+    "opponent_key": "jacksonville-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "BCA_CLASSIC_2004",
+    "accepted_site": {
+      "venue_name": "Bradley Center",
+      "city": "Milwaukee",
+      "state": "WI",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://olemisssports.com/news/2004/11/12/Ole_Miss_Basketball_Game_Notes",
+        "role": "Participating Ole Miss institutional game notes state entire Nov. 14–16 BCA Classic held at Bradley Center"
+      },
+      {
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2004-05",
+        "role": "Air Force exact first-round Jacksonville State pairing and date"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2004-05-002",
+    "season": "2004-05",
+    "game_date": "2004-11-15",
+    "opponent_key": "ole-miss",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "BCA_CLASSIC_2004",
+    "accepted_site": {
+      "venue_name": "Bradley Center",
+      "city": "Milwaukee",
+      "state": "WI",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://olemisssports.com/news/2004/11/12/Ole_Miss_Basketball_Game_Notes",
+        "role": "Ole Miss specifically previews second-round matchup versus either Air Force or Jacksonville State at event held Bradley Center"
+      },
+      {
+        "url": "https://olemisssports.com/news/2004/11/15/Ole_Miss_Falls_to_Air_Force_at_BCA_Classic",
+        "role": "Ole Miss exact 2004-11-15 Air Force game result and tournament edition"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2016-17-006",
+    "season": "2016-17",
+    "game_date": "2016-11-25",
+    "opponent_key": "akron",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "SAVANNAH_INVITATIONAL_2016",
+    "accepted_site": {
+      "venue_name": "Savannah Civic Center",
+      "city": "Savannah",
+      "state": "GA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://gozips.com/news/2016/11/21/11_21_2016_2928",
+        "role": "Akron first-party exact game announcement identifies Air Force on Nov. 25 at Savannah Civic Center"
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2016/11/25/Air_Force_Falls_to_Akron_84_75",
+        "role": "Air Force exact 84-75 game result and Savannah Invitational affiliation"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2016-17-007",
+    "season": "2016-17",
+    "game_date": "2016-11-26",
+    "opponent_key": "east-carolina",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "SAVANNAH_INVITATIONAL_2016",
+    "accepted_site": {
+      "venue_name": "Savannah Civic Center",
+      "city": "Savannah",
+      "state": "GA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://ecupirates.com/news/2016/11/10/mens-basketball-gameday-pirates-open-2016-17-against-grambling-state",
+        "role": "East Carolina institutional preview places entire Nov. 25–26 Savannah Invitational at Civic Center and explicitly previews possible Air Force opponent"
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2016/11/26/Air_Force_Falls_to_East_Carolina_70_63",
+        "role": "Air Force actual November 26 East Carolina consolation pairing and result"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2021-22-004",
+    "season": "2021-22",
+    "game_date": "2021-11-20",
+    "opponent_key": "holy-cross",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "SUNSHINE_SLAM_2021",
+    "accepted_site": {
+      "venue_name": "Ocean Center",
+      "city": "Daytona Beach",
+      "state": "FL",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://goholycross.com/news/2021/11/20/mens-basketball-mens-basketball-falls-to-air-force-at-sunshine-slam.aspx",
+        "role": "Holy Cross exact November 20 Air Force game recap explicitly says Ocean Center"
+      },
+      {
+        "url": "https://goholycross.com/sports/mens-basketball/stats/2021-22/air-force/boxscore/9479",
+        "role": "Holy Cross game box score confirms exact game and Ocean Center"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  },
+  {
+    "research_game_id": "AF-2021-22-005",
+    "season": "2021-22",
+    "game_date": "2021-11-21",
+    "opponent_key": "bethune-cookman",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "SUNSHINE_SLAM_2021",
+    "accepted_site": {
+      "venue_name": "Ocean Center",
+      "city": "Daytona Beach",
+      "state": "FL",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_OFFICIAL_EXACT_EDITION_SITE_AND_GAME_IDENTITY",
+    "evidence": [
+      {
+        "url": "https://bcuathletics.com/sports/mens-basketball/schedule/2021-22?grid=true",
+        "role": "Bethune-Cookman first-party opponent schedule names Air Force on Nov. 21 at Ocean Center"
+      },
+      {
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2021-22",
+        "role": "Air Force exact November 21 Bethune-Cookman championship result"
+      }
+    ],
+    "anti_inference_check": "Exact event edition is directly identified by the participant/host source; no city-only venue, prior-edition, or host-default substitution"
+  }
+]

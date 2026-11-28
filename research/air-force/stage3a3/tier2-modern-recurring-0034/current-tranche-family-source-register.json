@@ -1,0 +1,89 @@
+[
+  {
+    "family": "GOLDEN_BEAR_CLASSIC",
+    "editions": [
+      "2003-04",
+      "2008-09"
+    ],
+    "research_game_ids": [
+      "AF-2003-04-007",
+      "AF-2008-09-011",
+      "AF-2008-09-012"
+    ],
+    "outcome": "COMPLETE",
+    "accepted_venue_names": [
+      "Haas Pavilion"
+    ],
+    "source_mode": "first-party exact-edition venue/site evidence plus exact-game participant pairing",
+    "primary_source_urls": [
+      "https://calbears.com/sports/2003/7/14/207734430",
+      "https://calbears.com/sports/mens-basketball/schedule/2003-04?grid=true",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2003-04",
+      "https://calbears.com/sports/mens-basketball/schedule/2008-09?grid=true",
+      "https://calbears.com/sports/2008/5/19/207749107",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2008-09"
+    ]
+  },
+  {
+    "family": "BCA_CLASSIC_2004",
+    "editions": [
+      "2004-05"
+    ],
+    "research_game_ids": [
+      "AF-2004-05-001",
+      "AF-2004-05-002"
+    ],
+    "outcome": "COMPLETE",
+    "accepted_venue_names": [
+      "Bradley Center"
+    ],
+    "source_mode": "first-party exact-edition venue/site evidence plus exact-game participant pairing",
+    "primary_source_urls": [
+      "https://olemisssports.com/news/2004/11/12/Ole_Miss_Basketball_Game_Notes",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2004-05",
+      "https://olemisssports.com/news/2004/11/15/Ole_Miss_Falls_to_Air_Force_at_BCA_Classic"
+    ]
+  },
+  {
+    "family": "SAVANNAH_INVITATIONAL_2016",
+    "editions": [
+      "2016-17"
+    ],
+    "research_game_ids": [
+      "AF-2016-17-006",
+      "AF-2016-17-007"
+    ],
+    "outcome": "COMPLETE",
+    "accepted_venue_names": [
+      "Savannah Civic Center"
+    ],
+    "source_mode": "first-party exact-edition venue/site evidence plus exact-game participant pairing",
+    "primary_source_urls": [
+      "https://gozips.com/news/2016/11/21/11_21_2016_2928",
+      "https://goairforcefalcons.com/news/2016/11/25/Air_Force_Falls_to_Akron_84_75",
+      "https://ecupirates.com/news/2016/11/10/mens-basketball-gameday-pirates-open-2016-17-against-grambling-state",
+      "https://goairforcefalcons.com/news/2016/11/26/Air_Force_Falls_to_East_Carolina_70_63"
+    ]
+  },
+  {
+    "family": "SUNSHINE_SLAM_2021",
+    "editions": [
+      "2021-22"
+    ],
+    "research_game_ids": [
+      "AF-2021-22-004",
+      "AF-2021-22-005"
+    ],
+    "outcome": "COMPLETE",
+    "accepted_venue_names": [
+      "Ocean Center"
+    ],
+    "source_mode": "first-party exact-edition venue/site evidence plus exact-game participant pairing",
+    "primary_source_urls": [
+      "https://goholycross.com/news/2021/11/20/mens-basketball-mens-basketball-falls-to-air-force-at-sunshine-slam.aspx",
+      "https://goholycross.com/sports/mens-basketball/stats/2021-22/air-force/boxscore/9479",
+      "https://bcuathletics.com/sports/mens-basketball/schedule/2021-22?grid=true",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2021-22"
+    ]
+  }
+]
