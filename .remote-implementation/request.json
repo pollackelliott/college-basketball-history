@@ -1,32 +1,48 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "nevada-release-preview-verify-0001",
+  "request_id": "nevada-release-gate2-approval-0001",
   "school_key": "nevada",
-  "operation": "RELEASE_PREVIEW_VERIFY",
-  "previous_control_state_commit": "b04f16feaaf62a80d8296d3337e15861ad72c8ff",
-  "previous_control_state_sha256": "3a4a29d8029e54fe4c1353a243d812cf8f735f568079ea29db09c21a1506e9f0",
+  "operation": "RELEASE_GATE2_APPROVAL",
+  "previous_control_state_commit": "f735a47d66d47fe5f30fd8ba95570bdf3e903bde",
+  "previous_control_state_sha256": "d1ae14eaaa7ce85822be187e8fbfb358414470758401e417ebd4ab04e32a5473",
   "expected_protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
   "target_branch": "data/nevada-onboarding",
   "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
-  "release_readiness_checkpoint": {
-    "path": ".remote-implementation/checkpoints/nevada/nevada-release-readiness-0001/checkpoint-manifest.json",
-    "sha256": "3e595d3990d6901ba010eec6d07c660478426260cd5a5b76455cf3f475c82b49"
+  "release_preview_checkpoint": {
+    "path": ".remote-implementation/checkpoints/nevada/nevada-release-preview-verify-0001/checkpoint-manifest.json",
+    "sha256": "e980c8fb41c29ae4f1a5d8204a95cf41370d1c80325a17e3f997f6f35c621c05"
   },
-  "release_readiness_verification": {
-    "path": ".remote-implementation/verifications/nevada/nevada-release-readiness-0001/release-readiness-verification.json",
-    "sha256": "345b8ab8680d963a150d57b30e0a2a47110f83c4cb665aa9820a34364c5f38e0"
+  "release_preview_verification": {
+    "path": ".remote-implementation/verifications/nevada/nevada-release-preview-verify-0001/release-preview-verification.json",
+    "sha256": "7217c6fd8d8b71347296960ea4c42c2578cc190b4a35d59b307626f964871685"
   },
   "approved_plan_hash": "d842daa2ee517e5ab00da4d8a96312b7dc501cca20ad3d5e4fe6aa69acbd8d91",
   "release_manifest_sha256": "0e91f8b8e2d7df91d2c5262465b73d31fabc399f35534768896993dbb975a51e",
   "pr_number": 735,
+  "preview_deployment_id": 8125268623,
+  "preview_url": "https://college-basketball-history-7hzsgcua0-elliott-pollacks-projects.vercel.app",
+  "owner_gate_2_approval": {
+    "approved": true,
+    "approval_basis": "Owner explicitly replied 'Approved. Proceed' to independently fresh-verified Nevada Owner Gate 2 PR #735 exact head 0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9 and Vercel Preview deployment 8125268623 at https://college-basketball-history-7hzsgcua0-elliott-pollacks-projects.vercel.app, after the exact PREVIEW and visual-QA approval prompt. Approval authorizes one guarded exact two-parent PR merge and same-SHA Production proof; no unrelated historical or repository mutation.",
+    "preview_checkpoint_sha256": "e980c8fb41c29ae4f1a5d8204a95cf41370d1c80325a17e3f997f6f35c621c05",
+    "preview_verification_sha256": "7217c6fd8d8b71347296960ea4c42c2578cc190b4a35d59b307626f964871685",
+    "pr_number": 735,
+    "pr_head_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+    "preview_deployment_id": 8125268623,
+    "preview_url": "https://college-basketball-history-7hzsgcua0-elliott-pollacks-projects.vercel.app"
+  },
+  "final_release_continuation": {
+    "kind": "RELEASE_GATE2_TO_PRODUCTION_V1",
+    "production_request_id": "nevada-release-production-proof-0001"
+  },
   "creation_provenance": {
-    "origin": "Nevada same serialized Implementation lane; connector-owned exact PR #735 created from fresh-verified release readiness packet under already-approved release-preparation phase.",
-    "authorization": "Perform read-only exact-head PR/CI/Preview verification for Nevada PR #735 against the one release-readiness checkpoint and exact approved plan. Stop at fresh OWNER_GATE_2_READY for explicit owner review. No Owner Gate 2 approval, merge, Production, historical or website mutation."
+    "origin": "Nevada same serialized Implementation lane, explicit Owner Gate 2 approval in current owner message 'Approved. Proceed' to exact PR #735 and exact Vercel Preview.",
+    "authorization": "Authorize guarded read-only RELEASE_GATE2_APPROVAL and independent fresh verification with exact connector merge packet, exact approved two-parent merge of PR #735 only, then repository-owned Production proof against returned merge SHA. Never bypass fresh Gate 2 verification; no unrelated data mutation, no unapproved head, no direct main push."
   },
   "authority": {
     "owner_gate_1": false,
-    "owner_gate_2": false,
+    "owner_gate_2": true,
     "release": false,
     "phase0": false,
     "recovery": false,
@@ -40,8 +56,8 @@
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
     "release_readiness": false,
-    "release_preview_verify": true,
-    "release_gate2_approval": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": true,
     "release_production_proof": false,
     "venue_identity_maintenance": false,
     "phase0_scope_supersession": false
