@@ -1,0 +1,34 @@
+{
+  "kind": "SDSU_STAGE1_EXHAUSTION_CHECKPOINT_DERIVATION_V1",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_parent_sha": "1fcccfda474a481f92e5fe5308faf0b1c64654db",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "original_0023_zip_sha256": "0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867",
+  "new_zip_sha256": "42a37718684f8745900eb6c977c743ae62a185ccbdd04403d01d5358e8fea49a",
+  "new_zip_bytes": 323186,
+  "member_count": 8,
+  "original_game_ledger_sha256": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e",
+  "new_game_ledger_sha256": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e",
+  "original_census_sha256": "c870d32762f4b0edbd88f578b4fd9597b5772d6a17117442eae009430e75ab7d",
+  "new_census_sha256": "c870d32762f4b0edbd88f578b4fd9597b5772d6a17117442eae009430e75ab7d",
+  "original_source_provenance_sha256": "ef17a9c46465174d276ef6c7bfdfbc3658ba7ab866045fc8bc9f30037f5397b7",
+  "new_source_provenance_sha256": "ef17a9c46465174d276ef6c7bfdfbc3658ba7ab866045fc8bc9f30037f5397b7",
+  "assessment_sha256": "4e57e2ef709ba1aa7edbbc03ced6d6d1b6cd6b9a913ce50f823d7d5118f53b2e",
+  "modified_members": [
+    "blocking-residuals.json",
+    "missing-game-evidence.json",
+    "stage1-status.json",
+    "stage1-manifest.json"
+  ],
+  "new_members": [
+    "research-exhaustion-assessment.json"
+  ],
+  "unchanged_accepted_game_rows": 1086,
+  "unchanged_regular_season_games": 1043,
+  "unchanged_postseason_games": 43,
+  "unchanged_season_count": 49,
+  "unchanged_unidentified_real_games": 3,
+  "original_archives_unread": true,
+  "permanent_auditor_executed": false,
+  "stage1_complete": false
+}
