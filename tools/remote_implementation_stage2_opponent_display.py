@@ -281,6 +281,31 @@ def verify_census_and_freeze_authority(
                 )
         accepted_legacy_warnings = warnings
 
+    # A display-only operation after the one approved Grand Canyon key rebase
+    # must authenticate that exact fresh-verified predecessor; an arbitrary
+    # intervening tracked package commit is never equivalent to Phase 0.
+    key_path = manifest.get("stage2_current_program_key_rebase_successor_path")
+    if key_path:
+        bound = request.get("stage2_current_program_key_rebase_successor") or {}
+        if (
+            bound.get("path") != key_path
+            or bound.get("sha256") != manifest.get(
+                "stage2_current_program_key_rebase_successor_sha256"
+            )
+        ):
+            raise Stop("STAGE2_OPPONENT_DISPLAY_REGISTERED_KEY_BINDING_MISMATCH")
+        from remote_implementation_stage2_key_rebase import (
+            verify_registered_key_successor,
+        )
+        key_authority = verify_registered_key_successor(
+            request, control_commit,
+            phase0_sha=phase0["prepared_commit_sha"],
+        )
+        if key_authority["target_sha"] != request["target_sha"]:
+            raise Stop("STAGE2_OPPONENT_DISPLAY_REGISTERED_KEY_TARGET_MISMATCH")
+    elif request.get("stage2_current_program_key_rebase_successor") is not None:
+        raise Stop("STAGE2_OPPONENT_DISPLAY_UNEXPECTED_REGISTERED_KEY_BINDING")
+
     return {
         "census_manifest": manifest,
         "census_manifest_bytes": manifest_bytes,
