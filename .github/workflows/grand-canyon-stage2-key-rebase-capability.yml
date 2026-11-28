@@ -1,0 +1,56 @@
+name: Grand Canyon guarded registered-key capability — candidate proof
+
+on:
+  pull_request:
+    paths:
+      - 'tools/remote_implementation*key_rebase*.py'
+      - 'tools/remote_implementation_control.py'
+      - 'tools/remote_implementation_runner.py'
+      - 'tools/remote_implementation_verify.py'
+      - 'tools/remote_implementation_stage2_census.py'
+      - 'tools/stage2_candidate_registered_key_rebase_rehearsal.py'
+      - 'tests/test_remote_implementation_registered_key_rebase.py'
+      - '.github/workflows/grand-canyon-stage2-key-rebase-capability.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-candidate-runtime-and-adversarial:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact PR candidate runtime
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          path: runtime
+      - name: Check out original immutable Grand Canyon onboarding predecessor
+        uses: actions/checkout@v4
+        with:
+          ref: f67371c2380b7b28255e525922e780a65737a475
+          fetch-depth: 0
+          path: target
+      - name: Check out exact accepted Stage 2 control checkpoint
+        uses: actions/checkout@v4
+        with:
+          ref: 81a6191b927459fff30d2826b69cc43d9de27b15
+          fetch-depth: 0
+          path: control
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify Python syntax for all modified transaction surfaces
+        working-directory: runtime
+        run: |
+          python -m py_compile tools/remote_implementation_registered_key_rebase.py tools/remote_implementation_stage2_key_rebase.py tools/remote_implementation_runner.py tools/remote_implementation_control.py tools/remote_implementation_verify.py tools/remote_implementation_stage2_census.py tools/stage2_candidate_registered_key_rebase_rehearsal.py
+      - name: Run positive and adversarial registered-key tests
+        working-directory: runtime
+        run: |
+          python -m unittest discover -s tests -p 'test_remote_implementation_registered_key_rebase.py' -v
+          python -m unittest discover -s tests -p 'test_remote_implementation_control.py' -v
+          python -m unittest discover -s tests -p 'test_remote_implementation_stage2_census.py' -v
+          python -m unittest discover -s tests -p 'test_remote_implementation_stage2_opponent_display.py' -v
+      - name: Replay the exact blocked Grand Canyon census against candidate tooling
+        run: |
+          python runtime/tools/stage2_candidate_registered_key_rebase_rehearsal.py --runtime runtime --target target --control control
