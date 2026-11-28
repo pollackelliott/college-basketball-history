@@ -44,7 +44,8 @@ jobs:
           source=root/"stage2/0052-stage2-complete-exact-source-provenance"
           out=root/"stage3a/0053-stage3a0-local-mechanical-census"
           main="242370fc551fd749c157c74d92917ddfafbe40e0"
-          parent="83671d9088c103711920a7d6bcc416a3c8f397e1"
+          certified_stage2_head="83671d9088c103711920a7d6bcc416a3c8f397e1"
+          parent=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
           research_base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
           def sha(data):return hashlib.sha256(data).hexdigest()
           def check(ok,note):
@@ -53,7 +54,9 @@ jobs:
           def countjson(p):return len(load(p))
           def rows(p):
               with p.open(newline="",encoding="utf-8-sig") as f:return list(csv.DictReader(f))
-          check(subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()==parent,"research HEAD")
+          check(subprocess.run(["git","merge-base","--is-ancestor",certified_stage2_head,parent],capture_output=True).returncode==0,"Stage 2 certified head is an ancestor")
+          workflow_only_changes=subprocess.check_output(["git","diff","--name-only",certified_stage2_head,parent],text=True).splitlines()
+          check(workflow_only_changes==[".github/workflows/sdsu-stage3a0-local-census.yml"],"intervening Research changes must be exactly this workflow")
           check(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main advanced")
           check(subprocess.run(["git","cat-file","-e",research_base+"^{commit}"],capture_output=True).returncode==0,"immutable base unavailable")
           m=load(source/"manifest.json")
@@ -130,6 +133,7 @@ jobs:
               "school_key":"san-diego-state",
               "checkpoint":"0053-stage3a0-local-mechanical-census",
               "parent_research_head":parent,
+              "stage2_certified_research_head":certified_stage2_head,
               "immutable_research_base_sha":research_base,
               "protected_main_sha":main,
               "stage2_certification_run":"https://github.com/pollackelliott/college-basketball-history/actions/runs/46167444155",
