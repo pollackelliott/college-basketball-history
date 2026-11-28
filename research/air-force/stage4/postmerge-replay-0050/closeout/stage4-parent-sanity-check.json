@@ -1,0 +1,26 @@
+{
+  "package_game_ids_unique": true,
+  "package_source_game_rows": 1928,
+  "protected_main_sha": "229c8302b67112e1b86b8c24006fd904269b4b42",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "semantic_comparison_examples": [],
+  "semantic_comparison_unexpected_mismatches": 0,
+  "source_game_id_population_exact_match": true,
+  "stage3a4_opponent_home_responsibility": {
+    "declared_stage3a4_rows": 778,
+    "ledger_regular_season_opponent_home_rows": 778,
+    "material_literal_source_gap_rows": 0,
+    "present": true,
+    "reconciled": true,
+    "sidecar_rows": 778
+  },
+  "stage3b_checkpoint_sha256": "c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",
+  "stage3b_ledger_member": "stage3b-working-ledger.csv",
+  "stage3b_manifest_member": "manifest.json",
+  "stage3b_manifest_validation": "PASS",
+  "stage3b_parent_game_ids_unique": true,
+  "stage3b_parent_rows": 1928,
+  "stage3b_parent_topology": "MANIFESTED_DESCRIPTIVE_ROOT",
+  "stage3b_status_member": "status.json",
+  "status": "PASS"
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "STAGE4_POSTMERGE_PERMANENT_REPLAY",
+  "school_key": "air-force",
+  "status": "BLOCKED_ONE_HISTORICAL_HAN_CONTRADICTION",
+  "protected_main_sha": "229c8302b67112e1b86b8c24006fd904269b4b42",
+  "accepted_stage3b_research_commit": "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745",
+  "accepted_stage3b_sha256": "c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",
+  "exact_competitive_games": 1928,
+  "scores_present": 1928,
+  "guide_raw_text_present": 1928,
+  "primary_page_present": 1865,
+  "overtime_token_reparations": 3,
+  "already_researched_neutral_statuses": 4,
+  "remaining_historical_game": "AF-1959-60-006",
+  "error_count": 1,
+  "error": "1 SOURCE_PROGRAM_HOME row(s) use an exact venue not supported by the documented source-program HOME relationship chronology. This is an adversarial review signal only: do not infer H/A/N from geography. Correct H/A/N from accepted historical evidence or document the venue as a supported HOME relationship/exception in venues.csv. Examples: AF-1959-60-006 (1960-03-07: Alumni Hall)",
+  "stage4_complete": false,
+  "stage5_started": false,
+  "basketball_data_mutations": 0
+}

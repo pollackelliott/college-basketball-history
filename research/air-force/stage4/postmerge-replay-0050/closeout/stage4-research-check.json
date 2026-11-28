@@ -1,0 +1,112 @@
+{
+  "counts": {
+    "competitive_games": 1928,
+    "conference_rows": 3,
+    "coverage": {
+      "latest_package_season": "2025-2026",
+      "legacy_coverage_declaration_missing": false,
+      "primary_source_historical_cutoff": "2025-2026",
+      "required_completed_season_cutoff": "2025-2026",
+      "required_season_rows": 32
+    },
+    "game_types": {
+      "CONFERENCE_TOURNAMENT": 50,
+      "NCAA_TOURNAMENT": 4,
+      "POSTSEASON": 8,
+      "REGULAR_SEASON": 1866
+    },
+    "home_chronology": {
+      "approved_frozen_home_exception_rows": 0,
+      "chronology_rows": 4,
+      "home_chronology_conflicts": 1,
+      "home_rows_checked": 961
+    },
+    "ncaa_rows": 4,
+    "opponent_rows": 745,
+    "site_completeness": {
+      "home_missing_venue": 19,
+      "home_publication_blocker_rows": 0,
+      "material_gap_rows": 71,
+      "neutral_missing_venue": 52,
+      "researched_gap_rows": 71,
+      "researched_unresolved_home_location_rows": 0,
+      "researched_unresolved_home_venue_rows": 19,
+      "unaccounted_gap_rows": 0
+    },
+    "site_gap_decades": {
+      "home_missing_venue": {
+        "1950s": 19
+      },
+      "neutral_missing_venue": {
+        "1950s": 1,
+        "1960s": 13,
+        "1970s": 10,
+        "1980s": 18,
+        "1990s": 10
+      }
+    },
+    "site_gap_seasons": {
+      "home_missing_venue": {
+        "1956-1957": 9,
+        "1957-1958": 10
+      },
+      "neutral_missing_venue": {
+        "1958-1959": 1,
+        "1963-1964": 2,
+        "1964-1965": 1,
+        "1965-1966": 4,
+        "1966-1967": 2,
+        "1967-1968": 1,
+        "1968-1969": 3,
+        "1971-1972": 1,
+        "1972-1973": 3,
+        "1973-1974": 1,
+        "1976-1977": 1,
+        "1977-1978": 1,
+        "1978-1979": 2,
+        "1979-1980": 1,
+        "1980-1981": 1,
+        "1981-1982": 2,
+        "1982-1983": 1,
+        "1983-1984": 3,
+        "1984-1985": 1,
+        "1985-1986": 2,
+        "1986-1987": 1,
+        "1987-1988": 3,
+        "1988-1989": 1,
+        "1989-1990": 3,
+        "1990-1991": 2,
+        "1991-1992": 1,
+        "1992-1993": 1,
+        "1994-1995": 2,
+        "1995-1996": 2,
+        "1996-1997": 1,
+        "1998-1999": 1
+      }
+    },
+    "site_types": {
+      "NEUTRAL": 157,
+      "OPPONENT_HOME": 791,
+      "SOURCE_PROGRAM_HOME": 980
+    },
+    "unknown_exact_dates": 0,
+    "unknown_played_scores": 0,
+    "unresolved_opponents": 0,
+    "venue_rows": 52,
+    "venue_summary_consistency": {
+      "ambiguous_game_count": 0,
+      "ambiguous_game_examples": [],
+      "checked_groups": 51,
+      "mismatch_groups": 0,
+      "status": "PASS"
+    }
+  },
+  "errors": [
+    "1 SOURCE_PROGRAM_HOME row(s) use an exact venue not supported by the documented source-program HOME relationship chronology. This is an adversarial review signal only: do not infer H/A/N from geography. Correct H/A/N from accepted historical evidence or document the venue as a supported HOME relationship/exception in venues.csv. Examples: AF-1959-60-006 (1960-03-07: Alumni Hall)"
+  ],
+  "package": "/home/runner/work/_temp/stage4/closeout/stage4-research-package.zip",
+  "school_key": "air-force",
+  "status": "FAIL",
+  "warnings": [],
+  "zip_sha256": "51863ce30291b25f8f92cae4822c4bb1562475b1ceede687459740285c50aad0"
+}

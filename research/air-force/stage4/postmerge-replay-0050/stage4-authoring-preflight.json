@@ -1,0 +1,58 @@
+{
+  "authoring_members": {
+    "conferences.csv": "stage4-authoring/conferences.csv",
+    "opponents.csv": "stage4-authoring/opponents.csv",
+    "venues.csv": "stage4-authoring/venues.csv"
+  },
+  "authoring_opponent_rows": 745,
+  "conference_rows": 3,
+  "coverage": {
+    "primary_source_historical_cutoff": "2025-2026",
+    "required_completed_season_cutoff": "2025-2026"
+  },
+  "defects": [],
+  "early_history_uncertainty": {
+    "present": false
+  },
+  "institutional_scope": {
+    "parent_artifact_sha256": "",
+    "present": true,
+    "program_inception_season": "1956-57",
+    "publication_universe": "INCEPTION_THROUGH_PRESENT",
+    "sha256": "415057e65eaa502a9de35b696a35911ad1629f654c1801d051e3dc52facad9e9",
+    "top_level_scope": "1957-58+",
+    "transition_mode": "NEW_LANE"
+  },
+  "ledger_rows": 1928,
+  "legacy_opponent_compatibility": {
+    "authoring_opponent_rows": 745,
+    "legacy_literal_mapping_rows_added": 0,
+    "package_opponent_rows": 745
+  },
+  "legacy_opponent_schema_compatibility": {
+    "legacy_schema_detected": false,
+    "projected_canonical_columns": [],
+    "projection_is_in_memory_only": true,
+    "source_opponent_rows": 745
+  },
+  "missing_authoring_files": [],
+  "opponent_rows": 745,
+  "projected_source_games": 1928,
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "schema_version": 1,
+  "school_key": "air-force",
+  "stage": "STAGE_4_AUTHORING_PREFLIGHT",
+  "stage3a4_opponent_home_responsibility": {
+    "declared_stage3a4_rows": 778,
+    "ledger_regular_season_opponent_home_rows": 778,
+    "material_literal_source_gap_rows": 0,
+    "present": true,
+    "reconciled": true,
+    "sidecar_rows": 778
+  },
+  "stage3b_checkpoint_sha256": "c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",
+  "stage3b_parent_topology": "MANIFESTED_DESCRIPTIVE_ROOT",
+  "stage3b_status": "COMPLETE",
+  "status": "PASS",
+  "venue_rows": 52
+}
