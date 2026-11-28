@@ -82,12 +82,12 @@ jobs:
           ids=[r['research_game_id'] for r in rows]
           assert len(set(ids))==1928 and all(ids)
           kinds=collections.Counter(r.get('game_type','').strip().upper() for r in rows)
-          assert kinds=={'REGULAR_SEASON':1866,'POSTSEASON':62},kinds
+          assert kinds=={'REGULAR_SEASON':1866,'CONFERENCE_TOURNAMENT':50,'POSTSEASON':8,'NCAA_TOURNAMENT':4},kinds
           sites=collections.Counter(r.get('site_type','').strip().upper() for r in rows if r.get('game_type','').strip().upper()=='REGULAR_SEASON')
-          assert sites=={'HOME':972,'OPPONENT_HOME':778,'NEUTRAL':116},sites
+          assert sites=={'HOME':972,'AWAY':778,'NEUTRAL':116},sites
           neutrals=[r for r in rows if r.get('game_type','').strip().upper()=='REGULAR_SEASON' and r.get('site_type','').strip().upper()=='NEUTRAL']
-          assert sum(int(r['season_label'][:4])>=1996 for r in neutrals)==48
-          assert sum(int(r['season_label'][:4])<1996 for r in neutrals)==68
+          assert sum(int(r['season'][:4])>=1996 for r in neutrals)==48
+          assert sum(int(r['season'][:4])<1996 for r in neutrals)==68
           assert all(r.get('opponent_key') for r in neutrals)
           print('CHECKPOINT_0031_AUTHENTICATED 25 declared files; 1928 unique games; 116 regular neutrals; snapshot source available')
           PY
