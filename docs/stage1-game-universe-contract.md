@@ -158,14 +158,37 @@ to generalize to other seasons. Admission must fail closed on:
    missing-game count, claiming the original editorial method is proven,
    or converting the one-loss difference into a game or game-derived total.
 
-The only valid transition is **exact-parent read-only audit → separately
-SHA-256-bound closeout successor → independent verify-closeout**.
-The unverified closeout artifact must remain **Stage 1 INCOMPLETE**;
-only the independent successful verifier can establish a Stage 1 COMPLETE
-handoff. Preserve the original accepted-game ledger, complete source
-dispositions, the original season census and owner ruling byte-for-byte;
-promote the one-field owner-proposed terminal classification only in a
-separately named, independently verified terminal census.
+The only valid transition is **exact-parent read-only audit →
+separately SHA-256-bound closeout successor → independent verify-closeout
+PASS → seal-handoff → independent verify-handoff PASS**. The unverified
+closeout ZIP always remains **Stage 1 INCOMPLETE**; an eligible audit or
+an unverified ZIP is never an accepted final checkpoint.
+
+The closeout ZIP must preserve **all ten original checkpoint 0035 manifested
+members plus manifest-0035.json under their exact original paths and bytes**,
+not just the basketball tables. Its root manifest must independently hash
+every preserved original file and all additive terminal files. The owner
+candidate census is retained unchanged; the terminal census is additive.
+No original admission audit, diagnostic, README, eligibility matrix, or owner
+ruling may be dropped or reconstructed.
+
+The independent verifier produces a separately serialized PASS report
+including the exact audit SHA-256, closeout ZIP SHA-256, checkpoint commit,
+parent manifest Git blob, and Stage 4 coverage member SHA-256. The distinct
+sealed handoff binds those precise bytes and their verification report hash
+without rewriting the unverified successor ZIP. An independent
+`verify-handoff` must replay all relevant checks and return
+`VERIFIED_STAGE1_COMPLETE_HANDOFF`; anything else is a STOP.
+
+The Fresno Research lane must then durably commit the original-parent
+provenance, exact unchanged closeout ZIP, audit, independent verifier PASS,
+sealed handoff and independent handoff verification in **one separately
+manifested, hash-bound Stage 1 COMPLETE checkpoint**, before the next stage.
+Stage 2 and all later consumers must authenticate the exact pairing via
+`verify-handoff`, preserve the required `stage4-authoring/season-coverage.json`
+sidecar, and reject a standalone ZIP's `stage1_complete=false` status.
+No `audit`, `closeout`, `seal-handoff`, unsigned report or missing handoff
+may be treated as Stage 1 completion or as Stage 2 authorization.
 
 Persist `OWNER_ACCEPTED_SOURCE_ACCOUNTING_UNCERTAINTY` for 1965–66
 in `stage1-terminal-source-accounting.json` and

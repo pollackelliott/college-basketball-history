@@ -154,11 +154,17 @@ tools/research_stage3a0.py mechanically carries any Stage 2 authoring capsule th
 
 ### Fresno State 1965–66 terminal source-accounting coverage (issue #732)
 
-When—and only when—the exact owner-authorized Stage 1 audit,
-separately hashed closeout and independent verifier under
-`tools/research_stage1_owner_source_accounting.py` have **all** passed,
-the Stage 1 successor's
-`stage4-authoring/season-coverage.json` becomes required carried authority.
+Only after the exact owner-authorized Stage 1 audit, separately
+hashed closeout, independent `verify-closeout` PASS, `seal-handoff`
+and independent `verify-handoff` PASS under
+`tools/research_stage1_owner_source_accounting.py`, and after the Research
+lane has committed their full hash-bound proof as a durable Stage 1 COMPLETE
+checkpoint, can the `stage4-authoring/season-coverage.json` file become
+accepted carried authority. No Stage 2 consumer may rely on the closeout ZIP
+alone: it deliberately declares `stage1_complete=false`. It must
+authenticate the verified handoff plus paired audit, ZIP, verifier report,
+and original checkpoint using `verify-handoff`, and must fail closed on
+missing proof or unsupported carry-forward representation.
 The file must remain byte-identical through Stage 2, Stage 3A and Stage 3B;
 Stage 4 authoring/preflight must reject silent omission or re-interpretation.
 It encodes two distinct records: Fresno's reported 29 games (21–8) and

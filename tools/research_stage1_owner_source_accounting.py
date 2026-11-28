@@ -10,7 +10,15 @@ Commands:
       --expected-audit-sha256 SHA --output SUCCESSOR.zip
   verify-closeout CHECKPOINT_DIR SUCCESSOR.zip AUDIT.json
       --expected-parent-sha SHA --expected-audit-sha256 SHA
-      --expected-closeout-sha256 SHA --output REPORT.json
+      --expected-closeout-sha256 SHA --output VERIFIED.json
+  seal-handoff CHECKPOINT_DIR SUCCESSOR.zip AUDIT.json VERIFIED.json
+      --expected-parent-sha SHA --expected-audit-sha256 SHA
+      --expected-closeout-sha256 SHA --expected-verification-sha256 SHA
+      --output HANDOFF.json
+  verify-handoff CHECKPOINT_DIR SUCCESSOR.zip AUDIT.json VERIFIED.json HANDOFF.json
+      --expected-parent-sha SHA --expected-audit-sha256 SHA
+      --expected-closeout-sha256 SHA --expected-verification-sha256 SHA
+      --expected-handoff-sha256 SHA --output HANDOFF-VERIFICATION.json
 
 The separate closeout stays INCOMPLETE until independent verification passes.
 No command writes to the parent checkpoint, research branch or protected main.
@@ -339,11 +347,11 @@ def successor_members(checkpoint: Path, case: dict, audit: dict) -> dict[str, by
     require(audit.get("status") == "ELIGIBLE_OWNER_SOURCE_ACCOUNTING_UNCERTAINTY"
             and audit == audit_checkpoint(checkpoint, case), "STALE_OR_INVALID_AUDIT")
     record = terminal_record()
-    members = {
-        LEDGER: raw[LEDGER], SOURCE: raw[SOURCE], CENSUS: raw[CENSUS],
-        PENDING: raw[PENDING], RULING: raw[RULING],
+    # Every original checkpoint member, including all diagnostic/admission
+    # artifacts and manifest-0035.json, must remain under its original name.
+    members = dict(raw)
+    additions = {
         "49-season-stage1-terminal-census.csv": raw[CANDIDATE],
-        "stage1-predecessor-manifest-0035.json": raw[MANIFEST],
         "stage1-terminal-source-accounting.json": canonical(record),
         "stage4-authoring/season-coverage.json": canonical({
             "schema_version": 1, "school_key": "fresno-state",
@@ -359,14 +367,23 @@ def successor_members(checkpoint: Path, case: dict, audit: dict) -> dict[str, by
             "terminal_class": TERMINAL,
         }),
     }
+    require(not (set(members) & set(additions)),
+            "NEW_TERMINAL_FILE_COLLIDES_WITH_PARENT")
+    members.update(additions)
+    inherited_blobs = {name: git_blob(data) for name, data in sorted(raw.items())}
+    require(inherited_blobs[MANIFEST] == case["checkpoint_manifest_blob_sha"]
+            and {name: inherited_blobs[name] for name in case["member_git_blobs"]}
+            == case["member_git_blobs"], "INHERITED_GIT_BLOB_DRIFT")
     manifest = {
-        "schema_version": 1, "kind": "OWNER_SOURCE_ACCOUNTING_CLOSEOUT_SUCCESSOR_V1",
+        "schema_version": 2, "kind": "OWNER_SOURCE_ACCOUNTING_CLOSEOUT_SUCCESSOR_V2",
         "school_key": "fresno-state", "stage": "STAGE_1",
         "parent_checkpoint_commit_sha": case["checkpoint_commit_sha"],
         "parent_manifest_git_blob_sha": case["checkpoint_manifest_blob_sha"],
-        "member_sha256": {name: sha256(raw) for name, raw in sorted(members.items())},
-        "member_bytes": {name: len(raw) for name, raw in sorted(members.items())},
+        "inherited_parent_git_blobs": inherited_blobs,
+        "member_sha256": {name: sha256(data) for name, data in sorted(members.items())},
+        "member_bytes": {name: len(data) for name, data in sorted(members.items())},
     }
+    require("manifest.json" not in members, "PARENT_ROOT_MANIFEST_COLLISION")
     members["manifest.json"] = canonical(manifest)
     return members
 
@@ -422,6 +439,15 @@ def verify_closeout(checkpoint: Path, closeout_path: Path, audit_path: Path,
                 and all(sha256(raw) == manifest["member_sha256"][name]
                         and len(raw) == manifest["member_bytes"][name]
                         for name, raw in members.items()), "SUCCESSOR_MANIFEST_INVALID")
+        # Reauthenticate every original byte and Git blob in the successor.
+        parent = authenticated_parent(checkpoint, case)
+        inherited = manifest.get("inherited_parent_git_blobs", {})
+        require(set(inherited) == set(parent)
+                and all(name in members and members[name] == data
+                        and inherited[name] == git_blob(data)
+                        for name, data in parent.items())
+                and inherited[MANIFEST] == case["checkpoint_manifest_blob_sha"],
+                "INCOMPLETE_OR_ALTERED_PARENT_IN_SUCCESSOR")
         coverage = json.loads(members["stage4-authoring/season-coverage.json"])
         terminal = json.loads(members["stage1-terminal-source-accounting.json"])
         require(coverage["terminal_source_accounting_uncertainties"] == [terminal]
@@ -434,12 +460,113 @@ def verify_closeout(checkpoint: Path, closeout_path: Path, audit_path: Path,
         return {"status": "VERIFIED_STAGE1_OWNER_SOURCE_ACCOUNTING_CLOSEOUT",
                 "stage1_complete": True,
                 "verified_successor_sha256": closeout_sha,
+                "verified_audit_sha256": audit_sha,
                 "checkpoint_commit_sha": case["checkpoint_commit_sha"],
+                "parent_manifest_git_blob_sha": case["checkpoint_manifest_blob_sha"],
+                "stage4_coverage_sha256": sha256(
+                    members["stage4-authoring/season-coverage.json"]),
                 "stage2_authorized": False,
                 "historical_uncertainty_retained": True}
     except (ValueError, OSError, KeyError, TypeError, zipfile.BadZipFile,
             json.JSONDecodeError) as exc:
         return {"status": "FAIL", "stage1_complete": False, "defects": [str(exc)]}
+
+
+def verified_handoff_record(checkpoint: Path, closeout_path: Path,
+                            audit_path: Path, verification_path: Path,
+                            *, closeout_sha: str, audit_sha: str,
+                            verification_sha: str, case: dict) -> dict:
+    """Bind independent verify-closeout PASS to exact parent, audit and ZIP.
+
+    The sealed unverified closeout ZIP must remain Stage 1 INCOMPLETE.
+    The separate verified handoff may be admitted only by verify-handoff.
+    """
+    verifier_raw = verification_path.read_bytes()
+    require(sha256(verifier_raw) == verification_sha,
+            "VERIFIER_REPORT_SHA256_MISMATCH")
+    verification = json.loads(verifier_raw)
+    independent = verify_closeout(
+        checkpoint, closeout_path, audit_path,
+        closeout_sha=closeout_sha, audit_sha=audit_sha, case=case)
+    require(verification == independent
+            and verification.get("status")
+            == "VERIFIED_STAGE1_OWNER_SOURCE_ACCOUNTING_CLOSEOUT"
+            and verification.get("stage1_complete") is True
+            and verification.get("stage2_authorized") is False
+            and verification.get("verified_successor_sha256") == closeout_sha
+            and verification.get("verified_audit_sha256") == audit_sha,
+            "NO_EXACT_INDEPENDENT_VERIFIER_PASS")
+    return {
+        "schema_version": 1,
+        "kind": "FRESNO_EXACT_VERIFIED_STAGE1_HANDOFF_V1",
+        "state": "STAGE_1_COMPLETE_VERIFIED",
+        "stage1_complete": True,
+        "stage2_authorized": False,
+        "school_key": case["school_key"],
+        "season": case["season"],
+        "research_base_sha": case["research_base_sha"],
+        "parent_checkpoint_commit_sha": case["checkpoint_commit_sha"],
+        "parent_checkpoint_manifest_git_blob_sha":
+            case["checkpoint_manifest_blob_sha"],
+        "owner_disposition": case["owner_disposition_issue"],
+        "audit_sha256": audit_sha,
+        "closeout_zip_sha256": closeout_sha,
+        "independent_verifier_report_sha256": verification_sha,
+        "independent_verifier_status": verification["status"],
+        "stage4_coverage_sha256": verification["stage4_coverage_sha256"],
+        "terminal_class": TERMINAL,
+        "reported_institutional": {"games": 29, "wins": 21, "losses": 8},
+        "identified_competitive": {"games": 28, "wins": 21, "losses": 7},
+        "independent_additional_loss_possible": True,
+        "require_downstream_stage2_verification": "verify-handoff",
+    }
+
+
+def seal_handoff(checkpoint: Path, closeout_path: Path, audit_path: Path,
+                 verification_path: Path, output: Path,
+                 *, closeout_sha: str, audit_sha: str,
+                 verification_sha: str, case: dict | None = None) -> dict:
+    case = case if case is not None else load_authority()
+    record = verified_handoff_record(
+        checkpoint, closeout_path, audit_path, verification_path,
+        closeout_sha=closeout_sha, audit_sha=audit_sha,
+        verification_sha=verification_sha, case=case)
+    require(not output.exists(), "HANDOFF_OUTPUT_ALREADY_EXISTS")
+    data = canonical(record)
+    output.write_bytes(data)
+    # Sealing does not replace an independent verify-handoff PASS.
+    return {"status": "SEALED_STAGE1_HANDOFF_AWAITING_INDEPENDENT_CHECK",
+            "stage1_complete": False, "stage2_authorized": False,
+            "handoff_sha256": sha256(data),
+            "verified_successor_sha256": closeout_sha}
+
+
+def verify_handoff(checkpoint: Path, closeout_path: Path, audit_path: Path,
+                   verification_path: Path, handoff_path: Path,
+                   *, closeout_sha: str, audit_sha: str,
+                   verification_sha: str, handoff_sha: str,
+                   case: dict | None = None) -> dict:
+    try:
+        case = case if case is not None else load_authority()
+        actual = handoff_path.read_bytes()
+        require(len(handoff_sha) == 64 and sha256(actual) == handoff_sha,
+                "HANDOFF_SHA256_MISMATCH")
+        require(actual == canonical(verified_handoff_record(
+            checkpoint, closeout_path, audit_path, verification_path,
+            closeout_sha=closeout_sha, audit_sha=audit_sha,
+            verification_sha=verification_sha, case=case)),
+            "HANDOFF_NOT_BOUND_TO_INDEPENDENT_PASS")
+        return {"status": "VERIFIED_STAGE1_COMPLETE_HANDOFF",
+                "stage1_complete": True, "stage2_authorized": False,
+                "handoff_sha256": handoff_sha,
+                "verified_successor_sha256": closeout_sha,
+                "parent_checkpoint_commit_sha": case["checkpoint_commit_sha"],
+                "stage4_coverage_required": True,
+                "historical_uncertainty_retained": True}
+    except (ValueError, OSError, KeyError, TypeError, zipfile.BadZipFile,
+            json.JSONDecodeError) as exc:
+        return {"status": "FAIL", "stage1_complete": False,
+                "stage2_authorized": False, "defects": [str(exc)]}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -463,6 +590,28 @@ def main(argv: list[str] | None = None) -> int:
     v.add_argument("--expected-audit-sha256", required=True)
     v.add_argument("--expected-closeout-sha256", required=True)
     v.add_argument("--output", type=Path, required=True)
+    seal = commands.add_parser("seal-handoff")
+    seal.add_argument("checkpoint", type=Path)
+    seal.add_argument("closeout", type=Path)
+    seal.add_argument("audit", type=Path)
+    seal.add_argument("verification", type=Path)
+    seal.add_argument("--expected-parent-sha", required=True)
+    seal.add_argument("--expected-audit-sha256", required=True)
+    seal.add_argument("--expected-closeout-sha256", required=True)
+    seal.add_argument("--expected-verification-sha256", required=True)
+    seal.add_argument("--output", type=Path, required=True)
+    handoff = commands.add_parser("verify-handoff")
+    handoff.add_argument("checkpoint", type=Path)
+    handoff.add_argument("closeout", type=Path)
+    handoff.add_argument("audit", type=Path)
+    handoff.add_argument("verification", type=Path)
+    handoff.add_argument("handoff", type=Path)
+    handoff.add_argument("--expected-parent-sha", required=True)
+    handoff.add_argument("--expected-audit-sha256", required=True)
+    handoff.add_argument("--expected-closeout-sha256", required=True)
+    handoff.add_argument("--expected-verification-sha256", required=True)
+    handoff.add_argument("--expected-handoff-sha256", required=True)
+    handoff.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     case = load_authority()
     if args.expected_parent_sha != case["checkpoint_commit_sha"]:
@@ -477,16 +626,41 @@ def main(argv: list[str] | None = None) -> int:
         except (ValueError, OSError, KeyError, TypeError) as exc:
             report = {"status": "BLOCKED", "stage1_complete": False,
                       "defects": [str(exc)]}
-    else:
+    elif args.command == "verify-closeout":
         report = verify_closeout(args.checkpoint, args.closeout, args.audit,
                                  closeout_sha=args.expected_closeout_sha256,
                                  audit_sha=args.expected_audit_sha256, case=case)
-    args.output.write_bytes(canonical(report))
+    elif args.command == "seal-handoff":
+        try:
+            report = seal_handoff(
+                args.checkpoint, args.closeout, args.audit,
+                args.verification, args.output,
+                closeout_sha=args.expected_closeout_sha256,
+                audit_sha=args.expected_audit_sha256,
+                verification_sha=args.expected_verification_sha256, case=case)
+        except (ValueError, OSError, KeyError, TypeError,
+                json.JSONDecodeError) as exc:
+            report = {"status": "BLOCKED", "stage1_complete": False,
+                      "defects": [str(exc)]}
+    else:
+        report = verify_handoff(
+            args.checkpoint, args.closeout, args.audit,
+            args.verification, args.handoff,
+            closeout_sha=args.expected_closeout_sha256,
+            audit_sha=args.expected_audit_sha256,
+            verification_sha=args.expected_verification_sha256,
+            handoff_sha=args.expected_handoff_sha256, case=case)
+    # The handoff / closeout output path is the artifact itself, not a
+    # status-report destination. All other operations emit a report file.
+    if args.command not in {"closeout", "seal-handoff"}:
+        args.output.write_bytes(canonical(report))
     print(json.dumps(report, sort_keys=True))
     return 0 if report["status"] in {
         "ELIGIBLE_OWNER_SOURCE_ACCOUNTING_UNCERTAINTY",
         "AWAITING_INDEPENDENT_VERIFICATION",
         "VERIFIED_STAGE1_OWNER_SOURCE_ACCOUNTING_CLOSEOUT",
+        "SEALED_STAGE1_HANDOFF_AWAITING_INDEPENDENT_CHECK",
+        "VERIFIED_STAGE1_COMPLETE_HANDOFF",
     } else 1
 
 

@@ -17,6 +17,8 @@ jobs:
   exact-parent-adversarial-regression:
     runs-on: ubuntu-latest
     timeout-minutes: 35
+    env:
+      PYTHONPATH: tools:tests
     steps:
       - uses: actions/checkout@v4
         with:

@@ -15,6 +15,8 @@ import json
 import subprocess
 import tempfile
 import unittest
+import sys
+import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -319,6 +321,218 @@ class OwnerAccountingCloseoutTests(unittest.TestCase):
             audit_sha=mod.sha256(audit_file.read_bytes()), case=self.case,
         )
         self.assertEqual(result["status"], "FAIL")
+
+
+    def verified_chain(self):
+        """Actual exact-parent audit, ZIP closeout and independent verifier."""
+        audit = mod.audit_checkpoint(self.root, self.case)
+        audit_path = Path(self.tmp.name) / "audit-for-handoff.json"
+        audit_path.write_bytes(mod.canonical(audit))
+        audit_sha = mod.sha256(audit_path.read_bytes())
+        zip_path = Path(self.tmp.name) / "closeout-for-handoff.zip"
+        closeout = mod.closeout(
+            self.root, audit_path, zip_path, audit_sha=audit_sha, case=self.case)
+        self.assertFalse(closeout["stage1_complete"])
+        zip_sha = mod.sha256(zip_path.read_bytes())
+        verification = mod.verify_closeout(
+            self.root, zip_path, audit_path,
+            closeout_sha=zip_sha, audit_sha=audit_sha, case=self.case)
+        self.assertTrue(verification["stage1_complete"], verification)
+        verified_path = Path(self.tmp.name) / "independent-verified.json"
+        verified_path.write_bytes(mod.canonical(verification))
+        verified_sha = mod.sha256(verified_path.read_bytes())
+        return audit_path, audit_sha, zip_path, zip_sha, verified_path, verified_sha
+
+    def test_all_eleven_original_checkpoint_files_survive_byte_for_byte(self):
+        audit_path, audit_sha, zip_path, zip_sha, _, _ = self.verified_chain()
+        with zipfile.ZipFile(zip_path) as z:
+            names = set(z.namelist())
+            expected = set(self.case["member_git_blobs"]) | {mod.MANIFEST}
+            self.assertEqual(len(expected), 11)
+            self.assertTrue(expected.issubset(names))
+            self.assertIn("49-season-stage1-terminal-census.csv", names)
+            self.assertIn("stage4-authoring/season-coverage.json", names)
+            manifest = json.loads(z.read("manifest.json"))
+            self.assertEqual(set(manifest["inherited_parent_git_blobs"]), expected)
+            self.assertEqual(manifest["parent_checkpoint_commit_sha"], CASE_SHA)
+            self.assertEqual(manifest["parent_manifest_git_blob_sha"],
+                             self.case["checkpoint_manifest_blob_sha"])
+            for name in expected:
+                original = (self.root / name).read_bytes()
+                self.assertEqual(z.read(name), original, name)
+                self.assertEqual(manifest["inherited_parent_git_blobs"][name],
+                                 mod.git_blob(original))
+            self.assertFalse(json.loads(z.read(
+                "stage1-closeout-status.json"))["stage1_complete"])
+
+    def test_omit_predecessor_admission_diagnostic_in_successor_fails(self):
+        audit_path, audit_sha, zip_path, _, _, _ = self.verified_chain()
+        with zipfile.ZipFile(zip_path) as z:
+            members = {name: z.read(name) for name in z.namelist()}
+        self.assertIn("stage1-admission-diagnostic-0035.json", members)
+        del members["stage1-admission-diagnostic-0035.json"]
+        tampered = Path(self.tmp.name) / "dropped-original-diagnostic.zip"
+        tampered.write_bytes(mod.zip_bytes(members))
+        result = mod.verify_closeout(
+            self.root, tampered, audit_path,
+            closeout_sha=mod.sha256(tampered.read_bytes()),
+            audit_sha=audit_sha, case=self.case)
+        self.assertEqual(result["status"], "FAIL")
+        self.assertFalse(result["stage1_complete"])
+
+    def test_mutate_original_readme_in_successor_with_rehashed_zip_fails(self):
+        audit_path, audit_sha, zip_path, _, _, _ = self.verified_chain()
+        with zipfile.ZipFile(zip_path) as z:
+            members = {name: z.read(name) for name in z.namelist()}
+        self.assertIn("README.md", members)
+        members["README.md"] += b"\nNew invented diagnostic conclusion.\n"
+        root_manifest = json.loads(members["manifest.json"])
+        root_manifest["member_sha256"]["README.md"] = mod.sha256(members["README.md"])
+        root_manifest["member_bytes"]["README.md"] = len(members["README.md"])
+        members["manifest.json"] = mod.canonical(root_manifest)
+        tampered = Path(self.tmp.name) / "rewritten-parent-evidence.zip"
+        tampered.write_bytes(mod.zip_bytes(members))
+        result = mod.verify_closeout(
+            self.root, tampered, audit_path,
+            closeout_sha=mod.sha256(tampered.read_bytes()),
+            audit_sha=audit_sha, case=self.case)
+        self.assertEqual(result["status"], "FAIL")
+        self.assertFalse(result["stage1_complete"])
+
+    def test_verified_handoff_binds_pass_audit_zip_and_full_coverage(self):
+        audit_path, audit_sha, zip_path, zip_sha, verified_path, verified_sha = (
+            self.verified_chain())
+        handoff = Path(self.tmp.name) / "verified-stage1-handoff.json"
+        sealed = mod.seal_handoff(
+            self.root, zip_path, audit_path, verified_path, handoff,
+            closeout_sha=zip_sha, audit_sha=audit_sha,
+            verification_sha=verified_sha, case=self.case)
+        self.assertFalse(sealed["stage1_complete"])
+        self.assertTrue(handoff.is_file())
+        payload = json.loads(handoff.read_bytes())
+        self.assertEqual(payload["state"], "STAGE_1_COMPLETE_VERIFIED")
+        self.assertEqual(payload["closeout_zip_sha256"], zip_sha)
+        self.assertEqual(payload["audit_sha256"], audit_sha)
+        self.assertEqual(payload["independent_verifier_report_sha256"],
+                         verified_sha)
+        self.assertTrue(payload["independent_additional_loss_possible"])
+        self.assertEqual(payload["require_downstream_stage2_verification"],
+                         "verify-handoff")
+        accepted = mod.verify_handoff(
+            self.root, zip_path, audit_path, verified_path, handoff,
+            closeout_sha=zip_sha, audit_sha=audit_sha,
+            verification_sha=verified_sha,
+            handoff_sha=sealed["handoff_sha256"], case=self.case)
+        self.assertEqual(accepted["status"], "VERIFIED_STAGE1_COMPLETE_HANDOFF")
+        self.assertTrue(accepted["stage1_complete"])
+        self.assertFalse(accepted["stage2_authorized"])
+
+    def test_unverified_closeout_or_eligibility_cannot_seal_handoff(self):
+        audit_path, audit_sha, zip_path, zip_sha, verified_path, _ = (
+            self.verified_chain())
+        verified_path.write_bytes((audit_path).read_bytes())
+        forged_sha = mod.sha256(verified_path.read_bytes())
+        with self.assertRaises(ValueError):
+            mod.seal_handoff(
+                self.root, zip_path, audit_path, verified_path,
+                Path(self.tmp.name) / "invalid-handoff.json",
+                closeout_sha=zip_sha, audit_sha=audit_sha,
+                verification_sha=forged_sha, case=self.case)
+        self.assertFalse((Path(self.tmp.name) / "invalid-handoff.json").exists())
+
+    def test_handoff_wrong_parent_or_zip_hash_fails_closed(self):
+        audit_path, audit_sha, zip_path, zip_sha, verified_path, verified_sha = (
+            self.verified_chain())
+        handoff = Path(self.tmp.name) / "valid-handoff.json"
+        sealed = mod.seal_handoff(
+            self.root, zip_path, audit_path, verified_path, handoff,
+            closeout_sha=zip_sha, audit_sha=audit_sha,
+            verification_sha=verified_sha, case=self.case)
+        wrong = mod.verify_handoff(
+            self.root, zip_path, audit_path, verified_path, handoff,
+            closeout_sha="0"*64, audit_sha=audit_sha,
+            verification_sha=verified_sha,
+            handoff_sha=sealed["handoff_sha256"], case=self.case)
+        self.assertEqual(wrong["status"], "FAIL")
+        changed = copy.deepcopy(self.case)
+        changed["checkpoint_commit_sha"] = "a"*40
+        wrong_parent = mod.verify_handoff(
+            self.root, zip_path, audit_path, verified_path, handoff,
+            closeout_sha=zip_sha, audit_sha=audit_sha,
+            verification_sha=verified_sha,
+            handoff_sha=sealed["handoff_sha256"], case=changed)
+        self.assertEqual(wrong_parent["status"], "FAIL")
+
+    def test_handoff_tampered_caveat_rejected_even_if_rehashed(self):
+        audit_path, audit_sha, zip_path, zip_sha, verified_path, verified_sha = (
+            self.verified_chain())
+        handoff = Path(self.tmp.name) / "tamper-handoff.json"
+        mod.seal_handoff(
+            self.root, zip_path, audit_path, verified_path, handoff,
+            closeout_sha=zip_sha, audit_sha=audit_sha,
+            verification_sha=verified_sha, case=self.case)
+        payload = json.loads(handoff.read_bytes())
+        payload["independent_additional_loss_possible"] = False
+        handoff.write_bytes(mod.canonical(payload))
+        result = mod.verify_handoff(
+            self.root, zip_path, audit_path, verified_path, handoff,
+            closeout_sha=zip_sha, audit_sha=audit_sha,
+            verification_sha=verified_sha,
+            handoff_sha=mod.sha256(handoff.read_bytes()), case=self.case)
+        self.assertEqual(result["status"], "FAIL")
+
+    def test_missing_verified_report_disallows_stage1_handoff(self):
+        audit_path, audit_sha, zip_path, zip_sha, verified_path, verified_sha = (
+            self.verified_chain())
+        verified_path.unlink()
+        with self.assertRaises(OSError):
+            mod.seal_handoff(
+                self.root, zip_path, audit_path, verified_path,
+                Path(self.tmp.name) / "no-verifier-handoff.json",
+                closeout_sha=zip_sha, audit_sha=audit_sha,
+                verification_sha=verified_sha, case=self.case)
+
+    def test_cli_pipeline_keeps_closeout_zip_intact_and_verifies_handoff(self):
+        """Protect against CLI report overwriting ZIP and skipped last gate."""
+        root = Path(self.tmp.name)
+        audit, closeout, verified = (root / n for n in (
+            "cli-audit.json", "cli-closeout.zip", "cli-verified.json"))
+        handoff, proof = root / "cli-handoff.json", root / "cli-handoff-proof.json"
+        exe = [sys.executable, str(ROOT / "tools" /
+                                  "research_stage1_owner_source_accounting.py")]
+        def run(*argv):
+            result = subprocess.run([*exe, *map(str, argv)], capture_output=True,
+                                    text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        parent = ["--expected-parent-sha", CASE_SHA]
+        run("audit", self.root, *parent, "--output", audit)
+        audit_sha = mod.sha256(audit.read_bytes())
+        run("closeout", self.root, audit, *parent,
+            "--expected-audit-sha256", audit_sha, "--output", closeout)
+        self.assertTrue(zipfile.is_zipfile(closeout), "CLI must not clobber ZIP")
+        closeout_sha = mod.sha256(closeout.read_bytes())
+        run("verify-closeout", self.root, closeout, audit, *parent,
+            "--expected-audit-sha256", audit_sha,
+            "--expected-closeout-sha256", closeout_sha, "--output", verified)
+        verifier_sha = mod.sha256(verified.read_bytes())
+        run("seal-handoff", self.root, closeout, audit, verified, *parent,
+            "--expected-audit-sha256", audit_sha,
+            "--expected-closeout-sha256", closeout_sha,
+            "--expected-verification-sha256", verifier_sha,
+            "--output", handoff)
+        self.assertTrue(handoff.is_file())
+        run("verify-handoff", self.root, closeout, audit, verified, handoff, *parent,
+            "--expected-audit-sha256", audit_sha,
+            "--expected-closeout-sha256", closeout_sha,
+            "--expected-verification-sha256", verifier_sha,
+            "--expected-handoff-sha256", mod.sha256(handoff.read_bytes()),
+            "--output", proof)
+        result = json.loads(proof.read_bytes())
+        self.assertEqual(result["status"], "VERIFIED_STAGE1_COMPLETE_HANDOFF")
+        self.assertTrue(result["stage1_complete"])
+        self.assertFalse(result["stage2_authorized"])
+        self.assertEqual(mod.sha256(closeout.read_bytes()), closeout_sha)
+
 
 
 if __name__ == "__main__":
