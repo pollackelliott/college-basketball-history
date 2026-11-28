@@ -1,31 +1,28 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "nevada-release-readiness-0001",
+  "request_id": "nevada-release-preview-verify-0001",
   "school_key": "nevada",
-  "operation": "RELEASE_READINESS",
-  "previous_control_state_commit": "9fb6f51b0ff6a49246e7c27c12d883e015fd8394",
-  "previous_control_state_sha256": "d21558bb9446a55d7364ac0b6743d6438476bc110bd64c3ea1e28c1ed93d5716",
+  "operation": "RELEASE_PREVIEW_VERIFY",
+  "previous_control_state_commit": "b04f16feaaf62a80d8296d3337e15861ad72c8ff",
+  "previous_control_state_sha256": "3a4a29d8029e54fe4c1353a243d812cf8f735f568079ea29db09c21a1506e9f0",
   "expected_protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
   "target_branch": "data/nevada-onboarding",
   "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
-  "stage2_apply_successor": {
-    "path": ".remote-implementation/successors/nevada/nevada-stage2-sealed-apply-0001/successor-manifest.json",
-    "sha256": "692cc95224892dc212ad280719ac0feb7c47e6ee1b62c645e48d3534ab5df020"
+  "release_readiness_checkpoint": {
+    "path": ".remote-implementation/checkpoints/nevada/nevada-release-readiness-0001/checkpoint-manifest.json",
+    "sha256": "3e595d3990d6901ba010eec6d07c660478426260cd5a5b76455cf3f475c82b49"
   },
-  "stage2_apply_verification": {
-    "path": ".remote-implementation/verifications/nevada/nevada-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
-    "sha256": "928e6a2119829f7708812dfa32fa16fe686be50510f310dbf07729b4e463bbb3"
+  "release_readiness_verification": {
+    "path": ".remote-implementation/verifications/nevada/nevada-release-readiness-0001/release-readiness-verification.json",
+    "sha256": "345b8ab8680d963a150d57b30e0a2a47110f83c4cb665aa9820a34364c5f38e0"
   },
   "approved_plan_hash": "d842daa2ee517e5ab00da4d8a96312b7dc501cca20ad3d5e4fe6aa69acbd8d91",
   "release_manifest_sha256": "0e91f8b8e2d7df91d2c5262465b73d31fabc399f35534768896993dbb975a51e",
-  "release_phase_continuation": {
-    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
-    "preview_request_id": "nevada-release-preview-verify-0001"
-  },
+  "pr_number": 735,
   "creation_provenance": {
-    "origin": "Nevada same serialized Implementation lane; owner explicitly said Proceed to start release preparation after independently fresh-verified sealed apply.",
-    "authorization": "Bounded one release-preparation phase: exact read-only RELEASE_READINESS current-main gate replay and fresh verification; then connector-owned exact-head PR creation/reuse and exact CI/Preview verification to OWNER_GATE_2_READY. Does not approve Gate 2, merge, publish Production or modify approved historical authority."
+    "origin": "Nevada same serialized Implementation lane; connector-owned exact PR #735 created from fresh-verified release readiness packet under already-approved release-preparation phase.",
+    "authorization": "Perform read-only exact-head PR/CI/Preview verification for Nevada PR #735 against the one release-readiness checkpoint and exact approved plan. Stop at fresh OWNER_GATE_2_READY for explicit owner review. No Owner Gate 2 approval, merge, Production, historical or website mutation."
   },
   "authority": {
     "owner_gate_1": false,
@@ -42,8 +39,8 @@
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
-    "release_readiness": true,
-    "release_preview_verify": false,
+    "release_readiness": false,
+    "release_preview_verify": true,
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false,
