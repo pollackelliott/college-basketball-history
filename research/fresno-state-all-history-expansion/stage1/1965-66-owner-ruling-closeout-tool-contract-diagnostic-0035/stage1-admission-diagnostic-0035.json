@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_OWNER_RULING_PERMANENT_CLOSEOUT_COMPATIBILITY_DIAGNOSTIC_0035",
+  "school_key": "fresno-state",
+  "research_branch": "research/fresno-state-all-history-expansion",
+  "research_parent_sha": "5606e5f29be88a466990a558dca741d3cf1c121e",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "ruling_source": "checkpoint 0034 owner-1965-66-ruling.json",
+  "owner_ruling_preserved": true,
+  "accept_1965_66_typo_or_exhaustion_for_research_stopping": true,
+  "owner_reopen_only_for_concrete_new_game_evidence": true,
+  "printed_record": {
+    "games": 29,
+    "wins": 21,
+    "losses": 8
+  },
+  "identified_record": {
+    "games": 28,
+    "wins": 21,
+    "losses": 7
+  },
+  "source_specific_arithmetic": "UTEP source -007 independently corrected W to L; SDSU -022 duplicates -017. Corrected duplicate-inclusive line tally 21-8, unique identities 21-7. Causal method unproven.",
+  "unknown_extra_loss_not_proven_false": true,
+  "unidentified_game_created": false,
+  "ordinary_stage1_complete_supported_by_existing_policy": false,
+  "applicability_findings": [
+    {
+      "route": "ORDINARY_STAGE1_SUMMARY_DISCREPANCY",
+      "status": "NOT_DEMONSTRATED_ELIGIBLE",
+      "reason": "Detailed 28 unique game list exists, but independently reported contemporary 21-8 aggregate does not establish exhaustive 28-game universe; owner accepts possibility of a true unlisted loss"
+    },
+    {
+      "route": "SOURCE_EXPLICIT_MISSING_GAME_GAP",
+      "status": "INELIGIBLE",
+      "reason": "Primary Fresno source does not explicitly say one historical game is missing; numeric 21-8 versus 21-7 is an inferred difference"
+    },
+    {
+      "route": "EARLY_FOUNDING_AGGREGATE_COVERAGE",
+      "status": "INELIGIBLE",
+      "reason": "1965-66 is not founding era; no exact school case in early-aggregate registry"
+    },
+    {
+      "route": "EARLY_MULTI_SEASON_ACCOUNTING",
+      "status": "INELIGIBLE",
+      "reason": "Repository tool uses protected-main early-history multi-season registry populated for different school/cases; 1965-66 Fresno not covered"
+    },
+    {
+      "route": "EARLY_UNQUANTIFIED_OR_UNKNOWN_RESULT",
+      "status": "INELIGIBLE",
+      "reason": "1965-66 is neither unquantified founding era nor an already identified competitive game with unknowable result"
+    },
+    {
+      "route": "MIXED_EARLY_HISTORY_TERMINALS",
+      "status": "INELIGIBLE",
+      "reason": "Special coordinator only composes early aggregate coverage and identified unknown-result terminal families"
+    },
+    {
+      "route": "EXPANSION_PARENT_MATERIALIZATION",
+      "status": "NOT_APPLICABLE_TO_FRESNO",
+      "reason": "Permanent adapter currently hard-pins SCHOOL=arizona-state, fixed research base, original blob and historical 1916-1944 source aggregates"
+    },
+    {
+      "route": "OWNER_1965_66_RULING",
+      "status": "RECORDED_NO_POLICY_BYPASS",
+      "reason": "Owner accepts source typo / research exhausted while preserving possible unidentified additional loss"
+    },
+    {
+      "route": "1926_27_UC_DAVIS_CANDIDATE_REPRESENTATION",
+      "status": "REQUIRES_PERMANENT_CHECK",
+      "reason": "Two accepted reciprocal victories and four unassigned literal Fresno source score claims have not been accepted by permanent closeout validator"
+    },
+    {
+      "route": "RUNTIME_CLOSEOUT_VERIFICATION",
+      "status": "NOT_EXECUTED",
+      "reason": "No runnable checkout in container and git remote access failed DNS; available GitHub connector supports reading/commits but no dispatch of Stage 1 permanent execution"
+    }
+  ],
+  "runtime": {
+    "runnable_local_repository_checkout": false,
+    "github_remote_direct_git_dns_failed": true,
+    "github_connector_permanent_execution_action_available": false,
+    "permanent_stage1_audit_invoked": false,
+    "permanent_stage1_closeout_invoked": false,
+    "permanent_stage1_verify_closeout_invoked": false
+  },
+  "other_representation_validation_needed": {
+    "season": "1926-27",
+    "census_status": "OWNER_APPROVED_TWO_DAVIS_GAMES__FRESNO_FOUR_UNASSIGNED_SOURCE_CLAIMS",
+    "source_claims": "Four Fresno literal score claims retained but unassigned to either of two approved UC Davis games",
+    "known_failure": false,
+    "permanent_tool_verified": false
+  },
+  "safe_stop": "No Stage 1 COMPLETE without either: new evidence proving 28-game universe exhaustive under ordinary rules, or repository-authorized and tested narrow treatment for owner-accepted mid-history source-summary ambiguity. Any new policy/authority semantics require Control Center/repository governance review rather than generic tooling delegation.",
+  "prohibited": [
+    "MUTATE_PROTECTED_MAIN",
+    "FABRICATE_29TH_GAME",
+    "MARK_SOURCE_EXPLICIT_GAP_WHEN_ONLY_AGGREGATE_GAP",
+    "REUSE_FOUNDING_ERA_EXCEPTION",
+    "SILENTLY_MARK_STAGE1_COMPLETE",
+    "AUTHORIZE_STAGE2"
+  ],
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_0035_OWNER_HISTORICAL_RULING_TERMINAL_CLOSEOUT_ADMISSION_MANIFEST",
+  "school_key": "fresno-state",
+  "branch": "research/fresno-state-all-history-expansion",
+  "checkpoint_path": "research/fresno-state-all-history-expansion/stage1/1965-66-owner-ruling-closeout-tool-contract-diagnostic-0035/",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_parent_sha": "5606e5f29be88a466990a558dca741d3cf1c121e",
+  "parent_tree_sha": "0bc4708fa7983983016f6d85ab0ec9d6c42ef8e0",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "members": {
+    "README.md": "f14bf476bfac3f164548225b29ac6cbe223e3488",
+    "stage1-permanent-tool-eligibility-matrix-0035.csv": "b9012519407225c0f23fc46944ccd1a63a01a4c3",
+    "stage1-admission-diagnostic-0035.json": "2ec873490485573d93eaffd77016f96945bf9654",
+    "stage1-admission-audit-0035.json": "286771430e5073a58bd6da5fac7c16d71f94c7df",
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "49-season-stage1-census-owner-ruling-CANDIDATE.csv": "fddd0c045cbe2b7c86abb177fc2ffe680f7641bd",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb",
+    "owner-1965-66-ruling.json": "f4467d7ebda06a504c223b5de207fc866e18958a"
+  },
+  "accepted_games": 1011,
+  "accepted_record": {
+    "wins": 532,
+    "losses": 479
+  },
+  "source_representations": 1036,
+  "owner_clowns_exclusions": 2,
+  "owner_1965_66_ruling_preserved": true,
+  "permanent_tool_eligibility": "NOT_ESTABLISHED_BY_CURRENT_CONTRACT",
+  "permanent_stage1_closeout_executed": false,
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

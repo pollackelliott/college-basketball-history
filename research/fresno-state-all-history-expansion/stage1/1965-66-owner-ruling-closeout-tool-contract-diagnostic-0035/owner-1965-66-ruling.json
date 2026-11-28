@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_OWNER_1965_66_SOURCE_ACCOUNTING_HISTORICAL_DISPOSITION_0034",
+  "school_key": "fresno-state",
+  "season": "1965-66",
+  "research_parent_sha": "167201f7e42b5407bf41e96d5d83d923b89bd05a",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "owner_statement_verbatim": "I am comfortable calling it a typo/research exhausted. We can note there may be an additional loss unknown to us, but that doesn’t seem worth stopping progress to me",
+  "owner_authority_scope": "THIS_FRESNO_1965_66_SUMMARY_DISCREPANCY_ONLY",
+  "owner_decision": "ACCEPT_WORKING_TYPO_OR_SOURCE_ACCOUNTING_EXPLANATION_AND_STOP_REPEATED_RESEARCH; ADVANCE_WITH_EXPLICIT_ADDITIONAL_UNIDENTIFIED_LOSS_RISK",
+  "is_deterministic_fact_about_original_editors": false,
+  "assume_no_missing_game_proven": false,
+  "accept_competitive_game_ledger_as_identified": true,
+  "accepted_identified_game_total": 28,
+  "accepted_identified_record": {
+    "wins": 21,
+    "losses": 7
+  },
+  "preserve_official_printed_summary": {
+    "games": 29,
+    "wins": 21,
+    "losses": 8
+  },
+  "source_line_count": 29,
+  "known_source_line_mechanism": {
+    "source_result_reversal": "FRESNO-EXP-CAND-1965-66-007 UTEP Fresno W75-73 printed, L73-75 independently proven",
+    "duplicate_source": "FRESNO-EXP-CAND-1965-66-022 duplicates -017 SDSU Feb 18, 1966 Fresno L66-69",
+    "corrected_duplicate_inclusive_record": "21-8; not proof that editors counted duplicate"
+  },
+  "residual_uncertainty": "Potential separate 29th played loss remains unknown; not asserted nonexistent; no game-level identity established.",
+  "nonblocking_treatment_owner_requested": true,
+  "game_creation_authorized": false,
+  "alter_official_printed_record": false,
+  "alter_existing_game_results": false,
+  "alter_clowns_exhibitions": false,
+  "grant_source_explicit_missing_games_exception": false,
+  "grant_founding_era_exception": false,
+  "global_policy_change_authorized": false,
+  "stage1_terminal_complete_authorized_automatically": false,
+  "permanent_stage1_closeout_validated": false,
+  "next_execution": "CHECK_CANDIDATE_AGAINST_EXISTING_STAGE1_ORDINARY_SUMMARY_CONTRADICTION_RULE; RUN_REPOSITORY_PERMANENT_STAGE1_CLOSEOUT_IF_AVAILABLE. STOP IF TOOL REQUIRES A NEW POLICY_EXCEPTION."
+}

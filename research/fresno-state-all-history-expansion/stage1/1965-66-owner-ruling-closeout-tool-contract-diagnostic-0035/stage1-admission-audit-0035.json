@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_0035_STATIC_PERMANENT_ROUTE_ADMISSION_AUDIT",
+  "research_parent_sha": "5606e5f29be88a466990a558dca741d3cf1c121e",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "checkpoint_0034_manifest_blob_sha": "22ee70b407d36b89a903fe1b8640311b27cde0b8",
+  "exact_carry_blob_shas": {
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "49-season-stage1-census-owner-ruling-CANDIDATE.csv": "fddd0c045cbe2b7c86abb177fc2ffe680f7641bd",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb",
+    "owner-1965-66-ruling.json": "f4467d7ebda06a504c223b5de207fc866e18958a"
+  },
+  "status_counts_by_season_census": {
+    "BULK_WORKING_GAMES_ACCEPTED_NOT_STAGE1_COMPLETE": 45,
+    "OWNER_APPROVED_TWO_DAVIS_GAMES__FRESNO_FOUR_UNASSIGNED_SOURCE_CLAIMS": 1,
+    "OWNER_EXHIBITION_EXCLUSION__LITERAL_PRINTED_AGGREGATE_CONTRADICTION": 2,
+    "ONE_AGGREGATE_LOSS_UNMAPPED": 1
+  },
+  "accepted_games": 1011,
+  "wins": 532,
+  "losses": 479,
+  "source_representations": 1036,
+  "seasons": 49,
+  "pending_groups": 0,
+  "owner_historical_ruling": true,
+  "source_specific_1965_discrepancy_retained": true,
+  "applicable_permanent_terminal_path_found": false,
+  "permanent_tool_execution_available": false,
+  "permanent_tool_executed": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "check_count": 16
+}
