@@ -135,6 +135,38 @@ class PureExactCaseTests(unittest.TestCase):
             with self.subTest(change=change):
                 with self.assertRaises(rebase.KeyRebaseStop):rebase.require_census(altered,census)
 
+
+
+class CandidateReplayBranchTests(unittest.TestCase):
+    def test_detached_candidate_replays_on_named_clean_branch(self):
+        import subprocess
+        import tempfile
+        from stage2_candidate_registered_key_rebase_rehearsal import (
+            attach_disposable_stage2_branch,
+        )
+        with tempfile.TemporaryDirectory(prefix='registered-key-branch-test-') as td:
+            repo = Path(td)
+            def git(*args):
+                return subprocess.check_output(
+                    ['git', *args], cwd=repo, text=True,
+                    stderr=subprocess.STDOUT,
+                ).strip()
+            git('init', '-q')
+            git('config', 'user.name', 'ci-test')
+            git('config', 'user.email', 'ci-test@example.invalid')
+            git('commit', '--allow-empty', '-m', 'case')
+            prepared_sha = git('rev-parse', 'HEAD')
+            git('checkout', '--detach', prepared_sha)
+            with self.assertRaises(ValueError):
+                attach_disposable_stage2_branch(repo, 'f' * 40)
+            branch = attach_disposable_stage2_branch(repo, prepared_sha)
+            self.assertEqual(branch, 'candidate-grand-canyon-stage2-validation')
+            self.assertEqual(git('branch', '--show-current'), branch)
+            self.assertEqual(git('rev-parse', 'HEAD'), prepared_sha)
+            self.assertEqual(git('status', '--porcelain', '--untracked-files=all'), '')
+            with self.assertRaises(ValueError):
+                attach_disposable_stage2_branch(repo, prepared_sha)
+
 class GuardedTransactionBoundaryTests(unittest.TestCase):
     """Exercise transaction stop paths, not only the pure CSV transformer."""
 

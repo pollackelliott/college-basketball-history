@@ -38,6 +38,26 @@ def checked(*args: str, cwd: Path | None = None) -> None:
                    stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 
 
+def attach_disposable_stage2_branch(repo: Path, prepared_sha: str) -> str:
+    """Reattach only the disposable exact prepared commit for Stage 2 preflight.
+
+    Stage 2 deliberately rejects a detached HEAD. Rehearsal must use a named
+    non-main local branch without moving or publishing the real target ref.
+    """
+    if git(repo, 'rev-parse', 'HEAD') != prepared_sha:
+        raise ValueError('DISPOSABLE_PREPARED_COMMIT_MOVED')
+    if git(repo, 'branch', '--show-current'):
+        raise ValueError('DISPOSABLE_REPLAY_NOT_DETACHED')
+    if git(repo, 'status', '--porcelain', '--untracked-files=all'):
+        raise ValueError('DISPOSABLE_REPLAY_WORKTREE_DIRTY')
+    name = 'candidate-grand-canyon-stage2-validation'
+    checked('git', 'switch', '-c', name, cwd=repo)
+    if (git(repo, 'branch', '--show-current') != name
+            or git(repo, 'rev-parse', 'HEAD') != prepared_sha):
+        raise ValueError('DISPOSABLE_REPLAY_BRANCH_NOT_EXACT')
+    return name
+
+
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument('--runtime', type=Path, required=True)
@@ -78,6 +98,9 @@ def main() -> int:
         checked('git', 'config', 'user.email', 'candidate-rehearsal@example.invalid', cwd=scratch)
         prepared = _candidate(scratch, EXPECTED_TARGET, freeze)
         assert prepared['prepared_parent_sha'] == EXPECTED_TARGET, 'PREPARED_PARENT_CHANGED'
+        # The permanent Stage 2 coordinator requires a named, clean non-main
+        # branch; a detached immutable candidate is not a valid test surface.
+        attach_disposable_stage2_branch(scratch, prepared['prepared_commit_sha'])
         assert prepared['field_level_proof'] == pure_proof, 'PREPARED_FIELD_PROOF_CHANGED'
         assert sorted(prepared['changed_paths']) == sorted(pure_proof['allowed_paths']), 'PREPARED_PATHS_CHANGED'
         assert prepared['semantic_drift_before']['status'] == 'PASS', 'BEFORE_SEMANTIC_DRIFT'
