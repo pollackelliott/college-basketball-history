@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "RESEARCH_STAGE1_CHECKPOINT_MANIFEST_V1",
+  "checkpoint": "0004-stage1-complete-game-universe",
+  "school_key": "new-mexico",
+  "state": "STAGE_1_COMPLETE",
+  "research_branch": "research/new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "b0bedfd103aed100bf0c74bde9d957c1180c4b2e",
+  "parent_checkpoint": "0003-stage1-exhibition-and-record-audit",
+  "parent_checkpoint_manifest_git_blob_sha": "59c83b36e13e37a8fcaa96915cae7b07b2996bd0",
+  "institutional_scope_authority_git_blob_sha": "0c1e3d61cebd444008e8c6e520c78e6444843b70",
+  "accepted_top_level_scope": "INCEPTION+",
+  "program_inception_season": "1899-00",
+  "primary_source_pdf_sha256": "94a121232efa82a71ebb448139d4e72c799ac032128cb625ce2a5178b6bbdcc7",
+  "primary_source_historical_cutoff": "2025-26",
+  "required_completed_season_cutoff": "2025-26",
+  "identified_competitive_games": 2891,
+  "game_universe_blockers": 0,
+  "stage_2_authorized": false,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 8951,
+      "sha256": "0a8d1eba08e3030722af8b470541b3c7773798d31a5993092457af3d1ffbf4c5",
+      "git_blob_sha": "c1935e952e57ad6ff6ab1f4f0a0c0d67a07e41d0"
+    },
+    {
+      "path": "accepted-source-games.csv",
+      "bytes": 926066,
+      "sha256": "e669ff66502e14c023410ab804bd50ab3174d03e7df20a3f4c091aa3243d3cfb",
+      "git_blob_sha": "63490b3398c94193da324911b1d002aafcac2d06"
+    },
+    {
+      "path": "adjudication-log.csv",
+      "bytes": 5366,
+      "sha256": "841a30b47f420b375667a9637e18ea2468ab2ebf91b5c899a42c41550f665a29",
+      "git_blob_sha": "e3642d97e54f7ade65dca13b69753fd4e77d36c0"
+    },
+    {
+      "path": "excluded-exhibitions.csv",
+      "bytes": 14007,
+      "sha256": "cf334c6c44d9bad872b4d29a8abac117966735f065de043b71310cf3822b74e0",
+      "git_blob_sha": "01b61d61eeb1a428225744de6512877eb6ef9aa3"
+    },
+    {
+      "path": "exhibition-appendix-crosswalk.csv",
+      "bytes": 14269,
+      "sha256": "a8c6e4deea90f9048b397f52f2e90176767b73d2070e2aad30d2d7382c6a1f1d",
+      "git_blob_sha": "eda269cee6ec661cce01ce8021834017eea2e890"
+    },
+    {
+      "path": "rejected-layout-fragments.csv",
+      "bytes": 6006,
+      "sha256": "92d5794c363fe3951a05becacbefe66ee71b923c678e782d0fb11e24a8fb042e",
+      "git_blob_sha": "4c219c898658b19a888cf9b2f7ad9207bb417fa9"
+    },
+    {
+      "path": "season-census.csv",
+      "bytes": 17343,
+      "sha256": "1d1601a205d573cbd1963ec4823a444c4b919bdc38b36cc0d4aad557b9ee236f",
+      "git_blob_sha": "3dcdcc9d774e7c145143d2dde53a0766a3829b84"
+    },
+    {
+      "path": "stage1-residuals.csv",
+      "bytes": 1910,
+      "sha256": "92c29c03aecc159f4badac5aa9b1ec63519432b2eaa9d750b90668aeb1d9ac2c",
+      "git_blob_sha": "0bc41af43b3907bbec0784547caf762c76d52754"
+    },
+    {
+      "path": "stage1-status.json",
+      "bytes": 2372,
+      "sha256": "099484e3e0215123f9df30494fdb2be82b874394aac19e5d5c5f0b06ff17fe99",
+      "git_blob_sha": "5c4ae5cbebfbf400a8477d42fcca54d7cf450ec5"
+    }
+  ]
+}

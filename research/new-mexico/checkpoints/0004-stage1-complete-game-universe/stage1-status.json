@@ -1,0 +1,74 @@
+{
+  "accepted_competitive_games": 2891,
+  "accepted_game_type_rows": 2891,
+  "accepted_top_level_scope": "INCEPTION+",
+  "active_seasons": 123,
+  "completed_season_cutoff": "2025-26",
+  "completion_state": "COMPLETE",
+  "date_season_contradictions": 0,
+  "exclusion_rows": 86,
+  "exhibition_appendix_entries": 87,
+  "game_ids_unique": true,
+  "game_types": {
+    "CONFERENCE_TOURNAMENT": 93,
+    "NCAA_TOURNAMENT": 27,
+    "POSTSEASON": 44,
+    "REGULAR_SEASON": 2727
+  },
+  "historical_institutional_source_result_pages": "121-132",
+  "historical_touring_games_acceptances": [
+    "NM-1936-37-0006",
+    "NM-1937-38-0003",
+    "NM-1937-38-0004"
+  ],
+  "next_research_stage": "STAGE_2_AFTER_OWNER_PROCEED",
+  "no_research_main_mutation": true,
+  "no_team_seasons": [
+    "1900-01",
+    "1903-04",
+    "1917-18",
+    "1920-21"
+  ],
+  "no_unaccepted_canon_game_invention": true,
+  "nonblocking_residual_classes": [
+    "NONBLOCKING_FIELD_DEBT",
+    "NONBLOCKING_AGGREGATE_CONTRADICTION",
+    "NONBLOCKING_SOURCE_CLASSIFICATION_CONFLICT",
+    "NONBLOCKING_INSTITUTIONAL_SUMMARY_TYPO"
+  ],
+  "on_court_losses": 1224,
+  "on_court_wins": 1667,
+  "parent_research_commit": "b0bedfd103aed100bf0c74bde9d957c1180c4b2e",
+  "pending_owner_inclusion_questions": 0,
+  "primary_source_historical_cutoff": "2025-26",
+  "primary_source_pdf_sha256": "94a121232efa82a71ebb448139d4e72c799ac032128cb625ce2a5178b6bbdcc7",
+  "program_inception_season": "1899-00",
+  "provenance_preserving_score_separator_repairs": 6,
+  "required_completed_season_cutoff": "2025-26",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_phase_boundary": "STAGE_1_COMPLETE_STOP_BEFORE_STAGE_2",
+  "same_date_normalized_opponent_duplicate_candidates": 0,
+  "school_key": "new-mexico",
+  "score_statuses": {
+    "CURATED_SAME_SOURCE_NIT_HISTORY": 1,
+    "CURATED_SOURCE_SCORE_SEPARATOR_FROM_PDF_IMAGE": 6,
+    "EXACT_SOURCE_SCORE": 2883,
+    "MISSING_SOURCE_SCORE": 1
+  },
+  "score_wl_contradictions": 0,
+  "season_headings": 127,
+  "source_alltime_season_sums": {
+    "L": 1226,
+    "W": 1666
+  },
+  "source_published_overview_record": {
+    "L": 1223,
+    "W": 1667
+  },
+  "stage": "STAGE_1",
+  "stage1_universe_blockers": 0,
+  "superseded_protected_main_scope": "1950-51+",
+  "target_countable_exhibition_appendix_overlap": 1,
+  "unknown_exact_dates": 1,
+  "unknown_played_scores": 1
+}
