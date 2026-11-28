@@ -1,0 +1,20 @@
+{
+  "kind": "SDSU_STAGE2_COMPLETE_0050_MANIFEST_V1",
+  "checkpoint": "0050-stage2-complete-original-archive-field-parity",
+  "stage2_complete": false,
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "d4e702f4ef164f5682b10a36ddd6eb8ec5f8fe94",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "original_stage1_archive_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "accepted_stage2_parent_sha256": "1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89",
+  "files": {
+    "parity-and-readiness-audit.json": {
+      "sha256": "ddf18c34b1b1b5fc3a0930eb109698231cc2106cd00a3010cfb981b3a418d6ee",
+      "bytes": 24715
+    },
+    "research-status.json": {
+      "sha256": "b84664c38eb5a86b064a35c20249f3e0e1d7718313f60d55a3eae8db7ea69d19",
+      "bytes": 8013
+    }
+  }
+}

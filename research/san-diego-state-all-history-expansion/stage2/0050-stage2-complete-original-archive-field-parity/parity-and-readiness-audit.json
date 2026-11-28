@@ -1,0 +1,907 @@
+{
+  "source_member_manifest_sha256": "49975de639054b368215308735b462f9740dbf5de2c7f7ca30b4b28f5a5bb430",
+  "original_stage1_ledger_sha256": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e",
+  "new_source_columns": [
+    "opponent_literal",
+    "game_universe_state",
+    "source_checkpoint",
+    "source_row_order",
+    "source_result_token",
+    "literal_source_line",
+    "source_cohort_git_blob",
+    "source_row_json_sha256"
+  ],
+  "checks": {
+    "authenticated_workflow_parent": {
+      "pass": true,
+      "detail": {
+        "expected": "d4e702f4ef164f5682b10a36ddd6eb8ec5f8fe94",
+        "actual": "d4e702f4ef164f5682b10a36ddd6eb8ec5f8fe94"
+      }
+    },
+    "workflow_only_changed_path": {
+      "pass": true,
+      "detail": [
+        ".github/workflows/sdsu-stage2-exact-archive-parity.yml"
+      ]
+    },
+    "protected_main_still_exact": {
+      "pass": true,
+      "detail": {
+        "expected": "242370fc551fd749c157c74d92917ddfafbe40e0",
+        "actual": "242370fc551fd749c157c74d92917ddfafbe40e0"
+      }
+    },
+    "immutable_research_base_object_present": {
+      "pass": true,
+      "detail": null
+    },
+    "stage1_zip_exact_length": {
+      "pass": true,
+      "detail": 451387
+    },
+    "stage1_zip_exact_sha256": {
+      "pass": true,
+      "detail": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6"
+    },
+    "stage1_zip_exact_git_blob": {
+      "pass": true,
+      "detail": "e71dc178f8b360dd19fad5c2e14075fcb999dbb9"
+    },
+    "stage2_parent_original_blob": {
+      "pass": true,
+      "detail": "4865c0b823394a7b47ed938df7f762aa6c77b5ad"
+    },
+    "stage2_parent_original_sha256": {
+      "pass": true,
+      "detail": null
+    },
+    "stage2_original_opponents_blob": {
+      "pass": true,
+      "detail": "fe7314fa2b8c0b8ca24d8b938b677edff997c4ba"
+    },
+    "stage2_original_opponents_sha256": {
+      "pass": true,
+      "detail": null
+    },
+    "original_zip_crc": {
+      "pass": true,
+      "detail": null
+    },
+    "authoritative_manifest_unique_exact_path": {
+      "pass": true,
+      "detail": null
+    },
+    "stage1_manifest_identity": {
+      "pass": true,
+      "detail": {
+        "kind": "SDSU_STAGE1_COMPLETED_SOURCE_ACKNOWLEDGED_GAP_MANIFEST_V1",
+        "research_base": "5b840a354fb5cd792239ff8b93cba223a18dd87a"
+      }
+    },
+    "stage1_manifest_population": {
+      "pass": true,
+      "detail": null
+    },
+    "stage1_manifest_member_bytes_and_hashes": {
+      "pass": false,
+      "detail": {
+        "member_count": 20,
+        "verified": 20,
+        "original_parent_members": 8,
+        "errors": [
+          {
+            "member": "checkpoint/blocking-residuals.json",
+            "error": "PARENT_HASH_OR_LENGTH"
+          },
+          {
+            "member": "checkpoint/stage1-status.json",
+            "error": "PARENT_HASH_OR_LENGTH"
+          },
+          {
+            "member": "checkpoint/stage1-manifest.json",
+            "error": "PARENT_HASH_OR_LENGTH"
+          }
+        ]
+      }
+    },
+    "original_stage1_row_count": {
+      "pass": true,
+      "detail": 1086
+    },
+    "stage1_season_census": {
+      "pass": true,
+      "detail": 49
+    },
+    "original_disposition_count": {
+      "pass": true,
+      "detail": 1126
+    },
+    "source_coverage_debt_identity": {
+      "pass": true,
+      "detail": null
+    },
+    "source_season_coverage_debt": {
+      "pass": true,
+      "detail": null
+    },
+    "stage2_population": {
+      "pass": true,
+      "detail": 1086
+    },
+    "stage2_opponent_label_population": {
+      "pass": true,
+      "detail": 341
+    },
+    "stage2_distinct_opponent_keys": {
+      "pass": true,
+      "detail": null
+    },
+    "original_stage1_game_id_unique": {
+      "pass": true,
+      "detail": null
+    },
+    "original_stage2_game_id_unique": {
+      "pass": true,
+      "detail": null
+    },
+    "stage1_stage2_exact_id_set": {
+      "pass": true,
+      "detail": {
+        "only_original": [],
+        "only_stage2": []
+      }
+    },
+    "source_disposition_unique_and_exact_exclusions": {
+      "pass": true,
+      "detail": {
+        "named": 1126,
+        "excluded": 40
+      }
+    },
+    "original_stage1_structured_game_type": {
+      "pass": true,
+      "detail": {
+        "REGULAR_SEASON": 1043,
+        "POSTSEASON": 43
+      }
+    },
+    "stage2_structured_game_type": {
+      "pass": true,
+      "detail": null
+    },
+    "stage2_original_outcomes": {
+      "pass": true,
+      "detail": {
+        "W": 654,
+        "L": 431,
+        "T": 1
+      }
+    },
+    "original_five_missing_score_pairs": {
+      "pass": true,
+      "detail": [
+        "SDSU-EXP-S1-1929-30-0002",
+        "SDSU-EXP-S1-1930-31-0002",
+        "SDSU-EXP-S1-1930-31-0003",
+        "SDSU-EXP-S1-1931-32-0001",
+        "SDSU-EXP-S1-1931-32-0002"
+      ]
+    },
+    "original_one_tie": {
+      "pass": true,
+      "detail": [
+        "SDSU-EXP-S1-1931-32-0008"
+      ]
+    },
+    "site_type_uninferred": {
+      "pass": true,
+      "detail": null
+    },
+    "source_site_convention_tokens_retained": {
+      "pass": true,
+      "detail": null
+    },
+    "opponent_map_field_level_readiness": {
+      "pass": true,
+      "detail": {
+        "unmatched_ids": [],
+        "labels": 341
+      }
+    },
+    "exact_eight_stage1_provenance_columns_identified": {
+      "pass": true,
+      "detail": [
+        "opponent_literal",
+        "game_universe_state",
+        "source_checkpoint",
+        "source_row_order",
+        "source_result_token",
+        "literal_source_line",
+        "source_cohort_git_blob",
+        "source_row_json_sha256"
+      ]
+    },
+    "complete_field_by_field_stage1_and_stage2_parity": {
+      "pass": false,
+      "detail": {
+        "comparisons": 16290,
+        "mismatch_count": 1079,
+        "samples": [
+          {
+            "game_id": "SDSU-EXP-S1-1921-22-0012",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1924-25-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1926-27-0007",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1931-32-0015",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": "ot-W"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1933-34-0015",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": "ot-W"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1934-35-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1934-35-0009",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": "ot-W"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0001",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0002",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0003",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0005",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0006",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0007",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0011",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0012",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0013",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0014",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0015",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0016",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0017",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0018",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0019",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0020",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0021",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0022",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0023",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0024",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0025",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0026",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0002",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0003",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0005",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0006",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          }
+        ]
+      }
+    }
+  },
+  "errors": [
+    {
+      "check": "stage1_manifest_member_bytes_and_hashes",
+      "detail": {
+        "member_count": 20,
+        "verified": 20,
+        "original_parent_members": 8,
+        "errors": [
+          {
+            "member": "checkpoint/blocking-residuals.json",
+            "error": "PARENT_HASH_OR_LENGTH"
+          },
+          {
+            "member": "checkpoint/stage1-status.json",
+            "error": "PARENT_HASH_OR_LENGTH"
+          },
+          {
+            "member": "checkpoint/stage1-manifest.json",
+            "error": "PARENT_HASH_OR_LENGTH"
+          }
+        ]
+      }
+    },
+    {
+      "check": "complete_field_by_field_stage1_and_stage2_parity",
+      "detail": {
+        "comparisons": 16290,
+        "mismatch_count": 1079,
+        "samples": [
+          {
+            "game_id": "SDSU-EXP-S1-1921-22-0012",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1924-25-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1926-27-0007",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1931-32-0015",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": "ot-W"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1933-34-0015",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": "ot-W"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1934-35-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": "ot-L"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1934-35-0009",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": "ot-W"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0001",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0002",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0003",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0005",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0006",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0007",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0011",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0012",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0013",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0014",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0015",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0016",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0017",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0018",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0019",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0020",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0021",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0022",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0023",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0024",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0025",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1936-37-0026",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0002",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0003",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0004",
+            "field": "embedded_source_result_token",
+            "stage1": "L",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0005",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1937-38-0006",
+            "field": "embedded_source_result_token",
+            "stage1": "W",
+            "stage2": ""
+          }
+        ]
+      }
+    }
+  ],
+  "mismatch_count": 1079,
+  "mismatch_examples": [
+    {
+      "game_id": "SDSU-EXP-S1-1921-22-0012",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": "ot-L"
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1924-25-0004",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": "ot-L"
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1926-27-0007",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": "ot-L"
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1931-32-0015",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": "ot-W"
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1933-34-0015",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": "ot-W"
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1934-35-0004",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": "ot-L"
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1934-35-0009",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": "ot-W"
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0001",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0002",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0003",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0004",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0005",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0006",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0007",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0011",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0012",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0013",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0014",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0015",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0016",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0017",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0018",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0019",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0020",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0021",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0022",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0023",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0024",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0025",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1936-37-0026",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1937-38-0002",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1937-38-0003",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1937-38-0004",
+      "field": "embedded_source_result_token",
+      "stage1": "L",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1937-38-0005",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    },
+    {
+      "game_id": "SDSU-EXP-S1-1937-38-0006",
+      "field": "embedded_source_result_token",
+      "stage1": "W",
+      "stage2": ""
+    }
+  ],
+  "pass": false,
+  "accepted_games": 1086,
+  "source_labels": 341,
+  "opponent_keys": 203,
+  "stage3_started": false,
+  "stage1_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6"
+}
