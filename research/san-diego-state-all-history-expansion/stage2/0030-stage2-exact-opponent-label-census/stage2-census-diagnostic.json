@@ -1,0 +1,124 @@
+{
+  "kind": "SDSU_STAGE2_LABEL_CENSUS_V1",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "parent_research_head": "e9796c041a23b0b21491965559a3b6b6257dc2bb",
+  "exact_completed_stage1_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "source_ledger_sha256": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e",
+  "research_base_programs_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "research_base_published_opponents_git_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "counts": {
+    "unique_literal_labels": 341,
+    "game_rows": 1086,
+    "exact_registry_labels": 30,
+    "exact_registry_games": 114,
+    "prefix_cleaned_registry_labels": 84,
+    "prefix_cleaned_registry_games": 382,
+    "exact_published_mapping_labels": 51,
+    "exact_published_mapping_games": 226,
+    "source_prefix_marker_labels": 149,
+    "source_prefix_marker_games": 624,
+    "unmatched_after_prefix_labels": 249,
+    "unmatched_after_prefix_games": 692,
+    "multi_key_candidate_labels": 0
+  },
+  "game_types": {
+    "REGULAR_SEASON": 1043,
+    "POSTSEASON": 43
+  },
+  "historical_game_decisions_changed": 0,
+  "stage2_identities_accepted": 0,
+  "unidentified_1921_22_played_results_separately_carried": 3,
+  "source_notation_still_literal": true,
+  "source_site_notation_convention_not_proven": true,
+  "home_away_neutral_inferred": 0,
+  "prefix_removal_only_for_candidate_discovery": true,
+  "published_opponent_rows_are_candidates_not_automatic_identities": true,
+  "high_frequency_no_direct_candidate": [
+    {
+      "label": "Whittier",
+      "game_count": 29
+    },
+    {
+      "label": "at Whittier",
+      "game_count": 27
+    },
+    {
+      "label": "*Cal Poly-SLO",
+      "game_count": 22
+    },
+    {
+      "label": "San Diego Marines",
+      "game_count": 22
+    },
+    {
+      "label": "*at Cal Poly-SLO",
+      "game_count": 20
+    },
+    {
+      "label": "*at Cal State Los Angeles",
+      "game_count": 17
+    },
+    {
+      "label": "*Cal State Los Angeles",
+      "game_count": 17
+    },
+    {
+      "label": "*at Whittier",
+      "game_count": 15
+    },
+    {
+      "label": "*Occidental",
+      "game_count": 15
+    },
+    {
+      "label": "Chapman",
+      "game_count": 15
+    },
+    {
+      "label": "*La Verne",
+      "game_count": 13
+    },
+    {
+      "label": "*Santa Barbara State",
+      "game_count": 12
+    },
+    {
+      "label": "Redlands",
+      "game_count": 12
+    },
+    {
+      "label": "Occidental",
+      "game_count": 11
+    },
+    {
+      "label": "*at La Verne",
+      "game_count": 10
+    },
+    {
+      "label": "*Redlands",
+      "game_count": 10
+    },
+    {
+      "label": "*Santa Barbara",
+      "game_count": 10
+    },
+    {
+      "label": "*at Redlands",
+      "game_count": 9
+    },
+    {
+      "label": "*at Santa Barbara",
+      "game_count": 9
+    },
+    {
+      "label": "*Whittier",
+      "game_count": 9
+    }
+  ],
+  "next_bounded_unit": "Work one coherent high-frequency historical opponent identity family using authenticated historical evidence; record accepted mappings in Stage 2, preserving original game_type and literal source; do not mark Stage2 COMPLETE until full 1086-row structured-stage2-ledger.csv and stage4-authoring/opponents.csv are durable."
+}

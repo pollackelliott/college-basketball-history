@@ -1,0 +1,30 @@
+{
+  "kind": "SDSU_STAGE2_BOUNDED_CENSUS_CHECKPOINT_MANIFEST_V1",
+  "checkpoint": "0030-stage2-exact-opponent-label-census",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "e9796c041a23b0b21491965559a3b6b6257dc2bb",
+  "protected_main_sha_at_checkpoint": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "source_stage1_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "files": {
+    "stage2-opponent-label-census.csv": {
+      "sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+      "bytes_utf8": 48732
+    },
+    "stage2-census-diagnostic.json": {
+      "sha256": "5aed198312c379fbaea4cfb084284530e9bb4c877b66bb8056f705732e3db007",
+      "bytes_utf8": 3485
+    },
+    "research-status.json": {
+      "sha256": "55fce0ef3117852f6e8f118e987311dbac0ba0e0529c5e5354f1f034b86a1c26",
+      "bytes_utf8": 1182
+    },
+    "research-findings.md": {
+      "sha256": "26d200254d0b83d0df0ce2ac998ca67522a82c030b190a950d3debd6480d0f81",
+      "bytes_utf8": 1900
+    }
+  }
+}
