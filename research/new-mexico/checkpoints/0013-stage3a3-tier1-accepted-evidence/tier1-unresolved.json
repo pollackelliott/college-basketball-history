@@ -1,0 +1,596 @@
+[
+  {
+    "game_date": "",
+    "opponent_key": "texas-tech",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1938-39-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "colorado-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1940-41-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "colorado-college",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1940-41-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "pittsburg-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1941-42-0002"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "colorado-mines",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1941-42-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "central-missouri",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1941-42-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "kirtland-afb",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1942-43-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "west-texas-a-m",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1948-49-0002"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "central-oklahoma",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1948-49-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "hardin-simmons",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1948-49-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "abilene-christian",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1948-49-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "kent-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1949-50-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "arizona",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1949-50-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "west-texas-a-m",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1949-50-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "northern-arizona",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1950-51-0002"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "byu",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1950-51-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "montana",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1950-51-0009"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "texas-tech",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1952-53-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "northern-arizona",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1952-53-0021"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "occidental",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1955-56-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "hamline",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1955-56-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "regis-colorado",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1956-57-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "utep",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1956-57-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "northern-arizona",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1958-59-0001"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "valparaiso",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1959-60-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "air-force",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1959-60-0014"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "new-mexico-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1961-62-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "tcu",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1964-65-0009"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "south-carolina",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1969-70-0009"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "west-virginia",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1969-70-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "oregon",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1971-72-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "washington-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1971-72-0009"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "oregon-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1971-72-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "jacksonville",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1974-75-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "wichita-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1978-79-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "santa-clara",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1983-84-0001"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "usc",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1983-84-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "charlotte",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1986-87-0001"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "long-beach-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1986-87-0002"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "vanderbilt",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1986-87-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "seton-hall",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1987-88-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "iowa-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1987-88-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "ucla",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-1997-98-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "washington",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2005-06-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "wichita-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2006-07-0011"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "kansas-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2006-07-0012"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "vcu",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2008-09-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "drake",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2008-09-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "texas-a-m",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2009-10-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "colorado",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2010-11-0011"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "northern-iowa",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2010-11-0012"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "santa-clara",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2011-12-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "washington-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2011-12-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "boston-college",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2011-12-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "oklahoma-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2011-12-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "uic",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2012-13-0002"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "george-mason",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2012-13-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "uconn",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2012-13-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "uab",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2013-14-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "massachusetts",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2013-14-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "davidson",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2013-14-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "kansas",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2013-14-0009"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "marquette",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2013-14-0011"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "boston-college",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2014-15-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "george-mason",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2014-15-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "texas-a-m",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2014-15-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "auburn",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2015-16-0011"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "byu",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2015-16-0012"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "washington-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2015-16-0013"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "virginia-tech",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2016-17-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "cal-state-northridge",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2016-17-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "dayton",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2016-17-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "tcu",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2017-18-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "maryland",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2017-18-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "saint-mary-s",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2018-19-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "auburn",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2019-20-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "wisconsin",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2019-20-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "our-lady-of-the-lake",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0002"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "le-tourneau",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0003"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "nevada",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "nevada",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "utah-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "utah-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0009"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "san-jose-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0013"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "san-jose-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0014"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "wyoming",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0017"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "wyoming",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2020-21-0018"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "uab",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2021-22-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "towson",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2021-22-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "san-francisco",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2022-23-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "toledo",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2023-24-0004"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "rice",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2023-24-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "pepperdine",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2023-24-0006"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "santa-clara",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2023-24-0010"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "ucla",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2024-25-0002"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "arizona-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2024-25-0007"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "usc",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2024-25-0008"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "nebraska",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2025-26-0005"
+  },
+  {
+    "game_date": "",
+    "opponent_key": "mississippi-state",
+    "reason": "NO_EXACT_DATE_FOR_TIER1_MATCH",
+    "research_game_id": "NM-2025-26-0006"
+  }
+]

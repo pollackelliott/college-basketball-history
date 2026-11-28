@@ -1,0 +1,18 @@
+{
+  "accepted_complete_count": 0,
+  "accepted_count": 0,
+  "accepted_partial_count": 0,
+  "contradiction_count": 0,
+  "defects": [],
+  "external_research_used": false,
+  "input_ledger_sha256": "df05a6de47aa6db2df0afade2def54ddc10f9a3e11d5e442778af21e807e6bab",
+  "neutral_rows": 99,
+  "next_bounded_assignment": "Stage 3A-3 \u2014 modern recurring event/site families",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "remaining_historical": 42,
+  "remaining_modern": 57,
+  "schema_version": 1,
+  "school_key": "new-mexico",
+  "status": "COMPLETE",
+  "unresolved_count": 99
+}
