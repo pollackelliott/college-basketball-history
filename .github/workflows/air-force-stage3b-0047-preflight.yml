@@ -1,0 +1,98 @@
+name: Air Force Stage 3B 0047 permanent preflight
+
+on:
+  push:
+    branches:
+      - research/air-force-stage3b-0047-preflight
+
+permissions:
+  contents: read
+
+concurrency:
+  group: air-force-stage3b-0047-exact-preflight
+  cancel-in-progress: false
+
+jobs:
+  permanent-stage4-preflight:
+    name: Exact protected-main permanent Stage 4 preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact accepted Air Force checkpoint
+        uses: actions/checkout@v4
+        with:
+          ref: f1f0aaeb53293a53998fbe134902e4d970530eb2
+          path: candidate
+          persist-credentials: false
+      - name: Check out exact protected-main permanent tooling
+        uses: actions/checkout@v4
+        with:
+          ref: 242370fc551fd749c157c74d92917ddfafbe40e0
+          path: tool
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate immutable inputs and package original Git checkpoint
+        shell: bash
+        run: |
+          test "$(git -C candidate rev-parse HEAD)" = "f1f0aaeb53293a53998fbe134902e4d970530eb2"
+          test "$(git -C tool rev-parse HEAD)" = "242370fc551fd749c157c74d92917ddfafbe40e0"
+          mkdir -p "$RUNNER_TEMP/preflight"
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os, zipfile
+          root=Path('candidate/research/air-force/stage3b/conference-authoring-preflight-ready-0047')
+          target=Path(os.environ['RUNNER_TEMP'])/'stage3b-0047.zip'
+          manifest=json.loads((root/'manifest.json').read_bytes())
+          status=json.loads((root/'status.json').read_bytes())
+          assert manifest['parent_commit_sha']=='7454aea6ff54923d97724eb141a155a1da8db48f'
+          assert manifest['protected_main_sha']=='242370fc551fd749c157c74d92917ddfafbe40e0'
+          assert status['status']=='STAGE3B_PREFLIGHT_READY'
+          for item in manifest['files']:
+              data=(root/item['name']).read_bytes()
+              assert hashlib.sha256(data).hexdigest()==item['sha256'], item['name']
+              assert len(data)==item['bytes'], item['name']
+          with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_STORED) as z:
+              for p in sorted(root.rglob('*')):
+                  if p.is_file():
+                      rel=p.relative_to(root).as_posix()
+                      info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0))
+                      info.compress_type=zipfile.ZIP_STORED
+                      info.external_attr=0o100644<<16
+                      z.writestr(info,p.read_bytes())
+          sha=hashlib.sha256(target.read_bytes()).hexdigest()
+          (Path(os.environ['RUNNER_TEMP'])/'preflight'/'exact-checkpoint-zip-sha256.txt').write_text(sha+'  '+target.name+'\n')
+          print('Exact checkpoint and 15 manifested file SHA256 values authenticated; ZIP SHA256:',sha)
+          PY
+      - name: Run unchanged permanent Stage 4 preflight exactly once
+        id: preflight
+        shell: bash
+        run: |
+          set +e
+          (cd tool && PYTHONPATH=tools python tools/research_stage4.py preflight air-force "$RUNNER_TEMP/stage3b-0047.zip" --output-dir "$RUNNER_TEMP/preflight") > "$RUNNER_TEMP/preflight/console.log" 2>&1
+          rc=$?
+          echo "exit_code=$rc" >> "$GITHUB_OUTPUT"
+          python - <<'PY'
+          from pathlib import Path
+          import collections,json,os
+          p=Path(os.environ['RUNNER_TEMP'])/'preflight'/'stage4-authoring-preflight.json'
+          if p.exists():
+              obj=json.loads(p.read_text())
+              defects=obj.get('defects',[])
+              counts=dict(sorted(collections.Counter(str(x.get('reason','UNKNOWN')) for x in defects).items()))
+              summary={'status':obj.get('status'),'defect_count':len(defects),'defect_counts':counts,'ledger_rows':obj.get('ledger_rows'),'conference_rows':obj.get('conference_rows'),'venue_rows':obj.get('venue_rows'),'authoring_members':obj.get('authoring_members')}
+              print(json.dumps(summary,indent=2))
+          else:
+              print('Preflight did not emit JSON. Console log follows (first 150 lines):')
+              print('\n'.join((Path(os.environ['RUNNER_TEMP'])/'preflight'/'console.log').read_text().splitlines()[:150]))
+          PY
+          exit "$rc"
+      - name: Upload original permanent preflight result and ZIP fingerprint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: air-force-stage3b-0047-permanent-preflight
+          path: ${{ runner.temp }}/preflight/
+          if-no-files-found: error
+          retention-days: 14
