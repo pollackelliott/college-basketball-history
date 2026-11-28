@@ -118,6 +118,93 @@ A Stage 1 residual may be **nonblocking** when game identity/inclusion and seaso
 
 Nonblocking does not mean “ignore.” Every surviving identifiable-game residual must be explicit, row-level, and provenance-preserving.
 
+### Exact owner-authorized source-accounting uncertainty — Fresno State 1965–66 (issue #732)
+
+This is **one exact owner-authorized terminal representation**, not a generic
+historical season-count waiver or an extension of the founding-era and
+source-acknowledged-missing-game exceptions below.
+
+For **Fresno State 1965–66 only**, the owner accepts a research-exhausted
+source-accounting/possible-typo interpretation **while preserving the
+possibility that a separate real loss remains unidentified**. The institution
+printed **29 games, 21–8**; its preserved unique, identified competitive-game
+ledger contains **28 games, 21–7**. Independently correcting the original
+Texas Western result and collapsing a duplicated February 18 San Diego State
+loss representation reproduces 21–8 arithmetically when the duplicate is
+counted, but this **does not prove the editorial cause** and **does not
+establish either one missing game or zero missing games**.
+
+The verbatim owner ruling and
+[governance issue #732](https://github.com/pollackelliott/college-basketball-history/issues/732)
+are exact school/season/base/checkpoint authority. The permanent tool is
+`tools/research_stage1_owner_source_accounting.py`, bound to the one-case
+governance authority file
+`data/governance/research-stage1-owner-source-accounting-authorities.json`.
+This is **not** a global basketball-reference registration or permission
+to generalize to other seasons. Admission must fail closed on:
+
+1. A wrong school, season, immutable Research base, exact checkpoint
+   parent, manifest/member Git hashes, or owner ruling and disposition.
+2. Any altered accepted game (1,011 games, 532–479), source representation
+   (1,036 entries), literal source evidence, result, inclusion/exclusion,
+   game type, or 49-season census. Both exact Clowns exhibition exclusions
+   remain mandatory; no anonymous, placeholder, or aggregate-derived game.
+3. Any **additional Stage 1 blocker**. The separately owner-approved 1926–27
+   UC Davis **two real games / four unassigned Fresno score claims**
+   must pass ordinary permanent source/game/census acceptance; this terminal
+   case grants no exemption, new score assignment, or extra game.
+4. Losing the **reported 29/21–8 versus identified 28/21–7** distinction,
+   assuming no additional loss can exist, asserting a source-explicit
+   missing-game count, claiming the original editorial method is proven,
+   or converting the one-loss difference into a game or game-derived total.
+
+The only valid transition is **exact-parent read-only audit →
+separately SHA-256-bound closeout successor → independent verify-closeout
+PASS → seal-handoff → independent verify-handoff PASS**. The unverified
+closeout ZIP always remains **Stage 1 INCOMPLETE**; an eligible audit or
+an unverified ZIP is never an accepted final checkpoint.
+
+The closeout ZIP must preserve **all ten original checkpoint 0035 manifested
+members plus manifest-0035.json under their exact original paths and bytes**,
+not just the basketball tables. Its root manifest must independently hash
+every preserved original file and all additive terminal files. The owner
+candidate census is retained unchanged; the terminal census is additive.
+No original admission audit, diagnostic, README, eligibility matrix, or owner
+ruling may be dropped or reconstructed.
+
+The independent verifier produces a separately serialized PASS report
+including the exact audit SHA-256, closeout ZIP SHA-256, checkpoint commit,
+parent manifest Git blob, and Stage 4 coverage member SHA-256. The distinct
+sealed handoff binds those precise bytes and their verification report hash
+without rewriting the unverified successor ZIP. An independent
+`verify-handoff` must replay all relevant checks and return
+`VERIFIED_STAGE1_COMPLETE_HANDOFF`; anything else is a STOP.
+
+The Fresno Research lane must then durably commit the original-parent
+provenance, exact unchanged closeout ZIP, audit, independent verifier PASS,
+sealed handoff and independent handoff verification in **one separately
+manifested, hash-bound Stage 1 COMPLETE checkpoint**, before the next stage.
+Stage 2 and all later consumers must authenticate the exact pairing via
+`verify-handoff`, preserve the required `stage4-authoring/season-coverage.json`
+sidecar, and reject a standalone ZIP's `stage1_complete=false` status.
+No `audit`, `closeout`, `seal-handoff`, unsigned report or missing handoff
+may be treated as Stage 1 completion or as Stage 2 authorization.
+
+Persist `OWNER_ACCEPTED_SOURCE_ACCOUNTING_UNCERTAINTY` for 1965–66
+in `stage1-terminal-source-accounting.json` and
+`stage4-authoring/season-coverage.json`. Stage 2, Stage 3, Stage 4,
+Research Freeze, Integration/Implementation and published coverage
+must carry **both** source and identified counts, the possible-loss
+caveat and the source-versus-game distinction. Do not fabricate
+canonical games, records, achievements or a missing-game count.
+New concrete evidence for a real game requires renewed historical review.
+
+This policy change requires Control Center review of the exact focused
+protected-main PR **before merge**. Authorization to prepare that PR is not
+authorization to merge. The same Fresno Research lane resumes from
+checkpoint 0035 and must pass actual permanent audit, closeout and
+independent verification before Stage 2 can be authorized.
+
 ### Narrow exception: source-acknowledged unidentified historical games
 
 An institution may explicitly acknowledge that one or more historical games are absent from its detailed game list while the identity of those games is not recoverable. Those *unidentified games* have no defensible row-level identity. Their source-acknowledged omission is a **season-level coverage gap**, not permission to create an anonymous game row or to silently declare the published game universe exhaustive.

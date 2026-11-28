@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "authority_type": "EXACT_OWNER_STAGE1_SOURCE_ACCOUNTING_UNCERTAINTY",
+  "cases": [
+    {
+      "school_key": "fresno-state",
+      "season": "1965-66",
+      "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+      "checkpoint_commit_sha": "b2996ffc3e0e9e5f780cd6e7ccbb56789b55754b",
+      "checkpoint_path": "research/fresno-state-all-history-expansion/stage1/1965-66-owner-ruling-closeout-tool-contract-diagnostic-0035/",
+      "checkpoint_manifest_blob_sha": "61d96c72218343b1016e40302fee25200b3391c2",
+      "checkpoint_previous_research_sha": "5606e5f29be88a466990a558dca741d3cf1c121e",
+      "checkpoint_previous_tree_sha": "0bc4708fa7983983016f6d85ab0ec9d6c42ef8e0",
+      "member_git_blobs": {
+        "README.md": "f14bf476bfac3f164548225b29ac6cbe223e3488",
+        "stage1-permanent-tool-eligibility-matrix-0035.csv": "b9012519407225c0f23fc46944ccd1a63a01a4c3",
+        "stage1-admission-diagnostic-0035.json": "2ec873490485573d93eaffd77016f96945bf9654",
+        "stage1-admission-audit-0035.json": "286771430e5073a58bd6da5fac7c16d71f94c7df",
+        "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+        "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+        "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+        "49-season-stage1-census-owner-ruling-CANDIDATE.csv": "fddd0c045cbe2b7c86abb177fc2ffe680f7641bd",
+        "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb",
+        "owner-1965-66-ruling.json": "f4467d7ebda06a504c223b5de207fc866e18958a"
+      },
+      "ruling_research_parent_sha": "167201f7e42b5407bf41e96d5d83d923b89bd05a",
+      "owner_statement_verbatim": "I am comfortable calling it a typo/research exhausted. We can note there may be an additional loss unknown to us, but that doesn’t seem worth stopping progress to me",
+      "owner_disposition_issue": "https://github.com/pollackelliott/college-basketball-history/issues/732",
+      "reported_institutional_record": {
+        "games": 29,
+        "wins": 21,
+        "losses": 8
+      },
+      "identified_record": {
+        "games": 28,
+        "wins": 21,
+        "losses": 7
+      },
+      "uncertainty": "POSSIBLE_UNIDENTIFIED_ADDITIONAL_REAL_LOSS_NOT_PROVEN",
+      "source_explicit_missing_game_count": false,
+      "owner_ruling_disclaimer": "This is owner acceptance of research-exhausted source-accounting uncertainty, not proof that there was no omitted competitive game."
+    }
+  ]
+}
