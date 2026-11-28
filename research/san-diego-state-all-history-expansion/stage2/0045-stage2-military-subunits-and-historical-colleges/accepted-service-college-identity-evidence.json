@@ -1,0 +1,360 @@
+{
+  "kind": "SDSU_STAGE2_SERVICE_AND_COLLEGE_IDENTITY_0045_V1",
+  "checkpoint": "0045-stage2-military-subunits-and-historical-colleges",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "05eaf51aad972f26763594c7c870709a2c903e1e",
+  "prior_mapping_sha256": "ebd0fd91442497169a5526677163cdd4e64d859b6a49292504c37750f10da88c",
+  "prior_queue_sha256": "b9f4c8763c89ec1ccfd689ef8b66bd9d90d6e4dcd72c840f04fe8cccc1acfe8b",
+  "method": "18 source labels, 19 accepted Stage1 games, 17 separate opponent identity keys, official institutional and Navy/Marine chronology combined with SDSU historical opponent series; no implicit changes to accepted game universe",
+  "families": [
+    {
+      "key": "air-base-group-2",
+      "display": "Air Base Group 2",
+      "type": "MILITARY_SOURCE_NAMED_UNIT",
+      "canonicalization_basis": "Source names a numbered air-base group in 1942-43; independent SDSU result Dec 11, 1942 confirms exact opponent. Service branch/unit headquarters not inferred.",
+      "urls": [
+        "https://mcubed.net/ncaab/yearly/sandst/1943.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "Air Base Group 2 (D)",
+          "accepted_game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43"
+        }
+      ]
+    },
+    {
+      "key": "naval-airpac-1949-source-team",
+      "display": "Air Pac (Fleet Air), 1949 squad",
+      "type": "NAVY_AIRPAC_SOURCE_TEAM",
+      "canonicalization_basis": "U.S. Navy places creation of AIRPAC in 1942. This specifically labeled 1949-50 naval team is not automatically identical to a 1922 Fleet Air team; SDSU source's broad Fleet Air series is not military chain-of-command proof.",
+      "urls": [
+        "https://www.doncio.navy.mil/Chips/ArticleDetails.aspx?ID=5457",
+        "https://mcubed.net/ncaab/series/sandst/nd1_fleetair.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "Air Pac (Fleet Air)",
+          "accepted_game_count": 1,
+          "first_season": "1949-50",
+          "last_season": "1949-50"
+        }
+      ]
+    },
+    {
+      "key": "fleet-air-san-diego-source-team",
+      "display": "Fleet Air (San Diego source squad)",
+      "type": "NAVY_FLEET_AIR_SOURCE_TEAM",
+      "canonicalization_basis": "Two source labels in 1922-23 and 1943-44 refer to Fleet Air basketball opponents in SDSU historical series; exact naval chain of command and stable roster not established. Split from explicitly 1949 AIRPAC team because 1922 precedes AIRPAC establishment.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_fleetair.shtml",
+        "https://www.doncio.navy.mil/Chips/ArticleDetails.aspx?ID=5457"
+      ],
+      "source_rows": [
+        {
+          "literal": "at Fleet Air",
+          "accepted_game_count": 1,
+          "first_season": "1922-23",
+          "last_season": "1922-23"
+        },
+        {
+          "literal": "Fleet Air",
+          "accepted_game_count": 1,
+          "first_season": "1943-44",
+          "last_season": "1943-44"
+        }
+      ]
+    },
+    {
+      "key": "kearney-flyers-1942",
+      "display": "Kearney Flyers (1942 source squad)",
+      "type": "WARTIME_SOURCE_TEAM",
+      "canonicalization_basis": "SDSU historical results identify Jan 29, 1943 Kearney Flyers. Navy NAAS Camp Kearny was commissioned February 1943, later than this game; don't prematurely label this team commissioned NAAS Miramar.",
+      "urls": [
+        "https://mcubed.net/ncaab/yearly/sandst/1943.shtml",
+        "https://www.miramar-ems.marines.mil/Portals/60/Docs/MEMS/Inst_Rest/Miramar%20CRP_Final_083112_FINAL.pdf"
+      ],
+      "source_rows": [
+        {
+          "literal": "Kearney Flyers (D)",
+          "accepted_game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43"
+        }
+      ]
+    },
+    {
+      "key": "kearny-fliers-miramar-nas",
+      "display": "Kearny Fliers (Miramar NAS)",
+      "type": "NAVY_MIRAMAR_AIRFIELD_TEAM",
+      "canonicalization_basis": "Historical SDSU series identifies Feb 1946 Miramar NAS Kearny Fliers, distinct from separate Miramar Marines. Navy's 1943 Kearny station supported distinct naval and marine functions.",
+      "urls": [
+        "https://www.miramar-ems.marines.mil/Portals/60/Docs/MEMS/Inst_Rest/Miramar%20CRP_Final_083112_FINAL.pdf",
+        "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "Kearny Fliers (Miramar NAS)",
+          "accepted_game_count": 1,
+          "first_season": "1945-46",
+          "last_season": "1945-46"
+        }
+      ]
+    },
+    {
+      "key": "mcrd-san-diego-source-team",
+      "display": "Marine Corps Recruit Depot San Diego squad",
+      "type": "MARINE_RECRUIT_DEPOT_TEAM",
+      "canonicalization_basis": "MCRD SD existed at the time of 1932-33 contest. Source separately labels MCRD rather than San Diego Marines; do not merge with prior 25-game broad Marines series absent direct team-continuity evidence.",
+      "urls": [
+        "https://www.mcrdmuseumfoundation.org/about-the-museum/marines-in-san-diego-timeline",
+        "https://mcubed.net/ncaab/series/sandst/nd1series3.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "MCRD",
+          "accepted_game_count": 1,
+          "first_season": "1932-33",
+          "last_season": "1932-33"
+        }
+      ]
+    },
+    {
+      "key": "miramar-marines-source-team",
+      "display": "Miramar Marines",
+      "type": "MARINE_MIRAMAR_TEAM",
+      "canonicalization_basis": "March 1946 Miramar Marines team identified independently, linked only to source-named Marine unit; distinct from Miramar NAS Kearny Fliers and broad San Diego Marines.",
+      "urls": [
+        "https://www.miramar-ems.marines.mil/Portals/60/Docs/MEMS/Inst_Rest/Miramar%20CRP_Final_083112_FINAL.pdf",
+        "https://mcubed.net/ncaab/series/sandst/nd1series3.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "Miramar Marines",
+          "accepted_game_count": 1,
+          "first_season": "1945-46",
+          "last_season": "1945-46"
+        }
+      ]
+    },
+    {
+      "key": "navy-officers-club-san-diego",
+      "display": "Navy Officers Club (San Diego squad)",
+      "type": "NAVY_OFFICERS_CLUB_TEAM",
+      "canonicalization_basis": "Independent SDSU 1938 season results document source-named Navy Officers Club. Not Annapolis Navy, San Diego Navy, or a specified building.",
+      "urls": [
+        "https://mcubed.net/ncaab/yearly/sandst/1938.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "Navy Officers Club",
+          "accepted_game_count": 1,
+          "first_season": "1937-38",
+          "last_season": "1937-38"
+        }
+      ]
+    },
+    {
+      "key": "san-diego-coast-guard-team",
+      "display": "San Diego Coast Guard",
+      "type": "LOCAL_COAST_GUARD_TEAM",
+      "canonicalization_basis": "December 1943 opponent expressly San Diego Coast Guard; distinct from separate Wilmington Coast Guard local service team, even though USCG operated under Navy WWII command.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml",
+        "https://www.archives.gov/research/military/coast-guard/coast-guard-under-navy"
+      ],
+      "source_rows": [
+        {
+          "literal": "San Diego Coast Guard",
+          "accepted_game_count": 1,
+          "first_season": "1943-44",
+          "last_season": "1943-44"
+        }
+      ]
+    },
+    {
+      "key": "wilmington-coast-guard-team",
+      "display": "Wilmington Coast Guard",
+      "type": "LOCAL_COAST_GUARD_TEAM",
+      "canonicalization_basis": "SDSU March 1943 opponent expressly Wilmington Coast Guard (separate Southern California station/team), not the San Diego Coast Guard.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "Wilmington Coast Guard",
+          "accepted_game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43"
+        }
+      ]
+    },
+    {
+      "key": "submarine-division-1925-source-team",
+      "display": "Submarine Division (1925 squad)",
+      "type": "NAVAL_SUBMARINE_UNIT_TEAM",
+      "canonicalization_basis": "1925-26 source names a submarine division without its number. Preserve source-specific historical opponent rather than assigning a naval squadron, particular ship or later Pacific sub command.",
+      "urls": [
+        "https://www.archives.gov/research/guide-fed-records/groups/313.html"
+      ],
+      "source_rows": [
+        {
+          "literal": "Submarine Division",
+          "accepted_game_count": 1,
+          "first_season": "1925-26",
+          "last_season": "1925-26"
+        }
+      ]
+    },
+    {
+      "key": "submarines-pacific-1927-source-team",
+      "display": "Submarines Pacific (1927 squad)",
+      "type": "NAVAL_SUBMARINE_SOURCE_TEAM",
+      "canonicalization_basis": "1927-28 postseason source label explicitly names Submarines Pacific; no proof it is the same basketball subunit as 1925 unspecified Submarine Division, and (CH) is original competition notation.",
+      "urls": [
+        "https://www.archives.gov/research/guide-fed-records/groups/313.html"
+      ],
+      "source_rows": [
+        {
+          "literal": "Submarines Pacific (CH)",
+          "accepted_game_count": 1,
+          "first_season": "1927-28",
+          "last_season": "1927-28"
+        }
+      ]
+    },
+    {
+      "key": "alderson-broaddus",
+      "display": "Alderson-Broaddus",
+      "type": "HISTORIC_NAIA_COLLEGE",
+      "canonicalization_basis": "Alderson Broaddus was a historic West Virginia college; independent NAIA game result confirms SDSU victory 77-64 March 13, 1956; retain accepted postseason classification, without site inference.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_aldersonbroaddus.shtml",
+        "https://www.wvencyclopedia.org/entries/168"
+      ],
+      "source_rows": [
+        {
+          "literal": "Alderson-Broaddus",
+          "accepted_game_count": 1,
+          "first_season": "1955-56",
+          "last_season": "1955-56"
+        }
+      ]
+    },
+    {
+      "key": "new-mexico-tech",
+      "display": "New Mexico Tech (historical School of Mines)",
+      "type": "HISTORIC_INSTITUTION_RENAME",
+      "canonicalization_basis": "Official New Mexico Tech history confirms New Mexico School of Mines until 1951; independent SDSU series maps both 1938 and 1939 source games to New Mexico Tech, not New Mexico Lobos or New Mexico State.",
+      "urls": [
+        "https://www.nmt.edu/aboutnmt/nmthistory.php",
+        "https://mcubed.net/ncaab/series/sandst/nd1series6.shtml"
+      ],
+      "source_rows": [
+        {
+          "literal": "New Mexico Mines",
+          "accepted_game_count": 2,
+          "first_season": "1937-38",
+          "last_season": "1938-39"
+        }
+      ]
+    },
+    {
+      "key": "western-new-mexico",
+      "display": "Western New Mexico (historical New Mexico Western)",
+      "type": "HISTORIC_INSTITUTION_RENAME",
+      "canonicalization_basis": "Official Western New Mexico University institutional history identifies New Mexico Western College in 1949-1963, encompassing source's 1952-53 game; distinct from New Mexico Tech and current D1 New Mexico.",
+      "urls": [
+        "https://wnmu.edu/about-us/",
+        "https://administration.wnmu.edu/past-presidents/"
+      ],
+      "source_rows": [
+        {
+          "literal": "New Mexico Western",
+          "accepted_game_count": 1,
+          "first_season": "1952-53",
+          "last_season": "1952-53"
+        }
+      ]
+    },
+    {
+      "key": "southwestern-law-university-1925",
+      "display": "Southwestern University (Los Angeles; later Southwestern Law)",
+      "type": "HISTORIC_MULTIDEPARTMENT_COLLEGE_TEAM",
+      "canonicalization_basis": "Southwestern Law School institutional history confirms charter as Southwestern University in 1915 and athletic teams in 1920s. This source is Los Angeles legal and other professional departments, distinct from Southwestern College Kansas and Southwestern University Texas.",
+      "urls": [
+        "https://www.swlaw.edu/about-southwestern/history-southwestern"
+      ],
+      "source_rows": [
+        {
+          "literal": "Southwestern Law Univ. (Calif.)",
+          "accepted_game_count": 1,
+          "first_season": "1925-26",
+          "last_season": "1925-26"
+        }
+      ]
+    },
+    {
+      "key": "athletes-in-action",
+      "display": "Athletes in Action",
+      "type": "SPORTS_MINISTRY_BASKETBALL_TEAM",
+      "canonicalization_basis": "Athletes in Action official timeline documents founding in 1966 and early basketball team competition, consistent with 1967-68 SDSU source. General AIA touring 'exhibition' terminology is NOT specific proof this SDSU game was exhibition: flag game-specific verification without changing accepted Stage1 inclusion.",
+      "urls": [
+        "https://athletesinaction.org/about/history-and-finances/",
+        "https://www.cru.org/us/en/about/news/fact-sheets/athletes-in-action-fact-sheet.html"
+      ],
+      "source_rows": [
+        {
+          "literal": "Athletes in Action",
+          "accepted_game_count": 1,
+          "first_season": "1967-68",
+          "last_season": "1967-68"
+        }
+      ]
+    }
+  ],
+  "guardrails": [
+    "Generic 1922/1943 Fleet Air is not mechanically equated to specifically post-1942 AIRPAC team",
+    "January 1943 Kearney Flyers game predates Navy's February 1943 Camp Kearny NAAS commissioning",
+    "1946 Miramar NAS Kearny Fliers and Miramar Marines remain separate squad affiliations",
+    "MCRD named depot is distinct from broad San Diego Marines source category",
+    "San Diego and Wilmington Coast Guard are different teams",
+    "Unnumbered Submarine Division not assumed identical to Submarines Pacific",
+    "New Mexico Tech and Western New Mexico are distinct schools"
+  ],
+  "potential_inclusion_review": {
+    "literal": "Athletes in Action",
+    "season": "1967-68",
+    "games": 1,
+    "kind": "GAME_SPECIFIC_EXHIBITION_STATUS_NOT_YET_PROVEN",
+    "reason": "AIA generically describes basketball traveling squads as exhibitions; source-specific SDSU game evidence not yet adjudicated. No changes to accepted Stage1 classification or game count."
+  },
+  "remaining_touring_names_not_yet_decided": [
+    "Broadway Clowns",
+    "Harlem Globetrotters",
+    "House of David",
+    "Olson’s Swedes",
+    "Whiskered Wizards"
+  ],
+  "parent_mapping_byte_prefix_preserved": true,
+  "added_source_labels": 18,
+  "added_game_count": 19,
+  "new_provisional_non_d1_keys": 17,
+  "cumulative_labels": 326,
+  "cumulative_mapped_games": 1048,
+  "distinct_opponent_keys": 188,
+  "remaining_literals": 15,
+  "remaining_games": 38,
+  "stage1_accepted_games_unchanged": 1086,
+  "three_1921_22_unidentified_games_outside_ledger": 3,
+  "stage2_full_game_level_ledger_authored": false,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "formal_NON_D1_owner_scan_pending": true,
+  "shared_registry_mutated": false
+}
