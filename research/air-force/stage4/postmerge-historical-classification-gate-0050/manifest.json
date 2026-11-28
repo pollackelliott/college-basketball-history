@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "school_key": "air-force",
+  "kind": "STAGE4_POSTMERGE_HISTORICAL_DECISION_CHECKPOINT_MANIFEST",
+  "checkpoint": "0050",
+  "status": "OWNER_HAN_DISPOSITION_PENDING",
+  "protected_main_sha": "229c8302b67112e1b86b8c24006fd904269b4b42",
+  "research_parent_commit_sha": "fb16b5597ba7c3989b09f0dffcc86a06c0f83de1",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "original_stage3b_complete_sha": "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745",
+  "original_stage3b_input_sha256": "c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",
+  "proof_run_id": 46182826135,
+  "proof_execution_head": "da39e5ab47a83ec0453d3674d4dc8e648fc39a77",
+  "remaining_error_game_id": "AF-1959-60-006",
+  "members": [
+    {
+      "path": "README.md",
+      "sha": "c11a30ac636a749e2511e5a96985cb36de451bd6"
+    },
+    {
+      "path": "status.json",
+      "sha": "70f55972624d0705afeebe12f29a1f9f4bc4c60e"
+    },
+    {
+      "path": "historical-decision.json",
+      "sha": "363530322e959fa7c008fbace565ee5e4ea917ec"
+    }
+  ],
+  "stage4_complete": false,
+  "stage5_started": false,
+  "owner_approval": false
+}

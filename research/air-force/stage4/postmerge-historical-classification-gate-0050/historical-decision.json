@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE4_EXACT_HAN_CONTRADICTION_OWNER_DECISION",
+  "school_key": "air-force",
+  "status": "PENDING_HISTORICAL_AUTHORITY_DECISION",
+  "stage": "STAGE_4_MECHANICAL_CLOSEOUT_BLOCKED",
+  "protected_main_sha": "229c8302b67112e1b86b8c24006fd904269b4b42",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "stage3b_complete_commit": "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745",
+  "stage3b_input_sha256": "c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",
+  "previous_research_diagnostic_commit": "fb16b5597ba7c3989b09f0dffcc86a06c0f83de1",
+  "postmerge_tool_run": {
+    "id": 46182826135,
+    "url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46182826135",
+    "conclusion": "success",
+    "permanent_stage4_author_exit_code": 1,
+    "acceptance_status": "FAIL",
+    "acceptance_error_count": 1,
+    "archived_execution_commit": "da39e5ab47a83ec0453d3674d4dc8e648fc39a77",
+    "proof_path": "research/air-force/stage4/postmerge-replay-0050/postmerge-proof.json",
+    "proof_git_blob_sha": "04be4a8a998de6b17b1e8b0052662f2bdd6dfc4a"
+  },
+  "game": {
+    "research_game_id": "AF-1959-60-006",
+    "season": "1959-60",
+    "game_date": "1960-03-07",
+    "opponent": "DePaul",
+    "game_type": "NCAA_TOURNAMENT",
+    "on_court_result": "L",
+    "source_program_points": 63,
+    "opponent_points": 69,
+    "current_accepted_site": "HOME",
+    "current_accepted_venue": "Alumni Hall",
+    "city": "Chicago",
+    "state": "IL",
+    "country": "United States",
+    "original_air_force_guide_literal": "3-7........ DePaul##...................................L.........63-69",
+    "official_air_force_1959_60_schedule_opponent_presentation": "vs DePaul",
+    "proposed_site": "NEUTRAL",
+    "proposed_venue": "Alumni Hall",
+    "preserve_all_other_game_facts": true
+  },
+  "evidence": [
+    {
+      "source": "Air Force Athletics 1959-60 official season schedule",
+      "authority": "TARGET_FIRST_PARTY",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1959-60",
+      "facts": "March 7 result vs DePaul L 63-69; site-neutral ambiguity because 'vs' alone is not a complete H/A/N classification for historical NCAA tournament"
+    },
+    {
+      "source": "DePaul Athletics A-to-Z institutional history",
+      "authority": "RECIPROCAL_FIRST_PARTY",
+      "url": "https://depaulbluedemons.com/documents/download/2020/3/17/DePaulAtoZ_2020.pdf",
+      "facts": "DePaul defeated Air Force in the 1960 first-round NCAA contest at Alumni Hall; Alumni Hall was DePaul men's regular home venue from 1956-1980"
+    },
+    {
+      "source": "DePaul Athletics March 2026 Record Book",
+      "authority": "RECIPROCAL_FIRST_PARTY",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/depaulbluedemons.com/documents/2026/3/16/2026_Record_Book_March.pdf?timestamp=20260316055007",
+      "facts": "1959-60 March 7 Air Force W69-63 listed in NCAA tournament group; 1959-60 aggregate NEUTRAL 2-1, consistent with neutral designation but does not by itself establish this game's venue H/A/N. Source aggregate has a possible 1-game count discrepancy; do not infer game-specific H/A/N from it alone."
+    },
+    {
+      "source": "Sports Reference 1959-60 Air Force schedule",
+      "authority": "INDEPENDENT_GAME_LEVEL",
+      "url": "https://www.sports-reference.com/cbb/schools/air-force/men/1960-schedule.html",
+      "facts": "Exact March 7 NCAA game against DePaul classified N at Alumni Hall"
+    },
+    {
+      "source": "Sports Reference 1959-60 DePaul schedule",
+      "authority": "INDEPENDENT_RECIPROCAL_GAME_LEVEL",
+      "url": "https://www.sports-reference.com/cbb/schools/depaul/men/1960-schedule.html",
+      "facts": "Same March 7 NCAA game against Air Force classified N at Alumni Hall"
+    },
+    {
+      "source": "MCubed Air Force 1960 schedule",
+      "authority": "INDEPENDENT_GAME_LEVEL",
+      "url": "https://mcubed.net/ncaab/yearly/af/1960.shtml",
+      "facts": "Exact NCAA March 7 game classified (N)"
+    },
+    {
+      "source": "Contemporaneous Associated Press account in Oregon Statesman, March 4 1960",
+      "authority": "CONTEMPORANEOUS_EVENT_LOCATION",
+      "url": "https://oregonnews.uoregon.edu/lccn/sn85042470/1960-03-04/ed-1/seq-33/",
+      "facts": "DePaul Gym site of first-round NCAA tournament matchup, independently corroborating hosted first-round event rather than Air Force home campus"
+    }
+  ],
+  "adjudication_reason": "This is a single accepted historical H/A/N contradiction, not a generic Stage 4 projection error. The first-party reciprocal NCAA site record plus exact independent NCAA game-level N classifications support NEUTRAL. Stage 4 contract forbids rewriting already accepted Stage 3B historical conclusions. A game-site historical-authority choice is required; do not create a fabricated Air Force HOME relationship in venues.csv.",
+  "recommended_owner_choice": "RECLASSIFY_AF_1959_60_006_TO_NEUTRAL",
+  "allowed_authorized_repair_after_owner_choice": "One exact Stage3B successor correcting only accepted site/HAN and derived site-classification evidence for AF-1959-60-006; preserve one-game identity, scores, opponent, NCAA type, precise Alumni Hall/Chicago/IL, source literal, and original completed Stage3B immutable ancestor. Reauthenticate current protected main and rerun complete permanent Stage4 preflight/author/closeout. No other historical game mutation or stage advance.",
+  "history_mutation_performed": false,
+  "stage4_complete": false,
+  "stage5_started": false,
+  "stage6_started": false,
+  "owner_approval_recorded": false
+}
