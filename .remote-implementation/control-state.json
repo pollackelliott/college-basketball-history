@@ -835,7 +835,7 @@
     "nevada-stage2-main-refresh-0001"
   ],
   "active_expected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
-  "active_lock_commit": null,
+  "active_lock_commit": "b6fd3a790cfa1bb37f565ec80372f62f3c1a2029",
   "active_lock_owner": "github-actions:46104617968:1",
   "active_operation": "STAGE2_CURRENT_MAIN_REFRESH",
   "active_prepared_commit_sha": null,
