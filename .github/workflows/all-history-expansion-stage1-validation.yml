@@ -43,6 +43,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Execute the exact PR candidate tool bytes, not GitHub's ephemeral
+          # synthetic PR merge commit; historical data remains separately pinned.
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
@@ -77,7 +80,8 @@ jobs:
           python tools/ci_immutable_uc_davis_baseline.py \
             --runtime . \
             --output /tmp/ucd-expansion-venue-readonly/historical-main \
-            --baseline-sha 31cccfdac5b676bde3f914c63e7239ef7cb132d5
+            --baseline-sha 31cccfdac5b676bde3f914c63e7239ef7cb132d5 \
+            --runtime-sha "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}"
           git show e3156d4c611149bea24e026afefc78b53c6b9a1b:.remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-0001.txt | base64 --decode > /tmp/ucd-expansion-venue-readonly/freeze.zip
           git show 3b24750c2a78780d0916948b3733dd9c7155ef58:.remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json > /tmp/ucd-expansion-venue-readonly/owner.json
           git show b7f6961f1c228a169feee96f3da95cba9538e8fb:.remote-implementation/expansion-startup.json > /tmp/ucd-expansion-venue-readonly/startup.json

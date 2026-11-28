@@ -33,6 +33,13 @@ def verify_baseline(repo: Path, expected_sha: str) -> None:
     if git(repo, 'rev-parse', expected_sha + '^{commit}') != expected_sha:
         raise BaselineStop('BASELINE_OBJECT_MISMATCH')
 
+def require_runtime_sha(runtime: Path, expected_sha: str) -> None:
+    if not re.fullmatch('[0-9a-f]{40}', expected_sha):
+        raise BaselineStop('CANDIDATE_RUNTIME_SHA_MALFORMED')
+    if git(runtime, 'rev-parse', 'HEAD') != expected_sha:
+        raise BaselineStop('EXACT_CANDIDATE_RUNTIME_HEAD_MISMATCH')
+
+
 def create_baseline(runtime: Path, dest: Path, expected_sha: str) -> None:
     runtime = runtime.resolve()
     dest = dest.resolve()
@@ -58,7 +65,9 @@ def main() -> int:
     parser.add_argument('--runtime', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--baseline-sha', required=True)
+    parser.add_argument('--runtime-sha', required=True)
     opts = parser.parse_args()
+    require_runtime_sha(opts.runtime, opts.runtime_sha)
     create_baseline(opts.runtime, opts.output, opts.baseline_sha)
     print('UC_DAVIS_IMMUTABLE_DATA_BASELINE=PASS')
     print('HISTORICAL_BASE_SHA=' + opts.baseline_sha)

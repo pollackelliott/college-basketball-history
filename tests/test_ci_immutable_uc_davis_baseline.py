@@ -3,7 +3,7 @@ from __future__ import annotations
 import subprocess, sys, tempfile, unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-from ci_immutable_uc_davis_baseline import BaselineStop, create_baseline, git, verify_baseline
+from ci_immutable_uc_davis_baseline import BaselineStop, create_baseline, git, verify_baseline, require_runtime_sha
 
 class ImmutableHistoricalDataTests(unittest.TestCase):
     def test_separate_candidate_tools_and_exact_historical_data(self):
@@ -22,6 +22,11 @@ class ImmutableHistoricalDataTests(unittest.TestCase):
             git(runtime,'add','data/registry.csv','tools/new.py')
             git(runtime,'commit','-qm','candidate tooling')
             new=git(runtime,'rev-parse','HEAD')
+            require_runtime_sha(runtime,new)
+            with self.assertRaises(BaselineStop):
+                require_runtime_sha(runtime,old)
+            with self.assertRaises(BaselineStop):
+                require_runtime_sha(runtime,'invalid-sha')
             target=base/'baseline'
             create_baseline(runtime,target,old)
             self.assertEqual(git(target,'rev-parse','HEAD'),old)
