@@ -1,0 +1,241 @@
+{
+  "checkpoint": "0051-stage2-complete-original-archive-field-parity",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "stage2_state": "BLOCKED_EXACT_ARCHIVE_PARITY_VERIFICATION",
+  "parent_research_head": "cc34d45c4d7d77982eb71f02b7f7e6348afd8cb8",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "stage1_complete": true,
+  "accepted_game_rows": 1086,
+  "resolved_labels": 341,
+  "distinct_opponent_keys": 203,
+  "unresolved_opponent_labels": 0,
+  "unresolved_opponent_games": 0,
+  "stage1_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "stage3_started": false,
+  "non_d1_owner_scan_pending": true,
+  "blockers": [
+    {
+      "check": "complete_field_by_field_stage1_and_stage2_parity",
+      "detail": {
+        "comparisons": 16290,
+        "mismatch_count": 214,
+        "samples": [
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0001",
+            "field": "source_literal_line",
+            "stage1": "D.4 Section Base-Point Loma (D) | W 41-36",
+            "stage2": "D.4 Section Base-Point Loma (D)"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0002",
+            "field": "source_literal_line",
+            "stage1": "D.11 Air Base Group 2 (D) | W 55-37",
+            "stage2": "D.11 Air Base Group 2 (D)"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0003",
+            "field": "source_literal_line",
+            "stage1": "D.30 Camp Callan 57th Battalion (D) | W 47-45",
+            "stage2": "D.30 Camp Callan 57th Battalion (D)"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0004",
+            "field": "source_literal_line",
+            "stage1": "J.8 Loyola Marymount | W 36-34",
+            "stage2": "J.8 Loyola Marymount"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0005",
+            "field": "source_literal_line",
+            "stage1": "J.9 Loyola Marymount | W 34-30",
+            "stage2": "J.9 Loyola Marymount"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0006",
+            "field": "source_literal_line",
+            "stage1": "J.15 Pepperdine | W 40-35",
+            "stage2": "J.15 Pepperdine"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0007",
+            "field": "source_literal_line",
+            "stage1": "J.16 Pepperdine | L 25-31",
+            "stage2": "J.16 Pepperdine"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0008",
+            "field": "source_literal_line",
+            "stage1": "J.22 Santa Ana Army Air Base | L 34-36",
+            "stage2": "J.22 Santa Ana Army Air Base"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0009",
+            "field": "source_literal_line",
+            "stage1": "J.23 Santa Ana Army Air Base | W 43-38",
+            "stage2": "J.23 Santa Ana Army Air Base"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0010",
+            "field": "source_literal_line",
+            "stage1": "J.29 Kearney Flyers (D) | W 68-25",
+            "stage2": "J.29 Kearney Flyers (D)"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0011",
+            "field": "source_literal_line",
+            "stage1": "F.5 at Whittier | L 36-50",
+            "stage2": "F.5 at Whittier"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0012",
+            "field": "source_literal_line",
+            "stage1": "F.6 at Whittier | W 46-39",
+            "stage2": "F.6 at Whittier"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0013",
+            "field": "source_literal_line",
+            "stage1": "F.8 at Occidental | W 47-36",
+            "stage2": "F.8 at Occidental"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0014",
+            "field": "source_literal_line",
+            "stage1": "F.12 Section Base-Point Loma | L 32-42",
+            "stage2": "F.12 Section Base-Point Loma"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0015",
+            "field": "source_literal_line",
+            "stage1": "F.13 Camp Callan 57th Battalion | W 56-40",
+            "stage2": "F.13 Camp Callan 57th Battalion"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0016",
+            "field": "source_literal_line",
+            "stage1": "F.19 Whittier | W 52-48",
+            "stage2": "F.19 Whittier"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0017",
+            "field": "source_literal_line",
+            "stage1": "F.20 Whittier | L 42-46",
+            "stage2": "F.20 Whittier"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0018",
+            "field": "source_literal_line",
+            "stage1": "F.26 at Pepperdine | L 38-40",
+            "stage2": "F.26 at Pepperdine"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0019",
+            "field": "source_literal_line",
+            "stage1": "F.27 at Pepperdine | L 45-48",
+            "stage2": "F.27 at Pepperdine"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0020",
+            "field": "source_literal_line",
+            "stage1": "M.1 at Santa Ana Army Air Base | W 48-30",
+            "stage2": "M.1 at Santa Ana Army Air Base"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0022",
+            "field": "source_literal_line",
+            "stage1": "M.5 Wilmington Coast Guard | W 62-25",
+            "stage2": "M.5 Wilmington Coast Guard"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1942-43-0023",
+            "field": "source_literal_line",
+            "stage1": "M.6 20th Century Fox | L 36-40",
+            "stage2": "M.6 20th Century Fox"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0002",
+            "field": "source_literal_line",
+            "stage1": "D.3 San Diego Coast Guard | L 20-22",
+            "stage2": "D.3 San Diego Coast Guard"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0003",
+            "field": "source_literal_line",
+            "stage1": "D.4 Veteran’s Service League | W 33-24",
+            "stage2": "D.4 Veteran’s Service League"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0004",
+            "field": "source_literal_line",
+            "stage1": "D.10 at Pepperdine | L 36-47",
+            "stage2": "D.10 at Pepperdine"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0005",
+            "field": "source_literal_line",
+            "stage1": "D.11 at Pepperdine | L 33-48",
+            "stage2": "D.11 at Pepperdine"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0006",
+            "field": "source_literal_line",
+            "stage1": "D.17 Fleet Air | W 31-30",
+            "stage2": "D.17 Fleet Air"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0007",
+            "field": "source_literal_line",
+            "stage1": "D.18 San Bernardino Army Air Base | W 50-10",
+            "stage2": "D.18 San Bernardino Army Air Base"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0008",
+            "field": "source_literal_line",
+            "stage1": "D.29 at San Diego Navy | L 30-56",
+            "stage2": "D.29 at San Diego Navy"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0009",
+            "field": "source_literal_line",
+            "stage1": "D.30 Rohr | W 39-32",
+            "stage2": "D.30 Rohr"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0010",
+            "field": "source_literal_line",
+            "stage1": "J.6 at Santa Ana Army Air Base | L 33-36",
+            "stage2": "J.6 at Santa Ana Army Air Base"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0011",
+            "field": "source_literal_line",
+            "stage1": "J.7 at Whittier | W 51-24",
+            "stage2": "J.7 at Whittier"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0012",
+            "field": "source_literal_line",
+            "stage1": "J.8 at Veteran’s Service League | W 44-36",
+            "stage2": "J.8 at Veteran’s Service League"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0013",
+            "field": "source_literal_line",
+            "stage1": "J.14 Pepperdine | L 29-56",
+            "stage2": "J.14 Pepperdine"
+          },
+          {
+            "game_id": "SDSU-EXP-S1-1943-44-0014",
+            "field": "source_literal_line",
+            "stage1": "J.15 Pepperdine | L 36-61",
+            "stage2": "J.15 Pepperdine"
+          }
+        ]
+      }
+    }
+  ]
+}
