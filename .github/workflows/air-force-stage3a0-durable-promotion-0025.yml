@@ -1,0 +1,73 @@
+name: Air Force Stage 3A-0 exact output preservation 0025
+on:
+  push:
+    branches: [research/air-force]
+    paths:
+      - .github/workflows/air-force-stage3a0-durable-promotion-0025.yml
+permissions:
+  contents: write
+  actions: read
+jobs:
+  preserve_completed_stage3a0:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Authenticate successful tool artifact and promote exact files to Research
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = '6a4c7bae6e10654a39d24adf7a83097b0991d9c4' || { echo 'Unexpected research HEAD'; exit 20; }
+          test "$(git status --porcelain | wc -l)" -eq 0 || { echo 'Working tree not clean'; exit 21; }
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/46102773071" --jq '.conclusion + " " + .head_sha' | grep -Fx 'success 6a4c7bae6e10654a39d24adf7a83097b0991d9c4'
+          export AF_OUTPUT_SOURCE="$RUNNER_TEMP/air-force-0025-artifact"
+          mkdir -p "$AF_OUTPUT_SOURCE"
+          gh run download 46102773071 --repo "$GITHUB_REPOSITORY" --name 'air-force-stage3a0-0024-a11cccf944492e4d968edbeef4111ebad150fcec' --dir "$AF_OUTPUT_SOURCE"
+          python - <<'PY'
+          import csv, hashlib, io, json, os, pathlib, shutil
+          from collections import Counter
+          src = pathlib.Path(os.environ['AF_OUTPUT_SOURCE'])
+          dst = pathlib.Path('research/air-force/stage3a0/census-0025')
+          sha_expected = {"manifest.json":"8433b797bfa4f2454c39052695dae0ebe79db561baa7af3eb95c989b64d3cf68","stage3a0-opponent-home-queue.json":"e0a5c8281b41eee83da9b6939181e97a3c17cde2e505ca2d477f12560bf90686","stage3a0-input-ledger.csv":"c3fa28616c0a5a802f41f0f74d149031660cdcc2e0368bbe11a5ff69970a7e5e","stage3a0-status.json":"8aea222938124dfb326b0a526ee5cb239c14f8542e792195806261ab2a3822a6","stage3a0-summary.json":"8aea222938124dfb326b0a526ee5cb239c14f8542e792195806261ab2a3822a6","stage3a1-unknown-han-queue.json":"2b8d4c47e1fb8ca4f0fb692b02518b4f7ca0cf0da399df10ce00b9a27cd36c5d","stage3a2-home-queue.json":"955de60c6849bac99ca1baf7a569f0ec2ad4a3c175a1f76eb9ba3caba0929de3","stage3a3-historical-neutral-queue.json":"b6e187a4f6fe4d078f700cba380d45bc381b41b3841d8e38ea7b8e9f091b2ab4","stage3a3-modern-neutral-queue.json":"d62f76653030afb873e138cad7d48ae2fde28a30182e5b531febfc84a3344974","stage3a3-neutral-queue.json":"8806940aaea6b4a7104fe57080d6e34c74b13ac66cbf556dd8c45fbb66f11901","stage3b-postseason-handoff.json":"12479277261b7b214640665eba1eb04f373f6a57142c00b610de15ab0a6b59e5","stage4-authoring/institutional-scope.json":"415057e65eaa502a9de35b696a35911ad1629f654c1801d051e3dc52facad9e9","stage4-authoring/opponents.csv":"9291d8880d8fdcb0cdac7cfade612fab9a46559bde9d31761047030b4900512f"}
+          actual = {p.relative_to(src).as_posix(): p for p in src.rglob('*') if p.is_file()}
+          assert set(actual) == set(sha_expected), {'missing': sorted(set(sha_expected)-set(actual)), 'extra': sorted(set(actual)-set(sha_expected))}
+          for rel, expected in sha_expected.items():
+              assert hashlib.sha256(actual[rel].read_bytes()).hexdigest() == expected, ('byte mismatch', rel)
+          status = json.loads(actual['stage3a0-status.json'].read_text())
+          manifest = json.loads(actual['manifest.json'].read_text())
+          assert status['status']=='COMPLETE' and status['readiness']=={'ready':True,'blocking_defects':{},'date_blank_count':0}
+          assert status['school_key']=='air-force' and status['protected_main_sha']=='a11cccf944492e4d968edbeef4111ebad150fcec'
+          assert status['source_ledger_sha256']=='e46efcf79229e3fa5b114f91948abb78f94446e0eb034d059e3ba8f7d39c9c1d'
+          assert status['external_historical_research_used'] is False
+          assert status['ledger_rows']==1928 and status['partition']=={'regular_season':1866,'postseason':62,'unclassified':0}
+          assert status['regular_season_site_census']=={'HOME':958,'OPPONENT_HOME':766,'NEUTRAL':115,'UNKNOWN':27}
+          assert status['neutral_era_census']=={'HISTORICAL_1995_96_OR_EARLIER':67,'MODERN_1996_97_PLUS':48}
+          assert status['next_action']=='STOP_AT_STAGE_3A0_BOUNDARY'
+          for key, entry in manifest.items():
+              prefix = 'stage4-authoring/' if key.startswith('stage4_authoring_') else ''
+              rel = prefix + pathlib.Path(entry['path']).name
+              assert rel in sha_expected and entry['sha256']==sha_expected[rel], ('manifest mismatch',key)
+          queue_sizes = {'stage3a0-opponent-home-queue.json':766,'stage3a1-unknown-han-queue.json':27,'stage3a2-home-queue.json':958,'stage3a3-historical-neutral-queue.json':67,'stage3a3-modern-neutral-queue.json':48,'stage3a3-neutral-queue.json':115,'stage3b-postseason-handoff.json':62}
+          for rel, expected in queue_sizes.items():
+              q = json.loads(actual[rel].read_text())
+              assert isinstance(q,list) and len(q)==expected, ('queue count mismatch',rel)
+          rows = list(csv.DictReader(io.StringIO(actual['stage3a0-input-ledger.csv'].read_text(encoding='utf-8-sig'))))
+          ids = [r['research_game_id'] for r in rows]
+          assert len(rows)==1928 and len(set(ids))==1928
+          dst.mkdir(parents=True, exist_ok=False)
+          for rel,p in actual.items():
+              o=dst/rel; o.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(p,o)
+          receipt={'kind':'AIR_FORCE_STAGE3A0_GITHUB_ACTIONS_EXACT_OUTPUT_PROMOTION_V1','status':'STAGE3A0_COMPLETE','source_workflow_run_id':46102773071,'source_workflow_run_url':'https://github.com/pollackelliott/college-basketball-history/actions/runs/46102773071','source_artifact_id':15245978396,'source_artifact_name':'air-force-stage3a0-0024-a11cccf944492e4d968edbeef4111ebad150fcec','source_artifact_zip_sha256':'4992a9cc0269a43bdc903b72ce445fe2e60c0d724d62d128586e2d43fbdb2133','research_branch_exact_execution_sha':'6a4c7bae6e10654a39d24adf7a83097b0991d9c4','permanent_tool_protected_main_sha':'a11cccf944492e4d968edbeef4111ebad150fcec','protected_main_sha_at_promotion':'5f33c88ca1ea7d80e0517f42a200f5a2e15833c9','research_base_sha':'3f5a15458aa468347e56e669327d6fe4c9c6ee69','input_stage2_checkpoint':'research/air-force/stage2/game-type-taxonomy-repair-0024','tool_output_members_sha256':sha_expected,'stage4_authoring_carried_byte_exact':True,'no_external_historical_research':True,'next_stage':'STAGE_3A_1_OWNER_PROCEED_REQUIRED'}
+          (dst/'source-provenance.json').write_text(json.dumps(receipt,sort_keys=True,indent=2)+'\n')
+          (dst/'README.md').write_text('# Air Force — Stage 3A-0 COMPLETE — checkpoint 0025\n\nThis directory durably preserves, byte for byte, the 13 tool-produced files from [successful GitHub Actions run #46102773071](https://github.com/pollackelliott/college-basketball-history/actions/runs/46102773071). All contents and exact hashes are recorded in `source-provenance.json`. The tool-authored `manifest.json` and `stage3a0-status.json` are preserved unchanged, including their ephemeral runner paths; those paths are source provenance, not present repository paths.\n\nVerified mechanical census: 1,928 games = 1,866 regular season + 62 postseason. Regular-season queues: 958 HOME, 766 OPPONENT_HOME, 115 NEUTRAL (67 historical, 48 modern), and 27 UNKNOWN. No unclassified games; 0 input blockers. Preserved Stage 4 authoring capsule: `opponents.csv` and `institutional-scope.json`.\n\nPermanent tool and parent execution pinned to protected main `a11cccf944492e4d968edbeef4111ebad150fcec`; that main\'s tool and controlling policy blobs remain unchanged at newer main `5f33c88ca1ea7d80e0517f42a200f5a2e15833c9`. Immutable Research base `3f5a15458aa468347e56e669327d6fe4c9c6ee69`. Original Stage 2 accepted and repaired ledgers remain independently committed in earlier checkpoints.\n\n**Status: STAGE 3A-0 COMPLETE. STOP at the substage boundary. Stage 3A-1 requires explicit owner Proceed. No historical research or venue adjudication occurred in Stage 3A-0.**\n')
+          print('EXACT_ARTIFACT_PROMOTION_VALIDATED',len(sha_expected),'source files; COMPLETE; 1928 unique games; 7 queue counts')
+          PY
+          git add research/air-force/stage3a0/census-0025/
+          test "$(git diff --cached --name-only | grep -vc '^research/air-force/stage3a0/census-0025/')" -eq 0
+          git -c user.name='CBH Research Automation' -c user.email='actions@users.noreply.github.com' commit -m 'research(air-force): preserve Stage 3A-0 COMPLETE exact tool output checkpoint 0025'
+          git push origin HEAD:refs/heads/research/air-force
+          echo 'DURABLE_STAGE3A0_CHECKPOINT_PUSHED'
