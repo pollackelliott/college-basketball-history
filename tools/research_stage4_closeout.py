@@ -633,7 +633,7 @@ def _administrative_representation_note(
         row, "played_result", "on_court_result", "source_result", "result"
     )
     team = _first_parent_value(
-        row, "team_score", "wagner_points", "dayton_score", "score_for",
+        row, "team_score", "air_force_points", "wagner_points", "dayton_score", "score_for",
         "source_points_for"
     )
     opponent = _first_parent_value(
@@ -827,6 +827,8 @@ def _project_overtime(value: str) -> str:
         return ""
     if value.isdigit():
         return value
+    if value.startswith("(") and value.endswith(")"):
+        value = value[1:-1].strip()
     match = re.fullmatch(r"(?:(\d+))?OT", value.upper())
     if match:
         return match.group(1) or "1"
@@ -994,7 +996,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "canonical_opponent_key",
         ),
         "team_score": _first_parent_value(
-            row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
+            row, "team_score", "air_force_points", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
         ),
         "opponent_score": _first_parent_value(row, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"),
         "played_result": _first_parent_value(
@@ -1016,7 +1018,7 @@ def expected_parent_values(row: dict[str, str]) -> dict[str, str]:
             "curated_venue_country", "country", "venue_country"
         ),
         "curated_game_type": effective_parent_game_type(row),
-        "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_result_text"),
+        "raw_text": first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_result_text", "guide_literal_row"),
     }
     expected["administrative_status"], expected["administrative_note"] = (
         project_administrative_status(row)
@@ -1096,7 +1098,7 @@ def _legacy_score_orientation_equivalent(
     """
 
     parent_team = _first_parent_value(
-        parent_row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
+        parent_row, "team_score", "air_force_points", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
     )
     parent_opponent = _first_parent_value(
         parent_row, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"

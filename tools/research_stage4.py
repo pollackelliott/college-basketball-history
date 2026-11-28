@@ -448,6 +448,30 @@ def _research_accounting(
                     "Opponent-home building archaeology remains outside this "
                     "source-school's Research obligation."
                 )
+    # Narrowly project already accepted terminal Air Force neutral-site research.
+    # The original parent research status and basis remain completely unchanged.
+    legacy_status = row.get("site_research_status", "").strip().upper()
+    legacy_basis = row.get("site_research_basis", "").strip()
+    if game_type == "REGULAR_SEASON" and site == "NEUTRAL" and not accepted_venue and legacy_basis:
+        season = _first(row, "season_label", "season")
+        city = _first(row, "curated_venue_city", "city", "stage3a_final_city")
+        state = _first(row, "curated_venue_state", "state", "stage3a_final_state")
+        country = _first(row, "curated_venue_country", "country")
+        if season[:4].isdigit() and city:
+            year = int(season[:4])
+            if (legacy_status == "TIER4_HISTORICAL_LOCATION_COMPLETE"
+                    and year <= 1995 and country
+                    and country.casefold() not in {"united states", "usa", "us"}
+                    and not state):
+                return "RESEARCHED_PARTIAL", (
+                    "Accepted non-U.S. historical neutral location "
+                    + city + ", " + country + ": " + legacy_basis
+                    + "; exact-building enrichment was not established."
+                )
+            if (legacy_status == "RESEARCHED_UNRESOLVED_NEUTRAL_VENUE"
+                    and year >= 1996 and state):
+                return "RESEARCHED_UNRESOLVED", legacy_basis
+
     return "", ""
 
 
@@ -457,6 +481,8 @@ def _project_overtime(value: str) -> str:
         return ""
     if value.isdigit():
         return value
+    if value.startswith("(") and value.endswith(")"):
+        value = value[1:-1].strip()
     match = re.fullmatch(r"(?:(\d+))?OT", value.upper())
     if match:
         return match.group(1) or "1"
@@ -532,7 +558,7 @@ def _legacy_score_projection(
     played result remain unchanged; only package-field orientation changes.
     """
 
-    team = _first(row, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for")
+    team = _first(row, "team_score", "air_force_points", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for")
     opponent = _first(row, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against")
     result = _first(
         row, "played_result", "on_court_result", "source_result", "result"
@@ -582,7 +608,7 @@ def _legacy_score_projection(
         and not row.get("season_label", "").strip()
         and not row.get("source_program_key", "").strip()
     )
-    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "source_result_text")
+    raw_text = first_literal(row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "guide_literal_row", "source_result_text")
     literal = _LEGACY_LITERAL_SCORE_RESULT_RE.search(raw_text)
     literal_pairs = [
         (int(match.group("a")), int(match.group("b")))
@@ -1006,9 +1032,9 @@ def _projection(
                 "source_round": source_round,
                 "curated_game_type": effective_parent_game_type(row),
                 "curated_postseason_round": curated_round,
-                "source_page": _first(row, "source_page", "source_pdf_page", "source_locator"),
+                "source_page": _first(row, "source_page", "source_pdf_page", "primary_source_pdf_page", "source_locator"),
                 "raw_text": first_literal(
-                    row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "source_result_text"
+                    row, "raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "guide_literal_row", "source_result_text"
                 ),
                 "normalization_status": _first(row, "normalization_status")
                 or "RESEARCH_ACCEPTED",
@@ -1016,7 +1042,12 @@ def _projection(
                 "administrative_note": administrative_note,
                 "notes": " ".join(part for part in (
                     _first(row, "notes", "stage1_notes"), round_note, score_note,
-                    date_note, raw_score_note, type_note, location_note, source_postseason_note
+                    date_note, raw_score_note, type_note, location_note, source_postseason_note,
+                    (
+                        "Original institutional guide venue footnote: "
+                        + repr(row["guide_exact_venue_note"].strip()) + "."
+                        if row.get("guide_exact_venue_note", "").strip() else ""
+                    ),
                 ) if part),
                 "site_research_status": research_status,
                 "site_research_basis": research_basis if research_status else "",
@@ -1071,7 +1102,7 @@ def _semantic_projection_defects(
             "opponent_key",
             "canonical_opponent_key",
         ),
-        "team_score": ("team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"),
+        "team_score": ("team_score", "air_force_points", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"),
         "opponent_score": ("opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"),
         "played_result": (
             "played_result",
@@ -1079,10 +1110,10 @@ def _semantic_projection_defects(
             "source_result",
             "result",
         ),
-        "source_page": ("source_page", "source_pdf_page", "source_locator"),
+        "source_page": ("source_page", "source_pdf_page", "primary_source_pdf_page", "source_locator"),
         "overtime_periods": ("overtime_periods", "overtime", "source_overtime_token", "overtime_text"),
         "source_venue_name": ("source_venue_name", "source_venue_token"),
-        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "source_result_text"),
+        "raw_text": ("raw_text", "source_raw_text", "source_entry_literal", "source_raw_line", "source_line_raw", "guide_literal_row", "source_result_text"),
     }
     defects = []
     game_id = projected["source_game_id"]
@@ -1103,7 +1134,7 @@ def _semantic_projection_defects(
         if projected[target] != expected:
             if target in {"team_score", "opponent_score"}:
                 original_team = _first(
-                    parent, "team_score", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
+                    parent, "team_score", "air_force_points", "wagner_points", "dayton_score", "score_for", "source_points_for", "source_score_for"
                 )
                 original_opponent = _first(
                     parent, "opponent_score", "opponent_points", "score_against", "source_points_against", "source_score_against"
@@ -1471,9 +1502,10 @@ def _source_notes(
     )
     urls = sorted(
         {
-            _first(row, "source_url")
+            url
             for row in ledger
-            if _first(row, "source_url")
+            for field in ("source_url", "primary_source_url", "official_schedule_url")
+            if (url := row.get(field, "").strip())
         }
     )
     lines = [

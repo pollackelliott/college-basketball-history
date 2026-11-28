@@ -1793,5 +1793,90 @@ class Stage4AuthoringTests(unittest.TestCase):
         )
 
 
+    def test_air_force_score_guide_and_parenthesized_overtime_aliases(self):
+        _, opponents = mod._csv_bytes(opponent_bytes())
+        _, venues = mod._csv_bytes(venue_bytes())
+        literal = "1-20 Old College (3OT) W 81-77"
+        parent = {
+            "research_game_id": "AF-TEST-001",
+            "source_program_key": "test",
+            "season": "1999-00",
+            "game_date": "2000-01-20",
+            "source_opponent_label": "Old College",
+            "opponent_key": "old-college",
+            "air_force_points": "81",
+            "opponent_points": "77",
+            "on_court_result": "W",
+            "overtime": "(3OT)",
+            "game_type": "REGULAR_SEASON",
+            "site_type": "HOME",
+            "guide_literal_row": literal,
+            "primary_source_pdf_page": "65",
+            "guide_exact_venue_note": "Guide venue note; not an automatic venue ID",
+        }
+        games, defects = mod._projection([parent], opponents, venues)
+        self.assertEqual(defects, [])
+        game = games[0]
+        self.assertEqual(game["team_score"], "81")
+        self.assertEqual(game["opponent_score"], "77")
+        self.assertEqual(game["overtime_periods"], "3")
+        self.assertEqual(game["raw_text"], literal)
+        self.assertEqual(game["source_page"], "65")
+        self.assertIn("Guide venue note", game["notes"])
+        self.assertEqual(mod._semantic_projection_defects(parent, game), [])
+        for token, numeric in (("(OT)", "1"), ("(3OT)", "3"), ("OT", "1"), ("2OT", "2")):
+            self.assertEqual(mod._project_overtime(token), numeric)
+
+    def test_air_force_terminal_neutral_accounting_strict_conditions(self):
+        tokyo = {
+            "season": "1985-86",
+            "game_type": "REGULAR_SEASON",
+            "site_type": "NEUTRAL",
+            "curated_venue_city": "Tokyo",
+            "curated_venue_country": "Japan",
+            "site_research_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+            "site_research_basis": "Exact Tokyo locality recorded and building unresolved",
+        }
+        self.assertEqual(mod._research_accounting(tokyo)[0], "RESEARCHED_PARTIAL")
+        self.assertEqual(mod._research_accounting({**tokyo, "site_research_basis": ""}), ("", ""))
+        self.assertEqual(mod._research_accounting({**tokyo, "curated_venue_country": "United States"}), ("", ""))
+        self.assertEqual(mod._research_accounting({**tokyo, "game_type": "POSTSEASON"}), ("", ""))
+        modern = {
+            "season": "1998-99",
+            "game_type": "REGULAR_SEASON",
+            "site_type": "NEUTRAL",
+            "curated_venue_city": "Green Bay",
+            "curated_venue_state": "WI",
+            "site_research_status": "RESEARCHED_UNRESOLVED_NEUTRAL_VENUE",
+            "site_research_basis": "Accepted 0036 first-party search evidence",
+        }
+        self.assertEqual(mod._research_accounting(modern), ("RESEARCHED_UNRESOLVED", modern["site_research_basis"]))
+        self.assertEqual(mod._research_accounting({**modern, "site_research_basis": ""}), ("", ""))
+        self.assertEqual(mod._research_accounting({**modern, "curated_venue_name": "Named Gym"}), ("", ""))
+        self.assertEqual(mod._research_accounting({**modern, "season": "1994-95"})[0], "RESEARCHED_PARTIAL")
+
+    def test_air_force_official_guide_and_schedule_urls_in_source_notes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            archive_path = Path(temp) / "unused.zip"
+            with zipfile.ZipFile(archive_path, "w"):
+                pass
+            with zipfile.ZipFile(archive_path) as archive:
+                notes = mod._source_notes(
+                    "test",
+                    [{
+                        "primary_source_url": "https://example.edu/historical-guide.pdf",
+                        "official_schedule_url": "https://example.edu/historical-schedule",
+                    }],
+                    archive,
+                    "",
+                    {
+                        "primary_source_historical_cutoff": "2025-2026",
+                        "required_completed_season_cutoff": "2025-2026",
+                    },
+                )
+            self.assertIn("https://example.edu/historical-guide.pdf", notes)
+            self.assertIn("https://example.edu/historical-schedule", notes)
+
+
 if __name__ == "__main__":
     unittest.main()

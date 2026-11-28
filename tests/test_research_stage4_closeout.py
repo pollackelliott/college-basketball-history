@@ -1720,5 +1720,43 @@ class Stage4CloseoutTests(unittest.TestCase):
                 )
 
 
+    def test_air_force_original_score_parentheses_and_source_literal_parity(self):
+        parent = {
+            "research_game_id": "AF-TEST-001",
+            "season": "1999-00",
+            "source_program_key": "test",
+            "game_date": "2000-01-20",
+            "opponent_key": "old-college",
+            "air_force_points": "81",
+            "opponent_points": "77",
+            "on_court_result": "W",
+            "overtime": "(3OT)",
+            "game_type": "REGULAR_SEASON",
+            "site_type": "UNKNOWN",
+            "guide_literal_row": "1-20 Old College (3OT) W 81-77",
+        }
+        expected = mod.expected_parent_values(parent)
+        self.assertEqual(expected["team_score"], "81")
+        self.assertEqual(expected["opponent_score"], "77")
+        self.assertEqual(expected["overtime_periods"], "3")
+        self.assertEqual(expected["raw_text"], parent["guide_literal_row"])
+        self.assertEqual(mod._project_overtime("(OT)"), "1")
+        package = {
+            "source_game_id": "AF-TEST-001",
+            "source_program_key": "test",
+            "season_label": "1999-2000",
+            "game_date": "2000-01-20",
+            "normalized_opponent_key": "old-college",
+            "team_score": "81",
+            "opponent_score": "77",
+            "played_result": "W",
+            "overtime_periods": "3",
+            "curated_site_type": "UNKNOWN",
+            "curated_game_type": "REGULAR_SEASON",
+            "raw_text": parent["guide_literal_row"],
+        }
+        self.assertEqual(mod.compare_parent_semantics([parent], [package], []), [])
+
+
 if __name__ == "__main__":
     unittest.main()
