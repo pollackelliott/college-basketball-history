@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A3_TIER2_MODERN_RECURRING_CHECKPOINT_0033_MANIFEST_V1",
+  "school_key": "air-force",
+  "status": "TIER2_IN_PROGRESS_TRANCHE_COMPLETE",
+  "parent_commit_sha": "1247acfbc5ebd61239e5a767886ee3d6b252f208",
+  "parent_checkpoint_manifest_sha": "1c4d4625c0a08c1d7268c6aef9c227ddee1bcbbf",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "stage3a2_ledger_blob_sha": "e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e",
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "f9da580420d2e5dbaa686af880c8e8f104fc88fa",
+      "size_chars": 1409
+    },
+    {
+      "path": "status.json",
+      "git_blob_sha": "55fe357e417e40f74d53f2af33ddad12beffacc6",
+      "size_chars": 1498
+    },
+    {
+      "path": "tier2-accepted-site-evidence.json",
+      "git_blob_sha": "8cd57afc929edb34ece55275b9498a0952f338c3",
+      "size_chars": 9745
+    },
+    {
+      "path": "family-source-register.json",
+      "git_blob_sha": "5c3e6516da5f84278d463761a36937c6815efc8d",
+      "size_chars": 2875
+    },
+    {
+      "path": "stage3a3-neutral-row-state.json",
+      "git_blob_sha": "c8e4b6cd5fe9d1de124b5ed0c43f75a4c69d84ed",
+      "size_chars": 68175
+    },
+    {
+      "path": "remaining-neutral-queue.json",
+      "git_blob_sha": "8e2a43eb0ed1d29878480c096ffe60c8d7983058",
+      "size_chars": 145529
+    }
+  ],
+  "data_counts": {
+    "original": 116,
+    "cumulative_complete": 41,
+    "remaining": 75,
+    "modern_remaining": 30,
+    "historical_remaining": 45,
+    "tier2_tranche_completed": 12
+  }
+}

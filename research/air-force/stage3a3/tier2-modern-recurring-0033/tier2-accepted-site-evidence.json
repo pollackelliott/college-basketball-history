@@ -1,0 +1,253 @@
+[
+  {
+    "research_game_id": "AF-2018-19-003",
+    "season": "2018-19",
+    "game_date": "2018-11-16",
+    "opponent_key": "umbc",
+    "event_family": "BIMINI_JAM",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/sports/mens-basketball/stats/2018/umbc/boxscore/11409",
+      "https://goyotes.com/news/2018/5/22/mens-basketball-selected-for-bimini-jam-in-bahamas"
+    ],
+    "note": "2018/2019 Bimini event site documented for the exact edition; exact venue supplied directly, not inferred from prior year",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2018-19-004",
+    "season": "2018-19",
+    "game_date": "2018-11-18",
+    "opponent_key": "south-dakota",
+    "event_family": "BIMINI_JAM",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goyotes.com/news/2018/5/22/mens-basketball-selected-for-bimini-jam-in-bahamas",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2018-19"
+    ],
+    "note": "2018/2019 Bimini event site documented for the exact edition; exact venue supplied directly, not inferred from prior year",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2018-19-005",
+    "season": "2018-19",
+    "game_date": "2018-11-19",
+    "opponent_key": "high-point",
+    "event_family": "BIMINI_JAM",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goyotes.com/news/2018/5/22/mens-basketball-selected-for-bimini-jam-in-bahamas",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2018-19"
+    ],
+    "note": "2018/2019 Bimini event site documented for the exact edition; exact venue supplied directly, not inferred from prior year",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2019-20-005",
+    "season": "2019-20",
+    "game_date": "2019-11-21",
+    "opponent_key": "loyola-marymount",
+    "event_family": "JUNKANOO_JAM",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2019/11/21/mens-basketball-air-force-falls-to-loyola-marymount-at-junkanoo-jam",
+      "https://goairforcefalcons.com/news/2019/11/20/mens-basketball-air-force-travels-to-junkanoo-jam-in-bimini-bahamas"
+    ],
+    "note": "2018/2019 Bimini event site documented for the exact edition; exact venue supplied directly, not inferred from prior year",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2019-20-006",
+    "season": "2019-20",
+    "game_date": "2019-11-22",
+    "opponent_key": "duquesne",
+    "event_family": "JUNKANOO_JAM",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2019/11/22/mens-basketball-late-rally-note-enough-as-air-force-downed-by-duquesne-at-junkanoo-jam",
+      "https://goairforcefalcons.com/news/2019/11/20/mens-basketball-air-force-travels-to-junkanoo-jam-in-bimini-bahamas"
+    ],
+    "note": "2018/2019 Bimini event site documented for the exact edition; exact venue supplied directly, not inferred from prior year",
+    "preserves_tier1_partial": true
+  },
+  {
+    "research_game_id": "AF-2019-20-007",
+    "season": "2019-20",
+    "game_date": "2019-11-24",
+    "opponent_key": "indiana-state",
+    "event_family": "JUNKANOO_JAM",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Gateway Christian Academy",
+      "city": "Bimini",
+      "state": "",
+      "country": "Bahamas"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2019/11/20/mens-basketball-air-force-travels-to-junkanoo-jam-in-bimini-bahamas",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2019-20"
+    ],
+    "note": "2018/2019 Bimini event site documented for the exact edition; exact venue supplied directly, not inferred from prior year",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2002-03-009",
+    "season": "2002-03",
+    "game_date": "2002-12-27",
+    "opponent_key": "uab",
+    "event_family": "SUN_BOWL_INVITATIONAL",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Don Haskins Center",
+      "city": "El Paso",
+      "state": "TX",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://uabsports.com/news/2002/12/27/UAB_69_Air_Force_59"
+    ],
+    "note": "Exact year and/or exact game venue documented by official host or participant source; no inference from location alone",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2009-10-011",
+    "season": "2009-10",
+    "game_date": "2009-12-28",
+    "opponent_key": "niagara",
+    "event_family": "SUN_BOWL_INVITATIONAL",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Don Haskins Center",
+      "city": "El Paso",
+      "state": "TX",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://utepminers.com/news/2009/12/28/UTEP_Cruises_to_Sun_Bowl_Invitational_Title_Game.aspx",
+      "https://goairforcefalcons.com/news/2009/12/29/Air_Force_Defeats_Niagara_77_71"
+    ],
+    "note": "Exact year and/or exact game venue documented by official host or participant source; no inference from location alone",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2010-11-011",
+    "season": "2010-11",
+    "game_date": "2010-12-28",
+    "opponent_key": "sam-houston",
+    "event_family": "SUN_BOWL_INVITATIONAL",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Don Haskins Center",
+      "city": "El Paso",
+      "state": "TX",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2010/9/7/Falcons_Announce_2010_11_Men_s_Basketball_Schedule",
+      "https://goairforcefalcons.com/news/2010/12/27/falcons_set_to_battle_sam_houston_state_at_sun_bowl_invitational"
+    ],
+    "note": "Exact year and/or exact game venue documented by official host or participant source; no inference from location alone",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2012-13-001",
+    "season": "2012-13",
+    "game_date": "2012-11-10",
+    "opponent_key": "army",
+    "event_family": "ALL_MILITARY_CLASSIC",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "McAlister Field House",
+      "city": "Charleston",
+      "state": "SC",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2012/11/7/falcons_open_season_vs_army_at_all_military_classic",
+      "https://citadelsports.com/news/2014/7/29/MBB_0729141258"
+    ],
+    "note": "Exact year and/or exact game venue documented by official host or participant source; no inference from location alone",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2013-14-001",
+    "season": "2013-14",
+    "game_date": "2013-11-08",
+    "opponent_key": "army",
+    "event_family": "ALL_MILITARY_CLASSIC",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Cameron Hall",
+      "city": "Lexington",
+      "state": "VA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://vmikeydets.com/sports/2013/9/20/209264586.aspx",
+      "https://goairforcefalcons.com/news/2013/11/8/Air_Force_Opens_Season_with_79_68_Win_Over_Army"
+    ],
+    "note": "Exact year and/or exact game venue documented by official host or participant source; no inference from location alone",
+    "preserves_tier1_partial": false
+  },
+  {
+    "research_game_id": "AF-2014-15-002",
+    "season": "2014-15",
+    "game_date": "2014-11-15",
+    "opponent_key": "the-citadel",
+    "event_family": "ALL_MILITARY_CLASSIC",
+    "site_type": "NEUTRAL",
+    "accepted_site": {
+      "venue_name": "Christl Arena",
+      "city": "West Point",
+      "state": "NY",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_EVIDENCE",
+    "evidence_urls": [
+      "https://citadelsports.com/sports/mens-basketball/stats/2014-15/air-force/boxscore/3365",
+      "https://goairforcefalcons.com/news/2014/11/15/Air_Force_downs_Citadel_to_finish_third_in_All_Military_Classic"
+    ],
+    "note": "Exact year and/or exact game venue documented by official host or participant source; no inference from location alone",
+    "preserves_tier1_partial": false
+  }
+]
