@@ -152,6 +152,32 @@ supply the missing contents and therefore cannot authorize reconstruction.
 
 tools/research_stage3a0.py mechanically carries any Stage 2 authoring capsule through its output and records those files in its manifest, including early-history-uncertainty.json when present. Later Research substages must preserve the same invariant when serializing their checkpoints.
 
+### Fresno State 1965–66 terminal source-accounting coverage (issue #732)
+
+When—and only when—the exact owner-authorized Stage 1 audit,
+separately hashed closeout and independent verifier under
+`tools/research_stage1_owner_source_accounting.py` have **all** passed,
+the Stage 1 successor's
+`stage4-authoring/season-coverage.json` becomes required carried authority.
+The file must remain byte-identical through Stage 2, Stage 3A and Stage 3B;
+Stage 4 authoring/preflight must reject silent omission or re-interpretation.
+It encodes two distinct records: Fresno's reported 29 games (21–8) and
+28 accepted, individually identified games (21–7), with the explicit
+possibility of an additional unidentified loss. It is not an aggregate
+game row, a new result, proof of an omitted game, or a rewrite of inherited
+published history.
+
+Stage 4, the All-History expansion Research Freeze, Integration/
+Implementation and eventual public historical-coverage metadata must
+preserve this exact terminal record or fail closed. In particular no stage
+may convert the reported 29-game count into 29 game-derived canonical
+identities, discard the possible-loss caveat, or silently use the reported
+21–8 as the derived accepted-game record. This obligation changes no
+ordinary Stage 4 authoring requirements or current package schema:
+until the downstream format can carry this sidecar faithfully and passes
+its normal independent verifier, stop at that later boundary instead
+of silently dropping the metadata.
+
 ## 4. Stage 3B completion preflight
 
 Before reporting a current-policy Stage 3B checkpoint COMPLETE, run:

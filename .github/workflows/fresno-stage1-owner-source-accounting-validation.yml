@@ -1,0 +1,50 @@
+name: Fresno owner-scoped Stage 1 accounting proposal regression
+
+on:
+  pull_request:
+    paths:
+      - tools/research_stage1_owner_source_accounting.py
+      - tests/test_research_stage1_owner_source_accounting.py
+      - data/governance/research-stage1-owner-source-accounting-authorities.json
+      - docs/stage1-game-universe-contract.md
+      - docs/research-stage4-authoring-contract.md
+      - .github/workflows/fresno-stage1-owner-source-accounting-validation.yml
+
+permissions:
+  contents: read
+
+jobs:
+  exact-parent-adversarial-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch and authenticate exact accepted Research checkpoint 0035
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin '+refs/heads/research/fresno-state-all-history-expansion:refs/remotes/origin/research/fresno-state-all-history-expansion'
+          test "$(git rev-parse --verify b2996ffc3e0e9e5f780cd6e7ccbb56789b55754b^{commit})" = b2996ffc3e0e9e5f780cd6e7ccbb56789b55754b
+          test "$(git rev-parse b2996ffc3e0e9e5f780cd6e7ccbb56789b55754b^{tree})" = 0c916be9dae1bbfa6675a63ace318688be649096
+          test "$(git rev-parse --verify 087ac5dedc65780b65b7ae8d61e239d2033e2eea^{commit})" = 087ac5dedc65780b65b7ae8d61e239d2033e2eea
+          git cat-file blob b2996ffc3e0e9e5f780cd6e7ccbb56789b55754b:research/fresno-state-all-history-expansion/stage1/1965-66-owner-ruling-closeout-tool-contract-diagnostic-0035/manifest-0035.json > "$RUNNER_TEMP/fresno-exact-manifest.json"
+          test "$(git hash-object "$RUNNER_TEMP/fresno-exact-manifest.json")" = 61d96c72218343b1016e40302fee25200b3391c2
+      - name: Compile permanent tool and focused regression tests
+        run: python -m py_compile tools/research_stage1_owner_source_accounting.py tests/test_research_stage1_owner_source_accounting.py
+      - name: Exact-parent positive and adversarial Stage 1 regressions
+        run: python -m unittest discover -s tests -p 'test_research_stage1_owner_source_accounting.py' -v
+      - name: Existing special closeout family nonregression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_research_stage1_coverage_gap.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage1_aggregate_coverage.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage1_early_accounting_closeout.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage1_early_history_uncertainty.py' -v
+          python -m unittest discover -s tests -p 'test_research_stage1_mixed_terminal_closeout.py' -v
+      - name: Confirm no tracked basketball or source mutation
+        run: |
+          test -z "$(git status --porcelain --untracked-files=no)"
