@@ -1673,7 +1673,7 @@
   "last_operation": {
     "checkpoint_manifest_path": ".remote-implementation/checkpoints/nevada/nevada-release-gate2-approval-0001/checkpoint-manifest.json",
     "checkpoint_manifest_sha256": "d579723391cd49eadc317d9403a37f0a495c6fb1e9a76469c7a8af8dad924488",
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "gate2_merge_packet_path": ".remote-implementation/checkpoints/nevada/nevada-release-gate2-approval-0001/gate2-merge-packet.json",
     "gate2_merge_packet_sha256": "456cfc5e77dae1cf0fb78cc2baafbecb60964f1909e66465b71c1c07c2511c5a",
     "merged": false,
@@ -1682,7 +1682,7 @@
     "pr_number": 735,
     "production_request_id": "nevada-release-production-proof-0001",
     "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
-    "remote_gate2_approval_equivalence": "PENDING",
+    "remote_gate2_approval_equivalence": "PASS",
     "request_id": "nevada-release-gate2-approval-0001",
     "school_key": "nevada",
     "target_branch": "data/nevada-onboarding",
