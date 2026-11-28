@@ -1,0 +1,19 @@
+{
+  "checkpoint_manifest_sha256": "3e595d3990d6901ba010eec6d07c660478426260cd5a5b76455cf3f475c82b49",
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS_VERIFICATION",
+  "owner_gate_2": false,
+  "pr_body_sha256": "ed5d09f5cbdd0220bdf4f265b4397e479601099d221395aabdfe0948b5301e2d",
+  "pr_created": false,
+  "preview_request_id": "nevada-release-preview-verify-0001",
+  "preview_verified": false,
+  "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "readiness_proof_sha256": "bf733c0f36af0cbdfc127e83daa4e63d9b4358746e4bbfcdac4cae64a30a06a5",
+  "release_pr_packet_sha256": "23e9cef279eda9ca98c186b94942101005c1cf20475b9127472a2b11ff9a6f60",
+  "remote_release_readiness_equivalence": "PASS",
+  "request_id": "nevada-release-readiness-0001",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "tracked_mutation": "NONE"
+}
