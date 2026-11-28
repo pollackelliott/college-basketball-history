@@ -89,9 +89,10 @@ jobs:
           atbaseline=[r for r in published if r["source_site_candidate"]=="at"]
           breakdown=collections.Counter((r["curated_game_type"],r["curated_site_type"]) for r in atbaseline)
           check(len(atbaseline)==584,"published SDSU at source convention size")
-          check(breakdown[("REGULAR_SEASON","OPPONENT_HOME")]==583,"published regular-season at convention")
+          check(breakdown[("REGULAR_SEASON","OPPONENT_HOME")]==567,"published regular-season at convention")
+          check(breakdown[("CONFERENCE_TOURNAMENT","OPPONENT_HOME")]==12 and breakdown[("NIT","OPPONENT_HOME")]==4,"other published at convention")
           check(breakdown[("CONFERENCE_TOURNAMENT","NEUTRAL")]==1,"documented tournament exception")
-          check(len(breakdown)==2,"unexpected published at convention")
+          check(len(breakdown)==4,"unexpected published at convention")
           exception=[r for r in atbaseline if r["curated_site_type"]=="NEUTRAL"]
           check(len(exception)==1 and exception[0]["source_game_id"]=="SDSU-S1-000649","exact published tournament exception")
           # Systematic project-evidence join; no web discovery or geography-based site assignment.
@@ -149,7 +150,7 @@ jobs:
                       row["curated_site_type"]="OPPONENT_HOME"
                       row["site_research_status"]="SUPPORTED"
                       row["stage3a1_evidence_class"]="TARGET_INSTITUTIONAL_GUIDE_AT_CONVENTION_CORROBORATED_BY_PUBLISHED_BASELINE"
-                      row["stage3a1_evidence_reference"]="SDSU 2026-27 guide pp.88-93; main schools/san-diego-state/source-games.csv convention (583 regular at=OPPONENT_HOME; postseason exception SDSU-S1-000649)"
+                      row["stage3a1_evidence_reference"]="SDSU 2026-27 guide pp.88-93; main schools/san-diego-state/source-games.csv convention (567 regular at=OPPONENT_HOME; one conference tournament neutral exception SDSU-S1-000649)"
                       row["site_research_basis"]="Explicit primary guide 'at' notation; published SDSU regular-season source-series accepts at as OPPONENT_HOME; event-context rows withheld"
               elif reciprocal_support:
                   target_type,candidate=reciprocal_support
@@ -190,7 +191,8 @@ jobs:
               "published_sdsu_source_package_git_blob":"36f3357bf62d1a4765fc417407492cb4cbb3d6dc",
               "historical_supplemental_source":"SDSU 2026-27 media guide pp.88-93, owner-provided original",
               "rule":"Regular-season source 'at' designation, excluding documented event contexts, corroborated by accepted published SDSU 'at' convention",
-              "accepted_published_regular_season_at_opponent_home":583,
+              "accepted_published_regular_season_at_opponent_home":567,
+              "accepted_published_other_postseason_at_opponent_home":16,
               "accepted_published_at_postseason_exception":[{"source_game_id":exception[0]["source_game_id"],"game_type":exception[0]["curated_game_type"],"site":exception[0]["curated_site_type"],"source_line":exception[0]["raw_text"]}],
               "plain_at_eligible":sum(1 for r in source if r["game_type"]=="REGULAR_SEASON" and r["source_site_token"]=="at" and not r["source_event_context"]),
               "at_event_context_held": [{"research_game_id":r["research_game_id"],"event":r["source_event_context"],"source":r["source_literal_line"]} for r in source if r["game_type"]=="REGULAR_SEASON" and r["source_site_token"]=="at" and r["source_event_context"]],
