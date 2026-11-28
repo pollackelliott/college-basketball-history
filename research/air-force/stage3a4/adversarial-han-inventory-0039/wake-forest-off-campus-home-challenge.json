@@ -1,0 +1,18 @@
+{
+  "research_game_id": "AF-2006-07-008",
+  "date": "2006-11-29",
+  "opponent_key": "wake-forest",
+  "accepted_site_type": "NEUTRAL",
+  "evidence_supported_site_type": "HOME",
+  "physical_venue": "Colorado Springs World Arena",
+  "city": "Colorado Springs",
+  "state": "CO",
+  "venue_proof": "Wake Forest exact box score names Colorado Springs World Arena as site and Air Force as HOME, while Air Force official exact season lists vs Wake Forest in Colorado Springs",
+  "sources": [
+    "https://godeacs.com/news/2006/11/30/air_force_94_wake_forest_58",
+    "https://goairforcefalcons.com/sports/mens-basketball/schedule/2006-07",
+    "https://goairforcefalcons.com/news/2006/11/7/falcons_open_06_07_season_at_home_vs_arkansas_pine_bluff"
+  ],
+  "action": "RECONCILE_AS_EXACT_OFF_CAMPUS_HOME_GAME_IN_BOUNDED_STAGE3A1_AND_STAGE3A2_REPAIR",
+  "accepted_venue_not_disputed": true
+}

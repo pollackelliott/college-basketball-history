@@ -1,0 +1,101 @@
+[
+  {
+    "research_game_id": "AF-1959-60-007",
+    "date": "1959-12-04",
+    "opponent_key": "creighton",
+    "previous_site_type": "HOME",
+    "official_indicated_site_type": "AWAY",
+    "prior_home_assignment_present": true,
+    "prior_home_assignment_venue": "Cadet Gymnasium",
+    "required_downstream_action": "RETRACT_FALSE_HOME_VENUE_ASSIGNMENT",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-009",
+    "date": "1959-12-09",
+    "opponent_key": "denver",
+    "previous_site_type": "AWAY",
+    "official_indicated_site_type": "HOME",
+    "prior_home_assignment_present": false,
+    "prior_home_assignment_venue": "",
+    "required_downstream_action": "RECONCILE_NEW_HOME_VENUE_FROM_ACCEPTED_1958_PLUS_CADET_GYM_CHRONOLOGY_WITH_EXACT_GAME_EXCEPTION_CHALLENGE",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-011",
+    "date": "1959-12-19",
+    "opponent_key": "oklahoma-state",
+    "previous_site_type": "AWAY",
+    "official_indicated_site_type": "HOME",
+    "prior_home_assignment_present": false,
+    "prior_home_assignment_venue": "",
+    "required_downstream_action": "RECONCILE_NEW_HOME_VENUE_FROM_ACCEPTED_1958_PLUS_CADET_GYM_CHRONOLOGY_WITH_EXACT_GAME_EXCEPTION_CHALLENGE",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-012",
+    "date": "1960-01-07",
+    "opponent_key": "omaha",
+    "previous_site_type": "NEUTRAL",
+    "official_indicated_site_type": "HOME",
+    "prior_home_assignment_present": false,
+    "prior_home_assignment_venue": "",
+    "required_downstream_action": "RECONCILE_NEW_HOME_VENUE_FROM_ACCEPTED_1958_PLUS_CADET_GYM_CHRONOLOGY_WITH_EXACT_GAME_EXCEPTION_CHALLENGE",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-014",
+    "date": "1960-01-13",
+    "opponent_key": "western-colorado",
+    "previous_site_type": "HOME",
+    "official_indicated_site_type": "AWAY",
+    "prior_home_assignment_present": true,
+    "prior_home_assignment_venue": "Cadet Gymnasium",
+    "required_downstream_action": "RETRACT_FALSE_HOME_VENUE_ASSIGNMENT",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-015",
+    "date": "1960-01-16",
+    "opponent_key": "montana-state",
+    "previous_site_type": "HOME",
+    "official_indicated_site_type": "AWAY",
+    "prior_home_assignment_present": true,
+    "prior_home_assignment_venue": "Cadet Gymnasium",
+    "required_downstream_action": "RETRACT_FALSE_HOME_VENUE_ASSIGNMENT",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-016",
+    "date": "1960-01-20",
+    "opponent_key": "new-mexico-highlands",
+    "previous_site_type": "AWAY",
+    "official_indicated_site_type": "HOME",
+    "prior_home_assignment_present": false,
+    "prior_home_assignment_venue": "",
+    "required_downstream_action": "RECONCILE_NEW_HOME_VENUE_FROM_ACCEPTED_1958_PLUS_CADET_GYM_CHRONOLOGY_WITH_EXACT_GAME_EXCEPTION_CHALLENGE",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-019",
+    "date": "1960-01-31",
+    "opponent_key": "ucla",
+    "previous_site_type": "AWAY",
+    "official_indicated_site_type": "HOME",
+    "prior_home_assignment_present": false,
+    "prior_home_assignment_venue": "",
+    "required_downstream_action": "RECONCILE_NEW_HOME_VENUE_FROM_ACCEPTED_1958_PLUS_CADET_GYM_CHRONOLOGY_WITH_EXACT_GAME_EXCEPTION_CHALLENGE",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  },
+  {
+    "research_game_id": "AF-1959-60-003",
+    "date": "1960-02-22",
+    "opponent_key": "arizona-state",
+    "previous_site_type": "HOME",
+    "official_indicated_site_type": "AWAY",
+    "prior_home_assignment_present": true,
+    "prior_home_assignment_venue": "Cadet Gymnasium",
+    "required_downstream_action": "RETRACT_FALSE_HOME_VENUE_ASSIGNMENT",
+    "home_facility_chronology_source": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html"
+  }
+]

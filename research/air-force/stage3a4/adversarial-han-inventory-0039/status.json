@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A4_ADVERSARIAL_HAN_POPULATION_DIAGNOSTIC_0039",
+  "school_key": "air-force",
+  "status": "STAGE3A4_STOP_REQUIRES_BOUNDED_STAGE3A1_AND_STAGE3A2_REPAIR",
+  "stage3a4_complete": false,
+  "year_scope": "1959-60",
+  "immovable_parent_research_sha": "7bddc121a6103c97ec98f23cf40819ab451146ef",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "original_stage3a2_ledger_blob_sha": "e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e",
+  "parent_stage3a3_manifest_blob_sha": "229d20cf9143e249fc2b9fdbcd614177a4f44a4d",
+  "ledger_game_rows": 1928,
+  "season_1959_regular_games": 21,
+  "season_1959_postseason_games": 1,
+  "season_1959_matching_regular_games": 10,
+  "season_1959_mismatched_regular_games": 11,
+  "accepted_season_census": {
+    "HOME": 10,
+    "AWAY": 9,
+    "NEUTRAL": 2
+  },
+  "institutional_season_census": {
+    "AWAY": 9,
+    "HOME": 11,
+    "NEUTRAL": 1
+  },
+  "published_all_games_season_wl": {
+    "home": "7-4",
+    "away": "4-5",
+    "neutral": "1-1 (includes 1960 NCAA loss)"
+  },
+  "home_assignments_to_retract": 4,
+  "new_home_assignments_requiring_stage3a2_reconciliation": 5,
+  "additional_2006_off_campus_home_correction": 1,
+  "modern_terminal_venue_unknowns_preserved": 2,
+  "previous_stage3a3_cumulative_complete_count_not_promoted_to_final_stage3a4": true,
+  "site_type_rows_mutated": 0,
+  "game_type_rows_mutated": 0,
+  "accepted_stage3a2_ledger_mutated": false,
+  "protected_main_mutated": false,
+  "other_research_lanes_mutated": false,
+  "next_safe_assignment": "One bounded coherent Stage 3A-1 H/A/N correction of all 11 1959-60 discrepancies and Wake Forest 2006, with exact venue/home re-reconciliation in Stage 3A-2; re-enter Stage 3A-4 full ledger/census/QA only after durable repair. No broad external research or Stage 3B."
+}

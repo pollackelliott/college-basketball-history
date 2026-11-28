@@ -1,0 +1,17 @@
+{
+  "research_game_id": "AF-1959-60-018",
+  "game_date": "1960-01-30",
+  "opponent_key": "new-mexico",
+  "accepted_site_type": "AWAY",
+  "official_indicated_type": "NEUTRAL",
+  "source_locality_conflict": {
+    "accepted_staged_guide": "Albuquerque, NM [ONLINE SCHEDULE]; Denver, CO [GUIDE STARRED VENUE]",
+    "first_party_online_schedule": "Albuquerque, NM",
+    "first_party_historical_guide_star": "Denver, CO"
+  },
+  "decision": "CARRY_UNRESOLVED_EXACT_NEUTRAL_LOCALITY_CONFLICT_TO_BOUNDED_REPAIR; do not assume Albuquerque or Denver by geography",
+  "sources": [
+    "https://goairforcefalcons.com/sports/mens-basketball/schedule/1959-60",
+    "https://goairforcefalcons.com/documents/download/2023/9/22/History.2023-24.pdf"
+  ]
+}

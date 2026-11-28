@@ -1,0 +1,20 @@
+[
+  {
+    "research_game_id": "AF-1996-97-008",
+    "game_date": "1996-12-28",
+    "opponent_key": "tennessee-tech",
+    "reason": "TIER2_ACCEPTED_RESEARCHED_EXACT_BUILDING_UNKNOWN_NOT_REOPENED",
+    "site_type": "NEUTRAL",
+    "city_state": "Bozeman, MT",
+    "building_not_accepted": true
+  },
+  {
+    "research_game_id": "AF-1998-99-008",
+    "game_date": "1998-12-29",
+    "opponent_key": "drexel",
+    "reason": "TIER2_ACCEPTED_RESEARCHED_EXACT_BUILDING_UNKNOWN_NOT_REOPENED",
+    "site_type": "NEUTRAL",
+    "city_state": "Green Bay, WI",
+    "building_not_accepted": true
+  }
+]
