@@ -445,6 +445,12 @@ def persist_stage2_census_checkpoint(
             "correction_origin_main_sha"
         ),
         "target_authority_kind": phase0_authority["target_authority_kind"],
+        "stage2_current_program_key_rebase_successor_path": (
+            (request.get("stage2_current_program_key_rebase_successor") or {}).get("path")
+        ),
+        "stage2_current_program_key_rebase_successor_sha256": (
+            (request.get("stage2_current_program_key_rebase_successor") or {}).get("sha256")
+        ),
         "stage2_opponent_display_successor_path": (
             (request.get("stage2_opponent_display_successor") or {}).get("path")
         ),
