@@ -1,0 +1,13 @@
+season,official_source_listed_games,official_home_total,official_away_total,official_neutral_total,source_at_count,source_unmarked_count,accepted_all_game_types,accepted_regular_unmarked_new_home,source_population_exact_match,home_default_scope,primary_source,printed_source_page
+1922-23,22,17,5,0,5,17,20,15,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1923-24,13,10,3,0,3,10,12,9,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1925-26,19,14,5,0,5,14,19,12,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1926-27,15,9,6,0,6,9,15,6,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1927-28,18,11,7,0,7,11,18,7,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1929-30,12,9,3,0,3,9,11,8,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1930-31,10,7,3,0,3,7,9,6,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1931-32,16,11,5,0,5,11,15,10,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,144
+1932-33,11,9,2,0,2,9,10,8,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,145
+1933-34,16,9,7,0,7,9,15,8,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,145
+1934-35,20,14,6,0,6,14,19,11,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,145
+1935-36,16,12,4,0,4,12,15,11,True,ONLY_THIS_EXACT_CENSUS_PASSING_SEASON,https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf,145

@@ -1,0 +1,81 @@
+{
+  "files": {
+    "cal-poly-24-institutional-site-review.csv": {
+      "bytes": 11119,
+      "sha256": "8a3a3b901ad2fd5f8476621cb087327cc56ecf259d05aaf7cbfdac8c4b88f202"
+    },
+    "cal-poly-official-3-conflicts.json": {
+      "bytes": 3204,
+      "sha256": "baf925a40abfdb9f2e9565a775fbe8332deaab2bd8767ed00f0faf1264ebb86e"
+    },
+    "four-marked-tournament-source-adjudications.csv": {
+      "bytes": 3546,
+      "sha256": "136c65cb9faa27103c8cc7e0621c6ddebb7aed27f7ba6337431de55d047557a6"
+    },
+    "fresno-final-eight-institutional-review.csv": {
+      "bytes": 3959,
+      "sha256": "0afd85ad6f54adca7b0f8a1b6f2f143223591a98bc392ee45cd4ebed64e0c486"
+    },
+    "fresno-reciprocal-25-row-review.csv": {
+      "bytes": 10977,
+      "sha256": "0d79de7e5f1009900ddc1fd6d50ec17adfbfeee7d0abe0009a38e03fe126a910"
+    },
+    "fresno-reciprocal-4-conflicts.json": {
+      "bytes": 3953,
+      "sha256": "51a96c0ce91f356715ae8e32f996a82642e239f90543fe457e777acbc057c21a"
+    },
+    "source-notation-nonpropagation-boundaries.json": {
+      "bytes": 967,
+      "sha256": "7ceedc51412146142f9e6decfe6865f396c5a369fcbc431da949fbe04ea204c3"
+    },
+    "stage3a1-cumulative-contradictions.json": {
+      "bytes": 6734,
+      "sha256": "42d549910287993bd9ba3a7001637b95520dd8862ab5d1f38aefd041ff1ae678"
+    },
+    "stage3a1-reciprocal-candidates.json": {
+      "bytes": 9722,
+      "sha256": "d232da7ed3d5166f8e0569ffd4f68a37adcaa85f7d7445927dba8960fe938f1e"
+    },
+    "stage3a1-reciprocal-conflicts.json": {
+      "bytes": 461,
+      "sha256": "90f3a5982ee97d3fe108df3e7e4ff37b404c0b2473231c6662d6ce52903d25e9"
+    },
+    "stage3a1-remaining-unknown-queue.csv": {
+      "bytes": 87155,
+      "sha256": "fc812aabb1049a7eb1bef0c91762a09e5be91342aa5655f659f340bb0dbf6dd0"
+    },
+    "stage3a1-source-family-precedent.json": {
+      "bytes": 1484,
+      "sha256": "e5af936926035b868c5d21906a01b0dc2de74b4187ceb92e98dc52193334c4b1"
+    },
+    "stage3a1-summary.json": {
+      "bytes": 2999,
+      "sha256": "99189fb053dd4ac24e0d901ee3f0521500ef01ffe9041914f17dd0f2b9b8f79c"
+    },
+    "stage3a1-supported-site-decisions.csv": {
+      "bytes": 301838,
+      "sha256": "5072c713b4cb9e6cac4895bd8f41cbd50de5c4d8330e1eb49b1f549d321320fe"
+    },
+    "stage3a1-working-ledger.csv": {
+      "bytes": 1826928,
+      "sha256": "c7d9362b923ce8b9ed751781ab03a60c02a7d33730d96a5314e7dc676413881a"
+    },
+    "stage4-authoring/opponents.csv": {
+      "bytes": 289478,
+      "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d"
+    },
+    "stage4-authoring/season-coverage.json": {
+      "bytes": 505,
+      "sha256": "ca3922abb628ebccc810263e9e068fb1964940e00d668dd8ee7660a3699195f2"
+    },
+    "target-guide-12-season-census-proof.csv": {
+      "bytes": 2639,
+      "sha256": "d186143f0df300f3dcf688572258a83e898ebb723a50c333aaafad83cfd22585"
+    }
+  },
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "kind": "SDSU_STAGE3A1_0058_DURABLE_HASH_BOUND_PARTIAL_MANIFEST_V1",
+  "parent_research_head": "51da5908e29488c2eafd172a3bb1a075ea96a77f",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "stage3a1_complete": false
+}
