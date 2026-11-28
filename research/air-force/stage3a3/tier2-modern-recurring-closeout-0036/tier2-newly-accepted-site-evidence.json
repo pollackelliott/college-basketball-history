@@ -1,0 +1,103 @@
+[
+  {
+    "id": "AF-1999-00-002",
+    "family": "EARTH_GRAINS_CLASSIC_1999",
+    "date": "1999-11-14",
+    "opponent": "northern-iowa",
+    "venue": "Kiel Center",
+    "city": "St. Louis",
+    "state": "MO",
+    "country": "United States",
+    "evidence": [
+      {
+        "url": "https://files.core.ac.uk/download/222999644.pdf",
+        "type": "UNIVERSITY_OF_NORTHERN_IOWA_1999_2000_ORIGINAL_MEDIA_GUIDE_ARCHIVED_BY_CORE",
+        "claim": "The Northern Iowa media guide's opponents page explicitly names November 14, 1999 vs United States Air Force Academy, Earth Grains Classic, The Kiel Center, St. Louis, MO."
+      },
+      {
+        "url": "https://goairforcefalcons.com/documents/download/2018/10/3/History.pdf",
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_EVENT_RESULTS",
+        "claim": "Air Force all-time tournament list documents Nov. 14, 1999 Northern Iowa 70, Air Force 60 at Earth Grains Classic."
+      }
+    ],
+    "source_mode": "first-party exact-edition institutional / original media guide record",
+    "decision": "ACCEPTED_EXACT_GAME_SITE_EVIDENCE"
+  },
+  {
+    "id": "AF-2001-02-005",
+    "family": "MCCAFFREY_CLASSIC_2001",
+    "date": "2001-11-30",
+    "opponent": "montana-state",
+    "venue": "Selland Arena",
+    "city": "Fresno",
+    "state": "CA",
+    "country": "United States",
+    "evidence": [
+      {
+        "url": "https://gobulldogs.com/documents/download/2016/10/11/16_17_MBB_Media_Guide_Web.pdf",
+        "type": "FRESNO_STATE_OFFICIAL_HISTORICAL_TOURNAMENT_RESULTS",
+        "claim": "Fresno State institutional 2016-17 guide classic-history Selland Arena table explicitly lists 2001: Air Force 70, Montana State 65 and tournament participants/results."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2001/11/30/Falcons_Take_Down_Montana_State_70_65",
+        "type": "AIR_FORCE_EXACT_GAME_RECAP",
+        "claim": "Air Force Nov. 30 2001 exact 70-65 Montana State game at McCaffrey Classic."
+      },
+      {
+        "url": "https://gobulldogs.com/news/2002/12/2/Men_s_Basketball_Takes_on_Pair_of_WCC_Foes",
+        "type": "FRESNO_STATE_HOST_HISTORIC_FACILITY_CORROBORATION",
+        "claim": "Fresno State states 2002 Classic was last McCaffrey Classic in Selland Arena, corroborating 2001 tournament edition table."
+      }
+    ],
+    "source_mode": "first-party exact-edition institutional / original media guide record",
+    "decision": "ACCEPTED_EXACT_GAME_SITE_EVIDENCE"
+  },
+  {
+    "id": "AF-2006-07-005",
+    "family": "CBE_CLASSIC_2006_CHAMPIONSHIP",
+    "date": "2006-11-20",
+    "opponent": "duke",
+    "venue": "Municipal Auditorium",
+    "city": "Kansas City",
+    "state": "MO",
+    "country": "United States",
+    "evidence": [
+      {
+        "url": "https://goairforcefalcons.com/news/2006/9/19/16_Team_CBE_Classic_Field_Set",
+        "type": "AIR_FORCE_EXACT_EDITION_EVENT_ANNOUNCEMENT",
+        "claim": "Air Force identifies CBE Classic championship rounds Nov. 20–21 2006 at Municipal Auditorium, Kansas City."
+      },
+      {
+        "url": "https://goduke.com/news/2006/11/20/694461",
+        "type": "DUKE_EXACT_GAME_RECAP",
+        "claim": "Duke confirms Nov. 20 2006 semifinal 71-56 Duke vs Air Force in Kansas City CBE Classic."
+      }
+    ],
+    "source_mode": "first-party exact-edition institutional / original media guide record",
+    "decision": "ACCEPTED_EXACT_GAME_SITE_EVIDENCE"
+  },
+  {
+    "id": "AF-2012-13-011",
+    "family": "ORANGE_BOWL_BASKETBALL_CLASSIC_2012",
+    "date": "2012-12-29",
+    "opponent": "florida",
+    "venue": "BB&T Center",
+    "city": "Sunrise",
+    "state": "FL",
+    "country": "United States",
+    "evidence": [
+      {
+        "url": "https://d2b5htfb6s9xp9.cloudfront.net/news/2012/12/29/24558",
+        "type": "FLORIDA_EXACT_POSTGAME_REPORT",
+        "claim": "Florida December 29 2012 first-party report gives 78-61 Air Force game at BB&T Center, Sunrise, FL."
+      },
+      {
+        "url": "https://goairforcefalcons.com/documents/download/2018/6/20/16746__m_baskbl_2012_13_misc_non_event__OrangeBowlRelease.pdf",
+        "type": "ORANGE_BOWL_COMMITTEE_PRE_EVENT_RELEASE_ARCHIVED_BY_AIR_FORCE",
+        "claim": "July 2012 organizer release confirms Dec. 29 Florida–Air Force game at BankAtlantic Center (pre-event facility naming); contemporaneous Dec game report supplies BB&T Center game-date naming."
+      }
+    ],
+    "source_mode": "first-party exact-edition institutional / original media guide record",
+    "decision": "ACCEPTED_EXACT_GAME_SITE_EVIDENCE"
+  }
+]

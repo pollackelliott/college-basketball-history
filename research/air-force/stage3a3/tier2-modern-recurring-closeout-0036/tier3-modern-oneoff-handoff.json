@@ -1,0 +1,68 @@
+[
+  {
+    "research_game_id": "AF-2006-07-008",
+    "season": "2006-07",
+    "game_date": "2006-11-29",
+    "opponent_key": "wake-forest",
+    "guide_exact_venue_note": "Colorado Springs World Arena",
+    "source_schedule_locality": "Colorado Springs, CO",
+    "classification": "TIER3_MODERN_ONE_OFF_HANDOFF_UNRESEARCHED",
+    "reason": "No recurring Tier-2 event/source family identified in this bounded classification; venue literal already preserved in original Air Force institutional row, require exact-game provenance verification in Tier 3 before counting completion",
+    "source_url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2006-07"
+  },
+  {
+    "research_game_id": "AF-2017-18-011",
+    "season": "2017-18",
+    "game_date": "2017-12-17",
+    "opponent_key": "army",
+    "guide_exact_venue_note": "Madison Square Garden",
+    "source_schedule_locality": "New York, NY",
+    "classification": "TIER3_MODERN_ONE_OFF_HANDOFF_UNRESEARCHED",
+    "reason": "No recurring Tier-2 event/source family identified in this bounded classification; venue literal already preserved in original Air Force institutional row, require exact-game provenance verification in Tier 3 before counting completion",
+    "source_url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2017-18"
+  },
+  {
+    "research_game_id": "AF-2021-22-001",
+    "season": "2021-22",
+    "game_date": "2021-11-11",
+    "opponent_key": "south-dakota",
+    "guide_exact_venue_note": "Sanford Pentagon",
+    "source_schedule_locality": "Sioux Falls, SD",
+    "classification": "TIER3_MODERN_ONE_OFF_HANDOFF_UNRESEARCHED",
+    "reason": "No recurring Tier-2 event/source family identified in this bounded classification; venue literal already preserved in original Air Force institutional row, require exact-game provenance verification in Tier 3 before counting completion",
+    "source_url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2021-22"
+  },
+  {
+    "research_game_id": "AF-2023-24-011",
+    "season": "2023-24",
+    "game_date": "2023-12-16",
+    "opponent_key": "ut-arlington",
+    "guide_exact_venue_note": "Dickies Arena",
+    "source_schedule_locality": "Fort Worth, TX",
+    "classification": "TIER3_MODERN_ONE_OFF_HANDOFF_UNRESEARCHED",
+    "reason": "No recurring Tier-2 event/source family identified in this bounded classification; venue literal already preserved in original Air Force institutional row, require exact-game provenance verification in Tier 3 before counting completion",
+    "source_url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2023-24"
+  },
+  {
+    "research_game_id": "AF-2024-25-010",
+    "season": "2024-25",
+    "game_date": "2024-12-07",
+    "opponent_key": "stony-brook",
+    "guide_exact_venue_note": "Comerica Center",
+    "source_schedule_locality": "Frisco, TX",
+    "classification": "TIER3_MODERN_ONE_OFF_HANDOFF_UNRESEARCHED",
+    "reason": "No recurring Tier-2 event/source family identified in this bounded classification; venue literal already preserved in original Air Force institutional row, require exact-game provenance verification in Tier 3 before counting completion",
+    "source_url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2024-25"
+  },
+  {
+    "research_game_id": "AF-2025-26-009",
+    "season": "2025-26",
+    "game_date": "2025-11-29",
+    "opponent_key": "south-dakota",
+    "guide_exact_venue_note": "The Monument",
+    "source_schedule_locality": "Rapid City, SD",
+    "classification": "TIER3_MODERN_ONE_OFF_HANDOFF_UNRESEARCHED",
+    "reason": "No recurring Tier-2 event/source family identified in this bounded classification; venue literal already preserved in original Air Force institutional row, require exact-game provenance verification in Tier 3 before counting completion",
+    "source_url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/2025-26"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "AF-1996-97-008",
+    "family": "HOLIDAY_STORES_CLASSIC_1996",
+    "date": "1996-12-28",
+    "opponent": "tennessee-tech",
+    "locality": "Bozeman, MT",
+    "status": "TIER2_RESEARCHED_EXACT_BUILDING_UNRESOLVED",
+    "candidate_not_accepted": "Brick Breeden Fieldhouse",
+    "reason": "Source proves exact 1996 event/city, but recovered directly sourced host information does not explicitly bind the 1996 tournament edition to that building; 1995 edition/site or host arena chronology cannot substitute.",
+    "sources": [
+      {
+        "url": "https://goairforcefalcons.com/documents/download/2018/10/3/History.pdf",
+        "claim": "Official Air Force tournament register: 1996 Holiday Stores Classic in Bozeman, Air Force 88 Tennessee Tech 68."
+      },
+      {
+        "url": "https://msubobcats.com/honors/hall-of-fame/-mens-basketball-team-team/95",
+        "claim": "Montana State institutional history mentions Holiday Stores Classic in prior 1995 edition, not enough to infer 1996 venue."
+      },
+      {
+        "url": "https://goairforcefalcons.com/documents/download/2018/6/20/21645__m_baskbl_2015_16_release__release_20151115aaa.pdf",
+        "claim": "Air Force exact-opponent historical note identifies 1996 neutral game and Bozeman event but not a physical building."
+      }
+    ]
+  },
+  {
+    "id": "AF-1998-99-008",
+    "family": "UWGB_ONEIDA_CLASSIC_1998",
+    "date": "1998-12-29",
+    "opponent": "drexel",
+    "locality": "Green Bay, WI",
+    "status": "TIER2_RESEARCHED_EXACT_BUILDING_UNRESOLVED",
+    "candidate_not_accepted": "Brown County Arena",
+    "reason": "Official Green Bay, Drexel and Air Force institutional schedules corroborate the Dec 29–30 1998 tournament and exact game, but available institutional edition record does not explicitly assign physical arena to the Dec 29 neutral game; aggregator venue claim not accepted as authoritative source.",
+    "sources": [
+      {
+        "url": "https://greenbayphoenix.com/sports/mens-basketball/schedule/1998-99",
+        "claim": "Green Bay official schedule gives 1998 Oneida Bingo & Casino Classic games on Dec 29–30."
+      },
+      {
+        "url": "https://drexeldragons.com/sports/mens-basketball/schedule/text/1998-99",
+        "claim": "Drexel official schedule has exact neutral Dec 29 Air Force game in Green Bay."
+      },
+      {
+        "url": "https://goairforcefalcons.com/documents/download/2018/10/3/History.pdf",
+        "claim": "Air Force official register lists Dec 29 1998 UWGB Classic Air Force 56 Drexel 50."
+      }
+    ]
+  }
+]
