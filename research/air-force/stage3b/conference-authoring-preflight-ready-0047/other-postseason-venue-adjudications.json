@@ -1,0 +1,183 @@
+[
+  {
+    "game_id": "AF-2006-07-032",
+    "date": "2007-03-14",
+    "opponent_key": "austin-peay",
+    "accepted_result": "W 75-51",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "HOME",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Clune Arena",
+    "city": "Colorado Springs",
+    "state": "CO",
+    "country": "United States",
+    "reused_venue_key": "clune-arena",
+    "reused_immutable_base_venue_id": "VEN-000497",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/sports/2018/6/19/_m_baskbl_stats_031507aaa_html",
+      "https://www.af.mil/News/Article-Display/Article/127605/falcons-fly-high-in-nit-debut/",
+      "https://goairforcefalcons.com/news/2007/3/14/Falcons_Soar_Past_Austin_Peay_In_Opening_Round_Of_NIT_75_51"
+    ],
+    "evidence_basis": "Air Force official 2007-03-14 Austin Peay NIT game box score explicitly names Clune Arena, and contemporaneous Air Force institutional/military reports confirm the home venue and 75-51 result. Same physical facility as accepted Air Force primary HOME Clune Arena (research-base VEN-000497).",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  },
+  {
+    "game_id": "AF-2006-07-033",
+    "date": "2007-03-19",
+    "opponent_key": "georgia",
+    "accepted_result": "W 83-52",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "HOME",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Clune Arena",
+    "city": "Colorado Springs",
+    "state": "CO",
+    "country": "United States",
+    "reused_venue_key": "clune-arena",
+    "reused_immutable_base_venue_id": "VEN-000497",
+    "evidence_urls": [
+      "https://www.af.mil/News/Article-Display/Article/127545/falcon-forwards-march-over-georgia-in-nit/",
+      "https://goairforcefalcons.com/news/2007/3/19/Air_Force_Blows_By_Georgia_In_NIT_83_52?path=mbball"
+    ],
+    "evidence_basis": "Contemporaneous U.S. Air Force account explicitly reports 2007-03-19 Air Force–Georgia second-round NIT played at the Air Force Academy's Clune Arena, corroborated by target institution exact-game 83-52 recap. Reuse research-base Clune Arena physical identity.",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  },
+  {
+    "game_id": "AF-2006-07-034",
+    "date": "2007-03-21",
+    "opponent_key": "depaul",
+    "accepted_result": "W 52-51",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "HOME",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Clune Arena",
+    "city": "Colorado Springs",
+    "state": "CO",
+    "country": "United States",
+    "reused_venue_key": "clune-arena",
+    "reused_immutable_base_venue_id": "VEN-000497",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/sports/2018/6/19/_m_baskbl_stats_032107aaa_html",
+      "https://goairforcefalcons.com/news/2007/3/21/falcons_edge_depaul_52_51_move_on_to_nit_semifinals_in_new_york",
+      "https://www.af.mil/News/Article-Display/Article/127515/falcons-reach-nit-final-four-in-nyc/"
+    ],
+    "evidence_basis": "Official Air Force March 21 2007 NIT quarterfinal game box score explicitly records Clune Arena and the Air Force 52–51 DePaul result; contemporaneous Air Force Athletics recap and military article independently identify the same exact game and building.",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  },
+  {
+    "game_id": "AF-2006-07-035",
+    "date": "2007-03-27",
+    "opponent_key": "clemson",
+    "accepted_result": "L 67-68",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "NEUTRAL",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Madison Square Garden",
+    "city": "New York",
+    "state": "NY",
+    "country": "United States",
+    "reused_venue_key": "neutral-madison-square-garden-new-york-ny",
+    "reused_immutable_base_venue_id": "VEN-000124",
+    "evidence_urls": [
+      "https://www.af.mil/News/Article-Display/Article/127442/falcons-lose-heartbreaker-to-clemson-in-nit-semifinals/",
+      "https://www.af.mil/News/Article-Display/Article/127515/falcons-reach-nit-final-four-in-nyc/"
+    ],
+    "evidence_basis": "Air Force contemporaneous first-party military report explicitly records the March 27 2007 Clemson NIT semifinal 68-67 at Madison Square Garden, New York; pregame report names precise same facility. For this 2007 event the accepted immutable research-base venue split is current Madison Square Garden IV VEN-000124, not historical MSG III (closed 1968). Original target source guide_exact_venue_note is already Madison Square Garden and remains unchanged.",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  },
+  {
+    "game_id": "AF-2010-11-031",
+    "date": "2011-03-15",
+    "opponent_key": "north-dakota",
+    "accepted_result": "W 77-67",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "HOME",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Clune Arena",
+    "city": "Colorado Springs",
+    "state": "CO",
+    "country": "United States",
+    "reused_venue_key": "clune-arena",
+    "reused_immutable_base_venue_id": "VEN-000497",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2013/3/22/falcons_play_at_weber_state_in_cit_second_round",
+      "https://gazette.com/2011/03/15/offensive-breakthrough-leads-air-force-to-cit-first-round-win-831d3907-0428-5af7-bb65-47086f331930/",
+      "https://www.sports-reference.com/cbb/boxscores/2011-03-15-air-force.html"
+    ],
+    "evidence_basis": "Air Force official 2013 retrospective game notes explicitly state first-round 2011 CIT 77-67 over North Dakota at Clune Arena; contemporaneous March 15 game report confirms same exact scoreboard, event and building. Reuse primary HOME Clune Arena VEN-000497, without deriving H/A/N from geography.",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  },
+  {
+    "game_id": "AF-2010-11-032",
+    "date": "2011-03-18",
+    "opponent_key": "santa-clara",
+    "accepted_result": "L 75-88",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "AWAY",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Leavey Center",
+    "city": "Santa Clara",
+    "state": "CA",
+    "country": "United States",
+    "reused_venue_key": "neutral-leavey-center-santa-clara-ca",
+    "reused_immutable_base_venue_id": "VEN-000606",
+    "evidence_urls": [
+      "https://santaclarabroncos.com/news/2011/3/19/3_19_2011_6130.aspx",
+      "https://www.sports-reference.com/cbb/boxscores/2011-03-18-santa-clara.html",
+      "https://goairforcefalcons.com/news/2013/3/22/falcons_play_at_weber_state_in_cit_second_round"
+    ],
+    "evidence_basis": "Santa Clara official exact 2011 CIT second-round 88-75 recap explicitly places the Air Force contest at Leavey Center. Same venue as accepted pre-existing research Stage3A neutral Leavey authoring identity; immutable research-base physical VEN-000606 matches Santa Clara, CA. Distinct postseason AWAY game retains original accepted H/A/N.",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  },
+  {
+    "game_id": "AF-2012-13-031",
+    "date": "2013-03-20",
+    "opponent_key": "hawai-i",
+    "accepted_result": "W 69-65",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "AWAY",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Stan Sheriff Center",
+    "city": "Honolulu",
+    "state": "HI",
+    "country": "United States",
+    "reused_venue_key": "stan-sheriff-center",
+    "reused_immutable_base_venue_id": "VEN-000194",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2013/3/21/fitzgerald_leads_falcons_past_hawai_i_in_cit_first_round",
+      "https://goairforcefalcons.com/sports/mens-basketball/opponent-history/university-of-hawaii/71"
+    ],
+    "evidence_basis": "Air Force exact March 20 2013 first-round CIT recap explicitly reports 69-65 win at Hawai'i at the Stan Sheriff Center in Honolulu, confirmed by the official opponent-history Away locality. Reuse immutable research-base global physical venue VEN-000194, Stan Sheriff Center; no reconstruction or new physical entity.",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  },
+  {
+    "game_id": "AF-2012-13-032",
+    "date": "2013-03-23",
+    "opponent_key": "weber-state",
+    "accepted_result": "L 57-78",
+    "accepted_game_type": "POSTSEASON",
+    "accepted_han": "AWAY",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "physical_venue": "Dee Events Center",
+    "city": "Ogden",
+    "state": "UT",
+    "country": "United States",
+    "reused_venue_key": "dee-events-center",
+    "reused_immutable_base_venue_id": "VEN-000054",
+    "evidence_urls": [
+      "https://goairforcefalcons.com/news/2013/3/22/falcons_play_at_weber_state_in_cit_second_round",
+      "https://goairforcefalcons.com/news/2013/3/23/season_ends_with_78_57_loss_to_weber_state",
+      "https://weberstatesports.com/news/2017/11/1/general-dee-events-center-turns-40"
+    ],
+    "evidence_basis": "Air Force exact pregame venue disclosure and March 23 2013 CIT second-round 78-57 game report identify Weber State's Dee Events Center in Ogden. Weber State facility history confirms physical arena. Reuse immutable research-base venue VEN-000054.",
+    "source_literals_preserved": true,
+    "game_fact_fields_changed": false
+  }
+]

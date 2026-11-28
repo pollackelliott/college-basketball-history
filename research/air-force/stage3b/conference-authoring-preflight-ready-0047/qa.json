@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_CONFERENCE_AUTHORING_0047_QA",
+  "status": "READY_FOR_PERMANENT_PREFLIGHT_NOT_CERTIFIED",
+  "parent_commit_sha": "7454aea6ff54923d97724eb141a155a1da8db48f",
+  "accepted_ledger_git_blob": "b18e3b34237b1edb71d9ddf6d143c2d816d308a8",
+  "accepted_ledger_sha256": "4102509c317efc3ea5cdd8496ce26477eeac97f8041b398c9a86987854502707",
+  "game_rows": 1928,
+  "changed_game_rows": 0,
+  "changed_prior_authoring_rows": 0,
+  "postseason_site_complete": 62,
+  "postseason_site_pending": 0,
+  "conference_intervals": 3,
+  "conference_keys": [
+    "independent",
+    "wac",
+    "mountain-west"
+  ],
+  "restored_stage3a4_opponent_home_sidecar": "755e9ab42bd258f7c16af2c87b34c3285dc6877e",
+  "restored_stage3a4_status": "64e939ae813e650ca0df8388f379efe1886db137",
+  "permanent_preflight_pass": false,
+  "stage3b_complete": false
+}
