@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "ORDINARY_RESEARCH_STAGE2_COMPLETE_CHECKPOINT_MANIFEST_V1",
+  "school_key": "new-mexico",
+  "state": "STAGE_2_COMPLETE",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "fbfa4aa52c8f97cb529f9ae05e22d9849d714e43",
+  "accepted_stage1_complete_commit_sha": "e3b4c945ad3793b93f79e639099b5961c6ee4e7f",
+  "accepted_stage1_game_blob_sha": "63490b3398c94193da324911b1d002aafcac2d06",
+  "accepted_top_level_scope": "INCEPTION+",
+  "program_inception_season": "1899-00",
+  "primary_source_historical_cutoff": "2025-26",
+  "required_completed_season_cutoff": "2025-26",
+  "accepted_competitive_games": 2891,
+  "resolved_game_rows": 2891,
+  "source_opponent_labels": 986,
+  "unique_canonical_opponent_keys": 339,
+  "unresolved_game_identity_count": 0,
+  "stage3_authorized": false,
+  "files": [
+    {
+      "path": "research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/README.md",
+      "bytes": 4570,
+      "git_blob_sha": "a188f572d9834748a98a2f0efb9e9936499dcc6a"
+    },
+    {
+      "path": "research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/structured-stage2-ledger.csv",
+      "bytes": 1205138,
+      "git_blob_sha": "8c9c501f35a35a8813c250bad20c74783e6f9a8e"
+    },
+    {
+      "path": "research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/opponents.csv",
+      "bytes": 242748,
+      "git_blob_sha": "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76"
+    },
+    {
+      "path": "research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/identity-closeout-evidence.csv",
+      "bytes": 1195,
+      "git_blob_sha": "9087bbabab423c7267801391bc6d44fbe28092e2"
+    },
+    {
+      "path": "research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/stage2-residuals.csv",
+      "bytes": 62,
+      "git_blob_sha": "ed423e8edfc211a0cec6723c6952ad8382d3a43d"
+    },
+    {
+      "path": "research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/stage2-status.json",
+      "bytes": 1955,
+      "git_blob_sha": "001ae8bfeff183865384e2981db0503fb08a4db3"
+    },
+    {
+      "path": "research/new-mexico/stage4-authoring/opponents.csv",
+      "bytes": 242748,
+      "git_blob_sha": "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76"
+    }
+  ]
+}
