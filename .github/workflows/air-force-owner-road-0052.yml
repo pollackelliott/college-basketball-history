@@ -1,0 +1,334 @@
+name: Air Force 0052 exact owner-road correction and Stage 4 closeout
+on:
+  push:
+    branches: [research/air-force-owner-road-0052-transport]
+    paths: [.github/workflows/air-force-owner-road-0052.yml]
+permissions:
+  contents: write
+concurrency:
+  group: air-force-owner-road-0052-only
+  cancel-in-progress: false
+jobs:
+  exact-owner-road-correction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout isolated corrective transport and binding owner ruling
+        uses: actions/checkout@v4
+        with:
+          ref: research/air-force-owner-road-0052-transport
+          path: transport
+      - name: Checkout immutable Stage 3B COMPLETE checkpoint 0048
+        uses: actions/checkout@v4
+        with:
+          ref: 53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745
+          path: accepted
+          persist-credentials: false
+      - name: Checkout exact current protected-main permanent Stage 4 tool
+        uses: actions/checkout@v4
+        with:
+          ref: 1cde43ea49415d64b4fe9b59b1b44610fcad1716
+          path: permanent
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare one-game historically corrected 0052 successor and unchanged evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C accepted rev-parse HEAD)" = "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745"
+          test "$(git -C permanent rev-parse HEAD)" = "1cde43ea49415d64b4fe9b59b1b44610fcad1716"
+          python - <<'PY'
+          import csv,io,json,os,hashlib,shutil,subprocess
+          from pathlib import Path
+          owner_sha='5ff856c7a394ee07ea2457de622b33fe630a7aaf'
+          school='air-force'
+          root=Path('accepted/research/air-force/stage3b/completion-0048')
+          dest=Path('transport/research/air-force/stage3b/owner-road-correction-0052')
+          ruleroot=Path('transport/research/air-force/stage4/owner-road-designation-0051')
+          ruling=json.loads((ruleroot/'owner-ruling.json').read_text())
+          assert ruling['status']=='OWNER_ROAD_RULING_FINAL'
+          assert ruling['source_school_han']=='AWAY'
+          assert ruling['projected_package_curated_site_type']=='OPPONENT_HOME'
+          assert ruling['research_parent_sha']=='c323073f15d61a1543b6bc15e1332dbfa88f7d86'
+          assert ruling['accepted_stage3b_commit']=='53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745'
+          assert (ruleroot/'manifest.json').is_file()
+          old_manifest=json.loads((root/'manifest.json').read_text())
+          old_status=json.loads((root/'status.json').read_text())
+          assert old_manifest['status']=='COMPLETE' and old_status['status']=='COMPLETE'
+          assert old_status['research_base_sha']=='3f5a15458aa468347e56e669327d6fe4c9c6ee69'
+          assert len(old_manifest['files'])==16
+          for item in old_manifest['files']:
+              b=(root/item['name']).read_bytes()
+              assert len(b)==item['bytes'] and hashlib.sha256(b).hexdigest()==item['sha256'],item['name']
+          assert not dest.exists()
+          dest.mkdir(parents=True)
+          for item in old_manifest['files']:
+              to=dest/item['name']
+              to.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copyfile(root/item['name'],to)
+          shutil.copyfile(ruleroot/'owner-ruling.json',dest/'owner-ruling.json')
+          def patch_one_csv(path, selector, modifications):
+              original=path.read_text(encoding='utf-8')
+              lines=original.splitlines(keepends=True)
+              colnames=next(csv.reader([lines[0]]))
+              match_idx=[i for i,line in enumerate(lines[1:],1) if selector(dict(zip(colnames,next(csv.reader([line])))))]
+              assert len(match_idx)==1,(path,match_idx)
+              index=match_idx[0]
+              before=dict(zip(colnames,next(csv.reader([lines[index]]))))
+              for key,(expected,replacement) in modifications.items():
+                  assert before[key]==expected,(path,key,before[key],expected)
+                  before[key]=replacement
+              buffer=io.StringIO(newline='')
+              writer=csv.writer(buffer,quoting=csv.QUOTE_ALL,lineterminator='\n')
+              writer.writerow([before[k] for k in colnames])
+              lines[index]=buffer.getvalue()
+              output=''.join(lines)
+              path.write_text(output,encoding='utf-8',newline='')
+              return before
+          ledger=dest/'stage3b-working-ledger.csv'
+          before_rows=list(csv.DictReader((root/'stage3b-working-ledger.csv').open(newline='',encoding='utf-8')))
+          old_game=[r for r in before_rows if r['research_game_id']=='AF-1959-60-006']
+          assert len(old_game)==1
+          old_basis=old_game[0]['site_research_basis']
+          old_sentence='Source Air Force 1960 game is preserved HOME as accepted, without deriving H/A/N from location or building.'
+          assert old_basis.count(old_sentence)==1
+          new_sentence='Explicit owner ruling checkpoint 0051 supersedes previously accepted HOME: for website publication Air Force ROAD/AWAY and DePaul HOME at Alumni Hall, even where source NCAA designations differ. Original source designations are preserved in the unchanged guide literal and original Stage 3B checkpoint 0048.'
+          new_basis=old_basis.replace(old_sentence,new_sentence)
+          patch_one_csv(ledger,lambda r:r['research_game_id']=='AF-1959-60-006',{
+              'han':('HOME','AWAY'),'site_type':('HOME','AWAY'),
+              'site_research_basis':(old_basis,new_basis),
+          })
+          new_rows=list(csv.DictReader(ledger.open(newline='',encoding='utf-8')))
+          assert len(new_rows)==1928 and len(before_rows)==1928
+          changed=[(a['research_game_id'],[k for k in a if a[k]!=b[k]]) for a,b in zip(before_rows,new_rows) if a!=b]
+          assert changed==[('AF-1959-60-006',['han','site_type','site_research_basis'])],changed
+          for required in ('research_game_id','game_date','guide_literal_row','guide_literal_opponent','on_court_result','air_force_points','opponent_points','game_type','curated_venue_name','curated_venue_city','curated_venue_state','opponent_key'):
+              assert new_rows[5][required]==before_rows[5][required],required
+          venue=dest/'stage4-authoring/venues.csv'
+          venue_rows=list(csv.DictReader((root/'stage4-authoring/venues.csv').open(newline='',encoding='utf-8')))
+          match=[r for r in venue_rows if r['venue_key']=='postseason-alumni-hall-chicago-il']
+          assert len(match)==1 and match[0]['games_currently_assigned']=='1'
+          prior_venue_basis=match[0]['source_basis']
+          assert prior_venue_basis.count(old_sentence)==1
+          patch_one_csv(venue,lambda r:r['venue_key']=='postseason-alumni-hall-chicago-il',{
+              'source_basis':(prior_venue_basis,prior_venue_basis.replace(old_sentence,new_sentence)),
+          })
+          after_venue=list(csv.DictReader(venue.open(newline='',encoding='utf-8')))
+          venue_changed=[(a['venue_key'],[k for k in a if a[k]!=b[k]]) for a,b in zip(venue_rows,after_venue) if a!=b]
+          assert venue_changed==[('postseason-alumni-hall-chicago-il',['source_basis'])],venue_changed
+          ncaa=dest/'ncaa-tournament-venue-adjudications.json'
+          adj=json.loads(ncaa.read_text())
+          assert len(adj)==4 and adj[0]['game_id']=='AF-1959-60-006'
+          assert adj[0]['accepted_site_type']=='HOME'
+          adj[0]['accepted_site_type']='AWAY'
+          assert old_sentence in adj[0]['source_analysis']
+          adj[0]['source_analysis']=adj[0]['source_analysis'].replace(old_sentence,new_sentence)
+          adj[0]['source_conflict']={
+              'type':'EXPLICIT_OWNER_ROAD_RULING_SUPERSEDES_PREVIOUS_HOME_AND_SOURCE_NEUTRAL',
+              'previous_checkpoint_0048_han':'HOME',
+              'final_air_force_han':'AWAY',
+              'final_depaul_han':'HOME',
+              'ruling_checkpoint':'research/air-force/stage4/owner-road-designation-0051/',
+              'source_neutral_designation_preserved_as_provenance':True,
+          }
+          ncaa.write_text(json.dumps(adj,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          status=json.loads((dest/'status.json').read_text())
+          status.update({
+             'schema_version':1,'kind':'AIR_FORCE_STAGE3B_OWNER_ROAD_SUCCESSOR_0052_STATUS',
+             'status':'COMPLETE','parent_research_commit_sha':owner_sha,
+             'parent_checkpoint':'research/air-force/stage4/owner-road-designation-0051/',
+             'protected_main_sha':'1cde43ea49415d64b4fe9b59b1b44610fcad1716','owner_decision_checkpoint':'research/air-force/stage4/owner-road-designation-0051/',
+             'supersedes_accepted_0048_han_for_one_game':'AF-1959-60-006',
+             'stage3b_historical_research_complete':True,'stage3b_complete':True,
+             'durable_stage3b_complete':True,'stage4_started':False,
+             'authoritative_working_ledger':{
+                 'path':'stage3b-working-ledger.csv',
+                 'sha256':hashlib.sha256(ledger.read_bytes()).hexdigest(),
+                 'git_blob_sha':subprocess.check_output(['git','hash-object',str(ledger)],text=True).strip(),
+                 'rows':1928,
+             },
+          })
+          (dest/'status.json').write_text(json.dumps(status,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          qa=json.loads((dest/'qa.json').read_text())
+          qa.update({'kind':'AIR_FORCE_STAGE3B_OWNER_ROAD_SUCCESSOR_0052_QA',
+              'parent_research_commit_sha':owner_sha,'changed_game_rows':1,
+              'changed_game_han':1,'changed_game_dates':0,'changed_game_scores':0,
+              'changed_game_types':0,'changed_source_literals':0,
+              'changed_accepted_venue_authoring_rows':1,'changed_opponent_authoring_rows':0,
+              'changed_conference_authoring_rows':0,'inherited_authoring_capsule_byte_identical':False,
+              'explicit_owner_ruling':'owner-ruling.json',
+              'historical_0048_preflight_certification_inherited_not_current':True,
+              'status':'PASS','defects':[],
+          })
+          (dest/'qa.json').write_text(json.dumps(qa,indent=2)+'\n',encoding='utf-8')
+          (dest/'README.md').write_text(
+              '# Air Force — one-game owner-directed Stage 3B successor 0052\n\n'
+              'Binding owner disposition: Air Force AWAY (road), DePaul HOME for '
+              '1960-03-07 NCAA game AF-1959-60-006 at Alumni Hall, Chicago IL. '
+              'Prior suggested NEUTRAL categorization explicitly rejected.\n\n'
+              'All 1,928 original games, identities, dates, scores, source literal lines, '
+              'game types, original schedules, and exact physical venues remain preserved. '
+              'Only the two equivalent Air Force game site fields and explanatory evidence '
+              'for this one NCAA game changed. Venue assignment counts stay unchanged. '
+              'Original 0048 artifacts remain immutable. Inherited 0048 preflight certificate '
+              'documents the earlier accepted checkpoint only; this 0052 successor must '
+              'pass a NEW permanent preflight/author/closeout invocation.\n\n'
+              'Protected main used for new permanent replay: 1cde43ea49415d64b4fe9b59b1b44610fcad1716.\n'
+              'Owner authority: ../stage4/owner-road-designation-0051/owner-ruling.json\n',
+              encoding='utf-8')
+          oldmf=old_manifest
+          m=dict(oldmf)
+          m.update({
+              'kind':'AIR_FORCE_STAGE3B_OWNER_ROAD_SUCCESSOR_0052_MANIFEST',
+              'parent_commit_sha':owner_sha,
+              'parent_checkpoint':'research/air-force/stage4/owner-road-designation-0051/',
+              'parent_manifest_blob_sha':None,
+              'protected_main_sha':'1cde43ea49415d64b4fe9b59b1b44610fcad1716',
+              'authoritative_working_ledger_sha256':hashlib.sha256(ledger.read_bytes()).hexdigest(),
+              'owner_han_ruling':'owner-ruling.json','status':'COMPLETE',
+              'files':[],
+          })
+          oldmap={x['name']:x for x in oldmf['files']}
+          names=[x['name'] for x in oldmf['files']]+['owner-ruling.json']
+          for name in names:
+              file=dest/name
+              data=file.read_bytes()
+              blob=subprocess.check_output(['git','hash-object',str(file)],text=True).strip()
+              row={'name':name,'git_blob_sha':blob,'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)}
+              if name in oldmap and data==(root/name).read_bytes():
+                  row['inherited_from']='0048'
+                  assert blob==oldmap[name]['git_blob_sha']
+              else:
+                  row['updated_by']='EXPLICIT_OWNER_AIR_FORCE_AWAY_0051'
+              m['files'].append(row)
+          (dest/'manifest.json').write_text(json.dumps(m,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          assert len(m['files'])==17
+          import zipfile
+          target=Path(os.environ['RUNNER_TEMP'])/'stage3b-owner-road-0052.zip'
+          with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_STORED) as z:
+              for path in sorted(dest.rglob('*')):
+                  if path.is_file():
+                      info=zipfile.ZipInfo(path.relative_to(dest).as_posix(),date_time=(1980,1,1,0,0,0))
+                      info.compress_type=zipfile.ZIP_STORED
+                      info.external_attr=0o100644<<16
+                      z.writestr(info,path.read_bytes())
+          digest=hashlib.sha256(target.read_bytes()).hexdigest()
+          (dest/'../owner-road-correction-input-0052.sha256').write_text(digest+'  stage3b-owner-road-0052.zip\n')
+          print('NEW_OWNER_CORRECTED_STAGE3B_SHA256=',digest)
+          print('EXACT_CHANGED_GAME_ROWS=',changed)
+          print('EXACT_CHANGED_VENUE_NOTE_ROWS=',venue_changed)
+          print('ALL_OTHER_1927_GAME_RECORDS_BYTE_AND_FIELD_EQUIVALENT=YES')
+          PY
+      - name: Run exact current-main permanent Stage 3B preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/air-force-stage4-0052" "$RUNNER_TEMP/air-force-preflight-0052"
+          (cd permanent && PYTHONPATH=tools python tools/research_stage4.py preflight air-force "$RUNNER_TEMP/stage3b-owner-road-0052.zip" --output-dir "$RUNNER_TEMP/air-force-preflight-0052")
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])/'air-force-preflight-0052'
+          files=list(p.glob('*.json'))
+          assert files, 'permanent preflight did not emit any structured files'
+          reports=[json.loads(f.read_text()) for f in files]
+          pre=[x for x in reports if x.get('stage')=='STAGE_4_AUTHORING_PREFLIGHT']
+          assert len(pre)==1
+          assert pre[0]['status']=='PASS' and not pre[0]['defects'],pre[0]
+          assert pre[0]['ledger_rows']==1928
+          print('OWNER_CORRECTED_STAGE3B_PREFLIGHT=PASS')
+          PY
+      - name: Run exact merged-main permanent Stage 4 author and research acceptance
+        shell: bash
+        run: |
+          set +e
+          (cd permanent && PYTHONPATH=tools python tools/research_stage4.py author air-force "$RUNNER_TEMP/stage3b-owner-road-0052.zip" --main-sha 1cde43ea49415d64b4fe9b59b1b44610fcad1716 --output-dir "$RUNNER_TEMP/air-force-stage4-0052") > "$RUNNER_TEMP/air-force-stage4-0052/permanent-author-console.log" 2>&1
+          code=$?
+          echo "$code" > "$RUNNER_TEMP/air-force-stage4-0052/author-exit-code.txt"
+          exit 0
+      - name: Independently assert owner site, acceptance, and one-game immutable-parent parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,hashlib,json,os
+          from pathlib import Path
+          out=Path(os.environ['RUNNER_TEMP'])/'air-force-stage4-0052'
+          assert (out/'author-exit-code.txt').read_text().strip()=='0',(out/'permanent-author-console.log').read_text()[-10000:]
+          status=json.loads((out/'stage4-status.json').read_text())
+          assert status['status']=='COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY',status
+          assert status['closeout']['status']=='COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY'
+          check=json.loads((out/'closeout/stage4-research-check.json').read_text())
+          assert check['status']=='PASS' and len(check['errors'])==0,check
+          with (out/'package/source-games.csv').open(newline='',encoding='utf-8') as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==1928
+          ids={r['source_game_id']:r for r in rows}
+          assert len(ids)==1928
+          game=ids['AF-1959-60-006']
+          assert game['curated_site_type']=='OPPONENT_HOME',game
+          assert game['curated_venue_name']=='Alumni Hall'
+          assert game['city']=='Chicago' and game['state']=='IL'
+          assert game['team_score']=='63' and game['opponent_score']=='69'
+          assert game['played_result']=='L' and game['curated_game_type']=='NCAA_TOURNAMENT'
+          assert sum(bool(r['raw_text']) for r in rows)==1928
+          assert all(r['team_score'].isdigit() and r['opponent_score'].isdigit() for r in rows)
+          assert status['closeout']['owner_non_d1_scan_approved'] is False
+          assert status['closeout']['stage5_started'] is False
+          proof={
+              'schema_version':1,'kind':'AIR_FORCE_OWNER_ROAD_STAGE4_0052_EXACT_SUCCESS',
+              'status':'STAGE4_COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY',
+              'protected_main_sha':'1cde43ea49415d64b4fe9b59b1b44610fcad1716',
+              'immutable_original_stage3b_complete_commit':'53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745',
+              'binding_owner_ruling_commit':'5ff856c7a394ee07ea2457de622b33fe630a7aaf',
+              'game_id':'AF-1959-60-006',
+              'final_source_school_han':'AWAY',
+              'stage4_site_type':'OPPONENT_HOME',
+              'opponent_home_identity':'DePaul',
+              'physical_site':'Alumni Hall, Chicago, IL',
+              'game_count':1928,
+              'remaining_research_errors':0,
+              'owner_non_d1_scan_approved':False,
+              'stage5_started':False,
+              'basketball_data_global_mutations':0,
+              'input_sha256':hashlib.sha256((Path(os.environ['RUNNER_TEMP'])/'stage3b-owner-road-0052.zip').read_bytes()).hexdigest(),
+          }
+          (out/'owner-road-validation-proof.json').write_text(json.dumps(proof,indent=2)+'\n')
+          print(json.dumps(proof,indent=2))
+          PY
+      - name: Preserve all exact correction and authoring outputs on isolated branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$PWD/transport/research/air-force/stage4/owner-road-stage4-0052-result"
+          mkdir -p "$root"
+          if test -d "$RUNNER_TEMP/air-force-stage4-0052"; then cp -a "$RUNNER_TEMP/air-force-stage4-0052/." "$root/"; fi
+          if test -d "$RUNNER_TEMP/air-force-preflight-0052"; then cp -a "$RUNNER_TEMP/air-force-preflight-0052" "$root/permanent-preflight"; fi
+          if test -f "$RUNNER_TEMP/stage3b-owner-road-0052.zip"; then cp "$RUNNER_TEMP/stage3b-owner-road-0052.zip" "$root/"; fi
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('transport/research/air-force/stage4/owner-road-stage4-0052-result')
+          lines=[f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(root).as_posix()}"
+                 for p in sorted(root.rglob('*')) if p.is_file() and p.name!='SHA256SUMS.txt']
+          (root/'SHA256SUMS.txt').write_text('\n'.join(lines)+'\n')
+          PY
+          cd transport
+          git config user.name "Air Force owner-authorized research correction"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/air-force/stage3b/owner-road-correction-0052 research/air-force/stage4/owner-road-stage4-0052-result research/air-force/stage3b/owner-road-correction-input-0052.sha256
+          if ! git diff --cached --quiet; then
+            git commit -m "research(air-force): exact owner ROAD 0052 Stage 3B correction and Stage 4 validation"
+            git push origin HEAD:research/air-force-owner-road-0052-transport
+          fi
+      - name: Upload exact 0052 correction/replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: air-force-0052-owner-road-permanent-validation
+          path: transport/research/air-force/stage4/owner-road-stage4-0052-result/
+          if-no-files-found: warn
+          retention-days: 14
