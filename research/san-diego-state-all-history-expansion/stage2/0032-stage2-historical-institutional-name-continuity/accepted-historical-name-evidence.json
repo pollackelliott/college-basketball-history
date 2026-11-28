@@ -1,0 +1,403 @@
+{
+  "kind": "SDSU_STAGE2_HISTORICAL_INSTITUTIONAL_NAME_CONTINUITY_V1",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_2",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "research_parent_sha": "4532481d28df54c01cfa65c438caf55e7179c27f",
+  "prior_checkpoint": "0031-stage2-six-university-opponent-identity-tranche",
+  "census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "prior_authoring_sha256": "fdf509cbc70396b3adc1ef5d5a4f54659d22301fe776283cb733b637acfc9f14",
+  "prior_accepted_evidence_sha256": "d0bb5b966335712d0748c4df2cf8c6a3ca48ea1ab0d1c47a3bcd3f2d8ecad47c",
+  "reference_programs_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "reference_published_opponents_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "institutional_histories": {
+    "poly": {
+      "key": "cal-poly",
+      "display": "Cal Poly",
+      "d1": "Yes",
+      "url": [
+        "https://www.calpoly.edu/historical-fact/cal-poly-pomona-established",
+        "https://www.cpp.edu/aboutcpp/heritage.shtml"
+      ],
+      "method": "EXPLICIT_SLO_INSTITUTION_DISTINCT_FROM_CAL_POLY_POMONA",
+      "note": "Cal Poly-SLO literal explicitly identifies the San Luis Obispo institution; not Cal Poly Pomona; separate campus split 1966",
+      "published_base_rows": 4
+    },
+    "sb": {
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "d1": "Yes",
+      "url": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "note": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved",
+      "published_base_rows": 14
+    },
+    "la": {
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "d1": "No",
+      "url": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "note": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status",
+      "published_base_rows": 6
+    }
+  },
+  "accepted_new_label_records": [
+    {
+      "source_label": "*at Cal Poly SLO",
+      "first": "1949-50",
+      "last": "1949-50",
+      "count": 1,
+      "type": "REGULAR_SEASON",
+      "family": "poly",
+      "key": "cal-poly",
+      "display": "Cal Poly",
+      "current_d1": "Yes",
+      "resolution_method": "EXPLICIT_SLO_INSTITUTION_DISTINCT_FROM_CAL_POLY_POMONA",
+      "official_urls": [
+        "https://www.calpoly.edu/historical-fact/cal-poly-pomona-established",
+        "https://www.cpp.edu/aboutcpp/heritage.shtml"
+      ],
+      "provenance": "Cal Poly-SLO literal explicitly identifies the San Luis Obispo institution; not Cal Poly Pomona; separate campus split 1966"
+    },
+    {
+      "source_label": "*at Cal Poly-SLO",
+      "first": "1946-47",
+      "last": "1967-68",
+      "count": 20,
+      "type": "REGULAR_SEASON",
+      "family": "poly",
+      "key": "cal-poly",
+      "display": "Cal Poly",
+      "current_d1": "Yes",
+      "resolution_method": "EXPLICIT_SLO_INSTITUTION_DISTINCT_FROM_CAL_POLY_POMONA",
+      "official_urls": [
+        "https://www.calpoly.edu/historical-fact/cal-poly-pomona-established",
+        "https://www.cpp.edu/aboutcpp/heritage.shtml"
+      ],
+      "provenance": "Cal Poly-SLO literal explicitly identifies the San Luis Obispo institution; not Cal Poly Pomona; separate campus split 1966"
+    },
+    {
+      "source_label": "*at Cal State Los Angeles",
+      "first": "1950-51",
+      "last": "1969-70",
+      "count": 17,
+      "type": "REGULAR_SEASON",
+      "family": "la",
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "current_d1": "No",
+      "resolution_method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "official_urls": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "provenance": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status"
+    },
+    {
+      "source_label": "*at Santa Barbara",
+      "first": "1946-47",
+      "last": "1954-55",
+      "count": 9,
+      "type": "REGULAR_SEASON",
+      "family": "sb",
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "official_urls": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "provenance": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved"
+    },
+    {
+      "source_label": "*at Santa Barbara State",
+      "first": "1934-35",
+      "last": "1941-42",
+      "count": 6,
+      "type": "REGULAR_SEASON",
+      "family": "sb",
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "official_urls": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "provenance": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved"
+    },
+    {
+      "source_label": "*Cal Poly-SLO",
+      "first": "1946-47",
+      "last": "1967-68",
+      "count": 22,
+      "type": "REGULAR_SEASON",
+      "family": "poly",
+      "key": "cal-poly",
+      "display": "Cal Poly",
+      "current_d1": "Yes",
+      "resolution_method": "EXPLICIT_SLO_INSTITUTION_DISTINCT_FROM_CAL_POLY_POMONA",
+      "official_urls": [
+        "https://www.calpoly.edu/historical-fact/cal-poly-pomona-established",
+        "https://www.cpp.edu/aboutcpp/heritage.shtml"
+      ],
+      "provenance": "Cal Poly-SLO literal explicitly identifies the San Luis Obispo institution; not Cal Poly Pomona; separate campus split 1966"
+    },
+    {
+      "source_label": "*Cal State Los Angeles",
+      "first": "1950-51",
+      "last": "1967-68",
+      "count": 17,
+      "type": "REGULAR_SEASON",
+      "family": "la",
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "current_d1": "No",
+      "resolution_method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "official_urls": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "provenance": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status"
+    },
+    {
+      "source_label": "*Cal State Los Angeles (PG)",
+      "first": "1969-70",
+      "last": "1969-70",
+      "count": 1,
+      "type": "REGULAR_SEASON",
+      "family": "la",
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "current_d1": "No",
+      "resolution_method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "official_urls": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "provenance": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status"
+    },
+    {
+      "source_label": "*Santa Barbara",
+      "first": "1946-47",
+      "last": "1954-55",
+      "count": 10,
+      "type": "REGULAR_SEASON",
+      "family": "sb",
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "official_urls": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "provenance": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved"
+    },
+    {
+      "source_label": "*Santa Barbara State",
+      "first": "1933-34",
+      "last": "1941-42",
+      "count": 12,
+      "type": "REGULAR_SEASON",
+      "family": "sb",
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "official_urls": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "provenance": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved"
+    },
+    {
+      "source_label": "at *Cal State Los Angeles",
+      "first": "1956-57",
+      "last": "1956-57",
+      "count": 1,
+      "type": "REGULAR_SEASON",
+      "family": "la",
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "current_d1": "No",
+      "resolution_method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "official_urls": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "provenance": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status"
+    },
+    {
+      "source_label": "at Cal Poly-SLO",
+      "first": "1955-56",
+      "last": "1968-69",
+      "count": 2,
+      "type": "REGULAR_SEASON",
+      "family": "poly",
+      "key": "cal-poly",
+      "display": "Cal Poly",
+      "current_d1": "Yes",
+      "resolution_method": "EXPLICIT_SLO_INSTITUTION_DISTINCT_FROM_CAL_POLY_POMONA",
+      "official_urls": [
+        "https://www.calpoly.edu/historical-fact/cal-poly-pomona-established",
+        "https://www.cpp.edu/aboutcpp/heritage.shtml"
+      ],
+      "provenance": "Cal Poly-SLO literal explicitly identifies the San Luis Obispo institution; not Cal Poly Pomona; separate campus split 1966"
+    },
+    {
+      "source_label": "at Cal State Los Angeles",
+      "first": "1955-56",
+      "last": "1968-69",
+      "count": 2,
+      "type": "REGULAR_SEASON",
+      "family": "la",
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "current_d1": "No",
+      "resolution_method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "official_urls": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "provenance": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status"
+    },
+    {
+      "source_label": "at Santa Barbara State",
+      "first": "1938-39",
+      "last": "1938-39",
+      "count": 2,
+      "type": "REGULAR_SEASON",
+      "family": "sb",
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "official_urls": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "provenance": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved"
+    },
+    {
+      "source_label": "at Santa Barbara.",
+      "first": "1944-45",
+      "last": "1944-45",
+      "count": 2,
+      "type": "REGULAR_SEASON",
+      "family": "sb",
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "official_urls": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "provenance": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved"
+    },
+    {
+      "source_label": "Cal Poly-SLO",
+      "first": "1955-56",
+      "last": "1968-69",
+      "count": 3,
+      "type": "POSTSEASON|REGULAR_SEASON",
+      "family": "poly",
+      "key": "cal-poly",
+      "display": "Cal Poly",
+      "current_d1": "Yes",
+      "resolution_method": "EXPLICIT_SLO_INSTITUTION_DISTINCT_FROM_CAL_POLY_POMONA",
+      "official_urls": [
+        "https://www.calpoly.edu/historical-fact/cal-poly-pomona-established",
+        "https://www.cpp.edu/aboutcpp/heritage.shtml"
+      ],
+      "provenance": "Cal Poly-SLO literal explicitly identifies the San Luis Obispo institution; not Cal Poly Pomona; separate campus split 1966"
+    },
+    {
+      "source_label": "Cal State Los Angeles",
+      "first": "1949-50",
+      "last": "1955-56",
+      "count": 2,
+      "type": "REGULAR_SEASON",
+      "family": "la",
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "current_d1": "No",
+      "resolution_method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "official_urls": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "provenance": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status"
+    },
+    {
+      "source_label": "Santa Barbara State",
+      "first": "1937-38",
+      "last": "1937-38",
+      "count": 2,
+      "type": "REGULAR_SEASON",
+      "family": "sb",
+      "key": "uc-santa-barbara",
+      "display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_method": "UCSB_OFFICIAL_1921_1958_PREDECESSOR_CHRONOLOGY",
+      "official_urls": [
+        "https://www.library.ucsb.edu/special-collections/university-archives/ucsb-its-antecedent-institutions",
+        "https://www.ucsb.edu/about/history"
+      ],
+      "provenance": "Santa Barbara State Teachers College 1921–34, State College 1935–44, UC Santa Barbara predecessor from 1944; retrospective name labels preserved"
+    },
+    {
+      "source_label": "vs. Cal State Los Angeles (QF) (Evansville, Ind.)",
+      "first": "1956-57",
+      "last": "1956-57",
+      "count": 1,
+      "type": "POSTSEASON",
+      "family": "la",
+      "key": "cal-state-los-angeles",
+      "display": "Cal State Los Angeles",
+      "current_d1": "No",
+      "resolution_method": "LOS_ANGELES_STATE_COLLEGE_HISTORICAL_CONTINUITY_PUBLISHED_NON_D1_KEY",
+      "official_urls": [
+        "https://celebrate.calstatela.edu/first-decade/",
+        "https://www.calstatela.edu/univ/ppa/media/history.php"
+      ],
+      "provenance": "Founded 1947, men's basketball began 1948, later named Cal State LA; uses independent same-program published SDSU key and No status"
+    }
+  ],
+  "accepted_new_labels": 19,
+  "accepted_new_games": 132,
+  "new_families": {
+    "poly": {
+      "labels": 5,
+      "games": 48
+    },
+    "la": {
+      "labels": 7,
+      "games": 41
+    },
+    "sb": {
+      "labels": 7,
+      "games": 43
+    }
+  },
+  "cumulative_accepted_labels": 44,
+  "cumulative_accepted_games": 373,
+  "unresolved_label_count": 297,
+  "unresolved_game_count": 713,
+  "previous_authoring_records_byte_identical": true,
+  "no_han_inferred": true,
+  "no_venue_inferred": true,
+  "non_d1_future_owner_scan_candidate_key": "cal-state-los-angeles",
+  "source_1921_22_3_unknown_results_outside_games": true,
+  "stage2_complete": false
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "SDSU_STAGE2_HISTORICAL_NAME_CHECKPOINT_MANIFEST_V1",
+  "checkpoint": "0032-stage2-historical-institutional-name-continuity",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "4532481d28df54c01cfa65c438caf55e7179c27f",
+  "protected_main_sha_at_checkpoint": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "previous_checkpoint": "0031-stage2-six-university-opponent-identity-tranche",
+  "prior_stage4_opponents_sha256": "fdf509cbc70396b3adc1ef5d5a4f54659d22301fe776283cb733b637acfc9f14",
+  "prior_accepted_evidence_sha256": "d0bb5b966335712d0748c4df2cf8c6a3ca48ea1ab0d1c47a3bcd3f2d8ecad47c",
+  "source_census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "accepted_new_labels": 19,
+  "accepted_new_game_rows": 132,
+  "accepted_total_labels": 44,
+  "accepted_total_game_rows": 373,
+  "remaining_labels": 297,
+  "remaining_game_rows": 713,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "5a384fff0948cfbd406d14de87a2e887b03cc6104adce3c80fee4bd7d9034a9c",
+      "bytes_utf8": 28468
+    },
+    "accepted-historical-name-evidence.json": {
+      "sha256": "fdea704df7e2ee503c22d0c18d04335d303c83f11645624ea3e9632bbbe647b5",
+      "bytes_utf8": 16420
+    },
+    "research-status.json": {
+      "sha256": "6923a491deba4cb90826ddb4735009b1f798ac3e9b8552f6b8beb39420cfe35e",
+      "bytes_utf8": 1078
+    },
+    "research-findings.md": {
+      "sha256": "b7ceb46cc285328e5ad4a23e185b73bada3749cf682a92820de29030c9b39ffb",
+      "bytes_utf8": 2530
+    }
+  }
+}
