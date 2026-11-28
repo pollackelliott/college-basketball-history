@@ -15,16 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SOURCE_SHA: 4731f18332a67058801c9f9d0f449df862d67833
-      MAIN_SHA: 0181255ebb1a91d624cc62ef80a3edb6453d2fd0
+      MAIN_SHA: 242370fc551fd749c157c74d92917ddfafbe40e0
+      PARENT_MAIN_SHA: 0181255ebb1a91d624cc62ef80a3edb6453d2fd0
       RESEARCH_BASE_SHA: 3f5a15458aa468347e56e669327d6fe4c9c6ee69
       LEDGER_BLOB_SHA: e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e
       LEDGER_REL: research/air-force/stage3a3/tier1-execution-preflight-0031/structured-stage3a2-ledger.csv
       PARENT_DIR: research/air-force/stage3a3/tier1-execution-preflight-0031
       NEW_DIR: research/air-force/stage3a3/tier1-project-evidence-0032
-      SNAPSHOT_RUN: '46110520556'
-      SNAPSHOT_ARTIFACT_ID: '15249417494'
-      SNAPSHOT_NAME: research-stage3a3-tier1-state-0181255ebb1a91d624cc62ef80a3edb6453d2fd0
-      SNAPSHOT_DIGEST: sha256:fdd0190a5050f20816f122565c8fa453f8ee27d96abe82a786e736e7b0cbae75
+      SNAPSHOT_RUN: '46153935925'
+      SNAPSHOT_ARTIFACT_ID: '15266857325'
+      SNAPSHOT_NAME: research-stage3a3-tier1-state-242370fc551fd749c157c74d92917ddfafbe40e0
+      SNAPSHOT_DIGEST: sha256:e82a70187952ed5fb2cb67aba5a17bc5d32faa603c7a03ffb7acc478e360deab
     steps:
       - name: Check out the exact Research execution commit
         uses: actions/checkout@v4
@@ -67,7 +68,7 @@ jobs:
           parent=pathlib.Path(os.environ['PARENT_DIR'])
           manifest=json.loads((parent/'manifest.json').read_text())
           assert manifest['status']=='TIER1_TOOL_NOT_RUN_INPUT_TRANSPORT_BLOCKED'
-          assert manifest['protected_main_sha']==os.environ['MAIN_SHA']
+          assert manifest['protected_main_sha']==os.environ['PARENT_MAIN_SHA']
           assert manifest['research_base_sha']==os.environ['RESEARCH_BASE_SHA']
           assert len(manifest['files'])==25
           for f in manifest['files']:
@@ -156,13 +157,14 @@ jobs:
              'status':'COMPLETE',
              'school_key':'air-force',
              'research_base_sha':os.environ['RESEARCH_BASE_SHA'],
+             'parent_checkpoint_protected_main_sha':os.environ['PARENT_MAIN_SHA'],
              'protected_main_sha':os.environ['MAIN_SHA'],
              'research_parent_commit_sha':os.environ['SOURCE_SHA'],
              'workflow_execution_commit_sha':os.environ['GITHUB_SHA'],
              'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
              'workflow_run_url':f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
              'ledger':{'source_commit':os.environ['SOURCE_SHA'],'source_path':os.environ['LEDGER_REL'],'git_blob_sha':os.environ['LEDGER_BLOB_SHA'],'sha256':sha(ledger),'rows':1928,'regular_neutral':116},
-             'snapshot':{'run_id':int(os.environ['SNAPSHOT_RUN']),'artifact_id':int(os.environ['SNAPSHOT_ARTIFACT_ID']),'name':os.environ['SNAPSHOT_NAME'],'artifact_sha256_digest':os.environ['SNAPSHOT_DIGEST'],'manifest_sha256':sha(snap),'file_count':118,'reciprocal_file_count':115},
+             'snapshot':{'run_id':int(os.environ['SNAPSHOT_RUN']),'artifact_id':int(os.environ['SNAPSHOT_ARTIFACT_ID']),'name':os.environ['SNAPSHOT_NAME'],'artifact_sha256_digest':os.environ['SNAPSHOT_DIGEST'],'manifest_sha256':sha(snap),'file_count':119,'reciprocal_file_count':116},
              'tool':{'path':'tools/research_stage3a3_tier1.py','git_blob_sha':'f0027e9ef6ec7e3fc322eec7f2805ee1f927050e','source':'verified protected-main snapshot','algorithm_modified':False},
              'result_counts':{k:status[k] for k in ('neutral_rows','accepted_count','accepted_complete_count','accepted_partial_count','contradiction_count','unresolved_count','remaining_modern','remaining_historical')},
              'outcome':'STAGE_3A3_TIER1_COMPLETE_STAY_IN_STAGE_3A3',
