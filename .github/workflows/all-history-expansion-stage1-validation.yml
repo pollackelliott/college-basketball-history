@@ -63,13 +63,21 @@ jobs:
           python -m unittest discover -s tests -p 'test_remote_implementation_expansion_phase0.py' -v
           python -m unittest discover -s tests -p 'test_remote_implementation_expansion_startup.py' -v
           python -m unittest discover -s tests -p 'test_all_history_expansion_implementation_acceptance.py' -v
+      - name: Verify isolated immutable-baseline safety regressions
+        run: python -m unittest discover -s tests -p 'test_ci_immutable_uc_davis_baseline.py' -v
       - name: Rehearse actual immutable UC Davis seven-case venue population (read-only)
         shell: bash
         run: |
           set -euo pipefail
           git fetch --no-tags origin '+refs/heads/control/remote-implementation:refs/remotes/origin/control/remote-implementation'
-          test "$(git rev-parse refs/remotes/origin/main)" = 31cccfdac5b676bde3f914c63e7239ef7cb132d5
+          # Candidate tooling remains the checked-out PR HEAD. Frozen UC Davis
+          # basketball/reference data live only in an isolated exact-old-main
+          # clone, whose private origin/main is also pinned to that old SHA.
           mkdir -p /tmp/ucd-expansion-venue-readonly
+          python tools/ci_immutable_uc_davis_baseline.py \
+            --runtime . \
+            --output /tmp/ucd-expansion-venue-readonly/historical-main \
+            --baseline-sha 31cccfdac5b676bde3f914c63e7239ef7cb132d5
           git show e3156d4c611149bea24e026afefc78b53c6b9a1b:.remote-implementation/transports/uc-davis/uc-davis-expansion-0025-freeze-part-0001.txt | base64 --decode > /tmp/ucd-expansion-venue-readonly/freeze.zip
           git show 3b24750c2a78780d0916948b3733dd9c7155ef58:.remote-implementation/transports/uc-davis/uc-davis-owner-approved-preintegration-corrections-0005.json > /tmp/ucd-expansion-venue-readonly/owner.json
           git show b7f6961f1c228a169feee96f3da95cba9538e8fb:.remote-implementation/expansion-startup.json > /tmp/ucd-expansion-venue-readonly/startup.json
@@ -85,9 +93,12 @@ jobs:
           from all_history_expansion_phase0_preview import preview_phase0
           from expansion_implementation_stage1 import stage1
           from remote_implementation_expansion_startup import build_stage1_proof
-          repo = Path.cwd()
+          runtime = Path.cwd()
+          repo = Path("/tmp/ucd-expansion-venue-readonly/historical-main").resolve()
           root = Path("/tmp/ucd-expansion-venue-readonly")
           original = root / "freeze.zip"
+          from ci_immutable_uc_davis_baseline import verify_baseline
+          verify_baseline(repo, "31cccfdac5b676bde3f914c63e7239ef7cb132d5")
           startup = json.loads((root / "startup.json").read_bytes())
           reference = startup["owner_correction"]
           main = "31cccfdac5b676bde3f914c63e7239ef7cb132d5"
@@ -207,7 +218,7 @@ jobs:
               )
               # Data is exact protected main plus the projected package;
               # validator *software* must come from the PR candidate.
-              shutil.copyfile(repo / "tools" / "venue_reference.py",
+              shutil.copyfile(runtime / "tools" / "venue_reference.py",
                               candidate / "tools" / "venue_reference.py")
               for name in ("conferences.csv", "notes.md", "opponents.csv",
                            "source-games.csv", "source-notes.md", "venues.csv"):
@@ -217,8 +228,8 @@ jobs:
                   shutil.copyfile(preview / "references" / name,
                                   candidate / "data" / "reference" / name)
               validation = subprocess.run(
-                  [sys.executable, str(candidate / "tools" / "validate_data.py")],
-                  cwd=candidate, capture_output=True, text=True,
+                  [sys.executable, str(runtime / "tools" / "validate_data.py"), str(candidate)],
+                  cwd=runtime, capture_output=True, text=True,
               )
               if validation.returncode:
                   print("UC_DAVIS_PROJECTED_REPOSITORY_VALIDATION_FAILURE=" +
