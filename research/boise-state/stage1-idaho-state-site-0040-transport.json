@@ -1,0 +1,37 @@
+{
+  "checkpoint": 40,
+  "school_key": "boise-state",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "status": "STAGE_1_IN_PROGRESS",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "protected_main_at_start": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "49685dae6f90779cb57390d551896c94a9aa7301",
+  "immutable_research_base_sha": "1c3bb7f1d3231c604c413ed75a4afc17b0388089",
+  "portable_checkpoint_filename": "boise-state-stage1-idaho-state-reciprocal-site-reconciliation-0040.zip",
+  "portable_checkpoint_sha256": "c848cac4653b88aadd3bd4ed309b8e7129aafcdff6f18de168a4e68e39acbf68",
+  "portable_manifest_verified_members": 9,
+  "parent_0039_sha256": "4914db1968501bd1871f7870e8d5c72a41a6b2f6db3e2b8210b5479e051c7807",
+  "parent_archive_embedded_exact": true,
+  "historical_source_parent_0027_sha256": "f9a0e85a1a2c4a19076a55e6321f1c9df956bc72915038ec2167bc3346d42925",
+  "audit_parent_0028_sha256": "040edc01e7e81765e682c0831734a1d8218906b004ca33cdcae7215a7e091553",
+  "game_count": 254,
+  "accepted_games_unchanged": true,
+  "modified_rows": 14,
+  "modified_canonical_columns": [
+    "site_type",
+    "uncertainty"
+  ],
+  "compact_mirror_changed_columns": [
+    "site_type"
+  ],
+  "home_repairs": 8,
+  "opponent_home_repairs": 6,
+  "vs_unclassified": "BOISE-EXP-S1-ISU-1946-001",
+  "season_rows_unchanged": 38,
+  "residual_rows_unchanged": 40,
+  "official_jc_aggregate": 787,
+  "listed_jc_accepted": 194,
+  "arithmetic_difference_not_missing_ids": 593,
+  "source_url": "https://isubengals.com/sports/2014/6/18/MBB_0618144002.aspx?id=214"
+}
