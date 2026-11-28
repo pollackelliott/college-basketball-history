@@ -1,0 +1,50 @@
+{
+  "home_queue": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a2-home-queue.json",
+    "sha256": "955de60c6849bac99ca1baf7a569f0ec2ad4a3c175a1f76eb9ba3caba0929de3"
+  },
+  "input_ledger": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a0-input-ledger.csv",
+    "sha256": "c3fa28616c0a5a802f41f0f74d149031660cdcc2e0368bbe11a5ff69970a7e5e"
+  },
+  "neutral_historical_queue": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a3-historical-neutral-queue.json",
+    "sha256": "b6e187a4f6fe4d078f700cba380d45bc381b41b3841d8e38ea7b8e9f091b2ab4"
+  },
+  "neutral_modern_queue": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a3-modern-neutral-queue.json",
+    "sha256": "d62f76653030afb873e138cad7d48ae2fde28a30182e5b531febfc84a3344974"
+  },
+  "neutral_queue": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a3-neutral-queue.json",
+    "sha256": "8806940aaea6b4a7104fe57080d6e34c74b13ac66cbf556dd8c45fbb66f11901"
+  },
+  "opponent_home_queue": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a0-opponent-home-queue.json",
+    "sha256": "e0a5c8281b41eee83da9b6939181e97a3c17cde2e505ca2d477f12560bf90686"
+  },
+  "postseason_queue": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3b-postseason-handoff.json",
+    "sha256": "12479277261b7b214640665eba1eb04f373f6a57142c00b610de15ab0a6b59e5"
+  },
+  "stage4_authoring_institutional-scope": {
+    "path": "/home/runner/work/_temp/stage3a0/stage4-authoring/institutional-scope.json",
+    "sha256": "415057e65eaa502a9de35b696a35911ad1629f654c1801d051e3dc52facad9e9"
+  },
+  "stage4_authoring_opponents": {
+    "path": "/home/runner/work/_temp/stage3a0/stage4-authoring/opponents.csv",
+    "sha256": "9291d8880d8fdcb0cdac7cfade612fab9a46559bde9d31761047030b4900512f"
+  },
+  "status": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a0-status.json",
+    "sha256": "8aea222938124dfb326b0a526ee5cb239c14f8542e792195806261ab2a3822a6"
+  },
+  "summary": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a0-summary.json",
+    "sha256": "8aea222938124dfb326b0a526ee5cb239c14f8542e792195806261ab2a3822a6"
+  },
+  "unknown_queue": {
+    "path": "/home/runner/work/_temp/stage3a0/stage3a1-unknown-han-queue.json",
+    "sha256": "2b8d4c47e1fb8ca4f0fb692b02518b4f7ca0cf0da399df10ce00b9a27cd36c5d"
+  }
+}

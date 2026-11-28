@@ -1,0 +1,32 @@
+{
+  "input_stage2_checkpoint": "research/air-force/stage2/game-type-taxonomy-repair-0024",
+  "kind": "AIR_FORCE_STAGE3A0_GITHUB_ACTIONS_EXACT_OUTPUT_PROMOTION_V1",
+  "next_stage": "STAGE_3A_1_OWNER_PROCEED_REQUIRED",
+  "no_external_historical_research": true,
+  "permanent_tool_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "protected_main_sha_at_promotion": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "research_branch_exact_execution_sha": "6a4c7bae6e10654a39d24adf7a83097b0991d9c4",
+  "source_artifact_id": 15245978396,
+  "source_artifact_name": "air-force-stage3a0-0024-a11cccf944492e4d968edbeef4111ebad150fcec",
+  "source_artifact_zip_sha256": "4992a9cc0269a43bdc903b72ce445fe2e60c0d724d62d128586e2d43fbdb2133",
+  "source_workflow_run_id": 46102773071,
+  "source_workflow_run_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46102773071",
+  "stage4_authoring_carried_byte_exact": true,
+  "status": "STAGE3A0_COMPLETE",
+  "tool_output_members_sha256": {
+    "manifest.json": "8433b797bfa4f2454c39052695dae0ebe79db561baa7af3eb95c989b64d3cf68",
+    "stage3a0-input-ledger.csv": "c3fa28616c0a5a802f41f0f74d149031660cdcc2e0368bbe11a5ff69970a7e5e",
+    "stage3a0-opponent-home-queue.json": "e0a5c8281b41eee83da9b6939181e97a3c17cde2e505ca2d477f12560bf90686",
+    "stage3a0-status.json": "8aea222938124dfb326b0a526ee5cb239c14f8542e792195806261ab2a3822a6",
+    "stage3a0-summary.json": "8aea222938124dfb326b0a526ee5cb239c14f8542e792195806261ab2a3822a6",
+    "stage3a1-unknown-han-queue.json": "2b8d4c47e1fb8ca4f0fb692b02518b4f7ca0cf0da399df10ce00b9a27cd36c5d",
+    "stage3a2-home-queue.json": "955de60c6849bac99ca1baf7a569f0ec2ad4a3c175a1f76eb9ba3caba0929de3",
+    "stage3a3-historical-neutral-queue.json": "b6e187a4f6fe4d078f700cba380d45bc381b41b3841d8e38ea7b8e9f091b2ab4",
+    "stage3a3-modern-neutral-queue.json": "d62f76653030afb873e138cad7d48ae2fde28a30182e5b531febfc84a3344974",
+    "stage3a3-neutral-queue.json": "8806940aaea6b4a7104fe57080d6e34c74b13ac66cbf556dd8c45fbb66f11901",
+    "stage3b-postseason-handoff.json": "12479277261b7b214640665eba1eb04f373f6a57142c00b610de15ab0a6b59e5",
+    "stage4-authoring/institutional-scope.json": "415057e65eaa502a9de35b696a35911ad1629f654c1801d051e3dc52facad9e9",
+    "stage4-authoring/opponents.csv": "9291d8880d8fdcb0cdac7cfade612fab9a46559bde9d31761047030b4900512f"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "entry_mode": "checkpoint_zip",
+  "external_historical_research_used": false,
+  "input_artifact": "/home/runner/work/_temp/stage2-checkpoint-0024.zip",
+  "input_artifact_sha256": "b6496faae1930a1c8cb6ad8b21199b5e0e2f62dcf53846e928f6c2a619387261",
+  "input_checkpoint_member": "structured-stage2-ledger.csv",
+  "input_ledger": "/home/runner/work/_temp/stage3a0/stage3a0-input-ledger.csv",
+  "input_ledger_sha256": "c3fa28616c0a5a802f41f0f74d149031660cdcc2e0368bbe11a5ff69970a7e5e",
+  "ledger_rows": 1928,
+  "neutral_era_census": {
+    "HISTORICAL_1995_96_OR_EARLIER": 67,
+    "MODERN_1996_97_PLUS": 48
+  },
+  "next_action": "STOP_AT_STAGE_3A0_BOUNDARY",
+  "next_bounded_assignment": "Stage 3A-1 \u2014 H/A/N completion",
+  "partition": {
+    "postseason": 62,
+    "regular_season": 1866,
+    "unclassified": 0
+  },
+  "project_evidence_reuse": {
+    "deferred_to": [
+      "STAGE_3A1",
+      "STAGE_3A2",
+      "STAGE_3A3_TIER1"
+    ],
+    "performed_in_stage3a0": false,
+    "reason": "Stage 3A-0 is checkpoint-only census/partition."
+  },
+  "project_evidence_reuse_deferred": true,
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "readiness": {
+    "blocking_defects": {},
+    "date_blank_count": 0,
+    "ready": true
+  },
+  "regular_season_site_census": {
+    "HOME": 958,
+    "NEUTRAL": 115,
+    "OPPONENT_HOME": 766,
+    "UNKNOWN": 27
+  },
+  "repository_state_required": false,
+  "schema_version": 5,
+  "school_key": "air-force",
+  "site_type_defaulted_to_unknown_count": 0,
+  "source_ledger_sha256": "e46efcf79229e3fa5b114f91948abb78f94446e0eb034d059e3ba8f7d39c9c1d",
+  "stage4_authoring_carried": {
+    "institutional-scope.json": {
+      "input_member": "stage4-authoring/institutional-scope.json",
+      "output_path": "/home/runner/work/_temp/stage3a0/stage4-authoring/institutional-scope.json",
+      "sha256": "415057e65eaa502a9de35b696a35911ad1629f654c1801d051e3dc52facad9e9"
+    },
+    "opponents.csv": {
+      "input_member": "stage4-authoring/opponents.csv",
+      "output_path": "/home/runner/work/_temp/stage3a0/stage4-authoring/opponents.csv",
+      "sha256": "9291d8880d8fdcb0cdac7cfade612fab9a46559bde9d31761047030b4900512f"
+    }
+  },
+  "status": "COMPLETE"
+}
