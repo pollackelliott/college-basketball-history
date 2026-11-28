@@ -1,0 +1,502 @@
+{
+  "kind": "SDSU_STAGE2_UNIQUE_RESEARCH_BASE_KEY_COHORT_0036_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "parent_research_head": "28c955430a1714a97f7ba2cf1926548962e76274",
+  "prior_checkpoint": "0035-stage2-five-historical-california-college-opponents",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "source_label_census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "parent_opponents_sha256": "d2ad8e066e51f901470d867084feed6f694a3b502184284aa55b8dfbac14ccdf",
+  "base_programs_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "inherited_published_sdsu_opponents_git_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "selection": "First 25 remaining original Stage 2 literal labels with exactly one candidate key across immutable research-base registry and inherited published SDSU identity evidence; descending game count, then ascending literal label; 25-label bounded cohort.",
+  "new_labels": 25,
+  "new_games": 34,
+  "accepted_rows": [
+    {
+      "source_literal": "at Southern California",
+      "game_count": 3,
+      "first_season": "1950-51",
+      "last_season": "1953-54",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "usc",
+      "canonical_name": "USC",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_PUBLISHED_SDSU_OPPONENTS",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "",
+        "exact_published": "usc",
+        "prefix_published": "usc"
+      }
+    },
+    {
+      "source_literal": "at Nevada-Reno",
+      "game_count": 2,
+      "first_season": "1956-57",
+      "last_season": "1956-57",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "nevada",
+      "canonical_name": "Nevada",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_PUBLISHED_SDSU_OPPONENTS",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "",
+        "exact_published": "nevada",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "Brigham Young",
+      "game_count": 2,
+      "first_season": "1940-41",
+      "last_season": "1940-41",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "",
+      "canonical_key": "byu",
+      "canonical_name": "BYU",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_PUBLISHED_SDSU_OPPONENTS",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "",
+        "exact_published": "byu",
+        "prefix_published": "byu"
+      }
+    },
+    {
+      "source_literal": "California",
+      "game_count": 2,
+      "first_season": "1939-40",
+      "last_season": "1941-42",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "",
+      "canonical_key": "california",
+      "canonical_name": "California",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "california",
+        "prefix_registry": "california",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "Evansville",
+      "game_count": 2,
+      "first_season": "1961-62",
+      "last_season": "1966-67",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "",
+      "canonical_key": "evansville",
+      "canonical_name": "Evansville",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "evansville",
+        "prefix_registry": "evansville",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "Northern Arizona",
+      "game_count": 2,
+      "first_season": "1946-47",
+      "last_season": "1952-53",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "",
+      "canonical_key": "northern-arizona",
+      "canonical_name": "Northern Arizona",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "northern-arizona",
+        "prefix_registry": "northern-arizona",
+        "exact_published": "northern-arizona",
+        "prefix_published": "northern-arizona"
+      }
+    },
+    {
+      "source_literal": "Southern California",
+      "game_count": 2,
+      "first_season": "1938-39",
+      "last_season": "1938-39",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "",
+      "canonical_key": "usc",
+      "canonical_name": "USC",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_PUBLISHED_SDSU_OPPONENTS",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "",
+        "exact_published": "usc",
+        "prefix_published": "usc"
+      }
+    },
+    {
+      "source_literal": "Wichita State",
+      "game_count": 2,
+      "first_season": "1951-52",
+      "last_season": "1951-52",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "",
+      "canonical_key": "wichita-state",
+      "canonical_name": "Wichita State",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "wichita-state",
+        "prefix_registry": "wichita-state",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "*at Cal State Fullerton",
+      "game_count": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "LEADING_ASTERISK|AT_PREFIX",
+      "canonical_key": "cal-state-fullerton",
+      "canonical_name": "Cal State Fullerton",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "cal-state-fullerton",
+        "exact_published": "cal-state-fullerton",
+        "prefix_published": "cal-state-fullerton"
+      }
+    },
+    {
+      "source_literal": "*Cal State Fullerton",
+      "game_count": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "LEADING_ASTERISK",
+      "canonical_key": "cal-state-fullerton",
+      "canonical_name": "Cal State Fullerton",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "cal-state-fullerton",
+        "exact_published": "",
+        "prefix_published": "cal-state-fullerton"
+      }
+    },
+    {
+      "source_literal": "at Ball State",
+      "game_count": 1,
+      "first_season": "1968-69",
+      "last_season": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "ball-state",
+      "canonical_name": "Ball State",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "ball-state",
+        "exact_published": "",
+        "prefix_published": "ball-state"
+      }
+    },
+    {
+      "source_literal": "at Cal State Northridge",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "cal-state-northridge",
+      "canonical_name": "CSUN",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "cal-state-northridge",
+        "exact_published": "cal-state-northridge",
+        "prefix_published": "cal-state-northridge"
+      }
+    },
+    {
+      "source_literal": "at California",
+      "game_count": 1,
+      "first_season": "1940-41",
+      "last_season": "1940-41",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "california",
+      "canonical_name": "California",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "california",
+        "exact_published": "california",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Creighton",
+      "game_count": 1,
+      "first_season": "1948-49",
+      "last_season": "1948-49",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "creighton",
+      "canonical_name": "Creighton",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "creighton",
+        "exact_published": "creighton",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Denver",
+      "game_count": 1,
+      "first_season": "1962-63",
+      "last_season": "1962-63",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "denver",
+      "canonical_name": "Denver",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "denver",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Indiana State",
+      "game_count": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "indiana-state",
+      "canonical_name": "Indiana State",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "indiana-state",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Iowa State",
+      "game_count": 1,
+      "first_season": "1963-64",
+      "last_season": "1963-64",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "iowa-state",
+      "canonical_name": "Iowa State",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "iowa-state",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Marquette",
+      "game_count": 1,
+      "first_season": "1948-49",
+      "last_season": "1948-49",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "marquette",
+      "canonical_name": "Marquette",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "marquette",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Minnesota",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "minnesota",
+      "canonical_name": "Minnesota",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "minnesota",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Northern Colorado",
+      "game_count": 1,
+      "first_season": "1962-63",
+      "last_season": "1962-63",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "northern-colorado",
+      "canonical_name": "Northern Colorado",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "northern-colorado",
+        "exact_published": "northern-colorado",
+        "prefix_published": "northern-colorado"
+      }
+    },
+    {
+      "source_literal": "at Sacramento State",
+      "game_count": 1,
+      "first_season": "1956-57",
+      "last_season": "1956-57",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "sacramento-state",
+      "canonical_name": "Sacramento State",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "sacramento-state",
+        "exact_published": "",
+        "prefix_published": "sacramento-state"
+      }
+    },
+    {
+      "source_literal": "at San Francisco",
+      "game_count": 1,
+      "first_season": "1954-55",
+      "last_season": "1954-55",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "san-francisco",
+      "canonical_name": "San Francisco",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "san-francisco",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Seattle",
+      "game_count": 1,
+      "first_season": "1954-55",
+      "last_season": "1954-55",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "seattle-u",
+      "canonical_name": "Seattle",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "seattle-u",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Stanford",
+      "game_count": 1,
+      "first_season": "1940-41",
+      "last_season": "1940-41",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "stanford",
+      "canonical_name": "Stanford",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_REGISTRY",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "stanford",
+        "exact_published": "",
+        "prefix_published": ""
+      }
+    },
+    {
+      "source_literal": "at Texas-El Paso",
+      "game_count": 1,
+      "first_season": "1947-48",
+      "last_season": "1947-48",
+      "game_types": "REGULAR_SEASON",
+      "raw_markers": "AT_PREFIX",
+      "canonical_key": "utep",
+      "canonical_name": "UTEP",
+      "current_d1": "Yes",
+      "origin": "RESEARCH_BASE_PUBLISHED_SDSU_OPPONENTS",
+      "original_candidate_fields": {
+        "exact_registry": "",
+        "prefix_registry": "",
+        "exact_published": "utep",
+        "prefix_published": ""
+      }
+    }
+  ],
+  "institutional_corroboration": [
+    {
+      "topic": "Nevada-Reno continuity",
+      "source_literal": "at Nevada-Reno",
+      "url": "https://www.unr.edu/nevada-today/news/2026/history-of-the-brand",
+      "note": "Official Nevada-Reno naming in 1969 postdates original 1956-57 source; retained as the same Reno campus institution, without modifying literal"
+    },
+    {
+      "topic": "Texas-El Paso continuity",
+      "source_literal": "at Texas-El Paso",
+      "url": "https://www.utep.edu/hoop/section-1/history-and-mission.html",
+      "note": "UTEP was Texas Western before 1967; source 1947-48 geographic label retained rather than retroactively substituting formal period name"
+    },
+    {
+      "topic": "Seattle U midcentury basketball",
+      "source_literal": "at Seattle",
+      "url": "https://www.seattleu.edu/newsroom/2025/obrien-name-continues-to-resonate.php",
+      "note": "Seattle University official 1949-era basketball activity; same program identity as immutable census Seattle key"
+    }
+  ],
+  "previous_103_rows_byte_for_byte_unchanged": true,
+  "stage1_games": 1086,
+  "original_games_changed": 0,
+  "unidentified_1921_22_results_outside_ledger": 3,
+  "cumulative_labels": 128,
+  "cumulative_games": 758,
+  "cumulative_distinct_opponent_keys": 53,
+  "exact_unresolved_labels": 213,
+  "exact_unresolved_games": 328,
+  "unresolved_queue_file": "remaining-unresolved-opponent-labels.csv",
+  "site_venue_inferences": 0,
+  "full_structured_stage2_ledger_authored": false,
+  "stage2_complete": false,
+  "stage3_started": false
+}
