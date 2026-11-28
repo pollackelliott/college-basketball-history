@@ -1,0 +1,469 @@
+{
+  "kind": "SDSU_STAGE2_EXACT_IMMUTABLE_REGISTRY_COHORT_0034_V1",
+  "school_key": "san-diego-state",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "source_research_parent_sha": "8650085ebe3d429a657a0e76e1fb86f66d74b736",
+  "prior_checkpoint": "0033-stage2-southern-california-college-opponent-identities",
+  "input_census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "prior_mapping_sha256": "db03ec1fc0ebc01390e326050e7e493b60134663d1abb7275e365cae41b22955",
+  "base_registry_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "base_published_sdsu_opponents_git_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "selection": "First 25 unmatched literal labels ranked by count descending then literal ascending among unique exact research-base registry-name matches after removing only initial * and/or at prefix",
+  "accepted_rows": [
+    {
+      "source_literal": "UCLA",
+      "games": 9,
+      "first_season": "1925-26",
+      "last_season": "1940-41",
+      "game_types": "REGULAR_SEASON",
+      "key": "ucla",
+      "display": "UCLA",
+      "current_d1": "Yes",
+      "registry_matched_name": "UCLA",
+      "prefix_tokens": [],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 7,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "Arizona State",
+      "games": 8,
+      "first_season": "1937-38",
+      "last_season": "1957-58",
+      "game_types": "REGULAR_SEASON",
+      "key": "arizona-state",
+      "display": "Arizona State",
+      "current_d1": "Yes",
+      "registry_matched_name": "Arizona State",
+      "prefix_tokens": [],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 11,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "*at Cal State Northridge",
+      "games": 7,
+      "first_season": "1961-62",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "key": "cal-state-northridge",
+      "display": "CSUN",
+      "current_d1": "Yes",
+      "registry_matched_name": "Cal State Northridge",
+      "prefix_tokens": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 6,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "*Cal State Northridge",
+      "games": 7,
+      "first_season": "1961-62",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "key": "cal-state-northridge",
+      "display": "CSUN",
+      "current_d1": "Yes",
+      "registry_matched_name": "Cal State Northridge",
+      "prefix_tokens": [
+        "LEADING_ASTERISK"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 6,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Arizona",
+      "games": 7,
+      "first_season": "1946-47",
+      "last_season": "1959-60",
+      "game_types": "REGULAR_SEASON",
+      "key": "arizona",
+      "display": "Arizona",
+      "current_d1": "Yes",
+      "registry_matched_name": "Arizona",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 18,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Cal State Fullerton",
+      "games": 6,
+      "first_season": "1963-64",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "key": "cal-state-fullerton",
+      "display": "Cal State Fullerton",
+      "current_d1": "Yes",
+      "registry_matched_name": "Cal State Fullerton",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 12,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "Cal State Fullerton",
+      "games": 5,
+      "first_season": "1963-64",
+      "last_season": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "cal-state-fullerton",
+      "display": "Cal State Fullerton",
+      "current_d1": "Yes",
+      "registry_matched_name": "Cal State Fullerton",
+      "prefix_tokens": [],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 12,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Bradley",
+      "games": 4,
+      "first_season": "1947-48",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "key": "bradley",
+      "display": "Bradley",
+      "current_d1": "Yes",
+      "registry_matched_name": "Bradley",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 1,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Drake",
+      "games": 4,
+      "first_season": "1947-48",
+      "last_season": "1963-64",
+      "game_types": "REGULAR_SEASON",
+      "key": "drake",
+      "display": "Drake",
+      "current_d1": "Yes",
+      "registry_matched_name": "Drake",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 2,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Portland",
+      "games": 4,
+      "first_season": "1954-55",
+      "last_season": "1964-65",
+      "game_types": "REGULAR_SEASON",
+      "key": "portland",
+      "display": "Portland",
+      "current_d1": "Yes",
+      "registry_matched_name": "Portland",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 3,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at San Diego",
+      "games": 4,
+      "first_season": "1963-64",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "key": "san-diego",
+      "display": "San Diego",
+      "current_d1": "Yes",
+      "registry_matched_name": "San Diego",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 23,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at UCLA",
+      "games": 4,
+      "first_season": "1922-23",
+      "last_season": "1952-53",
+      "game_types": "REGULAR_SEASON",
+      "key": "ucla",
+      "display": "UCLA",
+      "current_d1": "Yes",
+      "registry_matched_name": "UCLA",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 7,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "San Diego",
+      "games": 4,
+      "first_season": "1962-63",
+      "last_season": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "san-diego",
+      "display": "San Diego",
+      "current_d1": "Yes",
+      "registry_matched_name": "San Diego",
+      "prefix_tokens": [],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 23,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "*at Pacific",
+      "games": 3,
+      "first_season": "1946-47",
+      "last_season": "1948-49",
+      "game_types": "REGULAR_SEASON",
+      "key": "pacific",
+      "display": "Pacific",
+      "current_d1": "Yes",
+      "registry_matched_name": "Pacific",
+      "prefix_tokens": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 8,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "*Pacific",
+      "games": 3,
+      "first_season": "1946-47",
+      "last_season": "1948-49",
+      "game_types": "REGULAR_SEASON",
+      "key": "pacific",
+      "display": "Pacific",
+      "current_d1": "Yes",
+      "registry_matched_name": "Pacific",
+      "prefix_tokens": [
+        "LEADING_ASTERISK"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 8,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "Arizona",
+      "games": 3,
+      "first_season": "1945-46",
+      "last_season": "1957-58",
+      "game_types": "REGULAR_SEASON",
+      "key": "arizona",
+      "display": "Arizona",
+      "current_d1": "Yes",
+      "registry_matched_name": "Arizona",
+      "prefix_tokens": [],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 18,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Arizona State",
+      "games": 3,
+      "first_season": "1953-54",
+      "last_season": "1958-59",
+      "game_types": "REGULAR_SEASON",
+      "key": "arizona-state",
+      "display": "Arizona State",
+      "current_d1": "Yes",
+      "registry_matched_name": "Arizona State",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 11,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Evansville",
+      "games": 3,
+      "first_season": "1961-62",
+      "last_season": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "evansville",
+      "display": "Evansville",
+      "current_d1": "Yes",
+      "registry_matched_name": "Evansville",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": false,
+      "existing_baseline_key_rows": 0,
+      "method": "EXACT_IMMUTABLE_REGISTRY_NAME"
+    },
+    {
+      "source_literal": "New Mexico State",
+      "games": 3,
+      "first_season": "1940-41",
+      "last_season": "1947-48",
+      "game_types": "REGULAR_SEASON",
+      "key": "new-mexico-state",
+      "display": "New Mexico State",
+      "current_d1": "Yes",
+      "registry_matched_name": "New Mexico State",
+      "prefix_tokens": [],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 4,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "*at UCLA",
+      "games": 2,
+      "first_season": "1926-27",
+      "last_season": "1926-27",
+      "game_types": "REGULAR_SEASON",
+      "key": "ucla",
+      "display": "UCLA",
+      "current_d1": "Yes",
+      "registry_matched_name": "UCLA",
+      "prefix_tokens": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 7,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Northern Illinois",
+      "games": 2,
+      "first_season": "1967-68",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "key": "northern-illinois",
+      "display": "Northern Illinois",
+      "current_d1": "Yes",
+      "registry_matched_name": "Northern Illinois",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 2,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Southern Illinois",
+      "games": 2,
+      "first_season": "1965-66",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "key": "southern-illinois",
+      "display": "Southern Illinois",
+      "current_d1": "Yes",
+      "registry_matched_name": "Southern Illinois",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": false,
+      "existing_baseline_key_rows": 0,
+      "method": "EXACT_IMMUTABLE_REGISTRY_NAME"
+    },
+    {
+      "source_literal": "at Tulsa",
+      "games": 2,
+      "first_season": "1952-53",
+      "last_season": "1966-67",
+      "game_types": "REGULAR_SEASON",
+      "key": "tulsa",
+      "display": "Tulsa",
+      "current_d1": "Yes",
+      "registry_matched_name": "Tulsa",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 5,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at UNLV",
+      "games": 2,
+      "first_season": "1966-67",
+      "last_season": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "unlv",
+      "display": "UNLV",
+      "current_d1": "Yes",
+      "registry_matched_name": "UNLV",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 62,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    },
+    {
+      "source_literal": "at Wichita State",
+      "games": 2,
+      "first_season": "1952-53",
+      "last_season": "1966-67",
+      "game_types": "REGULAR_SEASON",
+      "key": "wichita-state",
+      "display": "Wichita State",
+      "current_d1": "Yes",
+      "registry_matched_name": "Wichita State",
+      "prefix_tokens": [
+        "AT_PREFIX"
+      ],
+      "published_key_reused": true,
+      "existing_baseline_key_rows": 2,
+      "method": "EXACT_IMMUTABLE_REGISTRY_PLUS_PUBLISHED_KEY"
+    }
+  ],
+  "accepted_new_labels": 25,
+  "accepted_new_games": 103,
+  "accepted_current_d1_program_keys": 17,
+  "by_program_key": {
+    "ucla": 15,
+    "arizona-state": 11,
+    "cal-state-northridge": 14,
+    "arizona": 10,
+    "cal-state-fullerton": 11,
+    "bradley": 4,
+    "drake": 4,
+    "portland": 4,
+    "san-diego": 8,
+    "pacific": 6,
+    "evansville": 3,
+    "new-mexico-state": 3,
+    "northern-illinois": 2,
+    "southern-illinois": 2,
+    "tulsa": 2,
+    "unlv": 2,
+    "wichita-state": 2
+  },
+  "cumulative_mapped_labels": 88,
+  "cumulative_mapped_games": 671,
+  "cumulative_distinct_opponent_keys": 30,
+  "remaining_unadjudicated_labels": 253,
+  "remaining_unadjudicated_games": 415,
+  "unchanged_previous_63_mapping_rows": true,
+  "stage1_accepted_competitive_games": 1086,
+  "stage1_three_unidentified_games_not_canonical": true,
+  "source_game_rows_changed": 0,
+  "source_site_type_inferences": 0,
+  "official_series_corroborations": {
+    "ucla": "https://goaztecs.com/news/2012/11/27/less-than-1000-tickets-remain-for-sdsu-ucla-matchup",
+    "cal-state-northridge": "https://goaztecs.com/news/2001/11/30/aztecs-and-matadors-set-to-meet-in-mens-basketball",
+    "san-diego": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/usdtoreros.com/documents/2024/6/25/6-22-24_USD_MBB_Record_Book_Through_2023_24_Season_FINAL.pdf"
+  },
+  "stage2_complete": false
+}
