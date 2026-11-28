@@ -1,0 +1,297 @@
+name: SDSU Stage 3A-1 Fresno institutional 25-row bounded reconciliation
+on:
+  push:
+    branches:
+      - research/san-diego-state-all-history-expansion
+    paths:
+      - .github/workflows/sdsu-stage3a1-fresno-reciprocal-25.yml
+permissions:
+  contents: write
+jobs:
+  one-institutional-family:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current Research branch with exact ancestry
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Validate 0054 and review exact 25 Fresno State institutional reciprocal rows
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import collections,csv,datetime,hashlib,json,pathlib,re,subprocess
+          root=pathlib.Path("research/san-diego-state-all-history-expansion")
+          previous=root/"stage3a/0054-stage3a1-accepted-project-source-class-pass"
+          stage0=root/"stage3a/0053-stage3a0-local-mechanical-census"
+          source=root/"stage2/0052-stage2-complete-exact-source-provenance"
+          target=root/"stage3a/0055-stage3a1-fresno-25-institutional-reciprocal-tranche"
+          parent="d88765d6f2168ac7f0a0a73b3fea184f75ead805"
+          main="242370fc551fd749c157c74d92917ddfafbe40e0"
+          base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          fresno15="https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf"
+          fresno19="https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+          def digest(b):return hashlib.sha256(b).hexdigest()
+          def fail(cond,msg):
+              if not cond:raise AssertionError("SDSU_STAGE3A1_FRESNO_BOUNDED_AUTHORITY: "+msg)
+          def records(path):
+              with path.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          def obj(path):return json.loads(path.read_text(encoding="utf-8"))
+          def write_json(p,x):p.write_text(json.dumps(x,indent=2,sort_keys=True,ensure_ascii=False)+"\n",encoding="utf-8")
+          def write_csv(path,headers,items):
+              with path.open("w",newline="",encoding="utf-8") as handle:
+                  w=csv.DictWriter(handle,fieldnames=headers,extrasaction="raise")
+                  w.writeheader()
+                  w.writerows(items)
+          def source_date(raw,season):
+              m=re.fullmatch(r"([JF])\.(\d{1,2})",raw or "")
+              fail(m is not None,"unsupported date token "+str(raw))
+              y=int(season.split("-")[0])+1
+              return f"{y}-{1 if m.group(1)=='J' else 2:02d}-{int(m.group(2)):02d}"
+          head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          fail(subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()==parent,"unexpected parent")
+          fail(subprocess.check_output(["git","diff","--name-only",parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-fresno-reciprocal-25.yml"],"one bounded workflow-only change")
+          fail(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main advanced")
+          fail(subprocess.run(["git","cat-file","-e",base+"^{commit}"],capture_output=True).returncode==0,"immutable research base missing")
+          pm=obj(previous/"checkpoint-manifest.json")
+          ps=obj(previous/"stage3a1-summary.json")
+          fail(pm["parent_research_head"]=="48f83aab80b952c522550be6a77fd4b154699ace" and pm["immutable_research_base_sha"]==base,"parent 0054 manifest ancestry")
+          fail(ps["status"]=="IN_PROGRESS" and ps["stage3a1_complete"] is False,"parent Stage 3A-1 state")
+          fail(ps["accepted_site_decisions"]==434 and ps["remaining_unknown_regular"]==609,"parent Stage 3A-1 population")
+          fail(ps["regular_site_census"]=={"HOME":23,"OPPONENT_HOME":410,"NEUTRAL":1,"UNKNOWN":609},"parent site census")
+          for name,entry in pm["files"].items():
+              buf=(previous/name).read_bytes()
+              fail(len(buf)==entry["bytes"] and digest(buf)==entry["sha256"],"parent manifested member "+name)
+          sm=obj(source/"manifest.json")
+          fail(sm["stage2_complete"] is True and sm["immutable_research_base_sha"]==base,"Stage 2 authority")
+          for name,spec in sm["files"].items():
+              b=(source/name).read_bytes()
+              fail(digest(b)==spec["sha256"] and len(b)==spec["bytes"],"Stage 2 member "+name)
+          status0=obj(stage0/"stage3a0-status.json")
+          fail(status0["status"]=="COMPLETE" and status0["ledger_rows"]==1086 and status0["protected_main_sha"]==main,"Stage 3A-0 base")
+          ledger=records(previous/"stage3a1-working-ledger.csv")
+          unknown=records(previous/"stage3a1-remaining-unknown-queue.csv")
+          accepted=records(previous/"stage3a1-supported-site-decisions.csv")
+          fail(len(ledger)==1086 and len(unknown)==609 and len(accepted)==434,"parent population")
+          byid={r["research_game_id"]:r for r in ledger}
+          unknown_byid={r["research_game_id"]:r for r in unknown}
+          fail(len(byid)==1086 and len(unknown_byid)==609,"unique parent IDs")
+          fresno_all=[r for r in unknown if r["canonical_opponent_key"]=="fresno-state"]
+          fail(len(fresno_all)==33,"expected 33 Fresno site UNKNOWN")
+          # 25 bounded independent adjudications, chronological. Every reciprocal entry in two
+          # independent publication editions of Fresno State Athletics official all-time series.
+          # tuple: target id suffix, Fresno game date (2018-19), Fresno score, 2015-16 site,
+          # 2018-19 site. Four mismatches remain explicit; no edited prior game identities.
+          source_rows=[
+          ("1939-40-0006","1940-01-05","29-42","A","A"),
+          ("1939-40-0007","1940-01-06","24-62","A","A"),
+          ("1940-41-0010","1941-01-10","31-45","A","A"),
+          ("1940-41-0011","1941-01-11","31-45","A","A"),
+          ("1941-42-0011","1942-02-06","35-36","H","A"),
+          ("1941-42-0012","1942-02-07","26-37","A","A"),
+          ("1945-46-0010","1946-01-18","29-48","A","A"),
+          ("1945-46-0011","1946-01-19","33-57","A","A"),
+          ("1946-47-0020","1947-02-14","31-54","A","A"),
+          ("1946-47-0021","1947-02-15","37-35","A","A"),
+          ("1947-48-0018","1948-02-06","38-43","A","A"),
+          ("1947-48-0019","1948-02-07","47-57","A","A"),
+          ("1948-49-0025","1949-02-25","51-71","A","A"),
+          ("1949-50-0023","1950-02-25","65-84","A","A"),
+          ("1950-51-0016","1951-01-13","52-69","A","A"),
+          ("1952-53-0014","1953-01-12","56-71","A","A"),
+          ("1953-54-0010","1954-01-09","51-66","A","A"),
+          ("1954-55-0022","1955-02-11","64-82","A","A"),
+          ("1956-57-0019","1957-02-08","83-78","A","A"),
+          ("1956-57-0020","1957-02-09","71-55","A","A"),
+          ("1957-58-0010","1958-01-10","71-73","A","A"),
+          ("1958-59-0023","1959-02-20","69-74","A","A"),
+          ("1959-60-0017","1960-01-23","61-57","A","A"),
+          ("1960-61-0021","1961-02-18","64-60","H","A"),
+          ("1961-62-0016","1962-01-13","77-65","A","A"),
+          ]
+          fail(len(source_rows)==25 and source_rows[-1][0]=="1961-62-0016","bounded 25 review")
+          fail([r["research_game_id"] for r in fresno_all[:25]]==["SDSU-EXP-S1-"+r[0] for r in source_rows],"exact chronologically partitioned 25 Fresno rows")
+          conflict_expected={
+              "SDSU-EXP-S1-1941-42-0011":"OFFICIAL_EDITION_SITE_CONFLICT",
+              "SDSU-EXP-S1-1946-47-0020":"ACCEPTED_SDSU_V_FRESNO_SCORE_CONFLICT",
+              "SDSU-EXP-S1-1946-47-0021":"FRESNO_EDITION_DATE_CONFLICT",
+              "SDSU-EXP-S1-1960-61-0021":"OFFICIAL_EDITION_SITE_CONFLICT",
+          }
+          f15_date_exception={"SDSU-EXP-S1-1946-47-0021":"1947-01-15"}
+          selected={};review=[];conflicts=[];adds=[]
+          for suffix,printed_date,fscore,site15,site19 in source_rows:
+              rid="SDSU-EXP-S1-"+suffix
+              r=byid[rid]
+              fail(rid in unknown_byid and r["canonical_opponent_key"]=="fresno-state","Fresno residual "+rid)
+              fail(r["game_type"]=="REGULAR_SEASON" and r["site_type"]=="UNKNOWN" and r["site_research_status"]=="PENDING_STAGE3A1","unknown regular "+rid)
+              fail(r["source_site_token"]=="" and r["source_event_context"]=="","unmarked regular without source event "+rid)
+              fail(r["season_label"]==suffix[:7],"SDSU season "+rid)
+              matchdate=source_date(r["source_date_token"],r["season_label"])
+              fail(matchdate==printed_date,"SDSU/source 2019 date mismatch "+rid)
+              a,b=map(int,fscore.split("-"))
+              actual=(int(r["opponent_score"]),int(r["team_score"]))
+              validscore=(a,b)==actual
+              expected_result="W" if a>b else "L" if a<b else "T"
+              validresult=expected_result==r["result"].translate(str.maketrans({"W":"L","L":"W","T":"T"}))
+              fail(validresult or rid=="SDSU-EXP-S1-1946-47-0020","unexpected result mismatch "+rid)
+              date15=f15_date_exception.get(rid,printed_date)
+              date19=printed_date
+              conflict=None
+              if site15!=site19:conflict="OFFICIAL_EDITION_SITE_CONFLICT"
+              elif not validscore:conflict="ACCEPTED_SDSU_V_FRESNO_SCORE_CONFLICT"
+              elif date15!=date19:conflict="FRESNO_EDITION_DATE_CONFLICT"
+              fail(conflict==conflict_expected.get(rid),"review discrepancy classification "+rid+" "+str(conflict))
+              decision="RESEARCHED_UNRESOLVED" if conflict else "SUPPORTED"
+              site="" if conflict else ("HOME" if site15=="A" else "OPPONENT_HOME" if site15=="H" else "NEUTRAL")
+              fail(conflict or site=="HOME","expected accepted reciprocal A/A matched records")
+              provenance=f"Fresno State institutional all-time series records; 2015-16 and 2018-19 editions; Fresno {printed_date} {fscore} (2015 site {site15}; 2018 site {site19}); SDSU {r['source_literal_line']}"
+              item={
+                  "research_game_id":rid,"season_label":r["season_label"],"source_date_token":r["source_date_token"],
+                  "sdsu_result":r["result"],"sdsu_score":r["team_score"]+"-"+r["opponent_score"],
+                  "fresno_reciprocal_date_2015":date15,"fresno_reciprocal_date_2019":date19,
+                  "fresno_reciprocal_score":fscore,
+                  "fresno_site_2015":site15,"fresno_site_2019":site19,
+                  "reciprocal_score_exact":str(validscore).lower(),
+                  "publication_site_codes_agree":str(site15==site19).lower(),
+                  "disposition":decision,
+                  "proposed_target_site_type":site,
+                  "contradiction_kind":conflict or "",
+                  "source_2015":fresno15,"source_2019":fresno19,
+                  "source_evidence_detail":provenance
+              }
+              review.append(item)
+              selected[rid]=item
+              if conflict:conflicts.append(item)
+              else:
+                  adds.append({
+                      "research_game_id":rid,"season_label":r["season_label"],
+                      "source_opponent_label":r["source_opponent_label"],
+                      "team_score":r["team_score"],"opponent_score":r["opponent_score"],
+                      "previous_site":"UNKNOWN","new_site":site,
+                      "evidence_class":"FRESNO_TWO_OFFICIAL_EDITIONS_EXACT_RECIPROCAL_SITE",
+                      "source_reference":fresno15+" ; "+fresno19,
+                      "evidence_detail":provenance
+                  })
+          fail(len(review)==25 and len(adds)==21 and len(conflicts)==4,"bounded findings")
+          newrows=[]
+          for prior in ledger:
+              nextrow=dict(prior)
+              found=selected.get(prior["research_game_id"])
+              if found:
+                  if found["disposition"]=="SUPPORTED":
+                      nextrow["site_type"]=found["proposed_target_site_type"]
+                      nextrow["curated_site_type"]="SOURCE_PROGRAM_HOME" if nextrow["site_type"]=="HOME" else nextrow["site_type"]
+                      nextrow["site_research_status"]="SUPPORTED"
+                      nextrow["site_research_basis"]=found["source_evidence_detail"]
+                      nextrow["stage3a1_evidence_class"]="FRESNO_TWO_OFFICIAL_EDITIONS_EXACT_RECIPROCAL_SITE"
+                      nextrow["stage3a1_evidence_reference"]=fresno15+" ; "+fresno19
+                  else:
+                      nextrow["site_type"]="UNKNOWN"
+                      nextrow["site_research_status"]="RESEARCHED_UNRESOLVED"
+                      nextrow["site_research_basis"]="Target SDSU guide and two official Fresno all-time-series editions checked; material disagreement: "+found["contradiction_kind"]+"; no site inferred. "+found["source_evidence_detail"]
+                      nextrow["stage3a1_evidence_class"]="FRESNO_INSTITUTIONAL_CONTRADICTION_TERMINALIZED"
+                      nextrow["stage3a1_evidence_reference"]=fresno15+" ; "+fresno19
+              newrows.append(nextrow)
+          fail(len(newrows)==1086 and len({r["research_game_id"] for r in newrows})==1086,"cumulative ledger complete")
+          for before,after in zip(ledger,newrows):
+              for k,v in before.items():
+                  if before["research_game_id"] not in selected:
+                      fail(after[k]==v,"nontranche record changed "+before["research_game_id"]+":"+k)
+                  elif k not in {"site_type","curated_site_type","site_research_status","site_research_basis","stage3a1_evidence_class","stage3a1_evidence_reference"}:
+                      fail(after[k]==v,"historical game fact changed "+before["research_game_id"]+":"+k)
+          allaccepted=accepted+adds
+          remaining=[]
+          for r in unknown:
+              if r["research_game_id"] in selected and selected[r["research_game_id"]]["disposition"]=="SUPPORTED":
+                  continue
+              nxt=dict(r)
+              if r["research_game_id"] in selected:
+                  nxt["next_evidence_class"]="RESEARCHED_UNRESOLVED_AFTER_TWO_FRESNO_INSTITUTIONAL_EDITIONS"
+              remaining.append(nxt)
+          counts=collections.Counter(r["site_type"] for r in newrows if r["game_type"]=="REGULAR_SEASON")
+          fail(counts=={"HOME":44,"OPPONENT_HOME":410,"NEUTRAL":1,"UNKNOWN":588},"expected cumulative census")
+          fail(len(remaining)==588 and len(allaccepted)==455,"cumulative queue and support")
+          fail(sum(r["site_research_status"]=="RESEARCHED_UNRESOLVED" for r in newrows)==4,"four terminalized source disagreements")
+          fail(len([r for r in newrows if r["game_type"]=="POSTSEASON"])==43,"postseason count")
+          fail(all(r["site_type"]=="UNKNOWN" and r["site_research_status"]=="DEFERRED_POSTSEASON_STAGE3B" for r in newrows if r["game_type"]=="POSTSEASON"),"postseason untouched")
+          old_conflicts=obj(previous/"stage3a1-reciprocal-conflicts.json")
+          fail(len(old_conflicts)==2,"existing contradictory Arizona reciprocal population")
+          combined=[*old_conflicts,*[{"id":x["research_game_id"],"kind":x["contradiction_kind"],"disposition":"RESEARCHED_UNRESOLVED_HAN","sdsu_source_fact_unchanged":True,"source_references":[fresno15,fresno19]} for x in conflicts]]
+          target.mkdir(parents=True,exist_ok=False)
+          write_csv(target/"stage3a1-working-ledger.csv",list(ledger[0]),newrows)
+          write_csv(target/"stage3a1-remaining-unknown-queue.csv",list(unknown[0]),remaining)
+          write_csv(target/"stage3a1-supported-site-decisions.csv",list(accepted[0]),allaccepted)
+          write_csv(target/"fresno-reciprocal-25-row-review.csv",list(review[0]),review)
+          write_json(target/"fresno-reciprocal-4-conflicts.json",conflicts)
+          write_json(target/"stage3a1-cumulative-contradictions.json",combined)
+          sumstat={
+           "kind":"SDSU_STAGE3A1_0055_FRESNO_25_ONE_FAMILY_V1",
+           "school_key":"san-diego-state","stage":"STAGE_3A1","status":"IN_PROGRESS",
+           "immutable_research_base_sha":base,"protected_main_sha":main,
+           "parent_research_head":parent,
+           "parent_stage3a1_checkpoint":"0054-stage3a1-accepted-project-source-class-pass",
+           "parent_stage3a1_site_decisions":434,
+           "fresno_rows_in_0054_unknown":33,
+           "fresno_independent_rows_reviewed":25,
+           "new_supported_site_decisions":21,
+           "new_researched_unresolved_han":4,
+           "fresno_class_not_yet_reviewed":8,
+           "total_games":1086,"regular_season_games":1043,"postseason_stage3b_handoff":43,
+           "cumulative_supported_site_decisions":455,
+           "cumulative_unknown_regular":588,
+           "cumulative_terminal_researched_unresolved_han":4,
+           "cumulative_site_census":dict(counts),
+           "previous_arizona_reciprocal_date_conflicts_preserved":2,
+           "cumulative_documented_contradiction_rows":len(combined),
+           "independent_adjudication_limit_per_turn":25,
+           "no_geography_only_inference":True,"no_blank_site_default_to_home":True,
+           "source_authority":{"target_guide":"SDSU 2026-27 media guide pp. 88-93 (accepted Stage 1)",
+                               "fresno_2015_16":fresno15,"fresno_2018_19":fresno19},
+           "no_historical_game_facts_changed":True,
+           "stage3a1_complete":False,"stage3a2_started":False,"stage3a3_started":False,
+           "next_bounded_assignment":"Continue Stage 3A-1 with remaining coherent institutional source families and accepted-project reuse; preserve four terminalized Fresno disagreements; do not rerun this Fresno class without new decisive evidence"
+          }
+          write_json(target/"stage3a1-summary.json",sumstat)
+          (target/"stage4-authoring").mkdir(parents=True)
+          for name in ["opponents.csv","season-coverage.json"]:
+              origin=(previous/"stage4-authoring"/name).read_bytes()
+              fail(origin==(stage0/"stage4-authoring"/name).read_bytes(),"Stage 4 inherited authoring capsule")
+              (target/"stage4-authoring"/name).write_bytes(origin)
+          # Retain accepted predecessor's target-source convention and full original project reciprocal diagnostic byte-for-byte.
+          for filename in ["stage3a1-source-family-precedent.json","stage3a1-reciprocal-candidates.json","stage3a1-reciprocal-conflicts.json"]:
+              (target/filename).write_bytes((previous/filename).read_bytes())
+          fail(len(records(target/"stage3a1-working-ledger.csv"))==1086,"full ledger serialization")
+          fail(len(records(target/"stage3a1-remaining-unknown-queue.csv"))==588,"queue serialization")
+          fail(len(records(target/"stage3a1-supported-site-decisions.csv"))==455,"decisions serialization")
+          fail(len(records(target/"fresno-reciprocal-25-row-review.csv"))==25,"review serialization")
+          files={}
+          for path in sorted(target.rglob("*")):
+              if path.is_file():
+                  b=path.read_bytes()
+                  files[str(path.relative_to(target))]={"sha256":digest(b),"bytes":len(b)}
+          write_json(target/"checkpoint-manifest.json",{
+           "kind":"SDSU_STAGE3A1_0055_DURABLE_PARTIAL_RESEARCH_MANIFEST_V1",
+           "parent_research_head":parent,"immutable_research_base_sha":base,"protected_main_sha":main,
+           "stage3a1_complete":False,"files":files
+          })
+          for name,item in files.items():
+              content=(target/name).read_bytes()
+              fail(digest(content)==item["sha256"] and len(content)==item["bytes"],"checkpoint manifested member "+name)
+          print(json.dumps(sumstat,indent=2))
+          with open("/tmp/sdsu-stage3a1-fresno-0055-result.txt","w") as h:
+              h.write("### San Diego State Stage 3A-1 Fresno institution review\n\n25 independently examined rows; 21 new supported HOME sites; 4 unresolved because of official-source contradictions. Cumulative 455 resolved H/A/N, 588 UNKNOWN regular season, 43 postseason untouched. Stage 3A-1 still IN_PROGRESS.\n")
+          PY
+      - name: Commit immutable cumulative Stage 3A-1 partial checkpoint
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/san-diego-state-all-history-expansion/stage3a/0055-stage3a1-fresno-25-institutional-reciprocal-tranche/
+          git commit -m "research(sdsu): 25 Fresno reciprocal H/A/N reviews, 21 supported, four source conflicts preserved"
+          git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
+      - name: Publish exact bounded progress summary
+        shell: bash
+        run: |
+          cat /tmp/sdsu-stage3a1-fresno-0055-result.txt >> "$GITHUB_STEP_SUMMARY"
