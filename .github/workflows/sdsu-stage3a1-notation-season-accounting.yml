@@ -1,0 +1,360 @@
+name: SDSU Stage 3A-1 12-season institutional HAN census and four event markers
+on:
+  push:
+    branches:
+      - research/san-diego-state-all-history-expansion
+    paths:
+      - .github/workflows/sdsu-stage3a1-notation-season-accounting.yml
+permissions:
+  contents: write
+jobs:
+  official-whole-source-census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact Research authority
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Authenticate 0057 and reconcile full-source 12-season H-A-N totals and 4 marked event games
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import collections,csv,hashlib,json,pathlib,re,subprocess
+          root=pathlib.Path("research/san-diego-state-all-history-expansion")
+          prior=root/"stage3a/0057-stage3a1-cal-poly-24-official-institutional-reciprocals"
+          orig2=root/"stage2/0052-stage2-complete-exact-source-provenance"
+          orig0=root/"stage3a/0053-stage3a0-local-mechanical-census"
+          founding=root/"checkpoints/0002-founding-era-ledger-1921-1936/source-game-candidates.csv"
+          out=root/"stage3a/0058-stage3a1-target-guide-season-census-and-marked-event-review"
+          parent="51da5908e29488c2eafd172a3bb1a075ea96a77f"
+          main="242370fc551fd749c157c74d92917ddfafbe40e0"
+          base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          sdsu_guide="https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+          pepperdine="https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/pepperdinewaves.com/documents/2018/6/26/Men_Basketball_record_book.pdf?timestamp=20180626021709"
+          indiana="https://gosycamores.com/sports/mens-basketball/schedule/1950-51"
+          portland="https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/portlandpilots.com/documents/2011/1/5/2010-11_mens_hoops.pdf"
+          sdsu_recent="https://storage.googleapis.com/sdsu-prod/2024/06/17/4jVONejCwMkSosTRpS7GzEc5osLcrIsf9miDDdFM.pdf"
+          montana_source="https://gogriz.com/documents/download/2018/1/17/redbook_21_1968_1969.pdf"
+          montana_recent="https://gogriz.com/documents/download/2025/7/30/Records___History.pdf"
+          def sha(data):return hashlib.sha256(data).hexdigest()
+          def check(ok,msg):
+              if not ok:raise AssertionError("SDSU_STAGE3A1_0058_FAIL_CLOSED: "+msg)
+          def csvrows(p):
+              with p.open("r",newline="",encoding="utf-8-sig") as h:return list(csv.DictReader(h))
+          def js(p):return json.loads(p.read_text(encoding="utf-8"))
+          def savejs(p,o):p.write_text(json.dumps(o,sort_keys=True,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+          def savecsv(p,columns,items):
+              with p.open("w",newline="",encoding="utf-8") as h:
+                  w=csv.DictWriter(h,fieldnames=columns,extrasaction="raise");w.writeheader();w.writerows(items)
+          def source_group(r):
+              name=r["source_opponent_label"]
+              if re.match(r"^\*?at\s",name,re.I):return "at"
+              if re.match(r"^vs\.?\s",name,re.I):return "vs."
+              return "unmarked"
+          check(subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()==parent,"research predecessor mismatch")
+          check(subprocess.check_output(["git","diff","--name-only",parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-notation-season-accounting.yml"],"workflow-only descendant")
+          check(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main changed")
+          check(subprocess.run(["git","cat-file","-e",base+"^{commit}"],capture_output=True).returncode==0,"immutable research base absent")
+          m=js(prior/"checkpoint-manifest.json");s=js(prior/"stage3a1-summary.json")
+          check(m["parent_research_head"]=="cc3b92672fca4ff03f0d599b517bff05b39dca59" and m["immutable_research_base_sha"]==base,"0057 parent manifest")
+          check(s["status"]=="IN_PROGRESS" and s["stage3a1_complete"] is False and s["cumulative_unknown_regular"]==559 and s["cumulative_supported_site_decisions"]==484,"0057 state")
+          check(s["cumulative_site_census"]=={"HOME":73,"OPPONENT_HOME":410,"NEUTRAL":1,"UNKNOWN":559},"0057 census")
+          check(s["cumulative_terminal_researched_unresolved_han"]==7,"0057 terminal records")
+          for filename,spec in m["files"].items():
+              contents=(prior/filename).read_bytes()
+              check(sha(contents)==spec["sha256"] and len(contents)==spec["bytes"],"0057 manifest member "+filename)
+          m2=js(orig2/"manifest.json")
+          check(m2["stage2_complete"] is True and m2["immutable_research_base_sha"]==base,"Stage2 accepted")
+          for filename,spec in m2["files"].items():
+              buf=(orig2/filename).read_bytes()
+              check(sha(buf)==spec["sha256"] and len(buf)==spec["bytes"],"Stage2 member "+filename)
+          s0=js(orig0/"stage3a0-status.json")
+          check(s0["status"]=="COMPLETE" and s0["protected_main_sha"]==main and s0["source_ledger_sha256"]==m2["files"]["structured-stage2-ledger.csv"]["sha256"],"Stage 3A0")
+          games=csvrows(prior/"stage3a1-working-ledger.csv")
+          queue=csvrows(prior/"stage3a1-remaining-unknown-queue.csv")
+          accepted=csvrows(prior/"stage3a1-supported-site-decisions.csv")
+          found=csvrows(founding)
+          check(len(games)==1086 and len(queue)==559 and len(accepted)==484 and len(found)==242,"input cardinalities")
+          byid={r["research_game_id"]:r for r in games}
+          queue_ids={r["research_game_id"] for r in queue}
+          check(len(byid)==1086 and len(queue_ids)==559 and len({r["research_game_id"] for r in found})==242,"unique game keys")
+          first_party_season_home_away={
+           "1922-23":(17,5),"1923-24":(10,3),"1925-26":(14,5),
+           "1926-27":(9,6),"1927-28":(11,7),"1929-30":(9,3),
+           "1930-31":(7,3),"1931-32":(11,5),"1932-33":(9,2),
+           "1933-34":(9,7),"1934-35":(14,6),"1935-36":(12,4),
+          }
+          check(len(first_party_season_home_away)==12,"documented 12-season population")
+          accepted_ids={r["research_game_id"] for r in found}
+          by_season=collections.defaultdict(list)
+          for r in found:by_season[r["season"]].append(r)
+          class_counts=[];home_ids=set()
+          for season,(published_home,published_away) in first_party_season_home_away.items():
+              source_rows=by_season[season]
+              sitecount=collections.Counter(source_group(r) for r in source_rows)
+              # Whole-source census, not merely Research-accepted games: all source result rows,
+              # including later excluded exhibitions and games independently classified as postseason.
+              check(len(source_rows)==published_home+published_away,"source rows != official season HOME+AWAY "+season)
+              check(sitecount=={"at":published_away,"unmarked":published_home},"HOME/unmarked and AWAY/at source convention parity "+season+" "+str(sitecount))
+              cohort=[r for r in games if r["season_label"]==season]
+              cohort_ids={r["research_game_id"] for r in cohort}
+              check(cohort_ids.issubset({r["research_game_id"] for r in source_rows}),"accepted games outside full source season "+season)
+              check(all(r["source_site_token"] in {"","at"} for r in cohort),"unexpected accepted source symbol "+season)
+              check(all(r["site_type"]=="OPPONENT_HOME" for r in cohort if r["source_site_token"]=="at" and r["game_type"]=="REGULAR_SEASON"),"marked at already adjudicated "+season)
+              check(all(r["site_type"] in {"HOME","UNKNOWN"} for r in cohort if r["source_site_token"]=="" and r["game_type"]=="REGULAR_SEASON"),"unmarked prior contradiction "+season)
+              homes=[r for r in cohort if r["game_type"]=="REGULAR_SEASON" and r["source_site_token"]=="" and r["site_type"]=="UNKNOWN"]
+              home_ids.update(r["research_game_id"] for r in homes)
+              class_counts.append({
+                 "season":season,"official_source_listed_games":len(source_rows),
+                 "official_home_total":published_home,"official_away_total":published_away,"official_neutral_total":0,
+                 "source_at_count":sitecount["at"],"source_unmarked_count":sitecount["unmarked"],
+                 "accepted_all_game_types":len(cohort),"accepted_regular_unmarked_new_home":len(homes),
+                 "source_population_exact_match":True,
+                 "home_default_scope":"ONLY_THIS_EXACT_CENSUS_PASSING_SEASON",
+                 "primary_source":sdsu_guide,"printed_source_page":"144" if season<="1931-32" else "145",
+              })
+          check(len(home_ids)==111,"source-supported HOME candidate count must be 111")
+          # Fail closed on a demonstrably different 1928-29 evidence class:
+          # 2008 guide source HOME 10, AWAY 6 but historical results mark only four at;
+          # therefore two unmarked games are necessarily not HOME under the source totals.
+          s1928=by_season["1928-29"]
+          c1928=collections.Counter(source_group(r) for r in s1928)
+          check(len(s1928)==16 and c1928=={"at":4,"unmarked":12},"1928-29 source alternative population")
+          check(c1928["at"]!=6,"1928-29 must not be defaulted to HOME")
+          # Four source-marked, named-event rows: first-party reciprocal/event research,
+          # with explicit exception and contradiction handling.
+          event_facts={
+           "SDSU-EXP-S1-1950-51-0010":{
+             "source_site_token":"at","season_label":"1950-51","source_date_token":"D.26",
+             "team_score":"38","opponent_score":"67",
+             "site":"","disposition":"RESEARCHED_UNRESOLVED",
+             "evidence_class":"PEPPERDINE_TOURNAMENT_TARGET_AT_V_RECIPROCAL_NEUTRAL_CONFLICT",
+             "basis":"Pepperdine official 2017-18 record book, printed p.68, 1950-51: 12/26 # vs San Diego State N W 67-38; # Los Angeles Invitational, Los Angeles. SDSU source 2026-27 lists D.26 at Pepperdine under PEPPERDINE INVITATIONAL (Malibu, Calif.). Source-school explicit at conflicts with reciprocal explicit N and event name/locality; leave H/A/N UNKNOWN, do not infer building or location.",
+             "sources":[pepperdine,sdsu_guide],
+           },
+           "SDSU-EXP-S1-1950-51-0011":{
+             "source_site_token":"vs.","season_label":"1950-51","source_date_token":"D.28",
+             "team_score":"57","opponent_score":"65",
+             "site":"","disposition":"RESEARCHED_UNRESOLVED",
+             "evidence_class":"INDIANA_STATE_TARGET_VS_V_OPPONENT_AT_SDSU_CONFLICT",
+             "basis":"Indiana State official 1950-51 schedule: Dec. 28 1950 at San Diago State W65-57 and Dec. 30 1950 at San Diago State W53-48. SDSU original historical guide lists D.28 vs. Indiana State L57-65 under PEPPERDINE INVITATIONAL (Malibu, Calif.). Exact game date/score match but opposing H/A/N symbols conflict; do not force either HOME or NEUTRAL.",
+             "sources":[indiana,sdsu_guide],
+           },
+           "SDSU-EXP-S1-1959-60-0007":{
+             "source_site_token":"at","season_label":"1959-60","source_date_token":"D.18",
+             "team_score":"46","opponent_score":"63",
+             "site":"OPPONENT_HOME","disposition":"SUPPORTED",
+             "evidence_class":"PORTLAND_OFFICIAL_1959_60_EXACT_HOME_RECIPROCAL",
+             "basis":"Portland Pilots official 2010-11 men's basketball history, year-by-year 1959-60: W H San Diego State-1 63-46 (H=Portland HOME, footnote 1 first tournament). Unique season/score/outcome reciprocal corroborates SDSU guide D.18 at Portland L46-63 under TOURNAMENT OF ROSES (Portland, Ore.); this is not geography-only inference.",
+             "sources":[portland,sdsu_guide],
+           },
+           "SDSU-EXP-S1-1968-69-0009":{
+             "source_site_token":"vs.","season_label":"1968-69","source_date_token":"D.28",
+             "team_score":"71","opponent_score":"61",
+             "site":"NEUTRAL","disposition":"SUPPORTED_WITH_RECORDED_RECIPROCAL_DISAGREEMENT",
+             "evidence_class":"SDSU_EXPLICIT_NEUTRAL_SEASON_TOTAL_VS_TOURNAMENT_MONTANA_ORIGINAL_LOCATION",
+             "basis":"SDSU institutional year-by-year 1968-69: HOME 5-7, AWAY 4-8, NEUTRAL 1-0; sole literal vs. regular-season game is D.28 vs Montana W71-61 in NEVADA SOUTHERN TOURNAMENT (Las Vegas). Montana original 1968-69 Red Book: 12/28/68 Montana 61 SDSU 71, played Las Vegas, Nevada. Montana 2025 series summary inconsistently labels it A; retain discrepancy, prefer contemporaneous opponent locality plus target source season-level N 1-0 and explicit vs event. No venue identity inferred.",
+             "sources":[sdsu_recent,montana_source,montana_recent],
+           },
+          }
+          check(len(event_facts)==4 and len(set(event_facts).intersection(home_ids))==0,"four distinct marked row cases")
+          for gameid,fact in event_facts.items():
+              r=byid[gameid]
+              check(gameid in queue_ids and r["game_type"]=="REGULAR_SEASON" and r["site_type"]=="UNKNOWN" and r["site_research_status"]=="PENDING_STAGE3A1","marked game must still be open "+gameid)
+              for field in ("source_site_token","season_label","source_date_token","team_score","opponent_score"):
+                  check(r[field]==fact[field],"marked primary source mismatch "+gameid+":"+field)
+              check(bool(r["source_event_context"]),"marked tournament game missing named source event "+gameid)
+              check(fact["disposition"] in {"SUPPORTED","SUPPORTED_WITH_RECORDED_RECIPROCAL_DISAGREEMENT","RESEARCHED_UNRESOLVED"},"invalid disposition "+gameid)
+          check(sum(bool(f["site"]) for f in event_facts.values())==2,"two marked supported")
+          check(sum(not f["site"] for f in event_facts.values())==2,"two held cases")
+          evidence=[]
+          next_ledger=[]
+          new_decisions=[]
+          for old in games:
+              row=dict(old);gid=old["research_game_id"]
+              if gid in home_ids:
+                  season=old["season_label"]
+                  basis=f"SDSU official year-by-year results (2008-09 printed pp.144-145) season {season}: season HOME/AWAY totals reconcile exactly to the complete original source game-list census; all listed source at games exhaust every reported AWAY game, with zero NEUTRAL, so the original unmarked source rows are HOME. Same original institutional listing transcribed in accepted 2026-27 Stage 1 source candidates; automatic source-population join, no inference from geography."
+                  row.update({"site_type":"HOME","curated_site_type":"SOURCE_PROGRAM_HOME","site_research_status":"SUPPORTED","site_research_basis":basis,
+                              "stage3a1_evidence_class":"TARGET_INSTITUTIONAL_12_EXACT_SEASON_HAN_CENSUS_DEFAULT",
+                              "stage3a1_evidence_reference":sdsu_guide})
+              elif gid in event_facts:
+                  fact=event_facts[gid]
+                  if fact["site"]:
+                      row.update({"site_type":fact["site"],"curated_site_type":fact["site"],
+                         "site_research_status":"SUPPORTED","site_research_basis":fact["basis"],
+                         "stage3a1_evidence_class":fact["evidence_class"],
+                         "stage3a1_evidence_reference":" ; ".join(fact["sources"])})
+                  else:
+                      row.update({"site_type":"UNKNOWN","site_research_status":"RESEARCHED_UNRESOLVED",
+                         "site_research_basis":fact["basis"],"stage3a1_evidence_class":fact["evidence_class"],
+                         "stage3a1_evidence_reference":" ; ".join(fact["sources"])})
+              if gid in home_ids or (gid in event_facts and event_facts[gid]["site"]):
+                  new_decisions.append({
+                    "research_game_id":gid,"season_label":old["season_label"],
+                    "source_opponent_label":old["source_opponent_label"],
+                    "team_score":old["team_score"],"opponent_score":old["opponent_score"],
+                    "previous_site":"UNKNOWN","new_site":row["site_type"],
+                    "evidence_class":row["stage3a1_evidence_class"],
+                    "source_reference":row["stage3a1_evidence_reference"],
+                    "evidence_detail":row["site_research_basis"]
+                  })
+              next_ledger.append(row)
+          for old,new in zip(games,next_ledger):
+              for field,value in old.items():
+                  if old["research_game_id"] not in home_ids and old["research_game_id"] not in event_facts:
+                      check(new[field]==value,"nontranche record changed "+old["research_game_id"]+":"+field)
+                  elif field not in {"site_type","curated_site_type","site_research_status","site_research_basis","stage3a1_evidence_class","stage3a1_evidence_reference"}:
+                      check(new[field]==value,"historical game source fact changed "+old["research_game_id"]+":"+field)
+          all_decisions=accepted+new_decisions
+          new_queue=[]
+          for raw in queue:
+              gid=raw["research_game_id"]
+              if gid in home_ids or gid in event_facts and event_facts[gid]["site"]:continue
+              r=dict(raw)
+              if gid in event_facts:
+                  check(event_facts[gid]["disposition"]=="RESEARCHED_UNRESOLVED","held marked contradiction")
+                  r["next_evidence_class"]="RESEARCHED_UNRESOLVED_AFTER_TARGET_OPPONENT_INSTITUTIONAL_CONTRADICTION"
+              new_queue.append(r)
+          census=collections.Counter(r["site_type"] for r in next_ledger if r["game_type"]=="REGULAR_SEASON")
+          check(census=={"HOME":184,"OPPONENT_HOME":411,"NEUTRAL":2,"UNKNOWN":446},"cumulative deterministic census")
+          check(len(new_decisions)==113 and len(all_decisions)==597 and len(new_queue)==446,"decision and queue populations")
+          check(sum(r["site_research_status"]=="RESEARCHED_UNRESOLVED" for r in next_ledger)==9,"terminalized H/A/N count")
+          check(sum(r["game_type"]=="POSTSEASON" for r in next_ledger)==43 and all(r["site_type"]=="UNKNOWN" for r in next_ledger if r["game_type"]=="POSTSEASON"),"postseason Stage3B untouched")
+          original=csvrows(orig2/"structured-stage2-ledger.csv")
+          check(len(original)==1086,"Stage2 count")
+          for old,new in zip(original,next_ledger):
+              check(old["research_game_id"]==new["research_game_id"],"canonical game order")
+              for field,value in old.items():
+                  if field!="site_type":check(value==new[field],"accepted Stage2 basketball fact modified "+old["research_game_id"]+":"+field)
+          prev_conflicts=js(prior/"stage3a1-cumulative-contradictions.json")
+          check(len(prev_conflicts)==9,"previous source conflict population")
+          conflicts=list(prev_conflicts)
+          for gid,fact in event_facts.items():
+              if fact["disposition"]=="RESEARCHED_UNRESOLVED":
+                  conflicts.append({"id":gid,"kind":fact["evidence_class"],"disposition":"RESEARCHED_UNRESOLVED_HAN",
+                      "accepted_source_game_facts_unchanged":True,
+                      "source_references":fact["sources"],"evidence_note":fact["basis"]})
+              elif gid=="SDSU-EXP-S1-1968-69-0009":
+                  conflicts.append({"id":gid,"kind":"RETROSPECTIVE_MONTANA_A_V_ACCEPTED_TARGET_NEUTRAL_EVENT",
+                      "disposition":"SUPPORTED_TARGET_NEUTRAL_WITH_ADVERSARIAL_DISPOSITION",
+                      "accepted_source_game_facts_unchanged":True,"source_references":fact["sources"],
+                      "evidence_note":fact["basis"]})
+          check(len(conflicts)==12,"cumulative conflicts inclusive of Montana disputed reciprocal")
+          out.mkdir(parents=True,exist_ok=False)
+          savecsv(out/"stage3a1-working-ledger.csv",list(games[0]),next_ledger)
+          savecsv(out/"stage3a1-remaining-unknown-queue.csv",list(queue[0]),new_queue)
+          savecsv(out/"stage3a1-supported-site-decisions.csv",list(accepted[0]),all_decisions)
+          savecsv(out/"target-guide-12-season-census-proof.csv",list(class_counts[0]),class_counts)
+          marked=[]
+          for gid,fact in event_facts.items():
+              r=byid[gid]
+              marked.append({
+                "research_game_id":gid,"season_label":r["season_label"],
+                "source_date_token":r["source_date_token"],"source_site_token":r["source_site_token"],
+                "source_literal_line":r["source_literal_line"],"source_event_context":r["source_event_context"],
+                "accepted_target_score":r["team_score"]+"-"+r["opponent_score"],
+                "site_result":fact["site"] or "UNKNOWN",
+                "adjudication":fact["disposition"],"evidence_class":fact["evidence_class"],
+                "source_family_urls":" ; ".join(fact["sources"]),
+                "source_evidence_detail":fact["basis"],
+              })
+          savecsv(out/"four-marked-tournament-source-adjudications.csv",list(marked[0]),marked)
+          savejs(out/"stage3a1-cumulative-contradictions.json",conflicts)
+          savejs(out/"source-notation-nonpropagation-boundaries.json",{
+           "kind":"SDSU_STAGE3A1_MARKING_CONVENTION_EXCEPTION_ACCOUNTING_V1",
+           "not_a_global_unmarked_home_rule":True,
+           "1928_29_source_full_rows":16,"1928_29_source_at_rows":4,
+           "1928_29_source_unmarked_rows":12,
+           "1928_29_guide_HOME":10,"1928_29_guide_AWAY":6,
+           "1928_29_unmarked_away_population_implied_by_counts":2,
+           "1928_29_disposition":"DO_NOT_PROPAGATE_SITE_FROM_ABSENCE_OF_AT",
+           "1921_22_boundary":"source-acknowledged three unidentified games and two forfeits; not part of same closed direct game-count proof",
+           "1924_25_boundary":"three source-announced administrative forfeits, source listed game totals do not match summary without separate accounting",
+           "other_seasons":"no automatic propagation; must separately pass complete-source season-specific arithmetic and contradiction checks",
+           "source_2008_09":sdsu_guide,
+          })
+          for name in [
+           "cal-poly-24-institutional-site-review.csv",
+           "cal-poly-official-3-conflicts.json",
+           "fresno-final-eight-institutional-review.csv",
+           "fresno-reciprocal-25-row-review.csv",
+           "fresno-reciprocal-4-conflicts.json",
+           "stage3a1-reciprocal-candidates.json",
+           "stage3a1-reciprocal-conflicts.json",
+           "stage3a1-source-family-precedent.json"
+          ]:
+              (out/name).write_bytes((prior/name).read_bytes())
+          (out/"stage4-authoring").mkdir()
+          for name in ["opponents.csv","season-coverage.json"]:
+              source_bytes=(prior/"stage4-authoring"/name).read_bytes()
+              check(source_bytes==(orig2/"stage4-authoring"/name).read_bytes(),"Stage4 accepted member mismatch "+name)
+              (out/"stage4-authoring"/name).write_bytes(source_bytes)
+          summary={
+           "kind":"SDSU_STAGE3A1_0058_TARGET_GUIDE_SEASON_HAN_ARITHMETIC_V1",
+           "school_key":"san-diego-state","stage":"STAGE_3A1","status":"IN_PROGRESS",
+           "parent_research_head":parent,"immutable_research_base_sha":base,
+           "protected_main_sha":main,"parent_checkpoint":"0057-stage3a1-cal-poly-24-official-institutional-reciprocals",
+           "accepted_stage2_ledger_sha256":m2["files"]["structured-stage2-ledger.csv"]["sha256"],
+           "systematic_institutional_seasons_exactly_reconciled":12,
+           "new_supported_HOME_from_complete_source_season_census":111,
+           "new_supported_OPPONENT_HOME_from_portland":1,
+           "new_supported_NEUTRAL_from_montana":1,
+           "new_marked_tournament_rows_researched_unresolved":2,
+           "new_supported_site_decisions":113,
+           "cumulative_supported_site_decisions":597,
+           "cumulative_unknown_regular":446,
+           "cumulative_terminal_researched_unresolved_han":9,
+           "cumulative_site_census":dict(census),
+           "regular_season_games":1043,"postseason_stage3b_handoff":43,"total_games":1086,
+           "prior_documented_source_discrepancies_preserved":9,
+           "cumulative_documented_discrepancy_records_including_adversarial_montana":12,
+           "independent_game_adjudications_in_this_turn":4,
+           "systematic_propagation_mode":"TARGET_INSTITUTIONAL_12_SEASON_WHOLE_SOURCE_HAN_CENSUS_EXACT_ONLY",
+           "site_geography_only_inference_used":False,
+           "cross_era_blind_marking_rule_forbidden":True,
+           "1928_29_not_safe_for_blank_HOME_default":True,
+           "source_urls":{"sdsu_2008_institutional_history":sdsu_guide,
+             "pepperdine_official_1950_51":pepperdine,"indiana_state_official_1950_51":indiana,
+             "portland_official_1959_60":portland,"sdsu_recent_1968_69":sdsu_recent,
+             "montana_original_1968_69":montana_source,"montana_retrospective_conflict":montana_recent},
+           "historical_game_facts_modified":False,
+           "stage3a1_complete":False,"stage3a2_started":False,"stage3a3_started":False,
+           "next_bounded_assignment":"Stage 3A-1 further systematic whole-season source-census accounting in remaining eras. Reconcile source aggregate and exceptions before propagating unmarked HOME. No Stage 3A-2 automatic start."
+          }
+          savejs(out/"stage3a1-summary.json",summary)
+          check(len(csvrows(out/"stage3a1-working-ledger.csv"))==1086 and len(csvrows(out/"stage3a1-remaining-unknown-queue.csv"))==446,"cumulative roundtrip ledgers")
+          check(len(csvrows(out/"stage3a1-supported-site-decisions.csv"))==597,"cumulative decisions roundtrip")
+          check(len(csvrows(out/"target-guide-12-season-census-proof.csv"))==12 and len(csvrows(out/"four-marked-tournament-source-adjudications.csv"))==4,"evidence proof roundtrip")
+          files={}
+          for p in sorted(out.rglob("*")):
+              if p.is_file():
+                  buf=p.read_bytes()
+                  files[str(p.relative_to(out))]={"sha256":sha(buf),"bytes":len(buf)}
+          savejs(out/"checkpoint-manifest.json",{
+           "kind":"SDSU_STAGE3A1_0058_DURABLE_HASH_BOUND_PARTIAL_MANIFEST_V1",
+           "parent_research_head":parent,"protected_main_sha":main,
+           "immutable_research_base_sha":base,"stage3a1_complete":False,"files":files
+          })
+          for name,entry in files.items():
+              buf=(out/name).read_bytes()
+              check(sha(buf)==entry["sha256"] and len(buf)==entry["bytes"],"manifest member integrity "+name)
+          print(json.dumps(summary,indent=2))
+          with open("/tmp/sdsu-stage3a1-0058-report.txt","w") as f:
+              f.write("### SDSU Stage 3A-1 — target-guide 12-season exact arithmetic & four tournament markers\n\n111 unmarked HOME supported by 12 complete official per-season source-parity proofs; Portland at=OPPONENT_HOME, Montana vs=NEUTRAL; 2 explicit institutional contradictions terminalized as UNKNOWN; 1928-29 fails default convention. Cumulative 597 supported, 446 UNKNOWN, 43 postseason untouched. Stage 3A-1 IN_PROGRESS.\n")
+          PY
+      - name: Commit hash-verified Stage 3A-1 checkpoint 0058 on Research branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/san-diego-state-all-history-expansion/stage3a/0058-stage3a1-target-guide-season-census-and-marked-event-review/
+          git commit -m "research(sdsu): source-proven 12-season HOME classifications and marked-event H-A-N review"
+          git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
+      - name: Publish bounded review census and stop within Stage 3A-1
+        shell: bash
+        run: |
+          cat /tmp/sdsu-stage3a1-0058-report.txt >> "$GITHUB_STEP_SUMMARY"
