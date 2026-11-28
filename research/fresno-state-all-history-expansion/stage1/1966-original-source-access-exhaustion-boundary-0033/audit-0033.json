@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_RESEARCH_STAGE1_0033_AUDIT",
+  "main": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "branch": "research/fresno-state-all-history-expansion",
+  "parent": "193183324312a08cebd7ce97f231926f4d40e1dc",
+  "parentTree": "71afad021c60966421f40c287f41cd27b8f17f11",
+  "base": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "parent_manifest_blob_sha": "c487c541f8100d81ca98e5b3f9a643329969231f",
+  "old_gamedata_git_blob_shas": {
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb"
+  },
+  "access_paths_checked": 8,
+  "new_exact_period_item_locator": "collegian/27234",
+  "new_primary_game_level_evidence": false,
+  "accepted_games": 1011,
+  "record": "532-479",
+  "source_representations": 1036,
+  "census_seasons": 49,
+  "owner_exhibition_exclusions": 2,
+  "pending_groups": 0,
+  "still_blocking_1965_66": true,
+  "permanent_closeout_executed": false,
+  "stage1_complete": false
+}

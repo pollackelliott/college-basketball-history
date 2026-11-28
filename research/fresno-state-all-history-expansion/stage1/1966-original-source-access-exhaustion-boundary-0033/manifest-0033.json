@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_1966_SOURCE_ACCESS_STOP_CHECKPOINT_0033",
+  "school_key": "fresno-state",
+  "branch": "research/fresno-state-all-history-expansion",
+  "checkpoint_path": "research/fresno-state-all-history-expansion/stage1/1966-original-source-access-exhaustion-boundary-0033/",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_parent_sha": "193183324312a08cebd7ce97f231926f4d40e1dc",
+  "parent_tree_sha": "71afad021c60966421f40c287f41cd27b8f17f11",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "members": {
+    "README.md": "b2bd57213f428213a2ee2c875a475c7b05226fd1",
+    "1966-source-access-matrix.csv": "dd26a91e56366af6acc3b2e71a470d3ea5041bfe",
+    "1965-66-access-residual.json": "2258b6bb612bf761c1ee1b396ba82b8e013eb3ee",
+    "stage1-checks-0033.json": "3565c145d28c71db4ca749f9d524da5d8b0a353d",
+    "audit-0033.json": "21857c6602475d2ec56998bb5f5e3c06c9b43157",
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb"
+  },
+  "hash_algorithm": "git_blob_sha1",
+  "accepted_competitive_games": 1011,
+  "accepted_record": "532-479",
+  "source_representations": 1036,
+  "remaining_stage1_blocker": "1965-66",
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

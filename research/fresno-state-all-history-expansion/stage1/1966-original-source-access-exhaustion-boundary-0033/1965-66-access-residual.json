@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_1966_ARCHIVE_ACCESS_BOUNDARY_0033",
+  "school_key": "fresno-state",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_parent_sha": "193183324312a08cebd7ce97f231926f4d40e1dc",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "exact_march_2_1966_collegian_item_url": "https://cdmweb.lib.csufresno.edu/cdm/compoundobject/collection/collegian/id/27234/rec/27",
+  "exact_collegian_item_id": "27234",
+  "period_1966_yearbook_held": true,
+  "period_1966_edition_page_accessed": false,
+  "period_1966_collegian_content_accessed": false,
+  "original_1966_basketball_source_accessed": false,
+  "source_access_exhaustion": "ONLY_THE_BOUNDED_WEB_PATHS_TESTED__NOT_HISTORICAL_SOURCE_EXHAUSTION",
+  "source_representations": 1036,
+  "accepted_competitive_games": 1011,
+  "accepted_record": {
+    "wins": 532,
+    "losses": 479
+  },
+  "two_clowns_owner_exclusions_preserved": true,
+  "remaining_blocker": {
+    "season": "1965-66",
+    "printed_games": 29,
+    "printed_wins": 21,
+    "printed_losses": 8,
+    "identified_games": 28,
+    "identified_wins": 21,
+    "identified_losses": 7
+  },
+  "source_duplication": "-022 repeated Feb 18 SDSU loss -017",
+  "known_result_correction": "UTEP source -007 reversed W to L",
+  "new_game_evidence": false,
+  "new_game_added": false,
+  "closeout_eligible": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "next_action": "Do not loop generic source searches; reopen only for an actually readable new 1966 game-level primary source or express legitimate owner historical authority."
+}
