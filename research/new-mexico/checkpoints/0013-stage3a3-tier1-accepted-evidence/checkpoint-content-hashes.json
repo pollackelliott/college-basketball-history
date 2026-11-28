@@ -1,0 +1,66 @@
+{
+  "external_research_used": false,
+  "files": [
+    {
+      "bytes": 1237,
+      "path": "README.md",
+      "sha256": "609001f010a0319c9a16890a5da328ab5bfbc7025e63ef8ff113cae87bc71d89"
+    },
+    {
+      "bytes": 3,
+      "path": "accepted-project-evidence.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 1080,
+      "path": "manifest.json",
+      "sha256": "fc43f4654e34394e36c7147fbb5de518ddeea6fc0780c8f7b6504245ae16550a"
+    },
+    {
+      "bytes": 1763636,
+      "path": "parent-stage3a2-working-ledger.csv",
+      "sha256": "df05a6de47aa6db2df0afade2def54ddc10f9a3e11d5e442778af21e807e6bab"
+    },
+    {
+      "bytes": 192591,
+      "path": "remaining-neutral-queue.json",
+      "sha256": "6d8aa82105f2eaf9cc2279fffd6d08f76cbe0e0bdbc6ce5b26cfc29b61c795ae"
+    },
+    {
+      "bytes": 598,
+      "path": "stage3a3-tier1-status.json",
+      "sha256": "f53ad7e4acf104add8a05fff3ebf29278949718d95ac4bb10c28eed84b0d6db0"
+    },
+    {
+      "bytes": 840,
+      "path": "stage4-authoring/institutional-scope.json",
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e"
+    },
+    {
+      "bytes": 242748,
+      "path": "stage4-authoring/opponents.csv",
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44"
+    },
+    {
+      "bytes": 2327,
+      "path": "stage4-authoring/venues.csv",
+      "sha256": "d3f8a9d90e7e7b453891c7a04486a7d2091ee371d59f17295c8d5511991f1935"
+    },
+    {
+      "bytes": 3,
+      "path": "tier1-contradictions.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 15176,
+      "path": "tier1-unresolved.json",
+      "sha256": "e734af3f0848ab4bc422c27527ebc46918fb4741543616335f8a29896b6b2e5f"
+    }
+  ],
+  "kind": "NEW_MEXICO_STAGE3A3_TIER1_CHECKPOINT_V1",
+  "parent_checkpoint": "0012-stage3a2-home-complete",
+  "parent_research_commit_sha": "3339b0848e6ab6ae2e92d18db69b7d4ab602f55f",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "schema_version": 1,
+  "stage3a3_tier1_status": "COMPLETE"
+}

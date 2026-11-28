@@ -1,0 +1,22 @@
+{
+  "accepted": {
+    "path": "research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence/accepted-project-evidence.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "contradictions": {
+    "path": "research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence/tier1-contradictions.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "remaining": {
+    "path": "research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence/remaining-neutral-queue.json",
+    "sha256": "6d8aa82105f2eaf9cc2279fffd6d08f76cbe0e0bdbc6ce5b26cfc29b61c795ae"
+  },
+  "status": {
+    "path": "research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence/stage3a3-tier1-status.json",
+    "sha256": "f53ad7e4acf104add8a05fff3ebf29278949718d95ac4bb10c28eed84b0d6db0"
+  },
+  "unresolved": {
+    "path": "research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence/tier1-unresolved.json",
+    "sha256": "e734af3f0848ab4bc422c27527ebc46918fb4741543616335f8a29896b6b2e5f"
+  }
+}
