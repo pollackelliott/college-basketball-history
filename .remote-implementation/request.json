@@ -1,55 +1,52 @@
 {
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "nevada-release-readiness-0001",
+  "school_key": "nevada",
+  "operation": "RELEASE_READINESS",
+  "previous_control_state_commit": "9fb6f51b0ff6a49246e7c27c12d883e015fd8394",
+  "previous_control_state_sha256": "d21558bb9446a55d7364ac0b6743d6438476bc110bd64c3ea1e28c1ed93d5716",
+  "expected_protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "stage2_apply_successor": {
+    "path": ".remote-implementation/successors/nevada/nevada-stage2-sealed-apply-0001/successor-manifest.json",
+    "sha256": "692cc95224892dc212ad280719ac0feb7c47e6ee1b62c645e48d3534ab5df020"
+  },
+  "stage2_apply_verification": {
+    "path": ".remote-implementation/verifications/nevada/nevada-stage2-sealed-apply-0001/stage2-sealed-apply-verification.json",
+    "sha256": "928e6a2119829f7708812dfa32fa16fe686be50510f310dbf07729b4e463bbb3"
+  },
   "approved_plan_hash": "d842daa2ee517e5ab00da4d8a96312b7dc501cca20ad3d5e4fe6aa69acbd8d91",
-  "approved_plan_sha256": "3ce76822ddd508f9cbf42977a10908d7955ea7be5ebdac655ac53d72d9e68f37",
+  "release_manifest_sha256": "0e91f8b8e2d7df91d2c5262465b73d31fabc399f35534768896993dbb975a51e",
+  "release_phase_continuation": {
+    "kind": "RELEASE_READINESS_TO_PREVIEW_V1",
+    "preview_request_id": "nevada-release-preview-verify-0001"
+  },
+  "creation_provenance": {
+    "origin": "Nevada same serialized Implementation lane; owner explicitly said Proceed to start release preparation after independently fresh-verified sealed apply.",
+    "authorization": "Bounded one release-preparation phase: exact read-only RELEASE_READINESS current-main gate replay and fresh verification; then connector-owned exact-head PR creation/reuse and exact CI/Preview verification to OWNER_GATE_2_READY. Does not approve Gate 2, merge, publish Production or modify approved historical authority."
+  },
   "authority": {
     "owner_gate_1": false,
     "owner_gate_2": false,
-    "phase0": false,
-    "phase0_scope_supersession": false,
-    "recovery": false,
     "release": false,
-    "release_gate2_approval": false,
-    "release_preview_verify": false,
-    "release_production_proof": false,
-    "release_readiness": false,
+    "phase0": false,
+    "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
-    "stage2_gate1_fill": false,
-    "stage2_gate1_seal": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_preseal_rehearsal": false,
     "stage2_proposal_rehearsal": false,
     "stage2_reconciliation_diagnostic": false,
-    "stage2_sealed_apply": true,
-    "venue_identity_maintenance": false
-  },
-  "creation_provenance": {
-    "authorization": "phase-persistent owner/Control Center authority inherited from nevada-stage2-gate1-seal-0001",
-    "origin": "repository-owned Stage 2 phase continuation"
-  },
-  "decision_id_set_sha256": "64427ddd548f9bfa8527d734358ffaa3ec7fa092e874abe16b4d5740c36597f9",
-  "decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
-  "expected_protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
-  "filled_review_sha256": "021bf76a3bd15a34822f8f213b3f2d0315408d8b3ed57501bc536e7c6031ec32",
-  "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
-  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "operation": "STAGE2_SEALED_APPLY",
-  "owner_gate_1_approval_sha256": "7b1263abc0a91d27b5517fc492329873f72220a12c2a2daf2cd7ff1ba8b29686",
-  "previous_control_state_commit": "a016d3d635d8695b1397d530552364c563d999b3",
-  "previous_control_state_sha256": "c45b9efc000339dad7c88d1da2ebbacbc9af9b541677130e5d77a7bf9b5e860d",
-  "recommendation_map_sha256": "7f90ed45d9c25b417c3f7ddf9eb79b191bea2a8f5ff28c3affc104f50a8540a2",
-  "request_id": "nevada-stage2-sealed-apply-0001",
-  "schema_version": 1,
-  "school_key": "nevada",
-  "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
-  "stage2_gate1_seal_checkpoint": {
-    "path": ".remote-implementation/checkpoints/nevada/nevada-stage2-gate1-seal-0001/checkpoint-manifest.json",
-    "sha256": "38bc6f98f7c6af95cf8aefe0650a52d2d3d4ff6d2005b987d158e2a5b17b480a"
-  },
-  "stage2_gate1_seal_verification": {
-    "path": ".remote-implementation/verifications/nevada/nevada-stage2-gate1-seal-0001/stage2-gate1-seal-verification.json",
-    "sha256": "30dfeae275fb765f2f4ff1ca121e7f056de61c2467ed6b03982fad1c8d04fb06"
-  },
-  "target_branch": "data/nevada-onboarding",
-  "target_sha": "57c953748ace901d764b287bb8a625b01cb54091"
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": true,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "phase0_scope_supersession": false
+  }
 }
