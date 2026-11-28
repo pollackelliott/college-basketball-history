@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = '6a4c7bae6e10654a39d24adf7a83097b0991d9c4' || { echo 'Unexpected research HEAD'; exit 20; }
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA" || { echo "Unexpected checked-out workflow HEAD"; exit 20; }
           test "$(git status --porcelain | wc -l)" -eq 0 || { echo 'Working tree not clean'; exit 21; }
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/46102773071" --jq '.conclusion + " " + .head_sha' | grep -Fx 'success 6a4c7bae6e10654a39d24adf7a83097b0991d9c4'
           export AF_OUTPUT_SOURCE="$RUNNER_TEMP/air-force-0025-artifact"
