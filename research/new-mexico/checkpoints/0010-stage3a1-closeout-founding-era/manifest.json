@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A1_CLOSEOUT_MANIFEST_V1",
+  "school_key": "new-mexico",
+  "state": "STAGE_3A1_COMPLETE",
+  "parent_research_commit_sha": "5c2d2b9a0876eb739a37b1e9216b2c088027212f",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_stage3a1_working_ledger_git_blob_sha": "6fbc183bd43dc67d888b669c379099665e1e417c",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2345,
+      "sha256": "017d141bf1a369b8b83749ce7fbc9767b49184bb0912518f5e52e3364bb2368e"
+    },
+    {
+      "path": "stage3a1-status.json",
+      "bytes": 2864,
+      "sha256": "04614c0156e7d8d239c711e61ee59a6ed8f943acdac78cdd798d86c4868e631f"
+    },
+    {
+      "path": "stage3a1-working-ledger.csv",
+      "bytes": 1209710,
+      "sha256": "86672c83f2e9285a188a994715526325265537a82e12928d39e963795577bfe1"
+    },
+    {
+      "path": "stage3a1-founding-era-dispositions.csv",
+      "bytes": 22991,
+      "sha256": "6bf1fb8431cc70a4ea3d2c282a413ec13e5166105bd489e408d6a33fc0d824b8"
+    },
+    {
+      "path": "stage3a1-annotation-exception-audit.csv",
+      "bytes": 61762,
+      "sha256": "6c550ca9562a941fb7b2eeb291b04a28df1a49aaea78b57616601790ef48dc45"
+    },
+    {
+      "path": "stage3a1-downstream-queues.json",
+      "bytes": 72750,
+      "sha256": "168aa0fec19b1f0f17155b05cf492b330275b4f495aac003c1fd2680f9fbe282"
+    },
+    {
+      "path": "stage3a1-contradiction-dispositions.json",
+      "bytes": 2615,
+      "sha256": "2c1831c36f99057986ae0c6935cc79562f4d87ad62235339878295fd2afa1306"
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "git_blob_sha": "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76",
+      "bytes": 242748,
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "git_blob_sha": "0c1e3d61cebd444008e8c6e520c78e6444843b70",
+      "bytes": 840,
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e"
+    }
+  ]
+}

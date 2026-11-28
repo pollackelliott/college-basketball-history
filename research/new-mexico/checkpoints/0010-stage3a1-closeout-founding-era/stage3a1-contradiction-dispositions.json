@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A1_RESEARCHED_UNRESOLVED_SITE_CONTRADICTIONS_V1",
+  "state": "TERMINAL_RESEARCHED_UNRESOLVED",
+  "school_key": "new-mexico",
+  "conflict_count": 2,
+  "game_rows": [
+    {
+      "research_game_id": "NM-1919-20-0002",
+      "season": "1919-20",
+      "source_opponent_literal": "Arizona",
+      "source_score_literal": "21-40",
+      "accepted_site_type": "UNKNOWN",
+      "stage3a1_research_status": "RESEARCHED_UNRESOLVED",
+      "unm_recordbook_evidence": {
+        "site": "ALBUQUERQUE_WITH_SEASON_HOME",
+        "source_urls": [
+          "https://storage.googleapis.com/golobos-com/2020/12/f55647d3-2020-21-university-of-new-mexico-media-guide-compressed.pdf",
+          "https://storage.googleapis.com/golobos-com/2020/06/713b969b-2019_20_lobo_men_s_basketball_media_guide_compressed.pdf"
+        ]
+      },
+      "arizona_reciprocal_evidence": {
+        "site": "ARIZONA_HOME_TUCSON",
+        "source_urls": [
+          "https://arizonawildcats.com/sports/mbball/opponent-history/new-mexico/39",
+          "https://arizonawildcats.com/sports/mens-basketball/schedule/1919-20"
+        ]
+      },
+      "contemporary_unm_weekly": "https://digitalrepository.unm.edu/unm_weekly_1920/4/",
+      "contemporary_fallback_result": "FULL_TEXT_FETCH_FORBIDDEN_HTTP_403",
+      "nondecision": "NO_SITE_CLASSIFICATION_ASSIGNED; NO_SCORE_DATE_IDENTITY_MUTATION"
+    },
+    {
+      "research_game_id": "NM-1919-20-0003",
+      "season": "1919-20",
+      "source_opponent_literal": "Arizona",
+      "source_score_literal": "19-51",
+      "accepted_site_type": "UNKNOWN",
+      "stage3a1_research_status": "RESEARCHED_UNRESOLVED",
+      "unm_recordbook_evidence": {
+        "site": "ALBUQUERQUE_WITH_SEASON_HOME",
+        "source_urls": [
+          "https://storage.googleapis.com/golobos-com/2020/12/f55647d3-2020-21-university-of-new-mexico-media-guide-compressed.pdf",
+          "https://storage.googleapis.com/golobos-com/2020/06/713b969b-2019_20_lobo_men_s_basketball_media_guide_compressed.pdf"
+        ]
+      },
+      "arizona_reciprocal_evidence": {
+        "site": "ARIZONA_HOME_TUCSON",
+        "source_urls": [
+          "https://arizonawildcats.com/sports/mbball/opponent-history/new-mexico/39",
+          "https://arizonawildcats.com/sports/mens-basketball/schedule/1919-20"
+        ]
+      },
+      "contemporary_unm_weekly": "https://digitalrepository.unm.edu/unm_weekly_1920/4/",
+      "contemporary_fallback_result": "FULL_TEXT_FETCH_FORBIDDEN_HTTP_403",
+      "nondecision": "NO_SITE_CLASSIFICATION_ASSIGNED; NO_SCORE_DATE_IDENTITY_MUTATION"
+    }
+  ]
+}

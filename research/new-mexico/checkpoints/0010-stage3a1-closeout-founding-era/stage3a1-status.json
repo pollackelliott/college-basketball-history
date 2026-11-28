@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_RESEARCH_STAGE3A1_CLOSEOUT_V1",
+  "state": "STAGE_3A1_COMPLETE",
+  "school_key": "new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "5c2d2b9a0876eb739a37b1e9216b2c088027212f",
+  "accepted_game_universe": 2891,
+  "regular_season_games": 2727,
+  "postseason_deferred_games": 164,
+  "accepted_stage2_game_ledger_git_blob_sha": "8c9c501f35a35a8813c250bad20c74783e6f9a8e",
+  "parent_stage3a1_working_ledger_git_blob_sha": "6fbc183bd43dc67d888b669c379099665e1e417c",
+  "previous_individually_supported_site_decisions": 25,
+  "previous_owner_supported_systematic_site_decisions": 2669,
+  "new_founding_era_site_decisions": 31,
+  "researched_unresolved_han_count": 2,
+  "site_census": {
+    "HOME": 1564,
+    "OPPONENT_HOME": 1062,
+    "NEUTRAL": 99,
+    "UNKNOWN": 2
+  },
+  "source_families_checked": [
+    "ACCEPTED_RESEARCH_CHECKPOINTS",
+    "UNM_2020_21_PRIMARY_HISTORICAL_SEASON_SITE_TOTAL_AND_GAME_LOCATIONS",
+    "UNM_2019_20_PRIOR_PRIMARY_RESULTS_FOR_CONFLICT",
+    "NMSU_2020_21_RECIPROCAL_SERIES",
+    "ARIZONA_OFFICIAL_OPPONENT_HISTORY",
+    "ARIZONA_1919_20_SEASON_SCHEDULE",
+    "UNM_WEEKLY_1920_CONTEMPORARY_PERIODICAL_ATTEMPTED_UNAVAILABLE_HTTP403"
+  ],
+  "historical_site_conflict_game_ids": [
+    "NM-1919-20-0002",
+    "NM-1919-20-0003"
+  ],
+  "annotated_regular_season_rows": 386,
+  "annotation_classes": {
+    "RANKING_OR_NUMERIC_PARENTHETICAL": 141,
+    "NUMBERED_FOOTNOTE": 31,
+    "NUMBERED_EVENT_OR_SITE_ANNOTATION": 70,
+    "OTHER_ANNOTATION": 28,
+    "NAMED_EVENT_OR_HOSTING_CONTEXT": 116
+  },
+  "annotation_disposition": "All 386 preserved and grouped by literal source annotation, site token and date; no raw annotation here independently establishes a contradictory home/away/neutral classification. Explicit venue/event/hosting details are downstream Stage 3A-2/3 obligations, not a waiver of site contradiction if later encountered. Do not treat numbered footnotes as home/away/neutral without their literal source support.",
+  "adjudication_cap_independent_rows": 2,
+  "bulk_source_class_resolutions": 31,
+  "unresolved_policy": "Exactly two Arizona 1919-20 games preserved as UNKNOWN with RESEARCHED_UNRESOLVED status in separate contradiction disposition. First-party sources conflict; exhausted bounded source hierarchy and available contemporary UNM Weekly download returned 403.",
+  "latest_accepted_ledger_member": "stage3a1-working-ledger.csv",
+  "queue_member": "stage3a1-downstream-queues.json",
+  "stop_boundary": "STOP_AT_STAGE_3A1_BOUNDARY",
+  "next_bounded_stage": "Stage 3A-2 — HOME facility/chronology and alternate home exceptions (owner Proceed required)",
+  "stage3a2_started": false,
+  "stage3a3_started": false,
+  "stage3b_started": false
+}
