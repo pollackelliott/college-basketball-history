@@ -1,0 +1,114 @@
+name: New Mexico Stage 3A-0 bounded checkpoint execution
+on:
+  push:
+    branches: [research/new-mexico-stage3a0-transport]
+    paths: [.github/workflows/new-mexico-stage3a0-checkpoint-execution.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  stage3a0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout the isolated school-specific execution branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Authenticate permanent tool and exact accepted input
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object tools/research_stage3a0.py)" = "17afe677c8a107935afb72f86b0eb0023f2ad76b"
+          test "$(git hash-object tools/research_authoring_capsule.py)" = "98874d4ca599887eb5535af27fec5d6c0c8c4973"
+          test "$(git hash-object research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/structured-stage2-ledger.csv)" = "8c9c501f35a35a8813c250bad20c74783e6f9a8e"
+          test "$(git hash-object research/new-mexico/stage4-authoring/opponents.csv)" = "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76"
+          test "$(git hash-object research/new-mexico/stage4-authoring/institutional-scope.json)" = "0c1e3d61cebd444008e8c6e520c78e6444843b70"
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "242370fc551fd749c157c74d92917ddfafbe40e0"
+          test "$(git ls-remote origin refs/heads/research/new-mexico | cut -f1)" = "41432f70177b7c270cc611ae8c568a55f22f7bf3"
+
+      - name: Run unchanged protected-main Stage 3A-0 permanent command
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/research_stage3a0.py new-mexico \
+            research/new-mexico/checkpoints/0006-stage2-complete-opponent-identities/structured-stage2-ledger.csv \
+            --main-sha "242370fc551fd749c157c74d92917ddfafbe40e0" \
+            --output-dir research/new-mexico/checkpoints/0007-stage3a0-mechanical-census
+
+      - name: Validate tool output and preserve inherited research authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, csv, pathlib, shutil, hashlib
+          out=pathlib.Path('research/new-mexico/checkpoints/0007-stage3a0-mechanical-census')
+          s=json.loads((out/'stage3a0-status.json').read_text())
+          assert s['status']=='COMPLETE' and s['readiness']['ready'] is True, s
+          assert s['ledger_rows']==2891, s
+          assert s['partition']['regular_season']+s['partition']['postseason']==2891, s
+          assert s['external_historical_research_used'] is False
+          assert s['protected_main_sha']=='242370fc551fd749c157c74d92917ddfafbe40e0'
+          assert s['next_action']=='STOP_AT_STAGE_3A0_BOUNDARY'
+          for name, expected in [('stage3a1-unknown-han-queue.json',s['regular_season_site_census']['UNKNOWN']),('stage3b-postseason-handoff.json',s['partition']['postseason'])]:
+              assert len(json.loads((out/name).read_text()))==expected, name
+          assert (out/'manifest.json').is_file()
+          cap=out/'stage4-authoring'
+          cap.mkdir(parents=True,exist_ok=True)
+          shutil.copyfile('research/new-mexico/stage4-authoring/opponents.csv',cap/'opponents.csv')
+          shutil.copyfile('research/new-mexico/stage4-authoring/institutional-scope.json',cap/'institutional-scope.json')
+          readme=f'''# New Mexico — Stage 3A-0 mechanical checkpoint 0007
+          
+          STAGE_3A0_COMPLETE. No historical web/source research or canonical basketball evidence lookup.
+          Exact immutable research_base_sha: 242370fc551fd749c157c74d92917ddfafbe40e0.
+          Accepted Stage 2 COMPLETE research head: 41432f70177b7c270cc611ae8c568a55f22f7bf3.
+          Exact Stage 2 game-ledger Git blob: 8c9c501f35a35a8813c250bad20c74783e6f9a8e.
+          Exact protected-main permanent tool Git blob: 17afe677c8a107935afb72f86b0eb0023f2ad76b.
+          Source program: new-mexico, owner-final accepted scope INCEPTION+, inception 1899-00.
+          
+          All counts, H/A/N, neutral-era split and exact queues are emitted by the unchanged repository-owned
+          tools/research_stage3a0.py. The original tool manifest, summary and status are included. The accepted
+          Stage 2 opponents.csv and institutional-scope.json are copied byte-for-byte into stage4-authoring/.
+          
+          Ledger: {s['ledger_rows']} total; {s['partition']['regular_season']} regular season;
+          {s['partition']['postseason']} postseason. Regular season site census:
+          {json.dumps(s['regular_season_site_census'],sort_keys=True)}.
+          
+          Stage 3A-0 has no venue research and no inference from raw source_site_token.
+          Next owner Proceed authorizes Stage 3A-1 H/A/N completion; Stage 3A-2/3/4 and Stage 3B not started.
+          '''
+          (out/'README.md').write_text(readme,encoding='utf-8')
+          files=[]
+          for p in sorted(out.rglob('*')):
+              if not p.is_file() or p.name=='checkpoint-content-hashes.json': continue
+              dat=p.read_bytes()
+              files.append(dict(path=p.relative_to(out).as_posix(),bytes=len(dat),sha256=hashlib.sha256(dat).hexdigest()))
+          manifest=dict(schema_version=1,kind='NEW_MEXICO_STAGE3A0_PORTABLE_CHECKPOINT_V1',
+               research_base_sha='242370fc551fd749c157c74d92917ddfafbe40e0',
+               parent_research_commit_sha='41432f70177b7c270cc611ae8c568a55f22f7bf3',
+               parent_stage2_ledger_git_blob_sha='8c9c501f35a35a8813c250bad20c74783e6f9a8e',
+               stage3a0_status=s['status'],external_historical_research_used=False,files=files)
+          (out/'checkpoint-content-hashes.json').write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print(json.dumps(dict(status=s['status'],partition=s['partition'],sites=s['regular_season_site_census'],files=len(files)),indent=2))
+          PY
+
+      - name: Publish audit artifact of the single bounded run
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-mexico-stage3a0-0007
+          path: research/new-mexico/checkpoints/0007-stage3a0-mechanical-census
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Commit generated checkpoint to disposable branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "College Basketball History Stage3A0 CI"
+          git config user.email "stage3a0-ci@users.noreply.github.com"
+          git add research/new-mexico/checkpoints/0007-stage3a0-mechanical-census
+          git diff --cached --quiet && exit 1
+          git commit -m "Generate New Mexico Stage 3A-0 exact permanent-tool checkpoint artifacts"
+          git push origin HEAD:refs/heads/research/new-mexico-stage3a0-transport
