@@ -62,10 +62,14 @@ def restore_expansion_venue_reconciliation(
             raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_FREEZE_INVALID")
         return None
 
+    # Ordinary Integration Freeze stores the sidecar hash inside
+    # venue_reconciliation.spec_sha256; expansion freezes may also carry
+    # the legacy top-level venue_reconciliation_sha256. Both must agree when
+    # present, and neither may be invented or bypassed.
     reconciliation = freeze.get("venue_reconciliation")
-    expected = str(freeze.get("venue_reconciliation_sha256") or "")
+    top_level = str(freeze.get("venue_reconciliation_sha256") or "")
     if reconciliation is None:
-        if expected:
+        if top_level:
             raise Stop("STAGE2_GATE1_UNEXPECTED_VENUE_RECONCILIATION_HASH")
         if venue_reconciliation_bytes is not None:
             raise Stop("STAGE2_GATE1_UNEXPECTED_VENUE_RECONCILIATION_BYTES")
@@ -73,6 +77,10 @@ def restore_expansion_venue_reconciliation(
 
     if not isinstance(reconciliation, dict):
         raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_INVALID")
+    embedded = str(reconciliation.get("spec_sha256") or "")
+    if top_level and embedded and top_level != embedded:
+        raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_HASH_CONFLICT")
+    expected = top_level or embedded
     if not re.fullmatch(r"[0-9a-f]{64}", expected):
         raise Stop("STAGE2_GATE1_VENUE_RECONCILIATION_HASH_INVALID")
     if venue_reconciliation_bytes is None:

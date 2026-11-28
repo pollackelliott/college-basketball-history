@@ -326,6 +326,93 @@ class RemoteStage2PresealTests(unittest.TestCase):
                     b"wrong",
                 )
 
+    def test_ordinary_integration_freeze_sidecar_is_restored_exactly(self):
+        sidecar_bytes = b'{"schema_version":2}\n'
+        freeze_bytes = (
+            json.dumps(
+                {
+                    "kind": "INTEGRATION_FREEZE",
+                    "schema_version": 2,
+                    "venue_reconciliation": {"spec_sha256": sha(sidecar_bytes)},
+                }
+            ) + "\n"
+        ).encode()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            restored = preseal.restore_expansion_venue_reconciliation(
+                root, SCHOOL, freeze_bytes, sidecar_bytes
+            )
+            self.assertEqual(restored.read_bytes(), sidecar_bytes)
+            with self.assertRaisesRegex(
+                Stop, "STAGE2_GATE1_VENUE_RECONCILIATION_BYTES_MISSING"
+            ):
+                preseal.restore_expansion_venue_reconciliation(
+                    root, SCHOOL, freeze_bytes, None
+                )
+            with self.assertRaisesRegex(
+                Stop, "STAGE2_GATE1_VENUE_RECONCILIATION_BYTES_MISMATCH"
+            ):
+                preseal.restore_expansion_venue_reconciliation(
+                    root, SCHOOL, freeze_bytes, b"wrong"
+                )
+
+    def test_gate1_sidecar_rejects_conflicting_or_missing_digests(self):
+        sidecar_bytes = b'{"schema_version":2}\n'
+        valid_digest = sha(sidecar_bytes)
+        cases = [
+            (
+                {"venue_reconciliation": {
+                    "spec_sha256": valid_digest
+                }, "venue_reconciliation_sha256": "f" * 64},
+                "STAGE2_GATE1_VENUE_RECONCILIATION_HASH_CONFLICT",
+            ),
+            (
+                {"venue_reconciliation": {}},
+                "STAGE2_GATE1_VENUE_RECONCILIATION_HASH_INVALID",
+            ),
+            (
+                {"venue_reconciliation": {"spec_sha256": "not-a-sha"}},
+                "STAGE2_GATE1_VENUE_RECONCILIATION_HASH_INVALID",
+            ),
+            (
+                {"venue_reconciliation": {
+                    "spec_sha256": valid_digest
+                }, "venue_reconciliation_sha256": "not-a-sha"},
+                "STAGE2_GATE1_VENUE_RECONCILIATION_HASH_CONFLICT",
+            ),
+            (
+                {},
+                "STAGE2_GATE1_UNEXPECTED_VENUE_RECONCILIATION_BYTES",
+            ),
+        ]
+        for freeze, expected_error in cases:
+            with self.subTest(error=expected_error, freeze=freeze):
+                with tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    with self.assertRaisesRegex(Stop, expected_error):
+                        preseal.restore_expansion_venue_reconciliation(
+                            root, SCHOOL, json.dumps(freeze).encode(),
+                            sidecar_bytes,
+                        )
+                    self.assertFalse(
+                        (root / ".onboarding" / SCHOOL /
+                         "venue-reconciliation.json").exists()
+                    )
+
+    def test_gate1_sidecar_allows_consistent_dual_digest(self):
+        sidecar_bytes = b'{"schema_version":2}\n'
+        digest = sha(sidecar_bytes)
+        freeze_bytes = json.dumps({
+            "venue_reconciliation": {"spec_sha256": digest},
+            "venue_reconciliation_sha256": digest,
+        }).encode()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = preseal.restore_expansion_venue_reconciliation(
+                root, SCHOOL, freeze_bytes, sidecar_bytes
+            )
+            self.assertEqual(path.read_bytes(), sidecar_bytes)
+
     def test_permanent_rehearsal_restores_bound_venue_reconciliation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -334,9 +421,9 @@ class RemoteStage2PresealTests(unittest.TestCase):
             freeze_bytes = (
                 json.dumps(
                     {
-                        "kind": "ALL_HISTORY_EXPANSION_INTEGRATION_FREEZE",
+                        "kind": "INTEGRATION_FREEZE",
+                        "schema_version": 2,
                         "venue_reconciliation": {"spec_sha256": sha(sidecar_bytes)},
-                        "venue_reconciliation_sha256": sha(sidecar_bytes),
                     }
                 )
                 + "\n"
