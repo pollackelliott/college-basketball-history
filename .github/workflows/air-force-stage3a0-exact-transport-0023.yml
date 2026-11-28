@@ -1,0 +1,49 @@
+name: Air Force Stage 3A-0 exact transport 0023
+on:
+  push:
+    branches: [research/air-force]
+    paths:
+      - .github/workflows/air-force-stage3a0-exact-transport-0023.yml
+
+permissions:
+  contents: read
+
+jobs:
+  stage3a0_exact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Materialize exact Git objects and run permanent Stage 3A-0
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/tools" "$RUNNER_TEMP/stage2/stage4-authoring" "$RUNNER_TEMP/stage3a0"
+          fetch_exact_blob() {
+            local sha="$1" dest="$2"
+            gh api "repos/$GITHUB_REPOSITORY/git/blobs/$sha" --jq .content | base64 -d > "$dest"
+            test "$(git hash-object "$dest")" = "$sha" || { echo "Exact blob hash mismatch $dest" >&2; exit 8; }
+          }
+          fetch_exact_blob 17afe677c8a107935afb72f86b0eb0023f2ad76b "$RUNNER_TEMP/tools/research_stage3a0.py"
+          fetch_exact_blob 98874d4ca599887eb5535af27fec5d6c0c8c4973 "$RUNNER_TEMP/tools/research_authoring_capsule.py"
+          fetch_exact_blob acdf50852f41ccade14e36d0b73bfcb1a1c6c5bc "$RUNNER_TEMP/stage2/structured-stage2-ledger.csv"
+          fetch_exact_blob 8eb9d65d52485e8714c8a2afc99b8feb59795739 "$RUNNER_TEMP/stage2/stage4-authoring/opponents.csv"
+          fetch_exact_blob 3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff "$RUNNER_TEMP/stage2/stage4-authoring/institutional-scope.json"
+          fetch_exact_blob cfa5dc2c64e8babe86cf449eeaea534bbe9ab75f "$RUNNER_TEMP/stage2/manifest.json"
+          export AIR_FORCE_STAGE2_ROOT="$RUNNER_TEMP/stage2"
+          export AIR_FORCE_STAGE2_ZIP="$RUNNER_TEMP/stage2-checkpoint-0022.zip"
+          python -c 'import os, pathlib, zipfile; root=pathlib.Path(os.environ["AIR_FORCE_STAGE2_ROOT"]); paths=sorted(p for p in root.rglob("*") if p.is_file()); z=zipfile.ZipFile(os.environ["AIR_FORCE_STAGE2_ZIP"],"w",compression=zipfile.ZIP_DEFLATED); [z.write(p,p.relative_to(root).as_posix()) for p in paths]; z.close(); print("Exact Stage 2 checkpoint ZIP members:",len(paths))'
+          python "$RUNNER_TEMP/tools/research_stage3a0.py" air-force "$RUNNER_TEMP/stage2-checkpoint-0022.zip" --main-sha a11cccf944492e4d968edbeef4111ebad150fcec --output-dir "$RUNNER_TEMP/stage3a0"
+          export AIR_FORCE_STAGE3A0_OUT="$RUNNER_TEMP/stage3a0"
+          python -c 'import os, pathlib, json; p=pathlib.Path(os.environ["AIR_FORCE_STAGE3A0_OUT"]); d=json.loads((p/"stage3a0-status.json").read_text()); assert d["status"]=="COMPLETE", d; assert d["ledger_rows"]==1928; assert d["partition"]["regular_season"]+d["partition"]["postseason"]==1928; assert not d["external_historical_research_used"]; assert len(list(p.glob("stage3a*.json")))>3; print("Stage3A0 verified:",d["partition"],d["regular_season_site_census"],d["neutral_era_census"])'
+      - name: Upload exact-output bounded checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: air-force-stage3a0-0023-a11cccf944492e4d968edbeef4111ebad150fcec
+          path: ${{ runner.temp }}/stage3a0
+          if-no-files-found: error
+          retention-days: 7
