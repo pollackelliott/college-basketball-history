@@ -1,0 +1,708 @@
+{
+  "allowed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/program-top-level-scope.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/grand-canyon/conferences.csv",
+    "schools/grand-canyon/notes.md",
+    "schools/grand-canyon/opponents.csv",
+    "schools/grand-canyon/source-games.csv",
+    "schools/grand-canyon/source-notes.md",
+    "schools/grand-canyon/venues.csv"
+  ],
+  "changed_file_sha256": {
+    "data/reference/conferences.csv": "225350e4d7ea4896b967c1985edde2c66f00fef7a779fb08535d0ac3a8cfaec5",
+    "data/reference/programs.csv": "6dc19221a7a34044c15276da8db995783bc44d039375d9a7bc28ecc4ddbf3ada",
+    "data/reference/venue-names.csv": "4f369047c690fd359f3fd8991e4419f6eeb98c72ecc1f20a96b494ce312587e2",
+    "data/reference/venues.csv": "d0c20b11f0a82f15cef1e113a57ea550ab35dbe4ef1eeb3503a6a6629944a902",
+    "schools/grand-canyon/conferences.csv": "a05726f6b26dc435ac1534299cc5db79e2aaecae3516e19f978489170fc939f3",
+    "schools/grand-canyon/notes.md": "eee6f1f7a334f1c802dd6dd3e64a769dbd5097d79a881084580799a8d3ef9706",
+    "schools/grand-canyon/opponents.csv": "fbcf851f2f2c0b6a288a07078014192ddb20e4c975d088646f7c72e5605a7f88",
+    "schools/grand-canyon/source-games.csv": "3faa51895daa96370b06f6ed87cfd46918847b920a16ff5863f8aa9b9281c7cd",
+    "schools/grand-canyon/source-notes.md": "91d44029478f7055c9461e38187a1f410ac7a70a36e2739c8ffd114a51676a11",
+    "schools/grand-canyon/venues.csv": "455dd8a78e05d84740d96759185a606ab017579fbe90ce45042f208fc5f12199"
+  },
+  "changed_paths": [
+    "data/reference/conferences.csv",
+    "data/reference/programs.csv",
+    "data/reference/venue-names.csv",
+    "data/reference/venues.csv",
+    "schools/grand-canyon/conferences.csv",
+    "schools/grand-canyon/notes.md",
+    "schools/grand-canyon/opponents.csv",
+    "schools/grand-canyon/source-games.csv",
+    "schools/grand-canyon/source-notes.md",
+    "schools/grand-canyon/venues.csv"
+  ],
+  "commit_message": "Add Grand Canyon onboarding source package",
+  "conference_mapping": [
+    {
+      "conference_key": "pacific-west",
+      "resolution": "NEW_GLOBAL_IDENTITY"
+    },
+    {
+      "conference_key": "ccaa",
+      "resolution": "NEW_GLOBAL_IDENTITY"
+    }
+  ],
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "a05726f6b26dc435ac1534299cc5db79e2aaecae3516e19f978489170fc939f3",
+    "owner_approval_basis": "Grand Canyon Research Freeze accepts the seven exact historical conference rows. Owner authorized the existing Stage 1 deterministic reconciliation unit. The two missing shared conference keys are research-settled; registering them in the guarded target-school onboarding transaction is a representation-only action, not permission to change another published program, reopen memberships, or assert conference tournaments. Tournament labels are nonassertive exact-full-name fallbacks.",
+    "registration_count": 2,
+    "registrations": [
+      {
+        "conference_key": "pacific-west",
+        "conference_name": "Pacific West Conference",
+        "notes": "Grand Canyon frozen complete-institutional Research establishes 1991-92 through 1993-94 and 2006-07 through 2012-13 membership. Registration under accepted Stage 1 current-main reconciliation. Full conference name is a nonassertive display/tournament fallback only; no tournament existence is inferred.",
+        "status": "historical",
+        "tournament_label": "Pacific West Conference"
+      },
+      {
+        "conference_key": "ccaa",
+        "conference_name": "California Collegiate Athletic Association",
+        "notes": "Grand Canyon frozen complete-institutional Research establishes 1994-95 through 2003-04 membership. Registration under accepted Stage 1 current-main reconciliation. Full conference name is a nonassertive display/tournament fallback only; no tournament existence is inferred.",
+        "status": "historical",
+        "tournament_label": "California Collegiate Athletic Association"
+      }
+    ],
+    "replacement_history": [
+      {
+        "basis": "Authenticated Stage 1 season census records NAIA affiliation throughout 1949-50 through 1990-91; GCU Athletics current conference-membership history identifies the basketball program as NAIA Independent (associate member 1949-67; full member 1968-90). Source: https://gculopes.com/sports/2013/10/29/MBB_1029132527",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1990-1991",
+        "membership_type": "independent",
+        "notes": "Accepted complete-institutional pre-top-level chronology. NAIA is preserved as association/classification context; package conference identity is Independent.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "1949-1950"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - Pacific West for 1991-92 through 1993-94; GCU year-by-year history groups these three seasons under the Pacific West Conference. Source: https://gculopes.com/sports/2016/9/22/mens-basketball-year-by-year",
+        "conference_key": "pacific-west",
+        "conference_name": "Pacific West Conference",
+        "end_season": "1993-1994",
+        "membership_type": "primary",
+        "notes": "GCU historical materials also describe the Great Northwest Conference predecessor lineage; this row preserves the accepted Stage 1/PacWest grouping rather than reopening that accepted representation at Stage 3B closeout.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "1991-1992"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - California Collegiate for 1994-95 through 2003-04; GCU contemporaneous institutional history announced the move to the CCAA for 1994-95. Source: https://gculopes.com/documents/download/2020/7/9/1994.pdf",
+        "conference_key": "ccaa",
+        "conference_name": "California Collegiate Athletic Association",
+        "end_season": "2003-2004",
+        "membership_type": "primary",
+        "notes": "Ten-season CCAA basketball era preserved from accepted institutional chronology.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "1994-1995"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - Independent for 2004-05 and 2005-06; GCU year-by-year history lists both seasons as NCAA Division II Independent. Source: https://gculopes.com/sports/2016/9/22/mens-basketball-year-by-year",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "2005-2006",
+        "membership_type": "independent",
+        "notes": "Two-season NCAA Division II independent interval.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "2004-2005"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - Pacific West for 2006-07 through 2012-13; GCU institutional 2006 season outlook states the Lopes returned to the Pacific West Conference beginning 2006-07. Source: https://gculopes.com/news/2006/11/1/2006-gcu-mens-basketball-season-outlook",
+        "conference_key": "pacific-west",
+        "conference_name": "Pacific West Conference",
+        "end_season": "2012-2013",
+        "membership_type": "primary",
+        "notes": "Final NCAA Division II conference era before accepted top-level/D-I scope begins in 2013-14.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "2006-2007"
+      },
+      {
+        "basis": "Grand Canyon University Athletics officially announced GCU became a WAC member on 2013-07-01 for the 2013-14 school year (https://gculopes.com/news/2013/7/1/GEN_0701130834); GCU men's basketball history records the Division I WAC era through 2024-25 (https://gculopes.com/sports/2013/10/29/MBB_1029132527).",
+        "conference_key": "wac",
+        "conference_name": "Western Athletic Conference",
+        "end_season": "2024-2025",
+        "membership_type": "conference",
+        "notes": "Accepted Grand Canyon top-level Research scope begins with the 2013-14 WAC entry; final WAC basketball season in this researched scope is 2024-25.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "2013-2014"
+      },
+      {
+        "basis": "Grand Canyon University Athletics announced GCU entered the Mountain West on 2025-07-08 and would immediately participate in regular-season competition and conference championships for 2025-26 (https://gculopes.com/news/2025/7/8/general-gcu-jumps-to-mountain-west-this-fall); the Mountain West chronology independently records GCU's 2025 entry (https://themw.com/sports/2026/5/28/chronology.aspx).",
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West",
+        "end_season": "",
+        "membership_type": "conference",
+        "notes": "Ongoing through the required completed-season cutoff 2025-26.",
+        "ongoing": "True",
+        "source_program_key": "grand-canyon",
+        "start_season": "2025-2026"
+      }
+    ],
+    "replacement_row_count": 7,
+    "spec_path": "/tmp/remote-phase0-inputs-b_bvszyc/conference-reconciliation.json",
+    "spec_sha256": "cb3508344aafc53125f63cd6abc3badcfe1006451230f7a1a2e3a07841631fb7"
+  },
+  "expected_target_predecessor_sha": null,
+  "global_lock_commit": "5eb6c35c464eb12ad0207986eaa882f23a788460",
+  "history_scope": {
+    "history_scope_basis": "TOP_LEVEL_INTERVALS",
+    "history_scope_intervals": "2013-14+",
+    "history_scope_notes": "Grand Canyon original complete-institutional frozen Research establishes institutional varsity inception 1949-50 and publication universe 1949-50 through completed 2025-26. This compatibility history_scope field represents only accepted top-level/Division I-equivalent classification 2013-14+; it is not institutional inception and does not clip the immutable 2,147-game institutional Research source universe. Current-main program-top-level-scope.csv already exactly matches Grand Canyon,2013-14+; confirmed, not superseded. Preserve all accepted history.",
+    "history_scope_status": "OWNER_CONFIRMED",
+    "history_start_season": "2013-2014",
+    "top_level_scope_reference": {
+      "accepted_top_level_scope": "2013-14+",
+      "action": "CONFIRMED",
+      "changed": false,
+      "prior_top_level_scope": "2013-14+",
+      "school": "Grand Canyon"
+    }
+  },
+  "integration_freeze_sha256": "2d4063679b27c109d94f88ea09c58d9046063d5f22f03ef0de23b61d5e7b608d",
+  "kind": "REMOTE_IMPLEMENTATION_WRITEAHEAD",
+  "mutation_state": "PREPARED_NOT_PUBLISHED",
+  "package_member_sha256": {
+    "conferences.csv": "a05726f6b26dc435ac1534299cc5db79e2aaecae3516e19f978489170fc939f3",
+    "notes.md": "eee6f1f7a334f1c802dd6dd3e64a769dbd5097d79a881084580799a8d3ef9706",
+    "opponents.csv": "fbcf851f2f2c0b6a288a07078014192ddb20e4c975d088646f7c72e5605a7f88",
+    "source-games.csv": "3faa51895daa96370b06f6ed87cfd46918847b920a16ff5863f8aa9b9281c7cd",
+    "source-notes.md": "91d44029478f7055c9461e38187a1f410ac7a70a36e2739c8ffd114a51676a11",
+    "venues.csv": "455dd8a78e05d84740d96759185a606ab017579fbe90ce45042f208fc5f12199"
+  },
+  "prepared_commit_sha": "f67371c2380b7b28255e525922e780a65737a475",
+  "prepared_parent_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "prepared_tree_sha": "1e8a991039a8bc89ee4a41298110149184c9e5b7",
+  "program_alias_mapping": [],
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "repository_validation": "PASS",
+  "request_id": "grand-canyon-phase0-0001",
+  "request_sha256": "83d3c4dc96cd3375175d850dd6877305734ab1687dde7df060f6fc9a96e5dd19",
+  "research_base_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "research_checkpoint_sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
+  "schema_version": 1,
+  "school_key": "grand-canyon",
+  "semantic_snapshot_sha256": "e9424df1a55f68fcab755f11a920259ee3759ff0cb92e9a0f74bce28e4905319",
+  "sidecars": {
+    "conference-reconciliation.json": "cb3508344aafc53125f63cd6abc3badcfe1006451230f7a1a2e3a07841631fb7",
+    "integration-freeze.json": "2d4063679b27c109d94f88ea09c58d9046063d5f22f03ef0de23b61d5e7b608d",
+    "stage1-reconciliation.json": "c5813c2df21b75e28e02b9f21d17457d1092367e5b11aa8250e880292e288295",
+    "venue-reconciliation.json": "d8b522afca8413ba722994965c5bc9427eb7144e7411490601408b971cd0cd0c"
+  },
+  "target_branch": "data/grand-canyon-onboarding",
+  "venue_mapping": [
+    {
+      "canonical_name": "Acrisure Arena",
+      "final_venue_id": "VEN-000242",
+      "final_venue_key": "acrisure-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "acrisure-arena"
+    },
+    {
+      "canonical_name": "Anaheim Convention Center",
+      "final_venue_id": "VEN-000386",
+      "final_venue_key": "anaheim-convention-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "anaheim-convention-center"
+    },
+    {
+      "canonical_name": "Antelope Gymnasium",
+      "final_venue_id": "VEN-001152",
+      "final_venue_key": "antelope-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "antelope-gymnasium"
+    },
+    {
+      "canonical_name": "Ball Arena",
+      "final_venue_id": "VEN-000018",
+      "final_venue_key": "ball-arena",
+      "research_venue_id": "VEN-000018",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "ball-arena"
+    },
+    {
+      "canonical_name": "Brougham Pavilion",
+      "final_venue_id": "VEN-001166",
+      "final_venue_key": "royal-brougham-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "brougham-pavilion"
+    },
+    {
+      "canonical_name": "Bryant Fitness Center",
+      "final_venue_id": "VEN-001172",
+      "final_venue_key": "bryant-fitness-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "bryant-fitness-center"
+    },
+    {
+      "canonical_name": "Cox Pavilion",
+      "final_venue_id": "VEN-000575",
+      "final_venue_key": "cox-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "cox-pavilion"
+    },
+    {
+      "canonical_name": "Desert Diamond Arena",
+      "final_venue_id": "VEN-000349",
+      "final_venue_key": "desert-diamond-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "desert-diamond-arena"
+    },
+    {
+      "canonical_name": "Downtown Phoenix YMCA Gymnasium",
+      "final_venue_id": "VEN-001173",
+      "final_venue_key": "downtown-phoenix-ymca-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "downtown-phoenix-ymca-gymnasium"
+    },
+    {
+      "canonical_name": "East Gym",
+      "final_venue_id": "VEN-001156",
+      "final_venue_key": "east-gym-cal-poly-humboldt",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "east-gym"
+    },
+    {
+      "canonical_name": "GCU Basketball Practice Facility",
+      "final_venue_id": "VEN-001174",
+      "final_venue_key": "gcu-basketball-practice-facility",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "gcu-basketball-practice-facility"
+    },
+    {
+      "canonical_name": "Global Credit Union Arena at GCU",
+      "final_venue_id": "VEN-000975",
+      "final_venue_key": "gcu-arena",
+      "research_venue_id": "VEN-000975",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "gcu-arena"
+    },
+    {
+      "canonical_name": "Icardo Center",
+      "final_venue_id": "VEN-001163",
+      "final_venue_key": "icardo-center-csub",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "icardo-center"
+    },
+    {
+      "canonical_name": "Indiana Farmers Coliseum",
+      "final_venue_id": "VEN-000089",
+      "final_venue_key": "indiana-farmers-coliseum",
+      "research_venue_id": "VEN-000089",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "indiana-farmers-coliseum"
+    },
+    {
+      "canonical_name": "Intuit Dome",
+      "final_venue_id": "VEN-000375",
+      "final_venue_key": "intuit-dome",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "intuit-dome"
+    },
+    {
+      "canonical_name": "Jenny Craig Pavilion",
+      "final_venue_id": "VEN-000094",
+      "final_venue_key": "jenny-craig-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jenny-craig-pavilion"
+    },
+    {
+      "canonical_name": "Jon M. Huntsman Center",
+      "final_venue_id": "VEN-000097",
+      "final_venue_key": "jon-m-huntsman-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "jon-m-huntsman-center"
+    },
+    {
+      "canonical_name": "KeyArena",
+      "final_venue_id": "VEN-000102",
+      "final_venue_key": "keyarena",
+      "research_venue_id": "VEN-000102",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "keyarena"
+    },
+    {
+      "canonical_name": "Massari Arena",
+      "final_venue_id": "VEN-001175",
+      "final_venue_key": "massari-arena",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "massari-arena"
+    },
+    {
+      "canonical_name": "Mohegan Sun Arena",
+      "final_venue_id": "VEN-000139",
+      "final_venue_key": "mohegan-sun-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "mohegan-sun-arena"
+    },
+    {
+      "canonical_name": "Mortgage Matchup Center",
+      "final_venue_id": "VEN-000065",
+      "final_venue_key": "footprint-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "mortgage-matchup-center"
+    },
+    {
+      "canonical_name": "Nicholson Pavilion",
+      "final_venue_id": "VEN-001165",
+      "final_venue_key": "nicholson-pavilion",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "nicholson-pavilion"
+    },
+    {
+      "canonical_name": "North Gym",
+      "final_venue_id": "VEN-001176",
+      "final_venue_key": "north-gym",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "north-gym"
+    },
+    {
+      "canonical_name": "Numerica Veterans Arena",
+      "final_venue_id": "VEN-000152",
+      "final_venue_key": "numerica-veterans-arena",
+      "research_venue_id": "VEN-000152",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "numerica-veterans-arena"
+    },
+    {
+      "canonical_name": "Orleans Arena",
+      "final_venue_id": "VEN-000356",
+      "final_venue_key": "orleans-arena",
+      "research_venue_id": "VEN-000356",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "orleans-arena"
+    },
+    {
+      "canonical_name": "Patty Center",
+      "final_venue_id": "VEN-001177",
+      "final_venue_key": "patty-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "patty-center"
+    },
+    {
+      "canonical_name": "Prescott Armory",
+      "final_venue_id": "VEN-001178",
+      "final_venue_key": "prescott-armory",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "prescott-armory"
+    },
+    {
+      "canonical_name": "Sam Carver Gymnasium",
+      "final_venue_id": "VEN-001179",
+      "final_venue_key": "sam-carver-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "sam-carver-gymnasium"
+    },
+    {
+      "canonical_name": "San Francisco Federal Credit Union Gymnasium at Don Nasser Family Plaza",
+      "final_venue_id": "VEN-001154",
+      "final_venue_key": "sf-state-main-gymnasium",
+      "research_venue_id": "",
+      "resolution": "REUSE_REGISTERED_ALIAS",
+      "venue_key": "san-francisco-federal-credit-union-gymnasium"
+    },
+    {
+      "canonical_name": "Save Mart Center",
+      "final_venue_id": "VEN-000798",
+      "final_venue_key": "save-mart-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "save-mart-center"
+    },
+    {
+      "canonical_name": "Sports and Fitness Center",
+      "final_venue_id": "VEN-000191",
+      "final_venue_key": "sports-and-fitness-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "sports-and-fitness-center"
+    },
+    {
+      "canonical_name": "State Farm Arena",
+      "final_venue_id": "VEN-000195",
+      "final_venue_key": "state-farm-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "state-farm-arena"
+    },
+    {
+      "canonical_name": "T-Mobile Arena",
+      "final_venue_id": "VEN-000201",
+      "final_venue_key": "t-mobile-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-arena"
+    },
+    {
+      "canonical_name": "T-Mobile Center",
+      "final_venue_id": "VEN-000202",
+      "final_venue_key": "t-mobile-center",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "t-mobile-center"
+    },
+    {
+      "canonical_name": "Titan Gym",
+      "final_venue_id": "VEN-000212",
+      "final_venue_key": "titan-gym",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "titan-gym"
+    },
+    {
+      "canonical_name": "Triton Pavilion",
+      "final_venue_id": "VEN-001180",
+      "final_venue_key": "triton-pavilion",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "triton-pavilion"
+    },
+    {
+      "canonical_name": "University Credit Union Center",
+      "final_venue_id": "VEN-001129",
+      "final_venue_key": "university-credit-union-center",
+      "research_venue_id": "VEN-001129",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "university-credit-union-center"
+    },
+    {
+      "canonical_name": "UTC Arena",
+      "final_venue_id": "VEN-000697",
+      "final_venue_key": "utc-arena",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "utc-arena"
+    },
+    {
+      "canonical_name": "Valley High School",
+      "final_venue_id": "VEN-000455",
+      "final_venue_key": "valley-high-school-las-vegas",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+      "venue_key": "valley-high-school"
+    },
+    {
+      "canonical_name": "Whalen Gymnasium",
+      "final_venue_id": "VEN-001181",
+      "final_venue_key": "whalen-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "whalen-gymnasium"
+    },
+    {
+      "canonical_name": "Michelob ULTRA Arena",
+      "final_venue_id": "VEN-000135",
+      "final_venue_key": "michelob-ultra-arena",
+      "research_venue_id": "VEN-000135",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "michelob-ultra-arena"
+    },
+    {
+      "canonical_name": "Thomas & Mack Center",
+      "final_venue_id": "VEN-000377",
+      "final_venue_key": "thomas-and-mack-center",
+      "research_venue_id": "VEN-000377",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "thomas-and-mack-center"
+    },
+    {
+      "canonical_name": "UAA Sports Center",
+      "final_venue_id": "VEN-001182",
+      "final_venue_key": "uaa-sports-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "uaa-sports-center"
+    },
+    {
+      "canonical_name": "SRC Arena",
+      "final_venue_id": "VEN-001162",
+      "final_venue_key": "src-arena-uc-riverside",
+      "research_venue_id": "",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "src-arena-uc-riverside"
+    },
+    {
+      "canonical_name": "Felix Event Center",
+      "final_venue_id": "VEN-001183",
+      "final_venue_key": "felix-event-center",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "felix-event-center"
+    },
+    {
+      "canonical_name": "HTC Center",
+      "final_venue_id": "VEN-000354",
+      "final_venue_key": "htc-center",
+      "research_venue_id": "VEN-000354",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "htc-center"
+    },
+    {
+      "canonical_name": "WVU Coliseum",
+      "final_venue_id": "VEN-000235",
+      "final_venue_key": "wvu-coliseum",
+      "research_venue_id": "VEN-000235",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "wvu-coliseum"
+    },
+    {
+      "canonical_name": "Municipal Auditorium",
+      "final_venue_id": "VEN-000143",
+      "final_venue_key": "municipal-auditorium-kc",
+      "research_venue_id": "VEN-000143",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "municipal-auditorium-kc"
+    },
+    {
+      "canonical_name": "Kemper Arena",
+      "final_venue_id": "VEN-000099",
+      "final_venue_key": "kemper-arena",
+      "research_venue_id": "VEN-000099",
+      "resolution": "REUSE_EXACT_KEY",
+      "venue_key": "kemper-arena"
+    },
+    {
+      "canonical_name": "Plachy Hall",
+      "final_venue_id": "VEN-001184",
+      "final_venue_key": "plachy-hall",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "plachy-hall"
+    },
+    {
+      "canonical_name": "WNMU Fieldhouse",
+      "final_venue_id": "VEN-001185",
+      "final_venue_key": "wnmu-fieldhouse",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "wnmu-fieldhouse"
+    },
+    {
+      "canonical_name": "Roe F. Saunders Field House",
+      "final_venue_id": "VEN-001186",
+      "final_venue_key": "roe-f-saunders-field-house",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "roe-f-saunders-field-house"
+    },
+    {
+      "canonical_name": "Paul Wright Gymnasium",
+      "final_venue_id": "VEN-001187",
+      "final_venue_key": "paul-wright-gymnasium",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "paul-wright-gymnasium"
+    },
+    {
+      "canonical_name": "North Phoenix Baptist Church",
+      "final_venue_id": "VEN-001188",
+      "final_venue_key": "north-phoenix-baptist-church",
+      "research_venue_id": "",
+      "resolution": "NEW_GLOBAL_IDENTITY",
+      "venue_key": "north-phoenix-baptist-church"
+    }
+  ],
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "79d0307550c772f69c4f5f705484cf3cf2b3b35ba1d96ee35fcdc53ba962dc7a",
+    "mappings": [
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Arcata",
+        "expected_global_state": "CA",
+        "expected_local_city": "Arcata",
+        "expected_local_name": "East Gym",
+        "expected_local_state": "CA",
+        "global_venue_id": "VEN-001156",
+        "global_venue_key": "east-gym-cal-poly-humboldt",
+        "local_venue_key": "east-gym",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "The accepted 2007 NCAA postseason East Gym assignments explicitly identify the Humboldt State building in Arcata. Protected main VEN-001156 documents the same Humboldt State East Gym opened in 1931; neither identity nor site geography changes."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Bakersfield",
+        "expected_global_state": "CA",
+        "expected_local_city": "Bakersfield",
+        "expected_local_name": "Icardo Center",
+        "expected_local_state": "CA",
+        "global_venue_id": "VEN-001163",
+        "global_venue_key": "icardo-center-csub",
+        "local_venue_key": "icardo-center",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Frozen 1992-1997 NCAA postseason chronology explicitly equates Icardo Center with CSUB Activities Center at Bakersfield. Protected main VEN-001163 is that same CSUB building opened in 1989; preserve historic venue-name literals and exact accepted sites."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Phoenix",
+        "expected_global_state": "AZ",
+        "expected_local_city": "Phoenix",
+        "expected_local_name": "Mortgage Matchup Center",
+        "expected_local_state": "AZ",
+        "global_venue_id": "VEN-000065",
+        "global_venue_key": "footprint-center",
+        "local_venue_key": "mortgage-matchup-center",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Frozen Grand Canyon Stage 3A exact neutral games name Mortgage Matchup Center in Phoenix. Protected main VEN-000065 has the same display name/locality and documents Footprint Center/Mortgage Matchup Center as one physical building; reuse its current key rather than duplicate the arena."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Las Vegas",
+        "expected_global_state": "NV",
+        "expected_local_city": "Las Vegas",
+        "expected_local_name": "Valley High School",
+        "expected_local_state": "NV",
+        "global_venue_id": "VEN-000455",
+        "global_venue_key": "valley-high-school-las-vegas",
+        "local_venue_key": "valley-high-school",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Frozen 2008-12-20 and 2008-12-21 neutral games name Valley High School in Las Vegas. Protected main VEN-000455 records the same school/physical Las Vegas tournament venue from other accepted research; the buildings/geography agree."
+      }
+    ],
+    "owner_approval_basis": "Grand Canyon final six-file RESEARCH_FROZEN acceptance and explicit owner instruction to continue the already authorized Stage 1, classify all six findings, and perform deterministic current-main reconciliation. These four mappings preserve settled Research venue identity/geography; no historical correction, owner-gate bypass, or change to already-published state is authorized.",
+    "research_zip_sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
+    "schema_version": 1,
+    "spec_path": "/tmp/remote-phase0-inputs-b_bvszyc/venue-reconciliation.json",
+    "spec_sha256": "d8b522afca8413ba722994965c5bc9427eb7144e7411490601408b971cd0cd0c"
+  }
+}
