@@ -1,0 +1,304 @@
+name: SDSU Stage 3A-1 two NCAA-year source H-A-N parity
+on:
+  push:
+    branches:
+      - research/san-diego-state-all-history-expansion
+    paths:
+      - .github/workflows/sdsu-stage3a1-two-ncaa-season-parity.yml
+permissions:
+  contents: write
+jobs:
+  two-official-season-han-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact Research state with historical ancestry
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Authenticate 0060 and reconcile full first-party NCAA season site partitions
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import collections,csv,hashlib,json,pathlib,re,subprocess
+          root=pathlib.Path("research/san-diego-state-all-history-expansion")
+          prior=root/"stage3a/0060-stage3a1-eight-season-1951-1970-official-home-parity"
+          stage2=root/"stage2/0052-stage2-complete-exact-source-provenance"
+          stage0=root/"stage3a/0053-stage3a0-local-mechanical-census"
+          source=root/"checkpoints/0006-1951-1970-source-census/source-game-candidates.csv"
+          out=root/"stage3a/0061-stage3a1-two-ncaa-season-whole-source-parity"
+          parent="bbb0eae3106fbd8a4a5f8c99986ce7fe61284841"
+          main="242370fc551fd749c157c74d92917ddfafbe40e0"
+          base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          guide="https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+          source_expected_git_blob="167a4eef7be75aaae3c0e0edf0fc18ea411ed23d"
+          def sha(b):return hashlib.sha256(b).hexdigest()
+          def check(cond,msg):
+              if not cond:raise AssertionError("SDSU_STAGE3A1_0061_FAIL_CLOSED: "+msg)
+          def readcsv(p):
+              with p.open(newline="",encoding="utf-8-sig") as f:return list(csv.DictReader(f))
+          def readjson(p):return json.loads(p.read_text(encoding="utf-8"))
+          def writejson(p,x):p.write_text(json.dumps(x,indent=2,sort_keys=True,ensure_ascii=False)+"\n",encoding="utf-8")
+          def writecsv(p,columns,rows):
+              with p.open("w",newline="",encoding="utf-8") as f:
+                  w=csv.DictWriter(f,fieldnames=columns,extrasaction="raise")
+                  w.writeheader();w.writerows(rows)
+          def mark(r):
+              label=r["opponent_literal"]
+              if re.match(r"^\*?\s*at\s",label,re.I):return "at"
+              if re.match(r"^\*?\s*vs\.\s",label,re.I):return "vs."
+              return "blank"
+          def wl(rows):
+              return (sum(r["result_literal"]=="W" for r in rows),sum(r["result_literal"]=="L" for r in rows))
+          check(subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()==parent,"exact parent Research commit changed")
+          check(subprocess.check_output(["git","diff","--name-only",parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-two-ncaa-season-parity.yml"],"successor must be only workflow file")
+          check(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main SHA advanced")
+          check(subprocess.run(["git","cat-file","-e",base+"^{commit}"],capture_output=True).returncode==0,"immutable research base missing")
+          check(subprocess.check_output(["git","rev-parse","HEAD:"+str(source)],text=True).strip()==source_expected_git_blob,"original institutional source blob changed")
+          pm=readjson(prior/"checkpoint-manifest.json")
+          ps=readjson(prior/"stage3a1-summary.json")
+          check(pm["parent_research_head"]=="6089e6a9efdc03af9c9b4d771f57203ae5be83a2" and pm["immutable_research_base_sha"]==base,"parent manifest immutable lineage")
+          check(ps["status"]=="IN_PROGRESS" and ps["stage"]=="STAGE_3A1" and ps["stage3a1_complete"] is False,"Stage3A1 predecessor state")
+          check(ps["cumulative_site_census"]=={"HOME":413,"OPPONENT_HOME":411,"NEUTRAL":2,"UNKNOWN":217},"parent site census")
+          check(ps["cumulative_supported_site_decisions"]==826 and ps["cumulative_terminal_researched_unresolved_han"]==9,"parent supported/conflict population")
+          check(ps["postseason_stage3b_handoff"]==43 and ps["cumulative_documented_discrepancies"]==12,"postseason and contradiction authority")
+          for name,meta in pm["files"].items():
+              b=(prior/name).read_bytes()
+              check(len(b)==meta["bytes"] and sha(b)==meta["sha256"],"parent checkpoint member hash/size: "+name)
+          s2m=readjson(stage2/"manifest.json")
+          check(s2m["stage2_complete"] is True and s2m["immutable_research_base_sha"]==base,"frozen Stage2 authority")
+          for name,meta in s2m["files"].items():
+              b=(stage2/name).read_bytes()
+              check(len(b)==meta["bytes"] and sha(b)==meta["sha256"],"frozen Stage2 member "+name)
+          s0=readjson(stage0/"stage3a0-status.json")
+          check(s0["status"]=="COMPLETE" and s0["protected_main_sha"]==main and s0["source_ledger_sha256"]==s2m["files"]["structured-stage2-ledger.csv"]["sha256"],"Stage3A0 authority")
+          full=readcsv(source)
+          games=readcsv(prior/"stage3a1-working-ledger.csv")
+          queue=readcsv(prior/"stage3a1-remaining-unknown-queue.csv")
+          supported=readcsv(prior/"stage3a1-supported-site-decisions.csv")
+          check(len(full)==493 and len(games)==1086 and len(queue)==217 and len(supported)==826,"exact input population")
+          check(len({r["research_candidate_id"] for r in full})==493 and len({r["research_game_id"] for r in games})==1086,"unique source and accepted IDs")
+          queueids={r["research_game_id"] for r in queue}
+          sourceyears=collections.defaultdict(list)
+          acceptyears=collections.defaultdict(list)
+          for r in full:sourceyears[r["season"]].append(r)
+          for r in games:acceptyears[r["season_label"]].append(r)
+          # SDSU source 2008-09 historical guide (printed p.149; PDF p.6):
+          # (HOME W-L, AWAY W-L, NEUTRAL W-L; listed sources, marked site totals,
+          # exact Stage 2 accepted postseason game list), not implicit venue geography.
+          cases={
+           "1966-67":{
+            "home":(16,0),"away":(8,4),"neutral":(0,1),
+            "source_total":29,"at":12,"vs":1,"blank":16,
+            "post_ids":[
+             "SDSU-EXP-S1-1966-67-0027",
+             "SDSU-EXP-S1-1966-67-0028",
+             "SDSU-EXP-S1-1966-67-0029"],
+            "post_tokens":["","","vs."],
+            "post_results":["W","W","L"],
+            "post_events":["NCAA COLLEGE DIVISION REGIONALS","NCAA COLLEGE DIVISION REGIONALS","NCAA DIVISION II TOURNAMENT (Evansville, Ind.)"],
+            "previous_reg_home":2,
+            "new_reg_home":12,
+           },
+           "1967-68":{
+            "home":(9,2),"away":(11,3),"neutral":(1,1),
+            "source_total":27,"at":14,"vs":0,"blank":13,
+            "post_ids":[
+             "SDSU-EXP-S1-1967-68-0026",
+             "SDSU-EXP-S1-1967-68-0027"],
+            "post_tokens":["",""],
+            "post_results":["L","W"],
+            "post_events":["NCAA COLLEGE DIVISION REGIONALS","NCAA COLLEGE DIVISION REGIONALS"],
+            "previous_reg_home":2,
+            "new_reg_home":9,
+           },
+          }
+          check(len(cases)==2,"two exact source season cohorts")
+          proof=[];new_home=set()
+          for year,f in cases.items():
+              original=sourceyears[year]
+              accepted=acceptyears[year]
+              check(len(original)==f["source_total"] and len(accepted)==f["source_total"],"full institutional source/accepted roster mismatch "+year)
+              check({r["research_candidate_id"] for r in original}=={r["research_game_id"] for r in accepted},"no excluded/extra original game "+year)
+              groups={key:[r for r in original if mark(r)==key] for key in ("at","vs.","blank")}
+              check(len(groups["at"])==f["at"] and len(groups["vs."])==f["vs"] and len(groups["blank"])==f["blank"],"source literal marking population "+year)
+              check(sum(f[k]) for k in []) if False else None
+              check(sum(map(len,groups.values()))==f["source_total"],"source group partition "+year)
+              check(wl(original)==tuple(sum(f[k][j] for k in ("home","away","neutral")) for j in (0,1)),"full source W-L vs reported season W-L "+year)
+              check(wl(groups["at"])==f["away"],"all at games W-L exactly official away "+year)
+              check(len(groups["vs."])==sum(wl(groups["vs."])),"all vs rows have valid outcomes "+year)
+              byid={r["research_game_id"]:r for r in accepted}
+              check(len(byid)==f["source_total"],"source IDs unique "+year)
+              postseason=[r for r in accepted if r["game_type"]=="POSTSEASON"]
+              regular=[r for r in accepted if r["game_type"]=="REGULAR_SEASON"]
+              check([r["research_game_id"] for r in postseason]==f["post_ids"],"postseason exact IDs/order "+year)
+              check([r["source_site_token"] for r in postseason]==f["post_tokens"],"original postseason marker partition "+year)
+              check([r["result"] for r in postseason]==f["post_results"],"original postseason W-L partition "+year)
+              check([r["source_event_context"] for r in postseason]==f["post_events"],"original postseason event/source partition "+year)
+              check(all(r["site_type"]=="UNKNOWN" and r["site_research_status"]=="DEFERRED_POSTSEASON_STAGE3B" for r in postseason),"postseason deferred-site original must be untouched "+year)
+              check(all(r["source_site_token"] in {"","at"} for r in regular),"regular season notation contains unexpected vs "+year)
+              check(all(r["site_type"]=="OPPONENT_HOME" and r["site_research_status"]=="SUPPORTED" for r in regular if r["source_site_token"]=="at"),"target-guide at resolved away "+year)
+              check(all(r["site_type"] in {"HOME","UNKNOWN"} for r in regular if not r["source_site_token"]),"unexpected prior blank-site classification "+year)
+              check(not any(r["site_research_status"]=="RESEARCHED_UNRESOLVED" for r in accepted),"prior conflict in year blocks whole-family proof "+year)
+              # Do not mutate postseason. For 1966-67 all unmarked entries are HOME:
+              # 16-0 HOME vs exactly 16 blank 16-0, while single vs is lone N loss.
+              # For 1967-68 all accepted postseason rows are explicit neutral in
+              # the season H-A-N aggregate (1W1L), so remaining blank = HOME (9W2L).
+              home_from_guide=[r for r in original if mark(r)=="blank"]
+              if year=="1966-67":
+                  check(wl(home_from_guide)==f["home"],"1966-67 exact unmarked HOME win-loss proof")
+                  check(wl(groups["vs."])==f["neutral"],"1966-67 vs exactly neutral 0-1 source")
+                  check(len([r for r in postseason if r["source_site_token"]==""])==2,"1966-67 two postseason HOME-as-guide rows")
+              if year=="1967-68":
+                  check(len(groups["vs."])==0,"1967-68 no vs notation")
+                  neutral_post=("L","W")
+                  check(tuple(r["result"] for r in postseason)==neutral_post,"1967-68 source neutral postseason game results")
+                  blanks_regular=[r for r in original if mark(r)=="blank" and r["research_candidate_id"] not in f["post_ids"]]
+                  check(wl(blanks_regular)==f["home"],"1967-68 blank regular only equals HOME W-L")
+                  check(tuple(sum(r["result"]==outcome for r in postseason) for outcome in ("W","L"))==f["neutral"],"1967-68 postseason exactly neutral aggregate W-L")
+              for row in regular:
+                  if row["source_site_token"]=="at":continue
+                  source_row=next(x for x in original if x["research_candidate_id"]==row["research_game_id"])
+                  check(mark(source_row)=="blank","accepted blank must preserve original literal source "+year)
+              previous_home=[r for r in regular if r["site_type"]=="HOME"]
+              pending_home=[r for r in regular if r["site_type"]=="UNKNOWN"]
+              check(len(previous_home)==f["previous_reg_home"] and len(pending_home)==f["new_reg_home"],"exact supported + pending HOME partition "+year)
+              check(all(r["source_site_token"]=="" and r["site_research_status"]=="PENDING_STAGE3A1" and r["research_game_id"] in queueids for r in pending_home),"new HOME must be pending source unmarked "+year)
+              new_home.update(r["research_game_id"] for r in pending_home)
+              proof.append({
+               "season":year,"original_full_source_games":len(original),"accepted_total_games":len(accepted),
+               "published_home_w":f["home"][0],"published_home_l":f["home"][1],
+               "published_away_w":f["away"][0],"published_away_l":f["away"][1],
+               "published_neutral_w":f["neutral"][0],"published_neutral_l":f["neutral"][1],
+               "source_at_games":len(groups["at"]),"source_at_w_l":str(wl(groups["at"])),
+               "source_vs_games":len(groups["vs."]),"source_vs_w_l":str(wl(groups["vs."])),
+               "source_unmarked_games":len(groups["blank"]),"source_unmarked_w_l":str(wl(groups["blank"])),
+               "postseason_reserved_count":len(postseason),
+               "postseason_original_tokens":" / ".join(f["post_tokens"]),
+               "postseason_original_results":" / ".join(f["post_results"]),
+               "regular_prior_supported_HOME":len(previous_home),
+               "regular_new_supported_HOME":len(pending_home),
+               "source_classification_evidence":"EXACT_WL_SITE_SOURCE_POPULATION_WITH_INDEPENDENT_POSTSEASON_PARTITION",
+               "guide_printed_page":149,"guide_pdf_page":6,"guide_url":guide,
+               "stage3b_postseason_responsibility":"ALL_POSTSEASON_GAME_SITE_RECORDS_UNCHANGED",
+              })
+          check(len(proof)==2 and len(new_home)==21,"two-season 21 HOME support count")
+          beforemap={r["research_game_id"]:r for r in games}
+          changedgames=[];additional=[]
+          for old in games:
+              gid=old["research_game_id"]
+              r=dict(old)
+              if gid in new_home:
+                  year=old["season_label"]
+                  basis=(
+                    f"SDSU first-party 2008-09 history guide, 1966-67 and 1967-68, printed p.149, "
+                    f"source-complete {year} HOME/AWAY/NEUTRAL W-L and at/vs/unmarked game listings: "
+                    "all at games reconcile to official AWAY result counts; 1966-67 all blank games reconcile "
+                    "to HOME 16-0 and vs. to NEUTRAL 0-1; 1967-68 two explicit NCAA postseason games "
+                    "independently consume the official NEUTRAL 1-1 aggregate and remaining blank "
+                    "regular season games match HOME 9-2. This resolution is exact source-population "
+                    "arithmetic only and never infers H/A/N from geography. Postseason records remain deferred."
+                  )
+                  r.update({
+                    "site_type":"HOME","curated_site_type":"SOURCE_PROGRAM_HOME",
+                    "site_research_status":"SUPPORTED","site_research_basis":basis,
+                    "stage3a1_evidence_class":"SDSU_2008_GUIDE_NCAA_POSTSEASON_EXACT_SEASON_HAN_PARITY",
+                    "stage3a1_evidence_reference":guide,
+                  })
+                  additional.append({
+                    "research_game_id":gid,"season_label":year,
+                    "source_opponent_label":old["source_opponent_label"],
+                    "team_score":old["team_score"],"opponent_score":old["opponent_score"],
+                    "previous_site":"UNKNOWN","new_site":"HOME",
+                    "evidence_class":"SDSU_2008_GUIDE_NCAA_POSTSEASON_EXACT_SEASON_HAN_PARITY",
+                    "source_reference":guide,
+                    "evidence_detail":basis,
+                  })
+              changedgames.append(r)
+          for x,y in zip(games,changedgames):
+              for key,value in x.items():
+                  if x["research_game_id"] not in new_home:
+                      check(y[key]==value,"unrelated accepted or unresolved row modified "+x["research_game_id"]+":"+key)
+                  elif key not in {"site_type","curated_site_type","site_research_status","site_research_basis","stage3a1_evidence_class","stage3a1_evidence_reference"}:
+                      check(y[key]==value,"historical game fact mutated "+x["research_game_id"]+":"+key)
+          remaining=[x for x in queue if x["research_game_id"] not in new_home]
+          decisions=[*supported,*additional]
+          sitecensus=collections.Counter(r["site_type"] for r in changedgames if r["game_type"]=="REGULAR_SEASON")
+          check(sitecensus=={"HOME":434,"OPPONENT_HOME":411,"NEUTRAL":2,"UNKNOWN":196},"cumulative 0061 census")
+          check(len(additional)==21 and len(remaining)==196 and len(decisions)==847,"exact cumulative populations")
+          check(sum(r["site_research_status"]=="RESEARCHED_UNRESOLVED" for r in changedgames)==9,"previous terminal conflict population invariant")
+          check(sum(r["game_type"]=="POSTSEASON" for r in changedgames)==43 and
+           all(r["site_type"]=="UNKNOWN" and r["site_research_status"]=="DEFERRED_POSTSEASON_STAGE3B" for r in changedgames if r["game_type"]=="POSTSEASON"),"all 43 postseason records deferred unchanged")
+          stage2frozen=readcsv(stage2/"structured-stage2-ledger.csv")
+          check(len(stage2frozen)==1086 and len(changedgames)==1086,"Stage2 full identity corpus")
+          for original,new in zip(stage2frozen,changedgames):
+              check(original["research_game_id"]==new["research_game_id"],"Stage2 identity/order")
+              for key,value in original.items():
+                  if key!="site_type":
+                      check(new[key]==value,"Stage2 immutable game fact mismatch "+original["research_game_id"]+":"+key)
+          out.mkdir(parents=True,exist_ok=False)
+          writecsv(out/"stage3a1-working-ledger.csv",list(games[0]),changedgames)
+          writecsv(out/"stage3a1-remaining-unknown-queue.csv",list(queue[0]),remaining)
+          writecsv(out/"stage3a1-supported-site-decisions.csv",list(supported[0]),decisions)
+          writecsv(out/"two-ncaa-season-full-source-han-proof.csv",list(proof[0]),proof)
+          preserved_except={"stage3a1-working-ledger.csv","stage3a1-remaining-unknown-queue.csv","stage3a1-supported-site-decisions.csv","stage3a1-summary.json","checkpoint-manifest.json"}
+          for name in pm["files"]:
+              if name in preserved_except:continue
+              dest=out/name;dest.parent.mkdir(parents=True,exist_ok=True)
+              dest.write_bytes((prior/name).read_bytes())
+          for name in ("opponents.csv","season-coverage.json"):
+              check((out/"stage4-authoring"/name).read_bytes()==(stage2/"stage4-authoring"/name).read_bytes(),"Stage4 authoring capsule changed")
+          summary={
+           "kind":"SDSU_STAGE3A1_0061_TWO_NCAA_SOURCE_WL_SEASON_HAN_PARITY_V1",
+           "school_key":"san-diego-state","stage":"STAGE_3A1","status":"IN_PROGRESS",
+           "immutable_research_base_sha":base,"protected_main_sha":main,"parent_research_head":parent,
+           "parent_checkpoint":"0060-stage3a1-eight-season-1951-1970-official-home-parity",
+           "accepted_stage2_ledger_sha256":s2m["files"]["structured-stage2-ledger.csv"]["sha256"],
+           "source_reconciled_seasons":["1966-67","1967-68"],
+           "new_supported_HOME":21,"new_individual_row_level_adjudications":0,
+           "cumulative_supported_site_decisions":847,"cumulative_unknown_regular":196,
+           "cumulative_terminal_researched_unresolved_han":9,
+           "cumulative_site_census":dict(sitecensus),
+           "cumulative_documented_discrepancies":12,
+           "stage3b_postseason_untouched":43,"regular_season_games":1043,"total_games":1086,
+           "source_authority":{"2008_09_institutional_historical_guide":guide,"guide_printed_page":149,"guide_pdf_page":6,
+              "original_full_source_blob":source_expected_git_blob,"full_source_season_WL_HAN_parity":True},
+           "no_blind_unmarked_home":True,"no_geography_only_inference":True,
+           "historical_game_facts_modified":False,
+           "stage3a1_complete":False,"stage3a2_started":False,"stage3a3_started":False,
+           "next_bounded_assignment":"Stage3A1: isolate remaining 196 historical site-unknown cases by exact season and discrepancy source family; preserve 9 terminal H/A/N conflicts, no assumed unmarked HOME and no Stage 3A-2 start."
+          }
+          writejson(out/"stage3a1-summary.json",summary)
+          check(len(readcsv(out/"stage3a1-working-ledger.csv"))==1086 and len(readcsv(out/"stage3a1-remaining-unknown-queue.csv"))==196,"written ledger and queue")
+          check(len(readcsv(out/"stage3a1-supported-site-decisions.csv"))==847 and len(readcsv(out/"two-ncaa-season-full-source-han-proof.csv"))==2,"written decisions and two-season proof")
+          members={}
+          for p in sorted(out.rglob("*")):
+              if p.is_file():
+                  b=p.read_bytes()
+                  members[str(p.relative_to(out))]={"sha256":sha(b),"bytes":len(b)}
+          writejson(out/"checkpoint-manifest.json",{
+           "kind":"SDSU_STAGE3A1_0061_HASH_BOUND_IN_PROGRESS_MANIFEST_V1",
+           "parent_research_head":parent,"protected_main_sha":main,
+           "immutable_research_base_sha":base,"stage3a1_complete":False,"files":members,
+          })
+          for name,meta in members.items():
+              b=(out/name).read_bytes()
+              check(len(b)==meta["bytes"] and sha(b)==meta["sha256"],"new manifest member "+name)
+          print(json.dumps(summary,sort_keys=True,indent=2))
+          with open("/tmp/sdsu-0061-summary.txt","w") as h:
+              h.write("### SDSU Stage 3A-1 — Two NCAA-year exact first-party source parity proofs\n\n1966–67 and 1967–68 guide source markings, complete source W-L/H-A-N season totals, and separated exact NCAA postseason populations reconcile. 21 regular-season HOME support written; 0 independent game adjudications; 196 regular-season UNKNOWN remain; 9 terminal source contradictions and all 43 postseason records unchanged. Stage 3A-1 stays IN_PROGRESS.\n")
+          PY
+      - name: Commit hash-bound Research checkpoint 0061, no protected main mutation
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/san-diego-state-all-history-expansion/stage3a/0061-stage3a1-two-ncaa-season-whole-source-parity/
+          git commit -m "research(sdsu): two official NCAA season H-A-N parity proofs, 21 HOME"
+          git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
+      - name: Report fixed bounded Stage 3A-1 outcome
+        shell: bash
+        run: |
+          cat /tmp/sdsu-0061-summary.txt >> "$GITHUB_STEP_SUMMARY"
