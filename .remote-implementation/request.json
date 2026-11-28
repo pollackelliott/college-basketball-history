@@ -1,30 +1,38 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "nevada-stage2-opponent-display-normalize-0001",
+  "request_id": "nevada-stage2-proposal-0001",
   "school_key": "nevada",
-  "operation": "STAGE2_OPPONENT_DISPLAY_NORMALIZE",
-  "previous_control_state_commit": "e3ba1a0855f474d90629da83b3ed890db2a8cfb3",
-  "previous_control_state_sha256": "66e0656bcda8af65e40d67d04cb69fb46de38218d3379a8df9ab0eca5ad9566a",
+  "operation": "STAGE2_PROPOSAL_REHEARSAL",
+  "previous_control_state_commit": "12f140054164b7304af8ac3d336a3d4cc4523ab3",
+  "previous_control_state_sha256": "303dcd7b9002704c6a2950da3a6df5f63e577b66c48ede961fd5d1fefbbf02d1",
   "expected_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
   "target_branch": "data/nevada-onboarding",
-  "target_sha": "be03db65347decfeb700fae3ee62fc6ca5a92fe1",
-  "stage2_census_checkpoint": {
-    "path": ".remote-implementation/checkpoints/nevada/nevada-stage2-census-0001/checkpoint-manifest.json",
-    "sha256": "4781f4374da2f9568ad98aafe634a134cb5636c618d5e3e3f5638bde046aa43d"
+  "target_sha": "698639f0c826804b2504f642d1616ac61fb171c4",
+  "stage2_authority": {
+    "path": ".remote-implementation/successors/nevada/nevada-stage2-opponent-display-normalize-0001/successor-manifest.json",
+    "sha256": "6e93f1064a7e19c8ba2ba9cabbd2da5f060c223d27efbc9ec07ec27c8435b5e2"
   },
   "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
   "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
+  "decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+  "recommendation_map": {
+    "path": ".remote-implementation/requests/nevada-stage2-proposal-0001/recommendation-map.json",
+    "sha256": "2664d971fc0b7d258afb924fccdb9b3628ba04360015c140d6053055c34e8ed0"
+  },
   "creation_provenance": {
-    "origin": "Nevada ordinary serialized Implementation Stage 2; exact census-bound deterministic historical opponent-display normalization.",
-    "authorization": "Owner said Proceed after fresh-verified Nevada Stage 2 census nevada-stage2-census-0001. Census is BLOCKED solely on exactly two historical opponent-display conflicts, augustana-south-dakota and cal-state-los-angeles; zero warnings, zero owner decisions, zero semantic drift, tracked mutation NONE. Existing Stage 2 phase authorization permits one coherent guarded normalizer operation exactly census-bound. Permanent normalizer chooses existing project display authorities, dry-run must reproduce only these two keys, and may alter only opponents.csv canonical_opponent_name plus source-games.csv normalized_opponent_name. Preserve opponent keys, game identities, literal source labels, H/A/N, dates, scores, type, venue, every other historical field, semantic Freeze, and main. No broad cleanup, Stage 2 proposal/map, Gate 1, seal/apply, Preview, release, merger, or Production authority."
+    "origin": "Nevada same serialized Implementation Stage 2; owner-pasted advisory 0007 plus fresh permanent decision universe, identity/site-source challenge.",
+    "authorization": "Owner explicitly authorized exact Stage 2 proposal map consolidation and permanent read-only rehearsal; no Research restart, no Owner Gate 1 approval, no tracked basketball mutation, no fill/seal/apply, no Preview, no release or merge. Mapping: 39 identity candidates, 45 selected/48 not-applicable conditionals, 36 definite discrepancies, accomplishment audit retained under review, prospective publication conditional on both owner gates. Site decisions compared against Nevada raw H/A, home chronology and Rock Island tournament locality. Original advisory ZIP/citation paths unavailable; do not treat candidate evidence as owner approval."
   },
   "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
     "phase0": false,
     "recovery": false,
     "stage2_census": false,
-    "stage2_opponent_display_normalize": true,
-    "stage2_proposal_rehearsal": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": true,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
@@ -34,9 +42,6 @@
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false,
-    "release": false,
-    "owner_gate_1": false,
-    "owner_gate_2": false
+    "venue_identity_maintenance": false
   }
 }
