@@ -1,0 +1,527 @@
+{
+  "kind": "SDSU_STAGE2_SMALL_COLLEGE_HISTORICAL_INSTITUTIONS_0043_V1",
+  "checkpoint": "0043-stage2-historical-small-college-institutional-continuities",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "0faec9a7a6e9354987adc58e67efcef5b7937138",
+  "parent_checkpoint": "0042-stage2-club-and-industrial-team-identities",
+  "parent_opponents_sha256": "95af45276a81e06b2bfddbea318fcd6ceef5ab95ab586ab5719dc78406054250",
+  "parent_unresolved_sha256": "d8670f6a23cce7278be72bd10479e434d5ab8845164b434f3903e5960c89ce29",
+  "immutable_programs_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "selection_rule": "One bounded independent institutional-identity evidence tranche capped at 25 literal opponent rows: 24 source labels across 21 distinct lower-division / historic college institutional families and one previously admitted current D1 Missouri State historical alias; actual 25 labels / 26 accepted competitive games. Game-by-game venue or score research excluded.",
+  "family_evidence": [
+    {
+      "provisional_key": "beloit",
+      "canonical_display": "Beloit College",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE",
+      "identity_basis": "Beloit College's own historical retrospectives document the established men's basketball program and its rise to national prominence during the source 1948-49 season. Separate from any Beloit high school and from unrelated Beloit geographic references.",
+      "official_urls": [
+        "https://www.beloit.edu/live/news/2702-a-decade-of-dominance-and-half-a-century-of",
+        "https://www.beloit.edu/live/news/1717-fridays-with-fred-storied-beloit-photographers"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at Beloit",
+          "games": 1,
+          "first_season": "1948-49",
+          "last_season": "1948-49",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "humboldt-state",
+      "canonical_display": "Cal Poly Humboldt (historical Humboldt State)",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE_RENAME",
+      "identity_basis": "Cal Poly Humboldt official chronology documents the institution was Humboldt State College from 1935 during the original 1955-56 opponent season; today's Cal Poly Humboldt is the same Arcata school. No implied physical venue from the source 'at' marker.",
+      "official_urls": [
+        "https://www.humboldt.edu/special-collections/cal-poly-humboldt-chronology",
+        "https://www.humboldt.edu/about/our-history"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at Humboldt State",
+          "games": 1,
+          "first_season": "1955-56",
+          "last_season": "1955-56",
+          "source_game_types": "POSTSEASON",
+          "original_marker": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "loras",
+      "canonical_display": "Loras College",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE",
+      "identity_basis": "Loras College campus history documents its 1940s Loras Fieldhouse as a varsity basketball home; original 1948-49 opponent is the Dubuque institution, not another religious college.",
+      "official_urls": [
+        "https://loras.edu/news/our-fieldhouse-turns-100/",
+        "https://library.loras.edu/cdh/archive"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at Loras College",
+          "games": 1,
+          "first_season": "1948-49",
+          "last_season": "1948-49",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "provisional_key": "regis-colorado",
+      "canonical_display": "Regis University (Colorado)",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE_RENAME_AND_EVENT_SUFFIX",
+      "identity_basis": "Official Regis University institutional history identifies Regis College in Denver from 1921, later Regis University; own men's basketball history confirms team continuity. Independent SDSU series (Regis CO, 3 games) precisely corroborates these 1956-57 and 1962-63 three source labels; distinguish from Regis College Massachusetts. Original 'Denver Civic Auditorium', (SR), and at remain source evidence, not H/A/N or venue assignment by Stage 2.",
+      "official_urls": [
+        "https://www.regis.edu/about/history-mission/our-history",
+        "https://regisrangers.com/sports/2016/3/30/regis-mens-basketball-history.aspx",
+        "https://mcubed.net/ncaab/series/sandst/nd1_regisco.shtml"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at Regis (Colo.) (SR) (Denver Civic Auditorium.)",
+          "games": 1,
+          "first_season": "1956-57",
+          "last_season": "1956-57",
+          "source_game_types": "POSTSEASON",
+          "original_marker": "AT_PREFIX"
+        },
+        {
+          "literal": "at Regis College",
+          "games": 1,
+          "first_season": "1962-63",
+          "last_season": "1962-63",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": "AT_PREFIX"
+        },
+        {
+          "literal": "Regis College",
+          "games": 1,
+          "first_season": "1962-63",
+          "last_season": "1962-63",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "bemidji-state",
+      "canonical_display": "Bemidji State",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE_RENAME",
+      "identity_basis": "Bemidji State's own university history shows Bemidji Normal School became Bemidji State Teachers College in 1921; the 1941-42 source label 'Bemidji Teachers' identifies this Minnesota institution, not another teachers college.",
+      "official_urls": [
+        "https://www.bemidjistate.edu/about/a-century-in-the-pines/",
+        "https://www.bemidjistate.edu/100/through-the-decades/1940s/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Bemidji Teachers",
+          "games": 1,
+          "first_season": "1941-42",
+          "last_season": "1941-42",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "chadron-state",
+      "canonical_display": "Chadron State",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE",
+      "identity_basis": "Chadron State athletics independently publishes yearly results including the 1941-42 season and contemporary Nebraska basketball team; '(Neb.)' is a source disambiguation qualifier.",
+      "official_urls": [
+        "https://chadroneagles.com/sports/2021/2/25/yearly-results.aspx?id=140",
+        "https://chadroneagles.com/sports/2021/2/27/mens-basketball-all-time-results.aspx?id=145"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Chadron State (Neb.)",
+          "games": 1,
+          "first_season": "1941-42",
+          "last_season": "1941-42",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "claremont-mudd-scripps",
+      "canonical_display": "Claremont-Mudd-Scripps",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_JOINT_ATHLETIC_PROGRAM",
+      "identity_basis": "Claremont-Mudd Stags men's program was formed in 1958-59 by Claremont Men's College and Harvey Mudd, and CMS archives specifically document 1965-66 basketball. Same present Claremont-Mudd-Scripps varsity lineage; decisively distinct from Pomona-Claremont 1946-58 and modern Pomona-Pitzer (pomona-pitzer). No unsafe merger with Pomona College.",
+      "official_urls": [
+        "https://cmsathletics.org/sports/2024/6/26/history-overview.aspx",
+        "https://cmsathletics.org/news/2021/5/5/5_5_2021_673.aspx"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Claremont-Mudd",
+          "games": 2,
+          "first_season": "1965-66",
+          "last_season": "1967-68",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "culver-stockton",
+      "canonical_display": "Culver-Stockton College",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE_PUNCTUATION",
+      "identity_basis": "Culver-Stockton College official institutional history dates adoption of name to 1914 and confirms WWII-era collegiate operation; both original hyphen/punctuation variants 1940-41 and 1949-50 refer to one Missouri college Wildcats program.",
+      "official_urls": [
+        "https://culver.edu/about/our-history/",
+        "https://site.rocketalumnisolutions.com/category/86/6421"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Culver Stockton (Mo.)",
+          "games": 1,
+          "first_season": "1940-41",
+          "last_season": "1940-41",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        },
+        {
+          "literal": "Culver-Stockton",
+          "games": 1,
+          "first_season": "1949-50",
+          "last_season": "1949-50",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "delta-state",
+      "canonical_display": "Delta State",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_TEACHERS_COLLEGE",
+      "identity_basis": "Delta State University Archives and centennial history establish institution as Delta State Teachers College founded in 1925 in Cleveland, Mississippi; source's '(Miss.)' distinguishes this college. No assumption of historical classification from current program.",
+      "official_urls": [
+        "https://www.deltastate.edu/centennial/our-history/",
+        "https://www.deltastate.edu/library/departments/archives-museum/delta-state-history/history/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Delta State (Miss.)",
+          "games": 1,
+          "first_season": "1939-40",
+          "last_season": "1939-40",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "east-central-oklahoma",
+      "canonical_display": "East Central University (Oklahoma)",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_TEACHERS_COLLEGE_RENAME",
+      "identity_basis": "East Central University institutional history explicitly records 1939 renaming East Central State College from earlier East Central Normal School in Ada, Oklahoma; one current program, distinct from East Central Community College in Mississippi.",
+      "official_urls": [
+        "https://ecok.edu/news/ecu-celebrate-113-years-founders-day.php",
+        "https://www.ecok.edu/about-east-central-university/history-of-ecu/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "East Central State (Okla.)",
+          "games": 1,
+          "first_season": "1939-40",
+          "last_season": "1939-40",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "gustavus-adolphus",
+      "canonical_display": "Gustavus Adolphus",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE",
+      "identity_basis": "Gustavus Adolphus College official historical athletics article documents men's basketball MIAC championships in 1954, 1955, 1956, independently confirming 1955-56 source-era collegiate team identity.",
+      "official_urls": [
+        "https://blog.gustavus.edu/2021/01/11/hall-of-famers-coached-by-a-hall-of-famer-1950s-golden-era-of-gustie-mens-hoops/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Gustavus Adolphus",
+          "games": 1,
+          "first_season": "1955-56",
+          "last_season": "1955-56",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "manchester",
+      "canonical_display": "Manchester University (Indiana)",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE",
+      "identity_basis": "Manchester University confirms 1932 Manchester College identity and 1938/1939 NAIA basketball qualification for its North Manchester, Indiana program. Not Manchester University England.",
+      "official_urls": [
+        "https://www.manchester.edu/about/our-history/",
+        "https://muspartans.com/facilities/stauffer-wolfe-arena/3"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Manchester",
+          "games": 1,
+          "first_season": "1938-39",
+          "last_season": "1938-39",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "northern-state-sd",
+      "canonical_display": "Northern State (South Dakota)",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_NORMAL_SCHOOL_RENAME",
+      "identity_basis": "Northern State University official 125-year timeline confirms same Aberdeen SD institution; historic Northern Normal and Industrial School preceded 1939 Northern State Teachers College name. Source 1938-39 'Northern State' is a retrospective university shorthand, not a new school.",
+      "official_urls": [
+        "https://northern.edu/about/125-years-northern"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Northern State (S.D.)",
+          "games": 1,
+          "first_season": "1938-39",
+          "last_season": "1938-39",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "northwest-missouri-state",
+      "canonical_display": "Northwest Missouri State",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE_ALIAS",
+      "identity_basis": "Northwest Missouri State University own archive records Northwest Missouri State College renamed from State Teachers College in 1949 and continuing through 1966-67. Distinct from Southwest/Southeast Missouri and Missouri State current-D1 key.",
+      "official_urls": [
+        "https://www.nwmissouri.edu/archives/state/growth/index.htm",
+        "https://www.nwmissouri.edu/giving/foundation/annualreports/2023/index.htm"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "NW Missouri State",
+          "games": 1,
+          "first_season": "1966-67",
+          "last_season": "1966-67",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "peru-state",
+      "canonical_display": "Peru State",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE",
+      "identity_basis": "Peru State College institutional archives preserve 1930s yearbooks and basketball sports heritage at Peru, Nebraska. Source Neb. disambiguator is original label only.",
+      "official_urls": [
+        "https://www.peru.edu/about/history/",
+        "https://foundation.peru.edu/library/yearbooks/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Peru State (Neb.)",
+          "games": 1,
+          "first_season": "1938-39",
+          "last_season": "1938-39",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "pittsburg-state",
+      "canonical_display": "Pittsburg State",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_TEACHERS_COLLEGE",
+      "identity_basis": "Pittsburg State official archives contain 1939 Kansas State Teachers College yearbooks and document longtime men's basketball coach John Lance. This is Pittsburg Kansas, not Pittsburgh University Pennsylvania; 1939 source uses retrospective 'Pittsburg State'.",
+      "official_urls": [
+        "https://digitalcommons.pittstate.edu/kanza/92/",
+        "https://www.pittstate.edu/about/index.html"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Pittsburg State (Kan.)",
+          "games": 1,
+          "first_season": "1939-40",
+          "last_season": "1939-40",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "southwestern-college-kansas",
+      "canonical_display": "Southwestern College (Kansas)",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE_SOURCE_SHORT_FORM",
+      "identity_basis": "Southwestern College's official Winfield Kansas timeline specifically documents its men's basketball NAIA 1939 national title in accepted 1938-39 season. Source 'Southwest College (Kan.)' is historical label shorthand for Southwestern College (Moundbuilders), not Southwest Baptist University Missouri or unrelated Southwest College.",
+      "official_urls": [
+        "https://www.sckans.edu/ext/alumni-and-friends/timeline/index.html",
+        "https://www.sckans.edu/connecting-to-sc/halls-of-fame/athletic/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Southwest College (Kan.)",
+          "games": 1,
+          "first_season": "1938-39",
+          "last_season": "1938-39",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "tarkio-college",
+      "canonical_display": "Tarkio College",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "HISTORICAL_DEFUNCT_COLLEGE",
+      "identity_basis": "Tarkio College existed in Missouri through 1992 (Higher Learning Commission independent historical listing) and its 1940 basketball identity is independently documented in the SDSU 1940 NAIA championship final against Tarkio. Do not infer result/score changes from secondary sources; original accepted SDSU game remains unchanged.",
+      "official_urls": [
+        "https://www.hlcommission.org/institution/197/",
+        "https://mcubed.net/ncaab/yearly/sandst/1940.shtml"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Tarkio College (Mo.)",
+          "games": 1,
+          "first_season": "1939-40",
+          "last_season": "1939-40",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "texas-wesleyan",
+      "canonical_display": "Texas Wesleyan",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE",
+      "identity_basis": "Texas Wesleyan University's own men's basketball history shows 1939-40 20-3 record, 1940 NAIB Elite Eight tournament, established basketball program since 1935-36. Exact institutional opponent in source, different from Texas Christian and Texas State.",
+      "official_urls": [
+        "https://ramsports.net/sports/2013/11/21/MBB_1121133708.aspx?id=55",
+        "https://ramsports.net/sports/2013/11/4/GEN_1104133522"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Texas Wesleyan",
+          "games": 1,
+          "first_season": "1940-41",
+          "last_season": "1940-41",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "west-texas-a-m",
+      "canonical_display": "West Texas A&M (historical West Texas State)",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_COLLEGE_RENAME",
+      "identity_basis": "West Texas A&M official institutional history establishes West Texas State Teachers College during 1940-41; West Texas State College adopted 1949 and today's West Texas A&M in 1993. Original source 'West Texas State' is retrospective shorthand for same Canyon Texas Buffaloes basketball institution.",
+      "official_urls": [
+        "https://www.wtamu.edu/about/university-history/index.html",
+        "https://gobuffsgo.com/sports/2010/5/17/brief_history.aspx"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "West Texas State",
+          "games": 1,
+          "first_season": "1940-41",
+          "last_season": "1940-41",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "montana-western",
+      "canonical_display": "Montana Western",
+      "current_d1_at_immutable_research_base": "No",
+      "identity_kind": "LOWER_DIVISION_NORMAL_SCHOOL_RENAME",
+      "identity_basis": "University of Montana Western official archives trace Montana State Normal College (1903-49), Western Montana College (1949-88), present UMW. Source 'Western Montana' in 1940-41 is retrospective institutional shorthand, not University of Montana Grizzlies or Montana State.",
+      "official_urls": [
+        "https://www.umwestern.edu/section/special-collections/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Western Montana",
+          "games": 1,
+          "first_season": "1940-41",
+          "last_season": "1940-41",
+          "source_game_types": "POSTSEASON",
+          "original_marker": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "missouri-state",
+      "canonical_display": "Missouri State",
+      "current_d1_at_immutable_research_base": "Yes",
+      "identity_kind": "INHERITED_CURRENT_D1_HISTORICAL_ALIAS",
+      "identity_basis": "Same Springfield Southwest Missouri State / current Missouri State institutional identity independently accepted under two literal names in checkpoint 0041; source 'at' prefix preserved. Separate from Northwest Missouri State, Southeast Missouri State, and Missouri.",
+      "official_urls": [
+        "https://www.missouristate.edu/about/history.htm"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at SW Missouri State",
+          "games": 1,
+          "first_season": "1966-67",
+          "last_season": "1966-67",
+          "source_game_types": "REGULAR_SEASON",
+          "original_marker": "AT_PREFIX"
+        }
+      ]
+    }
+  ],
+  "explicit_nonmerges": [
+    "Regis College Colorado vs distinct Regis College Massachusetts",
+    "Claremont-Mudd-Scripps vs Pomona-Pitzer and former Pomona-Claremont",
+    "Northwest Missouri State vs Southwest Missouri State (current D1 Missouri State)",
+    "Southwestern College Winfield Kansas vs Southwest Baptist University Missouri",
+    "Pittsburg State Kansas vs Pittsburgh Pennsylvania",
+    "Western Montana (University of Montana Western) vs current D1 Montana",
+    "West Texas State Teachers College modern West Texas A&M vs unrelated West Texas area current D1 schools"
+  ],
+  "all_prior_259_mapping_rows_preserved_as_exact_byte_prefix": true,
+  "source_label_decisions": 25,
+  "new_games": 26,
+  "new_distinct_NON_D1_institution_keys": 21,
+  "source_games_modified": 0,
+  "venue_or_site_assignments_inferred": 0,
+  "stage1_game_universe_unchanged": 1086,
+  "cumulative_mapped_labels": 284,
+  "cumulative_mapped_games": 998,
+  "cumulative_distinct_keys": 148,
+  "exact_remaining_literals": 57,
+  "exact_remaining_accepted_games": 88,
+  "unidentified_1921_22_record_book_results_outside_accepted_game_ledger": 3,
+  "structured_full_stage2_game_ledger_not_created": true,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "formal_owner_NON_D1_sanity_scan_pending": true,
+  "shared_reference_registration_mutated": false
+}

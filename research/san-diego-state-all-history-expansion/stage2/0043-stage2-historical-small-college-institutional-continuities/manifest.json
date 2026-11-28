@@ -1,0 +1,44 @@
+{
+  "kind": "SDSU_STAGE2_SMALL_COLLEGE_IDENTITY_CHECKPOINT_0043_V1",
+  "checkpoint": "0043-stage2-historical-small-college-institutional-continuities",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "0faec9a7a6e9354987adc58e67efcef5b7937138",
+  "prior_checkpoint": "0042-stage2-club-and-industrial-team-identities",
+  "prior_opponents_sha256": "95af45276a81e06b2bfddbea318fcd6ceef5ab95ab586ab5719dc78406054250",
+  "prior_remaining_queue_sha256": "d8670f6a23cce7278be72bd10479e434d5ab8845164b434f3903e5960c89ce29",
+  "new_accepted_labels": 25,
+  "new_accepted_games": 26,
+  "new_non_d1_keys": 21,
+  "cumulative_accepted_labels": 284,
+  "cumulative_accepted_games": 998,
+  "distinct_keys": 148,
+  "remaining_unresolved_labels": 57,
+  "remaining_accepted_game_rows": 88,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "8df3b986de7a972fd8e076770ccb46bd49f8f1d3658c0ac0cd2da002afae8b6b",
+      "bytes_utf8": 224455
+    },
+    "accepted-historical-small-college-evidence.json": {
+      "sha256": "2caa5bdbe68711c06277d3b88cc1cb2480892a5ea632bc550f3d2128025d0eb0",
+      "bytes_utf8": 24074
+    },
+    "research-status.json": {
+      "sha256": "090c8618c7ad6a9cbc290840afe4d072d61b913cd1b321eb2febf6611c025289",
+      "bytes_utf8": 1519
+    },
+    "research-findings.md": {
+      "sha256": "8904af88341cb28344e6b8b43ca5fc627793f680bb2f07e26fe4c00d4b6c4cca",
+      "bytes_utf8": 13910
+    },
+    "remaining-unresolved-opponent-labels.csv": {
+      "sha256": "314feb39ee5734baaf9b1c0fad917719a67708505dc15e37edf1cd172bd7b4ee",
+      "bytes_utf8": 8048
+    }
+  }
+}
