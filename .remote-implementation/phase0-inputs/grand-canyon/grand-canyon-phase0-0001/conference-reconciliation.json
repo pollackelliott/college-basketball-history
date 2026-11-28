@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "school_key": "grand-canyon",
+  "owner_approval_basis": "Grand Canyon Research Freeze accepts the seven exact historical conference rows. Owner authorized the existing Stage 1 deterministic reconciliation unit. The two missing shared conference keys are research-settled; registering them in the guarded target-school onboarding transaction is a representation-only action, not permission to change another published program, reopen memberships, or assert conference tournaments. Tournament labels are nonassertive exact-full-name fallbacks.",
+  "expected_conferences_sha256": "a05726f6b26dc435ac1534299cc5db79e2aaecae3516e19f978489170fc939f3",
+  "replacement_history": [
+    {
+      "source_program_key": "grand-canyon",
+      "start_season": "1949-1950",
+      "end_season": "1990-1991",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "False",
+      "basis": "Authenticated Stage 1 season census records NAIA affiliation throughout 1949-50 through 1990-91; GCU Athletics current conference-membership history identifies the basketball program as NAIA Independent (associate member 1949-67; full member 1968-90). Source: https://gculopes.com/sports/2013/10/29/MBB_1029132527",
+      "notes": "Accepted complete-institutional pre-top-level chronology. NAIA is preserved as association/classification context; package conference identity is Independent."
+    },
+    {
+      "source_program_key": "grand-canyon",
+      "start_season": "1991-1992",
+      "end_season": "1993-1994",
+      "conference_key": "pacific-west",
+      "conference_name": "Pacific West Conference",
+      "membership_type": "primary",
+      "ongoing": "False",
+      "basis": "Authenticated Stage 1 season census records NCAA Division II - Pacific West for 1991-92 through 1993-94; GCU year-by-year history groups these three seasons under the Pacific West Conference. Source: https://gculopes.com/sports/2016/9/22/mens-basketball-year-by-year",
+      "notes": "GCU historical materials also describe the Great Northwest Conference predecessor lineage; this row preserves the accepted Stage 1/PacWest grouping rather than reopening that accepted representation at Stage 3B closeout."
+    },
+    {
+      "source_program_key": "grand-canyon",
+      "start_season": "1994-1995",
+      "end_season": "2003-2004",
+      "conference_key": "ccaa",
+      "conference_name": "California Collegiate Athletic Association",
+      "membership_type": "primary",
+      "ongoing": "False",
+      "basis": "Authenticated Stage 1 season census records NCAA Division II - California Collegiate for 1994-95 through 2003-04; GCU contemporaneous institutional history announced the move to the CCAA for 1994-95. Source: https://gculopes.com/documents/download/2020/7/9/1994.pdf",
+      "notes": "Ten-season CCAA basketball era preserved from accepted institutional chronology."
+    },
+    {
+      "source_program_key": "grand-canyon",
+      "start_season": "2004-2005",
+      "end_season": "2005-2006",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "membership_type": "independent",
+      "ongoing": "False",
+      "basis": "Authenticated Stage 1 season census records NCAA Division II - Independent for 2004-05 and 2005-06; GCU year-by-year history lists both seasons as NCAA Division II Independent. Source: https://gculopes.com/sports/2016/9/22/mens-basketball-year-by-year",
+      "notes": "Two-season NCAA Division II independent interval."
+    },
+    {
+      "source_program_key": "grand-canyon",
+      "start_season": "2006-2007",
+      "end_season": "2012-2013",
+      "conference_key": "pacific-west",
+      "conference_name": "Pacific West Conference",
+      "membership_type": "primary",
+      "ongoing": "False",
+      "basis": "Authenticated Stage 1 season census records NCAA Division II - Pacific West for 2006-07 through 2012-13; GCU institutional 2006 season outlook states the Lopes returned to the Pacific West Conference beginning 2006-07. Source: https://gculopes.com/news/2006/11/1/2006-gcu-mens-basketball-season-outlook",
+      "notes": "Final NCAA Division II conference era before accepted top-level/D-I scope begins in 2013-14."
+    },
+    {
+      "source_program_key": "grand-canyon",
+      "start_season": "2013-2014",
+      "end_season": "2024-2025",
+      "conference_key": "wac",
+      "conference_name": "Western Athletic Conference",
+      "membership_type": "conference",
+      "ongoing": "False",
+      "basis": "Grand Canyon University Athletics officially announced GCU became a WAC member on 2013-07-01 for the 2013-14 school year (https://gculopes.com/news/2013/7/1/GEN_0701130834); GCU men's basketball history records the Division I WAC era through 2024-25 (https://gculopes.com/sports/2013/10/29/MBB_1029132527).",
+      "notes": "Accepted Grand Canyon top-level Research scope begins with the 2013-14 WAC entry; final WAC basketball season in this researched scope is 2024-25."
+    },
+    {
+      "source_program_key": "grand-canyon",
+      "start_season": "2025-2026",
+      "end_season": "",
+      "conference_key": "mountain-west",
+      "conference_name": "Mountain West",
+      "membership_type": "conference",
+      "ongoing": "True",
+      "basis": "Grand Canyon University Athletics announced GCU entered the Mountain West on 2025-07-08 and would immediately participate in regular-season competition and conference championships for 2025-26 (https://gculopes.com/news/2025/7/8/general-gcu-jumps-to-mountain-west-this-fall); the Mountain West chronology independently records GCU's 2025 entry (https://themw.com/sports/2026/5/28/chronology.aspx).",
+      "notes": "Ongoing through the required completed-season cutoff 2025-26."
+    }
+  ],
+  "registrations": [
+    {
+      "conference_key": "pacific-west",
+      "conference_name": "Pacific West Conference",
+      "tournament_label": "Pacific West Conference",
+      "status": "historical",
+      "notes": "Grand Canyon frozen complete-institutional Research establishes 1991-92 through 1993-94 and 2006-07 through 2012-13 membership. Registration under accepted Stage 1 current-main reconciliation. Full conference name is a nonassertive display/tournament fallback only; no tournament existence is inferred."
+    },
+    {
+      "conference_key": "ccaa",
+      "conference_name": "California Collegiate Athletic Association",
+      "tournament_label": "California Collegiate Athletic Association",
+      "status": "historical",
+      "notes": "Grand Canyon frozen complete-institutional Research establishes 1994-95 through 2003-04 membership. Registration under accepted Stage 1 current-main reconciliation. Full conference name is a nonassertive display/tournament fallback only; no tournament existence is inferred."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "school_key": "grand-canyon",
+  "owner_approval_basis": "Grand Canyon final six-file RESEARCH_FROZEN acceptance and explicit owner instruction to continue the already authorized Stage 1, classify all six findings, and perform deterministic current-main reconciliation. These four mappings preserve settled Research venue identity/geography; no historical correction, owner-gate bypass, or change to already-published state is authorized.",
+  "expected_research_zip_sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
+  "expected_venues_sha256": "79d0307550c772f69c4f5f705484cf3cf2b3b35ba1d96ee35fcdc53ba962dc7a",
+  "mappings": [
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "east-gym",
+      "expected_local_name": "East Gym",
+      "expected_local_city": "Arcata",
+      "expected_local_state": "CA",
+      "global_venue_id": "VEN-001156",
+      "global_venue_key": "east-gym-cal-poly-humboldt",
+      "expected_global_city": "Arcata",
+      "expected_global_state": "CA",
+      "resolution_basis": "The accepted 2007 NCAA postseason East Gym assignments explicitly identify the Humboldt State building in Arcata. Protected main VEN-001156 documents the same Humboldt State East Gym opened in 1931; neither identity nor site geography changes."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "icardo-center",
+      "expected_local_name": "Icardo Center",
+      "expected_local_city": "Bakersfield",
+      "expected_local_state": "CA",
+      "global_venue_id": "VEN-001163",
+      "global_venue_key": "icardo-center-csub",
+      "expected_global_city": "Bakersfield",
+      "expected_global_state": "CA",
+      "resolution_basis": "Frozen 1992-1997 NCAA postseason chronology explicitly equates Icardo Center with CSUB Activities Center at Bakersfield. Protected main VEN-001163 is that same CSUB building opened in 1989; preserve historic venue-name literals and exact accepted sites."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "mortgage-matchup-center",
+      "expected_local_name": "Mortgage Matchup Center",
+      "expected_local_city": "Phoenix",
+      "expected_local_state": "AZ",
+      "global_venue_id": "VEN-000065",
+      "global_venue_key": "footprint-center",
+      "expected_global_city": "Phoenix",
+      "expected_global_state": "AZ",
+      "resolution_basis": "Frozen Grand Canyon Stage 3A exact neutral games name Mortgage Matchup Center in Phoenix. Protected main VEN-000065 has the same display name/locality and documents Footprint Center/Mortgage Matchup Center as one physical building; reuse its current key rather than duplicate the arena."
+    },
+    {
+      "action": "REUSE_CURRENT_IDENTITY",
+      "local_venue_key": "valley-high-school",
+      "expected_local_name": "Valley High School",
+      "expected_local_city": "Las Vegas",
+      "expected_local_state": "NV",
+      "global_venue_id": "VEN-000455",
+      "global_venue_key": "valley-high-school-las-vegas",
+      "expected_global_city": "Las Vegas",
+      "expected_global_state": "NV",
+      "resolution_basis": "Frozen 2008-12-20 and 2008-12-21 neutral games name Valley High School in Las Vegas. Protected main VEN-000455 records the same school/physical Las Vegas tournament venue from other accepted research; the buildings/geography agree."
+    }
+  ]
+}
