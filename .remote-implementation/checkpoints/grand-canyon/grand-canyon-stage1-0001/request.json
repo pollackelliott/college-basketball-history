@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "grand-canyon-stage1-0001",
+  "school_key": "grand-canyon",
+  "operation": "STAGE1_INVENTORY",
+  "previous_control_state_commit": "b73ffb6448ecfdbfdf5bae216c225073c6d00697",
+  "previous_control_state_sha256": "ec51f8a96e03c31cd87329bd2dc1a15fcac077a42048aaca365ce4f1c02085ec",
+  "expected_protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_checkpoint": {
+    "sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
+    "research_base_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+    "transport": {
+      "kind": "git_gzip_base64_parts",
+      "commit_sha": "b73ffb6448ecfdbfdf5bae216c225073c6d00697",
+      "path_prefix": ".remote-implementation/transports/grand-canyon/grand-canyon-stage1-0001/part-",
+      "part_count": 1
+    }
+  },
+  "venue_reconciliation": null,
+  "conference_reconciliation": null,
+  "creation_provenance": {
+    "origin": "Grand Canyon ordinary complete-institutional Implementation lane; owner-designated final RESEARCH_FROZEN ZIP and matched final status card, 2026-11-28.",
+    "authorization": "Owner authorized Grand Canyon original ordinary Implementation and instructed continuation of the existing Stage 1 phase. Final Research Freeze SHA-256 bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479, final card confirms Stage 6 checkpoint, NON_D1 APPROVED_NO_FLAGS, pre-freeze self-challenge PASS, research acceptance PASS 0 errors 0 warnings, and no remaining owner questions. Execute one bounded READ-ONLY Stage 1 current-main reconciliation inventory and permanent Research acceptance. Do not run Phase 0, Stage 2, any Owner Gate, Research reopening, global/shared mutation, release or merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false,
+    "venue_identity_maintenance": false,
+    "phase0_scope_supersession": false
+  }
+}
