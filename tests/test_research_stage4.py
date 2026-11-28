@@ -1853,7 +1853,7 @@ class Stage4AuthoringTests(unittest.TestCase):
         self.assertEqual(mod._research_accounting(modern), ("RESEARCHED_UNRESOLVED", modern["site_research_basis"]))
         self.assertEqual(mod._research_accounting({**modern, "site_research_basis": ""}), ("", ""))
         self.assertEqual(mod._research_accounting({**modern, "curated_venue_name": "Named Gym"}), ("", ""))
-        self.assertEqual(mod._research_accounting({**modern, "season": "1994-95"}), ("", ""))
+        self.assertEqual(mod._research_accounting({**modern, "season": "1994-95"})[0], "RESEARCHED_PARTIAL")
 
     def test_air_force_official_guide_and_schedule_urls_in_source_notes(self):
         with tempfile.TemporaryDirectory() as temp:
