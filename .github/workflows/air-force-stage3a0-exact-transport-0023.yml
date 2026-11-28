@@ -1,4 +1,4 @@
-name: Air Force Stage 3A-0 exact transport 0023
+name: Air Force Stage 3A-0 exact transport 0024
 on:
   push:
     branches: [research/air-force]
@@ -30,12 +30,18 @@ jobs:
           }
           fetch_exact_blob 17afe677c8a107935afb72f86b0eb0023f2ad76b "$RUNNER_TEMP/tools/research_stage3a0.py"
           fetch_exact_blob 98874d4ca599887eb5535af27fec5d6c0c8c4973 "$RUNNER_TEMP/tools/research_authoring_capsule.py"
-          fetch_exact_blob acdf50852f41ccade14e36d0b73bfcb1a1c6c5bc "$RUNNER_TEMP/stage2/structured-stage2-ledger.csv"
+          fetch_exact_blob e412be06ab8af3ba3054baa09a3b312f62b86145 "$RUNNER_TEMP/stage2/structured-stage2-ledger.csv"
           fetch_exact_blob 8eb9d65d52485e8714c8a2afc99b8feb59795739 "$RUNNER_TEMP/stage2/stage4-authoring/opponents.csv"
           fetch_exact_blob 3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff "$RUNNER_TEMP/stage2/stage4-authoring/institutional-scope.json"
-          fetch_exact_blob cfa5dc2c64e8babe86cf449eeaea534bbe9ab75f "$RUNNER_TEMP/stage2/manifest.json"
+          fetch_exact_blob b98321c809f766405cf6c16ff7c8492710175b65 "$RUNNER_TEMP/stage2/game-type-taxonomy-correction.csv"
+          fetch_exact_blob 8911262c3ae563081b57fab871f27fee10fd30a0 "$RUNNER_TEMP/stage2/stage2-opponent-mapping.csv"
+          fetch_exact_blob 08013cbabe29fa868f68c2dd19100ca160b405ab "$RUNNER_TEMP/stage2/stage2-root-census.csv"
+          fetch_exact_blob ba7603fb118279e7552aece0aae3bfb0f7eed557 "$RUNNER_TEMP/stage2/stage2-working-non-d1.csv"
+          fetch_exact_blob 081ba953920ac4f3b7e657e520567a5ae9a8e3f1 "$RUNNER_TEMP/stage2/stage2-identity-adjudications-0022.csv"
+          fetch_exact_blob ee37831ee5813233f48ddbce914e26b7c13a5549 "$RUNNER_TEMP/stage2/README.md"
+          fetch_exact_blob 31d5956f7c1117569d646177b401afb9762e91b6 "$RUNNER_TEMP/stage2/manifest.json"
           export AIR_FORCE_STAGE2_ROOT="$RUNNER_TEMP/stage2"
-          export AIR_FORCE_STAGE2_ZIP="$RUNNER_TEMP/stage2-checkpoint-0022.zip"
+          export AIR_FORCE_STAGE2_ZIP="$RUNNER_TEMP/stage2-checkpoint-0024.zip"
           python -c 'import os, pathlib, zipfile; root=pathlib.Path(os.environ["AIR_FORCE_STAGE2_ROOT"]); paths=sorted(p for p in root.rglob("*") if p.is_file()); z=zipfile.ZipFile(os.environ["AIR_FORCE_STAGE2_ZIP"],"w",compression=zipfile.ZIP_DEFLATED); [z.write(p,p.relative_to(root).as_posix()) for p in paths]; z.close(); print("Exact Stage 2 checkpoint ZIP members:",len(paths))'
           python "$RUNNER_TEMP/tools/research_stage3a0.py" air-force "$RUNNER_TEMP/stage2-checkpoint-0022.zip" --main-sha a11cccf944492e4d968edbeef4111ebad150fcec --output-dir "$RUNNER_TEMP/stage3a0"
           export AIR_FORCE_STAGE3A0_OUT="$RUNNER_TEMP/stage3a0"
@@ -43,7 +49,7 @@ jobs:
       - name: Upload exact-output bounded checkpoint
         uses: actions/upload-artifact@v4
         with:
-          name: air-force-stage3a0-0023-a11cccf944492e4d968edbeef4111ebad150fcec
+          name: air-force-stage3a0-0024-a11cccf944492e4d968edbeef4111ebad150fcec
           path: ${{ runner.temp }}/stage3a0
           if-no-files-found: error
           retention-days: 7
