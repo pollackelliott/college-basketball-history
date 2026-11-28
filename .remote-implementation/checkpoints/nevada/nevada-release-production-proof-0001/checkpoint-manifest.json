@@ -1,0 +1,23 @@
+{
+  "fresh_runner_verification": "PENDING",
+  "kind": "REMOTE_IMPLEMENTATION_EXACT_PRODUCTION_CHECKPOINT",
+  "merge_parent_main": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "merge_parent_onboarding": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "merge_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "merged": true,
+  "owner_gate_2_approved": true,
+  "owner_gate_2_checkpoint_sha256": "d579723391cd49eadc317d9403a37f0a495c6fb1e9a76469c7a8af8dad924488",
+  "owner_gate_2_verification_sha256": "7cea3b357056d4affdec16212465e7c41ca89bca51773ddd8704416f5b0beb6f",
+  "pr_head_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "pr_number": 735,
+  "production_deployment_id": 8130713064,
+  "production_json_checked_count": 79,
+  "production_proof": true,
+  "production_proof_sha256": "ec46eb71ada526590a3fbe84b6691effa1acb9abeb5005cce9a3d6d2e2791832",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "request_id": "nevada-release-production-proof-0001",
+  "request_sha256": "1eaa92becc25b2c125d71a758863b2b8a4254fe304b218c19006de354247a60a",
+  "schema_version": 1,
+  "school_key": "nevada",
+  "status": "PRODUCTION_PROOF_PASS"
+}
