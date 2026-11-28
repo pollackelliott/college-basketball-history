@@ -1,0 +1,44 @@
+{
+  "kind": "SDSU_STAGE2_SERVICE_SHIP_CHECKPOINT_0040_V1",
+  "checkpoint": "0040-stage2-service-squads-and-naval-vessel-opponents",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "b82b24e9d1b31a5181e46195bf88501edbee3104",
+  "prior_checkpoint": "0039-stage2-military-installation-and-unit-opponents",
+  "prior_opponents_sha256": "6850a7ab4f23dc0af4523498b9f547931099d8586d7d172566f58d56f34fa07d",
+  "prior_residual_queue_sha256": "d1ff818b4f13396a78181e1680382e4048ed71ce73b18e38453bb0957d4170aa",
+  "new_labels": 11,
+  "new_games": 41,
+  "new_keys": 7,
+  "cumulative_mapped_labels": 209,
+  "cumulative_mapped_games": 903,
+  "distinct_opponent_keys": 95,
+  "remaining_unresolved_labels": 132,
+  "remaining_games": 183,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "2208027afcd8ea99a00abd61dfbd31baf74a69c93e6bffb980cc645b1810b65d",
+      "bytes_utf8": 145600
+    },
+    "accepted-service-squad-ship-division-evidence.json": {
+      "sha256": "9f13332d3b5d9b453c16d322d82e8ec8d80a01758d17f9224b9dcd07677e7b13",
+      "bytes_utf8": 11619
+    },
+    "research-status.json": {
+      "sha256": "878d0a19c052d34417fe185cac9218c8491516a76ef97b0331f750f5e149d9b7",
+      "bytes_utf8": 1427
+    },
+    "research-findings.md": {
+      "sha256": "d443770392f7e4a9930d765404fb06449e3a13110d2f46fefe6aed8acde7b1b9",
+      "bytes_utf8": 5050
+    },
+    "remaining-unresolved-opponent-labels.csv": {
+      "sha256": "01860f89461dcdde0e2b98fc30dc97488b9baa9011fbd589a6c3f573462491ab",
+      "bytes_utf8": 18051
+    }
+  }
+}

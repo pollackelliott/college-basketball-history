@@ -1,0 +1,235 @@
+{
+  "kind": "SDSU_STAGE2_SERVICE_SQUAD_SHIP_DIVISION_0040_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "b82b24e9d1b31a5181e46195bf88501edbee3104",
+  "parent_checkpoint": "0039-stage2-military-installation-and-unit-opponents",
+  "parent_opponents_sha256": "6850a7ab4f23dc0af4523498b9f547931099d8586d7d172566f58d56f34fa07d",
+  "parent_exact_residual_queue_sha256": "d1ff818b4f13396a78181e1680382e4048ed71ce73b18e38453bb0957d4170aa",
+  "immutable_programs_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "selection": "One bounded homogeneous early/midcentury military basketball opponent-family tranche: source-recognized local San Diego Marine/Navy teams, three separately identifiable U.S. Navy ship crews, and two explicitly numbered destroyer divisions; 7 canonical NON_D1 keys, 11 source labels, 41 accepted games. Marine and Navy source-defined series have independently matching 25 and 7 games, respectively; no false merge of installation/crew/team or modern Naval Academy Navy.",
+  "family_evidence": [
+    {
+      "provisional_key": "san-diego-marines",
+      "canonical_name": "San Diego Marines",
+      "class": "NON_D1",
+      "type": "SOURCE_DESIGNATED_MARINE_TEAM",
+      "identity_reasoning": "Marine Corps Recruit Depot San Diego Command Museum explicitly documents San Diego Marine Corps team sports including basketball, and a long-running San Diego State–San Diego Marines rivalry; independent SDSU opposition series enumerates 25 games 1924–1960, exactly matching the two source literals. Canonical identity is the SOURCE-DESIGNATED local San Diego Marine sports opponent series, not an assertion that one fixed regiment, coach, roster, recruiter, or physical facility persisted across seasons. Keep separately source-named 'MCRD' and 'Miramar Marines' unresolved rather than presuming equivalence.",
+      "urls": [
+        "https://scalar.usc.edu/works/mcrd-san-diegos-centennial/if-you-want-to-be-an-athlete-join-the-marines-marine-corps-sports-teams-in-san-diego.3",
+        "https://mcubed.net/ncaab/series/sandst/nd1_sandiegomarines.shtml",
+        "https://www.mcrdsd.marines.mil/About/The-Mission-We-Make-Marines/DepotMascot/"
+      ],
+      "source_labels": [
+        {
+          "literal": "San Diego Marines",
+          "game_count": 22,
+          "first": "1923-24",
+          "last": "1960-61",
+          "source_game_types": "POSTSEASON|REGULAR_SEASON",
+          "prefix": ""
+        },
+        {
+          "literal": "San Diego Marines (D)",
+          "game_count": 3,
+          "first": "1924-25",
+          "last": "1934-35",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "san-diego-navy",
+      "canonical_name": "San Diego Navy",
+      "class": "NON_D1",
+      "type": "SOURCE_DESIGNATED_LOCAL_NAVAL_TEAM",
+      "identity_reasoning": "The contemporary source expressly names San Diego Navy and an independent historical SDSU basketball series separately reports seven San Diego Navy contests, agreeing with the three raw labels. Assign one provenance-qualified archival team identity, not the present Naval Academy Midshipmen (research-base 'navy' current-D1 program). Do not assert an unchanged unit, roster or specific installation over the 1925–1956 span. Keep named Navy hospitals, air stations, vessels, submarines and Coast Guard opponents separate.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml",
+        "https://mcubed.net/ncaab/series/sandst/nd1series2h.shtml",
+        "https://cnrsw.cnic.navy.mil/Installations/NAVBASE-San-Diego/About/History/"
+      ],
+      "source_labels": [
+        {
+          "literal": "at San Diego Navy",
+          "game_count": 1,
+          "first": "1943-44",
+          "last": "1943-44",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": "AT_PREFIX"
+        },
+        {
+          "literal": "San Diego Navy",
+          "game_count": 5,
+          "first": "1924-25",
+          "last": "1955-56",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": ""
+        },
+        {
+          "literal": "San Diego Navy (CH)",
+          "game_count": 1,
+          "first": "1926-27",
+          "last": "1926-27",
+          "source_game_types": "POSTSEASON",
+          "prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "uss-aroostook",
+      "canonical_name": "USS Aroostook (naval ship crew)",
+      "class": "NON_D1",
+      "type": "NAMED_NAVAL_SHIP_CREW",
+      "identity_reasoning": "Original SDSU raw literal 'USS Aroostock' is a historical source transcription/spelling; Naval History and Heritage Command independently confirms USS Aroostook (ID-1256 / CM-3) was operating as a Pacific naval aircraft tender during the source years, and the independent SDSU game-series index retains the same 'Aroostock' spelling for two contests. Preserve source misspelling exactly; correct only canonical vessel name.",
+      "urls": [
+        "https://www.history.navy.mil/research/histories/ship-histories/danfs/a/aroostook-steamer-ii.html",
+        "https://mcubed.net/ncaab/series/sandst/nd1_ussaroostock.shtml",
+        "https://www.navsource.net/archives/11/0603.htm"
+      ],
+      "source_labels": [
+        {
+          "literal": "USS Aroostock (D)",
+          "game_count": 2,
+          "first": "1927-28",
+          "last": "1929-30",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "uss-melville-ad-2",
+      "canonical_name": "USS Melville (AD-2 crew)",
+      "class": "NON_D1",
+      "type": "NAMED_NAVAL_SHIP_CREW",
+      "identity_reasoning": "Naval History and Heritage Command DANFS confirms USS Melville (destroyer tender no.2, later AD-2) during 1924-1929; source series lists precisely two USS Melville opponents. This vessel is distinct from USS Aroostook, USS Omaha and all destroyer divisions. The source (D) suffix remains literal, not presumed site or ship designation.",
+      "urls": [
+        "https://www.history.navy.mil/research/histories/ship-histories/danfs/m/melville-i.html",
+        "https://mcubed.net/ncaab/series/sandst/nd1_ussmelville.shtml",
+        "https://www.navsource.net/archives/09/03/0302.htm"
+      ],
+      "source_labels": [
+        {
+          "literal": "USS Melville (D)",
+          "game_count": 2,
+          "first": "1924-25",
+          "last": "1929-30",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "uss-omaha-cl-4",
+      "canonical_name": "USS Omaha (CL-4 crew)",
+      "class": "NON_D1",
+      "type": "NAMED_NAVAL_SHIP_CREW",
+      "identity_reasoning": "NHHC official history confirms USS Omaha CL-4 was commissioned February 1923 and operational during the accepted 1924-25 basketball season. Both source suffix variants (D) and (CH) are one vessel opponent, not different teams; third-party historical SDSU series lists exactly three USS Omaha contests. Preserve postseason game types and raw suffixes; no tournament/site inference.",
+      "urls": [
+        "https://www.history.navy.mil/research/histories/ship-histories/danfs/o/omaha-ii.html",
+        "https://www.history.navy.mil/our-collections/photography/alphabetical---donations0/o/2018-27-uss-omaha--cl-4--photo-collection.html",
+        "https://mcubed.net/ncaab/series/sandst/nd1_ussomaha.shtml"
+      ],
+      "source_labels": [
+        {
+          "literal": "USS Omaha (CH)",
+          "game_count": 1,
+          "first": "1924-25",
+          "last": "1924-25",
+          "source_game_types": "POSTSEASON",
+          "prefix": ""
+        },
+        {
+          "literal": "USS Omaha (D)",
+          "game_count": 2,
+          "first": "1924-25",
+          "last": "1924-25",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "us-navy-destroyer-division-31",
+      "canonical_name": "U.S. Navy Destroyer Division 31",
+      "class": "NON_D1",
+      "type": "NUMBERED_US_NAVY_DESTROYER_UNIT",
+      "identity_reasoning": "NHHC ship-history records document destroyer division 31 operating from San Diego during 1921–1923 (USS Delphy, Chauncey); original source label explicitly says Destroyers and specifies 31st. Treat as source-named division opponent, not USS Delphy's ship crew nor all destroyer divisions.",
+      "urls": [
+        "https://www.history.navy.mil/our-collections/photography/us-navy-ships/alphabetical-listing/d/uss-delphy--dd-261-0.html",
+        "https://www.history.navy.mil/research/histories/ship-histories/danfs/c/chauncey-ii.html"
+      ],
+      "source_labels": [
+        {
+          "literal": "31st Division-Destroyers",
+          "game_count": 1,
+          "first": "1922-23",
+          "last": "1922-23",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": ""
+        }
+      ]
+    },
+    {
+      "provisional_key": "us-navy-destroyer-division-32",
+      "canonical_name": "U.S. Navy Destroyer Division 32",
+      "class": "NON_D1",
+      "type": "NUMBERED_US_NAVY_DESTROYER_UNIT",
+      "identity_reasoning": "NHHC official records document destroyer division 32 of the Pacific Fleet with San Diego connections in 1922-1925. Original 1924-25 source explicitly says 32nd Division-Destroyers. Separate from 31st and 35th divisions and independent vessel crews.",
+      "urls": [
+        "https://www.history.navy.mil/research/library/biographical-files/modern-biographical-files-ndl/modern-bios-a/andrus-carlton-leverett.html",
+        "https://www.history.navy.mil/content/history/nhhc/research/histories/ship-histories/danfs/b/bagley-iv.html"
+      ],
+      "source_labels": [
+        {
+          "literal": "32nd Division-Destroyers (D)",
+          "game_count": 1,
+          "first": "1924-25",
+          "last": "1924-25",
+          "source_game_types": "REGULAR_SEASON",
+          "prefix": ""
+        }
+      ]
+    }
+  ],
+  "explicit_unresolved_names_retained": [
+    "35th Division (D)",
+    "MCRD",
+    "Miramar Marines",
+    "San Diego Coast Guard",
+    "Submarine Division",
+    "Submarines Pacific (CH)",
+    "Fleet Air",
+    "Air Pac (Fleet Air)"
+  ],
+  "cautions": [
+    "Service-series identity is source-defined; no homogeneous year-to-year unit or roster assumed",
+    "USS Aroostock raw spelling retained, canonical vessel normalized to USS Aroostook",
+    "(D), (CH), and at are raw not H/A/N or postseason site adjudication",
+    "Historical local San Diego Navy not conflated with current D1 Navy Midshipmen",
+    "Individual Navy ship crews, destroyer divisions, and other previously accepted installation teams stay separate"
+  ],
+  "prior_198_label_mappings_byte_preserved": true,
+  "new_source_labels": 11,
+  "new_game_rows": 41,
+  "new_non_d1_keys": 7,
+  "cumulative_mapped_literals": 209,
+  "cumulative_mapped_games": 903,
+  "distinct_canonical_keys": 95,
+  "remaining_unresolved_literals": 132,
+  "remaining_unresolved_games": 183,
+  "original_stage1_games_unchanged": 1086,
+  "three_unidentified_1921_22_results_outside_game_ledger": 3,
+  "source_game_rows_mutated": 0,
+  "venue_site_inferences": 0,
+  "stage2_full_game_ledger_authored": false,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "non_d1_owner_scan_pending": true,
+  "global_shared_registry_mutated": false
+}
