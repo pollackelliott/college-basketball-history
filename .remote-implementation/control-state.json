@@ -1648,11 +1648,11 @@
   "current_sequence": 795,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
     "operation": "STAGE2_CURRENT_MAIN_REFRESH",
     "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
-    "remote_stage2_current_main_refresh_equivalence": "PENDING",
+    "remote_stage2_current_main_refresh_equivalence": "PASS",
     "request_id": "nevada-stage2-main-refresh-0001",
     "school_key": "nevada",
     "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
