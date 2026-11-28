@@ -841,18 +841,19 @@
     "nevada-stage2-preseal-0001",
     "nevada-stage2-preseal-0002",
     "nevada-stage2-gate1-seal-0001",
-    "nevada-stage2-sealed-apply-0001"
+    "nevada-stage2-sealed-apply-0001",
+    "nevada-release-readiness-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_READINESS",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "nevada-release-readiness-0001",
+  "active_request_sha256": "4721ce82ca378bf25fe6a06f2c3e2ae20dc999e2c5fa6d505be7005415b6c01d",
+  "active_school_key": "nevada",
+  "active_target_branch": "data/nevada-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1685,8 +1686,11 @@
     "writeahead_manifest_path": ".remote-implementation/writeahead/nevada/nevada-stage2-sealed-apply-0001/writeahead-manifest.json",
     "writeahead_manifest_sha256": "f1711f9b9c3563b7972e6eb5ce3717f03c3f2f133a5b4de318691cf36543126f"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "46115138969",
+  "lock_acquisition_request_commit": "ee310b31a83d81a43529aa79348cb8b34b060971",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_READINESS_RUNNING"
 }
