@@ -1,0 +1,940 @@
+{
+  "kind": "SDSU_STAGE2_INHERITED_D1_ALIASES_AND_COLLEGE_CONTINUITIES_0041_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "ef9a091f3e5e4da5ddf09f60c94bb5754c487909",
+  "parent_checkpoint": "0040-stage2-service-squads-and-naval-vessel-opponents",
+  "parent_opponents_sha256": "2208027afcd8ea99a00abd61dfbd31baf74a69c93e6bffb980cc645b1810b65d",
+  "parent_residual_sha256": "01860f89461dcdde0e2b98fc30dc97488b9baa9011fbd589a6c3f573462491ab",
+  "immutable_programs_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "immutable_published_sdsu_opponents_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "selection": "Bounded school-institution identity tranche: 19 source literals to existing current-D1 or already-accepted inherited NON_D1 keys, plus nine literals to seven institutional small-college NON_D1 keys using institutional basketball historical sources. Systematic label normalization preserves original raw notation and source chronology; no game-universe/site work.",
+  "added_literal_labels": 28,
+  "added_games": 30,
+  "accepted_source_literal_rows": [
+    {
+      "literal": "Appalachian State (N.C.)",
+      "games": 1,
+      "first_season": "1939-40",
+      "last_season": "1939-40",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "app-state",
+      "canonical_display": "Appalachian State",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_ALIAS"
+    },
+    {
+      "literal": "at Fort Hays State",
+      "games": 1,
+      "first_season": "1952-53",
+      "last_season": "1952-53",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "canonical_key": "fort-hays-state",
+      "canonical_display": "Fort Hays State",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "at Kentucky Wesleyan",
+      "games": 2,
+      "first_season": "1965-66",
+      "last_season": "1968-69",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "canonical_key": "kentucky-wesleyan",
+      "canonical_display": "Kentucky Wesleyan",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "at Nebraska Wesleyan",
+      "games": 1,
+      "first_season": "1963-64",
+      "last_season": "1963-64",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "canonical_key": "nebraska-wesleyan",
+      "canonical_display": "Nebraska Wesleyan",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "at Puget Sound",
+      "games": 1,
+      "first_season": "1954-55",
+      "last_season": "1954-55",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "canonical_key": "puget-sound",
+      "canonical_display": "Puget Sound",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "at Seattle Pacific",
+      "games": 1,
+      "first_season": "1964-65",
+      "last_season": "1964-65",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "canonical_key": "seattle-pacific",
+      "canonical_display": "Seattle Pacific",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "at Southern Oregon",
+      "games": 1,
+      "first_season": "1936-37",
+      "last_season": "1936-37",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "canonical_key": "southern-oregon",
+      "canonical_display": "Southern Oregon",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "at Willamette",
+      "games": 1,
+      "first_season": "1954-55",
+      "last_season": "1954-55",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "AT_PREFIX",
+      "canonical_key": "willamette",
+      "canonical_display": "Willamette",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "Cal State Fullerton (PG)",
+      "games": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "cal-state-fullerton",
+      "canonical_display": "Cal State Fullerton",
+      "current_d1": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_SUFFIX"
+    },
+    {
+      "literal": "Colorado State Teachers College",
+      "games": 2,
+      "first_season": "1960-61",
+      "last_season": "1960-61",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "northern-colorado",
+      "canonical_display": "Northern Colorado",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RENAME"
+    },
+    {
+      "literal": "East Texas State",
+      "games": 1,
+      "first_season": "1938-39",
+      "last_season": "1938-39",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "east-texas-a-m",
+      "canonical_display": "East Texas A&M",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RENAME"
+    },
+    {
+      "literal": "Nebraska Wesleyan",
+      "games": 1,
+      "first_season": "1965-66",
+      "last_season": "1965-66",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "nebraska-wesleyan",
+      "canonical_display": "Nebraska Wesleyan",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "Nevada-Reno",
+      "games": 1,
+      "first_season": "1961-62",
+      "last_season": "1961-62",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "nevada",
+      "canonical_display": "Nevada",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_GEOGRAPHIC_ALIAS"
+    },
+    {
+      "literal": "Pomona College (SA)",
+      "games": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "pomona-pitzer",
+      "canonical_display": "Pomona-Pitzer",
+      "current_d1": "No",
+      "resolution_method": "INHERITED_HISTORICAL_NON_D1_CONTINUITY"
+    },
+    {
+      "literal": "Portland State (SR)",
+      "games": 1,
+      "first_season": "1966-67",
+      "last_season": "1966-67",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "portland-state",
+      "canonical_display": "Portland State",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_EVENT_SUFFIX"
+    },
+    {
+      "literal": "Southern Oregon",
+      "games": 1,
+      "first_season": "1937-38",
+      "last_season": "1937-38",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "southern-oregon",
+      "canonical_display": "Southern Oregon",
+      "current_d1": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY_PROVISIONAL_NON_D1"
+    },
+    {
+      "literal": "Southwest Missouri State",
+      "games": 1,
+      "first_season": "1951-52",
+      "last_season": "1951-52",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "missouri-state",
+      "canonical_display": "Missouri State",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RENAME"
+    },
+    {
+      "literal": "St. Mary’s",
+      "games": 1,
+      "first_season": "1960-61",
+      "last_season": "1960-61",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "saint-mary-s",
+      "canonical_display": "Saint Mary's",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RECIPROCAL"
+    },
+    {
+      "literal": "SW Missouri State",
+      "games": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "missouri-state",
+      "canonical_display": "Missouri State",
+      "current_d1": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RENAME"
+    },
+    {
+      "literal": "UC Davis (SR-3rd)",
+      "games": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "uc-davis",
+      "canonical_display": "UC Davis",
+      "current_d1": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX"
+    },
+    {
+      "literal": "UC Irvine (PG)",
+      "games": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "uc-irvine",
+      "canonical_display": "UC Irvine",
+      "current_d1": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX"
+    },
+    {
+      "literal": "UC Irvine (SR)",
+      "games": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "uc-irvine",
+      "canonical_display": "UC Irvine",
+      "current_d1": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX"
+    },
+    {
+      "literal": "UC San Diego (SA)",
+      "games": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "uc-san-diego",
+      "canonical_display": "UC San Diego",
+      "current_d1": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX"
+    },
+    {
+      "literal": "UNLV (RC)",
+      "games": 1,
+      "first_season": "1966-67",
+      "last_season": "1966-67",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "unlv",
+      "canonical_display": "UNLV",
+      "current_d1": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX"
+    },
+    {
+      "literal": "vs. Gonzaga",
+      "games": 1,
+      "first_season": "1959-60",
+      "last_season": "1959-60",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "gonzaga",
+      "canonical_display": "Gonzaga",
+      "current_d1": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_PREFIX"
+    },
+    {
+      "literal": "vs. Illinois State (QF) (D)",
+      "games": 1,
+      "first_season": "1966-67",
+      "last_season": "1966-67",
+      "accepted_game_types": "POSTSEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "illinois-state",
+      "canonical_display": "Illinois State",
+      "current_d1": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_EVENT_SUFFIX"
+    },
+    {
+      "literal": "vs. Indiana State",
+      "games": 1,
+      "first_season": "1950-51",
+      "last_season": "1950-51",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "indiana-state",
+      "canonical_display": "Indiana State",
+      "current_d1": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_PREFIX"
+    },
+    {
+      "literal": "vs. Montana",
+      "games": 1,
+      "first_season": "1968-69",
+      "last_season": "1968-69",
+      "accepted_game_types": "REGULAR_SEASON",
+      "raw_prefix_markers": "",
+      "canonical_key": "montana",
+      "canonical_display": "Montana",
+      "current_d1": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_PREFIX"
+    }
+  ],
+  "identity_families": [
+    {
+      "canonical_key": "app-state",
+      "canonical_display": "Appalachian State",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_ALIAS",
+      "evidence_summary": "Appalachian State Teachers College was the predecessor of current App State, with documented men's basketball during 1930s. North Carolina qualifier is source disambiguation, not venue.",
+      "urls": [
+        "https://disc.library.appstate.edu/university-archives/timelines/"
+      ],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "Appalachian State (N.C.)",
+          "games": 1,
+          "first_season": "1939-40",
+          "last_season": "1939-40",
+          "accepted_game_types": "POSTSEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "cal-state-fullerton",
+      "canonical_display": "Cal State Fullerton",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_SUFFIX",
+      "evidence_summary": "Exact Cal State Fullerton institutional name; remove only parenthetical source (PG) as opponent-identity notation; retain raw label and game_type.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "Cal State Fullerton (PG)",
+          "games": 1,
+          "first_season": "1969-70",
+          "last_season": "1969-70",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "northern-colorado",
+      "canonical_display": "Northern Colorado",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RENAME",
+      "evidence_summary": "UNC official archives show Colorado State Teachers College (1911), Colorado State College of Education (1935), Colorado State College (1957), University of Northern Colorado (1970). Source 1960-61 label is retrospective, not exact contemporaneous legal name; same Greeley institution, not Colorado State University.",
+      "urls": [
+        "https://www.unco.edu/alumni/about/traditions/",
+        "https://uncoarchives.coalliance.org/agents/corporate_entities/87"
+      ],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "Colorado State Teachers College",
+          "games": 2,
+          "first_season": "1960-61",
+          "last_season": "1960-61",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "east-texas-a-m",
+      "canonical_display": "East Texas A&M",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RENAME",
+      "evidence_summary": "East Texas A&M official institutional history establishes East Texas State Teachers College name during 1938-39, East Texas State College 1957, East Texas State University 1965, Texas A&M-Commerce and East Texas A&M 2024. Source short form does not establish 1938 legal name; identity continuity and current D1 key are supported.",
+      "urls": [
+        "https://www.etamu.edu/about-us/",
+        "https://www.etamu.edu/name-change-faqs/"
+      ],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "East Texas State",
+          "games": 1,
+          "first_season": "1938-39",
+          "last_season": "1938-39",
+          "accepted_game_types": "POSTSEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "nevada",
+      "canonical_display": "Nevada",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_GEOGRAPHIC_ALIAS",
+      "evidence_summary": "Nevada-Reno is the same University of Nevada, Reno campus identity already accepted for 'at Nevada-Reno' in Stage 2 0036. Preserve source city qualifier without creating separate campus key.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "Nevada-Reno",
+          "games": 1,
+          "first_season": "1961-62",
+          "last_season": "1961-62",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "portland-state",
+      "canonical_display": "Portland State",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_EVENT_SUFFIX",
+      "evidence_summary": "Portland State literal identifies the current D1 Portland State institutional basketball program. Source (SR) is an unchanged event/tournament notation, not part of opponent name.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "Portland State (SR)",
+          "games": 1,
+          "first_season": "1966-67",
+          "last_season": "1966-67",
+          "accepted_game_types": "POSTSEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "missouri-state",
+      "canonical_display": "Missouri State",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RENAME",
+      "evidence_summary": "Missouri State official chronology records Southwest Missouri State Teachers College then Southwest Missouri State College, later Southwest Missouri State University; renamed Missouri State in 2005. Both original labels refer to the Springfield institution, not Northwest/Southeast Missouri State.",
+      "urls": [
+        "https://www.missouristate.edu/about/history.htm",
+        "https://www.missouristate.edu/Policy/Chapter7/G7_02_1_AbouttheUniversity.htm"
+      ],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "Southwest Missouri State",
+          "games": 1,
+          "first_season": "1951-52",
+          "last_season": "1951-52",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        },
+        {
+          "source_literal": "SW Missouri State",
+          "games": 1,
+          "first_season": "1967-68",
+          "last_season": "1967-68",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "saint-mary-s",
+      "canonical_display": "Saint Mary's",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "HISTORICAL_CURRENT_D1_RECIPROCAL",
+      "evidence_summary": "Saint Mary's College of California official 2023-24 basketball record book, 1960-61 team game log, reports at San Diego State on 1961-02-03, victory 81-58. Distinct from St. Mary's College (Kansas) or Mount St. Mary's. Original SDSU 'St. Mary’s' literal retained.",
+      "urls": [
+        "https://smcgaels.com/documents/download/2024/3/18/MBB_Game_Notes_23-24_NCAA_WEST_REGION_R1_2.pdf"
+      ],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "St. Mary’s",
+          "games": 1,
+          "first_season": "1960-61",
+          "last_season": "1960-61",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "uc-davis",
+      "canonical_display": "UC Davis",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX",
+      "evidence_summary": "Original UC Davis opponent name equals inherited/current D1 UC Davis. (SR-3rd) is source event-placement notation, not an opponent or physical-site identity.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "UC Davis (SR-3rd)",
+          "games": 1,
+          "first_season": "1967-68",
+          "last_season": "1967-68",
+          "accepted_game_types": "POSTSEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "uc-irvine",
+      "canonical_display": "UC Irvine",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX",
+      "evidence_summary": "Original UC Irvine name and both suffixes refer to one UC Irvine institutional program, previously accepted under other source labels. Preserve (PG)/(SR) and the accepted game_type, with no assumption about exhibition/site.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "UC Irvine (PG)",
+          "games": 1,
+          "first_season": "1969-70",
+          "last_season": "1969-70",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        },
+        {
+          "source_literal": "UC Irvine (SR)",
+          "games": 1,
+          "first_season": "1967-68",
+          "last_season": "1967-68",
+          "accepted_game_types": "POSTSEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "uc-san-diego",
+      "canonical_display": "UC San Diego",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX",
+      "evidence_summary": "Original opponent UC San Diego is the same institutional program as inherited SDSU published UC San Diego games. Current-D1 classification is as of immutable Research base, not 1969-70 historical division status.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "UC San Diego (SA)",
+          "games": 1,
+          "first_season": "1969-70",
+          "last_season": "1969-70",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "unlv",
+      "canonical_display": "UNLV",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "PUBLISHED_CURRENT_D1_EVENT_SUFFIX",
+      "evidence_summary": "UNLV source opponent identity is current-D1 UNLV; (RC) remains original tournament/source notation and does not change game_type or venue.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "UNLV (RC)",
+          "games": 1,
+          "first_season": "1966-67",
+          "last_season": "1966-67",
+          "accepted_game_types": "POSTSEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "gonzaga",
+      "canonical_display": "Gonzaga",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_PREFIX",
+      "evidence_summary": "Remove only original source 'vs.' opponent indicator to match immutable program registry Gonzaga; source notation remains raw, and neutral venue/site is NOT inferred.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "vs. Gonzaga",
+          "games": 1,
+          "first_season": "1959-60",
+          "last_season": "1959-60",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "illinois-state",
+      "canonical_display": "Illinois State",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_EVENT_SUFFIX",
+      "evidence_summary": "Immutable registry and published identity distinguish Illinois State from Indiana State. (QF) and (D) remain literal event metadata, not canonical opponent name; no venue or game-type inference.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "vs. Illinois State (QF) (D)",
+          "games": 1,
+          "first_season": "1966-67",
+          "last_season": "1966-67",
+          "accepted_game_types": "POSTSEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "indiana-state",
+      "canonical_display": "Indiana State",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_PREFIX",
+      "evidence_summary": "Original source opponent Indiana State matches already accepted Indiana State institutional key; retain 'vs.' literal without site inference.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "vs. Indiana State",
+          "games": 1,
+          "first_season": "1950-51",
+          "last_season": "1950-51",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "montana",
+      "canonical_display": "Montana",
+      "current_d1_at_immutable_base": "Yes",
+      "resolution_method": "EXACT_CURRENT_D1_VS_PREFIX",
+      "evidence_summary": "Original opponent University of Montana matches immutable D1 Montana institutional key, distinct from Montana State. 'vs.' is original label notation, not a researched H/A/N assignment.",
+      "urls": [],
+      "base_program_key_exists": true,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "vs. Montana",
+          "games": 1,
+          "first_season": "1968-69",
+          "last_season": "1968-69",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "pomona-pitzer",
+      "canonical_display": "Pomona-Pitzer",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "INHERITED_HISTORICAL_NON_D1_CONTINUITY",
+      "evidence_summary": "Pomona College athletics is the predecessor single-school varsity program within current Pomona-Pitzer Sagehens, previously authenticated as 0037. Source 1969-70 Pomona College remains the Pomona College identity (by then participating in Pomona-Claremont), NOT Cal Poly Pomona, Pomona Junior College, or Pitzer as a distinct program. (SA) remains raw literal.",
+      "urls": [
+        "https://sagehens.com/sports/2023/7/27/information-history.aspx"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": true,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "Pomona College (SA)",
+          "games": 1,
+          "first_season": "1969-70",
+          "last_season": "1969-70",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "kentucky-wesleyan",
+      "canonical_display": "Kentucky Wesleyan",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY",
+      "evidence_summary": "Kentucky Wesleyan College men's basketball has official institution/athletics records throughout the 1960s. The Owensboro Panthers are a distinct non-D1 college from Kentucky University and Kentucky State. Both SDSU source games remain regular-season and site unknown without independent H/A/N evidence.",
+      "urls": [
+        "https://kwcpanthers.com/news/2010/4/6/MBB_0406102030.aspx"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "at Kentucky Wesleyan",
+          "games": 2,
+          "first_season": "1965-66",
+          "last_season": "1968-69",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "canonical_key": "nebraska-wesleyan",
+      "canonical_display": "Nebraska Wesleyan",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY",
+      "evidence_summary": "Nebraska Wesleyan University Athletics documents 1953-61 NAIA basketball appearance history and school archives document longstanding men's basketball teams; both source literals refer to the same institution in 1963-65.",
+      "urls": [
+        "https://nwusports.com/sports/2013/10/11/MBB_1011135629.aspx",
+        "https://nwuarchives.omeka.net/collections/show/5"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "at Nebraska Wesleyan",
+          "games": 1,
+          "first_season": "1963-64",
+          "last_season": "1963-64",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": "AT_PREFIX"
+        },
+        {
+          "source_literal": "Nebraska Wesleyan",
+          "games": 1,
+          "first_season": "1965-66",
+          "last_season": "1965-66",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "southern-oregon",
+      "canonical_display": "Southern Oregon",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY",
+      "evidence_summary": "Southern Oregon University Athletics men's basketball historical results explicitly contain 1936-37 and contemporary periods, supporting one continuous Raiders school program for the two literal source variants.",
+      "urls": [
+        "https://souraiders.com/sports/2009/1/12/MBB_0112093038.aspx"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "at Southern Oregon",
+          "games": 1,
+          "first_season": "1936-37",
+          "last_season": "1936-37",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": "AT_PREFIX"
+        },
+        {
+          "source_literal": "Southern Oregon",
+          "games": 1,
+          "first_season": "1937-38",
+          "last_season": "1937-38",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": ""
+        }
+      ]
+    },
+    {
+      "canonical_key": "seattle-pacific",
+      "canonical_display": "Seattle Pacific",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY",
+      "evidence_summary": "Seattle Pacific University official basketball history reports program began 1943-44 and lists NCAA tournament appearances in 1962, 1964, 1965 and 1966. The 1964-65 source identity is Seattle Pacific, not Seattle University.",
+      "urls": [
+        "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/spufalcons.com/documents/2021/11/3/SPUmbbNotes_11_3_21.pdf"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "at Seattle Pacific",
+          "games": 1,
+          "first_season": "1964-65",
+          "last_season": "1964-65",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "canonical_key": "puget-sound",
+      "canonical_display": "Puget Sound",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY",
+      "evidence_summary": "University of Puget Sound official athletics men's basketball archive includes 1954-55 season; original at Puget Sound refers to its varsity Loggers, distinct from Seattle Pacific and Seattle U.",
+      "urls": [
+        "https://loggerathletics.com/sports/2021/5/25/sports-mbkb-archive.aspx"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "at Puget Sound",
+          "games": 1,
+          "first_season": "1954-55",
+          "last_season": "1954-55",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "canonical_key": "fort-hays-state",
+      "canonical_display": "Fort Hays State",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY",
+      "evidence_summary": "Fort Hays State University's digital archive preserves a 1952-53 varsity basketball brochure under contemporaneous name Fort Hays Kansas State College; source 'Fort Hays State' is a retrospective same-institution name, not a new program.",
+      "urls": [
+        "https://scholars.fhsu.edu/athletic_programs/177/"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": true,
+      "source_rows": [
+        {
+          "source_literal": "at Fort Hays State",
+          "games": 1,
+          "first_season": "1952-53",
+          "last_season": "1952-53",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "canonical_key": "willamette",
+      "canonical_display": "Willamette",
+      "current_d1_at_immutable_base": "No",
+      "resolution_method": "HISTORICAL_NOND1_COLLEGE_CONTINUITY",
+      "evidence_summary": "Willamette University Archives holds original athletics records including men's basketball in the 1950s; original source names institution Willamette University, not Willamette High School or an unrelated club.",
+      "urls": [
+        "https://willamette.libraryhost.com/subjects/34"
+      ],
+      "base_program_key_exists": false,
+      "prior_accepted_reused": false,
+      "inherited_published_sdsu_reuse": false,
+      "source_rows": [
+        {
+          "source_literal": "at Willamette",
+          "games": 1,
+          "first_season": "1954-55",
+          "last_season": "1954-55",
+          "accepted_game_types": "REGULAR_SEASON",
+          "original_raw_prefix": "AT_PREFIX"
+        }
+      ]
+    }
+  ],
+  "distinct_new_provisional_NON_D1_keys": 7,
+  "all_prior_209_mappings_byte_prefix_preserved": true,
+  "new_mapped_labels": 237,
+  "new_mapped_games": 933,
+  "new_distinct_opponent_keys": 111,
+  "remaining_unresolved_labels": 104,
+  "remaining_accepted_game_rows": 153,
+  "source_accepted_games_unchanged": 1086,
+  "three_unidentified_1921_22_results_separately_preserved": 3,
+  "source_game_rows_mutated": 0,
+  "site_type_inferences": 0,
+  "venue_inferences": 0,
+  "non_d1_owner_scan_pending": true,
+  "shared_reference_registration_performed": false,
+  "full_stage2_structured_ledger_not_authored": true,
+  "stage2_complete": false,
+  "stage3_started": false
+}
