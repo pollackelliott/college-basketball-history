@@ -1,0 +1,46 @@
+[
+  {
+    "id": "AF-2006-07-008",
+    "scope": "STAGE3A4_FUTURE_ADVERSARIAL_CLASSIFICATION_REVIEW",
+    "target": "Air Force official 2006-07 schedule labels game vs Wake Forest and accepted Stage3A1 source H/A/N is NEUTRAL",
+    "opponent": "Wake Forest official 2006-11-29 game box score labels Air Force HOME, contemporaneous schedule names at Air Force",
+    "evidence_urls": [
+      "https://godeacs.com/news/2006/11/30/air_force_94_wake_forest_58",
+      "https://godeacs.com/news/2006/11/26/deacon_game_notes_wake_forest_vs_air_force",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/2006-07"
+    ],
+    "ruling": "No Tier3 H/A/N change. Venue site acceptance independently grounded. Isolate on Stage3A4 only if controlling contract calls for further review.",
+    "inherited_from_checkpoint": "0037",
+    "current_tier4_action": "PRESERVED_UNCHANGED_ACCEPTED_HAN"
+  },
+  {
+    "research_game_id": "AF-1959-60-012",
+    "kind": "HISTORICAL_SITE_CLASSIFICATION_CONTRADICTION",
+    "first_party_counter_evidence": {
+      "id": "AF-1959-60-012",
+      "potential_correct_site": "HOME",
+      "locality": "USAFA, CO",
+      "kind": "ACCEPTED_STAGE3A1_NEUTRAL_VS_OFFICIAL_HOME",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1959-60",
+      "basis": "Air Force exact 1959–60 official schedule lists Jan 7 Nebraska-Omaha W 90–41 as vs at USAFA, CO under Home (vs) program convention. Original Research row has neutral and blank locality; recorded before Tier4."
+    },
+    "accepted_stage3a_site_type": "NEUTRAL",
+    "decision": "HISTORICAL_HAN_CONTRADICTION_PRESERVED_FOR_STAGE3A4",
+    "stage3a4_scope": "Bounded exact-game first-party H/A/N adjudication before final Stage3A publication; original Stage3A2 ledger immutable at this checkpoint"
+  },
+  {
+    "research_game_id": "AF-1959-60-022",
+    "kind": "HISTORICAL_SITE_CLASSIFICATION_CONTRADICTION",
+    "first_party_counter_evidence": {
+      "id": "AF-1959-60-022",
+      "potential_correct_site": "OPPONENT_HOME",
+      "locality": "Golden, CO",
+      "kind": "ACCEPTED_STAGE3A1_NEUTRAL_VS_OFFICIAL_AWAY",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1959-60",
+      "basis": "Air Force exact 1959–60 official schedule lists Feb 10 Colorado Mines W 84–54 at Colorado Mines, Golden, CO. Research row presently neutral with blank locality."
+    },
+    "accepted_stage3a_site_type": "NEUTRAL",
+    "decision": "HISTORICAL_HAN_CONTRADICTION_PRESERVED_FOR_STAGE3A4",
+    "stage3a4_scope": "Bounded exact-game first-party H/A/N adjudication before final Stage3A publication; original Stage3A2 ledger immutable at this checkpoint"
+  }
+]

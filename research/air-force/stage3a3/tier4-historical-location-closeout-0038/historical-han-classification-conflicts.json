@@ -1,0 +1,48 @@
+[
+  {
+    "research_game_id": "AF-1959-60-012",
+    "season": "1959-60",
+    "game_date": "1960-01-07",
+    "opponent_key": "omaha",
+    "accepted_game_type": "REGULAR_SEASON",
+    "accepted_site_type": "NEUTRAL",
+    "accepted_source_literal": "1-7........ NEBRASKA-OMAHA..............W.......90-41",
+    "accepted_locality_literal": "",
+    "first_party_counter_evidence": {
+      "id": "AF-1959-60-012",
+      "potential_correct_site": "HOME",
+      "locality": "USAFA, CO",
+      "kind": "ACCEPTED_STAGE3A1_NEUTRAL_VS_OFFICIAL_HOME",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1959-60",
+      "basis": "Air Force exact 1959–60 official schedule lists Jan 7 Nebraska-Omaha W 90–41 as vs at USAFA, CO under Home (vs) program convention. Original Research row has neutral and blank locality; recorded before Tier4."
+    },
+    "decision": "HISTORICAL_HAN_CONTRADICTION_PRESERVED_FOR_STAGE3A4",
+    "site_type_mutated": false,
+    "venue_not_inferred": true,
+    "owner_gate_requested": false,
+    "review_scope": "Bounded exact-game first-party H/A/N adjudication before final Stage3A publication; original Stage3A2 ledger immutable at this checkpoint"
+  },
+  {
+    "research_game_id": "AF-1959-60-022",
+    "season": "1959-60",
+    "game_date": "1960-02-10",
+    "opponent_key": "colorado-school-of-mines",
+    "accepted_game_type": "REGULAR_SEASON",
+    "accepted_site_type": "NEUTRAL",
+    "accepted_source_literal": "2-10...... Colorado Mines.......................W.......84-54",
+    "accepted_locality_literal": "",
+    "first_party_counter_evidence": {
+      "id": "AF-1959-60-022",
+      "potential_correct_site": "OPPONENT_HOME",
+      "locality": "Golden, CO",
+      "kind": "ACCEPTED_STAGE3A1_NEUTRAL_VS_OFFICIAL_AWAY",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1959-60",
+      "basis": "Air Force exact 1959–60 official schedule lists Feb 10 Colorado Mines W 84–54 at Colorado Mines, Golden, CO. Research row presently neutral with blank locality."
+    },
+    "decision": "HISTORICAL_HAN_CONTRADICTION_PRESERVED_FOR_STAGE3A4",
+    "site_type_mutated": false,
+    "venue_not_inferred": true,
+    "owner_gate_requested": false,
+    "review_scope": "Bounded exact-game first-party H/A/N adjudication before final Stage3A publication; original Stage3A2 ledger immutable at this checkpoint"
+  }
+]

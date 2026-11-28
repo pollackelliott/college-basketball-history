@@ -1,0 +1,1507 @@
+[
+  {
+    "research_game_id": "AF-1956-57-011",
+    "season": "1956-57",
+    "game_date": "1957-01-26",
+    "opponent_key": "northern-colorado",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "Denver Auditorium Arena",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "Denver Auditorium Arena",
+      "guide_literal_row": "1-26..... Northern Colorado*..............L........66-88"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1956-57",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "EXACT_BUILDING_PRESERVED_FROM_SAME_SOURCE",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1956-57-013",
+    "season": "1956-57",
+    "game_date": "1957-02-02",
+    "opponent_key": "omaha",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "Denver Auditorium Arena",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "Denver Auditorium Arena",
+      "guide_literal_row": "2-2........ Nebraska-Omaha*................W......74-46"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1956-57",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "EXACT_BUILDING_PRESERVED_FROM_SAME_SOURCE",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1956-57-020",
+    "season": "1956-57",
+    "game_date": "1957-03-02",
+    "opponent_key": "regis-colorado",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "Denver Auditorium Arena",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "Denver Auditorium Arena",
+      "guide_literal_row": "3-2........ Regis*.........................................L........45-61"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1956-57",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "EXACT_BUILDING_PRESERVED_FROM_SAME_SOURCE",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1957-58-010",
+    "season": "1957-58",
+    "game_date": "1958-01-11",
+    "opponent_key": "loyola-chicago",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "Denver Auditorium Arena",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "Denver Auditorium Arena",
+      "guide_literal_row": "1-11...... Loyola (Ill.)*...............................L.........50-71"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1957-58",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "EXACT_BUILDING_PRESERVED_FROM_SAME_SOURCE",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1957-58-012",
+    "season": "1957-58",
+    "game_date": "1958-01-18",
+    "opponent_key": "washington-st-louis",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "Denver Auditorium Arena",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "Denver Auditorium Arena",
+      "guide_literal_row": "1-18...... Washington (Mo.)*................W.......83-41"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1957-58",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "EXACT_BUILDING_PRESERVED_FROM_SAME_SOURCE",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1958-59-008",
+    "season": "1958-59",
+    "game_date": "1959-01-03",
+    "opponent_key": "valparaiso",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "Denver Auditorium Arena",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "Denver Auditorium Arena",
+      "guide_literal_row": "1-3......... Valparaiso*................................W.......63-49"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1958-59",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "EXACT_BUILDING_PRESERVED_FROM_SAME_SOURCE",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1961-62-010",
+    "season": "1961-62",
+    "game_date": "1962-01-24",
+    "opponent_key": "denver",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "Denver Auditorium Arena",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "Denver Auditorium Arena",
+      "guide_literal_row": "1-24...... Denver*......................................W.......58-56"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1961-62",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "EXACT_BUILDING_PRESERVED_FROM_SAME_SOURCE",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1963-64-007",
+    "season": "1963-64",
+    "game_date": "1963-12-27",
+    "opponent_key": "florida",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Jacksonville",
+      "state": "FL",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Jacksonville, FL",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-27.... Florida$......................................L.........68-74"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1963-64",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1965-66-003",
+    "season": "1965-66",
+    "game_date": "1965-12-04",
+    "opponent_key": "denver",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Denver",
+      "state": "CO",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Denver, CO",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-4...... Denver$......................................L.........73-90"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1965-66",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1965-66-009",
+    "season": "1965-66",
+    "game_date": "1965-12-28",
+    "opponent_key": "michigan",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Portland",
+      "state": "OR",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Portland, OR",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-28 ... (7) Michigan&..........................L.........74-83"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1965-66",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1965-66-010",
+    "season": "1965-66",
+    "game_date": "1965-12-29",
+    "opponent_key": "oregon",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Portland",
+      "state": "OR",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Portland, OR",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29.... Oregon&....................................W.......69-57"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1965-66",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1967-68-004",
+    "season": "1967-68",
+    "game_date": "1967-12-09",
+    "opponent_key": "massachusetts",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Pittsburgh",
+      "state": "PA",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Pittsburgh, PA",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-9 ..... Massachusetts$ .....................W.......71-62"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1967-68",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1968-69-006",
+    "season": "1968-69",
+    "game_date": "1968-12-26",
+    "opponent_key": "virginia",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Greenville",
+      "state": "NC",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Greenville, NC",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-26 ... Virginia$.....................................L.........85-90"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1968-69",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1968-69-007",
+    "season": "1968-69",
+    "game_date": "1968-12-27",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Greenville",
+      "state": "NC",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Greenville, NC",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-27 ... Cornell$......................................W.......85-70"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1968-69",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1968-69-008",
+    "season": "1968-69",
+    "game_date": "1968-12-28",
+    "opponent_key": "william-mary",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Greenville",
+      "state": "NC",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Greenville, NC",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-28 ... William & Mary$ ...................L.........71-74"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1968-69",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1971-72-007",
+    "season": "1971-72",
+    "game_date": "1971-12-29",
+    "opponent_key": "xavier",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Charleston",
+      "state": "SC",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Charleston, SC",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... Xavier (Ohio)$..........................W.......62-58"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1971-72",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1972-73-004",
+    "season": "1972-73",
+    "game_date": "1972-12-09",
+    "opponent_key": "nebraska",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Morgantown",
+      "state": "WV",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Morgantown, WV",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-9 ..... Nebraska-Lincoln$.................L.........53-57"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1972-73",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1972-73-007",
+    "season": "1972-73",
+    "game_date": "1972-12-30",
+    "opponent_key": "boston-university",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Evansville",
+      "state": "IN",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Evansville, IN",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-30 ... Boston%.....................................W.......65-53"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1972-73",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1977-78-009",
+    "season": "1977-78",
+    "game_date": "1977-12-31",
+    "opponent_key": "tulane",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Bloomington",
+      "state": "MN",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Bloomington, MN",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-31.... Tulane$.......................................W.......87-60"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1977-78",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1978-79-007",
+    "season": "1978-79",
+    "game_date": "1978-12-29",
+    "opponent_key": "texas-a-m",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Burlington",
+      "state": "VT",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Burlington, VT",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... (12) Texas A&M$....................L.........66-73"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1978-79",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1978-79-008",
+    "season": "1978-79",
+    "game_date": "1978-12-30",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Burlington",
+      "state": "VT",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Burlington, VT",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-30 ... Cornell$......................................W.......58-56"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1978-79",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1979-80-008",
+    "season": "1979-80",
+    "game_date": "1979-12-29",
+    "opponent_key": "american-university",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "New Rochelle",
+      "state": "NY",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "New Rochelle, NY",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... American University$............L.........57-84"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1979-80",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1980-81-007",
+    "season": "1980-81",
+    "game_date": "1980-12-29",
+    "opponent_key": "auburn",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Toledo",
+      "state": "OH",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Toledo, OH",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... Auburn$.....................................W.......48-46"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1980-81",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1981-82-007",
+    "season": "1981-82",
+    "game_date": "1981-12-28",
+    "opponent_key": "nebraska",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Cedar Falls",
+      "state": "IA",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Cedar Falls, IA",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-28 ... Nebraska$.................................L.........47-63"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1981-82",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1981-82-008",
+    "season": "1981-82",
+    "game_date": "1981-12-29",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Cedar Falls",
+      "state": "IA",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Cedar Falls, IA",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... Cornell$......................................W.......39-36"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1981-82",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1983-84-008",
+    "season": "1983-84",
+    "game_date": "1983-12-28",
+    "opponent_key": "texas-a-m",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Nashville",
+      "state": "TN",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Nashville, TN",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-28 ... Texas A&M%............................L.........42-44"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1983-84",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1984-85-009",
+    "season": "1984-85",
+    "game_date": "1984-12-29",
+    "opponent_key": "brown",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Dayton",
+      "state": "OH",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Dayton, OH",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... Brown$.......................................L.........59-69"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1984-85",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1985-86-008",
+    "season": "1985-86",
+    "game_date": "1985-12-21",
+    "opponent_key": "navy",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Tokyo",
+      "state": "",
+      "country": "Japan"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Tokyo, Japan",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-21 ... Navy$..........................................L.........53-70"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1985-86",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1985-86-009",
+    "season": "1985-86",
+    "game_date": "1985-12-22",
+    "opponent_key": "army",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Tokyo",
+      "state": "",
+      "country": "Japan"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Tokyo, Japan",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-22 ... Army$.........................................W.......56-50"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1985-86",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1986-87-009",
+    "season": "1986-87",
+    "game_date": "1986-12-30",
+    "opponent_key": "georgia-southern",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Toledo",
+      "state": "OH",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Toledo, OH",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-30 ... Ga. Southern$..........................W.......87-82"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1986-87",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1987-88-001",
+    "season": "1987-88",
+    "game_date": "1987-11-27",
+    "opponent_key": "manhattan",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Irvine",
+      "state": "CA",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Irvine, CA",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "11-27.... Manhattan$..............................L.........71-76"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1987-88",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1987-88-002",
+    "season": "1987-88",
+    "game_date": "1987-11-28",
+    "opponent_key": "army",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Irvine",
+      "state": "CA",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Irvine, CA",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "11-28 ... Army$.........................................L.........70-79"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1987-88",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1987-88-008",
+    "season": "1987-88",
+    "game_date": "1987-12-29",
+    "opponent_key": "niagara",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Milwaukee",
+      "state": "WI",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Milwaukee, WI",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... Niagara%...................................W.......57-54"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1987-88",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1989-90-003",
+    "season": "1989-90",
+    "game_date": "1989-12-01",
+    "opponent_key": "pepperdine",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Lincoln",
+      "state": "NE",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Lincoln, NE",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-1...... Pepperdine%............................L.........75-82"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/text/1989-90",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1989-90-004",
+    "season": "1989-90",
+    "game_date": "1989-12-02",
+    "opponent_key": "harvard",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Lincoln",
+      "state": "NE",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Lincoln, NE",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-2 ..... Harvard%...................................W.......73-71"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/text/1989-90",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1989-90-009",
+    "season": "1989-90",
+    "game_date": "1989-12-29",
+    "opponent_key": "southern-illinois",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Chattanooga",
+      "state": "TN",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Chattanooga, TN",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 ... Southern Illinois& .................L.........74-89"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/text/1989-90",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1990-91-009",
+    "season": "1990-91",
+    "game_date": "1990-12-22",
+    "opponent_key": "vermont",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "San Francisco, CA",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-22.... Vermont$...................................L.........40-50"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/text/1990-91",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1991-92-009",
+    "season": "1991-92",
+    "game_date": "1991-12-28",
+    "opponent_key": "hofstra",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Boise",
+      "state": "ID",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Boise, ID",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-28.... Hofstra$.....................................L.........70-75"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/text/1991-92",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1992-93-009",
+    "season": "1992-93",
+    "game_date": "1992-12-29",
+    "opponent_key": "rider",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Nashville",
+      "state": "TN",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Nashville, TN",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29.... Rider (OT)$................................W.......75-66"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/text/1992-93",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1994-95-008",
+    "season": "1994-95",
+    "game_date": "1994-12-29",
+    "opponent_key": "the-citadel",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Wichita",
+      "state": "KS",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Wichita, KS",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29.... Citadel$......................................L.........61-65"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1994-95",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1995-96-008",
+    "season": "1995-96",
+    "game_date": "1995-12-29",
+    "opponent_key": "austin-peay",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Toledo",
+      "state": "OH",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Toledo, OH",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29.... Austin Peay$.............................L.........72-91"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1995-96",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1995-96-009",
+    "season": "1995-96",
+    "game_date": "1995-12-30",
+    "opponent_key": "william-mary",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Toledo",
+      "state": "OH",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Toledo, OH",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-30.... William and Mary$.................L.........60-64"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_EXACT_SEASON_SCHEDULE_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1995-96",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; official first-party season schedule named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2026/5/27/History.2026-27.pdf?timestamp=20260527033629",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  },
+  {
+    "research_game_id": "AF-1982-83-008",
+    "season": "1982-83",
+    "game_date": "1982-12-29",
+    "opponent_key": "lafayette",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "location": {
+      "venue_name": "",
+      "city": "Hartford",
+      "state": "CT",
+      "country": "United States"
+    },
+    "source_literal": {
+      "source_schedule_locality": "Hartford, CT",
+      "guide_exact_venue_note": "",
+      "guide_literal_row": "12-29 Lafayette$ L 61-63"
+    },
+    "source_provenance": [
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_TOURNAMENT_HISTORY_CARRIED_IN_ACCEPTED_LEDGER",
+        "url": "https://goairforcefalcons.com/documents/download/2010/11/9/_afa_m_baskbl__ResultsSection2010-11.pdf",
+        "claim": "Original checkpoint 0037 row contains source_schedule_locality; first-party results guide named in frozen source row"
+      },
+      {
+        "type": "AIR_FORCE_INSTITUTIONAL_RESEARCH_ACCEPTED_SOURCE_FIELD",
+        "url": "https://goairforcefalcons.com/documents/download/2010/11/9/_afa_m_baskbl__ResultsSection2010-11.pdf",
+        "claim": "Direct target-school original source evidence_basis carried in exact accepted Stage 3A-2 row"
+      }
+    ],
+    "historical_completeness_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+    "venue_obligation": "LOCATION_FIRST_SUFFICIENT_BUILDING_NOT_REQUIRED",
+    "source_fanout": "Target-school first-party exact-season results and guide already in prior accepted state; no custom building archaeology",
+    "event_identity_status": "Preserve source game and locality only; do not invent historical event name"
+  }
+]

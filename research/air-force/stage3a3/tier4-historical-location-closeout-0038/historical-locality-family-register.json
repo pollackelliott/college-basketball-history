@@ -1,0 +1,355 @@
+[
+  {
+    "group_key": "1956-57|Denver|CO",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1956-57-011",
+      "AF-1956-57-013",
+      "AF-1956-57-020"
+    ],
+    "game_count": 3,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1957-58|Denver|CO",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1957-58-010",
+      "AF-1957-58-012"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1958-59|Denver|CO",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1958-59-008"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1961-62|Denver|CO",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1961-62-010"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1963-64|Jacksonville|FL",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1963-64-007"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1965-66|Denver|CO",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1965-66-003"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1965-66|Portland|OR",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1965-66-009",
+      "AF-1965-66-010"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1967-68|Pittsburgh|PA",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1967-68-004"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1968-69|Greenville|NC",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1968-69-006",
+      "AF-1968-69-007",
+      "AF-1968-69-008"
+    ],
+    "game_count": 3,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1971-72|Charleston|SC",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1971-72-007"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1972-73|Morgantown|WV",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1972-73-004"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1972-73|Evansville|IN",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1972-73-007"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1977-78|Bloomington|MN",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1977-78-009"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1978-79|Burlington|VT",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1978-79-007",
+      "AF-1978-79-008"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1979-80|New Rochelle|NY",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1979-80-008"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1980-81|Toledo|OH",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1980-81-007"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1981-82|Cedar Falls|IA",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1981-82-007",
+      "AF-1981-82-008"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1983-84|Nashville|TN",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1983-84-008"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1984-85|Dayton|OH",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1984-85-009"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1985-86|Tokyo|Japan",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1985-86-008",
+      "AF-1985-86-009"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1986-87|Toledo|OH",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1986-87-009"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1987-88|Irvine|CA",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1987-88-001",
+      "AF-1987-88-002"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1987-88|Milwaukee|WI",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1987-88-008"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1989-90|Lincoln|NE",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1989-90-003",
+      "AF-1989-90-004"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1989-90|Chattanooga|TN",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1989-90-009"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1990-91|San Francisco|CA",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1990-91-009"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1991-92|Boise|ID",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1991-92-009"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1992-93|Nashville|TN",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1992-93-009"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1994-95|Wichita|KS",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1994-95-008"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1995-96|Toledo|OH",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1995-96-008",
+      "AF-1995-96-009"
+    ],
+    "game_count": 2,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  },
+  {
+    "group_key": "1982-83|Hartford|CT",
+    "mechanical_only": true,
+    "game_ids": [
+      "AF-1982-83-008"
+    ],
+    "game_count": 1,
+    "source_type": "air-force target-school first-party seasonal game results and exact site note",
+    "event_name_inferred": false,
+    "building_challenge_stopped": "historical city/state already supported; exact physical building is optional and not researched further"
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A3_TIER4_HISTORICAL_LOCATION_CLOSEOUT_CHECKPOINT_0038_MANIFEST_V1",
+  "school_key": "air-force",
+  "status": "TIER4_COMPLETE_WITH_TWO_HAN_ADVERSARIAL_REFERRALS",
+  "parent_research_commit_sha": "c0f4b842a35fa642fe73c19aa5015643376f6898",
+  "parent_checkpoint_manifest_git_blob_sha": "e23d100e97223586347d8d2f9675531f6b7638bd",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "stage3a2_ledger_git_blob_sha": "e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e",
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "47ac325d263a64cc1c00937761559ece891c4b9c",
+      "character_count": 3080
+    },
+    {
+      "path": "status.json",
+      "git_blob_sha": "d37fc9e07261d13e61fee2dcd20ca51eb32c0b09",
+      "character_count": 1778
+    },
+    {
+      "path": "tier4-accepted-historical-locality.json",
+      "git_blob_sha": "60558a26dc1ff313b887332ceacae3eee39ef9d8",
+      "character_count": 72908
+    },
+    {
+      "path": "historical-locality-family-register.json",
+      "git_blob_sha": "3be0bcd9d1e16d730dc0ef615b395145e29c63ef",
+      "character_count": 13354
+    },
+    {
+      "path": "historical-han-classification-conflicts.json",
+      "git_blob_sha": "dc181fe0c26189e6c6c6b1601f099ff3e01a0248",
+      "character_count": 2372
+    },
+    {
+      "path": "stage3a4-adversarial-handoff.json",
+      "git_blob_sha": "3ec9c60d239eeda8c7e65088f98e1c3417a39216",
+      "character_count": 2675
+    },
+    {
+      "path": "stage3a3-neutral-row-state.json",
+      "git_blob_sha": "e7f65867873b86006fd257a465fd51d9c0f8ac00",
+      "character_count": 99238
+    },
+    {
+      "path": "remaining-neutral-queue.json",
+      "git_blob_sha": "ecca96df9f61ed72e6c92c02cfc9e6cc00afe4a0",
+      "character_count": 7735
+    }
+  ],
+  "counts": {
+    "original_neutral": 116,
+    "tier1_complete": 29,
+    "tier2_complete": 34,
+    "tier3_complete": 6,
+    "tier4_historical_locality_complete": 43,
+    "cumulative_complete": 112,
+    "modern_researched_building_unknown": 2,
+    "historical_han_conflicts": 2,
+    "remaining_total": 4,
+    "stage3a4_advisory_count": 3
+  }
+}
