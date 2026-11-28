@@ -1,0 +1,93 @@
+{
+  "artifact_normalized_sha256": {
+    "implementation-stage2-capability-census.json": "26c3947f8dd24f2e818bf08c3519a4a91e36521685a8845168836bb15c1c03a4",
+    "implementation-stage2-status.json": "eacb7df306efd21e490ec58617b17b34b95c10295f79ddd15930f01226d0260e",
+    "plan.json": "9c751bf0e91a2ecf0bf83ad58e862a2590fc5e49c3b45ff5e33f25a857bf6538",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "a3f888af7d7dff9c8814ecf202c66d7e5c16fb1f5f063a5ed12931832092a149"
+  },
+  "artifact_sha256": {
+    "implementation-stage2-capability-census.json": "26c3947f8dd24f2e818bf08c3519a4a91e36521685a8845168836bb15c1c03a4",
+    "implementation-stage2-status.json": "fbd86ef52da8e95356cd15e43ebfebb0beeb3f1095aef9ab9009d294c9eb4734",
+    "plan.json": "b7a48bced37abec418712d554a54a073b86be23ff46a3674d3cb157955084b24",
+    "review.csv": "31d5646d8d259832295f4bb9134c99b5f59cc59400dc4293226246aaf5d8846d",
+    "review.md": "88d56f7d0784d4d77e23953162d2c204f2546a0b38cc6bed78f93bc7bb7e8e9a"
+  },
+  "authority_statement": "Read-only remote Implementation Stage 2 discovery checkpoint. No tracked repair, recommendation map, Gate 1 rehearsal, owner approval, sealed apply, Preview, or release authority is included.",
+  "capability_census_sha256": "26c3947f8dd24f2e818bf08c3519a4a91e36521685a8845168836bb15c1c03a4",
+  "capability_census_status": "PREFLIGHT_BLOCKED",
+  "capability_preflight": {
+    "blocker_count": 40,
+    "canonical_site_patch_reviews": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_fields": {},
+    "site_or_han_review_decision_ids": [],
+    "warning_count": 0
+  },
+  "capability_topology_groups": [
+    {
+      "classification": "UNCLASSIFIED",
+      "count": 40,
+      "topology": "preflight_blockers"
+    }
+  ],
+  "command_exit_code": 1,
+  "correction_integration_freeze_path": null,
+  "correction_integration_freeze_sha256": null,
+  "correction_origin_main_sha": null,
+  "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "historical_game_type_challenge_path": null,
+  "historical_game_type_challenge_sha256": null,
+  "integration_freeze_sha256": "2d4063679b27c109d94f88ea09c58d9046063d5f22f03ef0de23b61d5e7b608d",
+  "kind": "REMOTE_IMPLEMENTATION_STAGE2_CENSUS_CHECKPOINT",
+  "permanent_command": [
+    "python",
+    "tools/implementation_stage2.py",
+    "grand-canyon"
+  ],
+  "phase0_protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "phase0_successor_path": ".remote-implementation/successors/grand-canyon/grand-canyon-phase0-0001/successor-manifest.json",
+  "phase0_successor_sha256": "a730d3508dafea48e6cfd33825e9803afc9cc03b54fd9e63662a8c52d4efcbb8",
+  "preflight": {
+    "blocker_count": 40,
+    "conditional_discrepancies": 0,
+    "confident_collision_groups": 0,
+    "confident_collision_source_rows": 0,
+    "decision_categories": {},
+    "decision_count": 0,
+    "decision_universe_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "discrepancies_to_add": 0,
+    "existing_game_matches": 0,
+    "identity_cardinality_constraints": 0,
+    "new_canonical_games": 0,
+    "plan_path": ".onboarding/grand-canyon/plan.json",
+    "review_path": ".onboarding/grand-canyon/review.csv",
+    "warning_count": 0
+  },
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "request_id": "grand-canyon-stage2-census-0001",
+  "schema_version": 1,
+  "school_key": "grand-canyon",
+  "semantic_snapshot_sha256": "e9424df1a55f68fcab755f11a920259ee3759ff0cb92e9a0f74bce28e4905319",
+  "stage2_current_main_refresh_successor_path": null,
+  "stage2_current_main_refresh_successor_sha256": null,
+  "stage2_current_main_refresh_verification_path": null,
+  "stage2_opponent_display_successor_path": null,
+  "stage2_opponent_display_successor_sha256": null,
+  "stage2_opponent_display_verification_path": null,
+  "stage2_status": "BLOCKED",
+  "target_authority_kind": "PHASE0_SUCCESSOR",
+  "target_branch": "data/grand-canyon-onboarding",
+  "target_sha": "f67371c2380b7b28255e525922e780a65737a475",
+  "target_tree_sha": "1e8a991039a8bc89ee4a41298110149184c9e5b7",
+  "tracked_mutation_proof": {
+    "after_head_sha": "f67371c2380b7b28255e525922e780a65737a475",
+    "after_status": "",
+    "after_tree_sha": "1e8a991039a8bc89ee4a41298110149184c9e5b7",
+    "before_head_sha": "f67371c2380b7b28255e525922e780a65737a475",
+    "before_status": "",
+    "before_tree_sha": "1e8a991039a8bc89ee4a41298110149184c9e5b7",
+    "tracked_stage2_mutation": "NONE"
+  }
+}

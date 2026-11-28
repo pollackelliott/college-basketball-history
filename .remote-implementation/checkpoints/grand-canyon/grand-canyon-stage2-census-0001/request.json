@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "grand-canyon-stage2-census-0001",
+  "school_key": "grand-canyon",
+  "operation": "STAGE2_CENSUS",
+  "previous_control_state_commit": "0a9c2df4ea6423087cd4362a0ccbe9955850c8f1",
+  "previous_control_state_sha256": "011a5cb0328fb4f36af135a5372e0d34424b352c63775b4bfb451583b7a9684d",
+  "expected_protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "target_branch": "data/grand-canyon-onboarding",
+  "target_sha": "f67371c2380b7b28255e525922e780a65737a475",
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/grand-canyon/grand-canyon-phase0-0001/successor-manifest.json",
+    "sha256": "a730d3508dafea48e6cfd33825e9803afc9cc03b54fd9e63662a8c52d4efcbb8"
+  },
+  "integration_freeze_sha256": "2d4063679b27c109d94f88ea09c58d9046063d5f22f03ef0de23b61d5e7b608d",
+  "semantic_snapshot_sha256": "e9424df1a55f68fcab755f11a920259ee3759ff0cb92e9a0f74bce28e4905319",
+  "creation_provenance": {
+    "origin": "Grand Canyon serialized ordinary Implementation Stage 2 first capability census from fresh-verified Phase 0, owner Continue on 2026-11-28.",
+    "authorization": "Owner directed continuation of Grand Canyon Implementation. Authenticated exact protected main 242370fc551fd749c157c74d92917ddfafbe40e0, Phase 0 successor SHA a730d3508dafea48e6cfd33825e9803afc9cc03b54fd9e63662a8c52d4efcbb8, exact target f67371c2380b7b28255e525922e780a65737a475, Integration Freeze 2d4063679b27c109d94f88ea09c58d9046063d5f22f03ef0de23b61d5e7b608d and semantic snapshot e9424df1a55f68fcab755f11a920259ee3759ff0cb92e9a0f74bce28e4905319 have independent PASS. Execute only one bounded read-only Stage 2 capability census through CAPABILITY_CENSUS_READY or honest permanent-tool BLOCKED checkpoint. Preserve tracked state, no repairs, map, proposal rehearsal, owner gate, sealed apply, release, merge, or protected-main mutation."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "phase0_scope_supersession": false,
+    "venue_identity_maintenance": false,
+    "recovery": false,
+    "stage2_census": true,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": false
+  }
+}
