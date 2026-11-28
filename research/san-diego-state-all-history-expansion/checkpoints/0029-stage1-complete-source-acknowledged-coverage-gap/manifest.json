@@ -1,0 +1,37 @@
+{
+  "kind": "SDSU_STAGE1_COMPLETE_CHECKPOINT_MANIFEST_V1",
+  "checkpoint": "0029-stage1-complete-source-acknowledged-coverage-gap",
+  "stage": "STAGE_1",
+  "stage1_complete": true,
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "d08310f4ab7529e2389ca497a819de76d5956da5",
+  "protected_main_sha_at_checkpoint": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "previous_checkpoint": "0028-eligible-permanent-audit-proof-stage1-closeout-readiness",
+  "accepted_identified_game_rows": 1086,
+  "source_named_rows": 1126,
+  "excluded_named_rows": 40,
+  "terminal_coverage_gap_seasons": 1,
+  "unidentified_game_rows_created": 0,
+  "complete_zip": {
+    "file": "san-diego-state-stage1-complete-checkpoint.zip",
+    "sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+    "size": 451387,
+    "git_blob": "e71dc178f8b360dd19fad5c2e14075fcb999dbb9"
+  },
+  "unchanged_original_audited_parent_zip": {
+    "file": "audited-0027-stage1-input-parent.zip",
+    "sha256": "42a37718684f8745900eb6c977c743ae62a185ccbdd04403d01d5358e8fea49a",
+    "size": 323186,
+    "git_blob": "f945a213deac3bc5d04dd4e360e576763c4e9188"
+  },
+  "files": {
+    "research-status.json": {
+      "bytes_utf8": 2039
+    },
+    "research-findings.md": {
+      "bytes_utf8": 3380
+    }
+  }
+}
