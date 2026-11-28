@@ -1,0 +1,376 @@
+issue_id,family,season_source_token,page,column,source_y,literal,next_action
+NM-ST1-R0001,OTHER_SCORE_LIKE,1909-10,121,1,533.0,1911-17,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0002,OTHER_SCORE_LIKE,1909-10,121,1,551.0,32-8 (.500) / 7 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0003,OTHER_SCORE_LIKE,1907-18,121,2,447.5,2-4 (.333) / 1 season,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0004,OTHER_SCORE_LIKE,1918-19,121,2,561.0,"1920-31, 1934-40",classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0005,OTHER_SCORE_LIKE,1918-19,121,2,579.0,165-146 (.531) / 18 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0006,OTHER_SCORE_LIKE,1930-31,122,1,157.7,1932-33,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0007,OTHER_SCORE_LIKE,1930-31,122,1,175.7,23-12 (.657) / 2 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0008,OTHER_SCORE_LIKE,1932-33,122,1,591.2,"1920-31, 1934-40",classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0009,OTHER_SCORE_LIKE,1932-33,122,1,609.1,165-146 (.531) / 18 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0010,OTHER_SCORE_LIKE,1933-34,122,1,646.0,at Belen Merchants W,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0011,OTHER_SCORE_LIKE,1939-40,122,4,360.0,5-18 (.217) / 1 season,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0012,OTHER_SCORE_LIKE,1940-41,122,4,647.0,1942-43,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0013,OTHER_SCORE_LIKE,1940-41,122,4,664.9,12-30 (.286) / 2 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0014,OTHER_SCORE_LIKE,1942-43,123,1,493.9,11-2 (.846) / 1 season,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0015,OTHER_SCORE_LIKE,1943-44,123,2,87.3,"1945-51, 1953-55",classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0016,OTHER_SCORE_LIKE,1943-44,123,2,105.3,113-119 (.487) / 10 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0017,OTHER_SCORE_LIKE,1948-49,123,3,461.0,W 55-39,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0018,GAME_WITHOUT_RESULT,1948-49,123,3,463.6,D31 vs. Hardin-Simmons 2 Sunshine,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0019,OTHER_SCORE_LIKE,1948-49,123,3,470.6,W 46-44,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0020,GAME_WITHOUT_RESULT,1948-49,123,3,473.2,J1 vs. Abilene Christian 2 Sunshine,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0021,GAME_WITHOUT_RESULT,1948-49,123,3,550.0,F4 at UTEP L 5153,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0022,OTHER_SCORE_LIKE,1949-50,123,3,710.6,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0023,GAME_WITHOUT_RESULT,1949-50,123,3,713.2,D30 vs. Arizona 2 Sun Bowl 52-65,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0024,OTHER_SCORE_LIKE,1950-51,123,4,511.9,6-19 (.240) / 1 season,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0025,OTHER_SCORE_LIKE,1951-52,124,1,128.9,"1945-51, 1953-55",classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0026,OTHER_SCORE_LIKE,1951-52,124,1,146.9,113-119 (.487) / 10 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0027,OTHER_SCORE_LIKE,1954-55,124,2,266.4,1956-58,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0028,OTHER_SCORE_LIKE,1954-55,124,2,284.4,14-57 (.197) / 3 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0029,GAME_WITHOUT_RESULT,1956-57,124,2,646.0,D28 vs. UTEP 2 L 65=78,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0030,OTHER_SCORE_LIKE,1957-58,124,3,408.4,1959-62,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0031,OTHER_SCORE_LIKE,1957-58,124,3,426.4,21-75 (.219) / 4 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0032,OTHER_SCORE_LIKE,1961-62,124,4,614.6,W2ot 80-76,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0033,GAME_WITHOUT_RESULT,1961-62,124,4,617.2,D28 vs. New Mexico State 1 Sun Bowl,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0034,OTHER_SCORE_LIKE,1961-62,125,1,128.6,1963-72,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0035,OTHER_SCORE_LIKE,1961-62,125,1,146.6,175-89 (.663) / 10 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0036,OTHER_SCORE_LIKE,1964-65,125,2,153.8,W 76-58,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0037,GAME_WITHOUT_RESULT,1964-65,125,2,156.4,D29 vs. TCU 1 Sun Bowl,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0038,OTHER_SCORE_LIKE,1965-66,125,2,432.2,W 78-56,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0039,GAME_WITHOUT_RESULT,1965-66,125,2,434.8,D28 Tulane Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0040,OTHER_SCORE_LIKE,1965-66,125,2,441.8,W 99-81,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0041,GAME_WITHOUT_RESULT,1965-66,125,2,444.4,D29 Idaho Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0042,OTHER_SCORE_LIKE,1966-67,125,2,701.0,W 85-54,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0043,GAME_WITHOUT_RESULT,1966-67,125,2,703.6,D29 [5] Texas A&M Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0044,OTHER_SCORE_LIKE,1966-67,125,2,710.6,W 64-49,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0045,GAME_WITHOUT_RESULT,1966-67,125,2,713.2,D30 [5] Colorado State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0046,OTHER_SCORE_LIKE,1967-68,125,3,317.0,W 93-75,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0047,GAME_WITHOUT_RESULT,1967-68,125,3,319.6,D27 San Jose State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0048,OTHER_SCORE_LIKE,1967-68,125,3,326.6,W 75-62,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0049,GAME_WITHOUT_RESULT,1967-68,125,3,329.2,D28 Rhode Island Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0050,OTHER_SCORE_LIKE,1968-69,125,3,595.4,W 82-71,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0051,GAME_WITHOUT_RESULT,1968-69,125,3,598.0,D20 [5] San Francisco Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0052,OTHER_SCORE_LIKE,1968-69,125,3,605.0,W 83-70,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0053,GAME_WITHOUT_RESULT,1968-69,125,3,607.6,D21 [5] Temple Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0054,OTHER_SCORE_LIKE,1969-70,125,4,163.4,W 78-77,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0055,GAME_WITHOUT_RESULT,1969-70,125,4,166.0,D19 Saint Joseph’s Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0056,OTHER_SCORE_LIKE,1969-70,125,4,173.0,W 85-76,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0057,GAME_WITHOUT_RESULT,1969-70,125,4,175.6,D20 Washington State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0058,OTHER_SCORE_LIKE,1970-71,125,4,461.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0059,GAME_WITHOUT_RESULT,1970-71,125,4,463.6,D18 Michigan State Lobo Inv 69-73,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0060,OTHER_SCORE_LIKE,1970-71,125,4,470.6,W 91-62,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0061,GAME_WITHOUT_RESULT,1970-71,125,4,473.2,D19 Santa Clara Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0062,OTHER_SCORE_LIKE,1971-72,125,4,710.6,W 95-73,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0063,GAME_WITHOUT_RESULT,1971-72,125,4,713.2,D22 Texas A&M Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0064,OTHER_SCORE_LIKE,1971-72,125,4,720.2,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0065,GAME_WITHOUT_RESULT,1971-72,125,4,722.8,D23 St. John’s (10) Lobo Inv 92-95,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0066,OTHER_SCORE_LIKE,1971-72,125,4,729.8,W 76-61,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0067,GAME_WITHOUT_RESULT,1971-72,125,4,732.4,D28 vs. Oregon 1 Far West,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0068,OTHER_SCORE_LIKE,1971-72,125,4,739.4,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0069,GAME_WITHOUT_RESULT,1971-72,125,4,742.0,D29 vs. Washington State 1 Far West 51-60,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0070,OTHER_SCORE_LIKE,1971-72,126,1,263.6,1973-79,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0071,OTHER_SCORE_LIKE,1971-72,126,1,281.5,134-62 (.684) / 7 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0072,OTHER_SCORE_LIKE,1972-73,126,1,384.2,W 107-36,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0073,GAME_WITHOUT_RESULT,1972-73,126,1,386.8,D29 Dartmouth Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0074,OTHER_SCORE_LIKE,1972-73,126,1,393.8,W 70-54,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0075,GAME_WITHOUT_RESULT,1972-73,126,1,396.4,D30 Seattle Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0076,OTHER_SCORE_LIKE,1973-74,126,1,691.4,W 109-56,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0077,GAME_WITHOUT_RESULT,1973-74,126,1,694.0,D28 [17] Columbia Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0078,OTHER_SCORE_LIKE,1973-74,126,1,701.0,W 102-68,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0079,GAME_WITHOUT_RESULT,1973-74,126,1,703.6,D29 [17] Minnesota Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0080,GAME_WITHOUT_RESULT,1973-74,126,2,89.2,J26 [19] Colorado State W 5449,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0081,OTHER_SCORE_LIKE,1974-75,126,2,317.0,W 95-65,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0082,GAME_WITHOUT_RESULT,1974-75,126,2,319.6,D27 Army Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0083,OTHER_SCORE_LIKE,1974-75,126,2,326.6,W 78-63,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0084,GAME_WITHOUT_RESULT,1974-75,126,2,329.2,D28 Stanford Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0085,OTHER_SCORE_LIKE,1975-76,126,2,605.0,W 86-80,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0086,GAME_WITHOUT_RESULT,1975-76,126,2,607.6,D30 Wichita State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0087,OTHER_SCORE_LIKE,1976-77,126,3,211.4,W 96-83,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0088,GAME_WITHOUT_RESULT,1976-77,126,3,214.0,D29 Iowa Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0089,OTHER_SCORE_LIKE,1976-77,126,3,221.0,W 87-75,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0090,GAME_WITHOUT_RESULT,1976-77,126,3,223.6,D30 USC Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0091,OTHER_SCORE_LIKE,1977-78,126,3,499.4,W 104-81,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0092,GAME_WITHOUT_RESULT,1977-78,126,3,502.0,D29 Vermont Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0093,OTHER_SCORE_LIKE,1977-78,126,3,509.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0094,GAME_WITHOUT_RESULT,1977-78,126,3,511.6,D30 Syracuse (10) Lobo Inv 91-96,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0095,OTHER_SCORE_LIKE,1978-79,126,4,144.2,W 92-77,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0096,GAME_WITHOUT_RESULT,1978-79,126,4,146.8,D29 Davidson Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0097,OTHER_SCORE_LIKE,1978-79,126,4,378.0,6-22 (.214) / 1 season,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0098,OTHER_SCORE_LIKE,1979-80,126,4,509.0,W 91-76,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0099,GAME_WITHOUT_RESULT,1979-80,126,4,511.6,D28 Idaho State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0100,OTHER_SCORE_LIKE,1979-80,126,4,518.6,L 83-117,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0101,GAME_WITHOUT_RESULT,1979-80,126,4,521.2,D29 Utah State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0102,OTHER_SCORE_LIKE,1979-80,127,1,87.3,1981-88,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0103,OTHER_SCORE_LIKE,1979-80,127,1,105.3,146-106 (.579) / 8 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0104,OTHER_SCORE_LIKE,1980-81,127,1,211.4,W 76-69,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0105,GAME_WITHOUT_RESULT,1980-81,127,1,214.0,D29 TCU Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0106,OTHER_SCORE_LIKE,1980-81,127,1,221.0,W 107-87,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0107,GAME_WITHOUT_RESULT,1980-81,127,1,223.6,D30 Boston Univ. Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0108,OTHER_SCORE_LIKE,1981-82,127,1,489.8,W 86-70,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0109,GAME_WITHOUT_RESULT,1981-82,127,1,492.4,D29 Marshall Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0110,OTHER_SCORE_LIKE,1981-82,127,1,499.4,W 51-49,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0111,GAME_WITHOUT_RESULT,1981-82,127,1,502.0,D30 Fordham Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0112,OTHER_SCORE_LIKE,1982-83,127,2,96.2,W 72-61,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0113,GAME_WITHOUT_RESULT,1982-83,127,2,98.8,D28 Butler Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0114,OTHER_SCORE_LIKE,1982-83,127,2,105.8,W 52-46,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0115,GAME_WITHOUT_RESULT,1982-83,127,2,108.4,D29 Princeton Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0116,OTHER_SCORE_LIKE,1983-84,127,2,403.4,W 74-53,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0117,GAME_WITHOUT_RESULT,1983-84,127,2,406.0,D29 Idaho State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0118,OTHER_SCORE_LIKE,1983-84,127,2,413.0,W 86-74,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0119,GAME_WITHOUT_RESULT,1983-84,127,2,415.6,D30 Bowling Green Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0120,OTHER_SCORE_LIKE,1984-85,127,3,67.4,W 98-70,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0121,GAME_WITHOUT_RESULT,1984-85,127,3,70.0,D29 Alaska-Anchorage Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0122,OTHER_SCORE_LIKE,1984-85,127,3,77.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0123,GAME_WITHOUT_RESULT,1984-85,127,3,79.6,D30 Wisconsin Lobo Inv 74-83,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0124,OTHER_SCORE_LIKE,1985-86,127,3,413.0,W 52-40,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0125,GAME_WITHOUT_RESULT,1985-86,127,3,415.6,D27 Kent State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0126,OTHER_SCORE_LIKE,1985-86,127,3,422.6,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0127,GAME_WITHOUT_RESULT,1985-86,127,3,425.2,D28 Michigan State Lobo Inv 61-76,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0128,OTHER_SCORE_LIKE,1986-87,127,4,67.4,W 84-68,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0129,GAME_WITHOUT_RESULT,1986-87,127,4,70.0,D26 Brown Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0130,OTHER_SCORE_LIKE,1986-87,127,4,77.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0131,GAME_WITHOUT_RESULT,1986-87,127,4,79.6,D27 Drake Lobo Inv 52-59,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0132,OTHER_SCORE_LIKE,1987-88,127,4,441.8,W 77=69,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0133,GAME_WITHOUT_RESULT,1987-88,127,4,444.4,D26 North Texas Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0134,OTHER_SCORE_LIKE,1987-88,127,4,451.4,W 74-65,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0135,GAME_WITHOUT_RESULT,1987-88,127,4,454.0,D27 Ohio State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0136,OTHER_SCORE_LIKE,1987-88,128,1,87.3,1989-99,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0137,OTHER_SCORE_LIKE,1987-88,128,1,105.3,246-108 (.695) / 11 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0138,OTHER_SCORE_LIKE,1988-89,128,1,211.4,W 94-73,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0139,GAME_WITHOUT_RESULT,1988-89,128,1,214.0,D27 George Washington Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0140,OTHER_SCORE_LIKE,1988-89,128,1,221.0,W 76-71,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0141,GAME_WITHOUT_RESULT,1988-89,128,1,223.6,D28 Wake Forest Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0142,GAME_WITHOUT_RESULT,1989-90,128,1,492.4,N24 Hardin-Simmons Lobo Class W 9157,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0143,OTHER_SCORE_LIKE,1989-90,128,1,566.6,W 94-63,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0144,GAME_WITHOUT_RESULT,1989-90,128,1,569.2,D22 Maine Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0145,OTHER_SCORE_LIKE,1989-90,128,1,576.2,W 91-64,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0146,GAME_WITHOUT_RESULT,1989-90,128,1,578.8,D23 Detroit Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0147,OTHER_SCORE_LIKE,1990-91,128,2,259.4,W 99-82,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0148,GAME_WITHOUT_RESULT,1990-91,128,2,262.0,D28 Texas State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0149,OTHER_SCORE_LIKE,1990-91,128,2,269.0,W 94-83,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0150,GAME_WITHOUT_RESULT,1990-91,128,2,271.6,D29 Southern Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0151,OTHER_SCORE_LIKE,1991-92,128,2,566.6,W 70-57,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0152,GAME_WITHOUT_RESULT,1991-92,128,2,569.2,D27 Bucknell Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0153,OTHER_SCORE_LIKE,1991-92,128,2,576.2,W 63-55,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0154,GAME_WITHOUT_RESULT,1991-92,128,2,578.8,D28 Miami (Ohio) Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0155,OTHER_SCORE_LIKE,1992-93,128,3,211.4,W 64-59,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0156,GAME_WITHOUT_RESULT,1992-93,128,3,214.0,D28 William & Mary Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0157,OTHER_SCORE_LIKE,1992-93,128,3,221.0,W 54-51,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0158,GAME_WITHOUT_RESULT,1992-93,128,3,223.6,D29 Penn Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0159,OTHER_SCORE_LIKE,1993-94,128,3,566.6,W 69-56,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0160,GAME_WITHOUT_RESULT,1993-94,128,3,569.2,D29 Middle Tennessee Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0161,OTHER_SCORE_LIKE,1993-94,128,3,576.2,W 90-75,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0162,GAME_WITHOUT_RESULT,1993-94,128,3,578.8,D30 Rice Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0163,OTHER_SCORE_LIKE,1994-95,128,4,211.4,W 88-73,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0164,GAME_WITHOUT_RESULT,1994-95,128,4,214.0,D28 CSUN Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0165,OTHER_SCORE_LIKE,1994-95,128,4,221.0,Lot 75-78,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0166,GAME_WITHOUT_RESULT,1994-95,128,4,223.6,D29 Charlotte Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0167,OTHER_SCORE_LIKE,1995-96,128,4,528.2,W 91-66,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0168,GAME_WITHOUT_RESULT,1995-96,128,4,530.8,D28 Dartmouth Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0169,OTHER_SCORE_LIKE,1995-96,128,4,537.8,W 95-83,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0170,GAME_WITHOUT_RESULT,1995-96,128,4,540.4,D29 Boston Univ. Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0171,OTHER_SCORE_LIKE,1996-97,129,1,211.4,W 67-57,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0172,GAME_WITHOUT_RESULT,1996-97,129,1,214.0,D27 [14] Bucknell Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0173,OTHER_SCORE_LIKE,1996-97,129,1,221.0,W 75-64,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0174,GAME_WITHOUT_RESULT,1996-97,129,1,223.6,D28 [14] Mississippi Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0175,OTHER_SCORE_LIKE,1997-98,129,1,509.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0176,GAME_WITHOUT_RESULT,1997-98,129,1,511.6,D6 [8] vs.UCLA 1 (15) Wooden 58-69,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0177,OTHER_SCORE_LIKE,1997-98,129,1,537.8,W 69-44,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0178,GAME_WITHOUT_RESULT,1997-98,129,1,540.4,D29 [12] Holy Cross Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0179,OTHER_SCORE_LIKE,1997-98,129,1,547.4,W 69-44,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0180,GAME_WITHOUT_RESULT,1997-98,129,1,550.0,D30 [12] Yale Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0181,OTHER_SCORE_LIKE,1998-99,129,2,201.8,W 93-67,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0182,GAME_WITHOUT_RESULT,1998-99,129,2,204.4,D28 [15] New Hampshire Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0183,OTHER_SCORE_LIKE,1998-99,129,2,211.4,W 84-69,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0184,GAME_WITHOUT_RESULT,1998-99,129,2,214.0,D29 [15] Houston Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0185,OTHER_SCORE_LIKE,1998-99,129,2,475.2,2000-02,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0186,OTHER_SCORE_LIKE,1998-99,129,2,493.2,55-41 (.573) / 3 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0187,OTHER_SCORE_LIKE,1999-00,129,2,537.8,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0188,GAME_WITHOUT_RESULT,1999-00,129,2,540.4,N19 Dayton CoSIDA 57-70,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0189,OTHER_SCORE_LIKE,1999-00,129,2,547.4,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0190,GAME_WITHOUT_RESULT,1999-00,129,2,550.0,N20 St. John’s (15) CoSIDA 62-70,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0191,OTHER_SCORE_LIKE,1999-00,129,2,643.4,W 68-47,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0192,GAME_WITHOUT_RESULT,1999-00,129,2,646.0,D29 Alabama State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0193,OTHER_SCORE_LIKE,1999-00,129,2,653.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0194,GAME_WITHOUT_RESULT,1999-00,129,2,655.6,D30 Saint Joseph’s Lobo Inv 76-81,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0195,OTHER_SCORE_LIKE,2000-01,129,3,259.4,W 68-60,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0196,GAME_WITHOUT_RESULT,2000-01,129,3,262.0,D29 William & Mary Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0197,OTHER_SCORE_LIKE,2000-01,129,3,269.0,W 93-60,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0198,GAME_WITHOUT_RESULT,2000-01,129,3,271.6,D30 Drexel Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0199,OTHER_SCORE_LIKE,2001-02,129,3,557.0,W 85-66,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0200,GAME_WITHOUT_RESULT,2001-02,129,3,559.6,N23 Pacific Hispanic,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0201,OTHER_SCORE_LIKE,2001-02,129,3,566.6,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0202,GAME_WITHOUT_RESULT,2001-02,129,3,569.2,N24 West Virginia Hispanic 85-88,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0203,OTHER_SCORE_LIKE,2001-02,129,3,633.8,W 72-62,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0204,GAME_WITHOUT_RESULT,2001-02,129,3,636.4,D28 Saint Mary’s Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0205,OTHER_SCORE_LIKE,2001-02,129,3,643.4,W 77-60,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0206,GAME_WITHOUT_RESULT,2001-02,129,3,646.0,D29 Dartmouth Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0207,OTHER_SCORE_LIKE,2001-02,129,4,168.5,2003-07,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0208,OTHER_SCORE_LIKE,2001-02,129,4,186.5,82-69 (.543) / 5 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0209,OTHER_SCORE_LIKE,2002-03,129,4,297.8,W 69-52,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0210,GAME_WITHOUT_RESULT,2002-03,129,4,300.4,D28 Portland State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0211,OTHER_SCORE_LIKE,2002-03,129,4,307.4,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0212,GAME_WITHOUT_RESULT,2002-03,129,4,310.0,D29 Pepperdine Lobo Inv 68-88,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0213,OTHER_SCORE_LIKE,2003-04,129,4,595.4,W 87-51,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0214,GAME_WITHOUT_RESULT,2003-04,129,4,598.0,D28 Northwestern State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0215,OTHER_SCORE_LIKE,2003-04,129,4,605.0,W 82-63,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0216,GAME_WITHOUT_RESULT,2003-04,129,4,607.6,D29 Penn State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0217,OTHER_SCORE_LIKE,2004-05,130,1,249.8,W 101-68,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0218,GAME_WITHOUT_RESULT,2004-05,130,1,252.4,D28 Mississippi Valley State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0219,OTHER_SCORE_LIKE,2004-05,130,1,259.4,W 88-66,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0220,GAME_WITHOUT_RESULT,2004-05,130,1,262.0,D29 Troy Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0221,OTHER_SCORE_LIKE,2005-06,130,1,537.8,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0222,GAME_WITHOUT_RESULT,2005-06,130,1,540.4,D10 vs. Washington 1 (13) Wooden 71-81,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0223,OTHER_SCORE_LIKE,2005-06,130,1,585.8,W 66-60,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0224,GAME_WITHOUT_RESULT,2005-06,130,1,588.4,D28 Dartmouth Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0225,OTHER_SCORE_LIKE,2005-06,130,1,595.4,W 63-51,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0226,GAME_WITHOUT_RESULT,2005-06,130,1,598.0,D29 UT Arlington Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0227,GAME_WITHOUT_RESULT,2005-06,130,1,684.4,F4 Utah W 6453,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0228,OTHER_SCORE_LIKE,2006-07,130,2,211.4,W 71-68,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0229,GAME_WITHOUT_RESULT,2006-07,130,2,214.0,D22 vs. Wichita State 1 (8) Las Vegas,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0230,OTHER_SCORE_LIKE,2006-07,130,2,221.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0231,GAME_WITHOUT_RESULT,2006-07,130,2,223.6,D23 vs.Kansas State 1 Las Vegas 56-72,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0232,OTHER_SCORE_LIKE,2006-07,130,2,230.6,W 91-59,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0233,GAME_WITHOUT_RESULT,2006-07,130,2,233.2,D28 Alcorn State Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0234,OTHER_SCORE_LIKE,2006-07,130,2,240.2,W 101-96,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0235,GAME_WITHOUT_RESULT,2006-07,130,2,242.8,D29 Pepperdine Lobo Inv,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0236,OTHER_SCORE_LIKE,2006-07,130,2,455.4,2008-13,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0237,OTHER_SCORE_LIKE,2006-07,130,2,473.4,155-52 (.749) / 6 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0238,OTHER_SCORE_LIKE,2007-08,130,2,528.2,W 88-57,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0239,GAME_WITHOUT_RESULT,2007-08,130,2,530.8,N13 Presbyterian Travelers,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0240,OTHER_SCORE_LIKE,2007-08,130,2,537.8,W 81-54,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0241,GAME_WITHOUT_RESULT,2007-08,130,2,540.4,N14 St. Bonaventure Travelers,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0242,OTHER_SCORE_LIKE,2007-08,130,2,547.4,W 86-58,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0243,GAME_WITHOUT_RESULT,2007-08,130,2,550.0,N15 Loyola Marymount Travelers,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0244,OTHER_SCORE_LIKE,2008-09,130,3,230.6,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0245,GAME_WITHOUT_RESULT,2008-09,130,3,233.2,N29 vs. VCU 1 Cancun 55-67,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0246,OTHER_SCORE_LIKE,2008-09,130,3,240.2,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0247,GAME_WITHOUT_RESULT,2008-09,130,3,242.8,N30 vs. Drake 1 Cancun 62-68,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0248,OTHER_SCORE_LIKE,2010-11,130,4,278.6,W 74-59,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0249,GAME_WITHOUT_RESULT,2010-11,130,4,281.2,D1 at Southern Illinois MW/MVC,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0250,OTHER_SCORE_LIKE,2010-11,130,4,326.6,W 89-76,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0251,GAME_WITHOUT_RESULT,2010-11,130,4,329.2,D22 vs. Colorado 1 Las Vegas,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0252,OTHER_SCORE_LIKE,2010-11,130,4,336.2,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0253,GAME_WITHOUT_RESULT,2010-11,130,4,338.8,D23 vs. Northern Iowa 1 Las Vegas 60-66,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0254,OTHER_SCORE_LIKE,2011-12,130,4,691.4,W 66-56,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0255,GAME_WITHOUT_RESULT,2011-12,130,4,694.0,D17 vs. Oklahoma State 2 All College,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0256,OTHER_SCORE_LIKE,2012-13,131,1,307.4,W 66-59,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0257,GAME_WITHOUT_RESULT,2012-13,131,1,310.0,N16 vs. UIC 1 Paradise,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0258,OTHER_SCORE_LIKE,2012-13,131,1,317.0,W 70-69,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0259,GAME_WITHOUT_RESULT,2012-13,131,1,319.6,N18 vs. George Mason 1 Paradise,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0260,OTHER_SCORE_LIKE,2012-13,131,1,326.6,W 66-60,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0261,GAME_WITHOUT_RESULT,2012-13,131,1,329.2,N19 vs. Connecticut 1 (21) Paradise,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0262,OTHER_SCORE_LIKE,2012-13,131,1,365.0,Wot 77-68,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0263,GAME_WITHOUT_RESULT,2012-13,131,1,367.6,D1 [25] at Indiana State MW/MVC,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0264,OTHER_SCORE_LIKE,2012-13,131,2,87.3,2014-17,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0265,OTHER_SCORE_LIKE,2012-13,131,2,105.3,76-52 (.594) / 4 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0266,OTHER_SCORE_LIKE,2013-14,131,2,173.0,W2ot 97-94,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0267,GAME_WITHOUT_RESULT,2013-14,131,2,175.6,N21 [19] vs. UAB 1 Charleston,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0268,OTHER_SCORE_LIKE,2013-14,131,2,192.2,W 78-59,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0269,GAME_WITHOUT_RESULT,2013-14,131,2,194.8,N24 [19] vs. Davidson 1 Charleston,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0270,OTHER_SCORE_LIKE,2015-16,131,3,173.0,W 75-51,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0271,GAME_WITHOUT_RESULT,2015-16,131,3,175.6,N18 Loyola-Chicago MW/MVC,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0272,OTHER_SCORE_LIKE,2016-17,131,3,518.6,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0273,GAME_WITHOUT_RESULT,2016-17,131,3,521.2,N24 vs. Virginia Tech 1 Wooden 72-92,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0274,OTHER_SCORE_LIKE,2016-17,131,3,528.2,W 105-89,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0275,GAME_WITHOUT_RESULT,2016-17,131,3,530.8,N25 vs. CSUN 1 Wooden,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0276,OTHER_SCORE_LIKE,2016-17,131,3,537.8,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0277,GAME_WITHOUT_RESULT,2016-17,131,3,540.4,N27 vs. Dayton 1 Wooden 57-64,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0278,OTHER_SCORE_LIKE,2016-17,131,3,557.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0279,GAME_WITHOUT_RESULT,2016-17,131,3,559.6,D3 at Illinois State MW/MVC 74-79,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0280,OTHER_SCORE_LIKE,2016-17,131,4,136.4,2018-21,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0281,OTHER_SCORE_LIKE,2016-17,131,4,154.4,58-63 (.479) / 4 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0282,OTHER_SCORE_LIKE,2017-18,131,4,230.6,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0283,GAME_WITHOUT_RESULT,2017-18,131,4,233.2,N24 vs. TCU 1 Emerald 67-69,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0284,OTHER_SCORE_LIKE,2017-18,131,4,240.2,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0285,GAME_WITHOUT_RESULT,2017-18,131,4,242.8,N25 vs. Maryland 1 Emerald 65-80,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0286,OTHER_SCORE_LIKE,2019-20,132,1,259.4,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0287,GAME_WITHOUT_RESULT,2019-20,132,1,262.0,N25 vs. Auburn 1 (18) Legends 59-84,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0288,OTHER_SCORE_LIKE,2019-20,132,1,269.0,W 59-50,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0289,GAME_WITHOUT_RESULT,2019-20,132,1,271.6,N26 vs. Wisconsin 1 Legends,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0290,OTHER_SCORE_LIKE,2020-21,132,2,67.4,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0291,GAME_WITHOUT_RESULT,2020-21,132,2,70.0,M10 vs. Fresno State 5 MW 77-85,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0292,OTHER_SCORE_LIKE,2020-21,132,2,110.4,2022-25,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0293,OTHER_SCORE_LIKE,2020-21,132,2,128.4,88-49 (.642) / 4 seasons,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0294,OTHER_SCORE_LIKE,2021-22,132,2,211.4,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0295,GAME_WITHOUT_RESULT,2021-22,132,2,214.0,N25 vs. UAB 1 Las Vegas 73-86,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0296,OTHER_SCORE_LIKE,2021-22,132,2,221.0,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0297,GAME_WITHOUT_RESULT,2021-22,132,2,223.6,N26 vs. Towson 1 Las Vegas 58-73,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0298,OTHER_SCORE_LIKE,2023-24,132,3,210.5,W 92-84,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0299,GAME_WITHOUT_RESULT,2023-24,132,3,213.1,N21 vs. Toledo 1 BallDawgs,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0300,OTHER_SCORE_LIKE,2023-24,132,3,220.1,W 90-56,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0301,GAME_WITHOUT_RESULT,2023-24,132,3,222.7,N22 vs. Rice 1 BallDawgs,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0302,OTHER_SCORE_LIKE,2023-24,132,3,229.7,W 90-71,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0303,GAME_WITHOUT_RESULT,2023-24,132,3,232.3,N24 vs. Pepperdine 1 BallDawgs,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0304,OTHER_SCORE_LIKE,2024-25,132,3,623.3,L,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0305,GAME_WITHOUT_RESULT,2024-25,132,3,625.9,N28 vs. Arizona State 3 Acrisure 82-85,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0306,OTHER_SCORE_LIKE,2024-25,132,3,632.9,W 83-73,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0307,GAME_WITHOUT_RESULT,2024-25,132,3,635.5,N29 vs. USC 3 Acrisure,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0308,OTHER_SCORE_LIKE,2024-25,132,4,270.4,26-11 (.703) / 1 season,classify literal line: basketball game / statistical block / footnote / formatting collision
+NM-ST1-R0309,SEASON_RECORD_MISMATCH,1918-19,121,2,,1918-19 (4-1),"expect 4-1, parsed candidate 2-4; review source rows before historical research"
+NM-ST1-R0310,SEASON_RECORD_MISMATCH,1933-34,122,1,,"1933-34 (16-4, 6-4 Border)","expect 16-4, parsed candidate 15-4; review source rows before historical research"
+NM-ST1-R0311,SEASON_RECORD_MISMATCH,1940-41,122,4,,"1940-41 (5-17, 4-14 Border)","expect 5-17, parsed candidate 5-18; review source rows before historical research"
+NM-ST1-R0312,SEASON_RECORD_MISMATCH,1948-49,123,3,,"1948-49 (11-12, 7-9 Border)","expect 11-12, parsed candidate 9-11; review source rows before historical research"
+NM-ST1-R0313,SEASON_RECORD_MISMATCH,1949-50,123,3,,"1949-50 (5-19, 4-12 Border)","expect 5-19, parsed candidate 5-18; review source rows before historical research"
+NM-ST1-R0314,SEASON_RECORD_MISMATCH,1956-57,124,2,,"1956-57 (5-21, 1-13 Skyline)","expect 5-21, parsed candidate 5-20; review source rows before historical research"
+NM-ST1-R0315,SEASON_RECORD_MISMATCH,1961-62,124,4,,"1961-62 (6-20, 3-11 Skyline)","expect 6-20, parsed candidate 5-20; review source rows before historical research"
+NM-ST1-R0316,SEASON_RECORD_MISMATCH,1964-65,125,2,,"1964-65 (19-8, 5-5 WAC)","expect 19-8, parsed candidate 18-8; review source rows before historical research"
+NM-ST1-R0317,SEASON_RECORD_MISMATCH,1965-66,125,2,,"1965-66 (16-8, 4-6 WAC)","expect 16-8, parsed candidate 14-8; review source rows before historical research"
+NM-ST1-R0318,SEASON_RECORD_MISMATCH,1966-67,125,2,,"1966-67 (19-8, 5-5 WAC)","expect 19-8, parsed candidate 17-8; review source rows before historical research"
+NM-ST1-R0319,SEASON_RECORD_MISMATCH,1967-68,125,3,,"1967-68 (23-5, 8-2 WAC)","expect 23-5, parsed candidate 21-5; review source rows before historical research"
+NM-ST1-R0320,SEASON_RECORD_MISMATCH,1968-69,125,3,,"1968-69 (17-9, 4-6 WAC)","expect 17-9, parsed candidate 15-9; review source rows before historical research"
+NM-ST1-R0321,SEASON_RECORD_MISMATCH,1969-70,125,4,,"1969-70 (13-13, 7-7 WAC)","expect 13-13, parsed candidate 11-13; review source rows before historical research"
+NM-ST1-R0322,SEASON_RECORD_MISMATCH,1970-71,125,4,,"1970-71 (14-12, 4-10 WAC)","expect 14-12, parsed candidate 13-11; review source rows before historical research"
+NM-ST1-R0323,SEASON_RECORD_MISMATCH,1971-72,125,4,,"1971-72 (15-11, 7-7 WAC)","expect 15-11, parsed candidate 13-9; review source rows before historical research"
+NM-ST1-R0324,SEASON_RECORD_MISMATCH,1972-73,126,1,,"1972-73 (21-6, 9-5 WAC)","expect 21-6, parsed candidate 19-6; review source rows before historical research"
+NM-ST1-R0325,SEASON_RECORD_MISMATCH,1973-74,126,1,,"1973-74 (22-7, 10-4 WAC)","expect 22-7, parsed candidate 19-7; review source rows before historical research"
+NM-ST1-R0326,SEASON_RECORD_MISMATCH,1974-75,126,2,,"1974-75 (13-13, 4-10 WAC)","expect 13-13, parsed candidate 11-13; review source rows before historical research"
+NM-ST1-R0327,SEASON_RECORD_MISMATCH,1975-76,126,2,,"1975-76 (16-11, 8-6 WAC)","expect 16-11, parsed candidate 15-11; review source rows before historical research"
+NM-ST1-R0328,SEASON_RECORD_MISMATCH,1976-77,126,3,,"1976-77 (19-11, 8-6 WAC)","expect 19-11, parsed candidate 17-11; review source rows before historical research"
+NM-ST1-R0329,SEASON_RECORD_MISMATCH,1977-78,126,3,,"1977-78 (24-4, 13-1 WAC)","expect 24-4, parsed candidate 23-3; review source rows before historical research"
+NM-ST1-R0330,SEASON_RECORD_MISMATCH,1978-79,126,3,,"1978-79 (19-10, 8-4 WAC)","expect 19-10, parsed candidate 18-10; review source rows before historical research"
+NM-ST1-R0331,SEASON_RECORD_MISMATCH,1979-80,126,4,,"1979-80 (6-22, 3-11 WAC)","expect 6-22, parsed candidate 6-20; review source rows before historical research"
+NM-ST1-R0332,SEASON_RECORD_MISMATCH,1980-81,127,1,,"1980-81 (11-15, 6-10 WAC)","expect 11-15, parsed candidate 9-15; review source rows before historical research"
+NM-ST1-R0333,SEASON_RECORD_MISMATCH,1981-82,127,1,,"1981-82 (14-14, 7-9 WAC)","expect 14-14, parsed candidate 12-14; review source rows before historical research"
+NM-ST1-R0334,SEASON_RECORD_MISMATCH,1982-83,127,1,,"1982-83 (14-15, 6-10 WAC)","expect 14-15, parsed candidate 12-15; review source rows before historical research"
+NM-ST1-R0335,SEASON_RECORD_MISMATCH,1983-84,127,2,,"1983-84 (24-11, 10-6 WAC)","expect 24-11, parsed candidate 22-11; review source rows before historical research"
+NM-ST1-R0336,SEASON_RECORD_MISMATCH,1984-85,127,2,,"1984-85 (19-13, 9-7 WAC)","expect 19-13, parsed candidate 18-12; review source rows before historical research"
+NM-ST1-R0337,SEASON_RECORD_MISMATCH,1985-86,127,3,,"1985-86 (17-14, 8-8 WAC)","expect 17-14, parsed candidate 16-13; review source rows before historical research"
+NM-ST1-R0338,SEASON_RECORD_MISMATCH,1986-87,127,3,,"1986-87 (25-10, 11-5 WAC)","expect 25-10, parsed candidate 24-9; review source rows before historical research"
+NM-ST1-R0339,SEASON_RECORD_MISMATCH,1987-88,127,4,,"1987-88 (22-14, 8-8 WAC)","expect 22-14, parsed candidate 20-14; review source rows before historical research"
+NM-ST1-R0340,SEASON_RECORD_MISMATCH,1988-89,128,1,,"1988-89 (22-11, 11-5 WAC)","expect 22-11, parsed candidate 20-11; review source rows before historical research"
+NM-ST1-R0341,SEASON_RECORD_MISMATCH,1989-90,128,1,,"1989-90 (20-14, 9-7 WAC)","expect 20-14, parsed candidate 17-14; review source rows before historical research"
+NM-ST1-R0342,SEASON_RECORD_MISMATCH,1990-91,128,2,,"1990-91 (20-10, 10-6 WAC)","expect 20-10, parsed candidate 18-10; review source rows before historical research"
+NM-ST1-R0343,SEASON_RECORD_MISMATCH,1991-92,128,2,,"1991-92 (20-13, 11-5 WAC)","expect 20-13, parsed candidate 18-13; review source rows before historical research"
+NM-ST1-R0344,SEASON_RECORD_MISMATCH,1992-93,128,3,,"1992-93 (24-7, 13-5 WAC)","expect 24-7, parsed candidate 22-7; review source rows before historical research"
+NM-ST1-R0345,SEASON_RECORD_MISMATCH,1993-94,128,3,,"1993-94 (23-8, 14-4 WAC)","expect 23-8, parsed candidate 21-8; review source rows before historical research"
+NM-ST1-R0346,SEASON_RECORD_MISMATCH,1994-95,128,4,,"1994-95 (15-15, 9-9 WAC)","expect 15-15, parsed candidate 14-14; review source rows before historical research"
+NM-ST1-R0347,SEASON_RECORD_MISMATCH,1995-96,128,4,,"1995-96 (28-5, 14-4 WAC)","expect 28-5, parsed candidate 26-5; review source rows before historical research"
+NM-ST1-R0348,SEASON_RECORD_MISMATCH,1996-97,129,1,,"1996-97 (25-8, 11-5 WAC Mountain)","expect 25-8, parsed candidate 23-8; review source rows before historical research"
+NM-ST1-R0349,SEASON_RECORD_MISMATCH,1997-98,129,1,,"1997-98 (24-8, 11-3 WAC Mountain)","expect 24-8, parsed candidate 22-7; review source rows before historical research"
+NM-ST1-R0350,SEASON_RECORD_MISMATCH,1998-99,129,2,,"1998-99 (25-9, 9-5 WAC Pacific)","expect 25-9, parsed candidate 23-9; review source rows before historical research"
+NM-ST1-R0351,SEASON_RECORD_MISMATCH,1999-00,129,2,,"1999-00 (18-14, 9-5 Mountain West)","expect 18-14, parsed candidate 17-11; review source rows before historical research"
+NM-ST1-R0352,SEASON_RECORD_MISMATCH,2000-01,129,3,,"2000-01 (21-13, 6-8 Mountain West)","expect 21-13, parsed candidate 19-13; review source rows before historical research"
+NM-ST1-R0353,SEASON_RECORD_MISMATCH,2001-02,129,3,,"2001-02 (16-14, 6-8 Mountain West)","expect 16-14, parsed candidate 13-13; review source rows before historical research"
+NM-ST1-R0354,SEASON_RECORD_MISMATCH,2002-03,129,4,,"2002-03 (10-18, 4-10 Mountain West)","expect 10-18, parsed candidate 9-17; review source rows before historical research"
+NM-ST1-R0355,SEASON_RECORD_MISMATCH,2003-04,129,4,,"2003-04 (14-14, 5-9 Mountain West)","expect 14-14, parsed candidate 12-14; review source rows before historical research"
+NM-ST1-R0356,SEASON_RECORD_MISMATCH,2004-05,130,1,,"2004-05 (26-7, 10-4 Mountain West)","expect 26-7, parsed candidate 24-7; review source rows before historical research"
+NM-ST1-R0357,SEASON_RECORD_MISMATCH,2005-06,130,1,,"2005-06 (17-13, 8-8 Mountain West)","expect 17-13, parsed candidate 14-12; review source rows before historical research"
+NM-ST1-R0358,SEASON_RECORD_MISMATCH,2006-07,130,2,,"2006-07 (15-17, 4-12 Mountain West)","expect 15-17, parsed candidate 12-16; review source rows before historical research"
+NM-ST1-R0359,SEASON_RECORD_MISMATCH,2007-08,130,2,,"2007-08 (24-9, 11-5 Mountain West)","expect 24-9, parsed candidate 21-9; review source rows before historical research"
+NM-ST1-R0360,SEASON_RECORD_MISMATCH,2008-09,130,3,,"2008-09 (22-12, 12-4 Mountain West)","expect 22-12, parsed candidate 22-10; review source rows before historical research"
+NM-ST1-R0361,SEASON_RECORD_MISMATCH,2010-11,130,4,,"2010-11 (22-13, 8-8 Mountain West)","expect 22-13, parsed candidate 20-12; review source rows before historical research"
+NM-ST1-R0362,SEASON_RECORD_MISMATCH,2011-12,130,4,,"2011-12 (28-7, 10-4 Mountain West)","expect 28-7, parsed candidate 27-7; review source rows before historical research"
+NM-ST1-R0363,SEASON_RECORD_MISMATCH,2012-13,131,1,,"2012-13 (29-6, 13-3 Mountain West)","expect 29-6, parsed candidate 25-6; review source rows before historical research"
+NM-ST1-R0364,SEASON_RECORD_MISMATCH,2013-14,131,2,,"2013-14 (27-7, 15-3 Mountain West)","expect 27-7, parsed candidate 25-7; review source rows before historical research"
+NM-ST1-R0365,SEASON_RECORD_MISMATCH,2015-16,131,3,,"2015-16 (17-15, 10-8 Mountain West)","expect 17-15, parsed candidate 16-15; review source rows before historical research"
+NM-ST1-R0366,SEASON_RECORD_MISMATCH,2016-17,131,3,,"2016-17 (17-14, 10-8 Mountain West)","expect 17-14, parsed candidate 16-11; review source rows before historical research"
+NM-ST1-R0367,SEASON_RECORD_MISMATCH,2017-18,131,4,,"2017-18 (19-15, 12-6 Mountain West)","expect 19-15, parsed candidate 19-13; review source rows before historical research"
+NM-ST1-R0368,SEASON_RECORD_MISMATCH,2019-20,132,1,,"2019-20 (19-14, 7-11 Mountain West)","expect 19-14, parsed candidate 18-13; review source rows before historical research"
+NM-ST1-R0369,SEASON_RECORD_MISMATCH,2020-21,132,1,,"2020-21 (6-16, 2-15 Mountain West)","expect 6-16, parsed candidate 6-15; review source rows before historical research"
+NM-ST1-R0370,SEASON_RECORD_MISMATCH,2021-22,132,2,,"2021-22 (13-19, 5-12 Mountain West)","expect 13-19, parsed candidate 13-17; review source rows before historical research"
+NM-ST1-R0371,SEASON_RECORD_MISMATCH,2023-24,132,3,,"2023-24 (26-10, 10-8 Mountain West)","expect 26-10, parsed candidate 23-10; review source rows before historical research"
+NM-ST1-R0372,SEASON_RECORD_MISMATCH,2024-25,132,3,,"2024-25 (27-8, 17-3 Mountain West)","expect 27-8, parsed candidate 26-7; review source rows before historical research"
+NM-ST1-R0373,SOURCE_HEADING_TYPO,1907-18,121,2,,1907-18 (No Team),chronology indicates likely 1917-18; preserve source literal and verify before accepted normalized season
+NM-ST1-R0374,SOURCE_AGGREGATE_CONTRADICTION,,3,,,"Overall Record 1,667-1,223 (.577) in 126 seasons","season-heading W/L arithmetic currently 1,668-1,221; investigate coverage/administrative differences before accepting global aggregate"
+NM-ST1-R0375,EARLY_SOURCE_RECORD_CONTRADICTION,1918-19,121,2,,"1918-19 (4-1), while six printed games show 2W 4L",classify primary-source mismatch; do not alter real game rows to force season heading
