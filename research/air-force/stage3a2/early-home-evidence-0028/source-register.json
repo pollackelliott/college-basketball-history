@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A2_HOME_FACILITY_SOURCES_V1",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "primary_source_location_statement": "Existing Air Force schedule rows preserve literal USAFA, CO, including first 19 rows whose geography requires reconciliation, and Edinburg, TX on 2004-02-14 New Mexico whose exact-game article disproves that site.",
+  "facilities": [
+    {
+      "key": "cadet-gymnasium-air-force",
+      "era": "1958-59 through 1967-68",
+      "evidence_urls": [
+        "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html",
+        "https://www.sports-reference.com/cbb/schools/colorado/men/1959-schedule.html",
+        "https://www.sports-reference.com/cbb/schools/air-force/men/1968-schedule.html"
+      ],
+      "caveat": "No assertion that this arena existed before 1958 or was the home building in 1956-58."
+    },
+    {
+      "key": "clune-arena",
+      "era": "1968-11-30 onward",
+      "evidence_urls": [
+        "https://www.usafa.org/content/heritage-minute-clune-arena",
+        "https://goairforcefalcons.com/facilities/clune-arena---basketball/10"
+      ],
+      "caveat": "Cadet Field House basketball arena renamed Clune Arena on 1993-12-06; same physical identity."
+    },
+    {
+      "key": "broadmoor-world-arena",
+      "exact_date": "2005-12-28",
+      "evidence_urls": [
+        "https://goairforcefalcons.com/news/2005/7/28/Air_Force_Releases_2005_06_Men_s_Basketball_Schedule",
+        "https://ramblinwreck.com/sports/m-baskbl/schedule/season/2005-06"
+      ],
+      "caveat": "Exact HOME venue exception."
+    }
+  ],
+  "row_specific": [
+    {
+      "id": "AF-2003-04-021",
+      "resolution": "Clune Arena, Colorado Springs CO; Edinburg belongs to Feb 16 Texas-Pan American",
+      "evidence_urls": [
+        "https://goairforcefalcons.com/news/2004/2/14/Postgame_Notes",
+        "https://goairforcefalcons.com/sports/mens-basketball/schedule/2003-04"
+      ]
+    }
+  ],
+  "open_early": {
+    "count": 19,
+    "seasons": [
+      "1956-57",
+      "1957-58"
+    ],
+    "evidence_urls": [
+      "https://www.usafa.edu/about/history/building-years/",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/1956-57",
+      "https://goairforcefalcons.com/sports/mens-basketball/schedule/1957-58"
+    ],
+    "question": "Resolve pre-1958 physical HOME facilities and locality with contemporaneous institutional/reciprocal evidence; campus temporary at Lowry AFB Denver conflicts with modern archive schedule default USAFA CO."
+  },
+  "normalization": "Physical Clune Arena venue key/name reused for Cadet Field House basketball arena from 1968, with pre-1993 name preserved as historical alias."
+}
