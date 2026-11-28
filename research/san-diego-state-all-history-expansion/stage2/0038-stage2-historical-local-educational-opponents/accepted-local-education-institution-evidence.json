@@ -1,0 +1,400 @@
+{
+  "kind": "SDSU_STAGE2_LOCAL_EDUCATIONAL_INSTITUTIONS_0038_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "source_research_date": "2026-11-28",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "38e89ba6bb4766de90a0129ea96447302bbc288f",
+  "parent_checkpoint": "0037-stage2-remaining-registry-and-two-historical-college-families",
+  "parent_mapping_sha256": "9b60a7bfdb848a45385d092c265789f729f5c875c06f34e86bb8834520234fcf",
+  "parent_residual_queue_sha256": "87cb5ac7db54ae4e1073e157148a7826466b64df36e9c4aeb81a57a691a87440",
+  "selection": "One coherent institution-level historical opponent identity tranche: ten California junior-college schools and four San Diego-region high schools, 14 distinct institutions, 26 literal source labels, 33 games; official institution or governmental historical evidence, no individual game-by-game adjudications.",
+  "identity_families": [
+    {
+      "provisional_non_d1_key": "chaffey-college",
+      "canonical_display": "Chaffey Junior College",
+      "institution_type": "JUCO",
+      "evidence_basis": "Chaffey College resumed a separate junior-college department in 1919; not related to local high school team",
+      "source_urls": [
+        "https://www.chaffey.edu/140years/history.php"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "*at Chaffey JC",
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "*Chaffey JC",
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK",
+          "game_count": 1
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "citrus-college",
+      "canonical_display": "Citrus Junior College",
+      "institution_type": "JUCO",
+      "evidence_basis": "Citrus College founded as a junior college in 1915, distinct from Citrus Union High School",
+      "source_urls": [
+        "https://www.citruscollege.edu/general/about/timeline.html"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "*at Citrus JC",
+          "first_season": "1924-25",
+          "last_season": "1924-25",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "*Citrus JC (D)",
+          "first_season": "1922-23",
+          "last_season": "1923-24",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK",
+          "game_count": 2
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "imperial-valley-college",
+      "canonical_display": "Central Junior College (El Centro)",
+      "institution_type": "JUCO",
+      "evidence_basis": "Central Junior College founded in El Centro in 1922, renamed Imperial Valley College in 1951; distinct from independent Brawley Junior College",
+      "source_urls": [
+        "https://www.imperial.edu/about/history.html"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "*at El Centro JC",
+          "first_season": "1923-24",
+          "last_season": "1923-24",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "at El Centro JC",
+          "first_season": "1934-35",
+          "last_season": "1934-35",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX",
+          "game_count": 1
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "fullerton-college",
+      "canonical_display": "Fullerton Junior College",
+      "institution_type": "JUCO",
+      "evidence_basis": "Fullerton Junior College founded 1913, now Fullerton College; distinct from Cal State Fullerton",
+      "source_urls": [
+        "https://www.fullcoll.edu/about/"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "*at Fullerton JC",
+          "first_season": "1923-24",
+          "last_season": "1923-24",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "*Fullerton JC",
+          "first_season": "1922-23",
+          "last_season": "1924-25",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK",
+          "game_count": 2
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "pomona-junior-college",
+      "canonical_display": "Pomona Junior College",
+      "institution_type": "HISTORICAL_JUCO",
+      "evidence_basis": "Independent Pomona Junior College listed in federal 1936 college census, founded 1916; distinct from Pomona College, Cal Poly Pomona, and Mt San Antonio College created 1945-46",
+      "source_urls": [
+        "https://www.govinfo.gov/content/pkg/GOVPUB-I16-ce566eb8039f5b2b77b174799b673e6f/html/GOVPUB-I16-ce566eb8039f5b2b77b174799b673e6f.htm"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "*at Pomona JC",
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "*Pomona JC",
+          "first_season": "1921-22",
+          "last_season": "1923-24",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK",
+          "game_count": 2
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "riverside-city-college",
+      "canonical_display": "Riverside Junior College",
+      "institution_type": "JUCO",
+      "evidence_basis": "Riverside JC founded in 1916 and later renamed Riverside City College",
+      "source_urls": [
+        "https://www.rcc.edu/about/rcc-history.html"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "*at Riverside JC",
+          "first_season": "1923-24",
+          "last_season": "1923-24",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "*Riverside JC",
+          "first_season": "1922-23",
+          "last_season": "1924-25",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK",
+          "game_count": 2
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "santa-ana-college",
+      "canonical_display": "Santa Ana Junior College",
+      "institution_type": "JUCO",
+      "evidence_basis": "Santa Ana College began as Santa Ana Junior College in 1915",
+      "source_urls": [
+        "https://sac.edu/aboutsac/history"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "*at Santa Ana JC",
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK|AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "*Santa Ana JC",
+          "first_season": "1921-22",
+          "last_season": "1923-24",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "LEADING_ASTERISK",
+          "game_count": 2
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "brawley-junior-college",
+      "canonical_display": "Brawley Junior College",
+      "institution_type": "HISTORICAL_JUCO",
+      "evidence_basis": "Brawley Junior College began 1924 as a separate institution from El Centro Central Junior College, according to IVC history; preserve separate historical team",
+      "source_urls": [
+        "https://www.imperial.edu/about/history.html"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "at Brawley JC",
+          "first_season": "1934-35",
+          "last_season": "1934-35",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX",
+          "game_count": 1
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "modesto-junior-college",
+      "canonical_display": "Modesto Junior College",
+      "institution_type": "JUCO",
+      "evidence_basis": "Modesto Junior College founded 1921 as an autonomous junior college district",
+      "source_urls": [
+        "https://www.mjc.edu/about/history.html"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "at Modesto JC",
+          "first_season": "1936-37",
+          "last_season": "1936-37",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX",
+          "game_count": 1
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "pasadena-city-college",
+      "canonical_display": "Pasadena Junior College",
+      "institution_type": "JUCO",
+      "evidence_basis": "Pasadena Junior College founded 1924, modern Pasadena City College; not Pasadena High varsity",
+      "source_urls": [
+        "https://www.pasadena.edu/about/history.php"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "Pasadena JC",
+          "first_season": "1924-25",
+          "last_season": "1924-25",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "",
+          "game_count": 1
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "coronado-high-school",
+      "canonical_display": "Coronado High School",
+      "institution_type": "HIGH_SCHOOL",
+      "evidence_basis": "Coronado Historical Association documents high school founded 1913 and basketball athletics in source era",
+      "source_urls": [
+        "https://coronadohistory.org/blog/coronado-high-school-history-5-18-20/"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "at Coronado High School",
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "at Coronado HS",
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX",
+          "game_count": 1
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "grossmont-high-school",
+      "canonical_display": "Grossmont High School",
+      "institution_type": "HIGH_SCHOOL",
+      "evidence_basis": "Grossmont High School museum documents school opening 1920 and basketball team in 1923-24; exclude alumni",
+      "source_urls": [
+        "https://www.foothillermuseum.com/ghs-history/344-ghs-echoes-in-the-20th-century"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "at Grossmont H.S.",
+          "first_season": "1925-26",
+          "last_season": "1925-26",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX",
+          "game_count": 1
+        },
+        {
+          "source_literal": "Grossmont HS",
+          "first_season": "1921-22",
+          "last_season": "1922-23",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "",
+          "game_count": 3
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "san-diego-high-school",
+      "canonical_display": "San Diego High School",
+      "institution_type": "HIGH_SCHOOL",
+      "evidence_basis": "San Diego High School official school chronology from Russ School 1882 and basketball gyms in 1922-23; separate from San Diego State University",
+      "source_urls": [
+        "https://www.sdhs.sandiegounified.org/about_us/diego_high_school_history"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "San Diego High School",
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "",
+          "game_count": 1
+        },
+        {
+          "source_literal": "San Diego High School (D)",
+          "first_season": "1924-25",
+          "last_season": "1924-25",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "",
+          "game_count": 1
+        },
+        {
+          "source_literal": "San Diego HS",
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "",
+          "game_count": 1
+        },
+        {
+          "source_literal": "San Diego HS (D)",
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "",
+          "game_count": 1
+        }
+      ]
+    },
+    {
+      "provisional_non_d1_key": "sweetwater-high-school",
+      "canonical_display": "Sweetwater High School",
+      "institution_type": "HIGH_SCHOOL",
+      "evidence_basis": "Sweetwater Union High School in National City, California, established early 1920s and district 1920; not the separate alumni team",
+      "source_urls": [
+        "https://www.sweetwaterschools.org/about-us"
+      ],
+      "original_source_rows": [
+        {
+          "source_literal": "Sweetwater HS",
+          "first_season": "1922-23",
+          "last_season": "1922-23",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "",
+          "game_count": 1
+        }
+      ]
+    }
+  ],
+  "excluded_false_merges": [
+    "Pomona Junior College versus Pomona College versus Cal Poly Pomona versus Mount San Antonio College",
+    "Brawley Junior College versus Central Junior College in El Centro (renamed Imperial Valley College)",
+    "Fullerton Junior College versus Cal State Fullerton",
+    "high-school varsity teams versus same-school alumni teams",
+    "San Diego High School versus San Diego State"
+  ],
+  "all_155_predecessor_labels_byte_identical": true,
+  "accepted_added_label_count": 26,
+  "accepted_added_game_count": 33,
+  "accepted_cumulative_labels": 181,
+  "accepted_cumulative_games": 830,
+  "distinct_accepted_opponent_keys": 78,
+  "remaining_exact_unresolved_labels": 160,
+  "remaining_exact_unresolved_games": 256,
+  "original_stage1_games": 1086,
+  "unidentified_1921_22_played_results_outside_game_ledger": 3,
+  "source_game_results_dates_types_site_and_raw_mutated": 0,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "non_d1_owner_scan_pending": true,
+  "global_registration_deferred": true
+}

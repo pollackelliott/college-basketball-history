@@ -1,0 +1,44 @@
+{
+  "kind": "SDSU_STAGE2_EDUCATIONAL_OPPONENTS_CHECKPOINT_0038_V1",
+  "checkpoint": "0038-stage2-historical-local-educational-opponents",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "38e89ba6bb4766de90a0129ea96447302bbc288f",
+  "previous_checkpoint": "0037-stage2-remaining-registry-and-two-historical-college-families",
+  "previous_mapping_sha256": "9b60a7bfdb848a45385d092c265789f729f5c875c06f34e86bb8834520234fcf",
+  "previous_remaining_queue_sha256": "87cb5ac7db54ae4e1073e157148a7826466b64df36e9c4aeb81a57a691a87440",
+  "new_accepted_labels": 26,
+  "new_accepted_games": 33,
+  "new_distinct_non_d1_keys": 14,
+  "accepted_labels_cumulative": 181,
+  "accepted_games_cumulative": 830,
+  "distinct_keys_cumulative": 78,
+  "remaining_unresolved_labels": 160,
+  "remaining_game_rows": 256,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "ed4ec6e63c4b9dc9b703c8f08099793db6f648daebbdc1b067ed2b8f24fa623e",
+      "bytes_utf8": 112888
+    },
+    "accepted-local-education-institution-evidence.json": {
+      "sha256": "40d7c9cbe4d27fee224fe6bdf9f84c42b5da2681c2f01d284d214a633aeb1fdb",
+      "bytes_utf8": 14993
+    },
+    "research-status.json": {
+      "sha256": "c5fede75ac81b09243d8e35f3655b60889d23b4b98a455b6036c99537a59f166",
+      "bytes_utf8": 1399
+    },
+    "research-findings.md": {
+      "sha256": "eefac66048edf5f901b2f1fceb66bc2e2cce566b6152ce10cbf7362925bd1066",
+      "bytes_utf8": 4077
+    },
+    "remaining-unresolved-opponent-labels.csv": {
+      "sha256": "c28c2a61233610b795d4909804a3410137e9806bb772fb7d1734f0b76cd156cc",
+      "bytes_utf8": 22027
+    }
+  }
+}
