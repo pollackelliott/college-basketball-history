@@ -1,0 +1,25 @@
+{
+  "checkpoint": "0026-bounded-research-exhaustion-determination",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_1",
+  "stage1_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "a3efa9e9d4dfd208287ec040e768899600943339",
+  "protected_main_sha_at_checkpoint": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "previous_checkpoint": "0025-local-newspaper-and-junior-college-source-access-boundary",
+  "files": {
+    "research-exhaustion-assessment.json": {
+      "sha256": "4e57e2ef709ba1aa7edbbc03ced6d6d1b6cd6b9a913ce50f823d7d5118f53b2e",
+      "bytes_utf8": 6852
+    },
+    "research-findings.md": {
+      "sha256": "a19bcb5702136a95a14f32ed069cbb242f08c3fef0f64d3f15d4c4a13d8c0ff8",
+      "bytes_utf8": 3982
+    },
+    "research-status.json": {
+      "sha256": "d71f6520a4cfa57b9b47e32a395eba096ef0209cd63f2c1ef90ad6f701fc18b8",
+      "bytes_utf8": 1456
+    }
+  }
+}

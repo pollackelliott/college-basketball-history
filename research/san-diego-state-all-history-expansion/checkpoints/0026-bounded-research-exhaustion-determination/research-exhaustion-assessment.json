@@ -1,0 +1,120 @@
+{
+  "kind": "SOURCE_EXPLICIT_UNIDENTIFIED_GAMES_BOUNDED_RESEARCH_EXHAUSTION_ASSESSMENT_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "season": "1921-22",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "exact_parent_research_head": "a3efa9e9d4dfd208287ec040e768899600943339",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "primary_institutional_source": {
+    "document": "2026-27 San Diego State Men's Basketball Media Guide",
+    "pdf_sha256": "9c63066b60365d4f90abdb36242bf880f84b87030f87d776a6f81fbc75b9f2ad",
+    "printed_page": 88,
+    "pdf_page": 90,
+    "explicit_note": "1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.",
+    "source_named_results": 17,
+    "accepted_named_competitive": 14,
+    "excluded_named_noncompetitive": 3,
+    "administrative_forfeit_awards_not_played": 2,
+    "source_acknowledged_unnamed_played_results": {
+      "wins": 1,
+      "losses": 2,
+      "total": 3
+    },
+    "original_official_record": {
+      "wins": 14,
+      "losses": 8
+    }
+  },
+  "reconciled_game_universe": {
+    "named_results": 1126,
+    "accepted": 1086,
+    "regular_season": 1043,
+    "postseason": 43,
+    "excluded": 40,
+    "reconciled_seasons": 49,
+    "identified_universe_blockers": 0,
+    "unidentified_games_added": 0
+  },
+  "investigated_source_families": [
+    {
+      "name": "SDSU original institutional game guide",
+      "class": "primary institutional retrospective",
+      "status": "ORIGINAL_INSTITUTIONAL_GUIDE_REVIEWED",
+      "game_identity_result": "17 named and 3 explicitly unnamed 1921-22 results; no identifiable opponent for the three"
+    },
+    {
+      "name": "1922 Del Sudoeste contemporary school yearbook",
+      "class": "distinct contemporary student yearbook, same institution",
+      "status": "THIRD_PARTY_TRANSCRIPTION_INSPECTED_ORIGINAL_SCAN_INACCESSIBLE",
+      "locator": "https://doczz.net/doc/5471938/del-sudoeste---sdsu-library-and-information-access",
+      "game_identity_result": "20 played 12W/8L total corroborates source accounting; no three unnamed opponents in inspected transcription",
+      "independence_limitation": "Not an independent opponent institution; mirror not original scan"
+    },
+    {
+      "name": "1921-22 Paper Lantern original student newspaper",
+      "class": "SDSU campus primary news archive",
+      "status": "COLLECTION_LOCATED_INDIVIDUAL_ISSUES_INACCESSIBLE",
+      "locators": [
+        "https://sdsulibrary.wordpress.com/2013/09/12/extra-extra-read-all-about-it/",
+        "https://ibase.sdsu.edu/index.php?a=ViewItem&i=21",
+        "https://digitalcollections.sdsu.edu/the-daily-aztec"
+      ],
+      "game_identity_result": "No issue contents inspected; redirect/403 limits access, not evidence that original newspaper omitted games",
+      "exhaustion_credit": "feasible access routes investigated; do not claim archival holdings reviewed"
+    },
+    {
+      "name": "Contemporary San Diego Union / Evening Tribune local newspapers",
+      "class": "separate local primary news family",
+      "status": "PUBLIC_ARCHIVE_403_AND_LICENSED_OR_PHYSICAL_ALTERNATIVES_NOT_ACCESSED",
+      "locators": [
+        "https://cdnc.ucr.edu/?a=cl&cl=CL1&e=-------en--20--1--txt-txIN--------1&sp=SDDU",
+        "https://ucsd.libguides.com/c.php?g=91062&p=587620"
+      ],
+      "game_identity_result": "No 1921-22 original basketball page inspected; independently located but unavailable via available access",
+      "exhaustion_credit": "accessible research-channel search pursued; physical/licensed holdings explicitly outstanding"
+    },
+    {
+      "name": "1921-22 Chaffey, Santa Ana, Pomona reciprocal school records",
+      "class": "distinct opponent institutional paths",
+      "status": "TARGETED_EXACT_SEASON_SEARCHES_NO_AUTHENTICATED_GAME_LOG_RETRIEVED",
+      "locator": "prior checkpoint 0021 1921-22-investigation.csv and checkpoint 0025 source inventory",
+      "game_identity_result": "No independently authenticated additional 1921-22 game identity; no claim that entire opponent archives were inspected",
+      "exhaustion_credit": "bounded accessible search routes attempted"
+    },
+    {
+      "name": "Fontius 1921-1971 thesis",
+      "class": "historical secondary work",
+      "status": "BIBLIOGRAPHIC_REFERENCE_ONLY_TEXT_NOT_READ",
+      "locator": "https://sandiegohistory.org/journal/1993/july/theses2/",
+      "game_identity_result": "Not evidence for any opponent identity",
+      "exhaustion_credit": "none"
+    }
+  ],
+  "stopping_rationale": {
+    "standard": "Proportional exhaustion of realistically accessible high-yield institutional/reciprocal/source-family research, not proof that every surviving archival page has been inspected",
+    "further_high_yield_access_requirements": [
+      "Institutional/licensed access to SDSU historic newspapers or UCSD contemporary local newspaper images",
+      "A specifically located authenticated 1921-22 opponent-side game ledger or contemporary basketball report"
+    ],
+    "marginal_accessibility": "Several sources are established to exist but issue pages require access unavailable in this Research environment; an open-ended source search or arbitrary owner expense is disproportionate absent a specific accessible new lead",
+    "materiality": "An actually accessible primary newspaper or reciprocal record could change missing identities. If such concrete evidence becomes available, re-open only its exact relevant coverage question; no broad re-research.",
+    "honesty_constraints": [
+      "Never say inaccessible original issues were read or individually exhausted",
+      "Never treat indexed secondary results or aggregates as independent identities",
+      "Do not infer opponents/dates/scores for unidentified results",
+      "Do not treat administrative forfeit awards as played games"
+    ]
+  },
+  "determination": "RESEARCH_EXHAUSTED_IDENTITIES_UNRESOLVED",
+  "determination_scope": "BOUNDED_REALISTICALLY_ACCESSIBLE_RESEARCH_PATHS_ONLY",
+  "source_archives_exhaustively_read": false,
+  "no_additional_realistically_accessible_high_yield_original_record_identified": true,
+  "three_unknown_results_maintained_as_season_level_coverage_gap": true,
+  "permanent_auditor_latest_input_sha256": "0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867",
+  "latest_auditor_result": "FAIL_ON_PREVIOUS_EXPLICIT_NOT_EXHAUSTED_INPUT",
+  "actual_new_eligibility_audit_performed": false,
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "next_exact_step": "Prepare one SHA-256-pinned unchanged-ledger successor to ZIP 0023 changing only 1921-22 exhaustion/gap-state evidence to this truthful bounded conclusion, then run unchanged permanent read-only auditor. Do not close Stage 1 before an eligible exact-SHA audit and separately verified closeout."
+}
