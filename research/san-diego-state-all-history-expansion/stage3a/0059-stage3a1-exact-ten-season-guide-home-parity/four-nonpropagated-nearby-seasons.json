@@ -1,0 +1,13 @@
+{
+  "excluded_season_reasons": {
+    "1941-42": "Existing Fresno official publication site conflict must remain researched-unresolved; no automatic reopening",
+    "1943-44": "Original source at count six conflicts with published AWAY five",
+    "1945-46": "Official HOME+AWAY aggregate 27 conflicts with 26 source-listed games",
+    "1946-47": "Existing Fresno score/date reciprocal conflicts remain researched-unresolved; no automatic reopening"
+  },
+  "kind": "SDSU_STAGE3A1_0059_EXCLUDED_1936_50_SEASON_BOUNDARIES_V1",
+  "policy": "Do not reopen conflict-bearing seasons or invent site classifications from a generic missing-at rule",
+  "previous_checkpoint_1928_29_nonpropagation_preserved": true,
+  "prior_uncertainty_population_preserved": true,
+  "source_uri": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+}
