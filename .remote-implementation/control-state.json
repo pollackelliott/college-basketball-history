@@ -860,7 +860,7 @@
   "active_request_sha256": "83d3c4dc96cd3375175d850dd6877305734ab1687dde7df060f6fc9a96e5dd19",
   "active_school_key": "grand-canyon",
   "active_target_branch": "data/grand-canyon-onboarding",
-  "active_writeahead_commit": null,
+  "active_writeahead_commit": "9fd05bcd9354fae1549a4782a439013d772e22c3",
   "active_writeahead_path": ".remote-implementation/writeahead/grand-canyon/grand-canyon-phase0-0001/writeahead-manifest.json",
   "active_writeahead_sha256": "a1d906c320b3d3db0b494824628e7fc42efa18716477b46722d46618a07c96a6",
   "authority_statement": "Global serialized remote Implementation control authority. This state never supplies Owner Gate 1 or Owner Gate 2 approval.",
