@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_CONFERENCE_CHRONOLOGY_0047",
+  "school_key": "air-force",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "source_accepted_stage1_conference_observations_git_blob_sha": "7c390f7030b92f8bd156e12842c261844cad240e",
+  "source_accepted_stage1_path": "research/air-force/stage1/early-top-level-game-extraction-0020/conference-source-observations.csv",
+  "source_accepted_institutional_scope_git_blob_sha": "3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff",
+  "accepted_research_inception": "1956-57",
+  "accepted_top_level_classification": "1957-58+",
+  "required_completed_season_cutoff": "2025-26",
+  "chronology": [
+    {
+      "start_season": "1956-1957",
+      "end_season": "1979-1980",
+      "conference_key": "independent",
+      "conference_name": "Independent",
+      "source_basis": "Accepted 1956-57 institutional inception; 1996 Air Force official media guide establishes men's teams joined WAC in 1980; https://goairforcefalcons.com/documents/download/2025/9/10/1996_Media_Guide.pdf"
+    },
+    {
+      "start_season": "1980-1981",
+      "end_season": "1998-1999",
+      "conference_key": "wac",
+      "conference_name": "WAC",
+      "source_basis": "Accepted Stage 1 exact season conference observations: research/air-force/stage1/early-top-level-game-extraction-0020/conference-source-observations.csv (blob 7c390f7030b92f8bd156e12842c261844cad240e); https://goairforcefalcons.com/documents/download/2025/9/10/1996_Media_Guide.pdf"
+    },
+    {
+      "start_season": "1999-2000",
+      "end_season": "",
+      "conference_key": "mountain-west",
+      "conference_name": "Mountain West",
+      "source_basis": "Accepted Stage 1 official MWC observations from 1999-00 through 2025-26; Mountain West founding member 1999; https://goairforcefalcons.com/documents/download/2026/11/19/AF.MBB.2026-27.Notes.06.UTSA.pdf"
+    }
+  ],
+  "notes": "Source-game conference markers and conference tournament classifications remain unchanged. Three contiguous affiliation intervals authored; no shared registry mutation or new historical game decisions."
+}

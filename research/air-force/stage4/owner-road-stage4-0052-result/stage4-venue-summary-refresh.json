@@ -1,0 +1,24 @@
+{
+  "ambiguous_game_count": 0,
+  "changed_group_count": 1,
+  "changed_groups": [
+    {
+      "canonical_name": "Broadmoor World Arena",
+      "city": "Colorado Springs",
+      "first_assigned_game": "2005-12-28",
+      "games_currently_assigned": 2,
+      "last_assigned_game": "2006-11-29",
+      "state": "CO",
+      "venue_rows": 2
+    }
+  ],
+  "changed_row_count": 2,
+  "game_rows": 1928,
+  "refreshed_fields": [
+    "first_assigned_game",
+    "games_currently_assigned",
+    "last_assigned_game"
+  ],
+  "status": "PASS",
+  "venue_rows": 52
+}

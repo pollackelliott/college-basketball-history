@@ -1,0 +1,40 @@
+{
+  "expansion_coverage_proof": "NOT_APPLICABLE",
+  "home_chronology": {
+    "approved_frozen_home_exception_rows": 0,
+    "chronology_rows": 4,
+    "home_chronology_conflicts": 0,
+    "home_rows_checked": 960
+  },
+  "mechanical_stage4_csv_repairs_applied": 0,
+  "mechanical_stage4_csv_repairs_required": 0,
+  "owner_scan": {
+    "distinct_identities": 47,
+    "games": 251
+  },
+  "protected_main_sha": "1cde43ea49415d64b4fe9b59b1b44610fcad1716",
+  "research_acceptance_contract_check": "PASS",
+  "research_acceptance_contract_errors": 0,
+  "research_acceptance_contract_warnings": 0,
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "research_coverage": {
+    "latest_package_season": "2025-2026",
+    "legacy_coverage_declaration_missing": false,
+    "primary_source_historical_cutoff": "2025-2026",
+    "required_completed_season_cutoff": "2025-2026",
+    "required_season_rows": 32
+  },
+  "six_file_package_exact_flat_members": [
+    "conferences.csv",
+    "notes.md",
+    "opponents.csv",
+    "source-games.csv",
+    "source-notes.md",
+    "venues.csv"
+  ],
+  "six_file_package_sha256": "c95ebe6b6fa64a3fdff8d6e19f0fa2cd52b6c1b0071cea08dde0a16c4613a0cb",
+  "stage3b_game_id_population_exact_match": true,
+  "stage3b_parent_sha256": "4618ef7a6b0e051cd9c8e56e3c649878ae3f39fffc4c214b4a64d542147281e4",
+  "stage3b_semantic_comparison_unexpected_mismatches": 0,
+  "status": "PASS"
+}

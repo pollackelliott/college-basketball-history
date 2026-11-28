@@ -1,0 +1,95 @@
+[
+  {
+    "game_id": "AF-1959-60-006",
+    "game_date": "1960-03-07",
+    "opponent_key": "depaul",
+    "accepted_original_result": "L 63-69",
+    "game_type": "NCAA_TOURNAMENT",
+    "accepted_site_type": "AWAY",
+    "curated_venue_name": "Alumni Hall",
+    "curated_city": "Chicago",
+    "curated_state": "IL",
+    "curated_country": "United States",
+    "authoring_venue_key": "postseason-alumni-hall-chicago-il",
+    "evidence_urls": [
+      "https://depaulbluedemons.com/news/2007/10/26/DePaul_A_to_Z",
+      "https://depaulbluedemons.com/news/2010/1/14/Sixties_Guard_Billy_Haig_Passes_Away"
+    ],
+    "source_analysis": "DePaul official institutional history explicitly states DePaul defeated Air Force in the 1960 NCAA first-round game at Alumni Hall, Chicago; independent DePaul obituary corroborates the exact opponent and building. Explicit owner ruling checkpoint 0051 supersedes previously accepted HOME: for website publication Air Force ROAD/AWAY and DePaul HOME at Alumni Hall, even where source NCAA designations differ. Original source designations are preserved in the unchanged guide literal and original Stage 3B checkpoint 0048. Evidence: https://depaulbluedemons.com/news/2007/10/26/DePaul_A_to_Z; https://depaulbluedemons.com/news/2010/1/14/Sixties_Guard_Billy_Haig_Passes_Away",
+    "source_conflict": {
+      "type": "EXPLICIT_OWNER_ROAD_RULING_SUPERSEDES_PREVIOUS_HOME_AND_SOURCE_NEUTRAL",
+      "previous_checkpoint_0048_han": "HOME",
+      "final_air_force_han": "AWAY",
+      "final_depaul_han": "HOME",
+      "ruling_checkpoint": "research/air-force/stage4/owner-road-designation-0051/",
+      "source_neutral_designation_preserved_as_provenance": true
+    }
+  },
+  {
+    "game_id": "AF-1961-62-023",
+    "game_date": "1962-03-12",
+    "opponent_key": "texas-tech",
+    "accepted_original_result": "L 66-68",
+    "game_type": "NCAA_TOURNAMENT",
+    "accepted_site_type": "NEUTRAL",
+    "curated_venue_name": "Moody Coliseum",
+    "curated_city": "Dallas",
+    "curated_state": "TX",
+    "curated_country": "United States",
+    "authoring_venue_key": "postseason-moody-coliseum-dallas-tx",
+    "evidence_urls": [
+      "https://texastech.com/documents/download/2025/5/12/Tech_Record_Book_-_2025-26.pdf",
+      "https://www.sports-reference.com/cbb/boxscores/1962-03-12-air-force.html",
+      "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/creighton.sidearmsports.com/documents/2019/9/29/1920mbbmgall.pdf?timestamp=20190929085022",
+      "https://texastech.com/sports/mens-basketball/schedule/text/1961-62"
+    ],
+    "source_analysis": "Texas Tech official NCAA Tournament results record identifies the exact March 12 1962 Texas Tech 68-66 Air Force first round as Dallas TX; Sports-Reference exact game identifies Moody Coliseum, Dallas. Creighton institutional tournament history independently confirms the March 12 1962 first-round Dallas NCAA site at Moody Coliseum. Accepted original Air Force source_schedule_locality Lubbock TX retained as source literal, not promoted to curated place. Texas Tech retrospective online season schedule currently places March 12 game in Manhattan KS, contradicting Tech's repeated tournament-results record; use game-specific Dallas record corroborated by NCAA event and secondary exact-building game data. No changes to accepted date, H/A/N, game identity or score. Evidence: https://texastech.com/documents/download/2025/5/12/Tech_Record_Book_-_2025-26.pdf; https://www.sports-reference.com/cbb/boxscores/1962-03-12-air-force.html; https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/creighton.sidearmsports.com/documents/2019/9/29/1920mbbmgall.pdf?timestamp=20190929085022; https://texastech.com/sports/mens-basketball/schedule/text/1961-62",
+    "source_conflict": {
+      "type": "ORIGINAL_SOURCE_AND_RETROSPECTIVE_SCHEDULE_LOCALITIES_CONTRADICTED",
+      "original_source": "Lubbock, TX",
+      "texas_tech_schedule": "Manhattan, KS",
+      "accepted_curated": "Moody Coliseum, Dallas, TX",
+      "basis": "Texas Tech exact 1962 NCAA history lists Dallas; Creighton first-round Dallas host Moody Coliseum, secondary exact-game arena Moody Coliseum."
+    }
+  },
+  {
+    "game_id": "AF-2003-04-029",
+    "game_date": "2004-03-18",
+    "opponent_key": "north-carolina",
+    "accepted_original_result": "L 52-63",
+    "game_type": "NCAA_TOURNAMENT",
+    "accepted_site_type": "NEUTRAL",
+    "curated_venue_name": "Pepsi Center",
+    "curated_city": "Denver",
+    "curated_state": "CO",
+    "curated_country": "United States",
+    "authoring_venue_key": "postseason-ball-arena-denver-co",
+    "evidence_urls": [
+      "https://goheels.com/news/2004/3/16/205464024",
+      "https://goheels.com/news/2004/3/18/205474701",
+      "https://goheels.com/news/2014/3/18/209438153"
+    ],
+    "source_analysis": "North Carolina official March 16 2004 NCAA preview explicitly announces March 18 Air Force game at Pepsi Center, Denver; UNC first-round game account and retrospective historical review corroborate the same exact physical arena. Pepsi Center is the historical 2004 name of existing physical Ball Arena authoring identity; use period name on game and add authoring alias without inventing a second venue. Evidence: https://goheels.com/news/2004/3/16/205464024; https://goheels.com/news/2004/3/18/205474701; https://goheels.com/news/2014/3/18/209438153",
+    "source_conflict": null
+  },
+  {
+    "game_id": "AF-2005-06-031",
+    "game_date": "2006-03-16",
+    "opponent_key": "illinois",
+    "accepted_original_result": "L 69-78",
+    "game_type": "NCAA_TOURNAMENT",
+    "accepted_site_type": "NEUTRAL",
+    "curated_venue_name": "Cox Arena",
+    "curated_city": "San Diego",
+    "curated_state": "CA",
+    "curated_country": "United States",
+    "authoring_venue_key": "postseason-cox-arena-san-diego-ca",
+    "evidence_urls": [
+      "https://d1iubivivot1gj.cloudfront.net/sports/mens-basketball/stats/2005-06/air-force/boxscore/1494",
+      "https://www.af.mil/News/Article-Display/Article/131613/illinois-grounds-air-force-season-78-69/",
+      "https://fightingillini.com/news/2006/3/16/Illinois_Tops_Air_Force_To_Advance_To_Second_Round"
+    ],
+    "source_analysis": "Illinois official March 16 2006 first-round box score lists Cox Arena (San Diego, CA) for its 78-69 victory against Air Force; contemporaneous U.S. Air Force game article and Illinois institutional tournament recap independently name Cox Arena at San Diego State. Historical name Cox Arena retained; current facility is also known as Viejas Arena. Evidence: https://d1iubivivot1gj.cloudfront.net/sports/mens-basketball/stats/2005-06/air-force/boxscore/1494; https://www.af.mil/News/Article-Display/Article/131613/illinois-grounds-air-force-season-78-69/; https://fightingillini.com/news/2006/3/16/Illinois_Tops_Air_Force_To_Advance_To_Second_Round",
+    "source_conflict": null
+  }
+]

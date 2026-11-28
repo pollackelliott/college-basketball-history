@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_OWNER_ROAD_STAGE4_0052_EXACT_SUCCESS",
+  "status": "STAGE4_COMPLETE_OWNER_NON_D1_SANITY_SCAN_READY",
+  "protected_main_sha": "1cde43ea49415d64b4fe9b59b1b44610fcad1716",
+  "immutable_original_stage3b_complete_commit": "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745",
+  "binding_owner_ruling_commit": "5ff856c7a394ee07ea2457de622b33fe630a7aaf",
+  "game_id": "AF-1959-60-006",
+  "final_source_school_han": "AWAY",
+  "stage4_site_type": "OPPONENT_HOME",
+  "opponent_home_identity": "DePaul",
+  "physical_site": "Alumni Hall, Chicago, IL",
+  "game_count": 1928,
+  "remaining_research_errors": 0,
+  "owner_non_d1_scan_approved": false,
+  "stage5_started": false,
+  "basketball_data_global_mutations": 0,
+  "input_sha256": "4618ef7a6b0e051cd9c8e56e3c649878ae3f39fffc4c214b4a64d542147281e4"
+}
