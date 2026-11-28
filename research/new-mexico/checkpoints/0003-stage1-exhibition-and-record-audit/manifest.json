@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "RESEARCH_STAGE1_CHECKPOINT_MANIFEST_V1",
+  "checkpoint": "0003-stage1-exhibition-and-record-audit",
+  "school_key": "new-mexico",
+  "research_branch": "research/new-mexico",
+  "parent_research_commit_sha": "a481be046d6dc93ec885f1bcb7f6ffff50963dd7",
+  "prior_checkpoint": "0002-stage1-layout-reconciled-census",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "accepted_top_level_scope": "INCEPTION+",
+  "source_pdf_sha256": "94a121232efa82a71ebb448139d4e72c799ac032128cb625ce2a5178b6bbdcc7",
+  "checkpoint_state": "STAGE_1_IN_PROGRESS",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 7149,
+      "sha256": "47611a0c374865983a864fa9b12ac759caa6572b2aa92dd403c06813dde9cfe2",
+      "git_blob_sha": "25043fc0137bfc9df577b1b73606980a75b0c24f"
+    },
+    {
+      "path": "reviewed-source-games.csv",
+      "bytes": 863021,
+      "sha256": "d22709f0ca4fbe1de3649ffeeb7feb881e562e313c4edb067112918417314ff3",
+      "git_blob_sha": "b5a638b1f2a05d9ae2d7fed1edca577d3dd6bd74"
+    },
+    {
+      "path": "composite-season-census.csv",
+      "bytes": 11912,
+      "sha256": "73cc2815a0ffd909b2ee85a8259b42875f5da6acf740a79fc7417a836e274784",
+      "git_blob_sha": "ff3163b697ae00b00bd7bfb6053c80a14c724e9c"
+    },
+    {
+      "path": "alltime-results-crosswalk.csv",
+      "bytes": 24456,
+      "sha256": "1770db97f8cd5cd4cfc7b6bd07cdc1b7a7a21eaaf127ebaeb052287207fa5d38",
+      "git_blob_sha": "424c7d89b2eb6befde18c78fe060e59a3b2478a0"
+    },
+    {
+      "path": "exhibition-appendix-crosswalk.csv",
+      "bytes": 14357,
+      "sha256": "5bd91d3d7124cb93e18905e7c046e8f5a96cb7a8264a5b6ef7f0ca7edd2957e0",
+      "git_blob_sha": "0f7639754447fc4ea193ddee0dd810d4d73936bd"
+    },
+    {
+      "path": "adjudication-log.csv",
+      "bytes": 3741,
+      "sha256": "c7dd2df4cab593d141a27f632d6a3bc99896acb46d00e676624aa2b31ae08d40",
+      "git_blob_sha": "54314fc4c795c2370510733cbf30b4fef24b53f5"
+    },
+    {
+      "path": "stage1-status.json",
+      "bytes": 2738,
+      "sha256": "f0bc551d9ddc9244ff3c39558a66eeb2514d0c548264f80fca4a8d6bbdc2a25a",
+      "git_blob_sha": "f6a34e6dc513dd7404af761283c247cabae6223f"
+    }
+  ]
+}

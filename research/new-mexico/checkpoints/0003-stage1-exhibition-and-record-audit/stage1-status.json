@@ -1,0 +1,91 @@
+{
+  "checkpoint_id": "0003",
+  "research_type": "NEW_ORIGINAL_SCHOOL",
+  "stage": "STAGE_1",
+  "completion_state": "IN_PROGRESS",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "a481be046d6dc93ec885f1bcb7f6ffff50963dd7",
+  "accepted_top_level_scope": "INCEPTION+",
+  "source_pdf_sha256": "94a121232efa82a71ebb448139d4e72c799ac032128cb625ce2a5178b6bbdcc7",
+  "source_results_pages": "121-132",
+  "exhibition_appendix_page": 79,
+  "all_time_results_pages": "44-45",
+  "coach_records_page": 50,
+  "completed_season_cutoff": "2025-26",
+  "printed_season_headings": 127,
+  "source_explicit_no_team": 4,
+  "active_season_rows": 123,
+  "source_game_candidates": 2891,
+  "source_played_record": {
+    "W": 1667,
+    "L": 1224
+  },
+  "source_record_summary": {
+    "W": 1667,
+    "L": 1223,
+    "declared_seasons": 126
+  },
+  "alltime_table_sum": {
+    "W": 1666,
+    "L": 1226
+  },
+  "exhibition_appendix_entries": 87,
+  "exhibitions_explicitly_excluded": 86,
+  "exhibition_label_conflicts": 1,
+  "exhibition_subtypes": {
+    "PRESEASON_EXHIBITION": 75,
+    "IN_SEASON_EXHIBITION": 1,
+    "INTERNATIONAL_TRIP_EXHIBITION": 11
+  },
+  "exhibition_ledger_exact_overlaps": 1,
+  "exhibition_ledger_exact_overlaps_target_countable": 1,
+  "alltime_vs_detail_unequal_seasons": [
+    "1929-30",
+    "1979-80"
+  ],
+  "season_dispositions": {
+    "TRIPLE_SOURCE_RECORD_AGREEMENT": 119,
+    "NO_TEAM_EXPLICIT": 4,
+    "RESULTS_2_4_SUPPORTED_ALLTIME_COACH_HEADING_TYPO": 1,
+    "RESULTS_16_4_SUPPORTED_COACH_MW_ALLTIME_TYPO": 1,
+    "RESULTS_5_18_SUPPORTED_ALLTIME_COACH_HEADING_TYPO": 1,
+    "PLAYED_7_21_OFFICIAL_6_22_FORFEIT_ANNOTATED": 1
+  },
+  "court_score_repairs": [
+    {
+      "game_id": "NM-1966-67-0026",
+      "raw": "6-64",
+      "curated": "66-64",
+      "source_pdf_page": 84
+    }
+  ],
+  "forfeit_annotations": [
+    "NM-1979-80-0002"
+  ],
+  "material_residuals": [
+    {
+      "type": "HISTORICAL_EXHIBITION_CLASSIFICATION",
+      "game_ids": [
+        "NM-1936-37-0006",
+        "NM-1937-38-0003",
+        "NM-1937-38-0004"
+      ]
+    },
+    {
+      "type": "OVERALL_AGGREGATE_SOURCE_INTERNAL_DIFFERENCE",
+      "played": "1667-1224",
+      "overview": "1667-1223",
+      "alltime": "1666-1226"
+    }
+  ],
+  "unknown_date_rows": 1,
+  "unresolved_exact_score_rows": 7,
+  "malformed_source_score_rows": 8,
+  "structured_game_types": {
+    "REGULAR_SEASON": 2727,
+    "POSTSEASON": 44,
+    "NCAA_TOURNAMENT": 27,
+    "CONFERENCE_TOURNAMENT": 93
+  },
+  "next_bounded_stage1_unit": "Bounded classification check for three pre-1972 Harlem Globetrotters games from 1936-38 and any material exhibition evidence; then Stage1 mechanical final game-accounting closeout. No Stage2 without authorization."
+}
