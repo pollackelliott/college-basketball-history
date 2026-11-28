@@ -1,0 +1,25 @@
+{
+  "research_game_id": "AF-1959-60-018",
+  "game_date": "1960-01-30",
+  "opponent_key": "new-mexico",
+  "site_type": "NEUTRAL",
+  "accepted_venue": "",
+  "accepted_city": "",
+  "accepted_state": "",
+  "status": "FIRST_PARTY_LOCATION_CONFLICT_PRESERVED",
+  "sources": [
+    {
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1959-60",
+      "claim": "Air Force current season schedule records Neutral Albuquerque, NM"
+    },
+    {
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/opponent-history/university-of-new-mexico/90",
+      "claim": "Air Force current opponent history records neutral Albuquerque NM"
+    },
+    {
+      "url": "https://goairforcefalcons.com/documents/download/2024/2/22/AF.MBB.2023-24.Notes.26.New_Mexico.pdf",
+      "claim": "Air Force 2024 institutional series notes record Denver% at 1-30-60"
+    }
+  ],
+  "note": "City disputed in authoritative target records; defer narrow adjudication, do not invent locality or arena"
+}
