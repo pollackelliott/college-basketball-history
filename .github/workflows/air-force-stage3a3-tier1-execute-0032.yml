@@ -1,0 +1,200 @@
+name: Air Force Stage 3A-3 Tier 1 exact execution 0032
+
+on:
+  push:
+    branches: [research/air-force]
+    paths:
+      - .github/workflows/air-force-stage3a3-tier1-execute-0032.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  tier1_exact_execution:
+    runs-on: ubuntu-latest
+    env:
+      SOURCE_SHA: 4731f18332a67058801c9f9d0f449df862d67833
+      MAIN_SHA: 0181255ebb1a91d624cc62ef80a3edb6453d2fd0
+      RESEARCH_BASE_SHA: 3f5a15458aa468347e56e669327d6fe4c9c6ee69
+      LEDGER_BLOB_SHA: e78ad7fd3ce510f8a10d6064c0b29e52f1680c3e
+      LEDGER_REL: research/air-force/stage3a3/tier1-execution-preflight-0031/structured-stage3a2-ledger.csv
+      PARENT_DIR: research/air-force/stage3a3/tier1-execution-preflight-0031
+      NEW_DIR: research/air-force/stage3a3/tier1-project-evidence-0032
+      SNAPSHOT_RUN: '46110520556'
+      SNAPSHOT_ARTIFACT_ID: '15249417494'
+      SNAPSHOT_NAME: research-stage3a3-tier1-state-0181255ebb1a91d624cc62ef80a3edb6453d2fd0
+      SNAPSHOT_DIGEST: sha256:fdd0190a5050f20816f122565c8fa453f8ee27d96abe82a786e736e7b0cbae75
+    steps:
+      - name: Check out the exact Research execution commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate Git refs, ancestor checkpoint, original ledger and snapshot run
+        env:
+          GH_TOKEN: \${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/research/air-force
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain)"
+          test "$(git rev-parse HEAD^)" = "$SOURCE_SHA"
+          test "$(git diff --name-only "$SOURCE_SHA" HEAD)" = '.github/workflows/air-force-stage3a3-tier1-execute-0032.yml'
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$MAIN_SHA"
+          test "$(git rev-parse "$SOURCE_SHA:$LEDGER_REL")" = "$LEDGER_BLOB_SHA"
+          test "$(git rev-parse "HEAD:$LEDGER_REL")" = "$LEDGER_BLOB_SHA"
+          mkdir -p "$RUNNER_TEMP/air-force-ledger" "$RUNNER_TEMP/air-force-snapshot" "$RUNNER_TEMP/air-force-tier1-output"
+          git show "$SOURCE_SHA:$LEDGER_REL" > "$RUNNER_TEMP/air-force-ledger/structured-stage3a2-ledger.csv"
+          test "$(git hash-object "$RUNNER_TEMP/air-force-ledger/structured-stage3a2-ledger.csv")" = "$LEDGER_BLOB_SHA"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SNAPSHOT_RUN" > "$RUNNER_TEMP/air-force-snapshot-run.json"
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$SNAPSHOT_ARTIFACT_ID" > "$RUNNER_TEMP/air-force-snapshot-artifact.json"
+          python - <<'PY'
+          import json, os, pathlib, subprocess, csv, collections
+          temp=pathlib.Path(os.environ['RUNNER_TEMP'])
+          run=json.loads((temp/'air-force-snapshot-run.json').read_text())
+          art=json.loads((temp/'air-force-snapshot-artifact.json').read_text())
+          assert run['id']==int(os.environ['SNAPSHOT_RUN'])
+          assert run['head_sha']==os.environ['MAIN_SHA'] and run['conclusion']=='success' and run['status']=='completed'
+          assert art['id']==int(os.environ['SNAPSHOT_ARTIFACT_ID']) and art['name']==os.environ['SNAPSHOT_NAME']
+          assert art['expired'] is False and art['digest']==os.environ['SNAPSHOT_DIGEST']
+          assert art['workflow_run']['head_sha']==os.environ['MAIN_SHA']
+          parent=pathlib.Path(os.environ['PARENT_DIR'])
+          manifest=json.loads((parent/'manifest.json').read_text())
+          assert manifest['status']=='TIER1_TOOL_NOT_RUN_INPUT_TRANSPORT_BLOCKED'
+          assert manifest['protected_main_sha']==os.environ['MAIN_SHA']
+          assert manifest['research_base_sha']==os.environ['RESEARCH_BASE_SHA']
+          assert len(manifest['files'])==25
+          for f in manifest['files']:
+              p=pathlib.Path(f['path'])
+              assert p.is_file(),p
+              s=subprocess.check_output(['git','hash-object',str(p)],text=True).strip()
+              assert s==f['git_blob_sha'],(str(p),s,f['git_blob_sha'])
+          path=temp/'air-force-ledger/structured-stage3a2-ledger.csv'
+          with path.open(newline='',encoding='utf-8-sig') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==1928
+          ids=[r['research_game_id'] for r in rows]
+          assert len(set(ids))==1928 and all(ids)
+          kinds=collections.Counter(r.get('game_type','').strip().upper() for r in rows)
+          assert kinds=={'REGULAR_SEASON':1866,'POSTSEASON':62},kinds
+          sites=collections.Counter(r.get('site_type','').strip().upper() for r in rows if r.get('game_type','').strip().upper()=='REGULAR_SEASON')
+          assert sites=={'HOME':972,'OPPONENT_HOME':778,'NEUTRAL':116},sites
+          neutrals=[r for r in rows if r.get('game_type','').strip().upper()=='REGULAR_SEASON' and r.get('site_type','').strip().upper()=='NEUTRAL']
+          assert sum(int(r['season_label'][:4])>=1996 for r in neutrals)==48
+          assert sum(int(r['season_label'][:4])<1996 for r in neutrals)==68
+          assert all(r.get('opponent_key') for r in neutrals)
+          print('CHECKPOINT_0031_AUTHENTICATED 25 declared files; 1928 unique games; 116 regular neutrals; snapshot source available')
+          PY
+      - name: Download and verify the unchanged protected-main evidence snapshot
+        env:
+          GH_TOKEN: \${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh run download "$SNAPSHOT_RUN" --repo "$GITHUB_REPOSITORY" --name "$SNAPSHOT_NAME" --dir "$RUNNER_TEMP/air-force-snapshot"
+          python "$RUNNER_TEMP/air-force-snapshot/tools/research_stage3a3_tier1_portable.py" verify "$RUNNER_TEMP/air-force-snapshot" --main-sha "$MAIN_SHA"
+          test "$(git hash-object "$RUNNER_TEMP/air-force-snapshot/tools/research_stage3a3_tier1.py")" = f0027e9ef6ec7e3fc322eec7f2805ee1f927050e
+          test "$(git hash-object "$RUNNER_TEMP/air-force-snapshot/tools/research_stage3a3_tier1_portable.py")" = e7e7454d3d067ff30467f16bc52b4f67567da4fe
+      - name: Execute exact permanent Stage 3A-3 Tier 1 and require COMPLETE
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "$RUNNER_TEMP/air-force-snapshot/tools/research_stage3a3_tier1.py" air-force "$RUNNER_TEMP/air-force-ledger/structured-stage3a2-ledger.csv" --repo-root "$RUNNER_TEMP/air-force-snapshot" --main-sha "$MAIN_SHA" --output-dir "$RUNNER_TEMP/air-force-tier1-output"
+          python - <<'PY'
+          import os,json,pathlib,hashlib
+          d=pathlib.Path(os.environ['RUNNER_TEMP'])/'air-force-tier1-output'
+          status=json.loads((d/'stage3a3-tier1-status.json').read_text())
+          assert status['status']=='COMPLETE',status
+          assert status['school_key']=='air-force' and status['protected_main_sha']==os.environ['MAIN_SHA']
+          ledger=pathlib.Path(os.environ['RUNNER_TEMP'])/'air-force-ledger/structured-stage3a2-ledger.csv'
+          assert status['input_ledger_sha256']==hashlib.sha256(ledger.read_bytes()).hexdigest()
+          assert status['neutral_rows']==116 and status['external_research_used'] is False
+          outputs={'accepted':'accepted-project-evidence.json','contradictions':'tier1-contradictions.json','unresolved':'tier1-unresolved.json','remaining':'remaining-neutral-queue.json','status':'stage3a3-tier1-status.json'}
+          lists={key:json.loads((d/name).read_text()) for key,name in outputs.items() if key!='status'}
+          assert len(lists['accepted'])==status['accepted_count']
+          assert sum(bool(x['downstream_complete']) for x in lists['accepted'])==status['accepted_complete_count']
+          assert sum(not bool(x['downstream_complete']) for x in lists['accepted'])==status['accepted_partial_count']
+          assert len(lists['contradictions'])==status['contradiction_count']
+          assert len(lists['unresolved'])==status['unresolved_count']
+          assert len(lists['accepted'])+len(lists['contradictions'])+len(lists['unresolved'])==116
+          assert len(lists['remaining'])==status['remaining_modern']+status['remaining_historical']
+          assert len(lists['remaining'])==116-status['accepted_complete_count']
+          man=json.loads((d/'manifest.json').read_text())
+          assert set(man)==set(outputs)
+          for key,entry in man.items():
+              assert hashlib.sha256((d/outputs[key]).read_bytes()).hexdigest()==entry['sha256']
+          assert set(x.name for x in d.iterdir())==set(outputs.values())|{'manifest.json'}
+          print('PERMANENT_STAGE3A3_TIER1_COMPLETE',json.dumps({k:status[k] for k in ('neutral_rows','accepted_count','accepted_complete_count','accepted_partial_count','contradiction_count','unresolved_count','remaining_modern','remaining_historical')},sort_keys=True))
+          PY
+      - name: Preserve exact tool outputs and full accepted parent in checkpoint 0032
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e "$NEW_DIR"
+          mkdir -p "$NEW_DIR"
+          cp -a "$PARENT_DIR" "$NEW_DIR/parent-0031"
+          mkdir "$NEW_DIR/tier1-tool-output"
+          cp -a "$RUNNER_TEMP/air-force-tier1-output/." "$NEW_DIR/tier1-tool-output/"
+          python - <<'PY'
+          import os,json,hashlib,pathlib,subprocess
+          sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+          blob=lambda p:subprocess.check_output(['git','hash-object',str(p)],text=True).strip()
+          root=pathlib.Path(os.environ['NEW_DIR'])
+          temp=pathlib.Path(os.environ['RUNNER_TEMP'])
+          status=json.loads((root/'tier1-tool-output/stage3a3-tier1-status.json').read_text())
+          ledger=temp/'air-force-ledger/structured-stage3a2-ledger.csv'
+          snap=temp/'air-force-snapshot/research-stage3a3-tier1-state-manifest.json'
+          assert (root/'parent-0031/structured-stage3a2-ledger.csv').read_bytes()==ledger.read_bytes()
+          receipt={
+             'schema_version':1,
+             'kind':'AIR_FORCE_STAGE3A3_TIER1_EXACT_TOOL_EXECUTION_CHECKPOINT_0032',
+             'status':'COMPLETE',
+             'school_key':'air-force',
+             'research_base_sha':os.environ['RESEARCH_BASE_SHA'],
+             'protected_main_sha':os.environ['MAIN_SHA'],
+             'research_parent_commit_sha':os.environ['SOURCE_SHA'],
+             'workflow_execution_commit_sha':os.environ['GITHUB_SHA'],
+             'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+             'workflow_run_url':f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+             'ledger':{'source_commit':os.environ['SOURCE_SHA'],'source_path':os.environ['LEDGER_REL'],'git_blob_sha':os.environ['LEDGER_BLOB_SHA'],'sha256':sha(ledger),'rows':1928,'regular_neutral':116},
+             'snapshot':{'run_id':int(os.environ['SNAPSHOT_RUN']),'artifact_id':int(os.environ['SNAPSHOT_ARTIFACT_ID']),'name':os.environ['SNAPSHOT_NAME'],'artifact_sha256_digest':os.environ['SNAPSHOT_DIGEST'],'manifest_sha256':sha(snap),'file_count':118,'reciprocal_file_count':115},
+             'tool':{'path':'tools/research_stage3a3_tier1.py','git_blob_sha':'f0027e9ef6ec7e3fc322eec7f2805ee1f927050e','source':'verified protected-main snapshot','algorithm_modified':False},
+             'result_counts':{k:status[k] for k in ('neutral_rows','accepted_count','accepted_complete_count','accepted_partial_count','contradiction_count','unresolved_count','remaining_modern','remaining_historical')},
+             'outcome':'STAGE_3A3_TIER1_COMPLETE_STAY_IN_STAGE_3A3',
+             'no_external_historical_research':True,
+             'no_protected_main_or_published_data_mutation':True
+          }
+          (root/'execution-provenance.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          (root/'README.md').write_text(
+            '# Air Force Stage 3A-3 Tier 1 COMPLETE — checkpoint 0032\n\n'
+            'This checkpoint preserves the entire authenticated checkpoint 0031 under parent-0031/, including all 25 formerly declared members, without editing those bytes. '
+            'The unchanged permanent Tier-1 tool produced the files under tier1-tool-output/; its original status and manifest are preserved byte-for-byte. '
+            'execution-provenance.json binds exact protected main, Research input commit, original ledger blob/SHA-256, authenticated snapshot artifact, original tool blob, Actions run, and result counts. '
+            'The root manifest.json binds all new checkpoint files by SHA-256 and Git blob hash. '
+            'Tier 1 is mechanical accepted-project evidence only; no new historical research or venue inference was performed.\n\n'
+            f'Exact execution: {receipt["workflow_run_url"]}\n\n'
+            'STAGE 3A-3 remains IN PROGRESS. Stop at the Tier 1 boundary; next tier is modern recurring event/site families upon ordinary owner Proceed.\n')
+          filelist=[]
+          for p in sorted(root.rglob('*')):
+            if p.is_file():
+              filelist.append({'path':p.relative_to(root).as_posix(),'sha256':sha(p),'git_blob_sha':blob(p),'size_bytes':p.stat().st_size})
+          (root/'manifest.json').write_text(json.dumps({
+              'schema_version':1,'kind':'AIR_FORCE_STAGE3A3_TIER1_CHECKPOINT_0032_MANIFEST_V1',
+              'status':'TIER1_COMPLETE','school_key':'air-force',
+              'protected_main_sha':os.environ['MAIN_SHA'],
+              'research_parent_commit_sha':os.environ['SOURCE_SHA'],
+              'files':filelist},indent=2,sort_keys=True)+'\n')
+          assert len(filelist)>=33
+          print('CHECKPOINT_PREPARED',len(filelist),'manifest bound files')
+          PY
+          git add "$NEW_DIR"
+          test -n "$(git diff --cached --name-only)"
+          if git diff --cached --name-only | grep -v "^$NEW_DIR/"; then echo 'Outside scope staged' >&2; exit 14; fi
+          git -c user.name='CBH Research Automation' -c user.email='actions@users.noreply.github.com' commit -m 'research(air-force): Stage 3A-3 Tier 1 COMPLETE exact evidence checkpoint 0032'
+          git push origin HEAD:refs/heads/research/air-force
+          echo "CHECKPOINT_0032_COMMITTED_AND_PUSHED"
