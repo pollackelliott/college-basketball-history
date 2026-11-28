@@ -1,28 +1,42 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "nevada-stage2-proposal-0001",
+  "request_id": "nevada-stage2-main-refresh-0001",
   "school_key": "nevada",
-  "operation": "STAGE2_PROPOSAL_REHEARSAL",
-  "previous_control_state_commit": "12f140054164b7304af8ac3d336a3d4cc4523ab3",
+  "operation": "STAGE2_CURRENT_MAIN_REFRESH",
+  "previous_control_state_commit": "6c1d7bc53140dad2b8ff11158ee95a098225e155",
   "previous_control_state_sha256": "303dcd7b9002704c6a2950da3a6df5f63e577b66c48ede961fd5d1fefbbf02d1",
-  "expected_protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "expected_protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
   "target_branch": "data/nevada-onboarding",
   "target_sha": "698639f0c826804b2504f642d1616ac61fb171c4",
-  "stage2_authority": {
+  "phase0_successor": {
+    "path": ".remote-implementation/successors/nevada/nevada-phase0-0002/successor-manifest.json",
+    "sha256": "85f52ca63ff1743ae506c0e7baeec338079213143a474695fbcc4a6b241de009"
+  },
+  "stage2_opponent_display_successor": {
     "path": ".remote-implementation/successors/nevada/nevada-stage2-opponent-display-normalize-0001/successor-manifest.json",
     "sha256": "6e93f1064a7e19c8ba2ba9cabbd2da5f060c223d27efbc9ec07ec27c8435b5e2"
   },
   "integration_freeze_sha256": "6d2097a6a2f2db150b875887e5903aff96f6a0352a9f986d13d813c222745739",
   "semantic_snapshot_sha256": "a00238841cb75ad423568948cbc23f5b2d6b56a8706a820f432ba1763596e317",
-  "decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
-  "recommendation_map": {
-    "path": ".remote-implementation/requests/nevada-stage2-proposal-0001/recommendation-map.json",
-    "sha256": "2664d971fc0b7d258afb924fccdb9b3628ba04360015c140d6053055c34e8ed0"
+  "current_main_refresh_authorization": {
+    "approved": true,
+    "authority_kind": "SCHOOL_STAGE2_DISJOINT_DELEGATED",
+    "authorization_basis": "Existing owner-authorized Nevada Stage 2 Implementation lane, immutable Integration Freeze and independently verified stage2 opponent-display normalization 0001; protected main advanced solely by generic two-file tooling PR #731 (merge 5f33c88ca1ea7d80e0517f42a200f5a2e15833c9). GitHub compare from exact a11cccf base finds protected-main paths only tools/remote_implementation_stage2_proposal.py and tests/test_remote_implementation_stage2_proposal_venue_reconciliation.py; Nevada target paths disjoint. Permanent runner must independently prove the exact merge-base, six frozen school-package member hashes, no historical/shared overlap, clean semantic guard, and CAS/fresh verification."
+  },
+  "phase_continuation": {
+    "kind": "STAGE2_REFRESH_CENSUS_PROPOSAL_V1",
+    "census_request_id": "nevada-stage2-census-0002",
+    "proposal_request_id": "nevada-stage2-proposal-0002",
+    "expected_decision_universe_sha256": "fab8e7e951dd5136fce834b684ac52db2a777e671c4f2891e8f7c5fe9edcd6fc",
+    "recommendation_map": {
+      "path": ".remote-implementation/requests/nevada-stage2-proposal-0001/recommendation-map.json",
+      "sha256": "2664d971fc0b7d258afb924fccdb9b3628ba04360015c140d6053055c34e8ed0"
+    }
   },
   "creation_provenance": {
-    "origin": "Nevada same serialized Implementation Stage 2; owner-pasted advisory 0007 plus fresh permanent decision universe, identity/site-source challenge.",
-    "authorization": "Owner explicitly authorized exact Stage 2 proposal map consolidation and permanent read-only rehearsal; no Research restart, no Owner Gate 1 approval, no tracked basketball mutation, no fill/seal/apply, no Preview, no release or merge. Mapping: 39 identity candidates, 45 selected/48 not-applicable conditionals, 36 definite discrepancies, accomplishment audit retained under review, prospective publication conditional on both owner gates. Site decisions compared against Nevada raw H/A, home chronology and Rock Island tournament locality. Original advisory ZIP/citation paths unavailable; do not treat candidate evidence as owner approval."
+    "origin": "Same serialized Nevada Implementation Stage 2; post-PR-731 generic tooling repair. Exact disjoint current-main refresh plus repository-owned census-to-proposal continuation.",
+    "authorization": "Owner said Proceed after verified generic tool merge. SCHOOL_STAGE2_DISJOINT_DELEGATED only, against exact current protected main and existing Nevada target. Refresh, independent fresh verification, then separate exact census and read-only proposal only if decision universe is unchanged. Preserve 170-decision recommendation map, immutable Research/Integration Freezes, no new historical authority, Owner Gate 1 approval, seal/apply, Preview or release."
   },
   "authority": {
     "owner_gate_1": false,
@@ -32,16 +46,18 @@
     "recovery": false,
     "stage2_census": false,
     "stage2_opponent_display_normalize": false,
-    "stage2_proposal_rehearsal": true,
+    "stage2_proposal_rehearsal": false,
     "stage2_gate1_fill": false,
     "stage2_preseal_rehearsal": false,
     "stage2_gate1_seal": false,
     "stage2_sealed_apply": false,
+    "stage2_current_main_refresh": true,
     "stage2_reconciliation_diagnostic": false,
     "release_readiness": false,
     "release_preview_verify": false,
     "release_gate2_approval": false,
     "release_production_proof": false,
-    "venue_identity_maintenance": false
+    "venue_identity_maintenance": false,
+    "phase0_scope_supersession": false
   }
 }
