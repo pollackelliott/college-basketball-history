@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A2_CHECKPOINT_MANIFEST_V1",
+  "state": "STAGE_3A2_IN_PROGRESS",
+  "school_key": "new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "dd8f17677685411e1a01a3974acac8286fc0b786",
+  "parent_ledger_git_blob_sha": "31bbcd8ca4d6bde395d2aa3313f4818c001c5d34",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2419,
+      "sha256": "a671f1ad904234e543c6c8d759bdec17389be7455147e1e26fcba6f03afe86b4"
+    },
+    {
+      "path": "stage3a2-status.json",
+      "bytes": 2381,
+      "sha256": "9740738cc04301312a3cd90be6b67948d6030fa33dd3c5a4c2f1b205ae0e1a1a"
+    },
+    {
+      "path": "stage3a2-working-ledger.csv",
+      "bytes": 1529404,
+      "sha256": "526f8ed424d2276c181a7f1f730bd5d44e65890ee6ea2acdd69db7eadd775ea3"
+    },
+    {
+      "path": "stage3a2-home-assignments.csv",
+      "bytes": 372785,
+      "sha256": "1b17ae029c50605fc466f51acd91e8aa2c0037c4fdbbb806cbcd7701250faaad"
+    },
+    {
+      "path": "stage3a2-pre-carlisle-building-queue.json",
+      "bytes": 35551,
+      "sha256": "eb2f3ec664cd251619e96c49868799b802e176cafc915996a78499fb7b2c51e3"
+    },
+    {
+      "path": "stage3a2-exception-candidates.csv",
+      "bytes": 34092,
+      "sha256": "108e540258e9c2f4f0645ee96dce1591074c9c04217b7745619d0b0c0f644106"
+    },
+    {
+      "path": "stage3a2-season-home-census.csv",
+      "bytes": 2936,
+      "sha256": "f149161a3de7194bda8fdceb48221dfb0eaf583fd834163481fca3ee02ccde46"
+    },
+    {
+      "path": "stage4-authoring/venues.csv",
+      "bytes": 2327,
+      "sha256": "d3f8a9d90e7e7b453891c7a04486a7d2091ee371d59f17295c8d5511991f1935"
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "bytes": 242748,
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44",
+      "git_blob_sha": "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "bytes": 840,
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e",
+      "git_blob_sha": "0c1e3d61cebd444008e8c6e520c78e6444843b70"
+    }
+  ]
+}
