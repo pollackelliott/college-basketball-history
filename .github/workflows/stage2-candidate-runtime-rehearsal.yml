@@ -67,6 +67,10 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Test exact mixed-census route isolation
+        run: |
+          (cd candidate && python -m unittest discover -s tests \
+            -p 'test_stage2_registered_key_candidate_route.py' -v)
       - name: Test frozen venue-count compatibility guard
         shell: bash
         run: |
@@ -461,6 +465,14 @@ jobs:
                       or int(preflight.get('decision_count', -1)) != 0
                   ):
                       fail('blocked census does not bind exact verified last operation')
+                  # Route only the hash-bound, mixed registered-key case through
+                  # its own full candidate rebase, never through display sync.
+                  import sys
+                  sys.path.insert(0, str(Path('candidate/tools').resolve()))
+                  from stage2_registered_key_candidate_route import candidate_route
+                  if candidate_route(Path('control'), control_head, last,
+                                     manifest, checkpoint, raw):
+                      mode = 'BLOCKED_CENSUS_REGISTERED_KEY_REBASE'
               elif (last.get('operation') == 'STAGE2_CURRENT_MAIN_REFRESH'
                     and last.get('fresh_runner_verification') == 'PASS'
                     and last.get('remote_stage2_current_main_refresh_equivalence') == 'PASS'):
@@ -642,6 +654,45 @@ jobs:
           print('EXACT_PHASE0_AUTHENTICATED_WITH_CANDIDATE=PASS')
           print('CANDIDATE_STAGE2_CENSUS=' + status)
           print('TRACKED_STAGE2_MUTATION=NONE')
+          PY
+
+      - name: Check out exact registered-key target for candidate route
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'BLOCKED_CENSUS_REGISTERED_KEY_REBASE'
+        uses: actions/checkout@v4
+        with:
+          ref: f67371c2380b7b28255e525922e780a65737a475
+          path: target
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Replay exact authenticated registered-key case (not display sync)
+        if: >-
+          github.event_name == 'pull_request' &&
+          steps.authority.outputs.mode == 'BLOCKED_CENSUS_REGISTERED_KEY_REBASE'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C candidate rev-parse HEAD)" = "${{ steps.authority.outputs.candidate_sha }}"
+          test "$(git -C control rev-parse HEAD)" = "${{ steps.authority.outputs.control_commit }}"
+          test "$(git -C target rev-parse HEAD)" = f67371c2380b7b28255e525922e780a65737a475
+          python candidate/tools/stage2_candidate_registered_key_rebase_rehearsal.py \
+            --runtime candidate --target target --control control \
+            | tee /tmp/grand-canyon-registered-key-candidate.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          proof = json.loads(Path('/tmp/grand-canyon-registered-key-candidate.json').read_text())
+          assert proof['status'] == 'EXACT_CANDIDATE_RUNTIME_REPLAY_PASS', proof
+          assert proof['registered_key_rebase_cells'] == 2, proof
+          assert proof['after_census_blockers'] == 39, proof
+          assert proof['only_display_blockers'] is True, proof
+          assert proof['semantic_drift'] == 'PASS', proof
+          assert proof['repository_validation'] == 'PASS', proof
+          assert proof['tracked_publication'] == 'NONE', proof
+          assert proof['original_game_count'] == 2147, proof
+          assert proof['original_opponent_count'] == 491, proof
           PY
 
       - name: Replay exact blocked census with candidate tooling
