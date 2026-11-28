@@ -3849,6 +3849,19 @@
       "ties": 0
     },
     {
+      "opponent_key": "olsens-swedes",
+      "opponent_name": "Olsen's Swedes",
+      "current_d1": false,
+      "public_page_enabled": false,
+      "current_conference": null,
+      "first_season": "1927-1928",
+      "last_season": "1935-1936",
+      "games": 3,
+      "wins": 1,
+      "losses": 2,
+      "ties": 0
+    },
+    {
       "opponent_key": "olsens-nordics",
       "opponent_name": "Olsen’s Nordics",
       "current_d1": false,
@@ -3859,19 +3872,6 @@
       "games": 1,
       "wins": 0,
       "losses": 1,
-      "ties": 0
-    },
-    {
-      "opponent_key": "olsens-swedes",
-      "opponent_name": "Olsen’s Swedes",
-      "current_d1": false,
-      "public_page_enabled": false,
-      "current_conference": null,
-      "first_season": "1927-1928",
-      "last_season": "1935-1936",
-      "games": 3,
-      "wins": 1,
-      "losses": 2,
       "ties": 0
     },
     {
@@ -11517,7 +11517,7 @@
       "game_date": null,
       "date_precision": "SEASON",
       "opponent_key": "olsens-swedes",
-      "opponent_name": "Olsen’s Swedes",
+      "opponent_name": "Olsen's Swedes",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 30,
@@ -14817,7 +14817,7 @@
       "game_date": "1934-12-17",
       "date_precision": "EXACT",
       "opponent_key": "olsens-swedes",
-      "opponent_name": "Olsen’s Swedes",
+      "opponent_name": "Olsen's Swedes",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 32,
@@ -15267,7 +15267,7 @@
       "game_date": "1935-12-18",
       "date_precision": "EXACT",
       "opponent_key": "olsens-swedes",
-      "opponent_name": "Olsen’s Swedes",
+      "opponent_name": "Olsen's Swedes",
       "opponent_current_d1": false,
       "opponent_public_page_enabled": false,
       "team_score": 42,
