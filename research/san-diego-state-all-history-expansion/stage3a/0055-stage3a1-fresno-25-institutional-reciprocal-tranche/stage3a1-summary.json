@@ -1,0 +1,43 @@
+{
+  "cumulative_documented_contradiction_rows": 6,
+  "cumulative_site_census": {
+    "HOME": 44,
+    "NEUTRAL": 1,
+    "OPPONENT_HOME": 410,
+    "UNKNOWN": 588
+  },
+  "cumulative_supported_site_decisions": 455,
+  "cumulative_terminal_researched_unresolved_han": 4,
+  "cumulative_unknown_regular": 588,
+  "fresno_class_not_yet_reviewed": 8,
+  "fresno_independent_rows_reviewed": 25,
+  "fresno_rows_in_0054_unknown": 33,
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "independent_adjudication_limit_per_turn": 25,
+  "kind": "SDSU_STAGE3A1_0055_FRESNO_25_ONE_FAMILY_V1",
+  "new_researched_unresolved_han": 4,
+  "new_supported_site_decisions": 21,
+  "next_bounded_assignment": "Continue Stage 3A-1 with remaining coherent institutional source families and accepted-project reuse; preserve four terminalized Fresno disagreements; do not rerun this Fresno class without new decisive evidence",
+  "no_blank_site_default_to_home": true,
+  "no_geography_only_inference": true,
+  "no_historical_game_facts_changed": true,
+  "parent_research_head": "d88765d6f2168ac7f0a0a73b3fea184f75ead805",
+  "parent_stage3a1_checkpoint": "0054-stage3a1-accepted-project-source-class-pass",
+  "parent_stage3a1_site_decisions": 434,
+  "postseason_stage3b_handoff": 43,
+  "previous_arizona_reciprocal_date_conflicts_preserved": 2,
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "regular_season_games": 1043,
+  "school_key": "san-diego-state",
+  "source_authority": {
+    "fresno_2015_16": "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+    "fresno_2018_19": "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf",
+    "target_guide": "SDSU 2026-27 media guide pp. 88-93 (accepted Stage 1)"
+  },
+  "stage": "STAGE_3A1",
+  "stage3a1_complete": false,
+  "stage3a2_started": false,
+  "stage3a3_started": false,
+  "status": "IN_PROGRESS",
+  "total_games": 1086
+}

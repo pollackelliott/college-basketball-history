@@ -1,0 +1,56 @@
+[
+  {
+    "id": "SDSU-EXP-S1-1945-46-0005",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-27",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00570",
+    "target_month_day": "12-28"
+  },
+  {
+    "id": "SDSU-EXP-S1-1945-46-0006",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-28",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00571",
+    "target_month_day": "12-29"
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1941-42-0011",
+    "kind": "OFFICIAL_EDITION_SITE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1946-47-0020",
+    "kind": "ACCEPTED_SDSU_V_FRESNO_SCORE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1946-47-0021",
+    "kind": "FRESNO_EDITION_DATE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1960-61-0021",
+    "kind": "OFFICIAL_EDITION_SITE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  }
+]
