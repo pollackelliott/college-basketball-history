@@ -1,0 +1,319 @@
+{
+  "kind": "SDSU_STAGE2_NAMED_MILITARY_UNIT_COHORT_0039_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "prior_research_head": "e2c74a2d1344b56bf1882d10a27fb867ee562a65",
+  "prior_checkpoint": "0038-stage2-historical-local-educational-opponents",
+  "prior_mapping_sha256": "ed4ec6e63c4b9dc9b703c8f08099793db6f648daebbdc1b067ed2b8f24fa623e",
+  "prior_unresolved_queue_sha256": "c28c2a61233610b795d4909804a3410137e9806bb772fb7d1734f0b76cd156cc",
+  "cohort_rule": "Named military posts, wartime training bases, and hospital/named unit opponents; explicit institutional continuity for identical labels and source notation variants; no aggregation by geography or service branch. 10 distinct families, 17 labels, 32 accepted games.",
+  "source_school_raw_labels_preserved": true,
+  "original_stage1_accepted_games": 1086,
+  "existing_181_labels_byte_for_byte_preserved": true,
+  "added_source_labels": 17,
+  "added_games": 32,
+  "distinct_provisional_non_d1_families": 10,
+  "families": [
+    {
+      "key": "north-island-naval-air-station",
+      "name": "Naval Air Station North Island",
+      "kind": "NAVAL_AIR_STATION",
+      "source_era": "1924-25..1945-46",
+      "identity_basis": "U.S. Navy documents North Island commissioned as a naval air station in 1917, with its contemporary designation NAS San Diego before 1955. Source North Island NAS labels refer to this station team; do not combine with a generic San Diego Navy source label.",
+      "source_urls": [
+        "https://cnrsw.cnic.navy.mil/Installations/NAVBASE-Coronado/About/Installations/Naval-Air-Station-North-Island/",
+        "https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/b/building-the-navys-bases/building-the-navys-bases-vol-1-part-II.html"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at North Island NAS",
+          "source_game_count": 1,
+          "first_season": "1945-46",
+          "last_season": "1945-46",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX"
+        },
+        {
+          "literal": "North Island NAS",
+          "source_game_count": 5,
+          "first_season": "1924-25",
+          "last_season": "1945-46",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        },
+        {
+          "literal": "North Island NAS (D)",
+          "source_game_count": 2,
+          "first_season": "1931-32",
+          "last_season": "1931-32",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "san-diego-amphibious-training-base",
+      "name": "San Diego Amphibious Training Base",
+      "kind": "NAVAL_AMPHIBIOUS_TRAINING_BASE",
+      "source_era": "1944-45..1945-46",
+      "identity_basis": "The Navy identifies the World War II amphibious training base created by 1943 authorization and commissioned January 1944 in Coronado. This military facility/team is separate from North Island NAS and Navy's San Diego repair base; location is institutional identity only, not H/A/N evidence.",
+      "source_urls": [
+        "https://cnrsw.cnic.navy.mil/Installations/NAVBASE-Coronado/About/Installations/Naval-Amphibious-Base-Coronado/",
+        "https://www.navfac.navy.mil/Divisions/Environmental/Products-and-Services/Environmental-Restoration/Southwest/Coronado-NAB/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at San Diego Amphibious Training Base",
+          "source_game_count": 2,
+          "first_season": "1944-45",
+          "last_season": "1945-46",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX"
+        },
+        {
+          "literal": "San Diego Amphibious Training Base",
+          "source_game_count": 3,
+          "first_season": "1944-45",
+          "last_season": "1945-46",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "santa-ana-army-air-base",
+      "name": "Santa Ana Army Air Base",
+      "kind": "ARMY_AIR_BASE",
+      "source_era": "1942-43..1944-45",
+      "identity_basis": "Santa Ana Army Air Base established and activated February 1942, documented by Costa Mesa Historical Society and Army historical materials. Not Santa Ana Naval Air Station in Tustin or Santa Ana Junior College.",
+      "source_urls": [
+        "https://costamesahistory.org/learn/saaab/",
+        "https://militarymuseum.org/SantaAnaAAB.html"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at Santa Ana Army Air Base",
+          "source_game_count": 4,
+          "first_season": "1942-43",
+          "last_season": "1944-45",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX"
+        },
+        {
+          "literal": "Santa Ana Army Air Base",
+          "source_game_count": 3,
+          "first_season": "1942-43",
+          "last_season": "1944-45",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "camp-callan-57th-battalion",
+      "name": "Camp Callan 57th Battalion",
+      "kind": "NAMED_ARMY_BATTALION",
+      "source_era": "1942-43",
+      "identity_basis": "San Diego History Center identifies Camp Callan as a World War II Army training center constructed in 1940; original SDSU source identifies the 57th Battalion specifically. Keep battalion team separate from any general Camp Callan team. Historical game series independently appears as two contests in 1942-43.",
+      "source_urls": [
+        "https://sandiegohistory.org/collection/photographs/ac025/",
+        "https://archivesearch.csusm.edu/subjects/215",
+        "https://mcubed.net/ncaab/series/sandst/nd1_campcallan57thbattalion.shtml"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Camp Callan 57th Battalion",
+          "source_game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        },
+        {
+          "literal": "Camp Callan 57th Battalion (D)",
+          "source_game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "san-diego-naval-hospital",
+      "name": "San Diego Naval Hospital",
+      "kind": "NAVAL_MEDICAL_INSTALLATION",
+      "source_era": "1927-28..1944-45",
+      "identity_basis": "U.S. Navy and San Diego History Center independently document Naval Hospital San Diego in Balboa Park from 1922 and during the war. Identity is its hospital team, not naval-air-station, San Diego Navy, or San Diego Marines team.",
+      "source_urls": [
+        "https://www.navy.mil/DesktopModules/ArticleCS/Print.aspx?Article=3571705&ModuleId=685&PortalId=1",
+        "https://sandiegohistory.org/archives/books/risingtide/ch2/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "San Diego Naval Hospital",
+          "source_game_count": 3,
+          "first_season": "1927-28",
+          "last_season": "1944-45",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        },
+        {
+          "literal": "San Diego Naval Hospital (D)",
+          "source_game_count": 1,
+          "first_season": "1928-29",
+          "last_season": "1928-29",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "section-base-point-loma",
+      "name": "Section Base–Point Loma",
+      "kind": "SOURCE_NAMED_NAVAL_SECTION_BASE",
+      "source_era": "1942-43",
+      "identity_basis": "The original source specifically names a Section Base–Point Loma team. 1941 Navy filing manual identifies San Diego Section Base and separate Point Loma repair base, while NPS documents Section Base boiler at Point Loma. Exact historical administrative relationship is not inferred: retain uniquely named source team as provisional, distinct from Fort Rosecrans and other Point Loma facilities.",
+      "source_urls": [
+        "https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/n/navy-filing-manual-1941.html",
+        "https://npshistory.com/publications/cabr/shadows/chap5.htm"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Section Base-Point Loma",
+          "source_game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        },
+        {
+          "literal": "Section Base-Point Loma (D)",
+          "source_game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "fort-rosecrans",
+      "name": "Fort Rosecrans",
+      "kind": "ARMY_COAST_ARTILLERY_POST",
+      "source_era": "1945-46",
+      "identity_basis": "Fort Rosecrans was a U.S. Army coastal-defense installation on Point Loma into the 1940s, documented by NPS and Navy. Do not merge with Naval Section Base Point Loma, Navy sub base, or another garrison.",
+      "source_urls": [
+        "https://www.nps.gov/cabr/learn/historyculture/military-history-and-coastal-defense.htm",
+        "https://cnrsw.cnic.navy.mil/Installations/NAVBASE-Point-Loma/About/History/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "Fort Rosecrans",
+          "source_game_count": 1,
+          "first_season": "1945-46",
+          "last_season": "1945-46",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "san-bernardino-army-air-base",
+      "name": "San Bernardino Army Air Base",
+      "kind": "ARMY_AIRFIELD",
+      "source_era": "1943-44",
+      "identity_basis": "U.S. Air Force Civil Engineer Center histories establish name San Bernardino Army Airfield in 1942, later renamed Norton. Source's Army Air Base descriptive label retained; distinct from Santa Ana Army Air Base.",
+      "source_urls": [
+        "https://www.afcec.af.mil/Home/BRAC/Norton/History/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "San Bernardino Army Air Base",
+          "source_game_count": 1,
+          "first_season": "1943-44",
+          "last_season": "1943-44",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "luke-air-force-base",
+      "name": "Luke Air Force Base",
+      "kind": "AIR_FORCE_BASE",
+      "source_era": "1953-54",
+      "identity_basis": "U.S. Air Force Luke heritage history establishes the reactivated installation as Luke Air Force Base on February 1, 1951, covering the source 1953-54 era. Source 'at' token is not H/A/N inference.",
+      "source_urls": [
+        "https://www.luke.af.mil/About-Us/Fact-Sheets/Air-Park/"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "at Luke Air Force Base (Ariz.)",
+          "source_game_count": 1,
+          "first_season": "1953-54",
+          "last_season": "1953-54",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": "AT_PREFIX"
+        }
+      ]
+    },
+    {
+      "key": "presidio-san-francisco",
+      "name": "Presidio of San Francisco",
+      "kind": "US_ARMY_POST",
+      "source_era": "1957-58",
+      "identity_basis": "National Park Service documents San Francisco Presidio functioning as U.S. Army installation and Sixth Army headquarters in 1950s. Specific post team remains distinct from San Francisco colleges or San Francisco-based military units.",
+      "source_urls": [
+        "https://www.nps.gov/prsf/learn/historyculture/us-military-period.htm"
+      ],
+      "accepted_rows": [
+        {
+          "literal": "San Francisco Presidio",
+          "source_game_count": 1,
+          "first_season": "1957-58",
+          "last_season": "1957-58",
+          "game_types": "REGULAR_SEASON",
+          "source_prefix_markers": ""
+        }
+      ]
+    }
+  ],
+  "separations_enforced": [
+    "North Island NAS distinct from generic San Diego Navy label",
+    "San Diego Amphibious Training Base distinct from North Island NAS",
+    "Santa Ana Army Air Base distinct from Santa Ana Naval Air Station (Tustin)",
+    "Section Base–Point Loma distinct from Fort Rosecrans and unrelated Point Loma organizations",
+    "San Diego Naval Hospital distinct from broader San Diego Navy",
+    "Camp Callan 57th Battalion distinct from generic Camp Callan",
+    "Luke AFB and San Bernardino Army Air Base are different facilities"
+  ],
+  "unadjudicated_conspicuous_literals": [
+    "San Diego Marines",
+    "San Diego Marines (D)",
+    "San Diego Navy",
+    "San Diego Navy (CH)",
+    "at San Diego Navy",
+    "MCRD",
+    "Fleet Air",
+    "Air Pac (Fleet Air)"
+  ],
+  "unadjudicated_reason": "Potential multi-unit aggregate names, chronologically non-equivalent official labels or insufficient evidence for identity merges; remain in exact residual queue.",
+  "cumulative_labels": 198,
+  "cumulative_mapped_games": 862,
+  "distinct_canonical_keys": 88,
+  "remaining_unresolved_literals": 143,
+  "remaining_games": 224,
+  "stage2_game_level_ledger_authored": false,
+  "three_unidentified_1921_22_results_outside_canonical_games": 3,
+  "source_game_rows_mutated": 0,
+  "site_type_inferences": 0,
+  "venue_inferences": 0,
+  "non_d1_owner_scan_pending": true,
+  "global_shared_registration_performed": false,
+  "stage2_complete": false,
+  "stage3_started": false
+}
