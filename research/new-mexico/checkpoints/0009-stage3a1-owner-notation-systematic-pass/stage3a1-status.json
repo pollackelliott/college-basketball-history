@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A1_OWNER_ACCEPTED_SYSTEMATIC_NOTATION_PASS_V1",
+  "state": "STAGE_3A1_IN_PROGRESS",
+  "school_key": "new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "06f3448c5f832451178fcdb86bf65f840f523a4f",
+  "parent_working_ledger_blob_sha": "e46316ba4eacfb97659747fd3c414fa613f9766c",
+  "stage2_original_accepted_ledger_blob_sha": "8c9c501f35a35a8813c250bad20c74783e6f9a8e",
+  "accepted_owner_ruling": "2026-11-28: at/@ indicate road, vs strongly neutral, absent notation home for seasons using explicit at/vs convention; footnoted exceptions require preservation and review",
+  "evidence_kind": "OWNER_INTERPRETED_SOURCE_NOTATION_CONVENTION_CORROBORATED_BY_OFFICIAL_UNM_SCHEDULES",
+  "official_example_urls": [
+    "https://golobos.com/sports/mbball/schedule/season/2020-21",
+    "https://golobos.com/sports/mbball/schedule/season/2025-26",
+    "https://golobos.com/sports/mbball/schedule/season/2024-25"
+  ],
+  "applicability": {
+    "notated_seasons": 114,
+    "unnotated_seasons": 9,
+    "no_notation_home_requires_season_at_or_vs": true,
+    "only_game_type": "REGULAR_SEASON",
+    "site_type_must_be_unknown_before_mutation": true,
+    "unrecognized_token_abort": true,
+    "independent_row_level_historical_adjudications": 0
+  },
+  "previous_individually_authenticated_site_count": 25,
+  "newly_resolved_from_uniform_classification": 2669,
+  "full_regular_season_population": 2727,
+  "site_census": {
+    "HOME": 1533,
+    "OPPONENT_HOME": 1062,
+    "NEUTRAL": 99,
+    "UNKNOWN": 33
+  },
+  "remaining_unknown_games": 33,
+  "class_deltas": {
+    "HOME": 1519,
+    "OPPONENT_HOME": 1053,
+    "NEUTRAL": 97
+  },
+  "prior_classification_conflicts": [],
+  "footnoted_or_annotated_source_rows_in_newly_resolved_population": 384,
+  "footnote_policy": "source_opponent_annotation, literal opponent, and all raw/source fields kept byte-identical; footnotes are NOT automatically treated as venue/site evidence. Specific contradictory supported footnote overrides should be reconciled as exceptions before Stage3A1 closeout.",
+  "venue_research_not_started": true,
+  "postseason_game_count_untouched": 164,
+  "next_bounded_assignment": "Stage 3A-1 remaining 33 early unmarked rows: use authoritative institutional/reciprocal sources systematically, inspect footnoted exceptional evidence and contradictory dated games; closeout only after population-level exception challenge.",
+  "stage3a1_completed": false
+}

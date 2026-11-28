@@ -1,0 +1,995 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A1_NOTATION_ELIGIBILITY_CENSUS_V1",
+  "seasons": {
+    "notatedSeasons": [
+      {
+        "season": "1904-05",
+        "counts": {
+          "at": 1,
+          "vs": 0,
+          "blank": 0
+        }
+      },
+      {
+        "season": "1906-07",
+        "counts": {
+          "at": 2,
+          "vs": 0,
+          "blank": 0
+        }
+      },
+      {
+        "season": "1909-10",
+        "counts": {
+          "at": 1,
+          "vs": 0,
+          "blank": 4
+        }
+      },
+      {
+        "season": "1910-11",
+        "counts": {
+          "at": 1,
+          "vs": 0,
+          "blank": 4
+        }
+      },
+      {
+        "season": "1911-12",
+        "counts": {
+          "at": 1,
+          "vs": 0,
+          "blank": 2
+        }
+      },
+      {
+        "season": "1912-13",
+        "counts": {
+          "at": 1,
+          "vs": 0,
+          "blank": 5
+        }
+      },
+      {
+        "season": "1913-14",
+        "counts": {
+          "at": 1,
+          "vs": 0,
+          "blank": 0
+        }
+      },
+      {
+        "season": "1914-15",
+        "counts": {
+          "at": 2,
+          "vs": 0,
+          "blank": 7
+        }
+      },
+      {
+        "season": "1916-17",
+        "counts": {
+          "at": 1,
+          "vs": 0,
+          "blank": 4
+        }
+      },
+      {
+        "season": "1918-19",
+        "counts": {
+          "at": 2,
+          "vs": 0,
+          "blank": 4
+        }
+      },
+      {
+        "season": "1922-23",
+        "counts": {
+          "at": 5,
+          "vs": 0,
+          "blank": 4
+        }
+      },
+      {
+        "season": "1923-24",
+        "counts": {
+          "at": 4,
+          "vs": 0,
+          "blank": 4
+        }
+      },
+      {
+        "season": "1924-25",
+        "counts": {
+          "at": 4,
+          "vs": 0,
+          "blank": 9
+        }
+      },
+      {
+        "season": "1925-26",
+        "counts": {
+          "at": 6,
+          "vs": 0,
+          "blank": 8
+        }
+      },
+      {
+        "season": "1926-27",
+        "counts": {
+          "at": 6,
+          "vs": 0,
+          "blank": 11
+        }
+      },
+      {
+        "season": "1927-28",
+        "counts": {
+          "at": 3,
+          "vs": 0,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1928-29",
+        "counts": {
+          "at": 9,
+          "vs": 0,
+          "blank": 14
+        }
+      },
+      {
+        "season": "1929-30",
+        "counts": {
+          "at": 6,
+          "vs": 0,
+          "blank": 14
+        }
+      },
+      {
+        "season": "1930-31",
+        "counts": {
+          "at": 8,
+          "vs": 0,
+          "blank": 8
+        }
+      },
+      {
+        "season": "1931-32",
+        "counts": {
+          "at": 8,
+          "vs": 0,
+          "blank": 8
+        }
+      },
+      {
+        "season": "1932-33",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 9
+        }
+      },
+      {
+        "season": "1933-34",
+        "counts": {
+          "at": 8,
+          "vs": 0,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1934-35",
+        "counts": {
+          "at": 7,
+          "vs": 0,
+          "blank": 13
+        }
+      },
+      {
+        "season": "1935-36",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1936-37",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1937-38",
+        "counts": {
+          "at": 9,
+          "vs": 0,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1938-39",
+        "counts": {
+          "at": 13,
+          "vs": 1,
+          "blank": 11
+        }
+      },
+      {
+        "season": "1939-40",
+        "counts": {
+          "at": 13,
+          "vs": 0,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1940-41",
+        "counts": {
+          "at": 9,
+          "vs": 2,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1941-42",
+        "counts": {
+          "at": 10,
+          "vs": 3,
+          "blank": 9
+        }
+      },
+      {
+        "season": "1942-43",
+        "counts": {
+          "at": 7,
+          "vs": 1,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1943-44",
+        "counts": {
+          "at": 2,
+          "vs": 0,
+          "blank": 11
+        }
+      },
+      {
+        "season": "1944-45",
+        "counts": {
+          "at": 4,
+          "vs": 0,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1945-46",
+        "counts": {
+          "at": 8,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "1946-47",
+        "counts": {
+          "at": 8,
+          "vs": 0,
+          "blank": 10
+        }
+      },
+      {
+        "season": "1947-48",
+        "counts": {
+          "at": 17,
+          "vs": 0,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1948-49",
+        "counts": {
+          "at": 8,
+          "vs": 4,
+          "blank": 11
+        }
+      },
+      {
+        "season": "1949-50",
+        "counts": {
+          "at": 12,
+          "vs": 3,
+          "blank": 9
+        }
+      },
+      {
+        "season": "1950-51",
+        "counts": {
+          "at": 11,
+          "vs": 3,
+          "blank": 10
+        }
+      },
+      {
+        "season": "1951-52",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 13
+        }
+      },
+      {
+        "season": "1952-53",
+        "counts": {
+          "at": 11,
+          "vs": 2,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1953-54",
+        "counts": {
+          "at": 8,
+          "vs": 0,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1954-55",
+        "counts": {
+          "at": 14,
+          "vs": 0,
+          "blank": 10
+        }
+      },
+      {
+        "season": "1955-56",
+        "counts": {
+          "at": 9,
+          "vs": 2,
+          "blank": 11
+        }
+      },
+      {
+        "season": "1956-57",
+        "counts": {
+          "at": 14,
+          "vs": 2,
+          "blank": 10
+        }
+      },
+      {
+        "season": "1957-58",
+        "counts": {
+          "at": 9,
+          "vs": 0,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1958-59",
+        "counts": {
+          "at": 9,
+          "vs": 1,
+          "blank": 12
+        }
+      },
+      {
+        "season": "1959-60",
+        "counts": {
+          "at": 13,
+          "vs": 2,
+          "blank": 10
+        }
+      },
+      {
+        "season": "1960-61",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 13
+        }
+      },
+      {
+        "season": "1961-62",
+        "counts": {
+          "at": 12,
+          "vs": 1,
+          "blank": 13
+        }
+      },
+      {
+        "season": "1962-63",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 13
+        }
+      },
+      {
+        "season": "1963-64",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 14
+        }
+      },
+      {
+        "season": "1964-65",
+        "counts": {
+          "at": 10,
+          "vs": 1,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1965-66",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 13
+        }
+      },
+      {
+        "season": "1966-67",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1967-68",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1968-69",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 14
+        }
+      },
+      {
+        "season": "1969-70",
+        "counts": {
+          "at": 10,
+          "vs": 2,
+          "blank": 14
+        }
+      },
+      {
+        "season": "1970-71",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1971-72",
+        "counts": {
+          "at": 9,
+          "vs": 3,
+          "blank": 14
+        }
+      },
+      {
+        "season": "1972-73",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 14
+        }
+      },
+      {
+        "season": "1973-74",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1974-75",
+        "counts": {
+          "at": 10,
+          "vs": 1,
+          "blank": 15
+        }
+      },
+      {
+        "season": "1975-76",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1976-77",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1977-78",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "1978-79",
+        "counts": {
+          "at": 11,
+          "vs": 1,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1979-80",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1980-81",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1981-82",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1982-83",
+        "counts": {
+          "at": 12,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "1983-84",
+        "counts": {
+          "at": 11,
+          "vs": 2,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1984-85",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1985-86",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "1986-87",
+        "counts": {
+          "at": 9,
+          "vs": 3,
+          "blank": 19
+        }
+      },
+      {
+        "season": "1987-88",
+        "counts": {
+          "at": 12,
+          "vs": 2,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1988-89",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "1989-90",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1990-91",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "1991-92",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1992-93",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1993-94",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1994-95",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1995-96",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "1996-97",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "1997-98",
+        "counts": {
+          "at": 10,
+          "vs": 1,
+          "blank": 16
+        }
+      },
+      {
+        "season": "1998-99",
+        "counts": {
+          "at": 9,
+          "vs": 0,
+          "blank": 20
+        }
+      },
+      {
+        "season": "1999-00",
+        "counts": {
+          "at": 9,
+          "vs": 0,
+          "blank": 20
+        }
+      },
+      {
+        "season": "2000-01",
+        "counts": {
+          "at": 11,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "2001-02",
+        "counts": {
+          "at": 9,
+          "vs": 0,
+          "blank": 19
+        }
+      },
+      {
+        "season": "2002-03",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 17
+        }
+      },
+      {
+        "season": "2003-04",
+        "counts": {
+          "at": 9,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "2004-05",
+        "counts": {
+          "at": 10,
+          "vs": 0,
+          "blank": 19
+        }
+      },
+      {
+        "season": "2005-06",
+        "counts": {
+          "at": 11,
+          "vs": 1,
+          "blank": 17
+        }
+      },
+      {
+        "season": "2006-07",
+        "counts": {
+          "at": 11,
+          "vs": 2,
+          "blank": 18
+        }
+      },
+      {
+        "season": "2007-08",
+        "counts": {
+          "at": 13,
+          "vs": 0,
+          "blank": 18
+        }
+      },
+      {
+        "season": "2008-09",
+        "counts": {
+          "at": 12,
+          "vs": 2,
+          "blank": 17
+        }
+      },
+      {
+        "season": "2009-10",
+        "counts": {
+          "at": 12,
+          "vs": 1,
+          "blank": 17
+        }
+      },
+      {
+        "season": "2010-11",
+        "counts": {
+          "at": 12,
+          "vs": 2,
+          "blank": 16
+        }
+      },
+      {
+        "season": "2011-12",
+        "counts": {
+          "at": 10,
+          "vs": 4,
+          "blank": 15
+        }
+      },
+      {
+        "season": "2012-13",
+        "counts": {
+          "at": 11,
+          "vs": 3,
+          "blank": 16
+        }
+      },
+      {
+        "season": "2013-14",
+        "counts": {
+          "at": 10,
+          "vs": 5,
+          "blank": 15
+        }
+      },
+      {
+        "season": "2014-15",
+        "counts": {
+          "at": 12,
+          "vs": 3,
+          "blank": 15
+        }
+      },
+      {
+        "season": "2015-16",
+        "counts": {
+          "at": 12,
+          "vs": 3,
+          "blank": 15
+        }
+      },
+      {
+        "season": "2016-17",
+        "counts": {
+          "at": 11,
+          "vs": 3,
+          "blank": 15
+        }
+      },
+      {
+        "season": "2017-18",
+        "counts": {
+          "at": 12,
+          "vs": 2,
+          "blank": 16
+        }
+      },
+      {
+        "season": "2018-19",
+        "counts": {
+          "at": 12,
+          "vs": 1,
+          "blank": 16
+        }
+      },
+      {
+        "season": "2019-20",
+        "counts": {
+          "at": 11,
+          "vs": 2,
+          "blank": 18
+        }
+      },
+      {
+        "season": "2020-21",
+        "counts": {
+          "at": 11,
+          "vs": 10,
+          "blank": 0
+        }
+      },
+      {
+        "season": "2021-22",
+        "counts": {
+          "at": 11,
+          "vs": 2,
+          "blank": 18
+        }
+      },
+      {
+        "season": "2022-23",
+        "counts": {
+          "at": 11,
+          "vs": 1,
+          "blank": 19
+        }
+      },
+      {
+        "season": "2023-24",
+        "counts": {
+          "at": 11,
+          "vs": 4,
+          "blank": 16
+        }
+      },
+      {
+        "season": "2024-25",
+        "counts": {
+          "at": 11,
+          "vs": 3,
+          "blank": 17
+        }
+      },
+      {
+        "season": "2025-26",
+        "counts": {
+          "at": 12,
+          "vs": 2,
+          "blank": 17
+        }
+      }
+    ],
+    "unnotatedSeasons": [
+      {
+        "season": "1899-00",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 1
+        }
+      },
+      {
+        "season": "1901-02",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 2
+        }
+      },
+      {
+        "season": "1902-03",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 3
+        }
+      },
+      {
+        "season": "1905-06",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 4
+        }
+      },
+      {
+        "season": "1907-08",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 6
+        }
+      },
+      {
+        "season": "1908-09",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 1
+        }
+      },
+      {
+        "season": "1915-16",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 11
+        }
+      },
+      {
+        "season": "1919-20",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 3
+        }
+      },
+      {
+        "season": "1921-22",
+        "counts": {
+          "at": 0,
+          "vs": 0,
+          "blank": 2
+        }
+      }
+    ]
+  },
+  "annotated_newly_resolved_count": 384
+}

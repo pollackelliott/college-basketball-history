@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A1_SYSTEMATIC_PASS_MANIFEST_V1",
+  "state": "STAGE_3A1_IN_PROGRESS",
+  "school_key": "new-mexico",
+  "parent_research_commit_sha": "06f3448c5f832451178fcdb86bf65f840f523a4f",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_ledger_git_blob_sha": "e46316ba4eacfb97659747fd3c414fa613f9766c",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2130,
+      "sha256": "40586ea71620fae327aecea1f857b051fde05f2400da599f7b932f4dd5d46bbb"
+    },
+    {
+      "path": "stage3a1-status.json",
+      "bytes": 2513,
+      "sha256": "26a44dbd9d8fbd40f8a206eccdb99e383694b33b7eda56ae8edebf748da23a7e"
+    },
+    {
+      "path": "stage3a1-working-ledger.csv",
+      "bytes": 1209803,
+      "sha256": "78878a533bc1ff12df11e29a821e5ed8f5f985cb08dbf59ce812b1fb55df5704"
+    },
+    {
+      "path": "stage3a1-systematic-site-delta.csv",
+      "bytes": 587858,
+      "sha256": "feff37d25fe2133f69080917b9e1753115eb5493709c0aaed7a5acb562207869"
+    },
+    {
+      "path": "stage3a1-residual-unknown.json",
+      "bytes": 10322,
+      "sha256": "bff88b208043a92286660f07dcdf459e6c91d3ae4b209c4c4d3b97b200aaa5f9"
+    },
+    {
+      "path": "stage3a1-notation-season-census.json",
+      "bytes": 16987,
+      "sha256": "17092d970537e968e5dd03e8924f3d6b97cf4514ddbbd315b4e46bbe3ae392f4"
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "bytes": 242748,
+      "git_blob_sha": "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76",
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "bytes": 840,
+      "git_blob_sha": "0c1e3d61cebd444008e8c6e520c78e6444843b70",
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e"
+    }
+  ]
+}
