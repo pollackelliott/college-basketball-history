@@ -849,15 +849,15 @@
     "grand-canyon-stage1-0001",
     "grand-canyon-stage1-0002"
   ],
-  "active_expected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "active_expected_main_sha": null,
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": "STAGE1_INVENTORY",
+  "active_operation": null,
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": "grand-canyon-stage1-0002",
-  "active_request_sha256": "a3e8c2a4f034e1af52f423e9a92c205e3a878673d71d835a3a04ba78ad761fba",
-  "active_school_key": "grand-canyon",
+  "active_request_id": null,
+  "active_request_sha256": null,
+  "active_school_key": null,
   "active_target_branch": null,
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
@@ -1671,25 +1671,23 @@
     "nevada-release-preview-verify-0001",
     "nevada-release-gate2-approval-0001",
     "nevada-release-production-proof-0001",
-    "grand-canyon-stage1-0001"
+    "grand-canyon-stage1-0001",
+    "grand-canyon-stage1-0002"
   ],
-  "current_sequence": 808,
+  "current_sequence": 809,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "checkpoint_manifest_path": ".remote-implementation/checkpoints/grand-canyon/grand-canyon-stage1-0001/checkpoint-manifest.json",
-    "checkpoint_manifest_sha256": "18e785b305d82d1546dbabb07664b39352d4664f67e5dfc6c7e42f751f712848",
+    "checkpoint_manifest_path": ".remote-implementation/checkpoints/grand-canyon/grand-canyon-stage1-0002/checkpoint-manifest.json",
+    "checkpoint_manifest_sha256": "a0c1cb34a00a91c4e1d9e48196778b4acbaa77adf8f401f1a74df3b323fe1864",
     "operation": "STAGE1_INVENTORY",
     "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
-    "request_id": "grand-canyon-stage1-0001",
+    "request_id": "grand-canyon-stage1-0002",
     "school_key": "grand-canyon",
-    "stage1_reconciliation_sha256": "076a0f264f3fc572430120cf4c9a0e0785a342325920a6776ffaaa7b39199e01",
-    "stage1_status": "BLOCKED"
+    "stage1_reconciliation_sha256": "4781edd9159a06bcc55c71e0eef174e0ed5d8fd8471debae3b8a96042dbdab06",
+    "stage1_status": "PASS"
   },
-  "lifecycle_state": "READ_ONLY_ACTIVE",
-  "lock_acquired_run_attempt": "1",
-  "lock_acquired_run_id": "46159176656",
-  "lock_acquisition_request_commit": "f72d02cb84bb1003331d4ef8543703799db1ff9d",
-  "recovery_required": true,
+  "lifecycle_state": "IDLE",
+  "recovery_required": false,
   "schema_version": 1,
-  "transaction_state": "STAGE1_RUNNING"
+  "transaction_state": "IDLE"
 }

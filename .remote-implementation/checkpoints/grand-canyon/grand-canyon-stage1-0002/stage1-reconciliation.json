@@ -1,0 +1,3100 @@
+{
+  "ambiguous_stop_count": 0,
+  "blocker_count": 0,
+  "conference": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 2,
+      "REUSE_CURRENT_IDENTITY": 3
+    },
+    "row_count": 5,
+    "rows": [
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "issues": []
+      },
+      {
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "conference_key": "pacific-west",
+        "conference_name": "Pacific West Conference",
+        "issues": []
+      },
+      {
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "conference_key": "ccaa",
+        "conference_name": "California Collegiate Athletic Association",
+        "issues": []
+      },
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "wac",
+        "conference_name": "Western Athletic Conference",
+        "issues": []
+      },
+      {
+        "classification": "REUSE_CURRENT_IDENTITY",
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West",
+        "issues": []
+      }
+    ],
+    "schema_version": 1
+  },
+  "conference_reconciliation": {
+    "frozen_conferences_sha256": "a05726f6b26dc435ac1534299cc5db79e2aaecae3516e19f978489170fc939f3",
+    "owner_approval_basis": "Grand Canyon Research Freeze accepts the seven exact historical conference rows. Owner authorized the existing Stage 1 deterministic reconciliation unit. The two missing shared conference keys are research-settled; registering them in the guarded target-school onboarding transaction is a representation-only action, not permission to change another published program, reopen memberships, or assert conference tournaments. Tournament labels are nonassertive exact-full-name fallbacks.",
+    "registration_count": 2,
+    "registrations": [
+      {
+        "conference_key": "pacific-west",
+        "conference_name": "Pacific West Conference",
+        "notes": "Grand Canyon frozen complete-institutional Research establishes 1991-92 through 1993-94 and 2006-07 through 2012-13 membership. Registration under accepted Stage 1 current-main reconciliation. Full conference name is a nonassertive display/tournament fallback only; no tournament existence is inferred.",
+        "status": "historical",
+        "tournament_label": "Pacific West Conference"
+      },
+      {
+        "conference_key": "ccaa",
+        "conference_name": "California Collegiate Athletic Association",
+        "notes": "Grand Canyon frozen complete-institutional Research establishes 1994-95 through 2003-04 membership. Registration under accepted Stage 1 current-main reconciliation. Full conference name is a nonassertive display/tournament fallback only; no tournament existence is inferred.",
+        "status": "historical",
+        "tournament_label": "California Collegiate Athletic Association"
+      }
+    ],
+    "replacement_history": [
+      {
+        "basis": "Authenticated Stage 1 season census records NAIA affiliation throughout 1949-50 through 1990-91; GCU Athletics current conference-membership history identifies the basketball program as NAIA Independent (associate member 1949-67; full member 1968-90). Source: https://gculopes.com/sports/2013/10/29/MBB_1029132527",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "1990-1991",
+        "membership_type": "independent",
+        "notes": "Accepted complete-institutional pre-top-level chronology. NAIA is preserved as association/classification context; package conference identity is Independent.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "1949-1950"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - Pacific West for 1991-92 through 1993-94; GCU year-by-year history groups these three seasons under the Pacific West Conference. Source: https://gculopes.com/sports/2016/9/22/mens-basketball-year-by-year",
+        "conference_key": "pacific-west",
+        "conference_name": "Pacific West Conference",
+        "end_season": "1993-1994",
+        "membership_type": "primary",
+        "notes": "GCU historical materials also describe the Great Northwest Conference predecessor lineage; this row preserves the accepted Stage 1/PacWest grouping rather than reopening that accepted representation at Stage 3B closeout.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "1991-1992"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - California Collegiate for 1994-95 through 2003-04; GCU contemporaneous institutional history announced the move to the CCAA for 1994-95. Source: https://gculopes.com/documents/download/2020/7/9/1994.pdf",
+        "conference_key": "ccaa",
+        "conference_name": "California Collegiate Athletic Association",
+        "end_season": "2003-2004",
+        "membership_type": "primary",
+        "notes": "Ten-season CCAA basketball era preserved from accepted institutional chronology.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "1994-1995"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - Independent for 2004-05 and 2005-06; GCU year-by-year history lists both seasons as NCAA Division II Independent. Source: https://gculopes.com/sports/2016/9/22/mens-basketball-year-by-year",
+        "conference_key": "independent",
+        "conference_name": "Independent",
+        "end_season": "2005-2006",
+        "membership_type": "independent",
+        "notes": "Two-season NCAA Division II independent interval.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "2004-2005"
+      },
+      {
+        "basis": "Authenticated Stage 1 season census records NCAA Division II - Pacific West for 2006-07 through 2012-13; GCU institutional 2006 season outlook states the Lopes returned to the Pacific West Conference beginning 2006-07. Source: https://gculopes.com/news/2006/11/1/2006-gcu-mens-basketball-season-outlook",
+        "conference_key": "pacific-west",
+        "conference_name": "Pacific West Conference",
+        "end_season": "2012-2013",
+        "membership_type": "primary",
+        "notes": "Final NCAA Division II conference era before accepted top-level/D-I scope begins in 2013-14.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "2006-2007"
+      },
+      {
+        "basis": "Grand Canyon University Athletics officially announced GCU became a WAC member on 2013-07-01 for the 2013-14 school year (https://gculopes.com/news/2013/7/1/GEN_0701130834); GCU men's basketball history records the Division I WAC era through 2024-25 (https://gculopes.com/sports/2013/10/29/MBB_1029132527).",
+        "conference_key": "wac",
+        "conference_name": "Western Athletic Conference",
+        "end_season": "2024-2025",
+        "membership_type": "conference",
+        "notes": "Accepted Grand Canyon top-level Research scope begins with the 2013-14 WAC entry; final WAC basketball season in this researched scope is 2024-25.",
+        "ongoing": "False",
+        "source_program_key": "grand-canyon",
+        "start_season": "2013-2014"
+      },
+      {
+        "basis": "Grand Canyon University Athletics announced GCU entered the Mountain West on 2025-07-08 and would immediately participate in regular-season competition and conference championships for 2025-26 (https://gculopes.com/news/2025/7/8/general-gcu-jumps-to-mountain-west-this-fall); the Mountain West chronology independently records GCU's 2025 entry (https://themw.com/sports/2026/5/28/chronology.aspx).",
+        "conference_key": "mountain-west",
+        "conference_name": "Mountain West",
+        "end_season": "",
+        "membership_type": "conference",
+        "notes": "Ongoing through the required completed-season cutoff 2025-26.",
+        "ongoing": "True",
+        "source_program_key": "grand-canyon",
+        "start_season": "2025-2026"
+      }
+    ],
+    "replacement_row_count": 7,
+    "spec_path": "/tmp/remote-stage1-inputs-pt_eoj9a/conference-reconciliation.json",
+    "spec_sha256": "cb3508344aafc53125f63cd6abc3badcfe1006451230f7a1a2e3a07841631fb7"
+  },
+  "integration_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "maintenance_required_count": 0,
+  "origin_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "program_alias": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NO_CURRENT_VERIFIED_ALIAS": 276
+    },
+    "row_count": 276,
+    "rows": [
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Academy of Art",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "academy-of-art",
+        "source_opponent_label": "Academy of Art"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Adams State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "adams-state",
+        "source_opponent_label": "Adams State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Alaska Anchorage",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "alaska-anchorage",
+        "source_opponent_label": "Alaska Anchorage"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Alaska Fairbanks",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "alaska-fairbanks",
+        "source_opponent_label": "Alaska Fairbanks"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "College of Idaho",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "college-of-idaho",
+        "source_opponent_label": "Albertsons College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Albuquerque",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "university-of-albuquerque",
+        "source_opponent_label": "Albuquerque"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Ambassador College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "ambassador-college",
+        "source_opponent_label": "Ambassador"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Ambassador College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "ambassador-college",
+        "source_opponent_label": "Ambassador Col."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Anderson University (Indiana)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "anderson-indiana",
+        "source_opponent_label": "Anderson"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Arizona Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "arizona-christian",
+        "source_opponent_label": "Ariz. College of Bible"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Arizona Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "arizona-christian",
+        "source_opponent_label": "Arizona Christian"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northern Arizona freshmen",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northern-arizona-freshmen",
+        "source_opponent_label": "Arizona State College - Flagstaff (Freshmen)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Arizona State freshmen",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "arizona-state-freshmen",
+        "source_opponent_label": "Arizona State College - Tempe (Freshmen)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Assumption University (Massachusetts)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "assumption-massachusetts",
+        "source_opponent_label": "Assumption"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Auburn Montgomery",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "auburn-montgomery",
+        "source_opponent_label": "Auburn-Montgomery"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Augustana University (South Dakota)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "augustana-south-dakota",
+        "source_opponent_label": "Augustana"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Azusa Pacific",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "azusa-pacific",
+        "source_opponent_label": "Azusa Pacific"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Benedictine Mesa",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "benedictine-mesa",
+        "source_opponent_label": "Benedictine (Ariz.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Benedictine Mesa",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "benedictine-mesa",
+        "source_opponent_label": "Benedictine Mesa"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Bethany College (Kansas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bethany-college-kansas",
+        "source_opponent_label": "Bethany"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Southern Nazarene University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southern-nazarene",
+        "source_opponent_label": "Bethany Nazarene"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Bethesda University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bethesda",
+        "source_opponent_label": "Bethesda"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Bethesda University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bethesda",
+        "source_opponent_label": "Bethesda (Calif.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Biola",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "biola",
+        "source_opponent_label": "Biola"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Black Hills State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "black-hills-state",
+        "source_opponent_label": "Black Hills State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Briar Cliff University (Iowa)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "briar-cliff",
+        "source_opponent_label": "Briar Cliff"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Bridgeport",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "bridgeport",
+        "source_opponent_label": "Bridgeport"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "BYU–Hawaii",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "byu-hawaii",
+        "source_opponent_label": "BYU-Hawaii"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "California Baptist College–Covina (historical team)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-baptist-covina",
+        "source_opponent_label": "Cal Baptist-Covina"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "California Lutheran",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "california-lutheran",
+        "source_opponent_label": "Cal Lutheran"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "California Lutheran",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "california-lutheran",
+        "source_opponent_label": "Cal Luthern"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal Poly Pomona",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-poly-pomona",
+        "source_opponent_label": "Cal Poly Pomona"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal Poly Pomona",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-poly-pomona",
+        "source_opponent_label": "Cal Polytechnic"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Sonoma State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "sonoma-state",
+        "source_opponent_label": "Cal State-Sonoma"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Caldwell University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "caldwell-university",
+        "source_opponent_label": "Caldwell College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "California Lutheran",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "california-lutheran",
+        "source_opponent_label": "California Lutheran"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "United States International University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "united-states-international",
+        "source_opponent_label": "California Western"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cameron University (Oklahoma)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cameron-university",
+        "source_opponent_label": "Cameron"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Catawba College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "catawba",
+        "source_opponent_label": "Catabwa College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Central Methodist",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "central-methodist",
+        "source_opponent_label": "Central Methodist"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Central Oklahoma",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "central-oklahoma",
+        "source_opponent_label": "Central Okla."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Central Oklahoma",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "central-oklahoma",
+        "source_opponent_label": "Central Oklahoma"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Central State (Ohio)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "central-state-ohio",
+        "source_opponent_label": "Central State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Central Washington",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "central-washington",
+        "source_opponent_label": "Central Wash."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Central Washington",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "central-washington",
+        "source_opponent_label": "Central Washington"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Chaminade",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "chaminade",
+        "source_opponent_label": "Chaminade"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Chapman",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "chapman",
+        "source_opponent_label": "Champan"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Chapman",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "chapman",
+        "source_opponent_label": "Chapman"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Chico State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "chico-state",
+        "source_opponent_label": "Chico St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Chico State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "chico-state",
+        "source_opponent_label": "Chico State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Christian Brothers University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "christian-brothers",
+        "source_opponent_label": "Christian Brothers"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "San Diego Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "san-diego-christian",
+        "source_opponent_label": "Christian Heritage"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Claremont-Mudd Stags",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "claremont-mudd",
+        "source_opponent_label": "Claremont"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Claremont-Mudd Stags",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "claremont-mudd",
+        "source_opponent_label": "Claremont-Mudd"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Clarion State College/University (Pennsylvania)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "clarion",
+        "source_opponent_label": "Clarion State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Clarke University (Iowa)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "clarke-iowa",
+        "source_opponent_label": "Clarke"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "College of Artesia",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "college-of-artesia",
+        "source_opponent_label": "College of Artesia"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "College of Idaho",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "college-of-idaho",
+        "source_opponent_label": "College of Idaho"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Notre Dame de Namur",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "notre-dame-de-namur",
+        "source_opponent_label": "College of Notre Dame"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "College of Santa Fe",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "college-of-santa-fe",
+        "source_opponent_label": "College of Santa Fe"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Colorado Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "colorado-christian",
+        "source_opponent_label": "Colorado Christian"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Colorado School of Mines",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "colorado-school-of-mines",
+        "source_opponent_label": "Colorado Mines"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Colorado School of Mines",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "colorado-school-of-mines",
+        "source_opponent_label": "Colorado School of Mines"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western Colorado",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-colorado",
+        "source_opponent_label": "Colorado Western"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Concordia University Irvine",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "concordia-irvine",
+        "source_opponent_label": "Concordia"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Concordia (Nebraska)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "concordia-nebraska",
+        "source_opponent_label": "Concordia (Neb.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Concordia University Texas",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "concordia-texas",
+        "source_opponent_label": "Concordia Lutheran"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State Dominguez Hills",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-dominguez-hills",
+        "source_opponent_label": "CS Dominguez Hills"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State East Bay",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-east-bay",
+        "source_opponent_label": "CS Hayward"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Chico State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "chico-state",
+        "source_opponent_label": "CSU Chico"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State Dominguez Hills",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-dominguez-hills",
+        "source_opponent_label": "CSU Dominguez Hills"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State Dominguez Hills",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-dominguez-hills",
+        "source_opponent_label": "CSU Dominquez Hills"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State Los Angeles",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-los-angeles",
+        "source_opponent_label": "CSU Los Angeles"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State Monterey Bay",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-monterey-bay",
+        "source_opponent_label": "CSU Monterey Bay"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State San Bernardino",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-san-bernardino",
+        "source_opponent_label": "CSU San Bernardino"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Cal State Stanislaus",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cal-state-stanislaus",
+        "source_opponent_label": "CSU Stanislaus"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of the Cumberlands (Kentucky)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "cumberlands-kentucky",
+        "source_opponent_label": "Cumberland College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Dallas",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "university-of-dallas",
+        "source_opponent_label": "Dallas"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Dallas Baptist",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "dallas-baptist",
+        "source_opponent_label": "Dallas Baptist"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Davenport",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "davenport",
+        "source_opponent_label": "Davenport"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Davis–Monthan Air Force Base",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "davis-monthan-air-force-base",
+        "source_opponent_label": "Davis-Monthan A.F.B."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Davis–Monthan Air Force Base",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "davis-monthan-air-force-base",
+        "source_opponent_label": "Davis-Monthan Air Force Base"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Doane University (Nebraska)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "doane",
+        "source_opponent_label": "Doane College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Dominican University of California",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "dominican-california",
+        "source_opponent_label": "Dominican"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Drury",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "drury",
+        "source_opponent_label": "Drury"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Drury",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "drury",
+        "source_opponent_label": "Drury College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "East Central University (Oklahoma)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "east-central-oklahoma",
+        "source_opponent_label": "East Central Okla."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "East Stroudsburg University (Pennsylvania)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "east-stroudsburg",
+        "source_opponent_label": "East Stroudsburg St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Eastern Arizona College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "eastern-arizona-college",
+        "source_opponent_label": "Eastern Arizona"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Eastern Arizona College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "eastern-arizona-college",
+        "source_opponent_label": "Eastern Arizona J.C."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Eastern Arizona College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "eastern-arizona-college",
+        "source_opponent_label": "Eastern Arizona JC"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Montana State Billings",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "montana-state-billings",
+        "source_opponent_label": "Eastern Mont."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Montana State Billings",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "montana-state-billings",
+        "source_opponent_label": "Eastern Montana"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Eastern New Mexico",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "eastern-new-mexico",
+        "source_opponent_label": "Eastern N.M."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Eastern New Mexico",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "eastern-new-mexico",
+        "source_opponent_label": "Eastern New Mexico"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Naval Air Facility El Centro team",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "naval-air-facility-el-centro",
+        "source_opponent_label": "El Central Naval Air Station"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Emporia State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "emporia-state",
+        "source_opponent_label": "Emporia State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Ferris State University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "ferris-state",
+        "source_opponent_label": "Ferris State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Findlay",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "findlay",
+        "source_opponent_label": "Findlay"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Fort Hays State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "fort-hays-state",
+        "source_opponent_label": "Fort Hays State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Fort Huachuca Army Team (Arizona)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "fort-huachuca-army",
+        "source_opponent_label": "Fort Huachuca"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Fort Lewis",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "fort-lewis",
+        "source_opponent_label": "Fort Lewis"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Fresno Pacific",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "fresno-pacific",
+        "source_opponent_label": "Fresno Pacific"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Providence (formerly Great Falls)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "university-of-providence",
+        "source_opponent_label": "Great Falls"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Greenville University (Illinois)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "greenville-illinois",
+        "source_opponent_label": "Greenville"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Greenville University (Illinois)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "greenville-illinois",
+        "source_opponent_label": "Greenville College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Harman–McFarland AAU team (Arizona)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "harman-mcfarland-aau",
+        "source_opponent_label": "Harman-McFarland"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Haskell Indian Nations University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "haskell-indian-nations",
+        "source_opponent_label": "Haskell College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hastings College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hastings-college",
+        "source_opponent_label": "Hastings College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hawaii Hilo",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hawaii-hilo",
+        "source_opponent_label": "Hawaii Hilo"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hawaii Pacific",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hawaii-pacific",
+        "source_opponent_label": "Hawaii Pacific"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hawaii Hilo",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hawaii-hilo",
+        "source_opponent_label": "Hawaii-Hilo"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Holy Names University (California)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "holy-names-california",
+        "source_opponent_label": "Holy Names"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hope International",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hope-international",
+        "source_opponent_label": "Hope International"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Humboldt State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "humboldt-state",
+        "source_opponent_label": "Humboldt St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Humboldt State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "humboldt-state",
+        "source_opponent_label": "Humboldt State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Husson University (Maine)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "husson",
+        "source_opponent_label": "Husson"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Illinois Wesleyan",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "illinois-wesleyan",
+        "source_opponent_label": "Illinois Wesleyan"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Imperial Valley College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "imperial-valley-college",
+        "source_opponent_label": "Imperial Valley"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Imperial Valley College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "imperial-valley-college",
+        "source_opponent_label": "Imperial Valley College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Indiana University of Pennsylvania",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "indiana-pennsylvania",
+        "source_opponent_label": "Indiana Penn"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Nebraska Kearney",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "nebraska-kearney",
+        "source_opponent_label": "Kearney State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Kentucky Wesleyan College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "kentucky-wesleyan",
+        "source_opponent_label": "Kentucky Wesleyan"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "La Verne",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "la-verne",
+        "source_opponent_label": "La Verne"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Langston University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "langston",
+        "source_opponent_label": "Langston"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "La Verne",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "la-verne",
+        "source_opponent_label": "LaVerne"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Lewis & Clark College (Oregon)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "lewis-and-clark-college",
+        "source_opponent_label": "Lewis & Clark"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Life Pacific",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "life-pacific",
+        "source_opponent_label": "Life Pacific"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "The Master’s University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "the-masters",
+        "source_opponent_label": "Los Angeles Baptist"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Los Angeles Pacific College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "los-angeles-pacific-college",
+        "source_opponent_label": "Los Angeles Pacific"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Lubbock Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "lubbock-christian",
+        "source_opponent_label": "Lubbock Christian"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Luke Air Force Base",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "luke-air-force-base",
+        "source_opponent_label": "Luke A.F.B."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Luke Air Force Base",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "luke-air-force-base",
+        "source_opponent_label": "Luke Air Force Base"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Marymount College (Kansas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "marymount-kansas",
+        "source_opponent_label": "Marymount"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Colorado Mesa",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "colorado-mesa",
+        "source_opponent_label": "Mesa College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Colorado Mesa",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "colorado-mesa",
+        "source_opponent_label": "Mesa State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "MSU Denver",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "metropolitan-state-denver",
+        "source_opponent_label": "Metro State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "MSU Denver",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "metropolitan-state-denver",
+        "source_opponent_label": "Metropolitan St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "MSU Denver",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "metropolitan-state-denver",
+        "source_opponent_label": "Metropolitan State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "MidAmerica Nazarene University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "midamerica-nazarene",
+        "source_opponent_label": "Mid American Nazarene"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Midwestern State University (Texas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "midwestern-state-texas",
+        "source_opponent_label": "Midwestern"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Millikin",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "millikin",
+        "source_opponent_label": "Millikin"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Minnesota Duluth",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "minnesota-duluth",
+        "source_opponent_label": "Minnesota Duluth"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Minnesota Duluth",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "minnesota-duluth",
+        "source_opponent_label": "Minnesota-Duluth"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Minot State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "minot-state",
+        "source_opponent_label": "Minot State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Missouri Western State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "missouri-western-state",
+        "source_opponent_label": "Missouri Western St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Missouri S&T",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "missouri-s-t",
+        "source_opponent_label": "Missouri-Rolla"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Missouri–St. Louis",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "missouri-st-louis",
+        "source_opponent_label": "Missouri-St. Louis"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Minnesota State University Moorhead",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "minnesota-state-moorhead",
+        "source_opponent_label": "Moorhead State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Montana State Billings",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "montana-state-billings",
+        "source_opponent_label": "MSU Billings"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "New Mexico Highlands",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "new-mexico-highlands",
+        "source_opponent_label": "N.M. Highlands"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "New Mexico Military Institute",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "new-mexico-military-institute",
+        "source_opponent_label": "N.M. Military"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western New Mexico",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-new-mexico",
+        "source_opponent_label": "N.M. Western"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Nebraska Wesleyan University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "nebraska-wesleyan",
+        "source_opponent_label": "Nebraska Wesleyan"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Nebraska Kearney",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "nebraska-kearney",
+        "source_opponent_label": "Nebraska-Kearney"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Nellis Air Force Base Team",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "nellis-air-force-base",
+        "source_opponent_label": "Nellis Air Force Base"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "New Mexico Highlands",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "new-mexico-highlands",
+        "source_opponent_label": "New Mexico Highlands"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "New Mexico Military Institute",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "new-mexico-military-institute",
+        "source_opponent_label": "New Mexico Military"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western New Mexico",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-new-mexico",
+        "source_opponent_label": "New Mexico Western"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Newberry",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "newberry",
+        "source_opponent_label": "Newberry"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "North Central College (Illinois)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "north-central-college-illinois",
+        "source_opponent_label": "North Central"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "North Park University (Illinois)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "north-park",
+        "source_opponent_label": "North Park College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northern Montana",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northern-montana",
+        "source_opponent_label": "Northern Mont."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northern Montana",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northern-montana",
+        "source_opponent_label": "Northern Montana"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northern New Mexico College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northern-new-mexico-college",
+        "source_opponent_label": "Northern N.M."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northern State University (South Dakota)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northern-state-south-dakota",
+        "source_opponent_label": "Northern State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northwest Nazarene",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northwest-nazarene",
+        "source_opponent_label": "Northwest Nazarene"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northwestern Oklahoma State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northwest-oklahoma-state",
+        "source_opponent_label": "Northwest Okla."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Northwestern College (Iowa)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "northwestern-college-iowa",
+        "source_opponent_label": "Northwestern College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Norton Air Force Base Team",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "norton-afb",
+        "source_opponent_label": "Norton A.F.B."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Notre Dame de Namur",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "notre-dame-de-namur",
+        "source_opponent_label": "Notre Dame de Namur"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Occidental",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "occidental",
+        "source_opponent_label": "Occidental"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Oklahoma City University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "oklahoma-city",
+        "source_opponent_label": "Oklahoma City"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Olivet Nazarene",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "olivet-nazarene",
+        "source_opponent_label": "Olivet Nazarene"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Ottawa University (Kansas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "ottawa-kansas",
+        "source_opponent_label": "Ottawa"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Ottawa University Arizona",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "ottawa-arizona",
+        "source_opponent_label": "Ottawa (Ariz.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Hope International",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "hope-international",
+        "source_opponent_label": "Pacific Christian"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Pacific Lutheran",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "pacific-lutheran",
+        "source_opponent_label": "Pacific Lutheran"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Palo Verde College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "palo-verde-college",
+        "source_opponent_label": "Palo Verde"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Palo Verde College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "palo-verde-college",
+        "source_opponent_label": "Palo Verde CC"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Palo Verde College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "palo-verde-college",
+        "source_opponent_label": "Palo Verde College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Oklahoma Panhandle State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "oklahoma-panhandle-state",
+        "source_opponent_label": "Panhandle A & M"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Oklahoma Panhandle State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "oklahoma-panhandle-state",
+        "source_opponent_label": "Panhandle State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Park University Gilbert",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "park-gilbert",
+        "source_opponent_label": "Park (Ariz.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Point Loma Nazarene",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "point-loma-nazarene",
+        "source_opponent_label": "Pasadena"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Phoenix College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "phoenix-college",
+        "source_opponent_label": "Phoenix College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Point Loma Nazarene",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "point-loma-nazarene",
+        "source_opponent_label": "Point Loma"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Point Loma Nazarene",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "point-loma-nazarene",
+        "source_opponent_label": "Point Loma Nazaerne"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Point Loma Nazarene",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "point-loma-nazarene",
+        "source_opponent_label": "Point Loma Nazarene"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Pomona-Pitzer",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "pomona-pitzer",
+        "source_opponent_label": "Pomona"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Pomona-Pitzer",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "pomona-pitzer",
+        "source_opponent_label": "Pomona Pitzer"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Pomona-Pitzer",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "pomona-pitzer",
+        "source_opponent_label": "Pomona-Pitzer"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Portland Bible College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "portland-bible-college",
+        "source_opponent_label": "Portland Bible College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Puget Sound",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "puget-sound",
+        "source_opponent_label": "Puget Sound"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Regis University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "regis-university",
+        "source_opponent_label": "Regis"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Regis University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "regis-university",
+        "source_opponent_label": "Regis College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Rockhurst University (Missouri)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "rockhurst",
+        "source_opponent_label": "Rockhurst College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Rockmont College",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "rockmont-college",
+        "source_opponent_label": "Rockmont College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "San Bernardino College (California, historical)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "san-bernardino-college-california-historical",
+        "source_opponent_label": "San Bernardino"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "San Diego Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "san-diego-christian",
+        "source_opponent_label": "San Diego Christian"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "San Diego Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "san-diego-christian",
+        "source_opponent_label": "San Diego Christian College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "San Francisco State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "san-francisco-state",
+        "source_opponent_label": "San Francisco St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "San Francisco State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "san-francisco-state",
+        "source_opponent_label": "San Fransisco St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Savannah State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "savannah-state",
+        "source_opponent_label": "Savannah State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Seattle Pacific",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "seattle-pacific",
+        "source_opponent_label": "Seattle Pacific"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Simon Fraser University (Canada)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "simon-fraser",
+        "source_opponent_label": "Simon Fraser"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Simpson University (California)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "simpson-california",
+        "source_opponent_label": "Simpson"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Sonoma State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "sonoma-state",
+        "source_opponent_label": "Sonoma State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "CSU Pueblo",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southern-colorado-csu-pueblo",
+        "source_opponent_label": "Southern Colo."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "CSU Pueblo",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southern-colorado-csu-pueblo",
+        "source_opponent_label": "Southern Colorado"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Southern New Hampshire University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southern-new-hampshire",
+        "source_opponent_label": "Southern N.H."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Southern Nazarene University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southern-nazarene",
+        "source_opponent_label": "Southern Nazarene"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Southwestern College (Kansas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southwestern-college-kansas",
+        "source_opponent_label": "Southwestern"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Arizona Christian",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "arizona-christian",
+        "source_opponent_label": "Southwestern College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Saint Ambrose University (Iowa)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "saint-ambrose",
+        "source_opponent_label": "St. Ambrose"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Saint Anselm College (New Hampshire)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "saint-anselm",
+        "source_opponent_label": "St. Anselm"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "St. Cloud State University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "st-cloud-state",
+        "source_opponent_label": "St. Cloud State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "St. Edward's",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "st-edward-s",
+        "source_opponent_label": "St. Edward's"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Albuquerque",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "university-of-albuquerque",
+        "source_opponent_label": "St. Joseph's"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Albuquerque",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "university-of-albuquerque",
+        "source_opponent_label": "St. Joseph's (N.M.)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Albuquerque",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "university-of-albuquerque",
+        "source_opponent_label": "St. Joseph's (NM)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Albuquerque",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "university-of-albuquerque",
+        "source_opponent_label": "St. Joseph's NM"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Saint Martin’s",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "saint-martins",
+        "source_opponent_label": "St. Martin’s"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "St. Mary’s University (Texas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "st-marys-texas",
+        "source_opponent_label": "St. Mary’s (TX)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "College of Santa Fe",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "college-of-santa-fe",
+        "source_opponent_label": "St. Michael's"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Saint Xavier University (Illinois)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "saint-xavier-illinois",
+        "source_opponent_label": "St. Xavier"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Sul Ross State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "sul-ross-state",
+        "source_opponent_label": "Sul Ross State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Southwest Minnesota State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "southwest-minnesota-state",
+        "source_opponent_label": "SW Minnesota St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Tabor College (Kansas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "tabor-college-kansas",
+        "source_opponent_label": "Tabor College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Texas College (Tyler, Texas)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "texas-college",
+        "source_opponent_label": "Texas College"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Texas Lutheran",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "texas-lutheran",
+        "source_opponent_label": "Texas Lutheran"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Texas Wesleyan",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "texas-wesleyan",
+        "source_opponent_label": "Texas Wesleyan"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "The Master’s University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "the-masters",
+        "source_opponent_label": "The Master’s"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Transylvania University (Kentucky)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "transylvania",
+        "source_opponent_label": "Transylvania"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "United States International University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "united-states-international",
+        "source_opponent_label": "U.S. International"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "United States International University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "united-states-international",
+        "source_opponent_label": "U.S. Int’l"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Colorado Colorado Springs",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "colorado-colorado-springs",
+        "source_opponent_label": "UC Colorado Springs"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "UC Santa Cruz",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "uc-santa-cruz",
+        "source_opponent_label": "UC Santa Cruz"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Arizona freshmen",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "arizona-freshmen",
+        "source_opponent_label": "University of Arizona (Freshmen)"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Upland College (California)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "upland-college-california",
+        "source_opponent_label": "Upland"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "USC Upstate",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "usc-upstate",
+        "source_opponent_label": "USC-Spartanburg"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Vanguard",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "vanguard",
+        "source_opponent_label": "Vanguard"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Virginia State University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "virginia-state",
+        "source_opponent_label": "Virginia State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Walker Air Force Base Team",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "walker-air-force-base",
+        "source_opponent_label": "Walker A.F.B."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Walsh University (Ohio)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "walsh",
+        "source_opponent_label": "Walsh"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Washburn",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "washburn",
+        "source_opponent_label": "Washburn"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Wassuk College (Nevada)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wassuk-college-nevada",
+        "source_opponent_label": "Wassuk"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Wayland Baptist",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wayland-baptist",
+        "source_opponent_label": "Wayland"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Wayland Baptist",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wayland-baptist",
+        "source_opponent_label": "Wayland Baptist"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Wayne State University (Michigan)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wayne-state-michigan",
+        "source_opponent_label": "Wayne State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Waynesburg University (Pennsylvania)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "waynesburg",
+        "source_opponent_label": "Waynesburg"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "West Coast Christian College (California)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "west-coast-christian-college-california",
+        "source_opponent_label": "West Coast Christian"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "West Texas A&M",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "west-texas-a-m",
+        "source_opponent_label": "West Texas St."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "West Texas A&M",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "west-texas-a-m",
+        "source_opponent_label": "West Texas State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Montana Western",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "montana-western",
+        "source_opponent_label": "Western Mont."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Montana Western",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "montana-western",
+        "source_opponent_label": "Western Montana"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western New Mexico",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-new-mexico",
+        "source_opponent_label": "Western N.M."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western New Mexico",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-new-mexico",
+        "source_opponent_label": "Western New Mexico"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western Oregon",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-oregon",
+        "source_opponent_label": "Western Oregon"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western Colorado",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-colorado",
+        "source_opponent_label": "Western State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western Washington",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-washington",
+        "source_opponent_label": "Western Wash."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Western Washington",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "western-washington",
+        "source_opponent_label": "Western Washington"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Westminster College (Utah)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "westminster-utah",
+        "source_opponent_label": "Westminster"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Westmont",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "westmont",
+        "source_opponent_label": "Westmont"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Wheaton College (Illinois)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wheaton-illinois",
+        "source_opponent_label": "Wheaton"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Whittier",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "whittier",
+        "source_opponent_label": "Whittier"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Willamette",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "willamette",
+        "source_opponent_label": "Willamette"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Jessup University",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "jessup",
+        "source_opponent_label": "William Jessup"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "William Jewell College (Missouri)",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "william-jewell",
+        "source_opponent_label": "William Jewell"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Williams Air Force Base",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "williams-air-force-base",
+        "source_opponent_label": "Williams A.F.B."
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Williams Air Force Base",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "williams-air-force-base",
+        "source_opponent_label": "Williams Air Force Base"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Winona State",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "winona-state",
+        "source_opponent_label": "Winona State"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Wisconsin Oshkosh",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wisconsin-oshkosh",
+        "source_opponent_label": "Wisconsin-Oshkosh"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Wisconsin Parkside",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wisconsin-parkside",
+        "source_opponent_label": "Wisconsin-Parkside"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "University of Wisconsin–Stevens Point",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "wisconsin-stevens-point",
+        "source_opponent_label": "Wisconsin-Stevens"
+      },
+      {
+        "candidate_program_keys": [],
+        "canonical_opponent_name": "Yuma Air Force Base Team",
+        "classification": "NO_CURRENT_VERIFIED_ALIAS",
+        "from_program_key": "yuma-air-force-base",
+        "source_opponent_label": "Yuma A.F.B."
+      }
+    ],
+    "schema_version": 1
+  },
+  "research_base_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
+  "research_zip_sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
+  "schema_version": 2,
+  "school_key": "grand-canyon",
+  "status": "PASS",
+  "venue": {
+    "blocker_count": 0,
+    "blockers": [],
+    "classification_counts": {
+      "NEW_GLOBAL_IDENTITY": 17,
+      "SAFE_REPRESENTATION_REUSE": 37
+    },
+    "rows": [
+      {
+        "candidate_venue_ids": [
+          "VEN-000242"
+        ],
+        "canonical_name": "Acrisure Arena",
+        "chronology_conflicts": [],
+        "city": "Palm Desert",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000242",
+        "target_venue_key": "acrisure-arena",
+        "venue_key": "acrisure-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000386"
+        ],
+        "canonical_name": "Anaheim Convention Center",
+        "chronology_conflicts": [],
+        "city": "Anaheim",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000386",
+        "target_venue_key": "anaheim-convention-center",
+        "venue_key": "anaheim-convention-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001152"
+        ],
+        "canonical_name": "Antelope Gymnasium",
+        "chronology_conflicts": [],
+        "city": "Phoenix",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "South Gym"
+        ],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "AZ",
+        "target_venue_id": "VEN-001152",
+        "target_venue_key": "antelope-gymnasium",
+        "venue_key": "antelope-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000018"
+        ],
+        "canonical_name": "Ball Arena",
+        "chronology_conflicts": [],
+        "city": "Denver",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000018",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CO",
+        "target_venue_id": "VEN-000018",
+        "target_venue_key": "ball-arena",
+        "venue_key": "ball-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001166"
+        ],
+        "canonical_name": "Brougham Pavilion",
+        "chronology_conflicts": [],
+        "city": "Seattle",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_REGISTERED_ALIAS",
+        "state": "WA",
+        "target_venue_id": "VEN-001166",
+        "target_venue_key": "royal-brougham-pavilion",
+        "venue_key": "brougham-pavilion"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Bryant Fitness Center",
+        "chronology_conflicts": [],
+        "city": "Glendale",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AZ",
+        "target_venue_id": "",
+        "target_venue_key": "bryant-fitness-center",
+        "venue_key": "bryant-fitness-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000575"
+        ],
+        "canonical_name": "Cox Pavilion",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000575",
+        "target_venue_key": "cox-pavilion",
+        "venue_key": "cox-pavilion"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000349"
+        ],
+        "canonical_name": "Desert Diamond Arena",
+        "chronology_conflicts": [],
+        "city": "Glendale",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "AZ",
+        "target_venue_id": "VEN-000349",
+        "target_venue_key": "desert-diamond-arena",
+        "venue_key": "desert-diamond-arena"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Downtown Phoenix YMCA Gymnasium",
+        "chronology_conflicts": [],
+        "city": "Phoenix",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AZ",
+        "target_venue_id": "",
+        "target_venue_key": "downtown-phoenix-ymca-gymnasium",
+        "venue_key": "downtown-phoenix-ymca-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001156"
+        ],
+        "canonical_name": "East Gym",
+        "chronology_conflicts": [],
+        "city": "Arcata",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+        "state": "CA",
+        "target_venue_id": "VEN-001156",
+        "target_venue_key": "east-gym-cal-poly-humboldt",
+        "venue_key": "east-gym"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "GCU Basketball Practice Facility",
+        "chronology_conflicts": [],
+        "city": "Phoenix",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AZ",
+        "target_venue_id": "",
+        "target_venue_key": "gcu-basketball-practice-facility",
+        "venue_key": "gcu-basketball-practice-facility"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000975"
+        ],
+        "canonical_name": "Global Credit Union Arena at GCU",
+        "chronology_conflicts": [],
+        "city": "Phoenix",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "Global Credit Union Arena at GCU"
+        ],
+        "research_venue_id": "VEN-000975",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "AZ",
+        "target_venue_id": "VEN-000975",
+        "target_venue_key": "gcu-arena",
+        "venue_key": "gcu-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001163"
+        ],
+        "canonical_name": "Icardo Center",
+        "chronology_conflicts": [],
+        "city": "Bakersfield",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "CSUB Student Activities Center",
+          "Activities Center"
+        ],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+        "state": "CA",
+        "target_venue_id": "VEN-001163",
+        "target_venue_key": "icardo-center-csub",
+        "venue_key": "icardo-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000089"
+        ],
+        "canonical_name": "Indiana Farmers Coliseum",
+        "chronology_conflicts": [],
+        "city": "Indianapolis",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000089",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "IN",
+        "target_venue_id": "VEN-000089",
+        "target_venue_key": "indiana-farmers-coliseum",
+        "venue_key": "indiana-farmers-coliseum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000375"
+        ],
+        "canonical_name": "Intuit Dome",
+        "chronology_conflicts": [],
+        "city": "Inglewood",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000375",
+        "target_venue_key": "intuit-dome",
+        "venue_key": "intuit-dome"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000094"
+        ],
+        "canonical_name": "Jenny Craig Pavilion",
+        "chronology_conflicts": [],
+        "city": "San Diego",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000094",
+        "target_venue_key": "jenny-craig-pavilion",
+        "venue_key": "jenny-craig-pavilion"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000097"
+        ],
+        "canonical_name": "Jon M. Huntsman Center",
+        "chronology_conflicts": [],
+        "city": "Salt Lake City",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "UT",
+        "target_venue_id": "VEN-000097",
+        "target_venue_key": "jon-m-huntsman-center",
+        "venue_key": "jon-m-huntsman-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000102"
+        ],
+        "canonical_name": "KeyArena",
+        "chronology_conflicts": [],
+        "city": "Seattle",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000102",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "WA",
+        "target_venue_id": "VEN-000102",
+        "target_venue_key": "keyarena",
+        "venue_key": "keyarena"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Massari Arena",
+        "chronology_conflicts": [],
+        "city": "Pueblo",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CO",
+        "target_venue_id": "",
+        "target_venue_key": "massari-arena",
+        "venue_key": "massari-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000139"
+        ],
+        "canonical_name": "Mohegan Sun Arena",
+        "chronology_conflicts": [],
+        "city": "Uncasville",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CT",
+        "target_venue_id": "VEN-000139",
+        "target_venue_key": "mohegan-sun-arena",
+        "venue_key": "mohegan-sun-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000065"
+        ],
+        "canonical_name": "Mortgage Matchup Center",
+        "chronology_conflicts": [],
+        "city": "Phoenix",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+        "state": "AZ",
+        "target_venue_id": "VEN-000065",
+        "target_venue_key": "footprint-center",
+        "venue_key": "mortgage-matchup-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001165"
+        ],
+        "canonical_name": "Nicholson Pavilion",
+        "chronology_conflicts": [],
+        "city": "Ellensburg",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "WA",
+        "target_venue_id": "VEN-001165",
+        "target_venue_key": "nicholson-pavilion",
+        "venue_key": "nicholson-pavilion"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "North Gym",
+        "chronology_conflicts": [],
+        "city": "Phoenix",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AZ",
+        "target_venue_id": "",
+        "target_venue_key": "north-gym",
+        "venue_key": "north-gym"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000152"
+        ],
+        "canonical_name": "Numerica Veterans Arena",
+        "chronology_conflicts": [],
+        "city": "Spokane",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000152",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "WA",
+        "target_venue_id": "VEN-000152",
+        "target_venue_key": "numerica-veterans-arena",
+        "venue_key": "numerica-veterans-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000356"
+        ],
+        "canonical_name": "Orleans Arena",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000356",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000356",
+        "target_venue_key": "orleans-arena",
+        "venue_key": "orleans-arena"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Patty Center",
+        "chronology_conflicts": [],
+        "city": "Fairbanks",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AK",
+        "target_venue_id": "",
+        "target_venue_key": "patty-center",
+        "venue_key": "patty-center"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Prescott Armory",
+        "chronology_conflicts": [],
+        "city": "Prescott",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AZ",
+        "target_venue_id": "",
+        "target_venue_key": "prescott-armory",
+        "venue_key": "prescott-armory"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Sam Carver Gymnasium",
+        "chronology_conflicts": [],
+        "city": "Bellingham",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "WA",
+        "target_venue_id": "",
+        "target_venue_key": "sam-carver-gymnasium",
+        "venue_key": "sam-carver-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001154"
+        ],
+        "canonical_name": "San Francisco Federal Credit Union Gymnasium at Don Nasser Family Plaza",
+        "chronology_conflicts": [],
+        "city": "San Francisco",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "San Francisco State Main Gymnasium"
+        ],
+        "research_venue_id": "",
+        "resolution": "REUSE_REGISTERED_ALIAS",
+        "state": "CA",
+        "target_venue_id": "VEN-001154",
+        "target_venue_key": "sf-state-main-gymnasium",
+        "venue_key": "san-francisco-federal-credit-union-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000798"
+        ],
+        "canonical_name": "Save Mart Center",
+        "chronology_conflicts": [],
+        "city": "Fresno",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000798",
+        "target_venue_key": "save-mart-center",
+        "venue_key": "save-mart-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000191"
+        ],
+        "canonical_name": "Sports and Fitness Center",
+        "chronology_conflicts": [],
+        "city": "St. Thomas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "VI",
+        "target_venue_id": "VEN-000191",
+        "target_venue_key": "sports-and-fitness-center",
+        "venue_key": "sports-and-fitness-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000195"
+        ],
+        "canonical_name": "State Farm Arena",
+        "chronology_conflicts": [],
+        "city": "Atlanta",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "GA",
+        "target_venue_id": "VEN-000195",
+        "target_venue_key": "state-farm-arena",
+        "venue_key": "state-farm-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000201"
+        ],
+        "canonical_name": "T-Mobile Arena",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000201",
+        "target_venue_key": "t-mobile-arena",
+        "venue_key": "t-mobile-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000202"
+        ],
+        "canonical_name": "T-Mobile Center",
+        "chronology_conflicts": [],
+        "city": "Kansas City",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "MO",
+        "target_venue_id": "VEN-000202",
+        "target_venue_key": "t-mobile-center",
+        "venue_key": "t-mobile-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000212"
+        ],
+        "canonical_name": "Titan Gym",
+        "chronology_conflicts": [],
+        "city": "Fullerton",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-000212",
+        "target_venue_key": "titan-gym",
+        "venue_key": "titan-gym"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Triton Pavilion",
+        "chronology_conflicts": [],
+        "city": "La Jolla",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CA",
+        "target_venue_id": "",
+        "target_venue_key": "triton-pavilion",
+        "venue_key": "triton-pavilion"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001129"
+        ],
+        "canonical_name": "University Credit Union Center",
+        "chronology_conflicts": [],
+        "city": "Davis",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "Rec Hall"
+        ],
+        "research_venue_id": "VEN-001129",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-001129",
+        "target_venue_key": "university-credit-union-center",
+        "venue_key": "university-credit-union-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000697"
+        ],
+        "canonical_name": "UTC Arena",
+        "chronology_conflicts": [],
+        "city": "Chattanooga",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "TN",
+        "target_venue_id": "VEN-000697",
+        "target_venue_key": "utc-arena",
+        "venue_key": "utc-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000455"
+        ],
+        "canonical_name": "Valley High School",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXPLICIT_RECONCILIATION",
+        "state": "NV",
+        "target_venue_id": "VEN-000455",
+        "target_venue_key": "valley-high-school-las-vegas",
+        "venue_key": "valley-high-school"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Whalen Gymnasium",
+        "chronology_conflicts": [],
+        "city": "Durango",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CO",
+        "target_venue_id": "",
+        "target_venue_key": "whalen-gymnasium",
+        "venue_key": "whalen-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000135"
+        ],
+        "canonical_name": "Michelob ULTRA Arena",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000135",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000135",
+        "target_venue_key": "michelob-ultra-arena",
+        "venue_key": "michelob-ultra-arena"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000377"
+        ],
+        "canonical_name": "Thomas & Mack Center",
+        "chronology_conflicts": [],
+        "city": "Las Vegas",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000377",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "NV",
+        "target_venue_id": "VEN-000377",
+        "target_venue_key": "thomas-and-mack-center",
+        "venue_key": "thomas-and-mack-center"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "UAA Sports Center",
+        "chronology_conflicts": [],
+        "city": "Anchorage",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AK",
+        "target_venue_id": "",
+        "target_venue_key": "uaa-sports-center",
+        "venue_key": "uaa-sports-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-001162"
+        ],
+        "canonical_name": "SRC Arena",
+        "chronology_conflicts": [],
+        "city": "Riverside",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "Rec Center"
+        ],
+        "research_venue_id": "",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "CA",
+        "target_venue_id": "VEN-001162",
+        "target_venue_key": "src-arena-uc-riverside",
+        "venue_key": "src-arena-uc-riverside"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Felix Event Center",
+        "chronology_conflicts": [],
+        "city": "Azusa",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CA",
+        "target_venue_id": "",
+        "target_venue_key": "felix-event-center",
+        "venue_key": "felix-event-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000354"
+        ],
+        "canonical_name": "HTC Center",
+        "chronology_conflicts": [],
+        "city": "Conway",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000354",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "SC",
+        "target_venue_id": "VEN-000354",
+        "target_venue_key": "htc-center",
+        "venue_key": "htc-center"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000235"
+        ],
+        "canonical_name": "WVU Coliseum",
+        "chronology_conflicts": [],
+        "city": "Morgantown",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000235",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "WV",
+        "target_venue_id": "VEN-000235",
+        "target_venue_key": "wvu-coliseum",
+        "venue_key": "wvu-coliseum"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000143"
+        ],
+        "canonical_name": "Municipal Auditorium",
+        "chronology_conflicts": [],
+        "city": "Kansas City",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "VEN-000143",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "MO",
+        "target_venue_id": "VEN-000143",
+        "target_venue_key": "municipal-auditorium-kc",
+        "venue_key": "municipal-auditorium-kc"
+      },
+      {
+        "candidate_venue_ids": [
+          "VEN-000099"
+        ],
+        "canonical_name": "Kemper Arena",
+        "chronology_conflicts": [],
+        "city": "Kansas City",
+        "classification": "SAFE_REPRESENTATION_REUSE",
+        "issues": [
+          "GLOBAL_NAME_REGISTRATION_DURING_PHASE0"
+        ],
+        "missing_registered_names": [
+          "Crosby Kemper Memorial Arena",
+          "Crosby Kemper Arena"
+        ],
+        "research_venue_id": "VEN-000099",
+        "resolution": "REUSE_EXACT_KEY",
+        "state": "MO",
+        "target_venue_id": "VEN-000099",
+        "target_venue_key": "kemper-arena",
+        "venue_key": "kemper-arena"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Plachy Hall",
+        "chronology_conflicts": [],
+        "city": "Alamosa",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CO",
+        "target_venue_id": "",
+        "target_venue_key": "plachy-hall",
+        "venue_key": "plachy-hall"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "WNMU Fieldhouse",
+        "chronology_conflicts": [],
+        "city": "Silver City",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "NM",
+        "target_venue_id": "",
+        "target_venue_key": "wnmu-fieldhouse",
+        "venue_key": "wnmu-fieldhouse"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Roe F. Saunders Field House",
+        "chronology_conflicts": [],
+        "city": "Grand Junction",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CO",
+        "target_venue_id": "",
+        "target_venue_key": "roe-f-saunders-field-house",
+        "venue_key": "roe-f-saunders-field-house"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "Paul Wright Gymnasium",
+        "chronology_conflicts": [],
+        "city": "Gunnison",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "CO",
+        "target_venue_id": "",
+        "target_venue_key": "paul-wright-gymnasium",
+        "venue_key": "paul-wright-gymnasium"
+      },
+      {
+        "candidate_venue_ids": [],
+        "canonical_name": "North Phoenix Baptist Church",
+        "chronology_conflicts": [],
+        "city": "Phoenix",
+        "classification": "NEW_GLOBAL_IDENTITY",
+        "issues": [],
+        "missing_registered_names": [],
+        "research_venue_id": "",
+        "resolution": "NEW_GLOBAL_IDENTITY",
+        "state": "AZ",
+        "target_venue_id": "",
+        "target_venue_key": "north-phoenix-baptist-church",
+        "venue_key": "north-phoenix-baptist-church"
+      }
+    ],
+    "schema_version": 1,
+    "venue_count": 54
+  },
+  "venue_reconciliation": {
+    "frozen_venues_sha256": "79d0307550c772f69c4f5f705484cf3cf2b3b35ba1d96ee35fcdc53ba962dc7a",
+    "mappings": [
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Arcata",
+        "expected_global_state": "CA",
+        "expected_local_city": "Arcata",
+        "expected_local_name": "East Gym",
+        "expected_local_state": "CA",
+        "global_venue_id": "VEN-001156",
+        "global_venue_key": "east-gym-cal-poly-humboldt",
+        "local_venue_key": "east-gym",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "The accepted 2007 NCAA postseason East Gym assignments explicitly identify the Humboldt State building in Arcata. Protected main VEN-001156 documents the same Humboldt State East Gym opened in 1931; neither identity nor site geography changes."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Bakersfield",
+        "expected_global_state": "CA",
+        "expected_local_city": "Bakersfield",
+        "expected_local_name": "Icardo Center",
+        "expected_local_state": "CA",
+        "global_venue_id": "VEN-001163",
+        "global_venue_key": "icardo-center-csub",
+        "local_venue_key": "icardo-center",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Frozen 1992-1997 NCAA postseason chronology explicitly equates Icardo Center with CSUB Activities Center at Bakersfield. Protected main VEN-001163 is that same CSUB building opened in 1989; preserve historic venue-name literals and exact accepted sites."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Phoenix",
+        "expected_global_state": "AZ",
+        "expected_local_city": "Phoenix",
+        "expected_local_name": "Mortgage Matchup Center",
+        "expected_local_state": "AZ",
+        "global_venue_id": "VEN-000065",
+        "global_venue_key": "footprint-center",
+        "local_venue_key": "mortgage-matchup-center",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Frozen Grand Canyon Stage 3A exact neutral games name Mortgage Matchup Center in Phoenix. Protected main VEN-000065 has the same display name/locality and documents Footprint Center/Mortgage Matchup Center as one physical building; reuse its current key rather than duplicate the arena."
+      },
+      {
+        "action": "REUSE_CURRENT_IDENTITY",
+        "allow_locality_variant": false,
+        "expected_global_city": "Las Vegas",
+        "expected_global_state": "NV",
+        "expected_local_city": "Las Vegas",
+        "expected_local_name": "Valley High School",
+        "expected_local_state": "NV",
+        "global_venue_id": "VEN-000455",
+        "global_venue_key": "valley-high-school-las-vegas",
+        "local_venue_key": "valley-high-school",
+        "local_venue_row_index": "",
+        "locality_variant_basis": "",
+        "preserve_local_representation": false,
+        "resolution_basis": "Frozen 2008-12-20 and 2008-12-21 neutral games name Valley High School in Las Vegas. Protected main VEN-000455 records the same school/physical Las Vegas tournament venue from other accepted research; the buildings/geography agree."
+      }
+    ],
+    "owner_approval_basis": "Grand Canyon final six-file RESEARCH_FROZEN acceptance and explicit owner instruction to continue the already authorized Stage 1, classify all six findings, and perform deterministic current-main reconciliation. These four mappings preserve settled Research venue identity/geography; no historical correction, owner-gate bypass, or change to already-published state is authorized.",
+    "research_zip_sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
+    "schema_version": 1,
+    "spec_path": "/tmp/remote-stage1-inputs-pt_eoj9a/venue-reconciliation.json",
+    "spec_sha256": "d8b522afca8413ba722994965c5bc9427eb7144e7411490601408b971cd0cd0c"
+  }
+}
