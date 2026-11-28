@@ -26,7 +26,8 @@ jobs:
           stage0=root/"stage3a/0053-stage3a0-local-mechanical-census"
           stage2=root/"stage2/0052-stage2-complete-exact-source-provenance"
           output=root/"stage3a/0054-stage3a1-accepted-project-source-class-pass"
-          parent="16057d4902497a972e75d51634b8c06511fe06af"
+          stage0_root_parent="16057d4902497a972e75d51634b8c06511fe06af"
+          parent=subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()
           main="242370fc551fd749c157c74d92917ddfafbe40e0"
           base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
           def sha(b):return hashlib.sha256(b).hexdigest()
@@ -55,8 +56,8 @@ jobs:
           def opp_result(result):
               return {"W":"L","L":"W","T":"T"}.get(result,"")
           actual=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
-          check(subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()==parent,"exact predecessor")
-          check(subprocess.check_output(["git","diff","--name-only",parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-project-evidence-pass.yml"],"one workflow file only")
+          check(subprocess.run(["git","merge-base","--is-ancestor",stage0_root_parent,parent],capture_output=True).returncode==0,"Stage 3A-0 completed predecessor must be an ancestor")
+          check(subprocess.check_output(["git","diff","--name-only",stage0_root_parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-project-evidence-pass.yml"],"workflow-only descendants since Stage 3A-0")
           check(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main changed")
           check(subprocess.run(["git","cat-file","-e",base+"^{commit}"],capture_output=True).returncode==0,"research base missing")
           status0=json.loads((stage0/"stage3a0-status.json").read_text())
