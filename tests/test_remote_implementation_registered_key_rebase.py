@@ -254,6 +254,16 @@ class GuardedTransactionBoundaryTests(unittest.TestCase):
     def test_moved_main_aborts_before_lock_or_cas(self):
         self._prepare_to_publication(main_moved=True)
 
+    def test_candidate_file_reconstruction_uses_explicit_disposable_checkout(self):
+        tx = self.tx
+        with patch.object(tx, 'git_show_bytes', side_effect=[b'original-opp', b'original-games']) as show:
+            result = tx._files_at('f'*40, repo=Path('/tmp/isolated-grand-canyon-target'))
+        self.assertEqual(result, {'opponents.csv': b'original-opp',
+                                  'source-games.csv': b'original-games'})
+        self.assertEqual(show.call_count, 2)
+        for call in show.call_args_list:
+            self.assertEqual(call.kwargs['cwd'], Path('/tmp/isolated-grand-canyon-target'))
+
     def test_bad_fresh_successor_cannot_persist_pass(self):
         tx = self.tx
         state = self.control.initial_control_state()

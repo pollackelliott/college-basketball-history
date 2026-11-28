@@ -76,8 +76,10 @@ def _scope(request: dict, state: dict, control_commit: str) -> dict[str, Any]:
     return authority
 
 
-def _files_at(commit: str) -> dict[str, bytes]:
-    return {name: git_show_bytes(commit, f'schools/{SCHOOL}/{name}')
+def _files_at(commit: str, *, repo: Path | None = None) -> dict[str, bytes]:
+    # Live verification runs in the control checkout; isolated candidate
+    # rehearsal must read its own checkout rather than ambient cwd.
+    return {name: git_show_bytes(commit, f'schools/{SCHOOL}/{name}', cwd=repo)
             for name in SOURCE_HASHES}
 
 
@@ -93,7 +95,7 @@ def _candidate(worktree: Path, predecessor: str, freeze: bytes) -> dict:
     before_state = tracked_worktree_state(worktree)
     if before_state['head_sha'] != predecessor or before_state['status']:
         raise Stop('KEY_REBASE_DIRTY_OR_STALE_PREDECESSOR')
-    before = _files_at(predecessor)
+    before = _files_at(predecessor, repo=worktree)
     registry = (worktree / 'data/reference/programs.csv').read_bytes()
     pre = _semantic_pass(worktree, freeze, 'BEFORE')
     after, proof = make_candidate(before['opponents.csv'], before['source-games.csv'], registry)
@@ -187,7 +189,8 @@ def run_key_rebase(state: dict, request: dict, request_bytes: bytes,
     prepared = _candidate(worktree, predecessor, authority['freeze_bytes'])
     if remote_head(ROOT, branch) != predecessor:
         raise Stop('KEY_REBASE_TARGET_MOVED_BEFORE_WRITEAHEAD')
-    valid = run([sys.executable, 'tools/validate_data.py'], cwd=worktree, check=False)
+    valid = run([sys.executable, str(ROOT / 'tools/validate_data.py'), str(worktree)],
+                cwd=ROOT, check=False)
     if valid.returncode:
         raise Stop('KEY_REBASE_REPOSITORY_VALIDATION_FAILED:' + valid.stdout[-800:])
     DIAG.mkdir(parents=True, exist_ok=True)
@@ -349,7 +352,8 @@ def verify_key_rebase(live_main: str, control_head: str, state: dict) -> int:
     source_worktree = add_existing_onboarding_worktree(obj['target_branch'],
                                                        obj['prepared_commit_sha'], SCHOOL)
     drift = _semantic_pass(source_worktree, freeze, 'FRESH')
-    validation = run([sys.executable, 'tools/validate_data.py'], cwd=source_worktree, check=False)
+    validation = run([sys.executable, str(ROOT / 'tools/validate_data.py'), str(source_worktree)],
+                     cwd=ROOT, check=False)
     if validation.returncode:
         raise Stop('KEY_REBASE_FRESH_REPOSITORY_VALIDATION_FAILED')
     proof = require_exact_target_files(_files_at(obj['prepared_parent_sha']),

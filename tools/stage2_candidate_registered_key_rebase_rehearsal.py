@@ -85,8 +85,8 @@ def main() -> int:
         assert not prepared['semantic_drift_after']['changes'], 'HISTORICAL_SOURCE_CHANGED'
         for name in TARGET_HASHES:
             assert digest((scratch/'schools/grand-canyon'/name).read_bytes()) == TARGET_HASHES[name], 'PREPARED_BYTES_MISMATCH'
-        validation = subprocess.run([sys.executable, 'tools/validate_data.py'],
-            cwd=scratch, capture_output=True, text=True)
+        validation = subprocess.run([sys.executable, str(runtime/'tools/validate_data.py'), str(scratch)],
+            cwd=runtime, capture_output=True, text=True)
         assert validation.returncode == 0, 'PROJECT_VALIDATION_FAILED: ' + validation.stdout[-2500:]
 
         output = run_stage2_census_tool(scratch, 'grand-canyon', freeze,
