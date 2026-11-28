@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "result": "PASS",
+  "checks": [
+    "PINNED_RESEARCH_PARENT_MAIN_AND_RESEARCH_BASE",
+    "PREDECESSOR_FOUR_BLOB_HASHES_MATCH",
+    "UNIQUE_LEDGER_1011",
+    "RECORD_532_479",
+    "SOURCE_ROWS_1036",
+    "CENSUS_49_SEASONS",
+    "CLOWNS_OWNER_EXCLUSIONS_2",
+    "CLOWNS_PENDING_GROUPS_0",
+    "79_78_GAME_EXISTS_ONCE_IN_1964_65",
+    "1965_66_CSU_LOS_ANGELES_EXACT_TWO_WINS",
+    "1965_66_GAP_REMAINS_29_VS_28",
+    "NO_HISTORICAL_GAME_OR_SOURCE_CHANGE",
+    "NO_UNIDENTIFIED_GAME_INVENTED",
+    "NO_TERMINAL_COVERAGE_EXCEPTION",
+    "NO_STAGE2_AUTHORITY"
+  ],
+  "check_count": 15,
+  "permanent_closeout_tool_executed": false,
+  "stage1_complete": false
+}

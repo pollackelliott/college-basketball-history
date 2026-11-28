@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_0032_SOURCE_VERSION_AND_ELIGIBILITY_AUDIT",
+  "research_parent_sha": "b1e2d4f8904289eeab72dcaadc8f5e2a8d237f16",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "counts": {
+    "accepted_games": 1011,
+    "wins": 532,
+    "losses": 479,
+    "source_representations": 1036,
+    "seasons": 49,
+    "owner_clowns_exclusions": 2
+  },
+  "case": "2017 Fresno guide misallocates W79-78 CSU Los Angeles to 1965-66; 2016 and 2025 guides and accepted source prove 1964-65",
+  "game_changes": 0,
+  "source_changes": 0,
+  "census_changes": 0,
+  "stage1_blockers": [
+    {
+      "season": "1965-66",
+      "published": "29/21-8",
+      "unique": "28/21-7"
+    }
+  ],
+  "terminal_exception_eligible": false,
+  "checked_count": 15,
+  "protected_main_changed": false,
+  "stage1_complete": false
+}

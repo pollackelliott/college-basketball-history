@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_0032_SOURCE_VERSION_AND_CLOSEOUT_CHECKPOINT_MANIFEST",
+  "school_key": "fresno-state",
+  "research_branch": "research/fresno-state-all-history-expansion",
+  "checkpoint_path": "research/fresno-state-all-history-expansion/stage1/1965-66-cross-version-season-bleed-and-closeout-assessment-0032/",
+  "research_parent_sha": "b1e2d4f8904289eeab72dcaadc8f5e2a8d237f16",
+  "parent_tree_sha": "205cea5f1cc5583003aa7cf56e500364e1c235ac",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "hash_algorithm": "git_blob_sha1",
+  "members": {
+    "README.md": "7d1f6c208421b9f28d58f136d06a7855ee37e54e",
+    "1964-65-vs-1965-66-source-version.csv": "7b8d8ff8e1a9e7d28e98f34024c392c8b4ac2a0a",
+    "accepted-csu-la-game-trace.csv": "5764d7b5fbeb57a8309dab1d4b74d092c7bf19c4",
+    "stage1-closeout-eligibility-0032.json": "ef21a00aefa78530ba073ee5117feac4bdfb0250",
+    "stage1-mechanical-checks-0032.json": "159ffe7077f931069cf3ed76414e590ff9d182fc",
+    "audit-0032.json": "c3deef726d4c43dd2b3482ffb406290a5897bd9d",
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "99382c6b8c9faec8b1b5a0ab6401426b25da0bff",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb"
+  },
+  "accepted_games": 1011,
+  "record": "532-479",
+  "source_representations": 1036,
+  "owner_exhibition_exclusions": 2,
+  "stage1_open_blocker": "1965-66",
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

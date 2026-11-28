@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_1965_66_STAGE1_CLOSEOUT_ELIGIBILITY_ASSESSMENT_0032",
+  "school_key": "fresno-state",
+  "research_parent_sha": "b1e2d4f8904289eeab72dcaadc8f5e2a8d237f16",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "accepted_games": 1011,
+  "wins": 532,
+  "losses": 479,
+  "source_representations": 1036,
+  "source_version_resolution": {
+    "error": "2017–18 source-series moves 1964–65 W79-78 against CSU Los Angeles into 1965–66",
+    "correct_accepted_game_id": "FRESNO-EXP-CAND-1964-65-021",
+    "correct_season": "1964-65",
+    "new_1965_66_game": false
+  },
+  "unresolved_1965_66": {
+    "published_games": 29,
+    "published_wins": 21,
+    "published_losses": 8,
+    "unique_identified_games": 28,
+    "unique_identified_wins": 21,
+    "unique_identified_losses": 7,
+    "original_raw_lines_games": 29,
+    "original_raw_lines_wins": 22,
+    "original_raw_lines_losses": 7,
+    "corrected_duplicate_inclusive_lines_games": 29,
+    "corrected_duplicate_inclusive_wins": 21,
+    "corrected_duplicate_inclusive_losses": 8,
+    "mechanism": "Correct Fresno UTEP W75-73 to L73-75, then recognize duplicate SDSU loss lines -017 and -022",
+    "editorial_causation_proven": false,
+    "unlisted_extra_game_excluded_by_evidence": false
+  },
+  "closeout_tests": {
+    "ordinary_nonblocking_summary_contradiction": "NOT_YET_PROVEN: absence of a separate played 29th game not established by a complete independent period game list",
+    "source_explicit_unidentified_missing_games": "NOT_ELIGIBLE: Fresno provides no statement identifying the number of omitted games; aggregate difference alone insufficient",
+    "founding_era_aggregate_coverage": "NOT_APPLICABLE_1965_66",
+    "early_history_uncertainty": "NOT_APPLICABLE_1965_66"
+  },
+  "remaining_stage1_blocker_population": [
+    {
+      "season": "1965-66",
+      "printed": "29 games W21 L8",
+      "identified": "28 games W21 L7",
+      "status": "BLOCKING"
+    }
+  ],
+  "source_access_limits": [
+    "1966 Campus volume held but relevant pages inaccessible",
+    "1966 Collegian digitized period issues not available",
+    "Official large PDF screenshot requests returned size-limit errors; text extraction examined"
+  ],
+  "next_safely_permitted_work": "New materially game-level 1966 primary/reciprocal source or separately authorized historical authority determination; do not repeat same aggregate/source-version research",
+  "accepted_games_unchanged": true,
+  "source_rows_unchanged": true,
+  "stage1_complete": false,
+  "stage2_authorized": false
+}
