@@ -1679,11 +1679,11 @@
   "current_sequence": 810,
   "kind": "REMOTE_IMPLEMENTATION_GLOBAL_CONTROL",
   "last_operation": {
-    "fresh_runner_verification": "PENDING",
+    "fresh_runner_verification": "PASS",
     "integration_freeze_sha256": "2d4063679b27c109d94f88ea09c58d9046063d5f22f03ef0de23b61d5e7b608d",
     "operation": "PHASE0",
     "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
-    "remote_phase0_equivalence": "PENDING",
+    "remote_phase0_equivalence": "PASS",
     "request_id": "grand-canyon-phase0-0001",
     "school_key": "grand-canyon",
     "successor_manifest_path": ".remote-implementation/successors/grand-canyon/grand-canyon-phase0-0001/successor-manifest.json",

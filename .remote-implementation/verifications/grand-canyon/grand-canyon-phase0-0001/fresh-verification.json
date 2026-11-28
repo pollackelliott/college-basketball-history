@@ -1,0 +1,18 @@
+{
+  "exact_sidecars_verified": true,
+  "integration_freeze_sha256": "2d4063679b27c109d94f88ea09c58d9046063d5f22f03ef0de23b61d5e7b608d",
+  "kind": "REMOTE_IMPLEMENTATION_FRESH_VERIFICATION",
+  "package_member_hashes_verified": true,
+  "prepared_commit_sha": "f67371c2380b7b28255e525922e780a65737a475",
+  "prepared_parent_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "prepared_tree_sha": "1e8a991039a8bc89ee4a41298110149184c9e5b7",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "remote_phase0_equivalence": "PASS",
+  "repository_validation": "PASS",
+  "request_id": "grand-canyon-phase0-0001",
+  "schema_version": 1,
+  "school_key": "grand-canyon",
+  "semantic_snapshot_sha256": "e9424df1a55f68fcab755f11a920259ee3759ff0cb92e9a0f74bce28e4905319",
+  "target_branch": "data/grand-canyon-onboarding",
+  "target_sha": "f67371c2380b7b28255e525922e780a65737a475"
+}
