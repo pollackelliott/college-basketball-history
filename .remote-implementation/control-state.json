@@ -847,18 +847,19 @@
     "nevada-release-gate2-approval-0001",
     "nevada-release-production-proof-0001",
     "grand-canyon-stage1-0001",
-    "grand-canyon-stage1-0002"
+    "grand-canyon-stage1-0002",
+    "grand-canyon-phase0-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
   "active_lock_commit": null,
-  "active_lock_owner": null,
-  "active_operation": null,
+  "active_lock_owner": "github-actions:46163789987:1",
+  "active_operation": "PHASE0",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "grand-canyon-phase0-0001",
+  "active_request_sha256": "83d3c4dc96cd3375175d850dd6877305734ab1687dde7df060f6fc9a96e5dd19",
+  "active_school_key": "grand-canyon",
+  "active_target_branch": "data/grand-canyon-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1686,8 +1687,11 @@
     "stage1_reconciliation_sha256": "4781edd9159a06bcc55c71e0eef174e0ed5d8fd8471debae3b8a96042dbdab06",
     "stage1_status": "PASS"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "46163789987",
+  "lock_acquisition_request_commit": "d90ddbdd64391a3d43ac3cf6b0df3dc886549d59",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "IDLE"
+  "transaction_state": "LOCKED"
 }
