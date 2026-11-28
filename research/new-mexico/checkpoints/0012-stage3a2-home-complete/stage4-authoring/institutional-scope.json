@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "kind": "COMPLETE_INSTITUTIONAL_RESEARCH_SCOPE_V1",
+  "school_key": "new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "program_inception_season": "1899-00",
+  "top_level_scope": "INCEPTION+",
+  "publication_universe": "INCEPTION_THROUGH_PRESENT",
+  "transition_mode": "NEW_LANE",
+  "preservation_rule": "PRESERVE_ACCEPTED_PARENT_WORK_EXCEPT_GENUINE_CONTRADICTION",
+  "baseline_top_level_scope": "1950-51+",
+  "scope_baseline_disposition": "SUPERSEDED",
+  "scope_supersession_basis": "Final owner ruling supplied with NEW MEXICO original-school Research instruction, 2026-11-28; owner explicitly accepted INCEPTION+ over 1950-51+",
+  "source_evidence": "University of New Mexico 2026-27 mens basketball record book, physical PDF pages 3 and 121 (first varsity season 1899-1900)"
+}

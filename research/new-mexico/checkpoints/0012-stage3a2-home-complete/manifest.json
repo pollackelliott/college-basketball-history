@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A2_COMPLETE_MANIFEST_V1",
+  "state": "STAGE_3A2_COMPLETE",
+  "school_key": "new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "070e903b3b79ccd4b0bc3cb86bce91f43c53bba6",
+  "parent_ledger_git_blob_sha": "955dc19d9f75c19e5c2f2e839001b29d5ed34f27",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2949,
+      "sha256": "b5dfeb2d2eaf1f841f7608a2b21df84d1b2479752b725c4f91b936239375ae00"
+    },
+    {
+      "path": "stage3a2-status.json",
+      "bytes": 4631,
+      "sha256": "5cce4d5b0b016c930f93ad7b372a569f79fecde2e488b0af1e615e691dbc2bf8"
+    },
+    {
+      "path": "stage3a2-working-ledger.csv",
+      "bytes": 1763636,
+      "sha256": "df05a6de47aa6db2df0afade2def54ddc10f9a3e11d5e442778af21e807e6bab"
+    },
+    {
+      "path": "stage3a2-ancient-home-dispositions.csv",
+      "bytes": 160252,
+      "sha256": "0ab118968ba5928f0cb097886419f14fd5883c2eac4e948214423b6ecf5cc758"
+    },
+    {
+      "path": "stage3a2-home-exception-audit.csv",
+      "bytes": 50498,
+      "sha256": "235fecfe306d8db9afc3a4a12db8fb41e0a786c82d9135f6c59f5dbccf3546b2"
+    },
+    {
+      "path": "stage3a2-facility-source-audit.json",
+      "bytes": 3093,
+      "sha256": "0ac87662d5acb8842698b2c745865bfd206ce6a96ef0916caeb3c2401612072e"
+    },
+    {
+      "path": "stage4-authoring/venues.csv",
+      "bytes": 2327,
+      "sha256": "d3f8a9d90e7e7b453891c7a04486a7d2091ee371d59f17295c8d5511991f1935",
+      "git_blob_sha": "243004ec085f2eabf0618cfc0892ccd96b5b14d5"
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "bytes": 242748,
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44",
+      "git_blob_sha": "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "bytes": 840,
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e",
+      "git_blob_sha": "0c1e3d61cebd444008e8c6e520c78e6444843b70"
+    }
+  ]
+}

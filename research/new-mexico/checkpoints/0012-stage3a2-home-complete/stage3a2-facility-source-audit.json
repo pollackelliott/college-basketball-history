@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "NM_STAGE3A2_FACILITY_SOURCE_AUDIT_V1",
+  "source_families": [
+    {
+      "family": "UNM_2020_21_MEDIA_GUIDE_AND_YEAR_BY_YEAR_HISTORY",
+      "url": "https://storage.googleapis.com/golobos-com/2020/12/f55647d3-2020-21-university-of-new-mexico-media-guide-compressed.pdf",
+      "disposition": "1899-1928 HOME classification and Albuquerque locality, no per-game exact pre-Carlisle building"
+    },
+    {
+      "family": "UNM_INSTITUTIONAL_HISTORIC_PRESERVATION",
+      "url": "https://historicpreservation.unm.edu/preservation-plan/historic-preservation-plan.pdf",
+      "disposition": "1928 Carlisle construction and campus building chronology; no named continuous venue for 1899-1928"
+    },
+    {
+      "family": "UNM_DEPARTMENTAL_HISTORY_1910_GYMNASIUM",
+      "url": "https://physics.unm.edu/assets/documents/dept-history.pdf",
+      "disposition": "1910 historical campus Gymnasium existed, not basketball game-level venue proof; PDF page 3 visually inspected"
+    },
+    {
+      "family": "UNM_FINE_ARTS_CARLISLE_HISTORY",
+      "url": "https://finearts.unm.edu/venues/elizabeth-waters-center-for-dance/",
+      "disposition": "Carlisle used for historical varsity games from 1928; not retroactively assigned before building"
+    },
+    {
+      "family": "ARIZONA_ACCEPTED_RECIPROCAL",
+      "url": "https://github.com/pollackelliott/college-basketball-history/blob/242370fc551fd749c157c74d92917ddfafbe40e0/schools/arizona/source-games.csv",
+      "disposition": "1917-1928 Arizona games at New Mexico confirmed H/A/N; 0 exact physical UNM venues supplied. Accepted project package is authoritative at research base"
+    },
+    {
+      "family": "UNM_UNIVERSITY_ARENA_ARCHIVE_OLD_WOODEN_GYM",
+      "url": "http://www.unm.edu/~unmarchv/History/Buildings/the_Pit.html",
+      "disposition": "Named archival lead referenced by secondary summaries, original archival page unavailable; does not authorize assigning an exact venue to all 113 games"
+    },
+    {
+      "family": "UNM_1966_THE_PIT_PRIMARY",
+      "url": "https://golobos.com/the-pit",
+      "disposition": "The Pit home era begins 1966-12-01, existing accepted physical identity reused"
+    },
+    {
+      "family": "UNM_JOHNSON_1957_PRIMARY",
+      "url": "https://news.unm.edu/news/accolades-for-johnson-center-renovation",
+      "disposition": "Johnson Center served basketball 1957-1966, accepted research-local identity"
+    },
+    {
+      "family": "UNM_LOBO_INVITATIONAL_HOST",
+      "url": "https://golobos.com/news/2006/11/07/209064903",
+      "disposition": "Host tournament at The Pit 1966 onward, 1965 Johnson Gym period preserved"
+    },
+    {
+      "family": "UNM_LOBO_CLASSIC_HOST",
+      "url": "https://golobos.com/news/2022/11/23/lobo-classic-returns-to-the-pit-friday-sunday",
+      "disposition": "Official retrospective identifies original Lobo Classic 1988-99 at The Pit; no conflicting alternate assignment"
+    }
+  ],
+  "ancient_terminal_population": 113,
+  "exception_annotation_population": 214,
+  "accepted_home_venues": 1451,
+  "home_geography_complete": 1564
+}

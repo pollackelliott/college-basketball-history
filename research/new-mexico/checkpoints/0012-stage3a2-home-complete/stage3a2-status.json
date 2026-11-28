@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_RESEARCH_STAGE3A2_CLOSEOUT_V1",
+  "state": "STAGE_3A2_COMPLETE",
+  "school_key": "new-mexico",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "070e903b3b79ccd4b0bc3cb86bce91f43c53bba6",
+  "parent_ledger_git_blob_sha": "955dc19d9f75c19e5c2f2e839001b29d5ed34f27",
+  "source_game_count": 2891,
+  "regular_season_total": 2727,
+  "home_total": 1564,
+  "fully_identified_HOME_building_count": 1451,
+  "fully_supported_HOME_city_state_count": 1564,
+  "researched_unresolved_HOME_building_count": 113,
+  "unresolved_HOME_location_count": 0,
+  "HOME_physical_venue_distribution": {
+    "Carlisle Gymnasium": 343,
+    "Johnson Gymnasium": 118,
+    "The Pit": 990,
+    "RESEARCHED_UNRESOLVED_HOME_VENUE": 113
+  },
+  "source_annotation_exception_rows_audited": 214,
+  "specific_supported_alternate_HOME_venue_rows": 0,
+  "status_preserved_from_stage3a1_han_unknown": 2,
+  "stage3a2_researched_unresolved_rule": "Ancient HOME 1899-00 through 1927-28, city/state complete, primary institutional and accepted reciprocal families exhausted, exact per-game predecessor gym building not defensibly established. Historical venue field left blank with explicit row-level RESEARCHED_UNRESOLVED_HOME_VENUE.",
+  "source_family_audit": [
+    {
+      "family": "UNM_2020_21_MEDIA_GUIDE_AND_YEAR_BY_YEAR_HISTORY",
+      "url": "https://storage.googleapis.com/golobos-com/2020/12/f55647d3-2020-21-university-of-new-mexico-media-guide-compressed.pdf",
+      "disposition": "1899-1928 HOME classification and Albuquerque locality, no per-game exact pre-Carlisle building"
+    },
+    {
+      "family": "UNM_INSTITUTIONAL_HISTORIC_PRESERVATION",
+      "url": "https://historicpreservation.unm.edu/preservation-plan/historic-preservation-plan.pdf",
+      "disposition": "1928 Carlisle construction and campus building chronology; no named continuous venue for 1899-1928"
+    },
+    {
+      "family": "UNM_DEPARTMENTAL_HISTORY_1910_GYMNASIUM",
+      "url": "https://physics.unm.edu/assets/documents/dept-history.pdf",
+      "disposition": "1910 historical campus Gymnasium existed, not basketball game-level venue proof; PDF page 3 visually inspected"
+    },
+    {
+      "family": "UNM_FINE_ARTS_CARLISLE_HISTORY",
+      "url": "https://finearts.unm.edu/venues/elizabeth-waters-center-for-dance/",
+      "disposition": "Carlisle used for historical varsity games from 1928; not retroactively assigned before building"
+    },
+    {
+      "family": "ARIZONA_ACCEPTED_RECIPROCAL",
+      "url": "https://github.com/pollackelliott/college-basketball-history/blob/242370fc551fd749c157c74d92917ddfafbe40e0/schools/arizona/source-games.csv",
+      "disposition": "1917-1928 Arizona games at New Mexico confirmed H/A/N; 0 exact physical UNM venues supplied. Accepted project package is authoritative at research base"
+    },
+    {
+      "family": "UNM_UNIVERSITY_ARENA_ARCHIVE_OLD_WOODEN_GYM",
+      "url": "http://www.unm.edu/~unmarchv/History/Buildings/the_Pit.html",
+      "disposition": "Named archival lead referenced by secondary summaries, original archival page unavailable; does not authorize assigning an exact venue to all 113 games"
+    },
+    {
+      "family": "UNM_1966_THE_PIT_PRIMARY",
+      "url": "https://golobos.com/the-pit",
+      "disposition": "The Pit home era begins 1966-12-01, existing accepted physical identity reused"
+    },
+    {
+      "family": "UNM_JOHNSON_1957_PRIMARY",
+      "url": "https://news.unm.edu/news/accolades-for-johnson-center-renovation",
+      "disposition": "Johnson Center served basketball 1957-1966, accepted research-local identity"
+    },
+    {
+      "family": "UNM_LOBO_INVITATIONAL_HOST",
+      "url": "https://golobos.com/news/2006/11/07/209064903",
+      "disposition": "Host tournament at The Pit 1966 onward, 1965 Johnson Gym period preserved"
+    },
+    {
+      "family": "UNM_LOBO_CLASSIC_HOST",
+      "url": "https://golobos.com/news/2022/11/23/lobo-classic-returns-to-the-pit-friday-sunday",
+      "disposition": "Official retrospective identifies original Lobo Classic 1988-99 at The Pit; no conflicting alternate assignment"
+    }
+  ],
+  "stage4_compatible_research_status_fields": [
+    "site_research_status",
+    "site_research_basis",
+    "stage3a2_resolution_note"
+  ],
+  "invariant_accepted_game_fields_unchanged": true,
+  "invariant_no_shared_registry_modification": true,
+  "stage3a3_started": false,
+  "stage3b_started": false,
+  "stop_boundary": "STOP_AT_STAGE_3A2_BOUNDARY",
+  "next_bounded_stage": "STAGE_3A3_TIER_1_PERMANENT_TOOL_REUSE_OF_ACCEPTED_PROJECT_EVIDENCE_FIRST_AFTER_OWNER_PROCEED"
+}
