@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "STAGE3A1_IN_PROGRESS",
+  "checkpoint": "han-reciprocal-0026",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "parent_stage3a0_commit_sha": "98e3e8ef5537abff2c05905f1e78848d33145ca4",
+  "parent_stage3a0_terminal_status": "COMPLETE",
+  "parent_stage3a0_input_ledger_git_blob_sha": "12691e4bea21be9bb85869a62c52fb6426f65d1e",
+  "game_count": 1928,
+  "unique_game_ids": 1928,
+  "initial_unknown": 27,
+  "resolved_this_tranche": 16,
+  "unresolved_after_tranche": 11,
+  "regular_season_population": 1866,
+  "postseason_population": 62,
+  "site_type_counts": {
+    "HOME": 972,
+    "AWAY": 779,
+    "NEUTRAL": 158,
+    "UNKNOWN": 11,
+    "OPPONENT_HOME": 8
+  },
+  "first_party_school_package_keys": [
+    {
+      "school": "colorado-state",
+      "games": 2,
+      "sha": "58692503ea49508890f27c306145c17ce3a08507"
+    },
+    {
+      "school": "san-diego-state",
+      "games": 2,
+      "sha": "36f3357bf62d1a4765fc417407492cb4cbb3d6dc"
+    },
+    {
+      "school": "wyoming",
+      "games": 2,
+      "sha": "db8c1ef49288534ce949718ca77d63a18ed56ae5"
+    },
+    {
+      "school": "utah",
+      "games": 2,
+      "sha": "49705d1eb85171019b0d66cb9095bd523e3e0f5a"
+    },
+    {
+      "school": "byu",
+      "games": 2,
+      "sha": "feb777980beb611a3a06ff25b9580271bb00c916"
+    },
+    {
+      "school": "hawai-i",
+      "games": 2,
+      "sha": "ce4c462fe773ea039d00b69b8859b273d2358038"
+    },
+    {
+      "school": "uconn",
+      "games": 1,
+      "sha": "2128e2a1ba23bd5d7ebf0b86de0039bb44cd0a31"
+    }
+  ],
+  "source_method": "Bounded first-pass previously accepted reciprocal exact-game evidence plus exact official institution historical pages.",
+  "external_historical_research_used": true,
+  "stage3a1_complete": false,
+  "downstream_work_deferred": true
+}

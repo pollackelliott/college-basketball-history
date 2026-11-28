@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A1_BOUNDED_HAN_EVIDENCE_CHECKPOINT",
+  "checkpoint": "han-reciprocal-0026",
+  "status": "STAGE3A1_IN_PROGRESS",
+  "parent_research_commit_sha": "98e3e8ef5537abff2c05905f1e78848d33145ca4",
+  "protected_main_sha_at_execution": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "parent_stage3a0_checkpoint": "research/air-force/stage3a0/census-0025/",
+  "parent_input_ledger_git_blob_sha": "12691e4bea21be9bb85869a62c52fb6426f65d1e",
+  "source_stage2_corrected_ledger_git_blob_sha": "e412be06ab8af3ba3054baa09a3b312f62b86145",
+  "full_research_game_count": 1928,
+  "regular_season_games": 1866,
+  "postseason_games": 62,
+  "original_stage3a0_unknown": 27,
+  "updated_stage3a1_unknown": 11,
+  "stage3a1_resolved_new_games": 16,
+  "accepted_site_class_updates": {
+    "HOME": 8,
+    "OPPONENT_HOME": 8
+  },
+  "regular_season_site_census": {
+    "HOME": 966,
+    "OPPONENT_HOME": 774,
+    "NEUTRAL": 115,
+    "UNKNOWN": 11
+  },
+  "normalized_game_type_counts": {
+    "regular_season": 1866,
+    "postseason": 62
+  },
+  "stage4_authoring_carried_byte_exact": true,
+  "external_historical_research_used": true,
+  "stopping_rule": "BOUNDED_TRANCHE_CHECKPOINT_BEFORE_NEXT_11_ROW_RESEARCH",
+  "next_stage": "STAGE3A1_SAME_STAGE_CONTINUATION",
+  "files": [
+    {
+      "name": "structured-stage3a1-ledger.csv",
+      "sha": "39e619c35dd9c894d614bb4c4b0f0551f3f8e8be"
+    },
+    {
+      "name": "stage3a1-han-evidence-0026.csv",
+      "sha": "b6bad76dbd8c09f8a9624b2254dac2fe2b8a9600"
+    },
+    {
+      "name": "stage3a1-residuals.csv",
+      "sha": "230fe0946004d7bc4f9027ccb5a4ccc69ac01ecd"
+    },
+    {
+      "name": "stage3a1-census.json",
+      "sha": "9900648ac149154bba4170012fb9be8e70337d56"
+    },
+    {
+      "name": "stage4-authoring/opponents.csv",
+      "sha": "8eb9d65d52485e8714c8a2afc99b8feb59795739"
+    },
+    {
+      "name": "stage4-authoring/institutional-scope.json",
+      "sha": "3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff"
+    },
+    {
+      "name": "inherited-stage3a0-status.json",
+      "sha": "fc0c289f6b8497eb6ba92c959b84576984c3541a"
+    },
+    {
+      "name": "inherited-stage3a0-source-provenance.json",
+      "sha": "fb35b0fc4ede3614b138f8c6ef21fd135c6c6015"
+    },
+    {
+      "name": "README.md",
+      "sha": "09fd12f2e4ac7fab8a15d2715093aa00c0c7061a"
+    }
+  ]
+}
