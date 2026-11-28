@@ -1,0 +1,45 @@
+{
+  "accepted_cal_poly_24_source_class_remaining_unreviewed": 0,
+  "authority_input_stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+  "cumulative_documented_contradiction_rows": 9,
+  "cumulative_site_census": {
+    "HOME": 73,
+    "NEUTRAL": 1,
+    "OPPONENT_HOME": 410,
+    "UNKNOWN": 559
+  },
+  "cumulative_supported_site_decisions": 484,
+  "cumulative_terminal_researched_unresolved_han": 7,
+  "cumulative_unknown_regular": 559,
+  "historical_game_facts_modified": false,
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "independent_game_rows_reviewed": 24,
+  "kind": "SDSU_STAGE3A1_0057_CAL_POLY_24_ONE_OFFICIAL_SOURCE_FAMILY_V1",
+  "new_researched_unresolved_han": 3,
+  "next_bounded_assignment": "Continue Stage 3A-1 with one other high-yield coherent institutional source family; do not re-open Cal Poly conflicting results without genuinely new contradictory evidence.",
+  "no_geography_only_site_inference": true,
+  "parent_research_head": "cc3b92672fca4ff03f0d599b517bff05b39dca59",
+  "postseason_stage3b_handoff": 43,
+  "previous_checkpoint": "0056-stage3a1-fresno-final-eight-official-source",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "regular_season_games": 1043,
+  "school_key": "san-diego-state",
+  "site_supported_in_this_class": 21,
+  "source_authority": {
+    "cal_poly_2026_official_series": "https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf",
+    "cal_poly_2026_official_year_by_year": "https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf",
+    "first_party_official_cal_poly_series_entry_label": "SAN DIEGO STATE",
+    "source_site_label": "at San Diego State",
+    "three_documented_conflict_ids": [
+      "SDSU-EXP-S1-1958-59-0013",
+      "SDSU-EXP-S1-1959-60-0024",
+      "SDSU-EXP-S1-1968-69-0012"
+    ]
+  },
+  "stage": "STAGE_3A1",
+  "stage3a1_complete": false,
+  "stage3a2_started": false,
+  "stage3a3_started": false,
+  "status": "IN_PROGRESS",
+  "total_games": 1086
+}

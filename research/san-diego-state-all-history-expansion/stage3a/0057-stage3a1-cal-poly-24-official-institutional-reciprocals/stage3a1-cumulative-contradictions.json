@@ -1,0 +1,89 @@
+[
+  {
+    "id": "SDSU-EXP-S1-1945-46-0005",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-27",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00570",
+    "target_month_day": "12-28"
+  },
+  {
+    "id": "SDSU-EXP-S1-1945-46-0006",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-28",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00571",
+    "target_month_day": "12-29"
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1941-42-0011",
+    "kind": "OFFICIAL_EDITION_SITE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1946-47-0020",
+    "kind": "ACCEPTED_SDSU_V_FRESNO_SCORE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1946-47-0021",
+    "kind": "FRESNO_EDITION_DATE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1960-61-0021",
+    "kind": "OFFICIAL_EDITION_SITE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "accepted_sdsu_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1958-59-0013",
+    "kind": "CAL_POLY_OFFICIAL_RECIPROCAL_SCORE_DIFFERENCE",
+    "notes": "Cal Poly official 2026 season-by-season series PDF SAN DIEGO STATE table: 1959-01-10 at San Diego State L 54-72; exact SDSU source: J.10 *Cal Poly-SLO W 73-54",
+    "source_references": [
+      "https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf",
+      "https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf"
+    ]
+  },
+  {
+    "accepted_sdsu_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1959-60-0024",
+    "kind": "CAL_POLY_OFFICIAL_RECIPROCAL_DATE_DIFFERENCE",
+    "notes": "Cal Poly official 2026 season-by-season series PDF SAN DIEGO STATE table: 1960-02-17 at San Diego State W 68-64; exact SDSU source: F.19 *Cal Poly-SLO L 64-68",
+    "source_references": [
+      "https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf",
+      "https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf"
+    ]
+  },
+  {
+    "accepted_sdsu_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1968-69-0012",
+    "kind": "CAL_POLY_OFFICIAL_RECIPROCAL_SEASON_DIFFERENCE",
+    "notes": "Cal Poly official 2026 season-by-season series PDF SAN DIEGO STATE table: 1968-01-10 at San Diego State L 58-74; exact SDSU source: J.10 Cal Poly-SLO W 74-58; independent Cal Poly official 2026 year-by-year results locates 74-58 at San Diego State on Jan 10 in 1967-68 rather than target 1968-69; no opponent/game identity correction authorized",
+    "source_references": [
+      "https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf",
+      "https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf"
+    ]
+  }
+]
