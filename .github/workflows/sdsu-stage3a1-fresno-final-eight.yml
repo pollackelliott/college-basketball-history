@@ -1,0 +1,259 @@
+name: SDSU Stage 3A-1 Fresno final-eight official H-A-N review
+on:
+  push:
+    branches:
+      - research/san-diego-state-all-history-expansion
+    paths:
+      - .github/workflows/sdsu-stage3a1-fresno-final-eight.yml
+permissions:
+  contents: write
+jobs:
+  eight-row-source-family:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact same-lane Research predecessor
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Verify predecessor hashes and reconcile eight exact official Fresno reciprocal games
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import collections,csv,hashlib,json,pathlib,subprocess,re
+          root=pathlib.Path("research/san-diego-state-all-history-expansion")
+          parentbase=root/"stage3a/0055-stage3a1-fresno-25-institutional-reciprocal-tranche"
+          stage2=root/"stage2/0052-stage2-complete-exact-source-provenance"
+          stage0=root/"stage3a/0053-stage3a0-local-mechanical-census"
+          out=root/"stage3a/0056-stage3a1-fresno-final-eight-official-source"
+          parent="311f3fbacf836a243abd1e53bd9874739c975ecc"
+          main="242370fc551fd749c157c74d92917ddfafbe40e0"
+          research_base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          fresno_source="https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+          def hash(b):return hashlib.sha256(b).hexdigest()
+          def require(cond,msg):
+              if not cond:raise AssertionError("SDSU_STAGE3A1_0056_FAIL_CLOSED: "+msg)
+          def read_csv(path):
+              with path.open(newline="",encoding="utf-8-sig") as f:return list(csv.DictReader(f))
+          def read_json(path):return json.loads(path.read_text(encoding="utf-8"))
+          def write_csv(path,header,items):
+              with path.open("w",encoding="utf-8",newline="") as f:
+                  w=csv.DictWriter(f,fieldnames=header,extrasaction="raise")
+                  w.writeheader()
+                  w.writerows(items)
+          def write_json(path,obj):
+              path.write_text(json.dumps(obj,indent=2,sort_keys=True,ensure_ascii=False)+"\n",encoding="utf-8")
+          def expected_date(label,token):
+              m=re.fullmatch(r"([JF])\.(\d{1,2})",token)
+              require(bool(m),"source date malformed "+token)
+              return "%04d-%02d-%02d"%(int(label[:4])+1,{"J":1,"F":2}[m.group(1)],int(m.group(2)))
+          actual=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          require(subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()==parent,"unexpected immediate Research parent")
+          require(subprocess.check_output(["git","diff","--name-only",parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-fresno-final-eight.yml"],"workflow-only change from parent")
+          require(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main advanced")
+          require(subprocess.run(["git","cat-file","-e",research_base+"^{commit}"],capture_output=True).returncode==0,"immutable research base missing")
+          prev_manifest=read_json(parentbase/"checkpoint-manifest.json")
+          prev_state=read_json(parentbase/"stage3a1-summary.json")
+          require(prev_manifest["parent_research_head"]=="d88765d6f2168ac7f0a0a73b3fea184f75ead805" and prev_manifest["immutable_research_base_sha"]==research_base,"0055 manifest authority")
+          require(prev_state["status"]=="IN_PROGRESS" and prev_state["stage3a1_complete"] is False,"0055 state")
+          require(prev_state["cumulative_supported_site_decisions"]==455 and prev_state["cumulative_unknown_regular"]==588,"0055 populations")
+          require(prev_state["cumulative_site_census"]=={"HOME":44,"OPPONENT_HOME":410,"NEUTRAL":1,"UNKNOWN":588},"0055 site census")
+          require(prev_state["cumulative_terminal_researched_unresolved_han"]==4 and prev_state["fresno_class_not_yet_reviewed"]==8,"0055 bounds")
+          for name,meta in prev_manifest["files"].items():
+              b=(parentbase/name).read_bytes()
+              require(len(b)==meta["bytes"] and hash(b)==meta["sha256"],"0055 member integrity "+name)
+          orig_manifest=read_json(stage2/"manifest.json")
+          require(orig_manifest["stage2_complete"] and orig_manifest["immutable_research_base_sha"]==research_base,"Stage2 accepted authority")
+          for name,meta in orig_manifest["files"].items():
+              b=(stage2/name).read_bytes()
+              require(len(b)==meta["bytes"] and hash(b)==meta["sha256"],"Stage2 member integrity "+name)
+          stage0_status=read_json(stage0/"stage3a0-status.json")
+          require(stage0_status["status"]=="COMPLETE" and stage0_status["source_ledger_sha256"]==orig_manifest["files"]["structured-stage2-ledger.csv"]["sha256"],"Stage3A0 authority")
+          ledger=read_csv(parentbase/"stage3a1-working-ledger.csv")
+          queue=read_csv(parentbase/"stage3a1-remaining-unknown-queue.csv")
+          accepted=read_csv(parentbase/"stage3a1-supported-site-decisions.csv")
+          require(len(ledger)==1086 and len(queue)==588 and len(accepted)==455,"0055 row populations")
+          require(len({r["research_game_id"] for r in ledger})==1086 and len({r["research_game_id"] for r in queue})==588,"unique source IDs")
+          previous_by_id={r["research_game_id"]:r for r in ledger}
+          queue_by_id={r["research_game_id"]:r for r in queue}
+          # Exact rows from accepted San Diego State Stage 1 source and
+          # Fresno State official 2018-19 men's basketball record book:
+          # printed p.47 (PDF p.32): all-time series with dates, scores, H/A code;
+          # printed pp.28-30 (PDF pp.13-15): season-by-season 'at San Diego State' results.
+          # Each row: SDSU accepted game ID suffix; Fresno event date; Fresno score,
+          # Fresno winner or opponent winner, Fresno H/A code, printed year-by-year page.
+          evidence=[
+           ("1962-63-0014","1963-01-11","60","65","San Diego State","A","28"),
+           ("1963-64-0023","1964-02-15","68","61","Fresno State","A","29"),
+           ("1964-65-0012","1965-01-16","67","69","San Diego State","A","29"),
+           ("1965-66-0023","1966-02-18","66","69","San Diego State","A","29"),
+           ("1966-67-0014","1967-01-14","63","84","San Diego State","A","29"),
+           ("1967-68-0021","1968-02-16","70","86","San Diego State","A","29"),
+           ("1968-69-0013","1969-01-11","91","78","Fresno State","A","29"),
+           ("1969-70-0016","1970-01-30","88","86","Fresno State","A","30"),
+          ]
+          require(len(evidence)==8 and len(set(x[0] for x in evidence))==8,"eight unique source citations")
+          unreviewed=[r for r in queue if r["canonical_opponent_key"]=="fresno-state" and r["next_evidence_class"]!="RESEARCHED_UNRESOLVED_AFTER_TWO_FRESNO_INSTITUTIONAL_EDITIONS"]
+          require([x["research_game_id"] for x in unreviewed]==["SDSU-EXP-S1-"+x[0] for x in evidence],"exact Fresno unreviewed population")
+          expected_prior_terminal={r["research_game_id"] for r in queue if r["canonical_opponent_key"]=="fresno-state" and r["next_evidence_class"]=="RESEARCHED_UNRESOLVED_AFTER_TWO_FRESNO_INSTITUTIONAL_EDITIONS"}
+          require(expected_prior_terminal=={"SDSU-EXP-S1-1941-42-0011","SDSU-EXP-S1-1946-47-0020","SDSU-EXP-S1-1946-47-0021","SDSU-EXP-S1-1960-61-0021"},"prior Fresno terminalization preserved")
+          selected={}
+          source_rows=[]
+          additions=[]
+          for suffix,date,fscore,oscore,winner,venue,yearpage in evidence:
+              rid="SDSU-EXP-S1-"+suffix
+              row=previous_by_id[rid]
+              require(rid in queue_by_id and row["site_type"]=="UNKNOWN" and row["site_research_status"]=="PENDING_STAGE3A1","target row must be pending UNKNOWN "+rid)
+              require(row["canonical_opponent_key"]=="fresno-state" and row["game_type"]=="REGULAR_SEASON","Fresno regular identity "+rid)
+              require(row["source_site_token"]=="" and row["source_event_context"]=="","explicit source H/A absent, no event "+rid)
+              require(row["season_label"]==suffix[:7] and expected_date(row["season_label"],row["source_date_token"])==date,"accepted target date mismatches official reciprocal "+rid)
+              require(int(row["team_score"])==int(oscore) and int(row["opponent_score"])==int(fscore),"official reciprocal score mismatch "+rid)
+              expected_sdsu_result="W" if winner=="San Diego State" else "L"
+              require(row["result"]==expected_sdsu_result,"accepted outcome mismatch "+rid)
+              require(venue=="A","unexpected Fresno H/A code "+rid)
+              source_detail="Fresno State official 2018-19 record book, all-time series printed p.47 shows "+date+" "+winner+" "+fscore+"-"+oscore+" A (Fresno away), corroborated by season-by-season 'at San Diego State' row printed p."+yearpage+"; exact SDSU source date, score and result match"
+              item={
+                "research_game_id":rid,"season_label":row["season_label"],"sdsu_source_date_token":row["source_date_token"],
+                "fresno_record_book_date":date,"sdsu_score":row["team_score"]+"-"+row["opponent_score"],
+                "fresno_score":fscore+"-"+oscore,"fresno_winner":winner,
+                "fresno_site_code":venue,"sdsu_site_type":"HOME",
+                "all_time_series_printed_page":"47","year_by_year_printed_page":yearpage,
+                "source_url":fresno_source,"source_basis":source_detail,
+                "adjudication":"SUPPORTED_EXACT_INSTITUTIONAL_RECIPROCAL",
+                "site_not_inferred_from_geography":True,
+              }
+              source_rows.append(item)
+              selected[rid]=item
+              additions.append({
+                "research_game_id":rid,
+                "season_label":row["season_label"],
+                "source_opponent_label":row["source_opponent_label"],
+                "team_score":row["team_score"],
+                "opponent_score":row["opponent_score"],
+                "previous_site":"UNKNOWN",
+                "new_site":"HOME",
+                "evidence_class":"FRESNO_OFFICIAL_RECORD_BOOK_EXACT_RECIPROCAL_TWO_SECTION_CHECK",
+                "source_reference":fresno_source+" (all-time series printed p.47; year-by-year printed p."+yearpage+")",
+                "evidence_detail":source_detail,
+              })
+          require(len(source_rows)==8 and len(additions)==8,"exact 8 supported")
+          next_ledger=[]
+          for row in ledger:
+              next_row=dict(row)
+              ev=selected.get(row["research_game_id"])
+              if ev:
+                  next_row.update({
+                    "site_type":"HOME",
+                    "curated_site_type":"SOURCE_PROGRAM_HOME",
+                    "site_research_status":"SUPPORTED",
+                    "site_research_basis":ev["source_basis"],
+                    "stage3a1_evidence_class":"FRESNO_OFFICIAL_RECORD_BOOK_EXACT_RECIPROCAL_TWO_SECTION_CHECK",
+                    "stage3a1_evidence_reference":fresno_source+" (all-time series p.47; year-by-year p."+ev["year_by_year_printed_page"]+")",
+                  })
+              next_ledger.append(next_row)
+          for prior,after in zip(ledger,next_ledger):
+              for key,value in prior.items():
+                  if prior["research_game_id"] not in selected:
+                      require(value==after[key],"prior settled/unknown row changed "+prior["research_game_id"]+":"+key)
+                  elif key not in {"site_type","curated_site_type","site_research_status","site_research_basis","stage3a1_evidence_class","stage3a1_evidence_reference"}:
+                      require(value==after[key],"accepted historical fact modified "+prior["research_game_id"]+":"+key)
+          new_queue=[r for r in queue if r["research_game_id"] not in selected]
+          new_decisions=[*accepted,*additions]
+          census=collections.Counter(r["site_type"] for r in next_ledger if r["game_type"]=="REGULAR_SEASON")
+          require(census=={"HOME":52,"OPPONENT_HOME":410,"NEUTRAL":1,"UNKNOWN":580},"exact new cumulative H/A/N census")
+          require(len(new_queue)==580 and len(new_decisions)==463,"exact cumulative queue/decision cardinality")
+          require(all(r["site_type"]=="UNKNOWN" for r in next_ledger if r["game_type"]=="POSTSEASON") and sum(r["game_type"]=="POSTSEASON" for r in next_ledger)==43,"postseason 43 preserved")
+          require(sum(r["site_research_status"]=="RESEARCHED_UNRESOLVED" for r in next_ledger)==4,"Fresno existing terminals unchanged")
+          require(expected_prior_terminal.issubset({r["research_game_id"] for r in new_queue}),"terminal queue preserved")
+          require(all(r["site_type"]=="UNKNOWN" for r in next_ledger if r["research_game_id"] in expected_prior_terminal),"terminal H/A/N unchanged")
+          base_ledger=read_csv(stage2/"structured-stage2-ledger.csv")
+          require(len(base_ledger)==1086 and [r["research_game_id"] for r in base_ledger]==[r["research_game_id"] for r in next_ledger],"accepted Stage 2 game order")
+          for old,new in zip(base_ledger,next_ledger):
+              for key,value in old.items():
+                  if key!="site_type":require(new[key]==value,"Stage 2 accepted game fact "+old["research_game_id"]+":"+key)
+              require(old["site_type"]=="UNKNOWN","input Stage 2 original site type")
+          out.mkdir(parents=True,exist_ok=False)
+          write_csv(out/"stage3a1-working-ledger.csv",list(ledger[0]),next_ledger)
+          write_csv(out/"stage3a1-remaining-unknown-queue.csv",list(queue[0]),new_queue)
+          write_csv(out/"stage3a1-supported-site-decisions.csv",list(accepted[0]),new_decisions)
+          write_csv(out/"fresno-final-eight-institutional-review.csv",list(source_rows[0]),source_rows)
+          for filename in [
+           "fresno-reciprocal-25-row-review.csv",
+           "fresno-reciprocal-4-conflicts.json",
+           "stage3a1-cumulative-contradictions.json",
+           "stage3a1-source-family-precedent.json",
+           "stage3a1-reciprocal-candidates.json",
+           "stage3a1-reciprocal-conflicts.json"
+          ]:
+              (out/filename).write_bytes((parentbase/filename).read_bytes())
+          (out/"stage4-authoring").mkdir()
+          for filename in ["opponents.csv","season-coverage.json"]:
+              (out/"stage4-authoring"/filename).write_bytes((parentbase/"stage4-authoring"/filename).read_bytes())
+              require((out/"stage4-authoring"/filename).read_bytes()==(stage2/"stage4-authoring"/filename).read_bytes(),"Stage 4 authoring member preservation "+filename)
+          require(len(read_json(out/"stage3a1-cumulative-contradictions.json"))==6,"all six prior source contradictions")
+          require(len(read_json(out/"fresno-reciprocal-4-conflicts.json"))==4,"all four Fresno decisions")
+          summary={
+           "kind":"SDSU_STAGE3A1_0056_FRESNO_FINAL_EIGHT_OFFICIAL_EVIDENCE_V1",
+           "school_key":"san-diego-state","stage":"STAGE_3A1","status":"IN_PROGRESS",
+           "parent_research_head":parent,"immutable_research_base_sha":research_base,
+           "protected_main_sha":main,"parent_checkpoint":"0055-stage3a1-fresno-25-institutional-reciprocal-tranche",
+           "authority_input_stage2_ledger_sha256":orig_manifest["files"]["structured-stage2-ledger.csv"]["sha256"],
+           "reviewed_independent_game_rows":8,"new_supported_home":8,
+           "fresno_source_class_remaining_unreviewed":0,
+           "fresno_source_class_prior_terminalized_untouched":4,
+           "cumulative_supported_site_decisions":463,
+           "cumulative_unknown_regular":580,
+           "cumulative_terminal_researched_unresolved_han":4,
+           "cumulative_site_census":dict(census),
+           "regular_season_games":1043,"postseason_stage3b_handoff":43,"total_games":1086,
+           "source_authority":{
+              "2018_19_fresno_state_record_book":fresno_source,
+              "all_time_series_printed_page":47,
+              "year_by_year_printed_pages":[28,29,30],
+              "independent_publication_editions_consulted_in_this_tranche":1,
+              "independent_internal_record_sections_consulted":2,
+              "prior_two_edition_contradictions_retained":4,
+           },
+           "historical_game_facts_modified":False,"site_geography_inference_used":False,
+           "stage3a1_complete":False,"stage3a2_started":False,"stage3a3_started":False,
+           "next_bounded_assignment":"Stage 3A-1 continuing; classify a separate remaining coherent official institutional source family before any external-source fanout",
+          }
+          write_json(out/"stage3a1-summary.json",summary)
+          require(len(read_csv(out/"stage3a1-working-ledger.csv"))==1086,"write-through ledger")
+          require(len(read_csv(out/"stage3a1-remaining-unknown-queue.csv"))==580,"write-through residual")
+          require(len(read_csv(out/"stage3a1-supported-site-decisions.csv"))==463,"write-through decisions")
+          require(len(read_csv(out/"fresno-final-eight-institutional-review.csv"))==8,"write-through 8 review")
+          members={}
+          for path in sorted(out.rglob("*")):
+              if path.is_file():
+                  data=path.read_bytes()
+                  members[str(path.relative_to(out))]={"sha256":hash(data),"bytes":len(data)}
+          write_json(out/"checkpoint-manifest.json",{
+           "kind":"SDSU_STAGE3A1_0056_HASH_BOUND_PARTIAL_MANIFEST_V1",
+           "parent_research_head":parent,
+           "immutable_research_base_sha":research_base,
+           "protected_main_sha":main,
+           "stage3a1_complete":False,
+           "files":members,
+          })
+          for name,metadata in members.items():
+              data=(out/name).read_bytes()
+              require(len(data)==metadata["bytes"] and hash(data)==metadata["sha256"],"manifest roundtrip "+name)
+          print(json.dumps(summary,indent=2))
+          with open("/tmp/sdsu-0056-stage3a1-report.txt","w") as report:
+              report.write("### SDSU Stage 3A-1 — 0056 final Fresno institutional class\n\n8/8 newly supported HOME, 4 earlier Fresno source-conflicted rows retained as researched-unresolved; 463 supported regular-season H/A/N, 580 UNKNOWN; 43 postseason untouched. Stage 3A-1 remains IN_PROGRESS.\n")
+          PY
+      - name: Commit cumulative hash-bound Stage 3A-1 checkpoint 0056
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/san-diego-state-all-history-expansion/stage3a/0056-stage3a1-fresno-final-eight-official-source/
+          git commit -m "research(sdsu): preserve 8 final Fresno reciprocal HOME resolutions with source provenance"
+          git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
+      - name: Stop within Stage 3A-1 and report exact queue
+        shell: bash
+        run: |
+          cat /tmp/sdsu-0056-stage3a1-report.txt >> "$GITHUB_STEP_SUMMARY"
