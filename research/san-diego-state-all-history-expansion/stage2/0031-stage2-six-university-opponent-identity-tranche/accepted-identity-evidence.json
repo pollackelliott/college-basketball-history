@@ -1,0 +1,850 @@
+{
+  "kind": "SDSU_STAGE2_SIX_UNIVERSITY_IDENTITIES_ACCEPTED_V1",
+  "school_key": "san-diego-state",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "stage1_parent_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "stage2_census_parent_commit": "610cfe24aa61d30db81a1b51f080d434b54e93e0",
+  "source_census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "research_base_programs_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "research_base_published_sdsu_opponent_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "identity_method": "Unique exact accepted program name/display after removal of only a leading *; leading at ; or trailing (PG). Syntactic tokens always preserved as source literal; no venue inference. Published SDSU key exists independently for all six program identities.",
+  "resolved_label_count": 25,
+  "resolved_game_rows": 241,
+  "program_totals": {
+    "fresno-state": 62,
+    "long-beach-state": 29,
+    "pepperdine": 51,
+    "san-jose-state": 40,
+    "uc-santa-barbara": 17,
+    "loyola-marymount": 42
+  },
+  "identity_decisions": [
+    {
+      "source_opponent_label": "*at Fresno State",
+      "game_count": 24,
+      "first_season": "1940-41",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "fresno-state",
+      "canonical_opponent_display": "Fresno State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Fresno State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "fresno-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*at Long Beach State",
+      "game_count": 13,
+      "first_season": "1956-57",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "long-beach-state",
+      "canonical_opponent_display": "Long Beach State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Long Beach State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "long-beach-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*at Pepperdine",
+      "game_count": 5,
+      "first_season": "1949-50",
+      "last_season": "1953-54",
+      "canonical_opponent_key": "pepperdine",
+      "canonical_opponent_display": "Pepperdine",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Pepperdine",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "pepperdine"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*at San Jose State",
+      "game_count": 9,
+      "first_season": "1939-40",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "san-jose-state",
+      "canonical_opponent_display": "San Jose State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "San Jose State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "san-jose-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*at UC Santa Barbara",
+      "game_count": 8,
+      "first_season": "1956-57",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "uc-santa-barbara",
+      "canonical_opponent_display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "UC Santa Barbara",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "uc-santa-barbara"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*Fresno State",
+      "game_count": 28,
+      "first_season": "1939-40",
+      "last_season": "1967-68",
+      "canonical_opponent_key": "fresno-state",
+      "canonical_opponent_display": "Fresno State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Fresno State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "fresno-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*Fresno State (PG)",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "fresno-state",
+      "canonical_opponent_display": "Fresno State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Fresno State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "PARENTHETICAL_PG"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "fresno-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*Long Beach State",
+      "game_count": 12,
+      "first_season": "1956-57",
+      "last_season": "1967-68",
+      "canonical_opponent_key": "long-beach-state",
+      "canonical_opponent_display": "Long Beach State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Long Beach State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "long-beach-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*Long Beach State (PG)",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "long-beach-state",
+      "canonical_opponent_display": "Long Beach State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Long Beach State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "PARENTHETICAL_PG"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "long-beach-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*Pepperdine",
+      "game_count": 5,
+      "first_season": "1949-50",
+      "last_season": "1953-54",
+      "canonical_opponent_key": "pepperdine",
+      "canonical_opponent_display": "Pepperdine",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Pepperdine",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "pepperdine"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*San Jose State",
+      "game_count": 10,
+      "first_season": "1940-41",
+      "last_season": "1949-50",
+      "canonical_opponent_key": "san-jose-state",
+      "canonical_opponent_display": "San Jose State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "San Jose State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "san-jose-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*San Jose State (PG)",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "san-jose-state",
+      "canonical_opponent_display": "San Jose State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "San Jose State",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "PARENTHETICAL_PG"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "san-jose-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*UC Santa Barbara",
+      "game_count": 7,
+      "first_season": "1956-57",
+      "last_season": "1962-63",
+      "canonical_opponent_key": "uc-santa-barbara",
+      "canonical_opponent_display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "UC Santa Barbara",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "uc-santa-barbara"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "*UC Santa Barbara (PG)",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "canonical_opponent_key": "uc-santa-barbara",
+      "canonical_opponent_display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "UC Santa Barbara",
+      "syntax_tokens_preserved": [
+        "LEADING_ASTERISK",
+        "PARENTHETICAL_PG"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "uc-santa-barbara"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "at Fresno State",
+      "game_count": 5,
+      "first_season": "1945-46",
+      "last_season": "1968-69",
+      "canonical_opponent_key": "fresno-state",
+      "canonical_opponent_display": "Fresno State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Fresno State",
+      "syntax_tokens_preserved": [
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "fresno-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "at Long Beach State",
+      "game_count": 1,
+      "first_season": "1955-56",
+      "last_season": "1955-56",
+      "canonical_opponent_key": "long-beach-state",
+      "canonical_opponent_display": "Long Beach State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Long Beach State",
+      "syntax_tokens_preserved": [
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "long-beach-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "at Loyola Marymount",
+      "game_count": 17,
+      "first_season": "1925-26",
+      "last_season": "1961-62",
+      "canonical_opponent_key": "loyola-marymount",
+      "canonical_opponent_display": "Loyola Marymount",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Loyola Marymount",
+      "syntax_tokens_preserved": [
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "loyola-marymount"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "at Pepperdine",
+      "game_count": 21,
+      "first_season": "1942-43",
+      "last_season": "1963-64",
+      "canonical_opponent_key": "pepperdine",
+      "canonical_opponent_display": "Pepperdine",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Pepperdine",
+      "syntax_tokens_preserved": [
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "pepperdine"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "at San Jose State",
+      "game_count": 12,
+      "first_season": "1936-37",
+      "last_season": "1959-60",
+      "canonical_opponent_key": "san-jose-state",
+      "canonical_opponent_display": "San Jose State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "San Jose State",
+      "syntax_tokens_preserved": [
+        "AT_PREFIX"
+      ],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "san-jose-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "Fresno State",
+      "game_count": 4,
+      "first_season": "1945-46",
+      "last_season": "1968-69",
+      "canonical_opponent_key": "fresno-state",
+      "canonical_opponent_display": "Fresno State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Fresno State",
+      "syntax_tokens_preserved": [],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "fresno-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "Long Beach State",
+      "game_count": 2,
+      "first_season": "1953-54",
+      "last_season": "1955-56",
+      "canonical_opponent_key": "long-beach-state",
+      "canonical_opponent_display": "Long Beach State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Long Beach State",
+      "syntax_tokens_preserved": [],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "long-beach-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "Loyola Marymount",
+      "game_count": 25,
+      "first_season": "1925-26",
+      "last_season": "1960-61",
+      "canonical_opponent_key": "loyola-marymount",
+      "canonical_opponent_display": "Loyola Marymount",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Loyola Marymount",
+      "syntax_tokens_preserved": [],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "loyola-marymount"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "Pepperdine",
+      "game_count": 20,
+      "first_season": "1942-43",
+      "last_season": "1963-64",
+      "canonical_opponent_key": "pepperdine",
+      "canonical_opponent_display": "Pepperdine",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "Pepperdine",
+      "syntax_tokens_preserved": [],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "pepperdine"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "San Jose State",
+      "game_count": 8,
+      "first_season": "1938-39",
+      "last_season": "1958-59",
+      "canonical_opponent_key": "san-jose-state",
+      "canonical_opponent_display": "San Jose State",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "San Jose State",
+      "syntax_tokens_preserved": [],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "san-jose-state"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    },
+    {
+      "source_opponent_label": "UC Santa Barbara",
+      "game_count": 1,
+      "first_season": "1968-69",
+      "last_season": "1968-69",
+      "canonical_opponent_key": "uc-santa-barbara",
+      "canonical_opponent_display": "UC Santa Barbara",
+      "current_d1": "Yes",
+      "resolution_status": "RESOLVED",
+      "resolution_method": "EXACT_RESEARCH_BASE_PROGRAM_NAME_WITH_SYNTAX_PRESERVED",
+      "source_name_basis": "UC Santa Barbara",
+      "syntax_tokens_preserved": [],
+      "registry_evidence": {
+        "file": "data/reference/programs.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+        "exact_program_key": "uc-santa-barbara"
+      },
+      "published_evidence": {
+        "file": "schools/san-diego-state/opponents.csv",
+        "at_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+        "blob_sha": "44b47ce83de0c604274a05cd0487e788303704ed",
+        "accepted_same_program_key_present": true
+      },
+      "guardrails": {
+        "no_source_literal_change": true,
+        "no_game_type_change": true,
+        "no_site_type_inference": true,
+        "no_original_stage1_game_mutation": true
+      }
+    }
+  ],
+  "unresolved_source_labels_remaining": 316,
+  "unresolved_accepted_game_rows": 845,
+  "stage2_complete": false,
+  "Stage3_not_started": true,
+  "homogeneous_label_tranche_limit": 25
+}
