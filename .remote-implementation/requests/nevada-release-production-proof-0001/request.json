@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "REMOTE_IMPLEMENTATION_REQUEST",
+  "request_id": "nevada-release-production-proof-0001",
+  "school_key": "nevada",
+  "operation": "RELEASE_PRODUCTION_PROOF",
+  "previous_control_state_commit": "974815f569d7930d7016b159cee8a6f81b1e911c",
+  "previous_control_state_sha256": "e762479a0dc6f2e71b53885f8d359cbb0c96525999982b31d833830570f9ccde",
+  "expected_protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "pr_number": 735,
+  "merge_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "owner_gate_2_checkpoint": {
+    "path": ".remote-implementation/checkpoints/nevada/nevada-release-gate2-approval-0001/checkpoint-manifest.json",
+    "sha256": "d579723391cd49eadc317d9403a37f0a495c6fb1e9a76469c7a8af8dad924488"
+  },
+  "owner_gate_2_verification": {
+    "path": ".remote-implementation/verifications/nevada/nevada-release-gate2-approval-0001/gate2-approval-verification.json",
+    "sha256": "7cea3b357056d4affdec16212465e7c41ca89bca51773ddd8704416f5b0beb6f"
+  },
+  "creation_provenance": {
+    "origin": "Nevada serialized Implementation final release; exact connector merge of Owner Gate 2-approved PR #735 returned 242370fc551fd749c157c74d92917ddfafbe40e0 and GitHub confirms approved two parents.",
+    "authorization": "Execute read-only permanent exact-SHA Production proof against the approved merge and fresh Gate 2 ancestry: full merged-main gates, successful same-SHA Vercel Production deployment, every required and affected generated public JSON equivalence, independent fresh verifier. No further mutation, no new gate approval, no additional merge."
+  },
+  "authority": {
+    "owner_gate_1": false,
+    "owner_gate_2": false,
+    "release": false,
+    "phase0": false,
+    "recovery": false,
+    "stage2_census": false,
+    "stage2_current_main_refresh": false,
+    "stage2_opponent_display_normalize": false,
+    "stage2_proposal_rehearsal": false,
+    "stage2_reconciliation_diagnostic": false,
+    "stage2_gate1_fill": false,
+    "stage2_preseal_rehearsal": false,
+    "stage2_gate1_seal": false,
+    "stage2_sealed_apply": false,
+    "release_readiness": false,
+    "release_preview_verify": false,
+    "release_gate2_approval": false,
+    "release_production_proof": true,
+    "venue_identity_maintenance": false,
+    "phase0_scope_supersession": false
+  }
+}

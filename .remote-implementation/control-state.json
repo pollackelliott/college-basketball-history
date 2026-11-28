@@ -844,18 +844,19 @@
     "nevada-stage2-sealed-apply-0001",
     "nevada-release-readiness-0001",
     "nevada-release-preview-verify-0001",
-    "nevada-release-gate2-approval-0001"
+    "nevada-release-gate2-approval-0001",
+    "nevada-release-production-proof-0001"
   ],
-  "active_expected_main_sha": null,
+  "active_expected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
   "active_lock_commit": null,
   "active_lock_owner": null,
-  "active_operation": null,
+  "active_operation": "RELEASE_PRODUCTION_PROOF",
   "active_prepared_commit_sha": null,
   "active_prepared_tree_sha": null,
-  "active_request_id": null,
-  "active_request_sha256": null,
-  "active_school_key": null,
-  "active_target_branch": null,
+  "active_request_id": "nevada-release-production-proof-0001",
+  "active_request_sha256": "1eaa92becc25b2c125d71a758863b2b8a4254fe304b218c19006de354247a60a",
+  "active_school_key": "nevada",
+  "active_target_branch": "data/nevada-onboarding",
   "active_writeahead_commit": null,
   "active_writeahead_path": null,
   "active_writeahead_sha256": null,
@@ -1688,8 +1689,11 @@
     "target_branch": "data/nevada-onboarding",
     "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9"
   },
-  "lifecycle_state": "IDLE",
-  "recovery_required": false,
+  "lifecycle_state": "READ_ONLY_ACTIVE",
+  "lock_acquired_run_attempt": "1",
+  "lock_acquired_run_id": "46154019035",
+  "lock_acquisition_request_commit": "809e0054bfb135a97d23dbbb6789ff12c37ae35f",
+  "recovery_required": true,
   "schema_version": 1,
-  "transaction_state": "COMPLETE"
+  "transaction_state": "RELEASE_PRODUCTION_RUNNING"
 }
