@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_1959_60_NEW_MEXICO_NEUTRAL_LOCALITY_ADJUDICATION_0041",
+  "research_game_id": "AF-1959-60-018",
+  "game_date_preserved": "1960-01-30",
+  "opponent_key": "new-mexico",
+  "game_type": "REGULAR_SEASON",
+  "site_type_preserved": "NEUTRAL",
+  "result_preserved": "W 70-66",
+  "accepted_site": {
+    "venue_name": "Denver Auditorium Arena",
+    "city": "Denver",
+    "state": "CO",
+    "country": "United States"
+  },
+  "independent_authority": [
+    {
+      "url": "https://goairforcefalcons.com/documents/download/2024/2/22/AF.MBB.2023-24.Notes.26.New_Mexico.pdf",
+      "claim": "Air Force series notes list Denver% and footnote explicitly expands % to Denver Auditorium Arena"
+    },
+    {
+      "url": "https://storage.googleapis.com/golobos-prod/2020/06/2e80e4b0-2018_19_media_guide_final_3_compressed-1.pdf",
+      "claim": "New Mexico 1959-60 year-by-year records Air Force 66-70 in Denver, Colorado on Jan 29 immediately before its Jan 30 Denver game"
+    }
+  ],
+  "preserved_disagreement": {
+    "current_air_force_schedule_locality": "Albuquerque, NM",
+    "air_force_notes_date": "1960-01-30",
+    "new_mexico_guide_date": "1960-01-29",
+    "disposition": "Locality resolved Denver. Date disagreement retained; unchanged accepted date."
+  },
+  "parent_0040_conflict_blob_sha": "9c512ee12683e078a6e85621bb2a81f9978cf051",
+  "unmodified_scope": "Other 1,927 game rows, original raw/source fields, 62 postseason games, 974 HOME assignments, all other 113 neutral records, and inherited authoring capsule unchanged",
+  "stage3a4_status": "NOT_RUN"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A3_NARROW_ADJUDICATION_0041_STATUS",
+  "status": "LOCALITY_ADJUDICATION_COMPLETE_STAGE3A4_QA_PENDING",
+  "school_key": "air-force",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_checkpoint": "0040",
+  "parent_commit_sha": "314ef0885dd67b423fc497b96c8a4d5a8731a325",
+  "accepted_neutral_site_correction": "AF-1959-60-018",
+  "site": "Denver Auditorium Arena, Denver, CO, United States",
+  "accepted_game_date_unchanged": true,
+  "total_games": 1928,
+  "regular_season_games": 1866,
+  "postseason_deferred_games": 62,
+  "regular_census": {
+    "HOME": 974,
+    "AWAY": 778,
+    "NEUTRAL": 114
+  },
+  "home_complete_building": 955,
+  "home_researched_venue_unknown": 19,
+  "home_city_state_missing": 0,
+  "neutral_rows": 114,
+  "neutral_venue_and_location_complete": 112,
+  "neutral_modern_researched_building_unknown": 2,
+  "neutral_historical_locality_conflict": 0,
+  "stage3a4_complete": false,
+  "stage3b_started": false,
+  "next_unit": "Separate mechanical Stage 3A-4 QA and completion checkpoint; do not reopen accepted research"
+}
