@@ -1,0 +1,45 @@
+{
+  "authority_input_stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+  "cumulative_site_census": {
+    "HOME": 52,
+    "NEUTRAL": 1,
+    "OPPONENT_HOME": 410,
+    "UNKNOWN": 580
+  },
+  "cumulative_supported_site_decisions": 463,
+  "cumulative_terminal_researched_unresolved_han": 4,
+  "cumulative_unknown_regular": 580,
+  "fresno_source_class_prior_terminalized_untouched": 4,
+  "fresno_source_class_remaining_unreviewed": 0,
+  "historical_game_facts_modified": false,
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "kind": "SDSU_STAGE3A1_0056_FRESNO_FINAL_EIGHT_OFFICIAL_EVIDENCE_V1",
+  "new_supported_home": 8,
+  "next_bounded_assignment": "Stage 3A-1 continuing; classify a separate remaining coherent official institutional source family before any external-source fanout",
+  "parent_checkpoint": "0055-stage3a1-fresno-25-institutional-reciprocal-tranche",
+  "parent_research_head": "311f3fbacf836a243abd1e53bd9874739c975ecc",
+  "postseason_stage3b_handoff": 43,
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "regular_season_games": 1043,
+  "reviewed_independent_game_rows": 8,
+  "school_key": "san-diego-state",
+  "site_geography_inference_used": false,
+  "source_authority": {
+    "2018_19_fresno_state_record_book": "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf",
+    "all_time_series_printed_page": 47,
+    "independent_internal_record_sections_consulted": 2,
+    "independent_publication_editions_consulted_in_this_tranche": 1,
+    "prior_two_edition_contradictions_retained": 4,
+    "year_by_year_printed_pages": [
+      28,
+      29,
+      30
+    ]
+  },
+  "stage": "STAGE_3A1",
+  "stage3a1_complete": false,
+  "stage3a2_started": false,
+  "stage3a3_started": false,
+  "status": "IN_PROGRESS",
+  "total_games": 1086
+}

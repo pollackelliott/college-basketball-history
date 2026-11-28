@@ -1,0 +1,61 @@
+{
+  "files": {
+    "fresno-final-eight-institutional-review.csv": {
+      "bytes": 3959,
+      "sha256": "0afd85ad6f54adca7b0f8a1b6f2f143223591a98bc392ee45cd4ebed64e0c486"
+    },
+    "fresno-reciprocal-25-row-review.csv": {
+      "bytes": 10977,
+      "sha256": "0d79de7e5f1009900ddc1fd6d50ec17adfbfeee7d0abe0009a38e03fe126a910"
+    },
+    "fresno-reciprocal-4-conflicts.json": {
+      "bytes": 3953,
+      "sha256": "51a96c0ce91f356715ae8e32f996a82642e239f90543fe457e777acbc057c21a"
+    },
+    "stage3a1-cumulative-contradictions.json": {
+      "bytes": 1982,
+      "sha256": "63eff2e3f1b27ddb86ffd5100e579a22ef218dea49ba2efa641dd08fbec00adc"
+    },
+    "stage3a1-reciprocal-candidates.json": {
+      "bytes": 9722,
+      "sha256": "d232da7ed3d5166f8e0569ffd4f68a37adcaa85f7d7445927dba8960fe938f1e"
+    },
+    "stage3a1-reciprocal-conflicts.json": {
+      "bytes": 461,
+      "sha256": "90f3a5982ee97d3fe108df3e7e4ff37b404c0b2473231c6662d6ce52903d25e9"
+    },
+    "stage3a1-remaining-unknown-queue.csv": {
+      "bytes": 112655,
+      "sha256": "7024308614c1e02d467f12ab2151e7411cb08bb3f8313a60d163c0ec72cc219c"
+    },
+    "stage3a1-source-family-precedent.json": {
+      "bytes": 1484,
+      "sha256": "e5af936926035b868c5d21906a01b0dc2de74b4187ceb92e98dc52193334c4b1"
+    },
+    "stage3a1-summary.json": {
+      "bytes": 1859,
+      "sha256": "08be92bd982b7a0715457cdb2d2f9742cced80aa4bc7ee73a3ec8b1fee3462eb"
+    },
+    "stage3a1-supported-site-decisions.csv": {
+      "bytes": 214588,
+      "sha256": "680304682d101c525f9d6d400a7c5ffab7da29a2cfa02f01a07696a7a59afabb"
+    },
+    "stage3a1-working-ledger.csv": {
+      "bytes": 1758128,
+      "sha256": "86e33c0f808ff77d194c9e456e0d24d91a4469d6c3bd08c28f82556f3fee81f1"
+    },
+    "stage4-authoring/opponents.csv": {
+      "bytes": 289478,
+      "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d"
+    },
+    "stage4-authoring/season-coverage.json": {
+      "bytes": 505,
+      "sha256": "ca3922abb628ebccc810263e9e068fb1964940e00d668dd8ee7660a3699195f2"
+    }
+  },
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "kind": "SDSU_STAGE3A1_0056_HASH_BOUND_PARTIAL_MANIFEST_V1",
+  "parent_research_head": "311f3fbacf836a243abd1e53bd9874739c975ecc",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "stage3a1_complete": false
+}
