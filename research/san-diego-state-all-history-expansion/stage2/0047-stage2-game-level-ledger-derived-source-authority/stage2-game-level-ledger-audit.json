@@ -1,0 +1,157 @@
+{
+  "kind": "SDSU_STAGE2_DERIVED_FULL_GAME_LEDGER_AUDIT_0047_V1",
+  "checkpoint": "0047-stage2-game-level-ledger-derived-source-authority",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "4e78f41d946a6cf41cb111c494625baa9e2bebde",
+  "stage1_checkpoint": "0029-stage1-complete-source-acknowledged-coverage-gap",
+  "stage1_final_archive": {
+    "path": "research/san-diego-state-all-history-expansion/checkpoints/0029-stage1-complete-source-acknowledged-coverage-gap/san-diego-state-stage1-complete-checkpoint.zip",
+    "sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+    "bytes": 451387,
+    "direct_binary_archive_inner_ledger_parity_checked": false
+  },
+  "derivation": "Original 0002, 0005, 0006 source candidate CSVs plus authenticated 0018 final dispositions. Source IDs independently match 1126/1126. 0029 Stage1 COMPLETE status declares 1086 source-backed accepted games and no source-history disposition changes. Original 0029 ZIP inner full ledger cannot be extracted by available GitHub UTF8-only text connector; exact zip inner game-fields parity remains a named closeout task.",
+  "input_evidence": {
+    "disposition": {
+      "path": "research/san-diego-state-all-history-expansion/checkpoints/0018-owner-approved-25-competitive-inclusions/all-49-season-dispositions.csv",
+      "git_blob": "ce748edc05ae1219415aca4f34c38c4b816eaa15",
+      "sha256": "3a6773521752f0307659009de60224c2c1de2c00c61737da9bef7f9f927cfdae",
+      "rows": 1126,
+      "accepted": 1086,
+      "excluded": 40
+    },
+    "original_candidates": {
+      "EARLY_1921_1936": {
+        "path": "research/san-diego-state-all-history-expansion/checkpoints/0002-founding-era-ledger-1921-1936/source-game-candidates.csv",
+        "git_blob": "0aef8ce220add96f009403575b02fda96f5fb4ff",
+        "sha256": "b6daf68dcbb46ffedc79f3b6f8704e4f4816c92d013c354419d8a64108d044f8",
+        "bytes_utf8": 46215,
+        "rows": 242
+      },
+      "MIDDLE_1936_1951": {
+        "path": "research/san-diego-state-all-history-expansion/checkpoints/0005-1936-1951-source-census/source-game-candidates.csv",
+        "git_blob": "dc25fb61d94374ecc0313f023cfae6c93b23ee68",
+        "sha256": "d1d7b3429605945f984002e0278f044feaa6fb85c5d18676a15daa358fdd0699",
+        "bytes_utf8": 81824,
+        "rows": 391
+      },
+      "LATER_1951_1970": {
+        "path": "research/san-diego-state-all-history-expansion/checkpoints/0006-1951-1970-source-census/source-game-candidates.csv",
+        "git_blob": "167a4eef7be75aaae3c0e0edf0fc18ea411ed23d",
+        "sha256": "b6a4d9d4887d4eb7151eaef806147acefe5745a2c2f3b10f45851e2977e7ed7a",
+        "bytes_utf8": 98205,
+        "rows": 493
+      }
+    },
+    "accepted_opponent_map": {
+      "path": "research/san-diego-state-all-history-expansion/stage2/0046-stage2-final-touring-and-misc-opponent-identity-census/stage4-authoring/opponents.csv",
+      "git_blob": "fe7314fa2b8c0b8ca24d8b938b677edff997c4ba",
+      "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d",
+      "literal_labels": 341,
+      "mapped_accepted_games": 1086
+    },
+    "stage1_status": {
+      "path": "research/san-diego-state-all-history-expansion/checkpoints/0029-stage1-complete-source-acknowledged-coverage-gap/research-status.json",
+      "git_blob": "a3a7dafc65887e2fe0a99fb4c8db2156b0d038e7",
+      "sha256": "add4d99d63d3d17aaf87111e546dc20cac433930f8f410391255a13aa26a54eb"
+    }
+  },
+  "result": {
+    "file": "structured-stage2-ledger.csv",
+    "rows": 1086,
+    "columns": 35,
+    "distinct_game_ids": 1086,
+    "distinct_source_labels": 341,
+    "distinct_opponent_keys": 203,
+    "active_seasons": 49,
+    "game_types": {
+      "REGULAR_SEASON": 1043,
+      "POSTSEASON": 43
+    },
+    "raw_outcomes": {
+      "W": 654,
+      "L": 431,
+      "T": 1
+    },
+    "original_blank_score_pairs": [
+      "SDSU-EXP-S1-1929-30-0002",
+      "SDSU-EXP-S1-1930-31-0002",
+      "SDSU-EXP-S1-1930-31-0003",
+      "SDSU-EXP-S1-1931-32-0001",
+      "SDSU-EXP-S1-1931-32-0002"
+    ],
+    "original_source_tie_game_id": "SDSU-EXP-S1-1931-32-0008",
+    "raw_site_types": {
+      "UNKNOWN": 1086
+    },
+    "candidate_family_counts": {
+      "EARLY_1921_1936": 228,
+      "MIDDLE_1936_1951": 375,
+      "LATER_1951_1970": 483
+    },
+    "season_counts": {
+      "1921-22": 14,
+      "1922-23": 20,
+      "1923-24": 12,
+      "1924-25": 21,
+      "1925-26": 19,
+      "1926-27": 15,
+      "1927-28": 18,
+      "1928-29": 15,
+      "1929-30": 11,
+      "1930-31": 9,
+      "1931-32": 15,
+      "1932-33": 10,
+      "1933-34": 15,
+      "1934-35": 19,
+      "1935-36": 15,
+      "1936-37": 23,
+      "1937-38": 27,
+      "1938-39": 30,
+      "1939-40": 27,
+      "1940-41": 31,
+      "1941-42": 21,
+      "1942-43": 23,
+      "1943-44": 15,
+      "1944-45": 26,
+      "1945-46": 25,
+      "1946-47": 26,
+      "1947-48": 26,
+      "1948-49": 25,
+      "1949-50": 23,
+      "1950-51": 27,
+      "1951-52": 22,
+      "1952-53": 27,
+      "1953-54": 23,
+      "1954-55": 25,
+      "1955-56": 28,
+      "1956-57": 26,
+      "1957-58": 24,
+      "1958-59": 24,
+      "1959-60": 25,
+      "1960-61": 23,
+      "1961-62": 26,
+      "1962-63": 26,
+      "1963-64": 26,
+      "1964-65": 25,
+      "1965-66": 26,
+      "1966-67": 29,
+      "1967-68": 27,
+      "1968-69": 25,
+      "1969-70": 26
+    },
+    "source_game_id_unchanged": true,
+    "full_original_candidate_fields_embedded_as_json": true,
+    "at_and_vs_raw_prefix_token_preserved_without_HAN_interpretation": true,
+    "stage1_40_excluded_did_not_reappear": true,
+    "three_unidentified_1921_22_games_not_fabricated": true
+  },
+  "sha256_ledger": "1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89",
+  "stage2_complete": false,
+  "stage3_started": false,
+  "owner_non_d1_scan_pending": true
+}
