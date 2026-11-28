@@ -1,0 +1,273 @@
+[
+  {
+    "research_game_id": "AF-2000-01-011",
+    "season": "2000-01",
+    "game_date": "2000-12-29",
+    "opponent_key": "cornell",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "GOSSNER_FOODS_CLASSIC_2000",
+    "accepted_site": {
+      "venue_name": "Dee Glen Smith Spectrum",
+      "city": "Logan",
+      "state": "UT",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://utahstateaggies.com/news/2000/12/18/Basketball_Notes_For_The_Week_Of_Dec_18_2000.aspx",
+        "kind": "HOST_EXACT_EDITION",
+        "detail": "Utah State names the Dec 29 2000 Cornell vs Air Force opener and Dee Glen Smith Spectrum for the entire Gossner Foods Classic."
+      },
+      {
+        "url": "https://utahstateaggies.com/news/2000/12/21/Basketball_Game_Notes_Versus_Weber_State.aspx",
+        "kind": "HOST_CORROBORATION",
+        "detail": "Utah State repeats the matchup, date and exact venue."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2001-02-001",
+    "season": "2001-02",
+    "game_date": "2001-11-13",
+    "opponent_key": "yale",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "GUARDIANS_CLASSIC_2001",
+    "accepted_site": {
+      "venue_name": "Hearnes Center",
+      "city": "Columbia",
+      "state": "MO",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://mutigers.com/news/2001/07/05/mens-basketball-to-take-part-in-inaugural-guardians-classic",
+        "kind": "HOST_EXACT_GAME_AND_VENUE",
+        "detail": "Missouri explicitly schedules November 13 Air Force vs Yale at Hearnes Center in Columbia."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2001/11/13/Men_s_Basketball_Defeats_Yale_68_62",
+        "kind": "TARGET_GAME_RESULT",
+        "detail": "Air Force confirms 68-62 exact-game result."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2005-06-001",
+    "season": "2005-06",
+    "game_date": "2005-11-13",
+    "opponent_key": "northern-arizona",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "BCA_CLASSIC_2005_SEATTLE",
+    "accepted_site": {
+      "venue_name": "Bank of America Arena",
+      "city": "Seattle",
+      "state": "WA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://gohuskies.com/sports/2005/6/23/208013801",
+        "kind": "HOST_EXACT_EDITION_VENUE",
+        "detail": "Washington names Nov 13-15 BCA Classic at Bank of America Arena and Air Force as a participant."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2005/9/23/Falcons_to_Open_Season_Against_Northern_Arizona_Add_Exhibition_Game",
+        "kind": "TARGET_EXACT_GAME_IDENTITY",
+        "detail": "Air Force confirms November 13 2005 Northern Arizona opener in Seattle at BCA Classic; separately identifies the Nov 3 McMaster game as exhibition."
+      },
+      {
+        "url": "https://utamavs.com/news/2005/8/11/mavs_to_open_season_at_bca_classic",
+        "kind": "PARTICIPANT_VENUE_CORROBORATION",
+        "detail": "UT Arlington confirms 2005 eight-team event held at Bank of America Arena; Northern Arizona and Air Force both participating."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2006-07-002",
+    "season": "2006-07",
+    "game_date": "2006-11-14",
+    "opponent_key": "long-beach-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "CBE_CLASSIC_2006_STANFORD",
+    "accepted_site": {
+      "venue_name": "Maples Pavilion",
+      "city": "Stanford",
+      "state": "CA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://longbeachstate.com/news/2006/11/7/49ers_Meet_Air_Force_In_Opener?path=mbball",
+        "kind": "OPPONENT_EXACT_GAME_AND_VENUE",
+        "detail": "Long Beach State lists Nov 14 2006 Air Force game at Maples Pavilion in Stanford, CBE Classic."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2006/11/13/Air_Force_Battles_Long_Beach_State_at_CBE_Classic",
+        "kind": "TARGET_EXACT_GAME_AND_VENUE",
+        "detail": "Air Force identifies matchup and Maples Pavilion."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2007-08-005",
+    "season": "2007-08",
+    "game_date": "2007-11-23",
+    "opponent_key": "mississippi-valley-state",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "COUGAR_HISPANIC_COLLEGE_FUND_CHALLENGE_2007",
+    "accepted_site": {
+      "venue_name": "Spokane Arena",
+      "city": "Spokane",
+      "state": "WA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://mvsusports.com/sports/mens-basketball/schedule/2007-2008?grid=true",
+        "kind": "OPPONENT_EXACT_GAME_AND_VENUE",
+        "detail": "Mississippi Valley State's original 2007-08 schedule gives Nov 23 2007 Air Force contest, Hispanic College Fund Classic at Spokane Arena, 40-58."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2007/9/17/Air_Force_Releases_2007_08_Men_s_Basketball_Schedule",
+        "kind": "TARGET_EXACT_GAME_IDENTITY",
+        "detail": "Air Force schedules Mississippi Valley State on Nov 23 and Montana Nov 24 at Spokane event."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2007-08-006",
+    "season": "2007-08",
+    "game_date": "2007-11-24",
+    "opponent_key": "montana",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "COUGAR_HISPANIC_COLLEGE_FUND_CHALLENGE_2007",
+    "accepted_site": {
+      "venue_name": "Spokane Arena",
+      "city": "Spokane",
+      "state": "WA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://wsucougars.com/news/2007/11/24/no-9-wsu-rolls-to-fifth-straight-win",
+        "kind": "HOST_EXACT_EDITION_VENUE",
+        "detail": "Washington State reports November 24 Cougar Hispanic College Fund Challenge contests on the Spokane Arena court."
+      },
+      {
+        "url": "https://gogriz.com/documents/download/2022/3/11/2021_22_Montana_men_s_basketball_yearbook.pdf",
+        "kind": "OPPONENT_EXACT_GAME_RESULT",
+        "detail": "Montana's institutional results give 2007-08 Air Force W 59-57 in Spokane Hispanic College Fund Challenge."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2007/9/17/Air_Force_Releases_2007_08_Men_s_Basketball_Schedule",
+        "kind": "TARGET_EXACT_EDITION_MATCHUP",
+        "detail": "Air Force confirms Mississippi Valley State Nov 23 and Montana Nov 24 at same Spokane tournament."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2011-12-011",
+    "season": "2011-12",
+    "game_date": "2011-12-30",
+    "opponent_key": "eastern-michigan",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "CABLE_CAR_CLASSIC_2011",
+    "accepted_site": {
+      "venue_name": "Leavey Center",
+      "city": "Santa Clara",
+      "state": "CA",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://emueagles.com/sports/mens-basketball/stats/2011/air-force/boxscore/3351",
+        "kind": "OPPONENT_EXACT_GAME_BOX_SCORE",
+        "detail": "Eastern Michigan official box score specifies Dec 30 2011 Air Force 42 Eastern Michigan 37 at Santa Clara (Leavey Center)."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2011/12/30/Air_Force_Tops_Eastern_Michigan_42_37",
+        "kind": "TARGET_EXACT_GAME_RESULT",
+        "detail": "Air Force confirms Cable Car Classic consolation game and score."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2020-21-001",
+    "season": "2020-21",
+    "game_date": "2020-11-28",
+    "opponent_key": "cal-state-northridge",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "MENS_VEGAS_BUBBLE_2020",
+    "accepted_site": {
+      "venue_name": "T-Mobile Arena",
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://goairforcefalcons.com/news/2020/11/28/mens-basketball-air-force-opens-with-66-61-win-over-csun-at-mens-vegas-bubble",
+        "kind": "TARGET_EXACT_GAME_AND_VENUE",
+        "detail": "Nov 28 Air Force exact score 66-61 over CSUN at Men's Vegas Bubble at T-Mobile Arena."
+      },
+      {
+        "url": "https://gomatadors.com/sports/mens-basketball/schedule/text/2020-21",
+        "kind": "OPPONENT_EXACT_GAME_AND_VENUE",
+        "detail": "CSUN official schedule identifies the Nov 28 Air Force game as neutral at T-Mobile Arena."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  },
+  {
+    "research_game_id": "AF-2020-21-002",
+    "season": "2020-21",
+    "game_date": "2020-11-29",
+    "opponent_key": "seattle-u",
+    "game_type": "REGULAR_SEASON",
+    "site_type": "NEUTRAL",
+    "event_family": "MENS_VEGAS_BUBBLE_2020",
+    "accepted_site": {
+      "venue_name": "T-Mobile Arena",
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "United States"
+    },
+    "decision": "ACCEPTED_EXACT_EDITION_FIRST_PARTY_HISTORICAL_SITE_EVIDENCE",
+    "evidence": [
+      {
+        "url": "https://goairforcefalcons.com/news/2020/11/29/mens-basketball-air-force-downed-by-seattle-sunday-at-mens-vegas-bubble",
+        "kind": "TARGET_EXACT_GAME_AND_VENUE",
+        "detail": "Air Force Sunday Nov 29 game report and game card identify loss 45-63 to Seattle at T-Mobile Arena."
+      },
+      {
+        "url": "https://goairforcefalcons.com/news/2020/11/28/mens-basketball-air-force-opens-with-66-61-win-over-csun-at-mens-vegas-bubble",
+        "kind": "TARGET_EXACT_NEXT_DAY_VENUE",
+        "detail": "Air Force Nov 28 report expressly previews Nov 29 Seattle at same named arena."
+      }
+    ],
+    "site_inference": "NONE; all exact games/editions explicitly bound by participating institutional or host evidence"
+  }
+]

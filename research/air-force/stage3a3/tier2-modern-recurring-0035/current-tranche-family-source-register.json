@@ -1,0 +1,134 @@
+[
+  {
+    "family": "GOSSNER_FOODS_CLASSIC_2000",
+    "editions": [
+      "2000-01"
+    ],
+    "row_ids": [
+      "AF-2000-01-011"
+    ],
+    "evidence_mode": "official host or participant exact-edition, exact-site evidence",
+    "accepted_venues": [
+      "Dee Glen Smith Spectrum"
+    ],
+    "source_urls": [
+      "https://utahstateaggies.com/news/2000/12/18/Basketball_Notes_For_The_Week_Of_Dec_18_2000.aspx",
+      "https://utahstateaggies.com/news/2000/12/21/Basketball_Game_Notes_Versus_Weber_State.aspx"
+    ],
+    "status": "ACCEPTED_COMPLETE"
+  },
+  {
+    "family": "GUARDIANS_CLASSIC_2001",
+    "editions": [
+      "2001-02"
+    ],
+    "row_ids": [
+      "AF-2001-02-001"
+    ],
+    "evidence_mode": "official host or participant exact-edition, exact-site evidence",
+    "accepted_venues": [
+      "Hearnes Center"
+    ],
+    "source_urls": [
+      "https://mutigers.com/news/2001/07/05/mens-basketball-to-take-part-in-inaugural-guardians-classic",
+      "https://goairforcefalcons.com/news/2001/11/13/Men_s_Basketball_Defeats_Yale_68_62"
+    ],
+    "status": "ACCEPTED_COMPLETE"
+  },
+  {
+    "family": "BCA_CLASSIC_2005_SEATTLE",
+    "editions": [
+      "2005-06"
+    ],
+    "row_ids": [
+      "AF-2005-06-001"
+    ],
+    "evidence_mode": "official host or participant exact-edition, exact-site evidence",
+    "accepted_venues": [
+      "Bank of America Arena"
+    ],
+    "source_urls": [
+      "https://gohuskies.com/sports/2005/6/23/208013801",
+      "https://goairforcefalcons.com/news/2005/9/23/Falcons_to_Open_Season_Against_Northern_Arizona_Add_Exhibition_Game",
+      "https://utamavs.com/news/2005/8/11/mavs_to_open_season_at_bca_classic"
+    ],
+    "status": "ACCEPTED_COMPLETE"
+  },
+  {
+    "family": "CBE_CLASSIC_2006_STANFORD",
+    "editions": [
+      "2006-07"
+    ],
+    "row_ids": [
+      "AF-2006-07-002"
+    ],
+    "evidence_mode": "official host or participant exact-edition, exact-site evidence",
+    "accepted_venues": [
+      "Maples Pavilion"
+    ],
+    "source_urls": [
+      "https://longbeachstate.com/news/2006/11/7/49ers_Meet_Air_Force_In_Opener?path=mbball",
+      "https://goairforcefalcons.com/news/2006/11/13/Air_Force_Battles_Long_Beach_State_at_CBE_Classic"
+    ],
+    "status": "ACCEPTED_COMPLETE"
+  },
+  {
+    "family": "COUGAR_HISPANIC_COLLEGE_FUND_CHALLENGE_2007",
+    "editions": [
+      "2007-08"
+    ],
+    "row_ids": [
+      "AF-2007-08-005",
+      "AF-2007-08-006"
+    ],
+    "evidence_mode": "official host or participant exact-edition, exact-site evidence",
+    "accepted_venues": [
+      "Spokane Arena"
+    ],
+    "source_urls": [
+      "https://mvsusports.com/sports/mens-basketball/schedule/2007-2008?grid=true",
+      "https://goairforcefalcons.com/news/2007/9/17/Air_Force_Releases_2007_08_Men_s_Basketball_Schedule",
+      "https://wsucougars.com/news/2007/11/24/no-9-wsu-rolls-to-fifth-straight-win",
+      "https://gogriz.com/documents/download/2022/3/11/2021_22_Montana_men_s_basketball_yearbook.pdf"
+    ],
+    "status": "ACCEPTED_COMPLETE"
+  },
+  {
+    "family": "CABLE_CAR_CLASSIC_2011",
+    "editions": [
+      "2011-12"
+    ],
+    "row_ids": [
+      "AF-2011-12-011"
+    ],
+    "evidence_mode": "official host or participant exact-edition, exact-site evidence",
+    "accepted_venues": [
+      "Leavey Center"
+    ],
+    "source_urls": [
+      "https://emueagles.com/sports/mens-basketball/stats/2011/air-force/boxscore/3351",
+      "https://goairforcefalcons.com/news/2011/12/30/Air_Force_Tops_Eastern_Michigan_42_37"
+    ],
+    "status": "ACCEPTED_COMPLETE"
+  },
+  {
+    "family": "MENS_VEGAS_BUBBLE_2020",
+    "editions": [
+      "2020-21"
+    ],
+    "row_ids": [
+      "AF-2020-21-001",
+      "AF-2020-21-002"
+    ],
+    "evidence_mode": "official host or participant exact-edition, exact-site evidence",
+    "accepted_venues": [
+      "T-Mobile Arena"
+    ],
+    "source_urls": [
+      "https://goairforcefalcons.com/news/2020/11/28/mens-basketball-air-force-opens-with-66-61-win-over-csun-at-mens-vegas-bubble",
+      "https://gomatadors.com/sports/mens-basketball/schedule/text/2020-21",
+      "https://goairforcefalcons.com/news/2020/11/29/mens-basketball-air-force-downed-by-seattle-sunday-at-mens-vegas-bubble"
+    ],
+    "status": "ACCEPTED_COMPLETE"
+  }
+]
