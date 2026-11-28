@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A2_1956_58_GEOGRAPHY_RECONCILIATION_V1",
+  "school_key": "air-force",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "predecessor_checkpoint": "research/air-force/stage3a2/early-home-evidence-0028/",
+  "rule": "SYSTEMATIC_SOURCE_PROGRAM_HOME_GEOGRAPHY_PROPAGATION",
+  "rule_source": "docs/stage3a-regular-season-site-research.md §4.3; docs/home-venue-research-unresolved-policy.md",
+  "population": {
+    "total": 19,
+    "exact_city_state_game_reciprocal": 3,
+    "exact_county_and_city_propagation": 1,
+    "same_season_city_state_propagation": 15,
+    "accepted_city_state_19": 19,
+    "accepted_building_0": 0,
+    "await_building": 19
+  },
+  "decisions": [
+    {
+      "id": "AF-1956-57-015",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "source_url": "https://goeasternathletics.com/sports/mens-basketball/schedule/1956-57"
+    },
+    {
+      "id": "AF-1957-58-011",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "source_url": "https://goeasternathletics.com/sports/mens-basketball/schedule/1957-58"
+    },
+    {
+      "id": "AF-1957-58-014",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "source_url": "https://gocreighton.com/sports/mens-basketball/schedule/1957-58"
+    },
+    {
+      "id": "AF-1957-58-006",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "source_url": "https://godrakebulldogs.com/sports/mens-basketball/schedule/1957-58",
+      "note": "Opponent source exact says El Paso County, Colorado; city supported by same-season official other opponent records, not blindly inferred from county."
+    }
+  ],
+  "season_default": [
+    {
+      "season": "1956-57",
+      "home_rows": 9,
+      "exact_city_games": 1,
+      "source_urls": [
+        "https://goeasternathletics.com/sports/mens-basketball/schedule/1956-57"
+      ]
+    },
+    {
+      "season": "1957-58",
+      "home_rows": 10,
+      "exact_city_games": 2,
+      "exact_county_games": 1,
+      "source_urls": [
+        "https://goeasternathletics.com/sports/mens-basketball/schedule/1957-58",
+        "https://gocreighton.com/sports/mens-basketball/schedule/1957-58",
+        "https://godrakebulldogs.com/sports/mens-basketball/schedule/1957-58"
+      ]
+    }
+  ],
+  "negative_evidence": "Air Force Academy's 1955-58 cadets based at Lowry AFB Denver; Lowry Cadet Gym 863 is NOT proven basketball home floor. Retrospective target schedule shows USAFA CO. No independent same-game reciprocal evidence in evaluated seasons identifies a Denver HOME venue; do not overwrite raw target venue/locality claims.",
+  "source_urls": [
+    "https://www.usafa.edu/about/history/building-years/",
+    "https://lowryfoundation.org/lowry-legacy/air-force-academy/campus-locator/"
+  ],
+  "uncertainties": [
+    "Exact 1956-58 physical venue names unknown for all 19.",
+    "The systematic assignment of 15 games is not identical to exact-game source proof; each row preserves research method.",
+    "Secondary Cadet Gymnasium label on Drake row cannot establish which physical building; 1958 permanent gym and Lowry 1955 gym must never be conflated."
+  ],
+  "unmodified": [
+    "All H/A/N, source dates, opponents, scores, results, game types, literal source site tokens",
+    "Accepted 953 HOME venue assignments",
+    "Original 62 postseason population and all neutral/opponent-home queues",
+    "Stage4 authoring opponent and venue physical-identity member"
+  ],
+  "remaining_work": "Targeted facility/game-program/reciprocal evidence pass for exact building. Do not mark RESEARCHED_UNRESOLVED_HOME_VENUE before concluding stage evidence exhaustion."
+}
