@@ -1,0 +1,25 @@
+{
+  "checkpoint": "0052-stage2-complete-exact-source-provenance",
+  "school_key": "san-diego-state",
+  "research_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": true,
+  "remote_certification": "PENDING_EXACT_HEAD_READ_ONLY_GITHUB_ACTIONS",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_head": "8ce570bbe263f1116453fc7b72c5e70119ea1321",
+  "source_stage1_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "authoritative_stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+  "accepted_games": 1086,
+  "opponent_labels": 341,
+  "opponent_keys": 203,
+  "unresolved_opponent_identity_rows": 0,
+  "restored_provenance_rows": 214,
+  "stage3_started": false,
+  "non_d1_owner_scan": "PENDING_LATER_RESEARCH_BOUNDARY",
+  "historical_coverage_debt_preserved": {
+    "season": "1921-22",
+    "unknown_opponent_games": 3
+  },
+  "next_stage": "STAGE_3A0_ONLY_AFTER_SEPARATE_OWNER_AUTHORIZATION"
+}

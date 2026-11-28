@@ -1,0 +1,98 @@
+{
+  "kind": "SOURCE_ACKNOWLEDGED_COVERAGE_GAPS_V1",
+  "count": 1,
+  "total_unidentified_games": 3,
+  "terminal_gaps": [
+    {
+      "kind": "SOURCE_ACKNOWLEDGED_UNIDENTIFIED_GAME_GAP",
+      "season": "1921-22",
+      "disposition": "TERMINAL_RESEARCHED_COVERAGE_DEBT",
+      "original_blocker": {
+        "class": "SOURCE_EXPLICIT_GAME_MISSING",
+        "season": "1921-22",
+        "source_note": {
+          "text": "1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.",
+          "page": 88
+        },
+        "detail": {
+          "unidentified_games": 3,
+          "unidentified_wins": 1,
+          "unidentified_losses": 2,
+          "source_named_rows": 17,
+          "accepted_named_rows": 14,
+          "excluded_named_rows": 3,
+          "nonplayed_awarded_forfeits": 2
+        },
+        "research_state": "RESEARCHED_UNRESOLVED",
+        "research_evidence_summary": "Checkpoint 0026, SHA 4e57e2ef709ba1aa7edbbc03ced6d6d1b6cd6b9a913ce50f823d7d5118f53b2e: proportionate source research exhausted across realistically accessible high-yield institutional, yearbook, student/local newspaper and targeted reciprocal paths; original issues and some reciprocal holdings remain uninspected due to restricted access. Three explicit unidentified results persist without recovered identity."
+      },
+      "exact_primary_note": "1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.",
+      "source_page": 88,
+      "original_census_state": "MISMATCH",
+      "primary_heading": "14-8 institutional source aggregate, includes two administrative forfeit awards",
+      "source_named_rows": 17,
+      "accepted_named_rows": 14,
+      "excluded_named_rows": 3,
+      "unidentified_played_games": 3,
+      "unidentified_wins": 1,
+      "unidentified_losses": 2,
+      "administrative_nonplayed_forfeit_awards": 2,
+      "new_game_ids": 0,
+      "source_research": [
+        {
+          "source": "SDSU original institutional game guide",
+          "authority": "primary institutional retrospective",
+          "finding": "ORIGINAL_INSTITUTIONAL_GUIDE_REVIEWED: 17 named and 3 explicitly unnamed 1921-22 results; no identifiable opponent for the three; access/exhaustion scope: see checkpoint 0026",
+          "locator": "",
+          "limitation": ""
+        },
+        {
+          "source": "1922 Del Sudoeste contemporary school yearbook",
+          "authority": "distinct contemporary student yearbook, same institution",
+          "finding": "THIRD_PARTY_TRANSCRIPTION_INSPECTED_ORIGINAL_SCAN_INACCESSIBLE: 20 played 12W/8L total corroborates source accounting; no three unnamed opponents in inspected transcription; access/exhaustion scope: see checkpoint 0026",
+          "locator": "https://doczz.net/doc/5471938/del-sudoeste---sdsu-library-and-information-access",
+          "limitation": "Not an independent opponent institution; mirror not original scan"
+        },
+        {
+          "source": "1921-22 Paper Lantern original student newspaper",
+          "authority": "SDSU campus primary news archive",
+          "finding": "COLLECTION_LOCATED_INDIVIDUAL_ISSUES_INACCESSIBLE: No issue contents inspected; redirect/403 limits access, not evidence that original newspaper omitted games; access/exhaustion scope: feasible access routes investigated; do not claim archival holdings reviewed",
+          "locator": [
+            "https://sdsulibrary.wordpress.com/2013/09/12/extra-extra-read-all-about-it/",
+            "https://ibase.sdsu.edu/index.php?a=ViewItem&i=21",
+            "https://digitalcollections.sdsu.edu/the-daily-aztec"
+          ],
+          "limitation": ""
+        },
+        {
+          "source": "Contemporary San Diego Union / Evening Tribune local newspapers",
+          "authority": "separate local primary news family",
+          "finding": "PUBLIC_ARCHIVE_403_AND_LICENSED_OR_PHYSICAL_ALTERNATIVES_NOT_ACCESSED: No 1921-22 original basketball page inspected; independently located but unavailable via available access; access/exhaustion scope: accessible research-channel search pursued; physical/licensed holdings explicitly outstanding",
+          "locator": [
+            "https://cdnc.ucr.edu/?a=cl&cl=CL1&e=-------en--20--1--txt-txIN--------1&sp=SDDU",
+            "https://ucsd.libguides.com/c.php?g=91062&p=587620"
+          ],
+          "limitation": ""
+        },
+        {
+          "source": "1921-22 Chaffey, Santa Ana, Pomona reciprocal school records",
+          "authority": "distinct opponent institutional paths",
+          "finding": "TARGETED_EXACT_SEASON_SEARCHES_NO_AUTHENTICATED_GAME_LOG_RETRIEVED: No independently authenticated additional 1921-22 game identity; no claim that entire opponent archives were inspected; access/exhaustion scope: bounded accessible search routes attempted",
+          "locator": "prior checkpoint 0021 1921-22-investigation.csv and checkpoint 0025 source inventory",
+          "limitation": ""
+        },
+        {
+          "source": "Fontius 1921-1971 thesis",
+          "authority": "historical secondary work",
+          "finding": "BIBLIOGRAPHIC_REFERENCE_ONLY_TEXT_NOT_READ: Not evidence for any opponent identity; access/exhaustion scope: none",
+          "locator": "https://sandiegohistory.org/journal/1993/july/theses2/",
+          "limitation": ""
+        }
+      ],
+      "source_access_limitations": "Bounded systematic research of realistically accessible high-yield institutional, contemporary yearbook, campus/local newspaper access paths, and obvious reciprocal source families is proportionately exhausted (checkpoint 0026). Explicit limitation: original 1921-22 newspapers, licensed local pages, some opponent archive logs and Fontius thesis were not read; do not claim every archival holding exhausted. No opponent identity recovered; reopen if concrete original-source identity evidence becomes accessible.",
+      "reopen_only_on_actual_identity_evidence": true,
+      "audited_parent_sha256": "42a37718684f8745900eb6c977c743ae62a185ccbdd04403d01d5358e8fea49a",
+      "exact_audit_report_sha256": "1c17e7c90c453e140dc679c7ca73b9fae6f4228116f3ed817d8de0606cb618d2"
+    }
+  ]
+}

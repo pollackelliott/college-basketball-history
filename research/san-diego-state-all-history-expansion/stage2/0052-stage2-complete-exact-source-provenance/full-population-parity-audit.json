@@ -1,0 +1,70 @@
+{
+  "kind": "SDSU_STAGE2_0052_PRE_CERTIFICATION_FULL_POPULATION_PARITY_V1",
+  "school_key": "san-diego-state",
+  "scope": "CONTROL_CENTER_ONE_BOUNDED_SAME_STAGE_PROVENANCE_CORRECTION",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "8ce570bbe263f1116453fc7b72c5e70119ea1321",
+  "stage1_archive": {
+    "path": "research/san-diego-state-all-history-expansion/checkpoints/0029-stage1-complete-source-acknowledged-coverage-gap/san-diego-state-stage1-complete-checkpoint.zip",
+    "git_blob": "e71dc178f8b360dd19fad5c2e14075fcb999dbb9",
+    "sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+    "bytes": 451387,
+    "manifest_members_verified": 20,
+    "audited_parent_members_verified": 8,
+    "stage1_ledger_sha256": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e"
+  },
+  "before": {
+    "stage2_ledger_sha256": "1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89",
+    "game_rows": 1086,
+    "provenance_mismatch_count": 214
+  },
+  "classification": {
+    "field": "source_literal_line",
+    "cause": "PIPE_DELIMITED_RESULT_AND_SCORE_SUFFIX_TRUNCATED",
+    "rows": 214,
+    "by_season": {
+      "1942-43": 22,
+      "1943-44": 15,
+      "1944-45": 26,
+      "1945-46": 25,
+      "1946-47": 26,
+      "1947-48": 26,
+      "1948-49": 24,
+      "1949-50": 23,
+      "1950-51": 27
+    },
+    "unclassified": 0
+  },
+  "after": {
+    "repaired_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+    "game_rows": 1086,
+    "source_field_comparisons": 16290,
+    "source_field_mismatches": 0,
+    "previous_stage2_fields_preserved_except_214_source_literal_lines": true,
+    "original_stage1_provenance_columns_added": [
+      "opponent_literal",
+      "game_universe_state",
+      "source_checkpoint",
+      "source_row_order",
+      "source_result_token",
+      "literal_source_line",
+      "source_cohort_git_blob",
+      "source_row_json_sha256"
+    ],
+    "identical_game_id_set": true,
+    "identical_opponent_identity_mapping": true,
+    "identical_scores_and_outcomes": true,
+    "identical_game_types": true,
+    "site_type_inference_added": 0,
+    "stage3_started": false
+  },
+  "other_authority": {
+    "opponent_labels": 341,
+    "opponent_keys": 203,
+    "disposition_rows": 1126,
+    "excluded_named_rows": 40,
+    "source_acknowledged_1921_22_unidentified_games": 3
+  },
+  "local_full_population_pre_certification": "PASS",
+  "remote_read_only_certification": "REQUIRED_ONCE"
+}

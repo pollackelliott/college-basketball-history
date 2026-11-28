@@ -1,0 +1,42 @@
+{
+  "kind": "SDSU_STAGE2_0052_COMPLETE_AUTHENTICATED_PROVENANCE_V1",
+  "checkpoint": "0052-stage2-complete-exact-source-provenance",
+  "parent_research_head": "8ce570bbe263f1116453fc7b72c5e70119ea1321",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "accepted_ledger_parent_sha256": "1f65277fc7143b0494a6f88d304e182dcea748abf5aad22561bb86083ac1cc89",
+  "stage1_zip_sha256": "25d9eed65d15dfdb9a32bc1434b7f71e98ecf6b9d0f731cd8e8d6ceb8e2aa7c6",
+  "stage1_ledger_sha256": "6181814048d2a60093615ab29c239e01db4177a3a152bf58bd30938cbc52bd5e",
+  "stage2_complete": true,
+  "remote_independent_ci_certification_required": true,
+  "files": {
+    "structured-stage2-ledger.csv": {
+      "sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+      "bytes": 1586240
+    },
+    "provenance-repair-inventory.csv": {
+      "sha256": "35f76f8448fa64da3395d64479471bbba45156fd7dfa2f349377fdaf0bec0958",
+      "bytes": 35517
+    },
+    "full-population-parity-audit.json": {
+      "sha256": "0bfe9da898711b999e47ebf96b9876f5697104f2839d454d178f1af900198f0e",
+      "bytes": 2524
+    },
+    "research-status.json": {
+      "sha256": "45ac65fc605cc62733f97fd1fb3959152c3bbd86045cc0abefd7ae6da18ca101",
+      "bytes": 1114
+    },
+    "source-acknowledged-coverage-gaps.json": {
+      "sha256": "699960b80bdc9a9068baf6c7aafb55eb6b6c4c3df8e4f18d62d67a00b5848954",
+      "bytes": 6136
+    },
+    "stage4-authoring/season-coverage.json": {
+      "sha256": "ca3922abb628ebccc810263e9e068fb1964940e00d668dd8ee7660a3699195f2",
+      "bytes": 505
+    },
+    "stage4-authoring/opponents.csv": {
+      "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d",
+      "bytes": 289478
+    }
+  }
+}
