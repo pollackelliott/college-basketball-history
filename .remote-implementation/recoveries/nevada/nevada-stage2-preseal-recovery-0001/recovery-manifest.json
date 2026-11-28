@@ -1,0 +1,11 @@
+{
+  "actual_target_sha": null,
+  "kind": "REMOTE_IMPLEMENTATION_RECOVERY",
+  "lock_commit": null,
+  "mutation_classification": "NOT_ATTEMPTED",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "recovered_request_id": "nevada-stage2-preseal-0001",
+  "request_id": "nevada-stage2-preseal-recovery-0001",
+  "schema_version": 1,
+  "target_branch": null
+}
