@@ -1,0 +1,36 @@
+{
+  "kind": "SDSU_STAGE2_SOCAL_COLLEGES_CHECKPOINT_MANIFEST_V1",
+  "checkpoint": "0033-stage2-southern-california-college-opponent-identities",
+  "school_key": "san-diego-state",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "ea3ed15f1437ecf44165c53ad00fe0cd063e81b8",
+  "protected_main_sha_at_checkpoint": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "prior_mapping_sha256": "5a384fff0948cfbd406d14de87a2e887b03cc6104adce3c80fee4bd7d9034a9c",
+  "census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "added_labels": 19,
+  "added_games": 195,
+  "cumulative_mapped_labels": 63,
+  "cumulative_mapped_games": 568,
+  "remaining_labels": 278,
+  "remaining_games": 518,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "db03ec1fc0ebc01390e326050e7e493b60134663d1abb7275e365cae41b22955",
+      "bytes_utf8": 38017
+    },
+    "accepted-southern-california-college-evidence.json": {
+      "sha256": "1b36512be60e8e5fe26c450bfa209058381bbbe6f9f23c399be6388f6c0656ea",
+      "bytes_utf8": 14842
+    },
+    "research-status.json": {
+      "sha256": "135951dba958d26d12c11f363301583ec78ff30d60830d965c80a0679a056964",
+      "bytes_utf8": 1059
+    },
+    "research-findings.md": {
+      "sha256": "a93736b091faad3ed3bd093ba4a1e9e7a7001c7ef838ec37dabbbc5e342efd01",
+      "bytes_utf8": 1661
+    }
+  }
+}

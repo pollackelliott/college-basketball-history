@@ -1,0 +1,409 @@
+{
+  "kind": "SDSU_STAGE2_SOCAL_COLLEGE_HISTORICAL_IDENTITY_V1",
+  "school_key": "san-diego-state",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "ea3ed15f1437ecf44165c53ad00fe0cd063e81b8",
+  "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "source_census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "prior_authoring_sha256": "5a384fff0948cfbd406d14de87a2e887b03cc6104adce3c80fee4bd7d9034a9c",
+  "reference_published_opponent_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "reference_program_registry_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "official_family_sources": [
+    {
+      "key": "whittier",
+      "name": "Whittier",
+      "re": {},
+      "historical": "Whittier College established in 1887; a founding SCIAC school",
+      "urls": [
+        "https://www.whittier.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ],
+      "inherited_published_rows": 1
+    },
+    {
+      "key": "occidental",
+      "name": "Occidental",
+      "re": {},
+      "historical": "Occidental College established in 1887; a founding SCIAC school",
+      "urls": [
+        "https://www.oxy.edu/about-oxy/mission/our-history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ],
+      "inherited_published_rows": 3
+    },
+    {
+      "key": "redlands",
+      "name": "Redlands",
+      "re": {},
+      "historical": "University of Redlands established in 1907; a founding SCIAC school",
+      "urls": [
+        "https://www.redlands.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ],
+      "inherited_published_rows": 1
+    },
+    {
+      "key": "la-verne",
+      "name": "La Verne",
+      "re": {},
+      "historical": "La Verne College name from 1917; joined SCIAC in 1926 with San Diego State; NCAA currently DIII. Expansion-only proposed non-D1 key",
+      "urls": [
+        "https://leopardathletics.com/sports/2023/5/18/History-La-Verne-History.aspx",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=341"
+      ],
+      "inherited_published_rows": 0
+    },
+    {
+      "key": "chapman",
+      "name": "Chapman",
+      "re": {},
+      "historical": "Chapman predecessor California Christian College to 1934, 1957 Chapman (FR) the NCAA College Division first round, not freshmen",
+      "urls": [
+        "https://athletics.chapman.edu/honors/chapman-athletics-hall-of-fame-est-1979-/ralph-welch-/118",
+        "https://storage.googleapis.com/sdsu-prod/2024/06/21/yU4yRGttFguApZSHk6bruePKQs1DzqSyLAglVYCe.pdf"
+      ],
+      "inherited_published_rows": 1
+    }
+  ],
+  "accepted_labels": [
+    {
+      "literal": "*at La Verne",
+      "games": 10,
+      "first": "1927-28",
+      "last": "1935-36",
+      "game_types": "REGULAR_SEASON",
+      "key": "la-verne",
+      "name": "La Verne",
+      "current_d1": "No",
+      "method": "OFFICIAL_NON_D1_SCIAC_NEW_KEY",
+      "reason": "La Verne College name from 1917; joined SCIAC in 1926 with San Diego State; NCAA currently DIII. Expansion-only proposed non-D1 key",
+      "sources": [
+        "https://leopardathletics.com/sports/2023/5/18/History-La-Verne-History.aspx",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=341"
+      ]
+    },
+    {
+      "literal": "*at Occidental",
+      "games": 4,
+      "first": "1926-27",
+      "last": "1931-32",
+      "game_types": "REGULAR_SEASON",
+      "key": "occidental",
+      "name": "Occidental",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Occidental College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.oxy.edu/about-oxy/mission/our-history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "*at Redlands",
+      "games": 9,
+      "first": "1927-28",
+      "last": "1937-38",
+      "game_types": "REGULAR_SEASON",
+      "key": "redlands",
+      "name": "Redlands",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "University of Redlands established in 1907; a founding SCIAC school",
+      "sources": [
+        "https://www.redlands.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "*at Whittier",
+      "games": 15,
+      "first": "1926-27",
+      "last": "1938-39",
+      "game_types": "REGULAR_SEASON",
+      "key": "whittier",
+      "name": "Whittier",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Whittier College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.whittier.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "*La Verne",
+      "games": 13,
+      "first": "1926-27",
+      "last": "1937-38",
+      "game_types": "REGULAR_SEASON",
+      "key": "la-verne",
+      "name": "La Verne",
+      "current_d1": "No",
+      "method": "OFFICIAL_NON_D1_SCIAC_NEW_KEY",
+      "reason": "La Verne College name from 1917; joined SCIAC in 1926 with San Diego State; NCAA currently DIII. Expansion-only proposed non-D1 key",
+      "sources": [
+        "https://leopardathletics.com/sports/2023/5/18/History-La-Verne-History.aspx",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=341"
+      ]
+    },
+    {
+      "literal": "*Occidental",
+      "games": 15,
+      "first": "1927-28",
+      "last": "1938-39",
+      "game_types": "REGULAR_SEASON",
+      "key": "occidental",
+      "name": "Occidental",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Occidental College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.oxy.edu/about-oxy/mission/our-history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "*Redlands",
+      "games": 10,
+      "first": "1926-27",
+      "last": "1938-39",
+      "game_types": "REGULAR_SEASON",
+      "key": "redlands",
+      "name": "Redlands",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "University of Redlands established in 1907; a founding SCIAC school",
+      "sources": [
+        "https://www.redlands.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "*Whittier",
+      "games": 9,
+      "first": "1927-28",
+      "last": "1937-38",
+      "game_types": "REGULAR_SEASON",
+      "key": "whittier",
+      "name": "Whittier",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Whittier College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.whittier.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "at Chapman",
+      "games": 3,
+      "first": "1936-37",
+      "last": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "chapman",
+      "name": "Chapman",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Chapman predecessor California Christian College to 1934, 1957 Chapman (FR) the NCAA College Division first round, not freshmen",
+      "sources": [
+        "https://athletics.chapman.edu/honors/chapman-athletics-hall-of-fame-est-1979-/ralph-welch-/118",
+        "https://storage.googleapis.com/sdsu-prod/2024/06/21/yU4yRGttFguApZSHk6bruePKQs1DzqSyLAglVYCe.pdf"
+      ]
+    },
+    {
+      "literal": "at Chapman College",
+      "games": 1,
+      "first": "1925-26",
+      "last": "1925-26",
+      "game_types": "REGULAR_SEASON",
+      "key": "chapman",
+      "name": "Chapman",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Chapman predecessor California Christian College to 1934, 1957 Chapman (FR) the NCAA College Division first round, not freshmen",
+      "sources": [
+        "https://athletics.chapman.edu/honors/chapman-athletics-hall-of-fame-est-1979-/ralph-welch-/118",
+        "https://storage.googleapis.com/sdsu-prod/2024/06/21/yU4yRGttFguApZSHk6bruePKQs1DzqSyLAglVYCe.pdf"
+      ]
+    },
+    {
+      "literal": "at Occidental",
+      "games": 2,
+      "first": "1942-43",
+      "last": "1944-45",
+      "game_types": "REGULAR_SEASON",
+      "key": "occidental",
+      "name": "Occidental",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Occidental College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.oxy.edu/about-oxy/mission/our-history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "at Redlands",
+      "games": 6,
+      "first": "1925-26",
+      "last": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "key": "redlands",
+      "name": "Redlands",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "University of Redlands established in 1907; a founding SCIAC school",
+      "sources": [
+        "https://www.redlands.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "at Whittier",
+      "games": 27,
+      "first": "1924-25",
+      "last": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "whittier",
+      "name": "Whittier",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Whittier College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.whittier.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "Chapman",
+      "games": 15,
+      "first": "1936-37",
+      "last": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "chapman",
+      "name": "Chapman",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Chapman predecessor California Christian College to 1934, 1957 Chapman (FR) the NCAA College Division first round, not freshmen",
+      "sources": [
+        "https://athletics.chapman.edu/honors/chapman-athletics-hall-of-fame-est-1979-/ralph-welch-/118",
+        "https://storage.googleapis.com/sdsu-prod/2024/06/21/yU4yRGttFguApZSHk6bruePKQs1DzqSyLAglVYCe.pdf"
+      ]
+    },
+    {
+      "literal": "Chapman (FR) (Aztec Gym)",
+      "games": 1,
+      "first": "1956-57",
+      "last": "1956-57",
+      "game_types": "POSTSEASON",
+      "key": "chapman",
+      "name": "Chapman",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Chapman predecessor California Christian College to 1934, 1957 Chapman (FR) the NCAA College Division first round, not freshmen",
+      "sources": [
+        "https://athletics.chapman.edu/honors/chapman-athletics-hall-of-fame-est-1979-/ralph-welch-/118",
+        "https://storage.googleapis.com/sdsu-prod/2024/06/21/yU4yRGttFguApZSHk6bruePKQs1DzqSyLAglVYCe.pdf"
+      ]
+    },
+    {
+      "literal": "Chapman College",
+      "games": 3,
+      "first": "1928-29",
+      "last": "1931-32",
+      "game_types": "REGULAR_SEASON",
+      "key": "chapman",
+      "name": "Chapman",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Chapman predecessor California Christian College to 1934, 1957 Chapman (FR) the NCAA College Division first round, not freshmen",
+      "sources": [
+        "https://athletics.chapman.edu/honors/chapman-athletics-hall-of-fame-est-1979-/ralph-welch-/118",
+        "https://storage.googleapis.com/sdsu-prod/2024/06/21/yU4yRGttFguApZSHk6bruePKQs1DzqSyLAglVYCe.pdf"
+      ]
+    },
+    {
+      "literal": "Occidental",
+      "games": 11,
+      "first": "1939-40",
+      "last": "1953-54",
+      "game_types": "REGULAR_SEASON",
+      "key": "occidental",
+      "name": "Occidental",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Occidental College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.oxy.edu/about-oxy/mission/our-history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "Redlands",
+      "games": 12,
+      "first": "1949-50",
+      "last": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "redlands",
+      "name": "Redlands",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "University of Redlands established in 1907; a founding SCIAC school",
+      "sources": [
+        "https://www.redlands.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    },
+    {
+      "literal": "Whittier",
+      "games": 29,
+      "first": "1923-24",
+      "last": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "key": "whittier",
+      "name": "Whittier",
+      "current_d1": "No",
+      "method": "INHERITED_NON_D1_KEY_AND_INSTITUTIONAL_SOURCE",
+      "reason": "Whittier College established in 1887; a founding SCIAC school",
+      "sources": [
+        "https://www.whittier.edu/about/history",
+        "https://thesciac.org/sports/2023/6/30/ABOUT%20THE%20SCIAC.aspx"
+      ]
+    }
+  ],
+  "added_labels": 19,
+  "added_games": 195,
+  "by_opponent": {
+    "la-verne": 23,
+    "occidental": 32,
+    "redlands": 37,
+    "whittier": 80,
+    "chapman": 23
+  },
+  "cumulative_mapped_labels": 63,
+  "cumulative_mapped_games": 568,
+  "distinct_keys": 13,
+  "remaining_unadjudicated_labels": 278,
+  "remaining_unadjudicated_game_rows": 518,
+  "whittier_junior_chamber_separate": {
+    "source_label": "Whittier Junior Chamber of Commerce",
+    "game_count": 1,
+    "resolved_as_whittier_college": false
+  },
+  "new_non_d1_key_requires_owner_scan": "la-verne",
+  "non_d1_owner_scan_candidates": [
+    "whittier",
+    "occidental",
+    "redlands",
+    "la-verne",
+    "chapman"
+  ],
+  "unchanged_prior_table_bytes": true,
+  "site_type_venue_round_inferences": 0,
+  "source_game_rows_changed": 0,
+  "unidentified_1921_22_games_noncanonical": 3,
+  "stage2_complete": false
+}
