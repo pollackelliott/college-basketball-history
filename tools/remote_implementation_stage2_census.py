@@ -1228,16 +1228,33 @@ def verify_phase0_authority(
             phase0_preview=phase0_preview,
         )
 
+    # Only the exact fresh-verified two-field registered-key exception may
+    # interpose between the original Phase 0 successor and a display-only
+    # successor. No generic key rebase or unverified school mutation is accepted.
+    registered_key_rebase_authority: dict[str, Any] | None = None
+    effective_predecessor_sha = phase0_target_sha
+    if request.get("stage2_current_program_key_rebase_successor") is not None:
+        from remote_implementation_stage2_key_rebase import (
+            verify_registered_key_successor,
+        )
+        registered_key_rebase_authority = verify_registered_key_successor(
+            request, control_commit, phase0_sha=phase0_target_sha,
+        )
+        effective_predecessor_sha = registered_key_rebase_authority["target_sha"]
+
     display_authority: dict[str, Any] | None = None
-    if request["target_sha"] == phase0_target_sha:
+    if request["target_sha"] == effective_predecessor_sha:
         if request.get("stage2_opponent_display_successor") is not None:
             raise Stop("STAGE2_OPPONENT_DISPLAY_SUCCESSOR_NOT_APPLICABLE")
-        target_authority_kind = "PHASE0_SUCCESSOR"
+        target_authority_kind = (
+            "STAGE2_REGISTERED_KEY_REBASE_SUCCESSOR"
+            if registered_key_rebase_authority else "PHASE0_SUCCESSOR"
+        )
     else:
         display_authority = _verify_opponent_display_target_authority(
             request,
             control_commit,
-            phase0_target_sha=phase0_target_sha,
+            phase0_target_sha=effective_predecessor_sha,
             package_hashes=package_hashes,
             phase0_successor=successor,
             phase0_writeahead=writeahead,
@@ -1259,6 +1276,7 @@ def verify_phase0_authority(
         "phase0_protected_main_sha": successor.get("protected_main_sha"),
         "target_authority_kind": target_authority_kind,
         "opponent_display_authority": display_authority,
+        "registered_key_rebase_authority": registered_key_rebase_authority,
     }
 
 

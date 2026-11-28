@@ -31,6 +31,7 @@ OP_PHASE0_SCOPE_SUPERSESSION = "PHASE0_SCOPE_SUPERSESSION"
 OP_STAGE2_CENSUS = "STAGE2_CENSUS"
 OP_STAGE2_CURRENT_MAIN_REFRESH = "STAGE2_CURRENT_MAIN_REFRESH"
 OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE = "STAGE2_OPPONENT_DISPLAY_NORMALIZE"
+OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE = "STAGE2_CURRENT_PROGRAM_KEY_REBASE"
 OP_STAGE2_PROPOSAL_REHEARSAL = "STAGE2_PROPOSAL_REHEARSAL"
 OP_STAGE2_GATE1_FILL = "STAGE2_GATE1_FILL"
 OP_STAGE2_PRESEAL_REHEARSAL = "STAGE2_PRESEAL_REHEARSAL"
@@ -53,6 +54,7 @@ SUPPORTED_OPERATIONS = {
     OP_STAGE2_CENSUS,
     OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+    OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_STAGE2_GATE1_FILL,
     OP_STAGE2_PRESEAL_REHEARSAL,
@@ -525,6 +527,16 @@ def validate_request(request: dict[str, Any]) -> None:
 
     authority = request.get("authority")
     _require(isinstance(authority, dict), "REQUEST_AUTHORITY_MISSING")
+    if operation == OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE:
+        _require(
+            authority.get("stage2_current_program_key_rebase") is True,
+            "REGISTERED_KEY_REBASE_REQUEST_AUTHORITY_REQUIRED",
+        )
+    else:
+        _require(
+            authority.get("stage2_current_program_key_rebase") is not True,
+            "REGISTERED_KEY_REBASE_AUTHORITY_FORBIDDEN",
+        )
     validate_stage2_phase_continuation(
         operation,
         request_id,
@@ -1308,6 +1320,12 @@ def validate_request(request: dict[str, Any]) -> None:
                     "stage2_opponent_display_successor",
                     required=True,
                 )
+            if request.get("stage2_current_program_key_rebase_successor") is not None:
+                _validate_payload_ref(
+                    request.get("stage2_current_program_key_rebase_successor"),
+                    "stage2_current_program_key_rebase_successor",
+                    required=True,
+                )
             if request.get("stage2_current_main_refresh_successor") is not None:
                 _validate_payload_ref(
                     request.get("stage2_current_main_refresh_successor"),
@@ -1390,6 +1408,59 @@ def validate_request(request: dict[str, Any]) -> None:
         _require(
             bool(str(authorization.get("authorization_basis") or "").strip()),
             "STAGE2_REFRESH_AUTHORIZATION_BASIS_REQUIRED",
+        )
+
+    if operation == OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE:
+        _require(
+            school_key == "grand-canyon",
+            "REGISTERED_KEY_REBASE_SCHOOL_FORBIDDEN",
+        )
+        _require(
+            request.get("target_branch") == "data/grand-canyon-onboarding",
+            "REGISTERED_KEY_REBASE_TARGET_BRANCH_FORBIDDEN",
+        )
+        _require_sha(
+            request.get("target_sha"), 40,
+            "REGISTERED_KEY_REBASE_TARGET_SHA_INVALID",
+        )
+        _validate_payload_ref(
+            request.get("stage2_census_checkpoint"),
+            "stage2_census_checkpoint", required=True,
+        )
+        _require(
+            request["stage2_census_checkpoint"]["sha256"]
+            == "30a16fae7319d0c4015dc4e7b2f791313627517e6d54d64dc07a7429efa2d037",
+            "REGISTERED_KEY_REBASE_CENSUS_NOT_APPROVED",
+        )
+        _require(
+            request.get("case") == "grand-canyon-1989-90-035",
+            "REGISTERED_KEY_REBASE_CASE_NOT_APPROVED",
+        )
+        _require(
+            request.get("ruling_url") ==
+            "https://github.com/pollackelliott/college-basketball-history/issues/736#issuecomment-7243473979",
+            "REGISTERED_KEY_REBASE_RULING_MISMATCH",
+        )
+        for key in (
+            "phase0", "recovery", "stage2_census", "stage2_current_main_refresh",
+            "stage2_opponent_display_normalize", "stage2_proposal_rehearsal",
+            "stage2_gate1_fill", "stage2_preseal_rehearsal",
+            "stage2_gate1_seal", "stage2_sealed_apply",
+            "stage2_reconciliation_diagnostic", "venue_identity_maintenance",
+            "release_readiness", "release_preview_verify",
+            "release_gate2_approval", "release_production_proof", "release",
+        ):
+            _require(
+                authority.get(key) is not True,
+                "REGISTERED_KEY_REBASE_OTHER_AUTHORITY_FORBIDDEN:" + key,
+            )
+        _require_sha(
+            request.get("integration_freeze_sha256"), 64,
+            "REGISTERED_KEY_REBASE_FREEZE_SHA_INVALID",
+        )
+        _require_sha(
+            request.get("semantic_snapshot_sha256"), 64,
+            "REGISTERED_KEY_REBASE_SEMANTIC_SHA_INVALID",
         )
 
     if operation == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
@@ -1982,6 +2053,7 @@ def verify_request_predecessor(
             OP_EXPANSION_REBOOTSTRAP_FROM_FREEZE,
             OP_PHASE0_SCOPE_SUPERSESSION,
             OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+            OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE,
         }:
             _require(
                 recovery.get("target_branch")

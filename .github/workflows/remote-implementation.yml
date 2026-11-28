@@ -880,3 +880,42 @@ jobs:
           path: /tmp/remote-implementation-verification
           if-no-files-found: ignore
           retention-days: 14
+
+  fresh-registered-key-rebase-verification:
+    needs: process-request
+    if: needs.process-request.result == 'success' && needs.process-request.outputs.operation == 'STAGE2_CURRENT_PROGRAM_KEY_REBASE'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out durable key-rebase write-ahead and control state
+        uses: actions/checkout@v4
+        with:
+          ref: control/remote-implementation
+          path: control
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check out exact request-bound protected-main verifier runtime
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.process-request.outputs.protected_main_sha }}
+          path: runtime
+          fetch-depth: 0
+
+      - name: Independently reconstruct and verify the exact two-cell rebase
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$GITHUB_WORKSPACE/runtime/tools/remote_implementation_verify.py"
+
+      - name: Upload registered-key fresh verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-implementation-registered-key-verify-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/remote-implementation-verification
+          if-no-files-found: ignore
+          retention-days: 14
