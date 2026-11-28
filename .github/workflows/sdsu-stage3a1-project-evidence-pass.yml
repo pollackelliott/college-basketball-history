@@ -1,0 +1,262 @@
+name: SDSU Stage 3A-1 bounded accepted project evidence pass
+on:
+  push:
+    branches: [research/san-diego-state-all-history-expansion]
+    paths:
+      - .github/workflows/sdsu-stage3a1-project-evidence-pass.yml
+permissions:
+  contents: write
+jobs:
+  project-first-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact Research authority and protected-main contents
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Authenticate Stage 3A-0; project/target institutional source family census; write cumulative Stage 3A-1 partial checkpoint
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import collections,csv,hashlib,io,json,pathlib,re,subprocess
+          root=pathlib.Path("research/san-diego-state-all-history-expansion")
+          stage0=root/"stage3a/0053-stage3a0-local-mechanical-census"
+          stage2=root/"stage2/0052-stage2-complete-exact-source-provenance"
+          output=root/"stage3a/0054-stage3a1-accepted-project-source-class-pass"
+          parent="16057d4902497a972e75d51634b8c06511fe06af"
+          main="242370fc551fd749c157c74d92917ddfafbe40e0"
+          base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          def sha(b):return hashlib.sha256(b).hexdigest()
+          def check(x,m):
+              if not x:raise AssertionError("STAGE3A1_EVIDENCE_GUARD: "+m)
+          def rows(p):
+              with p.open(newline="",encoding="utf-8-sig") as f:return list(csv.DictReader(f))
+          def dump(p,o):p.write_text(json.dumps(o,indent=2,sort_keys=True,ensure_ascii=False)+"\n",encoding="utf-8")
+          def csvout(p,items,fields):
+              with p.open("w",newline="",encoding="utf-8") as f:
+                  writer=csv.DictWriter(f,fieldnames=fields,extrasaction="raise")
+                  writer.writeheader()
+                  writer.writerows(items)
+          def norm_season(s):
+              s=(s or "").strip()
+              m=re.fullmatch(r"(\d{4})-(\d{2}|\d{4})",s)
+              if not m:return ""
+              y=int(m.group(1));expected=y+1
+              if m.group(2) not in {str(expected),str(expected%100).zfill(2)}:return ""
+              return str(y)+"-"+str(expected)
+          def date_token(t):
+              m=re.fullmatch(r"\s*([ONDJFMAM])\.\s*(\d{1,2})\s*",t or "",re.I)
+              if not m:return ""
+              d={ "O":10,"N":11,"D":12,"J":1,"F":2,"M":3,"A":4}
+              return f"{d[m.group(1).upper()]:02d}-{int(m.group(2)):02d}"
+          def opp_result(result):
+              return {"W":"L","L":"W","T":"T"}.get(result,"")
+          actual=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          check(subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()==parent,"exact predecessor")
+          check(subprocess.check_output(["git","diff","--name-only",parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-project-evidence-pass.yml"],"one workflow file only")
+          check(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main changed")
+          check(subprocess.run(["git","cat-file","-e",base+"^{commit}"],capture_output=True).returncode==0,"research base missing")
+          status0=json.loads((stage0/"stage3a0-status.json").read_text())
+          manifest0=json.loads((stage0/"manifest.json").read_text())
+          provenance0=json.loads((stage0/"stage3a0-execution-provenance.json").read_text())
+          check(status0["status"]=="COMPLETE" and status0["ledger_rows"]==1086,"Stage 3A-0 status")
+          check(status0["protected_main_sha"]==main and status0["source_ledger_sha256"]=="2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95","Stage 3A-0 authority")
+          check(provenance0["immutable_research_base_sha"]==base and provenance0["result"]=="COMPLETE","Stage 3A-0 provenance")
+          for entry in manifest0.values():
+              p=pathlib.Path(entry["path"])
+              check(p.is_file() and sha(p.read_bytes())==entry["sha256"],"Stage 3A-0 member integrity: "+str(p))
+          manifest2=json.loads((stage2/"manifest.json").read_text())
+          check(manifest2["stage2_complete"] is True and manifest2["immutable_research_base_sha"]==base,"Stage 2 authority")
+          for name,item in manifest2["files"].items():
+              b=(stage2/name).read_bytes()
+              check(sha(b)==item["sha256"] and len(b)==item["bytes"],"Stage 2 member integrity: "+name)
+          source=rows(stage0/"stage3a0-input-ledger.csv")
+          original=rows(stage2/"structured-stage2-ledger.csv")
+          check(len(source)==len(original)==1086,"input cardinality")
+          orig_by_id={r["research_game_id"]:r for r in original}
+          check(len(orig_by_id)==1086,"duplicate original IDs")
+          for r in source:
+              o=orig_by_id.get(r["research_game_id"])
+              check(o is not None and all(r[k]==v for k,v in o.items()),"Stage 3A-0 changed source facts "+r["research_game_id"])
+          check(collections.Counter(r["game_type"] for r in source)=={"REGULAR_SEASON":1043,"POSTSEASON":43},"game type population")
+          check(collections.Counter(r["site_type"] for r in source)=={"UNKNOWN":1086},"input site census")
+          published_path=pathlib.Path("schools/san-diego-state/source-games.csv")
+          published=rows(published_path)
+          check(len(published)==1709,"published SDSU baseline cardinality")
+          atbaseline=[r for r in published if r["source_site_candidate"]=="at"]
+          breakdown=collections.Counter((r["curated_game_type"],r["curated_site_type"]) for r in atbaseline)
+          check(len(atbaseline)==584,"published SDSU at source convention size")
+          check(breakdown[("REGULAR_SEASON","OPPONENT_HOME")]==583,"published regular-season at convention")
+          check(breakdown[("CONFERENCE_TOURNAMENT","NEUTRAL")]==1,"documented tournament exception")
+          check(len(breakdown)==2,"unexpected published at convention")
+          exception=[r for r in atbaseline if r["curated_site_type"]=="NEUTRAL"]
+          check(len(exception)==1 and exception[0]["source_game_id"]=="SDSU-S1-000649","exact published tournament exception")
+          # Systematic project-evidence join; no web discovery or geography-based site assignment.
+          reciprocal=[]
+          for file in sorted(pathlib.Path("schools").glob("*/source-games.csv")):
+              if file.parent.name=="san-diego-state":continue
+              for r in rows(file):
+                  if r.get("normalized_opponent_key")!="san-diego-state":continue
+                  if r.get("curated_game_type")!="REGULAR_SEASON":continue
+                  if r.get("source_program_key")!=file.parent.name:continue
+                  if r.get("curated_site_type") not in {"SOURCE_PROGRAM_HOME","OPPONENT_HOME","NEUTRAL"}:continue
+                  if not norm_season(r.get("season_label","")):continue
+                  reciprocal.append({**r,"_file":str(file)})
+          recip_by_key=collections.defaultdict(list)
+          for r in reciprocal:
+              key=(r["source_program_key"],norm_season(r["season_label"]),r["team_score"],r["opponent_score"],r["played_result"])
+              recip_by_key[key].append(r)
+          target_key_counts=collections.Counter((r["canonical_opponent_key"],norm_season(r["season_label"]),r["team_score"],r["opponent_score"],r["result"]) for r in source if r["game_type"]=="REGULAR_SEASON")
+          out_fields=list(source[0])+["curated_site_type","site_research_status","site_research_basis","stage3a1_evidence_class","stage3a1_evidence_reference"]
+          queue_fields=["research_game_id","season_label","game_type","source_opponent_label","canonical_opponent_key","team_score","opponent_score","source_date_token","source_site_token","source_event_context","source_literal_line","current_site_type","next_evidence_class"]
+          record_fields=["research_game_id","season_label","source_opponent_label","team_score","opponent_score","previous_site","new_site","evidence_class","source_reference","evidence_detail"]
+          results=[];decisions=[];remaining=[];recip_candidates=[];potential_conflicts=[]
+          counts=collections.Counter()
+          for r in source:
+              row={**r,"curated_site_type":"","site_research_status":"PENDING_STAGE3A1","site_research_basis":"","stage3a1_evidence_class":"","stage3a1_evidence_reference":""}
+              if r["game_type"]!="REGULAR_SEASON":
+                  row["site_research_status"]="DEFERRED_POSTSEASON_STAGE3B"
+                  results.append(row)
+                  continue
+              key=(r["canonical_opponent_key"],norm_season(r["season_label"]),r["opponent_score"],r["team_score"],opp_result(r["result"]))
+              same=recip_by_key.get(key,[])
+              identity=(r["canonical_opponent_key"],norm_season(r["season_label"]),r["team_score"],r["opponent_score"],r["result"])
+              valid=[]
+              for cand in same:
+                  expected=date_token(r["source_date_token"])
+                  actual=(cand.get("game_date") or "")[-5:]
+                  if expected and actual and expected!=actual:
+                      potential_conflicts.append({"id":r["research_game_id"],"kind":"RECIPROCAL_DATE_MISMATCH","reference":cand["_file"]+"#"+cand["source_game_id"],"target_month_day":expected,"reciprocal_month_day":actual})
+                      continue
+                  valid.append(cand)
+              reciprocal_support=None
+              if len(valid)==1 and target_key_counts[identity]==1:
+                  candidate=valid[0]
+                  opposite={"SOURCE_PROGRAM_HOME":"OPPONENT_HOME","OPPONENT_HOME":"HOME","NEUTRAL":"NEUTRAL"}[candidate["curated_site_type"]]
+                  reciprocal_support=(opposite,candidate)
+                  recip_candidates.append({"id":r["research_game_id"],"site_type":opposite,"file":candidate["_file"],"source_game_id":candidate["source_game_id"],"source_site":candidate["curated_site_type"]})
+              elif valid:
+                  potential_conflicts.append({"id":r["research_game_id"],"kind":"AMBIGUOUS_RECIPROCAL_GAME_IDENTITY","candidate_count":len(valid),"target_score_tuple_frequency":target_key_counts[identity]})
+              is_plain_at=r["source_site_token"]=="at" and not r["source_event_context"] and re.search(r"(?:^|\s)\*?at\s",r["source_literal_line"],re.I)
+              if is_plain_at:
+                  if reciprocal_support and reciprocal_support[0]!="OPPONENT_HOME":
+                      potential_conflicts.append({"id":r["research_game_id"],"kind":"RECIPROCAL_CONTRADICTS_AT_SOURCE_CONVENTION","site":reciprocal_support[0],"source_game_id":reciprocal_support[1]["source_game_id"]})
+                  else:
+                      row["site_type"]="OPPONENT_HOME"
+                      row["curated_site_type"]="OPPONENT_HOME"
+                      row["site_research_status"]="SUPPORTED"
+                      row["stage3a1_evidence_class"]="TARGET_INSTITUTIONAL_GUIDE_AT_CONVENTION_CORROBORATED_BY_PUBLISHED_BASELINE"
+                      row["stage3a1_evidence_reference"]="SDSU 2026-27 guide pp.88-93; main schools/san-diego-state/source-games.csv convention (583 regular at=OPPONENT_HOME; postseason exception SDSU-S1-000649)"
+                      row["site_research_basis"]="Explicit primary guide 'at' notation; published SDSU regular-season source-series accepts at as OPPONENT_HOME; event-context rows withheld"
+              elif reciprocal_support:
+                  target_type,candidate=reciprocal_support
+                  row["site_type"]=target_type
+                  row["curated_site_type"]="SOURCE_PROGRAM_HOME" if target_type=="HOME" else target_type
+                  row["site_research_status"]="SUPPORTED"
+                  row["stage3a1_evidence_class"]="EXACT_CURRENT_MAIN_PUBLISHED_RECIPROCAL_GAME"
+                  row["stage3a1_evidence_reference"]=candidate["_file"]+"#"+candidate["source_game_id"]
+                  row["site_research_basis"]="Unique reciprocal opponent current-main source game, opposite scores/outcome, identical season and date where available; accepted published reciprocal curated_site_type="+candidate["curated_site_type"]
+              if row["site_research_status"]=="SUPPORTED":
+                  decisions.append({"research_game_id":r["research_game_id"],"season_label":r["season_label"],"source_opponent_label":r["source_opponent_label"],"team_score":r["team_score"],"opponent_score":r["opponent_score"],"previous_site":r["site_type"],"new_site":row["site_type"],"evidence_class":row["stage3a1_evidence_class"],"source_reference":row["stage3a1_evidence_reference"],"evidence_detail":row["site_research_basis"]})
+                  counts[row["stage3a1_evidence_class"]]+=1
+              else:
+                  row["stage3a1_evidence_class"]="PENDING_SOURCE_HIERARCHY"
+                  row["stage3a1_evidence_reference"]="Stage 3A-0 UNKNOWN queue; accepted project-first exact reciprocal pass"
+                  remaining.append({**{f:r.get(f,"") for f in queue_fields if f not in {"current_site_type","next_evidence_class"}},"current_site_type":row["site_type"],"next_evidence_class":"TARGET_INSTITUTIONAL_OR_OPPONENT_INSTITUTIONAL_BOUNDED_FANOUT"})
+              results.append(row)
+          check(len(results)==1086 and len(decisions)+len(remaining)==1043,"stage3a1 exact accounted regular-season population")
+          check(len({r["research_game_id"] for r in results})==1086,"game IDs")
+          check(sum(counts.values())==len(decisions),"decision evidence population")
+          check(all(r["site_type"]=="UNKNOWN" for r in results if r["game_type"]=="POSTSEASON"),"no postseason changes")
+          check(all(r["site_type"] in {"HOME","OPPONENT_HOME","NEUTRAL","UNKNOWN"} for r in results),"no invalid sites")
+          check(all(r["site_research_status"]=="SUPPORTED" for r in results if r["site_type"]!="UNKNOWN"),"site provenance")
+          for old,new in zip(source,results):
+              for k,v in old.items():
+                  if k!="site_type":check(v==new[k],"accepted basketball source field changed: "+old["research_game_id"]+":"+k)
+              check(old["site_type"]=="UNKNOWN","unexpected original supported site")
+          # Preserve conflicts as separate work; a reciprocal conflict is not authority to overwrite accepted source facts.
+          output.mkdir(parents=True,exist_ok=False)
+          csvout(output/"stage3a1-working-ledger.csv",results,out_fields)
+          csvout(output/"stage3a1-supported-site-decisions.csv",decisions,record_fields)
+          csvout(output/"stage3a1-remaining-unknown-queue.csv",remaining,queue_fields)
+          dump(output/"stage3a1-reciprocal-candidates.json",recip_candidates)
+          dump(output/"stage3a1-reciprocal-conflicts.json",potential_conflicts)
+          dump(output/"stage3a1-source-family-precedent.json",{
+              "kind":"SDSU_STAGE3A1_SOURCE_CONVENTION_PRECEDENT_V1",
+              "published_sdsu_source_package":"schools/san-diego-state/source-games.csv",
+              "published_sdsu_source_package_git_blob":"36f3357bf62d1a4765fc417407492cb4cbb3d6dc",
+              "historical_supplemental_source":"SDSU 2026-27 media guide pp.88-93, owner-provided original",
+              "rule":"Regular-season source 'at' designation, excluding documented event contexts, corroborated by accepted published SDSU 'at' convention",
+              "accepted_published_regular_season_at_opponent_home":583,
+              "accepted_published_at_postseason_exception":[{"source_game_id":exception[0]["source_game_id"],"game_type":exception[0]["curated_game_type"],"site":exception[0]["curated_site_type"],"source_line":exception[0]["raw_text"]}],
+              "plain_at_eligible":sum(1 for r in source if r["game_type"]=="REGULAR_SEASON" and r["source_site_token"]=="at" and not r["source_event_context"]),
+              "at_event_context_held": [{"research_game_id":r["research_game_id"],"event":r["source_event_context"],"source":r["source_literal_line"]} for r in source if r["game_type"]=="REGULAR_SEASON" and r["source_site_token"]=="at" and r["source_event_context"]],
+              "no_geography_only_inference":True,
+              "no_default_home_from_blank_token":True,
+          })
+          summary={
+              "kind":"SDSU_STAGE3A1_0054_PROJECT_SOURCE_FAMILY_EVIDENCE_PASS_V1",
+              "school_key":"san-diego-state",
+              "stage":"STAGE_3A1",
+              "status":"IN_PROGRESS",
+              "immutable_research_base_sha":base,
+              "parent_research_head":parent,
+              "protected_main_sha":main,
+              "stage3a0_complete_checkpoint":"0053-stage3a0-local-mechanical-census",
+              "input_stage2_ledger_sha256":manifest2["files"]["structured-stage2-ledger.csv"]["sha256"],
+              "external_historical_web_research_used":False,
+              "independent_historical_row_adjudications":0,
+              "source_research_mode":"ONE_SYSTEMATIC_ACCEPTED_PROJECT_AND_TARGET_GUIDE_CONVENTION_PASS",
+              "total_games":1086,
+              "regular_season_games":1043,
+              "postseason_stage3b_handoff":43,
+              "accepted_site_decisions":len(decisions),
+              "accepted_by_evidence_class":dict(counts),
+              "remaining_unknown_regular":len(remaining),
+              "regular_site_census":dict(collections.Counter(r["site_type"] for r in results if r["game_type"]=="REGULAR_SEASON")),
+              "current_main_reciprocal_candidate_count":len(recip_candidates),
+              "source_or_reciprocal_conflict_count":len(potential_conflicts),
+              "stage3a1_complete":False,
+              "next_bounded_assignment":"Continue Stage 3A-1 with target-school and obvious opponent institutional evidence for exact remaining class, respecting <=25 independent-row adjudications and source fanout",
+              "stage3a2_started":False,
+              "stage3a3_started":False,
+          }
+          dump(output/"stage3a1-summary.json",summary)
+          (output/"stage4-authoring").mkdir()
+          for name in ["opponents.csv","season-coverage.json"]:
+              check((stage0/"stage4-authoring"/name).read_bytes()==(stage2/"stage4-authoring"/name).read_bytes(),"inherited capsule "+name)
+              (output/"stage4-authoring"/name).write_bytes((stage0/"stage4-authoring"/name).read_bytes())
+          check(len(rows(output/"stage3a1-working-ledger.csv"))==1086,"durable ledger roundtrip")
+          check(len(rows(output/"stage3a1-supported-site-decisions.csv"))==len(decisions),"durable decision roundtrip")
+          check(len(rows(output/"stage3a1-remaining-unknown-queue.csv"))==len(remaining),"durable queue roundtrip")
+          file_specs={}
+          for p in sorted(output.rglob("*")):
+              if p.is_file():file_specs[str(p.relative_to(output))]={"sha256":sha(p.read_bytes()),"bytes":len(p.read_bytes())}
+          dump(output/"checkpoint-manifest.json",{
+              "kind":"SDSU_STAGE3A1_0054_PARTIAL_DURABLE_MANIFEST_V1",
+              "parent_research_head":parent,
+              "protected_main_sha":main,
+              "immutable_research_base_sha":base,
+              "input_stage2_ledger_sha256":manifest2["files"]["structured-stage2-ledger.csv"]["sha256"],
+              "stage3a1_complete":False,
+              "files":file_specs
+          })
+          print(json.dumps(summary,indent=2))
+          with open("/tmp/sdsu-stage3a1-pass.txt","w") as f:
+              f.write("### SDSU Stage 3A-1 accepted project/source convention pass\n\nStatus: IN_PROGRESS. Resolved: "+str(len(decisions))+" of 1,043 regular-season UNKNOWN site rows; remainder: "+str(len(remaining))+". Postseason 43 untouched. No geography-only or blank-token HOME inference.\n")
+          PY
+      - name: Commit bounded research findings to Research branch only
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/san-diego-state-all-history-expansion/stage3a/0054-stage3a1-accepted-project-source-class-pass/
+          git commit -m "research(sdsu): Stage 3A-1 bounded accepted project and primary guide convention pass"
+          git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
+      - name: Publish durable substage progress
+        shell: bash
+        run: |
+          cat /tmp/sdsu-stage3a1-pass.txt >> "$GITHUB_STEP_SUMMARY"
