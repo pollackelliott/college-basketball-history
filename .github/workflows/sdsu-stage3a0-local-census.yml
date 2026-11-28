@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      TOOL_BUNDLE: ${{ runner.temp }}/stage3a0-tool
+      TOOL_BUNDLE: /tmp/stage3a0-tool
     steps:
       - name: Check out exact Research predecessor
         uses: actions/checkout@v4
