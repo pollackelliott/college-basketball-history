@@ -1,0 +1,21 @@
+{
+  "apply_protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "apply_request_id": "nevada-stage2-sealed-apply-0001",
+  "approved_plan_hash": "d842daa2ee517e5ab00da4d8a96312b7dc501cca20ad3d5e4fe6aa69acbd8d91",
+  "changed_path_count": 85,
+  "kind": "REMOTE_IMPLEMENTATION_RELEASE_READINESS",
+  "owner_gate_2": false,
+  "permanent_release_gates": "PASS",
+  "pr_created": false,
+  "preview_verified": false,
+  "protected_main_sha": "0181255ebb1a91d624cc62ef80a3edb6453d2fd0",
+  "release_manifest_sha256": "0e91f8b8e2d7df91d2c5262465b73d31fabc399f35534768896993dbb975a51e",
+  "school_key": "nevada",
+  "status": "RELEASE_READINESS_PASS",
+  "successor_sha256": "692cc95224892dc212ad280719ac0feb7c47e6ee1b62c645e48d3534ab5df020",
+  "target_branch": "data/nevada-onboarding",
+  "target_sha": "0c53b5aada5bc3435d8a74ee4fbf2dfc6d308bf9",
+  "tracked_mutation": "NONE",
+  "verification_sha256": "928e6a2119829f7708812dfa32fa16fe686be50510f310dbf07729b4e463bbb3",
+  "writeahead_sha256": "f1711f9b9c3563b7972e6eb5ce3717f03c3f2f133a5b4de318691cf36543126f"
+}
