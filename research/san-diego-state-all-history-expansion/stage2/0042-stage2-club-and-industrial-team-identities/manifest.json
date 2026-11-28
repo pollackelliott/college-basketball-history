@@ -1,0 +1,44 @@
+{
+  "kind": "SDSU_STAGE2_CLUB_INDUSTRIAL_CHECKPOINT_0042_V1",
+  "checkpoint": "0042-stage2-club-and-industrial-team-identities",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "2d2995f7dcb93d2da9b8a345897e6ac6a23f4cb3",
+  "previous_checkpoint": "0041-stage2-college-identity-aliases-and-small-colleges",
+  "previous_opponents_sha256": "7c23aa9ed1d6d4efdaac58feefec9ed429d2efffdf117ed5a3d7a96505051761",
+  "previous_remaining_queue_sha256": "28809827f9b798a71f63ffb7a1235fb8b8b910367f2a0f9249d06d7bfbab064d",
+  "new_accepted_labels": 22,
+  "new_accepted_games": 39,
+  "new_non_d1_keys": 16,
+  "cumulative_mapped_labels": 259,
+  "cumulative_mapped_games": 972,
+  "distinct_keys": 127,
+  "remaining_unresolved_labels": 82,
+  "remaining_game_rows": 114,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "95af45276a81e06b2bfddbea318fcd6ceef5ab95ab586ab5719dc78406054250",
+      "bytes_utf8": 194672
+    },
+    "accepted-club-industrial-identity-evidence.json": {
+      "sha256": "2ad4d357cf58395a781566cde14b44d83c4815998835ae3d539656b964979451",
+      "bytes_utf8": 18842
+    },
+    "research-status.json": {
+      "sha256": "e1e3f02bd0297fd4e36d8bc79993e13a6d7763e86fc783e1d83b793c21a0fb33",
+      "bytes_utf8": 1435
+    },
+    "research-findings.md": {
+      "sha256": "4719bbae5d7ce7a95da7e08fd64623b15bd4493c7502e16f0fc746f20591eeca",
+      "bytes_utf8": 10045
+    },
+    "remaining-unresolved-opponent-labels.csv": {
+      "sha256": "d8670f6a23cce7278be72bd10479e434d5ab8845164b434f3903e5960c89ce29",
+      "bytes_utf8": 11342
+    }
+  }
+}

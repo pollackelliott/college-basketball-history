@@ -1,0 +1,414 @@
+{
+  "kind": "SDSU_STAGE2_HISTORICAL_CLUB_INDUSTRIAL_SOURCE_IDENTITIES_0042_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "parent_research_head": "2d2995f7dcb93d2da9b8a345897e6ac6a23f4cb3",
+  "parent_checkpoint": "0041-stage2-college-identity-aliases-and-small-colleges",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_opponents_sha256": "7c23aa9ed1d6d4efdaac58feefec9ed429d2efffdf117ed5a3d7a96505051761",
+  "parent_remaining_queue_sha256": "28809827f9b798a71f63ffb7a1235fb8b8b910367f2a0f9249d06d7bfbab064d",
+  "original_stage1_game_rows": 1086,
+  "original_1921_22_unidentified_game_debt": 3,
+  "source_selection": "One coherent bounded source-defined early club, local organization and WWII factory-team identity tranche, 16 distinct named team families, 22 literals, 39 games. Groups were resolved by original SDSU evidence, independently matching opponent-series aggregates and corroborating club/aircraft/Caterpillar official institutional documentation; source-name-only entities retain scope limitations and are not assigned speculative ancestry.",
+  "families": [
+    {
+      "key": "san-diego-ymca",
+      "display": "San Diego YMCA",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "LOCAL_ASSOCIATION_TEAM",
+      "resolution_evidence": "Established San Diego YMCA founded in 1882. Three original labels refer to the source-named San Diego YMCA organization-sponsored regular team; SDSU historical seven-game series exactly confirms 2+4+1. This is a source-name team identity, not proof of unchanged roster or specific YMCA building. Separately named YMCA All-Stars remain independent.",
+      "urls": [
+        "https://www.ymcasd.org/about-y/",
+        "https://mcubed.net/ncaab/series/sandst/nd1_sandiegoymca.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "at San Diego YMCA",
+          "game_count": 2,
+          "first_season": "1921-22",
+          "last_season": "1928-29",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": "AT_PREFIX"
+        },
+        {
+          "raw_literal": "San Diego YMCA",
+          "game_count": 4,
+          "first_season": "1925-26",
+          "last_season": "1930-31",
+          "accepted_game_types": "POSTSEASON|REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        },
+        {
+          "raw_literal": "San Diego YMCA (D)",
+          "game_count": 1,
+          "first_season": "1931-32",
+          "last_season": "1931-32",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "san-diego-ymca-all-stars",
+      "display": "San Diego YMCA All-Stars",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "NAMED_ASSOCIATION_ALL_STAR_SQUAD",
+      "resolution_evidence": "SDSU opponent record independently lists one 1923-24 San Diego YMCA All-Stars match, and deliberately names a distinct All-Stars unit rather than the regular San Diego YMCA squad. Both trace to local Y, but no automatic team merge.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_sandiegoymcaallstars.shtml",
+        "https://www.ymcasd.org/about-y/"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "San Diego YMCA All-Stars",
+          "game_count": 1,
+          "first_season": "1923-24",
+          "last_season": "1923-24",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "first-national-bank-sd-team",
+      "display": "First National Bank (San Diego source team)",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_BANK_TEAM",
+      "resolution_evidence": "Seven 1921-25 source-series contests appear under one San Diego State First National Bank opponent in independent basketball results, matching 6+1 original literal variants. Name scoped to historical SDSU opponent/team, not an assertion identifying a specific bank charter, successor institution, or other nationwide First National Bank.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_firstnationalbank.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "First National Bank",
+          "game_count": 6,
+          "first_season": "1921-22",
+          "last_season": "1924-25",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        },
+        {
+          "raw_literal": "First National Bank (D)",
+          "game_count": 1,
+          "first_season": "1924-25",
+          "last_season": "1924-25",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "san-diego-athletic-club",
+      "display": "San Diego Athletic Club",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "LOCAL_ATHLETIC_CLUB_FIRST_TEAM",
+      "resolution_evidence": "SDSU historical series confirms two contests against San Diego AC with original labels 'at San Diego Athletic Club' and 'San Diego Athletic Club'. Separate source-named 'B' squad is not merged; neither source 'at' nor club identity is a basketball venue inference.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_sandiegoac.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "at San Diego Athletic Club",
+          "game_count": 1,
+          "first_season": "1928-29",
+          "last_season": "1928-29",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": "AT_PREFIX"
+        },
+        {
+          "raw_literal": "San Diego Athletic Club",
+          "game_count": 1,
+          "first_season": "1927-28",
+          "last_season": "1927-28",
+          "accepted_game_types": "POSTSEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "san-diego-athletic-club-b",
+      "display": "San Diego Athletic Club B",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "LOCAL_ATHLETIC_CLUB_SECOND_TEAM",
+      "resolution_evidence": "SDSU historical opponent-series explicitly names a San Diego AC(B) 1928-29 contest, distinct from first San Diego Athletic Club team. Keep B team as separate basketball identity despite shared club sponsorship.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_sandiegoacb.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "San Diego Athletic Club ‘B’",
+          "game_count": 1,
+          "first_season": "1928-29",
+          "last_season": "1928-29",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "veterans-service-league",
+      "display": "Veteran's Service League",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_VETERANS_TEAM",
+      "resolution_evidence": "Four SDSU WWII-era games in 1943-44 and 1944-45 against the same literal Veteran's Service League team across 'at' and plain labels; independent basketball series counts four (3-1) and matches raw 2+2. Do not assert exact veteran organization charter or home facility.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_veteransserviceleague.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "at Veteran’s Service League",
+          "game_count": 2,
+          "first_season": "1943-44",
+          "last_season": "1944-45",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": "AT_PREFIX"
+        },
+        {
+          "raw_literal": "Veteran’s Service League",
+          "game_count": 2,
+          "first_season": "1943-44",
+          "last_season": "1944-45",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "alhambra-athletic-club",
+      "display": "Alhambra Athletic Club",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LOCAL_ATHLETIC_CLUB",
+      "resolution_evidence": "The accepted SDSU source has four 1933-37 Alhambra Athletic Club opponents; independent San Diego State historical series lists four Alhambra AC games. This is a source-named athletic club team, without unsupported facility/geographic or ownership inference.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series3.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "Alhambra Athletic Club",
+          "game_count": 4,
+          "first_season": "1933-34",
+          "last_season": "1936-37",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "consolidated-aircraft-team",
+      "display": "Consolidated Aircraft",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "AVIATION_FACTORY_TEAM",
+      "resolution_evidence": "Two SDSU 1941-42 games against source-named Consolidated Aircraft team independently corroborated; San Diego Air & Space Museum documents actual Consolidated plant and its 1943 merger with Vultee. This key represents the pre-merger company team, not post-merger Convair Dominators or Vultee's separate Downey workplace.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_consolidatedaircraft.shtml",
+        "https://sandiegoairandspace.org/collection/item/consolidated-aircraft-corporation-periodical-collection"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "Consolidated Aircraft",
+          "game_count": 2,
+          "first_season": "1941-42",
+          "last_season": "1941-42",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "convair-dominators",
+      "display": "Convair Dominators",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "DISTINCT_AVIATION_FACTORY_NAMED_SQUAD",
+      "resolution_evidence": "SDSU 1944-45 game precisely labels Convair Dominators; independent historical series validates one contest. San Diego Air & Space Museum documents the consolidated company known as Convair after March 1943; namesake squad does NOT prove that earlier Consolidated Aircraft roster or Vultee Downey team is identical.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_convairdominators.shtml",
+        "https://sandiegoairandspace.org/collection/item/convairiety-newsletter-collection"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "Convair Dominators",
+          "game_count": 1,
+          "first_season": "1944-45",
+          "last_season": "1944-45",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "peoria-caterpillar-diesels",
+      "display": "Peoria Caterpillar Diesels",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "INDUSTRIAL_BASKETBALL_TEAM",
+      "resolution_evidence": "Caterpillar's own 2014 historical publication identifies famous Caterpillar Diesels / Peoria Cats industrial basketball program, and Peoria sports history documents its 1950s elite competitive team. 'at Peoria Diesels' and 'Peoria Caterpillar Diesels' are equivalent 1949-50 and 1950-51 historical basketball-team names, not any separate Peoria college team.",
+      "urls": [
+        "https://s7d2.scene7.com/is/content/Caterpillar/C10132721",
+        "https://www.gpshof.com/basketball"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "at Peoria Diesels",
+          "game_count": 1,
+          "first_season": "1950-51",
+          "last_season": "1950-51",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": "AT_PREFIX"
+        },
+        {
+          "raw_literal": "Peoria Caterpillar Diesels",
+          "game_count": 1,
+          "first_season": "1949-50",
+          "last_season": "1949-50",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "ryan-all-stars",
+      "display": "Ryan All-Stars",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LOCAL_ALL_STAR_TEAM",
+      "resolution_evidence": "Historical SDSU series identifies exactly two games against Ryan All-Stars, matching accepted 1944-45 source count. Name-only identity retained; while San Diego had Ryan Aircraft, attribution of these basketball players to Ryan Aeronautical employees is unverified and is not asserted.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series3.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "Ryan All-Stars",
+          "game_count": 2,
+          "first_season": "1944-45",
+          "last_season": "1944-45",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "lockhead-air-team",
+      "display": "Lockhead Air",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_WARTIME_AIRCRAFT_TEAM",
+      "resolution_evidence": "Independent historical SDSU results preserve the literal source spelling 'Lockhead Air' for precisely two 1940-41 opponents. Preserve a source-defined wartime company squad, without asserting the specific Lockheed corporate plant or silently spelling the source as Lockheed.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "Lockhead Air",
+          "game_count": 2,
+          "first_season": "1940-41",
+          "last_season": "1940-41",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "rohr-aircraft-team",
+      "display": "Rohr",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "AVIATION_FACTORY_TEAM",
+      "resolution_evidence": "SDSU historical series lists 1943-44 Rohr opponent; San Diego Air & Space Museum historical corporate archive confirms Rohr Aircraft operating in Chula Vista by 1941 and the WWII era. This factory-affiliated source-name team distinct from Ryan, Consolidated or Convair.",
+      "urls": [
+        "https://sandiegoairandspace.org/collection/item/rohr-aircraft-corporation",
+        "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "Rohr",
+          "game_count": 1,
+          "first_season": "1943-44",
+          "last_season": "1943-44",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "san-diego-rowing-club",
+      "display": "San Diego Rowing Club",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_LOCAL_CLUB",
+      "resolution_evidence": "Source 1921-22 names a San Diego Rowing Club basketball opponent; independent SDSU series lists exactly one game. The established source-named rowing club basketball team does not prove specific corporate/rowing club founding identity, sporting venue or unchanged roster.",
+      "urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series9.shtml"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "San Diego Rowing Club",
+          "game_count": 1,
+          "first_season": "1921-22",
+          "last_season": "1921-22",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "twentieth-century-fox-team",
+      "display": "20th Century Fox",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "SOURCE_NAMED_STUDIO_TEAM",
+      "resolution_evidence": "1942-43 original source explicitly names 20th Century Fox opponent. Preserve as distinct source-named film-studio basketball team without asserting a particular local branch, employee roster or employer contract.",
+      "urls": [],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "20th Century Fox",
+          "game_count": 1,
+          "first_season": "1942-43",
+          "last_season": "1942-43",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    },
+    {
+      "key": "vultee-aircraft-downey",
+      "display": "Vultee Aircraft – Downey",
+      "current_d1_at_research_base": "No",
+      "entity_kind": "DISTINCT_FACTORY_LOCALITY_SQUAD",
+      "resolution_evidence": "Original 1944-45 source explicitly qualifies Vultee Aircraft team with 'Downey'; San Diego Air & Space Museum records corporate merger with Consolidated in March 1943. Preserve Downey-qualified source squad independently from earlier Consolidated San Diego squad and named Convair Dominators; no continuity of basketball rosters inferred.",
+      "urls": [
+        "https://sandiegoairandspace.org/collection/item/convair-general-dynamics-corporate-records"
+      ],
+      "accepted_source_rows": [
+        {
+          "raw_literal": "Vultee Aircraft - Downey",
+          "game_count": 1,
+          "first_season": "1944-45",
+          "last_season": "1944-45",
+          "accepted_game_types": "REGULAR_SEASON",
+          "raw_prefix_markers": ""
+        }
+      ]
+    }
+  ],
+  "identity_splits_preserved": [
+    "San Diego YMCA distinct from its separate All-Stars squad",
+    "San Diego Athletic Club first squad distinct from B squad",
+    "Consolidated Aircraft pre-merger distinct from named post-merger Convair Dominators and specifically Downey Vultee",
+    "First National Bank source team not falsely identified with Bank of Italy or other national banks",
+    "Peoria Diesels and Peoria Caterpillar Diesels matched to established Caterpillar-sponsored basketball team",
+    "Ryan All-Stars not assumed to be Ryan Aircraft employee basketball team",
+    "Lockhead Air original uncorrected spelling retained; no exact Lockheed employer identity asserted"
+  ],
+  "all_prior_237_source_label_mappings_byte_preserved": true,
+  "added_source_literals": 22,
+  "added_accepted_games": 39,
+  "new_distinct_non_d1_team_keys": 16,
+  "cumulative_mapped_labels": 259,
+  "cumulative_mapped_games": 972,
+  "distinct_opponent_keys": 127,
+  "remaining_source_labels": 82,
+  "remaining_game_rows": 114,
+  "stage2_full_game_ledger_authored": false,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "game_data_mutated": 0,
+  "site_venue_inferences": 0,
+  "owner_non_d1_sanity_scan_pending": true,
+  "shared_registry_mutated": false
+}
