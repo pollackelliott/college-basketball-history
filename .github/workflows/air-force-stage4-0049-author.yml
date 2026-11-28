@@ -1,0 +1,131 @@
+name: Air Force Stage 4 0049 exact permanent authoring
+on:
+  push:
+    branches: [research/air-force-stage4-0049-transport]
+    paths: [.github/workflows/air-force-stage4-0049-author.yml]
+permissions:
+  contents: write
+concurrency:
+  group: air-force-stage4-0049-once
+  cancel-in-progress: false
+jobs:
+  exact-permanent-authoring:
+    name: Exact Stage 3B 0048 to permanent Stage 4 closeout
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout authorized disposable transport branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/air-force-stage4-0049-transport
+          path: transport
+      - name: Checkout exact Stage 3B COMPLETE authority
+        uses: actions/checkout@v4
+        with:
+          ref: 53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745
+          path: candidate
+          persist-credentials: false
+      - name: Checkout unchanged protected-main permanent tools
+        uses: actions/checkout@v4
+        with:
+          ref: 242370fc551fd749c157c74d92917ddfafbe40e0
+          path: tool
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate exact authority and pack immutable Stage 3B input
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C candidate rev-parse HEAD)" = "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745"
+          test "$(git -C tool rev-parse HEAD)" = "242370fc551fd749c157c74d92917ddfafbe40e0"
+          mkdir -p "$RUNNER_TEMP/stage4"
+          python - <<'PY'
+          import hashlib,json,os,zipfile
+          from pathlib import Path
+          root=Path('candidate/research/air-force/stage3b/completion-0048')
+          target=Path(os.environ['RUNNER_TEMP'])/'stage3b-0048.zip'
+          manifest=json.loads((root/'manifest.json').read_bytes())
+          status=json.loads((root/'status.json').read_bytes())
+          proof=json.loads((root/'stage3b-preflight-certification.json').read_bytes())
+          assert manifest['status']=='COMPLETE'
+          assert manifest['parent_commit_sha']=='f1f0aaeb53293a53998fbe134902e4d970530eb2'
+          assert manifest['protected_main_sha']=='242370fc551fd749c157c74d92917ddfafbe40e0'
+          assert status['status']=='COMPLETE' and status['stage4_started'] is False
+          assert proof['status']=='PASS' and proof['defects']==0
+          assert len(manifest['files'])==16
+          for item in manifest['files']:
+              b=(root/item['name']).read_bytes()
+              assert hashlib.sha256(b).hexdigest()==item['sha256'],item['name']
+              assert len(b)==item['bytes'],item['name']
+          with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_STORED) as z:
+              for path in sorted(root.rglob('*')):
+                  if path.is_file():
+                      info=zipfile.ZipInfo(path.relative_to(root).as_posix(),date_time=(1980,1,1,0,0,0))
+                      info.compress_type=zipfile.ZIP_STORED
+                      info.external_attr=0o100644<<16
+                      z.writestr(info,path.read_bytes())
+          digest=hashlib.sha256(target.read_bytes()).hexdigest()
+          (Path(os.environ['RUNNER_TEMP'])/'stage4'/'stage3b-0048-input-fingerprint.txt').write_text(digest+'  stage3b-0048.zip\n')
+          print('Stage 3B COMPLETE checkpoint: 16 manifested member hashes/bytes PASS; exact ZIP SHA256:',digest)
+          PY
+      - name: Execute unchanged permanent Stage 4 author and closeout
+        id: author
+        shell: bash
+        run: |
+          set +e
+          (cd tool && PYTHONPATH=tools python tools/research_stage4.py author air-force "$RUNNER_TEMP/stage3b-0048.zip" --main-sha "242370fc551fd749c157c74d92917ddfafbe40e0" --output-dir "$RUNNER_TEMP/stage4") > "$RUNNER_TEMP/stage4-console.log" 2>&1
+          rc=$?
+          echo "$rc" > "$RUNNER_TEMP/stage4/author-exit-code.txt"
+          echo "exit_code=$rc" >> "$GITHUB_OUTPUT"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])/'stage4'/'stage4-status.json'
+          if p.exists():
+              v=json.loads(p.read_text())
+              summary={'status':v.get('status'),'source_stage3b_sha256':v.get('stage3b_checkpoint_sha256'),'closeout_status':v.get('closeout',{}).get('status'),'non_d1_distinct':v.get('closeout',{}).get('non_d1_owner_scan_distinct_identities'),'non_d1_games':v.get('closeout',{}).get('non_d1_owner_scan_games')}
+              print(json.dumps(summary,indent=2))
+          else:
+              print('No Stage 4 status emitted. Permanent tool console follows.')
+              print((Path(os.environ['RUNNER_TEMP'])/'stage4-console.log').read_text()[-12000:])
+          PY
+          exit "$rc"
+      - name: Durably preserve exact Stage 4 tool output on disposable branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="$PWD/transport/research/air-force/stage4/authoring-0049"
+          mkdir -p "$target"
+          cp -a "$RUNNER_TEMP/stage4/." "$target/"
+          if test -f "$RUNNER_TEMP/stage3b-0048.zip"; then cp "$RUNNER_TEMP/stage3b-0048.zip" "$target/stage3b-0048.zip"; fi
+          if test -f "$RUNNER_TEMP/stage4-console.log"; then cp "$RUNNER_TEMP/stage4-console.log" "$target/permanent-tool-console.log"; fi
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('transport/research/air-force/stage4/authoring-0049')
+          lines=[]
+          for p in sorted(root.rglob('*')):
+              if p.is_file() and p.name!='SHA256SUMS.txt':
+                  lines.append(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(root).as_posix()}')
+          (root/'SHA256SUMS.txt').write_text('\n'.join(lines)+'\n')
+          print('Durable readback manifest files:',len(lines))
+          PY
+          cd transport
+          git config user.name "Research Stage 4 exact tool transport"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/air-force/stage4/authoring-0049
+          if ! git diff --cached --quiet; then
+            git commit -m "research(air-force): preserve exact permanent Stage 4 author output (0049 transport)"
+            git push origin HEAD:research/air-force-stage4-0049-transport
+          fi
+      - name: Upload exact Stage 4 output recovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: air-force-stage4-0049-exact-output
+          path: transport/research/air-force/stage4/authoring-0049/
+          retention-days: 14
+          if-no-files-found: error
