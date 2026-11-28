@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_OTHER_POSTSEASON_0046_MANIFEST",
+  "school_key": "air-force",
+  "status": "IN_PROGRESS_HISTORICAL_POSTSEASON_SITE_RESEARCH_COMPLETE",
+  "parent_commit_sha": "38a8982a941363d119e18ad00c7a27c5aff25ef2",
+  "parent_checkpoint": "research/air-force/stage3b/ncaa-tournament-venues-0045/",
+  "parent_manifest_blob_sha": "5b6f72ee9ed334233c56ecf422a6b820b72c4074",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "89d3be9c741ff40d486a2fbfd17df1717eae8979",
+      "chars": 3314
+    },
+    {
+      "path": "status.json",
+      "git_blob_sha": "b7a1f33d4eb30aec9840731345af00250636a6b4",
+      "chars": 1322
+    },
+    {
+      "path": "qa.json",
+      "git_blob_sha": "444b62716eb0500d98c110946bedc6641c383142",
+      "chars": 1882
+    },
+    {
+      "path": "other-postseason-venue-adjudications.json",
+      "git_blob_sha": "0c22135a7985c318162b3bfe7a84da1c24db408b",
+      "chars": 9374
+    },
+    {
+      "path": "postseason-residual-queue.json",
+      "git_blob_sha": "fe51488c7066f6687ef680d6bfaa4f7768ef205c",
+      "chars": 3
+    },
+    {
+      "path": "stage3b-working-ledger.csv",
+      "git_blob_sha": "b18e3b34237b1edb71d9ddf6d143c2d816d308a8",
+      "chars": 2046818
+    },
+    {
+      "path": "stage4-authoring/venues.csv",
+      "git_blob_sha": "ac7b4bdb3b3d43c15056d8b5ca3101ae076691bf",
+      "chars": 42222
+    },
+    {
+      "path": "ncaa-tournament-venue-adjudications.json",
+      "git_blob_sha": "0a7f6f4f3efde59a29025ee09b23f986c49ed53b",
+      "inherited_from": "0045"
+    },
+    {
+      "path": "wac-campus-venue-adjudications.json",
+      "git_blob_sha": "6d753a18c8cdd0daca8ab454cd637eb58f86e0cd",
+      "inherited_from": "0045"
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "git_blob_sha": "8eb9d65d52485e8714c8a2afc99b8feb59795739",
+      "inherited_from": "0045"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "git_blob_sha": "3c01a11981cfaef7e62d516dea4cc8b0cc2fd1ff",
+      "inherited_from": "0045"
+    }
+  ],
+  "counts": {
+    "total_games": 1928,
+    "total_postseason": 62,
+    "conference_tournament_completed": 50,
+    "ncaa_completed": 4,
+    "other_postseason_completed": 8,
+    "postseason_site_completed": 62,
+    "postseason_site_pending": 0,
+    "stage3b_complete": false
+  }
+}

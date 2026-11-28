@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_OTHER_POSTSEASON_QA_0046",
+  "status": "PASS_HISTORICAL_SITE_LEDGER_INVARIANTS",
+  "parent_game_ledger_git_blob_sha": "2b2b34c0ddc760e8d32fc360ec4b3a31a983d365",
+  "parent_venue_table_git_blob_sha": "9e5da7e7e5f3bc9916a26f6112b507843f38ccb7",
+  "parent_residual_queue_git_blob_sha": "72ad3655b759943ca429a6a3adb8bbebcba39685",
+  "total_games": 1928,
+  "changed_game_ids": [
+    "AF-2006-07-032",
+    "AF-2006-07-033",
+    "AF-2006-07-034",
+    "AF-2006-07-035",
+    "AF-2010-11-031",
+    "AF-2010-11-032",
+    "AF-2012-13-031",
+    "AF-2012-13-032"
+  ],
+  "changed_game_count": 8,
+  "changed_field_count": 48,
+  "only_changed_fields": [
+    "curated_venue_name",
+    "curated_venue_city",
+    "curated_venue_state",
+    "curated_venue_country",
+    "site_research_status",
+    "site_research_basis"
+  ],
+  "changed_game_core_fields": 0,
+  "changed_original_dates": 0,
+  "changed_source_literals": 0,
+  "changed_original_source_locality": 0,
+  "changed_han": 0,
+  "changed_game_type": 0,
+  "changed_stage3a_games": 0,
+  "changed_conference_tournament_games": 0,
+  "changed_ncaa_tournament_games": 0,
+  "remaining_postseason_queue": 0,
+  "accepted_postseason_site_counts": {
+    "conference_tournament": 50,
+    "ncaa_tournament": 4,
+    "other_postseason": 8,
+    "total": 62
+  },
+  "venue_authoring_rows_before": 50,
+  "venue_authoring_rows_after": 52,
+  "venue_rows_reused": [
+    "clune-arena",
+    "neutral-madison-square-garden-new-york-ny",
+    "neutral-leavey-center-santa-clara-ca"
+  ],
+  "venue_rows_added": [
+    "stan-sheriff-center",
+    "dee-events-center"
+  ],
+  "new_venue_rows_reuse_immutable_base_ids": [
+    "VEN-000194",
+    "VEN-000054"
+  ],
+  "inherited_authoring_opponents_and_institutional_scope_byte_identical": true,
+  "stage3b_preflight_completed": false,
+  "stage3b_complete": false,
+  "defects": []
+}
