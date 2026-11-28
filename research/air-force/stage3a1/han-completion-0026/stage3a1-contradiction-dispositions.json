@@ -1,0 +1,24 @@
+{
+  "kind": "AIR_FORCE_STAGE3A1_HAN_CONTRADICTION_DISPOSITIONS_V1",
+  "open_authority_blockers": 0,
+  "items": [
+    {
+      "population": "1982-83 accepted game universe",
+      "competing": "Some newer official Air Force year-by-year PDF rows transposed from 1983-84 or print incompatible 1982-83 score/season aggregate",
+      "ruling": "Preserve earlier archived 2010-11 official 10-17 27-game 1982-83 source ledger and its existing Stage 1 result/date determinations; do not reopen Stage 1; use exact same-game accepted reciprocal site facts",
+      "stage3a1_site_implication": "No change to accepted game universe"
+    },
+    {
+      "game": "AF-1982-83-021",
+      "competing": "Current Air Force online UTEP opponent history gives a February 20 66-72 1982-83 listing, inconsistent with older accepted 1982-83 February 14 55-61 at UTEP",
+      "ruling": "Retain original older official Stage1 February 14 55-61 game and its mixed-case source opponent label; treat the online newer series as corrupted season-source-family, not an additional game",
+      "stage3a1_site_implication": "Air Force AWAY, derived from corroborated same-season source-specific home/away notation and season schedule corroboration"
+    },
+    {
+      "game": "AF-1982-83-008",
+      "competing": "Title-case in archived results source resembles away notation, but game is against Lafayette at a tournament hosted by Connecticut",
+      "ruling": "Contemporary Dec. 29 consolation-game account and UConn host championship account establish independent visiting teams at Connecticut Mutual Classic; treat game as NEUTRAL rather than marking Lafayette as site host",
+      "stage3a1_site_implication": "NEUTRAL; historical neutral location Hartford, CT was already accepted at Stage 1"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "kind": "AIR_FORCE_STAGE3A1_1982_83_HAN_SOURCE_PATTERN_EVIDENCE_V1",
+  "accepted_source": "Air Force 2010-11 archived results book printed p98 (historical 1982-83 results)",
+  "source_url": "https://goairforcefalcons.com/documents/download/2010/11/9/_afa_m_baskbl__ResultsSection2010-11.pdf",
+  "convention_external_cross_reference": "https://goairforcefalcons.com/news/2021/9/16/mens-basketball-air-force-mens-basketball-completes-schedule-with-non-conference-games",
+  "method": "Source-specific textual case convention calibrated against 21 accepted exact-game corroborations across source-family opponents; 1982-83 historical source not presumed to have an independently printed legend",
+  "calibration_count": 21,
+  "exception": "AF-1982-83-008 Lafayette at Connecticut Mutual Classic consolation; neutral on event/host record regardless of title case",
+  "five_historical_source_notation_class_games": [
+    "AF-1982-83-001",
+    "AF-1982-83-003",
+    "AF-1982-83-006",
+    "AF-1982-83-009",
+    "AF-1982-83-021"
+  ],
+  "not_geography_based": true,
+  "conflicts_source_scoped": true,
+  "original_score_ledger_unchanged": true
+}

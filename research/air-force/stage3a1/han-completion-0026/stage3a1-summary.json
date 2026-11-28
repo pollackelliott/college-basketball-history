@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A1_HAN_COMPLETION_V1",
+  "checkpoint": "han-completion-0026",
+  "status": "STAGE3A1_COMPLETE",
+  "school_key": "air-force",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "protected_main_sha_at_execution": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "parent_stage3a0_commit_sha": "1a8fe27b194bd9986224fe4b0d7655a1c0019c1a",
+  "parent_stage3a0_checkpoint": "research/air-force/stage3a0/census-0025/",
+  "parent_stage3a0_output_status": "COMPLETE",
+  "parent_input_ledger_git_blob_sha": "12691e4bea21be9bb85869a62c52fb6426f65d1e",
+  "cumulative_stage3a1_ledger_git_blob_sha": "4e07deea8c9381864a660518ebb6f84f049811e1",
+  "adjudication_csv_git_blob_sha": "a8c6f5a5322301f984f95885a96f56b92a3fb2ad",
+  "universe": {
+    "game_rows": 1928,
+    "unique_game_ids": 1928,
+    "regular_season": 1866,
+    "postseason": 62,
+    "original_stage3a0_unknown_han": 27,
+    "original_unknown_seasons": [
+      "1982-83"
+    ],
+    "changed_han_rows": 27,
+    "unchanged_rows": 1901,
+    "unsupported_han_inferences_from_geography": 0
+  },
+  "resolution": {
+    "complete": true,
+    "accepted_home": 14,
+    "accepted_opponent_home": 12,
+    "accepted_neutral": 1,
+    "terminal_researched_unresolved": 0,
+    "documented_conflicting_sources_retained": true,
+    "accepted_project_or_direct_institutional_or_event_game_evidence": 22,
+    "source_specific_typography_correlated_family": 5,
+    "independent_1982_83_non_neutral_exact_site_confirmations": 21
+  },
+  "regular_season_site_census": {
+    "HOME": 972,
+    "OPPONENT_HOME": 778,
+    "NEUTRAL": 116,
+    "UNKNOWN": 0
+  },
+  "regular_season_neutral_era_census": {
+    "HISTORICAL_1995_96_OR_EARLIER": 68,
+    "MODERN_1996_97_PLUS": 48
+  },
+  "source_hierarchy": {
+    "accepted_project_reciprocal_source_games": 13,
+    "other_institutional_or_event_game_records": 9,
+    "remaining_same_season_source_typography_class": 5,
+    "notes": "The only 27 unknown H/A/N rows were in 1982-83. The target's accepted original official 2010-11 results book preserves uppercase opponent names at home and mixed-case opponent names on the road. That 1982-83 typography agrees with 21 exact-game accepted project/official reciprocal site identifications. Later Air Force men's schedule explicitly identifies BOLD ALL CAPS as home. Five remaining sites were classified from this coherent source-specific convention, corroborated by secondary schedules where available; no H/A/N inferred solely from geography. Lafayette consolation game separately neutral by contemporary Connecticut Mutual Classic event account."
+  },
+  "altered_fields": [
+    "han",
+    "site_type"
+  ],
+  "unchanged_original_fields_other_than_han_site_type": true,
+  "unchanged_game_id_date_opponent_score_game_type": true,
+  "source_literal_fields_preserved": true,
+  "other_seasons_site_type_untouched": true,
+  "postseason_handoff_carried_byte_exact": true,
+  "stage4_opponents_and_institutional_scope_carried_byte_exact": true,
+  "venue_research_performed": false,
+  "stage3a2_home_venue_chronology_started": false,
+  "stage3a3_neutral_venue_research_started": false,
+  "stage3b_postseason_research_started": false,
+  "next_action": "STOP_AT_STAGE3A1_BOUNDARY",
+  "next_bounded_stage": "STAGE_3A2_HOME_VENUE_RESEARCH_AWAIT_OWNER_PROCEED"
+}
