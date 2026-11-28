@@ -1,0 +1,143 @@
+name: San Diego State Stage 1 bounded-exhaustion permanent audit (exact SHA)
+on:
+  push:
+    branches: [research-exec/san-diego-state-stage1-audit-0027]
+permissions:
+  contents: read
+jobs:
+  exact-source-coverage-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout authenticated permanent auditor from protected main
+        uses: actions/checkout@v4
+        with:
+          ref: 5f33c88ca1ea7d80e0517f42a200f5a2e15833c9
+          path: protected-main
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Checkout checkpoint 0027 and immutable predecessor ZIP
+        uses: actions/checkout@v4
+        with:
+          ref: 0c6d9c7301ce8fd7d04fa7451229465a3ddcc78c
+          path: research-checkpoint
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exact manifests, unchanged ledger/census and invoke permanent tool
+        shell: bash
+        env:
+          PIN_MAIN: 5f33c88ca1ea7d80e0517f42a200f5a2e15833c9
+          PIN_RESEARCH: 0c6d9c7301ce8fd7d04fa7451229465a3ddcc78c
+          PIN_TOOL: 0f77c191c36576bfd30b86592554d6ea76d965ac
+          PIN_ZIP: 42a37718684f8745900eb6c977c743ae62a185ccbdd04403d01d5358e8fea49a
+          PIN_PREVIOUS_ZIP: 0bb50cdd70e9bd4a6e7476b1d58d1097a1206df2a4b81dbdf44bb0beeb751867
+          PIN_ASSESSMENT: 4e57e2ef709ba1aa7edbbc03ced6d6d1b6cd6b9a913ce50f823d7d5118f53b2e
+        run: |
+          set -euo pipefail
+          tool="protected-main/tools/research_stage1_coverage_gap.py"
+          archive="research-checkpoint/research/san-diego-state-all-history-expansion/checkpoints/0027-bounded-exhaustion-stage1-audit-input/san-diego-state-stage1-exhausted-audit-input.zip"
+          parent_archive="research-checkpoint/research/san-diego-state-all-history-expansion/checkpoints/0023-corrected-audit-zip-transport/san-diego-state-stage1-audit-input.zip"
+          test "$(git -C protected-main rev-parse HEAD)" = "$PIN_MAIN"
+          test "$(git -C research-checkpoint rev-parse HEAD)" = "$PIN_RESEARCH"
+          test "$(git -C protected-main hash-object tools/research_stage1_coverage_gap.py)" = "$PIN_TOOL"
+          echo "$PIN_ZIP  $archive" | sha256sum -c -
+          echo "$PIN_PREVIOUS_ZIP  $parent_archive" | sha256sum -c -
+          python - "$archive" "$parent_archive" <<'PY'
+          import hashlib, json, pathlib, sys, zipfile
+          zpath, oldpath = (pathlib.Path(x) for x in sys.argv[1:])
+          with zipfile.ZipFile(zpath) as z, zipfile.ZipFile(oldpath) as old:
+              assert z.testzip() is None and old.testzip() is None
+              names=z.namelist()
+              assert len(names) == len(set(names)) == 8
+              def read(zipobj, name): return zipobj.read("checkpoint/" + name)
+              manifest=json.loads(read(z, "stage1-manifest.json"))
+              assert manifest["research_base_sha"] == "5b840a354fb5cd792239ff8b93cba223a18dd87a"
+              assert manifest["game_rows"] == 1086
+              assert manifest["unknown_real_games"] == 3
+              assert manifest["blocking_residuals"] == 1
+              assert set(names)=={"checkpoint/stage1-manifest.json"} | {"checkpoint/"+n for n in manifest["members"]}
+              for member, binding in manifest["members"].items():
+                  payload=read(z,member)
+                  assert len(payload)==binding["size"],member
+                  assert hashlib.sha256(payload).hexdigest()==binding["sha256"],member
+              for stable in ("structured-stage1-ledger.csv","season-census.csv","source-provenance.json"):
+                  assert read(z,stable) == read(old,stable), stable
+              assessment=read(z,"research-exhaustion-assessment.json")
+              assert hashlib.sha256(assessment).hexdigest()==__import__("os").environ["PIN_ASSESSMENT"]
+              a=json.loads(assessment)
+              assert a["determination"]=="RESEARCH_EXHAUSTED_IDENTITIES_UNRESOLVED"
+              assert a["source_archives_exhaustively_read"] is False
+              evidence=json.loads(read(z,"missing-game-evidence.json"))
+              assert evidence["policy_result"]=="RESEARCH_EXHAUSTED_IDENTITIES_UNRESOLVED"
+              assert evidence["source_archives_exhaustively_read"] is False
+              assert evidence["seasons"][0]["season"]=="1921-22"
+              assert evidence["seasons"][0]["disposition"]=="BLOCKING_RESEARCHED_UNRESOLVED"
+              blockers=json.loads(read(z,"blocking-residuals.json"))
+              assert len(blockers)==1 and blockers[0]["research_state"]=="RESEARCHED_UNRESOLVED"
+          print("MANIFEST_AND_IMMUTABLE_LEDGER_CENSUS_PROOF=PASS")
+          PY
+          set +e
+          python "$tool" "$archive" --expected-sha256 "$PIN_ZIP" \
+            --evidence-member missing-game-evidence.json \
+            --output audit-report.json > audit-stdout.json
+          audit_exit=$?
+          set -e
+          python - "$audit_exit" <<'PY'
+          import hashlib,json,os,pathlib,sys
+          actual_exit=int(sys.argv[1])
+          report_bytes=pathlib.Path("audit-report.json").read_bytes()
+          report=json.loads(report_bytes)
+          assert pathlib.Path("audit-stdout.json").read_bytes()==report_bytes
+          assert report["checkpoint_sha256"] == os.environ["PIN_ZIP"]
+          assert report["research_base_sha"] == "5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          assert report["identified_competitive_games"] == 1086
+          assert report["unidentified_games_not_added"] == 3
+          assert report["stage1_complete"] is False
+          assert len(report["source_coverage_gaps"]) == 1
+          assert report["source_coverage_gaps"][0]["season"] == "1921-22"
+          assert report["source_coverage_gaps"][0]["remaining_unidentified_count"] == 3
+          eligible=report["status"]=="ELIGIBLE_FOR_SOURCE_ACKNOWLEDGED_COVERAGE_GAP" and actual_exit==0 and report["defects"]==[]
+          proof={
+            "kind":"SDSU_STAGE1_BOUNDED_EXHAUSTION_ACTUAL_PERMANENT_AUDIT_PROOF",
+            "protected_main_sha":os.environ["PIN_MAIN"],
+            "research_checkpoint_sha":os.environ["PIN_RESEARCH"],
+            "checkpoint_zip_sha256":os.environ["PIN_ZIP"],
+            "permanent_tool_git_blob":os.environ["PIN_TOOL"],
+            "original_ledger_and_census_byte_identical":True,
+            "original_archival_pages_exhaustively_read":False,
+            "identified_competitive_games":1086,
+            "unidentified_games_not_added":3,
+            "actual_status":report["status"],
+            "actual_defects":report["defects"],
+            "permanent_tool_exit_code":actual_exit,
+            "report_sha256":hashlib.sha256(report_bytes).hexdigest(),
+            "eligible":eligible,
+            "stage1_complete":False,
+            "stage2_authorized":False,
+            "historic_game_mutation":False
+          }
+          pathlib.Path("audit-execution-proof.json").write_text(json.dumps(proof,sort_keys=True,indent=2)+"\n")
+          print("PERMANENT_AUDITOR_ACTUAL_STATUS="+report["status"])
+          print("PERMANENT_AUDITOR_ACTUAL_EXIT="+str(actual_exit))
+          print("PERMANENT_AUDITOR_ACTUAL_DEFECTS="+json.dumps(report["defects"]))
+          print("REPORT_SHA256="+proof["report_sha256"])
+          print("ELIGIBLE="+str(eligible))
+          if not eligible: raise SystemExit("Audit input not eligible: preserve report, do not close Stage 1")
+          PY
+          test -z "$(git -C protected-main status --porcelain --untracked-files=no)"
+          test -z "$(git -C research-checkpoint status --porcelain --untracked-files=no)"
+      - name: Preserve actual permanent-tool audit report and proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: san-diego-state-0027-bounded-exhaustion-permanent-audit
+          path: |
+            audit-report.json
+            audit-stdout.json
+            audit-execution-proof.json
+          if-no-files-found: warn
+          retention-days: 90
