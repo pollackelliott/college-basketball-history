@@ -1,0 +1,349 @@
+{
+  "kind": "SDSU_STAGE2_FINAL_LITERALS_TOURING_HISTORICAL_0046_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "97a8479c01e4eed4623aa1c2dcf87f413bd67c48",
+  "parent_checkpoint": "0045-stage2-military-subunits-and-historical-colleges",
+  "parent_mapping_sha256": "be2feb9469e85b18ff390af7b063a2fd88868066f6783504642ead69b20ef929",
+  "parent_residual_queue_sha256": "799c735e277adc42e1dfae4c6b0a6255754ea392defe680dfb05f66323b7149c",
+  "method": "One bounded source-label historical identity/adversarial caution tranche of fifteen remaining accepted opponent names, 38 games. Durable identities grounded in SDSU source/compiled opponent series, contemporary newspapers, official archivist collections, reciprocal college record books and historical university/US Navy archive. No accepted Stage1 universe inclusion mutation.",
+  "new_labels": 15,
+  "new_accepted_games": 38,
+  "new_research_provisional_NON_D1_keys": 15,
+  "accepted_341_source_labels_byte_preserved_existing_prefix": true,
+  "source_identities": [
+    {
+      "literal": "35th Division (D)",
+      "canonical_key": "military-35th-division-san-diego-1923",
+      "canonical_display": "35th Division (1923 source military squad)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_NUMBERED_MILITARY_DIVISION",
+      "source_game_count": 1,
+      "first_season": "1923-24",
+      "last_season": "1923-24",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "The exact 1923-24 source labels a '35th Division' team, not an army or navy branch. NHHC DANFS independently documents US Navy Destroyer Division 35 on Pacific coast and at San Diego in 1922-25; neighboring source labels explicitly identify Destroyer Divisions 31 and 32. This makes Navy destroyer identity the strongest candidate, but 35th source label itself lacks 'Destroyers'. Preserve a source-qualified key without making Army 35th Infantry Division or the naval assignment certain. Material uncertainty preserved for eventual historical identity audit; no merge with 31st/32nd divisions.",
+      "unresolved_qualifier": "HISTORICAL_MILITARY_BRANCH_UNCERTAIN",
+      "evidence_urls": [
+        "https://www.history.navy.mil/research/histories/ship-histories/danfs/r/robert-smith.html",
+        "https://mcubed.net/ncaab/series/sandst/nd1_35thdivision.shtml"
+      ]
+    },
+    {
+      "literal": "Bank of Italy",
+      "canonical_key": "bank-of-italy-sd-source-basketball",
+      "canonical_display": "Bank of Italy (San Diego source basketball team)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_BANK_TEAM",
+      "source_game_count": 1,
+      "first_season": "1931-32",
+      "last_season": "1931-32",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Original 1931-32 source uses Bank of Italy; independent SDSU compiled opponent series identifies single Dec 22 1931 1-0 win. This is a source-named banking-company team, distinct from First National Bank and Bank League All-Stars. A score of 1-0 could indicate a forfeit/administrative credit rather than played contest, but source-specific original record status has not been independently adjudicated; flag separately without silently removing a previously accepted Stage1 game.",
+      "unresolved_qualifier": "POSSIBLE_UNPLAYED_FORFEIT_TO_BE_EXAMINED_AT_SEPARATE_GAME_UNIVERSE_GATE",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_bankofitaly.shtml"
+      ]
+    },
+    {
+      "literal": "Bostonians",
+      "canonical_key": "bostonians-1925-aau-source-team",
+      "canonical_display": "Bostonians (1925 San Diego AAU source squad)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_AAU_BASKETBALL_TEAM",
+      "source_game_count": 1,
+      "first_season": "1924-25",
+      "last_season": "1924-25",
+      "source_accepted_game_types": "POSTSEASON",
+      "source_marker": "",
+      "identity_basis": "The 1925 Feb 24 San Diego County AAU tournament contains one source-named Bostonians opponent, corroborated independently as 50–20 SDSU result. No basis to assert team originated in Boston Massachusetts or was a particular unrelated Boston city college; keep AAU tournament-local source team identity with original POSTSEASON game type untouched.",
+      "unresolved_qualifier": "EXACT_AAU_CLUB_CHARTER_NOT_ESTABLISHED",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_bostonians.shtml"
+      ]
+    },
+    {
+      "literal": "Broadway Clowns",
+      "canonical_key": "broadway-clowns-al-pullins",
+      "canonical_display": "Broadway Clowns (Al Pullins touring team)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "NAMED_HISTORICAL_AFRICAN_AMERICAN_TOURING_TEAM",
+      "source_game_count": 9,
+      "first_season": "1935-36",
+      "last_season": "1947-48",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Notre Dame Hesburgh Libraries Joyce Sports Collection documents Al Pullins' touring Broadway Clowns as distinct from the Harlem Globetrotters despite Pullins' former Globetrotters tenure, and its later Harlem Clowns branding. Contemporary Oregon 1937–38 newspapers document Broadway Clowns as touring African American basketball squad. SDSU accepted expansion ledger represents nine source games 1935–1948; independent all-history series has ten total, not used to add an unaccepted expansion row or modify inherited baseline. Touring/showmanship identity is NOT game-specific proof that any SDSU contest was officially an exhibition. Owner's unrelated Fresno exclusions do not apply automatically.",
+      "unresolved_qualifier": "TOURING_EXHIBITION_STATUS_NEEDS_PER_GAME_EVIDENCE",
+      "evidence_urls": [
+        "https://archivesspace.library.nd.edu/repositories/3/resources/2455",
+        "https://oregonnews.uoregon.edu/lccn/sn97071090/1938-02-03/ed-1/seq-4/",
+        "https://mcubed.net/ncaab/series/sandst/nd1_broadwayclowns.shtml"
+      ]
+    },
+    {
+      "literal": "California 145’s",
+      "canonical_key": "california-145s-historical-team",
+      "canonical_display": "California 145's",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_HISTORICAL_LOCAL_AMATEUR_TEAM",
+      "source_game_count": 1,
+      "first_season": "1925-26",
+      "last_season": "1925-26",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Exactly one source-literal 1925–26 game against 'California 145’s', independently corroborated as Jan 8 1926 SDSU 28–24. No archival evidence yet identifies why squad used numeral 145, any military or athletic association, sponsorship or individual players. A narrow source-name canonical team is defensible; the unproven organizational affiliation is preserved as uncertainty and must not be inferred.",
+      "unresolved_qualifier": "UNKNOWN_TEAM_ORGANIZATIONAL_PROVENANCE",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_california145s.shtml"
+      ]
+    },
+    {
+      "literal": "Firestones",
+      "canonical_key": "firestones-1934-source-team",
+      "canonical_display": "Firestones (1933–34 source basketball team)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_INDUSTRIAL_AMATEUR_TEAM",
+      "source_game_count": 1,
+      "first_season": "1933-34",
+      "last_season": "1933-34",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "SDSU source explicitly names Firestones in 1933–34 and compiled historical record independently lists Jan 6 1934 22–66 loss. Do not assign a specific local Firestone retail branch or prove that all team members were corporate employees. The name is unlike contemporary college/institutional opponent names, so retain a source-named nonD1 industrial/community team.",
+      "unresolved_qualifier": "SPONSOR_OR_TEAM_OWNERSHIP_UNPROVEN",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_firestones.shtml"
+      ]
+    },
+    {
+      "literal": "Harlem Globetrotters",
+      "canonical_key": "harlem-globetrotters",
+      "canonical_display": "Harlem Globetrotters",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "HISTORICAL_TOURING_PROFESSIONAL_BASKETBALL_TEAM",
+      "source_game_count": 4,
+      "first_season": "1937-38",
+      "last_season": "1945-46",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Notre Dame's Joyce Sports archive identifies Harlem Globetrotters as a distinct professional exhibition team from Broadway Clowns. SDSU 1937–1946 accepted 4 original games match independent 1–3 opponent series. 'Exhibition team' in archival collection title describes team category, not necessarily that each particular SDSU historical game was designated exhibition by its source. Preserve original Stage1 acceptance pending any game-specific contradictory evidence.",
+      "unresolved_qualifier": "TOURING_EXHIBITION_STATUS_NEEDS_PER_GAME_EVIDENCE",
+      "evidence_urls": [
+        "https://libguides.library.nd.edu/joyce-sports-collection/basketball-african-american-exhibition-teams",
+        "https://mcubed.net/ncaab/series/sandst/nd1_harlemglobetrotters.shtml"
+      ]
+    },
+    {
+      "literal": "House of David",
+      "canonical_key": "house-of-david-source-basketball",
+      "canonical_display": "House of David (historical touring basketball squad)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "HISTORICAL_TOURING_BASKETBALL_TEAM",
+      "source_game_count": 6,
+      "first_season": "1932-33",
+      "last_season": "1939-40",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Contemporary Dec 1939 Glenville Mercury describes a touring House of David comedy/bearded basketball squad, while contemporary and museum histories confirm numerous barnstorming and look-alike House of David teams in the 1930s. Six SDSU source games 1932–40 are separately verified 3–3 by independent series. Source label alone does not prove each roster officially belonged to the Benton Harbor religious colony or that these six contests were designated exhibitions. Canonical key intentionally source-name scoped, not a specific religious membership identity.",
+      "unresolved_qualifier": "TOURING_TEAM_NAME_HAS_IMPERSONATORS;_GAME_STATUS_NOT_PROVEN",
+      "evidence_urls": [
+        "https://www.glenville.edu/sites/default/files/assets/mercury_19391219.pdf",
+        "https://www.northcountrypublicradio.org/news/story/33352/20170207/basketballers-barnstorm-north-creek-in-1938",
+        "https://mcubed.net/ncaab/series/sandst/nd1_houseofdavid.shtml"
+      ]
+    },
+    {
+      "literal": "Kansas City All-Stars",
+      "canonical_key": "kansas-city-all-stars-1945-source",
+      "canonical_display": "Kansas City All-Stars (1945 source squad)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_CITY_ALL_STAR_TEAM",
+      "source_game_count": 1,
+      "first_season": "1945-46",
+      "last_season": "1945-46",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Single accepted 1945–46 Kansas City All-Stars team in SDSU source and historical opponent series. No evidence that this is the Kansas City Monarchs baseball team, an NCAA Kansas City college, a permanent AAU sponsor, or any particular professional franchise. Preserve qualified source identity without false merger.",
+      "unresolved_qualifier": "CLUB_CHARTER_AND_PLAYER_IDENTITIES_UNKNOWN",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series8.shtml"
+      ]
+    },
+    {
+      "literal": "Mannen’s All-Stars",
+      "canonical_key": "mannens-all-stars-1931-source",
+      "canonical_display": "Mannen's All-Stars",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_LOCAL_ALL_STAR_TEAM",
+      "source_game_count": 1,
+      "first_season": "1931-32",
+      "last_season": "1931-32",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "One original 1931–32 SDSU opponent literal, named Mannen's All-Stars. Preserve exact source attribution without assuming relation to Hanson, Todd, or other All-Stars, nor the specific sponsor/player family behind the name.",
+      "unresolved_qualifier": "TEAM_SPONSOR_PERSON_NOT_IDENTIFIED",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1series6.shtml"
+      ]
+    },
+    {
+      "literal": "Olson’s Swedes",
+      "canonical_key": "olsons-terrible-swedes",
+      "canonical_display": "Olson's Terrible Swedes",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "HISTORICAL_BARNSTORMING_BASKETBALL_TEAM",
+      "source_game_count": 5,
+      "first_season": "1931-32",
+      "last_season": "1935-36",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "1934 contemporaneous Oregon Statesman identifies traveling Olson's Terrible Swedes basketball stars; original SDSU labels Olson's Swedes; independent SDSU series 'Olsen's Swedes' corroborates exact five 1932–36 games and 1–4 record. Source Olson/Olsen spelling variations retain raw original and match one touring team identity, but no roster uniformity across years assumed. Barnstorming does not itself prove source-game exhibition designation.",
+      "unresolved_qualifier": "TOURING_EXHIBITION_STATUS_NEEDS_PER_GAME_EVIDENCE",
+      "evidence_urls": [
+        "https://oregonnews.uoregon.edu/lccn/sn85042470/1934-01-05/ed-1/seq-12/ocr/",
+        "https://mcubed.net/ncaab/series/sandst/nd1_olsensswedes.shtml"
+      ]
+    },
+    {
+      "literal": "Pacific Coast Club",
+      "canonical_key": "pacific-coast-club-basketball",
+      "canonical_display": "Pacific Coast Club (1937–38 source basketball team)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_REGIONAL_ATHLETIC_CLUB_TEAM",
+      "source_game_count": 2,
+      "first_season": "1937-38",
+      "last_season": "1937-38",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Two SDSU 1937–38 Pacific Coast Club games, independently corroborated in compiled source-opponent series dated Dec 11 1937 and Jan 22 1938. The generic name does not authorize an inference about the precise legal organization, city, venue, Pacific Coast Conference affiliation or any player roster. Distinct source-named club.",
+      "unresolved_qualifier": "SPECIFIC_CLUB_CHARTER_UNKNOWN",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_pacificcoastclub.shtml"
+      ]
+    },
+    {
+      "literal": "Tahoe College (SA)",
+      "canonical_key": "tahoe-college-saints-1969",
+      "canonical_display": "Tahoe College Saints (historic South Lake Tahoe)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "DEFUNCT_HISTORICAL_COLLEGE_BASKETBALL_TEAM",
+      "source_game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "Historical local reporting documents the privately founded Tahoe College in 1968 and closure after founder's death. USD 1969–70 university yearbook independently records upset by Tahoe College at SDSU Invitational, with contemporary 1969 local reporting identifying its nickname as Saints. SDSU source 1969–70 Aztec Invitational game maps to this short-lived Tahoe College, NOT Lake Tahoe Community College (public district founded 1974/75) or Nevada-Reno. Preserve (SA) original tournament note without Stage2 site inference.",
+      "unresolved_qualifier": "SHORT_LIVED_HISTORIC_INSTITUTION_NOT_PRESENT_PUBLIC_COLLEGE",
+      "evidence_urls": [
+        "https://www.laketahoenews.net/category/lifestyle/page/509/?print=print-search&viewall%2Fpage%2F61%2F=",
+        "https://user-hazoqtr.cld.bz/Alcala-19702/154/",
+        "https://cld.bz/users/user-hAZoqtr/News-Scrapbook-1969-1971/63/",
+        "https://www.ltcc.edu/50thAnniversary/"
+      ]
+    },
+    {
+      "literal": "University of Mexico",
+      "canonical_key": "national-autonomous-university-of-mexico",
+      "canonical_display": "National University of Mexico (UNAM)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "HISTORIC_INTERNATIONAL_UNIVERSITY_BASKETBALL_TEAM",
+      "source_game_count": 2,
+      "first_season": "1938-39",
+      "last_season": "1947-48",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "An original February 3, 1939 Oregon newspaper explicitly identifies contemporary 'University of Mexico' touring U.S. college team as varsity of National University of Mexico, present Universidad Nacional Autónoma de México (UNAM); same 1938–39 western tour includes SDSU Jan 5 1939 and Arizona Dec 1938. Separate contemporary 1947-48 Illinois/Arizona/UCSB sources identify touring college-champion 'University of Mexico' basketball squads, supporting 1948 SDSU source label as the same national-university opponent identity; specific 1948 roster/administrative details not independently verified and do not change program identity. This is NOT University of New Mexico Lobos, New Mexico State, or New Mexico Tech.",
+      "unresolved_qualifier": "1948_TEAM_SPECIFIC_ORIGIN_NOT_INDEPENDENTLY_VERIFIED;INSTITUTIONAL_PROVENANCE_STRONG",
+      "evidence_urls": [
+        "https://oregonnews.uoregon.edu/lccn/2006260039/1939-02-03/ed-1/seq-5/",
+        "https://mcubed.net/ncaab/series/sandst/nd1_universityofmexico.shtml",
+        "https://arizonawildcats.com/sports/mens-basketball/schedule/1947-48",
+        "https://mcubed.net/ncaab/yearly/ucsb/1948.shtml"
+      ]
+    },
+    {
+      "literal": "Whiskered Wizards",
+      "canonical_key": "whiskered-wizards-1941",
+      "canonical_display": "Whiskered Wizards (1940–41 source touring team)",
+      "class": "NON_D1_AT_IMMUTABLE_RESEARCH_BASE",
+      "kind": "SOURCE_NAMED_BARNSTORMING_BASKETBALL_TEAM",
+      "source_game_count": 2,
+      "first_season": "1940-41",
+      "last_season": "1940-41",
+      "source_accepted_game_types": "REGULAR_SEASON",
+      "source_marker": "",
+      "identity_basis": "SDSU primary 1940–41 season record names Whiskered Wizards two contests on consecutive days Feb 14 and 15, 1941, independently corroborated by compiled 2–0 source series. A whisker-themed team label does NOT establish identity with House of David, its imitators, Broadway Clowns or another bearded show troupe; source-specific name retained.",
+      "unresolved_qualifier": "COMPANY_ORIGIN_UNKNOWN;DO_NOT_FALSE_MERGE_WITH_HOUSE_OF_DAVID",
+      "evidence_urls": [
+        "https://mcubed.net/ncaab/series/sandst/nd1_whiskeredwizards.shtml",
+        "https://mcubed.net/ncaab/yearly/sandst/1941.shtml"
+      ]
+    }
+  ],
+  "explicit_identity_nonmergers": [
+    "Broadway Clowns distinct from Harlem Globetrotters, though Al Pullins earlier worked for Globetrotters",
+    "House of David source team designation does not distinguish authentic Benton Harbor teams from multiple historical imitations",
+    "Whiskered Wizards not automatically House of David",
+    "35th Division original source omits branch; contemporary San Diego Navy Destroyer Division 35 is strong but not definitive candidate",
+    "University of Mexico old national university is not University of New Mexico current D1",
+    "Tahoe College Saints 1969 historical private school not Lake Tahoe Community College established years later"
+  ],
+  "game_universe_diagnostics_not_resolved_in_this_phase": [
+    {
+      "literal": "Bank of Italy",
+      "source_season": "1931-32",
+      "issue": "Original and independently compiled source report 1–0; unclear whether basketball was actually played or a forfeit/administrative credit; Stage1 accepted game unchanged, exact source-specific inclusion question preserved"
+    },
+    {
+      "literal": "Broadway Clowns",
+      "source_years": "1935-36..1947-48",
+      "issue": "Notre Dame classifies touring organization as exhibition basketball; cannot infer status of each specific SDSU contest; nine expansion source-game rows preserved"
+    },
+    {
+      "literal": "Harlem Globetrotters",
+      "source_years": "1937-38..1945-46",
+      "issue": "Professional exhibition team identity established, but game-specific SDSU exhibition classification not yet proven"
+    },
+    {
+      "literal": "House of David",
+      "source_years": "1932-33..1939-40",
+      "issue": "Comic barnstorming and historical imitation teams exist; six recorded SDSU contests not ruled exhibitions by identity alone"
+    },
+    {
+      "literal": "Olson’s Swedes",
+      "source_years": "1931-32..1935-36",
+      "issue": "Touring barnstorming opponent, not a game-specific exhibition designation"
+    },
+    {
+      "literal": "Whiskered Wizards",
+      "source_years": "1940-41",
+      "issue": "Bearded branding does not establish game exhibition status or House of David club identity"
+    },
+    {
+      "literal": "Athletes in Action",
+      "source_years": "1967-68",
+      "issue": "Previously accepted Stage2 identity 0045; national ministry touring-exhibition language does not by itself prove specific SDSU game was exhibition"
+    }
+  ],
+  "accepted_stage1_game_universe": 1086,
+  "completed_literal_label_census": true,
+  "total_accepted_literal_mappings": 341,
+  "total_accepted_game_rows": 1086,
+  "total_distinct_canonical_keys": 203,
+  "remaining_unresolved_literal_labels": 0,
+  "remaining_unresolved_accepted_game_rows": 0,
+  "prior_326_label_mappings_exact_byte_prefix_preserved": true,
+  "full_game_level_1086_row_stage2_ledger_NOT_YET_AUTHORED": true,
+  "stage2_complete": false,
+  "stage3_started": false,
+  "source_game_rows_mutated": 0,
+  "site_venue_han_inferences": 0,
+  "formal_non_d1_owner_scan_pending": true,
+  "shared_reference_registry_mutated": false,
+  "unidentified_1921_22_played_result_coverage_debt_outside_ledger": 3
+}

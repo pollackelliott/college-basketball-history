@@ -1,0 +1,46 @@
+{
+  "kind": "SDSU_STAGE2_FINAL_LABEL_CENSUS_CHECKPOINT_0046_V1",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "checkpoint": "0046-stage2-final-touring-and-misc-opponent-identity-census",
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "97a8479c01e4eed4623aa1c2dcf87f413bd67c48",
+  "prior_checkpoint": "0045-stage2-military-subunits-and-historical-colleges",
+  "prior_mapping_sha256": "be2feb9469e85b18ff390af7b063a2fd88868066f6783504642ead69b20ef929",
+  "prior_remaining_queue_sha256": "799c735e277adc42e1dfae4c6b0a6255754ea392defe680dfb05f66323b7149c",
+  "new_accepted_labels": 15,
+  "new_accepted_games": 38,
+  "new_non_d1_keys": 15,
+  "cumulative_mapped_labels": 341,
+  "cumulative_mapped_games": 1086,
+  "distinct_canonical_keys": 203,
+  "remaining_unresolved_labels": 0,
+  "remaining_accepted_games": 0,
+  "stage2_label_mapping_complete": true,
+  "full_game_level_stage2_ledger_NOT_YET_CREATED": true,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d",
+      "bytes_utf8": 289478
+    },
+    "accepted-final-source-opponent-identity-evidence.json": {
+      "sha256": "6350127820a8546f5e870193317c77f81ba9ca5b1450f6b0ac939dde78fecae3",
+      "bytes_utf8": 22556
+    },
+    "research-status.json": {
+      "sha256": "eecc38a8b1b40dbc863493817aaf839c1168ec225c7233963115a18728be6852",
+      "bytes_utf8": 1818
+    },
+    "research-findings.md": {
+      "sha256": "bcf48bac4e30f32d1a67d96e0a65637ff03c2fbedf226bce76110d27f1d82b0e",
+      "bytes_utf8": 14938
+    },
+    "remaining-unresolved-opponent-labels.csv": {
+      "sha256": "9f5bf6fd8a312f9c461027d423e37d879bd590ca7593c77d559bf52175ef72c2",
+      "bytes_utf8": 409
+    }
+  }
+}
