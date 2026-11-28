@@ -1,0 +1,57 @@
+{
+  "accepted_stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+  "cumulative_documented_discrepancies": 12,
+  "cumulative_site_census": {
+    "HOME": 413,
+    "NEUTRAL": 2,
+    "OPPONENT_HOME": 411,
+    "UNKNOWN": 217
+  },
+  "cumulative_supported_site_decisions": 826,
+  "cumulative_terminal_researched_unresolved_han": 9,
+  "cumulative_unknown_regular": 217,
+  "historical_game_facts_modified": false,
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "independent_row_level_adjudications": 0,
+  "kind": "SDSU_STAGE3A1_0060_EIGHT_1951_1970_SEASON_COMPLETE_SOURCE_WL_PARITY_V1",
+  "new_supported_HOME": 84,
+  "next_bounded_assignment": "Stage 3A-1: classify remaining 217 UNKNOWN regular games into coherent source conflict and exhausted ancient/other residuals; check remaining clear institutional source opportunities before terminalizing. Never reopen accepted conflict debt without new independent evidence. Stop before Stage 3A-2.",
+  "no_cross_era_blank_home_default": true,
+  "no_geography_only_inference": true,
+  "number_of_source_complete_seasons": 8,
+  "parent_research_head": "6089e6a9efdc03af9c9b4d771f57203ae5be83a2",
+  "postseason_stage3b_handoff": 43,
+  "previous_checkpoint": "0059-stage3a1-exact-ten-season-guide-home-parity",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "regular_season_games": 1043,
+  "remaining_1951_1970_nonpropagated_source_seasons": [
+    "1952-53",
+    "1953-54",
+    "1955-56",
+    "1956-57",
+    "1958-59",
+    "1959-60",
+    "1960-61",
+    "1961-62",
+    "1966-67",
+    "1967-68",
+    "1968-69"
+  ],
+  "school_key": "san-diego-state",
+  "source_authority": {
+    "accepted_original_source_cohort_blob": "167a4eef7be75aaae3c0e0edf0fc18ea411ed23d",
+    "complete_source_game_count_and_site_specific_W_L_proven": true,
+    "guide_printed_pages": [
+      147,
+      148,
+      149
+    ],
+    "sdsu_2008_09_year_by_year_official_guide": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+  },
+  "stage": "STAGE_3A1",
+  "stage3a1_complete": false,
+  "stage3a2_started": false,
+  "stage3a3_started": false,
+  "status": "IN_PROGRESS",
+  "total_games": 1086
+}

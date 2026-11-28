@@ -1,0 +1,123 @@
+[
+  {
+    "id": "SDSU-EXP-S1-1945-46-0005",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-27",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00570",
+    "target_month_day": "12-28"
+  },
+  {
+    "id": "SDSU-EXP-S1-1945-46-0006",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-28",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00571",
+    "target_month_day": "12-29"
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1941-42-0011",
+    "kind": "OFFICIAL_EDITION_SITE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1946-47-0020",
+    "kind": "ACCEPTED_SDSU_V_FRESNO_SCORE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1946-47-0021",
+    "kind": "FRESNO_EDITION_DATE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1960-61-0021",
+    "kind": "OFFICIAL_EDITION_SITE_CONFLICT",
+    "sdsu_source_fact_unchanged": true,
+    "source_references": [
+      "https://gobulldogs.com/documents/download/2016/6/9/bballmediaguide.pdf",
+      "https://gobulldogs.com/documents/download/2019/2/8/18_19_MBB_Record_Book.pdf"
+    ]
+  },
+  {
+    "accepted_sdsu_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1958-59-0013",
+    "kind": "CAL_POLY_OFFICIAL_RECIPROCAL_SCORE_DIFFERENCE",
+    "notes": "Cal Poly official 2026 season-by-season series PDF SAN DIEGO STATE table: 1959-01-10 at San Diego State L 54-72; exact SDSU source: J.10 *Cal Poly-SLO W 73-54",
+    "source_references": [
+      "https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf",
+      "https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf"
+    ]
+  },
+  {
+    "accepted_sdsu_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1959-60-0024",
+    "kind": "CAL_POLY_OFFICIAL_RECIPROCAL_DATE_DIFFERENCE",
+    "notes": "Cal Poly official 2026 season-by-season series PDF SAN DIEGO STATE table: 1960-02-17 at San Diego State W 68-64; exact SDSU source: F.19 *Cal Poly-SLO L 64-68",
+    "source_references": [
+      "https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf",
+      "https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf"
+    ]
+  },
+  {
+    "accepted_sdsu_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "id": "SDSU-EXP-S1-1968-69-0012",
+    "kind": "CAL_POLY_OFFICIAL_RECIPROCAL_SEASON_DIFFERENCE",
+    "notes": "Cal Poly official 2026 season-by-season series PDF SAN DIEGO STATE table: 1968-01-10 at San Diego State L 58-74; exact SDSU source: J.10 Cal Poly-SLO W 74-58; independent Cal Poly official 2026 year-by-year results locates 74-58 at San Diego State on Jan 10 in 1967-68 rather than target 1968-69; no opponent/game identity correction authorized",
+    "source_references": [
+      "https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf",
+      "https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf"
+    ]
+  },
+  {
+    "accepted_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "evidence_note": "Pepperdine official 2017-18 record book, printed p.68, 1950-51: 12/26 # vs San Diego State N W 67-38; # Los Angeles Invitational, Los Angeles. SDSU source 2026-27 lists D.26 at Pepperdine under PEPPERDINE INVITATIONAL (Malibu, Calif.). Source-school explicit at conflicts with reciprocal explicit N and event name/locality; leave H/A/N UNKNOWN, do not infer building or location.",
+    "id": "SDSU-EXP-S1-1950-51-0010",
+    "kind": "PEPPERDINE_TOURNAMENT_TARGET_AT_V_RECIPROCAL_NEUTRAL_CONFLICT",
+    "source_references": [
+      "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/pepperdinewaves.com/documents/2018/6/26/Men_Basketball_record_book.pdf?timestamp=20180626021709",
+      "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+    ]
+  },
+  {
+    "accepted_source_game_facts_unchanged": true,
+    "disposition": "RESEARCHED_UNRESOLVED_HAN",
+    "evidence_note": "Indiana State official 1950-51 schedule: Dec. 28 1950 at San Diago State W65-57 and Dec. 30 1950 at San Diago State W53-48. SDSU original historical guide lists D.28 vs. Indiana State L57-65 under PEPPERDINE INVITATIONAL (Malibu, Calif.). Exact game date/score match but opposing H/A/N symbols conflict; do not force either HOME or NEUTRAL.",
+    "id": "SDSU-EXP-S1-1950-51-0011",
+    "kind": "INDIANA_STATE_TARGET_VS_V_OPPONENT_AT_SDSU_CONFLICT",
+    "source_references": [
+      "https://gosycamores.com/sports/mens-basketball/schedule/1950-51",
+      "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+    ]
+  },
+  {
+    "accepted_source_game_facts_unchanged": true,
+    "disposition": "SUPPORTED_TARGET_NEUTRAL_WITH_ADVERSARIAL_DISPOSITION",
+    "evidence_note": "SDSU institutional year-by-year 1968-69: HOME 5-7, AWAY 4-8, NEUTRAL 1-0; sole literal vs. regular-season game is D.28 vs Montana W71-61 in NEVADA SOUTHERN TOURNAMENT (Las Vegas). Montana original 1968-69 Red Book: 12/28/68 Montana 61 SDSU 71, played Las Vegas, Nevada. Montana 2025 series summary inconsistently labels it A; retain discrepancy, prefer contemporaneous opponent locality plus target source season-level N 1-0 and explicit vs event. No venue identity inferred.",
+    "id": "SDSU-EXP-S1-1968-69-0009",
+    "kind": "RETROSPECTIVE_MONTANA_A_V_ACCEPTED_TARGET_NEUTRAL_EVENT",
+    "source_references": [
+      "https://storage.googleapis.com/sdsu-prod/2024/06/17/4jVONejCwMkSosTRpS7GzEc5osLcrIsf9miDDdFM.pdf",
+      "https://gogriz.com/documents/download/2018/1/17/redbook_21_1968_1969.pdf",
+      "https://gogriz.com/documents/download/2025/7/30/Records___History.pdf"
+    ]
+  }
+]
