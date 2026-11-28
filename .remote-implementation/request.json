@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "kind": "REMOTE_IMPLEMENTATION_REQUEST",
-  "request_id": "grand-canyon-stage1-0002",
+  "request_id": "grand-canyon-phase0-0001",
   "school_key": "grand-canyon",
-  "operation": "STAGE1_INVENTORY",
-  "previous_control_state_commit": "7291eee5299782c0372f6eb9c98bf788e813dd6f",
-  "previous_control_state_sha256": "d573dc6b640087a9a2dfa30a502255eb1c4cbcd101c201eb3fb2cfb3a4e3366b",
+  "operation": "PHASE0",
+  "previous_control_state_commit": "da4ec5d29ab21b47aad623a0cf7902f370fe3a5d",
+  "previous_control_state_sha256": "10f1dba822f9d16807d4a96cb112958e122f6e47fd0217bc9ee1be1f3d549d46",
   "expected_protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "target_branch": "data/grand-canyon-onboarding",
   "research_checkpoint": {
     "sha256": "bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479",
     "research_base_sha": "36b8e829e7e5ffde7390ec7ef00816cda3d7f663",
@@ -17,23 +18,30 @@
       "part_count": 1
     }
   },
+  "stage1_checkpoint": {
+    "path": ".remote-implementation/checkpoints/grand-canyon/grand-canyon-stage1-0002/checkpoint-manifest.json",
+    "sha256": "a0c1cb34a00a91c4e1d9e48196778b4acbaa77adf8f401f1a74df3b323fe1864"
+  },
   "venue_reconciliation": {
-    "path": ".remote-implementation/requests/grand-canyon-stage1-0002/venue-reconciliation.json",
+    "path": ".remote-implementation/checkpoints/grand-canyon/grand-canyon-stage1-0002/venue-reconciliation.json",
     "sha256": "d8b522afca8413ba722994965c5bc9427eb7144e7411490601408b971cd0cd0c"
   },
   "conference_reconciliation": {
-    "path": ".remote-implementation/requests/grand-canyon-stage1-0002/conference-reconciliation.json",
+    "path": ".remote-implementation/checkpoints/grand-canyon/grand-canyon-stage1-0002/conference-reconciliation.json",
     "sha256": "cb3508344aafc53125f63cd6abc3badcfe1006451230f7a1a2e3a07841631fb7"
   },
+  "history_scope": {
+    "start_season": "2013-2014",
+    "basis": "TOP_LEVEL_INTERVALS",
+    "intervals": "2013-14+",
+    "notes": "Grand Canyon original complete-institutional frozen Research establishes institutional varsity inception 1949-50 and publication universe 1949-50 through completed 2025-26. This compatibility history_scope field represents only accepted top-level/Division I-equivalent classification 2013-14+; it is not institutional inception and does not clip the immutable 2,147-game institutional Research source universe. Current-main program-top-level-scope.csv already exactly matches Grand Canyon,2013-14+; confirmed, not superseded. Preserve all accepted history."
+  },
   "creation_provenance": {
-    "origin": "Grand Canyon ordinary serialized Implementation Stage 1 bounded deterministic reconciliation of six authenticated grand-canyon-stage1-0001 blockers.",
-    "authorization": "Owner explicitly authorized existing Stage 1 continuation and largest safe deterministic reconciliation unit on 2026-11-28. Exact source checkpoint .remote-implementation/checkpoints/grand-canyon/grand-canyon-stage1-0001/checkpoint-manifest.json has SHA-256 18e785b305d82d1546dbabb07664b39352d4664f67e5dfc6c7e42f751f712848 and reconciliation SHA-256 076a0f264f3fc572430120cf4c9a0e0785a342325920a6776ffaaa7b39199e01. Reuse four same physical global venue identities and register two research-settled historical conference keys under guarded Phase 0 only, with seven frozen conference membership rows preserved exactly. Read-only permanent STAGE1_INVENTORY recheck. No historical change, no dedicated global maintenance PR, no Phase0/Stage2/Gate/release/merge authorization."
+    "origin": "Grand Canyon ordinary serialized Implementation Phase 0 from authenticated Stage 1 PASS grand-canyon-stage1-0002; owner directed Continue on November 28, 2026.",
+    "authorization": "Owner explicitly authorized Grand Canyon current-main Stage 1 and continuation to the next bounded implementation unit. Permanent Stage 1 reconciled all six blockers with PASS, zero ambiguous, zero maintenance, using immutable ZIP SHA bf00a187426745c772d3234d08bc53ae3f7969ac5dc5c42408bc50e2ad85f479. Authorize one guarded Phase 0 Integration Freeze: exact-current-main rebase, 37 safe venue representation reuses including four explicit mappings, 17 research-settled new venue registrations, two research-settled historical conference registrations, target scope 2013-14+, complete-institutional inception 1949-50 preserved, durable write-ahead, create-once data/grand-canyon-onboarding, lock release, independent fresh proof. No existing shared/global maintenance, historical re-adjudication, other-school mutations, Stage 2, owner gates, release, merge, or direct protected-main change."
   },
   "authority": {
-    "owner_gate_1": false,
-    "owner_gate_2": false,
-    "release": false,
-    "phase0": false,
+    "phase0": true,
     "recovery": false,
     "stage2_census": false,
     "stage2_current_main_refresh": false,
@@ -49,6 +57,9 @@
     "release_gate2_approval": false,
     "release_production_proof": false,
     "venue_identity_maintenance": false,
-    "phase0_scope_supersession": false
+    "phase0_scope_supersession": false,
+    "release": false,
+    "owner_gate_1": false,
+    "owner_gate_2": false
   }
 }
