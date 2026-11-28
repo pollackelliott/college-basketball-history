@@ -1,0 +1,15 @@
+{
+  "kind": "STAGE1_SEASON_COVERAGE_V1",
+  "gaps": [
+    {
+      "season": "1921-22",
+      "class": "SOURCE_ACKNOWLEDGED_UNIDENTIFIED_GAME_GAP",
+      "unidentified_games": 3,
+      "unidentified_wins": 1,
+      "unidentified_losses": 2,
+      "identified_competitive_games": 14,
+      "source_note": "1 win, 2 losses vs. unknown teams. Forfeit wins vs. Riverside & Fullerton JC.",
+      "official_aggregate": "14-8 institutional source aggregate, includes two administrative forfeit awards"
+    }
+  ]
+}

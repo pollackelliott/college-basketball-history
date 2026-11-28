@@ -1,0 +1,44 @@
+{
+  "accepted_stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95",
+  "cumulative_documented_discrepancies": 12,
+  "cumulative_site_census": {
+    "HOME": 434,
+    "NEUTRAL": 2,
+    "OPPONENT_HOME": 411,
+    "UNKNOWN": 196
+  },
+  "cumulative_supported_site_decisions": 847,
+  "cumulative_terminal_researched_unresolved_han": 9,
+  "cumulative_unknown_regular": 196,
+  "historical_game_facts_modified": false,
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "kind": "SDSU_STAGE3A1_0061_TWO_NCAA_SOURCE_WL_SEASON_HAN_PARITY_V1",
+  "new_individual_row_level_adjudications": 0,
+  "new_supported_HOME": 21,
+  "next_bounded_assignment": "Stage3A1: isolate remaining 196 historical site-unknown cases by exact season and discrepancy source family; preserve 9 terminal H/A/N conflicts, no assumed unmarked HOME and no Stage 3A-2 start.",
+  "no_blind_unmarked_home": true,
+  "no_geography_only_inference": true,
+  "parent_checkpoint": "0060-stage3a1-eight-season-1951-1970-official-home-parity",
+  "parent_research_head": "bbb0eae3106fbd8a4a5f8c99986ce7fe61284841",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "regular_season_games": 1043,
+  "school_key": "san-diego-state",
+  "source_authority": {
+    "2008_09_institutional_historical_guide": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf",
+    "full_source_season_WL_HAN_parity": true,
+    "guide_pdf_page": 6,
+    "guide_printed_page": 149,
+    "original_full_source_blob": "167a4eef7be75aaae3c0e0edf0fc18ea411ed23d"
+  },
+  "source_reconciled_seasons": [
+    "1966-67",
+    "1967-68"
+  ],
+  "stage": "STAGE_3A1",
+  "stage3a1_complete": false,
+  "stage3a2_started": false,
+  "stage3a3_started": false,
+  "stage3b_postseason_untouched": 43,
+  "status": "IN_PROGRESS",
+  "total_games": 1086
+}

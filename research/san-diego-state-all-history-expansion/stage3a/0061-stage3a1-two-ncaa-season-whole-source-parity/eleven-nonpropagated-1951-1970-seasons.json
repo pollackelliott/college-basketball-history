@@ -1,0 +1,19 @@
+{
+  "excluded_reason": {
+    "1952-53": "Guide AWAY 12 but original at-marked source 14; cannot infer absence-of-at HOME",
+    "1953-54": "Target source rows, postseason at Pasadena, and guide aggregate do not form exact source partition",
+    "1955-56": "Original at source count and neutral/NAIA postseason partition do not uniquely prove blank HOME",
+    "1956-57": "Marked at and vs plus NCAA postseason partition do not uniquely prove blank HOME",
+    "1958-59": "Official AWAY 11 but original source at-marked count 10",
+    "1959-60": "Official AWAY 12 but original at-marked count 13, contains a documented tournament at",
+    "1960-61": "Existing Fresno State site contradiction, retained RESEARCHED_UNRESOLVED",
+    "1961-62": "Official AWAY 12 but original source at-marked count 13",
+    "1966-67": "Three NCAA postseason games and mixed regional HOME/NEUTRAL source evidence require separate partition",
+    "1967-68": "NCAA postseason and competing home/neutral classifications must not be inferred from missing markings",
+    "1968-69": "Prior Cal Poly source-season contradiction; preserve official Montana NEUTRAL and researched-unresolved Cal Poly"
+  },
+  "kind": "SDSU_STAGE3A1_0060_EXCLUDED_SEASON_EVIDENCE_CLASSES_V1",
+  "no_blind_missing_at_default": true,
+  "previous_resolved_and_unresolved_site_rows_preserved": true,
+  "source_uri": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+}

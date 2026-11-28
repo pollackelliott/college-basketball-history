@@ -1,0 +1,15 @@
+{
+  "1921_22_boundary": "source-acknowledged three unidentified games and two forfeits; not part of same closed direct game-count proof",
+  "1924_25_boundary": "three source-announced administrative forfeits, source listed game totals do not match summary without separate accounting",
+  "1928_29_disposition": "DO_NOT_PROPAGATE_SITE_FROM_ABSENCE_OF_AT",
+  "1928_29_guide_AWAY": 6,
+  "1928_29_guide_HOME": 10,
+  "1928_29_source_at_rows": 4,
+  "1928_29_source_full_rows": 16,
+  "1928_29_source_unmarked_rows": 12,
+  "1928_29_unmarked_away_population_implied_by_counts": 2,
+  "kind": "SDSU_STAGE3A1_MARKING_CONVENTION_EXCEPTION_ACCOUNTING_V1",
+  "not_a_global_unmarked_home_rule": true,
+  "other_seasons": "no automatic propagation; must separately pass complete-source season-specific arithmetic and contradiction checks",
+  "source_2008_09": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goaztecs.com/documents/2018/7/17/08_sdsu_mbaskbl_mg_history.pdf"
+}

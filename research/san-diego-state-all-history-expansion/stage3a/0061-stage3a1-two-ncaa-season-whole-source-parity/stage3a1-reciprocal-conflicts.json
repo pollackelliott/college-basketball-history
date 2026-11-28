@@ -1,0 +1,16 @@
+[
+  {
+    "id": "SDSU-EXP-S1-1945-46-0005",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-27",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00570",
+    "target_month_day": "12-28"
+  },
+  {
+    "id": "SDSU-EXP-S1-1945-46-0006",
+    "kind": "RECIPROCAL_DATE_MISMATCH",
+    "reciprocal_month_day": "12-28",
+    "reference": "schools/arizona/source-games.csv#ARIZ-STG1-PRE-00571",
+    "target_month_day": "12-29"
+  }
+]
