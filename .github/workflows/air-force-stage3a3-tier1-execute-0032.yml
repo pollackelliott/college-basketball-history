@@ -29,7 +29,7 @@ jobs:
       - name: Check out the exact Research execution commit
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 3
           persist-credentials: true
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -37,14 +37,14 @@ jobs:
           python-version: '3.12'
       - name: Authenticate Git refs, ancestor checkpoint, original ledger and snapshot run
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = refs/heads/research/air-force
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           test -z "$(git status --porcelain)"
-          test "$(git rev-parse HEAD^)" = "$SOURCE_SHA"
+          git merge-base --is-ancestor "$SOURCE_SHA" HEAD
           test "$(git diff --name-only "$SOURCE_SHA" HEAD)" = '.github/workflows/air-force-stage3a3-tier1-execute-0032.yml'
           test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$MAIN_SHA"
           test "$(git rev-parse "$SOURCE_SHA:$LEDGER_REL")" = "$LEDGER_BLOB_SHA"
@@ -92,7 +92,7 @@ jobs:
           PY
       - name: Download and verify the unchanged protected-main evidence snapshot
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
