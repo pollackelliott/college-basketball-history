@@ -43,7 +43,8 @@ jobs:
           export AIR_FORCE_STAGE2_ROOT="$RUNNER_TEMP/stage2"
           export AIR_FORCE_STAGE2_ZIP="$RUNNER_TEMP/stage2-checkpoint-0024.zip"
           python -c 'import os, pathlib, zipfile; root=pathlib.Path(os.environ["AIR_FORCE_STAGE2_ROOT"]); paths=sorted(p for p in root.rglob("*") if p.is_file()); z=zipfile.ZipFile(os.environ["AIR_FORCE_STAGE2_ZIP"],"w",compression=zipfile.ZIP_DEFLATED); [z.write(p,p.relative_to(root).as_posix()) for p in paths]; z.close(); print("Exact Stage 2 checkpoint ZIP members:",len(paths))'
-          python "$RUNNER_TEMP/tools/research_stage3a0.py" air-force "$RUNNER_TEMP/stage2-checkpoint-0022.zip" --main-sha a11cccf944492e4d968edbeef4111ebad150fcec --output-dir "$RUNNER_TEMP/stage3a0"
+          test -s "$AIR_FORCE_STAGE2_ZIP" || { echo "Expected exactly constructed checkpoint ZIP not present" >&2; exit 9; }
+          python "$RUNNER_TEMP/tools/research_stage3a0.py" air-force "$AIR_FORCE_STAGE2_ZIP" --main-sha a11cccf944492e4d968edbeef4111ebad150fcec --output-dir "$RUNNER_TEMP/stage3a0"
           export AIR_FORCE_STAGE3A0_OUT="$RUNNER_TEMP/stage3a0"
           python -c 'import os, pathlib, json; p=pathlib.Path(os.environ["AIR_FORCE_STAGE3A0_OUT"]); d=json.loads((p/"stage3a0-status.json").read_text()); assert d["status"]=="COMPLETE", d; assert d["ledger_rows"]==1928; assert d["partition"]["regular_season"]+d["partition"]["postseason"]==1928; assert not d["external_historical_research_used"]; assert len(list(p.glob("stage3a*.json")))>3; print("Stage3A0 verified:",d["partition"],d["regular_season_site_census"],d["neutral_era_census"])'
       - name: Upload exact-output bounded checkpoint
