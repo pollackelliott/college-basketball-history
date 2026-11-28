@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE4_0049_EXACT_FAILURE_CENSUS",
+  "school_key": "air-force",
+  "workflow": "ORDINARY_SCHOOL_RESEARCH",
+  "accepted_stage3b_checkpoint_commit": "53ae4f1bfd15c9b67e8c6f4ba2907c49eeb85745",
+  "accepted_stage3b_checkpoint": "research/air-force/stage3b/completion-0048/",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "permanent_tool_execution_commit": "e56f955125a56d313a76acc51566f60e80f3fece",
+  "git_run_id": 46174971145,
+  "git_run_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46174971145",
+  "preserved_transport_branch_head": "0adafc6fc33a8c28853168fc677d6693b13588e4",
+  "preserved_exact_output": "https://github.com/pollackelliott/college-basketball-history/tree/0adafc6fc33a8c28853168fc677d6693b13588e4/research/air-force/stage4/authoring-0049",
+  "output_artifact_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46174971145/artifacts/15275396480",
+  "stage3b_input_zip_sha256": "c16590d92fe2bf013acde3edd0eebd7eed68bb132421c017b57c41162c356945",
+  "permanent_stage4_preflight": "PASS",
+  "permanent_stage4_preflight_defects": 0,
+  "permanent_research_acceptance": "FAIL",
+  "validator_error_count": 1933,
+  "validator_error_classes": [
+    {
+      "reason": "ONLY_ONE_SCORE_POPULATED",
+      "validator_records": 1928,
+      "unique_game_rows": 1928,
+      "source_field": "air_force_points",
+      "projected_missing_field": "team_score",
+      "explanation": "Accepted Stage3B has both air_force_points and opponent_points for all 1,928 games; permanent Stage4 score projection does not include air_force_points in its exact accepted legacy alias list. This is deterministic representation loss, not unknown historical scoring.",
+      "evidence": "Parent ledger original Git blob b18e3b34237b1edb71d9ddf6d143c2d816d308a8; generated source-games Git blob 769bead6940091f1cb981d6c89e10f05d01f9b96."
+    },
+    {
+      "reason": "OVERTIME_PERIODS_INVALID",
+      "validator_records": 3,
+      "unique_game_ids": [
+        "AF-1999-00-014",
+        "AF-1999-00-019",
+        "AF-2000-01-009"
+      ],
+      "accepted_tokens": [
+        "(3OT)",
+        "(OT)",
+        "(OT)"
+      ],
+      "explanation": "Permanent Stage4 _project_overtime supports OT, 2OT but not parentheses; exact accepted source OT values are present and mechanically translatable to 3,1,1 without changing historical evidence."
+    },
+    {
+      "reason": "NEUTRAL_MATERIAL_GAP_NOT_RESEARCH_ACCOUNTED",
+      "validator_records": 1,
+      "unique_game_ids": [
+        "AF-1985-86-008",
+        "AF-1985-86-009",
+        "AF-1996-97-008",
+        "AF-1998-99-008"
+      ],
+      "classification": [
+        {
+          "ids": [
+            "AF-1985-86-008",
+            "AF-1985-86-009"
+          ],
+          "accepted_source_status": "TIER4_HISTORICAL_LOCATION_COMPLETE",
+          "locality": "Tokyo, Japan",
+          "country": "Japan",
+          "cause": "Non-U.S. exact-building exception terminal site status not translated to controlled package research-accounting vocabulary; accepted Tokyo locality and basis are already populated."
+        },
+        {
+          "ids": [
+            "AF-1996-97-008"
+          ],
+          "accepted_source_status": "RESEARCHED_UNRESOLVED_NEUTRAL_VENUE",
+          "locality": "Bozeman, MT",
+          "cause": "Modern exact-venue research-exhausted terminal status not translated; accepted source basis refers to bounded 0036 evidence."
+        },
+        {
+          "ids": [
+            "AF-1998-99-008"
+          ],
+          "accepted_source_status": "RESEARCHED_UNRESOLVED_NEUTRAL_VENUE",
+          "locality": "Green Bay, WI",
+          "cause": "Modern exact-venue research-exhausted terminal status not translated; accepted source basis refers to bounded 0036 evidence."
+        }
+      ],
+      "explanation": "All four accepted source rows already have nonblank site_research_basis and explicit venue localities. Preserve original statuses and no inference or new venue name; derive controlled package status only under narrow verified row conditions."
+    },
+    {
+      "reason": "SOURCE_PROGRAM_HOME_RELATIONSHIP_CONTRADICTION",
+      "validator_records": 1,
+      "game_id": "AF-1959-60-006",
+      "accepted_han": "HOME",
+      "accepted_venue": "Alumni Hall",
+      "accepted_city": "Chicago",
+      "accepted_state": "IL",
+      "date": "1960-03-07",
+      "opponent": "DePaul",
+      "evidence_urls": [
+        "https://depaulbluedemons.com/news/2007/10/26/DePaul_A_to_Z",
+        "https://depaulbluedemons.com/documents/download/2020/3/17/DePaulAtoZ_2020.pdf",
+        "https://www.sports-reference.com/cbb/schools/air-force/men/1960-schedule.html",
+        "https://www.sports-reference.com/cbb/schools/depaul/men/1960-schedule.html"
+      ],
+      "explanation": "True accepted game-site/HAN contradiction rather than generic representation loss. DePaul institutional evidence identifies first-round NCAA at its Alumni Hall and reciprocal schedule services mark 1960 NCAA meeting neutral. Do not assume H/A/N from geography. Requires narrowly scoped authenticated historical classification correction under Research policy, not a generic HOME-relationship exception fabricated to silence validator."
+    }
+  ],
+  "validator_classes_sum": 1933,
+  "additional_proactive_provenance_defects_not_in_validator_error_count": [
+    {
+      "missing_package_field": "raw_text",
+      "rows": 1928,
+      "accepted_parent_field": "guide_literal_row",
+      "cause": "Accepted raw guide source lines exist on all 1,928 parent rows, but projection raw_text alias set omits guide_literal_row."
+    },
+    {
+      "missing_package_field": "source_page",
+      "rows": 1865,
+      "accepted_parent_field": "primary_source_pdf_page",
+      "cause": "First-party source PDF-page locators remain populated in Stage3B but projection alias set omits primary_source_pdf_page."
+    },
+    {
+      "missing_package_field": "source_venue_name",
+      "rows": 113,
+      "accepted_parent_field": "guide_exact_venue_note",
+      "cause": "Accepted guide-literal venue notes are present but projected source_venue_name always blank; any safe compatibility must preserve raw literal and not imply curated physical identity."
+    },
+    {
+      "missing_package_field": "source-notes.md URLs",
+      "source_primary_url_rows": 1928,
+      "source_schedule_url_rows": 1903,
+      "source_evidence_basis_rows": 1928,
+      "cause": "Permanent source-notes collects source_url/source_kind only; accepted Air Force primary_source_url, official_schedule_url, evidence_basis remain present in parent but missing from presentation. Need one-way, lossless provenance rendering without reauthoring research."
+    }
+  ],
+  "fatal_acceptance_recheck_not_authorized_without_remedy": true,
+  "history_mutations": 0,
+  "global_reference_mutations": 0
+}
