@@ -1,0 +1,55 @@
+{
+  "files": [
+    {
+      "bytes": 693,
+      "path": "README.md",
+      "sha256": "1582b2c37931c00ebabc1aa76448bc1a69963fe669e2418d8b44c7746c6ed780"
+    },
+    {
+      "bytes": 159243,
+      "path": "remaining-neutral-queue.json",
+      "sha256": "26de3580dea60dc2590e68ecc8397057ff81c922103439caa44ce955376363e9"
+    },
+    {
+      "bytes": 1555,
+      "path": "source-family-audit.json",
+      "sha256": "abf3e8f2286e5edbd574140ada6ced102b05e43badcd00a43e549a6332ca5a86"
+    },
+    {
+      "bytes": 8639,
+      "path": "stage3a3-tier2-evidence.json",
+      "sha256": "958ccbcd1571e3fbbbd053440ed2354a97e1d159baa54c35b37bf064118c904f"
+    },
+    {
+      "bytes": 1023,
+      "path": "stage3a3-tier2-status.json",
+      "sha256": "e860dd51f64590714a0411de663a35345fb9bf0a5c0ffb56daeb49f46697f2ff"
+    },
+    {
+      "bytes": 1769462,
+      "path": "stage3a3-tier2-working-ledger.csv",
+      "sha256": "f89489f3cd71edafa7ecf3c547891926a134eb46e79c3c514414448ce70ef799"
+    },
+    {
+      "bytes": 840,
+      "path": "stage4-authoring/institutional-scope.json",
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e"
+    },
+    {
+      "bytes": 242748,
+      "path": "stage4-authoring/opponents.csv",
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44"
+    },
+    {
+      "bytes": 5433,
+      "path": "stage4-authoring/venues.csv",
+      "sha256": "51683d88be8866a36ed1f173c2be53bbbc2b09a058f042050ac76a42d79442c2"
+    }
+  ],
+  "kind": "NEW_MEXICO_STAGE3A3_TIER2_TRANCHE1_CHECKPOINT_V1",
+  "parent_ledger_sha256": "df05a6de47aa6db2df0afade2def54ddc10f9a3e11d5e442778af21e807e6bab",
+  "parent_research_commit_sha": "9a1930309b5f01f10ab4f1eec469ad7d377546d3",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "schema_version": 1,
+  "status": "TRANCHE1_COMPLETE_TIER2_IN_PROGRESS"
+}
