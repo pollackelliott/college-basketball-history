@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3A2_HOME_TERMINAL_EXCEPTION_AUDIT_V1",
+  "school_key": "air-force",
+  "status": "CONVERGED_19_RESEARCHED_UNRESOLVED_HOME_VENUE",
+  "research_base_sha": "3f5a15458aa468347e56e669327d6fe4c9c6ee69",
+  "source_notes": [
+    {
+      "class": "TARGET_EXACT_GAME_LEDGER",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1956-57",
+      "finding": "9 HOME rows use retrospective USAFA, CO, no physical building. Other 1956-57 games explicitly labeled Denver CO are a separate population."
+    },
+    {
+      "class": "TARGET_EXACT_GAME_LEDGER",
+      "url": "https://goairforcefalcons.com/sports/mens-basketball/schedule/1957-58",
+      "finding": "10 HOME rows use retrospective USAFA, CO, no physical building."
+    },
+    {
+      "class": "TARGET_FIRST_PARTY_RESULTS",
+      "url": "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/goairforcefalcons.com/documents/2010/11/9/_afa_m_baskbl__ResultsSection2010-11.pdf?timestamp=20180621115541",
+      "finding": "Page 94 uses an explicit asterisk note for Denver Auditorium Arena on 1956-57 and 1957-58 named games, but none of these 19 uppercase HOME rows has that venue footnote; no building is named for 19."
+    },
+    {
+      "class": "TARGET_FACILITY_CHRONOLOGY",
+      "url": "https://goairforcefalcons.com/sports/2018/6/21/facilities-cadet-gym-html",
+      "finding": "Permanent-campus Cadet Gym built 1958, years later than 1956-57 and season 1957-58; cannot retroactively assign it."
+    },
+    {
+      "class": "ACADEMY_HISTORICAL_CHRONOLOGY",
+      "url": "https://www.usafa.af.mil/About-Us/Fact-Sheets/Display/Article/428274/air-force-academy-history/",
+      "finding": "Academy 1955-58 cadets were temporarily at Lowry in Denver, permanent campus transferred 1958-08-29; institutional campus location alone cannot identify away or HOME varsity game arena."
+    },
+    {
+      "class": "LOWRY_CAMPUS_FACILITY_INVENTORY",
+      "url": "https://lowryfoundation.org/lowry-legacy/air-force-academy/campus-locator/",
+      "finding": "Lowry campus Building 863 Cadet Gymnasium and annex 867 existed; no reliable evidence they hosted any of the 19 HOME games; geographic conflict with accepted Colorado Springs HOME evidence."
+    },
+    {
+      "class": "RECIPROCAL_OFFICIAL_SEASON_SCHEDULE",
+      "url": "https://goeasternathletics.com/sports/mens-basketball/schedule/1956-57",
+      "finding": "1957-02-09 HOME for Air Force Colorado Springs, no arena named."
+    },
+    {
+      "class": "RECIPROCAL_OFFICIAL_SEASON_SCHEDULE",
+      "url": "https://goeasternathletics.com/sports/mens-basketball/schedule/1957-58",
+      "finding": "1958-01-16 HOME for Air Force Colorado Springs, no arena named."
+    },
+    {
+      "class": "RECIPROCAL_OFFICIAL_SEASON_SCHEDULE",
+      "url": "https://gocreighton.com/sports/mens-basketball/schedule/1957-58",
+      "finding": "1958-01-29 HOME for Air Force Colorado Springs, no arena named."
+    },
+    {
+      "class": "RECIPROCAL_GIT_PUBLISHED_PACKAGE",
+      "url": "https://github.com/pollackelliott/college-basketball-history/blob/0181255ebb1a91d624cc62ef80a3edb6453d2fd0/schools/creighton/source-games.csv",
+      "finding": "Accepted Creighton source-games.csv exact 1958-01-29 vs Air Force, score 52-63; site OPPONENT_HOME but venue/city fields blank. No accepted agreeing building to propagate."
+    },
+    {
+      "class": "RECIPROCAL_OFFICIAL_SCHEDULE",
+      "url": "https://godrakebulldogs.com/sports/mens-basketball/schedule/1957-58",
+      "finding": "Drake 1957-12-18 game at Air Force in El Paso County, Colorado; no physical venue named."
+    },
+    {
+      "class": "SECONDARY_GAME_SITE_SUSPECT",
+      "url": "https://www.hoopsipedia.com/teams/air-force-falcons/1957-58",
+      "finding": "One game Dec. 18 1957 vs Drake labels Cadet Gymnasium, but source does not distinguish Lowry Building 863 from permanent-campus Cadet Gymnasium opened after this season and gives no contemporaneous source. Cannot treat as supported physical venue identification."
+    },
+    {
+      "class": "YEARBOOK_ARCHIVE_INDEX",
+      "url": "https://www.usafa.org/polaris-yearbooks",
+      "finding": "1959 earliest Association & Foundation yearbook, indexed at official website; no extractable 1956-58 exact-game venue found from accessible indexing. 1959 hosted source too large for web text fetch; cannot treat unread pages as evidence."
+    }
+  ],
+  "exact_row_exceptions": [
+    {
+      "research_game_id": "AF-1956-57-001",
+      "season": "1956-57",
+      "game_date": "1956-12-05",
+      "opponent": "WESTMINSTER (Utah)",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-003",
+      "season": "1956-57",
+      "game_date": "1956-12-12",
+      "opponent": "CHADRON (Neb.)",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-005",
+      "season": "1956-57",
+      "game_date": "1956-12-19",
+      "opponent": "KEARNEY STATE (Neb.)",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-007",
+      "season": "1956-57",
+      "game_date": "1957-01-09",
+      "opponent": "KANSAS WESLEYAN",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-009",
+      "season": "1956-57",
+      "game_date": "1957-01-16",
+      "opponent": "ST. MICHAEL’S (Vt.)",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-012",
+      "season": "1956-57",
+      "game_date": "1957-01-30",
+      "opponent": "ADAMS STATE",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-014",
+      "season": "1956-57",
+      "game_date": "1957-02-06",
+      "opponent": "COLORADO COLLEGE",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-015",
+      "season": "1956-57",
+      "game_date": "1957-02-09",
+      "opponent": "EASTERN NEW MEXICO",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1956-57-016",
+      "season": "1956-57",
+      "game_date": "1957-02-13",
+      "opponent": "N. MEXICO HIGHLANDS",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-001",
+      "season": "1957-58",
+      "game_date": "1957-12-04",
+      "opponent": "WESTMINSTER (Utah)",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-003",
+      "season": "1957-58",
+      "game_date": "1957-12-10",
+      "opponent": "KANSAS CITY UNIV",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-006",
+      "season": "1957-58",
+      "game_date": "1957-12-18",
+      "opponent": "DRAKE",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence. Secondary Cadet Gymnasium claim on Drake 1957-12-18 conflicts with two possible historical physical gymnasiums and is not independently corroborated."
+    },
+    {
+      "research_game_id": "AF-1957-58-009",
+      "season": "1957-58",
+      "game_date": "1958-01-08",
+      "opponent": "ADAMS STATE",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-011",
+      "season": "1957-58",
+      "game_date": "1958-01-16",
+      "opponent": "EASTERN NEW MEXICO",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-014",
+      "season": "1957-58",
+      "game_date": "1958-01-29",
+      "opponent": "CREIGHTON",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-016",
+      "season": "1957-58",
+      "game_date": "1958-02-05",
+      "opponent": "NORTHERN COLORADO",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-018",
+      "season": "1957-58",
+      "game_date": "1958-02-12",
+      "opponent": "COLORADO MINES",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-020",
+      "season": "1957-58",
+      "game_date": "1958-02-19",
+      "opponent": "N. MEXICO HIGHLANDS",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    },
+    {
+      "research_game_id": "AF-1957-58-022",
+      "season": "1957-58",
+      "game_date": "1958-02-26",
+      "opponent": "COLORADO COLLEGE",
+      "site_type": "HOME",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "curated_venue_name": "",
+      "site_research_status": "RESEARCHED_UNRESOLVED_HOME_VENUE",
+      "site_research_basis": "Official Air Force 1956-57/1957-58 game schedule and the 2010-11 first-party results guide p94 provide HOME but no building; guide explicitly footnotes other games at Denver Auditorium Arena, not these HOME rows. Permanent Cadet Gym postdates these games; 1955 Lowry Cadet Gym 863 is physically distinct and not tied to these exact HOME games. Eastern New Mexico/Creighton/Drake official reciprocal site records support Colorado Springs/El Paso County but do not identify buildings; accepted published Creighton reciprocal 1958-01-29 likewise has venue blank. 1959 Academy yearbook index checked without accessible exact-game venue. No safe exact building supported by systematic institutional/facility/reciprocal evidence."
+    }
+  ],
+  "convergence_reason": "After the first-party all-time results and exact-season schedules, institutional facility chronology, temporary-campus historical archives, reciprocal institutional schedules, accepted published Creighton source side, and indexed yearbook opportunity, the exact physical building for any of the 19 HOME games has not been established. Do not replace missing physical identity with Denver Auditorium Arena, Lowry Cadet Gymnasium, or permanent Cadet Gymnasium. City/state supported Colorado Springs CO and retained. A secondary Drake Gymnasium label is not independently usable and physically ambiguous.",
+  "remaining_material_unresolved_building_population": 19,
+  "remaining_home_locality_gaps": 0,
+  "known_agreeing_project_venue_not_propagated": 0,
+  "do_not_reopen_without": "New authoritative exact building evidence or genuine contrary accepted project fact.",
+  "reopening_scope": "Any newly found physical venue evidence must be reconciled against 19 exact IDs; this checkpoint does not close other Research obligations."
+}
