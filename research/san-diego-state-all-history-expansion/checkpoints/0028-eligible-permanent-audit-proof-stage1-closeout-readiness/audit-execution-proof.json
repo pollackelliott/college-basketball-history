@@ -1,0 +1,19 @@
+{
+  "actual_defects": [],
+  "actual_status": "ELIGIBLE_FOR_SOURCE_ACKNOWLEDGED_COVERAGE_GAP",
+  "checkpoint_zip_sha256": "42a37718684f8745900eb6c977c743ae62a185ccbdd04403d01d5358e8fea49a",
+  "eligible": true,
+  "historic_game_mutation": false,
+  "identified_competitive_games": 1086,
+  "kind": "SDSU_STAGE1_BOUNDED_EXHAUSTION_ACTUAL_PERMANENT_AUDIT_PROOF",
+  "original_archival_pages_exhaustively_read": false,
+  "original_ledger_and_census_byte_identical": true,
+  "permanent_tool_exit_code": 0,
+  "permanent_tool_git_blob": "0f77c191c36576bfd30b86592554d6ea76d965ac",
+  "protected_main_sha": "5f33c88ca1ea7d80e0517f42a200f5a2e15833c9",
+  "report_sha256": "1c17e7c90c453e140dc679c7ca73b9fae6f4228116f3ed817d8de0606cb618d2",
+  "research_checkpoint_sha": "0c6d9c7301ce8fd7d04fa7451229465a3ddcc78c",
+  "stage1_complete": false,
+  "stage2_authorized": false,
+  "unidentified_games_not_added": 3
+}
