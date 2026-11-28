@@ -192,7 +192,8 @@ def run_key_rebase(state: dict, request: dict, request_bytes: bytes,
         raise Stop('KEY_REBASE_REPOSITORY_VALIDATION_FAILED:' + valid.stdout[-800:])
     DIAG.mkdir(parents=True, exist_ok=True)
     (DIAG / 'key-rebase-validate.log').write_text(valid.stdout)
-    assert live_main == remote_head(ROOT, 'main'), 'KEY_REBASE_PROTECTED_MAIN_MOVED'
+    if live_main != remote_head(ROOT, 'main'):
+        raise Stop('KEY_REBASE_PROTECTED_MAIN_MOVED')
 
     folder = Path('.remote-implementation/writeahead') / SCHOOL / request['request_id']
     folder.mkdir(parents=True, exist_ok=True)
