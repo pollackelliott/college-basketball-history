@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_EXACT_PERMANENT_PREFLIGHT_CERTIFICATION_0048",
+  "school_key": "air-force",
+  "status": "PASS",
+  "defects": 0,
+  "exact_input_checkpoint_commit": "f1f0aaeb53293a53998fbe134902e4d970530eb2",
+  "exact_input_checkpoint": "research/air-force/stage3b/conference-authoring-preflight-ready-0047/",
+  "exact_input_checkpoint_zip_sha256": "04b2ff25f11f67139af8d0142ae44f8b74fba3b32f4aa86db23281ea54e1ad18",
+  "permanent_tool_protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "command": "PYTHONPATH=tools python tools/research_stage4.py preflight air-force $RUNNER_TEMP/stage3b-0047.zip --output-dir $RUNNER_TEMP/preflight",
+  "run_id": 46174057090,
+  "run_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46174057090",
+  "job_id": 141068662064,
+  "execution_commit": "4a62656c37a5509c97ab5619fc8c94d8d6f4ecb4",
+  "artifact_id": 15274843314,
+  "artifact_url": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46174057090/artifacts/15274843314",
+  "artifact_zip_sha256": "8bc49bb998d43e1ec8c07942507f25ffb17d4a243bce528ea38bfa2aa4889dbc",
+  "preflight_results": {
+    "status": "PASS",
+    "defect_count": 0,
+    "defect_counts": {},
+    "ledger_rows": 1928,
+    "venue_rows": 52,
+    "conference_rows": 3,
+    "authoring_members": {
+      "opponents.csv": "stage4-authoring/opponents.csv",
+      "venues.csv": "stage4-authoring/venues.csv",
+      "conferences.csv": "stage4-authoring/conferences.csv"
+    }
+  },
+  "bound_stage3b_game_ledger_git_blob": "b18e3b34237b1edb71d9ddf6d143c2d816d308a8",
+  "stage4_started": false
+}
