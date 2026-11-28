@@ -1,0 +1,130 @@
+name: New Mexico Stage 3A-3 Tier 1 bounded permanent-tool execution
+on:
+  push:
+    branches: [research/new-mexico-stage3a3-tier1-transport]
+    paths: [.github/workflows/new-mexico-stage3a3-tier1-checkpoint-execution.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  tier1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout immutable Research parent transport
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Checkout exact protected main as execution runtime and complete evidence source
+        uses: actions/checkout@v4
+        with:
+          repository: pollackelliott/college-basketball-history
+          ref: 242370fc551fd749c157c74d92917ddfafbe40e0
+          path: .exact-main
+          persist-credentials: false
+      - name: Verify exact main, Research parent, and all parent checkpoint members
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .exact-main rev-parse HEAD)" = "242370fc551fd749c157c74d92917ddfafbe40e0"
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "242370fc551fd749c157c74d92917ddfafbe40e0"
+          test "$(git ls-remote origin refs/heads/research/new-mexico | cut -f1)" = "3339b0848e6ab6ae2e92d18db69b7d4ab602f55f"
+          python - <<'PY'
+          import csv,hashlib,json,pathlib
+          root=pathlib.Path('research/new-mexico/checkpoints/0012-stage3a2-home-complete')
+          m=json.loads((root/'manifest.json').read_text())
+          s=json.loads((root/'stage3a2-status.json').read_text())
+          assert m['kind']=='NEW_MEXICO_STAGE3A2_COMPLETE_MANIFEST_V1' and m['state']=='STAGE_3A2_COMPLETE'
+          assert m['research_base_sha']=='242370fc551fd749c157c74d92917ddfafbe40e0'
+          assert s['state']=='STAGE_3A2_COMPLETE' and s['stage3a3_started'] is False
+          assert s['source_game_count']==2891 and s['regular_season_total']==2727 and s['home_total']==1564
+          assert s['status_preserved_from_stage3a1_han_unknown']==2
+          for f in m['files']:
+              b=(root/f['path']).read_bytes()
+              assert len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'],f['path']
+          ledger=root/'stage3a2-working-ledger.csv'
+          with ledger.open(newline='') as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==2891
+          print('Checkpoint 0012 full hash/size and 2,891-row ledger verified')
+          PY
+      - name: Run UNCHANGED exact-main permanent Tier 1 tool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .exact-main/tools/research_stage3a3_tier1.py new-mexico             research/new-mexico/checkpoints/0012-stage3a2-home-complete/stage3a2-working-ledger.csv             --repo-root .exact-main             --main-sha "242370fc551fd749c157c74d92917ddfafbe40e0"             --output-dir research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence
+      - name: Verify full neutral population, status, residuals and carry-forward capsule
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,hashlib,json,pathlib,shutil
+          par=pathlib.Path('research/new-mexico/checkpoints/0012-stage3a2-home-complete')
+          out=pathlib.Path('research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence')
+          s=json.loads((out/'stage3a3-tier1-status.json').read_text())
+          a=json.loads((out/'accepted-project-evidence.json').read_text())
+          c=json.loads((out/'tier1-contradictions.json').read_text())
+          u=json.loads((out/'tier1-unresolved.json').read_text())
+          q=json.loads((out/'remaining-neutral-queue.json').read_text())
+          assert s['status']=='COMPLETE' and s['school_key']=='new-mexico'
+          assert s['protected_main_sha']=='242370fc551fd749c157c74d92917ddfafbe40e0' and s['external_research_used'] is False
+          assert s['neutral_rows']==99
+          assert s['accepted_count']==len(a) and s['contradiction_count']==len(c) and s['unresolved_count']==len(u)
+          assert s['accepted_count']+len(c)+len(u)==99
+          assert s['accepted_complete_count']+s['accepted_partial_count']==len(a)
+          assert s['remaining_modern']+s['remaining_historical']==len(q)
+          assert len(q)==len(u)+len(c)+s['accepted_partial_count']
+          assert s['input_ledger_sha256']==hashlib.sha256((par/'stage3a2-working-ledger.csv').read_bytes()).hexdigest()
+          cap=out/'stage4-authoring'
+          cap.mkdir(parents=True,exist_ok=True)
+          for n in ['opponents.csv','venues.csv','institutional-scope.json']:
+              shutil.copyfile(par/'stage4-authoring'/n,cap/n)
+          shutil.copyfile(par/'stage3a2-working-ledger.csv',out/'parent-stage3a2-working-ledger.csv')
+          readme=f"""# New Mexico — Stage 3A-3 Tier 1 checkpoint 0013
+
+          Tier 1 permanent accepted-project exact-game evidence pass: COMPLETE.
+          This is a deterministic Stage 3A-3 Tier 1 research boundary, not Stage 3A-3 closeout.
+          Immutable research_base_sha / exact protected main: 242370fc551fd749c157c74d92917ddfafbe40e0.
+          Accepted Research parent: 3339b0848e6ab6ae2e92d18db69b7d4ab602f55f, checkpoint 0012.
+          Full parent checkpoint hash/size and 2,891-row ledger verified before execution.
+          Tool: unchanged protected-main tools/research_stage3a3_tier1.py.
+          Evidence: exact protected-main canonical games and every published reciprocal source-games.csv.
+          Neutral: {s['neutral_rows']}; complete exact-game accepted matches: {s['accepted_complete_count']};
+          partial exact-game accepted matches: {s['accepted_partial_count']};
+          contradictions: {s['contradiction_count']}; no exact accepted evidence: {s['unresolved_count']}.
+          Remaining: {len(q)}, modern 1996-97+: {s['remaining_modern']}, historical through 1995-96: {s['remaining_historical']}.
+          External research: none. Prior HOME chronology and 2 Arizona UNKNOWN H/A/N unchanged.
+          Parent ledger and stage4-authoring capsule copied byte-for-byte for reproducible downstream reconciliation.
+          Accepted evidence, partials, contradictions, and remaining exact queue are separate permanent-tool outputs.
+          Stop at Tier 1 boundary. Next meaningful work: modern recurring neutral event/site families.
+          """
+          (out/'README.md').write_text('\n'.join(line.strip() for line in readme.splitlines())+'\n')
+          files=[]
+          for p in sorted(out.rglob('*')):
+              if p.is_file() and p.name!='checkpoint-content-hashes.json':
+                  b=p.read_bytes()
+                  files.append(dict(path=p.relative_to(out).as_posix(),bytes=len(b),sha256=hashlib.sha256(b).hexdigest()))
+          (out/'checkpoint-content-hashes.json').write_text(json.dumps(dict(schema_version=1,kind='NEW_MEXICO_STAGE3A3_TIER1_CHECKPOINT_V1',
+            research_base_sha='242370fc551fd749c157c74d92917ddfafbe40e0',parent_research_commit_sha='3339b0848e6ab6ae2e92d18db69b7d4ab602f55f',
+            parent_checkpoint='0012-stage3a2-home-complete',stage3a3_tier1_status='COMPLETE',
+            external_research_used=False,files=files),indent=2,sort_keys=True)+'\n')
+          print(json.dumps(s,indent=2))
+          PY
+      - name: Upload independently inspectable Tier 1 output artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-mexico-stage3a3-tier1-0013
+          path: research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence
+          if-no-files-found: error
+          retention-days: 3
+      - name: Publish generated checkpoint to disposable transport branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "College Basketball History New Mexico Tier1 CI"
+          git config user.email "new-mexico-tier1-ci@users.noreply.github.com"
+          git add research/new-mexico/checkpoints/0013-stage3a3-tier1-accepted-evidence
+          git diff --cached --quiet && exit 1
+          git commit -m "Generate New Mexico Stage 3A-3 Tier 1 exact-main permanent-tool checkpoint"
+          git push origin HEAD:refs/heads/research/new-mexico-stage3a3-tier1-transport
