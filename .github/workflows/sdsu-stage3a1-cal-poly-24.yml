@@ -1,0 +1,311 @@
+name: SDSU Stage 3A-1 Cal Poly 24-row first-party institutional site review
+on:
+  push:
+    branches:
+      - research/san-diego-state-all-history-expansion
+    paths:
+      - .github/workflows/sdsu-stage3a1-cal-poly-24.yml
+permissions:
+  contents: write
+jobs:
+  one-official-source-family:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact Research predecessor
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Authenticate checkpoints and reconcile exact 24 Cal Poly records
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import collections,csv,hashlib,json,pathlib,subprocess,re
+          root=pathlib.Path("research/san-diego-state-all-history-expansion")
+          prior=root/"stage3a/0056-stage3a1-fresno-final-eight-official-source"
+          stage2=root/"stage2/0052-stage2-complete-exact-source-provenance"
+          stage0=root/"stage3a/0053-stage3a0-local-mechanical-census"
+          out=root/"stage3a/0057-stage3a1-cal-poly-24-official-institutional-reciprocals"
+          parent="cc3b92672fca4ff03f0d599b517bff05b39dca59"
+          main="242370fc551fd749c157c74d92917ddfafbe40e0"
+          research_base="5b840a354fb5cd792239ff8b93cba223a18dd87a"
+          series_url="https://gopoly.com/documents/download/2026/4/3/Series_Records_Year-by-Year.pdf"
+          yearbyyear_url="https://gopoly.com/documents/download/2026/4/3/Year-by-Year_Results.pdf"
+          def sha(b):return hashlib.sha256(b).hexdigest()
+          def check(cond,msg):
+              if not cond:raise AssertionError("SDSU_STAGE3A1_0057_FAIL_CLOSED: "+msg)
+          def csvrows(p):
+              with p.open(newline="",encoding="utf-8-sig") as f:return list(csv.DictReader(f))
+          def read_json(p):return json.loads(p.read_text(encoding="utf-8"))
+          def dump(p,o):p.write_text(json.dumps(o,indent=2,sort_keys=True,ensure_ascii=False)+"\n",encoding="utf-8")
+          def writecsv(p,rows,fieldnames):
+              with p.open("w",newline="",encoding="utf-8") as f:
+                  writer=csv.DictWriter(f,fieldnames=fieldnames,extrasaction="raise")
+                  writer.writeheader()
+                  writer.writerows(rows)
+          def source_date(season,token):
+              m=re.fullmatch(r"([JF])\.(\d{1,2})",token or "")
+              check(m is not None,"unexpected literal date "+str(token))
+              return "%04d-%02d-%02d"%(int(season[:4])+1,{"J":1,"F":2}[m.group(1)],int(m.group(2)))
+          check(subprocess.check_output(["git","rev-parse","HEAD^"],text=True).strip()==parent,"prior research commit")
+          check(subprocess.check_output(["git","diff","--name-only",parent,"HEAD"],text=True).splitlines()==[".github/workflows/sdsu-stage3a1-cal-poly-24.yml"],"one workflow-only change")
+          check(subprocess.check_output(["git","ls-remote","origin","refs/heads/main"],text=True).split()[0]==main,"protected main SHA changed")
+          check(subprocess.run(["git","cat-file","-e",research_base+"^{commit}"],capture_output=True).returncode==0,"immutable research base unavailable")
+          pm=read_json(prior/"checkpoint-manifest.json")
+          ps=read_json(prior/"stage3a1-summary.json")
+          check(pm["parent_research_head"]=="311f3fbacf836a243abd1e53bd9874739c975ecc" and pm["immutable_research_base_sha"]==research_base,"prior research checkpoint provenance")
+          check(ps["status"]=="IN_PROGRESS" and ps["stage3a1_complete"] is False,"prior Stage 3A-1 incomplete")
+          check(ps["cumulative_supported_site_decisions"]==463 and ps["cumulative_unknown_regular"]==580,"prior cumulative population")
+          check(ps["cumulative_site_census"]=={"HOME":52,"OPPONENT_HOME":410,"NEUTRAL":1,"UNKNOWN":580},"prior site census")
+          check(ps["cumulative_terminal_researched_unresolved_han"]==4,"prior Fresno terminal population")
+          for name,meta in pm["files"].items():
+              data=(prior/name).read_bytes()
+              check(len(data)==meta["bytes"] and sha(data)==meta["sha256"],"prior hash/size "+name)
+          s2=read_json(stage2/"manifest.json")
+          check(s2["stage2_complete"] is True and s2["immutable_research_base_sha"]==research_base,"Stage 2 authority")
+          for name,meta in s2["files"].items():
+              data=(stage2/name).read_bytes()
+              check(len(data)==meta["bytes"] and sha(data)==meta["sha256"],"Stage2 integrity "+name)
+          s0=read_json(stage0/"stage3a0-status.json")
+          check(s0["status"]=="COMPLETE" and s0["protected_main_sha"]==main and s0["source_ledger_sha256"]==s2["files"]["structured-stage2-ledger.csv"]["sha256"],"Stage 3A-0 controlling state")
+          ledger=csvrows(prior/"stage3a1-working-ledger.csv")
+          unknown=csvrows(prior/"stage3a1-remaining-unknown-queue.csv")
+          decisions=csvrows(prior/"stage3a1-supported-site-decisions.csv")
+          check(len(ledger)==1086 and len(unknown)==580 and len(decisions)==463,"input populations")
+          by_id={r["research_game_id"]:r for r in ledger}
+          remaining_by_id={r["research_game_id"]:r for r in unknown}
+          check(len(by_id)==1086 and len(remaining_by_id)==580,"unique game IDs")
+          calpoly=[r for r in unknown if r["canonical_opponent_key"]=="cal-poly"]
+          check(len(calpoly)==24,"Cal Poly exact residual count")
+          # Explicit first-party Cal Poly opponent-series data, series document "SAN DIEGO STATE"
+          # section. Cal Poly perspective: YYYY-MM-DD, Cal Poly points, SDSU points,
+          # Cal Poly W/L. Cal Poly source literally says "at San Diego State" on each row.
+          # 1968-69 target Cal Poly score 74-58 is found instead in official 1967-68
+          # season/year-by-year, not in 1968-69; do not silently shift seasons.
+          source_rows=[
+           ("1946-47-0017","1947-02-07",38,57,"L"),
+           ("1946-47-0018","1947-02-08",34,55,"L"),
+           ("1947-48-0013","1948-01-17",39,49,"L"),
+           ("1948-49-0013","1949-01-08",48,58,"L"),
+           ("1949-50-0013","1950-01-14",35,51,"L"),
+           ("1950-51-0024","1951-02-17",61,56,"W"),
+           ("1951-52-0013","1952-01-12",55,56,"L"),
+           ("1952-53-0025","1953-02-21",71,76,"L"),
+           ("1953-54-0018","1954-02-06",73,67,"W"),
+           ("1954-55-0015","1955-01-15",75,70,"W"),
+           ("1955-56-0013","1956-01-14",69,81,"L"),
+           ("1956-57-0021","1957-02-16",60,65,"L"),
+           ("1957-58-0018","1958-02-08",60,82,"L"),
+           ("1958-59-0013","1959-01-10",54,72,"L"),
+           ("1959-60-0024","1960-02-17",68,64,"W"),
+           ("1960-61-0020","1961-02-17",60,67,"L"),
+           ("1961-62-0015","1962-01-12",49,60,"L"),
+           ("1962-63-0015","1963-01-12",58,65,"L"),
+           ("1963-64-0022","1964-02-14",64,90,"L"),
+           ("1964-65-0011","1965-01-15",76,77,"L"),
+           ("1965-66-0024","1966-02-19",52,83,"L"),
+           ("1966-67-0013","1967-01-13",69,96,"L"),
+           ("1967-68-0022","1968-02-17",75,94,"L"),
+           ("1968-69-0012","1968-01-10",58,74,"L"),
+          ]
+          check(len(source_rows)==24 and len({x[0] for x in source_rows})==24,"24 reviewed records")
+          check([r["research_game_id"] for r in calpoly]==["SDSU-EXP-S1-"+r[0] for r in source_rows],"exact ordered Cal Poly population")
+          expected_conflicts={
+           "SDSU-EXP-S1-1958-59-0013":"CAL_POLY_OFFICIAL_RECIPROCAL_SCORE_DIFFERENCE",
+           "SDSU-EXP-S1-1959-60-0024":"CAL_POLY_OFFICIAL_RECIPROCAL_DATE_DIFFERENCE",
+           "SDSU-EXP-S1-1968-69-0012":"CAL_POLY_OFFICIAL_RECIPROCAL_SEASON_DIFFERENCE",
+          }
+          record=[];approved=[];held=[];selected={}
+          for suffix,official_date,cp_points,sdsu_points,cp_result in source_rows:
+              gid="SDSU-EXP-S1-"+suffix
+              row=by_id[gid]
+              check(gid in remaining_by_id and row["game_type"]=="REGULAR_SEASON" and row["canonical_opponent_key"]=="cal-poly","exact Cal Poly identity "+gid)
+              check(row["site_type"]=="UNKNOWN" and row["site_research_status"]=="PENDING_STAGE3A1","unresolved unchanged "+gid)
+              check(not row["source_site_token"] and not row["source_event_context"],"no token or event condition "+gid)
+              check(row["season_label"]==suffix[:7],"source season literal "+gid)
+              accepted_date=source_date(row["season_label"],row["source_date_token"])
+              date_ok=accepted_date==official_date
+              score_ok=int(row["opponent_score"])==cp_points and int(row["team_score"])==sdsu_points
+              outcome_ok=row["result"]=={"L":"W","W":"L","T":"T"}[cp_result]
+              check(outcome_ok,"opposite result differs "+gid)
+              if not date_ok:
+                  code=("CAL_POLY_OFFICIAL_RECIPROCAL_SEASON_DIFFERENCE" if accepted_date[:4]!=official_date[:4] else "CAL_POLY_OFFICIAL_RECIPROCAL_DATE_DIFFERENCE")
+              elif not score_ok:code="CAL_POLY_OFFICIAL_RECIPROCAL_SCORE_DIFFERENCE"
+              else:code=""
+              check(code==expected_conflicts.get(gid,""),"unexpected source discrepancy "+gid+": "+code)
+              cite=f"Cal Poly official 2026 season-by-season series PDF SAN DIEGO STATE table: {official_date} at San Diego State {cp_result} {cp_points}-{sdsu_points}; exact SDSU source: {row['source_literal_line']}"
+              if code=="CAL_POLY_OFFICIAL_RECIPROCAL_SEASON_DIFFERENCE":
+                  cite+="; independent Cal Poly official 2026 year-by-year results locates 74-58 at San Diego State on Jan 10 in 1967-68 rather than target 1968-69; no opponent/game identity correction authorized"
+              review={
+                "research_game_id":gid,"season_label":row["season_label"],"sdsu_literal_date":row["source_date_token"],
+                "sdsu_computed_date":accepted_date,"cal_poly_official_date":official_date,
+                "sdsu_score":row["team_score"]+"-"+row["opponent_score"],
+                "cal_poly_official_score":str(cp_points)+"-"+str(sdsu_points),
+                "cal_poly_official_result":cp_result,
+                "cal_poly_official_site_label":"at San Diego State",
+                "exact_date":str(date_ok).lower(),"exact_reciprocal_score":str(score_ok).lower(),"opposite_outcome_matches":str(outcome_ok).lower(),
+                "adjudication":"RESEARCHED_UNRESOLVED" if code else "SUPPORTED",
+                "target_site_type":"" if code else "HOME",
+                "discrepancy_code":code,
+                "source_url":series_url,"source_context_url":yearbyyear_url,
+                "evidence_note":cite
+              }
+              record.append(review)
+              selected[gid]=review
+              if code:held.append(review)
+              else:approved.append({
+                "research_game_id":gid,"season_label":row["season_label"],
+                "source_opponent_label":row["source_opponent_label"],
+                "team_score":row["team_score"],"opponent_score":row["opponent_score"],
+                "previous_site":"UNKNOWN","new_site":"HOME",
+                "evidence_class":"CAL_POLY_2026_OFFICIAL_EXACT_INSTITUTIONAL_RECIPROCAL",
+                "source_reference":series_url,
+                "evidence_detail":cite,
+              })
+          check(len(record)==24 and len(approved)==21 and len(held)==3,"expected 21 supported / 3 held")
+          next_ledger=[]
+          for original in ledger:
+              updated=dict(original)
+              evidence=selected.get(original["research_game_id"])
+              if evidence:
+                  if evidence["adjudication"]=="SUPPORTED":
+                      updated.update({
+                        "site_type":"HOME",
+                        "curated_site_type":"SOURCE_PROGRAM_HOME",
+                        "site_research_status":"SUPPORTED",
+                        "site_research_basis":evidence["evidence_note"],
+                        "stage3a1_evidence_class":"CAL_POLY_2026_OFFICIAL_EXACT_INSTITUTIONAL_RECIPROCAL",
+                        "stage3a1_evidence_reference":series_url
+                      })
+                  else:
+                      updated.update({
+                        "site_type":"UNKNOWN",
+                        "site_research_status":"RESEARCHED_UNRESOLVED",
+                        "site_research_basis":"Contradictory official Cal Poly series and accepted SDSU institutional game facts; "+evidence["discrepancy_code"]+". "+evidence["evidence_note"],
+                        "stage3a1_evidence_class":"CAL_POLY_OFFICIAL_CONTRADICTION",
+                        "stage3a1_evidence_reference":series_url+" ; "+yearbyyear_url
+                      })
+              next_ledger.append(updated)
+          for old,new in zip(ledger,next_ledger):
+              for key,value in old.items():
+                  if old["research_game_id"] not in selected:
+                      check(value==new[key],"untouched row mutated "+old["research_game_id"]+":"+key)
+                  elif key not in {"site_type","curated_site_type","site_research_status","site_research_basis","stage3a1_evidence_class","stage3a1_evidence_reference"}:
+                      check(value==new[key],"historical game fact changed "+old["research_game_id"]+":"+key)
+          next_queue=[]
+          approved_ids={r["research_game_id"] for r in approved}
+          for raw in unknown:
+              if raw["research_game_id"] in approved_ids:continue
+              clone=dict(raw)
+              if clone["research_game_id"] in selected:
+                  check(selected[clone["research_game_id"]]["adjudication"]=="RESEARCHED_UNRESOLVED","held queue")
+                  clone["next_evidence_class"]="RESEARCHED_UNRESOLVED_AFTER_CAL_POLY_OFFICIAL_RECIPROCAL_CONTRADICTION"
+              next_queue.append(clone)
+          next_decisions=decisions+approved
+          conflicts=read_json(prior/"stage3a1-cumulative-contradictions.json")
+          check(len(conflicts)==6 and sum(bool(x.get("disposition")) for x in conflicts)==4,"prior six contradictions preserved")
+          for x in held:
+              conflicts.append({
+                "id":x["research_game_id"],"kind":x["discrepancy_code"],
+                "disposition":"RESEARCHED_UNRESOLVED_HAN",
+                "accepted_sdsu_source_game_facts_unchanged":True,
+                "source_references":[series_url,yearbyyear_url],
+                "notes":x["evidence_note"]
+              })
+          sitecounts=collections.Counter(r["site_type"] for r in next_ledger if r["game_type"]=="REGULAR_SEASON")
+          check(sitecounts=={"HOME":73,"OPPONENT_HOME":410,"NEUTRAL":1,"UNKNOWN":559},"site accounting 21 new HOME")
+          check(len(next_decisions)==484 and len(next_queue)==559 and len(conflicts)==9,"cumulative 484 supported / 559 UNKNOWN / 9 recorded conflicts")
+          check(sum(r["site_research_status"]=="RESEARCHED_UNRESOLVED" for r in next_ledger)==7,"seven terminal source-contradictory H/A/N")
+          check(all(r["game_type"]=="POSTSEASON" and r["site_type"]=="UNKNOWN" for r in next_ledger if r["game_type"]=="POSTSEASON"),"postseason unchanged")
+          check(sum(r["game_type"]=="POSTSEASON" for r in next_ledger)==43,"43 postseason games preserved")
+          for original,updated in zip(csvrows(stage2/"structured-stage2-ledger.csv"),next_ledger):
+              check(original["research_game_id"]==updated["research_game_id"],"Stage2 row alignment")
+              for key,value in original.items():
+                  if key!="site_type":check(value==updated[key],"Stage2 fact changed "+original["research_game_id"]+":"+key)
+          out.mkdir(parents=True,exist_ok=False)
+          writecsv(out/"stage3a1-working-ledger.csv",next_ledger,list(ledger[0]))
+          writecsv(out/"stage3a1-remaining-unknown-queue.csv",next_queue,list(unknown[0]))
+          writecsv(out/"stage3a1-supported-site-decisions.csv",next_decisions,list(decisions[0]))
+          writecsv(out/"cal-poly-24-institutional-site-review.csv",record,list(record[0]))
+          dump(out/"cal-poly-official-3-conflicts.json",held)
+          dump(out/"stage3a1-cumulative-contradictions.json",conflicts)
+          for filename in [
+              "fresno-final-eight-institutional-review.csv",
+              "fresno-reciprocal-25-row-review.csv",
+              "fresno-reciprocal-4-conflicts.json",
+              "stage3a1-reciprocal-candidates.json",
+              "stage3a1-reciprocal-conflicts.json",
+              "stage3a1-source-family-precedent.json"
+          ]:
+              (out/filename).write_bytes((prior/filename).read_bytes())
+          (out/"stage4-authoring").mkdir()
+          for basename in ["opponents.csv","season-coverage.json"]:
+              value=(prior/"stage4-authoring"/basename).read_bytes()
+              check(value==(stage2/"stage4-authoring"/basename).read_bytes(),"stage4 capsule integrity "+basename)
+              (out/"stage4-authoring"/basename).write_bytes(value)
+          summary={
+           "kind":"SDSU_STAGE3A1_0057_CAL_POLY_24_ONE_OFFICIAL_SOURCE_FAMILY_V1",
+           "school_key":"san-diego-state","stage":"STAGE_3A1","status":"IN_PROGRESS",
+           "immutable_research_base_sha":research_base,"protected_main_sha":main,
+           "parent_research_head":parent,
+           "previous_checkpoint":"0056-stage3a1-fresno-final-eight-official-source",
+           "authority_input_stage2_ledger_sha256":s2["files"]["structured-stage2-ledger.csv"]["sha256"],
+           "independent_game_rows_reviewed":24,
+           "site_supported_in_this_class":21,
+           "new_researched_unresolved_han":3,
+           "cumulative_supported_site_decisions":484,
+           "cumulative_unknown_regular":559,
+           "cumulative_terminal_researched_unresolved_han":7,
+           "cumulative_documented_contradiction_rows":9,
+           "cumulative_site_census":dict(sitecounts),
+           "regular_season_games":1043,"postseason_stage3b_handoff":43,"total_games":1086,
+           "accepted_cal_poly_24_source_class_remaining_unreviewed":0,
+           "source_authority":{"cal_poly_2026_official_series":series_url,
+               "cal_poly_2026_official_year_by_year":yearbyyear_url,
+               "first_party_official_cal_poly_series_entry_label":"SAN DIEGO STATE",
+               "source_site_label":"at San Diego State",
+               "three_documented_conflict_ids":[r["research_game_id"] for r in held]},
+           "historical_game_facts_modified":False,
+           "no_geography_only_site_inference":True,
+           "stage3a1_complete":False,"stage3a2_started":False,"stage3a3_started":False,
+           "next_bounded_assignment":"Continue Stage 3A-1 with one other high-yield coherent institutional source family; do not re-open Cal Poly conflicting results without genuinely new contradictory evidence."
+          }
+          dump(out/"stage3a1-summary.json",summary)
+          check(len(csvrows(out/"stage3a1-working-ledger.csv"))==1086,"cumulative ledger write")
+          check(len(csvrows(out/"stage3a1-remaining-unknown-queue.csv"))==559,"unknown queue write")
+          check(len(csvrows(out/"stage3a1-supported-site-decisions.csv"))==484,"supported decisions write")
+          check(len(csvrows(out/"cal-poly-24-institutional-site-review.csv"))==24,"24 review write")
+          memberhashes={}
+          for p in sorted(out.rglob("*")):
+              if p.is_file():
+                  b=p.read_bytes()
+                  memberhashes[str(p.relative_to(out))]={"sha256":sha(b),"bytes":len(b)}
+          dump(out/"checkpoint-manifest.json",{
+           "kind":"SDSU_STAGE3A1_0057_HASH_BOUND_PARTIAL_MANIFEST_V1",
+           "parent_research_head":parent,
+           "protected_main_sha":main,
+           "immutable_research_base_sha":research_base,
+           "stage3a1_complete":False,
+           "files":memberhashes
+          })
+          for name,meta in memberhashes.items():
+              b=(out/name).read_bytes()
+              check(len(b)==meta["bytes"] and sha(b)==meta["sha256"],"checkpoint manifest "+name)
+          print(json.dumps(summary,indent=2))
+          with open("/tmp/sdsu-0057-summary.txt","w") as handle:
+              handle.write("## SDSU Stage 3A-1 — Cal Poly official reciprocal source family\n\n24 source rows adjudicated, 21 supported HOME and 3 RESEARCHED_UNRESOLVED source discrepancies. Cumulative 484 supported, 559 unknown (including 7 historical conflicts). 43 postseason deferred unchanged. Stage 3A-1 still IN_PROGRESS.\n")
+          PY
+      - name: Commit append-only checkpoint 0057 on Research branch only
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/san-diego-state-all-history-expansion/stage3a/0057-stage3a1-cal-poly-24-official-institutional-reciprocals/
+          git commit -m "research(sdsu): 24 Cal Poly institutional H-A-N reviews with 3 source discrepancies held"
+          git push origin HEAD:refs/heads/research/san-diego-state-all-history-expansion
+      - name: Report durable Stage 3A-1 progress without advancing substage
+        shell: bash
+        run: |
+          cat /tmp/sdsu-0057-summary.txt >> "$GITHUB_STEP_SUMMARY"
