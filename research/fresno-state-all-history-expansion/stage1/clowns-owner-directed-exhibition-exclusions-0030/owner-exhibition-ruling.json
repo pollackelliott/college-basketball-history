@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_OWNER_HISTORICAL_EXHIBITION_RULING_0030",
+  "school_key": "fresno-state",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "decision_date": "2026-11-27",
+  "owner_ruling_final": true,
+  "decision": "EXCLUDE_BOTH_CLOWNS_AS_EXHIBITIONS",
+  "scope": "These exact two Fresno source IDs only; does not classify all Clowns contests.",
+  "source_vs_judgment": "Fresno primary year-by-year lists both scored results and season W-L totals without exact-match exhibition markers. Independent Notre Dame archival evidence classifies touring Clowns organization as exhibition/comedy basketball. Owner directs exhibition exclusions as final repository inclusion judgment, not newly sourced Fresno match annotation.",
+  "matches": [
+    {
+      "source_entry_id": "FRESNO-EXP-CAND-1935-36-019",
+      "season": "1935-36",
+      "opponent": "Broadway Clowns",
+      "fresno_result": "L",
+      "fresno_points": 34,
+      "opponent_points": 37,
+      "original_source_text": "Broadway Clowns L 37-34",
+      "disposition": "EXCLUDED_OWNER_DIRECTED_EXHIBITION"
+    },
+    {
+      "source_entry_id": "FRESNO-EXP-CAND-1953-54-018",
+      "season": "1953-54",
+      "opponent": "Harlem Clowns",
+      "fresno_result": "W",
+      "fresno_points": 82,
+      "opponent_points": 61,
+      "original_source_text": "Harlem Clowns W 82-61",
+      "disposition": "EXCLUDED_OWNER_DIRECTED_EXHIBITION"
+    }
+  ],
+  "accepted_games": 1011,
+  "accepted_record": "532-479",
+  "source_representations": 1036,
+  "pending_clowns_inclusion_holds": 0,
+  "explicit_exhibition_exclusions": 2,
+  "printed_season_accounting_differences": [
+    {
+      "season": "1935-36",
+      "printed": "27 games 10-17",
+      "accepted": "26 games 10-16",
+      "reason": "Excluded Broadway loss"
+    },
+    {
+      "season": "1953-54",
+      "printed": "29 games 13-16",
+      "accepted": "28 games 12-16",
+      "reason": "Excluded Harlem win"
+    }
+  ],
+  "independent_1965_66_discrepancy": "Printed 29 games 21-8 versus identified 28 games 21-7; still unresolved",
+  "parent_checkpoint": "clowns-owner-historical-inclusion-decision-proposal-0029",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "research_parent_sha": "805db6f3b929d2fd6865119c48fd48a70cf2a806",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

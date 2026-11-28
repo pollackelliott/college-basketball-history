@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_EXHIBITION_EXCLUSION_MANIFEST_0030",
+  "school_key": "fresno-state",
+  "research_branch": "research/fresno-state-all-history-expansion",
+  "checkpoint_path": "research/fresno-state-all-history-expansion/stage1/clowns-owner-directed-exhibition-exclusions-0030/",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "research_parent_sha": "805db6f3b929d2fd6865119c48fd48a70cf2a806",
+  "parent_tree_sha": "9b9f557b5408e31ecf2cb58582e2b357428e9e91",
+  "immutable_research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "hash_algorithm": "Git blob SHA-1 (exact immutable Git object, path bound by commit tree)",
+  "members": {
+    "README.md": "09f763080c53a3a4f275e368fd43e629c19135cc",
+    "stage1-accepted-game-ledger.csv": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "stage1-source-dispositions.csv": "adba9e60520fe0345837b6807cf58a9342d95cda",
+    "stage1-pending-source-groups.csv": "3f447691fc161edf14c2131eb97fa9abdbaf46eb",
+    "49-season-stage1-census.csv": "cf1d7ef820fb6033dc0bce929e888922d9d958bb",
+    "two-match-evidence-matrix.csv": "01b73791459cbc6494d3753bafe5eb8e0fc9b6f4",
+    "four-inclusion-scenarios.csv": "0cf76e42468c3494341108218de4efe9df39de44",
+    "source-accounting-contradictions.csv": "95af29f15de1e1d6971ecd987045ed2aac66f5bc",
+    "owner-exhibition-ruling.json": "6cfbda30953dd8f2e8ad83760131f58ff8b53403",
+    "stage1-check-results.json": "0338b0c1d75979eda19e9faa9cb361dfa2c95a8e",
+    "audit-0030.json": "886dffc2b56b89bdeb93d1d491b9104d3090c7d2"
+  },
+  "accepted_games": 1011,
+  "accepted_record": {
+    "wins": 532,
+    "losses": 479
+  },
+  "source_representations": 1036,
+  "owner_exhibition_exclusions": 2,
+  "pending_inclusion_groups": 0,
+  "remaining_stage1_blocker_seasons": [
+    "1965-66"
+  ],
+  "stage1_complete": false
+}

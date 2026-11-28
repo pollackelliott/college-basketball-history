@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_OWNER_CLOWNS_EXHIBITION_DISPOSITION_AUDIT_0030",
+  "status": "OWNER_EXACT_TWO_EXHIBITION_EXCLUSIONS_APPLIED__STAGE1_OPEN",
+  "school_key": "fresno-state",
+  "workflow": "ALL_HISTORY_EXPANSION",
+  "parent_commit_sha": "805db6f3b929d2fd6865119c48fd48a70cf2a806",
+  "parent_tree_sha": "9b9f557b5408e31ecf2cb58582e2b357428e9e91",
+  "protected_main_sha": "a11cccf944492e4d968edbeef4111ebad150fcec",
+  "research_base_sha": "087ac5dedc65780b65b7ae8d61e239d2033e2eea",
+  "predecessor_checkpoint": "clowns-owner-historical-inclusion-decision-proposal-0029",
+  "predecessor_blob_shas": {
+    "ledger": "d51e78e88295e1abc8c89d13651c914adbad2c7a",
+    "sources": "b00974af230d617c40b94165d4fb23da16374058",
+    "pending": "f082a07b72a10a449736cba7e3be54b6eac409b8",
+    "census": "cc786d8c18a478bf1b89f955eaf19a26e1724728",
+    "matrix": "01b73791459cbc6494d3753bafe5eb8e0fc9b6f4",
+    "scenarios": "0cf76e42468c3494341108218de4efe9df39de44",
+    "newSources": "adba9e60520fe0345837b6807cf58a9342d95cda"
+  },
+  "changed_source_entry_ids": [
+    "FRESNO-EXP-CAND-1935-36-019",
+    "FRESNO-EXP-CAND-1953-54-018"
+  ],
+  "source_disposition_rows_changed": 2,
+  "season_census_rows_changed": 2,
+  "accepted_game_rows_changed": 0,
+  "accepted_games": 1011,
+  "wins": 532,
+  "losses": 479,
+  "source_representations": 1036,
+  "season_census_rows": 49,
+  "owner_exhibition_exclusions": 2,
+  "pending_inclusion_groups_before": 2,
+  "pending_inclusion_groups_after": 0,
+  "printed_aggregate_differences_preserved": [
+    "1935-36: source 10-17 vs accepted 10-16",
+    "1953-54: source 13-16 vs accepted 12-16"
+  ],
+  "remaining_blocker_population": [
+    {
+      "season": "1965-66",
+      "printed_games": 29,
+      "printed_w": 21,
+      "printed_l": 8,
+      "accepted_games": 28,
+      "accepted_w": 21,
+      "accepted_l": 7
+    }
+  ],
+  "literal_source_fields_preserved": true,
+  "no_source_match_exhibition_annotation_invented": true,
+  "other_rows_unchanged": true,
+  "no_aggregate_coverage_exception": true,
+  "no_replacement_game": true,
+  "protected_main_mutation": false,
+  "shared_registry_mutation": false,
+  "published_game_mutation": false,
+  "mechanical_checks": 18,
+  "permanent_stage1_closeout_tool_executed": false,
+  "stage1_complete": false,
+  "stage2_authorized": false
+}

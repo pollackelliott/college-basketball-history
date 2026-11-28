@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "FRESNO_STAGE1_EXHIBITION_EXCLUSION_MECHANICAL_VALIDATION_0030",
+  "result": "PASS",
+  "check_count": 18,
+  "passed": [
+    "MAIN_SHA_PINNED",
+    "RESEARCH_HEAD_PINNED",
+    "PARENT_BLOB_HASHES_MATCH",
+    "SOURCE_REPRESENTATIONS_1036",
+    "EXACT_TWO_EXHIBITION_SOURCE_DISPOSITIONS",
+    "SOURCE_LITERAL_TEXT_AND_SCORES_UNCHANGED",
+    "ORIGINAL_SOURCE_EXHIBITION_MARKERS_UNCHANGED",
+    "NO_ACCEPTED_CLOWNS_GAME",
+    "ACCEPTED_GAMES_1011",
+    "ACCEPTED_RECORD_532_479",
+    "ACCEPTED_GAME_IDS_UNIQUE",
+    "ACCEPTED_SEASON_CENSUS_MATCHES_LEDGER",
+    "49_SEASONS_PRESERVED_INCLUDING_ZERO_GAME_SEASONS",
+    "EXACT_TWO_CENSUS_ROWS_RECONCILED",
+    "ZERO_CLOWNS_INCLUSION_HOLDS",
+    "1965_66_UNRESOLVED_UNCHANGED",
+    "NO_ANONYMOUS_GAMES",
+    "NO_STAGE1_COMPLETION_OR_DOWNSTREAM_AUTHORITY"
+  ],
+  "accepted_games": 1011,
+  "record": {
+    "wins": 532,
+    "losses": 479
+  },
+  "source_representations": 1036,
+  "owner_exhibition_exclusions": 2,
+  "pending_inclusion_groups": 0,
+  "remaining_stage1_blockers": [
+    {
+      "season": "1965-66",
+      "printed": "29 games 21-8",
+      "identified": "28 games 21-7"
+    }
+  ],
+  "permanent_stage1_closeout_tool_executed": false,
+  "note": "Open Stage 1 checkpoint, not an eligible terminal closeout; exact source/census/ledger mechanical checks performed via authenticated GitHub connector, not misrepresented as permanent tool certification."
+}
