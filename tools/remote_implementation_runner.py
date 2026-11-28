@@ -25,6 +25,7 @@ from remote_implementation_control import (
     OP_STAGE2_CENSUS,
     OP_STAGE2_CURRENT_MAIN_REFRESH,
     OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE,
+    OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE,
     OP_STAGE2_PROPOSAL_REHEARSAL,
     OP_STAGE2_GATE1_FILL,
     OP_STAGE2_PRESEAL_REHEARSAL,
@@ -158,6 +159,10 @@ from remote_implementation_release_readiness import (
 from remote_implementation_stage2_diagnostic import (
     run_stage2_reconciliation_diagnostic_tool,
     verify_stage2_diagnostic_authority,
+)
+from remote_implementation_stage2_key_rebase import (
+    finalize_recovered_key_rebase,
+    run_key_rebase,
 )
 from remote_implementation_stage2_opponent_display import (
     apply_and_prepare_repair,
@@ -4331,6 +4336,39 @@ def run_recovery(
             )
             return
 
+        if state.get("active_operation") == OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE:
+            if manifest.get("operation") != OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE:
+                raise Stop("RECOVERY_REGISTERED_KEY_OPERATION_MISMATCH")
+            original_request_path = (
+                ".remote-implementation/requests/%s/request.json"
+                % original_request_id
+            )
+            original_request_bytes = git_show_bytes(
+                predecessor_commit, original_request_path,
+            )
+            if sha256_bytes(original_request_bytes) != state["active_request_sha256"]:
+                raise Stop("RECOVERY_REGISTERED_KEY_REQUEST_HASH_MISMATCH")
+            original_request = json.loads(original_request_bytes)
+            commit = finalize_recovered_key_rebase(
+                active=state,
+                request=original_request,
+                request_bytes=original_request_bytes,
+                live_main=live_main,
+                ahead=manifest,
+                ahead_path=state["active_writeahead_path"],
+                ahead_sha=state["active_writeahead_sha256"],
+                ahead_commit=state.get("active_writeahead_commit"),
+                expected_control=request_commit,
+                recovery_id=request["request_id"],
+                recovery_classification=classification,
+                recovery_dir=directory,
+            )
+            print(
+                "REMOTE REGISTERED KEY REBASE RECOVERY: %s commit=%s"
+                % (classification, commit)
+            )
+            return
+
         if state.get("active_operation") == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
             if manifest.get("operation") != OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
                 raise Stop("RECOVERY_OPPONENT_DISPLAY_WRITEAHEAD_OPERATION_MISMATCH")
@@ -4788,6 +4826,15 @@ def main() -> int:
                 request,
                 request_bytes,
                 request_commit,
+                live_main,
+            )
+        elif request["operation"] == OP_STAGE2_CURRENT_PROGRAM_KEY_REBASE:
+            run_key_rebase(
+                state,
+                request,
+                request_bytes,
+                request_commit,
+                predecessor_commit,
                 live_main,
             )
         elif request["operation"] == OP_STAGE2_OPPONENT_DISPLAY_NORMALIZE:
