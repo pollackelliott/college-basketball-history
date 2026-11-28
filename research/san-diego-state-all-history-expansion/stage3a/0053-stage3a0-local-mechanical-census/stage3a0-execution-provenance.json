@@ -1,0 +1,20 @@
+{
+  "authenticated_portable_bundle_run": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46153935899",
+  "checkpoint": "0053-stage3a0-local-mechanical-census",
+  "historical_external_research_used": false,
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "input_zip_members": 8,
+  "kind": "SDSU_STAGE3A0_0053_EXECUTION_PROVENANCE_V1",
+  "next_action": "STOP_AT_STAGE_3A0_BOUNDARY",
+  "parent_research_head": "9cb1dea859455873a87e9997b7d10624d813c247",
+  "permanent_dependency_main_git_blob": "98874d4ca599887eb5535af27fec5d6c0c8c4973",
+  "permanent_tool_exit_code": 0,
+  "permanent_tool_main_git_blob": "17afe677c8a107935afb72f86b0eb0023f2ad76b",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "result": "COMPLETE",
+  "school_key": "san-diego-state",
+  "stage2_certification_run": "https://github.com/pollackelliott/college-basketball-history/actions/runs/46167444155",
+  "stage2_certified_research_head": "83671d9088c103711920a7d6bcc416a3c8f397e1",
+  "stage2_input_zip_sha256": "c29db910af164ee299c921418e69d7a3a8771f74e3ea7aba41888eaf89c2f33e",
+  "stage2_ledger_sha256": "2809b2b619255eaa5b5d637254b850cd7811d1e922f6fdee2b6dda2447d53d95"
+}

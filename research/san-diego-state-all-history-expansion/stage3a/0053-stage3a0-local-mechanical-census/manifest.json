@@ -1,0 +1,50 @@
+{
+  "home_queue": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a2-home-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "input_ledger": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a0-input-ledger.csv",
+    "sha256": "a8d171a89504575ad51bac376302d5a29a9ae589752b8364fd7bead1536f5dad"
+  },
+  "neutral_historical_queue": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a3-historical-neutral-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "neutral_modern_queue": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a3-modern-neutral-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "neutral_queue": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a3-neutral-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "opponent_home_queue": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a0-opponent-home-queue.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "postseason_queue": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3b-postseason-handoff.json",
+    "sha256": "8d472d2261a9e120112f0630dba1ed6b1720d72fb04bd63e3c26201bc6ae4614"
+  },
+  "stage4_authoring_opponents": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage4-authoring/opponents.csv",
+    "sha256": "b115ba0b5c1de314345e12342d8b76e2eb082c77411d985343f713adf696707d"
+  },
+  "stage4_authoring_season-coverage": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage4-authoring/season-coverage.json",
+    "sha256": "ca3922abb628ebccc810263e9e068fb1964940e00d668dd8ee7660a3699195f2"
+  },
+  "status": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a0-status.json",
+    "sha256": "8592d7ff0491e3f1d54bf9123326c255c1c7ce7507ebdee8b4f32bc20ba7ae06"
+  },
+  "summary": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a0-summary.json",
+    "sha256": "8592d7ff0491e3f1d54bf9123326c255c1c7ce7507ebdee8b4f32bc20ba7ae06"
+  },
+  "unknown_queue": {
+    "path": "research/san-diego-state-all-history-expansion/stage3a/0053-stage3a0-local-mechanical-census/stage3a1-unknown-han-queue.json",
+    "sha256": "704b529c655901241ab4d161b4e8a6d0715d47bc2ccb16da660105af64c8331d"
+  }
+}
