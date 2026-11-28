@@ -1,0 +1,102 @@
+{
+  "counts": {
+    "invalid_home_venue_exception_marker_rows": 0,
+    "lower_level_postseason_researched_nonblocking": 2,
+    "neutral_missing_location": 5,
+    "neutral_missing_venue": 25,
+    "postseason_missing_location": 2,
+    "postseason_missing_venue": 2,
+    "public_gap_rows": 219,
+    "reciprocal_only_unknown_site_provenance": 2,
+    "reciprocal_research_accounted_gap": 3,
+    "reciprocal_unpropagated": 0,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "strict_home_gap_rows": 0,
+    "strict_ncaa_gap_rows": 0,
+    "target_canonical_games": 2766,
+    "target_source_information_loss": 0,
+    "unaccounted_public_gap_rows": 0,
+    "unknown_site_type": 194
+  },
+  "errors": [],
+  "examples": {
+    "lower_level_postseason_researched_nonblocking": [
+      "CBBG-0216414",
+      "CBBG-0216417"
+    ],
+    "neutral_missing_location": [
+      "CBBG-0107180",
+      "CBBG-0107181",
+      "CBBG-0107308",
+      "CBBG-0107309",
+      "CBBG-0216526"
+    ],
+    "neutral_missing_venue": [
+      "CBBG-0107180",
+      "CBBG-0107181",
+      "CBBG-0107308",
+      "CBBG-0107309",
+      "CBBG-0149099",
+      "CBBG-0216275",
+      "CBBG-0216339",
+      "CBBG-0216340",
+      "CBBG-0216380",
+      "CBBG-0216381",
+      "CBBG-0216386",
+      "CBBG-0216416"
+    ],
+    "postseason_missing_location": [
+      "CBBG-0216414",
+      "CBBG-0216417"
+    ],
+    "postseason_missing_venue": [
+      "CBBG-0216414",
+      "CBBG-0216417"
+    ],
+    "reciprocal_only_unknown_site_provenance": [
+      "CBBG-0214364",
+      "CBBG-0214365"
+    ],
+    "reciprocal_research_accounted_gap": [
+      "CBBG-0149099",
+      "CBBG-0214364",
+      "CBBG-0214365"
+    ],
+    "unknown_site_type": [
+      "CBBG-0175493",
+      "CBBG-0175494",
+      "CBBG-0214332",
+      "CBBG-0214333",
+      "CBBG-0214341",
+      "CBBG-0214342",
+      "CBBG-0214364",
+      "CBBG-0214365",
+      "CBBG-0214379",
+      "CBBG-0214380",
+      "CBBG-0214394",
+      "CBBG-0214395"
+    ]
+  },
+  "history_start_season": "1969-1970",
+  "school_key": "nevada",
+  "source_site_counts": {
+    "home_publication_blocker_rows": 0,
+    "material_gap_rows": 216,
+    "neutral_missing_location": 5,
+    "neutral_missing_venue": 24,
+    "postseason_missing_location": 2,
+    "postseason_missing_venue": 2,
+    "researched_gap_rows": 216,
+    "researched_unresolved_home_location_rows": 0,
+    "researched_unresolved_home_venue_rows": 0,
+    "unaccounted_gap_rows": 0,
+    "unknown_site_type": 192
+  },
+  "source_validation_scope": {
+    "mode": "FULL_SOURCE_PACKAGE",
+    "scoped_source_games": 2763
+  },
+  "status": "PASS",
+  "warnings": []
+}
