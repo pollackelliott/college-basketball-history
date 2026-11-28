@@ -1,0 +1,37 @@
+{
+  "kind": "SDSU_STAGE2_CALIFORNIA_COLLEGE_NAME_CHECKPOINT_0035_V1",
+  "checkpoint": "0035-stage2-five-historical-california-college-opponents",
+  "school_key": "san-diego-state",
+  "workflow_kind": "ALL_HISTORY_EXPANSION",
+  "stage": "STAGE_2",
+  "stage2_complete": false,
+  "protected_main_sha_at_checkpoint": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "6f660eb706bdada357c6402d66a5f6c1f274d69d",
+  "prior_opponent_table_sha256": "4f8829a225db60330a491190508be8cfec5c70192dded3877165b3a4155ae891",
+  "source_label_census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "accepted_added_labels": 15,
+  "accepted_added_game_rows": 53,
+  "accepted_cumulative_labels": 103,
+  "accepted_cumulative_games": 724,
+  "remaining_unresolved_labels": 238,
+  "remaining_game_rows": 362,
+  "files": {
+    "stage4-authoring/opponents.csv": {
+      "sha256": "d2ad8e066e51f901470d867084feed6f694a3b502184284aa55b8dfbac14ccdf",
+      "bytes_utf8": 59086
+    },
+    "accepted-historical-california-college-evidence.json": {
+      "sha256": "f20c7adfac5905c4261c9acbe784286bfba0496e21e0cd4d8c7d2ba7a51e33fe",
+      "bytes_utf8": 18389
+    },
+    "research-status.json": {
+      "sha256": "a48e73f10e286c43c41602163044310699099cefe40a3b1dfbaf8d17562c652c",
+      "bytes_utf8": 1254
+    },
+    "research-findings.md": {
+      "sha256": "488cd435e510948be998fe6c7db7741182511914b70ac8c2082e2acc8e83b625",
+      "bytes_utf8": 2564
+    }
+  }
+}

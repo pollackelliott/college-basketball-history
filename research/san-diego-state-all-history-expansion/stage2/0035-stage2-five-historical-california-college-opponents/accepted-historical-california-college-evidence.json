@@ -1,0 +1,409 @@
+{
+  "kind": "SDSU_STAGE2_CALIFORNIA_COLLEGE_IDENTITY_CONTINUITY_0035_V1",
+  "school_key": "san-diego-state",
+  "protected_main_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "immutable_research_base_sha": "5b840a354fb5cd792239ff8b93cba223a18dd87a",
+  "parent_research_head": "6f660eb706bdada357c6402d66a5f6c1f274d69d",
+  "prior_checkpoint": "0034-stage2-exact-registry-current-d1-identity-tranche",
+  "source_census_sha256": "d74a43c6c8f2ff006bda93ab017538ee60f0fcb95f0c3aadfaf66e16daf1c148",
+  "prior_opponents_authoring_sha256": "4f8829a225db60330a491190508be8cfec5c70192dded3877165b3a4155ae891",
+  "published_opponents_registry_git_blob": "44b47ce83de0c604274a05cd0487e788303704ed",
+  "programs_registry_git_blob": "3049b989ebaa0f48c44b6ac2f57e60dde482a75c",
+  "source_retrieval_date": "2026-11-28",
+  "family_historical_evidence": {
+    "cpp": {
+      "key": "cal-poly-pomona",
+      "display": "Cal Poly Pomona",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "source_regex": "/^\\*?(?:at )?Cal Poly-Pomona(?: \\(PG\\))?$/",
+      "min_source_season": "1962-63",
+      "institutional_evidence": "Separate Pomona-campus Broncos basketball program existing before the 1966 split from Cal Poly SLO",
+      "urls": [
+        "https://broncoathletics.com/sports/2019/1/29/cal-poly-pomona-mens-basketball-history.aspx",
+        "https://broncoathletics.com/sports/2009/11/4/Traditions_page.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=91"
+      ],
+      "inherited_sdsu_published_rows": 3,
+      "not_in_current_D1_program_registry": true
+    },
+    "chico": {
+      "key": "chico-state",
+      "display": "Chico State",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_NEW_PROVISIONAL_NON_D1_KEY",
+      "source_regex": "/^(?:at )?Chico State$/",
+      "min_source_season": "1936-37",
+      "institutional_evidence": "Chico State College was the institution's name 1935-72; basketball in source era, current NCAA DII",
+      "urls": [
+        "https://www.csuchico.edu/traditions/history/chico-state-college.shtml",
+        "https://chicowildcats.com/sports/mens-basketball/opponent-history",
+        "https://web3.ncaa.org/directory/orgDetail?id=95"
+      ],
+      "inherited_sdsu_published_rows": 0,
+      "not_in_current_D1_program_registry": true
+    },
+    "pasadena": {
+      "key": "point-loma-nazarene",
+      "display": "Point Loma Nazarene",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "source_regex": "/^(?:at )?Pasadena Nazarene$/",
+      "min_source_season": "1953-54",
+      "institutional_evidence": "San Diego State 2005 official source identifies all 12 earlier games against Point Loma Nazarene as games under Pasadena Nazarene name when the university was in Pasadena",
+      "urls": [
+        "https://goaztecs.com/news/2005/12/02/san-diego-state-renews-its-rivalry-with-point-loma-nazarene-this-saturday-night-at-cox-arena",
+        "https://www.pointloma.edu/about/history",
+        "https://plnusealions.com/news/2020/4/13/a-look-back-at-the-legendary-firehouse-five.aspx"
+      ],
+      "inherited_sdsu_published_rows": 3,
+      "not_in_current_D1_program_registry": true
+    },
+    "caltech": {
+      "key": "caltech",
+      "display": "Caltech",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_NEW_PROVISIONAL_NON_D1_KEY",
+      "source_regex": "/^\\*?(?:at )?Cal Tech$/",
+      "min_source_season": "1922-23",
+      "institutional_evidence": "Cal Tech source shorthand for California Institute of Technology, official school name since 1920; basketball SCIAC since 1930s, current NCAA DIII",
+      "urls": [
+        "https://library.caltech.edu/archives/about/caltech-history",
+        "https://gocaltech.com/sports/2023/12/15/mens-basketball-all-sciac.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=89"
+      ],
+      "inherited_sdsu_published_rows": 0,
+      "not_in_current_D1_program_registry": true
+    },
+    "sfsu": {
+      "key": "san-francisco-state",
+      "display": "San Francisco State",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "source_regex": "/^(?:at )?San Francisco State(?: \\(PG\\))?$/",
+      "min_source_season": "1959-60",
+      "institutional_evidence": "San Francisco State College predecessor naming and men's basketball 1950-70 institutional records, current NCAA DII",
+      "urls": [
+        "https://logo.sfsu.edu/sfsu-facts",
+        "https://sfstategators.com/sports/2018/1/31/sf-state-mens-basketball-history.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=628"
+      ],
+      "inherited_sdsu_published_rows": 1,
+      "not_in_current_D1_program_registry": true
+    }
+  },
+  "accepted_source_label_rows": [
+    {
+      "family": "cpp",
+      "source_opponent_label": "*at Cal Poly-Pomona",
+      "game_count": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "cal-poly-pomona",
+      "canonical_opponent_name": "Cal Poly Pomona",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://broncoathletics.com/sports/2019/1/29/cal-poly-pomona-mens-basketball-history.aspx",
+        "https://broncoathletics.com/sports/2009/11/4/Traditions_page.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=91"
+      ],
+      "institutional_evidence": "Separate Pomona-campus Broncos basketball program existing before the 1966 split from Cal Poly SLO"
+    },
+    {
+      "family": "caltech",
+      "source_opponent_label": "*at Cal Tech",
+      "game_count": 2,
+      "first_season": "1927-28",
+      "last_season": "1930-31",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "caltech",
+      "canonical_opponent_name": "Caltech",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_NEW_PROVISIONAL_NON_D1_KEY",
+      "official_sources": [
+        "https://library.caltech.edu/archives/about/caltech-history",
+        "https://gocaltech.com/sports/2023/12/15/mens-basketball-all-sciac.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=89"
+      ],
+      "institutional_evidence": "Cal Tech source shorthand for California Institute of Technology, official school name since 1920; basketball SCIAC since 1930s, current NCAA DIII"
+    },
+    {
+      "family": "cpp",
+      "source_opponent_label": "*Cal Poly-Pomona",
+      "game_count": 1,
+      "first_season": "1967-68",
+      "last_season": "1967-68",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "cal-poly-pomona",
+      "canonical_opponent_name": "Cal Poly Pomona",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://broncoathletics.com/sports/2019/1/29/cal-poly-pomona-mens-basketball-history.aspx",
+        "https://broncoathletics.com/sports/2009/11/4/Traditions_page.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=91"
+      ],
+      "institutional_evidence": "Separate Pomona-campus Broncos basketball program existing before the 1966 split from Cal Poly SLO"
+    },
+    {
+      "family": "caltech",
+      "source_opponent_label": "*Cal Tech",
+      "game_count": 4,
+      "first_season": "1926-27",
+      "last_season": "1933-34",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "caltech",
+      "canonical_opponent_name": "Caltech",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_NEW_PROVISIONAL_NON_D1_KEY",
+      "official_sources": [
+        "https://library.caltech.edu/archives/about/caltech-history",
+        "https://gocaltech.com/sports/2023/12/15/mens-basketball-all-sciac.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=89"
+      ],
+      "institutional_evidence": "Cal Tech source shorthand for California Institute of Technology, official school name since 1920; basketball SCIAC since 1930s, current NCAA DIII"
+    },
+    {
+      "family": "cpp",
+      "source_opponent_label": "at Cal Poly-Pomona",
+      "game_count": 6,
+      "first_season": "1963-64",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "cal-poly-pomona",
+      "canonical_opponent_name": "Cal Poly Pomona",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://broncoathletics.com/sports/2019/1/29/cal-poly-pomona-mens-basketball-history.aspx",
+        "https://broncoathletics.com/sports/2009/11/4/Traditions_page.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=91"
+      ],
+      "institutional_evidence": "Separate Pomona-campus Broncos basketball program existing before the 1966 split from Cal Poly SLO"
+    },
+    {
+      "family": "chico",
+      "source_opponent_label": "at Chico State",
+      "game_count": 4,
+      "first_season": "1936-37",
+      "last_season": "1956-57",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "chico-state",
+      "canonical_opponent_name": "Chico State",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_NEW_PROVISIONAL_NON_D1_KEY",
+      "official_sources": [
+        "https://www.csuchico.edu/traditions/history/chico-state-college.shtml",
+        "https://chicowildcats.com/sports/mens-basketball/opponent-history",
+        "https://web3.ncaa.org/directory/orgDetail?id=95"
+      ],
+      "institutional_evidence": "Chico State College was the institution's name 1935-72; basketball in source era, current NCAA DII"
+    },
+    {
+      "family": "pasadena",
+      "source_opponent_label": "at Pasadena Nazarene",
+      "game_count": 5,
+      "first_season": "1953-54",
+      "last_season": "1963-64",
+      "game_types": "POSTSEASON|REGULAR_SEASON",
+      "canonical_opponent_key": "point-loma-nazarene",
+      "canonical_opponent_name": "Point Loma Nazarene",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://goaztecs.com/news/2005/12/02/san-diego-state-renews-its-rivalry-with-point-loma-nazarene-this-saturday-night-at-cox-arena",
+        "https://www.pointloma.edu/about/history",
+        "https://plnusealions.com/news/2020/4/13/a-look-back-at-the-legendary-firehouse-five.aspx"
+      ],
+      "institutional_evidence": "San Diego State 2005 official source identifies all 12 earlier games against Point Loma Nazarene as games under Pasadena Nazarene name when the university was in Pasadena"
+    },
+    {
+      "family": "sfsu",
+      "source_opponent_label": "at San Francisco State",
+      "game_count": 2,
+      "first_season": "1959-60",
+      "last_season": "1964-65",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "san-francisco-state",
+      "canonical_opponent_name": "San Francisco State",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://logo.sfsu.edu/sfsu-facts",
+        "https://sfstategators.com/sports/2018/1/31/sf-state-mens-basketball-history.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=628"
+      ],
+      "institutional_evidence": "San Francisco State College predecessor naming and men's basketball 1950-70 institutional records, current NCAA DII"
+    },
+    {
+      "family": "cpp",
+      "source_opponent_label": "Cal Poly-Pomona",
+      "game_count": 6,
+      "first_season": "1962-63",
+      "last_season": "1968-69",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "cal-poly-pomona",
+      "canonical_opponent_name": "Cal Poly Pomona",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://broncoathletics.com/sports/2019/1/29/cal-poly-pomona-mens-basketball-history.aspx",
+        "https://broncoathletics.com/sports/2009/11/4/Traditions_page.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=91"
+      ],
+      "institutional_evidence": "Separate Pomona-campus Broncos basketball program existing before the 1966 split from Cal Poly SLO"
+    },
+    {
+      "family": "cpp",
+      "source_opponent_label": "Cal Poly-Pomona (PG)",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "cal-poly-pomona",
+      "canonical_opponent_name": "Cal Poly Pomona",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://broncoathletics.com/sports/2019/1/29/cal-poly-pomona-mens-basketball-history.aspx",
+        "https://broncoathletics.com/sports/2009/11/4/Traditions_page.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=91"
+      ],
+      "institutional_evidence": "Separate Pomona-campus Broncos basketball program existing before the 1966 split from Cal Poly SLO"
+    },
+    {
+      "family": "caltech",
+      "source_opponent_label": "Cal Tech",
+      "game_count": 3,
+      "first_season": "1922-23",
+      "last_season": "1938-39",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "caltech",
+      "canonical_opponent_name": "Caltech",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_NEW_PROVISIONAL_NON_D1_KEY",
+      "official_sources": [
+        "https://library.caltech.edu/archives/about/caltech-history",
+        "https://gocaltech.com/sports/2023/12/15/mens-basketball-all-sciac.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=89"
+      ],
+      "institutional_evidence": "Cal Tech source shorthand for California Institute of Technology, official school name since 1920; basketball SCIAC since 1930s, current NCAA DIII"
+    },
+    {
+      "family": "chico",
+      "source_opponent_label": "Chico State",
+      "game_count": 8,
+      "first_season": "1937-38",
+      "last_season": "1955-56",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "chico-state",
+      "canonical_opponent_name": "Chico State",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_NEW_PROVISIONAL_NON_D1_KEY",
+      "official_sources": [
+        "https://www.csuchico.edu/traditions/history/chico-state-college.shtml",
+        "https://chicowildcats.com/sports/mens-basketball/opponent-history",
+        "https://web3.ncaa.org/directory/orgDetail?id=95"
+      ],
+      "institutional_evidence": "Chico State College was the institution's name 1935-72; basketball in source era, current NCAA DII"
+    },
+    {
+      "family": "pasadena",
+      "source_opponent_label": "Pasadena Nazarene",
+      "game_count": 7,
+      "first_season": "1954-55",
+      "last_season": "1964-65",
+      "game_types": "POSTSEASON|REGULAR_SEASON",
+      "canonical_opponent_key": "point-loma-nazarene",
+      "canonical_opponent_name": "Point Loma Nazarene",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://goaztecs.com/news/2005/12/02/san-diego-state-renews-its-rivalry-with-point-loma-nazarene-this-saturday-night-at-cox-arena",
+        "https://www.pointloma.edu/about/history",
+        "https://plnusealions.com/news/2020/4/13/a-look-back-at-the-legendary-firehouse-five.aspx"
+      ],
+      "institutional_evidence": "San Diego State 2005 official source identifies all 12 earlier games against Point Loma Nazarene as games under Pasadena Nazarene name when the university was in Pasadena"
+    },
+    {
+      "family": "sfsu",
+      "source_opponent_label": "San Francisco State",
+      "game_count": 2,
+      "first_season": "1959-60",
+      "last_season": "1962-63",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "san-francisco-state",
+      "canonical_opponent_name": "San Francisco State",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://logo.sfsu.edu/sfsu-facts",
+        "https://sfstategators.com/sports/2018/1/31/sf-state-mens-basketball-history.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=628"
+      ],
+      "institutional_evidence": "San Francisco State College predecessor naming and men's basketball 1950-70 institutional records, current NCAA DII"
+    },
+    {
+      "family": "sfsu",
+      "source_opponent_label": "San Francisco State (PG)",
+      "game_count": 1,
+      "first_season": "1969-70",
+      "last_season": "1969-70",
+      "game_types": "REGULAR_SEASON",
+      "canonical_opponent_key": "san-francisco-state",
+      "canonical_opponent_name": "San Francisco State",
+      "current_d1": "No",
+      "method": "HISTORICAL_COLLEGE_CONTINUITY_INHERITED_NON_D1_KEY",
+      "official_sources": [
+        "https://logo.sfsu.edu/sfsu-facts",
+        "https://sfstategators.com/sports/2018/1/31/sf-state-mens-basketball-history.aspx",
+        "https://web3.ncaa.org/directory/orgDetail?id=628"
+      ],
+      "institutional_evidence": "San Francisco State College predecessor naming and men's basketball 1950-70 institutional records, current NCAA DII"
+    }
+  ],
+  "accepted_new_labels": 15,
+  "accepted_new_games": 53,
+  "counts_by_family": {
+    "cpp": {
+      "labels": 5,
+      "games": 15
+    },
+    "caltech": {
+      "labels": 3,
+      "games": 9
+    },
+    "chico": {
+      "labels": 2,
+      "games": 12
+    },
+    "pasadena": {
+      "labels": 2,
+      "games": 12
+    },
+    "sfsu": {
+      "labels": 3,
+      "games": 5
+    }
+  },
+  "explicit_sdsu_pasadena_series_prior_meetings": 12,
+  "source_accepted_pasadena_game_count": 12,
+  "source_coincidence_verified": true,
+  "aggregate": {
+    "mapped_labels": 103,
+    "mapped_competitive_games": 724,
+    "distinct_opponent_keys": 35,
+    "unresolved_labels": 238,
+    "unresolved_accepted_game_rows": 362
+  },
+  "new_provisional_NON_D1_keys": [
+    "chico-state",
+    "caltech"
+  ],
+  "owner_NON_D1_sanity_scan_pending": true,
+  "all_previous_88_label_rows_preserved_byte_for_byte": true,
+  "original_competitive_games": 1086,
+  "three_1921_22_missing_played_results_still_noncanonical": true,
+  "game_type_mutations": 0,
+  "site_classifications_inferred": 0,
+  "venue_inferences": 0,
+  "stage2_complete": false,
+  "stage3_started": false
+}
