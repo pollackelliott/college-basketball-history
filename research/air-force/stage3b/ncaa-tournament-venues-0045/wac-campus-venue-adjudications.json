@@ -1,0 +1,94 @@
+[
+  {
+    "id": "AF-1983-84-027",
+    "date": "1984-03-05",
+    "opponent_key": "colorado-state",
+    "score": "L 56-61",
+    "site": "AWAY",
+    "venue": "Moby Arena",
+    "city": "Fort Collins",
+    "state": "CO",
+    "venue_key": "postseason-moby-arena-fort-collins-co",
+    "historical_alias": "Moby Gym",
+    "links": [
+      "https://csurams.com/sports/mbball/opponent-history/air-force/15",
+      "https://csurams.com/news/2013/7/2/Glenn_Morris_Field_House",
+      "https://csurams.com/facilities/moby-arena/1",
+      "https://www.sports-reference.com/cbb/schools/colorado-state/men/1984-schedule.html"
+    ],
+    "basis": "Colorado State institutional opponent history confirms 1984-03-05 61-56 HOME Fort Collins; official facility chronology places its basketball team at Moby Gym, opened 1966 and renamed Moby Arena in 1988. Secondary exact-score game record places the game at Moby Arena on March 7 instead of March 5; source/date disagreement is preserved.",
+    "conflict": {
+      "source": "Sports-Reference",
+      "date": "1984-03-07",
+      "accepted_date": "1984-03-05",
+      "resolution": "Do not alter accepted institutional date"
+    }
+  },
+  {
+    "id": "AF-1984-85-027",
+    "date": "1985-03-04",
+    "opponent_key": "byu",
+    "score": "W 82-79",
+    "site": "AWAY",
+    "venue": "Marriott Center",
+    "city": "Provo",
+    "state": "UT",
+    "venue_key": "postseason-mariott-center-provo-ut",
+    "historical_alias": "Mariott Center [owner shared-site reference misspelling]",
+    "links": [
+      "https://byucougars.com/sports/mens-basketball/schedule/season/1984-1985",
+      "https://archives.lib.byu.edu/repositories/byu-archives/archival_objects/ref4151_k6z"
+    ],
+    "basis": "BYU official 1984-85 schedule explicitly lists its March 4 79-82 loss against Air Force at Marriott Center, Provo UT. The owner shared-site 1987-88 reference misspells the same facility 'Mariott Center'; preserve that literal as alias while using first-party proper canonical name.",
+    "conflict": null
+  },
+  {
+    "id": "AF-1984-85-028",
+    "date": "1985-03-06",
+    "opponent_key": "utah",
+    "score": "L 64-66",
+    "site": "AWAY",
+    "venue": "Jon M. Huntsman Center",
+    "city": "Salt Lake City",
+    "state": "UT",
+    "venue_key": "postseason-jon-m-huntsman-center-salt-lake-city-ut",
+    "historical_alias": "Huntsman Center",
+    "links": [
+      "https://utahutes.com/news/2003/3/10/mwc_tournament_postseason_guide",
+      "https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/utahutes.com/documents/2025/3/19/2018-19_MBB_Media_Guide_Final_10.01.18.pdf?timestamp=20250319072235",
+      "https://www.sports-reference.com/cbb/schools/utah/men/1985-schedule.html"
+    ],
+    "basis": "Utah official 2003 postseason guide explicitly identifies the exact 66-64 WAC second-round win over Air Force March 6 1985 as played at Huntsman Center; institutional media guide agrees on March 6 in Salt Lake City. A secondary schedule instead reports March 5 and Special Events Center in El Paso; preserve disagreement without changing original accepted date/site classification.",
+    "conflict": {
+      "source": "Sports-Reference",
+      "date": "1985-03-05",
+      "venue": "Special Events Center, El Paso TX",
+      "accepted_date": "1985-03-06",
+      "resolution": "Official exact-game Utah facility statement preferred, secondary contrary claim retained"
+    }
+  },
+  {
+    "id": "AF-1985-86-028",
+    "date": "1986-03-03",
+    "opponent_key": "hawai-i",
+    "score": "W 64-58",
+    "site": "HOME",
+    "venue": "Clune Arena",
+    "city": "Colorado Springs",
+    "state": "CO",
+    "venue_key": "clune-arena",
+    "historical_alias": "Cadet Field House basketball arena",
+    "links": [
+      "https://goairforcefalcons.com/sports/mens-basketball/opponent-history/university-of-hawaii/71",
+      "https://goairforcefalcons.com/sports/2018/6/21/facilities-clune-arena-html",
+      "https://www.sports-reference.com/cbb/schools/air-force/men/1986-schedule.html"
+    ],
+    "basis": "Air Force official exact opponent history records W 64-58 HOME USAFA on March 3 1986; Air Force facility chronology identifies Clune basketball facility since 1968, matching accepted venue chronology. Secondary match record calls March 4 and also lists Clune Arena; date dissent preserved.",
+    "conflict": {
+      "source": "Sports-Reference",
+      "date": "1986-03-04",
+      "accepted_date": "1986-03-03",
+      "resolution": "Preserve immutable accepted institutional date"
+    }
+  }
+]

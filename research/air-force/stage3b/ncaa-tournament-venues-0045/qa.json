@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "AIR_FORCE_STAGE3B_NCAA_SITES_QA_0045",
+  "status": "PASS",
+  "parent_game_ledger_git_blob_sha": "0586988d7a53994ee3f3bf88ad5b5fecdb386054",
+  "parent_venue_table_git_blob_sha": "5c3069ee21818e5ae9f6a48df638af11dc2efc50",
+  "parent_residual_queue_git_blob_sha": "35d926316b5344a67a326ba7ad4aa6a007cba099",
+  "total_rows": 1928,
+  "changed_rows": 4,
+  "changed_game_ids": [
+    "AF-1959-60-006",
+    "AF-1961-62-023",
+    "AF-2003-04-029",
+    "AF-2005-06-031"
+  ],
+  "changed_fields": 24,
+  "changed_only_columns": [
+    "curated_venue_name",
+    "curated_venue_city",
+    "curated_venue_state",
+    "curated_venue_country",
+    "site_research_status",
+    "site_research_basis"
+  ],
+  "changed_game_core_fields": 0,
+  "changed_original_dates": 0,
+  "changed_source_localities": 0,
+  "changed_han": 0,
+  "changed_game_type": 0,
+  "changed_stage3a_games": 0,
+  "changed_conference_tournament_games": 0,
+  "changed_other_postseason_games": 0,
+  "parent_postseason_unresolved": 12,
+  "child_postseason_unresolved": 8,
+  "conference_tournament_exact_site_rows": 50,
+  "ncaa_tournament_exact_site_rows": 4,
+  "other_postseason_residual_ids": [
+    "AF-2006-07-032",
+    "AF-2006-07-033",
+    "AF-2006-07-034",
+    "AF-2006-07-035",
+    "AF-2010-11-031",
+    "AF-2010-11-032",
+    "AF-2012-13-031",
+    "AF-2012-13-032"
+  ],
+  "physical_venue_authoring_parent_rows": 47,
+  "physical_venue_authoring_child_rows": 50,
+  "preexisting_ball_arena_reused_with_pepsi_center_alias": true,
+  "all_four_site_evidence_records_present": true,
+  "retained_original_site_conflicts": [
+    "1962 Air Force source locality Lubbock vs accepted Dallas",
+    "1962 Texas Tech online schedule Manhattan vs official NCAA history Dallas",
+    "1960 inherited HOME/HAN not inferred from DePaul arena"
+  ],
+  "parent_inherited_authoring_unmodified": true,
+  "defects": []
+}

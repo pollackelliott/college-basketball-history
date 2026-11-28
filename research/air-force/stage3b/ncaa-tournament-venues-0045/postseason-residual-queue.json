@@ -1,0 +1,82 @@
+[
+  {
+    "id": "AF-2006-07-032",
+    "game_date": "2007-03-14",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "HOME",
+    "source_locality": "USAFA, CO",
+    "source_exact_venue_note": "",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  },
+  {
+    "id": "AF-2006-07-033",
+    "game_date": "2007-03-19",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "HOME",
+    "source_locality": "USAFA, CO",
+    "source_exact_venue_note": "",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  },
+  {
+    "id": "AF-2006-07-034",
+    "game_date": "2007-03-21",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "HOME",
+    "source_locality": "USAFA, CO",
+    "source_exact_venue_note": "",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  },
+  {
+    "id": "AF-2006-07-035",
+    "game_date": "2007-03-27",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "NEUTRAL",
+    "source_locality": "New York, NY",
+    "source_exact_venue_note": "Madison Square Garden",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  },
+  {
+    "id": "AF-2010-11-031",
+    "game_date": "2011-03-15",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "HOME",
+    "source_locality": "USAFA, CO",
+    "source_exact_venue_note": "",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  },
+  {
+    "id": "AF-2010-11-032",
+    "game_date": "2011-03-18",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "AWAY",
+    "source_locality": "Santa Clara, CA",
+    "source_exact_venue_note": "",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  },
+  {
+    "id": "AF-2012-13-031",
+    "game_date": "2013-03-20",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "AWAY",
+    "source_locality": "Honolulu, HI",
+    "source_exact_venue_note": "Stan Sheriff Center",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  },
+  {
+    "id": "AF-2012-13-032",
+    "game_date": "2013-03-23",
+    "game_type": "POSTSEASON",
+    "cohort": "OTHER_POSTSEASON_EXACT_SITE",
+    "site_type": "AWAY",
+    "source_locality": "Ogden, UT",
+    "source_exact_venue_note": "Dee Events Center",
+    "next_evidence": "accepted project exact-game site evidence then official host/participant/tournament evidence"
+  }
+]
