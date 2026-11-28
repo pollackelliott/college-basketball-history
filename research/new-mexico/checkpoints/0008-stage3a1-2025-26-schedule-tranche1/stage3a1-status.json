@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A1_BOUNDED_RESEARCH_TRANCHE_V1",
+  "school_key": "new-mexico",
+  "status": "STAGE_3A1_IN_PROGRESS",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "protected_main_sha_at_research_start": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "86b10f09d09b84637e36bb7569955f7a19bba483",
+  "parent_checkpoint": "0007-stage3a0-mechanical-census",
+  "parent_stage3a0_input_ledger_git_blob_sha": "f38530e66cc2bffec356b2241e224b3d6679e377",
+  "accepted_stage2_ledger_git_blob_sha": "8c9c501f35a35a8813c250bad20c74783e6f9a8e",
+  "source_family": "TARGET_INSTITUTION_OFFICIAL_2025_26_RESULTS",
+  "source_url": "https://golobos.com/sports/mbball/schedule/season/2025-26",
+  "source_scope": "25 individually matched 2025-26 REGULAR_SEASON rows only; no global notation inference",
+  "resolutions_this_tranche": 25,
+  "site_resolutions_this_tranche": {
+    "HOME": 14,
+    "OPPONENT_HOME": 9,
+    "NEUTRAL": 2
+  },
+  "regular_season_total": 2727,
+  "site_researched_total": 25,
+  "site_unknown_remaining": 2702,
+  "regular_season_site_census": {
+    "HOME": 14,
+    "OPPONENT_HOME": 9,
+    "NEUTRAL": 2,
+    "UNKNOWN": 2702
+  },
+  "postseason_unchanged": 164,
+  "stage3a2_home_venue_research_started": false,
+  "stage3a3_neutral_venue_research_started": false,
+  "source_site_token_global_rule_applied": false,
+  "ambiguity_warning": "2024-25 official schedule labels some Albuquerque home games 'vs.'; do not infer site from raw 'vs' tokens without date/game-specific evidence.",
+  "next_bounded_assignment": "Continue Stage 3A-1 class-first official-source H/A/N reconciliation, preserving 25-row independent adjudication ceiling",
+  "stage_completion": false
+}

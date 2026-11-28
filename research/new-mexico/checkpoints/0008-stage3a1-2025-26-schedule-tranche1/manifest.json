@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "NEW_MEXICO_STAGE3A1_TRANCHE_CHECKPOINT_MANIFEST_V1",
+  "school_key": "new-mexico",
+  "status": "STAGE_3A1_IN_PROGRESS",
+  "research_base_sha": "242370fc551fd749c157c74d92917ddfafbe40e0",
+  "parent_research_commit_sha": "86b10f09d09b84637e36bb7569955f7a19bba483",
+  "parent_stage3a0_input_ledger_git_blob_sha": "f38530e66cc2bffec356b2241e224b3d6679e377",
+  "accepted_stage2_ledger_git_blob_sha": "8c9c501f35a35a8813c250bad20c74783e6f9a8e",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1610,
+      "sha256": "745e25007013a2f5331aff7f94cbc0aacfecd5b4e05a7537c48ae0181f415127"
+    },
+    {
+      "path": "stage3a1-status.json",
+      "bytes": 1749,
+      "sha256": "0bc5e54acdef5a1351069204d284c53c3c4ed907f425c86fc6aaef3bb2bce3c4"
+    },
+    {
+      "path": "stage3a1-site-decisions.csv",
+      "bytes": 6650,
+      "sha256": "a9777b0ea2597621cfe8eff8b20f66dad169bc4467c90c7c36d00c28635ccf29"
+    },
+    {
+      "path": "stage3a1-working-ledger.csv",
+      "bytes": 1208042,
+      "sha256": "72cdc021b1cd78441b18802a7b846b7a844eb744ef2e0adddd2970c63e243f76"
+    },
+    {
+      "path": "stage3a1-remaining-unknown-ids.json",
+      "bytes": 62426,
+      "sha256": "f1930a24e727f3f3b951ff9d73099587c8e2e71afbc29ca8288bfd8c731a002c"
+    },
+    {
+      "path": "stage4-authoring/opponents.csv",
+      "bytes": 242748,
+      "sha256": "3f13c990306abe2b856cda74e768ecf3d3adf65b091c3ec80df60a1bd09efc44",
+      "git_blob_sha": "b7e4b9b75603cbeea392aa8b116f8d28b23b5d76"
+    },
+    {
+      "path": "stage4-authoring/institutional-scope.json",
+      "bytes": 840,
+      "sha256": "0a2f5f57442c13ab3fe39aca572ac006be2d508bf279eccd5ef00c87657d125e",
+      "git_blob_sha": "0c1e3d61cebd444008e8c6e520c78e6444843b70"
+    }
+  ]
+}
